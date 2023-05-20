@@ -1040,7 +1040,7 @@
                                                     <li><a href="javascript:void(0)"><strong>Filter by:</strong></a>
                                                     </li>
                                                     <li class="d-flex justify-content-between"><a
-                                                            href="javascript:void(0)">A-Z Alphabets</a>
+                                                            href="javascript:void(0)">A-Z </a>
                                                         <div class="form-check m-0">
                                                             <input class="form-check-input mt-2" type="radio"
                                                                 name="exampleRadios" id="exampleRadios1" value="option1"
@@ -1097,7 +1097,7 @@
                                                     <li><a href="javascript:void(0)"><strong>Filter by:</strong></a>
                                                     </li>
                                                     <li class="d-flex justify-content-between"><a
-                                                            href="javascript:void(0)">A-Z Alphabets</a>
+                                                            href="javascript:void(0)">A-Z </a>
                                                         <div class="form-check m-0">
                                                             <input type="checkbox" class="form-check-input mt-2"
                                                                 id="exampleCheck1">
