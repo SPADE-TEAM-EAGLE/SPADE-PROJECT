@@ -592,7 +592,7 @@ confirmPassword.addEventListener('keyup', confirmPasswordValidation);
 function confirmPasswordValidation() {
     if (confirmPassword.value == validconfirmPassword.value) {
       next3.disabled = false;
-      next3.addEventListener('click', GoHome);
+      // next3.addEventListener('click', GoHome);
     } else {
       next3.disabled = true;
     }

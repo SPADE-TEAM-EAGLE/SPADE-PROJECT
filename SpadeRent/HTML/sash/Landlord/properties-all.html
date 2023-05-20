@@ -91,6 +91,15 @@
         color: #333;
         border-radius: 4px;
     }
+    .dark-mode .selected-files span
+    {
+        display: inline-block;
+        margin-right: 0;
+        padding: 4px 8px;
+        background: transparent;
+        color: white;
+        border-radius: 4px;
+    }
 
     .custom-file-input {
         visibility: hidden;
@@ -104,6 +113,16 @@
         justify-content: center;
         padding: 6px 12px;
         background-color: #fff;
+    }
+    .dark-mode .custom-file-label
+    {
+        cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 12px;
+    background-color: transparent;
     }
 
     .custom-file-label i {
@@ -526,7 +545,7 @@
                 <div class="modal-body">
                     <div class="accordion-item mb-4" id="accordion-item1">
                         <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button" id="accordian-button-1" type="button"
+                            <button class="accordion-button text-white" id="accordian-button-1" type="button"
                                 data-bs-toggle="collapse" onclick="checkFieldsFilled('accordion-item1')"
                                 id="accordion-button1" data-bs-target="#collapseOne" aria-expanded="true"
                                 aria-controls="collapseOne">
@@ -625,7 +644,7 @@
                     </div>
                     <div class="accordion-item" id="accordion-item2">
                         <h2 class="accordion-header" id="headingTwo">
-                            <button class="accordion-button collapsed" onclick="checkFieldsFilled('accordion-item2')"
+                            <button class="accordion-button collapsed text-white" onclick="checkFieldsFilled('accordion-item2')"
                                 type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
                                 aria-expanded="false" aria-controls="collapseTwo">
                                 <span class="m-0 me-4 fs-1" style="font-weight: bold;">02</span>
@@ -639,7 +658,7 @@
                             data-bs-parent="#accordionExample">
                             <form class="row g-3 m-1" enctype="multipart/form-data">
 
-                                <div class="col-12 mb-1">
+                                <div class="col-12 mb-3">
                                     <label for="inputAddress" class="form-label fw-bold">Number of Units<span
                                             class="text-danger">*</span></label>
                                     <input type="text" class="form-control px-2" id="units" placeholder=" ">
@@ -653,9 +672,10 @@
                     <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft'
                         disabled>Save as
                         Draft</button>
-                    <button class="btn btn-transparent text-dark button"
-                        style='background-color:#FFFFFF; border: 3px solid #1467B0;' data-bs-dismiss="modal"
+                    <button class="btn btn-outline-default btn-pill button"
+                         data-bs-dismiss="modal"
                         id='close'>Close</button>
+                        <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
                     <button class="btn text-light button" style='background-color:#1467B0;' id='next'
                         disabled>Next</button>
                 </div>
@@ -2828,8 +2848,8 @@ response.data[0]?.sort(function(a, b) {
             },
             error: function(xhr, status, error) {
                 console.log(error)
-                window.alert('Error: ' + "Token expeired!, Login again");
-                window.location = '../Landlord/login_module.html';
+                // window.alert('Error: ' + "Token expeired!, Login again");
+                // window.location = '../Landlord/login_module.html';
             }
         });
 
