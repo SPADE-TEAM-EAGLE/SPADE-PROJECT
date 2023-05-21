@@ -40,6 +40,19 @@
     .custom-file-input::-webkit-file-upload-button {
         visibility: hidden;
     }
+    .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar {
+  width: 7px;/* Width of the scrollbar */
+}
+
+.modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb {
+  background-color: rgb(136, 136, 136,0.2); /* Color of the scrollbar thumb */
+  border-radius: 7px;
+  transition: all 1ms; /* Rounded corners for the thumb */
+}
+
+.modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(136, 136, 136,0.5); /* Color of the scrollbar thumb on hover */
+}
 
     .custom-file-input::before {
         content: 'Select Files';
@@ -530,7 +543,7 @@
     <!-- /GLOBAL-LOADER -->
     <!-- Modal -->
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg " role="document">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="text-justify ps-2 border-model-line">
@@ -747,7 +760,7 @@
         </div>
     </div> -->
     <div class="modal fade" id="myModal_edit" aria-labelledby="myModal" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="text-justify ps-2 border-model-line">
@@ -842,8 +855,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-transparent text-dark"
-                        style='background-color:#FFFFFF; border: 3px solid #1467B0;'
+                    <button type="button" class="btn btn-outline-default btn-pill button"
                         data-bs-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" id="update">Save changes</button>
                 </div>
@@ -2265,6 +2277,19 @@
             }
         });
     });
+    const check=0
+    const updateformInputs = document.querySelectorAll('#myModal_edit .form-control');
+    updateformInputs.forEach(input => {
+        input.addEventListener('blur', function() {
+            // console.log(input.nextElementSibling)
+            if (validateInput(input)) {
+                input.nextElementSibling.classList.add('d-none');
+                
+            } else {
+                input.nextElementSibling.classList.remove('d-none');
+            }
+        });
+    });
     counter = 0
     const draftButton = document.getElementById('draft');
     const nextButton = document.getElementById('next');
@@ -2331,11 +2356,21 @@
                     input.nextElementSibling.classList.remove('d-none');
                 }
             });
+        }else{
+            updateformInputs.forEach(input => {
+                if (validateInput(input)) {
+                    input.nextElementSibling.classList.add('d-none');
+                } else {
+                    input.nextElementSibling.classList.remove('d-none');
+                }
+            });
         }
         if (id === 'accordion-item1') {
             isForm1Valid = validateForm(document.getElementById('accordion-item1'));
-        } else {
+        } else if(id === 'accordion-item1') {
             isForm2Valid = validateForm(document.getElementById('accordion-item2'));
+        }else{
+            updateFormValid=validateForm(document.getElementById('myModal_edit'));
         }
         // const isForm1Valid = validateForm(document.getElementById('accordion-item1'));
         // const isForm2Valid = validateForm(document.getElementById('accordion-item2'));
@@ -2848,8 +2883,8 @@ response.data[0]?.sort(function(a, b) {
             },
             error: function(xhr, status, error) {
                 console.log(error)
-                // window.alert('Error: ' + "Token expeired!, Login again");
-                // window.location = '../Landlord/login_module.html';
+                window.alert('Error: ' + "Token expeired!, Login again");
+                window.location = '../Landlord/login_module.html';
             }
         });
 

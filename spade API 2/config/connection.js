@@ -9,7 +9,7 @@ const createConnection = async() => {
         host: 'localhost',
         user: 'root',
         password: '',
-        database: 'spade'
+        database: 'spaid'
     });
 
     return connection;
