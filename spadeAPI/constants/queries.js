@@ -24,5 +24,5 @@ exports.updatePassword="UPDATE users SET Password = ? where id = ? and token = ?
 exports.insertInUsers='INSERT INTO users (id,FirstName, LastName, Email, Phone, Password, PlanID) VALUES (?,?, ?, ?, ?, ?, ?)';
 exports.insertInProperty='INSERT INTO property (landlordID, propertyName, address, city, state, zipCode, propertyType, propertySQFT,status,units) VALUES (?,?,?,?,?,?,?,?,?,?)';
 exports.insertInPropertyImage='INSERT INTO propertyimage (propertyID, Image) VALUES (?,?)';
-
+exports.insertInPropertyUnits='INSERT INTO propertyunits (propertyID, unitNumber,Area,unitDetails,status) VALUES (?,?,?,?,?)';
 exports.updateProperty='UPDATE property SET landlordID = ?, propertyName = ? , address = ? , city = ? , state = ? , zipCode = ? , propertyType = ? , propertySQFT = ? , status = ?, units = ?  WHERE id = ? ';
