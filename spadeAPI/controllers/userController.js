@@ -594,7 +594,7 @@ exports.getpropertyUnits = async (req, res) => {
 
 
 
-    //  ############################# update Property Units Start ############################################################
+    //  ############################# Update Property Units Start ############################################################
 exports.putPropertyUnitsUpdates = async (req, res) => {
   try {
     const { 
