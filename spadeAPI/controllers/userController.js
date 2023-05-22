@@ -15,7 +15,8 @@ const {
   insertInProperty,
   insertInPropertyImage,
   updateProperty,
-  insertInPropertyUnits
+  insertInPropertyUnits,
+  updatePropertyUnits
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -566,3 +567,59 @@ exports.getpropertyByID = async (req, res) => {
         }
       }
     //  ############################# View Property End ############################################################
+
+
+    //  ############################# Get Property Units Start ############################################################
+exports.getpropertyUnits = async (req, res) => {
+  try {
+    const { id } = req.body
+    const propertyUnitsResult = await queryRunner(selectQuery("propertyunits", "propertyID"), [id]);
+    if (propertyUnitsResult.length > 0) {
+      res.status(200).json({
+        data: propertyUnitsResult,
+        message: "property Units"
+      })
+    } else {
+      res.status(400).json({
+        message: "No data found"
+      })
+    }
+  } catch (error) {
+    res.send("Error Get Property Units");
+    console.log(req.body)
+    console.log(error)
+  }
+      }
+      //  ############################# Get Property Units End ############################################################
+
+
+
+    //  ############################# Update Property Units Start ############################################################
+exports.putPropertyUnitsUpdates = async (req, res) => {
+  try {
+    const { 
+      id,
+      propertyID,
+      unitNumber,
+      Area,
+      unitDetails
+     } = req.body
+    let status = "Occupied";
+    const propertyUnitsResult = await queryRunner(updatePropertyUnits, [unitNumber, Area, unitDetails, status, id, propertyID]);
+    if (propertyUnitsResult[0].affectedRows > 0) {
+      res.status(200).json({
+        data: propertyUnitsResult,
+        message: "property Units updated successful"
+      })
+    } else {
+      res.status(400).json({
+        message: "No data found"
+      })
+    }
+  } catch (error) {
+    res.send("Error Get Property Units update");
+    console.log(req.body)
+    console.log(error)
+  }
+      }
+      //  ############################# Update Property Units End ############################################################

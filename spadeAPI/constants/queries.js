@@ -26,3 +26,4 @@ exports.insertInProperty='INSERT INTO property (landlordID, propertyName, addres
 exports.insertInPropertyImage='INSERT INTO propertyimage (propertyID, Image) VALUES (?,?)';
 exports.insertInPropertyUnits='INSERT INTO propertyunits (propertyID, unitNumber,Area,unitDetails,status) VALUES (?,?,?,?,?)';
 exports.updateProperty='UPDATE property SET landlordID = ?, propertyName = ? , address = ? , city = ? , state = ? , zipCode = ? , propertyType = ? , propertySQFT = ? , status = ?, units = ?  WHERE id = ? ';
+exports.updatePropertyUnits='UPDATE propertyunits SET unitNumber = ?, Area = ?, unitDetails = ?, status = ?  where id = ? AND propertyID = ? ';
