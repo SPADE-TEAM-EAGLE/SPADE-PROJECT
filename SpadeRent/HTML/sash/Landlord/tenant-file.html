@@ -67,6 +67,17 @@
             margin-top: 10px;
         }
         
+        .image-container {
+            /* Border width and color */
+            border-radius: 5px;
+            /* Border radius for rounded corners */
+            padding: 10px;
+            /* Spacing between the image and the border */
+            /* Shadow effect */
+            margin-bottom: 10px;
+            /* Margin between the image containers */
+        }
+        
         .selected-files span {
             display: inline-block;
             margin-right: 5px;
@@ -87,7 +98,7 @@
             align-items: center;
             justify-content: center;
             padding: 6px 12px;
-            background-color: #fff;
+            background-color: transparent;
         }
         
         .custom-file-label i {
@@ -354,9 +365,9 @@
             #top_main_image {
                 display: none;
             }
-            #top_main_card {
+            /* #top_main_card {
                 height: 220px;
-            }
+            } */
             #nav_links {
                 top: 165px;
             }
@@ -399,9 +410,9 @@
             #top_main_image {
                 display: none;
             }
-            #top_main_card {
+            /* #top_main_card {
                 height: 220px;
-            }
+            } */
             #nav_links {
                 top: 165px;
             }
@@ -441,10 +452,12 @@
         
         .dark-mode th {
             background: #212121 !important;
+            font-weight: bold !important;
         }
         
         .light-mode th {
             background: #ECF3F9 !important;
+            font-weight: bold !important;
         }
     </style>
 
@@ -458,14 +471,14 @@
     </div>
     <!-- /GLOBAL-LOADER -->
     <!-- Modal -->
-    <div class="modal fade" id="largemodal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg " role="document">
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="text-justify ps-2 border-model-line">
-                        <h2 class="modal-title">Create <strong class="color-primary">New Property</strong></h2>
-                        <span class="">Spade Rent allows you to add a range of commercial and residential properties,
-                            from condos and single-family homes to retail stores and parking lots.</span>
+                        <h2 class="modal-title">Personal <strong class="color-primary">Information</strong></h2>
+                        <span class="">These details are required for rent reminders, tenants commutations
+                            and portal access.</span>
                     </div>
                     <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true"><img src="../assets/images/cross-circle.svg" /></span>
@@ -474,9 +487,9 @@
                 <div class="modal-body">
                     <div class="accordion-item mb-4" id="accordion-item1">
                         <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button" id="accordian-button-1" type="button" data-bs-toggle="collapse" onclick="checkFieldsFilled('accordion-item1')" id="accordion-button1" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <button class="accordion-button text-white" id="accordian-button-1" type="button" data-bs-toggle="collapse" onclick="checkFieldsFilled('accordion-item1')" id="accordion-button1" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                 <span class="m-0 me-4 fs-1" style="font-weight: bold;">01</span>
-                                <h3 class="m-0"><strong>Property Information</strong> <i class="fi fi-rs-pencil"></i><i
+                                <h3 class="m-0"><strong>Personal Info</strong><i
                                         class="fi fi-rs-angle-circle-down chevron icon"></i>
                                 </h3>
                             </button>
@@ -503,27 +516,52 @@
                                         <span class="text-danger d-none">Photos are required!</span>
                                     </div>
                                     <div class="col-md-6">
-                                        <label for="inputEmail4" class="form-label fw-bold">Property ID</label>
-                                        <input type="text" class="form-control form" id="propertyId">
+                                        <label for="inputEmail4" class="form-label fw-bold">First Name</label>
+                                        <input type="text" class="form-control form" placeholder="Enter First Name" id="propertyId">
                                         <span class="text-danger d-none">Property ID is required!</span>
                                     </div>
                                     <div class="col-md-6">
-                                        <label for="inputPassword4" class="form-label fw-bold">Property Name <spnan
+                                        <label for="inputPassword4" class="form-label fw-bold">Last Name<spnan
                                                 class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="propertyName">
+                                        <input type="text" class="form-control form" placeholder="Enter First Name" id="propertyName">
                                         <span class="text-danger d-none">Property name required!</span>
                                     </div>
-                                    <div class="col-12">
-                                        <label for="inputAddress" class="form-label fw-bold">Address <spnan
+                                    <div class="col-md-4">
+                                        <label for="inputAddress" class="form-label fw-bold">Company Name (Optional)<spnan
                                                 class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="address" placeholder="1234 Main St">
+                                        <input type="text" class="form-control form" id="address" placeholder="Enter Company Name">
                                         <span class="text-danger d-none">Address is required!</span>
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="inputCity" class="form-label fw-bold">City <spnan
+                                        <label for="inputCity" class="form-label fw-bold">Email<spnan
                                                 class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="city">
+                                        <input type="text" class="form-control form" placeholder="Enter Email" id="city">
                                         <span class="text-danger d-none">City is required!</span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="inputState" class="form-label fw-bold">Phone Number (Optional)<spnan
+                                                class="text-danger">*</span></label>
+                                        <select id="state" class="form-select form">
+                                            <option selected>Choose...</option>
+                                            <option>Sindh</option>
+                                            <option>Punjab</option>
+                                            <option>Balochistan</option>
+                                            <option>KPK</option>
+                                        </select>
+                                        <span class="text-danger d-none">State is required!</span>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="inputZip" class="form-label fw-bold">Address (Optional)<span class="text-danger">
+                                                *</span></label>
+                                        <textarea class="form-control mb-4" placeholder="Enter Company Name" rows="4"></textarea>
+                                        <span class="text-danger d-none">Zip is required!</span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="inputState" class="form-label fw-bold">City <spnan
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control form" id="propertyTotalSF">
+
+                                        <span class="text-danger d-none">Property Type is required!</span>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="inputState" class="form-label fw-bold">State <spnan
@@ -538,25 +576,7 @@
                                         <span class="text-danger d-none">State is required!</span>
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="inputZip" class="form-label fw-bold">Zip <spnan class="text-danger">
-                                                *</span></label>
-                                        <input type="text" class="form-control form" id="zip">
-                                        <span class="text-danger d-none">Zip is required!</span>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="inputState" class="form-label fw-bold">Property Type <spnan
-                                                class="text-danger">*</span></label>
-                                        <select id="propertyType" class="form-select form">
-                                            <option selected>Choose...</option>
-                                            <option>Sindh</option>
-                                            <option>Punjab</option>
-                                            <option>Balochistan</option>
-                                            <option>KPK</option>
-                                        </select>
-                                        <span class="text-danger d-none">Property Type is required!</span>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="inputPassword4" class="form-label fw-bold">Property Total SF <spnan
+                                        <label for="inputPassword4" class="form-label fw-bold">Zip Code <spnan
                                                 class="text-danger">*</span></label>
                                         <input type="text" class="form-control form" id="propertyTotalSF">
                                         <span class="text-danger d-none">Property Total SF is required!</span>
@@ -565,12 +585,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="accordion-item" id="accordion-item2">
+                    <div class="accordion-item mb-4" id="accordion-item2">
                         <h2 class="accordion-header" id="headingTwo">
-                            <button class="accordion-button collapsed" onclick="checkFieldsFilled('accordion-item2')" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <button class="accordion-button collapsed text-white" onclick="checkFieldsFilled('accordion-item2')" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                 <span class="m-0 me-4 fs-1" style="font-weight: bold;">02</span>
-                                <h3 class="m-0"><strong>Property Unit Information</strong> <i
-                                        class="fi fi-rs-pencil"></i><i
+                                <h3 class="m-0"><strong>Contact Info</strong><i
                                         class="fi fi-rs-angle-circle-down chevron icon"></i>
                                 </h3>
                             </button>
@@ -578,7 +597,7 @@
                         <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                             <form class="row g-3 m-1" enctype="multipart/form-data">
 
-                                <div class="col-12 mb-1">
+                                <div class="col-12 mb-3">
                                     <label for="inputAddress" class="form-label fw-bold">Number of Units<span
                                             class="text-danger">*</span></label>
                                     <input type="text" class="form-control px-2" id="units" placeholder=" ">
@@ -587,37 +606,14 @@
                             </form>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-dark button-left me-auto" data-bs-dismiss="modal" id='draft' disabled>Save as
-                        Draft</button>
-                    <button class="btn btn-transparent text-dark" style='background-color:#FFFFFF; border: 3px solid #1467B0;' data-bs-dismiss="modal" id='close'>Close</button>
-                    <button class="btn text-light" style='background-color:#1467B0;' id='next' disabled>Next</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- MODAL EFFECTS -->
-    <div class="modal fade" id="modaldemo8">
-        <div class="modal-dialog modal-dialog-centered text-center" role="document">
-            <div class="modal-content modal-content-demo">
-                <div class="modal-header">
-                    <div class="text-justify">
-                        <h2 class="modal-title">Create <strong class="color-primary">New Property</strong></h2>
-                        <span class="">Spade Rent allows you to add a range of commercial and residential properties,
-                            from condos and single-family homes to retail stores and parking lots.</span>
-                    </div>
 
-                    <button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span
-                            aria-hidden="true">&times;</span></button>
-                </div>
-                <div class="modal-body">
-                    <h6>Why We Use Electoral College, Not Popular Vote</h6>
-                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to
-                        using 'Content here, content here', making it look like readable English.</p>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary">Save changes</button> <button class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
+                        Draft</button>
+                    <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close'>Close</button>
+                    <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
+                    <button class="btn text-light button" style='background-color:#1467B0;' id='next' disabled>Next</button>
                 </div>
             </div>
         </div>
@@ -753,24 +749,24 @@
                     </div>
                     <div class="main-sidemenu">
                         <div class="slide-left disabled" id="slide-left"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24">
-                            <path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" />
-                        </svg></div>
+                                <path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" />
+                            </svg></div>
                         <ul class="side-menu">
                             <li class="sub-category">
                                 <!-- <h3>Main</h3> -->
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item has-link create-new-link" href="javascript:void(0)" target="_self"><i
-                                    class="side-menu__icon fi fi-rs-square-plus"></i><span class="side-menu__label ">Create New</span>
-                            </a>
+                                        class="side-menu__icon fi fi-rs-square-plus"></i><span class="side-menu__label ">Create New</span>
+                                </a>
                             </li>
 
                             <!-- <li class="slide">
-                            <a class="side-menu__item has-link" href="landing-page.php" target="_blank"><i
-                                    class="side-menu__icon fe fe-plus"></i><span class="side-menu__label">Complete your
-                                    Profile</span>
-                            </a>
-                        </li> -->
+                                <a class="side-menu__item has-link" href="landing-page.php" target="_blank"><i
+                                        class="side-menu__icon fe fe-plus"></i><span class="side-menu__label">Complete your
+                                        Profile</span>
+                                </a>
+                            </li> -->
                             <li class="slide">
                                 <div class="M-0 mt-3 mb-4" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
                                     <div class="card-header pb-0 border-bottom-0">
@@ -788,17 +784,17 @@
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html"><i
-                                    class="side-menu__icon fi fi-rs-dashboard"></i><span class="side-menu__label">Overview</span></a>
+                                        class="side-menu__icon fi fi-rs-dashboard"></i><span class="side-menu__label">Overview</span></a>
                             </li>
                             <!-- <li class="sub-category">
-                                       <h3>UI Kit</h3>
-                                   </li> -->
+                                           <h3>UI Kit</h3>
+                                       </li> -->
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
-                                    class="side-menu__icon fi fi-rs-building"></i><span class="side-menu__label">Properties</span>
-                                    <i
-                                    class="angle fe fe-chevron-right"></i>
-                                   </a>
+                                        class="side-menu__icon fi fi-rs-building"></i><span class="side-menu__label">Properties</span>
+                                        <i
+                                        class="angle fe fe-chevron-right"></i>
+                                       </a>
                                 <ul class="slide-menu">
                                     <li class="side-menu-label1"><a href="javascript:void(0)">Properties</a></li>
                                     <li><a href="properties-all.html" class="slide-item">All</a></li>
@@ -807,42 +803,42 @@
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="add-tenant.html"><i
-                                    class="side-menu__icon fi fi-rs-cabin"></i><span class="side-menu__label">Tenants</span>
-                                    <!-- <i
-                                    class="angle fe fe-chevron-right"></i> -->
-                                   
-                                   </a>
+                                        class="side-menu__icon fi fi-rs-cabin"></i><span class="side-menu__label">Tenants</span>
+                                        <!-- <i
+                                        class="angle fe fe-chevron-right"></i> -->
+                                       
+                                       </a>
 
                             </li>
 
                             <!-- <li class="sub-category">
-                                       <h3>Pre-build Pages</h3>
-                                   </li> -->
+                                           <h3>Pre-build Pages</h3>
+                                       </li> -->
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="invoices.html"><i
-                                    class="side-menu__icon fi fi-rs-file-invoice-dollar"></i><span class="side-menu__label">Invoicing</span>
-                                    <!-- <i
-                                    class="angle fe fe-chevron-right"></i> -->
-                                   </a>
+                                        class="side-menu__icon fi fi-rs-file-invoice-dollar"></i><span class="side-menu__label">Invoicing</span>
+                                        <!-- <i
+                                        class="angle fe fe-chevron-right"></i> -->
+                                       </a>
 
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="leads-all.php"><i
-                                    class="side-menu__icon fi fi-rs-chart-simple"></i><span
-                                    class="side-menu__label">Leads</span>
-                                    <!-- <i class="angle fe fe-chevron-right"></i> -->
-                                   
-                                   </a>
+                                        class="side-menu__icon fi fi-rs-chart-simple"></i><span
+                                        class="side-menu__label">Leads</span>
+                                        <!-- <i class="angle fe fe-chevron-right"></i> -->
+                                       
+                                       </a>
 
                             </li>
 
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="tasks.php"><i
-                                    class="side-menu__icon fi fi-rs-list-check"></i><span class="side-menu__label">Tasks</span>
-                                    <!-- <i
-                                    class="angle fe fe-chevron-right"></i> -->
-                                   
-                                   </a>
+                                        class="side-menu__icon fi fi-rs-list-check"></i><span class="side-menu__label">Tasks</span>
+                                        <!-- <i
+                                        class="angle fe fe-chevron-right"></i> -->
+                                       
+                                       </a>
 
                             </li>
                             <li class="slide">
@@ -855,15 +851,15 @@
 
                                 <li>
                                     <a class="side-menu__item has-link" href="settings.php" target="_self"><i
-                                    class="side-menu__icon fi fi-rs-settings"></i><span class="side-menu__label">Settings</span>
-                                <!-- <span
-                                               class="badge bg-green br-5 side-badge blink-text pb-1">New</span> -->
-                            </a>
+                                        class="side-menu__icon fi fi-rs-settings"></i><span class="side-menu__label">Settings</span>
+                                    <!-- <span
+                                                   class="badge bg-green br-5 side-badge blink-text pb-1">New</span> -->
+                                </a>
                                 </li>
                         </ul>
                         <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24">
-                            <path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z" />
-                        </svg></div>
+                                <path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z" />
+                            </svg></div>
                     </div>
                 </div>
             </div>
@@ -885,270 +881,127 @@
                             </div>
                         </div> -->
 
-                        <div class="card" style="background: #1467B0;" id="top_main_card">
+                        <div class="card" style="background: #1467B0;margin-bottom: 100px;" id="top_main_card">
                             <div class="card-body pt-3 pe-3 pb-0">
                                 <div class="row">
-                                    <div class="col-lg-9 position-relative">
-                                        <h1 class="page-titlee text-white mb-1" style="font-weight: 700;" id="property_name">Houston Shopping Center</h1>
-                                        <h5 class="page-titlee text-white" style="font-weight: 100;" id="property_address">9430 Research Blvd. Ste 2-350 Austin TX 78759</h5>
+                                    <div class="col-lg-12  position-relative">
+                                        <div class="d-flex">
+                                            <div class="media mt-0 mb-2">
+                                                <div class="media-user me-2">
+                                                    <div class=""><img alt="" class="rounded-circle avatar avatar-md" style="max-width: 120px;" src="../assets/images/users/16.jpg"></div>
+                                                </div>
+                                                <div class="media-body">
+                                                    <small class="text-white">Tenants</small>
+                                                    <h3 class="mb-0 text-white" style="font-weight: bold;">The Michael Scott Paper Company | Michael Scott</h3>
+                                                </div>
+                                            </div>
+                                            <div class="ms-auto">
+                                                <div class="dropdown show">
+
+                                                    <i class="fe fe-more-vertical text-white fs-20" data-bs-toggle="dropdown"></i>
+
+                                                    <div class="dropdown-menu dropdown-menu-end">
+                                                        <a class="dropdown-item text-success" data-bs-toggle="modal" href="#addModal"><i
+                                                            class=
+                                                            "fi fi-rs-edit me-1"
+                                                            ></i> Edit</a>
+                                                        <a class="dropdown-item text-danger" href="javascript:void(0)"> <i class="fi fi-rs-trash me-1"></i>Delete</a>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <!-- <a href="javascript:void(0)" id="email_verification"
-                                                                class="btn btn-primary btn-pill btn-xl email-verification-btn"><i
-                                                                    class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
-                                                                verification &nbsp; <i
-                                                                    class="angle fe fe-arrow-right create-btn-plus"></i></a> -->
-                                        <ul class="nav1 br-7 position-absolute" style="bottom: 0;" id="nav_links">
+                                                                    class="btn btn-primary btn-pill btn-xl email-verification-btn"><i
+                                                                        class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
+                                                                    verification &nbsp; <i
+                                                                        class="angle fe fe-arrow-right create-btn-plus"></i></a> -->
+
+                                    </div>
+                                    <div class="col-12">
+                                        <ul class="nav1 br-7" style="bottom: 0;">
                                             <li class="nav-item1">
-                                                <a class="nav-link active p-0" href="view-property.html">Overview</a>
+                                                <a class="nav-link active p-0" href="view-tenant.html">Overview</a>
                                             </li>
                                             <li class="nav-item1">
-                                                <a class="nav-link p-0" href="property-unit.html">Units</a>
+                                                <a class="nav-link p-0" href="tenant-properties.html">Properties</a>
                                             </li>
                                             <li class="nav-item1">
-                                                <a class="nav-link p-0" href="property-tenant.html">Tenants</a>
+                                                <a class="nav-link p-0" href="tenant-tasks.html">Tasks</a>
                                             </li>
                                             <li class="nav-item1">
-                                                <a class="nav-link p-0" href="property-task.html">Tasks</a>
+                                                <a class="nav-link p-0" href="tenant-file.html">Files</a>
                                             </li>
                                         </ul>
                                     </div>
-                                    <div class="col-lg-3">
-                                        <img src="../assets/header-img/Group1.png" alt="" id="top_main_image">
-                                    </div>
+
                                 </div>
 
                             </div>
                         </div>
                         <!-- PAGE-HEADER END -->
-                        <div class="over_view" id="Overview">
-                            <!-- ROW-2 OPEN -->
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="card inner-cards">
-                                        <div class="card-header justify-content-start">
-                                            <h3 class="card-title font-wieght-bold">Add Units</h3>
+                        <div class="row justify-content-center">
+                            <div class="col-lg-6 col-xl-6">
+                                <div class="card">
+                                    <!-- <div class="card-header">
+                                        <div class="card-title">Edit Password</div>
+                                    </div> -->
+                                    <div class="card-body">
+                                        <div class="text-center chat-image mb-5" style="margin-top: -85px;">
+                                           
+                                                <div class="profile-img-1">
+                                                    <img src="../assets/images/users/21.jpg" class="brround" alt="img">
+                                                </div>
+                                           
+                                          
+                                            <div class="main-chat-msg-name">
+                                                <!-- <a href="profile.html">
+                                                    <h5 class="mb-1 text-dark fw-semibold">Percy Kewshun</h5>
+                                                </a>
+                                                <p class="text-muted mt-0 mb-0 pt-0 fs-13">Web Designer</p> -->
+                                                <h2 class="modal-title">Create <strong class="color-primary">New Property</strong></h2>
+
+                                            </div>
                                         </div>
-                                        <div class="card-body">
-                                            <div class="table-responsive">
-                                                <table id="key-table" class="table table-bordered text-nowrap mb-0">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>UNIT.ID</th>
-                                                            <th>Status</th>
-                                                            <th>Unit number</th>
-                                                            <th>Area</th>
-                                                            <th>UNIT DETAILS</th>
-                                                            <th>Action</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>
-                                                                <a class="like" href="javascript:;">
-                                                                    <span class="badge bg-light-blue text-primary rounded-pill py-2 px-3">
-                                                                        U-134</span>
-                                                                </a>
-                                                            </td>
-                                                            <td class="text-danger">Vacant</td>
-                                                            <td><input type="email" class="form-control" id="inputEmail5" placeholder="Enter Unit Number">
-                                                            </td>
-                                                            <td><input type="email" class="form-control" id="inputEmail5" placeholder="Enter Area"></td>
-                                                            <td><input type="email" class="form-control" id="inputEmail5" placeholder="Enter Unit Details (Optional)"></td>
-                                                            <td><button class="btn btn-primary btn-pill pt-1 pb-1">Done</button>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <a class="like" href="javascript:;">
-                                                                    <span class="badge bg-light-blue text-primary rounded-pill py-2 px-3">
-                                                                        U-134</span>
-                                                                </a>
-                                                            </td>
-                                                            <td class="text-danger">Vacant</td>
-                                                            <td><input type="email" class="form-control" id="inputEmail5" placeholder="Enter Unit Number">
-                                                            </td>
-                                                            <td><input type="email" class="form-control" id="inputEmail5" placeholder="Enter Area"></td>
-                                                            <td><input type="email" class="form-control" id="inputEmail5" placeholder="Enter Unit Details (Optional)"></td>
-                                                            <td><button class="btn btn-primary btn-pill pt-1 pb-1">Done</button>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <a class="like" href="javascript:;">
-                                                                    <span class="badge bg-light-blue text-primary rounded-pill py-2 px-3">
-                                                                        U-134</span>
-                                                                </a>
-                                                            </td>
-                                                            <td class="text-danger">Vacant</td>
-                                                            <td><input type="email" class="form-control" id="inputEmail5" placeholder="Enter Unit Number">
-                                                            </td>
-                                                            <td><input type="email" class="form-control" id="inputEmail5" placeholder="Enter Area"></td>
-                                                            <td><input type="email" class="form-control" id="inputEmail5" placeholder="Enter Unit Details (Optional)"></td>
-                                                            <td><button class="btn btn-primary btn-pill pt-1 pb-1">Done</button>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <a class="like" href="javascript:;">
-                                                                    <span class="badge bg-light-blue text-primary rounded-pill py-2 px-3">
-                                                                        U-134</span>
-                                                                </a>
-                                                            </td>
-                                                            <td class="text-danger">Vacant</td>
-                                                            <td><input type="email" class="form-control" id="inputEmail5" placeholder="Enter Unit Number">
-                                                            </td>
-                                                            <td><input type="email" class="form-control" id="inputEmail5" placeholder="Enter Area"></td>
-                                                            <td><input type="email" class="form-control" id="inputEmail5" placeholder="Enter Unit Details (Optional)"></td>
-                                                            <td><button class="btn btn-primary btn-pill pt-1 pb-1">Done</button>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <a class="like" href="javascript:;">
-                                                                    <span class="badge bg-light-blue text-primary rounded-pill py-2 px-3">
-                                                                        U-134</span>
-                                                                </a>
-                                                            </td>
-                                                            <td class="text-danger">Vacant</td>
-                                                            <td><input type="email" class="form-control" id="inputEmail5" placeholder="Enter Unit Number">
-                                                            </td>
-                                                            <td><input type="email" class="form-control" id="inputEmail5" placeholder="Enter Area"></td>
-                                                            <td><input type="email" class="form-control" id="inputEmail5" placeholder="Enter Unit Details (Optional)"></td>
-                                                            <td><button class="btn btn-primary btn-pill pt-1 pb-1">Done</button>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <a class="like" href="javascript:;">
-                                                                    <span class="badge bg-light-blue text-primary rounded-pill py-2 px-3">
-                                                                        U-134</span>
-                                                                </a>
-                                                            </td>
-                                                            <td class="text-danger">Vacant</td>
-                                                            <td><input type="email" class="form-control" id="inputEmail5" placeholder="Enter Unit Number">
-                                                            </td>
-                                                            <td><input type="email" class="form-control" id="inputEmail5" placeholder="Enter Area"></td>
-                                                            <td><input type="email" class="form-control" id="inputEmail5" placeholder="Enter Unit Details (Optional)"></td>
-                                                            <td><button class="btn btn-primary btn-pill pt-1 pb-1">Done</button>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <a class="like" href="javascript:;">
-                                                                    <span class="badge bg-light-blue text-primary rounded-pill py-2 px-3">
-                                                                        U-134</span>
-                                                                </a>
-                                                            </td>
-                                                            <td class="text-danger">Vacant</td>
-                                                            <td><input type="email" class="form-control" id="inputEmail5" placeholder="Enter Unit Number">
-                                                            </td>
-                                                            <td><input type="email" class="form-control" id="inputEmail5" placeholder="Enter Area"></td>
-                                                            <td><input type="email" class="form-control" id="inputEmail5" placeholder="Enter Unit Details (Optional)"></td>
-                                                            <td><button class="btn btn-primary btn-pill pt-1 pb-1">Done</button>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <a class="like" href="javascript:;">
-                                                                    <span class="badge bg-light-blue text-primary rounded-pill py-2 px-3">
-                                                                        U-134</span>
-                                                                </a>
-                                                            </td>
-                                                            <td class="text-danger">Vacant</td>
-                                                            <td><input type="email" class="form-control" id="inputEmail5" placeholder="Enter Unit Number">
-                                                            </td>
-                                                            <td><input type="email" class="form-control" id="inputEmail5" placeholder="Enter Area"></td>
-                                                            <td><input type="email" class="form-control" id="inputEmail5" placeholder="Enter Unit Details (Optional)"></td>
-                                                            <td><button class="btn btn-primary btn-pill pt-1 pb-1">Done</button>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <a class="like" href="javascript:;">
-                                                                    <span class="badge bg-light-blue text-primary rounded-pill py-2 px-3">
-                                                                        U-134</span>
-                                                                </a>
-                                                            </td>
-                                                            <td class="text-danger">Vacant</td>
-                                                            <td><input type="email" class="form-control" id="inputEmail5" placeholder="Enter Unit Number">
-                                                            </td>
-                                                            <td><input type="email" class="form-control" id="inputEmail5" placeholder="Enter Area"></td>
-                                                            <td><input type="email" class="form-control" id="inputEmail5" placeholder="Enter Unit Details (Optional)"></td>
-                                                            <td><button class="btn btn-primary btn-pill pt-1 pb-1">Done</button>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <a class="like" href="javascript:;">
-                                                                    <span class="badge bg-light-blue text-primary rounded-pill py-2 px-3">
-                                                                        U-134</span>
-                                                                </a>
-                                                            </td>
-                                                            <td class="text-danger">Vacant</td>
-                                                            <td><input type="email" class="form-control" id="inputEmail5" placeholder="Enter Unit Number">
-                                                            </td>
-                                                            <td><input type="email" class="form-control" id="inputEmail5" placeholder="Enter Area"></td>
-                                                            <td><input type="email" class="form-control" id="inputEmail5" placeholder="Enter Unit Details (Optional)"></td>
-                                                            <td><button class="btn btn-primary btn-pill pt-1 pb-1">Done</button>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <a class="like" href="javascript:;">
-                                                                    <span class="badge bg-light-blue text-primary rounded-pill py-2 px-3">
-                                                                        U-134</span>
-                                                                </a>
-                                                            </td>
-                                                            <td class="text-danger">Vacant</td>
-                                                            <td><input type="email" class="form-control" id="inputEmail5" placeholder="Enter Unit Number">
-                                                            </td>
-                                                            <td><input type="email" class="form-control" id="inputEmail5" placeholder="Enter Area"></td>
-                                                            <td><input type="email" class="form-control" id="inputEmail5" placeholder="Enter Unit Details (Optional)"></td>
-                                                            <td><button class="btn btn-primary btn-pill pt-1 pb-1">Done</button>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <a class="like" href="javascript:;">
-                                                                    <span class="badge bg-light-blue text-primary rounded-pill py-2 px-3">
-                                                                        U-134</span>
-                                                                </a>
-                                                            </td>
-                                                            <td class="text-danger">Vacant</td>
-                                                            <td><input type="email" class="form-control" id="inputEmail5" placeholder="Enter Unit Number">
-                                                            </td>
-                                                            <td><input type="email" class="form-control" id="inputEmail5" placeholder="Enter Area"></td>
-                                                            <td><input type="email" class="form-control" id="inputEmail5" placeholder="Enter Unit Details (Optional)"></td>
-                                                            <td><button class="btn btn-primary btn-pill pt-1 pb-1">Done</button>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
+                                        <div class="form-group">
+                                            <div class="custom-file" style="border: 1px dashed #00000087;">
+                                                <input id="fileInput" type="file" name="image" class="custom-file-input form" accept=".jpg, .png, image/jpeg, image/png" aria-label="hello" multiple>
+                                                <span className="d-none"></span>
+                                                <label class="custom-file-label" for="fileInput">
+                                                    <i class="fi fi-rs-cloud-upload color-primary"></i>
+                                                    <div class="custom-file-text">
+                                                        <h4 class="mb-0" style="font-weight: bold;">Upload Photo or drag and drop here</h4>
+                                                        <span class="fs-12">JPEG, PNG and PDF, file size no more than 10MB</span>
+                                                    </div>
+                                                </label>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <!-- ROW-2 CLOSED -->
                         </div>
                     </div>
-                    <!-- ROW-3 CLOSED -->
                 </div>
-                <!-- ROW-2 END -->
-
-
-
-
-                <div class="card-body pb-0 bg-recentorder" style="display: none;">
-                    <h3 class="card-title text-white">Recent Orders</h3>
-                    <div class="chartjs-wrapper-demo">
-                        <canvas id="recentorders" class="chart-dropshadow"></canvas>
-                    </div>
-                </div>
-                <div id="flotback-chart" class="flot-background" style="display: none;"></div>
-
+                <!-- ROW-3 CLOSED -->
             </div>
-            <!-- CONTAINER END -->
+            <!-- ROW-2 END -->
+
+
+
+
+            <div class="card-body pb-0 bg-recentorder" style="display: none;">
+                <h3 class="card-title text-white">Recent Orders</h3>
+                <div class="chartjs-wrapper-demo">
+                    <canvas id="recentorders" class="chart-dropshadow"></canvas>
+                </div>
+            </div>
+            <div id="flotback-chart" class="flot-background" style="display: none;"></div>
+
         </div>
+        <!-- CONTAINER END -->
+    </div>
     </div>
     <!--app-content close-->
 
@@ -1782,15 +1635,7 @@
     <script src="../assets/js/custom.js"></script>
 
     <!-- ############################################# -->
-    <!-- INTERNAL Autofill-Table JS -->
-    <!-- <script src="../assets/plugins/datatable/js/jquery.dataTables.min.js"></script> -->
-    <!-- <script src="../assets/plugins/datatable/js/dataTables.bootstrap5.js"></script> -->
-    <!-- <script src="../assets/plugins/datatable/js/dataTables.buttons.min.js"></script> -->
-    <!-- <script src="../assets/plugins/datatable/js/buttons.bootstrap5.min.js"></script> -->
-    <!-- <script src="../assets/plugins/extension-datatable/autofill/dataTables.autoFill.min.js"></script> -->
-    <script src="../assets/plugins/extension-datatable/autofill/autoFill.bootstrap5.min.js"></script>
-    <!-- <script src="../assets/plugins/extension-datatable/keytable/dataTables.keyTable.min.js"></script> -->
-    <script src="../assets/js/autofill-table.js"></script>
+
 
     <!-- C3 CHART JS -->
     <script src="../assets/plugins/charts-c3/d3.v5.min.js"></script>
@@ -1806,149 +1651,6 @@
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
     <script>
-        const form1Inputs = document.querySelectorAll('#accordion-item1 .form');
-        form1Inputs.forEach(input => {
-            input.addEventListener('blur', function() {
-                if (validateInput(input)) {
-                    input.nextElementSibling.classList.add('d-none');
-                } else {
-                    input.nextElementSibling.classList.remove('d-none');
-                }
-            });
-        });
-
-        // Attach event listeners to input fields in second form
-        const form2Inputs = document.querySelectorAll('#accordion-item2 .form-control');
-        form2Inputs.forEach(input => {
-            input.addEventListener('blur', function() {
-                // console.log(input.nextElementSibling)
-                if (validateInput(input)) {
-                    input.nextElementSibling.classList.add('d-none');
-                } else {
-                    input.nextElementSibling.classList.remove('d-none');
-                }
-            });
-        });
-        counter = 0
-        const draftButton = document.getElementById('draft');
-        const nextButton = document.getElementById('next');
-        let isForm1Valid = false;
-        let isForm2Valid = false;
-
-        function checkFieldsFilled(id) {
-            if (id === "accordion-item2" && counter === 0) {
-                counter += 1
-                return
-            }
-            const accordionItem = document.getElementById(id);
-            // console.log(accordionItem)
-            const formFields = accordionItem.querySelectorAll("input, select");
-            let allFieldsFilled = true;
-            // console.log(formFields)
-            formFields.forEach(function(field) {
-                // console.log(field.type, field.value)
-                // console.log(field)
-                if (field.value === "") {
-                    allFieldsFilled = false;
-                }
-
-            });
-
-            const chevronIcon = accordionItem.querySelector(".icon");
-
-            if (accordionItem.querySelector(".accordion-button").classList.contains("collapsed")) {
-                if (allFieldsFilled) {
-                    chevronIcon.classList.remove("fi-rs-exclamation");
-                    chevronIcon.classList.remove("chevron");
-                    chevronIcon.classList.add("fi-rs-check");
-                    chevronIcon.classList.add("tick");
-                } else {
-                    chevronIcon.classList.remove("fi-rs-check");
-                    chevronIcon.classList.remove("chevron");
-                    chevronIcon.classList.add("fi-rs-exclamation");
-                    chevronIcon.classList.add("cross");
-                }
-            } else {
-                chevronIcon.classList.remove("fi-rs-check");
-                // chevronIcon.classList.remove("chevron");
-                chevronIcon.classList.add("chevron");
-                chevronIcon.classList.remove("fi-rs-exclamation");
-                chevronIcon.classList.remove("cross");
-                chevronIcon.classList.remove("tick");
-            }
-            if (id === "accordion-item1") {
-                // console.log(1)
-                form1Inputs.forEach(input => {
-                    if (validateInput(input)) {
-
-                        input.nextElementSibling.classList.add('d-none');
-                    } else {
-                        input.nextElementSibling.classList.remove('d-none');
-                    }
-                });
-            } else if (id === "accordion-item2") {
-                // console.log(form2Inputs)
-                form2Inputs.forEach(input => {
-                    if (validateInput(input)) {
-                        input.nextElementSibling.classList.add('d-none');
-                    } else {
-                        input.nextElementSibling.classList.remove('d-none');
-                    }
-                });
-            }
-            if (id === 'accordion-item1') {
-                isForm1Valid = validateForm(document.getElementById('accordion-item1'));
-            } else {
-                isForm2Valid = validateForm(document.getElementById('accordion-item2'));
-            }
-            // const isForm1Valid = validateForm(document.getElementById('accordion-item1'));
-            // const isForm2Valid = validateForm(document.getElementById('accordion-item2'));
-
-            // Enable/Disable buttons based on form validity
-            if (isForm1Valid && isForm2Valid) {
-                draftButton.disabled = false;
-                nextButton.disabled = false;
-            } else {
-                draftButton.disabled = true;
-                nextButton.disabled = true;
-            }
-        }
-
-        function validateInput(inputElement) {
-            // console.log(inputElement)
-            if (inputElement.value.trim() === '' || inputElement.value.trim() === "Choose...") {
-                inputElement.style.border = '1px solid red';
-
-                return false
-                    // inputElement.siblings('.text-danger').show();
-            } else {
-
-                inputElement.style.border = '1px solid #ced4da'
-                return true
-                    // inputElement.siblings('.text-danger').hide();
-            }
-        }
-
-        function validateForm(form) {
-            let inputs
-            if (form.id === "accordion-item1") {
-                // console.log(form.id)
-                inputs = form.querySelectorAll('.form');
-            } else if (form.id === "accordion-item2") {
-                // console.log(form.id)
-                inputs = form.querySelectorAll('.form-control');
-            }
-            let isValid = true;
-            inputs.forEach(input => {
-                validateInput(input);
-
-                if (input.value.trim() === '') {
-                    isValid = false;
-                }
-            });
-
-            return isValid;
-        }
     </script>
 
     <script>
@@ -1958,7 +1660,6 @@
         // Get a reference to the logo element
         const logo = document.getElementById('logo');
 
-        // Set the logo source file based on the user's preferred color scheme
         if (userPrefersDark) {
             logo.src = '../assets/header-img/comment.svg';
         } else {
@@ -1973,173 +1674,35 @@
     <script>
         $(document).ready(function() {
 
-            // function AllProperties() {
-            // $.ajax({
-            //     url: 'https://192.162.100.16:3000/api/spade/property',
-            //     type: 'GET',
-            //     contentType: 'application/json',
-            //     success: function(response) {
-            //         console.log(response.data)
-            //         // var tabledata = "";
-            // for (i = 0; i < response.data.length; i++) {
-            //     tabledata += `<tr>
-            //                                     <td><label class="custom-control custom-checkbox-md">
-            //                                             <input type="checkbox" class="custom-control-input"
-            //                                                 name="example-checkbox5" value="option5" checked="">
-            //                                             <span class="custom-control-label"></span>
-            //                                         </label></td>
-            //                                     <td><img src="https://cdn.pixabay.com/photo/2017/07/08/02/16/house-2483336__340.jpg"
-            //                                             alt=""></td>
-            //                                     <td style="font-weight: 600;">US-272723</td>
-            //                                     <td style="font-weight: 600;">Houston Shopping Center</td>
-            //                                     <td><a class="like" href="javascript:;">
-            //                                             <span
-            //                                                 class="badge btn-light rounded-pill-Single-Family rounded-pill py-2 px-3">
-            //                                                 <i class="fe fe-circle me-1"></i>Single
-            //                                                 Family</span>
-            //                                         </a></td>
-            //                                     <td>
-            //                                         <p style="font-weight: 600;" class="mb-1">1 Unit (s)</p>
-            //                                         <span class="font-weight-normal">220 Square Feet</span>
-            //                                     </td>
-            //                                     <td>
-            //                                         <p style="font-weight: 600;" class="mb-1">9430 Research
-            //                                             Blvd. Ste 2-350 Austin</p>
-            //                                         <span>TX 78759</span>
-            //                                     </td>
-            //                                     <td><i class="fe fe-more-vertical" data-bs-toggle="tooltip"
-            //                                             title="" data-bs-original-title="fe fe-more-vertical"
-            //                                             aria-label="fe fe-more-vertical"></i></td>
-            //                                 </tr>`;
-            // }
-            // document.getElementById("table_body").innerHTML = tabledata;
-            //         },
-            //         error: function(xhr, status, error) {
-            //             console.error(xhr.responseText);
-            //         }
-            //     });
-            // }
-            // AllProperties();
+            const propertyId = (new URL(document.location)).searchParams.get("propertyId");
 
-            var selectedFiles = []; // Array to store the selected files
-
-            $('#fileInput').on('change', function() {
-                var files = Array.from($(this)[0].files);
-
-                files.forEach(function(file) {
-                    selectedFiles.push(file); // Add each file to the selected files array
-                });
-
-                updateSelectedFilesContainer(); // Update the selected files container
-            });
-
-            $(document).on('click', '.delete-file', function() {
-                var index = $(this).data('index');
-                selectedFiles.splice(index, 1); // Remove the selected file from the array
-                updateSelectedFilesContainer(); // Update the selected files container
-            });
-
-            function updateSelectedFilesContainer() {
-                var selectedFilesContainer = $('.file-grid');
-                selectedFilesContainer.empty();
-
-                selectedFiles.forEach(function(file, index) {
-                    var fileName = truncateFileName(file.name);
-                    var fileSize = formatFileSize(file.size);
-
-                    var fileElement = $('<div>')
-                        .addClass('selected-file')
-                        .append(
-                            $('<img>')
-                            .addClass('file-preview')
-                            .attr('src', URL.createObjectURL(file))
-                        )
-                        .append(
-                            $('<div>')
-                            .addClass('file-details')
-                            .append($('<span>').text(fileName))
-                            .append($('<span>').text(fileSize))
-                        )
-                        .append(
-                            $('<span>')
-                            .addClass('delete-file')
-                            .text('X')
-                            .attr('data-index', index)
-                        )
-                        .appendTo(selectedFilesContainer);
-                });
-            }
-
-            function formatFileSize(bytes) {
-                if (bytes === 0) return '0 Bytes';
-                var k = 1024;
-                var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-                var i = Math.floor(Math.log(bytes) / Math.log(k));
-                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-            }
-
-            function truncateFileName(fileName) {
-                var maxFileNameLength = 10; // Define the maximum length of the file name
-
-                if (fileName.length > maxFileNameLength) {
-                    return fileName.substring(0, maxFileNameLength) + '...'; // Truncate the file name
-                }
-
-                return fileName;
-            }
-        });
-
-
-
-        $(document).on('click', '#next', function(e) {
-
-            e.preventDefault();
-
-            var formData = new FormData();
-
-            // Get the form data
-            var propertyName = $("#propertyName").val();
-            var address = $("#address").val();
-            var city = $("#city").val();
-            var state = $("#state").val();
-            var zipCode = $("#zip").val();
-            var propertyType = $("#propertyType").val();
-            var propertySQFT = $("#propertyTotalSF").val();
-            var units = $("#units").val();
-
-            // Add the form data to the FormData object
-            formData.append('propertyName', propertyName);
-            formData.append('address', address);
-            formData.append('city', city);
-            formData.append('state', state);
-            formData.append('zipCode', zipCode);
-            formData.append('propertyType', propertyType);
-            formData.append('propertySQFT', propertySQFT);
-            formData.append('units', units);
-
-            // Get the selected files
-            var files = $('#fileInput')[0].files;
-
-            // Add the files to the FormData object
-            for (var i = 0; i < files.length; i++) {
-                formData.append('image', files[i]);
-            }
-
-            // Send the form data to the server using AJAX
             $.ajax({
-                url: 'http://localhost:3000/api/spade/property',
-                type: 'POST',
-                data: formData,
-                contentType: false,
-                processData: false,
-                xhrFields: {
-                    withCredentials: true // Send cookies with the request
+                url: 'http://localhost:3000/api/spade/viewProperty',
+                type: 'GET',
+                data: {
+                    propertyId
                 },
-                crossDomain: true,
-                success: function(response) {
-                    console.log(response)
-                    window.alert(response.message);
-                    window.location('../Landlord/properties-all.html')
+                contentType: "application/json; charset=utf-8",
+                // processData: false,
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function({
+                    data
+                }) {
+                    console.log(data)
+                        // window.alert(response.message);
+                    console.log(data.propertyName)
+                    $("#property_name").text(data.propertyName)
+                    $("#property_address").text(data.address)
+                    $("#property_type").text(data.propertyType)
+                    $("#property_units").text(data.units)
+                    $("#property_status").text(data.status)
+                    $("#image-placeholder").empty()
+                    data.images.forEach(image => {
+                        $("#image-placeholder").append('<div class="col-xs-2 col-sm-3 col-lg-2"><div class="image-container"><img src="../../../../spade API 2/uploads/' + image.Image + '" alt="" class="img-fluid"></div></div>')
+                    });
+
                 },
                 error: function(xhr, status, error) {
                     window.alert('Error: ' + error);
