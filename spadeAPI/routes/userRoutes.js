@@ -15,6 +15,7 @@ router.post('/verifyResetEmailCode', userController.verifyResetEmailCode);
 router.post('/updatePassword', userController.updatePassword);
 router.post('/resendCode', userController.resendCode);
 router.post('/property', [verifyToken,upload] , userController.property);
+// router.post('/property', upload , userController.property);
 router.get('/allProperty',verifyToken, userController.getproperty);
 // router.get('/property',verifyToken, userController.getpropertyByID);
 // router.get('/allProperty', userController.getproperty);
