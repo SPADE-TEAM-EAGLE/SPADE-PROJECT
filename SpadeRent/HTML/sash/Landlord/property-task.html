@@ -1952,109 +1952,149 @@
             let allFieldsFilled = true;
             // console.log(formFields)
             formFields.forEach(function(field) {
-                // console.log(field.type, field.value)
-                // console.log(field)
-                if (field.value === "") {
-                    allFieldsFilled = false;
-                }
+                    // console.log(field.type, field.value)
+                    // console.log(field)
+                    if (field.value === "") {
+                        allFieldsFilled = false;
+                    }
 
-            });
+                    if (accordionItem.querySelector(".accordion-button").classList.contains("collapsed")) {
+                        if (allFieldsFilled) {
+                            chevronIcon.classList.remove("fi-rs-exclamation");
+                            chevronIcon.classList.remove("chevron");
+                            chevronIcon.classList.add("fi-rs-check-circle");
+                            chevronIcon.classList.add("tick");
+                        } else {
+                            chevronIcon.classList.remove("fi-rs-check-circle");
+                            chevronIcon.classList.remove("chevron");
+                            chevronIcon.classList.add("fi-rs-exclamation");
+                            chevronIcon.classList.add("cross");
+                        }
+                    } else {
+                        chevronIcon.classList.remove("fi-rs-check-circle");
+                        // chevronIcon.classList.remove("chevron");
+                        chevronIcon.classList.add("chevron");
+                        chevronIcon.classList.remove("fi-rs-exclamation");
+                        chevronIcon.classList.remove("cross");
+                        chevronIcon.classList.remove("tick");
+                    }
+                    if (id === "accordion-item1") {
+                        // console.log(1)
+                        form1Inputs.forEach(input => {
+                            if (validateInput(input)) {
 
-            const chevronIcon = accordionItem.querySelector(".icon");
+                                input.nextElementSibling.classList.add('d-none');
+                            } else {
+                                input.nextElementSibling.classList.remove('d-none');
+                            }
+                        });
+                    } else if (id === "accordion-item2") {
+                        // console.log(form2Inputs)
+                        form2Inputs.forEach(input => {
+                            if (validateInput(input)) {
+                                input.nextElementSibling.classList.add('d-none');
+                            } else {
+                                input.nextElementSibling.classList.remove('d-none');
+                            }
+                        });
+                    }
+                    if (id === 'accordion-item1') {
+                        isForm1Valid = validateForm(document.getElementById('accordion-item1'));
+                    } else {
+                        isForm2Valid = validateForm(document.getElementById('accordion-item2'));
+                    }
+                    // const isForm1Valid = validateForm(document.getElementById('accordion-item1'));
+                    // const isForm2Valid = validateForm(document.getElementById('accordion-item2'));
 
-            if (accordionItem.querySelector(".accordion-button").classList.contains("collapsed")) {
-                if (allFieldsFilled) {
-                    chevronIcon.classList.remove("fi-rs-exclamation");
-                    chevronIcon.classList.remove("chevron");
-                    chevronIcon.classList.add("fi-rs-check-circle");
-                    chevronIcon.classList.add("tick");
+                    // Enable/Disable buttons based on form validity
+                    if (isForm1Valid && isForm2Valid) {
+                        draftButton.disabled = false;
+                        nextButton.disabled = false;
+                    } else {
+                        draftButton.disabled = true;
+                        nextButton.disabled = true;
+                    }
                 } else {
-                    chevronIcon.classList.remove("fi-rs-check-circle");
-                    chevronIcon.classList.remove("chevron");
-                    chevronIcon.classList.add("fi-rs-exclamation");
-                    chevronIcon.classList.add("cross");
+                    chevronIcon.classList.remove("fi-rs-check");
+                    // chevronIcon.classList.remove("chevron");
+                    chevronIcon.classList.add("chevron");
+                    chevronIcon.classList.remove("fi-rs-exclamation");
+                    chevronIcon.classList.remove("cross");
+                    chevronIcon.classList.remove("tick");
                 }
-            } else {
-                chevronIcon.classList.remove("fi-rs-check-circle");
-                // chevronIcon.classList.remove("chevron");
-                chevronIcon.classList.add("chevron");
-                chevronIcon.classList.remove("fi-rs-exclamation");
-                chevronIcon.classList.remove("cross");
-                chevronIcon.classList.remove("tick");
-            }
-            if (id === "accordion-item1") {
-                // console.log(1)
-                form1Inputs.forEach(input => {
-                    if (validateInput(input)) {
+                if (id === "accordion-item1") {
+                    // console.log(1)
+                    form1Inputs.forEach(input => {
+                        if (validateInput(input)) {
 
-                        input.nextElementSibling.classList.add('d-none');
-                    } else {
-                        input.nextElementSibling.classList.remove('d-none');
+                            input.nextElementSibling.classList.add('d-none');
+                        } else {
+                            input.nextElementSibling.classList.remove('d-none');
+                        }
+                    });
+                } else if (id === "accordion-item2") {
+                    // console.log(form2Inputs)
+                    form2Inputs.forEach(input => {
+                        if (validateInput(input)) {
+                            input.nextElementSibling.classList.add('d-none');
+                        } else {
+                            input.nextElementSibling.classList.remove('d-none');
+                        }
+                    });
+                }
+                if (id === 'accordion-item1') {
+                    isForm1Valid = validateForm(document.getElementById('accordion-item1'));
+                } else {
+                    isForm2Valid = validateForm(document.getElementById('accordion-item2'));
+                }
+                // const isForm1Valid = validateForm(document.getElementById('accordion-item1'));
+                // const isForm2Valid = validateForm(document.getElementById('accordion-item2'));
+
+                // Enable/Disable buttons based on form validity
+                if (isForm1Valid && isForm2Valid) {
+                    draftButton.disabled = false;
+                    nextButton.disabled = false;
+                } else {
+                    draftButton.disabled = true;
+                    nextButton.disabled = true;
+                }
+            }
+
+            function validateInput(inputElement) {
+                // console.log(inputElement)
+                if (inputElement.value.trim() === '' || inputElement.value.trim() === "Choose...") {
+                    inputElement.style.border = '1px solid red';
+
+                    return false
+                        // inputElement.siblings('.text-danger').show();
+                } else {
+
+                    inputElement.style.border = '1px solid #ced4da'
+                    return true
+                        // inputElement.siblings('.text-danger').hide();
+                }
+            }
+
+            function validateForm(form) {
+                let inputs
+                if (form.id === "accordion-item1") {
+                    // console.log(form.id)
+                    inputs = form.querySelectorAll('.form');
+                } else if (form.id === "accordion-item2") {
+                    // console.log(form.id)
+                    inputs = form.querySelectorAll('.form-control');
+                }
+                let isValid = true;
+                inputs.forEach(input => {
+                    validateInput(input);
+
+                    if (input.value.trim() === '') {
+                        isValid = false;
                     }
                 });
-            } else if (id === "accordion-item2") {
-                // console.log(form2Inputs)
-                form2Inputs.forEach(input => {
-                    if (validateInput(input)) {
-                        input.nextElementSibling.classList.add('d-none');
-                    } else {
-                        input.nextElementSibling.classList.remove('d-none');
-                    }
-                });
+
+                return isValid;
             }
-            if (id === 'accordion-item1') {
-                isForm1Valid = validateForm(document.getElementById('accordion-item1'));
-            } else {
-                isForm2Valid = validateForm(document.getElementById('accordion-item2'));
-            }
-            // const isForm1Valid = validateForm(document.getElementById('accordion-item1'));
-            // const isForm2Valid = validateForm(document.getElementById('accordion-item2'));
-
-            // Enable/Disable buttons based on form validity
-            if (isForm1Valid && isForm2Valid) {
-                draftButton.disabled = false;
-                nextButton.disabled = false;
-            } else {
-                draftButton.disabled = true;
-                nextButton.disabled = true;
-            }
-        }
-
-        function validateInput(inputElement) {
-            // console.log(inputElement)
-            if (inputElement.value.trim() === '' || inputElement.value.trim() === "Choose...") {
-                inputElement.style.border = '1px solid red';
-
-                return false
-                    // inputElement.siblings('.text-danger').show();
-            } else {
-
-                inputElement.style.border = '1px solid #ced4da'
-                return true
-                    // inputElement.siblings('.text-danger').hide();
-            }
-        }
-
-        function validateForm(form) {
-            let inputs
-            if (form.id === "accordion-item1") {
-                // console.log(form.id)
-                inputs = form.querySelectorAll('.form');
-            } else if (form.id === "accordion-item2") {
-                // console.log(form.id)
-                inputs = form.querySelectorAll('.form-control');
-            }
-            let isValid = true;
-            inputs.forEach(input => {
-                validateInput(input);
-
-                if (input.value.trim() === '') {
-                    isValid = false;
-                }
-            });
-
-            return isValid;
-        }
     </script>
 
     <script>

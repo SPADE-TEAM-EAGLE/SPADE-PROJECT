@@ -9,15 +9,16 @@ router.get('/protected',verifyToken,userController.getUser)
 router.get('/checkemail', userController.checkemail);
 router.get('/Signin', userController.Signin);
 router.get('/Signinall', userController.Signinall);
+// router.get('/Signinall', userController.Signinall);
 router.post('/resetEmail', userController.createResetEmail);
 router.post('/verifyResetEmailCode', userController.verifyResetEmailCode);
 router.post('/updatePassword', userController.updatePassword);
 router.post('/resendCode', userController.resendCode);
 router.post('/property', [verifyToken,upload] , userController.property);
+// router.post('/property', upload , userController.property);
 router.get('/allProperty',verifyToken, userController.getproperty);
-router.get('/PropertyUnits',verifyToken,  userController.getpropertyUnits);
-router.put('/PropertyUnitsUpdates',verifyToken,  userController.putPropertyUnitsUpdates);
-// router.put('/PropertyUnitsUpdates', userController.putPropertyUnitsUpdates);
+// router.get('/property',verifyToken, userController.getpropertyByID);
+// router.get('/allProperty', userController.getproperty);
 router.delete('/propertyDelete', verifyToken,userController.propertyDelete);
 // router.put('/updateProperty', verifyToken ,userController.propertyUpdate);
 // router.put('/updateProperty', userController.updateproperty);
@@ -26,5 +27,8 @@ router.delete('/propertyDelete', verifyToken,userController.propertyDelete);
 // router.delete('/deleteProperty', userController.propertyDelete);
 router.put('/updateProperty', [verifyToken,upload], userController.propertyUpdate);
 router.get('/viewProperty', verifyToken,userController.propertyView);
+router.get('/PropertyUnits',verifyToken,  userController.getpropertyUnits);
+router.put('/PropertyUnitsUpdates',verifyToken,  userController.putPropertyUnitsUpdates);
+router.post('/tenants',verifyToken,userController.createTenants);
 
 module.exports = router;
