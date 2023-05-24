@@ -756,7 +756,7 @@
                                 <!-- <h3>Main</h3> -->
                             </li>
                             <li class="slide">
-                                <a class="side-menu__item has-link create-new-link" href="javascript:void(0)" target="_self"><i
+                                <a class="side-menu__item has-link create-new-link" href="javascript:void(0)" target="_self" style="border: 3px solid #1467B0 !important;"><i
                                         class="side-menu__icon fi fi-rs-square-plus"></i><span class="side-menu__label ">Create New</span>
                                 </a>
                             </li>
@@ -1768,53 +1768,7 @@
             logo.src = '../assets/header-img/question.svg';
         }
     </script>
-    <script src="../assets/plugins/fancyuploder/jquery.ui.widget.js"></script>
-    <script src="../assets/plugins/fancyuploder/jquery.fileupload.js"></script>
-    <script src="../assets/plugins/fancyuploder/jquery.iframe-transport.js"></script>
-    <script src="../assets/plugins/fancyuploder/jquery.fancy-fileupload.js"></script>
-    <script src="../assets/plugins/fancyuploder/fancy-uploader.js"></script>
-    <script>
-        $(document).ready(function() {
 
-            const propertyId = (new URL(document.location)).searchParams.get("propertyId");
-
-            $.ajax({
-                url: 'http://localhost:3000/api/spade/viewProperty',
-                type: 'GET',
-                data: {
-                    propertyId
-                },
-                contentType: "application/json; charset=utf-8",
-                // processData: false,
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                },
-                success: function({
-                    data
-                }) {
-                    console.log(data)
-                        // window.alert(response.message);
-                    console.log(data.propertyName)
-                    $("#property_name").text(data.propertyName)
-                    $("#property_address").text(data.address)
-                    $("#property_type").text(data.propertyType)
-                    $("#property_units").text(data.units)
-                    $("#property_status").text(data.status)
-                    $("#image-placeholder").empty()
-                    data.images.forEach(image => {
-                        $("#image-placeholder").append('<div class="col-xs-2 col-sm-3 col-lg-2"><div class="image-container"><img src="../../../../spadeApi/uploads/' + image.Image + '" alt="" class="img-fluid"></div></div>')
-                    });
-
-                },
-                error: function(xhr, status, error) {
-                    window.alert('Error: ' + error);
-                }
-            });
-        });
-
-
-        // });
-    </script>
 </body>
 
 </html>

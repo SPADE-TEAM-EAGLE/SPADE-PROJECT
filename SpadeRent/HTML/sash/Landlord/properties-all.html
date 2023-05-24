@@ -87,6 +87,9 @@
             color: white !important;
             border-radius: 50px !important;
         }
+        /* .dark-mode .create-new-link:hover {
+            border: 3px solid #1467B0 !important;
+        } */
         
         .create-new-link {
             background: transparent !important;
@@ -242,7 +245,8 @@
             color: white;
         }
         
-        .modal-footer button {
+        .modal-footer button,
+        .modal-footer a {
             border-radius: 2.75rem;
             padding: 4px 30px;
             font-family: 'Figtree';
@@ -254,6 +258,12 @@
             /* identical to box height, or 120% */
             letter-spacing: 0.0145455em;
             /* font-size: 0.938rem; */
+        }
+        
+        .disabled {
+            pointer-events: none;
+            cursor: not-allowed;
+            color: gray;
         }
         
         .modal-footer .button {
@@ -274,7 +284,7 @@
         }
         
         .tick {
-            color: green;
+            color: #1DBC5F;
             font-weight: bolder
         }
         
@@ -377,14 +387,14 @@
     } */
         
         button.btn-close {
-            right: -7px;
+            right: 5px;
         }
         
         .btn-close {
-            width: 2.5rem;
+            width: 1.8rem;
             opacity: 1;
             position: absolute;
-            top: -11px;
+            top: 5px;
         }
         
         .del {
@@ -469,6 +479,9 @@
         @media (max-width:375px) {
             .border-model-line h2 {
                 font-size: 1.4rem;
+            }
+            .succes-modal {
+                padding: 1rem 1rem;
             }
         }
         
@@ -651,7 +664,38 @@
                         Draft</button>
                     <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close'>Close</button>
                     <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
-                    <button class="btn text-light button" style='background-color:#1467B0;' id='next' disabled>Next</button>
+                    <a href="javascript:void(0)" class="btn text-light button disabled" style='background-color:#1467B0;' id='next'>Next</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- succes modal -->
+
+    <div class="modal fade" id="succesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><img src="../assets/images/cross-circle.svg" /></span>
+                    </button>
+                </div>
+                <div class="modal-body succes-modal">
+                    <div class="text-justify ps-2 border-model-line">
+                        <h2 class="modal-title d-flex align-items-center ps-1">
+                            <strong class="color-primary">Success!&nbsp;</strong>
+                            <i class="fi fi-rs-check-circle text-success"></i>
+                        </h2>
+                        <a href="javascript:void(0)" class="btn btn-outline-default btn-pill ms-1 my-2" style='background-color:#1467B0;color: white;'> <i class="fi fi-rs-pencil"></i> EDIT PROPERTY UNITS</a>
+                        <a class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal">
+                            <i class="fi fi-rs-plus-small" style="vertical-align: middle;"></i>Add Tenants
+                        </a>
+                        <p class="ms-2 mb-0 text-start">Your Property has been successfully added.</p>
+                        <p class="ms-2 text-start">Please add tenant to this property.</p>
+                    </div>
+
+                </div>
+                <div class="modal-footer" style="border-top: 0">
                 </div>
             </div>
         </div>
@@ -724,7 +768,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="text-justify ps-2 border-model-line">
-                        <h2 class="modal-title">Update <strong class="color-primary" id="property-name">New Property</strong></h2>
+                        <h2 class="modal-title">Update <strong class="color-primary" id="property-name">New
+                                Property</strong></h2>
                         <span class="">Spade Rent allows you to add a range of commercial and residential properties,
                             from condos and single-family homes to retail stores and parking lots.</span>
                     </div>
@@ -814,8 +859,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="update">Save changes</button>
+                    <a class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal">Close</a>
+                    <a class="btn btn-primary" id="update">Save changes</a>
                 </div>
             </div>
         </div>
@@ -983,7 +1028,7 @@
                                 <!-- <h3>Main</h3> -->
                             </li>
                             <li class="slide">
-                                <a class="side-menu__item has-link create-new-link" href="javascript:void(0)" target="_self"><i
+                                <a class="side-menu__item has-link create-new-link" href="javascript:void(0)" target="_self" style="border: 3px solid #1467B0 !important;"><i
                                         class="side-menu__icon fi fi-rs-square-plus"></i><span class="side-menu__label ">Create New</span>
                                 </a>
                             </li>
@@ -1011,17 +1056,18 @@
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html"><i
-                                        class="side-menu__icon fi fi-rs-dashboard"></i><span class="side-menu__label">Overview</span></a>
+                                        class="side-menu__icon fi fi-rs-dashboard"></i><span
+                                        class="side-menu__label">Overview</span></a>
                             </li>
                             <!-- <li class="sub-category">
                                            <h3>UI Kit</h3>
                                        </li> -->
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
-                                        class="side-menu__icon fi fi-rs-building"></i><span class="side-menu__label">Properties</span>
-                                        <i
-                                        class="angle fe fe-chevron-right"></i>
-                                       </a>
+                                        class="side-menu__icon fi fi-rs-building"></i><span
+                                        class="side-menu__label">Properties</span>
+                                    <i class="angle fe fe-chevron-right"></i>
+                                </a>
                                 <ul class="slide-menu">
                                     <li class="side-menu-label1"><a href="javascript:void(0)">Properties</a></li>
                                     <li><a href="properties-all.html" class="slide-item">All</a></li>
@@ -1030,11 +1076,12 @@
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="add-tenant.html"><i
-                                        class="side-menu__icon fi fi-rs-cabin"></i><span class="side-menu__label">Tenants</span>
-                                        <!-- <i
+                                        class="side-menu__icon fi fi-rs-cabin"></i><span
+                                        class="side-menu__label">Tenants</span>
+                                    <!-- <i
                                         class="angle fe fe-chevron-right"></i> -->
-                                       
-                                       </a>
+
+                                </a>
 
                             </li>
 
@@ -1043,29 +1090,31 @@
                                        </li> -->
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="invoices.html"><i
-                                        class="side-menu__icon fi fi-rs-file-invoice-dollar"></i><span class="side-menu__label">Invoicing</span>
-                                        <!-- <i
+                                        class="side-menu__icon fi fi-rs-file-invoice-dollar"></i><span
+                                        class="side-menu__label">Invoicing</span>
+                                    <!-- <i
                                         class="angle fe fe-chevron-right"></i> -->
-                                       </a>
+                                </a>
 
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="leads-all.php"><i
                                         class="side-menu__icon fi fi-rs-chart-simple"></i><span
                                         class="side-menu__label">Leads</span>
-                                        <!-- <i class="angle fe fe-chevron-right"></i> -->
-                                       
-                                       </a>
+                                    <!-- <i class="angle fe fe-chevron-right"></i> -->
+
+                                </a>
 
                             </li>
 
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="tasks.php"><i
-                                        class="side-menu__icon fi fi-rs-list-check"></i><span class="side-menu__label">Tasks</span>
-                                        <!-- <i
+                                        class="side-menu__icon fi fi-rs-list-check"></i><span
+                                        class="side-menu__label">Tasks</span>
+                                    <!-- <i
                                         class="angle fe fe-chevron-right"></i> -->
-                                       
-                                       </a>
+
+                                </a>
 
                             </li>
                             <li class="slide">
@@ -1078,7 +1127,8 @@
 
                                 <li>
                                     <a class="side-menu__item has-link" href="settings.php" target="_self"><i
-                                        class="side-menu__icon fi fi-rs-settings"></i><span class="side-menu__label">Settings</span>
+                                        class="side-menu__icon fi fi-rs-settings"></i><span
+                                        class="side-menu__label">Settings</span>
                                     <!-- <span
                                                    class="badge bg-green br-5 side-badge blink-text pb-1">New</span> -->
                                 </a>
@@ -1113,7 +1163,8 @@
                                 <div class="row">
                                     <div class="col-lg-9">
                                         <h3 class="page-titlee text-white" style="font-weight: 100; margin-bottom: 0px;">Welcome to Spade Portal</h3>
-                                        <h1 class="page-titlee text-white" style="font-weight: 700;" id="user-name">John Clark</h1>
+                                        <h1 class="page-titlee text-white" style="font-weight: 700;" id="user-name">John Clark
+                                        </h1>
                                         <a href="javascript:void(0)" id="email_verification" class="btn btn-primary btn-pill btn-xl email-verification-btn"><i
                                                 class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
                                             verification &nbsp; <i
@@ -1264,7 +1315,8 @@
                                                         <td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
 
                                                             <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item text-primary" href="view-property.html" id="edit">Edit</a></li>
+                                                                <li><a class="dropdown-item text-primary" href="view-property.html" id="edit">Edit</a>
+                                                                </li>
                                                                 <li><a class="dropdown-item text-danger" href="javascript:void(0)" id="delete">Delete</a>
                                                                 </li>
                                                                 <li><a class="dropdown-item text-success delete-option" href="javascript:void(0)">View</a></li>
@@ -2113,19 +2165,19 @@
                 }
             });
         });
-        const check = 0
-        const updateformInputs = document.querySelectorAll('#myModal_edit .form-control');
-        updateformInputs.forEach(input => {
-            input.addEventListener('blur', function() {
-                // console.log(input.nextElementSibling)
-                if (validateInput(input)) {
-                    input.nextElementSibling.classList.add('d-none');
+        // const check = 0
+        // const updateformInputs = document.querySelectorAll('#myModal_edit .form-control');
+        // updateformInputs.forEach(input => {
+        //     input.addEventListener('blur', function () {
+        //         // console.log(input.nextElementSibling)
+        //         if (validateInput(input)) {
+        //             input.nextElementSibling.classList.add('d-none');
 
-                } else {
-                    input.nextElementSibling.classList.remove('d-none');
-                }
-            });
-        });
+        //         } else {
+        //             input.nextElementSibling.classList.remove('d-none');
+        //         }
+        //     });
+        // });
         counter = 0
         const draftButton = document.getElementById('draft');
         const nextButton = document.getElementById('next');
@@ -2157,16 +2209,16 @@
                 if (allFieldsFilled) {
                     chevronIcon.classList.remove("fi-rs-exclamation");
                     chevronIcon.classList.remove("chevron");
-                    chevronIcon.classList.add("fi-rs-check");
+                    chevronIcon.classList.add("fi-rs-check-circle");
                     chevronIcon.classList.add("tick");
                 } else {
-                    chevronIcon.classList.remove("fi-rs-check");
+                    chevronIcon.classList.remove("fi-rs-check-circle");
                     chevronIcon.classList.remove("chevron");
                     chevronIcon.classList.add("fi-rs-exclamation");
                     chevronIcon.classList.add("cross");
                 }
             } else {
-                chevronIcon.classList.remove("fi-rs-check");
+                chevronIcon.classList.remove("fi-rs-check-circle");
                 // chevronIcon.classList.remove("chevron");
                 chevronIcon.classList.add("chevron");
                 chevronIcon.classList.remove("fi-rs-exclamation");
@@ -2192,21 +2244,11 @@
                         input.nextElementSibling.classList.remove('d-none');
                     }
                 });
-            } else {
-                updateformInputs.forEach(input => {
-                    if (validateInput(input)) {
-                        input.nextElementSibling.classList.add('d-none');
-                    } else {
-                        input.nextElementSibling.classList.remove('d-none');
-                    }
-                });
             }
             if (id === 'accordion-item1') {
                 isForm1Valid = validateForm(document.getElementById('accordion-item1'));
-            } else if (id === 'accordion-item1') {
+            } else if (id === 'accordion-item2') {
                 isForm2Valid = validateForm(document.getElementById('accordion-item2'));
-            } else {
-                updateFormValid = validateForm(document.getElementById('myModal_edit'));
             }
             // const isForm1Valid = validateForm(document.getElementById('accordion-item1'));
             // const isForm2Valid = validateForm(document.getElementById('accordion-item2'));
@@ -2214,10 +2256,11 @@
             // Enable/Disable buttons based on form validity
             if (isForm1Valid && isForm2Valid) {
                 draftButton.disabled = false;
-                nextButton.disabled = false;
+                nextButton.classList.remove("disabled")
             } else {
+                // console.log(1)
                 draftButton.disabled = true;
-                nextButton.disabled = true;
+                nextButton.classList.add("disabled")
             }
         }
 
@@ -2238,6 +2281,7 @@
 
         function validateForm(form) {
             let inputs
+                // console.log(form.id)
             if (form.id === "accordion-item1") {
                 // console.log(form.id)
                 inputs = form.querySelectorAll('.form');
@@ -2281,6 +2325,7 @@
     <script>
         var selectedFiles = [];
         $(document).ready(function() {
+            // $('#succesModal').modal('show')
 
 
             //         $(function() {
@@ -2427,8 +2472,7 @@
             $(this).find('.file-grid').empty();
         });
         $(document).on('click', '#next', function(e) {
-
-            e.preventDefault();
+            console.log(1)
             $('#addModal').modal('hide');
             // $("#largemodal").addClass("hide");
             var formData = new FormData();
@@ -2471,9 +2515,10 @@
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
+
                 success: function(response) {
-                    // console.log(response);
-                    // window.alert(response.message);
+                    console.log(1)
+                    $('#succesModal').modal('show')
                     getData()
                         // window.location = '../Landlord/properties-all.html';
                 },
@@ -2481,6 +2526,7 @@
                     window.alert('Error: ' + error);
                 }
             });
+
 
         });
         let propertyId;
@@ -2539,6 +2585,7 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function(response) {
+                    e.preventDefault()
                     getData();
                 },
                 error: function(xhr, status, error) {
@@ -2575,6 +2622,7 @@
             })
             // let data;
         function getData(selectedFilter = "alphabets") {
+
             $("#global-loader").fadeIn("fast")
                 // console.log(22)
             $.ajax({
@@ -2603,7 +2651,7 @@
                     // Iterate over the response and populate the table
 
                     if (selectedFilter === 'alphabets') {
-                        response.data[0] ? .sort(function(a, b) {
+                        response.data[0] ?.sort(function(a, b) {
                             var textA = a.propertyName.toLowerCase();
                             var textB = b.propertyName.toLowerCase();
 
@@ -2616,25 +2664,25 @@
                             }
                         });
                     } else if (selectedFilter === 'ascending') {
-                        response.data[0] ? .sort(function(a, b) {
+                        response.data[0] ?.sort(function(a, b) {
                             return a.id - b.id;
                         });
 
                     } else if (selectedFilter === 'descending') {
                         // Sort the array in descending order based on the id property
-                        response.data[0] ? .sort(function(a, b) {
+                        response.data[0] ?.sort(function(a, b) {
                             return b.id - a.id;
                         });
 
                     }
-                    response.data[0] ? .forEach(function(property) {
+                    response.data[0] ?.forEach(function(property) {
                         var checkbox = '<td><label class="custom-control custom-checkbox-md">' +
                             '<input type="checkbox" class="custom-control-input" name="example-checkbox5" value="option5" checked="">' +
                             '<span class="custom-control-label"></span>' +
                             '</label></td>';
 
-                        var image = '<td><img src="../../../../spadeApi/uploads/' + property.images[0] + '" alt=""></td>';
-                        // var image = '<td><img src="../../../../../../Desktop/spadeApi/uploads/image-1684250579662.png" alt="hhghghgh"></td>';
+                        var image = '<td><img src="../../../../spadeAPI/uploads/' + property.images[0] + '" alt=""></td>';
+                        // var image = '<td><img src="../../../../../../Desktop/spade API 2/uploads/image-1684250579662.png" alt="hhghghgh"></td>';
 
                         var propertyId = '<td class="property-id" style="font-weight: 600;">' + property
                             .id + '</td>';
@@ -2718,9 +2766,9 @@
                     });
                 },
                 error: function(xhr, status, error) {
-                    // console.log(error)
-                    // window.alert('Error: ' + "Token expeired!, Login again");
-                    // window.location = '../Landlord/login_module.html';
+                    console.log(error)
+                    window.alert('Error: ' + "Token expeired!, Login again");
+                    window.location = '../Landlord/login_module.html';
                 }
             });
 
@@ -2737,7 +2785,7 @@
                     .append(
                         $('<img>')
                         .addClass('file-preview')
-                        .attr('src', typeof file === "object" ? URL.createObjectURL(file) : '../../../../spadeApi/uploads/' + file)
+                        .attr('src', typeof file === "object" ? URL.createObjectURL(file) : '../../../../spadeAPI/uploads/' + file)
                     )
                     .append(
                         $('<div>')

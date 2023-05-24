@@ -4,7 +4,7 @@ const { selectQuery } = require('../constants/queries');
 const config = process.env;
 const verifyToken=async(req, res, next)=>{
   const token = req.headers.authorization.split(' ')[1]
-  console.log(req.body)
+  // console.log(req.body)
   if (!token) {
     return res.status(401).send('Access Denied');
   }
