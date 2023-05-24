@@ -16,7 +16,9 @@ const {
   insertInPropertyImage,
   updateProperty,
   insertInPropertyUnits,
-  updatePropertyUnits
+  updatePropertyUnits,
+  insertTenants,
+  UpdateTenants
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -285,7 +287,7 @@ exports.property = async (req, res) => {
           }
         } //sss
         for (let i = 0; i < units; i++) {
-          const propertyResult = await queryRunner(insertInPropertyUnits, [propertyID,"","","","Vacant"]);
+          const propertyResult = await queryRunner(insertInPropertyUnits, [propertyID, "", "", "", "Vacant"]);
           if (propertyResult.affectedRows === 0) {
             res.send('Error3 error occur in inserted units');
             return;
@@ -293,8 +295,8 @@ exports.property = async (req, res) => {
         }
         //
         res.status(200).json({
-              message: " property created successful"
-            });
+          message: " property created successful"
+        });
       }
     }
   }
@@ -311,7 +313,7 @@ exports.property = async (req, res) => {
 //  ############################# Get Property Start ############################################################
 
 exports.getproperty = async (req, res) => {
-  const {userId,userName}=req.user
+  const { userId, userName } = req.user
   try {
 
     console.log("Step 1: Fetching property data...");
@@ -337,7 +339,7 @@ exports.getproperty = async (req, res) => {
       res.status(200).json({
         // data: length,
         data: allPropertyResult,
-        user:userName,
+        user: userName,
         message: "All properties"
       });
       // }
@@ -379,21 +381,21 @@ exports.getpropertyByID = async (req, res) => {
     // console.log(req.body)
     console.log(error)
   }
-      }
-      //  ############################# Get Property ByID End ############################################################
+}
+//  ############################# Get Property ByID End ############################################################
 
 
-      //  ############################# Delete Property Start ############################################################
-      exports.propertyDelete = async (req, res) => {
-        try {
-          const { id } = req.body
-          const PropertyDeleteResult = await queryRunner(deleteQuery("property", "id"), [id]);
-          if (PropertyDeleteResult[0].affectedRows > 0) {
+//  ############################# Delete Property Start ############################################################
+exports.propertyDelete = async (req, res) => {
+  try {
+    const { id } = req.body
+    const PropertyDeleteResult = await queryRunner(deleteQuery("property", "id"), [id]);
+    if (PropertyDeleteResult[0].affectedRows > 0) {
 
-            const propertycheckresult = await queryRunner(selectQuery("propertyimage", "propertyID"), [id]);
-            console.log(propertycheckresult);
-            if (propertycheckresult[0].length > 0) {
-              propertyimages = propertycheckresult[0].map((image) => image.Image);
+      const propertycheckresult = await queryRunner(selectQuery("propertyimage", "propertyID"), [id]);
+      console.log(propertycheckresult);
+      if (propertycheckresult[0].length > 0) {
+        propertyimages = propertycheckresult[0].map((image) => image.Image);
         // delete folder images
         imageToDelete(propertyimages);
         const propertyDeleteresult = await queryRunner(deleteQuery("propertyimage", "propertyID"), [id]);
@@ -623,3 +625,52 @@ exports.getpropertyByID = async (req, res) => {
       }
           }
           //  ############################# Update Property Units End ############################################################
+          exports.createTenants = async (req, res) => {
+            try {
+              const {
+                landlordID,
+                firstName,
+                lastName,
+                companyName,
+                email,
+                phoneNumber,
+                address,
+                city,
+                state,
+                zipcode
+              } = req.body
+          
+              const tenantsCheck = await queryRunner(selectQuery("tenants", "email"), [email]);
+              if (tenantsCheck[0].length > 0) {
+                // res.send("email found");
+                const tenantsInsert = await queryRunner(UpdateTenants, [landlordID, firstName, lastName, companyName, email, phoneNumber, address, city, state, zipcode]);
+                if (tenantsInsert[0].affectedRows > 0) {
+                  res.status(200).json({
+                    message: "Tenants Updated Successful",
+                    data: tenantsInsert[0]
+                  })
+          
+                } else {
+                  res.status(400).json({
+                    message: "email found but never change something"
+                  })
+                }
+              } else {
+                const tenantsInsert = await queryRunner(insertTenants, [landlordID, firstName, lastName, companyName, email, phoneNumber, address, city, state, zipcode]);
+                if (tenantsInsert[0].affectedRows > 0) {
+                  res.send("data save Successful");
+                  res.status(200).json({
+                    message: "Tenants save Successful",
+                    data: tenantsInsert[0]
+                  })
+                } else {
+                  res.status(400).json({
+                    message: "data not save"
+                  })
+                }
+              }
+            }
+            catch (error) {
+              res.send("Error occurs in creating Tenants  " + error)
+            }
+          }

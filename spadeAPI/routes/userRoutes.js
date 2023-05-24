@@ -29,4 +29,6 @@ router.put('/updateProperty', [verifyToken,upload], userController.propertyUpdat
 router.get('/viewProperty', verifyToken,userController.propertyView);
 router.get('/PropertyUnits',verifyToken,  userController.getpropertyUnits);
 router.put('/PropertyUnitsUpdates',verifyToken,  userController.putPropertyUnitsUpdates);
+router.post('/tenants',verifyToken,userController.createTenants);
+
 module.exports = router;
