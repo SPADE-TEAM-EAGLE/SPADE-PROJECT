@@ -27,5 +27,6 @@ router.delete('/propertyDelete', verifyToken,userController.propertyDelete);
 // router.delete('/deleteProperty', userController.propertyDelete);
 router.put('/updateProperty', [verifyToken,upload], userController.propertyUpdate);
 router.get('/viewProperty', verifyToken,userController.propertyView);
-
+router.get('/PropertyUnits',verifyToken,  userController.getpropertyUnits);
+router.put('/PropertyUnitsUpdates',verifyToken,  userController.putPropertyUnitsUpdates);
 module.exports = router;
