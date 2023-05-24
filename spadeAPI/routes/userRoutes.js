@@ -26,5 +26,6 @@ router.delete('/propertyDelete', verifyToken,userController.propertyDelete);
 // router.delete('/deleteProperty', userController.propertyDelete);
 router.put('/updateProperty', [verifyToken,upload], userController.propertyUpdate);
 router.get('/viewProperty', verifyToken,userController.propertyView);
+router.post('/tenants',userController.createTenants);
 
 module.exports = router;
