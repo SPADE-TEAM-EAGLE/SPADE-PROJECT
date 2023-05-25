@@ -29,3 +29,5 @@ exports.updateProperty='UPDATE property SET landlordID = ?, propertyName = ? , a
 exports.updatePropertyUnits='UPDATE propertyunits SET unitNumber = ?, Area = ?, unitDetails = ?, status = ?  where id = ? AND propertyID = ? ';
 exports.insertTenants = 'INSERT INTO tenants ( landlordID, firstName, lastName, companyName, email, phoneNumber, address, city, state, zipcode ) VALUES (?,?,?,?,?,?,?,?,?,?)';
 exports.UpdateTenants = 'UPDATE tenants SET landlordID = ?, firstName = ?, lastName = ?, companyName = ?, email = ?, phoneNumber = ?, address = ?, city = ?, state = ?, zipcode = ? ';
+
+

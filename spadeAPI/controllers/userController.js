@@ -681,5 +681,27 @@ exports.createTenants = async (req, res) => {
 
       //  ############################# tenant email send Start  ############################################################
 
-      
+      exports.sendInvitationLink = async (req, res) => {
+        const { tenantID } = req.body;
+        try {
+          const selectTenantResult = await queryRunner(selectQuery("tenants", "id"), [tenantID])
+    if (selectTenantResult[0].length > 0) {
+
+      const name = selectTenantResult[0][0].firstName; 
+                const mailSubject = "Spade Welcome Email";
+          const ran = Math.floor(100000 + Math.random() * 900000);
+          const random = "Spade" + ran;
+          await sendMail(email, mailSubject, random, name);
+
+      return res.status(400).send("Tenant welcome email send successfully");
+    }else{
+      return res.status(400).send('Tenant is not exists');
+    }
+
+          // res.send("Email sent successfully"); // Sending success response
+        } catch (error) {
+          res.send("Error occurs in Sending Tenants welcome email " + error); // Sending error response
+        }
+      };
+          
       //  ############################# tenant email send Start  ############################################################

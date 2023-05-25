@@ -17,15 +17,12 @@ router.post('/property', [verifyToken,upload] , userController.property);
 router.get('/allProperty',verifyToken, userController.getproperty);
 router.get('/PropertyUnits',verifyToken,  userController.getpropertyUnits);
 router.put('/PropertyUnitsUpdates',verifyToken,  userController.putPropertyUnitsUpdates);
-// router.put('/PropertyUnitsUpdates', userController.putPropertyUnitsUpdates);
 router.delete('/propertyDelete', verifyToken,userController.propertyDelete);
-// router.put('/updateProperty', verifyToken ,userController.propertyUpdate);
-// router.put('/updateProperty', userController.updateproperty);
-// // router.post('/property', upload , userController.property);
-// router.get('/allProperty', userController.getproperty);
-// router.delete('/deleteProperty', userController.propertyDelete);
 router.put('/updateProperty', [verifyToken,upload], userController.propertyUpdate);
 router.get('/viewProperty', verifyToken,userController.propertyView);
 router.post('/tenants',userController.createTenants);
+router.post('/sendInvitationLink',userController.sendInvitationLink); 
 
 module.exports = router;
+
+
