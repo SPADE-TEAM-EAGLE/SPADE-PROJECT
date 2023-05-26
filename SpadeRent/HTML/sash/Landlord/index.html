@@ -333,7 +333,7 @@
                                 <div class="row">
                                     <div class="col-lg-9">
                                         <h3 class="page-titlee text-white" style="font-weight: 100; margin-bottom: 0px;">Welcome to Spade Portal</h3>
-                                        <h1 class="page-titlee text-white" style="font-weight: 700;">John Clark</h1>
+                                        <h1 class="page-titlee text-white" style="font-weight: 700;" id="user-name">John Clark</h1>
                                         <a href="javascript:void(0)" class="btn btn-primary btn-pill btn-xl email-verification-btn"><i
                                                 class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
                                             verification &nbsp; <i
@@ -1225,7 +1225,7 @@
     </div>
 
     <!-- BACK-TO-TOP -->
-    <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
+    <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a>
 
     <!-- JQUERY JS -->
     <script src="../assets/js/jquery.min.js"></script>
@@ -1333,7 +1333,26 @@
             logo.src = '../assets/header-img/question.svg';
         }
     </script>
+<script>
+$(document).ready(()=>{
+    $.ajax({
+                url: 'http://localhost:3000/api/spade/allproperty',
+                type: 'GET',
+                contentType: false,
+                processData: false,
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function(response) {
+                // data=response.data[0]
+                
+                    $("#user-name").text(response.user)
+                },error:function(xhr, status, erroror){
 
+                    }
+                })
+})
+</script>
 
 </body>
 

@@ -1806,6 +1806,15 @@
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
     <script>
+           $(document).ready(function() {
+
+const propertyId = (new URL(document.location)).searchParams.get("propertyId");
+// // console.log($("#viewUnits").attr("href"))
+$("#viewUnits").attr("href",`./property-unit.html?propertyId=${propertyId}`)
+$("#viewOverview").attr("href",`./view-property.html?propertyId=${propertyId}`)
+$("#viewTenants").attr("href",`./property-tenant.html?propertyId=${propertyId}`)
+$("#viewTasks").attr("href",`./property-task.html?propertyId=${propertyId}`)
+});
     </script>
 
     <script>
