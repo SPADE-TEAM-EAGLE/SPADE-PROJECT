@@ -27,6 +27,8 @@ router.post('/sendInvitationLink', verifyToken, userController.sendInvitationLin
 router.get('/PropertyUnits',verifyToken,  userController.getpropertyUnits);
 router.put('/PropertyUnitsUpdates',verifyToken,  userController.putPropertyUnitsUpdates);
 router.post('/tenants',verifyToken,userController.createTenants);
+// router.get('/verifyMailCheck',verifyToken,  userController.verifyMailCheck);
+router.get('/verifyMailCheck', userController.verifyMailCheck);
 
 module.exports = router;
 
