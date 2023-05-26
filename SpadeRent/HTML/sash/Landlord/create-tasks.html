@@ -16,7 +16,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="../assets/images/brand/favicon.ico" />
 
     <!-- TITLE -->
-    <title>Tenant Tasks - SpadeRent</title>
+    <title>Property Tasks - SpadeRent</title>
 
     <!-- BOOTSTRAP CSS -->
     <link id="style" href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -67,17 +67,6 @@
             margin-top: 10px;
         }
         
-        .image-container {
-            /* Border width and color */
-            border-radius: 5px;
-            /* Border radius for rounded corners */
-            padding: 10px;
-            /* Spacing between the image and the border */
-            /* Shadow effect */
-            margin-bottom: 10px;
-            /* Margin between the image containers */
-        }
-        
         .selected-files span {
             display: inline-block;
             margin-right: 5px;
@@ -98,7 +87,7 @@
             align-items: center;
             justify-content: center;
             padding: 6px 12px;
-            background-color: transparent;
+            background-color: #fff;
         }
         
         .custom-file-label i {
@@ -365,9 +354,9 @@
             #top_main_image {
                 display: none;
             }
-            /* #top_main_card {
+            #top_main_card {
                 height: 220px;
-            } */
+            }
             #nav_links {
                 top: 165px;
             }
@@ -410,9 +399,9 @@
             #top_main_image {
                 display: none;
             }
-            /* #top_main_card {
+            #top_main_card {
                 height: 220px;
-            } */
+            }
             #nav_links {
                 top: 165px;
             }
@@ -452,12 +441,10 @@
         
         .dark-mode th {
             background: #212121 !important;
-            font-weight: bold !important;
         }
         
         .light-mode th {
             background: #ECF3F9 !important;
-            font-weight: bold !important;
         }
     </style>
 
@@ -470,155 +457,101 @@
         <img src="../assets/images/loader.svg" class="loader-img" alt="Loader">
     </div>
     <!-- /GLOBAL-LOADER -->
-    <!-- Modal -->
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="text-justify ps-2 border-model-line">
-                        <h2 class="modal-title">Personal <strong class="color-primary">Information</strong></h2>
-                        <span class="">These details are required for rent reminders, tenants commutations
-                            and portal access.</span>
+                        <h2 class="modal-title">Post an <strong class="color-primary">Update</strong></h2>
+                        <span class="">The real power of tasks is keeping track of deadlines and having a 
+                            log of all work and communication related to the tasks for later reference.</span>
                     </div>
                     <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true"><img src="../assets/images/cross-circle.svg" /></span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="accordion-item mb-4" id="accordion-item1">
-                        <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button text-white" id="accordian-button-1" type="button" data-bs-toggle="collapse" onclick="checkFieldsFilled('accordion-item1')" id="accordion-button1" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                <span class="m-0 me-4 fs-1" style="font-weight: bold;">01</span>
-                                <h3 class="m-0"><strong>Personal Info</strong><i
-                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
-                                </h3>
-                            </button>
-                        </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <form class="row g-3" enctype="multipart/form-data">
-                                    <div class="col-md-12">
-                                        <label class="form-label fw-bold">Property Photo</label>
-                                        <div class="custom-file" style="border: 1px dashed #00000087;">
-                                            <input id="fileInput" type="file" name="image" class="custom-file-input form" accept=".jpg, .png, image/jpeg, image/png" aria-label="hello" multiple>
-                                            <span className="d-none"></span>
-                                            <label class="custom-file-label" for="fileInput">
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <form class="row g-3" enctype="multipart/form-data">
+                            <div class="col-md-12">
+                                <label class="form-label fw-bold">Message</label>
+                                
+                                <textarea class="form-control mb-4" placeholder="Sorry about that We will look into it." rows="2" style="height: 307px;"></textarea>
+                                <span class="text-danger d-none">Photos are required!</span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputEmail4" class="form-label fw-bold">Due Date</label>
+                                <input class="form-control fc-datepicker" placeholder="MM/DD/YYYY" type="text">
+                                <span class="text-danger d-none">Property ID is required!</span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputState" class="form-label fw-bold">Priority<spnan
+                                    class="text-danger">*</span></label>
+                                <select id="state" class="form-select form">
+                                <option selected>Choose...</option>
+                                <option>Sindh</option>
+                                <option>Punjab</option>
+                                <option>Balochistan</option>
+                                <option>KPK</option>
+                            </select>
+                                <span class="text-danger d-none">Property name required!</span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputState" class="form-label fw-bold">Status<spnan
+                                    class="text-danger">*</span></label>
+                                <select id="state" class="form-select form">
+                                <option selected>Choose...</option>
+                                <option>Sindh</option>
+                                <option>Punjab</option>
+                                <option>Balochistan</option>
+                                <option>KPK</option>
+                            </select>
+                                <span class="text-danger d-none">Address is required!</span>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label fw-bold">Property Photo</label>
+                                <div class="custom-file" style="border: 1px dashed #00000087;">
+                                    <input id="fileInput" type="file" name="image" class="custom-file-input form" accept=".jpg, .png, image/jpeg, image/png" aria-label="hello" multiple>
+                                    <span className="d-none"></span>
+                                    <label class="custom-file-label" for="fileInput">
                                                 <i class="fi fi-rs-cloud-upload"></i>
                                                 <div class="custom-file-text">
                                                     <span>Upload Photo or drag and drop here</span>
                                                     <span>JPEG, PNG and PDF, file size no more than 10MB</span>
                                                 </div>
                                             </label>
-                                        </div>
-                                        <div class="selected-files">
-                                            <div class="file-grid"></div>
-                                        </div>
-                                        <span class="text-danger d-none">Photos are required!</span>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="inputEmail4" class="form-label fw-bold">First Name</label>
-                                        <input type="text" class="form-control form" placeholder="Enter First Name" id="propertyId">
-                                        <span class="text-danger d-none">Property ID is required!</span>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="inputPassword4" class="form-label fw-bold">Last Name<spnan
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" placeholder="Enter First Name" id="propertyName">
-                                        <span class="text-danger d-none">Property name required!</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputAddress" class="form-label fw-bold">Company Name (Optional)<spnan
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="address" placeholder="Enter Company Name">
-                                        <span class="text-danger d-none">Address is required!</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputCity" class="form-label fw-bold">Email<spnan
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" placeholder="Enter Email" id="city">
-                                        <span class="text-danger d-none">City is required!</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputState" class="form-label fw-bold">Phone Number (Optional)<spnan
-                                                class="text-danger">*</span></label>
-                                        <select id="state" class="form-select form">
-                                            <option selected>Choose...</option>
-                                            <option>Sindh</option>
-                                            <option>Punjab</option>
-                                            <option>Balochistan</option>
-                                            <option>KPK</option>
-                                        </select>
-                                        <span class="text-danger d-none">State is required!</span>
-                                    </div>
-                                    <div class="col-12">
-                                        <label for="inputZip" class="form-label fw-bold">Address (Optional)<span class="text-danger">
-                                                *</span></label>
-                                        <textarea class="form-control mb-4" placeholder="Enter Company Name" rows="4"></textarea>
-                                        <span class="text-danger d-none">Zip is required!</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputState" class="form-label fw-bold">City <spnan
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="propertyTotalSF">
-
-                                        <span class="text-danger d-none">Property Type is required!</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputState" class="form-label fw-bold">State <spnan
-                                                class="text-danger">*</span></label>
-                                        <select id="state" class="form-select form">
-                                            <option selected>Choose...</option>
-                                            <option>Sindh</option>
-                                            <option>Punjab</option>
-                                            <option>Balochistan</option>
-                                            <option>KPK</option>
-                                        </select>
-                                        <span class="text-danger d-none">State is required!</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputPassword4" class="form-label fw-bold">Zip Code <spnan
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="propertyTotalSF">
-                                        <span class="text-danger d-none">Property Total SF is required!</span>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item mb-4" id="accordion-item2">
-                        <h2 class="accordion-header" id="headingTwo">
-                            <button class="accordion-button collapsed text-white" onclick="checkFieldsFilled('accordion-item2')" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                <span class="m-0 me-4 fs-1" style="font-weight: bold;">02</span>
-                                <h3 class="m-0"><strong>Contact Info</strong><i
-                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
-                                </h3>
-                            </button>
-                        </h2>
-                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                            <form class="row g-3 m-1" enctype="multipart/form-data">
-
-                                <div class="col-12 mb-3">
-                                    <label for="inputAddress" class="form-label fw-bold">Number of Units<span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control px-2" id="units" placeholder=" ">
-                                    <span class="text-danger d-none">Units are required!</span>
                                 </div>
-                            </form>
-                        </div>
+                                <div class="selected-files">
+                                    <div class="file-grid"></div>
+                                </div>
+                                <span class="text-danger d-none">Photos are required!</span>
+                            </div>
+                        </form>
                     </div>
 
                 </div>
-                <div class="modal-footer">
-                    <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
-                        Draft</button>
-                    <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close'>Close</button>
-                    <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
-                    <button class="btn text-light button" style='background-color:#1467B0;' id='next' disabled>Next</button>
+                <div class="modal-footer d-flex justify-content-between">
+                    <!-- <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
+                        Draft</button> -->
+                        <div class="d-flex">
+
+                            <label class="custom-control custom-checkbox me-2">
+                                <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1" checked="">
+                                <span class="custom-control-label">Notify Tenant</span>
+                            </label>
+                            <label class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1" checked="">
+                                <span class="custom-control-label">Notify Assignee(s)</span>
+                            </label>
+                        </div>
+                        <div class=""><button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close'>Close</button>
+                            <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
+                            <a href="javascript:void(0)" class="btn text-light btn-pill button disabled" style='background-color:#1467B0;' id='next'>Next</a></div>
+                    
                 </div>
             </div>
         </div>
     </div>
-    <!-- MODAL EFFECTS -->
 
     <!-- PAGE -->
     <div class="page">
@@ -749,24 +682,24 @@
                     </div>
                     <div class="main-sidemenu">
                         <div class="slide-left disabled" id="slide-left"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24">
-                                <path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" />
-                            </svg></div>
+                            <path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" />
+                        </svg></div>
                         <ul class="side-menu">
                             <li class="sub-category">
                                 <!-- <h3>Main</h3> -->
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item has-link create-new-link" href="javascript:void(0)" target="_self" style="border: 3px solid #1467B0 !important;"><i
-                                        class="side-menu__icon fi fi-rs-square-plus"></i><span class="side-menu__label ">Create New</span>
-                                </a>
+                                    class="side-menu__icon fi fi-rs-square-plus"></i><span class="side-menu__label ">Create New</span>
+                            </a>
                             </li>
 
                             <!-- <li class="slide">
-                                <a class="side-menu__item has-link" href="landing-page.php" target="_blank"><i
-                                        class="side-menu__icon fe fe-plus"></i><span class="side-menu__label">Complete your
-                                        Profile</span>
-                                </a>
-                            </li> -->
+                            <a class="side-menu__item has-link" href="landing-page.php" target="_blank"><i
+                                    class="side-menu__icon fe fe-plus"></i><span class="side-menu__label">Complete your
+                                    Profile</span>
+                            </a>
+                        </li> -->
                             <li class="slide">
                                 <div class="M-0 mt-3 mb-4" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
                                     <div class="card-header pb-0 border-bottom-0">
@@ -784,17 +717,17 @@
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html"><i
-                                        class="side-menu__icon fi fi-rs-dashboard"></i><span class="side-menu__label">Overview</span></a>
+                                    class="side-menu__icon fi fi-rs-dashboard"></i><span class="side-menu__label">Overview</span></a>
                             </li>
                             <!-- <li class="sub-category">
-                                           <h3>UI Kit</h3>
-                                       </li> -->
+                                       <h3>UI Kit</h3>
+                                   </li> -->
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
-                                        class="side-menu__icon fi fi-rs-building"></i><span class="side-menu__label">Properties</span>
-                                        <i
-                                        class="angle fe fe-chevron-right"></i>
-                                       </a>
+                                    class="side-menu__icon fi fi-rs-building"></i><span class="side-menu__label">Properties</span>
+                                    <i
+                                    class="angle fe fe-chevron-right"></i>
+                                   </a>
                                 <ul class="slide-menu">
                                     <li class="side-menu-label1"><a href="javascript:void(0)">Properties</a></li>
                                     <li><a href="properties-all.html" class="slide-item">All</a></li>
@@ -803,11 +736,11 @@
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="add-tenant.html"><i
-                                        class="side-menu__icon fi fi-rs-cabin"></i><span class="side-menu__label">Tenants</span>
-                                        <i
-                                        class="angle fe fe-chevron-right"></i>
-                                       
-                                       </a>
+                                    class="side-menu__icon fi fi-rs-cabin"></i><span class="side-menu__label">Tenants</span>
+                                    <i
+                                    class="angle fe fe-chevron-right"></i>
+                                   
+                                   </a>
                                 <ul class="slide-menu">
                                     <li class="side-menu-label1"><a href="javascript:void(0)">Tenants</a></li>
                                     <li><a href="add-tenant.html" class="slide-item">All</a></li>
@@ -816,14 +749,14 @@
                             </li>
 
                             <!-- <li class="sub-category">
-                                           <h3>Pre-build Pages</h3>
-                                       </li> -->
+                                       <h3>Pre-build Pages</h3>
+                                   </li> -->
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="invoices.html"><i
-                                        class="side-menu__icon fi fi-rs-file-invoice-dollar"></i><span class="side-menu__label">Invoicing</span>
-                                        <i
-                                        class="angle fe fe-chevron-right"></i>
-                                       </a>
+                                            class="side-menu__icon fi fi-rs-file-invoice-dollar"></i><span class="side-menu__label">Invoicing</span>
+                                            <i
+                                            class="angle fe fe-chevron-right"></i>
+                                           </a>
                                 <ul class="slide-menu">
                                     <li class="side-menu-label1"><a href="javascript:void(0)">Invoicing</a></li>
                                     <li><a href="create-invoicing.html" class="slide-item">All</a></li>
@@ -833,11 +766,11 @@
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="leads-all.php"><i
-                                        class="side-menu__icon fi fi-rs-chart-simple"></i><span
-                                        class="side-menu__label">Leads</span>
-                                        <!-- <i class="angle fe fe-chevron-right"></i> -->
-                                       
-                                       </a>
+                                    class="side-menu__icon fi fi-rs-chart-simple"></i><span
+                                    class="side-menu__label">Leads</span>
+                                    <!-- <i class="angle fe fe-chevron-right"></i> -->
+                                   
+                                   </a>
 
                             </li>
 
@@ -848,11 +781,11 @@
                                         class="angle fe fe-chevron-right"></i>
                                        
                                        </a>
-                                       <ul class="slide-menu">
-                                        <li class="side-menu-label1"><a href="javascript:void(0)">Invoicing</a></li>
-                                        <li><a href="create-tasks.html" class="slide-item">All</a></li>
-                                        <li><a href="new-tasks.html" class="slide-item">Draft</a></li>
-                                    </ul>
+                                <ul class="slide-menu">
+                                    <li class="side-menu-label1"><a href="javascript:void(0)">Invoicing</a></li>
+                                    <li><a href="create-tasks.html" class="slide-item">All</a></li>
+                                    <li><a href="new-tasks.html" class="slide-item">Draft</a></li>
+                                </ul>
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
@@ -864,15 +797,15 @@
 
                                 <li>
                                     <a class="side-menu__item has-link" href="settings.php" target="_self"><i
-                                        class="side-menu__icon fi fi-rs-settings"></i><span class="side-menu__label">Settings</span>
-                                    <!-- <span
-                                                   class="badge bg-green br-5 side-badge blink-text pb-1">New</span> -->
-                                </a>
+                                    class="side-menu__icon fi fi-rs-settings"></i><span class="side-menu__label">Settings</span>
+                                <!-- <span
+                                               class="badge bg-green br-5 side-badge blink-text pb-1">New</span> -->
+                            </a>
                                 </li>
                         </ul>
                         <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24">
-                                <path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z" />
-                            </svg></div>
+                            <path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z" />
+                        </svg></div>
                     </div>
                 </div>
             </div>
@@ -897,266 +830,380 @@
                         <div class="card" style="background: #1467B0;" id="top_main_card">
                             <div class="card-body pt-3 pe-3 pb-0">
                                 <div class="row">
-                                    <div class="col-lg-12  position-relative">
-                                        <div class="d-flex">
-                                            <div class="media mt-0 mb-2">
-                                                <div class="media-user me-2">
-                                                    <div class=""><img alt="" class="rounded-circle avatar avatar-md" style="max-width: 120px;" src="../assets/images/users/16.jpg"></div>
-                                                </div>
-                                                <div class="media-body">
-                                                    <small class="text-white">Tenants</small>
-                                                    <h3 class="mb-0 text-white" style="font-weight: bold;">The Michael Scott Paper Company | Michael Scott</h3>
-                                                </div>
-                                            </div>
-                                            <div class="ms-auto">
-                                                <div class="dropdown show">
-
-                                                    <i class="fe fe-more-vertical text-white fs-20" data-bs-toggle="dropdown"></i>
-
-                                                    <div class="dropdown-menu dropdown-menu-end">
-                                                        <a class="dropdown-item text-success" data-bs-toggle="modal" href="#addModal"><i
-                                                            class=
-                                                            "fi fi-rs-edit me-1"
-                                                            ></i> Edit</a>
-                                                        <a class="dropdown-item text-danger" href="javascript:void(0)"> <i class="fi fi-rs-trash me-1"></i>Delete</a>
-
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
+                                    <div class="col-lg-9 position-relative">
+                                        <h1 class="page-titlee text-white mb-1" style="font-weight: 700;" id="property_name">Houston Shopping Center</h1>
+                                        <h5 class="page-titlee text-white" style="font-weight: 100;" id="property_address">9430 Research Blvd. Ste 2-350 Austin TX 78759</h5>
                                         <!-- <a href="javascript:void(0)" id="email_verification"
                                                                     class="btn btn-primary btn-pill btn-xl email-verification-btn"><i
                                                                         class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
                                                                     verification &nbsp; <i
                                                                         class="angle fe fe-arrow-right create-btn-plus"></i></a> -->
-
-                                    </div>
-                                    <div class="col-12">
-                                        <ul class="nav1 br-7" style="bottom: 0;">
+                                        <ul class="nav1 br-7 position-absolute" style="bottom: 0;" id="nav_links">
                                             <li class="nav-item1 p-0">
-                                                <a class="nav-link active p-2" href="view-tenant.html">Overview</a>
+                                                <a class="nav-link active p-2" href="view-property.html">Overview</a>
                                             </li>
                                             <li class="nav-item1 p-0">
-                                                <a class="nav-link p-2" href="tenant-properties.html">Properties</a>
+                                                <a class="nav-link p-2" href="property-unit.html" id="viewUnits">Units</a>
                                             </li>
                                             <li class="nav-item1 p-0">
-                                                <a class="nav-link p-2" href="tenant-tasks.html">Tasks</a>
+                                                <a class="nav-link p-2" href="property-tenant.html">Tenants</a>
                                             </li>
                                             <li class="nav-item1 p-0">
-                                                <a class="nav-link p-2" href="tenant-file.html">Files</a>
+                                                <a class="nav-link p-2" href="property-task.html">Tasks</a>
                                             </li>
                                         </ul>
                                     </div>
-
+                                    <div class="col-lg-3">
+                                        <img src="../assets/header-img/Group1.png" alt="" id="top_main_image">
+                                    </div>
                                 </div>
 
                             </div>
                         </div>
                         <!-- PAGE-HEADER END -->
-                        <div class="row">
-                            <div class="col-lg-12 col-xl-12">
-                                <div class="card">
-                                    <div class="card-header justify-content-between">
-                                        <div class="d-flex">
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-dark font-weight-bold" id="filter_btn" data-bs-toggle="dropdown"><i
-                                                        class="typcn typcn-filter me-2"></i><strong>Filter</strong></button>
-                                                <ul class="dropdown-menu" role="menu">
-                                                    <li><a href="javascript:void(0)"><strong>Filter by:</strong></a>
-                                                    </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">A-Z Alphabets</a>
-                                                        <div class="form-check m-0">
-                                                            <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="alphabets" value="option1" checked>
-                                                        </div>
-                                                    </li>
-                                                    <!-- <li class="d-flex justify-content-between"><a
-                                                            href="javascript:void(0)">Date Modified</a>
-                                                        <div class="form-check m-0">
-                                                            <input class="form-check-input mt-2" type="radio"
-                                                                name="exampleRadios" id="exampleRadios1" value="option1"
-                                                                checked>
-                                                        </div>
-                                                    </li> -->
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">Ascending</a>
-                                                        <div class="form-check m-0">
-                                                            <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="ascending" value="option1">
-                                                        </div>
-                                                    </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">Descending</a>
-                                                        <div class="form-check m-0">
-                                                            <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="descending" value="option1">
-                                                        </div>
-                                                    </li>
-                                                    <!-- <li class="d-flex justify-content-between"><a
-                                                            href="javascript:void(0)">Recently Added</a>
-                                                        <div class="form-check m-0">
-                                                            <input class="form-check-input mt-2" type="radio"
-                                                                name="exampleRadios" id="exampleRadios1" value="option1"
-                                                                checked>
-                                                        </div>
-                                                    </li> -->
-                                                </ul>
-                                            </div>
-                                            <div class="mx-2">
-                                                <div class="form-group m-0">
-                                                    <input class="form-control" placeholder="Search Users by Name, Email or Date" type="text" id="search_input">
+                        <div class="over_view" id="Overview">
+                            <!-- ROW-2 OPEN -->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card inner-cards">
+                                        <div class="card-header justify-content-between">
+                                            <div class="d-flex">
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-dark font-weight-bold" id="filter_btn" data-bs-toggle="dropdown"><i
+                                                            class="typcn typcn-filter me-2"></i><strong>Filter</strong></button>
+                                                    <ul class="dropdown-menu" role="menu">
+                                                        <li><a href="javascript:void(0)"><strong>Filter by:</strong></a>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between"><a href="javascript:void(0)">A-Z Alphabets</a>
+                                                            <div class="form-check m-0">
+                                                                <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between"><a href="javascript:void(0)">Date Modified</a>
+                                                            <div class="form-check m-0">
+                                                                <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between"><a href="javascript:void(0)">Ascending</a>
+                                                            <div class="form-check m-0">
+                                                                <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between"><a href="javascript:void(0)">Descending</a>
+                                                            <div class="form-check m-0">
+                                                                <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between"><a href="javascript:void(0)">Recently Added</a>
+                                                            <div class="form-check m-0">
+                                                                <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="mx-2">
+                                                    <div class="form-group m-0">
+                                                        <input class="form-control" placeholder="Search Users by Name, Email or Date" type="text" id="search_input">
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="d-flex">
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-dark bg-transparent font-weight-bold text-dark" id="customize_btn" data-bs-toggle="dropdown"><strong>CUSTOMIZED</strong><i
-                                                        class="fe fe-chevron-down ms-2"></i></button>
-                                                <ul class="dropdown-menu" role="menu">
-                                                    <li><a href="javascript:void(0)"><strong>Filter by:</strong></a>
-                                                    </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">A-Z Alphabets</a>
-                                                        <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1">
-                                                        </div>
-                                                    </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">Date Modified</a>
-                                                        <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1">
-                                                        </div>
-                                                    </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">Ascending</a>
-                                                        <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1">
-                                                        </div>
-                                                    </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">Descending</a>
-                                                        <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1">
-                                                        </div>
-                                                    </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">Recently Added</a>
-                                                        <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1">
-                                                        </div>
-                                                    </li>
-                                                </ul>
+                                            <div class="d-flex">
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-dark bg-transparent font-weight-bold text-dark" id="customize_btn" data-bs-toggle="dropdown"><strong>CUSTOMIZED</strong><i
+                                                            class="fe fe-chevron-down ms-2"></i></button>
+                                                    <ul class="dropdown-menu" role="menu">
+                                                        <li><a href="javascript:void(0)"><strong>Filter by:</strong></a>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between"><a href="javascript:void(0)">A-Z Alphabets</a>
+                                                            <div class="form-check m-0">
+                                                                <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1">
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between"><a href="javascript:void(0)">Date Modified</a>
+                                                            <div class="form-check m-0">
+                                                                <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1">
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between"><a href="javascript:void(0)">Ascending</a>
+                                                            <div class="form-check m-0">
+                                                                <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1">
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between"><a href="javascript:void(0)">Descending</a>
+                                                            <div class="form-check m-0">
+                                                                <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1">
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between"><a href="javascript:void(0)">Recently Added</a>
+                                                            <div class="form-check m-0">
+                                                                <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1">
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <button type="button" class="btn btn-primary btn-pill mx-2" id="add_property_btn" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal"><i
+                                                    class="fe fe-plus me-2"></i><strong>ADD NEW
+                                                    TASK</strong></button>
                                             </div>
-
                                         </div>
-                                    </div>
-                                    <div class="card-body p-0">
-                                        <div class="table-responsive">
-                                            <table class="table border text-nowrap text-md-nowrap mb-0">
-                                                <thead>
-                                                    <tr>
-                                                        <th><label class="custom-control custom-checkbox-md">
-                                                                <input type="checkbox" class="custom-control-input"
-                                                                    name="example-checkbox5" value="option5" checked="">
-                                                                <span class="custom-control-label"></span>
-                                                            </label></th>
-                                                        <th>IMAGE</th>
-                                                        <th>TASK</th>
-                                                        <th>ASSIGNED TO</th>
-                                                        <th>DUE AT</th>
-                                                        <th>RELATED TO</th>
-                                                        <th>STATUS</th>
-                                                        <td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
+                                        <div class="card-body p-0">
+                                            <div class="table-responsive">
+                                                <table class="table border text-nowrap text-md-nowrap mb-0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th><label class="custom-control custom-checkbox-md">
+                                                                    <input type="checkbox" class="custom-control-input"
+                                                                        name="example-checkbox5" value="option5"
+                                                                        checked="">
+                                                                    <span class="custom-control-label"></span>
+                                                                </label></th>
+                                                            <th>Image</th>
+                                                            <th>TASK</th>
+                                                            <th>ASSIGNED TO</th>
+                                                            <th>DUE AT</th>
+                                                            <th>RELATED TO</th>
+                                                            <th>STATUS</th>
+                                                            <th><i class="fe fe-more-vertical" data-bs-toggle="tooltip"></i></th>
 
-                                                            <!-- <ul class="dropdown-menu">
-                                                            <li><a class="dropdown-item text-dark"
-                                                                href="javascript:void(0)">View</a></li>
-                                                            <li><a class="dropdown-item text-dark"
-                                                                    href="view-property.html">Edit</a></li>
-                                                                    <li><a class="dropdown-item text-success"
-                                                                        href="view-property.html">Invite Sent!</a></li>
-                                                                        <li><a class="dropdown-item text-danger"
-                                                                                href="javascript:void(0)">Delete</a>
-                                                                        </li>
-                                                        </ul> -->
-                                                        </td>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="table_body">
-
-                                                    <tr>
-                                                        <td><label class="custom-control custom-checkbox-md">
-                                                                <input type="checkbox" class="custom-control-input"
-                                                                    name="example-checkbox5" value="option5" checked="">
-                                                                <span class="custom-control-label"></span>
-                                                            </label></td>
-                                                        <td><img src="https://cdn.pixabay.com/photo/2017/07/08/02/16/house-2483336__340.jpg" alt=""></td>
-                                                        <td>
-                                                            <p style="font-weight: bold;" class="mb-1">Sink is Leaking</p>
-                                                            <span style="color: #9B9B9B;">8 Days ago</span></td>
-                                                        <td style="font-weight: 600;text-align: center;display: flex;">
-                                                            <div class="me-2">
-                                                                <img class="avatar brround avatar-md" src="../assets/images/users/2.jpg" alt="avatar-img">
-                                                                <div class="media-body valign-middle mt-0">
-                                                                    <a href="javascript:void(0)" class="text-dark fw-semibold">Tenant</a>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="table_body">
+                                                        <tr>
+                                                            <td><label class="custom-control custom-checkbox-md">
+                                                                    <input type="checkbox" class="custom-control-input"
+                                                                        name="example-checkbox5" value="option5"
+                                                                        checked="">
+                                                                    <span class="custom-control-label"></span>
+                                                                </label></td>
+                                                            <td><img src="https://cdn.pixabay.com/photo/2017/07/08/02/16/house-2483336__340.jpg" alt=""></td>
+                                                            <td style="font-weight: 600;">
+                                                                <p style="font-weight: 600;" class="mb-1">Sink is Leaking
+                                                                </p>
+                                                                <span class="font-weight-normal" style="color: #9B9B9B;">8 Days
+                                                                    ago</span>
+                                                            </td>
+                                                            <td style="font-weight: 600;text-align: center;display: flex;">
+                                                                <div class="me-2">
+                                                                    <img class="avatar brround avatar-md" src="../assets/images/users/2.jpg" alt="avatar-img">
+                                                                    <div class="media-body valign-middle mt-0">
+                                                                        <a href="javascript:void(0)" class="text-dark fw-semibold">Tenant</a>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="me-2">
-                                                                <img class="avatar brround avatar-md" src="../assets/images/users/2.jpg" alt="avatar-img">
-                                                                <div class="media-body valign-middle mt-0">
-                                                                    <a href="javascript:void(0)" class="text-dark fw-semibold">Tenant</a>
+                                                                <div class="me-2">
+                                                                    <img class="avatar brround avatar-md" src="../assets/images/users/2.jpg" alt="avatar-img">
+                                                                    <div class="media-body valign-middle mt-0">
+                                                                        <a href="javascript:void(0)" class="text-dark fw-semibold">Tenant</a>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="me-2">
-                                                                <img class="avatar brround avatar-md" src="../assets/images/users/2.jpg" alt="avatar-img">
-                                                                <div class="media-body valign-middle mt-0">
-                                                                    <a href="javascript:void(0)" class="text-dark fw-semibold">Tenant</a>
+                                                            </td>
+                                                            <td>
+                                                                <p style="font-weight: 600;" class="mb-1">April-05-2020
+                                                                </p>
+                                                                <span class="font-weight-normal text-danger"> <i class="fe fe-circle me-1"></i>High Priority</span>
+                                                            </td>
+                                                            <td>
+                                                                <p style="font-weight: 600;" class="mb-1">Houston Shopping Center</p>
+                                                                <span class="font-weight-normal">Unit Number: 103A</span>
+                                                            </td>
+                                                            <td>
+                                                                <p style="font-weight: 600;" class="mb-1 text-warning">In Progress</p>
+                                                            </td>
+                                                            <td>
+                                                                <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
+
+                                                                <ul class="dropdown-menu">
+                                                                    <li><a class="dropdown-item text-dark" href="javascript:void(0)">View</a></li>
+                                                                    <li><a class="dropdown-item text-dark" href="javascript:void(0)">Edit</a>
+                                                                    </li>
+                                                                    <li><a class="dropdown-item text-dark" href="javascript:void(0)">Post an Update</a></li>
+                                                                    <li><a class="dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>
+                                                                </ul>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><label class="custom-control custom-checkbox-md">
+                                                                    <input type="checkbox" class="custom-control-input"
+                                                                        name="example-checkbox5" value="option5"
+                                                                        checked="">
+                                                                    <span class="custom-control-label"></span>
+                                                                </label></td>
+                                                            <td><img src="https://cdn.pixabay.com/photo/2017/07/08/02/16/house-2483336__340.jpg" alt=""></td>
+                                                            <td style="font-weight: 600;">
+                                                                <p style="font-weight: 600;" class="mb-1">Sink is Leaking
+                                                                </p>
+                                                                <span class="font-weight-normal" style="color: #9B9B9B;">8 Days
+                                                                    ago</span>
+                                                            </td>
+                                                            <td style="font-weight: 600;text-align: center;display: flex;">
+                                                                <div class="me-2">
+                                                                    <img class="avatar brround avatar-md" src="../assets/images/users/2.jpg" alt="avatar-img">
+                                                                    <div class="media-body valign-middle mt-0">
+                                                                        <a href="javascript:void(0)" class="text-dark fw-semibold">Tenant</a>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <p style="font-weight: 600;" class="mb-1">April-05-2020
-                                                            </p>
-                                                            <span class="font-weight-normal text-danger"> <i class="fe fe-circle me-1"></i>High Priority</span>
-                                                        </td>
-                                                        <td>
-                                                            <p style="font-weight: 600;" class="mb-1">Houston Shopping Center</p>
-                                                            <span class="font-weight-normal">Unit Number: 103A</span>
-                                                        </td>
-                                                        <td>
-                                                            <p style="font-weight: 600;" class="mb-1 text-warning">In Progress</p>
-                                                        </td>
-                                                        <td> <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
+                                                                <div class="me-2">
+                                                                    <img class="avatar brround avatar-md" src="../assets/images/users/2.jpg" alt="avatar-img">
+                                                                    <div class="media-body valign-middle mt-0">
+                                                                        <a href="javascript:void(0)" class="text-dark fw-semibold">Tenant</a>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <p style="font-weight: 600;" class="mb-1">April-05-2020
+                                                                </p>
+                                                                <span class="font-weight-normal text-warning"> <i class="fe fe-circle me-1"></i>Low Priority</span>
+                                                            </td>
+                                                            <td>
+                                                                <p style="font-weight: 600;" class="mb-1">Houston Shopping Center</p>
+                                                                <span class="font-weight-normal">Unit Number: 103A</span>
+                                                            </td>
+                                                            <td>
+                                                                <p style="font-weight: 600;" class="mb-1 text-default">Not Started</p>
+                                                            </td>
+                                                            <td>
+                                                                <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
 
-                                                            <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item text-dark" href="javascript:void(0)">View</a></li>
-                                                                <li><a class="dropdown-item text-dark" href="view-property.html">Edit</a></li>
-                                                                <li><a class="dropdown-item text-success" href="view-property.html">Invite Sent!</a></li>
-                                                                <li><a class="dropdown-item text-danger" href="javascript:void(0)">Delete</a>
-                                                                </li>
-                                                            </ul>
-                                                        </td>
-                                                    </tr>
+                                                                <ul class="dropdown-menu">
+                                                                    <li><a class="dropdown-item text-dark" href="javascript:void(0)">View</a></li>
+                                                                    <li><a class="dropdown-item text-dark" href="javascript:void(0)">Edit</a>
+                                                                    </li>
+                                                                    <li><a class="dropdown-item text-dark" href="javascript:void(0)">Post an Update</a></li>
+                                                                    <li><a class="dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>
+                                                                </ul>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><label class="custom-control custom-checkbox-md">
+                                                                    <input type="checkbox" class="custom-control-input"
+                                                                        name="example-checkbox5" value="option5"
+                                                                        checked="">
+                                                                    <span class="custom-control-label"></span>
+                                                                </label></td>
+                                                            <td><img src="https://cdn.pixabay.com/photo/2017/07/08/02/16/house-2483336__340.jpg" alt=""></td>
+                                                            <td style="font-weight: 600;">
+                                                                <p style="font-weight: 600;" class="mb-1">Sink is Leaking
+                                                                </p>
+                                                                <span class="font-weight-normal" style="color: #9B9B9B;">8 Days
+                                                                    ago</span>
+                                                            </td>
+                                                            <td style="font-weight: 600;text-align: center;display: flex;">
+                                                                <div class="me-2">
+                                                                    <img class="avatar brround avatar-md" src="../assets/images/users/2.jpg" alt="avatar-img">
+                                                                    <div class="media-body valign-middle mt-0">
+                                                                        <a href="javascript:void(0)" class="text-dark fw-semibold">Tenant</a>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="me-2">
+                                                                    <img class="avatar brround avatar-md" src="../assets/images/users/2.jpg" alt="avatar-img">
+                                                                    <div class="media-body valign-middle mt-0">
+                                                                        <a href="javascript:void(0)" class="text-dark fw-semibold">Tenant</a>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <p style="font-weight: 600;" class="mb-1">April-05-2020
+                                                                </p>
+                                                                <span class="font-weight-normal text-danger"> <i class="fe fe-circle me-1"></i>High Priority</span>
+                                                            </td>
+                                                            <td>
+                                                                <p style="font-weight: 600;" class="mb-1">Houston Shopping Center</p>
+                                                                <span class="font-weight-normal">Unit Number: 103A</span>
+                                                            </td>
+                                                            <td>
+                                                                <p style="font-weight: 600;" class="mb-1 text-warning">In Progress</p>
+                                                            </td>
+                                                            <td>
+                                                                <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
 
-                                                </tbody>
-                                            </table>
+                                                                <ul class="dropdown-menu">
+                                                                    <li><a class="dropdown-item text-dark" href="javascript:void(0)">View</a></li>
+                                                                    <li><a class="dropdown-item text-dark" href="javascript:void(0)">Edit</a>
+                                                                    </li>
+                                                                    <li><a class="dropdown-item text-dark" href="javascript:void(0)">Post an Update</a></li>
+                                                                    <li><a class="dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>
+                                                                </ul>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><label class="custom-control custom-checkbox-md">
+                                                                    <input type="checkbox" class="custom-control-input"
+                                                                        name="example-checkbox5" value="option5"
+                                                                        checked="">
+                                                                    <span class="custom-control-label"></span>
+                                                                </label></td>
+                                                            <td><img src="https://cdn.pixabay.com/photo/2017/07/08/02/16/house-2483336__340.jpg" alt=""></td>
+                                                            <td style="font-weight: 600;">
+                                                                <p style="font-weight: 600;" class="mb-1">Sink is Leaking
+                                                                </p>
+                                                                <span class="font-weight-normal" style="color: #9B9B9B;">8 Days
+                                                                    ago</span>
+                                                            </td>
+                                                            <td style="font-weight: 600;text-align: center;display: flex;">
+                                                                <div class="me-2">
+                                                                    <img class="avatar brround avatar-md" src="../assets/images/users/2.jpg" alt="avatar-img">
+                                                                    <div class="media-body valign-middle mt-0">
+                                                                        <a href="javascript:void(0)" class="text-dark fw-semibold">Tenant</a>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="me-2">
+                                                                    <img class="avatar brround avatar-md" src="../assets/images/users/2.jpg" alt="avatar-img">
+                                                                    <div class="media-body valign-middle mt-0">
+                                                                        <a href="javascript:void(0)" class="text-dark fw-semibold">Tenant</a>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <p style="font-weight: 600;" class="mb-1">April-05-2020
+                                                                </p>
+                                                                <span class="font-weight-normal text-warning"> <i class="fe fe-circle me-1"></i>Low Priority</span>
+                                                            </td>
+                                                            <td>
+                                                                <p style="font-weight: 600;" class="mb-1">Houston Shopping Center</p>
+                                                                <span class="font-weight-normal">Unit Number: 103A</span>
+                                                            </td>
+                                                            <td>
+                                                                <p style="font-weight: 600;" class="mb-1 text-default">Not Started</p>
+                                                            </td>
+                                                            <td>
+                                                                <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
+
+                                                                <ul class="dropdown-menu">
+                                                                    <li><a class="dropdown-item text-dark" href="javascript:void(0)">View</a></li>
+                                                                    <li><a class="dropdown-item text-dark" href="javascript:void(0)">Edit</a>
+                                                                    </li>
+                                                                    <li><a class="dropdown-item text-dark" href="javascript:void(0)">Post an Update</a></li>
+                                                                    <li><a class="dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>
+                                                                </ul>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <!-- ROW-2 CLOSED -->
                         </div>
                     </div>
+                    <!-- ROW-3 CLOSED -->
                 </div>
-                <!-- ROW-3 CLOSED -->
-            </div>
-            <!-- ROW-2 END -->
+                <!-- ROW-2 END -->
 
 
 
 
-            <div class="card-body pb-0 bg-recentorder" style="display: none;">
-                <h3 class="card-title text-white">Recent Orders</h3>
-                <div class="chartjs-wrapper-demo">
-                    <canvas id="recentorders" class="chart-dropshadow"></canvas>
+                <div class="card-body pb-0 bg-recentorder" style="display: none;">
+                    <h3 class="card-title text-white">Recent Orders</h3>
+                    <div class="chartjs-wrapper-demo">
+                        <canvas id="recentorders" class="chart-dropshadow"></canvas>
+                    </div>
                 </div>
-            </div>
-            <div id="flotback-chart" class="flot-background" style="display: none;"></div>
+                <div id="flotback-chart" class="flot-background" style="display: none;"></div>
 
+            </div>
+            <!-- CONTAINER END -->
         </div>
-        <!-- CONTAINER END -->
-    </div>
     </div>
     <!--app-content close-->
 
@@ -1790,7 +1837,15 @@
     <script src="../assets/js/custom.js"></script>
 
     <!-- ############################################# -->
-
+    <!-- INTERNAL Autofill-Table JS -->
+    <!-- <script src="../assets/plugins/datatable/js/jquery.dataTables.min.js"></script> -->
+    <!-- <script src="../assets/plugins/datatable/js/dataTables.bootstrap5.js"></script> -->
+    <!-- <script src="../assets/plugins/datatable/js/dataTables.buttons.min.js"></script> -->
+    <!-- <script src="../assets/plugins/datatable/js/buttons.bootstrap5.min.js"></script> -->
+    <!-- <script src="../assets/plugins/extension-datatable/autofill/dataTables.autoFill.min.js"></script> -->
+    <script src="../assets/plugins/extension-datatable/autofill/autoFill.bootstrap5.min.js"></script>
+    <!-- <script src="../assets/plugins/extension-datatable/keytable/dataTables.keyTable.min.js"></script> -->
+    <script src="../assets/js/autofill-table.js"></script>
 
     <!-- C3 CHART JS -->
     <script src="../assets/plugins/charts-c3/d3.v5.min.js"></script>
@@ -1803,34 +1858,52 @@
     <script src="../assets/plugins/chart/Chart.bundle.js"></script>
     <script src="../assets/plugins/chart/utils.js"></script>
 
+
+    <script src="../assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+     <!-- BOOTSTRAP-DATERANGEPICKER JS -->
+     <script src="../assets/plugins/bootstrap-daterangepicker/moment.min.js"></script>
+     <script src="../assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+ 
+     <!-- INTERNAL Bootstrap-Datepicker js-->
+     <script src="../assets/plugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+ 
+     <!-- INTERNAL Sumoselect js-->
+     <script src="../assets/plugins/sumoselect/jquery.sumoselect.js"></script>
+ 
+     <!-- TIMEPICKER JS -->
+     <script src="../assets/plugins/time-picker/jquery.timepicker.js"></script>
+     <script src="../assets/plugins/time-picker/toggles.min.js"></script>
+ 
+     <!-- INTERNAL intlTelInput js-->
+     <script src="../assets/plugins/intl-tel-input-master/intlTelInput.js"></script>
+     <script src="../assets/plugins/intl-tel-input-master/country-select.js"></script>
+     <script src="../assets/plugins/intl-tel-input-master/utils.js"></script>
+ 
+     <!-- INTERNAL jquery transfer js-->
+     <script src="../assets/plugins/jQuerytransfer/jquery.transfer.js"></script>
+ 
+     <!-- INTERNAL multi js-->
+     <script src="../assets/plugins/multi/multi.min.js"></script>
+ 
+     <!-- DATEPICKER JS -->
+     <script src="../assets/plugins/date-picker/date-picker.js"></script>
+     <script src="../assets/plugins/date-picker/jquery-ui.js"></script>
+     <script src="../assets/plugins/input-mask/jquery.maskedinput.js"></script>
+ 
+     <!-- COLOR PICKER JS -->
+     <script src="../assets/plugins/pickr-master/pickr.es5.min.js"></script>
+     <script src="../assets/js/picker.js"></script>
+ 
+     <!-- MULTI SELECT JS-->
+     <script src="../assets/plugins/multipleselect/multiple-select.js"></script>
+     <script src="../assets/plugins/multipleselect/multi-select.js"></script>
+ 
+     <!-- FORMELEMENTS JS -->
+     <script src="../assets/js/formelementadvnced.js"></script>
+     <script src="../assets/js/form-elements.js"></script>
+
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
-    <script>
-           $(document).ready(function() {
-
-const propertyId = (new URL(document.location)).searchParams.get("propertyId");
-// // console.log($("#viewUnits").attr("href"))
-$("#viewUnits").attr("href",`./property-unit.html?propertyId=${propertyId}`)
-$("#viewOverview").attr("href",`./view-property.html?propertyId=${propertyId}`)
-$("#viewTenants").attr("href",`./property-tenant.html?propertyId=${propertyId}`)
-$("#viewTasks").attr("href",`./property-task.html?propertyId=${propertyId}`)
-});
-    </script>
-
-    <script>
-        // Get the user's preferred color scheme
-        const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-        // Get a reference to the logo element
-        const logo = document.getElementById('logo');
-
-        if (userPrefersDark) {
-            logo.src = '../assets/header-img/comment.svg';
-        } else {
-            logo.src = '../assets/header-img/question.svg';
-        }
-    </script>
-
 </body>
 
 </html>

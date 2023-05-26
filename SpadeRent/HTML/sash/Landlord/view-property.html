@@ -18,7 +18,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="../assets/images/brand/favicon.ico" />
 
     <!-- TITLE -->
-    <title>Sash – Bootstrap 5 Admin & Dashboard Template </title>
+    <title>View Property - SpadeRent</title>
 
     <!-- BOOTSTRAP CSS -->
     <link id="style" href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -858,24 +858,33 @@
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="add-tenant.html"><i
                                         class="side-menu__icon fi fi-rs-cabin"></i><span class="side-menu__label">Tenants</span>
-                                        <!-- <i
-                                        class="angle fe fe-chevron-right"></i> -->
+                                        <i
+                                        class="angle fe fe-chevron-right"></i>
                                        
                                        </a>
-                               
+                                       <ul class="slide-menu">
+                                        <li class="side-menu-label1"><a href="javascript:void(0)">Tenants</a></li>
+                                        <li><a href="add-tenant.html" class="slide-item">All</a></li>
+                                        <li><a href="new-property.html" class="slide-item">Draft</a></li>
+                                    </ul>
                             </li>
            
                             <!-- <li class="sub-category">
                                            <h3>Pre-build Pages</h3>
                                        </li> -->
-                            <li class="slide">
-                                <a class="side-menu__item" data-bs-toggle="slide" href="invoices.html"><i
-                                        class="side-menu__icon fi fi-rs-file-invoice-dollar"></i><span class="side-menu__label">Invoicing</span>
-                                        <!-- <i
-                                        class="angle fe fe-chevron-right"></i> -->
-                                       </a>
-                               
-                            </li>
+                                       <li class="slide">
+                                        <a class="side-menu__item" data-bs-toggle="slide" href="invoices.html"><i
+                                                class="side-menu__icon fi fi-rs-file-invoice-dollar"></i><span class="side-menu__label">Invoicing</span>
+                                                <i
+                                                class="angle fe fe-chevron-right"></i>
+                                               </a>
+                                               <ul class="slide-menu">
+                                                <li class="side-menu-label1"><a href="javascript:void(0)">Invoicing</a></li>
+                                                <li><a href="create-invoicing.html" class="slide-item">All</a></li>
+                                                <li><a href="new-property.html" class="slide-item">Draft</a></li>
+                                            </ul>
+        
+                                    </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="leads-all.php"><i
                                         class="side-menu__icon fi fi-rs-chart-simple"></i><span
@@ -887,13 +896,17 @@
                             </li>
                             
                             <li class="slide">
-                                <a class="side-menu__item" data-bs-toggle="slide" href="tasks.php"><i
+                                <a class="side-menu__item" data-bs-toggle="slide" href="view-tasks.html"><i
                                         class="side-menu__icon fi fi-rs-list-check"></i><span class="side-menu__label">Tasks</span>
-                                        <!-- <i
-                                        class="angle fe fe-chevron-right"></i> -->
+                                        <i
+                                        class="angle fe fe-chevron-right"></i>
                                        
                                        </a>
-                              
+                                       <ul class="slide-menu">
+                                        <li class="side-menu-label1"><a href="javascript:void(0)">Invoicing</a></li>
+                                        <li><a href="create-tasks.html" class="slide-item">All</a></li>
+                                        <li><a href="new-tasks.html" class="slide-item">Draft</a></li>
+                                    </ul>
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
@@ -953,8 +966,8 @@
                                             <li class="nav-item1">
                                                 <a class="nav-link active p-0" href="view-property.html" id="viewOverview">Overview</a>
                                             </li>
-                                            <li class="nav-item1">
-                                                <a class="nav-link p-0" href="property-unit.html" id="viewUnits">Units</a>
+                                            <li class="nav-item1 p-0">
+                                                <a class="nav-link p-2" href="property-unit.html" id="viewUnits">Units</a>
                                             </li>
                                             <li class="nav-item1">
                                                 <a class="nav-link p-0" href="property-tenant.html" id="viewTenants">Tenants</a>
@@ -984,12 +997,12 @@
                                                 <p class="text-default">What would you like to do next?</p>
 
                                                 <div class="btn-list btn-list-icon">
-                                                    <button type="button" class="btn btn-primary btn-pill"><i
-                                                            class="fi fi-rs-building me-2"></i>Add Units</button>
-                                                    <button type="button" class="btn btn-primary btn-pill"><i
-                                                            class="fi fi-rs-cabin me-2"></i>Add Tenants</button>
-                                                    <button type="button" class="btn btn-primary btn-pill"><i
-                                                            class="fi fi-rs-list-check me-2"></i>Add Tasks</button>
+                                                    <a class="btn btn-primary btn-pill" href="property-unit.html"><i
+                                                            class="fi fi-rs-building me-2"></i>Add Units</a>
+                                                    <a class="btn btn-primary btn-pill" href="property-tenant.html"><i
+                                                            class="fi fi-rs-cabin me-2"></i>Add Tenants</a>
+                                                    <a class="btn btn-primary btn-pill" href="property-task.html"><i
+                                                            class="fi fi-rs-list-check me-2"></i>Add Tasks</a>
                                                 </div>
 
                                             </div>
@@ -1078,7 +1091,67 @@
                                         <div class="card-header justify-content-start">
                                             <h3 class="card-title font-wieght-bold">Photos</h3>
                                         </div>
+                                        <!-- id="image-placeholder" -->
                                         <div class="card-body">
+                                            <ul id="lightgallery" class="list-unstyled row">
+                                                <li class="col-xs-6 col-sm-4 col-md-4 col-xl-3 mb-5 border-bottom-0" data-responsive="../assets/images/media/1.jpg" data-src="../assets/images/media/1.jpg" data-sub-html="<h4>Gallery Image 1</h4><p> Many desktop publishing packages and web page editors now use Lorem Ipsum</p>">
+                                                    <a href="javascript:void(0)">
+                                                        <img class="img-responsive br-5" src="../assets/images/media/1.jpg" alt="Thumb-1">
+                                                    </a>
+                                                </li>
+                                                <li class="col-xs-6 col-sm-4 col-md-4 col-xl-3 mb-5 border-bottom-0" data-responsive="../assets/images/media/2.jpg" data-src="../assets/images/media/2.jpg" data-sub-html="<h4>Gallery Image 2</h4><p> Many desktop publishing packages and web page editors now use Lorem Ipsum</p>">
+                                                    <a href="javascript:void(0)">
+                                                        <img class="img-responsive br-5" src="../assets/images/media/2.jpg" alt="Thumb-2">
+                                                    </a>
+                                                </li>
+                                                <li class="col-xs-6 col-sm-4 col-md-4 col-xl-3 mb-5 border-bottom-0" data-responsive="../assets/images/media/3.jpg" data-src="../assets/images/media/3.jpg" data-sub-html="<h4>Gallery Image 3</h4><p> Many desktop publishing packages and web page editors now use Lorem Ipsum</p>">
+                                                    <a href="javascript:void(0)">
+                                                        <img class="img-responsive br-5" src="../assets/images/media/3.jpg" alt="Thumb-1">
+                                                    </a>
+                                                </li>
+                                                <li class="col-xs-6 col-sm-4 col-md-4 col-xl-3 mb-5 border-bottom-0" data-responsive="../assets/images/media/4.jpg" data-src="../assets/images/media/4.jpg" data-sub-html=" <h4>Gallery Image 4</h4><p> Many desktop publishing packages and web page editors now use Lorem Ipsum</p>">
+                                                    <a href="javascript:void(0)">
+                                                        <img class="img-responsive br-5" src="../assets/images/media/4.jpg" alt="Thumb-2">
+                                                    </a>
+                                                </li>
+                                                <li class="col-xs-6 col-sm-4 col-md-4 col-xl-4 mb-5 border-bottom-0" data-responsive="../assets/images/media/5.jpg" data-src="../assets/images/media/5.jpg" data-sub-html="<h4>Gallery Image 5</h4><p> Many desktop publishing packages and web page editors now use Lorem Ipsum</p>">
+                                                    <a href="javascript:void(0)">
+                                                        <img class="img-responsive br-5" src="../assets/images/media/5.jpg" alt="Thumb-1">
+                                                    </a>
+                                                </li>
+                                                <li class="col-xs-6 col-sm-4 col-md-4 col-xl-4 mb-5 border-bottom-0" data-responsive="../assets/images/media/6.jpg" data-src="../assets/images/media/6.jpg" data-sub-html="<h4>Gallery Image 6</h4><p> Many desktop publishing packages and web page editors now use Lorem Ipsum</p>">
+                                                    <a href="javascript:void(0)">
+                                                        <img class="img-responsive br-5" src="../assets/images/media/6.jpg" alt="Thumb-2">
+                                                    </a>
+                                                </li>
+                                                <li class="col-xs-6 col-sm-4 col-md-4 col-xl-4 mb-5 border-bottom-0" data-responsive="../assets/images/media/7.jpg" data-src="../assets/images/media/7.jpg" data-sub-html="<h4>Gallery Image 7</h4><p> Many desktop publishing packages and web page editors now use Lorem Ipsum</p>">
+                                                    <a href="javascript:void(0)">
+                                                        <img class="img-responsive br-5" src="../assets/images/media/7.jpg" alt="Thumb-1">
+                                                    </a>
+                                                </li>
+                                                <li class="col-xs-6 col-sm-4 col-md-4 col-xl-3 mb-5 border-bottom-0" data-responsive="../assets/images/media/8.jpg" data-src="../assets/images/media/8.jpg" data-sub-html="<h4>Gallery Image 8</h4><p> Many desktop publishing packages and web page editors now use Lorem Ipsum</p>">
+                                                    <a href="javascript:void(0)">
+                                                        <img class="img-responsive br-5" src="../assets/images/media/8.jpg" alt="Thumb-2">
+                                                    </a>
+                                                </li>
+                                                <li class="col-xs-6 col-sm-4 col-md-4 col-xl-3 mb-5 border-bottom-0" data-responsive="../assets/images/media/9.jpg" data-src="../assets/images/media/9.jpg" data-sub-html="<h4>Gallery Image 9</h4><p> Many desktop publishing packages and web page editors now use Lorem Ipsum</p>">
+                                                    <a href="javascript:void(0)">
+                                                        <img class="img-responsive mb-0 br-5" src="../assets/images/media/9.jpg" alt="Thumb-1">
+                                                    </a>
+                                                </li>
+                                                <li class="col-xs-6 col-sm-4 col-md-4 col-xl-3 mb-xl-0 mb-md-0 mb-md-0 mb-5 border-bottom-0" data-responsive="../assets/images/media/10.jpg" data-src="../assets/images/media/10.jpg" data-sub-html="<h4>Gallery Image 10</h4><p> Many desktop publishing packages and web page editors now use Lorem Ipsum</p>">
+                                                    <a href="javascript:void(0)">
+                                                        <img class="img-responsive mb-0 br-5" src="../assets/images/media/10.jpg" alt="Thumb-2">
+                                                    </a>
+                                                </li>
+                                                <li class="col-xs-6 col-sm-4 col-md-4 col-xl-3 mb-5 mb-md-0 mb-xl-0  border-bottom-0" data-responsive="../assets/images/media/11.jpg" data-src="../assets/images/media/11.jpg" data-sub-html="<h4>Gallery Image 11</h4><p> Many desktop publishing packages and web page editors now use Lorem Ipsum</p>">
+                                                    <a href="javascript:void(0)">
+                                                        <img class="img-responsive mb-0 br-5" src="../assets/images/media/11.jpg" alt="Thumb-1">
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <!-- <div class="card-body">
                                             <div class="row"
                                                 id="image-placeholder">
                                             <img src="../assets/images/demo_img.png" alt="">
@@ -1088,7 +1161,7 @@
                                             <img src="../assets/images/demo_img.png" alt="">
                                             <img src="../assets/images/demo_img.png" alt="">
                                             <img src="../assets/images/demo_img.png" alt=""></div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -1707,9 +1780,7 @@
         <div class="container">
             <div class="row align-items-center flex-row-reverse">
                 <div class="col-md-12 col-sm-12 text-center">
-                    Copyright © <span id="year"></span> <a href="javascript:void(0)">Sash</a>. Designed with <span
-                        class="fa fa-heart text-danger"></span> by <a href="javascript:void(0)"> Spruko </a> All
-                    rights reserved.
+                    Copyright ©     <a href="javascript:void(0)">Spade, LLC.</a> <span id="year"></span>
                 </div>
             </div>
         </div>
@@ -1796,7 +1867,16 @@
 
     <!-- ############################################# -->
 
-
+ <!-- GALLERY JS -->
+ <script src="../assets/plugins/gallery/picturefill.js"></script>
+ <script src="../assets/plugins/gallery/lightgallery.js"></script>
+ <script src="../assets/plugins/gallery/lightgallery-1.js"></script>
+ <script src="../assets/plugins/gallery/lg-pager.js"></script>
+ <script src="../assets/plugins/gallery/lg-autoplay.js"></script>
+ <script src="../assets/plugins/gallery/lg-fullscreen.js"></script>
+ <script src="../assets/plugins/gallery/lg-zoom.js"></script>
+ <script src="../assets/plugins/gallery/lg-hash.js"></script>
+ <script src="../assets/plugins/gallery/lg-share.js"></script>
     <!-- C3 CHART JS -->
     <script src="../assets/plugins/charts-c3/d3.v5.min.js"></script>
     <script src="../assets/plugins/charts-c3/c3-chart.js"></script>
