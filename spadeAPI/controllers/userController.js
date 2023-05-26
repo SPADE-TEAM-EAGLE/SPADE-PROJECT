@@ -536,141 +536,248 @@ exports.propertyDelete = async (req, res) => {
               const imageData = propertyViewImageResult[0];
 
 
-              const propertiesWithImages = propertyData.map(property => {
-                const matchingImages = imageData.filter(image => image.propertyID === property.id.toString());
-                const images = matchingImages.map(image => ({
-                  propertyID: image.propertyID,
-                  Image: image.Image
-                }));
-                return {
-                  ...property,
-                  images
-                };
-              });
-              // console.log(propertiesWithImages[0].images)
-              const finalResult = propertiesWithImages[0];
-              res.status(200).json({
-                data: finalResult
-              })
-            } else {
-              res.status(400).json({
-                message: "No Image data found"
-              })
-            }
-          } else {
-            res.status(400).json({
-              message: "No Property data found"
-            })
-          }
+        const propertiesWithImages = propertyData.map(property => {
+          const matchingImages = imageData.filter(image => image.propertyID === property.id.toString());
+          const images = matchingImages.map(image => ({
+            propertyID: image.propertyID,
+            Image: image.Image
+          }));
+          return {
+            ...property,
+            images
+          };
+        });
+        // console.log(propertiesWithImages[0].images)
+        const finalResult = propertiesWithImages[0];
+        res.status(200).json({
+          data: finalResult
+        })
+      } else {
+        res.status(400).json({
+          message: "No Image data found"
+        })
+      }
+    } else {
+      res.status(400).json({
+        message: "No Property data found"
+      })
+    }
+  } catch (error) {
+    res.send("Error from Viewing Property ");
+    console.log(req.body)
+    console.log(error)
+  }
+}
+//  ############################# View Property End ############################################################
+
+
+//  ############################# Get Property Units Start ############################################################
+exports.getpropertyUnits = async (req, res) => {
+  try {
+    const { id } = req.body
+    const propertyUnitsResult = await queryRunner(selectQuery("propertyunits", "propertyID"), [id]);
+    if (propertyUnitsResult.length > 0) {
+      res.status(200).json({
+        data: propertyUnitsResult,
+        message: "property Units"
+      })
+    } else {
+      res.status(400).json({
+        message: "No data found"
+      })
+    }
+  } catch (error) {
+    res.send("Error Get Property Units");
+    console.log(req.body)
+    console.log(error)
+  }
+}
+//  ############################# Get Property Units End ############################################################
+
+
+
+//  ############################# Update Property Units Start ############################################################
+exports.putPropertyUnitsUpdates = async (req, res) => {
+  try {
+    const {
+      id,
+      propertyID,
+      unitNumber,
+      Area,
+      unitDetails
+    } = req.body
+    let status = "Occupied";
+    const propertyUnitsResult = await queryRunner(updatePropertyUnits, [unitNumber, Area, unitDetails, status, id, propertyID]);
+    if (propertyUnitsResult[0].affectedRows > 0) {
+      res.status(200).json({
+        data: propertyUnitsResult,
+        message: "property Units updated successful"
+      })
+    } else {
+      res.status(400).json({
+        message: "No data found"
+      })
+    }
+  } catch (error) {
+    res.send("Error Get Property Units update");
+  }
+}
+//  ############################# update Property Units End ############################################################
+
+
+
+//  ############################# Create tenants Start ############################################################
+exports.createTenants = async (req, res) => {
+  try {
+    const {
+      landlordID,
+      firstName,
+      lastName,
+      companyName,
+      email,
+      phoneNumber,
+      address,
+      city,
+      state,
+      zipcode,
+      propertyID,
+      propertyUnitID,
+      rentAmount,
+      gross_or_triple_lease,
+      baseRent,
+      tripleNet,
+      leaseStartDate,
+      leaseEndDate,
+      increaseRent
+    } = req.body
+
+    const tenantsCheck = await queryRunner(selectQuery("tenants", "email"), [email]);
+    if (tenantsCheck[0].length > 0) {
+      // res.send("email found");
+      // const tenantsInsert = await queryRunner(UpdateTenants, [landlordID, firstName, lastName, companyName, email, phoneNumber, address, city, state, zipcode, propertyID, propertyUnitID, rentAmount, gross_or_triple_lease, baseRent, tripleNet, leaseStartDate, leaseEndDate, increaseRent, tenantPassword]);
+      // if (tenantsInsert[0].affectedRows > 0) {
+      //   res.status(200).json({
+      //     message: "Tenants Updated Successful",
+      //     data: tenantsInsert[0]
+      //   })
+
+      // } else {
+      //   res.status(400).json({
+      //     message: "email found but never change something"
+      //   })
+      // }
+      res.status(400).json({
+        message: `Tenants Already exist on this email ${email} `,
+      })
+    } else {
+      currentDate = new Date();
+      const ran = Math.floor(100000 + Math.random() * 900000);
+          const tenantPassword = "Spade" + ran;
+    const hashPassword = await hashedPassword(tenantPassword);
+
+      const tenantsInsert = await queryRunner(insertTenants, [landlordID, firstName, lastName, companyName, email, phoneNumber, address, city, state, zipcode, propertyID, propertyUnitID, rentAmount, gross_or_triple_lease, baseRent, tripleNet, leaseStartDate, leaseEndDate, increaseRent, hashPassword, currentDate]);
+      if (tenantsInsert[0].affectedRows > 0) {
+        res.status(200).json({
+          message: "Tenants save Successful",
+          data: tenantsInsert[0]
+        })
+      } else {
+        res.status(400).json({
+          message: "data not save"
+        })
+      }
+    }
+  }
+  catch (error) {
+    res.send("Error occurs in creating Tenants  " + error)
+  }
+}
+      //  ############################# Create tenants END ############################################################
+
+
+      //  ############################# tenant email send Start  ############################################################
+
+      exports.sendInvitationLink = async (req, res) => {
+        const { tenantID } = req.body;
+        try {
+          const selectTenantResult = await queryRunner(selectQuery("tenants", "id"), [tenantID])
+    if (selectTenantResult[0].length > 0) {
+
+      const name = selectTenantResult[0][0].firstName; 
+      const email = selectTenantResult[0][0].email; 
+      const currentDate = new Date();
+      const ran = Math.floor(100000 + Math.random() * 900000);
+      const tenantPassword = "Spade" + ran;
+const hashPassword = await hashedPassword(tenantPassword); 
+                const mailSubject = "Spade Welcome Email";
+ 
+
+const tenantsInsert = await queryRunner(UpdateTenants, [hashPassword, currentDate, tenantID]);
+      if (tenantsInsert[0].affectedRows > 0) {
+        await sendMail(email, mailSubject, tenantPassword, name); 
+        // console.log(tenantPassword);
+        res.status(200).json({
+          message: "Tenants Welcome email send Successful",
+          data: tenantsInsert[0]
+        })
+
+      } else {
+        res.status(400).json({
+          message: "welcome email not sent to tenant "
+        })
+      }
+    }else{
+      return res.status(400).send('Tenant is not exists');
+    }
+
+          // res.send("Email sent successfully"); // Sending success response
         } catch (error) {
-          res.send("Error from Viewing Property ");
-          // console.log(req.body)
-          console.log(error)
+          res.send("Error occurs in Sending Tenants welcome email " + error); // Sending error response
         }
-      }
-    //  ############################# View Property End ############################################################
-    exports.getpropertyUnits = async (req, res) => {
-      try {
-        const { propertyId } = req.query
-        // console.log(req.body,req.query,1)
-        const propertyUnitsResult = await queryRunner(selectQuery("propertyunits", "propertyID"), [propertyId]);
-        if (propertyUnitsResult.length > 0) {
-          res.status(200).json({
-            data: propertyUnitsResult,
-            message: "property Units"
-          })
-        } else {
-          res.status(400).json({
-            message: "No data found"
-          })
-        }
-      } catch (error) {
-        res.send("Error Get Property Units");
-        console.log(req.body)
-        console.log(error)
-      }
-          }
-          //  ############################# Get Property Units End ############################################################
-    
-    
-    
-        //  ############################# Update Property Units Start ############################################################
-    exports.putPropertyUnitsUpdates = async (req, res) => {
-      try {
-        console.log(req.body)
-        const { 
-          id,
-          propertyId,
-          unitNumber,
-          Area,
-          unitDetails
-         } = req.body
-        //  unitDetails=unitDetails.length>0?unitDetails:""
-        let status = "Occupied";
-        const propertyUnitsResult = await queryRunner(updatePropertyUnits, [unitNumber, Area, unitDetails, status, id, propertyId]);
-        if (propertyUnitsResult[0].affectedRows > 0) {
-          res.status(200).json({
-            data: propertyUnitsResult,
-            message: "property Units updated successful"
-          })
-        } else {
-          res.status(400).json({
-            message: "No data found"
-          })
-        }
-      } catch (error) {
-        res.send("Error Get Property Units update");
-        console.log(req.body)
-        console.log(error)
-      }
-          }
-          //  ############################# Update Property Units End ############################################################
-          exports.createTenants = async (req, res) => {
-            try {
-              const {
-                landlordID,
-                firstName,
-                lastName,
-                companyName,
-                email,
-                phoneNumber,
-                address,
-                city,
-                state,
-                zipcode
-              } = req.body
+      };
           
-              const tenantsCheck = await queryRunner(selectQuery("tenants", "email"), [email]);
-              if (tenantsCheck[0].length > 0) {
-                // res.send("email found");
-                const tenantsInsert = await queryRunner(UpdateTenants, [landlordID, firstName, lastName, companyName, email, phoneNumber, address, city, state, zipcode]);
-                if (tenantsInsert[0].affectedRows > 0) {
-                  res.status(200).json({
-                    message: "Tenants Updated Successful",
-                    data: tenantsInsert[0]
-                  })
+      //  ############################# tenant email send END  ############################################################
+
+      //  ############################# verify Mail Check Start  ############################################################
+
+      exports.verifyMailCheck = async (req, res) => {
+        const { landlordID, email } = req.body;
+        try {
+          const selectTenantResult = await queryRunner(selectQuery("users", "id"), [landlordID])
+    if (selectTenantResult[0].length > 0) {
+
+      const createdDate = selectTenantResult[0][0].created_at; 
+      // const createdDate = new Date('2023-05-27 15:34:32');
+      const currentDate = new Date();
+      const differenceInMilliseconds = currentDate - createdDate;
+      const differenceInSeconds = Math.floor(differenceInMilliseconds / 1000);
+      const differenceInMinutes = Math.floor(differenceInSeconds / 60);
+      const differenceInHours = Math.floor(differenceInMinutes / 60);
+      const differenceInDays = Math.floor(differenceInHours / 24);
+      if(differenceInDays > 0){
+        return res.status(200).json({
+          message : `Your remaining days is ${differenceInDays} please verify your email otherwise your account will locked after ${differenceInDays} days`
+        });
+      }else if(differenceInDays == 0){
+        return res.status(200).json({
           
-                } else {
-                  res.status(400).json({
-                    message: "email found but never change something"
-                  })
-                }
-              } else {
-                const tenantsInsert = await queryRunner(insertTenants, [landlordID, firstName, lastName, companyName, email, phoneNumber, address, city, state, zipcode]);
-                if (tenantsInsert[0].affectedRows > 0) {
-                  res.send("data save Successful");
-                  res.status(200).json({
-                    message: "Tenants save Successful",
-                    data: tenantsInsert[0]
-                  })
-                } else {
-                  res.status(400).json({
-                    message: "data not save"
-                  })
-                }
-              }
-            }
-            catch (error) {
-              res.send("Error occurs in creating Tenants  " + error)
-            }
-          }
+          message : `Today is your last day so Kindly verify your email otherwise your account will locked on tomorrow`
+        });
+      }else{
+        return res.status(200).json({
+          remainingDays : `Your account is locked due to email verification firstly verify your email`
+        });
+      }
+ 
+    }else{
+      return res.status(400).send('landlord is not exists');
+    }
+
+          // res.send("Email sent successfully"); // Sending success response
+        } catch (error) {
+          res.send("Error occurs in verifying the landlord email " + error); // Sending error response
+        }
+      };
+          
+      //  ############################# verify Mail Check END  ############################################################
+      
