@@ -898,16 +898,16 @@
                                                                         class="angle fe fe-arrow-right create-btn-plus"></i></a> -->
                                         <ul class="nav1 br-7 position-absolute" style="bottom: 0;" id="nav_links">
                                             <li class="nav-item1">
-                                                <a class="nav-link active p-0" href="view-property.html">Overview</a>
+                                                <a class="nav-link active p-0" href="view-property.html" id="viewOverview">Overview</a>
                                             </li>
                                             <li class="nav-item1">
-                                                <a class="nav-link p-0" href="property-unit.html">Units</a>
+                                                <a class="nav-link p-0" href="property-unit.html" id="viewUnits">Units</a>
                                             </li>
                                             <li class="nav-item1">
-                                                <a class="nav-link p-0" href="property-tenant.html">Tenants</a>
+                                                <a class="nav-link p-0" href="property-tenant.html" id="viewTenants">Tenants</a>
                                             </li>
                                             <li class="nav-item1">
-                                                <a class="nav-link p-0" href="property-task.html">Tasks</a>
+                                                <a class="nav-link p-0" href="property-task.html" id="viewTasks">Tasks</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -1911,7 +1911,17 @@
 
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
-   
+   <script>
+       $(document).ready(function() {
+
+const propertyId = (new URL(document.location)).searchParams.get("propertyId");
+// // console.log($("#viewUnits").attr("href"))
+$("#viewUnits").attr("href",`./property-unit.html?propertyId=${propertyId}`)
+$("#viewOverview").attr("href",`./view-property.html?propertyId=${propertyId}`)
+$("#viewTenants").attr("href",`./property-tenant.html?propertyId=${propertyId}`)
+$("#viewTasks").attr("href",`./property-task.html?propertyId=${propertyId}`)
+});
+    </script>
 
     <script>
         // Get the user's preferred color scheme

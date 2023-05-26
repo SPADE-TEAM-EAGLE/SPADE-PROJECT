@@ -178,7 +178,10 @@
         .panel-body {
             padding: 0px;
         }
-        
+        .dark-mode .btn-close {
+    color: white;
+}
+
         .accordion-item:first-of-type {
             border-bottom-left-radius: 0.25rem;
             border-bottom-right-radius: 0.25rem;
@@ -387,14 +390,14 @@
     } */
         
         button.btn-close {
-            right: 5px;
+            right: 6px;
         }
         
         .btn-close {
             width: 1.8rem;
             opacity: 1;
             position: absolute;
-            top: 5px;
+            top: 6px;
         }
         
         .del {
@@ -540,7 +543,7 @@
                             from condos and single-family homes to retail stores and parking lots.</span>
                     </div>
                     <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><img src="../assets/images/cross-circle.svg" /></span>
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
                     </button>
                 </div>
                 <div class="modal-body">
@@ -592,23 +595,25 @@
                                         <span class="text-danger d-none">Address is required!</span>
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="inputCity" class="form-label fw-bold">City <spnan
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="city">
+                                        <label for="inputCity" class="form-label fw-bold">City <span class="text-danger">*</span></label>
+                                        <select id="city" class="form-select form city-select">
+                                          <option selected>Choose...</option>
+                                        </select>
                                         <span class="text-danger d-none">City is required!</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputState" class="form-label fw-bold">State <spnan
-                                                class="text-danger">*</span></label>
-                                        <select id="state" class="form-select form">
-                                            <option selected>Choose...</option>
-                                            <option>Sindh</option>
-                                            <option>Punjab</option>
-                                            <option>Balochistan</option>
-                                            <option>KPK</option>
+                                      </div>
+                                      <div class="col-md-4">
+                                        <label for="inputState" class="form-label fw-bold">State <span class="text-danger">*</span></label>
+                                        <select id="state" class="form-select form state-select">
+                                          <option selected>Choose...</option>
+                                          <option value="Sindh">Sindh</option>
+                                          <option value="Punjab">Punjab</option>
+                                          <option value="Balochistan">Balochistan</option>
+                                          <option value="KPK">KPK</option>
                                         </select>
                                         <span class="text-danger d-none">State is required!</span>
-                                    </div>
+                                      </div>
+                                      
+                                    
                                     <div class="col-md-4">
                                         <label for="inputZip" class="form-label fw-bold">Zip <spnan class="text-danger">
                                                 *</span></label>
@@ -707,7 +712,7 @@
                     <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
                         <div class="card-header border-0 pt-3">
                             <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true"><img src="../assets/images/cross-circle.svg" /></span>
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
                             </button>
                         </div>
                         <div class="card-body text-center">
@@ -774,7 +779,7 @@
                             from condos and single-family homes to retail stores and parking lots.</span>
                     </div>
                     <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><img src="../assets/images/cross-circle.svg" /></span>
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
                     </button>
                 </div>
                 <div class="modal-body">
@@ -816,15 +821,16 @@
                             <span class="text-danger d-none">Address is required!</span>
                         </div>
                         <div class="col-md-4">
-                            <label for="inputCity" class="form-label fw-bold">City <spnan class="text-danger">
-                                    *</span></label>
-                            <input type="text" class="form-control form" id="city_update">
+                            <label for="inputCity" class="form-label fw-bold">City <span class="text-danger">*</span></label>
+                            <select id="city_update" class="form-select form city-select">
+                                <option selected>Choose...</option>
+                            </select>
                             <span class="text-danger d-none">City is required!</span>
-                        </div>
+                          </div>
                         <div class="col-md-4">
                             <label for="inputState" class="form-label fw-bold">State <spnan class="text-danger">
                                     *</span></label>
-                            <select id="state_update" class="form-select form">
+                            <select id="state_update" class="form-select form state-select">
                                 <option selected>Choose...</option>
                                 <option>Sindh</option>
                                 <option>Punjab</option>
@@ -2165,19 +2171,6 @@
                 }
             });
         });
-        // const check = 0
-        // const updateformInputs = document.querySelectorAll('#myModal_edit .form-control');
-        // updateformInputs.forEach(input => {
-        //     input.addEventListener('blur', function () {
-        //         // console.log(input.nextElementSibling)
-        //         if (validateInput(input)) {
-        //             input.nextElementSibling.classList.add('d-none');
-
-        //         } else {
-        //             input.nextElementSibling.classList.remove('d-none');
-        //         }
-        //     });
-        // });
         counter = 0
         const draftButton = document.getElementById('draft');
         const nextButton = document.getElementById('next');
@@ -2338,7 +2331,7 @@
 
             $('#fileInput').on('change', function() {
                 var files = Array.from($(this)[0].files);
-                console.log(files)
+                // console.log(files)
                 files.forEach(function(file) {
                     selectedFiles.push(file); // Add each file to the selected files array
                 });
@@ -2346,9 +2339,9 @@
                 updateSelectedFilesContainer(); // Update the selected files container
             });
             $('#fileInput_update').on('change', function() {
-                console.log($(this)[0].files)
+                // console.log($(this)[0].files)
                 var files = Array.from($(this)[0].files);
-                console.log(files)
+                // console.log(files)
                 files.forEach(function(file) {
                     selectedFiles.push(file); // Add each file to the selected files array
                 });
@@ -2387,10 +2380,10 @@
                 getData("descending")
             });
             $('#alphabets').on('click', function() {
-                console.log(1)
+                // console.log(1)
                 getData("alphabets")
             });
-            console.log($('#alphabets'))
+            // console.log($('#alphabets'))
                 // Search functionality
             $('#search_input').on('keyup', function() {
                 var searchValue = $(this).val().toLowerCase();
@@ -2450,7 +2443,7 @@
 
         $('#myModal_edit').on('hidden.bs.modal', function() {
             // Clear input values
-            console.log(1)
+            // console.log(1)
             $(this).find('input, textarea, select').val('');
 
             // Clear file input values
@@ -2472,7 +2465,7 @@
             $(this).find('.file-grid').empty();
         });
         $(document).on('click', '#next', function(e) {
-            console.log(1)
+            e.preventDefault()
             $('#addModal').modal('hide');
             // $("#largemodal").addClass("hide");
             var formData = new FormData();
@@ -2517,7 +2510,7 @@
                 },
 
                 success: function(response) {
-                    console.log(1)
+                    // console.log(1)
                     $('#succesModal').modal('show')
                     getData()
                         // window.location = '../Landlord/properties-all.html';
@@ -2633,12 +2626,19 @@
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function(response = "none") {
+                success: function(response) {
                     // data=response.data[0]
                     // console.log(response)
                     // console.log(response.name,$("#user-name"))
                     // result=response
+                    // console.log(response.data[0])
+                    if(response.data[0].length===0){
+                        
+                        window.location='./new-property.html'
+                    }
+                    else{
                     $("#user-name").text(response.user)
+
                         // Assuming response is an array of property objects
                     var tableBody = $('#table_body');
                     // console.log(response)
@@ -2651,7 +2651,7 @@
                     // Iterate over the response and populate the table
 
                     if (selectedFilter === 'alphabets') {
-                        response.data[0] ?.sort(function(a, b) {
+                        response.data[0]?.sort(function(a, b) {
                             var textA = a.propertyName.toLowerCase();
                             var textB = b.propertyName.toLowerCase();
 
@@ -2744,6 +2744,7 @@
 
                         const data = response.data[0].find(obj => obj.id.toString() === propertyId);
                         selectedFiles = data.images
+                    console.log(data.city)
                         updateSelectedFilesContainer()
                         $("#propertyId_update").val(data.id);
                         $("#propertyName_update").val(data.propertyName);
@@ -2763,7 +2764,7 @@
                         propertyId = propertyIdElement.text();
 
                         $('#myModal_delete').modal('show');
-                    });
+                    });}
                 },
                 error: function(xhr, status, error) {
                     console.log(error)
@@ -2824,6 +2825,130 @@
         getData()
     </script>
     <script>
+    // $(document).ready(function() {
+    //   // Fetch cities in Sindh from GeoNames API
+    //   $.ajax({
+    //     url: 'http://api.geonames.org/searchJSON',
+    //     method: 'GET',
+    //     data: {
+    //         country: 'PK', // Country code for Pakistan
+    //       maxRows: 500, // Maximum number of cities to retrieve (adjust as needed)
+    //       username: 'developedmatz', // Replace with your GeoNames username
+    //       style: 'full'
+    //     },
+    //     success: function(data) {
+    //         count=0
+    //         // console.log(data.geonames)
+            
+    //         data.geonames.forEach((item)=>{
+    //             console.log(item.adminName1)
+    //             if(count===10){
+    //                 return
+    //             }
+    //         })
+    //       var cityDropdown = $('#city');
+    //       var cities = data.geonames;
+
+    //       // Populate the city dropdown with retrieved city data
+    //       cities.forEach(function(city) {
+    //         cityDropdown.append($('<option></option>').text(city.name));
+    //       });
+    //     },
+    //     error: function(error) {
+    //         console.log(error)
+    //       console.log('Error occurred while fetching city data.');
+    //     }
+    //   });
+    // });
+    $(document).ready(function() {
+      // City data based on state selection
+    //   var cityData = {
+    //     Sindh: ["Karachi", "Hyderabad", "Sukkur", "Larkana"],
+    //     Punjab: ["Lahore", "Faisalabad", "Rawalpindi", "Multan"],
+    //     Balochistan: ["Quetta", "Gwadar", "Khuzdar", "Turbat"],
+    //     KPK: ["Peshawar", "Abbottabad", "Mardan", "Swat"]
+    //   };
+    $.ajax({
+        url: 'http://api.geonames.org/searchJSON',
+        method: 'GET',
+        data: {
+            country: 'PK', // Country code for Pakistan
+          maxRows: 500, // Maximum number of cities to retrieve (adjust as needed)
+          username: 'developedmatz', // Replace with your GeoNames username
+          style: 'full'
+        },
+        success: function(result) {
+      // Handle state selection change
+      $('#state').change(function() {
+        var selectedState = $(this).val();
+        if(selectedState==="KPK"){
+            selectedState="Khyber Pakhtunkhwa"
+        }
+        
+        var cityDropdown = $('#city');
+        
+        // Clear existing options
+        cityDropdown.empty();
+        cityDropdown.append($('<option></option>').text("Choose..."));
+        cities=[]
+        if (selectedState !== "Choose...") {
+          // Populate city options based on selected state
+          count=0
+          data=result.geonames
+          for(item of data){
+            if(item.adminName1===selectedState){
+                    cities.push(item.name)
+                    count++
+            }
+            if(count===10){
+                    break
+            }
+          }
+
+        cities.forEach(function(city) {
+            cityDropdown.append($('<option></option>').text(city));
+          });
+
+        }
+      });
+      $('#state_update').change(function() {
+        var selectedState = $(this).val();
+        if(selectedState==="KPK"){
+            selectedState="Khyber Pakhtunkhwa"
+        }
+        
+        var cityDropdown = $('#city_update');
+        
+        // Clear existing options
+        cityDropdown.empty();
+        cityDropdown.append($('<option></option>').text("Choose..."));
+        cities=[]
+        if (selectedState !== "Choose...") {
+          // Populate city options based on selected state
+          count=0
+          data=result.geonames
+          for(item of data){
+            if(item.adminName1===selectedState){
+                    cities.push(item.name)
+                    count++
+            }
+            if(count===10){
+                    break
+            }
+          }
+
+        cities.forEach(function(city) {
+            cityDropdown.append($('<option></option>').text(city));
+          });
+
+        }
+      });
+    },
+    error:function(xhr, status, error){
+
+    }
+})
+    })
     </script>
 </body>
 
