@@ -231,7 +231,7 @@
                                 <ul class="slide-menu">
                                     <li class="side-menu-label1"><a href="javascript:void(0)">Properties</a></li>
                                     <li><a href="properties-all.html" class="slide-item">All</a></li>
-                                    <li><a href="new-property.html" class="slide-item">Draft</a></li>
+                                    <li><a href="javascript:void(0)" class="slide-item">Draft</a></li>
                                 </ul>
                             </li>
                             <li class="slide">
@@ -244,7 +244,7 @@
                                 <ul class="slide-menu">
                                     <li class="side-menu-label1"><a href="javascript:void(0)">Tenants</a></li>
                                     <li><a href="add-tenant.html" class="slide-item">All</a></li>
-                                    <li><a href="new-property.html" class="slide-item">Draft</a></li>
+                                    <li><a href="javascript:void(0)" class="slide-item">Draft</a></li>
                                 </ul>
                             </li>
 
@@ -260,7 +260,7 @@
                                 <ul class="slide-menu">
                                     <li class="side-menu-label1"><a href="javascript:void(0)">Invoicing</a></li>
                                     <li><a href="create-invoicing.html" class="slide-item">All</a></li>
-                                    <li><a href="new-property.html" class="slide-item">Draft</a></li>
+                                    <li><a href="javascript:void(0)" class="slide-item">Draft</a></li>
                                 </ul>
 
                             </li>
@@ -281,11 +281,11 @@
                                         class="angle fe fe-chevron-right"></i>
                                        
                                        </a>
-                                       <ul class="slide-menu">
-                                        <li class="side-menu-label1"><a href="javascript:void(0)">Invoicing</a></li>
-                                        <li><a href="create-tasks.html" class="slide-item">All</a></li>
-                                        <li><a href="new-tasks.html" class="slide-item">Draft</a></li>
-                                    </ul>
+                                <ul class="slide-menu">
+                                    <li class="side-menu-label1"><a href="javascript:void(0)">Invoicing</a></li>
+                                    <li><a href="create-tasks.html" class="slide-item">All</a></li>
+                                    <li><a href="new-tasks.html" class="slide-item">Draft</a></li>
+                                </ul>
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
@@ -1333,9 +1333,9 @@
             logo.src = '../assets/header-img/question.svg';
         }
     </script>
-<script>
-$(document).ready(()=>{
-    $.ajax({
+    <script>
+        $(document).ready(() => {
+            $.ajax({
                 url: 'http://localhost:3000/api/spade/allproperty',
                 type: 'GET',
                 contentType: false,
@@ -1344,15 +1344,16 @@ $(document).ready(()=>{
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function(response) {
-                // data=response.data[0]
-                
-                    $("#user-name").text(response.user)
-                },error:function(xhr, status, erroror){
+                    // data=response.data[0]
 
-                    }
-                })
-})
-</script>
+                    $("#user-name").text(response.user)
+                },
+                error: function(xhr, status, erroror) {
+
+                }
+            })
+        })
+    </script>
 
 </body>
 
