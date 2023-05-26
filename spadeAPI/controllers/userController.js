@@ -378,7 +378,7 @@ exports.getpropertyByID = async (req, res) => {
     }
   } catch (error) {
     res.send("Error Get Property By ID");
-    console.log(req.body)
+    // console.log(req.body)
     console.log(error)
   }
 }
@@ -404,136 +404,136 @@ exports.propertyDelete = async (req, res) => {
             message: " Property deleted successfully"
           })
         }
-      }
-      else {
-        res.status(400).json({
-          message: "No Property Image data found "
-        })
-      }
+            }
+            else {
+              res.status(400).json({
+                message: "No Property Image data found "
+              })
+            }
 
 
 
 
 
-
-    } else {
-      res.status(400).json({
-        message: "No data found"
-      })
-      // console.log(PropertyDeleteResult)
-    }
-  } catch (error) {
-    res.send("Error from delete Property ");
-    console.log(req.body)
-    console.log(error)
-  }
-}
-//  ############################# Delete Property End ############################################################
-
-
-//  ############################# Update Property Start ############################################################
-
-exports.propertyUpdate = async (req, res) => {
-  try {
-    // console.log(`step : 1 get all values into body`);
-
-    const { existingImages, propertyName, address, city, state, zipCode, propertyType, propertySQFT, status, id, units } = req.body
-    const { userId } = req.user
-    // console.log(`step : 2 send all values data into database`);
-    const propertyUpdateResult = await queryRunner(updateProperty, [userId, propertyName, address, city, state, zipCode, propertyType, propertySQFT, "Active", units, id]);
-    // console.log(req.files)
-    if (propertyUpdateResult[0].affectedRows > 0) {
-      // console.log(`step : 3 check property images into database propertyid = ${id}`);
-      const propertycheckresult = await queryRunner(selectQuery("propertyimage", "propertyID"), [id]);
-
-      if (propertycheckresult.length > 0) {
-        propertyimages = propertycheckresult[0].map((image) => image.Image);
-        let existingImg = existingImages.split(",")
-        const imagesToDelete = propertyimages.filter(element => !existingImg.includes(element));
-
-
-        // Combine the common elements with array2
-
-        imageToDelete(imagesToDelete);
-        let propertyDeleteresult = [{ "affectedRows": 0 }];
-        // delete images Data into database
-        if (imagesToDelete.length > 0) {
-          for (let i = 0; i < imagesToDelete.length; i++) {
-
-            propertyDeleteresult = await queryRunner(deleteQuery("propertyimage", "Image"), [imagesToDelete[i]]);
-            // console.log(propertyDeleteresult)
+         
+          } else {
+            res.status(400).json({
+              message: "No data found"
+            })
+            // console.log(PropertyDeleteResult)
           }
+        } catch (error) {
+          res.send("Error from delete Property ");
+          // console.log(req.body)
+          console.log(error)
         }
-
-        // console.log(`step : 4 delete previous images data into database propertyid = ${id}`);
-        // console.log(propertyDeleteresult)
-        // if (propertyDeleteresult[0].affectedRows > 0) {
-
-
-
-        const fileNames = req.files.map((file) => file.filename);
-        existingImg = [...fileNames]
-        // using loop to send new images data into database
-        for (let i = 0; i < existingImg.length; i++) {
-          const img = existingImg[i];
-          const propertyImageResult = await queryRunner(insertInPropertyImage, [id, img]);
-          console.log(`step : 5 inserted new image data into database insertId = ${id}`);
-          if (propertyImageResult.affectedRows === 0) {
-            return res.send('Error2');
-          }
-        }
-
-        return res.status(201).json({
-          message: "Form Submited",
-        });
-      } else {
-        return res.status(400).json({
-          message: "No Property data found",
-        });
       }
-    } else {
-      return res.status(400).json({
-        message: "No Property",
-      });
-    }
-
-    // This part of the code will not be reached due to the previous return statements.
-    // res.status(200).json({
-    //   message: "Property Updated successfully",
-    // });
-    // } else {
-    //   return res.status(400).json({
-    //     message: "No data found",
-    //   });
-    // }
-  } catch (error) {
-    console.log(error);
-    return res.send("Error from Updating Property");
-  }
-};
-
-//  ############################# Update Property End ############################################################
+      //  ############################# Delete Property End ############################################################
 
 
+      //  ############################# Update Property Start ############################################################
+
+      exports.propertyUpdate = async (req, res) => {
+        try {
+          // console.log(`step : 1 get all values into body`);
+ 
+          const {existingImages, propertyName, address, city, state, zipCode, propertyType, propertySQFT, status, id, units } = req.body
+          const { userId } = req.user
+          // console.log(`step : 2 send all values data into database`);
+          const propertyUpdateResult = await queryRunner(updateProperty, [userId, propertyName, address, city, state, zipCode, propertyType, propertySQFT, "Active", units, id]);
+          // console.log(req.files)
+          if (propertyUpdateResult[0].affectedRows > 0) {
+            // console.log(`step : 3 check property images into database propertyid = ${id}`);
+            const propertycheckresult = await queryRunner(selectQuery("propertyimage", "propertyID"), [id]);
+
+            if (propertycheckresult.length > 0) {
+              propertyimages = propertycheckresult[0].map((image) => image.Image);
+              let existingImg=existingImages.split(",")
+              const imagesToDelete = propertyimages.filter(element => !existingImg.includes(element));
+              
+
+              // Combine the common elements with array2
+            
+              imageToDelete(imagesToDelete);
+              let propertyDeleteresult=[{"affectedRows":0}];
+              // delete images Data into database
+              if(imagesToDelete.length>0){
+                for(let i=0;i<imagesToDelete.length;i++){
+
+                  propertyDeleteresult = await queryRunner(deleteQuery("propertyimage", "Image"), [imagesToDelete[i]]);
+                  // console.log(propertyDeleteresult)
+                }
+              }
+             
+              // console.log(`step : 4 delete previous images data into database propertyid = ${id}`);
+              // console.log(propertyDeleteresult)
+              // if (propertyDeleteresult[0].affectedRows > 0) {
+        
+
+                
+                const fileNames = req.files.map((file) => file.filename);
+                existingImg=[...fileNames]
+                // using loop to send new images data into database
+                for (let i = 0; i < existingImg.length; i++) {
+                  const img = existingImg[i];
+                  const propertyImageResult = await queryRunner(insertInPropertyImage, [id, img]);
+                  console.log(`step : 5 inserted new image data into database insertId = ${id}`);
+                  if (propertyImageResult.affectedRows === 0) {
+                    return res.send('Error2');
+                  }
+                }
+
+                return res.status(201).json({
+                  message: "Form Submited",
+                });
+              } else {
+                return res.status(400).json({
+                  message: "No Property data found",
+                });
+              }
+            } else {
+              return res.status(400).json({
+                message: "No Property",
+              });
+            }
+
+            // This part of the code will not be reached due to the previous return statements.
+            // res.status(200).json({
+            //   message: "Property Updated successfully",
+            // });
+          // } else {
+          //   return res.status(400).json({
+          //     message: "No data found",
+          //   });
+          // }
+        } catch (error) {
+          console.log(error);
+          return res.send("Error from Updating Property");
+        }
+      };
+
+      //  ############################# Update Property End ############################################################
+
+      
 
 
-//  ############################# View Property Start ############################################################
-exports.propertyView = async (req, res) => {
-  try {
-    const { propertyId } = req.query
-    // console.log(req.query)
-    // check property in database
-    const propertyViewResult = await queryRunner(selectQuery('property', 'id'), [propertyId]);
-    if (propertyViewResult.length > 0) {
-      // check property Images in database
-      const propertyViewImageResult = await queryRunner(selectQuery('propertyimage', 'propertyID'), [propertyId]);
-      if (propertyViewImageResult.length > 0) {
+      //  ############################# View Property Start ############################################################
+      exports.propertyView = async (req, res) => {
+        try {
+          const { propertyId } = req.query
+          // console.log(req.query)
+          // check property in database
+          const propertyViewResult = await queryRunner(selectQuery('property', 'id'), [propertyId]);
+          if (propertyViewResult.length > 0) {
+            // check property Images in database
+            const propertyViewImageResult = await queryRunner(selectQuery('propertyimage', 'propertyID'), [propertyId]);
+            if (propertyViewImageResult.length > 0) {
 
-        // Property Data
-        const propertyData = propertyViewResult[0];
+              // Property Data
+              const propertyData = propertyViewResult[0];
 
-        // Property Image Data
-        const imageData = propertyViewImageResult[0];
+              // Property Image Data
+              const imageData = propertyViewImageResult[0];
 
 
         const propertiesWithImages = propertyData.map(property => {
@@ -704,4 +704,6 @@ exports.createTenants = async (req, res) => {
         }
       };
           
+      //  ############################# tenant email send Start  ############################################################
+      
       //  ############################# tenant email send Start  ############################################################
