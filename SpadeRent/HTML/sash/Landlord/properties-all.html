@@ -16,7 +16,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="../assets/images/brand/favicon.ico" />
 
     <!-- TITLE -->
-    <title>Property List - SpadeRent</title>
+    <title>Sash – Bootstrap 5 Admin & Dashboard Template </title>
 
     <!-- BOOTSTRAP CSS -->
     <link id="style" href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -30,6 +30,7 @@
     <!--- FONT-ICONS CSS -->
     <link href="../assets/css/icons.css" rel="stylesheet" />
     <link rel="stylesheet" href="fancy_fileupload.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
     <!-- COLOR SKIN CSS -->
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="../assets/colors/color1.css" />
     <style>
@@ -37,7 +38,25 @@
         .custom-file-input::-webkit-file-upload-button {
             visibility: hidden;
         }
-        
+        #propertyTable {
+  padding: 0;
+}
+
+#propertyTable_wrapper .dataTables_wrapper {
+  padding: 0;
+}
+
+#propertyTable_wrapper .dataTables_scroll {
+  padding: 0;
+}
+
+#propertyTable_wrapper .dataTables_scrollHead {
+  padding: 0;
+}
+
+#propertyTable_wrapper .dataTables_scrollBody {
+  padding: 0;
+}
         .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar {
             width: 7px;
             /* Width of the scrollbar */
@@ -681,7 +700,7 @@
             <div class="modal-content">
                 <div class="modal-header">
 
-                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="succes-close">
                         <span aria-hidden="true"><img src="../assets/images/cross-circle.svg" /></span>
                     </button>
                 </div>
@@ -1084,15 +1103,11 @@
                                 <a class="side-menu__item" data-bs-toggle="slide" href="add-tenant.html"><i
                                         class="side-menu__icon fi fi-rs-cabin"></i><span
                                         class="side-menu__label">Tenants</span>
-                                    <i
-                                        class="angle fe fe-chevron-right"></i>
+                                    <!-- <i
+                                        class="angle fe fe-chevron-right"></i> -->
 
                                 </a>
-                                <ul class="slide-menu">
-                                    <li class="side-menu-label1"><a href="javascript:void(0)">Tenants</a></li>
-                                    <li><a href="add-tenant.html" class="slide-item">All</a></li>
-                                    <li><a href="new-property.html" class="slide-item">Draft</a></li>
-                                </ul>
+
                             </li>
 
                             <!-- <li class="sub-category">
@@ -1100,15 +1115,11 @@
                                        </li> -->
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="invoices.html"><i
-                                                class="side-menu__icon fi fi-rs-file-invoice-dollar"></i><span class="side-menu__label">Invoicing</span>
-                                                <i
-                                                class="angle fe fe-chevron-right"></i>
-                                               </a>
-                                <ul class="slide-menu">
-                                    <li class="side-menu-label1"><a href="javascript:void(0)">Invoicing</a></li>
-                                    <li><a href="create-invoicing.html" class="slide-item">All</a></li>
-                                    <li><a href="new-property.html" class="slide-item">Draft</a></li>
-                                </ul>
+                                        class="side-menu__icon fi fi-rs-file-invoice-dollar"></i><span
+                                        class="side-menu__label">Invoicing</span>
+                                    <!-- <i
+                                        class="angle fe fe-chevron-right"></i> -->
+                                </a>
 
                             </li>
                             <li class="slide">
@@ -1122,17 +1133,14 @@
                             </li>
 
                             <li class="slide">
-                                <a class="side-menu__item" data-bs-toggle="slide" href="view-tasks.html"><i
-                                        class="side-menu__icon fi fi-rs-list-check"></i><span class="side-menu__label">Tasks</span>
-                                        <i
-                                        class="angle fe fe-chevron-right"></i>
-                                       
-                                       </a>
-                                       <ul class="slide-menu">
-                                        <li class="side-menu-label1"><a href="javascript:void(0)">Invoicing</a></li>
-                                        <li><a href="create-tasks.html" class="slide-item">All</a></li>
-                                        <li><a href="new-tasks.html" class="slide-item">Draft</a></li>
-                                    </ul>
+                                <a class="side-menu__item" data-bs-toggle="slide" href="tasks.php"><i
+                                        class="side-menu__icon fi fi-rs-list-check"></i><span
+                                        class="side-menu__label">Tasks</span>
+                                    <!-- <i
+                                        class="angle fe fe-chevron-right"></i> -->
+
+                                </a>
+
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
@@ -1249,34 +1257,39 @@
                                         </div>
                                         <div class="d-flex">
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-dark bg-transparent font-weight-bold text-dark" id="customize_btn" data-bs-toggle="dropdown"><strong>CUSTOMIZED</strong><i
+                                                <button type="button" class="btn btn-dark font-weight-bold" id="customize_btn" data-bs-toggle="dropdown"><strong>CUSTOMIZED</strong><i
                                                         class="fe fe-chevron-down ms-2"></i></button>
                                                 <ul class="dropdown-menu" role="menu">
-                                                    <li><a href="javascript:void(0)"><strong>Filter by:</strong></a>
+                                                    <li><a href="javascript:void(0)"><strong>Coulmns to Show</strong></a>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">A-Z Alphabets</a>
+                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">IMAGE</a>
                                                         <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1">
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">Date Modified</a>
+                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">PROPERTY ID</a>
                                                         <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1">
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">Ascending</a>
+                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">PROPERTY NAME</a>
                                                         <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1">
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">Descending</a>
+                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">PROPERTY TYPE</a>
                                                         <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1">
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">Recently Added</a>
+                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">PROPERTY UNITS</a>
                                                         <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1">
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
+                                                        </div>
+                                                    </li>
+                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">PROPERTY ADDRESS</a>
+                                                        <div class="form-check m-0">
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
                                                 </ul>
@@ -1288,11 +1301,11 @@
                                     </div>
                                     <div class="card-body p-0">
                                         <div class="table-responsive">
-                                            <table class="table border text-nowrap text-md-nowrap mb-0">
+                                            <table class="table border text-nowrap text-md-nowrap mb-0" id="responsive-datatable">
                                                 <thead>
                                                     <tr>
                                                         <th><label class="custom-control custom-checkbox-md">
-                                                                <input type="checkbox" class="custom-control-input"
+                                                                <input type="checkbox" class="custom-control-input" id="header-checkbox"
                                                                     name="example-checkbox5" value="option5" checked="">
                                                                 <span class="custom-control-label"></span>
                                                             </label></th>
@@ -1306,7 +1319,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody id="table_body">
-                                                    <tr>
+                                                    <!-- <tr>
                                                         <td><label class="custom-control custom-checkbox-md">
                                                                 <input type="checkbox" class="custom-control-input"
                                                                     name="example-checkbox5" value="option5" checked="">
@@ -1339,110 +1352,8 @@
                                                                 <li><a class="dropdown-item text-success delete-option" href="javascript:void(0)">View</a></li>
                                                             </ul>
                                                         </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><label class="custom-control custom-checkbox-md">
-                                                                <input type="checkbox" class="custom-control-input"
-                                                                    name="example-checkbox5" value="option5" checked="">
-                                                                <span class="custom-control-label"></span>
-                                                            </label></td>
-                                                        <td><img src="https://cdn.pixabay.com/photo/2017/07/08/02/16/house-2483336__340.jpg" alt=""></td>
-                                                        <td>US-272723</td>
-                                                        <td>Houston Shopping Center</td>
-                                                        <td>
-                                                            <a class="like" href="javascript:;">
-                                                                <span class="badge btn-light rounded-pill-Single-Family rounded-pill py-2 px-3">
-                                                                    <i class="fe fe-circle me-1"></i>Single
-                                                                    Family</span>
-                                                            </a>
-                                                        </td>
-                                                        <td>
-                                                            <p style="font-weight: 600;" class="mb-1">1 Unit (s)</p>
-                                                            <span>220 Square Feet</span>
-                                                        </td>
-                                                        <td>
-                                                            <p style="font-weight: 600;" class="mb-1">9430 Research Blvd. Ste 2-350 Austin</p>
-                                                            <span>TX 78759</span>
-                                                        </td>
-                                                        <td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
-
-                                                            <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item text-primary" href="view-property.html">Edit</a></li>
-                                                                <li><a class="dropdown-item text-danger" href="javascript:void(0)">Delete</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item text-success" href="javascript:void(0)">View</a></li>
-                                                            </ul>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><label class="custom-control custom-checkbox-md">
-                                                                <input type="checkbox" class="custom-control-input"
-                                                                    name="example-checkbox5" value="option5" checked="">
-                                                                <span class="custom-control-label"></span>
-                                                            </label></td>
-                                                        <td><img src="https://cdn.pixabay.com/photo/2017/07/08/02/16/house-2483336__340.jpg" alt=""></td>
-                                                        <td>US-272723</td>
-                                                        <td>Houston Shopping Center</td>
-                                                        <td>
-                                                            <a class="like" href="javascript:;">
-                                                                <span class="badge btn-light rounded-pill-Multi-Family rounded-pill py-2 px-3">
-                                                                    <i class="fe fe-circle me-1"></i>Single
-                                                                    Family</span>
-                                                            </a>
-                                                        </td>
-                                                        <td>
-                                                            <p style="font-weight: 600;" class="mb-1">1 Unit (s)</p>
-                                                            <span>220 Square Feet</span>
-                                                        </td>
-                                                        <td>
-                                                            <p style="font-weight: 600;" class="mb-1">9430 Research Blvd. Ste 2-350 Austin</p>
-                                                            <span>TX 78759</span>
-                                                        </td>
-                                                        <td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
-
-                                                            <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item text-primary" href="view-property.html">Edit</a></li>
-                                                                <li><a class="dropdown-item text-danger" href="javascript:void(0)">Delete</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item text-success" href="javascript:void(0)">View</a></li>
-                                                            </ul>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><label class="custom-control custom-checkbox-md">
-                                                                <input type="checkbox" class="custom-control-input"
-                                                                    name="example-checkbox5" value="option5" checked="">
-                                                                <span class="custom-control-label"></span>
-                                                            </label></td>
-                                                        <td><img src="https://cdn.pixabay.com/photo/2017/07/08/02/16/house-2483336__340.jpg" alt=""></td>
-                                                        <td>US-272723</td>
-                                                        <td>Houston Shopping Center</td>
-                                                        <td>
-                                                            <a class="like" href="javascript:;">
-                                                                <span class="badge btn-light rounded-pill-Multi-Family rounded-pill py-2 px-3">
-                                                                    <i class="fe fe-circle me-1"></i>Single
-                                                                    Family</span>
-                                                            </a>
-                                                        </td>
-                                                        <td>
-                                                            <p style="font-weight: 600;" class="mb-1">1 Unit (s)</p>
-                                                            <span>220 Square Feet</span>
-                                                        </td>
-                                                        <td>
-                                                            <p style="font-weight: 600;" class="mb-1">9430 Research Blvd. Ste 2-350 Austin</p>
-                                                            <span>TX 78759</span>
-                                                        </td>
-                                                        <td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
-
-                                                            <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item text-primary" href="view-property.html">Edit</a></li>
-                                                                <li><a class="dropdown-item text-danger" href="javascript:void(0)">Delete</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item text-success" href="javascript:void(0)">View</a></li>
-                                                            </ul>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
+                                                    </tr> -->
+                                                    <!-- <tr>
                                                         <td><label class="custom-control custom-checkbox-md">
                                                                 <input type="checkbox" class="custom-control-input"
                                                                     name="example-checkbox5" value="option5" checked="">
@@ -1475,7 +1386,7 @@
                                                                 <li><a class="dropdown-item text-success" href="javascript:void(0)">View</a></li>
                                                             </ul>
                                                         </td>
-                                                    </tr>
+                                                    </tr> -->
                                                 </tbody>
                                             </table>
                                         </div>
@@ -2048,7 +1959,7 @@
         <div class="container">
             <div class="row align-items-center flex-row-reverse">
                 <div class="col-md-12 col-sm-12 text-center">
-                    Copyright © <a href="javascript:void(0)">Spade, LLC.</a> <span id="year"></span>
+                    Copyright © <span id="year"></span> <a href="javascript:void(0)">Sash</a>. Designed with <span class="fa fa-heart text-danger"></span> by <a href="javascript:void(0)"> Spruko </a> All rights reserved.
                 </div>
             </div>
         </div>
@@ -2107,10 +2018,25 @@
     <!-- INTERNAL SELECT2 JS -->
     <script src="../assets/plugins/select2/select2.full.min.js"></script>
 
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+
     <!-- INTERNAL Data tables js-->
+    <!-- <script src="../assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
+    <script src="../assets/plugins/datatable/js/dataTables.bootstrap5.js"></script>
+    <script src="../assets/plugins/datatable/dataTables.responsive.min.js"></script> -->
     <script src="../assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
     <script src="../assets/plugins/datatable/js/dataTables.bootstrap5.js"></script>
+    <script src="../assets/plugins/datatable/js/dataTables.buttons.min.js"></script>
+    <script src="../assets/plugins/datatable/js/buttons.bootstrap5.min.js"></script>
+    <script src="../assets/plugins/datatable/js/jszip.min.js"></script>
+    <script src="../assets/plugins/datatable/pdfmake/pdfmake.min.js"></script>
+    <script src="../assets/plugins/datatable/pdfmake/vfs_fonts.js"></script>
+    <script src="../assets/plugins/datatable/js/buttons.html5.min.js"></script>
+    <script src="../assets/plugins/datatable/js/buttons.print.min.js"></script>
+    <script src="../assets/plugins/datatable/js/buttons.colVis.min.js"></script>
     <script src="../assets/plugins/datatable/dataTables.responsive.min.js"></script>
+    <script src="../assets/plugins/datatable/responsive.bootstrap5.min.js"></script>
+    <script src="../assets/js/table-data.js"></script>
 
     <!-- INTERNAL APEXCHART JS -->
     <script src="../assets/js/apexcharts.js"></script>
@@ -2197,11 +2123,11 @@
             // console.log(accordionItem)
             const formFields = accordionItem.querySelectorAll("input, select");
             let allFieldsFilled = true;
-            // console.log(formFields)
+            console.log(formFields)
             formFields.forEach(function(field) {
                 // console.log(field.type, field.value)
                 // console.log(field)
-                if (field.value === "") {
+                if (field.value === "" || field.value === "Choose...") {
                     allFieldsFilled = false;
                 }
 
@@ -2295,9 +2221,10 @@
             }
             let isValid = true;
             inputs.forEach(input => {
+                console.log(input)
                 validateInput(input);
 
-                if (input.value.trim() === '') {
+                if (input.value.trim() === '' || input.value.trim() === "Choose...") {
                     isValid = false;
                 }
             });
@@ -2329,6 +2256,30 @@
     <script>
         var selectedFiles = [];
         $(document).ready(function() {
+        // Handle change event of checkboxes
+        $('#propertyTable').DataTable({
+            paging: true,
+    searching: false,
+    info: false,
+    lengthChange: false,
+    pageLength: 10,
+    
+
+
+  });
+        $('input[type="checkbox"]').change(function() {
+            var columnIndex = $(this).closest('li').index() + 1; // Get the index of the corresponding <li> element
+            var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
+
+            // Toggle the visibility of the corresponding column
+            $('table').find('tr').each(function() {
+                var column = $(this).find('th:nth-child(' + columnIndex + '), td:nth-child(' + columnIndex + ')');
+                isColumnVisible ? column.show() : column.hide();
+            });
+        });
+            $("#succesModal").on('hide.bs.modal', function(){
+                getData()
+})
             // $('#succesModal').modal('show')
 
 
@@ -2523,7 +2474,7 @@
                 success: function(response) {
                     // console.log(1)
                     $('#succesModal').modal('show')
-                    getData()
+                    
                         // window.location = '../Landlord/properties-all.html';
                 },
                 error: function(xhr, status, error) {
@@ -2625,6 +2576,7 @@
                 });
             })
             // let data;
+            
         function getData(selectedFilter = "alphabets") {
 
             $("#global-loader").fadeIn("fast")
@@ -2688,7 +2640,7 @@
                     }
                     response.data[0] ?.forEach(function(property) {
                         var checkbox = '<td><label class="custom-control custom-checkbox-md">' +
-                            '<input type="checkbox" class="custom-control-input" name="example-checkbox5" value="option5" checked="">' +
+                            '<input type="checkbox" class="custom-control-input row-checkbox" name="example-checkbox5" value="option5" checked="">' +
                             '<span class="custom-control-label"></span>' +
                             '</label></td>';
 
@@ -2872,6 +2824,15 @@
     //   });
     // });
     $(document).ready(function() {
+        $('#header-checkbox').change(function() {
+            var isChecked = $(this).prop('checked'); // Check if the header checkbox is checked or unchecked
+
+            // Set the state of all row checkboxes based on the header checkbox
+            $('.row-checkbox').prop('checked', isChecked);
+        });
+        $("#responsive-datatable_info").remove()
+        $("#responsive-datatable_length").parent().parent().remove();
+        $("#responsive-datatable").css("padding","0")
       // City data based on state selection
     //   var cityData = {
     //     Sindh: ["Karachi", "Hyderabad", "Sukkur", "Larkana"],

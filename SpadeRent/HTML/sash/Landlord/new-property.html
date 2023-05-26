@@ -98,17 +98,16 @@
         .modal-footer .button {
             font-size: 0.938rem;
         }
-button.btn-close {
-            right: 1px !important;
+        button.btn-close {
+            right: 6px;
         }
         
         .btn-close {
             width: 1.8rem;
             opacity: 1;
             position: absolute;
-            top: 6px !important;
+            top: 6px;
         }
-
         
         .btn-close:hover,
         .btn-close:focus {
@@ -399,7 +398,7 @@ button.btn-close {
         .dark-mode .delete-file{
             color: #ffffff;
         }
-        button.btn-close {
+        /* button.btn-close {
             right: -7px;
         }
         
@@ -415,7 +414,7 @@ button.btn-close {
             color: #000;
             text-decoration: none;
             opacity: 1;
-        }
+        } */
         
         @media (max-width:992px) {
             .modal-footer button {
@@ -1763,12 +1762,13 @@ button.btn-close {
             const accordionItem = document.getElementById(id);
             // console.log(accordionItem)
             const formFields = accordionItem.querySelectorAll("input, select");
+            console.log(formFields)
             let allFieldsFilled = true;
             // console.log(formFields)
             formFields.forEach(function(field) {
                 // console.log(field.type, field.value)
-                // console.log(field)
-                if (field.value === "") {
+                
+                if (field.value === "" || field.value==="Choose...") {
                     allFieldsFilled = false;
                 }
 
@@ -1864,7 +1864,7 @@ button.btn-close {
             inputs.forEach(input => {
                 validateInput(input);
 
-                if (input.value.trim() === '') {
+                if (input.value.trim() === '' || input.value.trim() === 'Choose...') {
                     isValid = false;
                 }
             });
@@ -1873,6 +1873,9 @@ button.btn-close {
         }
         var selectedFiles = [];
         $(document).ready(function() {
+            $("#succesModal").on('hide.bs.modal', function(){
+                window.location="./properties-all.html"
+})
             $.ajax({
         url: 'http://api.geonames.org/searchJSON',
         method: 'GET',
@@ -2004,9 +2007,9 @@ button.btn-close {
                 },
 
                 success: function(response) {
-                    console.log(1)
-                    // $('#succesModal').modal('show')
-                    window.location="./properties-all.html"
+                    // console.log(1)
+                    $('#succesModal').modal('show')
+                    // window.location="./properties-all.html"
                         // window.location = '../Landlord/properties-all.html';
                 },
                 error: function(xhr, status, error) {

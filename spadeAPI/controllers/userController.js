@@ -573,10 +573,16 @@ exports.propertyDelete = async (req, res) => {
       try {
         const { propertyId } = req.query
         // console.log(req.body,req.query,1)
+        const property=await queryRunner(selectQuery("property", "id"), [propertyId]);
         const propertyUnitsResult = await queryRunner(selectQuery("propertyunits", "propertyID"), [propertyId]);
+        // console.log(propertyUnitsResult)
         if (propertyUnitsResult.length > 0) {
+          // propertyUnitsResult.append(property[0][0])
+          console.log(property[0][0].propertyName)
           res.status(200).json({
             data: propertyUnitsResult,
+            propertyName:property[0][0]?.propertyName,
+            propertyAddress:property[0][0].address,
             message: "property Units"
           })
         } else {

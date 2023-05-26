@@ -2048,10 +2048,13 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function({
-                    data
+                    data,propertyName,propertyAddress
                 }) {
+                    console.log(data)
+                    
                     const units = data[0];
-                    console.log(units)
+                    $("#property_name").text(propertyName)
+                    $("#property_address").text(propertyAddress)
                     const tableBody = $('#key-table tbody');
                     tableBody.empty();
                     let unitIdCell, statusCell, unitNumberInput, areaInput
