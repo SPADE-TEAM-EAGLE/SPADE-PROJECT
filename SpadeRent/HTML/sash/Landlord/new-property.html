@@ -104,16 +104,15 @@
         .modal-footer .button {
             font-size: 0.938rem;
         }
-        
         button.btn-close {
-            right: 1px !important;
+            right: 6px;
         }
         
         .btn-close {
             width: 1.8rem;
             opacity: 1;
             position: absolute;
-            top: 6px !important;
+            top: 6px;
         }
         
         .btn-close:hover,
@@ -411,8 +410,7 @@
         .dark-mode .delete-file {
             color: #ffffff;
         }
-        
-        button.btn-close {
+        /* button.btn-close {
             right: -7px;
         }
         
@@ -428,7 +426,7 @@
             color: #000;
             text-decoration: none;
             opacity: 1;
-        }
+        } */
         
         @media (max-width:992px) {
             .modal-footer button {
@@ -1752,12 +1750,13 @@
             const accordionItem = document.getElementById(id);
             // console.log(accordionItem)
             const formFields = accordionItem.querySelectorAll("input, select");
+            console.log(formFields)
             let allFieldsFilled = true;
             // console.log(formFields)
             formFields.forEach(function(field) {
                 // console.log(field.type, field.value)
-                // console.log(field)
-                if (field.value === "") {
+                
+                if (field.value === "" || field.value==="Choose...") {
                     allFieldsFilled = false;
                 }
 
@@ -1853,7 +1852,7 @@
             inputs.forEach(input => {
                 validateInput(input);
 
-                if (input.value.trim() === '') {
+                if (input.value.trim() === '' || input.value.trim() === 'Choose...') {
                     isValid = false;
                 }
             });
@@ -1862,6 +1861,9 @@
         }
         var selectedFiles = [];
         $(document).ready(function() {
+            $("#succesModal").on('hide.bs.modal', function(){
+                window.location="./properties-all.html"
+})
             $.ajax({
                     url: 'http://api.geonames.org/searchJSON',
                     method: 'GET',
@@ -1976,36 +1978,33 @@
                 // Get the selected files
                 var files = $('#fileInput')[0].files;
 
-                // Add the files to the FormData object
-                for (var i = 0; i < files.length; i++) {
-                    formData.append('image', files[i]);
+            // Send the form data to the server using AJAX
+            $.ajax({
+                url: 'http://localhost:3000/api/spade/property',
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+
+                success: function(response) {
+                    // console.log(1)
+                    $('#succesModal').modal('show')
+                    // window.location="./properties-all.html"
+                        // window.location = '../Landlord/properties-all.html';
+                },
+                error: function(xhr, status, error) {
+                    window.alert('Error: ' + error);
                 }
 
                 // Send the form data to the server using AJAX
-                $.ajax({
-                    url: 'http://localhost:3000/api/spade/property',
-                    type: 'POST',
-                    data: formData,
-                    contentType: false,
-                    processData: false,
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-
-                    success: function(response) {
-                        console.log(1)
-                            // $('#succesModal').modal('show')
-                        window.location = "./properties-all.html"
-                            // window.location = '../Landlord/properties-all.html';
-                    },
-                    error: function(xhr, status, error) {
-                        window.alert('Error: ' + error);
-                    }
-                });
+                
 
 
             });
-
+            })
             function updateSelectedFilesContainer() {
                 var selectedFilesContainer = $('.file-grid');
                 selectedFilesContainer.empty();

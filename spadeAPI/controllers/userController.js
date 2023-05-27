@@ -734,8 +734,181 @@ const tenantsInsert = await queryRunner(UpdateTenants, [hashPassword, currentDat
         } catch (error) {
           res.send("Error occurs in Sending Tenants welcome email " + error); // Sending error response
         }
+      }
+    //  ############################# View Property End ############################################################
+    exports.getpropertyUnits = async (req, res) => {
+      try {
+        const { propertyId } = req.query
+        // console.log(req.body,req.query,1)
+        const property=await queryRunner(selectQuery("property", "id"), [propertyId]);
+        const propertyUnitsResult = await queryRunner(selectQuery("propertyunits", "propertyID"), [propertyId]);
+        // console.log(propertyUnitsResult)
+        if (propertyUnitsResult.length > 0) {
+          // propertyUnitsResult.append(property[0][0])
+          console.log(property[0][0].propertyName)
+          res.status(200).json({
+            data: propertyUnitsResult,
+            propertyName:property[0][0]?.propertyName,
+            propertyAddress:property[0][0].address,
+            message: "property Units"
+          })
+        } else {
+          res.status(400).json({
+            message: "No data found"
+          })
+        }
+      } catch (error) {
+        res.send("Error Get Property Units");
+        console.log(req.body)
+        console.log(error)
+      }
+          }
+          //  ############################# Get Property Units End ############################################################
+    
+    
+    
+        //  ############################# Update Property Units Start ############################################################
+    exports.putPropertyUnitsUpdates = async (req, res) => {
+      try {
+        console.log(req.body)
+        const { 
+          id,
+          propertyId,
+          unitNumber,
+          Area,
+          unitDetails
+         } = req.body
+        //  unitDetails=unitDetails.length>0?unitDetails:""
+        let status = "Occupied";
+        const propertyUnitsResult = await queryRunner(updatePropertyUnits, [unitNumber, Area, unitDetails, status, id, propertyId]);
+        if (propertyUnitsResult[0].affectedRows > 0) {
+          res.status(200).json({
+            data: propertyUnitsResult,
+            message: "property Units updated successful"
+          })
+        } else {
+          res.status(400).json({
+            message: "No data found"
+          })
+        }
+      } catch (error) {
+        res.send("Error Get Property Units update");
+        console.log(req.body)
+        console.log(error)
+      }
+          }
+          //  ############################# Update Property Units End ############################################################
+          //  ############################# Create tenants Start ############################################################
+exports.createTenants = async (req, res) => {
+  try {
+    const {
+      landlordID,
+      firstName,
+      lastName,
+      companyName,
+      email,
+      phoneNumber,
+      address,
+      city,
+      state,
+      zipcode,
+      propertyID,
+      propertyUnitID,
+      rentAmount,
+      gross_or_triple_lease,
+      baseRent,
+      tripleNet,
+      leaseStartDate,
+      leaseEndDate,
+      increaseRent
+    } = req.body
+
+    const tenantsCheck = await queryRunner(selectQuery("tenants", "email"), [email]);
+    if (tenantsCheck[0].length > 0) {
+      // res.send("email found");
+      // const tenantsInsert = await queryRunner(UpdateTenants, [landlordID, firstName, lastName, companyName, email, phoneNumber, address, city, state, zipcode, propertyID, propertyUnitID, rentAmount, gross_or_triple_lease, baseRent, tripleNet, leaseStartDate, leaseEndDate, increaseRent, tenantPassword]);
+      // if (tenantsInsert[0].affectedRows > 0) {
+      //   res.status(200).json({
+      //     message: "Tenants Updated Successful",
+      //     data: tenantsInsert[0]
+      //   })
+
+      // } else {
+      //   res.status(400).json({
+      //     message: "email found but never change something"
+      //   })
+      // }
+      res.status(400).json({
+        message: `Tenants Already exist on this email ${email} `,
+      })
+    } else {
+      currentDate = new Date();
+      const ran = Math.floor(100000 + Math.random() * 900000);
+          const tenantPassword = "Spade" + ran;
+    const hashPassword = await hashedPassword(tenantPassword);
+
+      const tenantsInsert = await queryRunner(insertTenants, [landlordID, firstName, lastName, companyName, email, phoneNumber, address, city, state, zipcode, propertyID, propertyUnitID, rentAmount, gross_or_triple_lease, baseRent, tripleNet, leaseStartDate, leaseEndDate, increaseRent, hashPassword, currentDate]);
+      if (tenantsInsert[0].affectedRows > 0) {
+        res.status(200).json({
+          message: "Tenants save Successful",
+          data: tenantsInsert[0]
+        })
+      } else {
+        res.status(400).json({
+          message: "data not save"
+        })
+      }
+    }
+  }
+  catch (error) {
+    res.send("Error occurs in creating Tenants  " + error)
+  }
+}
+      //  ############################# Create tenants END ############################################################
+
+
+      //  ############################# tenant email send Start  ############################################################
+
+      exports.sendInvitationLink = async (req, res) => {
+        const { tenantID } = req.body;
+        try {
+          const selectTenantResult = await queryRunner(selectQuery("tenants", "id"), [tenantID])
+    if (selectTenantResult[0].length > 0) {
+
+      const name = selectTenantResult[0][0].firstName; 
+      const email = selectTenantResult[0][0].email; 
+      const currentDate = new Date();
+      const ran = Math.floor(100000 + Math.random() * 900000);
+      const tenantPassword = "Spade" + ran;
+const hashPassword = await hashedPassword(tenantPassword); 
+                const mailSubject = "Spade Welcome Email";
+ 
+
+const tenantsInsert = await queryRunner(UpdateTenants, [hashPassword, currentDate, tenantID]);
+      if (tenantsInsert[0].affectedRows > 0) {
+        await sendMail(email, mailSubject, tenantPassword, name); 
+        // console.log(tenantPassword);
+        res.status(200).json({
+          message: "Tenants Welcome email send Successful",
+          data: tenantsInsert[0]
+        })
+
+      } else {
+        res.status(400).json({
+          message: "welcome email not sent to tenant "
+        })
+      }
+    }else{
+      return res.status(400).send('Tenant is not exists');
+    }
+
+          // res.send("Email sent successfully"); // Sending success response
+        } catch (error) {
+          res.send("Error occurs in Sending Tenants welcome email " + error); // Sending error response
+        }
       };
           
+      //  ############################# tenant email send END  ############################################################
       //  ############################# tenant email send END  ############################################################
 
       //  ############################# verify Mail Check Start  ############################################################
