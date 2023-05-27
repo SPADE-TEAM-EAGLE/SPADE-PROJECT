@@ -76,7 +76,7 @@ exports.getUser = (req, res) => {
 }
 
 exports.Signin = async function (req, res) {
-  const { email, password, tenant } = req.body;
+  const { email, password, tenant } = req.query;
   // console.log(1)
   // let selectResult;
   try {
@@ -338,7 +338,7 @@ exports.property = async (req, res) => {
 //  ############################# Get Property Start ############################################################
 
 exports.getproperty = async (req, res) => {
-  const {userId} = req.body
+  const {userId} = req.user
   try {
 
     console.log("Step 1: Fetching property data...");
@@ -386,7 +386,7 @@ exports.getproperty = async (req, res) => {
 //  ############################# Get Property ByID Start ############################################################
 exports.getpropertyByID = async (req, res) => {
   try {
-    const { id } = req.body
+    const { id } = req.user
     // const propertycheckresult = await queryRunner(selectQuery("property","propertyName","address"),[propertyName,address])
     const PropertyByIDResult = await queryRunner(selectQuery("property", "id"), [id]);
     if (PropertyByIDResult.length > 0) {
@@ -544,9 +544,10 @@ exports.propertyDelete = async (req, res) => {
       //  ############################# View Property Start ############################################################
       exports.propertyView = async (req, res) => {
         try {
-          const { propertyId } = req.query
+          const { propertyId } = req.body
           // console.log(req.query)
           // check property in database
+          console.log(propertyId);
           const propertyViewResult = await queryRunner(selectQuery('property', 'id'), [propertyId]);
           if (propertyViewResult.length > 0) {
             // check property Images in database
@@ -588,7 +589,7 @@ exports.propertyDelete = async (req, res) => {
     }
   } catch (error) {
     res.send("Error from Viewing Property ");
-    console.log(req.body)
+    // console.log(req.body)
     console.log(error)
   }
 }
@@ -717,6 +718,40 @@ exports.createTenants = async (req, res) => {
   }
 }
       //  ############################# Create tenants END ############################################################
+
+
+      //  ############################# Tenant Increase Rent Start ############################################################
+exports.tenantIncreaseRent = async (req, res) => {
+  try {
+    const {
+      id,
+      tenantID,
+      propertyID,
+      date,
+      increaseRentAmount
+    } = req.body
+    console.log(id);
+    console.log(increaseRentAmount);
+
+    for(let i = 0; i > increaseRentAmount.length; i++){
+      console.log(increaseRentAmount.length);
+    }
+    // const propertyUnitsResult = await queryRunner(updatePropertyUnits, [unitNumber, Area, unitDetails, status, id, propertyID]);
+    // if (propertyUnitsResult[0].affectedRows > 0) {
+    //   res.status(200).json({
+    //     data: propertyUnitsResult,
+    //     message: "property Units updated successful"
+    //   })
+    // } else {
+    //   res.status(400).json({
+    //     message: "No data found"
+    //   })
+    // }
+  } catch (error) {
+    res.send("Error Get Tenant Increase Rent");
+  }
+}
+//  ############################# Tenant Increase Rent End ############################################################
 
 
       //  ############################# tenant email send Start  ############################################################
