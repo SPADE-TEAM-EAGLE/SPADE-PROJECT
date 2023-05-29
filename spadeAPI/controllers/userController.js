@@ -275,6 +275,35 @@ exports.resendCode = async (req, res) => {
 
 
 
+//  ############################# Get Pricing Plan Start ############################################################
+exports.pricingPlan = async (req, res) => {
+  try {
+    const pricingPlanResult = await queryRunner(selectQuery("plan"));
+    if (pricingPlanResult.length > 0) {
+      const data = JSON.parse(JSON.stringify(pricingPlanResult));
+      res.status(200).json({
+        data: data,
+        message: "property By ID"
+      })
+    } else {
+      res.status(400).json({
+        message: "No data found"
+      })
+    }
+  } catch (error) {
+    res.send("Error Get Property By ID");
+    // console.log(req.body)
+    console.log(error)
+  }
+}
+//  ############################# Get Pricing Plan End ############################################################
+
+
+
+
+
+
+
 //  ############################# Property Start ############################################################
 
 exports.property = async (req, res) => {
