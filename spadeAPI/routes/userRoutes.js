@@ -17,18 +17,24 @@ router.post('/resendCode', userController.resendCode);
 router.post('/property', [verifyToken,upload] , userController.property);
 // router.post('/property', upload , userController.property);
 router.get('/allProperty',verifyToken, userController.getproperty);
-// router.get('/property',verifyToken, userController.getpropertyByID);
 // router.get('/allProperty', userController.getproperty);
+router.get('/PropertyUnits',verifyToken,  userController.getpropertyUnits);
+router.put('/PropertyUnitsUpdates',verifyToken,  userController.putPropertyUnitsUpdates);
 router.delete('/propertyDelete', verifyToken,userController.propertyDelete);
-// router.put('/updateProperty', verifyToken ,userController.propertyUpdate);
-// router.put('/updateProperty', userController.updateproperty);
-// // router.post('/property', upload , userController.property);
-// router.get('/allProperty', userController.getproperty);
-// router.delete('/deleteProperty', userController.propertyDelete);
 router.put('/updateProperty', [verifyToken,upload], userController.propertyUpdate);
+// router.get('/viewProperty' ,userController.propertyView);
 router.get('/viewProperty', verifyToken,userController.propertyView);
 router.get('/PropertyUnits',verifyToken,  userController.getpropertyUnits);
 router.put('/PropertyUnitsUpdates',verifyToken,  userController.putPropertyUnitsUpdates);
 router.post('/tenants',verifyToken,userController.createTenants);
+router.post('/sendInvitationLink', verifyToken, userController.sendInvitationLink); 
+router.post('/tenantIncreaseRent' , userController.tenantIncreaseRent); 
+// router.get('/verifyMailCheck',verifyToken,  userController.verifyMailCheck);
+router.get('/verifyMailCheck', userController.verifyMailCheck);
+router.put('/resetEmailTenant', userController.createResetEmailTenant);
+router.post('/verifyResetEmailCodeTenant', userController.verifyResetEmailCodeTenant);
+router.put('/updatePasswordTenant', userController.updatePasswordTenant);
 
 module.exports = router;
+
+

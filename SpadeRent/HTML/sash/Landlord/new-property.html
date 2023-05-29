@@ -16,7 +16,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="../assets/images/brand/favicon.ico" />
 
     <!-- TITLE -->
-    <title>Sash – Bootstrap 5 Admin & Dashboard Template </title>
+    <title>New Property - SpadeRent</title>
 
     <!-- BOOTSTRAP CSS -->
     <link id="style" href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -38,6 +38,24 @@
             visibility: hidden;
         }
         
+        .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar {
+            width: 7px;
+            /* Width of the scrollbar */
+        }
+        
+        .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb {
+            background-color: rgb(136, 136, 136, 0.2);
+            /* Color of the scrollbar thumb */
+            border-radius: 7px;
+            transition: all 1ms;
+            /* Rounded corners for the thumb */
+        }
+        
+        .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb:hover {
+            background-color: rgb(136, 136, 136, 0.5);
+            /* Color of the scrollbar thumb on hover */
+        }
+        
         .custom-file-input::before {
             content: 'Select Files';
             display: inline-block;
@@ -52,6 +70,56 @@
         
         .custom-file-input:hover::before {
             background: #0069d9;
+        }
+        
+        .dark-mode .btn-close {
+            color: white;
+        }
+        
+        .dark-mode .selected-files span {
+            display: inline-block;
+            margin-right: 0;
+            padding: 4px 8px;
+            background: transparent;
+            color: white;
+            border-radius: 4px;
+        }
+        
+        .dark-mode .custom-file-label {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 12px;
+            background-color: transparent;
+        }
+        
+        .modal-footer .button-left {
+            background-color: #1F1F1F;
+            margin: 0rem 1rem;
+            color: white;
+        }
+        
+        .modal-footer .button {
+            font-size: 0.938rem;
+        }
+        button.btn-close {
+            right: 6px;
+        }
+        
+        .btn-close {
+            width: 1.8rem;
+            opacity: 1;
+            position: absolute;
+            top: 6px;
+        }
+        
+        .btn-close:hover,
+        .btn-close:focus {
+            color: #000;
+            text-decoration: none;
+            opacity: 1;
         }
         
         .custom-file-input:active::before {
@@ -191,6 +259,21 @@
             color: white;
         }
         
+        .modal-footer button,
+        .modal-footer a {
+            border-radius: 2.75rem;
+            padding: 4px 30px;
+            font-family: 'Figtree';
+            font-style: normal;
+            font-weight: 600;
+            line-height: 1.875rem;
+            font-size: 0.77rem;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
+            /* identical to box height, or 120% */
+            letter-spacing: 0.0145455em;
+            /* font-size: 0.938rem; */
+        }
+        
         .modal-footer button {
             border-radius: 2.75rem;
             padding: 4px 30px;
@@ -247,16 +330,19 @@
         .rounded-pill-Single-Family {
             color: #4A4AFF !important;
             background: #E6E6F2 !important;
+            font-weight: bold;
         }
         
         .rounded-pill-Multi-Family {
             color: #0BAAB8 !important;
             background: #C8F3F7 !important;
+            font-weight: bold;
         }
         
         .rounded-pill-Multi-Commercial {
             background: #FFF9E5 !important;
             color: #F5CA38 !important;
+            font-weight: bold;
         }
         
         .table-primary {
@@ -274,15 +360,14 @@
         .file-details {
             padding: 10px;
         }
-        
-        .delete-file {
+        /* .delete-file {
             position: absolute;
             top: 5px;
             right: 5px;
             cursor: pointer;
             font-size: 18px;
             color: #ff0000;
-        }
+        } */
         
         .btn-group>.btn-group:not(:last-child)>.btn,
         .btn-group>.btn:not(:last-child):not(.dropdown-toggle) {
@@ -314,14 +399,18 @@
         
         .delete-file {
             position: absolute;
-            top: 0px;
-            right: 5px;
+            top: -9px;
+            right: -4px;
+            font-weight: bolder;
             cursor: pointer;
             font-size: 13px;
-            color: #000;
+            color: #000000;
         }
         
-        button.btn-close {
+        .dark-mode .delete-file {
+            color: #ffffff;
+        }
+        /* button.btn-close {
             right: -7px;
         }
         
@@ -337,7 +426,7 @@
             color: #000;
             text-decoration: none;
             opacity: 1;
-        }
+        } */
         
         @media (max-width:992px) {
             .modal-footer button {
@@ -358,7 +447,7 @@
                 height: 220px;
             }
             #nav_links {
-                top: 165px;
+                top: 153px;
             }
         }
         
@@ -403,7 +492,7 @@
                 height: 220px;
             }
             #nav_links {
-                top: 165px;
+                top: 153px;
             }
         }
         
@@ -458,8 +547,37 @@
     </div>
     <!-- /GLOBAL-LOADER -->
     <!-- Modal -->
-    <div class="modal fade" id="largemodal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg " role="document">
+    <div class="modal fade" id="succesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><img src="../assets/images/cross-circle.svg" /></span>
+                    </button>
+                </div>
+                <div class="modal-body succes-modal">
+                    <div class="text-justify ps-2 border-model-line">
+                        <h2 class="modal-title d-flex align-items-center ps-1">
+                            <strong class="color-primary">Success!&nbsp;</strong>
+                            <i class="fi fi-rs-check-circle text-success"></i>
+                        </h2>
+                        <a href="javascript:void(0)" class="btn btn-outline-default btn-pill ms-1 my-2" style='background-color:#1467B0;color: white;'> <i class="fi fi-rs-pencil"></i> EDIT PROPERTY UNITS</a>
+                        <a class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal">
+                            <i class="fi fi-rs-plus-small" style="vertical-align: middle;"></i>Add Tenants
+                        </a>
+                        <p class="ms-2 mb-0 text-start">Your Property has been successfully added.</p>
+                        <p class="ms-2 text-start">Please add tenant to this property.</p>
+                    </div>
+
+                </div>
+                <div class="modal-footer" style="border-top: 0">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="text-justify ps-2 border-model-line">
@@ -468,13 +586,13 @@
                             from condos and single-family homes to retail stores and parking lots.</span>
                     </div>
                     <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><img src="../assets/images/cross-circle.svg" /></span>
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="accordion-item mb-4" id="accordion-item1">
                         <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button" id="accordian-button-1" type="button" data-bs-toggle="collapse" onclick="checkFieldsFilled('accordion-item1')" id="accordion-button1" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <button class="accordion-button text-white" id="accordian-button-1" type="button" data-bs-toggle="collapse" onclick="checkFieldsFilled('accordion-item1')" id="accordion-button1" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                 <span class="m-0 me-4 fs-1" style="font-weight: bold;">01</span>
                                 <h3 class="m-0"><strong>Property Information</strong> <i class="fi fi-rs-pencil"></i><i
                                         class="fi fi-rs-angle-circle-down chevron icon"></i>
@@ -520,9 +638,10 @@
                                         <span class="text-danger d-none">Address is required!</span>
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="inputCity" class="form-label fw-bold">City <spnan
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="city">
+                                        <label for="inputCity" class="form-label fw-bold">City <span class="text-danger">*</span></label>
+                                        <select id="city" class="form-select form city-select">
+                                          <option selected>Choose...</option>
+                                        </select>
                                         <span class="text-danger d-none">City is required!</span>
                                     </div>
                                     <div class="col-md-4">
@@ -548,10 +667,9 @@
                                                 class="text-danger">*</span></label>
                                         <select id="propertyType" class="form-select form">
                                             <option selected>Choose...</option>
-                                            <option>Sindh</option>
-                                            <option>Punjab</option>
-                                            <option>Balochistan</option>
-                                            <option>KPK</option>
+                                            <option>Single Family</option>
+                                            <option>Multi-Family</option>
+                                            <option>Multi-Commercial</option>
                                         </select>
                                         <span class="text-danger d-none">Property Type is required!</span>
                                     </div>
@@ -567,7 +685,7 @@
                     </div>
                     <div class="accordion-item" id="accordion-item2">
                         <h2 class="accordion-header" id="headingTwo">
-                            <button class="accordion-button collapsed" onclick="checkFieldsFilled('accordion-item2')" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <button class="accordion-button collapsed text-white" onclick="checkFieldsFilled('accordion-item2')" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                 <span class="m-0 me-4 fs-1" style="font-weight: bold;">02</span>
                                 <h3 class="m-0"><strong>Property Unit Information</strong> <i
                                         class="fi fi-rs-pencil"></i><i
@@ -578,7 +696,7 @@
                         <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                             <form class="row g-3 m-1" enctype="multipart/form-data">
 
-                                <div class="col-12 mb-1">
+                                <div class="col-12 mb-3">
                                     <label for="inputAddress" class="form-label fw-bold">Number of Units<span
                                             class="text-danger">*</span></label>
                                     <input type="text" class="form-control px-2" id="units" placeholder=" ">
@@ -589,39 +707,15 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-dark button-left me-auto" data-bs-dismiss="modal" id='draft' disabled>Save as
+                    <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
                         Draft</button>
-                    <button class="btn btn-transparent text-dark" style='background-color:#FFFFFF; border: 3px solid #1467B0;' data-bs-dismiss="modal" id='close'>Close</button>
-                    <button class="btn text-light" style='background-color:#1467B0;' id='next' disabled>Next</button>
-                </div>
+                    <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close'>Close</button>
+                    <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
+                    <a href="javascript:void(0)" class="btn text-light button disabled" style="background-color:#1467B0;" id="next">Next</a> </div>
             </div>
         </div>
     </div>
-    <!-- MODAL EFFECTS -->
-    <div class="modal fade" id="modaldemo8">
-        <div class="modal-dialog modal-dialog-centered text-center" role="document">
-            <div class="modal-content modal-content-demo">
-                <div class="modal-header">
-                    <div class="text-justify">
-                        <h2 class="modal-title">Create <strong class="color-primary">New Property</strong></h2>
-                        <span class="">Spade Rent allows you to add a range of commercial and residential properties,
-                            from condos and single-family homes to retail stores and parking lots.</span>
-                    </div>
 
-                    <button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span
-                            aria-hidden="true">&times;</span></button>
-                </div>
-                <div class="modal-body">
-                    <h6>Why We Use Electoral College, Not Popular Vote</h6>
-                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to
-                        using 'Content here, content here', making it look like readable English.</p>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary">Save changes</button> <button class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
     <!-- MODAL EFFECTS -->
 
     <!-- PAGE -->
@@ -802,17 +896,21 @@
                                 <ul class="slide-menu">
                                     <li class="side-menu-label1"><a href="javascript:void(0)">Properties</a></li>
                                     <li><a href="properties-all.html" class="slide-item">All</a></li>
-                                    <li><a href="new-property.html" class="slide-item">Draft</a></li>
+                                    <li><a href="javascript:void(0)" class="slide-item">Draft</a></li>
                                 </ul>
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="add-tenant.html"><i
                                     class="side-menu__icon fi fi-rs-cabin"></i><span class="side-menu__label">Tenants</span>
-                                    <!-- <i
-                                    class="angle fe fe-chevron-right"></i> -->
+                                    <i
+                                    class="angle fe fe-chevron-right"></i>
                                    
                                    </a>
-
+                                <ul class="slide-menu">
+                                    <li class="side-menu-label1"><a href="javascript:void(0)">Tenants</a></li>
+                                    <li><a href="add-tenant.html" class="slide-item">All</a></li>
+                                    <li><a href="javascript:void(0)" class="slide-item">Draft</a></li>
+                                </ul>
                             </li>
 
                             <!-- <li class="sub-category">
@@ -820,10 +918,15 @@
                                    </li> -->
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="invoices.html"><i
-                                    class="side-menu__icon fi fi-rs-file-invoice-dollar"></i><span class="side-menu__label">Invoicing</span>
-                                    <!-- <i
-                                    class="angle fe fe-chevron-right"></i> -->
-                                   </a>
+                                            class="side-menu__icon fi fi-rs-file-invoice-dollar"></i><span class="side-menu__label">Invoicing</span>
+                                            <i
+                                            class="angle fe fe-chevron-right"></i>
+                                           </a>
+                                <ul class="slide-menu">
+                                    <li class="side-menu-label1"><a href="javascript:void(0)">Invoicing</a></li>
+                                    <li><a href="create-invoicing.html" class="slide-item">All</a></li>
+                                    <li><a href="javascript:void(0)" class="slide-item">Draft</a></li>
+                                </ul>
 
                             </li>
                             <li class="slide">
@@ -837,13 +940,17 @@
                             </li>
 
                             <li class="slide">
-                                <a class="side-menu__item" data-bs-toggle="slide" href="tasks.php"><i
-                                    class="side-menu__icon fi fi-rs-list-check"></i><span class="side-menu__label">Tasks</span>
-                                    <!-- <i
-                                    class="angle fe fe-chevron-right"></i> -->
-                                   
-                                   </a>
-
+                                <a class="side-menu__item" data-bs-toggle="slide" href="view-tasks.html"><i
+                                        class="side-menu__icon fi fi-rs-list-check"></i><span class="side-menu__label">Tasks</span>
+                                        <i
+                                        class="angle fe fe-chevron-right"></i>
+                                       
+                                       </a>
+                                <ul class="slide-menu">
+                                    <li class="side-menu-label1"><a href="javascript:void(0)">Invoicing</a></li>
+                                    <li><a href="create-tasks.html" class="slide-item">All</a></li>
+                                    <li><a href="new-tasks.html" class="slide-item">Draft</a></li>
+                                </ul>
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
@@ -890,7 +997,7 @@
                                 <div class="row">
                                     <div class="col-lg-9">
                                         <h3 class="page-titlee text-white" style="font-weight: 100; margin-bottom: 0px;">Welcome to Spade Portal</h3>
-                                        <h1 class="page-titlee text-white" style="font-weight: 700;">John Clark</h1>
+                                        <h1 class="page-titlee text-white" style="font-weight: 700;" id="user-name">John Clark</h1>
                                         <a href="javascript:void(0)" id="email_verification" class="btn btn-primary btn-pill btn-xl email-verification-btn"><i
                                                 class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
                                             verification &nbsp; <i
@@ -915,8 +1022,9 @@
                                     <div class="card-footer text-center border-0">
                                         <div class="row">
                                             <div class="text-center">
-                                                <a href="javascript:void(0)" class="btn btn-primary btn-pill btn-xl font-weight-bold">+ ADD NEW PROPERTY</a>
-                                            </div>
+                                                <button type="button" class="btn btn-primary btn-pill btn-xl font-weight-bold" id="add_property_btn" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal"><i
+                                                    class="fe fe-plus me-2"></i><strong>ADD NEW
+                                                    PROPERTY</strong></button> </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1486,7 +1594,7 @@
         <div class="container">
             <div class="row align-items-center flex-row-reverse">
                 <div class="col-md-12 col-sm-12 text-center">
-                    Copyright © <span id="year"></span> <a href="javascript:void(0)">Sash</a>. Designed with <span class="fa fa-heart text-danger"></span> by <a href="javascript:void(0)"> Spruko </a> All rights reserved.
+                    Copyright © <a href="javascript:void(0)">Spade, LLC.</a> <span id="year"></span>
                 </div>
             </div>
         </div>
@@ -1587,6 +1695,366 @@
 
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
-   </body>
+
+
+    <script>
+        // Get the user's preferred color scheme
+        const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        // Get a reference to the logo element
+        const logo = document.getElementById('logo');
+
+        // Set the logo source file based on the user's preferred color scheme
+        if (userPrefersDark) {
+            // console.log(document.getElementById("myModal_delete"))
+            logo.src = '../assets/header-img/comment.svg';
+        } else {
+            logo.src = '../assets/header-img/question.svg';
+        }
+    </script>
+    <script>
+        const form1Inputs = document.querySelectorAll('#accordion-item1 .form');
+        form1Inputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                if (validateInput(input)) {
+                    input.nextElementSibling.classList.add('d-none');
+                } else {
+                    input.nextElementSibling.classList.remove('d-none');
+                }
+            });
+        });
+
+        // Attach event listeners to input fields in second form
+        const form2Inputs = document.querySelectorAll('#accordion-item2 .form-control');
+        form2Inputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                // console.log(input.nextElementSibling)
+                if (validateInput(input)) {
+                    input.nextElementSibling.classList.add('d-none');
+                } else {
+                    input.nextElementSibling.classList.remove('d-none');
+                }
+            });
+        });
+        counter = 0
+        const draftButton = document.getElementById('draft');
+        const nextButton = document.getElementById('next');
+        let isForm1Valid = false;
+        let isForm2Valid = false;
+
+        function checkFieldsFilled(id) {
+            if (id === "accordion-item2" && counter === 0) {
+                counter += 1
+                return
+            }
+            const accordionItem = document.getElementById(id);
+            // console.log(accordionItem)
+            const formFields = accordionItem.querySelectorAll("input, select");
+            console.log(formFields)
+            let allFieldsFilled = true;
+            // console.log(formFields)
+            formFields.forEach(function(field) {
+                // console.log(field.type, field.value)
+                
+                if (field.value === "" || field.value==="Choose...") {
+                    allFieldsFilled = false;
+                }
+
+            });
+
+            const chevronIcon = accordionItem.querySelector(".icon");
+
+            if (accordionItem.querySelector(".accordion-button").classList.contains("collapsed")) {
+                if (allFieldsFilled) {
+                    chevronIcon.classList.remove("fi-rs-exclamation");
+                    chevronIcon.classList.remove("chevron");
+                    chevronIcon.classList.add("fi-rs-check-circle");
+                    chevronIcon.classList.add("tick");
+                } else {
+                    chevronIcon.classList.remove("fi-rs-check-circle");
+                    chevronIcon.classList.remove("chevron");
+                    chevronIcon.classList.add("fi-rs-exclamation");
+                    chevronIcon.classList.add("cross");
+                }
+            } else {
+                chevronIcon.classList.remove("fi-rs-check-circle");
+                // chevronIcon.classList.remove("chevron");
+                chevronIcon.classList.add("chevron");
+                chevronIcon.classList.remove("fi-rs-exclamation");
+                chevronIcon.classList.remove("cross");
+                chevronIcon.classList.remove("tick");
+            }
+            if (id === "accordion-item1") {
+                // console.log(1)
+                form1Inputs.forEach(input => {
+                    if (validateInput(input)) {
+
+                        input.nextElementSibling.classList.add('d-none');
+                    } else {
+                        input.nextElementSibling.classList.remove('d-none');
+                    }
+                });
+            } else if (id === "accordion-item2") {
+                // console.log(form2Inputs)
+                form2Inputs.forEach(input => {
+                    if (validateInput(input)) {
+                        input.nextElementSibling.classList.add('d-none');
+                    } else {
+                        input.nextElementSibling.classList.remove('d-none');
+                    }
+                });
+            }
+            if (id === 'accordion-item1') {
+                isForm1Valid = validateForm(document.getElementById('accordion-item1'));
+            } else if (id === 'accordion-item2') {
+                isForm2Valid = validateForm(document.getElementById('accordion-item2'));
+            }
+            // const isForm1Valid = validateForm(document.getElementById('accordion-item1'));
+            // const isForm2Valid = validateForm(document.getElementById('accordion-item2'));
+
+            // Enable/Disable buttons based on form validity
+            if (isForm1Valid && isForm2Valid) {
+                draftButton.disabled = false;
+                nextButton.classList.remove("disabled")
+            } else {
+                // console.log(1)
+                draftButton.disabled = true;
+                nextButton.classList.add("disabled")
+            }
+        }
+
+        function validateInput(inputElement) {
+            // console.log(inputElement)
+            if (inputElement.value.trim() === '' || inputElement.value.trim() === "Choose...") {
+                inputElement.style.border = '1px solid red';
+
+                return false
+                    // inputElement.siblings('.text-danger').show();
+            } else {
+
+                inputElement.style.border = '1px solid #ced4da'
+                return true
+                    // inputElement.siblings('.text-danger').hide();
+            }
+        }
+
+        function validateForm(form) {
+            let inputs
+                // console.log(form.id)
+            if (form.id === "accordion-item1") {
+                // console.log(form.id)
+                inputs = form.querySelectorAll('.form');
+            } else if (form.id === "accordion-item2") {
+                // console.log(form.id)
+                inputs = form.querySelectorAll('.form-control');
+            }
+            let isValid = true;
+            inputs.forEach(input => {
+                validateInput(input);
+
+                if (input.value.trim() === '' || input.value.trim() === 'Choose...') {
+                    isValid = false;
+                }
+            });
+
+            return isValid;
+        }
+        var selectedFiles = [];
+        $(document).ready(function() {
+            $("#succesModal").on('hide.bs.modal', function(){
+                window.location="./properties-all.html"
+})
+            $.ajax({
+                    url: 'http://api.geonames.org/searchJSON',
+                    method: 'GET',
+                    data: {
+                        country: 'PK', // Country code for Pakistan
+                        maxRows: 500, // Maximum number of cities to retrieve (adjust as needed)
+                        username: 'developedmatz', // Replace with your GeoNames username
+                        style: 'full'
+                    },
+                    success: function(result) {
+                        // Handle state selection change
+                        $('#state').change(function() {
+                            var selectedState = $(this).val();
+                            if (selectedState === "KPK") {
+                                selectedState = "Khyber Pakhtunkhwa"
+                            }
+
+                            var cityDropdown = $('#city');
+
+                            // Clear existing options
+                            cityDropdown.empty();
+                            cityDropdown.append($('<option></option>').text("Choose..."));
+                            cities = []
+                            if (selectedState !== "Choose...") {
+                                // Populate city options based on selected state
+                                count = 0
+                                data = result.geonames
+                                for (item of data) {
+                                    if (item.adminName1 === selectedState) {
+                                        cities.push(item.name)
+                                        count++
+                                    }
+                                    if (count === 10) {
+                                        break
+                                    }
+                                }
+
+                                cities.forEach(function(city) {
+                                    cityDropdown.append($('<option></option>').text(city));
+                                });
+
+                            }
+                        });
+                    },
+                    error: function(xhr, status, error) {
+
+                    }
+                })
+                // $('#succesModal').modal('show')
+
+
+            //         $(function() {
+            //     $('#sidebar-placeholder').load('./sidebar.html');
+            //   });
+            //   $(function() {
+            //     $('#navbar-placeholder').load('./header.html');
+            //   });
+            // Array to store the selected files
+
+            $('#fileInput').on('change', function() {
+                var files = Array.from($(this)[0].files);
+                console.log(files)
+                files.forEach(function(file) {
+                    selectedFiles.push(file); // Add each file to the selected files array
+                });
+
+                updateSelectedFilesContainer(); // Update the selected files container
+            });
+            $(document).on('click', '.delete-file', function() {
+                var index = $(this).data('index');
+                selectedFiles.splice(index, 1); // Remove the selected file from the array
+                updateSelectedFilesContainer(); // Update the selected files container
+            });
+            $('#addModal').on('hidden.bs.modal', function() {
+                // Clear input values
+                $(this).find('input, textarea, select').val('');
+
+                // Clear file input values
+                $(this).find('input[type="file"]').val(null);
+
+                // Clear radio button selections
+                $(this).find('input[type="radio"]').prop('checked', false);
+                $(this).find('.file-grid').empty();
+            });
+
+            $(document).on('click', '#next', function(e) {
+                console.log(1)
+                $('#addModal').modal('hide');
+                // $("#largemodal").addClass("hide");
+                var formData = new FormData();
+
+                // Get the form data
+                var propertyName = $("#propertyName").val();
+                var address = $("#address").val();
+                var city = $("#city").val();
+                var state = $("#state").val();
+                var zipCode = $("#zip").val();
+                var propertyType = $("#propertyType").val();
+                var propertySQFT = $("#propertyTotalSF").val();
+                var units = $("#units").val();
+
+                // Add the form data to the FormData object
+                formData.append('propertyName', propertyName);
+                formData.append('address', address);
+                formData.append('city', city);
+                formData.append('state', state);
+                formData.append('zipCode', zipCode);
+                formData.append('propertyType', propertyType);
+                formData.append('propertySQFT', propertySQFT);
+                formData.append('units', units);
+
+                // Get the selected files
+                var files = $('#fileInput')[0].files;
+
+            // Send the form data to the server using AJAX
+            $.ajax({
+                url: 'http://localhost:3000/api/spade/property',
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+
+                success: function(response) {
+                    // console.log(1)
+                    $('#succesModal').modal('show')
+                    // window.location="./properties-all.html"
+                        // window.location = '../Landlord/properties-all.html';
+                },
+                error: function(xhr, status, error) {
+                    window.alert('Error: ' + error);
+                }
+
+                // Send the form data to the server using AJAX
+                
+
+
+            });
+            })
+            function updateSelectedFilesContainer() {
+                var selectedFilesContainer = $('.file-grid');
+                selectedFilesContainer.empty();
+                console.log(selectedFiles)
+                selectedFiles.forEach(function(file, index) {
+
+                    var fileElement = $('<div>')
+                        .addClass('selected-file')
+                        .append(
+                            $('<img>')
+                            .addClass('file-preview')
+                            .attr('src', typeof file === "object" ? URL.createObjectURL(file) : '../../../../spadeAPI/uploads/' + file)
+                        )
+                        .append(
+                            $('<div>')
+                            .addClass('file-details')
+                            .append($('<span>').text("Image-" + (index + 1)))
+                            // .append($('<span>').text(fileSize))
+                        )
+                        .append(
+                            $('<p>')
+                            .addClass('delete-file')
+                            .text('X')
+                            .attr('data-index', index)
+                        )
+                        .appendTo(selectedFilesContainer);
+
+                });
+
+            }
+
+            function formatFileSize(bytes) {
+                if (bytes === 0) return '0 Bytes';
+                var k = 1024;
+                var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+                var i = Math.floor(Math.log(bytes) / Math.log(k));
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+            }
+
+            function truncateFileName(fileName) {
+                var maxFileNameLength = 10; // Define the maximum length of the file name
+                if (fileName.length > maxFileNameLength) {
+                    return fileName.substring(0, maxFileNameLength) + '...'; // Truncate the file name
+                }
+
+                return fileName;
+            }
+
+        })
+    </script>
+</body>
 
 </html>

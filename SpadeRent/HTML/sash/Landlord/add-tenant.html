@@ -16,7 +16,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="../assets/images/brand/favicon.ico" />
 
     <!-- TITLE -->
-    <title>Sash – Bootstrap 5 Admin & Dashboard Template </title>
+    <title>Property Tenant - SpadeRent</title>
 
     <!-- BOOTSTRAP CSS -->
     <link id="style" href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -33,7 +33,7 @@
     <!-- COLOR SKIN CSS -->
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="../assets/colors/color1.css" />
     <style>
-            @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
         .custom-file-input::-webkit-file-upload-button {
             visibility: hidden;
         }
@@ -303,16 +303,19 @@
         .rounded-pill-Single-Family {
             color: #4A4AFF !important;
             background: #E6E6F2 !important;
+            font-weight: bold;
         }
         
         .rounded-pill-Multi-Family {
             color: #0BAAB8 !important;
             background: #C8F3F7 !important;
+            font-weight: bold;
         }
         
         .rounded-pill-Multi-Commercial {
             background: #FFF9E5 !important;
             color: #F5CA38 !important;
+            font-weight: bold;
         }
         
         .table-primary {
@@ -444,7 +447,7 @@
                     height: 220px;
                 }
                 #nav_links {
-                    top: 165px;
+                    top: 153px;
                 }
             }
             @media (max-width:425px) {
@@ -488,7 +491,7 @@
                     height: 220px;
                 }
                 #nav_links {
-                    top: 165px;
+                    top: 153px;
                 }
             }
             @media (max-width:375px) {
@@ -546,7 +549,7 @@
                 <div class="modal-header">
                     <div class="text-justify ps-2 border-model-line">
                         <h2 class="modal-title">Create <strong class="color-primary">New Tenant</strong></h2>
-                        <span class="">Post your properties to thousands of potential investors, 
+                        <span class="">Post your properties to thousands of potential investors,
                             tenants and interested individuals.</span>
                     </div>
                     <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
@@ -556,7 +559,7 @@
                 <div class="modal-body">
                     <div class="accordion-item mb-4" id="accordion-item1">
                         <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button text-white" id="accordian-button-1" type="button" data-bs-toggle="collapse" onclick="checkFieldsFilled('accordion-item1')" id="accordion-button1" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <button class="accordion-button text-white" id="accordian-button-1" type="button" id="accordion-button1" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                 <span class="m-0 me-4 fs-1" style="font-weight: bold;">01</span>
                                 <h3 class="m-0"><strong>Tenant Information</strong> <i class="fi fi-rs-pencil"></i><i
                                         class="fi fi-rs-angle-circle-down chevron icon"></i>
@@ -596,8 +599,8 @@
                                         <span class="text-danger d-none">Property name required!</span>
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="inputAddress" class="form-label fw-bold">Company Name (Optional)<spnan
-                                                class="text-danger">*</span></label>
+                                        <label for="inputAddress" class="form-label fw-bold">Company Name (Optional)
+                                            <spnan class="text-danger">*</span></label>
                                         <input type="text" class="form-control form" id="address" placeholder="Enter Company Name">
                                         <span class="text-danger d-none">Address is required!</span>
                                     </div>
@@ -620,7 +623,8 @@
                                         <span class="text-danger d-none">State is required!</span>
                                     </div>
                                     <div class="col-12">
-                                        <label for="inputZip" class="form-label fw-bold">Address (Optional)<span class="text-danger">
+                                        <label for="inputZip" class="form-label fw-bold">Address (Optional)<span
+                                                class="text-danger">
                                                 *</span></label>
                                         <textarea class="form-control mb-4" placeholder="Enter Company Name" rows="4"></textarea>
                                         <span class="text-danger d-none">Zip is required!</span>
@@ -656,46 +660,143 @@
                     </div>
                     <div class="accordion-item mb-4" id="accordion-item2">
                         <h2 class="accordion-header" id="headingTwo">
-                            <button class="accordion-button collapsed text-white" onclick="checkFieldsFilled('accordion-item2')" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <button class="accordion-button collapsed text-white" type="button" id="accordian-button-2" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapseTwo">
                                 <span class="m-0 me-4 fs-1" style="font-weight: bold;">02</span>
-                                <h3 class="m-0"><strong>Assign Property</strong> <i
-                                        class="fi fi-rs-pencil"></i><i
+                                <h3 class="m-0"><strong>Assign Property</strong> <i class="fi fi-rs-pencil"></i><i
                                         class="fi fi-rs-angle-circle-down chevron icon"></i>
                                 </h3>
                             </button>
                         </h2>
                         <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                            <form class="row g-3 m-1" enctype="multipart/form-data">
-
-                                <div class="col-12 mb-3">
-                                    <label for="inputAddress" class="form-label fw-bold">Number of Units<span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control px-2" id="units" placeholder=" ">
-                                    <span class="text-danger d-none">Units are required!</span>
-                                </div>
-                            </form>
+                            <div class="accordion-body">
+                                <form class="row g-3">
+                                    <div class="col-md-4">
+                                        <label for="inputEmail4" class="form-label">Select Property</label>
+                                        <select id="inputState" class="form-select">
+                                            <option selected>Choose...</option>
+                                            <option>...</option>
+                                          </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="inputPassword4" class="form-label">Select Property Unit</label>
+                                        <select id="inputState" class="form-select">
+                                            <option selected>Choose...</option>
+                                            <option>...</option>
+                                          </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="inputAddress" class="form-label">Rent Amount/Per Month</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" style="color: #1467B0;background-color: transparent !important;">$</span>
+                                            <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St"></div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="inputAddress2" class="form-label">Lease Start Date</label>
+                                        <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="inputCity" class="form-label">Lease End Date</label>
+                                        <input type="text" class="form-control" id="inputCity">
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                     <div class="accordion-item" id="accordion-item3">
-                        <h2 class="accordion-header" id="headingTwo">
-                            <button class="accordion-button collapsed text-white" onclick="checkFieldsFilled('accordion-item2')" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed text-white" onclick="checkFieldsFilled('accordion-item3')" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                 <span class="m-0 me-4 fs-1" style="font-weight: bold;">03</span>
-                                <h3 class="m-0"><strong>Lease Details</strong> <i
-                                        class="fi fi-rs-pencil"></i><i
+                                <h3 class="m-0"><strong>Lease Details</strong> <i class="fi fi-rs-pencil"></i><i
                                         class="fi fi-rs-angle-circle-down chevron icon"></i>
                                 </h3>
                             </button>
                         </h2>
-                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                            <form class="row g-3 m-1" enctype="multipart/form-data">
-
-                                <div class="col-12 mb-3">
-                                    <label for="inputAddress" class="form-label fw-bold">Number of Units<span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control px-2" id="units" placeholder=" ">
-                                    <span class="text-danger d-none">Units are required!</span>
-                                </div>
-                            </form>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExampe">
+                            <div class="accordion-body">
+                                <form class="row g-3">
+                                    <div class="col-md-12">
+                                        <label for="inputEmail4" class="form-label">Is this a gross lease or triple net
+                                            lease?</label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                Gross Lease
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                Triple Net Lease
+                                            </label>
+                                        </div>
+                                        <div class="collapse" id="collapseExample">
+                                            <div class="card card-body">
+                                                <div class="text-justify ps-2 border-model-line">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <label for="inputEmail4" class="form-label">Base Rent Amount
+                                                                (Optional)</label>
+                                                            <input type="email" class="form-control" id="inputEmail4">
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label for="inputPassword4" class="form-label">Triple Net
+                                                                Amount (Optional)</label>
+                                                            <input type="password" class="form-control" id="inputPassword4">
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label for="inputEmail4" class="form-label">Lease Start
+                                                                Date</label>
+                                                            <input type="email" class="form-control" id="inputEmail4">
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label for="inputPassword4" class="form-label">Lease End
+                                                                Date</label>
+                                                            <input type="password" class="form-control" id="inputPassword4">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="inputEmail4" class="form-label">Are there any rent increases during
+                                            the Lease Term?</label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                Yes
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="">
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                No
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 row" id="add-item-container">
+                                        <div class="col-md-5">
+                                            <label for="inputEmail4" class="form-label">Date of Rent Change
+                                                (Optional)</label>
+                                            <input type="email" class="form-control" id="inputEmail4">
+                                        </div>
+                                        <div class="col-md-5">
+                                            <label for="inputPassword4" class="form-label">Rent Amount Correlating to
+                                                that Date</label>
+                                            <input type="password" class="form-control" id="inputPassword4">
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button>
+                                                <i class="fi fi-rs-trash"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <a href="javascript:;" class="mt-1" id="add-item">+Add Line Item</a>
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-primary">Sign in</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -777,7 +878,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="text-justify ps-2 border-model-line">
-                        <h2 class="modal-title">Update <strong class="color-primary" id="property-name">New Property</strong></h2>
+                        <h2 class="modal-title">Update <strong class="color-primary" id="property-name">New
+                                Property</strong></h2>
                         <span class="">Spade Rent allows you to add a range of commercial and residential properties,
                             from condos and single-family homes to retail stores and parking lots.</span>
                     </div>
@@ -874,30 +976,7 @@
         </div>
     </div>
     <!-- MODAL EFFECTS -->
-    <div class="modal fade" id="modaldemo8">
-        <div class="modal-dialog modal-dialog-centered text-center" role="document">
-            <div class="modal-content modal-content-demo">
-                <div class="modal-header">
-                    <div class="text-justify">
-                        <h2 class="modal-title">Create <strong class="color-primary">New Property</strong></h2>
-                        <span class="">Spade Rent allows you to add a range of commercial and residential properties,
-                            from condos and single-family homes to retail stores and parking lots.</span>
-                    </div>
-
-                    <button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span
-                            aria-hidden="true">&times;</span></button>
-                </div>
-                <div class="modal-body">
-                    <h6>Why We Use Electoral College, Not Popular Vote</h6>
-                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to
-                        using 'Content here, content here', making it look like readable English.</p>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary">Save changes</button> <button class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
+  
     <!-- MODAL EFFECTS -->
 
     <!-- PAGE -->
@@ -1011,7 +1090,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> 
             <!-- /app-Header -->
             <!--APP-SIDEBAR-->
             <!-- side bar -->
@@ -1037,8 +1116,8 @@
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item has-link create-new-link" href="javascript:void(0)" target="_self" style="border: 3px solid #1467B0 !important;"><i
-                                    class="side-menu__icon fi fi-rs-square-plus"></i><span class="side-menu__label ">Create New</span>
-                            </a>
+                                        class="side-menu__icon fi fi-rs-square-plus"></i><span class="side-menu__label ">Create New</span>
+                                </a>
                             </li>
 
                             <!-- <li class="slide">
@@ -1064,31 +1143,37 @@
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html"><i
-                                        class="side-menu__icon fi fi-rs-dashboard"></i><span class="side-menu__label">Overview</span></a>
+                                        class="side-menu__icon fi fi-rs-dashboard"></i><span
+                                        class="side-menu__label">Overview</span></a>
                             </li>
                             <!-- <li class="sub-category">
                                            <h3>UI Kit</h3>
                                        </li> -->
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
-                                        class="side-menu__icon fi fi-rs-building"></i><span class="side-menu__label">Properties</span>
-                                        <i
-                                        class="angle fe fe-chevron-right"></i>
-                                       </a>
+                                        class="side-menu__icon fi fi-rs-building"></i><span
+                                        class="side-menu__label">Properties</span>
+                                    <i class="angle fe fe-chevron-right"></i>
+                                </a>
                                 <ul class="slide-menu">
                                     <li class="side-menu-label1"><a href="javascript:void(0)">Properties</a></li>
                                     <li><a href="properties-all.html" class="slide-item">All</a></li>
-                                    <li><a href="new-property.html" class="slide-item">Draft</a></li>
+                                    <li><a href="javascript:void(0)" class="slide-item">Draft</a></li>
                                 </ul>
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="add-tenant.html"><i
-                                        class="side-menu__icon fi fi-rs-cabin"></i><span class="side-menu__label">Tenants</span>
-                                        <!-- <i
-                                        class="angle fe fe-chevron-right"></i> -->
-                                       
-                                       </a>
+                                        class="side-menu__icon fi fi-rs-cabin"></i><span
+                                        class="side-menu__label">Tenants</span>
+                                    <i
+                                        class="angle fe fe-chevron-right"></i>
 
+                                </a>
+                                <ul class="slide-menu">
+                                    <li class="side-menu-label1"><a href="javascript:void(0)">Tenants</a></li>
+                                    <li><a href="add-tenant.html" class="slide-item">All</a></li>
+                                    <li><a href="javascript:void(0)" class="slide-item">Draft</a></li>
+                                </ul>
                             </li>
 
                             <!-- <li class="sub-category">
@@ -1096,30 +1181,39 @@
                                        </li> -->
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="invoices.html"><i
-                                        class="side-menu__icon fi fi-rs-file-invoice-dollar"></i><span class="side-menu__label">Invoicing</span>
-                                        <!-- <i
-                                        class="angle fe fe-chevron-right"></i> -->
-                                       </a>
+                                                class="side-menu__icon fi fi-rs-file-invoice-dollar"></i><span class="side-menu__label">Invoicing</span>
+                                                <i
+                                                class="angle fe fe-chevron-right"></i>
+                                               </a>
+                                <ul class="slide-menu">
+                                    <li class="side-menu-label1"><a href="javascript:void(0)">Invoicing</a></li>
+                                    <li><a href="create-invoicing.html" class="slide-item">All</a></li>
+                                    <li><a href="javascript:void(0)" class="slide-item">Draft</a></li>
+                                </ul>
 
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="leads-all.php"><i
                                         class="side-menu__icon fi fi-rs-chart-simple"></i><span
                                         class="side-menu__label">Leads</span>
-                                        <!-- <i class="angle fe fe-chevron-right"></i> -->
-                                       
-                                       </a>
+                                    <!-- <i class="angle fe fe-chevron-right"></i> -->
+
+                                </a>
 
                             </li>
 
                             <li class="slide">
-                                <a class="side-menu__item" data-bs-toggle="slide" href="tasks.php"><i
+                                <a class="side-menu__item" data-bs-toggle="slide" href="view-tasks.html"><i
                                         class="side-menu__icon fi fi-rs-list-check"></i><span class="side-menu__label">Tasks</span>
-                                        <!-- <i
-                                        class="angle fe fe-chevron-right"></i> -->
+                                        <i
+                                        class="angle fe fe-chevron-right"></i>
                                        
                                        </a>
-
+                                <ul class="slide-menu">
+                                    <li class="side-menu-label1"><a href="javascript:void(0)">Invoicing</a></li>
+                                    <li><a href="create-tasks.html" class="slide-item">All</a></li>
+                                    <li><a href="new-tasks.html" class="slide-item">Draft</a></li>
+                                </ul>
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
@@ -1131,7 +1225,8 @@
 
                                 <li>
                                     <a class="side-menu__item has-link" href="settings.php" target="_self"><i
-                                        class="side-menu__icon fi fi-rs-settings"></i><span class="side-menu__label">Settings</span>
+                                        class="side-menu__icon fi fi-rs-settings"></i><span
+                                        class="side-menu__label">Settings</span>
                                     <!-- <span
                                                    class="badge bg-green br-5 side-badge blink-text pb-1">New</span> -->
                                 </a>
@@ -1166,7 +1261,8 @@
                                 <div class="row">
                                     <div class="col-lg-9">
                                         <h3 class="page-titlee text-white" style="font-weight: 100; margin-bottom: 0px;">Welcome to Spade Portal</h3>
-                                        <h1 class="page-titlee text-white" style="font-weight: 700;" id="user-name">John Clark</h1>
+                                        <h1 class="page-titlee text-white" style="font-weight: 700;" id="user-name">John Clark
+                                        </h1>
                                         <a href="javascript:void(0)" id="email_verification" class="btn btn-primary btn-pill btn-xl email-verification-btn"><i
                                                 class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
                                             verification &nbsp; <i
@@ -1188,8 +1284,8 @@
                                     <div class="card-header justify-content-between">
                                         <div class="d-flex">
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-dark font-weight-bold" id="filter_btn" data-bs-toggle="dropdown"><i
-                                                        class="typcn typcn-filter me-2"></i><strong>Filter</strong></button>
+                                                <button type="button" class="btn btn-outline-default text-dark py-1" id="filter_btn" data-bs-toggle="dropdown"><i
+                                                    class="typcn typcn-filter me-2 fs-16"></i><strong>Filter</strong></button>
                                                 <ul class="dropdown-menu" role="menu">
                                                     <li><a href="javascript:void(0)"><strong>Filter by:</strong></a>
                                                     </li>
@@ -1234,8 +1330,8 @@
                                         </div>
                                         <div class="d-flex">
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-dark font-weight-bold" id="customize_btn" data-bs-toggle="dropdown"><strong>CUSTOMIZED</strong><i
-                                                        class="fe fe-chevron-down ms-2"></i></button>
+                                                <button type="button" class="btn btn-dark bg-transparent font-weight-bold text-dark" id="customize_btn" data-bs-toggle="dropdown"><strong>CUSTOMIZED</strong><i
+                                                    class="fe fe-chevron-down ms-2"></i></button>
                                                 <ul class="dropdown-menu" role="menu">
                                                     <li><a href="javascript:void(0)"><strong>Filter by:</strong></a>
                                                     </li>
@@ -1299,20 +1395,30 @@
                                                             </label></td>
                                                         <td>100027</td>
                                                         <td>
-                                                            <p style="font-weight: 600;color: #1A6AB2;" class="mb-1">Justin Septimus</p>
-                                                            <span style="color: #9B9B9B;">example@email.com</span></td>
+                                                            <p style="font-weight: 600;color: #1A6AB2;" class="mb-1">
+                                                                Justin Septimus</p>
+                                                            <span style="color: #9B9B9B;">example@email.com</span>
+                                                        </td>
                                                         <td>
                                                             <p style="font-weight: bold;" class="mb-1">Pensgate St</p>
-                                                            <span style="color: #6E6893;">9430 Research Blvd. Ste 2-350 Austin TX 78759</span></td>
+                                                            <span style="color: #6E6893;">9430 Research Blvd. Ste 2-350
+                                                                Austin TX 78759</span>
+                                                        </td>
                                                         <td>
                                                             <p style="font-weight: bold;" class="mb-1">$170,000</p>
-                                                            <span style="color: #6E6893;">Next Due Date: November-12-2020</span></td>
+                                                            <span style="color: #6E6893;">Next Due Date:
+                                                                November-12-2020</span>
+                                                        </td>
                                                         <td>
-                                                            <p style="font-weight: bold;" class="mb-1">Unit Name Here</p>
-                                                            <span>220 Square/Feet</span></td>
+                                                            <p style="font-weight: bold;" class="mb-1">Unit Name Here
+                                                            </p>
+                                                            <span>220 Square/Feet</span>
+                                                        </td>
                                                         <td>
-                                                            <p style="font-weight: bold;" class="mb-1">October-12-2020</p>
-                                                            <span style="color: #1A6AB2;">50 Days Remaining</span></td>
+                                                            <p style="font-weight: bold;" class="mb-1">October-12-2020
+                                                            </p>
+                                                            <span style="color: #1A6AB2;">50 Days Remaining</span>
+                                                        </td>
                                                         <td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
 
                                                             <ul class="dropdown-menu">
@@ -1332,20 +1438,29 @@
                                                             </label></td>
                                                         <td>100027</td>
                                                         <td>
-                                                            <p style="font-weight: 600;color: #1A6AB2;" class="mb-1">Justin Septimus</p>
-                                                            <span style="color: #9B9B9B;">example@email.com</span></td>
+                                                            <p style="font-weight: 600;color: #1A6AB2;" class="mb-1">
+                                                                Justin Septimus</p>
+                                                            <span style="color: #9B9B9B;">example@email.com</span>
+                                                        </td>
                                                         <td>
                                                             <p style="font-weight: bold;" class="mb-1">Pensgate St</p>
-                                                            <span style="color: #6E6893;">9430 Research Blvd. Ste 2-350 Austin TX 78759</span></td>
+                                                            <span style="color: #6E6893;">9430 Research Blvd. Ste 2-350
+                                                                Austin TX 78759</span>
+                                                        </td>
                                                         <td>
                                                             <p style="font-weight: bold;" class="mb-1">$170,000</p>
-                                                            <span style="color: #6E6893;">Next Due Date: November-12-2020</span></td>
+                                                            <span style="color: #6E6893;">Next Due Date:
+                                                                November-12-2020</span>
+                                                        </td>
                                                         <td>
                                                             <p style="font-weight: bold;" class="mb-1">19 Unit (s)</p>
-                                                            <span style="color:#4A4AFF;">9 (Multi)</span> <span style="color:#F9B44D;">10 (Single)</span></td>
+                                                            <span style="color:#4A4AFF;">9 (Multi)</span> <span style="color:#F9B44D;">10 (Single)</span>
+                                                        </td>
                                                         <td>
-                                                            <p style="font-weight: bold;" class="mb-1">October-12-2020</p>
-                                                            <span style="color: #1A6AB2;">50 Days Remaining</span></td>
+                                                            <p style="font-weight: bold;" class="mb-1">October-12-2020
+                                                            </p>
+                                                            <span style="color: #1A6AB2;">50 Days Remaining</span>
+                                                        </td>
                                                         <td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
 
                                                             <ul class="dropdown-menu">
@@ -2041,7 +2156,7 @@
     <script>
         const form1Inputs = document.querySelectorAll('#accordion-item1 .form');
         form1Inputs.forEach(input => {
-            input.addEventListener('blur', function() {
+            input.addEventListener('input', function() {
                 if (validateInput(input)) {
                     input.nextElementSibling.classList.add('d-none');
                 } else {
@@ -2049,11 +2164,10 @@
                 }
             });
         });
-
         // Attach event listeners to input fields in second form
         const form2Inputs = document.querySelectorAll('#accordion-item2 .form-control');
         form2Inputs.forEach(input => {
-            input.addEventListener('blur', function() {
+            input.addEventListener('input', function() {
                 // console.log(input.nextElementSibling)
                 if (validateInput(input)) {
                     input.nextElementSibling.classList.add('d-none');
@@ -2065,7 +2179,7 @@
         const check = 0
         const updateformInputs = document.querySelectorAll('#myModal_edit .form-control');
         updateformInputs.forEach(input => {
-            input.addEventListener('blur', function() {
+            input.addEventListener('input', function() {
                 // console.log(input.nextElementSibling)
                 if (validateInput(input)) {
                     input.nextElementSibling.classList.add('d-none');
@@ -2082,7 +2196,9 @@
         let isForm2Valid = false;
 
         function checkFieldsFilled(id) {
+            let button = "accordian-button-1"
             if (id === "accordion-item2" && counter === 0) {
+                button = "accordian-button-2"
                 counter += 1
                 return
             }
@@ -2104,6 +2220,7 @@
 
             if (accordionItem.querySelector(".accordion-button").classList.contains("collapsed")) {
                 if (allFieldsFilled) {
+                    $(`#${button}`).attr("data-bs-toggle", `collapse`).attr("onclick", "checkFieldsFilled()");
                     chevronIcon.classList.remove("fi-rs-exclamation");
                     chevronIcon.classList.remove("chevron");
                     chevronIcon.classList.add("fi-rs-check-circle");
@@ -2231,14 +2348,30 @@
         var selectedFiles = [];
         $(document).ready(function() {
 
+            $("#add-item").on("click", () => {
+                    console.log($("add-item-container"))
 
-            //         $(function() {
-            //     $('#sidebar-placeholder').load('./sidebar.html');
-            //   });
-            //   $(function() {
-            //     $('#navbar-placeholder').load('./header.html');
-            //   });
-            // Array to store the selected files
+                    $("#add-item-container").append(`<div class="col-md-5">
+                                            <label for="inputEmail4" class="form-label">Date of Rent Change (Optional)</label>
+                                            <input type="email" class="form-control" id="inputEmail4">
+                                          </div>
+                                          <div class="col-md-5">
+                                            <label for="inputPassword4" class="form-label">Rent Amount Correlating to that Date</label>
+                                            <input type="password" class="form-control" id="inputPassword4">
+                                          </div>
+                                          <div class="col-md-2 text-center d-flex align-items-center">
+                                            <button class="positon-absolute" style="top:80%;left:50%;">
+                                                <i class="fi fi-rs-trash"></i>
+                                            </button>
+                                        </div>`)
+                })
+                //         $(function() {
+                //     $('#sidebar-placeholder').load('./sidebar.html');
+                //   });
+                //   $(function() {
+                //     $('#navbar-placeholder').load('./header.html');
+                //   });
+                // Array to store the selected files
 
             $('#fileInput').on('change', function() {
                 var files = Array.from($(this)[0].files);
