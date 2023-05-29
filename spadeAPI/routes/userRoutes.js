@@ -34,6 +34,7 @@ router.get('/verifyMailCheck', userController.verifyMailCheck);
 router.put('/resetEmailTenant', userController.createResetEmailTenant);
 router.post('/verifyResetEmailCodeTenant', userController.verifyResetEmailCodeTenant);
 router.put('/updatePasswordTenant', userController.updatePasswordTenant);
+router.get('/getPropertyTenant', userController.getPropertyTenant);
 
 module.exports = router;
 

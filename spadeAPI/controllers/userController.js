@@ -20,7 +20,8 @@ const {
   insertTenants,
   UpdateTenants,
   addResetTokenTenants,
-  updatePasswordTenant
+  updatePasswordTenant,
+  selectPropertyTenant
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -857,6 +858,36 @@ const tenantsInsert = await queryRunner(UpdateTenants, [hashPassword, currentDat
       }
           }
           //  ############################# Update Property Units End ############################################################
+  
+  
+
+          //  ############################# Get Property and tenant data Start ############################################################
+exports.getPropertyTenant = async (req, res) => {
+  try {
+    // const { id } = req.user
+    const { id } = req.body
+    const PropertyTenantResult = await queryRunner(selectPropertyTenant, [id]);
+    if (PropertyTenantResult.length > 0) {
+      res.status(200).json({
+        data: PropertyTenantResult,
+        message: "Property Tenant "
+      })
+    } else {
+      res.status(400).json({
+        message: "No data found"
+      })
+    }
+  } catch (error) {
+    res.send("Error Get Property Tenant data");
+    console.log(error)
+  }
+}
+//  ############################# Get Property and tenant data End ############################################################
+
+
+          
+  
+  
           //  ############################# Create tenants Start ############################################################
 exports.createTenants = async (req, res) => {
   try {
