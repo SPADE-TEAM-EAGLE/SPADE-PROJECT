@@ -450,7 +450,7 @@
                     top: 153px;
                 }
             }
-            @media (max-width:425px) {
+            @media (max-width:575px) {
                 .modal-footer {
                     flex-direction: column !important;
                     justify-content: flex-center !important;
@@ -471,16 +471,20 @@
                     font-size: 12px;
                     margin: 0 !important;
                 }
-                #customize_btn {
+                /* #customize_btn {
+                    display: none;
+                } */
+                #info-head {
                     display: none;
                 }
                 #add_property_btn {
                     font-size: 12px;
                     margin: 0 !important;
-                }
-                #search_input {
                     display: none;
                 }
+                /* #search_input {
+                    display: none;
+                } */
                 #email_verification {
                     font-size: 12px;
                 }
@@ -559,7 +563,7 @@
                 <div class="modal-body">
                     <div class="accordion-item mb-4" id="accordion-item1">
                         <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button text-white" id="accordian-button-1" type="button" id="accordion-button1" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <button class="accordion-button text-white" id="accordian-button-1" type="button" id="accordion-button1" onclick="checkFieldsFilled('accordion-item1')" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                 <span class="m-0 me-4 fs-1" style="font-weight: bold;">01</span>
                                 <h3 class="m-0"><strong>Tenant Information</strong> <i class="fi fi-rs-pencil"></i><i
                                         class="fi fi-rs-angle-circle-down chevron icon"></i>
@@ -569,74 +573,42 @@
                         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
                                 <form class="row g-3" enctype="multipart/form-data">
-                                    <div class="col-md-12">
-                                        <label class="form-label fw-bold">Property Photo</label>
-                                        <div class="custom-file" style="border: 1px dashed #00000087;">
-                                            <input id="fileInput" type="file" name="image" class="custom-file-input form" accept=".jpg, .png, image/jpeg, image/png" aria-label="hello" multiple>
-                                            <span className="d-none"></span>
-                                            <label class="custom-file-label" for="fileInput">
-                                                <i class="fi fi-rs-cloud-upload"></i>
-                                                <div class="custom-file-text">
-                                                    <span>Upload Photo or drag and drop here</span>
-                                                    <span>JPEG, PNG and PDF, file size no more than 10MB</span>
-                                                </div>
-                                            </label>
-                                        </div>
-                                        <div class="selected-files">
-                                            <div class="file-grid"></div>
-                                        </div>
-                                        <span class="text-danger d-none">Photos are required!</span>
-                                    </div>
                                     <div class="col-md-6">
-                                        <label for="inputEmail4" class="form-label fw-bold">First Name</label>
-                                        <input type="text" class="form-control form" placeholder="Enter First Name" id="propertyId">
-                                        <span class="text-danger d-none">Property ID is required!</span>
+                                        <label for="inputEmail4" class="form-label fw-bold">First Name<spnan
+                                            class="text-danger"> *</span></label>
+                                        <input type="text" class="form-control form" placeholder="Enter First Name" id="firstName">
+                                        <span class="text-danger d-none">First name is required!</span>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="inputPassword4" class="form-label fw-bold">Last Name<spnan
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" placeholder="Enter First Name" id="propertyName">
-                                        <span class="text-danger d-none">Property name required!</span>
+                                                class="text-danger"> *</span></label>
+                                        <input type="text" class="form-control form" placeholder="Enter Last Name" id="lastName">
+                                        <span class="text-danger d-none">Last name required!</span>
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="inputAddress" class="form-label fw-bold">Company Name (Optional)
-                                            <spnan class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="address" placeholder="Enter Company Name">
-                                        <span class="text-danger d-none">Address is required!</span>
+                                        <label for="inputAddress" class="form-label fw-bold">Company Name <span class="fw-light">(Optional)</span>
+                                            </label>
+                                        <input type="text" class="form-control form" id="company" placeholder="Enter Company Name">
+                                        <span class="text-danger d-none">Company name is required!</span>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="inputCity" class="form-label fw-bold">Email<spnan
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" placeholder="Enter Email" id="city">
-                                        <span class="text-danger d-none">City is required!</span>
+                                                class="text-danger"> *</span></label>
+                                        <input type="text" class="form-control form" placeholder="Enter Email" id="email">
+                                        <span class="text-danger d-none">Email is required!</span>
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="inputState" class="form-label fw-bold">Phone Number (Optional)<spnan
-                                                class="text-danger">*</span></label>
-                                        <select id="state" class="form-select form">
-                                            <option selected>Choose...</option>
-                                            <option>Sindh</option>
-                                            <option>Punjab</option>
-                                            <option>Balochistan</option>
-                                            <option>KPK</option>
+                                        <label for="inputState" class="form-label fw-bold">Phone Number <span class="fw-light">(Optional)</span></label>
+                                        <div class="iti iti--allow-dropdown"><div class="iti__flag-container"><div class="iti__selected-flag" role="combobox" aria-owns="country-listbox" tabindex="0" title="United States: +1"><div class="iti__flag iti__us"></div><div class="iti__arrow"></div></div></div><input id="phone" name="phone" type="tel" autocomplete="off" data-intl-tel-input-id="0"></div>
                                         </select>
                                         <span class="text-danger d-none">State is required!</span>
                                     </div>
                                     <div class="col-12">
-                                        <label for="inputZip" class="form-label fw-bold">Address (Optional)<span
-                                                class="text-danger">
-                                                *</span></label>
-                                        <textarea class="form-control mb-4" placeholder="Enter Company Name" rows="4"></textarea>
-                                        <span class="text-danger d-none">Zip is required!</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputState" class="form-label fw-bold">City <spnan
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="propertyTotalSF">
-
-                                        <span class="text-danger d-none">Property Type is required!</span>
-                                    </div>
-                                    <div class="col-md-4">
+                                        <label for="inputAddress2" class="form-label fw-bold">Address <span class="fw-light">(Optional)</span></label>
+                                        <input type="text" class="form-control" id="address" placeholder="Apartment, studio, or floor">
+                                        <span class="text-danger d-none">Address is required!</span>
+                                      </div>
+                                      <div class="col-md-4">
                                         <label for="inputState" class="form-label fw-bold">State <spnan
                                                 class="text-danger">*</span></label>
                                         <select id="state" class="form-select form">
@@ -649,10 +621,22 @@
                                         <span class="text-danger d-none">State is required!</span>
                                     </div>
                                     <div class="col-md-4">
+                                        <label for="inputState" class="form-label fw-bold">City <spnan
+                                                class="text-danger">*</span></label>
+                                        <select id="city" class="form-select form">
+                                            <option selected>Choose...</option>
+                                            <option>Sindh</option>
+                                            <option>Punjab</option>
+                                            <option>Balochistan</option>
+                                            <option>KPK</option>
+                                        </select>
+                                        <span class="text-danger d-none">City is required!</span>
+                                    </div>
+                                    <div class="col-md-4">
                                         <label for="inputPassword4" class="form-label fw-bold">Zip Code <spnan
                                                 class="text-danger">*</span></label>
                                         <input type="text" class="form-control form" id="propertyTotalSF">
-                                        <span class="text-danger d-none">Property Total SF is required!</span>
+                                        <span class="text-danger d-none">Zip code is required!</span>
                                     </div>
                                 </form>
                             </div>
@@ -660,7 +644,7 @@
                     </div>
                     <div class="accordion-item mb-4" id="accordion-item2">
                         <h2 class="accordion-header" id="headingTwo">
-                            <button class="accordion-button collapsed text-white" type="button" id="accordian-button-2" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapseTwo">
+                            <button class="accordion-button collapsed text-white" type="button" id="accordian-button-2" onclick="checkFieldsFilled('accordion-item2')" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                 <span class="m-0 me-4 fs-1" style="font-weight: bold;">02</span>
                                 <h3 class="m-0"><strong>Assign Property</strong> <i class="fi fi-rs-pencil"></i><i
                                         class="fi fi-rs-angle-circle-down chevron icon"></i>
@@ -671,21 +655,21 @@
                             <div class="accordion-body">
                                 <form class="row g-3">
                                     <div class="col-md-4">
-                                        <label for="inputEmail4" class="form-label">Select Property</label>
+                                        <label for="inputEmail4" class="form-label">Select Property Unit</label>
                                         <select id="inputState" class="form-select">
                                             <option selected>Choose...</option>
                                             <option>...</option>
                                           </select>
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="inputPassword4" class="form-label">Select Property Unit</label>
+                                        <label for="inputEmail4" class="form-label">Select Property Unit</label>
                                         <select id="inputState" class="form-select">
                                             <option selected>Choose...</option>
                                             <option>...</option>
                                           </select>
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="inputAddress" class="form-label">Rent Amount/Per Month</label>
+                                        <label for="inputAddress" class="form-label">Input Rent Amount /Per Month</label>
                                         <div class="input-group">
                                             <span class="input-group-text" style="color: #1467B0;background-color: transparent !important;">$</span>
                                             <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St"></div>
@@ -721,7 +705,7 @@
                                             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                             <label class="form-check-label" for="flexCheckDefault">
                                                 Gross Lease
-                                            </label>
+                                            </label><span><i class="fi fi-rs-info"></i></span>
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
@@ -898,7 +882,7 @@
                                     <i class="fi fi-rs-cloud-upload"></i>
                                     <div class="custom-file-text">
                                         <span>Upload Photo or drag and drop here</span>
-                                        <span>JPEG, PNG and PDF, file size no more than 10MB</span>
+                                        <span>JPEG and PNG, file size no more than 10MB</span>
                                     </div>
                                 </label>
                             </div>
@@ -976,7 +960,7 @@
         </div>
     </div>
     <!-- MODAL EFFECTS -->
-  
+
     <!-- MODAL EFFECTS -->
 
     <!-- PAGE -->
@@ -1090,7 +1074,7 @@
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>
             <!-- /app-Header -->
             <!--APP-SIDEBAR-->
             <!-- side bar -->
@@ -1326,6 +1310,16 @@
                                                 <div class="form-group m-0">
                                                     <input class="form-control" placeholder="Search Users by Name, Email or Date" type="text" id="search_input">
                                                 </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex">
+                                            <div id="info-head">
+                                                <a href="javascript:void(0)" class="d-flex align-items-center me-3 text-dark">
+                                                    <span class="w-3 h-3 brround me-2" style="background-color: #1467B0;"></span> Tenant with Single Property
+                                                </a>
+                                                <a href="javascript:void(0)" class="d-flex align-items-center text-dark">
+                                                    <span class="w-3 h-3 brround me-2" style="background-color: #0BAAB8;"></span> Tenant with Multiple Properties
+                                                </a>
                                             </div>
                                         </div>
                                         <div class="d-flex">
@@ -2043,7 +2037,7 @@
         <div class="container">
             <div class="row align-items-center flex-row-reverse">
                 <div class="col-md-12 col-sm-12 text-center">
-                    Copyright © <span id="year"></span> <a href="javascript:void(0)">Sash</a>. Designed with <span class="fa fa-heart text-danger"></span> by <a href="javascript:void(0)"> Spruko </a> All rights reserved.
+                    Copyright © <a href="javascript:void(0)">Spade, LLC.</a> <span id="year"></span>
                 </div>
             </div>
         </div>
@@ -2053,7 +2047,9 @@
     </div>
 
     <!-- BACK-TO-TOP -->
-    <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a>
+    <!-- <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a> -->
+    <a href="#addModal" data-bs-effect="effect-scale" data-bs-toggle="modal" id="add-tenant-side-btn"><i class="fe fe-plus"></i></a>
+
 
     <!-- JQUERY JS -->
     <script src="../assets/js/jquery.min.js"></script>

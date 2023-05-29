@@ -29,7 +29,7 @@
 
     <!--- FONT-ICONS CSS -->
     <link href="../assets/css/icons.css" rel="stylesheet" />
-    <link rel="stylesheet" href="fancy_fileupload.css">
+    <!-- <link rel="stylesheet" href="fancy_fileupload.css"> -->
     <!-- COLOR SKIN CSS -->
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="../assets/colors/color1.css" />
     <style>
@@ -490,7 +490,7 @@
                                                 <i class="fi fi-rs-cloud-upload"></i>
                                                 <div class="custom-file-text">
                                                     <span>Upload Photo or drag and drop here</span>
-                                                    <span>JPEG, PNG and PDF, file size no more than 10MB</span>
+                                                    <span>JPEG and PNG, file size no more than 10MB</span>
                                                 </div>
                                             </label>
                                         </div>
@@ -884,17 +884,17 @@
                                                                     verification &nbsp; <i
                                                                         class="angle fe fe-arrow-right create-btn-plus"></i></a> -->
                                         <ul class="nav1 br-7 position-absolute" style="bottom: 0;" id="nav_links">
-                                            <li class="nav-item1">
-                                                <a class="nav-link active p-0" href="view-property.html" id="viewOverview">Overview</a>
+                                            <li class="nav-item1 p-0">
+                                                <a class="nav-link active p-2" href="view-property.html" id="viewOverview">Overview</a>
                                             </li>
                                             <li class="nav-item1 p-0">
-                                                <a class="nav-link p-2 viewUnits" href="property-unit.html" >Units</a>
+                                                <a class="nav-link p-2" href="property-unit.html" id="viewUnits">Units</a>
                                             </li>
-                                            <li class="nav-item1">
-                                                <a class="nav-link p-0 viewTenants" href="property-tenant.html" >Tenants</a>
+                                            <li class="nav-item1 p-0">
+                                                <a class="nav-link p-2" href="property-tenant.html" id="viewTenants">Tenants</a>
                                             </li>
-                                            <li class="nav-item1">
-                                                <a class="nav-link p-0 viewTasks" href="property-task.html" >Tasks</a>
+                                            <li class="nav-item1 p-0">
+                                                <a class="nav-link p-2" href="property-task.html" id="viewTasks">Tasks</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -1014,7 +1014,7 @@
                                         <!-- id="image-placeholder" -->
                                         <div class="card-body" id="image-placeholder">
                                             <ul id="lightgallery" class="list-unstyled row">
-                                                
+
                                             </ul>
                                         </div>
                                         <!-- <div class="card-body">
@@ -1684,14 +1684,16 @@
     <!-- CUSTOM JS -->
     <script src="../assets/js/custom.js"></script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
 
             const propertyId = (new URL(document.location)).searchParams.get("propertyId");
             // console.log($("#viewUnits").attr("href"))
-            $(".viewUnits").attr("href",`./property-unit.html?propertyId=${propertyId}`)
-            $("#viewOverview").attr("href",`./view-property.html?propertyId=${propertyId}`)
-            $(".viewTenants").attr("href",`./property-tenant.html?propertyId=${propertyId}`)
-            $(".viewTasks").attr("href",`./property-task.html?propertyId=${propertyId}`)
+            //            
+
+            $("#viewUnits").attr("href", `./property-unit.html?propertyId=${propertyId}`)
+            $("#viewOverview").attr("href", `./view-property.html?propertyId=${propertyId}`)
+            $("#viewTenants").attr("href", `./property-tenant.html?propertyId=${propertyId}`)
+            $("#viewTasks").attr("href", `./property-task.html?propertyId=${propertyId}`)
             $.ajax({
                 url: 'http://localhost:3000/api/spade/viewProperty',
                 type: 'GET',
@@ -1703,9 +1705,11 @@
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function ({ data }) {
+                success: function({
+                    data
+                }) {
                     console.log(data)
-                    // window.alert(response.message);
+                        // window.alert(response.message);
                     console.log(data.propertyName)
                     $("#property_name").text(data.propertyName)
                     $("#property_address").text(data.address)
@@ -1714,19 +1718,19 @@
                     $("#property_status").text(data.status)
                     $("#lightgallery").empty()
                     data.images.forEach(image => {
-                    $("#lightgallery").append('<li class="col-xs-6 col-sm-4 col-md-4 col-xl-3 mb-5 border-bottom-0" data-responsive="../../../../spadeAPI/uploads/'+image.Image+'" data-src="../../../../spadeAPI/uploads/'+image.Image+'" data-sub-html="<h4>Gallery Image 1</h4><p> Many desktop publishing packages and web page editors now use Lorem Ipsum</p>"><a href="javascript:void(0)"><img class="img-responsive br-5" src="../../../../spadeAPI/uploads/' + image.Image + '" alt="Thumb-1"></a></li>')
+                        $("#lightgallery").append('<li class="col-xs-6 col-sm-4 col-md-4 col-xl-3 mb-5 border-bottom-0" data-responsive="../../../../spadeAPI/uploads/' + image.Image + '" data-src="../../../../spadeAPI/uploads/' + image.Image + '" data-sub-html="<h4>Gallery Image 1</h4><p> Many desktop publishing packages and web page editors now use Lorem Ipsum</p>"><a href="javascript:void(0)"><img class="img-responsive br-5" src="../../../../spadeAPI/uploads/' + image.Image + '" alt="Thumb-1"></a></li>')
 
                     });
                     // $("#lightgallery").append('<li class="col-xs-6 col-sm-4 col-md-4 col-xl-3 mb-5 border-bottom-0" data-responsive="../../../../spadeAPI/uploads/'+image.Image+'" data-src="../../../../spadeAPI/uploads/'+image.Image+'" data-sub-html="<h4>Gallery Image 1</h4><p> Many desktop publishing packages and web page editors now use Lorem Ipsum</p>"><a href="javascript:void(0)"><img class="img-responsive br-5" src="../../../../spadeAPI/uploads/' + image.Image + '" alt="Thumb-1"></a></li>')
                 },
-                error: function (xhr, status, error) {
+                error: function(xhr, status, error) {
                     window.alert('Error: ' + error);
                 }
             });
         });
 
 
-    // });
+        // });
     </script>
     <!-- ############################################# -->
 
@@ -1762,13 +1766,13 @@
         const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
         // Get a reference to the logo element
-        const logo = document.getElementById('logo');
+        // const logo = document.getElementById('logo');
 
-        if (userPrefersDark) {
-            logo.src = '../assets/header-img/comment.svg';
-        } else {
-            logo.src = '../assets/header-img/question.svg';
-        }
+        // if (userPrefersDark) {
+        //     logo.src = '../assets/header-img/comment.svg';
+        // } else {
+        //     logo.src = '../assets/header-img/question.svg';
+        // }
     </script>
     <script src="../assets/plugins/fancyuploder/jquery.ui.widget.js"></script>
     <script src="../assets/plugins/fancyuploder/jquery.fileupload.js"></script>
