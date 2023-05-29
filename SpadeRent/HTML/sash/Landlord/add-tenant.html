@@ -655,11 +655,12 @@
                             <div class="accordion-body">
                                 <form class="row g-3">
                                     <div class="col-md-4">
-                                        <label for="inputEmail4" class="form-label">Select Property Unit</label>
+                                        <label for="inputEmail4" class="form-label">Select Property</label>
                                         <select id="inputState" class="form-select">
                                             <option selected>Choose...</option>
                                             <option>...</option>
                                           </select>
+                                          <span class="text-danger d-none">Property is required!</span>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="inputEmail4" class="form-label">Select Property Unit</label>
@@ -667,21 +668,16 @@
                                             <option selected>Choose...</option>
                                             <option>...</option>
                                           </select>
+                                          <span class="text-danger d-none">Property units is required!</span>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="inputAddress" class="form-label">Input Rent Amount /Per Month</label>
                                         <div class="input-group">
                                             <span class="input-group-text" style="color: #1467B0;background-color: transparent !important;">$</span>
-                                            <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St"></div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="inputAddress2" class="form-label">Lease Start Date</label>
-                                        <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="inputCity" class="form-label">Lease End Date</label>
-                                        <input type="text" class="form-control" id="inputCity">
-                                    </div>
+                                            <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                                        </div>
+                                        <span class="text-danger d-none">Rent amount is required!</span>
+                                        </div>
                                 </form>
                             </div>
                         </div>
@@ -745,12 +741,13 @@
                                     <div class="col-md-12">
                                         <label for="inputEmail4" class="form-label">Are there any rent increases during
                                             the Lease Term?</label>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                            <label class="form-check-label" for="flexCheckDefault">
-                                                Yes
-                                            </label>
-                                        </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked2" data-bs-toggle="collapse" href="#collapse2" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                <label class="form-check-label" for="flexCheckChecked">
+                                                    Yes
+                                                </label>
+                                            </div>
+                                        
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" value="">
                                             <label class="form-check-label" for="flexCheckChecked">
@@ -758,8 +755,8 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="col-12 row" id="add-item-container">
-                                        <div class="col-md-5">
+                                    <div class="col-12 row">
+                                        <!-- <div class="col-md-5">
                                             <label for="inputEmail4" class="form-label">Date of Rent Change
                                                 (Optional)</label>
                                             <input type="email" class="form-control" id="inputEmail4">
@@ -773,12 +770,32 @@
                                             <button>
                                                 <i class="fi fi-rs-trash"></i>
                                             </button>
+                                        </div> -->
+                                        <div class="collapse" id="collapse2">
+                                            <div class="card card-body">
+                                                <div class="text-justify" id="add-item-container">
+                                                    <div class="row">
+                                                        <div class="col-md-5">
+                                                            <label for="inputEmail4" class="form-label">Date of Rent Change
+                                                                (Optional)</label>
+                                                            <input type="email" class="form-control" id="inputEmail4">
+                                                        </div>
+                                                        <div class="col-md-5">
+                                                            <label for="inputPassword4" class="form-label">Rent Amount Correlating to
+                                                                that Date</label>
+                                                            <input type="password" class="form-control" id="inputPassword4">
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <button>
+                                                                <i class="fi fi-rs-trash"></i>
+                                                            </button>
+                                                        </div> 
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <a href="javascript:;" class="mt-1" id="add-item">+Add Line Item</a>
-                                    <div class="col-12">
-                                        <button type="submit" class="btn btn-primary">Sign in</button>
-                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -2347,7 +2364,7 @@
             $("#add-item").on("click", () => {
                     console.log($("add-item-container"))
 
-                    $("#add-item-container").append(`<div class="col-md-5">
+                    $("#add-item-container").append(`<div class="row"><div class="col-md-5">
                                             <label for="inputEmail4" class="form-label">Date of Rent Change (Optional)</label>
                                             <input type="email" class="form-control" id="inputEmail4">
                                           </div>
