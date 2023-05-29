@@ -104,6 +104,7 @@
         .modal-footer .button {
             font-size: 0.938rem;
         }
+        
         button.btn-close {
             right: 6px;
         }
@@ -611,7 +612,7 @@
                                                 <i class="fi fi-rs-cloud-upload"></i>
                                                 <div class="custom-file-text">
                                                     <span>Upload Photo or drag and drop here</span>
-                                                    <span>JPEG, PNG and PDF, file size no more than 10MB</span>
+                                                    <span>JPEG and PNG, file size no more than 10MB</span>
                                                 </div>
                                             </label>
                                         </div>
@@ -1755,8 +1756,8 @@
             // console.log(formFields)
             formFields.forEach(function(field) {
                 // console.log(field.type, field.value)
-                
-                if (field.value === "" || field.value==="Choose...") {
+
+                if (field.value === "" || field.value === "Choose...") {
                     allFieldsFilled = false;
                 }
 
@@ -1861,9 +1862,9 @@
         }
         var selectedFiles = [];
         $(document).ready(function() {
-            $("#succesModal").on('hide.bs.modal', function(){
-                window.location="./properties-all.html"
-})
+            $("#succesModal").on('hide.bs.modal', function() {
+                window.location = "./properties-all.html"
+            })
             $.ajax({
                     url: 'http://api.geonames.org/searchJSON',
                     method: 'GET',
@@ -1978,33 +1979,34 @@
                 // Get the selected files
                 var files = $('#fileInput')[0].files;
 
-            // Send the form data to the server using AJAX
-            $.ajax({
-                url: 'http://localhost:3000/api/spade/property',
-                type: 'POST',
-                data: formData,
-                contentType: false,
-                processData: false,
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                },
-
-                success: function(response) {
-                    // console.log(1)
-                    $('#succesModal').modal('show')
-                    // window.location="./properties-all.html"
-                        // window.location = '../Landlord/properties-all.html';
-                },
-                error: function(xhr, status, error) {
-                    window.alert('Error: ' + error);
-                }
-
                 // Send the form data to the server using AJAX
-                
+                $.ajax({
+                    url: 'http://localhost:3000/api/spade/property',
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+
+                    success: function(response) {
+                        // console.log(1)
+                        $('#succesModal').modal('show')
+                            // window.location="./properties-all.html"
+                            // window.location = '../Landlord/properties-all.html';
+                    },
+                    error: function(xhr, status, error) {
+                        window.alert('Error: ' + error);
+                    }
+
+                    // Send the form data to the server using AJAX
 
 
-            });
+
+                });
             })
+
             function updateSelectedFilesContainer() {
                 var selectedFilesContainer = $('.file-grid');
                 selectedFilesContainer.empty();
