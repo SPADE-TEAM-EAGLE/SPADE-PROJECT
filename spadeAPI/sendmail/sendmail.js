@@ -11,10 +11,8 @@ try {
         // to:"aj8706786@gmail.com",
         subject:mailSubject,
 
-        html: mailSubject == "Spade Welcome Email" ? codeHTML.welcomeHTML(email, random, name ) : codeHTML.codeHTML(name, random)
-         
-    }
-
+        html: mailSubject == "Spade Welcome Email" ? codeHTML.welcomeHTML(email, random, name ) : codeHTML.codeHTML(name, random) 
+    } 
     transpoter.sendMail(mailOptions, function (error, info) {
         if (error) {
             console.log("Error occur to send email" + error);

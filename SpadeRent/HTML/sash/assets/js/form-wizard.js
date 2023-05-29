@@ -307,10 +307,16 @@ let card_btnn8 = document.getElementsByClassName("card-btnn")[7];
 let done = document.getElementById("done");
 
 
-let card_btnn9 = document.getElementsByClassName("btnt")[0];
+// let card_btnn9 = document.getElementsByClassName("btnt")[0];
+let card_btnn9 = document.getElementsByClassName("card-btnn")[8];
 let card_btnn10 = document.getElementsByClassName("card-btnn")[9];
 let card_btnn11 = document.getElementsByClassName("card-btnn")[10];
 let card_btnn12 = document.getElementsByClassName("card-btnn")[11];
+let card_btnn13 = document.getElementsByClassName("card-btnn")[12];
+let card_btnn14 = document.getElementsByClassName("card-btnn")[13];
+let card_btnn15 = document.getElementsByClassName("card-btnn")[14];
+let card_btnn16 = document.getElementsByClassName("card-btnn")[15];
+
 
 let nextpayment = document.getElementById("nextpayment");
 nextpayment.addEventListener("click", cardbtnchange2);
@@ -326,10 +332,15 @@ card_btnn5.addEventListener("click", cardbtnchange);
 card_btnn6.addEventListener("click", cardbtnchange1);
 card_btnn7.addEventListener("click", cardbtnchange1);
 card_btnn8.addEventListener("click", cardbtnchange1);
+// card_btnn9.addEventListener("click", cardbtnchange);
 card_btnn9.addEventListener("click", cardbtnchange);
-card_btnn10.addEventListener("click", cardbtnchange);
-card_btnn11.addEventListener("click", cardbtnchange);
-card_btnn12.addEventListener("click", cardbtnchange);
+card_btnn10.addEventListener("click", cardbtnchange1);
+card_btnn11.addEventListener("click", cardbtnchange1);
+card_btnn12.addEventListener("click", cardbtnchange1);
+card_btnn13.addEventListener("click", cardbtnchange);
+card_btnn14.addEventListener("click", cardbtnchange1);
+card_btnn15.addEventListener("click", cardbtnchange1);
+card_btnn16.addEventListener("click", cardbtnchange1);
 
 function cardbtnchange1()
 {
