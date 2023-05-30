@@ -50,7 +50,6 @@
             transition: all 1ms;
             /* Rounded corners for the thumb */
         }
-        
         .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb:hover {
             background-color: rgb(136, 136, 136, 0.5);
             /* Color of the scrollbar thumb on hover */
@@ -71,7 +70,18 @@
         .custom-file-input:hover::before {
             background: #0069d9;
         }
-        
+        /* .fi-rs-calendar {
+    position: absolute;
+    top: 78%;
+    right: 24px;
+    transform: translateY(-50%);
+    background-size: cover;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #1467B0;
+} */
+
+
         .custom-file-input:active::before {
             background: #0062cc;
         }
@@ -80,7 +90,13 @@
             content: 'Change Files';
             background: #28a745;
         }
-        
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            /* display: none; */
+            background-size: cover;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #1467B0;
+}
         .dark-mode .create-new-link {
             background: transparent !important;
             border: 3px solid #1467B0 !important;
@@ -98,7 +114,11 @@
         .selected-files {
             margin-top: 10px;
         }
-        
+        .del-btn{
+            position: absolute;
+    right: 10px;
+    top: 50%;
+        }
         .selected-files span {
             display: inline-block;
             margin-right: 5px;
@@ -599,7 +619,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label for="inputState" class="form-label fw-bold">Phone Number <span class="fw-light">(Optional)</span></label>
-                                        <div class="iti iti--allow-dropdown"><div class="iti__flag-container"><div class="iti__selected-flag" role="combobox" aria-owns="country-listbox" tabindex="0" title="United States: +1"><div class="iti__flag iti__us"></div><div class="iti__arrow"></div></div></div><input id="phone" name="phone" type="tel" autocomplete="off" data-intl-tel-input-id="0"></div>
+                                        <input id="phone" name="phone" type="tel" autocomplete="off">
                                         </select>
                                         <span class="text-danger d-none">State is required!</span>
                                     </div>
@@ -696,42 +716,52 @@
                                 <form class="row g-3">
                                     <div class="col-md-12">
                                         <label for="inputEmail4" class="form-label">Is this a gross lease or triple net
-                                            lease?</label>
+                                            lease? <i class="fi fi-rs-info ms-2" style="color: #1467B0"></i></label>
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                             <label class="form-check-label" for="flexCheckDefault">
                                                 Gross Lease
-                                            </label><span><i class="fi fi-rs-info"></i></span>
+                                            </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                            <label class="form-check-label" for="flexCheckChecked">
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked1" data-bs-toggle="collapse" href="#collapse1" role="button" aria-expanded="false" aria-controls="collapseExample1">
+                                            <label class="form-check-label" for="flexCheckChecked1">
                                                 Triple Net Lease
                                             </label>
                                         </div>
-                                        <div class="collapse" id="collapseExample">
+                                        <div class="collapse" id="collapse1">
                                             <div class="card card-body">
                                                 <div class="text-justify ps-2 border-model-line">
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <label for="inputEmail4" class="form-label">Base Rent Amount
                                                                 (Optional)</label>
-                                                            <input type="email" class="form-control" id="inputEmail4">
-                                                        </div>
+                                                            <div class="input-group">
+                                                                <span class="input-group-text" style="color: #1467B0;background-color: transparent !important;">$</span>
+                                                                <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                                                            </div>
+                                                            <span class="text-danger d-none">Rent amount is required!</span>
+                                                            </div>
                                                         <div class="col-md-6">
                                                             <label for="inputPassword4" class="form-label">Triple Net
                                                                 Amount (Optional)</label>
-                                                            <input type="password" class="form-control" id="inputPassword4">
-                                                        </div>
+                                                            <div class="input-group">
+                                                                <span class="input-group-text" style="color: #1467B0;background-color: transparent !important;">$</span>
+                                                                <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                                                            </div>
+                                                            <span class="text-danger d-none">Rent amount is required!</span>
+                                                            </div>
                                                         <div class="col-md-6">
                                                             <label for="inputEmail4" class="form-label">Lease Start
                                                                 Date</label>
-                                                            <input type="email" class="form-control" id="inputEmail4">
+                                                            <input type="date" class="form-control position-relative" id="inputEmail4">
+                                                            <!-- <i class="fi fi-rs-calendar"></i> -->
                                                         </div>
                                                         <div class="col-md-6">
                                                             <label for="inputPassword4" class="form-label">Lease End
                                                                 Date</label>
-                                                            <input type="password" class="form-control" id="inputPassword4">
+                                                            <input type="date" class="form-control" id="inputPassword4">
+                                                            <!-- <i class="fi fi-rs-calendar"></i> -->
                                                         </div>
                                                     </div>
                                                 </div>
@@ -740,16 +770,16 @@
                                     </div>
                                     <div class="col-md-12">
                                         <label for="inputEmail4" class="form-label">Are there any rent increases during
-                                            the Lease Term?</label>
+                                            the Lease Term? <i class="fi fi-rs-info ms-2" style="color: #1467B0"></i></label>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked2" data-bs-toggle="collapse" href="#collapse2" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                <input class="form-check-input" type="radio" value="yes" name="yesno" id="flexCheckChecked2"  href="#collapse2" role="button" aria-expanded="false" aria-controls="collapseExample2">
                                                 <label class="form-check-label" for="flexCheckChecked">
                                                     Yes
                                                 </label>
                                             </div>
                                         
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="">
+                                            <input class="form-check-input" type="radio" value="no" name="yesno">
                                             <label class="form-check-label" for="flexCheckChecked">
                                                 No
                                             </label>
@@ -778,19 +808,21 @@
                                                         <div class="col-md-5">
                                                             <label for="inputEmail4" class="form-label">Date of Rent Change
                                                                 (Optional)</label>
-                                                            <input type="email" class="form-control" id="inputEmail4">
+                                                            <input type="date" class="form-control" id="inputEmail4">
                                                         </div>
                                                         <div class="col-md-5">
                                                             <label for="inputPassword4" class="form-label">Rent Amount Correlating to
                                                                 that Date</label>
                                                             <input type="password" class="form-control" id="inputPassword4">
                                                         </div>
-                                                        <div class="col-md-2">
-                                                            <button>
-                                                                <i class="fi fi-rs-trash"></i>
+                                                        <div class="col-md-2 text-center d-flex align-items-center">
+                                                            <button type="button" class="btn position-relative">
+                                                              <i class="fi fi-rs-trash text-danger del-btn fs-5"></i>
                                                             </button>
-                                                        </div> 
+                                                          </div>
                                                     </div>
+                                                    
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -2101,7 +2133,9 @@
 
     <!-- SIDEBAR JS -->
     <script src="../assets/plugins/sidebar/sidebar.js"></script>
-
+    <script src="../assets/plugins/intl-tel-input-master/intlTelInput.js"></script>
+    <script src="../assets/plugins/intl-tel-input-master/country-select.js"></script>
+    <script src="../assets/plugins/intl-tel-input-master/utils.js"></script>
     <!-- Perfect SCROLLBAR JS-->
     <script src="../assets/plugins/p-scroll/perfect-scrollbar.js"></script>
     <script src="../assets/plugins/p-scroll/pscroll.js"></script>
@@ -2163,7 +2197,6 @@
     <!-- CHARTJS JS -->
     <script src="../assets/plugins/chart/Chart.bundle.js"></script>
     <script src="../assets/plugins/chart/utils.js"></script>
-
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
     <script>
@@ -2366,16 +2399,16 @@
 
                     $("#add-item-container").append(`<div class="row"><div class="col-md-5">
                                             <label for="inputEmail4" class="form-label">Date of Rent Change (Optional)</label>
-                                            <input type="email" class="form-control" id="inputEmail4">
+                                            <input type="date" class="form-control" id="inputEmail4">
                                           </div>
                                           <div class="col-md-5">
                                             <label for="inputPassword4" class="form-label">Rent Amount Correlating to that Date</label>
                                             <input type="password" class="form-control" id="inputPassword4">
                                           </div>
                                           <div class="col-md-2 text-center d-flex align-items-center">
-                                            <button class="positon-absolute" style="top:80%;left:50%;">
-                                                <i class="fi fi-rs-trash"></i>
-                                            </button>
+                                            <button type="button" class="btn position-relative">
+                                                                <i class="fi fi-rs-trash text-danger del-btn fs-5"></i>
+                                                            </button>
                                         </div>`)
                 })
                 //         $(function() {
@@ -2385,7 +2418,29 @@
                 //     $('#navbar-placeholder').load('./header.html');
                 //   });
                 // Array to store the selected files
+                $('#add-item-container').on('click', '.del-btn', function() {
+                    var $row = $(this).closest('.row');
+    var $rowsContainer = $row.parent();
 
+    if ($rowsContainer.children('.row').length > 1) {
+      $row.remove();
+    } else {
+    //   alert('Cannot delete the last row.');
+    }
+  });
+  $('input[name="yesno"]').change(function() {
+    console.log($(this).val())
+    if ($(this).val() === 'yes') {
+      if (!$('#collapse2').hasClass('show')) {
+        $('#collapse2').collapse('show');
+      }
+    } else if ($(this).val() === 'no') {
+        
+      if ($('#collapse2').hasClass('show')) {
+        $('#collapse2').collapse('hide');
+      }
+    }
+  });
             $('#fileInput').on('change', function() {
                 var files = Array.from($(this)[0].files);
                 console.log(files)
