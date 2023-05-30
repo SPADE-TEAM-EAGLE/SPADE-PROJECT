@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
+const tenantController = require('../controllers/tenantController');
 const verifyToken = require('../middleware/authenticate');
 const {upload} = require('../middleware/imageUploads') ;
 const {uploadExistingFiles} = require('../middleware/imageUploads') ;
@@ -27,15 +28,16 @@ router.put('/updateProperty', [verifyToken,upload], userController.propertyUpdat
 router.get('/viewProperty', verifyToken,userController.propertyView);
 router.get('/PropertyUnits',verifyToken,  userController.getpropertyUnits);
 router.put('/PropertyUnitsUpdates',verifyToken,  userController.putPropertyUnitsUpdates);
-router.post('/tenants',verifyToken,userController.createTenants);
-router.post('/sendInvitationLink', verifyToken, userController.sendInvitationLink); 
-router.post('/tenantIncreaseRent' , userController.tenantIncreaseRent); 
+router.get('/getPropertyUnitsTenant', userController.getPropertyUnitsTenant);
 router.get('/getPropertyTenant', verifyToken,userController.getPropertyTenant);
+router.post('/tenants',verifyToken,tenantController.createTenants);
+router.post('/sendInvitationLink', verifyToken, tenantController.sendInvitationLink); 
+// router.post('/tenantIncreaseRent' , userController.tenantIncreaseRent); 
 // router.get('/verifyMailCheck',verifyToken,  userController.verifyMailCheck);
-router.get('/verifyMailCheck', userController.verifyMailCheck);
-router.put('/resetEmailTenant', userController.createResetEmailTenant);
-router.post('/verifyResetEmailCodeTenant', userController.verifyResetEmailCodeTenant);
-router.put('/updatePasswordTenant', userController.updatePasswordTenant);
+router.get('/verifyMailCheck', tenantController.verifyMailCheck);
+router.get('/resetEmailTenant', tenantController.createResetEmailTenant);
+router.post('/verifyResetEmailCodeTenant', tenantController.verifyResetEmailCodeTenant);
+router.put('/updatePasswordTenant', tenantController.updatePasswordTenant);
 
 module.exports = router;
 
