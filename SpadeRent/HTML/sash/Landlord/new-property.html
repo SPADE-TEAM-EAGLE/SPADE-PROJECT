@@ -104,6 +104,7 @@
         .modal-footer .button {
             font-size: 0.938rem;
         }
+        
         button.btn-close {
             right: 6px;
         }
@@ -547,35 +548,7 @@
     </div>
     <!-- /GLOBAL-LOADER -->
     <!-- Modal -->
-    <div class="modal fade" id="succesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-
-                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><img src="../assets/images/cross-circle.svg" /></span>
-                    </button>
-                </div>
-                <div class="modal-body succes-modal">
-                    <div class="text-justify ps-2 border-model-line">
-                        <h2 class="modal-title d-flex align-items-center ps-1">
-                            <strong class="color-primary">Success!&nbsp;</strong>
-                            <i class="fi fi-rs-check-circle text-success"></i>
-                        </h2>
-                        <a href="javascript:void(0)" class="btn btn-outline-default btn-pill ms-1 my-2" style='background-color:#1467B0;color: white;'> <i class="fi fi-rs-pencil"></i> EDIT PROPERTY UNITS</a>
-                        <a class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal">
-                            <i class="fi fi-rs-plus-small" style="vertical-align: middle;"></i>Add Tenants
-                        </a>
-                        <p class="ms-2 mb-0 text-start">Your Property has been successfully added.</p>
-                        <p class="ms-2 text-start">Please add tenant to this property.</p>
-                    </div>
-
-                </div>
-                <div class="modal-footer" style="border-top: 0">
-                </div>
-            </div>
-        </div>
-    </div>
+    
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
@@ -585,33 +558,39 @@
                         <span class="">Spade Rent allows you to add a range of commercial and residential properties,
                             from condos and single-family homes to retail stores and parking lots.</span>
                     </div>
-                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="top-close">
                         <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="accordion-item mb-4" id="accordion-item1">
                         <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button text-white" id="accordian-button-1" type="button" data-bs-toggle="collapse" onclick="checkFieldsFilled('accordion-item1')" id="accordion-button1" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <button class="accordion-button text-white" id="accordian-button-1" type="button"
+                                data-bs-toggle="collapse" onclick="checkFieldsFilled('accordion-item1')"
+                                id="accordion-button1" data-bs-target="#collapseOne" aria-expanded="true"
+                                aria-controls="collapseOne">
                                 <span class="m-0 me-4 fs-1" style="font-weight: bold;">01</span>
                                 <h3 class="m-0"><strong>Property Information</strong> <i class="fi fi-rs-pencil"></i><i
                                         class="fi fi-rs-angle-circle-down chevron icon"></i>
                                 </h3>
                             </button>
                         </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                            data-bs-parent="#accordionExample">
                             <div class="accordion-body">
                                 <form class="row g-3" enctype="multipart/form-data">
                                     <div class="col-md-12">
                                         <label class="form-label fw-bold">Property Photo</label>
                                         <div class="custom-file" style="border: 1px dashed #00000087;">
-                                            <input id="fileInput" type="file" name="image" class="custom-file-input form" accept=".jpg, .png, image/jpeg, image/png" aria-label="hello" multiple>
+                                            <input id="fileInput" type="file" name="image"
+                                                class="custom-file-input form"
+                                                accept=".jpg, .png, image/jpeg, image/png" aria-label="hello" multiple>
                                             <span className="d-none"></span>
                                             <label class="custom-file-label" for="fileInput">
                                                 <i class="fi fi-rs-cloud-upload"></i>
                                                 <div class="custom-file-text">
                                                     <span>Upload Photo or drag and drop here</span>
-                                                    <span>JPEG, PNG and PDF, file size no more than 10MB</span>
+                                                    <span>JPEG and PNG, file size no more than 10MB</span>
                                                 </div>
                                             </label>
                                         </div>
@@ -634,34 +613,39 @@
                                     <div class="col-12">
                                         <label for="inputAddress" class="form-label fw-bold">Address <spnan
                                                 class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="address" placeholder="1234 Main St">
+                                        <input type="text" class="form-control form" id="address"
+                                            placeholder="1234 Main St">
                                         <span class="text-danger d-none">Address is required!</span>
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="inputCity" class="form-label fw-bold">City <span class="text-danger">*</span></label>
-                                        <select id="city" class="form-select form city-select">
-                                          <option selected>Choose...</option>
-                                        </select>
-                                        <span class="text-danger d-none">City is required!</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputState" class="form-label fw-bold">State <spnan
+                                        <label for="inputState" class="form-label fw-bold">State <span
                                                 class="text-danger">*</span></label>
-                                        <select id="state" class="form-select form">
+                                        <select id="state" class="form-select form state-select">
                                             <option selected>Choose...</option>
-                                            <option>Sindh</option>
-                                            <option>Punjab</option>
-                                            <option>Balochistan</option>
-                                            <option>KPK</option>
+                                            <option value="Sindh">Sindh</option>
+                                            <option value="Punjab">Punjab</option>
+                                            <option value="Balochistan">Balochistan</option>
+                                            <option value="KPK">KPK</option>
                                         </select>
                                         <span class="text-danger d-none">State is required!</span>
                                     </div>
                                     <div class="col-md-4">
+                                        <label for="inputCity" class="form-label fw-bold">City <span
+                                                class="text-danger">*</span></label>
+                                        <select id="city" class="form-select form city-select">
+                                            <option selected>Choose...</option>
+                                        </select>
+                                        <span class="text-danger d-none">City is required!</span>
+                                    </div>
+                                    <div class="col-md-4">
                                         <label for="inputZip" class="form-label fw-bold">Zip <spnan class="text-danger">
                                                 *</span></label>
-                                        <input type="text" class="form-control form" id="zip">
-                                        <span class="text-danger d-none">Zip is required!</span>
+                                        <input class="form-control form" type="text" id="zip" name="zip"
+                                            pattern="[0-9]{5}" placeholder="A valid 5-digit zip code" maxlength="5"
+                                            oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                                        <span class="text-danger d-none">Zip code is required!</span>
                                     </div>
+
                                     <div class="col-md-6">
                                         <label for="inputState" class="form-label fw-bold">Property Type <spnan
                                                 class="text-danger">*</span></label>
@@ -676,7 +660,9 @@
                                     <div class="col-md-6">
                                         <label for="inputPassword4" class="form-label fw-bold">Property Total SF <spnan
                                                 class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="propertyTotalSF">
+                                        <input type="text" class="form-control form" id="propertyTotalSF"
+                                            pattern="[0-9]{5}" placeholder="Area in square feet" maxlength="5"
+                                            oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                                         <span class="text-danger d-none">Property Total SF is required!</span>
                                     </div>
                                 </form>
@@ -685,7 +671,9 @@
                     </div>
                     <div class="accordion-item" id="accordion-item2">
                         <h2 class="accordion-header" id="headingTwo">
-                            <button class="accordion-button collapsed text-white" onclick="checkFieldsFilled('accordion-item2')" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <button class="accordion-button collapsed text-white"
+                                onclick="checkFieldsFilled('accordion-item2')" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                 <span class="m-0 me-4 fs-1" style="font-weight: bold;">02</span>
                                 <h3 class="m-0"><strong>Property Unit Information</strong> <i
                                         class="fi fi-rs-pencil"></i><i
@@ -693,13 +681,16 @@
                                 </h3>
                             </button>
                         </h2>
-                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                            data-bs-parent="#accordionExample">
                             <form class="row g-3 m-1" enctype="multipart/form-data">
 
                                 <div class="col-12 mb-3">
                                     <label for="inputAddress" class="form-label fw-bold">Number of Units<span
                                             class="text-danger">*</span></label>
-                                    <input type="text" class="form-control px-2" id="units" placeholder=" ">
+                                    <input type="text" class="form-control px-2" id="units" pattern="[0-9]{5}"
+                                        placeholder="units.." maxlength="3"
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                                     <span class="text-danger d-none">Units are required!</span>
                                 </div>
                             </form>
@@ -707,11 +698,48 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
+                    <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft'
+                        disabled>Save as
                         Draft</button>
-                    <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close'>Close</button>
+                    <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal"
+                        id='close'>Close</button>
                     <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
-                    <a href="javascript:void(0)" class="btn text-light button disabled" style="background-color:#1467B0;" id="next">Next</a> </div>
+                    <a href="javascript:void(0)" class="btn text-light button disabled"
+                        style='background-color:#1467B0;' id='next'>Next</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- succes modal -->
+
+    <div class="modal fade" id="succesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="succes-close">
+                        <span aria-hidden="true"><img src="../assets/images/cross-circle.svg" /></span>
+                    </button>
+                </div>
+                <div class="modal-body succes-modal">
+                    <div class="text-justify ps-2 border-model-line">
+                        <h2 class="modal-title d-flex align-items-center ps-1">
+                            <strong class="color-primary">Success!&nbsp;</strong>
+                            <i class="fi fi-rs-check-circle text-success"></i>
+                        </h2>
+                        <a href="javascript:void(0)" class="btn btn-outline-default btn-pill ms-1 my-2"
+                            style='background-color:#1467B0;color: white;'> <i class="fi fi-rs-pencil"></i> EDIT
+                            PROPERTY UNITS</a>
+                        <a class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal">
+                            <i class="fi fi-rs-plus-small" style="vertical-align: middle;"></i>Add Tenants
+                        </a>
+                        <p class="ms-2 mb-0 text-start">Your Property has been successfully added.</p>
+                        <p class="ms-2 text-start">Please add tenant to this property.</p>
+                    </div>
+
+                </div>
+                <div class="modal-footer" style="border-top: 0">
+                </div>
             </div>
         </div>
     </div>
@@ -1712,348 +1740,7 @@
             logo.src = '../assets/header-img/question.svg';
         }
     </script>
-    <script>
-        const form1Inputs = document.querySelectorAll('#accordion-item1 .form');
-        form1Inputs.forEach(input => {
-            input.addEventListener('blur', function() {
-                if (validateInput(input)) {
-                    input.nextElementSibling.classList.add('d-none');
-                } else {
-                    input.nextElementSibling.classList.remove('d-none');
-                }
-            });
-        });
-
-        // Attach event listeners to input fields in second form
-        const form2Inputs = document.querySelectorAll('#accordion-item2 .form-control');
-        form2Inputs.forEach(input => {
-            input.addEventListener('blur', function() {
-                // console.log(input.nextElementSibling)
-                if (validateInput(input)) {
-                    input.nextElementSibling.classList.add('d-none');
-                } else {
-                    input.nextElementSibling.classList.remove('d-none');
-                }
-            });
-        });
-        counter = 0
-        const draftButton = document.getElementById('draft');
-        const nextButton = document.getElementById('next');
-        let isForm1Valid = false;
-        let isForm2Valid = false;
-
-        function checkFieldsFilled(id) {
-            if (id === "accordion-item2" && counter === 0) {
-                counter += 1
-                return
-            }
-            const accordionItem = document.getElementById(id);
-            // console.log(accordionItem)
-            const formFields = accordionItem.querySelectorAll("input, select");
-            console.log(formFields)
-            let allFieldsFilled = true;
-            // console.log(formFields)
-            formFields.forEach(function(field) {
-                // console.log(field.type, field.value)
-                
-                if (field.value === "" || field.value==="Choose...") {
-                    allFieldsFilled = false;
-                }
-
-            });
-
-            const chevronIcon = accordionItem.querySelector(".icon");
-
-            if (accordionItem.querySelector(".accordion-button").classList.contains("collapsed")) {
-                if (allFieldsFilled) {
-                    chevronIcon.classList.remove("fi-rs-exclamation");
-                    chevronIcon.classList.remove("chevron");
-                    chevronIcon.classList.add("fi-rs-check-circle");
-                    chevronIcon.classList.add("tick");
-                } else {
-                    chevronIcon.classList.remove("fi-rs-check-circle");
-                    chevronIcon.classList.remove("chevron");
-                    chevronIcon.classList.add("fi-rs-exclamation");
-                    chevronIcon.classList.add("cross");
-                }
-            } else {
-                chevronIcon.classList.remove("fi-rs-check-circle");
-                // chevronIcon.classList.remove("chevron");
-                chevronIcon.classList.add("chevron");
-                chevronIcon.classList.remove("fi-rs-exclamation");
-                chevronIcon.classList.remove("cross");
-                chevronIcon.classList.remove("tick");
-            }
-            if (id === "accordion-item1") {
-                // console.log(1)
-                form1Inputs.forEach(input => {
-                    if (validateInput(input)) {
-
-                        input.nextElementSibling.classList.add('d-none');
-                    } else {
-                        input.nextElementSibling.classList.remove('d-none');
-                    }
-                });
-            } else if (id === "accordion-item2") {
-                // console.log(form2Inputs)
-                form2Inputs.forEach(input => {
-                    if (validateInput(input)) {
-                        input.nextElementSibling.classList.add('d-none');
-                    } else {
-                        input.nextElementSibling.classList.remove('d-none');
-                    }
-                });
-            }
-            if (id === 'accordion-item1') {
-                isForm1Valid = validateForm(document.getElementById('accordion-item1'));
-            } else if (id === 'accordion-item2') {
-                isForm2Valid = validateForm(document.getElementById('accordion-item2'));
-            }
-            // const isForm1Valid = validateForm(document.getElementById('accordion-item1'));
-            // const isForm2Valid = validateForm(document.getElementById('accordion-item2'));
-
-            // Enable/Disable buttons based on form validity
-            if (isForm1Valid && isForm2Valid) {
-                draftButton.disabled = false;
-                nextButton.classList.remove("disabled")
-            } else {
-                // console.log(1)
-                draftButton.disabled = true;
-                nextButton.classList.add("disabled")
-            }
-        }
-
-        function validateInput(inputElement) {
-            // console.log(inputElement)
-            if (inputElement.value.trim() === '' || inputElement.value.trim() === "Choose...") {
-                inputElement.style.border = '1px solid red';
-
-                return false
-                    // inputElement.siblings('.text-danger').show();
-            } else {
-
-                inputElement.style.border = '1px solid #ced4da'
-                return true
-                    // inputElement.siblings('.text-danger').hide();
-            }
-        }
-
-        function validateForm(form) {
-            let inputs
-                // console.log(form.id)
-            if (form.id === "accordion-item1") {
-                // console.log(form.id)
-                inputs = form.querySelectorAll('.form');
-            } else if (form.id === "accordion-item2") {
-                // console.log(form.id)
-                inputs = form.querySelectorAll('.form-control');
-            }
-            let isValid = true;
-            inputs.forEach(input => {
-                validateInput(input);
-
-                if (input.value.trim() === '' || input.value.trim() === 'Choose...') {
-                    isValid = false;
-                }
-            });
-
-            return isValid;
-        }
-        var selectedFiles = [];
-        $(document).ready(function() {
-            $("#succesModal").on('hide.bs.modal', function(){
-                window.location="./properties-all.html"
-})
-            $.ajax({
-                    url: 'http://api.geonames.org/searchJSON',
-                    method: 'GET',
-                    data: {
-                        country: 'PK', // Country code for Pakistan
-                        maxRows: 500, // Maximum number of cities to retrieve (adjust as needed)
-                        username: 'developedmatz', // Replace with your GeoNames username
-                        style: 'full'
-                    },
-                    success: function(result) {
-                        // Handle state selection change
-                        $('#state').change(function() {
-                            var selectedState = $(this).val();
-                            if (selectedState === "KPK") {
-                                selectedState = "Khyber Pakhtunkhwa"
-                            }
-
-                            var cityDropdown = $('#city');
-
-                            // Clear existing options
-                            cityDropdown.empty();
-                            cityDropdown.append($('<option></option>').text("Choose..."));
-                            cities = []
-                            if (selectedState !== "Choose...") {
-                                // Populate city options based on selected state
-                                count = 0
-                                data = result.geonames
-                                for (item of data) {
-                                    if (item.adminName1 === selectedState) {
-                                        cities.push(item.name)
-                                        count++
-                                    }
-                                    if (count === 10) {
-                                        break
-                                    }
-                                }
-
-                                cities.forEach(function(city) {
-                                    cityDropdown.append($('<option></option>').text(city));
-                                });
-
-                            }
-                        });
-                    },
-                    error: function(xhr, status, error) {
-
-                    }
-                })
-                // $('#succesModal').modal('show')
-
-
-            //         $(function() {
-            //     $('#sidebar-placeholder').load('./sidebar.html');
-            //   });
-            //   $(function() {
-            //     $('#navbar-placeholder').load('./header.html');
-            //   });
-            // Array to store the selected files
-
-            $('#fileInput').on('change', function() {
-                var files = Array.from($(this)[0].files);
-                console.log(files)
-                files.forEach(function(file) {
-                    selectedFiles.push(file); // Add each file to the selected files array
-                });
-
-                updateSelectedFilesContainer(); // Update the selected files container
-            });
-            $(document).on('click', '.delete-file', function() {
-                var index = $(this).data('index');
-                selectedFiles.splice(index, 1); // Remove the selected file from the array
-                updateSelectedFilesContainer(); // Update the selected files container
-            });
-            $('#addModal').on('hidden.bs.modal', function() {
-                // Clear input values
-                $(this).find('input, textarea, select').val('');
-
-                // Clear file input values
-                $(this).find('input[type="file"]').val(null);
-
-                // Clear radio button selections
-                $(this).find('input[type="radio"]').prop('checked', false);
-                $(this).find('.file-grid').empty();
-            });
-
-            $(document).on('click', '#next', function(e) {
-                console.log(1)
-                $('#addModal').modal('hide');
-                // $("#largemodal").addClass("hide");
-                var formData = new FormData();
-
-                // Get the form data
-                var propertyName = $("#propertyName").val();
-                var address = $("#address").val();
-                var city = $("#city").val();
-                var state = $("#state").val();
-                var zipCode = $("#zip").val();
-                var propertyType = $("#propertyType").val();
-                var propertySQFT = $("#propertyTotalSF").val();
-                var units = $("#units").val();
-
-                // Add the form data to the FormData object
-                formData.append('propertyName', propertyName);
-                formData.append('address', address);
-                formData.append('city', city);
-                formData.append('state', state);
-                formData.append('zipCode', zipCode);
-                formData.append('propertyType', propertyType);
-                formData.append('propertySQFT', propertySQFT);
-                formData.append('units', units);
-
-                // Get the selected files
-                var files = $('#fileInput')[0].files;
-
-            // Send the form data to the server using AJAX
-            $.ajax({
-                url: 'http://localhost:3000/api/spade/property',
-                type: 'POST',
-                data: formData,
-                contentType: false,
-                processData: false,
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                },
-
-                success: function(response) {
-                    // console.log(1)
-                    $('#succesModal').modal('show')
-                    // window.location="./properties-all.html"
-                        // window.location = '../Landlord/properties-all.html';
-                },
-                error: function(xhr, status, error) {
-                    window.alert('Error: ' + error);
-                }
-
-                // Send the form data to the server using AJAX
-                
-
-
-            });
-            })
-            function updateSelectedFilesContainer() {
-                var selectedFilesContainer = $('.file-grid');
-                selectedFilesContainer.empty();
-                console.log(selectedFiles)
-                selectedFiles.forEach(function(file, index) {
-
-                    var fileElement = $('<div>')
-                        .addClass('selected-file')
-                        .append(
-                            $('<img>')
-                            .addClass('file-preview')
-                            .attr('src', typeof file === "object" ? URL.createObjectURL(file) : '../../../../spadeAPI/uploads/' + file)
-                        )
-                        .append(
-                            $('<div>')
-                            .addClass('file-details')
-                            .append($('<span>').text("Image-" + (index + 1)))
-                            // .append($('<span>').text(fileSize))
-                        )
-                        .append(
-                            $('<p>')
-                            .addClass('delete-file')
-                            .text('X')
-                            .attr('data-index', index)
-                        )
-                        .appendTo(selectedFilesContainer);
-
-                });
-
-            }
-
-            function formatFileSize(bytes) {
-                if (bytes === 0) return '0 Bytes';
-                var k = 1024;
-                var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-                var i = Math.floor(Math.log(bytes) / Math.log(k));
-                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-            }
-
-            function truncateFileName(fileName) {
-                var maxFileNameLength = 10; // Define the maximum length of the file name
-                if (fileName.length > maxFileNameLength) {
-                    return fileName.substring(0, maxFileNameLength) + '...'; // Truncate the file name
-                }
-
-                return fileName;
-            }
-
-        })
+    <script src="../assets/js/modal_functionality.js">
     </script>
 </body>
 
