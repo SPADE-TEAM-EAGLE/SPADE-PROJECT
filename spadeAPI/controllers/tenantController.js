@@ -9,19 +9,10 @@ const { serialize } = require('cookie');
 const {
   selectQuery,
   deleteQuery,
-  insertInUsers,
-  addResetToken,
-  updatePassword,
-  insertInProperty,
-  insertInPropertyImage,
-  updateProperty,
-  insertInPropertyUnits,
-  updatePropertyUnits,
   insertTenants,
   UpdateTenants,
   addResetTokenTenants,
   updatePasswordTenant,
-  selectPropertyTenant
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
