@@ -680,6 +680,47 @@ exports.putPropertyUnitsUpdates = async (req, res) => {
 //  ############################# update Property Units End ############################################################
 
 
+      //  #############################  Property Units End Start ############################################################
+      exports.getPropertyUnitsTenant= async (req, res) => {
+        try {
+          const {id } = req.body
+          const getPropertyUnitsTenantResult = await queryRunner(selectQuery("property","landlordID"),[id]);
+          if (getPropertyUnitsTenantResult[0].length > 0) {
+            let unitsFound = false;
+            for(let i = 0; i < getPropertyUnitsTenantResult[0][0].units; i++){
+              const propertyID = getPropertyUnitsTenantResult[0][0].id;
+              const getPropertyUnitsResult = await queryRunner(selectQuery("propertyunits","propertyID","status"), [propertyID, "Vacant"]);
+              if(getPropertyUnitsResult[0].length > 0){
+                getPropertyUnitsTenantResult[0].push(getPropertyUnitsResult[0][i]);
+                unitsFound = true; 
+                } 
+        }
+
+        if (unitsFound) {
+        res.status(200).json({
+          data: getPropertyUnitsTenantResult[0],
+          count: count,
+          message: "get Property Units Tenant" 
+        })
+       } else {
+        res.status(200).json({
+          data : getPropertyUnitsTenantResult[0],
+          message: "No unit found"
+        });
+      }
+          } else {
+            res.status(400).json({
+              message: "No data found"
+            })
+          }
+        } catch (error) {
+          res.send("get Property Units Tenant");
+          console.log(error)
+        }
+            }
+            //  #############################  Property Units End ############################################################
+    
+
 
 //  ############################# Create tenants Start ############################################################
 exports.createTenants = async (req, res) => {
