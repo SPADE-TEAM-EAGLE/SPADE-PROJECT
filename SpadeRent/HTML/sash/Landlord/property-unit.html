@@ -2010,6 +2010,7 @@
             });
         });
         const propertyId = (new URL(document.location)).searchParams.get("propertyId");
+        // console.log(propertyId)
         // // console.log($("#viewUnits").attr("href"))
 
         $("#viewUnits").attr("href", `./property-unit.html?propertyId=${propertyId}`)
@@ -2113,6 +2114,7 @@
                         tableBody.append(row);
                     });
                     $('.done-option').click(function(e) {
+                        console.log(22)
                         e.preventDefault();
                         const unitIdElement = $(this).closest("tr").find(".unit-id");
                         const unitId = unitIdElement.text();
@@ -2127,8 +2129,9 @@
 
                             }
                             values.push(cellValue)
-                            console.log(values)
+                            // console.log(values)
                         });
+                        console.log(propertyId)
                         $.ajax({
                             url: 'http://localhost:3000/api/spade/PropertyUnitsUpdates',
                             type: 'PUT',
@@ -2144,6 +2147,7 @@
                                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                             },
                             success: function(response) {
+                                console.log(response)
                                 getData()
                             },
                             error: function(xhr, status, error) {

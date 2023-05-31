@@ -28,7 +28,7 @@ const config = process.env;
           exports.createTenants = async (req, res) => {
             try {
               const {
-                landlordID,
+                // landlordID,
                 firstName,
                 lastName,
                 companyName,
@@ -48,7 +48,7 @@ const config = process.env;
                 leaseEndDate,
                 increaseRent
               } = req.body
-          
+              const {userId}=req.user
               const tenantsCheck = await queryRunner(selectQuery("tenants", "email"), [email]);
               if (tenantsCheck[0].length > 0) {
                 // res.send("email found");

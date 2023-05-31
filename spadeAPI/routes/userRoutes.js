@@ -28,7 +28,7 @@ router.put('/updateProperty', [verifyToken,upload], userController.propertyUpdat
 router.get('/viewProperty', verifyToken,userController.propertyView);
 router.get('/PropertyUnits',verifyToken,  userController.getpropertyUnits);
 router.put('/PropertyUnitsUpdates',verifyToken,  userController.putPropertyUnitsUpdates);
-router.get('/getPropertyUnitsTenant', userController.getPropertyUnitsTenant);
+router.get('/getPropertyUnitsTenant',verifyToken, userController.getPropertyUnitsTenant);
 router.get('/getPropertyTenant', verifyToken,userController.getPropertyTenant);
 router.post('/tenants',verifyToken,tenantController.createTenants);
 router.post('/sendInvitationLink', verifyToken, tenantController.sendInvitationLink); 
