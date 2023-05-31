@@ -17,10 +17,6 @@ const {
   updateProperty,
   insertInPropertyUnits,
   updatePropertyUnits,
-  insertTenants,
-  UpdateTenants,
-  addResetTokenTenants,
-  updatePasswordTenant,
   selectPropertyTenant
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
@@ -28,7 +24,7 @@ const { queryRunner } = require("../helper/queryRunner");
 const config = process.env;
 
 exports.createUser = async function (req, res) {
-  const { firstName, lastName, email, phone, password, planID } = req.body;
+  const { firstName, lastName, email, phone, password, planID, } = req.body;
   try {
     const selectResult = await queryRunner(selectQuery("users", "Email"), [email])
     if (selectResult[0].length > 0) {
