@@ -16,7 +16,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="../assets/images/brand/favicon.ico" />
 
     <!-- TITLE -->
-    <title>Tenant Overview - SpadeRent</title>
+    <title>Property Tasks - SpadeRent</title>
 
     <!-- BOOTSTRAP CSS -->
     <link id="style" href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -36,6 +36,44 @@
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
         .custom-file-input::-webkit-file-upload-button {
             visibility: hidden;
+        }
+        
+        #propertyTable {
+            padding: 0;
+        }
+        
+        #propertyTable_wrapper .dataTables_wrapper {
+            padding: 0;
+        }
+        
+        #propertyTable_wrapper .dataTables_scroll {
+            padding: 0;
+        }
+        
+        #propertyTable_wrapper .dataTables_scrollHead {
+            padding: 0;
+        }
+        
+        #propertyTable_wrapper .dataTables_scrollBody {
+            padding: 0;
+        }
+        
+        .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar {
+            width: 7px;
+            /* Width of the scrollbar */
+        }
+        
+        .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb {
+            background-color: rgb(136, 136, 136, 0.2);
+            /* Color of the scrollbar thumb */
+            border-radius: 7px;
+            transition: all 1ms;
+            /* Rounded corners for the thumb */
+        }
+        
+        .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb:hover {
+            background-color: rgb(136, 136, 136, 0.5);
+            /* Color of the scrollbar thumb on hover */
         }
         
         .custom-file-input::before {
@@ -63,19 +101,34 @@
             background: #28a745;
         }
         
+        .dark-mode .create-new-link {
+            background: transparent !important;
+            border: 3px solid #1467B0 !important;
+            color: white !important;
+            border-radius: 50px !important;
+        }
+        /* .dark-mode .create-new-link:hover {
+    border: 3px solid #1467B0 !important;
+} */
+        
+        .create-new-link {
+            background: transparent !important;
+            border: 3px solid #1467B0 !important;
+            color: black;
+            border-radius: 50px !important;
+        }
+        
         .selected-files {
             margin-top: 10px;
         }
         
-        .image-container {
-            /* Border width and color */
-            border-radius: 5px;
-            /* Border radius for rounded corners */
-            padding: 10px;
-            /* Spacing between the image and the border */
-            /* Shadow effect */
-            margin-bottom: 10px;
-            /* Margin between the image containers */
+        .dark-mode .selected-files span {
+            display: inline-block;
+            margin-right: 0;
+            padding: 4px 8px;
+            background: transparent;
+            color: white !important;
+            border-radius: 4px;
         }
         
         .selected-files span {
@@ -99,6 +152,16 @@
             justify-content: center;
             padding: 6px 12px;
             background-color: #fff;
+        }
+        
+        .dark-mode .custom-file-label {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 12px;
+            background-color: transparent;
         }
         
         .custom-file-label i {
@@ -129,11 +192,15 @@
             border: 1px solid #e9edf4;
         }
         /* input:focus {
-            border: 3px solid #555 !important;
-        } */
+    border: 3px solid #555 !important;
+} */
         
         .panel-body {
             padding: 0px;
+        }
+        
+        .dark-mode .btn-close {
+            color: white;
         }
         
         .accordion-item:first-of-type {
@@ -193,8 +260,8 @@
             vertical-align: middle !important;
         }
         /* .card-header {
-        padding: 0.5rem 1rem;
-    } */
+padding: 0.5rem 1rem;
+} */
         
         .modal-footer .button-left {
             background-color: #1F1F1F;
@@ -202,17 +269,29 @@
             color: white;
         }
         
-        .modal-footer button {
+        .modal-footer button,
+        .modal-footer a {
             border-radius: 2.75rem;
             padding: 4px 30px;
             font-family: 'Figtree';
             font-style: normal;
             font-weight: 600;
-            font-size: 0.938rem;
             line-height: 1.875rem;
+            font-size: 0.77rem;
             box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
             /* identical to box height, or 120% */
             letter-spacing: 0.0145455em;
+            /* font-size: 0.938rem; */
+        }
+        
+        .disabled {
+            pointer-events: none;
+            cursor: not-allowed;
+            color: gray;
+        }
+        
+        .modal-footer .button {
+            font-size: 0.938rem;
         }
         
         .accordion-button::after {
@@ -229,7 +308,7 @@
         }
         
         .tick {
-            color: green;
+            color: #1DBC5F;
             font-weight: bolder
         }
         
@@ -291,11 +370,11 @@
         
         .delete-file {
             position: absolute;
-            top: 5px;
-            right: 5px;
+            top: -1px;
+            right: 4px;
             cursor: pointer;
-            font-size: 18px;
-            color: #ff0000;
+            font-size: 11px;
+            color: #000;
         }
         
         .btn-group>.btn-group:not(:last-child)>.btn,
@@ -316,34 +395,28 @@
             border-top-right-radius: calc(0.5rem - 1px);
             border-top-left-radius: calc(0.5rem - 1px);
         }
-        
-        .selected-files span {
-            display: inline-block;
-            margin-right: 0px;
-            padding: 0px;
-            background: none;
-            color: #333;
-            /* border-radius: 4px; */
-        }
-        
-        .delete-file {
-            position: absolute;
-            top: 0px;
-            right: 5px;
-            cursor: pointer;
-            font-size: 13px;
-            color: #000;
-        }
+        /* .delete-file {
+position: absolute;
+top: 0px;
+right: 5px;
+cursor: pointer;
+font-size: 13px;
+color: #000;
+} */
         
         button.btn-close {
-            right: -7px;
+            right: 6px;
         }
         
         .btn-close {
-            width: 2.5rem !important;
+            width: 1.8rem;
             opacity: 1;
             position: absolute;
             top: 6px;
+        }
+        
+        .del {
+            width: 2rem !important;
         }
         
         .btn-close:hover,
@@ -368,9 +441,9 @@
             #top_main_image {
                 display: none;
             }
-            /* #top_main_card {
+            #top_main_card {
                 height: 220px;
-            } */
+            }
             #nav_links {
                 top: 153px;
             }
@@ -413,9 +486,9 @@
             #top_main_image {
                 display: none;
             }
-            /* #top_main_card {
+            #top_main_card {
                 height: 220px;
-            } */
+            }
             #nav_links {
                 top: 153px;
             }
@@ -424,6 +497,9 @@
         @media (max-width:375px) {
             .border-model-line h2 {
                 font-size: 1.4rem;
+            }
+            .succes-modal {
+                padding: 1rem 1rem;
             }
         }
         
@@ -446,6 +522,20 @@
                 padding: 5px;
             }
         }
+        
+        th,
+        td {
+            border-left-color: transparent !important;
+            border-right-color: transparent !important;
+        }
+        
+        .dark-mode th {
+            background: #212121 !important;
+        }
+        
+        .light-mode th {
+            background: #ECF3F9 !important;
+        }
     </style>
 
 </head>
@@ -453,6 +543,9 @@
 <body class="app sidebar-mini ltr light-mode">
 
     <!-- GLOBAL-LOADER -->
+    <!-- <div id="global-loader">
+        <img src="../assets/images/loader.svg" class="loader-img" alt="Loader">
+    </div> -->
     <div id="preloader" class="tlp-preloader">
         <div class="animation-preloader">
             <div class="tlp-spinner"></div>
@@ -460,150 +553,305 @@
         </div>
     </div>
     <!-- /GLOBAL-LOADER -->
-    <!-- Modal -->
-    <div class="modal fade" id="largemodal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg " role="document">
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="text-justify ps-2 border-model-line">
-                        <h2 class="modal-title">Create <strong class="color-primary">New Property</strong></h2>
-                        <span class="">Spade Rent allows you to add a range of commercial and residential properties,
-                            from condos and single-family homes to retail stores and parking lots.</span>
+                        <h2 class="modal-title">Create <strong class="color-primary">New Task</strong></h2>
+                        <span class="">The real power of tasks is keeping track of deadlines and having a 
+                            log of all work and communication related to the tasks for later reference.</span>
                     </div>
-                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><img src="../assets/images/cross-circle.svg" /></span>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="top-close">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="accordion-item mb-4" id="accordion-item1">
-                        <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button" id="accordian-button-1" type="button" data-bs-toggle="collapse" onclick="checkFieldsFilled('accordion-item1')" id="accordion-button1" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                <span class="m-0 me-4 fs-1" style="font-weight: bold;">01</span>
-                                <h3 class="m-0"><strong>Property Information</strong> <i class="fi fi-rs-pencil"></i><i
-                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
-                                </h3>
-                            </button>
-                        </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <form class="row g-3" enctype="multipart/form-data">
-                                    <div class="col-md-12">
-                                        <label class="form-label fw-bold">Property Photo</label>
-                                        <div class="custom-file" style="border: 1px dashed #00000087;">
-                                            <input id="fileInput" type="file" name="image" class="custom-file-input form" accept=".jpg, .png, image/jpeg, image/png" aria-label="hello" multiple>
-                                            <span className="d-none"></span>
-                                            <label class="custom-file-label" for="fileInput">
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <form class="row g-3" enctype="multipart/form-data">
+                            <div class="col-md-4">
+                                <label for="inputEmail4" class="form-label fw-bold">Task Name</label>
+                                <input class="form-control" placeholder="Sink in Leaked" type="text">
+                                <span class="text-danger d-none">Property ID is required!</span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputState" class="form-label fw-bold">Assign To</label>
+                                <select id="state" class="form-select form">
+                                <option selected>Choose...</option>
+                                <option>Sindh</option>
+                                <option>Punjab</option>
+                                <option>Balochistan</option>
+                                <option>KPK</option>
+                            </select>
+                                <span class="text-danger d-none">Property name required!</span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputState" class="form-label fw-bold">Related To</label>
+                                <select id="state" class="form-select form">
+                                <option selected>Choose...</option>
+                                <option>Sindh</option>
+                                <option>Punjab</option>
+                                <option>Balochistan</option>
+                                <option>KPK</option>
+                            </select>
+                                <span class="text-danger d-none">Property name required!</span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputEmail4" class="form-label fw-bold">Due Date</label>
+                                <input class="form-control" placeholder="MM/DD/YYYY" type="date">
+                                <span class="text-danger d-none">Property ID is required!</span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputState" class="form-label fw-bold">Status</label>
+                                <select id="state" class="form-select form">
+                                <option selected>Choose...</option>
+                                <option>Sindh</option>
+                                <option>Punjab</option>
+                                <option>Balochistan</option>
+                                <option>KPK</option>
+                            </select>
+                                <span class="text-danger d-none">Property name required!</span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputState" class="form-label fw-bold">Priority</label>
+                                <select id="state" class="form-select form">
+                                <option selected>Choose...</option>
+                                <option>Sindh</option>
+                                <option>Punjab</option>
+                                <option>Balochistan</option>
+                                <option>KPK</option>
+                            </select>
+                                <span class="text-danger d-none">Property name required!</span>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label fw-bold">Notes</label>
+                                <textarea class="form-control mb-4" placeholder="Sorry about that We will look into it." rows="4"></textarea>
+                                <span class="text-danger d-none">Photos are required!</span>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label fw-bold">Media/ Files</label>
+                                <div class="custom-file" style="border: 1px dashed #00000087;">
+                                    <input id="fileInput" type="file" name="image" class="custom-file-input form" accept=".jpg, .png, image/jpeg, image/png" aria-label="hello" multiple>
+                                    <span className="d-none"></span>
+                                    <label class="custom-file-label" for="fileInput">
                                                 <i class="fi fi-rs-cloud-upload"></i>
                                                 <div class="custom-file-text">
                                                     <span>Upload Photo or drag and drop here</span>
                                                     <span>JPEG and PNG, file size no more than 10MB</span>
                                                 </div>
                                             </label>
-                                        </div>
-                                        <div class="selected-files">
-                                            <div class="file-grid"></div>
-                                        </div>
-                                        <span class="text-danger d-none">Photos are required!</span>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="inputEmail4" class="form-label fw-bold">Property ID</label>
-                                        <input type="text" class="form-control form" id="propertyId">
-                                        <span class="text-danger d-none">Property ID is required!</span>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="inputPassword4" class="form-label fw-bold">Property Name <spnan
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="propertyName">
-                                        <span class="text-danger d-none">Property name required!</span>
-                                    </div>
-                                    <div class="col-12">
-                                        <label for="inputAddress" class="form-label fw-bold">Address <spnan
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="address" placeholder="1234 Main St">
-                                        <span class="text-danger d-none">Address is required!</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputCity" class="form-label fw-bold">City <spnan
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="city">
-                                        <span class="text-danger d-none">City is required!</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputState" class="form-label fw-bold">State <spnan
-                                                class="text-danger">*</span></label>
-                                        <select id="state" class="form-select form">
-                                            <option selected>Choose...</option>
-                                            <option>Sindh</option>
-                                            <option>Punjab</option>
-                                            <option>Balochistan</option>
-                                            <option>KPK</option>
-                                        </select>
-                                        <span class="text-danger d-none">State is required!</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputZip" class="form-label fw-bold">Zip <spnan class="text-danger">
-                                                *</span></label>
-                                        <input type="text" class="form-control form" id="zip">
-                                        <span class="text-danger d-none">Zip is required!</span>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="inputState" class="form-label fw-bold">Property Type <spnan
-                                                class="text-danger">*</span></label>
-                                        <select id="propertyType" class="form-select form">
-                                            <option selected>Choose...</option>
-                                            <option>Sindh</option>
-                                            <option>Punjab</option>
-                                            <option>Balochistan</option>
-                                            <option>KPK</option>
-                                        </select>
-                                        <span class="text-danger d-none">Property Type is required!</span>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="inputPassword4" class="form-label fw-bold">Property Total SF <spnan
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="propertyTotalSF">
-                                        <span class="text-danger d-none">Property Total SF is required!</span>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item" id="accordion-item2">
-                        <h2 class="accordion-header" id="headingTwo">
-                            <button class="accordion-button collapsed" onclick="checkFieldsFilled('accordion-item2')" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                <span class="m-0 me-4 fs-1" style="font-weight: bold;">02</span>
-                                <h3 class="m-0"><strong>Property Unit Information</strong> <i
-                                        class="fi fi-rs-pencil"></i><i
-                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
-                                </h3>
-                            </button>
-                        </h2>
-                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                            <form class="row g-3 m-1" enctype="multipart/form-data">
-
-                                <div class="col-12 mb-1">
-                                    <label for="inputAddress" class="form-label fw-bold">Number of Units<span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control px-2" id="units" placeholder=" ">
-                                    <span class="text-danger d-none">Units are required!</span>
                                 </div>
-                            </form>
-                        </div>
+                                <div class="selected-files">
+                                    <div class="file-grid"></div>
+                                </div>
+                                <span class="text-danger d-none">Photos are required!</span>
+                            </div>
+                        </form>
                     </div>
+
                 </div>
-                <div class="modal-footer">
-                    <button class="btn btn-dark button-left me-auto" data-bs-dismiss="modal" id='draft' disabled>Save as
-                        Draft</button>
-                    <button class="btn btn-transparent text-dark" style='background-color:#FFFFFF; border: 3px solid #1467B0;' data-bs-dismiss="modal" id='close'>Close</button>
-                    <button class="btn text-light" style='background-color:#1467B0;' id='next' disabled>Next</button>
+                <div class="modal-footer d-flex justify-content-between">
+                    <!-- <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
+                        Draft</button> -->
+                    <div class="d-flex">
+
+                        <label class="custom-control custom-checkbox me-2">
+                                <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1" checked="">
+                                <span class="custom-control-label">Notify Tenant</span>
+                            </label>
+                        <label class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1" checked="">
+                                <span class="custom-control-label">Notify Assignee(s)</span>
+                            </label>
+                    </div>
+                    <div class=""><button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close'>Close</button>
+                        <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
+                        <a href="javascript:void(0)" class="btn text-light btn-pill button disabled" style='background-color:#1467B0;' id='next'>Next</a></div>
+
                 </div>
             </div>
         </div>
     </div>
-    <!-- MODAL EFFECTS -->
+    <div class="modal fade" id="myModal_edit" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="text-justify ps-2 border-model-line">
+                        <h2 class="modal-title">Post an <strong class="color-primary">Update</strong></h2>
+                        <span class="">The real power of tasks is keeping track of deadlines and having a 
+                            log of all work and communication related to the tasks for later reference.</span>
+                    </div>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="top-close">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <form class="row g-3" enctype="multipart/form-data">
+                            <div class="col-md-12">
+                                <label class="form-label fw-bold">Message</label>
 
-    <!-- MODAL EFFECTS -->
+                                <textarea class="form-control mb-4" placeholder="Sorry about that We will look into it." rows="4"></textarea>
+                                <span class="text-danger d-none">Photos are required!</span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputEmail4" class="form-label fw-bold">Due Date</label>
+                                <input class="form-control" placeholder="MM/DD/YYYY" type="date">
+                                <span class="text-danger d-none">Property ID is required!</span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputState" class="form-label fw-bold">Priority</label>
+                                <select id="state" class="form-select form">
+                                <option selected>Choose...</option>
+                                <option>Sindh</option>
+                                <option>Punjab</option>
+                                <option>Balochistan</option>
+                                <option>KPK</option>
+                            </select>
+                                <span class="text-danger d-none">Property name required!</span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputState" class="form-label fw-bold">Status</label>
+                                <select id="state" class="form-select form">
+                                <option selected>Choose...</option>
+                                <option>Sindh</option>
+                                <option>Punjab</option>
+                                <option>Balochistan</option>
+                                <option>KPK</option>
+                            </select>
+                                <span class="text-danger d-none">Address is required!</span>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="form-label fw-bold">Assignee(s)</label>
+                                    <select class="form-control select2" data-placeholder="Choose Browser" multiple>
+                                            <option value="Firefox">
+                                                Firefox
+                                            </option>
+                                            <option value="Chrome selected">
+                                                Chrome
+                                            </option>
+                                            <option value="Safari">
+                                                Safari
+                                            </option>
+                                            <option selected value="Opera">
+                                                Opera
+                                            </option>
+                                            <option value="Internet Explorer">
+                                                Internet Explorer
+                                            </option>
+                                        </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label fw-bold">Media/ Files</label>
+                                <div class="custom-file" style="border: 1px dashed #00000087;">
+                                    <input id="fileInput" type="file" name="image" class="custom-file-input form" accept=".jpg, .png, image/jpeg, image/png" aria-label="hello" multiple>
+                                    <span className="d-none"></span>
+                                    <label class="custom-file-label" for="fileInput">
+                                                <i class="fi fi-rs-cloud-upload"></i>
+                                                <div class="custom-file-text">
+                                                    <span>Upload Photo or drag and drop here</span>
+                                                    <span>JPEG and PNG, file size no more than 10MB</span>
+                                                </div>
+                                            </label>
+                                </div>
+                                <div class="selected-files">
+                                    <div class="file-grid"></div>
+                                </div>
+                                <span class="text-danger d-none">Photos are required!</span>
+                            </div>
+                        </form>
+                    </div>
 
+                </div>
+                <div class="modal-footer d-flex justify-content-between">
+                    <!-- <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
+                        Draft</button> -->
+                    <div class="d-flex">
+
+                        <label class="custom-control custom-checkbox me-2">
+                                <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1" checked="">
+                                <span class="custom-control-label">Notify Tenant</span>
+                            </label>
+                        <label class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1" checked="">
+                                <span class="custom-control-label">Notify Assignee(s)</span>
+                            </label>
+                    </div>
+                    <div class=""><button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close'>Close</button>
+                        <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
+                        <a href="javascript:void(0)" class="btn text-light btn-pill button disabled" style='background-color:#1467B0;' id='next'>Next</a></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="succesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="succes-close">
+                        <span aria-hidden="true"><img src="../assets/images/cross-circle.svg" /></span>
+                    </button>
+                </div>
+                <div class="modal-body succes-modal">
+                    <div class="text-justify ps-2 border-model-line">
+                        <h2 class="modal-title d-flex align-items-center ps-1">
+                            <strong class="color-primary">Success!&nbsp;</strong>
+                            <i class="fi fi-rs-check-circle text-success"></i>
+                        </h2>
+                        <a href="javascript:void(0)" class="btn btn-outline-default btn-pill ms-1 my-2" style='background-color:#1467B0;color: white;'> <i class="fi fi-rs-pencil"></i> EDIT PROPERTY UNITS</a>
+                        <a class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal">
+                            <i class="fi fi-rs-plus-small" style="vertical-align: middle;"></i>Add Tenants
+                        </a>
+                        <p class="ms-2 mb-0 text-start">Your Property has been successfully added.</p>
+                        <p class="ms-2 text-start">Please add tenant to this property.</p>
+                    </div>
+
+                </div>
+                <div class="modal-footer" style="border-top: 0">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal_delete">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
+                        <div class="card-header border-0 pt-3">
+                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                            </button>
+                        </div>
+                        <div class="card-body text-center">
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
+                                    viewBox="0 0 24 24">
+                                    <path fill="#f07f8f"
+                                        d="M20.05713,22H3.94287A3.02288,3.02288,0,0,1,1.3252,17.46631L9.38232,3.51123a3.02272,3.02272,0,0,1,5.23536,0L22.6748,17.46631A3.02288,3.02288,0,0,1,20.05713,22Z" />
+                                    <circle cx="12" cy="17" r="1" fill="#e62a45" />
+                                    <path fill="#e62a45" d="M12,14a1,1,0,0,1-1-1V9a1,1,0,0,1,2,0v4A1,1,0,0,1,12,14Z" />
+                                </svg></span>
+                            <h4 class="h4 mb-0 mt-3 fw-bold fs-4">Warning</h4>
+                            <p class="card-text">This will delete your property. Are you sure?</p>
+
+                        </div>
+                        <div class="card-footer text-center border-0 pt-0">
+                            <div class="row">
+                                <div class="text-center">
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- PAGE -->
     <div class="page">
         <div class="page-main">
@@ -733,24 +981,24 @@
                     </div>
                     <div class="main-sidemenu">
                         <div class="slide-left disabled" id="slide-left"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24">
-                                <path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" />
-                            </svg></div>
+                            <path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" />
+                        </svg></div>
                         <ul class="side-menu">
                             <li class="sub-category">
                                 <!-- <h3>Main</h3> -->
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item has-link create-new-link" href="javascript:void(0)" target="_self" style="border: 3px solid #1467B0 !important;"><i
-                                        class="side-menu__icon fi fi-rs-square-plus"></i><span class="side-menu__label ">Create New</span>
-                                </a>
+                                    class="side-menu__icon fi fi-rs-square-plus"></i><span class="side-menu__label ">Create New</span>
+                            </a>
                             </li>
 
                             <!-- <li class="slide">
-                                <a class="side-menu__item has-link" href="landing-page.php" target="_blank"><i
-                                        class="side-menu__icon fe fe-plus"></i><span class="side-menu__label">Complete your
-                                        Profile</span>
-                                </a>
-                            </li> -->
+                            <a class="side-menu__item has-link" href="landing-page.php" target="_blank"><i
+                                    class="side-menu__icon fe fe-plus"></i><span class="side-menu__label">Complete your
+                                    Profile</span>
+                            </a>
+                        </li> -->
                             <li class="slide">
                                 <div class="M-0 mt-3 mb-4" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
                                     <div class="card-header pb-0 border-bottom-0">
@@ -768,17 +1016,17 @@
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html"><i
-                                        class="side-menu__icon fi fi-rs-dashboard"></i><span class="side-menu__label">Overview</span></a>
+                                    class="side-menu__icon fi fi-rs-dashboard"></i><span class="side-menu__label">Overview</span></a>
                             </li>
                             <!-- <li class="sub-category">
-                                           <h3>UI Kit</h3>
-                                       </li> -->
+                                       <h3>UI Kit</h3>
+                                   </li> -->
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
-                                        class="side-menu__icon fi fi-rs-building"></i><span class="side-menu__label">Properties</span>
-                                        <i
-                                        class="angle fe fe-chevron-right"></i>
-                                       </a>
+                                    class="side-menu__icon fi fi-rs-building"></i><span class="side-menu__label">Properties</span>
+                                    <i
+                                    class="angle fe fe-chevron-right"></i>
+                                   </a>
                                 <ul class="slide-menu">
                                     <li class="side-menu-label1"><a href="javascript:void(0)">Properties</a></li>
                                     <li><a href="properties-all.html" class="slide-item">All</a></li>
@@ -787,27 +1035,27 @@
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="add-tenant.html"><i
-                                        class="side-menu__icon fi fi-rs-cabin"></i><span class="side-menu__label">Tenants</span>
-                                        <i
-                                        class="angle fe fe-chevron-right"></i>
-                                       
-                                       </a>
+                                    class="side-menu__icon fi fi-rs-cabin"></i><span class="side-menu__label">Tenants</span>
+                                    <i
+                                    class="angle fe fe-chevron-right"></i>
+                                   
+                                   </a>
                                 <ul class="slide-menu">
-                                    <li class="side-menu-label1"><a href="javascript:void(0)">Properties</a></li>
+                                    <li class="side-menu-label1"><a href="javascript:void(0)">Tenants</a></li>
                                     <li><a href="add-tenant.html" class="slide-item">All</a></li>
                                     <li><a href="javascript:void(0)" class="slide-item">Draft</a></li>
                                 </ul>
                             </li>
 
                             <!-- <li class="sub-category">
-                                           <h3>Pre-build Pages</h3>
-                                       </li> -->
+                                       <h3>Pre-build Pages</h3>
+                                   </li> -->
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="invoices.html"><i
-                                                class="side-menu__icon fi fi-rs-file-invoice-dollar"></i><span class="side-menu__label">Invoicing</span>
-                                                <i
-                                                class="angle fe fe-chevron-right"></i>
-                                               </a>
+                                            class="side-menu__icon fi fi-rs-file-invoice-dollar"></i><span class="side-menu__label">Invoicing</span>
+                                            <i
+                                            class="angle fe fe-chevron-right"></i>
+                                           </a>
                                 <ul class="slide-menu">
                                     <li class="side-menu-label1"><a href="javascript:void(0)">Invoicing</a></li>
                                     <li><a href="create-invoicing.html" class="slide-item">All</a></li>
@@ -817,11 +1065,11 @@
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="leads-all.php"><i
-                                        class="side-menu__icon fi fi-rs-chart-simple"></i><span
-                                        class="side-menu__label">Leads</span>
-                                        <!-- <i class="angle fe fe-chevron-right"></i> -->
-                                       
-                                       </a>
+                                    class="side-menu__icon fi fi-rs-chart-simple"></i><span
+                                    class="side-menu__label">Leads</span>
+                                    <!-- <i class="angle fe fe-chevron-right"></i> -->
+                                   
+                                   </a>
 
                             </li>
 
@@ -849,15 +1097,15 @@
 
                                 <li>
                                     <a class="side-menu__item has-link" href="settings.php" target="_self"><i
-                                        class="side-menu__icon fi fi-rs-settings"></i><span class="side-menu__label">Settings</span>
-                                    <!-- <span
-                                                   class="badge bg-green br-5 side-badge blink-text pb-1">New</span> -->
-                                </a>
+                                    class="side-menu__icon fi fi-rs-settings"></i><span class="side-menu__label">Settings</span>
+                                <!-- <span
+                                               class="badge bg-green br-5 side-badge blink-text pb-1">New</span> -->
+                            </a>
                                 </li>
                         </ul>
                         <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24">
-                                <path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z" />
-                            </svg></div>
+                            <path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z" />
+                        </svg></div>
                     </div>
                 </div>
             </div>
@@ -879,198 +1127,63 @@
                             </div>
                         </div> -->
 
-                        <div class="card" style="background: #1467B0;" id="top_main_card">
-                            <div class="card-body pb-0">
+                        <div class="card mt-5" style="background: linear-gradient(180deg, #232323 0%, #434343 100%);">
+                            <div class="card-body">
                                 <div class="row">
-                                    <div class="col-lg-12  position-relative">
-                                        <div class="d-flex">
-                                            <div class="media mt-0 mb-2">
-                                                <div class="media-user me-2">
-                                                    <div class=""><img alt="" class="rounded-circle avatar avatar-md" style="max-width: 120px;" src="../assets/images/users/16.jpg"></div>
-                                                </div>
-                                                <div class="media-body">
-                                                    <small class="text-white">Tenants</small>
-                                                    <h3 class="mb-0 mt-1 text-white" style="font-weight: bold;">The Michael Scott Paper Company | Michael Scott</h3>
-                                                </div>
-                                            </div>
-                                            <div class="ms-auto">
-                                                <div class="dropdown show">
-
-                                                    <i class="fe fe-more-vertical text-white fs-20" data-bs-toggle="dropdown"></i>
-
-                                                    <div class="dropdown-menu dropdown-menu-end">
-                                                        <a class="dropdown-item text-primary" href="javascript:void(0)"><i
-                                                            class=
-                                                            "fi fi-rs-edit me-1"
-                                                            ></i> Edit</a>
-                                                        <a class="dropdown-item text-danger" href="javascript:void(0)"> <i class="fi fi-rs-trash me-1"></i>Delete</a>
-
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- <a href="javascript:void(0)" id="email_verification"
-                                                                    class="btn btn-primary btn-pill btn-xl email-verification-btn"><i
-                                                                        class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
-                                                                    verification &nbsp; <i
-                                                                        class="angle fe fe-arrow-right create-btn-plus"></i></a> -->
-
+                                    <div class="col-lg-9">
+                                        <h3 class="page-titlee text-white" style="font-weight: 100; margin-bottom: 0px;">Welcome to Spade Portal</h3>
+                                        <h1 class="page-titlee text-white" style="font-weight: 700;" id="user-name">John Clark
+                                        </h1>
+                                        <a href="javascript:void(0)" id="email_verification" class="btn btn-primary btn-pill btn-xl email-verification-btn"><i
+                                                class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
+                                            verification &nbsp; <i
+                                                class="angle fe fe-arrow-right create-btn-plus"></i></a>
                                     </div>
-                                    <div class="col-12">
-                                        <ul class="nav1 br-7" style="bottom: 0;">
-                                            <li class="nav-item1 p-0">
-                                                <a class="nav-link active p-2" href="view-tenant.html">Overview</a>
-                                            </li>
-                                            <li class="nav-item1 p-0">
-                                                <a class="nav-link p-2" href="tenant-properties.html">Properties</a>
-                                            </li>
-                                            <li class="nav-item1 p-0">
-                                                <a class="nav-link p-2" href="tenant-tasks.html">Tasks</a>
-                                            </li>
-                                            <li class="nav-item1 p-0">
-                                                <a class="nav-link p-2" href="tenant-file.html">Files</a>
-                                            </li>
-                                        </ul>
+                                    <div class="col-lg-3">
+                                        <img src="../assets/header-img/Group1.png" alt="">
                                     </div>
-
                                 </div>
 
                             </div>
                         </div>
                         <!-- PAGE-HEADER END -->
-                        <div class="over_view" id="Overview">
-                            <!-- ROW-2 OPEN -->
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="card inner-cards">
-                                        <div class="card-header justify-content-start">
-                                            <h3 class="card-title font-weight-bold" style="font-weight: bold;">Contact Info</h3>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="main-profile-contact-list">
-                                                <div class="me-5">
-                                                    <div class="media mb-4 d-flex">
-                                                        <div class="media-icon bg-primary  mb-3 mb-sm-0 me-3 mt-1">
-                                                            <i class="fi fi-rs-phone-call text-white"></i>
-                                                        </div>
-                                                        <div class="media-body">
-                                                            <!-- <h6 class="font-weight-semibold mb-1">Web Designer at <a href="javascript:void(0)" class="btn-link">Spruko</a></h6> -->
-                                                            <span style="color: #727272;">No Contact Info on File</span>
-                                                            <br>
-                                                            <!-- <p>Past Work: Spruko, Inc.</p> -->
-                                                            <a href="javascript:void(0)" class="btn-link" style="font-weight: bold;">+ Add New</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-xl-7 col-md-7">
+                                <div class="card border p-0 pb-3">
+                                    <div class="card-body text-center p-0">
+                                        <span class=""><img src="../assets/images/new-tenant.png" alt=""></span>
+                                        <h1 class="mt-3" style="font-weight: 700;line-height: 2.5rem;">Keep Track of <span style="color: #1467B0;">Maintenance Issues</span></h1>
+                                        <p class="card-text px-5">Whether it is knowing when you last replaced the microwave or inputting a request a tenant told you about in person, have a clear history of maintenance issues at your rental.</p>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="card inner-cards">
-                                        <div class="card-header justify-content-start">
-                                            <h3 class="card-title font-wieght-bold" style="font-weight: bold;">Emergency Contacts</h3>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="main-profile-contact-list">
-                                                <div class="me-5">
-                                                    <div class="media mb-4 d-flex">
-                                                        <div class="media-icon bg-primary  mb-3 mb-sm-0 me-3 mt-1">
-                                                            <i class="fi fi-rs-portrait text-white"></i>
-                                                        </div>
-                                                        <div class="media-body">
-                                                            <!-- <h6 class="font-weight-semibold mb-1">Web Designer at <a href="javascript:void(0)" class="btn-link">Spruko</a></h6> -->
-                                                            <span style="color: #727272;">No Emergency Contacts on File</span>
-                                                            <br>
-                                                            <!-- <p>Past Work: Spruko, Inc.</p> -->
-                                                            <a href="javascript:void(0)" class="btn-link" style="font-weight: bold;">+ Add New</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                    <div class="card-footer text-center border-0">
+                                        <div class="row">
+                                            <div class="text-center">
+                                                <button type="button" class="btn btn-primary btn-pill btn-xl font-weight-bold" id="add_property_btn" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal"><i
+                                                    class="fe fe-plus me-2"></i><strong>ADD NEW TASK</strong></button> </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="card inner-cards">
-                                        <div class="card-header justify-content-start">
-                                            <h3 class="card-title font-wieght-bold" style="font-weight: bold;">Address</h3>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="main-profile-contact-list">
-                                                <div class="me-5">
-                                                    <div class="media mb-4 d-flex">
-                                                        <div class="media-icon bg-primary  mb-3 mb-sm-0 me-3 mt-1">
-
-                                                            <i class="fi fi-rs-marker text-white"></i>
-                                                        </div>
-                                                        <div class="media-body">
-                                                            <!-- <h6 class="font-weight-semibold mb-1">Web Designer at <a href="javascript:void(0)" class="btn-link">Spruko</a></h6> -->
-                                                            <span style="color: #727272;">No Address Info on File</span>
-                                                            <br>
-                                                            <!-- <p>Past Work: Spruko, Inc.</p> -->
-                                                            <a href="javascript:void(0)" class="btn-link" style="font-weight: bold;">+ Add New</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="card inner-cards">
-                                        <div class="card-header justify-content-start">
-                                            <h3 class="card-title font-wieght-bold" style="font-weight: bold;">Tenant Portal</h3>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="main-profile-contact-list">
-                                                <div class="me-5">
-                                                    <div class="media mb-4 d-flex">
-                                                        <div class="media-icon bg-primary  mb-3 mb-sm-0 me-3 mt-1">
-
-                                                            <i class="fi fi-rs-window-alt text-white"></i>
-                                                        </div>
-                                                        <div class="media-body">
-                                                            <!-- <h6 class="font-weight-semibold mb-1">Web Designer at <a href="javascript:void(0)" class="btn-link">Spruko</a></h6> -->
-                                                            <span style="color: #727272;">Status: Inactive</span>
-                                                            <br>
-                                                            <!-- <p>Past Work: Spruko, Inc.</p> -->
-                                                            <a href="javascript:void(0)" class="btn-link" style="font-weight: bold;">+ Add New</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- ROW-2 CLOSED -->
                         </div>
                     </div>
+                    <!-- ROW-3 CLOSED -->
                 </div>
-                <!-- ROW-3 CLOSED -->
-            </div>
-            <!-- ROW-2 END -->
+                <!-- ROW-2 END -->
 
 
 
 
-            <div class="card-body pb-0 bg-recentorder" style="display: none;">
-                <h3 class="card-title text-white">Recent Orders</h3>
-                <div class="chartjs-wrapper-demo">
-                    <canvas id="recentorders" class="chart-dropshadow"></canvas>
+                <div class="card-body pb-0 bg-recentorder" style="display: none;">
+                    <h3 class="card-title text-white">Recent Orders</h3>
+                    <div class="chartjs-wrapper-demo">
+                        <canvas id="recentorders" class="chart-dropshadow"></canvas>
+                    </div>
                 </div>
-            </div>
-            <div id="flotback-chart" class="flot-background" style="display: none;"></div>
+                <div id="flotback-chart" class="flot-background" style="display: none;"></div>
 
+            </div>
+            <!-- CONTAINER END -->
         </div>
-        <!-- CONTAINER END -->
-    </div>
     </div>
     <!--app-content close-->
 
@@ -1628,7 +1741,9 @@
     </div>
 
     <!-- BACK-TO-TOP -->
-    <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a>
+    <!-- <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a> -->
+    <a href="#addModal" data-bs-effect="effect-scale" data-bs-toggle="modal" id="add-tenant-side-btn"><i class="fe fe-plus"></i></a>
+
 
 
     <!-- JQUERY JS -->
@@ -1704,7 +1819,15 @@
     <script src="../assets/js/custom.js"></script>
 
     <!-- ############################################# -->
-
+    <!-- INTERNAL Autofill-Table JS -->
+    <!-- <script src="../assets/plugins/datatable/js/jquery.dataTables.min.js"></script> -->
+    <!-- <script src="../assets/plugins/datatable/js/dataTables.bootstrap5.js"></script> -->
+    <!-- <script src="../assets/plugins/datatable/js/dataTables.buttons.min.js"></script> -->
+    <!-- <script src="../assets/plugins/datatable/js/buttons.bootstrap5.min.js"></script> -->
+    <!-- <script src="../assets/plugins/extension-datatable/autofill/dataTables.autoFill.min.js"></script> -->
+    <script src="../assets/plugins/extension-datatable/autofill/autoFill.bootstrap5.min.js"></script>
+    <!-- <script src="../assets/plugins/extension-datatable/keytable/dataTables.keyTable.min.js"></script> -->
+    <script src="../assets/js/autofill-table.js"></script>
 
     <!-- C3 CHART JS -->
     <script src="../assets/plugins/charts-c3/d3.v5.min.js"></script>
@@ -1717,25 +1840,857 @@
     <script src="../assets/plugins/chart/Chart.bundle.js"></script>
     <script src="../assets/plugins/chart/utils.js"></script>
 
+
+    <script src="../assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <!-- BOOTSTRAP-DATERANGEPICKER JS -->
+    <script src="../assets/plugins/bootstrap-daterangepicker/moment.min.js"></script>
+    <script src="../assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+    <!-- INTERNAL Bootstrap-Datepicker js-->
+    <script src="../assets/plugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+
+    <!-- INTERNAL Sumoselect js-->
+    <script src="../assets/plugins/sumoselect/jquery.sumoselect.js"></script>
+
+    <!-- TIMEPICKER JS -->
+    <script src="../assets/plugins/time-picker/jquery.timepicker.js"></script>
+    <script src="../assets/plugins/time-picker/toggles.min.js"></script>
+
+    <!-- INTERNAL intlTelInput js-->
+    <script src="../assets/plugins/intl-tel-input-master/intlTelInput.js"></script>
+    <script src="../assets/plugins/intl-tel-input-master/country-select.js"></script>
+    <script src="../assets/plugins/intl-tel-input-master/utils.js"></script>
+
+    <!-- INTERNAL jquery transfer js-->
+    <script src="../assets/plugins/jQuerytransfer/jquery.transfer.js"></script>
+
+    <!-- INTERNAL multi js-->
+    <script src="../assets/plugins/multi/multi.min.js"></script>
+
+    <!-- DATEPICKER JS -->
+    <script src="../assets/plugins/date-picker/date-picker.js"></script>
+    <script src="../assets/plugins/date-picker/jquery-ui.js"></script>
+    <script src="../assets/plugins/input-mask/jquery.maskedinput.js"></script>
+
+    <!-- COLOR PICKER JS -->
+    <script src="../assets/plugins/pickr-master/pickr.es5.min.js"></script>
+    <script src="../assets/js/picker.js"></script>
+
+    <!-- MULTI SELECT JS-->
+    <script src="../assets/plugins/multipleselect/multiple-select.js"></script>
+    <script src="../assets/plugins/multipleselect/multi-select.js"></script>
+
+    <!-- FORMELEMENTS JS -->
+    <script src="../assets/js/formelementadvnced.js"></script>
+    <script src="../assets/js/form-elements.js"></script>
+
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
-    <script>
-    </script>
 
     <script>
-        // Get the user's preferred color scheme
-        const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        function checkFieldsStatus(accordionId) {
+            var accordionFields = $('#' + accordionId + ' input[type="text"], #' + accordionId + ' select');
+            var imageField = $('#' + accordionId + ' input[type="file"]');
+            var hasEmptyFields = false;
+            var hasErrorFields = false;
+            var hasFilledFields = false;
 
-        // Get a reference to the logo element
-        const logo = document.getElementById('logo');
-
-        if (userPrefersDark) {
-            logo.src = '../assets/header-img/comment.svg';
-        } else {
-            logo.src = '../assets/header-img/question.svg';
+            accordionFields.each(function() {
+                var $field = $(this);
+                if ($field.val() === '' || $field.val() === 'Choose...') {
+                    hasEmptyFields = true;
+                }
+                if ($field.hasClass('border-danger')) {
+                    hasErrorFields = true;
+                }
+                if ($field.val() !== '' || $field.val() !== 'Choose...') {
+                    hasFilledFields = true;
+                }
+            });
+            if (imageField.length && imageField.get(0).files.length === 0) {
+                hasEmptyFields = true;
+            }
+            if (hasEmptyFields && hasErrorFields) {
+                return 1;
+            } else if (!hasEmptyFields && !hasErrorFields && hasFilledFields) {
+                return 2;
+            } else if (hasEmptyFields && !hasErrorFields && hasFilledFields) {
+                console.log(2)
+                return 3;
+            } else {
+                return 0;
+            }
         }
-    </script>
 
+        let counter = 0
+
+        function checkFieldsFilled(id) {
+            const status = checkFieldsStatus(id)
+            if (id === "accordion-item2" && counter === 0) {
+                counter += 1
+                return
+            }
+            const accordionItem = document.getElementById(id);
+            const formFields = accordionItem.querySelectorAll("input, select");
+            let allFieldsFilled = true;
+            formFields.forEach(function(field) {
+                if (field.value === "" || field.value === "Choose...") {
+                    allFieldsFilled = false;
+                }
+
+            });
+            const chevronIcon = accordionItem.querySelector(".icon");
+            switch (status) {
+                case 0:
+
+                    break;
+                case 1:
+                    chevronIcon.classList.remove("fi-rs-check-circle");
+                    chevronIcon.classList.remove("chevron");
+                    chevronIcon.classList.add("fi-rs-exclamation");
+                    chevronIcon.classList.add("cross");
+                    break;
+                case 2:
+                    chevronIcon.classList.remove("fi-rs-exclamation");
+                    chevronIcon.classList.remove("chevron");
+                    chevronIcon.classList.add("fi-rs-check-circle");
+                    chevronIcon.classList.remove("cross");
+                    chevronIcon.classList.add("tick");
+                    break;
+                case 3:
+                    console.log(2)
+                    chevronIcon.classList.remove("fi-rs-exclamation");
+                    chevronIcon.classList.add("chevron");
+                    // chevronIcon.classList.add("fi-rs-check-circle");
+                    chevronIcon.classList.remove("cross");
+                    chevronIcon.classList.remove("tick");
+                    break;
+                default:
+                    break;
+            }
+        }
+        var selectedFiles = [];
+
+        $(document).ready(function() {
+
+            $.ajax({
+                url: 'http://api.geonames.org/searchJSON',
+                method: 'GET',
+                data: {
+                    country: 'PK',
+                    maxRows: 500,
+                    username: 'developedmatz',
+                    style: 'full'
+                },
+                success: function(result) {
+                    // Handle state selection change
+                    $('#state').change(function() {
+                        var selectedState = $(this).val();
+                        if (selectedState === "KPK") {
+                            selectedState = "Khyber Pakhtunkhwa"
+                        }
+
+                        var cityDropdown = $('#city');
+
+                        // Clear existing options
+                        cityDropdown.empty();
+                        cityDropdown.append($('<option></option>').text("Choose..."));
+                        cities = []
+                        if (selectedState !== "Choose...") {
+                            // Populate city options based on selected state
+                            count = 0
+                            data = result.geonames
+                            for (item of data) {
+                                if (item.adminName1 === selectedState) {
+                                    cities.push(item.name)
+                                    count++
+                                }
+                                if (count === 10) {
+                                    break
+                                }
+                            }
+
+
+                            cities.forEach(function(city) {
+                                cityDropdown.append($('<option></option>').text(city));
+                            });
+
+                        }
+                    })
+                    $('#state_update').change(function() {
+                        var selectedState = $(this).val();
+                        if (selectedState === "KPK") {
+                            selectedState = "Khyber Pakhtunkhwa"
+                        }
+
+                        var cityDropdown = $('#city_update');
+
+                        // Clear existing options
+                        cityDropdown.empty();
+                        cityDropdown.append($('<option></option>').text("Choose..."));
+                        cities = []
+                        if (selectedState !== "Choose...") {
+                            // Populate city options based on selected state
+                            count = 0
+                            data = result.geonames
+                            for (item of data) {
+                                if (item.adminName1 === selectedState) {
+                                    cities.push(item.name)
+                                    count++
+                                }
+                                if (count === 10) {
+                                    break
+                                }
+                            }
+
+
+
+                            cities.forEach(function(city) {
+                                cityDropdown.append($('<option></option>').text(city));
+                            });
+
+                        }
+                    });
+                }
+            })
+
+            function areAllFieldsFilled() {
+                var accordion1Fields = $('#accordion-item1 input[type="text"], #accordion-item1 select');
+                var accordion2Fields = $('#accordion-item2 input[type="text"], #accordion-item2 select');
+                var imageInput = $('#fileInput');
+                var allFieldsFilled = accordion1Fields.filter(function() {
+                    return $(this).val() === '' || $(this).val() === 'Choose...';
+                }).length === 0 && accordion2Fields.filter(function() {
+                    return $(this).val() === '' || $(this).val() === 'Choose...';
+                }).length === 0 && imageInput.get(0).files.length > 0;
+
+                return allFieldsFilled;
+            }
+
+            // Function to enable or disable buttons based on field status
+            function updateButtonStatus() {
+                var accordion1Fields = $('#accordion-item1 input[type="text"], #accordion-item1 select');
+                var accordion2Fields = $('#accordion-item2 input[type="text"], #accordion-item2 select');
+                var imageInput = $('#fileInput');
+
+                var isAccordion1FieldsEmpty = accordion1Fields.filter(function() {
+                    return $(this).val() !== '' || $(this).val() === 'Choose...';
+                }).length === 0;
+
+                var isAccordion2FieldsEmpty = accordion2Fields.filter(function() {
+                    return $(this).val() !== '' || $(this).val() === 'Choose...';
+                }).length === 0;
+
+                var isImageInputEmpty = imageInput.get(0).files.length === 0;
+
+                // Enable or disable the buttons based on the fields' status
+                if (!isAccordion1FieldsEmpty || !isAccordion2FieldsEmpty || !isImageInputEmpty) {
+                    $('#draft').removeAttr('disabled');
+                } else {
+                    $('#draft').attr('disabled', 'disabled');
+                }
+
+                var allFieldsFilled = areAllFieldsFilled();
+
+                // Enable or disable the buttons based on the fields' status
+                if (allFieldsFilled) {
+                    $('#next').removeClass("disabled");
+                    //   $('#draft').removeAttr("disabled");
+                } else {
+                    $('#next').addClass("disabled");
+                    //   $('#draft').removeAttr("disabled");
+
+                }
+            }
+
+            // Call the updateButtonStatus function when any field in the accordions is changed
+            $('#accordion-item1 input, #accordion-item1 select, #accordion-item2 input, #accordion-item2 select').on('input change', function() {
+                var $field = $(this);
+                var $errorMessage = $field.next('.text-danger');
+
+                if ($field.val() === '' || $field.val() === 'Choose...') {
+                    $field.addClass('border-danger');
+                    $errorMessage.removeClass('d-none');
+                } else {
+                    $field.removeClass('border-danger');
+                    $errorMessage.addClass('d-none');
+                }
+                updateButtonStatus();
+            });
+            // Handle change event of checkboxes
+
+
+            $('#fileInput').on('change', function() {
+                var files = Array.from($(this)[0].files);
+                // console.log(files)
+                files.forEach(function(file) {
+                    selectedFiles.push(file); // Add each file to the selected files array
+                });
+
+                updateSelectedFilesContainer(); // Update the selected files container
+            });
+            $('#fileInput_update').on('change', function() {
+                // console.log($(this)[0].files)
+                var files = Array.from($(this)[0].files);
+                // console.log(files)
+                files.forEach(function(file) {
+                    selectedFiles.push(file); // Add each file to the selected files array
+                });
+
+                updateSelectedFilesContainer(); // Update the selected files container
+            });
+
+            $(document).on('click', '.delete-file', function() {
+                var index = $(this).data('index');
+                selectedFiles.splice(index, 1); // Remove the selected file from the array
+                updateSelectedFilesContainer(); // Update the selected files container
+            });
+
+            function resetAccordions() {
+                // Reset all accordions
+                $('.accordion-item').each(function() {
+                    var accordionId = $(this).attr('id');
+                    var accordionFields = $('#' + accordionId + ' input[type="text"], #' + accordionId + ' select');
+                    var imageField = $('#' + accordionId + ' input[type="file"]');
+                    var accordionButton = $('#' + accordionId + ' button.accordion-button');
+
+                    // Empty input fields
+                    accordionFields.val('');
+
+                    // Remove border-danger class
+                    accordionFields.removeClass('border-danger');
+
+                    // Hide error spans
+                    accordionFields.siblings('span.text-danger').addClass('d-none');
+
+                    // Reset image input
+                    // if (imageField.length) {
+                    //     imageField.val('');
+                    //     imageField.siblings('label.custom-file-label').find('.custom-file-text span').first().text('Upload Photo or drag and drop here');
+                    //     imageField.siblings('.selected-files').find('.file-grid').empty();
+                    // }
+                    // // $('#accordion-item1').find('.file-grid').empty();
+                    // Reset accordion button icons
+                    accordionButton.find('.fi-rs-exclamation').addClass('fi-rs-angle-circle-down').addClass("chevron").removeClass('fi-rs-exclamation').removeClass("cross");
+                    accordionButton.find('.fi-rs-check-circle').addClass('fi-rs-angle-circle-down').addClass("chevron").removeClass('fi-rs-check-circle').removeClass("tick");
+                    $('#next').addClass("disabled");
+                    $('#draft').attr("disabled", "disabled");
+                });
+            }
+
+            $('#close,#top-close').on('click', function(e) {
+                e.preventDefault()
+                resetAccordions()
+                $('#addModal').modal('hide');
+            })
+            $(document).on('click', '#next', function(e) {
+                e.preventDefault()
+                selectedFiles = []
+                $('#addModal').modal('hide');
+
+                // $("#largemodal").addClass("hide");
+                var formData = new FormData();
+
+                // Get the form data
+                var propertyName = $("#propertyName").val();
+                var address = $("#address").val();
+                var city = $("#city").val();
+                var state = $("#state").val();
+                var zipCode = $("#zip").val();
+                var propertyType = $("#propertyType").val();
+                var propertySQFT = $("#propertyTotalSF").val();
+                var units = $("#units").val();
+
+                // Add the form data to the FormData object
+                formData.append('propertyName', propertyName);
+                formData.append('address', address);
+                formData.append('city', city);
+                formData.append('state', state);
+                formData.append('zipCode', zipCode);
+                formData.append('propertyType', propertyType);
+                formData.append('propertySQFT', propertySQFT);
+                formData.append('units', units);
+
+                // Get the selected files
+                var files = $('#fileInput')[0].files;
+
+                // Add the files to the FormData object
+                for (var i = 0; i < files.length; i++) {
+                    formData.append('image', files[i]);
+                }
+
+                // Send the form data to the server using AJAX
+                $.ajax({
+                    url: 'http://localhost:3000/api/spade/property',
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+
+                    success: function(response) {
+                        console.log(2)
+                            // console.log(1)
+                        $('#succesModal').modal('show')
+                            // window.location = '../Landlord/properties-all.html';
+                    },
+                    error: function(xhr, status, error) {
+                        window.alert('Error: ' + error);
+                    }
+                });
+
+
+            });
+            let propertyId;
+
+            function updateSelectedFilesContainer() {
+                var selectedFilesContainer = $('.file-grid');
+                selectedFilesContainer.empty();
+                console.log(selectedFiles)
+                selectedFiles.forEach(function(file, index) {
+
+                    var fileElement = $('<div>')
+                        .addClass('selected-file')
+                        .append(
+                            $('<img>')
+                            .addClass('file-preview')
+                            .attr('src', typeof file === "object" ? URL.createObjectURL(file) : '../../../../spadeAPI/uploads/' + file)
+                        )
+                        .append(
+                            $('<div>')
+                            .addClass('file-details')
+                            .append($('<span>').text("Image-" + (index + 1)))
+                            // .append($('<span>').text(fileSize))
+                        )
+                        .append(
+                            $('<span>')
+                            .addClass('delete-file')
+                            .text('X')
+                            .attr('data-index', index)
+                        )
+                        .appendTo(selectedFilesContainer);
+
+                });
+
+            }
+
+            function formatFileSize(bytes) {
+                if (bytes === 0) return '0 Bytes';
+                var k = 1024;
+                var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+                var i = Math.floor(Math.log(bytes) / Math.log(k));
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+            }
+
+            function truncateFileName(fileName) {
+                var maxFileNameLength = 10; // Define the maximum length of the file name
+                if (fileName.length > maxFileNameLength) {
+                    return fileName.substring(0, maxFileNameLength) + '...'; // Truncate the file name
+                }
+
+                return fileName;
+            }
+
+            $('#myModal_edit').find('input, select').on('input change', function() {
+                var updateButton = document.getElementById('update');
+                console.log(updateButton)
+                var isFilled = true;
+
+                // Check each field for empty value and toggle red border and span visibility
+                $('#myModal_edit').find('input, select').each(function(index) {
+                    var value = $(this).val().trim();
+                    var span = $(this).siblings('.text-danger');
+                    if (index == 0 && $('.file-grid').children()[1] ?.length === 0) {
+                        isFilled = false;
+                    } else if (index >= 1) {
+                        if (value === '' || value === 'Choose...') {
+                            $(this).addClass('border-danger');
+                            //   console.log(1)
+                            span.removeClass('d-none');
+                            isFilled = false;
+                        } else {
+                            $(this).removeClass('border-danger');
+                            span.addClass('d-none');
+                        }
+                    }
+                });
+
+                // Toggle button behavior based on the fields' status
+                if (isFilled) {
+                    updateButton.classList.remove('disabled')
+                } else {
+                    updateButton.classList.add("disabled")
+                }
+            });
+
+
+
+            // Call the updateButtonStatus function when any field in the accordions is changed
+
+            // Handle change event of checkboxes
+            $('#propertyTable').DataTable({
+                paging: true,
+                searching: false,
+                info: false,
+                lengthChange: false,
+                pageLength: 10,
+
+
+
+            });
+            let columnsToHide = []
+            $('input[type="checkbox"]').change(function() {
+                var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
+                var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
+                console.log(columnIndex, isColumnVisible)
+                    // Toggle the visibility of the corresponding column
+                $('table').find('tr').each(function() {
+                    var column = $(this).find('th:nth-child(' + columnIndex + '), td:nth-child(' + columnIndex + ')');
+                    isColumnVisible ? column.show() : column.hide();
+                });
+            });
+            $("#succesModal").on('hide.bs.modal', function() {
+                if (imageField.length) {
+                    imageField.val('');
+                    imageField.siblings('label.custom-file-label').find('.custom-file-text span').first().text('Upload Photo or drag and drop here');
+                    imageField.siblings('.selected-files').find('.file-grid').empty();
+                }
+                resetAccordions()
+                    // $('#accordion-item1').find('.file-grid').empty();
+                    // getData()
+            })
+
+
+            let result;
+
+            function filterTable(selectedFilter) {
+                var tableBody = $('#table_body');
+                var rows = tableBody.find('tr');
+
+                if (selectedFilter === 'alphabets') {
+                    rows.sort(function(a, b) {
+                        var textA = $(a).find('.propertyName').text().toLowerCase();
+                        var textB = $(b).find('.propertyName').text().toLowerCase();
+                        return textA.localeCompare(textB);
+                    });
+                } else if (selectedFilter === 'ascending') {
+                    rows.sort(function(a, b) {
+                        var idA = parseInt($(a).find('.property-id').text());
+                        var idB = parseInt($(b).find('.property-id').text());
+                        return idA - idB;
+                    });
+                } else if (selectedFilter === 'descending') {
+                    rows.sort(function(a, b) {
+                        var idA = parseInt($(a).find('.property-id').text());
+                        var idB = parseInt($(b).find('.property-id').text());
+                        return idB - idA;
+                    });
+                }
+
+                tableBody.empty().append(rows);
+            }
+
+            // Filter functionality
+            $('#ascending').on('click', function() {
+                filterTable("ascending")
+            });
+            $('#descending').on('click', function() {
+                filterTable("descending")
+            });
+            $('#alphabets').on('click', function() {
+                // console.log(1)
+                filterTable("alphabets")
+            });
+            // console.log($('#alphabets'))
+            // Search functionality
+            $('#search_input').on('keyup', function() {
+                var searchValue = $(this).val().toLowerCase();
+                $('#table_body tr').filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+                });
+            });
+
+            // Function to update the table based on filters
+            function updateTable() {
+                $('#table_body').empty();
+                $.ajax({
+                    url: 'http://localhost:3000/api/spade/allproperty',
+                    type: 'GET',
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function(response) {
+                        // console.log(response);
+
+                        // Assuming response is an array of property objects
+                        var tableBody = $('#table_body');
+
+                        // Iterate over the response and populate the table
+                        response.forEach(function(property) {
+                            // Generate table rows with property data
+                            var row = '<tr>' +
+                                '<td>' + property.propertyId + '</td>' +
+                                '<td>' + property.propertyName + '</td>' +
+                                '<td>' + property.propertyType + '</td>' +
+                                '<td>' + property.units + '</td>' +
+                                '<td>' + property.address + '</td>' +
+                                '</tr>';
+
+                            // Append the row to the table body
+                            tableBody.append(row);
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        window.alert('Error: ' + error);
+                    }
+                });
+            }
+
+            // Initial table population
+            // updateTable();
+
+
+            $('#myModal_edit').on('hidden.bs.modal', function() {
+                // Clear input values
+                // console.log(1)
+                $(this).find('input, textarea, select').val('');
+
+                // Clear file input values
+                // $(this).find('input[type="file"]').val(null);
+
+                // Clear radio button selections
+                $(this).find('input[type="radio"]').prop('checked', false);
+
+                $('#myModal_edit').find('.file-grid').empty();
+                $('#accordion-item1').find('.file-grid').empty();
+            });
+
+
+
+            // let propertyId;
+
+            $(document).on('click', '#update', function(e) {
+                e.preventDefault();
+                $("#myModal_edit").modal("hide");
+
+                var formData = new FormData();
+                var propertyName = $("#propertyName_update").val();
+                var address = $("#address_update").val();
+                var city = $("#city_update").val();
+                var state = $("#state_update").val();
+                var zipCode = $("#zip_update").val();
+                var propertyType = $("#propertyType_update").val();
+                var propertySQFT = $("#propertyTotalSF_update").val();
+                var units = $("#unit_update").val();
+
+                formData.append('id', propertyId);
+                formData.append('propertyName', propertyName);
+                formData.append('address', address);
+                formData.append('city', city);
+                formData.append('state', state);
+                formData.append('zipCode', zipCode);
+                formData.append('propertyType', propertyType);
+                formData.append('propertySQFT', propertySQFT);
+                formData.append('units', units);
+
+                // Retrieve existing image names from the DOM
+
+                var existingImageNames = [];
+                selectedFiles.forEach((file) => {
+                        if (typeof file === "string") {
+                            existingImageNames.push(file)
+                        }
+                    })
+                    // Get the selected files
+                var files = selectedFiles.map(function(file) {
+                    return file instanceof File ? file : file.name;
+                });
+
+                // Add the selected files to the FormData object
+                files.forEach(function(file) {
+                    formData.append('image', file);
+                });
+
+                formData.append("existingImages", existingImageNames)
+                $.ajax({
+                    url: 'http://localhost:3000/api/spade/updateProperty',
+                    // url: 'http://ec2-54-158-103-230.compute-1.amazonaws.com:3000/api/spade/updateProperty',
+                    type: 'PUT',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function(response) {
+                        e.preventDefault()
+                            // getData();
+                    },
+                    error: function(xhr, status, error) {
+                        window.alert('Error: ' + error);
+                    }
+                });
+            });
+            $(document).on('click', '#confirmDelete', function(e) {
+
+                    e.preventDefault();
+                    // delete using AJAX
+                    $('#myModal_delete').modal('hide');
+                    $.ajax({
+                        url: 'http://localhost:3000/api/spade/propertyDelete',
+                        type: 'DELETE',
+                        data: JSON.stringify({
+                            "id": propertyId
+                        }),
+                        contentType: "application/json; charset=utf-8",
+                        processData: false,
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function(response) {
+                            // getData()
+                        },
+                        error: function(xhr, status, error) {
+                            window.alert('Error: ' + error);
+                        }
+                    });
+                })
+                // let data;
+
+            function getData(selectedFilter = "alphabets") {
+                // console.log(2)
+                $("#global-loader").fadeIn("fast")
+                    // console.log(22)
+                $.ajax({
+                    url: 'http://localhost:3000/api/spade/allproperty',
+                    type: 'GET',
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function(response) {
+                        if (response.data[0].length === 0) {
+
+                            window.location = './new-property.html'
+                        } else {
+                            $("#user-name").text(response.user)
+
+                            var tableBody = $('#table_body');
+
+                            tableBody.empty();
+
+                            response.data[0] ?.forEach(function(property) {
+                                var image = '<td><img src="../../../../spadeAPI/uploads/' + property.images[0] + '" alt=""></td>';
+                                // var image = '<td><img src="../../../../../../Desktop/spade API 2/uploads/image-1684250579662.png" alt="hhghghgh"></td>';
+
+                                var propertyId = '<td class="property-id " style="font-weight: 600;">' + property
+                                    .id + '</td>';
+
+                                var propertyName = '<td class="propertyName" style="font-weight: 600;">' +
+                                    property
+                                    .propertyName +
+                                    '</td>';
+                                var colorClass = '';
+                                var backgroundClass = '';
+
+                                if (property.propertyType === 'Single Family') {
+                                    var colorClass = 'rounded-pill-Single-Family'
+                                } else if (property.propertyType === 'Multi-Family') {
+                                    var colorClass = 'rounded-pill-Multi-Family';
+
+                                } else if (property.propertyType === 'Multi-Commercial') {
+                                    var colorClass = 'rounded-pill-Multi-Commercial';
+                                }
+
+                                var propertyType =
+                                    '<td class="propertyType"><a class="like" href="javascript:;">' +
+                                    `<span class="badge btn-light ${colorClass} rounded-pill py-2 px-3">` +
+                                    '<i class="fe fe-circle me-1"></i>' + property.propertyType + '</span>' +
+                                    '</a></td>';
+
+                                var propertyUnits = '<td class="propertyUnits">' +
+                                    '<p style="font-weight: 600;" class="mb-1">' + property.units +
+                                    ' Unit(s)</p>' +
+                                    '<span class="font-weight-normal">' + property.propertySQFT +
+                                    ' Square Feet</span>' +
+                                    '</td>';
+
+                                var propertyAddress = '<td class="propertyAddress">' +
+                                    '<p style="font-weight: 600;" class="mb-1">' + property.address + '</p>' +
+                                    '<span>' + property.city + ', ' + property.state + ' ' + property.zipCode +
+                                    '</span>' +
+                                    '</td>';
+
+                                var dropdownMenu =
+                                    '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
+                                    '<ul class="dropdown-menu">' +
+                                    '<li><a class="edit-option dropdown-item text-primary" href="javascript:void(0)">Edit</a></li>' +
+                                    '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>' +
+                                    `<li><a class="dropdown-item text-success" href="./view-property.html?propertyId=${property.id}">View</a></li>` +
+                                    '</ul></td>';
+                                // Create a table row and append the generated columns
+                                var row = '<tr>' + image + propertyId + propertyName + propertyType +
+                                    propertyUnits + propertyAddress + dropdownMenu + '</tr>';
+
+                                // Append the row to the table body
+                                tableBody.append(row);
+                            });
+                            $("#global-loader").fadeOut("slow")
+                            $('.edit-option').click(function(e) {
+                                e.preventDefault();
+                                const propertyIdElement = $(this).closest("tr").find(".property-id");
+
+                                propertyId = propertyIdElement.text();
+
+                                const data = response.data[0].find(obj => obj.id.toString() === propertyId);
+                                selectedFiles = data.images
+                                console.log(data.city)
+                                var option = $('<option>').text(data.city).val(data.city);
+
+                                // Append the option to the select element
+                                $('#city_update').append(option);
+
+                                // Make the option selected
+                                option.prop('selected', true);
+                                updateSelectedFilesContainer()
+                                $("#propertyId_update").val(data.id);
+                                $("#propertyName_update").val(data.propertyName);
+                                $("#address_update").val(data.address);
+                                $("#city_update").val(data.city);
+                                $("#state_update").val(data.state);
+                                $("#zip_update").val(data.zipCode);
+                                $("#propertyType_update").val(data.propertyType);
+                                $("#propertyTotalSF_update").val(data.propertySQFT);
+                                $("#unit_update").val(data.units);
+                                $("#property-name").text(data.propertyName)
+                                $('#myModal_edit').modal('show');
+                            });
+                            $('.delete-option').click(function(e) {
+                                e.preventDefault(); // Prevent default anchor behavior
+                                const propertyIdElement = $(this).closest("tr").find(".property-id");
+                                propertyId = propertyIdElement.text();
+
+                                $('#myModal_delete').modal('show');
+                            });
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(error)
+                        window.alert('Error: ' + "Token expeired!, Login again");
+                        window.location = '../Landlord/login_module.html';
+                    }
+                });
+
+            }
+
+
+        })
+    </script>
 </body>
 
 </html>
