@@ -657,7 +657,7 @@ exports.putPropertyUnitsUpdates = async (req, res) => {
       Area,
       unitDetails
     } = req.body
-    let status = "Occupied";
+    let status = "Vacant";
     const propertyUnitsResult = await queryRunner(updatePropertyUnits, [unitNumber, Area, unitDetails, status, id, propertyID]);
     if (propertyUnitsResult[0].affectedRows > 0) {
       res.status(200).json({
