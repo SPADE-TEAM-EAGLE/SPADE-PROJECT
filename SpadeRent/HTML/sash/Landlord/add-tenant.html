@@ -144,6 +144,7 @@
         .custom-file-label i {
             margin-bottom: 5px;
             font-size: 3rem;
+            color: #1467B0;
         }
         
         .custom-file-text {
@@ -167,12 +168,11 @@
             vertical-align: top;
             border: 1px solid #e9edf4;
         }
-        
-        input:focus {
+        /* /* input:focus {
             border: 3px solid #555 !important;
-        }
+        } */
         
-        .panel-body {
+        */ .panel-body {
             padding: 0px;
         }
         
@@ -417,7 +417,7 @@
                 width: 2.5rem;
                 opacity: 1;
                 position: absolute;
-                top: -11px;
+                top: 6px;
             }
             .del {
                 width: 2rem !important;
@@ -542,8 +542,14 @@
 <body class="app sidebar-mini ltr light-mode">
 
     <!-- GLOBAL-LOADER -->
-    <div id="global-loader">
+    <!-- <div id="global-loader">
         <img src="../assets/images/loader.svg" class="loader-img" alt="Loader">
+    </div> -->
+    <div id="preloader" class="tlp-preloader">
+        <div class="animation-preloader">
+            <div class="tlp-spinner"></div>
+            <img src="../assets/images/logo-preloader.png" alt="Preloader" style="width: 65px;">
+        </div>
     </div>
     <!-- /GLOBAL-LOADER -->
     <!-- Modal -->
@@ -599,7 +605,13 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label for="inputState" class="form-label fw-bold">Phone Number <span class="fw-light">(Optional)</span></label>
-                                        <div class="iti iti--allow-dropdown"><div class="iti__flag-container"><div class="iti__selected-flag" role="combobox" aria-owns="country-listbox" tabindex="0" title="United States: +1"><div class="iti__flag iti__us"></div><div class="iti__arrow"></div></div></div><input id="phone" name="phone" type="tel" autocomplete="off" data-intl-tel-input-id="0"></div>
+                                        <div class="iti iti--allow-dropdown">
+                                            <div class="iti__flag-container">
+                                                <div class="iti__selected-flag" role="combobox" aria-owns="country-listbox" tabindex="0" title="United States: +1">
+                                                    <div class="iti__flag iti__us"></div>
+                                                    <div class="iti__arrow"></div>
+                                                </div>
+                                            </div><input id="phone" name="phone" type="tel" autocomplete="off" data-intl-tel-input-id="0"></div>
                                         </select>
                                         <span class="text-danger d-none">State is required!</span>
                                     </div>
@@ -607,8 +619,8 @@
                                         <label for="inputAddress2" class="form-label fw-bold">Address <span class="fw-light">(Optional)</span></label>
                                         <input type="text" class="form-control" id="address" placeholder="Apartment, studio, or floor">
                                         <span class="text-danger d-none">Address is required!</span>
-                                      </div>
-                                      <div class="col-md-4">
+                                    </div>
+                                    <div class="col-md-4">
                                         <label for="inputState" class="form-label fw-bold">State <spnan
                                                 class="text-danger">*</span></label>
                                         <select id="state" class="form-select form">
@@ -655,11 +667,12 @@
                             <div class="accordion-body">
                                 <form class="row g-3">
                                     <div class="col-md-4">
-                                        <label for="inputEmail4" class="form-label">Select Property Unit</label>
+                                        <label for="inputEmail4" class="form-label">Select Property</label>
                                         <select id="inputState" class="form-select">
                                             <option selected>Choose...</option>
                                             <option>...</option>
                                           </select>
+                                          <span class="text-danger d-none">Property is required!</span>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="inputEmail4" class="form-label">Select Property Unit</label>
@@ -667,21 +680,16 @@
                                             <option selected>Choose...</option>
                                             <option>...</option>
                                           </select>
+                                          <span class="text-danger d-none">Property units is required!</span>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="inputAddress" class="form-label">Input Rent Amount /Per Month</label>
                                         <div class="input-group">
                                             <span class="input-group-text" style="color: #1467B0;background-color: transparent !important;">$</span>
-                                            <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St"></div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="inputAddress2" class="form-label">Lease Start Date</label>
-                                        <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="inputCity" class="form-label">Lease End Date</label>
-                                        <input type="text" class="form-control" id="inputCity">
-                                    </div>
+                                            <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                                        </div>
+                                        <span class="text-danger d-none">Rent amount is required!</span>
+                                        </div>
                                 </form>
                             </div>
                         </div>
@@ -745,12 +753,13 @@
                                     <div class="col-md-12">
                                         <label for="inputEmail4" class="form-label">Are there any rent increases during
                                             the Lease Term?</label>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                            <label class="form-check-label" for="flexCheckDefault">
-                                                Yes
-                                            </label>
-                                        </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked2" data-bs-toggle="collapse" href="#collapse2" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                <label class="form-check-label" for="flexCheckChecked">
+                                                    Yes
+                                                </label>
+                                            </div>
+                                        
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" value="">
                                             <label class="form-check-label" for="flexCheckChecked">
@@ -758,8 +767,8 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="col-12 row" id="add-item-container">
-                                        <div class="col-md-5">
+                                    <div class="col-12 row">
+                                        <!-- <div class="col-md-5">
                                             <label for="inputEmail4" class="form-label">Date of Rent Change
                                                 (Optional)</label>
                                             <input type="email" class="form-control" id="inputEmail4">
@@ -773,12 +782,32 @@
                                             <button>
                                                 <i class="fi fi-rs-trash"></i>
                                             </button>
+                                        </div> -->
+                                        <div class="collapse" id="collapse2">
+                                            <div class="card card-body">
+                                                <div class="text-justify" id="add-item-container">
+                                                    <div class="row">
+                                                        <div class="col-md-5">
+                                                            <label for="inputEmail4" class="form-label">Date of Rent Change
+                                                                (Optional)</label>
+                                                            <input type="email" class="form-control" id="inputEmail4">
+                                                        </div>
+                                                        <div class="col-md-5">
+                                                            <label for="inputPassword4" class="form-label">Rent Amount Correlating to
+                                                                that Date</label>
+                                                            <input type="password" class="form-control" id="inputPassword4">
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <button>
+                                                                <i class="fi fi-rs-trash"></i>
+                                                            </button>
+                                                        </div> 
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <a href="javascript:;" class="mt-1" id="add-item">+Add Line Item</a>
-                                    <div class="col-12">
-                                        <button type="submit" class="btn btn-primary">Sign in</button>
-                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -1194,9 +1223,10 @@
                                        
                                        </a>
                                 <ul class="slide-menu">
-                                    <li class="side-menu-label1"><a href="javascript:void(0)">Invoicing</a></li>
+                                    <li class="side-menu-label1"><a href="javascript:void(0)">Tasks</a></li>
                                     <li><a href="create-tasks.html" class="slide-item">All</a></li>
-                                    <li><a href="new-tasks.html" class="slide-item">Draft</a></li>
+                                    <li><a href="new-tasks.html" class="slide-item">Requests</a></li>
+                                    <li><a href="new-tasks.html" class="slide-item">Vendors</a></li>
                                 </ul>
                             </li>
                             <li class="slide">
@@ -2347,7 +2377,7 @@
             $("#add-item").on("click", () => {
                     console.log($("add-item-container"))
 
-                    $("#add-item-container").append(`<div class="col-md-5">
+                    $("#add-item-container").append(`<div class="row"><div class="col-md-5">
                                             <label for="inputEmail4" class="form-label">Date of Rent Change (Optional)</label>
                                             <input type="email" class="form-control" id="inputEmail4">
                                           </div>
