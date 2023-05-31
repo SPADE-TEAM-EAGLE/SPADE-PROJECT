@@ -39,6 +39,7 @@ router.get('/verifyMailCheck', tenantController.verifyMailCheck);
 router.get('/resetEmailTenant', tenantController.createResetEmailTenant);
 router.post('/verifyResetEmailCodeTenant', tenantController.verifyResetEmailCodeTenant);
 router.put('/updatePasswordTenant', tenantController.updatePasswordTenant);
+router.post('/addAlternateEmailPhone', tenantController.addAlternateEmailPhone);
 
 module.exports = router;
 

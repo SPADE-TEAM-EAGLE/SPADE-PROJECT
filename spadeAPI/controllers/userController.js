@@ -364,7 +364,7 @@ exports.property = async (req, res) => {
 //  ############################# Get Property Start ############################################################
 
 exports.getproperty = async (req, res) => {
-  const {userId} = req.user
+  const {userId,userName} = req.user
   try {
 
     console.log("Step 1: Fetching property data...");
@@ -389,7 +389,9 @@ exports.getproperty = async (req, res) => {
 
       res.status(200).json({
         // data: length,
+        user : userName,
         data: allPropertyResult,
+
         message: "All properties"
       });
       // }
