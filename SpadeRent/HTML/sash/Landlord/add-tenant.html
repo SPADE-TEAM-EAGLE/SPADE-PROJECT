@@ -58,7 +58,9 @@
             background-color: rgb(136, 136, 136, 0.5);
             /* Color of the scrollbar thumb on hover */
         }
-
+        .iti{
+            margin-bottom: 0!important;
+        }
         .custom-file-input::before {
             content: 'Select Files';
             display: inline-block;
@@ -173,6 +175,7 @@
         .custom-file-label i {
             margin-bottom: 5px;
             font-size: 3rem;
+            color: #1467B0;
         }
 
         .custom-file-text {
@@ -196,12 +199,11 @@
             vertical-align: top;
             border: 1px solid #e9edf4;
         }
-
-        input:focus {
+        /* /* input:focus {
             border: 3px solid #555 !important;
-        }
-
-        .panel-body {
+        } */
+        
+        */ .panel-body {
             padding: 0px;
         }
 
@@ -449,7 +451,7 @@
                 width: 2.5rem;
                 opacity: 1;
                 position: absolute;
-                top: -11px;
+                top: 6px;
             }
 
             .del {
@@ -600,8 +602,14 @@
 <body class="app sidebar-mini ltr light-mode">
 
     <!-- GLOBAL-LOADER -->
-    <div id="global-loader">
+    <!-- <div id="global-loader">
         <img src="../assets/images/loader.svg" class="loader-img" alt="Loader">
+    </div> -->
+    <div id="preloader" class="tlp-preloader">
+        <div class="animation-preloader">
+            <div class="tlp-spinner"></div>
+            <img src="../assets/images/logo-preloader.png" alt="Preloader" style="width: 65px;">
+        </div>
     </div>
     <!-- /GLOBAL-LOADER -->
     <!-- Modal -->
@@ -639,14 +647,14 @@
                                         <label for="inputEmail4" class="form-label fw-bold">First Name<spnan
                                                 class="text-danger"> *</span></label>
                                         <input type="text" class="form-control form" placeholder="Enter First Name"
-                                            id="firstName">
+                                            id="firstName" required>
                                         <span class="text-danger d-none">First name is required!</span>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="inputPassword4" class="form-label fw-bold">Last Name<spnan
                                                 class="text-danger"> *</span></label>
                                         <input type="text" class="form-control form" placeholder="Enter Last Name"
-                                            id="lastName">
+                                            id="lastName" required>
                                         <span class="text-danger d-none">Last name required!</span>
                                     </div>
                                     <div class="col-md-4">
@@ -661,13 +669,15 @@
                                         <label for="inputCity" class="form-label fw-bold">Email<spnan
                                                 class="text-danger"> *</span></label>
                                         <input type="text" class="form-control form" placeholder="Enter Email"
-                                            id="email">
+                                            id="email" required>
                                         <span class="text-danger d-none">Email is required!</span>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="inputState" class="form-label fw-bold">Phone Number <span
                                                 class="fw-light">(Optional)</span></label>
                                         <input id="phone" name="phone" type="tel" autocomplete="off">
+                                        <span id="valid-msg" class="d-none text-success">✓ Valid</span>
+<span id="error-msg" class="hide text-danger"></span>
                                         </select>
                                         <!-- <span class="text-danger d-none">State is required!</span> -->
                                     </div>
@@ -681,7 +691,7 @@
                                     <div class="col-md-4">
                                         <label for="inputState" class="form-label fw-bold">State<spnan
                                                 class="text-danger">*</span></label>
-                                        <select id="state" class="form-select form">
+                                        <select id="state" class="form-select form" required>
                                             <option selected>Choose...</option>
                                             <option>Sindh</option>
                                             <option>Punjab</option>
@@ -693,7 +703,7 @@
                                     <div class="col-md-4">
                                         <label for="inputState" class="form-label fw-bold">City <spnan
                                                 class="text-danger">*</span></label>
-                                        <select id="city" class="form-select form">
+                                        <select id="city" class="form-select form" required>
                                             <option selected>Choose...</option>
 
                                         </select>
@@ -726,16 +736,16 @@
                             <div class="accordion-body">
                                 <form class="row g-3">
                                     <div class="col-md-4">
-                                        <label for="inputEmail4" class="form-label">Select Property</label>
-                                        <select id="property" class="form-select">
+                                        <label for="inputEmail4" class="form-label">Select Property<span class="text-danger"> *</span></label>
+                                        <select id="property" class="form-select" required>
                                             <option selected>Choose...</option>
                                             <option>...</option>
                                         </select>
                                         <span class="text-danger d-none">Property is required!</span>
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="inputEmail4" class="form-label">Select Property Unit</label>
-                                        <select id="unit" class="form-select">
+                                        <label for="inputEmail4" class="form-label">Select Property Unit<span class="text-danger"> *</span></label>
+                                        <select id="unit" class="form-select" required>
                                             <option selected>Choose...</option>
                                             <option>...</option>
                                         </select>
@@ -743,7 +753,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label for="inputAddress" class="form-label">Input Rent Amount /Per
-                                            Month</label>
+                                            Month<span class="text-danger"> *</span></label>
                                         <div class="input-group">
                                             <span class="input-group-text"
                                                 style="color: #1467B0;background-color: transparent !important;">$</span>
@@ -776,20 +786,21 @@
                                         <label for="inputEmail4" class="form-label">Is this a gross lease or triple net
                                             lease? <i class="fi fi-rs-info ms-2" style="color: #1467B0"></i></label>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
+                                            <input class="form-check-input" type="radio" value="Gross Lease" name="lease"
                                                 id="flexCheckDefault">
                                             <label class="form-check-label" for="flexCheckDefault">
                                                 Gross Lease
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                id="flexCheckChecked1" data-bs-toggle="collapse" href="#collapse1"
+                                            <input class="form-check-input" type="radio" value="Triple Net Lease" name="lease"
+                                                id="flexCheckChecked1" href="#collapse1"
                                                 role="button" aria-expanded="false" aria-controls="collapseExample1">
                                             <label class="form-check-label" for="flexCheckChecked1">
                                                 Triple Net Lease
                                             </label>
                                         </div>
+                                        <!-- <input type="hidden" name="radioOptionsHidden" required> -->
                                         <div class="collapse" id="collapse1">
                                             <div class="card card-body">
                                                 <div class="text-justify ps-2 border-model-line">
@@ -824,13 +835,18 @@
                                                             <label for="inputEmail4" class="form-label">Lease Start
                                                                 Date</label>
                                                             <input type="date" class="form-control position-relative"
-                                                                id="leaseStart">
+                                                                id="leaseStart" required>
+                                                                <span class="text-danger d-none">Rent amount is
+                                                                    required!</span>
                                                             <!-- <i class="fi fi-rs-calendar"></i> -->
                                                         </div>
                                                         <div class="col-md-6">
                                                             <label for="inputPassword4" class="form-label">Lease End
                                                                 Date</label>
-                                                            <input type="date" class="form-control" id="leaseStart">
+
+                                                            <input type="date" class="form-control" id="leaseEnd" required>
+                                                            <span class="text-danger d-none">Rent amount is
+                                                                required!</span>
                                                             <!-- <i class="fi fi-rs-calendar"></i> -->
                                                         </div>
                                                     </div>
@@ -845,18 +861,19 @@
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" value="yes" name="yesno"
                                                 id="flexCheckChecked2" href="#collapse2" role="button"
-                                                aria-expanded="false" aria-controls="collapseExample2">
+                                                aria-expanded="false" aria-controls="collapseExample2" required>
                                             <label class="form-check-label" for="flexCheckChecked">
                                                 Yes
                                             </label>
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" value="no" name="yesno">
+                                            <input class="form-check-input" type="radio" value="no" name="yesno" required>
                                             <label class="form-check-label" for="flexCheckChecked">
                                                 No
                                             </label>
                                         </div>
+                                        
                                     </div>
                                     <div class="col-12 row">
                                         <!-- <div class="col-md-5">
@@ -877,13 +894,15 @@
                                         <div class="collapse" id="collapse2">
                                             <div class="card card-body">
                                                 <div class="text-justify" id="add-item-container">
-                                                    <div class="row">
+                                                    <div class="row row-multiple">
                                                         <div class="col-md-5">
                                                             <label for="inputEmail4" class="form-label">Date of Rent
                                                                 Change
                                                                 (Optional)</label>
                                                             <input type="date" class="form-control input-date"
-                                                                id="dateofRentchange">
+                                                                id="dateofRentchange" required>
+                                                                <span class="text-danger d-none">Rent amount is
+                                                                    required!</span>
                                                         </div>
                                                         <div class="col-md-5">
                                                             <label for="inputPassword4" class="form-label">Rent Amount
@@ -892,6 +911,8 @@
                                                             <input type="text" class="form-control input-amount"
                                                                 id="amountChange" pattern="[0-9]{7}" placeholder="Enter Amount.." maxlength="7"
                                                                 oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                                                                <span class="text-danger d-none">Rent amount is
+                                                                    required!</span>
                                                         </div>
                                                         <div class="col-md-2 text-center d-flex align-items-center">
                                                             <button type="button" class="btn position-relative">
@@ -1347,9 +1368,10 @@
 
                                 </a>
                                 <ul class="slide-menu">
-                                    <li class="side-menu-label1"><a href="javascript:void(0)">Invoicing</a></li>
+                                    <li class="side-menu-label1"><a href="javascript:void(0)">Tasks</a></li>
                                     <li><a href="create-tasks.html" class="slide-item">All</a></li>
-                                    <li><a href="new-tasks.html" class="slide-item">Draft</a></li>
+                                    <li><a href="new-tasks.html" class="slide-item">Requests</a></li>
+                                    <li><a href="new-tasks.html" class="slide-item">Vendors</a></li>
                                 </ul>
                             </li>
                             <li class="slide">
@@ -2474,9 +2496,9 @@ console.log(properties)
             $("#add-item").on("click", () => {
                 // console.log($("add-item-container"))
 
-                $("#add-item-container").append(`<div class="row"><div class="col-md-5">
+                $("#add-item-container").append(`<div class="row row-multiple"><div class="col-md-5">
                                             <label for="inputEmail4" class="form-label">Date of Rent Change (Optional)</label>
-                                            <input type="date" class="form-control input-date" id="inputEmail4">
+                                            <input type="date" class="form-control input-date" id="inputEmail4" required>
                                           </div>
                                           <div class="col-md-5">
                                             <label for="inputPassword4" class="form-label">Rent Amount Correlating to that Date</label>
@@ -2512,11 +2534,44 @@ console.log(properties)
                     if (!$('#collapse2').hasClass('show')) {
                         $('#collapse2').collapse('show');
                     }
+                    $('.row-multiple').each(function () {
+                    var date = $(this).find('.input-date')
+                    var amount = $(this).find('.input-amount')
+                    date.prop('required', true)
+                    amount.prop('required', true)
+                })
                 } else if ($(this).val() === 'no') {
 
                     if ($('#collapse2').hasClass('show')) {
                         $('#collapse2').collapse('hide');
                     }
+                    $('.row-multiple').each(function () {
+                    var date = $(this).find('.input-date')
+                    var amount = $(this).find('.input-amount')
+                    date.prop('required', false)
+                    amount.prop('required', false)
+                })
+                }
+            });
+            $('input[name="lease"]').change(function () {
+                console.log($(this).val())
+                if ($(this).val() === 'Triple Net Lease') {
+                    if (!$('#collapse1').hasClass('show')) {
+                        $('#collapse1').collapse('show');
+                    }
+                    $('#baseRent').prop('required', true);
+      $('#tripleNet').prop('required', true);
+      $('#leaseStart').prop('required', true);
+      $('#leaseEnd').prop('required', true);
+                } else if ($(this).val() === 'Gross Lease') {
+
+                    if ($('#collapse1').hasClass('show')) {
+                        $('#collapse1').collapse('hide');
+                    }
+                    $('#baseRent').prop('required', false);
+      $('#tripleNet').prop('required', false);
+      $('#leaseStart').prop('required', false);
+      $('#leaseEnd').prop('required', false);
                 }
             });
 
@@ -2527,30 +2582,32 @@ console.log(properties)
                 // Get Tenant Information
                 formData.firstName = document.getElementById('firstName').value;
                 formData.lastName = document.getElementById('lastName').value;
-                formData.company = document.getElementById('company').value;
+                formData.companyName = document.getElementById('company').value;
                 formData.email = document.getElementById('email').value;
-                formData.phone = document.getElementById('phone').value;
+                formData.phoneNumber = document.getElementById('phone').value;
                 formData.address = document.getElementById('address').value;
                 formData.state = document.getElementById('state').value;
                 formData.city = document.getElementById('city').value;
-                formData.zip = document.getElementById('zip').value;
+                formData.zipcode = document.getElementById('zip').value;
 
                 // Get Assign Property
-                formData.property = document.getElementById('property').value;
-                formData.unit = document.getElementById('unit').value;
-                formData.rent = document.getElementById('rent').value;
+                formData.propertyID = document.getElementById('property').value;
+                formData.propertyUnitID = document.getElementById('unit').value;
+                formData.rentAmount = document.getElementById('rent').value;
 
                 // Get Lease Details
-                formData.grossLease = document.getElementById('flexCheckDefault').checked;
+                formData.gross_or_triple_lease = document.querySelector('input[name="lease"]:checked').value;
                 formData.baseRent = document.getElementById('baseRent').value;
                 formData.tripleNet = document.getElementById('tripleNet').value;
-                formData.leaseStart = document.getElementById('leaseStart').value;
-                formData.leaseEnd = document.getElementById('leaseEnd').value;
-                formData.rentIncreases = document.querySelector('input[name="yesno"]:checked').value;
+                formData.leaseStartDate = document.getElementById('leaseStart').value;
+                formData.leaseEndDate = document.getElementById('leaseEnd').value;
+                formData.increaseRent = document.querySelector('input[name="yesno"]:checked').value;
+                
+                
                 var rowData = [];
 
                 // Iterate over each row
-                $('.row').each(function () {
+                $('.row-multiple').each(function () {
                     var date = $(this).find('.input-date').val();
                     var amount = $(this).find('.input-amount').val();
 
@@ -2563,8 +2620,8 @@ console.log(properties)
                     // Add the object to the rowData array
                     rowData.push(rowObject);
                 });
-                console.log(rowData)
-                formData.rentChangeDateandAmount = rowData
+                // console.log(rowData)
+                formData.increaseRentData = rowData
                 //   formData.rentChangeDate = document.getElementById('dateofRentchange').value;
                 //   formData.amountChange = document.getElementById('amountChange').value;
 
@@ -2574,19 +2631,20 @@ console.log(properties)
             // Function to make the AJAX call
             function sendData() {
                 var formData = getFormData();
-
+                console.log(formData)
                 // Make the AJAX call
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/allproperty',
-                    type: 'POST',
-                    data: formData,
-                    contentType: false,
-                    processData: false,
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
+                    url: 'http://localhost:3000/api/spade/tenants',
+                type: 'POST',
+                data: JSON.stringify(formData),
+                contentType: "application/json; charset=utf-8",
+                processData: false,
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
                     success: function (response) {
                         // Handle the success response
+                        console.log(response)
                         console.log('Data sent successfully!');
                     },
                     error: function (xhr, status, error) {
@@ -2595,10 +2653,14 @@ console.log(properties)
                     }
                 });
             }
-
+            $("#next").on('click',()=>{
+                sendData()
+            })
             function checkFieldsStatus(accordionId) {
-            var accordionFields = $('#' + accordionId + ' input[type="text"], #' + accordionId + ' select');
-            var imageField = $('#' + accordionId + ' input[type="file"]');
+            // var accordionFields = $('#' + accordionId + ' input[type="text"], #' + accordionId + ' select');
+            var accordionFields = $('#' + accordionId + ' input[required], #' + accordionId + ' select[required]');
+
+            // var imageField = $('#' + accordionId + ' input[type="file"]');
             var hasEmptyFields = false;
             var hasErrorFields = false;
             var hasFilledFields = false;
@@ -2615,9 +2677,9 @@ console.log(properties)
                     hasFilledFields = true;
                 }
             });
-            if (imageField.length && imageField.get(0).files.length === 0) {
-                hasEmptyFields = true;
-            }
+            // if (imageField.length && imageField.get(0).files.length === 0) {
+            //     hasEmptyFields = true;
+            // }
             if (hasEmptyFields && hasErrorFields) {
                 return 1;
             } else if (!hasEmptyFields && !hasErrorFields && hasFilledFields) {
@@ -2639,7 +2701,7 @@ console.log(properties)
                 return
             }
             const accordionItem = document.getElementById(id);
-            const formFields = accordionItem.querySelectorAll("input, select");
+            const formFields = accordionItem.querySelectorAll("input[required], select[required]");
             let allFieldsFilled = true;
             formFields.forEach(function (field) {
                 if (field.value === "" || field.value === "Choose...") {
@@ -2684,26 +2746,33 @@ console.log(properties)
         $("#accordion-button2").on("click",()=>{checkFieldsFilled("accordion-item2")})
         $("#accordion-button3").on("click",()=>{checkFieldsFilled("accordion-item3")})
         function areAllFieldsFilled() {
-                var accordion1Fields = $('#accordion-item1 input[type="text"], #accordion-item1 select');
-                var accordion2Fields = $('#accordion-item2 input[type="text"], #accordion-item2 select');
-                var accordion3Fields = $('#accordion-item3 input[type="text"], #accordion-item3 select');
-                // var imageInput = $('#fileInput');
-                var allFieldsFilled = accordion1Fields.filter(function () {
-                    return $(this).val() === '' || $(this).val() === 'Choose...';
-                }).length === 0 && accordion2Fields.filter(function () {
-                    return $(this).val() === '' || $(this).val() === 'Choose...';
-                }).length === 0 && imageInput.get(0).files.length > 0;
+            var accordion1Fields = $('#accordion-item1 input[required], #accordion-item1 select[required]');
+  var accordion2Fields = $('#accordion-item2 input[required], #accordion-item2 select[required]');
+  var accordion3Fields = $('#accordion-item3 input[required]');
 
-                return allFieldsFilled;
+  var allFieldsFilled =
+    accordion1Fields.filter(function() {
+      return $(this).val() === '' || $(this).val() === 'Choose...';
+    }).length === 0 &&
+    accordion2Fields.filter(function() {
+      return $(this).val() === '' || $(this).val() === 'Choose...';
+    }).length === 0 &&
+    accordion3Fields.filter(function() {
+      return $(this).val() === '';
+    }).length === 0;
+
+  return allFieldsFilled;
             }
 
             // Function to enable or disable buttons based on field status
             function updateButtonStatus() {
-                var accordion1Fields = $('#accordion-item1 input[type="text"], #accordion-item1 select');
-                var accordion2Fields = $('#accordion-item2 input[type="text"], #accordion-item2 select');
-                var accordion3Fields = $('#accordion-item3 input[type="text"], #accordion-item3 select');
+                var accordion1Fields = $('#accordion-item1 input[required], #accordion-item1 select[required]');
+                var accordion2Fields = $('#accordion-item2 input[required], #accordion-item2 select[required]');
+                var accordion3Fields = $('#accordion-item3 input[required]');
                 // var imageInput = $('#fileInput');
-
+                // console.log(accordion1Fields)
+                // console.log(accordion2Fields)
+                // console.log(accordion3Fields)
                 var isAccordion1FieldsEmpty = accordion1Fields.filter(function () {
                     return $(this).val() !== '' || $(this).val() === 'Choose...';
                 }).length === 0;
@@ -2712,6 +2781,7 @@ console.log(properties)
                     return $(this).val() !== '' || $(this).val() === 'Choose...';
                 }).length === 0;
                 var isAccordion3FieldsEmpty = accordion3Fields.filter(function () {
+                    console.log($(this).val())
                     return $(this).val() !== '' || $(this).val() === 'Choose...';
                 }).length === 0;
 
@@ -2729,16 +2799,16 @@ console.log(properties)
                 // Enable or disable the buttons based on the fields' status
                 if (allFieldsFilled) {
                     $('#next').removeClass("disabled");
-                    //   $('#draft').removeAttr("disabled");
+                      $('#next').removeAttr("disabled");
                 } else {
                     $('#next').addClass("disabled");
-                    //   $('#draft').removeAttr("disabled");
+                    //   $('#next').addAttr("disabled","disabled");
 
                 }
             }
 
             // Call the updateButtonStatus function when any field in the accordions is changed
-            $('#accordion-item1 input, #accordion-item1 select, #accordion-item2 input, #accordion-item2 select, #accordion-item3 input, #accordion-item3 select').on('input change', function () {
+            $('#accordion-item1 input[required], #accordion-item1 select[required], #accordion-item2 input[required], #accordion-item2 select[required], #accordion-item3 input[required], #accordion-item3 select[required]').on('input change', function () {
                 var $field = $(this);
                 var $errorMessage = $field.next('.text-danger');
 
@@ -2782,6 +2852,91 @@ console.log(properties)
                     $('#draft').attr("disabled", "disabled");
                 });
             }
+            $.ajax({
+                url: 'http://api.geonames.org/searchJSON',
+                method: 'GET',
+                data: {
+                    country: 'PK',
+                    maxRows: 500,
+                    username: 'developedmatz',
+                    style: 'full'
+                },
+                success: function (result) {
+                    // Handle state selection change
+                    $('#state').change(function () {
+                        var selectedState = $(this).val();
+                        if (selectedState === "KPK") {
+                            selectedState = "Khyber Pakhtunkhwa"
+                        }
+
+                        var cityDropdown = $('#city');
+
+                        // Clear existing options
+                        cityDropdown.empty();
+                        cityDropdown.append($('<option></option>').text("Choose..."));
+                        cities = []
+                        if (selectedState !== "Choose...") {
+                            // Populate city options based on selected state
+                            count = 0
+                            data = result.geonames
+                            for (item of data) {
+                                if (item.adminName1 === selectedState) {
+                                    cities.push(item.name)
+                                    count++
+                                }
+                                if (count === 10) {
+                                    break
+                                }
+                            }
+
+
+                            cities.forEach(function (city) {
+                                cityDropdown.append($('<option></option>').text(city));
+                            });
+
+                        }
+                    })
+                }
+            })
+            const input = document.querySelector("#phone");
+const errorMsg = document.querySelector("#error-msg");
+const validMsg = document.querySelector("#valid-msg");
+
+// here, the index maps to the error code returned from getValidationError - see readme
+const errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+
+// initialise plugin
+const iti = window.intlTelInput(input, {
+  utilsScript: "/intl-tel-input/js/utils.js?1684676252775"
+});
+
+const reset = () => {
+  input.classList.remove("error");
+  errorMsg.innerHTML = "";
+  errorMsg.classList.add("d-none");
+  validMsg.classList.add("d-none");
+};
+
+// on blur: validate
+input.addEventListener('blur', () => {
+  reset();
+  if (input.value.trim()) {
+    if (iti.isValidNumber()) {
+      validMsg.classList.remove("d-none");
+    } else {
+      input.classList.add("error");
+      const errorCode = iti.getValidationError();
+      errorMsg.innerHTML = errorMap[errorCode];
+      errorMsg.classList.remove("d-none");
+    }
+  }
+});
+
+// on keyup / change flag: reset
+input.addEventListener('change', reset);
+input.addEventListener('keyup', reset);
+
+
 
 
 
@@ -2944,7 +3099,7 @@ console.log(properties)
             $(this).find('input[type="radio"]').prop('checked', false);
             $(this).find('.file-grid').empty();
         });
-        $(document).on('click', '#next', function (e) {
+        $(document).on('click', '#nex', function (e) {
 
             e.preventDefault();
             $('#addModal').modal('hide');

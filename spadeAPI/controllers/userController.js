@@ -17,10 +17,6 @@ const {
   updateProperty,
   insertInPropertyUnits,
   updatePropertyUnits,
-  insertTenants,
-  UpdateTenants,
-  addResetTokenTenants,
-  updatePasswordTenant,
   selectPropertyTenant
 } = require('../constants/queries')
 const { hashedPassword } = require('../helper/hash')
@@ -401,7 +397,7 @@ exports.property = async (req, res) => {
 //  ############################# Get Property Start ############################################################
 
 exports.getproperty = async (req, res) => {
-  const { userId } = req.user
+  const { userId,userName } = req.user
   try {
     console.log('Step 1: Fetching property data...')
     const allPropertyResult = await queryRunner(
@@ -432,6 +428,7 @@ exports.getproperty = async (req, res) => {
       res.status(200).json({
         // data: length,
         data: allPropertyResult,
+        user:userName,
         message: 'All properties'
       })
       // }
@@ -641,7 +638,7 @@ exports.propertyUpdate = async (req, res) => {
 //  ############################# View Property Start ############################################################
 exports.propertyView = async (req, res) => {
   try {
-    const { propertyId } = req.body
+    const { propertyId } = req.query
     // console.log(req.query)
     // check property in database
     console.log(propertyId)
@@ -726,7 +723,7 @@ exports.putPropertyUnitsUpdates = async (req, res) => {
   try {
     const { id, propertyId, unitNumber, Area, unitDetails } = req.body
     // console.log(id, propertyID, unitNumber, Area, unitDetails)
-    let status = 'Occupied'
+    let status = 'Vacant'
     const propertyUnitsResult = await queryRunner(updatePropertyUnits, [
       unitNumber,
       Area,

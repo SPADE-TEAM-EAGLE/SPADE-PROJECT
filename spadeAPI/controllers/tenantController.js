@@ -13,6 +13,8 @@ const {
   UpdateTenants,
   addResetTokenTenants,
   updatePasswordTenant,
+  insertincreaseRentData,
+  updatePropertyUnitsTenant
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -46,24 +48,17 @@ const config = process.env;
                 tripleNet,
                 leaseStartDate,
                 leaseEndDate,
-                increaseRent
+                increaseRent,
+                increaseRentData
               } = req.body
+              // console.log(req.body,req.query)
               const {userId}=req.user
+              console.log(req.body)
+              // console.log(userId)
               const tenantsCheck = await queryRunner(selectQuery("tenants", "email"), [email]);
+              console.log(tenantsCheck[0])
               if (tenantsCheck[0].length > 0) {
-                // res.send("email found");
-                // const tenantsInsert = await queryRunner(UpdateTenants, [landlordID, firstName, lastName, companyName, email, phoneNumber, address, city, state, zipcode, propertyID, propertyUnitID, rentAmount, gross_or_triple_lease, baseRent, tripleNet, leaseStartDate, leaseEndDate, increaseRent, tenantPassword]);
-                // if (tenantsInsert[0].affectedRows > 0) {
-                //   res.status(200).json({
-                //     message: "Tenants Updated Successful",
-                //     data: tenantsInsert[0]
-                //   })
-          
-                // } else {
-                //   res.status(400).json({
-                //     message: "email found but never change something"
-                //   })
-                // }
+
                 res.status(400).json({
                   message: `Tenants Already exist on this email ${email} `,
                 })
@@ -73,12 +68,46 @@ const config = process.env;
                     const tenantPassword = "Spade" + ran;
               const hashPassword = await hashedPassword(tenantPassword);
           
-                const tenantsInsert = await queryRunner(insertTenants, [landlordID, firstName, lastName, companyName, email, phoneNumber, address, city, state, zipcode, propertyID, propertyUnitID, rentAmount, gross_or_triple_lease, baseRent, tripleNet, leaseStartDate, leaseEndDate, increaseRent, hashPassword, currentDate]);
+                const tenantsInsert = await queryRunner(insertTenants, [userId, firstName, lastName, companyName, email, phoneNumber, address, city, state, zipcode, propertyID, propertyUnitID, rentAmount, gross_or_triple_lease, baseRent, tripleNet, leaseStartDate, leaseEndDate, increaseRent, hashPassword, currentDate]);
                 if (tenantsInsert[0].affectedRows > 0) {
-                  res.status(200).json({
-                    message: "Tenants save Successful",
-                    data: tenantsInsert[0]
-                  })
+                    // update property unit
+                    const status = "Occupied";
+                    const propertyUnitsResult = await queryRunner(updatePropertyUnitsTenant, [ status, propertyUnitID, propertyID ]);
+                    if (propertyUnitsResult[0].affectedRows > 0) {
+                      // insert increase rent amount Start
+                      if(increaseRent == 'No'){
+                        res.status(200).json({
+                            message: "Tenants save Successful",
+                            data: tenantsInsert[0]
+                          })
+                    }
+                    else{
+                        const tenantID = tenantsInsert[0].insertId;
+                        if(increaseRentData.length>=1 && increaseRentData[0].date!==""){
+                          for(let i=0; i < increaseRentData.length; i++ ){
+                            const propertyID = increaseRentData[i].propertyID;
+                            const increaseDate = increaseRentData[i].increaseDate;
+                            const increaseRentAmount = increaseRentData[i].increaseRentAmount;
+                            console.log(tenantID, propertyID, increaseDate, increaseRentAmount,1)
+                            const increaseRentDataResult = await queryRunner(insertincreaseRentData, [tenantID, propertyID, increaseDate, increaseRentAmount])
+                            
+                          }
+                        }
+
+                          res.status(200).json({
+                            message: " tenant created successful"
+                          });
+ 
+                    }
+                      // insert increase rent amount END
+
+                    } else {
+                      res.status(400).json({
+                        message: "Error occur in update tenant property unit"
+                      })
+                    } 
+                    
+
                 } else {
                   res.status(400).json({
                     message: "data not save"
@@ -87,6 +116,7 @@ const config = process.env;
               }
             }
             catch (error) {
+              console.log(error)
               res.send("Error occurs in creating Tenants  " + error)
             }
           }
