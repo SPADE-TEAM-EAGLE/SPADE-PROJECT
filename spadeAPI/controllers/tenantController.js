@@ -14,7 +14,9 @@ const {
   addResetTokenTenants,
   updatePasswordTenant,
   insertincreaseRentData,
-  updatePropertyUnitsTenant
+  updatePropertyUnitsTenant,
+  insertAlternateEmailData,
+  insertAlternatePhoneData
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -315,5 +317,60 @@ const config = process.env;
             }
           }
           //  ############################# Tenant Update Password ############################################################
+
+
+          //  ############################# Add Alternate Email and Phone Start ############################################################
+          exports.addAlternateEmailPhone = async (req, res) => {
+            const { tenantID, alternatePhone, alternateEmail } = req.body;
+          
+            try {
+                let phoneExist = false;
+                let emailExist = false;
+            //   if (alternatePhone && alternateEmail && alternatePhone.length > 0 && alternateEmail.length > 0) {
+              const selectalternatePhoneResult = await queryRunner(selectQuery('tenantalternatephone', 'tenantID'), [tenantID]); 
+              if(selectalternatePhoneResult[0].length > 0){
+                phoneExist = true;
+              }else{
+                    for (let i = 0; i < alternatePhone.length; i++) {
+                  const phoneName = alternatePhone[i].phoneName;
+                  const phoneNumber = alternatePhone[i].phoneNumber;
+                  const alternatePhoneDataResult = await queryRunner(insertAlternatePhoneData, [tenantID, phoneName, phoneNumber]);
+                }
+              } 
+              const selectalternateEmailResult = await queryRunner(selectQuery('tenantalternateemail', 'tenantID'), [tenantID]); 
+              if(selectalternateEmailResult[0].length > 0){
+                emailExist = true;
+              }else{
+                          for (let i = 0; i < alternateEmail.length; i++) {
+                    const emailName = alternateEmail[i].emailName;
+                    const email = alternateEmail[i].email; 
+                    const alternateEmailDataResult = await queryRunner(insertAlternateEmailData, [tenantID, emailName, email]);
+                  }
+              }
+              if(phoneExist == true && emailExist == true){
+                res.status(200).json({
+                  message: "Email and number already exist"
+                });
+              } else if(phoneExist == false && emailExist == true){
+                res.status(200).json({
+                    message: "Phone number successfully save email already already exist"
+                  });
+              } else if(phoneExist == true && emailExist ==false ){
+                res.status(200).json({
+                    message: " Email successfully save Phone number already already exist"
+                  });
+              }else{
+                res.status(200).json({
+                    message: " Email and phone number successfully save "
+                  });
+              }
+ 
+            } catch (error) {
+              console.error("Error:", error);
+              res.sendStatus(500);
+            }
+          };
+ 
+          //  ############################# Add Alternate Email and Phone End ############################################################
           
           
