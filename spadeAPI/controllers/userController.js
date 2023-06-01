@@ -783,46 +783,35 @@ exports.getPropertyTenant = async (req, res) => {
 
 //  ############################# Add more property units Start ############################################################
 exports.addMoreUnits = async (req, res) => {
-  const { propertyID, units } = req.body;
-  let checkUnit = false;
+  const { propertyID } = req.body;
   try {
 
-    // if(selectalternatePhoneResult[0].length > 0){
-    // }else{
-    for (let i = 0; i < units.length; i++) {
-      const status = "Vacant";
-      const unitNumber = units[i].unitNumber;
-      const area = units[i].area;
-      const unitDetails = units[i].unitDetails;
-
-      const addMoreUnitsResult = await queryRunner(insertMoreUnits, [propertyID, unitNumber, area, unitDetails, status]);
-
-      if (addMoreUnitsResult[0].affectedRows > 0) {
-        checkUnit = true;
-      }
-    }
-    if(checkUnit){
+    const propertyUnitResult = await queryRunner(insertInPropertyUnits, [propertyID, "", "", "", "Vacant"]);
+    if (propertyUnitResult[0].affectedRows > 0) {
       const selectaddMoreUnitsResult = await queryRunner(getUnitsCount, [propertyID]);
-        if (selectaddMoreUnitsResult[0].length > 0) {
-          const unitCount = selectaddMoreUnitsResult[0][0].unitCount;
-      const updateaddMoreUnitsResult = await queryRunner(putUnitsUpdate, [unitCount, propertyID,]); 
-      if(updateaddMoreUnitsResult[0].affectedRows > 0){
-        res.status(200).json({
-          data: unitCount,
-          message: "total unit"
-        })
-      }else{
-        res.status(400).json({
-          message: "Error occurs in Updating unit in database"
-        })  
-      }
-        
+      if (selectaddMoreUnitsResult[0].length > 0) {
+        const unitCount = selectaddMoreUnitsResult[0][0].unitCount;
+        const updateaddMoreUnitsResult = await queryRunner(putUnitsUpdate, [unitCount, propertyID,]);
+        if (updateaddMoreUnitsResult[0].affectedRows > 0) {
+          res.status(200).json({
+            data: unitCount,
+            message: "total unit"
+          })
+        } else {
+          res.status(400).json({
+            message: "Error occurs in Updating unit in database"
+          })
         }
+
+      }
+
+
     }else{
-      res.status(400).json({
-        message: "Error occurs in inserted unit in database"
-      })
+        res.status(400).json({
+          message: "Unit not inserted"
+        })
     }
+
 
 
   } catch (error) {
