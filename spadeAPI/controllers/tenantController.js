@@ -370,9 +370,7 @@ const config = process.env;
               res.sendStatus(500);
             }
           };
-          
-          
-          
+ 
           //  ############################# Add Alternate Email and Phone End ############################################################
           
           
