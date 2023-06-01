@@ -823,3 +823,49 @@ exports.addMoreUnits = async (req, res) => {
           //  ############################# Add more property units End ############################################################
 
 
+
+
+
+          //  ############################# Delete property units Start ############################################################
+exports.deleteMoreUnits = async (req, res) => {
+  const { unitID, propertyID } = req.body;
+  try {
+
+    // const propertyUnitResult = await queryRunner(insertInPropertyUnits, [propertyID, "", "", "", "Vacant"]);
+    const unitDeleteResult = await queryRunner(deleteQuery("propertyunits", "id"), [unitID]);
+
+    if (unitDeleteResult[0].affectedRows > 0) {
+      const selectaddMoreUnitsResult = await queryRunner(getUnitsCount, [propertyID]);
+      if (selectaddMoreUnitsResult[0].length > 0) {
+        const unitCount = selectaddMoreUnitsResult[0][0].unitCount;
+        const updateaddMoreUnitsResult = await queryRunner(putUnitsUpdate, [unitCount, propertyID,]);
+        if (updateaddMoreUnitsResult[0].affectedRows > 0) {
+          res.status(200).json({
+            data: unitCount,
+            message: "total unit"
+          })
+        } else {
+          res.status(400).json({
+            message: "Error occurs in Updating unit in database"
+          })
+        }
+
+      }
+
+
+    }else{
+        res.status(400).json({
+          message: "Unit not inserted"
+        })
+    }
+
+
+
+  } catch (error) {
+    console.error("Error:", error);
+    res.sendStatus(500);
+  }
+};
+
+          //  ############################# Delete property units End ############################################################
+
