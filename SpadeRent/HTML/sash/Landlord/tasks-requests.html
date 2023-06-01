@@ -16,7 +16,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="../assets/images/brand/favicon.ico" />
 
     <!-- TITLE -->
-    <title>Sash – Bootstrap 5 Admin & Dashboard Template </title>
+    <title>Property Tasks - SpadeRent</title>
 
     <!-- BOOTSTRAP CSS -->
     <link id="style" href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -30,7 +30,6 @@
     <!--- FONT-ICONS CSS -->
     <link href="../assets/css/icons.css" rel="stylesheet" />
     <link rel="stylesheet" href="fancy_fileupload.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
     <!-- COLOR SKIN CSS -->
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="../assets/colors/color1.css" />
     <style>
@@ -109,8 +108,8 @@
             border-radius: 50px !important;
         }
         /* .dark-mode .create-new-link:hover {
-            border: 3px solid #1467B0 !important;
-        } */
+    border: 3px solid #1467B0 !important;
+} */
         
         .create-new-link {
             background: transparent !important;
@@ -192,11 +191,11 @@
             vertical-align: top;
             border: 1px solid #e9edf4;
         }
-        /* /* input:focus {
-            border: 3px solid #555 !important;
-        } */
+        /* input:focus {
+    border: 3px solid #555 !important;
+} */
         
-        */ .panel-body {
+        .panel-body {
             padding: 0px;
         }
         
@@ -261,8 +260,8 @@
             vertical-align: middle !important;
         }
         /* .card-header {
-        padding: 0.5rem 1rem;
-    } */
+padding: 0.5rem 1rem;
+} */
         
         .modal-footer .button-left {
             background-color: #1F1F1F;
@@ -397,13 +396,13 @@
             border-top-left-radius: calc(0.5rem - 1px);
         }
         /* .delete-file {
-        position: absolute;
-        top: 0px;
-        right: 5px;
-        cursor: pointer;
-        font-size: 13px;
-        color: #000;
-    } */
+position: absolute;
+top: 0px;
+right: 5px;
+cursor: pointer;
+font-size: 13px;
+color: #000;
+} */
         
         button.btn-close {
             right: 6px;
@@ -544,6 +543,9 @@
 <body class="app sidebar-mini ltr light-mode">
 
     <!-- GLOBAL-LOADER -->
+    <!-- <div id="global-loader">
+        <img src="../assets/images/loader.svg" class="loader-img" alt="Loader">
+    </div> -->
     <div id="preloader" class="tlp-preloader">
         <div class="animation-preloader">
             <div class="tlp-spinner"></div>
@@ -551,150 +553,240 @@
         </div>
     </div>
     <!-- /GLOBAL-LOADER -->
-    <!-- Modal -->
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="text-justify ps-2 border-model-line">
-                        <h2 class="modal-title">Create <strong class="color-primary">New Property</strong></h2>
-                        <span class="">Spade Rent allows you to add a range of commercial and residential properties,
-                            from condos and single-family homes to retail stores and parking lots.</span>
+                        <h2 class="modal-title">Create <strong class="color-primary">New Task</strong></h2>
+                        <span class="">The real power of tasks is keeping track of deadlines and having a 
+                            log of all work and communication related to the tasks for later reference.</span>
                     </div>
                     <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="top-close">
                         <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="accordion-item mb-4" id="accordion-item1">
-                        <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button text-white" id="accordian-button-1" type="button" data-bs-toggle="collapse" onclick="checkFieldsFilled('accordion-item1')" id="accordion-button1" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                <span class="m-0 me-4 fs-1" style="font-weight: bold;">01</span>
-                                <h3 class="m-0"><strong>Property Information</strong> <i class="fi fi-rs-pencil"></i><i
-                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
-                                </h3>
-                            </button>
-                        </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <form class="row g-3" enctype="multipart/form-data">
-                                    <div class="col-md-12">
-                                        <label class="form-label fw-bold">Property Photo</label>
-                                        <div class="custom-file" style="border: 1px dashed #00000087;">
-                                            <input id="fileInput" type="file" name="image" class="custom-file-input form" accept=".jpg, .png, image/jpeg, image/png" aria-label="hello" multiple>
-                                            <span className="d-none"></span>
-                                            <label class="custom-file-label" for="fileInput">
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <form class="row g-3" enctype="multipart/form-data">
+                            <div class="col-md-4">
+                                <label for="inputEmail4" class="form-label fw-bold">Task Name</label>
+                                <input class="form-control" placeholder="Sink in Leaked" type="text">
+                                <span class="text-danger d-none">Property ID is required!</span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputState" class="form-label fw-bold">Assign To</label>
+                                <select id="state" class="form-select form">
+                                <option selected>Choose...</option>
+                                <option>Sindh</option>
+                                <option>Punjab</option>
+                                <option>Balochistan</option>
+                                <option>KPK</option>
+                            </select>
+                                <span class="text-danger d-none">Property name required!</span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputState" class="form-label fw-bold">Related To</label>
+                                <select id="state" class="form-select form">
+                                <option selected>Choose...</option>
+                                <option>Sindh</option>
+                                <option>Punjab</option>
+                                <option>Balochistan</option>
+                                <option>KPK</option>
+                            </select>
+                                <span class="text-danger d-none">Property name required!</span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputEmail4" class="form-label fw-bold">Due Date</label>
+                                <input class="form-control" placeholder="MM/DD/YYYY" type="date">
+                                <span class="text-danger d-none">Property ID is required!</span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputState" class="form-label fw-bold">Status</label>
+                                <select id="state" class="form-select form">
+                                <option selected>Choose...</option>
+                                <option>Sindh</option>
+                                <option>Punjab</option>
+                                <option>Balochistan</option>
+                                <option>KPK</option>
+                            </select>
+                                <span class="text-danger d-none">Property name required!</span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputState" class="form-label fw-bold">Priority</label>
+                                <select id="state" class="form-select form">
+                                <option selected>Choose...</option>
+                                <option>Sindh</option>
+                                <option>Punjab</option>
+                                <option>Balochistan</option>
+                                <option>KPK</option>
+                            </select>
+                                <span class="text-danger d-none">Property name required!</span>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label fw-bold">Notes</label>
+                                <textarea class="form-control mb-4" placeholder="Sorry about that We will look into it." rows="4"></textarea>
+                                <span class="text-danger d-none">Photos are required!</span>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label fw-bold">Media/ Files</label>
+                                <div class="custom-file" style="border: 1px dashed #00000087;">
+                                    <input id="fileInput" type="file" name="image" class="custom-file-input form" accept=".jpg, .png, image/jpeg, image/png" aria-label="hello" multiple>
+                                    <span className="d-none"></span>
+                                    <label class="custom-file-label" for="fileInput">
                                                 <i class="fi fi-rs-cloud-upload"></i>
                                                 <div class="custom-file-text">
                                                     <span>Upload Photo or drag and drop here</span>
                                                     <span>JPEG and PNG, file size no more than 10MB</span>
                                                 </div>
                                             </label>
-                                        </div>
-                                        <div class="selected-files text-white">
-                                            <div class="file-grid"></div>
-                                        </div>
-                                        <span class="text-danger d-none">Photos are required!</span>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="inputEmail4" class="form-label fw-bold">Property ID</label>
-                                        <input type="text" class="form-control form" id="propertyId">
-                                        <span class="text-danger d-none">Property ID is required!</span>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="inputPassword4" class="form-label fw-bold">Property Name <spnan
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="propertyName">
-                                        <span class="text-danger d-none">Property name required!</span>
-                                    </div>
-                                    <div class="col-12">
-                                        <label for="inputAddress" class="form-label fw-bold">Address <spnan
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="address" placeholder="1234 Main St">
-                                        <span class="text-danger d-none">Address is required!</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputState" class="form-label fw-bold">State <span
-                                                class="text-danger">*</span></label>
-                                        <select id="state" class="form-select form state-select">
-                                            <option selected>Choose...</option>
-                                            <option value="Sindh">Sindh</option>
-                                            <option value="Punjab">Punjab</option>
-                                            <option value="Balochistan">Balochistan</option>
-                                            <option value="KPK">KPK</option>
-                                        </select>
-                                        <span class="text-danger d-none">State is required!</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputCity" class="form-label fw-bold">City <span
-                                                class="text-danger">*</span></label>
-                                        <select id="city" class="form-select form city-select">
-                                            <option selected>Choose...</option>
-                                        </select>
-                                        <span class="text-danger d-none">City is required!</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputZip" class="form-label fw-bold">Zip <spnan class="text-danger">
-                                                *</span></label>
-                                        <input class="form-control form" type="text" id="zip" name="zip" pattern="[0-9]{5}" placeholder="A valid 5-digit zip code" maxlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
-                                        <span class="text-danger d-none">Zip code is required!</span>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <label for="inputState" class="form-label fw-bold">Property Type <spnan
-                                                class="text-danger">*</span></label>
-                                        <select id="propertyType" class="form-select form">
-                                            <option selected>Choose...</option>
-                                            <option>Single Family</option>
-                                            <option>Multi-Family</option>
-                                            <option>Multi-Commercial</option>
-                                        </select>
-                                        <span class="text-danger d-none">Property Type is required!</span>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="inputPassword4" class="form-label fw-bold">Property Total SF <spnan
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="propertyTotalSF" pattern="[0-9]{5}" placeholder="Area in square feet" maxlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
-                                        <span class="text-danger d-none">Property Total SF is required!</span>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item" id="accordion-item2">
-                        <h2 class="accordion-header" id="headingTwo">
-                            <button class="accordion-button collapsed text-white" onclick="checkFieldsFilled('accordion-item2')" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                <span class="m-0 me-4 fs-1" style="font-weight: bold;">02</span>
-                                <h3 class="m-0"><strong>Property Unit Information</strong> <i
-                                        class="fi fi-rs-pencil"></i><i
-                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
-                                </h3>
-                            </button>
-                        </h2>
-                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                            <form class="row g-3 m-1" enctype="multipart/form-data">
-
-                                <div class="col-12 mb-3">
-                                    <label for="inputAddress" class="form-label fw-bold">Number of Units<span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control px-2" id="units" pattern="[0-9]{5}" placeholder="units.." maxlength="3" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
-                                    <span class="text-danger d-none">Units are required!</span>
                                 </div>
-                            </form>
-                        </div>
+                                <div class="selected-files">
+                                    <div class="file-grid"></div>
+                                </div>
+                                <span class="text-danger d-none">Photos are required!</span>
+                            </div>
+                        </form>
                     </div>
+
                 </div>
-                <div class="modal-footer">
-                    <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
-                        Draft</button>
-                    <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close'>Close</button>
-                    <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
-                    <a href="javascript:void(0)" class="btn text-light button disabled" style='background-color:#1467B0;' id='next'>Next</a>
+                <div class="modal-footer d-flex justify-content-between">
+                    <!-- <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
+                        Draft</button> -->
+                    <div class="d-flex">
+
+                        <label class="custom-control custom-checkbox me-2">
+                                <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1" checked="">
+                                <span class="custom-control-label">Notify Tenant</span>
+                            </label>
+                        <label class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1" checked="">
+                                <span class="custom-control-label">Notify Assignee(s)</span>
+                            </label>
+                    </div>
+                    <div class=""><button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close'>Close</button>
+                        <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
+                        <a href="javascript:void(0)" class="btn text-light btn-pill button disabled" style='background-color:#1467B0;' id='next'>Next</a></div>
+
                 </div>
             </div>
         </div>
     </div>
-    <!-- succes modal -->
+    <div class="modal fade" id="myModal_edit" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="text-justify ps-2 border-model-line">
+                        <h2 class="modal-title">Post an <strong class="color-primary">Update</strong></h2>
+                        <span class="">The real power of tasks is keeping track of deadlines and having a 
+                            log of all work and communication related to the tasks for later reference.</span>
+                    </div>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="top-close">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <form class="row g-3" enctype="multipart/form-data">
+                            <div class="col-md-12">
+                                <label class="form-label fw-bold">Message</label>
+
+                                <textarea class="form-control mb-4" placeholder="Sorry about that We will look into it." rows="4"></textarea>
+                                <span class="text-danger d-none">Photos are required!</span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputEmail4" class="form-label fw-bold">Due Date</label>
+                                <input class="form-control" placeholder="MM/DD/YYYY" type="date">
+                                <span class="text-danger d-none">Property ID is required!</span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputState" class="form-label fw-bold">Priority</label>
+                                <select id="state" class="form-select form">
+                                <option selected>Choose...</option>
+                                <option>Sindh</option>
+                                <option>Punjab</option>
+                                <option>Balochistan</option>
+                                <option>KPK</option>
+                            </select>
+                                <span class="text-danger d-none">Property name required!</span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputState" class="form-label fw-bold">Status</label>
+                                <select id="state" class="form-select form">
+                                <option selected>Choose...</option>
+                                <option>Sindh</option>
+                                <option>Punjab</option>
+                                <option>Balochistan</option>
+                                <option>KPK</option>
+                            </select>
+                                <span class="text-danger d-none">Address is required!</span>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="form-label fw-bold">Assignee(s)</label>
+                                    <select class="form-control select2" data-placeholder="Choose Browser" multiple>
+                                            <option value="Firefox">
+                                                Firefox
+                                            </option>
+                                            <option value="Chrome selected">
+                                                Chrome
+                                            </option>
+                                            <option value="Safari">
+                                                Safari
+                                            </option>
+                                            <option selected value="Opera">
+                                                Opera
+                                            </option>
+                                            <option value="Internet Explorer">
+                                                Internet Explorer
+                                            </option>
+                                        </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label fw-bold">Media/ Files</label>
+                                <div class="custom-file" style="border: 1px dashed #00000087;">
+                                    <input id="fileInput" type="file" name="image" class="custom-file-input form" accept=".jpg, .png, image/jpeg, image/png" aria-label="hello" multiple>
+                                    <span className="d-none"></span>
+                                    <label class="custom-file-label" for="fileInput">
+                                                <i class="fi fi-rs-cloud-upload"></i>
+                                                <div class="custom-file-text">
+                                                    <span>Upload Photo or drag and drop here</span>
+                                                    <span>JPEG and PNG, file size no more than 10MB</span>
+                                                </div>
+                                            </label>
+                                </div>
+                                <div class="selected-files">
+                                    <div class="file-grid"></div>
+                                </div>
+                                <span class="text-danger d-none">Photos are required!</span>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+                <div class="modal-footer d-flex justify-content-between">
+                    <!-- <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
+                        Draft</button> -->
+                    <div class="d-flex">
+
+                        <label class="custom-control custom-checkbox me-2">
+                                <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1" checked="">
+                                <span class="custom-control-label">Notify Tenant</span>
+                            </label>
+                        <label class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1" checked="">
+                                <span class="custom-control-label">Notify Assignee(s)</span>
+                            </label>
+                    </div>
+                    <div class=""><button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close'>Close</button>
+                        <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
+                        <a href="javascript:void(0)" class="btn text-light btn-pill button disabled" style='background-color:#1467B0;' id='next'>Next</a></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="modal fade" id="succesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -760,142 +852,6 @@
             </div>
         </div>
     </div>
-    <!-- <div class="modal fade" id="myModal_delete" aria-labelledby="myModal" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-
-
-            <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
-                <div class="card-header border-0 pt-3">
-                    <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><img src="../assets/images/cross-circle.svg" /></span>
-                    </button>
-                </div>
-                <div class="card-body text-center">
-                    <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24">
-                            <path fill="#f07f8f"
-                                d="M20.05713,22H3.94287A3.02288,3.02288,0,0,1,1.3252,17.46631L9.38232,3.51123a3.02272,3.02272,0,0,1,5.23536,0L22.6748,17.46631A3.02288,3.02288,0,0,1,20.05713,22Z" />
-                            <circle cx="12" cy="17" r="1" fill="#e62a45" />
-                            <path fill="#e62a45" d="M12,14a1,1,0,0,1-1-1V9a1,1,0,0,1,2,0v4A1,1,0,0,1,12,14Z" />
-                        </svg></span>
-                    <h4 class="h4 mb-0 mt-3 fw-bold fs-4">Warning</h4>
-                    <p class="card-text">This will delete your property. Are you sure?</p>
-                    <button type="button" style="font-size: 0.77rem;"
-                                >delete</button>
-                </div>
-                
-            </div>
-            
-
-        </div>
-    </div> -->
-    <div class="modal fade" id="myModal_edit" aria-labelledby="myModal" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div class="text-justify ps-2 border-model-line">
-                        <h2 class="modal-title">Update <strong class="color-primary" id="property-name">New
-                                Property</strong></h2>
-                        <span class="">Spade Rent allows you to add a range of commercial and residential properties,
-                            from condos and single-family homes to retail stores and parking lots.</span>
-                    </div>
-                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form class="row g-3" enctype="multipart/form-data" id="update-form">
-                        <div class="col-md-12">
-                            <label class="form-label fw-bold">Property Photo</label>
-                            <div class="custom-file" style="border: 1px dashed #00000087;">
-                                <input id="fileInput_update" type="file" name="image" class="custom-file-input form" accept=".jpg, .png, image/jpeg, image/png" aria-label="hello" multiple>
-                                <span className="d-none"></span>
-                                <label class="custom-file-label" for="fileInput_update">
-                                    <i class="fi fi-rs-cloud-upload"></i>
-                                    <div class="custom-file-text">
-                                        <span>Upload Photo or drag and drop here</span>
-                                        <span>JPEG and PNG, file size no more than 10MB</span>
-                                    </div>
-                                </label>
-                            </div>
-                            <div class="selected-files">
-                                <div class="file-grid"></div>
-                            </div>
-                            <span class="text-danger d-none">Photos are required!</span>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="inputPassword4" class="form-label fw-bold">Property Name <spnan
-                                    class="text-danger">*</span></label>
-                            <input type="text" class="form-control form" id="propertyName_update">
-                            <span class="text-danger d-none">Property name required!</span>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="inputAddress" class="form-label fw-bold">Number of Units<span
-                                    class="text-danger">*</span></label>
-                            <input type="text" class="form-control form px-2" id="unit_update" pattern="[0-9]{5}" placeholder="" maxlength="3" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required readonly>
-                            <span class="text-danger d-none">Units are required!</span>
-                        </div>
-                        <div class="col-12">
-                            <label for="inputAddress" class="form-label fw-bold">Address <spnan class="text-danger">
-                                    *</span></label>
-                            <input type="text" class="form-control form" id="address_update" placeholder="1234 Main St">
-                            <span class="text-danger d-none">Address is required!</span>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="inputCity" class="form-label fw-bold">City <span
-                                    class="text-danger">*</span></label>
-                            <select id="city_update" class="form-select form city-select">
-                                <option selected>Choose...</option>
-                            </select>
-                            <span class="text-danger d-none">City is required!</span>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="inputState" class="form-label fw-bold">State <spnan class="text-danger">
-                                    *</span></label>
-                            <select id="state_update" class="form-select form state-select">
-                                <option selected>Choose...</option>
-                                <option>Sindh</option>
-                                <option>Punjab</option>
-                                <option>Balochistan</option>
-                                <option>KPK</option>
-                            </select>
-                            <span class="text-danger d-none">State is required!</span>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="inputZip" class="form-label fw-bold">Zip <spnan class="text-danger">
-                                    *</span></label>
-                            <input type="text" class="form-control form" id="zip_update" pattern="[0-9]{5}" placeholder="" maxlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
-                            <span class="text-danger d-none">Zip is required!</span>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="inputState" class="form-label fw-bold">Property Type <spnan class="text-danger">
-                                    *</span></label>
-                            <select id="propertyType_update" class="form-select form">
-                                <option selected>Choose...</option>
-                                <option>Single Family</option>
-                                <option>Multi-Family</option>
-                                <option>Multi-Commercial</option>
-                            </select>
-                            <span class="text-danger d-none">Property Type is required!</span>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="inputPassword4" class="form-label fw-bold">Property Total SF <spnan
-                                    class="text-danger">*</span></label>
-                            <input type="text" class="form-control form" id="propertyTotalSF_update" pattern="[0-9]{5}" placeholder="" maxlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
-                            <span class="text-danger d-none">Property Total SF is required!</span>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <a class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal">Close</a>
-                    <a class="btn btn-primary disabled" id="update">Save changes</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- MODAL EFFECTS -->
-
-    <!-- MODAL EFFECTS -->
-
     <!-- PAGE -->
     <div class="page">
         <div class="page-main">
@@ -978,7 +934,28 @@
                                                     class="avatar  profile-user brround cover-image"> -->
                                                 <span class="side-menu__item dynamic-text-head" style="padding: 10px 10px;">Spade Admin</span> <i class="fe fe-chevron-down dark-mode" style="font-size: 20px; font-weight: 800;"></i>
                                             </a>
-
+                                            <!-- <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                                <div class="drop-heading">
+                                                    <div class="text-center">
+                                                        <h5 class="text-dark mb-0 fs-14 fw-semibold">Percy Kewshun</h5>
+                                                        <small class="text-muted">Senior Admin</small>
+                                                    </div>
+                                                </div>
+                                                <div class="dropdown-divider m-0"></div>
+                                                <a class="dropdown-item" href="profile.html">
+                                                    <i class="dropdown-icon fe fe-user"></i> Profile
+                                                </a>
+                                                <a class="dropdown-item" href="email-inbox.html">
+                                                    <i class="dropdown-icon fe fe-mail"></i> Inbox
+                                                    <span class="badge bg-danger rounded-pill float-end">5</span>
+                                                </a>
+                                                <a class="dropdown-item" href="lockscreen.html">
+                                                    <i class="dropdown-icon fe fe-lock"></i> Lockscreen
+                                                </a>
+                                                <a class="dropdown-item" href="login.html">
+                                                    <i class="dropdown-icon fe fe-alert-circle"></i> Sign out
+                                                </a>
+                                            </div> -->
                                         </div>
                                     </div>
                                 </div>
@@ -1004,25 +981,24 @@
                     </div>
                     <div class="main-sidemenu">
                         <div class="slide-left disabled" id="slide-left"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24">
-                                <path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" />
-                            </svg></div>
+                            <path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" />
+                        </svg></div>
                         <ul class="side-menu">
                             <li class="sub-category">
                                 <!-- <h3>Main</h3> -->
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item has-link create-new-link" href="javascript:void(0)" target="_self" style="border: 3px solid #1467B0 !important;"><i
-                                        class="side-menu__icon fi fi-rs-square-plus"></i><span
-                                        class="side-menu__label ">Create New</span>
-                                </a>
+                                    class="side-menu__icon fi fi-rs-square-plus"></i><span class="side-menu__label ">Create New</span>
+                            </a>
                             </li>
 
                             <!-- <li class="slide">
-                                <a class="side-menu__item has-link" href="landing-page.php" target="_blank"><i
-                                        class="side-menu__icon fe fe-plus"></i><span class="side-menu__label">Complete your
-                                        Profile</span>
-                                </a>
-                            </li> -->
+                            <a class="side-menu__item has-link" href="landing-page.php" target="_blank"><i
+                                    class="side-menu__icon fe fe-plus"></i><span class="side-menu__label">Complete your
+                                    Profile</span>
+                            </a>
+                        </li> -->
                             <li class="slide">
                                 <div class="M-0 mt-3 mb-4" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
                                     <div class="card-header pb-0 border-bottom-0">
@@ -1040,18 +1016,17 @@
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html"><i
-                                        class="side-menu__icon fi fi-rs-dashboard"></i><span
-                                        class="side-menu__label">Overview</span></a>
+                                    class="side-menu__icon fi fi-rs-dashboard"></i><span class="side-menu__label">Overview</span></a>
                             </li>
                             <!-- <li class="sub-category">
-                                           <h3>UI Kit</h3>
-                                       </li> -->
+                                       <h3>UI Kit</h3>
+                                   </li> -->
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
-                                        class="side-menu__icon fi fi-rs-building"></i><span
-                                        class="side-menu__label">Properties</span>
-                                    <i class="angle fe fe-chevron-right"></i>
-                                </a>
+                                    class="side-menu__icon fi fi-rs-building"></i><span class="side-menu__label">Properties</span>
+                                    <i
+                                    class="angle fe fe-chevron-right"></i>
+                                   </a>
                                 <ul class="slide-menu">
                                     <li class="side-menu-label1"><a href="javascript:void(0)">Properties</a></li>
                                     <li><a href="properties-all.html" class="slide-item">All</a></li>
@@ -1060,11 +1035,11 @@
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="add-tenant.html"><i
-                                        class="side-menu__icon fi fi-rs-cabin"></i><span
-                                        class="side-menu__label">Tenants</span>
-                                    <i class="angle fe fe-chevron-right"></i>
-
-                                </a>
+                                    class="side-menu__icon fi fi-rs-cabin"></i><span class="side-menu__label">Tenants</span>
+                                    <i
+                                    class="angle fe fe-chevron-right"></i>
+                                   
+                                   </a>
                                 <ul class="slide-menu">
                                     <li class="side-menu-label1"><a href="javascript:void(0)">Tenants</a></li>
                                     <li><a href="add-tenant.html" class="slide-item">All</a></li>
@@ -1073,14 +1048,14 @@
                             </li>
 
                             <!-- <li class="sub-category">
-                                           <h3>Pre-build Pages</h3>
-                                       </li> -->
+                                       <h3>Pre-build Pages</h3>
+                                   </li> -->
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="invoices.html"><i
-                                        class="side-menu__icon fi fi-rs-file-invoice-dollar"></i><span
-                                        class="side-menu__label">Invoicing</span>
-                                    <i class="angle fe fe-chevron-right"></i>
-                                </a>
+                                            class="side-menu__icon fi fi-rs-file-invoice-dollar"></i><span class="side-menu__label">Invoicing</span>
+                                            <i
+                                            class="angle fe fe-chevron-right"></i>
+                                           </a>
                                 <ul class="slide-menu">
                                     <li class="side-menu-label1"><a href="javascript:void(0)">Invoicing</a></li>
                                     <li><a href="create-invoicing.html" class="slide-item">All</a></li>
@@ -1090,11 +1065,11 @@
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="leads-all.php"><i
-                                        class="side-menu__icon fi fi-rs-chart-simple"></i><span
-                                        class="side-menu__label">Leads</span>
-                                    <i class="angle fe fe-chevron-right"></i>
-
-                                </a>
+                                    class="side-menu__icon fi fi-rs-chart-simple"></i><span
+                                    class="side-menu__label">Leads</span>
+                                    <!-- <i class="angle fe fe-chevron-right"></i> -->
+                                   
+                                   </a>
 
                             </li>
 
@@ -1117,21 +1092,20 @@
                                     <i class="side-menu__icon fi fi-rs-document"></i>
                                     <span class="side-menu__label">Reports</span>
 
-                                    <i class="angle fe fe-chevron-right"></i>
+                                    <!-- <i class="angle fe fe-chevron-right"></i> -->
                                 </a>
 
                                 <li>
                                     <a class="side-menu__item has-link" href="settings.php" target="_self"><i
-                                        class="side-menu__icon fi fi-rs-settings"></i><span
-                                        class="side-menu__label">Settings</span>
-                                    <!-- <span
-                                                   class="badge bg-green br-5 side-badge blink-text pb-1">New</span> -->
-                                </a>
+                                    class="side-menu__icon fi fi-rs-settings"></i><span class="side-menu__label">Settings</span>
+                                <!-- <span
+                                               class="badge bg-green br-5 side-badge blink-text pb-1">New</span> -->
+                            </a>
                                 </li>
                         </ul>
                         <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24">
-                                <path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z" />
-                            </svg></div>
+                            <path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z" />
+                        </svg></div>
                     </div>
                 </div>
             </div>
@@ -1173,142 +1147,255 @@
                             </div>
                         </div>
                         <!-- PAGE-HEADER END -->
-
-                        <!-- Row -->
-                        <div class="row">
-                            <div class="col-lg-12 col-xl-12">
-                                <div class="card">
-                                    <div class="card-header justify-content-between">
-                                        <div class="d-flex">
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-outline-default text-dark py-1" id="filter_btn" data-bs-toggle="dropdown"><i
+                        <div class="over_view" id="Overview">
+                            <!-- ROW-2 OPEN -->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card inner-cards">
+                                        <div class="card-header justify-content-between">
+                                            <div class="d-flex">
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-outline-default text-dark py-1" id="filter_btn" data-bs-toggle="dropdown"><i
                                                         class="typcn typcn-filter me-2 fs-16"></i><strong>Filter</strong></button>
-                                                <ul class="dropdown-menu" role="menu">
-                                                    <li><a href="javascript:void(0)"><strong>Filter by:</strong></a>
-                                                    </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">A-Z Alphabets</a>
-                                                        <div class="form-check m-0">
-                                                            <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="alphabets" value="option1" checked>
-                                                        </div>
-                                                    </li>
-
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">Ascending</a>
-                                                        <div class="form-check m-0">
-                                                            <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="ascending" value="option1">
-                                                        </div>
-                                                    </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">Descending</a>
-                                                        <div class="form-check m-0">
-                                                            <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="descending" value="option1">
-                                                        </div>
-                                                    </li>
-                                                    <!-- <li class="d-flex justify-content-between"><a
-                                                            href="javascript:void(0)">Recently Added</a>
-                                                        <div class="form-check m-0">
-                                                            <input class="form-check-input mt-2" type="radio"
-                                                                name="exampleRadios" id="exampleRadios1" value="option1"
-                                                                checked>
-                                                        </div>
-                                                    </li> -->
-                                                </ul>
-                                            </div>
-                                            <div class="mx-2">
-                                                <div class="form-group m-0">
-                                                    <input class="form-control" placeholder="Search Users by Name, Email or Date" id="search_input" type="text">
+                                                    <ul class="dropdown-menu" role="menu">
+                                                        <li><a href="javascript:void(0)"><strong>Filter by:</strong></a>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between"><a href="javascript:void(0)" for="exampleRadio">Default</a>
+                                                            <div class="form-check m-0">
+                                                                <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between"><a href="javascript:void(0)" for="exampleRadio">Task Name</a>
+                                                            <div class="form-check m-0">
+                                                                <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between"><a href="javascript:void(0)">Assigned To</a>
+                                                            <div class="form-check m-0">
+                                                                <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between"><a href="javascript:void(0)">Date</a>
+                                                            <div class="form-check m-0">
+                                                                <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between"><a href="javascript:void(0)">Ascending</a>
+                                                            <div class="form-check m-0">
+                                                                <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between"><a href="javascript:void(0)">Descending</a>
+                                                            <div class="form-check m-0">
+                                                                <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
                                                 </div>
-
+                                                <div class="mx-2">
+                                                    <div class="form-group m-0">
+                                                        <input class="form-control" placeholder="Search Users by Name, Email or Date" type="text" id="search_input">
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="d-flex">
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-dark font-weight-bold" id="customize_btn" data-bs-toggle="dropdown"><strong>CUSTOMIZED</strong><i
-                                                        class="fe fe-chevron-down ms-2"></i></button>
-                                                <ul class="dropdown-menu" role="menu">
-                                                    <li><a href="javascript:void(0)"><strong>Coulmns to
-                                                                Show</strong></a>
-                                                    </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">IMAGE</a>
-                                                        <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
-                                                        </div>
-                                                    </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">PROPERTY ID</a>
-                                                        <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
-                                                        </div>
-                                                    </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">PROPERTY NAME</a>
-                                                        <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
-                                                        </div>
-                                                    </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">PROPERTY TYPE</a>
-                                                        <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
-                                                        </div>
-                                                    </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">PROPERTY UNITS</a>
-                                                        <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
-                                                        </div>
-                                                    </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">PROPERTY ADDRESS</a>
-                                                        <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <button type="button" class="btn btn-primary mx-2" id="add_property_btn" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal"><i
+                                            <div class="d-flex">
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-dark bg-transparent font-weight-bold text-dark" id="customize_btn" data-bs-toggle="dropdown"><strong>CUSTOMIZED</strong><i
+                                                            class="fe fe-chevron-down ms-2"></i></button>
+                                                    <ul class="dropdown-menu" role="menu">
+                                                        <li><a href="javascript:void(0)"><strong>Coulmns to
+                                                                            Show</strong></a>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between"><a href="javascript:void(0)">Date</a>
+                                                            <div class="form-check m-0">
+                                                                <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between"><a href="javascript:void(0)">PROPERTY</a>
+                                                            <div class="form-check m-0">
+                                                                <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between"><a href="javascript:void(0)">Task</a>
+                                                            <div class="form-check m-0">
+                                                                <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between"><a href="javascript:void(0)">Media</a>
+                                                            <div class="form-check m-0">
+                                                                <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between"><a href="javascript:void(0)">Status</a>
+                                                            <div class="form-check m-0">
+                                                                <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <button type="button" class="btn btn-primary btn-pill mx-2" id="add_property_btn" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal"><i
                                                     class="fe fe-plus me-2"></i><strong>ADD NEW
-                                                    PROPERTY</strong></button>
+                                                    TASK</strong></button>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="card-body p-0">
-                                        <div class="table-responsive">
-                                            <table class="table border text-nowrap text-md-nowrap mb-0" id="responsive-datatable">
-                                                <thead>
-                                                    <tr>
+                                        <div class="card-body p-0">
+                                            <div class="table-responsive">
+                                                <table class="table border text-nowrap text-md-nowrap mb-0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th><label class="custom-control custom-checkbox-md">
+                                                                    <input type="checkbox" class="custom-control-input"
+                                                                        name="example-checkbox5" value="option5"
+                                                                        checked="">
+                                                                    <span class="custom-control-label"></span>
+                                                                </label></th>
+                                                            <th>Image</th>
+                                                            <th>TASK</th>
+                                                            <th>ASSIGNED TO</th>
+                                                            <th>DUE AT</th>
+                                                            <th>RELATED TO</th>
+                                                            <th>STATUS</th>
+                                                            <th><i class="fe fe-more-vertical" data-bs-toggle="tooltip"></i></th>
 
-                                                        <th>IMAGE</th>
-                                                        <th>PROPERTY ID</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="table_body">
+                                                        <tr>
+                                                            <td><label class="custom-control custom-checkbox-md">
+                                                                    <input type="checkbox" class="custom-control-input"
+                                                                        name="example-checkbox5" value="option5"
+                                                                        checked="">
+                                                                    <span class="custom-control-label"></span>
+                                                                </label></td>
+                                                            <td><img src="../assets/images/tenant-req-task.svg" alt=""></td>
+                                                            <td style="font-weight: 600;">
+                                                                <p style="font-weight: 600;" class="mb-1">Sink is Leaking
+                                                                </p>
+                                                                <span class="font-weight-normal" style="color: #9B9B9B;">8 Days
+                                                                    ago</span>
+                                                            </td>
+                                                            <td style="font-weight: 600;text-align: center;display: flex;">
+                                                                <div class="me-2">
+                                                                    <img class="avatar brround avatar-md" src="../assets/images/users/2.jpg" alt="avatar-img">
+                                                                    <div class="media-body valign-middle mt-0">
+                                                                        <a href="javascript:void(0)" class="text-dark fw-semibold">Tenant</a>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="me-2">
+                                                                    <img class="avatar brround avatar-md" src="../assets/images/users/2.jpg" alt="avatar-img">
+                                                                    <div class="media-body valign-middle mt-0">
+                                                                        <a href="javascript:void(0)" class="text-dark fw-semibold">Tenant</a>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <p style="font-weight: 600;" class="mb-1">April-05-2020
+                                                                </p>
+                                                                <span class="font-weight-normal text-danger"> <i class="fe fe-circle me-1"></i>High Priority</span>
+                                                            </td>
+                                                            <td>
+                                                                <p style="font-weight: 600;" class="mb-1">Houston Shopping Center</p>
+                                                                <span class="font-weight-normal">Unit Number: 103A</span>
+                                                            </td>
+                                                            <td>
+                                                                <p style="font-weight: 600;" class="mb-1 text-warning">In Progress</p>
+                                                            </td>
+                                                            <td>
+                                                                <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
 
-                                                        <th>PROPERTY NAME</th>
-                                                        <th>PROPERTY Type</th>
-                                                        <th>PROPERTY UNITS</th>
-                                                        <th>PROPERTY ADDRESS</th>
-                                                        <th><i class="fe fe-more-vertical" data-bs-toggle="tooltip" title="" data-bs-original-title="fe fe-more-vertical" aria-label="fe fe-more-vertical"></i></th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="table_body">
+                                                                <ul class="dropdown-menu">
+                                                                    <li><a class="dropdown-item text-dark" href="javascript:void(0)">View</a></li>
+                                                                    <li><a class="dropdown-item text-dark" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#myModal_edit">Edit</a>
+                                                                    </li>
+                                                                    <li><a class="dropdown-item text-dark" href="javascript:void(0)">Post an Update</a></li>
+                                                                    <li><a class="dropdown-item text-danger" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#myModal_delete">Delete</a></li>
+                                                                </ul>
+                                                            </td>
+                                                        </tr>
+                                                        
+                                                        <tr>
+                                                            <td><label class="custom-control custom-checkbox-md">
+                                                                    <input type="checkbox" class="custom-control-input"
+                                                                        name="example-checkbox5" value="option5"
+                                                                        checked="">
+                                                                    <span class="custom-control-label"></span>
+                                                                </label></td>
+                                                            <td><img src="../assets/images/tenant-req-task.svg" alt=""></td>
+                                                            <td style="font-weight: 600;">
+                                                                <p style="font-weight: 600;" class="mb-1">Sink is Leaking
+                                                                </p>
+                                                                <span class="font-weight-normal" style="color: #9B9B9B;">8 Days
+                                                                    ago</span>
+                                                            </td>
+                                                            <td style="font-weight: 600;text-align: center;display: flex;">
+                                                                <div class="me-2">
+                                                                    <img class="avatar brround avatar-md" src="../assets/images/users/2.jpg" alt="avatar-img">
+                                                                    <div class="media-body valign-middle mt-0">
+                                                                        <a href="javascript:void(0)" class="text-dark fw-semibold">Tenant</a>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="me-2">
+                                                                    <img class="avatar brround avatar-md" src="../assets/images/users/2.jpg" alt="avatar-img">
+                                                                    <div class="media-body valign-middle mt-0">
+                                                                        <a href="javascript:void(0)" class="text-dark fw-semibold">Tenant</a>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <p style="font-weight: 600;" class="mb-1">April-05-2020
+                                                                </p>
+                                                                <span class="font-weight-normal text-danger"> <i class="fe fe-circle me-1"></i>High Priority</span>
+                                                            </td>
+                                                            <td>
+                                                                <p style="font-weight: 600;" class="mb-1">Houston Shopping Center</p>
+                                                                <span class="font-weight-normal">Unit Number: 103A</span>
+                                                            </td>
+                                                            <td>
+                                                                <p style="font-weight: 600;" class="mb-1 text-warning">In Progress</p>
+                                                            </td>
+                                                            <td>
+                                                                <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
 
-                                                </tbody>
-                                            </table>
+                                                                <ul class="dropdown-menu">
+                                                                    <li><a class="dropdown-item text-dark" href="javascript:void(0)">View</a></li>
+                                                                    <li><a class="dropdown-item text-dark" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#myModal_edit">Edit</a>
+                                                                    </li>
+                                                                    <li><a class="dropdown-item text-dark" href="javascript:void(0)">Post an Update</a></li>
+                                                                    <li><a class="dropdown-item text-danger" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#myModal_delete">Delete</a></li>
+                                                                </ul>
+                                                            </td>
+                                                        </tr>
+                                                        
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <!-- Row -->
-                    </div>
-                    <!-- ROW-2 END -->
-
-
-
-
-                    <div class="card-body pb-0 bg-recentorder" style="display: none;">
-                        <h3 class="card-title text-white">Recent Orders</h3>
-                        <div class="chartjs-wrapper-demo">
-                            <canvas id="recentorders" class="chart-dropshadow"></canvas>
+                            <!-- ROW-2 CLOSED -->
                         </div>
                     </div>
-                    <div id="flotback-chart" class="flot-background" style="display: none;"></div>
-
+                    <!-- ROW-3 CLOSED -->
                 </div>
-                <!-- CONTAINER END -->
+                <!-- ROW-2 END -->
+
+
+
+
+                <div class="card-body pb-0 bg-recentorder" style="display: none;">
+                    <h3 class="card-title text-white">Recent Orders</h3>
+                    <div class="chartjs-wrapper-demo">
+                        <canvas id="recentorders" class="chart-dropshadow"></canvas>
+                    </div>
+                </div>
+                <div id="flotback-chart" class="flot-background" style="display: none;"></div>
+
             </div>
+            <!-- CONTAINER END -->
         </div>
-        <!--app-content close-->
+    </div>
+    <!--app-content close-->
 
     </div>
 
@@ -1868,23 +1955,14 @@
     <a href="#addModal" data-bs-effect="effect-scale" data-bs-toggle="modal" id="add-tenant-side-btn"><i class="fe fe-plus"></i></a>
 
 
+
     <!-- JQUERY JS -->
     <script src="../assets/js/jquery.min.js"></script>
 
     <!-- BOOTSTRAP JS -->
     <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
     <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-    <script>
-        //             // $(document).ready(function() {
 
-
-        // $(function() {
-        // $('#sidebar-placeholder').load('./sidebar.html');
-        // });
-        // $(function() {
-        // $('#navbar-placeholder').load('./header.html');
-        // });})
-    </script>
     <!-- SPARKLINE JS-->
     <script src="../assets/js/jquery.sparkline.min.js"></script>
 
@@ -1915,25 +1993,10 @@
     <!-- INTERNAL SELECT2 JS -->
     <script src="../assets/plugins/select2/select2.full.min.js"></script>
 
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
-
     <!-- INTERNAL Data tables js-->
-    <!-- <script src="../assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
-    <script src="../assets/plugins/datatable/js/dataTables.bootstrap5.js"></script>
-    <script src="../assets/plugins/datatable/dataTables.responsive.min.js"></script> -->
     <script src="../assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
     <script src="../assets/plugins/datatable/js/dataTables.bootstrap5.js"></script>
-    <script src="../assets/plugins/datatable/js/dataTables.buttons.min.js"></script>
-    <script src="../assets/plugins/datatable/js/buttons.bootstrap5.min.js"></script>
-    <script src="../assets/plugins/datatable/js/jszip.min.js"></script>
-    <script src="../assets/plugins/datatable/pdfmake/pdfmake.min.js"></script>
-    <script src="../assets/plugins/datatable/pdfmake/vfs_fonts.js"></script>
-    <script src="../assets/plugins/datatable/js/buttons.html5.min.js"></script>
-    <script src="../assets/plugins/datatable/js/buttons.print.min.js"></script>
-    <script src="../assets/plugins/datatable/js/buttons.colVis.min.js"></script>
     <script src="../assets/plugins/datatable/dataTables.responsive.min.js"></script>
-    <script src="../assets/plugins/datatable/responsive.bootstrap5.min.js"></script>
-    <script src="../assets/js/table-data.js"></script>
 
     <!-- INTERNAL APEXCHART JS -->
     <script src="../assets/js/apexcharts.js"></script>
@@ -1966,7 +2029,15 @@
     <script src="../assets/js/custom.js"></script>
 
     <!-- ############################################# -->
-
+    <!-- INTERNAL Autofill-Table JS -->
+    <!-- <script src="../assets/plugins/datatable/js/jquery.dataTables.min.js"></script> -->
+    <!-- <script src="../assets/plugins/datatable/js/dataTables.bootstrap5.js"></script> -->
+    <!-- <script src="../assets/plugins/datatable/js/dataTables.buttons.min.js"></script> -->
+    <!-- <script src="../assets/plugins/datatable/js/buttons.bootstrap5.min.js"></script> -->
+    <!-- <script src="../assets/plugins/extension-datatable/autofill/dataTables.autoFill.min.js"></script> -->
+    <script src="../assets/plugins/extension-datatable/autofill/autoFill.bootstrap5.min.js"></script>
+    <!-- <script src="../assets/plugins/extension-datatable/keytable/dataTables.keyTable.min.js"></script> -->
+    <script src="../assets/js/autofill-table.js"></script>
 
     <!-- C3 CHART JS -->
     <script src="../assets/plugins/charts-c3/d3.v5.min.js"></script>
@@ -1979,23 +2050,53 @@
     <script src="../assets/plugins/chart/Chart.bundle.js"></script>
     <script src="../assets/plugins/chart/utils.js"></script>
 
+
+    <script src="../assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <!-- BOOTSTRAP-DATERANGEPICKER JS -->
+    <script src="../assets/plugins/bootstrap-daterangepicker/moment.min.js"></script>
+    <script src="../assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+    <!-- INTERNAL Bootstrap-Datepicker js-->
+    <script src="../assets/plugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+
+    <!-- INTERNAL Sumoselect js-->
+    <script src="../assets/plugins/sumoselect/jquery.sumoselect.js"></script>
+
+    <!-- TIMEPICKER JS -->
+    <script src="../assets/plugins/time-picker/jquery.timepicker.js"></script>
+    <script src="../assets/plugins/time-picker/toggles.min.js"></script>
+
+    <!-- INTERNAL intlTelInput js-->
+    <script src="../assets/plugins/intl-tel-input-master/intlTelInput.js"></script>
+    <script src="../assets/plugins/intl-tel-input-master/country-select.js"></script>
+    <script src="../assets/plugins/intl-tel-input-master/utils.js"></script>
+
+    <!-- INTERNAL jquery transfer js-->
+    <script src="../assets/plugins/jQuerytransfer/jquery.transfer.js"></script>
+
+    <!-- INTERNAL multi js-->
+    <script src="../assets/plugins/multi/multi.min.js"></script>
+
+    <!-- DATEPICKER JS -->
+    <script src="../assets/plugins/date-picker/date-picker.js"></script>
+    <script src="../assets/plugins/date-picker/jquery-ui.js"></script>
+    <script src="../assets/plugins/input-mask/jquery.maskedinput.js"></script>
+
+    <!-- COLOR PICKER JS -->
+    <script src="../assets/plugins/pickr-master/pickr.es5.min.js"></script>
+    <script src="../assets/js/picker.js"></script>
+
+    <!-- MULTI SELECT JS-->
+    <script src="../assets/plugins/multipleselect/multiple-select.js"></script>
+    <script src="../assets/plugins/multipleselect/multi-select.js"></script>
+
+    <!-- FORMELEMENTS JS -->
+    <script src="../assets/js/formelementadvnced.js"></script>
+    <script src="../assets/js/form-elements.js"></script>
+
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
-    <script>
-        // Get the user's preferred color scheme
-        const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-        // Get a reference to the logo element
-        const logo = document.getElementById('logo');
-
-
-        if (userPrefersDark) {
-
-            logo.src = '../assets/header-img/comment.svg';
-        } else {
-            logo.src = '../assets/header-img/question.svg';
-        }
-    </script>
     <script>
         function checkFieldsStatus(accordionId) {
             var accordionFields = $('#' + accordionId + ' input[type="text"], #' + accordionId + ' select');
@@ -2468,7 +2569,7 @@
                 }
                 resetAccordions()
                     // $('#accordion-item1').find('.file-grid').empty();
-                getData()
+                    // getData()
             })
 
 
@@ -2637,7 +2738,7 @@
                     },
                     success: function(response) {
                         e.preventDefault()
-                        getData();
+                            // getData();
                     },
                     error: function(xhr, status, error) {
                         window.alert('Error: ' + error);
@@ -2661,7 +2762,7 @@
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function(response) {
-                            getData()
+                            // getData()
                         },
                         error: function(xhr, status, error) {
                             window.alert('Error: ' + error);
@@ -2796,23 +2897,6 @@
                 });
 
             }
-            getData()
-
-        })
-    </script>
-    <script>
-        $(document).ready(function() {
-            $('#header-checkbox').change(function() {
-                $(".sorting").removeClass("sorting").removeClass("sorting_asc").remove("sorting_desc")
-                var isChecked = $(this).prop('checked'); // Check if the header checkbox is checked or unchecked
-
-                // Set the state of all row checkboxes based on the header checkbox
-                $('.row-checkbox').prop('checked', isChecked);
-            });
-            $("#responsive-datatable_info").remove()
-            $("#responsive-datatable_length").parent().parent().remove();
-            $("#responsive-datatable").css("padding", "0")
-            $(".sorting").removeClass("sorting").removeClass("sorting_asc").remove("sorting_desc")
 
 
         })
