@@ -42,6 +42,8 @@ router.get('/resetEmailTenant', tenantController.createResetEmailTenant);
 router.post('/verifyResetEmailCodeTenant', tenantController.verifyResetEmailCodeTenant);
 router.put('/updatePasswordTenant', tenantController.updatePasswordTenant);
 router.post('/addAlternateEmailPhone', tenantController.addAlternateEmailPhone);
+router.post('/tenantAttachFile',upload, tenantController.tenantAttachFile);
+router.delete('/tenantAttachFileDelete' , tenantController.tenantAttachFileDelete);
 
 module.exports = router;
 
