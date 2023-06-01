@@ -415,8 +415,9 @@ exports.tenantAttachFile = async (req, res) => {
 //  ############################# Delete Tenant Attach File Start ############################################################
 exports.tenantAttachFileDelete = async (req, res) => {
   try {
-    const { id,userId } = req.body
-  // const { userId } = req.user 
+    const { id } = req.body
+    // const { id,userId } = req.body
+  const { userId } = req.user 
     const attachFileResult = await queryRunner(selectQuery('tenantattachfiles', 'id'), [id]);
     if (attachFileResult[0].length > 0) {
       const file = attachFileResult[0][0].fileName;
