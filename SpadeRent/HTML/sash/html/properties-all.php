@@ -1035,7 +1035,7 @@
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-dark font-weight-bold"
                                                     data-bs-toggle="dropdown"><i
-                                                        class="typcn typcn-filter me-2"></i><strong>Filter</strong></button>
+                                                        class="typcn typcn-filter me-2"></i><strong id="Filter-btn">Filter</strong></button>
                                                 <ul class="dropdown-menu" role="menu">
                                                     <li><a href="javascript:void(0)"><strong>Filter by:</strong></a>
                                                     </li>
