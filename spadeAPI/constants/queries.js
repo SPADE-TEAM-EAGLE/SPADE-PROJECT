@@ -40,4 +40,5 @@ exports.insertAlternateEmailData = 'INSERT INTO tenantalternateemail ( tenantID,
 exports.getUnitsCount = 'SELECT COUNT(propertyID) as unitCount FROM `propertyunits` WHERE propertyID = ? ';
 exports.insertMoreUnits='INSERT INTO propertyunits (propertyID, unitNumber,Area,unitDetails,status) VALUES (?,?,?,?,?)';
 exports.putUnitsUpdate = 'UPDATE property SET  units = ?  where id = ? ';
+exports.insertTenantAttachFile ='INSERT INTO tenantattachfiles (landlordID, tenantID, fileName) VALUES (?,?,?)';
 

@@ -16,10 +16,12 @@ const {
   insertincreaseRentData,
   updatePropertyUnitsTenant,
   insertAlternateEmailData,
-  insertAlternatePhoneData
+  insertAlternatePhoneData,
+  insertTenantAttachFile
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
+const { file } = require("googleapis/build/src/apis/file");
 const config = process.env;
 
 
@@ -374,3 +376,69 @@ const config = process.env;
           //  ############################# Add Alternate Email and Phone End ############################################################
           
           
+          
+          //  ############################# Add Tenant Attach File Start ############################################################
+
+exports.tenantAttachFile = async (req, res) => {
+  // console.log(1)
+  const {
+    tenantID
+  } = req.body;
+  const { userId } = req.user
+  try {
+
+        const fileNames = req.files.map((file) => file.filename);
+        for (let i = 0; i < fileNames.length; i++) {
+          const attachFile = fileNames[i];
+          const tenantAttachFileResult = await queryRunner(insertTenantAttachFile, [userId, tenantID,attachFile])
+          if (tenantAttachFileResult.affectedRows === 0) {
+            res.send('Error');
+            return;
+          }
+        } //sss
+ 
+        res.status(200).json({
+          message: " Tenant Files save successful"
+        });
+  }
+  catch (error) {
+    res.status(400).send("Error4");
+    console.log(error);
+  }
+}
+ 
+          //  ############################# Add Tenant Attach File End ############################################################
+          
+          
+
+
+//  ############################# Delete Tenant Attach File Start ############################################################
+exports.tenantAttachFileDelete = async (req, res) => {
+  try {
+    const { id } = req.body
+    // const { id,userId } = req.body
+  const { userId } = req.user 
+    const attachFileResult = await queryRunner(selectQuery('tenantattachfiles', 'id'), [id]);
+    if (attachFileResult[0].length > 0) {
+      const file = attachFileResult[0][0].fileName;
+          // delete folder images Start
+      imageToDelete([file]);
+      // delete folder images End
+ const PropertyDeleteResult = await queryRunner(deleteQuery("tenantattachfiles", "id", "landlordID"), [id, userId]);
+    if (PropertyDeleteResult[0].affectedRows > 0) {
+      res.status(200).json({
+        data: file,
+        message: " Tenant Files deleted successful"
+      });
+    } else {
+      res.status(400).json({
+        message: "No data found"
+      })
+    }
+    }
+  } catch (error) {
+    res.send("Error from delete Property ");
+    console.log(error)
+  }
+}
+//  ############################# Delete Tenant Attach File End ############################################################
