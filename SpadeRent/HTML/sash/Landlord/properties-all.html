@@ -376,12 +376,17 @@
         }
 
         .delete-file {
-            position: absolute;
-            top: -1px;
-            right: 4px;
-            cursor: pointer;
-            font-size: 11px;
-            color: #000;
+            position: absolute !important;
+            top: -9px !important;
+            right: -4px !important;
+            font-weight: bolder !important;
+            cursor: pointer !important;
+            font-size: 13px !important;
+            color: #000000 !important;
+        }
+        
+        .dark-mode .delete-file {
+            color: #ffffff !important;
         }
 
         .btn-group>.btn-group:not(:last-child)>.btn,
@@ -1183,7 +1188,7 @@
                                     <li class="side-menu-label1"><a href="javascript:void(0)">Tasks</a></li>
                                     <li><a href="create-tasks.html" class="slide-item">All</a></li>
                                     <li><a href="new-tasks.html" class="slide-item">Requests</a></li>
-                                    <li><a href="new-tasks.html" class="slide-item">Vendors</a></li>
+                                    <li><a href="tasks-vendors.html" class="slide-item">Vendors</a></li>
                                 </ul>
                             </li>
                             <li class="slide">
@@ -1270,7 +1275,7 @@
                                                         <div class="form-check m-0">
                                                             <input class="form-check-input mt-2" type="radio"
                                                                 name="exampleRadios" id="alphabets" value="option1"
-                                                                checked>
+                                                                >
                                                         </div>
                                                     </li>
 
@@ -2240,13 +2245,20 @@
                 url: 'http://api.geonames.org/searchJSON',
                 method: 'GET',
                 data: {
-                    country: 'PK',
+                    country: 'US',
                     maxRows: 500,
                     username: 'developedmatz',
                     style: 'full'
                 },
                 success: function (result) {
+                    console.log(result)
                     // Handle state selection change
+                    $('#state').empty()
+                    result.geonames.forEach((item)=>{
+                        $('#state').append($('<option></option>').text("Choose..."))
+                        console.log(item.adminName1,item.name)
+                    })
+                    $('#state').append($('<option></option>').text("Choose..."))
                     $('#state').change(function () {
                         var selectedState = $(this).val();
                         if (selectedState === "KPK") {
@@ -2446,6 +2458,16 @@
                 resetAccordions()
                 $('#addModal').modal('hide');
             })
+            $("#succesModal").on('hide.bs.modal', function () {
+            // if (imageField.length) {
+            //             imageField.val('');
+            //             imageField.siblings('label.custom-file-label').find('.custom-file-text span').first().text('Upload Photo or drag and drop here');
+            //             imageField.siblings('.selected-files').find('.file-grid').empty();
+            //         }
+            resetAccordions()
+            // $('#accordion-item1').find('.file-grid').empty();
+            getData()
+        })
             $(document).on('click', '#next', function (e) {
                 e.preventDefault()
                 selectedFiles = []
@@ -2508,53 +2530,7 @@
             });
             let propertyId;
 
-            function updateSelectedFilesContainer() {
-                var selectedFilesContainer = $('.file-grid');
-                selectedFilesContainer.empty();
-                console.log(selectedFiles)
-                selectedFiles.forEach(function (file, index) {
-
-                    var fileElement = $('<div>')
-                        .addClass('selected-file')
-                        .append(
-                            $('<img>')
-                                .addClass('file-preview')
-                                .attr('src', typeof file === "object" ? URL.createObjectURL(file) : '../../../../spadeAPI/uploads/' + file)
-                        )
-                        .append(
-                            $('<div>')
-                                .addClass('file-details')
-                                .append($('<span>').text("Image-" + (index + 1)))
-                            // .append($('<span>').text(fileSize))
-                        )
-                        .append(
-                            $('<span>')
-                                .addClass('delete-file')
-                                .text('X')
-                                .attr('data-index', index)
-                        )
-                        .appendTo(selectedFilesContainer);
-
-                });
-
-            }
-
-            function formatFileSize(bytes) {
-                if (bytes === 0) return '0 Bytes';
-                var k = 1024;
-                var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-                var i = Math.floor(Math.log(bytes) / Math.log(k));
-                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-            }
-
-            function truncateFileName(fileName) {
-                var maxFileNameLength = 10; // Define the maximum length of the file name
-                if (fileName.length > maxFileNameLength) {
-                    return fileName.substring(0, maxFileNameLength) + '...'; // Truncate the file name
-                }
-
-                return fileName;
-            }
+            
 
             $('#myModal_edit').find('input, select').on('input change', function () {
                 var updateButton = document.getElementById('update');
@@ -2604,20 +2580,21 @@
 
             });
         });
-        $("#succesModal").on('hide.bs.modal', function () {
-            // if (imageField.length) {
-            //             imageField.val('');
-            //             imageField.siblings('label.custom-file-label').find('.custom-file-text span').first().text('Upload Photo or drag and drop here');
-            //             imageField.siblings('.selected-files').find('.file-grid').empty();
-            //         }
-            resetAccordions()
-            // $('#accordion-item1').find('.file-grid').empty();
-            getData()
-        })
+
 
 
         let result;
-
+        let columnsToHide = []
+        $('input[type="checkbox"]').change(function () {
+            var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
+            var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
+            console.log(columnIndex, isColumnVisible)
+            // Toggle the visibility of the corresponding column
+            $('table').find('tr').each(function () {
+                var column = $(this).find('th:nth-child(' + columnIndex + '), td:nth-child(' + columnIndex + ')');
+                isColumnVisible ? column.show() : column.hide();
+            });
+        });
         function filterTable(selectedFilter) {
             var tableBody = $('#table_body');
             var rows = tableBody.find('tr');
@@ -2630,14 +2607,14 @@
                 });
             } else if (selectedFilter === 'ascending') {
                 rows.sort(function (a, b) {
-                    var idA = parseInt($(a).find('.property-id').text());
-                    var idB = parseInt($(b).find('.property-id').text());
+                    var idA = parseInt($(a).find('.propertyUnits').text());
+                    var idB = parseInt($(b).find('.propertyUnits').text());
                     return idA - idB;
                 });
             } else if (selectedFilter === 'descending') {
                 rows.sort(function (a, b) {
-                    var idA = parseInt($(a).find('.property-id').text());
-                    var idB = parseInt($(b).find('.property-id').text());
+                    var idA = parseInt($(a).find('.propertyUnits').text());
+                    var idB = parseInt($(b).find('.propertyUnits').text());
                     return idB - idA;
                 });
             }
@@ -2813,7 +2790,53 @@
             });
         })
         // let data;
+        function updateSelectedFilesContainer() {
+                var selectedFilesContainer = $('.file-grid');
+                selectedFilesContainer.empty();
+                console.log(selectedFiles)
+                selectedFiles.forEach(function (file, index) {
 
+                    var fileElement = $('<div>')
+                        .addClass('selected-file')
+                        .append(
+                            $('<img>')
+                                .addClass('file-preview')
+                                .attr('src', typeof file === "object" ? URL.createObjectURL(file) : '../../../../spadeAPI/uploads/' + file)
+                        )
+                        .append(
+                            $('<div>')
+                                .addClass('file-details')
+                                .append($('<span>').text("Image-" + (index + 1)))
+                            // .append($('<span>').text(fileSize))
+                        )
+                        .append(
+                            $('<p>')
+                                .addClass('delete-file')
+                                .text('X')
+                                .attr('data-index', index)
+                        )
+                        .appendTo(selectedFilesContainer);
+
+                });
+
+            }
+
+            function formatFileSize(bytes) {
+                if (bytes === 0) return '0 Bytes';
+                var k = 1024;
+                var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+                var i = Math.floor(Math.log(bytes) / Math.log(k));
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+            }
+
+            function truncateFileName(fileName) {
+                var maxFileNameLength = 10; // Define the maximum length of the file name
+                if (fileName.length > maxFileNameLength) {
+                    return fileName.substring(0, maxFileNameLength) + '...'; // Truncate the file name
+                }
+
+                return fileName;
+            }
         function getData(selectedFilter = "alphabets") {
             // console.log(2)
             $("#global-loader").fadeIn("fast")

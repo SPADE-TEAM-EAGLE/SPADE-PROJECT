@@ -33,378 +33,369 @@
     <!-- COLOR SKIN CSS -->
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="../assets/colors/color1.css" />
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-.custom-file-input::-webkit-file-upload-button {
-    visibility: hidden;
-}
-
-#propertyTable {
-    padding: 0;
-}
-
-#propertyTable_wrapper .dataTables_wrapper {
-    padding: 0;
-}
-
-#propertyTable_wrapper .dataTables_scroll {
-    padding: 0;
-}
-
-#propertyTable_wrapper .dataTables_scrollHead {
-    padding: 0;
-}
-
-#propertyTable_wrapper .dataTables_scrollBody {
-    padding: 0;
-}
-
-.modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar {
-    width: 7px;
-    /* Width of the scrollbar */
-}
-
-.modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb {
-    background-color: rgb(136, 136, 136, 0.2);
-    /* Color of the scrollbar thumb */
-    border-radius: 7px;
-    transition: all 1ms;
-    /* Rounded corners for the thumb */
-}
-
-.modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb:hover {
-    background-color: rgb(136, 136, 136, 0.5);
-    /* Color of the scrollbar thumb on hover */
-}
-
-.custom-file-input::before {
-    content: 'Select Files';
-    display: inline-block;
-    background: #007bff;
-    color: #fff;
-    padding: 4px 8px;
-    outline: none;
-    white-space: nowrap;
-    cursor: pointer;
-    border-radius: 4px;
-}
-
-.custom-file-input:hover::before {
-    background: #0069d9;
-}
-
-.custom-file-input:active::before {
-    background: #0062cc;
-}
-
-.custom-file-input.selected::before {
-    content: 'Change Files';
-    background: #28a745;
-}
-
-.dark-mode .create-new-link {
-    background: transparent !important;
-    border: 3px solid #1467B0 !important;
-    color: white !important;
-    border-radius: 50px !important;
-}
-
-/* .dark-mode .create-new-link:hover {
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        .custom-file-input::-webkit-file-upload-button {
+            visibility: hidden;
+        }
+        
+        #propertyTable {
+            padding: 0;
+        }
+        
+        #propertyTable_wrapper .dataTables_wrapper {
+            padding: 0;
+        }
+        
+        #propertyTable_wrapper .dataTables_scroll {
+            padding: 0;
+        }
+        
+        #propertyTable_wrapper .dataTables_scrollHead {
+            padding: 0;
+        }
+        
+        #propertyTable_wrapper .dataTables_scrollBody {
+            padding: 0;
+        }
+        
+        .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar {
+            width: 7px;
+            /* Width of the scrollbar */
+        }
+        
+        .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb {
+            background-color: rgb(136, 136, 136, 0.2);
+            /* Color of the scrollbar thumb */
+            border-radius: 7px;
+            transition: all 1ms;
+            /* Rounded corners for the thumb */
+        }
+        
+        .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb:hover {
+            background-color: rgb(136, 136, 136, 0.5);
+            /* Color of the scrollbar thumb on hover */
+        }
+        
+        .custom-file-input::before {
+            content: 'Select Files';
+            display: inline-block;
+            background: #007bff;
+            color: #fff;
+            padding: 4px 8px;
+            outline: none;
+            white-space: nowrap;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        
+        .custom-file-input:hover::before {
+            background: #0069d9;
+        }
+        
+        .custom-file-input:active::before {
+            background: #0062cc;
+        }
+        
+        .custom-file-input.selected::before {
+            content: 'Change Files';
+            background: #28a745;
+        }
+        
+        .dark-mode .create-new-link {
+            background: transparent !important;
+            border: 3px solid #1467B0 !important;
+            color: white !important;
+            border-radius: 50px !important;
+        }
+        /* .dark-mode .create-new-link:hover {
     border: 3px solid #1467B0 !important;
 } */
-
-.create-new-link {
-    background: transparent !important;
-    border: 3px solid #1467B0 !important;
-    color: black;
-    border-radius: 50px !important;
-}
-
-.selected-files {
-    margin-top: 10px;
-}
-
-.dark-mode .selected-files span {
-    display: inline-block;
-    margin-right: 0;
-    padding: 4px 8px;
-    background: transparent;
-    color: white !important;
-    border-radius: 4px;
-}
-
-.selected-files span {
-    display: inline-block;
-    margin-right: 5px;
-    padding: 4px 8px;
-    background: #f8f9fa;
-    color: #333;
-    border-radius: 4px;
-}
-
-
-
-.custom-file-input {
-    visibility: hidden;
-}
-
-.custom-file-label {
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 6px 12px;
-    background-color: #fff;
-}
-
-.dark-mode .custom-file-label {
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 6px 12px;
-    background-color: transparent;
-}
-
-.custom-file-label i {
-    margin-bottom: 5px;
-    font-size: 3rem;
-    color: #1467B0;
-}
-
-.custom-file-text {
-    text-align: center;
-    line-height: 1.2;
-    margin-top: 5px;
-}
-
-.custom-file-text span {
-    display: block;
-    font-size: 14px;
-}
-
-.remove-file {
-    cursor: pointer;
-}
-
-.border {
-    border: 0px solid #e9edf4 !important;
-    padding: 0.75rem;
-    vertical-align: top;
-    border: 1px solid #e9edf4;
-}
-
-/* input:focus {
+        
+        .create-new-link {
+            background: transparent !important;
+            border: 3px solid #1467B0 !important;
+            color: black;
+            border-radius: 50px !important;
+        }
+        
+        .selected-files {
+            margin-top: 10px;
+        }
+        
+        .dark-mode .selected-files span {
+            display: inline-block;
+            margin-right: 0;
+            padding: 4px 8px;
+            background: transparent;
+            color: white !important;
+            border-radius: 4px;
+        }
+        
+        .selected-files span {
+            display: inline-block;
+            margin-right: 5px;
+            padding: 4px 8px;
+            background: #f8f9fa;
+            color: #333;
+            border-radius: 4px;
+        }
+        
+        .custom-file-input {
+            visibility: hidden;
+        }
+        
+        .custom-file-label {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 12px;
+            background-color: #fff;
+        }
+        
+        .dark-mode .custom-file-label {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 12px;
+            background-color: transparent;
+        }
+        
+        .custom-file-label i {
+            margin-bottom: 5px;
+            font-size: 3rem;
+            color: #1467B0;
+        }
+        
+        .custom-file-text {
+            text-align: center;
+            line-height: 1.2;
+            margin-top: 5px;
+        }
+        
+        .custom-file-text span {
+            display: block;
+            font-size: 14px;
+        }
+        
+        .remove-file {
+            cursor: pointer;
+        }
+        
+        .border {
+            border: 0px solid #e9edf4 !important;
+            padding: 0.75rem;
+            vertical-align: top;
+            border: 1px solid #e9edf4;
+        }
+        /* input:focus {
     border: 3px solid #555 !important;
 } */
-
-.panel-body {
-    padding: 0px;
-}
-
-.dark-mode .btn-close {
-    color: white;
-}
-
-.accordion-item:first-of-type {
-    border-bottom-left-radius: 0.25rem;
-    border-bottom-right-radius: 0.25rem;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
-}
-
-.accordion-item:last-of-type {
-    border-top-right-radius: 0.25rem;
-    border-top-left-radius: 0.25rem;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
-}
-
-.table-primary th {
-    font-weight: 600 !important;
-    vertical-align: middle !important;
-}
-
-.border-model-line {
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
-    border-top-right-radius: 3px !important;
-    border-bottom-right-radius: 3px !important;
-}
-
-.file-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    grid-gap: 10px;
-}
-
-.selected-file {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.file-preview {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    border-radius: 5px;
-}
-
-.file-details {
-    margin-top: 5px;
-    font-size: 12px;
-}
-
-.table td {
-    vertical-align: middle !important;
-}
-
-/* .card-header {
+        
+        .panel-body {
+            padding: 0px;
+        }
+        
+        .dark-mode .btn-close {
+            color: white;
+        }
+        
+        .accordion-item:first-of-type {
+            border-bottom-left-radius: 0.25rem;
+            border-bottom-right-radius: 0.25rem;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
+        }
+        
+        .accordion-item:last-of-type {
+            border-top-right-radius: 0.25rem;
+            border-top-left-radius: 0.25rem;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
+        }
+        
+        .table-primary th {
+            font-weight: 600 !important;
+            vertical-align: middle !important;
+        }
+        
+        .border-model-line {
+            border-top-left-radius: 3px;
+            border-bottom-left-radius: 3px;
+            border-top-right-radius: 3px !important;
+            border-bottom-right-radius: 3px !important;
+        }
+        
+        .file-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            grid-gap: 10px;
+        }
+        
+        .selected-file {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+        .file-preview {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        
+        .file-details {
+            margin-top: 5px;
+            font-size: 12px;
+        }
+        
+        .table td {
+            vertical-align: middle !important;
+        }
+        /* .card-header {
 padding: 0.5rem 1rem;
 } */
-
-.modal-footer .button-left {
-    background-color: #1F1F1F;
-    margin: 0rem 1rem;
-    color: white;
-}
-
-.modal-footer button,
-.modal-footer a {
-    border-radius: 2.75rem;
-    padding: 4px 30px;
-    font-family: 'Figtree';
-    font-style: normal;
-    font-weight: 600;
-    line-height: 1.875rem;
-    font-size: 0.77rem;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
-    /* identical to box height, or 120% */
-    letter-spacing: 0.0145455em;
-    /* font-size: 0.938rem; */
-}
-
-.disabled {
-    pointer-events: none;
-    cursor: not-allowed;
-    color: gray;
-}
-
-.modal-footer .button {
-    font-size: 0.938rem;
-}
-
-.accordion-button::after {
-    content: "";
-    display: inline-block;
-    /* Replace with the path to your default chevron image */
-}
-
-.chevron,
-.tick,
-.cross {
-    position: absolute;
-    right: 15px;
-}
-
-.tick {
-    color: #1DBC5F;
-    font-weight: bolder
-}
-
-.cross {
-    color: red;
-    font-weight: bolder
-}
-
-.accordion-button .chevron {
-    transition: transform 0.3s;
-    /* Transition for smooth animation */
-}
-
-.accordion-button[aria-expanded="true"] .chevron {
-    transform: rotate(-180deg);
-    /* Rotate the chevron when accordion is open */
-}
-
-.table tbody img {
-    width: 40px;
-    border: transparent;
-    border-radius: 5px;
-    height: 40px;
-}
-
-.rounded-pill-Single-Family {
-    color: #4A4AFF !important;
-    background: #E6E6F2 !important;
-    font-weight: bold;
-}
-
-.rounded-pill-Multi-Family {
-    color: #0BAAB8 !important;
-    background: #C8F3F7 !important;
-    font-weight: bold;
-}
-
-.rounded-pill-Multi-Commercial {
-    background: #FFF9E5 !important;
-    color: #F5CA38 !important;
-    font-weight: bold;
-}
-
-.table-primary {
-    background: #1467B014;
-}
-
-.selected-file {
-    position: relative;
-}
-
-.file-preview {
-    width: 100%;
-}
-
-.file-details {
-    padding: 10px;
-}
-
-.delete-file {
-    position: absolute;
-    top: -1px;
-    right: 4px;
-    cursor: pointer;
-    font-size: 11px;
-    color: #000;
-}
-
-.btn-group>.btn-group:not(:last-child)>.btn,
-.btn-group>.btn:not(:last-child):not(.dropdown-toggle) {
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-}
-
-.color-primary {
-    color: #1467B0;
-}
-
-.border-model-line {
-    border-left: 5px solid #1467B0;
-}
-
-.accordion-item:first-of-type .accordion-button {
-    border-top-right-radius: calc(0.5rem - 1px);
-    border-top-left-radius: calc(0.5rem - 1px);
-}
-
-
-
-/* .delete-file {
+        
+        .modal-footer .button-left {
+            background-color: #1F1F1F;
+            margin: 0rem 1rem;
+            color: white;
+        }
+        
+        .modal-footer button,
+        .modal-footer a {
+            border-radius: 2.75rem;
+            padding: 4px 30px;
+            font-family: 'Figtree';
+            font-style: normal;
+            font-weight: 600;
+            line-height: 1.875rem;
+            font-size: 0.77rem;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
+            /* identical to box height, or 120% */
+            letter-spacing: 0.0145455em;
+            /* font-size: 0.938rem; */
+        }
+        
+        .disabled {
+            pointer-events: none;
+            cursor: not-allowed;
+            color: gray;
+        }
+        
+        .modal-footer .button {
+            font-size: 0.938rem;
+        }
+        
+        .accordion-button::after {
+            content: "";
+            display: inline-block;
+            /* Replace with the path to your default chevron image */
+        }
+        
+        .chevron,
+        .tick,
+        .cross {
+            position: absolute;
+            right: 15px;
+        }
+        
+        .tick {
+            color: #1DBC5F;
+            font-weight: bolder
+        }
+        
+        .cross {
+            color: red;
+            font-weight: bolder
+        }
+        
+        .accordion-button .chevron {
+            transition: transform 0.3s;
+            /* Transition for smooth animation */
+        }
+        
+        .accordion-button[aria-expanded="true"] .chevron {
+            transform: rotate(-180deg);
+            /* Rotate the chevron when accordion is open */
+        }
+        
+        .table tbody img {
+            width: 40px;
+            border: transparent;
+            border-radius: 5px;
+            height: 40px;
+        }
+        
+        .rounded-pill-Single-Family {
+            color: #4A4AFF !important;
+            background: #E6E6F2 !important;
+            font-weight: bold;
+        }
+        
+        .rounded-pill-Multi-Family {
+            color: #0BAAB8 !important;
+            background: #C8F3F7 !important;
+            font-weight: bold;
+        }
+        
+        .rounded-pill-Multi-Commercial {
+            background: #FFF9E5 !important;
+            color: #F5CA38 !important;
+            font-weight: bold;
+        }
+        
+        .table-primary {
+            background: #1467B014;
+        }
+        
+        .selected-file {
+            position: relative;
+        }
+        
+        .file-preview {
+            width: 100%;
+        }
+        
+        .file-details {
+            padding: 10px;
+        }
+        
+        .delete-file {
+            position: absolute;
+            top: -1px;
+            right: 4px;
+            cursor: pointer;
+            font-size: 11px;
+            color: #000;
+        }
+        
+        .btn-group>.btn-group:not(:last-child)>.btn,
+        .btn-group>.btn:not(:last-child):not(.dropdown-toggle) {
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+        
+        .color-primary {
+            color: #1467B0;
+        }
+        
+        .border-model-line {
+            border-left: 5px solid #1467B0;
+        }
+        
+        .accordion-item:first-of-type .accordion-button {
+            border-top-right-radius: calc(0.5rem - 1px);
+            border-top-left-radius: calc(0.5rem - 1px);
+        }
+        /* .delete-file {
 position: absolute;
 top: 0px;
 right: 5px;
@@ -412,157 +403,139 @@ cursor: pointer;
 font-size: 13px;
 color: #000;
 } */
-
-button.btn-close {
-    right: 6px;
-}
-
-.btn-close {
-    width: 1.8rem;
-    opacity: 1;
-    position: absolute;
-    top: 6px;
-}
-
-.del {
-    width: 2rem !important;
-}
-
-.btn-close:hover,
-.btn-close:focus {
-    color: #000;
-    text-decoration: none;
-    opacity: 1;
-}
-
-@media (max-width:992px) {
-    .modal-footer button {
-        border-radius: 2.75rem;
-        padding: 4px 30px;
-        font-family: 'Figtree';
-        font-style: normal;
-        font-weight: 600;
-        font-size: 0.8rem;
-        line-height: 1.875rem;
-        /* identical to box height, or 120% */
-        letter-spacing: 0.0145455em;
-    }
-
-    #top_main_image {
-        display: none;
-    }
-
-    #top_main_card {
-        height: 220px;
-    }
-
-    #nav_links {
-        top: 153px;
-    }
-}
-
-@media (max-width:425px) {
-    .modal-footer {
-        flex-direction: column !important;
-        justify-content: flex-center !important;
-    }
-
-    .modal-footer .button-left {
-        margin: auto;
-    }
-
-    .modal-footer button {
-        width: 231px;
-    }
-
-    .border-model-line h2 {
-        font-size: 1.6rem;
-    }
-
-    .accordion-button h3 {
-        font-size: 15px;
-    }
-
-    #filter_btn {
-        font-size: 12px;
-        margin: 0 !important;
-    }
-
-    #customize_btn {
-        display: none;
-    }
-
-    #add_property_btn {
-        font-size: 12px;
-        margin: 0 !important;
-    }
-
-    #search_input {
-        display: none;
-    }
-
-    #email_verification {
-        font-size: 12px;
-    }
-
-    #top_main_image {
-        display: none;
-    }
-
-    #top_main_card {
-        height: 220px;
-    }
-
-    #nav_links {
-        top: 153px;
-    }
-}
-
-@media (max-width:375px) {
-    .border-model-line h2 {
-        font-size: 1.4rem;
-    }
-
-    .succes-modal {
-        padding: 1rem 1rem;
-    }
-}
-
-@media (max-width:320px) {
-    .modal-footer button {
-        width: 231px;
-    }
-}
-
-@media (max-width: 767px) {
-    .file-select-area {
-        display: block;
-        text-align: center;
-    }
-
-    .selected-files {
-        margin-top: 10px;
-        text-align: center;
-    }
-
-    .file-details {
-        padding: 5px;
-    }
-}
-
-th,
-td {
-    border-left-color: transparent !important;
-    border-right-color: transparent !important;
-}
-
-.dark-mode th {
-    background: #212121 !important;
-}
-
-.light-mode th {
-    background: #ECF3F9 !important;
-}
+        
+        button.btn-close {
+            right: 6px;
+        }
+        
+        .btn-close {
+            width: 1.8rem;
+            opacity: 1;
+            position: absolute;
+            top: 6px;
+        }
+        
+        .del {
+            width: 2rem !important;
+        }
+        
+        .btn-close:hover,
+        .btn-close:focus {
+            color: #000;
+            text-decoration: none;
+            opacity: 1;
+        }
+        
+        @media (max-width:992px) {
+            .modal-footer button {
+                border-radius: 2.75rem;
+                padding: 4px 30px;
+                font-family: 'Figtree';
+                font-style: normal;
+                font-weight: 600;
+                font-size: 0.8rem;
+                line-height: 1.875rem;
+                /* identical to box height, or 120% */
+                letter-spacing: 0.0145455em;
+            }
+            #top_main_image {
+                display: none;
+            }
+            #top_main_card {
+                height: 220px;
+            }
+            #nav_links {
+                top: 153px;
+            }
+        }
+        
+        @media (max-width:425px) {
+            .modal-footer {
+                flex-direction: column !important;
+                justify-content: flex-center !important;
+            }
+            .modal-footer .button-left {
+                margin: auto;
+            }
+            .modal-footer button {
+                width: 231px;
+            }
+            .border-model-line h2 {
+                font-size: 1.6rem;
+            }
+            .accordion-button h3 {
+                font-size: 15px;
+            }
+            #filter_btn {
+                font-size: 12px;
+                margin: 0 !important;
+            }
+            #customize_btn {
+                display: none;
+            }
+            #add_property_btn {
+                font-size: 12px;
+                margin: 0 !important;
+            }
+            #search_input {
+                display: none;
+            }
+            #email_verification {
+                font-size: 12px;
+            }
+            #top_main_image {
+                display: none;
+            }
+            #top_main_card {
+                height: 220px;
+            }
+            #nav_links {
+                top: 153px;
+            }
+        }
+        
+        @media (max-width:375px) {
+            .border-model-line h2 {
+                font-size: 1.4rem;
+            }
+            .succes-modal {
+                padding: 1rem 1rem;
+            }
+        }
+        
+        @media (max-width:320px) {
+            .modal-footer button {
+                width: 231px;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .file-select-area {
+                display: block;
+                text-align: center;
+            }
+            .selected-files {
+                margin-top: 10px;
+                text-align: center;
+            }
+            .file-details {
+                padding: 5px;
+            }
+        }
+        
+        th,
+        td {
+            border-left-color: transparent !important;
+            border-right-color: transparent !important;
+        }
+        
+        .dark-mode th {
+            background: #212121 !important;
+        }
+        
+        .light-mode th {
+            background: #ECF3F9 !important;
+        }
     </style>
 
 </head>
@@ -652,7 +625,7 @@ td {
                             </div>
                             <div class="col-md-12">
                                 <label class="form-label fw-bold">Notes</label>
-                                <textarea class="form-control mb-4" placeholder="Sorry about that We will look into it." rows="4" ></textarea>
+                                <textarea class="form-control mb-4" placeholder="Sorry about that We will look into it." rows="4"></textarea>
                                 <span class="text-danger d-none">Photos are required!</span>
                             </div>
                             <div class="col-md-12">
@@ -718,7 +691,7 @@ td {
                             <div class="col-md-12">
                                 <label class="form-label fw-bold">Message</label>
 
-                                <textarea class="form-control mb-4" placeholder="Sorry about that We will look into it." rows="4" ></textarea>
+                                <textarea class="form-control mb-4" placeholder="Sorry about that We will look into it." rows="4"></textarea>
                                 <span class="text-danger d-none">Photos are required!</span>
                             </div>
                             <div class="col-md-4">
@@ -1111,7 +1084,7 @@ td {
                                     <li class="side-menu-label1"><a href="javascript:void(0)">Tasks</a></li>
                                     <li><a href="create-tasks.html" class="slide-item">All</a></li>
                                     <li><a href="new-tasks.html" class="slide-item">Requests</a></li>
-                                    <li><a href="new-tasks.html" class="slide-item">Vendors</a></li>
+                                    <li><a href="tasks-vendors.html" class="slide-item">Vendors</a></li>
                                 </ul>
                             </li>
                             <li class="slide">
@@ -1229,46 +1202,36 @@ td {
                                                 <div class="btn-group">
                                                     <button type="button" class="btn btn-dark bg-transparent font-weight-bold text-dark" id="customize_btn" data-bs-toggle="dropdown"><strong>CUSTOMIZED</strong><i
                                                             class="fe fe-chevron-down ms-2"></i></button>
-                                                            <ul class="dropdown-menu" role="menu">
-                                                                <li><a href="javascript:void(0)"><strong>Coulmns to
+                                                    <ul class="dropdown-menu" role="menu">
+                                                        <li><a href="javascript:void(0)"><strong>Coulmns to
                                                                             Show</strong></a>
-                                                                </li>
-                                                                <li class="d-flex justify-content-between"><a
-                                                                        href="javascript:void(0)">Date</a>
-                                                                    <div class="form-check m-0">
-                                                                        <input type="checkbox" class="form-check-input mt-2"
-                                                                            id="exampleCheck1" checked>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="d-flex justify-content-between"><a
-                                                                        href="javascript:void(0)">PROPERTY</a>
-                                                                    <div class="form-check m-0">
-                                                                        <input type="checkbox" class="form-check-input mt-2"
-                                                                            id="exampleCheck1" checked>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="d-flex justify-content-between"><a
-                                                                        href="javascript:void(0)">Task</a>
-                                                                    <div class="form-check m-0">
-                                                                        <input type="checkbox" class="form-check-input mt-2"
-                                                                            id="exampleCheck1" checked>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="d-flex justify-content-between"><a
-                                                                        href="javascript:void(0)">Media</a>
-                                                                    <div class="form-check m-0">
-                                                                        <input type="checkbox" class="form-check-input mt-2"
-                                                                            id="exampleCheck1" checked>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="d-flex justify-content-between"><a
-                                                                        href="javascript:void(0)">Status</a>
-                                                                    <div class="form-check m-0">
-                                                                        <input type="checkbox" class="form-check-input mt-2"
-                                                                            id="exampleCheck1" checked>
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between"><a href="javascript:void(0)">Date</a>
+                                                            <div class="form-check m-0">
+                                                                <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between"><a href="javascript:void(0)">PROPERTY</a>
+                                                            <div class="form-check m-0">
+                                                                <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between"><a href="javascript:void(0)">Task</a>
+                                                            <div class="form-check m-0">
+                                                                <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between"><a href="javascript:void(0)">Media</a>
+                                                            <div class="form-check m-0">
+                                                                <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between"><a href="javascript:void(0)">Status</a>
+                                                            <div class="form-check m-0">
+                                                                <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
                                                 </div>
                                                 <button type="button" class="btn btn-primary btn-pill mx-2" id="add_property_btn" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal"><i
                                                     class="fe fe-plus me-2"></i><strong>ADD NEW
@@ -2237,7 +2200,6 @@ td {
     <script src="../assets/js/charts.js"></script>
 
     <script>
-        
         function checkFieldsStatus(accordionId) {
             var accordionFields = $('#' + accordionId + ' input[type="text"], #' + accordionId + ' select');
             var imageField = $('#' + accordionId + ' input[type="file"]');
@@ -2245,7 +2207,7 @@ td {
             var hasErrorFields = false;
             var hasFilledFields = false;
 
-            accordionFields.each(function () {
+            accordionFields.each(function() {
                 var $field = $(this);
                 if ($field.val() === '' || $field.val() === 'Choose...') {
                     hasEmptyFields = true;
@@ -2273,6 +2235,7 @@ td {
         }
 
         let counter = 0
+
         function checkFieldsFilled(id) {
             const status = checkFieldsStatus(id)
             if (id === "accordion-item2" && counter === 0) {
@@ -2282,7 +2245,7 @@ td {
             const accordionItem = document.getElementById(id);
             const formFields = accordionItem.querySelectorAll("input, select");
             let allFieldsFilled = true;
-            formFields.forEach(function (field) {
+            formFields.forEach(function(field) {
                 if (field.value === "" || field.value === "Choose...") {
                     allFieldsFilled = false;
                 }
@@ -2320,7 +2283,7 @@ td {
         }
         var selectedFiles = [];
 
-        $(document).ready(function () {
+        $(document).ready(function() {
 
             $.ajax({
                 url: 'http://api.geonames.org/searchJSON',
@@ -2331,9 +2294,9 @@ td {
                     username: 'developedmatz',
                     style: 'full'
                 },
-                success: function (result) {
+                success: function(result) {
                     // Handle state selection change
-                    $('#state').change(function () {
+                    $('#state').change(function() {
                         var selectedState = $(this).val();
                         if (selectedState === "KPK") {
                             selectedState = "Khyber Pakhtunkhwa"
@@ -2360,13 +2323,13 @@ td {
                             }
 
 
-                            cities.forEach(function (city) {
+                            cities.forEach(function(city) {
                                 cityDropdown.append($('<option></option>').text(city));
                             });
 
                         }
                     })
-                    $('#state_update').change(function () {
+                    $('#state_update').change(function() {
                         var selectedState = $(this).val();
                         if (selectedState === "KPK") {
                             selectedState = "Khyber Pakhtunkhwa"
@@ -2394,7 +2357,7 @@ td {
 
 
 
-                            cities.forEach(function (city) {
+                            cities.forEach(function(city) {
                                 cityDropdown.append($('<option></option>').text(city));
                             });
 
@@ -2402,13 +2365,14 @@ td {
                     });
                 }
             })
+
             function areAllFieldsFilled() {
                 var accordion1Fields = $('#accordion-item1 input[type="text"], #accordion-item1 select');
                 var accordion2Fields = $('#accordion-item2 input[type="text"], #accordion-item2 select');
                 var imageInput = $('#fileInput');
-                var allFieldsFilled = accordion1Fields.filter(function () {
+                var allFieldsFilled = accordion1Fields.filter(function() {
                     return $(this).val() === '' || $(this).val() === 'Choose...';
-                }).length === 0 && accordion2Fields.filter(function () {
+                }).length === 0 && accordion2Fields.filter(function() {
                     return $(this).val() === '' || $(this).val() === 'Choose...';
                 }).length === 0 && imageInput.get(0).files.length > 0;
 
@@ -2421,11 +2385,11 @@ td {
                 var accordion2Fields = $('#accordion-item2 input[type="text"], #accordion-item2 select');
                 var imageInput = $('#fileInput');
 
-                var isAccordion1FieldsEmpty = accordion1Fields.filter(function () {
+                var isAccordion1FieldsEmpty = accordion1Fields.filter(function() {
                     return $(this).val() !== '' || $(this).val() === 'Choose...';
                 }).length === 0;
 
-                var isAccordion2FieldsEmpty = accordion2Fields.filter(function () {
+                var isAccordion2FieldsEmpty = accordion2Fields.filter(function() {
                     return $(this).val() !== '' || $(this).val() === 'Choose...';
                 }).length === 0;
 
@@ -2452,7 +2416,7 @@ td {
             }
 
             // Call the updateButtonStatus function when any field in the accordions is changed
-            $('#accordion-item1 input, #accordion-item1 select, #accordion-item2 input, #accordion-item2 select').on('input change', function () {
+            $('#accordion-item1 input, #accordion-item1 select, #accordion-item2 input, #accordion-item2 select').on('input change', function() {
                 var $field = $(this);
                 var $errorMessage = $field.next('.text-danger');
 
@@ -2468,27 +2432,27 @@ td {
             // Handle change event of checkboxes
 
 
-            $('#fileInput').on('change', function () {
+            $('#fileInput').on('change', function() {
                 var files = Array.from($(this)[0].files);
                 // console.log(files)
-                files.forEach(function (file) {
+                files.forEach(function(file) {
                     selectedFiles.push(file); // Add each file to the selected files array
                 });
 
                 updateSelectedFilesContainer(); // Update the selected files container
             });
-            $('#fileInput_update').on('change', function () {
+            $('#fileInput_update').on('change', function() {
                 // console.log($(this)[0].files)
                 var files = Array.from($(this)[0].files);
                 // console.log(files)
-                files.forEach(function (file) {
+                files.forEach(function(file) {
                     selectedFiles.push(file); // Add each file to the selected files array
                 });
 
                 updateSelectedFilesContainer(); // Update the selected files container
             });
 
-            $(document).on('click', '.delete-file', function () {
+            $(document).on('click', '.delete-file', function() {
                 var index = $(this).data('index');
                 selectedFiles.splice(index, 1); // Remove the selected file from the array
                 updateSelectedFilesContainer(); // Update the selected files container
@@ -2496,7 +2460,7 @@ td {
 
             function resetAccordions() {
                 // Reset all accordions
-                $('.accordion-item').each(function () {
+                $('.accordion-item').each(function() {
                     var accordionId = $(this).attr('id');
                     var accordionFields = $('#' + accordionId + ' input[type="text"], #' + accordionId + ' select');
                     var imageField = $('#' + accordionId + ' input[type="file"]');
@@ -2526,16 +2490,16 @@ td {
                 });
             }
 
-            $('#close,#top-close').on('click', function (e) {
+            $('#close,#top-close').on('click', function(e) {
                 e.preventDefault()
                 resetAccordions()
                 $('#addModal').modal('hide');
             })
-            $(document).on('click', '#next', function (e) {
+            $(document).on('click', '#next', function(e) {
                 e.preventDefault()
                 selectedFiles = []
                 $('#addModal').modal('hide');
-                
+
                 // $("#largemodal").addClass("hide");
                 var formData = new FormData();
 
@@ -2578,13 +2542,13 @@ td {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
 
-                    success: function (response) {
+                    success: function(response) {
                         console.log(2)
-                        // console.log(1)
+                            // console.log(1)
                         $('#succesModal').modal('show')
-                        // window.location = '../Landlord/properties-all.html';
+                            // window.location = '../Landlord/properties-all.html';
                     },
-                    error: function (xhr, status, error) {
+                    error: function(xhr, status, error) {
                         window.alert('Error: ' + error);
                     }
                 });
@@ -2597,26 +2561,26 @@ td {
                 var selectedFilesContainer = $('.file-grid');
                 selectedFilesContainer.empty();
                 console.log(selectedFiles)
-                selectedFiles.forEach(function (file, index) {
+                selectedFiles.forEach(function(file, index) {
 
                     var fileElement = $('<div>')
                         .addClass('selected-file')
                         .append(
                             $('<img>')
-                                .addClass('file-preview')
-                                .attr('src', typeof file === "object" ? URL.createObjectURL(file) : '../../../../spadeAPI/uploads/' + file)
+                            .addClass('file-preview')
+                            .attr('src', typeof file === "object" ? URL.createObjectURL(file) : '../../../../spadeAPI/uploads/' + file)
                         )
                         .append(
                             $('<div>')
-                                .addClass('file-details')
-                                .append($('<span>').text("Image-" + (index + 1)))
+                            .addClass('file-details')
+                            .append($('<span>').text("Image-" + (index + 1)))
                             // .append($('<span>').text(fileSize))
                         )
                         .append(
                             $('<span>')
-                                .addClass('delete-file')
-                                .text('X')
-                                .attr('data-index', index)
+                            .addClass('delete-file')
+                            .text('X')
+                            .attr('data-index', index)
                         )
                         .appendTo(selectedFilesContainer);
 
@@ -2640,405 +2604,404 @@ td {
 
                 return fileName;
             }
-        
-        $('#myModal_edit').find('input, select').on('input change', function () {
-            var updateButton = document.getElementById('update');
-            console.log(updateButton)
-            var isFilled = true;
 
-            // Check each field for empty value and toggle red border and span visibility
-            $('#myModal_edit').find('input, select').each(function (index) {
-                var value = $(this).val().trim();
-                var span = $(this).siblings('.text-danger');
-                if (index == 0 && $('.file-grid').children()[1]?.length === 0) {
-                    isFilled = false;
-                }
-                else if (index >= 1) {
-                    if (value === '' || value === 'Choose...') {
-                        $(this).addClass('border-danger');
-                        //   console.log(1)
-                        span.removeClass('d-none');
+            $('#myModal_edit').find('input, select').on('input change', function() {
+                var updateButton = document.getElementById('update');
+                console.log(updateButton)
+                var isFilled = true;
+
+                // Check each field for empty value and toggle red border and span visibility
+                $('#myModal_edit').find('input, select').each(function(index) {
+                    var value = $(this).val().trim();
+                    var span = $(this).siblings('.text-danger');
+                    if (index == 0 && $('.file-grid').children()[1] ?.length === 0) {
                         isFilled = false;
-                    } else {
-                        $(this).removeClass('border-danger');
-                        span.addClass('d-none');
+                    } else if (index >= 1) {
+                        if (value === '' || value === 'Choose...') {
+                            $(this).addClass('border-danger');
+                            //   console.log(1)
+                            span.removeClass('d-none');
+                            isFilled = false;
+                        } else {
+                            $(this).removeClass('border-danger');
+                            span.addClass('d-none');
+                        }
                     }
+                });
+
+                // Toggle button behavior based on the fields' status
+                if (isFilled) {
+                    updateButton.classList.remove('disabled')
+                } else {
+                    updateButton.classList.add("disabled")
                 }
             });
 
-            // Toggle button behavior based on the fields' status
-            if (isFilled) {
-                updateButton.classList.remove('disabled')
-            } else {
-                updateButton.classList.add("disabled")
-            }
-        });
+
+
+            // Call the updateButtonStatus function when any field in the accordions is changed
+
+            // Handle change event of checkboxes
+            $('#propertyTable').DataTable({
+                paging: true,
+                searching: false,
+                info: false,
+                lengthChange: false,
+                pageLength: 10,
 
 
 
-        // Call the updateButtonStatus function when any field in the accordions is changed
-
-        // Handle change event of checkboxes
-        $('#propertyTable').DataTable({
-            paging: true,
-            searching: false,
-            info: false,
-            lengthChange: false,
-            pageLength: 10,
-
-
-
-        });
-        let columnsToHide = []
-        $('input[type="checkbox"]').change(function () {
-            var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
-            var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
-            console.log(columnIndex, isColumnVisible)
-            // Toggle the visibility of the corresponding column
-            $('table').find('tr').each(function () {
-                var column = $(this).find('th:nth-child(' + columnIndex + '), td:nth-child(' + columnIndex + ')');
-                isColumnVisible ? column.show() : column.hide();
             });
-        });
-        $("#succesModal").on('hide.bs.modal', function () {
-            if (imageField.length) {
-                        imageField.val('');
-                        imageField.siblings('label.custom-file-label').find('.custom-file-text span').first().text('Upload Photo or drag and drop here');
-                        imageField.siblings('.selected-files').find('.file-grid').empty();
-                    }
+            let columnsToHide = []
+            $('input[type="checkbox"]').change(function() {
+                var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
+                var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
+                console.log(columnIndex, isColumnVisible)
+                    // Toggle the visibility of the corresponding column
+                $('table').find('tr').each(function() {
+                    var column = $(this).find('th:nth-child(' + columnIndex + '), td:nth-child(' + columnIndex + ')');
+                    isColumnVisible ? column.show() : column.hide();
+                });
+            });
+            $("#succesModal").on('hide.bs.modal', function() {
+                if (imageField.length) {
+                    imageField.val('');
+                    imageField.siblings('label.custom-file-label').find('.custom-file-text span').first().text('Upload Photo or drag and drop here');
+                    imageField.siblings('.selected-files').find('.file-grid').empty();
+                }
                 resetAccordions()
                     // $('#accordion-item1').find('.file-grid').empty();
-            // getData()
-        })
+                    // getData()
+            })
 
 
-        let result;
-        function filterTable(selectedFilter) {
-            var tableBody = $('#table_body');
-            var rows = tableBody.find('tr');
+            let result;
 
-            if (selectedFilter === 'alphabets') {
-                rows.sort(function (a, b) {
-                    var textA = $(a).find('.propertyName').text().toLowerCase();
-                    var textB = $(b).find('.propertyName').text().toLowerCase();
-                    return textA.localeCompare(textB);
-                });
-            } else if (selectedFilter === 'ascending') {
-                rows.sort(function (a, b) {
-                    var idA = parseInt($(a).find('.property-id').text());
-                    var idB = parseInt($(b).find('.property-id').text());
-                    return idA - idB;
-                });
-            } else if (selectedFilter === 'descending') {
-                rows.sort(function (a, b) {
-                    var idA = parseInt($(a).find('.property-id').text());
-                    var idB = parseInt($(b).find('.property-id').text());
-                    return idB - idA;
-                });
+            function filterTable(selectedFilter) {
+                var tableBody = $('#table_body');
+                var rows = tableBody.find('tr');
+
+                if (selectedFilter === 'alphabets') {
+                    rows.sort(function(a, b) {
+                        var textA = $(a).find('.propertyName').text().toLowerCase();
+                        var textB = $(b).find('.propertyName').text().toLowerCase();
+                        return textA.localeCompare(textB);
+                    });
+                } else if (selectedFilter === 'ascending') {
+                    rows.sort(function(a, b) {
+                        var idA = parseInt($(a).find('.property-id').text());
+                        var idB = parseInt($(b).find('.property-id').text());
+                        return idA - idB;
+                    });
+                } else if (selectedFilter === 'descending') {
+                    rows.sort(function(a, b) {
+                        var idA = parseInt($(a).find('.property-id').text());
+                        var idB = parseInt($(b).find('.property-id').text());
+                        return idB - idA;
+                    });
+                }
+
+                tableBody.empty().append(rows);
             }
 
-            tableBody.empty().append(rows);
-        }
-
-        // Filter functionality
-        $('#ascending').on('click', function () {
-            filterTable("ascending")
-        });
-        $('#descending').on('click', function () {
-            filterTable("descending")
-        });
-        $('#alphabets').on('click', function () {
-            // console.log(1)
-            filterTable("alphabets")
-        });
-        // console.log($('#alphabets'))
-        // Search functionality
-        $('#search_input').on('keyup', function () {
-            var searchValue = $(this).val().toLowerCase();
-            $('#table_body tr').filter(function () {
-                $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+            // Filter functionality
+            $('#ascending').on('click', function() {
+                filterTable("ascending")
             });
-        });
-
-        // Function to update the table based on filters
-        function updateTable() {
-            $('#table_body').empty();
-            $.ajax({
-                url: 'http://localhost:3000/api/spade/allproperty',
-                type: 'GET',
-                contentType: false,
-                processData: false,
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                },
-                success: function (response) {
-                    // console.log(response);
-
-                    // Assuming response is an array of property objects
-                    var tableBody = $('#table_body');
-
-                    // Iterate over the response and populate the table
-                    response.forEach(function (property) {
-                        // Generate table rows with property data
-                        var row = '<tr>' +
-                            '<td>' + property.propertyId + '</td>' +
-                            '<td>' + property.propertyName + '</td>' +
-                            '<td>' + property.propertyType + '</td>' +
-                            '<td>' + property.units + '</td>' +
-                            '<td>' + property.address + '</td>' +
-                            '</tr>';
-
-                        // Append the row to the table body
-                        tableBody.append(row);
-                    });
-                },
-                error: function (xhr, status, error) {
-                    window.alert('Error: ' + error);
-                }
+            $('#descending').on('click', function() {
+                filterTable("descending")
             });
-        }
-
-        // Initial table population
-        // updateTable();
-
-
-        $('#myModal_edit').on('hidden.bs.modal', function () {
-            // Clear input values
-            // console.log(1)
-            $(this).find('input, textarea, select').val('');
-
-            // Clear file input values
-            // $(this).find('input[type="file"]').val(null);
-
-            // Clear radio button selections
-            $(this).find('input[type="radio"]').prop('checked', false);
-
-            $('#myModal_edit').find('.file-grid').empty();
-            $('#accordion-item1').find('.file-grid').empty();
-        });
-
-
-
-        // let propertyId;
-
-        $(document).on('click', '#update', function (e) {
-            e.preventDefault();
-            $("#myModal_edit").modal("hide");
-
-            var formData = new FormData();
-            var propertyName = $("#propertyName_update").val();
-            var address = $("#address_update").val();
-            var city = $("#city_update").val();
-            var state = $("#state_update").val();
-            var zipCode = $("#zip_update").val();
-            var propertyType = $("#propertyType_update").val();
-            var propertySQFT = $("#propertyTotalSF_update").val();
-            var units = $("#unit_update").val();
-
-            formData.append('id', propertyId);
-            formData.append('propertyName', propertyName);
-            formData.append('address', address);
-            formData.append('city', city);
-            formData.append('state', state);
-            formData.append('zipCode', zipCode);
-            formData.append('propertyType', propertyType);
-            formData.append('propertySQFT', propertySQFT);
-            formData.append('units', units);
-
-            // Retrieve existing image names from the DOM
-
-            var existingImageNames = [];
-            selectedFiles.forEach((file) => {
-                if (typeof file === "string") {
-                    existingImageNames.push(file)
-                }
-            })
-            // Get the selected files
-            var files = selectedFiles.map(function (file) {
-                return file instanceof File ? file : file.name;
+            $('#alphabets').on('click', function() {
+                // console.log(1)
+                filterTable("alphabets")
+            });
+            // console.log($('#alphabets'))
+            // Search functionality
+            $('#search_input').on('keyup', function() {
+                var searchValue = $(this).val().toLowerCase();
+                $('#table_body tr').filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+                });
             });
 
-            // Add the selected files to the FormData object
-            files.forEach(function (file) {
-                formData.append('image', file);
-            });
+            // Function to update the table based on filters
+            function updateTable() {
+                $('#table_body').empty();
+                $.ajax({
+                    url: 'http://localhost:3000/api/spade/allproperty',
+                    type: 'GET',
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function(response) {
+                        // console.log(response);
 
-            formData.append("existingImages", existingImageNames)
-            $.ajax({
-                url: 'http://localhost:3000/api/spade/updateProperty',
-                // url: 'http://ec2-54-158-103-230.compute-1.amazonaws.com:3000/api/spade/updateProperty',
-                type: 'PUT',
-                data: formData,
-                contentType: false,
-                processData: false,
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                },
-                success: function (response) {
-                    e.preventDefault()
-                    // getData();
-                },
-                error: function (xhr, status, error) {
-                    window.alert('Error: ' + error);
-                }
-            });
-        });
-        $(document).on('click', '#confirmDelete', function (e) {
-
-            e.preventDefault();
-            // delete using AJAX
-            $('#myModal_delete').modal('hide');
-            $.ajax({
-                url: 'http://localhost:3000/api/spade/propertyDelete',
-                type: 'DELETE',
-                data: JSON.stringify({
-                    "id": propertyId
-                }),
-                contentType: "application/json; charset=utf-8",
-                processData: false,
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                },
-                success: function (response) {
-                    // getData()
-                },
-                error: function (xhr, status, error) {
-                    window.alert('Error: ' + error);
-                }
-            });
-        })
-        // let data;
-
-        function getData(selectedFilter = "alphabets") {
-            // console.log(2)
-            $("#global-loader").fadeIn("fast")
-            // console.log(22)
-            $.ajax({
-                url: 'http://localhost:3000/api/spade/allproperty',
-                type: 'GET',
-                contentType: false,
-                processData: false,
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                },
-                success: function (response) {
-                    if (response.data[0].length === 0) {
-
-                        window.location = './new-property.html'
-                    } else {
-                        $("#user-name").text(response.user)
-
+                        // Assuming response is an array of property objects
                         var tableBody = $('#table_body');
 
-                        tableBody.empty();
-
-                        response.data[0]?.forEach(function (property) {
-                            var image = '<td><img src="../../../../spadeAPI/uploads/' + property.images[0] + '" alt=""></td>';
-                            // var image = '<td><img src="../../../../../../Desktop/spade API 2/uploads/image-1684250579662.png" alt="hhghghgh"></td>';
-
-                            var propertyId = '<td class="property-id " style="font-weight: 600;">' + property
-                                .id + '</td>';
-
-                            var propertyName = '<td class="propertyName" style="font-weight: 600;">' +
-                                property
-                                    .propertyName +
-                                '</td>';
-                            var colorClass = '';
-                            var backgroundClass = '';
-
-                            if (property.propertyType === 'Single Family') {
-                                var colorClass = 'rounded-pill-Single-Family'
-                            } else if (property.propertyType === 'Multi-Family') {
-                                var colorClass = 'rounded-pill-Multi-Family';
-
-                            } else if (property.propertyType === 'Multi-Commercial') {
-                                var colorClass = 'rounded-pill-Multi-Commercial';
-                            }
-
-                            var propertyType =
-                                '<td class="propertyType"><a class="like" href="javascript:;">' +
-                                `<span class="badge btn-light ${colorClass} rounded-pill py-2 px-3">` +
-                                '<i class="fe fe-circle me-1"></i>' + property.propertyType + '</span>' +
-                                '</a></td>';
-
-                            var propertyUnits = '<td class="propertyUnits">' +
-                                '<p style="font-weight: 600;" class="mb-1">' + property.units +
-                                ' Unit(s)</p>' +
-                                '<span class="font-weight-normal">' + property.propertySQFT +
-                                ' Square Feet</span>' +
-                                '</td>';
-
-                            var propertyAddress = '<td class="propertyAddress">' +
-                                '<p style="font-weight: 600;" class="mb-1">' + property.address + '</p>' +
-                                '<span>' + property.city + ', ' + property.state + ' ' + property.zipCode +
-                                '</span>' +
-                                '</td>';
-
-                            var dropdownMenu =
-                                '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
-                                '<ul class="dropdown-menu">' +
-                                '<li><a class="edit-option dropdown-item text-primary" href="javascript:void(0)">Edit</a></li>' +
-                                '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>' +
-                                `<li><a class="dropdown-item text-success" href="./view-property.html?propertyId=${property.id}">View</a></li>` +
-                                '</ul></td>';
-                            // Create a table row and append the generated columns
-                            var row = '<tr>'+ image + propertyId + propertyName + propertyType +
-                                propertyUnits + propertyAddress + dropdownMenu + '</tr>';
+                        // Iterate over the response and populate the table
+                        response.forEach(function(property) {
+                            // Generate table rows with property data
+                            var row = '<tr>' +
+                                '<td>' + property.propertyId + '</td>' +
+                                '<td>' + property.propertyName + '</td>' +
+                                '<td>' + property.propertyType + '</td>' +
+                                '<td>' + property.units + '</td>' +
+                                '<td>' + property.address + '</td>' +
+                                '</tr>';
 
                             // Append the row to the table body
                             tableBody.append(row);
                         });
-                        $("#global-loader").fadeOut("slow")
-                        $('.edit-option').click(function (e) {
-                            e.preventDefault();
-                            const propertyIdElement = $(this).closest("tr").find(".property-id");
-
-                            propertyId = propertyIdElement.text();
-
-                            const data = response.data[0].find(obj => obj.id.toString() === propertyId);
-                            selectedFiles = data.images
-                            console.log(data.city)
-                            var option = $('<option>').text(data.city).val(data.city);
-
-                            // Append the option to the select element
-                            $('#city_update').append(option);
-
-                            // Make the option selected
-                            option.prop('selected', true);
-                            updateSelectedFilesContainer()
-                            $("#propertyId_update").val(data.id);
-                            $("#propertyName_update").val(data.propertyName);
-                            $("#address_update").val(data.address);
-                            $("#city_update").val(data.city);
-                            $("#state_update").val(data.state);
-                            $("#zip_update").val(data.zipCode);
-                            $("#propertyType_update").val(data.propertyType);
-                            $("#propertyTotalSF_update").val(data.propertySQFT);
-                            $("#unit_update").val(data.units);
-                            $("#property-name").text(data.propertyName)
-                            $('#myModal_edit').modal('show');
-                        });
-                        $('.delete-option').click(function (e) {
-                            e.preventDefault(); // Prevent default anchor behavior
-                            const propertyIdElement = $(this).closest("tr").find(".property-id");
-                            propertyId = propertyIdElement.text();
-
-                            $('#myModal_delete').modal('show');
-                        });
+                    },
+                    error: function(xhr, status, error) {
+                        window.alert('Error: ' + error);
                     }
-                },
-                error: function (xhr, status, error) {
-                    console.log(error)
-                    window.alert('Error: ' + "Token expeired!, Login again");
-                    window.location = '../Landlord/login_module.html';
-                }
+                });
+            }
+
+            // Initial table population
+            // updateTable();
+
+
+            $('#myModal_edit').on('hidden.bs.modal', function() {
+                // Clear input values
+                // console.log(1)
+                $(this).find('input, textarea, select').val('');
+
+                // Clear file input values
+                // $(this).find('input[type="file"]').val(null);
+
+                // Clear radio button selections
+                $(this).find('input[type="radio"]').prop('checked', false);
+
+                $('#myModal_edit').find('.file-grid').empty();
+                $('#accordion-item1').find('.file-grid').empty();
             });
 
-        }
-        
-        
-    })
-    
+
+
+            // let propertyId;
+
+            $(document).on('click', '#update', function(e) {
+                e.preventDefault();
+                $("#myModal_edit").modal("hide");
+
+                var formData = new FormData();
+                var propertyName = $("#propertyName_update").val();
+                var address = $("#address_update").val();
+                var city = $("#city_update").val();
+                var state = $("#state_update").val();
+                var zipCode = $("#zip_update").val();
+                var propertyType = $("#propertyType_update").val();
+                var propertySQFT = $("#propertyTotalSF_update").val();
+                var units = $("#unit_update").val();
+
+                formData.append('id', propertyId);
+                formData.append('propertyName', propertyName);
+                formData.append('address', address);
+                formData.append('city', city);
+                formData.append('state', state);
+                formData.append('zipCode', zipCode);
+                formData.append('propertyType', propertyType);
+                formData.append('propertySQFT', propertySQFT);
+                formData.append('units', units);
+
+                // Retrieve existing image names from the DOM
+
+                var existingImageNames = [];
+                selectedFiles.forEach((file) => {
+                        if (typeof file === "string") {
+                            existingImageNames.push(file)
+                        }
+                    })
+                    // Get the selected files
+                var files = selectedFiles.map(function(file) {
+                    return file instanceof File ? file : file.name;
+                });
+
+                // Add the selected files to the FormData object
+                files.forEach(function(file) {
+                    formData.append('image', file);
+                });
+
+                formData.append("existingImages", existingImageNames)
+                $.ajax({
+                    url: 'http://localhost:3000/api/spade/updateProperty',
+                    // url: 'http://ec2-54-158-103-230.compute-1.amazonaws.com:3000/api/spade/updateProperty',
+                    type: 'PUT',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function(response) {
+                        e.preventDefault()
+                            // getData();
+                    },
+                    error: function(xhr, status, error) {
+                        window.alert('Error: ' + error);
+                    }
+                });
+            });
+            $(document).on('click', '#confirmDelete', function(e) {
+
+                    e.preventDefault();
+                    // delete using AJAX
+                    $('#myModal_delete').modal('hide');
+                    $.ajax({
+                        url: 'http://localhost:3000/api/spade/propertyDelete',
+                        type: 'DELETE',
+                        data: JSON.stringify({
+                            "id": propertyId
+                        }),
+                        contentType: "application/json; charset=utf-8",
+                        processData: false,
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function(response) {
+                            // getData()
+                        },
+                        error: function(xhr, status, error) {
+                            window.alert('Error: ' + error);
+                        }
+                    });
+                })
+                // let data;
+
+            function getData(selectedFilter = "alphabets") {
+                // console.log(2)
+                $("#global-loader").fadeIn("fast")
+                    // console.log(22)
+                $.ajax({
+                    url: 'http://localhost:3000/api/spade/allproperty',
+                    type: 'GET',
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function(response) {
+                        if (response.data[0].length === 0) {
+
+                            window.location = './new-property.html'
+                        } else {
+                            $("#user-name").text(response.user)
+
+                            var tableBody = $('#table_body');
+
+                            tableBody.empty();
+
+                            response.data[0] ?.forEach(function(property) {
+                                var image = '<td><img src="../../../../spadeAPI/uploads/' + property.images[0] + '" alt=""></td>';
+                                // var image = '<td><img src="../../../../../../Desktop/spade API 2/uploads/image-1684250579662.png" alt="hhghghgh"></td>';
+
+                                var propertyId = '<td class="property-id " style="font-weight: 600;">' + property
+                                    .id + '</td>';
+
+                                var propertyName = '<td class="propertyName" style="font-weight: 600;">' +
+                                    property
+                                    .propertyName +
+                                    '</td>';
+                                var colorClass = '';
+                                var backgroundClass = '';
+
+                                if (property.propertyType === 'Single Family') {
+                                    var colorClass = 'rounded-pill-Single-Family'
+                                } else if (property.propertyType === 'Multi-Family') {
+                                    var colorClass = 'rounded-pill-Multi-Family';
+
+                                } else if (property.propertyType === 'Multi-Commercial') {
+                                    var colorClass = 'rounded-pill-Multi-Commercial';
+                                }
+
+                                var propertyType =
+                                    '<td class="propertyType"><a class="like" href="javascript:;">' +
+                                    `<span class="badge btn-light ${colorClass} rounded-pill py-2 px-3">` +
+                                    '<i class="fe fe-circle me-1"></i>' + property.propertyType + '</span>' +
+                                    '</a></td>';
+
+                                var propertyUnits = '<td class="propertyUnits">' +
+                                    '<p style="font-weight: 600;" class="mb-1">' + property.units +
+                                    ' Unit(s)</p>' +
+                                    '<span class="font-weight-normal">' + property.propertySQFT +
+                                    ' Square Feet</span>' +
+                                    '</td>';
+
+                                var propertyAddress = '<td class="propertyAddress">' +
+                                    '<p style="font-weight: 600;" class="mb-1">' + property.address + '</p>' +
+                                    '<span>' + property.city + ', ' + property.state + ' ' + property.zipCode +
+                                    '</span>' +
+                                    '</td>';
+
+                                var dropdownMenu =
+                                    '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
+                                    '<ul class="dropdown-menu">' +
+                                    '<li><a class="edit-option dropdown-item text-primary" href="javascript:void(0)">Edit</a></li>' +
+                                    '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>' +
+                                    `<li><a class="dropdown-item text-success" href="./view-property.html?propertyId=${property.id}">View</a></li>` +
+                                    '</ul></td>';
+                                // Create a table row and append the generated columns
+                                var row = '<tr>' + image + propertyId + propertyName + propertyType +
+                                    propertyUnits + propertyAddress + dropdownMenu + '</tr>';
+
+                                // Append the row to the table body
+                                tableBody.append(row);
+                            });
+                            $("#global-loader").fadeOut("slow")
+                            $('.edit-option').click(function(e) {
+                                e.preventDefault();
+                                const propertyIdElement = $(this).closest("tr").find(".property-id");
+
+                                propertyId = propertyIdElement.text();
+
+                                const data = response.data[0].find(obj => obj.id.toString() === propertyId);
+                                selectedFiles = data.images
+                                console.log(data.city)
+                                var option = $('<option>').text(data.city).val(data.city);
+
+                                // Append the option to the select element
+                                $('#city_update').append(option);
+
+                                // Make the option selected
+                                option.prop('selected', true);
+                                updateSelectedFilesContainer()
+                                $("#propertyId_update").val(data.id);
+                                $("#propertyName_update").val(data.propertyName);
+                                $("#address_update").val(data.address);
+                                $("#city_update").val(data.city);
+                                $("#state_update").val(data.state);
+                                $("#zip_update").val(data.zipCode);
+                                $("#propertyType_update").val(data.propertyType);
+                                $("#propertyTotalSF_update").val(data.propertySQFT);
+                                $("#unit_update").val(data.units);
+                                $("#property-name").text(data.propertyName)
+                                $('#myModal_edit').modal('show');
+                            });
+                            $('.delete-option').click(function(e) {
+                                e.preventDefault(); // Prevent default anchor behavior
+                                const propertyIdElement = $(this).closest("tr").find(".property-id");
+                                propertyId = propertyIdElement.text();
+
+                                $('#myModal_delete').modal('show');
+                            });
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(error)
+                        window.alert('Error: ' + "Token expeired!, Login again");
+                        window.location = '../Landlord/login_module.html';
+                    }
+                });
+
+            }
+
+
+        })
     </script>
 </body>
 
