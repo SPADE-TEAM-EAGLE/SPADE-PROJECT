@@ -693,10 +693,6 @@
                                                 class="text-danger">*</span></label>
                                         <select id="state" class="form-select form" required>
                                             <option selected>Choose...</option>
-                                            <option>Sindh</option>
-                                            <option>Punjab</option>
-                                            <option>Balochistan</option>
-                                            <option>KPK</option>
                                         </select>
                                         <span class="text-danger d-none">State is required!</span>
                                     </div>
@@ -1009,110 +1005,7 @@
 
         </div>
     </div> -->
-    <div class="modal fade" id="myModal_edit" aria-labelledby="myModal" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div class="text-justify ps-2 border-model-line">
-                        <h2 class="modal-title">Update <strong class="color-primary" id="property-name">New
-                                Property</strong></h2>
-                        <span class="">Spade Rent allows you to add a range of commercial and residential properties,
-                            from condos and single-family homes to retail stores and parking lots.</span>
-                    </div>
-                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><img src="../assets/images/cross-circle.svg" /></span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form class="row g-3" enctype="multipart/form-data">
-                        <div class="col-md-12">
-                            <label class="form-label fw-bold">Property Photo</label>
-                            <div class="custom-file" style="border: 1px dashed #00000087;">
-                                <input id="fileInput_update" type="file" name="image" class="custom-file-input form"
-                                    accept=".jpg, .png, image/jpeg, image/png" aria-label="hello" multiple>
-                                <span className="d-none"></span>
-                                <label class="custom-file-label" for="fileInput_update">
-                                    <i class="fi fi-rs-cloud-upload"></i>
-                                    <div class="custom-file-text">
-                                        <span>Upload Photo or drag and drop here</span>
-                                        <span>JPEG and PNG, file size no more than 10MB</span>
-                                    </div>
-                                </label>
-                            </div>
-                            <div class="selected-files">
-                                <div class="file-grid"></div>
-                            </div>
-                            <span class="text-danger d-none">Photos are required!</span>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="inputPassword4" class="form-label fw-bold">Property Name <spnan
-                                    class="text-danger">*</span></label>
-                            <input type="text" class="form-control form" id="propertyName_update">
-                            <span class="text-danger d-none">Property name required!</span>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="inputAddress" class="form-label fw-bold">Number of Units<span
-                                    class="text-danger">*</span></label>
-                            <input type="text" class="form-control px-2" id="unit_update" placeholder=" ">
-                            <span class="text-danger d-none">Units are required!</span>
-                        </div>
-                        <div class="col-12">
-                            <label for="inputAddress" class="form-label fw-bold">Address <spnan class="text-danger">
-                                    *</span></label>
-                            <input type="text" class="form-control form" id="address_update" placeholder="1234 Main St">
-                            <span class="text-danger d-none">Address is required!</span>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="inputCity" class="form-label fw-bold">City <spnan class="text-danger">
-                                    *</span></label>
-                            <input type="text" class="form-control form" id="city_update">
-                            <span class="text-danger d-none">City is required!</span>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="inputState" class="form-label fw-bold">State <spnan class="text-danger">
-                                    *</span></label>
-                            <select id="state_update" class="form-select form">
-                                <option selected>Choose...</option>
-                                <option>Sindh</option>
-                                <option>Punjab</option>
-                                <option>Balochistan</option>
-                                <option>KPK</option>
-                            </select>
-                            <span class="text-danger d-none">State is required!</span>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="inputZip" class="form-label fw-bold">Zip <spnan class="text-danger">
-                                    *</span></label>
-                            <input type="text" class="form-control form" id="zip_update">
-                            <span class="text-danger d-none">Zip is required!</span>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="inputState" class="form-label fw-bold">Property Type <spnan class="text-danger">
-                                    *</span></label>
-                            <select id="propertyType_update" class="form-select form">
-                                <option selected>Choose...</option>
-                                <option>Single Family</option>
-                                <option>Multi-Family</option>
-                                <option>Multi-Commercial</option>
-                            </select>
-                            <span class="text-danger d-none">Property Type is required!</span>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="inputPassword4" class="form-label fw-bold">Property Total SF <spnan
-                                    class="text-danger">*</span></label>
-                            <input type="text" class="form-control form" id="propertyTotalSF_update">
-                            <span class="text-danger d-none">Property Total SF is required!</span>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-default btn-pill button"
-                        data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="update">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    
     <!-- MODAL EFFECTS -->
 
     <!-- MODAL EFFECTS -->
@@ -2445,6 +2338,53 @@
         var selectedFiles = [];
         $(document).ready(function () {
             $.ajax({
+        url: 'http://api.geonames.org/searchJSON',
+        method: 'GET',
+        data: {
+          country: 'US',
+          maxRows: 500,
+          username: 'developedmatz', // Replace with your GeoNames username
+          style: 'full'
+        },
+        success: function(result) {
+          // Handle state selection change
+          $('#state').change(function() {
+            var selectedState = $(this).val();
+            var cityDropdown = $('#city');
+
+            // Clear existing options
+            cityDropdown.empty();
+            cityDropdown.append($('<option></option>').text("Choose..."));
+
+            if (selectedState !== "Choose...") {
+              var cities = result.geonames.filter(function(place) {
+                return place.adminName1 === selectedState && place.fcode === "PPL";
+              });
+
+              cities.forEach(function(city) {
+                cityDropdown.append($('<option></option>').text(city.name));
+              });
+              if(selectedState==="Texas"){
+                cityDropdown.append($('<option></option>').text("Houston"));
+              }
+            }
+          });
+
+          var stateDropdown = $('#state');
+          var states = result.geonames.filter(function(place) {
+            return place.fcode === "ADM1" ;
+          });
+
+        //   stateDropdown.append($('<option></option>').text("Choose..."));
+          states.forEach(function(state) {
+            stateDropdown.append($('<option></option>').text(state.adminName1));
+          });
+        },
+        error: function(xhr, status, error) {
+          console.log('Error occurred while fetching state and city data.');
+        }
+      });
+            $.ajax({
     url: 'http://localhost:3000/api/spade/getPropertyUnitsTenant',
     type: 'GET',
     contentType: false,
@@ -2854,52 +2794,6 @@ console.log(properties)
                     $('#draft').attr("disabled", "disabled");
                 });
             }
-            $.ajax({
-                url: 'http://api.geonames.org/searchJSON',
-                method: 'GET',
-                data: {
-                    country: 'PK',
-                    maxRows: 500,
-                    username: 'developedmatz',
-                    style: 'full'
-                },
-                success: function (result) {
-                    // Handle state selection change
-                    $('#state').change(function () {
-                        var selectedState = $(this).val();
-                        if (selectedState === "KPK") {
-                            selectedState = "Khyber Pakhtunkhwa"
-                        }
-
-                        var cityDropdown = $('#city');
-
-                        // Clear existing options
-                        cityDropdown.empty();
-                        cityDropdown.append($('<option></option>').text("Choose..."));
-                        cities = []
-                        if (selectedState !== "Choose...") {
-                            // Populate city options based on selected state
-                            count = 0
-                            data = result.geonames
-                            for (item of data) {
-                                if (item.adminName1 === selectedState) {
-                                    cities.push(item.name)
-                                    count++
-                                }
-                                if (count === 10) {
-                                    break
-                                }
-                            }
-
-
-                            cities.forEach(function (city) {
-                                cityDropdown.append($('<option></option>').text(city));
-                            });
-
-                        }
-                    })
-                }
-            })
             const input = document.querySelector("#phone");
 const errorMsg = document.querySelector("#error-msg");
 const validMsg = document.querySelector("#valid-msg");
