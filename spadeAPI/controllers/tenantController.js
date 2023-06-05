@@ -57,7 +57,7 @@ const config = process.env;
               } = req.body
               // console.log(req.body,req.query)
               const {userId}=req.user
-              // console.log(req.body)
+              console.log(req.body)
               // console.log(userId)
               const tenantsCheck = await queryRunner(selectQuery("tenants", "email"), [email]);
               // console.log(tenantsCheck[0])
@@ -75,6 +75,7 @@ const config = process.env;
                 const tenantsInsert = await queryRunner(insertTenants, [userId, firstName, lastName, companyName, email, phoneNumber, address, city, state, zipcode, propertyID, propertyUnitID, rentAmount, gross_or_triple_lease, baseRent, tripleNet, leaseStartDate, leaseEndDate, increaseRent, hashPassword, currentDate]);
                 if (tenantsInsert[0].affectedRows > 0) {
                     // update property unit
+                    console.log(tenantsInsert[0].insertId)
                     const status = "Occupied";
                     const propertyUnitsResult = await queryRunner(updatePropertyUnitsTenant, [ status, propertyUnitID, propertyID ]);
                     if (propertyUnitsResult[0].affectedRows > 0) {
@@ -82,7 +83,8 @@ const config = process.env;
                       if(increaseRent == 'No'){
                         res.status(200).json({
                             message: "Tenants save Successful",
-                            data: tenantsInsert[0]
+                            data: tenantsInsert[0],
+                            tenantId:tenantsInsert[0].insertId
                           })
                     }
                     else{
@@ -99,7 +101,9 @@ const config = process.env;
                         }
 
                           res.status(200).json({
-                            message: " tenant created successful"
+                            message: " tenant created successful",
+                            data: tenantsInsert[0],
+                            tenantId:tenantsInsert[0].insertId
                           });
  
                     }
@@ -131,6 +135,7 @@ const config = process.env;
           
                 exports.sendInvitationLink = async (req, res) => {
                   const { tenantID } = req.body;
+                  console.log(req)
                   try {
                     const selectTenantResult = await queryRunner(selectQuery("tenants", "id"), [tenantID])
               if (selectTenantResult[0].length > 0) {

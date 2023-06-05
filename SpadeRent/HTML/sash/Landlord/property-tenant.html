@@ -2165,7 +2165,7 @@
         });
 
             $.ajax({
-                url: 'http://localhost:3000/api/spade/getPropertyTenant',
+                url: 'http://localhost:3000/api/spade/viewPropertyTenant',
                 type: 'GET',
                 data: {
                     "id":propertyId
@@ -2175,9 +2175,12 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function ({data}) {
-                    // console.log(response)
+                    console.log(data)
                     if (data[0].length === 0) {
 
+                        var tableBody = $('#table_body');
+
+                        tableBody.empty();
                         // window.location = './new-property.html'
                     } else {
                         console.log(data[0][0])

@@ -31,7 +31,10 @@ router.post('/addMoreUnits' ,  userController.addMoreUnits);
 router.delete('/deleteMoreUnits' ,  userController.deleteMoreUnits);
 router.put('/PropertyUnitsUpdates',verifyToken,  userController.putPropertyUnitsUpdates);
 router.get('/getPropertyUnitsTenant',verifyToken, userController.getPropertyUnitsTenant);
-router.get('/getPropertyTenant', verifyToken,userController.getPropertyTenant);
+router.get('/viewPropertyTenant', verifyToken,userController.viewPropertyTenant);
+
+
+
 // router.post('/tenants',verifyToken,tenantController.createTenants);
 router.post('/tenants',verifyToken, tenantController.createTenants);
 router.post('/sendInvitationLink', verifyToken, tenantController.sendInvitationLink); 
