@@ -41,4 +41,8 @@ exports.getUnitsCount = 'SELECT COUNT(propertyID) as unitCount FROM `propertyuni
 exports.insertMoreUnits='INSERT INTO propertyunits (propertyID, unitNumber,Area,unitDetails,status) VALUES (?,?,?,?,?)';
 exports.putUnitsUpdate = 'UPDATE property SET  units = ?  where id = ? ';
 exports.insertTenantAttachFile ='INSERT INTO tenantattachfiles (landlordID, tenantID, fileName) VALUES (?,?,?)';
+exports.insertInvoice ='INSERT INTO invoice (landlordID, tenantID, invoiceType, startDate, endDate, frequency, dueDate, repeatTerms, terms, note) VALUES (?,?,?,?,?,?,?,?,?,?)';
+exports.insertLineItems ='INSERT INTO invoicelineitems (invoiceID, category, property, memo, amount ) VALUES (?,?,?,?,?)';
+exports.insertInvoiceImage ='INSERT INTO invoiceimages (invoiceID, InvoiceImage) VALUES (?,?)';
+exports.updateUnitsTenant = 'UPDATE propertyunits SET  status = ?  where id = ? ';
 

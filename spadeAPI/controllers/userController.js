@@ -762,6 +762,7 @@ exports.getPropertyTenant = async (req, res) => {
   try {
     const { id } = req.user
     // const { id } = req.body
+    
     const PropertyTenantResult = await queryRunner(selectPropertyTenant, [id]);
     if (PropertyTenantResult.length > 0) {
       res.status(200).json({
