@@ -926,7 +926,7 @@
                                 <div class="col-md-12">
                                     <div class="card inner-cards">
                                         <div class="card-header justify-content-start">
-                                            <h3 class="card-title font-wieght-bold">Add Units</h3>
+                                            <button class="btn btn-primary btn-pill pt-1 pb-1 done-option" id="add-units">Add Units</button>
                                         </div>
                                         <div class="card-body">
                                             <div class="table-responsive">
@@ -954,7 +954,8 @@
                                                             </td>
                                                             <td><input type="email" class="form-control" id="inputEmail5" placeholder="Enter Area"></td>
                                                             <td><input type="email" class="form-control w-100" id="inputEmail5" placeholder="Enter Unit Details (Optional)"></td>
-                                                            <td><button class="btn btn-primary btn-pill pt-1 pb-1">Done</button>
+                                                            <td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
+                                                                <ul class="dropdown-menu"><li><a class="edit-option dropdown-item text-primary" href="javascript:void(0)">Edit</a></li><li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li><li><a class="dropdown-item text-success" href="./view-property.html?propertyId=13">View</a></li></ul>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -2014,6 +2015,7 @@
             });
         });
         const propertyId = (new URL(document.location)).searchParams.get("propertyId");
+        // console.log(propertyId)
         // // console.log($("#viewUnits").attr("href"))
 
         $("#viewUnits").attr("href", `./property-unit.html?propertyId=${propertyId}`)
@@ -2021,6 +2023,24 @@
         $("#viewTenants").attr("href", `./property-tenant.html?propertyId=${propertyId}`)
         $("#viewTasks").attr("href", `./property-task.html?propertyId=${propertyId}`)
             // $("#viewUnits").attr("href",`./property-unit.html?propertyId=${propertyId}`)
+            $("#add-units").click(()=>{
+                $.ajax({
+                url: 'http://localhost:3000/api/spade/addMoreUnits',
+                type: 'POST',
+                data: JSON.stringify({
+                    "propertyID":propertyId
+                }),
+                contentType: "application/json; charset=utf-8",
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    getData()
+                },
+                error: function (xhr, status, error) {
+                    window.alert('Error: ' + error);
+                }
+            })})
         function getData() {
             $.ajax({
                 url: 'http://localhost:3000/api/spade/PropertyUnits',
@@ -2068,23 +2088,22 @@
 
                         const unitNumberCell = $('<td></td>');
                         const unitNumberInput = $(`<input type="email" class="form-control" id="inputEmail5" placeholder="Enter Unit Number" value='${unit.unitNumber}' ${unit.unitNumber ? "readonly" : ""}>`);
-                        const unitNumberRequiredMsg = $('<span class="required-msg text-danger">This field is required.</span>').hide();
-                        unitNumberCell.append(unitNumberInput, unitNumberRequiredMsg);
+
+                        unitNumberCell.append(unitNumberInput);
                         row.append(unitNumberCell);
 
                         const areaCell = $('<td></td>');
                         const areaInput = $(`<input type="email" class="form-control" id="inputEmail5" placeholder="Enter Area" value='${unit.Area}' ${unit.Area ? "readonly" : ""}>`);
-                        const areaRequiredMsg = $('<span class="required-msg text-danger">This field is required.</span>').hide();
-                        areaCell.append(areaInput, areaRequiredMsg);
+                        areaCell.append(areaInput);
                         row.append(areaCell);
 
                         const unitDetailsCell = $('<td colspan="3"></td>');
-                        const unitDetailsInput = $(`<input type="email" class="form-control" id="inputEmail5" placeholder="Enter Unit Details (Optional)" value='${unit.unitDetails}' ${unit.unitDetails ? "readonly" : ""}>`);
+                        const unitDetailsInput = $(`<input type="email" class="form-control" id="inputEmail5" placeholder="Enter Unit Details (Optional)" value='${unit.unitDetails}' ${unit.Area ? "readonly" : ""}>`);
                         unitDetailsCell.append(unitDetailsInput);
                         row.append(unitDetailsCell);
 
                         const actionCell = $('<td></td>');
-                        const doneButton = $('<button class="btn btn-primary btn-pill pt-1 pb-1 done-option" disabled>Done</button>');
+                        const doneButton = $(`<i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i><ul class="dropdown-menu"><li class='${unit.unitNumber ? "d-none" : ""}'><a class="dropdown-item text-success done-option" href="" disabled>Done</a></li><li class='${unit.unitNumber ? "" : "d-none"}'><a class="edit-option dropdown-item text-primary" href="javascript:void(0)" >Edit</a></li><li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li></ul>`);
                         actionCell.append(doneButton);
                         row.append(actionCell);
 
@@ -2103,20 +2122,21 @@
                         // Event listener for unit number input
                         unitNumberInput.on('input', function() {
                             const unitNumberValue = $(this).val();
-                            unitNumberRequiredMsg.toggle(unitNumberValue.trim() === '');
+                            // unitNumberRequiredMsg.toggle(unitNumberValue.trim() === '');
                             checkRequiredFields();
                         });
 
                         // Event listener for area input
                         areaInput.on('input', function() {
                             const areaValue = $(this).val();
-                            areaRequiredMsg.toggle(areaValue.trim() === '');
+                            // areaRequiredMsg.toggle(areaValue.trim() === '');
                             checkRequiredFields();
                         });
 
                         tableBody.append(row);
                     });
                     $('.done-option').click(function(e) {
+                        console.log(22)
                         e.preventDefault();
                         const unitIdElement = $(this).closest("tr").find(".unit-id");
                         const unitId = unitIdElement.text();
@@ -2131,8 +2151,9 @@
 
                             }
                             values.push(cellValue)
-                            console.log(values)
+                            // console.log(values)
                         });
+                        console.log(propertyId)
                         $.ajax({
                             url: 'http://localhost:3000/api/spade/PropertyUnitsUpdates',
                             type: 'PUT',
@@ -2148,6 +2169,7 @@
                                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                             },
                             success: function(response) {
+                                console.log(response)
                                 getData()
                             },
                             error: function(xhr, status, error) {
@@ -2155,6 +2177,60 @@
                             }
                         })
                     });
+                    $('.delete-option').click(function(e) {
+            console.log(333)
+                        e.preventDefault();
+                        const unitIdElement = $(this).closest("tr").find(".unit-id");
+                        const unitId = unitIdElement.text();
+                        let values = []
+                        $(`#${unitId}`).find('td').each(function() {
+                            let cellValue = "";
+                            const input = $(this).find('input')
+                            if (input.length > 0) {
+                                cellValue = input.val()
+                            } else {
+                                cellValue = $(this).text()
+
+                            }
+                            values.push(cellValue)
+                            // console.log(values)
+                        });
+            $.ajax({
+                url: 'http://localhost:3000/api/spade/deleteMoreUnits',
+                type: 'DELETE',
+                data: JSON.stringify({
+                    "propertyID": propertyId,
+                    "unitID":values[0],
+                }),
+                contentType: "application/json; charset=utf-8",
+                processData: false,
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    console.log(1)
+                    getData()
+                },
+                error: function (xhr, status, error) {
+                    window.alert('Error: ' + error);
+                }
+            });
+        })
+        $(".edit-option").click(function(){
+            // e.preventDefault();
+            console.log(1)
+                        const unitIdElement = $(this).closest("tr").find(".unit-id");
+                        $(this).parent().addClass("d-none")
+                        $(this).parent().prev().removeClass('d-none');
+                        const unitId = unitIdElement.text();
+                        
+                        $(`#${unitId}`).find('td').each(function() {
+                            
+                            const input = $(this).find('input')
+                            input.attr("readonly", false); 
+                        });
+                        // $(this).replaceWith( ('<a class="dropdown-item text-success done-option" href="" disabled>Done</a>') )
+        })
                 },
                 error: function(xhr, status, error) {
                     window.alert('Error: ' + error);
