@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
 const tenantController = require('../controllers/tenantController');
+const invoiceController = require('../controllers/invoiceController');
 const verifyToken = require('../middleware/authenticate');
 const {upload} = require('../middleware/imageUploads') ;
 const {uploadExistingFiles} = require('../middleware/imageUploads') ;
@@ -47,6 +48,8 @@ router.put('/updatePasswordTenant', tenantController.updatePasswordTenant);
 router.post('/addAlternateEmailPhone' ,verifyToken, tenantController.addAlternateEmailPhone);
 router.post('/tenantAttachFile',[verifyToken,upload], tenantController.tenantAttachFile);
 router.delete('/tenantAttachFileDelete' ,verifyToken, tenantController.tenantAttachFileDelete);
+router.delete('/tenantDelete', tenantController.tenantDelete);
+router.post('/createInvoice',upload, invoiceController.createInvoice);
 
 module.exports = router;
 

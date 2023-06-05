@@ -17,7 +17,8 @@ const {
   updatePropertyUnitsTenant,
   insertAlternateEmailData,
   insertAlternatePhoneData,
-  insertTenantAttachFile
+  insertTenantAttachFile,
+  updateUnitsTenant
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -444,3 +445,85 @@ exports.tenantAttachFileDelete = async (req, res) => {
   }
 }
 //  ############################# Delete Tenant Attach File End ############################################################
+
+
+//  ############################# Delete Tenant Start ############################################################
+exports.tenantDelete = async (req, res) => {
+  try {
+    const { id } = req.body
+    const tenantResult = await queryRunner(selectQuery("tenants", "id"), [id]);
+const propertyUnitID = tenantResult[0][0].propertyUnitID;
+    const tenantDeleteResult = await queryRunner(deleteQuery("tenants", "id"), [id]);
+    if (tenantDeleteResult[0].affectedRows > 0) {
+
+      const tenantCheckResult = await queryRunner(selectQuery("tenantattachfiles", "tenantID"), [id]);
+      // console.log(tenantcheckresult);
+      if (tenantCheckResult[0].length > 0) {
+        tenantimages = tenantCheckResult[0].map((image) => image.fileName);
+        // delete folder images
+        imageToDelete(tenantimages);
+        const tenantFileDeleteresult = await queryRunner(deleteQuery("tenantattachfiles", "tenantID"), [id]);
+        if (tenantFileDeleteresult[0].affectedRows > 0) {
+        const tenantAdditionalEmailresult = await queryRunner(deleteQuery("tenantalternateemail", "tenantID"), [id]);
+        if (tenantAdditionalEmailresult[0].affectedRows > 0) {
+        const tenantAdditionalPhoneResult = await queryRunner(deleteQuery("tenantalternatephone", "tenantID"), [id]);
+        if (tenantAdditionalPhoneResult[0].affectedRows > 0) {
+          const tenantIncreaseRentResult = await queryRunner(deleteQuery("tenantincreaserent", "tenantID"), [id]);
+          if (tenantIncreaseRentResult[0].affectedRows > 0) {
+            //dddddd
+            const status = "Vacant";
+            const propertyUnitsResult = await queryRunner(updateUnitsTenant, [ status , propertyUnitID ]);
+            if (propertyUnitsResult[0].affectedRows > 0) {
+          
+              res.status(200).json({
+                message: " tenant deleted successfully"
+              })    
+            }else{
+              // " tenant Error occur in increase rent "
+              res.status(400).json({
+                message: " tenant Error occur in updating property units "
+              })
+            }
+          }else{
+            // " tenant Error occur in increase rent "
+            res.status(400).json({
+              message: " tenant Error occur in delete increase rent "
+            })
+          }
+          // }
+          
+        }else{
+          res.status(400).json({
+            message: " tenant Error occur in delete alternate phone "
+          })
+        }
+         
+         
+        }else{
+          res.status(400).json({
+            message: " tenant Error occur in delete alternate email "
+          })  
+        }
+      }else{
+        res.status(400).json({
+          message: " tenant Error occur in delete files "
+        })  
+      }
+      } else { // tenantCheckResult
+        res.status(400).json({
+          message: "No tenant file data found "
+        })
+      }
+
+    } else { //tenantDeleteResult
+      res.status(400).json({
+        message: "No data found"
+      })
+    }
+  } catch (error) {
+    res.send("Error from delete tenants ");
+    // console.log(req.body)
+    console.log(error)
+  }
+}
+//  ############################# Delete Tenant End ############################################################
