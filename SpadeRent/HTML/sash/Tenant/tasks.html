@@ -26,6 +26,7 @@
     <link href="../assets/css/dark-style.css" rel="stylesheet" />
     <link href="../assets/css/transparent-style.css" rel="stylesheet">
     <link href="../assets/css/skin-modes.css" rel="stylesheet" />
+    <link href="../assets/css/responsive.css" rel="stylesheet" />
 
     <!--- FONT-ICONS CSS -->
     <link href="../assets/css/icons.css" rel="stylesheet" />
@@ -518,151 +519,81 @@
 
 <body class="app sidebar-mini ltr light-mode">
 
-    <!-- GLOBAL-LOADER -->
-    <div id="global-loader">
-        <img src="../assets/images/loader.svg" class="loader-img" alt="Loader">
+   <!-- GLOBAL-LOADER -->
+   <div id="preloader" class="tlp-preloader">
+    <div class="animation-preloader">
+        <div class="tlp-spinner"></div>
+        <img src="../assets/images/logo-preloader.png" alt="Preloader" style="width: 65px;">
     </div>
-    <!-- /GLOBAL-LOADER -->
+</div>
+<!-- /GLOBAL-LOADER -->
+
     <!-- Modal -->
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="text-justify ps-2 border-model-line">
-                        <h2 class="modal-title">Create <strong class="color-primary">New Property</strong></h2>
-                        <span class="">Spade Rent allows you to add a range of commercial and residential properties,
-                            from condos and single-family homes to retail stores and parking lots.</span>
+                        <h2 class="modal-title">Create <strong class="color-primary">New Task</strong></h2>
+                        <span class="">The real power of tasks is keeping track of deadlines and having a 
+                            log of all work and communication related to the tasks for later reference.</span>
                     </div>
-                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><img src="../assets/images/cross-circle.svg" /></span>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="top-close">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="accordion-item mb-4" id="accordion-item1">
-                        <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button text-white" id="accordian-button-1" type="button" data-bs-toggle="collapse" onclick="checkFieldsFilled('accordion-item1')" id="accordion-button1" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                <span class="m-0 me-4 fs-1" style="font-weight: bold;">01</span>
-                                <h3 class="m-0"><strong>Property Information</strong> <i class="fi fi-rs-pencil"></i><i
-                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
-                                </h3>
-                            </button>
-                        </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <form class="row g-3" enctype="multipart/form-data">
-                                    <div class="col-md-12">
-                                        <label class="form-label fw-bold">Property Photo</label>
-                                        <div class="custom-file" style="border: 1px dashed #00000087;">
-                                            <input id="fileInput" type="file" name="image" class="custom-file-input form" accept=".jpg, .png, image/jpeg, image/png" aria-label="hello" multiple>
-                                            <span className="d-none"></span>
-                                            <label class="custom-file-label" for="fileInput">
-                                                <i class="fi fi-rs-cloud-upload"></i>
-                                                <div class="custom-file-text">
-                                                    <span>Upload Photo or drag and drop here</span>
-                                                    <span>JPEG and PNG, file size no more than 10MB</span>
-                                                </div>
-                                            </label>
-                                        </div>
-                                        <div class="selected-files">
-                                            <div class="file-grid"></div>
-                                        </div>
-                                        <span class="text-danger d-none">Photos are required!</span>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="inputEmail4" class="form-label fw-bold">Property ID</label>
-                                        <input type="text" class="form-control form" id="propertyId">
-                                        <span class="text-danger d-none">Property ID is required!</span>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="inputPassword4" class="form-label fw-bold">Property Name <spnan
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="propertyName">
-                                        <span class="text-danger d-none">Property name required!</span>
-                                    </div>
-                                    <div class="col-12">
-                                        <label for="inputAddress" class="form-label fw-bold">Address <spnan
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="address" placeholder="1234 Main St">
-                                        <span class="text-danger d-none">Address is required!</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputCity" class="form-label fw-bold">City <spnan
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="city">
-                                        <span class="text-danger d-none">City is required!</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputState" class="form-label fw-bold">State <spnan
-                                                class="text-danger">*</span></label>
-                                        <select id="state" class="form-select form">
-                                            <option selected>Choose...</option>
-                                            <option>Sindh</option>
-                                            <option>Punjab</option>
-                                            <option>Balochistan</option>
-                                            <option>KPK</option>
-                                        </select>
-                                        <span class="text-danger d-none">State is required!</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputZip" class="form-label fw-bold">Zip <spnan class="text-danger">
-                                                *</span></label>
-                                        <input type="text" class="form-control form" id="zip">
-                                        <span class="text-danger d-none">Zip is required!</span>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="inputState" class="form-label fw-bold">Property Type <spnan
-                                                class="text-danger">*</span></label>
-                                        <select id="propertyType" class="form-select form">
-                                            <option selected>Choose...</option>
-                                            <option>Single Family</option>
-                                            <option>Multi-Family</option>
-                                            <option>Multi-Commercial</option>
-                                        </select>
-                                        <span class="text-danger d-none">Property Type is required!</span>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="inputPassword4" class="form-label fw-bold">Property Total SF <spnan
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="propertyTotalSF">
-                                        <span class="text-danger d-none">Property Total SF is required!</span>
-                                    </div>
-                                </form>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <form class="row g-3" enctype="multipart/form-data">
+                            <div class="col-md-6">
+                                <label for="inputEmail4" class="form-label fw-bold">Task</label>
+                                <input type="text" class="form-control form" id="task">
+                                <span class="text-danger d-none">Task is required!</span>
                             </div>
-                        </div>
+                            <div class="col-md-6"></div>
+                            <div class="col-md-6">
+                                <label for="inputState" class="form-label fw-bold">Property Name <spnan
+                                        class="text-danger">*</span></label>
+                                <select id="state" class="form-select form">
+                                    <option selected>Select Option</option>
+                                    <option>Sindh</option>
+                                    <option>Punjab</option>
+                                    <option>Balochistan</option>
+                                    <option>KPK</option>
+                                </select>
+                                <span class="text-danger d-none">Property Name is required!</span>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="inputState" class="form-label fw-bold">Unit <spnan
+                                        class="text-danger">*</span></label>
+                                <select id="propertyType" class="form-select form">
+                                    <option selected>Select Option</option>
+                                    <option>Single Family</option>
+                                    <option>Multi-Family</option>
+                                    <option>Multi-Commercial</option>
+                                </select>
+                                <span class="text-danger d-none">Unit is required!</span>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="exampleFormControlTextarea1">Message</label>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+                                  </div>
+                                <span class="text-danger d-none">Message is required!</span>
+                            </div>
+                        </form>
                     </div>
-                    <div class="accordion-item" id="accordion-item2">
-                        <h2 class="accordion-header" id="headingTwo">
-                            <button class="accordion-button collapsed text-white" onclick="checkFieldsFilled('accordion-item2')" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                <span class="m-0 me-4 fs-1" style="font-weight: bold;">02</span>
-                                <h3 class="m-0"><strong>Property Unit Information</strong> <i
-                                        class="fi fi-rs-pencil"></i><i
-                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
-                                </h3>
-                            </button>
-                        </h2>
-                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                            <form class="row g-3 m-1" enctype="multipart/form-data">
 
-                                <div class="col-12 mb-3">
-                                    <label for="inputAddress" class="form-label fw-bold">Number of Units<span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control px-2" id="units" placeholder=" ">
-                                    <span class="text-danger d-none">Units are required!</span>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
-                        Draft</button>
-                    <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close'>Close</button>
-                    <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
-                    <button class="btn text-light button" style='background-color:#1467B0;' id='next' disabled>Next</button>
+                <div class="modal-footer d-flex>
+                    <div class=""><button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close'>Close</button>
+                        <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
+                        <a type="submit" class="btn text-light btn-pill button" style='background-color:#1467B0;' id='next'>Next</a></div>
                 </div>
             </div>
         </div>
-    </div>
+    </div>
+
     <div class="modal fade" id="myModal_delete">
         <div class="modal-dialog modal-dialog-centered text-center" role="document">
             <div class="modal-content modal-content-demo">
@@ -883,12 +814,12 @@
 
 
                                         <!-- 1 comments start  -->
-                                        <div class="d-flex country">
+                                        <!-- <div class="d-flex country">
                                             <img src="../assets\header-img\comment.svg" alt="profile-user" class="avatarr profile-user brroundd nav-link cover-image dark-layout">
-                                        </div>
-                                        <div class="d-flex country">
+                                        </div> -->
+                                        <!-- <div class="d-flex country">
                                             <img src="../assets\header-img\comment-light.webp" alt="profile-user" class="avatarr profile-user nav-link brroundd cover-image light-layout">
-                                        </div>
+                                        </div> -->
                                         <!-- 1 comments start  -->
 
                                         <!-- 2 comments start  -->
@@ -911,7 +842,7 @@
                                             <a href="javascript:void(0)" data-bs-toggle="dropdown" class="nav-link leading-none d-flex">
                                                 <!-- <img src="../assets/images/users/21.jpg" alt="profile-user"
                                                     class="avatar  profile-user brround cover-image"> -->
-                                                <span class="side-menu__item dynamic-text-head" style="padding: 10px 10px;">Spade Admin</span> <i class="fe fe-chevron-down dark-mode" style="font-size: 20px; font-weight: 800;"></i>
+                                                <span class="side-menu__item dynamic-text-head" style="padding: 10px 10px;">Spade Admin</span> <i class="fe fe-chevron-down dark-mode text-dark" style="font-size: 20px; font-weight: 800;"></i>
                                             </a>
                                             <!-- <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                                 <div class="drop-heading">
@@ -1065,19 +996,16 @@
                                                 <div class="card mt-5" style="background: linear-gradient(180deg, #232323 0%, #434343 100%); background: url(../assets/header-img/tenant-dashboard.png); background-size: cover; background-repeat: no-repeat;">
                                                     <div class="card-body">
                                                         <div class="row">
-                                                            <div class="col-lg-12">
+                                                            <div class="col-lg-12 mobile-text-center">
                                                                 <!-- <h3 class="page-titlee text-white" style="font-weight: 100; margin-bottom: 0px;">Welcome to Spade Portal</h3> -->
                                                                 <h1 class="page-titlee text-white" style="font-weight: 700; margin-bottom: 0px; border-radius: 40px;"><span style="font-weight: 300;">Welcome</span> John Clark</h1>
-                                                                <div style="width: 100px; height: 6px; background-color: #1467B0; border-radius: 40px;"></div>
+                                                                <div class="bottom-border-underline"><div style="width: 100px; height: 6px; background-color: #1467B0; border-radius: 40px;"></div></div>
                                                                 <h4 class="mt-3 text-white mb-3" style="font-weight: 300;">Balance Due</h4>
                                                                 <h1 class="mt-3 text-white font-weight-900" style="font-weight: 800; margin-bottom: 0px;">$356.00</h1>
-                                                                <div style="display: flex; align-items: center;"> <i class="side-menu__icon fi fi-rs-calendar text-white"></i><span class="side-menu__labell text-white">&nbsp;&nbsp; Your next payment of $356.00 is due on 5/1/2023&emsp;<a href="#" class="btn btn-primary btn-pill">Pay Now</a></span></div> 
-                                                                <div style="display: flex; align-items: center;"><i class="side-menu__icon fi fi-rs-building text-white"></i><span class="side-menu__labell text-white">&nbsp;&nbsp; <span><b>Pensgate St</b></span> <br>&nbsp;&nbsp;  9430 Research Blvd. Ste 2-350 Austin TX 78759</span></div>
+                                                                <div class="mobile-icon-text-align"><i class="side-menu__icon fi fi-rs-calendar text-white"></i><span class="side-menu__labell text-white">&nbsp;&nbsp; Your next payment of $356.00 is due on 5/1/2023&emsp; <a href="#" class="btn btn-primary btn-pill btn-paynow-banner">Pay Now</a></span></div> 
+                                                                <div class="mobile-icon-text-align"><i class="side-menu__icon fi fi-rs-building text-white"></i><span class="side-menu__labell text-white">&nbsp;&nbsp; <span><b>Pensgate St</b></span> <br>&nbsp;&nbsp;  9430 Research Blvd. Ste 2-350 Austin TX 78759</span></div>
                         
                                                             </div>
-                                                            <!-- <div class="col-lg-3">
-                                                                <img src="../assets/heade-img/Group1.png" alt="">
-                                                            </div> -->
                                 </div>
 
                             </div>
@@ -1179,12 +1107,7 @@
                                             <table class="table border text-nowrap text-md-nowrap mb-0">
                                                 <thead>
                                                     <tr>
-                                                        <th><label class="custom-control custom-checkbox-md">
-                                                                <input type="checkbox" class="custom-control-input"
-                                                                    name="example-checkbox5" value="option5"
-                                                                    checked="">
-                                                                <span class="custom-control-label"></span>
-                                                            </label></th>
+                                                        <th></th>
                                                         <th>Image</th>
                                                         <th>TASK</th>
                                                         <th>ASSIGNED TO</th>
@@ -1197,12 +1120,7 @@
                                                 </thead>
                                                 <tbody id="table_body">
                                                     <tr>
-                                                        <td><label class="custom-control custom-checkbox-md">
-                                                                <input type="checkbox" class="custom-control-input"
-                                                                    name="example-checkbox5" value="option5"
-                                                                    checked="">
-                                                                <span class="custom-control-label"></span>
-                                                            </label></td>
+                                                        <td></td>
                                                         <td><img src="../assets/images/Group-user.png" alt=""></td>
                                                         <td style="font-weight: 600;">
                                                             <p style="font-weight: 600;" class="mb-1">Sink is Leaking
@@ -1254,12 +1172,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td><label class="custom-control custom-checkbox-md">
-                                                                <input type="checkbox" class="custom-control-input"
-                                                                    name="example-checkbox5" value="option5"
-                                                                    checked="">
-                                                                <span class="custom-control-label"></span>
-                                                            </label></td>
+                                                      <td></td>
                                                         <td><img src="../assets/images/Group-create.png" alt=""></td>
                                                         <td style="font-weight: 600;">
                                                             <p style="font-weight: 600;" class="mb-1">Electrical Issues
@@ -1291,12 +1204,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td><label class="custom-control custom-checkbox-md">
-                                                                <input type="checkbox" class="custom-control-input"
-                                                                    name="example-checkbox5" value="option5"
-                                                                    checked="">
-                                                                <span class="custom-control-label"></span>
-                                                            </label></td>
+                                                        <td></td>
                                                         <td><img src="../assets/images/Group-user.png" alt=""></td>
                                                         <td style="font-weight: 600;">
                                                             <p style="font-weight: 600;" class="mb-1">Sink is Leaking
@@ -1348,12 +1256,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td><label class="custom-control custom-checkbox-md">
-                                                                <input type="checkbox" class="custom-control-input"
-                                                                    name="example-checkbox5" value="option5"
-                                                                    checked="">
-                                                                <span class="custom-control-label"></span>
-                                                            </label></td>
+                                                       <td></td>
                                                         <td><img src="../assets/images/Group-create.png" alt=""></td>
                                                         <td style="font-weight: 600;">
                                                             <p style="font-weight: 600;" class="mb-1">Electrical Issues
@@ -1385,12 +1288,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td><label class="custom-control custom-checkbox-md">
-                                                                <input type="checkbox" class="custom-control-input"
-                                                                    name="example-checkbox5" value="option5"
-                                                                    checked="">
-                                                                <span class="custom-control-label"></span>
-                                                            </label></td>
+                                                      <td></td>
                                                         <td><img src="../assets/images/Group-user.png" alt=""></td>
                                                         <td style="font-weight: 600;">
                                                             <p style="font-weight: 600;" class="mb-1">Sink is Leaking
@@ -1442,12 +1340,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td><label class="custom-control custom-checkbox-md">
-                                                                <input type="checkbox" class="custom-control-input"
-                                                                    name="example-checkbox5" value="option5"
-                                                                    checked="">
-                                                                <span class="custom-control-label"></span>
-                                                            </label></td>
+                                                       <td></td>
                                                         <td><img src="../assets/images/Group-create.png" alt=""></td>
                                                         <td style="font-weight: 600;">
                                                             <p style="font-weight: 600;" class="mb-1">Electrical Issues

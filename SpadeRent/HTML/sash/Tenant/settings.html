@@ -28,6 +28,7 @@
     <link href="../assets/css/dark-style.css" rel="stylesheet" />
     <link href="../assets/css/transparent-style.css" rel="stylesheet">
     <link href="../assets/css/skin-modes.css" rel="stylesheet" />
+    <link href="../assets/css/responsive.css" rel="stylesheet" />
 
     <!--- FONT-ICONS CSS -->
     <link href="../assets/css/icons.css" rel="stylesheet" />
@@ -594,7 +595,7 @@
             top: -1000px;
         }
 
-        #profile {
+        /* #profile {
             border-radius: 100%;
             width: 160px;
             height: 160px;
@@ -618,22 +619,16 @@
             height: 100%;
             border: 4px dashed #2b2a2a;
             opacity: 1;
-        }
+        } */
 
-        #profile label {
-            /* display: table-cell;
-	 vertical-align: middle;
-	 text-align: center;
-	 padding: 0 30px;
-	 color: grey;
-	 opacity: 1; */
+        /* #profile label {
             padding: 0px 25px;
             margin-top: 65px;
             text-align: center;
             font-size: 11px;
-        }
+        } */
 
-        #profile div .upload-imgg {
+        /* #profile div .upload-imgg {
             display: block;
             vertical-align: middle;
             text-align: center;
@@ -641,7 +636,7 @@
             color: grey;
             opacity: 1;
             position: absolute;
-        }
+        } */
 
         #profile.dragging {
             background-image: none !important;
@@ -809,11 +804,15 @@
 
 <body class="app sidebar-mini ltr light-mode">
 
-    <!-- GLOBAL-LOADER -->
-    <div id="global-loader">
-        <img src="../assets/images/loader.svg" class="loader-img" alt="Loader">
+  <!-- GLOBAL-LOADER -->
+  <div id="preloader" class="tlp-preloader">
+    <div class="animation-preloader">
+        <div class="tlp-spinner"></div>
+        <img src="../assets/images/logo-preloader.png" alt="Preloader" style="width: 65px;">
     </div>
-    <!-- /GLOBAL-LOADER -->
+</div>
+<!-- /GLOBAL-LOADER -->
+
     <!-- Modal -->
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
@@ -1222,14 +1221,14 @@
 
 
                                         <!-- 1 comments start  -->
-                                        <div class="d-flex country">
+                                        <!-- <div class="d-flex country">
                                             <img src="../assets\header-img\comment.svg" alt="profile-user"
                                                 class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
                                         <div class="d-flex country">
                                             <img src="../assets\header-img\comment-light.webp" alt="profile-user"
                                                 class="avatarr profile-user nav-link brroundd cover-image light-layout">
-                                        </div>
+                                        </div> -->
                                         <!-- 1 comments start  -->
 
                                         <!-- 2 comments start  -->
@@ -1259,7 +1258,7 @@
                                                     class="avatar  profile-user brround cover-image"> -->
                                                 <span class="side-menu__item dynamic-text-head"
                                                     style="padding: 10px 10px;">Spade Admin</span> <i
-                                                    class="fe fe-chevron-down dark-mode"
+                                                    class="fe fe-chevron-down dark-mode text-dark"
                                                     style="font-size: 20px; font-weight: 800;"></i>
                                             </a>
                                             <!-- <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
@@ -1467,7 +1466,7 @@
                                                     style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-lg-2">
+                                                    <div class="col-lg-2 col-4">
                                                         <div id="profile">
                                                             <div class="dashes"></div>
                                                             <div><img src="../assets/images/fancy_upload.png"
@@ -1478,10 +1477,10 @@
                                                                 10MB</label>
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-9" style="display: flex; align-items: center;">
-                                                        <div>
-                                                            <h3 class="mb-2 text-dark"><b>My Profile Picture</b></h3>
-                                                            <p style="font-size: 17px;">Your picture will be on your
+                                                    <div class="col-lg-9 col-8" style="display: flex; align-items: center;">
+                                                        <div class="profile-text-margin">
+                                                            <h3 class="mb-2 text-dark h3-profile-heading"><b>My Profile Picture</b></h3>
+                                                            <p class="profile-paragraph-p">Your picture will be on your
                                                                 spade rent application, and more!</p>
                                                         </div>
                                                     </div>
@@ -1594,7 +1593,7 @@
                                                         <div class="card"
                                                             style="background-color: #1467B0; border-radius: 20px;">
                                                             <div class="card-body">
-                                                                <div style="display: flex;">
+                                                                <div style="display: flex; align-items: center;">
                                                                     <img src="../assets/images/security-confirmation.png"
                                                                         alt=""
                                                                         style="margin-right: 20px; height: 110px;">
@@ -1711,42 +1710,43 @@
                                                 <div class="row">
                                                     <div class="col-lg-6">
                                                         <div class="row mt-5">
-                                                            <div class="col-lg-6"
+                                                                                                                        <!-- radio button start  -->
+
+
+                                                                                                                        <div class="row">
+                                                                                                                            <div class="col-lg-8"
+                                                                                                                                style="display: flex; justify-content: space-between;">
+                                                                                                                                <label class="custom-control custom-radio"> <input
+                                                                                                                                        type="radio" class="custom-control-input"
+                                                                                                                                        name="creditcard" id="creditcard"
+                                                                                                                                        value="Credit-Card" checked="checked"> <span
+                                                                                                                                        class="custom-control-label"><b>Credit
+                                                                                                                                            Card</b></span> </label>
+                                                            
+                                                                                                                                <label class="custom-control custom-radio"> <input
+                                                                                                                                        type="radio" class="custom-control-input"
+                                                                                                                                        name="creditcard" id="debitcard"
+                                                                                                                                        value="Debit-Card"> <span
+                                                                                                                                        class="custom-control-label"><b>Debit
+                                                                                                                                            Card</b></span> </label>
+                                                            
+                                                                                                                                <label class="custom-control custom-radio"> <input
+                                                                                                                                        type="radio" class="custom-control-input"
+                                                                                                                                        name="creditcard" id="ach" value="ACH">
+                                                                                                                                    <span
+                                                                                                                                        class="custom-control-label"><b>ACH</b></span>
+                                                                                                                                </label>
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                        <!-- radio button End  -->
+                                                            <div class="col-lg-6 mt-5"
                                                                 style="display: flex; justify-content: space-between; margin-bottom: 30px;">
                                                                 <a href="javascript:void(0)"
                                                                     class="btn btn-default btn-actives btn-lg"><b>Primary</b></a>
                                                                 <a href="javascript:void(0)"
                                                                     class="btn btn-default btn-actives btn-lg"><b>Secondary</b></a>
                                                             </div>
-                                                            <!-- radio button start  -->
 
-
-                                                            <div class="row">
-                                                                <div class="col-lg-8"
-                                                                    style="display: flex; justify-content: space-between;">
-                                                                    <label class="custom-control custom-radio"> <input
-                                                                            type="radio" class="custom-control-input"
-                                                                            name="creditcard" id="creditcard"
-                                                                            value="Credit-Card" checked="checked"> <span
-                                                                            class="custom-control-label"><b>Credit
-                                                                                Card</b></span> </label>
-
-                                                                    <label class="custom-control custom-radio"> <input
-                                                                            type="radio" class="custom-control-input"
-                                                                            name="creditcard" id="debitcard"
-                                                                            value="Debit-Card"> <span
-                                                                            class="custom-control-label"><b>Debit
-                                                                                Card</b></span> </label>
-
-                                                                    <label class="custom-control custom-radio"> <input
-                                                                            type="radio" class="custom-control-input"
-                                                                            name="creditcard" id="ach" value="ACH">
-                                                                        <span
-                                                                            class="custom-control-label"><b>ACH</b></span>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                            <!-- radio button End  -->
                                                             <!-- credit card debit card start  -->
                                                             <div class="desc Credit-Card Debit-Card">
                                                             <div class="form-row"
@@ -1860,13 +1860,7 @@
                                                                 <h1 class="card-title card-title-primary">Primary
                                                                     Payment Info</h1>
                                                                 <div class="card-options">
-                                                                    <label class="custom-control custom-checkbox-lg">
-                                                                        <input type="checkbox"
-                                                                            class="custom-control-input"
-                                                                            name="example-checkbox9" value="option9"
-                                                                            checked=""> <span
-                                                                            class="custom-control-label"></span>
-                                                                    </label>
+                                                                    <label class="custom-switch m-0"> <input type="radio" name="radioo" class="custom-switch-input" checked=""> <span class="custom-switch-indicator"></span> </label>
                                                                 </div>
                                                             </div>
                                                             <div class="card-body">
@@ -1894,12 +1888,7 @@
                                                                 <h1 class="card-title card-title-primary1">Secondary
                                                                     Payment Info</h1>
                                                                 <div class="card-options">
-                                                                    <label class="custom-control custom-checkbox-lg">
-                                                                        <input type="checkbox"
-                                                                            class="custom-control-input"
-                                                                            name="example-checkbox9" value="option9">
-                                                                        <span class="custom-control-label"></span>
-                                                                    </label>
+                                                                    <label class="custom-switch m-0"> <input type="radio" name="radioo" class="custom-switch-input"> <span class="custom-switch-indicator"></span> </label>
                                                                 </div>
                                                             </div>
                                                             <div class="card-body">
