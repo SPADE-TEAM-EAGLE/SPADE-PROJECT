@@ -221,16 +221,16 @@ const config = process.env;
                 
           //  ############################# Tenant Reset Email ############################################################
           exports.createResetEmailTenant = async (req, res) => {
-            const { email } = req.body;
-            // console.log(email);
+            const { email } = req.query;
+            // console.log(req);
             const mailSubject = "Spade Reset Email";
             const random = Math.floor(100000 + Math.random() * 900000)
             try {
               const selectResult = await queryRunner(selectQuery('tenants', "Email"), [email]);
-              // console.log(selectResult[0])
+              console.log(selectResult[0])
               if (selectResult[0].length > 0) {
                 const userid = selectResult[0][0].id;
-                const name = selectResult[0][0].FirstName + " " + selectResult[0][0].LastName
+                const name = selectResult[0][0].firstName + " " + selectResult[0][0].lastName
                 // console.log(updateResult);
                 console.log(userid);
                 sendMail(email, mailSubject, random, name);
