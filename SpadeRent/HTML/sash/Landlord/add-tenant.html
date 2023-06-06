@@ -90,7 +90,9 @@
     color: #1467B0;
 } */
 
-
+        .dark-mode .link-text{
+            color: #000;
+        }
         .custom-file-input:active::before {
             background: #0062cc;
         }
@@ -173,7 +175,15 @@
             padding: 6px 12px;
             background-color: transparent;
         }
-
+        .dark-mode .btn-close {
+            color: white;
+        }
+        .dark-mode .iti input[type=tel], .dark-mode .iti input[type=text] {
+    border-color: rgba(255, 255, 255, 0.1);
+    background-color: transparent;
+    border-right-color: rgba(255, 255, 255, 0.1);
+    color: #dedefd;
+}
         .custom-file-label i {
             margin-bottom: 5px;
             font-size: 3rem;
@@ -420,18 +430,16 @@ background-color: white;
         font-size: 13px;
         color: #000;
     } */
-
-        button.btn-close {
-            right: 5px;
+    button.btn-close {
+            right: 6px;
         }
 
         .btn-close {
             width: 1.8rem;
             opacity: 1;
             position: absolute;
-            top: 5px;
+            top: 6px;
         }
-
         .del {
             width: 2rem !important;
         }
@@ -627,7 +635,7 @@ background-color: white;
                 <div class="modal-header">
 
                     <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="succes-close">
-                        <span aria-hidden="true"><img src="../assets/images/cross-circle.svg" /></span>
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
                     </button>
                 </div>
                 <div class="modal-body succes-modal">
@@ -642,7 +650,7 @@ background-color: white;
                     </div>
                     <div class="d-flex align-items-center rounded-pill shadow-lg p-2 my-3">
                         <div class="flex-grow-1 ms-3">
-                            <p class="fw-bolder">Invite your Tenant to the Tenant Portal <a href="#">https://spaderent.tenant103A.com/rix-rbcr-mei</a></p>
+                            <p class="fw-bolder link-text">Invite your Tenant to the Tenant Portal <a href="#">https://spaderent.tenant103A.com/rix-rbcr-mei</a></p>
                             
                           </div>
                         <div class="flex-shrink-0">
@@ -677,7 +685,7 @@ background-color: white;
                     <button type="button" class="btn btn-primary me-4 mt-3 d-none" id="edit-btn"><i
                             class="fi fi-rs-pencil" style="display:block"></i><small>Edit Details</small></button>
                     <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><img src="../assets/images/cross-circle.svg" /></span>
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
                     </button>
                 </div>
                 <div class="modal-body">
@@ -1484,45 +1492,53 @@ background-color: white;
                                                     id="customize_btn"
                                                     data-bs-toggle="dropdown"><strong>CUSTOMIZED</strong><i
                                                         class="fe fe-chevron-down ms-2"></i></button>
-                                                <ul class="dropdown-menu" role="menu">
-                                                    <li><a href="javascript:void(0)"><strong>Filter by:</strong></a>
-                                                    </li>
+                                                        <ul class="dropdown-menu" role="menu">
+                                                            <li><a href="javascript:void(0)"><strong>Columns to show</strong></a>
+                                                            </li>
+                                                            <li class="d-flex justify-content-between"><a
+                                                                    href="javascript:void(0)">TENANT ID</a>
+                                                                <div class="form-check m-0">
+                                                                    <input type="checkbox" class="form-check-input mt-2"
+                                                                        id="exampleCheck1" checked>
+                                                                </div>
+                                                            </li>
+                                                            <li class="d-flex justify-content-between"><a
+                                                                    href="javascript:void(0)">TENANT NAME</a>
+                                                                <div class="form-check m-0">
+                                                                    <input type="checkbox" class="form-check-input mt-2"
+                                                                        id="exampleCheck1" checked>
+                                                                </div>
+                                                            </li>
+                                                            <li class="d-flex justify-content-between"><a
+                                                                    href="javascript:void(0)">PROPERTY NAME</a>
+                                                                <div class="form-check m-0">
+                                                                    <input type="checkbox" class="form-check-input mt-2"
+                                                                        id="exampleCheck1" checked>
+                                                                </div>
+                                                            </li>
+                                                            <li class="d-flex justify-content-between"><a
+                                                                    href="javascript:void(0)">RENT AMOUNT</a>
+                                                                <div class="form-check m-0">
+                                                                    <input type="checkbox" class="form-check-input mt-2"
+                                                                        id="exampleCheck1" checked>
+                                                                </div>
+                                                            </li>
+                                                            <li class="d-flex justify-content-between"><a
+                                                                    href="javascript:void(0)">PROPERTY UNITS</a>
+                                                                <div class="form-check m-0">
+                                                                    <input type="checkbox" class="form-check-input mt-2"
+                                                                        id="exampleCheck1" checked>
+                                                                </div>
+                                                            </li>
+                                                            
                                                     <li class="d-flex justify-content-between"><a
-                                                            href="javascript:void(0)">A-Z Alphabets</a>
-                                                        <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2"
-                                                                id="exampleCheck1">
-                                                        </div>
-                                                    </li>
-                                                    <li class="d-flex justify-content-between"><a
-                                                            href="javascript:void(0)">Date Modified</a>
-                                                        <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2"
-                                                                id="exampleCheck1">
-                                                        </div>
-                                                    </li>
-                                                    <li class="d-flex justify-content-between"><a
-                                                            href="javascript:void(0)">Ascending</a>
-                                                        <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2"
-                                                                id="exampleCheck1">
-                                                        </div>
-                                                    </li>
-                                                    <li class="d-flex justify-content-between"><a
-                                                            href="javascript:void(0)">Descending</a>
-                                                        <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2"
-                                                                id="exampleCheck1">
-                                                        </div>
-                                                    </li>
-                                                    <li class="d-flex justify-content-between"><a
-                                                            href="javascript:void(0)">Recently Added</a>
-                                                        <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2"
-                                                                id="exampleCheck1">
-                                                        </div>
-                                                    </li>
-                                                </ul>
+                                                        href="javascript:void(0)">LEASE END DATE</a>
+                                                    <div class="form-check m-0">
+                                                        <input type="checkbox" class="form-check-input mt-2"
+                                                            id="exampleCheck1" checked>
+                                                    </div>
+                                                </li>
+                                                        </ul>
                                             </div>
                                             <button type="button" class="btn btn-primary btn-pill mx-2"
                                                 id="add_property_btn" data-bs-effect="effect-scale"
@@ -1536,11 +1552,6 @@ background-color: white;
                                             <table class="table border text-nowrap text-md-nowrap mb-0">
                                                 <thead>
                                                     <tr>
-                                                        <th><label class="custom-control custom-checkbox-md">
-                                                                <input type="checkbox" class="custom-control-input"
-                                                                    name="example-checkbox5" value="option5" checked="">
-                                                                <span class="custom-control-label"></span>
-                                                            </label></th>
                                                         <th>TENANT ID</th>
                                                         <th>TENANT NAME</th>
                                                         <th>PROPERTY NAME</th>
@@ -1553,100 +1564,7 @@ background-color: white;
                                                     </tr>
                                                 </thead>
                                                 <tbody id="table_body">
-                                                    <tr>
-                                                        <td><label class="custom-control custom-checkbox-md">
-                                                                <input type="checkbox" class="custom-control-input"
-                                                                    name="example-checkbox5" value="option5" checked="">
-                                                                <span class="custom-control-label"></span>
-                                                            </label></td>
-                                                        <td>100027</td>
-                                                        <td>
-                                                            <p style="font-weight: 600;color: #1A6AB2;" class="mb-1">
-                                                                Justin Septimus</p>
-                                                            <span style="color: #9B9B9B;">example@email.com</span>
-                                                        </td>
-                                                        <td>
-                                                            <p style="font-weight: bold;" class="mb-1">Pensgate St</p>
-                                                            <span style="color: #6E6893;">9430 Research Blvd. Ste 2-350
-                                                                Austin TX 78759</span>
-                                                        </td>
-                                                        <td>
-                                                            <p style="font-weight: bold;" class="mb-1">$170,000</p>
-                                                            <span style="color: #6E6893;">Next Due Date:
-                                                                November-12-2020</span>
-                                                        </td>
-                                                        <td>
-                                                            <p style="font-weight: bold;" class="mb-1">Unit Name Here
-                                                            </p>
-                                                            <span>220 Square/Feet</span>
-                                                        </td>
-                                                        <td>
-                                                            <p style="font-weight: bold;" class="mb-1">October-12-2020
-                                                            </p>
-                                                            <span style="color: #1A6AB2;">50 Days Remaining</span>
-                                                        </td>
-                                                        <td><i class="fe fe-more-vertical"
-                                                                data-bs-toggle="dropdown"></i>
-
-                                                            <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item text-dark"
-                                                                        href="javascript:void(0)">View</a></li>
-                                                                <li><a class="dropdown-item text-dark"
-                                                                        href="view-property.html">Edit</a></li>
-                                                                <li><a class="dropdown-item text-success"
-                                                                        href="view-property.html">Invite Sent!</a></li>
-                                                                <li><a class="dropdown-item text-danger"
-                                                                        href="javascript:void(0)">Delete</a>
-                                                                </li>
-                                                            </ul>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><label class="custom-control custom-checkbox-md">
-                                                                <input type="checkbox" class="custom-control-input"
-                                                                    name="example-checkbox5" value="option5" checked="">
-                                                                <span class="custom-control-label"></span>
-                                                            </label></td>
-                                                        <td>100027</td>
-                                                        <td>
-                                                            <p style="font-weight: 600;color: #1A6AB2;" class="mb-1">
-                                                                Justin Septimus</p>
-                                                            <span style="color: #9B9B9B;">example@email.com</span>
-                                                        </td>
-                                                        <td>
-                                                            <p style="font-weight: bold;" class="mb-1">Pensgate St</p>
-                                                            <span style="color: #6E6893;">9430 Research Blvd. Ste 2-350
-                                                                Austin TX 78759</span>
-                                                        </td>
-                                                        <td>
-                                                            <p style="font-weight: bold;" class="mb-1">$170,000</p>
-                                                            <span style="color: #6E6893;">Next Due Date:
-                                                                November-12-2020</span>
-                                                        </td>
-                                                        <td>
-                                                            <p style="font-weight: bold;" class="mb-1">19 Unit (s)</p>
-                                                            <span style="color:#4A4AFF;">9 (Multi)</span> <span
-                                                                style="color:#F9B44D;">10 (Single)</span>
-                                                        </td>
-                                                        <td>
-                                                            <p style="font-weight: bold;" class="mb-1">October-12-2020
-                                                            </p>
-                                                            <span style="color: #1A6AB2;">50 Days Remaining</span>
-                                                        </td>
-                                                        <td><i class="fe fe-more-vertical"
-                                                                data-bs-toggle="dropdown"></i>
-
-                                                            <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item text-primary"
-                                                                        href="view-property.html">Edit</a></li>
-                                                                <li><a class="dropdown-item text-danger"
-                                                                        href="javascript:void(0)">Delete</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item text-success"
-                                                                        href="javascript:void(0)">View</a></li>
-                                                            </ul>
-                                                        </td>
-                                                    </tr>
+                                                    
                                                 </tbody>
                                             </table>
                                         </div>
@@ -2404,6 +2322,7 @@ background-color: white;
     <script>
         var selectedFiles = [];
         $(document).ready(function () {
+            // $("#succesModal").modal("show")
             let tenantID;
             $("#send-email").click(()=>{
                 $("#succesModal").modal("hide")
@@ -3010,7 +2929,63 @@ background-color: white;
                     }
                 }
             });
+            $('input[type="checkbox"]').change(function () {
+            var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
+            var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
+            console.log(columnIndex, isColumnVisible)
+            // Toggle the visibility of the corresponding column
+            $('table').find('tr').each(function () {
+                var column = $(this).find('th:nth-child(' + columnIndex + '), td:nth-child(' + columnIndex + ')');
+                isColumnVisible ? column.show() : column.hide();
+            });
+        });
+        function filterTable(selectedFilter) {
+            var tableBody = $('#table_body');
+            var rows = tableBody.find('tr');
 
+            if (selectedFilter === 'alphabets') {
+                rows.sort(function (a, b) {
+                    var textA = $(a).find('.tenantName').text().toLowerCase();
+                    var textB = $(b).find('.tenantName').text().toLowerCase();
+                    return textA.localeCompare(textB);
+                });
+            } else if (selectedFilter === 'ascending') {
+                rows.sort(function (a, b) {
+                    console.log(parseInt($(a).find('.rentAmount').text()))
+                    var idA = parseInt($(a).find('.rentAmount').text());
+                    var idB = parseInt($(b).find('.rentAmount').text());
+                    return idA - idB;
+                });
+            } else if (selectedFilter === 'descending') {
+                rows.sort(function (a, b) {
+                    var idA = parseInt($(a).find('.rentAmount').text());
+                    var idB = parseInt($(b).find('.rentAmount').text());
+                    return idB - idA;
+                });
+            }
+
+            tableBody.empty().append(rows);
+        }
+
+        // Filter functionality
+        $('#ascending').on('click', function () {
+            filterTable("ascending")
+        });
+        $('#descending').on('click', function () {
+            filterTable("descending")
+        });
+        $('#alphabets').on('click', function () {
+            // console.log(1)
+            filterTable("alphabets")
+        });
+
+            // Search functionality
+            $('#search_input').on('keyup', function () {
+                var searchValue = $(this).val().toLowerCase();
+                $('#table_body tr').filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+                });
+            });
             // on keyup / change flag: reset
             input.addEventListener('change', reset);
             input.addEventListener('keyup', reset);
@@ -3069,42 +3044,9 @@ background-color: white;
                 updateSelectedFilesContainer(); // Update the selected files container
             });
             let result;
-            // const Filter=((selectedFilter)=>{
-            //     if (selectedFilter === 'alphabets') {
-
-            //     } else if (selectedFilter === 'date') {
-            //         // Sort by date modified
-            //     } else if (selectedFilter === 'ascending') {
-            //         // Sort in ascending order
-            //     } else if (selectedFilter === 'descending') {
-            //         // Sort in descending order
-            //     } else if (selectedFilter === 'recent') {
-            //         // Sort by recently added
-            //     }
-
-            //     // Update the table based on the applied filter
-            //     updateTable();
+dateTable();
             // })
 
-            // Filter functionality
-            $('#ascending').on('click', function () {
-                getData("ascending")
-            });
-            $('#descending').on('click', function () {
-                getData("descending")
-            });
-            $('#alphabets').on('click', function () {
-                console.log(1)
-                getData("alphabets")
-            });
-            console.log($('#alphabets'))
-            // Search functionality
-            $('#search_input').on('keyup', function () {
-                var searchValue = $(this).val().toLowerCase();
-                $('#table_body tr').filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
-                });
-            });
 
             // Function to update the table based on filters
             function updateTable() {
@@ -3306,28 +3248,24 @@ background-color: white;
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function ({data,user}) {
-                    // console.log(response)
+                    console.log(data)
                     $("#user-name").text(user)
                     var tableBody = $('#table_body');
                     tableBody.empty();
                     // console.log(data[0])
                     let tenantNames=[]
                     data[0]?.forEach(function (tenant) {
-                        var checkbox = '<td><label class="custom-control custom-checkbox-md">' +
-                            '<input type="checkbox" class="custom-control-input" name="example-checkbox5" value="option5" checked="">' +
-                            '<span class="custom-control-label"></span>' +
-                            '</label></td>';
-                            if(tenant)
+
                         // var image = '<td><img src="../../../../spadeApi/uploads/' + tenant.images[0] + '" alt=""></td>';
                         // var image = '<td><img src="../../../../../../Desktop/spadeApi/uploads/image-1684250579662.png" alt="hhghghgh"></td>';
 
                         var tenantId = '<td class="tenant-id" style="font-weight: 600;">' + tenant.tenantID + '</td>';
                             // var tenantId = '<td class="tenant-id" style="font-weight: 600;">' + tenant
                             // .id + '</td>';
-                        var tenantName = '<td class="tenantName" style="font-weight: 600;">' +tenant.firstName + tenant.lastName  +'</td>';
-                        var propertyName = '<td class="tenant-id" style="font-weight: 600;">' + tenant.propertyName + `<br><small>${tenant.pAddress}</small>` + '</td>';
-                        var rentAmount= '<td class="tenant-id" style="font-weight: 600;">' + tenant.rentAmount + `<br><small>Next Due Date: November-12-2020</small>`+ '</td>';
-                        var assignUnit = '<td class="tenant-id" style="font-weight: 600;">' + tenant.unitNumber+ '</td>';
+                        var tenantName = '<td class="tenantName" style="font-weight: 600;">' +tenant.firstName + tenant.lastName +`<br><small>${tenant.tEmail}</small>`+ '</td>';
+                        var propertyName = '<td class="propertyName" style="font-weight: 600;">' + tenant.propertyName + `<br><small>${tenant.pAddress}</small>` + '</td>';
+                        var rentAmount= '<td class="rentAmount" style="font-weight: 600;">'+tenant.rentAmount +'<span> $</span>'+ `<br><small>Next Due Date: November-12-2020</small>`+ '</td>';
+                        var assignUnit = '<td class="assignUnit" style="font-weight: 600;">' + tenant.unitNumber+ `<br><small>${tenant.unitArea} Square/Feet</small>`+ '</td>';
                         var dropdownMenu =
                             '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
                             '<ul class="dropdown-menu">' +
@@ -3343,14 +3281,14 @@ background-color: white;
 
     // Convert milliseconds to days
     var daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-    var leaseEndDate = '<td class="tenant-id " style="font-weight: 600;">' + `${tenant.leaseEndDate?tenant.leaseEndDate:"N/A"}`+ `<small class=d-block "${daysLeft>10?'text-primary':'text-danger'}">`+ daysLeft+' day(s) remaining</small>' + '</td>';
+    var leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate?tenant.leaseEndDate:"N/A"}`+ `<small class=d-block "${daysLeft>10?'text-primary':'text-danger'}">`+ daysLeft+' day(s) remaining</small>' + '</td>';
 } else {
 
-    var leaseEndDate = '<td class="tenant-id " style="font-weight: 600;">' + `${tenant.leaseEndDate?tenant.leaseEndDate:"N/A"}` + '</td>';
+    var leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate?tenant.leaseEndDate:"N/A"}` + '</td>';
     
 }
 
-                        var row = '<tr>' + checkbox + tenantId + tenantName + propertyName + rentAmount +
+                        var row = '<tr>' + tenantId + tenantName + propertyName + rentAmount +
                             assignUnit + leaseEndDate + dropdownMenu + '</tr>';
 
                         // Append the row to the table body
