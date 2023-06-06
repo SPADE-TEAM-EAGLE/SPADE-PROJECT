@@ -7,6 +7,7 @@ const Path = require('path');
 const imageToDelete = require('./../middleware/deleteImage.js')
 const { serialize } = require('cookie');
 const {
+    selectQuery,
     insertInvoice,
     insertLineItems,
     insertInvoiceImage
@@ -29,9 +30,10 @@ exports.createInvoice = async (req, res) => {
         repeatTerms,
         terms,
         additionalNote,
-        lineItems
+        lineItems,
+        sendmails
  } = req.body;
-    // const { userId } = req.user;
+
     const { userId } = req.body;
     try {
         const currentDate = new Date();
@@ -39,7 +41,20 @@ exports.createInvoice = async (req, res) => {
       if (invoiceResult.affectedRows === 0) {
         res.status(400).send('Error occur in creating invoice');
       } else {
+        // select tenants 
         const invoiceID = invoiceResult[0].insertId;
+        const selectTenantsResult = await queryRunner(selectQuery('tenants', 'id'), [tenantID])
+        if (selectTenantsResult[0].length > 0) {
+            const tenantEmail = selectTenantsResult[0][0].email;
+            const companyName = selectTenantsResult[0][0].companyName;
+            const tenantName = selectTenantsResult[0][0].firstName + " "+ selectTenantsResult[0][0].lastName;
+            const random = "12345";
+            if(sendmails == "Yes"){
+                const mailSubject = invoiceID+" From "+ companyName;
+                sendMail(tenantEmail, mailSubject, random, tenantName)
+            }
+        }
+        // select tenants 
         if(lineItems){
         for (let i = 0; i < lineItems.length; i++) {
             const category = lineItems[i].category;
@@ -65,7 +80,7 @@ exports.createInvoice = async (req, res) => {
             }
           } //sss
         }  
-        
+
         res.status(200).json({
           message: " Invoice created successful"
         });
@@ -76,4 +91,6 @@ exports.createInvoice = async (req, res) => {
     }
   }
   //  ############################# Create Invoice END ############################################################
+  
+
   
