@@ -34,7 +34,8 @@ exports.createInvoice = async (req, res) => {
     // const { userId } = req.user;
     const { userId } = req.body;
     try {
-        const invoiceResult = await queryRunner(insertInvoice, [userId, tenantID, invoiceType, startDate, endDate, frequency, dueDays, repeatTerms, terms,additionalNote]);
+        const currentDate = new Date();
+        const invoiceResult = await queryRunner(insertInvoice, [userId, tenantID, invoiceType, startDate, endDate, frequency, dueDays, repeatTerms, terms,additionalNote,"Unpaid",currentDate]);
       if (invoiceResult.affectedRows === 0) {
         res.status(400).send('Error occur in creating invoice');
       } else {
