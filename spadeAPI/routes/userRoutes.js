@@ -47,6 +47,7 @@ router.post('/addAlternateEmailPhone' ,verifyToken, tenantController.addAlternat
 router.post('/tenantAttachFile',[verifyToken,upload], tenantController.tenantAttachFile);
 router.delete('/tenantAttachFileDelete' ,verifyToken, tenantController.tenantAttachFileDelete);
 router.delete('/tenantDelete', tenantController.tenantDelete);
+router.get('/getTenantsByID', tenantController.getTenantsByID);
 router.post('/createInvoice',upload, invoiceController.createInvoice);
 
 module.exports = router;

@@ -18,7 +18,8 @@ const {
   insertAlternateEmailData,
   insertAlternatePhoneData,
   insertTenantAttachFile,
-  updateUnitsTenant
+  updateUnitsTenant,
+  getTenantsById
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -554,3 +555,28 @@ const propertyUnitID = tenantResult[0][0].propertyUnitID;
   }
 }
 //  ############################# Delete Tenant End ############################################################
+
+
+//  ############################# Get tenant ByID Start ############################################################
+exports.getTenantsByID = async (req, res) => {
+  try {
+    const { id } = req.body;
+    const TenantsByIDResult = await queryRunner(getTenantsById,[id])
+    if (TenantsByIDResult.length > 0) {
+      const data = JSON.parse(JSON.stringify(TenantsByIDResult))
+      res.status(200).json({
+        data: data,
+        message: 'Tenants By ID'
+      })
+    } else {
+      res.status(400).json({
+        message: 'No data found'
+      })
+    }
+  } catch (error) {
+    res.send('Error Get Tenants By ID')
+    // console.log(req.body)
+    console.log(error)
+  }
+}
+//  ############################# Get tenant ByID End ############################################################
