@@ -42,6 +42,7 @@ router.get('/verifyMailCheck', tenantController.verifyMailCheck);
 router.get('/resetEmailTenant', tenantController.createResetEmailTenant);
 router.post('/verifyResetEmailCodeTenant', tenantController.verifyResetEmailCodeTenant);
 router.put('/updatePasswordTenant', tenantController.updatePasswordTenant);
+router.put('/resendCodeTenants', tenantController.resendCodeTenants);
 router.post('/addAlternateEmailPhone' ,verifyToken, tenantController.addAlternateEmailPhone);
 router.post('/tenantAttachFile',[verifyToken,upload], tenantController.tenantAttachFile);
 router.delete('/tenantAttachFileDelete' ,verifyToken, tenantController.tenantAttachFileDelete);

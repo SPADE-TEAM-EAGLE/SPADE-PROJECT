@@ -252,7 +252,39 @@ const config = process.env;
           
           
           
-          
+          //  ############################# resend Code ############################################################
+exports.resendCodeTenants = async (req, res) => {
+  const { id } = req.body
+  const mailSubject = 'Spade Reset Email'
+  const random = Math.floor(100000 + Math.random() * 900000)
+  try {
+    const selectResult = await queryRunner(selectQuery('tenants', 'id'), [id])
+    if (selectResult[0].length > 0) {
+      const userid = selectResult[0][0].id
+      const name =
+        selectResult[0][0].firstName + ' ' + selectResult[0][0].lastName
+      // console.log(selectResult[0][0])
+      sendMail(selectResult[0][0].email, mailSubject, random, name)
+      const now = new Date()
+      const formattedDate = now.toISOString().slice(0, 19).replace('T', ' ')
+      const updateResult = await queryRunner(addResetTokenTenants, [
+        random,
+        formattedDate,
+        userid
+      ])
+      if (updateResult[0].affectedRows === 0) {
+        res.status(400).send('Error')
+      } else {
+        res.status(200).json({ message: 'Sended' })
+      }
+    }
+  } catch (error) {
+    res.status(400).send('Error')
+    console.log(error)
+  }
+}
+//  ############################# resend Code ############################################################
+
           
           
           
