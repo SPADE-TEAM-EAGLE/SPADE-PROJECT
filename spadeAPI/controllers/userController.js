@@ -174,7 +174,7 @@ exports.createResetEmail = async (req, res) => {
       const userid = selectResult[0][0].id
       const name =
         selectResult[0][0].FirstName + ' ' + selectResult[0][0].LastName
-      sendMail(email, mailSubject, random, name)
+        sendMail.sendMail(email, mailSubject, random, name)
       const now = new Date()
       const formattedDate = now.toISOString().slice(0, 19).replace('T', ' ')
       const updateResult = await queryRunner(addResetToken, [
@@ -272,7 +272,7 @@ exports.resendCode = async (req, res) => {
       const name =
         selectResult[0][0].FirstName + ' ' + selectResult[0][0].LastName
       // console.log(selectResult[0][0])
-      sendMail(selectResult[0][0].Email, mailSubject, random, name)
+      sendMail.sendMail(selectResult[0][0].Email, mailSubject, random, name)
       const now = new Date()
       const formattedDate = now.toISOString().slice(0, 19).replace('T', ' ')
       const updateResult = await queryRunner(addResetToken, [

@@ -148,7 +148,7 @@ const config = process.env;
           
           const tenantsInsert = await queryRunner(UpdateTenants, [hashPassword, currentDate, tenantID]);
                 if (tenantsInsert[0].affectedRows > 0) {
-                  await sendMail(email, mailSubject, tenantPassword, name); 
+                  await sendMail.sendMail(email, mailSubject, tenantPassword, name); 
                   // console.log(tenantPassword);
                   res.status(200).json({
                     message: "Tenants Welcome email send Successful",
@@ -229,7 +229,7 @@ const config = process.env;
                 const name = selectResult[0][0].FirstName + " " + selectResult[0][0].LastName
                 // console.log(updateResult);
                 console.log(userid);
-                sendMail(email, mailSubject, random, name);
+                sendMail.sendMail(email, mailSubject, random, name);
                 const now = new Date();
                 const formattedDate = now.toISOString().slice(0, 19).replace('T', ' ');
                 const updateResult = await queryRunner(addResetTokenTenants, [random, formattedDate, userid]);
@@ -265,7 +265,7 @@ exports.resendCodeTenants = async (req, res) => {
       const name =
         selectResult[0][0].firstName + ' ' + selectResult[0][0].lastName
       // console.log(selectResult[0][0])
-      sendMail(selectResult[0][0].email, mailSubject, random, name)
+      sendMail.sendMail(selectResult[0][0].email, mailSubject, random, name)
       const now = new Date()
       const formattedDate = now.toISOString().slice(0, 19).replace('T', ' ')
       const updateResult = await queryRunner(addResetTokenTenants, [

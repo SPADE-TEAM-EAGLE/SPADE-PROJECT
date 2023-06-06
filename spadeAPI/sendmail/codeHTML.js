@@ -346,3 +346,29 @@ exports.welcomeHTML = (email, password, name )=>{
     </tbody></table>
     </body></html>`
 }
+
+
+exports.invoiceHTML = (tenantName, dueDays, invoiceID,landlordName)=>{
+  return `<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+  </head>
+  <body>
+      <h4>Dear <span style="  color: #1467B0; ">${tenantName},</span></h4>
+      <br>
+      <p>Please find attached your rent invoice with number <b>${invoiceID}</b>.
+           and Due Date: <b>${dueDays}</b> If you have any questions,
+            please let us know. </p>
+  
+            <p>Have a great day and thank you for your business<b>!</b></p>
+  
+            <p>Sincerely</p>
+            <h4>${landlordName}</h4>
+            <p>company Name</p>
+  </body>
+  </html>`
+}

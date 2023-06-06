@@ -46,12 +46,13 @@ exports.createInvoice = async (req, res) => {
         const selectTenantsResult = await queryRunner(selectQuery('tenants', 'id'), [tenantID])
         if (selectTenantsResult[0].length > 0) {
             const tenantEmail = selectTenantsResult[0][0].email;
-            const companyName = selectTenantsResult[0][0].companyName;
             const tenantName = selectTenantsResult[0][0].firstName + " "+ selectTenantsResult[0][0].lastName;
-            const random = "12345";
+
             if(sendmails == "Yes"){
-                const mailSubject = invoiceID+" From "+ companyName;
-                sendMail(tenantEmail, mailSubject, random, tenantName)
+                // const {userName} = req.user;
+                // const { userId } = req.user
+                const mailSubject = invoiceID+" From "+ frequency;
+                sendMail.invoiceSendMail(tenantName, tenantEmail, mailSubject, dueDays, invoiceID,frequency);
             }
         }
         // select tenants 
@@ -93,4 +94,3 @@ exports.createInvoice = async (req, res) => {
   //  ############################# Create Invoice END ############################################################
   
 
-  
