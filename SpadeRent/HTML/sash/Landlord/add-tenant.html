@@ -960,8 +960,8 @@ background-color: white;
                                         <div class="collapse" id="collapse2">
                                             <div class="card card-body">
                                                 <div class="text-justify" id="add-item-container">
-                                                    <div class="row row-multiple">
-                                                        <div class="col-md-5">
+                                                    <div class="row row-multiple mb-2 pb-3" style="background-color: #F4FAFF !important;">
+                                                        <div class="col-md-6">
                                                             <label for="inputEmail4" class="form-label">Date of Rent
                                                                 Change
                                                                 (Optional)</label>
@@ -982,9 +982,9 @@ background-color: white;
                                                             <span class="text-danger d-none">Rent amount is
                                                                 required!</span>
                                                         </div>
-                                                        <div class="col-md-2 text-center d-flex align-items-center">
-                                                            <button type="button" class="btn position-relative">
-                                                                <i class="fi fi-rs-trash text-danger del-btn fs-5"></i>
+                                                        <div class="col-md-1 text-center">
+                                                            <button type="button" class="btn position-relative p-0 d-flex">
+                                                                <i class="fi fi-rs-trash text-danger fs-5"></i>
                                                             </button>
                                                         </div>
                                                     </div>
@@ -2453,9 +2453,7 @@ background-color: white;
 
 
             $("#add-item").on("click", () => {
-                // console.log($("add-item-container"))
-
-                $("#add-item-container").append(`<div class="row row-multiple"><div class="col-md-5">
+                $("#add-item-container").append(`<div class="row row-multiple mb-2 pb-3" style="background-color: #F4FAFF !important;"><div class="col-md-5">
                                             <label for="inputEmail4" class="form-label">Date of Rent Change (Optional)</label>
                                             <input type="date" class="form-control input-date" id="inputEmail4" required>
                                           </div>
@@ -2469,14 +2467,7 @@ background-color: white;
                                                                 <i class="fi fi-rs-trash text-danger del-btn fs-5"></i>
                                                             </button>
                                         </div>`)
-            })
-            //         $(function() {
-            //     $('#sidebar-placeholder').load('./sidebar.html');
-            //   });
-            //   $(function() {
-            //     $('#navbar-placeholder').load('./header.html');
-            //   });
-            // Array to store the selected files
+            });
             $('#add-item-container').on('click', '.del-btn', function () {
                 var $row = $(this).closest('.row');
                 var $rowsContainer = $row.parent();

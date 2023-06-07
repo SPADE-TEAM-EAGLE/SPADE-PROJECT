@@ -59,7 +59,7 @@ const config = process.env;
               } = req.body
               // console.log(req.body,req.query)
               const {userId}=req.user
-              console.log(req.body)
+              // console.log(req.body)
               // console.log(userId)
               const tenantsCheck = await queryRunner(selectQuery("tenants", "email"), [email]);
               // console.log(tenantsCheck[0])
@@ -77,7 +77,7 @@ const config = process.env;
                 const tenantsInsert = await queryRunner(insertTenants, [userId, firstName, lastName, companyName, email, phoneNumber, address, city, state, zipcode, propertyID, propertyUnitID, rentAmount, gross_or_triple_lease, baseRent, tripleNet, leaseStartDate, leaseEndDate, increaseRent, hashPassword, currentDate]);
                 if (tenantsInsert[0].affectedRows > 0) {
                     // update property unit
-                    console.log(tenantsInsert[0].insertId)
+                    // console.log(tenantsInsert[0].insertId)
                     const status = "Occupied";
                     const propertyUnitsResult = await queryRunner(updatePropertyUnitsTenant, [ status, propertyUnitID, propertyID ]);
                     if (propertyUnitsResult[0].affectedRows > 0) {
@@ -137,7 +137,7 @@ const config = process.env;
           
                 exports.sendInvitationLink = async (req, res) => {
                   const { tenantID } = req.body;
-                  console.log(req)
+                  // console.log(req)
                   try {
                     const selectTenantResult = await queryRunner(selectQuery("tenants", "id"), [tenantID])
               if (selectTenantResult[0].length > 0) {
@@ -153,7 +153,7 @@ const config = process.env;
           
           const tenantsInsert = await queryRunner(UpdateTenants, [hashPassword, currentDate, tenantID]);
                 if (tenantsInsert[0].affectedRows > 0) {
-                  await sendMail(email, mailSubject, tenantPassword, name); 
+                  await sendMail.sendMail(email, mailSubject, tenantPassword, name); 
                   // console.log(tenantPassword);
                   res.status(200).json({
                     message: "Tenants Welcome email send Successful",
@@ -234,7 +234,7 @@ const config = process.env;
                 const name = selectResult[0][0].firstName + " " + selectResult[0][0].lastName
                 // console.log(updateResult);
                 console.log(userid);
-                sendMail(email, mailSubject, random, name);
+                sendMail.sendMail(email, mailSubject, random, name);
                 const now = new Date();
                 const formattedDate = now.toISOString().slice(0, 19).replace('T', ' ');
                 const updateResult = await queryRunner(addResetTokenTenants, [random, formattedDate, userid]);
@@ -270,7 +270,7 @@ exports.resendCodeTenants = async (req, res) => {
       const name =
         selectResult[0][0].firstName + ' ' + selectResult[0][0].lastName
       // console.log(selectResult[0][0])
-      sendMail(selectResult[0][0].email, mailSubject, random, name)
+      sendMail.sendMail(selectResult[0][0].email, mailSubject, random, name)
       const now = new Date()
       const formattedDate = now.toISOString().slice(0, 19).replace('T', ' ')
       const updateResult = await queryRunner(addResetTokenTenants, [
@@ -590,3 +590,5 @@ exports.getTenantsByID = async (req, res) => {
   }
 }
 //  ############################# Get tenant ByID End ############################################################
+
+ 
