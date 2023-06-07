@@ -561,6 +561,7 @@ const propertyUnitID = tenantResult[0][0].propertyUnitID;
 exports.getTenantsByID = async (req, res) => {
   try {
     const { id } = req.body;
+    console.log("object");
     const TenantsByIDResult = await queryRunner(getTenantsById,[id])
     if (TenantsByIDResult.length > 0) {
       const data = JSON.parse(JSON.stringify(TenantsByIDResult))
@@ -580,3 +581,5 @@ exports.getTenantsByID = async (req, res) => {
   }
 }
 //  ############################# Get tenant ByID End ############################################################
+
+ 
