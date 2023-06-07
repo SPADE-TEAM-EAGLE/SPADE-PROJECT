@@ -914,7 +914,7 @@
                                                 </div>
                                                 <div class="media-body">
                                                     <small class="text-white">Tenants</small>
-                                                    <h3 class="mb-0 text-white" style="font-weight: bold;">The Michael Scott Paper Company | Michael Scott</h3>
+                                                    <h3 class="mb-0 text-white company-name" style="font-weight: bold;">The Michael Scott Paper Company | Michael Scott</h3>
                                                 </div>
                                             </div>
                                             <div class="ms-auto">
@@ -945,16 +945,16 @@
                                     <div class="col-12">
                                         <ul class="nav1 br-7" style="bottom: 0;">
                                             <li class="nav-item1 p-0">
-                                                <a class="nav-link active p-2" href="view-tenant.html">Overview</a>
+                                                <a class="nav-link active p-2" href="view-tenant.html" id="viewOverview">Overview</a>
                                             </li>
                                             <li class="nav-item1 p-0">
-                                                <a class="nav-link p-2" href="tenant-properties.html">Properties</a>
+                                                <a class="nav-link p-2" href="tenant-properties.html" id="viewProperties">Properties</a>
                                             </li>
                                             <li class="nav-item1 p-0">
-                                                <a class="nav-link p-2" href="tenant-tasks.html">Tasks</a>
+                                                <a class="nav-link p-2" href="tenant-tasks.html" id="viewTasks">Tasks</a>
                                             </li>
                                             <li class="nav-item1 p-0">
-                                                <a class="nav-link p-2" href="tenant-file.html">Files</a>
+                                                <a class="nav-link p-2" href="tenant-file.html" id="viewFiles">Files</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -1003,6 +1003,7 @@
                                                 <div class="file-grid"></div>
                                             </div>
                                         </div>
+                                        <a class="btn btn-outline-default btn-pill button" id="submit-pics">Submit</a>
                                     </div>
                                 </div>
                             </div>
@@ -1692,7 +1693,42 @@
         // }
         let selectedFiles=[]
         $(document).ready(()=>{
-            console.log(1)
+            const tenantId = (new URL(document.location)).searchParams.get("tenantId");
+            // console.log($("#viewUnits").attr("href"))
+            //            
+
+            $("#viewProperties").attr("href", `./tenant-properties.html?tenantId=${tenantId}`)
+            $("#viewOverview").attr("href", `./view-tenant.html?tenantId=${tenantId}`)
+            $("#viewFiles").attr("href", `./tenant-file.html?tenantId=${tenantId}`)
+            $("#viewTasks").attr("href", `./tenant-tasks.html?tenantId=${tenantId}`)
+            console.log(propertyId)
+            $("#submit-pics").click(()=>{
+                var formData = new FormData();
+            formData.append('tenantID', tenantId);
+            var files = $('#fileInput')[0].files;
+            for (var i = 0; i < selectedFiles.length; i++) {
+                formData.append('image', selectedFiles[i]);
+            }
+            console.log(formData)
+                $.ajax({
+                url: 'http://localhost:3000/api/spade/tenantAttachFile',
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function({data}) {
+                    console.log(2)
+                    $(".company-name").text(`${data[0][0].companyName} | ${data[0][0].firstName+" "+data[0][0].lastName}`)
+                },
+                error: function(xhr, status, error) {
+                    window.alert('Error: ' + error);
+                }
+            });
+            })
+        
             $('#fileInput').on('change', function () {
                 console.log(1)
             var files = Array.from($(this)[0].files);

@@ -420,6 +420,7 @@ exports.tenantAttachFile = async (req, res) => {
   const {
     tenantID
   } = req.body;
+  // console.log(req.files)
   const { userId } = req.user
   try {
 
@@ -565,10 +566,14 @@ const propertyUnitID = tenantResult[0][0].propertyUnitID;
 //  ############################# Get tenant ByID Start ############################################################
 exports.getTenantsByID = async (req, res) => {
   try {
-    const { id } = req.body;
+    const { id } = req.query;
+    // console.log(req)
     const TenantsByIDResult = await queryRunner(getTenantsById,[id])
+    console.log(TenantsByIDResult)
+
     if (TenantsByIDResult.length > 0) {
       const data = JSON.parse(JSON.stringify(TenantsByIDResult))
+      // console.log(data)
       res.status(200).json({
         data: data,
         message: 'Tenants By ID'

@@ -912,7 +912,7 @@
                                                 </div>
                                                 <div class="media-body">
                                                     <small class="text-white">Tenants</small>
-                                                    <h3 class="mb-0 text-white" style="font-weight: bold;">The Michael Scott Paper Company | Michael Scott</h3>
+                                                    <h3 class="mb-0 text-white company-name" style="font-weight: bold;">The Michael Scott Paper Company | Michael Scott</h3>
                                                 </div>
                                             </div>
                                             <div class="ms-auto">
@@ -943,16 +943,16 @@
                                     <div class="col-12">
                                         <ul class="nav1 br-7" style="bottom: 0;">
                                             <li class="nav-item1 p-0">
-                                                <a class="nav-link active p-2" href="view-tenant.html">Overview</a>
+                                                <a class="nav-link active p-2" href="view-tenant.html" id="viewOverview">Overview</a>
                                             </li>
                                             <li class="nav-item1 p-0">
-                                                <a class="nav-link p-2" href="tenant-properties.html">Properties</a>
+                                                <a class="nav-link p-2" href="tenant-properties.html" id="viewProperties">Properties</a>
                                             </li>
                                             <li class="nav-item1 p-0">
-                                                <a class="nav-link p-2" href="tenant-tasks.html">Tasks</a>
+                                                <a class="nav-link p-2" href="tenant-tasks.html" id="viewTasks">Tasks</a>
                                             </li>
                                             <li class="nav-item1 p-0">
-                                                <a class="nav-link p-2" href="tenant-file.html">Files</a>
+                                                <a class="nav-link p-2" href="tenant-file.html" id="viewFiles">Files</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -1051,7 +1051,7 @@
                                     </div>
                                     <div class="card-body p-0">
                                         <div class="table-responsive">
-                                            <table class="table border text-nowrap text-md-nowrap mb-0">
+                                            <table class="table border text-nowrap text-md-nowrap mb-0" id="table-body">
                                                 <thead>
                                                     <tr>
                                                         <th><label class="custom-control custom-checkbox-md">
@@ -1788,7 +1788,64 @@
             logo.src = '../assets/header-img/question.svg';
         }
     </script>
+    <script>
+        $(document).ready(()=>{
+            const tenantId = (new URL(document.location)).searchParams.get("tenantId");
+            // console.log($("#viewUnits").attr("href"))
+            //            
 
+            $("#viewProperties").attr("href", `./tenant-properties.html?tenantId=${tenantId}`)
+            $("#viewOverview").attr("href", `./view-tenant.html?tenantId=${tenantId}`)
+            $("#viewFiles").attr("href", `./tenant-file.html?tenantId=${tenantId}`)
+            $("#viewTasks").attr("href", `./tenant-tasks.html?tenantId=${tenantId}`)
+            console.log(propertyId)
+            $.ajax({
+                url: 'http://localhost:3000/api/spade/getTenantsByID',
+                type: 'GET',
+                data: {
+                    id:tenantId
+                },
+                contentType: "application/json; charset=utf-8",
+                // processData: false,
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function({data}) {
+                    console.log(data[0])
+                    $(".company-name").text(`${data[0][0].companyName} | ${data[0][0].firstName+" "+data[0][0].lastName}`)
+                    $.each(data[0], function(index, item) {
+                var row = $('<tr>');
+                row.append('<td><label class="custom-control custom-checkbox-md"><input type="checkbox" class="custom-control-input" name="example-checkbox5" value="option5" checked=""><span class="custom-control-label"></span></label></td>');
+                row.append('<td><img src="../../../../spadeAPI/uploads/' + item.image + '" alt=""></td>');
+                row.append('<td>' + item.propertyId + '</td>');
+                row.append('<td>' + item.propertyName + '</td>');
+                row.append('<td><p style="font-weight: bold;" class="mb-1">' + item.rentAmount + '</p><span style="color: #6E6893;">Next Due Date: ' + "item.nextDueDate" + '</span></td>');
+                row.append('<td><a class="like" href="javascript:;"><span class="badge btn-light rounded-pill-Single-Family rounded-pill py-2 px-3"><i class="fe fe-circle me-1"></i>' + item.propertyType + '</span></a></td>');
+                row.append('<td>' + item.pUnits + ' Unit(s)</td>');
+                var currentDate = new Date();
+                            if (item.leaseEndDate) {
+    var targetDate = new Date(item.leaseEndDate);
+    var currentDate = new Date();
+
+    // Calculate the time difference in milliseconds
+    var timeDiff = targetDate.getTime() - currentDate.getTime();
+
+    // Convert milliseconds to days
+    var daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+                    row.append('<td><p style="font-weight: bold;" class="mb-1">' + item.leaseEndDate + '</p><span style="color: #1A6AB2;">' + daysLeft + ' Days Remaining</span></td>');
+}else{
+    row.append('<td><p style="font-weight: bold;" class="mb-1">' + "N/A" + '</p><span style="color: #1A6AB2;"></span></td>');
+
+}
+                $('#table_body').append(row);
+            });
+                },
+                error: function(xhr, status, error) {
+                    window.alert('Error: ' + error);
+                }
+            });
+        })
+    </script>
 </body>
 
 </html>

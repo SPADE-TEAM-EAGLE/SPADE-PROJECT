@@ -3271,7 +3271,7 @@ dateTable();
                             '<ul class="dropdown-menu">' +
                             '<li><a class="edit-option dropdown-item text-primary" href="javascript:void(0)">Edit</a></li>' +
                             '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>' +
-                            `<li><a class="dropdown-item text-success" href="./view-property.html?propertyId=${property.id}">View</a></li>` +
+                            `<li><a class="dropdown-item text-success" href="./view-tenant.html?tenantId=${tenant.tenantID}">View</a></li>` +
                             '</ul></td>';
                         var currentDate = new Date();
                             if (tenant.leaseEndDate) {
@@ -3297,7 +3297,7 @@ dateTable();
                     $("#global-loader").fadeOut("slow")
                     $('.edit-option').click(function (e) {
                         e.preventDefault();
-                        const propertyIdElement = $(this).closest("tr").find(".property-id");
+                        const propertyIdElement = $(this).closest("tr").find(".tenant-id");
 
                         propertyId = propertyIdElement.text();
 
