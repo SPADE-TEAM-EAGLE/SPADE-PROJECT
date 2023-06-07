@@ -10,7 +10,8 @@ const {
     selectQuery,
     insertInvoice,
     insertLineItems,
-    insertInvoiceImage
+    insertInvoiceImage,
+    updateInvoiceStatus
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -34,7 +35,7 @@ exports.createInvoice = async (req, res) => {
         sendmails
  } = req.body;
 
-    const { userId } = req.body;
+    const { userId } = req.user;
     try {
         const currentDate = new Date();
         const invoiceResult = await queryRunner(insertInvoice, [userId, tenantID, invoiceType, startDate, endDate, frequency, dueDays, repeatTerms, terms,additionalNote,"Unpaid",currentDate]);
@@ -94,3 +95,34 @@ exports.createInvoice = async (req, res) => {
   //  ############################# Create Invoice END ############################################################
   
 
+//  ############################# update Invoice Status Start ############################################################
+exports.putInvoiceStatusUpdates = async (req, res) => {
+    try {
+      const { id, status, note } = req.body
+    // const { userId } = req.user; 
+    const {userId} = req.body; 
+      const currentDate = new Date();
+      const invoiceUpdateStatusResult = await queryRunner(updateInvoiceStatus, [
+        status,
+        note,
+        currentDate,
+        id,
+        userId,
+      ])
+      if (invoiceUpdateStatusResult[0].affectedRows > 0) {
+        res.status(200).json({
+          data: invoiceUpdateStatusResult,
+          message: 'Invoice status updated successful'
+        })
+      } else {
+        res.status(400).json({
+          message: 'No data found'
+        })
+      }
+    } catch (error) {
+      console.log(error)
+      res.send('Error Invoice Status update')
+    }
+  }
+  //  ############################# update Invoice Status End ############################################################
+  
