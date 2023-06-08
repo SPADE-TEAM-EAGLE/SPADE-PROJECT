@@ -595,7 +595,7 @@
                     <button class="btn btn-dark button-left me-auto" data-bs-dismiss="modal" id='draft' disabled>Save as
                         Draft</button>
                     <button class="btn btn-transparent text-dark" style='background-color:#FFFFFF; border: 3px solid #1467B0;' data-bs-dismiss="modal" id='close'>Close</button>
-                    <button class="btn text-light" style='background-color:#1467B0;' id='next' disabled>Next</button>
+                    <!-- <button class="btn text-light" style='background-color:#1467B0;' id='next' disabled>Next</button> -->
                 </div>
             </div>
         </div>
@@ -956,7 +956,7 @@
                                         
                                         <div class="accordion-item" id="accordion-item1">
                                             <h2 class="accordion-header" id="headingOne">
-                                                <button class="accordion-button collapsed text-white" id="accordion-button1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                                <button class="accordion-button collapsed text-white" id="accordion-button1" type="button">
                                                     <span class="m-0 me-4 fs-1" style="font-weight: bold;">01</span>
                                                     <h3 class="m-0"><strong>Contact Info</strong> <i class="fi fi-rs-pencil"></i><i
                                                             class="fi fi-rs-angle-circle-down chevron icon"></i>
@@ -971,7 +971,7 @@
                                                                 <div class="form-group" >
                                                                     <label class="form-label"><strong>Phone</strong></label>
                                                                     <div class="row" id="add-item-containerPhone">
-                                                                        <div class="col-md-6">
+                                                                        <div class="col-md-6 mt-2">
                                                                             <select class="form-control form-select select2" data-bs-placeholder="Select" required>
                                                                                 <option label="Select">Country</option>
                                                                                 <option value="1">Germany</option>
@@ -980,7 +980,7 @@
                                                                                 <option value="4">Aus</option>
                                                                             </select>
                                                                         </div>
-                                                                        <div class="col-md-6">
+                                                                        <div class="col-md-6 mt-2">
                                                                             <input type="tel" class="form-control" placeholder="Phone Number" required>
                                                                         </div>
                                                                     </div>
@@ -997,15 +997,16 @@
                                                                 <div class="form-group" >
                                                                     <label class="form-label"><strong>Email</strong></label>
                                                                     <div class="row" id="add-item-containerEmail">
-                                                                        <div class="col-md-6">
+                                                                        <div class="col-md-6 mt-2">
                                                                             <select class="form-control form-select select2" data-bs-placeholder="Select" required>
-                                                                                <option value="1">Germany</option>
-                                                                                <option value="2">Canada</option>
-                                                                                <option value="3">Usa</option>
-                                                                                <option value="4">Aus</option>
+                                                                                <option>Choose...</option>
+                                                                                <option>Germany</option>
+                                                                                <option>Canada</option>
+                                                                                <option>Usa</option>
+                                                                                <option>Aus</option>
                                                                             </select>
                                                                         </div>
-                                                                        <div class="col-md-6">
+                                                                        <div class="col-md-6 mt-2">
                                                                             <input type="email" class="form-control" placeholder="Email" required>
                                                                         </div>
 
@@ -1052,7 +1053,7 @@
                                                             <span style="color: #727272;">No Contact Info on File</span>
                                                             <br>
                                                             <!-- <p>Past Work: Spruko, Inc.</p> -->
-                                                            <a href="javascript:void(0)" class="btn-link" style="font-weight: bold;" id="add-contactInfo">+ Add New</a>
+                                                            <a href="javascript:void(0)" class="btn-link add-contactInfo" style="font-weight: bold;" >+ Add New</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1077,7 +1078,7 @@
                                                             <span style="color: #727272;">No Emergency Contacts on File</span>
                                                             <br>
                                                             <!-- <p>Past Work: Spruko, Inc.</p> -->
-                                                            <a href="javascript:void(0)" class="btn-link" style="font-weight: bold;">+ Add New</a>
+                                                            <a href="javascript:void(0)" class="btn-link add-contactInfo" style="font-weight: bold;" >+ Add New</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1090,7 +1091,7 @@
                                 <div class="col-md-6">
                                     <div class="card inner-cards">
                                         <div class="card-header justify-content-start">
-                                            <h3 class="card-title font-wieght-bold" style="font-weight: bold;">Address</h3>
+                                            <h3 class="card-title font-wieght-bold" style="font-weight: bold;">Email</h3>
                                         </div>
                                         <div class="card-body">
                                             <div class="main-profile-contact-list">
@@ -1105,7 +1106,7 @@
                                                             <span style="color: #727272;">No Address Info on File</span>
                                                             <br>
                                                             <!-- <p>Past Work: Spruko, Inc.</p> -->
-                                                            <a href="javascript:void(0)" class="btn-link" style="font-weight: bold;">+ Add New</a>
+                                                            <a href="javascript:void(0)" class="btn-link add-contactInfo" style="font-weight: bold;" >+ Add New</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1131,7 +1132,7 @@
                                                             <span style="color: #727272;">Status: Inactive</span>
                                                             <br>
                                                             <!-- <p>Past Work: Spruko, Inc.</p> -->
-                                                            <a href="javascript:void(0)" class="btn-link" style="font-weight: bold;">+ Add New</a>
+                                                            <a href="javascript:void(0)" class="btn-link" style="font-weight: bold;" id="send-invite">+ Send Invite to Tenant Portal                                                            </a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1838,7 +1839,33 @@
             $("#viewOverview").attr("href", `./view-tenant.html?tenantId=${tenantId}`)
             $("#viewFiles").attr("href", `./tenant-file.html?tenantId=${tenantId}`)
             $("#viewTasks").attr("href", `./tenant-tasks.html?tenantId=${tenantId}`)
-            console.log(propertyId)
+            // console.log(propertyId)
+            $("#send-invite").click(()=>{
+                // $("#succesModal").modal("hide")
+                // console.log(tenantID)
+                $.ajax({
+                    url: 'http://localhost:3000/api/spade/sendInvitationLink',
+                    type: 'POST',
+                    data: JSON.stringify({
+                        tenantID:tenantId
+                    }),
+                    contentType: "application/json; charset=utf-8",
+                    processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                       getData()
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle the error response
+                        console.log(xhr)
+                        console.log(status)
+                        console.log(error)
+                        console.error('Error sending data:', error);
+                    }
+                });
+            })
             $.ajax({
                 url: 'http://localhost:3000/api/spade/getTenantsByID',
                 type: 'GET',
@@ -1858,7 +1885,7 @@
                     window.alert('Error: ' + error);
                 }
             });
-            $("#add-contactInfo").click(()=>{
+            $(".add-contactInfo").click(()=>{
                 $("#contactInfoModal").modal("show")
             })
             $("#add-item-phone").on("click", () => {
@@ -1876,7 +1903,7 @@
                                                                         </div>`)
             });
             $("#add-item-email").on("click", () => {
-                $("#add-item-containerEmail").append(`<div class="col-md-6">
+                $("#add-item-containerEmail").append(`<div class="col-md-6 mt-2">
                                                                             <select class="form-control form-select select2" data-bs-placeholder="Select" required>
                                                                                 <option label="Select">Country</option>
                                                                                 <option value="1">Germany</option>
@@ -1885,7 +1912,7 @@
                                                                                 <option value="4">Aus</option>
                                                                             </select>
                                                                         </div>
-                                                                        <div class="col-md-6">
+                                                                        <div class="col-md-6 mt-2">
                                                                             <input type="email" class="form-control" placeholder="Email" required>
                                                                         </div>`)
             });
@@ -1899,7 +1926,88 @@
                     //   alert('Cannot delete the last row.');
                 }
             });
+            $("#next").click(() => {
+    const formData = new FormData();
+    const phone = [];
+    const emailArray = [];
+    $("#add-item-containerPhone").each(function() {
+        const phoneName = $(this).find("select").val();
+        const phoneNumber = $(this).find("input[type='tel']").val();
+        // console.log(country,phoneNumber)
+
+        phone.push({
+            phoneName: phoneName,
+            phoneNumber: phoneNumber
         });
+    });
+
+    $("#add-item-containerEmail").each(function() {
+        const emailName = $(this).find("select").val();
+        const email = $(this).find("input[type='email']").val();
+        // console.log(country,email)
+
+        emailArray.push({
+            emailName: emailName,
+            email: email
+        });
+    });
+    // console.log(phone,emailArray)
+    formData.append("alternatePhone", JSON.stringify(phone));
+    formData.append("alternateEmail", JSON.stringify(emailArray));
+    formData.append("tenantID", tenantId);
+    console.log(formData)
+    $.ajax({
+        url: "http://localhost:3000/api/spade/addAlternateEmailPhone",
+        type: "POST",
+        data: JSON.stringify({
+    alternatePhone: phone,
+    alternateEmail: emailArray,
+    tenantID: tenantId
+}),
+contentType: "application/json",
+        // processData: false,
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+        },
+        success: function(response) {
+            console.log("Data sent successfully!");
+            // Handle the success response from the backend
+        },
+        error: function(xhr, status, error) {
+            console.error("Error sending data: " + error);
+            // Handle the error response from the backend
+        }
+    });
+});
+
+            })
+            function checkFields() {
+    let allFieldsFilled = true;
+
+    // Check the Phone fields
+    $('#add-item-containerPhone input[type="tel"]').each(function() {
+      if ($(this).val() === '' || $(this).val() === 'Choose...') {
+        allFieldsFilled = false;
+        return false; // Exit the loop early if any field is empty
+      }
+    });
+
+    // Check the Email fields
+    $('#add-item-containerEmail input[type="email"]').each(function() {
+      if ($(this).val() === '' || $(this).val() === 'Choose...') {
+        allFieldsFilled = false;
+        return false; // Exit the loop early if any field is empty
+      }
+    });
+
+    // Enable or disable the "Next" button based on the validation result
+    $('#next').prop('disabled', !allFieldsFilled);
+  }
+  $('#add-item-containerPhone').on('input', 'input[type="tel"], input[type="email"]', checkFields);
+  $('#add-item-containerEmail').on('input', 'input[type="tel"], input[type="email"]', checkFields);
+
+  // Bind the checkFields function to input events
+//   $('input[type="tel"], input[type="email"]').on('input', checkFields);
         // });
     </script>
 </body>

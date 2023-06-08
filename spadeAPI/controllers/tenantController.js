@@ -228,12 +228,12 @@ const config = process.env;
             const random = Math.floor(100000 + Math.random() * 900000)
             try {
               const selectResult = await queryRunner(selectQuery('tenants', "Email"), [email]);
-              console.log(selectResult[0])
+              // console.log(selectResult[0])
               if (selectResult[0].length > 0) {
                 const userid = selectResult[0][0].id;
                 const name = selectResult[0][0].firstName + " " + selectResult[0][0].lastName
                 // console.log(updateResult);
-                console.log(userid);
+                // console.log(userid);
                 sendMail.sendMail(email, mailSubject, random, name);
                 const now = new Date();
                 const formattedDate = now.toISOString().slice(0, 19).replace('T', ' ');
@@ -360,6 +360,7 @@ exports.resendCodeTenants = async (req, res) => {
           //  ############################# Add Alternate Email and Phone Start ############################################################
           exports.addAlternateEmailPhone = async (req, res) => {
             const { tenantID, alternatePhone, alternateEmail } = req.body;
+            console.log(tenantID, alternatePhone, alternateEmail)
           
             try {
                 let phoneExist = false;
@@ -367,7 +368,7 @@ exports.resendCodeTenants = async (req, res) => {
             //   if (alternatePhone && alternateEmail && alternatePhone.length > 0 && alternateEmail.length > 0) {
               const selectalternatePhoneResult = await queryRunner(selectQuery('tenantalternatephone', 'tenantID'), [tenantID]); 
               if(selectalternatePhoneResult[0].length > 0){
-                phoneExist = true;
+                phoneExist = false;
               }else{
                     for (let i = 0; i < alternatePhone.length; i++) {
                   const phoneName = alternatePhone[i].phoneName;

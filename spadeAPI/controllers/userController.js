@@ -493,7 +493,7 @@ exports.propertyDelete = async (req, res) => {
         selectQuery("propertyimage", "propertyID"),
         [id]
       );
-      console.log(propertycheckresult);
+      // console.log(propertycheckresult);
       if (propertycheckresult[0].length > 0) {
         propertyimages = propertycheckresult[0].map((image) => image.Image);
         // delete folder images
@@ -819,7 +819,7 @@ exports.getpropertyUnits = async (req, res) => {
     // console.log(propertyUnitsResult)
     if (propertyUnitsResult.length > 0) {
       // propertyUnitsResult.append(property[0][0])
-      console.log(property[0][0].propertyName);
+      // console.log(property[0][0].propertyName);
       res.status(200).json({
         data: propertyUnitsResult,
         propertyName: property[0][0]?.propertyName,
