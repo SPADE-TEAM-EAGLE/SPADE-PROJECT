@@ -11,7 +11,8 @@ const {
     insertInvoice,
     insertLineItems,
     insertInvoiceImage,
-    updateInvoiceStatus
+    updateInvoiceStatus,
+    getAllInvoicesquery
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -30,6 +31,7 @@ exports.createInvoice = async (req, res) => {
         dueDays,
         repeatTerms,
         terms,
+        totalAmount,
         additionalNote,
         lineItems,
         sendmails
@@ -38,7 +40,7 @@ exports.createInvoice = async (req, res) => {
     const { userId } = req.user;
     try {
         const currentDate = new Date();
-        const invoiceResult = await queryRunner(insertInvoice, [userId, tenantID, invoiceType, startDate, endDate, frequency, dueDays, repeatTerms, terms,additionalNote,"Unpaid",currentDate]);
+        const invoiceResult = await queryRunner(insertInvoice, [userId, tenantID, invoiceType, startDate, endDate, frequency, dueDays, repeatTerms, terms,totalAmount,additionalNote,"Unpaid",currentDate]);
       if (invoiceResult.affectedRows === 0) {
         res.status(400).send('Error occur in creating invoice');
       } else {
@@ -126,3 +128,77 @@ exports.putInvoiceStatusUpdates = async (req, res) => {
   }
   //  ############################# update Invoice Status End ############################################################
   
+
+
+
+  //  ############################# update Invoice Status Start ############################################################
+exports.putInvoiceStatusUpdates = async (req, res) => {
+    try {
+      const { id, status, note } = req.body
+    const { userId } = req.user; 
+    // const {userId} = req.body; 
+      const currentDate = new Date();
+      const invoiceUpdateStatusResult = await queryRunner(updateInvoiceStatus, [
+        status,
+        note,
+        currentDate,
+        id,
+        userId,
+      ])
+      if (invoiceUpdateStatusResult[0].affectedRows > 0) {
+        res.status(200).json({
+          data: invoiceUpdateStatusResult,
+          message: 'Invoice status updated successful'
+        })
+      } else {
+        res.status(400).json({
+          message: 'No data found'
+        })
+      }
+    } catch (error) {
+      console.log(error)
+      res.send('Error Invoice Status update')
+    }
+  }
+  //  ############################# update Invoice  End ############################################################
+
+
+
+    //  ############################# View All Invoices Start ############################################################
+exports.getAllInvoices = async (req, res) => {
+    try {
+    // const { userId } = req.user; 
+    const {userId} = req.body; 
+      const getAllInvoicesResult = await queryRunner(getAllInvoicesquery, [userId]);
+      if (getAllInvoicesResult[0].length > 0) {
+        for (let i = 0; i < getAllInvoicesResult[0].length; i++){
+            const invoiceID = getAllInvoicesResult[0][i].invoiceID;
+            const invoicelineitemsResult = await queryRunner(selectQuery("invoicelineitems", "invoiceID"), [invoiceID]);
+            if (invoicelineitemsResult[0].length > 0) {
+                const memo = invoicelineitemsResult[0].map((desc)=> desc.memo )
+                getAllInvoicesResult[0][i].memo = memo
+
+
+            } else {
+                getAllInvoicesResult[0][i].memo = ["No memo"]
+            }
+
+        }
+
+        
+        res.status(200).json({
+          data: getAllInvoicesResult,
+          message: 'All Invoice successful'
+        })
+      } else {
+        res.status(400).json({
+          message: 'No data found'
+        })
+      }
+    } catch (error) {
+      console.log(error)
+      res.send('All Invoice ')
+    }
+  }
+  //  ############################# View All Invoice  End ############################################################
+

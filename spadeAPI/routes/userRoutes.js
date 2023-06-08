@@ -50,6 +50,7 @@ router.delete('/tenantDelete', tenantController.tenantDelete);
 router.get('/getTenantsByID', tenantController.getTenantsByID);
 router.post('/createInvoice',upload, invoiceController.createInvoice);
 router.put('/putInvoiceStatusUpdates', invoiceController.putInvoiceStatusUpdates);
+router.get('/getAllInvoices', invoiceController.getAllInvoices);
 
 module.exports = router;
 

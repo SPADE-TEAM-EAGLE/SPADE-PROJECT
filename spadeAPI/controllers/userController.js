@@ -599,10 +599,7 @@ exports.propertyUpdate = async (req, res) => {
           const propertyImageResult = await queryRunner(insertInPropertyImage, [
             id,
             img
-          ])
-          console.log(
-            `step : 5 inserted new image data into database insertId = ${id}`
-          )
+          ]) 
           if (propertyImageResult.affectedRows === 0) {
             return res.send('Error2')
           }
