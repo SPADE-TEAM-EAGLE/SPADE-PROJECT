@@ -384,9 +384,9 @@
             .modal-footer .button-left {
                 margin: auto;
             }
-            .modal-footer button {
+            /* .modal-footer button {
                 width: 231px;
-            }
+            } */
             .border-model-line h2 {
                 font-size: 1.6rem;
             }
@@ -428,9 +428,9 @@
         }
         
         @media (max-width:320px) {
-            .modal-footer button {
+            /* .modal-footer button {
                 width: 231px;
-            }
+            } */
         }
         
         @media (max-width: 767px) {
@@ -1054,7 +1054,7 @@
                                             <table class="table border text-nowrap text-md-nowrap mb-0" id="table-body">
                                                 <thead>
                                                     <tr>
-     
+
                                                         <th>IMAGE</th>
                                                         <th>PROPERTY ID</th>
                                                         <th>PROPERTY NAME</th>
@@ -1066,7 +1066,7 @@
                                                 </thead>
                                                 <tbody id="table_body">
 
-                                                   
+
                                                 </tbody>
                                             </table>
                                         </div>
@@ -1759,7 +1759,7 @@
         }
     </script>
     <script>
-        $(document).ready(()=>{
+        $(document).ready(() => {
             const tenantId = (new URL(document.location)).searchParams.get("tenantId");
             // console.log($("#viewUnits").attr("href"))
             //            
@@ -1773,42 +1773,44 @@
                 url: 'http://localhost:3000/api/spade/getTenantsByID',
                 type: 'GET',
                 data: {
-                    id:tenantId
+                    id: tenantId
                 },
                 contentType: "application/json; charset=utf-8",
                 // processData: false,
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function({data}) {
+                success: function({
+                    data
+                }) {
                     console.log(data[0])
                     $(".company-name").text(`${data[0][0].companyName} | ${data[0][0].firstName+" "+data[0][0].lastName}`)
                     $.each(data[0], function(index, item) {
-                var row = $('<tr>');
-                // row.append('<td><label class="custom-control custom-checkbox-md"><input type="checkbox" class="custom-control-input" name="example-checkbox5" value="option5" checked=""><span class="custom-control-label"></span></label></td>');
-                row.append('<td><img src="../../../../spadeAPI/uploads/' + item.image + '" alt=""></td>');
-                row.append('<td>' + item.propertyId + '</td>');
-                row.append('<td>' + item.propertyName + '</td>');
-                row.append('<td><p style="font-weight: bold;" class="mb-1">' + item.rentAmount + '</p><span style="color: #6E6893;">Next Due Date: ' + "item.nextDueDate" + '</span></td>');
-                row.append('<td><a class="like" href="javascript:;"><span class="badge btn-light rounded-pill-Single-Family rounded-pill py-2 px-3"><i class="fe fe-circle me-1"></i>' + item.propertyType + '</span></a></td>');
-                row.append('<td>' + item.pUnits + ' Unit(s)</td>');
-                var currentDate = new Date();
-                            if (item.leaseEndDate) {
-    var targetDate = new Date(item.leaseEndDate);
-    var currentDate = new Date();
+                        var row = $('<tr>');
+                        // row.append('<td><label class="custom-control custom-checkbox-md"><input type="checkbox" class="custom-control-input" name="example-checkbox5" value="option5" checked=""><span class="custom-control-label"></span></label></td>');
+                        row.append('<td><img src="../../../../spadeAPI/uploads/' + item.image + '" alt=""></td>');
+                        row.append('<td>' + item.propertyId + '</td>');
+                        row.append('<td>' + item.propertyName + '</td>');
+                        row.append('<td><p style="font-weight: bold;" class="mb-1">' + item.rentAmount + '</p><span style="color: #6E6893;">Next Due Date: ' + "item.nextDueDate" + '</span></td>');
+                        row.append('<td><a class="like" href="javascript:;"><span class="badge btn-light rounded-pill-Single-Family rounded-pill py-2 px-3"><i class="fe fe-circle me-1"></i>' + item.propertyType + '</span></a></td>');
+                        row.append('<td>' + item.pUnits + ' Unit(s)</td>');
+                        var currentDate = new Date();
+                        if (item.leaseEndDate) {
+                            var targetDate = new Date(item.leaseEndDate);
+                            var currentDate = new Date();
 
-    // Calculate the time difference in milliseconds
-    var timeDiff = targetDate.getTime() - currentDate.getTime();
+                            // Calculate the time difference in milliseconds
+                            var timeDiff = targetDate.getTime() - currentDate.getTime();
 
-    // Convert milliseconds to days
-    var daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-                    row.append('<td><p style="font-weight: bold;" class="mb-1">' + item.leaseEndDate + '</p><span style="color: #1A6AB2;">' + daysLeft + ' Days Remaining</span></td>');
-}else{
-    row.append('<td><p style="font-weight: bold;" class="mb-1">' + "N/A" + '</p><span style="color: #1A6AB2;"></span></td>');
+                            // Convert milliseconds to days
+                            var daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+                            row.append('<td><p style="font-weight: bold;" class="mb-1">' + item.leaseEndDate + '</p><span style="color: #1A6AB2;">' + daysLeft + ' Days Remaining</span></td>');
+                        } else {
+                            row.append('<td><p style="font-weight: bold;" class="mb-1">' + "N/A" + '</p><span style="color: #1A6AB2;"></span></td>');
 
-}
-                $('#table_body').append(row);
-            });
+                        }
+                        $('#table_body').append(row);
+                    });
                 },
                 error: function(xhr, status, error) {
                     window.alert('Error: ' + error);

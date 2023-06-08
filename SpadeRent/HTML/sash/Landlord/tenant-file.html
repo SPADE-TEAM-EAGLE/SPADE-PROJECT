@@ -291,13 +291,13 @@
         
         .delete-file {
             .delete-file {
-    position: absolute;
-    top: -9px;
-    right: -4px;
-    cursor: pointer;
-    font-size: 13px;
-    color: #000;
-}
+                position: absolute;
+                top: -9px;
+                right: -4px;
+                cursor: pointer;
+                font-size: 13px;
+                color: #000;
+            }
         }
         
         .btn-group>.btn-group:not(:last-child)>.btn,
@@ -327,7 +327,6 @@
             color: #333;
             /* border-radius: 4px; */
         }
-        
         /* .delete-file {
             position: absolute;
             top: 0px;
@@ -337,6 +336,7 @@
             color: #000;
         }
          */
+        
         button.btn-close {
             right: -7px;
         }
@@ -386,9 +386,9 @@
             .modal-footer .button-left {
                 margin: auto;
             }
-            .modal-footer button {
+            /* .modal-footer button {
                 width: 231px;
-            }
+            } */
             .border-model-line h2 {
                 font-size: 1.6rem;
             }
@@ -430,9 +430,9 @@
         }
         
         @media (max-width:320px) {
-            .modal-footer button {
+            /* .modal-footer button {
                 width: 231px;
-            }
+            } */
         }
         
         @media (max-width: 767px) {
@@ -1732,8 +1732,8 @@
         // } else {
         //     logo.src = '../assets/header-img/question.svg';
         // }
-        let selectedFiles=[]
-        $(document).ready(()=>{
+        let selectedFiles = []
+        $(document).ready(() => {
             const tenantId = (new URL(document.location)).searchParams.get("tenantId");
             // console.log($("#viewUnits").attr("href"))
             //            
@@ -1743,74 +1743,77 @@
             $("#viewFiles").attr("href", `./tenant-file.html?tenantId=${tenantId}`)
             $("#viewTasks").attr("href", `./tenant-tasks.html?tenantId=${tenantId}`)
             console.log(propertyId)
-            $("#submit-pics").click(()=>{
+            $("#submit-pics").click(() => {
                 var formData = new FormData();
-            formData.append('tenantID', tenantId);
-            var files = $('#fileInput')[0].files;
-            for (var i = 0; i < selectedFiles.length; i++) {
-                formData.append('image', selectedFiles[i]);
-            }
-            console.log(formData)
-                $.ajax({
-                url: 'http://localhost:3000/api/spade/tenantAttachFile',
-                type: 'POST',
-                data: formData,
-                contentType: false,
-                processData: false,
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                },
-                success: function({data}) {
-                    console.log(2)
-                    $(".company-name").text(`${data[0][0].companyName} | ${data[0][0].firstName+" "+data[0][0].lastName}`)
-                },
-                error: function(xhr, status, error) {
-                    window.alert('Error: ' + error);
+                formData.append('tenantID', tenantId);
+                var files = $('#fileInput')[0].files;
+                for (var i = 0; i < selectedFiles.length; i++) {
+                    formData.append('image', selectedFiles[i]);
                 }
-            });
+                console.log(formData)
+                $.ajax({
+                    url: 'http://localhost:3000/api/spade/tenantAttachFile',
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function({
+                        data
+                    }) {
+                        console.log(2)
+                        $(".company-name").text(`${data[0][0].companyName} | ${data[0][0].firstName+" "+data[0][0].lastName}`)
+                    },
+                    error: function(xhr, status, error) {
+                        window.alert('Error: ' + error);
+                    }
+                });
             })
-        
-            $('#fileInput').on('change', function () {
+
+            $('#fileInput').on('change', function() {
                 console.log(1)
-            var files = Array.from($(this)[0].files);
-            // console.log(files)
-            files.forEach(function (file) {
-                selectedFiles.push(file); // Add each file to the selected files array
+                var files = Array.from($(this)[0].files);
+                // console.log(files)
+                files.forEach(function(file) {
+                    selectedFiles.push(file); // Add each file to the selected files array
+                });
+
+                updateSelectedFilesContainer(); // Update the selected files container
             });
 
-            updateSelectedFilesContainer(); // Update the selected files container
-        });
-
-        $(document).on('click', '.delete-file', function () {
-            var index = $(this).data('index');
-            selectedFiles.splice(index, 1); // Remove the selected file from the array
-            updateSelectedFilesContainer(); // Update the selected files container
-        });
+            $(document).on('click', '.delete-file', function() {
+                var index = $(this).data('index');
+                selectedFiles.splice(index, 1); // Remove the selected file from the array
+                updateSelectedFilesContainer(); // Update the selected files container
+            });
         })
+
         function updateSelectedFilesContainer() {
             var selectedFilesContainer = $('.file-grid');
             selectedFilesContainer.empty();
             console.log(selectedFiles)
-            selectedFiles.forEach(function (file, index) {
+            selectedFiles.forEach(function(file, index) {
 
                 var fileElement = $('<div>')
                     .addClass('selected-file')
                     .append(
                         $('<img>')
-                            .addClass('file-preview')
-                            .attr('src', typeof file === "object" ? URL.createObjectURL(file) : '../../../../spadeAPI/uploads/' + file)
+                        .addClass('file-preview')
+                        .attr('src', typeof file === "object" ? URL.createObjectURL(file) : '../../../../spadeAPI/uploads/' + file)
                     )
                     .append(
                         $('<div>')
-                            .addClass('file-details')
-                            .append($('<span>').text("Image-" + (index + 1)))
+                        .addClass('file-details')
+                        .append($('<span>').text("Image-" + (index + 1)))
                         // .append($('<span>').text(fileSize))
                     )
                     .append(
                         $('<p>')
-                            .addClass('delete-file')
-                            .text('X')
-                            .attr('data-index', index)
+                        .addClass('delete-file')
+                        .text('X')
+                        .attr('data-index', index)
                     )
                     .appendTo(selectedFilesContainer);
 

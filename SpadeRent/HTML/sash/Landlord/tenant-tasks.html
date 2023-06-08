@@ -384,9 +384,9 @@
             .modal-footer .button-left {
                 margin: auto;
             }
-            .modal-footer button {
+            /* .modal-footer button {
                 width: 231px;
-            }
+            } */
             .border-model-line h2 {
                 font-size: 1.6rem;
             }
@@ -428,9 +428,9 @@
         }
         
         @media (max-width:320px) {
-            .modal-footer button {
+            /* .modal-footer button {
                 width: 231px;
-            }
+            } */
         }
         
         @media (max-width: 767px) {
@@ -1827,14 +1827,16 @@
                 url: 'http://localhost:3000/api/spade/getTenantsByID',
                 type: 'GET',
                 data: {
-                    id:tenantId
+                    id: tenantId
                 },
                 contentType: "application/json; charset=utf-8",
                 // processData: false,
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function({data}) {
+                success: function({
+                    data
+                }) {
                     $(".company-name").text(`${data[0][0].companyName} | ${data[0][0].firstName+" "+data[0][0].lastName}`)
                 },
                 error: function(xhr, status, error) {

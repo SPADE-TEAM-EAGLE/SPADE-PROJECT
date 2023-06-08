@@ -16,7 +16,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="../assets/images/brand/favicon.ico" />
 
     <!-- TITLE -->
-    <title>New Property - SpadeRent</title>
+    <title>Property Tenant - SpadeRent</title>
 
     <!-- BOOTSTRAP CSS -->
     <link id="style" href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -36,6 +36,26 @@
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
         .custom-file-input::-webkit-file-upload-button {
             visibility: hidden;
+        }
+        
+        #propertyTable {
+            padding: 0;
+        }
+        
+        #propertyTable_wrapper .dataTables_wrapper {
+            padding: 0;
+        }
+        
+        #propertyTable_wrapper .dataTables_scroll {
+            padding: 0;
+        }
+        
+        #propertyTable_wrapper .dataTables_scrollHead {
+            padding: 0;
+        }
+        
+        #propertyTable_wrapper .dataTables_scrollBody {
+            padding: 0;
         }
         
         .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar {
@@ -72,57 +92,6 @@
             background: #0069d9;
         }
         
-        .dark-mode .btn-close {
-            color: white;
-        }
-        
-        .dark-mode .selected-files span {
-            display: inline-block;
-            margin-right: 0;
-            padding: 4px 8px;
-            background: transparent;
-            color: white;
-            border-radius: 4px;
-        }
-        
-        .dark-mode .custom-file-label {
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 6px 12px;
-            background-color: transparent;
-        }
-        
-        .modal-footer .button-left {
-            background-color: #1F1F1F;
-            margin: 0rem 1rem;
-            color: white;
-        }
-        
-        .modal-footer .button {
-            font-size: 0.938rem;
-        }
-        
-        button.btn-close {
-            right: 6px;
-        }
-        
-        .btn-close {
-            width: 1.8rem;
-            opacity: 1;
-            position: absolute;
-            top: 6px;
-        }
-        
-        .btn-close:hover,
-        .btn-close:focus {
-            color: #000;
-            text-decoration: none;
-            opacity: 1;
-        }
-        
         .custom-file-input:active::before {
             background: #0062cc;
         }
@@ -132,8 +101,34 @@
             background: #28a745;
         }
         
+        .dark-mode .create-new-link {
+            background: transparent !important;
+            border: 3px solid #1467B0 !important;
+            color: white !important;
+            border-radius: 50px !important;
+        }
+        /* .dark-mode .create-new-link:hover {
+    border: 3px solid #1467B0 !important;
+} */
+        
+        .create-new-link {
+            background: transparent !important;
+            border: 3px solid #1467B0 !important;
+            color: black;
+            border-radius: 50px !important;
+        }
+        
         .selected-files {
             margin-top: 10px;
+        }
+        
+        .dark-mode .selected-files span {
+            display: inline-block;
+            margin-right: 0;
+            padding: 4px 8px;
+            background: transparent;
+            color: white !important;
+            border-radius: 4px;
         }
         
         .selected-files span {
@@ -157,6 +152,16 @@
             justify-content: center;
             padding: 6px 12px;
             background-color: #fff;
+        }
+        
+        .dark-mode .custom-file-label {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 12px;
+            background-color: transparent;
         }
         
         .custom-file-label i {
@@ -186,12 +191,16 @@
             vertical-align: top;
             border: 1px solid #e9edf4;
         }
-        /* /* input:focus {
-            border: 3px solid #555 !important;
-        } */
+        /* input:focus {
+    border: 3px solid #555 !important;
+} */
         
-        */ .panel-body {
+        .panel-body {
             padding: 0px;
+        }
+        
+        .dark-mode .btn-close {
+            color: white;
         }
         
         .accordion-item:first-of-type {
@@ -251,8 +260,8 @@
             vertical-align: middle !important;
         }
         /* .card-header {
-        padding: 0.5rem 1rem;
-    } */
+padding: 0.5rem 1rem;
+} */
         
         .modal-footer .button-left {
             background-color: #1F1F1F;
@@ -275,17 +284,14 @@
             /* font-size: 0.938rem; */
         }
         
-        .modal-footer button {
-            border-radius: 2.75rem;
-            padding: 4px 30px;
-            font-family: 'Figtree';
-            font-style: normal;
-            font-weight: 600;
+        .disabled {
+            pointer-events: none;
+            cursor: not-allowed;
+            color: gray;
+        }
+        
+        .modal-footer .button {
             font-size: 0.938rem;
-            line-height: 1.875rem;
-            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
-            /* identical to box height, or 120% */
-            letter-spacing: 0.0145455em;
         }
         
         .accordion-button::after {
@@ -302,7 +308,7 @@
         }
         
         .tick {
-            color: green;
+            color: #1DBC5F;
             font-weight: bolder
         }
         
@@ -361,14 +367,15 @@
         .file-details {
             padding: 10px;
         }
-        /* .delete-file {
+        
+        .delete-file {
             position: absolute;
-            top: 5px;
-            right: 5px;
+            top: -1px;
+            right: 4px;
             cursor: pointer;
-            font-size: 18px;
-            color: #ff0000;
-        } */
+            font-size: 11px;
+            color: #000;
+        }
         
         .btn-group>.btn-group:not(:last-child)>.btn,
         .btn-group>.btn:not(:last-child):not(.dropdown-toggle) {
@@ -388,38 +395,28 @@
             border-top-right-radius: calc(0.5rem - 1px);
             border-top-left-radius: calc(0.5rem - 1px);
         }
+        /* .delete-file {
+position: absolute;
+top: 0px;
+right: 5px;
+cursor: pointer;
+font-size: 13px;
+color: #000;
+} */
         
-        .selected-files span {
-            display: inline-block;
-            margin-right: 0px;
-            padding: 0px;
-            background: none;
-            color: #333;
-            /* border-radius: 4px; */
-        }
-        
-        .delete-file {
-            position: absolute;
-            top: -9px;
-            right: -4px;
-            font-weight: bolder;
-            cursor: pointer;
-            font-size: 13px;
-            color: #000000;
-        }
-        
-        .dark-mode .delete-file {
-            color: #ffffff;
-        }
-        /* button.btn-close {
-            right: -7px;
+        button.btn-close {
+            right: 6px;
         }
         
         .btn-close {
-            width: 2.5rem !important;
+            width: 1.8rem;
             opacity: 1;
             position: absolute;
-            top: -11px;
+            top: 6px;
+        }
+        
+        .del {
+            width: 2rem !important;
         }
         
         .btn-close:hover,
@@ -427,7 +424,7 @@
             color: #000;
             text-decoration: none;
             opacity: 1;
-        } */
+        }
         
         @media (max-width:992px) {
             .modal-footer button {
@@ -501,13 +498,15 @@
             .border-model-line h2 {
                 font-size: 1.4rem;
             }
+            .succes-modal {
+                padding: 1rem 1rem;
+            }
         }
         
         @media (max-width:320px) {
             /* /* .modal-footer button {
                 width: 231px;
             } */
-            
         }
         
         @media (max-width: 767px) {
@@ -544,6 +543,9 @@
 <body class="app sidebar-mini ltr light-mode">
 
     <!-- GLOBAL-LOADER -->
+    <!-- <div id="global-loader">
+        <img src="../assets/images/loader.svg" class="loader-img" alt="Loader">
+    </div> -->
     <div id="preloader" class="tlp-preloader">
         <div class="animation-preloader">
             <div class="tlp-spinner"></div>
@@ -551,27 +553,28 @@
         </div>
     </div>
     <!-- /GLOBAL-LOADER -->
-    <!-- Modal -->
-
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <div class="text-justify ps-2 border-model-line">
-                        <h2 class="modal-title">Create <strong class="color-primary">New Property</strong></h2>
-                        <span class="">Spade Rent allows you to add a range of commercial and residential properties,
-                            from condos and single-family homes to retail stores and parking lots.</span>
+                    <div class="text-justify ps-2 border-model-line title-text">
+                        <h2 class="modal-title">Create <strong class="color-primary" id="title-sub">New Tenant</strong>
+                        </h2>
+                        <span class="">Post your properties to thousands of potential investors,
+                            tenants and interested individuals.</span>
                     </div>
-                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="top-close">
+                    <button type="button" class="btn btn-primary me-4 mt-3 d-none" id="edit-btn"><i
+                            class="fi fi-rs-pencil" style="display:block"></i><small>Edit Details</small></button>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="accordion-item mb-4" id="accordion-item1">
                         <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button text-white" id="accordian-button-1" type="button" data-bs-toggle="collapse" onclick="checkFieldsFilled('accordion-item1')" id="accordion-button1" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <button class="accordion-button text-white" type="button" id="accordion-button1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                 <span class="m-0 me-4 fs-1" style="font-weight: bold;">01</span>
-                                <h3 class="m-0"><strong>Property Information</strong> <i class="fi fi-rs-pencil"></i><i
+                                <h3 class="m-0"><strong>Tenant Information</strong> <i class="fi fi-rs-pencil"></i><i
                                         class="fi fi-rs-angle-circle-down chevron icon"></i>
                                 </h3>
                             </button>
@@ -579,109 +582,260 @@
                         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
                                 <form class="row g-3" enctype="multipart/form-data">
-                                    <div class="col-md-12">
-                                        <label class="form-label fw-bold">Property Photo</label>
-                                        <div class="custom-file" style="border: 1px dashed #00000087;">
-                                            <input id="fileInput" type="file" name="image" class="custom-file-input form" accept=".jpg, .png, image/jpeg, image/png" aria-label="hello" multiple>
-                                            <span className="d-none"></span>
-                                            <label class="custom-file-label" for="fileInput">
-                                                <i class="fi fi-rs-cloud-upload"></i>
-                                                <div class="custom-file-text">
-                                                    <span>Upload Photo or drag and drop here</span>
-                                                    <span>JPEG and PNG, file size no more than 10MB</span>
-                                                </div>
-                                            </label>
-                                        </div>
-                                        <div class="selected-files">
-                                            <div class="file-grid"></div>
-                                        </div>
-                                        <span class="text-danger d-none">Photos are required!</span>
+                                    <div class="col-md-6">
+                                        <label for="inputEmail4" class="form-label fw-bold">First Name<spnan
+                                                class="text-danger"> *</span></label>
+                                        <input type="text" class="form-control form" placeholder="Enter First Name" id="firstName" required>
+                                        <span class="text-danger d-none">First name is required!</span>
                                     </div>
                                     <div class="col-md-6">
-                                        <label for="inputEmail4" class="form-label fw-bold">Property ID</label>
-                                        <input type="text" class="form-control form" id="propertyId">
-                                        <span class="text-danger d-none">Property ID is required!</span>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="inputPassword4" class="form-label fw-bold">Property Name <spnan
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="propertyName">
-                                        <span class="text-danger d-none">Property name required!</span>
-                                    </div>
-                                    <div class="col-12">
-                                        <label for="inputAddress" class="form-label fw-bold">Address <spnan
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="address" placeholder="1234 Main St">
-                                        <span class="text-danger d-none">Address is required!</span>
+                                        <label for="inputPassword4" class="form-label fw-bold">Last Name<spnan
+                                                class="text-danger"> *</span></label>
+                                        <input type="text" class="form-control form" placeholder="Enter Last Name" id="lastName" required>
+                                        <span class="text-danger d-none">Last name required!</span>
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="inputState" class="form-label fw-bold">State <span
+                                        <label for="inputAddress" class="form-label fw-bold">Company Name <span
+                                                class="fw-light">(Optional)</span>
+                                        </label>
+                                        <input type="text" class="form-control form" id="company" placeholder="Enter Company Name">
+                                        <!-- <span class="text-danger d-none">Company name is required!</span> -->
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="inputCity" class="form-label fw-bold">Email<spnan
+                                                class="text-danger"> *</span></label>
+                                        <input type="text" class="form-control form" placeholder="Enter Email" id="email" required>
+                                        <span class="text-danger d-none">Email is required!</span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="inputState" class="form-label fw-bold">Phone Number <span
+                                                class="fw-light">(Optional)</span></label>
+                                        <input id="phone" name="phone" type="tel" autocomplete="off">
+                                        <span id="valid-msg" class="d-none text-success">✓ Valid</span>
+                                        <span id="error-msg" class="hide text-danger"></span>
+                                        </select>
+                                        <!-- <span class="text-danger d-none">State is required!</span> -->
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="inputAddress2" class="form-label fw-bold">Address <span
+                                                class="fw-light">(Optional)</span></label>
+                                        <input type="text" class="form-control" id="address" placeholder="Apartment, studio, or floor">
+                                        <!-- <span class="text-danger d-none">Address is required!</span> -->
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="inputState" class="form-label fw-bold">State<spnan
                                                 class="text-danger">*</span></label>
-                                        <select id="state" class="form-select form state-select">
+                                        <select id="state" class="form-select form" required>
                                             <option selected>Choose...</option>
-                                            <option value="Sindh">Sindh</option>
-                                            <option value="Punjab">Punjab</option>
-                                            <option value="Balochistan">Balochistan</option>
-                                            <option value="KPK">KPK</option>
                                         </select>
                                         <span class="text-danger d-none">State is required!</span>
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="inputCity" class="form-label fw-bold">City <span
+                                        <label for="inputState" class="form-label fw-bold">City <spnan
                                                 class="text-danger">*</span></label>
-                                        <select id="city" class="form-select form city-select">
+                                        <select id="city" class="form-select form" required>
                                             <option selected>Choose...</option>
+
                                         </select>
                                         <span class="text-danger d-none">City is required!</span>
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="inputZip" class="form-label fw-bold">Zip <spnan class="text-danger">
-                                                *</span></label>
-                                        <input class="form-control form" type="text" id="zip" name="zip" pattern="[0-9]{5}" placeholder="A valid 5-digit zip code" maxlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                                        <label for="inputPassword4" class="form-label fw-bold">Zip Code <spnan
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control form" id="zip" pattern="[0-9]{5}" placeholder="A valid 5-digit zip code" maxlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                                         <span class="text-danger d-none">Zip code is required!</span>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <label for="inputState" class="form-label fw-bold">Property Type <spnan
-                                                class="text-danger">*</span></label>
-                                        <select id="propertyType" class="form-select form">
-                                            <option selected>Choose...</option>
-                                            <option>Single Family</option>
-                                            <option>Multi-Family</option>
-                                            <option>Multi-Commercial</option>
-                                        </select>
-                                        <span class="text-danger d-none">Property Type is required!</span>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="inputPassword4" class="form-label fw-bold">Property Total SF <spnan
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="propertyTotalSF" pattern="[0-9]{5}" placeholder="Area in square feet" maxlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
-                                        <span class="text-danger d-none">Property Total SF is required!</span>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
-                    <div class="accordion-item" id="accordion-item2">
+                    <div class="accordion-item mb-4" id="accordion-item2">
                         <h2 class="accordion-header" id="headingTwo">
-                            <button class="accordion-button collapsed text-white" onclick="checkFieldsFilled('accordion-item2')" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <button class="accordion-button collapsed text-white" type="button" id="accordion-button2" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                 <span class="m-0 me-4 fs-1" style="font-weight: bold;">02</span>
-                                <h3 class="m-0"><strong>Property Unit Information</strong> <i
-                                        class="fi fi-rs-pencil"></i><i
+                                <h3 class="m-0"><strong>Assign Property</strong> <i class="fi fi-rs-pencil"></i><i
                                         class="fi fi-rs-angle-circle-down chevron icon"></i>
                                 </h3>
                             </button>
                         </h2>
                         <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                            <form class="row g-3 m-1" enctype="multipart/form-data">
+                            <div class="accordion-body">
+                                <form class="row g-3">
+                                    <div class="col-md-4">
+                                        <label for="inputEmail4" class="form-label">Select Property<span
+                                                class="text-danger"> *</span></label>
+                                        <select id="property" class="form-select" required>
+                                            <option selected>Choose...</option>
+                                            <option>...</option>
+                                        </select>
+                                        <span class="text-danger d-none">Property is required!</span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="inputEmail4" class="form-label">Select Property Unit<span
+                                                class="text-danger"> *</span></label>
+                                        <select id="unit" class="form-select" required>
+                                            <option selected>Choose...</option>
+                                            <option>...</option>
+                                        </select>
+                                        <span class="text-danger d-none">Property units is required!</span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="inputAddress" class="form-label">Input Rent Amount /Per
+                                            Month<span class="text-danger"> *</span></label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" style="color: #1467B0;background-color: transparent !important;">$</span>
+                                            <input type="text" class="form-control" id="rent" pattern="[0-9]{7}" placeholder="Enter rent amount" maxlength="7" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                                        </div>
+                                        <span class="text-danger d-none">Rent amount is required!</span>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item" id="accordion-item3">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed text-white" id="accordion-button3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                <span class="m-0 me-4 fs-1" style="font-weight: bold;">03</span>
+                                <h3 class="m-0"><strong>Lease Details</strong> <i class="fi fi-rs-pencil"></i><i
+                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
+                                </h3>
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExampe">
+                            <div class="accordion-body">
+                                <form class="row g-3">
+                                    <div class="col-md-12">
+                                        <label for="inputEmail4" class="form-label">Is this a gross lease or triple net
+                                            lease? <i class="fi fi-rs-info ms-2" style="color: #1467B0"></i></label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" value="Gross Lease" name="lease" id="flexCheckDefault">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                Gross Lease
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" value="Triple Net Lease" name="lease" id="flexCheckChecked1" href="#collapse1" role="button" aria-expanded="false" aria-controls="collapseExample1">
+                                            <label class="form-check-label" for="flexCheckChecked1">
+                                                Triple Net Lease
+                                            </label>
+                                        </div>
+                                        <!-- <input type="hidden" name="radioOptionsHidden" required> -->
+                                        <div class="collapse" id="collapse1">
+                                            <div class="card card-body">
+                                                <div class="text-justify ps-2 border-model-line">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <label for="inputEmail4" class="form-label">Base Rent Amount
+                                                                (Optional)</label>
+                                                            <div class="input-group">
+                                                                <span class="input-group-text" style="color: #1467B0;background-color: transparent !important;">$</span>
+                                                                <input type="text" class="form-control" id="baseRent" pattern="[0-9]{7}" placeholder="Enter Amount.." maxlength="7" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                                                            </div>
+                                                            <span class="text-danger d-none">Rent amount is
+                                                                required!</span>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label for="inputPassword4" class="form-label">Triple Net
+                                                                Amount (Optional)</label>
+                                                            <div class="input-group">
+                                                                <span class="input-group-text" style="color: #1467B0;background-color: transparent !important;">$</span>
+                                                                <input type="text" class="form-control" id="tripleNet" pattern="[0-9]{7}" placeholder="Enter Amount.." maxlength="7" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                                                            </div>
+                                                            <span class="text-danger d-none">Rent amount is
+                                                                required!</span>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label for="inputEmail4" class="form-label">Lease Start
+                                                                Date</label>
+                                                            <input type="date" class="form-control position-relative" id="leaseStart" required>
+                                                            <span class="text-danger d-none">Rent amount is
+                                                                required!</span>
+                                                            <!-- <i class="fi fi-rs-calendar"></i> -->
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label for="inputPassword4" class="form-label">Lease End
+                                                                Date</label>
 
-                                <div class="col-12 mb-3">
-                                    <label for="inputAddress" class="form-label fw-bold">Number of Units<span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control px-2" id="units" pattern="[0-9]{5}" placeholder="units.." maxlength="3" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
-                                    <span class="text-danger d-none">Units are required!</span>
-                                </div>
-                            </form>
+                                                            <input type="date" class="form-control" id="leaseEnd" required>
+                                                            <span class="text-danger d-none">Rent amount is
+                                                                required!</span>
+                                                            <!-- <i class="fi fi-rs-calendar"></i> -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="inputEmail4" class="form-label">Are there any rent increases during
+                                            the Lease Term? <i class="fi fi-rs-info ms-2"
+                                                style="color: #1467B0"></i></label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" value="yes" name="yesno" id="flexCheckChecked2" href="#collapse2" role="button" aria-expanded="false" aria-controls="collapseExample2" required>
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                Yes
+                                            </label>
+                                        </div>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" value="no" name="yesno" required>
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                No
+                                            </label>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-12 row">
+                                        <!-- <div class="col-md-5">
+                                            <label for="inputEmail4" class="form-label">Date of Rent Change
+                                                (Optional)</label>
+                                            <input type="email" class="form-control" id="inputEmail4">
+                                        </div>
+                                        <div class="col-md-5">
+                                            <label for="inputPassword4" class="form-label">Rent Amount Correlating to
+                                                that Date</label>
+                                            <input type="password" class="form-control" id="inputPassword4">
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button>
+                                                <i class="fi fi-rs-trash"></i>
+                                            </button>
+                                        </div> -->
+                                        <div class="collapse" id="collapse2">
+                                            <div class="card card-body">
+                                                <div class="text-justify" id="add-item-container">
+                                                    <div class="row row-multiple mb-2 pb-3" style="background-color: #F4FAFF !important;">
+                                                        <div class="col-md-6">
+                                                            <label for="inputEmail4" class="form-label">Date of Rent
+                                                                Change
+                                                                (Optional)</label>
+                                                            <input type="date" class="form-control input-date" id="dateofRentchange" required>
+                                                            <span class="text-danger d-none">Rent amount is
+                                                                required!</span>
+                                                        </div>
+                                                        <div class="col-md-5">
+                                                            <label for="inputPassword4" class="form-label">Rent Amount
+                                                                Correlating to
+                                                                that Date</label>
+                                                            <input type="text" class="form-control input-amount" id="amountChange" pattern="[0-9]{7}" placeholder="Enter Amount.." maxlength="7" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                                                            <span class="text-danger d-none">Rent amount is
+                                                                required!</span>
+                                                        </div>
+                                                        <div class="col-md-1 text-center">
+                                                            <button type="button" class="btn position-relative p-0 d-flex">
+                                                                <i class="fi fi-rs-trash text-danger fs-5"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a href="javascript:;" class="mt-1" id="add-item">+Add Line Item</a>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -690,20 +844,134 @@
                         Draft</button>
                     <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close'>Close</button>
                     <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
-                    <a href="javascript:void(0)" class="btn text-light button disabled" style='background-color:#1467B0;' id='next'>Next</a>
+                    <button class="btn text-light button" style='background-color:#1467B0;' id='next' disabled>Next</button>
+                    <button class="btn text-light button d-none" style='background-color:#1467B0;' id='submit'>Submit</button>
                 </div>
             </div>
         </div>
     </div>
-    <!-- succes modal -->
+    <div class="modal fade" id="myModal_edit" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="text-justify ps-2 border-model-line">
+                        <h2 class="modal-title">Post an <strong class="color-primary">Update</strong></h2>
+                        <span class="">The real power of tasks is keeping track of deadlines and having a 
+                            log of all work and communication related to the tasks for later reference.</span>
+                    </div>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="top-close">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <form class="row g-3" enctype="multipart/form-data">
+                            <div class="col-md-12">
+                                <label class="form-label fw-bold">Message</label>
 
+                                <textarea class="form-control mb-4" placeholder="Sorry about that We will look into it." rows="4"></textarea>
+                                <span class="text-danger d-none">Photos are required!</span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputEmail4" class="form-label fw-bold">Due Date</label>
+                                <input class="form-control" placeholder="MM/DD/YYYY" type="date">
+                                <span class="text-danger d-none">Property ID is required!</span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputState" class="form-label fw-bold">Priority</label>
+                                <select id="state" class="form-select form">
+                                <option selected>Choose...</option>
+                                <option>Sindh</option>
+                                <option>Punjab</option>
+                                <option>Balochistan</option>
+                                <option>KPK</option>
+                            </select>
+                                <span class="text-danger d-none">Property name required!</span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputState" class="form-label fw-bold">Status</label>
+                                <select id="state" class="form-select form">
+                                <option selected>Choose...</option>
+                                <option>Sindh</option>
+                                <option>Punjab</option>
+                                <option>Balochistan</option>
+                                <option>KPK</option>
+                            </select>
+                                <span class="text-danger d-none">Address is required!</span>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="form-label fw-bold">Assignee(s)</label>
+                                    <select class="form-control select2" data-placeholder="Choose Browser" multiple>
+                                            <option value="Firefox">
+                                                Firefox
+                                            </option>
+                                            <option value="Chrome selected">
+                                                Chrome
+                                            </option>
+                                            <option value="Safari">
+                                                Safari
+                                            </option>
+                                            <option selected value="Opera">
+                                                Opera
+                                            </option>
+                                            <option value="Internet Explorer">
+                                                Internet Explorer
+                                            </option>
+                                        </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label fw-bold">Media/ Files</label>
+                                <div class="custom-file" style="border: 1px dashed #00000087;">
+                                    <input id="fileInput" type="file" name="image" class="custom-file-input form" accept=".jpg, .png, image/jpeg, image/png" aria-label="hello" multiple>
+                                    <span className="d-none"></span>
+                                    <label class="custom-file-label" for="fileInput">
+                                                <i class="fi fi-rs-cloud-upload"></i>
+                                                <div class="custom-file-text">
+                                                    <span>Upload Photo or drag and drop here</span>
+                                                    <span>JPEG and PNG, file size no more than 10MB</span>
+                                                </div>
+                                            </label>
+                                </div>
+                                <div class="selected-files">
+                                    <div class="file-grid"></div>
+                                </div>
+                                <span class="text-danger d-none">Photos are required!</span>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+                <div class="modal-footer d-flex justify-content-between">
+                    <!-- <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
+                        Draft</button> -->
+                    <div class="d-flex">
+
+                        <label class="custom-control custom-checkbox me-2">
+                                <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1" checked="">
+                                <span class="custom-control-label">Notify Tenant</span>
+                            </label>
+                        <label class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1" checked="">
+                                <span class="custom-control-label">Notify Assignee(s)</span>
+                            </label>
+                    </div>
+                    <div class=""><button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close'>Close</button>
+                        <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
+                        <a href="javascript:void(0)" class="btn text-light btn-pill button disabled" style='background-color:#1467B0;' id='next'>Next</a></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="succesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
 
                     <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="succes-close">
-                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                        <span aria-hidden="true"><img src="../assets/images/cross-circle.svg" /></span>
                     </button>
                 </div>
                 <div class="modal-body succes-modal">
@@ -726,9 +994,41 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="myModal_delete">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
+                        <div class="card-header border-0 pt-3">
+                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                            </button>
+                        </div>
+                        <div class="card-body text-center">
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
+                                    viewBox="0 0 24 24">
+                                    <path fill="#f07f8f"
+                                        d="M20.05713,22H3.94287A3.02288,3.02288,0,0,1,1.3252,17.46631L9.38232,3.51123a3.02272,3.02272,0,0,1,5.23536,0L22.6748,17.46631A3.02288,3.02288,0,0,1,20.05713,22Z" />
+                                    <circle cx="12" cy="17" r="1" fill="#e62a45" />
+                                    <path fill="#e62a45" d="M12,14a1,1,0,0,1-1-1V9a1,1,0,0,1,2,0v4A1,1,0,0,1,12,14Z" />
+                                </svg></span>
+                            <h4 class="h4 mb-0 mt-3 fw-bold fs-4">Warning</h4>
+                            <p class="card-text">This will delete your property. Are you sure?</p>
 
-    <!-- MODAL EFFECTS -->
-
+                        </div>
+                        <div class="card-footer text-center border-0 pt-0">
+                            <div class="row">
+                                <div class="text-center">
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- PAGE -->
     <div class="page">
         <div class="page-main">
@@ -1009,7 +1309,8 @@
                                 <div class="row">
                                     <div class="col-lg-9">
                                         <h3 class="page-titlee text-white" style="font-weight: 100; margin-bottom: 0px;">Welcome to Spade Portal</h3>
-                                        <h1 class="page-titlee text-white" style="font-weight: 700;" id="user-name">John Clark</h1>
+                                        <h1 class="page-titlee text-white" style="font-weight: 700;" id="user-name">John Clark
+                                        </h1>
                                         <a href="javascript:void(0)" id="email_verification" class="btn btn-primary btn-pill btn-xl email-verification-btn"><i
                                                 class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
                                             verification &nbsp; <i
@@ -1026,41 +1327,42 @@
                         <div class="row justify-content-center">
                             <div class="col-xl-7 col-md-7">
                                 <div class="card border p-0 pb-3">
-                                    <div class="card-body text-center p-0">
-                                        <span class=""><img src="../assets/images/newpropertypic.png" alt=""></span>
-                                        <h1 class="mt-3" style="font-weight: 700;line-height: 2.5rem;">Add Your <span style="color: #1467B0;">Rental Property</span></h1>
-                                        <p class="card-text px-5">Whether you are looking to market your rental across the web or send a tenant an online application, you first need to add your property.</p>
+                                    <div class="card-body text-center">
+                                        <span class=""><img src="../assets/images/new-tenant.png" alt=""></span>
+                                        <h1 class="mt-3" style="font-weight: 700;line-height: 2.5rem;">Find Your <span style="color: #1467B0;">Next Tenant!</span></h1>
+                                        <p class="card-text px-5">Whether you want to market your rental across the web or invite an interested renter to apply, you first need to add a property. After that, it's easy to stay organized as renters go from lead to applicant to tenant.</p>
                                     </div>
                                     <div class="card-footer text-center border-0">
                                         <div class="row">
                                             <div class="text-center">
                                                 <button type="button" class="btn btn-primary btn-pill btn-xl font-weight-bold" id="add_property_btn" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal"><i
-                                                    class="fe fe-plus me-2"></i><strong>ADD NEW
-                                                    PROPERTY</strong></button> </div>
+                                                    class="fe fe-plus me-2"></i><strong>ADD NEW TENANT</strong></button> </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- ROW-2 END -->
-
-
-
-
-                    <div class="card-body pb-0 bg-recentorder" style="display: none;">
-                        <h3 class="card-title text-white">Recent Orders</h3>
-                        <div class="chartjs-wrapper-demo">
-                            <canvas id="recentorders" class="chart-dropshadow"></canvas>
-                        </div>
-                    </div>
-                    <div id="flotback-chart" class="flot-background" style="display: none;"></div>
-
+                    <!-- ROW-3 CLOSED -->
                 </div>
-                <!-- CONTAINER END -->
+                <!-- ROW-2 END -->
+
+
+
+
+                <div class="card-body pb-0 bg-recentorder" style="display: none;">
+                    <h3 class="card-title text-white">Recent Orders</h3>
+                    <div class="chartjs-wrapper-demo">
+                        <canvas id="recentorders" class="chart-dropshadow"></canvas>
+                    </div>
+                </div>
+                <div id="flotback-chart" class="flot-background" style="display: none;"></div>
+
             </div>
+            <!-- CONTAINER END -->
         </div>
-        <!--app-content close-->
+    </div>
+    <!--app-content close-->
 
     </div>
 
@@ -1616,7 +1918,9 @@
     </div>
 
     <!-- BACK-TO-TOP -->
-    <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a>
+    <!-- <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a> -->
+    <a href="#addModal" data-bs-effect="effect-scale" data-bs-toggle="modal" id="add-tenant-side-btn"><i class="fe fe-plus"></i></a>
+
 
 
     <!-- JQUERY JS -->
@@ -1692,7 +1996,15 @@
     <script src="../assets/js/custom.js"></script>
 
     <!-- ############################################# -->
-
+    <!-- INTERNAL Autofill-Table JS -->
+    <!-- <script src="../assets/plugins/datatable/js/jquery.dataTables.min.js"></script> -->
+    <!-- <script src="../assets/plugins/datatable/js/dataTables.bootstrap5.js"></script> -->
+    <!-- <script src="../assets/plugins/datatable/js/dataTables.buttons.min.js"></script> -->
+    <!-- <script src="../assets/plugins/datatable/js/buttons.bootstrap5.min.js"></script> -->
+    <!-- <script src="../assets/plugins/extension-datatable/autofill/dataTables.autoFill.min.js"></script> -->
+    <script src="../assets/plugins/extension-datatable/autofill/autoFill.bootstrap5.min.js"></script>
+    <!-- <script src="../assets/plugins/extension-datatable/keytable/dataTables.keyTable.min.js"></script> -->
+    <script src="../assets/js/autofill-table.js"></script>
 
     <!-- C3 CHART JS -->
     <script src="../assets/plugins/charts-c3/d3.v5.min.js"></script>
@@ -1705,27 +2017,675 @@
     <script src="../assets/plugins/chart/Chart.bundle.js"></script>
     <script src="../assets/plugins/chart/utils.js"></script>
 
+
+    <script src="../assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <!-- BOOTSTRAP-DATERANGEPICKER JS -->
+    <script src="../assets/plugins/bootstrap-daterangepicker/moment.min.js"></script>
+    <script src="../assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+    <!-- INTERNAL Bootstrap-Datepicker js-->
+    <script src="../assets/plugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+
+    <!-- INTERNAL Sumoselect js-->
+    <script src="../assets/plugins/sumoselect/jquery.sumoselect.js"></script>
+
+    <!-- TIMEPICKER JS -->
+    <script src="../assets/plugins/time-picker/jquery.timepicker.js"></script>
+    <script src="../assets/plugins/time-picker/toggles.min.js"></script>
+
+    <!-- INTERNAL intlTelInput js-->
+    <script src="../assets/plugins/intl-tel-input-master/intlTelInput.js"></script>
+    <script src="../assets/plugins/intl-tel-input-master/country-select.js"></script>
+    <script src="../assets/plugins/intl-tel-input-master/utils.js"></script>
+
+    <!-- INTERNAL jquery transfer js-->
+    <script src="../assets/plugins/jQuerytransfer/jquery.transfer.js"></script>
+
+    <!-- INTERNAL multi js-->
+    <script src="../assets/plugins/multi/multi.min.js"></script>
+
+    <!-- DATEPICKER JS -->
+    <script src="../assets/plugins/date-picker/date-picker.js"></script>
+    <script src="../assets/plugins/date-picker/jquery-ui.js"></script>
+    <script src="../assets/plugins/input-mask/jquery.maskedinput.js"></script>
+
+    <!-- COLOR PICKER JS -->
+    <script src="../assets/plugins/pickr-master/pickr.es5.min.js"></script>
+    <script src="../assets/js/picker.js"></script>
+
+    <!-- MULTI SELECT JS-->
+    <script src="../assets/plugins/multipleselect/multiple-select.js"></script>
+    <script src="../assets/plugins/multipleselect/multi-select.js"></script>
+
+    <!-- FORMELEMENTS JS -->
+    <script src="../assets/js/formelementadvnced.js"></script>
+    <script src="../assets/js/form-elements.js"></script>
+
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
-
-
     <script>
-        // Get the user's preferred color scheme
-        const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var selectedFiles = [];
+        $(document).ready(function() {
+            // $("#preloader").fadeIn("fast");
+            // $("#succesModal").modal("show")
+            let tenantID;
+            $("#send-email").click(() => {
+                    $("#succesModal").modal("hide")
+                    console.log(tenantID)
+                    $.ajax({
+                        url: 'http://localhost:3000/api/spade/sendInvitationLink',
+                        type: 'POST',
+                        data: JSON.stringify({
+                            tenantID: tenantID
+                        }),
+                        contentType: "application/json; charset=utf-8",
+                        processData: false,
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function(response) {
+                            getData()
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle the error response
+                            console.log(xhr)
+                            console.log(status)
+                            console.log(error)
+                            console.error('Error sending data:', error);
+                        }
+                    });
+                })
+                // $("#succesModal").modal("show")
+            $.ajax({
+                url: 'http://api.geonames.org/searchJSON',
+                method: 'GET',
+                data: {
+                    country: 'US',
+                    maxRows: 500,
+                    username: 'developedmatz', // Replace with your GeoNames username
+                    style: 'full'
+                },
+                success: function(result) {
+                    // Handle state selection change
+                    console.log(result)
+                    $('#state').change(function() {
+                        var selectedState = $(this).val();
+                        var cityDropdown = $('#city');
 
-        // Get a reference to the logo element
-        const logo = document.getElementById('logo');
+                        // Clear existing options
+                        cityDropdown.empty();
+                        cityDropdown.append($('<option></option>').text("Choose..."));
 
-        // Set the logo source file based on the user's preferred color scheme
-        if (userPrefersDark) {
-            // console.log(document.getElementById("myModal_delete"))
-            logo.src = '../assets/header-img/comment.svg';
-        } else {
-            logo.src = '../assets/header-img/question.svg';
-        }
+                        if (selectedState !== "Choose...") {
+                            var cities = result.geonames.filter(function(place) {
+                                return place.adminName1 === selectedState && place.fcode === "PPL";
+                            });
+
+                            cities.forEach(function(city) {
+                                cityDropdown.append($('<option></option>').text(city.name));
+                            });
+                            if (selectedState === "Texas") {
+                                cityDropdown.append($('<option></option>').text("Houston"));
+                            }
+                        }
+                    });
+
+                    var stateDropdown = $('#state');
+                    var states = result.geonames.filter(function(place) {
+                        return place.fcode === "ADM1";
+                    });
+
+                    //   stateDropdown.append($('<option></option>').text("Choose..."));
+                    states.forEach(function(state) {
+                        stateDropdown.append($('<option></option>').text(state.adminName1));
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.log('Error occurred while fetching state and city data.');
+                }
+            });
+            $.ajax({
+                url: 'http://localhost:3000/api/spade/getPropertyUnitsTenant',
+                type: 'GET',
+                contentType: false,
+                processData: false,
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function(response) {
+                    var properties = response.data; // Assuming the response data is an array of property objects
+                    console.log(properties)
+                        // Populate Select Property dropdown
+                    var propertySelect = $('#property');
+                    propertySelect.empty(); // Clear existing options
+                    propertySelect.append($('<option></option>')
+                        .text("Choose..")
+                    )
+                    properties.forEach(function(property) {
+                        var option = $('<option></option>')
+                            .text(property.propertyName)
+                            .val(property.id);
+                        propertySelect.append(option);
+                    });
+
+                    // Handle property selection change
+                    propertySelect.change(function() {
+                        var selectedPropertyId = $(this).val();
+
+                        // Find the selected property object
+                        var selectedProperty = properties.find(function(property) {
+                            return property.id == selectedPropertyId;
+                        });
+
+                        // Populate Select Property Unit dropdown
+                        var propertyUnitSelect = $('#unit');
+                        propertyUnitSelect.empty(); // Clear existing options
+
+                        selectedProperty.vacantUnits.forEach(function(unit) {
+                            console.log(unit.unitNumber)
+
+                            var option = $('<option></option>')
+                                .text(unit.unitNumber)
+                                .val(unit.id);
+                            propertyUnitSelect.append(option);
+                        });
+                    });
+                },
+                error: function(xhr, status, error) {
+                    window.alert('Error: ' + error);
+                }
+            });
+
+
+            $("#add-item").on("click", () => {
+                $("#add-item-container").append(`<div class="row row-multiple mb-2 pb-3" style="background-color: #F4FAFF !important;"><div class="col-md-6">
+                                            <label for="inputEmail4" class="form-label">Date of Rent Change (Optional)</label>
+                                            <input type="date" class="form-control input-date" id="inputEmail4" required>
+                                          </div>
+                                          <div class="col-md-5">
+                                            <label for="inputPassword4" class="form-label">Rent Amount Correlating to that Date</label>
+                                            <input type="text" class="form-control input-amount" id="amountChange" pattern="[0-9]{7}" placeholder="Enter Amount.." maxlength="7"
+                                                                oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                                          </div>
+                                          <div class="col-md-1 d-flex justify-content-center align-items-end">
+                                                            <button type="button" class="btn p-0">
+                                                                <i class="fi fi-rs-trash text-danger fs-5"></i>
+                                                            </button>
+                                                        </div>`)
+            });
+            $('#add-item-container').on('click', '.del-btn', function() {
+                var $row = $(this).closest('.row');
+                var $rowsContainer = $row.parent();
+
+                if ($rowsContainer.children('.row').length > 1) {
+                    $row.remove();
+                } else {
+                    //   alert('Cannot delete the last row.');
+                }
+            });
+            $('input[name="yesno"]').change(function() {
+                console.log($(this).val())
+                if ($(this).val() === 'yes') {
+                    if (!$('#collapse2').hasClass('show')) {
+                        $('#collapse2').collapse('show');
+                    }
+                    $('.row-multiple').each(function() {
+                        var date = $(this).find('.input-date')
+                        var amount = $(this).find('.input-amount')
+                        date.prop('required', true)
+                        amount.prop('required', true)
+                    })
+                } else if ($(this).val() === 'no') {
+
+                    if ($('#collapse2').hasClass('show')) {
+                        $('#collapse2').collapse('hide');
+                    }
+                    $('.row-multiple').each(function() {
+                        var date = $(this).find('.input-date')
+                        var amount = $(this).find('.input-amount')
+                        date.prop('required', false)
+                        amount.prop('required', false)
+                    })
+                }
+            });
+            $('input[name="lease"]').change(function() {
+                console.log($(this).val())
+                if ($(this).val() === 'Triple Net Lease') {
+                    if (!$('#collapse1').hasClass('show')) {
+                        $('#collapse1').collapse('show');
+                    }
+                    $('#baseRent').prop('required', true);
+                    $('#tripleNet').prop('required', true);
+                    $('#leaseStart').prop('required', true);
+                    $('#leaseEnd').prop('required', true);
+                } else if ($(this).val() === 'Gross Lease') {
+
+                    if ($('#collapse1').hasClass('show')) {
+                        $('#collapse1').collapse('hide');
+                    }
+                    $('#baseRent').prop('required', false);
+                    $('#tripleNet').prop('required', false);
+                    $('#leaseStart').prop('required', false);
+                    $('#leaseEnd').prop('required', false);
+                }
+            });
+
+            // Function to get the form data from the accordions
+            function getFormData() {
+                var formData = {};
+
+                // Get Tenant Information
+                formData.firstName = document.getElementById('firstName').value;
+                formData.lastName = document.getElementById('lastName').value;
+                formData.companyName = document.getElementById('company').value;
+                formData.email = document.getElementById('email').value;
+                formData.phoneNumber = document.getElementById('phone').value;
+                formData.address = document.getElementById('address').value;
+                formData.state = document.getElementById('state').value;
+                formData.city = document.getElementById('city').value;
+                formData.zipcode = document.getElementById('zip').value;
+
+                // Get Assign Property
+                formData.propertyID = document.getElementById('property').value;
+                formData.propertyUnitID = document.getElementById('unit').value;
+                formData.rentAmount = document.getElementById('rent').value;
+
+                // Get Lease Details
+                formData.gross_or_triple_lease = document.querySelector('input[name="lease"]:checked').value;
+                console.log(document.getElementById('baseRent'))
+                formData.baseRent = document.getElementById('baseRent').value;
+                formData.tripleNet = document.getElementById('tripleNet').value;
+                formData.leaseStartDate = document.getElementById('leaseStart').value;
+                formData.leaseEndDate = document.getElementById('leaseEnd').value;
+                formData.increaseRent = document.querySelector('input[name="yesno"]:checked').value;
+
+
+                var rowData = [];
+
+                // Iterate over each row
+                $('.row-multiple').each(function() {
+                    var date = $(this).find('.input-date').val();
+                    var amount = $(this).find('.input-amount').val();
+
+                    // Create an object with the extracted data
+                    var rowObject = {
+                        date: date,
+                        amount: amount
+                    };
+
+                    // Add the object to the rowData array
+                    rowData.push(rowObject);
+                });
+                // console.log(rowData)
+                formData.increaseRentData = rowData
+                    //   formData.rentChangeDate = document.getElementById('dateofRentchange').value;
+                    //   formData.amountChange = document.getElementById('amountChange').value;
+
+                return formData;
+            }
+            $("#submit").on("click", () => {
+                    console.log(2)
+                    sendData()
+                })
+                // Function to make the AJAX call
+            function sendData() {
+                var formData = getFormData();
+                // console.log(formData)
+                $("#addModal").modal("hide")
+                    // Make the AJAX call
+                $.ajax({
+                    url: 'http://localhost:3000/api/spade/tenants',
+                    type: 'POST',
+                    data: JSON.stringify(formData),
+                    contentType: "application/json; charset=utf-8",
+                    processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function(response) {
+                        console.log(response)
+                            // Handle the success response
+                        $("#succes-text").text(`Tenant has been successfully created and linked to ${formData.propertyUnitID} Unit with ${formData.propertyID}.`)
+
+                        $("#succesModal").modal("show")
+                        tenantID = response.tenantId
+                            // console.log(response)
+                            // console.log('Data sent successfully!');
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle the error response
+                        console.log(xhr)
+                        console.log(status)
+                        console.log(error)
+                        console.error('Error sending data:', error);
+                    }
+                });
+            }
+            $("#next").on('click', () => {
+                console.log(1)
+                var accordions = $('.accordion-item');
+                console.log(accordions)
+                    // Open all accordions
+                accordions.addClass('open');
+                $("#edit-btn").removeClass("d-none")
+                $(".title-text").empty()
+                $(".title-text").append(`<h2 class="modal-title">View <strong class="color-primary" id="title-sub">Tenant Summary</strong></h2><span class="">Post your properties to thousands of potential investors,
+                            tenants and interested individuals.</span>`)
+                $(".accordion-item .icon").removeClass("fi-rs-exclamation");
+                $(".accordion-item .icon").removeClass("chevron");
+                $(".accordion-item .icon").addClass("fi-rs-check-circle");
+                $(".accordion-item .icon").removeClass("cross");
+                $(".accordion-item .icon").addClass("tick");
+                // console.log($('#title-sub'))
+                $("#next").addClass("d-none")
+                $("#submit").removeClass("d-none")
+                    // $('.modal-title').text("View ");
+
+                // Change the text of the <strong> element
+                // $('#title-sub').text('Tenant Summary');
+                // $('#title-sub').text("Tenant Summary")
+                // $(".border-model-line span").text("Post your properties to thousands of potential investors, tenants and interested individuals")
+
+                // Find all input, select, and other fields within the accordions and make them readonly
+                accordions.find('input,textarea').attr('readonly', true);
+
+                // Optional: Disable any buttons within the accordions
+                accordions.find('button,select,input[type="radio"]').prop('disabled', true);
+                // Optional: Disable any buttons within the accordions
+                //   accordions.find('button').prop('disabled', true);
+
+                // Remove data-bs-toggle attribute from accordion headers
+                accordions.find('.accordion-button').removeAttr('data-bs-toggle').removeClass("collapsed");
+                accordions.find('.accordion-button').removeAttr('data-bs-toggle').removeClass("collpsed");
+                accordions.find('.accordion-collapse').addClass("show");
+                $("#next").removeAttr
+
+                // sendData()
+            })
+            $("#edit-btn").on('click', () => {
+                console.log(1)
+                var accordions = $('.accordion-item');
+                console.log(accordions)
+                    // Open all accordions
+                accordions.addClass('open');
+
+                $("#edit-btn").addClass("d-none")
+                    // $(".border-model-line h2").text("Create ")
+                $(".title-text").empty()
+                $(".title-text").append(`<h2 class="modal-title">Create <strong class="color-primary" id="title-sub">New Tenant</strong></h2><span class="">Post your properties to thousands of potential investors,
+                            tenants and interested individuals.</span>`)
+                    // $("#title-sub").text("New Tenant")
+                    // $(".border-model-line span").text("Post your properties to thousands of potential investors, tenants and interested individuals")
+                    // $(".accordion-item .icon").removeClass("fi-rs-exclamation");
+                $(".accordion-item .icon").removeClass("fi-rs-check-circle");
+                $(".accordion-item .icon").addClass("chevron");
+                $(".accordion-item .icon").removeClass("cross");
+                $(".accordion-item .icon").removeClass("tick");
+                // Find all input, select, and other fields within the accordions and make them readonly
+                accordions.find('input,textarea').attr('readonly', false);
+                // Optional: Disable any buttons within the accordions
+                accordions.find('button,select,input[type="radio"]').prop('disabled', false);
+                // Optional: Disable any buttons within the accordions
+                //   accordions.find('button').prop('disabled', true);
+
+                // Remove data-bs-toggle attribute from accordion headers
+                accordions.find('.accordion-button').attr('data-bs-toggle', 'collapse').addClass("collapsed");
+                accordions.find('.accordion-collapse').addClass("show");
+                $("#next").removeClass("d-none")
+                $("#submit").addClass("d-none")
+                    // $("#submit").removeAttr('disabled','disabled')
+            })
+
+            function checkFieldsStatus(accordionId) {
+                // var accordionFields = $('#' + accordionId + ' input[type="text"], #' + accordionId + ' select');
+                var accordionFields = $('#' + accordionId + ' input[required], #' + accordionId + ' select[required]');
+
+                // var imageField = $('#' + accordionId + ' input[type="file"]');
+                var hasEmptyFields = false;
+                var hasErrorFields = false;
+                var hasFilledFields = false;
+
+                accordionFields.each(function() {
+                    var $field = $(this);
+                    if ($field.val() === '' || $field.val() === 'Choose...') {
+                        hasEmptyFields = true;
+                    }
+                    if ($field.hasClass('border-danger')) {
+                        hasErrorFields = true;
+                    }
+                    if ($field.val() !== '' || $field.val() !== 'Choose...') {
+                        hasFilledFields = true;
+                    }
+                });
+                // if (imageField.length && imageField.get(0).files.length === 0) {
+                //     hasEmptyFields = true;
+                // }
+                if (hasEmptyFields && hasErrorFields) {
+                    return 1;
+                } else if (!hasEmptyFields && !hasErrorFields && hasFilledFields) {
+                    return 2;
+                } else if (hasEmptyFields && !hasErrorFields && hasFilledFields) {
+                    console.log(2)
+                    return 3;
+                } else {
+                    return 0;
+                }
+            }
+
+            let counter = 0
+
+            function checkFieldsFilled(id) {
+                console.log(id)
+                const status = checkFieldsStatus(id)
+                if (id === "accordion-item2" && counter === 0) {
+                    counter += 1
+                    return
+                }
+                const accordionItem = document.getElementById(id);
+                const formFields = accordionItem.querySelectorAll("input[required], select[required]");
+                let allFieldsFilled = true;
+                formFields.forEach(function(field) {
+                    if (field.value === "" || field.value === "Choose...") {
+                        allFieldsFilled = false;
+                    }
+
+                });
+                const chevronIcon = accordionItem.querySelector(".icon");
+                console.log(status)
+                switch (status) {
+                    case 0:
+
+                        break;
+                    case 1:
+                        chevronIcon.classList.remove("fi-rs-check-circle");
+                        chevronIcon.classList.remove("chevron");
+                        chevronIcon.classList.add("fi-rs-exclamation");
+                        chevronIcon.classList.add("cross");
+                        break;
+                    case 2:
+                        chevronIcon.classList.remove("fi-rs-exclamation");
+                        chevronIcon.classList.remove("chevron");
+                        chevronIcon.classList.add("fi-rs-check-circle");
+                        chevronIcon.classList.remove("cross");
+                        chevronIcon.classList.add("tick");
+                        break;
+                    case 3:
+                        console.log(2)
+                        chevronIcon.classList.remove("fi-rs-exclamation");
+                        chevronIcon.classList.add("chevron");
+                        // chevronIcon.classList.add("fi-rs-check-circle");
+                        chevronIcon.classList.remove("cross");
+                        chevronIcon.classList.remove("tick");
+                        break;
+                    default:
+                        break;
+                }
+            }
+            $("#accordion-button1").on("click", () => {
+                checkFieldsFilled("accordion-item1")
+            })
+            $("#accordion-button2").on("click", () => {
+                checkFieldsFilled("accordion-item2")
+            })
+            $("#accordion-button3").on("click", () => {
+                checkFieldsFilled("accordion-item3")
+            })
+
+            function areAllFieldsFilled() {
+                var accordion1Fields = $('#accordion-item1 input[required], #accordion-item1 select[required]');
+                var accordion2Fields = $('#accordion-item2 input[required], #accordion-item2 select[required]');
+                var accordion3Fields = $('#accordion-item3 input[required]');
+
+                var allFieldsFilled =
+                    accordion1Fields.filter(function() {
+                        return $(this).val() === '' || $(this).val() === 'Choose...';
+                    }).length === 0 &&
+                    accordion2Fields.filter(function() {
+                        return $(this).val() === '' || $(this).val() === 'Choose...';
+                    }).length === 0 &&
+                    accordion3Fields.filter(function() {
+                        return $(this).val() === '';
+                    }).length === 0;
+
+                return allFieldsFilled;
+            }
+
+            // Function to enable or disable buttons based on field status
+            function updateButtonStatus() {
+                var accordion1Fields = $('#accordion-item1 input[required], #accordion-item1 select[required]');
+                var accordion2Fields = $('#accordion-item2 input[required], #accordion-item2 select[required]');
+                var accordion3Fields = $('#accordion-item3 input[required]');
+                // var imageInput = $('#fileInput');
+                // console.log(accordion1Fields)
+                // console.log(accordion2Fields)
+                // console.log(accordion3Fields)
+                var isAccordion1FieldsEmpty = accordion1Fields.filter(function() {
+                    return $(this).val() !== '' || $(this).val() === 'Choose...';
+                }).length === 0;
+
+                var isAccordion2FieldsEmpty = accordion2Fields.filter(function() {
+                    return $(this).val() !== '' || $(this).val() === 'Choose...';
+                }).length === 0;
+                var isAccordion3FieldsEmpty = accordion3Fields.filter(function() {
+                    console.log($(this).val())
+                    return $(this).val() !== '' || $(this).val() === 'Choose...';
+                }).length === 0;
+
+                // var isImageInputEmpty = imageInput.get(0).files.length === 0;
+
+                // Enable or disable the buttons based on the fields' status
+                if (!isAccordion1FieldsEmpty || !isAccordion2FieldsEmpty || !isAccordion3FieldsEmpty) {
+                    $('#draft').removeAttr('disabled');
+                } else {
+                    $('#draft').attr('disabled', 'disabled');
+                }
+
+                var allFieldsFilled = areAllFieldsFilled();
+
+                // Enable or disable the buttons based on the fields' status
+                if (allFieldsFilled) {
+                    $('#next').removeClass("disabled");
+                    $('#next').removeAttr("disabled");
+                } else {
+                    $('#next').addClass("disabled");
+                    //   $('#next').addAttr("disabled","disabled");
+
+                }
+            }
+
+            // Call the updateButtonStatus function when any field in the accordions is changed
+            $('#accordion-item1 input[required], #accordion-item1 select[required], #accordion-item2 input[required], #accordion-item2 select[required], #accordion-item3 input[required], #accordion-item3 select[required]').on('input change', function() {
+                var $field = $(this);
+                var $errorMessage = $field.next('.text-danger');
+
+                if ($field.val() === '' || $field.val() === 'Choose...') {
+                    $field.addClass('border-danger');
+                    $errorMessage.removeClass('d-none');
+                } else {
+                    $field.removeClass('border-danger');
+                    $errorMessage.addClass('d-none');
+                }
+                updateButtonStatus();
+            });
+
+            function resetAccordions() {
+                // Reset all accordions
+                $('.accordion-item').each(function() {
+                    var accordionId = $(this).attr('id');
+                    var accordionFields = $('#' + accordionId + ' input, #' + accordionId + ' select');
+                    // var imageField = $('#' + accordionId + ' input[type="file"]');
+                    var accordionButton = $('#' + accordionId + ' button.accordion-button');
+
+                    // Empty input fields
+                    accordionFields.val('');
+
+                    // Remove border-danger class
+                    accordionFields.removeClass('border-danger');
+
+                    // Hide error spans
+                    accordionFields.siblings('span.text-danger').addClass('d-none');
+
+                    // Reset image input
+                    // if (imageField.length) {
+                    //     imageField.val('');
+                    //     imageField.siblings('label.custom-file-label').find('.custom-file-text span').first().text('Upload Photo or drag and drop here');
+                    //     imageField.siblings('.selected-files').find('.file-grid').empty();
+                    // }
+                    // // $('#accordion-item1').find('.file-grid').empty();
+                    // Reset accordion button icons
+                    accordionButton.find('.fi-rs-exclamation').addClass('fi-rs-angle-circle-down').addClass("chevron").removeClass('fi-rs-exclamation').removeClass("cross");
+                    accordionButton.find('.fi-rs-check-circle').addClass('fi-rs-angle-circle-down').addClass("chevron").removeClass('fi-rs-check-circle').removeClass("tick");
+                    $('#next').addClass("disabled");
+                    $('#draft').attr("disabled", "disabled");
+                });
+            }
+            const input = document.querySelector("#phone");
+            const errorMsg = document.querySelector("#error-msg");
+            const validMsg = document.querySelector("#valid-msg");
+
+            // here, the index maps to the error code returned from getValidationError - see readme
+            const errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+
+            // initialise plugin
+            const iti = window.intlTelInput(input, {
+                utilsScript: "/intl-tel-input/js/utils.js?1684676252775"
+            });
+
+            const reset = () => {
+                input.classList.remove("error");
+                errorMsg.innerHTML = "";
+                errorMsg.classList.add("d-none");
+                validMsg.classList.add("d-none");
+            };
+
+            // on blur: validate
+            input.addEventListener('blur', () => {
+                reset();
+                if (input.value.trim()) {
+                    if (iti.isValidNumber()) {
+                        validMsg.classList.remove("d-none");
+                    } else {
+                        input.classList.add("error");
+                        const errorCode = iti.getValidationError();
+                        errorMsg.innerHTML = errorMap[errorCode];
+                        errorMsg.classList.remove("d-none");
+                    }
+                }
+            });
+            $('input[type="checkbox"]').change(function() {
+                var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
+                var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
+                console.log(columnIndex, isColumnVisible)
+                    // Toggle the visibility of the corresponding column
+                $('table').find('tr').each(function() {
+                    var column = $(this).find('th:nth-child(' + columnIndex + '), td:nth-child(' + columnIndex + ')');
+                    isColumnVisible ? column.show() : column.hide();
+                });
+            });
+
+        });
     </script>
-    <script src="../assets/js/modal_functionality.js">
-    </script>
+
 </body>
 
 </html>
