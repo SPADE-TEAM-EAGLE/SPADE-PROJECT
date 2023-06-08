@@ -832,8 +832,8 @@
                                 <ul class="slide-menu">
                                     <li class="side-menu-label1"><a href="javascript:void(0)">Tasks</a></li>
                                     <li><a href="create-tasks.html" class="slide-item">All</a></li>
-                                    <li><a href="new-tasks.html" class="slide-item">Requests</a></li>
-                                    <li><a href="new-tasks.html" class="slide-item">Vendors</a></li>
+                                    <li><a href="tasks-requests.html" class="slide-item">Requests</a></li>
+                                    <li><a href="tasks-vendors.html" class="slide-item">Vendors</a></li>
                                 </ul>
                             </li>
                             <li class="slide">
@@ -1698,6 +1698,7 @@
             $("#viewOverview").attr("href", `./view-property.html?propertyId=${propertyId}`)
             $("#viewTenants").attr("href", `./property-tenant.html?propertyId=${propertyId}`)
             $("#viewTasks").attr("href", `./property-task.html?propertyId=${propertyId}`)
+            console.log(propertyId)
             $.ajax({
                 url: 'http://localhost:3000/api/spade/viewProperty',
                 type: 'GET',

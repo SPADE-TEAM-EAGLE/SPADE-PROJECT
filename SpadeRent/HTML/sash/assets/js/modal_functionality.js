@@ -81,7 +81,7 @@ function checkFieldsFilled(id) {
 var selectedFiles = [];
 $(document).ready(function () {
     $("#succesModal").on('hide.bs.modal', function () {
-        window.location="../../Landlord/properties-all.html"
+        window.location='./properties-all.html'
     })
     $.ajax({
         url: 'http://api.geonames.org/searchJSON',
@@ -260,7 +260,7 @@ $(document).on('click', '#next', function (e) {
     e.preventDefault()
     selectedFiles=[]
     $('#addModal').modal('hide');
-    resetAccordions()
+    // resetAccordions()
     // $("#largemodal").addClass("hide");
     var formData = new FormData();
 
@@ -305,6 +305,8 @@ $(document).on('click', '#next', function (e) {
 
         success: function (response) {
             // console.log(1)
+    resetAccordions()
+
             $('#succesModal').modal('show')
 
             // window.location = '../Landlord/properties-all.html';
@@ -338,7 +340,7 @@ function updateSelectedFilesContainer() {
                 // .append($('<span>').text(fileSize))
             )
             .append(
-                $('<span>')
+                $('<p>')
                     .addClass('delete-file')
                     .text('X')
                     .attr('data-index', index)

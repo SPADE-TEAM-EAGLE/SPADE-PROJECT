@@ -539,3 +539,14 @@ $('.off-canvas').on('click', function () {
     $('body').addClass('overflow-y-scroll');
     $('body').addClass('pe-0');
 });
+
+$(document).ready(function() {
+    $('#togglePassword1').click(function() {
+      $(this).toggleClass('fi-rs-eye fi-rs-crossed-eye');
+    });
+  });
+  $(document).ready(function() {
+    $('#togglePassword2').click(function() {
+      $(this).toggleClass('fi-rs-eye fi-rs-crossed-eye');
+    });
+  });
