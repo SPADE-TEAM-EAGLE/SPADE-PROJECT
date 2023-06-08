@@ -77,6 +77,7 @@ const config = process.env;
                 const tenantsInsert = await queryRunner(insertTenants, [userId, firstName, lastName, companyName, email, phoneNumber, address, city, state, zipcode, propertyID, propertyUnitID, rentAmount, gross_or_triple_lease, baseRent, tripleNet, leaseStartDate, leaseEndDate, increaseRent, hashPassword, currentDate]);
                 if (tenantsInsert[0].affectedRows > 0) {
                     // update property unit
+                    // console.log(tenantsInsert[0].insertId)
                     const status = "Occupied";
                     const propertyUnitsResult = await queryRunner(updatePropertyUnitsTenant, [ status, propertyUnitID, propertyID ]);
                     if (propertyUnitsResult[0].affectedRows > 0) {
@@ -84,7 +85,8 @@ const config = process.env;
                       if(increaseRent == 'No'){
                         res.status(200).json({
                             message: "Tenants save Successful",
-                            data: tenantsInsert[0]
+                            data: tenantsInsert[0],
+                            tenantId:tenantsInsert[0].insertId
                           })
                     }
                     else{
@@ -101,7 +103,9 @@ const config = process.env;
                         }
 
                           res.status(200).json({
-                            message: " tenant created successful"
+                            message: " tenant created successful",
+                            data: tenantsInsert[0],
+                            tenantId:tenantsInsert[0].insertId
                           });
  
                     }
@@ -133,6 +137,7 @@ const config = process.env;
           
                 exports.sendInvitationLink = async (req, res) => {
                   const { tenantID } = req.body;
+                  // console.log(req)
                   try {
                     const selectTenantResult = await queryRunner(selectQuery("tenants", "id"), [tenantID])
               if (selectTenantResult[0].length > 0) {
@@ -217,16 +222,16 @@ const config = process.env;
                 
           //  ############################# Tenant Reset Email ############################################################
           exports.createResetEmailTenant = async (req, res) => {
-            const { email } = req.body;
-            // console.log(email);
+            const { email } = req.query;
+            // console.log(req);
             const mailSubject = "Spade Reset Email";
             const random = Math.floor(100000 + Math.random() * 900000)
             try {
               const selectResult = await queryRunner(selectQuery('tenants', "Email"), [email]);
-              // console.log(selectResult[0])
+              console.log(selectResult[0])
               if (selectResult[0].length > 0) {
                 const userid = selectResult[0][0].id;
-                const name = selectResult[0][0].FirstName + " " + selectResult[0][0].LastName
+                const name = selectResult[0][0].firstName + " " + selectResult[0][0].lastName
                 // console.log(updateResult);
                 console.log(userid);
                 sendMail.sendMail(email, mailSubject, random, name);
@@ -415,6 +420,7 @@ exports.tenantAttachFile = async (req, res) => {
   const {
     tenantID
   } = req.body;
+  // console.log(req.files)
   const { userId } = req.user
   try {
 
@@ -560,11 +566,14 @@ const propertyUnitID = tenantResult[0][0].propertyUnitID;
 //  ############################# Get tenant ByID Start ############################################################
 exports.getTenantsByID = async (req, res) => {
   try {
-    const { id } = req.body;
-    console.log("object");
+    const { id } = req.query;
+    // console.log(req)
     const TenantsByIDResult = await queryRunner(getTenantsById,[id])
+    console.log(TenantsByIDResult)
+
     if (TenantsByIDResult.length > 0) {
       const data = JSON.parse(JSON.stringify(TenantsByIDResult))
+      // console.log(data)
       res.status(200).json({
         data: data,
         message: 'Tenants By ID'

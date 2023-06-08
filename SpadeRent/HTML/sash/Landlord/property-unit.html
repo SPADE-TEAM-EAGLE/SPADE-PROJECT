@@ -373,9 +373,9 @@
             .modal-footer .button-left {
                 margin: auto;
             }
-            .modal-footer button {
+            /* .modal-footer button {
                 width: 231px;
-            }
+            } */
             .border-model-line h2 {
                 font-size: 1.6rem;
             }
@@ -417,9 +417,9 @@
         }
         
         @media (max-width:320px) {
-            .modal-footer button {
+            /* .modal-footer button {
                 width: 231px;
-            }
+            } */
         }
         
         @media (max-width: 767px) {
@@ -955,7 +955,11 @@
                                                             <td><input type="email" class="form-control" id="inputEmail5" placeholder="Enter Area"></td>
                                                             <td><input type="email" class="form-control w-100" id="inputEmail5" placeholder="Enter Unit Details (Optional)"></td>
                                                             <td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
-                                                                <ul class="dropdown-menu"><li><a class="edit-option dropdown-item text-primary" href="javascript:void(0)">Edit</a></li><li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li><li><a class="dropdown-item text-success" href="./view-property.html?propertyId=13">View</a></li></ul>
+                                                                <ul class="dropdown-menu">
+                                                                    <li><a class="edit-option dropdown-item text-primary" href="javascript:void(0)">Edit</a></li>
+                                                                    <li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>
+                                                                    <li><a class="dropdown-item text-success" href="./view-property.html?propertyId=13">View</a></li>
+                                                                </ul>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -2023,24 +2027,26 @@
         $("#viewTenants").attr("href", `./property-tenant.html?propertyId=${propertyId}`)
         $("#viewTasks").attr("href", `./property-task.html?propertyId=${propertyId}`)
             // $("#viewUnits").attr("href",`./property-unit.html?propertyId=${propertyId}`)
-            $("#add-units").click(()=>{
-                $.ajax({
+        $("#add-units").click(() => {
+            $.ajax({
                 url: 'http://localhost:3000/api/spade/addMoreUnits',
                 type: 'POST',
                 data: JSON.stringify({
-                    "propertyID":propertyId
+                    "propertyID": propertyId
                 }),
                 contentType: "application/json; charset=utf-8",
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function (response) {
+                success: function(response) {
                     getData()
                 },
-                error: function (xhr, status, error) {
+                error: function(xhr, status, error) {
                     window.alert('Error: ' + error);
                 }
-            })})
+            })
+        })
+
         function getData() {
             $.ajax({
                 url: 'http://localhost:3000/api/spade/PropertyUnits',
@@ -2151,7 +2157,7 @@
 
                             }
                             values.push(cellValue)
-                            // console.log(values)
+                                // console.log(values)
                         });
                         console.log(propertyId)
                         $.ajax({
@@ -2178,7 +2184,7 @@
                         })
                     });
                     $('.delete-option').click(function(e) {
-            console.log(333)
+                        console.log(333)
                         e.preventDefault();
                         const unitIdElement = $(this).closest("tr").find(".unit-id");
                         const unitId = unitIdElement.text();
@@ -2193,44 +2199,44 @@
 
                             }
                             values.push(cellValue)
-                            // console.log(values)
+                                // console.log(values)
                         });
-            $.ajax({
-                url: 'http://localhost:3000/api/spade/deleteMoreUnits',
-                type: 'DELETE',
-                data: JSON.stringify({
-                    "propertyID": propertyId,
-                    "unitID":values[0],
-                }),
-                contentType: "application/json; charset=utf-8",
-                processData: false,
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                },
-                success: function (response) {
-                    console.log(1)
-                    getData()
-                },
-                error: function (xhr, status, error) {
-                    window.alert('Error: ' + error);
-                }
-            });
-        })
-        $(".edit-option").click(function(){
-            // e.preventDefault();
-            console.log(1)
+                        $.ajax({
+                            url: 'http://localhost:3000/api/spade/deleteMoreUnits',
+                            type: 'DELETE',
+                            data: JSON.stringify({
+                                "propertyID": propertyId,
+                                "unitID": values[0],
+                            }),
+                            contentType: "application/json; charset=utf-8",
+                            processData: false,
+                            headers: {
+                                'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                            },
+                            success: function(response) {
+                                console.log(1)
+                                getData()
+                            },
+                            error: function(xhr, status, error) {
+                                window.alert('Error: ' + error);
+                            }
+                        });
+                    })
+                    $(".edit-option").click(function() {
+                        // e.preventDefault();
+                        console.log(1)
                         const unitIdElement = $(this).closest("tr").find(".unit-id");
                         $(this).parent().addClass("d-none")
                         $(this).parent().prev().removeClass('d-none');
                         const unitId = unitIdElement.text();
-                        
+
                         $(`#${unitId}`).find('td').each(function() {
-                            
+
                             const input = $(this).find('input')
-                            input.attr("readonly", false); 
+                            input.attr("readonly", false);
                         });
                         // $(this).replaceWith( ('<a class="dropdown-item text-success done-option" href="" disabled>Done</a>') )
-        })
+                    })
                 },
                 error: function(xhr, status, error) {
                     window.alert('Error: ' + error);
