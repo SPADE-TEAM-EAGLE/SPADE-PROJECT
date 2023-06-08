@@ -364,7 +364,7 @@ exports.invoiceHTML = (tenantName, dueDays, invoiceID, landlordName) => {
             <p>Have a great day and thank you for your business<b>!</b></p>
   
             <p>Sincerely</p>
-            <h4>${landlordName}</h4>
+            <h4>${landlordName}</h4> 
             <p>company Name</p>
   </body>
   </html>`;

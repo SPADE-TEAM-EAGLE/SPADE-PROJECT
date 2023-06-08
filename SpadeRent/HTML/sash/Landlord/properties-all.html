@@ -655,19 +655,13 @@
                                                 class="text-danger">*</span></label>
                                         <select id="state" class="form-select form state-select">
                                             <option selected>Choose...</option>
-                                            <option value="Sindh">Sindh</option>
-                                            <option value="Punjab">Punjab</option>
-                                            <option value="Balochistan">Balochistan</option>
-                                            <option value="KPK">KPK</option>
                                         </select>
                                         <span class="text-danger d-none">State is required!</span>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="inputCity" class="form-label fw-bold">City <span
                                                 class="text-danger">*</span></label>
-                                        <select id="city" class="form-select form city-select">
-                                            <option selected>Choose...</option>
-                                        </select>
+                                        <input type="text" id="city" class="form-control form city-select">
                                         <span class="text-danger d-none">City is required!</span>
                                     </div>
                                     <div class="col-md-4">
@@ -751,7 +745,7 @@
                 <div class="modal-header">
 
                     <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="succes-close">
-                        <span aria-hidden="true"><img src="../assets/images/cross-circle.svg" /></span>
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
                     </button>
                 </div>
                 <div class="modal-body succes-modal">
@@ -896,25 +890,23 @@
                             <span class="text-danger d-none">Address is required!</span>
                         </div>
                         <div class="col-md-4">
-                            <label for="inputCity" class="form-label fw-bold">City <span
-                                    class="text-danger">*</span></label>
-                            <select id="city_update" class="form-select form city-select">
-                                <option selected>Choose...</option>
-                            </select>
-                            <span class="text-danger d-none">City is required!</span>
-                        </div>
-                        <div class="col-md-4">
                             <label for="inputState" class="form-label fw-bold">State <spnan class="text-danger">
                                     *</span></label>
                             <select id="state_update" class="form-select form state-select">
                                 <option selected>Choose...</option>
-                                <option>Sindh</option>
-                                <option>Punjab</option>
-                                <option>Balochistan</option>
-                                <option>KPK</option>
+
                             </select>
                             <span class="text-danger d-none">State is required!</span>
                         </div>
+                        <div class="col-md-4">
+                            <label for="inputCity" class="form-label fw-bold">City <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" id="city_update" class="form-control form city-select">
+                                
+                            
+                            <span class="text-danger d-none">City is required!</span>
+                        </div>
+
                         <div class="col-md-4">
                             <label for="inputZip" class="form-label fw-bold">Zip <spnan class="text-danger">
                                     *</span></label>
@@ -935,7 +927,7 @@
                             <span class="text-danger d-none">Property Type is required!</span>
                         </div>
                         <div class="col-md-6">
-                            <label for="inputPassword4" class="form-label fw-bold">Property Total SF <spnan
+                            <label for="inputPassword4" class="form-label fw-bold">Property Total SQFT <spnan
                                     class="text-danger">*</span></label>
                             <input type="text" class="form-control form" id="propertyTotalSF_update" pattern="[0-9]{5}"
                                 placeholder="" maxlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
@@ -2237,97 +2229,42 @@
             }
         }
         var selectedFiles = [];
-
+        var states
         $(document).ready(function () {
-
+            
             $.ajax({
                 url: 'http://api.geonames.org/searchJSON',
                 method: 'GET',
                 data: {
                     country: 'US',
                     maxRows: 500,
-                    username: 'developedmatz',
+                    username: 'developedmatz', // Replace with your GeoNames username
                     style: 'full'
                 },
                 success: function (result) {
-                    console.log(result)
                     // Handle state selection change
-                    $('#state').empty()
-
-                    // Populate the state dropdown with retrieved state data
-                    //   states.forEach(function(state) {
-                    //     stateDropdown.append($('<option></option>').text(state.name));
-                    //   });
-                    // $('#state').append($('<option></option>').text("Choose..."))
-                    // $('#state').change(function () {
-                    //     var selectedState = $(this).val();
-                    //     if (selectedState === "KPK") {
-                    //         selectedState = "Khyber Pakhtunkhwa"
-                    //     }
-
-                    var cityDropdown = $('#city');
-
-                    // Clear existing options
-                    cityDropdown.empty();
-                    cityDropdown.append($('<option></option>').text("Choose..."));
-                    cities = []
-                    if (selectedState !== "Choose...") {
-                        // Populate city options based on selected state
-                        count = 0
-                        data = result.geonames
-                        for (item of data) {
-                            if (item.adminName1 === selectedState) {
-                                cities.push(item.name)
-                                count++
-                            }
-                            if (count === 10) {
-                                break
-                            }
-                        }
-
-
-                        cities.forEach(function (city) {
-                            cityDropdown.append($('<option></option>').text(city));
-                        });
-
-                    }
-                
-            $('#state_update').change(function () {
-                var selectedState = $(this).val();
-                if (selectedState === "KPK") {
-                    selectedState = "Khyber Pakhtunkhwa"
-                }
-
-                var cityDropdown = $('#city_update');
-
-                // Clear existing options
-                cityDropdown.empty();
-                cityDropdown.append($('<option></option>').text("Choose..."));
-                cities = []
-                if (selectedState !== "Choose...") {
-                    // Populate city options based on selected state
-                    count = 0
-                    data = result.geonames
-                    for (item of data) {
-                        if (item.adminName1 === selectedState) {
-                            cities.push(item.name)
-                            count++
-                        }
-                        if (count === 10) {
-                            break
-                        }
-                    }
-
-
-
-                    cities.forEach(function (city) {
-                        cityDropdown.append($('<option></option>').text(city));
+                    console.log(result)
+                    
+                    var stateDropdown = $('#state');
+                    var stateupdateDropdown = $('#state_update');
+                    states = result.geonames.filter(function (place) {
+                        return place.fcode === "ADM1";
                     });
 
+                    //   stateDropdown.append($('<option></option>').text("Choose..."));
+                    states.forEach(function (state) {
+                        stateDropdown.append($('<option></option>').text(state.adminName1));
+                    });
+                    
+                },
+                error: function (xhr, status, error) {
+                    console.log('Error occurred while fetching state and city data.');
+                    console.log(xhr);
+                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
                 }
             });
-        }
-            })
+
 
         function areAllFieldsFilled() {
             var accordion1Fields = $('#accordion-item1 input[type="text"], #accordion-item1 select');
@@ -2470,7 +2407,7 @@
         })
         $(document).on('click', '#next', function (e) {
             e.preventDefault()
-            selectedFiles = []
+            // selectedFiles = []
             $('#addModal').modal('hide');
 
             // $("#largemodal").addClass("hide");
@@ -2500,8 +2437,8 @@
             var files = $('#fileInput')[0].files;
 
             // Add the files to the FormData object
-            for (var i = 0; i < files.length; i++) {
-                formData.append('image', files[i]);
+            for (var i = 0; i < selectedFiles.length; i++) {
+                formData.append('image', selectedFiles[i]);
             }
 
             // Send the form data to the server using AJAX
@@ -2925,21 +2862,33 @@
                             propertyId = propertyIdElement.text();
 
                             const data = response.data[0].find(obj => obj.id.toString() === propertyId);
+                            var stateupdateDropdown = $('#state_update');
+
+                    //   stateDropdown.append($('<option></option>').text("Choose..."));
+                    states.forEach(function (state) {
+                        if(state.adminName1===data.state){
+                            stateupdateDropdown.append($('<option selected></option>').text(state.adminName1)).val(state.adminName1);
+
+                        }else{
+                            stateupdateDropdown.append($('<option></option>').text(state.adminName1));
+                        }
+                        
+                    });
                             selectedFiles = data.images
-                            console.log(data.city)
-                            var option = $('<option>').text(data.city).val(data.city);
+                            
+                            // var option = $('<option>').text(data.city).val(data.city);
 
                             // Append the option to the select element
-                            $('#city_update').append(option);
+                            // $('#city_update').append(option);
 
                             // Make the option selected
-                            option.prop('selected', true);
+                            // option.prop('selected', true);
                             updateSelectedFilesContainer()
                             $("#propertyId_update").val(data.id);
                             $("#propertyName_update").val(data.propertyName);
                             $("#address_update").val(data.address);
                             $("#city_update").val(data.city);
-                            $("#state_update").val(data.state);
+                            // $("#state_update").val(data.state);
                             $("#zip_update").val(data.zipCode);
                             $("#propertyType_update").val(data.propertyType);
                             $("#propertyTotalSF_update").val(data.propertySQFT);

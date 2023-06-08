@@ -912,7 +912,7 @@
                                                 </div>
                                                 <div class="media-body">
                                                     <small class="text-white">Tenants</small>
-                                                    <h3 class="mb-0 text-white" style="font-weight: bold;">The Michael Scott Paper Company | Michael Scott</h3>
+                                                    <h3 class="mb-0 text-white company-name" style="font-weight: bold;">The Michael Scott Paper Company | Michael Scott</h3>
                                                 </div>
                                             </div>
                                             <div class="ms-auto">
@@ -943,16 +943,16 @@
                                     <div class="col-12">
                                         <ul class="nav1 br-7" style="bottom: 0;">
                                             <li class="nav-item1 p-0">
-                                                <a class="nav-link active p-2" href="view-tenant.html">Overview</a>
+                                                <a class="nav-link active p-2" href="view-tenant.html" id="viewOverview">Overview</a>
                                             </li>
                                             <li class="nav-item1 p-0">
-                                                <a class="nav-link p-2" href="tenant-properties.html">Properties</a>
+                                                <a class="nav-link p-2" href="tenant-properties.html" id="viewProperties">Properties</a>
                                             </li>
                                             <li class="nav-item1 p-0">
-                                                <a class="nav-link p-2" href="tenant-tasks.html">Tasks</a>
+                                                <a class="nav-link p-2" href="tenant-tasks.html" id="viewTasks">Tasks</a>
                                             </li>
                                             <li class="nav-item1 p-0">
-                                                <a class="nav-link p-2" href="tenant-file.html">Files</a>
+                                                <a class="nav-link p-2" href="tenant-file.html" id="viewFiles">Files</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -1814,13 +1814,33 @@
     <script src="../assets/js/charts.js"></script>
     <script>
         $(document).ready(function() {
+            const tenantId = (new URL(document.location)).searchParams.get("tenantId");
+            // console.log($("#viewUnits").attr("href"))
+            //            
 
-            const propertyId = (new URL(document.location)).searchParams.get("propertyId");
-            // // console.log($("#viewUnits").attr("href"))
-            $("#viewUnits").attr("href", `./property-unit.html?propertyId=${propertyId}`)
-            $("#viewOverview").attr("href", `./view-property.html?propertyId=${propertyId}`)
-            $("#viewTenants").attr("href", `./property-tenant.html?propertyId=${propertyId}`)
-            $("#viewTasks").attr("href", `./property-task.html?propertyId=${propertyId}`)
+            $("#viewProperties").attr("href", `./tenant-properties.html?tenantId=${tenantId}`)
+            $("#viewOverview").attr("href", `./view-tenant.html?tenantId=${tenantId}`)
+            $("#viewFiles").attr("href", `./tenant-file.html?tenantId=${tenantId}`)
+            $("#viewTasks").attr("href", `./tenant-tasks.html?tenantId=${tenantId}`)
+            console.log(propertyId)
+            $.ajax({
+                url: 'http://localhost:3000/api/spade/getTenantsByID',
+                type: 'GET',
+                data: {
+                    id:tenantId
+                },
+                contentType: "application/json; charset=utf-8",
+                // processData: false,
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function({data}) {
+                    $(".company-name").text(`${data[0][0].companyName} | ${data[0][0].firstName+" "+data[0][0].lastName}`)
+                },
+                error: function(xhr, status, error) {
+                    window.alert('Error: ' + error);
+                }
+            });
         });
     </script>
 

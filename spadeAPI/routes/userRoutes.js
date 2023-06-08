@@ -51,7 +51,12 @@ router.get(
   verifyToken,
   userController.getPropertyUnitsTenant
 );
-router.get("/getPropertyTenant", verifyToken, userController.getPropertyTenant);
+router.get(
+  "/viewPropertyTenant",
+  verifyToken,
+  userController.viewPropertyTenant
+);
+
 // router.post('/tenants',verifyToken,tenantController.createTenants);
 router.post("/tenants", verifyToken, tenantController.createTenants);
 router.post(
@@ -87,8 +92,11 @@ router.delete(
 router.delete("/tenantDelete", tenantController.tenantDelete);
 router.get("/getTenantsByID", tenantController.getTenantsByID);
 router.post("/createInvoice", upload, invoiceController.createInvoice);
-
+router.put(
+  "/putInvoiceStatusUpdates",
+  invoiceController.putInvoiceStatusUpdates
+);
 router.post("/addVendor", taskController.addVendors);
 router.post("/addTasks", upload, taskController.addTasks);
-
+router.get("/getAllVendors", taskController.getAllVendors);
 module.exports = router;

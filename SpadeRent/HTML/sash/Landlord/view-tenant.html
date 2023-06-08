@@ -890,7 +890,7 @@
                                                 </div>
                                                 <div class="media-body">
                                                     <small class="text-white">Tenants</small>
-                                                    <h3 class="mb-0 mt-1 text-white" style="font-weight: bold;">The Michael Scott Paper Company | Michael Scott</h3>
+                                                    <h3 class="mb-0 mt-1 text-white company-name" style="font-weight: bold;">The Michael Scott Paper Company | Michael Scott</h3>
                                                 </div>
                                             </div>
                                             <div class="ms-auto">
@@ -921,22 +921,114 @@
                                     <div class="col-12">
                                         <ul class="nav1 br-7" style="bottom: 0;">
                                             <li class="nav-item1 p-0">
-                                                <a class="nav-link active p-2" href="view-tenant.html">Overview</a>
+                                                <a class="nav-link active p-2" href="view-tenant.html" id="viewOverview">Overview</a>
                                             </li>
                                             <li class="nav-item1 p-0">
-                                                <a class="nav-link p-2" href="tenant-properties.html">Properties</a>
+                                                <a class="nav-link p-2" href="tenant-properties.html" id="viewProperties">Properties</a>
                                             </li>
                                             <li class="nav-item1 p-0">
-                                                <a class="nav-link p-2" href="tenant-tasks.html">Tasks</a>
+                                                <a class="nav-link p-2" href="tenant-tasks.html" id="viewTasks">Tasks</a>
                                             </li>
                                             <li class="nav-item1 p-0">
-                                                <a class="nav-link p-2" href="tenant-file.html">Files</a>
+                                                <a class="nav-link p-2" href="tenant-file.html" id="viewFiles">Files</a>
                                             </li>
                                         </ul>
                                     </div>
 
                                 </div>
 
+                            </div>
+                        </div>
+                        <div class="modal fade" id="contactInfoModal" tabindex="-1" role="dialog">
+                            <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <div class="text-justify ps-2 border-model-line">
+                                            <h2 class="modal-title">Personal <strong class="color-primary">Information</strong></h2>
+                                            <span class="">These details are required for rent reminders, tenants commutations
+                                                and portal access. </span>
+                                        </div>
+                                        <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        
+                                        <div class="accordion-item" id="accordion-item1">
+                                            <h2 class="accordion-header" id="headingOne">
+                                                <button class="accordion-button collapsed text-white" id="accordion-button1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                                    <span class="m-0 me-4 fs-1" style="font-weight: bold;">01</span>
+                                                    <h3 class="m-0"><strong>Contact Info</strong> <i class="fi fi-rs-pencil"></i><i
+                                                            class="fi fi-rs-angle-circle-down chevron icon"></i>
+                                                    </h3>
+                                                </button>
+                                            </h2>
+                                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExampe">
+                                                <div class="accordion-body p-0">
+                                                    <div class="card-body mb-2" style="background-color: #F4FAFF !important;">
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <div class="form-group" >
+                                                                    <label class="form-label"><strong>Phone</strong></label>
+                                                                    <div class="row" id="add-item-containerPhone">
+                                                                        <div class="col-md-6">
+                                                                            <select class="form-control form-select select2" data-bs-placeholder="Select" required>
+                                                                                <option label="Select">Country</option>
+                                                                                <option value="1">Germany</option>
+                                                                                <option value="2">Canada</option>
+                                                                                <option value="3">Usa</option>
+                                                                                <option value="4">Aus</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <input type="tel" class="form-control" placeholder="Phone Number" required>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-12 mt-2">
+                                                                        <a href="javascript:;" class="mt-1" id="add-item-phone">+Add Line Item</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body" style="background-color: #F4FAFF !important;">
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <div class="form-group" >
+                                                                    <label class="form-label"><strong>Email</strong></label>
+                                                                    <div class="row" id="add-item-containerEmail">
+                                                                        <div class="col-md-6">
+                                                                            <select class="form-control form-select select2" data-bs-placeholder="Select" required>
+                                                                                <option value="1">Germany</option>
+                                                                                <option value="2">Canada</option>
+                                                                                <option value="3">Usa</option>
+                                                                                <option value="4">Aus</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <input type="email" class="form-control" placeholder="Email" required>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="col-12 mt-2">
+                                                                        <a href="javascript:;" class="mt-1" id="add-item-email">+Add Line Item</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
+                                            Draft</button>
+                                        <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close'>Close</button>
+                                        <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
+                                        <button class="btn text-light button" style='background-color:#1467B0;' id='next' disabled>Next</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <!-- PAGE-HEADER END -->
@@ -960,7 +1052,7 @@
                                                             <span style="color: #727272;">No Contact Info on File</span>
                                                             <br>
                                                             <!-- <p>Past Work: Spruko, Inc.</p> -->
-                                                            <a href="javascript:void(0)" class="btn-link" style="font-weight: bold;">+ Add New</a>
+                                                            <a href="javascript:void(0)" class="btn-link" style="font-weight: bold;" id="add-contactInfo">+ Add New</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1735,7 +1827,81 @@
             logo.src = '../assets/header-img/question.svg';
         }
     </script>
+    <script>
+        $(document).ready(function() {
 
+            const tenantId = (new URL(document.location)).searchParams.get("tenantId");
+            // console.log($("#viewUnits").attr("href"))
+            //            
+            $(".company-name").text()
+            $("#viewProperties").attr("href", `./tenant-properties.html?tenantId=${tenantId}`)
+            $("#viewOverview").attr("href", `./view-tenant.html?tenantId=${tenantId}`)
+            $("#viewFiles").attr("href", `./tenant-file.html?tenantId=${tenantId}`)
+            $("#viewTasks").attr("href", `./tenant-tasks.html?tenantId=${tenantId}`)
+            console.log(propertyId)
+            $.ajax({
+                url: 'http://localhost:3000/api/spade/getTenantsByID',
+                type: 'GET',
+                data: {
+                    id:tenantId
+                },
+                contentType: "application/json; charset=utf-8",
+                // processData: false,
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function({data}) {
+                    console.log(data)
+                    $(".company-name").text(`${data[0][0].companyName} | ${data[0][0].firstName+" "+data[0][0].lastName}`)
+                },
+                error: function(xhr, status, error) {
+                    window.alert('Error: ' + error);
+                }
+            });
+            $("#add-contactInfo").click(()=>{
+                $("#contactInfoModal").modal("show")
+            })
+            $("#add-item-phone").on("click", () => {
+                $("#add-item-containerPhone").append(`<div class="col-md-6 mt-2">
+                                                                            <select class="form-control form-select select2" data-bs-placeholder="Select" required>
+                                                                                <option label="Select">Country</option>
+                                                                                <option value="1">Germany</option>
+                                                                                <option value="2">Canada</option>
+                                                                                <option value="3">Usa</option>
+                                                                                <option value="4">Aus</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="col-md-6 mt-2">
+                                                                            <input type="tel" class="form-control" placeholder="Phone Number" required>
+                                                                        </div>`)
+            });
+            $("#add-item-email").on("click", () => {
+                $("#add-item-containerEmail").append(`<div class="col-md-6">
+                                                                            <select class="form-control form-select select2" data-bs-placeholder="Select" required>
+                                                                                <option label="Select">Country</option>
+                                                                                <option value="1">Germany</option>
+                                                                                <option value="2">Canada</option>
+                                                                                <option value="3">Usa</option>
+                                                                                <option value="4">Aus</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <input type="email" class="form-control" placeholder="Email" required>
+                                                                        </div>`)
+            });
+            $('#add-item-container').on('click', '.del-btn', function () {
+                var $row = $(this).closest('.row');
+                var $rowsContainer = $row.parent();
+
+                if ($rowsContainer.children('.row').length > 1) {
+                    $row.remove();
+                } else {
+                    //   alert('Cannot delete the last row.');
+                }
+            });
+        });
+        // });
+    </script>
 </body>
 
 </html>

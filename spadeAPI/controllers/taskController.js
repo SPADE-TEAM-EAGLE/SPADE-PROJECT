@@ -15,6 +15,7 @@ const {
   selectEmailQuery,
   selectNameQuery,
   selectAnyQuery,
+  addVendorList,
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -88,6 +89,7 @@ exports.addTasks = async (req, res) => {
     notifyVendor,
     created_at,
     updated_at,
+    created_by,
   } = req.body;
   //   const { userId } = req.user
   const { userId } = req.body;
@@ -113,6 +115,7 @@ exports.addTasks = async (req, res) => {
         notifyVendor,
         created_at,
         updated_at,
+        created_by,
       ]);
       if (TasksResult.affectedRows === 0) {
         return res.status(400).send("Error1");
@@ -129,25 +132,42 @@ exports.addTasks = async (req, res) => {
             return res.send("Error2");
           }
         }
+        //  add vendor
+        for (let i = 0; i < vendorID.length; i++) {
+          const Vendorid = vendorID[i];
 
+          const vendorResults = await queryRunner(addVendorList, [
+            tasksID,
+            Vendorid,
+          ]);
+          if (vendorResults.affectedRows === 0) {
+            return res.send("Error2");
+          }
+        }
+        //  add vendor
         const tenantResult = await queryRunner(selectQuery("tenants", "id"), [
           tenantID,
         ]);
         const vendorResult = await queryRunner(selectQuery("vendor", "id"), [
           vendorID,
         ]);
-
-        const tenantName =
-          tenantResult[0][0].firstName + " " + tenantResult[0][0].lastName;
-        const tenantEmail = tenantResult[0][0].email;
-        const vendorName =
-          vendorResult[0][0].firstName + " " + vendorResult[0][0].lastName;
-        // const vendorEmail = vendorResult[0][0].email;
-
-        const CompanyName = tenantResult[0][0].companyName;
         const landlordResult = await queryRunner(selectQuery("users", "id"), [
           userId,
         ]);
+
+        const tenantName =
+          tenantResult[0][0].firstName + " " + tenantResult[0][0].lastName;
+
+        const tenantEmail = tenantResult[0][0].email;
+
+        // const vendorLists = req.body.map((vendor) => vendor.vendorID);
+        // console.log(vendorLists);
+
+        const vendorName =
+          vendorResult[0][0].firstName + " " + vendorResult[0][0].lastName;
+
+        const CompanyName = tenantResult[0][0].companyName;
+
         const landlordName =
           landlordResult[0][0].FirstName + " " + landlordResult[0][0].LastName;
 
@@ -193,3 +213,32 @@ exports.addTasks = async (req, res) => {
 };
 
 //  #############################  ADD TASK ENDS HERE ##################################################
+
+//  ############################# View All Invoices Start ############################################################
+exports.getAllVendors = async (req, res) => {
+  const { ID } = req.body;
+  try {
+    const getVendorAPI = await queryRunner(
+      selectQuery("vendor", "landlordID"),
+      [ID]
+    );
+
+    if (getVendorAPI[0].length > 0) {
+      res.status(200).json({
+        data: getVendorAPI,
+        message: "All invoices retrieved successfully",
+      });
+    } else {
+      res.status(400).json({
+        message: "No data found",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "An error occurred while retrieving invoices.",
+      error: error.message,
+    });
+  }
+};
+//  ############################# View All Invoice  End ############################################################
