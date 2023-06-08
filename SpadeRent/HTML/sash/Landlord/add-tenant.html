@@ -982,8 +982,8 @@ background-color: white;
                                                             <span class="text-danger d-none">Rent amount is
                                                                 required!</span>
                                                         </div>
-                                                        <div class="col-md-1 text-center">
-                                                            <button type="button" class="btn position-relative p-0 d-flex">
+                                                        <div class="col-md-1 d-flex justify-content-center align-items-end">
+                                                            <button type="button" class="btn p-0">
                                                                 <i class="fi fi-rs-trash text-danger fs-5"></i>
                                                             </button>
                                                         </div>
@@ -2322,6 +2322,7 @@ background-color: white;
     <script>
         var selectedFiles = [];
         $(document).ready(function () {
+            // $("#preloader").fadeIn("fast");
             // $("#succesModal").modal("show")
             let tenantID;
             $("#send-email").click(()=>{
@@ -2453,7 +2454,7 @@ background-color: white;
 
 
             $("#add-item").on("click", () => {
-                $("#add-item-container").append(`<div class="row row-multiple mb-2 pb-3" style="background-color: #F4FAFF !important;"><div class="col-md-5">
+                $("#add-item-container").append(`<div class="row row-multiple mb-2 pb-3" style="background-color: #F4FAFF !important;"><div class="col-md-6">
                                             <label for="inputEmail4" class="form-label">Date of Rent Change (Optional)</label>
                                             <input type="date" class="form-control input-date" id="inputEmail4" required>
                                           </div>
@@ -2462,11 +2463,11 @@ background-color: white;
                                             <input type="text" class="form-control input-amount" id="amountChange" pattern="[0-9]{7}" placeholder="Enter Amount.." maxlength="7"
                                                                 oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                                           </div>
-                                          <div class="col-md-2 text-center d-flex align-items-center">
-                                            <button type="button" class="btn position-relative">
-                                                                <i class="fi fi-rs-trash text-danger del-btn fs-5"></i>
+                                          <div class="col-md-1 d-flex justify-content-center align-items-end">
+                                                            <button type="button" class="btn p-0">
+                                                                <i class="fi fi-rs-trash text-danger fs-5"></i>
                                                             </button>
-                                        </div>`)
+                                                        </div>`)
             });
             $('#add-item-container').on('click', '.del-btn', function () {
                 var $row = $(this).closest('.row');
@@ -3228,7 +3229,7 @@ dateTable();
         })
         // let data;
         function getData(selectedFilter = "alphabets") {
-            $("#global-loader").fadeIn("fast")
+            $("#preloader").fadeIn("fast");
             // console.log(22)
             $.ajax({
                 url: 'http://localhost:3000/api/spade/viewPropertyTenant',
@@ -3240,6 +3241,9 @@ dateTable();
                 },
                 success: function ({data,user}) {
                     console.log(data)
+                    if(data[0].length===0){
+                        window.location="./new-tenant.html"
+                    }
                     $("#user-name").text(user)
                     var tableBody = $('#table_body');
                     tableBody.empty();
@@ -3285,7 +3289,7 @@ dateTable();
                         // Append the row to the table body
                         tableBody.append(row);
                     });
-                    $("#global-loader").fadeOut("slow")
+                    $("#preloader").fadeOut("slow")
                     $('.edit-option').click(function (e) {
                         e.preventDefault();
                         const propertyIdElement = $(this).closest("tr").find(".tenant-id");

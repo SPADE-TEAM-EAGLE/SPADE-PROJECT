@@ -16,7 +16,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="../assets/images/brand/favicon.ico" />
 
     <!-- TITLE -->
-    <title>Property Tasks - SpadeRent</title>
+    <title>Property Tenant - SpadeRent</title>
 
     <!-- BOOTSTRAP CSS -->
     <link id="style" href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -557,117 +557,341 @@ color: #000;
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <div class="text-justify ps-2 border-model-line">
-                        <h2 class="modal-title">Create <strong class="color-primary">New Task</strong></h2>
-                        <span class="">The real power of tasks is keeping track of deadlines and having a 
-                            log of all work and communication related to the tasks for later reference.</span>
+                    <div class="text-justify ps-2 border-model-line title-text">
+                        <h2 class="modal-title">Create <strong class="color-primary" id="title-sub">New Tenant</strong>
+                        </h2>
+                        <span class="">Post your properties to thousands of potential investors,
+                            tenants and interested individuals.</span>
                     </div>
-                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="top-close">
+                    <button type="button" class="btn btn-primary me-4 mt-3 d-none" id="edit-btn"><i
+                            class="fi fi-rs-pencil" style="display:block"></i><small>Edit Details</small></button>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                        <form class="row g-3" enctype="multipart/form-data">
-                            <div class="col-md-4">
-                                <label for="inputEmail4" class="form-label fw-bold">Task Name</label>
-                                <input class="form-control" placeholder="Sink in Leaked" type="text">
-                                <span class="text-danger d-none">Property ID is required!</span>
+                    <div class="accordion-item mb-4" id="accordion-item1">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button text-white" type="button" id="accordion-button1"
+                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                                aria-expanded="true" aria-controls="collapseOne">
+                                <span class="m-0 me-4 fs-1" style="font-weight: bold;">01</span>
+                                <h3 class="m-0"><strong>Tenant Information</strong> <i class="fi fi-rs-pencil"></i><i
+                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
+                                </h3>
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <form class="row g-3" enctype="multipart/form-data">
+                                    <div class="col-md-6">
+                                        <label for="inputEmail4" class="form-label fw-bold">First Name<spnan
+                                                class="text-danger"> *</span></label>
+                                        <input type="text" class="form-control form" placeholder="Enter First Name"
+                                            id="firstName" required>
+                                        <span class="text-danger d-none">First name is required!</span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="inputPassword4" class="form-label fw-bold">Last Name<spnan
+                                                class="text-danger"> *</span></label>
+                                        <input type="text" class="form-control form" placeholder="Enter Last Name"
+                                            id="lastName" required>
+                                        <span class="text-danger d-none">Last name required!</span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="inputAddress" class="form-label fw-bold">Company Name <span
+                                                class="fw-light">(Optional)</span>
+                                        </label>
+                                        <input type="text" class="form-control form" id="company"
+                                            placeholder="Enter Company Name">
+                                        <!-- <span class="text-danger d-none">Company name is required!</span> -->
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="inputCity" class="form-label fw-bold">Email<spnan
+                                                class="text-danger"> *</span></label>
+                                        <input type="text" class="form-control form" placeholder="Enter Email"
+                                            id="email" required>
+                                        <span class="text-danger d-none">Email is required!</span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="inputState" class="form-label fw-bold">Phone Number <span
+                                                class="fw-light">(Optional)</span></label>
+                                        <input id="phone" name="phone" type="tel" autocomplete="off">
+                                        <span id="valid-msg" class="d-none text-success">✓ Valid</span>
+                                        <span id="error-msg" class="hide text-danger"></span>
+                                        </select>
+                                        <!-- <span class="text-danger d-none">State is required!</span> -->
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="inputAddress2" class="form-label fw-bold">Address <span
+                                                class="fw-light">(Optional)</span></label>
+                                        <input type="text" class="form-control" id="address"
+                                            placeholder="Apartment, studio, or floor">
+                                        <!-- <span class="text-danger d-none">Address is required!</span> -->
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="inputState" class="form-label fw-bold">State<spnan
+                                                class="text-danger">*</span></label>
+                                        <select id="state" class="form-select form" required>
+                                            <option selected>Choose...</option>
+                                        </select>
+                                        <span class="text-danger d-none">State is required!</span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="inputState" class="form-label fw-bold">City <spnan
+                                                class="text-danger">*</span></label>
+                                        <select id="city" class="form-select form" required>
+                                            <option selected>Choose...</option>
+
+                                        </select>
+                                        <span class="text-danger d-none">City is required!</span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="inputPassword4" class="form-label fw-bold">Zip Code <spnan
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control form" id="zip" pattern="[0-9]{5}"
+                                            placeholder="A valid 5-digit zip code" maxlength="5"
+                                            oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                                        <span class="text-danger d-none">Zip code is required!</span>
+                                    </div>
+                                </form>
                             </div>
-                            <div class="col-md-4">
-                                <label for="inputState" class="form-label fw-bold">Assign To</label>
-                                <select id="state" class="form-select form">
-                                <option selected>Choose...</option>
-                                <option>Sindh</option>
-                                <option>Punjab</option>
-                                <option>Balochistan</option>
-                                <option>KPK</option>
-                            </select>
-                                <span class="text-danger d-none">Property name required!</span>
+                        </div>
+                    </div>
+                    <div class="accordion-item mb-4" id="accordion-item2">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed text-white" type="button" id="accordion-button2"
+                                data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
+                                aria-controls="collapseTwo">
+                                <span class="m-0 me-4 fs-1" style="font-weight: bold;">02</span>
+                                <h3 class="m-0"><strong>Assign Property</strong> <i class="fi fi-rs-pencil"></i><i
+                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
+                                </h3>
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <form class="row g-3">
+                                    <div class="col-md-4">
+                                        <label for="inputEmail4" class="form-label">Select Property<span
+                                                class="text-danger"> *</span></label>
+                                        <select id="property" class="form-select" required>
+                                            <option selected>Choose...</option>
+                                            <option>...</option>
+                                        </select>
+                                        <span class="text-danger d-none">Property is required!</span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="inputEmail4" class="form-label">Select Property Unit<span
+                                                class="text-danger"> *</span></label>
+                                        <select id="unit" class="form-select" required>
+                                            <option selected>Choose...</option>
+                                            <option>...</option>
+                                        </select>
+                                        <span class="text-danger d-none">Property units is required!</span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="inputAddress" class="form-label">Input Rent Amount /Per
+                                            Month<span class="text-danger"> *</span></label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"
+                                                style="color: #1467B0;background-color: transparent !important;">$</span>
+                                            <input type="text" class="form-control" id="rent" pattern="[0-9]{7}"
+                                                placeholder="Enter rent amount" maxlength="7"
+                                                oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                                        </div>
+                                        <span class="text-danger d-none">Rent amount is required!</span>
+                                    </div>
+                                </form>
                             </div>
-                            <div class="col-md-4">
-                                <label for="inputState" class="form-label fw-bold">Related To</label>
-                                <select id="state" class="form-select form">
-                                <option selected>Choose...</option>
-                                <option>Sindh</option>
-                                <option>Punjab</option>
-                                <option>Balochistan</option>
-                                <option>KPK</option>
-                            </select>
-                                <span class="text-danger d-none">Property name required!</span>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="inputEmail4" class="form-label fw-bold">Due Date</label>
-                                <input class="form-control" placeholder="MM/DD/YYYY" type="date">
-                                <span class="text-danger d-none">Property ID is required!</span>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="inputState" class="form-label fw-bold">Status</label>
-                                <select id="state" class="form-select form">
-                                <option selected>Choose...</option>
-                                <option>Sindh</option>
-                                <option>Punjab</option>
-                                <option>Balochistan</option>
-                                <option>KPK</option>
-                            </select>
-                                <span class="text-danger d-none">Property name required!</span>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="inputState" class="form-label fw-bold">Priority</label>
-                                <select id="state" class="form-select form">
-                                <option selected>Choose...</option>
-                                <option>Sindh</option>
-                                <option>Punjab</option>
-                                <option>Balochistan</option>
-                                <option>KPK</option>
-                            </select>
-                                <span class="text-danger d-none">Property name required!</span>
-                            </div>
-                            <div class="col-md-12">
-                                <label class="form-label fw-bold">Notes</label>
-                                <textarea class="form-control mb-4" placeholder="Sorry about that We will look into it." rows="4"></textarea>
-                                <span class="text-danger d-none">Photos are required!</span>
-                            </div>
-                            <div class="col-md-12">
-                                <label class="form-label fw-bold">Media/ Files</label>
-                                <div class="custom-file" style="border: 1px dashed #00000087;">
-                                    <input id="fileInput" type="file" name="image" class="custom-file-input form" accept=".jpg, .png, image/jpeg, image/png" aria-label="hello" multiple>
-                                    <span className="d-none"></span>
-                                    <label class="custom-file-label" for="fileInput">
-                                                <i class="fi fi-rs-cloud-upload"></i>
-                                                <div class="custom-file-text">
-                                                    <span>Upload Photo or drag and drop here</span>
-                                                    <span>JPEG and PNG, file size no more than 10MB</span>
-                                                </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item" id="accordion-item3">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed text-white" id="accordion-button3" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false"
+                                aria-controls="collapseThree">
+                                <span class="m-0 me-4 fs-1" style="font-weight: bold;">03</span>
+                                <h3 class="m-0"><strong>Lease Details</strong> <i class="fi fi-rs-pencil"></i><i
+                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
+                                </h3>
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                            data-bs-parent="#accordionExampe">
+                            <div class="accordion-body">
+                                <form class="row g-3">
+                                    <div class="col-md-12">
+                                        <label for="inputEmail4" class="form-label">Is this a gross lease or triple net
+                                            lease? <i class="fi fi-rs-info ms-2" style="color: #1467B0"></i></label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" value="Gross Lease"
+                                                name="lease" id="flexCheckDefault">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                Gross Lease
                                             </label>
-                                </div>
-                                <div class="selected-files">
-                                    <div class="file-grid"></div>
-                                </div>
-                                <span class="text-danger d-none">Photos are required!</span>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" value="Triple Net Lease"
+                                                name="lease" id="flexCheckChecked1" href="#collapse1" role="button"
+                                                aria-expanded="false" aria-controls="collapseExample1">
+                                            <label class="form-check-label" for="flexCheckChecked1">
+                                                Triple Net Lease
+                                            </label>
+                                        </div>
+                                        <!-- <input type="hidden" name="radioOptionsHidden" required> -->
+                                        <div class="collapse" id="collapse1">
+                                            <div class="card card-body">
+                                                <div class="text-justify ps-2 border-model-line">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <label for="inputEmail4" class="form-label">Base Rent Amount
+                                                                (Optional)</label>
+                                                            <div class="input-group">
+                                                                <span class="input-group-text"
+                                                                    style="color: #1467B0;background-color: transparent !important;">$</span>
+                                                                <input type="text" class="form-control" id="baseRent"
+                                                                    pattern="[0-9]{7}" placeholder="Enter Amount.."
+                                                                    maxlength="7"
+                                                                    oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                                                    required>
+                                                            </div>
+                                                            <span class="text-danger d-none">Rent amount is
+                                                                required!</span>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label for="inputPassword4" class="form-label">Triple Net
+                                                                Amount (Optional)</label>
+                                                            <div class="input-group">
+                                                                <span class="input-group-text"
+                                                                    style="color: #1467B0;background-color: transparent !important;">$</span>
+                                                                <input type="text" class="form-control" id="tripleNet"
+                                                                    pattern="[0-9]{7}" placeholder="Enter Amount.."
+                                                                    maxlength="7"
+                                                                    oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                                                    required>
+                                                            </div>
+                                                            <span class="text-danger d-none">Rent amount is
+                                                                required!</span>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label for="inputEmail4" class="form-label">Lease Start
+                                                                Date</label>
+                                                            <input type="date" class="form-control position-relative"
+                                                                id="leaseStart" required>
+                                                            <span class="text-danger d-none">Rent amount is
+                                                                required!</span>
+                                                            <!-- <i class="fi fi-rs-calendar"></i> -->
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label for="inputPassword4" class="form-label">Lease End
+                                                                Date</label>
+
+                                                            <input type="date" class="form-control" id="leaseEnd"
+                                                                required>
+                                                            <span class="text-danger d-none">Rent amount is
+                                                                required!</span>
+                                                            <!-- <i class="fi fi-rs-calendar"></i> -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="inputEmail4" class="form-label">Are there any rent increases during
+                                            the Lease Term? <i class="fi fi-rs-info ms-2"
+                                                style="color: #1467B0"></i></label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" value="yes" name="yesno"
+                                                id="flexCheckChecked2" href="#collapse2" role="button"
+                                                aria-expanded="false" aria-controls="collapseExample2" required>
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                Yes
+                                            </label>
+                                        </div>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" value="no" name="yesno"
+                                                required>
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                No
+                                            </label>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-12 row">
+                                        <!-- <div class="col-md-5">
+                                            <label for="inputEmail4" class="form-label">Date of Rent Change
+                                                (Optional)</label>
+                                            <input type="email" class="form-control" id="inputEmail4">
+                                        </div>
+                                        <div class="col-md-5">
+                                            <label for="inputPassword4" class="form-label">Rent Amount Correlating to
+                                                that Date</label>
+                                            <input type="password" class="form-control" id="inputPassword4">
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button>
+                                                <i class="fi fi-rs-trash"></i>
+                                            </button>
+                                        </div> -->
+                                        <div class="collapse" id="collapse2">
+                                            <div class="card card-body">
+                                                <div class="text-justify" id="add-item-container">
+                                                    <div class="row row-multiple mb-2 pb-3" style="background-color: #F4FAFF !important;">
+                                                        <div class="col-md-6">
+                                                            <label for="inputEmail4" class="form-label">Date of Rent
+                                                                Change
+                                                                (Optional)</label>
+                                                            <input type="date" class="form-control input-date"
+                                                                id="dateofRentchange" required>
+                                                            <span class="text-danger d-none">Rent amount is
+                                                                required!</span>
+                                                        </div>
+                                                        <div class="col-md-5">
+                                                            <label for="inputPassword4" class="form-label">Rent Amount
+                                                                Correlating to
+                                                                that Date</label>
+                                                            <input type="text" class="form-control input-amount"
+                                                                id="amountChange" pattern="[0-9]{7}"
+                                                                placeholder="Enter Amount.." maxlength="7"
+                                                                oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                                                required>
+                                                            <span class="text-danger d-none">Rent amount is
+                                                                required!</span>
+                                                        </div>
+                                                        <div class="col-md-1 text-center">
+                                                            <button type="button" class="btn position-relative p-0 d-flex">
+                                                                <i class="fi fi-rs-trash text-danger fs-5"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a href="javascript:;" class="mt-1" id="add-item">+Add Line Item</a>
+                                </form>
                             </div>
-                        </form>
+                        </div>
                     </div>
-
                 </div>
-                <div class="modal-footer d-flex justify-content-between">
-                    <!-- <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
-                        Draft</button> -->
-                    <div class="d-flex">
-
-                        <label class="custom-control custom-checkbox me-2">
-                                <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1" checked="">
-                                <span class="custom-control-label">Notify Tenant</span>
-                            </label>
-                        <label class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1" checked="">
-                                <span class="custom-control-label">Notify Assignee(s)</span>
-                            </label>
-                    </div>
-                    <div class=""><button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close'>Close</button>
-                        <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
-                        <a href="javascript:void(0)" class="btn text-light btn-pill button disabled" style='background-color:#1467B0;' id='next'>Next</a></div>
-
+                <div class="modal-footer">
+                    <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft'
+                        disabled>Save as
+                        Draft</button>
+                    <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal"
+                        id='close'>Close</button>
+                    <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
+                    <button class="btn text-light button" style='background-color:#1467B0;' id='next'
+                        disabled>Next</button>
+                        <button class="btn text-light button d-none" style='background-color:#1467B0;' id='submit'
+                        >Submit</button>
                 </div>
             </div>
         </div>
@@ -787,7 +1011,6 @@ color: #000;
             </div>
         </div>
     </div>
-
     <div class="modal fade" id="succesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -1151,15 +1374,17 @@ color: #000;
                             <div class="col-xl-7 col-md-7">
                                 <div class="card border p-0 pb-3">
                                     <div class="card-body text-center p-0">
-                                        <span class=""><img src="../assets/images/new-task.png" alt=""></span>
-                                        <h1 class="mt-3" style="font-weight: 700;line-height: 2.5rem;">Keep Track of <span style="color: #1467B0;">Maintenance Issues</span></h1>
-                                        <p class="card-text px-5">Whether it is knowing when you last replaced the microwave or inputting a request a tenant told you about in person, have a clear history of maintenance issues at your rental.</p>
+                                        <span class=""><img src="../assets/images/new-tenant.png" alt=""></span>
+                                        <h1 class="mt-3" style="font-weight: 700;line-height: 2.5rem;">Find Your <span style="color: #1467B0;">Next Tenant!</span></h1>
+                                        <p class="card-text px-5">Whether you want to market your rental across the web or invite an interested 
+                                            renter to apply, you first need to add a property. After that, it's easy to 
+                                            stay organized as renters go from lead to applicant to tenant.</p>
                                     </div>
                                     <div class="card-footer text-center border-0">
                                         <div class="row">
                                             <div class="text-center">
                                                 <button type="button" class="btn btn-primary btn-pill btn-xl font-weight-bold" id="add_property_btn" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal"><i
-                                                    class="fe fe-plus me-2"></i><strong>ADD NEW TASK</strong></button> </div>
+                                                    class="fe fe-plus me-2"></i><strong>ADD NEW TENANT</strong></button> </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1887,810 +2112,7 @@ color: #000;
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
 
-    <script>
-        function checkFieldsStatus(accordionId) {
-            var accordionFields = $('#' + accordionId + ' input[type="text"], #' + accordionId + ' select');
-            var imageField = $('#' + accordionId + ' input[type="file"]');
-            var hasEmptyFields = false;
-            var hasErrorFields = false;
-            var hasFilledFields = false;
-
-            accordionFields.each(function() {
-                var $field = $(this);
-                if ($field.val() === '' || $field.val() === 'Choose...') {
-                    hasEmptyFields = true;
-                }
-                if ($field.hasClass('border-danger')) {
-                    hasErrorFields = true;
-                }
-                if ($field.val() !== '' || $field.val() !== 'Choose...') {
-                    hasFilledFields = true;
-                }
-            });
-            if (imageField.length && imageField.get(0).files.length === 0) {
-                hasEmptyFields = true;
-            }
-            if (hasEmptyFields && hasErrorFields) {
-                return 1;
-            } else if (!hasEmptyFields && !hasErrorFields && hasFilledFields) {
-                return 2;
-            } else if (hasEmptyFields && !hasErrorFields && hasFilledFields) {
-                console.log(2)
-                return 3;
-            } else {
-                return 0;
-            }
-        }
-
-        let counter = 0
-
-        function checkFieldsFilled(id) {
-            const status = checkFieldsStatus(id)
-            if (id === "accordion-item2" && counter === 0) {
-                counter += 1
-                return
-            }
-            const accordionItem = document.getElementById(id);
-            const formFields = accordionItem.querySelectorAll("input, select");
-            let allFieldsFilled = true;
-            formFields.forEach(function(field) {
-                if (field.value === "" || field.value === "Choose...") {
-                    allFieldsFilled = false;
-                }
-
-            });
-            const chevronIcon = accordionItem.querySelector(".icon");
-            switch (status) {
-                case 0:
-
-                    break;
-                case 1:
-                    chevronIcon.classList.remove("fi-rs-check-circle");
-                    chevronIcon.classList.remove("chevron");
-                    chevronIcon.classList.add("fi-rs-exclamation");
-                    chevronIcon.classList.add("cross");
-                    break;
-                case 2:
-                    chevronIcon.classList.remove("fi-rs-exclamation");
-                    chevronIcon.classList.remove("chevron");
-                    chevronIcon.classList.add("fi-rs-check-circle");
-                    chevronIcon.classList.remove("cross");
-                    chevronIcon.classList.add("tick");
-                    break;
-                case 3:
-                    console.log(2)
-                    chevronIcon.classList.remove("fi-rs-exclamation");
-                    chevronIcon.classList.add("chevron");
-                    // chevronIcon.classList.add("fi-rs-check-circle");
-                    chevronIcon.classList.remove("cross");
-                    chevronIcon.classList.remove("tick");
-                    break;
-                default:
-                    break;
-            }
-        }
-        var selectedFiles = [];
-
-        $(document).ready(function() {
-
-            $.ajax({
-                url: 'http://api.geonames.org/searchJSON',
-                method: 'GET',
-                data: {
-                    country: 'PK',
-                    maxRows: 500,
-                    username: 'developedmatz',
-                    style: 'full'
-                },
-                success: function(result) {
-                    // Handle state selection change
-                    $('#state').change(function() {
-                        var selectedState = $(this).val();
-                        if (selectedState === "KPK") {
-                            selectedState = "Khyber Pakhtunkhwa"
-                        }
-
-                        var cityDropdown = $('#city');
-
-                        // Clear existing options
-                        cityDropdown.empty();
-                        cityDropdown.append($('<option></option>').text("Choose..."));
-                        cities = []
-                        if (selectedState !== "Choose...") {
-                            // Populate city options based on selected state
-                            count = 0
-                            data = result.geonames
-                            for (item of data) {
-                                if (item.adminName1 === selectedState) {
-                                    cities.push(item.name)
-                                    count++
-                                }
-                                if (count === 10) {
-                                    break
-                                }
-                            }
-
-
-                            cities.forEach(function(city) {
-                                cityDropdown.append($('<option></option>').text(city));
-                            });
-
-                        }
-                    })
-                    $('#state_update').change(function() {
-                        var selectedState = $(this).val();
-                        if (selectedState === "KPK") {
-                            selectedState = "Khyber Pakhtunkhwa"
-                        }
-
-                        var cityDropdown = $('#city_update');
-
-                        // Clear existing options
-                        cityDropdown.empty();
-                        cityDropdown.append($('<option></option>').text("Choose..."));
-                        cities = []
-                        if (selectedState !== "Choose...") {
-                            // Populate city options based on selected state
-                            count = 0
-                            data = result.geonames
-                            for (item of data) {
-                                if (item.adminName1 === selectedState) {
-                                    cities.push(item.name)
-                                    count++
-                                }
-                                if (count === 10) {
-                                    break
-                                }
-                            }
-
-
-
-                            cities.forEach(function(city) {
-                                cityDropdown.append($('<option></option>').text(city));
-                            });
-
-                        }
-                    });
-                }
-            })
-
-            function areAllFieldsFilled() {
-                var accordion1Fields = $('#accordion-item1 input[type="text"], #accordion-item1 select');
-                var accordion2Fields = $('#accordion-item2 input[type="text"], #accordion-item2 select');
-                var imageInput = $('#fileInput');
-                var allFieldsFilled = accordion1Fields.filter(function() {
-                    return $(this).val() === '' || $(this).val() === 'Choose...';
-                }).length === 0 && accordion2Fields.filter(function() {
-                    return $(this).val() === '' || $(this).val() === 'Choose...';
-                }).length === 0 && imageInput.get(0).files.length > 0;
-
-                return allFieldsFilled;
-            }
-
-            // Function to enable or disable buttons based on field status
-            function updateButtonStatus() {
-                var accordion1Fields = $('#accordion-item1 input[type="text"], #accordion-item1 select');
-                var accordion2Fields = $('#accordion-item2 input[type="text"], #accordion-item2 select');
-                var imageInput = $('#fileInput');
-
-                var isAccordion1FieldsEmpty = accordion1Fields.filter(function() {
-                    return $(this).val() !== '' || $(this).val() === 'Choose...';
-                }).length === 0;
-
-                var isAccordion2FieldsEmpty = accordion2Fields.filter(function() {
-                    return $(this).val() !== '' || $(this).val() === 'Choose...';
-                }).length === 0;
-
-                var isImageInputEmpty = imageInput.get(0).files.length === 0;
-
-                // Enable or disable the buttons based on the fields' status
-                if (!isAccordion1FieldsEmpty || !isAccordion2FieldsEmpty || !isImageInputEmpty) {
-                    $('#draft').removeAttr('disabled');
-                } else {
-                    $('#draft').attr('disabled', 'disabled');
-                }
-
-                var allFieldsFilled = areAllFieldsFilled();
-
-                // Enable or disable the buttons based on the fields' status
-                if (allFieldsFilled) {
-                    $('#next').removeClass("disabled");
-                    //   $('#draft').removeAttr("disabled");
-                } else {
-                    $('#next').addClass("disabled");
-                    //   $('#draft').removeAttr("disabled");
-
-                }
-            }
-
-            // Call the updateButtonStatus function when any field in the accordions is changed
-            $('#accordion-item1 input, #accordion-item1 select, #accordion-item2 input, #accordion-item2 select').on('input change', function() {
-                var $field = $(this);
-                var $errorMessage = $field.next('.text-danger');
-
-                if ($field.val() === '' || $field.val() === 'Choose...') {
-                    $field.addClass('border-danger');
-                    $errorMessage.removeClass('d-none');
-                } else {
-                    $field.removeClass('border-danger');
-                    $errorMessage.addClass('d-none');
-                }
-                updateButtonStatus();
-            });
-            // Handle change event of checkboxes
-
-
-            $('#fileInput').on('change', function() {
-                var files = Array.from($(this)[0].files);
-                // console.log(files)
-                files.forEach(function(file) {
-                    selectedFiles.push(file); // Add each file to the selected files array
-                });
-
-                updateSelectedFilesContainer(); // Update the selected files container
-            });
-            $('#fileInput_update').on('change', function() {
-                // console.log($(this)[0].files)
-                var files = Array.from($(this)[0].files);
-                // console.log(files)
-                files.forEach(function(file) {
-                    selectedFiles.push(file); // Add each file to the selected files array
-                });
-
-                updateSelectedFilesContainer(); // Update the selected files container
-            });
-
-            $(document).on('click', '.delete-file', function() {
-                var index = $(this).data('index');
-                selectedFiles.splice(index, 1); // Remove the selected file from the array
-                updateSelectedFilesContainer(); // Update the selected files container
-            });
-
-            function resetAccordions() {
-                // Reset all accordions
-                $('.accordion-item').each(function() {
-                    var accordionId = $(this).attr('id');
-                    var accordionFields = $('#' + accordionId + ' input[type="text"], #' + accordionId + ' select');
-                    var imageField = $('#' + accordionId + ' input[type="file"]');
-                    var accordionButton = $('#' + accordionId + ' button.accordion-button');
-
-                    // Empty input fields
-                    accordionFields.val('');
-
-                    // Remove border-danger class
-                    accordionFields.removeClass('border-danger');
-
-                    // Hide error spans
-                    accordionFields.siblings('span.text-danger').addClass('d-none');
-
-                    // Reset image input
-                    // if (imageField.length) {
-                    //     imageField.val('');
-                    //     imageField.siblings('label.custom-file-label').find('.custom-file-text span').first().text('Upload Photo or drag and drop here');
-                    //     imageField.siblings('.selected-files').find('.file-grid').empty();
-                    // }
-                    // // $('#accordion-item1').find('.file-grid').empty();
-                    // Reset accordion button icons
-                    accordionButton.find('.fi-rs-exclamation').addClass('fi-rs-angle-circle-down').addClass("chevron").removeClass('fi-rs-exclamation').removeClass("cross");
-                    accordionButton.find('.fi-rs-check-circle').addClass('fi-rs-angle-circle-down').addClass("chevron").removeClass('fi-rs-check-circle').removeClass("tick");
-                    $('#next').addClass("disabled");
-                    $('#draft').attr("disabled", "disabled");
-                });
-            }
-
-            $('#close,#top-close').on('click', function(e) {
-                e.preventDefault()
-                resetAccordions()
-                $('#addModal').modal('hide');
-            })
-            $(document).on('click', '#next', function(e) {
-                e.preventDefault()
-                selectedFiles = []
-                $('#addModal').modal('hide');
-
-                // $("#largemodal").addClass("hide");
-                var formData = new FormData();
-
-                // Get the form data
-                var propertyName = $("#propertyName").val();
-                var address = $("#address").val();
-                var city = $("#city").val();
-                var state = $("#state").val();
-                var zipCode = $("#zip").val();
-                var propertyType = $("#propertyType").val();
-                var propertySQFT = $("#propertyTotalSF").val();
-                var units = $("#units").val();
-
-                // Add the form data to the FormData object
-                formData.append('propertyName', propertyName);
-                formData.append('address', address);
-                formData.append('city', city);
-                formData.append('state', state);
-                formData.append('zipCode', zipCode);
-                formData.append('propertyType', propertyType);
-                formData.append('propertySQFT', propertySQFT);
-                formData.append('units', units);
-
-                // Get the selected files
-                var files = $('#fileInput')[0].files;
-
-                // Add the files to the FormData object
-                for (var i = 0; i < files.length; i++) {
-                    formData.append('image', files[i]);
-                }
-
-                // Send the form data to the server using AJAX
-                $.ajax({
-                    url: 'http://localhost:3000/api/spade/property',
-                    type: 'POST',
-                    data: formData,
-                    contentType: false,
-                    processData: false,
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-
-                    success: function(response) {
-                        console.log(2)
-                            // console.log(1)
-                        $('#succesModal').modal('show')
-                            // window.location = '../Landlord/properties-all.html';
-                    },
-                    error: function(xhr, status, error) {
-                        window.alert('Error: ' + error);
-                    }
-                });
-
-
-            });
-            let propertyId;
-
-            function updateSelectedFilesContainer() {
-                var selectedFilesContainer = $('.file-grid');
-                selectedFilesContainer.empty();
-                console.log(selectedFiles)
-                selectedFiles.forEach(function(file, index) {
-
-                    var fileElement = $('<div>')
-                        .addClass('selected-file')
-                        .append(
-                            $('<img>')
-                            .addClass('file-preview')
-                            .attr('src', typeof file === "object" ? URL.createObjectURL(file) : '../../../../spadeAPI/uploads/' + file)
-                        )
-                        .append(
-                            $('<div>')
-                            .addClass('file-details')
-                            .append($('<span>').text("Image-" + (index + 1)))
-                            // .append($('<span>').text(fileSize))
-                        )
-                        .append(
-                            $('<span>')
-                            .addClass('delete-file')
-                            .text('X')
-                            .attr('data-index', index)
-                        )
-                        .appendTo(selectedFilesContainer);
-
-                });
-
-            }
-
-            function formatFileSize(bytes) {
-                if (bytes === 0) return '0 Bytes';
-                var k = 1024;
-                var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-                var i = Math.floor(Math.log(bytes) / Math.log(k));
-                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-            }
-
-            function truncateFileName(fileName) {
-                var maxFileNameLength = 10; // Define the maximum length of the file name
-                if (fileName.length > maxFileNameLength) {
-                    return fileName.substring(0, maxFileNameLength) + '...'; // Truncate the file name
-                }
-
-                return fileName;
-            }
-
-            $('#myModal_edit').find('input, select').on('input change', function() {
-                var updateButton = document.getElementById('update');
-                console.log(updateButton)
-                var isFilled = true;
-
-                // Check each field for empty value and toggle red border and span visibility
-                $('#myModal_edit').find('input, select').each(function(index) {
-                    var value = $(this).val().trim();
-                    var span = $(this).siblings('.text-danger');
-                    if (index == 0 && $('.file-grid').children()[1] ?.length === 0) {
-                        isFilled = false;
-                    } else if (index >= 1) {
-                        if (value === '' || value === 'Choose...') {
-                            $(this).addClass('border-danger');
-                            //   console.log(1)
-                            span.removeClass('d-none');
-                            isFilled = false;
-                        } else {
-                            $(this).removeClass('border-danger');
-                            span.addClass('d-none');
-                        }
-                    }
-                });
-
-                // Toggle button behavior based on the fields' status
-                if (isFilled) {
-                    updateButton.classList.remove('disabled')
-                } else {
-                    updateButton.classList.add("disabled")
-                }
-            });
-
-
-
-            // Call the updateButtonStatus function when any field in the accordions is changed
-
-            // Handle change event of checkboxes
-            $('#propertyTable').DataTable({
-                paging: true,
-                searching: false,
-                info: false,
-                lengthChange: false,
-                pageLength: 10,
-
-
-
-            });
-            let columnsToHide = []
-            $('input[type="checkbox"]').change(function() {
-                var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
-                var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
-                console.log(columnIndex, isColumnVisible)
-                    // Toggle the visibility of the corresponding column
-                $('table').find('tr').each(function() {
-                    var column = $(this).find('th:nth-child(' + columnIndex + '), td:nth-child(' + columnIndex + ')');
-                    isColumnVisible ? column.show() : column.hide();
-                });
-            });
-            $("#succesModal").on('hide.bs.modal', function() {
-                if (imageField.length) {
-                    imageField.val('');
-                    imageField.siblings('label.custom-file-label').find('.custom-file-text span').first().text('Upload Photo or drag and drop here');
-                    imageField.siblings('.selected-files').find('.file-grid').empty();
-                }
-                resetAccordions()
-                    // $('#accordion-item1').find('.file-grid').empty();
-                    // getData()
-            })
-
-
-            let result;
-
-            function filterTable(selectedFilter) {
-                var tableBody = $('#table_body');
-                var rows = tableBody.find('tr');
-
-                if (selectedFilter === 'alphabets') {
-                    rows.sort(function(a, b) {
-                        var textA = $(a).find('.propertyName').text().toLowerCase();
-                        var textB = $(b).find('.propertyName').text().toLowerCase();
-                        return textA.localeCompare(textB);
-                    });
-                } else if (selectedFilter === 'ascending') {
-                    rows.sort(function(a, b) {
-                        var idA = parseInt($(a).find('.property-id').text());
-                        var idB = parseInt($(b).find('.property-id').text());
-                        return idA - idB;
-                    });
-                } else if (selectedFilter === 'descending') {
-                    rows.sort(function(a, b) {
-                        var idA = parseInt($(a).find('.property-id').text());
-                        var idB = parseInt($(b).find('.property-id').text());
-                        return idB - idA;
-                    });
-                }
-
-                tableBody.empty().append(rows);
-            }
-
-            // Filter functionality
-            $('#ascending').on('click', function() {
-                filterTable("ascending")
-            });
-            $('#descending').on('click', function() {
-                filterTable("descending")
-            });
-            $('#alphabets').on('click', function() {
-                // console.log(1)
-                filterTable("alphabets")
-            });
-            // console.log($('#alphabets'))
-            // Search functionality
-            $('#search_input').on('keyup', function() {
-                var searchValue = $(this).val().toLowerCase();
-                $('#table_body tr').filter(function() {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
-                });
-            });
-
-            // Function to update the table based on filters
-            function updateTable() {
-                $('#table_body').empty();
-                $.ajax({
-                    url: 'http://localhost:3000/api/spade/allproperty',
-                    type: 'GET',
-                    contentType: false,
-                    processData: false,
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-                    success: function(response) {
-                        // console.log(response);
-
-                        // Assuming response is an array of property objects
-                        var tableBody = $('#table_body');
-
-                        // Iterate over the response and populate the table
-                        response.forEach(function(property) {
-                            // Generate table rows with property data
-                            var row = '<tr>' +
-                                '<td>' + property.propertyId + '</td>' +
-                                '<td>' + property.propertyName + '</td>' +
-                                '<td>' + property.propertyType + '</td>' +
-                                '<td>' + property.units + '</td>' +
-                                '<td>' + property.address + '</td>' +
-                                '</tr>';
-
-                            // Append the row to the table body
-                            tableBody.append(row);
-                        });
-                    },
-                    error: function(xhr, status, error) {
-                        window.alert('Error: ' + error);
-                    }
-                });
-            }
-
-            // Initial table population
-            // updateTable();
-
-
-            $('#myModal_edit').on('hidden.bs.modal', function() {
-                // Clear input values
-                // console.log(1)
-                $(this).find('input, textarea, select').val('');
-
-                // Clear file input values
-                // $(this).find('input[type="file"]').val(null);
-
-                // Clear radio button selections
-                $(this).find('input[type="radio"]').prop('checked', false);
-
-                $('#myModal_edit').find('.file-grid').empty();
-                $('#accordion-item1').find('.file-grid').empty();
-            });
-
-
-
-            // let propertyId;
-
-            $(document).on('click', '#update', function(e) {
-                e.preventDefault();
-                $("#myModal_edit").modal("hide");
-
-                var formData = new FormData();
-                var propertyName = $("#propertyName_update").val();
-                var address = $("#address_update").val();
-                var city = $("#city_update").val();
-                var state = $("#state_update").val();
-                var zipCode = $("#zip_update").val();
-                var propertyType = $("#propertyType_update").val();
-                var propertySQFT = $("#propertyTotalSF_update").val();
-                var units = $("#unit_update").val();
-
-                formData.append('id', propertyId);
-                formData.append('propertyName', propertyName);
-                formData.append('address', address);
-                formData.append('city', city);
-                formData.append('state', state);
-                formData.append('zipCode', zipCode);
-                formData.append('propertyType', propertyType);
-                formData.append('propertySQFT', propertySQFT);
-                formData.append('units', units);
-
-                // Retrieve existing image names from the DOM
-
-                var existingImageNames = [];
-                selectedFiles.forEach((file) => {
-                        if (typeof file === "string") {
-                            existingImageNames.push(file)
-                        }
-                    })
-                    // Get the selected files
-                var files = selectedFiles.map(function(file) {
-                    return file instanceof File ? file : file.name;
-                });
-
-                // Add the selected files to the FormData object
-                files.forEach(function(file) {
-                    formData.append('image', file);
-                });
-
-                formData.append("existingImages", existingImageNames)
-                $.ajax({
-                    url: 'http://localhost:3000/api/spade/updateProperty',
-                    // url: 'http://ec2-54-158-103-230.compute-1.amazonaws.com:3000/api/spade/updateProperty',
-                    type: 'PUT',
-                    data: formData,
-                    contentType: false,
-                    processData: false,
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-                    success: function(response) {
-                        e.preventDefault()
-                            // getData();
-                    },
-                    error: function(xhr, status, error) {
-                        window.alert('Error: ' + error);
-                    }
-                });
-            });
-            $(document).on('click', '#confirmDelete', function(e) {
-
-                    e.preventDefault();
-                    // delete using AJAX
-                    $('#myModal_delete').modal('hide');
-                    $.ajax({
-                        url: 'http://localhost:3000/api/spade/propertyDelete',
-                        type: 'DELETE',
-                        data: JSON.stringify({
-                            "id": propertyId
-                        }),
-                        contentType: "application/json; charset=utf-8",
-                        processData: false,
-                        headers: {
-                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                        },
-                        success: function(response) {
-                            // getData()
-                        },
-                        error: function(xhr, status, error) {
-                            window.alert('Error: ' + error);
-                        }
-                    });
-                })
-                // let data;
-
-            function getData(selectedFilter = "alphabets") {
-                // console.log(2)
-                $("#global-loader").fadeIn("fast")
-                    // console.log(22)
-                $.ajax({
-                    url: 'http://localhost:3000/api/spade/allproperty',
-                    type: 'GET',
-                    contentType: false,
-                    processData: false,
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-                    success: function(response) {
-                        if (response.data[0].length === 0) {
-
-                            window.location = './new-property.html'
-                        } else {
-                            $("#user-name").text(response.user)
-
-                            var tableBody = $('#table_body');
-
-                            tableBody.empty();
-
-                            response.data[0] ?.forEach(function(property) {
-                                var image = '<td><img src="../../../../spadeAPI/uploads/' + property.images[0] + '" alt=""></td>';
-                                // var image = '<td><img src="../../../../../../Desktop/spade API 2/uploads/image-1684250579662.png" alt="hhghghgh"></td>';
-
-                                var propertyId = '<td class="property-id " style="font-weight: 600;">' + property
-                                    .id + '</td>';
-
-                                var propertyName = '<td class="propertyName" style="font-weight: 600;">' +
-                                    property
-                                    .propertyName +
-                                    '</td>';
-                                var colorClass = '';
-                                var backgroundClass = '';
-
-                                if (property.propertyType === 'Single Family') {
-                                    var colorClass = 'rounded-pill-Single-Family'
-                                } else if (property.propertyType === 'Multi-Family') {
-                                    var colorClass = 'rounded-pill-Multi-Family';
-
-                                } else if (property.propertyType === 'Multi-Commercial') {
-                                    var colorClass = 'rounded-pill-Multi-Commercial';
-                                }
-
-                                var propertyType =
-                                    '<td class="propertyType"><a class="like" href="javascript:;">' +
-                                    `<span class="badge btn-light ${colorClass} rounded-pill py-2 px-3">` +
-                                    '<i class="fe fe-circle me-1"></i>' + property.propertyType + '</span>' +
-                                    '</a></td>';
-
-                                var propertyUnits = '<td class="propertyUnits">' +
-                                    '<p style="font-weight: 600;" class="mb-1">' + property.units +
-                                    ' Unit(s)</p>' +
-                                    '<span class="font-weight-normal">' + property.propertySQFT +
-                                    ' Square Feet</span>' +
-                                    '</td>';
-
-                                var propertyAddress = '<td class="propertyAddress">' +
-                                    '<p style="font-weight: 600;" class="mb-1">' + property.address + '</p>' +
-                                    '<span>' + property.city + ', ' + property.state + ' ' + property.zipCode +
-                                    '</span>' +
-                                    '</td>';
-
-                                var dropdownMenu =
-                                    '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
-                                    '<ul class="dropdown-menu">' +
-                                    '<li><a class="edit-option dropdown-item text-primary" href="javascript:void(0)">Edit</a></li>' +
-                                    '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>' +
-                                    `<li><a class="dropdown-item text-success" href="./view-property.html?propertyId=${property.id}">View</a></li>` +
-                                    '</ul></td>';
-                                // Create a table row and append the generated columns
-                                var row = '<tr>' + image + propertyId + propertyName + propertyType +
-                                    propertyUnits + propertyAddress + dropdownMenu + '</tr>';
-
-                                // Append the row to the table body
-                                tableBody.append(row);
-                            });
-                            $("#global-loader").fadeOut("slow")
-                            $('.edit-option').click(function(e) {
-                                e.preventDefault();
-                                const propertyIdElement = $(this).closest("tr").find(".property-id");
-
-                                propertyId = propertyIdElement.text();
-
-                                const data = response.data[0].find(obj => obj.id.toString() === propertyId);
-                                selectedFiles = data.images
-                                console.log(data.city)
-                                var option = $('<option>').text(data.city).val(data.city);
-
-                                // Append the option to the select element
-                                $('#city_update').append(option);
-
-                                // Make the option selected
-                                option.prop('selected', true);
-                                updateSelectedFilesContainer()
-                                $("#propertyId_update").val(data.id);
-                                $("#propertyName_update").val(data.propertyName);
-                                $("#address_update").val(data.address);
-                                $("#city_update").val(data.city);
-                                $("#state_update").val(data.state);
-                                $("#zip_update").val(data.zipCode);
-                                $("#propertyType_update").val(data.propertyType);
-                                $("#propertyTotalSF_update").val(data.propertySQFT);
-                                $("#unit_update").val(data.units);
-                                $("#property-name").text(data.propertyName)
-                                $('#myModal_edit').modal('show');
-                            });
-                            $('.delete-option').click(function(e) {
-                                e.preventDefault(); // Prevent default anchor behavior
-                                const propertyIdElement = $(this).closest("tr").find(".property-id");
-                                propertyId = propertyIdElement.text();
-
-                                $('#myModal_delete').modal('show');
-                            });
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        console.log(error)
-                        window.alert('Error: ' + "Token expeired!, Login again");
-                        window.location = '../Landlord/login_module.html';
-                    }
-                });
-
-            }
-
-
-        })
-    </script>
+   
 </body>
 
 </html>
