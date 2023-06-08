@@ -384,9 +384,9 @@
             .modal-footer .button-left {
                 margin: auto;
             }
-            .modal-footer button {
+            /* .modal-footer button {
                 width: 231px;
-            }
+            } */
             .border-model-line h2 {
                 font-size: 1.6rem;
             }
@@ -428,9 +428,9 @@
         }
         
         @media (max-width:320px) {
-            .modal-footer button {
+            /* .modal-footer button {
                 width: 231px;
-            }
+            } */
         }
         
         @media (max-width: 767px) {
@@ -953,7 +953,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        
+
                                         <div class="accordion-item" id="accordion-item1">
                                             <h2 class="accordion-header" id="headingOne">
                                                 <button class="accordion-button collapsed text-white" id="accordion-button1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
@@ -968,7 +968,7 @@
                                                     <div class="card-body mb-2" style="background-color: #F4FAFF !important;">
                                                         <div class="row">
                                                             <div class="col-12">
-                                                                <div class="form-group" >
+                                                                <div class="form-group">
                                                                     <label class="form-label"><strong>Phone</strong></label>
                                                                     <div class="row" id="add-item-containerPhone">
                                                                         <div class="col-md-6">
@@ -994,7 +994,7 @@
                                                     <div class="card-body" style="background-color: #F4FAFF !important;">
                                                         <div class="row">
                                                             <div class="col-12">
-                                                                <div class="form-group" >
+                                                                <div class="form-group">
                                                                     <label class="form-label"><strong>Email</strong></label>
                                                                     <div class="row" id="add-item-containerEmail">
                                                                         <div class="col-md-6">
@@ -1843,14 +1843,16 @@
                 url: 'http://localhost:3000/api/spade/getTenantsByID',
                 type: 'GET',
                 data: {
-                    id:tenantId
+                    id: tenantId
                 },
                 contentType: "application/json; charset=utf-8",
                 // processData: false,
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function({data}) {
+                success: function({
+                    data
+                }) {
                     console.log(data)
                     $(".company-name").text(`${data[0][0].companyName} | ${data[0][0].firstName+" "+data[0][0].lastName}`)
                 },
@@ -1858,7 +1860,7 @@
                     window.alert('Error: ' + error);
                 }
             });
-            $("#add-contactInfo").click(()=>{
+            $("#add-contactInfo").click(() => {
                 $("#contactInfoModal").modal("show")
             })
             $("#add-item-phone").on("click", () => {
@@ -1889,7 +1891,7 @@
                                                                             <input type="email" class="form-control" placeholder="Email" required>
                                                                         </div>`)
             });
-            $('#add-item-container').on('click', '.del-btn', function () {
+            $('#add-item-container').on('click', '.del-btn', function() {
                 var $row = $(this).closest('.row');
                 var $rowsContainer = $row.parent();
 
