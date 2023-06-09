@@ -1,5 +1,5 @@
-exports.codeHTML = (name, random)=>{
-    return`<body style="	margin: 0;
+exports.codeHTML = (name, random) => {
+  return `<body style="	margin: 0;
     background: #FEFEFE;
     color: #585858;
   ">
@@ -59,7 +59,7 @@ exports.codeHTML = (name, random)=>{
     margin-bottom: 0;
     color: black;
     font-family: figtree;
-  ">Hi <span style="color: #1672BA;font-weight: 700; font-size: 25px;">${name}</span>,</h1>
+  ">Hi <span style="color: #1672BA;font-weight: 700; font-size: 25px;"><b>${name}</b></span>,</h1>
                 <p class="near_title last" style="margin-top: 10px;margin-bottom: 0; color: gray; font-family: figtree;">Please verify that your email address , and that you entered it when signing up for Spade Rent.</p>
                 <div style="	display: block;
     width: 100%;
@@ -185,13 +185,11 @@ exports.codeHTML = (name, random)=>{
       </tr>
     </tbody></table>
   
-  </body>`
-}
+  </body>`;
+};
 
-
-
-exports.welcomeHTML = (email, password, name )=>{
-    return `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+exports.welcomeHTML = (email, password, name) => {
+  return `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
     <html xmlns="http://www.w3.org/1999/xhtml"><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"><meta content="width=device-width, initial-scale=1" name="viewport"><title>Spade Welcome Email</title><!-- Designed by https://github.com/kaytcat --><!-- Robot header image designed by Freepik.com --><style type="text/css">
       @import url(https://fonts.googleapis.com/css?family=Nunito);
@@ -294,7 +292,7 @@ exports.welcomeHTML = (email, password, name )=>{
     ">
     </td>
     </tr>
-    <tr class=""><td class="headline">Welcome ${name} to Spade Rent!</td></tr>
+    <tr class=""><td class="headline">Welcome <b>${name}</b> to Spade Rent!</td></tr>
     <tr>
     <td>
     <center class=""><table cellpadding="0" cellspacing="0" class="" style="margin: 0 auto;" width="75%"><tbody class=""><tr class="">
@@ -344,11 +342,10 @@ exports.welcomeHTML = (email, password, name )=>{
     </td>
     </tr>
     </tbody></table>
-    </body></html>`
-}
+    </body></html>`;
+};
 
-
-exports.invoiceHTML = (tenantName, dueDays, invoiceID,landlordName)=>{
+exports.invoiceHTML = (tenantName, dueDays, invoiceID, landlordName) => {
   return `<!DOCTYPE html>
   <html lang="en">
   <head>
@@ -370,5 +367,97 @@ exports.invoiceHTML = (tenantName, dueDays, invoiceID,landlordName)=>{
             <h4>${landlordName}</h4> 
             <p>company Name</p>
   </body>
-  </html>`
-}
+  </html>`;
+};
+
+exports.taskHTML = (
+  mailSubject,
+  tenantName,
+  dueDays,
+  taskName,
+  assignedTo,
+  priority,
+  landlordName,
+  companyName,
+  landLordContactInformation
+) => {
+  return `<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+      <title>Document</title>
+      <style>
+      body {
+        font-family: 'Quicksand', sans-serif;
+        width: 100%;
+        height: 100%;        
+        background: #fff;
+        font-size: 18px;
+        height: 100vh;
+        max-width: 80%;
+        margin: 20px auto;
+        padding: 10px;    
+        font-weight: 600;    
+      }   
+      
+      div {
+        background-color: aliceblue;
+        padding: 20px 10px;
+        border-radius: 10px;
+      }
+
+      ol {
+        margin-left: -25px;
+      }
+      </style>
+      
+  </head>
+  <body>
+  <div>
+   <center><img alt="Spade Rent" src="https://res.cloudinary.com/djhjn0ngj/image/upload/v1685012561/Logo_2_is7u6m.png" width="155" style="
+  margin-bottom: 15px;
+  "></center>            
+      <h4>Dear <span style="  color: #1467B0; ">${tenantName},</span></h4>
+      <p>We hope this email finds you well. We wanted to remind you of some upcoming property maintenance tasks that are
+      scheduled in the near future. These tasks are important for maintaining the quality and safety of our property.
+      </p>
+      
+      <p>Please take note of the following maintenance tasks:</p>
+      <ul type="none" style="none">
+      <li>
+        <p>Date: <b>${dueDays}</b></p>
+        <p>Task: <b>${taskName}</b></p>
+        <p>Assigned To: <b>${assignedTo}</b></p>
+        <p>Priority: <b>${priority}</b></p>
+      </li>
+      </ul>
+      
+      <p>
+      It is crucial that these tasks are completed to ensure the smooth operation and longevity of the property. We kindly request
+    your cooperation in allowing our maintenance team to access the premises during the designated time for efficient
+    completion of these tasks.
+      </p>
+      
+      <p>
+      Should you have any questions or concerns regarding these maintenance tasks or need to reschedule, please don't hesitate
+      to contact our property management team at <b>${landLordContactInformation}</b>. We are here to assist you.
+      </p>
+      
+      <p>
+      Thank you for your cooperation in keeping our property well-maintained and safe for everyone. We appreciate your attention
+      to this matter.
+      </p>
+      
+      <p>
+      Best regards,
+      </p>
+      
+      <h4><span style="  color: #1467B0; ">${landlordName},</span></h4>
+      <h4><span style="  color: #1467B0; ">${companyName},</span></h4>
+    </div>
+  </body>
+  </html>`;
+};
