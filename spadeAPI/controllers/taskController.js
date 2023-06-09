@@ -65,7 +65,7 @@ exports.addVendors = async (req, res) => {
         return res.status(400).send("Error1");
       }
     }
-
+    
     res.status(200).json({
       message: " Vendor created successful",
     });
@@ -76,6 +76,41 @@ exports.addVendors = async (req, res) => {
 };
 //  #############################  ADD VENDOR ENDS HERE ##################################################
 
+
+//  #############################  All VENDOR Start HERE ##################################################
+exports.getAllVendors = async (req, res) => {
+  const { ID } = req.body;
+  try {
+    const getVendorAPI = await queryRunner(
+      selectQuery("vendor", "landlordID"),
+      [ID]
+    );
+
+    if (getVendorAPI[0].length > 0) {
+      res.status(200).json({
+        data: getVendorAPI,
+        message: "All vendor retrieved successfully",
+      });
+    } else {
+      res.status(400).json({
+        message: "No data found",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "An error occurred while retrieving Vendor.",
+      error: error.message,
+    });
+  }
+};
+//  #############################  All VENDOR ENDS HERE ##################################################
+
+
+
+
+
+//  #############################  ADD TASK Start HERE ##################################################
 exports.addTasks = async (req, res) => {
   const {
     taskName,
@@ -210,35 +245,7 @@ exports.addTasks = async (req, res) => {
     res.status(400).send(error);
     console.log(error);
   }
-};
-
+}; 
 //  #############################  ADD TASK ENDS HERE ##################################################
 
-//  ############################# View All Invoices Start ############################################################
-exports.getAllVendors = async (req, res) => {
-  const { ID } = req.body;
-  try {
-    const getVendorAPI = await queryRunner(
-      selectQuery("vendor", "landlordID"),
-      [ID]
-    );
 
-    if (getVendorAPI[0].length > 0) {
-      res.status(200).json({
-        data: getVendorAPI,
-        message: "All invoices retrieved successfully",
-      });
-    } else {
-      res.status(400).json({
-        message: "No data found",
-      });
-    }
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({
-      message: "An error occurred while retrieving invoices.",
-      error: error.message,
-    });
-  }
-};
-//  ############################# View All Invoice  End ############################################################
