@@ -80,6 +80,7 @@ router.post('/createInvoice',upload, invoiceController.createInvoice);
 router.put('/putInvoiceStatusUpdates', invoiceController.putInvoiceStatusUpdates);
 router.get('/getAllInvoices', invoiceController.getAllInvoices);
 router.get('/getByIdInvoices', invoiceController.getByIdInvoices);
+router.put('/UpdateInvoice', upload, invoiceController.UpdateInvoice);
 router.post("/addVendor", taskController.addVendors);
 router.post("/addTasks", upload, taskController.addTasks);
 router.get("/getAllVendors", taskController.getAllVendors);
