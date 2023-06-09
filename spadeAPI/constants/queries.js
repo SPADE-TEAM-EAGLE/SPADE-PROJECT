@@ -71,86 +71,29 @@ exports.updatePropertyUnits =
 exports.insertTenants =
   "INSERT INTO tenants ( landlordID, firstName, lastName, companyName, email, phoneNumber, address, city, state, zipcode, propertyID, propertyUnitID, rentAmount, gross_or_triple_lease, baseRent, tripleNet, leaseStartDate, leaseEndDate, increaseRent, tenantPassword,tenantCreated_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 // exports.UpdateTenants = 'UPDATE tenants SET landlordID = ?, firstName = ?, lastName = ?, companyName = ?, email = ?, phoneNumber = ?, address = ?, city = ?, state = ?, zipcode = ?, propertyID = ?, propertyUnitID = ?, rentAmount = ?, gross_or_triple_lease = ?, baseRent = ?, tripleNet = ?, leaseStartDate = ?, leaseEndDate = ?, increaseRent = ?, tenantPassword = ?  ';
-exports.UpdateTenants =
-  "UPDATE tenants SET tenantPassword = ?, tenantUpdated_at = ? WHERE id = ?  ";
-exports.addVendor =
-  "INSERT INTO vendor (firstName, lastName, businessName, streetAddress, city, state, zipCode, workNumber, mobileNumber, email, categoryID) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-exports.addResetTokenTenants =
-  "UPDATE tenants SET token = ?, tenantUpdated_at = ? where id = ?";
-exports.updatePasswordTenant =
-  "UPDATE tenants SET tenantPassword = ? , tenantUpdated_at = ? where id = ? AND token = ?";
-exports.selectPropertyTenant = `SELECT p.propertyName, p.address AS pAddress, p.city AS pCity, p.state AS pState, p.zipCode AS pZipCode, p.propertyType, p.propertySQFT, p.status AS pStatus,p.units AS pUnits, t.id AS tenantID ,t.firstName,t.lastName, t.companyName, t.email AS tEmail, t.phoneNumber AS tPhoneNumber, t.Address AS tAddress, t.city AS tCity, t.state AS tState, t.zipcode AS tZipcode, t.rentAmount, t.gross_or_triple_lease, t.baseRent, t.tripleNet, t.leaseStartDate, t.leaseEndDate, t.increaseRent, pu.unitNumber, pu.Area AS unitArea, pu.unitDetails, pu.status AS unitStatus FROM tenants AS t INNER JOIN property AS p ON t.propertyID = p.id INNER JOIN propertyunits AS pu ON t.propertyUnitID = pu.id WHERE t.landlordID = ? and t.propertyID = ?`;
-exports.selectAllTenants = `SELECT p.propertyName, p.address AS pAddress, p.city AS pCity, p.state AS pState, p.zipCode AS pZipCode, p.propertyType, p.propertySQFT, p.status AS pStatus,p.units AS pUnits, t.id AS tenantID ,t.firstName,t.lastName, t.companyName, t.email AS tEmail, t.phoneNumber AS tPhoneNumber, t.Address AS tAddress, t.city AS tCity, t.state AS tState, t.zipcode AS tZipcode, t.rentAmount, t.gross_or_triple_lease, t.baseRent, t.tripleNet, t.leaseStartDate, t.leaseEndDate, t.increaseRent, pu.unitNumber, pu.Area AS unitArea, pu.unitDetails, pu.status AS unitStatus FROM tenants AS t INNER JOIN property AS p ON t.propertyID = p.id INNER JOIN propertyunits AS pu ON t.propertyUnitID = pu.id WHERE t.landlordID = ?`;
-exports.insertincreaseRentData =
-  "INSERT INTO tenantincreaserent ( tenantID, propertyID , date, increaseRentAmount) VALUES (?,?,?,?)";
-exports.updatePropertyUnitsTenant =
-  "UPDATE propertyunits SET  status = ?  where id = ? AND propertyID = ? ";
-exports.insertAlternatePhoneData =
-  "INSERT INTO tenantalternatephone ( tenantID, phoneName , phoneNumber) VALUES (?,?,?)";
-exports.insertAlternateEmailData =
-  "INSERT INTO tenantalternateemail ( tenantID, emailName , alternateEmail) VALUES (?,?,?)";
-exports.getUnitsCount =
-  "SELECT COUNT(propertyID) as unitCount FROM `propertyunits` WHERE propertyID = ? ";
-exports.insertMoreUnits =
-  "INSERT INTO propertyunits (propertyID, unitNumber,Area,unitDetails,status) VALUES (?,?,?,?,?)";
-exports.putUnitsUpdate = "UPDATE property SET  units = ?  where id = ? ";
-exports.insertTenantAttachFile =
-  "INSERT INTO tenantattachfiles (landlordID, tenantID, fileName) VALUES (?,?,?)";
-exports.insertInvoice =
-  "INSERT INTO invoice (landlordID, tenantID, invoiceType, startDate, endDate, frequency, dueDate, repeatTerms, terms, note,status,created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
-exports.insertLineItems =
-  "INSERT INTO invoicelineitems (invoiceID, category, property, memo, amount ) VALUES (?,?,?,?,?)";
-exports.insertInvoiceImage =
-  "INSERT INTO invoiceimages (invoiceID, InvoiceImage) VALUES (?,?)";
-exports.updateUnitsTenant =
-  "UPDATE propertyunits SET  status = ?  where id = ? ";
-exports.getTenantsById = `SELECT
-p.propertyName,
-p.address AS pAddress,
-p.city AS pCity,
-p.state AS pState,
-p.zipCode AS pZipCode,
-p.id AS propertyId,
-p.propertyType,
-p.propertySQFT,
-p.status AS pStatus,
-p.units AS pUnits,
-t.id AS tenantID,
-t.firstName,
-t.lastName,
-t.companyName,
-t.email AS tEmail,
-t.phoneNumber AS tPhoneNumber,
-t.Address AS tAddress,
-t.city AS tCity,
-t.state AS tState,
-t.zipcode AS tZipcode,
-t.rentAmount,
-t.gross_or_triple_lease,
-t.baseRent,
-t.tripleNet,
-t.leaseStartDate,
-t.leaseEndDate,
-t.increaseRent,
-pu.unitNumber,
-pu.Area AS unitArea,
-pu.unitDetails,
-pu.status AS unitStatus,
-(
-    SELECT pi.image
-    FROM propertyimage AS pi
-    WHERE pi.propertyID = p.id
-    LIMIT 1
-) AS image
-FROM
-tenants AS t
-INNER JOIN property AS p ON t.propertyID = p.id
-INNER JOIN propertyunits AS pu ON t.propertyUnitID = pu.id
-WHERE
-t.id =? `;
+exports.UpdateTenants = 'UPDATE tenants SET tenantPassword = ?, tenantUpdated_at = ? WHERE id = ?  ';
+exports.addResetTokenTenants ='UPDATE tenants SET token = ?, tenantUpdated_at = ? where id = ?';
+exports.updatePasswordTenant ="UPDATE tenants SET tenantPassword = ? , tenantUpdated_at = ? where id = ? AND token = ?";
+exports.selectPropertyTenant = "SELECT p.propertyName, p.address AS pAddress, p.city AS pCity, p.state AS pState, p.zipCode AS pZipCode, p.propertyType, p.propertySQFT, p.status AS pStatus,p.units AS pUnits, t.id AS tenantID ,t.firstName,t.lastName, t.companyName, t.email AS tEmail, t.phoneNumber AS tPhoneNumber, t.Address AS tAddress, t.city AS tCity, t.state AS tState, t.zipcode AS tZipcode, t.rentAmount, t.gross_or_triple_lease, t.baseRent, t.tripleNet, t.leaseStartDate, t.leaseEndDate, t.increaseRent, pu.unitNumber, pu.Area AS unitArea, pu.unitDetails, pu.status AS unitStatus FROM tenants AS t INNER JOIN property AS p ON t.propertyID = p.id INNER JOIN propertyunits AS pu ON t.propertyUnitID = pu.id WHERE t.landlordID = ? ";
+exports.insertincreaseRentData = 'INSERT INTO tenantincreaserent ( tenantID, propertyID , date, increaseRentAmount) VALUES (?,?,?,?)';
+exports.updatePropertyUnitsTenant = 'UPDATE propertyunits SET  status = ?  where id = ? AND propertyID = ? ';
+exports.insertAlternatePhoneData = 'INSERT INTO tenantalternatephone ( tenantID, phoneName , phoneNumber) VALUES (?,?,?)';
+exports.insertAlternateEmailData = 'INSERT INTO tenantalternateemail ( tenantID, emailName , alternateEmail) VALUES (?,?,?)';
+exports.getUnitsCount = 'SELECT COUNT(propertyID) as unitCount FROM `propertyunits` WHERE propertyID = ? ';
+exports.insertMoreUnits='INSERT INTO propertyunits (propertyID, unitNumber,Area,unitDetails,status) VALUES (?,?,?,?,?)';
+exports.putUnitsUpdate = 'UPDATE property SET  units = ?  where id = ? ';
+exports.insertTenantAttachFile ='INSERT INTO tenantattachfiles (landlordID, tenantID, fileName) VALUES (?,?,?)';
+exports.insertInvoice ='INSERT INTO invoice (landlordID, tenantID, invoiceType, startDate, endDate, frequency, dueDate, repeatTerms, terms,totalAmount, note,status,created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)';
+exports.insertLineItems ='INSERT INTO invoicelineitems (invoiceID, category, property, memo, amount ) VALUES (?,?,?,?,?)';
+exports.insertInvoiceImage ='INSERT INTO invoiceimages (invoiceID, InvoiceImage) VALUES (?,?)';
+exports.updateUnitsTenant = 'UPDATE propertyunits SET  status = ?  where id = ? ';
+exports.getTenantsById = "SELECT p.id as propertyID, p.propertyName, p.address AS pAddress, p.city AS pCity, p.state AS pState, p.zipCode AS pZipCode, p.propertyType, p.propertySQFT, p.status AS pStatus,p.units AS pUnits, t.id AS tenantID ,t.firstName,t.lastName, t.companyName, t.email AS tEmail, t.phoneNumber AS tPhoneNumber, t.Address AS tAddress, t.city AS tCity, t.state AS tState, t.zipcode AS tZipcode, t.rentAmount, t.gross_or_triple_lease, t.baseRent, t.tripleNet, t.leaseStartDate, t.leaseEndDate, t.increaseRent, pu.unitNumber, pu.Area AS unitArea, pu.unitDetails, pu.status AS unitStatus FROM tenants AS t INNER JOIN property AS p ON t.propertyID = p.id INNER JOIN propertyunits AS pu ON t.propertyUnitID = pu.id WHERE t.id = ? ";
+exports.updateInvoiceStatus = 'UPDATE invoice SET  status = ?, note = ?, updated_at = ?  where id = ? AND landlordID = ? ';
+exports.getAllInvoicesquery = 'SELECT i.id as invoiceID,i.dueDate, i.startDate, i.totalAmount, i.status, t.firstName, t.lastName, t.phoneNumber as tPhone, p.propertyName FROM invoice as i JOIN tenants as t ON i.tenantID = t.id JOIN property as p ON t.propertyID = p.id WHERE i.landlordID = ? ';
+exports.getByIdInvoicesQuery = 'SELECT i.id as invoiceID,i.dueDate, i.startDate, i.totalAmount, i.status, t.firstName AS tFName, t.lastName AS tLName, t.phoneNumber as tPhone, p.propertyName, pu.unitNumber, l.FirstName as landlordFName, l.LastName as landlordLName, l.phone as landlordPhone FROM invoice as i JOIN tenants as t ON i.tenantID = t.id JOIN property as p ON t.propertyID = p.id JOIN propertyunits AS pu ON t.propertyUnitID = pu.id JOIN users as l ON l.id = i.landlordID WHERE i.id = ? ';
+exports.updateInvoice = 'UPDATE invoice SET  invoiceType = ? , startDate = ? , endDate = ? , frequency = ? , dueDate = ? , repeatTerms = ? , terms = ? , totalAmount = ? , note = ? , updated_at = ? where id = ? AND landlordID = ? ';
 
-exports.addTasksQuery =
-  "INSERT INTO task (taskName, vendorID, tenantID, dueDate, status, priority, notes, notifyTenant, notifyVendor, created_at, updated_at, created_by) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 
-exports.addVendorList =
-  "INSERT INTO taskassignto (taskId, vendorId) VALUES (?, ?)";
+
+exports.addTasksQuery = "INSERT INTO task (taskName, vendorID, tenantID, dueDate, status, priority, notes, notifyTenant, notifyVendor, created_at, updated_at, created_by) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+exports.addVendorList = "INSERT INTO taskassignto (taskId, vendorId) VALUES (?, ?)";

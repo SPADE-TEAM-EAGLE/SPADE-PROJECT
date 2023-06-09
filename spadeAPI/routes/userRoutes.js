@@ -31,11 +31,7 @@ router.put(
   userController.putPropertyUnitsUpdates
 );
 router.delete("/propertyDelete", verifyToken, userController.propertyDelete);
-router.put(
-  "/updateProperty",
-  [verifyToken, upload],
-  userController.propertyUpdate
-);
+router.put("/updateProperty",[verifyToken, upload],userController.propertyUpdate);
 // router.get('/viewProperty' ,userController.propertyView);
 router.get("/viewProperty", verifyToken, userController.propertyView);
 router.get("/PropertyUnits", verifyToken, userController.getpropertyUnits);
@@ -66,37 +62,24 @@ router.post(
 );
 // router.post('/tenantIncreaseRent' , userController.tenantIncreaseRent);
 // router.get('/verifyMailCheck',verifyToken,  userController.verifyMailCheck);
-router.get("/verifyMailCheck", tenantController.verifyMailCheck);
-router.get("/resetEmailTenant", tenantController.createResetEmailTenant);
-router.post(
-  "/verifyResetEmailCodeTenant",
-  tenantController.verifyResetEmailCodeTenant
-);
-router.put("/updatePasswordTenant", tenantController.updatePasswordTenant);
-router.put("/resendCodeTenants", tenantController.resendCodeTenants);
-router.post(
-  "/addAlternateEmailPhone",
-  verifyToken,
-  tenantController.addAlternateEmailPhone
-);
-router.post(
-  "/tenantAttachFile",
-  [verifyToken, upload],
-  tenantController.tenantAttachFile
-);
-router.delete(
-  "/tenantAttachFileDelete",
-  verifyToken,
-  tenantController.tenantAttachFileDelete
-);
-router.delete("/tenantDelete", tenantController.tenantDelete);
-router.get("/getTenantsByID", tenantController.getTenantsByID);
-router.post("/createInvoice", upload, invoiceController.createInvoice);
-router.put(
-  "/putInvoiceStatusUpdates",
-  invoiceController.putInvoiceStatusUpdates
-);
+router.get('/verifyMailCheck', tenantController.verifyMailCheck);
+router.get('/resetEmailTenant', tenantController.createResetEmailTenant);
+router.post('/verifyResetEmailCodeTenant', tenantController.verifyResetEmailCodeTenant);
+router.put('/updatePasswordTenant', tenantController.updatePasswordTenant);
+router.put('/resendCodeTenants', tenantController.resendCodeTenants);
+router.post('/addAlternateEmailPhone' ,verifyToken, tenantController.addAlternateEmailPhone);
+router.post('/tenantAttachFile',[verifyToken,upload], tenantController.tenantAttachFile);
+router.delete('/tenantAttachFileDelete' ,verifyToken, tenantController.tenantAttachFileDelete);
+router.delete('/tenantDelete', tenantController.tenantDelete);
+router.get('/getTenantsByID', tenantController.getTenantsByID);
+router.post('/createInvoice',upload, invoiceController.createInvoice);
+router.put('/putInvoiceStatusUpdates', invoiceController.putInvoiceStatusUpdates);
+router.get('/getAllInvoices', invoiceController.getAllInvoices);
+router.get('/getByIdInvoices', invoiceController.getByIdInvoices);
+router.put('/UpdateInvoice', upload, invoiceController.UpdateInvoice);
+router.delete('/invoiceDelete', invoiceController.invoiceDelete);
 router.post("/addVendor", taskController.addVendors);
 router.post("/addTasks", upload, taskController.addTasks);
 router.get("/getAllVendors", taskController.getAllVendors);
+
 module.exports = router;
