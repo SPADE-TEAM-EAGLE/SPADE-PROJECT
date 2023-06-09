@@ -367,3 +367,48 @@ exports.UpdateInvoice = async (req, res) => {
   }
   //  ############################# Update Invoice END ############################################################
   
+
+
+  //  ############################# Delete invoice Start ############################################################
+exports.invoiceDelete = async (req, res) => {
+    try {
+      const { id } = req.body;
+      const invoiceDeleteResult = await queryRunner(
+        deleteQuery("invoice", "id"),
+        [id]
+      );
+      if (invoiceDeleteResult[0].affectedRows > 0) {
+        const invoiceImagecheckresult = await queryRunner(
+          selectQuery("invoiceimages", "invoiceID"),
+          [id]
+        );
+        if (invoiceImagecheckresult[0].length > 0) {
+          invoiceImages = invoiceImagecheckresult[0].map((image) => image.InvoiceImage);
+          // delete folder images
+          imageToDelete(invoiceImages);
+          // delete folder images
+          const invoiceDeleteresult = await queryRunner(
+            deleteQuery("invoiceimages", "invoiceID"),
+            [id]
+          );
+        }
+            const DeletelineItemsResult = await queryRunner(
+                deleteQuery("invoicelineitems", "invoiceID"),
+                [id]
+              );
+          
+            res.status(200).json({
+              message: " Invoice deleted successfully",
+            });
+ 
+      } else {
+        res.status(400).json({
+          message: "No data found",
+        });
+      }
+    } catch (error) {
+      res.send("Error from delete Property ");
+      console.log(error);
+    }
+  };
+  //  ############################# Delete invoice End ############################################################
