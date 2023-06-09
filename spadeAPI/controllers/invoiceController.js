@@ -30,16 +30,17 @@ exports.createInvoice = async (req, res) => {
         dueDays,
         repeatTerms,
         terms,
-        additionalNote,
+        additionalNotes,
         lineItems,
         sendmails
  } = req.body;
-
+console.log(req.body)
     const { userId } = req.user;
     try {
         const currentDate = new Date();
-        const invoiceResult = await queryRunner(insertInvoice, [userId, tenantID, invoiceType, startDate, endDate, frequency, dueDays, repeatTerms, terms,additionalNote,"Unpaid",currentDate]);
-      if (invoiceResult.affectedRows === 0) {
+        const invoiceResult = await queryRunner(insertInvoice, [userId, tenantID, invoiceType, startDate, endDate, frequency, dueDays, repeatTerms, terms,additionalNotes,"Unpaid",currentDate]);
+        // console.log(invoiceResult)
+        if (invoiceResult.affectedRows === 0) {
         res.status(400).send('Error occur in creating invoice');
       } else {
         // select tenants 
@@ -51,6 +52,7 @@ exports.createInvoice = async (req, res) => {
 
             if(sendmails == "Yes"){
                 // const {userName} = req.user;
+                console.log(sendmails)
                 // const { userId } = req.user
                 const mailSubject = invoiceID+" From "+ frequency;
                 sendMail.invoiceSendMail(tenantName, tenantEmail, mailSubject, dueDays, invoiceID,frequency);

@@ -485,25 +485,25 @@ exports.tenantAttachFileDelete = async (req, res) => {
 //  ############################# Delete Tenant Start ############################################################
 exports.tenantDelete = async (req, res) => {
   try {
-    const { id } = req.body
-    const tenantResult = await queryRunner(selectQuery("tenants", "id"), [id]);
+    const { tenantID } = req.body
+    const tenantResult = await queryRunner(selectQuery("tenants", "id"), [tenantID]);
 const propertyUnitID = tenantResult[0][0].propertyUnitID;
-    const tenantDeleteResult = await queryRunner(deleteQuery("tenants", "id"), [id]);
+    const tenantDeleteResult = await queryRunner(deleteQuery("tenants", "id"), [tenantID]);
     if (tenantDeleteResult[0].affectedRows > 0) {
 
-      const tenantCheckResult = await queryRunner(selectQuery("tenantattachfiles", "tenantID"), [id]);
+      const tenantCheckResult = await queryRunner(selectQuery("tenantattachfiles", "tenantID"), [tenantID]);
       // console.log(tenantcheckresult);
       if (tenantCheckResult[0].length > 0) {
         tenantimages = tenantCheckResult[0].map((image) => image.fileName);
         // delete folder images
         imageToDelete(tenantimages);
-        const tenantFileDeleteresult = await queryRunner(deleteQuery("tenantattachfiles", "tenantID"), [id]);
+        const tenantFileDeleteresult = await queryRunner(deleteQuery("tenantattachfiles", "tenantID"), [tenantID]);
         if (tenantFileDeleteresult[0].affectedRows > 0) {
-        const tenantAdditionalEmailresult = await queryRunner(deleteQuery("tenantalternateemail", "tenantID"), [id]);
+        const tenantAdditionalEmailresult = await queryRunner(deleteQuery("tenantalternateemail", "tenantID"), [tenantID]);
         if (tenantAdditionalEmailresult[0].affectedRows > 0) {
-        const tenantAdditionalPhoneResult = await queryRunner(deleteQuery("tenantalternatephone", "tenantID"), [id]);
+        const tenantAdditionalPhoneResult = await queryRunner(deleteQuery("tenantalternatephone", "tenantID"), [tenantID]);
         if (tenantAdditionalPhoneResult[0].affectedRows > 0) {
-          const tenantIncreaseRentResult = await queryRunner(deleteQuery("tenantincreaserent", "tenantID"), [id]);
+          const tenantIncreaseRentResult = await queryRunner(deleteQuery("tenantincreaserent", "tenantID"), [tenantID]);
           if (tenantIncreaseRentResult[0].affectedRows > 0) {
             //dddddd
             const status = "Vacant";

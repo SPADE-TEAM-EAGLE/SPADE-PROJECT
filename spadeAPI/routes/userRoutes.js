@@ -51,7 +51,7 @@ router.post('/tenantAttachFile',[verifyToken,upload], tenantController.tenantAtt
 router.delete('/tenantAttachFileDelete' ,verifyToken, tenantController.tenantAttachFileDelete);
 router.delete('/tenantDelete', tenantController.tenantDelete);
 router.get('/getTenantsByID', tenantController.getTenantsByID);
-router.post('/createInvoice',upload, invoiceController.createInvoice);
+router.post('/createInvoice',[verifyToken,upload], invoiceController.createInvoice);
 router.put('/putInvoiceStatusUpdates', invoiceController.putInvoiceStatusUpdates);
 
 module.exports = router;
