@@ -290,12 +290,14 @@
         }
         
         .delete-file {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            cursor: pointer;
-            font-size: 18px;
-            color: #ff0000;
+            .delete-file {
+                position: absolute;
+                top: -9px;
+                right: -4px;
+                cursor: pointer;
+                font-size: 13px;
+                color: #000;
+            }
         }
         
         .btn-group>.btn-group:not(:last-child)>.btn,
@@ -325,8 +327,7 @@
             color: #333;
             /* border-radius: 4px; */
         }
-        
-        .delete-file {
+        /* .delete-file {
             position: absolute;
             top: 0px;
             right: 5px;
@@ -334,6 +335,7 @@
             font-size: 13px;
             color: #000;
         }
+         */
         
         button.btn-close {
             right: -7px;
@@ -384,9 +386,9 @@
             .modal-footer .button-left {
                 margin: auto;
             }
-            .modal-footer button {
+            /* .modal-footer button {
                 width: 231px;
-            }
+            } */
             .border-model-line h2 {
                 font-size: 1.6rem;
             }
@@ -428,9 +430,9 @@
         }
         
         @media (max-width:320px) {
-            .modal-footer button {
+            /* .modal-footer button {
                 width: 231px;
-            }
+            } */
         }
         
         @media (max-width: 767px) {
@@ -477,25 +479,25 @@
     </div>
     <!-- /GLOBAL-LOADER -->
     <!-- Modal -->
-    <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
+    <div class="modal fade" id="contactInfoModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="text-justify ps-2 border-model-line">
                         <h2 class="modal-title">Personal <strong class="color-primary">Information</strong></h2>
                         <span class="">These details are required for rent reminders, tenants commutations
-                            and portal access.</span>
+                            and portal access. </span>
                     </div>
                     <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><img src="../assets/images/cross-circle.svg" /></span>
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="accordion-item mb-4" id="accordion-item1">
                         <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button text-white" id="accordian-button-1" type="button" data-bs-toggle="collapse" onclick="checkFieldsFilled('accordion-item1')" id="accordion-button1" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <button class="accordion-button text-white" type="button" id="accordion-button1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                 <span class="m-0 me-4 fs-1" style="font-weight: bold;">01</span>
-                                <h3 class="m-0"><strong>Personal Info</strong><i
+                                <h3 class="m-0"><strong>Personal Info</strong> <i class="fi fi-rs-pencil"></i><i
                                         class="fi fi-rs-angle-circle-down chevron icon"></i>
                                 </h3>
                             </button>
@@ -506,7 +508,7 @@
                                     <div class="col-md-12">
                                         <label class="form-label fw-bold">Property Photo</label>
                                         <div class="custom-file" style="border: 1px dashed #00000087;">
-                                            <input id="fileInput" type="file" name="image" class="custom-file-input form" accept=".jpg, .png, image/jpeg, image/png" aria-label="hello" multiple>
+                                            <input type="file" name="image" class="custom-file-input form" accept=".jpg, .png, image/jpeg, image/png" aria-label="hello" multiple>
                                             <span className="d-none"></span>
                                             <label class="custom-file-label" for="fileInput">
                                                 <i class="fi fi-rs-cloud-upload"></i>
@@ -522,97 +524,138 @@
                                         <span class="text-danger d-none">Photos are required!</span>
                                     </div>
                                     <div class="col-md-6">
-                                        <label for="inputEmail4" class="form-label fw-bold">First Name</label>
-                                        <input type="text" class="form-control form" placeholder="Enter First Name" id="propertyId">
-                                        <span class="text-danger d-none">Property ID is required!</span>
+                                        <label for="inputEmail4" class="form-label fw-bold">First Name<spnan
+                                                class="text-danger"> *</span></label>
+                                        <input type="text" class="form-control form" placeholder="Enter First Name" id="firstName" required>
+                                        <span class="text-danger d-none">First name is required!</span>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="inputPassword4" class="form-label fw-bold">Last Name<spnan
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" placeholder="Enter First Name" id="propertyName">
-                                        <span class="text-danger d-none">Property name required!</span>
+                                                class="text-danger"> *</span></label>
+                                        <input type="text" class="form-control form" placeholder="Enter Last Name" id="lastName" required>
+                                        <span class="text-danger d-none">Last name required!</span>
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="inputAddress" class="form-label fw-bold">Company Name (Optional)<spnan
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="address" placeholder="Enter Company Name">
-                                        <span class="text-danger d-none">Address is required!</span>
+                                        <label for="inputAddress" class="form-label fw-bold">Company Name <span
+                                                class="fw-light">(Optional)</span>
+                                        </label>
+                                        <input type="text" class="form-control form" id="company" placeholder="Enter Company Name">
+                                        <!-- <span class="text-danger d-none">Company name is required!</span> -->
                                     </div>
                                     <div class="col-md-4">
                                         <label for="inputCity" class="form-label fw-bold">Email<spnan
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" placeholder="Enter Email" id="city">
-                                        <span class="text-danger d-none">City is required!</span>
+                                                class="text-danger"> *</span></label>
+                                        <input type="text" class="form-control form" placeholder="Enter Email" id="email" required>
+                                        <span class="text-danger d-none">Email is required!</span>
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="inputState" class="form-label fw-bold">Phone Number (Optional)<spnan
-                                                class="text-danger">*</span></label>
-                                        <select id="state" class="form-select form">
-                                            <option selected>Choose...</option>
-                                            <option>Sindh</option>
-                                            <option>Punjab</option>
-                                            <option>Balochistan</option>
-                                            <option>KPK</option>
+                                        <label for="inputState" class="form-label fw-bold">Phone Number <span
+                                                class="fw-light">(Optional)</span></label>
+                                        <input id="phone" name="phone" type="tel" autocomplete="off">
+                                        <span id="valid-msg" class="d-none text-success">✓ Valid</span>
+                                        <span id="error-msg" class="hide text-danger"></span>
                                         </select>
-                                        <span class="text-danger d-none">State is required!</span>
+                                        <!-- <span class="text-danger d-none">State is required!</span> -->
                                     </div>
                                     <div class="col-12">
-                                        <label for="inputZip" class="form-label fw-bold">Address (Optional)<span class="text-danger">
-                                                *</span></label>
-                                        <textarea class="form-control mb-4" placeholder="Enter Company Name" rows="4"></textarea>
-                                        <span class="text-danger d-none">Zip is required!</span>
+                                        <label for="inputAddress2" class="form-label fw-bold">Address <span
+                                                class="fw-light">(Optional)</span></label>
+                                        <input type="text" class="form-control" id="address" placeholder="Apartment, studio, or floor">
+                                        <!-- <span class="text-danger d-none">Address is required!</span> -->
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="inputState" class="form-label fw-bold">State<spnan
+                                                class="text-danger">*</span></label>
+                                        <select id="state" class="form-select form" required>
+                                            <option selected>Choose...</option>
+                                        </select>
+                                        <span class="text-danger d-none">State is required!</span>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="inputState" class="form-label fw-bold">City <spnan
                                                 class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="propertyTotalSF">
-
-                                        <span class="text-danger d-none">Property Type is required!</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputState" class="form-label fw-bold">State <spnan
-                                                class="text-danger">*</span></label>
-                                        <select id="state" class="form-select form">
+                                        <select id="city" class="form-select form" required>
                                             <option selected>Choose...</option>
-                                            <option>Sindh</option>
-                                            <option>Punjab</option>
-                                            <option>Balochistan</option>
-                                            <option>KPK</option>
+
                                         </select>
-                                        <span class="text-danger d-none">State is required!</span>
+                                        <span class="text-danger d-none">City is required!</span>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="inputPassword4" class="form-label fw-bold">Zip Code <spnan
                                                 class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="propertyTotalSF">
-                                        <span class="text-danger d-none">Property Total SF is required!</span>
+                                        <input type="text" class="form-control form" id="zip" pattern="[0-9]{5}" placeholder="A valid 5-digit zip code" maxlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                                        <span class="text-danger d-none">Zip code is required!</span>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
-                    <div class="accordion-item mb-4" id="accordion-item2">
-                        <h2 class="accordion-header" id="headingTwo">
-                            <button class="accordion-button collapsed text-white" onclick="checkFieldsFilled('accordion-item2')" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                <span class="m-0 me-4 fs-1" style="font-weight: bold;">02</span>
-                                <h3 class="m-0"><strong>Contact Info</strong><i
+                    <div class="accordion-item" id="accordion-item3">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed text-white" id="accordion-button3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                <span class="m-0 me-4 fs-1" style="font-weight: bold;">03</span>
+                                <h3 class="m-0"><strong>Contact Info</strong> <i class="fi fi-rs-pencil"></i><i
                                         class="fi fi-rs-angle-circle-down chevron icon"></i>
                                 </h3>
                             </button>
                         </h2>
-                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                            <form class="row g-3 m-1" enctype="multipart/form-data">
-
-                                <div class="col-12 mb-3">
-                                    <label for="inputAddress" class="form-label fw-bold">Number of Units<span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control px-2" id="units" placeholder=" ">
-                                    <span class="text-danger d-none">Units are required!</span>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExampe">
+                            <div class="accordion-body p-0">
+                                <div class="card-body mb-2" style="background-color: #F4FAFF !important;">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label class="form-label"><strong>Phone</strong></label>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <select class="form-control form-select select2" data-bs-placeholder="Select">
+                                                            <option label="Select">Country</option>
+                                                            <option value="1">Germany</option>
+                                                            <option value="2">Canada</option>
+                                                            <option value="3">Usa</option>
+                                                            <option value="4">Aus</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <input type="tel" class="form-control" placeholder="Phone Number">
+                                                    </div>
+                                                    <div class="col-12 mt-2">
+                                                        <a href="javascript:;" class="mt-1" id="add-item">+Add Line Item</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </form>
+                                <div class="card-body" style="background-color: #F4FAFF !important;">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label class="form-label"><strong>Email</strong></label>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <select class="form-control form-select select2" data-bs-placeholder="Select">
+                                                            <option label="Select">Country</option>
+                                                            <option value="1">Germany</option>
+                                                            <option value="2">Canada</option>
+                                                            <option value="3">Usa</option>
+                                                            <option value="4">Aus</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <input type="email" class="form-control" placeholder="Email">
+                                                    </div>
+                                                    <div class="col-12 mt-2">
+                                                        <a href="javascript:;" class="mt-1" id="add-item">+Add Line Item</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
@@ -912,7 +955,7 @@
                                                 </div>
                                                 <div class="media-body">
                                                     <small class="text-white">Tenants</small>
-                                                    <h3 class="mb-0 text-white" style="font-weight: bold;">The Michael Scott Paper Company | Michael Scott</h3>
+                                                    <h3 class="mb-0 text-white company-name" style="font-weight: bold;">The Michael Scott Paper Company | Michael Scott</h3>
                                                 </div>
                                             </div>
                                             <div class="ms-auto">
@@ -921,7 +964,7 @@
                                                     <i class="fe fe-more-vertical text-white fs-20" data-bs-toggle="dropdown"></i>
 
                                                     <div class="dropdown-menu dropdown-menu-end">
-                                                        <a class="dropdown-item text-success" data-bs-toggle="modal" href="#addModal"><i
+                                                        <a class="dropdown-item text-success" data-bs-toggle="modal" href="#personalInformation"><i
                                                             class=
                                                             "fi fi-rs-edit me-1"
                                                             ></i> Edit</a>
@@ -943,16 +986,16 @@
                                     <div class="col-12">
                                         <ul class="nav1 br-7" style="bottom: 0;">
                                             <li class="nav-item1 p-0">
-                                                <a class="nav-link active p-2" href="view-tenant.html">Overview</a>
+                                                <a class="nav-link active p-2" href="view-tenant.html" id="viewOverview">Overview</a>
                                             </li>
                                             <li class="nav-item1 p-0">
-                                                <a class="nav-link p-2" href="tenant-properties.html">Properties</a>
+                                                <a class="nav-link p-2" href="tenant-properties.html" id="viewProperties">Properties</a>
                                             </li>
                                             <li class="nav-item1 p-0">
-                                                <a class="nav-link p-2" href="tenant-tasks.html">Tasks</a>
+                                                <a class="nav-link p-2" href="tenant-tasks.html" id="viewTasks">Tasks</a>
                                             </li>
                                             <li class="nav-item1 p-0">
-                                                <a class="nav-link p-2" href="tenant-file.html">Files</a>
+                                                <a class="nav-link p-2" href="tenant-file.html" id="viewFiles">Files</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -997,7 +1040,11 @@
                                                     </div>
                                                 </label>
                                             </div>
+                                            <div class="selected-files text-white">
+                                                <div class="file-grid"></div>
+                                            </div>
                                         </div>
+                                        <a class="btn btn-outline-default btn-pill button" id="submit-pics">Submit</a>
                                     </div>
                                 </div>
                             </div>
@@ -1674,16 +1721,121 @@
     </script>
 
     <script>
-        // Get the user's preferred color scheme
-        const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        // // Get the user's preferred color scheme
+        // const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-        // Get a reference to the logo element
-        const logo = document.getElementById('logo');
+        // // Get a reference to the logo element
+        // const logo = document.getElementById('logo');
 
-        if (userPrefersDark) {
-            logo.src = '../assets/header-img/comment.svg';
-        } else {
-            logo.src = '../assets/header-img/question.svg';
+        // if (userPrefersDark) {
+        //     logo.src = '../assets/header-img/comment.svg';
+        // } else {
+        //     logo.src = '../assets/header-img/question.svg';
+        // }
+        let selectedFiles = []
+        $(document).ready(() => {
+            const tenantId = (new URL(document.location)).searchParams.get("tenantId");
+            // console.log($("#viewUnits").attr("href"))
+            //            
+
+            $("#viewProperties").attr("href", `./tenant-properties.html?tenantId=${tenantId}`)
+            $("#viewOverview").attr("href", `./view-tenant.html?tenantId=${tenantId}`)
+            $("#viewFiles").attr("href", `./tenant-file.html?tenantId=${tenantId}`)
+            $("#viewTasks").attr("href", `./tenant-tasks.html?tenantId=${tenantId}`)
+            console.log(propertyId)
+            $("#submit-pics").click(() => {
+                var formData = new FormData();
+                formData.append('tenantID', tenantId);
+                var files = $('#fileInput')[0].files;
+                for (var i = 0; i < selectedFiles.length; i++) {
+                    formData.append('image', selectedFiles[i]);
+                }
+                console.log(formData)
+                $.ajax({
+                    url: 'http://localhost:3000/api/spade/tenantAttachFile',
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function({
+                        data
+                    }) {
+                        console.log(2)
+                        $(".company-name").text(`${data[0][0].companyName} | ${data[0][0].firstName+" "+data[0][0].lastName}`)
+                    },
+                    error: function(xhr, status, error) {
+                        window.alert('Error: ' + error);
+                    }
+                });
+            })
+
+            $('#fileInput').on('change', function() {
+                console.log(1)
+                var files = Array.from($(this)[0].files);
+                // console.log(files)
+                files.forEach(function(file) {
+                    selectedFiles.push(file); // Add each file to the selected files array
+                });
+
+                updateSelectedFilesContainer(); // Update the selected files container
+            });
+
+            $(document).on('click', '.delete-file', function() {
+                var index = $(this).data('index');
+                selectedFiles.splice(index, 1); // Remove the selected file from the array
+                updateSelectedFilesContainer(); // Update the selected files container
+            });
+        })
+
+        function updateSelectedFilesContainer() {
+            var selectedFilesContainer = $('.file-grid');
+            selectedFilesContainer.empty();
+            console.log(selectedFiles)
+            selectedFiles.forEach(function(file, index) {
+
+                var fileElement = $('<div>')
+                    .addClass('selected-file')
+                    .append(
+                        $('<img>')
+                        .addClass('file-preview')
+                        .attr('src', typeof file === "object" ? URL.createObjectURL(file) : '../../../../spadeAPI/uploads/' + file)
+                    )
+                    .append(
+                        $('<div>')
+                        .addClass('file-details')
+                        .append($('<span>').text("Image-" + (index + 1)))
+                        // .append($('<span>').text(fileSize))
+                    )
+                    .append(
+                        $('<p>')
+                        .addClass('delete-file')
+                        .text('X')
+                        .attr('data-index', index)
+                    )
+                    .appendTo(selectedFilesContainer);
+
+            });
+
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            var k = 1024;
+            var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+            var i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        function truncateFileName(fileName) {
+            var maxFileNameLength = 10; // Define the maximum length of the file name
+            if (fileName.length > maxFileNameLength) {
+                return fileName.substring(0, maxFileNameLength) + '...'; // Truncate the file name
+            }
+
+            return fileName;
         }
     </script>
 

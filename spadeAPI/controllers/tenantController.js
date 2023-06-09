@@ -17,7 +17,9 @@ const {
   updatePropertyUnitsTenant,
   insertAlternateEmailData,
   insertAlternatePhoneData,
-  insertTenantAttachFile
+  insertTenantAttachFile,
+  updateUnitsTenant,
+  getTenantsById
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -75,6 +77,7 @@ const config = process.env;
                 const tenantsInsert = await queryRunner(insertTenants, [userId, firstName, lastName, companyName, email, phoneNumber, address, city, state, zipcode, propertyID, propertyUnitID, rentAmount, gross_or_triple_lease, baseRent, tripleNet, leaseStartDate, leaseEndDate, increaseRent, hashPassword, currentDate]);
                 if (tenantsInsert[0].affectedRows > 0) {
                     // update property unit
+                    // console.log(tenantsInsert[0].insertId)
                     const status = "Occupied";
                     const propertyUnitsResult = await queryRunner(updatePropertyUnitsTenant, [ status, propertyUnitID, propertyID ]);
                     if (propertyUnitsResult[0].affectedRows > 0) {
@@ -82,7 +85,8 @@ const config = process.env;
                       if(increaseRent == 'No'){
                         res.status(200).json({
                             message: "Tenants save Successful",
-                            data: tenantsInsert[0]
+                            data: tenantsInsert[0],
+                            tenantId:tenantsInsert[0].insertId
                           })
                     }
                     else{
@@ -99,7 +103,9 @@ const config = process.env;
                         }
 
                           res.status(200).json({
-                            message: " tenant created successful"
+                            message: " tenant created successful",
+                            data: tenantsInsert[0],
+                            tenantId:tenantsInsert[0].insertId
                           });
  
                     }
@@ -131,6 +137,7 @@ const config = process.env;
           
                 exports.sendInvitationLink = async (req, res) => {
                   const { tenantID } = req.body;
+                  // console.log(req)
                   try {
                     const selectTenantResult = await queryRunner(selectQuery("tenants", "id"), [tenantID])
               if (selectTenantResult[0].length > 0) {
@@ -146,7 +153,7 @@ const config = process.env;
           
           const tenantsInsert = await queryRunner(UpdateTenants, [hashPassword, currentDate, tenantID]);
                 if (tenantsInsert[0].affectedRows > 0) {
-                  await sendMail(email, mailSubject, tenantPassword, name); 
+                  await sendMail.sendMail(email, mailSubject, tenantPassword, name); 
                   // console.log(tenantPassword);
                   res.status(200).json({
                     message: "Tenants Welcome email send Successful",
@@ -215,19 +222,19 @@ const config = process.env;
                 
           //  ############################# Tenant Reset Email ############################################################
           exports.createResetEmailTenant = async (req, res) => {
-            const { email } = req.body;
-            // console.log(email);
+            const { email } = req.query;
+            // console.log(req);
             const mailSubject = "Spade Reset Email";
             const random = Math.floor(100000 + Math.random() * 900000)
             try {
               const selectResult = await queryRunner(selectQuery('tenants', "Email"), [email]);
-              // console.log(selectResult[0])
+              console.log(selectResult[0])
               if (selectResult[0].length > 0) {
                 const userid = selectResult[0][0].id;
-                const name = selectResult[0][0].FirstName + " " + selectResult[0][0].LastName
+                const name = selectResult[0][0].firstName + " " + selectResult[0][0].lastName
                 // console.log(updateResult);
                 console.log(userid);
-                sendMail(email, mailSubject, random, name);
+                sendMail.sendMail(email, mailSubject, random, name);
                 const now = new Date();
                 const formattedDate = now.toISOString().slice(0, 19).replace('T', ' ');
                 const updateResult = await queryRunner(addResetTokenTenants, [random, formattedDate, userid]);
@@ -251,7 +258,39 @@ const config = process.env;
           
           
           
-          
+          //  ############################# resend Code ############################################################
+exports.resendCodeTenants = async (req, res) => {
+  const { id } = req.body
+  const mailSubject = 'Spade Reset Email'
+  const random = Math.floor(100000 + Math.random() * 900000)
+  try {
+    const selectResult = await queryRunner(selectQuery('tenants', 'id'), [id])
+    if (selectResult[0].length > 0) {
+      const userid = selectResult[0][0].id
+      const name =
+        selectResult[0][0].firstName + ' ' + selectResult[0][0].lastName
+      // console.log(selectResult[0][0])
+      sendMail.sendMail(selectResult[0][0].email, mailSubject, random, name)
+      const now = new Date()
+      const formattedDate = now.toISOString().slice(0, 19).replace('T', ' ')
+      const updateResult = await queryRunner(addResetTokenTenants, [
+        random,
+        formattedDate,
+        userid
+      ])
+      if (updateResult[0].affectedRows === 0) {
+        res.status(400).send('Error')
+      } else {
+        res.status(200).json({ message: 'Sended' })
+      }
+    }
+  } catch (error) {
+    res.status(400).send('Error')
+    console.log(error)
+  }
+}
+//  ############################# resend Code ############################################################
+
           
           
           
@@ -381,6 +420,7 @@ exports.tenantAttachFile = async (req, res) => {
   const {
     tenantID
   } = req.body;
+  // console.log(req.files)
   const { userId } = req.user
   try {
 
@@ -439,3 +479,116 @@ exports.tenantAttachFileDelete = async (req, res) => {
   }
 }
 //  ############################# Delete Tenant Attach File End ############################################################
+
+
+//  ############################# Delete Tenant Start ############################################################
+exports.tenantDelete = async (req, res) => {
+  try {
+    const { id } = req.body
+    const tenantResult = await queryRunner(selectQuery("tenants", "id"), [id]);
+const propertyUnitID = tenantResult[0][0].propertyUnitID;
+    const tenantDeleteResult = await queryRunner(deleteQuery("tenants", "id"), [id]);
+    if (tenantDeleteResult[0].affectedRows > 0) {
+
+      const tenantCheckResult = await queryRunner(selectQuery("tenantattachfiles", "tenantID"), [id]);
+      // console.log(tenantcheckresult);
+      if (tenantCheckResult[0].length > 0) {
+        tenantimages = tenantCheckResult[0].map((image) => image.fileName);
+        // delete folder images
+        imageToDelete(tenantimages);
+        const tenantFileDeleteresult = await queryRunner(deleteQuery("tenantattachfiles", "tenantID"), [id]);
+        if (tenantFileDeleteresult[0].affectedRows > 0) {
+        const tenantAdditionalEmailresult = await queryRunner(deleteQuery("tenantalternateemail", "tenantID"), [id]);
+        if (tenantAdditionalEmailresult[0].affectedRows > 0) {
+        const tenantAdditionalPhoneResult = await queryRunner(deleteQuery("tenantalternatephone", "tenantID"), [id]);
+        if (tenantAdditionalPhoneResult[0].affectedRows > 0) {
+          const tenantIncreaseRentResult = await queryRunner(deleteQuery("tenantincreaserent", "tenantID"), [id]);
+          if (tenantIncreaseRentResult[0].affectedRows > 0) {
+            //dddddd
+            const status = "Vacant";
+            const propertyUnitsResult = await queryRunner(updateUnitsTenant, [ status , propertyUnitID ]);
+            if (propertyUnitsResult[0].affectedRows > 0) {
+          
+              res.status(200).json({
+                message: " tenant deleted successfully"
+              })    
+            }else{
+              // " tenant Error occur in increase rent "
+              res.status(400).json({
+                message: " tenant Error occur in updating property units "
+              })
+            }
+          }else{
+            // " tenant Error occur in increase rent "
+            res.status(400).json({
+              message: " tenant Error occur in delete increase rent "
+            })
+          }
+          // }
+          
+        }else{
+          res.status(400).json({
+            message: " tenant Error occur in delete alternate phone "
+          })
+        }
+         
+         
+        }else{
+          res.status(400).json({
+            message: " tenant Error occur in delete alternate email "
+          })  
+        }
+      }else{
+        res.status(400).json({
+          message: " tenant Error occur in delete files "
+        })  
+      }
+      } else { // tenantCheckResult
+        res.status(400).json({
+          message: "No tenant file data found "
+        })
+      }
+
+    } else { //tenantDeleteResult
+      res.status(400).json({
+        message: "No data found"
+      })
+    }
+  } catch (error) {
+    res.send("Error from delete tenants ");
+    // console.log(req.body)
+    console.log(error)
+  }
+}
+//  ############################# Delete Tenant End ############################################################
+
+
+//  ############################# Get tenant ByID Start ############################################################
+exports.getTenantsByID = async (req, res) => {
+  try {
+    const { id } = req.query;
+    // console.log(req)
+    const TenantsByIDResult = await queryRunner(getTenantsById,[id])
+    console.log(TenantsByIDResult)
+
+    if (TenantsByIDResult.length > 0) {
+      const data = JSON.parse(JSON.stringify(TenantsByIDResult))
+      // console.log(data)
+      res.status(200).json({
+        data: data,
+        message: 'Tenants By ID'
+      })
+    } else {
+      res.status(400).json({
+        message: 'No data found'
+      })
+    }
+  } catch (error) {
+    res.send('Error Get Tenants By ID')
+    // console.log(req.body)
+    console.log(error)
+  }
+}
+//  ############################# Get tenant ByID End ############################################################
+
+ 

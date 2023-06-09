@@ -30,6 +30,11 @@
     <!--- FONT-ICONS CSS -->
     <link href="../assets/css/icons.css" rel="stylesheet" />
 
+    <!-- drag and drop start  -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.5.2/dragula.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.css">
+    <!-- drag and drop end  -->
+
     <!-- COLOR SKIN CSS -->
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="../assets/colors/color1.css" />
     <style>
@@ -286,7 +291,7 @@
                 <div class="side-app">
 
                     <!-- CONTAINER -->
-                    <div class="main-container container-fluid">
+                    <div class="main-container container-fluid" id="main">
 
                         <!-- PAGE-HEADER -->
 
@@ -1430,6 +1435,52 @@
                 logo.src = '../assets/header-img/question.svg';
             }
         </script>
+
+        <!-- column drag and drop start  -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.5.2/dragula.min.js"></script>
+            <script>
+           var COL_WIDTH = 62 // should be calculated dynamically, and recalculated at window resize
+var GUTTER_WIDTH = 30
+
+var COL_WIDTHS = {
+  750: 62,
+  970: 81,
+  1170: 97
+}
+
+$(function() {
+  
+  var d = dragula({
+    invalid: function(el, target) {
+      return $(el).hasClass('ui-resizable-handle')
+    }
+  })
+  $('.row').each(function() {
+    d.containers.push(this)
+  })
+
+  $('.card').resizable({
+    grid: COL_WIDTH - GUTTER_WIDTH,
+    handles: 'se',
+    resize: function(e, ui) {
+      console.log('resized', ui.size)
+      $(this).css('width', '').removeClass(function(index, css) {
+        return (css.match (/(^|\s)col-sm-\S+/g) || []).join(' ')
+      })
+      .addClass('col-sm-' + Math.max(1, Math.round(ui.size.width / COL_WIDTH)))
+    }
+  })
+  
+  var colWidth = COL_WIDTHS[$('.main-container').width()] || COL_WIDTHS[0]
+  $(window).resize(function() {
+    colWidth = COL_WIDTHS[$('.main-container').width()] || COL_WIDTHS[0]
+    console.log('set colWidth to', colWidth, $('.main-container').width())
+  })
+  
+})
+            </script>
+        <!-- column drag and drop end  -->
 
 
 </body>
