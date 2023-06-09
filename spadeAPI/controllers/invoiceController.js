@@ -12,7 +12,8 @@ const {
     insertLineItems,
     insertInvoiceImage,
     updateInvoiceStatus,
-    getAllInvoicesquery
+    getAllInvoicesquery,
+    getByIdInvoicesQuery
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -34,7 +35,8 @@ exports.createInvoice = async (req, res) => {
         totalAmount,
         additionalNote,
         lineItems,
-        sendmails
+        sendmails,
+
  } = req.body;
 
     const { userId } = req.user;
@@ -175,17 +177,12 @@ exports.getAllInvoices = async (req, res) => {
             const invoiceID = getAllInvoicesResult[0][i].invoiceID;
             const invoicelineitemsResult = await queryRunner(selectQuery("invoicelineitems", "invoiceID"), [invoiceID]);
             if (invoicelineitemsResult[0].length > 0) {
-                const memo = invoicelineitemsResult[0].map((desc)=> desc.memo )
+                const memo = invoicelineitemsResult[0].map((desc)=>  desc.memo, desc.category  )
                 getAllInvoicesResult[0][i].memo = memo
-
-
             } else {
                 getAllInvoicesResult[0][i].memo = ["No memo"]
             }
-
         }
-
-        
         res.status(200).json({
           data: getAllInvoicesResult,
           message: 'All Invoice successful'
@@ -201,4 +198,53 @@ exports.getAllInvoices = async (req, res) => {
     }
   }
   //  ############################# View All Invoice  End ############################################################
+
+
+
+      //  #############################Invoice By ID Start ############################################################
+exports.getByIdInvoices = async (req, res) => {
+    try {
+    const {invoiceId} = req.body; 
+      const getAllInvoicesResult = await queryRunner(getByIdInvoicesQuery, [invoiceId]);
+      if (getAllInvoicesResult[0].length > 0) {
+            const invoicelineitemsResult = await queryRunner(selectQuery("invoicelineitems", "invoiceID"), [invoiceId]);
+            if (invoicelineitemsResult[0].length > 0) {
+                const memo = invoicelineitemsResult[0].map((desc)=> ({
+                    category:desc.category,
+                    property: desc.property,
+                    memo:desc.memo,
+                    amount:desc.amount
+                }) )
+                // const memo = invoicelineitemsResult[0].map((desc)=> desc.memo )
+                getAllInvoicesResult[0][0].memo = memo
+            } else {
+                getAllInvoicesResult[0][0].memo = ["No memo"]
+            }
+
+
+
+
+            const invoiceImagesResult = await queryRunner(selectQuery("invoiceimages", "invoiceID"), [invoiceId]);
+            if (invoiceImagesResult[0].length > 0) {
+                const Image = invoiceImagesResult[0].map((img)=> img.InvoiceImage  )
+                // const memo = invoicelineitemsResult[0].map((desc)=> desc.memo )
+                getAllInvoicesResult[0][0].image = Image
+            } else {
+                getAllInvoicesResult[0][0].image = ["No Image"]
+            }
+        res.status(200).json({
+          data: getAllInvoicesResult,
+          message: ' Invoice By ID successful'
+        })
+      } else {
+        res.status(400).json({
+          message: 'No data found'
+        })
+      }
+    } catch (error) {
+      console.log(error)
+      res.send('Error occur in Invoice by ID');
+    }
+  }
+  //  ############################# Invoice By ID End ############################################################
 
