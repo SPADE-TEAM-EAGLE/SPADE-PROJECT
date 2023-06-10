@@ -39,7 +39,7 @@ const verifyTokenTenant=async(req, res, next)=>{
       userName:result[0][0].FirstName+" "+result[0][0].LastName
 
     }
-    
+    console.log("hello")
     next();
   } catch (err) {
     console.log(err)

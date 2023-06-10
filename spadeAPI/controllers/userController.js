@@ -601,11 +601,8 @@ exports.propertyUpdate = async (req, res) => {
           const img = existingImg[i];
           const propertyImageResult = await queryRunner(insertInPropertyImage, [
             id,
-            img,
-          ]);
-          console.log(
-            `step : 5 inserted new image data into database insertId = ${id}`
-          );
+            img
+          ]) 
           if (propertyImageResult.affectedRows === 0) {
             return res.send("Error2");
           }
@@ -760,7 +757,7 @@ exports.putPropertyUnitsUpdates = async (req, res) => {
 exports.getPropertyUnitsTenant = async (req, res) => {
   try {
     const { userId } = req.user;
-
+    console.log(1)
     const getPropertyUnitsTenantResult = await queryRunner(
       selectQuery("property", "landlordID"),
       [userId]
