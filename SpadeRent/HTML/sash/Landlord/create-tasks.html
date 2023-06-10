@@ -34,35 +34,16 @@
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="../assets/colors/color1.css" />
     <style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
         .custom-file-input::-webkit-file-upload-button {
             visibility: hidden;
         }
-        
-        #propertyTable {
-            padding: 0;
-        }
-        
-        #propertyTable_wrapper .dataTables_wrapper {
-            padding: 0;
-        }
-        
-        #propertyTable_wrapper .dataTables_scroll {
-            padding: 0;
-        }
-        
-        #propertyTable_wrapper .dataTables_scrollHead {
-            padding: 0;
-        }
-        
-        #propertyTable_wrapper .dataTables_scrollBody {
-            padding: 0;
-        }
-        
+
         .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar {
             width: 7px;
             /* Width of the scrollbar */
         }
-        
+
         .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb {
             background-color: rgb(136, 136, 136, 0.2);
             /* Color of the scrollbar thumb */
@@ -70,12 +51,16 @@
             transition: all 1ms;
             /* Rounded corners for the thumb */
         }
-        
+
         .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb:hover {
             background-color: rgb(136, 136, 136, 0.5);
             /* Color of the scrollbar thumb on hover */
         }
-        
+
+        .iti {
+            margin-bottom: 0 !important;
+        }
+
         .custom-file-input::before {
             content: 'Select Files';
             display: inline-block;
@@ -87,50 +72,66 @@
             cursor: pointer;
             border-radius: 4px;
         }
-        
+
         .custom-file-input:hover::before {
             background: #0069d9;
         }
-        
+
+        /* .fi-rs-calendar {
+    position: absolute;
+    top: 78%;
+    right: 24px;
+    transform: translateY(-50%);
+    background-size: cover;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #1467B0;
+} */
+
+        .dark-mode .link-text{
+            color: #000;
+        }
         .custom-file-input:active::before {
             background: #0062cc;
         }
-        
+
         .custom-file-input.selected::before {
             content: 'Change Files';
             background: #28a745;
         }
-        
+
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            /* display: none; */
+            background-size: cover;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #1467B0;
+        }
+
         .dark-mode .create-new-link {
             background: transparent !important;
             border: 3px solid #1467B0 !important;
             color: white !important;
             border-radius: 50px !important;
         }
-        /* .dark-mode .create-new-link:hover {
-    border: 3px solid #1467B0 !important;
-} */
-        
+
         .create-new-link {
             background: transparent !important;
             border: 3px solid #1467B0 !important;
             color: black;
             border-radius: 50px !important;
         }
-        
+
         .selected-files {
             margin-top: 10px;
         }
-        
-        .dark-mode .selected-files span {
-            display: inline-block;
-            margin-right: 0;
-            padding: 4px 8px;
-            background: transparent;
-            color: white !important;
-            border-radius: 4px;
+
+        .del-btn {
+            position: absolute;
+            right: 10px;
+            top: 50%;
         }
-        
+
         .selected-files span {
             display: inline-block;
             margin-right: 5px;
@@ -139,11 +140,20 @@
             color: #333;
             border-radius: 4px;
         }
-        
+
+        .dark-mode .selected-files span {
+            display: inline-block;
+            margin-right: 0;
+            padding: 4px 8px;
+            background: transparent;
+            color: white;
+            border-radius: 4px;
+        }
+
         .custom-file-input {
             visibility: hidden;
         }
-        
+
         .custom-file-label {
             cursor: pointer;
             display: flex;
@@ -153,7 +163,7 @@
             padding: 6px 12px;
             background-color: #fff;
         }
-        
+
         .dark-mode .custom-file-label {
             cursor: pointer;
             display: flex;
@@ -163,76 +173,81 @@
             padding: 6px 12px;
             background-color: transparent;
         }
-        
+        .dark-mode .btn-close {
+            color: white;
+        }
+        .dark-mode .iti input[type=tel], .dark-mode .iti input[type=text] {
+    border-color: rgba(255, 255, 255, 0.1);
+    background-color: transparent;
+    border-right-color: rgba(255, 255, 255, 0.1);
+    color: #dedefd;
+}
         .custom-file-label i {
             margin-bottom: 5px;
             font-size: 3rem;
             color: #1467B0;
         }
-        
+
         .custom-file-text {
             text-align: center;
             line-height: 1.2;
             margin-top: 5px;
         }
-        
+
         .custom-file-text span {
             display: block;
             font-size: 14px;
         }
-        
+
         .remove-file {
             cursor: pointer;
         }
-        
+
         .border {
             border: 0px solid #e9edf4 !important;
             padding: 0.75rem;
             vertical-align: top;
             border: 1px solid #e9edf4;
         }
-        /* input:focus {
-    border: 3px solid #555 !important;
-} */
-        
-        .panel-body {
+
+        /* /* input:focus {
+            border: 3px solid #555 !important;
+        } */
+
+        */ .panel-body {
             padding: 0px;
         }
-        
-        .dark-mode .btn-close {
-            color: white;
-        }
-        
+
         .accordion-item:first-of-type {
             border-bottom-left-radius: 0.25rem;
             border-bottom-right-radius: 0.25rem;
             box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
         }
-        
+
         .accordion-item:last-of-type {
             border-top-right-radius: 0.25rem;
             border-top-left-radius: 0.25rem;
             box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
         }
-        
+
         .table-primary th {
             font-weight: 600 !important;
             vertical-align: middle !important;
         }
-        
+
         .border-model-line {
             border-top-left-radius: 3px;
             border-bottom-left-radius: 3px;
             border-top-right-radius: 3px !important;
             border-bottom-right-radius: 3px !important;
         }
-        
+
         .file-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
             grid-gap: 10px;
         }
-        
+
         .selected-file {
             display: flex;
             flex-direction: column;
@@ -243,34 +258,34 @@
             border: 1px solid #ccc;
             border-radius: 5px;
         }
-        
+
         .file-preview {
             width: 80px;
             height: 80px;
             object-fit: cover;
             border-radius: 5px;
         }
-        
+
         .file-details {
             margin-top: 5px;
             font-size: 12px;
         }
-        
+
         .table td {
             vertical-align: middle !important;
         }
+
         /* .card-header {
-padding: 0.5rem 1rem;
-} */
-        
+        padding: 0.5rem 1rem;
+    } */
+
         .modal-footer .button-left {
             background-color: #1F1F1F;
             margin: 0rem 1rem;
             color: white;
         }
-        
-        .modal-footer button,
-        .modal-footer a {
+
+        .modal-footer button {
             border-radius: 2.75rem;
             padding: 4px 30px;
             font-family: 'Figtree';
@@ -283,91 +298,91 @@ padding: 0.5rem 1rem;
             letter-spacing: 0.0145455em;
             /* font-size: 0.938rem; */
         }
-        
-        .disabled {
-            pointer-events: none;
-            cursor: not-allowed;
-            color: gray;
-        }
-        
+
         .modal-footer .button {
             font-size: 0.938rem;
         }
-        
+
         .accordion-button::after {
             content: "";
             display: inline-block;
             /* Replace with the path to your default chevron image */
         }
-        
+
         .chevron,
         .tick,
         .cross {
             position: absolute;
             right: 15px;
         }
-        
+
         .tick {
-            color: #1DBC5F;
+            color: green;
             font-weight: bolder
         }
-        
+
         .cross {
             color: red;
             font-weight: bolder
         }
-        
+
         .accordion-button .chevron {
             transition: transform 0.3s;
             /* Transition for smooth animation */
         }
-        
+
         .accordion-button[aria-expanded="true"] .chevron {
             transform: rotate(-180deg);
             /* Rotate the chevron when accordion is open */
         }
-        
+
         .table tbody img {
             width: 40px;
             border: transparent;
             border-radius: 5px;
             height: 40px;
         }
-        
+
         .rounded-pill-Single-Family {
             color: #4A4AFF !important;
             background: #E6E6F2 !important;
             font-weight: bold;
         }
-        
+
         .rounded-pill-Multi-Family {
             color: #0BAAB8 !important;
             background: #C8F3F7 !important;
             font-weight: bold;
         }
-        
+        .succes-modal-dialog {
+    max-width: 544px;
+    margin: 1.75rem auto;
+}
+.succes-modal-dialog .shadow-lg {
+background-color: white;
+}
         .rounded-pill-Multi-Commercial {
             background: #FFF9E5 !important;
             color: #F5CA38 !important;
             font-weight: bold;
         }
-        
+
         .table-primary {
             background: #1467B014;
         }
-        
+
         .selected-file {
             position: relative;
         }
-        
+
         .file-preview {
             width: 100%;
         }
-        
+
         .file-details {
             padding: 10px;
         }
-        
+
         .delete-file {
             position: absolute;
             top: -1px;
@@ -376,56 +391,64 @@ padding: 0.5rem 1rem;
             font-size: 11px;
             color: #000;
         }
-        
+
         .btn-group>.btn-group:not(:last-child)>.btn,
         .btn-group>.btn:not(:last-child):not(.dropdown-toggle) {
             border-top-right-radius: 5px;
             border-bottom-right-radius: 5px;
         }
-        
+
         .color-primary {
             color: #1467B0;
         }
-        
+
         .border-model-line {
             border-left: 5px solid #1467B0;
         }
-        
+
         .accordion-item:first-of-type .accordion-button {
             border-top-right-radius: calc(0.5rem - 1px);
             border-top-left-radius: calc(0.5rem - 1px);
         }
+
+        .selected-files span {
+            display: inline-block;
+            margin-right: 0px;
+            padding: 0px;
+            background: none;
+            color: #333;
+            /* border-radius: 4px; */
+        }
+
         /* .delete-file {
-position: absolute;
-top: 0px;
-right: 5px;
-cursor: pointer;
-font-size: 13px;
-color: #000;
-} */
-        
-        button.btn-close {
+        position: absolute;
+        top: 0px;
+        right: 5px;
+        cursor: pointer;
+        font-size: 13px;
+        color: #000;
+    } */
+    button.btn-close {
             right: 6px;
         }
-        
+
         .btn-close {
             width: 1.8rem;
             opacity: 1;
             position: absolute;
             top: 6px;
         }
-        
         .del {
             width: 2rem !important;
         }
-        
+
         .btn-close:hover,
         .btn-close:focus {
             color: #000;
             text-decoration: none;
             opacity: 1;
         }
-        
+
         @media (max-width:992px) {
             .modal-footer button {
                 border-radius: 2.75rem;
@@ -438,104 +461,154 @@ color: #000;
                 /* identical to box height, or 120% */
                 letter-spacing: 0.0145455em;
             }
-            #top_main_image {
-                display: none;
+
+            .btn-close {
+                width: 2.5rem;
+                opacity: 1;
+                position: absolute;
+                top: 6px;
             }
-            #top_main_card {
-                height: 220px;
+
+            .del {
+                width: 2rem !important;
             }
-            #nav_links {
-                top: 153px;
+
+            .btn-close:hover,
+            .btn-close:focus {
+                color: #000;
+                text-decoration: none;
+                opacity: 1;
             }
-        }
-        
-        @media (max-width:425px) {
-            .modal-footer {
-                flex-direction: column !important;
-                justify-content: flex-center !important;
+
+            @media (max-width:992px) {
+                .modal-footer button {
+                    border-radius: 2.75rem;
+                    padding: 4px 30px;
+                    font-family: 'Figtree';
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 0.8rem;
+                    line-height: 1.875rem;
+                    /* identical to box height, or 120% */
+                    letter-spacing: 0.0145455em;
+                }
+
+                #top_main_image {
+                    display: none;
+                }
+
+                #top_main_card {
+                    height: 220px;
+                }
+
+                #nav_links {
+                    top: 153px;
+                }
             }
-            .modal-footer .button-left {
-                margin: auto;
+
+            @media (max-width:575px) {
+                .modal-footer {
+                    flex-direction: column !important;
+                    justify-content: flex-center !important;
+                }
+
+                .modal-footer .button-left {
+                    margin: auto;
+                }
+
+                /* .modal-footer button {
+                    width: 231px;
+                } */
+
+                .border-model-line h2 {
+                    font-size: 1.6rem;
+                }
+
+                .accordion-button h3 {
+                    font-size: 15px;
+                }
+
+                #filter_btn {
+                    font-size: 12px;
+                    margin: 0 !important;
+                }
+
+                /* #customize_btn {
+                    display: none;
+                } */
+                #info-head {
+                    display: none;
+                }
+
+                #add_property_btn {
+                    font-size: 12px;
+                    margin: 0 !important;
+                    display: none;
+                }
+
+                /* #search_input {
+                    display: none;
+                } */
+                #email_verification {
+                    font-size: 12px;
+                }
+
+                #top_main_image {
+                    display: none;
+                }
+
+                #top_main_card {
+                    height: 220px;
+                }
+
+                #nav_links {
+                    top: 153px;
+                }
             }
-            /* /* .modal-footer button {
-                width: 231px;
-            } */
-            */ .border-model-line h2 {
-                font-size: 1.6rem;
+
+            @media (max-width:375px) {
+                .border-model-line h2 {
+                    font-size: 1.4rem;
+                }
             }
-            .accordion-button h3 {
-                font-size: 15px;
+
+            @media (max-width:320px) {
+                /* .modal-footer button {
+                    width: 231px;
+                } */
             }
-            #filter_btn {
-                font-size: 12px;
-                margin: 0 !important;
+
+            @media (max-width: 767px) {
+                .file-select-area {
+                    display: block;
+                    text-align: center;
+                }
+
+                .selected-files {
+                    margin-top: 10px;
+                    text-align: center;
+                }
+
+                .file-details {
+                    padding: 5px;
+                }
             }
-            #customize_btn {
-                display: none;
+
+            th,
+            td {
+                border-left-color: transparent !important;
+                border-right-color: transparent !important;
             }
-            #add_property_btn {
-                font-size: 12px;
-                margin: 0 !important;
+
+            .dark-mode th {
+                background: #212121 !important;
+                font-weight: bold !important;
             }
-            #search_input {
-                display: none;
+
+            .light-mode th {
+                background: #ECF3F9 !important;
+                font-weight: bold !important;
             }
-            #email_verification {
-                font-size: 12px;
-            }
-            #top_main_image {
-                display: none;
-            }
-            #top_main_card {
-                height: 220px;
-            }
-            #nav_links {
-                top: 153px;
-            }
-        }
-        
-        @media (max-width:375px) {
-            .border-model-line h2 {
-                font-size: 1.4rem;
-            }
-            .succes-modal {
-                padding: 1rem 1rem;
-            }
-        }
-        
-        @media (max-width:320px) {
-            /* /* .modal-footer button {
-                width: 231px;
-            } */
-            
-        }
-        
-        @media (max-width: 767px) {
-            .file-select-area {
-                display: block;
-                text-align: center;
-            }
-            .selected-files {
-                margin-top: 10px;
-                text-align: center;
-            }
-            .file-details {
-                padding: 5px;
-            }
-        }
-        
-        th,
-        td {
-            border-left-color: transparent !important;
-            border-right-color: transparent !important;
-        }
-        
-        .dark-mode th {
-            background: #212121 !important;
-        }
-        
-        .light-mode th {
-            background: #ECF3F9 !important;
         }
     </style>
 
@@ -695,13 +768,31 @@ color: #000;
                                 <span class="text-danger d-none">Property ID is required!</span>
                             </div>
                             <div class="col-md-4">
-                                <label for="inputState" class="form-label fw-bold">Assign To</label>
+                                <!-- <label for="inputState" class="form-label fw-bold"></label>
                                 <select id="state" class="form-select form">
                                 <option selected>Choose...</option>
                                 <option>Sindh</option>
                                 <option>Punjab</option>
                                 <option>Balochistan</option>
-                                <option>KPK</option>
+                                <option>KPK</option> -->
+                                <label class="form-label fw-bold">Assign To</label>
+                                    <select class="form-control select2" data-placeholder="Choose Browser" multiple>
+                                            <option value="Firefox">
+                                                Firefox
+                                            </option>
+                                            <option value="Chrome selected">
+                                                Chrome
+                                            </option>
+                                            <option value="Safari">
+                                                Safari
+                                            </option>
+                                            <option selected value="Opera">
+                                                Opera
+                                            </option>
+                                            <option value="Internet Explorer">
+                                                Internet Explorer
+                                            </option>
+                                        </select>
                             </select>
                                 <span class="text-danger d-none">Property name required!</span>
                             </div>
@@ -1045,6 +1136,62 @@ color: #000;
                                         <div class="d-flex country">
                                             <img src="../assets\header-img\spade.svg" alt="profile-user" class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
+                                        <div class="dropdown  d-flex notifications">
+                                            <a class="nav-link icon" data-bs-toggle="dropdown"><i class="fe fe-bell"></i><span class=" pulse"></span>
+                                            </a>
+                                            <!-- <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                                <div class="drop-heading border-bottom">
+                                                    <div class="d-flex">
+                                                        <h6 class="mt-1 mb-0 fs-16 fw-semibold text-dark">Notifications
+                                                        </h6>
+                                                    </div>
+                                                </div>
+                                                <div class="notifications-menu ps">
+                                                    <a class="dropdown-item d-flex" href="notify-list.html">
+                                                        <div class="me-3 notifyimg  bg-primary brround box-shadow-primary">
+                                                            <i class="fe fe-mail"></i>
+                                                        </div>
+                                                        <div class="mt-1 wd-80p">
+                                                            <h5 class="notification-label mb-1">New Application received
+                                                            </h5>
+                                                            <span class="notification-subtext">3 days ago</span>
+                                                        </div>
+                                                    </a>
+                                                    <a class="dropdown-item d-flex" href="notify-list.html">
+                                                        <div class="me-3 notifyimg  bg-secondary brround box-shadow-secondary">
+                                                            <i class="fe fe-check-circle"></i>
+                                                        </div>
+                                                        <div class="mt-1 wd-80p">
+                                                            <h5 class="notification-label mb-1">Project has been
+                                                                approved</h5>
+                                                            <span class="notification-subtext">2 hours ago</span>
+                                                        </div>
+                                                    </a>
+                                                    <a class="dropdown-item d-flex" href="notify-list.html">
+                                                        <div class="me-3 notifyimg  bg-success brround box-shadow-success">
+                                                            <i class="fe fe-shopping-cart"></i>
+                                                        </div>
+                                                        <div class="mt-1 wd-80p">
+                                                            <h5 class="notification-label mb-1">Your Product Delivered
+                                                            </h5>
+                                                            <span class="notification-subtext">30 min ago</span>
+                                                        </div>
+                                                    </a>
+                                                    <a class="dropdown-item d-flex" href="notify-list.html">
+                                                        <div class="me-3 notifyimg bg-pink brround box-shadow-pink">
+                                                            <i class="fe fe-user-plus"></i>
+                                                        </div>
+                                                        <div class="mt-1 wd-80p">
+                                                            <h5 class="notification-label mb-1">Friend Requests</h5>
+                                                            <span class="notification-subtext">1 day ago</span>
+                                                        </div>
+                                                    </a>
+                                                <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div></div>
+                                                <div class="dropdown-divider m-0"></div>
+                                                <a href="notify-list.html" class="dropdown-item text-center p-3 text-muted">View all
+                                                    Notification</a>
+                                            </div> -->
+                                        </div>
                                         <div class="d-flex country">
                                             <img src="../assets\header-img\circlels.png" alt="profile-user" class="avatarr profile-user nav-link brroundd cover-image light-layout">
                                         </div>
@@ -1052,17 +1199,17 @@ color: #000;
                                             <a href="javascript:void(0)" data-bs-toggle="dropdown" class="nav-link leading-none d-flex">
                                                 <!-- <img src="../assets/images/users/21.jpg" alt="profile-user"
                                                     class="avatar  profile-user brround cover-image"> -->
-                                                <span class="side-menu__item dynamic-text-head" style="padding: 10px 10px;">Spade Admin</span> <i class="fe fe-chevron-down dark-mode" style="font-size: 20px; font-weight: 800;"></i>
+                                                <span class="side-menu__item dynamic-text-head" style="padding: 10px 10px;">Spade Admin</span> <i class="fe fe-chevron-down dark-mode text-dark" style="font-size: 20px; font-weight: 800;"></i>
                                             </a>
-                                            <!-- <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                                <div class="drop-heading">
+                                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                                <!-- <div class="drop-heading">
                                                     <div class="text-center">
                                                         <h5 class="text-dark mb-0 fs-14 fw-semibold">Percy Kewshun</h5>
                                                         <small class="text-muted">Senior Admin</small>
                                                     </div>
-                                                </div>
-                                                <div class="dropdown-divider m-0"></div>
-                                                <a class="dropdown-item" href="profile.html">
+                                                </div> -->
+                                                <!-- <div class="dropdown-divider m-0"></div> -->
+                                                <!-- <a class="dropdown-item" href="profile.html">
                                                     <i class="dropdown-icon fe fe-user"></i> Profile
                                                 </a>
                                                 <a class="dropdown-item" href="email-inbox.html">
@@ -1071,11 +1218,11 @@ color: #000;
                                                 </a>
                                                 <a class="dropdown-item" href="lockscreen.html">
                                                     <i class="dropdown-icon fe fe-lock"></i> Lockscreen
-                                                </a>
+                                                </a> -->
                                                 <a class="dropdown-item" href="login.html">
                                                     <i class="dropdown-icon fe fe-alert-circle"></i> Sign out
                                                 </a>
-                                            </div> -->
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
