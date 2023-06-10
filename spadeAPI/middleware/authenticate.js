@@ -19,6 +19,7 @@ const verifyToken=async(req, res, next)=>{
     }
     
     next();
+    // console.log("hello")
   } catch (err) {
     console.log(err)
     return res.status(400).send('Invalid Token');
@@ -39,7 +40,7 @@ const verifyTokenTenant=async(req, res, next)=>{
       userName:result[0][0].FirstName+" "+result[0][0].LastName
 
     }
-    console.log("hello")
+  
     next();
   } catch (err) {
     console.log(err)

@@ -2417,21 +2417,6 @@ background-color: white;
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
 
-    <script>
-        // Get the user's preferred color scheme
-        const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-        // Get a reference to the logo element
-        const logo = document.getElementById('logo');
-
-        // Set the logo source file based on the user's preferred color scheme
-        if (userPrefersDark) {
-            // console.log(document.getElementById("myModal_delete"))
-            logo.src = '../assets/header-img/comment.svg';
-        } else {
-            logo.src = '../assets/header-img/question.svg';
-        }
-    </script>
     <!-- <script src="../assets/plugins/fancyuploder/jquery.ui.widget.js"></script>
     <script src="../assets/plugins/fancyuploder/jquery.fileupload.js"></script>
     <script src="../assets/plugins/fancyuploder/jquery.iframe-transport.js"></script>
@@ -3347,6 +3332,7 @@ dateTable();
                 type: 'GET',
                 contentType: false,
                 processData: false,
+                
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },

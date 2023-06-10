@@ -1346,7 +1346,7 @@
                         <div class="col-md-12 col-lg-4">
                             <span class="float-end">
                                 <label class="form-label fw-bold m-0">Balance Due</label>
-                                <h1 class="text-primary fw-bold m-0">$0.00</h1>
+                                <h1 class="text-primary fw-bold m-0" id="totalText">$0.00</h1>
                             </span>
                         </div>
                         <div class="col-12">
@@ -2079,12 +2079,6 @@
                                             <table class="table border text-nowrap text-md-nowrap mb-0">
                                                 <thead>
                                                     <tr>
-                                                        <th><label class="custom-control custom-checkbox-md">
-                                                                <input type="checkbox" class="custom-control-input"
-                                                                    name="example-checkbox5" value="option5" checked="">
-                                                                <span class="custom-control-label"></span>
-                                                            </label></th>
-                                                        <th></th>
                                                         <th>INVOICE NO</th>
                                                         <th>TENANT NAME</th>
                                                         <th>MEMO/DESCRIPTION</th>
@@ -3143,6 +3137,8 @@
                     formData.append('terms', selectedTerms);
                     formData.append('repeatTerms', switchValue);
                     formData.append('additionalNotes', additionalNotes);
+                    console.log($("#totalText").text().split('$')[1])
+                    formData.append('totalAmount',$("#totalText").text().split(' ')[1])
                     // Loop through the lineItems array and add each line item to the FormData object
                     for (var i = 0; i < lineItems.length; i++) {
                         var lineItem = lineItems[i];
@@ -3197,10 +3193,34 @@
                     },
                     success: function ({ data, user }) {
                         console.log(data)
+                        $("#user-name").text(user)
+                        $("#tenants").empty()
+                        $("#tenants").append($('<option></option>').text("Choose..."));
+                        // var tableBody = $('#table_body');
+                        data[0]?.forEach(function (tenant) {
+                            $("#tenants").append($('<option></option>').text(tenant.firstName + " "+tenant.lastName).val(tenant.tenantID));
+                        })
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(error)
+                        window.alert('Error: ' + "Token expeired!, Login again");
+                        window.location = '../Landlord/login_module.html';
+                    }
+                });
+                $.ajax({
+                    url: 'http://localhost:3000/api/spade/getAllInvoices',
+                    type: 'GET',
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function ({data}) {
+                        console.log(data[0])
                         // if(data[0].length===0){
                         //     window.location="./new-tenant.html"
                         // }
-                        $("#user-name").text(user)
+                        // $("#user-name").text(user)
                         $("#tenants").empty()
                         // var cityDropdown = $('#city');
 
@@ -3211,43 +3231,49 @@
                         tableBody.empty();
                         // console.log(data[0])
                         let tenantNames = []
-                        data[0]?.forEach(function (tenant) {
+                        data[0]?.forEach(function (invoice) {
 
                             // var image = '<td><img src="../../../../spadeApi/uploads/' + tenant.images[0] + '" alt=""></td>';
                             // var image = '<td><img src="../../../../../../Desktop/spadeApi/uploads/image-1684250579662.png" alt="hhghghgh"></td>';
 
-                            var tenantId = '<td class="tenant-id" style="font-weight: 600;">' + tenant.tenantID + '</td>';
+                            var invoiceNumber = '<td class="tenant-id" style="font-weight: 600;">' + invoice.invoiceID + '</td>';
                             // var tenantId = '<td class="tenant-id" style="font-weight: 600;">' + tenant
                             // .id + '</td>';
-                            var tenantName = '<td class="tenantName" style="font-weight: 600;">' + tenant.firstName + tenant.lastName + `<br><small>${tenant.tEmail}</small>` + '</td>';
-                            $("#tenants").append($('<option></option>').text(tenant.firstName + " "+tenant.lastName).val(tenant.tenantID));
-                            var propertyName = '<td class="propertyName" style="font-weight: 600;">' + tenant.propertyName + `<br><small>${tenant.pAddress}</small>` + '</td>';
-                            var rentAmount = '<td class="rentAmount" style="font-weight: 600;">' + tenant.rentAmount + '<span> $</span>' + `<br><small>Next Due Date: November-12-2020</small>` + '</td>';
-                            var assignUnit = '<td class="assignUnit" style="font-weight: 600;">' + tenant.unitNumber + `<br><small>${tenant.unitArea} Square/Feet</small>` + '</td>';
+                            var tenantName = '<td class="tenantName" style="font-weight: 600;">' + invoice.firstName + invoice.lastName + `<br><small>${invoice.tEmail}</small>` + '</td>';
+                            var memoDescription = '<td class="propertyName" style="font-weight: 600;">' + invoice.memo[0].memo + `<br><small>${invoice.invoiceType}</small>` + '</td>';
+                            // var createdTimestamp = "2023-06-10 12:34:56";
+var dateObj = new Date(invoice.created_at);
+var day = dateObj.getDate();
+var month = dateObj.getMonth() + 1; // Month is zero-based, so adding 1 to get the correct month number
+var year = dateObj.getFullYear();
+                            var invoiceDate = '<td class="propertyName" style="font-weight: 600;">' + day+"/"+month+"/"+year + '</td>';
+                            var propertyName = '<td class="propertyName" style="font-weight: 600;">' + invoice.propertyName + `<br><small>${invoice.tPhone}</small>` + '</td>';
+                            var invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + invoice.totalAmount + '<span> $</span>' + `<br><small>Next Due Date: November-12-2020</small>` + '</td>';
+                            var status = `<td class="assignUnit" style="font-weight: 600;${invoice.status==="Unpaid"?'color:blue;':'color:green'}">` + invoice.status + '</td>';
                             var dropdownMenu =
                                 '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
                                 '<ul class="dropdown-menu">' +
                                 '<li><a class="edit-option dropdown-item text-primary" href="javascript:void(0)">Edit</a></li>' +
                                 '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>' +
-                                `<li><a class="dropdown-item text-success" href="./view-tenant.html?tenantId=${tenant.tenantID}">View</a></li>` +
+                                `<li><a class="dropdown-item text-success" href="./view-tenant.html?tenantId=${invoice.invoiceID}">View</a></li>` +
                                 '</ul></td>';
-                            var currentDate = new Date();
-                            if (tenant.leaseEndDate) {
-                                var targetDate = new Date(tenant.leaseEndDate);
-                                var currentDate = new Date();
-                                var timeDiff = targetDate.getTime() - currentDate.getTime();
+                            // var currentDate = new Date();
+                            // if (tenant.leaseEndDate) {
+                            //     var targetDate = new Date(tenant.leaseEndDate);
+                            //     var currentDate = new Date();
+                            //     var timeDiff = targetDate.getTime() - currentDate.getTime();
 
-                                // Convert milliseconds to days
-                                var daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-                                var leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + `<small class=d-block "${daysLeft > 10 ? 'text-primary' : 'text-danger'}">` + daysLeft + ' day(s) remaining</small>' + '</td>';
-                            } else {
+                            //     // Convert milliseconds to days
+                            //     var daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+                            //     var leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + `<small class=d-block "${daysLeft > 10 ? 'text-primary' : 'text-danger'}">` + daysLeft + ' day(s) remaining</small>' + '</td>';
+                            // } else {
 
-                                var leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + '</td>';
+                            //     var leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + '</td>';
 
-                            }
+                            // }
 
-                            var row = '<tr>' + tenantId + tenantName + propertyName + rentAmount +
-                                assignUnit + leaseEndDate + dropdownMenu + '</tr>';
+                            var row = '<tr>' + invoiceNumber + tenantName + memoDescription + invoiceDate +
+                                propertyName + invoiceAmount+ status + dropdownMenu + '</tr>';
 
                             // Append the row to the table body
                             tableBody.append(row);
@@ -3329,12 +3355,38 @@ checkFields();
                                             </button></td>
                                         </tr>`)
             });
+            $(document).on("input", "input[name='amount']",updateTotal);
+            function updateTotal() {
+                var total = 0;
+  
+  $("input[name='amount']").each(function() {
+    var inputValue = $(this).val();
+    
+    if (inputValue !== "") {
+      var numericValue = parseFloat(inputValue);
+      if (!isNaN(numericValue)) {
+        total += numericValue;
+      }
+    }
+  });
+  
+  if (isNaN(total)) {
+    total = 0.00;
+  }
+  if(total===0){
+    $("#totalText").text(`$ 0.00`)
+  }else{
+  $("#totalText").text(`$ ${total}`)}
+
+  // Perform other operations on the dynamically added input element as needed
+}
             $('#add-item-container1').on('click', '#del-btn1', function () {
                 var $row = $(this).closest('.tr');
                 var $rowsContainer = $row.parent();
 
                 if ($rowsContainer.children('.tr').length > 1) {
                     $row.remove();
+                    updateTotal()
                 } else {
                     //   alert('Cannot delete the last row.');
                 }

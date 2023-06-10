@@ -90,17 +90,15 @@ exports.getUser = (req, res) => {
 
 exports.Signin = async function (req, res) {
   const { email, password, tenant } = req.query;
-  console.log(req.query)
+  // console.log(req.query)
   // console.log(1)
   // let selectResult;
   try {
     // for tenant
     if (tenant == "tenant") {
-      console.log(email);
       const selectResult = await queryRunner(selectQuery("tenants", "email"), [
         email,
       ]);
-      console.log(selectResult[0][0].tenantPassword)
       if (selectResult[0].length === 0) {
         res.status(400).send("Email not found");
       } else if (
@@ -405,7 +403,6 @@ exports.property = async (req, res) => {
 exports.getproperty = async (req, res) => {
   const { userId, userName } = req.user;
   try {
-    console.log("Step 1: Fetching property data...");
     const allPropertyResult = await queryRunner(
       selectQuery("property", "landlordID"),
       [userId]
@@ -755,9 +752,10 @@ exports.putPropertyUnitsUpdates = async (req, res) => {
 
 //  #############################  Property Units End Start ############################################################
 exports.getPropertyUnitsTenant = async (req, res) => {
+  // console.log(req,res)
   try {
     const { userId } = req.user;
-    console.log(1)
+    // console.log(userId)
     const getPropertyUnitsTenantResult = await queryRunner(
       selectQuery("property", "landlordID"),
       [userId]
@@ -830,7 +828,7 @@ exports.getpropertyUnits = async (req, res) => {
     }
   } catch (error) {
     res.send("Error Get Property Units");
-    console.log(req.body);
+    // console.log(req.body);
     console.log(error);
   }
 };
@@ -925,19 +923,22 @@ exports.viewPropertyTenant = async (req, res) => {
   try {
     
     const { userId,userName } = req.user;
-    const { id } = req.query;
-    console.log(id)
+    console.log(req.user)
+    // const { id } = req.query;
+    // console.log(id)
     let PropertyTenantResult;
-    if (id) {
-      PropertyTenantResult = await queryRunner(selectPropertyTenant, [
-        userId,
-        id,
-      ]);
-    } else {
+    // if (id) {
+    //   PropertyTenantResult = await queryRunner(selectPropertyTenant, [
+    //     userId,
+    //     id,
+    //   ]);
+    // } 
+    // else {
       PropertyTenantResult = await queryRunner(selectAllTenants, [
         userId,
       ]);
-    }
+    // }
+    console.log(PropertyTenantResult)
     if (PropertyTenantResult.length > 0) {
       res.status(200).json({
         data: PropertyTenantResult,

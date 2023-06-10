@@ -237,7 +237,6 @@ exports.addTasks = async (req, res) => {
             landlordContact
           );
         }
-        console.log(tenantEmail);
         res.json({ message: "Task added successfully" });
       }
     }
