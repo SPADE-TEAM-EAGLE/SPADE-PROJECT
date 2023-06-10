@@ -31,11 +31,7 @@ router.put(
   userController.putPropertyUnitsUpdates
 );
 router.delete("/propertyDelete", verifyToken, userController.propertyDelete);
-router.put(
-  "/updateProperty",
-  [verifyToken, upload],
-  userController.propertyUpdate
-);
+router.put("/updateProperty",[verifyToken, upload],userController.propertyUpdate);
 // router.get('/viewProperty' ,userController.propertyView);
 router.get("/viewProperty", verifyToken, userController.propertyView);
 router.get("/PropertyUnits", verifyToken, userController.getpropertyUnits);
@@ -81,6 +77,7 @@ router.put('/putInvoiceStatusUpdates', invoiceController.putInvoiceStatusUpdates
 router.get('/getAllInvoices',[verifyToken],invoiceController.getAllInvoices);
 router.get('/getByIdInvoices', invoiceController.getByIdInvoices);
 router.put('/UpdateInvoice', upload, invoiceController.UpdateInvoice);
+router.delete('/invoiceDelete', invoiceController.invoiceDelete);
 router.post("/addVendor", taskController.addVendors);
 router.post("/addTasks", upload, taskController.addTasks);
 router.get("/getAllVendors", taskController.getAllVendors);
