@@ -95,5 +95,8 @@ exports.updateInvoice = 'UPDATE invoice SET  invoiceType = ? , startDate = ? , e
 
 
 
-exports.addTasksQuery = "INSERT INTO task (taskName, vendorID, tenantID, dueDate, status, priority, notes, notifyTenant, notifyVendor, created_at, updated_at, created_by) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+exports.addTasksQuery = "INSERT INTO task (taskName, tenantID, dueDate, status, priority, notes, notifyTenant, notifyVendor, created_at, updated_at, createdBy) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 exports.addVendorList = "INSERT INTO taskassignto (taskId, vendorId) VALUES (?, ?)";
+exports.getLandlordTenant = 'SELECT t.firstName,t.lastName,t.email,t.companyName,l.FirstName,l.LastName,l.Phone,l.Email FROM tenants as t JOIN invoice as i ON t.id = i.tenantID JOIN users as l ON i.landlordID = l.id WHERE i.landlordID = ? AND i.tenantID = ?';
+exports.PropertyUnitsVacant = 'SELECT * FROM `propertyunits`WHERE propertyID = ? AND status = ? AND unitNumber !=""';
+

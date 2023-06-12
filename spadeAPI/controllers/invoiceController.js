@@ -179,7 +179,10 @@ exports.getAllInvoices = async (req, res) => {
             const invoiceID = getAllInvoicesResult[0][i].invoiceID;
             const invoicelineitemsResult = await queryRunner(selectQuery("invoicelineitems", "invoiceID"), [invoiceID]);
             if (invoicelineitemsResult[0].length > 0) {
-                const memo = invoicelineitemsResult[0].map((desc)=>  desc.memo, desc.category  )
+                const memo = invoicelineitemsResult[0].map((desc)=> ({
+                    memo:desc.memo, 
+                    category:desc.category
+                })   )
                 getAllInvoicesResult[0][i].memo = memo
             } else {
                 getAllInvoicesResult[0][i].memo = ["No memo"]

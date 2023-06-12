@@ -44,7 +44,7 @@ router.put(
 );
 router.get(
   "/getPropertyUnitsTenant",
-  verifyToken,
+//   verifyToken,
   userController.getPropertyUnitsTenant
 );
 router.get(

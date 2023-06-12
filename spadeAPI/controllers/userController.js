@@ -22,6 +22,7 @@ const {
   insertMoreUnits,
   putUnitsUpdate,
   selectAllTenants,
+  PropertyUnitsVacant,
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -756,19 +757,16 @@ exports.putPropertyUnitsUpdates = async (req, res) => {
 //  #############################  Property Units End Start ############################################################
 exports.getPropertyUnitsTenant = async (req, res) => {
   try {
-    const { userId } = req.user;
-
+    // const { userId } = req.user; 
+    const { userId } = req.body;
     const getPropertyUnitsTenantResult = await queryRunner(
       selectQuery("property", "landlordID"),
       [userId]
     );
-
     if (getPropertyUnitsTenantResult[0].length > 0) {
       for (let item of getPropertyUnitsTenantResult[0]) {
         if (item.units > 0) {
-          const getPropertyUnitsVacantResult = await queryRunner(
-            selectQuery("propertyunits", "propertyID", "status"),
-            [item.id, "Vacant"]
+          const getPropertyUnitsVacantResult = await queryRunner(PropertyUnitsVacant, [item.id, "Vacant"]
           );
           const getPropertyUnitsOccupiedResult = await queryRunner(
             selectQuery("propertyunits", "propertyID", "status"),
