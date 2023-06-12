@@ -752,10 +752,7 @@ color: #000;
                                     <div class="col-md-4">
                                         <label for="inputState" class="form-label fw-bold">City <spnan
                                                 class="text-danger">*</span></label>
-                                        <select id="city" class="form-select form" required>
-                                            <option selected>Choose...</option>
-
-                                        </select>
+                                        <input id="city" class="form-control form" required>
                                         <span class="text-danger d-none">City is required!</span>
                                     </div>
                                     <div class="col-md-4">
@@ -2297,24 +2294,7 @@ color: #000;
                     console.log(result)
                     $('#state').change(function() {
                         var selectedState = $(this).val();
-                        var cityDropdown = $('#city');
 
-                        // Clear existing options
-                        cityDropdown.empty();
-                        cityDropdown.append($('<option></option>').text("Choose..."));
-
-                        if (selectedState !== "Choose...") {
-                            var cities = result.geonames.filter(function(place) {
-                                return place.adminName1 === selectedState && place.fcode === "PPL";
-                            });
-
-                            cities.forEach(function(city) {
-                                cityDropdown.append($('<option></option>').text(city.name));
-                            });
-                            if (selectedState === "Texas") {
-                                cityDropdown.append($('<option></option>').text("Houston"));
-                            }
-                        }
                     });
 
                     var stateDropdown = $('#state');
@@ -2530,7 +2510,7 @@ color: #000;
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function(response) {
-                        console.log(response)
+                        
                             // Handle the success response
                         $("#succes-text").text(`Tenant has been successfully created and linked to ${formData.propertyUnitID} Unit with ${formData.propertyID}.`)
 

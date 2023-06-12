@@ -1306,6 +1306,16 @@ background-color: white;
                                 </label>
                             </div>
                         </div>
+                        <div class="col-md-8 col-lg-6">
+                            <label class="form-label fw-bold fs-18">Property Name</label>
+                            <input type="text" class="form-control form" id="propertyName" value="" readonly>
+                            <span class="text-danger d-none">Photos are required!</span>
+                        </div>
+                        <div class="col-md-8 col-lg-6">
+                            <label class="form-label fw-bold fs-18">Due Date</label>
+                            <input type="date" class="form-control form" id="dueDate">
+                            <span class="text-danger d-none">Photos are required!</span>
+                        </div>
                         <div class="collapse row" id="collapse1">
                             <div class="col-md-6 col-lg-4">
                                 <label class="form-label fw-bold fs-18">Start Date</label>
@@ -3282,7 +3292,7 @@ background-color: white;
                     });
                 });
             });
-
+            let tenantData=[]
             function getData() {
                 $("#preloader").fadeIn("fast");
                 // console.log(22)
@@ -3299,6 +3309,7 @@ background-color: white;
                         $("#user-name").text(user)
                         $("#tenants").empty()
                         $("#tenants").append($('<option></option>').text("Choose..."));
+                        tenantData=data[0]
                         // var tableBody = $('#table_body');
                         data[0]?.forEach(function (tenant) {
                             $("#tenants").append($('<option></option>').text(tenant.firstName + " "+tenant.lastName).val(tenant.tenantID));
@@ -3319,17 +3330,14 @@ background-color: white;
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function ({data}) {
+                        console.log(data)
                         console.log(data[0])
-                        // if(data[0].length===0){
-                        //     window.location="./new-tenant.html"
-                        // }
-                        // $("#user-name").text(user)
-                        $("#tenants").empty()
+                        // $("#tenants").empty()
                         // var cityDropdown = $('#city');
 
                         // Clear existing options
                         // cityDropdown.empty();
-                        $("#tenants").append($('<option></option>').text("Choose..."));
+                        // $("#tenants").append($('<option></option>').text("Choose..."));
                         var tableBody = $('#table_body');
                         tableBody.empty();
                         // console.log(data[0])
@@ -3342,7 +3350,7 @@ background-color: white;
                             var invoiceNumber = '<td class="tenant-id" style="font-weight: 600;">' + invoice.invoiceID + '</td>';
                             // var tenantId = '<td class="tenant-id" style="font-weight: 600;">' + tenant
                             // .id + '</td>';
-                            var tenantName = '<td class="tenantName" style="font-weight: 600;">' + invoice.firstName + invoice.lastName + `<br><small>${invoice.tEmail}</small>` + '</td>';
+                            var tenantName = '<td class="tenantName" style="font-weight: 600;">' + invoice.firstName + invoice.lastName + `<br><small>${invoice.tPhone}</small>` + '</td>';
                             var memoDescription = '<td class="propertyName" style="font-weight: 600;">' + invoice.memo[0].memo + `<br><small>${invoice.invoiceType}</small>` + '</td>';
                             // var createdTimestamp = "2023-06-10 12:34:56";
 var dateObj = new Date(invoice.created_at);
@@ -3353,13 +3361,35 @@ var year = dateObj.getFullYear();
                             var propertyName = '<td class="propertyName" style="font-weight: 600;">' + invoice.propertyName + `<br><small>${invoice.tPhone}</small>` + '</td>';
                             var invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + invoice.totalAmount + '<span> $</span>' + `<br><small>Next Due Date: November-12-2020</small>` + '</td>';
                             var status = `<td class="assignUnit" style="font-weight: 600;${invoice.status==="Unpaid"?'color:blue;':'color:green'}">` + invoice.status + '</td>';
-                            var dropdownMenu =
-                                '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
-                                '<ul class="dropdown-menu">' +
-                                '<li><a class="edit-option dropdown-item text-primary" href="javascript:void(0)">Edit</a></li>' +
-                                '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>' +
-                                `<li><a class="dropdown-item text-success" href="./view-tenant.html?tenantId=${invoice.invoiceID}">View</a></li>` +
-                                '</ul></td>';
+                            var dropdownMenu =`<td><i class="fe fe-more-vertical"
+                                                                data-bs-toggle="dropdown"></i>
+
+                                                            <ul class="dropdown-menu">
+                                                                <li><a class="dropdown-item text-dark"
+                                                                        data-bs-effect="effect-scale"
+                                                                        data-bs-toggle="modal"
+                                                                        href="#viewModal">View</a></li>
+                                                                <li><a class="dropdown-item text-dark edit-option"
+                                                                        data-bs-effect="effect-scale"
+                                                                        data-bs-toggle="modal"
+                                                                        href="#editModal">Edit</a></li>
+                                                                <li><a class="dropdown-item text-dark status-option"
+                                                                        data-bs-effect="effect-scale"
+                                                                        data-bs-toggle="modal"
+                                                                        href="#changeStatusModal">Change Status</a></li>
+                                                                <li><a class="dropdown-item text-dark resend-option"
+                                                                        data-bs-effect="effect-scale"
+                                                                        data-bs-toggle="modal"
+                                                                        href="#resendModal">Resend Invoice</a></li>
+                                                                <li><a class="dropdown-item text-dark refund-option"
+                                                                        data-bs-effect="effect-scale"
+                                                                        data-bs-toggle="modal" href="#refundModal">Issue
+                                                                        Refund</a></li>
+                                                                <li><a class="dropdown-item text-danger delete-option"
+                                                                        href="javascript:void(0)">Delete</a>
+                                                                </li>
+                                                            </ul>
+                                                        </td>`
                             // var currentDate = new Date();
                             // if (tenant.leaseEndDate) {
                             //     var targetDate = new Date(tenant.leaseEndDate);
@@ -3421,6 +3451,17 @@ var year = dateObj.getFullYear();
 
             }
             getData()
+            $("#tenants").change(()=>{
+                const property=$("#tenants").val()
+                // console.log(property)
+                const propertyName = tenantData.filter((tenant)=>{
+                    if(tenant.tenantID==property){
+                        return tenant.propertyName
+                    }
+                })
+                // console.log(propertyName)
+                $("#propertyName").val(propertyName[0].propertyName)
+            })
             function checkFields() {
   var isFilled = true;
 
