@@ -85,7 +85,7 @@ exports.checkemail = async function (req, res) {
 };
 
 exports.getUser = (req, res) => {
-  console.log(req.user);
+  // console.log(req.user);
 };
 
 exports.Signin = async function (req, res) {
@@ -642,7 +642,7 @@ exports.propertyView = async (req, res) => {
     const { propertyId } = req.query;
     // console.log(req.query)
     // check property in database
-    console.log(propertyId);
+    // console.log(propertyId);
     const propertyViewResult = await queryRunner(
       selectQuery("property", "id"),
       [propertyId]
@@ -898,7 +898,7 @@ exports.getpropertyUnits = async (req, res) => {
     // console.log(propertyUnitsResult)
     if (propertyUnitsResult.length > 0) {
       // propertyUnitsResult.append(property[0][0])
-      console.log(property[0][0].propertyName);
+      // console.log(property[0][0].propertyName);
       res.status(200).json({
         data: propertyUnitsResult,
         propertyName: property[0][0]?.propertyName,
@@ -912,7 +912,7 @@ exports.getpropertyUnits = async (req, res) => {
     }
   } catch (error) {
     res.send("Error Get Property Units");
-    console.log(req.body);
+    // console.log(req.body);
     console.log(error);
   }
 };
@@ -938,7 +938,7 @@ exports.viewPropertyTenant = async (req, res) => {
         userId,
       ]);
     // }
-    console.log(PropertyTenantResult)
+    // console.log(PropertyTenantResult)
     if (PropertyTenantResult.length > 0) {
       res.status(200).json({
         data: PropertyTenantResult,
@@ -1023,7 +1023,7 @@ exports.deleteMoreUnits = async (req, res) => {
           unitCount,
           propertyID,
         ]);
-        console.log(updateaddMoreUnitsResult);
+        // console.log(updateaddMoreUnitsResult);
         if (updateaddMoreUnitsResult[0].affectedRows > 0) {
           res.status(200).json({
             data: unitCount,

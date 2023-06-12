@@ -105,6 +105,7 @@ const config = process.env;
 
                     } else {
                       res.status(400).json({
+                        
                         message: "Error occur in update tenant property unit"
                       })
                     } 
