@@ -25,7 +25,7 @@ function checkFieldsStatus(accordionId) {
     } else if (!hasEmptyFields && !hasErrorFields && hasFilledFields) {
         return 2;
     } else if (hasEmptyFields && !hasErrorFields && hasFilledFields) {
-        console.log(2)
+        // console.log(2)
         return 3;
     } else {
         return 0;

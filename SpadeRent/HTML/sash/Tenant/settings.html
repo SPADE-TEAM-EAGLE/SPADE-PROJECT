@@ -26,6 +26,7 @@
     <link href="../assets/css/dark-style.css" rel="stylesheet" />
     <link href="../assets/css/transparent-style.css" rel="stylesheet">
     <link href="../assets/css/skin-modes.css" rel="stylesheet" />
+    <link href="../assets/css/responsive.css" rel="stylesheet" />
 
     <!--- FONT-ICONS CSS -->
     <link href="../assets/css/icons.css" rel="stylesheet" />
@@ -517,7 +518,8 @@
         /* Tabs css Start  */
         
         .tabs-menu1 ul li a {
-            padding: 10px 30px 6px 0px;
+            padding: 10px 0px 6px 0px;
+            margin-right: 30px;
             display: block;
             color: white;
         }
@@ -569,8 +571,8 @@
             position: absolute;
             top: -1000px;
         }
-        
-        #profile {
+
+        /* #profile {
             border-radius: 100%;
             width: 160px;
             height: 160px;
@@ -594,22 +596,16 @@
             height: 100%;
             border: 4px dashed #2b2a2a;
             opacity: 1;
-        }
-        
-        #profile label {
-            /* display: table-cell;
-	 vertical-align: middle;
-	 text-align: center;
-	 padding: 0 30px;
-	 color: grey;
-	 opacity: 1; */
+        } */
+
+        /* #profile label {
             padding: 0px 25px;
             margin-top: 65px;
             text-align: center;
             font-size: 11px;
-        }
-        
-        #profile div .upload-imgg {
+        } */
+
+        /* #profile div .upload-imgg {
             display: block;
             vertical-align: middle;
             text-align: center;
@@ -617,8 +613,8 @@
             color: grey;
             opacity: 1;
             position: absolute;
-        }
-        
+        } */
+
         #profile.dragging {
             background-image: none !important;
         }
@@ -768,7 +764,6 @@
         .card-title-primary1 {
             font-size: 23px;
             font-weight: 800;
-            color: #000;
         }
         
         .card-holder {
@@ -783,11 +778,15 @@
 
 <body class="app sidebar-mini ltr light-mode">
 
-    <!-- GLOBAL-LOADER -->
-    <div id="global-loader">
-        <img src="../assets/images/loader.svg" class="loader-img" alt="Loader">
+  <!-- GLOBAL-LOADER -->
+  <div id="preloader" class="tlp-preloader">
+    <div class="animation-preloader">
+        <div class="tlp-spinner"></div>
+        <img src="../assets/images/logo-preloader.png" alt="Preloader" style="width: 65px;">
     </div>
-    <!-- /GLOBAL-LOADER -->
+</div>
+<!-- /GLOBAL-LOADER -->
+
     <!-- Modal -->
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
@@ -1172,12 +1171,14 @@
 
 
                                         <!-- 1 comments start  -->
-                                        <div class="d-flex country">
-                                            <img src="../assets\header-img\comment.svg" alt="profile-user" class="avatarr profile-user brroundd nav-link cover-image dark-layout">
+                                        <!-- <div class="d-flex country">
+                                            <img src="../assets\header-img\comment.svg" alt="profile-user"
+                                                class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
                                         <div class="d-flex country">
-                                            <img src="../assets\header-img\comment-light.webp" alt="profile-user" class="avatarr profile-user nav-link brroundd cover-image light-layout">
-                                        </div>
+                                            <img src="../assets\header-img\comment-light.webp" alt="profile-user"
+                                                class="avatarr profile-user nav-link brroundd cover-image light-layout">
+                                        </div> -->
                                         <!-- 1 comments start  -->
 
                                         <!-- 2 comments start  -->
@@ -1193,6 +1194,62 @@
                                         <div class="d-flex country">
                                             <img src="../assets\header-img\spade.svg" alt="profile-user" class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
+                                        <div class="dropdown  d-flex notifications">
+                                            <a class="nav-link icon" data-bs-toggle="dropdown"><i class="fe fe-bell"></i><span class=" pulse"></span>
+                                            </a>
+                                            <!-- <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                                <div class="drop-heading border-bottom">
+                                                    <div class="d-flex">
+                                                        <h6 class="mt-1 mb-0 fs-16 fw-semibold text-dark">Notifications
+                                                        </h6>
+                                                    </div>
+                                                </div>
+                                                <div class="notifications-menu ps">
+                                                    <a class="dropdown-item d-flex" href="notify-list.html">
+                                                        <div class="me-3 notifyimg  bg-primary brround box-shadow-primary">
+                                                            <i class="fe fe-mail"></i>
+                                                        </div>
+                                                        <div class="mt-1 wd-80p">
+                                                            <h5 class="notification-label mb-1">New Application received
+                                                            </h5>
+                                                            <span class="notification-subtext">3 days ago</span>
+                                                        </div>
+                                                    </a>
+                                                    <a class="dropdown-item d-flex" href="notify-list.html">
+                                                        <div class="me-3 notifyimg  bg-secondary brround box-shadow-secondary">
+                                                            <i class="fe fe-check-circle"></i>
+                                                        </div>
+                                                        <div class="mt-1 wd-80p">
+                                                            <h5 class="notification-label mb-1">Project has been
+                                                                approved</h5>
+                                                            <span class="notification-subtext">2 hours ago</span>
+                                                        </div>
+                                                    </a>
+                                                    <a class="dropdown-item d-flex" href="notify-list.html">
+                                                        <div class="me-3 notifyimg  bg-success brround box-shadow-success">
+                                                            <i class="fe fe-shopping-cart"></i>
+                                                        </div>
+                                                        <div class="mt-1 wd-80p">
+                                                            <h5 class="notification-label mb-1">Your Product Delivered
+                                                            </h5>
+                                                            <span class="notification-subtext">30 min ago</span>
+                                                        </div>
+                                                    </a>
+                                                    <a class="dropdown-item d-flex" href="notify-list.html">
+                                                        <div class="me-3 notifyimg bg-pink brround box-shadow-pink">
+                                                            <i class="fe fe-user-plus"></i>
+                                                        </div>
+                                                        <div class="mt-1 wd-80p">
+                                                            <h5 class="notification-label mb-1">Friend Requests</h5>
+                                                            <span class="notification-subtext">1 day ago</span>
+                                                        </div>
+                                                    </a>
+                                                <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div></div>
+                                                <div class="dropdown-divider m-0"></div>
+                                                <a href="notify-list.html" class="dropdown-item text-center p-3 text-muted">View all
+                                                    Notification</a>
+                                            </div> -->
+                                        </div>
                                         <div class="d-flex country">
                                             <img src="../assets\header-img\circlels.png" alt="profile-user" class="avatarr profile-user nav-link brroundd cover-image light-layout">
                                         </div>
@@ -1200,7 +1257,10 @@
                                             <a href="javascript:void(0)" data-bs-toggle="dropdown" class="nav-link leading-none d-flex">
                                                 <!-- <img src="../assets/images/users/21.jpg" alt="profile-user"
                                                     class="avatar  profile-user brround cover-image"> -->
-                                                <span class="side-menu__item dynamic-text-head" style="padding: 10px 10px;">Spade Admin</span> <i class="fe fe-chevron-down dark-mode" style="font-size: 20px; font-weight: 800;"></i>
+                                                <span class="side-menu__item dynamic-text-head"
+                                                    style="padding: 10px 10px;">Spade Admin</span> <i
+                                                    class="fe fe-chevron-down dark-mode text-dark"
+                                                    style="font-size: 20px; font-weight: 800;"></i>
                                             </a>
                                             <!-- <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                                 <div class="drop-heading">
@@ -1294,10 +1354,7 @@
                                 <a class="side-menu__item" data-bs-toggle="slide" href="invoicing.html"><i
                                         class="side-menu__icon fi fi-rs-file-invoice-dollar"></i><span
                                         class="side-menu__label">Invoicing</span>
-                                    <!-- <i
-                                    class="angle fe fe-chevron-right"></i> -->
                                 </a>
-
                             </li>
 
                             <li class="slide">
@@ -1400,7 +1457,7 @@
                                                 <div style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-lg-2">
+                                                    <div class="col-lg-2 col-4">
                                                         <div id="profile">
                                                             <div class="dashes"></div>
                                                             <div><img src="../assets/images/fancy_upload.png" class="upload-imgg" alt=""></div>
@@ -1410,10 +1467,11 @@
                                                                 10MB</label>
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-9" style="display: flex; align-items: center;">
-                                                        <div>
-                                                            <h3 class="mb-2 text-dark"><b>My Profile Picture</b></h3>
-                                                            <p style="font-size: 17px;">Your picture will be on your spade rent application, and more!</p>
+                                                    <div class="col-lg-9 col-8" style="display: flex; align-items: center;">
+                                                        <div class="profile-text-margin">
+                                                            <h3 class="mb-2 text-dark h3-profile-heading"><b>My Profile Picture</b></h3>
+                                                            <p class="profile-paragraph-p">Your picture will be on your
+                                                                spade rent application, and more!</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1505,8 +1563,10 @@
                                                     <div class="col-lg-6 mt-5">
                                                         <div class="card" style="background-color: #1467B0; border-radius: 20px;">
                                                             <div class="card-body">
-                                                                <div style="display: flex;">
-                                                                    <img src="../assets/images/security-confirmation.png" alt="" style="margin-right: 20px; height: 110px;">
+                                                                <div style="display: flex; align-items: center;">
+                                                                    <img src="../assets/images/security-confirmation.png"
+                                                                        alt=""
+                                                                        style="margin-right: 20px; height: 110px;">
                                                                     <div>
                                                                         <h3 class="text-white"><b>Security
                                                                                 Confirmation</b></h3>
@@ -1591,38 +1651,43 @@
                                                 <div class="row">
                                                     <div class="col-lg-6">
                                                         <div class="row mt-5">
-                                                            <div class="col-lg-6" style="display: flex; justify-content: space-between; margin-bottom: 30px;">
-                                                                <a href="javascript:void(0)" class="btn btn-default btn-actives btn-lg"><b>Primary</b></a>
-                                                                <a href="javascript:void(0)" class="btn btn-default btn-actives btn-lg"><b>Secondary</b></a>
+                                                                                                                        <!-- radio button start  -->
+
+
+                                                                                                                        <div class="row">
+                                                                                                                            <div class="col-lg-8"
+                                                                                                                                style="display: flex; justify-content: space-between;">
+                                                                                                                                <label class="custom-control custom-radio"> <input
+                                                                                                                                        type="radio" class="custom-control-input"
+                                                                                                                                        name="creditcard" id="creditcard"
+                                                                                                                                        value="Credit-Card" checked="checked"> <span
+                                                                                                                                        class="custom-control-label"><b>Credit
+                                                                                                                                            Card</b></span> </label>
+                                                            
+                                                                                                                                <label class="custom-control custom-radio"> <input
+                                                                                                                                        type="radio" class="custom-control-input"
+                                                                                                                                        name="creditcard" id="debitcard"
+                                                                                                                                        value="Debit-Card"> <span
+                                                                                                                                        class="custom-control-label"><b>Debit
+                                                                                                                                            Card</b></span> </label>
+                                                            
+                                                                                                                                <label class="custom-control custom-radio"> <input
+                                                                                                                                        type="radio" class="custom-control-input"
+                                                                                                                                        name="creditcard" id="ach" value="ACH">
+                                                                                                                                    <span
+                                                                                                                                        class="custom-control-label"><b>ACH</b></span>
+                                                                                                                                </label>
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                        <!-- radio button End  -->
+                                                            <div class="col-lg-6 mt-5"
+                                                                style="display: flex; justify-content: space-between; margin-bottom: 30px;">
+                                                                <a href="javascript:void(0)"
+                                                                    class="btn btn-default btn-actives btn-lg"><b>Primary</b></a>
+                                                                <a href="javascript:void(0)"
+                                                                    class="btn btn-default btn-actives btn-lg"><b>Secondary</b></a>
                                                             </div>
-                                                            <!-- radio button start  -->
 
-
-                                                            <div class="row">
-                                                                <div class="col-lg-8" style="display: flex; justify-content: space-between;">
-                                                                    <label class="custom-control custom-radio"> <input
-                                                                            type="radio" class="custom-control-input"
-                                                                            name="creditcard" id="creditcard"
-                                                                            value="Credit-Card" checked="checked"> <span
-                                                                            class="custom-control-label"><b>Credit
-                                                                                Card</b></span> </label>
-
-                                                                    <label class="custom-control custom-radio"> <input
-                                                                            type="radio" class="custom-control-input"
-                                                                            name="creditcard" id="debitcard"
-                                                                            value="Debit-Card"> <span
-                                                                            class="custom-control-label"><b>Debit
-                                                                                Card</b></span> </label>
-
-                                                                    <label class="custom-control custom-radio"> <input
-                                                                            type="radio" class="custom-control-input"
-                                                                            name="creditcard" id="ach" value="ACH">
-                                                                        <span
-                                                                            class="custom-control-label"><b>ACH</b></span>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                            <!-- radio button End  -->
                                                             <!-- credit card debit card start  -->
                                                             <div class="desc Credit-Card Debit-Card">
                                                                 <div class="form-row" id="credit-card">
@@ -1711,13 +1776,7 @@
                                                             <div class="card-header">
                                                                 <h1 class="card-title card-title-primary">Primary Payment Info</h1>
                                                                 <div class="card-options">
-                                                                    <label class="custom-control custom-checkbox-lg">
-                                                                        <input type="checkbox"
-                                                                            class="custom-control-input"
-                                                                            name="example-checkbox9" value="option9"
-                                                                            checked=""> <span
-                                                                            class="custom-control-label"></span>
-                                                                    </label>
+                                                                    <label class="custom-switch m-0"> <input type="radio" name="radioo" class="custom-switch-input" checked=""> <span class="custom-switch-indicator"></span> </label>
                                                                 </div>
                                                             </div>
                                                             <div class="card-body">
@@ -1744,12 +1803,7 @@
                                                             <div class="card-header">
                                                                 <h1 class="card-title card-title-primary1">Secondary Payment Info</h1>
                                                                 <div class="card-options">
-                                                                    <label class="custom-control custom-checkbox-lg">
-                                                                        <input type="checkbox"
-                                                                            class="custom-control-input"
-                                                                            name="example-checkbox9" value="option9">
-                                                                        <span class="custom-control-label"></span>
-                                                                    </label>
+                                                                    <label class="custom-switch m-0"> <input type="radio" name="radioo" class="custom-switch-input"> <span class="custom-switch-indicator"></span> </label>
                                                                 </div>
                                                             </div>
                                                             <div class="card-body">
@@ -2364,8 +2418,12 @@
                 <div class="container">
                     <div class="row align-items-center flex-row-reverse">
                         <div class="col-md-12 col-sm-12 text-center">
+<<<<<<< HEAD
+                            Copyright © <a href="javascript:void(0)">Spade, LLC.</a> <span id="year">2023</span>
+=======
                             Copyright © <span id="year"></span> <a href="javascript:void(0)">Sash</a>. Designed with
                             <span class="fa fa-heart text-danger"></span> by <a href="javascript:void(0)"> Spruko </a> All rights reserved.
+>>>>>>> d2a5e877ff82f8703148f46aa05fb88fcfb71055
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,11 @@
 (function ($) {
     "use strict";
 
+     // Preloader -------------------------------------*/
+ $('#preloader').fadeOut('slow', function() {
+    $(this).remove();
+});
+
     // PAGE LOADING
     $(window).on("load", function (e) {
         $("#global-loader").fadeOut("slow");

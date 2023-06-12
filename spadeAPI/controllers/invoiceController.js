@@ -34,18 +34,18 @@ exports.createInvoice = async (req, res) => {
         dueDays,
         repeatTerms,
         terms,
-        totalAmount,
-        additionalNote,
+        additionalNotes,
         lineItems,
         sendmails,
-
+        totalAmount
  } = req.body;
-
+console.log(req.body)
     const { userId } = req.user;
     try {
         const currentDate = new Date();
-        const invoiceResult = await queryRunner(insertInvoice, [userId, tenantID, invoiceType, startDate, endDate, frequency, dueDays, repeatTerms, terms,totalAmount,additionalNote,"Unpaid",currentDate]);
-      if (invoiceResult.affectedRows === 0) {
+        const invoiceResult = await queryRunner(insertInvoice, [userId, tenantID, invoiceType, startDate, endDate, frequency, dueDays, repeatTerms, terms,additionalNotes,"Unpaid",currentDate,totalAmount]);
+        // console.log(invoiceResult)
+        if (invoiceResult.affectedRows === 0) {
         res.status(400).send('Error occur in creating invoice');
       } else {
         // select tenants 
@@ -172,12 +172,14 @@ exports.putInvoiceStatusUpdates = async (req, res) => {
 exports.getAllInvoices = async (req, res) => {
     try {
     // const { userId } = req.user; 
-    const {userId} = req.body; 
+    // console.log(111)
+    const {userId} = req.user; 
       const getAllInvoicesResult = await queryRunner(getAllInvoicesquery, [userId]);
       if (getAllInvoicesResult[0].length > 0) {
         for (let i = 0; i < getAllInvoicesResult[0].length; i++){
             const invoiceID = getAllInvoicesResult[0][i].invoiceID;
             const invoicelineitemsResult = await queryRunner(selectQuery("invoicelineitems", "invoiceID"), [invoiceID]);
+            // console.log(invoicelineitemsResult[0])
             if (invoicelineitemsResult[0].length > 0) {
                 const memo = invoicelineitemsResult[0].map((desc)=> ({
                     memo:desc.memo, 
@@ -193,7 +195,7 @@ exports.getAllInvoices = async (req, res) => {
           message: 'All Invoice successful'
         })
       } else {
-        res.status(400).json({
+        res.status(200).json({
           message: 'No data found'
         })
       }
