@@ -173,7 +173,6 @@ exports.addTasks = async (req, res) => {
       //   //  add vendor
         for (let i = 0; i < vendorID.length; i++) {
           const Vendorid = vendorID[i];
-
           const vendorResults = await queryRunner(addVendorList, [
             tasksID,
             Vendorid,
@@ -184,8 +183,20 @@ exports.addTasks = async (req, res) => {
         }
       //   //  add vendor
         const tenantLandlordResult = await queryRunner(getLandlordTenant, [userId,tenantID]);
-        const propertyUnitsResult = await queryRunner( selectQuery("propertyunits", "propertyID"), [propertyId] );
+        let vendorEmailarr = [];
+        let vendorNamearr = [];
+        for(let i = 0; i < vendorID.length; i++){
+          const vendorCheckResult = await queryRunner( selectQuery("vendor", "id"), [vendorID[i]] );
+          if(vendorCheckResult.length > 0){
+            let vendorName = vendorCheckResult[0][0].firstName + " " + vendorCheckResult[0][0].lastName;
+            let vendorEmail = vendorCheckResult[0][0].email;
+            vendorNamearr.push(vendorName);
+            vendorEmailarr.push(vendorEmail);
 
+          }else{
+            return res.send("Vendor not found");
+          }
+        }
         const tenantName = tenantLandlordResult[0][0].firstName + " " + tenantLandlordResult[0][0].lastName; 
         const tenantEmail = tenantLandlordResult[0][0].email;
         const CompanyName = tenantLandlordResult[0][0].companyName;
@@ -193,14 +204,7 @@ exports.addTasks = async (req, res) => {
         const landlordContact = tenantLandlordResult[0][0].Phone;
         const landlordEmail = tenantLandlordResult[0][0].Email;
 
-
-      //   // const vendorLists = req.body.map((vendor) => vendor.vendorID);
-      //   // console.log(vendorLists);
-        const vendorName = "ssss";
-      //     vendorResult[0][0].firstName + " " + vendorResult[0][0].lastName;
-
-
-
+        const vendorNames = vendorNamearr.toString();
 
         if (notifyTenant.toLowerCase() === "yes") {
           await taskSendMail(
@@ -210,29 +214,32 @@ exports.addTasks = async (req, res) => {
             dueDate,
             landlordName,
             taskName,
-            vendorName,
+            vendorNames,
             priority,
             CompanyName,
             landlordContact
           );
         }
-      //   if (notifyVendor.toLowerCase() === "yes") {
-      //     await taskSendMail(
-      //       tenantName,
-      //       landlordEmail,
-      //       "Property Maintenance: " + taskName,
-      //       dueDate,
-      //       landlordName,
-      //       taskName,
-      //       vendorName,
-      //       priority,
-      //       CompanyName,
-      //       landlordContact
-      //     );
-      //   }
-      //   console.log(tenantEmail);
-      //   res.json({ message: "Task added successfully" });
-      // }
+        if (notifyVendor.toLowerCase() === "yes") {
+          console.log("vendor1");
+        for(let i = 0; i < vendorEmailarr.length > 0; i++){
+          console.log("vendor2");
+          await taskSendMail(
+            tenantName,
+            vendorEmailarr[i],
+            "Property Maintenance: " + taskName,
+            dueDate,
+            landlordName,
+            taskName,
+            vendorNames,
+            priority,
+            CompanyName,
+            landlordContact
+          );
+        }
+        console.log("vendor3");
+        }
+
     }
   } catch (error) {
     res.status(400).send(error);

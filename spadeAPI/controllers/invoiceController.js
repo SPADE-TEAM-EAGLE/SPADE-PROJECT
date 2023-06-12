@@ -109,8 +109,8 @@ console.log(req.body)
 exports.putInvoiceStatusUpdates = async (req, res) => {
     try {
       const { id, status, note } = req.body
-    const { userId } = req.user; 
-    // const {userId} = req.body; 
+    // const { userId } = req.user; 
+    const {userId} = req.body; 
       const currentDate = new Date();
       const invoiceUpdateStatusResult = await queryRunner(updateInvoiceStatus, [
         status,
