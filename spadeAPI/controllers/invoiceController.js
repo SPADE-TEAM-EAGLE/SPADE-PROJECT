@@ -105,8 +105,10 @@ console.log(req.body)
 exports.putInvoiceStatusUpdates = async (req, res) => {
     try {
       const { id, status, note } = req.body
+      // console.log(req)
     // const { userId } = req.user; 
-    const {userId} = req.body; 
+    const {userId} = req.user;
+
       const currentDate = new Date();
       const invoiceUpdateStatusResult = await queryRunner(updateInvoiceStatus, [
         status,
@@ -136,34 +138,34 @@ exports.putInvoiceStatusUpdates = async (req, res) => {
 
 
   //  ############################# update Invoice Status Start ############################################################
-exports.putInvoiceStatusUpdates = async (req, res) => {
-    try {
-      const { id, status, note } = req.body
-    const { userId } = req.user; 
-    // const {userId} = req.body; 
-      const currentDate = new Date();
-      const invoiceUpdateStatusResult = await queryRunner(updateInvoiceStatus, [
-        status,
-        note,
-        currentDate,
-        id,
-        userId,
-      ])
-      if (invoiceUpdateStatusResult[0].affectedRows > 0) {
-        res.status(200).json({
-          data: invoiceUpdateStatusResult,
-          message: 'Invoice status updated successful'
-        })
-      } else {
-        res.status(400).json({
-          message: 'No data found'
-        })
-      }
-    } catch (error) {
-      console.log(error)
-      res.send('Error Invoice Status update')
-    }
-  }
+// exports.putInvoiceStatusUpdates = async (req, res) => {
+//     try {
+//       const { id, status, note } = req.body
+//     const { userId } = req.user; 
+//     // const {userId} = req.body; 
+//       const currentDate = new Date();
+//       const invoiceUpdateStatusResult = await queryRunner(updateInvoiceStatus, [
+//         status,
+//         note,
+//         currentDate,
+//         id,
+//         userId,
+//       ])
+//       if (invoiceUpdateStatusResult[0].affectedRows > 0) {
+//         res.status(200).json({
+//           data: invoiceUpdateStatusResult,
+//           message: 'Invoice status updated successful'
+//         })
+//       } else {
+//         res.status(400).json({
+//           message: 'No data found'
+//         })
+//       }
+//     } catch (error) {
+//       console.log(error)
+//       res.send('Error Invoice Status update')
+//     }
+//   }
   //  ############################# update Invoice  End ############################################################
 
 
@@ -181,7 +183,7 @@ exports.getAllInvoices = async (req, res) => {
             const invoicelineitemsResult = await queryRunner(selectQuery("invoicelineitems", "invoiceID"), [invoiceID]);
             // console.log(invoicelineitemsResult[0])
             if (invoicelineitemsResult[0].length > 0) {
-                const memo = invoicelineitemsResult[0].map((desc)=>({memo:desc.memo, category:desc.category}))
+                const memo = invoicelineitemsResult[0].map((desc)=>({memo:desc.memo, category:desc.category, amount:desc.amount}))
                 getAllInvoicesResult[0][i].memo = memo
             } else {
                 getAllInvoicesResult[0][i].memo = ["No memo"]
