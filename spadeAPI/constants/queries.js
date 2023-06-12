@@ -101,5 +101,8 @@ exports.updateInvoice = 'UPDATE invoice SET  invoiceType = ? , startDate = ? , e
 exports.selectAllTenants = `SELECT p.propertyName, p.address AS pAddress, p.city AS pCity, p.state AS pState, p.zipCode AS pZipCode, p.propertyType, p.propertySQFT, p.status AS pStatus,p.units AS pUnits, t.id AS tenantID ,t.firstName,t.lastName, t.companyName, t.email AS tEmail, t.phoneNumber AS tPhoneNumber, t.Address AS tAddress, t.city AS tCity, t.state AS tState, t.zipcode AS tZipcode, t.rentAmount, t.gross_or_triple_lease, t.baseRent, t.tripleNet, t.leaseStartDate, t.leaseEndDate, t.increaseRent, pu.unitNumber, pu.Area AS unitArea, pu.unitDetails, pu.status AS unitStatus FROM tenants AS t INNER JOIN property AS p ON t.propertyID = p.id INNER JOIN propertyunits AS pu ON t.propertyUnitID = pu.id WHERE t.landlordID = ?`;
 
 
-exports.addTasksQuery = "INSERT INTO task (taskName, vendorID, tenantID, dueDate, status, priority, notes, notifyTenant, notifyVendor, created_at, updated_at, created_by) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+exports.addTasksQuery = "INSERT INTO task (taskName, tenantID, dueDate, status, priority, notes, notifyTenant, notifyVendor, created_at, updated_at, createdBy) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 exports.addVendorList = "INSERT INTO taskassignto (taskId, vendorId) VALUES (?, ?)";
+exports.getLandlordTenant = 'SELECT t.firstName,t.lastName,t.email,t.companyName,l.FirstName,l.LastName,l.Phone,l.Email FROM tenants as t JOIN invoice as i ON t.id = i.tenantID JOIN users as l ON i.landlordID = l.id WHERE i.landlordID = ? AND i.tenantID = ?';
+exports.PropertyUnitsVacant = 'SELECT * FROM `propertyunits`WHERE propertyID = ? AND status = ? AND unitNumber !=""';
+
