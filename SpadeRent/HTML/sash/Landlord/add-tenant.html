@@ -2473,21 +2473,6 @@ background-color: white;
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
 
-    <script>
-        // Get the user's preferred color scheme
-        const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-        // Get a reference to the logo element
-        const logo = document.getElementById('logo');
-
-        // Set the logo source file based on the user's preferred color scheme
-        if (userPrefersDark) {
-            // console.log(document.getElementById("myModal_delete"))
-            logo.src = '../assets/header-img/comment.svg';
-        } else {
-            logo.src = '../assets/header-img/question.svg';
-        }
-    </script>
     <!-- <script src="../assets/plugins/fancyuploder/jquery.ui.widget.js"></script>
     <script src="../assets/plugins/fancyuploder/jquery.fileupload.js"></script>
     <script src="../assets/plugins/fancyuploder/jquery.iframe-transport.js"></script>
@@ -2810,14 +2795,6 @@ background-color: white;
                 // console.log($('#title-sub'))
                 $("#next").addClass("d-none")
                 $("#submit").removeClass("d-none")
-                // $('.modal-title').text("View ");
-
-// Change the text of the <strong> element
-// $('#title-sub').text('Tenant Summary');
-                // $('#title-sub').text("Tenant Summary")
-                // $(".border-model-line span").text("Post your properties to thousands of potential investors, tenants and interested individuals")
-
-                // Find all input, select, and other fields within the accordions and make them readonly
                 accordions.find('input,textarea').attr('readonly', true);
 
                 // Optional: Disable any buttons within the accordions
@@ -3380,10 +3357,10 @@ dateTable();
             // delete using AJAX
             $('#myModal_delete').modal('hide');
             $.ajax({
-                url: 'http://localhost:3000/api/spade/propertyDelete',
+                url: 'http://localhost:3000/api/spade//tenantDelete',
                 type: 'DELETE',
                 data: JSON.stringify({
-                    "id": propertyId
+                    "tenantID": tenantID
                 }),
                 contentType: "application/json; charset=utf-8",
                 processData: false,
@@ -3402,6 +3379,7 @@ dateTable();
             });
         })
         // let data;
+        var tenantID
         function getData(selectedFilter = "alphabets") {
             $("#preloader").fadeIn("fast");
             // console.log(22)
@@ -3410,6 +3388,7 @@ dateTable();
                 type: 'GET',
                 contentType: false,
                 processData: false,
+                
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
@@ -3466,9 +3445,9 @@ dateTable();
                     $("#preloader").fadeOut("slow")
                     $('.edit-option').click(function (e) {
                         e.preventDefault();
-                        const propertyIdElement = $(this).closest("tr").find(".tenant-id");
+                        const tenantIdElement = $(this).closest("tr").find(".tenant-id");
 
-                        propertyId = propertyIdElement.text();
+                        tenantID = tenantIdElement.text();
 
                         const data = response.data[0].find(obj => obj.id.toString() === propertyId);
                         selectedFiles = data.images
@@ -3487,8 +3466,9 @@ dateTable();
                     });
                     $('.delete-option').click(function (e) {
                         e.preventDefault(); // Prevent default anchor behavior
-                        const propertyIdElement = $(this).closest("tr").find(".property-id");
-                        propertyId = propertyIdElement.text();
+                        const tenantIdElement = $(this).closest("tr").find(".tenant-id");
+
+                        tenantID = tenantIdElement.text();
 
                         $('#myModal_delete').modal('show');
                     });

@@ -755,8 +755,9 @@
                                     <div class="col-md-4">
                                         <label for="inputZip" class="form-label fw-bold">Zip <spnan class="text-danger">
                                                 *</span></label>
-                                        <input class="form-control form" type="text" id="zip" name="zip" pattern="[0-9]{5}" placeholder="A valid 5-digit zip code" maxlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
-                                        <span class="text-danger d-none">Zip code is required!</span>
+                                                <input class="form-control form" type="text" id="zip" name="zip" pattern="[0-9]{5}" placeholder="A valid 5-digit zip code" maxlength="5" minlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                                        
+                                                <span class="text-danger d-none">Zip code is required!</span>
                                     </div>
 
                                     <div class="col-md-6">
@@ -2420,32 +2421,22 @@
                     // Hide error spans
                     accordionFields.siblings('span.text-danger').addClass('d-none');
 
-                    // Reset image input
-                    // if (imageField.length) {
-                    //     imageField.val('');
-                    //     imageField.siblings('label.custom-file-label').find('.custom-file-text span').first().text('Upload Photo or drag and drop here');
-                    //     imageField.siblings('.selected-files').find('.file-grid').empty();
-                    // }
-                    // // $('#accordion-item1').find('.file-grid').empty();
-                    // Reset accordion button icons
                     accordionButton.find('.fi-rs-exclamation').addClass('fi-rs-angle-circle-down').addClass("chevron").removeClass('fi-rs-exclamation').removeClass("cross");
                     accordionButton.find('.fi-rs-check-circle').addClass('fi-rs-angle-circle-down').addClass("chevron").removeClass('fi-rs-check-circle').removeClass("tick");
                     $('#next').addClass("disabled");
                     $('#draft').attr("disabled", "disabled");
                 });
             }
-
+            $("#succes-close").click(()=>{
+                resetAccordions()
+            })
             $('#close,#top-close').on('click', function(e) {
                 e.preventDefault()
                 resetAccordions()
                 $('#addModal').modal('hide');
             })
             $("#succesModal").on('hide.bs.modal', function() {
-                // if (imageField.length) {
-                //             imageField.val('');
-                //             imageField.siblings('label.custom-file-label').find('.custom-file-text span').first().text('Upload Photo or drag and drop here');
-                //             imageField.siblings('.selected-files').find('.file-grid').empty();
-                //         }
+
                 resetAccordions()
                     // $('#accordion-item1').find('.file-grid').empty();
                 getData()
