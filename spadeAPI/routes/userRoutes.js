@@ -82,5 +82,6 @@ router.post("/addVendor", taskController.addVendors);
 router.get("/getAllVendors", taskController.getAllVendors);
 router.post("/addTasks", upload, taskController.addTasks);
 router.get("/getAllTask", taskController.getAllTask);
+router.get("/taskByID", taskController.taskByID);
 
 module.exports = router;
