@@ -309,9 +309,7 @@ exports.taskByID = async (req, res) => {
   const { Id } = req.body;
   try {
     const taskByIDResult = await queryRunner(taskByIDQuery, [Id]);
-
     if (taskByIDResult.length > 0) {
-      
       const TaskImagesResult = await queryRunner(selectQuery("taskimages", "taskID"),[Id]);
       if(TaskImagesResult[0].length > 0){
         const taskImages = TaskImagesResult[0].map((image) => image.taskImages);
@@ -325,21 +323,18 @@ exports.taskByID = async (req, res) => {
       );
       const vendorIDs = TaskAssignToResult[0].map((vendorID) => vendorID.vendorId);
       const vendorData = [];
-
       for (let i = 0; i < vendorIDs.length; i++) {
         const vID = vendorIDs[i];
         const vendorResult = await queryRunner(
           selectQuery("vendor", "id"),
           [vID]
         );
-
         if (vendorResult.length > 0) {
           const categoryIDs = vendorResult[0][0].categoryID;
           const VendorCategoryResult = await queryRunner(
             selectQuery("vendorcategory", "id"),
             [categoryIDs]
           );
-
           if (VendorCategoryResult.length > 0) {
             const vendorDataObject = {
               name: vendorResult[0][0].firstName + " " + vendorResult[0][0].lastName,
@@ -356,9 +351,7 @@ exports.taskByID = async (req, res) => {
           }
         }
       }
-
         taskByIDResult[0][0].vendor = vendorData;
-
       res.status(200).json({
         data: taskByIDResult,
         message: "Task data retrieved successfully",
@@ -375,3 +368,145 @@ exports.taskByID = async (req, res) => {
 };
 
 //  ############################# Task By ID End ############################################################
+
+
+
+
+
+
+
+
+//  #############################  ADD TASK Start HERE ##################################################
+exports.addTasks = async (req, res) => {
+  const {
+    taskName,
+    vendorID,
+    tenantID,
+    dueDate,
+    status,
+    priority,
+    notes,
+    notifyTenant,
+    notifyVendor,
+    created_at,
+    updated_at,
+    created_by,
+  } = req.body;
+  const { userId } = req.body;
+  try {
+    const addTasksCheckResult = await queryRunner(
+      selectQuery("task", "taskName", "tenantID"),
+      [taskName, tenantID]
+    );
+    // console.log(addTasksCheckResult);
+    if (addTasksCheckResult[0].length > 0) {
+      return res.send("Task already exists");
+    } else {
+      const TasksResult = await queryRunner(addTasksQuery, [
+        taskName,
+        tenantID,
+        dueDate,
+        status,
+        priority,
+        notes,
+        notifyTenant,
+        notifyVendor,
+        created_at,
+        updated_at,
+        created_by,
+      ]);
+      if (TasksResult.affectedRows === 0) {
+        return res.status(400).send("Error1");
+      } 
+      // else {
+        const tasksID = TasksResult[0].insertId;
+        if(req.files){ 
+        const fileNames = req.files.map((file) => file.filename);
+        for (let i = 0; i < fileNames.length; i++) {
+          const taskImages = fileNames[i];
+          const taskImageResult = await queryRunner(insertInTaskImage, [
+            tasksID,
+            taskImages,
+          ]);
+          if (taskImageResult.affectedRows === 0) {
+            return res.send("Error2");
+          }
+        }
+      }
+      //   //  add vendor
+        for (let i = 0; i < vendorID.length; i++) {
+          const Vendorid = vendorID[i];
+          const vendorResults = await queryRunner(addVendorList, [
+            tasksID,
+            Vendorid,
+          ]);
+          if (vendorResults.affectedRows === 0) {
+            return res.send("Error2");
+          }
+        }
+      //   //  add vendor
+        const tenantLandlordResult = await queryRunner(getLandlordTenant, [userId,tenantID]);
+        let vendorEmailarr = [];
+        let vendorNamearr = [];
+        for(let i = 0; i < vendorID.length; i++){
+          const vendorCheckResult = await queryRunner( selectQuery("vendor", "id"), [vendorID[i]] );
+          if(vendorCheckResult.length > 0){
+            let vendorName = vendorCheckResult[0][0].firstName + " " + vendorCheckResult[0][0].lastName;
+            let vendorEmail = vendorCheckResult[0][0].email;
+            vendorNamearr.push(vendorName);
+            vendorEmailarr.push(vendorEmail);
+
+          }else{
+            return res.send("Vendor not found");
+          }
+        }
+        const tenantName = tenantLandlordResult[0][0].firstName + " " + tenantLandlordResult[0][0].lastName; 
+        const tenantEmail = tenantLandlordResult[0][0].email;
+        const CompanyName = tenantLandlordResult[0][0].companyName;
+        const landlordName = tenantLandlordResult[0][0].FirstName + " " + tenantLandlordResult[0][0].LastName;
+        const landlordContact = tenantLandlordResult[0][0].Phone;
+        const landlordEmail = tenantLandlordResult[0][0].Email;
+
+        const vendorNames = vendorNamearr.toString();
+
+        if (notifyTenant.toLowerCase() === "yes") {
+          await taskSendMail(
+            tenantName,
+            tenantEmail,
+            "Property Maintenance: " + taskName,
+            dueDate,
+            landlordName,
+            taskName,
+            vendorNames,
+            priority,
+            CompanyName,
+            landlordContact
+          );
+        }
+        if (notifyVendor.toLowerCase() === "yes") {
+          console.log("vendor1");
+        for(let i = 0; i < vendorEmailarr.length > 0; i++){
+          console.log("vendor2");
+          await taskSendMail(
+            tenantName,
+            vendorEmailarr[i],
+            "Property Maintenance: " + taskName,
+            dueDate,
+            landlordName,
+            taskName,
+            vendorNames,
+            priority,
+            CompanyName,
+            landlordContact
+          );
+        }
+        console.log("vendor3");
+        }
+
+    }
+  } catch (error) {
+    res.status(400).send(error);
+    console.log(error);
+  }
+}; 
+//  #############################  ADD TASK ENDS HERE ##################################################
