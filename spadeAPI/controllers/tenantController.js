@@ -557,7 +557,7 @@ exports.getTenantsByID = async (req, res) => {
   try {
     // con
     const { id } = req.query;
-    console.log(req)
+    // console.log(req)
     const TenantsByIDResult = await queryRunner(getTenantsById, [id])
     // console.log(TenantsByIDResult)
     console.log(TenantsByIDResult)
