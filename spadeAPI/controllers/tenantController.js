@@ -555,6 +555,7 @@ exports.tenantDelete = async (req, res) => {
 //  ############################# Get tenant ByID Start ############################################################
 exports.getTenantsByID = async (req, res) => {
   try {
+    // con
     const { id } = req.query;
     const TenantsByIDResult = await queryRunner(getTenantsById, [id])
     if (TenantsByIDResult.length > 0) {
