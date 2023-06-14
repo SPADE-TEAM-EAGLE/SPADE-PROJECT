@@ -2042,13 +2042,13 @@
                 });
             })
             $.ajax({
-                url: 'http://localhost:3000/api/spade/getTenantsByID',
+                url: 'http://localhost:3000/api/getTenantsByID',
                 type: 'GET',
                 data: {
-                    id: tenantId
+                    tenantId
                 },
                 contentType: "application/json; charset=utf-8",
-                // processData: false,
+                processData: false,
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },

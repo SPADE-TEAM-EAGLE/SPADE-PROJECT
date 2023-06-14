@@ -672,300 +672,346 @@ color: #000;
     </div>
 </div>
 <!--/Default Offcanvas-->
-    <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div class="text-justify ps-2 border-model-line title-text">
-                        <h2 class="modal-title">Create <strong class="color-primary" id="title-sub">New Tenant</strong>
-                        </h2>
-                        <span class="">Post your properties to thousands of potential investors,
-                            tenants and interested individuals.</span>
-                    </div>
-                    <button type="button" class="btn btn-primary me-4 mt-3 d-none" id="edit-btn"><i
-                            class="fi fi-rs-pencil" style="display:block"></i><small>Edit Details</small></button>
-                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
-                    </button>
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="text-justify ps-2 border-model-line title-text">
+                    <h2 class="modal-title">Create <strong class="color-primary" id="title-sub">New Tenant</strong>
+                    </h2>
+                    <span class="">Post your properties to thousands of potential investors,
+                        tenants and interested individuals.</span>
                 </div>
-                <div class="modal-body">
-                    <div class="accordion-item mb-4" id="accordion-item1">
-                        <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button text-white" type="button" id="accordion-button1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                <span class="m-0 me-4 fs-1" style="font-weight: bold;">01</span>
-                                <h3 class="m-0"><strong>Tenant Information</strong> <i class="fi fi-rs-pencil"></i><i
-                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
-                                </h3>
-                            </button>
-                        </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <form class="row g-3" enctype="multipart/form-data">
-                                    <div class="col-md-6">
-                                        <label for="inputEmail4" class="form-label fw-bold">First Name<spnan
-                                                class="text-danger"> *</span></label>
-                                        <input type="text" class="form-control form" placeholder="Enter First Name" id="firstName" required>
-                                        <span class="text-danger d-none">First name is required!</span>
+                <button type="button" class="btn btn-primary me-4 mt-3 d-none" id="edit-btn"><i
+                        class="fi fi-rs-pencil" style="display:block"></i><small>Edit Details</small></button>
+                <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="accordion-item mb-4" id="accordion-item1">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button text-white" type="button" id="accordion-button1"
+                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                            aria-expanded="true" aria-controls="collapseOne">
+                            <span class="m-0 me-4 fs-1" style="font-weight: bold;">01</span>
+                            <h3 class="m-0"><strong>Tenant Information</strong> <i class="fi fi-rs-pencil"></i><i
+                                    class="fi fi-rs-angle-circle-down chevron icon"></i>
+                            </h3>
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <form class="row g-3" enctype="multipart/form-data">
+                                <div class="col-md-6">
+                                    <label for="inputEmail4" class="form-label fw-bold">First Name<spnan
+                                            class="text-danger"> *</span></label>
+                                    <input type="text" class="form-control form" placeholder="Enter First Name"
+                                        id="firstName" required>
+                                    <span class="text-danger d-none">First name is required!</span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="inputPassword4" class="form-label fw-bold">Last Name<spnan
+                                            class="text-danger"> *</span></label>
+                                    <input type="text" class="form-control form" placeholder="Enter Last Name"
+                                        id="lastName" required>
+                                    <span class="text-danger d-none">Last name required!</span>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="inputAddress" class="form-label fw-bold">Company Name <span
+                                            class="fw-light">(Optional)</span>
+                                    </label>
+                                    <input type="text" class="form-control form" id="company"
+                                        placeholder="Enter Company Name">
+                                    <!-- <span class="text-danger d-none">Company name is required!</span> -->
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="inputCity" class="form-label fw-bold">Email<spnan
+                                            class="text-danger"> *</span></label>
+                                    <input type="text" class="form-control form" placeholder="Enter Email"
+                                        id="email" required>
+                                    <span class="text-danger d-none">Email is required!</span>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="inputState" class="form-label fw-bold">Phone Number <span
+                                            class="fw-light">(Optional)</span></label>
+                                    <input id="phone" name="phone" type="tel" autocomplete="off">
+                                    <span id="valid-msg" class="d-none text-success">✓ Valid</span>
+                                    <span id="error-msg" class="hide text-danger"></span>
+                                    </select>
+                                    <!-- <span class="text-danger d-none">State is required!</span> -->
+                                </div>
+                                <div class="col-12">
+                                    <label for="inputAddress2" class="form-label fw-bold">Address <span
+                                            class="fw-light">(Optional)</span></label>
+                                    <input type="text" class="form-control" id="address"
+                                        placeholder="Apartment, studio, or floor">
+                                    <!-- <span class="text-danger d-none">Address is required!</span> -->
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="inputState" class="form-label fw-bold">State<spnan
+                                            class="text-danger">*</span></label>
+                                    <select id="state" class="form-select form" required>
+                                        <option selected>Choose...</option>
+                                    </select>
+                                    <span class="text-danger d-none">State is required!</span>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="inputState" class="form-label fw-bold">City <spnan
+                                            class="text-danger">*</span></label>
+                                    <input id="city" class="form-control form" required>
+                                    <span class="text-danger d-none">City is required!</span>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="inputPassword4" class="form-label fw-bold">Zip Code <spnan
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control form" id="zip" pattern="[0-9]{5}"
+                                        placeholder="A valid 5-digit zip code" maxlength="5"
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                                    <span class="text-danger d-none">Zip code is required!</span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item mb-4" id="accordion-item2">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed text-white" type="button" id="accordion-button2"
+                            data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
+                            aria-controls="collapseTwo">
+                            <span class="m-0 me-4 fs-1" style="font-weight: bold;">02</span>
+                            <h3 class="m-0"><strong>Assign Property</strong> <i class="fi fi-rs-pencil"></i><i
+                                    class="fi fi-rs-angle-circle-down chevron icon"></i>
+                            </h3>
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <form class="row g-3">
+                                <div class="col-md-4">
+                                    <label for="inputEmail4" class="form-label">Select Property<span
+                                            class="text-danger"> *</span></label>
+                                    <select id="property" class="form-select" required>
+                                        <option selected>Choose...</option>
+                                        <option>...</option>
+                                    </select>
+                                    <span class="text-danger d-none">Property is required!</span>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="inputEmail4" class="form-label">Select Property Unit<span
+                                            class="text-danger"> *</span></label>
+                                    <select id="unit" class="form-select" required>
+                                        <option selected>Choose...</option>
+                                        <option>...</option>
+                                    </select>
+                                    <span class="text-danger d-none">Property units is required!</span>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="inputAddress" class="form-label">Input Rent Amount /Per
+                                        Month<span class="text-danger"> *</span></label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"
+                                            style="color: #1467B0;background-color: transparent !important;">$</span>
+                                        <input type="text" class="form-control" id="rent" pattern="[0-9]{7}"
+                                            placeholder="Enter rent amount" maxlength="7"
+                                            oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                                     </div>
-                                    <div class="col-md-6">
-                                        <label for="inputPassword4" class="form-label fw-bold">Last Name<spnan
-                                                class="text-danger"> *</span></label>
-                                        <input type="text" class="form-control form" placeholder="Enter Last Name" id="lastName" required>
-                                        <span class="text-danger d-none">Last name required!</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputAddress" class="form-label fw-bold">Company Name <span
-                                                class="fw-light">(Optional)</span>
+                                    <span class="text-danger d-none">Rent amount is required!</span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item" id="accordion-item3">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed text-white" id="accordion-button3" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false"
+                            aria-controls="collapseThree">
+                            <span class="m-0 me-4 fs-1" style="font-weight: bold;">03</span>
+                            <h3 class="m-0"><strong>Lease Details</strong> <i class="fi fi-rs-pencil"></i><i
+                                    class="fi fi-rs-angle-circle-down chevron icon"></i>
+                            </h3>
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                        data-bs-parent="#accordionExampe">
+                        <div class="accordion-body">
+                            <form class="row g-3">
+                                <div class="col-md-12">
+                                    <label for="inputEmail4" class="form-label">Is this a gross lease or triple net
+                                        lease? <i class="fi fi-rs-info ms-2" style="color: #1467B0"></i></label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" value="Gross Lease"
+                                            name="lease" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Gross Lease
                                         </label>
-                                        <input type="text" class="form-control form" id="company" placeholder="Enter Company Name">
-                                        <!-- <span class="text-danger d-none">Company name is required!</span> -->
                                     </div>
-                                    <div class="col-md-4">
-                                        <label for="inputCity" class="form-label fw-bold">Email<spnan
-                                                class="text-danger"> *</span></label>
-                                        <input type="text" class="form-control form" placeholder="Enter Email" id="email" required>
-                                        <span class="text-danger d-none">Email is required!</span>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" value="Triple Net Lease"
+                                            name="lease" id="flexCheckChecked1" href="#collapse1" role="button"
+                                            aria-expanded="false" aria-controls="collapseExample1">
+                                        <label class="form-check-label" for="flexCheckChecked1">
+                                            Triple Net Lease
+                                        </label>
                                     </div>
-                                    <div class="col-md-4">
-                                        <label for="inputState" class="form-label fw-bold">Phone Number <span
-                                                class="fw-light">(Optional)</span></label>
-                                        <input id="phone" name="phone" type="tel" autocomplete="off">
-                                        <span id="valid-msg" class="d-none text-success">✓ Valid</span>
-                                        <span id="error-msg" class="hide text-danger"></span>
-                                        </select>
-                                        <!-- <span class="text-danger d-none">State is required!</span> -->
-                                    </div>
-                                    <div class="col-12">
-                                        <label for="inputAddress2" class="form-label fw-bold">Address <span
-                                                class="fw-light">(Optional)</span></label>
-                                        <input type="text" class="form-control" id="address" placeholder="Apartment, studio, or floor">
-                                        <!-- <span class="text-danger d-none">Address is required!</span> -->
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputState" class="form-label fw-bold">State<spnan
-                                                class="text-danger">*</span></label>
-                                        <select id="state" class="form-select form" required>
-                                            <option selected>Choose...</option>
-                                        </select>
-                                        <span class="text-danger d-none">State is required!</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputState" class="form-label fw-bold">City <spnan
-                                                class="text-danger">*</span></label>
-                                        <input id="city" class="form-control form" required>
-                                        <span class="text-danger d-none">City is required!</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputPassword4" class="form-label fw-bold">Zip Code <spnan
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="zip" pattern="[0-9]{5}" placeholder="A valid 5-digit zip code" maxlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
-                                        <span class="text-danger d-none">Zip code is required!</span>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item mb-4" id="accordion-item2">
-                        <h2 class="accordion-header" id="headingTwo">
-                            <button class="accordion-button collapsed text-white" type="button" id="accordion-button2" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                <span class="m-0 me-4 fs-1" style="font-weight: bold;">02</span>
-                                <h3 class="m-0"><strong>Assign Property</strong> <i class="fi fi-rs-pencil"></i><i
-                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
-                                </h3>
-                            </button>
-                        </h2>
-                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <form class="row g-3">
-                                    <div class="col-md-4">
-                                        <label for="inputEmail4" class="form-label">Select Property<span
-                                                class="text-danger"> *</span></label>
-                                        <select id="property" class="form-select" required>
-                                            <option selected>Choose...</option>
-                                            <option>...</option>
-                                        </select>
-                                        <span class="text-danger d-none">Property is required!</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputEmail4" class="form-label">Select Property Unit<span
-                                                class="text-danger"> *</span></label>
-                                        <select id="unit" class="form-select" required>
-                                            <option selected>Choose...</option>
-                                            <option>...</option>
-                                        </select>
-                                        <span class="text-danger d-none">Property units is required!</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputAddress" class="form-label">Input Rent Amount /Per
-                                            Month<span class="text-danger"> *</span></label>
-                                        <div class="input-group">
-                                            <span class="input-group-text" style="color: #1467B0;background-color: transparent !important;">$</span>
-                                            <input type="text" class="form-control" id="rent" pattern="[0-9]{7}" placeholder="Enter rent amount" maxlength="7" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
-                                        </div>
-                                        <span class="text-danger d-none">Rent amount is required!</span>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item" id="accordion-item3">
-                        <h2 class="accordion-header" id="headingThree">
-                            <button class="accordion-button collapsed text-white" id="accordion-button3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                <span class="m-0 me-4 fs-1" style="font-weight: bold;">03</span>
-                                <h3 class="m-0"><strong>Lease Details</strong> <i class="fi fi-rs-pencil"></i><i
-                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
-                                </h3>
-                            </button>
-                        </h2>
-                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExampe">
-                            <div class="accordion-body">
-                                <form class="row g-3">
-                                    <div class="col-md-12">
-                                        <label for="inputEmail4" class="form-label">Is this a gross lease or triple net
-                                            lease? <i class="fi fi-rs-info ms-2" style="color: #1467B0"></i></label>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" value="Gross Lease" name="lease" id="flexCheckDefault">
-                                            <label class="form-check-label" for="flexCheckDefault">
-                                                Gross Lease
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" value="Triple Net Lease" name="lease" id="flexCheckChecked1" href="#collapse1" role="button" aria-expanded="false" aria-controls="collapseExample1">
-                                            <label class="form-check-label" for="flexCheckChecked1">
-                                                Triple Net Lease
-                                            </label>
-                                        </div>
-                                        <!-- <input type="hidden" name="radioOptionsHidden" required> -->
-                                        <div class="collapse" id="collapse1">
-                                            <div class="card card-body">
-                                                <div class="text-justify ps-2 border-model-line">
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <label for="inputEmail4" class="form-label">Base Rent Amount
-                                                                (Optional)</label>
-                                                            <div class="input-group">
-                                                                <span class="input-group-text" style="color: #1467B0;background-color: transparent !important;">$</span>
-                                                                <input type="text" class="form-control" id="baseRent" pattern="[0-9]{7}" placeholder="Enter Amount.." maxlength="7" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
-                                                            </div>
-                                                            <span class="text-danger d-none">Rent amount is
-                                                                required!</span>
+                                    <!-- <input type="hidden" name="radioOptionsHidden" required> -->
+                                    <div class="collapse" id="collapse1">
+                                        <div class="card card-body">
+                                            <div class="text-justify ps-2 border-model-line">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label for="inputEmail4" class="form-label">Base Rent Amount
+                                                            (Optional)</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-text"
+                                                                style="color: #1467B0;background-color: transparent !important;">$</span>
+                                                            <input type="text" class="form-control" id="baseRent"
+                                                                pattern="[0-9]{7}" placeholder="Enter Amount.."
+                                                                maxlength="7"
+                                                                oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                                                required>
                                                         </div>
-                                                        <div class="col-md-6">
-                                                            <label for="inputPassword4" class="form-label">Triple Net
-                                                                Amount (Optional)</label>
-                                                            <div class="input-group">
-                                                                <span class="input-group-text" style="color: #1467B0;background-color: transparent !important;">$</span>
-                                                                <input type="text" class="form-control" id="tripleNet" pattern="[0-9]{7}" placeholder="Enter Amount.." maxlength="7" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
-                                                            </div>
-                                                            <span class="text-danger d-none">Rent amount is
-                                                                required!</span>
+                                                        <span class="text-danger d-none">Rent amount is
+                                                            required!</span>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="inputPassword4" class="form-label">Triple Net
+                                                            Amount (Optional)</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-text"
+                                                                style="color: #1467B0;background-color: transparent !important;">$</span>
+                                                            <input type="text" class="form-control" id="tripleNet"
+                                                                pattern="[0-9]{7}" placeholder="Enter Amount.."
+                                                                maxlength="7"
+                                                                oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                                                required>
                                                         </div>
-                                                        <div class="col-md-6">
-                                                            <label for="inputEmail4" class="form-label">Lease Start
-                                                                Date</label>
-                                                            <input type="date" class="form-control position-relative" id="leaseStart" required>
-                                                            <span class="text-danger d-none">Rent amount is
-                                                                required!</span>
-                                                            <!-- <i class="fi fi-rs-calendar"></i> -->
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <label for="inputPassword4" class="form-label">Lease End
-                                                                Date</label>
+                                                        <span class="text-danger d-none">Rent amount is
+                                                            required!</span>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="inputEmail4" class="form-label">Lease Start
+                                                            Date</label>
+                                                        <input type="date" class="form-control position-relative"
+                                                            id="leaseStart" required>
+                                                        <span class="text-danger d-none">Rent amount is
+                                                            required!</span>
+                                                        <!-- <i class="fi fi-rs-calendar"></i> -->
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="inputPassword4" class="form-label">Lease End
+                                                            Date</label>
 
-                                                            <input type="date" class="form-control" id="leaseEnd" required>
-                                                            <span class="text-danger d-none">Rent amount is
-                                                                required!</span>
-                                                            <!-- <i class="fi fi-rs-calendar"></i> -->
-                                                        </div>
+                                                        <input type="date" class="form-control" id="leaseEnd"
+                                                            required>
+                                                        <span class="text-danger d-none">Rent amount is
+                                                            required!</span>
+                                                        <!-- <i class="fi fi-rs-calendar"></i> -->
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
-                                        <label for="inputEmail4" class="form-label">Are there any rent increases during
-                                            the Lease Term? <i class="fi fi-rs-info ms-2"
-                                                style="color: #1467B0"></i></label>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" value="yes" name="yesno" id="flexCheckChecked2" href="#collapse2" role="button" aria-expanded="false" aria-controls="collapseExample2" required>
-                                            <label class="form-check-label" for="flexCheckChecked">
-                                                Yes
-                                            </label>
-                                        </div>
-
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" value="no" name="yesno" required>
-                                            <label class="form-check-label" for="flexCheckChecked">
-                                                No
-                                            </label>
-                                        </div>
-
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="inputEmail4" class="form-label">Are there any rent increases during
+                                        the Lease Term? <i class="fi fi-rs-info ms-2"
+                                            style="color: #1467B0"></i></label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" value="yes" name="yesno"
+                                            id="flexCheckChecked2" href="#collapse2" role="button"
+                                            aria-expanded="false" aria-controls="collapseExample2" required>
+                                        <label class="form-check-label" for="flexCheckChecked">
+                                            Yes
+                                        </label>
                                     </div>
-                                    <div class="col-12 row">
-                                        <!-- <div class="col-md-5">
-                                            <label for="inputEmail4" class="form-label">Date of Rent Change
-                                                (Optional)</label>
-                                            <input type="email" class="form-control" id="inputEmail4">
-                                        </div>
-                                        <div class="col-md-5">
-                                            <label for="inputPassword4" class="form-label">Rent Amount Correlating to
-                                                that Date</label>
-                                            <input type="password" class="form-control" id="inputPassword4">
-                                        </div>
-                                        <div class="col-md-2">
-                                            <button>
-                                                <i class="fi fi-rs-trash"></i>
-                                            </button>
-                                        </div> -->
-                                        <div class="collapse" id="collapse2">
-                                            <div class="card card-body">
-                                                <div class="text-justify" id="add-item-container">
-                                                    <div class="row row-multiple mb-2 pb-3" style="background-color: #F4FAFF !important;">
-                                                        <div class="col-md-6">
-                                                            <label for="inputEmail4" class="form-label">Date of Rent
-                                                                Change
-                                                                (Optional)</label>
-                                                            <input type="date" class="form-control input-date" id="dateofRentchange" required>
-                                                            <span class="text-danger d-none">Rent amount is
-                                                                required!</span>
-                                                        </div>
-                                                        <div class="col-md-5">
-                                                            <label for="inputPassword4" class="form-label">Rent Amount
-                                                                Correlating to
-                                                                that Date</label>
-                                                            <input type="text" class="form-control input-amount" id="amountChange" pattern="[0-9]{7}" placeholder="Enter Amount.." maxlength="7" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
-                                                            <span class="text-danger d-none">Rent amount is
-                                                                required!</span>
-                                                        </div>
-                                                        <div class="col-md-1 text-center">
-                                                            <button type="button" class="btn position-relative p-0 d-flex">
-                                                                <i class="fi fi-rs-trash text-danger fs-5"></i>
-                                                            </button>
-                                                        </div>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" value="no" name="yesno"
+                                            required>
+                                        <label class="form-check-label" for="flexCheckChecked">
+                                            No
+                                        </label>
+                                    </div>
+
+                                </div>
+                                <div class="col-12 row">
+                                    <!-- <div class="col-md-5">
+                                        <label for="inputEmail4" class="form-label">Date of Rent Change
+                                            (Optional)</label>
+                                        <input type="email" class="form-control" id="inputEmail4">
+                                    </div>
+                                    <div class="col-md-5">
+                                        <label for="inputPassword4" class="form-label">Rent Amount Correlating to
+                                            that Date</label>
+                                        <input type="password" class="form-control" id="inputPassword4">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button>
+                                            <i class="fi fi-rs-trash"></i>
+                                        </button>
+                                    </div> -->
+                                    <div class="collapse" id="collapse2">
+                                        <div class="card card-body">
+                                            <div class="text-justify" id="add-item-container">
+                                                <div class="row row-multiple mb-2 pb-3" style="background-color: #F4FAFF !important;">
+                                                    <div class="col-md-6">
+                                                        <label for="inputEmail4" class="form-label">Date of Rent
+                                                            Change
+                                                            (Optional)</label>
+                                                        <input type="date" class="form-control input-date"
+                                                            id="dateofRentchange" required>
+                                                        <span class="text-danger d-none">Rent amount is
+                                                            required!</span>
                                                     </div>
-
-
+                                                    <div class="col-md-5">
+                                                        <label for="inputPassword4" class="form-label">Rent Amount
+                                                            Correlating to
+                                                            that Date</label>
+                                                        <input type="text" class="form-control input-amount"
+                                                            id="amountChange" pattern="[0-9]{7}"
+                                                            placeholder="Enter Amount.." maxlength="7"
+                                                            oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                                            required>
+                                                        <span class="text-danger d-none">Rent amount is
+                                                            required!</span>
+                                                    </div>
+                                                    <div class="col-md-1 d-flex justify-content-center align-items-end">
+                                                        <button type="button" class="btn p-0 del-btn">
+                                                            <i class="fi fi-rs-trash text-danger fs-5"></i>
+                                                        </button>
+                                                    </div>
                                                 </div>
+
+
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="javascript:;" class="mt-1" id="add-item">+Add Line Item</a>
-                                </form>
-                            </div>
+                                </div>
+                                <a href="javascript:;" class="mt-1" id="add-item">+Add Line Item</a>
+                            </form>
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
-                        Draft</button>
-                    <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close'>Close</button>
-                    <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
-                    <button class="btn text-light button" style='background-color:#1467B0;' id='next' disabled>Next</button>
-                    <button class="btn text-light button d-none" style='background-color:#1467B0;' id='submit'>Submit</button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft'
+                    disabled>Save as
+                    Draft</button>
+                <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal"
+                    id='close'>Close</button>
+                <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
+                <button class="btn text-light button" style='background-color:#1467B0;' id='next'
+                    disabled>Next</button>
+                    <button class="btn text-light button d-none" style='background-color:#1467B0;' id='submit'
+                    >Submit</button>
             </div>
         </div>
     </div>
+</div>
     <div class="modal fade" id="myModal_edit" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
@@ -2250,6 +2296,16 @@ color: #000;
     <script>
         var selectedFiles = [];
         $(document).ready(function() {
+            $('#add-item-container').on('click', '.del-btn', function () {
+                var $row = $(this).closest('.row');
+                var $rowsContainer = $row.parent();
+
+                if ($rowsContainer.children('.row').length > 1) {
+                    $row.remove();
+                } else {
+                    //   alert('Cannot delete the last row.');
+                }
+            });
             // $("#preloader").fadeIn("fast");
             // $("#succesModal").modal("show")
             let tenantID;
@@ -2321,7 +2377,7 @@ color: #000;
                 },
                 success: function(response) {
                     var properties = response.data; // Assuming the response data is an array of property objects
-                    console.log(properties)
+                    $("#user-name").text(response.user)
                         // Populate Select Property dropdown
                     var propertySelect = $('#property');
                     propertySelect.empty(); // Clear existing options
@@ -2375,7 +2431,7 @@ color: #000;
                                                                 oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                                           </div>
                                           <div class="col-md-1 d-flex justify-content-center align-items-end">
-                                                            <button type="button" class="btn p-0">
+                                                            <button type="button" class="btn p-0 del-btn">
                                                                 <i class="fi fi-rs-trash text-danger fs-5"></i>
                                                             </button>
                                                         </div>`)
@@ -2510,7 +2566,7 @@ color: #000;
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function(response) {
-                        
+                        console.log(response)
                             // Handle the success response
                         $("#succes-text").text(`Tenant has been successfully created and linked to ${formData.propertyUnitID} Unit with ${formData.propertyID}.`)
 
