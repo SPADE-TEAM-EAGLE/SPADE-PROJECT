@@ -50,7 +50,7 @@ router.get(
 );
 router.get(
   "/viewPropertyTenant",
-  verifyToken,
+  // verifyToken,
   userController.viewPropertyTenant
 );
 
