@@ -33,6 +33,7 @@
     <!--- FONT-ICONS CSS -->
     <link href="../assets/css/icons.css" rel="stylesheet" />
     <link rel="stylesheet" href="fancy_fileupload.css">
+
     <!-- COLOR SKIN CSS -->
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="../assets/colors/color1.css" />
 
@@ -605,11 +606,6 @@
             }
         }
 
-
-
-
-
-
         .btn-light {
             border-color: #000000 !important;
         }
@@ -834,7 +830,7 @@
         }
 
         .nav {
-            width: 1405px;
+            width: 1600px;
         }
 
         /* pricing cards start  */
@@ -1548,6 +1544,12 @@
         }
 
         /* email template active css end  */
+
+        .model-account-close-logo {
+            border: 4px solid orange;
+            border-radius: 50%;
+            padding: 10px 17px 10px 17px;
+        }
     </style>
 
 </head>
@@ -2292,6 +2294,7 @@
                                                     <li><a href="#tab12" data-bs-toggle="tab">Invoice Settings</a></li>
                                                     <li><a href="#tab13" data-bs-toggle="tab">Merchant Services</a></li>
                                                     <li><a href="#tab14" data-bs-toggle="tab">Vendors</a></li>
+                                                    <li><a href="#tab15" data-bs-toggle="tab">Close Account</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -7264,639 +7267,896 @@
                                                 </div>
                                             </div>
 
+                                            <div class="tab-pane mt-0" id="tab15">
+                                                <div class="card-body pt-0">
+                                                    <h2 class="h2-personal-inf">Close Account</h2>
+                                                    <p class="p-personal-inf">Remove accounts from this Accounts Centre.
+                                                        Removing an account will also remove any profiles managed by
+                                                        that account.</p>
+                                                    <hr style="background-color: #D3D3D3;">
+                                                    <h2 class="h2-personal-inf text-dark mb-3">Invoices</h2>
+                                                    <div
+                                                        style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
+                                                    </div>
+
+                                                    <div class="table-responsive">
+                                                        <table class="table border text-nowrap text-md-nowrap mb-0">
+                                                            <!-- <thead>
+                                                                <tr>
+                                                                    <th><label class="custom-control custom-checkbox-md">
+                                                                            <input type="checkbox" class="custom-control-input"
+                                                                                name="example-checkbox5" value="option5">
+                                                                            <span class="custom-control-label"></span>
+                                                                        </label></th>
+                                                                    <th>INVOICE NO.</th>
+                                                                    <th>MEMO/DESCRIPTION</th>
+                                                                    <th>INVOICE DATE</th>
+                                                                    <th>PROPERTY NAME</th>
+                                                                    <th>AMOUNT</th>
+                                                                    <th>STATUS</th>
+                                                                    <th><i class="fe fe-more-vertical" data-bs-toggle="tooltip" title="" data-bs-original-title="fe fe-more-vertical" aria-label="fe fe-more-vertical"></i></th>
+                                                                </tr>
+                                                            </thead> -->
+                                                            <tbody id="table_body">
+                                                                <tr>
+                                                                    <td class="text-primary">INV-5C5B28</td>
+                                                                    <td>
+                                                                        <p style="font-weight: 600;"
+                                                                            class="mb-1 text-primary">Justin Septimus
+                                                                        </p>
+                                                                        <span>Phone: (783) 220003</span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p style="font-weight: 600;" class="mb-1">Rent
+                                                                            for Jan Month</p>
+                                                                        <span>One Time Invoice</span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p style="font-weight: 600;" class="mb-1">
+                                                                            01/12/2023</p>
+                                                                        <span>Due Date: 01/17/2023</span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <b>3114 Stargate Ct</b>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p style="font-weight: 600;" class="mb-1">$3000
+                                                                        </p>
+                                                                    </td>
+                                                                    <td>
+                                                                        <b style="color: #FB233B;"><i
+                                                                                class="fi fi-rs-clock-three"
+                                                                                style="color: #FB233B;"></i> Unpaid</b>
+                                                                    </td>
+                                                                    <td><i class="fe fe-more-vertical"
+                                                                            data-bs-toggle="dropdown"></i>
+
+                                                                        <ul class="dropdown-menu">
+                                                                            <li><a class="dropdown-item"
+                                                                                    href="view-property.html"
+                                                                                    id="edit">View</a></li>
+                                                                            <li><a class="dropdown-item"
+                                                                                    href="javascript:void(0)"
+                                                                                    id="delete">Sent Reminder</a></li>
+                                                                            <li><a class="dropdown-item"
+                                                                                    href="javascript:void(0)">Change
+                                                                                    Status</a></li>
+                                                                            <li><a class="dropdown-item"
+                                                                                    href="javascript:void(0)">Resend
+                                                                                    Invoice</a></li>
+                                                                            <li><a class="dropdown-item"
+                                                                                    href="javascript:void(0)">Issue
+                                                                                    Refund</a></li>
+                                                                            <li><a class="dropdown-item delete-option"
+                                                                                    href="javascript:void(0)">Delete</a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td class="text-primary">INV-5C5B28</td>
+                                                                    <td>
+                                                                        <p style="font-weight: 600;"
+                                                                            class="mb-1 text-primary">Justin Septimus
+                                                                        </p>
+                                                                        <span>Phone: (783) 220003</span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p style="font-weight: 600;" class="mb-1">Rent
+                                                                            for Jan Month</p>
+                                                                        <span>One Time Invoice</span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p style="font-weight: 600;" class="mb-1">
+                                                                            01/12/2023</p>
+                                                                        <span>Due Date: 01/17/2023</span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <b>3114 Stargate Ct</b>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p style="font-weight: 600;" class="mb-1">$3000
+                                                                        </p>
+                                                                    </td>
+                                                                    <td>
+                                                                        <b style="color: #FB233B;"><i
+                                                                                class="fi fi-rs-clock-three"
+                                                                                style="color: #FB233B;"></i> Unpaid</b>
+                                                                    </td>
+                                                                    <td><i class="fe fe-more-vertical"
+                                                                            data-bs-toggle="dropdown"></i>
+
+                                                                        <ul class="dropdown-menu">
+                                                                            <li><a class="dropdown-item"
+                                                                                    href="view-property.html"
+                                                                                    id="edit">View</a></li>
+                                                                            <li><a class="dropdown-item"
+                                                                                    href="javascript:void(0)"
+                                                                                    id="delete">Sent Reminder</a></li>
+                                                                            <li><a class="dropdown-item"
+                                                                                    href="javascript:void(0)">Change
+                                                                                    Status</a></li>
+                                                                            <li><a class="dropdown-item"
+                                                                                    href="javascript:void(0)">Resend
+                                                                                    Invoice</a></li>
+                                                                            <li><a class="dropdown-item"
+                                                                                    href="javascript:void(0)">Issue
+                                                                                    Refund</a></li>
+                                                                            <li><a class="dropdown-item delete-option"
+                                                                                    href="javascript:void(0)">Delete</a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </td>
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+
+                                                    <div class="row mt-5">
+                                                        <div class="col-lg-6">
+                                                            <div class="card card-color card-primary">
+                                                                <div class="card-body">
+                                                                    <div class="row" style="align-items: center;">
+                                                                        <div class="col-xl-5 col-sm-5 col-md-12">
+                                                                            <div
+                                                                                style="display: flex; align-items: center;">
+                                                                                <span
+                                                                                    class="settings-icon bg-primary-transparent text-primary"><img
+                                                                                        src="../assets/images/logo_loginmodule.png"></span>
+                                                                                &nbsp;&nbsp; <div
+                                                                                    style="display: inline-block;">
+                                                                                    <h3 class="mb-0">John Clark</h3>
+                                                                                    <span>
+                                                                                        <p>Spade Rent</p>
+                                                                                    </span>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="col-xl-7 col-sm-7 col-md-12"
+                                                                            style="display: flex; justify-content: end;">
+                                                                            <button
+                                                                                class="btn btn-light text-primaryy btn-pill m-2"
+                                                                                data-bs-target="#closeaccount"
+                                                                                data-bs-toggle="modal"
+                                                                                style="width: fit-content; border: transparent;"><b>Close
+                                                                                    Account</b></button>
+                                                                        </div>
+
+                                                                        <div class="row">
+                                                                            <div class="col-lg-6">
+                                                                                <div class="wrap-input100 validate-input input-group"
+                                                                                    id="Password-toggle"> <a
+                                                                                        href="javascript:void(0)"
+                                                                                        class="input-group-text bg-white text-muted">
+                                                                                        <i class="zmdi text-muted zmdi-eye-off"
+                                                                                            aria-hidden="true"></i> </a>
+                                                                                    <input
+                                                                                        class="input100 border-start-0 form-control ms-0"
+                                                                                        type="text"
+                                                                                        placeholder="Password"> </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <!-- close account model box start  -->
+                                                                        <div class="modal fade" id="closeaccount"
+                                                                            tabindex="-1" role="dialog">
+                                                                            <div class="modal-dialog modal-md modal-dialog-scrollable"
+                                                                                role="document">
+                                                                                <div class="modal-content">
+                                                                                    <div class="modal-header">
+                                                                                        <button class="btn-close"
+                                                                                            data-bs-dismiss="modal"
+                                                                                            aria-label="Close">
+                                                                                            <span
+                                                                                                aria-hidden="true"><img
+                                                                                                    src="../assets/images/cross-circle.svg" /></span>
+                                                                                        </button>
+                                                                                    </div>
+                                                                                    <div
+                                                                                        class="modal-body text-center text-dark">
+                                                                                        <img src="../assets/images/logo_loginmodule.png"
+                                                                                            class="model-account-close-logo"
+                                                                                            alt="">
+                                                                                        <h2 class="mt-5 mb-0">John Clark
+                                                                                        </h2>
+                                                                                        <h4>Spade Rent</h4>
+                                                                                        <h2><b>Remove this account from
+                                                                                                your
+                                                                                                Accounts Centre?</b>
+                                                                                        </h2>
+
+                                                                                        <button
+                                                                                            class="btn btn-primary btn-pill m-2"
+                                                                                            data-bs-target="#continueaccount"
+                                                                                            data-bs-toggle="modal"
+                                                                                            style="width: fit-content;">
+                                                                                            &nbsp; Continue &nbsp;
+                                                                                        </button>
+                                                                                    </div>
+                                                                                    <div class="modal-footer">
+
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <!-- close account model box start  -->
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="card-body pb-0 bg-recentorder" style="display: none;">
+                                    <h3 class="card-title text-white">Recent Orders</h3>
+                                    <div class="chartjs-wrapper-demo">
+                                        <canvas id="recentorders" class="chart-dropshadow"></canvas>
+                                    </div>
+                                </div>
+                                <div id="flotback-chart" class="flot-background" style="display: none;"></div>
+
+                            </div>
+
+                        </div>
+                        <!-- ROW-2 END -->
+
+
+
+
+                        <div class="card-body pb-0 bg-recentorder" style="display: none;">
+                            <h3 class="card-title text-white">Recent Orders</h3>
+                            <div class="chartjs-wrapper-demo">
+                                <canvas id="recentorders" class="chart-dropshadow"></canvas>
+                            </div>
+                        </div>
+                        <div id="flotback-chart" class="flot-background" style="display: none;"></div>
+
+                    </div>
+                    <!-- CONTAINER END -->
+                </div>
+            </div>
+            <!--app-content close-->
+
+        </div>
+
+        <!-- Sidebar-right -->
+        <div class="sidebar sidebar-right sidebar-animate">
+            <div class="panel panel-primary card mb-0 shadow-none border-0">
+                <div class="tab-menu-heading border-0 d-flex p-3">
+                    <div class="card-title mb-0"><i class="fe fe-bell me-2"></i><span
+                            class=" pulse"></span>Notifications
+                    </div>
+                    <div class="card-options ms-auto">
+                        <a href="javascript:void(0);" class="sidebar-icon text-end float-end me-3 mb-1"
+                            data-bs-toggle="sidebar-right" data-target=".sidebar-right"><i
+                                class="fe fe-x text-white"></i></a>
+                    </div>
+                </div>
+                <div class="panel-body tabs-menu-body latest-tasks p-0 border-0">
+                    <div class="tabs-menu border-bottom">
+                        <!-- Tabs -->
+                        <ul class="nav panel-tabs">
+                            <li class=""><a href="#side1" class="active" data-bs-toggle="tab"><i
+                                        class="fe fe-settings me-1"></i>Feeds</a></li>
+                            <li><a href="#side2" data-bs-toggle="tab"><i class="fe fe-message-circle"></i> Chat</a></li>
+                            <li><a href="#side3" data-bs-toggle="tab"><i class="fe fe-anchor me-1"></i>Timeline</a></li>
+                        </ul>
+                    </div>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="side1">
+                            <div class="p-3 fw-semibold ps-5">Feeds</div>
+                            <div class="card-body pt-2">
+                                <div class="browser-stats">
+                                    <div class="row mb-4">
+                                        <div class="col-sm-2 mb-sm-0 mb-3">
+                                            <span class="feeds avatar-circle brround bg-primary-transparent"><i
+                                                    class="fe fe-user text-primary"></i></span>
+                                        </div>
+                                        <div class="col-sm-10 ps-sm-0">
+                                            <div class="d-flex align-items-end justify-content-between ms-2">
+                                                <h6 class="">New user registered</h6>
+                                                <div>
+                                                    <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
+                                                    <a href="javascript:void(0)"><i class="fe fe-x"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <div class="col-sm-2 mb-sm-0 mb-3">
+                                            <span
+                                                class="feeds avatar-circle avatar-circle-secondary brround bg-secondary-transparent"><i
+                                                    class="fe fe-shopping-cart text-secondary"></i></span>
+                                        </div>
+                                        <div class="col-sm-10 ps-sm-0">
+                                            <div class="d-flex align-items-end justify-content-between ms-2">
+                                                <h6 class="">New order delivered</h6>
+                                                <div>
+                                                    <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
+                                                    <a href="javascript:void(0)"><i class="fe fe-x"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <div class="col-sm-2 mb-sm-0 mb-3">
+                                            <span
+                                                class="feeds avatar-circle avatar-circle-danger brround bg-danger-transparent"><i
+                                                    class="fe fe-bell text-danger"></i></span>
+                                        </div>
+                                        <div class="col-sm-10 ps-sm-0">
+                                            <div class="d-flex align-items-end justify-content-between ms-2">
+                                                <h6 class="">You have pending tasks</h6>
+                                                <div>
+                                                    <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
+                                                    <a href="javascript:void(0)"><i class="fe fe-x"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <div class="col-sm-2 mb-sm-0 mb-3">
+                                            <span
+                                                class="feeds avatar-circle avatar-circle-warning brround bg-warning-transparent"><i
+                                                    class="fe fe-gitlab text-warning"></i></span>
+                                        </div>
+                                        <div class="col-sm-10 ps-sm-0">
+                                            <div class="d-flex align-items-end justify-content-between ms-2">
+                                                <h6 class="">New version arrived</h6>
+                                                <div>
+                                                    <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
+                                                    <a href="javascript:void(0)"><i class="fe fe-x"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <div class="col-sm-2 mb-sm-0 mb-3">
+                                            <span
+                                                class="feeds avatar-circle avatar-circle-pink brround bg-pink-transparent"><i
+                                                    class="fe fe-database text-pink"></i></span>
+                                        </div>
+                                        <div class="col-sm-10 ps-sm-0">
+                                            <div class="d-flex align-items-end justify-content-between ms-2">
+                                                <h6 class="">Server #1 overloaded</h6>
+                                                <div>
+                                                    <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
+                                                    <a href="javascript:void(0)"><i class="fe fe-x"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-2 mb-sm-0 mb-3">
+                                            <span
+                                                class="feeds avatar-circle avatar-circle-info brround bg-info-transparent"><i
+                                                    class="fe fe-check-circle text-info"></i></span>
+                                        </div>
+                                        <div class="col-sm-10 ps-sm-0">
+                                            <div class="d-flex align-items-end justify-content-between ms-2">
+                                                <h6 class="">New project launched</h6>
+                                                <div>
+                                                    <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
+                                                    <a href="javascript:void(0)"><i class="fe fe-x"></i></a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-
-                            <div class="card-body pb-0 bg-recentorder" style="display: none;">
-                                <h3 class="card-title text-white">Recent Orders</h3>
-                                <div class="chartjs-wrapper-demo">
-                                    <canvas id="recentorders" class="chart-dropshadow"></canvas>
+                            <div class="p-3 fw-semibold ps-5">Settings</div>
+                            <div class="card-body pt-2">
+                                <div class="browser-stats">
+                                    <div class="row mb-4">
+                                        <div class="col-sm-2 mb-sm-0 mb-3">
+                                            <span class="feeds avatar-circle brround bg-primary-transparent"><i
+                                                    class="fe fe-settings text-primary"></i></span>
+                                        </div>
+                                        <div class="col-sm-10 ps-sm-0">
+                                            <div class="d-flex align-items-end justify-content-between ms-2">
+                                                <h6 class="">General Settings</h6>
+                                                <div>
+                                                    <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <div class="col-sm-2 mb-sm-0 mb-3">
+                                            <span
+                                                class="feeds avatar-circle avatar-circle-secondary brround bg-secondary-transparent"><i
+                                                    class="fe fe-map-pin text-secondary"></i></span>
+                                        </div>
+                                        <div class="col-sm-10 ps-sm-0">
+                                            <div class="d-flex align-items-end justify-content-between ms-2">
+                                                <h6 class="">Map Settings</h6>
+                                                <div>
+                                                    <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <div class="col-sm-2 mb-sm-0 mb-3">
+                                            <span
+                                                class="feeds avatar-circle avatar-circle-danger brround bg-danger-transparent"><i
+                                                    class="fe fe-headphones text-danger"></i></span>
+                                        </div>
+                                        <div class="col-sm-10 ps-sm-0">
+                                            <div class="d-flex align-items-end justify-content-between ms-2">
+                                                <h6 class="">Support Settings</h6>
+                                                <div>
+                                                    <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <div class="col-sm-2 mb-sm-0 mb-3">
+                                            <span
+                                                class="feeds avatar-circle avatar-circle-warning brround bg-warning-transparent"><i
+                                                    class="fe fe-credit-card text-warning"></i></span>
+                                        </div>
+                                        <div class="col-sm-10 ps-sm-0">
+                                            <div class="d-flex align-items-end justify-content-between ms-2">
+                                                <h6 class="">Payment Settings</h6>
+                                                <div>
+                                                    <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <div class="col-sm-2 mb-sm-0 mb-3">
+                                            <span
+                                                class="feeds avatar-circle avatar-circle-pink brround bg-pink-transparent"><i
+                                                    class="fe fe-bell text-pink"></i></span>
+                                        </div>
+                                        <div class="col-sm-10 ps-sm-0">
+                                            <div class="d-flex align-items-end justify-content-between ms-2">
+                                                <h6 class="">Notification Settings</h6>
+                                                <div>
+                                                    <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div id="flotback-chart" class="flot-background" style="display: none;"></div>
-
                         </div>
-
-                    </div>
-                    <!-- ROW-2 END -->
-
-
-
-
-                    <div class="card-body pb-0 bg-recentorder" style="display: none;">
-                        <h3 class="card-title text-white">Recent Orders</h3>
-                        <div class="chartjs-wrapper-demo">
-                            <canvas id="recentorders" class="chart-dropshadow"></canvas>
+                        <div class="tab-pane" id="side2">
+                            <div class="list-group list-group-flush">
+                                <div class="pt-3 fw-semibold ps-5">Today</div>
+                                <div class="list-group-item d-flex align-items-center">
+                                    <div class="me-2">
+                                        <span class="avatar avatar-md brround cover-image"
+                                            data-bs-image-src="../assets/images/users/2.jpg"></span>
+                                    </div>
+                                    <div class="">
+                                        <a href="chat.html">
+                                            <div class="fw-semibold text-dark" data-bs-toggle="modal"
+                                                data-target="#chatmodel">Addie Minstra</div>
+                                            <p class="mb-0 fs-12 text-muted"> Hey! there I' am available.... </p>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="list-group-item d-flex align-items-center">
+                                    <div class="me-2">
+                                        <span class="avatar avatar-md brround cover-image"
+                                            data-bs-image-src="../assets/images/users/11.jpg"><span
+                                                class="avatar-status bg-success"></span></span>
+                                    </div>
+                                    <div class="">
+                                        <a href="chat.html">
+                                            <div class="fw-semibold text-dark" data-bs-toggle="modal"
+                                                data-target="#chatmodel">Rose Bush</div>
+                                            <p class="mb-0 fs-12 text-muted"> Okay...I will be waiting for you </p>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="list-group-item d-flex align-items-center">
+                                    <div class="me-2">
+                                        <span class="avatar avatar-md brround cover-image"
+                                            data-bs-image-src="../assets/images/users/10.jpg"></span>
+                                    </div>
+                                    <div class="">
+                                        <a href="chat.html">
+                                            <div class="fw-semibold text-dark" data-bs-toggle="modal"
+                                                data-target="#chatmodel">Claude Strophobia</div>
+                                            <p class="mb-0 fs-12 text-muted"> Hi we can explain our new project......
+                                            </p>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="list-group-item d-flex align-items-center">
+                                    <div class="me-2">
+                                        <span class="avatar avatar-md brround cover-image"
+                                            data-bs-image-src="../assets/images/users/13.jpg"></span>
+                                    </div>
+                                    <div class="">
+                                        <a href="chat.html">
+                                            <div class="fw-semibold text-dark" data-bs-toggle="modal"
+                                                data-target="#chatmodel">Eileen Dover</div>
+                                            <p class="mb-0 fs-12 text-muted"> New product Launching... </p>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="list-group-item d-flex align-items-center">
+                                    <div class="me-2">
+                                        <span class="avatar avatar-md brround cover-image"
+                                            data-bs-image-src="../assets/images/users/12.jpg"><span
+                                                class="avatar-status bg-success"></span></span>
+                                    </div>
+                                    <div class="">
+                                        <a href="chat.html">
+                                            <div class="fw-semibold text-dark" data-bs-toggle="modal"
+                                                data-target="#chatmodel">Willie Findit</div>
+                                            <p class="mb-0 fs-12 text-muted"> Okay...I will be waiting for you </p>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="list-group-item d-flex align-items-center">
+                                    <div class="me-2">
+                                        <span class="avatar avatar-md brround cover-image"
+                                            data-bs-image-src="../assets/images/users/15.jpg"></span>
+                                    </div>
+                                    <div class="">
+                                        <a href="chat.html">
+                                            <div class="fw-semibold text-dark" data-bs-toggle="modal"
+                                                data-target="#chatmodel">Manny Jah</div>
+                                            <p class="mb-0 fs-12 text-muted"> Hi we can explain our new project......
+                                            </p>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="list-group-item d-flex align-items-center">
+                                    <div class="me-2">
+                                        <span class="avatar avatar-md brround cover-image"
+                                            data-bs-image-src="../assets/images/users/4.jpg"></span>
+                                    </div>
+                                    <div class="">
+                                        <a href="chat.html">
+                                            <div class="fw-semibold text-dark" data-bs-toggle="modal"
+                                                data-target="#chatmodel">Cherry Blossom</div>
+                                            <p class="mb-0 fs-12 text-muted"> Hey! there I' am available....</p>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="pt-3 fw-semibold ps-5">Yesterday</div>
+                                <div class="list-group-item d-flex align-items-center">
+                                    <div class="me-2">
+                                        <span class="avatar avatar-md brround cover-image"
+                                            data-bs-image-src="../assets/images/users/7.jpg"><span
+                                                class="avatar-status bg-success"></span></span>
+                                    </div>
+                                    <div class="">
+                                        <a href="chat.html">
+                                            <div class="fw-semibold text-dark" data-bs-toggle="modal"
+                                                data-target="#chatmodel">Simon Sais</div>
+                                            <p class="mb-0 fs-12 text-muted">Schedule Realease...... </p>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="list-group-item d-flex align-items-center">
+                                    <div class="me-2">
+                                        <span class="avatar avatar-md brround cover-image"
+                                            data-bs-image-src="../assets/images/users/9.jpg"></span>
+                                    </div>
+                                    <div class="">
+                                        <a href="chat.html">
+                                            <div class="fw-semibold text-dark" data-bs-toggle="modal"
+                                                data-target="#chatmodel">Laura Biding</div>
+                                            <p class="mb-0 fs-12 text-muted"> Hi we can explain our new project......
+                                            </p>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="list-group-item d-flex align-items-center">
+                                    <div class="me-2">
+                                        <span class="avatar avatar-md brround cover-image"
+                                            data-bs-image-src="../assets/images/users/2.jpg"><span
+                                                class="avatar-status bg-success"></span></span>
+                                    </div>
+                                    <div class="">
+                                        <a href="chat.html">
+                                            <div class="fw-semibold text-dark" data-bs-toggle="modal"
+                                                data-target="#chatmodel">Addie Minstra</div>
+                                            <p class="mb-0 fs-12 text-muted">Contact me for details....</p>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="list-group-item d-flex align-items-center">
+                                    <div class="me-2">
+                                        <span class="avatar avatar-md brround cover-image"
+                                            data-bs-image-src="../assets/images/users/9.jpg"></span>
+                                    </div>
+                                    <div class="">
+                                        <a href="chat.html">
+                                            <div class="fw-semibold text-dark" data-bs-toggle="modal"
+                                                data-target="#chatmodel">Ivan Notheridiya</div>
+                                            <p class="mb-0 fs-12 text-muted"> Hi we can explain our new project......
+                                            </p>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="list-group-item d-flex align-items-center">
+                                    <div class="me-2">
+                                        <span class="avatar avatar-md brround cover-image"
+                                            data-bs-image-src="../assets/images/users/14.jpg"></span>
+                                    </div>
+                                    <div class="">
+                                        <a href="chat.html">
+                                            <div class="fw-semibold text-dark" data-bs-toggle="modal"
+                                                data-target="#chatmodel">Dulcie Veeta</div>
+                                            <p class="mb-0 fs-12 text-muted"> Okay...I will be waiting for you </p>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="list-group-item d-flex align-items-center">
+                                    <div class="me-2">
+                                        <span class="avatar avatar-md brround cover-image"
+                                            data-bs-image-src="../assets/images/users/11.jpg"></span>
+                                    </div>
+                                    <div class="">
+                                        <a href="chat.html">
+                                            <div class="fw-semibold text-dark" data-bs-toggle="modal"
+                                                data-target="#chatmodel">Florinda Carasco</div>
+                                            <p class="mb-0 fs-12 text-muted">New product Launching...</p>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="list-group-item d-flex align-items-center">
+                                    <div class="me-2">
+                                        <span class="avatar avatar-md brround cover-image"
+                                            data-bs-image-src="../assets/images/users/4.jpg"><span
+                                                class="avatar-status bg-success"></span></span>
+                                    </div>
+                                    <div class="">
+                                        <a href="chat.html">
+                                            <div class="fw-semibold text-dark" data-bs-toggle="modal"
+                                                data-target="#chatmodel">Cherry Blossom</div>
+                                            <p class="mb-0 fs-12 text-muted">cherryblossom@gmail.com</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="side3">
+                            <ul class="task-list timeline-task">
+                                <li class="d-sm-flex mt-4">
+                                    <div>
+                                        <i class="task-icon1"></i>
+                                        <h6 class="fw-semibold">Task Finished<span
+                                                class="text-muted fs-11 mx-2 fw-normal">09 July 2021</span></h6>
+                                        <p class="text-muted fs-12">Adam Berry finished task on<a
+                                                href="javascript:void(0)" class="fw-semibold"> Project Management</a>
+                                        </p>
+                                    </div>
+                                    <div class="ms-auto d-md-flex me-3">
+                                        <a href="javascript:void(0)" class="text-muted me-2"><span
+                                                class="fe fe-edit"></span></a>
+                                        <a href="javascript:void(0)" class="text-muted"><span
+                                                class="fe fe-trash-2"></span></a>
+                                    </div>
+                                </li>
+                                <li class="d-sm-flex">
+                                    <div>
+                                        <i class="task-icon1"></i>
+                                        <h6 class="fw-semibold">New Comment<span
+                                                class="text-muted fs-11 mx-2 fw-normal">05
+                                                July 2021</span></h6>
+                                        <p class="text-muted fs-12">Victoria commented on Project <a
+                                                href="javascript:void(0)" class="fw-semibold"> AngularJS Template</a>
+                                        </p>
+                                    </div>
+                                    <div class="ms-auto d-md-flex me-3">
+                                        <a href="javascript:void(0)" class="text-muted me-2"><span
+                                                class="fe fe-edit"></span></a>
+                                        <a href="javascript:void(0)" class="text-muted"><span
+                                                class="fe fe-trash-2"></span></a>
+                                    </div>
+                                </li>
+                                <li class="d-sm-flex">
+                                    <div>
+                                        <i class="task-icon1"></i>
+                                        <h6 class="fw-semibold">New Comment<span
+                                                class="text-muted fs-11 mx-2 fw-normal">25
+                                                June 2021</span></h6>
+                                        <p class="text-muted fs-12">Victoria commented on Project <a
+                                                href="javascript:void(0)" class="fw-semibold"> AngularJS Template</a>
+                                        </p>
+                                    </div>
+                                    <div class="ms-auto d-md-flex me-3">
+                                        <a href="javascript:void(0)" class="text-muted me-2"><span
+                                                class="fe fe-edit"></span></a>
+                                        <a href="javascript:void(0)" class="text-muted"><span
+                                                class="fe fe-trash-2"></span></a>
+                                    </div>
+                                </li>
+                                <li class="d-sm-flex">
+                                    <div>
+                                        <i class="task-icon1"></i>
+                                        <h6 class="fw-semibold">Task Overdue<span
+                                                class="text-muted fs-11 mx-2 fw-normal">14
+                                                June 2021</span></h6>
+                                        <p class="text-muted mb-0 fs-12">Petey Cruiser finished task <a
+                                                href="javascript:void(0)" class="fw-semibold"> Integrated management</a>
+                                        </p>
+                                    </div>
+                                    <div class="ms-auto d-md-flex me-3">
+                                        <a href="javascript:void(0)" class="text-muted me-2"><span
+                                                class="fe fe-edit"></span></a>
+                                        <a href="javascript:void(0)" class="text-muted"><span
+                                                class="fe fe-trash-2"></span></a>
+                                    </div>
+                                </li>
+                                <li class="d-sm-flex">
+                                    <div>
+                                        <i class="task-icon1"></i>
+                                        <h6 class="fw-semibold">Task Overdue<span
+                                                class="text-muted fs-11 mx-2 fw-normal">29
+                                                June 2021</span></h6>
+                                        <p class="text-muted mb-0 fs-12">Petey Cruiser finished task <a
+                                                href="javascript:void(0)" class="fw-semibold"> Integrated management</a>
+                                        </p>
+                                    </div>
+                                    <div class="ms-auto d-md-flex me-3">
+                                        <a href="javascript:void(0)" class="text-muted me-2"><span
+                                                class="fe fe-edit"></span></a>
+                                        <a href="javascript:void(0)" class="text-muted"><span
+                                                class="fe fe-trash-2"></span></a>
+                                    </div>
+                                </li>
+                                <li class="d-sm-flex">
+                                    <div>
+                                        <i class="task-icon1"></i>
+                                        <h6 class="fw-semibold">Task Finished<span
+                                                class="text-muted fs-11 mx-2 fw-normal">09 July 2021</span></h6>
+                                        <p class="text-muted fs-12">Adam Berry finished task on<a
+                                                href="javascript:void(0)" class="fw-semibold"> Project Management</a>
+                                        </p>
+                                    </div>
+                                    <div class="ms-auto d-md-flex me-3">
+                                        <a href="javascript:void(0)" class="text-muted me-2"><span
+                                                class="fe fe-edit"></span></a>
+                                        <a href="javascript:void(0)" class="text-muted"><span
+                                                class="fe fe-trash-2"></span></a>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                    <div id="flotback-chart" class="flot-background" style="display: none;"></div>
-
                 </div>
-                <!-- CONTAINER END -->
             </div>
         </div>
-        <!--app-content close-->
+        <!--/Sidebar-right-->
 
-    </div>
-
-    <!-- Sidebar-right -->
-    <div class="sidebar sidebar-right sidebar-animate">
-        <div class="panel panel-primary card mb-0 shadow-none border-0">
-            <div class="tab-menu-heading border-0 d-flex p-3">
-                <div class="card-title mb-0"><i class="fe fe-bell me-2"></i><span class=" pulse"></span>Notifications
-                </div>
-                <div class="card-options ms-auto">
-                    <a href="javascript:void(0);" class="sidebar-icon text-end float-end me-3 mb-1"
-                        data-bs-toggle="sidebar-right" data-target=".sidebar-right"><i
-                            class="fe fe-x text-white"></i></a>
-                </div>
-            </div>
-            <div class="panel-body tabs-menu-body latest-tasks p-0 border-0">
-                <div class="tabs-menu border-bottom">
-                    <!-- Tabs -->
-                    <ul class="nav panel-tabs">
-                        <li class=""><a href="#side1" class="active" data-bs-toggle="tab"><i
-                                    class="fe fe-settings me-1"></i>Feeds</a></li>
-                        <li><a href="#side2" data-bs-toggle="tab"><i class="fe fe-message-circle"></i> Chat</a></li>
-                        <li><a href="#side3" data-bs-toggle="tab"><i class="fe fe-anchor me-1"></i>Timeline</a></li>
-                    </ul>
-                </div>
-                <div class="tab-content">
-                    <div class="tab-pane active" id="side1">
-                        <div class="p-3 fw-semibold ps-5">Feeds</div>
-                        <div class="card-body pt-2">
-                            <div class="browser-stats">
-                                <div class="row mb-4">
-                                    <div class="col-sm-2 mb-sm-0 mb-3">
-                                        <span class="feeds avatar-circle brround bg-primary-transparent"><i
-                                                class="fe fe-user text-primary"></i></span>
-                                    </div>
-                                    <div class="col-sm-10 ps-sm-0">
-                                        <div class="d-flex align-items-end justify-content-between ms-2">
-                                            <h6 class="">New user registered</h6>
-                                            <div>
-                                                <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
-                                                <a href="javascript:void(0)"><i class="fe fe-x"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mb-4">
-                                    <div class="col-sm-2 mb-sm-0 mb-3">
-                                        <span
-                                            class="feeds avatar-circle avatar-circle-secondary brround bg-secondary-transparent"><i
-                                                class="fe fe-shopping-cart text-secondary"></i></span>
-                                    </div>
-                                    <div class="col-sm-10 ps-sm-0">
-                                        <div class="d-flex align-items-end justify-content-between ms-2">
-                                            <h6 class="">New order delivered</h6>
-                                            <div>
-                                                <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
-                                                <a href="javascript:void(0)"><i class="fe fe-x"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mb-4">
-                                    <div class="col-sm-2 mb-sm-0 mb-3">
-                                        <span
-                                            class="feeds avatar-circle avatar-circle-danger brround bg-danger-transparent"><i
-                                                class="fe fe-bell text-danger"></i></span>
-                                    </div>
-                                    <div class="col-sm-10 ps-sm-0">
-                                        <div class="d-flex align-items-end justify-content-between ms-2">
-                                            <h6 class="">You have pending tasks</h6>
-                                            <div>
-                                                <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
-                                                <a href="javascript:void(0)"><i class="fe fe-x"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mb-4">
-                                    <div class="col-sm-2 mb-sm-0 mb-3">
-                                        <span
-                                            class="feeds avatar-circle avatar-circle-warning brround bg-warning-transparent"><i
-                                                class="fe fe-gitlab text-warning"></i></span>
-                                    </div>
-                                    <div class="col-sm-10 ps-sm-0">
-                                        <div class="d-flex align-items-end justify-content-between ms-2">
-                                            <h6 class="">New version arrived</h6>
-                                            <div>
-                                                <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
-                                                <a href="javascript:void(0)"><i class="fe fe-x"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mb-4">
-                                    <div class="col-sm-2 mb-sm-0 mb-3">
-                                        <span
-                                            class="feeds avatar-circle avatar-circle-pink brround bg-pink-transparent"><i
-                                                class="fe fe-database text-pink"></i></span>
-                                    </div>
-                                    <div class="col-sm-10 ps-sm-0">
-                                        <div class="d-flex align-items-end justify-content-between ms-2">
-                                            <h6 class="">Server #1 overloaded</h6>
-                                            <div>
-                                                <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
-                                                <a href="javascript:void(0)"><i class="fe fe-x"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-2 mb-sm-0 mb-3">
-                                        <span
-                                            class="feeds avatar-circle avatar-circle-info brround bg-info-transparent"><i
-                                                class="fe fe-check-circle text-info"></i></span>
-                                    </div>
-                                    <div class="col-sm-10 ps-sm-0">
-                                        <div class="d-flex align-items-end justify-content-between ms-2">
-                                            <h6 class="">New project launched</h6>
-                                            <div>
-                                                <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
-                                                <a href="javascript:void(0)"><i class="fe fe-x"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-3 fw-semibold ps-5">Settings</div>
-                        <div class="card-body pt-2">
-                            <div class="browser-stats">
-                                <div class="row mb-4">
-                                    <div class="col-sm-2 mb-sm-0 mb-3">
-                                        <span class="feeds avatar-circle brround bg-primary-transparent"><i
-                                                class="fe fe-settings text-primary"></i></span>
-                                    </div>
-                                    <div class="col-sm-10 ps-sm-0">
-                                        <div class="d-flex align-items-end justify-content-between ms-2">
-                                            <h6 class="">General Settings</h6>
-                                            <div>
-                                                <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mb-4">
-                                    <div class="col-sm-2 mb-sm-0 mb-3">
-                                        <span
-                                            class="feeds avatar-circle avatar-circle-secondary brround bg-secondary-transparent"><i
-                                                class="fe fe-map-pin text-secondary"></i></span>
-                                    </div>
-                                    <div class="col-sm-10 ps-sm-0">
-                                        <div class="d-flex align-items-end justify-content-between ms-2">
-                                            <h6 class="">Map Settings</h6>
-                                            <div>
-                                                <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mb-4">
-                                    <div class="col-sm-2 mb-sm-0 mb-3">
-                                        <span
-                                            class="feeds avatar-circle avatar-circle-danger brround bg-danger-transparent"><i
-                                                class="fe fe-headphones text-danger"></i></span>
-                                    </div>
-                                    <div class="col-sm-10 ps-sm-0">
-                                        <div class="d-flex align-items-end justify-content-between ms-2">
-                                            <h6 class="">Support Settings</h6>
-                                            <div>
-                                                <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mb-4">
-                                    <div class="col-sm-2 mb-sm-0 mb-3">
-                                        <span
-                                            class="feeds avatar-circle avatar-circle-warning brround bg-warning-transparent"><i
-                                                class="fe fe-credit-card text-warning"></i></span>
-                                    </div>
-                                    <div class="col-sm-10 ps-sm-0">
-                                        <div class="d-flex align-items-end justify-content-between ms-2">
-                                            <h6 class="">Payment Settings</h6>
-                                            <div>
-                                                <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mb-4">
-                                    <div class="col-sm-2 mb-sm-0 mb-3">
-                                        <span
-                                            class="feeds avatar-circle avatar-circle-pink brround bg-pink-transparent"><i
-                                                class="fe fe-bell text-pink"></i></span>
-                                    </div>
-                                    <div class="col-sm-10 ps-sm-0">
-                                        <div class="d-flex align-items-end justify-content-between ms-2">
-                                            <h6 class="">Notification Settings</h6>
-                                            <div>
-                                                <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+        <!-- Country-selector modal-->
+        <div class="modal fade" id="country-selector">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content country-select-modal">
+                    <div class="modal-header">
+                        <h6 class="modal-title">Choose Country</h6><button aria-label="Close" class="btn-close"
+                            data-bs-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
                     </div>
-                    <div class="tab-pane" id="side2">
-                        <div class="list-group list-group-flush">
-                            <div class="pt-3 fw-semibold ps-5">Today</div>
-                            <div class="list-group-item d-flex align-items-center">
-                                <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image"
-                                        data-bs-image-src="../assets/images/users/2.jpg"></span>
-                                </div>
-                                <div class="">
-                                    <a href="chat.html">
-                                        <div class="fw-semibold text-dark" data-bs-toggle="modal"
-                                            data-target="#chatmodel">Addie Minstra</div>
-                                        <p class="mb-0 fs-12 text-muted"> Hey! there I' am available.... </p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="list-group-item d-flex align-items-center">
-                                <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image"
-                                        data-bs-image-src="../assets/images/users/11.jpg"><span
-                                            class="avatar-status bg-success"></span></span>
-                                </div>
-                                <div class="">
-                                    <a href="chat.html">
-                                        <div class="fw-semibold text-dark" data-bs-toggle="modal"
-                                            data-target="#chatmodel">Rose Bush</div>
-                                        <p class="mb-0 fs-12 text-muted"> Okay...I will be waiting for you </p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="list-group-item d-flex align-items-center">
-                                <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image"
-                                        data-bs-image-src="../assets/images/users/10.jpg"></span>
-                                </div>
-                                <div class="">
-                                    <a href="chat.html">
-                                        <div class="fw-semibold text-dark" data-bs-toggle="modal"
-                                            data-target="#chatmodel">Claude Strophobia</div>
-                                        <p class="mb-0 fs-12 text-muted"> Hi we can explain our new project......
-                                        </p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="list-group-item d-flex align-items-center">
-                                <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image"
-                                        data-bs-image-src="../assets/images/users/13.jpg"></span>
-                                </div>
-                                <div class="">
-                                    <a href="chat.html">
-                                        <div class="fw-semibold text-dark" data-bs-toggle="modal"
-                                            data-target="#chatmodel">Eileen Dover</div>
-                                        <p class="mb-0 fs-12 text-muted"> New product Launching... </p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="list-group-item d-flex align-items-center">
-                                <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image"
-                                        data-bs-image-src="../assets/images/users/12.jpg"><span
-                                            class="avatar-status bg-success"></span></span>
-                                </div>
-                                <div class="">
-                                    <a href="chat.html">
-                                        <div class="fw-semibold text-dark" data-bs-toggle="modal"
-                                            data-target="#chatmodel">Willie Findit</div>
-                                        <p class="mb-0 fs-12 text-muted"> Okay...I will be waiting for you </p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="list-group-item d-flex align-items-center">
-                                <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image"
-                                        data-bs-image-src="../assets/images/users/15.jpg"></span>
-                                </div>
-                                <div class="">
-                                    <a href="chat.html">
-                                        <div class="fw-semibold text-dark" data-bs-toggle="modal"
-                                            data-target="#chatmodel">Manny Jah</div>
-                                        <p class="mb-0 fs-12 text-muted"> Hi we can explain our new project......
-                                        </p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="list-group-item d-flex align-items-center">
-                                <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image"
-                                        data-bs-image-src="../assets/images/users/4.jpg"></span>
-                                </div>
-                                <div class="">
-                                    <a href="chat.html">
-                                        <div class="fw-semibold text-dark" data-bs-toggle="modal"
-                                            data-target="#chatmodel">Cherry Blossom</div>
-                                        <p class="mb-0 fs-12 text-muted"> Hey! there I' am available....</p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="pt-3 fw-semibold ps-5">Yesterday</div>
-                            <div class="list-group-item d-flex align-items-center">
-                                <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image"
-                                        data-bs-image-src="../assets/images/users/7.jpg"><span
-                                            class="avatar-status bg-success"></span></span>
-                                </div>
-                                <div class="">
-                                    <a href="chat.html">
-                                        <div class="fw-semibold text-dark" data-bs-toggle="modal"
-                                            data-target="#chatmodel">Simon Sais</div>
-                                        <p class="mb-0 fs-12 text-muted">Schedule Realease...... </p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="list-group-item d-flex align-items-center">
-                                <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image"
-                                        data-bs-image-src="../assets/images/users/9.jpg"></span>
-                                </div>
-                                <div class="">
-                                    <a href="chat.html">
-                                        <div class="fw-semibold text-dark" data-bs-toggle="modal"
-                                            data-target="#chatmodel">Laura Biding</div>
-                                        <p class="mb-0 fs-12 text-muted"> Hi we can explain our new project......
-                                        </p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="list-group-item d-flex align-items-center">
-                                <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image"
-                                        data-bs-image-src="../assets/images/users/2.jpg"><span
-                                            class="avatar-status bg-success"></span></span>
-                                </div>
-                                <div class="">
-                                    <a href="chat.html">
-                                        <div class="fw-semibold text-dark" data-bs-toggle="modal"
-                                            data-target="#chatmodel">Addie Minstra</div>
-                                        <p class="mb-0 fs-12 text-muted">Contact me for details....</p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="list-group-item d-flex align-items-center">
-                                <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image"
-                                        data-bs-image-src="../assets/images/users/9.jpg"></span>
-                                </div>
-                                <div class="">
-                                    <a href="chat.html">
-                                        <div class="fw-semibold text-dark" data-bs-toggle="modal"
-                                            data-target="#chatmodel">Ivan Notheridiya</div>
-                                        <p class="mb-0 fs-12 text-muted"> Hi we can explain our new project......
-                                        </p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="list-group-item d-flex align-items-center">
-                                <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image"
-                                        data-bs-image-src="../assets/images/users/14.jpg"></span>
-                                </div>
-                                <div class="">
-                                    <a href="chat.html">
-                                        <div class="fw-semibold text-dark" data-bs-toggle="modal"
-                                            data-target="#chatmodel">Dulcie Veeta</div>
-                                        <p class="mb-0 fs-12 text-muted"> Okay...I will be waiting for you </p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="list-group-item d-flex align-items-center">
-                                <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image"
-                                        data-bs-image-src="../assets/images/users/11.jpg"></span>
-                                </div>
-                                <div class="">
-                                    <a href="chat.html">
-                                        <div class="fw-semibold text-dark" data-bs-toggle="modal"
-                                            data-target="#chatmodel">Florinda Carasco</div>
-                                        <p class="mb-0 fs-12 text-muted">New product Launching...</p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="list-group-item d-flex align-items-center">
-                                <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image"
-                                        data-bs-image-src="../assets/images/users/4.jpg"><span
-                                            class="avatar-status bg-success"></span></span>
-                                </div>
-                                <div class="">
-                                    <a href="chat.html">
-                                        <div class="fw-semibold text-dark" data-bs-toggle="modal"
-                                            data-target="#chatmodel">Cherry Blossom</div>
-                                        <p class="mb-0 fs-12 text-muted">cherryblossom@gmail.com</p>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane" id="side3">
-                        <ul class="task-list timeline-task">
-                            <li class="d-sm-flex mt-4">
-                                <div>
-                                    <i class="task-icon1"></i>
-                                    <h6 class="fw-semibold">Task Finished<span
-                                            class="text-muted fs-11 mx-2 fw-normal">09 July 2021</span></h6>
-                                    <p class="text-muted fs-12">Adam Berry finished task on<a href="javascript:void(0)"
-                                            class="fw-semibold"> Project Management</a>
-                                    </p>
-                                </div>
-                                <div class="ms-auto d-md-flex me-3">
-                                    <a href="javascript:void(0)" class="text-muted me-2"><span
-                                            class="fe fe-edit"></span></a>
-                                    <a href="javascript:void(0)" class="text-muted"><span
-                                            class="fe fe-trash-2"></span></a>
-                                </div>
+                    <div class="modal-body">
+                        <ul class="row p-3">
+                            <li class="col-lg-6 mb-2">
+                                <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block active">
+                                    <span class="country-selector"><img alt="" src="../assets/images/flags/us_flag.jpg"
+                                            class="me-3 language"></span>USA
+                                </a>
                             </li>
-                            <li class="d-sm-flex">
-                                <div>
-                                    <i class="task-icon1"></i>
-                                    <h6 class="fw-semibold">New Comment<span class="text-muted fs-11 mx-2 fw-normal">05
-                                            July 2021</span></h6>
-                                    <p class="text-muted fs-12">Victoria commented on Project <a
-                                            href="javascript:void(0)" class="fw-semibold"> AngularJS Template</a>
-                                    </p>
-                                </div>
-                                <div class="ms-auto d-md-flex me-3">
-                                    <a href="javascript:void(0)" class="text-muted me-2"><span
-                                            class="fe fe-edit"></span></a>
-                                    <a href="javascript:void(0)" class="text-muted"><span
-                                            class="fe fe-trash-2"></span></a>
-                                </div>
+                            <li class="col-lg-6 mb-2">
+                                <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
+                                    <span class="country-selector"><img alt=""
+                                            src="../assets/images/flags/italy_flag.jpg"
+                                            class="me-3 language"></span>Italy
+                                </a>
                             </li>
-                            <li class="d-sm-flex">
-                                <div>
-                                    <i class="task-icon1"></i>
-                                    <h6 class="fw-semibold">New Comment<span class="text-muted fs-11 mx-2 fw-normal">25
-                                            June 2021</span></h6>
-                                    <p class="text-muted fs-12">Victoria commented on Project <a
-                                            href="javascript:void(0)" class="fw-semibold"> AngularJS Template</a>
-                                    </p>
-                                </div>
-                                <div class="ms-auto d-md-flex me-3">
-                                    <a href="javascript:void(0)" class="text-muted me-2"><span
-                                            class="fe fe-edit"></span></a>
-                                    <a href="javascript:void(0)" class="text-muted"><span
-                                            class="fe fe-trash-2"></span></a>
-                                </div>
+                            <li class="col-lg-6 mb-2">
+                                <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
+                                    <span class="country-selector"><img alt=""
+                                            src="../assets/images/flags/spain_flag.jpg"
+                                            class="me-3 language"></span>Spain
+                                </a>
                             </li>
-                            <li class="d-sm-flex">
-                                <div>
-                                    <i class="task-icon1"></i>
-                                    <h6 class="fw-semibold">Task Overdue<span class="text-muted fs-11 mx-2 fw-normal">14
-                                            June 2021</span></h6>
-                                    <p class="text-muted mb-0 fs-12">Petey Cruiser finished task <a
-                                            href="javascript:void(0)" class="fw-semibold"> Integrated management</a>
-                                    </p>
-                                </div>
-                                <div class="ms-auto d-md-flex me-3">
-                                    <a href="javascript:void(0)" class="text-muted me-2"><span
-                                            class="fe fe-edit"></span></a>
-                                    <a href="javascript:void(0)" class="text-muted"><span
-                                            class="fe fe-trash-2"></span></a>
-                                </div>
+                            <li class="col-lg-6 mb-2">
+                                <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
+                                    <span class="country-selector"><img alt=""
+                                            src="../assets/images/flags/india_flag.jpg"
+                                            class="me-3 language"></span>India
+                                </a>
                             </li>
-                            <li class="d-sm-flex">
-                                <div>
-                                    <i class="task-icon1"></i>
-                                    <h6 class="fw-semibold">Task Overdue<span class="text-muted fs-11 mx-2 fw-normal">29
-                                            June 2021</span></h6>
-                                    <p class="text-muted mb-0 fs-12">Petey Cruiser finished task <a
-                                            href="javascript:void(0)" class="fw-semibold"> Integrated management</a>
-                                    </p>
-                                </div>
-                                <div class="ms-auto d-md-flex me-3">
-                                    <a href="javascript:void(0)" class="text-muted me-2"><span
-                                            class="fe fe-edit"></span></a>
-                                    <a href="javascript:void(0)" class="text-muted"><span
-                                            class="fe fe-trash-2"></span></a>
-                                </div>
+                            <li class="col-lg-6 mb-2">
+                                <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
+                                    <span class="country-selector"><img alt=""
+                                            src="../assets/images/flags/french_flag.jpg"
+                                            class="me-3 language"></span>French
+                                </a>
                             </li>
-                            <li class="d-sm-flex">
-                                <div>
-                                    <i class="task-icon1"></i>
-                                    <h6 class="fw-semibold">Task Finished<span
-                                            class="text-muted fs-11 mx-2 fw-normal">09 July 2021</span></h6>
-                                    <p class="text-muted fs-12">Adam Berry finished task on<a href="javascript:void(0)"
-                                            class="fw-semibold"> Project Management</a>
-                                    </p>
-                                </div>
-                                <div class="ms-auto d-md-flex me-3">
-                                    <a href="javascript:void(0)" class="text-muted me-2"><span
-                                            class="fe fe-edit"></span></a>
-                                    <a href="javascript:void(0)" class="text-muted"><span
-                                            class="fe fe-trash-2"></span></a>
-                                </div>
+                            <li class="col-lg-6 mb-2">
+                                <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
+                                    <span class="country-selector"><img alt=""
+                                            src="../assets/images/flags/russia_flag.jpg"
+                                            class="me-3 language"></span>Russia
+                                </a>
+                            </li>
+                            <li class="col-lg-6 mb-2">
+                                <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
+                                    <span class="country-selector"><img alt=""
+                                            src="../assets/images/flags/germany_flag.jpg"
+                                            class="me-3 language"></span>Germany
+                                </a>
+                            </li>
+                            <li class="col-lg-6 mb-2">
+                                <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
+                                    <span class="country-selector"><img alt=""
+                                            src="../assets/images/flags/argentina.jpg"
+                                            class="me-3 language"></span>Argentina
+                                </a>
+                            </li>
+                            <li class="col-lg-6 mb-2">
+                                <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
+                                    <span class="country-selector"><img alt="" src="../assets/images/flags/malaysia.jpg"
+                                            class="me-3 language"></span>Malaysia
+                                </a>
+                            </li>
+                            <li class="col-lg-6 mb-2">
+                                <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
+                                    <span class="country-selector"><img alt="" src="../assets/images/flags/turkey.jpg"
+                                            class="me-3 language"></span>Turkey
+                                </a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!--/Sidebar-right-->
+        <!-- Country-selector modal-->
 
-    <!-- Country-selector modal-->
-    <div class="modal fade" id="country-selector">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content country-select-modal">
-                <div class="modal-header">
-                    <h6 class="modal-title">Choose Country</h6><button aria-label="Close" class="btn-close"
-                        data-bs-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
-                </div>
-                <div class="modal-body">
-                    <ul class="row p-3">
-                        <li class="col-lg-6 mb-2">
-                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block active">
-                                <span class="country-selector"><img alt="" src="../assets/images/flags/us_flag.jpg"
-                                        class="me-3 language"></span>USA
-                            </a>
-                        </li>
-                        <li class="col-lg-6 mb-2">
-                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
-                                <span class="country-selector"><img alt="" src="../assets/images/flags/italy_flag.jpg"
-                                        class="me-3 language"></span>Italy
-                            </a>
-                        </li>
-                        <li class="col-lg-6 mb-2">
-                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
-                                <span class="country-selector"><img alt="" src="../assets/images/flags/spain_flag.jpg"
-                                        class="me-3 language"></span>Spain
-                            </a>
-                        </li>
-                        <li class="col-lg-6 mb-2">
-                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
-                                <span class="country-selector"><img alt="" src="../assets/images/flags/india_flag.jpg"
-                                        class="me-3 language"></span>India
-                            </a>
-                        </li>
-                        <li class="col-lg-6 mb-2">
-                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
-                                <span class="country-selector"><img alt="" src="../assets/images/flags/french_flag.jpg"
-                                        class="me-3 language"></span>French
-                            </a>
-                        </li>
-                        <li class="col-lg-6 mb-2">
-                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
-                                <span class="country-selector"><img alt="" src="../assets/images/flags/russia_flag.jpg"
-                                        class="me-3 language"></span>Russia
-                            </a>
-                        </li>
-                        <li class="col-lg-6 mb-2">
-                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
-                                <span class="country-selector"><img alt="" src="../assets/images/flags/germany_flag.jpg"
-                                        class="me-3 language"></span>Germany
-                            </a>
-                        </li>
-                        <li class="col-lg-6 mb-2">
-                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
-                                <span class="country-selector"><img alt="" src="../assets/images/flags/argentina.jpg"
-                                        class="me-3 language"></span>Argentina
-                            </a>
-                        </li>
-                        <li class="col-lg-6 mb-2">
-                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
-                                <span class="country-selector"><img alt="" src="../assets/images/flags/malaysia.jpg"
-                                        class="me-3 language"></span>Malaysia
-                            </a>
-                        </li>
-                        <li class="col-lg-6 mb-2">
-                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
-                                <span class="country-selector"><img alt="" src="../assets/images/flags/turkey.jpg"
-                                        class="me-3 language"></span>Turkey
-                            </a>
-                        </li>
-                    </ul>
+        <!-- FOOTER -->
+        <footer class="footer">
+            <div class="container">
+                <div class="row align-items-center flex-row-reverse">
+                    <div class="col-md-12 col-sm-12 text-center">
+                        Copyright © <a href="javascript:void(0)">Spade, LLC.</a> <span id="year"></span>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <!-- Country-selector modal-->
-
-    <!-- FOOTER -->
-    <footer class="footer">
-        <div class="container">
-            <div class="row align-items-center flex-row-reverse">
-                <div class="col-md-12 col-sm-12 text-center">
-                    Copyright © <a href="javascript:void(0)">Spade, LLC.</a> <span id="year"></span>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- FOOTER END -->
+        </footer>
+        <!-- FOOTER END -->
 
     </div>
 
@@ -8009,6 +8269,9 @@
 
     <!-- Internal Chat js-->
     <script src="../assets/js/chat.js"></script>
+
+    <!-- SHOW PASSWORD JS -->
+    <script src="../assets/js/show-password.min.js"></script>
 
 
     <!-- C3 CHART JS -->
@@ -8234,11 +8497,11 @@
         });
     </script>
 
-<!-- vendor start  -->
-<script>
-    $(document).ready(function () {
-        $("#add-item5").on("click", () => {
-            $("#add-item-container5").append(`<tr class="tr">
+    <!-- vendor start  -->
+    <script>
+        $(document).ready(function () {
+            $("#add-item5").on("click", () => {
+                $("#add-item-container5").append(`<tr class="tr">
                                                                             <td>
                                                                                 <label for=""><b>Categories</b></label>
                                                                                 <input type="text" name=""
@@ -8251,20 +8514,20 @@
                                                                                         class="fi fi-rs-trash text-danger fs-5"></i>
                                                                                 </button></td>
                                                                         </tr>`)
-        });
-        $('#add-item-container5').on('click', '#del-btn5', function () {
-            var $row = $(this).closest('.tr');
-            var $rowsContainer = $row.parent();
+            });
+            $('#add-item-container5').on('click', '#del-btn5', function () {
+                var $row = $(this).closest('.tr');
+                var $rowsContainer = $row.parent();
 
-            if ($rowsContainer.children('.tr').length > 1) {
-                $row.remove();
-            } else {
-                //   alert('Cannot delete the last row.');
-            }
-        });
+                if ($rowsContainer.children('.tr').length > 1) {
+                    $row.remove();
+                } else {
+                    //   alert('Cannot delete the last row.');
+                }
+            });
 
-    });
-</script>
+        });
+    </script>
 
 </body>
 
