@@ -58,6 +58,7 @@ const config = process.env;
                 increaseRentData
               } = req.body
               const {userId}=req.user
+              // console.log(req.body)
               const tenantsCheck = await queryRunner(selectQuery("tenants", "email"), [email]);
               if (tenantsCheck[0].length > 0) {
 
@@ -86,10 +87,12 @@ const config = process.env;
                         const tenantID = tenantsInsert[0].insertId;
                         if(increaseRentData.length>=1 && increaseRentData[0].date!==""){
                           for(let i=0; i < increaseRentData.length; i++ ){
-                            const propertyID = increaseRentData[i].propertyID;
-                            const increaseDate = increaseRentData[i].increaseDate;
-                            const increaseRentAmount = increaseRentData[i].increaseRentAmount;
+                            
+                            const increaseDate = increaseRentData[i].date;
+                            const increaseRentAmount = increaseRentData[i].amount;
+                            // console.log(increaseDate,increaseRentAmount,propertyID)
                             const increaseRentDataResult = await queryRunner(insertincreaseRentData, [tenantID, propertyID, increaseDate, increaseRentAmount])
+                            
                             
                           }
                         }
@@ -105,7 +108,7 @@ const config = process.env;
 
                     } else {
                       res.status(400).json({
-                        
+
                         message: "Error occur in update tenant property unit"
                       })
                     } 
@@ -471,27 +474,38 @@ exports.tenantDelete = async (req, res) => {
   try {
     const { tenantID } = req.body
     const tenantResult = await queryRunner(selectQuery("tenants", "id"), [tenantID]);
+    console.log(tenantResult[0][0])
 const propertyUnitID = tenantResult[0][0].propertyUnitID;
     const tenantDeleteResult = await queryRunner(deleteQuery("tenants", "id"), [tenantID]);
+    console.log(tenantDeleteResult[0])
     if (tenantDeleteResult[0].affectedRows > 0) {
 
       const tenantCheckResult = await queryRunner(selectQuery("tenantattachfiles", "tenantID"), [tenantID]);
-      // console.log(tenantcheckresult);
+      console.log(tenantCheckResult[0]);
       if (tenantCheckResult[0].length > 0) {
         tenantimages = tenantCheckResult[0].map((image) => image.fileName);
         // delete folder images
         imageToDelete(tenantimages);
         const tenantFileDeleteresult = await queryRunner(deleteQuery("tenantattachfiles", "tenantID"), [tenantID]);
+        console.log(tenantFileDeleteresult)
         if (tenantFileDeleteresult[0].affectedRows > 0) {
         const tenantAdditionalEmailresult = await queryRunner(deleteQuery("tenantalternateemail", "tenantID"), [tenantID]);
+        console.log(tenantFileDeleteresult)
+        
         if (tenantAdditionalEmailresult[0].affectedRows > 0) {
         const tenantAdditionalPhoneResult = await queryRunner(deleteQuery("tenantalternatephone", "tenantID"), [tenantID]);
+        console.log(tenantFileDeleteresult)
+        
         if (tenantAdditionalPhoneResult[0].affectedRows > 0) {
           const tenantIncreaseRentResult = await queryRunner(deleteQuery("tenantincreaserent", "tenantID"), [tenantID]);
+        console.log(tenantFileDeleteresult)
+          
           if (tenantIncreaseRentResult[0].affectedRows > 0) {
             //dddddd
             const status = "Vacant";
             const propertyUnitsResult = await queryRunner(updateUnitsTenant, [ status , propertyUnitID ]);
+        console.log(tenantFileDeleteresult)
+            
             if (propertyUnitsResult[0].affectedRows > 0) {
           
               res.status(200).json({
