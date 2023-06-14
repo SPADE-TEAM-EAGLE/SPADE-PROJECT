@@ -788,6 +788,8 @@
                         <p class="mb-1">Creating Invoice records that you owe a Tenant money.</p>
                         <button type="button" class="btn btn-github edit-btn"><i class="fi fi-rs-pencil"></i> EDIT
                             INVOICE</button>
+                            <button type="button" class="btn btn-github" id="resend-invoice"><i class="fi fi-rs-pencil"></i> SEND
+                                INVOICE</button>
                     </div>
                     <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="top-close">
                         <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
@@ -2507,19 +2509,17 @@
                                                                         href="#viewModal">View</a></li>
                                                                 <li><a class="dropdown-item text-dark"
                                                                         data-bs-effect="effect-scale"
-                                                                        data-bs-toggle="modal"
-                                                                        href="#editModal">Edit</a></li>
+                                                                        
+                                                                        >Edit</a></li>
                                                                 <li><a class="dropdown-item text-dark"
                                                                         data-bs-effect="effect-scale"
-                                                                        data-bs-toggle="modal"
-                                                                        href="#changeStatusModal">Change Status</a></li>
+                                                                        >Change Status</a></li>
                                                                 <li><a class="dropdown-item text-dark"
                                                                         data-bs-effect="effect-scale"
-                                                                        data-bs-toggle="modal"
-                                                                        href="#resendModal">Resend Invoice</a></li>
+                                                                       >Resend Invoice</a></li>
                                                                 <li><a class="dropdown-item text-dark"
                                                                         data-bs-effect="effect-scale"
-                                                                        data-bs-toggle="modal" href="#refundModal">Issue
+                                                                        >Issue
                                                                         Refund</a></li>
                                                                 <li><a class="dropdown-item text-danger"
                                                                         href="javascript:void(0)">Delete</a>
@@ -3461,6 +3461,26 @@
 
                 return fileName;
             }
+            $("#resend-invoice").click(()=>{
+                $.ajax({
+    url: 'http://localhost:3000/api/spade/resendEmail',
+    type: 'GET',  // Change the method to POST
+    data: { invoiceID: invoiceId },  // Send the data in the request body
+    contentType: 'application/json',  // Set the content type to JSON
+    headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+    },
+    success: function (response) {
+        // Handle the success response from the API
+        console.log('API response:', response);
+    },
+    error: function (xhr, status, error) {
+        // Handle the error response from the API
+        console.log('API error:', error);
+    }
+});
+
+            })
             $(".save-invoice").each(function () {
                 $(this).on("click", function () {
                     console.log(1)
@@ -3630,8 +3650,9 @@
                                                                         href="#viewModal">View</a></li>
                                                                 <li><a class="dropdown-item text-dark edit-option"
                                                                         data-bs-effect="effect-scale"
-                                                                        data-bs-toggle="modal"
-                                                                        href="#editModal">Edit</a></li>
+                                                                        href="#"
+
+                                                                        >Edit</a></li>
                                                                 <li><a class="dropdown-item text-dark status-option"
                                                                         data-bs-effect="effect-scale"
                                                                         data-bs-toggle="modal"
@@ -3639,7 +3660,7 @@
                                                                 <li><a class="dropdown-item text-dark resend-option"
                                                                         data-bs-effect="effect-scale"
                                                                         data-bs-toggle="modal"
-                                                                        href="#resendModal">Resend Invoice</a></li>
+                                                                        href="#">Resend Invoice</a></li>
                                                                 <li><a class="dropdown-item text-dark refund-option"
                                                                         data-bs-effect="effect-scale"
                                                                         data-bs-toggle="modal" href="#refundModal">Issue
@@ -3889,8 +3910,25 @@ function updateTotal() {
             $('input[name="status"]').on('click', function () {
                 selectedValue = $(this).val();
             });
-            $(document).on('click', ".view-btn", function (e) {
+            $(document).on('click', ".view-btn,.edit-option,.resend-option", function (e) {
                 e.preventDefault();
+                const buttonText = $(this).text();
+                const headingElem=$("#viewModal .modal-title")
+                headingElem.empty()
+                // headingElem.append(`View <strong class="color-primary">Invoice</strong>`)
+                switch (buttonText) {
+                    case "Edit":
+                        headingElem.append(`Edit <strong class="color-primary">Invoice</strong>`)
+                        break;
+                    case "Resend Invoice":
+                    headingElem.append(`Resend <strong class="color-primary">Invoice</strong>`)
+                        
+                        break;                
+                    default:
+                    headingElem.append(`View <strong class="color-primary">Invoice</strong>`)
+
+                        break;
+                }
                 const invoiceIdElement = $(this).closest("tr").find(".invoice-id");
                 console.log(invoiceIdElement.text())
                 invoiceId = invoiceIdElement.text();
@@ -3975,7 +4013,7 @@ function updateTotal() {
 
 
                 })
-
+                $("#viewModal").modal("show")
             })
             $(document).on('click', '.three-dots', function () {
                 const invoiceIdElement = $(this).closest("tr").find(".invoice-id");
@@ -4018,8 +4056,7 @@ function updateTotal() {
             })
             $('.edit-btn').click(function () {
                 $("#viewModal").modal("hide");
-                $("#editModal").modal("hide");
-                $("#resendModal").modal("hide");
+
                 const data1 = invoiceData.find(obj => obj.invoiceID == invoiceId);
                 const data2 = tenantData.find(obj => obj.tenantID == data1.tenantID);
 

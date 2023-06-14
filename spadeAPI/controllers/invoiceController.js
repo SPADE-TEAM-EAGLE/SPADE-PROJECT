@@ -443,11 +443,13 @@ exports.invoiceDelete = async (req, res) => {
 //  ############################# Create Invoice Start ############################################################
 
 exports.resendEmail = async (req, res) => {
-  const { invoiceID  } = req.body;
+  const { invoiceID  } = req.query;
   // const { userId } = req.user;
+  // console.log(req)
   try {
       const resendEmailResult = await queryRunner(resendEmailQuery, [invoiceID])
-      console.log(resendEmailResult);
+      // console.log(111)
+      // console.log(resendEmailResult);
       if (resendEmailResult[0].length > 0) {
         const tenantEmail = resendEmailResult[0][0].email;
         const dueDays = resendEmailResult[0][0].dueDate;
