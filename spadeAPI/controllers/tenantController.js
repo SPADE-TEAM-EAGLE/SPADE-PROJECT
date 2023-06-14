@@ -557,13 +557,9 @@ exports.getTenantsByID = async (req, res) => {
   try {
     // con
     const { id } = req.query;
-    // console.log(req)
     const TenantsByIDResult = await queryRunner(getTenantsById, [id])
-    // console.log(TenantsByIDResult)
-    console.log(TenantsByIDResult)
     if (TenantsByIDResult.length > 0) {
       const data = JSON.parse(JSON.stringify(TenantsByIDResult))
-      // console.log(data)
       res.status(200).json({
         data: data,
         message: 'Tenants By ID'
@@ -575,7 +571,6 @@ exports.getTenantsByID = async (req, res) => {
     }
   } catch (error) {
     res.send('Error Get Tenants By ID')
-    // console.log(req.body)
     console.log(error)
   }
 }

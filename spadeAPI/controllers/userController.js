@@ -921,24 +921,29 @@ exports.getpropertyUnits = async (req, res) => {
 exports.viewPropertyTenant = async (req, res) => {
   try {
     
-    const { userId,userName } = req.user;
-    console.log(req.user)
-    // const { id } = req.query;
-    // console.log(id)
+    // const { userId,userName } = req.user;
+    const { userId,userName } = req.body;
+    // console.log(req.user)
     let PropertyTenantResult;
-    // if (id) {
-    //   PropertyTenantResult = await queryRunner(selectPropertyTenant, [
-    //     userId,
-    //     id,
-    //   ]);
-    // } 
-    // else {
       PropertyTenantResult = await queryRunner(selectAllTenants, [
         userId,
       ]);
-    // }
-    // console.log(PropertyTenantResult)
-    if (PropertyTenantResult.length > 0) {
+    if (PropertyTenantResult[0].length > 0) {
+      for(let i=0; i < PropertyTenantResult[0].length; i++ ){
+      const tenantID = PropertyTenantResult[0][i].tenantID;
+      const tenantIncreaseResult = await queryRunner(selectQuery("tenantincreaserent", "tenantID"),[tenantID]);
+      if(tenantIncreaseResult[0].length > 0){
+        const tenantIncrease = tenantIncreaseResult[0].map((data)=> ({
+          date : data.date,
+          increaseRentAmount : data.increaseRentAmount
+        }) 
+        )
+        PropertyTenantResult[0][i].increaseRentAmount = tenantIncrease ;
+      }else{
+        PropertyTenantResult[0][i].increaseRentAmount = ["No tenant Increase"] ;
+
+      }
+    }
       res.status(200).json({
         data: PropertyTenantResult,
         message: 'Property Tenant ',
