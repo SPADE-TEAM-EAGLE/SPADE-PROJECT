@@ -19,7 +19,8 @@ const {
   insertAlternatePhoneData,
   insertTenantAttachFile,
   updateUnitsTenant,
-  getTenantsById
+  getTenantsById,
+  updateTenants
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -591,3 +592,107 @@ exports.getTenantsByID = async (req, res) => {
 //  ############################# Get tenant ByID End ############################################################
 
  
+
+//  ############################# Update tenants Start ############################################################
+exports.updateTenants = async (req, res) => {
+  try {
+    const {
+      tenantID,
+      firstName,
+      lastName,
+      companyName,
+      email,
+      phoneNumber,
+      address,
+      city,
+      state,
+      zipcode,
+      propertyID,
+      propertyUnitID,
+      rentAmount,
+      gross_or_triple_lease,
+      baseRent,
+      tripleNet,
+      leaseStartDate,
+      leaseEndDate,
+      increaseRent,
+      increaseRentData
+    } = req.body
+    // const {userId}=req.user
+    const tenantcheckresult = await queryRunner( selectQuery("tenants", "id"), [tenantID] ); 
+    if(tenantcheckresult[0].length > 0){
+      const checkpropertyUnitID = tenantcheckresult[0][0].propertyUnitID;
+      const checkpropertyID = tenantcheckresult[0][0].propertyID;
+      const checkincreaseRent = tenantcheckresult[0][0].increaseRent;
+      if(checkpropertyUnitID !== propertyUnitID){
+        const status = "Vacant";
+        const propertyUnitsResult = await queryRunner(updatePropertyUnitsTenant, [ status, checkpropertyUnitID, checkpropertyID ]);  
+      }
+      if(checkincreaseRent !== increaseRent){
+        const lineItemDelete = await queryRunner(deleteQuery("tenantincreaserent", "tenantID"), [tenantID]);  
+      }
+      currentDate = new Date();
+      const ran = Math.floor(100000 + Math.random() * 900000);
+      const tenantsInsert = await queryRunner(updateTenants, [firstName, lastName, companyName, email, phoneNumber, address, city, state, zipcode, propertyID, propertyUnitID, rentAmount, gross_or_triple_lease, baseRent, tripleNet, leaseStartDate, leaseEndDate, increaseRent, currentDate, tenantID]);
+      if (tenantsInsert[0].affectedRows > 0) {
+        
+          const status = "Occupied";
+          const propertyUnitsResult = await queryRunner(updatePropertyUnitsTenant, [ status, propertyUnitID, propertyID ]);
+          console.log("11");
+          console.log(propertyUnitsResult);
+          if (propertyUnitsResult[0].affectedRows > 0) {
+            if(increaseRent == 'No'){
+              res.status(200).json({
+                  message: "Tenants save Successful",
+                  data: tenantsInsert[0],
+                  tenantId:tenantsInsert[0].insertId
+                })
+          }
+          else{
+              // const tenantID = tenantsInsert[0].insertId;
+              if(increaseRentData.length>=1 && increaseRentData[0].date!==""){
+                for(let i=0; i < increaseRentData.length; i++ ){
+                  
+                  const increaseDate = increaseRentData[i].date;
+                  const increaseRentAmount = increaseRentData[i].amount;
+                  const increaseRentDataResult = await queryRunner(insertincreaseRentData, [tenantID, propertyID, increaseDate, increaseRentAmount])
+                }
+              }
+                res.status(200).json({
+                  message: " tenant Updated successful",
+                  data: tenantsInsert[0],
+                  tenantId:tenantsInsert[0].insertId
+                });
+
+          }
+            // insert increase rent amount END
+
+          } else {
+            res.status(400).json({
+
+              message: "Error occur in update tenant property unit"
+            })
+          } 
+
+
+        }else{
+          res.status(200).json({
+            message: "Tenants is not found",
+          })
+        }
+          
+          
+
+      } else {
+        res.status(400).json({
+          message: "tenant not Updated"
+        })
+      }
+    // }
+  }
+  catch (error) {
+    console.log(error)
+    res.send("Error occurs in updating Tenants  " + error)
+  }
+}
+      //  ############################# Update tenants END ############################################################
