@@ -44,7 +44,7 @@ router.put(
 );
 router.get(
   "/getPropertyUnitsTenant",
-  verifyToken,
+//   verifyToken,
   userController.getPropertyUnitsTenant
 );
 router.get(
@@ -72,14 +72,18 @@ router.post('/tenantAttachFile',[verifyToken,upload], tenantController.tenantAtt
 router.delete('/tenantAttachFileDelete' ,verifyToken, tenantController.tenantAttachFileDelete);
 router.delete('/tenantDelete', tenantController.tenantDelete);
 router.get('/getTenantsByID', tenantController.getTenantsByID);
-router.post('/createInvoice',upload, invoiceController.createInvoice);
-router.put('/putInvoiceStatusUpdates', invoiceController.putInvoiceStatusUpdates);
-router.get('/getAllInvoices', invoiceController.getAllInvoices);
+router.post('/createInvoice',[verifyToken,upload], invoiceController.createInvoice);
+router.put('/putInvoiceStatusUpdates',verifyToken ,invoiceController.putInvoiceStatusUpdates);
+router.get('/getAllInvoices',[verifyToken],invoiceController.getAllInvoices);
 router.get('/getByIdInvoices', invoiceController.getByIdInvoices);
 router.put('/UpdateInvoice', upload, invoiceController.UpdateInvoice);
 router.delete('/invoiceDelete', invoiceController.invoiceDelete);
+router.get('/resendEmail', invoiceController.resendEmail);
 router.post("/addVendor", taskController.addVendors);
-router.post("/addTasks", upload, taskController.addTasks);
 router.get("/getAllVendors", taskController.getAllVendors);
+router.post("/addTasks", upload, taskController.addTasks);
+router.get("/getAllTask", taskController.getAllTask);
+router.get("/taskByID", taskController.taskByID);
+router.put("/updateTenants", tenantController.updateTenants);
 
 module.exports = router;

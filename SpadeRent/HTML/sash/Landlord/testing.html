@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Generate PDF on Click</title>
+</head>
+<body>
+  <div id="content">
+    <h1>My PDF Content</h1>
+    <p>This is the content of my PDF.</p>
+    <ul>
+      <li>List item 1</li>
+      <li>List item 2</li>
+      <li>List item 3</li>
+    </ul>
+  </div>
+
+  <button onclick="generatePDF()">Generate PDF</button>
+
+  <script>
+    function generatePDF() {
+      // Hide the button to avoid printing it
+      document.querySelector("button").style.display = "none";
+
+      // Open the print dialog
+      window.print();
+
+      // Show the button again after printing
+      document.querySelector("button").style.display = "block";
+    }
+  </script>
+</body>
+</html>

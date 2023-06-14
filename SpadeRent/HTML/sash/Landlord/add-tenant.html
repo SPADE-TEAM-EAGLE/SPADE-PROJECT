@@ -879,10 +879,7 @@ background-color: white;
                                     <div class="col-md-4">
                                         <label for="inputState" class="form-label fw-bold">City <spnan
                                                 class="text-danger">*</span></label>
-                                        <select id="city" class="form-select form" required>
-                                            <option selected>Choose...</option>
-
-                                        </select>
+                                        <input id="city" class="form-control form" required>
                                         <span class="text-danger d-none">City is required!</span>
                                     </div>
                                     <div class="col-md-4">
@@ -1033,6 +1030,7 @@ background-color: white;
                                                                 required!</span>
                                                             <!-- <i class="fi fi-rs-calendar"></i> -->
                                                         </div>
+                                                        <!-- <input type="date" class="form-control input-date" id="middledate" required> -->
                                                     </div>
                                                 </div>
                                             </div>
@@ -1084,8 +1082,8 @@ background-color: white;
                                                             <label for="inputEmail4" class="form-label">Date of Rent
                                                                 Change
                                                                 (Optional)</label>
-                                                            <input type="date" class="form-control input-date"
-                                                                id="dateofRentchange" required>
+                                                            <input type="date" class="form-control input-date dateofRentchange"
+                                                               name="dateofRentchange" id="dateofRentchange" required>
                                                             <span class="text-danger d-none">Rent amount is
                                                                 required!</span>
                                                         </div>
@@ -1286,6 +1284,62 @@ background-color: white;
                                             <img src="../assets\header-img\spade.svg" alt="profile-user"
                                                 class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
+                                        <div class="dropdown  d-flex notifications">
+                                            <a class="nav-link icon" data-bs-toggle="dropdown"><i class="fe fe-bell"></i><span class=" pulse"></span>
+                                            </a>
+                                            <!-- <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                                <div class="drop-heading border-bottom">
+                                                    <div class="d-flex">
+                                                        <h6 class="mt-1 mb-0 fs-16 fw-semibold text-dark">Notifications
+                                                        </h6>
+                                                    </div>
+                                                </div>
+                                                <div class="notifications-menu ps">
+                                                    <a class="dropdown-item d-flex" href="notify-list.html">
+                                                        <div class="me-3 notifyimg  bg-primary brround box-shadow-primary">
+                                                            <i class="fe fe-mail"></i>
+                                                        </div>
+                                                        <div class="mt-1 wd-80p">
+                                                            <h5 class="notification-label mb-1">New Application received
+                                                            </h5>
+                                                            <span class="notification-subtext">3 days ago</span>
+                                                        </div>
+                                                    </a>
+                                                    <a class="dropdown-item d-flex" href="notify-list.html">
+                                                        <div class="me-3 notifyimg  bg-secondary brround box-shadow-secondary">
+                                                            <i class="fe fe-check-circle"></i>
+                                                        </div>
+                                                        <div class="mt-1 wd-80p">
+                                                            <h5 class="notification-label mb-1">Project has been
+                                                                approved</h5>
+                                                            <span class="notification-subtext">2 hours ago</span>
+                                                        </div>
+                                                    </a>
+                                                    <a class="dropdown-item d-flex" href="notify-list.html">
+                                                        <div class="me-3 notifyimg  bg-success brround box-shadow-success">
+                                                            <i class="fe fe-shopping-cart"></i>
+                                                        </div>
+                                                        <div class="mt-1 wd-80p">
+                                                            <h5 class="notification-label mb-1">Your Product Delivered
+                                                            </h5>
+                                                            <span class="notification-subtext">30 min ago</span>
+                                                        </div>
+                                                    </a>
+                                                    <a class="dropdown-item d-flex" href="notify-list.html">
+                                                        <div class="me-3 notifyimg bg-pink brround box-shadow-pink">
+                                                            <i class="fe fe-user-plus"></i>
+                                                        </div>
+                                                        <div class="mt-1 wd-80p">
+                                                            <h5 class="notification-label mb-1">Friend Requests</h5>
+                                                            <span class="notification-subtext">1 day ago</span>
+                                                        </div>
+                                                    </a>
+                                                <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div></div>
+                                                <div class="dropdown-divider m-0"></div>
+                                                <a href="notify-list.html" class="dropdown-item text-center p-3 text-muted">View all
+                                                    Notification</a>
+                                            </div> -->
+                                        </div>
                                         <div class="d-flex country">
                                             <img src="../assets\header-img\circlels.png" alt="profile-user"
                                                 class="avatarr profile-user nav-link brroundd cover-image light-layout">
@@ -1295,20 +1349,20 @@ background-color: white;
                                                 class="nav-link leading-none d-flex">
                                                 <!-- <img src="../assets/images/users/21.jpg" alt="profile-user"
                                                     class="avatar  profile-user brround cover-image"> -->
-                                                <span class="side-menu__item dynamic-text-head"
+                                                <span class="side-menu__item dynamic-text-head text-dark"
                                                     style="padding: 10px 10px;">Spade Admin</span> <i
                                                     class="fe fe-chevron-down dark-mode"
                                                     style="font-size: 20px; font-weight: 800;"></i>
                                             </a>
-                                            <!-- <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                                <div class="drop-heading">
+                                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                                <!-- <div class="drop-heading">
                                                     <div class="text-center">
                                                         <h5 class="text-dark mb-0 fs-14 fw-semibold">Percy Kewshun</h5>
                                                         <small class="text-muted">Senior Admin</small>
                                                     </div>
-                                                </div>
-                                                <div class="dropdown-divider m-0"></div>
-                                                <a class="dropdown-item" href="profile.html">
+                                                </div> -->
+                                                <!-- <div class="dropdown-divider m-0"></div> -->
+                                                <!-- <a class="dropdown-item" href="profile.html">
                                                     <i class="dropdown-icon fe fe-user"></i> Profile
                                                 </a>
                                                 <a class="dropdown-item" href="email-inbox.html">
@@ -1317,11 +1371,11 @@ background-color: white;
                                                 </a>
                                                 <a class="dropdown-item" href="lockscreen.html">
                                                     <i class="dropdown-icon fe fe-lock"></i> Lockscreen
-                                                </a>
+                                                </a> -->
                                                 <a class="dropdown-item" href="login.html">
                                                     <i class="dropdown-icon fe fe-alert-circle"></i> Sign out
                                                 </a>
-                                            </div> -->
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -2417,26 +2471,28 @@ background-color: white;
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
 
-    <script>
-        // Get the user's preferred color scheme
-        const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-        // Get a reference to the logo element
-        const logo = document.getElementById('logo');
-
-        // Set the logo source file based on the user's preferred color scheme
-        if (userPrefersDark) {
-            // console.log(document.getElementById("myModal_delete"))
-            logo.src = '../assets/header-img/comment.svg';
-        } else {
-            logo.src = '../assets/header-img/question.svg';
-        }
-    </script>
     <!-- <script src="../assets/plugins/fancyuploder/jquery.ui.widget.js"></script>
     <script src="../assets/plugins/fancyuploder/jquery.fileupload.js"></script>
     <script src="../assets/plugins/fancyuploder/jquery.iframe-transport.js"></script>
     <script src="../assets/plugins/fancyuploder/jquery.fancy-fileupload.js"></script>
     <script src="../assets/plugins/fancyuploder/fancy-uploader.js"></script> -->
+    <script>
+        var startDateInput = document.getElementById('leaseStart');
+var endDateInput = document.getElementById('leaseEnd');
+var middleDateInputs = document.getElementsByClassName('dateofRentchange');
+
+startDateInput.addEventListener("change", function() {
+  endDateInput.min = startDateInput.value;
+});
+
+endDateInput.addEventListener("change", function() {
+  for (var i = 0; i < middleDateInputs.length; i++) {
+    var middleDateInput = middleDateInputs[i];
+    middleDateInput.min = startDateInput.value;
+    middleDateInput.max = endDateInput.value;
+  }
+});
+    </script>
     <script>
         var selectedFiles = [];
         $(document).ready(function () {
@@ -2484,23 +2540,14 @@ background-color: white;
                     console.log(result)
                     $('#state').change(function () {
                         var selectedState = $(this).val();
-                        var cityDropdown = $('#city');
+ 
 
-                        // Clear existing options
-                        cityDropdown.empty();
-                        cityDropdown.append($('<option></option>').text("Choose..."));
+
 
                         if (selectedState !== "Choose...") {
                             var cities = result.geonames.filter(function (place) {
                                 return place.adminName1 === selectedState && place.fcode === "PPL";
                             });
-
-                            cities.forEach(function (city) {
-                                cityDropdown.append($('<option></option>').text(city.name));
-                            });
-                            if (selectedState === "Texas") {
-                                cityDropdown.append($('<option></option>').text("Houston"));
-                            }
                         }
                     });
 
@@ -2572,9 +2619,10 @@ background-color: white;
 
 
             $("#add-item").on("click", () => {
+                
                 $("#add-item-container").append(`<div class="row row-multiple mb-2 pb-3" style="background-color: #F4FAFF !important;"><div class="col-md-6">
                                             <label for="inputEmail4" class="form-label">Date of Rent Change (Optional)</label>
-                                            <input type="date" class="form-control input-date" id="inputEmail4" required>
+                                            <input type="date" class="form-control input-date dateofRentchange" name="dateofRentchange" id="dateofRentchange" required>
                                           </div>
                                           <div class="col-md-5">
                                             <label for="inputPassword4" class="form-label">Rent Amount Correlating to that Date</label>
@@ -2586,6 +2634,12 @@ background-color: white;
                                                                 <i class="fi fi-rs-trash text-danger fs-5"></i>
                                                             </button>
                                                         </div>`)
+
+                                                        for (var i = 0; i < middleDateInputs.length; i++) {
+    var middleDateInput = middleDateInputs[i];
+    middleDateInput.min = startDateInput.value;
+    middleDateInput.max = endDateInput.value;
+  }
             });
             $('#add-item-container').on('click', '.del-btn', function () {
                 var $row = $(this).closest('.row');
@@ -2754,14 +2808,6 @@ background-color: white;
                 // console.log($('#title-sub'))
                 $("#next").addClass("d-none")
                 $("#submit").removeClass("d-none")
-                // $('.modal-title').text("View ");
-
-// Change the text of the <strong> element
-// $('#title-sub').text('Tenant Summary');
-                // $('#title-sub').text("Tenant Summary")
-                // $(".border-model-line span").text("Post your properties to thousands of potential investors, tenants and interested individuals")
-
-                // Find all input, select, and other fields within the accordions and make them readonly
                 accordions.find('input,textarea').attr('readonly', true);
 
                 // Optional: Disable any buttons within the accordions
@@ -3324,10 +3370,10 @@ dateTable();
             // delete using AJAX
             $('#myModal_delete').modal('hide');
             $.ajax({
-                url: 'http://localhost:3000/api/spade/propertyDelete',
+                url: 'http://localhost:3000/api/spade//tenantDelete',
                 type: 'DELETE',
                 data: JSON.stringify({
-                    "id": propertyId
+                    "tenantID": tenantID
                 }),
                 contentType: "application/json; charset=utf-8",
                 processData: false,
@@ -3346,6 +3392,7 @@ dateTable();
             });
         })
         // let data;
+        var tenantID
         function getData(selectedFilter = "alphabets") {
             $("#preloader").fadeIn("fast");
             // console.log(22)
@@ -3354,6 +3401,7 @@ dateTable();
                 type: 'GET',
                 contentType: false,
                 processData: false,
+                
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
@@ -3382,9 +3430,9 @@ dateTable();
                         var dropdownMenu =
                             '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
                             '<ul class="dropdown-menu">' +
-                            '<li><a class="edit-option dropdown-item text-primary" href="javascript:void(0)">Edit</a></li>' +
-                            '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>' +
                             `<li><a class="dropdown-item text-success" href="./view-tenant.html?tenantId=${tenant.tenantID}">View</a></li>` +
+                            '<li><a class="edit-option dropdown-item text-primary" href="javascript:void(0)">Edit</a></li>' +
+                            '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>'
                             '</ul></td>';
                         var currentDate = new Date();
                             if (tenant.leaseEndDate) {
@@ -3410,9 +3458,9 @@ dateTable();
                     $("#preloader").fadeOut("slow")
                     $('.edit-option').click(function (e) {
                         e.preventDefault();
-                        const propertyIdElement = $(this).closest("tr").find(".tenant-id");
+                        const tenantIdElement = $(this).closest("tr").find(".tenant-id");
 
-                        propertyId = propertyIdElement.text();
+                        tenantID = tenantIdElement.text();
 
                         const data = response.data[0].find(obj => obj.id.toString() === propertyId);
                         selectedFiles = data.images
@@ -3431,8 +3479,9 @@ dateTable();
                     });
                     $('.delete-option').click(function (e) {
                         e.preventDefault(); // Prevent default anchor behavior
-                        const propertyIdElement = $(this).closest("tr").find(".property-id");
-                        propertyId = propertyIdElement.text();
+                        const tenantIdElement = $(this).closest("tr").find(".tenant-id");
+
+                        tenantID = tenantIdElement.text();
 
                         $('#myModal_delete').modal('show');
                     });
@@ -3495,8 +3544,9 @@ dateTable();
         }
         getData();
     </script>
-    <script>
-    </script>
+
+    
+
 </body>
 
 </html>

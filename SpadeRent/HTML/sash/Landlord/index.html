@@ -29,6 +29,11 @@
     <!--- FONT-ICONS CSS -->
     <link href="../assets/css/icons.css" rel="stylesheet" />
 
+    <!-- drag and drop start  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.5.2/dragula.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.css">
+    <!-- drag and drop end  -->
+
     <!-- COLOR SKIN CSS -->
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="../assets/colors/color1.css" />
     <style>
@@ -43,6 +48,13 @@
         .panel-body {
             padding: 0px;
         }
+        .divider {
+  border-top: 1px solid;
+  margin: 10px 0 20px 0;
+}
+.custom-switch-input:checked~.custom-switch-indicator {
+    background: #11D247;
+}
     </style>
 
 </head>
@@ -57,115 +69,111 @@
         </div>
     </div>
     <!-- /GLOBAL-LOADER -->
-<!-- Default Offcanvas-->
-<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-    <div class="offcanvas-header pt-5">
-        <h1 class="offcanvas-title" id="offcanvasExampleLabel">Create <strong class="color-primary">New</strong></h1>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"><i class="fe fe-x fs-18"></i></button>
-    </div>
-    <div class="offcanvas-body">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-6 col-lg-3 col-xl-3">
-                    <div class="card">
-                        <div class="card-header" style="background-color: #1467B0;color: white;">
-                            <div class="card-title fw-bold"><a href="properties-all.html" style="color: white;">Property</a></div>
-                        </div>
-                        <div class="card-body">
-                            <div class="text-center chat-image mb-5">
-                                <div class="avatar avatar-xxl chat-profile mb-3 brround">
-                                    <a class="" href="properties-all.html"><img alt="avatar" src="../assets/images/icons/Group 10341.png" class="brround w-100 h-100"></a>
-                                </div>
-                                <div class="main-chat-msg-name">
-                                    <a href="properties-all.html">
-                                        <h5 class="mb-1 text-dark fw-bold">Create New Property</h5>
-                                    </a>
-                                    <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the benefits
-                                        of an all-in-one property management tool! </p>
+    <!-- Default Offcanvas-->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header pt-5">
+            <h1 class="offcanvas-title" id="offcanvasExampleLabel">Create <strong class="color-primary">New</strong></h1>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"><i class="fe fe-x fs-18"></i></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6 col-lg-3 col-xl-3">
+                        <div class="card">
+                            <div class="card-header" style="background-color: #1467B0;color: white;">
+                                <div class="card-title fw-bold"><a href="properties-all.html" style="color: white;">Property</a></div>
+                            </div>
+                            <div class="card-body">
+                                <div class="text-center chat-image mb-5">
+                                    <div class="avatar avatar-xxl chat-profile mb-3 brround">
+                                        <a class="" href="properties-all.html"><img alt="avatar" src="../assets/images/icons/Group 10341.png" class="brround w-100 h-100"></a>
+                                    </div>
+                                    <div class="main-chat-msg-name">
+                                        <a href="properties-all.html">
+                                            <h5 class="mb-1 text-dark fw-bold">Create New Property</h5>
+                                        </a>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the benefits of an all-in-one property management tool! </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6 col-lg-3 col-xl-3">
-                    <div class="card">
-                        <div class="card-header" style="background-color: #1467B0;color: white;">
-                            <div class="card-title fw-bold"><a href="add-tenant.html" style="color: white;">Tenant</a></div>
-                        </div>
-                        <div class="card-body">
-                            <div class="text-center chat-image mb-5">
-                                <div class="avatar avatar-xxl chat-profile mb-3 brround">
-                                    <a class="" href="add-tenant.html"><img alt="avatar" src="../assets/images/icons/Group 10344.png" class="brround w-100 h-100"></a>
-                                </div>
-                                <div class="main-chat-msg-name">
-                                    <a href="add-tenant.html">
-                                        <h5 class="mb-1 text-dark fw-bold">Create New Tenant</h5>
-                                    </a>
-                                    <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the benefits
-                                        of an all-in-one property management tool! </p>
+                    <div class="col-md-6 col-lg-3 col-xl-3">
+                        <div class="card">
+                            <div class="card-header" style="background-color: #1467B0;color: white;">
+                                <div class="card-title fw-bold"><a href="add-tenant.html" style="color: white;">Tenant</a></div>
+                            </div>
+                            <div class="card-body">
+                                <div class="text-center chat-image mb-5">
+                                    <div class="avatar avatar-xxl chat-profile mb-3 brround">
+                                        <a class="" href="add-tenant.html"><img alt="avatar" src="../assets/images/icons/Group 10344.png" class="brround w-100 h-100"></a>
+                                    </div>
+                                    <div class="main-chat-msg-name">
+                                        <a href="add-tenant.html">
+                                            <h5 class="mb-1 text-dark fw-bold">Create New Tenant</h5>
+                                        </a>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the benefits of an all-in-one property management tool! </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6 col-lg-3 col-xl-3">
-                    <div class="card">
-                        <div class="card-header" style="background-color: #1467B0;color: white;">
-                            <div class="card-title fw-bold"><a href="create-invoicing.html" style="color: white;">Invoice</a></div>
-                        </div>
-                        <div class="card-body">
-                            <div class="text-center chat-image mb-5">
-                                <div class="avatar avatar-xxl chat-profile mb-3 brround">
-                                    <a class="" href="create-invoicing.html"><img alt="avatar" src="../assets/images/icons/Group 10346.png" class="brround w-100 h-100"></a>
-                                </div>
-                                <div class="main-chat-msg-name">
-                                    <a href="create-invoicing.html">
-                                        <h5 class="mb-1 text-dark fw-bold">Create New Invoice</h5>
-                                    </a>
-                                    <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the benefits
-                                        of an all-in-one property management tool! </p>
+                    <div class="col-md-6 col-lg-3 col-xl-3">
+                        <div class="card">
+                            <div class="card-header" style="background-color: #1467B0;color: white;">
+                                <div class="card-title fw-bold"><a href="create-invoicing.html" style="color: white;">Invoice</a></div>
+                            </div>
+                            <div class="card-body">
+                                <div class="text-center chat-image mb-5">
+                                    <div class="avatar avatar-xxl chat-profile mb-3 brround">
+                                        <a class="" href="create-invoicing.html"><img alt="avatar" src="../assets/images/icons/Group 10346.png" class="brround w-100 h-100"></a>
+                                    </div>
+                                    <div class="main-chat-msg-name">
+                                        <a href="create-invoicing.html">
+                                            <h5 class="mb-1 text-dark fw-bold">Create New Invoice</h5>
+                                        </a>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the benefits of an all-in-one property management tool! </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6 col-lg-3 col-xl-3">
-                    <div class="card">
-                        <div class="card-header" style="background-color: #1467B0;color: white;">
-                            <div class="card-title fw-bold"><a href="#" style="color: white;">Lead</a></div>
-                        </div>
-                        <div class="card-body">
-                            <div class="text-center chat-image mb-5">
-                                <div class="avatar avatar-xxl chat-profile mb-3 brround">
-                                    <a class="" href="#"><img alt="avatar" src="../assets/images/icons/Group 10348.png" class="brround w-100 h-100"></a>
-                                </div>
-                                <div class="main-chat-msg-name">
-                                    <a href="#">
-                                        <h5 class="mb-1 text-dark fw-bold">Create New Lead</h5>
-                                    </a>
-                                    <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the benefits
-                                        of an all-in-one property management tool! </p>
+                    <div class="col-md-6 col-lg-3 col-xl-3">
+                        <div class="card">
+                            <div class="card-header" style="background-color: #1467B0;color: white;">
+                                <div class="card-title fw-bold"><a href="#" style="color: white;">Lead</a></div>
+                            </div>
+                            <div class="card-body">
+                                <div class="text-center chat-image mb-5">
+                                    <div class="avatar avatar-xxl chat-profile mb-3 brround">
+                                        <a class="" href="#"><img alt="avatar" src="../assets/images/icons/Group 10348.png" class="brround w-100 h-100"></a>
+                                    </div>
+                                    <div class="main-chat-msg-name">
+                                        <a href="#">
+                                            <h5 class="mb-1 text-dark fw-bold">Create New Lead</h5>
+                                        </a>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the benefits of an all-in-one property management tool! </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6 col-lg-3 col-xl-3">
-                    <div class="card">
-                        <div class="card-header" style="background-color: #1467B0;color: white;">
-                            <div class="card-title fw-bold"><a href="create-tasks.html" style="color: white;">Tasks</a></div>
-                        </div>
-                        <div class="card-body">
-                            <div class="text-center chat-image mb-5">
-                                <div class="avatar avatar-xxl chat-profile mb-3 brround">
-                                    <a class="" href="create-tasks.html"><img alt="avatar" src="../assets/images/icons/Group 10350.png" class="brround w-100 h-100"></a>
-                                </div>
-                                <div class="main-chat-msg-name">
-                                    <a href="create-tasks.html">
-                                        <h5 class="mb-1 text-dark fw-bold">Create New Tasks</h5>
-                                    </a>
-                                    <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the benefits
-                                        of an all-in-one property management tool! </p>
+                    <div class="col-md-6 col-lg-3 col-xl-3">
+                        <div class="card">
+                            <div class="card-header" style="background-color: #1467B0;color: white;">
+                                <div class="card-title fw-bold"><a href="create-tasks.html" style="color: white;">Tasks</a></div>
+                            </div>
+                            <div class="card-body">
+                                <div class="text-center chat-image mb-5">
+                                    <div class="avatar avatar-xxl chat-profile mb-3 brround">
+                                        <a class="" href="create-tasks.html"><img alt="avatar" src="../assets/images/icons/Group 10350.png" class="brround w-100 h-100"></a>
+                                    </div>
+                                    <div class="main-chat-msg-name">
+                                        <a href="create-tasks.html">
+                                            <h5 class="mb-1 text-dark fw-bold">Create New Tasks</h5>
+                                        </a>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the benefits of an all-in-one property management tool! </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -174,8 +182,78 @@
             </div>
         </div>
     </div>
-</div>
-<!--/Default Offcanvas-->
+    <!--/Default Offcanvas-->
+    <!--Right Offcanvas-->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header pt-5">
+            <h1 class="offcanvas-title" id="offcanvasExampleLabel">Customize <strong class="color-primary">Widgets</strong></h1>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"><i class="fe fe-x fs-18"></i></button>
+        </div>
+        <p class="text-default pe-5 ps-5">To add and remove widgets, use switches 
+            from this panel to your Dashboard and back.</p>
+            <div class="divider text-default pe-5 ps-5"></div>
+        <div class="offcanvas-body">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label class="custom-switch form-switch mb-0">
+                                    <input type="checkbox" name="custom-switch-radio" class="custom-switch-input" checked>
+                                    <span class="custom-switch-indicator custom-switch-indicator-md"></span>
+                                    <span class="custom-switch-description text-dark fw-bold">Invoicing Widget</span>
+                                </label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label class="custom-switch form-switch mb-0">
+                                    <input type="checkbox" name="custom-switch-radio" class="custom-switch-input">
+                                    <span class="custom-switch-indicator custom-switch-indicator-md"></span>
+                                    <span class="custom-switch-description text-dark fw-bold">Amount Paid</span>
+                                </label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label class="custom-switch form-switch mb-0">
+                                    <input type="checkbox" name="custom-switch-radio" class="custom-switch-input" checked>
+                                    <span class="custom-switch-indicator custom-switch-indicator-md"></span>
+                                    <span class="custom-switch-description text-dark fw-bold">Amount Outstanding</span>
+                                </label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label class="custom-switch form-switch mb-0">
+                                    <input type="checkbox" name="custom-switch-radio" class="custom-switch-input">
+                                    <span class="custom-switch-indicator custom-switch-indicator-md"></span>
+                                    <span class="custom-switch-description text-dark fw-bold">Active Leads</span>
+                                </label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label class="custom-switch form-switch mb-0">
+                                    <input type="checkbox" name="custom-switch-radio" class="custom-switch-input">
+                                    <span class="custom-switch-indicator custom-switch-indicator-md"></span>
+                                    <span class="custom-switch-description text-dark fw-bold">Recent Tasks</span>
+                                </label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label class="custom-switch form-switch mb-0">
+                                    <input type="checkbox" name="custom-switch-radio" class="custom-switch-input">
+                                    <span class="custom-switch-indicator custom-switch-indicator-md"></span>
+                                    <span class="custom-switch-description text-dark fw-bold">Property Status</span>
+                                </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/Right Offcanvas-->
     <!-- PAGE -->
     <div class="page">
         <div class="page-main">
@@ -247,6 +325,63 @@
                                         <div class="d-flex country">
                                             <img src="../assets\header-img\spade.svg" alt="profile-user" class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
+                                        <div class="dropdown  d-flex notifications">
+                                            <a class="nav-link icon" data-bs-toggle="dropdown"><i class="fe fe-bell"></i><span class=" pulse"></span>
+                                            </a>
+                                            <!-- <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                                <div class="drop-heading border-bottom">
+                                                    <div class="d-flex">
+                                                        <h6 class="mt-1 mb-0 fs-16 fw-semibold text-dark">Notifications
+                                                        </h6>
+                                                    </div>
+                                                </div>
+                                                <div class="notifications-menu ps">
+                                                    <a class="dropdown-item d-flex" href="notify-list.html">
+                                                        <div class="me-3 notifyimg  bg-primary brround box-shadow-primary">
+                                                            <i class="fe fe-mail"></i>
+                                                        </div>
+                                                        <div class="mt-1 wd-80p">
+                                                            <h5 class="notification-label mb-1">New Application received
+                                                            </h5>
+                                                            <span class="notification-subtext">3 days ago</span>
+                                                        </div>
+                                                    </a>
+                                                    <a class="dropdown-item d-flex" href="notify-list.html">
+                                                        <div class="me-3 notifyimg  bg-secondary brround box-shadow-secondary">
+                                                            <i class="fe fe-check-circle"></i>
+                                                        </div>
+                                                        <div class="mt-1 wd-80p">
+                                                            <h5 class="notification-label mb-1">Project has been
+                                                                approved</h5>
+                                                            <span class="notification-subtext">2 hours ago</span>
+                                                        </div>
+                                                    </a>
+                                                    <a class="dropdown-item d-flex" href="notify-list.html">
+                                                        <div class="me-3 notifyimg  bg-success brround box-shadow-success">
+                                                            <i class="fe fe-shopping-cart"></i>
+                                                        </div>
+                                                        <div class="mt-1 wd-80p">
+                                                            <h5 class="notification-label mb-1">Your Product Delivered
+                                                            </h5>
+                                                            <span class="notification-subtext">30 min ago</span>
+                                                        </div>
+                                                    </a>
+                                                    <a class="dropdown-item d-flex" href="notify-list.html">
+                                                        <div class="me-3 notifyimg bg-pink brround box-shadow-pink">
+                                                            <i class="fe fe-user-plus"></i>
+                                                        </div>
+                                                        <div class="mt-1 wd-80p">
+                                                            <h5 class="notification-label mb-1">Friend Requests</h5>
+                                                            <span class="notification-subtext">1 day ago</span>
+                                                        </div>
+                                                    </a>
+                                                <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div></div>
+                                                <div class="dropdown-divider m-0"></div>
+                                                <a href="notify-list.html" class="dropdown-item text-center p-3 text-muted">View all
+                                                    Notification</a>
+                                            </div> -->
+                                        </div>
+
                                         <div class="d-flex country">
                                             <img src="../assets\header-img\circlels.png" alt="profile-user" class="avatarr profile-user nav-link brroundd cover-image light-layout">
                                         </div>
@@ -254,17 +389,17 @@
                                             <a href="javascript:void(0)" data-bs-toggle="dropdown" class="nav-link leading-none d-flex">
                                                 <!-- <img src="../assets/images/users/21.jpg" alt="profile-user"
                                                     class="avatar  profile-user brround cover-image"> -->
-                                                <span class="side-menu__item dynamic-text-head" style="padding: 10px 10px;">Spade Admin</span> <i class="fe fe-chevron-down text-dark" style="font-size: 20px; font-weight: 800;"></i>
+                                                <span class="side-menu__item dynamic-text-head" style="padding: 10px 10px;">Spade Admin</span> <i class="fe fe-chevron-down text-dark text-dark" style="font-size: 20px; font-weight: 800;"></i>
                                             </a>
-                                            <!-- <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                                <div class="drop-heading">
+                                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                                <!-- <div class="drop-heading">
                                                     <div class="text-center">
                                                         <h5 class="text-dark mb-0 fs-14 fw-semibold">Percy Kewshun</h5>
                                                         <small class="text-muted">Senior Admin</small>
                                                     </div>
-                                                </div>
-                                                <div class="dropdown-divider m-0"></div>
-                                                <a class="dropdown-item" href="profile.html">
+                                                </div> -->
+                                                <!-- <div class="dropdown-divider m-0"></div> -->
+                                                <!-- <a class="dropdown-item" href="profile.html">
                                                     <i class="dropdown-icon fe fe-user"></i> Profile
                                                 </a>
                                                 <a class="dropdown-item" href="email-inbox.html">
@@ -273,11 +408,11 @@
                                                 </a>
                                                 <a class="dropdown-item" href="lockscreen.html">
                                                     <i class="dropdown-icon fe fe-lock"></i> Lockscreen
-                                                </a>
+                                                </a> -->
                                                 <a class="dropdown-item" href="login.html">
                                                     <i class="dropdown-icon fe fe-alert-circle"></i> Sign out
                                                 </a>
-                                            </div> -->
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -437,7 +572,7 @@
                 <div class="side-app">
 
                     <!-- CONTAINER -->
-                    <div class="main-container container-fluid">
+                    <div class="main-container container-fluid" id="main">
 
                         <!-- PAGE-HEADER -->
                         <!-- <div class="page-header">
@@ -456,10 +591,11 @@
                                     <div class="col-lg-9">
                                         <h3 class="page-titlee text-white" style="font-weight: 100; margin-bottom: 0px;">Welcome to Spade Portal</h3>
                                         <h1 class="page-titlee text-white" style="font-weight: 700;" id="user-name">John Clark</h1>
-                                        <a href="javascript:void(0)" class="btn btn-primary btn-pill btn-xl email-verification-btn" id="email_verification"><i
+                                        <a href="javascript:void(0)" class="btn btn-primary btn-pill btn-xl email-verification-btn mb-3" id="email_verification"><i
                                                 class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
                                             verification &nbsp; <i
                                                 class="angle fe fe-arrow-right create-btn-plus"></i></a>
+                                        <p class="text-white m-0">Your account will be locked after 7-Days</p>
                                     </div>
                                     <div class="col-lg-3">
                                         <img src="../assets/header-img/Group1.png" alt="">
@@ -469,7 +605,29 @@
                             </div>
                         </div>
                         <!-- PAGE-HEADER END -->
-
+                        <!-- ROW 0  -->
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
+                                <div class="d-flex justify-content-end">
+                                    <div class="form-group me-3">
+                                        <select class="form-select form-select">
+                                              <option selected>Filter by Property</option>
+                                              <option value="1">Germany</option>
+                                              <option value="2">Canada</option>
+                                              <option value="3">Usa</option>
+                                              <option value="4">Aus</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn-primary btn-pill" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i
+                                            class=
+                                            "fi fi-rs-settings-sliders"
+                                            ></i> Customized Dashboard</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ROW 0 End -->
                         <!-- ROW-1 -->
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
@@ -1476,7 +1634,51 @@
             })
         })
     </script>
-    
+    <!-- column drag and drop start  -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.5.2/dragula.min.js"></script>
+    <script>
+        var COL_WIDTH = 62 // should be calculated dynamically, and recalculated at window resize
+        var GUTTER_WIDTH = 30
+
+        var COL_WIDTHS = {
+            750: 62,
+            970: 81,
+            1170: 97
+        }
+
+        $(function() {
+
+            var d = dragula({
+                invalid: function(el, target) {
+                    return $(el).hasClass('ui-resizable-handle')
+                }
+            })
+            $('.row').each(function() {
+                d.containers.push(this)
+            })
+
+            $('.card').resizable({
+                grid: COL_WIDTH - GUTTER_WIDTH,
+                handles: 'se',
+                resize: function(e, ui) {
+                    console.log('resized', ui.size)
+                    $(this).css('width', '').removeClass(function(index, css) {
+                            return (css.match(/(^|\s)col-sm-\S+/g) || []).join(' ')
+                        })
+                        .addClass('col-sm-' + Math.max(1, Math.round(ui.size.width / COL_WIDTH)))
+                }
+            })
+
+            var colWidth = COL_WIDTHS[$('.main-container').width()] || COL_WIDTHS[0]
+            $(window).resize(function() {
+                colWidth = COL_WIDTHS[$('.main-container').width()] || COL_WIDTHS[0]
+                console.log('set colWidth to', colWidth, $('.main-container').width())
+            })
+
+        })
+    </script>
+    <!-- column drag and drop end  -->
 
 </body>
 

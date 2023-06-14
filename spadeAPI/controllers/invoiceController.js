@@ -15,7 +15,8 @@ const {
     updateInvoiceStatus,
     getAllInvoicesquery,
     getByIdInvoicesQuery,
-    updateInvoice
+    updateInvoice,
+    resendEmailQuery
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -34,18 +35,18 @@ exports.createInvoice = async (req, res) => {
         dueDays,
         repeatTerms,
         terms,
-        totalAmount,
-        additionalNote,
+        additionalNotes,
         lineItems,
         sendmails,
-
+        totalAmount
  } = req.body;
-
+console.log(req.body)
     const { userId } = req.user;
     try {
         const currentDate = new Date();
-        const invoiceResult = await queryRunner(insertInvoice, [userId, tenantID, invoiceType, startDate, endDate, frequency, dueDays, repeatTerms, terms,totalAmount,additionalNote,"Unpaid",currentDate]);
-      if (invoiceResult.affectedRows === 0) {
+        const invoiceResult = await queryRunner(insertInvoice, [userId, tenantID, invoiceType, startDate, endDate, frequency, dueDays, repeatTerms, terms,additionalNotes,"Unpaid",currentDate,totalAmount]);
+        // console.log(invoiceResult)
+        if (invoiceResult.affectedRows === 0) {
         res.status(400).send('Error occur in creating invoice');
       } else {
         // select tenants 
@@ -105,8 +106,10 @@ exports.createInvoice = async (req, res) => {
 exports.putInvoiceStatusUpdates = async (req, res) => {
     try {
       const { id, status, note } = req.body
+      // console.log(req)
     // const { userId } = req.user; 
-    const {userId} = req.body; 
+    const {userId} = req.user;
+
       const currentDate = new Date();
       const invoiceUpdateStatusResult = await queryRunner(updateInvoiceStatus, [
         status,
@@ -136,34 +139,34 @@ exports.putInvoiceStatusUpdates = async (req, res) => {
 
 
   //  ############################# update Invoice Status Start ############################################################
-exports.putInvoiceStatusUpdates = async (req, res) => {
-    try {
-      const { id, status, note } = req.body
-    const { userId } = req.user; 
-    // const {userId} = req.body; 
-      const currentDate = new Date();
-      const invoiceUpdateStatusResult = await queryRunner(updateInvoiceStatus, [
-        status,
-        note,
-        currentDate,
-        id,
-        userId,
-      ])
-      if (invoiceUpdateStatusResult[0].affectedRows > 0) {
-        res.status(200).json({
-          data: invoiceUpdateStatusResult,
-          message: 'Invoice status updated successful'
-        })
-      } else {
-        res.status(400).json({
-          message: 'No data found'
-        })
-      }
-    } catch (error) {
-      console.log(error)
-      res.send('Error Invoice Status update')
-    }
-  }
+// exports.putInvoiceStatusUpdates = async (req, res) => {
+//     try {
+//       const { id, status, note } = req.body
+//     const { userId } = req.user; 
+//     // const {userId} = req.body; 
+//       const currentDate = new Date();
+//       const invoiceUpdateStatusResult = await queryRunner(updateInvoiceStatus, [
+//         status,
+//         note,
+//         currentDate,
+//         id,
+//         userId,
+//       ])
+//       if (invoiceUpdateStatusResult[0].affectedRows > 0) {
+//         res.status(200).json({
+//           data: invoiceUpdateStatusResult,
+//           message: 'Invoice status updated successful'
+//         })
+//       } else {
+//         res.status(400).json({
+//           message: 'No data found'
+//         })
+//       }
+//     } catch (error) {
+//       console.log(error)
+//       res.send('Error Invoice Status update')
+//     }
+//   }
   //  ############################# update Invoice  End ############################################################
 
 
@@ -172,14 +175,16 @@ exports.putInvoiceStatusUpdates = async (req, res) => {
 exports.getAllInvoices = async (req, res) => {
     try {
     // const { userId } = req.user; 
-    const {userId} = req.body; 
+    // console.log(111)
+    const {userId} = req.user; 
       const getAllInvoicesResult = await queryRunner(getAllInvoicesquery, [userId]);
       if (getAllInvoicesResult[0].length > 0) {
         for (let i = 0; i < getAllInvoicesResult[0].length; i++){
             const invoiceID = getAllInvoicesResult[0][i].invoiceID;
             const invoicelineitemsResult = await queryRunner(selectQuery("invoicelineitems", "invoiceID"), [invoiceID]);
+            // console.log(invoicelineitemsResult[0])
             if (invoicelineitemsResult[0].length > 0) {
-                const memo = invoicelineitemsResult[0].map((desc)=>  desc.memo, desc.category  )
+                const memo = invoicelineitemsResult[0].map((desc)=>({memo:desc.memo, category:desc.category, amount:desc.amount}))
                 getAllInvoicesResult[0][i].memo = memo
             } else {
                 getAllInvoicesResult[0][i].memo = ["No memo"]
@@ -190,7 +195,7 @@ exports.getAllInvoices = async (req, res) => {
           message: 'All Invoice successful'
         })
       } else {
-        res.status(400).json({
+        res.status(200).json({
           message: 'No data found'
         })
       }
@@ -412,3 +417,32 @@ exports.invoiceDelete = async (req, res) => {
     }
   };
   //  ############################# Delete invoice End ############################################################
+
+
+  
+//  ############################# Create Invoice Start ############################################################
+
+exports.resendEmail = async (req, res) => {
+  const { invoiceID  } = req.body;
+  // const { userId } = req.user;
+  try {
+      const resendEmailResult = await queryRunner(resendEmailQuery, [invoiceID])
+      console.log(resendEmailResult);
+      if (resendEmailResult[0].length > 0) {
+        const tenantEmail = resendEmailResult[0][0].email;
+        const dueDays = resendEmailResult[0][0].dueDate;
+        const frequency = resendEmailResult[0][0].frequency;
+        const tenantName = resendEmailResult[0][0].firstName + " "+ resendEmailResult[0][0].lastName;
+              const mailSubject = invoiceID+" From "+ frequency;
+              sendMail.invoiceSendMail(tenantName, tenantEmail, mailSubject, dueDays, invoiceID,frequency);
+      }
+  
+      res.status(200).json({
+        message: " Resend Email successful"
+      });
+  } catch (error) {
+    console.log(error)
+    res.status(400).send("Error")
+  }
+}
+//  ############################# Resend Email Invoice END ############################################################
