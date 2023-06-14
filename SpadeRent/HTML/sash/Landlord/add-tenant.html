@@ -1082,7 +1082,7 @@ background-color: white;
                                                             <label for="inputEmail4" class="form-label">Date of Rent
                                                                 Change
                                                                 (Optional)</label>
-                                                            <input type="date" class="form-control input-date"
+                                                            <input type="date" class="form-control input-date dateofRentchange"
                                                                name="dateofRentchange" id="dateofRentchange" required>
                                                             <span class="text-danger d-none">Rent amount is
                                                                 required!</span>
@@ -2477,6 +2477,23 @@ background-color: white;
     <script src="../assets/plugins/fancyuploder/jquery.fancy-fileupload.js"></script>
     <script src="../assets/plugins/fancyuploder/fancy-uploader.js"></script> -->
     <script>
+        var startDateInput = document.getElementById('leaseStart');
+var endDateInput = document.getElementById('leaseEnd');
+var middleDateInputs = document.getElementsByClassName('dateofRentchange');
+
+startDateInput.addEventListener("change", function() {
+  endDateInput.min = startDateInput.value;
+});
+
+endDateInput.addEventListener("change", function() {
+  for (var i = 0; i < middleDateInputs.length; i++) {
+    var middleDateInput = middleDateInputs[i];
+    middleDateInput.min = startDateInput.value;
+    middleDateInput.max = endDateInput.value;
+  }
+});
+    </script>
+    <script>
         var selectedFiles = [];
         $(document).ready(function () {
             // $("#preloader").fadeIn("fast");
@@ -2602,9 +2619,10 @@ background-color: white;
 
 
             $("#add-item").on("click", () => {
+                
                 $("#add-item-container").append(`<div class="row row-multiple mb-2 pb-3" style="background-color: #F4FAFF !important;"><div class="col-md-6">
                                             <label for="inputEmail4" class="form-label">Date of Rent Change (Optional)</label>
-                                            <input type="date" class="form-control input-date" name="dateofRentchange" id="dateofRentchange" required>
+                                            <input type="date" class="form-control input-date dateofRentchange" name="dateofRentchange" id="dateofRentchange" required>
                                           </div>
                                           <div class="col-md-5">
                                             <label for="inputPassword4" class="form-label">Rent Amount Correlating to that Date</label>
@@ -2616,6 +2634,12 @@ background-color: white;
                                                                 <i class="fi fi-rs-trash text-danger fs-5"></i>
                                                             </button>
                                                         </div>`)
+
+                                                        for (var i = 0; i < middleDateInputs.length; i++) {
+    var middleDateInput = middleDateInputs[i];
+    middleDateInput.min = startDateInput.value;
+    middleDateInput.max = endDateInput.value;
+  }
             });
             $('#add-item-container').on('click', '.del-btn', function () {
                 var $row = $(this).closest('.row');
@@ -3521,20 +3545,7 @@ dateTable();
         getData();
     </script>
 
-    <script>
-        var startDateInput = document.getElementById('leaseStart');
-        var endDateInput = document.getElementById('leaseEnd');
-        var middleDateInput = document.getElementById('dateofRentchange');
-                
-                startDateInput.addEventListener("change", function() {
-                  endDateInput.min = startDateInput.value;
-                });
-                endDateInput.addEventListener("change", function() {
-                  middleDateInput.min = startDateInput.value;
-                  middleDateInput.max = endDateInput.value;
-                });
     
-    </script>
 
 </body>
 
