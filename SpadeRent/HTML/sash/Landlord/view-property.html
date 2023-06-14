@@ -1869,10 +1869,21 @@
             // console.log($("#viewUnits").attr("href"))
             //            
 
-            $("#viewUnits").attr("href", `./property-unit.html?propertyId=${propertyId}`)
-            $("#viewOverview").attr("href", `./view-property.html?propertyId=${propertyId}`)
-            $("#viewTenants").attr("href", `./property-tenant.html?propertyId=${propertyId}`)
-            $("#viewTasks").attr("href", `./property-task.html?propertyId=${propertyId}`)
+            $(".viewUnits").each((element)=>{
+                console.log(element)
+                $(this).attr("href", `./property-unit.html?propertyId=${propertyId}`)
+            })
+            $(".viewOverview").each(()=>{
+                $(this).attr("href", `./view-property.html?propertyId=${propertyId}`)
+            })
+            $(".viewTenants").each(()=>{
+                $(this).attr("href", `./property-tenant.html?propertyId=${propertyId}`)
+            })
+            
+            $(".viewTasks").each(()=>{
+                $(this).attr("href", `./property-task.html?propertyId=${propertyId}`)
+            })
+            
             console.log(propertyId)
             $.ajax({
                 url: 'http://localhost:3000/api/spade/viewProperty',

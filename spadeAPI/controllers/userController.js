@@ -1,5 +1,5 @@
 const user = require("../models/user");
-const sendMail = require("../sendmail/sendmail.js");
+const {sendMail} = require("../sendmail/sendmail.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const fs = require("fs");
@@ -755,8 +755,8 @@ exports.putPropertyUnitsUpdates = async (req, res) => {
 exports.getPropertyUnitsTenant = async (req, res) => {
   // console.log(req,res)
   try {
-    const { userId } = req.user;
-    // console.log(userId)
+    const { userId,userName } = req.user;
+    // console.log(userName)
     const getPropertyUnitsTenantResult = await queryRunner(
       selectQuery("property", "landlordID"),
       [userId]
@@ -781,6 +781,7 @@ exports.getPropertyUnitsTenant = async (req, res) => {
 
       res.status(200).json({
         data: getPropertyUnitsTenantResult[0],
+        user:userName,
         message: "Get Property Units Tenant",
       });
     } else {

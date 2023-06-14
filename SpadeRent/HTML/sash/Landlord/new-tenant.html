@@ -2321,7 +2321,7 @@ color: #000;
                 },
                 success: function(response) {
                     var properties = response.data; // Assuming the response data is an array of property objects
-                    console.log(properties)
+                    $("#user-name").text(response.user)
                         // Populate Select Property dropdown
                     var propertySelect = $('#property');
                     propertySelect.empty(); // Clear existing options
@@ -2510,7 +2510,7 @@ color: #000;
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function(response) {
-                        
+                        console.log(response)
                             // Handle the success response
                         $("#succes-text").text(`Tenant has been successfully created and linked to ${formData.propertyUnitID} Unit with ${formData.propertyID}.`)
 
