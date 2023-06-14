@@ -72,7 +72,7 @@ router.post('/addAlternateEmailPhone' ,verifyToken, tenantController.addAlternat
 router.post('/tenantAttachFile',[verifyToken,upload], tenantController.tenantAttachFile);
 router.delete('/tenantAttachFileDelete' ,verifyToken, tenantController.tenantAttachFileDelete);
 router.delete('/tenantDelete',verifyToken ,tenantController.tenantDelete);
-router.get('/getTenantsByID', tenantController.getTenantsByID);
+router.get('/getTenantsByID', verifyToken,tenantController.getTenantsByID);
 router.post('/createInvoice',[verifyToken,upload], invoiceController.createInvoice);
 router.put('/putInvoiceStatusUpdates',verifyToken ,invoiceController.putInvoiceStatusUpdates);
 router.get('/getAllInvoices',[verifyToken],invoiceController.getAllInvoices);
@@ -84,5 +84,6 @@ router.get("/getAllVendors", taskController.getAllVendors);
 router.post("/addTasks", upload, taskController.addTasks);
 router.get("/getAllTask", taskController.getAllTask);
 router.get("/taskByID", taskController.taskByID);
+router.put("/updateTenants", tenantController.updateTenants);
 
 module.exports = router;
