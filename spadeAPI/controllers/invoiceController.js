@@ -15,7 +15,8 @@ const {
     updateInvoiceStatus,
     getAllInvoicesquery,
     getByIdInvoicesQuery,
-    updateInvoice
+    updateInvoice,
+    resendEmailQuery
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -436,3 +437,32 @@ exports.invoiceDelete = async (req, res) => {
     }
   };
   //  ############################# Delete invoice End ############################################################
+
+
+  
+//  ############################# Create Invoice Start ############################################################
+
+exports.resendEmail = async (req, res) => {
+  const { invoiceID  } = req.body;
+  // const { userId } = req.user;
+  try {
+      const resendEmailResult = await queryRunner(resendEmailQuery, [invoiceID])
+      console.log(resendEmailResult);
+      if (resendEmailResult[0].length > 0) {
+        const tenantEmail = resendEmailResult[0][0].email;
+        const dueDays = resendEmailResult[0][0].dueDate;
+        const frequency = resendEmailResult[0][0].frequency;
+        const tenantName = resendEmailResult[0][0].firstName + " "+ resendEmailResult[0][0].lastName;
+              const mailSubject = invoiceID+" From "+ frequency;
+              sendMail.invoiceSendMail(tenantName, tenantEmail, mailSubject, dueDays, invoiceID,frequency);
+      }
+  
+      res.status(200).json({
+        message: " Resend Email successful"
+      });
+  } catch (error) {
+    console.log(error)
+    res.status(400).send("Error")
+  }
+}
+//  ############################# Create Invoice END ############################################################

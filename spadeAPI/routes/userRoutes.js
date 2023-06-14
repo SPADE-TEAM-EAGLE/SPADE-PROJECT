@@ -79,7 +79,9 @@ router.get('/getByIdInvoices', invoiceController.getByIdInvoices);
 router.put('/UpdateInvoice', [verifyToken,upload], invoiceController.UpdateInvoice);
 router.delete('/invoiceDelete',verifyToken ,invoiceController.invoiceDelete);
 router.post("/addVendor", taskController.addVendors);
-router.post("/addTasks", upload, taskController.addTasks);
 router.get("/getAllVendors", taskController.getAllVendors);
+router.post("/addTasks", upload, taskController.addTasks);
+router.get("/getAllTask", taskController.getAllTask);
+router.get("/taskByID", taskController.taskByID);
 
 module.exports = router;
