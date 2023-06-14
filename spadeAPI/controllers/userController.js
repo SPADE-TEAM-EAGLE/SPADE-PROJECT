@@ -921,8 +921,8 @@ exports.getpropertyUnits = async (req, res) => {
 exports.viewPropertyTenant = async (req, res) => {
   try {
     
-    // const { userId,userName } = req.user;
-    const { userId,userName } = req.body;
+    const { userId,userName } = req.user;
+    // const { userId,userName } = req.body;
     // console.log(req.user)
     let PropertyTenantResult;
       PropertyTenantResult = await queryRunner(selectAllTenants, [

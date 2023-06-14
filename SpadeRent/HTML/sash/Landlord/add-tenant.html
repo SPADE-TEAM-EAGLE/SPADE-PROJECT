@@ -2534,6 +2534,7 @@
     </script>
     <script>
         var selectedFiles = [];
+        var tenantData=[]
         $(document).ready(function () {
             // $("#preloader").fadeIn("fast");
             // $("#succesModal").modal("show")
@@ -3181,31 +3182,40 @@
                     $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
                 });
             });
+            
             // on keyup / change flag: reset
             input.addEventListener('change', reset);
             input.addEventListener('keyup', reset);
-            $(document).on('click',".edit-option",()=>{
+            
+            $(document).on('click', ".edit-option", function() {
+  const tenantIdElement = $(this).closest("tr").find(".tenant-id");
+  console.log(tenantIdElement);
+
+
+                const tenants=tenantData.find(obj => obj.tenantID == tenantIdElement.text());
+                console.log(tenants)
                 $("#addModal").modal("show")
                 $("#addModal .modal-title").empty()
                 $("#addModal .modal-title").append(
                     `Update <strong class="color-primary" id="title-sub"> Tenant</strong>`
                 )
-                $("#firstName").val()
-                $("#lastName").val()
-                $("#company").val()
-                $("#email").val()
-                $("#phone").val()
-                $("#address").val()
-                $("#state").val()
-                $("#city").val()
-                $("#zip").val()
-                $("#property").val()
-                $("#unit").val()
-                $("#rent").val()
-                $("#baseRent").val()
+                $("#firstName").val(tenants.firstName)
+                $("#lastName").val(tenants.lastName)
+                $("#company").val(tenants.companyName)
+                $("#email").val(tenants.tEmail)
+                $("#phone").val(tenants.tPhoneNumber)
+                $("#address").val(tenants.tAddress)
+                $("#state").val(tenants.tState)
+                // $("#mySelect").val(optionValueToSelect);
+                $("#city").val(tenants.tCity)
+                $("#property").val(tenants.propertyName)
+                $("#unit").val(tenants.unitNumber)
+                $("#zip").val(tenants.tZipcode)
+                $("#rent").val(tenants.rentAmount)
+                $("#baseRent").val(tenants.baseRent)
                 $("#tripleNet").val()
-                $("#leaseStart").val()
-                $("#leaseEnd").val()
+                $("#leaseStart").val(tenants.leaseStartDate)
+                $("#leaseEnd").val(tenants.leaseEndDate)
                 // $("#property").val()
                 // $("#property").val()
 
@@ -3480,6 +3490,7 @@
             });
         })
         // let data;
+        // var tenantData;
         var tenantID
         function getData(selectedFilter = "alphabets") {
             $("#preloader").fadeIn("fast");
@@ -3494,7 +3505,8 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function ({ data, user }) {
-                    console.log(data)
+                    tenantData=data[0]
+                    // console.log(tenantData)
                     if (data[0].length === 0) {
                         window.location = "./new-tenant.html"
                     }
@@ -3544,31 +3556,10 @@
                         tableBody.append(row);
                     });
                     $("#preloader").fadeOut("slow")
-                    // $('.edit-option').click(function (e) {
-                    //     e.preventDefault();
-                    //     const tenantIdElement = $(this).closest("tr").find(".tenant-id");
-
-                    //     tenantID = tenantIdElement.text();
-
-                    //     const data = response.data[0].find(obj => obj.id.toString() === propertyId);
-                    //     selectedFiles = data.images
-                    //     updateSelectedFilesContainer()
-                    //     $("#propertyId_update").val(data.id);
-                    //     $("#propertyName_update").val(data.propertyName);
-                    //     $("#address_update").val(data.address);
-                    //     $("#city_update").val(data.city);
-                    //     $("#state_update").val(data.state);
-                    //     $("#zip_update").val(data.zipCode);
-                    //     $("#propertyType_update").val(data.propertyType);
-                    //     $("#propertyTotalSF_update").val(data.propertySQFT);
-                    //     $("#unit_update").val(data.units);
-                    //     $("#property-name").text(data.propertyName)
-                    //     $('#myModal_edit').modal('show');
-                    // });
+                    
                     $('.delete-option').click(function (e) {
                         e.preventDefault(); // Prevent default anchor behavior
                         const tenantIdElement = $(this).closest("tr").find(".tenant-id");
-
                         tenantID = tenantIdElement.text();
 
                         $('#myModal_delete').modal('show');
