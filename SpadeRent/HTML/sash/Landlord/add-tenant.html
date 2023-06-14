@@ -1033,6 +1033,7 @@ background-color: white;
                                                                 required!</span>
                                                             <!-- <i class="fi fi-rs-calendar"></i> -->
                                                         </div>
+                                                        <!-- <input type="date" class="form-control input-date" id="middledate" required> -->
                                                     </div>
                                                 </div>
                                             </div>
@@ -1085,7 +1086,7 @@ background-color: white;
                                                                 Change
                                                                 (Optional)</label>
                                                             <input type="date" class="form-control input-date"
-                                                                id="dateofRentchange" required>
+                                                               name="dateofRentchange" id="dateofRentchange" required>
                                                             <span class="text-danger d-none">Rent amount is
                                                                 required!</span>
                                                         </div>
@@ -2615,7 +2616,7 @@ background-color: white;
             $("#add-item").on("click", () => {
                 $("#add-item-container").append(`<div class="row row-multiple mb-2 pb-3" style="background-color: #F4FAFF !important;"><div class="col-md-6">
                                             <label for="inputEmail4" class="form-label">Date of Rent Change (Optional)</label>
-                                            <input type="date" class="form-control input-date" id="inputEmail4" required>
+                                            <input type="date" class="form-control input-date" name="dateofRentchange" id="dateofRentchange" required>
                                           </div>
                                           <div class="col-md-5">
                                             <label for="inputPassword4" class="form-label">Rent Amount Correlating to that Date</label>
@@ -3531,8 +3532,22 @@ dateTable();
         }
         getData();
     </script>
+
     <script>
+        var startDateInput = document.getElementById('leaseStart');
+        var endDateInput = document.getElementById('leaseEnd');
+        var middleDateInput = document.getElementById('dateofRentchange');
+                
+                startDateInput.addEventListener("change", function() {
+                  endDateInput.min = startDateInput.value;
+                });
+                endDateInput.addEventListener("change", function() {
+                  middleDateInput.min = startDateInput.value;
+                  middleDateInput.max = endDateInput.value;
+                });
+    
     </script>
+
 </body>
 
 </html>
