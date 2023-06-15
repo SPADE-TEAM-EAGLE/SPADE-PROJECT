@@ -1,3 +1,20 @@
+$.ajax({
+    url: 'http://localhost:3000/api/spade/protected',
+    method: 'GET',
+    headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+    },
+    success: function({user}) {
+        $("#user-name").text(user)
+
+    },
+    error: function(xhr, status, error) {
+        console.log('Error occurred while fetching state and city data.');
+        console.log(xhr);
+        console.log(error);
+        // console.log('Error occurred while fetching state and city data.');
+    }
+});
 function checkFieldsStatus(accordionId) {
     var accordionFields = $('#' + accordionId + ' input[type="text"], #' + accordionId + ' select');
     var imageField = $('#' + accordionId + ' input[type="file"]');

@@ -557,7 +557,7 @@
                     display: none;
                 }
 
-                /* #search_input {
+                /* #typehead {
                     display: none;
                 } */
                 #email_verification {
@@ -887,7 +887,7 @@
                                     <div class="col-md-4">
                                         <label for="inputState" class="form-label fw-bold">Phone Number <span
                                                 class="fw-light">(Optional)</span></label>
-                                        <input id="phone" name="phone" type="tel" autocomplete="off" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your phone number here" data-bs-container="#addModal">
+                                        <input id="phone" name="phone" type="tel" autocomplete="off" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your phone number here" data-bs-container="#addModal" pattern="[0-9]{5}" placeholder="" maxlength="15" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Your total units">
                                         <span id="valid-msg" class="d-none text-success">✓ Valid</span>
                                         <span id="error-msg" class="hide text-danger"></span>
                                         </select>
@@ -3220,7 +3220,7 @@
             });
 
             // Search functionality
-            $('#search_input').on('keyup', function () {
+            $('#typehead').on('keyup', function () {
                 var searchValue = $(this).val().toLowerCase();
                 $('#table_body tr').filter(function () {
                     $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
