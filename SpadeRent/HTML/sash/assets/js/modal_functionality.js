@@ -1,3 +1,20 @@
+$.ajax({
+    url: 'http://localhost:3000/api/spade/protected',
+    method: 'GET',
+    headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+    },
+    success: function({user}) {
+        $("#user-name").text(user)
+
+    },
+    error: function(xhr, status, error) {
+        console.log('Error occurred while fetching state and city data.');
+        console.log(xhr);
+        console.log(error);
+        // console.log('Error occurred while fetching state and city data.');
+    }
+});
 function checkFieldsStatus(accordionId) {
     var accordionFields = $('#' + accordionId + ' input[type="text"], #' + accordionId + ' select');
     var imageField = $('#' + accordionId + ' input[type="file"]');
@@ -84,49 +101,31 @@ $(document).ready(function () {
         window.location='./properties-all.html'
     })
     $.ajax({
-        url: 'http://api.geonames.org/searchJSON',
+        url: 'http://localhost:3000/api/spade/getStates',
         method: 'GET',
-        data: {
-            country: 'PK',
-            maxRows: 500,
-            username: 'developedmatz',
-            style: 'full'
-        },
-        success: function (result) {
+        success: function({data}) {
             // Handle state selection change
-            $('#state').change(function () {
-                var selectedState = $(this).val();
-                if (selectedState === "KPK") {
-                    selectedState = "Khyber Pakhtunkhwa"
-                }
+            // console.log(result)
 
-                var cityDropdown = $('#city');
+            var stateDropdown = $('#state');
+            var stateupdateDropdown = $('#state_update');
+            // states = result.geonames.filter(function(place) {
+            //     return place.fcode === "ADM1";
+            // });
+                states=data
+            //   stateDropdown.append($('<option></option>').text("Choose..."));
+            data.forEach(function(state) {
+                stateDropdown.append($('<option></option>').text(state.states).val(state.states));
+            });
 
-                // Clear existing options
-                cityDropdown.empty();
-                cityDropdown.append($('<option></option>').text("Choose..."));
-                cities = []
-                if (selectedState !== "Choose...") {
-                    // Populate city options based on selected state
-                    count = 0
-                    data = result.geonames
-                    for (item of data) {
-                        if (item.adminName1 === selectedState) {
-                            cities.push(item.name)
-                            count++
-                        }
-                        if (count === 10) {
-                            break
-                        }
-                    }
-
-
-                    cities.forEach(function (city) {
-                        cityDropdown.append($('<option></option>').text(city));
-                    });
-
-                }
-            })}})
+        },
+        error: function(xhr, status, error) {
+            console.log('Error occurred while fetching state and city data.');
+            console.log(xhr);
+            console.log(error);
+            // console.log('Error occurred while fetching state and city data.');
+        }
+    });
     function areAllFieldsFilled() {
         var accordion1Fields = $('#accordion-item1 input[type="text"], #accordion-item1 select');
         var accordion2Fields = $('#accordion-item2 input[type="text"], #accordion-item2 select');

@@ -369,7 +369,7 @@
             padding: 10px;
         }
         
-        .delete-file {
+        /* .delete-file {
             position: absolute !important;
             top: -9px !important;
             right: -4px !important;
@@ -377,7 +377,7 @@
             cursor: pointer !important;
             font-size: 13px !important;
             color: #000000 !important;
-        }
+        } */
         
         .dark-mode .delete-file {
             color: #ffffff !important;
@@ -401,6 +401,20 @@
             border-top-right-radius: calc(0.5rem - 1px);
             border-top-left-radius: calc(0.5rem - 1px);
         }
+
+        /* .delete-file{
+            position: absolute;
+    top: -9px;
+    right: -11px;
+    font-weight: bolder;
+    cursor: pointer;
+    font-size: 13px;
+    color: #fff;
+    border: 2px solid black;
+    border-radius: 54px;
+    background: black;
+    width: 23px;
+        } */
         /* .delete-file {
         position: absolute;
         top: 0px;
@@ -483,7 +497,7 @@
                 font-size: 12px;
                 margin: 0 !important;
             }
-            #search_input {
+            #typehead {
                 display: none;
             }
             #email_verification {
@@ -2285,27 +2299,21 @@
         $(document).ready(function() {
 
             $.ajax({
-                url: 'http://api.geonames.org/searchJSON',
+                url: 'http://localhost:3000/api/spade/getStates',
                 method: 'GET',
-                data: {
-                    country: 'US',
-                    maxRows: 500,
-                    username: 'developedmatz', // Replace with your GeoNames username
-                    style: 'full'
-                },
-                success: function(result) {
+                success: function({data}) {
                     // Handle state selection change
-                    console.log(result)
+                    // console.log(result)
 
                     var stateDropdown = $('#state');
                     var stateupdateDropdown = $('#state_update');
-                    states = result.geonames.filter(function(place) {
-                        return place.fcode === "ADM1";
-                    });
-
+                    // states = result.geonames.filter(function(place) {
+                    //     return place.fcode === "ADM1";
+                    // });
+                        states=data
                     //   stateDropdown.append($('<option></option>').text("Choose..."));
-                    states.forEach(function(state) {
-                        stateDropdown.append($('<option></option>').text(state.adminName1));
+                    data.forEach(function(state) {
+                        stateDropdown.append($('<option></option>').text(state.states).val(state.states));
                     });
 
                 },
@@ -2615,7 +2623,7 @@
         });
         // console.log($('#alphabets'))
         // Search functionality
-        $('#search_input').on('keyup', function() {
+        $('#typehead').on('keyup', function() {
             var searchValue = $(this).val().toLowerCase();
             $('#table_body tr').filter(function() {
                 $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
@@ -2911,11 +2919,11 @@
 
                             //   stateDropdown.append($('<option></option>').text("Choose..."));
                             states.forEach(function(state) {
-                                if (state.adminName1 === data.state) {
-                                    stateupdateDropdown.append($('<option selected></option>').text(state.adminName1)).val(state.adminName1);
+                                if (state.states === data.state) {
+                                    stateupdateDropdown.append($('<option selected></option>').text(state.states)).val(state.states);
 
                                 } else {
-                                    stateupdateDropdown.append($('<option></option>').text(state.adminName1));
+                                    stateupdateDropdown.append($('<option></option>').text(state.states));
                                 }
 
                             });

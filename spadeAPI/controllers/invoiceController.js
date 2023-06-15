@@ -176,8 +176,9 @@ console.log(req.body,userId)
 exports.getAllInvoices = async (req, res) => {
     try {
     // const { userId } = req.user; 
-    // console.log(111)
+    console.log(111)
     const {userId} = req.user; 
+    console.log(userId)
       const getAllInvoicesResult = await queryRunner(getAllInvoicesquery, [userId]);
       console.log(getAllInvoicesResult[0])
       if (getAllInvoicesResult[0].length > 0) {
