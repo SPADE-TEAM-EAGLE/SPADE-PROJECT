@@ -6,9 +6,7 @@ const invoiceController = require("../controllers/invoiceController");
 const verifyToken = require("../middleware/authenticate");
 const { upload } = require("../middleware/imageUploads");
 const { uploadExistingFiles } = require("../middleware/imageUploads");
-
 const taskController = require("../controllers/taskController");
-
 router.post("/Signup", userController.createUser);
 router.get("/protected", verifyToken, userController.getUser);
 router.get("/checkemail", userController.checkemail);
@@ -75,8 +73,8 @@ router.delete('/tenantDelete',verifyToken ,tenantController.tenantDelete);
 router.get('/getTenantsByID', verifyToken,tenantController.getTenantsByID);
 router.post('/createInvoice',[verifyToken,upload], invoiceController.createInvoice);
 router.put('/putInvoiceStatusUpdates',verifyToken ,invoiceController.putInvoiceStatusUpdates);
-router.get('/getAllInvoices',[verifyToken],invoiceController.getAllInvoices);
-router.get('/getByIdInvoices', invoiceController.getByIdInvoices);
+router.get('/getAllInvoices', verifyToken ,invoiceController.getAllInvoices);
+router.get('/getByIdInvoices', verifyToken ,invoiceController.getByIdInvoices);
 router.put('/UpdateInvoice', [verifyToken,upload], invoiceController.UpdateInvoice);
 router.delete('/invoiceDelete',verifyToken ,invoiceController.invoiceDelete);
 router.post("/addVendor", taskController.addVendors);
