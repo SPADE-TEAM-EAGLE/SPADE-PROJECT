@@ -1550,6 +1550,11 @@
             border-radius: 50%;
             padding: 10px 17px 10px 17px;
         }
+
+        .model-account-request-close-logo{
+            width: 120px;
+        }
+   
     </style>
 
 </head>
@@ -7471,11 +7476,11 @@
                                                     </div>
 
                                                     <div class="row mt-5">
-                                                        <div class="col-lg-6">
+                                                        <div class="col-lg-8">
                                                             <div class="card card-color card-primary">
                                                                 <div class="card-body">
                                                                     <div class="row" style="align-items: center;">
-                                                                        <div class="col-xl-5 col-sm-5 col-md-12">
+                                                                        <div class="col-xl-6 col-sm-6 col-md-12">
                                                                             <div
                                                                                 style="display: flex; align-items: center;">
                                                                                 <span
@@ -7491,7 +7496,7 @@
                                                                             </div>
 
                                                                         </div>
-                                                                        <div class="col-xl-7 col-sm-7 col-md-12"
+                                                                        <div class="col-xl-6 col-sm-6 col-md-12"
                                                                             style="display: flex; justify-content: end;">
                                                                             <button
                                                                                 class="btn btn-light text-primaryy btn-pill m-2"
@@ -7499,21 +7504,6 @@
                                                                                 data-bs-toggle="modal"
                                                                                 style="width: fit-content; border: transparent;"><b>Close
                                                                                     Account</b></button>
-                                                                        </div>
-
-                                                                        <div class="row">
-                                                                            <div class="col-lg-6">
-                                                                                <div class="wrap-input100 validate-input input-group"
-                                                                                    id="Password-toggle"> <a
-                                                                                        href="javascript:void(0)"
-                                                                                        class="input-group-text bg-white text-muted">
-                                                                                        <i class="zmdi text-muted zmdi-eye-off"
-                                                                                            aria-hidden="true"></i> </a>
-                                                                                    <input
-                                                                                        class="input100 border-start-0 form-control ms-0"
-                                                                                        type="text"
-                                                                                        placeholder="Password"> </div>
-                                                                            </div>
                                                                         </div>
 
                                                                         <!-- close account model box start  -->
@@ -7545,9 +7535,8 @@
                                                                                         </h2>
 
                                                                                         <button
-                                                                                            class="btn btn-primary btn-pill m-2"
-                                                                                            data-bs-target="#continueaccount"
-                                                                                            data-bs-toggle="modal"
+                                                                                            class="btn btn-primary btn-pill m-2"  id="form1show"
+                                                                                            type="button" data-bs-dismiss="modal" aria-label="Close"
                                                                                             style="width: fit-content;">
                                                                                             &nbsp; Continue &nbsp;
                                                                                         </button>
@@ -7566,12 +7555,103 @@
                                                         </div>
 
                                                     </div>
+
+                                                    <div id="form1" style="display: none;">
+                                                    <div class="row">
+                                                        <div class="col-lg-6 mb-3" id="account_closure_show">
+                                                            <label for="inputState" class="form-label"><b>Reason for Account Closure</b><spnan
+                                                                    class="text-danger">*</span></label>
+                                                            <select id="state" class="form-select form" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your state here" data-bs-container="#addModal">
+                                                                <option selected>Select Reason</option>
+                                                                <option>1</option>
+                                                                <option>2</option>
+                                                                <option>3</option>
+                                                            </select>
+                                                            <span class="text-danger d-none">State is required!</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-6" id="current_password_show">
+                                                            <div class="form-group">
+                                                                <label for=""><b>Current Password</b></label>
+                                                                <input type="password" class="form-control" name="password" id="current_password" aria-describedby="emailHelp" placeholder="Password"  data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter password here.">
+                                                                <i class="fi fi-rs-eye text-dark fs-20 toggle-password"  toggle="#current_password" style="cursor: pointer;
+                                                                float: right;
+                                                                margin-top: -30px;
+                                                                margin-right: 15px;
+                                                                "></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-6" id="confirm_password_show">
+                                                            <div class="form-group">
+                                                                <label for=""><b>Confirm Password</b></label>
+                                                                <input type="password" class="form-control" name="password" id="confirm_password" aria-describedby="emailHelp" placeholder="Password"  data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter password here.">
+                                                                <i class="fi fi-rs-eye text-dark fs-20 toggle-password"  toggle="#confirm_password" style="cursor: pointer;
+                                                                float: right;
+                                                                margin-top: -30px;
+                                                                margin-right: 15px;
+                                                                "></i>
+                                                            </div>
+                                                            <div class="col-lg-12">
+                                                                <button
+                                                                class="btn btn-primary text-light btn-pill mt-2"
+                                                                data-bs-target="#requestcloseaccount"
+                                                                data-bs-toggle="modal"
+                                                                style="width: fit-content; border: transparent;"><b>Request to Close the Account</b></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                                 </div>
 
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
+                                <!-- request close account model box start  -->
+                                <div class="modal fade" id="requestcloseaccount"
+                                tabindex="-1" role="dialog">
+                                <div class="modal-dialog modal-md modal-dialog-scrollable"
+                                    role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button class="btn-close"
+                                                data-bs-dismiss="modal"
+                                                aria-label="Close">
+                                                <span
+                                                    aria-hidden="true"><img
+                                                        src="../assets/images/cross-circle.svg" /></span>
+                                            </button>
+                                        </div>
+                                        <div
+                                            class="modal-body text-center text-dark">
+                                            <img src="../assets/images/logo-preloader.png"
+                                                class="model-account-request-close-logo mb-4"
+                                                alt="">
+                                                <img src="../assets/images/request-close-user.png" alt="">
+                                            <h2 class="text-primary"><b>Your account closure request 
+                                                is initiated.</b>
+                                            </h2>
+                                            <p>Your account will be closed soon and you will 
+                                                receive email on closure.</p>
+
+                                            <button
+                                                class="btn btn-primary btn-pill m-2"  id="form1showw"
+                                                type="button" data-bs-dismiss="modal" aria-label="Close"
+                                                style="width: fit-content;">
+                                                &nbsp; Ok &nbsp;
+                                            </button>
+                                        </div>
+                                        <div class="modal-footer">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- request close account model box start  -->
 
 
                                 <div class="card-body pb-0 bg-recentorder" style="display: none;">
@@ -8584,6 +8664,27 @@
 
         });
     </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script>
+        $(".toggle-password").click(function() {
+
+$(this).toggleClass("fi-rs-eye fi-rs-crossed-eye");
+var input = $($(this).attr("toggle"));
+if (input.attr("type") == "password") {
+  input.attr("type", "text");
+} else {
+  input.attr("type", "password");
+}
+});
+    </script>
+
+    <script>
+	$("#form1show").click(function(e){
+	$('#form1').show();
+	});
+    </script>
+
 
 </body>
 
