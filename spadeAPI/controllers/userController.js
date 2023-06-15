@@ -785,7 +785,7 @@ exports.getPropertyUnitsTenant = async (req, res) => {
         message: "Get Property Units Tenant",
       });
     } else {
-      res.status(400).json({
+      res.status(200).json({
         message: "No data found",
       });
     }
@@ -923,7 +923,7 @@ exports.viewPropertyTenant = async (req, res) => {
     
     const { userId,userName } = req.user;
     // const { userId,userName } = req.body;
-    // console.log(req.user)
+    console.log(req.user)
     let PropertyTenantResult;
       PropertyTenantResult = await queryRunner(selectAllTenants, [
         userId,
@@ -950,7 +950,7 @@ exports.viewPropertyTenant = async (req, res) => {
         user:userName
       })
     } else {
-      res.status(400).json({
+      res.status(200).json({
         message: 'No data found'
       })
     }
