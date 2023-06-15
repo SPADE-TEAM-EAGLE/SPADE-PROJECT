@@ -3669,8 +3669,11 @@
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
-                    success: function ({ data, user }) {
-                        console.log(data)
+                    success: function (response , { data, user }) {
+                        if(response.message == "No data found")
+                        {
+                            window.location = './new-invoice.html'
+                        }
                         $("#user-name").text(user)
                         $("#tenants").empty()
                         $("#tenants").append($('<option></option>').text("Choose..."));
@@ -4160,7 +4163,6 @@ function updateTotal() {
                 if(data.invoiceType==="One Time Invoice"){
                     $("#invoice_update").attr('checked', 'checked')
                 }else{
-
                     $("#recurring_update").attr('checked', 'checked')
                     $("#collapse1_update").addClass("show")
                     $("#startDate_update").val(data.startDate)

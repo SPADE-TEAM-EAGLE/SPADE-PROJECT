@@ -3581,10 +3581,11 @@
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function ({ data, user }) {
-                    tenantData=data[0]
-                    // console.log(tenantData)
-                    if (data[0].length === 0) {
+                success: function (response){
+                    // tenantData=data[0]
+                    // console.log(response)
+                    if (response.message == "No data found") {
+                        console.log("tenantData")
                         window.location = "./new-tenant.html"
                     }
                     $("#user-name").text(user)

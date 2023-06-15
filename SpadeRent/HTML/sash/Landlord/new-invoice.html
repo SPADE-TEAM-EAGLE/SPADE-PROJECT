@@ -16,7 +16,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="../assets/images/brand/favicon.ico" />
 
     <!-- TITLE -->
-    <title>Property Tenant - SpadeRent</title>
+    <title>New Property - SpadeRent</title>
 
     <!-- BOOTSTRAP CSS -->
     <link id="style" href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -36,26 +36,6 @@
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
         .custom-file-input::-webkit-file-upload-button {
             visibility: hidden;
-        }
-        
-        #propertyTable {
-            padding: 0;
-        }
-        
-        #propertyTable_wrapper .dataTables_wrapper {
-            padding: 0;
-        }
-        
-        #propertyTable_wrapper .dataTables_scroll {
-            padding: 0;
-        }
-        
-        #propertyTable_wrapper .dataTables_scrollHead {
-            padding: 0;
-        }
-        
-        #propertyTable_wrapper .dataTables_scrollBody {
-            padding: 0;
         }
         
         .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar {
@@ -92,6 +72,57 @@
             background: #0069d9;
         }
         
+        .dark-mode .btn-close {
+            color: white;
+        }
+        
+        .dark-mode .selected-files span {
+            display: inline-block;
+            margin-right: 0;
+            padding: 4px 8px;
+            background: transparent;
+            color: white;
+            border-radius: 4px;
+        }
+        
+        .dark-mode .custom-file-label {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 12px;
+            background-color: transparent;
+        }
+        
+        .modal-footer .button-left {
+            background-color: #1F1F1F;
+            margin: 0rem 1rem;
+            color: white;
+        }
+        
+        .modal-footer .button {
+            font-size: 0.938rem;
+        }
+        
+        button.btn-close {
+            right: 6px;
+        }
+        
+        .btn-close {
+            width: 1.8rem;
+            opacity: 1;
+            position: absolute;
+            top: 6px;
+        }
+        
+        .btn-close:hover,
+        .btn-close:focus {
+            color: #000;
+            text-decoration: none;
+            opacity: 1;
+        }
+        
         .custom-file-input:active::before {
             background: #0062cc;
         }
@@ -101,34 +132,8 @@
             background: #28a745;
         }
         
-        .dark-mode .create-new-link {
-            background: transparent !important;
-            border: 3px solid #1467B0 !important;
-            color: white !important;
-            border-radius: 50px !important;
-        }
-        /* .dark-mode .create-new-link:hover {
-    border: 3px solid #1467B0 !important;
-} */
-        
-        .create-new-link {
-            background: transparent !important;
-            border: 3px solid #1467B0 !important;
-            color: black;
-            border-radius: 50px !important;
-        }
-        
         .selected-files {
             margin-top: 10px;
-        }
-        
-        .dark-mode .selected-files span {
-            display: inline-block;
-            margin-right: 0;
-            padding: 4px 8px;
-            background: transparent;
-            color: white !important;
-            border-radius: 4px;
         }
         
         .selected-files span {
@@ -152,16 +157,6 @@
             justify-content: center;
             padding: 6px 12px;
             background-color: #fff;
-        }
-        
-        .dark-mode .custom-file-label {
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 6px 12px;
-            background-color: transparent;
         }
         
         .custom-file-label i {
@@ -191,16 +186,12 @@
             vertical-align: top;
             border: 1px solid #e9edf4;
         }
-        /* input:focus {
-    border: 3px solid #555 !important;
-} */
+        /* /* input:focus {
+            border: 3px solid #555 !important;
+        } */
         
-        .panel-body {
+        */ .panel-body {
             padding: 0px;
-        }
-        
-        .dark-mode .btn-close {
-            color: white;
         }
         
         .accordion-item:first-of-type {
@@ -260,8 +251,8 @@
             vertical-align: middle !important;
         }
         /* .card-header {
-padding: 0.5rem 1rem;
-} */
+        padding: 0.5rem 1rem;
+    } */
         
         .modal-footer .button-left {
             background-color: #1F1F1F;
@@ -284,14 +275,17 @@ padding: 0.5rem 1rem;
             /* font-size: 0.938rem; */
         }
         
-        .disabled {
-            pointer-events: none;
-            cursor: not-allowed;
-            color: gray;
-        }
-        
-        .modal-footer .button {
+        .modal-footer button {
+            border-radius: 2.75rem;
+            padding: 4px 30px;
+            font-family: 'Figtree';
+            font-style: normal;
+            font-weight: 600;
             font-size: 0.938rem;
+            line-height: 1.875rem;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
+            /* identical to box height, or 120% */
+            letter-spacing: 0.0145455em;
         }
         
         .accordion-button::after {
@@ -367,15 +361,14 @@ padding: 0.5rem 1rem;
         .file-details {
             padding: 10px;
         }
-        
-        .delete-file {
+        /* .delete-file {
             position: absolute;
-            top: -1px;
-            right: 4px;
+            top: 5px;
+            right: 5px;
             cursor: pointer;
-            font-size: 11px;
-            color: #000;
-        }
+            font-size: 18px;
+            color: #ff0000;
+        } */
         
         .btn-group>.btn-group:not(:last-child)>.btn,
         .btn-group>.btn:not(:last-child):not(.dropdown-toggle) {
@@ -395,28 +388,38 @@ padding: 0.5rem 1rem;
             border-top-right-radius: calc(0.5rem - 1px);
             border-top-left-radius: calc(0.5rem - 1px);
         }
-        /* .delete-file {
-position: absolute;
-top: 0px;
-right: 5px;
-cursor: pointer;
-font-size: 13px;
-color: #000;
-} */
         
-        button.btn-close {
-            right: 6px;
+        .selected-files span {
+            display: inline-block;
+            margin-right: 0px;
+            padding: 0px;
+            background: none;
+            color: #333;
+            /* border-radius: 4px; */
+        }
+        
+        /* .delete-file {
+            position: absolute;
+            top: -9px;
+            right: -4px;
+            font-weight: bolder;
+            cursor: pointer;
+            font-size: 13px;
+            color: #000000;
+        } */
+        
+        .dark-mode .delete-file {
+            color: #ffffff;
+        }
+        /* button.btn-close {
+            right: -7px;
         }
         
         .btn-close {
-            width: 1.8rem;
+            width: 2.5rem !important;
             opacity: 1;
             position: absolute;
-            top: 6px;
-        }
-        
-        .del {
-            width: 2rem !important;
+            top: -11px;
         }
         
         .btn-close:hover,
@@ -424,7 +427,7 @@ color: #000;
             color: #000;
             text-decoration: none;
             opacity: 1;
-        }
+        } */
         
         @media (max-width:992px) {
             .modal-footer button {
@@ -498,15 +501,13 @@ color: #000;
             .border-model-line h2 {
                 font-size: 1.4rem;
             }
-            .succes-modal {
-                padding: 1rem 1rem;
-            }
         }
         
         @media (max-width:320px) {
             /* /* .modal-footer button {
                 width: 231px;
             } */
+            
         }
         
         @media (max-width: 767px) {
@@ -536,6 +537,8 @@ color: #000;
         .light-mode th {
             background: #ECF3F9 !important;
         }
+
+    
     </style>
 
 </head>
@@ -543,9 +546,6 @@ color: #000;
 <body class="app sidebar-mini ltr light-mode">
 
     <!-- GLOBAL-LOADER -->
-    <!-- <div id="global-loader">
-        <img src="../assets/images/loader.svg" class="loader-img" alt="Loader">
-    </div> -->
     <div id="preloader" class="tlp-preloader">
         <div class="animation-preloader">
             <div class="tlp-spinner"></div>
@@ -672,453 +672,172 @@ color: #000;
     </div>
 </div>
 <!--/Default Offcanvas-->
-<div class="modal fade" id="addModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="text-justify ps-2 border-model-line title-text">
-                    <h2 class="modal-title">Create <strong class="color-primary" id="title-sub">New Tenant</strong>
-                    </h2>
-                    <span class="">Post your properties to thousands of potential investors,
-                        tenants and interested individuals.</span>
-                </div>
-                <button type="button" class="btn btn-primary me-4 mt-3 d-none" id="edit-btn"><i
-                        class="fi fi-rs-pencil" style="display:block"></i><small>Edit Details</small></button>
-                <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="accordion-item mb-4" id="accordion-item1">
-                    <h2 class="accordion-header" id="headingOne">
-                        <button class="accordion-button text-white" type="button" id="accordion-button1"
-                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                            aria-expanded="true" aria-controls="collapseOne">
-                            <span class="m-0 me-4 fs-1" style="font-weight: bold;">01</span>
-                            <h3 class="m-0"><strong>Tenant Information</strong> <i class="fi fi-rs-pencil"></i><i
-                                    class="fi fi-rs-angle-circle-down chevron icon"></i>
-                            </h3>
-                        </button>
-                    </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                        data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            <form class="row g-3" enctype="multipart/form-data">
-                                <div class="col-md-6">
-                                    <label for="inputEmail4" class="form-label fw-bold">First Name<spnan
-                                            class="text-danger"> *</span></label>
-                                    <input type="text" class="form-control form" placeholder="Enter First Name"
-                                        id="firstName" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your first name here" data-bs-container="#addModal">
-                                    <span class="text-danger d-none">First name is required!</span>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="inputPassword4" class="form-label fw-bold">Last Name<spnan
-                                            class="text-danger"> *</span></label>
-                                    <input type="text" class="form-control form" placeholder="Enter Last Name"
-                                        id="lastName" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your last name here" data-bs-container="#addModal">
-                                    <span class="text-danger d-none">Last name required!</span>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="inputAddress" class="form-label fw-bold">Company Name <span
-                                            class="fw-light">(Optional)</span>
-                                    </label>
-                                    <input type="text" class="form-control form" id="company"
-                                        placeholder="Enter Company Name" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your company name here" data-bs-container="#addModal">
-                                    <!-- <span class="text-danger d-none">Company name is required!</span> -->
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="inputCity" class="form-label fw-bold">Email<spnan
-                                            class="text-danger"> *</span></label>
-                                    <input type="text" class="form-control form" placeholder="Enter Email"
-                                        id="email" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your email here" data-bs-container="#addModal">
-                                    <span class="text-danger d-none">Email is required!</span>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="inputState" class="form-label fw-bold">Phone Number <span
-                                            class="fw-light">(Optional)</span></label>
-                                    <input id="phone" name="phone" type="tel" autocomplete="off" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your phone number here" data-bs-container="#addModal">
-                                    <span id="valid-msg" class="d-none text-success">✓ Valid</span>
-                                    <span id="error-msg" class="hide text-danger"></span>
-                                    </select>
-                                    <!-- <span class="text-danger d-none">State is required!</span> -->
-                                </div>
-                                <div class="col-12">
-                                    <label for="inputAddress2" class="form-label fw-bold">Address <span
-                                            class="fw-light">(Optional)</span></label>
-                                    <input type="text" class="form-control" id="address"
-                                        placeholder="Apartment, studio, or floor" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your address here" data-bs-container="#addModal">
-                                    <!-- <span class="text-danger d-none">Address is required!</span> -->
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="inputState" class="form-label fw-bold">State<spnan
-                                            class="text-danger">*</span></label>
-                                    <select id="state" class="form-select form" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your state here" data-bs-container="#addModal">
-                                        <option selected>Choose...</option>
-                                    </select>
-                                    <span class="text-danger d-none">State is required!</span>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="inputState" class="form-label fw-bold">City <spnan
-                                            class="text-danger">*</span></label>
-                                    <input id="city" class="form-control form" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your city here" data-bs-container="#addModal">
-                                    <span class="text-danger d-none">City is required!</span>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="inputPassword4" class="form-label fw-bold">Zip Code <spnan
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control form" id="zip" pattern="[0-9]{5}"
-                                        placeholder="A valid 5-digit zip code" maxlength="5"
-                                        oninput="this.value = this.value.replace(/[^0-9]/g, '')" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your zip code" data-bs-container="#addModal">
-                                    <span class="text-danger d-none">Zip code is required!</span>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="accordion-item mb-4" id="accordion-item2">
-                    <h2 class="accordion-header" id="headingTwo">
-                        <button class="accordion-button collapsed text-white" type="button" id="accordion-button2"
-                            data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
-                            aria-controls="collapseTwo">
-                            <span class="m-0 me-4 fs-1" style="font-weight: bold;">02</span>
-                            <h3 class="m-0"><strong>Assign Property</strong> <i class="fi fi-rs-pencil"></i><i
-                                    class="fi fi-rs-angle-circle-down chevron icon"></i>
-                            </h3>
-                        </button>
-                    </h2>
-                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                        data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            <form class="row g-3">
-                                <div class="col-md-4">
-                                    <label for="inputEmail4" class="form-label">Select Property<span
-                                            class="text-danger"> *</span></label>
-                                    <select id="property" class="form-select" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select your property" data-bs-container="#addModal">
-                                        <option selected>Choose...</option>
-                                        <option>...</option>
-                                    </select>
-                                    <span class="text-danger d-none">Property is required!</span>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="inputEmail4" class="form-label">Select Property Unit<span
-                                            class="text-danger"> *</span></label>
-                                    <select id="unit" class="form-select" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select your property units" data-bs-container="#addModal">
-                                        <option selected>Choose...</option>
-                                        <option>...</option>
-                                    </select>
-                                    <span class="text-danger d-none">Property units is required!</span>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="inputAddress" class="form-label">Input Rent Amount /Per
-                                        Month<span class="text-danger"> *</span></label>
-                                    <div class="input-group">
-                                        <span class="input-group-text"
-                                            style="color: #1467B0;background-color: transparent !important;">$</span>
-                                        <input type="text" class="form-control" id="rent" pattern="[0-9]{7}"
-                                            placeholder="Enter rent amount" maxlength="7"
-                                            oninput="this.value = this.value.replace(/[^0-9]/g, '')" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Rent Amount /Per Month" data-bs-container="#addModal">
-                                    </div>
-                                    <span class="text-danger d-none">Rent amount is required!</span>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="accordion-item" id="accordion-item3">
-                    <h2 class="accordion-header" id="headingThree">
-                        <button class="accordion-button collapsed text-white" id="accordion-button3" type="button"
-                            data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false"
-                            aria-controls="collapseThree">
-                            <span class="m-0 me-4 fs-1" style="font-weight: bold;">03</span>
-                            <h3 class="m-0"><strong>Lease Details</strong> <i class="fi fi-rs-pencil"></i><i
-                                    class="fi fi-rs-angle-circle-down chevron icon"></i>
-                            </h3>
-                        </button>
-                    </h2>
-                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-                        data-bs-parent="#accordionExampe">
-                        <div class="accordion-body">
-                            <form class="row g-3">
-                                <div class="col-md-12">
-                                    <label for="inputEmail4" class="form-label">Is this a gross lease or triple net
-                                        lease? <i class="fi fi-rs-info ms-2" style="color: #1467B0"></i></label>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" value="Gross Lease"
-                                            name="lease" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            Gross Lease
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" value="Triple Net Lease"
-                                            name="lease" id="flexCheckChecked1" href="#collapse1" role="button"
-                                            aria-expanded="false" aria-controls="collapseExample1">
-                                        <label class="form-check-label" for="flexCheckChecked1">
-                                            Triple Net Lease
-                                        </label>
-                                    </div>
-                                    <!-- <input type="hidden" name="radioOptionsHidden" required> -->
-                                    <div class="collapse" id="collapse1">
-                                        <div class="card card-body">
-                                            <div class="text-justify ps-2 border-model-line">
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <label for="inputEmail4" class="form-label">Base Rent Amount
-                                                            (Optional)</label>
-                                                        <div class="input-group">
-                                                            <span class="input-group-text"
-                                                                style="color: #1467B0;background-color: transparent !important;">$</span>
-                                                            <input type="text" class="form-control" id="baseRent"
-                                                                pattern="[0-9]{7}" placeholder="Enter Amount.."
-                                                                maxlength="7"
-                                                                oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                                                                required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Base Rent Amount" data-bs-container="#addModal">
-                                                        </div>
-                                                        <span class="text-danger d-none">Rent amount is
-                                                            required!</span>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label for="inputPassword4" class="form-label">Triple Net
-                                                            Amount (Optional)</label>
-                                                        <div class="input-group">
-                                                            <span class="input-group-text"
-                                                                style="color: #1467B0;background-color: transparent !important;">$</span>
-                                                            <input type="text" class="form-control" id="tripleNet"
-                                                                pattern="[0-9]{7}" placeholder="Enter Amount.."
-                                                                maxlength="7"
-                                                                oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                                                                required data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Triple Net Amount" data-bs-container="#addModal">
-                                                        </div>
-                                                        <span class="text-danger d-none">Rent amount is
-                                                            required!</span>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label for="inputEmail4" class="form-label">Lease Start
-                                                            Date</label>
-                                                        <input type="date" class="form-control position-relative"
-                                                            id="leaseStart" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Lease Start
-                                                            Date" data-bs-container="#addModal">
-                                                        <span class="text-danger d-none">Rent amount is
-                                                            required!</span>
-                                                        <!-- <i class="fi fi-rs-calendar"></i> -->
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label for="inputPassword4" class="form-label">Lease End
-                                                            Date</label>
+    <!-- Modal -->
 
-                                                        <input type="date" class="form-control" id="leaseEnd"
-                                                            required data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Lease End
-                                                            Date" data-bs-container="#addModal">
-                                                        <span class="text-danger d-none">Rent amount is
-                                                            required!</span>
-                                                        <!-- <i class="fi fi-rs-calendar"></i> -->
-                                                    </div>
-                                                    <!-- <input type="date" class="form-control input-date" id="middledate" required> -->
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <label for="inputEmail4" class="form-label">Are there any rent increases during
-                                        the Lease Term? <i class="fi fi-rs-info ms-2"
-                                            style="color: #1467B0"></i></label>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" value="yes" name="yesno"
-                                            id="flexCheckChecked2" href="#collapse2" role="button"
-                                            aria-expanded="false" aria-controls="collapseExample2" required>
-                                        <label class="form-check-label" for="flexCheckChecked">
-                                            Yes
-                                        </label>
-                                    </div>
-
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" value="no" name="yesno"
-                                            required>
-                                        <label class="form-check-label" for="flexCheckChecked">
-                                            No
-                                        </label>
-                                    </div>
-
-                                </div>
-                                <div class="col-12 row">
-                                    <!-- <div class="col-md-5">
-                                        <label for="inputEmail4" class="form-label">Date of Rent Change
-                                            (Optional)</label>
-                                        <input type="email" class="form-control" id="inputEmail4">
-                                    </div>
-                                    <div class="col-md-5">
-                                        <label for="inputPassword4" class="form-label">Rent Amount Correlating to
-                                            that Date</label>
-                                        <input type="password" class="form-control" id="inputPassword4">
-                                    </div>
-                                    <div class="col-md-2">
-                                        <button>
-                                            <i class="fi fi-rs-trash"></i>
-                                        </button>
-                                    </div> -->
-                                    <div class="collapse" id="collapse2">
-                                        <div class="card card-body">
-                                            <div class="text-justify" id="add-item-container">
-                                                <div class="row row-multiple mb-2 pb-3"
-                                                    style="background-color: #F4FAFF !important;">
-                                                    <div class="col-md-6">
-                                                        <label for="inputEmail4" class="form-label">Date of Rent
-                                                            Change
-                                                            (Optional)</label>
-                                                        <input type="date" class="form-control input-date dateofRentchange"
-                                                           name="dateofRentchange" id="dateofRentchange" required data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Date of Rent
-                                                           Change" data-bs-container="#addModal">
-                                                        <span class="text-danger d-none">Rent amount is
-                                                            required!</span>
-                                                    </div>
-                                                    <div class="col-md-5">
-                                                        <label for="inputPassword4" class="form-label">Rent Amount
-                                                            Correlating to
-                                                            that Date</label>
-                                                        <input type="text" class="form-control input-amount"
-                                                            id="amountChange" pattern="[0-9]{7}"
-                                                            placeholder="Enter Amount.." maxlength="7"
-                                                            oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                                                            required data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Rent Amount
-                                                            Correlating to
-                                                            that Date" data-bs-container="#addModal">
-                                                        <span class="text-danger d-none">Rent amount is
-                                                            required!</span>
-                                                    </div>
-                                                    <div
-                                                        class="col-md-1 d-flex justify-content-center align-items-end">
-                                                        <button type="button" class="btn p-0 del-btn">
-                                                            <i class="fi fi-rs-trash text-danger fs-5"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <a href="javascript:;" class="mt-1" id="add-item">+Add Line Item</a>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft'
-                    disabled>Save as
-                    Draft</button>
-                <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal"
-                    id='close'>Close</button>
-                <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
-                <button class="btn text-light button" style='background-color:#1467B0;' id='next'
-                    disabled>Next</button>
-                <button class="btn text-light button d-none" style='background-color:#1467B0;'
-                    id='submit'>Submit</button>
-                    <button class="btn text-light button d-none" style='background-color:#1467B0;'
-                    id='save'>Save</button>
-            </div>
-        </div>
-    </div>
-</div>
-    <div class="modal fade" id="myModal_edit" tabindex="-1" role="dialog">
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="text-justify ps-2 border-model-line">
-                        <h2 class="modal-title">Post an <strong class="color-primary">Update</strong></h2>
-                        <span class="">The real power of tasks is keeping track of deadlines and having a 
-                            log of all work and communication related to the tasks for later reference.</span>
+                        <h2 class="modal-title mb-0">Create <strong class="color-primary">New Invoice</strong></h2>
+                        <button type="button" class="btn btn-primary">#Invoice Number: INV-89900A</button>
                     </div>
                     <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="top-close">
-                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                        <form class="row g-3" enctype="multipart/form-data">
-                            <div class="col-md-12">
-                                <label class="form-label fw-bold">Message</label>
-
-                                <textarea class="form-control mb-4" placeholder="Sorry about that We will look into it." rows="4"></textarea>
+                    <div class="row mb-3">
+                        <div class="col-md-12 col-lg-6">
+                            <label class="form-label fw-bold fs-18">Select Tenant</label>
+                            <select class="form-control select2 form-select" data-placeholder="Select Tenant"
+                                name="tenants" id="tenants" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select Tenant" data-bs-container="#addModal">
+                                <option label="Choose one">
+                                </option>
+                                <option value="Repeat Yearly">Repeat Yearly</option>
+                                <option value="Repeat Monthly">Repeat Monthly</option>
+                            </select>
+                            <span class="text-danger d-none">Photos are required!</span>
+                        </div>
+                        <div class="col-md-12 col-lg-6">
+                            <label class="form-label fw-bold fs-18">Invoice Type</label>
+                            <div class="d-flex">
+                                <label class="custom-control custom-radio me-3 mb-0">
+                                    <input class="custom-control-input" type="radio" value="One Time Invoice"
+                                        name="invoice" id="invoice" checked >
+                                    <span class="custom-control-label">One Time Invoice</span>
+                                </label>
+                                <label class="custom-control custom-radio mb-0">
+                                    <input class="custom-control-input" type="radio" value="Recurring Invoice"
+                                        name="invoice" id="recurring" data-bs-toggle="collapse" href="#collapse1"
+                                        role="button" aria-expanded="false" aria-controls="collapseExample1">
+                                    <span class="custom-control-label">Recurring Invoice</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-8 col-lg-6">
+                            <label class="form-label fw-bold fs-18">Property Name</label>
+                            <input type="text" class="form-control form" id="propertyName" value="" readonly data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Property Name here" data-bs-container="#addModal">
+                            <span class="text-danger d-none">Photos are required!</span>
+                        </div>
+                        <div class="col-md-8 col-lg-6">
+                            <label class="form-label fw-bold fs-18">Due Date</label>
+                            <input type="date" class="form-control form" id="dueDate" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select Due Date" data-bs-container="#addModal">
+                            <span class="text-danger d-none">Photos are required!</span>
+                        </div>
+                        <div class="collapse row" id="collapse1">
+                            <div class="col-md-6 col-lg-4">
+                                <label class="form-label fw-bold fs-18">Start Date</label>
+                                <input type="date" class="form-control form" id="startDate" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select Start Date" data-bs-container="#addModal">
                                 <span class="text-danger d-none">Photos are required!</span>
                             </div>
-                            <div class="col-md-4">
-                                <label for="inputEmail4" class="form-label fw-bold">Due Date</label>
-                                <input class="form-control" placeholder="MM/DD/YYYY" type="date">
-                                <span class="text-danger d-none">Property ID is required!</span>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="inputState" class="form-label fw-bold">Priority</label>
-                                <select id="state" class="form-select form">
-                                <option selected>Choose...</option>
-                                <option>Sindh</option>
-                                <option>Punjab</option>
-                                <option>Balochistan</option>
-                                <option>KPK</option>
-                            </select>
-                                <span class="text-danger d-none">Property name required!</span>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="inputState" class="form-label fw-bold">Status</label>
-                                <select id="state" class="form-select form">
-                                <option selected>Choose...</option>
-                                <option>Sindh</option>
-                                <option>Punjab</option>
-                                <option>Balochistan</option>
-                                <option>KPK</option>
-                            </select>
-                                <span class="text-danger d-none">Address is required!</span>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label class="form-label fw-bold">Assignee(s)</label>
-                                    <select class="form-control select2" data-placeholder="Choose Browser" multiple>
-                                            <option value="Firefox">
-                                                Firefox
-                                            </option>
-                                            <option value="Chrome selected">
-                                                Chrome
-                                            </option>
-                                            <option value="Safari">
-                                                Safari
-                                            </option>
-                                            <option selected value="Opera">
-                                                Opera
-                                            </option>
-                                            <option value="Internet Explorer">
-                                                Internet Explorer
-                                            </option>
-                                        </select>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <label class="form-label fw-bold">Media/ Files</label>
-                                <div class="custom-file" style="border: 1px dashed #00000087;">
-                                    <input id="fileInput" type="file" name="image" class="custom-file-input form" accept=".jpg, .png, image/jpeg, image/png" aria-label="hello" multiple>
-                                    <span className="d-none"></span>
-                                    <label class="custom-file-label" for="fileInput">
-                                                <i class="fi fi-rs-cloud-upload"></i>
-                                                <div class="custom-file-text">
-                                                    <span>Upload Photo or drag and drop here</span>
-                                                    <span>JPEG and PNG, file size no more than 10MB</span>
-                                                </div>
-                                            </label>
-                                </div>
-                                <div class="selected-files">
-                                    <div class="file-grid"></div>
-                                </div>
+                            <div class="col-md-6 col-lg-4">
+                                <label class="form-label fw-bold fs-18">End Date</label>
+                                <input type="date" class="form-control form" id="endDate" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter End Date" data-bs-container="#addModal">
                                 <span class="text-danger d-none">Photos are required!</span>
                             </div>
-                        </form>
+                            <div class="col-md-12 col-lg-4">
+                                <label class="form-label fw-bold fs-18">Frequency</label>
+                                <select class="form-control select2 form-select" data-placeholder="Every Month"
+                                    id="frequency" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select Frequency" data-bs-container="#addModal">
+                                    <option label="Choose one">
+                                    </option>
+                                    <option value="Repeat Yearly">Repeat Yearly</option>
+                                    <option value="Repeat Monthly">Repeat Monthly</option>
+                                </select>
+                                <span class="text-danger d-none">Photos are required!</span>
+                            </div>
+                            <div class="col-md-8 col-lg-5">
+                                <label class="form-label fw-bold fs-18">Number of Days until due</label>
+                                <input type="text" class="form-control form" id="daysUntilDue" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Number of Days until due" data-bs-container="#addModal">
+                                <span class="text-danger d-none">Photos are required!</span>
+                            </div>
+                            <div class="col-md-2 col-lg-3">
+                                <label class="form-label fw-bold fs-18">Repeat</label>
+                                <label class="custom-switch form-switch mb-0">
+                                    <input type="checkbox" name="custom-switch-radio" class="custom-switch-input" id="" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select to repeat" data-bs-container="#addModal">
+                                    <span class="custom-switch-indicator custom-switch-indicator-md"></span>
+                                </label>
+                            </div>
+                            <div class="col-md-12 col-lg-4">
+                                <label class="form-label fw-bold fs-18">Terms</label>
+                                <select class="form-control select2 form-select" data-placeholder="Every Month"
+                                    id="terms" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select Terms" data-bs-container="#addModal">
+                                    <option label="Choose one">
+                                    </option>
+                                    <option value="Due on Receipt">Due on Receipt</option>
+                                </select>
+                                <span class="text-danger d-none">Photos are required!</span>
+                            </div>
+                        </div>
                     </div>
-
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="table-responsive">
+                                <table class="table text-nowrap table-borderless text-md-nowrap mg-b-0 mb-0"
+                                    id="lineItemsTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Category</th>
+                                            <th>Property</th>
+                                            <th>Memo</th>
+                                            <th>Amount</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="add-item-container1">
+                                        <tr class="tr">
+                                            <td><input type="text" class="form-control" name="category" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter category here" data-bs-container="#addModal"></td>
+                                            <td><input type="text" class="form-control" name="property" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter property here" data-bs-container="#addModal"></td>
+                                            <td><input type="text" class="form-control" name="memo" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter memo here" data-bs-container="#addModal"></td>
+                                            <td><input type="text" class="form-control" name="amount" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter amount here" data-bs-container="#addModal"></td>
+                                            <td><button type="button" class="btn" id="del-btn1">
+                                                    <i class="fi fi-rs-trash text-danger fs-5"></i>
+                                                </button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-12 mb-2">
+                            <a href="javascript:;" class="mt-1" id="add-item1">+Add Line Item</a>
+                        </div>
+                        <div class="col-md-12 col-lg-8">
+                            <textarea class="form-control mb-4" placeholder="Additional Notes" rows="4"
+                                id="additionalNotes" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Additional Notes here" data-bs-container="#addModal"></textarea>
+                            <span class="text-danger d-none">Photos are required!</span>
+                        </div>
+                        <div class="col-md-12 col-lg-4">
+                            <span class="float-end">
+                                <label class="form-label fw-bold m-0">Balance Due</label>
+                                <h1 class="text-primary fw-bold m-0" id="totalText">$0.00</h1>
+                            </span>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label fw-bold">Add Photo</label>
+                            <div class="custom-file" style="border: 1px dashed #00000087;">
+                                <input id="fileInput" type="file" name="image" class="custom-file-input form"
+                                    accept=".jpg, .png, image/jpeg, image/png" aria-label="hello" multiple>
+                                <span className="d-none"></span>
+                                <label class="custom-file-label" for="fileInput">
+                                    <i class="fi fi-rs-cloud-upload"></i>
+                                    <div class="custom-file-text">
+                                        <span>Upload Photo or drag and drop here</span>
+                                        <span>JPEG and PNG, file size no more than 10MB</span>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="selected-files">
+                                <div class="file-grid"></div>
+                            </div>
+                            <span class="text-danger d-none">Photos are required!</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="modal-footer d-flex justify-content-between">
+                <div class="modal-footer d-flex">
                     <!-- <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
                         Draft</button> -->
-                    <div class="d-flex">
+                    <!-- <div class="d-flex">
 
                         <label class="custom-control custom-checkbox me-2">
                                 <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1" checked="">
@@ -1128,91 +847,122 @@ color: #000;
                                 <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1" checked="">
                                 <span class="custom-control-label">Notify Assignee(s)</span>
                             </label>
+                    </div> -->
+                    <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal"
+                        id='close'>Close</button>
+                    <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
+                    <div class="btn-group rounded-split mt-2 mb-2">
+                        <button type="button" class="btn btn-pill btn-primary save-invoice">Save</button>
+                        <button type="button" class="btn btn-pill btn-primary dropdown-toggle px-1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" style="">
+                            <li><a href="javascript:void(0)"><i class="fi fi-rs-eye me-2 text-primary"></i> Preview
+                                    Invoice</a></li>
+                            <li><a href="javascript:void(0)" class="save-invoice"><i
+                                        class="fi fi-rs-disk me-2 text-primary "></i> Save & Send</a></li>
+                            <li>
+                                <a href="javascript:void(0)" class="save-invoice"> <i
+                                        class="fi fi-rs-print me-2 text-primary "></i>Save & Print</a>
+                            </li>
+                        </ul>
                     </div>
-                    <div class=""><button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close'>Close</button>
-                        <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
-                        <a href="javascript:void(0)" class="btn text-light btn-pill button disabled" style='background-color:#1467B0;' id='next'>Next</a></div>
 
                 </div>
             </div>
         </div>
     </div>
-    <div class="modal fade" id="succesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered succes-modal-dialog">
+    <!-- succes modal -->
+
+    <div class="modal fade" id="sendmailModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-
-                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="succes-close">
-                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                    <div class="text-justify ps-2 border-model-line">
+                        <h2 class="modal-title mb-0">Send <strong class="color-primary">Email</strong></h2>
+                        <p class="mb-1">Creating Invoice records that you owe a Tenant money.</p>
+                        <button type="button" class="btn btn-primary">#Invoice Number: INV-89900A</button>
+                    </div>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="top-close">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
                     </button>
                 </div>
-                <div class="modal-body succes-modal">
-                    <div class="text-justify ps-2 border-model-line">
-                        <h2 class="modal-title d-flex align-items-center ps-1">
-                            <strong class="color-primary">Success!&nbsp;</strong>
-                            <i class="fi fi-rs-check-circle text-success"></i>
-                            
-                        </h2>
-                        <p class="ps-1 text-justify" id="succes-text">Tenant has been successfully created and linked to 103A Unit with Property Name.</p>
-                        
-                    </div>
-                    <div class="d-flex align-items-center rounded-pill shadow-lg p-2 my-3">
-                        <div class="flex-grow-1 ms-3">
-                            <p class="fw-bolder link-text">Invite your Tenant to the Tenant Portal <a href="#">https://spaderent.tenant103A.com/rix-rbcr-mei</a></p>
-                            
-                          </div>
-                        <div class="flex-shrink-0">
-                            <a href="javascript:void(0)" class="btn btn-primary btn-pill" id="send-email">Send Invite</a>
-                        </div>
-                      </div>
-                    <div class="mt-2">                       <button type="button" class="btn btn-primary btn-pill mx-2"
-                        id="add_property_btn" data-bs-effect="effect-scale"
-                        data-bs-toggle="modal" href="#addModal"><i
-                            class="fe fe-plus me-2"></i><strong>ADD NEW
-                            TENANT</strong></button></div>
-
-                </div>
-                <div class="modal-footer" style="border-top: 0">
-                            
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="myModal_delete">
-        <div class="modal-dialog modal-dialog-centered text-center" role="document">
-            <div class="modal-content modal-content-demo">
-                <div class="modal-body p-0">
-                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
-                        <div class="card-header border-0 pt-3">
-                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
-                            </button>
-                        </div>
-                        <div class="card-body text-center">
-                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
-                                    viewBox="0 0 24 24">
-                                    <path fill="#f07f8f"
-                                        d="M20.05713,22H3.94287A3.02288,3.02288,0,0,1,1.3252,17.46631L9.38232,3.51123a3.02272,3.02272,0,0,1,5.23536,0L22.6748,17.46631A3.02288,3.02288,0,0,1,20.05713,22Z" />
-                                    <circle cx="12" cy="17" r="1" fill="#e62a45" />
-                                    <path fill="#e62a45" d="M12,14a1,1,0,0,1-1-1V9a1,1,0,0,1,2,0v4A1,1,0,0,1,12,14Z" />
-                                </svg></span>
-                            <h4 class="h4 mb-0 mt-3 fw-bold fs-4">Warning</h4>
-                            <p class="card-text">This will delete your property. Are you sure?</p>
-
-                        </div>
-                        <div class="card-footer text-center border-0 pt-0">
-                            <div class="row">
-                                <div class="text-center">
-                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">cancel</a>
-                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">delete</a>
+                <div class="modal-body">
+                    <div class="conatiner-fluid">
+                        <div class="row p-3 br-5" style="background-color: #FAFAFA;border: 4px solid #1467B0;">
+                            <div class="col-12 mb-5">
+                                <div class="d-flex justify-content-between">
+                                    <img src="../assets/images/logo-preloader.png" alt="" height="30px">
+                                    <span class="fw-bold fs-18 text-black">Date: 02/03/2022</span>
                                 </div>
+                            </div>
+                            <div class="col-12">
+                                <p class="fs-18" style="color: #B1B1B1;">Email: Johnadmas@outlook.com</p>
+                                <p class="fs-18" style="color: #666666;"><span class="text-black fw-bold">Subject: </span><span class="text-primary">INV-89900A</span> from Landloard (IT Company)</p>
+                                <p class="fs-18"><span class="text-black fw-bold">Dear </span><span class="text-primary">Tenant Name,</span></p>
+                                <p class="fs-18" style="color: #666666;">Please find attached your rent invoice with number <span class="fw-bold text-black">INV-89900A</span>. 
+                                    and Due Date: <span class="fw-bold text-black">02/03/2022</span> If you have any questions, please 
+                                    let us know. 
+                                    <br>
+                                    <br>
+                                    Have a great day and thank you for your business! 
+                                    <br>
+                                    <br>
+                                    Sincerely
+                                    <br>
+                                    <span class="fw-bold text-black">Landloard Name</span>
+                                    <br>
+                                    <span class="text-primary">IT Company</span>
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="modal-footer d-flex">
+                    <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
+                        Draft</button>
+                    <!-- <div class="d-flex">
+
+                        <label class="custom-control custom-checkbox me-2">
+                                <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1" checked="">
+                                <span class="custom-control-label">Notify Tenant</span>
+                            </label>
+                        <label class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1" checked="">
+                                <span class="custom-control-label">Notify Assignee(s)</span>
+                            </label>
+                    </div> -->
+                    <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal"
+                        id='close'>Close</button>
+                    <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
+                    <div class="btn-group rounded-split mt-2 mb-2">
+                        <button type="button" class="btn btn-pill btn-primary save-invoice">Save</button>
+                        <button type="button" class="btn btn-pill btn-primary dropdown-toggle px-1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" style="">
+                            <li><a href="javascript:void(0)"><i class="fi fi-rs-eye me-2 text-primary"></i> Preview
+                                    Invoice</a></li>
+                            <li><a href="javascript:void(0)" class="save-invoice"><i
+                                        class="fi fi-rs-disk me-2 text-primary "></i> Save & Send</a></li>
+                            <li>
+                                <a href="javascript:void(0)" class="save-invoice"> <i
+                                        class="fi fi-rs-print me-2 text-primary "></i>Save & Print</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
+
+    <!-- MODAL EFFECTS -->
+
     <!-- PAGE -->
     <div class="page">
         <div class="page-main">
@@ -1549,8 +1299,7 @@ color: #000;
                                 <div class="row">
                                     <div class="col-lg-9">
                                         <h3 class="page-titlee text-white" style="font-weight: 100; margin-bottom: 0px;">Welcome to Spade Portal</h3>
-                                        <h1 class="page-titlee text-white" style="font-weight: 700;" id="user-name">John Clark
-                                        </h1>
+                                        <h1 class="page-titlee text-white" style="font-weight: 700;" id="user-name">John Clark</h1>
                                         <a href="javascript:void(0)" id="email_verification" class="btn btn-primary btn-pill btn-xl email-verification-btn"><i
                                                 class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
                                             verification &nbsp; <i
@@ -1567,42 +1316,43 @@ color: #000;
                         <div class="row justify-content-center">
                             <div class="col-xl-7 col-md-7">
                                 <div class="card border p-0 pb-3">
-                                    <div class="card-body text-center">
-                                        <span class=""><img src="../assets/images/new-tenant.png" alt=""></span>
-                                        <h1 class="mt-3" style="font-weight: 700;line-height: 2.5rem;">Find Your <span style="color: #1467B0;">Next Tenant!</span></h1>
-                                        <p class="card-text px-5">Whether you want to market your rental across the web or invite an interested renter to apply, you first need to add a property. After that, it's easy to stay organized as renters go from lead to applicant to tenant.</p>
+                                    <div class="card-body text-center p-0">
+                                        <span class=""><img src="../assets/images/newinvoice.png" alt=""></span>
+                                        <h1 class="mt-3" style="font-weight: 700;line-height: 2.5rem;">Create <span style="color: #1467B0;">Invoices</span></h1>
+                                        <p class="card-text px-5">Whether you are looking to market your 
+                                            rental across the web or send a tenant an online application, you first 
+                                            need to add your property.</p>
                                     </div>
                                     <div class="card-footer text-center border-0">
                                         <div class="row">
                                             <div class="text-center">
                                                 <button type="button" class="btn btn-primary btn-pill btn-xl font-weight-bold" id="add_property_btn" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal"><i
-                                                    class="fe fe-plus me-2"></i><strong>ADD NEW TENANT</strong></button> </div>
+                                                    class="fe fe-plus me-2"></i><strong>ADD NEW
+                                                    INVOICE</strong></button> </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- ROW-3 CLOSED -->
-                </div>
-                <!-- ROW-2 END -->
+                    <!-- ROW-2 END -->
 
 
 
 
-                <div class="card-body pb-0 bg-recentorder" style="display: none;">
-                    <h3 class="card-title text-white">Recent Orders</h3>
-                    <div class="chartjs-wrapper-demo">
-                        <canvas id="recentorders" class="chart-dropshadow"></canvas>
+                    <div class="card-body pb-0 bg-recentorder" style="display: none;">
+                        <h3 class="card-title text-white">Recent Orders</h3>
+                        <div class="chartjs-wrapper-demo">
+                            <canvas id="recentorders" class="chart-dropshadow"></canvas>
+                        </div>
                     </div>
-                </div>
-                <div id="flotback-chart" class="flot-background" style="display: none;"></div>
+                    <div id="flotback-chart" class="flot-background" style="display: none;"></div>
 
+                </div>
+                <!-- CONTAINER END -->
             </div>
-            <!-- CONTAINER END -->
         </div>
-    </div>
-    <!--app-content close-->
+        <!--app-content close-->
 
     </div>
 
@@ -2158,9 +1908,7 @@ color: #000;
     </div>
 
     <!-- BACK-TO-TOP -->
-    <!-- <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a> -->
-    <a href="#addModal" data-bs-effect="effect-scale" data-bs-toggle="modal" id="add-tenant-side-btn"><i class="fe fe-plus"></i></a>
-
+    <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a>
 
 
     <!-- JQUERY JS -->
@@ -2236,15 +1984,7 @@ color: #000;
     <script src="../assets/js/custom.js"></script>
 
     <!-- ############################################# -->
-    <!-- INTERNAL Autofill-Table JS -->
-    <!-- <script src="../assets/plugins/datatable/js/jquery.dataTables.min.js"></script> -->
-    <!-- <script src="../assets/plugins/datatable/js/dataTables.bootstrap5.js"></script> -->
-    <!-- <script src="../assets/plugins/datatable/js/dataTables.buttons.min.js"></script> -->
-    <!-- <script src="../assets/plugins/datatable/js/buttons.bootstrap5.min.js"></script> -->
-    <!-- <script src="../assets/plugins/extension-datatable/autofill/dataTables.autoFill.min.js"></script> -->
-    <script src="../assets/plugins/extension-datatable/autofill/autoFill.bootstrap5.min.js"></script>
-    <!-- <script src="../assets/plugins/extension-datatable/keytable/dataTables.keyTable.min.js"></script> -->
-    <script src="../assets/js/autofill-table.js"></script>
+
 
     <!-- C3 CHART JS -->
     <script src="../assets/plugins/charts-c3/d3.v5.min.js"></script>
@@ -2257,223 +1997,31 @@ color: #000;
     <script src="../assets/plugins/chart/Chart.bundle.js"></script>
     <script src="../assets/plugins/chart/utils.js"></script>
 
-
-    <script src="../assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
-    <!-- BOOTSTRAP-DATERANGEPICKER JS -->
-    <script src="../assets/plugins/bootstrap-daterangepicker/moment.min.js"></script>
-    <script src="../assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
-
-    <!-- INTERNAL Bootstrap-Datepicker js-->
-    <script src="../assets/plugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
-
-    <!-- INTERNAL Sumoselect js-->
-    <script src="../assets/plugins/sumoselect/jquery.sumoselect.js"></script>
-
-    <!-- TIMEPICKER JS -->
-    <script src="../assets/plugins/time-picker/jquery.timepicker.js"></script>
-    <script src="../assets/plugins/time-picker/toggles.min.js"></script>
-
-    <!-- INTERNAL intlTelInput js-->
-    <script src="../assets/plugins/intl-tel-input-master/intlTelInput.js"></script>
-    <script src="../assets/plugins/intl-tel-input-master/country-select.js"></script>
-    <script src="../assets/plugins/intl-tel-input-master/utils.js"></script>
-
-    <!-- INTERNAL jquery transfer js-->
-    <script src="../assets/plugins/jQuerytransfer/jquery.transfer.js"></script>
-
-    <!-- INTERNAL multi js-->
-    <script src="../assets/plugins/multi/multi.min.js"></script>
-
-    <!-- DATEPICKER JS -->
-    <script src="../assets/plugins/date-picker/date-picker.js"></script>
-    <script src="../assets/plugins/date-picker/jquery-ui.js"></script>
-    <script src="../assets/plugins/input-mask/jquery.maskedinput.js"></script>
-
-    <!-- COLOR PICKER JS -->
-    <script src="../assets/plugins/pickr-master/pickr.es5.min.js"></script>
-    <script src="../assets/js/picker.js"></script>
-
-    <!-- MULTI SELECT JS-->
-    <script src="../assets/plugins/multipleselect/multiple-select.js"></script>
-    <script src="../assets/plugins/multipleselect/multi-select.js"></script>
-
-    <!-- FORMELEMENTS JS -->
-    <script src="../assets/js/formelementadvnced.js"></script>
-    <script src="../assets/js/form-elements.js"></script>
-
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
+
+    <script src="../assets/js/modal_functionality.js">
+    </script>
     <script>
-        var selectedFiles = [];
-        $(document).ready(function() {
-            $('#add-item-container').on('click', '.del-btn', function () {
-                var $row = $(this).closest('.row');
-                var $rowsContainer = $row.parent();
-
-                if ($rowsContainer.children('.row').length > 1) {
-                    $row.remove();
-                } else {
-                    //   alert('Cannot delete the last row.');
-                }
-            });
-            // $("#preloader").fadeIn("fast");
-            // $("#succesModal").modal("show")
-            let tenantID;
-            $("#send-email").click(() => {
-                    $("#succesModal").modal("hide")
-                    console.log(tenantID)
-                    $.ajax({
-                        url: 'http://localhost:3000/api/spade/sendInvitationLink',
-                        type: 'POST',
-                        data: JSON.stringify({
-                            tenantID: tenantID
-                        }),
-                        contentType: "application/json; charset=utf-8",
-                        processData: false,
-                        headers: {
-                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                        },
-                        success: function(response) {
-                            window.location="./add-tenant.html"
-                        },
-                        error: function(xhr, status, error) {
-                            // Handle the error response
-                            console.log(xhr)
-                            console.log(status)
-                            console.log(error)
-                            console.error('Error sending data:', error);
-                        }
-                    });
-                })
-                // $("#succesModal").modal("show")
-            $.ajax({
-                url: 'http://api.geonames.org/searchJSON',
-                method: 'GET',
-                data: {
-                    country: 'US',
-                    maxRows: 500,
-                    username: 'developedmatz', // Replace with your GeoNames username
-                    style: 'full'
-                },
-                success: function(result) {
-                    // Handle state selection change
-                    console.log(result)
-                    $('#state').change(function() {
-                        var selectedState = $(this).val();
-
-                    });
-
-                    var stateDropdown = $('#state');
-                    var states = result.geonames.filter(function(place) {
-                        return place.fcode === "ADM1";
-                    });
-
-                    //   stateDropdown.append($('<option></option>').text("Choose..."));
-                    states.forEach(function(state) {
-                        stateDropdown.append($('<option></option>').text(state.adminName1));
-                    });
-                },
-                error: function(xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                }
-            });
-            $.ajax({
-                url: 'http://localhost:3000/api/spade/getPropertyUnitsTenant',
-                type: 'GET',
-                contentType: false,
-                processData: false,
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                },
-                success: function(response) {
-                    var properties = response.data; // Assuming the response data is an array of property objects
-                    $("#user-name").text(response.user)
-                        // Populate Select Property dropdown
-                    var propertySelect = $('#property');
-                    propertySelect.empty(); // Clear existing options
-                    propertySelect.append($('<option></option>')
-                        .text("Choose..")
-                    )
-                    properties.forEach(function(property) {
-                        var option = $('<option></option>')
-                            .text(property.propertyName)
-                            .val(property.id);
-                        propertySelect.append(option);
-                    });
-
-                    // Handle property selection change
-                    propertySelect.change(function() {
-                        var selectedPropertyId = $(this).val();
-
-                        // Find the selected property object
-                        var selectedProperty = properties.find(function(property) {
-                            return property.id == selectedPropertyId;
-                        });
-
-                        // Populate Select Property Unit dropdown
-                        var propertyUnitSelect = $('#unit');
-                        propertyUnitSelect.empty(); // Clear existing options
-
-                        selectedProperty.vacantUnits.forEach(function(unit) {
-                            console.log(unit.unitNumber)
-
-                            var option = $('<option></option>')
-                                .text(unit.unitNumber)
-                                .val(unit.id);
-                            propertyUnitSelect.append(option);
-                        });
-                    });
-                },
-                error: function(xhr, status, error) {
-                    window.alert('Error: ' + error);
-                }
-            });
-
-
-            $("#add-item").on("click", () => {
-                $("#add-item-container").append(`<div class="row row-multiple mb-2 pb-3" style="background-color: #F4FAFF !important;"><div class="col-md-6">
-                                            <label for="inputEmail4" class="form-label">Date of Rent Change (Optional)</label>
-                                            <input type="date" class="form-control input-date" id="inputEmail4" required>
-                                          </div>
-                                          <div class="col-md-5">
-                                            <label for="inputPassword4" class="form-label">Rent Amount Correlating to that Date</label>
-                                            <input type="text" class="form-control input-amount" id="amountChange" pattern="[0-9]{7}" placeholder="Enter Amount.." maxlength="7"
-                                                                oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
-                                          </div>
-                                          <div class="col-md-1 d-flex justify-content-center align-items-end">
-                                                            <button type="button" class="btn p-0 del-btn">
-                                                                <i class="fi fi-rs-trash text-danger fs-5"></i>
-                                                            </button>
-                                                        </div>`)
-            });
-            $('#add-item-container').on('click', '.del-btn', function() {
-                var $row = $(this).closest('.row');
-                var $rowsContainer = $row.parent();
-
-                if ($rowsContainer.children('.row').length > 1) {
-                    $row.remove();
-                } else {
-                    //   alert('Cannot delete the last row.');
-                }
-            });
-            $('input[name="yesno"]').change(function() {
+        $(document).ready(function () {
+            $('input[name="invoice"],input[name="invoice_update"]').change(function () {
                 console.log($(this).val())
-                if ($(this).val() === 'yes') {
-                    if (!$('#collapse2').hasClass('show')) {
-                        $('#collapse2').collapse('show');
+                if ($(this).val() === 'Recurring Invoice') {
+                    if (!$('#collapse1').hasClass('show')) {
+                        $('#collapse1').collapse('show');
                     }
-                    $('.row-multiple').each(function() {
+                    $('.row-multiple').each(function () {
                         var date = $(this).find('.input-date')
                         var amount = $(this).find('.input-amount')
                         date.prop('required', true)
                         amount.prop('required', true)
                     })
-                } else if ($(this).val() === 'no') {
+                } else if ($(this).val() === 'One Time Invoice') {
 
-                    if ($('#collapse2').hasClass('show')) {
-                        $('#collapse2').collapse('hide');
+                    if ($('#collapse1').hasClass('show')) {
+                        $('#collapse1').collapse('hide');
                     }
-                    $('.row-multiple').each(function() {
+                    $('.row-multiple').each(function () {
                         var date = $(this).find('.input-date')
                         var amount = $(this).find('.input-amount')
                         date.prop('required', false)
@@ -2481,444 +2029,879 @@ color: #000;
                     })
                 }
             });
-            $('input[name="lease"]').change(function() {
-                console.log($(this).val())
-                if ($(this).val() === 'Triple Net Lease') {
-                    if (!$('#collapse1').hasClass('show')) {
-                        $('#collapse1').collapse('show');
-                    }
-                    $('#baseRent').prop('required', true);
-                    $('#tripleNet').prop('required', true);
-                    $('#leaseStart').prop('required', true);
-                    $('#leaseEnd').prop('required', true);
-                } else if ($(this).val() === 'Gross Lease') {
+            var selectedFiles = [];
+            $('#fileInput').on('change', function () {
+                var files = Array.from($(this)[0].files);
+                // console.log(files)
+                files.forEach(function (file) {
+                    selectedFiles.push(file); // Add each file to the selected files array
+                });
 
-                    if ($('#collapse1').hasClass('show')) {
-                        $('#collapse1').collapse('hide');
-                    }
-                    $('#baseRent').prop('required', false);
-                    $('#tripleNet').prop('required', false);
-                    $('#leaseStart').prop('required', false);
-                    $('#leaseEnd').prop('required', false);
-                }
+                updateSelectedFilesContainer(); // Update the selected files container
+            });
+            $('#fileInput_update').on('change', function () {
+                // console.log($(this)[0].files)
+                var files = Array.from($(this)[0].files);
+                // console.log(files)
+                files.forEach(function (file) {
+                    selectedFiles.push(file); // Add each file to the selected files array
+                });
+
+                updateSelectedFilesContainer(); // Update the selected files container
             });
 
-            // Function to get the form data from the accordions
-            function getFormData() {
-                var formData = {};
+            $(document).on('click', '.delete-file', function () {
+                var index = $(this).data('index');
+                selectedFiles.splice(index, 1); // Remove the selected file from the array
+                updateSelectedFilesContainer(); // Update the selected files container
+            });
+            function updateSelectedFilesContainer() {
+                var selectedFilesContainer = $('.file-grid');
+                selectedFilesContainer.empty();
+                console.log(selectedFiles)
+                selectedFiles.forEach(function (file, index) {
 
-                // Get Tenant Information
-                formData.firstName = document.getElementById('firstName').value;
-                formData.lastName = document.getElementById('lastName').value;
-                formData.companyName = document.getElementById('company').value;
-                formData.email = document.getElementById('email').value;
-                formData.phoneNumber = document.getElementById('phone').value;
-                formData.address = document.getElementById('address').value;
-                formData.state = document.getElementById('state').value;
-                formData.city = document.getElementById('city').value;
-                formData.zipcode = document.getElementById('zip').value;
+                    var fileElement = $('<div>')
+                        .addClass('selected-file')
+                        .append(
+                            $('<img>')
+                                .addClass('file-preview')
+                                .attr('src', typeof file === "object" ? URL.createObjectURL(file) : '../../../../spadeAPI/uploads/' + file)
+                        )
+                        .append(
+                            $('<div>')
+                                .addClass('file-details')
+                                .append($('<span>').text("Image-" + (index + 1)))
+                            // .append($('<span>').text(fileSize))
+                        )
+                        .append(
+                            $('<p>')
+                                .addClass('delete-file')
+                                .text('X')
+                                .attr('data-index', index)
+                        )
+                        .appendTo(selectedFilesContainer);
 
-                // Get Assign Property
-                formData.propertyID = document.getElementById('property').value;
-                formData.propertyUnitID = document.getElementById('unit').value;
-                formData.rentAmount = document.getElementById('rent').value;
-
-                // Get Lease Details
-                formData.gross_or_triple_lease = document.querySelector('input[name="lease"]:checked').value;
-                console.log(document.getElementById('baseRent'))
-                formData.baseRent = document.getElementById('baseRent').value;
-                formData.tripleNet = document.getElementById('tripleNet').value;
-                formData.leaseStartDate = document.getElementById('leaseStart').value;
-                formData.leaseEndDate = document.getElementById('leaseEnd').value;
-                formData.increaseRent = document.querySelector('input[name="yesno"]:checked').value;
-
-
-                var rowData = [];
-
-                // Iterate over each row
-                $('.row-multiple').each(function() {
-                    var date = $(this).find('.input-date').val();
-                    var amount = $(this).find('.input-amount').val();
-
-                    // Create an object with the extracted data
-                    var rowObject = {
-                        date: date,
-                        amount: amount
-                    };
-
-                    // Add the object to the rowData array
-                    rowData.push(rowObject);
                 });
-                // console.log(rowData)
-                formData.increaseRentData = rowData
-                    //   formData.rentChangeDate = document.getElementById('dateofRentchange').value;
-                    //   formData.amountChange = document.getElementById('amountChange').value;
 
-                return formData;
             }
-            $("#submit").on("click", () => {
-                    console.log(2)
-                    sendData()
-                })
-                // Function to make the AJAX call
-            function sendData() {
-                var formData = getFormData();
-                // console.log(formData)
-                $("#addModal").modal("hide")
-                    // Make the AJAX call
+
+            function formatFileSize(bytes) {
+                if (bytes === 0) return '0 Bytes';
+                var k = 1024;
+                var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+                var i = Math.floor(Math.log(bytes) / Math.log(k));
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+            }
+
+            function truncateFileName(fileName) {
+                var maxFileNameLength = 10; // Define the maximum length of the file name
+                if (fileName.length > maxFileNameLength) {
+                    return fileName.substring(0, maxFileNameLength) + '...'; // Truncate the file name
+                }
+
+                return fileName;
+            }
+            $("#resend-invoice").click(()=>{
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/tenants',
-                    type: 'POST',
-                    data: JSON.stringify(formData),
-                    contentType: "application/json; charset=utf-8",
+    url: 'http://localhost:3000/api/spade/resendEmail',
+    type: 'GET',  // Change the method to POST
+    data: { invoiceID: invoiceId },  // Send the data in the request body
+    contentType: 'application/json',  // Set the content type to JSON
+    headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+    },
+    success: function (response) {
+        // Handle the success response from the API
+        console.log('API response:', response);
+    },
+    error: function (xhr, status, error) {
+        // Handle the error response from the API
+        console.log('API error:', error);
+    }
+});
+
+            })
+            $(".save-invoice").each(function () {
+                $(this).on("click", function () {
+                    console.log(1)
+                    var selectedTenant = $('#tenants').val();
+                    var selectedInvoiceType = $('input[name="invoice"]:checked').val();
+                    var startDate = $('#startDate').val();
+                    var endDate = $('#endDate').val();
+                    var dueDate=$('#dueDate').val()
+                    var selectedFrequency = $('#frequency').val();
+                    var daysUntilDue = $('#daysUntilDue').val();
+                    var selectedTerms = $('#terms').val();
+                    var additionalNotes = $('#additionalNotes').val();
+                    var switchValue = $("input[name='custom-switch-radio']").is(":checked");
+                    // Collect the line items data from the table
+                    var lineItems = [];
+                    $('#lineItemsTable tbody tr').each(function () {
+
+                        var category = $(this).find('input[name="category"]').val();
+                        var property = $(this).find('input[name="property"]').val();
+                        var memo = $(this).find('input[name="memo"]').val();
+                        var amount = $(this).find('input[name="amount"]').val();
+
+                        lineItems.push({
+                            category: category,
+                            property: property,
+                            memo: memo,
+                            amount: amount
+                        });
+                    });
+
+                    // Create a FormData object to hold the data and files
+                    var formData = new FormData();
+                    var buttonText = $(this).text();
+
+                    if (buttonText !== "Save" && buttonText.indexOf("Print") === -1) {
+                        console.log("here")
+                        formData.append("sendmails", "Yes")
+                    }
+                    // Add the data to the FormData object
+                    formData.append('tenantID', selectedTenant);
+                    formData.append('invoiceType', selectedInvoiceType);
+                    formData.append('startDate', startDate);
+                    formData.append('endDate', endDate);
+                    formData.append('frequency', selectedFrequency);
+                    formData.append('dueDate', dueDate);
+                    formData.append('dueDays', daysUntilDue);
+                    formData.append('terms', selectedTerms);
+                    formData.append('repeatTerms', switchValue);
+                    formData.append('additionalNotes', additionalNotes);
+                    console.log($("#totalText").text().split('$')[1])
+                    formData.append('totalAmount', $("#totalText").text().split(' ')[1])
+                    // Loop through the lineItems array and add each line item to the FormData object
+                    for (var i = 0; i < lineItems.length; i++) {
+                        var lineItem = lineItems[i];
+                        formData.append('lineItems[' + i + '][category]', lineItem.category);
+                        formData.append('lineItems[' + i + '][property]', lineItem.property);
+                        formData.append('lineItems[' + i + '][memo]', lineItem.memo);
+                        formData.append('lineItems[' + i + '][amount]', lineItem.amount);
+                    }
+
+                    // Add the files to the FormData object
+                    var fileInput = document.getElementById('fileInput');
+                    var files = fileInput.files;
+
+                    for (var i = 0; i < files.length; i++) {
+                        var file = files[i];
+                        formData.append('image', file);
+                    }
+
+                    // Send the data and files to the API using AJAX
+                    $.ajax({
+                        url: 'http://localhost:3000/api/spade/createInvoice',
+                        type: 'POST',
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+
+                        success: function (response) {
+                            // Handle the success response from the API
+                            console.log('API response:', response);
+                        },
+                        error: function (xhr, status, error) {
+                            // Handle the error response from the API
+                            console.log('API error:', error);
+                        }
+                    });
+                });
+            });
+            let tenantData = []; let invoiceData = []
+            function getData() {
+                $("#preloader").fadeIn("fast");
+                // console.log(22)
+                $.ajax({
+                    url: 'http://localhost:3000/api/spade/viewPropertyTenant',
+                    type: 'GET',
+                    contentType: false,
                     processData: false,
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
-                    success: function(response) {
-                        console.log(response)
-                            // Handle the success response
-                        $("#succes-text").text(`Tenant has been successfully created and linked to ${formData.propertyUnitID} Unit with ${formData.propertyID}.`)
+                    success: function ({ data, user }) {
+                        console.log(data)
+                        $("#user-name").text(user)
+                        $("#tenants").empty()
+                        $("#tenants").append($('<option></option>').text("Choose..."));
+                        tenantData = data[0]
+                        // var tableBody = $('#table_body');
 
-                        $("#succesModal").modal("show")
-                        tenantID = response.tenantId
-                            // console.log(response)
-                            // console.log('Data sent successfully!');
+                        data[0]?.forEach(function (tenant) {
+                            $("#tenants").append($('<option></option>').text(tenant.firstName + " " + tenant.lastName).val(tenant.tenantID));
+                        })
                     },
-                    error: function(xhr, status, error) {
-                        // Handle the error response
-                        console.log(xhr)
-                        console.log(status)
+                    error: function (xhr, status, error) {
                         console.log(error)
-                        console.error('Error sending data:', error);
+                        window.alert('Error: ' + "Token expeired!, Login again");
+                        window.location = '../Landlord/login_module.html';
                     }
                 });
-            }
-            $("#next").on('click', () => {
-                console.log(1)
-                var accordions = $('.accordion-item');
-                console.log(accordions)
-                    // Open all accordions
-                accordions.addClass('open');
-                $("#edit-btn").removeClass("d-none")
-                $(".title-text").empty()
-                $(".title-text").append(`<h2 class="modal-title">View <strong class="color-primary" id="title-sub">Tenant Summary</strong></h2><span class="">Post your properties to thousands of potential investors,
-                            tenants and interested individuals.</span>`)
-                $(".accordion-item .icon").removeClass("fi-rs-exclamation");
-                $(".accordion-item .icon").removeClass("chevron");
-                $(".accordion-item .icon").addClass("fi-rs-check-circle");
-                $(".accordion-item .icon").removeClass("cross");
-                $(".accordion-item .icon").addClass("tick");
-                // console.log($('#title-sub'))
-                $("#next").addClass("d-none")
-                $("#submit").removeClass("d-none")
-                    // $('.modal-title').text("View ");
 
-                // Change the text of the <strong> element
-                // $('#title-sub').text('Tenant Summary');
-                // $('#title-sub').text("Tenant Summary")
-                // $(".border-model-line span").text("Post your properties to thousands of potential investors, tenants and interested individuals")
+                $.ajax({
+                    url: 'http://localhost:3000/api/spade/getAllInvoices',
+                    type: 'GET',
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function ({ data }) {
+                        console.log(data)
+                        // if(!data){
+                        //     window.location="./new-tenant.html"
+                        // }
+                        console.log(data[0])
+                        invoiceData = data[0]
 
-                // Find all input, select, and other fields within the accordions and make them readonly
-                accordions.find('input,textarea').attr('readonly', true);
+                        var tableBody = $('#table_body');
+                        tableBody.empty();
+                        // console.log(data[0])
+                        let tenantNames = []
 
-                // Optional: Disable any buttons within the accordions
-                accordions.find('button,select,input[type="radio"]').prop('disabled', true);
-                // Optional: Disable any buttons within the accordions
-                //   accordions.find('button').prop('disabled', true);
+                        data[0]?.forEach(function (invoice) {
 
-                // Remove data-bs-toggle attribute from accordion headers
-                accordions.find('.accordion-button').removeAttr('data-bs-toggle').removeClass("collapsed");
-                accordions.find('.accordion-button').removeAttr('data-bs-toggle').removeClass("collpsed");
-                accordions.find('.accordion-collapse').addClass("show");
-                $("#next").removeAttr
 
-                // sendData()
-            })
-            $("#edit-btn").on('click', () => {
-                console.log(1)
-                var accordions = $('.accordion-item');
-                console.log(accordions)
-                    // Open all accordions
-                accordions.addClass('open');
+                            var invoiceNumber = '<td class="invoice-id" style="font-weight: 600;">' + invoice.invoiceID + '</td>';
 
-                $("#edit-btn").addClass("d-none")
-                    // $(".border-model-line h2").text("Create ")
-                $(".title-text").empty()
-                $(".title-text").append(`<h2 class="modal-title">Create <strong class="color-primary" id="title-sub">New Tenant</strong></h2><span class="">Post your properties to thousands of potential investors,
-                            tenants and interested individuals.</span>`)
-                    // $("#title-sub").text("New Tenant")
-                    // $(".border-model-line span").text("Post your properties to thousands of potential investors, tenants and interested individuals")
-                    // $(".accordion-item .icon").removeClass("fi-rs-exclamation");
-                $(".accordion-item .icon").removeClass("fi-rs-check-circle");
-                $(".accordion-item .icon").addClass("chevron");
-                $(".accordion-item .icon").removeClass("cross");
-                $(".accordion-item .icon").removeClass("tick");
-                // Find all input, select, and other fields within the accordions and make them readonly
-                accordions.find('input,textarea').attr('readonly', false);
-                // Optional: Disable any buttons within the accordions
-                accordions.find('button,select,input[type="radio"]').prop('disabled', false);
-                // Optional: Disable any buttons within the accordions
-                //   accordions.find('button').prop('disabled', true);
+                            var tenantName = '<td class="tenantName" style="font-weight: 600;">' + invoice.firstName + invoice.lastName + `<br><small>${invoice.tPhone}</small>` + '</td>';
+                            var memoDescription = '<td class="memo" style="font-weight: 600;">' + invoice.memo[0].memo + `<br><small>${invoice.invoiceType}</small>` + '</td>';
 
-                // Remove data-bs-toggle attribute from accordion headers
-                accordions.find('.accordion-button').attr('data-bs-toggle', 'collapse').addClass("collapsed");
-                accordions.find('.accordion-collapse').addClass("show");
-                $("#next").removeClass("d-none")
-                $("#submit").addClass("d-none")
-                    // $("#submit").removeAttr('disabled','disabled')
-            })
+                            var dateObj = new Date(invoice.created_at);
+                            var day = dateObj.getDate();
+                            var month = dateObj.getMonth() + 1;
+                            var year = dateObj.getFullYear();
+                            var invoiceDate = '<td class="date" style="font-weight: 600;">' + day + "/" + month + "/" + year + '</td>';
+                            var propertyName = '<td class="propertyName" style="font-weight: 600;">' + invoice.propertyName + `<br><small>${invoice.tPhone}</small>` + '</td>';
+                            var invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + invoice.totalAmount + '<span> $</span>' + `<br><small>Next Due Date: November-12-2020</small>` + '</td>';
+                            var status = `<td class="status" style="font-weight: 600;${invoice.status === "Unpaid" ? 'color:blue;' : 'color:green'}">` + invoice.status + '</td>';
+                            var dropdownMenu = `<td><i class="fe fe-more-vertical three-dots"
+                                                                data-bs-toggle="dropdown"></i>
 
-            function checkFieldsStatus(accordionId) {
-                // var accordionFields = $('#' + accordionId + ' input[type="text"], #' + accordionId + ' select');
-                var accordionFields = $('#' + accordionId + ' input[required], #' + accordionId + ' select[required]');
+                                                            <ul class="dropdown-menu">
+                                                                <li><a class="dropdown-item text-dark view-btn"
+                                                                        data-bs-effect="effect-scale"
+                                                                        data-bs-toggle="modal"
+                                                                        href="#viewModal">View</a></li>
+                                                                <li><a class="dropdown-item text-dark edit-option"
+                                                                        data-bs-effect="effect-scale"
+                                                                        href="#"
 
-                // var imageField = $('#' + accordionId + ' input[type="file"]');
-                var hasEmptyFields = false;
-                var hasErrorFields = false;
-                var hasFilledFields = false;
+                                                                        >Edit</a></li>
+                                                                <li><a class="dropdown-item text-dark status-option"
+                                                                        data-bs-effect="effect-scale"
+                                                                        data-bs-toggle="modal"
+                                                                        href="#changeStatusModal">Change Status</a></li>
+                                                                <li><a class="dropdown-item text-dark resend-option"
+                                                                        data-bs-effect="effect-scale"
+                                                                        data-bs-toggle="modal"
+                                                                        href="#">Resend Invoice</a></li>
+                                                                <li><a class="dropdown-item text-dark refund-option"
+                                                                        data-bs-effect="effect-scale"
+                                                                        data-bs-toggle="modal" href="#refundModal">Issue
+                                                                        Refund</a></li>
+                                                                <li><a class="dropdown-item text-danger delete-option"
+                                                                        href="javascript:void(0)">Delete</a>
+                                                                </li>
+                                                            </ul>
+                                                        </td>`
 
-                accordionFields.each(function() {
-                    var $field = $(this);
-                    if ($field.val() === '' || $field.val() === 'Choose...') {
-                        hasEmptyFields = true;
-                    }
-                    if ($field.hasClass('border-danger')) {
-                        hasErrorFields = true;
-                    }
-                    if ($field.val() !== '' || $field.val() !== 'Choose...') {
-                        hasFilledFields = true;
+
+                            var row = '<tr>' + invoiceNumber + tenantName + memoDescription + invoiceDate +
+                                propertyName + invoiceAmount + status + dropdownMenu + '</tr>';
+
+                            // Append the row to the table body
+                            tableBody.append(row);
+                        });
+                        $("#preloader").fadeOut("slow")
+                        $('.edit-option').click(function (e) {
+                            e.preventDefault();
+                            const tenantIdElement = $(this).closest("tr").find(".tenant-id");
+
+                            tenantID = tenantIdElement.text();
+
+                            const data = response.data[0].find(obj => obj.id.toString() === propertyId);
+                            // selectedFiles = data.images
+                            updateSelectedFilesContainer()
+                            $("#propertyId_update").val(data.id);
+                            $("#propertyName_update").val(data.propertyName);
+                            $("#address_update").val(data.address);
+                            $("#city_update").val(data.city);
+                            $("#state_update").val(data.state);
+                            $("#zip_update").val(data.zipCode);
+                            $("#propertyType_update").val(data.propertyType);
+                            $("#propertyTotalSF_update").val(data.propertySQFT);
+                            $("#unit_update").val(data.units);
+                            $("#property-name").text(data.propertyName)
+                            $('#myModal_edit').modal('show');
+                        });
+
+                    },
+                    error: function (xhr, status, error) {
+                        // console.log(error)
+                        // window.alert('Error: ' + "Token expeired!, Login again");
+                        // window.location = '../Landlord/login_module.html';
                     }
                 });
-                // if (imageField.length && imageField.get(0).files.length === 0) {
-                //     hasEmptyFields = true;
-                // }
-                if (hasEmptyFields && hasErrorFields) {
-                    return 1;
-                } else if (!hasEmptyFields && !hasErrorFields && hasFilledFields) {
-                    return 2;
-                } else if (hasEmptyFields && !hasErrorFields && hasFilledFields) {
-                    console.log(2)
-                    return 3;
-                } else {
-                    return 0;
-                }
+
             }
-
-            let counter = 0
-
-            function checkFieldsFilled(id) {
-                console.log(id)
-                const status = checkFieldsStatus(id)
-                if (id === "accordion-item2" && counter === 0) {
-                    counter += 1
-                    return
-                }
-                const accordionItem = document.getElementById(id);
-                const formFields = accordionItem.querySelectorAll("input[required], select[required]");
-                let allFieldsFilled = true;
-                formFields.forEach(function(field) {
-                    if (field.value === "" || field.value === "Choose...") {
-                        allFieldsFilled = false;
+            getData()
+            $("#tenants,#tenants_update").change(() => {
+                const property = $("#tenants").val()
+                // console.log(property)
+                const propertyName = tenantData.filter((tenant) => {
+                    if (tenant.tenantID == property) {
+                        return tenant.propertyName
                     }
+                })
+                // console.log(propertyName)
+                $("#propertyName").val(propertyName[0].propertyName)
+            })
+            function checkFields() {
+                var isFilled = true;
 
+                // Check each required field for emptiness
+                $("input[type='text']:not(#fileInput), textarea, select").each(function () {
+                    if ($(this).val() === "") {
+                        isFilled = false;
+                        return false; // Exit the loop if any field is empty
+                    }
                 });
-                const chevronIcon = accordionItem.querySelector(".icon");
-                console.log(status)
-                switch (status) {
-                    case 0:
 
-                        break;
-                    case 1:
-                        chevronIcon.classList.remove("fi-rs-check-circle");
-                        chevronIcon.classList.remove("chevron");
-                        chevronIcon.classList.add("fi-rs-exclamation");
-                        chevronIcon.classList.add("cross");
-                        break;
-                    case 2:
-                        chevronIcon.classList.remove("fi-rs-exclamation");
-                        chevronIcon.classList.remove("chevron");
-                        chevronIcon.classList.add("fi-rs-check-circle");
-                        chevronIcon.classList.remove("cross");
-                        chevronIcon.classList.add("tick");
-                        break;
-                    case 3:
-                        console.log(2)
-                        chevronIcon.classList.remove("fi-rs-exclamation");
-                        chevronIcon.classList.add("chevron");
-                        // chevronIcon.classList.add("fi-rs-check-circle");
-                        chevronIcon.classList.remove("cross");
-                        chevronIcon.classList.remove("tick");
-                        break;
-                    default:
-                        break;
-                }
-            }
-            $("#accordion-button1").on("click", () => {
-                checkFieldsFilled("accordion-item1")
-            })
-            $("#accordion-button2").on("click", () => {
-                checkFieldsFilled("accordion-item2")
-            })
-            $("#accordion-button3").on("click", () => {
-                checkFieldsFilled("accordion-item3")
-            })
-
-            function areAllFieldsFilled() {
-                var accordion1Fields = $('#accordion-item1 input[required], #accordion-item1 select[required]');
-                var accordion2Fields = $('#accordion-item2 input[required], #accordion-item2 select[required]');
-                var accordion3Fields = $('#accordion-item3 input[required]');
-
-                var allFieldsFilled =
-                    accordion1Fields.filter(function() {
-                        return $(this).val() === '' || $(this).val() === 'Choose...';
-                    }).length === 0 &&
-                    accordion2Fields.filter(function() {
-                        return $(this).val() === '' || $(this).val() === 'Choose...';
-                    }).length === 0 &&
-                    accordion3Fields.filter(function() {
-                        return $(this).val() === '';
-                    }).length === 0;
-
-                return allFieldsFilled;
-            }
-
-            // Function to enable or disable buttons based on field status
-            function updateButtonStatus() {
-                var accordion1Fields = $('#accordion-item1 input[required], #accordion-item1 select[required]');
-                var accordion2Fields = $('#accordion-item2 input[required], #accordion-item2 select[required]');
-                var accordion3Fields = $('#accordion-item3 input[required]');
-                // var imageInput = $('#fileInput');
-                // console.log(accordion1Fields)
-                // console.log(accordion2Fields)
-                // console.log(accordion3Fields)
-                var isAccordion1FieldsEmpty = accordion1Fields.filter(function() {
-                    return $(this).val() !== '' || $(this).val() === 'Choose...';
-                }).length === 0;
-
-                var isAccordion2FieldsEmpty = accordion2Fields.filter(function() {
-                    return $(this).val() !== '' || $(this).val() === 'Choose...';
-                }).length === 0;
-                var isAccordion3FieldsEmpty = accordion3Fields.filter(function() {
-                    console.log($(this).val())
-                    return $(this).val() !== '' || $(this).val() === 'Choose...';
-                }).length === 0;
-
-                // var isImageInputEmpty = imageInput.get(0).files.length === 0;
-
-                // Enable or disable the buttons based on the fields' status
-                if (!isAccordion1FieldsEmpty || !isAccordion2FieldsEmpty || !isAccordion3FieldsEmpty) {
-                    $('#draft').removeAttr('disabled');
+                // Enable or disable the save button based on field fill status
+                if (isFilled) {
+                    $("#save-button").prop("disabled", false);
                 } else {
-                    $('#draft').attr('disabled', 'disabled');
-                }
-
-                var allFieldsFilled = areAllFieldsFilled();
-
-                // Enable or disable the buttons based on the fields' status
-                if (allFieldsFilled) {
-                    $('#next').removeClass("disabled");
-                    $('#next').removeAttr("disabled");
-                } else {
-                    $('#next').addClass("disabled");
-                    //   $('#next').addAttr("disabled","disabled");
-
+                    $("#save-button").prop("disabled", true);
                 }
             }
 
-            // Call the updateButtonStatus function when any field in the accordions is changed
-            $('#accordion-item1 input[required], #accordion-item1 select[required], #accordion-item2 input[required], #accordion-item2 select[required], #accordion-item3 input[required], #accordion-item3 select[required]').on('input change', function() {
-                var $field = $(this);
-                var $errorMessage = $field.next('.text-danger');
-
-                if ($field.val() === '' || $field.val() === 'Choose...') {
-                    $field.addClass('border-danger');
-                    $errorMessage.removeClass('d-none');
-                } else {
-                    $field.removeClass('border-danger');
-                    $errorMessage.addClass('d-none');
-                }
-                updateButtonStatus();
+            // Call the checkFields function when any input field value changes
+            $("input[type='text']:not(#fileInput), textarea, select").on("input change", function () {
+                checkFields();
             });
 
-            function resetAccordions() {
-                // Reset all accordions
-                $('.accordion-item').each(function() {
-                    var accordionId = $(this).attr('id');
-                    var accordionFields = $('#' + accordionId + ' input, #' + accordionId + ' select');
-                    // var imageField = $('#' + accordionId + ' input[type="file"]');
-                    var accordionButton = $('#' + accordionId + ' button.accordion-button');
-
-                    // Empty input fields
-                    accordionFields.val('');
-
-                    // Remove border-danger class
-                    accordionFields.removeClass('border-danger');
-
-                    // Hide error spans
-                    accordionFields.siblings('span.text-danger').addClass('d-none');
-
-                    // Reset image input
-                    // if (imageField.length) {
-                    //     imageField.val('');
-                    //     imageField.siblings('label.custom-file-label').find('.custom-file-text span').first().text('Upload Photo or drag and drop here');
-                    //     imageField.siblings('.selected-files').find('.file-grid').empty();
-                    // }
-                    // // $('#accordion-item1').find('.file-grid').empty();
-                    // Reset accordion button icons
-                    accordionButton.find('.fi-rs-exclamation').addClass('fi-rs-angle-circle-down').addClass("chevron").removeClass('fi-rs-exclamation').removeClass("cross");
-                    accordionButton.find('.fi-rs-check-circle').addClass('fi-rs-angle-circle-down').addClass("chevron").removeClass('fi-rs-check-circle').removeClass("tick");
-                    $('#next').addClass("disabled");
-                    $('#draft').attr("disabled", "disabled");
-                });
-            }
-            const input = document.querySelector("#phone");
-            const errorMsg = document.querySelector("#error-msg");
-            const validMsg = document.querySelector("#valid-msg");
-
-            // here, the index maps to the error code returned from getValidationError - see readme
-            const errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
-
-            // initialise plugin
-            const iti = window.intlTelInput(input, {
-                utilsScript: "/intl-tel-input/js/utils.js?1684676252775"
+            // Call the checkFields function on page load
+            checkFields();
+            $("#add-item1").on("click", () => {
+                $("#add-item-container1").append(`<tr class="tr">
+                                            <td><input type="text" class="form-control" name="category"></td>
+                                            <td><input type="text" class="form-control" name="property"></td>
+                                            <td><input type="text" class="form-control" name="memo"></td>
+                                            <td><input type="text" class="form-control" name="amount"></td>
+                                            <td><button type="button" class="btn" id="del-btn1">
+                                                <i class="fi fi-rs-trash text-danger fs-5"></i>
+                                            </button></td>
+                                        </tr>`)
             });
+            $("#add-item1_update").on("click", () => {
+                $("#add-item-container1_update").append(`<tr class="tr">
+                                            <td><input type="text" class="form-control" name="category_update"></td>
+                                            <td><input type="text" class="form-control" name="property_update"></td>
+                                            <td><input type="text" class="form-control" name="memo_update"></td>
+                                            <td><input type="text" class="form-control" name="amount_update"></td>
+                                            <td><button type="button" class="btn" id="del-btn_update">
+                                                <i class="fi fi-rs-trash text-danger fs-5"></i>
+                                            </button></td>
+                                        </tr>`)
+            });
+            $(document).on("input", "input[name='amount'], input[name='amount_update']", updateTotal);
 
-            const reset = () => {
-                input.classList.remove("error");
-                errorMsg.innerHTML = "";
-                errorMsg.classList.add("d-none");
-                validMsg.classList.add("d-none");
-            };
+function updateTotal() {
+  var total = 0;
 
-            // on blur: validate
-            input.addEventListener('blur', () => {
-                reset();
-                if (input.value.trim()) {
-                    if (iti.isValidNumber()) {
-                        validMsg.classList.remove("d-none");
-                    } else {
-                        input.classList.add("error");
-                        const errorCode = iti.getValidationError();
-                        errorMsg.innerHTML = errorMap[errorCode];
-                        errorMsg.classList.remove("d-none");
-                    }
+  $("input[name='amount'], input[name='amount_update']").each(function() {
+    var inputValue = $(this).val();
+
+    if (inputValue !== "") {
+      var numericValue = parseFloat(inputValue);
+      if (!isNaN(numericValue)) {
+        total += numericValue;
+      }
+    }
+  });
+
+  if (isNaN(total)) {
+    total = 0.00;
+  }
+
+  if (total === 0) {
+    $("#totalText").text("$ 0.00");
+    $("#totalText_update").text("$ 0.00"); // Update the 'textTotal_update' field as well
+  } else {
+    $("#totalText").text("$ " + total);
+    $("#totalText_update").text("$ " + total); // Update the 'textTotal_update' field as well
+  }
+
+  // Perform other operations on the dynamically added input element as needed
+}
+
+            $('#add-item-container1').on('click', '#del-btn1', function () {
+                var $row = $(this).closest('.tr');
+                var $rowsContainer = $row.parent();
+
+                if ($rowsContainer.children('.tr').length > 1) {
+                    $row.remove();
+                    updateTotal()
+                } else {
+                    //   alert('Cannot delete the last row.');
                 }
             });
-            $('input[type="checkbox"]').change(function() {
+            $('#add-item-container1').on('click', '#del-btn_update', function () {
+                console.log(11)
+                var $row = $(this).closest('.tr');
+                var $rowsContainer = $row.parent();
+
+                if ($rowsContainer.children('.tr').length > 1) {
+                    $row.remove();
+                    updateTotal()
+                } else {
+                    //   alert('Cannot delete the last row.');
+                }
+            });
+            $("#add-item2").on("click", () => {
+                $("#add-item-container2").append(`<tr class="tr">
+                                            <td><label class="custom-control custom-checkbox-md">
+                                                <input type="checkbox" class="custom-control-input"
+                                                    name="example-checkbox5" value="option5" checked="">
+                                                <span class="custom-control-label"></span>
+                                            </label></td>
+                                            <td><input type="text" class="form-control"></td>
+                                            <td><input type="text" class="form-control"></td>
+                                            <td><button type="button" class="btn" id="del-btn2">
+                                                <i class="fi fi-rs-trash text-danger fs-5"></i>
+                                            </button></td>
+                                        </tr>`)
+            });
+            $('#add-item-container2').on('click', '#del-btn2', function () {
+                var $row = $(this).closest('.tr');
+                var $rowsContainer = $row.parent();
+
+                if ($rowsContainer.children('.tr').length > 1) {
+                    $row.remove();
+                } else {
+                    //   alert('Cannot delete the last row.');
+                }
+            });
+            $('input[type="checkbox"]').change(function () {
                 var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
                 var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
                 console.log(columnIndex, isColumnVisible)
-                    // Toggle the visibility of the corresponding column
-                $('table').find('tr').each(function() {
+                // Toggle the visibility of the corresponding column
+                $('table').find('tr').each(function () {
                     var column = $(this).find('th:nth-child(' + columnIndex + '), td:nth-child(' + columnIndex + ')');
                     isColumnVisible ? column.show() : column.hide();
                 });
             });
 
+            function filterTable(selectedFilter) {
+                var tableBody = $('#table_body');
+                var rows = tableBody.find('tr');
+
+                if (selectedFilter === 'alphabets') {
+                    rows.sort(function (a, b) {
+                        var textA = $(a).find('.tenantName').text().toLowerCase();
+                        var textB = $(b).find('.tenantName').text().toLowerCase();
+                        return textA.localeCompare(textB);
+                    });
+                } else if (selectedFilter === 'ascending') {
+                    rows.sort(function (a, b) {
+                        var idA = parseInt($(a).find('.date').text());
+                        var idB = parseInt($(b).find('.date').text());
+                        return idA - idB;
+                    });
+                } else if (selectedFilter === 'descending') {
+                    rows.sort(function (a, b) {
+                        var idA = parseInt($(a).find('.date').text());
+                        var idB = parseInt($(b).find('.date').text());
+                        return idB - idA;
+                    });
+                }
+
+                tableBody.empty().append(rows);
+            }
+
+            // Filter functionality
+            $('#ascending').on('click', function () {
+                filterTable("ascending")
+            });
+            $('#descending').on('click', function () {
+                filterTable("descending")
+            });
+            $('#alphabets').on('click', function () {
+                // console.log(1)
+                filterTable("alphabets")
+            });
+            // console.log($('#alphabets'))
+            // Search functionality
+            $('#search_input').on('keyup', function () {
+                var searchValue = $(this).val().toLowerCase();
+                $('#table_body tr').filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+                });
+            });
+            let invoiceId;
+            let selectedValue;
+            $('input[name="status"]').on('click', function () {
+                selectedValue = $(this).val();
+            });
+            $(document).on('click', ".view-btn,.edit-option,.resend-option", function (e) {
+                e.preventDefault();
+                const buttonText = $(this).text();
+                const headingElem=$("#viewModal .modal-title")
+                headingElem.empty()
+                // headingElem.append(`View <strong class="color-primary">Invoice</strong>`)
+                switch (buttonText) {
+                    case "Edit":
+                        headingElem.append(`Edit <strong class="color-primary">Invoice</strong>`)
+                        break;
+                    case "Resend Invoice":
+                    headingElem.append(`Resend <strong class="color-primary">Invoice</strong>`)
+                        
+                        break;                
+                    default:
+                    headingElem.append(`View <strong class="color-primary">Invoice</strong>`)
+
+                        break;
+                }
+                const invoiceIdElement = $(this).closest("tr").find(".invoice-id");
+                console.log(invoiceIdElement.text())
+                invoiceId = invoiceIdElement.text();
+                // console.log(tenantData,invoiceData
+                // console.log(invoiceData)
+                const data1 = invoiceData.find(obj => obj.invoiceID == invoiceId);
+                const data2 = tenantData.find(obj => obj.tenantID == data1.tenantID)
+
+                const data = {
+                    ...data1, ...data2
+                }
+
+                $("#client-id").empty()
+                $("#client-id").append(`<h5 class="fw-bold" style="color: 
+                                #562AC8;">BILLED TO</h5>
+                                    <p class="text-dark">${data.firstName + " " + data.lastName}<br>${data.tAddress
+                    }<br>${data.tCity},
+                                        ${data.tState}<br>${data.tZipcode}<br>United States<br>${data.tPhoneNumber}</p>`)
+                console.log(1)
+                $("#owner-id").empty()
+                $("#owner-id").append(`                                    <h5 class="text-dark fw-bold">${data.companyName}</h5>
+                                    <p class="text-dark">${data.pAddress}<br>${data.pCity}, ${data.pState}<br>${data.pZipCode}<br>United
+                                        States<br>1-888-123-8910</p>`)
+                $("#table-body").empty()
+                var dateObj = new Date(data.created_at);
+                var day = dateObj.getDate();
+                var month = dateObj.getMonth() + 1;
+                var year = dateObj.getFullYear();
+                $("#table-body").append(
+                    `<tr>
+                        <td>${day}/${month}/${year}</td>
+                                                    <td>INV-10012</td>
+                                                    <td>$ ${data.totalAmount}</td>
+                                                    <td>${data.dueDate}</td>
+                                                    <td>Due On Receipt</td>
+                    </tr>
+                    `
+                )
+
+                $("#memo-table").empty()
+                data.memo.forEach((item) => {
+                    $("#memo-table").append(`
+                <tr>
+                                                    <td>
+                                                        <p style="font-weight: bold;" class="mb-1">Services</p>
+                                                        <span>${item.memo
+                        }</span>
+                                                    </td>
+                                                    </td>
+                                                    <td>${data.propertyName}</td>
+                                                    <td>${item.category}</td>
+                                                    <td>$ ${item.amount}</td>
+                                                </tr>
+                `)
+                    $("#price-table").empty()
+                    $("#price-table").append(`
+                <tr>
+                                                    <td>Subtotal</td>
+                                                    <td>$ ${data.totalAmount}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Discount</td>
+                                                    <td>$550.00</td>
+                                                </tr>
+                                                <tr style="    border-bottom: 1px solid #AFAFAF;">
+                                                    <td>Tax (8.25%)</td>
+                                                    <td>$0</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Total</td>
+                                                    <td>$550.00</td>
+                                                </tr>
+                                                <tr style="    border-bottom: 2px solid #562AC8;">
+                                                    <td>Deposit Requested</td>
+                                                    <td>$550.00</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="fw-bold">Deposit Due</td>
+                                                    <td class="fw-bold">$550.00</td>
+                                                </tr>
+                `)
+
+
+                })
+                $("#viewModal").modal("show")
+            })
+            $(document).on('click', '.three-dots', function () {
+                const invoiceIdElement = $(this).closest("tr").find(".invoice-id");
+
+                if (invoiceIdElement.length > 0) {
+                    invoiceId = invoiceIdElement.text();
+                    console.log(invoiceId);
+                } else {
+                    console.log("Invoice ID element not found.");
+                }
+            });
+            $(document).on('click', '.delete-option', function () {
+
+                $("#myModal_delete").modal("show")
+            }
+
+
+            );
+            $(document).on("click", "#confirmDelete", () => {
+                $("#myModal_delete").modal("hide")
+                $.ajax({
+                    url: 'http://localhost:3000/api/spade/invoiceDelete',
+                    type: 'DELETE',
+                    data: JSON.stringify({
+                        id: invoiceId,
+                    }),
+                    contentType: "application/json; charset=utf-8",
+                    processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        getData()
+
+                    },
+                    error: function (xhr, status, error) {
+                        window.alert('Error: ' + error);
+                    }
+                });
+            })
+            $('.edit-btn').click(function () {
+                $("#viewModal").modal("hide");
+
+                const data1 = invoiceData.find(obj => obj.invoiceID == invoiceId);
+                const data2 = tenantData.find(obj => obj.tenantID == data1.tenantID);
+
+                const data = {
+                    ...data1,
+                    ...data2
+                };
+                console.log(data)
+                tenantData.forEach(function (tenant) {
+                    if (tenant.tenantID == data.tenantID) {
+                        $("#tenants_update").append($('<option></option>').text(tenant.firstName + " " + tenant.lastName).val(tenant.tenantID).attr("selected", "selected"));
+                    } else {
+                        $("#tenants_update").append($('<option></option>').text(tenant.firstName + " " + tenant.lastName).val(tenant.tenantID));
+                    }
+                });
+                if(data.invoiceType==="One Time Invoice"){
+                    $("#invoice_update").attr('checked', 'checked')
+                }else{
+                    $("#recurring_update").attr('checked', 'checked')
+                    $("#collapse1_update").addClass("show")
+                    $("#startDate_update").val(data.startDate)
+                    $("#endDate_update").val(data.endDate)
+                    $("#frequency_update").empty()
+                    // $("#frequency_update").append($('<option></option>').text(("Choose...")).val(("Choose...")))
+                    if(data.frequency=="Repeat Yearly"){
+                        $("#frequency_update").append($('<option></option>').text((data.frequency)).val((data.frequency)).attr("selected", "selected"))
+                        $("#frequency_update").append($('<option></option>').text(("Repeat Monthly")).val(("Repeat Monthly")))
+                    }
+                    else{
+                        $("#frequency_update").append($('<option></option>').text((data.frequency)).val((data.frequency)).attr("selected", "selected"))
+                        $("#frequency_update").append($('<option></option>').text(("Repeat Yearly")).val(("Repeat Yearly")))
+                    }
+                    $("#terms_update").empty()
+                    $("#terms_update").append($('<option></option>').text((data.terms)).val((data.terms)).attr("selected", "selected"))
+                    $("#daysUntilDue_update").val(data.daysDue)
+                    // $("#terms_update").val(data.terms)
+                    if(data.repeatTerms=="true"){
+                        $("input[name='custom-switch-radio_update']").prop("checked", true);
+                    }
+                    else{
+                        $("input[name='custom-switch-radio_update']").prop("checked", false);
+                    }
+
+
+                }
+                const property = $("#tenants_update").val()
+                const propertyName = tenantData.filter((tenant) => {
+                    if (tenant.tenantID == property) {
+                        return tenant.propertyName
+                    }
+                })
+                $("#propertyName_update").val(propertyName[0].propertyName)
+                $("#dueDate_update").val(data.dueDate)
+                $('#add-item-container1_update').empty()
+                data.memo.forEach(({memo,category,amount})=>{
+                    $('#add-item-container1_update').append(
+                        `<tr class="tr">
+                                            <td><input type="text" class="form-control" name="category_update" value=${category}></td>
+                                            <td><input type="text" class="form-control" name="property_update" value=${category}></td>
+                                            <td><input type="text" class="form-control" name="memo_update" value=${memo}></td>
+                                            <td><input type="text" class="form-control" name="amount_update" value=${amount}></td>
+                                            <td><button type="button" class="btn" id="del-btn_update">
+                                                <i class="fi fi-rs-trash text-danger fs-5"></i>
+                                            </button></td>
+                                        </tr>`
+                    )
+                })
+                $("#totalText_update").text(`$ ${data.totalAmount}`)
+                $("#additionalNotes_update").val(data.note)
+                selectedFiles=[]
+                selectedFiles=data.invoiceImages.split(",")
+                updateSelectedFilesContainer()
+                $("#myModal_edit").modal("show");
+
+            });
+            $(".save-invoice_update").each(function () {
+                $(this).on("click", function () {
+                    // console.log(1)
+                    var selectedTenant = $('#tenants_update').val();
+                    var selectedInvoiceType = $('input[name="invoice_update"]:checked').val();
+                    var startDate = $('#startDate_update').val();
+                    var endDate = $('#endDate_update').val();
+                    var dueDate = $('#dueDate_update').val();
+                    var selectedFrequency = $('#frequency_update').val();
+                    var daysUntilDue = $('#daysUntilDue_update').val();
+                    var selectedTerms = $('#terms_update').val();
+                    var additionalNotes = $('#additionalNotes_update').val();
+                    var switchValue = $("input[name='custom-switch-radio_update']").is(":checked");
+                    // Collect the line items data from the table
+                    var lineItems = [];
+                    $('#lineItemsTable_update tbody tr').each(function () {
+
+                        var category = $(this).find('input[name="category_update"]').val();
+                        var property = $(this).find('input[name="property_update"]').val();
+                        var memo = $(this).find('input[name="memo_update"]').val();
+                        var amount = $(this).find('input[name="amount_update"]').val();
+
+                        lineItems.push({
+                            category: category,
+                            property: property,
+                            memo: memo,
+                            amount: amount
+                        });
+                    });
+
+                    // Create a FormData object to hold the data and files
+                    var formData = new FormData();
+                    var buttonText = $(this).text();
+
+                    if (buttonText !== "Save" && buttonText.indexOf("Print") === -1) {
+                        console.log("here")
+                        formData.append("sendmails", "Yes")
+                    }
+                    // Add the data to the FormData object
+                    formData.append('tenantID', selectedTenant);
+                    formData.append('invoiceID',invoiceId)
+                    formData.append('invoiceType', selectedInvoiceType);
+                    formData.append('startDate', startDate);
+                    formData.append('endDate', endDate);
+                    formData.append('frequency', selectedFrequency);
+                    formData.append('dueDate', dueDate);
+                    formData.append('dueDays', daysUntilDue);
+                    formData.append('terms', selectedTerms);
+                    formData.append('repeatTerms', switchValue);
+                    formData.append('additionalNotes', additionalNotes);
+                    console.log($("#totalText_update").text().split('$')[1])
+                    formData.append('totalAmount', $("#totalText_update").text().split(' ')[1])
+                    var existingImageNames = [];
+            selectedFiles.forEach((file) => {
+                    if (typeof file === "string") {
+                        existingImageNames.push(file)
+                    }
+                })
+
+            formData.append("existingImages", existingImageNames)
+                    // Loop through the lineItems array and add each line item to the FormData object
+                    for (var i = 0; i < lineItems.length; i++) {
+                        var lineItem = lineItems[i];
+                        formData.append('lineItems[' + i + '][category]', lineItem.category);
+                        formData.append('lineItems[' + i + '][property]', lineItem.property);
+                        formData.append('lineItems[' + i + '][memo]', lineItem.memo);
+                        formData.append('lineItems[' + i + '][amount]', lineItem.amount);
+                    }
+
+                    var files = selectedFiles.map(function(file) {
+                return file instanceof File ? file : file.name;
+            });
+
+            // Add the selected files to the FormData object
+            files.forEach(function(file) {
+                formData.append('image', file);
+            });
+
+                    // Send the data and files to the API using AJAX
+                    $.ajax({
+                        url: 'http://localhost:3000/api/spade/UpdateInvoice',
+                        type: 'PUT',
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+
+                        success: function (response) {
+                            // Handle the success response from the API
+                            console.log('API response:', response);
+                        },
+                        error: function (xhr, status, error) {
+                            // Handle the error response from the API
+                            console.log('API error:', error);
+                        }
+                    });
+                });
+            });
+            $("#update-status").click(() => {
+                // console.log(invoiceId)
+                $("#changeStatusModal").modal("hide")
+                $.ajax({
+                    url: 'http://localhost:3000/api/spade/putInvoiceStatusUpdates',
+                    type: 'PUT',
+                    data: JSON.stringify({
+                        id: invoiceId,
+                        status: selectedValue,
+                        note: $("#add-note").val()
+                    }),
+                    contentType: "application/json; charset=utf-8",
+                    processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        // console.log(response);
+                        // window.alert(response.message);
+                        getData()
+                        // window.location = '../Landlord/properties-all.html';
+                    },
+                    error: function (xhr, status, error) {
+                        window.alert('Error: ' + error);
+                    }
+                });
+            })
         });
     </script>
-
 </body>
 
 </html>
