@@ -393,14 +393,14 @@
             padding: 10px;
         }
 
-        .delete-file {
+        /* .delete-file {
             position: absolute;
             top: -1px;
             right: 4px;
             cursor: pointer;
             font-size: 11px;
             color: #000;
-        }
+        } */
 
         .btn-group>.btn-group:not(:last-child)>.btn,
         .btn-group>.btn:not(:last-child):not(.dropdown-toggle) {
@@ -3102,14 +3102,14 @@
                 }
                 updateButtonStatus();
             });
-            function resetAccordions() {
+            function resetAccordions(update) {
                 // Reset all accordions
                 setEditable()
                 $('.accordion-item').each(function () {
                     var accordionId = $(this).attr('id');
-                    var accordionFields = $('#' + accordionId + ' input, #' + accordionId + ' select');
-                    // var imageField = $('#' + accordionId + ' input[type="file"]');
-                    var accordionButton = $('#' + accordionId + ' button.accordion-button');
+    var accordionFields = $('#' + accordionId + ' input:not([type="radio"]), #' + accordionId + ' select');
+    var accordionButton = $('#' + accordionId + ' button.accordion-button');
+
 
                     // Empty input fields
                     accordionFields.val('');
@@ -3133,6 +3133,16 @@
                     $('#next').addClass("disabled");
                     $('#draft').attr("disabled", "disabled");
                 });
+                if(update){
+                    $("#collapse1,#collapse2").collapse('hide')
+                    $('.row-multiple').each(function() {
+  if ($('.row-multiple').length > 1) {
+    $(this).remove();
+  }
+  $('input[name="yesno"]').prop('checked', false);
+  $('input[name="lease"]').prop('checked', false);
+});
+                }
             }
             const input = document.querySelector("#phone");
             const errorMsg = document.querySelector("#error-msg");
@@ -3225,10 +3235,10 @@
                 });
             });
             $(".modal").on("click", ".btn-close,.btn-close-bottom, .modal-backdrop", function() {
-    $("#addModal").css("display", "none");
+    
 
     // Perform specific action when modal or backdrop is clicked
-    resetAccordions()
+    resetAccordions("update")
     console.log("this is accordinon")
   });
             // on keyup / change flag: reset
