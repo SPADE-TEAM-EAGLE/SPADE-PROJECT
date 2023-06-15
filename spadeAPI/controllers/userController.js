@@ -1,5 +1,5 @@
 const user = require("../models/user");
-const sendMail = require("../sendmail/sendmail.js");
+const {sendMail} = require("../sendmail/sendmail.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const fs = require("fs");
@@ -755,8 +755,8 @@ exports.putPropertyUnitsUpdates = async (req, res) => {
 exports.getPropertyUnitsTenant = async (req, res) => {
   // console.log(req,res)
   try {
-    const { userId } = req.user;
-    // console.log(userId)
+    const { userId,userName } = req.user;
+    // console.log(userName)
     const getPropertyUnitsTenantResult = await queryRunner(
       selectQuery("property", "landlordID"),
       [userId]
@@ -781,6 +781,7 @@ exports.getPropertyUnitsTenant = async (req, res) => {
 
       res.status(200).json({
         data: getPropertyUnitsTenantResult[0],
+        user:userName,
         message: "Get Property Units Tenant",
       });
     } else {
@@ -920,24 +921,29 @@ exports.getpropertyUnits = async (req, res) => {
 exports.viewPropertyTenant = async (req, res) => {
   try {
     
-    const { userId,userName } = req.user;
-    console.log(req.user)
-    // const { id } = req.query;
-    // console.log(id)
+    // const { userId,userName } = req.user;
+    const { userId,userName } = req.body;
+    // console.log(req.user)
     let PropertyTenantResult;
-    // if (id) {
-    //   PropertyTenantResult = await queryRunner(selectPropertyTenant, [
-    //     userId,
-    //     id,
-    //   ]);
-    // } 
-    // else {
       PropertyTenantResult = await queryRunner(selectAllTenants, [
         userId,
       ]);
-    // }
-    // console.log(PropertyTenantResult)
-    if (PropertyTenantResult.length > 0) {
+    if (PropertyTenantResult[0].length > 0) {
+      for(let i=0; i < PropertyTenantResult[0].length; i++ ){
+      const tenantID = PropertyTenantResult[0][i].tenantID;
+      const tenantIncreaseResult = await queryRunner(selectQuery("tenantincreaserent", "tenantID"),[tenantID]);
+      if(tenantIncreaseResult[0].length > 0){
+        const tenantIncrease = tenantIncreaseResult[0].map((data)=> ({
+          date : data.date,
+          increaseRentAmount : data.increaseRentAmount
+        }) 
+        )
+        PropertyTenantResult[0][i].increaseRentAmount = tenantIncrease ;
+      }else{
+        PropertyTenantResult[0][i].increaseRentAmount = ["No tenant Increase"] ;
+
+      }
+    }
       res.status(200).json({
         data: PropertyTenantResult,
         message: 'Property Tenant ',

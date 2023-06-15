@@ -1098,11 +1098,11 @@
                                                 <p class="text-default">What would you like to do next?</p>
 
                                                 <div class="btn-list btn-list-icon">
-                                                    <a class="btn btn-primary btn-pill viewUnits" href="property-unit.html"><i
+                                                    <a class="btn btn-primary btn-pill" id="viewUnitspill" href="property-unit.html"><i
                                                             class="fi fi-rs-building me-2"></i>Add Units</a>
-                                                    <a class="btn btn-primary btn-pill viewTenants" href="property-tenant.html"><i
+                                                    <a class="btn btn-primary btn-pill" id="viewTenantspill" href="property-tenant.html"><i
                                                             class="fi fi-rs-cabin me-2"></i>Add Tenants</a>
-                                                    <a class="btn btn-primary btn-pill viewTasks" href="property-task.html"><i
+                                                    <a class="btn btn-primary btn-pill" id="viewTaskspill" href="property-task.html"><i
                                                             class="fi fi-rs-list-check me-2"></i>Add Tasks</a>
                                                 </div>
 
@@ -1866,9 +1866,10 @@
         $(document).ready(function() {
 
             const propertyId = (new URL(document.location)).searchParams.get("propertyId");
-            // console.log($("#viewUnits").attr("href"))
-            //            
-
+            $("#viewUnitspill").attr("href", `./property-unit.html?propertyId=${propertyId}`)
+            $("#viewOverviewpill").attr("href", `./view-property.html?propertyId=${propertyId}`)
+            $("#viewTenantspill").attr("href", `./property-tenant.html?propertyId=${propertyId}`)
+            $("#viewTaskspill").attr("href", `./property-task.html?propertyId=${propertyId}`)
             $("#viewUnits").attr("href", `./property-unit.html?propertyId=${propertyId}`)
             $("#viewOverview").attr("href", `./view-property.html?propertyId=${propertyId}`)
             $("#viewTenants").attr("href", `./property-tenant.html?propertyId=${propertyId}`)

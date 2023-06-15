@@ -32,6 +32,7 @@ exports.createInvoice = async (req, res) => {
         startDate,
         endDate,
         frequency,
+        dueDate,
         dueDays,
         repeatTerms,
         terms,
@@ -44,7 +45,7 @@ console.log(req.body)
     const { userId } = req.user;
     try {
         const currentDate = new Date();
-        const invoiceResult = await queryRunner(insertInvoice, [userId, tenantID, invoiceType, startDate, endDate, frequency, dueDays, repeatTerms, terms,additionalNotes,"Unpaid",currentDate,totalAmount]);
+        const invoiceResult = await queryRunner(insertInvoice, [userId, tenantID, invoiceType, startDate, endDate, frequency,dueDate ,dueDays, repeatTerms, terms,additionalNotes,"Unpaid",currentDate,totalAmount]);
         // console.log(invoiceResult)
         if (invoiceResult.affectedRows === 0) {
         res.status(400).send('Error occur in creating invoice');
@@ -109,7 +110,7 @@ exports.putInvoiceStatusUpdates = async (req, res) => {
       // console.log(req)
     // const { userId } = req.user; 
     const {userId} = req.user;
-
+console.log(req.body,userId)
       const currentDate = new Date();
       const invoiceUpdateStatusResult = await queryRunner(updateInvoiceStatus, [
         status,
@@ -178,11 +179,13 @@ exports.getAllInvoices = async (req, res) => {
     // console.log(111)
     const {userId} = req.user; 
       const getAllInvoicesResult = await queryRunner(getAllInvoicesquery, [userId]);
+      console.log(getAllInvoicesResult[0])
       if (getAllInvoicesResult[0].length > 0) {
         for (let i = 0; i < getAllInvoicesResult[0].length; i++){
             const invoiceID = getAllInvoicesResult[0][i].invoiceID;
             const invoicelineitemsResult = await queryRunner(selectQuery("invoicelineitems", "invoiceID"), [invoiceID]);
             // console.log(invoicelineitemsResult[0])
+            
             if (invoicelineitemsResult[0].length > 0) {
                 const memo = invoicelineitemsResult[0].map((desc)=>({memo:desc.memo, category:desc.category, amount:desc.amount}))
                 getAllInvoicesResult[0][i].memo = memo
@@ -263,113 +266,130 @@ exports.getByIdInvoices = async (req, res) => {
 
   //  ############################# Update Invoice Start ############################################################
 
-exports.UpdateInvoice = async (req, res) => {
+  exports.UpdateInvoice = async (req, res) => {
     const {
-        tenantID,
-        invoiceID,
+      tenantID,
+      invoiceID,
+      invoiceType,
+      startDate,
+      endDate,
+      frequency,
+      dueDate,
+      dueDays,
+      repeatTerms,
+      terms,
+      totalAmount,
+      additionalNotes,
+      lineItems,
+      sendmails,
+      existingImages
+    } = req.body;
+    const {userId}=req.user
+    try {
+      const currentDate = new Date();
+      const invoiceUpdatedResult = await queryRunner(updateInvoice, [
         invoiceType,
         startDate,
         endDate,
         frequency,
+        dueDate,
         dueDays,
         repeatTerms,
         terms,
         totalAmount,
-        additionalNote,
-        lineItems,
-        sendmails,
-
- } = req.body;
-
-    // const { userId } = req.user;
-    const { userId } = req.body;
-    try {
-        const currentDate = new Date();
-        const invoiceUpdatedResult = await queryRunner(updateInvoice, [invoiceType, startDate, endDate, frequency, dueDays, repeatTerms, terms,totalAmount,additionalNote,currentDate,invoiceID,userId]);
+        additionalNotes,
+        currentDate,
+        invoiceID,
+        userId
+      ]);
+  
       if (invoiceUpdatedResult.affectedRows === 0) {
-        res.status(400).send('Error occur in creating invoice');
-      } else {
-        // select tenants 
-        const selectTenantsResult = await queryRunner(selectQuery('tenants', 'id'), [tenantID]) 
-        if (selectTenantsResult[0].length > 0) {
-            const tenantEmail = selectTenantsResult[0][0].email;
-            const tenantName = selectTenantsResult[0][0].firstName + " "+ selectTenantsResult[0][0].lastName;
-
-            if(sendmails == "Yes"){
-                // const {userName} = req.user;
-                // const { userId } = req.user
-                const mailSubject = invoiceID+" From "+ frequency;
-                sendMail.invoiceSendMail(tenantName, tenantEmail, mailSubject, dueDays, invoiceID,frequency);
-            }
-        }
-        // // select tenants 
-        if(lineItems){
-            const DeletelineItemsResult = await queryRunner(
-                deleteQuery("invoicelineitems", "invoiceID"),
-                [invoiceID]
-              );
-          
-              if (DeletelineItemsResult[0].affectedRows > 0) {
-                for (let i = 0; i < lineItems.length; i++) {
-                    const category = lineItems[i].category;
-                const property = lineItems[i].property;
-                const memo = lineItems[i].memo;
-                const amount = lineItems[i].amount;
-                  const invoiceLineItemsResult = await queryRunner(insertLineItems, [invoiceID, category, property, memo, amount])
-                  if (invoiceLineItemsResult.affectedRows === 0) {
-                    res.send('Error2');
-                    return;
-                  }
-                  }
-              }else{
-                res.send('Error occur in delete invoice line items');
-              }
-        
-          }
-          if(req.files){ 
-                const Invoicecheckresult = await queryRunner(
-                  selectQuery("invoiceimages", "invoiceID"),
-                  [invoiceID]
-                );
-                // console.log(propertycheckresult);
-                if (Invoicecheckresult[0].length > 0) {
-                  invoiceimages = Invoicecheckresult[0].map((image) => image.InvoiceImage);
-                  // delete folder images
-                  imageToDelete(invoiceimages);
-                  const InvoiceDeleteresult = await queryRunner(
-                    deleteQuery("invoiceimages", "invoiceID"),
-                    [invoiceID]
-                  );
-                  if (InvoiceDeleteresult[0].affectedRows > 0) {
-                    
-// insert image
-          const fileNames = req.files.map((file) => file.filename);
-          for (let i = 0; i < fileNames.length; i++) {
-            const img = fileNames[i];
-            const invoiceImageResult = await queryRunner(insertInvoiceImage, [invoiceID, img])
-            if (invoiceImageResult.affectedRows === 0) {
-              res.send('Error3');
-              return;
-            }
-          } //sss
-// insert image
-                  }
-                } else {
-                  res.status(400).json({
-                    message: "Error occur in deleting invoice ",
-                  });
-                }
-        }  
-
-        res.status(200).json({
-          message: " Invoice Updated successful"
-        });
+        return res.status(400).send('Error occurred while updating invoice');
       }
-    } catch (error) {
-      console.log(error)
-      res.status(400).send("Error")
-    }
-  }
+  
+      const selectTenantsResult = await queryRunner(selectQuery('tenants', 'id'), [tenantID]);
+  
+      if (selectTenantsResult[0].length > 0) {
+        const tenantEmail = selectTenantsResult[0][0].email;
+        const tenantName = selectTenantsResult[0][0].firstName + " " + selectTenantsResult[0][0].lastName;
+  
+        if (sendmails === "Yes") {
+          const mailSubject = invoiceID + " From " + frequency;
+          sendMail.invoiceSendMail(tenantName, tenantEmail, mailSubject, dueDays, invoiceID, frequency);
+        }
+      }
+  
+      if (lineItems) {
+        const deleteLineItemsResult = await queryRunner(deleteQuery("invoicelineitems", "invoiceID"), [invoiceID]);
+  
+        if (deleteLineItemsResult[0].affectedRows > 0) {
+          for (let i = 0; i < lineItems.length; i++) {
+            const category = lineItems[i].category;
+            const property = lineItems[i].property;
+            const memo = lineItems[i].memo;
+            const amount = lineItems[i].amount;
+  
+            const invoiceLineItemsResult = await queryRunner(insertLineItems, [invoiceID, category, property, memo, amount]);
+  
+            if (invoiceLineItemsResult.affectedRows === 0) {
+              return res.send('Error occurred while inserting invoice line items');
+            }
+          }
+        } else {
+          return res.send('Error occurred while deleting invoice line items');
+        }
+      }
+  
+      if (req.files || existingImages.length >= 1) {
+        const invoiceCheckResult = await queryRunner(
+          selectQuery("invoiceimages", "invoiceID"),
+          [invoiceID]
+        );
+  
+        if (invoiceCheckResult[0].length > 0) {
+          const invoiceImages = invoiceCheckResult[0].map((image) => image.InvoiceImage);
+          const existingImg = existingImages.split(",");
+          const imagesToDelete = invoiceImages.filter(
+            (element) => !existingImg.includes(element)
+          );
+  
+          imageToDelete(imagesToDelete);
+  
+          if (imagesToDelete.length > 0) {
+            for (let i = 0; i < imagesToDelete.length; i++) {
+              await queryRunner(
+                deleteQuery("invoiceimages", "invoiceID", "InvoiceImage"),
+                [invoiceID, imagesToDelete[i]]
+              );
+            }
+          }
+        }
+  
+        const fileNames = req.files.map((file) => file.filename);
+
+            for (let i = 0; i < fileNames.length; i++) {
+              const img = fileNames[i];
+              const invoiceImageResult = await queryRunner(insertInvoiceImage, [invoiceID, img]);
+    
+              if (invoiceImageResult.affectedRows === 0) {
+                return res.send('Error occurred while inserting invoice images');
+              }
+            }
+    
+          return res.status(200).json({
+            message: "Invoice updated successfully"
+          });
+        }
+    
+        return res.status(400).json({
+          message: "No tenants found"
+        });
+      } catch (error) {
+        console.log(error);
+        return res.status(400).send("Error occurred while updating invoice");
+      }
+    };
+      
   //  ############################# Update Invoice END ############################################################
   
 
@@ -423,11 +443,13 @@ exports.invoiceDelete = async (req, res) => {
 //  ############################# Create Invoice Start ############################################################
 
 exports.resendEmail = async (req, res) => {
-  const { invoiceID  } = req.body;
+  const { invoiceID  } = req.query;
   // const { userId } = req.user;
+  // console.log(req)
   try {
       const resendEmailResult = await queryRunner(resendEmailQuery, [invoiceID])
-      console.log(resendEmailResult);
+      // console.log(111)
+      // console.log(resendEmailResult);
       if (resendEmailResult[0].length > 0) {
         const tenantEmail = resendEmailResult[0][0].email;
         const dueDays = resendEmailResult[0][0].dueDate;
@@ -445,4 +467,4 @@ exports.resendEmail = async (req, res) => {
     res.status(400).send("Error")
   }
 }
-//  ############################# Create Invoice END ############################################################
+//  ############################# Resend Email Invoice END ############################################################

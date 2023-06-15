@@ -34,6 +34,7 @@ router.delete("/propertyDelete", verifyToken, userController.propertyDelete);
 router.put("/updateProperty",[verifyToken, upload],userController.propertyUpdate);
 // router.get('/viewProperty' ,userController.propertyView);
 router.get("/viewProperty", verifyToken, userController.propertyView);
+router.get('/resendEmail', verifyToken,invoiceController.resendEmail);
 router.get("/PropertyUnits", verifyToken, userController.getpropertyUnits);
 router.post("/addMoreUnits", userController.addMoreUnits);
 router.delete("/deleteMoreUnits", userController.deleteMoreUnits);
@@ -49,7 +50,7 @@ router.get(
 );
 router.get(
   "/viewPropertyTenant",
-  verifyToken,
+  // verifyToken,
   userController.viewPropertyTenant
 );
 
@@ -70,19 +71,19 @@ router.put('/resendCodeTenants', tenantController.resendCodeTenants);
 router.post('/addAlternateEmailPhone' ,verifyToken, tenantController.addAlternateEmailPhone);
 router.post('/tenantAttachFile',[verifyToken,upload], tenantController.tenantAttachFile);
 router.delete('/tenantAttachFileDelete' ,verifyToken, tenantController.tenantAttachFileDelete);
-router.delete('/tenantDelete', tenantController.tenantDelete);
-router.get('/getTenantsByID', tenantController.getTenantsByID);
+router.delete('/tenantDelete',verifyToken ,tenantController.tenantDelete);
+router.get('/getTenantsByID', verifyToken,tenantController.getTenantsByID);
 router.post('/createInvoice',[verifyToken,upload], invoiceController.createInvoice);
 router.put('/putInvoiceStatusUpdates',verifyToken ,invoiceController.putInvoiceStatusUpdates);
 router.get('/getAllInvoices',[verifyToken],invoiceController.getAllInvoices);
 router.get('/getByIdInvoices', invoiceController.getByIdInvoices);
-router.put('/UpdateInvoice', upload, invoiceController.UpdateInvoice);
-router.delete('/invoiceDelete', invoiceController.invoiceDelete);
-router.get('/resendEmail', invoiceController.resendEmail);
+router.put('/UpdateInvoice', [verifyToken,upload], invoiceController.UpdateInvoice);
+router.delete('/invoiceDelete',verifyToken ,invoiceController.invoiceDelete);
 router.post("/addVendor", taskController.addVendors);
 router.get("/getAllVendors", taskController.getAllVendors);
 router.post("/addTasks", upload, taskController.addTasks);
 router.get("/getAllTask", taskController.getAllTask);
 router.get("/taskByID", taskController.taskByID);
+router.put("/updateTenants", tenantController.updateTenants);
 
 module.exports = router;
