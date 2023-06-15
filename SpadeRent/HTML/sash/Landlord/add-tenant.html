@@ -393,14 +393,14 @@
             padding: 10px;
         }
 
-        .delete-file {
+        /* .delete-file {
             position: absolute;
             top: -1px;
             right: 4px;
             cursor: pointer;
             font-size: 11px;
             color: #000;
-        }
+        } */
 
         .btn-group>.btn-group:not(:last-child)>.btn,
         .btn-group>.btn:not(:last-child):not(.dropdown-toggle) {
@@ -557,7 +557,7 @@
                     display: none;
                 }
 
-                /* #search_input {
+                /* #typehead {
                     display: none;
                 } */
                 #email_verification {
@@ -887,7 +887,7 @@
                                     <div class="col-md-4">
                                         <label for="inputState" class="form-label fw-bold">Phone Number <span
                                                 class="fw-light">(Optional)</span></label>
-                                        <input id="phone" name="phone" type="tel" autocomplete="off" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your phone number here" data-bs-container="#addModal">
+                                        <input id="phone" name="phone" type="tel" autocomplete="off" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your phone number here" data-bs-container="#addModal" pattern="[0-9]{5}" placeholder="" maxlength="15" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Your total units">
                                         <span id="valid-msg" class="d-none text-success">✓ Valid</span>
                                         <span id="error-msg" class="hide text-danger"></span>
                                         </select>
@@ -1160,7 +1160,7 @@
                     <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft'
                         disabled>Save as
                         Draft</button>
-                    <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal"
+                    <button class="btn btn-close-bottom btn-outline-default btn-pill button" data-bs-dismiss="modal"
                         id='close'>Close</button>
                     <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
                     <button class="btn text-light button" style='background-color:#1467B0;' id='next'
@@ -2578,38 +2578,30 @@
             })
             // $("#succesModal").modal("show")
             $.ajax({
-                url: 'http://api.geonames.org/searchJSON',
+                url: 'http://localhost:3000/api/spade/getStates',
                 method: 'GET',
-                data: {
-                    country: 'US',
-                    maxRows: 500,
-                    username: 'developedmatz', // Replace with your GeoNames username
-                    style: 'full'
-                },
-                success: function (result) {
+                success: function ({data}) {
                     // Handle state selection change
-                    console.log(result)
+                    // console.log(result)
                     $('#state').change(function () {
                         var selectedState = $(this).val();
 
 
 
 
-                        if (selectedState !== "Choose...") {
-                            var cities = result.geonames.filter(function (place) {
-                                return place.adminName1 === selectedState && place.fcode === "PPL";
-                            });
-                        }
+                        // if (selectedState !== "Choose...") {
+                        //     var cities = result.geonames.filter(function (place) {
+                        //         return place.adminName1 === selectedState && place.fcode === "PPL";
+                        //     });
+                        // }
                     });
 
                     var stateDropdown = $('#state');
-                    var states = result.geonames.filter(function (place) {
-                        return place.fcode === "ADM1";
-                    });
+                    var states = data
 
                     //   stateDropdown.append($('<option></option>').text("Choose..."));
-                    states.forEach(function (state) {
-                        stateDropdown.append($('<option></option>').text(state.adminName1));
+                    data.forEach(function (state) {
+                        stateDropdown.append($('<option></option>').text(state.states).val(state.states));
                     });
                 },
                 error: function (xhr, status, error) {
@@ -3102,14 +3094,14 @@
                 }
                 updateButtonStatus();
             });
-            function resetAccordions() {
+            function resetAccordions(update) {
                 // Reset all accordions
                 setEditable()
                 $('.accordion-item').each(function () {
                     var accordionId = $(this).attr('id');
-                    var accordionFields = $('#' + accordionId + ' input, #' + accordionId + ' select');
-                    // var imageField = $('#' + accordionId + ' input[type="file"]');
-                    var accordionButton = $('#' + accordionId + ' button.accordion-button');
+    var accordionFields = $('#' + accordionId + ' input:not([type="radio"]), #' + accordionId + ' select');
+    var accordionButton = $('#' + accordionId + ' button.accordion-button');
+
 
                     // Empty input fields
                     accordionFields.val('');
@@ -3133,6 +3125,16 @@
                     $('#next').addClass("disabled");
                     $('#draft').attr("disabled", "disabled");
                 });
+                if(update){
+                    $("#collapse1,#collapse2").collapse('hide')
+                    $('.row-multiple').each(function() {
+  if ($('.row-multiple').length > 1) {
+    $(this).remove();
+  }
+  $('input[name="yesno"]').prop('checked', false);
+  $('input[name="lease"]').prop('checked', false);
+});
+                }
             }
             const input = document.querySelector("#phone");
             const errorMsg = document.querySelector("#error-msg");
@@ -3218,13 +3220,19 @@
             });
 
             // Search functionality
-            $('#search_input').on('keyup', function () {
+            $('#typehead').on('keyup', function () {
                 var searchValue = $(this).val().toLowerCase();
                 $('#table_body tr').filter(function () {
                     $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
                 });
             });
-            
+            $(".modal").on("click", ".btn-close,.btn-close-bottom, .modal-backdrop", function() {
+    
+
+    // Perform specific action when modal or backdrop is clicked
+    resetAccordions("update")
+    console.log("this is accordinon")
+  });
             // on keyup / change flag: reset
             input.addEventListener('change', reset);
             input.addEventListener('keyup', reset);
@@ -3588,12 +3596,13 @@
                         console.log("tenantData")
                         window.location = "./new-tenant.html"
                     }
-                    $("#user-name").text(user)
+                    tenantData=response.data[0]
+                    $("#user-name").text(response.user)
                     var tableBody = $('#table_body');
                     tableBody.empty();
                     // console.log(data[0])
                     let tenantNames = []
-                    data[0]?.forEach(function (tenant) {
+                    response.data[0]?.forEach(function (tenant) {
 
                         // var image = '<td><img src="../../../../spadeApi/uploads/' + tenant.images[0] + '" alt=""></td>';
                         // var image = '<td><img src="../../../../../../Desktop/spadeApi/uploads/image-1684250579662.png" alt="hhghghgh"></td>';

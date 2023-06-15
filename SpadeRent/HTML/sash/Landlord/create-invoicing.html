@@ -392,7 +392,7 @@
         .file-details {
             padding: 10px;
         }
-
+/* 
         .delete-file {
             position: absolute;
             top: -1px;
@@ -400,7 +400,7 @@
             cursor: pointer;
             font-size: 11px;
             color: #000;
-        }
+        } */
 
         .btn-group>.btn-group:not(:last-child)>.btn,
         .btn-group>.btn:not(:last-child):not(.dropdown-toggle) {
@@ -557,7 +557,7 @@
                     display: none;
                 }
 
-                /* #search_input {
+                /* #typehead {
                     display: none;
                 } */
                 #email_verification {
@@ -1480,7 +1480,7 @@
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
-                        <ul class="dropdown-menu" role="menu" style="">
+                        <ul class="dropdown-menu" role="menu" >
                             <li><a href="javascript:void(0)"><i class="fi fi-rs-eye me-2 text-primary"></i> Preview
                                     Invoice</a></li>
                             <li><a href="javascript:void(0)" class="save-invoice"><i
@@ -1665,7 +1665,7 @@
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
-                        <ul class="dropdown-menu" role="menu" style="">
+                        <ul class="dropdown-menu" role="menu" >
                             <li><a href="javascript:void(0)"><i class="fi fi-rs-eye me-2 text-primary"></i> Preview
                                     Invoice</a></li>
                             <li><a href="javascript:void(0)" class="save-invoice_update"><i
@@ -1983,7 +1983,7 @@
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
-                        <ul class="dropdown-menu" role="menu" style="">
+                        <ul class="dropdown-menu" role="menu" >
                             <li><a href="javascript:void(0)"><i class="fi fi-rs-eye me-2 text-primary"></i> Preview
                                     Invoice</a></li>
                             <li><a href="javascript:void(0)" class="save-invoice"><i
@@ -2533,8 +2533,7 @@
                                             <table class="table border text-nowrap text-md-nowrap mb-0">
                                                 <thead>
                                                     <tr>
-                                                        <th></th>
-                                                        <th></th>
+ 
                                                         <th>INVOICE NO</th>
                                                         <th>TENANT NAME</th>
                                                         <th>MEMO/DESCRIPTION</th>
@@ -3987,7 +3986,7 @@ function updateTotal() {
             });
             // console.log($('#alphabets'))
             // Search functionality
-            $('#search_input').on('keyup', function () {
+            $('#typehead').on('keyup', function () {
                 var searchValue = $(this).val().toLowerCase();
                 $('#table_body tr').filter(function () {
                     $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
