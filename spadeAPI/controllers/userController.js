@@ -1051,3 +1051,28 @@ exports.deleteMoreUnits = async (req, res) => {
 };
 
 //  ############################# Delete property units End ############################################################
+
+
+
+
+
+//  ############################# Get property States End ############################################################
+exports.getStates = async (req, res) => {
+  try {
+    const statesResult = await queryRunner(selectQuery("propertystates")); 
+    if (statesResult[0].length > 0) {
+      res.status(200).json({
+        data: statesResult[0],
+        message: "ALL USA STATES",
+      });
+    } else {
+      res.status(400).json({
+        message: "No States data found",
+      });
+    }
+  } catch (error) {
+    res.send("Error Get states ");
+    console.log(error);
+  }
+};
+//  ############################# Get Property States End ############################################################
