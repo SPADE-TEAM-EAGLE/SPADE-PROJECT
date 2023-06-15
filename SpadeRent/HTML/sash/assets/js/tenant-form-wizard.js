@@ -160,7 +160,7 @@
   document.getElementById("part3").disabled = true;
   document.getElementById("next1").disabled = true;
   
-  var validname = /^[A-Za-z]+$/;
+  var validname = /^[A-Za-z\s]+$/;
   let firstname = document.getElementById("firstname1");
   firstname.addEventListener("keyup", fnameValidation);
   
@@ -179,7 +179,7 @@
   }
   // first name
   // last name
-  var validname = /^[A-Za-z]+$/;
+  var validname = /^[A-Za-z\s]+$/;
   let lastname = document.getElementById("lastname");
   lastname.addEventListener("keyup", lnameValidation);
   

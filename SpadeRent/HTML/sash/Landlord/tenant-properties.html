@@ -815,9 +815,6 @@
                                         <!-- 2 comments start  -->
 
                                         <!-- 3 comments start  -->
-                                        <div class="d-flex country">
-                                            <img src="../assets\header-img\spade.svg" alt="profile-user" class="avatarr profile-user brroundd nav-link cover-image dark-layout">
-                                        </div>
                                         <div class="dropdown  d-flex notifications">
                                             <a class="nav-link icon" data-bs-toggle="dropdown"><i class="fe fe-bell"></i><span class=" pulse"></span>
                                             </a>
@@ -873,6 +870,9 @@
                                                 <a href="notify-list.html" class="dropdown-item text-center p-3 text-muted">View all
                                                     Notification</a>
                                             </div> -->
+                                        </div>
+                                        <div class="d-flex country">
+                                            <img src="../assets\header-img\spade.svg" alt="profile-user" class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
                                         <div class="d-flex country">
                                             <img src="../assets\header-img\circlels.png" alt="profile-user" class="avatarr profile-user nav-link brroundd cover-image light-layout">
@@ -1198,29 +1198,39 @@
                                                 <ul class="dropdown-menu" role="menu">
                                                     <li><a href="javascript:void(0)"><strong>Filter by:</strong></a>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">A-Z Alphabets</a>
+                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">IMAGE</a>
                                                         <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1">
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">Date Modified</a>
+                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">PROPERTY ID</a>
                                                         <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1">
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">Ascending</a>
+                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">PROPERTY NAME</a>
                                                         <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1">
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">Descending</a>
+                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">RENT AMOUNT</a>
                                                         <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1">
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">Recently Added</a>
+                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">PROPERTY TYPE</a>
                                                         <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1">
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
+                                                        </div>
+                                                    </li>
+                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">PROPERTY UNITS</a>
+                                                        <div class="form-check m-0">
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
+                                                        </div>
+                                                    </li>
+                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">LEASE END DATE</a>
+                                                        <div class="form-check m-0">
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
                                                 </ul>
@@ -1948,6 +1958,63 @@
             $("#viewFiles").attr("href", `./tenant-file.html?tenantId=${tenantId}`)
             $("#viewTasks").attr("href", `./tenant-tasks.html?tenantId=${tenantId}`)
             console.log(propertyId)
+            $('input[type="checkbox"]').change(function () {
+            var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
+            var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
+            console.log(columnIndex, isColumnVisible)
+            // Toggle the visibility of the corresponding column
+            $('table').find('tr').each(function () {
+                var column = $(this).find('th:nth-child(' + columnIndex + '), td:nth-child(' + columnIndex + ')');
+                isColumnVisible ? column.show() : column.hide();
+            });
+        });
+        function filterTable(selectedFilter) {
+            var tableBody = $('#table_body');
+            var rows = tableBody.find('tr');
+
+            if (selectedFilter === 'alphabets') {
+                rows.sort(function (a, b) {
+                    var textA = $(a).find('.property-name').text().toLowerCase();
+                    var textB = $(b).find('.property-name').text().toLowerCase();
+                    return textA.localeCompare(textB);
+                });
+            } else if (selectedFilter === 'ascending') {
+                rows.sort(function (a, b) {
+                    console.log(parseInt($(a).find('.rentAmount').text()))
+                    var idA = parseInt($(a).find('.rentAmount').text());
+                    var idB = parseInt($(b).find('.rentAmount').text());
+                    return idA - idB;
+                });
+            } else if (selectedFilter === 'descending') {
+                rows.sort(function (a, b) {
+                    var idA = parseInt($(a).find('.rentAmount').text());
+                    var idB = parseInt($(b).find('.rentAmount').text());
+                    return idB - idA;
+                });
+            }
+
+            tableBody.empty().append(rows);
+        }
+
+        // Filter functionality
+        $('#ascending').on('click', function () {
+            filterTable("ascending")
+        });
+        $('#descending').on('click', function () {
+            filterTable("descending")
+        });
+        $('#alphabets').on('click', function () {
+            // console.log(1)
+            filterTable("alphabets")
+        });
+
+            // Search functionality
+            $('#search_input').on('keyup', function () {
+                var searchValue = $(this).val().toLowerCase();
+                $('#table_body tr').filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+                });
+            });
             $.ajax({
                 url: 'http://localhost:3000/api/spade/getTenantsByID',
                 type: 'GET',
@@ -1969,8 +2036,8 @@
                         // row.append('<td><label class="custom-control custom-checkbox-md"><input type="checkbox" class="custom-control-input" name="example-checkbox5" value="option5" checked=""><span class="custom-control-label"></span></label></td>');
                         row.append('<td><img src="../../../../spadeAPI/uploads/' + item.images.split(',')[0] + '" alt=""></td>');
                         row.append('<td>' + item.propertyID + '</td>');
-                        row.append('<td>' + item.propertyName + '</td>');
-                        row.append('<td><p style="font-weight: bold;" class="mb-1">' + item.rentAmount + '</p><span style="color: #6E6893;">Next Due Date: ' + "item.nextDueDate" + '</span></td>');
+                        row.append('<td class="property-name">' + item.propertyName + '</td>');
+                        row.append('<td class="rentAmount"><p style="font-weight: bold;" class="mb-1">' + item.rentAmount + '</p><span style="color: #6E6893;">Next Due Date: ' + "item.nextDueDate" + '</span></td>');
                         row.append('<td><a class="like" href="javascript:;"><span class="badge btn-light rounded-pill-Single-Family rounded-pill py-2 px-3"><i class="fe fe-circle me-1"></i>' + item.propertyType + '</span></a></td>');
                         row.append('<td>' + item.pUnits + ' Unit(s)</td>');
                         var currentDate = new Date();

@@ -800,9 +800,6 @@
                                         <!-- 2 comments start  -->
 
                                         <!-- 3 comments start  -->
-                                        <div class="d-flex country">
-                                            <img src="../assets\header-img\spade.svg" alt="profile-user" class="avatarr profile-user brroundd nav-link cover-image dark-layout">
-                                        </div>
                                         <div class="dropdown  d-flex notifications">
                                             <a class="nav-link icon" data-bs-toggle="dropdown"><i class="fe fe-bell"></i><span class=" pulse"></span>
                                             </a>
@@ -858,6 +855,9 @@
                                                 <a href="notify-list.html" class="dropdown-item text-center p-3 text-muted">View all
                                                     Notification</a>
                                             </div> -->
+                                        </div>
+                                        <div class="d-flex country">
+                                            <img src="../assets\header-img\spade.svg" alt="profile-user" class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
                                         <div class="d-flex country">
                                             <img src="../assets\header-img\circlels.png" alt="profile-user" class="avatarr profile-user nav-link brroundd cover-image light-layout">
@@ -1108,11 +1108,11 @@
                                                 <p class="text-default">What would you like to do next?</p>
 
                                                 <div class="btn-list btn-list-icon">
-                                                    <a class="btn btn-primary btn-pill viewUnits" href="property-unit.html"><i
+                                                    <a class="btn btn-primary btn-pill" id="viewUnitspill" href="property-unit.html"><i
                                                             class="fi fi-rs-building me-2"></i>Add Units</a>
-                                                    <a class="btn btn-primary btn-pill viewTenants" href="property-tenant.html"><i
+                                                    <a class="btn btn-primary btn-pill" id="viewTenantspill" href="property-tenant.html"><i
                                                             class="fi fi-rs-cabin me-2"></i>Add Tenants</a>
-                                                    <a class="btn btn-primary btn-pill viewTasks" href="property-task.html"><i
+                                                    <a class="btn btn-primary btn-pill" id="viewTaskspill" href="property-task.html"><i
                                                             class="fi fi-rs-list-check me-2"></i>Add Tasks</a>
                                                 </div>
 
@@ -1876,9 +1876,10 @@
         $(document).ready(function() {
 
             const propertyId = (new URL(document.location)).searchParams.get("propertyId");
-            // console.log($("#viewUnits").attr("href"))
-            //            
-
+            $("#viewUnitspill").attr("href", `./property-unit.html?propertyId=${propertyId}`)
+            $("#viewOverviewpill").attr("href", `./view-property.html?propertyId=${propertyId}`)
+            $("#viewTenantspill").attr("href", `./property-tenant.html?propertyId=${propertyId}`)
+            $("#viewTaskspill").attr("href", `./property-task.html?propertyId=${propertyId}`)
             $("#viewUnits").attr("href", `./property-unit.html?propertyId=${propertyId}`)
             $("#viewOverview").attr("href", `./view-property.html?propertyId=${propertyId}`)
             $("#viewTenants").attr("href", `./property-tenant.html?propertyId=${propertyId}`)
