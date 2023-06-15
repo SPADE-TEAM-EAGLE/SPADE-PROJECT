@@ -626,7 +626,7 @@
 </head>
 
 <body class="app sidebar-mini ltr light-mode">
-
+    
     <!-- GLOBAL-LOADER -->
     <!-- <div id="global-loader">
         <img src="../assets/images/loader.svg" class="loader-img" alt="Loader">
@@ -1699,6 +1699,90 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="sendmailModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="text-justify ps-2 border-model-line">
+                        <h2 class="modal-title mb-0">Send <strong class="color-primary">Email</strong></h2>
+                        <p class="mb-1">Creating Invoice records that you owe a Tenant money.</p>
+                        <button type="button" class="btn btn-primary">#Invoice Number: INV-89900A</button>
+                    </div>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="top-close">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="conatiner-fluid">
+                        <div class="row p-3 br-5" style="background-color: #FAFAFA;border: 4px solid #1467B0;">
+                            <div class="col-12 mb-5">
+                                <div class="d-flex justify-content-between">
+                                    <img src="../assets/images/logo-preloader.png" alt="" height="30px">
+                                    <span class="fw-bold fs-18 text-black">Date: 02/03/2022</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <p class="fs-18" style="color: #B1B1B1;">Email: Johnadmas@outlook.com</p>
+                                <p class="fs-18" style="color: #666666;"><span class="text-black fw-bold">Subject: </span><span class="text-primary">INV-89900A</span> from Landloard (IT Company)</p>
+                                <p class="fs-18"><span class="text-black fw-bold">Dear </span><span class="text-primary">Tenant Name,</span></p>
+                                <p class="fs-18" style="color: #666666;">Please find attached your rent invoice with number <span class="fw-bold text-black">INV-89900A</span>. 
+                                    and Due Date: <span class="fw-bold text-black">02/03/2022</span> If you have any questions, please 
+                                    let us know. 
+                                    <br>
+                                    <br>
+                                    Have a great day and thank you for your business! 
+                                    <br>
+                                    <br>
+                                    Sincerely
+                                    <br>
+                                    <span class="fw-bold text-black">Landloard Name</span>
+                                    <br>
+                                    <span class="text-primary">IT Company</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex">
+                    <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
+                        Draft</button>
+                    <!-- <div class="d-flex">
+
+                        <label class="custom-control custom-checkbox me-2">
+                                <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1" checked="">
+                                <span class="custom-control-label">Notify Tenant</span>
+                            </label>
+                        <label class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1" checked="">
+                                <span class="custom-control-label">Notify Assignee(s)</span>
+                            </label>
+                    </div> -->
+                    <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal"
+                        id='close'>Close</button>
+                    <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
+                    <div class="btn-group rounded-split mt-2 mb-2">
+                        <button type="button" class="btn btn-pill btn-primary save-invoice">Save</button>
+                        <button type="button" class="btn btn-pill btn-primary dropdown-toggle px-1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" style="">
+                            <li><a href="javascript:void(0)"><i class="fi fi-rs-eye me-2 text-primary"></i> Preview
+                                    Invoice</a></li>
+                            <li><a href="javascript:void(0)" class="save-invoice"><i
+                                        class="fi fi-rs-disk me-2 text-primary "></i> Save & Send</a></li>
+                            <li>
+                                <a href="javascript:void(0)" class="save-invoice"> <i
+                                        class="fi fi-rs-print me-2 text-primary "></i>Save & Print</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- MODAL EFFECTS -->
 
     <!-- MODAL EFFECTS -->
@@ -1782,10 +1866,6 @@
                                         <!-- 2 comments start  -->
 
                                         <!-- 3 comments start  -->
-                                        <div class="d-flex country">
-                                            <img src="../assets\header-img\spade.svg" alt="profile-user"
-                                                class="avatarr profile-user brroundd nav-link cover-image dark-layout">
-                                        </div>
                                         <div class="dropdown  d-flex notifications">
                                             <a class="nav-link icon" data-bs-toggle="dropdown"><i
                                                     class="fe fe-bell"></i><span class=" pulse"></span>
@@ -1842,6 +1922,10 @@
                                                 <a href="notify-list.html" class="dropdown-item text-center p-3 text-muted">View all
                                                     Notification</a>
                                             </div> -->
+                                        </div>
+                                        <div class="d-flex country">
+                                            <img src="../assets\header-img\spade.svg" alt="profile-user"
+                                                class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
                                         <div class="d-flex country">
                                             <img src="../assets\header-img\circlels.png" alt="profile-user"
@@ -2229,6 +2313,8 @@
                                             <table class="table border text-nowrap text-md-nowrap mb-0">
                                                 <thead>
                                                     <tr>
+                                                        <th></th>
+                                                        <th></th>
                                                         <th>INVOICE NO</th>
                                                         <th>TENANT NAME</th>
                                                         <th>MEMO/DESCRIPTION</th>
