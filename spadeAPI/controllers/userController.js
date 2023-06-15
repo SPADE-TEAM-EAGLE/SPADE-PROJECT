@@ -905,7 +905,7 @@ exports.getpropertyUnits = async (req, res) => {
         message: "property Units",
       });
     } else {
-      res.status(400).json({
+      res.status(200).json({
         message: "No data found",
       });
     }
@@ -950,7 +950,7 @@ exports.viewPropertyTenant = async (req, res) => {
         user:userName
       })
     } else {
-      res.status(400).json({
+      res.status(200).json({
         message: 'No data found'
       })
     }
