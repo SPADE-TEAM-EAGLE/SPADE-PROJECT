@@ -3697,11 +3697,11 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function ({ data }) {
-                        console.log(data)
+                        // console.log(data)
                         // if(!data){
                         //     window.location="./new-tenant.html"
                         // }
-                        console.log(data[0])
+                        // console.log(data[0])
                         invoiceData = data[0]
 
                         var tableBody = $('#table_body');
@@ -4308,8 +4308,7 @@ function updateTotal() {
                         },
 
                         success: function (response) {
-                            // Handle the success response from the API
-                            console.log('API response:', response);
+                            getData()
                         },
                         error: function (xhr, status, error) {
                             // Handle the error response from the API
