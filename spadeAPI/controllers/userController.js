@@ -87,6 +87,10 @@ exports.checkemail = async function (req, res) {
 
 exports.getUser = (req, res) => {
   // console.log(req.user);
+  res.status(200).json({
+    user : req.user.userName
+    
+  });
 };
 
 exports.Signin = async function (req, res) {
@@ -785,7 +789,7 @@ exports.getPropertyUnitsTenant = async (req, res) => {
         message: "Get Property Units Tenant",
       });
     } else {
-      res.status(400).json({
+      res.status(200).json({
         message: "No data found",
       });
     }
@@ -905,7 +909,7 @@ exports.getpropertyUnits = async (req, res) => {
         message: "property Units",
       });
     } else {
-      res.status(400).json({
+      res.status(200).json({
         message: "No data found",
       });
     }
@@ -923,7 +927,7 @@ exports.viewPropertyTenant = async (req, res) => {
     
     const { userId,userName } = req.user;
     // const { userId,userName } = req.body;
-    // console.log(req.user)
+    console.log(req.user)
     let PropertyTenantResult;
       PropertyTenantResult = await queryRunner(selectAllTenants, [
         userId,
@@ -950,7 +954,7 @@ exports.viewPropertyTenant = async (req, res) => {
         user:userName
       })
     } else {
-      res.status(400).json({
+      res.status(200).json({
         message: 'No data found'
       })
     }

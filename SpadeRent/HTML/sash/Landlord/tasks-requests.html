@@ -477,7 +477,7 @@ color: #000;
                 font-size: 12px;
                 margin: 0 !important;
             }
-            #search_input {
+            #typehead {
                 display: none;
             }
             #email_verification {
@@ -672,240 +672,241 @@ color: #000;
     </div>
 </div>
 <!--/Default Offcanvas-->
-    <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div class="text-justify ps-2 border-model-line">
-                        <h2 class="modal-title">Create <strong class="color-primary">New Task</strong></h2>
-                        <span class="">The real power of tasks is keeping track of deadlines and having a 
-                            log of all work and communication related to the tasks for later reference.</span>
-                    </div>
-                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="top-close">
-                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
-                    </button>
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="text-justify ps-2 border-model-line">
+                    <h2 class="modal-title">Create <strong class="color-primary">New Task</strong></h2>
+                    <span class="">The real power of tasks is keeping track of deadlines and having a 
+                        log of all work and communication related to the tasks for later reference.</span>
                 </div>
-                <div class="modal-body">
-                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                        <form class="row g-3" enctype="multipart/form-data">
-                            <div class="col-md-4">
-                                <label for="inputEmail4" class="form-label fw-bold">Task Name</label>
-                                <input class="form-control" placeholder="Sink in Leaked" type="text">
-                                <span class="text-danger d-none">Property ID is required!</span>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="inputState" class="form-label fw-bold">Assign To</label>
-                                <select id="state" class="form-select form">
-                                <option selected>Choose...</option>
-                                <option>Sindh</option>
-                                <option>Punjab</option>
-                                <option>Balochistan</option>
-                                <option>KPK</option>
-                            </select>
-                                <span class="text-danger d-none">Property name required!</span>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="inputState" class="form-label fw-bold">Related To</label>
-                                <select id="state" class="form-select form">
-                                <option selected>Choose...</option>
-                                <option>Sindh</option>
-                                <option>Punjab</option>
-                                <option>Balochistan</option>
-                                <option>KPK</option>
-                            </select>
-                                <span class="text-danger d-none">Property name required!</span>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="inputEmail4" class="form-label fw-bold">Due Date</label>
-                                <input class="form-control" placeholder="MM/DD/YYYY" type="date">
-                                <span class="text-danger d-none">Property ID is required!</span>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="inputState" class="form-label fw-bold">Status</label>
-                                <select id="state" class="form-select form">
-                                <option selected>Choose...</option>
-                                <option>Sindh</option>
-                                <option>Punjab</option>
-                                <option>Balochistan</option>
-                                <option>KPK</option>
-                            </select>
-                                <span class="text-danger d-none">Property name required!</span>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="inputState" class="form-label fw-bold">Priority</label>
-                                <select id="state" class="form-select form">
-                                <option selected>Choose...</option>
-                                <option>Sindh</option>
-                                <option>Punjab</option>
-                                <option>Balochistan</option>
-                                <option>KPK</option>
-                            </select>
-                                <span class="text-danger d-none">Property name required!</span>
-                            </div>
-                            <div class="col-md-12">
-                                <label class="form-label fw-bold">Notes</label>
-                                <textarea class="form-control mb-4" placeholder="Sorry about that We will look into it." rows="4"></textarea>
-                                <span class="text-danger d-none">Photos are required!</span>
-                            </div>
-                            <div class="col-md-12">
-                                <label class="form-label fw-bold">Media/ Files</label>
-                                <div class="custom-file" style="border: 1px dashed #00000087;">
-                                    <input id="fileInput" type="file" name="image" class="custom-file-input form" accept=".jpg, .png, image/jpeg, image/png" aria-label="hello" multiple>
-                                    <span className="d-none"></span>
-                                    <label class="custom-file-label" for="fileInput">
-                                                <i class="fi fi-rs-cloud-upload"></i>
-                                                <div class="custom-file-text">
-                                                    <span>Upload Photo or drag and drop here</span>
-                                                    <span>JPEG and PNG, file size no more than 10MB</span>
-                                                </div>
-                                            </label>
-                                </div>
-                                <div class="selected-files">
-                                    <div class="file-grid"></div>
-                                </div>
-                                <span class="text-danger d-none">Photos are required!</span>
-                            </div>
-                        </form>
-                    </div>
+                <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="top-close">
+                    <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <form class="row g-3" enctype="multipart/form-data">
+                        <div class="col-md-4">
+                            <label for="inputEmail4" class="form-label fw-bold">Task Name</label>
+                            <input class="form-control" placeholder="Sink in Leaked" type="text" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Task Name here" data-bs-container="#addModal">
+                            <span class="text-danger d-none">Property ID is required!</span>
+                        </div>
+                        <div class="col-md-4">
+                            <!-- <label for="inputState" class="form-label fw-bold"></label>
+                            <select id="state" class="form-select form">
+                            <option selected>Choose...</option>
+                            <option>Sindh</option>
+                            <option>Punjab</option>
+                            <option>Balochistan</option>
+                            <option>KPK</option> -->
+                            <label class="form-label fw-bold">Assign To</label>
+                                <select class="form-control select2" data-placeholder="Choose Browser" multiple data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Assign To here" data-bs-container="#addModal">
+                                        <option value="Firefox">
+                                            Firefox
+                                        </option>
+                                        <option value="Chrome selected">
+                                            Chrome
+                                        </option>
+                                        <option value="Safari">
+                                            Safari
+                                        </option>
+                                        <option selected value="Opera">
+                                            Opera
+                                        </option>
+                                        <option value="Internet Explorer">
+                                            Internet Explorer
+                                        </option>
+                                    </select>
+                        </select>
+                            <span class="text-danger d-none">Property name required!</span>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="inputState" class="form-label fw-bold">Related To</label>
+                            <select id="state" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Related To here" data-bs-container="#addModal">
+                            <option selected>Choose...</option>
+                        </select>
+                            <span class="text-danger d-none">Property name required!</span>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="inputEmail4" class="form-label fw-bold">Due Date</label>
+                            <input class="form-control" placeholder="MM/DD/YYYY" type="date" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Due Date here" data-bs-container="#addModal">
+                            <span class="text-danger d-none">Property ID is required!</span>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="inputState" class="form-label fw-bold">Status</label>
+                            <select id="state" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select Status" data-bs-container="#addModal"> 
+                            <option selected>Choose...</option>
 
+                                </select>
+                            <span class="text-danger d-none">Property name required!</span>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="inputState" class="form-label fw-bold">Priority</label>
+                            <select id="state" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select Priority" data-bs-container="#addModal">
+                            <option selected>Choose...</option>
+                        </select>
+                            <span class="text-danger d-none">Property name required!</span>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label fw-bold">Notes</label>
+                            <textarea class="form-control mb-4" placeholder="Sorry about that We will look into it." rows="4" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Notes" data-bs-container="#addModal"></textarea>
+                            <span class="text-danger d-none">Photos are required!</span>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label fw-bold">Media/ Files</label>
+                            <div class="custom-file" style="border: 1px dashed #00000087;">
+                                <input id="fileInput" type="file" name="image" class="custom-file-input form" accept=".jpg, .png, image/jpeg, image/png" aria-label="hello" multiple>
+                                <span className="d-none"></span>
+                                <label class="custom-file-label" for="fileInput">
+                                            <i class="fi fi-rs-cloud-upload"></i>
+                                            <div class="custom-file-text">
+                                                <span>Upload Photo or drag and drop here</span>
+                                                <span>JPEG and PNG, file size no more than 10MB</span>
+                                            </div>
+                                        </label>
+                            </div>
+                            <div class="selected-files">
+                                <div class="file-grid"></div>
+                            </div>
+                            <span class="text-danger d-none">Photos are required!</span>
+                        </div>
+                    </form>
                 </div>
-                <div class="modal-footer d-flex justify-content-between">
-                    <!-- <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
-                        Draft</button> -->
-                    <div class="d-flex">
 
-                        <label class="custom-control custom-checkbox me-2">
-                                <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1" checked="">
-                                <span class="custom-control-label">Notify Tenant</span>
-                            </label>
-                        <label class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1" checked="">
-                                <span class="custom-control-label">Notify Assignee(s)</span>
-                            </label>
-                    </div>
-                    <div class=""><button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close'>Close</button>
-                        <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
-                        <a href="javascript:void(0)" class="btn text-light btn-pill button disabled" style='background-color:#1467B0;' id='next'>Next</a></div>
+            </div>
+            <div class="modal-footer d-flex justify-content-between">
+                <!-- <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
+                    Draft</button> -->
+                <div class="d-flex">
 
+                    <label class="custom-control custom-checkbox me-2">
+                            <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1" checked="">
+                            <span class="custom-control-label">Notify Tenant</span>
+                        </label>
+                    <label class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1" checked="">
+                            <span class="custom-control-label">Notify Assignee(s)</span>
+                        </label>
                 </div>
+                <div class=""><button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close'>Close</button>
+                    <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
+                    <a href="javascript:void(0)" class="btn text-light btn-pill button disabled" style='background-color:#1467B0;' id='next'>Next</a></div>
+
             </div>
         </div>
     </div>
-    <div class="modal fade" id="myModal_edit" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div class="text-justify ps-2 border-model-line">
-                        <h2 class="modal-title">Post an <strong class="color-primary">Update</strong></h2>
-                        <span class="">The real power of tasks is keeping track of deadlines and having a 
-                            log of all work and communication related to the tasks for later reference.</span>
-                    </div>
-                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="top-close">
-                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
-                    </button>
+</div>
+<div class="modal fade" id="myModal_edit" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="text-justify ps-2 border-model-line">
+                    <h2 class="modal-title">Post an <strong class="color-primary">Update</strong></h2>
+                    <span class="">The real power of tasks is keeping track of deadlines and having a 
+                        log of all work and communication related to the tasks for later reference.</span>
                 </div>
-                <div class="modal-body">
-                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                        <form class="row g-3" enctype="multipart/form-data">
-                            <div class="col-md-12">
-                                <label class="form-label fw-bold">Message</label>
+                <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="top-close">
+                    <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <form class="row g-3" enctype="multipart/form-data">
+                        <div class="col-md-12">
+                            <label class="form-label fw-bold">Message</label>
 
-                                <textarea class="form-control mb-4" placeholder="Sorry about that We will look into it." rows="4"></textarea>
-                                <span class="text-danger d-none">Photos are required!</span>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="inputEmail4" class="form-label fw-bold">Due Date</label>
-                                <input class="form-control" placeholder="MM/DD/YYYY" type="date">
-                                <span class="text-danger d-none">Property ID is required!</span>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="inputState" class="form-label fw-bold">Priority</label>
-                                <select id="state" class="form-select form">
-                                <option selected>Choose...</option>
-                                <option>Sindh</option>
-                                <option>Punjab</option>
-                                <option>Balochistan</option>
-                                <option>KPK</option>
-                            </select>
-                                <span class="text-danger d-none">Property name required!</span>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="inputState" class="form-label fw-bold">Status</label>
-                                <select id="state" class="form-select form">
-                                <option selected>Choose...</option>
-                                <option>Sindh</option>
-                                <option>Punjab</option>
-                                <option>Balochistan</option>
-                                <option>KPK</option>
-                            </select>
-                                <span class="text-danger d-none">Address is required!</span>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label class="form-label fw-bold">Assignee(s)</label>
-                                    <select class="form-control select2" data-placeholder="Choose Browser" multiple>
-                                            <option value="Firefox">
-                                                Firefox
-                                            </option>
-                                            <option value="Chrome selected">
-                                                Chrome
-                                            </option>
-                                            <option value="Safari">
-                                                Safari
-                                            </option>
-                                            <option selected value="Opera">
-                                                Opera
-                                            </option>
-                                            <option value="Internet Explorer">
-                                                Internet Explorer
-                                            </option>
-                                        </select>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <label class="form-label fw-bold">Media/ Files</label>
-                                <div class="custom-file" style="border: 1px dashed #00000087;">
-                                    <input id="fileInput" type="file" name="image" class="custom-file-input form" accept=".jpg, .png, image/jpeg, image/png" aria-label="hello" multiple>
-                                    <span className="d-none"></span>
-                                    <label class="custom-file-label" for="fileInput">
-                                                <i class="fi fi-rs-cloud-upload"></i>
-                                                <div class="custom-file-text">
-                                                    <span>Upload Photo or drag and drop here</span>
-                                                    <span>JPEG and PNG, file size no more than 10MB</span>
-                                                </div>
-                                            </label>
-                                </div>
-                                <div class="selected-files">
-                                    <div class="file-grid"></div>
-                                </div>
-                                <span class="text-danger d-none">Photos are required!</span>
-                            </div>
-                        </form>
-                    </div>
+                            <textarea class="form-control mb-4" placeholder="Sorry about that We will look into it." rows="4" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Message here" data-bs-container="#myModal_edit"></textarea>
+                            <span class="text-danger d-none">Photos are required!</span>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="inputEmail4" class="form-label fw-bold">Due Date</label>
+                            <input class="form-control" placeholder="MM/DD/YYYY" type="date" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Due Date here" data-bs-container="#myModal_edit">
+                            <span class="text-danger d-none">Property ID is required!</span>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="inputState" class="form-label fw-bold">Priority</label>
+                            <select id="state" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select Priority" data-bs-container="#myModal_edit">
+                            <option selected>Choose...</option>
 
+                        </select>
+                            <span class="text-danger d-none">Property name required!</span>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="inputState" class="form-label fw-bold">Status</label>
+                            <select id="state" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select Status" data-bs-container="#myModal_edit">
+                            <option selected>Choose...</option>
+
+                        </select>
+                            <span class="text-danger d-none">Address is required!</span>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label class="form-label fw-bold">Assignee(s)</label>
+                                <select class="form-control select2" data-placeholder="Choose Browser" multiple data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select Assignee(s)" data-bs-container="#myModal_edit">
+                                        <option value="Firefox">
+                                            Firefox
+                                        </option>
+                                        <option value="Chrome selected">
+                                            Chrome
+                                        </option>
+                                        <option value="Safari">
+                                            Safari
+                                        </option>
+                                        <option selected value="Opera">
+                                            Opera
+                                        </option>
+                                        <option value="Internet Explorer">
+                                            Internet Explorer
+                                        </option>
+                                    </select>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label fw-bold">Media/ Files</label>
+                            <div class="custom-file" style="border: 1px dashed #00000087;">
+                                <input id="fileInput" type="file" name="image" class="custom-file-input form" accept=".jpg, .png, image/jpeg, image/png" aria-label="hello" multiple>
+                                <span className="d-none"></span>
+                                <label class="custom-file-label" for="fileInput">
+                                            <i class="fi fi-rs-cloud-upload"></i>
+                                            <div class="custom-file-text">
+                                                <span>Upload Photo or drag and drop here</span>
+                                                <span>JPEG and PNG, file size no more than 10MB</span>
+                                            </div>
+                                        </label>
+                            </div>
+                            <div class="selected-files">
+                                <div class="file-grid"></div>
+                            </div>
+                            <span class="text-danger d-none">Photos are required!</span>
+                        </div>
+                    </form>
                 </div>
-                <div class="modal-footer d-flex justify-content-between">
-                    <!-- <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
-                        Draft</button> -->
-                    <div class="d-flex">
 
-                        <label class="custom-control custom-checkbox me-2">
-                                <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1" checked="">
-                                <span class="custom-control-label">Notify Tenant</span>
-                            </label>
-                        <label class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1" checked="">
-                                <span class="custom-control-label">Notify Assignee(s)</span>
-                            </label>
-                    </div>
-                    <div class=""><button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close'>Close</button>
-                        <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
-                        <a href="javascript:void(0)" class="btn text-light btn-pill button disabled" style='background-color:#1467B0;' id='next'>Next</a></div>
+            </div>
+            <div class="modal-footer d-flex justify-content-between">
+                <!-- <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
+                    Draft</button> -->
+                <div class="d-flex">
 
+                    <label class="custom-control custom-checkbox me-2">
+                            <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1" checked="">
+                            <span class="custom-control-label">Notify Tenant</span>
+                        </label>
+                    <label class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1" checked="">
+                            <span class="custom-control-label">Notify Assignee(s)</span>
+                        </label>
                 </div>
+                <div class=""><button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close'>Close</button>
+                    <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
+                    <a href="javascript:void(0)" class="btn text-light btn-pill button disabled" style='background-color:#1467B0;' id='next'>Next</a></div>
+
             </div>
         </div>
     </div>
+</div>
 
     <div class="modal fade" id="succesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -1369,7 +1370,7 @@ color: #000;
                                                 </div>
                                                 <div class="mx-2">
                                                     <div class="form-group m-0">
-                                                        <input class="form-control" placeholder="Search Users by Name, Email or Date" type="text" id="search_input">
+                                                        <input class="form-control" placeholder="Search Users by Name, Email or Date" type="text" id="search_input" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Search Users by Name, Email or Date">
                                                     </div>
                                                 </div>
                                             </div>
@@ -2359,7 +2360,7 @@ color: #000;
         $(document).ready(function() {
 
             $.ajax({
-                url: 'http://api.geonames.org/searchJSON',
+                url: 'http://localhost:3000/api/spade/getStates',
                 method: 'GET',
                 data: {
                     country: 'PK',
@@ -2790,7 +2791,7 @@ color: #000;
             });
             // console.log($('#alphabets'))
             // Search functionality
-            $('#search_input').on('keyup', function() {
+            $('#typehead').on('keyup', function() {
                 var searchValue = $(this).val().toLowerCase();
                 $('#table_body tr').filter(function() {
                     $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);

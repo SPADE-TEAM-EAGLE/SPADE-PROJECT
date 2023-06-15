@@ -392,7 +392,7 @@
         .file-details {
             padding: 10px;
         }
-
+/* 
         .delete-file {
             position: absolute;
             top: -1px;
@@ -400,7 +400,7 @@
             cursor: pointer;
             font-size: 11px;
             color: #000;
-        }
+        } */
 
         .btn-group>.btn-group:not(:last-child)>.btn,
         .btn-group>.btn:not(:last-child):not(.dropdown-toggle) {
@@ -557,7 +557,7 @@
                     display: none;
                 }
 
-                /* #search_input {
+                /* #typehead {
                     display: none;
                 } */
                 #email_verification {
@@ -2437,7 +2437,7 @@
                                                 </div> -->
                                                 <div class="main-header-center d-none d-lg-block m-0">
                                                     <button class="btn px-0 pt-2"><i class="fe fe-search" aria-hidden="true"></i></button>
-                                                    <input type="text" class="form-control" id="typehead" placeholder="Search for results..." autocomplete="off" style="width: 230px;">    
+                                                    <input type="text" class="form-control" id="typehead" placeholder="Search for results..." autocomplete="off" style="width: 230px;" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Search for results...">    
                                                 </div>
                                             </div>
                                         </div>
@@ -3983,7 +3983,7 @@ function updateTotal() {
             });
             // console.log($('#alphabets'))
             // Search functionality
-            $('#search_input').on('keyup', function () {
+            $('#typehead').on('keyup', function () {
                 var searchValue = $(this).val().toLowerCase();
                 $('#table_body tr').filter(function () {
                     $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
