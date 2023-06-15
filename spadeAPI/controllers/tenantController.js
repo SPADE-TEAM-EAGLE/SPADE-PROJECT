@@ -59,7 +59,7 @@ exports.createTenants = async (req, res) => {
       increaseRentData
     } = req.body
     const { userId } = req.user
-    // console.log(req.body)
+    console.log(req.body)
     const tenantsCheck = await queryRunner(selectQuery("tenants", "email"), [email]);
     if (tenantsCheck[0].length > 0) {
 
@@ -603,6 +603,7 @@ exports.updateTenants = async (req, res) => {
       increaseRent,
       increaseRentData
     } = req.body
+    console.log(req)
     // const {userId}=req.user
     const tenantcheckresult = await queryRunner( selectQuery("tenants", "id"), [tenantID] ); 
     if(tenantcheckresult[0].length > 0){

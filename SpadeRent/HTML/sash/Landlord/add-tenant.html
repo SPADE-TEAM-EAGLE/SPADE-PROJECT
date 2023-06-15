@@ -1163,6 +1163,8 @@
                         disabled>Next</button>
                     <button class="btn text-light button d-none" style='background-color:#1467B0;'
                         id='submit'>Submit</button>
+                        <button class="btn text-light button d-none" style='background-color:#1467B0;'
+                        id='save'>Save</button>
                 </div>
             </div>
         </div>
@@ -2534,6 +2536,7 @@
     </script>
     <script>
         var selectedFiles = [];
+        var edit=false
         var tenantData=[]
         $(document).ready(function () {
             // $("#preloader").fadeIn("fast");
@@ -2605,6 +2608,7 @@
                     console.log('Error occurred while fetching state and city data.');
                 }
             });
+            let tenantIdElement
             $.ajax({
                 url: 'http://localhost:3000/api/spade/getPropertyUnitsTenant',
                 type: 'GET',
@@ -2739,10 +2743,11 @@
             });
 
             // Function to get the form data from the accordions
-            function getFormData() {
+            function getFormData(tenantID) {
                 var formData = {};
 
                 // Get Tenant Information
+                formData.tenantID=tenantID
                 formData.firstName = document.getElementById('firstName').value;
                 formData.lastName = document.getElementById('lastName').value;
                 formData.companyName = document.getElementById('company').value;
@@ -2791,20 +2796,28 @@
 
                 return formData;
             }
+            
             $("#submit").on("click", () => {
-                console.log(2)
-                sendData()
+                edit=false
+                sendData("tenants","POST")
             }
             )
+            $("#save").on("click", () => {
+                edit=false
+                console.log(tenantIdElement.text())
+                sendData("updateTenants","PUT",tenantIdElement.text())
+            }
+            )
+            
             // Function to make the AJAX call
-            function sendData() {
-                var formData = getFormData();
+            function sendData(uri,method,tenantID) {
+                var formData = getFormData(tenantID);
                 // console.log(formData)
                 $("#addModal").modal("hide")
                 // Make the AJAX call
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/tenants',
-                    type: 'POST',
+                    url: `http://localhost:3000/api/spade/${uri}`,
+                    type:method,
                     data: JSON.stringify(formData),
                     contentType: "application/json; charset=utf-8",
                     processData: false,
@@ -2817,6 +2830,7 @@
                         $("#succes-text").text(`Tenant has been successfully created and linked to ${formData.propertyUnitID} Unit with ${formData.propertyID}.`)
 
                         $("#succesModal").modal("show")
+                        resetAccordions()
                         tenantID = response.tenantId
                         // console.log(response)
                         // console.log('Data sent successfully!');
@@ -2830,41 +2844,7 @@
                     }
                 });
             }
-            $("#next").on('click', () => {
-                console.log(1)
-                var accordions = $('.accordion-item');
-                console.log(accordions)
-                // Open all accordions
-                accordions.addClass('open');
-                $("#edit-btn").removeClass("d-none")
-                $(".title-text").empty()
-                $(".title-text").append(`<h2 class="modal-title">View <strong class="color-primary" id="title-sub">Tenant Summary</strong></h2><span class="">Post your properties to thousands of potential investors,
-                            tenants and interested individuals.</span>`)
-                $(".accordion-item .icon").removeClass("fi-rs-exclamation");
-                $(".accordion-item .icon").removeClass("chevron");
-                $(".accordion-item .icon").addClass("fi-rs-check-circle");
-                $(".accordion-item .icon").removeClass("cross");
-                $(".accordion-item .icon").addClass("tick");
-                // console.log($('#title-sub'))
-                $("#next").addClass("d-none")
-                $("#submit").removeClass("d-none")
-                accordions.find('input,textarea').attr('readonly', true);
-
-                // Optional: Disable any buttons within the accordions
-                accordions.find('button,select,input[type="radio"]').prop('disabled', true);
-                // Optional: Disable any buttons within the accordions
-                //   accordions.find('button').prop('disabled', true);
-
-                // Remove data-bs-toggle attribute from accordion headers
-                accordions.find('.accordion-button').removeAttr('data-bs-toggle').removeClass("collapsed");
-                accordions.find('.accordion-button').removeAttr('data-bs-toggle').removeClass("collpsed");
-                accordions.find('.accordion-collapse').addClass("show");
-                $("#next").removeAttr
-
-                // sendData()
-            })
-            $("#edit-btn").on('click', () => {
-                console.log(1)
+            function setEditable(){
                 var accordions = $('.accordion-item');
                 console.log(accordions)
                 // Open all accordions
@@ -2893,8 +2873,60 @@
                 accordions.find('.accordion-button').attr('data-bs-toggle', 'collapse').addClass("collapsed");
                 accordions.find('.accordion-collapse').addClass("show");
                 $("#next").removeClass("d-none")
-                $("#submit").addClass("d-none")
+                if(edit){
+                    $("#save").addClass("d-none")
+                }
+                else{
+                    $("#submit").addClass("d-none") 
+                }
+                
+                // $("#submit").addClass("d-none")
                 // $("#submit").removeAttr('disabled','disabled')
+            }
+            $("#next").on('click', () => {
+                
+                var accordions = $('.accordion-item');
+                console.log(accordions)
+                // Open all accordions
+                accordions.addClass('open');
+                $("#edit-btn").removeClass("d-none")
+                console.log($(".title-text").text())
+                $(".title-text").empty()
+                $(".title-text").append(`<h2 class="modal-title">View <strong class="color-primary" id="title-sub">Tenant Summary</strong></h2><span class="">Post your properties to thousands of potential investors,
+                            tenants and interested individuals.</span>`)
+                $(".accordion-item .icon").removeClass("fi-rs-exclamation");
+                $(".accordion-item .icon").removeClass("chevron");
+                $(".accordion-item .icon").addClass("fi-rs-check-circle");
+                $(".accordion-item .icon").removeClass("cross");
+                $(".accordion-item .icon").addClass("tick");
+                // console.log($('#title-sub'))
+                $("#next").addClass("d-none")
+                if(edit){
+                    $("#save").removeClass("d-none")
+                }
+                else{
+                    $("#submit").removeClass("d-none") 
+                }
+                
+                // $("#submit").removeClass("d-none")
+                accordions.find('input,textarea').attr('readonly', true);
+
+                // Optional: Disable any buttons within the accordions
+                accordions.find('button,select,input[type="radio"]').prop('disabled', true);
+                // Optional: Disable any buttons within the accordions
+                //   accordions.find('button').prop('disabled', true);
+
+                // Remove data-bs-toggle attribute from accordion headers
+                accordions.find('.accordion-button').removeAttr('data-bs-toggle').removeClass("collapsed");
+                accordions.find('.accordion-button').removeAttr('data-bs-toggle').removeClass("collpsed");
+                accordions.find('.accordion-collapse').addClass("show");
+                
+
+                // sendData()
+            })
+            $("#edit-btn").on('click', () => {
+                setEditable()
+                
             })
             function checkFieldsStatus(accordionId) {
                 // var accordionFields = $('#' + accordionId + ' input[type="text"], #' + accordionId + ' select');
@@ -3063,6 +3095,7 @@
             });
             function resetAccordions() {
                 // Reset all accordions
+                setEditable()
                 $('.accordion-item').each(function () {
                     var accordionId = $(this).attr('id');
                     var accordionFields = $('#' + accordionId + ' input, #' + accordionId + ' select');
@@ -3188,8 +3221,8 @@
             input.addEventListener('keyup', reset);
             
             $(document).on('click', ".edit-option", function() {
-  const tenantIdElement = $(this).closest("tr").find(".tenant-id");
-  console.log(tenantIdElement);
+                edit=true
+  tenantIdElement = $(this).closest("tr").find(".tenant-id");
 
 
                 const tenants=tenantData.find(obj => obj.tenantID == tenantIdElement.text());
@@ -3208,14 +3241,49 @@
                 $("#state").val(tenants.tState)
                 // $("#mySelect").val(optionValueToSelect);
                 $("#city").val(tenants.tCity)
-                $("#property").val(tenants.propertyName)
-                $("#unit").val(tenants.unitNumber)
+                $("#property").val(tenants.propertyID)
+                $("#unit").empty()
+                $("#unit").append($('<option></option>').text(tenants.unitNumber).val(tenants.propertyUnitID))
+                
                 $("#zip").val(tenants.tZipcode)
                 $("#rent").val(tenants.rentAmount)
                 $("#baseRent").val(tenants.baseRent)
-                $("#tripleNet").val()
+                if(tenants.gross_or_triple_lease==="Triple Net Lease"){
+                    $("#collapse1").addClass('show')
+                    $('input[name="lease"][value="Triple Net Lease"]').prop("checked", true);
+                }
+                else{
+                    console.log('value="Gross Lease"')
+                    $('input[name="lease"][value="Gross Lease"]').prop("checked", true);
+                }
+                if(tenants.increaseRent==="yes"){
+                    $("#collapse2").addClass('show')
+                    $('input[name="yesno"][value="yes"]').prop("checked", true);
+                    
+                }
+                else{
+                    $('input[name="yesno"][value="no"]').prop("checked", true);
+                }
+                $("#tripleNet").val(tenants.tripleNet)
                 $("#leaseStart").val(tenants.leaseStartDate)
                 $("#leaseEnd").val(tenants.leaseEndDate)
+                $("#add-item-container").empty()
+                tenants.increaseRentAmount.forEach(function(rentAmount){
+                    $("#add-item-container").append(`<div class="row row-multiple mb-2 pb-3" style="background-color: #F4FAFF !important;"><div class="col-md-6">
+                                            <label for="inputEmail4" class="form-label">Date of Rent Change (Optional)</label>
+                                            <input type="date" class="form-control input-date dateofRentchange" name="dateofRentchange" id="dateofRentchange" value="${rentAmount.date}"required>
+                                          </div>
+                                          <div class="col-md-5">
+                                            <label for="inputPassword4" class="form-label">Rent Amount Correlating to that Date</label>
+                                            <input type="text" class="form-control input-amount" id="amountChange" value="${rentAmount.increaseRentAmount}" pattern="[0-9]{7}" placeholder="Enter Amount.." maxlength="7"
+                                                                oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                                          </div>
+                                          <div class="col-md-1 d-flex justify-content-center align-items-end">
+                                                            <button type="button" class="btn p-0 del-btn">
+                                                                <i class="fi fi-rs-trash text-danger fs-5"></i>
+                                                            </button>
+                                                        </div>`)
+                })
                 // $("#property").val()
                 // $("#property").val()
 
@@ -3319,29 +3387,29 @@
             // updateTable();
         });
 
-        $('#myModal_edit').on('hidden.bs.modal', function () {
-            // Clear input values
-            console.log(1)
-            $(this).find('input, textarea, select').val('');
+        // $('#myModal_edit').on('hidden.bs.modal', function () {
+        //     // Clear input values
+        //     console.log(1)
+        //     $(this).find('input, textarea, select').val('');
 
-            // Clear file input values
-            $(this).find('input[type="file"]').val(null);
+        //     // Clear file input values
+        //     $(this).find('input[type="file"]').val(null);
 
-            // Clear radio button selections
-            $(this).find('input[type="radio"]').prop('checked', false);
-            $(this).find('.file-grid').empty();
-        });
-        $('#addModal').on('hidden.bs.modal', function () {
-            // Clear input values
-            $(this).find('input, textarea, select').val('');
+        //     // Clear radio button selections
+        //     $(this).find('input[type="radio"]').prop('checked', false);
+        //     $(this).find('.file-grid').empty();
+        // });
+        // $('#addModal').on('hidden.bs.modal', function () {
+        //     // Clear input values
+        //     $(this).find('input, textarea, select').val('');
 
-            // Clear file input values
-            $(this).find('input[type="file"]').val(null);
+        //     // Clear file input values
+        //     $(this).find('input[type="file"]').val(null);
 
-            // Clear radio button selections
-            $(this).find('input[type="radio"]').prop('checked', false);
-            $(this).find('.file-grid').empty();
-        });
+        //     // Clear radio button selections
+        //     $(this).find('input[type="radio"]').prop('checked', false);
+        //     $(this).find('.file-grid').empty();
+        // });
         $(document).on('click', '#nex', function (e) {
 
             e.preventDefault();
