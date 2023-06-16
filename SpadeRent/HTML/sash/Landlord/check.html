@@ -172,6 +172,51 @@
                                     <td>Expense</td>
                                     <td>$550.00</td>
                                 </tr>
+                                <tr>
+                                    <td>
+                                        <p style="font-weight: bold;" class="mb-1">01/12/2023</p>
+                                        <span>Due Date: 01/17/2023</span></td>
+                                    </td>
+                                    <td>5810 Northridge</td>
+                                    <td>Expense</td>
+                                    <td>$550.00</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p style="font-weight: bold;" class="mb-1">01/12/2023</p>
+                                        <span>Due Date: 01/17/2023</span></td>
+                                    </td>
+                                    <td>5810 Northridge</td>
+                                    <td>Expense</td>
+                                    <td>$550.00</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p style="font-weight: bold;" class="mb-1">01/12/2023</p>
+                                        <span>Due Date: 01/17/2023</span></td>
+                                    </td>
+                                    <td>5810 Northridge</td>
+                                    <td>Expense</td>
+                                    <td>$550.00</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p style="font-weight: bold;" class="mb-1">01/12/2023</p>
+                                        <span>Due Date: 01/17/2023</span></td>
+                                    </td>
+                                    <td>5810 Northridge</td>
+                                    <td>Expense</td>
+                                    <td>$550.00</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p style="font-weight: bold;" class="mb-1">01/12/2023</p>
+                                        <span>Due Date: 01/17/2023</span></td>
+                                    </td>
+                                    <td>5810 Northridge</td>
+                                    <td>Expense</td>
+                                    <td>$550.00</td>
+                                </tr>
                                 
                             </tbody>
                         </table>
@@ -272,17 +317,14 @@
             var
                 form = $('.form'),
                 cache_width = form.width(),
-                a3 = [655, 800.89]; // for a4 size paper width and height  
+                a3 = [655,9000000];
             form.submit((e)=> {
                 e.preventDefault();
             })
             $('#create_pdf').on('click', function() {
                 $('body').scrollTop(0);
                 createPDF();
-
-                // console.log(document.location.replace())  
             });
-            //create pdf  
             function createPDF() {
                 getCanvas().then(function(canvas) {
                     var
@@ -296,12 +338,9 @@
                     doc.save('invoice.pdf');
                     form.width(cache_width);
                     form.off('submit');
-
-                  
                 });
             }
 
-            // create canvas object  
             function getCanvas() {
                 form.width((a3[0] * 1.33333) - 80).css('max-width', 'none');
                 return html2canvas(form, {

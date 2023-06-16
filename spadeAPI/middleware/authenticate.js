@@ -1,50 +1,148 @@
-const jwt = require('jsonwebtoken');
-const { queryRunner } = require('../helper/queryRunner');
-const { selectQuery } = require('../constants/queries');
+// const jwt = require("jsonwebtoken");
+// const { queryRunner } = require("../helper/queryRunner");
+// const { selectQuery } = require("../constants/queries");
+// const config = process.env;
+
+// const verifyToken = async (req, res, next) => {
+//   try {
+//     const authorizationHeader = req.headers.authorization;
+
+//     if (!authorizationHeader || !authorizationHeader.startsWith("Bearer ")) {
+//       return res.status(401).send("Access Denied");
+//     }
+
+//     const token = authorizationHeader.split(" ")[1];
+//     const decoded = jwt.verify(token, config.JWT_SECRET_KEY);
+//     console.log(decoded);
+
+//     const result = await queryRunner(selectQuery("tenants", "email"), [
+//       decoded.email,
+//     ]);
+//     req.user = {
+//       email: decoded.email,
+//       userId: result[0][0].id,
+//       userName: result[0][0].FirstName + " " + result[0][0].LastName,
+//     };
+
+//     if (result.length === 0) {
+//       return res.status(401).send("Invalid Token");
+//     }
+
+//     // req.user = {
+//     //   email: decoded.email,
+//     //   userId: result[0].id,
+//     //   userName: result[0].FirstName + " " + result[0].LastName,
+//     // };
+
+//     next();
+//   } catch (err) {
+//     console.log(err);
+//     if (err instanceof jwt.TokenExpiredError) {
+//       return res.status(401).send("Token expired");
+//     }
+//     return res.status(401).send("Invalid Token");
+//   }
+// };
+
+// /*
+// const verifyToken = async (req, res, next) => {
+//   const token = req.headers.authorization.split(" ")[1];
+//   // console.log(req.body)
+//   if (!token) {
+//     return res.status(401).send("Access Denied");
+//   }
+//   try {
+//     const decoded = jwt.verify(token, config.JWT_SECRET_KEY);
+//     const result = await queryRunner(selectQuery("users", "Email"), [
+//       decoded.email,
+//     ]);
+//     req.user = {
+//       email: decoded.email,
+//       userId: result[0][0].id,
+//       userName: result[0][0].FirstName + " " + result[0][0].LastName,
+//     };
+
+//     next();
+//     // console.log("hello")
+//   } catch (err) {
+//     console.log(err);
+//     return res.status(400).send("Invalid Token");
+//   }
+// };
+// */
+// const verifyTokenTenant = async (req, res, next) => {
+//   const token = req.headers.authorization.split(" ")[1];
+//   // console.log(req.body)
+//   if (!token) {
+//     return res.status(401).send("Access Denied");
+//   }
+//   try {
+//     const decoded = jwt.verify(token, config.JWT_SECRET_KEY);
+//     const result = await queryRunner(selectQuery("tenants", "email"), [
+//       decoded.email,
+//     ]);
+//     req.user = {
+//       email: decoded.email,
+//       userId: result[0][0].id,
+//       userName: result[0][0].FirstName + " " + result[0][0].LastName,
+//     };
+
+//     next();
+//   } catch (err) {
+//     console.log(err);
+//     return res.status(400).send("Invalid Token");
+//   }
+// };
+// (module.exports = verifyToken), verifyTokenTenant;
+const jwt = require("jsonwebtoken");
+const { queryRunner } = require("../helper/queryRunner");
+const { selectQuery } = require("../constants/queries");
 const config = process.env;
-const verifyToken=async(req, res, next)=>{
-  const token = req.headers.authorization.split(' ')[1]
+const verifyToken = async (req, res, next) => {
+  const token = req.headers.authorization.split(" ")[1];
   // console.log(req.body)
   if (!token) {
-    return res.status(401).send('Access Denied');
+    return res.status(401).send("Access Denied");
   }
   try {
-    const decoded = jwt.verify(token,config.JWT_SECRET_KEY);
-    const result=await queryRunner(selectQuery("users","Email"), [decoded.email])
+    const decoded = jwt.verify(token, config.JWT_SECRET_KEY);
+    const result = await queryRunner(selectQuery("users", "Email"), [
+      decoded.email,
+    ]);
     req.user = {
-      email:decoded.email,
-      userId:result[0][0].id,
-      userName:result[0][0].FirstName+" "+result[0][0].LastName
+      email: decoded.email,
+      userId: result[0][0].id,
+      userName: result[0][0].FirstName + " " + result[0][0].LastName,
+    };
 
-    }
-    
     next();
     // console.log("hello")
   } catch (err) {
-    console.log(err)
-    return res.status(400).send('Invalid Token');
+    console.log(err);
+    return res.status(400).send("Invalid Token");
   }
-}
-const verifyTokenTenant=async(req, res, next)=>{
-  const token = req.headers.authorization.split(' ')[1]
+};
+const verifyTokenTenant = async (req, res, next) => {
+  const token = req.headers.authorization.split(" ")[1];
   // console.log(req.body)
   if (!token) {
-    return res.status(401).send('Access Denied');
+    return res.status(401).send("Access Denied");
   }
   try {
-    const decoded = jwt.verify(token,config.JWT_SECRET_KEY);
-    const result=await queryRunner(selectQuery("tenants","email"), [decoded.email])
+    const decoded = jwt.verify(token, config.JWT_SECRET_KEY);
+    const result = await queryRunner(selectQuery("tenants", "email"), [
+      decoded.email,
+    ]);
     req.user = {
-      email:decoded.email,
-      userId:result[0][0].id,
-      userName:result[0][0].FirstName+" "+result[0][0].LastName
+      email: decoded.email,
+      userId: result[0][0].id,
+      userName: result[0][0].FirstName + " " + result[0][0].LastName,
+    };
 
-    }
-  
     next();
   } catch (err) {
-    console.log(err)
-    return res.status(400).send('Invalid Token');
+    console.log(err);
+    return res.status(400).send("Invalid Token");
   }
-}
-module.exports=verifyToken, verifyTokenTenant
+};
+(module.exports = verifyToken), verifyTokenTenant;

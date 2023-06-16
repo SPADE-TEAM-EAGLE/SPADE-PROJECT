@@ -289,6 +289,7 @@ exports.getByIdInvoices = async (req, res) => {
     try {
       const currentDate = new Date();
       const invoiceUpdatedResult = await queryRunner(updateInvoice, [
+        tenantID,
         invoiceType,
         startDate,
         endDate,
