@@ -1735,8 +1735,7 @@
                         <p class="ms-2 mb-0 text-start">Your Invoice with INV-89900A was successfully</p>
                         <p class="ms-2 text-start">sent to John Adams.</p>
                     </div>
-                    <a data-bs-effect="effect-scale"
-                    data-bs-toggle="modal" href="#addModal" class="btn btn-outline-default btn-pill ms-1 my-2"
+                    <a href="javascript:void(0)" class="btn btn-outline-default btn-pill ms-1 my-2" id="succes-addtenant-close"
                     style='background-color:#1467B0;color: white;'><i class="fi fi-rs-plus-small" style="vertical-align: middle;"></i> Create New Invoice</a>
                 </div>
                 <div class="modal-footer" style="border-top: 0">
@@ -3277,6 +3276,10 @@
     <script>
         $(document).ready(function () {
             // $("#succesModal").modal("show")
+            $("#succes-addtenant-close").click(()=>{
+                $("#succesModal").modal("hide")
+                $("#addModal").modal("show")
+            })
             $("#succes-close").click(()=>{
                 getData()
             })
