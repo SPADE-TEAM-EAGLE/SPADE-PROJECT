@@ -343,11 +343,11 @@ card_btnn16.addEventListener("click", cardbtnchange1);
 function cardbtnchange1()
 {
   loader.style.display = "block";
-  card2.classList.add("fade");
-  card1.classList.add("fade");
-  card3.classList.add("fade");
-  card5.classList.add("fade");
-  card4.classList.remove("fade");
+  card2.classList.add("card-fade");
+  card1.classList.add("card-fade");
+  card3.classList.add("card-fade");
+  card5.classList.add("card-fade");
+  card4.classList.remove("card-fade");
   // part4.classList.add("shadow-active");
   part3.classList.remove("shadow-active");
   part2.classList.remove("shadow-active");
@@ -367,10 +367,10 @@ function cardbtnchange1()
   // part3.addEventListener("click", thirdBtnChange);
   // function thirdBtnChange() {
   // loader.style.display = "block";
-  //   card2.classList.add("fade");
-  //   card1.classList.add("fade");
-  //   card3.classList.add("fade");
-  //   card4.classList.remove("fade");
+  //   card2.classList.add("card-fade");
+  //   card1.classList.add("card-fade");
+  //   card3.classList.add("card-fade");
+  //   card4.classList.remove("card-fade");
   //   part3.classList.add("shadow-active");
   //   part2.classList.remove("shadow-active");
   //   part1.classList.remove("shadow-active");
@@ -390,11 +390,11 @@ function cardbtnchange1()
 function cardbtnchange2()
 {
   loader.style.display = "block";
-  card2.classList.add("fade");
-  card1.classList.add("fade");
-  card3.classList.add("fade");
-  card4.classList.add("fade");
-  card5.classList.remove("fade");
+  card2.classList.add("card-fade");
+  card1.classList.add("card-fade");
+  card3.classList.add("card-fade");
+  card4.classList.add("card-fade");
+  card5.classList.remove("card-fade");
   // part4.classList.add("shadow-active");
   part3.classList.remove("shadow-active");
   part2.classList.remove("shadow-active");
@@ -414,11 +414,11 @@ function cardbtnchange2()
   // part3.addEventListener("click", thirdBtnChange);
   // function thirdBtnChange() {
   // loader.style.display = "block";
-  //   card2.classList.add("fade");
-  //   card1.classList.add("fade");
-  //   card3.classList.add("fade");
-  //   card4.classList.add("fade");
-  //   card5.classList.remove("fade");
+  //   card2.classList.add("card-fade");
+  //   card1.classList.add("card-fade");
+  //   card3.classList.add("card-fade");
+  //   card4.classList.add("card-fade");
+  //   card5.classList.remove("card-fade");
   //   // part3.classList.add("shadow-active");
   //   part2.classList.remove("shadow-active");
   //   part1.classList.remove("shadow-active");
@@ -440,11 +440,11 @@ function cardbtnchange2()
 function cardbtnchange() {
   document.getElementById("paymentform").reset();
   loader.style.display = "block";
-  card2.classList.add("fade");
-  card1.classList.add("fade");
-  card4.classList.add("fade");
-  card3.classList.remove("fade");
-  card5.classList.add("fade");
+  card2.classList.add("card-fade");
+  card1.classList.add("card-fade");
+  card4.classList.add("card-fade");
+  card3.classList.remove("card-fade");
+  card5.classList.add("card-fade");
   part3.classList.add("shadow-active");
   part2.classList.remove("shadow-active");
   part1.classList.remove("shadow-active");
@@ -463,11 +463,11 @@ function cardbtnchange() {
   part3.addEventListener("click", thirdBtnChange);
   function thirdBtnChange() {
   loader.style.display = "block";
-    card2.classList.add("fade");
-    card1.classList.add("fade");
-    card4.classList.add("fade");
-    card5.classList.add("fade");
-    card3.classList.remove("fade");
+    card2.classList.add("card-fade");
+    card1.classList.add("card-fade");
+    card4.classList.add("card-fade");
+    card5.classList.add("card-fade");
+    card3.classList.remove("card-fade");
     part3.classList.add("shadow-active");
     part2.classList.remove("shadow-active");
     part1.classList.remove("shadow-active");
@@ -515,13 +515,13 @@ function card1_switch() {
     lastname.value.match(validname) &&
     firstname.value.match(validname)
   ) {
-    card1.classList.add("fade");
-    card3.classList.add("fade");
-    card4.classList.add("fade");
-    card5.classList.add("fade");
+    card1.classList.add("card-fade");
+    card3.classList.add("card-fade");
+    card4.classList.add("card-fade");
+    card5.classList.add("card-fade");
     loader.style.display = "block";
-    // loader.classList.add("fadein-loader");
-    card2.classList.remove("fade");
+    // loader.classList.add("card-fadein-loader");
+    card2.classList.remove("card-fade");
     part2.classList.add("shadow-active");
     part1.classList.remove("shadow-active");
     part3.classList.remove("shadow-active");
@@ -541,11 +541,11 @@ function card1_switch() {
     part2.addEventListener("click", secondBtnChange);
     function secondBtnChange() {
   loader.style.display = "block";
-      card1.classList.add("fade");
-      card3.classList.add("fade");
-      card4.classList.add("fade");
-      card5.classList.add("fade");
-      card2.classList.remove("fade");
+      card1.classList.add("card-fade");
+      card3.classList.add("card-fade");
+      card4.classList.add("card-fade");
+      card5.classList.add("card-fade");
+      card2.classList.remove("card-fade");
       part2.classList.add("shadow-active");
       part1.classList.remove("shadow-active");
       part3.classList.remove("shadow-active");
@@ -568,11 +568,11 @@ function card1_switch() {
 part1.addEventListener("click", firstBtnChange);
 function firstBtnChange() {
   loader.style.display = "block";
-  card2.classList.add("fade");
-  card3.classList.add("fade");
-  card4.classList.add("fade");
-  card5.classList.add("fade");
-  card1.classList.remove("fade");
+  card2.classList.add("card-fade");
+  card3.classList.add("card-fade");
+  card4.classList.add("card-fade");
+  card5.classList.add("card-fade");
+  card1.classList.remove("card-fade");
   part1.classList.add("shadow-active");
   
   part2.classList.remove("shadow-active");
