@@ -383,14 +383,14 @@
     } */
         
         button.btn-close {
-            right: -7px;
+            right: 5px;
         }
         
         .btn-close {
             width: 2.5rem;
             opacity: 1;
             position: absolute;
-            top: -11px;
+            top: 6px;
         }
         
         .del {
@@ -712,11 +712,17 @@
         
         @media (max-width: 600px) {
             .nav {
-                width: 515px;
+                width: 610px;
             }
             .tab-menu-heading {
                 overflow-x: scroll;
             }
+            .tabs-menu1 ul li a {
+            padding: 10px 0px 6px 0px !important;
+            margin-right: 20px;
+            display: block;
+            color: white;
+        }
         }
         
         .dark-mode .tab-menu-heading {
@@ -772,6 +778,56 @@
         }
         /* upload file end  */
         /* Tabs css End  */
+
+        .card-primary {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #1467B0;
+    border: inherit !important;
+    background-clip: border-box;
+    border-radius: 7px;
+    box-shadow: 0px 4px 51px -8px rgba(0, 0, 0, 0.57) !important;
+    color: white;
+}
+
+.settings-icon {
+    border: 0px solid transparent;
+    border-radius: 36px;
+    padding: 11px 15px;
+    font-size: 20px;
+}
+
+.settings-icon, .bg-primary-transparent, .text-primary.active {
+    background-color: #f8e7e7;
+}
+
+.model-account-close-logo {
+    border: 4px solid orange;
+    border-radius: 50%;
+    padding: 10px 17px 10px 17px;
+}
+
+.model-account-request-close-logo {
+    width: 120px;
+}
+
+.form-row{
+            text-align: left;
+        }
+
+        .balance-due{
+            font-weight: 400;
+        }
+
+        .balnce-price{
+            font-size: 55px;
+            text-align: left;
+        }
     </style>
 
 </head>
@@ -1262,8 +1318,8 @@
                                                     class="fe fe-chevron-down dark-mode text-dark"
                                                     style="font-size: 20px; font-weight: 800;"></i>
                                             </a>
-                                            <!-- <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                                <div class="drop-heading">
+                                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                                <!-- <div class="drop-heading">
                                                     <div class="text-center">
                                                         <h5 class="text-dark mb-0 fs-14 fw-semibold">Percy Kewshun</h5>
                                                         <small class="text-muted">Senior Admin</small>
@@ -1279,11 +1335,11 @@
                                                 </a>
                                                 <a class="dropdown-item" href="lockscreen.html">
                                                     <i class="dropdown-icon fe fe-lock"></i> Lockscreen
-                                                </a>
-                                                <a class="dropdown-item" href="login.html">
+                                                </a> --> 
+                                                <a class="dropdown-item" href="login_module.html" onclick="logout()">
                                                     <i class="dropdown-icon fe fe-alert-circle"></i> Sign out
                                                 </a>
-                                            </div> -->
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1434,6 +1490,7 @@
                                                     <li><a href="#tab6" data-bs-toggle="tab">Security Settings</a></li>
                                                     <li><a href="#tab7" data-bs-toggle="tab">Appearance</a></li>
                                                     <li><a href="#tab8" data-bs-toggle="tab">Payment Method</a></li>
+                                                    <li><a href="#tab9" data-bs-toggle="tab">Close Account</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -1825,10 +1882,232 @@
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            <div class="tab-pane mt-0" id="tab9">
+                                                <div class="card-body pt-0">
+                                                    <h2 class="h2-personal-inf">Close Account</h2>
+                                                    <p class="p-personal-inf">Remove accounts from this Accounts Centre.
+                                                        Removing an account will also remove any profiles managed by
+                                                        that account.</p>
+                                                    <hr style="background-color: #D3D3D3;">
+                                                    <h2 class="h2-personal-inf text-dark mb-3 balance-due">Balance Due</h2>
+                                                    <h1 class="text-primary balnce-price mb-0"><b>$356.00</b></h1>
+                                                    <button
+                                                                                class="btn btn-primary text-primaryy btn-pill m-2" id="form2show"
+                                                                                style="width: fit-content; border: transparent;"><b>Pay Now</b></button>
+                                                    <p class="mt-4" id="text-hide"><b>You are not able to close account because you have <br>
+                                                        outstanding balance of <span style="color: #1467B0;">$356.00</span></b></p>
+
+                                                    <div class="row mt-5">
+                                                        <div id="form2" style="display: none;">
+                                                                                                                    <!-- credit card debit card start  -->
+                                                                                                                    <div class="desc Credit-Card Debit-Card">
+                                                                                                                        <div class="form-row" id="credit-card">
+                                                                                                                            <div class="col-lg-6">
+                                                                                                                            <div class="row">
+                                                                                                                                
+                                                                                                                            <div class="col-xl-6 mb-5">
+                                                                                                                                <input type="number" class="form-control" id="card-holder-name" placeholder="Card Holder Name" required>
+                                                                                                                                <div class="valid-feedback">Looks good!</div>
+                                                                                                                            </div>
+                                                                                                                            <div class="col-xl-6 mb-5">
+                                                                                                                                <input type="date" class="form-control" id="card-date" placeholder="Clark" required>
+                                                                                                                            </div>
+                                                                                                                            <div class="col-xl-12 mb-5">
+                                                                                                                                <input type="number" class="form-control" id="card-number" placeholder="Card Number" required>
+                                                                                                                                <div class="valid-feedback">Looks good!</div>
+                                                                                                                                <img src="../assets/images/viza.png" alt="" style="display: flex; margin-top: -30px; float: right;">
+                                                                                                                            </div>
+                                                        
+                                                                                                                            <div class="col-xl-6 mb-5">
+                                                                                                                                <input type="text" class="form-control" id="cvv" placeholder="CVV" required>
+                                                                                                                                <div class="valid-feedback">Looks good!</div>
+                                                                                                                            </div>
+                                                                                                                            <div class="col-xl-6 mb-5">
+                                                                                                                                <input type="number" class="form-control" id="billing-zip-code" placeholder="Billing Zip Code" required>
+                                                                                                                                <div class="valid-feedback">Looks good!</div>
+                                                                                                                            </div>
+                                                                                                                            <div class="col-lg-12">
+                                                                                                                                <div class="row">
+                                                                                                                                    <div class="col-lg-6 mt-4" style="display: flex; width: auto;">
+                                                                                                                                        <button class="btn btn-primary btn-pill m-2" id="form3show">Close</button>
+                                                                                                                                    </div>
+                                                                                                                                </div>
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                    </div>
+                                                                                                                    </div>
+                                                        
+                                                                                                                    <!-- credit card debit card End  -->
+                                                        </div>
+                                                        <div id="form3" style="display: none;">
+                                                        <div class="col-lg-8">
+                                                            <div class="card card-color card-primary">
+                                                                <div class="card-body">
+                                                                    <div class="row" style="align-items: center;">
+                                                                        <div class="col-xl-6 col-sm-6 col-md-12">
+                                                                            <div
+                                                                                style="display: flex; align-items: center;">
+                                                                                <span
+                                                                                    class="settings-icon bg-primary-transparent text-primary"><img
+                                                                                        src="../assets/images/logo_loginmodule.png"></span>
+                                                                                &nbsp;&nbsp; <div
+                                                                                    style="display: inline-block;">
+                                                                                    <h3 class="mb-0">John Clark</h3>
+                                                                                    <span>
+                                                                                        <p>Spade Rent</p>
+                                                                                    </span>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="col-xl-6 col-sm-6 col-md-12"
+                                                                            style="display: flex; justify-content: end;">
+                                                                            <button
+                                                                                class="btn btn-light text-primaryy btn-pill m-2"
+                                                                                data-bs-target="#closeaccount"
+                                                                                data-bs-toggle="modal"
+                                                                                style="width: fit-content; border: transparent;"><b>Close
+                                                                                    Account</b></button>
+                                                                        </div>
+
+                                                                        <!-- close account model box start  -->
+                                                                        <div class="modal fade" id="closeaccount"
+                                                                            tabindex="-1" role="dialog">
+                                                                            <div class="modal-dialog modal-md modal-dialog-scrollable"
+                                                                                role="document">
+                                                                                <div class="modal-content">
+                                                                                    <div class="modal-header">
+                                                                                        <button class="btn-close"
+                                                                                            data-bs-dismiss="modal"
+                                                                                            aria-label="Close">
+                                                                                            <span
+                                                                                                aria-hidden="true"><img
+                                                                                                    src="../assets/images/cross-circle.svg" /></span>
+                                                                                        </button>
+                                                                                    </div>
+                                                                                    <div
+                                                                                        class="modal-body text-center text-dark">
+                                                                                        <img src="../assets/images/logo_loginmodule.png"
+                                                                                            class="model-account-close-logo"
+                                                                                            alt="">
+                                                                                        <h2 class="mt-5 mb-0">John Clark
+                                                                                        </h2>
+                                                                                        <h4>Spade Rent</h4>
+                                                                                        <h2><b>Remove this account from
+                                                                                                your
+                                                                                                Accounts Centre?</b>
+                                                                                        </h2>
+
+                                                                                        <button
+                                                                                            class="btn btn-primary btn-pill m-2"  id="form1show"
+                                                                                            type="button" data-bs-dismiss="modal" aria-label="Close"
+                                                                                            style="width: fit-content;">
+                                                                                            &nbsp; Continue &nbsp;
+                                                                                        </button>
+                                                                                    </div>
+                                                                                    <div class="modal-footer">
+
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <!-- close account model box start  -->
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    </div>
+
+                                                    <div id="form1" style="display: none;">
+                                                    <div class="row">
+                                                        <div class="col-lg-6" id="current_password_show">
+                                                            <div class="form-group">
+                                                                <label for=""><b>Current Password</b></label>
+                                                                <input type="password" class="form-control" name="password" id="current_password" aria-describedby="emailHelp" placeholder="Password"  data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter password here.">
+                                                                <i class="fi fi-rs-eye text-dark fs-20 toggle-password"  toggle="#current_password" style="cursor: pointer;
+                                                                float: right;
+                                                                margin-top: -30px;
+                                                                margin-right: 15px;
+                                                                "></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-6" id="confirm_password_show">
+                                                            <div class="form-group">
+                                                                <label for=""><b>Confirm Password</b></label>
+                                                                <input type="password" class="form-control" name="password" id="confirm_password" aria-describedby="emailHelp" placeholder="Password"  data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter password here.">
+                                                                <i class="fi fi-rs-eye text-dark fs-20 toggle-password"  toggle="#confirm_password" style="cursor: pointer;
+                                                                float: right;
+                                                                margin-top: -30px;
+                                                                margin-right: 15px;
+                                                                "></i>
+                                                            </div>
+                                                            <div class="col-lg-12">
+                                                                <button
+                                                                class="btn btn-primary text-light btn-pill mt-2"
+                                                                data-bs-target="#requestcloseaccount"
+                                                                data-bs-toggle="modal"
+                                                                style="width: fit-content; border: transparent;"><b>Request to Close the Account</b></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                </div>
+
+                                            </div>
+                                          
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+                               <!-- request close account model box start  -->
+                               <div class="modal fade" id="requestcloseaccount"
+                               tabindex="-1" role="dialog">
+                               <div class="modal-dialog modal-md modal-dialog-scrollable"
+                                   role="document">
+                                   <div class="modal-content">
+                                       <div class="modal-header">
+                                           <button class="btn-close"
+                                               data-bs-dismiss="modal"
+                                               aria-label="Close">
+                                               <span
+                                                   aria-hidden="true"><img
+                                                       src="../assets/images/cross-circle.svg" /></span>
+                                           </button>
+                                       </div>
+                                       <div
+                                           class="modal-body text-center text-dark">
+                                           <img src="../assets/images/logo-preloader.png"
+                                               class="model-account-request-close-logo mb-4"
+                                               alt="">
+                                               <img src="../assets/images/request-close-user.png" alt="">
+                                           <h2 class="text-primary"><b>Your account closure request 
+                                               is initiated.</b>
+                                           </h2>
+                                           <p>Your account will be closed soon and you will 
+                                               receive email on closure.</p>
+
+                                           <button
+                                               class="btn btn-primary btn-pill m-2"  id="form1showw"
+                                               type="button" data-bs-dismiss="modal" aria-label="Close"
+                                               style="width: fit-content;">
+                                               &nbsp; Ok &nbsp;
+                                           </button>
+                                       </div>
+                                       <div class="modal-footer">
+
+                                       </div>
+                                   </div>
+                               </div>
+                               <!-- request close account model box start  -->
 
 
                             <div class="card-body pb-0 bg-recentorder" style="display: none;">
@@ -2821,6 +3100,43 @@
                 });
             });
         </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script>
+    $(".toggle-password").click(function() {
+
+$(this).toggleClass("fi-rs-eye fi-rs-crossed-eye");
+var input = $($(this).attr("toggle"));
+if (input.attr("type") == "password") {
+input.attr("type", "text");
+} else {
+input.attr("type", "password");
+}
+});
+</script>
+
+<script>
+$("#form1show").click(function(e){
+$('#form1').show();
+});
+</script>
+
+<script>
+    $("#form2show").click(function(e){
+    $('#form2').show();
+    $("#text-hide").css("display", "none");
+    $("#form2show").css("display", "none");
+    });
+</script>
+
+<script>
+    $("#form3show").click(function(e){
+    $('#form3').show();
+    $("#form2").css("display", "none");
+    $("#form2show").css("display", "none");
+    });
+</script>
+
 </body>
 
 </html>
