@@ -1,5 +1,5 @@
 const user = require("../models/user");
-const {sendMail} = require("../sendmail/sendmail.js");
+const { sendMail } = require("../sendmail/sendmail.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const fs = require("fs");
@@ -88,8 +88,7 @@ exports.checkemail = async function (req, res) {
 exports.getUser = (req, res) => {
   // console.log(req.user);
   res.status(200).json({
-    user : req.user.userName
-    
+    user: req.user.userName,
   });
 };
 
@@ -603,8 +602,8 @@ exports.propertyUpdate = async (req, res) => {
           const img = existingImg[i];
           const propertyImageResult = await queryRunner(insertInPropertyImage, [
             id,
-            img
-          ]) 
+            img,
+          ]);
           if (propertyImageResult.affectedRows === 0) {
             return res.send("Error2");
           }
@@ -729,12 +728,12 @@ exports.putPropertyUnitsUpdates = async (req, res) => {
   try {
     const { id, propertyId, unitNumber, Area, unitDetails } = req.body;
     // console.log(id, propertyID, unitNumber, Area, unitDetails)
-    let status = "Vacant";
+    // let status = "Vacant";
     const propertyUnitsResult = await queryRunner(updatePropertyUnits, [
       unitNumber,
       Area,
       unitDetails,
-      status,
+      // status,
       id,
       propertyId,
     ]);
@@ -759,7 +758,7 @@ exports.putPropertyUnitsUpdates = async (req, res) => {
 exports.getPropertyUnitsTenant = async (req, res) => {
   // console.log(req,res)
   try {
-    const { userId,userName } = req.user;
+    const { userId, userName } = req.user;
     // console.log(userName)
     const getPropertyUnitsTenantResult = await queryRunner(
       selectQuery("property", "landlordID"),
@@ -768,7 +767,9 @@ exports.getPropertyUnitsTenant = async (req, res) => {
     if (getPropertyUnitsTenantResult[0].length > 0) {
       for (let item of getPropertyUnitsTenantResult[0]) {
         if (item.units > 0) {
-          const getPropertyUnitsVacantResult = await queryRunner(PropertyUnitsVacant, [item.id, "Vacant"]
+          const getPropertyUnitsVacantResult = await queryRunner(
+            PropertyUnitsVacant,
+            [item.id, "Vacant"]
           );
           const getPropertyUnitsOccupiedResult = await queryRunner(
             selectQuery("propertyunits", "propertyID", "status"),
@@ -785,7 +786,7 @@ exports.getPropertyUnitsTenant = async (req, res) => {
 
       res.status(200).json({
         data: getPropertyUnitsTenantResult[0],
-        user:userName,
+        user: userName,
         message: "Get Property Units Tenant",
       });
     } else {
@@ -924,39 +925,39 @@ exports.getpropertyUnits = async (req, res) => {
 //  ############################# Get Property and tenant data Start ############################################################
 exports.viewPropertyTenant = async (req, res) => {
   try {
-    
-    const { userId,userName } = req.user;
+    const { userId, userName } = req.user;
     // const { userId,userName } = req.body;
-    console.log(req.user)
+    console.log(req.user);
     let PropertyTenantResult;
-      PropertyTenantResult = await queryRunner(selectAllTenants, [
-        userId,
-      ]);
+    PropertyTenantResult = await queryRunner(selectAllTenants, [userId]);
     if (PropertyTenantResult[0].length > 0) {
-      for(let i=0; i < PropertyTenantResult[0].length; i++ ){
-      const tenantID = PropertyTenantResult[0][i].tenantID;
-      const tenantIncreaseResult = await queryRunner(selectQuery("tenantincreaserent", "tenantID"),[tenantID]);
-      if(tenantIncreaseResult[0].length > 0){
-        const tenantIncrease = tenantIncreaseResult[0].map((data)=> ({
-          date : data.date,
-          increaseRentAmount : data.increaseRentAmount
-        }) 
-        )
-        PropertyTenantResult[0][i].increaseRentAmount = tenantIncrease ;
-      }else{
-        PropertyTenantResult[0][i].increaseRentAmount = ["No tenant Increase"] ;
-
+      for (let i = 0; i < PropertyTenantResult[0].length; i++) {
+        const tenantID = PropertyTenantResult[0][i].tenantID;
+        const tenantIncreaseResult = await queryRunner(
+          selectQuery("tenantincreaserent", "tenantID"),
+          [tenantID]
+        );
+        if (tenantIncreaseResult[0].length > 0) {
+          const tenantIncrease = tenantIncreaseResult[0].map((data) => ({
+            date: data.date,
+            increaseRentAmount: data.increaseRentAmount,
+          }));
+          PropertyTenantResult[0][i].increaseRentAmount = tenantIncrease;
+        } else {
+          PropertyTenantResult[0][i].increaseRentAmount = [
+            "No tenant Increase",
+          ];
+        }
       }
-    }
       res.status(200).json({
         data: PropertyTenantResult,
-        message: 'Property Tenant ',
-        user:userName
-      })
+        message: "Property Tenant ",
+        user: userName,
+      });
     } else {
       res.status(200).json({
-        message: 'No data found'
-      })
+        message: "No data found",
+      });
     }
   } catch (error) {
     res.send("Error Get Property Tenant data");
@@ -1055,14 +1056,10 @@ exports.deleteMoreUnits = async (req, res) => {
 };
 //  ############################# Delete property units End ############################################################
 
-
-
-
-
 //  ############################# Get property States End ############################################################
 exports.getStates = async (req, res) => {
   try {
-    const statesResult = await queryRunner(selectQuery("propertystates")); 
+    const statesResult = await queryRunner(selectQuery("propertystates"));
     if (statesResult[0].length > 0) {
       res.status(200).json({
         data: statesResult[0],
