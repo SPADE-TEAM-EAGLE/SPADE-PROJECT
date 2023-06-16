@@ -1201,16 +1201,16 @@
                                                                     <div class="row" id="add-item-containerPhone">
                                                                         <div class="col-md-6 mt-2">
                                                                             <select class="form-control form-select select2" data-bs-placeholder="Select" required>
-                                                                                <option label="Select">Country</option>
-                                                                                <option value="1">Germany</option>
-                                                                                <option value="2">Canada</option>
-                                                                                <option value="3">Usa</option>
-                                                                                <option value="4">Aus</option>
+                                                                                <option label="Select">Choose...</option>
+                                                                                <option value="work">Work</option>
+                                                                                <option value="personal">Personal</option>
+                                                                               
                                                                             </select>
                                                                         </div>
                                                                         <div class="col-md-6 mt-2">
                                                                             <input type="tel" class="form-control" placeholder="Phone Number" required>
                                                                         </div>
+                                                                        
                                                                     </div>
                                                                     <div class="col-12 mt-2">
                                                                         <a href="javascript:;" class="mt-1" id="add-item-phone">+Add Line Item</a>
@@ -1227,11 +1227,9 @@
                                                                     <div class="row" id="add-item-containerEmail">
                                                                         <div class="col-md-6 mt-2">
                                                                             <select class="form-control form-select select2" data-bs-placeholder="Select" required>
-                                                                                <option>Choose...</option>
-                                                                                <option>Germany</option>
-                                                                                <option>Canada</option>
-                                                                                <option>Usa</option>
-                                                                                <option>Aus</option>
+                                                                                <option label="Select">Choose...</option>
+                                                                                <option value="work">Work</option>
+                                                                                <option value="personal">Personal</option>
                                                                             </select>
                                                                         </div>
                                                                         <div class="col-md-6 mt-2">
@@ -2058,7 +2056,17 @@
     </script>
     <script>
         $(document).ready(function() {
-
+            $('.btn-close').each(function() {
+  $(this).click(() => {
+    console.log("hello");
+    $('#add-item-containerPhone div').slice(2).remove();
+    $('#add-item-containerEmail div').slice(2).remove();
+    $('#add-item-containerPhone div').find('input').val('');
+  $('#add-item-containerPhone div').find('select').val('');
+  $('#add-item-containerEmail div').find('input').val('');
+  $('#add-item-containerEmail div').find('select').val('Select');
+  });
+});
             const tenantId = (new URL(document.location)).searchParams.get("tenantId");
             // console.log($("#viewUnits").attr("href"))
             //            
@@ -2123,11 +2131,9 @@
             $("#add-item-phone").on("click", () => {
                 $("#add-item-containerPhone").append(`<div class="col-md-6 mt-2">
                                                                             <select class="form-control form-select select2" data-bs-placeholder="Select" required>
-                                                                                <option label="Select">Country</option>
-                                                                                <option value="1">Germany</option>
-                                                                                <option value="2">Canada</option>
-                                                                                <option value="3">Usa</option>
-                                                                                <option value="4">Aus</option>
+                                                                                <option label="Select">Choose...</option>
+                                                                                <option value="work">Work</option>
+                                                                                <option value="personal">Personal</option>
                                                                             </select>
                                                                         </div>
                                                                         <div class="col-md-6 mt-2">
@@ -2137,11 +2143,9 @@
             $("#add-item-email").on("click", () => {
                 $("#add-item-containerEmail").append(`<div class="col-md-6 mt-2">
                                                                             <select class="form-control form-select select2" data-bs-placeholder="Select" required>
-                                                                                <option label="Select">Country</option>
-                                                                                <option value="1">Germany</option>
-                                                                                <option value="2">Canada</option>
-                                                                                <option value="3">Usa</option>
-                                                                                <option value="4">Aus</option>
+                                                                                <option label="Select">Choose...</option>
+                                                                                <option value="work">Work</option>
+                                                                                <option value="personal">Personal</option>
                                                                             </select>
                                                                         </div>
                                                                         <div class="col-md-6 mt-2">
@@ -2172,7 +2176,7 @@
             phoneNumber: phoneNumber
         });
     });
-
+   
     $("#add-item-containerEmail").each(function() {
         const emailName = $(this).find("select").val();
         const email = $(this).find("input[type='email']").val();
