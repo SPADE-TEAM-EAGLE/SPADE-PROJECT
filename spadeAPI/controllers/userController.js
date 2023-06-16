@@ -729,12 +729,12 @@ exports.putPropertyUnitsUpdates = async (req, res) => {
   try {
     const { id, propertyId, unitNumber, Area, unitDetails } = req.body;
     // console.log(id, propertyID, unitNumber, Area, unitDetails)
-    let status = "Vacant";
+    // let status = "Vacant";
     const propertyUnitsResult = await queryRunner(updatePropertyUnits, [
       unitNumber,
       Area,
       unitDetails,
-      status,
+      // status,
       id,
       propertyId,
     ]);
