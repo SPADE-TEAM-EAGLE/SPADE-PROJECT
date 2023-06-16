@@ -24,7 +24,7 @@ function checkFieldsStatus(accordionId) {
 
     accordionFields.each(function () {
         var $field = $(this);
-        if ($field.val() === '' || $field.val() === 'Choose...') {
+        if ($field.val() === '' || $field.val() === 'Choose...' || $("#zip").val().length!==5) {
             hasEmptyFields = true;
         }
         if ($field.hasClass('border-danger')) {
@@ -135,7 +135,10 @@ $(document).ready(function () {
         }).length === 0 && accordion2Fields.filter(function () {
             return $(this).val() === '' || $(this).val() === 'Choose...';
         }).length === 0 && imageInput.get(0).files.length > 0;
-
+        var zipField = $('#zip');
+        if (zipField.val().length !== 5) {
+            allFieldsFilled = false;
+        }
         return allFieldsFilled;
     }
 
@@ -179,8 +182,15 @@ $(document).ready(function () {
     $('#accordion-item1 input, #accordion-item1 select, #accordion-item2 input, #accordion-item2 select').on('input change', function () {
         var $field = $(this);
         var $errorMessage = $field.next('.text-danger');
-
-        if ($field.val() === '' || $field.val() === 'Choose...') {
+        if ($field.attr("id") === "zip") {
+            if ($field.val().length !== 5) {
+                $field.addClass('border-danger');
+                $errorMessage.removeClass('d-none');
+            } else {
+                $field.removeClass('border-danger');
+                $errorMessage.addClass('d-none');
+            }
+        } else if($field.val() === '' || $field.val() === 'Choose...') {
             $field.addClass('border-danger');
             $errorMessage.removeClass('d-none');
         } else {
