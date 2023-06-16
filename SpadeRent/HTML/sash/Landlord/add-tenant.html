@@ -878,12 +878,14 @@
                                         <!-- <span class="text-danger d-none">Company name is required!</span> -->
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="inputCity" class="form-label fw-bold">Email<spnan
-                                                class="text-danger"> *</span></label>
-                                        <input type="text" class="form-control form" placeholder="Enter Email"
-                                            id="email" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your email here" data-bs-container="#addModal">
+                                        <label for="inputCity" class="form-label fw-bold">Email<span class="text-danger"> *</span></label>
+                                        <input type="email" class="form-control form" placeholder="Enter Email" id="email" required
+                                          pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                                          data-bs-placement="top" data-bs-toggle="tooltip" title=""
+                                          data-bs-original-title="Enter your email here" data-bs-container="#addModal">
                                         <span class="text-danger d-none">Email is required!</span>
-                                    </div>
+                                      </div>
+                                      
                                     <div class="col-md-4">
                                         <label for="inputState" class="form-label fw-bold">Phone Number <span
                                                 class="fw-light">(Optional)</span></label>
@@ -2644,13 +2646,17 @@
                         var propertyUnitSelect = $('#unit');
                          // Clear existing options
                          propertyUnitSelect.empty()
-                        propertyUnitSelect.append($('<option></option>')
-                                .text("Choose..."))
+                        
+
                                 if(selectedProperty.vacantUnits.length===0){
-                                    // propertyUnitSelect.attr("disabled","disabled")
+                                    
                                     propertyUnitSelect.prop("disabled", true);
+                                    propertyUnitSelect.append($('<option></option>')
+                                .text("No unit available!!"))
                                 }else{
                                     propertyUnitSelect.prop("disabled", false);
+                                    propertyUnitSelect.append($('<option></option>')
+                                .text("Choose..."))
 
                                     selectedProperty.vacantUnits.forEach(function (unit) {
                             console.log(unit.unitNumber)
@@ -3269,6 +3275,16 @@ $('#accordion-item1 input[required], #accordion-item1 select[required], #accordi
 
                 const tenants=tenantData.find(obj => obj.tenantID == tenantIdElement.text());
                 console.log(tenants)
+                $('#baseRent').prop('required', false);
+                    $('#tripleNet').prop('required', false);
+                    $('#leaseStart').prop('required', false);
+                    $('#leaseEnd').prop('required', false);
+                    $('.row-multiple').each(function () {
+                        var date = $(this).find('.input-date')
+                        var amount = $(this).find('.input-amount')
+                        date.prop('required', false)
+                        amount.prop('required', false)
+                    })
                 $("#addModal").modal("show")
                 $("#addModal .modal-title").empty()
                 $("#addModal .modal-title").append(
@@ -3289,10 +3305,18 @@ $('#accordion-item1 input[required], #accordion-item1 select[required], #accordi
                 
                 $("#zip").val(tenants.tZipcode)
                 $("#rent").val(tenants.rentAmount)
-                $("#baseRent").val(tenants.baseRent)
+                // $("#baseRent").val(tenants.baseRent)
                 if(tenants.gross_or_triple_lease==="Triple Net Lease"){
                     $("#collapse1").addClass('show')
                     $('input[name="lease"][value="Triple Net Lease"]').prop("checked", true);
+                    $('#baseRent').prop('required', true);
+                    $('#tripleNet').prop('required', true);
+                    $('#leaseStart').prop('required', true);
+                    $('#leaseEnd').prop('required', true);
+                    $("#baseRent").val(tenants.baseRent)
+                    $("#tripleNet").val(tenants.tripleNet)
+                $("#leaseStart").val(tenants.leaseStartDate)
+                $("#leaseEnd").val(tenants.leaseEndDate)
                 }
                 else{
                     console.log('value="Gross Lease"')
@@ -3301,15 +3325,8 @@ $('#accordion-item1 input[required], #accordion-item1 select[required], #accordi
                 if(tenants.increaseRent==="yes"){
                     $("#collapse2").addClass('show')
                     $('input[name="yesno"][value="yes"]').prop("checked", true);
-                    
-                }
-                else{
-                    $('input[name="yesno"][value="no"]').prop("checked", true);
-                }
-                $("#tripleNet").val(tenants.tripleNet)
-                $("#leaseStart").val(tenants.leaseStartDate)
-                $("#leaseEnd").val(tenants.leaseEndDate)
-                $("#add-item-container").empty()
+                            
+                    $("#add-item-container").empty()
                 tenants.increaseRentAmount.forEach(function(rentAmount){
                     $("#add-item-container").append(`<div class="row row-multiple mb-2 pb-3"><div class="col-md-6">
                                             <label for="inputEmail4" class="form-label">Date of Rent Change (Optional)</label>
@@ -3326,6 +3343,30 @@ $('#accordion-item1 input[required], #accordion-item1 select[required], #accordi
                                                             </button>
                                                         </div>`)
                 })
+                }
+                else{
+                    $('input[name="yesno"][value="no"]').prop("checked", true);
+                }
+                // $("#tripleNet").val(tenants.tripleNet)
+                // $("#leaseStart").val(tenants.leaseStartDate)
+                // $("#leaseEnd").val(tenants.leaseEndDate)
+                // $("#add-item-container").empty()
+                // tenants.increaseRentAmount.forEach(function(rentAmount){
+                //     $("#add-item-container").append(`<div class="row row-multiple mb-2 pb-3" style="background-color: #F4FAFF !important;"><div class="col-md-6">
+                //                             <label for="inputEmail4" class="form-label">Date of Rent Change (Optional)</label>
+                //                             <input type="date" class="form-control input-date dateofRentchange" name="dateofRentchange" id="dateofRentchange" value="${rentAmount.date}"required>
+                //                           </div>
+                //                           <div class="col-md-5">
+                //                             <label for="inputPassword4" class="form-label">Rent Amount Correlating to that Date</label>
+                //                             <input type="text" class="form-control input-amount" id="amountChange" value="${rentAmount.increaseRentAmount}" pattern="[0-9]{7}" placeholder="Enter Amount.." maxlength="7"
+                //                                                 oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                //                           </div>
+                //                           <div class="col-md-1 d-flex justify-content-center align-items-end">
+                //                                             <button type="button" class="btn p-0 del-btn">
+                //                                                 <i class="fi fi-rs-trash text-danger fs-5"></i>
+                //                                             </button>
+                //                                         </div>`)
+                // })
                 // $("#property").val()
                 // $("#property").val()
 
