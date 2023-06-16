@@ -18,7 +18,8 @@ const {
   addVendorList,
   getLandlordTenant,
   Alltasks,
-  taskByIDQuery
+  taskByIDQuery,
+  updateTasksQuery
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -125,12 +126,12 @@ exports.addTasks = async (req, res) => {
     notes,
     notifyTenant,
     notifyVendor,
-    created_at,
-    updated_at,
-    created_by,
+    // created_at,
+    // created_by,
   } = req.body;
   //   const { userId } = req.user
-  const { userId } = req.body;
+  const { userId, userName } = req.user;
+  const currentDate = new Date();
   try {
     // console.log(1);
     const addTasksCheckResult = await queryRunner(
@@ -150,9 +151,8 @@ exports.addTasks = async (req, res) => {
         notes,
         notifyTenant,
         notifyVendor,
-        created_at,
-        updated_at,
-        created_by,
+        currentDate,
+        userName,
       ]);
       if (TasksResult.affectedRows === 0) {
         return res.status(400).send("Error1");
@@ -387,22 +387,14 @@ exports.addTasks = async (req, res) => {
     priority,
     notes,
     notifyTenant,
-    notifyVendor,
-    created_at,
-    updated_at,
-    created_by,
+    notifyVendor 
   } = req.body;
-  const { userId } = req.body;
+  // const { userId,  } = req.body;
+  const { userId, userName } = req.user;
+  const currentDate = new Date();
   try {
-    const addTasksCheckResult = await queryRunner(
-      selectQuery("task", "taskName", "tenantID"),
-      [taskName, tenantID]
-    );
-    // console.log(addTasksCheckResult);
-    if (addTasksCheckResult[0].length > 0) {
-      return res.send("Task already exists");
-    } else {
-      const TasksResult = await queryRunner(addTasksQuery, [
+    
+      const TasksResult = await queryRunner(updateTasksQuery, [
         taskName,
         tenantID,
         dueDate,
@@ -410,16 +402,13 @@ exports.addTasks = async (req, res) => {
         priority,
         notes,
         notifyTenant,
-        notifyVendor,
-        created_at,
-        updated_at,
-        created_by,
+        notifyVendor, 
+        currentDate,
+        userName,
       ]);
       if (TasksResult.affectedRows === 0) {
         return res.status(400).send("Error1");
       } 
-      // else {
-        const tasksID = TasksResult[0].insertId;
         if(req.files){ 
         const fileNames = req.files.map((file) => file.filename);
         for (let i = 0; i < fileNames.length; i++) {
@@ -503,7 +492,6 @@ exports.addTasks = async (req, res) => {
         console.log("vendor3");
         }
 
-    }
   } catch (error) {
     res.status(400).send(error);
     console.log(error);
