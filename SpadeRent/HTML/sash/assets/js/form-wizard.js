@@ -184,7 +184,20 @@ document.getElementById("next1").disabled = true;
 
 var validname = /^[A-Za-z\s]+$/;
 let firstname = document.getElementById("firstname1");
+// let holdernamee = document.getElementById("holdernamee");
 firstname.addEventListener("keyup", fnameValidation);
+// holdernamee.addEventListener("keyup", holdernameValidation);
+
+
+// function holdernameValidation (){
+//   if (holdernamee.value.match(validname)) {
+//     holdernamee.classList.remove("is-invalid");
+//     holdernamee.classList.add("is-valid");
+//   } else {
+//     holdernamee.classList.add("is-invalid");
+//     holdernamee.classList.remove("is-valid");
+//   }
+// }
 
 function fnameValidation() {
   if (firstname.value.match(validname)) {
@@ -593,16 +606,33 @@ function firstBtnChange() {
 
 
 // ****************************************************************************************************************
+let password_validate = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
 var validconfirmPassword = document.getElementById("id_password1");
 let confirmPassword = document.getElementById("id_password2");
 var next3 = document.getElementById("next3");
 confirmPassword.addEventListener('keyup', confirmPasswordValidation);
+validconfirmPassword.addEventListener('keyup', confirmPasswordValidation);
+var spantag1 = document.getElementById("passnotmatch1");
 
 function confirmPasswordValidation() {
-    if (confirmPassword.value == validconfirmPassword.value) {
+  if(validconfirmPassword.value.match(password_validate))
+  {
+    validconfirmPassword.classList.add("border-green");
+    spantag1.style.display = "none";
+  }
+  else
+  {
+    validconfirmPassword.classList.remove("border-green");
+    spantag1.style.display = "block";
+
+  }
+    if (confirmPassword.value == validconfirmPassword.value && validconfirmPassword.value.match(password_validate)) {
       next3.disabled = false;
+      confirmPassword.classList.add("border-green");
       // next3.addEventListener('click', GoHome);
     } else {
+      confirmPassword.classList.remove("border-green");
+
       next3.disabled = true;
     }
 }
@@ -615,7 +645,7 @@ function GoHome()
 
 // payment validation start 
 
-var validholdername = /^[A-Za-z]+$/;
+var validholdername = /^[A-Za-z\s]+$/;
 let holdername = document.getElementById("holdernamee");
 holdername.addEventListener("keyup", holdernamevalidation);
 
@@ -687,17 +717,32 @@ function zipcodevalidation() {
     zipcode.classList.remove("is-valid");
   }
 }
+let paydate = document.getElementById("payment-date"); 
+paydate.addEventListener("change", paydatevalidation);
+
+function paydatevalidation() {
+  if (paydate.value != "") {
+    paydate.classList.add("is-valid");
+    paydate.classList.remove("is-invalid");
+  } else {
+    paydate.classList.add("is-invalid");
+    paydate.classList.remove("is-valid");
+  }
+}
+
 
 holdername.addEventListener("keyup", button2);
 cardnumber.addEventListener("keyup", button2);
 cv.addEventListener("keyup", button2);
+paydate.addEventListener("change", button2);
 zipcode.addEventListener("keyup", button2);
 function button2() {
   if (
     holdername.value.match(validholdername) &&
     cardnumber.value.match(validPhone1) &&
     cv.value.match(validcv) &&
-    zipcode.value.match(validzipcode)
+    zipcode.value.match(validzipcode) &&
+    paydate.value != ""
   ) {
     document.getElementById("nextpayment").disabled = false;
     // part2.disabled = false;
