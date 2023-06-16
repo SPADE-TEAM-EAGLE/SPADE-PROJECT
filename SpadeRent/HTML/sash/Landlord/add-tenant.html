@@ -895,28 +895,48 @@
                                         <!-- <span class="text-danger d-none">Company name is required!</span> -->
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="inputCity" class="form-label fw-bold">Email<spnan
+                                        <<<<<<< HEAD <label for="inputCity" class="form-label fw-bold">Email<spnan
                                                 class="text-danger"> *</span></label>
-                                        <input type="text" class="form-control form" placeholder="Enter Email"
-                                            id="email" required data-bs-placement="top" data-bs-toggle="tooltip"
-                                            title="" data-bs-original-title="Enter your email here"
-                                            data-bs-container="#addModal">
-                                        <span class="text-danger d-none">Email is required!</span>
+                                                <input type="text" class="form-control form" placeholder="Enter Email"
+                                                    id="email" required data-bs-placement="top" data-bs-toggle="tooltip"
+                                                    title="" data-bs-original-title="Enter your email here"
+                                                    data-bs-container="#addModal">
+                                                =======
+                                                <label for="inputCity" class="form-label fw-bold">Email<span
+                                                        class="text-danger"> *</span></label>
+                                                <input type="email" class="form-control form" placeholder="Enter Email"
+                                                    id="email" required
+                                                    pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                                                    data-bs-placement="top" data-bs-toggle="tooltip" title=""
+                                                    data-bs-original-title="Enter your email here"
+                                                    data-bs-container="#addModal">
+                                                >>>>>>> 908483d5f3c99659c24904768d87a2cbd2900078
+                                                <span class="text-danger d-none">Email is required!</span>
                                     </div>
+
                                     <div class="col-md-4">
                                         <label for="inputState" class="form-label fw-bold">Phone Number <span
                                                 class="fw-light">(Optional)</span></label>
-                                        <input id="phone" name="phone" type="tel" autocomplete="off"
+                                        <<<<<<< HEAD <input id="phone" name="phone" type="tel" autocomplete="off"
                                             data-bs-placement="top" data-bs-toggle="tooltip" title=""
                                             data-bs-original-title="Enter your phone number here"
                                             data-bs-container="#addModal" pattern="[0-9]{5}" placeholder=""
                                             maxlength="15" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                                             required data-bs-placement="top" data-bs-toggle="tooltip" title=""
                                             data-bs-original-title="Your total units">
-                                        <span id="valid-msg" class="d-none text-success">✓ Valid</span>
-                                        <span id="error-msg" class="hide text-danger"></span>
-                                        </select>
-                                        <!-- <span class="text-danger d-none">State is required!</span> -->
+                                            =======
+                                            <input id="phone" name="phone" type="tel" autocomplete="off"
+                                                data-bs-placement="top" data-bs-toggle="tooltip" title=""
+                                                data-bs-original-title="Enter your phone number here"
+                                                data-bs-container="#addModal" pattern="[0-9]" placeholder=""
+                                                maxlength="13" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                                required data-bs-placement="top" data-bs-toggle="tooltip" title=""
+                                                data-bs-original-title="Your total units">
+                                            >>>>>>> 908483d5f3c99659c24904768d87a2cbd2900078
+                                            <span id="valid-msg" class="d-none text-success">✓ Valid</span>
+                                            <span id="error-msg" class="hide text-danger"></span>
+                                            </select>
+                                            <!-- <span class="text-danger d-none">State is required!</span> -->
                                     </div>
                                     <div class="col-12">
                                         <label for="inputAddress2" class="form-label fw-bold">Address <span
@@ -950,11 +970,11 @@
                                     <div class="col-md-4">
                                         <label for="inputPassword4" class="form-label fw-bold">Zip Code <spnan
                                                 class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="zip" pattern="[0-9]{5}"
-                                            placeholder="A valid 5-digit zip code" maxlength="5"
-                                            oninput="this.value = this.value.replace(/[^0-9]/g, '')" required
+                                        <input class="form-control form" type="text" id="zip" name="zip"
+                                            pattern="[0-9]{5}" placeholder="A valid 5-digit zip code" maxlength="5"
+                                            minlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                                             data-bs-placement="top" data-bs-toggle="tooltip" title=""
-                                            data-bs-original-title="Enter your zip code" data-bs-container="#addModal">
+                                            data-bs-original-title="Enter Zip" data-bs-container="#addModal" required>
                                         <span class="text-danger d-none">Zip code is required!</span>
                                     </div>
                                 </form>
@@ -983,7 +1003,7 @@
                                             data-bs-toggle="tooltip" title=""
                                             data-bs-original-title="Select your property" data-bs-container="#addModal">
                                             <option selected>Choose...</option>
-                                            <option>...</option>
+
                                         </select>
                                         <span class="text-danger d-none">Property is required!</span>
                                     </div>
@@ -995,7 +1015,7 @@
                                             data-bs-original-title="Select your property units"
                                             data-bs-container="#addModal">
                                             <option selected>Choose...</option>
-                                            <option>...</option>
+
                                         </select>
                                         <span class="text-danger d-none">Property units is required!</span>
                                     </div>
@@ -1835,9 +1855,7 @@
                                                         <th>RENT AMOUNT</th>
                                                         <th>PROPERTY UNITS</th>
                                                         <th>LEASE END DATE</th>
-                                                        <th><i class="fe fe-more-vertical" data-bs-toggle="tooltip"
-                                                                title="" data-bs-original-title="fe fe-more-vertical"
-                                                                aria-label="fe fe-more-vertical"></i></th>
+                                                        <th>ACTION</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="table_body">
@@ -2609,6 +2627,9 @@
         $(document).ready(function () {
             // $("#preloader").fadeIn("fast");
             // $("#succesModal").modal("show")
+            $("#succes-close").click(() => {
+                getData()
+            })
             let tenantID;
             $("#send-email").click(() => {
                 $("#succesModal").modal("hide")
@@ -2684,7 +2705,7 @@
                     var propertySelect = $('#property');
                     propertySelect.empty(); // Clear existing options
                     propertySelect.append($('<option></option>')
-                        .text("Choose..")
+                        .text("Choose...")
                     )
                     properties.forEach(function (property) {
                         var option = $('<option></option>')
@@ -2704,16 +2725,30 @@
 
                         // Populate Select Property Unit dropdown
                         var propertyUnitSelect = $('#unit');
-                        propertyUnitSelect.empty(); // Clear existing options
+                        // Clear existing options
+                        propertyUnitSelect.empty()
 
-                        selectedProperty.vacantUnits.forEach(function (unit) {
-                            console.log(unit.unitNumber)
 
-                            var option = $('<option></option>')
-                                .text(unit.unitNumber)
-                                .val(unit.id);
-                            propertyUnitSelect.append(option);
-                        });
+                        if (selectedProperty.vacantUnits.length === 0) {
+
+                            propertyUnitSelect.prop("disabled", true);
+                            propertyUnitSelect.append($('<option></option>')
+                                .text("No unit available!!"))
+                        } else {
+                            propertyUnitSelect.prop("disabled", false);
+                            propertyUnitSelect.append($('<option></option>')
+                                .text("Choose..."))
+
+                            selectedProperty.vacantUnits.forEach(function (unit) {
+                                console.log(unit.unitNumber)
+
+                                var option = $('<option></option>')
+                                    .text(unit.unitNumber)
+                                    .val(unit.id);
+                                propertyUnitSelect.append(option);
+                            });
+                        }
+
                     });
                 },
                 error: function (xhr, status, error) {
@@ -2724,7 +2759,7 @@
 
             $("#add-item").on("click", () => {
 
-                $("#add-item-container").append(`<div class="row row-multiple mb-2 pb-3" style="background-color: #F4FAFF !important;"><div class="col-md-6">
+                $("#add-item-container").append(`<div class="row row-multiple mb-2 pb-3"><div class="col-md-6">
                                             <label for="inputEmail4" class="form-label">Date of Rent Change (Optional)</label>
                                             <input type="date" class="form-control input-date dateofRentchange" name="dateofRentchange" id="dateofRentchange" required data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Date of Rent
                                                                Change" data-bs-container="#addModal">
@@ -3082,43 +3117,45 @@
                 var accordion1Fields = $('#accordion-item1 input[required], #accordion-item1 select[required]');
                 var accordion2Fields = $('#accordion-item2 input[required], #accordion-item2 select[required]');
                 var accordion3Fields = $('#accordion-item3 input[required]');
-
+                var unitField = $('#unit');
                 var allFieldsFilled =
                     accordion1Fields.filter(function () {
                         return $(this).val() === '' || $(this).val() === 'Choose...';
                     }).length === 0 &&
                     accordion2Fields.filter(function () {
-                        return $(this).val() === '' || $(this).val() === 'Choose...';
+                        return $(this).val() === '' || $(this).val() === 'Choose...' || unitField.prop("disabled");
                     }).length === 0 &&
                     accordion3Fields.filter(function () {
                         return $(this).val() === '';
                     }).length === 0;
 
+                // Zip code length validation
+                var zipField = $('#zip');
+                if (zipField.val().length !== 5) {
+                    allFieldsFilled = false;
+                }
+
+                if (unitField.prop("disabled")) {
+                    allFieldsFilled = false;
+                }
                 return allFieldsFilled;
             }
 
+            // Function to enable or disable buttons based on field status
             // Function to enable or disable buttons based on field status
             function updateButtonStatus() {
                 var accordion1Fields = $('#accordion-item1 input[required], #accordion-item1 select[required]');
                 var accordion2Fields = $('#accordion-item2 input[required], #accordion-item2 select[required]');
                 var accordion3Fields = $('#accordion-item3 input[required]');
-                // var imageInput = $('#fileInput');
-                // console.log(accordion1Fields)
-                // console.log(accordion2Fields)
-                // console.log(accordion3Fields)
                 var isAccordion1FieldsEmpty = accordion1Fields.filter(function () {
                     return $(this).val() !== '' || $(this).val() === 'Choose...';
                 }).length === 0;
-
                 var isAccordion2FieldsEmpty = accordion2Fields.filter(function () {
                     return $(this).val() !== '' || $(this).val() === 'Choose...';
                 }).length === 0;
                 var isAccordion3FieldsEmpty = accordion3Fields.filter(function () {
-                    console.log($(this).val())
-                    return $(this).val() !== '' || $(this).val() === 'Choose...';
+                    return $(this).val() !== '';
                 }).length === 0;
-
-                // var isImageInputEmpty = imageInput.get(0).files.length === 0;
 
                 // Enable or disable the buttons based on the fields' status
                 if (!isAccordion1FieldsEmpty || !isAccordion2FieldsEmpty || !isAccordion3FieldsEmpty) {
@@ -3131,12 +3168,9 @@
 
                 // Enable or disable the buttons based on the fields' status
                 if (allFieldsFilled) {
-                    $('#next').removeClass("disabled");
-                    $('#next').removeAttr("disabled");
+                    $('#next').removeClass("disabled").removeAttr("disabled");
                 } else {
-                    $('#next').addClass("disabled");
-                    //   $('#next').addAttr("disabled","disabled");
-
+                    $('#next').addClass("disabled").attr("disabled", "disabled");
                 }
             }
 
@@ -3144,8 +3178,15 @@
             $('#accordion-item1 input[required], #accordion-item1 select[required], #accordion-item2 input[required], #accordion-item2 select[required], #accordion-item3 input[required], #accordion-item3 select[required]').on('input change', function () {
                 var $field = $(this);
                 var $errorMessage = $field.next('.text-danger');
-
-                if ($field.val() === '' || $field.val() === 'Choose...') {
+                if ($field.attr("id") === "zip") {
+                    if ($field.val().length !== 5) {
+                        $field.addClass('border-danger');
+                        $errorMessage.removeClass('d-none');
+                    } else {
+                        $field.removeClass('border-danger');
+                        $errorMessage.addClass('d-none');
+                    }
+                } else if ($field.val() === '' || $field.val() === 'Choose...') {
                     $field.addClass('border-danger');
                     $errorMessage.removeClass('d-none');
                 } else {
@@ -3154,6 +3195,7 @@
                 }
                 updateButtonStatus();
             });
+
             function resetAccordions(update) {
                 // Reset all accordions
                 setEditable()
@@ -3185,6 +3227,16 @@
                     $('#next').addClass("disabled");
                     $('#draft').attr("disabled", "disabled");
                 });
+                $('.row-multiple').each(function () {
+                    var date = $(this).find('.input-date')
+                    var amount = $(this).find('.input-amount')
+                    date.prop('required', false)
+                    amount.prop('required', false)
+                })
+                $('#baseRent').prop('required', false);
+                $('#tripleNet').prop('required', false);
+                $('#leaseStart').prop('required', false);
+                $('#leaseEnd').prop('required', false);
                 if (update) {
                     $("#collapse1,#collapse2").collapse('hide')
                     $('.row-multiple').each(function () {
@@ -3304,6 +3356,16 @@
 
                 const tenants = tenantData.find(obj => obj.tenantID == tenantIdElement.text());
                 console.log(tenants)
+                $('#baseRent').prop('required', false);
+                $('#tripleNet').prop('required', false);
+                $('#leaseStart').prop('required', false);
+                $('#leaseEnd').prop('required', false);
+                $('.row-multiple').each(function () {
+                    var date = $(this).find('.input-date')
+                    var amount = $(this).find('.input-amount')
+                    date.prop('required', false)
+                    amount.prop('required', false)
+                })
                 $("#addModal").modal("show")
                 $("#addModal .modal-title").empty()
                 $("#addModal .modal-title").append(
@@ -3324,10 +3386,18 @@
 
                 $("#zip").val(tenants.tZipcode)
                 $("#rent").val(tenants.rentAmount)
-                $("#baseRent").val(tenants.baseRent)
+                // $("#baseRent").val(tenants.baseRent)
                 if (tenants.gross_or_triple_lease === "Triple Net Lease") {
                     $("#collapse1").addClass('show')
                     $('input[name="lease"][value="Triple Net Lease"]').prop("checked", true);
+                    $('#baseRent').prop('required', true);
+                    $('#tripleNet').prop('required', true);
+                    $('#leaseStart').prop('required', true);
+                    $('#leaseEnd').prop('required', true);
+                    $("#baseRent").val(tenants.baseRent)
+                    $("#tripleNet").val(tenants.tripleNet)
+                    $("#leaseStart").val(tenants.leaseStartDate)
+                    $("#leaseEnd").val(tenants.leaseEndDate)
                 }
                 else {
                     console.log('value="Gross Lease"')
@@ -3337,16 +3407,9 @@
                     $("#collapse2").addClass('show')
                     $('input[name="yesno"][value="yes"]').prop("checked", true);
 
-                }
-                else {
-                    $('input[name="yesno"][value="no"]').prop("checked", true);
-                }
-                $("#tripleNet").val(tenants.tripleNet)
-                $("#leaseStart").val(tenants.leaseStartDate)
-                $("#leaseEnd").val(tenants.leaseEndDate)
-                $("#add-item-container").empty()
-                tenants.increaseRentAmount.forEach(function (rentAmount) {
-                    $("#add-item-container").append(`<div class="row row-multiple mb-2 pb-3" style="background-color: #F4FAFF !important;"><div class="col-md-6">
+                    $("#add-item-container").empty()
+                    tenants.increaseRentAmount.forEach(function (rentAmount) {
+                        $("#add-item-container").append(`<div class="row row-multiple mb-2 pb-3"><div class="col-md-6">
                                             <label for="inputEmail4" class="form-label">Date of Rent Change (Optional)</label>
                                             <input type="date" class="form-control input-date dateofRentchange" name="dateofRentchange" id="dateofRentchange" value="${rentAmount.date}"required>
                                           </div>
@@ -3360,7 +3423,31 @@
                                                                 <i class="fi fi-rs-trash text-danger fs-5"></i>
                                                             </button>
                                                         </div>`)
-                })
+                    })
+                }
+                else {
+                    $('input[name="yesno"][value="no"]').prop("checked", true);
+                }
+                // $("#tripleNet").val(tenants.tripleNet)
+                // $("#leaseStart").val(tenants.leaseStartDate)
+                // $("#leaseEnd").val(tenants.leaseEndDate)
+                // $("#add-item-container").empty()
+                // tenants.increaseRentAmount.forEach(function(rentAmount){
+                //     $("#add-item-container").append(`<div class="row row-multiple mb-2 pb-3" style="background-color: #F4FAFF !important;"><div class="col-md-6">
+                //                             <label for="inputEmail4" class="form-label">Date of Rent Change (Optional)</label>
+                //                             <input type="date" class="form-control input-date dateofRentchange" name="dateofRentchange" id="dateofRentchange" value="${rentAmount.date}"required>
+                //                           </div>
+                //                           <div class="col-md-5">
+                //                             <label for="inputPassword4" class="form-label">Rent Amount Correlating to that Date</label>
+                //                             <input type="text" class="form-control input-amount" id="amountChange" value="${rentAmount.increaseRentAmount}" pattern="[0-9]{7}" placeholder="Enter Amount.." maxlength="7"
+                //                                                 oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                //                           </div>
+                //                           <div class="col-md-1 d-flex justify-content-center align-items-end">
+                //                                             <button type="button" class="btn p-0 del-btn">
+                //                                                 <i class="fi fi-rs-trash text-danger fs-5"></i>
+                //                                             </button>
+                //                                         </div>`)
+                // })
                 // $("#property").val()
                 // $("#property").val()
 

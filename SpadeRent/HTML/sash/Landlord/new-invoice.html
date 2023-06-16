@@ -269,7 +269,7 @@
             font-weight: 600;
             line-height: 1.875rem;
             font-size: 0.77rem;
-            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
+            /* box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1); */
             /* identical to box height, or 120% */
             letter-spacing: 0.0145455em;
             /* font-size: 0.938rem; */
@@ -726,7 +726,7 @@
                             <span class="text-danger d-none">Photos are required!</span>
                         </div>
                         <div class="collapse row" id="collapse1">
-                            <div class="col-md-6 col-lg-4">
+                            <!-- <div class="col-md-6 col-lg-4">
                                 <label class="form-label fw-bold fs-18">Start Date</label>
                                 <input type="date" class="form-control form" id="startDate" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select Start Date" data-bs-container="#addModal">
                                 <span class="text-danger d-none">Photos are required!</span>
@@ -768,7 +768,8 @@
                                     <option value="Due on Receipt">Due on Receipt</option>
                                 </select>
                                 <span class="text-danger d-none">Photos are required!</span>
-                            </div>
+                            </div> -->
+                            <p>Coming Soon!!!</p>
                         </div>
                     </div>
                     <div class="row">
@@ -875,7 +876,33 @@
         </div>
     </div>
     <!-- succes modal -->
+    <div class="modal fade" id="succesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
 
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="succes-close">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body succes-modal">
+                    <div class="text-justify ps-2 border-model-line">
+                        <h2 class="modal-title d-flex align-items-center ps-1">
+                            <strong class="color-primary">Congratulations!&nbsp;</strong>
+                            <i class="fi fi-rs-check-circle text-success"></i>
+                        </h2>
+                        <p class="ms-2 mb-0 text-start">Your Invoice with INV-89900A was successfully</p>
+                        <p class="ms-2 text-start">sent to John Adams.</p>
+                    </div>
+                    <a data-bs-effect="effect-scale"
+                    data-bs-toggle="modal" href="#addModal" class="btn btn-outline-default btn-pill ms-1 my-2"
+                    style='background-color:#1467B0;color: white;'><i class="fi fi-rs-plus-small" style="vertical-align: middle;"></i> Create New Invoice</a>
+                </div>
+                <div class="modal-footer" style="border-top: 0">
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="sendmailModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
@@ -2004,6 +2031,9 @@
     </script>
     <script>
         $(document).ready(function () {
+            $("#succes-close").click(()=>{
+                window.location='./create-invoicing.html'
+            })
             $('input[name="invoice"],input[name="invoice_update"]').change(function () {
                 console.log($(this).val())
                 if ($(this).val() === 'Recurring Invoice') {
@@ -2203,8 +2233,9 @@
                         },
 
                         success: function (response) {
-                            // Handle the success response from the API
-                            console.log('API response:', response);
+                            $("#addModal").modal("hide")
+                            $("#succesModal").modal("show")
+                            $("#addModal").mods
                         },
                         error: function (xhr, status, error) {
                             // Handle the error response from the API
