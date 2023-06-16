@@ -274,7 +274,7 @@
 
 <body onload="check()">
 
-  <div class="modal fade" id="myModal_success">
+  <div class="modal fade" id="myModal_success" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered text-center" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-body p-0">
@@ -338,7 +338,7 @@
             <hr class="mt-1 hrset">
           </div>
           <div>
-            <h1 class="font-weight-500 mb-0 built text-dark fw-bold">
+            <h1 class="font-weight-500 mb-0 built text-white fw-bold">
               Built For <span class="mobcolor">Just You</span>
             </h1>
             <p class="text-dark mb-0 fs-16 ppp">Make rental management easier with property management software, 
@@ -368,11 +368,11 @@
                         <input type="email" class="form-control input-inside" id="login-email"
                           aria-describedby="emailHelp" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Email must have '@' symbol." placeholder="Enter Email">
                           <span class="text-danger" style="display: none;" id="email_span">Sorry! incorrect email address</span>
-                          <i class="fi fi-rs-info text-dark fs-20" id="togglePassword1" data-bs-placement="top" data-bs-toggle="tooltip" data-bs-original-title="Email must have '@' symbol." aria-describedby="tooltip739895" style="cursor: pointer;
+                          <!-- <i class="fi fi-rs-info text-dark fs-20" id="togglePassword1" data-bs-placement="top" data-bs-toggle="tooltip" data-bs-original-title="Email must have '@' symbol." aria-describedby="tooltip739895" style="cursor: pointer;
                                                                     float: right;
                                                                     margin-top: -34px;
                                                                     margin-right: 15px;
-                                                                    "></i>
+                                                                    "></i> -->
                       </div>
                     </div>
                     <div class="col-12">
@@ -384,7 +384,7 @@
                                      <i class="fi fi-rs-eye text-dark fs-20" id="togglePassword1" style="cursor: pointer;
                                                                     float: right;
                                                                     margin-top: -34px;
-                                                                    margin-right: 15px;
+                                                                    margin-right: 28px;
                                                                     "></i>
                       </div>
                     </div>
@@ -545,6 +545,10 @@
                     success: function(response) {
                         if(response.message == "Successful Login")
                         {
+                          $("#id_password1").removeClass("is-invalid");
+                          $("#login-email").removeClass("is-invalid");
+                          $("#login-email").addClass("is-valid");
+                          $("#id_password1").addClass("is-valid");
                           $("#myModal_success").modal("show");
                           setTimeout(function() {
                              $('#myModal_success').modal('hide');
@@ -569,17 +573,11 @@
                           else if (xhr.responseText == "Incorrect Password")
                           {
                             $("#login-email").removeClass("is-invalid");
+                            $("#login-email").addClass("is-valid");
                             $("#id_password1").addClass("is-invalid");
                             $("#email_span").hide();
                             $("#pass_span").show();
                           }
-                          // else if (xhr.responseText == "Incorrect Password")
-                          // {
-                          //   $("#login-email").addClass("is-invalid");
-                          //   $("#id_password1").addClass("is-invalid");
-                          //   $("#email_span").show();
-                          //   $("#pass_span").show();
-                          // }
                           else{
                             alert(xhr.responseText)
                           }

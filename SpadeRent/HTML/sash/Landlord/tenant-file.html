@@ -1133,7 +1133,7 @@
                                                     <h3 class="mb-0 text-white company-name" style="font-weight: bold;">The Michael Scott Paper Company | Michael Scott</h3>
                                                 </div>
                                             </div>
-                                            <div class="ms-auto">
+                                            <!-- <div class="ms-auto">
                                                 <div class="dropdown show">
 
                                                     <i class="fe fe-more-vertical text-white fs-20" data-bs-toggle="dropdown"></i>
@@ -1148,7 +1148,7 @@
 
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </div>
 
                                         <!-- <a href="javascript:void(0)" id="email_verification"
@@ -1918,6 +1918,23 @@
             $("#viewFiles").attr("href", `./tenant-file.html?tenantId=${tenantId}`)
             $("#viewTasks").attr("href", `./tenant-tasks.html?tenantId=${tenantId}`)
             // console.log(propertyId)
+            $.ajax({
+                url: 'http://localhost:3000/api/spade/getTenantsByID',
+                type: 'GET',
+                data: {
+                    id: tenantId
+                },
+                contentType: "application/json; charset=utf-8",
+                // processData: false,
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function({
+                    data
+                }) {
+                    $(".company-name").text(`${data[0][0].companyName} | ${data[0][0].firstName+" "+data[0][0].lastName}`)
+                },error:{}
+            })
             $("#submit-pics").click(()=>{
                 var formData = new FormData();
                 formData.append('tenantID', tenantId);
@@ -1939,7 +1956,7 @@
                         data
                     }) {
                         console.log(2)
-                        $(".company-name").text(`${data[0][0].companyName} | ${data[0][0].firstName+" "+data[0][0].lastName}`)
+                        // $(".company-name").text(`${data[0][0].companyName} | ${data[0][0].firstName+" "+data[0][0].lastName}`)
                     },
                     error: function(xhr, status, error) {
                         window.alert('Error: ' + error);

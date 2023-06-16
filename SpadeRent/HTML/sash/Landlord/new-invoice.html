@@ -16,7 +16,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="../assets/images/brand/favicon.ico" />
 
     <!-- TITLE -->
-    <title>Tenant Overview - SpadeRent</title>
+    <title>New Property - SpadeRent</title>
 
     <!-- BOOTSTRAP CSS -->
     <link id="style" href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -38,6 +38,24 @@
             visibility: hidden;
         }
         
+        .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar {
+            width: 7px;
+            /* Width of the scrollbar */
+        }
+        
+        .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb {
+            background-color: rgb(136, 136, 136, 0.2);
+            /* Color of the scrollbar thumb */
+            border-radius: 7px;
+            transition: all 1ms;
+            /* Rounded corners for the thumb */
+        }
+        
+        .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb:hover {
+            background-color: rgb(136, 136, 136, 0.5);
+            /* Color of the scrollbar thumb on hover */
+        }
+        
         .custom-file-input::before {
             content: 'Select Files';
             display: inline-block;
@@ -54,6 +72,57 @@
             background: #0069d9;
         }
         
+        .dark-mode .btn-close {
+            color: white;
+        }
+        
+        .dark-mode .selected-files span {
+            display: inline-block;
+            margin-right: 0;
+            padding: 4px 8px;
+            background: transparent;
+            color: white;
+            border-radius: 4px;
+        }
+        
+        .dark-mode .custom-file-label {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 12px;
+            background-color: transparent;
+        }
+        
+        .modal-footer .button-left {
+            background-color: #1F1F1F;
+            margin: 0rem 1rem;
+            color: white;
+        }
+        
+        .modal-footer .button {
+            font-size: 0.938rem;
+        }
+        
+        button.btn-close {
+            right: 6px;
+        }
+        
+        .btn-close {
+            width: 1.8rem;
+            opacity: 1;
+            position: absolute;
+            top: 6px;
+        }
+        
+        .btn-close:hover,
+        .btn-close:focus {
+            color: #000;
+            text-decoration: none;
+            opacity: 1;
+        }
+        
         .custom-file-input:active::before {
             background: #0062cc;
         }
@@ -65,17 +134,6 @@
         
         .selected-files {
             margin-top: 10px;
-        }
-        
-        .image-container {
-            /* Border width and color */
-            border-radius: 5px;
-            /* Border radius for rounded corners */
-            padding: 10px;
-            /* Spacing between the image and the border */
-            /* Shadow effect */
-            margin-bottom: 10px;
-            /* Margin between the image containers */
         }
         
         .selected-files span {
@@ -128,11 +186,11 @@
             vertical-align: top;
             border: 1px solid #e9edf4;
         }
-        /* input:focus {
+        /* /* input:focus {
             border: 3px solid #555 !important;
         } */
         
-        .panel-body {
+        */ .panel-body {
             padding: 0px;
         }
         
@@ -202,6 +260,21 @@
             color: white;
         }
         
+        .modal-footer button,
+        .modal-footer a {
+            border-radius: 2.75rem;
+            padding: 4px 30px;
+            font-family: 'Figtree';
+            font-style: normal;
+            font-weight: 600;
+            line-height: 1.875rem;
+            font-size: 0.77rem;
+            /* box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1); */
+            /* identical to box height, or 120% */
+            letter-spacing: 0.0145455em;
+            /* font-size: 0.938rem; */
+        }
+        
         .modal-footer button {
             border-radius: 2.75rem;
             padding: 4px 30px;
@@ -229,7 +302,7 @@
         }
         
         .tick {
-            color: green;
+            color: #1DBC5F;
             font-weight: bolder
         }
         
@@ -288,15 +361,14 @@
         .file-details {
             padding: 10px;
         }
-        
-        .delete-file {
+        /* .delete-file {
             position: absolute;
             top: 5px;
             right: 5px;
             cursor: pointer;
             font-size: 18px;
             color: #ff0000;
-        }
+        } */
         
         .btn-group>.btn-group:not(:last-child)>.btn,
         .btn-group>.btn:not(:last-child):not(.dropdown-toggle) {
@@ -326,16 +398,20 @@
             /* border-radius: 4px; */
         }
         
-        .delete-file {
+        /* .delete-file {
             position: absolute;
-            top: 0px;
-            right: 5px;
+            top: -9px;
+            right: -4px;
+            font-weight: bolder;
             cursor: pointer;
             font-size: 13px;
-            color: #000;
-        }
+            color: #000000;
+        } */
         
-        button.btn-close {
+        .dark-mode .delete-file {
+            color: #ffffff;
+        }
+        /* button.btn-close {
             right: -7px;
         }
         
@@ -343,7 +419,7 @@
             width: 2.5rem !important;
             opacity: 1;
             position: absolute;
-            top: 6px;
+            top: -11px;
         }
         
         .btn-close:hover,
@@ -351,7 +427,7 @@
             color: #000;
             text-decoration: none;
             opacity: 1;
-        }
+        } */
         
         @media (max-width:992px) {
             .modal-footer button {
@@ -368,9 +444,9 @@
             #top_main_image {
                 display: none;
             }
-            /* #top_main_card {
+            #top_main_card {
                 height: 220px;
-            } */
+            }
             #nav_links {
                 top: 153px;
             }
@@ -384,10 +460,10 @@
             .modal-footer .button-left {
                 margin: auto;
             }
-            /* .modal-footer button {
+            /* /* .modal-footer button {
                 width: 231px;
             } */
-            .border-model-line h2 {
+            */ .border-model-line h2 {
                 font-size: 1.6rem;
             }
             .accordion-button h3 {
@@ -404,7 +480,7 @@
                 font-size: 12px;
                 margin: 0 !important;
             }
-            #typehead {
+            #search_input {
                 display: none;
             }
             #email_verification {
@@ -413,9 +489,9 @@
             #top_main_image {
                 display: none;
             }
-            /* #top_main_card {
+            #top_main_card {
                 height: 220px;
-            } */
+            }
             #nav_links {
                 top: 153px;
             }
@@ -428,9 +504,10 @@
         }
         
         @media (max-width:320px) {
-            /* .modal-footer button {
+            /* /* .modal-footer button {
                 width: 231px;
             } */
+            
         }
         
         @media (max-width: 767px) {
@@ -446,16 +523,22 @@
                 padding: 5px;
             }
         }
-
-        .card{
-        border-radius: 22px;
-        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-    }
-
-        .card-header{
-            padding: 0.6rem 1.5rem;
-            border-radius: 28px 28px 0px 0px !important;
+        
+        th,
+        td {
+            border-left-color: transparent !important;
+            border-right-color: transparent !important;
         }
+        
+        .dark-mode th {
+            background: #212121 !important;
+        }
+        
+        .light-mode th {
+            background: #ECF3F9 !important;
+        }
+
+    
     </style>
 
 </head>
@@ -590,147 +673,211 @@
 </div>
 <!--/Default Offcanvas-->
     <!-- Modal -->
-    <div class="modal fade" id="largemodal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg " role="document">
+
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="text-justify ps-2 border-model-line">
-                        <h2 class="modal-title">Create <strong class="color-primary">New Property</strong></h2>
-                        <span class="">Spade Rent allows you to add a range of commercial and residential properties,
-                            from condos and single-family homes to retail stores and parking lots.</span>
+                        <h2 class="modal-title mb-0">Create <strong class="color-primary">New Invoice</strong></h2>
+                        <button type="button" class="btn btn-primary">#Invoice Number: INV-89900A</button>
                     </div>
-                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><img src="../assets/images/cross-circle.svg" /></span>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="top-close">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="accordion-item mb-4" id="accordion-item1">
-                        <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button" id="accordian-button-1" type="button" data-bs-toggle="collapse" onclick="checkFieldsFilled('accordion-item1')" id="accordion-button1" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                <span class="m-0 me-4 fs-1" style="font-weight: bold;">01</span>
-                                <h3 class="m-0"><strong>Property Information</strong> <i class="fi fi-rs-pencil"></i><i
-                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
-                                </h3>
-                            </button>
-                        </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <form class="row g-3" enctype="multipart/form-data">
-                                    <div class="col-md-12">
-                                        <label class="form-label fw-bold">Property Photo</label>
-                                        <div class="custom-file" style="border: 1px dashed #00000087;">
-                                            <input id="fileInput" type="file" name="image" class="custom-file-input form" accept=".jpg, .png, image/jpeg, image/png" aria-label="hello" multiple>
-                                            <span className="d-none"></span>
-                                            <label class="custom-file-label" for="fileInput">
-                                                <i class="fi fi-rs-cloud-upload"></i>
-                                                <div class="custom-file-text">
-                                                    <span>Upload Photo or drag and drop here</span>
-                                                    <span>JPEG and PNG, file size no more than 10MB</span>
-                                                </div>
-                                            </label>
-                                        </div>
-                                        <div class="selected-files">
-                                            <div class="file-grid"></div>
-                                        </div>
-                                        <span class="text-danger d-none">Photos are required!</span>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="inputEmail4" class="form-label fw-bold">Property ID</label>
-                                        <input type="text" class="form-control form" id="propertyId">
-                                        <span class="text-danger d-none">Property ID is required!</span>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="inputPassword4" class="form-label fw-bold">Property Name <spnan
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="propertyName">
-                                        <span class="text-danger d-none">Property name required!</span>
-                                    </div>
-                                    <div class="col-12">
-                                        <label for="inputAddress" class="form-label fw-bold">Address <spnan
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="address" placeholder="1234 Main St">
-                                        <span class="text-danger d-none">Address is required!</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputCity" class="form-label fw-bold">City <spnan
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="city">
-                                        <span class="text-danger d-none">City is required!</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputState" class="form-label fw-bold">State <spnan
-                                                class="text-danger">*</span></label>
-                                        <select id="state" class="form-select form">
-                                            <option selected>Choose...</option>
-                                            <option>Sindh</option>
-                                            <option>Punjab</option>
-                                            <option>Balochistan</option>
-                                            <option>KPK</option>
-                                        </select>
-                                        <span class="text-danger d-none">State is required!</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputZip" class="form-label fw-bold">Zip <spnan class="text-danger">
-                                                *</span></label>
-                                        <input type="text" class="form-control form" id="zip">
-                                        <span class="text-danger d-none">Zip is required!</span>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="inputState" class="form-label fw-bold">Property Type <spnan
-                                                class="text-danger">*</span></label>
-                                        <select id="propertyType" class="form-select form">
-                                            <option selected>Choose...</option>
-                                            <option>Sindh</option>
-                                            <option>Punjab</option>
-                                            <option>Balochistan</option>
-                                            <option>KPK</option>
-                                        </select>
-                                        <span class="text-danger d-none">Property Type is required!</span>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="inputPassword4" class="form-label fw-bold">Property Total SF <spnan
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="propertyTotalSF">
-                                        <span class="text-danger d-none">Property Total SF is required!</span>
-                                    </div>
-                                </form>
+                    <div class="row mb-3">
+                        <div class="col-md-12 col-lg-6">
+                            <label class="form-label fw-bold fs-18">Select Tenant</label>
+                            <select class="form-control select2 form-select" data-placeholder="Select Tenant"
+                                name="tenants" id="tenants" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select Tenant" data-bs-container="#addModal">
+                                <option label="Choose one">
+                                </option>
+                                <option value="Repeat Yearly">Repeat Yearly</option>
+                                <option value="Repeat Monthly">Repeat Monthly</option>
+                            </select>
+                            <span class="text-danger d-none">Photos are required!</span>
+                        </div>
+                        <div class="col-md-12 col-lg-6">
+                            <label class="form-label fw-bold fs-18">Invoice Type</label>
+                            <div class="d-flex">
+                                <label class="custom-control custom-radio me-3 mb-0">
+                                    <input class="custom-control-input" type="radio" value="One Time Invoice"
+                                        name="invoice" id="invoice" checked >
+                                    <span class="custom-control-label">One Time Invoice</span>
+                                </label>
+                                <label class="custom-control custom-radio mb-0">
+                                    <input class="custom-control-input" type="radio" value="Recurring Invoice"
+                                        name="invoice" id="recurring" data-bs-toggle="collapse" href="#collapse1"
+                                        role="button" aria-expanded="false" aria-controls="collapseExample1">
+                                    <span class="custom-control-label">Recurring Invoice</span>
+                                </label>
                             </div>
                         </div>
+                        <div class="col-md-8 col-lg-6">
+                            <label class="form-label fw-bold fs-18">Property Name</label>
+                            <input type="text" class="form-control form" id="propertyName" value="" readonly data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Property Name here" data-bs-container="#addModal">
+                            <span class="text-danger d-none">Photos are required!</span>
+                        </div>
+                        <div class="col-md-8 col-lg-6">
+                            <label class="form-label fw-bold fs-18">Due Date</label>
+                            <input type="date" class="form-control form" id="dueDate" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select Due Date" data-bs-container="#addModal">
+                            <span class="text-danger d-none">Photos are required!</span>
+                        </div>
+                        <div class="collapse row" id="collapse1">
+                            <!-- <div class="col-md-6 col-lg-4">
+                                <label class="form-label fw-bold fs-18">Start Date</label>
+                                <input type="date" class="form-control form" id="startDate" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select Start Date" data-bs-container="#addModal">
+                                <span class="text-danger d-none">Photos are required!</span>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <label class="form-label fw-bold fs-18">End Date</label>
+                                <input type="date" class="form-control form" id="endDate" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter End Date" data-bs-container="#addModal">
+                                <span class="text-danger d-none">Photos are required!</span>
+                            </div>
+                            <div class="col-md-12 col-lg-4">
+                                <label class="form-label fw-bold fs-18">Frequency</label>
+                                <select class="form-control select2 form-select" data-placeholder="Every Month"
+                                    id="frequency" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select Frequency" data-bs-container="#addModal">
+                                    <option label="Choose one">
+                                    </option>
+                                    <option value="Repeat Yearly">Repeat Yearly</option>
+                                    <option value="Repeat Monthly">Repeat Monthly</option>
+                                </select>
+                                <span class="text-danger d-none">Photos are required!</span>
+                            </div>
+                            <div class="col-md-8 col-lg-5">
+                                <label class="form-label fw-bold fs-18">Number of Days until due</label>
+                                <input type="text" class="form-control form" id="daysUntilDue" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Number of Days until due" data-bs-container="#addModal">
+                                <span class="text-danger d-none">Photos are required!</span>
+                            </div>
+                            <div class="col-md-2 col-lg-3">
+                                <label class="form-label fw-bold fs-18">Repeat</label>
+                                <label class="custom-switch form-switch mb-0">
+                                    <input type="checkbox" name="custom-switch-radio" class="custom-switch-input" id="" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select to repeat" data-bs-container="#addModal">
+                                    <span class="custom-switch-indicator custom-switch-indicator-md"></span>
+                                </label>
+                            </div>
+                            <div class="col-md-12 col-lg-4">
+                                <label class="form-label fw-bold fs-18">Terms</label>
+                                <select class="form-control select2 form-select" data-placeholder="Every Month"
+                                    id="terms" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select Terms" data-bs-container="#addModal">
+                                    <option label="Choose one">
+                                    </option>
+                                    <option value="Due on Receipt">Due on Receipt</option>
+                                </select>
+                                <span class="text-danger d-none">Photos are required!</span>
+                            </div> -->
+                            <p>Coming Soon!!!</p>
+                        </div>
                     </div>
-                    <div class="accordion-item" id="accordion-item2">
-                        <h2 class="accordion-header" id="headingTwo">
-                            <button class="accordion-button collapsed" onclick="checkFieldsFilled('accordion-item2')" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                <span class="m-0 me-4 fs-1" style="font-weight: bold;">02</span>
-                                <h3 class="m-0"><strong>Property Unit Information</strong> <i
-                                        class="fi fi-rs-pencil"></i><i
-                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
-                                </h3>
-                            </button>
-                        </h2>
-                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                            <form class="row g-3 m-1" enctype="multipart/form-data">
-
-                                <div class="col-12 mb-1">
-                                    <label for="inputAddress" class="form-label fw-bold">Number of Units<span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control px-2" id="units" placeholder=" ">
-                                    <span class="text-danger d-none">Units are required!</span>
-                                </div>
-                            </form>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="table-responsive">
+                                <table class="table text-nowrap table-borderless text-md-nowrap mg-b-0 mb-0"
+                                    id="lineItemsTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Category</th>
+                                            <th>Property</th>
+                                            <th>Memo</th>
+                                            <th>Amount</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="add-item-container1">
+                                        <tr class="tr">
+                                            <td><input type="text" class="form-control" name="category" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter category here" data-bs-container="#addModal"></td>
+                                            <td><input type="text" class="form-control" name="property" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter property here" data-bs-container="#addModal"></td>
+                                            <td><input type="text" class="form-control" name="memo" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter memo here" data-bs-container="#addModal"></td>
+                                            <td><input type="text" class="form-control" name="amount" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter amount here" data-bs-container="#addModal"></td>
+                                            <td><button type="button" class="btn" id="del-btn1">
+                                                    <i class="fi fi-rs-trash text-danger fs-5"></i>
+                                                </button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-12 mb-2">
+                            <a href="javascript:;" class="mt-1" id="add-item1">+Add Line Item</a>
+                        </div>
+                        <div class="col-md-12 col-lg-8">
+                            <textarea class="form-control mb-4" placeholder="Additional Notes" rows="4"
+                                id="additionalNotes" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Additional Notes here" data-bs-container="#addModal"></textarea>
+                            <span class="text-danger d-none">Photos are required!</span>
+                        </div>
+                        <div class="col-md-12 col-lg-4">
+                            <span class="float-end">
+                                <label class="form-label fw-bold m-0">Balance Due</label>
+                                <h1 class="text-primary fw-bold m-0" id="totalText">$0.00</h1>
+                            </span>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label fw-bold">Add Photo</label>
+                            <div class="custom-file" style="border: 1px dashed #00000087;">
+                                <input id="fileInput" type="file" name="image" class="custom-file-input form"
+                                    accept=".jpg, .png, image/jpeg, image/png" aria-label="hello" multiple>
+                                <span className="d-none"></span>
+                                <label class="custom-file-label" for="fileInput">
+                                    <i class="fi fi-rs-cloud-upload"></i>
+                                    <div class="custom-file-text">
+                                        <span>Upload Photo or drag and drop here</span>
+                                        <span>JPEG and PNG, file size no more than 10MB</span>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="selected-files">
+                                <div class="file-grid"></div>
+                            </div>
+                            <span class="text-danger d-none">Photos are required!</span>
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button class="btn btn-dark button-left me-auto" data-bs-dismiss="modal" id='draft' disabled>Save as
-                        Draft</button>
-                    <button class="btn btn-transparent text-dark" style='background-color:#FFFFFF; border: 3px solid #1467B0;' data-bs-dismiss="modal" id='close'>Close</button>
-                    <!-- <button class="btn text-light" style='background-color:#1467B0;' id='next' disabled>Next</button> -->
+                <div class="modal-footer d-flex">
+                    <!-- <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
+                        Draft</button> -->
+                    <!-- <div class="d-flex">
+
+                        <label class="custom-control custom-checkbox me-2">
+                                <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1" checked="">
+                                <span class="custom-control-label">Notify Tenant</span>
+                            </label>
+                        <label class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1" checked="">
+                                <span class="custom-control-label">Notify Assignee(s)</span>
+                            </label>
+                    </div> -->
+                    <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal"
+                        id='close'>Close</button>
+                    <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
+                    <div class="btn-group rounded-split mt-2 mb-2">
+                        <button type="button" class="btn btn-pill btn-primary save-invoice">Save</button>
+                        <button type="button" class="btn btn-pill btn-primary dropdown-toggle px-1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" style="">
+                            <li><a href="javascript:void(0)"><i class="fi fi-rs-eye me-2 text-primary"></i> Preview
+                                    Invoice</a></li>
+                            <li><a href="javascript:void(0)" class="save-invoice"><i
+                                        class="fi fi-rs-disk me-2 text-primary "></i> Save & Send</a></li>
+                            <li>
+                                <a href="javascript:void(0)" class="save-invoice"> <i
+                                        class="fi fi-rs-print me-2 text-primary "></i>Save & Print</a>
+                            </li>
+                        </ul>
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
+    <!-- succes modal -->
     <div class="modal fade" id="succesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered succes-modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
 
@@ -741,38 +888,105 @@
                 <div class="modal-body succes-modal">
                     <div class="text-justify ps-2 border-model-line">
                         <h2 class="modal-title d-flex align-items-center ps-1">
-                            <strong class="color-primary">Success!&nbsp;</strong>
+                            <strong class="color-primary">Congratulations!&nbsp;</strong>
                             <i class="fi fi-rs-check-circle text-success"></i>
-
                         </h2>
-                        <p class="ps-1 text-justify" id="succes-text">Tenant has been successfully created and linked to
-                            103A Unit with Property Name.</p>
-
+                        <p class="ms-2 mb-0 text-start">Your Invoice with INV-89900A was successfully</p>
+                        <p class="ms-2 text-start">sent to John Adams.</p>
                     </div>
-                    <div class="d-flex align-items-center rounded-pill shadow-lg p-2 my-3">
-                        <div class="flex-grow-1 ms-3">
-                            <p class="fw-bolder link-text">Invite your Tenant to the Tenant Portal <a
-                                    href="#">https://spaderent.tenant103A.com/rix-rbcr-mei</a></p>
-
-                        </div>
-                        <div class="flex-shrink-0">
-                            <a href="javascript:void(0)" class="btn btn-primary btn-pill" id="send-email">Send
-                                Invite</a>
-                        </div>
-                    </div>
-                    <div class="mt-2"> <button type="button" class="btn btn-primary btn-pill mx-2" id="add_property_btn"
-                            data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal"><i
-                                class="fe fe-plus me-2"></i><strong>ADD NEW
-                                TENANT</strong></button></div>
-
+                    <a data-bs-effect="effect-scale"
+                    data-bs-toggle="modal" href="#addModal" class="btn btn-outline-default btn-pill ms-1 my-2"
+                    style='background-color:#1467B0;color: white;'><i class="fi fi-rs-plus-small" style="vertical-align: middle;"></i> Create New Invoice</a>
                 </div>
                 <div class="modal-footer" style="border-top: 0">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="sendmailModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="text-justify ps-2 border-model-line">
+                        <h2 class="modal-title mb-0">Send <strong class="color-primary">Email</strong></h2>
+                        <p class="mb-1">Creating Invoice records that you owe a Tenant money.</p>
+                        <button type="button" class="btn btn-primary">#Invoice Number: INV-89900A</button>
+                    </div>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="top-close">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="conatiner-fluid">
+                        <div class="row p-3 br-5" style="background-color: #FAFAFA;border: 4px solid #1467B0;">
+                            <div class="col-12 mb-5">
+                                <div class="d-flex justify-content-between">
+                                    <img src="../assets/images/logo-preloader.png" alt="" height="30px">
+                                    <span class="fw-bold fs-18 text-black">Date: 02/03/2022</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <p class="fs-18" style="color: #B1B1B1;">Email: Johnadmas@outlook.com</p>
+                                <p class="fs-18" style="color: #666666;"><span class="text-black fw-bold">Subject: </span><span class="text-primary">INV-89900A</span> from Landloard (IT Company)</p>
+                                <p class="fs-18"><span class="text-black fw-bold">Dear </span><span class="text-primary">Tenant Name,</span></p>
+                                <p class="fs-18" style="color: #666666;">Please find attached your rent invoice with number <span class="fw-bold text-black">INV-89900A</span>. 
+                                    and Due Date: <span class="fw-bold text-black">02/03/2022</span> If you have any questions, please 
+                                    let us know. 
+                                    <br>
+                                    <br>
+                                    Have a great day and thank you for your business! 
+                                    <br>
+                                    <br>
+                                    Sincerely
+                                    <br>
+                                    <span class="fw-bold text-black">Landloard Name</span>
+                                    <br>
+                                    <span class="text-primary">IT Company</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex">
+                    <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
+                        Draft</button>
+                    <!-- <div class="d-flex">
+
+                        <label class="custom-control custom-checkbox me-2">
+                                <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1" checked="">
+                                <span class="custom-control-label">Notify Tenant</span>
+                            </label>
+                        <label class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1" checked="">
+                                <span class="custom-control-label">Notify Assignee(s)</span>
+                            </label>
+                    </div> -->
+                    <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal"
+                        id='close'>Close</button>
+                    <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
+                    <div class="btn-group rounded-split mt-2 mb-2">
+                        <button type="button" class="btn btn-pill btn-primary save-invoice">Save</button>
+                        <button type="button" class="btn btn-pill btn-primary dropdown-toggle px-1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" style="">
+                            <li><a href="javascript:void(0)"><i class="fi fi-rs-eye me-2 text-primary"></i> Preview
+                                    Invoice</a></li>
+                            <li><a href="javascript:void(0)" class="save-invoice"><i
+                                        class="fi fi-rs-disk me-2 text-primary "></i> Save & Send</a></li>
+                            <li>
+                                <a href="javascript:void(0)" class="save-invoice"> <i
+                                        class="fi fi-rs-print me-2 text-primary "></i>Save & Print</a>
+                            </li>
+                        </ul>
+                    </div>
 
                 </div>
             </div>
         </div>
     </div>
-    <!-- MODAL EFFECTS -->
 
     <!-- MODAL EFFECTS -->
 
@@ -961,24 +1175,24 @@
                     </div>
                     <div class="main-sidemenu">
                         <div class="slide-left disabled" id="slide-left"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24">
-                                <path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" />
-                            </svg></div>
+                            <path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" />
+                        </svg></div>
                         <ul class="side-menu">
                             <li class="sub-category">
                                 <!-- <h3>Main</h3> -->
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item has-link create-new-link" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample" style="border: 3px solid #1467B0 !important;"><i
-                                        class="side-menu__icon fi fi-rs-square-plus"></i><span class="side-menu__label ">Create New</span>
-                                </a>
+                                    class="side-menu__icon fi fi-rs-square-plus"></i><span class="side-menu__label ">Create New</span>
+                            </a>
                             </li>
 
                             <!-- <li class="slide">
-                                <a class="side-menu__item has-link" href="landing-page.php" target="_blank"><i
-                                        class="side-menu__icon fe fe-plus"></i><span class="side-menu__label">Complete your
-                                        Profile</span>
-                                </a>
-                            </li> -->
+                            <a class="side-menu__item has-link" href="landing-page.php" target="_blank"><i
+                                    class="side-menu__icon fe fe-plus"></i><span class="side-menu__label">Complete your
+                                    Profile</span>
+                            </a>
+                        </li> -->
                             <li class="slide">
                                 <div class="M-0 mt-3 mb-4" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
                                     <div class="card-header pb-0 border-bottom-0">
@@ -996,17 +1210,17 @@
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html"><i
-                                        class="side-menu__icon fi fi-rs-dashboard"></i><span class="side-menu__label">Overview</span></a>
+                                    class="side-menu__icon fi fi-rs-dashboard"></i><span class="side-menu__label">Overview</span></a>
                             </li>
                             <!-- <li class="sub-category">
-                                           <h3>UI Kit</h3>
-                                       </li> -->
+                                       <h3>UI Kit</h3>
+                                   </li> -->
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
-                                        class="side-menu__icon fi fi-rs-building"></i><span class="side-menu__label">Properties</span>
-                                        <i
-                                        class="angle fe fe-chevron-right"></i>
-                                       </a>
+                                    class="side-menu__icon fi fi-rs-building"></i><span class="side-menu__label">Properties</span>
+                                    <i
+                                    class="angle fe fe-chevron-right"></i>
+                                   </a>
                                 <ul class="slide-menu">
                                     <li class="side-menu-label1"><a href="javascript:void(0)">Properties</a></li>
                                     <li><a href="properties-all.html" class="slide-item">All</a></li>
@@ -1015,27 +1229,27 @@
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="add-tenant.html"><i
-                                        class="side-menu__icon fi fi-rs-cabin"></i><span class="side-menu__label">Tenants</span>
-                                        <i
-                                        class="angle fe fe-chevron-right"></i>
-                                       
-                                       </a>
+                                    class="side-menu__icon fi fi-rs-cabin"></i><span class="side-menu__label">Tenants</span>
+                                    <i
+                                    class="angle fe fe-chevron-right"></i>
+                                   
+                                   </a>
                                 <ul class="slide-menu">
-                                    <li class="side-menu-label1"><a href="javascript:void(0)">Properties</a></li>
+                                    <li class="side-menu-label1"><a href="javascript:void(0)">Tenants</a></li>
                                     <li><a href="add-tenant.html" class="slide-item">All</a></li>
                                     <li><a href="javascript:void(0)" class="slide-item">Draft</a></li>
                                 </ul>
                             </li>
 
                             <!-- <li class="sub-category">
-                                           <h3>Pre-build Pages</h3>
-                                       </li> -->
+                                       <h3>Pre-build Pages</h3>
+                                   </li> -->
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="invoices.html"><i
-                                                class="side-menu__icon fi fi-rs-file-invoice-dollar"></i><span class="side-menu__label">Invoicing</span>
-                                                <i
-                                                class="angle fe fe-chevron-right"></i>
-                                               </a>
+                                            class="side-menu__icon fi fi-rs-file-invoice-dollar"></i><span class="side-menu__label">Invoicing</span>
+                                            <i
+                                            class="angle fe fe-chevron-right"></i>
+                                           </a>
                                 <ul class="slide-menu">
                                     <li class="side-menu-label1"><a href="javascript:void(0)">Invoicing</a></li>
                                     <li><a href="create-invoicing.html" class="slide-item">All</a></li>
@@ -1045,11 +1259,11 @@
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="leads-all.php"><i
-                                        class="side-menu__icon fi fi-rs-chart-simple"></i><span
-                                        class="side-menu__label">Leads</span>
-                                        <!-- <i class="angle fe fe-chevron-right"></i> -->
-                                       
-                                       </a>
+                                    class="side-menu__icon fi fi-rs-chart-simple"></i><span
+                                    class="side-menu__label">Leads</span>
+                                    <!-- <i class="angle fe fe-chevron-right"></i> -->
+                                   
+                                   </a>
 
                             </li>
 
@@ -1077,15 +1291,15 @@
 
                                 <li>
                                     <a class="side-menu__item has-link" href="settings.php" target="_self"><i
-                                        class="side-menu__icon fi fi-rs-settings"></i><span class="side-menu__label">Settings</span>
-                                    <!-- <span
-                                                   class="badge bg-green br-5 side-badge blink-text pb-1">New</span> -->
-                                </a>
+                                    class="side-menu__icon fi fi-rs-settings"></i><span class="side-menu__label">Settings</span>
+                                <!-- <span
+                                               class="badge bg-green br-5 side-badge blink-text pb-1">New</span> -->
+                            </a>
                                 </li>
                         </ul>
                         <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24">
-                                <path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z" />
-                            </svg></div>
+                            <path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z" />
+                        </svg></div>
                     </div>
                 </div>
             </div>
@@ -1107,293 +1321,65 @@
                             </div>
                         </div> -->
 
-                        <div class="card" style="background: #1467B0;" id="top_main_card">
-                            <div class="card-body pb-0">
+                        <div class="card mt-5" style="background: linear-gradient(180deg, #232323 0%, #434343 100%);">
+                            <div class="card-body">
                                 <div class="row">
-                                    <div class="col-lg-12  position-relative">
-                                        <div class="d-flex">
-                                            <div class="media mt-0 mb-2">
-                                                <div class="media-user me-2">
-                                                    <div class=""><img alt="" class="rounded-circle avatar avatar-md" style="max-width: 120px;" src="../assets/images/users/16.jpg"></div>
-                                                </div>
-                                                <div class="media-body">
-                                                    <small class="text-white">Tenants</small>
-                                                    <h3 class="mb-0 mt-1 text-white company-name" style="font-weight: bold;">The Michael Scott Paper Company | Michael Scott</h3>
-                                                </div>
-                                            </div>
-                                            <!-- <div class="ms-auto">
-                                                <div class="dropdown show">
-
-                                                    <i class="fe fe-more-vertical text-white fs-20" data-bs-toggle="dropdown"></i>
-
-                                                    <div class="dropdown-menu dropdown-menu-end">
-                                                        <a class="dropdown-item text-primary" href="javascript:void(0)"><i
-                                                            class=
-                                                            "fi fi-rs-edit me-1"
-                                                            ></i> Edit</a>
-                                                        <a class="dropdown-item text-danger" href="javascript:void(0)"> <i class="fi fi-rs-trash me-1"></i>Delete</a>
-
-
-                                                    </div>
-                                                </div>
-                                            </div> -->
-                                        </div>
-
-                                        <!-- <a href="javascript:void(0)" id="email_verification"
-                                                                    class="btn btn-primary btn-pill btn-xl email-verification-btn"><i
-                                                                        class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
-                                                                    verification &nbsp; <i
-                                                                        class="angle fe fe-arrow-right create-btn-plus"></i></a> -->
-
+                                    <div class="col-lg-9">
+                                        <h3 class="page-titlee text-white" style="font-weight: 100; margin-bottom: 0px;">Welcome to Spade Portal</h3>
+                                        <h1 class="page-titlee text-white" style="font-weight: 700;" id="user-name">John Clark</h1>
+                                        <a href="javascript:void(0)" id="email_verification" class="btn btn-primary btn-pill btn-xl email-verification-btn"><i
+                                                class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
+                                            verification &nbsp; <i
+                                                class="angle fe fe-arrow-right create-btn-plus"></i></a>
                                     </div>
-                                    <div class="col-12">
-                                        <ul class="nav1 br-7" style="bottom: 0;">
-                                            <li class="nav-item1 p-0">
-                                                <a class="nav-link active p-2" href="view-tenant.html" id="viewOverview">Overview</a>
-                                            </li>
-                                            <li class="nav-item1 p-0">
-                                                <a class="nav-link p-2" href="tenant-properties.html" id="viewProperties">Properties</a>
-                                            </li>
-                                            <li class="nav-item1 p-0">
-                                                <a class="nav-link p-2" href="tenant-tasks.html" id="viewTasks">Tasks</a>
-                                            </li>
-                                            <li class="nav-item1 p-0">
-                                                <a class="nav-link p-2" href="tenant-file.html" id="viewFiles">Files</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="modal fade" id="contactInfoModal" tabindex="-1" role="dialog">
-                            <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <div class="text-justify ps-2 border-model-line">
-                                            <h2 class="modal-title">Personal <strong class="color-primary">Information</strong></h2>
-                                            <span class="">These details are required for rent reminders, tenants commutations
-                                                and portal access. </span>
-                                        </div>
-                                        <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-
-                                        <div class="accordion-item" id="accordion-item1">
-                                            <h2 class="accordion-header" id="headingOne">
-                                                <button class="accordion-button collapsed text-white" id="accordion-button1" type="button">
-                                                    <span class="m-0 me-4 fs-1" style="font-weight: bold;">01</span>
-                                                    <h3 class="m-0"><strong>Contact Info</strong> <i class="fi fi-rs-pencil"></i><i
-                                                            class="fi fi-rs-angle-circle-down chevron icon"></i>
-                                                    </h3>
-                                                </button>
-                                            </h2>
-                                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExampe">
-                                                <div class="accordion-body p-0">
-                                                    <div class="card-body mb-2">
-                                                        <div class="row">
-                                                            <div class="col-12">
-                                                                <div class="form-group">
-                                                                    <label class="form-label"><strong>Phone</strong></label>
-                                                                    <div class="row" id="add-item-containerPhone">
-                                                                        <div class="col-md-6 mt-2">
-                                                                            <select class="form-control form-select select2" data-bs-placeholder="Select" required>
-                                                                                <option label="Select">Country</option>
-                                                                                <option value="1">Germany</option>
-                                                                                <option value="2">Canada</option>
-                                                                                <option value="3">Usa</option>
-                                                                                <option value="4">Aus</option>
-                                                                            </select>
-                                                                        </div>
-                                                                        <div class="col-md-6 mt-2">
-                                                                            <input type="tel" class="form-control" placeholder="Phone Number" required>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-12 mt-2">
-                                                                        <a href="javascript:;" class="mt-1" id="add-item-phone">+Add Line Item</a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <div class="row">
-                                                            <div class="col-12">
-                                                                <div class="form-group">
-                                                                    <label class="form-label"><strong>Email</strong></label>
-                                                                    <div class="row" id="add-item-containerEmail">
-                                                                        <div class="col-md-6 mt-2">
-                                                                            <select class="form-control form-select select2" data-bs-placeholder="Select" required>
-                                                                                <option>Choose...</option>
-                                                                                <option>Germany</option>
-                                                                                <option>Canada</option>
-                                                                                <option>Usa</option>
-                                                                                <option>Aus</option>
-                                                                            </select>
-                                                                        </div>
-                                                                        <div class="col-md-6 mt-2">
-                                                                            <input type="email" class="form-control" placeholder="Email" required>
-                                                                        </div>
-
-                                                                    </div>
-                                                                    <div class="col-12 mt-2">
-                                                                        <a href="javascript:;" class="mt-1" id="add-item-email">+Add Line Item</a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
-                                            Draft</button>
-                                        <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close'>Close</button>
-                                        <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
-                                        <button class="btn text-light button" style='background-color:#1467B0;' id='next' disabled>Next</button>
+                                    <div class="col-lg-3">
+                                        <img src="../assets/header-img/Group1.png" alt="">
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                         <!-- PAGE-HEADER END -->
-                        <div class="over_view" id="Overview">
-                            <!-- ROW-2 OPEN -->
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="card inner-cards">
-                                        <div class="card-header justify-content-start bg-light">
-                                            <h3 class="card-title font-weight-bold" style="font-weight: bold;">Contact Info</h3>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="main-profile-contact-list">
-                                                <div class="me-5">
-                                                    <div class="media mb-4 d-flex">
-                                                        <div class="media-icon bg-primary  mb-3 mb-sm-0 me-3 mt-1">
-                                                            <i class="fi fi-rs-phone-call text-white"></i>
-                                                        </div>
-                                                        <div class="media-body">
-                                                            <!-- <h6 class="font-weight-semibold mb-1">Web Designer at <a href="javascript:void(0)" class="btn-link">Spruko</a></h6> -->
-                                                            <span style="color: #727272;">No Contact Info on File</span>
-                                                            <br>
-                                                            <!-- <p>Past Work: Spruko, Inc.</p> -->
-                                                            <a href="javascript:void(0)" class="btn-link add-contactInfo" style="font-weight: bold;" >+ Add New</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-xl-7 col-md-7">
+                                <div class="card border p-0 pb-3">
+                                    <div class="card-body text-center p-0">
+                                        <span class=""><img src="../assets/images/newinvoice.png" alt=""></span>
+                                        <h1 class="mt-3" style="font-weight: 700;line-height: 2.5rem;">Create <span style="color: #1467B0;">Invoices</span></h1>
+                                        <p class="card-text px-5">Whether you are looking to market your 
+                                            rental across the web or send a tenant an online application, you first 
+                                            need to add your property.</p>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="card inner-cards">
-                                        <div class="card-header justify-content-start bg-light">
-                                            <h3 class="card-title font-wieght-bold" style="font-weight: bold;">Emergency Contacts</h3>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="main-profile-contact-list">
-                                                <div class="me-5">
-                                                    <div class="media mb-4 d-flex">
-                                                        <div class="media-icon bg-primary  mb-3 mb-sm-0 me-3 mt-1">
-                                                            <i class="fi fi-rs-portrait text-white"></i>
-                                                        </div>
-                                                        <div class="media-body">
-                                                            <!-- <h6 class="font-weight-semibold mb-1">Web Designer at <a href="javascript:void(0)" class="btn-link">Spruko</a></h6> -->
-                                                            <span style="color: #727272;">No Emergency Contacts on File</span>
-                                                            <br>
-                                                            <!-- <p>Past Work: Spruko, Inc.</p> -->
-                                                            <a href="javascript:void(0)" class="btn-link add-contactInfo" style="font-weight: bold;" >+ Add New</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                    <div class="card-footer text-center border-0">
+                                        <div class="row">
+                                            <div class="text-center">
+                                                <button type="button" class="btn btn-primary btn-pill btn-xl font-weight-bold" id="add_property_btn" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal"><i
+                                                    class="fe fe-plus me-2"></i><strong>ADD NEW
+                                                    INVOICE</strong></button> </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="card inner-cards">
-                                        <div class="card-header justify-content-start bg-light">
-                                            <h3 class="card-title font-wieght-bold" style="font-weight: bold;">Email</h3>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="main-profile-contact-list">
-                                                <div class="me-5">
-                                                    <div class="media mb-4 d-flex">
-                                                        <div class="media-icon bg-primary  mb-3 mb-sm-0 me-3 mt-1">
-
-                                                            <i class="fi fi-rs-marker text-white"></i>
-                                                        </div>
-                                                        <div class="media-body">
-                                                            <!-- <h6 class="font-weight-semibold mb-1">Web Designer at <a href="javascript:void(0)" class="btn-link">Spruko</a></h6> -->
-                                                            <span style="color: #727272;">No Email Info on File</span>
-                                                            <br>
-                                                            <!-- <p>Past Work: Spruko, Inc.</p> -->
-                                                            <a href="javascript:void(0)" class="btn-link add-contactInfo" style="font-weight: bold;" >+ Add New</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="card inner-cards">
-                                        <div class="card-header justify-content-start bg-light">
-                                            <h3 class="card-title font-wieght-bold" style="font-weight: bold;">Tenant Portal</h3>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="main-profile-contact-list">
-                                                <div class="me-5">
-                                                    <div class="media mb-4 d-flex">
-                                                        <div class="media-icon bg-primary  mb-3 mb-sm-0 me-3 mt-1">
-
-                                                            <i class="fi fi-rs-window-alt text-white"></i>
-                                                        </div>
-                                                        <div class="media-body">
-                                                            <!-- <h6 class="font-weight-semibold mb-1">Web Designer at <a href="javascript:void(0)" class="btn-link">Spruko</a></h6> -->
-                                                            <span style="color: #727272;">Status: Inactive</span>
-                                                            <br>
-                                                            <!-- <p>Past Work: Spruko, Inc.</p> -->
-                                                            <a href="javascript:void(0)" class="btn-link" style="font-weight: bold;" id="send-invite">+ Send Invite to Tenant Portal                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- ROW-2 CLOSED -->
                         </div>
                     </div>
+                    <!-- ROW-2 END -->
+
+
+
+
+                    <div class="card-body pb-0 bg-recentorder" style="display: none;">
+                        <h3 class="card-title text-white">Recent Orders</h3>
+                        <div class="chartjs-wrapper-demo">
+                            <canvas id="recentorders" class="chart-dropshadow"></canvas>
+                        </div>
+                    </div>
+                    <div id="flotback-chart" class="flot-background" style="display: none;"></div>
+
                 </div>
-                <!-- ROW-3 CLOSED -->
+                <!-- CONTAINER END -->
             </div>
-            <!-- ROW-2 END -->
-
-
-
-
-            <div class="card-body pb-0 bg-recentorder" style="display: none;">
-                <h3 class="card-title text-white">Recent Orders</h3>
-                <div class="chartjs-wrapper-demo">
-                    <canvas id="recentorders" class="chart-dropshadow"></canvas>
-                </div>
-            </div>
-            <div id="flotback-chart" class="flot-background" style="display: none;"></div>
-
         </div>
-        <!-- CONTAINER END -->
-    </div>
-    </div>
-    <!--app-content close-->
+        <!--app-content close-->
 
     </div>
 
@@ -2040,42 +2026,691 @@
 
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
-    <script>
-    </script>
 
-    <script>
-        // Get the user's preferred color scheme
-        const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-        // Get a reference to the logo element
-        const logo = document.getElementById('logo');
-
-        if (userPrefersDark) {
-            logo.src = '../assets/header-img/comment.svg';
-        } else {
-            logo.src = '../assets/header-img/question.svg';
-        }
+    <script src="../assets/js/modal_functionality.js">
     </script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
+            $("#succes-close").click(()=>{
+                window.location='./create-invoicing.html'
+            })
+            $('input[name="invoice"],input[name="invoice_update"]').change(function () {
+                console.log($(this).val())
+                if ($(this).val() === 'Recurring Invoice') {
+                    if (!$('#collapse1').hasClass('show')) {
+                        $('#collapse1').collapse('show');
+                    }
+                    $('.row-multiple').each(function () {
+                        var date = $(this).find('.input-date')
+                        var amount = $(this).find('.input-amount')
+                        date.prop('required', true)
+                        amount.prop('required', true)
+                    })
+                } else if ($(this).val() === 'One Time Invoice') {
 
-            const tenantId = (new URL(document.location)).searchParams.get("tenantId");
-            // console.log($("#viewUnits").attr("href"))
-            //            
-            $(".company-name").text()
-            $("#viewProperties").attr("href", `./tenant-properties.html?tenantId=${tenantId}`)
-            $("#viewOverview").attr("href", `./view-tenant.html?tenantId=${tenantId}`)
-            $("#viewFiles").attr("href", `./tenant-file.html?tenantId=${tenantId}`)
-            $("#viewTasks").attr("href", `./tenant-tasks.html?tenantId=${tenantId}`)
-            // console.log(propertyId)
-            $("#send-invite").click(()=>{
-                // $("#succesModal").modal("hide")
-                // console.log(tenantID)
+                    if ($('#collapse1').hasClass('show')) {
+                        $('#collapse1').collapse('hide');
+                    }
+                    $('.row-multiple').each(function () {
+                        var date = $(this).find('.input-date')
+                        var amount = $(this).find('.input-amount')
+                        date.prop('required', false)
+                        amount.prop('required', false)
+                    })
+                }
+            });
+            var selectedFiles = [];
+            $('#fileInput').on('change', function () {
+                var files = Array.from($(this)[0].files);
+                // console.log(files)
+                files.forEach(function (file) {
+                    selectedFiles.push(file); // Add each file to the selected files array
+                });
+
+                updateSelectedFilesContainer(); // Update the selected files container
+            });
+            $('#fileInput_update').on('change', function () {
+                // console.log($(this)[0].files)
+                var files = Array.from($(this)[0].files);
+                // console.log(files)
+                files.forEach(function (file) {
+                    selectedFiles.push(file); // Add each file to the selected files array
+                });
+
+                updateSelectedFilesContainer(); // Update the selected files container
+            });
+
+            $(document).on('click', '.delete-file', function () {
+                var index = $(this).data('index');
+                selectedFiles.splice(index, 1); // Remove the selected file from the array
+                updateSelectedFilesContainer(); // Update the selected files container
+            });
+            function updateSelectedFilesContainer() {
+                var selectedFilesContainer = $('.file-grid');
+                selectedFilesContainer.empty();
+                console.log(selectedFiles)
+                selectedFiles.forEach(function (file, index) {
+
+                    var fileElement = $('<div>')
+                        .addClass('selected-file')
+                        .append(
+                            $('<img>')
+                                .addClass('file-preview')
+                                .attr('src', typeof file === "object" ? URL.createObjectURL(file) : '../../../../spadeAPI/uploads/' + file)
+                        )
+                        .append(
+                            $('<div>')
+                                .addClass('file-details')
+                                .append($('<span>').text("Image-" + (index + 1)))
+                            // .append($('<span>').text(fileSize))
+                        )
+                        .append(
+                            $('<p>')
+                                .addClass('delete-file')
+                                .text('X')
+                                .attr('data-index', index)
+                        )
+                        .appendTo(selectedFilesContainer);
+
+                });
+
+            }
+
+            function formatFileSize(bytes) {
+                if (bytes === 0) return '0 Bytes';
+                var k = 1024;
+                var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+                var i = Math.floor(Math.log(bytes) / Math.log(k));
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+            }
+
+            function truncateFileName(fileName) {
+                var maxFileNameLength = 10; // Define the maximum length of the file name
+                if (fileName.length > maxFileNameLength) {
+                    return fileName.substring(0, maxFileNameLength) + '...'; // Truncate the file name
+                }
+
+                return fileName;
+            }
+            $("#resend-invoice").click(()=>{
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/sendInvitationLink',
-                    type: 'POST',
+    url: 'http://localhost:3000/api/spade/resendEmail',
+    type: 'GET',  // Change the method to POST
+    data: { invoiceID: invoiceId },  // Send the data in the request body
+    contentType: 'application/json',  // Set the content type to JSON
+    headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+    },
+    success: function (response) {
+        // Handle the success response from the API
+        console.log('API response:', response);
+    },
+    error: function (xhr, status, error) {
+        // Handle the error response from the API
+        console.log('API error:', error);
+    }
+});
+
+            })
+            $(".save-invoice").each(function () {
+                $(this).on("click", function () {
+                    console.log(1)
+                    var selectedTenant = $('#tenants').val();
+                    var selectedInvoiceType = $('input[name="invoice"]:checked').val();
+                    var startDate = $('#startDate').val();
+                    var endDate = $('#endDate').val();
+                    var dueDate=$('#dueDate').val()
+                    var selectedFrequency = $('#frequency').val();
+                    var daysUntilDue = $('#daysUntilDue').val();
+                    var selectedTerms = $('#terms').val();
+                    var additionalNotes = $('#additionalNotes').val();
+                    var switchValue = $("input[name='custom-switch-radio']").is(":checked");
+                    // Collect the line items data from the table
+                    var lineItems = [];
+                    $('#lineItemsTable tbody tr').each(function () {
+
+                        var category = $(this).find('input[name="category"]').val();
+                        var property = $(this).find('input[name="property"]').val();
+                        var memo = $(this).find('input[name="memo"]').val();
+                        var amount = $(this).find('input[name="amount"]').val();
+
+                        lineItems.push({
+                            category: category,
+                            property: property,
+                            memo: memo,
+                            amount: amount
+                        });
+                    });
+
+                    // Create a FormData object to hold the data and files
+                    var formData = new FormData();
+                    var buttonText = $(this).text();
+
+                    if (buttonText !== "Save" && buttonText.indexOf("Print") === -1) {
+                        console.log("here")
+                        formData.append("sendmails", "Yes")
+                    }
+                    // Add the data to the FormData object
+                    formData.append('tenantID', selectedTenant);
+                    formData.append('invoiceType', selectedInvoiceType);
+                    formData.append('startDate', startDate);
+                    formData.append('endDate', endDate);
+                    formData.append('frequency', selectedFrequency);
+                    formData.append('dueDate', dueDate);
+                    formData.append('dueDays', daysUntilDue);
+                    formData.append('terms', selectedTerms);
+                    formData.append('repeatTerms', switchValue);
+                    formData.append('additionalNotes', additionalNotes);
+                    console.log($("#totalText").text().split('$')[1])
+                    formData.append('totalAmount', $("#totalText").text().split(' ')[1])
+                    // Loop through the lineItems array and add each line item to the FormData object
+                    for (var i = 0; i < lineItems.length; i++) {
+                        var lineItem = lineItems[i];
+                        formData.append('lineItems[' + i + '][category]', lineItem.category);
+                        formData.append('lineItems[' + i + '][property]', lineItem.property);
+                        formData.append('lineItems[' + i + '][memo]', lineItem.memo);
+                        formData.append('lineItems[' + i + '][amount]', lineItem.amount);
+                    }
+
+                    // Add the files to the FormData object
+                    var fileInput = document.getElementById('fileInput');
+                    var files = fileInput.files;
+
+                    for (var i = 0; i < files.length; i++) {
+                        var file = files[i];
+                        formData.append('image', file);
+                    }
+
+                    // Send the data and files to the API using AJAX
+                    $.ajax({
+                        url: 'http://localhost:3000/api/spade/createInvoice',
+                        type: 'POST',
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+
+                        success: function (response) {
+                            $("#addModal").modal("hide")
+                            $("#succesModal").modal("show")
+                            $("#addModal").mods
+                        },
+                        error: function (xhr, status, error) {
+                            // Handle the error response from the API
+                            console.log('API error:', error);
+                        }
+                    });
+                });
+            });
+            let tenantData = []; let invoiceData = []
+            function getData() {
+                $("#preloader").fadeIn("fast");
+                // console.log(22)
+                $.ajax({
+                    url: 'http://localhost:3000/api/spade/viewPropertyTenant',
+                    type: 'GET',
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function ({ data, user }) {
+                        console.log(data)
+                        $("#user-name").text(user)
+                        $("#tenants").empty()
+                        $("#tenants").append($('<option></option>').text("Choose..."));
+                        tenantData = data[0]
+                        // var tableBody = $('#table_body');
+
+                        data[0]?.forEach(function (tenant) {
+                            $("#tenants").append($('<option></option>').text(tenant.firstName + " " + tenant.lastName).val(tenant.tenantID));
+                        })
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(error)
+                        window.alert('Error: ' + "Token expeired!, Login again");
+                        window.location = '../Landlord/login_module.html';
+                    }
+                });
+
+                $.ajax({
+                    url: 'http://localhost:3000/api/spade/getAllInvoices',
+                    type: 'GET',
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function ({ data }) {
+                        console.log(data)
+                        // if(!data){
+                        //     window.location="./new-tenant.html"
+                        // }
+                        console.log(data[0])
+                        invoiceData = data[0]
+
+                        var tableBody = $('#table_body');
+                        tableBody.empty();
+                        // console.log(data[0])
+                        let tenantNames = []
+
+                        data[0]?.forEach(function (invoice) {
+
+
+                            var invoiceNumber = '<td class="invoice-id" style="font-weight: 600;">' + invoice.invoiceID + '</td>';
+
+                            var tenantName = '<td class="tenantName" style="font-weight: 600;">' + invoice.firstName + invoice.lastName + `<br><small>${invoice.tPhone}</small>` + '</td>';
+                            var memoDescription = '<td class="memo" style="font-weight: 600;">' + invoice.memo[0].memo + `<br><small>${invoice.invoiceType}</small>` + '</td>';
+
+                            var dateObj = new Date(invoice.created_at);
+                            var day = dateObj.getDate();
+                            var month = dateObj.getMonth() + 1;
+                            var year = dateObj.getFullYear();
+                            var invoiceDate = '<td class="date" style="font-weight: 600;">' + day + "/" + month + "/" + year + '</td>';
+                            var propertyName = '<td class="propertyName" style="font-weight: 600;">' + invoice.propertyName + `<br><small>${invoice.tPhone}</small>` + '</td>';
+                            var invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + invoice.totalAmount + '<span> $</span>' + `<br><small>Next Due Date: November-12-2020</small>` + '</td>';
+                            var status = `<td class="status" style="font-weight: 600;${invoice.status === "Unpaid" ? 'color:blue;' : 'color:green'}">` + invoice.status + '</td>';
+                            var dropdownMenu = `<td><i class="fe fe-more-vertical three-dots"
+                                                                data-bs-toggle="dropdown"></i>
+
+                                                            <ul class="dropdown-menu">
+                                                                <li><a class="dropdown-item text-dark view-btn"
+                                                                        data-bs-effect="effect-scale"
+                                                                        data-bs-toggle="modal"
+                                                                        href="#viewModal">View</a></li>
+                                                                <li><a class="dropdown-item text-dark edit-option"
+                                                                        data-bs-effect="effect-scale"
+                                                                        href="#"
+
+                                                                        >Edit</a></li>
+                                                                <li><a class="dropdown-item text-dark status-option"
+                                                                        data-bs-effect="effect-scale"
+                                                                        data-bs-toggle="modal"
+                                                                        href="#changeStatusModal">Change Status</a></li>
+                                                                <li><a class="dropdown-item text-dark resend-option"
+                                                                        data-bs-effect="effect-scale"
+                                                                        data-bs-toggle="modal"
+                                                                        href="#">Resend Invoice</a></li>
+                                                                <li><a class="dropdown-item text-dark refund-option"
+                                                                        data-bs-effect="effect-scale"
+                                                                        data-bs-toggle="modal" href="#refundModal">Issue
+                                                                        Refund</a></li>
+                                                                <li><a class="dropdown-item text-danger delete-option"
+                                                                        href="javascript:void(0)">Delete</a>
+                                                                </li>
+                                                            </ul>
+                                                        </td>`
+
+
+                            var row = '<tr>' + invoiceNumber + tenantName + memoDescription + invoiceDate +
+                                propertyName + invoiceAmount + status + dropdownMenu + '</tr>';
+
+                            // Append the row to the table body
+                            tableBody.append(row);
+                        });
+                        $("#preloader").fadeOut("slow")
+                        $('.edit-option').click(function (e) {
+                            e.preventDefault();
+                            const tenantIdElement = $(this).closest("tr").find(".tenant-id");
+
+                            tenantID = tenantIdElement.text();
+
+                            const data = response.data[0].find(obj => obj.id.toString() === propertyId);
+                            // selectedFiles = data.images
+                            updateSelectedFilesContainer()
+                            $("#propertyId_update").val(data.id);
+                            $("#propertyName_update").val(data.propertyName);
+                            $("#address_update").val(data.address);
+                            $("#city_update").val(data.city);
+                            $("#state_update").val(data.state);
+                            $("#zip_update").val(data.zipCode);
+                            $("#propertyType_update").val(data.propertyType);
+                            $("#propertyTotalSF_update").val(data.propertySQFT);
+                            $("#unit_update").val(data.units);
+                            $("#property-name").text(data.propertyName)
+                            $('#myModal_edit').modal('show');
+                        });
+
+                    },
+                    error: function (xhr, status, error) {
+                        // console.log(error)
+                        // window.alert('Error: ' + "Token expeired!, Login again");
+                        // window.location = '../Landlord/login_module.html';
+                    }
+                });
+
+            }
+            getData()
+            $("#tenants,#tenants_update").change(() => {
+                const property = $("#tenants").val()
+                // console.log(property)
+                const propertyName = tenantData.filter((tenant) => {
+                    if (tenant.tenantID == property) {
+                        return tenant.propertyName
+                    }
+                })
+                // console.log(propertyName)
+                $("#propertyName").val(propertyName[0].propertyName)
+            })
+            function checkFields() {
+                var isFilled = true;
+
+                // Check each required field for emptiness
+                $("input[type='text']:not(#fileInput), textarea, select").each(function () {
+                    if ($(this).val() === "") {
+                        isFilled = false;
+                        return false; // Exit the loop if any field is empty
+                    }
+                });
+
+                // Enable or disable the save button based on field fill status
+                if (isFilled) {
+                    $("#save-button").prop("disabled", false);
+                } else {
+                    $("#save-button").prop("disabled", true);
+                }
+            }
+
+            // Call the checkFields function when any input field value changes
+            $("input[type='text']:not(#fileInput), textarea, select").on("input change", function () {
+                checkFields();
+            });
+
+            // Call the checkFields function on page load
+            checkFields();
+            $("#add-item1").on("click", () => {
+                $("#add-item-container1").append(`<tr class="tr">
+                                            <td><input type="text" class="form-control" name="category"></td>
+                                            <td><input type="text" class="form-control" name="property"></td>
+                                            <td><input type="text" class="form-control" name="memo"></td>
+                                            <td><input type="text" class="form-control" name="amount"></td>
+                                            <td><button type="button" class="btn" id="del-btn1">
+                                                <i class="fi fi-rs-trash text-danger fs-5"></i>
+                                            </button></td>
+                                        </tr>`)
+            });
+            $("#add-item1_update").on("click", () => {
+                $("#add-item-container1_update").append(`<tr class="tr">
+                                            <td><input type="text" class="form-control" name="category_update"></td>
+                                            <td><input type="text" class="form-control" name="property_update"></td>
+                                            <td><input type="text" class="form-control" name="memo_update"></td>
+                                            <td><input type="text" class="form-control" name="amount_update"></td>
+                                            <td><button type="button" class="btn" id="del-btn_update">
+                                                <i class="fi fi-rs-trash text-danger fs-5"></i>
+                                            </button></td>
+                                        </tr>`)
+            });
+            $(document).on("input", "input[name='amount'], input[name='amount_update']", updateTotal);
+
+function updateTotal() {
+  var total = 0;
+
+  $("input[name='amount'], input[name='amount_update']").each(function() {
+    var inputValue = $(this).val();
+
+    if (inputValue !== "") {
+      var numericValue = parseFloat(inputValue);
+      if (!isNaN(numericValue)) {
+        total += numericValue;
+      }
+    }
+  });
+
+  if (isNaN(total)) {
+    total = 0.00;
+  }
+
+  if (total === 0) {
+    $("#totalText").text("$ 0.00");
+    $("#totalText_update").text("$ 0.00"); // Update the 'textTotal_update' field as well
+  } else {
+    $("#totalText").text("$ " + total);
+    $("#totalText_update").text("$ " + total); // Update the 'textTotal_update' field as well
+  }
+
+  // Perform other operations on the dynamically added input element as needed
+}
+
+            $('#add-item-container1').on('click', '#del-btn1', function () {
+                var $row = $(this).closest('.tr');
+                var $rowsContainer = $row.parent();
+
+                if ($rowsContainer.children('.tr').length > 1) {
+                    $row.remove();
+                    updateTotal()
+                } else {
+                    //   alert('Cannot delete the last row.');
+                }
+            });
+            $('#add-item-container1').on('click', '#del-btn_update', function () {
+                console.log(11)
+                var $row = $(this).closest('.tr');
+                var $rowsContainer = $row.parent();
+
+                if ($rowsContainer.children('.tr').length > 1) {
+                    $row.remove();
+                    updateTotal()
+                } else {
+                    //   alert('Cannot delete the last row.');
+                }
+            });
+            $("#add-item2").on("click", () => {
+                $("#add-item-container2").append(`<tr class="tr">
+                                            <td><label class="custom-control custom-checkbox-md">
+                                                <input type="checkbox" class="custom-control-input"
+                                                    name="example-checkbox5" value="option5" checked="">
+                                                <span class="custom-control-label"></span>
+                                            </label></td>
+                                            <td><input type="text" class="form-control"></td>
+                                            <td><input type="text" class="form-control"></td>
+                                            <td><button type="button" class="btn" id="del-btn2">
+                                                <i class="fi fi-rs-trash text-danger fs-5"></i>
+                                            </button></td>
+                                        </tr>`)
+            });
+            $('#add-item-container2').on('click', '#del-btn2', function () {
+                var $row = $(this).closest('.tr');
+                var $rowsContainer = $row.parent();
+
+                if ($rowsContainer.children('.tr').length > 1) {
+                    $row.remove();
+                } else {
+                    //   alert('Cannot delete the last row.');
+                }
+            });
+            $('input[type="checkbox"]').change(function () {
+                var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
+                var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
+                console.log(columnIndex, isColumnVisible)
+                // Toggle the visibility of the corresponding column
+                $('table').find('tr').each(function () {
+                    var column = $(this).find('th:nth-child(' + columnIndex + '), td:nth-child(' + columnIndex + ')');
+                    isColumnVisible ? column.show() : column.hide();
+                });
+            });
+
+            function filterTable(selectedFilter) {
+                var tableBody = $('#table_body');
+                var rows = tableBody.find('tr');
+
+                if (selectedFilter === 'alphabets') {
+                    rows.sort(function (a, b) {
+                        var textA = $(a).find('.tenantName').text().toLowerCase();
+                        var textB = $(b).find('.tenantName').text().toLowerCase();
+                        return textA.localeCompare(textB);
+                    });
+                } else if (selectedFilter === 'ascending') {
+                    rows.sort(function (a, b) {
+                        var idA = parseInt($(a).find('.date').text());
+                        var idB = parseInt($(b).find('.date').text());
+                        return idA - idB;
+                    });
+                } else if (selectedFilter === 'descending') {
+                    rows.sort(function (a, b) {
+                        var idA = parseInt($(a).find('.date').text());
+                        var idB = parseInt($(b).find('.date').text());
+                        return idB - idA;
+                    });
+                }
+
+                tableBody.empty().append(rows);
+            }
+
+            // Filter functionality
+            $('#ascending').on('click', function () {
+                filterTable("ascending")
+            });
+            $('#descending').on('click', function () {
+                filterTable("descending")
+            });
+            $('#alphabets').on('click', function () {
+                // console.log(1)
+                filterTable("alphabets")
+            });
+            // console.log($('#alphabets'))
+            // Search functionality
+            $('#search_input').on('keyup', function () {
+                var searchValue = $(this).val().toLowerCase();
+                $('#table_body tr').filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+                });
+            });
+            let invoiceId;
+            let selectedValue;
+            $('input[name="status"]').on('click', function () {
+                selectedValue = $(this).val();
+            });
+            $(document).on('click', ".view-btn,.edit-option,.resend-option", function (e) {
+                e.preventDefault();
+                const buttonText = $(this).text();
+                const headingElem=$("#viewModal .modal-title")
+                headingElem.empty()
+                // headingElem.append(`View <strong class="color-primary">Invoice</strong>`)
+                switch (buttonText) {
+                    case "Edit":
+                        headingElem.append(`Edit <strong class="color-primary">Invoice</strong>`)
+                        break;
+                    case "Resend Invoice":
+                    headingElem.append(`Resend <strong class="color-primary">Invoice</strong>`)
+                        
+                        break;                
+                    default:
+                    headingElem.append(`View <strong class="color-primary">Invoice</strong>`)
+
+                        break;
+                }
+                const invoiceIdElement = $(this).closest("tr").find(".invoice-id");
+                console.log(invoiceIdElement.text())
+                invoiceId = invoiceIdElement.text();
+                // console.log(tenantData,invoiceData
+                // console.log(invoiceData)
+                const data1 = invoiceData.find(obj => obj.invoiceID == invoiceId);
+                const data2 = tenantData.find(obj => obj.tenantID == data1.tenantID)
+
+                const data = {
+                    ...data1, ...data2
+                }
+
+                $("#client-id").empty()
+                $("#client-id").append(`<h5 class="fw-bold" style="color: 
+                                #562AC8;">BILLED TO</h5>
+                                    <p class="text-dark">${data.firstName + " " + data.lastName}<br>${data.tAddress
+                    }<br>${data.tCity},
+                                        ${data.tState}<br>${data.tZipcode}<br>United States<br>${data.tPhoneNumber}</p>`)
+                console.log(1)
+                $("#owner-id").empty()
+                $("#owner-id").append(`                                    <h5 class="text-dark fw-bold">${data.companyName}</h5>
+                                    <p class="text-dark">${data.pAddress}<br>${data.pCity}, ${data.pState}<br>${data.pZipCode}<br>United
+                                        States<br>1-888-123-8910</p>`)
+                $("#table-body").empty()
+                var dateObj = new Date(data.created_at);
+                var day = dateObj.getDate();
+                var month = dateObj.getMonth() + 1;
+                var year = dateObj.getFullYear();
+                $("#table-body").append(
+                    `<tr>
+                        <td>${day}/${month}/${year}</td>
+                                                    <td>INV-10012</td>
+                                                    <td>$ ${data.totalAmount}</td>
+                                                    <td>${data.dueDate}</td>
+                                                    <td>Due On Receipt</td>
+                    </tr>
+                    `
+                )
+
+                $("#memo-table").empty()
+                data.memo.forEach((item) => {
+                    $("#memo-table").append(`
+                <tr>
+                                                    <td>
+                                                        <p style="font-weight: bold;" class="mb-1">Services</p>
+                                                        <span>${item.memo
+                        }</span>
+                                                    </td>
+                                                    </td>
+                                                    <td>${data.propertyName}</td>
+                                                    <td>${item.category}</td>
+                                                    <td>$ ${item.amount}</td>
+                                                </tr>
+                `)
+                    $("#price-table").empty()
+                    $("#price-table").append(`
+                <tr>
+                                                    <td>Subtotal</td>
+                                                    <td>$ ${data.totalAmount}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Discount</td>
+                                                    <td>$550.00</td>
+                                                </tr>
+                                                <tr style="    border-bottom: 1px solid #AFAFAF;">
+                                                    <td>Tax (8.25%)</td>
+                                                    <td>$0</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Total</td>
+                                                    <td>$550.00</td>
+                                                </tr>
+                                                <tr style="    border-bottom: 2px solid #562AC8;">
+                                                    <td>Deposit Requested</td>
+                                                    <td>$550.00</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="fw-bold">Deposit Due</td>
+                                                    <td class="fw-bold">$550.00</td>
+                                                </tr>
+                `)
+
+
+                })
+                $("#viewModal").modal("show")
+            })
+            $(document).on('click', '.three-dots', function () {
+                const invoiceIdElement = $(this).closest("tr").find(".invoice-id");
+
+                if (invoiceIdElement.length > 0) {
+                    invoiceId = invoiceIdElement.text();
+                    console.log(invoiceId);
+                } else {
+                    console.log("Invoice ID element not found.");
+                }
+            });
+            $(document).on('click', '.delete-option', function () {
+
+                $("#myModal_delete").modal("show")
+            }
+
+
+            );
+            $(document).on("click", "#confirmDelete", () => {
+                $("#myModal_delete").modal("hide")
+                $.ajax({
+                    url: 'http://localhost:3000/api/spade/invoiceDelete',
+                    type: 'DELETE',
                     data: JSON.stringify({
-                        tenantID:tenantId
+                        id: invoiceId,
                     }),
                     contentType: "application/json; charset=utf-8",
                     processData: false,
@@ -2083,164 +2718,220 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(1111)
-                        $("#succesModal").modal("show")
-                    //    getData()
+                        getData()
+
                     },
                     error: function (xhr, status, error) {
-                        // Handle the error response
-                        console.log(xhr)
-                        console.log(status)
-                        console.log(error)
-                        console.error('Error sending data:', error);
+                        window.alert('Error: ' + error);
                     }
                 });
             })
-            $.ajax({
-                url: 'http://localhost:3000/api/spade/getTenantsByID',
-                type: 'GET',
-                data: {
-                    id: tenantId
-                },
-                contentType: "application/json; charset=utf-8",
-                // processData: false,
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                },
-                success: function({
-                    data
-                }) {
-                    console.log(data)
-                    $(".company-name").text(`${data[0][0].companyName} | ${data[0][0].firstName+" "+data[0][0].lastName}`)
-                },
-                error: function(xhr, status, error) {
-                    window.alert('Error: ' + error);
+            $('.edit-btn').click(function () {
+                $("#viewModal").modal("hide");
+
+                const data1 = invoiceData.find(obj => obj.invoiceID == invoiceId);
+                const data2 = tenantData.find(obj => obj.tenantID == data1.tenantID);
+
+                const data = {
+                    ...data1,
+                    ...data2
+                };
+                console.log(data)
+                tenantData.forEach(function (tenant) {
+                    if (tenant.tenantID == data.tenantID) {
+                        $("#tenants_update").append($('<option></option>').text(tenant.firstName + " " + tenant.lastName).val(tenant.tenantID).attr("selected", "selected"));
+                    } else {
+                        $("#tenants_update").append($('<option></option>').text(tenant.firstName + " " + tenant.lastName).val(tenant.tenantID));
+                    }
+                });
+                if(data.invoiceType==="One Time Invoice"){
+                    $("#invoice_update").attr('checked', 'checked')
+                }else{
+                    $("#recurring_update").attr('checked', 'checked')
+                    $("#collapse1_update").addClass("show")
+                    $("#startDate_update").val(data.startDate)
+                    $("#endDate_update").val(data.endDate)
+                    $("#frequency_update").empty()
+                    // $("#frequency_update").append($('<option></option>').text(("Choose...")).val(("Choose...")))
+                    if(data.frequency=="Repeat Yearly"){
+                        $("#frequency_update").append($('<option></option>').text((data.frequency)).val((data.frequency)).attr("selected", "selected"))
+                        $("#frequency_update").append($('<option></option>').text(("Repeat Monthly")).val(("Repeat Monthly")))
+                    }
+                    else{
+                        $("#frequency_update").append($('<option></option>').text((data.frequency)).val((data.frequency)).attr("selected", "selected"))
+                        $("#frequency_update").append($('<option></option>').text(("Repeat Yearly")).val(("Repeat Yearly")))
+                    }
+                    $("#terms_update").empty()
+                    $("#terms_update").append($('<option></option>').text((data.terms)).val((data.terms)).attr("selected", "selected"))
+                    $("#daysUntilDue_update").val(data.daysDue)
+                    // $("#terms_update").val(data.terms)
+                    if(data.repeatTerms=="true"){
+                        $("input[name='custom-switch-radio_update']").prop("checked", true);
+                    }
+                    else{
+                        $("input[name='custom-switch-radio_update']").prop("checked", false);
+                    }
+
+
                 }
+                const property = $("#tenants_update").val()
+                const propertyName = tenantData.filter((tenant) => {
+                    if (tenant.tenantID == property) {
+                        return tenant.propertyName
+                    }
+                })
+                $("#propertyName_update").val(propertyName[0].propertyName)
+                $("#dueDate_update").val(data.dueDate)
+                $('#add-item-container1_update').empty()
+                data.memo.forEach(({memo,category,amount})=>{
+                    $('#add-item-container1_update').append(
+                        `<tr class="tr">
+                                            <td><input type="text" class="form-control" name="category_update" value=${category}></td>
+                                            <td><input type="text" class="form-control" name="property_update" value=${category}></td>
+                                            <td><input type="text" class="form-control" name="memo_update" value=${memo}></td>
+                                            <td><input type="text" class="form-control" name="amount_update" value=${amount}></td>
+                                            <td><button type="button" class="btn" id="del-btn_update">
+                                                <i class="fi fi-rs-trash text-danger fs-5"></i>
+                                            </button></td>
+                                        </tr>`
+                    )
+                })
+                $("#totalText_update").text(`$ ${data.totalAmount}`)
+                $("#additionalNotes_update").val(data.note)
+                selectedFiles=[]
+                selectedFiles=data.invoiceImages.split(",")
+                updateSelectedFilesContainer()
+                $("#myModal_edit").modal("show");
+
             });
-            $(".add-contactInfo").click(()=>{
-                $("#contactInfoModal").modal("show")
+            $(".save-invoice_update").each(function () {
+                $(this).on("click", function () {
+                    // console.log(1)
+                    var selectedTenant = $('#tenants_update').val();
+                    var selectedInvoiceType = $('input[name="invoice_update"]:checked').val();
+                    var startDate = $('#startDate_update').val();
+                    var endDate = $('#endDate_update').val();
+                    var dueDate = $('#dueDate_update').val();
+                    var selectedFrequency = $('#frequency_update').val();
+                    var daysUntilDue = $('#daysUntilDue_update').val();
+                    var selectedTerms = $('#terms_update').val();
+                    var additionalNotes = $('#additionalNotes_update').val();
+                    var switchValue = $("input[name='custom-switch-radio_update']").is(":checked");
+                    // Collect the line items data from the table
+                    var lineItems = [];
+                    $('#lineItemsTable_update tbody tr').each(function () {
+
+                        var category = $(this).find('input[name="category_update"]').val();
+                        var property = $(this).find('input[name="property_update"]').val();
+                        var memo = $(this).find('input[name="memo_update"]').val();
+                        var amount = $(this).find('input[name="amount_update"]').val();
+
+                        lineItems.push({
+                            category: category,
+                            property: property,
+                            memo: memo,
+                            amount: amount
+                        });
+                    });
+
+                    // Create a FormData object to hold the data and files
+                    var formData = new FormData();
+                    var buttonText = $(this).text();
+
+                    if (buttonText !== "Save" && buttonText.indexOf("Print") === -1) {
+                        console.log("here")
+                        formData.append("sendmails", "Yes")
+                    }
+                    // Add the data to the FormData object
+                    formData.append('tenantID', selectedTenant);
+                    formData.append('invoiceID',invoiceId)
+                    formData.append('invoiceType', selectedInvoiceType);
+                    formData.append('startDate', startDate);
+                    formData.append('endDate', endDate);
+                    formData.append('frequency', selectedFrequency);
+                    formData.append('dueDate', dueDate);
+                    formData.append('dueDays', daysUntilDue);
+                    formData.append('terms', selectedTerms);
+                    formData.append('repeatTerms', switchValue);
+                    formData.append('additionalNotes', additionalNotes);
+                    console.log($("#totalText_update").text().split('$')[1])
+                    formData.append('totalAmount', $("#totalText_update").text().split(' ')[1])
+                    var existingImageNames = [];
+            selectedFiles.forEach((file) => {
+                    if (typeof file === "string") {
+                        existingImageNames.push(file)
+                    }
+                })
+
+            formData.append("existingImages", existingImageNames)
+                    // Loop through the lineItems array and add each line item to the FormData object
+                    for (var i = 0; i < lineItems.length; i++) {
+                        var lineItem = lineItems[i];
+                        formData.append('lineItems[' + i + '][category]', lineItem.category);
+                        formData.append('lineItems[' + i + '][property]', lineItem.property);
+                        formData.append('lineItems[' + i + '][memo]', lineItem.memo);
+                        formData.append('lineItems[' + i + '][amount]', lineItem.amount);
+                    }
+
+                    var files = selectedFiles.map(function(file) {
+                return file instanceof File ? file : file.name;
+            });
+
+            // Add the selected files to the FormData object
+            files.forEach(function(file) {
+                formData.append('image', file);
+            });
+
+                    // Send the data and files to the API using AJAX
+                    $.ajax({
+                        url: 'http://localhost:3000/api/spade/UpdateInvoice',
+                        type: 'PUT',
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+
+                        success: function (response) {
+                            // Handle the success response from the API
+                            console.log('API response:', response);
+                        },
+                        error: function (xhr, status, error) {
+                            // Handle the error response from the API
+                            console.log('API error:', error);
+                        }
+                    });
+                });
+            });
+            $("#update-status").click(() => {
+                // console.log(invoiceId)
+                $("#changeStatusModal").modal("hide")
+                $.ajax({
+                    url: 'http://localhost:3000/api/spade/putInvoiceStatusUpdates',
+                    type: 'PUT',
+                    data: JSON.stringify({
+                        id: invoiceId,
+                        status: selectedValue,
+                        note: $("#add-note").val()
+                    }),
+                    contentType: "application/json; charset=utf-8",
+                    processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        // console.log(response);
+                        // window.alert(response.message);
+                        getData()
+                        // window.location = '../Landlord/properties-all.html';
+                    },
+                    error: function (xhr, status, error) {
+                        window.alert('Error: ' + error);
+                    }
+                });
             })
-            $("#add-item-phone").on("click", () => {
-                $("#add-item-containerPhone").append(`<div class="col-md-6 mt-2">
-                                                                            <select class="form-control form-select select2" data-bs-placeholder="Select" required>
-                                                                                <option label="Select">Country</option>
-                                                                                <option value="1">Germany</option>
-                                                                                <option value="2">Canada</option>
-                                                                                <option value="3">Usa</option>
-                                                                                <option value="4">Aus</option>
-                                                                            </select>
-                                                                        </div>
-                                                                        <div class="col-md-6 mt-2">
-                                                                            <input type="tel" class="form-control" placeholder="Phone Number" required>
-                                                                        </div>`)
-            });
-            $("#add-item-email").on("click", () => {
-                $("#add-item-containerEmail").append(`<div class="col-md-6 mt-2">
-                                                                            <select class="form-control form-select select2" data-bs-placeholder="Select" required>
-                                                                                <option label="Select">Country</option>
-                                                                                <option value="1">Germany</option>
-                                                                                <option value="2">Canada</option>
-                                                                                <option value="3">Usa</option>
-                                                                                <option value="4">Aus</option>
-                                                                            </select>
-                                                                        </div>
-                                                                        <div class="col-md-6 mt-2">
-                                                                            <input type="email" class="form-control" placeholder="Email" required>
-                                                                        </div>`)
-            });
-            $('#add-item-container').on('click', '.del-btn', function() {
-                var $row = $(this).closest('.row');
-                var $rowsContainer = $row.parent();
-
-                if ($rowsContainer.children('.row').length > 1) {
-                    $row.remove();
-                } else {
-                    //   alert('Cannot delete the last row.');
-                }
-            });
-            $("#next").click(() => {
-    const formData = new FormData();
-    const phone = [];
-    const emailArray = [];
-    $("#add-item-containerPhone").each(function() {
-        const phoneName = $(this).find("select").val();
-        const phoneNumber = $(this).find("input[type='tel']").val();
-        // console.log(country,phoneNumber)
-
-        phone.push({
-            phoneName: phoneName,
-            phoneNumber: phoneNumber
         });
-    });
-
-    $("#add-item-containerEmail").each(function() {
-        const emailName = $(this).find("select").val();
-        const email = $(this).find("input[type='email']").val();
-        // console.log(country,email)
-
-        emailArray.push({
-            emailName: emailName,
-            email: email
-        });
-    });
-    // console.log(phone,emailArray)
-    formData.append("alternatePhone", JSON.stringify(phone));
-    formData.append("alternateEmail", JSON.stringify(emailArray));
-    formData.append("tenantID", tenantId);
-    console.log(formData)
-    $.ajax({
-        url: "http://localhost:3000/api/spade/addAlternateEmailPhone",
-        type: "POST",
-        data: JSON.stringify({
-    alternatePhone: phone,
-    alternateEmail: emailArray,
-    tenantID: tenantId
-}),
-contentType: "application/json",
-        // processData: false,
-        headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-        },
-        success: function(response) {
-            console.log("Data sent successfully!");
-            // Handle the success response from the backend
-        },
-        error: function(xhr, status, error) {
-            console.error("Error sending data: " + error);
-            // Handle the error response from the backend
-        }
-    });
-});
-
-            })
-            function checkFields() {
-    let allFieldsFilled = true;
-
-    // Check the Phone fields
-    $('#add-item-containerPhone input[type="tel"]').each(function() {
-      if ($(this).val() === '' || $(this).val() === 'Choose...') {
-        allFieldsFilled = false;
-        return false; // Exit the loop early if any field is empty
-      }
-    });
-
-    // Check the Email fields
-    $('#add-item-containerEmail input[type="email"]').each(function() {
-      if ($(this).val() === '' || $(this).val() === 'Choose...') {
-        allFieldsFilled = false;
-        return false; // Exit the loop early if any field is empty
-      }
-    });
-
-    // Enable or disable the "Next" button based on the validation result
-    $('#next').prop('disabled', !allFieldsFilled);
-  }
-  $('#add-item-containerPhone').on('input', 'input[type="tel"], input[type="email"]', checkFields);
-  $('#add-item-containerEmail').on('input', 'input[type="tel"], input[type="email"]', checkFields);
-
-  // Bind the checkFields function to input events
-//   $('input[type="tel"], input[type="email"]').on('input', checkFields);
-        // });
     </script>
 </body>
 
