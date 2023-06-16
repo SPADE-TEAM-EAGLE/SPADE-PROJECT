@@ -729,6 +729,49 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="succesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered succes-modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="succes-close">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body succes-modal">
+                    <div class="text-justify ps-2 border-model-line">
+                        <h2 class="modal-title d-flex align-items-center ps-1">
+                            <strong class="color-primary">Success!&nbsp;</strong>
+                            <i class="fi fi-rs-check-circle text-success"></i>
+
+                        </h2>
+                        <p class="ps-1 text-justify" id="succes-text">Tenant has been successfully created and linked to
+                            103A Unit with Property Name.</p>
+
+                    </div>
+                    <div class="d-flex align-items-center rounded-pill shadow-lg p-2 my-3">
+                        <div class="flex-grow-1 ms-3">
+                            <p class="fw-bolder link-text">Invite your Tenant to the Tenant Portal <a
+                                    href="#">https://spaderent.tenant103A.com/rix-rbcr-mei</a></p>
+
+                        </div>
+                        <div class="flex-shrink-0">
+                            <a href="javascript:void(0)" class="btn btn-primary btn-pill" id="send-email">Send
+                                Invite</a>
+                        </div>
+                    </div>
+                    <div class="mt-2"> <button type="button" class="btn btn-primary btn-pill mx-2" id="add_property_btn"
+                            data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal"><i
+                                class="fe fe-plus me-2"></i><strong>ADD NEW
+                                TENANT</strong></button></div>
+
+                </div>
+                <div class="modal-footer" style="border-top: 0">
+
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- MODAL EFFECTS -->
 
     <!-- MODAL EFFECTS -->
@@ -2040,7 +2083,9 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                       getData()
+                        console.log(1111)
+                        $("#succesModal").modal("show")
+                    //    getData()
                     },
                     error: function (xhr, status, error) {
                         // Handle the error response

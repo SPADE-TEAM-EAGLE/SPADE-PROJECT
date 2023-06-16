@@ -1480,7 +1480,7 @@
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
-                        <ul class="dropdown-menu" role="menu" style="">
+                        <ul class="dropdown-menu" role="menu" >
                             <li><a href="javascript:void(0)"><i class="fi fi-rs-eye me-2 text-primary"></i> Preview
                                     Invoice</a></li>
                             <li><a href="javascript:void(0)" class="save-invoice"><i
@@ -1665,7 +1665,7 @@
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
-                        <ul class="dropdown-menu" role="menu" style="">
+                        <ul class="dropdown-menu" role="menu" >
                             <li><a href="javascript:void(0)"><i class="fi fi-rs-eye me-2 text-primary"></i> Preview
                                     Invoice</a></li>
                             <li><a href="javascript:void(0)" class="save-invoice_update"><i
@@ -1732,16 +1732,11 @@
                             <strong class="color-primary">Congratulations!&nbsp;</strong>
                             <i class="fi fi-rs-check-circle text-success"></i>
                         </h2>
-                        <a href="javascript:void(0)" class="btn btn-outline-default btn-pill ms-1 my-2"
-                            style='background-color:#1467B0;color: white;'> <i class="fi fi-rs-pencil"></i> EDIT
-                            PROPERTY UNITS</a>
-                        <a class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal">
-                            <i class="fi fi-rs-plus-small" style="vertical-align: middle;"></i>Add Tenants
-                        </a>
-                        <p class="ms-2 mb-0 text-start">Your Property has been successfully added.</p>
-                        <p class="ms-2 text-start">Please add tenant to this property.</p>
+                        <p class="ms-2 mb-0 text-start">Your Invoice with INV-89900A was successfully</p>
+                        <p class="ms-2 text-start">sent to John Adams.</p>
                     </div>
-
+                    <a href="javascript:void(0)" class="btn btn-outline-default btn-pill ms-1 my-2"
+                    style='background-color:#1467B0;color: white;'><i class="fi fi-rs-plus-small" style="vertical-align: middle;"></i> Create New Invoice</a>
                 </div>
                 <div class="modal-footer" style="border-top: 0">
                 </div>
@@ -1983,7 +1978,7 @@
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
-                        <ul class="dropdown-menu" role="menu" style="">
+                        <ul class="dropdown-menu" role="menu" >
                             <li><a href="javascript:void(0)"><i class="fi fi-rs-eye me-2 text-primary"></i> Preview
                                     Invoice</a></li>
                             <li><a href="javascript:void(0)" class="save-invoice"><i
@@ -2533,8 +2528,7 @@
                                             <table class="table border text-nowrap text-md-nowrap mb-0">
                                                 <thead>
                                                     <tr>
-                                                        <th></th>
-                                                        <th></th>
+ 
                                                         <th>INVOICE NO</th>
                                                         <th>TENANT NAME</th>
                                                         <th>MEMO/DESCRIPTION</th>
@@ -3448,6 +3442,10 @@
 
     <script>
         $(document).ready(function () {
+            // $("#succesModal").modal("show")
+            $("#succes-close").click(()=>{
+                getData()
+            })
             $('input[name="invoice"],input[name="invoice_update"]').change(function () {
                 console.log($(this).val())
                 if ($(this).val() === 'Recurring Invoice') {
@@ -3647,8 +3645,9 @@
                         },
 
                         success: function (response) {
-                            // Handle the success response from the API
-                            console.log('API response:', response);
+                            $("#addModal").modal("hide")
+                            $("#succesModal").modal("show")
+                            
                         },
                         error: function (xhr, status, error) {
                             // Handle the error response from the API
@@ -3669,15 +3668,19 @@
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
-                    success: function ({ data, user }) {
-                        console.log(data)
-                        $("#user-name").text(user)
+                    success: function (response) {
+                        if(response.message == "No data found")
+                        {
+                            window.location = './new-tenant.html'
+                        }
+                        // console.log(data,user)
+                        $("#user-name").text(response.user)
                         $("#tenants").empty()
                         $("#tenants").append($('<option></option>').text("Choose..."));
-                        tenantData = data[0]
+                        tenantData = response.data[0]
                         // var tableBody = $('#table_body');
 
-                        data[0]?.forEach(function (tenant) {
+                        response.data[0]?.forEach(function (tenant) {
                             $("#tenants").append($('<option></option>').text(tenant.firstName + " " + tenant.lastName).val(tenant.tenantID));
                         })
                     },
@@ -3696,20 +3699,21 @@
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
-                    success: function ({ data }) {
-                        // console.log(data)
-                        // if(!data){
-                        //     window.location="./new-tenant.html"
-                        // }
-                        // console.log(data[0])
-                        invoiceData = data[0]
+                    success: function (response) {
+                        if(response.message == "No data found")
+                        {
+                            window.location = './new-invoice.html'
+                        }
+                        
+                        invoiceData = response.data[0]
+                        
 
                         var tableBody = $('#table_body');
                         tableBody.empty();
                         // console.log(data[0])
                         let tenantNames = []
 
-                        data[0]?.forEach(function (invoice) {
+                        response.data[0]?.forEach(function (invoice) {
 
 
                             var invoiceNumber = '<td class="invoice-id" style="font-weight: 600;">' + invoice.invoiceID + '</td>';
@@ -4160,7 +4164,6 @@ function updateTotal() {
                 if(data.invoiceType==="One Time Invoice"){
                     $("#invoice_update").attr('checked', 'checked')
                 }else{
-
                     $("#recurring_update").attr('checked', 'checked')
                     $("#collapse1_update").addClass("show")
                     $("#startDate_update").val(data.startDate)
@@ -4308,6 +4311,8 @@ function updateTotal() {
                         },
 
                         success: function (response) {
+                            $("#myModal_edit").modal("hide")
+                            $("#succesModal").modal("show")
                             getData()
                         },
                         error: function (xhr, status, error) {

@@ -917,9 +917,7 @@
                                     <div class="col-md-4">
                                         <label for="inputPassword4" class="form-label fw-bold">Zip Code <spnan
                                                 class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="zip" pattern="[0-9]{5}"
-                                            placeholder="A valid 5-digit zip code" maxlength="5"
-                                            oninput="this.value = this.value.replace(/[^0-9]/g, '')" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your zip code" data-bs-container="#addModal">
+                                                <input class="form-control form" type="text" id="zip" name="zip" pattern="[0-9]{5}" placeholder="A valid 5-digit zip code" maxlength="5" minlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '')" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Zip" data-bs-container="#addModal" required>
                                         <span class="text-danger d-none">Zip code is required!</span>
                                     </div>
                                 </form>
@@ -946,7 +944,7 @@
                                                 class="text-danger"> *</span></label>
                                         <select id="property" class="form-select" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select your property" data-bs-container="#addModal">
                                             <option selected>Choose...</option>
-                                            <option>...</option>
+                                            
                                         </select>
                                         <span class="text-danger d-none">Property is required!</span>
                                     </div>
@@ -955,7 +953,7 @@
                                                 class="text-danger"> *</span></label>
                                         <select id="unit" class="form-select" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select your property units" data-bs-container="#addModal">
                                             <option selected>Choose...</option>
-                                            <option>...</option>
+                                            
                                         </select>
                                         <span class="text-danger d-none">Property units is required!</span>
                                     </div>
@@ -2549,6 +2547,9 @@
         $(document).ready(function () {
             // $("#preloader").fadeIn("fast");
             // $("#succesModal").modal("show")
+            $("#succes-close").click(()=>{
+                getData()
+            })
             let tenantID;
             $("#send-email").click(() => {
                 $("#succesModal").modal("hide")
@@ -2624,7 +2625,7 @@
                     var propertySelect = $('#property');
                     propertySelect.empty(); // Clear existing options
                     propertySelect.append($('<option></option>')
-                        .text("Choose..")
+                        .text("Choose...")
                     )
                     properties.forEach(function (property) {
                         var option = $('<option></option>')
@@ -2644,9 +2645,17 @@
 
                         // Populate Select Property Unit dropdown
                         var propertyUnitSelect = $('#unit');
-                        propertyUnitSelect.empty(); // Clear existing options
+                         // Clear existing options
+                         propertyUnitSelect.empty()
+                        propertyUnitSelect.append($('<option></option>')
+                                .text("Choose..."))
+                                if(selectedProperty.vacantUnits.length===0){
+                                    // propertyUnitSelect.attr("disabled","disabled")
+                                    propertyUnitSelect.prop("disabled", true);
+                                }else{
+                                    propertyUnitSelect.prop("disabled", false);
 
-                        selectedProperty.vacantUnits.forEach(function (unit) {
+                                    selectedProperty.vacantUnits.forEach(function (unit) {
                             console.log(unit.unitNumber)
 
                             var option = $('<option></option>')
@@ -2654,6 +2663,8 @@
                                 .val(unit.id);
                             propertyUnitSelect.append(option);
                         });
+                                }
+
                     });
                 },
                 error: function (xhr, status, error) {
@@ -3019,81 +3030,88 @@
             $("#accordion-button2").on("click", () => { checkFieldsFilled("accordion-item2") })
             $("#accordion-button3").on("click", () => { checkFieldsFilled("accordion-item3") })
             function areAllFieldsFilled() {
-                var accordion1Fields = $('#accordion-item1 input[required], #accordion-item1 select[required]');
-                var accordion2Fields = $('#accordion-item2 input[required], #accordion-item2 select[required]');
-                var accordion3Fields = $('#accordion-item3 input[required]');
+    var accordion1Fields = $('#accordion-item1 input[required], #accordion-item1 select[required]');
+    var accordion2Fields = $('#accordion-item2 input[required], #accordion-item2 select[required]');
+    var accordion3Fields = $('#accordion-item3 input[required]');
+    var unitField = $('#unit');
+    var allFieldsFilled =
+        accordion1Fields.filter(function () {
+            return $(this).val() === '' || $(this).val() === 'Choose...';
+        }).length === 0 &&
+        accordion2Fields.filter(function () {
+            return $(this).val() === '' || $(this).val() === 'Choose...' || unitField.prop("disabled");
+        }).length === 0 &&
+        accordion3Fields.filter(function () {
+            return $(this).val() === '';
+        }).length === 0;
 
-                var allFieldsFilled =
-                    accordion1Fields.filter(function () {
-                        return $(this).val() === '' || $(this).val() === 'Choose...';
-                    }).length === 0 &&
-                    accordion2Fields.filter(function () {
-                        return $(this).val() === '' || $(this).val() === 'Choose...';
-                    }).length === 0 &&
-                    accordion3Fields.filter(function () {
-                        return $(this).val() === '';
-                    }).length === 0;
-
-                return allFieldsFilled;
-            }
+    // Zip code length validation
+    var zipField = $('#zip');
+    if (zipField.val().length !== 5) {
+        allFieldsFilled = false;
+    }
+    
+        if(unitField.prop("disabled")){
+            allFieldsFilled = false;
+        }
+    return allFieldsFilled;
+}
 
             // Function to enable or disable buttons based on field status
-            function updateButtonStatus() {
-                var accordion1Fields = $('#accordion-item1 input[required], #accordion-item1 select[required]');
-                var accordion2Fields = $('#accordion-item2 input[required], #accordion-item2 select[required]');
-                var accordion3Fields = $('#accordion-item3 input[required]');
-                // var imageInput = $('#fileInput');
-                // console.log(accordion1Fields)
-                // console.log(accordion2Fields)
-                // console.log(accordion3Fields)
-                var isAccordion1FieldsEmpty = accordion1Fields.filter(function () {
-                    return $(this).val() !== '' || $(this).val() === 'Choose...';
-                }).length === 0;
+            // Function to enable or disable buttons based on field status
+function updateButtonStatus() {
+    var accordion1Fields = $('#accordion-item1 input[required], #accordion-item1 select[required]');
+    var accordion2Fields = $('#accordion-item2 input[required], #accordion-item2 select[required]');
+    var accordion3Fields = $('#accordion-item3 input[required]');
+    var isAccordion1FieldsEmpty = accordion1Fields.filter(function () {
+        return $(this).val() !== '' || $(this).val() === 'Choose...';
+    }).length === 0;
+    var isAccordion2FieldsEmpty = accordion2Fields.filter(function () {
+        return $(this).val() !== '' || $(this).val() === 'Choose...';
+    }).length === 0;
+    var isAccordion3FieldsEmpty = accordion3Fields.filter(function () {
+        return $(this).val() !== '';
+    }).length === 0;
 
-                var isAccordion2FieldsEmpty = accordion2Fields.filter(function () {
-                    return $(this).val() !== '' || $(this).val() === 'Choose...';
-                }).length === 0;
-                var isAccordion3FieldsEmpty = accordion3Fields.filter(function () {
-                    console.log($(this).val())
-                    return $(this).val() !== '' || $(this).val() === 'Choose...';
-                }).length === 0;
+    // Enable or disable the buttons based on the fields' status
+    if (!isAccordion1FieldsEmpty || !isAccordion2FieldsEmpty || !isAccordion3FieldsEmpty) {
+        $('#draft').removeAttr('disabled');
+    } else {
+        $('#draft').attr('disabled', 'disabled');
+    }
 
-                // var isImageInputEmpty = imageInput.get(0).files.length === 0;
+    var allFieldsFilled = areAllFieldsFilled();
 
-                // Enable or disable the buttons based on the fields' status
-                if (!isAccordion1FieldsEmpty || !isAccordion2FieldsEmpty || !isAccordion3FieldsEmpty) {
-                    $('#draft').removeAttr('disabled');
-                } else {
-                    $('#draft').attr('disabled', 'disabled');
-                }
+    // Enable or disable the buttons based on the fields' status
+    if (allFieldsFilled) {
+        $('#next').removeClass("disabled").removeAttr("disabled");
+    } else {
+        $('#next').addClass("disabled").attr("disabled", "disabled");
+    }
+}
 
-                var allFieldsFilled = areAllFieldsFilled();
+// Call the updateButtonStatus function when any field in the accordions is changed
+$('#accordion-item1 input[required], #accordion-item1 select[required], #accordion-item2 input[required], #accordion-item2 select[required], #accordion-item3 input[required], #accordion-item3 select[required]').on('input change', function () {
+    var $field = $(this);
+    var $errorMessage = $field.next('.text-danger');
+    if ($field.attr("id") === "zip") {
+        if ($field.val().length !== 5) {
+            $field.addClass('border-danger');
+            $errorMessage.removeClass('d-none');
+        } else {
+            $field.removeClass('border-danger');
+            $errorMessage.addClass('d-none');
+        }
+    } else if ($field.val() === '' || $field.val() === 'Choose...') {
+        $field.addClass('border-danger');
+        $errorMessage.removeClass('d-none');
+    } else {
+        $field.removeClass('border-danger');
+        $errorMessage.addClass('d-none');
+    }
+    updateButtonStatus();
+});
 
-                // Enable or disable the buttons based on the fields' status
-                if (allFieldsFilled) {
-                    $('#next').removeClass("disabled");
-                    $('#next').removeAttr("disabled");
-                } else {
-                    $('#next').addClass("disabled");
-                    //   $('#next').addAttr("disabled","disabled");
-
-                }
-            }
-
-            // Call the updateButtonStatus function when any field in the accordions is changed
-            $('#accordion-item1 input[required], #accordion-item1 select[required], #accordion-item2 input[required], #accordion-item2 select[required], #accordion-item3 input[required], #accordion-item3 select[required]').on('input change', function () {
-                var $field = $(this);
-                var $errorMessage = $field.next('.text-danger');
-
-                if ($field.val() === '' || $field.val() === 'Choose...') {
-                    $field.addClass('border-danger');
-                    $errorMessage.removeClass('d-none');
-                } else {
-                    $field.removeClass('border-danger');
-                    $errorMessage.addClass('d-none');
-                }
-                updateButtonStatus();
-            });
             function resetAccordions(update) {
                 // Reset all accordions
                 setEditable()
@@ -3125,6 +3143,16 @@
                     $('#next').addClass("disabled");
                     $('#draft').attr("disabled", "disabled");
                 });
+                $('.row-multiple').each(function () {
+                        var date = $(this).find('.input-date')
+                        var amount = $(this).find('.input-amount')
+                        date.prop('required', false)
+                        amount.prop('required', false)
+                    })
+                $('#baseRent').prop('required', false);
+                    $('#tripleNet').prop('required', false);
+                    $('#leaseStart').prop('required', false);
+                    $('#leaseEnd').prop('required', false);
                 if(update){
                     $("#collapse1,#collapse2").collapse('hide')
                     $('.row-multiple').each(function() {
@@ -3589,10 +3617,11 @@
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function (response) {
-                    console.log(response)
-                    
-                    if (response.message=="No data found") {
+                success: function (response){
+                    // tenantData=data[0]
+                    // console.log(response)
+                    if (response.message == "No data found") {
+                        console.log("tenantData")
                         window.location = "./new-tenant.html"
                     }
                     tenantData=response.data[0]
