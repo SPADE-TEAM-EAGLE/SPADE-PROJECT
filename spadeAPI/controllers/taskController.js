@@ -19,7 +19,9 @@ const {
   getLandlordTenant,
   Alltasks,
   taskByIDQuery,
-  updateTasksQuery
+  updateTasksQuery,
+  getVendors
+  // addVendor
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -35,35 +37,39 @@ exports.addVendors = async (req, res) => {
     businessName,
     streetAddress,
     city,
-    state,
-    zipCode,
-    workNumber,
-    mobileNumber,
+    status,
+    zip,
+    workPhone,
+    phone,
     email,
     categoryID,
   } = req.body;
-console.log(req)
+const {userId}=req.user
+// console.log(userId)
   try {
     const vendorCheckResult = await queryRunner(
-      selectQuery("vendor", "mobileNumber", "email"),
-      [mobileNumber, email]
+      selectQuery("vendor", "email","landlordID"),
+      [email,userId]
     );
 
+    
     if (vendorCheckResult[0].length > 0) {
       return res.send("Vendor already exists");
     } else {
+      // console.log(userId)
       const vendorResult = await queryRunner(addVendor, [
         firstName,
         lastName,
         businessName,
         streetAddress,
         city,
-        state,
-        zipCode,
-        workNumber,
-        mobileNumber,
+        status,
+        zip,
+        workPhone,
+        phone,
         email,
         categoryID,
+        userId
       ]);
       if (vendorResult.affectedRows === 0) {
         return res.status(400).send("Error1");
@@ -83,16 +89,16 @@ console.log(req)
 
 //  #############################  All VENDOR Start HERE ##################################################
 exports.getAllVendors = async (req, res) => {
-  const { userId } = req.user;
+  const { userId,userName } = req.user;
   try {
     const getVendorAPI = await queryRunner(
-      selectQuery("vendor", "landlordID"),
-      [userId]
+      getVendors,[userId]
     );
-
+      
     if (getVendorAPI[0].length > 0) {
       res.status(200).json({
         data: getVendorAPI,
+        name:userName,
         message: "All vendor retrieved successfully",
       });
     } else {
