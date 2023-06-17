@@ -369,14 +369,30 @@ exports.taskByID = async (req, res) => {
 
 //  ############################# Task By ID End ############################################################
 
+//  ############################# Get vendor category End ############################################################
+exports.getVendorCategory = async (req, res) => {
+  try {
+    const categoryResult = await queryRunner(selectQuery("vendorcategory")); 
+    if (categoryResult[0].length > 0) {
+      res.status(200).json({
+        data: categoryResult[0],
+        message: "ALL vendor category",
+      });
+    } else {
+      res.status(400).json({
+        message: "No vendor category data found",
+      });
+    }
+  } catch (error) {
+    res.send("Error Get category ");
+    console.log(error);
+  }
+};
+//  ############################# Get vendor category End ############################################################
 
 
 
-
-
-
-
-//  #############################  ADD TASK Start HERE ##################################################
+//  #############################  Update TASK Start HERE ##################################################
 exports.addTasks = async (req, res) => {
   const {
     taskName,
@@ -497,4 +513,4 @@ exports.addTasks = async (req, res) => {
     console.log(error);
   }
 }; 
-//  #############################  ADD TASK ENDS HERE ##################################################
+//  #############################  Update TASK ENDS HERE ##################################################
