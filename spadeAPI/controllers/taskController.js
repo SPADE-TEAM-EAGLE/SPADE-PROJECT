@@ -19,7 +19,8 @@ const {
   getLandlordTenant,
   Alltasks,
   taskByIDQuery,
-  updateTasksQuery
+  updateTasksQuery,
+  selectVendorCategory
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -390,26 +391,26 @@ exports.getVendorCategory = async (req, res) => {
 
 //  #############################  Task Assign to Start HERE ##################################################
 
-exports.getVendorAssignTo = async (req, res) => {
-  try {
-    const {userId}=req.user
-    // const {userId}=req.body
-    const vendorResult = await queryRunner(selectQuery("vendor", "LandlordID"),[userId]); 
-    if (vendorResult[0].length > 0) {
-      res.status(200).json({
-        data: vendorResult[0],
-        message: "ALL vendor Here",
-      });
-    } else {
-      res.status(400).json({
-        message: "No vendor data found",
-      });
-    }
-  } catch (error) {
-    res.send("Error Get vendor list ");
-    console.log(error);
-  }
-};
+// exports.getVendorAssignTo = async (req, res) => {
+//   try {
+//     const {userId}=req.user
+//     // const {userId}=req.body
+//     const vendorResult = await queryRunner(selectQuery("vendor", "LandlordID"),[userId]); 
+//     if (vendorResult[0].length > 0) {
+//       res.status(200).json({
+//         data: vendorResult[0],
+//         message: "ALL vendor Here",
+//       });
+//     } else {
+//       res.status(400).json({
+//         message: "No vendor data found",
+//       });
+//     }
+//   } catch (error) {
+//     res.send("Error Get vendor list ");
+//     console.log(error);
+//   }
+// };
 //  #############################  Task Assign to ENDS HERE ##################################################
 
 
