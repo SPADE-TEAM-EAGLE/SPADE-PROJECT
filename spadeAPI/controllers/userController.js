@@ -622,16 +622,7 @@ exports.propertyUpdate = async (req, res) => {
         message: "No Property",
       });
     }
-
-    // This part of the code will not be reached due to the previous return statements.
-    // res.status(200).json({
-    //   message: "Property Updated successfully",
-    // });
-    // } else {
-    //   return res.status(400).json({
-    //     message: "No data found",
-    //   });
-    // }
+ 
   } catch (error) {
     console.log(error);
     return res.send("Error from Updating Property");

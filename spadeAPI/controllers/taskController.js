@@ -393,124 +393,208 @@ exports.getVendorCategory = async (req, res) => {
 
 
 //  #############################  Update TASK Start HERE ##################################################
-exports.addTasks = async (req, res) => {
-  const {
-    taskName,
-    vendorID,
-    tenantID,
-    dueDate,
-    status,
-    priority,
-    notes,
-    notifyTenant,
-    notifyVendor 
-  } = req.body;
-  // const { userId,  } = req.body;
-  const { userId, userName } = req.user;
-  const currentDate = new Date();
-  try {
+// exports.addTasks = async (req, res) => {
+//   const {
+//     taskID,
+//     taskName,
+//     vendorID,
+//     tenantID,
+//     dueDate,
+//     status,
+//     priority,
+//     notes,
+//     taskImagesExist,
+//     notifyTenant,
+//     notifyVendor 
+//   } = req.body;
+//   // const { userId,  } = req.body;
+//   const { userId, userName } = req.user;
+//   const currentDate = new Date();
+//   try {
     
-      const TasksResult = await queryRunner(updateTasksQuery, [
-        taskName,
-        tenantID,
-        dueDate,
-        status,
-        priority,
-        notes,
-        notifyTenant,
-        notifyVendor, 
-        currentDate,
-        userName,
-      ]);
-      if (TasksResult.affectedRows === 0) {
-        return res.status(400).send("Error1");
-      } 
-        if(req.files){ 
-        const fileNames = req.files.map((file) => file.filename);
-        for (let i = 0; i < fileNames.length; i++) {
-          const taskImages = fileNames[i];
-          const taskImageResult = await queryRunner(insertInTaskImage, [
-            tasksID,
-            taskImages,
-          ]);
-          if (taskImageResult.affectedRows === 0) {
-            return res.send("Error2");
-          }
-        }
-      }
-      //   //  add vendor
-        for (let i = 0; i < vendorID.length; i++) {
-          const Vendorid = vendorID[i];
-          const vendorResults = await queryRunner(addVendorList, [
-            tasksID,
-            Vendorid,
-          ]);
-          if (vendorResults.affectedRows === 0) {
-            return res.send("Error2");
-          }
-        }
-      //   //  add vendor
-        const tenantLandlordResult = await queryRunner(getLandlordTenant, [userId,tenantID]);
-        let vendorEmailarr = [];
-        let vendorNamearr = [];
-        for(let i = 0; i < vendorID.length; i++){
-          const vendorCheckResult = await queryRunner( selectQuery("vendor", "id"), [vendorID[i]] );
-          if(vendorCheckResult.length > 0){
-            let vendorName = vendorCheckResult[0][0].firstName + " " + vendorCheckResult[0][0].lastName;
-            let vendorEmail = vendorCheckResult[0][0].email;
-            vendorNamearr.push(vendorName);
-            vendorEmailarr.push(vendorEmail);
+//       const TasksResult = await queryRunner(updateTasksQuery, [
+//         taskName,
+//         tenantID,
+//         dueDate,
+//         status,
+//         priority,
+//         notes,
+//         taskImagesExist,
+//         notifyTenant,
+//         notifyVendor, 
+//         currentDate,
+//         userName,
+//         taskID
+//       ]);
+//       if (TasksResult.affectedRows === 0) {
+//         return res.status(400).send("Error1");
+//       } 
+ 
+//       const taskCheckResult = await queryRunner(
+//         selectQuery("taskimages", "taskID"),
+//         [taskID]
+//       );
 
-          }else{
-            return res.send("Vendor not found");
-          }
-        }
-        const tenantName = tenantLandlordResult[0][0].firstName + " " + tenantLandlordResult[0][0].lastName; 
-        const tenantEmail = tenantLandlordResult[0][0].email;
-        const CompanyName = tenantLandlordResult[0][0].companyName;
-        const landlordName = tenantLandlordResult[0][0].FirstName + " " + tenantLandlordResult[0][0].LastName;
-        const landlordContact = tenantLandlordResult[0][0].Phone;
-        const landlordEmail = tenantLandlordResult[0][0].Email;
 
-        const vendorNames = vendorNamearr.toString();
+//       if (taskCheckResult.length > 0) {
+//         taskimages = taskCheckResult[0].map((image) => image.Image);
+//         let existingImg = taskImagesExist.split(",");
+//         const imagesToDelete = taskimages.filter(
+//           (element) => !existingImg.includes(element)
+//         );
 
-        if (notifyTenant.toLowerCase() === "yes") {
-          await taskSendMail(
-            tenantName,
-            tenantEmail,
-            "Property Maintenance: " + taskName,
-            dueDate,
-            landlordName,
-            taskName,
-            vendorNames,
-            priority,
-            CompanyName,
-            landlordContact
-          );
-        }
-        if (notifyVendor.toLowerCase() === "yes") {
-          console.log("vendor1");
-        for(let i = 0; i < vendorEmailarr.length > 0; i++){
-          console.log("vendor2");
-          await taskSendMail(
-            tenantName,
-            vendorEmailarr[i],
-            "Property Maintenance: " + taskName,
-            dueDate,
-            landlordName,
-            taskName,
-            vendorNames,
-            priority,
-            CompanyName,
-            landlordContact
-          );
-        }
-        console.log("vendor3");
-        }
+//         // Combine the common elements with array2
 
+//         imageToDelete(imagesToDelete);
+//         let taskDeleteresult = [{ affectedRows: 0 }];
+//         // delete images Data into database
+//         if (imagesToDelete.length > 0) {
+//           for (let i = 0; i < imagesToDelete.length; i++) {
+//             taskDeleteresult = await queryRunner(
+//               deleteQuery("taskimages", "taskImages"),
+//               [imagesToDelete[i]]
+//             );
+//             // console.log(taskDeleteresult)
+//           }
+//         }
+
+//         // console.log(`step : 4 delete previous images data into database propertyid = ${id}`);
+//         // console.log(taskDeleteresult)
+//         // if (taskDeleteresult[0].affectedRows > 0) {
+
+//         const fileNames = req.files.map((file) => file.filename);
+//         existingImg = [...fileNames];
+//         // using loop to send new images data into database
+//         for (let i = 0; i < existingImg.length; i++) {
+//           const img = existingImg[i];
+//           const propertyImageResult = await queryRunner(insertInTaskImage, [
+//             taskID,
+//             img,
+//           ]);
+//           if (propertyImageResult.affectedRows === 0) {
+//             return res.send("Error2");
+//           }
+//         }
+
+      
+//       //   //  add vendor
+//       const taskVendorDeleteResult = await queryRunner(
+//         deleteQuery("taskassignto", "taskId"),
+//         [taskID]
+//       );
+//       for (let i = 0; i < vendorID.length; i++) {
+//         const Vendorid = vendorID[i];
+//         const vendorResults = await queryRunner(addVendorList, [
+//           taskID,
+//           Vendorid,
+//         ]);
+//         if (vendorResults.affectedRows === 0) {
+//           return res.send("Error2");
+//         }
+//       }
+//     //   //  add vendor
+
+
+
+// // Email Send
+
+// const tenantLandlordResult = await queryRunner(getLandlordTenant, [userId,tenantID]);
+// let vendorEmailarr = [];
+// let vendorNamearr = [];
+// for(let i = 0; i < vendorID.length; i++){
+//   const vendorCheckResult = await queryRunner( selectQuery("vendor", "id"), [vendorID[i]] );
+//   if(vendorCheckResult.length > 0){
+//     let vendorName = vendorCheckResult[0][0].firstName + " " + vendorCheckResult[0][0].lastName;
+//     let vendorEmail = vendorCheckResult[0][0].email;
+//     vendorNamearr.push(vendorName);
+//     vendorEmailarr.push(vendorEmail);
+
+//   }else{
+//     return res.send("Vendor not found");
+//   }
+// }
+// const tenantName = tenantLandlordResult[0][0].firstName + " " + tenantLandlordResult[0][0].lastName; 
+// const tenantEmail = tenantLandlordResult[0][0].email;
+// const CompanyName = tenantLandlordResult[0][0].companyName;
+// const landlordName = tenantLandlordResult[0][0].FirstName + " " + tenantLandlordResult[0][0].LastName;
+// const landlordContact = tenantLandlordResult[0][0].Phone;
+// const landlordEmail = tenantLandlordResult[0][0].Email;
+
+// const vendorNames = vendorNamearr.toString();
+
+// if (notifyTenant.toLowerCase() === "yes") {
+//   await taskSendMail(
+//     tenantName,
+//     tenantEmail,
+//     "Property Maintenance: " + taskName,
+//     dueDate,
+//     landlordName,
+//     taskName,
+//     vendorNames,
+//     priority,
+//     CompanyName,
+//     landlordContact
+//   );
+// }
+// if (notifyVendor.toLowerCase() === "yes") {
+//   console.log("vendor1");
+// for(let i = 0; i < vendorEmailarr.length > 0; i++){
+//   console.log("vendor2");
+//   await taskSendMail(
+//     tenantName,
+//     vendorEmailarr[i],
+//     "Property Maintenance: " + taskName,
+//     dueDate,
+//     landlordName,
+//     taskName,
+//     vendorNames,
+//     priority,
+//     CompanyName,
+//     landlordContact
+//   );
+// }
+// }
+// // Email Send
+
+
+//       } else {
+//         return res.status(400).json({
+//           message: "No task Image Data Found",
+//         });
+//       }
+ 
+ 
+
+//   } catch (error) {
+//     res.status(400).send(error);
+//     console.log(error);
+//   }
+// }; 
+//  #############################  Update TASK ENDS HERE ##################################################
+
+
+//  #############################  Task Assign to Start HERE ##################################################
+
+exports.getVendorAssignTo = async (req, res) => {
+  try {
+    const {userId}=req.user
+    // const {userId}=req.body
+    const vendorResult = await queryRunner(selectQuery("vendor", "LandlordID"),[userId]); 
+    if (vendorResult[0].length > 0) {
+      res.status(200).json({
+        data: vendorResult[0],
+        message: "ALL vendor Here",
+      });
+    } else {
+      res.status(400).json({
+        message: "No vendor data found",
+      });
+    }
   } catch (error) {
-    res.status(400).send(error);
+    res.send("Error Get vendor list ");
     console.log(error);
   }
-}; 
-//  #############################  Update TASK ENDS HERE ##################################################
+};
+//  #############################  Task Assign to ENDS HERE ##################################################
+
+

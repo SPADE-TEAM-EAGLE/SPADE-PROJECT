@@ -85,4 +85,5 @@ router.get("/taskByID", taskController.taskByID);
 router.put("/updateTenants", verifyToken,tenantController.updateTenants);
 router.get("/getStates", userController.getStates);
 router.get("/getVendorCategory" ,taskController.getVendorCategory);
+router.get("/getVendorAssignTo" ,taskController.getVendorAssignTo);
 module.exports = router;
