@@ -9,12 +9,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Sash – Bootstrap 5  Admin & Dashboard Template">
     <meta name="author" content="Spruko Technologies Private Limited">
-    <meta name="keywords"
-        content="admin,admin dashboard,admin panel,admin template,bootstrap,clean,dashboard,flat,jquery,modern,responsive,premium admin templates,responsive admin,ui,ui kit.">
+    <meta name="keywords" content="admin,admin dashboard,admin panel,admin template,bootstrap,clean,dashboard,flat,jquery,modern,responsive,premium admin templates,responsive admin,ui,ui kit.">
 
     <!-- FAVICON -->
-    <link rel='stylesheet'
-        href='https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css'>
     <link rel="shortcut icon" type="image/x-icon" href="../assets/images/brand/favicon.ico" />
 
     <!-- TITLE -->
@@ -34,18 +32,21 @@
     <link rel="stylesheet" href="fancy_fileupload.css">
     <!-- COLOR SKIN CSS -->
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="../assets/colors/color1.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/dataTables.bootstrap.min.css" integrity="sha512-BMbq2It2D3J17/C7aRklzOODG1IQ3+MHw3ifzBHMBwGO/0yUqYmsStgBjI0z5EYlaDEFnvYV7gNYdD3vFLRKsA==" crossorigin="anonymous"
+        referrerpolicy="no-referrer" />
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
         .custom-file-input::-webkit-file-upload-button {
             visibility: hidden;
         }
-
+        
         .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar {
             width: 7px;
             /* Width of the scrollbar */
         }
-
+        
         .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb {
             background-color: rgb(136, 136, 136, 0.2);
             /* Color of the scrollbar thumb */
@@ -53,16 +54,20 @@
             transition: all 1ms;
             /* Rounded corners for the thumb */
         }
-
+        
         .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb:hover {
             background-color: rgb(136, 136, 136, 0.5);
             /* Color of the scrollbar thumb on hover */
         }
-
+        
+        div.dataTables_wrapper div.dataTables_length label {
+            margin: 20px;
+        }
+        
         .iti {
             margin-bottom: 0 !important;
         }
-
+        
         .custom-file-input::before {
             content: 'Select Files';
             display: inline-block;
@@ -74,11 +79,10 @@
             cursor: pointer;
             border-radius: 4px;
         }
-
+        
         .custom-file-input:hover::before {
             background: #0069d9;
         }
-
         /* .fi-rs-calendar {
     position: absolute;
     top: 78%;
@@ -89,20 +93,20 @@
     font-size: 1.2rem;
     color: #1467B0;
 } */
-
+        
         .dark-mode .link-text {
             color: #000;
         }
-
+        
         .custom-file-input:active::before {
             background: #0062cc;
         }
-
+        
         .custom-file-input.selected::before {
             content: 'Change Files';
             background: #28a745;
         }
-
+        
         input[type="date"]::-webkit-calendar-picker-indicator {
             /* display: none; */
             background-size: cover;
@@ -110,31 +114,31 @@
             font-size: 1.2rem;
             color: #1467B0;
         }
-
+        
         .dark-mode .create-new-link {
             background: transparent !important;
             border: 3px solid #1467B0 !important;
             color: white !important;
             border-radius: 50px !important;
         }
-
+        
         .create-new-link {
             background: transparent !important;
             border: 3px solid #1467B0 !important;
             color: black;
             border-radius: 50px !important;
         }
-
+        
         .selected-files {
             margin-top: 10px;
         }
-
+        
         .del-btn {
             position: absolute;
             right: 10px;
             top: 50%;
         }
-
+        
         .selected-files span {
             display: inline-block;
             margin-right: 5px;
@@ -143,7 +147,7 @@
             color: #333;
             border-radius: 4px;
         }
-
+        
         .dark-mode .selected-files span {
             display: inline-block;
             margin-right: 0;
@@ -152,11 +156,11 @@
             color: white;
             border-radius: 4px;
         }
-
+        
         .custom-file-input {
             visibility: hidden;
         }
-
+        
         .custom-file-label {
             cursor: pointer;
             display: flex;
@@ -166,7 +170,7 @@
             padding: 6px 12px;
             background-color: #fff;
         }
-
+        
         .dark-mode .custom-file-label {
             cursor: pointer;
             display: flex;
@@ -176,11 +180,11 @@
             padding: 6px 12px;
             background-color: transparent;
         }
-
+        
         .dark-mode .btn-close {
             color: white;
         }
-
+        
         .dark-mode .iti input[type=tel],
         .dark-mode .iti input[type=text] {
             border-color: rgba(255, 255, 255, 0.1);
@@ -188,73 +192,72 @@
             border-right-color: rgba(255, 255, 255, 0.1);
             color: #dedefd;
         }
-
+        
         .custom-file-label i {
             margin-bottom: 5px;
             font-size: 3rem;
             color: #1467B0;
         }
-
+        
         .custom-file-text {
             text-align: center;
             line-height: 1.2;
             margin-top: 5px;
         }
-
+        
         .custom-file-text span {
             display: block;
             font-size: 14px;
         }
-
+        
         .remove-file {
             cursor: pointer;
         }
-
+        
         .border {
             border: 0px solid #e9edf4 !important;
             padding: 0.75rem;
             vertical-align: top;
             border: 1px solid #e9edf4;
         }
-
         /* /* input:focus {
             border: 3px solid #555 !important;
         } */
-
+        
         */ .panel-body {
             padding: 0px;
         }
-
+        
         .accordion-item:first-of-type {
             border-bottom-left-radius: 0.25rem;
             border-bottom-right-radius: 0.25rem;
             box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
         }
-
+        
         .accordion-item:last-of-type {
             border-top-right-radius: 0.25rem;
             border-top-left-radius: 0.25rem;
             box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
         }
-
+        
         .table-primary th {
             font-weight: 600 !important;
             vertical-align: middle !important;
         }
-
+        
         .border-model-line {
             border-top-left-radius: 3px;
             border-bottom-left-radius: 3px;
             border-top-right-radius: 3px !important;
             border-bottom-right-radius: 3px !important;
         }
-
+        
         .file-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
             grid-gap: 10px;
         }
-
+        
         .selected-file {
             display: flex;
             flex-direction: column;
@@ -265,33 +268,32 @@
             border: 1px solid #ccc;
             border-radius: 5px;
         }
-
+        
         .file-preview {
             width: 80px;
             height: 80px;
             object-fit: cover;
             border-radius: 5px;
         }
-
+        
         .file-details {
             margin-top: 5px;
             font-size: 12px;
         }
-
+        
         .table td {
             vertical-align: middle !important;
         }
-
         /* .card-header {
         padding: 0.5rem 1rem;
     } */
-
+        
         .modal-footer .button-left {
             background-color: #1F1F1F;
             margin: 0rem 1rem;
             color: white;
         }
-
+        
         .modal-footer button {
             border-radius: 2.75rem;
             padding: 4px 30px;
@@ -305,94 +307,93 @@
             letter-spacing: 0.0145455em;
             /* font-size: 0.938rem; */
         }
-
+        
         .modal-footer .button {
             font-size: 0.938rem;
         }
-
+        
         .accordion-button::after {
             content: "";
             display: inline-block;
             /* Replace with the path to your default chevron image */
         }
-
+        
         .chevron,
         .tick,
         .cross {
             position: absolute;
             right: 15px;
         }
-
+        
         .tick {
             color: green;
             font-weight: bolder
         }
-
+        
         .cross {
             color: red;
             font-weight: bolder
         }
-
+        
         .accordion-button .chevron {
             transition: transform 0.3s;
             /* Transition for smooth animation */
         }
-
+        
         .accordion-button[aria-expanded="true"] .chevron {
             transform: rotate(-180deg);
             /* Rotate the chevron when accordion is open */
         }
-
+        
         .table tbody img {
             width: 40px;
             border: transparent;
             border-radius: 5px;
             height: 40px;
         }
-
+        
         .rounded-pill-Single-Family {
             color: #4A4AFF !important;
             background: #E6E6F2 !important;
             font-weight: bold;
         }
-
+        
         .rounded-pill-Multi-Family {
             color: #0BAAB8 !important;
             background: #C8F3F7 !important;
             font-weight: bold;
         }
-
+        
         .succes-modal-dialog {
             max-width: 544px;
             margin: 1.75rem auto;
         }
-
+        
         .succes-modal-dialog .shadow-lg {
             background-color: white;
         }
-
+        
         .rounded-pill-Multi-Commercial {
             background: #FFF9E5 !important;
             color: #F5CA38 !important;
             font-weight: bold;
         }
-
+        
         .table-primary {
             background: #1467B014;
         }
-
+        
         .selected-file {
             position: relative;
         }
-
+        
         .file-preview {
             width: 100%;
         }
-
+        
         .file-details {
             padding: 10px;
         }
-
         /* .delete-file {
             position: absolute;
             top: -1px;
@@ -401,26 +402,26 @@
             font-size: 11px;
             color: #000;
         } */
-
+        
         .btn-group>.btn-group:not(:last-child)>.btn,
         .btn-group>.btn:not(:last-child):not(.dropdown-toggle) {
             border-top-right-radius: 5px;
             border-bottom-right-radius: 5px;
         }
-
+        
         .color-primary {
             color: #1467B0;
         }
-
+        
         .border-model-line {
             border-left: 5px solid #1467B0;
         }
-
+        
         .accordion-item:first-of-type .accordion-button {
             border-top-right-radius: calc(0.5rem - 1px);
             border-top-left-radius: calc(0.5rem - 1px);
         }
-
+        
         .selected-files span {
             display: inline-block;
             margin-right: 0px;
@@ -429,7 +430,6 @@
             color: #333;
             /* border-radius: 4px; */
         }
-
         /* .delete-file {
         position: absolute;
         top: 0px;
@@ -438,28 +438,29 @@
         font-size: 13px;
         color: #000;
     } */
+        
         button.btn-close {
             right: 6px;
         }
-
+        
         .btn-close {
             width: 1.8rem;
             opacity: 1;
             position: absolute;
             top: 6px;
         }
-
+        
         .del {
             width: 2rem !important;
         }
-
+        
         .btn-close:hover,
         .btn-close:focus {
             color: #000;
             text-decoration: none;
             opacity: 1;
         }
-
+        
         @media (max-width:992px) {
             .modal-footer button {
                 border-radius: 2.75rem;
@@ -472,25 +473,21 @@
                 /* identical to box height, or 120% */
                 letter-spacing: 0.0145455em;
             }
-
             .btn-close {
                 width: 2.5rem;
                 opacity: 1;
                 position: absolute;
                 top: 6px;
             }
-
             .del {
                 width: 2rem !important;
             }
-
             .btn-close:hover,
             .btn-close:focus {
                 color: #000;
                 text-decoration: none;
                 opacity: 1;
             }
-
             @media (max-width:992px) {
                 .modal-footer button {
                     border-radius: 2.75rem;
@@ -503,119 +500,96 @@
                     /* identical to box height, or 120% */
                     letter-spacing: 0.0145455em;
                 }
-
                 #top_main_image {
                     display: none;
                 }
-
                 #top_main_card {
                     height: 220px;
                 }
-
                 #nav_links {
                     top: 153px;
                 }
             }
-
             @media (max-width:575px) {
                 .modal-footer {
                     flex-direction: column !important;
                     justify-content: flex-center !important;
                 }
-
                 .modal-footer .button-left {
                     margin: auto;
                 }
-
                 /* .modal-footer button {
                     width: 231px;
                 } */
-
                 .border-model-line h2 {
                     font-size: 1.6rem;
                 }
-
                 .accordion-button h3 {
                     font-size: 15px;
                 }
-
                 #filter_btn {
                     font-size: 12px;
                     margin: 0 !important;
                 }
-
                 /* #customize_btn {
                     display: none;
                 } */
                 #info-head {
                     display: none;
                 }
-
                 #add_property_btn {
                     font-size: 12px;
                     margin: 0 !important;
                     display: none;
                 }
-
                 /* #typehead {
                     display: none;
                 } */
                 #email_verification {
                     font-size: 12px;
                 }
-
                 #top_main_image {
                     display: none;
                 }
-
                 #top_main_card {
                     height: 220px;
                 }
-
                 #nav_links {
                     top: 153px;
                 }
             }
-
             @media (max-width:375px) {
                 .border-model-line h2 {
                     font-size: 1.4rem;
                 }
             }
-
             @media (max-width:320px) {
                 /* .modal-footer button {
                     width: 231px;
                 } */
             }
-
             @media (max-width: 767px) {
                 .file-select-area {
                     display: block;
                     text-align: center;
                 }
-
                 .selected-files {
                     margin-top: 10px;
                     text-align: center;
                 }
-
                 .file-details {
                     padding: 5px;
                 }
             }
-
             th,
             td {
                 border-left-color: transparent !important;
                 border-right-color: transparent !important;
             }
-
             .dark-mode th {
                 background: #212121 !important;
                 font-weight: bold !important;
             }
-
             .light-mode th {
                 background: #ECF3F9 !important;
                 font-weight: bold !important;
@@ -652,23 +626,18 @@
                     <div class="col-md-6 col-lg-3 col-xl-3">
                         <div class="card">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
-                                <div class="card-title fw-bold"><a href="properties-all.html"
-                                        style="color: white;">Property</a></div>
+                                <div class="card-title fw-bold"><a href="properties-all.html" style="color: white;">Property</a></div>
                             </div>
                             <div class="card-body">
                                 <div class="text-center chat-image mb-5">
                                     <div class="avatar avatar-xxl chat-profile mb-3 brround">
-                                        <a class="" href="properties-all.html"><img alt="avatar"
-                                                src="../assets/images/icons/Group 10341.png"
-                                                class="brround w-100 h-100"></a>
+                                        <a class="" href="properties-all.html"><img alt="avatar" src="../assets/images/icons/Group 10341.png" class="brround w-100 h-100"></a>
                                     </div>
                                     <div class="main-chat-msg-name">
                                         <a href="properties-all.html">
                                             <h5 class="mb-1 text-dark fw-bold">Create New Property</h5>
                                         </a>
-                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the
-                                            benefits
-                                            of an all-in-one property management tool! </p>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the benefits of an all-in-one property management tool! </p>
                                     </div>
                                 </div>
                             </div>
@@ -677,23 +646,18 @@
                     <div class="col-md-6 col-lg-3 col-xl-3">
                         <div class="card">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
-                                <div class="card-title fw-bold"><a href="add-tenant.html"
-                                        style="color: white;">Tenant</a></div>
+                                <div class="card-title fw-bold"><a href="add-tenant.html" style="color: white;">Tenant</a></div>
                             </div>
                             <div class="card-body">
                                 <div class="text-center chat-image mb-5">
                                     <div class="avatar avatar-xxl chat-profile mb-3 brround">
-                                        <a class="" href="add-tenant.html"><img alt="avatar"
-                                                src="../assets/images/icons/Group 10344.png"
-                                                class="brround w-100 h-100"></a>
+                                        <a class="" href="add-tenant.html"><img alt="avatar" src="../assets/images/icons/Group 10344.png" class="brround w-100 h-100"></a>
                                     </div>
                                     <div class="main-chat-msg-name">
                                         <a href="add-tenant.html">
                                             <h5 class="mb-1 text-dark fw-bold">Create New Tenant</h5>
                                         </a>
-                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the
-                                            benefits
-                                            of an all-in-one property management tool! </p>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the benefits of an all-in-one property management tool! </p>
                                     </div>
                                 </div>
                             </div>
@@ -702,23 +666,18 @@
                     <div class="col-md-6 col-lg-3 col-xl-3">
                         <div class="card">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
-                                <div class="card-title fw-bold"><a href="create-invoicing.html"
-                                        style="color: white;">Invoice</a></div>
+                                <div class="card-title fw-bold"><a href="create-invoicing.html" style="color: white;">Invoice</a></div>
                             </div>
                             <div class="card-body">
                                 <div class="text-center chat-image mb-5">
                                     <div class="avatar avatar-xxl chat-profile mb-3 brround">
-                                        <a class="" href="create-invoicing.html"><img alt="avatar"
-                                                src="../assets/images/icons/Group 10346.png"
-                                                class="brround w-100 h-100"></a>
+                                        <a class="" href="create-invoicing.html"><img alt="avatar" src="../assets/images/icons/Group 10346.png" class="brround w-100 h-100"></a>
                                     </div>
                                     <div class="main-chat-msg-name">
                                         <a href="create-invoicing.html">
                                             <h5 class="mb-1 text-dark fw-bold">Create New Invoice</h5>
                                         </a>
-                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the
-                                            benefits
-                                            of an all-in-one property management tool! </p>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the benefits of an all-in-one property management tool! </p>
                                     </div>
                                 </div>
                             </div>
@@ -732,17 +691,13 @@
                             <div class="card-body">
                                 <div class="text-center chat-image mb-5">
                                     <div class="avatar avatar-xxl chat-profile mb-3 brround">
-                                        <a class="" href="#"><img alt="avatar"
-                                                src="../assets/images/icons/Group 10348.png"
-                                                class="brround w-100 h-100"></a>
+                                        <a class="" href="#"><img alt="avatar" src="../assets/images/icons/Group 10348.png" class="brround w-100 h-100"></a>
                                     </div>
                                     <div class="main-chat-msg-name">
                                         <a href="#">
                                             <h5 class="mb-1 text-dark fw-bold">Create New Lead</h5>
                                         </a>
-                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the
-                                            benefits
-                                            of an all-in-one property management tool! </p>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the benefits of an all-in-one property management tool! </p>
                                     </div>
                                 </div>
                             </div>
@@ -751,23 +706,18 @@
                     <div class="col-md-6 col-lg-3 col-xl-3">
                         <div class="card">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
-                                <div class="card-title fw-bold"><a href="create-tasks.html"
-                                        style="color: white;">Tasks</a></div>
+                                <div class="card-title fw-bold"><a href="create-tasks.html" style="color: white;">Tasks</a></div>
                             </div>
                             <div class="card-body">
                                 <div class="text-center chat-image mb-5">
                                     <div class="avatar avatar-xxl chat-profile mb-3 brround">
-                                        <a class="" href="create-tasks.html"><img alt="avatar"
-                                                src="../assets/images/icons/Group 10350.png"
-                                                class="brround w-100 h-100"></a>
+                                        <a class="" href="create-tasks.html"><img alt="avatar" src="../assets/images/icons/Group 10350.png" class="brround w-100 h-100"></a>
                                     </div>
                                     <div class="main-chat-msg-name">
                                         <a href="create-tasks.html">
                                             <h5 class="mb-1 text-dark fw-bold">Create New Tasks</h5>
                                         </a>
-                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the
-                                            benefits
-                                            of an all-in-one property management tool! </p>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the benefits of an all-in-one property management tool! </p>
                                     </div>
                                 </div>
                             </div>
@@ -794,14 +744,12 @@
                             <i class="fi fi-rs-check-circle text-success"></i>
 
                         </h2>
-                        <p class="ps-1 text-justify" id="succes-text">Tenant has been successfully created and linked to
-                            103A Unit with Property Name.</p>
+                        <p class="ps-1 text-justify" id="succes-text">Tenant has been successfully created and linked to 103A Unit with Property Name.</p>
 
                     </div>
                     <div class="d-flex align-items-center rounded-pill shadow-lg p-2 my-3">
                         <div class="flex-grow-1 ms-3">
-                            <p class="fw-bolder link-text">Invite your Tenant to the Tenant Portal <a
-                                    href="#">https://spaderent.tenant103A.com/rix-rbcr-mei</a></p>
+                            <p class="fw-bolder link-text">Invite your Tenant to the Tenant Portal <a href="#">https://spaderent.tenant103A.com/rix-rbcr-mei</a></p>
 
                         </div>
                         <div class="flex-shrink-0">
@@ -809,8 +757,7 @@
                                 Invite</a>
                         </div>
                     </div>
-                    <div class="mt-2"> <button type="button" class="btn btn-primary btn-pill mx-2" id="add_property_btn"
-                            data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal"><i
+                    <div class="mt-2"> <button type="button" class="btn btn-primary btn-pill mx-2" id="add_property_btn" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal"><i
                                 class="fe fe-plus me-2"></i><strong>ADD NEW
                                 TENANT</strong></button></div>
 
@@ -842,54 +789,54 @@
                 <div class="modal-body">
                     <div class="accordion-item mb-4" id="accordion-item1">
                         <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button text-white" type="button" id="accordion-button1"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                                aria-expanded="true" aria-controls="collapseOne">
+                            <button class="accordion-button text-white" type="button" id="accordion-button1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                 <span class="m-0 me-4 fs-1" style="font-weight: bold;">01</span>
                                 <h3 class="m-0"><strong>Tenant Information</strong> <i class="fi fi-rs-pencil"></i><i
                                         class="fi fi-rs-angle-circle-down chevron icon"></i>
                                 </h3>
                             </button>
                         </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                            data-bs-parent="#accordionExample">
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
                                 <form class="row g-3" enctype="multipart/form-data">
                                     <div class="col-md-6">
                                         <label for="inputEmail4" class="form-label fw-bold">First Name<spnan
                                                 class="text-danger"> *</span></label>
-                                        <input type="text" class="form-control form" placeholder="Enter First Name"
-                                            id="firstName" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your first name here" data-bs-container="#addModal">
+                                        <input type="text" class="form-control form" placeholder="Enter First Name" id="firstName" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your first name here" data-bs-container="#addModal">
                                         <span class="text-danger d-none">First name is required!</span>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="inputPassword4" class="form-label fw-bold">Last Name<spnan
                                                 class="text-danger"> *</span></label>
-                                        <input type="text" class="form-control form" placeholder="Enter Last Name"
-                                            id="lastName" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your last name here" data-bs-container="#addModal">
+                                        <input type="text" class="form-control form" placeholder="Enter Last Name" id="lastName" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your last name here" data-bs-container="#addModal">
                                         <span class="text-danger d-none">Last name required!</span>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="inputAddress" class="form-label fw-bold">Company Name <span
                                                 class="fw-light">(Optional)</span>
                                         </label>
-                                        <input type="text" class="form-control form" id="company"
-                                            placeholder="Enter Company Name" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your company name here" data-bs-container="#addModal">
+                                        <input type="text" class="form-control form" id="company" placeholder="Enter Company Name" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your company name here" data-bs-container="#addModal">
                                         <!-- <span class="text-danger d-none">Company name is required!</span> -->
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="inputCity" class="form-label fw-bold">Email<span class="text-danger"> *</span></label>
-                                        <input type="email" class="form-control form" placeholder="Enter Email" id="email" required
-                                          pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
-                                          data-bs-placement="top" data-bs-toggle="tooltip" title=""
-                                          data-bs-original-title="Enter your email here" data-bs-container="#addModal">
+                                        <label for="inputCity" class="form-label fw-bold">Email<spnan
+                                                class="text-danger"> *</span></label>
+                                        <input type="text" class="form-control form" placeholder="Enter Email" id="email" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your email here" data-bs-container="#addModal">
+
+                                        <label for="inputCity" class="form-label fw-bold">Email<span
+                                                        class="text-danger"> *</span></label>
+                                        <input type="email" class="form-control form" placeholder="Enter Email" id="email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your email here"
+                                            data-bs-container="#addModal">
                                         <span class="text-danger d-none">Email is required!</span>
-                                      </div>
-                                      
+                                    </div>
+
                                     <div class="col-md-4">
                                         <label for="inputState" class="form-label fw-bold">Phone Number <span
                                                 class="fw-light">(Optional)</span></label>
-                                        <input id="phone" name="phone" type="tel" autocomplete="off" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your phone number here" data-bs-container="#addModal" pattern="[0-9]" placeholder="" maxlength="13" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Your total units">
+                                        <input id="phone" name="phone" type="tel" autocomplete="off" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your phone number here" data-bs-container="#addModal" pattern="[0-9]{5}" placeholder="" maxlength="15"
+                                            oninput="this.value = this.value.replace(/[^0-9]/g, '')" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Your total units">
+                                        <input id="phone" name="phone" type="tel" autocomplete="off" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your phone number here" data-bs-container="#addModal" pattern="[0-9]" placeholder="" maxlength="13" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                            required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Your total units">
                                         <span id="valid-msg" class="d-none text-success">✓ Valid</span>
                                         <span id="error-msg" class="hide text-danger"></span>
                                         </select>
@@ -898,8 +845,7 @@
                                     <div class="col-12">
                                         <label for="inputAddress2" class="form-label fw-bold">Address <span
                                                 class="fw-light">(Optional)</span></label>
-                                        <input type="text" class="form-control" id="address"
-                                            placeholder="Apartment, studio, or floor" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your address here" data-bs-container="#addModal">
+                                        <input type="text" class="form-control" id="address" placeholder="Apartment, studio, or floor" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your address here" data-bs-container="#addModal">
                                         <!-- <span class="text-danger d-none">Address is required!</span> -->
                                     </div>
                                     <div class="col-md-4">
@@ -919,7 +865,8 @@
                                     <div class="col-md-4">
                                         <label for="inputPassword4" class="form-label fw-bold">Zip Code <spnan
                                                 class="text-danger">*</span></label>
-                                                <input class="form-control form" type="text" id="zip" name="zip" pattern="[0-9]{5}" placeholder="A valid 5-digit zip code" maxlength="5" minlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '')" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Zip" data-bs-container="#addModal" required>
+                                        <input class="form-control form" type="text" id="zip" name="zip" pattern="[0-9]{5}" placeholder="A valid 5-digit zip code" maxlength="5" minlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '')" data-bs-placement="top" data-bs-toggle="tooltip"
+                                            title="" data-bs-original-title="Enter Zip" data-bs-container="#addModal" required>
                                         <span class="text-danger d-none">Zip code is required!</span>
                                     </div>
                                 </form>
@@ -928,17 +875,14 @@
                     </div>
                     <div class="accordion-item mb-4" id="accordion-item2">
                         <h2 class="accordion-header" id="headingTwo">
-                            <button class="accordion-button collapsed text-white" type="button" id="accordion-button2"
-                                data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
-                                aria-controls="collapseTwo">
+                            <button class="accordion-button collapsed text-white" type="button" id="accordion-button2" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                 <span class="m-0 me-4 fs-1" style="font-weight: bold;">02</span>
                                 <h3 class="m-0"><strong>Assign Property</strong> <i class="fi fi-rs-pencil"></i><i
                                         class="fi fi-rs-angle-circle-down chevron icon"></i>
                                 </h3>
                             </button>
                         </h2>
-                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                            data-bs-parent="#accordionExample">
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
                                 <form class="row g-3">
                                     <div class="col-md-4">
@@ -946,7 +890,7 @@
                                                 class="text-danger"> *</span></label>
                                         <select id="property" class="form-select" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select your property" data-bs-container="#addModal">
                                             <option selected>Choose...</option>
-                                            
+
                                         </select>
                                         <span class="text-danger d-none">Property is required!</span>
                                     </div>
@@ -955,7 +899,7 @@
                                                 class="text-danger"> *</span></label>
                                         <select id="unit" class="form-select" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select your property units" data-bs-container="#addModal">
                                             <option selected>Choose...</option>
-                                            
+
                                         </select>
                                         <span class="text-danger d-none">Property units is required!</span>
                                     </div>
@@ -963,11 +907,9 @@
                                         <label for="inputAddress" class="form-label">Input Rent Amount /Per
                                             Month<span class="text-danger"> *</span></label>
                                         <div class="input-group">
-                                            <span class="input-group-text"
-                                                style="color: #1467B0;background-color: transparent !important;">$</span>
-                                            <input type="text" class="form-control" id="rent" pattern="[0-9]{7}"
-                                                placeholder="Enter rent amount" maxlength="7"
-                                                oninput="this.value = this.value.replace(/[^0-9]/g, '')" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Rent Amount /Per Month" data-bs-container="#addModal">
+                                            <span class="input-group-text" style="color: #1467B0;background-color: transparent !important;">$</span>
+                                            <input type="text" class="form-control" id="rent" pattern="[0-9]{7}" placeholder="Enter rent amount" maxlength="7" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Rent Amount /Per Month"
+                                                data-bs-container="#addModal">
                                         </div>
                                         <span class="text-danger d-none">Rent amount is required!</span>
                                     </div>
@@ -977,33 +919,27 @@
                     </div>
                     <div class="accordion-item" id="accordion-item3">
                         <h2 class="accordion-header" id="headingThree">
-                            <button class="accordion-button collapsed text-white" id="accordion-button3" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false"
-                                aria-controls="collapseThree">
+                            <button class="accordion-button collapsed text-white" id="accordion-button3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                 <span class="m-0 me-4 fs-1" style="font-weight: bold;">03</span>
                                 <h3 class="m-0"><strong>Lease Details</strong> <i class="fi fi-rs-pencil"></i><i
                                         class="fi fi-rs-angle-circle-down chevron icon"></i>
                                 </h3>
                             </button>
                         </h2>
-                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-                            data-bs-parent="#accordionExampe">
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExampe">
                             <div class="accordion-body">
                                 <form class="row g-3">
                                     <div class="col-md-12">
                                         <label for="inputEmail4" class="form-label">Is this a gross lease or triple net
                                             lease? <i class="fi fi-rs-info ms-2" style="color: #1467B0"></i></label>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" value="Gross Lease"
-                                                name="lease" id="flexCheckDefault">
+                                            <input class="form-check-input" type="radio" value="Gross Lease" name="lease" id="flexCheckDefault">
                                             <label class="form-check-label" for="flexCheckDefault">
                                                 Gross Lease
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" value="Triple Net Lease"
-                                                name="lease" id="flexCheckChecked1" href="#collapse1" role="button"
-                                                aria-expanded="false" aria-controls="collapseExample1">
+                                            <input class="form-check-input" type="radio" value="Triple Net Lease" name="lease" id="flexCheckChecked1" href="#collapse1" role="button" aria-expanded="false" aria-controls="collapseExample1">
                                             <label class="form-check-label" for="flexCheckChecked1">
                                                 Triple Net Lease
                                             </label>
@@ -1017,13 +953,9 @@
                                                             <label for="inputEmail4" class="form-label">Base Rent Amount
                                                                 (Optional)</label>
                                                             <div class="input-group">
-                                                                <span class="input-group-text"
-                                                                    style="color: #1467B0;background-color: transparent !important;">$</span>
-                                                                <input type="text" class="form-control" id="baseRent"
-                                                                    pattern="[0-9]{7}" placeholder="Enter Amount.."
-                                                                    maxlength="7"
-                                                                    oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                                                                    required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Base Rent Amount" data-bs-container="#addModal">
+                                                                <span class="input-group-text" style="color: #1467B0;background-color: transparent !important;">$</span>
+                                                                <input type="text" class="form-control" id="baseRent" pattern="[0-9]{7}" placeholder="Enter Amount.." maxlength="7" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Base Rent Amount"
+                                                                    data-bs-container="#addModal">
                                                             </div>
                                                             <span class="text-danger d-none">Rent amount is
                                                                 required!</span>
@@ -1032,13 +964,9 @@
                                                             <label for="inputPassword4" class="form-label">Triple Net
                                                                 Amount (Optional)</label>
                                                             <div class="input-group">
-                                                                <span class="input-group-text"
-                                                                    style="color: #1467B0;background-color: transparent !important;">$</span>
-                                                                <input type="text" class="form-control" id="tripleNet"
-                                                                    pattern="[0-9]{7}" placeholder="Enter Amount.."
-                                                                    maxlength="7"
-                                                                    oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                                                                    required data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Triple Net Amount" data-bs-container="#addModal">
+                                                                <span class="input-group-text" style="color: #1467B0;background-color: transparent !important;">$</span>
+                                                                <input type="text" class="form-control" id="tripleNet" pattern="[0-9]{7}" placeholder="Enter Amount.." maxlength="7" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Triple Net Amount"
+                                                                    data-bs-container="#addModal">
                                                             </div>
                                                             <span class="text-danger d-none">Rent amount is
                                                                 required!</span>
@@ -1046,8 +974,7 @@
                                                         <div class="col-md-6">
                                                             <label for="inputEmail4" class="form-label">Lease Start
                                                                 Date</label>
-                                                            <input type="date" class="form-control position-relative"
-                                                                id="leaseStart" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Lease Start
+                                                            <input type="date" class="form-control position-relative" id="leaseStart" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Lease Start
                                                                 Date" data-bs-container="#addModal">
                                                             <span class="text-danger d-none">Rent amount is
                                                                 required!</span>
@@ -1057,8 +984,7 @@
                                                             <label for="inputPassword4" class="form-label">Lease End
                                                                 Date</label>
 
-                                                            <input type="date" class="form-control" id="leaseEnd"
-                                                                required data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Lease End
+                                                            <input type="date" class="form-control" id="leaseEnd" required data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Lease End
                                                                 Date" data-bs-container="#addModal">
                                                             <span class="text-danger d-none">Rent amount is
                                                                 required!</span>
@@ -1075,17 +1001,14 @@
                                             the Lease Term? <i class="fi fi-rs-info ms-2"
                                                 style="color: #1467B0"></i></label>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" value="yes" name="yesno"
-                                                id="flexCheckChecked2" href="#collapse2" role="button"
-                                                aria-expanded="false" aria-controls="collapseExample2" required>
+                                            <input class="form-check-input" type="radio" value="yes" name="yesno" id="flexCheckChecked2" href="#collapse2" role="button" aria-expanded="false" aria-controls="collapseExample2" required>
                                             <label class="form-check-label" for="flexCheckChecked">
                                                 Yes
                                             </label>
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" value="no" name="yesno"
-                                                required>
+                                            <input class="form-check-input" type="radio" value="no" name="yesno" required>
                                             <label class="form-check-label" for="flexCheckChecked">
                                                 No
                                             </label>
@@ -1116,8 +1039,7 @@
                                                             <label for="inputEmail4" class="form-label">Date of Rent
                                                                 Change
                                                                 (Optional)</label>
-                                                            <input type="date" class="form-control input-date dateofRentchange"
-                                                               name="dateofRentchange" id="dateofRentchange" required data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Date of Rent
+                                                            <input type="date" class="form-control input-date dateofRentchange" name="dateofRentchange" id="dateofRentchange" required data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Date of Rent
                                                                Change" data-bs-container="#addModal">
                                                             <span class="text-danger d-none">Rent amount is
                                                                 required!</span>
@@ -1126,18 +1048,13 @@
                                                             <label for="inputPassword4" class="form-label">Rent Amount
                                                                 Correlating to
                                                                 that Date</label>
-                                                            <input type="text" class="form-control input-amount"
-                                                                id="amountChange" pattern="[0-9]{7}"
-                                                                placeholder="Enter Amount.." maxlength="7"
-                                                                oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                                                                required data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Rent Amount
+                                                            <input type="text" class="form-control input-amount" id="amountChange" pattern="[0-9]{7}" placeholder="Enter Amount.." maxlength="7" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Rent Amount
                                                                 Correlating to
                                                                 that Date" data-bs-container="#addModal">
                                                             <span class="text-danger d-none">Rent amount is
                                                                 required!</span>
                                                         </div>
-                                                        <div
-                                                            class="col-md-1 d-flex justify-content-center align-items-end">
+                                                        <div class="col-md-1 d-flex justify-content-center align-items-end">
                                                             <button type="button" class="btn p-0 del-btn">
                                                                 <i class="fi fi-rs-trash text-danger fs-5"></i>
                                                             </button>
@@ -1156,18 +1073,13 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft'
-                        disabled>Save as
+                    <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
                         Draft</button>
-                    <button class="btn btn-close-bottom btn-outline-default btn-pill button" data-bs-dismiss="modal"
-                        id='close'>Close</button>
+                    <button class="btn btn-close-bottom btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close'>Close</button>
                     <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
-                    <button class="btn text-light button" style='background-color:#1467B0;' id='next'
-                        disabled>Next</button>
-                    <button class="btn text-light button d-none" style='background-color:#1467B0;'
-                        id='submit'>Submit</button>
-                        <button class="btn text-light button d-none" style='background-color:#1467B0;'
-                        id='save'>Save</button>
+                    <button class="btn text-light button" style='background-color:#1467B0;' id='next' disabled>Next</button>
+                    <button class="btn text-light button d-none" style='background-color:#1467B0;' id='submit'>Submit</button>
+                    <button class="btn text-light button d-none" style='background-color:#1467B0;' id='save'>Save</button>
                 </div>
             </div>
         </div>
@@ -1178,8 +1090,8 @@
                 <div class="modal-body p-0">
                     <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
                         <div class="card-header border-0 pt-3">
-                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true"><img src="../assets/images/cross-circle.svg" /></span>
+                            <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
                             </button>
                         </div>
                         <div class="card-body text-center">
@@ -1197,8 +1109,7 @@
                         <div class="card-footer text-center border-0 pt-0">
                             <div class="row">
                                 <div class="text-center">
-                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal"
-                                        aria-label="Close">cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">cancel</a>
                                     <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">delete</a>
                                 </div>
                             </div>
@@ -1249,13 +1160,11 @@
             <div class="app-header header sticky" id="navbar-placeholder">
                 <div class="container-fluid main-container">
                     <div class="d-flex">
-                        <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-bs-toggle="sidebar"
-                            href="javascript:void(0)"></a>
+                        <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-bs-toggle="sidebar" href="javascript:void(0)"></a>
                         <!-- sidebar-toggle-->
                         <a class="logo-horizontal " href="index.html">
                             <img src="../assets/images/logo_white.png" class="header-brand-img desktop-logo" alt="logo">
-                            <img src="../assets/images/Artboard GÇô 1.svg" class="header-brand-img light-logo1"
-                                alt="logo">
+                            <img src="../assets/images/Artboard GÇô 1.svg" class="header-brand-img light-logo1" alt="logo">
                         </a>
                         <!-- LOGO -->
                         <!-- <div class="main-header-center ms-3 d-none d-lg-block">
@@ -1264,10 +1173,7 @@
                         </div> -->
                         <div class="d-flex order-lg-2 ms-auto header-right-icons">
                             <!-- SEARCH -->
-                            <button class="navbar-toggler navresponsive-toggler d-lg-none ms-auto" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent-4"
-                                aria-controls="navbarSupportedContent-4" aria-expanded="false"
-                                aria-label="Toggle navigation">
+                            <button class="navbar-toggler navresponsive-toggler d-lg-none ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon fe fe-more-vertical"></span>
                             </button>
                             <div class="navbar navbar-collapse responsive-navbar p-0">
@@ -1299,23 +1205,19 @@
 
                                         <!-- 1 comments start  -->
                                         <div class="d-flex country">
-                                            <img src="../assets\header-img\comment.svg" alt="profile-user"
-                                                class="avatarr profile-user brroundd nav-link cover-image dark-layout">
+                                            <img src="../assets\header-img\comment.svg" alt="profile-user" class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
                                         <div class="d-flex country">
-                                            <img src="../assets\header-img\comment-light.webp" alt="profile-user"
-                                                class="avatarr profile-user nav-link brroundd cover-image light-layout">
+                                            <img src="../assets\header-img\comment-light.webp" alt="profile-user" class="avatarr profile-user nav-link brroundd cover-image light-layout">
                                         </div>
                                         <!-- 1 comments start  -->
 
                                         <!-- 2 comments start  -->
                                         <div class="d-flex country">
-                                            <img src="../assets\header-img\question.svg" alt="profile-user"
-                                                class="avatarr profile-user brroundd nav-link cover-image dark-layout">
+                                            <img src="../assets\header-img\question.svg" alt="profile-user" class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
                                         <div class="d-flex country">
-                                            <img src="../assets\header-img\question-light.webp" alt="profile-user"
-                                                class="avatarr profile-user nav-link brroundd cover-image light-layout">
+                                            <img src="../assets\header-img\question-light.webp" alt="profile-user" class="avatarr profile-user nav-link brroundd cover-image light-layout">
                                         </div>
                                         <!-- 2 comments start  -->
 
@@ -1378,22 +1280,16 @@
                                             </div> -->
                                         </div>
                                         <div class="d-flex country">
-                                            <img src="../assets\header-img\spade.svg" alt="profile-user"
-                                                class="avatarr profile-user brroundd nav-link cover-image dark-layout">
+                                            <img src="../assets\header-img\spade.svg" alt="profile-user" class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
                                         <div class="d-flex country">
-                                            <img src="../assets\header-img\circlels.png" alt="profile-user"
-                                                class="avatarr profile-user nav-link brroundd cover-image light-layout">
+                                            <img src="../assets\header-img\circlels.png" alt="profile-user" class="avatarr profile-user nav-link brroundd cover-image light-layout">
                                         </div>
                                         <div class="dropdown d-flex profile-1 country">
-                                            <a href="javascript:void(0)" data-bs-toggle="dropdown"
-                                                class="nav-link leading-none d-flex">
+                                            <a href="javascript:void(0)" data-bs-toggle="dropdown" class="nav-link leading-none d-flex">
                                                 <!-- <img src="../assets/images/users/21.jpg" alt="profile-user"
                                                     class="avatar  profile-user brround cover-image"> -->
-                                                <span class="side-menu__item dynamic-text-head text-dark"
-                                                    style="padding: 10px 10px;">Spade Admin</span> <i
-                                                    class="fe fe-chevron-down  text-dark"
-                                                    style="font-size: 20px; font-weight: 800;"></i>
+                                                <span class="side-menu__item dynamic-text-head text-dark" style="padding: 10px 10px;">Spade Admin</span> <i class="fe fe-chevron-down  text-dark" style="font-size: 20px; font-weight: 800;"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                                 <!-- <div class="drop-heading">
@@ -1413,7 +1309,7 @@
                                                 <a class="dropdown-item" href="lockscreen.html">
                                                     <i class="dropdown-icon fe fe-lock"></i> Lockscreen
                                                 </a> -->
-                                                <a class="dropdown-item" href="login.html">
+                                                <a class="dropdown-item" href="login_module.html" onclick="logout()">
                                                     <i class="dropdown-icon fe fe-alert-circle"></i> Sign out
                                                 </a>
                                             </div>
@@ -1434,18 +1330,14 @@
                     <div class="side-header">
                         <a class="header-brand1" href="index.html">
                             <img src="../assets/images/logo_white.png" class="header-brand-img desktop-logo" alt="logo">
-                            <img src="../assets/images/logo_loginmodule.png" class="header-brand-img toggle-logo"
-                                alt="logo">
-                            <img src="../assets/images/logo_loginmodule.png" class="header-brand-img light-logo"
-                                alt="logo">
-                            <img src="../assets/images/Artboard GÇô 1.svg" class="header-brand-img light-logo1"
-                                alt="logo">
+                            <img src="../assets/images/logo_loginmodule.png" class="header-brand-img toggle-logo" alt="logo">
+                            <img src="../assets/images/logo_loginmodule.png" class="header-brand-img light-logo" alt="logo">
+                            <img src="../assets/images/Artboard GÇô 1.svg" class="header-brand-img light-logo1" alt="logo">
                         </a>
                         <!-- LOGO -->
                     </div>
                     <div class="main-sidemenu">
-                        <div class="slide-left disabled" id="slide-left"><svg xmlns="http://www.w3.org/2000/svg"
-                                fill="#7b8191" width="24" height="24" viewBox="0 0 24 24">
+                        <div class="slide-left disabled" id="slide-left"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24">
                                 <path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" />
                             </svg></div>
                         <ul class="side-menu">
@@ -1453,9 +1345,7 @@
                                 <!-- <h3>Main</h3> -->
                             </li>
                             <li class="slide">
-                                <a class="side-menu__item has-link create-new-link" data-bs-toggle="offcanvas"
-                                    href="#offcanvasExample" role="button" aria-controls="offcanvasExample"
-                                    style="border: 3px solid #1467B0 !important;"><i
+                                <a class="side-menu__item has-link create-new-link" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample" style="border: 3px solid #1467B0 !important;"><i
                                         class="side-menu__icon fi fi-rs-square-plus"></i><span
                                         class="side-menu__label ">Create New</span>
                                 </a>
@@ -1564,17 +1454,16 @@
                                     <!-- <i class="angle fe fe-chevron-right"></i> -->
                                 </a>
 
-                            <li>
-                                <a class="side-menu__item has-link" href="settings.php" target="_self"><i
+                                <li>
+                                    <a class="side-menu__item has-link" href="settings.php" target="_self"><i
                                         class="side-menu__icon fi fi-rs-settings"></i><span
                                         class="side-menu__label">Settings</span>
                                     <!-- <span
                                                    class="badge bg-green br-5 side-badge blink-text pb-1">New</span> -->
                                 </a>
-                            </li>
+                                </li>
                         </ul>
-                        <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191"
-                                width="24" height="24" viewBox="0 0 24 24">
+                        <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24">
                                 <path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z" />
                             </svg></div>
                     </div>
@@ -1602,13 +1491,10 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-lg-9">
-                                        <h3 class="page-titlee text-white"
-                                            style="font-weight: 100; margin-bottom: 0px;">Welcome to Spade Portal</h3>
-                                        <h1 class="page-titlee text-white" style="font-weight: 700;" id="user-name">John
-                                            Clark
+                                        <h3 class="page-titlee text-white" style="font-weight: 100; margin-bottom: 0px;">Welcome to Spade Portal</h3>
+                                        <h1 class="page-titlee text-white" style="font-weight: 700;" id="user-name">John Clark
                                         </h1>
-                                        <a href="javascript:void(0)" id="email_verification"
-                                            class="btn btn-primary btn-pill btn-xl email-verification-btn"><i
+                                        <a href="javascript:void(0)" id="email_verification" class="btn btn-primary btn-pill btn-xl email-verification-btn"><i
                                                 class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
                                             verification &nbsp; <i
                                                 class="angle fe fe-arrow-right create-btn-plus"></i></a>
@@ -1629,19 +1515,15 @@
                                     <div class="card-header justify-content-between">
                                         <div class="d-flex">
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-outline-default text-dark py-1"
-                                                    id="filter_btn" data-bs-toggle="dropdown"><i
+                                                <button type="button" class="btn btn-outline-default text-dark py-1" id="filter_btn" data-bs-toggle="dropdown"><i
                                                         class="typcn typcn-filter fs-16"></i><strong
                                                         id="Filter-btn">Filter</strong></button>
                                                 <ul class="dropdown-menu" role="menu">
                                                     <li><a href="javascript:void(0)"><strong>Filter by:</strong></a>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a
-                                                            href="javascript:void(0)">A-Z Alphabets</a>
+                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">A-Z Alphabets</a>
                                                         <div class="form-check m-0">
-                                                            <input class="form-check-input mt-2" type="radio"
-                                                                name="exampleRadios" id="alphabets" value="option1"
-                                                                checked>
+                                                            <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="alphabets" value="option1" checked>
                                                         </div>
                                                     </li>
                                                     <!-- <li class="d-flex justify-content-between"><a
@@ -1652,18 +1534,14 @@
                                                                 checked>
                                                         </div>
                                                     </li> -->
-                                                    <li class="d-flex justify-content-between"><a
-                                                            href="javascript:void(0)">Ascending</a>
+                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">Ascending</a>
                                                         <div class="form-check m-0">
-                                                            <input class="form-check-input mt-2" type="radio"
-                                                                name="exampleRadios" id="ascending" value="option1">
+                                                            <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="ascending" value="option1">
                                                         </div>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a
-                                                            href="javascript:void(0)">Descending</a>
+                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">Descending</a>
                                                         <div class="form-check m-0">
-                                                            <input class="form-check-input mt-2" type="radio"
-                                                                name="exampleRadios" id="descending" value="option1">
+                                                            <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="descending" value="option1">
                                                         </div>
                                                     </li>
                                                     <!-- <li class="d-flex justify-content-between"><a
@@ -1683,93 +1561,71 @@
                                                         id="search_input">
                                                 </div> -->
                                                 <div class="main-header-center d-none d-lg-block m-0">
-                                                    <button class="btn px-0 pt-2"><i class="fe fe-search" aria-hidden="true"></i></button>
-                                                    <input type="text" class="form-control" id="typehead" placeholder="Search for results..." autocomplete="off" style="width: 230px;">    
+                                                    <button class="btn px-0 pt-2"><i class="fe fe-search"
+                                                            aria-hidden="true"></i></button>
+                                                    <input type="text" class="form-control" id="typehead" placeholder="Search for results..." autocomplete="off" style="width: 230px;">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="d-flex">
                                             <div id="info-head">
-                                                <a href="javascript:void(0)"
-                                                    class="d-flex align-items-center me-3 text-dark">
-                                                    <span class="w-3 h-3 brround me-2"
-                                                        style="background-color: #1467B0;"></span> Tenant with Single
-                                                    Property
+                                                <a href="javascript:void(0)" class="d-flex align-items-center me-3 text-dark">
+                                                    <span class="w-3 h-3 brround me-2" style="background-color: #1467B0;"></span> Tenant with Single Property
                                                 </a>
-                                                <a href="javascript:void(0)"
-                                                    class="d-flex align-items-center text-dark">
-                                                    <span class="w-3 h-3 brround me-2"
-                                                        style="background-color: #0BAAB8;"></span> Tenant with Multiple
-                                                    Properties
+                                                <a href="javascript:void(0)" class="d-flex align-items-center text-dark">
+                                                    <span class="w-3 h-3 brround me-2" style="background-color: #0BAAB8;"></span> Tenant with Multiple Properties
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="d-flex">
                                             <div class="btn-group">
-                                                <button type="button"
-                                                    class="btn btn-dark bg-transparent font-weight-bold text-dark"
-                                                    id="customize_btn"
-                                                    data-bs-toggle="dropdown" style="border: none;"><strong>CUSTOMIZED</strong><i
+                                                <button type="button" class="btn btn-dark bg-transparent font-weight-bold text-dark" id="customize_btn" data-bs-toggle="dropdown" style="border: none;"><strong>CUSTOMIZED</strong><i
                                                         class="fe fe-chevron-down ms-2"></i></button>
                                                 <ul class="dropdown-menu" role="menu">
                                                     <li><a href="javascript:void(0)"><strong>Columns to
                                                                 show</strong></a>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a
-                                                            href="javascript:void(0)">TENANT ID</a>
+                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">TENANT ID</a>
                                                         <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2"
-                                                                id="exampleCheck1" checked>
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a
-                                                            href="javascript:void(0)">TENANT NAME</a>
+                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">TENANT NAME</a>
                                                         <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2"
-                                                                id="exampleCheck1" checked>
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a
-                                                            href="javascript:void(0)">PROPERTY NAME</a>
+                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">PROPERTY NAME</a>
                                                         <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2"
-                                                                id="exampleCheck1" checked>
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a
-                                                            href="javascript:void(0)">RENT AMOUNT</a>
+                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">RENT AMOUNT</a>
                                                         <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2"
-                                                                id="exampleCheck1" checked>
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a
-                                                            href="javascript:void(0)">PROPERTY UNITS</a>
+                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">PROPERTY UNITS</a>
                                                         <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2"
-                                                                id="exampleCheck1" checked>
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
 
-                                                    <li class="d-flex justify-content-between"><a
-                                                            href="javascript:void(0)">LEASE END DATE</a>
+                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">LEASE END DATE</a>
                                                         <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2"
-                                                                id="exampleCheck1" checked>
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
                                                 </ul>
                                             </div>
-                                            <button type="button" class="btn btn-primary btn-pill mx-2"
-                                                id="add_property_btn" data-bs-effect="effect-scale"
-                                                data-bs-toggle="modal" href="#addModal"><i
+                                            <button type="button" class="btn btn-primary btn-pill mx-2" id="add_property_btn" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal"><i
                                                     class="fe fe-plus me-2"></i><strong>ADD NEW
                                                     TENANT</strong></button>
                                         </div>
                                     </div>
                                     <div class="card-body p-0">
                                         <div class="table-responsive">
-                                            <table class="table border text-nowrap text-md-nowrap mb-0">
+                                            <table class="table border text-nowrap text-md-nowrap mb-0" id="myTable">
                                                 <thead>
                                                     <tr>
                                                         <th>TENANT ID</th>
@@ -1820,8 +1676,7 @@
                 <div class="card-title mb-0"><i class="fe fe-bell me-2"></i><span class=" pulse"></span>Notifications
                 </div>
                 <div class="card-options ms-auto">
-                    <a href="javascript:void(0);" class="sidebar-icon text-end float-end me-3 mb-1"
-                        data-bs-toggle="sidebar-right" data-target=".sidebar-right"><i
+                    <a href="javascript:void(0);" class="sidebar-icon text-end float-end me-3 mb-1" data-bs-toggle="sidebar-right" data-target=".sidebar-right"><i
                             class="fe fe-x text-white"></i></a>
                 </div>
             </div>
@@ -1857,8 +1712,7 @@
                                 </div>
                                 <div class="row mb-4">
                                     <div class="col-sm-2 mb-sm-0 mb-3">
-                                        <span
-                                            class="feeds avatar-circle avatar-circle-secondary brround bg-secondary-transparent"><i
+                                        <span class="feeds avatar-circle avatar-circle-secondary brround bg-secondary-transparent"><i
                                                 class="fe fe-shopping-cart text-secondary"></i></span>
                                     </div>
                                     <div class="col-sm-10 ps-sm-0">
@@ -1873,8 +1727,7 @@
                                 </div>
                                 <div class="row mb-4">
                                     <div class="col-sm-2 mb-sm-0 mb-3">
-                                        <span
-                                            class="feeds avatar-circle avatar-circle-danger brround bg-danger-transparent"><i
+                                        <span class="feeds avatar-circle avatar-circle-danger brround bg-danger-transparent"><i
                                                 class="fe fe-bell text-danger"></i></span>
                                     </div>
                                     <div class="col-sm-10 ps-sm-0">
@@ -1889,8 +1742,7 @@
                                 </div>
                                 <div class="row mb-4">
                                     <div class="col-sm-2 mb-sm-0 mb-3">
-                                        <span
-                                            class="feeds avatar-circle avatar-circle-warning brround bg-warning-transparent"><i
+                                        <span class="feeds avatar-circle avatar-circle-warning brround bg-warning-transparent"><i
                                                 class="fe fe-gitlab text-warning"></i></span>
                                     </div>
                                     <div class="col-sm-10 ps-sm-0">
@@ -1905,8 +1757,7 @@
                                 </div>
                                 <div class="row mb-4">
                                     <div class="col-sm-2 mb-sm-0 mb-3">
-                                        <span
-                                            class="feeds avatar-circle avatar-circle-pink brround bg-pink-transparent"><i
+                                        <span class="feeds avatar-circle avatar-circle-pink brround bg-pink-transparent"><i
                                                 class="fe fe-database text-pink"></i></span>
                                     </div>
                                     <div class="col-sm-10 ps-sm-0">
@@ -1921,8 +1772,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-2 mb-sm-0 mb-3">
-                                        <span
-                                            class="feeds avatar-circle avatar-circle-info brround bg-info-transparent"><i
+                                        <span class="feeds avatar-circle avatar-circle-info brround bg-info-transparent"><i
                                                 class="fe fe-check-circle text-info"></i></span>
                                     </div>
                                     <div class="col-sm-10 ps-sm-0">
@@ -1956,8 +1806,7 @@
                                 </div>
                                 <div class="row mb-4">
                                     <div class="col-sm-2 mb-sm-0 mb-3">
-                                        <span
-                                            class="feeds avatar-circle avatar-circle-secondary brround bg-secondary-transparent"><i
+                                        <span class="feeds avatar-circle avatar-circle-secondary brround bg-secondary-transparent"><i
                                                 class="fe fe-map-pin text-secondary"></i></span>
                                     </div>
                                     <div class="col-sm-10 ps-sm-0">
@@ -1971,8 +1820,7 @@
                                 </div>
                                 <div class="row mb-4">
                                     <div class="col-sm-2 mb-sm-0 mb-3">
-                                        <span
-                                            class="feeds avatar-circle avatar-circle-danger brround bg-danger-transparent"><i
+                                        <span class="feeds avatar-circle avatar-circle-danger brround bg-danger-transparent"><i
                                                 class="fe fe-headphones text-danger"></i></span>
                                     </div>
                                     <div class="col-sm-10 ps-sm-0">
@@ -1986,8 +1834,7 @@
                                 </div>
                                 <div class="row mb-4">
                                     <div class="col-sm-2 mb-sm-0 mb-3">
-                                        <span
-                                            class="feeds avatar-circle avatar-circle-warning brround bg-warning-transparent"><i
+                                        <span class="feeds avatar-circle avatar-circle-warning brround bg-warning-transparent"><i
                                                 class="fe fe-credit-card text-warning"></i></span>
                                     </div>
                                     <div class="col-sm-10 ps-sm-0">
@@ -2001,8 +1848,7 @@
                                 </div>
                                 <div class="row mb-4">
                                     <div class="col-sm-2 mb-sm-0 mb-3">
-                                        <span
-                                            class="feeds avatar-circle avatar-circle-pink brround bg-pink-transparent"><i
+                                        <span class="feeds avatar-circle avatar-circle-pink brround bg-pink-transparent"><i
                                                 class="fe fe-bell text-pink"></i></span>
                                     </div>
                                     <div class="col-sm-10 ps-sm-0">
@@ -2022,40 +1868,34 @@
                             <div class="pt-3 fw-semibold ps-5">Today</div>
                             <div class="list-group-item d-flex align-items-center">
                                 <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image"
-                                        data-bs-image-src="../assets/images/users/2.jpg"></span>
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/2.jpg"></span>
                                 </div>
                                 <div class="">
                                     <a href="chat.html">
-                                        <div class="fw-semibold text-dark" data-bs-toggle="modal"
-                                            data-target="#chatmodel">Addie Minstra</div>
+                                        <div class="fw-semibold text-dark" data-bs-toggle="modal" data-target="#chatmodel">Addie Minstra</div>
                                         <p class="mb-0 fs-12 text-muted"> Hey! there I' am available.... </p>
                                     </a>
                                 </div>
                             </div>
                             <div class="list-group-item d-flex align-items-center">
                                 <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image"
-                                        data-bs-image-src="../assets/images/users/11.jpg"><span
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/11.jpg"><span
                                             class="avatar-status bg-success"></span></span>
                                 </div>
                                 <div class="">
                                     <a href="chat.html">
-                                        <div class="fw-semibold text-dark" data-bs-toggle="modal"
-                                            data-target="#chatmodel">Rose Bush</div>
+                                        <div class="fw-semibold text-dark" data-bs-toggle="modal" data-target="#chatmodel">Rose Bush</div>
                                         <p class="mb-0 fs-12 text-muted"> Okay...I will be waiting for you </p>
                                     </a>
                                 </div>
                             </div>
                             <div class="list-group-item d-flex align-items-center">
                                 <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image"
-                                        data-bs-image-src="../assets/images/users/10.jpg"></span>
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/10.jpg"></span>
                                 </div>
                                 <div class="">
                                     <a href="chat.html">
-                                        <div class="fw-semibold text-dark" data-bs-toggle="modal"
-                                            data-target="#chatmodel">Claude Strophobia</div>
+                                        <div class="fw-semibold text-dark" data-bs-toggle="modal" data-target="#chatmodel">Claude Strophobia</div>
                                         <p class="mb-0 fs-12 text-muted"> Hi we can explain our new project......
                                         </p>
                                     </a>
@@ -2063,40 +1903,34 @@
                             </div>
                             <div class="list-group-item d-flex align-items-center">
                                 <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image"
-                                        data-bs-image-src="../assets/images/users/13.jpg"></span>
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/13.jpg"></span>
                                 </div>
                                 <div class="">
                                     <a href="chat.html">
-                                        <div class="fw-semibold text-dark" data-bs-toggle="modal"
-                                            data-target="#chatmodel">Eileen Dover</div>
+                                        <div class="fw-semibold text-dark" data-bs-toggle="modal" data-target="#chatmodel">Eileen Dover</div>
                                         <p class="mb-0 fs-12 text-muted"> New product Launching... </p>
                                     </a>
                                 </div>
                             </div>
                             <div class="list-group-item d-flex align-items-center">
                                 <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image"
-                                        data-bs-image-src="../assets/images/users/12.jpg"><span
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/12.jpg"><span
                                             class="avatar-status bg-success"></span></span>
                                 </div>
                                 <div class="">
                                     <a href="chat.html">
-                                        <div class="fw-semibold text-dark" data-bs-toggle="modal"
-                                            data-target="#chatmodel">Willie Findit</div>
+                                        <div class="fw-semibold text-dark" data-bs-toggle="modal" data-target="#chatmodel">Willie Findit</div>
                                         <p class="mb-0 fs-12 text-muted"> Okay...I will be waiting for you </p>
                                     </a>
                                 </div>
                             </div>
                             <div class="list-group-item d-flex align-items-center">
                                 <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image"
-                                        data-bs-image-src="../assets/images/users/15.jpg"></span>
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/15.jpg"></span>
                                 </div>
                                 <div class="">
                                     <a href="chat.html">
-                                        <div class="fw-semibold text-dark" data-bs-toggle="modal"
-                                            data-target="#chatmodel">Manny Jah</div>
+                                        <div class="fw-semibold text-dark" data-bs-toggle="modal" data-target="#chatmodel">Manny Jah</div>
                                         <p class="mb-0 fs-12 text-muted"> Hi we can explain our new project......
                                         </p>
                                     </a>
@@ -2104,13 +1938,11 @@
                             </div>
                             <div class="list-group-item d-flex align-items-center">
                                 <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image"
-                                        data-bs-image-src="../assets/images/users/4.jpg"></span>
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/4.jpg"></span>
                                 </div>
                                 <div class="">
                                     <a href="chat.html">
-                                        <div class="fw-semibold text-dark" data-bs-toggle="modal"
-                                            data-target="#chatmodel">Cherry Blossom</div>
+                                        <div class="fw-semibold text-dark" data-bs-toggle="modal" data-target="#chatmodel">Cherry Blossom</div>
                                         <p class="mb-0 fs-12 text-muted"> Hey! there I' am available....</p>
                                     </a>
                                 </div>
@@ -2118,27 +1950,23 @@
                             <div class="pt-3 fw-semibold ps-5">Yesterday</div>
                             <div class="list-group-item d-flex align-items-center">
                                 <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image"
-                                        data-bs-image-src="../assets/images/users/7.jpg"><span
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/7.jpg"><span
                                             class="avatar-status bg-success"></span></span>
                                 </div>
                                 <div class="">
                                     <a href="chat.html">
-                                        <div class="fw-semibold text-dark" data-bs-toggle="modal"
-                                            data-target="#chatmodel">Simon Sais</div>
+                                        <div class="fw-semibold text-dark" data-bs-toggle="modal" data-target="#chatmodel">Simon Sais</div>
                                         <p class="mb-0 fs-12 text-muted">Schedule Realease...... </p>
                                     </a>
                                 </div>
                             </div>
                             <div class="list-group-item d-flex align-items-center">
                                 <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image"
-                                        data-bs-image-src="../assets/images/users/9.jpg"></span>
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/9.jpg"></span>
                                 </div>
                                 <div class="">
                                     <a href="chat.html">
-                                        <div class="fw-semibold text-dark" data-bs-toggle="modal"
-                                            data-target="#chatmodel">Laura Biding</div>
+                                        <div class="fw-semibold text-dark" data-bs-toggle="modal" data-target="#chatmodel">Laura Biding</div>
                                         <p class="mb-0 fs-12 text-muted"> Hi we can explain our new project......
                                         </p>
                                     </a>
@@ -2146,27 +1974,23 @@
                             </div>
                             <div class="list-group-item d-flex align-items-center">
                                 <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image"
-                                        data-bs-image-src="../assets/images/users/2.jpg"><span
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/2.jpg"><span
                                             class="avatar-status bg-success"></span></span>
                                 </div>
                                 <div class="">
                                     <a href="chat.html">
-                                        <div class="fw-semibold text-dark" data-bs-toggle="modal"
-                                            data-target="#chatmodel">Addie Minstra</div>
+                                        <div class="fw-semibold text-dark" data-bs-toggle="modal" data-target="#chatmodel">Addie Minstra</div>
                                         <p class="mb-0 fs-12 text-muted">Contact me for details....</p>
                                     </a>
                                 </div>
                             </div>
                             <div class="list-group-item d-flex align-items-center">
                                 <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image"
-                                        data-bs-image-src="../assets/images/users/9.jpg"></span>
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/9.jpg"></span>
                                 </div>
                                 <div class="">
                                     <a href="chat.html">
-                                        <div class="fw-semibold text-dark" data-bs-toggle="modal"
-                                            data-target="#chatmodel">Ivan Notheridiya</div>
+                                        <div class="fw-semibold text-dark" data-bs-toggle="modal" data-target="#chatmodel">Ivan Notheridiya</div>
                                         <p class="mb-0 fs-12 text-muted"> Hi we can explain our new project......
                                         </p>
                                     </a>
@@ -2174,40 +1998,34 @@
                             </div>
                             <div class="list-group-item d-flex align-items-center">
                                 <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image"
-                                        data-bs-image-src="../assets/images/users/14.jpg"></span>
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/14.jpg"></span>
                                 </div>
                                 <div class="">
                                     <a href="chat.html">
-                                        <div class="fw-semibold text-dark" data-bs-toggle="modal"
-                                            data-target="#chatmodel">Dulcie Veeta</div>
+                                        <div class="fw-semibold text-dark" data-bs-toggle="modal" data-target="#chatmodel">Dulcie Veeta</div>
                                         <p class="mb-0 fs-12 text-muted"> Okay...I will be waiting for you </p>
                                     </a>
                                 </div>
                             </div>
                             <div class="list-group-item d-flex align-items-center">
                                 <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image"
-                                        data-bs-image-src="../assets/images/users/11.jpg"></span>
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/11.jpg"></span>
                                 </div>
                                 <div class="">
                                     <a href="chat.html">
-                                        <div class="fw-semibold text-dark" data-bs-toggle="modal"
-                                            data-target="#chatmodel">Florinda Carasco</div>
+                                        <div class="fw-semibold text-dark" data-bs-toggle="modal" data-target="#chatmodel">Florinda Carasco</div>
                                         <p class="mb-0 fs-12 text-muted">New product Launching...</p>
                                     </a>
                                 </div>
                             </div>
                             <div class="list-group-item d-flex align-items-center">
                                 <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image"
-                                        data-bs-image-src="../assets/images/users/4.jpg"><span
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/4.jpg"><span
                                             class="avatar-status bg-success"></span></span>
                                 </div>
                                 <div class="">
                                     <a href="chat.html">
-                                        <div class="fw-semibold text-dark" data-bs-toggle="modal"
-                                            data-target="#chatmodel">Cherry Blossom</div>
+                                        <div class="fw-semibold text-dark" data-bs-toggle="modal" data-target="#chatmodel">Cherry Blossom</div>
                                         <p class="mb-0 fs-12 text-muted">cherryblossom@gmail.com</p>
                                     </a>
                                 </div>
@@ -2219,10 +2037,8 @@
                             <li class="d-sm-flex mt-4">
                                 <div>
                                     <i class="task-icon1"></i>
-                                    <h6 class="fw-semibold">Task Finished<span
-                                            class="text-muted fs-11 mx-2 fw-normal">09 July 2021</span></h6>
-                                    <p class="text-muted fs-12">Adam Berry finished task on<a href="javascript:void(0)"
-                                            class="fw-semibold"> Project Management</a>
+                                    <h6 class="fw-semibold">Task Finished<span class="text-muted fs-11 mx-2 fw-normal">09 July 2021</span></h6>
+                                    <p class="text-muted fs-12">Adam Berry finished task on<a href="javascript:void(0)" class="fw-semibold"> Project Management</a>
                                     </p>
                                 </div>
                                 <div class="ms-auto d-md-flex me-3">
@@ -2237,8 +2053,7 @@
                                     <i class="task-icon1"></i>
                                     <h6 class="fw-semibold">New Comment<span class="text-muted fs-11 mx-2 fw-normal">05
                                             July 2021</span></h6>
-                                    <p class="text-muted fs-12">Victoria commented on Project <a
-                                            href="javascript:void(0)" class="fw-semibold"> AngularJS Template</a>
+                                    <p class="text-muted fs-12">Victoria commented on Project <a href="javascript:void(0)" class="fw-semibold"> AngularJS Template</a>
                                     </p>
                                 </div>
                                 <div class="ms-auto d-md-flex me-3">
@@ -2253,8 +2068,7 @@
                                     <i class="task-icon1"></i>
                                     <h6 class="fw-semibold">New Comment<span class="text-muted fs-11 mx-2 fw-normal">25
                                             June 2021</span></h6>
-                                    <p class="text-muted fs-12">Victoria commented on Project <a
-                                            href="javascript:void(0)" class="fw-semibold"> AngularJS Template</a>
+                                    <p class="text-muted fs-12">Victoria commented on Project <a href="javascript:void(0)" class="fw-semibold"> AngularJS Template</a>
                                     </p>
                                 </div>
                                 <div class="ms-auto d-md-flex me-3">
@@ -2269,8 +2083,7 @@
                                     <i class="task-icon1"></i>
                                     <h6 class="fw-semibold">Task Overdue<span class="text-muted fs-11 mx-2 fw-normal">14
                                             June 2021</span></h6>
-                                    <p class="text-muted mb-0 fs-12">Petey Cruiser finished task <a
-                                            href="javascript:void(0)" class="fw-semibold"> Integrated management</a>
+                                    <p class="text-muted mb-0 fs-12">Petey Cruiser finished task <a href="javascript:void(0)" class="fw-semibold"> Integrated management</a>
                                     </p>
                                 </div>
                                 <div class="ms-auto d-md-flex me-3">
@@ -2285,8 +2098,7 @@
                                     <i class="task-icon1"></i>
                                     <h6 class="fw-semibold">Task Overdue<span class="text-muted fs-11 mx-2 fw-normal">29
                                             June 2021</span></h6>
-                                    <p class="text-muted mb-0 fs-12">Petey Cruiser finished task <a
-                                            href="javascript:void(0)" class="fw-semibold"> Integrated management</a>
+                                    <p class="text-muted mb-0 fs-12">Petey Cruiser finished task <a href="javascript:void(0)" class="fw-semibold"> Integrated management</a>
                                     </p>
                                 </div>
                                 <div class="ms-auto d-md-flex me-3">
@@ -2299,10 +2111,8 @@
                             <li class="d-sm-flex">
                                 <div>
                                     <i class="task-icon1"></i>
-                                    <h6 class="fw-semibold">Task Finished<span
-                                            class="text-muted fs-11 mx-2 fw-normal">09 July 2021</span></h6>
-                                    <p class="text-muted fs-12">Adam Berry finished task on<a href="javascript:void(0)"
-                                            class="fw-semibold"> Project Management</a>
+                                    <h6 class="fw-semibold">Task Finished<span class="text-muted fs-11 mx-2 fw-normal">09 July 2021</span></h6>
+                                    <p class="text-muted fs-12">Adam Berry finished task on<a href="javascript:void(0)" class="fw-semibold"> Project Management</a>
                                     </p>
                                 </div>
                                 <div class="ms-auto d-md-flex me-3">
@@ -2325,8 +2135,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content country-select-modal">
                 <div class="modal-header">
-                    <h6 class="modal-title">Choose Country</h6><button aria-label="Close" class="btn-close"
-                        data-bs-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
+                    <h6 class="modal-title">Choose Country</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
                     <ul class="row p-3">
@@ -2419,6 +2228,8 @@
 
     <!-- JQUERY JS -->
     <script src="../assets/js/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js" integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!-- BOOTSTRAP JS -->
     <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
@@ -2527,11 +2338,11 @@
         var endDateInput = document.getElementById('leaseEnd');
         var middleDateInputs = document.getElementsByClassName('dateofRentchange');
 
-        startDateInput.addEventListener("change", function () {
+        startDateInput.addEventListener("change", function() {
             endDateInput.min = startDateInput.value;
         });
 
-        endDateInput.addEventListener("change", function () {
+        endDateInput.addEventListener("change", function() {
             for (var i = 0; i < middleDateInputs.length; i++) {
                 var middleDateInput = middleDateInputs[i];
                 middleDateInput.min = startDateInput.value;
@@ -2541,49 +2352,51 @@
     </script>
     <script>
         var selectedFiles = [];
-        var edit=false
-        var tenantData=[]
-        $(document).ready(function () {
+        var edit = false
+        var tenantData = []
+        $(document).ready(function() {
             // $("#preloader").fadeIn("fast");
             // $("#succesModal").modal("show")
-            $("#succes-close").click(()=>{
+            $("#succes-close").click(() => {
                 getData()
             })
             let tenantID;
             $("#send-email").click(() => {
-                $("#succesModal").modal("hide")
-                console.log(tenantID)
-                $.ajax({
-                    url: 'http://localhost:3000/api/spade/sendInvitationLink',
-                    type: 'POST',
-                    data: JSON.stringify({
-                        tenantID: tenantID
-                    }),
-                    contentType: "application/json; charset=utf-8",
-                    processData: false,
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-                    success: function (response) {
-                        getData()
-                    },
-                    error: function (xhr, status, error) {
-                        // Handle the error response
-                        console.log(xhr)
-                        console.log(status)
-                        console.log(error)
-                        console.error('Error sending data:', error);
-                    }
-                });
-            })
-            // $("#succesModal").modal("show")
+                    $("#succesModal").modal("hide")
+                    console.log(tenantID)
+                    $.ajax({
+                        url: 'http://localhost:3000/api/spade/sendInvitationLink',
+                        type: 'POST',
+                        data: JSON.stringify({
+                            tenantID: tenantID
+                        }),
+                        contentType: "application/json; charset=utf-8",
+                        processData: false,
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function(response) {
+                            getData()
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle the error response
+                            console.log(xhr)
+                            console.log(status)
+                            console.log(error)
+                            console.error('Error sending data:', error);
+                        }
+                    });
+                })
+                // $("#succesModal").modal("show")
             $.ajax({
                 url: 'http://localhost:3000/api/spade/getStates',
                 method: 'GET',
-                success: function ({data}) {
+                success: function({
+                    data
+                }) {
                     // Handle state selection change
                     // console.log(result)
-                    $('#state').change(function () {
+                    $('#state').change(function() {
                         var selectedState = $(this).val();
 
 
@@ -2600,11 +2413,11 @@
                     var states = data
 
                     //   stateDropdown.append($('<option></option>').text("Choose..."));
-                    data.forEach(function (state) {
+                    data.forEach(function(state) {
                         stateDropdown.append($('<option></option>').text(state.states).val(state.states));
                     });
                 },
-                error: function (xhr, status, error) {
+                error: function(xhr, status, error) {
                     console.log('Error occurred while fetching state and city data.');
                 }
             });
@@ -2617,16 +2430,16 @@
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function (response) {
+                success: function(response) {
                     var properties = response.data; // Assuming the response data is an array of property objects
                     console.log(properties)
-                    // Populate Select Property dropdown
+                        // Populate Select Property dropdown
                     var propertySelect = $('#property');
                     propertySelect.empty(); // Clear existing options
                     propertySelect.append($('<option></option>')
                         .text("Choose...")
                     )
-                    properties.forEach(function (property) {
+                    properties.forEach(function(property) {
                         var option = $('<option></option>')
                             .text(property.propertyName)
                             .val(property.id);
@@ -2634,43 +2447,43 @@
                     });
 
                     // Handle property selection change
-                    propertySelect.change(function () {
+                    propertySelect.change(function() {
                         var selectedPropertyId = $(this).val();
 
                         // Find the selected property object
-                        var selectedProperty = properties.find(function (property) {
+                        var selectedProperty = properties.find(function(property) {
                             return property.id == selectedPropertyId;
                         });
 
                         // Populate Select Property Unit dropdown
                         var propertyUnitSelect = $('#unit');
-                         // Clear existing options
-                         propertyUnitSelect.empty()
-                        
+                        // Clear existing options
+                        propertyUnitSelect.empty()
 
-                                if(selectedProperty.vacantUnits.length===0){
-                                    
-                                    propertyUnitSelect.prop("disabled", true);
-                                    propertyUnitSelect.append($('<option></option>')
+
+                        if (selectedProperty.vacantUnits.length === 0) {
+
+                            propertyUnitSelect.prop("disabled", true);
+                            propertyUnitSelect.append($('<option></option>')
                                 .text("No unit available!!"))
-                                }else{
-                                    propertyUnitSelect.prop("disabled", false);
-                                    propertyUnitSelect.append($('<option></option>')
+                        } else {
+                            propertyUnitSelect.prop("disabled", false);
+                            propertyUnitSelect.append($('<option></option>')
                                 .text("Choose..."))
 
-                                    selectedProperty.vacantUnits.forEach(function (unit) {
-                            console.log(unit.unitNumber)
+                            selectedProperty.vacantUnits.forEach(function(unit) {
+                                console.log(unit.unitNumber)
 
-                            var option = $('<option></option>')
-                                .text(unit.unitNumber)
-                                .val(unit.id);
-                            propertyUnitSelect.append(option);
-                        });
-                                }
+                                var option = $('<option></option>')
+                                    .text(unit.unitNumber)
+                                    .val(unit.id);
+                                propertyUnitSelect.append(option);
+                            });
+                        }
 
                     });
                 },
-                error: function (xhr, status, error) {
+                error: function(xhr, status, error) {
                     window.alert('Error: ' + error);
                 }
             });
@@ -2700,7 +2513,7 @@
                     middleDateInput.max = endDateInput.value;
                 }
             });
-            $('#add-item-container').on('click', '.del-btn', function () {
+            $('#add-item-container').on('click', '.del-btn', function() {
                 var $row = $(this).closest('.row');
                 var $rowsContainer = $row.parent();
 
@@ -2710,13 +2523,13 @@
                     //   alert('Cannot delete the last row.');
                 }
             });
-            $('input[name="yesno"]').change(function () {
+            $('input[name="yesno"]').change(function() {
                 console.log($(this).val())
                 if ($(this).val() === 'yes') {
                     if (!$('#collapse2').hasClass('show')) {
                         $('#collapse2').collapse('show');
                     }
-                    $('.row-multiple').each(function () {
+                    $('.row-multiple').each(function() {
                         var date = $(this).find('.input-date')
                         var amount = $(this).find('.input-amount')
                         date.prop('required', true)
@@ -2727,7 +2540,7 @@
                     if ($('#collapse2').hasClass('show')) {
                         $('#collapse2').collapse('hide');
                     }
-                    $('.row-multiple').each(function () {
+                    $('.row-multiple').each(function() {
                         var date = $(this).find('.input-date')
                         var amount = $(this).find('.input-amount')
                         date.prop('required', false)
@@ -2735,7 +2548,7 @@
                     })
                 }
             });
-            $('input[name="lease"]').change(function () {
+            $('input[name="lease"]').change(function() {
                 console.log($(this).val())
                 if ($(this).val() === 'Triple Net Lease') {
                     if (!$('#collapse1').hasClass('show')) {
@@ -2762,7 +2575,7 @@
                 var formData = {};
 
                 // Get Tenant Information
-                formData.tenantID=tenantID
+                formData.tenantID = tenantID
                 formData.firstName = document.getElementById('firstName').value;
                 formData.lastName = document.getElementById('lastName').value;
                 formData.companyName = document.getElementById('company').value;
@@ -2791,7 +2604,7 @@
                 var rowData = [];
 
                 // Iterate over each row
-                $('.row-multiple').each(function () {
+                $('.row-multiple').each(function() {
                     var date = $(this).find('.input-date').val();
                     var amount = $(this).find('.input-amount').val();
 
@@ -2806,51 +2619,49 @@
                 });
                 // console.log(rowData)
                 formData.increaseRentData = rowData
-                //   formData.rentChangeDate = document.getElementById('dateofRentchange').value;
-                //   formData.amountChange = document.getElementById('amountChange').value;
+                    //   formData.rentChangeDate = document.getElementById('dateofRentchange').value;
+                    //   formData.amountChange = document.getElementById('amountChange').value;
 
                 return formData;
             }
-            
+
             $("#submit").on("click", () => {
-                edit=false
-                sendData("tenants","POST")
-            }
-            )
+                edit = false
+                sendData("tenants", "POST")
+            })
             $("#save").on("click", () => {
-                edit=false
+                edit = false
                 console.log(tenantIdElement.text())
-                sendData("updateTenants","PUT",tenantIdElement.text())
-            }
-            )
-            
+                sendData("updateTenants", "PUT", tenantIdElement.text())
+            })
+
             // Function to make the AJAX call
-            function sendData(uri,method,tenantID) {
+            function sendData(uri, method, tenantID) {
                 var formData = getFormData(tenantID);
                 // console.log(formData)
                 $("#addModal").modal("hide")
-                // Make the AJAX call
+                    // Make the AJAX call
                 $.ajax({
                     url: `http://localhost:3000/api/spade/${uri}`,
-                    type:method,
+                    type: method,
                     data: JSON.stringify(formData),
                     contentType: "application/json; charset=utf-8",
                     processData: false,
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
-                    success: function (response) {
+                    success: function(response) {
                         console.log(response)
-                        // Handle the success response
+                            // Handle the success response
                         $("#succes-text").text(`Tenant has been successfully created and linked to ${formData.propertyUnitID} Unit with ${formData.propertyID}.`)
 
                         $("#succesModal").modal("show")
                         resetAccordions()
                         tenantID = response.tenantId
-                        // console.log(response)
-                        // console.log('Data sent successfully!');
+                            // console.log(response)
+                            // console.log('Data sent successfully!');
                     },
-                    error: function (xhr, status, error) {
+                    error: function(xhr, status, error) {
                         // Handle the error response
                         console.log(xhr)
                         console.log(status)
@@ -2859,20 +2670,21 @@
                     }
                 });
             }
-            function setEditable(){
+
+            function setEditable() {
                 var accordions = $('.accordion-item');
                 console.log(accordions)
-                // Open all accordions
+                    // Open all accordions
                 accordions.addClass('open');
 
                 $("#edit-btn").addClass("d-none")
-                // $(".border-model-line h2").text("Create ")
+                    // $(".border-model-line h2").text("Create ")
                 $(".title-text").empty()
                 $(".title-text").append(`<h2 class="modal-title">Create <strong class="color-primary" id="title-sub">New Tenant</strong></h2><span class="">Post your properties to thousands of potential investors,
                             tenants and interested individuals.</span>`)
-                // $("#title-sub").text("New Tenant")
-                // $(".border-model-line span").text("Post your properties to thousands of potential investors, tenants and interested individuals")
-                // $(".accordion-item .icon").removeClass("fi-rs-exclamation");
+                    // $("#title-sub").text("New Tenant")
+                    // $(".border-model-line span").text("Post your properties to thousands of potential investors, tenants and interested individuals")
+                    // $(".accordion-item .icon").removeClass("fi-rs-exclamation");
                 $(".accordion-item .icon").removeClass("fi-rs-check-circle");
                 $(".accordion-item .icon").addClass("chevron");
                 $(".accordion-item .icon").removeClass("cross");
@@ -2888,21 +2700,20 @@
                 accordions.find('.accordion-button').attr('data-bs-toggle', 'collapse').addClass("collapsed");
                 accordions.find('.accordion-collapse').addClass("show");
                 $("#next").removeClass("d-none")
-                if(edit){
+                if (edit) {
                     $("#save").addClass("d-none")
+                } else {
+                    $("#submit").addClass("d-none")
                 }
-                else{
-                    $("#submit").addClass("d-none") 
-                }
-                
+
                 // $("#submit").addClass("d-none")
                 // $("#submit").removeAttr('disabled','disabled')
             }
             $("#next").on('click', () => {
-                
+
                 var accordions = $('.accordion-item');
                 console.log(accordions)
-                // Open all accordions
+                    // Open all accordions
                 accordions.addClass('open');
                 $("#edit-btn").removeClass("d-none")
                 console.log($(".title-text").text())
@@ -2916,13 +2727,12 @@
                 $(".accordion-item .icon").addClass("tick");
                 // console.log($('#title-sub'))
                 $("#next").addClass("d-none")
-                if(edit){
+                if (edit) {
                     $("#save").removeClass("d-none")
+                } else {
+                    $("#submit").removeClass("d-none")
                 }
-                else{
-                    $("#submit").removeClass("d-none") 
-                }
-                
+
                 // $("#submit").removeClass("d-none")
                 accordions.find('input,textarea').attr('readonly', true);
 
@@ -2935,14 +2745,15 @@
                 accordions.find('.accordion-button').removeAttr('data-bs-toggle').removeClass("collapsed");
                 accordions.find('.accordion-button').removeAttr('data-bs-toggle').removeClass("collpsed");
                 accordions.find('.accordion-collapse').addClass("show");
-                
+
 
                 // sendData()
             })
             $("#edit-btn").on('click', () => {
                 setEditable()
-                
+
             })
+
             function checkFieldsStatus(accordionId) {
                 // var accordionFields = $('#' + accordionId + ' input[type="text"], #' + accordionId + ' select');
                 var accordionFields = $('#' + accordionId + ' input[required], #' + accordionId + ' select[required]');
@@ -2952,7 +2763,7 @@
                 var hasErrorFields = false;
                 var hasFilledFields = false;
 
-                accordionFields.each(function () {
+                accordionFields.each(function() {
                     var $field = $(this);
                     if ($field.val() === '' || $field.val() === 'Choose...') {
                         hasEmptyFields = true;
@@ -2980,6 +2791,7 @@
             }
 
             let counter = 0
+
             function checkFieldsFilled(id) {
                 console.log(id)
                 const status = checkFieldsStatus(id)
@@ -2990,7 +2802,7 @@
                 const accordionItem = document.getElementById(id);
                 const formFields = accordionItem.querySelectorAll("input[required], select[required]");
                 let allFieldsFilled = true;
-                formFields.forEach(function (field) {
+                formFields.forEach(function(field) {
                     if (field.value === "" || field.value === "Choose...") {
                         allFieldsFilled = false;
                     }
@@ -3030,98 +2842,103 @@
             $("#accordion-button1").on("click", () => {
                 checkFieldsFilled("accordion-item1")
             })
-            $("#accordion-button2").on("click", () => { checkFieldsFilled("accordion-item2") })
-            $("#accordion-button3").on("click", () => { checkFieldsFilled("accordion-item3") })
+            $("#accordion-button2").on("click", () => {
+                checkFieldsFilled("accordion-item2")
+            })
+            $("#accordion-button3").on("click", () => {
+                checkFieldsFilled("accordion-item3")
+            })
+
             function areAllFieldsFilled() {
-    var accordion1Fields = $('#accordion-item1 input[required], #accordion-item1 select[required]');
-    var accordion2Fields = $('#accordion-item2 input[required], #accordion-item2 select[required]');
-    var accordion3Fields = $('#accordion-item3 input[required]');
-    var unitField = $('#unit');
-    var allFieldsFilled =
-        accordion1Fields.filter(function () {
-            return $(this).val() === '' || $(this).val() === 'Choose...';
-        }).length === 0 &&
-        accordion2Fields.filter(function () {
-            return $(this).val() === '' || $(this).val() === 'Choose...' || unitField.prop("disabled");
-        }).length === 0 &&
-        accordion3Fields.filter(function () {
-            return $(this).val() === '';
-        }).length === 0;
+                var accordion1Fields = $('#accordion-item1 input[required], #accordion-item1 select[required]');
+                var accordion2Fields = $('#accordion-item2 input[required], #accordion-item2 select[required]');
+                var accordion3Fields = $('#accordion-item3 input[required]');
+                var unitField = $('#unit');
+                var allFieldsFilled =
+                    accordion1Fields.filter(function() {
+                        return $(this).val() === '' || $(this).val() === 'Choose...';
+                    }).length === 0 &&
+                    accordion2Fields.filter(function() {
+                        return $(this).val() === '' || $(this).val() === 'Choose...' || unitField.prop("disabled");
+                    }).length === 0 &&
+                    accordion3Fields.filter(function() {
+                        return $(this).val() === '';
+                    }).length === 0;
 
-    // Zip code length validation
-    var zipField = $('#zip');
-    if (zipField.val().length !== 5) {
-        allFieldsFilled = false;
-    }
-    
-        if(unitField.prop("disabled")){
-            allFieldsFilled = false;
-        }
-    return allFieldsFilled;
-}
+                // Zip code length validation
+                var zipField = $('#zip');
+                if (zipField.val().length !== 5) {
+                    allFieldsFilled = false;
+                }
+
+                if (unitField.prop("disabled")) {
+                    allFieldsFilled = false;
+                }
+                return allFieldsFilled;
+            }
 
             // Function to enable or disable buttons based on field status
             // Function to enable or disable buttons based on field status
-function updateButtonStatus() {
-    var accordion1Fields = $('#accordion-item1 input[required], #accordion-item1 select[required]');
-    var accordion2Fields = $('#accordion-item2 input[required], #accordion-item2 select[required]');
-    var accordion3Fields = $('#accordion-item3 input[required]');
-    var isAccordion1FieldsEmpty = accordion1Fields.filter(function () {
-        return $(this).val() !== '' || $(this).val() === 'Choose...';
-    }).length === 0;
-    var isAccordion2FieldsEmpty = accordion2Fields.filter(function () {
-        return $(this).val() !== '' || $(this).val() === 'Choose...';
-    }).length === 0;
-    var isAccordion3FieldsEmpty = accordion3Fields.filter(function () {
-        return $(this).val() !== '';
-    }).length === 0;
+            function updateButtonStatus() {
+                var accordion1Fields = $('#accordion-item1 input[required], #accordion-item1 select[required]');
+                var accordion2Fields = $('#accordion-item2 input[required], #accordion-item2 select[required]');
+                var accordion3Fields = $('#accordion-item3 input[required]');
+                var isAccordion1FieldsEmpty = accordion1Fields.filter(function() {
+                    return $(this).val() !== '' || $(this).val() === 'Choose...';
+                }).length === 0;
+                var isAccordion2FieldsEmpty = accordion2Fields.filter(function() {
+                    return $(this).val() !== '' || $(this).val() === 'Choose...';
+                }).length === 0;
+                var isAccordion3FieldsEmpty = accordion3Fields.filter(function() {
+                    return $(this).val() !== '';
+                }).length === 0;
 
-    // Enable or disable the buttons based on the fields' status
-    if (!isAccordion1FieldsEmpty || !isAccordion2FieldsEmpty || !isAccordion3FieldsEmpty) {
-        $('#draft').removeAttr('disabled');
-    } else {
-        $('#draft').attr('disabled', 'disabled');
-    }
+                // Enable or disable the buttons based on the fields' status
+                if (!isAccordion1FieldsEmpty || !isAccordion2FieldsEmpty || !isAccordion3FieldsEmpty) {
+                    $('#draft').removeAttr('disabled');
+                } else {
+                    $('#draft').attr('disabled', 'disabled');
+                }
 
-    var allFieldsFilled = areAllFieldsFilled();
+                var allFieldsFilled = areAllFieldsFilled();
 
-    // Enable or disable the buttons based on the fields' status
-    if (allFieldsFilled) {
-        $('#next').removeClass("disabled").removeAttr("disabled");
-    } else {
-        $('#next').addClass("disabled").attr("disabled", "disabled");
-    }
-}
+                // Enable or disable the buttons based on the fields' status
+                if (allFieldsFilled) {
+                    $('#next').removeClass("disabled").removeAttr("disabled");
+                } else {
+                    $('#next').addClass("disabled").attr("disabled", "disabled");
+                }
+            }
 
-// Call the updateButtonStatus function when any field in the accordions is changed
-$('#accordion-item1 input[required], #accordion-item1 select[required], #accordion-item2 input[required], #accordion-item2 select[required], #accordion-item3 input[required], #accordion-item3 select[required]').on('input change', function () {
-    var $field = $(this);
-    var $errorMessage = $field.next('.text-danger');
-    if ($field.attr("id") === "zip") {
-        if ($field.val().length !== 5) {
-            $field.addClass('border-danger');
-            $errorMessage.removeClass('d-none');
-        } else {
-            $field.removeClass('border-danger');
-            $errorMessage.addClass('d-none');
-        }
-    } else if ($field.val() === '' || $field.val() === 'Choose...') {
-        $field.addClass('border-danger');
-        $errorMessage.removeClass('d-none');
-    } else {
-        $field.removeClass('border-danger');
-        $errorMessage.addClass('d-none');
-    }
-    updateButtonStatus();
-});
+            // Call the updateButtonStatus function when any field in the accordions is changed
+            $('#accordion-item1 input[required], #accordion-item1 select[required], #accordion-item2 input[required], #accordion-item2 select[required], #accordion-item3 input[required], #accordion-item3 select[required]').on('input change', function() {
+                var $field = $(this);
+                var $errorMessage = $field.next('.text-danger');
+                if ($field.attr("id") === "zip") {
+                    if ($field.val().length !== 5) {
+                        $field.addClass('border-danger');
+                        $errorMessage.removeClass('d-none');
+                    } else {
+                        $field.removeClass('border-danger');
+                        $errorMessage.addClass('d-none');
+                    }
+                } else if ($field.val() === '' || $field.val() === 'Choose...') {
+                    $field.addClass('border-danger');
+                    $errorMessage.removeClass('d-none');
+                } else {
+                    $field.removeClass('border-danger');
+                    $errorMessage.addClass('d-none');
+                }
+                updateButtonStatus();
+            });
 
             function resetAccordions(update) {
                 // Reset all accordions
                 setEditable()
-                $('.accordion-item').each(function () {
+                $('.accordion-item').each(function() {
                     var accordionId = $(this).attr('id');
-    var accordionFields = $('#' + accordionId + ' input:not([type="radio"]), #' + accordionId + ' select');
-    var accordionButton = $('#' + accordionId + ' button.accordion-button');
+                    var accordionFields = $('#' + accordionId + ' input:not([type="radio"]), #' + accordionId + ' select');
+                    var accordionButton = $('#' + accordionId + ' button.accordion-button');
 
 
                     // Empty input fields
@@ -3146,25 +2963,25 @@ $('#accordion-item1 input[required], #accordion-item1 select[required], #accordi
                     $('#next').addClass("disabled");
                     $('#draft').attr("disabled", "disabled");
                 });
-                $('.row-multiple').each(function () {
-                        var date = $(this).find('.input-date')
-                        var amount = $(this).find('.input-amount')
-                        date.prop('required', false)
-                        amount.prop('required', false)
-                    })
+                $('.row-multiple').each(function() {
+                    var date = $(this).find('.input-date')
+                    var amount = $(this).find('.input-amount')
+                    date.prop('required', false)
+                    amount.prop('required', false)
+                })
                 $('#baseRent').prop('required', false);
-                    $('#tripleNet').prop('required', false);
-                    $('#leaseStart').prop('required', false);
-                    $('#leaseEnd').prop('required', false);
-                if(update){
+                $('#tripleNet').prop('required', false);
+                $('#leaseStart').prop('required', false);
+                $('#leaseEnd').prop('required', false);
+                if (update) {
                     $("#collapse1,#collapse2").collapse('hide')
                     $('.row-multiple').each(function() {
-  if ($('.row-multiple').length > 1) {
-    $(this).remove();
-  }
-  $('input[name="yesno"]').prop('checked', false);
-  $('input[name="lease"]').prop('checked', false);
-});
+                        if ($('.row-multiple').length > 1) {
+                            $(this).remove();
+                        }
+                        $('input[name="yesno"]').prop('checked', false);
+                        $('input[name="lease"]').prop('checked', false);
+                    });
                 }
             }
             const input = document.querySelector("#phone");
@@ -3200,35 +3017,36 @@ $('#accordion-item1 input[required], #accordion-item1 select[required], #accordi
                     }
                 }
             });
-            $('input[type="checkbox"]').change(function () {
+            $('input[type="checkbox"]').change(function() {
                 var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
                 var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
                 console.log(columnIndex, isColumnVisible)
-                // Toggle the visibility of the corresponding column
-                $('table').find('tr').each(function () {
+                    // Toggle the visibility of the corresponding column
+                $('table').find('tr').each(function() {
                     var column = $(this).find('th:nth-child(' + columnIndex + '), td:nth-child(' + columnIndex + ')');
                     isColumnVisible ? column.show() : column.hide();
                 });
             });
+
             function filterTable(selectedFilter) {
                 var tableBody = $('#table_body');
                 var rows = tableBody.find('tr');
 
                 if (selectedFilter === 'alphabets') {
-                    rows.sort(function (a, b) {
+                    rows.sort(function(a, b) {
                         var textA = $(a).find('.tenantName').text().toLowerCase();
                         var textB = $(b).find('.tenantName').text().toLowerCase();
                         return textA.localeCompare(textB);
                     });
                 } else if (selectedFilter === 'ascending') {
-                    rows.sort(function (a, b) {
+                    rows.sort(function(a, b) {
                         console.log(parseInt($(a).find('.rentAmount').text()))
                         var idA = parseInt($(a).find('.rentAmount').text());
                         var idB = parseInt($(b).find('.rentAmount').text());
                         return idA - idB;
                     });
                 } else if (selectedFilter === 'descending') {
-                    rows.sort(function (a, b) {
+                    rows.sort(function(a, b) {
                         var idA = parseInt($(a).find('.rentAmount').text());
                         var idB = parseInt($(b).find('.rentAmount').text());
                         return idB - idA;
@@ -3239,52 +3057,52 @@ $('#accordion-item1 input[required], #accordion-item1 select[required], #accordi
             }
 
             // Filter functionality
-            $('#ascending').on('click', function () {
+            $('#ascending').on('click', function() {
                 filterTable("ascending")
             });
-            $('#descending').on('click', function () {
+            $('#descending').on('click', function() {
                 filterTable("descending")
             });
-            $('#alphabets').on('click', function () {
+            $('#alphabets').on('click', function() {
                 // console.log(1)
                 filterTable("alphabets")
             });
 
             // Search functionality
-            $('#typehead').on('keyup', function () {
+            $('#typehead').on('keyup', function() {
                 var searchValue = $(this).val().toLowerCase();
-                $('#table_body tr').filter(function () {
+                $('#table_body tr').filter(function() {
                     $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
                 });
             });
             $(".modal").on("click", ".btn-close,.btn-close-bottom, .modal-backdrop", function() {
-    
 
-    // Perform specific action when modal or backdrop is clicked
-    resetAccordions("update")
-    console.log("this is accordinon")
-  });
+
+                // Perform specific action when modal or backdrop is clicked
+                resetAccordions("update")
+                console.log("this is accordinon")
+            });
             // on keyup / change flag: reset
             input.addEventListener('change', reset);
             input.addEventListener('keyup', reset);
-            
+
             $(document).on('click', ".edit-option", function() {
-                edit=true
-  tenantIdElement = $(this).closest("tr").find(".tenant-id");
+                edit = true
+                tenantIdElement = $(this).closest("tr").find(".tenant-id");
 
 
-                const tenants=tenantData.find(obj => obj.tenantID == tenantIdElement.text());
+                const tenants = tenantData.find(obj => obj.tenantID == tenantIdElement.text());
                 console.log(tenants)
                 $('#baseRent').prop('required', false);
-                    $('#tripleNet').prop('required', false);
-                    $('#leaseStart').prop('required', false);
-                    $('#leaseEnd').prop('required', false);
-                    $('.row-multiple').each(function () {
-                        var date = $(this).find('.input-date')
-                        var amount = $(this).find('.input-amount')
-                        date.prop('required', false)
-                        amount.prop('required', false)
-                    })
+                $('#tripleNet').prop('required', false);
+                $('#leaseStart').prop('required', false);
+                $('#leaseEnd').prop('required', false);
+                $('.row-multiple').each(function() {
+                    var date = $(this).find('.input-date')
+                    var amount = $(this).find('.input-amount')
+                    date.prop('required', false)
+                    amount.prop('required', false)
+                })
                 $("#addModal").modal("show")
                 $("#addModal .modal-title").empty()
                 $("#addModal .modal-title").append(
@@ -3297,16 +3115,16 @@ $('#accordion-item1 input[required], #accordion-item1 select[required], #accordi
                 $("#phone").val(tenants.tPhoneNumber)
                 $("#address").val(tenants.tAddress)
                 $("#state").val(tenants.tState)
-                // $("#mySelect").val(optionValueToSelect);
+                    // $("#mySelect").val(optionValueToSelect);
                 $("#city").val(tenants.tCity)
                 $("#property").val(tenants.propertyID)
                 $("#unit").empty()
                 $("#unit").append($('<option></option>').text(tenants.unitNumber).val(tenants.propertyUnitID))
-                
+
                 $("#zip").val(tenants.tZipcode)
                 $("#rent").val(tenants.rentAmount)
-                // $("#baseRent").val(tenants.baseRent)
-                if(tenants.gross_or_triple_lease==="Triple Net Lease"){
+                    // $("#baseRent").val(tenants.baseRent)
+                if (tenants.gross_or_triple_lease === "Triple Net Lease") {
                     $("#collapse1").addClass('show')
                     $('input[name="lease"][value="Triple Net Lease"]').prop("checked", true);
                     $('#baseRent').prop('required', true);
@@ -3315,20 +3133,19 @@ $('#accordion-item1 input[required], #accordion-item1 select[required], #accordi
                     $('#leaseEnd').prop('required', true);
                     $("#baseRent").val(tenants.baseRent)
                     $("#tripleNet").val(tenants.tripleNet)
-                $("#leaseStart").val(tenants.leaseStartDate)
-                $("#leaseEnd").val(tenants.leaseEndDate)
-                }
-                else{
+                    $("#leaseStart").val(tenants.leaseStartDate)
+                    $("#leaseEnd").val(tenants.leaseEndDate)
+                } else {
                     console.log('value="Gross Lease"')
                     $('input[name="lease"][value="Gross Lease"]').prop("checked", true);
                 }
-                if(tenants.increaseRent==="yes"){
+                if (tenants.increaseRent === "yes") {
                     $("#collapse2").addClass('show')
                     $('input[name="yesno"][value="yes"]').prop("checked", true);
-                            
+
                     $("#add-item-container").empty()
-                tenants.increaseRentAmount.forEach(function(rentAmount){
-                    $("#add-item-container").append(`<div class="row row-multiple mb-2 pb-3"><div class="col-md-6">
+                    tenants.increaseRentAmount.forEach(function(rentAmount) {
+                        $("#add-item-container").append(`<div class="row row-multiple mb-2 pb-3"><div class="col-md-6">
                                             <label for="inputEmail4" class="form-label">Date of Rent Change (Optional)</label>
                                             <input type="date" class="form-control input-date dateofRentchange" name="dateofRentchange" id="dateofRentchange" value="${rentAmount.date}"required>
                                           </div>
@@ -3342,9 +3159,8 @@ $('#accordion-item1 input[required], #accordion-item1 select[required], #accordi
                                                                 <i class="fi fi-rs-trash text-danger fs-5"></i>
                                                             </button>
                                                         </div>`)
-                })
-                }
-                else{
+                    })
+                } else {
                     $('input[name="yesno"][value="no"]').prop("checked", true);
                 }
                 // $("#tripleNet").val(tenants.tripleNet)
@@ -3393,7 +3209,7 @@ $('#accordion-item1 input[required], #accordion-item1 select[required], #accordi
                 // });
                 // // console.log(rowData)
                 // formData.increaseRentData = rowData
-                
+
             })
 
 
@@ -3423,27 +3239,27 @@ $('#accordion-item1 input[required], #accordion-item1 select[required], #accordi
 
 
 
-            $('#fileInput').on('change', function () {
+            $('#fileInput').on('change', function() {
                 var files = Array.from($(this)[0].files);
                 console.log(files)
-                files.forEach(function (file) {
+                files.forEach(function(file) {
                     selectedFiles.push(file); // Add each file to the selected files array
                 });
 
                 updateSelectedFilesContainer(); // Update the selected files container
             });
-            $('#fileInput_update').on('change', function () {
+            $('#fileInput_update').on('change', function() {
                 console.log($(this)[0].files)
                 var files = Array.from($(this)[0].files);
                 console.log(files)
-                files.forEach(function (file) {
+                files.forEach(function(file) {
                     selectedFiles.push(file); // Add each file to the selected files array
                 });
 
                 updateSelectedFilesContainer(); // Update the selected files container
             });
 
-            $(document).on('click', '.delete-file', function () {
+            $(document).on('click', '.delete-file', function() {
                 var index = $(this).data('index');
                 selectedFiles.splice(index, 1); // Remove the selected file from the array
                 updateSelectedFilesContainer(); // Update the selected files container
@@ -3493,7 +3309,7 @@ $('#accordion-item1 input[required], #accordion-item1 select[required], #accordi
         //     $(this).find('input[type="radio"]').prop('checked', false);
         //     $(this).find('.file-grid').empty();
         // });
-        $(document).on('click', '#nex', function (e) {
+        $(document).on('click', '#nex', function(e) {
 
             e.preventDefault();
             $('#addModal').modal('hide');
@@ -3538,13 +3354,13 @@ $('#accordion-item1 input[required], #accordion-item1 select[required], #accordi
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function (response) {
+                success: function(response) {
                     // console.log(response);
                     // window.alert(response.message);
                     getData()
-                    // window.location = '../Landlord/properties-all.html';
+                        // window.location = '../Landlord/properties-all.html';
                 },
-                error: function (xhr, status, error) {
+                error: function(xhr, status, error) {
                     window.alert('Error: ' + error);
                 }
             });
@@ -3552,7 +3368,7 @@ $('#accordion-item1 input[required], #accordion-item1 select[required], #accordi
         });
         let propertyId;
 
-        $(document).on('click', '#update', function (e) {
+        $(document).on('click', '#update', function(e) {
             e.preventDefault();
             $("#myModal_edit").modal("hide");
 
@@ -3580,17 +3396,17 @@ $('#accordion-item1 input[required], #accordion-item1 select[required], #accordi
 
             var existingImageNames = [];
             selectedFiles.forEach((file) => {
-                if (typeof file === "string") {
-                    existingImageNames.push(file)
-                }
-            })
-            // Get the selected files
-            var files = selectedFiles.map(function (file) {
+                    if (typeof file === "string") {
+                        existingImageNames.push(file)
+                    }
+                })
+                // Get the selected files
+            var files = selectedFiles.map(function(file) {
                 return file instanceof File ? file : file.name;
             });
 
             // Add the selected files to the FormData object
-            files.forEach(function (file) {
+            files.forEach(function(file) {
                 formData.append('image', file);
             });
 
@@ -3605,44 +3421,45 @@ $('#accordion-item1 input[required], #accordion-item1 select[required], #accordi
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function (response) {
+                success: function(response) {
                     getData();
                 },
-                error: function (xhr, status, error) {
+                error: function(xhr, status, error) {
                     window.alert('Error: ' + error);
                 }
             });
         });
-        $(document).on('click', '#confirmDelete', function (e) {
+        $(document).on('click', '#confirmDelete', function(e) {
 
-            e.preventDefault();
-            // delete using AJAX
-            $('#myModal_delete').modal('hide');
-            $.ajax({
-                url: 'http://localhost:3000/api/spade//tenantDelete',
-                type: 'DELETE',
-                data: JSON.stringify({
-                    "tenantID": tenantID
-                }),
-                contentType: "application/json; charset=utf-8",
-                processData: false,
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                },
-                success: function (response) {
-                    // console.log(response);
-                    // window.alert(response.message);
-                    getData()
-                    // window.location = '../Landlord/properties-all.html';
-                },
-                error: function (xhr, status, error) {
-                    window.alert('Error: ' + error);
-                }
-            });
-        })
-        // let data;
-        // var tenantData;
+                e.preventDefault();
+                // delete using AJAX
+                $('#myModal_delete').modal('hide');
+                $.ajax({
+                    url: 'http://localhost:3000/api/spade//tenantDelete',
+                    type: 'DELETE',
+                    data: JSON.stringify({
+                        "tenantID": tenantID
+                    }),
+                    contentType: "application/json; charset=utf-8",
+                    processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function(response) {
+                        // console.log(response);
+                        // window.alert(response.message);
+                        getData()
+                            // window.location = '../Landlord/properties-all.html';
+                    },
+                    error: function(xhr, status, error) {
+                        window.alert('Error: ' + error);
+                    }
+                });
+            })
+            // let data;
+            // var tenantData;
         var tenantID
+
         function getData(selectedFilter = "alphabets") {
             $("#preloader").fadeIn("fast");
             // console.log(22)
@@ -3655,20 +3472,20 @@ $('#accordion-item1 input[required], #accordion-item1 select[required], #accordi
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function (response){
+                success: function(response) {
                     // tenantData=data[0]
                     // console.log(response)
                     if (response.message == "No data found") {
                         console.log("tenantData")
                         window.location = "./new-tenant.html"
                     }
-                    tenantData=response.data[0]
+                    tenantData = response.data[0]
                     $("#user-name").text(response.user)
                     var tableBody = $('#table_body');
                     tableBody.empty();
                     // console.log(data[0])
                     let tenantNames = []
-                    response.data[0]?.forEach(function (tenant) {
+                    response.data[0] ?.forEach(function(tenant) {
 
                         // var image = '<td><img src="../../../../spadeApi/uploads/' + tenant.images[0] + '" alt=""></td>';
                         // var image = '<td><img src="../../../../../../Desktop/spadeApi/uploads/image-1684250579662.png" alt="hhghghgh"></td>';
@@ -3709,8 +3526,8 @@ $('#accordion-item1 input[required], #accordion-item1 select[required], #accordi
                         tableBody.append(row);
                     });
                     $("#preloader").fadeOut("slow")
-                    
-                    $('.delete-option').click(function (e) {
+
+                    $('.delete-option').click(function(e) {
                         e.preventDefault(); // Prevent default anchor behavior
                         const tenantIdElement = $(this).closest("tr").find(".tenant-id");
                         tenantID = tenantIdElement.text();
@@ -3718,7 +3535,7 @@ $('#accordion-item1 input[required], #accordion-item1 select[required], #accordi
                         $('#myModal_delete').modal('show');
                     });
                 },
-                error: function (xhr, status, error) {
+                error: function(xhr, status, error) {
                     // console.log(error)
                     // window.alert('Error: ' + "Token expeired!, Login again");
                     // window.location = '../Landlord/login_module.html';
@@ -3731,26 +3548,26 @@ $('#accordion-item1 input[required], #accordion-item1 select[required], #accordi
             var selectedFilesContainer = $('.file-grid');
             selectedFilesContainer.empty();
             console.log(selectedFiles)
-            selectedFiles.forEach(function (file, index) {
+            selectedFiles.forEach(function(file, index) {
 
                 var fileElement = $('<div>')
                     .addClass('selected-file')
                     .append(
                         $('<img>')
-                            .addClass('file-preview')
-                            .attr('src', typeof file === "object" ? URL.createObjectURL(file) : '../../../../spadeApi/uploads/' + file)
+                        .addClass('file-preview')
+                        .attr('src', typeof file === "object" ? URL.createObjectURL(file) : '../../../../spadeApi/uploads/' + file)
                     )
                     .append(
                         $('<div>')
-                            .addClass('file-details')
-                            .append($('<span>').text("Image-" + (index + 1)))
+                        .addClass('file-details')
+                        .append($('<span>').text("Image-" + (index + 1)))
                         // .append($('<span>').text(fileSize))
                     )
                     .append(
                         $('<span>')
-                            .addClass('delete-file')
-                            .text('X')
-                            .attr('data-index', index)
+                        .addClass('delete-file')
+                        .text('X')
+                        .attr('data-index', index)
                     )
                     .appendTo(selectedFilesContainer);
 
@@ -3777,6 +3594,23 @@ $('#accordion-item1 input[required], #accordion-item1 select[required], #accordi
         getData();
     </script>
 
+    <script>
+        function logout() {
+            localStorage.removeItem('authtoken');
+            window.open('./login_module.html', "_blank")
+            window.close();
+            console.log('Done');
+        }
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#myTable').DataTable({
+                ordering: false,
+                info: false,
+                searching: false
+            });
+        });
+    </script>
 
 
 </body>
