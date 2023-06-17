@@ -80,8 +80,9 @@ const {userId}=req.user
       message: " Vendor created successful",
     });
   } catch (error) {
-    res.status(400).send(error);
     console.log(error);
+    res.status(400).send(error);
+    
   }
 };
 //  #############################  ADD VENDOR ENDS HERE ##################################################
@@ -90,6 +91,7 @@ const {userId}=req.user
 //  #############################  All VENDOR Start HERE ##################################################
 exports.getAllVendors = async (req, res) => {
   const { userId,userName } = req.user;
+  console.log(userId)
   try {
     const getVendorAPI = await queryRunner(
       getVendors,[userId]
@@ -123,18 +125,20 @@ exports.getAllVendors = async (req, res) => {
 //  #############################  ADD TASK Start HERE ##################################################
 exports.addTasks = async (req, res) => {
   const {
-    taskName,
-    vendorID,
-    tenantID,
+    task,
+    assignee,
+    property,
     dueDate,
     status,
     priority,
-    notes,
+    note,
     notifyTenant,
     notifyVendor,
     // created_at,
     // created_by,
   } = req.body;
+  console.log(req)
+  const vendorID=assignee.split(",")
   //   const { userId } = req.user
   const { userId, userName } = req.user;
   const currentDate = new Date();
@@ -142,19 +146,19 @@ exports.addTasks = async (req, res) => {
     // console.log(1);
     const addTasksCheckResult = await queryRunner(
       selectQuery("task", "taskName", "tenantID"),
-      [taskName, tenantID]
+      [task, property]
     );
     // console.log(addTasksCheckResult);
     if (addTasksCheckResult[0].length > 0) {
       return res.send("Task already exists");
     } else {
       const TasksResult = await queryRunner(addTasksQuery, [
-        taskName,
-        tenantID,
+        task,
+        property,
         dueDate,
         status,
         priority,
-        notes,
+        note,
         notifyTenant,
         notifyVendor,
         currentDate,
@@ -190,7 +194,7 @@ exports.addTasks = async (req, res) => {
           }
         }
       //   //  add vendor
-        const tenantLandlordResult = await queryRunner(getLandlordTenant, [userId,tenantID]);
+        const tenantLandlordResult = await queryRunner(getLandlordTenant, [userId,property]);
         let vendorEmailarr = [];
         let vendorNamearr = [];
         for(let i = 0; i < vendorID.length; i++){
@@ -205,6 +209,7 @@ exports.addTasks = async (req, res) => {
             return res.send("Vendor not found");
           }
         }
+        console.log(tenantLandlordResult[0])
         const tenantName = tenantLandlordResult[0][0].firstName + " " + tenantLandlordResult[0][0].lastName; 
         const tenantEmail = tenantLandlordResult[0][0].email;
         const CompanyName = tenantLandlordResult[0][0].companyName;
@@ -218,10 +223,10 @@ exports.addTasks = async (req, res) => {
           await taskSendMail(
             tenantName,
             tenantEmail,
-            "Property Maintenance: " + taskName,
+            "Property Maintenance: " + task,
             dueDate,
             landlordName,
-            taskName,
+            task,
             vendorNames,
             priority,
             CompanyName,
@@ -235,10 +240,10 @@ exports.addTasks = async (req, res) => {
           await taskSendMail(
             tenantName,
             vendorEmailarr[i],
-            "Property Maintenance: " + taskName,
+            "Property Maintenance: " + task,
             dueDate,
             landlordName,
-            taskName,
+            task,
             vendorNames,
             priority,
             CompanyName,
@@ -583,12 +588,13 @@ exports.getVendorCategory = async (req, res) => {
 
 exports.getVendorAssignTo = async (req, res) => {
   try {
-    const {userId}=req.user
+    const {userId,userName}=req.user
     // const {userId}=req.body
     const vendorResult = await queryRunner(selectQuery("vendor", "LandlordID"),[userId]); 
     if (vendorResult[0].length > 0) {
       res.status(200).json({
         data: vendorResult[0],
+        name:userName,
         message: "ALL vendor Here",
       });
     } else {

@@ -2485,7 +2485,7 @@ color: #000;
             $("#preloader").fadeIn("fast");
             // console.log(22)
             $.ajax({
-                url: 'http://localhost:3000/api/spade/getAllVendors',
+                url: 'http://localhost:3000/api/spade/getVendorAssignTo',
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -2500,13 +2500,13 @@ color: #000;
                         console.log("tenantData")
                         window.location = "./new-tenant.html"
                     }
-                    vendorData = response.data[0]
+                    vendorData = response.data
                     $("#user-name").text(response.name)
                     var tableBody = $('#table_body');
                     tableBody.empty();
                     // console.log(data[0])
                     let tenantNames = []
-                    response.data[0]?.forEach(function (vendor) {
+                    response.data?.forEach(function (vendor) {
 
                         // var image = '<td><img src="../../../../spadeApi/uploads/' + tenant.images[0] + '" alt=""></td>';
                         // var image = '<td><img src="../../../../../../Desktop/spadeApi/uploads/image-1684250579662.png" alt="hhghghgh"></td>';
