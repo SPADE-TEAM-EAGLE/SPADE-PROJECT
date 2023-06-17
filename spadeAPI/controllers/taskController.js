@@ -42,7 +42,7 @@ exports.addVendors = async (req, res) => {
     email,
     categoryID,
   } = req.body;
-
+console.log(req)
   try {
     const vendorCheckResult = await queryRunner(
       selectQuery("vendor", "mobileNumber", "email"),
@@ -83,11 +83,11 @@ exports.addVendors = async (req, res) => {
 
 //  #############################  All VENDOR Start HERE ##################################################
 exports.getAllVendors = async (req, res) => {
-  const { ID } = req.body;
+  const { userId } = req.user;
   try {
     const getVendorAPI = await queryRunner(
       selectQuery("vendor", "landlordID"),
-      [ID]
+      [userId]
     );
 
     if (getVendorAPI[0].length > 0) {
