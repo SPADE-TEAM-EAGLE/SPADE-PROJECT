@@ -94,7 +94,7 @@ exports.getAllVendors = async (req, res) => {
     const getVendorAPI = await queryRunner(
       getVendors,[userId]
     );
-      
+
     if (getVendorAPI[0].length > 0) {
       res.status(200).json({
         data: getVendorAPI,

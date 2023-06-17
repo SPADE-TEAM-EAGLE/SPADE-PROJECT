@@ -764,19 +764,13 @@ background-color: white;
                         <form class="row g-3" enctype="multipart/form-data">
                             <div class="col-md-4">
                                 <label for="inputEmail4" class="form-label fw-bold">Task Name</label>
-                                <input class="form-control" placeholder="Sink in Leaked" type="text" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Task Name here" data-bs-container="#addModal">
-                                <span class="text-danger d-none">Property ID is required!</span>
+                                <input id="task" required class="form-control" placeholder="Sink in Leaked" type="text" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Task Name here" data-bs-container="#addModal">
+                                <span class="text-danger d-none">Task name is required!</span>
                             </div>
                             <div class="col-md-4">
-                                <!-- <label for="inputState" class="form-label fw-bold"></label>
-                                <select id="state" class="form-select form">
-                                <option selected>Choose...</option>
-                                <option>Sindh</option>
-                                <option>Punjab</option>
-                                <option>Balochistan</option>
-                                <option>KPK</option> -->
+                          
                                 <label class="form-label fw-bold">Assign To</label>
-                                    <select class="form-control select2" data-placeholder="Choose Browser" multiple data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Assign To here" data-bs-container="#addModal">
+                                    <select id="assignee" class="form-control select2" data-placeholder="Choose Browser" multiple data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Assign To here" data-bs-container="#addModal">
                                             <option value="Firefox">
                                                 Firefox
                                             </option>
@@ -794,44 +788,44 @@ background-color: white;
                                             </option>
                                         </select>
                             </select>
-                                <span class="text-danger d-none">Property name required!</span>
+                                <!-- <span class="text-danger d-none">Property name required!</span> -->
                             </div>
                             <div class="col-md-4">
                                 <label for="inputState" class="form-label fw-bold">Related To</label>
-                                <select id="state" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Related To here" data-bs-container="#addModal">
+                                <select required id="property" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Related To here" data-bs-container="#addModal">
                                 <option selected>Choose...</option>
                             </select>
                                 <span class="text-danger d-none">Property name required!</span>
                             </div>
                             <div class="col-md-4">
                                 <label for="inputEmail4" class="form-label fw-bold">Due Date</label>
-                                <input class="form-control" placeholder="MM/DD/YYYY" type="date" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Due Date here" data-bs-container="#addModal">
-                                <span class="text-danger d-none">Property ID is required!</span>
+                                <input id="dueDate" class="form-control" placeholder="MM/DD/YYYY" type="date" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Due Date here" data-bs-container="#addModal">
+                                <!-- <span class="text-danger d-none">Property ID is required!</span> -->
                             </div>
                             <div class="col-md-4">
                                 <label for="inputState" class="form-label fw-bold">Status</label>
-                                <select id="state" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select Status" data-bs-container="#addModal"> 
+                                <select id="status" required class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select Status" data-bs-container="#addModal"> 
                                 <option selected>Choose...</option>
 
                                     </select>
-                                <span class="text-danger d-none">Property name required!</span>
+                                <span class="text-danger d-none">Status is required!</span>
                             </div>
                             <div class="col-md-4">
                                 <label for="inputState" class="form-label fw-bold">Priority</label>
-                                <select id="state" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select Priority" data-bs-container="#addModal">
+                                <select id="priority" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select Priority" data-bs-container="#addModal">
                                 <option selected>Choose...</option>
                             </select>
-                                <span class="text-danger d-none">Property name required!</span>
+                                <!-- <span class="text-danger d-none">Property name required!</span> -->
                             </div>
                             <div class="col-md-12">
                                 <label class="form-label fw-bold">Notes</label>
-                                <textarea class="form-control mb-4" placeholder="Sorry about that We will look into it." rows="4" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Notes" data-bs-container="#addModal"></textarea>
-                                <span class="text-danger d-none">Photos are required!</span>
+                                <textarea id="notes" class="form-control mb-4" placeholder="Sorry about that We will look into it." rows="4" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Notes" data-bs-container="#addModal"></textarea>
+                                <!-- <span class="text-danger d-none">Photos are required!</span> -->
                             </div>
                             <div class="col-md-12">
                                 <label class="form-label fw-bold">Media/ Files</label>
                                 <div class="custom-file" style="border: 1px dashed #00000087;">
-                                    <input id="fileInput" type="file" name="image" class="custom-file-input form" accept=".jpg, .png, image/jpeg, image/png" aria-label="hello" multiple>
+                                    <input id="fileInput" required type="file" name="image" class="custom-file-input form" accept=".jpg, .png, image/jpeg, image/png" aria-label="hello" multiple>
                                     <span className="d-none"></span>
                                     <label class="custom-file-label" for="fileInput">
                                                 <i class="fi fi-rs-cloud-upload"></i>
@@ -856,11 +850,11 @@ background-color: white;
                     <div class="d-flex">
 
                         <label class="custom-control custom-checkbox me-2">
-                                <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1" checked="">
+                                <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="" checked="">
                                 <span class="custom-control-label">Notify Tenant</span>
                             </label>
                         <label class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1" checked="">
+                                <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="" checked="">
                                 <span class="custom-control-label">Notify Assignee(s)</span>
                             </label>
                     </div>
@@ -975,7 +969,7 @@ background-color: white;
                     </div>
                     <div class=""><button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close'>Close</button>
                         <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
-                        <a href="javascript:void(0)" class="btn text-light btn-pill button disabled" style='background-color:#1467B0;' id='next'>Next</a></div>
+                        <a href="javascript:void(0)" class="btn text-light btn-pill button disabled" style='background-color:#1467B0;' id='next1'>Next</a></div>
 
                 </div>
             </div>
@@ -2428,207 +2422,48 @@ background-color: white;
     <script src="../assets/js/charts.js"></script>
 
     <script>
-        function checkFieldsStatus(accordionId) {
-            var accordionFields = $('#' + accordionId + ' input[type="text"], #' + accordionId + ' select');
-            var imageField = $('#' + accordionId + ' input[type="file"]');
-            var hasEmptyFields = false;
-            var hasErrorFields = false;
-            var hasFilledFields = false;
-
-            accordionFields.each(function() {
-                var $field = $(this);
-                if ($field.val() === '' || $field.val() === 'Choose...') {
-                    hasEmptyFields = true;
-                }
-                if ($field.hasClass('border-danger')) {
-                    hasErrorFields = true;
-                }
-                if ($field.val() !== '' || $field.val() !== 'Choose...') {
-                    hasFilledFields = true;
-                }
-            });
-            if (imageField.length && imageField.get(0).files.length === 0) {
-                hasEmptyFields = true;
-            }
-            if (hasEmptyFields && hasErrorFields) {
-                return 1;
-            } else if (!hasEmptyFields && !hasErrorFields && hasFilledFields) {
-                return 2;
-            } else if (hasEmptyFields && !hasErrorFields && hasFilledFields) {
-                console.log(2)
-                return 3;
-            } else {
-                return 0;
-            }
-        }
-
-        let counter = 0
-
-        function checkFieldsFilled(id) {
-            const status = checkFieldsStatus(id)
-            if (id === "accordion-item2" && counter === 0) {
-                counter += 1
-                return
-            }
-            const accordionItem = document.getElementById(id);
-            const formFields = accordionItem.querySelectorAll("input, select");
-            let allFieldsFilled = true;
-            formFields.forEach(function(field) {
-                if (field.value === "" || field.value === "Choose...") {
-                    allFieldsFilled = false;
-                }
-
-            });
-            const chevronIcon = accordionItem.querySelector(".icon");
-            switch (status) {
-                case 0:
-
-                    break;
-                case 1:
-                    chevronIcon.classList.remove("fi-rs-check-circle");
-                    chevronIcon.classList.remove("chevron");
-                    chevronIcon.classList.add("fi-rs-exclamation");
-                    chevronIcon.classList.add("cross");
-                    break;
-                case 2:
-                    chevronIcon.classList.remove("fi-rs-exclamation");
-                    chevronIcon.classList.remove("chevron");
-                    chevronIcon.classList.add("fi-rs-check-circle");
-                    chevronIcon.classList.remove("cross");
-                    chevronIcon.classList.add("tick");
-                    break;
-                case 3:
-                    console.log(2)
-                    chevronIcon.classList.remove("fi-rs-exclamation");
-                    chevronIcon.classList.add("chevron");
-                    // chevronIcon.classList.add("fi-rs-check-circle");
-                    chevronIcon.classList.remove("cross");
-                    chevronIcon.classList.remove("tick");
-                    break;
-                default:
-                    break;
-            }
-        }
+        
         var selectedFiles = [];
 
         $(document).ready(function() {
 
             $.ajax({
-                url: 'http://localhost:3000/api/spade/getStates',
+                url: 'http://localhost:3000/api/spade/viewPropertyTenant',
                 method: 'GET',
-                data: {
-                    country: 'PK',
-                    maxRows: 500,
-                    username: 'developedmatz',
-                    style: 'full'
-                },
-                success: function(result) {
+                contentType: "application/json; charset=utf-8",
+                headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+    },
+                success: function(response) {
+                    console.log(response.data[0])
+                    $("#user-name").text(response.user)
+                    // console.log(response)
+                    $("#property").empty()
+                    $("#property").append($("<option></option>").text("Choose...").prop("selected",true))
+                    
+                    response.data[0].forEach((property) => {
+    console.log(property);
+    var optionText = "Tenant: " + property.firstName + " " + property.lastName + " Property: " + property.propertyName;
+    var optionValue = property.tenantID;
+    $("#property").append($("<option></option>").text(optionText).val(optionValue));
+});
                     // Handle state selection change
-                    $('#state').change(function() {
-                        var selectedState = $(this).val();
-                        if (selectedState === "KPK") {
-                            selectedState = "Khyber Pakhtunkhwa"
-                        }
-
-                        var cityDropdown = $('#city');
-
-                        // Clear existing options
-                        cityDropdown.empty();
-                        cityDropdown.append($('<option></option>').text("Choose..."));
-                        cities = []
-                        if (selectedState !== "Choose...") {
-                            // Populate city options based on selected state
-                            count = 0
-                            data = result.geonames
-                            for (item of data) {
-                                if (item.adminName1 === selectedState) {
-                                    cities.push(item.name)
-                                    count++
-                                }
-                                if (count === 10) {
-                                    break
-                                }
-                            }
-
-
-                            cities.forEach(function(city) {
-                                cityDropdown.append($('<option></option>').text(city));
-                            });
-
-                        }
-                    })
-                    $('#state_update').change(function() {
-                        var selectedState = $(this).val();
-                        if (selectedState === "KPK") {
-                            selectedState = "Khyber Pakhtunkhwa"
-                        }
-
-                        var cityDropdown = $('#city_update');
-
-                        // Clear existing options
-                        cityDropdown.empty();
-                        cityDropdown.append($('<option></option>').text("Choose..."));
-                        cities = []
-                        if (selectedState !== "Choose...") {
-                            // Populate city options based on selected state
-                            count = 0
-                            data = result.geonames
-                            for (item of data) {
-                                if (item.adminName1 === selectedState) {
-                                    cities.push(item.name)
-                                    count++
-                                }
-                                if (count === 10) {
-                                    break
-                                }
-                            }
-
-
-
-                            cities.forEach(function(city) {
-                                cityDropdown.append($('<option></option>').text(city));
-                            });
-
-                        }
-                    });
                 }
             })
 
             function areAllFieldsFilled() {
-                var accordion1Fields = $('#accordion-item1 input[type="text"], #accordion-item1 select');
-                var accordion2Fields = $('#accordion-item2 input[type="text"], #accordion-item2 select');
+                var accordion1Fields = $('#addModal input[required], #addModal select[required]');
+  
                 var imageInput = $('#fileInput');
                 var allFieldsFilled = accordion1Fields.filter(function() {
                     return $(this).val() === '' || $(this).val() === 'Choose...';
-                }).length === 0 && accordion2Fields.filter(function() {
-                    return $(this).val() === '' || $(this).val() === 'Choose...';
-                }).length === 0 && imageInput.get(0).files.length > 0;
+                }).length === 0 ;
 
                 return allFieldsFilled;
             }
 
             // Function to enable or disable buttons based on field status
             function updateButtonStatus() {
-                var accordion1Fields = $('#accordion-item1 input[type="text"], #accordion-item1 select');
-                var accordion2Fields = $('#accordion-item2 input[type="text"], #accordion-item2 select');
-                var imageInput = $('#fileInput');
-
-                var isAccordion1FieldsEmpty = accordion1Fields.filter(function() {
-                    return $(this).val() !== '' || $(this).val() === 'Choose...';
-                }).length === 0;
-
-                var isAccordion2FieldsEmpty = accordion2Fields.filter(function() {
-                    return $(this).val() !== '' || $(this).val() === 'Choose...';
-                }).length === 0;
-
-                var isImageInputEmpty = imageInput.get(0).files.length === 0;
-
-                // Enable or disable the buttons based on the fields' status
-                if (!isAccordion1FieldsEmpty || !isAccordion2FieldsEmpty || !isImageInputEmpty) {
-                    $('#draft').removeAttr('disabled');
-                } else {
-                    $('#draft').attr('disabled', 'disabled');
-                }
 
                 var allFieldsFilled = areAllFieldsFilled();
 
@@ -2644,7 +2479,7 @@ background-color: white;
             }
 
             // Call the updateButtonStatus function when any field in the accordions is changed
-            $('#accordion-item1 input, #accordion-item1 select, #accordion-item2 input, #accordion-item2 select').on('input change', function() {
+            $('#addModal input, #addModal select').on('input change', function() {
                 var $field = $(this);
                 var $errorMessage = $field.next('.text-danger');
 
