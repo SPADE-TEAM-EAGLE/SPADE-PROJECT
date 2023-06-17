@@ -108,6 +108,7 @@ exports.createTenants = async (req, res) => {
           // insert increase rent amount END
 
         } else {
+          console.log(111)
           res.status(400).json({
 
             message: "Error occur in update tenant property unit"
@@ -116,6 +117,7 @@ exports.createTenants = async (req, res) => {
 
 
       } else {
+        console.log(22222)
         res.status(400).json({
           message: "data not save"
         })
