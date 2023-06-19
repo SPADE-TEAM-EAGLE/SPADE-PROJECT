@@ -391,26 +391,26 @@ exports.getVendorCategory = async (req, res) => {
 
 //  #############################  Task Assign to Start HERE ##################################################
 
-// exports.getVendorAssignTo = async (req, res) => {
-//   try {
-//     const {userId}=req.user
-//     // const {userId}=req.body
-//     const vendorResult = await queryRunner(selectQuery("vendor", "LandlordID"),[userId]); 
-//     if (vendorResult[0].length > 0) {
-//       res.status(200).json({
-//         data: vendorResult[0],
-//         message: "ALL vendor Here",
-//       });
-//     } else {
-//       res.status(400).json({
-//         message: "No vendor data found",
-//       });
-//     }
-//   } catch (error) {
-//     res.send("Error Get vendor list ");
-//     console.log(error);
-//   }
-// };
+exports.getVendorAssignTo = async (req, res) => {
+  try {
+    // const {userId}=req.user
+    const {userId}=req.body
+    const vendorResult = await queryRunner(selectVendorCategory,[userId]); 
+    if (vendorResult[0].length > 0) {
+      res.status(200).json({
+        data: vendorResult[0],
+        message: "ALL vendor Here",
+      });
+    } else {
+      res.status(400).json({
+        message: "No vendor data found",
+      });
+    }
+  } catch (error) {
+    res.send("Error Get vendor list ");
+    console.log(error);
+  }
+};
 //  #############################  Task Assign to ENDS HERE ##################################################
 
 
@@ -478,11 +478,7 @@ exports.updateTasks = async (req, res) => {
             // console.log(taskDeleteresult)
           }
         }
-
-        // console.log(`step : 4 delete previous images data into database propertyid = ${id}`);
-        // console.log(taskDeleteresult)
-        // if (taskDeleteresult[0].affectedRows > 0) {
-
+ 
         const fileNames = req.files.map((file) => file.filename);
         existingImg = [...fileNames];
         // using loop to send new images data into database
@@ -496,9 +492,10 @@ exports.updateTasks = async (req, res) => {
             return res.send("Error2");
           }
         }
+        }
 
       
-      //   //  add vendor
+//       //   //  add vendor
       const taskVendorDeleteResult = await queryRunner(
         deleteQuery("taskassignto", "taskId"),
         [taskID]
@@ -513,16 +510,16 @@ exports.updateTasks = async (req, res) => {
           return res.send("Error2");
         }
       }
-    //   //  add vendor
+//     //   //  add vendor
 
 
 
-// Email Send
+// // Email Send
 
 const tenantLandlordResult = await queryRunner(getLandlordTenant, [userId,tenantID]);
 let vendorEmailarr = [];
 let vendorNamearr = [];
-for(let i = 0; i < vendorID.length; i++){
+for(let i = 0; i < vendorID.length; i++){ 
   const vendorCheckResult = await queryRunner( selectQuery("vendor", "id"), [vendorID[i]] );
   if(vendorCheckResult.length > 0){
     let vendorName = vendorCheckResult[0][0].firstName + " " + vendorCheckResult[0][0].lastName;
@@ -575,17 +572,10 @@ for(let i = 0; i < vendorEmailarr.length > 0; i++){
   );
 }
 }
-// Email Send
-
-
-      } else {
-        return res.status(400).json({
-          message: "No task Image Data Found",
-        });
-      }
+return res.status(200).json({
+            message: " task updated successful ",
+          });
  
- 
-
   } catch (error) {
     res.status(400).send(error);
     console.log(error);
