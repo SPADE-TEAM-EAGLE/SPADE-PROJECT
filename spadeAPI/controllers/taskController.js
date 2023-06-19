@@ -251,7 +251,8 @@ exports.addTasks = async (req, res) => {
 
 //  ############################# Get ALL Task Start ############################################################
 exports.getAllTask = async (req, res) => {
-  const { userId } = req.user;
+  // const { userId } = req.user;
+  const { userId } = req.body;
   try {
     const allTaskResult = await queryRunner(Alltasks, [userId]);
 
