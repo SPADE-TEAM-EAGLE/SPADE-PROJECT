@@ -1136,7 +1136,6 @@ exports.propertyTask = async (req, res) => {
     res.send("Error Get property Task");
   }
 };
-
-
+ 
 //  ############################# Task property ############################################################
  

@@ -90,4 +90,5 @@ router.get("/getVendorAssignTo" ,taskController.getVendorAssignTo);
 router.put("/updateTasks" ,taskController.updateTasks);
 router.delete("/deleteTask" ,taskController.deleteTask);
 router.get("/propertyTask", userController.propertyTask);
+router.get("/tenantTask", tenantController.tenantTask);
 module.exports = router;
