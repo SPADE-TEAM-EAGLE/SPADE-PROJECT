@@ -2443,8 +2443,8 @@ color: #000;
                 formData.append('phone', phone);
                 formData.append('workPhone', workPhone);
                 formData.append('email', email);
-                // formData.append('categoryID', category);
-                formData.append('categoryID', 2);
+                formData.append('categoryID', category);
+                // formData.append('categoryID', 2);
                 console.log(status)
                 $.ajax({
                     url: 'http://localhost:3000/api/spade/addVendor',
@@ -2462,7 +2462,7 @@ color: #000;
                         status: status,
                         email: email,
                         // formData.append(categoryID:category),
-                        categoryID: 2
+                        categoryID: category
                     }),
                     contentType: "application/json; charset=utf-8",
                     processData: false,
@@ -2485,7 +2485,7 @@ color: #000;
             $("#preloader").fadeIn("fast");
             // console.log(22)
             $.ajax({
-                url: 'http://localhost:3000/api/spade/getVendorAssignTo',
+                url: 'http://localhost:3000/api/spade/getAllVendors',
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -2500,13 +2500,13 @@ color: #000;
                         console.log("tenantData")
                         window.location = "./new-tenant.html"
                     }
-                    vendorData = response.data
+                    vendorData = response.data[0]
                     $("#user-name").text(response.name)
                     var tableBody = $('#table_body');
                     tableBody.empty();
                     // console.log(data[0])
                     let tenantNames = []
-                    response.data?.forEach(function (vendor) {
+                    response.data[0]?.forEach(function (vendor) {
 
                         // var image = '<td><img src="../../../../spadeApi/uploads/' + tenant.images[0] + '" alt=""></td>';
                         // var image = '<td><img src="../../../../../../Desktop/spadeApi/uploads/image-1684250579662.png" alt="hhghghgh"></td>';

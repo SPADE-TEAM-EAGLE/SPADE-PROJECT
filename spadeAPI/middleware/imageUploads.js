@@ -7,6 +7,7 @@ const Path = require('path');
             cb(null,"uploads")
         },
         filename : function(req,file,cb){
+          // console.log(file)
             cb(null, file.fieldname+`-`+ Date.now()+ Path.extname(file.originalname));
         }
     })

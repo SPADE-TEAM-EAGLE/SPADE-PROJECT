@@ -1598,40 +1598,49 @@
                                                                     Show</strong></a>
                                                         </li>
                                                         <li class="d-flex justify-content-between"><a
-                                                                href="javascript:void(0)">Date</a>
+                                                                href="javascript:void(0)">IMAGE</a>
                                                             <div class="form-check m-0">
                                                                 <input type="checkbox" class="form-check-input mt-2"
                                                                     id="exampleCheck1" checked>
                                                             </div>
                                                         </li>
                                                         <li class="d-flex justify-content-between"><a
-                                                                href="javascript:void(0)">PROPERTY</a>
+                                                                href="javascript:void(0)">TASK</a>
+                                                            <div class="form-check m-0">
+                                                                <input type="checkbox" class="form-check-input mt-2"
+                                                                    id="exampleCheck1" checked>
+                                                            </div>
+                                                        </li>
+
+                                                        <li class="d-flex justify-content-between"><a
+                                                                href="javascript:void(0)">ASSIGNED TO</a>
                                                             <div class="form-check m-0">
                                                                 <input type="checkbox" class="form-check-input mt-2"
                                                                     id="exampleCheck1" checked>
                                                             </div>
                                                         </li>
                                                         <li class="d-flex justify-content-between"><a
-                                                                href="javascript:void(0)">Task</a>
+                                                                href="javascript:void(0)">DUE AT</a>
                                                             <div class="form-check m-0">
                                                                 <input type="checkbox" class="form-check-input mt-2"
                                                                     id="exampleCheck1" checked>
                                                             </div>
                                                         </li>
                                                         <li class="d-flex justify-content-between"><a
-                                                                href="javascript:void(0)">Media</a>
-                                                            <div class="form-check m-0">
-                                                                <input type="checkbox" class="form-check-input mt-2"
-                                                                    id="exampleCheck1" checked>
-                                                            </div>
-                                                        </li>
-                                                        <li class="d-flex justify-content-between"><a
-                                                                href="javascript:void(0)">Status</a>
-                                                            <div class="form-check m-0">
-                                                                <input type="checkbox" class="form-check-input mt-2"
-                                                                    id="exampleCheck1" checked>
-                                                            </div>
-                                                        </li>
+                                                            href="javascript:void(0)">RELATED TO</a>
+                                                        <div class="form-check m-0">
+                                                            <input type="checkbox" class="form-check-input mt-2"
+                                                                id="exampleCheck1" checked>
+                                                        </div>
+                                                    </li>
+                                                    <li class="d-flex justify-content-between"><a
+                                                        href="javascript:void(0)">STATUS</a>
+                                                    <div class="form-check m-0">
+                                                        <input type="checkbox" class="form-check-input mt-2"
+                                                            id="exampleCheck1" checked>
+                                                    </div>
+                                                </li>
+                                                
                                                     </ul>
                                                 </div>
                                                 <button type="button" class="btn btn-primary btn-pill mx-2"
@@ -1646,12 +1655,7 @@
                                                 <table class="table border text-nowrap text-md-nowrap mb-0">
                                                     <thead>
                                                         <tr>
-                                                            <th><label class="custom-control custom-checkbox-md">
-                                                                    <input type="checkbox" class="custom-control-input"
-                                                                        name="example-checkbox5" value="option5"
-                                                                        checked="">
-                                                                    <span class="custom-control-label"></span>
-                                                                </label></th>
+
                                                             <th>Image</th>
                                                             <th>TASK</th>
                                                             <th>ASSIGNED TO</th>
@@ -1682,15 +1686,6 @@
                                                             </td>
                                                             <td
                                                                 style="font-weight: 600;text-align: center;display: flex;">
-                                                                <div class="me-2">
-                                                                    <img class="avatar brround avatar-md"
-                                                                        src="../assets/images/users/2.jpg"
-                                                                        alt="avatar-img">
-                                                                    <div class="media-body valign-middle mt-0">
-                                                                        <a href="javascript:void(0)"
-                                                                            class="text-dark fw-semibold">Tenant</a>
-                                                                    </div>
-                                                                </div>
                                                                 <div class="me-2">
                                                                     <img class="avatar brround avatar-md"
                                                                         src="../assets/images/users/2.jpg"
@@ -2851,14 +2846,7 @@
                     // Hide error spans
                     accordionFields.siblings('span.text-danger').addClass('d-none');
 
-                    // Reset image input
-                    // if (imageField.length) {
-                    //     imageField.val('');
-                    //     imageField.siblings('label.custom-file-label').find('.custom-file-text span').first().text('Upload Photo or drag and drop here');
-                    //     imageField.siblings('.selected-files').find('.file-grid').empty();
-                    // }
-                    // // $('#accordion-item1').find('.file-grid').empty();
-                    // Reset accordion button icons
+
                     accordionButton.find('.fi-rs-exclamation').addClass('fi-rs-angle-circle-down').addClass("chevron").removeClass('fi-rs-exclamation').removeClass("cross");
                     accordionButton.find('.fi-rs-check-circle').addClass('fi-rs-angle-circle-down').addClass("chevron").removeClass('fi-rs-check-circle').removeClass("tick");
                     $('#next').addClass("disabled");
@@ -2871,63 +2859,64 @@
                 resetAccordions()
                 $('#addModal').modal('hide');
             })
-            $(document).on('click', '#next', function(e) {
-  e.preventDefault();
-  selectedFiles = [];
-  $('#addModal').modal('hide');
+            $(document).on('click', '#next', function (e) {
+                e.preventDefault();
+                //   selectedFiles = [];
+                $('#addModal').modal('hide');
 
-  var task = $("#task").val();
-  var assignee = $("#assignee").val();
-  var property = $("#property").val();
-  var dueDate = $("#dueDate").val();
-  var status = $("#status").val();
-  var priority = $("#priority").val();
-  var note = $("#note").val();
+                var task = $("#task").val();
+                var assignee = $("#assignee").val();
+                var property = $("#property").val();
+                var dueDate = $("#dueDate").val();
+                var status = $("#status").val();
+                var priority = $("#priority").val();
+                var note = $("#notes").val();
 
-  var formData = new FormData();
+                var formData = new FormData();
 
-  // Add the form data
-  formData.append('task', task);
-  formData.append('assignee', assignee);
-  formData.append('property', property);
-  formData.append('dueDate', dueDate);
-  formData.append('status', status);
-  formData.append('priority', priority);
-  formData.append('note', note);
+                // Add the form data
+                formData.append('task', task);
+                formData.append('assignee', assignee);
+                formData.append('property', property);
+                formData.append('dueDate', dueDate);
+                formData.append('status', status);
+                formData.append('priority', priority);
+                formData.append('note', note);
 
-  // Check if the first checkbox is checked
-  var isNotifyTenantChecked = $('input[name="example-checkbox1"]:eq(0)').is(':checked') ? "yes" : "no";
+                // Check if the first checkbox is checked
+                var isNotifyTenantChecked = $('input[name="example-checkbox1"]:eq(0)').is(':checked') ? "yes" : "no";
 
-  // Check if the second checkbox is checked
-  var isNotifyAssigneesChecked = $('input[name="example-checkbox1"]:eq(1)').is(':checked') ? "yes" : "no";
+                // Check if the second checkbox is checked
+                var isNotifyAssigneesChecked = $('input[name="example-checkbox1"]:eq(1)').is(':checked') ? "yes" : "no";
 
-  // Add the checkbox values
-  formData.append('notifyTenant', isNotifyTenantChecked);
-  formData.append('notifyVendor', isNotifyAssigneesChecked);
+                // Add the checkbox values
+                formData.append('notifyTenant', isNotifyTenantChecked);
+                formData.append('notifyVendor', isNotifyAssigneesChecked);
 
-  // Add the selected files
-  var files = $('#fileInput')[0].files;
-  for (var i = 0; i < selectedFiles.length; i++) {
-    formData.append('images', selectedFiles[i]);
-  }
+                var files = $('#fileInput')[0].files;
 
-  $.ajax({
-    url: 'http://localhost:3000/api/spade/addTasks',
-    type: 'POST',
-    data: formData,
-    contentType: false,
-    processData: false,
-    headers: {
-      'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-    },
-    success: function(response) {
-      console.log(2);
-    },
-    error: function(xhr, status, error) {
-      window.alert('Error: ' + error);
-    }
-  });
-});
+                // Add the files to the FormData object
+                for (var i = 0; i < selectedFiles.length; i++) {
+                    formData.append('image', selectedFiles[i]);
+                }
+
+                $.ajax({
+                    url: 'http://localhost:3000/api/spade/addTasks',
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        console.log(2);
+                    },
+                    error: function (xhr, status, error) {
+                        window.alert('Error: ' + error);
+                    }
+                });
+            });
 
             let propertyId;
 
@@ -3091,7 +3080,7 @@
             });
             // console.log($('#alphabets'))
             // Search functionality
-            $('#typehead').on('keyup', function () {
+            $('#search_input').on('keyup', function () {
                 var searchValue = $(this).val().toLowerCase();
                 $('#table_body tr').filter(function () {
                     $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
@@ -3247,12 +3236,12 @@
             })
             // let data;
 
-            function getData(selectedFilter = "alphabets") {
-                // console.log(2)
+            function getData() {
+                console.log(2)
                 $("#global-loader").fadeIn("fast")
                 // console.log(22)
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/allproperty',
+                    url: 'http://localhost:3000/api/spade/getAllTask',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -3261,7 +3250,7 @@
                     },
                     success: function (response) {
                         console.log(response);
-                        if (response.data[0].length === 0) {
+                        if (false) {
 
                             window.location = './new-property.html'
                         } else {
@@ -3270,48 +3259,85 @@
                             var tableBody = $('#table_body');
 
                             tableBody.empty();
+                            function toTitleCase(str) {
+  return str.replace(/\w\S*/g, function(txt) {
+    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+  });
+}
 
-                            response.data[0]?.forEach(function (property) {
-                                var image = '<td><img src="../../../../spadeAPI/uploads/' + property.images[0] + '" alt=""></td>';
+                            response.data[0]?.forEach(function (task) {
+                                // var image = '<td><img src="../../../../spadeAPI/uploads/' + property.images[0] + '" alt=""></td>';
                                 // var image = '<td><img src="../../../../../../Desktop/spade API 2/uploads/image-1684250579662.png" alt="hhghghgh"></td>';
+                                var image = '<td><img src="../../../../spadeAPI/uploads/' + task.taskImages?.split(',')[0] + '" alt=""></td>';
 
-                                var propertyId = '<td class="property-id " style="font-weight: 600;">' + property
-                                    .id + '</td>';
+                                var createdDate = new Date(task.created_at);
+var currentDate = new Date();
 
-                                var propertyName = '<td class="propertyName" style="font-weight: 600;">' +
-                                    property
-                                        .propertyName +
-                                    '</td>';
-                                var colorClass = '';
-                                var backgroundClass = '';
+var timeDiff = Math.abs(currentDate - createdDate);
+var minutesDiff = Math.floor(timeDiff / (1000 * 60));
+var hoursDiff = Math.floor(minutesDiff / 60);
+var daysDiff = Math.floor(hoursDiff / 24);
 
-                                if (property.propertyType === 'Single Family') {
-                                    var colorClass = 'rounded-pill-Single-Family'
-                                } else if (property.propertyType === 'Multi-Family') {
-                                    var colorClass = 'rounded-pill-Multi-Family';
+var taskName = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + task.taskName + '</p>' +
+    `<span class="font-weight-normal" style="color: #9B9B9B;"> By ${task.createdBy} - `;
 
-                                } else if (property.propertyType === 'Multi-Commercial') {
-                                    var colorClass = 'rounded-pill-Multi-Commercial';
-                                }
+if (daysDiff > 0) {
+    taskName += `${daysDiff} days`;
+} else if (hoursDiff > 0) {
+    taskName += `${hoursDiff} hours`;
+} else {
+    taskName += `${minutesDiff} minutes`;
+}
 
-                                var propertyType =
-                                    '<td class="propertyType"><a class="like" href="javascript:;">' +
-                                    `<span class="badge btn-light ${colorClass} rounded-pill py-2 px-3">` +
-                                    '<i class="fe fe-circle me-1"></i>' + property.propertyType + '</span>' +
-                                    '</a></td>';
+taskName += '</span>' + '</td>';
 
-                                var propertyUnits = '<td class="propertyUnits">' +
-                                    '<p style="font-weight: 600;" class="mb-1">' + property.units +
-                                    ' Unit(s)</p>' +
-                                    '<span class="font-weight-normal">' + property.propertySQFT +
-                                    ' Square Feet</span>' +
-                                    '</td>';
+                                    var assignTo = '<td style="font-weight: 600;text-align: center;display: flex;">' +
+    (task.AssignTo?.map(({ name, email }) => {
+        return `
+            <div class="me-2">
+                <img class="avatar brround avatar-md" src="../assets/images/users/2.jpg" alt="avatar-img">
+                <div class="media-body valign-middle mt-0">
+                    <a href="javascript:void(0)" class="text-dark fw-semibold">${name}</a>
+                </div>
+            </div>`;
+    }) || "Not assigned") +
+    '</td>';
 
-                                var propertyAddress = '<td class="propertyAddress">' +
-                                    '<p style="font-weight: 600;" class="mb-1">' + property.address + '</p>' +
-                                    '<span>' + property.city + ', ' + property.state + ' ' + property.zipCode +
-                                    '</span>' +
-                                    '</td>';
+    var dueDate = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">'+ (task.dueDate || "Not Set") + '</p>' +`<span class="font-weight-normal text-danger"> <i
+                                                                        class="fe fe-circle me-1"></i>${task.priority}</span>` + '</td>';
+    var relatedTo = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">'+ (task.propertyName ? toTitleCase(task.propertyName) : "Not Set")+ '</p>' +`<span class="font-weight-normal text-danger">Unit Number: ${task.unitNumber}</span>` + '</td>';
+    var status = '<td class="property-id " style="font-weight: 600;">' + (task.status ? toTitleCase(task.status) : "Not Set") + '</td>';
+                                    
+                                // var colorClass = '';
+                                // var backgroundClass = '';
+
+                                // if (property.propertyType === 'Single Family') {
+                                //     var colorClass = 'rounded-pill-Single-Family'
+                                // } else if (property.propertyType === 'Multi-Family') {
+                                //     var colorClass = 'rounded-pill-Multi-Family';
+
+                                // } else if (property.propertyType === 'Multi-Commercial') {
+                                //     var colorClass = 'rounded-pill-Multi-Commercial';
+                                // }
+
+                                // var propertyType =
+                                //     '<td class="propertyType"><a class="like" href="javascript:;">' +
+                                //     `<span class="badge btn-light ${colorClass} rounded-pill py-2 px-3">` +
+                                //     '<i class="fe fe-circle me-1"></i>' + property.propertyType + '</span>' +
+                                //     '</a></td>';
+
+                                // var propertyUnits = '<td class="propertyUnits">' +
+                                //     '<p style="font-weight: 600;" class="mb-1">' + property.units +
+                                //     ' Unit(s)</p>' +
+                                //     '<span class="font-weight-normal">' + property.propertySQFT +
+                                //     ' Square Feet</span>' +
+                                //     '</td>';
+
+                                // var propertyAddress = '<td class="propertyAddress">' +
+                                //     '<p style="font-weight: 600;" class="mb-1">' + property.address + '</p>' +
+                                //     '<span>' + property.city + ', ' + property.state + ' ' + property.zipCode +
+                                //     '</span>' +
+                                //     '</td>';
 
                                 var dropdownMenu =
                                     '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
@@ -3321,8 +3347,8 @@
                                     `<li><a class="dropdown-item text-success" href="./view-property.html?propertyId=${property.id}">View</a></li>` +
                                     '</ul></td>';
                                 // Create a table row and append the generated columns
-                                var row = '<tr>' + image + propertyId + propertyName + propertyType +
-                                    propertyUnits + propertyAddress + dropdownMenu + '</tr>';
+                                var row = '<tr>' + image + taskName + assignTo + dueDate+
+                                    relatedTo + status + dropdownMenu + '</tr>';
 
                                 // Append the row to the table body
                                 tableBody.append(row);
@@ -3374,7 +3400,7 @@
                 });
 
             }
-
+            getData()
 
         })
     </script>

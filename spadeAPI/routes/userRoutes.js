@@ -80,7 +80,7 @@ router.delete('/invoiceDelete',verifyToken ,invoiceController.invoiceDelete);
 router.post("/addVendor", verifyToken,taskController.addVendors);
 // router.get("/getAllVendors",verifyToken ,taskController.getAllVendors);
 router.get("/getAllVendors",verifyToken ,taskController.getAllVendors);
-router.post("/addTasks", upload, taskController.addTasks);
+router.post("/addTasks",[verifyToken ,upload], taskController.addTasks);
 router.get("/getAllTask",verifyToken ,taskController.getAllTask);
 router.get("/taskByID",verifyToken ,taskController.taskByID);
 router.put("/updateTenants", verifyToken,tenantController.updateTenants);

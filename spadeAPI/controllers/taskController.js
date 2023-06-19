@@ -20,8 +20,8 @@ const {
   Alltasks,
   taskByIDQuery,
   updateTasksQuery,
+  selectVendorCategory,
   getVendors
-  // addVendor
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -96,7 +96,7 @@ exports.getAllVendors = async (req, res) => {
     const getVendorAPI = await queryRunner(
       getVendors,[userId]
     );
-
+      // console.log(getVendorAPI)
     if (getVendorAPI[0].length > 0) {
       res.status(200).json({
         data: getVendorAPI,
@@ -137,7 +137,7 @@ exports.addTasks = async (req, res) => {
     // created_at,
     // created_by,
   } = req.body;
-  console.log(req)
+  // console.log(req)
   const vendorID=assignee.split(",")
   //   const { userId } = req.user
   const { userId, userName } = req.user;
@@ -163,12 +163,14 @@ exports.addTasks = async (req, res) => {
         notifyVendor,
         currentDate,
         userName,
+        userId
       ]);
       if (TasksResult.affectedRows === 0) {
         return res.status(400).send("Error1");
       } 
       // else {
         const tasksID = TasksResult[0].insertId;
+        console.log(req.files)
         if(req.files){ 
         const fileNames = req.files.map((file) => file.filename);
         for (let i = 0; i < fileNames.length; i++) {
@@ -209,7 +211,7 @@ exports.addTasks = async (req, res) => {
             return res.send("Vendor not found");
           }
         }
-        console.log(tenantLandlordResult[0])
+        // console.log(tenantLandlordResult[0])
         const tenantName = tenantLandlordResult[0][0].firstName + " " + tenantLandlordResult[0][0].lastName; 
         const tenantEmail = tenantLandlordResult[0][0].email;
         const CompanyName = tenantLandlordResult[0][0].companyName;
@@ -411,8 +413,8 @@ exports.getVendorAssignTo = async (req, res) => {
     const vendorResult = await queryRunner(selectQuery("vendor", "LandlordID"),[userId]); 
     if (vendorResult[0].length > 0) {
       res.status(200).json({
+        user:userName,
         data: vendorResult[0],
-        name:userName,
         message: "ALL vendor Here",
       });
     } else {
