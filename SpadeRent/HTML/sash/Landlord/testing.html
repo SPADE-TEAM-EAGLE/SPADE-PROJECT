@@ -1,32 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Generate PDF on Click</title>
+  <title>Video Poster with CSS</title>
+  <style>
+    #video-container {
+      position: relative;
+      width: 640px; /* Adjust width and height according to your video dimensions */
+      height: 360px;
+    }
+    
+    #video {
+      width: 100%;
+    }
+    
+    #video-container::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("path/to/poster-image.jpg");
+      background-size: cover;
+      z-index: 1;
+    }
+  </style>
 </head>
 <body>
-  <div id="content">
-    <h1>My PDF Content</h1>
-    <p>This is the content of my PDF.</p>
-    <ul>
-      <li>List item 1</li>
-      <li>List item 2</li>
-      <li>List item 3</li>
-    </ul>
+  <div id="video-container">
+    <video id="video" controls poster="../assets/images/walkthrough-demo1.png">
+      <source src="../assets/images/video-testing.mp4" type="video/mp4">
+    </video>
   </div>
-
-  <button onclick="generatePDF()">Generate PDF</button>
-
-  <script>
-    function generatePDF() {
-      // Hide the button to avoid printing it
-      document.querySelector("button").style.display = "none";
-
-      // Open the print dialog
-      window.print();
-
-      // Show the button again after printing
-      document.querySelector("button").style.display = "block";
-    }
-  </script>
 </body>
 </html>

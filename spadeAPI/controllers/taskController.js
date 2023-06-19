@@ -251,7 +251,8 @@ exports.addTasks = async (req, res) => {
 
 //  ############################# Get ALL Task Start ############################################################
 exports.getAllTask = async (req, res) => {
-  const { userId } = req.user;
+  // const { userId } = req.user;
+  const { userId } = req.body;
   try {
     const allTaskResult = await queryRunner(Alltasks, [userId]);
 
@@ -274,6 +275,7 @@ exports.getAllTask = async (req, res) => {
 
           if (vendorResult.length > 0) {
             const vendor = {
+              ID : vendorResult[0][0].id,
               name: vendorResult[0][0].firstName + " "+ vendorResult[0][0].lastName,
               email: vendorResult[0][0].email,
             };
@@ -587,3 +589,25 @@ return res.status(200).json({
 
 
 
+//  #############################  Delete Task Start HERE ##################################################
+
+exports.deleteTask = async (req, res) => {
+  try {
+    const {taskID}=req.body
+    const deleteTaskResult = await queryRunner(deleteQuery("task","id"),[taskID]); 
+    if (deleteTaskResult[0].affectedRows > 0) {
+      res.status(200).json({
+        // data: vendorResult[0],
+        message: "task Deleted Successful",
+      });
+    } else {
+      res.status(400).json({
+        message: "No task data found",
+      });
+    }
+  } catch (error) {
+    res.send("Error Get delete task  ");
+    console.log(error);
+  }
+};
+//  #############################  Delete Task ENDS HERE ##################################################
