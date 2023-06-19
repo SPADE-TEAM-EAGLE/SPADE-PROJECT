@@ -20,7 +20,8 @@ const {
   insertTenantAttachFile,
   updateUnitsTenant,
   getTenantsById,
-  updateTenants
+  updateTenants,
+  tenantTaskQuery
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -684,3 +685,73 @@ exports.updateTenants = async (req, res) => {
   }
 }
       //  ############################# Update tenants END ############################################################
+
+
+      //  ############################# Task tenant ############################################################
+exports.tenantTask = async (req, res) => {
+  const { Id } = req.body;
+  try {
+    const taskByIDResult = await queryRunner(tenantTaskQuery, [Id]);
+    if (taskByIDResult.length > 0) {
+      for (let j = 0; j < taskByIDResult[0].length; j++) {
+        const taskID = taskByIDResult[0][j].id;
+        const TaskImagesResult = await queryRunner(selectQuery("taskimages", "taskID"),[taskID]);
+        if (TaskImagesResult[0].length > 0) {
+          const taskImages = TaskImagesResult[0].map((image) => image.taskImages);
+          taskByIDResult[0][j].taskImages = taskImages;
+        } else {
+          taskByIDResult[0][j].taskImages = ["No Task Images Found"];
+        }
+        const TaskAssignToResult = await queryRunner(
+          selectQuery("taskassignto", "taskId"),
+          [taskID]
+        );
+        const vendorIDs = TaskAssignToResult[0].map((vendorID) => vendorID.vendorId);
+        const vendorData = [];
+        for (let i = 0; i < vendorIDs.length; i++) {
+          const vID = vendorIDs[i];
+          const vendorResult = await queryRunner(
+            selectQuery("vendor", "id"),
+            [vID]
+          );
+          if (vendorResult.length > 0) {
+            const categoryIDs = vendorResult[0][0].categoryID;
+            const VendorCategoryResult = await queryRunner(
+              selectQuery("vendorcategory", "id"),
+              [categoryIDs]
+            );
+            if (VendorCategoryResult.length > 0) {
+              const vendorDataObject = {
+                name: vendorResult[0][0].firstName + " " + vendorResult[0][0].lastName,
+                businessName: vendorResult[0][0].businessName,
+                streetAddress: vendorResult[0][0].streetAddress,
+                workNumber: vendorResult[0][0].workNumber,
+                mobileNumber: vendorResult[0][0].mobileNumber,
+                email: vendorResult[0][0].email,
+                category: VendorCategoryResult[0][0].category,
+              };
+              vendorData.push(vendorDataObject);
+            } else {
+              vendorData.push(["No Vendor Data Found"]);
+            }
+          }
+        }
+        taskByIDResult[0][j].vendor = vendorData;
+      }
+      res.status(200).json({
+        data: taskByIDResult,
+        message: "Task data retrieved successfully",
+      });
+    } else {
+      res.status(400).json({
+        message: "No tenant Task data found",
+      });
+    }
+  } catch (error) {
+    console.log("Error:", error);
+    res.send("Error Get tenant Task");
+  }
+};
+ 
+//  ############################# Task tenant ############################################################
+ 
