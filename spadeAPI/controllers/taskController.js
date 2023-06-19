@@ -430,8 +430,9 @@ exports.updateTasks = async (req, res) => {
     notifyTenant,
     notifyVendor 
   } = req.body;
-  const { userId, userName  } = req.body;
-  // const { userId, userName } = req.user;
+  // const { userId, userName  } = req.body;
+  const { userId, userName } = req.user;
+
   const currentDate = new Date();
   try {
     
