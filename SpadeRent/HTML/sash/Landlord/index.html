@@ -34,6 +34,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.css">
     <!-- drag and drop end  -->
 
+        <!-- demo walktrough start  -->
+        <link rel="stylesheet" href="../assets/css/walkthrough-demo.css">
+        <!-- demo walktrough End  -->
+
     <!-- COLOR SKIN CSS -->
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="../assets/colors/color1.css" />
     <style>
@@ -298,10 +302,16 @@
                                         <!-- LOGO -->
 
                                         <!-- COUNTRY -->
-                                        <div class="d-flex country">
-                                            <a class="nav-link icon theme-layout nav-link-bg layout-setting">
+                                        <div class="d-flex country mt-2">
+                                            <a class="nav-link icon theme-layout nav-link-bg layout-setting card-domo-0">
                                                 <span class="dark-layout text-dark"><i class="fe fe-moon"></i></span>
                                                 <span class="light-layout"><i class="fe fe-sun"></i></span>
+                                            </a>
+                                        </div>
+
+                                        <div class="d-flex country mt-2">
+                                            <a class="nav-link icon theme-layout nav-link-bg layout-settingg" onclick="mydemoclick()">
+                                                <span class="dark-layout text-dark"><i class="fi fi-rs-universal-access"></i></span>
                                             </a>
                                         </div>
 
@@ -481,7 +491,7 @@
                             <!-- <li class="sub-category">
                                        <h3>UI Kit</h3>
                                    </li> -->
-                            <li class="slide">
+                            <li class="slide card-demo-1">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
                                     class="side-menu__icon fi fi-rs-building"></i><span class="side-menu__label">Properties</span>
                                     <i
@@ -493,7 +503,7 @@
                                     <li><a href="javascript:void(0)" class="slide-item">Draft</a></li>
                                 </ul>
                             </li>
-                            <li class="slide">
+                            <li class="slide card-demo-2">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="add-tenant.html"><i
                                     class="side-menu__icon fi fi-rs-cabin"></i><span class="side-menu__label">Tenants</span>
                                     <i
@@ -510,7 +520,7 @@
                             <!-- <li class="sub-category">
                                        <h3>Pre-build Pages</h3>
                                    </li> -->
-                            <li class="slide">
+                            <li class="slide card-demo-3">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="invoices.html"><i
                                             class="side-menu__icon fi fi-rs-file-invoice-dollar"></i><span class="side-menu__label">Invoicing</span>
                                             <i
@@ -523,7 +533,7 @@
                                 </ul>
 
                             </li>
-                            <li class="slide">
+                            <li class="slide card-demo-4">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="leads-all.php"><i
                                     class="side-menu__icon fi fi-rs-chart-simple"></i><span
                                     class="side-menu__label">Leads</span>
@@ -533,7 +543,7 @@
 
                             </li>
 
-                            <li class="slide">
+                            <li class="slide card-demo-5">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="view-tasks.html"><i
                                         class="side-menu__icon fi fi-rs-list-check"></i><span class="side-menu__label">Tasks</span>
                                         <i
@@ -547,7 +557,7 @@
                                     <li><a href="tasks-vendors.html" class="slide-item">Vendors</a></li>
                                 </ul>
                             </li>
-                            <li class="slide">
+                            <li class="slide card-demo-6">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
                                     <i class="side-menu__icon fi fi-rs-document"></i>
                                     <span class="side-menu__label">Reports</span>
@@ -555,7 +565,7 @@
                                     <!-- <i class="angle fe fe-chevron-right"></i> -->
                                 </a>
 
-                                <li>
+                                <li class="card-demo-7">
                                     <a class="side-menu__item has-link" href="settings.php" target="_self"><i
                                     class="side-menu__icon fi fi-rs-settings"></i><span class="side-menu__label">Settings</span>
                                 <!-- <span
@@ -1693,8 +1703,72 @@
   }
 </script>
 
-
-    
+          <!-- demo walktrough start  -->
+          <script src="../assets/js/walkthrough-demo.js"></script>
+          <script>
+                // function mydemoclick(){
+                introJs().setOptions({
+                steps: [
+                {
+                    element: document.querySelector('.card-demo-0'),
+                    // title: 'Want to 2 minuts and learn what you can do with Rent',
+                    intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4">Your browser does not support the video tag.</video> <br> <b style="font-size: 17px;">Want to 2 minuts and learn what you can do with Rent</b> <br><br> Spade Rent is your one-stop-shop to find tenants and manage your Rental property.',
+                    // intro: 'This step focuses on an element',
+                    position: 'top-bottom'
+                },
+                {
+                    element: document.querySelector('.card-demo-1'),
+                    title: 'Manage your Properties',
+                    intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px;">Manage and grow your portfolio from anywhere with ease.</b>',
+                    // intro: 'This step focuses on an element',
+                    position: 'right'
+                },
+                {
+                    element: document.querySelector('.card-demo-2'),
+                    title: 'Manage Tenants',
+                    intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px;">Whether you are looking to market your rental across the web or send a tenant an online application, you first need to add your property.</b>',
+                    // intro: 'This step focuses on an element',
+                    position: 'right'
+                },
+                {
+                    element: document.querySelector('.card-demo-3'),
+                    title: 'Manage Invoicing',
+                    intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px;">Whether you are looking to market your rental across the web</b>',
+                    // intro: 'This step focuses on an element',
+                    position: 'right'
+                },
+                {
+                    element: document.querySelector('.card-demo-4'),
+                    title: 'Manage Leads',
+                    intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px;">Whether you are looking to market your rental across the web</b>',
+                    // intro: 'This step focuses on an element',
+                    position: 'right'
+                },
+                {
+                    element: document.querySelector('.card-demo-5'),
+                    title: 'Manage Tasks',
+                    intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px;">Whether you are looking to market your rental across the web</b>',
+                    // intro: 'This step focuses on an element',
+                    position: 'right'
+                },
+                {
+                    element: document.querySelector('.card-demo-6'),
+                    title: 'Manage Reports',
+                    intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px;">Whether you are looking to market your rental across the web</b>',
+                    // intro: 'This step focuses on an element',
+                    position: 'right'
+                },
+                {
+                    element: document.querySelector('.card-demo-7'),
+                    title: 'Manage Setttings',
+                    intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px;">Whether you are looking to market your rental across the web</b>',
+                    // intro: 'This step focuses on an element',
+                    position: 'right'
+                },
+                ]
+                }).start();
+          </script>
+          <!-- demo walktrough End  -->
 
 </body>
 

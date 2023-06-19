@@ -35,6 +35,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.css">
     <!-- drag and drop end  -->
 
+    <!-- demo walktrough start  -->
+    <link rel="stylesheet" href="../assets/css/walkthrough-demo.css">
+    <!-- demo walktrough End  -->
+
     <!-- COLOR SKIN CSS -->
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="../assets/colors/color1.css" />
     <style>
@@ -109,10 +113,16 @@
                                         <!-- LOGO -->
 
                                         <!-- COUNTRY -->
-                                        <div class="d-flex country">
+                                        <div class="d-flex country mt-2">
                                             <a class="nav-link icon theme-layout nav-link-bg layout-setting">
                                                 <span class="dark-layout text-dark"><i class="fe fe-moon"></i></span>
                                                 <span class="light-layout"><i class="fe fe-sun"></i></span>
+                                            </a>
+                                        </div>
+
+                                        <div class="d-flex country mt-2">
+                                            <a class="nav-link icon theme-layout nav-link-bg layout-settingg" onclick="mydemoclick()">
+                                                <span class="dark-layout text-dark"><i class="fi fi-rs-universal-access"></i></span>
                                             </a>
                                         </div>
 
@@ -289,14 +299,14 @@
                                     class="side-menu__icon fi fi-rs-dashboard"></i><span class="side-menu__label">Overview</span></a>
                             </li>
 
-                            <li class="slide">
+                            <li class="slide card-demo">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="invoicing.html"><i
                                         class="side-menu__icon fi fi-rs-file-invoice-dollar"></i><span
                                         class="side-menu__label">Invoicing</span>
                                 </a>
                             </li>
 
-                            <li class="slide">
+                            <li class="slide card-demo1">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="tasks.html"><i
                                     class="side-menu__icon fi fi-rs-list-check"></i><span class="side-menu__label">Tasks</span>
                                    </a>
@@ -375,7 +385,7 @@
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-12 col-xl-4">
-                                        <div class="card overflow-hidden">
+                                        <div class="card overflow-hidden" id="login">
                                             <div class="card-body">
                                                 <div class="d-flex">
                                                     <div class="mt-2">
@@ -1547,6 +1557,30 @@ $(function() {
             }
           </script>
           
+          <!-- demo walktrough start  -->
+          <script src="../assets/js/walkthrough-demo.js"></script>
+          <script>
+                function mydemoclick(){
+                introJs().setOptions({
+                steps: [
+                {
+                    element: document.querySelector('.card-demo'),
+                    title: 'Welocme',
+                    intro: '<img src="../assets/images/newinvoice.png" alt=""> <br> My Name is Noman Peerzada',
+                    // intro: 'This step focuses on an element',
+                    position: 'right'
+                },
+                {
+                    element: document.querySelector('.card-demo'),
+                    title: 'Welocme',
+                    intro: '<img src="../assets/images/newinvoice.png" alt=""> <br> My Name is Noman Peerzada',
+                    // intro: 'This step focuses on an element',
+                    position: 'right'
+                },
+                ]
+                }).start();}
+          </script>
+          <!-- demo walktrough End  -->
           
 
 </body>
