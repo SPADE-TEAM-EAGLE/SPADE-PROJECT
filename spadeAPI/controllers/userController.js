@@ -1073,7 +1073,7 @@ exports.getStates = async (req, res) => {
 
 //  ############################# Task property ############################################################
 exports.propertyTask = async (req, res) => {
-  const { Id } = req.body;
+  const { prop } = req.body;
   try {
     const taskByIDResult = await queryRunner(propertyTaskQuery, [Id]);
     if (taskByIDResult.length > 0) {

@@ -2041,6 +2041,105 @@
             </div>
         </div>
     </div>
+
+    <!-- View Modal Start  -->
+    <div class="modal fade" id="viewModal-invoice" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="text-justify ps-2 border-model-line">
+                        <h2 class="modal-title mb-0">View <strong class="color-primary">Invoice</strong></h2>
+                        <button type="button" class="btn btn-primary">#Invoice Number: INV-89900A</button>
+                    </div>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="viewModal-invoice">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                     <div class="row">
+                        <div class="col-lg-3">
+                            <label><b>Tenant Name</b></label>
+                            <p class="text-primary"><b>John Clark</b></p>
+                        </div>
+                        <div class="col-lg-3">
+                            <label><b>Invoice Type</b></label>
+                            <p class="text-primary"><b>One Time Invoice</b></p>
+                        </div>
+                        <div class="col-lg-3">
+                            <label><b>Due Date</b></label>
+                            <p class="text-primary"><b>Jan-01-2023</b></p>
+                        </div>
+                        <div class="col-lg-3">
+                            <label><b>Status</b></label>
+                            <p class="text-danger"><b><i class="fi fi-rs-clock-three" style="color: #FB233B;"></i> Unpaid</b></p>
+                        </div>
+                        <div class="col-lg-12 mt-5">
+                            <label><b>Property Information</b></label>
+                            <p class="text-primary"><b>3114 Stargate Ct</b></p>
+                        </div>
+                        <div class="col-lg-12 mt-5">
+                            <div style="display: flex;">
+                            <p class="text-primary"><b>Line Items</b></p>
+                            <hr style="height: 2px; background: black; width: 88%; margin-left: 83px; position: absolute; margin-top: 10px;">
+                        </div>
+                        </div>
+                        <!-- <div class="col-lg-10 mt-5">
+                            
+                        </div> -->
+                     </div>
+                    <div class="row mt-5">
+                        <div class="col-12">
+                            <div class="table-responsive">
+                                <table class="table text-nowrap table-borderless text-md-nowrap mg-b-0 mb-0"
+                                    id="lineItemsTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Category</th>
+                                            <th>Property</th>
+                                            <th>Memo</th>
+                                            <th>Amount</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="add-item-container1">
+                                        <tr class="tr">
+                                            <td><p class="text-primary"><b>Rent</b></p></td>
+                                            <td><p class="text-primary"><b>3114 Stargate Ct</b></p></td>
+                                            <td><p class="text-primary"><b>Testing</b></p></td>
+                                            <td><p class="text-primary"><b>$200.00</b></p></td>
+                                            <td><button type="button" class="btn" id="del-btn1">
+                                                    <i class="fi fi-rs-trash text-danger fs-5"></i>
+                                                </button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-lg-8 mt-5">
+                            <label><b>Additional Information</b></label>
+                            <p class="text-primary"><b>Testing 123</b></p>
+                        </div>
+                        <div class="col-md-12 col-lg-4 mt-5">
+                            <span class="float-end">
+                                <label class="form-label fw-bold m-0">Balance Due</label>
+                                <h1 class="text-primary fw-bold m-0" id="totalText">$200.00</h1>
+                            </span>
+                        </div>
+                        <div class="col-lg-12 mt-5 mb-5">
+                            <img src="../assets/images/demo_img.png" alt=""> &nbsp;
+                            <img src="../assets/images/demo_img.png" alt=""> &nbsp;
+                            <img src="../assets/images/demo_img.png" alt=""> &nbsp;
+                            <img src="../assets/images/demo_img.png" alt=""> &nbsp;
+                            <img src="../assets/images/demo_img.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <!-- View Modal End  -->
     <!-- MODAL EFFECTS -->
 
     <!-- MODAL EFFECTS -->
@@ -3626,10 +3725,16 @@
                                                                 data-bs-toggle="dropdown"></i>
 
                                                             <ul class="dropdown-menu">
+                                                                <li><a class="dropdown-item text-dark view-btnn"
+                                                                        data-bs-effect="effect-scale"
+                                                                        data-bs-toggle="modal"
+                                                                        href="#viewModal-invoice">View</a>
+                                                                </li>
                                                                 <li><a class="dropdown-item text-dark view-btn"
                                                                         data-bs-effect="effect-scale"
                                                                         data-bs-toggle="modal"
-                                                                        href="#viewModal">View</a></li>
+                                                                        href="#viewModal">View PDF Invoice</a>
+                                                                </li>
                                                                 <li><a class="dropdown-item text-dark edit-option"
                                                                         data-bs-effect="effect-scale"
                                                                         href="#"
@@ -3973,23 +4078,23 @@
                                                 </tr>
                                                 <tr>
                                                     <td>Discount</td>
-                                                    <td>$550.00</td>
+                                                    <td>$ ${0}</td>
                                                 </tr>
                                                 <tr style="    border-bottom: 1px solid #AFAFAF;">
-                                                    <td>Tax (8.25%)</td>
-                                                    <td>$0</td>
+                                                    <td>Tax (0%)</td>
+                                                    <td>$ ${0}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Total</td>
-                                                    <td>$550.00</td>
+                                                    <td>$ ${data.totalAmount+0}</td>
                                                 </tr>
                                                 <tr style="    border-bottom: 2px solid #562AC8;">
                                                     <td>Deposit Requested</td>
-                                                    <td>$550.00</td>
+                                                    <td>$ 0</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="fw-bold">Deposit Due</td>
-                                                    <td class="fw-bold">$550.00</td>
+                                                    <td class="fw-bold">$ ${data.totalAmount+0+0}</td>
                                                 </tr>
                 `)
 
