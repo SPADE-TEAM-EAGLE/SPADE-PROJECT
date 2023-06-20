@@ -3,6 +3,7 @@ const router = express.Router();
 const userController = require("../controllers/userController");
 const tenantController = require("../controllers/tenantController");
 const invoiceController = require("../controllers/invoiceController");
+const tenantPortalController = require("../controllers/tenantPortalController");
 const verifyToken = require("../middleware/authenticate");
 const { upload } = require("../middleware/imageUploads");
 const { uploadExistingFiles } = require("../middleware/imageUploads");
@@ -40,19 +41,19 @@ router.put(
   "/PropertyUnitsUpdates",
   verifyToken,
   userController.putPropertyUnitsUpdates
-);
-router.get(
-  "/getPropertyUnitsTenant",
-  verifyToken,
-  userController.getPropertyUnitsTenant
-);
+  );
+  router.get(
+    "/getPropertyUnitsTenant",
+    verifyToken,
+    userController.getPropertyUnitsTenant
+    );
 router.get(
   "/viewPropertyTenant",
   verifyToken,
   userController.viewPropertyTenant
-);
-
-// router.post('/tenants',verifyToken,tenantController.createTenants);
+  );
+  
+  // router.post('/tenants',verifyToken,tenantController.createTenants);
 router.post("/tenants", verifyToken, tenantController.createTenants);
 router.post(
   "/sendInvitationLink",
@@ -89,4 +90,8 @@ router.get("/getVendorCategory" ,taskController.getVendorCategory);
 router.get("/getVendorAssignTo",verifyToken ,taskController.getVendorAssignTo);
 router.put("/updateTasks",[verifyToken,upload] ,taskController.updateTasks);
 router.delete("/deleteTask" ,taskController.deleteTask);
+router.get("/propertyTask", userController.propertyTask);
+router.get("/tenantTask", tenantController.tenantTask);
+router.get("/getAllInvoicesTenant", tenantPortalController.getAllInvoicesTenant);
+router.get("/getAllTaskTenant", tenantPortalController.getAllTaskTenant);
 module.exports = router;

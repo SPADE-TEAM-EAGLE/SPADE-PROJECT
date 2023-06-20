@@ -942,7 +942,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                    <div id="collapseOne_update" class="accordion-collapse collapse show" aria-labelledby="headingOne"
                         data-bs-parent="#accordionExample">
                         <form class="row g-3" enctype="multipart/form-data">
                             <div class="col-md-12">
@@ -1072,7 +1072,7 @@
                             id='close'>Close</button>
                         <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
                         <a href="javascript:void(0)" class="btn text-light btn-pill button disabled"
-                            style='background-color:#1467B0;' id='update'>Next</a>
+                            style='background-color:#1467B0;' id='save'>Save</a>
                     </div>
 
                 </div>
@@ -2783,20 +2783,43 @@
                     // Handle state selection change
                 }
             })
-            function areAllFieldsFilled() {
+            function areAllFieldsFilled(update) {
+                if(update){
+                    var accordion1Fields = $('#editModal input[required], #editModal select[required]');
+
+var imageInput = $('#fileInput_update');
+var allFieldsFilled = accordion1Fields.filter(function () {
+    return $(this).val() === '' || $(this).val() === 'Choose...';
+}).length === 0;
+    console.log()
+return allFieldsFilled;
+                }
                 var accordion1Fields = $('#addModal input[required], #addModal select[required]');
 
-                var imageInput = $('#fileInput');
-                var allFieldsFilled = accordion1Fields.filter(function () {
-                    return $(this).val() === '' || $(this).val() === 'Choose...';
-                }).length === 0;
-                    console.log()
-                return allFieldsFilled;
+var imageInput = $('#fileInput');
+var allFieldsFilled = accordion1Fields.filter(function () {
+    return $(this).val() === '' || $(this).val() === 'Choose...';
+}).length === 0;
+    console.log()
+return allFieldsFilled;
+
             }
 
             // Function to enable or disable buttons based on field status
-            function updateButtonStatus() {
+            function updateButtonStatus(update) {
+                if(update){
+                    var allFieldsFilled = areAllFieldsFilled(update);
+                
+                // Enable or disable the buttons based on the fields' status
+                if (allFieldsFilled) {
+                    $('#save').removeClass("disabled");
+                    //   $('#draft').removeAttr("disabled");
+                } else {
+                    $('#save').addClass("disabled");
+                    //   $('#draft').removeAttr("disabled");
 
+                }
+                }else{
                 var allFieldsFilled = areAllFieldsFilled();
                 
                 // Enable or disable the buttons based on the fields' status
@@ -2807,7 +2830,7 @@
                     $('#next').addClass("disabled");
                     //   $('#draft').removeAttr("disabled");
 
-                }
+                }}
             }
 
             // Call the updateButtonStatus function when any field in the accordions is changed
@@ -2823,6 +2846,19 @@
                     $errorMessage.addClass('d-none');
                 }
                 updateButtonStatus();
+            });
+            $('#editModal input[required], #editModal select[required]').on('input change', function () {
+                var $field = $(this);
+                var $errorMessage = $field.next('.text-danger');
+
+                if ($field.val() === '' || $field.val() === 'Choose...') {
+                    $field.addClass('border-danger');
+                    $errorMessage.removeClass('d-none');
+                } else {
+                    $field.removeClass('border-danger');
+                    $errorMessage.addClass('d-none');
+                }
+                updateButtonStatus("_update");
             });
             // Handle change event of checkboxes
 
