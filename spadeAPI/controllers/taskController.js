@@ -289,6 +289,7 @@ exports.getAllTask = async (req, res) => {
 
           if (vendorResult.length > 0) {
             const vendor = {
+              ID:vendorResult[0][0].id,
               name: vendorResult[0][0].firstName + " "+ vendorResult[0][0].lastName,
               email: vendorResult[0][0].email,
             };
@@ -433,31 +434,35 @@ exports.getVendorAssignTo = async (req, res) => {
 
 //  #############################  Update TASK Start HERE ##################################################
 exports.updateTasks = async (req, res) => {
+  console.log(req.body)
   const {
-    taskID,
+    property,
     taskName,
-    vendorID,
-    tenantID,
+    // assignee,
+    taskID,
     dueDate,
     status,
     priority,
-    notes,
-    taskImagesExist,
+    // notes,
+    assignee,
+    existingImages,
     notifyTenant,
-    notifyVendor 
+    notifyVendor,
+    message
   } = req.body;
-  const { userId, userName  } = req.body;
-  // const { userId, userName } = req.user;
+  // const { userId, userName  } = req.body;
+  const { userId, userName } = req.user;
+
   const currentDate = new Date();
   try {
     
       const TasksResult = await queryRunner(updateTasksQuery, [
         taskName,
-        tenantID,
+        property,
         dueDate,
         status,
         priority,
-        notes,
+        message,
         notifyTenant,
         notifyVendor, 
         currentDate,
@@ -474,14 +479,16 @@ exports.updateTasks = async (req, res) => {
 
 
       if (taskCheckResult.length > 0) {
-        taskimages = taskCheckResult[0].map((image) => image.Image);
-        let existingImg = taskImagesExist.split(",");
+        console.log(taskCheckResult)
+        const taskimages = taskCheckResult[0].map((image) => image.taskImages);
+        console.log(taskimages)
+        let existingImg = existingImages.split(",");
         const imagesToDelete = taskimages.filter(
           (element) => !existingImg.includes(element)
         );
 
         // Combine the common elements with array2
-
+          console.log("imagesToDeleted",imagesToDelete)
         imageToDelete(imagesToDelete);
         let taskDeleteresult = [{ affectedRows: 0 }];
         // delete images Data into database
@@ -494,11 +501,7 @@ exports.updateTasks = async (req, res) => {
             // console.log(taskDeleteresult)
           }
         }
-
-        // console.log(`step : 4 delete previous images data into database propertyid = ${id}`);
-        // console.log(taskDeleteresult)
-        // if (taskDeleteresult[0].affectedRows > 0) {
-
+ 
         const fileNames = req.files.map((file) => file.filename);
         existingImg = [...fileNames];
         // using loop to send new images data into database
@@ -512,13 +515,15 @@ exports.updateTasks = async (req, res) => {
             return res.send("Error2");
           }
         }
+        }
 
       
-      //   //  add vendor
+//       //   //  add vendor
       const taskVendorDeleteResult = await queryRunner(
         deleteQuery("taskassignto", "taskId"),
-        [taskID]
+        [property]
       );
+      const vendorID=assignee.split(",")
       for (let i = 0; i < vendorID.length; i++) {
         const Vendorid = vendorID[i];
         const vendorResults = await queryRunner(addVendorList, [
@@ -529,16 +534,16 @@ exports.updateTasks = async (req, res) => {
           return res.send("Error2");
         }
       }
-    //   //  add vendor
+//     //   //  add vendor
 
 
 
-// Email Send
+// // Email Send
 
-const tenantLandlordResult = await queryRunner(getLandlordTenant, [userId,tenantID]);
+const tenantLandlordResult = await queryRunner(getLandlordTenant, [userId,property]);
 let vendorEmailarr = [];
 let vendorNamearr = [];
-for(let i = 0; i < vendorID.length; i++){
+for(let i = 0; i < vendorID.length; i++){ 
   const vendorCheckResult = await queryRunner( selectQuery("vendor", "id"), [vendorID[i]] );
   if(vendorCheckResult.length > 0){
     let vendorName = vendorCheckResult[0][0].firstName + " " + vendorCheckResult[0][0].lastName;
@@ -591,17 +596,10 @@ for(let i = 0; i < vendorEmailarr.length > 0; i++){
   );
 }
 }
-// Email Send
-
-
-      } else {
-        return res.status(400).json({
-          message: "No task Image Data Found",
-        });
-      }
+return res.status(200).json({
+            message: " task updated successful ",
+          });
  
- 
-
   } catch (error) {
     res.status(400).send(error);
     console.log(error);
@@ -612,3 +610,25 @@ for(let i = 0; i < vendorEmailarr.length > 0; i++){
 
 
 
+//  #############################  Delete Task Start HERE ##################################################
+
+exports.deleteTask = async (req, res) => {
+  try {
+    const {taskID}=req.body
+    const deleteTaskResult = await queryRunner(deleteQuery("task","id"),[taskID]); 
+    if (deleteTaskResult[0].affectedRows > 0) {
+      res.status(200).json({
+        // data: vendorResult[0],
+        message: "task Deleted Successful",
+      });
+    } else {
+      res.status(400).json({
+        message: "No task data found",
+      });
+    }
+  } catch (error) {
+    res.send("Error Get delete task  ");
+    console.log(error);
+  }
+};
+//  #############################  Delete Task ENDS HERE ##################################################

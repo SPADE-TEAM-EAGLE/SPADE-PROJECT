@@ -835,7 +835,7 @@
                                     data-bs-container="#addModal">
                                     <option selected>Choose...</option>
                                 </select>
-                                <span class="text-danger d-none">Property name required!</span>
+                                <span class="text-danger d-none">Property is required!</span>
                             </div>
                             <div class="col-md-4">
                                 <label for="inputEmail4" class="form-label fw-bold">Due Date</label>
@@ -859,7 +859,7 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="inputState" class="form-label fw-bold">Priority</label>
-                                <select id="priority" class="form-select form" data-bs-placement="top"
+                                <select id="priority" required class="form-select form" data-bs-placement="top"
                                     data-bs-toggle="tooltip" title="" data-bs-original-title="Select Priority"
                                     data-bs-container="#addModal">
                                     <option selected>Choose...</option>
@@ -867,7 +867,7 @@
                                     <option name="moderate">Moderate</option>
                                     <option name="low">Low</option>
                                 </select>
-                                <!-- <span class="text-danger d-none">Property name required!</span> -->
+                                <span class="text-danger d-none">Priority is required!</span>
                             </div>
                             <div class="col-md-12">
                                 <label class="form-label fw-bold">Notes</label>
@@ -950,22 +950,38 @@
 
                                 <textarea class="form-control mb-4" placeholder="Sorry about that We will look into it."
                                     rows="4" data-bs-placement="top" data-bs-toggle="tooltip" title=""
-                                    data-bs-original-title="Enter Message here"
-                                    data-bs-container="#myModal_edit"></textarea>
+                                    data-bs-original-title="Enter Message here" data-bs-container="#myModal_edit"
+                                    id="message"></textarea>
                                 <span class="text-danger d-none">Photos are required!</span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputEmail4" class="form-label fw-bold">Task Name</label>
+                                <input class="form-control" placeholder="Task name" type="text" data-bs-placement="top"
+                                    data-bs-toggle="tooltip" title="" data-bs-original-title="Enter task name here"
+                                    data-bs-container="#myModal_edit" id="taskName_update">
+                                <span class="text-danger d-none">Property ID is required!</span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputState" class="form-label fw-bold">Related To</label>
+                                <select required id="property_update" class="form-select form" data-bs-placement="top"
+                                    data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Related To here"
+                                    data-bs-container="#addModal">
+                                    <option selected>Choose...</option>
+                                </select>
+                                <span class="text-danger d-none">Property name required!</span>
                             </div>
                             <div class="col-md-4">
                                 <label for="inputEmail4" class="form-label fw-bold">Due Date</label>
                                 <input class="form-control" placeholder="MM/DD/YYYY" type="date" data-bs-placement="top"
                                     data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Due Date here"
-                                    data-bs-container="#myModal_edit">
+                                    data-bs-container="#myModal_edit" id="dueDate_update">
                                 <span class="text-danger d-none">Property ID is required!</span>
                             </div>
                             <div class="col-md-4">
                                 <label for="inputState" class="form-label fw-bold">Priority</label>
-                                <select id="state" class="form-select form" data-bs-placement="top"
-                                    data-bs-toggle="tooltip" title="" data-bs-original-title="Select Priority"
-                                    data-bs-container="#myModal_edit">
+                                <select class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip"
+                                    title="" data-bs-original-title="Select Priority" data-bs-container="#myModal_edit"
+                                    id="priority_update">
                                     <option selected>Choose...</option>
                                     <option name="high">High</option>
                                     <option name="moderate">Moderate</option>
@@ -977,9 +993,9 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="inputState" class="form-label fw-bold">Status</label>
-                                <select id="state" class="form-select form" data-bs-placement="top"
-                                    data-bs-toggle="tooltip" title="" data-bs-original-title="Select Status"
-                                    data-bs-container="#myModal_edit">
+                                <select class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip"
+                                    title="" data-bs-original-title="Select Status" data-bs-container="#myModal_edit"
+                                    id="status_update">
                                     <option selected>Choose...</option>
                                     <option value="not started">Not Started</option>
                                     <option value="in progress">In progress</option>
@@ -993,7 +1009,8 @@
                                     <label class="form-label fw-bold">Assignee(s)</label>
                                     <select class="form-control select2" data-placeholder="Choose Assignee" multiple
                                         data-bs-placement="top" data-bs-toggle="tooltip" title=""
-                                        data-bs-original-title="Select Assignee(s)" data-bs-container="#myModal_edit">
+                                        data-bs-original-title="Select Assignee(s)" data-bs-container="#myModal_edit"
+                                        id="assignee_update">
                                         <option value="Firefox">
                                             Firefox
                                         </option>
@@ -1015,10 +1032,10 @@
                             <div class="col-md-12">
                                 <label class="form-label fw-bold">Media/ Files</label>
                                 <div class="custom-file" style="border: 1px dashed #00000087;">
-                                    <input id="fileInput" type="file" name="image" class="custom-file-input form"
+                                    <input id="fileInput_update" type="file" name="image" class="custom-file-input form"
                                         accept=".jpg, .png, image/jpeg, image/png" aria-label="hello" multiple>
                                     <span className="d-none"></span>
-                                    <label class="custom-file-label" for="fileInput">
+                                    <label class="custom-file-label" for="fileInput_update">
                                         <i class="fi fi-rs-cloud-upload"></i>
                                         <div class="custom-file-text">
                                             <span>Upload Photo or drag and drop here</span>
@@ -1041,13 +1058,13 @@
                     <div class="d-flex">
 
                         <label class="custom-control custom-checkbox me-2">
-                            <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1"
-                                checked="">
+                            <input type="checkbox" class="custom-control-input" name="example-checkbox1_update"
+                                value="option1" checked="">
                             <span class="custom-control-label">Notify Tenant</span>
                         </label>
                         <label class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1"
-                                checked="">
+                            <input type="checkbox" class="custom-control-input" name="example-checkbox1_update"
+                                value="option1" checked="">
                             <span class="custom-control-label">Notify Assignee(s)</span>
                         </label>
                     </div>
@@ -1055,7 +1072,7 @@
                             id='close'>Close</button>
                         <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
                         <a href="javascript:void(0)" class="btn text-light btn-pill button disabled"
-                            style='background-color:#1467B0;' id='next1'>Next</a>
+                            style='background-color:#1467B0;' id='update'>Next</a>
                     </div>
 
                 </div>
@@ -1113,7 +1130,7 @@
                                     <path fill="#e62a45" d="M12,14a1,1,0,0,1-1-1V9a1,1,0,0,1,2,0v4A1,1,0,0,1,12,14Z" />
                                 </svg></span>
                             <h4 class="h4 mb-0 mt-3 fw-bold fs-4">Warning</h4>
-                            <p class="card-text">This will delete your property. Are you sure?</p>
+                            <p class="card-text">This will delete your task. Are you sure?</p>
 
                         </div>
                         <div class="card-footer text-center border-0 pt-0">
@@ -1627,20 +1644,20 @@
                                                             </div>
                                                         </li>
                                                         <li class="d-flex justify-content-between"><a
-                                                            href="javascript:void(0)">RELATED TO</a>
-                                                        <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2"
-                                                                id="exampleCheck1" checked>
-                                                        </div>
-                                                    </li>
-                                                    <li class="d-flex justify-content-between"><a
-                                                        href="javascript:void(0)">STATUS</a>
-                                                    <div class="form-check m-0">
-                                                        <input type="checkbox" class="form-check-input mt-2"
-                                                            id="exampleCheck1" checked>
-                                                    </div>
-                                                </li>
-                                                
+                                                                href="javascript:void(0)">RELATED TO</a>
+                                                            <div class="form-check m-0">
+                                                                <input type="checkbox" class="form-check-input mt-2"
+                                                                    id="exampleCheck1" checked>
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between"><a
+                                                                href="javascript:void(0)">STATUS</a>
+                                                            <div class="form-check m-0">
+                                                                <input type="checkbox" class="form-check-input mt-2"
+                                                                    id="exampleCheck1" checked>
+                                                            </div>
+                                                        </li>
+
                                                     </ul>
                                                 </div>
                                                 <button type="button" class="btn btn-primary btn-pill mx-2"
@@ -2710,7 +2727,7 @@
     <script>
 
         var selectedFiles = [];
-
+        let taskId;
         $(document).ready(function () {
 
             $.ajax({
@@ -2723,15 +2740,18 @@
                 success: function (response) {
                     console.log(response.data[0])
                     $("#user-name").text(response.user)
-                    // console.log(response)
+                    
                     $("#property").empty()
                     $("#property").append($("<option></option>").text("Choose...").prop("selected", true))
+                    
 
                     response.data[0].forEach((property) => {
                         console.log(property);
                         var optionText = "Tenant: " + property.firstName + " " + property.lastName + " Property: " + property.propertyName;
                         var optionValue = property.tenantID;
                         $("#property").append($("<option></option>").text(optionText).val(optionValue));
+                        $("#property_update").append($("<option></option>").text(optionText).val(optionValue));
+
                     });
                     // Handle state selection change
                 }
@@ -2749,12 +2769,16 @@
                     // console.log(response)
                     $("#assignee").empty()
                     $("#assignee").append($("<option></option>").text("Choose..."))
+                    $("#assignee_update").empty()
+                    $("#assignee_update").append($("<option></option>").text("Choose..."))
 
                     response.data.forEach((vendor) => {
                         // console.log(property);
                         var optionText = vendor.firstName + " " + vendor.lastName;
                         var optionValue = vendor.id;
                         $("#assignee").append($("<option></option>").text(optionText).val(optionValue));
+                        $("#assignee_update").append($("<option></option>").text(optionText).val(optionValue));
+
                     });
                     // Handle state selection change
                 }
@@ -2766,7 +2790,7 @@
                 var allFieldsFilled = accordion1Fields.filter(function () {
                     return $(this).val() === '' || $(this).val() === 'Choose...';
                 }).length === 0;
-
+                    console.log()
                 return allFieldsFilled;
             }
 
@@ -2774,7 +2798,7 @@
             function updateButtonStatus() {
 
                 var allFieldsFilled = areAllFieldsFilled();
-
+                
                 // Enable or disable the buttons based on the fields' status
                 if (allFieldsFilled) {
                     $('#next').removeClass("disabled");
@@ -2787,7 +2811,7 @@
             }
 
             // Call the updateButtonStatus function when any field in the accordions is changed
-            $('#addModal input, #addModal select').on('input change', function () {
+            $('#addModal input[required], #addModal select[required]').on('input change', function () {
                 var $field = $(this);
                 var $errorMessage = $field.next('.text-danger');
 
@@ -3153,24 +3177,45 @@
                 $("#myModal_edit").modal("hide");
 
                 var formData = new FormData();
-                var propertyName = $("#propertyName_update").val();
-                var address = $("#address_update").val();
-                var city = $("#city_update").val();
-                var state = $("#state_update").val();
-                var zipCode = $("#zip_update").val();
-                var propertyType = $("#propertyType_update").val();
-                var propertySQFT = $("#propertyTotalSF_update").val();
-                var units = $("#unit_update").val();
+                //                 $("#message").val(data.message);
+                //                                 $("#dueDate_update").val(data.dueDate);
+                //                                 $("#taskName_update").val(data.taskName);
+                //                                 $("#property_update").val(data.tenantID);
+                //                                 // $("#mySelectBox");
 
-                formData.append('id', propertyId);
-                formData.append('propertyName', propertyName);
-                formData.append('address', address);
-                formData.append('city', city);
-                formData.append('state', state);
-                formData.append('zipCode', zipCode);
-                formData.append('propertyType', propertyType);
-                formData.append('propertySQFT', propertySQFT);
-                formData.append('units', units);
+                // // Find the option with the matching value and set it as selected
+                // // selectBox.find(`option[value="${apiValue}"]`).prop("selected", true);
+                //                                 $("#priority_update").find(`option[name="${data.priority.toLowerCase()}"]`).prop("selected", true);
+                //                                 $("#status_update").find(`option[value="${data.status}"]`).prop("selected", true);
+                //                                 data.AssignTo.forEach(({ID,name})=>{
+                //                                     $("#assignee_update").find(`option[value="${ID}"]`).prop("selected", true);
+                //                                     $(".select2-selection__rendered").append(`<li class="select2-selection__choice" title="${name}"><span class="select2-selection__choice__remove" role="presentation">×</span>${name}</li>`)
+                //                                 })
+                var message = $("#message").val();
+                var dueDate = $("#dueDate_update").val();
+                var taskName = $("#taskName_update").val();
+                var property = $("#property_update").val();
+                var priority = $("#priority_update").val();
+                var status = $("#status_update").val();
+                var assignee = $("#assignee_update").val();
+                // var units = $("#unit_update").val();
+                var isNotifyTenantChecked = $('input[name="example-checkbox1_update"]:eq(0)').is(':checked') ? "yes" : "no";
+
+                // Check if the second checkbox is checked
+                var isNotifyAssigneesChecked = $('input[name="example-checkbox1_update"]:eq(1)').is(':checked') ? "yes" : "no";
+
+                // Add the checkbox values
+                formData.append("taskID", taskId)
+                formData.append('notifyTenant', isNotifyTenantChecked);
+                formData.append('notifyVendor', isNotifyAssigneesChecked);
+                formData.append('message', message);
+                formData.append('dueDate', dueDate);
+                formData.append('taskName', taskName);
+                formData.append('property', property);
+                formData.append('priority', priority);
+                formData.append('status', status);
+                formData.append('assignee', assignee);
+
 
                 // Retrieve existing image names from the DOM
 
@@ -3192,7 +3237,7 @@
 
                 formData.append("existingImages", existingImageNames)
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/updateProperty',
+                    url: 'http://localhost:3000/api/spade/updateTasks',
                     // url: 'http://ec2-54-158-103-230.compute-1.amazonaws.com:3000/api/spade/updateProperty',
                     type: 'PUT',
                     data: formData,
@@ -3214,12 +3259,13 @@
 
                 e.preventDefault();
                 // delete using AJAX
+
                 $('#myModal_delete').modal('hide');
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/propertyDelete',
+                    url: 'http://localhost:3000/api/spade/deleteTask',
                     type: 'DELETE',
                     data: JSON.stringify({
-                        "id": propertyId
+                        "taskID": taskId
                     }),
                     contentType: "application/json; charset=utf-8",
                     processData: false,
@@ -3227,7 +3273,7 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        // getData()
+                        getData()
                     },
                     error: function (xhr, status, error) {
                         window.alert('Error: ' + error);
@@ -3260,10 +3306,10 @@
 
                             tableBody.empty();
                             function toTitleCase(str) {
-  return str.replace(/\w\S*/g, function(txt) {
-    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-  });
-}
+                                return str.replace(/\w\S*/g, function (txt) {
+                                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                                });
+                            }
 
                             response.data[0]?.forEach(function (task) {
                                 // var image = '<td><img src="../../../../spadeAPI/uploads/' + property.images[0] + '" alt=""></td>';
@@ -3271,73 +3317,44 @@
                                 var image = '<td><img src="../../../../spadeAPI/uploads/' + task.taskImages?.split(',')[0] + '" alt=""></td>';
 
                                 var createdDate = new Date(task.created_at);
-var currentDate = new Date();
+                                var currentDate = new Date();
 
-var timeDiff = Math.abs(currentDate - createdDate);
-var minutesDiff = Math.floor(timeDiff / (1000 * 60));
-var hoursDiff = Math.floor(minutesDiff / 60);
-var daysDiff = Math.floor(hoursDiff / 24);
+                                var timeDiff = Math.abs(currentDate - createdDate);
+                                var minutesDiff = Math.floor(timeDiff / (1000 * 60));
+                                var hoursDiff = Math.floor(minutesDiff / 60);
+                                var daysDiff = Math.floor(hoursDiff / 24);
 
-var taskName = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + task.taskName + '</p>' +
-    `<span class="font-weight-normal" style="color: #9B9B9B;"> By ${task.createdBy} - `;
+                                var taskName = `<td class="task-id" id=${task.id} style="font-weight: 600;">` + '<p style="font-weight: 600;" class="mb-1">' + task.taskName + '</p>' +
+                                    `<span class="font-weight-normal" style="color: #9B9B9B;"> By ${task.createdBy} - `;
 
-if (daysDiff > 0) {
-    taskName += `${daysDiff} days`;
-} else if (hoursDiff > 0) {
-    taskName += `${hoursDiff} hours`;
-} else {
-    taskName += `${minutesDiff} minutes`;
-}
+                                if (daysDiff > 0) {
+                                    taskName += `${daysDiff} days`;
+                                } else if (hoursDiff > 0) {
+                                    taskName += `${hoursDiff} hours`;
+                                } else {
+                                    taskName += `${minutesDiff} minutes`;
+                                }
 
-taskName += '</span>' + '</td>';
+                                taskName += '</span>' + '</td>';
 
-                                    var assignTo = '<td style="font-weight: 600;text-align: center;display: flex;">' +
-    (task.AssignTo?.map(({ name, email }) => {
-        return `
+                                var assignTo = '<td style="font-weight: 600;text-align: center;display: flex;">' +
+                                    (task.AssignTo?.map(({ name, email }) => {
+                                        return `
             <div class="me-2">
                 <img class="avatar brround avatar-md" src="../assets/images/users/2.jpg" alt="avatar-img">
                 <div class="media-body valign-middle mt-0">
                     <a href="javascript:void(0)" class="text-dark fw-semibold">${name}</a>
                 </div>
             </div>`;
-    }) || "Not assigned") +
-    '</td>';
+                                    }) || "Not assigned") +
+                                    '</td>';
 
-    var dueDate = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">'+ (task.dueDate || "Not Set") + '</p>' +`<span class="font-weight-normal text-danger"> <i
+                                var dueDate = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + (task.dueDate || "Not Set") + '</p>' + `<span class="font-weight-normal text-danger"> <i
                                                                         class="fe fe-circle me-1"></i>${task.priority}</span>` + '</td>';
-    var relatedTo = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">'+ (task.propertyName ? toTitleCase(task.propertyName) : "Not Set")+ '</p>' +`<span class="font-weight-normal text-danger">Unit Number: ${task.unitNumber}</span>` + '</td>';
-    var status = '<td class="property-id " style="font-weight: 600;">' + (task.status ? toTitleCase(task.status) : "Not Set") + '</td>';
-                                    
-                                // var colorClass = '';
-                                // var backgroundClass = '';
+                                var relatedTo = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + (task.propertyName ? toTitleCase(task.propertyName) : "Not Set") + '</p>' + `<span class="font-weight-normal text-danger">Unit Number: ${task.unitNumber}</span>` + '</td>';
+                                var status = '<td class="property-id " style="font-weight: 600;">' + (task.status ? toTitleCase(task.status) : "Not Set") + '</td>';
 
-                                // if (property.propertyType === 'Single Family') {
-                                //     var colorClass = 'rounded-pill-Single-Family'
-                                // } else if (property.propertyType === 'Multi-Family') {
-                                //     var colorClass = 'rounded-pill-Multi-Family';
 
-                                // } else if (property.propertyType === 'Multi-Commercial') {
-                                //     var colorClass = 'rounded-pill-Multi-Commercial';
-                                // }
-
-                                // var propertyType =
-                                //     '<td class="propertyType"><a class="like" href="javascript:;">' +
-                                //     `<span class="badge btn-light ${colorClass} rounded-pill py-2 px-3">` +
-                                //     '<i class="fe fe-circle me-1"></i>' + property.propertyType + '</span>' +
-                                //     '</a></td>';
-
-                                // var propertyUnits = '<td class="propertyUnits">' +
-                                //     '<p style="font-weight: 600;" class="mb-1">' + property.units +
-                                //     ' Unit(s)</p>' +
-                                //     '<span class="font-weight-normal">' + property.propertySQFT +
-                                //     ' Square Feet</span>' +
-                                //     '</td>';
-
-                                // var propertyAddress = '<td class="propertyAddress">' +
-                                //     '<p style="font-weight: 600;" class="mb-1">' + property.address + '</p>' +
-                                //     '<span>' + property.city + ', ' + property.state + ' ' + property.zipCode +
-                                //     '</span>' +
-                                //     '</td>';
 
                                 var dropdownMenu =
                                     '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
@@ -3347,7 +3364,7 @@ taskName += '</span>' + '</td>';
                                     `<li><a class="dropdown-item text-success" href="./view-property.html?propertyId=${property.id}">View</a></li>` +
                                     '</ul></td>';
                                 // Create a table row and append the generated columns
-                                var row = '<tr>' + image + taskName + assignTo + dueDate+
+                                var row = '<tr>' + image + taskName + assignTo + dueDate +
                                     relatedTo + status + dropdownMenu + '</tr>';
 
                                 // Append the row to the table body
@@ -3356,38 +3373,33 @@ taskName += '</span>' + '</td>';
                             $("#global-loader").fadeOut("slow")
                             $('.edit-option').click(function (e) {
                                 e.preventDefault();
-                                const propertyIdElement = $(this).closest("tr").find(".property-id");
+                                const taskIdElement = $(this).closest("tr").find(".task-id");
 
-                                propertyId = propertyIdElement.text();
+                                taskId = taskIdElement.attr("id")
 
-                                const data = response.data[0].find(obj => obj.id.toString() === propertyId);
-                                selectedFiles = data.images
-                                console.log(data.city)
-                                var option = $('<option>').text(data.city).val(data.city);
+                                const data = response.data[0].find(obj => obj.id.toString() == taskId);
+                                console.log(taskId)
+                                selectedFiles = data.taskImages.split(",")
 
-                                // Append the option to the select element
-                                $('#city_update').append(option);
-
-                                // Make the option selected
-                                option.prop('selected', true);
                                 updateSelectedFilesContainer()
-                                $("#propertyId_update").val(data.id);
-                                $("#propertyName_update").val(data.propertyName);
-                                $("#address_update").val(data.address);
-                                $("#city_update").val(data.city);
-                                $("#state_update").val(data.state);
-                                $("#zip_update").val(data.zipCode);
-                                $("#propertyType_update").val(data.propertyType);
-                                $("#propertyTotalSF_update").val(data.propertySQFT);
-                                $("#unit_update").val(data.units);
-                                $("#property-name").text(data.propertyName)
+                                $("#message").val(data.notes);
+                                $("#dueDate_update").val(data.dueDate);
+                                $("#taskName_update").val(data.taskName);
+                                $("#property_update").val(data.tenantID);
+
+                                $("#priority_update").find(`option[name="${data.priority.toLowerCase()}"]`).prop("selected", true);
+                                $("#status_update").find(`option[value="${data.status}"]`).prop("selected", true);
+                                data.AssignTo.forEach(({ ID, name }) => {
+                                    $("#assignee_update").find(`option[value="${ID}"]`).prop("selected", true);
+                                    $(".select2-selection__rendered").append(`<li class="select2-selection__choice" title="${name}"><span class="select2-selection__choice__remove" role="presentation">×</span>${name}</li>`)
+                                })
+
                                 $('#myModal_edit').modal('show');
                             });
                             $('.delete-option').click(function (e) {
                                 e.preventDefault(); // Prevent default anchor behavior
-                                const propertyIdElement = $(this).closest("tr").find(".property-id");
-                                propertyId = propertyIdElement.text();
-
+                                const taskIdElement = $(this).closest("tr").find(".task-id");
+                                taskId = taskIdElement.attr("id");
                                 $('#myModal_delete').modal('show');
                             });
                         }

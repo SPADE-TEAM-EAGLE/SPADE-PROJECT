@@ -87,5 +87,6 @@ router.put("/updateTenants", verifyToken,tenantController.updateTenants);
 router.get("/getStates", userController.getStates);
 router.get("/getVendorCategory" ,taskController.getVendorCategory);
 router.get("/getVendorAssignTo",verifyToken ,taskController.getVendorAssignTo);
-router.put("/updateTasks" ,taskController.updateTasks);
+router.put("/updateTasks",[verifyToken,upload] ,taskController.updateTasks);
+router.delete("/deleteTask" ,taskController.deleteTask);
 module.exports = router;

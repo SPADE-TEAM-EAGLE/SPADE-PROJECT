@@ -803,7 +803,8 @@ color: #000;
                                     data-bs-toggle="tooltip" title=""
                                     data-bs-original-title="Enter your Mobile Number here" data-bs-container="#addModal"
                                     id="phone" required>
-                                <span class="text-danger d-none">Phone number is required!</span>
+                                    <span id="valid-msg" class="d-none text-success">✓ Valid</span>
+                                    <span id="error-msg" class="hide text-danger"></span>
                             </div>
                             <div class="col-md-6">
                                 <label for="inputEmail3" class="form-label fw-bold">Email</label>
@@ -2385,6 +2386,43 @@ color: #000;
     <script>
         $(document).ready(() => {
             let vendorData;
+            function resetAccordions(update) {
+  // Reset fields in the specific accordion (#collapseOne)
+  var accordionFields = $('#collapseOne input[required], #collapseOne select[required]');
+  accordionFields.val('').removeClass('border-danger');
+  accordionFields.siblings('span.text-danger').addClass('d-none');
+
+  // Reset button icons in the specific accordion (#collapseOne)
+//   var accordionButton = $('#collapseOne button.accordion-button');
+//   accordionButton.find('.fi-rs-exclamation').addClass('fi-rs-angle-circle-down chevron').removeClass('fi-rs-exclamation cross');
+//   accordionButton.find('.fi-rs-check-circle').addClass('fi-rs-angle-circle-down chevron').removeClass('fi-rs-check-circle tick');
+
+  // Disable buttons
+  $('#next').addClass('disabled');
+  $('#draft').attr('disabled', 'disabled');
+
+  // Reset fields in the row-multiple section
+//   $('.row-multiple .input-date, .row-multiple .input-amount').prop('required', false);
+
+  // Reset specific fields
+//   $('#baseRent, #tripleNet, #leaseStart, #leaseEnd').prop('required', false);
+
+//   if (update) {
+//     // Hide specified collapse elements (#collapse1 and #collapse2)
+//     $("#collapse1, #collapse2").collapse('hide');
+
+//     // Remove additional row-multiple elements
+//     $('.row-multiple').each(function(index) {
+//       if (index > 0) {
+//         $(this).remove();
+//       }
+//     });
+
+//     // Reset specific checkbox inputs
+//     $('input[name="yesno"], input[name="lease"]').prop('checked', false);
+//   }
+}
+
             $.ajax({
                 url: 'http://localhost:3000/api/spade/getVendorCategory',
                 type: 'GET',
@@ -2473,6 +2511,7 @@ color: #000;
                     success: function (response) {
                         $("#addModal").modal("hide")
                         $("#succesModal").modal("show")
+                        resetAccordions()
                     },
                     error: function (xhr, status, error) {
                         window.alert('Error: ' + error);
@@ -2508,12 +2547,6 @@ color: #000;
                     let tenantNames = []
                     response.data[0]?.forEach(function (vendor) {
 
-                        // var image = '<td><img src="../../../../spadeApi/uploads/' + tenant.images[0] + '" alt=""></td>';
-                        // var image = '<td><img src="../../../../../../Desktop/spadeApi/uploads/image-1684250579662.png" alt="hhghghgh"></td>';
-
-                        // var vendorId = '<td class="vendor-id" style="font-weight: 600;">' + vendor.id+ '</td>';
-                        // var tenantId = '<td class="tenant-id" style="font-weight: 600;">' + tenant
-                        // .id + '</td>';
                         console.log(vendor.workPhone.length>=1?vendor.workPhone:"N/A")
                         var vendorName = '<td class="vendorName" style="font-weight: 600;">' + vendor.firstName + vendor.lastName +`<br><small>${vendor.email}</small>` + '</td>';
                         var businessName = '<td class="businessName" style="font-weight: 600;">' + vendor.businessName+ '</td>';
@@ -2530,23 +2563,7 @@ color: #000;
                             '<li><a class="edit-option dropdown-item text-primary"  href="javascript:void(0) ">Edit</a></li>' +
                             '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>'
                         '</ul></td>';
-                        // var currentDate = new Date();
-                        // if (tenant.leaseEndDate) {
-                        //     var targetDate = new Date(tenant.leaseEndDate);
-                        //     var currentDate = new Date();
-                        //     var timeDiff = targetDate.getTime() - currentDate.getTime();
 
-                        //     // Convert milliseconds to days
-                        //     var daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-                        //     var leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + `<small class=d-block "${daysLeft > 10 ? 'text-primary' : 'text-danger'}">` + daysLeft + ' day(s) remaining</small>' + '</td>';
-                        // } else {
-
-                        //     var leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + '</td>';
-
-                        // }
-
-                        // var row = '<tr>' + businessName + vendorName + phone +
-                        //     address + workPhone+category + dropdownMenu + '</tr>';
                         
                         var row = '<tr>' + businessName + vendorName + phone +
                             address + workPhone+category + '</tr>';
@@ -2565,9 +2582,7 @@ color: #000;
                     });
                 },
                 error: function (xhr, status, error) {
-                    // console.log(error)
-                    // window.alert('Error: ' + "Token expeired!, Login again");
-                    // window.location = '../Landlord/login_module.html';
+
                 }
             });
 
@@ -2630,6 +2645,7 @@ color: #000;
                     $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
                 });
             });
+            let phoneError=true
             function areAllFieldsFilled() {
                 var accordion1Fields = $('#addModal input[required], #addModal select[required]');
                 var allFieldsFilled = accordion1Fields.filter(function () {
@@ -2637,6 +2653,9 @@ color: #000;
                 }).length === 0 ;
                 var zipField = $('#zip');
                 if (zipField.val().length !== 5) {
+                    allFieldsFilled = false;
+                }
+                if(phoneError){
                     allFieldsFilled = false;
                 }
                 return allFieldsFilled;
@@ -2662,7 +2681,7 @@ color: #000;
             }
 
             // Call the updateButtonStatus function when any field in the accordions is changed
-            $('#addModal input, #addModal select').on('input change', function () {
+            $('#addModal input[required], #addModal select[required]').on('input change', function () {
                 var $field = $(this);
                 var $errorMessage = $field.next('.text-danger');
                 if ($field.attr("id") === "zip") {
@@ -2682,6 +2701,45 @@ color: #000;
                 }
                 updateButtonStatus();
             });
+            const input = document.querySelector("#phone");
+            const errorMsg = document.querySelector("#error-msg");
+            const validMsg = document.querySelector("#valid-msg");
+
+            // here, the index maps to the error code returned from getValidationError - see readme
+            const errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+
+            // initialise plugin
+            const iti = window.intlTelInput(input, {
+                utilsScript: "/intl-tel-input/js/utils.js?1684676252775"
+            });
+
+            const reset = () => {
+                input.classList.remove("error");
+                errorMsg.innerHTML = "";
+                errorMsg.classList.add("d-none");
+                validMsg.classList.add("d-none");
+            };
+
+            // on blur: validate
+            input.addEventListener('input', () => {
+                reset();
+                console.log("in phone input")
+                if (input.value.trim()) {
+                    if (iti.isValidNumber()) {
+                        validMsg.classList.remove("d-none");
+                        phoneError=false
+                    } else {
+                        phoneError=true
+                        input.classList.add("error");
+                        const errorCode = iti.getValidationError();
+                        errorMsg.innerHTML = errorMap[errorCode];
+                        errorMsg.classList.remove("d-none");
+                    }
+                }
+            });
+            $("#close,.btn-close").click(()=>{
+                resetAccordions()
+            })
             $("#succes-close").click(()=>{
                 getData()
             })

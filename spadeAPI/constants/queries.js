@@ -122,6 +122,7 @@ p.propertyName,
 pu.unitNumber,
 t.firstName AS tfirstName,
 t.lastName AS tlastName,
+t.id as tenantID,
 GROUP_CONCAT(ti.taskImages) AS taskImages
 FROM
 task AS tk
