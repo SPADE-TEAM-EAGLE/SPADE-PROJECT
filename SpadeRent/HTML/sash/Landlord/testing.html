@@ -1,36 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Video Poster with CSS</title>
-  <style>
-    #video-container {
-      position: relative;
-      width: 640px; /* Adjust width and height according to your video dimensions */
-      height: 360px;
-    }
-    
-    #video {
-      width: 100%;
-    }
-    
-    #video-container::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url("path/to/poster-image.jpg");
-      background-size: cover;
-      z-index: 1;
-    }
-  </style>
+  <link rel="stylesheet" href="introjs.min.css">
 </head>
 <body>
-  <div id="video-container">
-    <video id="video" controls poster="../assets/images/walkthrough-demo1.png">
-      <source src="../assets/images/video-testing.mp4" type="video/mp4">
-    </video>
-  </div>
+  <h1>Welcome to My Web App</h1>
+  <p>This is a demo application using Intro.js.</p>
+
+  <button id="startTourBtn">Start Tour</button>
+
+  <script src="intro.min.js"></script>
+  <script>
+    function startTour() {
+      var intro = introJs();
+      intro.setOptions({
+        steps: [
+          {
+            element: document.querySelector('#startTourBtn'),
+            intro: 'Click this button to start the tour.',
+          },
+          {
+            element: document.querySelector('h1'),
+            intro: 'This is the main heading of the page.',
+          },
+          {
+            element: document.querySelector('p'),
+            intro: 'This is a paragraph explaining the purpose of the application.',
+          }
+        ]
+      });
+      intro.start();
+    }
+
+    document.querySelector('#startTourBtn').addEventListener('click', startTour);
+  </script>
 </body>
 </html>
