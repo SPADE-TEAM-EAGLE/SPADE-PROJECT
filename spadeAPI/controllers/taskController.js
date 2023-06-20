@@ -432,8 +432,8 @@ exports.updateTasks = async (req, res) => {
     notifyTenant,
     notifyVendor 
   } = req.body;
-  // const { userId, userName  } = req.body;
-  const { userId, userName } = req.user;
+  const { userId, userName  } = req.body;
+  // const { userId, userName } = req.user;
 
   const currentDate = new Date();
   try {
@@ -499,10 +499,8 @@ exports.updateTasks = async (req, res) => {
 
       
 //       //   //  add vendor
-      const taskVendorDeleteResult = await queryRunner(
-        deleteQuery("taskassignto", "taskId"),
-        [taskID]
-      );
+      const taskVendorDeleteResult = await queryRunner(deleteQuery("taskassignto", "taskId"),[taskID]); 
+      //if(taskVendorDeleteResult.affectedRows > 0){ 
       for (let i = 0; i < vendorID.length; i++) {
         const Vendorid = vendorID[i];
         const vendorResults = await queryRunner(addVendorList, [
@@ -513,6 +511,7 @@ exports.updateTasks = async (req, res) => {
           return res.send("Error2");
         }
       }
+     // }
 //     //   //  add vendor
 
 

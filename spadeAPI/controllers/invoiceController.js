@@ -137,40 +137,7 @@ console.log(req.body,userId)
   //  ############################# update Invoice Status End ############################################################
   
 
-
-
-  //  ############################# update Invoice Status Start ############################################################
-// exports.putInvoiceStatusUpdates = async (req, res) => {
-//     try {
-//       const { id, status, note } = req.body
-//     const { userId } = req.user; 
-//     // const {userId} = req.body; 
-//       const currentDate = new Date();
-//       const invoiceUpdateStatusResult = await queryRunner(updateInvoiceStatus, [
-//         status,
-//         note,
-//         currentDate,
-//         id,
-//         userId,
-//       ])
-//       if (invoiceUpdateStatusResult[0].affectedRows > 0) {
-//         res.status(200).json({
-//           data: invoiceUpdateStatusResult,
-//           message: 'Invoice status updated successful'
-//         })
-//       } else {
-//         res.status(400).json({
-//           message: 'No data found'
-//         })
-//       }
-//     } catch (error) {
-//       console.log(error)
-//       res.send('Error Invoice Status update')
-//     }
-//   }
-  //  ############################# update Invoice  End ############################################################
-
-
+ 
 
     //  ############################# View All Invoices Start ############################################################
 exports.getAllInvoices = async (req, res) => {
