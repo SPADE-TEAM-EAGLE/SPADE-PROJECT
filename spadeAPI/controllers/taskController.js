@@ -460,42 +460,42 @@ exports.updateTasks = async (req, res) => {
       );
 
 
-      // if (taskCheckResult.length > 0) {
-      //   taskimages = taskCheckResult[0].map((image) => image.Image);
-      //   let existingImg = taskImagesExist.split(",");
-      //   const imagesToDelete = taskimages.filter(
-      //     (element) => !existingImg.includes(element)
-      //   );
+      if (taskCheckResult.length > 0) {
+        taskimages = taskCheckResult[0].map((image) => image.Image);
+        let existingImg = taskImagesExist.split(",");
+        const imagesToDelete = taskimages.filter(
+          (element) => !existingImg.includes(element)
+        );
 
-      //   // Combine the common elements with array2
+        // Combine the common elements with array2
 
-      //   imageToDelete(imagesToDelete);
-      //   let taskDeleteresult = [{ affectedRows: 0 }];
-      //   // delete images Data into database
-      //   if (imagesToDelete.length > 0) {
-      //     for (let i = 0; i < imagesToDelete.length; i++) {
-      //       taskDeleteresult = await queryRunner(
-      //         deleteQuery("taskimages", "taskImages"),
-      //         [imagesToDelete[i]]
-      //       );
-      //       // console.log(taskDeleteresult)
-      //     }
-      //   }
+        imageToDelete(imagesToDelete);
+        let taskDeleteresult = [{ affectedRows: 0 }];
+        // delete images Data into database
+        if (imagesToDelete.length > 0) {
+          for (let i = 0; i < imagesToDelete.length; i++) {
+            taskDeleteresult = await queryRunner(
+              deleteQuery("taskimages", "taskImages"),
+              [imagesToDelete[i]]
+            );
+            // console.log(taskDeleteresult)
+          }
+        }
  
-      //   const fileNames = req.files.map((file) => file.filename);
-      //   existingImg = [...fileNames];
-      //   // using loop to send new images data into database
-      //   for (let i = 0; i < existingImg.length; i++) {
-      //     const img = existingImg[i];
-      //     const propertyImageResult = await queryRunner(insertInTaskImage, [
-      //       taskID,
-      //       img,
-      //     ]);
-      //     if (propertyImageResult.affectedRows === 0) {
-      //       return res.send("Error2");
-      //     }
-      //   }
-      //   }
+        const fileNames = req.files.map((file) => file.filename);
+        existingImg = [...fileNames];
+        // using loop to send new images data into database
+        for (let i = 0; i < existingImg.length; i++) {
+          const img = existingImg[i];
+          const propertyImageResult = await queryRunner(insertInTaskImage, [
+            taskID,
+            img,
+          ]);
+          if (propertyImageResult.affectedRows === 0) {
+            return res.send("Error2");
+          }
+        }
+        }
 
       
 //       //   //  add vendor
