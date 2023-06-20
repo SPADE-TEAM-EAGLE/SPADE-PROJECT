@@ -428,19 +428,18 @@ phone.addEventListener('keyup', reset);
   
   
   // ****************************************************************************************************************
-  var validconfirmPassword = document.getElementById("id_password1");
-  let confirmPassword = document.getElementById("id_password2");
-  var next3 = document.getElementById("next3");
-  confirmPassword.addEventListener('keyup', confirmPasswordValidation);
+  // var validconfirmPassword = document.getElementById("id_password1");
+  // let confirmPassword = document.getElementById("id_password2");
+  // var next3 = document.getElementById("next3");
+  // confirmPassword.addEventListener('keyup', confirmPasswordValidation);
   
-  function confirmPasswordValidation() {
-      if (confirmPassword.value == validconfirmPassword.value) {
-        next3.disabled = false;
-        // next3.addEventListener('click', GoHome);
-      } else {
-        next3.disabled = true;
-      }
-  }
+  // function confirmPasswordValidation() {
+  //     if (confirmPassword.value == validconfirmPassword.value) {
+  //       next3.disabled = false;
+  //     } else {
+  //       next3.disabled = true;
+  //     }
+  // }
   function GoHome()
   {
     window.location="../html/index.html";
