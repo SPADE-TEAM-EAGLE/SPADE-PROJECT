@@ -615,6 +615,7 @@ validconfirmPassword.addEventListener('keyup', confirmPasswordValidation);
 var spantag1 = document.getElementById("passnotmatch1");
 
 function confirmPasswordValidation() {
+  alert("1");
   if(validconfirmPassword.value.match(password_validate))
   {
     validconfirmPassword.classList.add("border-green");
@@ -636,10 +637,8 @@ function confirmPasswordValidation() {
       next3.disabled = true;
     }
 }
-function GoHome()
-{
-  window.location="../html/index.html";
-}
+
+
 
 
 
