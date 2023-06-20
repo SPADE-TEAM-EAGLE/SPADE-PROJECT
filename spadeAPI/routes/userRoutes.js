@@ -93,4 +93,5 @@ router.delete("/deleteTask" ,taskController.deleteTask);
 router.get("/propertyTask", userController.propertyTask);
 router.get("/tenantTask", tenantController.tenantTask);
 router.get("/getAllInvoicesTenant", tenantPortalController.getAllInvoicesTenant);
+router.get("/getAllTaskTenant", tenantPortalController.getAllTaskTenant);
 module.exports = router;

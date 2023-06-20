@@ -9,7 +9,8 @@ const { serialize } = require('cookie');
 const {
   selectQuery,
   deleteQuery,
-  getAllInvoiceTenantQuery
+  getAllInvoiceTenantQuery,
+  AlltasksTenantsQuery
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -58,3 +59,63 @@ const config = process.env;
       //  ############################# View All Invoice Tenant End ############################################################
     
     
+      //  #############################Invoice By ID Start ############################################################
+    //   getByIdInvoices from invoiceController file
+      //  #############################Invoice By ID END  ############################################################
+
+
+      //  ############################# Get ALL Task Start ############################################################
+exports.getAllTaskTenant = async (req, res) => {
+    // const { userId } = req.user;
+    const { userId } = req.body;
+    try {
+      const allTaskResult = await queryRunner(AlltasksTenantsQuery, [userId]);
+      if (allTaskResult.length > 0) {
+        for (let i = 0; i < allTaskResult[0].length; i++) {
+          const taskID = allTaskResult[0][i].id;
+          const assignToResult = await queryRunner(
+            selectQuery("taskassignto", "taskId"),
+            [taskID]
+          );
+          const vendorIDs = assignToResult[0].map((vendor) => vendor.vendorId);
+  
+          const vendorData = [];
+  
+          for (let j = 0; j < vendorIDs.length; j++) {
+            const vendorResult = await queryRunner(
+              selectQuery("vendor", "id"),
+              [vendorIDs[j]]
+            );
+  
+            if (vendorResult.length > 0) {
+              const vendor = {
+                ID : vendorResult[0][0].id,
+                name: vendorResult[0][0].firstName + " "+ vendorResult[0][0].lastName,
+                email: vendorResult[0][0].email,
+              };
+              vendorData.push(vendor);
+            }
+          }
+  
+          allTaskResult[0][i].AssignTo = vendorData;
+        }
+  
+        res.status(200).json({
+          data: allTaskResult,
+          message: "All Tasks",
+        });
+      } else {
+        res.status(400).json({
+          message: "No Tasks data found",
+        });
+      }
+    } catch (error) {
+      console.log("Error:", error);
+      res.send("Error Get Tasks");
+    }
+  };
+  //  ############################# Get ALL Task End ############################################################
+  
+       //  ############################# Task By ID Start ############################################################
+    //   getByIdTask from TaskController file
+      //  ############################# Task By ID END  ############################################################
