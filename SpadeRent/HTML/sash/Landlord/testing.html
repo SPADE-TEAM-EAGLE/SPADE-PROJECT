@@ -1,32 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Generate PDF on Click</title>
+  <link rel="stylesheet" href="introjs.min.css">
 </head>
 <body>
-  <div id="content">
-    <h1>My PDF Content</h1>
-    <p>This is the content of my PDF.</p>
-    <ul>
-      <li>List item 1</li>
-      <li>List item 2</li>
-      <li>List item 3</li>
-    </ul>
-  </div>
+  <h1>Welcome to My Web App</h1>
+  <p>This is a demo application using Intro.js.</p>
 
-  <button onclick="generatePDF()">Generate PDF</button>
+  <button id="startTourBtn">Start Tour</button>
 
+  <script src="intro.min.js"></script>
   <script>
-    function generatePDF() {
-      // Hide the button to avoid printing it
-      document.querySelector("button").style.display = "none";
-
-      // Open the print dialog
-      window.print();
-
-      // Show the button again after printing
-      document.querySelector("button").style.display = "block";
+    function startTour() {
+      var intro = introJs();
+      intro.setOptions({
+        steps: [
+          {
+            element: document.querySelector('#startTourBtn'),
+            intro: 'Click this button to start the tour.',
+          },
+          {
+            element: document.querySelector('h1'),
+            intro: 'This is the main heading of the page.',
+          },
+          {
+            element: document.querySelector('p'),
+            intro: 'This is a paragraph explaining the purpose of the application.',
+          }
+        ]
+      });
+      intro.start();
     }
+
+    document.querySelector('#startTourBtn').addEventListener('click', startTour);
   </script>
 </body>
 </html>
