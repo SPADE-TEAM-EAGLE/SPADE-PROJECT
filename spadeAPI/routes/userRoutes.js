@@ -100,6 +100,6 @@ router.get("/tenantTask", verifyToken,tenantController.tenantTask);
 router.get("/getAllInvoicesTenant",verifyTokenTenant ,tenantPortalController.getAllInvoicesTenant);
 router.get("/getAllTaskTenant",verifyTokenTenant ,tenantPortalController.getAllTaskTenant);
 router.get('/getTenantByID', verifyTokenTenant,tenantPortalController.getTenantByID);
-router.put('/changePasssword', verifyTokenTenant,tenantPortalController.changePasssword);
+router.put('/changePasssword', verifyToken,settingController.changePasssword);
 
 module.exports = router;

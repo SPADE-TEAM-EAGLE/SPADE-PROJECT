@@ -1581,6 +1581,40 @@
         </div>
     </div>
     <!-- /GLOBAL-LOADER -->
+    <div class="modal fade" id="myModal_success" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+          <div class="modal-content modal-content-demo">
+            <div class="modal-body p-0">
+              <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
+                <!-- <div class="card-header border-0 pt-3">
+                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                            </button>
+                        </div> -->
+                <div class="card-body text-center">
+                  <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24">
+                      <path fill="#13bfa6"
+                        d="M10.3125,16.09375a.99676.99676,0,0,1-.707-.293L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328l-6.1875,6.1875A.99676.99676,0,0,1,10.3125,16.09375Z"
+                        opacity=".99" />
+                      <path fill="#71d8c9"
+                        d="M12,2A10,10,0,1,0,22,12,10.01146,10.01146,0,0,0,12,2Zm5.207,7.61328-6.1875,6.1875a.99963.99963,0,0,1-1.41406,0L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328Z" />
+                    </svg></span>
+                  <h4 class="h4 mb-0 mt-3 fw-bold">Success</h4>
+                  <p class="card-text text-dark">Successfully Loged In</p>
+                </div>
+                <!-- <div class="card-footer text-center border-0 pt-0">
+                            <div class="row">
+                                <div class="text-center">
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">delete</a>
+                                </div>
+                            </div>
+                        </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     <!-- Modal -->
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
@@ -2528,13 +2562,13 @@
                                                         <div
                                                             style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
                                                         </div>
-                                                        <div style="display: flex;">
+                                                        <!-- <div style="display: flex;">
                                                             <label class="custom-switch m-0"> <input type="radio"
                                                                     name="radio11" class="custom-switch-input"> <span
                                                                     class="custom-switch-indicator"></span> </label>
                                                             &emsp;<p>Require 2-Step verification code to log in <span
                                                                     style="color: #1467B0;">(recommended)</span></p>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                                     <div class="col-lg-6 mt-5">
                                                         <div class="card"
@@ -2551,7 +2585,7 @@
                                                                             require you to enter your
                                                                             current password for security purposes:</p>
                                                                         <input type="password" class="form-control"
-                                                                            id="validationCustom02"
+                                                                            id="current_password_reset"
                                                                             placeholder="Current Password *" required>
                                                                     </div>
                                                                 </div>
@@ -2559,7 +2593,7 @@
                                                         </div>
                                                         <div class="col-lg-7" style="display: flex; width: auto;">
                                                             <button class="btn btn-light btn-pill m-2">Close</button>
-                                                            <button class="btn btn-primary btn-pill m-2">Save</button>
+                                                            <button class="btn btn-primary btn-pill m-2" id="save">Save</button>
                                                         </div>
                                                     </div>
 
@@ -8752,7 +8786,42 @@ $(document).ready(function() {
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <script>
-        $(".toggle-password").click(function() {
+        $(document).ready(()=>{
+            $("#save").click(()=>{
+                console.log($("#current_password_reset").val(),$("#id_password1").val())
+                $.ajax({
+    url: 'http://localhost:3000/api/spade/changePasssword',
+    type: 'PUT',
+    data: JSON.stringify({
+        currentPassword: $("#current_password_reset").val(),
+        NewPassword: $("#id_password1").val()
+    }),
+    contentType: "application/json; charset=utf-8",
+    processData: false,
+    headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+    },
+    success: function (response) {
+        $("#myModal_success").modal("show");
+              setTimeout(function () {
+                $("#myModal_success").modal("hide");
+                localStorage.setItem("authtoken", response.token);
+                // window.location = "../Landlord/index.html";
+              }, 2000);
+    },
+    error: function (xhr, status, error) {
+        // Handle the error response from the API
+        if (xhr.status === 401) {
+            alert("Incorrect Password");
+        } else {
+            console.log('API error:', error);
+        }
+    }
+});
+
+            })
+            
+            $(".toggle-password").click(function() {
 
 $(this).toggleClass("fi-rs-eye fi-rs-crossed-eye");
 var input = $($(this).attr("toggle"));
@@ -8762,13 +8831,14 @@ if (input.attr("type") == "password") {
   input.attr("type", "password");
 }
 });
-    </script>
-
-    <script>
-	$("#form1show").click(function(e){
+$("#form1show").click(function(e){
 	$('#form1').show();
 	});
+
+            
+        })
     </script>
+
 
 
 </body>
