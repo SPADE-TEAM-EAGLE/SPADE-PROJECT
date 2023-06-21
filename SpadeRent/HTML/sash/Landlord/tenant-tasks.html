@@ -1360,11 +1360,6 @@
                                             <table class="table border text-nowrap text-md-nowrap mb-0" id="myTable">
                                                 <thead>
                                                     <tr>
-                                                        <th><label class="custom-control custom-checkbox-md">
-                                                                <input type="checkbox" class="custom-control-input"
-                                                                    name="example-checkbox5" value="option5" checked="">
-                                                                <span class="custom-control-label"></span>
-                                                            </label></th>
                                                         <th>IMAGE</th>
                                                         <th>TASK</th>
                                                         <th>ASSIGNED TO</th>
@@ -2196,27 +2191,91 @@
             $("#viewOverview").attr("href", `./view-tenant.html?tenantId=${tenantId}`)
             $("#viewFiles").attr("href", `./tenant-file.html?tenantId=${tenantId}`)
             $("#viewTasks").attr("href", `./tenant-tasks.html?tenantId=${tenantId}`)
-            console.log(propertyId)
+            function toTitleCase(str) {
+                                return str.replace(/\w\S*/g, function (txt) {
+                                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                                });
+                            }
             $.ajax({
-                url: 'http://localhost:3000/api/spade/getTenantsByID',
-                type: 'GET',
-                data: {
-                    id: tenantId
-                },
-                contentType: "application/json; charset=utf-8",
-                // processData: false,
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                },
-                success: function ({
-                    data
-                }) {
-                    $(".company-name").text(`${data[0][0].companyName} | ${data[0][0].firstName + " " + data[0][0].lastName}`)
-                },
-                error: function (xhr, status, error) {
-                    window.alert('Error: ' + error);
-                }
-            });
+                            url: 'http://localhost:3000/api/spade/tenantTask',
+                            type: 'GET',
+                            data: {
+                                Id:tenantId
+                            },
+                            contentType: "application/json; charset=utf-8",
+                            headers: {
+                                'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                            },
+                            success: function (response) {
+                                console.log(response.data[0])
+                                $("#property_name").text(response.data[0][0].propertyName)
+                        // $("#property_address").text(data[0][0].pAddress)
+
+                        var tableBody = $('#table_body');
+
+                        tableBody.empty();
+
+                        response.data[0]?.forEach(function (task) {
+                            var image = '<td><img src="../../../../spadeAPI/uploads/' + task.taskImages[0] + '" alt=""></td>';
+
+                                var createdDate = new Date(task.created_at);
+                                var currentDate = new Date();
+
+                                var timeDiff = Math.abs(currentDate - createdDate);
+                                var minutesDiff = Math.floor(timeDiff / (1000 * 60));
+                                var hoursDiff = Math.floor(minutesDiff / 60);
+                                var daysDiff = Math.floor(hoursDiff / 24);
+
+                                var taskName = `<td class="task-id" id=${task.id} style="font-weight: 600;">` + '<p style="font-weight: 600;" class="mb-1">' + task.taskName + '</p>' +
+                                    `<span class="font-weight-normal" style="color: #9B9B9B;"> By ${task.createdBy} - `;
+
+                                if (daysDiff > 0) {
+                                    taskName += `${daysDiff} days`;
+                                } else if (hoursDiff > 0) {
+                                    taskName += `${hoursDiff} hours`;
+                                } else {
+                                    taskName += `${minutesDiff} minutes`;
+                                }
+
+                                taskName += '</span>' + '</td>';
+
+                                var assignTo = '<td style="font-weight: 600;text-align: center;display: flex;">' +
+                                    (task.vendor?.map(({ name, email }) => {
+                                        return `
+            <div class="me-2">
+                <img class="avatar brround avatar-md" src="../assets/images/users/2.jpg" alt="avatar-img">
+                <div class="media-body valign-middle mt-0">
+                    <a href="javascript:void(0)" class="text-dark fw-semibold">${name}</a>
+                </div>
+            </div>`;
+                                    }) || "Not assigned") +
+                                    '</td>';
+
+                                var dueDate = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + (task.dueDate || "Not Set") + '</p>' + `<span class="font-weight-normal text-danger"> <i
+                                                                        class="fe fe-circle me-1"></i>${task.priority}</span>` + '</td>';
+                                var relatedTo = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + (task.propertyName ? toTitleCase(task.propertyName) : "Not Set") + '</p>' + `<span class="font-weight-normal text-danger">Unit Number: ${task.unitNumber}</span>` + '</td>';
+                                var status = '<td class="property-id " style="font-weight: 600;">' + (task.status ? toTitleCase(task.status) : "Not Set") + '</td>';
+
+
+
+                                var dropdownMenu =
+                                    '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
+                                    '<ul class="dropdown-menu">' +
+                                    '<li><a class="edit-option dropdown-item text-primary" href="javascript:void(0)">Edit</a></li>' +
+                                    '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>' +
+                                    `<li><a class="dropdown-item text-success" href="./view-property.html?propertyId=${task.id}">View</a></li>` +
+                                    '</ul></td>';
+                                // Create a table row and append the generated columns
+                                var row = '<tr>' + image + taskName + assignTo + dueDate +
+                                    relatedTo + status + dropdownMenu + '</tr>';
+
+                                // Append the row to the table body
+                                tableBody.append(row);})
+                            },
+                            error: function (xhr, status, error) {
+                                window.alert('Error: ' + error);
+                            }
+                        })
         });
     </script>
 
@@ -2236,11 +2295,8 @@
 
     <script>
         $(document).ready(function () {
-            $('#myTable').DataTable({
-                ordering: false,
-                info: false,
-                searching: false
-            });
+            
+            
         });
     </script>
 

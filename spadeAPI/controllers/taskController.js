@@ -91,7 +91,7 @@ const {userId}=req.user
 //  #############################  All VENDOR Start HERE ##################################################
 exports.getAllVendors = async (req, res) => {
   const { userId,userName } = req.user;
-  console.log(userId)
+  // console.log(userId)
   try {
     const getVendorAPI = await queryRunner(
       getVendors,[userId]
@@ -170,7 +170,7 @@ exports.addTasks = async (req, res) => {
       } 
       // else {
         const tasksID = TasksResult[0].insertId;
-        console.log(req.files)
+        // console.log(req.files)
         if(req.files){ 
         const fileNames = req.files.map((file) => file.filename);
         for (let i = 0; i < fileNames.length; i++) {
@@ -480,16 +480,16 @@ exports.updateTasks = async (req, res) => {
 
 
       if (taskCheckResult.length > 0) {
-        console.log(taskCheckResult)
+        // console.log(taskCheckResult)
         const taskimages = taskCheckResult[0].map((image) => image.taskImages);
-        console.log(taskimages)
+        // console.log(taskimages)
         let existingImg = existingImages.split(",");
         const imagesToDelete = taskimages.filter(
           (element) => !existingImg.includes(element)
         );
 
         // Combine the common elements with array2
-          console.log("imagesToDeleted",imagesToDelete)
+          // console.log("imagesToDeleted",imagesToDelete)
         imageToDelete(imagesToDelete);
         let taskDeleteresult = [{ affectedRows: 0 }];
         // delete images Data into database
@@ -539,7 +539,7 @@ exports.updateTasks = async (req, res) => {
 
 
 // // Email Send
-console.log(userId,property)
+// console.log(userId,property)
 const tenantLandlordResult = await queryRunner(getLandlordTenant, [userId,property]);
 let vendorEmailarr = [];
 let vendorNamearr = [];

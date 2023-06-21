@@ -60,7 +60,7 @@ exports.createTenants = async (req, res) => {
       increaseRentData
     } = req.body
     const { userId } = req.user
-    console.log(req.body)
+    // console.log(req.body)
     const tenantsCheck = await queryRunner(selectQuery("tenants", "email"), [email]);
     if (tenantsCheck[0].length > 0) {
 
@@ -109,7 +109,7 @@ exports.createTenants = async (req, res) => {
           // insert increase rent amount END
 
         } else {
-          console.log(111)
+          // console.log(111)
           res.status(400).json({
 
             message: "Error occur in update tenant property unit"
@@ -118,7 +118,7 @@ exports.createTenants = async (req, res) => {
 
 
       } else {
-        console.log(22222)
+        // console.log(22222)
         res.status(400).json({
           message: "data not save"
         })
@@ -478,14 +478,14 @@ exports.tenantDelete = async (req, res) => {
   try {
     const { tenantID } = req.body
     const tenantResult = await queryRunner(selectQuery("tenants", "id"), [tenantID]);
-    console.log(tenantResult[0][0])
+    // console.log(tenantResult[0][0])
     const propertyUnitID = tenantResult[0][0].propertyUnitID;
     const tenantDeleteResult = await queryRunner(deleteQuery("tenants", "id"), [tenantID]);
-    console.log(tenantDeleteResult[0])
+    // console.log(tenantDeleteResult[0])
     if (tenantDeleteResult[0].affectedRows > 0) {
 
       const tenantCheckResult = await queryRunner(selectQuery("tenantattachfiles", "tenantID"), [tenantID]);
-      console.log(tenantCheckResult)
+      // console.log(tenantCheckResult)
       if (tenantCheckResult[0].length > 0) {
         tenantimages = tenantCheckResult[0].map((image) => image.fileName);
         // delete folder images
@@ -606,7 +606,7 @@ exports.updateTenants = async (req, res) => {
       increaseRent,
       increaseRentData
     } = req.body
-    console.log(req)
+    // console.log(req)
     // const {userId}=req.user
     const tenantcheckresult = await queryRunner( selectQuery("tenants", "id"), [tenantID] ); 
     if(tenantcheckresult[0].length > 0){
@@ -627,8 +627,8 @@ exports.updateTenants = async (req, res) => {
         
           const status = "Occupied";
           const propertyUnitsResult = await queryRunner(updatePropertyUnitsTenant, [ status, propertyUnitID, propertyID ]);
-          console.log("11");
-          console.log(propertyUnitsResult);
+          // console.log("11");
+          // console.log(propertyUnitsResult);
           if (propertyUnitsResult[0].affectedRows > 0) {
             if(increaseRent == 'No'){
               res.status(200).json({
@@ -689,7 +689,7 @@ exports.updateTenants = async (req, res) => {
 
       //  ############################# Task tenant ############################################################
 exports.tenantTask = async (req, res) => {
-  const { Id } = req.body;
+  const { Id } = req.query;
   try {
     const taskByIDResult = await queryRunner(tenantTaskQuery, [Id]);
     if (taskByIDResult.length > 0) {

@@ -23,7 +23,8 @@ const {
   putUnitsUpdate,
   selectAllTenants,
   PropertyUnitsVacant,
-  propertyTaskQuery
+  propertyTaskQuery,
+  selectAllTenantsProperty
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -918,10 +919,57 @@ exports.getpropertyUnits = async (req, res) => {
 exports.viewPropertyTenant = async (req, res) => {
   try {
     const { userId, userName } = req.user;
-    // const { userId,userName } = req.body;
-    console.log(req.user);
+    const {id} = req.query;
+    // console.log(req)
+    // console.log(req.user);
     let PropertyTenantResult;
+    console.log(id)
+    PropertyTenantResult = await queryRunner(selectAllTenantsProperty, [id]);
+    console.log(PropertyTenantResult[0])
+    if (PropertyTenantResult[0].length > 0) {
+      for (let i = 0; i < PropertyTenantResult[0].length; i++) {
+        const tenantID = PropertyTenantResult[0][i].tenantID;
+        const tenantIncreaseResult = await queryRunner(
+          selectQuery("tenantincreaserent", "tenantID"),
+          [tenantID]
+        );
+        if (tenantIncreaseResult[0].length > 0) {
+          const tenantIncrease = tenantIncreaseResult[0].map((data) => ({
+            date: data.date,
+            increaseRentAmount: data.increaseRentAmount,
+          }));
+          PropertyTenantResult[0][i].increaseRentAmount = tenantIncrease;
+        } else {
+          PropertyTenantResult[0][i].increaseRentAmount = [
+            "No tenant Increase",
+          ];
+        }
+      }
+      res.status(200).json({
+        data: PropertyTenantResult,
+        message: "Property Tenant ",
+        user: userName,
+      });
+    } else {
+      res.status(200).json({
+        message: "No data found",
+      });
+    }
+  } catch (error) {
+    res.send("Error Get Property Tenant data");
+    console.log(error);
+  }
+};
+exports.viewAllPropertyTenant = async (req, res) => {
+  try {
+    const { userId, userName } = req.user;
+    // const {id} = req.query;
+    // console.log(req)
+    // console.log(req.user);
+    let PropertyTenantResult;
+    // console.log(id)
     PropertyTenantResult = await queryRunner(selectAllTenants, [userId]);
+    console.log(PropertyTenantResult[0])
     if (PropertyTenantResult[0].length > 0) {
       for (let i = 0; i < PropertyTenantResult[0].length; i++) {
         const tenantID = PropertyTenantResult[0][i].tenantID;
@@ -1073,7 +1121,8 @@ exports.getStates = async (req, res) => {
 
 //  ############################# Task property ############################################################
 exports.propertyTask = async (req, res) => {
-  const { prop } = req.body;
+  const { Id } = req.query;
+  // console.log(req.query)
   try {
     const taskByIDResult = await queryRunner(propertyTaskQuery, [Id]);
     if (taskByIDResult.length > 0) {

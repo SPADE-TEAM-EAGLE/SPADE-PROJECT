@@ -4,7 +4,7 @@ const userController = require("../controllers/userController");
 const tenantController = require("../controllers/tenantController");
 const invoiceController = require("../controllers/invoiceController");
 const tenantPortalController = require("../controllers/tenantPortalController");
-const verifyToken = require("../middleware/authenticate");
+const {verifyToken,verifyTokenTenant} = require("../middleware/authenticate");
 const { upload } = require("../middleware/imageUploads");
 const { uploadExistingFiles } = require("../middleware/imageUploads");
 const taskController = require("../controllers/taskController");
@@ -52,7 +52,11 @@ router.get(
   verifyToken,
   userController.viewPropertyTenant
   );
-  
+  router.get(
+    "/viewAllPropertyTenant",
+    verifyToken,
+    userController.viewAllPropertyTenant
+    );
   // router.post('/tenants',verifyToken,tenantController.createTenants);
 router.post("/tenants", verifyToken, tenantController.createTenants);
 router.post(
@@ -90,8 +94,10 @@ router.get("/getVendorCategory" ,taskController.getVendorCategory);
 router.get("/getVendorAssignTo",verifyToken ,taskController.getVendorAssignTo);
 router.put("/updateTasks",[verifyToken,upload] ,taskController.updateTasks);
 router.delete("/deleteTask" ,taskController.deleteTask);
-router.get("/propertyTask", userController.propertyTask);
-router.get("/tenantTask", tenantController.tenantTask);
-router.get("/getAllInvoicesTenant", tenantPortalController.getAllInvoicesTenant);
-router.get("/getAllTaskTenant", tenantPortalController.getAllTaskTenant);
+router.get("/propertyTask",verifyToken ,userController.propertyTask);
+router.get("/tenantTask", verifyToken,tenantController.tenantTask);
+router.get("/getAllInvoicesTenant",verifyTokenTenant ,tenantPortalController.getAllInvoicesTenant);
+router.get("/getAllTaskTenant",verifyTokenTenant ,tenantPortalController.getAllTaskTenant);
+router.get('/getTenantByID', verifyTokenTenant,tenantPortalController.getTenantByID);
+
 module.exports = router;

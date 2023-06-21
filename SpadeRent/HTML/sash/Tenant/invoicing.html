@@ -1129,7 +1129,7 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <!-- <h3 class="page-titlee text-white" style="font-weight: 100; margin-bottom: 0px;">Welcome to Spade Portal</h3> -->
-                                        <h1 class="page-titlee text-white" style="font-weight: 700; margin-bottom: 0px; border-radius: 40px;"><span style="font-weight: 300;">Welcome</span> John Clark</h1>
+                                        <h1 class="page-titlee text-white" id="tenant-name" style="font-weight: 700; margin-bottom: 0px; border-radius: 40px;"><span style="font-weight: 300;">Welcome</span> John Clark</h1>
                                         <div style="width: 100px; height: 6px; background-color: #1467B0; border-radius: 40px;"></div>
                                         <h4 class="mt-3 text-white mb-3" style="font-weight: 300;">Balance Due</h4>
                                         <h1 class="mt-3 text-white font-weight-900" style="font-weight: 800; margin-bottom: 0px;">$356.00</h1>
@@ -1211,32 +1211,32 @@
                                                     </li>
                                                     <li class="d-flex justify-content-between"><a href="javascript:void(0)">Invoice No</a>
                                                         <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1">
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
                                                     <li class="d-flex justify-content-between"><a href="javascript:void(0)">Memo/Description</a>
                                                         <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1">
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
                                                     <li class="d-flex justify-content-between"><a href="javascript:void(0)">Invoice Date</a>
                                                         <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1">
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
                                                     <li class="d-flex justify-content-between"><a href="javascript:void(0)">Property Name</a>
                                                         <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1">
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
                                                     <li class="d-flex justify-content-between"><a href="javascript:void(0)">Amount</a>
                                                         <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1">
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
                                                     <li class="d-flex justify-content-between"><a href="javascript:void(0)">Status</a>
                                                         <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1">
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
                                                 </ul>
@@ -1251,11 +1251,7 @@
                                             <table class="table border text-nowrap text-md-nowrap mb-0">
                                                 <thead>
                                                     <tr>
-                                                        <th><label class="custom-control custom-checkbox-md">
-                                                                <input type="checkbox" class="custom-control-input"
-                                                                    name="example-checkbox5" value="option5">
-                                                                <span class="custom-control-label"></span>
-                                                            </label></th>
+
                                                         <th>INVOICE NO.</th>
                                                         <th>MEMO/DESCRIPTION</th>
                                                         <th>INVOICE DATE</th>
@@ -2867,7 +2863,128 @@
         }
         getData()
     </script> -->
+<script>
+    $(document).ready(()=>{
+        // console.log(1222222)
+        $.ajax({
+                url: 'http://localhost:3000/api/spade/getTenantByID',
+                type: 'GET',
+                contentType: "application/json; charset=utf-8",
+                // processData: false,
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function(response) {
+                    console.log(1111111)
+                    console.log(response)
+                    // console.log(data)
+                    $(".company-name").text(`${data[0][0].companyName} | ${data[0][0].firstName+" "+data[0][0].lastName}`)
+                },
+                error: function(xhr, status, error) {
+                    window.alert('Error: ' + error);
+                }
+            });
+        $.ajax({
+                    url: 'http://localhost:3000/api/spade/getAllInvoicesTenant',
+                    type: 'GET',
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        if (response.message == "No data found") {
+                            // window.location = './invoicing.html'
+                        }
 
+                        invoiceData = response.data[0]
+
+
+                        var tableBody = $('#table_body');
+                        tableBody.empty();
+                        // console.log(data[0])
+                        let tenantNames = []
+
+                        response.data[0]?.forEach(function (invoice) {
+
+
+                            var invoiceNumber = '<td class="invoice-id" style="font-weight: 600;">' + invoice.invoiceID + '</td>';
+
+                            // var tenantName = '<td class="tenantName" style="font-weight: 600;">' + invoice.firstName + invoice.lastName + `<br><small>${invoice.tPhone}</small>` + '</td>';
+                            var memoDescription = '<td class="memo" style="font-weight: 600;">' + invoice.memo[0].memo + `<br><small>${invoice.invoiceType}</small>` + '</td>';
+
+                            var dateObj = new Date(invoice.created_at);
+                            var day = dateObj.getDate();
+                            var month = dateObj.getMonth() + 1;
+                            var year = dateObj.getFullYear();
+                            var invoiceDate = '<td class="date" style="font-weight: 600;">' + day + "/" + month + "/" + year + '</td>';
+                            var propertyName = '<td class="propertyName" style="font-weight: 600;">' + invoice.propertyName + `<br><small>${invoice.tPhone}</small>` + '</td>';
+                            var invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + invoice.totalAmount + '<span> $</span>' + `<br><small>Next Due Date: November-12-2020</small>` + '</td>';
+                            var status = `<td class="status" style="font-weight: 600;${invoice.status === "Unpaid" ? 'color:blue;' : 'color:green'}">` + invoice.status + '</td>';
+                            var dropdownMenu = `<td><i class="fe fe-more-vertical three-dots"
+                                                                data-bs-toggle="dropdown"></i>
+
+                                                            <ul class="dropdown-menu">
+                                                                <li><a class="dropdown-item text-dark view-btnn"
+                                                                        data-bs-effect="effect-scale"
+                                                                        data-bs-toggle="modal"
+                                                                        href="#viewModal-invoice">View</a>
+                                                                </li>
+                                                                <li><a class="dropdown-item text-dark view-btn"
+                                                                        data-bs-effect="effect-scale"
+                                                                        data-bs-toggle="modal"
+                                                                        href="#viewModal">View PDF Invoice</a>
+                                                                </li>
+                                                                <li><a class="dropdown-item text-dark edit-option"
+                                                                        data-bs-effect="effect-scale"
+                                                                        href="#"
+
+                                                                        >Edit</a></li>
+                                                                <li><a class="dropdown-item text-dark status-option"
+                                                                        data-bs-effect="effect-scale"
+                                                                        data-bs-toggle="modal"
+                                                                        href="#changeStatusModal">Change Status</a></li>
+                                                                <li><a class="dropdown-item text-dark resend-option"
+                                                                        data-bs-effect="effect-scale"
+                                                                        data-bs-toggle="modal"
+                                                                        href="#">Resend Invoice</a></li>
+                                                                <li><a class="dropdown-item text-dark refund-option"
+                                                                        data-bs-effect="effect-scale"
+                                                                        data-bs-toggle="modal" href="#refundModal">Issue
+                                                                        Refund</a></li>
+                                                                <li><a class="dropdown-item text-danger delete-option"
+                                                                        href="javascript:void(0)">Delete</a>
+                                                                </li>
+                                                            </ul>
+                                                        </td>`
+
+
+                            var row = '<tr>' + invoiceNumber +  memoDescription + invoiceDate +
+                                propertyName + invoiceAmount + status + dropdownMenu + '</tr>';
+
+                            // Append the row to the table body
+                            tableBody.append(row);
+                        });},error:function(){
+
+                        }})
+                        $('#typehead').on('keyup', function() {
+                var searchValue = $(this).val().toLowerCase();
+                $('#table_body tr').filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+                });
+            });
+            $('input[type="checkbox"]').change(function () {
+                var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
+                var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
+                console.log(columnIndex, isColumnVisible)
+                // Toggle the visibility of the corresponding column
+                $('table').find('tr').each(function () {
+                    var column = $(this).find('th:nth-child(' + columnIndex + '), td:nth-child(' + columnIndex + ')');
+                    isColumnVisible ? column.show() : column.hide();
+                });
+            });
+    })
+</script>
     <script>
         function logout() {    
           localStorage.removeItem('authtoken'); 

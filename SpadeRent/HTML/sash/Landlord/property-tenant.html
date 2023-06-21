@@ -2123,7 +2123,7 @@
         $(document).ready(function () {
 
             const propertyId = (new URL(document.location)).searchParams.get("propertyId");
-            // // console.log($("#viewUnits").attr("href"))
+            console.log(propertyId)
             $("#viewUnits").attr("href", `./property-unit.html?propertyId=${propertyId}`)
             $("#viewOverview").attr("href", `./view-property.html?propertyId=${propertyId}`)
             $("#viewTenants").attr("href", `./property-tenant.html?propertyId=${propertyId}`)
@@ -2186,7 +2186,7 @@
                     $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
                 });
             });
-
+            console.log(propertyId)
             $.ajax({
                 url: 'http://localhost:3000/api/spade/viewPropertyTenant',
                 type: 'GET',
