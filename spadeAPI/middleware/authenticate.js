@@ -106,6 +106,7 @@ const verifyToken = async (req, res, next) => {
   }
   try {
     const decoded = jwt.verify(token, config.JWT_SECRET_KEY);
+    // console.log("landlord",decoded)
     const result = await queryRunner(selectQuery("users", "Email"), [
       decoded.email,
     ]);
@@ -130,13 +131,15 @@ const verifyTokenTenant = async (req, res, next) => {
   }
   try {
     const decoded = jwt.verify(token, config.JWT_SECRET_KEY);
+    // console.log("tenant",decoded)
     const result = await queryRunner(selectQuery("tenants", "email"), [
       decoded.email,
     ]);
+    console.log(result)
     req.user = {
       email: decoded.email,
       userId: result[0][0].id,
-      userName: result[0][0].FirstName + " " + result[0][0].LastName,
+      userName: result[0][0].firstName + " " + result[0][0].lastName,
     };
 
     next();
@@ -145,4 +148,7 @@ const verifyTokenTenant = async (req, res, next) => {
     return res.status(400).send("Invalid Token");
   }
 };
-(module.exports = verifyToken), verifyTokenTenant;
+module.exports = {
+  verifyToken,
+  verifyTokenTenant
+};

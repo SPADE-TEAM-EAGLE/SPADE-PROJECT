@@ -1,22 +1,15 @@
-<!doctype html>
-<html lang="en" dir="ltr">
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-
-    <!-- META DATA -->
     <meta charset="UTF-8">
-    <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Sash – Bootstrap 5  Admin & Dashboard Template">
-    <meta name="author" content="Spruko Technologies Private Limited">
-    <meta name="keywords" content="admin,admin dashboard,admin panel,admin template,bootstrap,clean,dashboard,flat,jquery,modern,responsive,premium admin templates,responsive admin,ui,ui kit.">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
     <!-- FAVICON -->
-    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css'>
     <link rel="shortcut icon" type="image/x-icon" href="../assets/images/brand/favicon.ico" />
 
     <!-- TITLE -->
-    <title>Property Tenant - SpadeRent</title>
+    <title>Sash – Bootstrap 5 Admin & Dashboard Template</title>
 
     <!-- BOOTSTRAP CSS -->
     <link id="style" href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -29,127 +22,378 @@
 
     <!--- FONT-ICONS CSS -->
     <link href="../assets/css/icons.css" rel="stylesheet" />
-    <link rel="stylesheet" href="fancy_fileupload.css">
+
     <!-- COLOR SKIN CSS -->
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="../assets/colors/color1.css" />
+
+    <style>
+        .main{
+  margin:1rem;
+  max-width:350px;
+  width:50%;  
+  height:250px;
+}
+@media(max-width:34em){
+  .main{
+    min-width:150px;
+    width:auto;
+  }
+}
+select {
+    display: none !important;
+}
+
+.dropdown-select {
+    /* background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0) 100%); */
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#40FFFFFF', endColorstr='#00FFFFFF', GradientType=0);
+    background-color: #fff;
+    border-radius: 6px;
+    border: solid 1px #eee;
+    box-shadow: 0px 2px 5px 0px rgba(155, 155, 155, 0.5);
+    box-sizing: border-box;
+    cursor: pointer;
+    display: block;
+    float: left;
+    font-size: 14px;
+    font-weight: normal;
+    height: 42px;
+    line-height: 40px;
+    outline: none;
+    padding-left: 18px;
+    padding-right: 30px;
+    position: relative;
+    text-align: left !important;
+    transition: all 0.2s ease-in-out;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    white-space: nowrap;
+    width: auto;
+    display: inline-block;
+    width: 100%;
+    height: 2.375rem;
+    padding: 0.5rem 1.75rem 0.5rem 0.75rem;
+    line-height: 1.5;
+    color: black;
+    vertical-align: middle;
+    background-size: 8px 10px;
+    border-radius: 7px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 1px solid #e9edf4;
+
+}
+
+.dropdown-select:focus {
+    background-color: #fff;
+}
+
+.dropdown-select:hover {
+    background-color: #fff;
+}
+
+.dropdown-select:active,
+.dropdown-select.open {
+    background-color: #fff !important;
+    border-color: #bbb;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05) inset;
+}
+
+.dropdown-select:after {
+    height: 0;
+    width: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid #777;
+    -webkit-transform: origin(50% 20%);
+    transform: origin(50% 20%);
+    transition: all 0.125s ease-in-out;
+    content: '';
+    display: block;
+    margin-top: -2px;
+    pointer-events: none;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+}
+
+.dropdown-select.open:after {
+    -webkit-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+}
+
+.dropdown-select.open .list {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.dropdown-select.open .option {
+    cursor: pointer;
+}
+
+.dropdown-select.wide {
+    width: 100%;
+}
+
+.dropdown-select.wide .list {
+    left: 0 !important;
+    right: 0 !important;
+}
+
+.dropdown-select .list {
+    box-sizing: border-box;
+    transition: all 0.15s cubic-bezier(0.25, 0, 0.25, 1.75), opacity 0.1s linear;
+    -webkit-transform: scale(0.75);
+    transform: scale(0.75);
+    -webkit-transform-origin: 50% 0;
+    transform-origin: 50% 0;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.09);
+    background-color: #fff;
+    border-radius: 6px;
+    margin-top: 4px;
+    padding: 3px 0;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 999;
+    max-height: 250px;
+    overflow: auto;
+    border: 1px solid #ddd;
+}
+
+.dropdown-select .list:hover .option:not(:hover) {
+    background-color: transparent !important;
+}
+.dropdown-select .dd-search{
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0.5rem;
+}
+
+.dropdown-select .dd-searchbox{
+  width: 100%;
+  padding:0.5rem;
+  border:1px solid #999;
+  border-color:#999;
+  border-radius:4px;
+  outline:none;
+}
+.dropdown-select .dd-searchbox:focus{
+  border-color:#12CBC4;
+}
+
+.dropdown-select .list ul {
+    padding: 0;
+}
+
+.dropdown-select .option {
+    cursor: default;
+    font-weight: 400;
+    line-height: 40px;
+    outline: none;
+    padding-left: 18px;
+    padding-right: 29px;
+    text-align: left;
+    transition: all 0.2s;
+    list-style: none;
+}
+
+.dropdown-select .option:hover,
+.dropdown-select .option:focus {
+    background-color: #f6f6f6 !important;
+}
+
+.dropdown-select .option.selected {
+    font-weight: 600;
+    color: #12cbc4;
+}
+
+.dropdown-select .option.selected:focus {
+    background: #f6f6f6;
+}
+
+.dropdown-select a {
+    color: #aaa;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.dropdown-select a:hover {
+    color: #666;
+}
+
+    </style>
 </head>
 
-<body class="app sidebar-mini ltr light-mode">
-    <div id="preloader" class="tlp-preloader">
-        <div class="animation-preloader">
-            <div class="tlp-spinner"></div>
-            <img src="../assets/images/logo-preloader.png" alt="Preloader" style="width: 65px;">
-        </div>
-    </div>
+<body>
 
-    <!-- <a data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal">click here</a>
-    <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <input type="text" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the same password here.">
-                </div>
+
+    <button class="btn btn-success bg-success-gradient mt-3" data-bs-toggle="modal" data-bs-target="#largemodal">large Modal</button>
+
+    <div class="modal fade" id="largemodal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Modal title</h5>
+              <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
             </div>
+            <div class="modal-body">
+               
+                    <select name="">
+                      <option value="1">One</option>
+                      <option value="2">Two</option>
+                      <option value="3">Three</option>
+                      <option value="4">Four</option>
+                  </select>
+                  
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
         </div>
-    </div> -->
-    <a href="index.html?openModal=true">click here</a>
+      </div>
+
+      <!-- <div class="container">
+      <div class="main">
+        <h2>Dropdown with search box<h2>
+        <select name="">
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+          <option value="4">Four</option>
+      </select>
+      </div> -->
 
 
-
-    
     <!-- JQUERY JS -->
     <script src="../assets/js/jquery.min.js"></script>
 
     <!-- BOOTSTRAP JS -->
     <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
     <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-    <!-- SPARKLINE JS-->
-    <script src="../assets/js/jquery.sparkline.min.js"></script>
-
-    <!-- Sticky js -->
-    <script src="../assets/js/sticky.js"></script>
-
-    <!-- CHART-CIRCLE JS-->
-    <script src="../assets/js/circle-progress.min.js"></script>
-    <!-- INTERNAL File-Uploads Js-->
-
-    <!-- PIETY CHART JS-->
-    <script src="../assets/plugins/peitychart/jquery.peity.min.js"></script>
-    <script src="../assets/plugins/peitychart/peitychart.init.js"></script>
-
-    <!-- SIDEBAR JS -->
-    <script src="../assets/plugins/sidebar/sidebar.js"></script>
-    <script src="../assets/plugins/intl-tel-input-master/intlTelInput.js"></script>
-    <script src="../assets/plugins/intl-tel-input-master/country-select.js"></script>
-    <script src="../assets/plugins/intl-tel-input-master/utils.js"></script>
-    <!-- Perfect SCROLLBAR JS-->
-    <script src="../assets/plugins/p-scroll/perfect-scrollbar.js"></script>
-    <script src="../assets/plugins/p-scroll/pscroll.js"></script>
-    <script src="../assets/plugins/p-scroll/pscroll-1.js"></script>
-
-    <!-- INTERNAL CHARTJS CHART JS-->
-    <script src="../assets/plugins/chart/Chart.bundle.js"></script>
-    <script src="../assets/plugins/chart/rounded-barchart.js"></script>
-    <script src="../assets/plugins/chart/utils.js"></script>
-
-    <!-- INTERNAL SELECT2 JS -->
-    <script src="../assets/plugins/select2/select2.full.min.js"></script>
-
-    <!-- INTERNAL Data tables js-->
-    <script src="../assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
-    <script src="../assets/plugins/datatable/js/dataTables.bootstrap5.js"></script>
-    <script src="../assets/plugins/datatable/dataTables.responsive.min.js"></script>
-
-    <!-- INTERNAL APEXCHART JS -->
-    <script src="../assets/js/apexcharts.js"></script>
-    <script src="../assets/plugins/apexchart/irregular-data-series.js"></script>
-
-    <!-- INTERNAL Flot JS -->
-    <script src="../assets/plugins/flot/jquery.flot.js"></script>
-    <script src="../assets/plugins/flot/jquery.flot.fillbetween.js"></script>
-    <script src="../assets/plugins/flot/chart.flot.sampledata.js"></script>
-    <script src="../assets/plugins/flot/dashboard.sampledata.js"></script>
-
-    <!-- INTERNAL Vector js -->
-    <script src="../assets/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
-    <script src="../assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-
-    <!-- SIDE-MENU JS-->
-    <script src="../assets/plugins/sidemenu/sidemenu.js"></script>
-
-    <!-- TypeHead js -->
-    <script src="../assets/plugins/bootstrap5-typehead/autocomplete.js"></script>
-    <script src="../assets/js/typehead.js"></script>
-
-    <!-- INTERNAL INDEX JS -->
-    <script src="../assets/js/index1.js"></script>
-
-    <!-- Color Theme js -->
-    <script src="../assets/js/themeColors.js"></script>
-
-    <!-- CUSTOM JS -->
-    <script src="../assets/js/custom.js"></script>
-
-    <!-- ############################################# -->
 
 
-    <!-- C3 CHART JS -->
-    <script src="../assets/plugins/charts-c3/d3.v5.min.js"></script>
-    <script src="../assets/plugins/charts-c3/c3-chart.js"></script>
+    <script>
+        function create_custom_dropdowns() {
+    $('select').each(function (i, select) {
+        if (!$(this).next().hasClass('dropdown-select')) {
+            $(this).after('<div class="dropdown-select wide ' + ($(this).attr('class') || '') + '" tabindex="0"><span class="current"></span><div class="list"><ul></ul></div></div>');
+            var dropdown = $(this).next();
+            var options = $(select).find('option');
+            var selected = $(this).find('option:selected');
+            dropdown.find('.current').html(selected.data('display-text') || selected.text());
+            options.each(function (j, o) {
+                var display = $(o).data('display-text') || '';
+                dropdown.find('ul').append('<li class="option ' + ($(o).is(':selected') ? 'selected' : '') + '" data-value="' + $(o).val() + '" data-display-text="' + display + '">' + $(o).text() + '</li>');
+            });
+        }
+    });
 
-    <!-- INPUT MASK JS-->
-    <script src="../assets/plugins/input-mask/jquery.mask.min.js"></script>
+    $('.dropdown-select ul').before('<div class="dd-search"><input id="txtSearchValue" autocomplete="off" onkeyup="filter()" class="dd-searchbox" type="text"></div>');
+}
 
-    <!-- CHARTJS JS -->
-    <script src="../assets/plugins/chart/Chart.bundle.js"></script>
-    <script src="../assets/plugins/chart/utils.js"></script>
-    <!-- CHART-DONUT JS -->
-    <script src="../assets/js/charts.js"></script>
+// Event listeners
+
+// Open/close
+$(document).on('click', '.dropdown-select', function (event) {
+    if($(event.target).hasClass('dd-searchbox')){
+        return;
+    }
+    $('.dropdown-select').not($(this)).removeClass('open');
+    $(this).toggleClass('open');
+    if ($(this).hasClass('open')) {
+        $(this).find('.option').attr('tabindex', 0);
+        $(this).find('.selected').focus();
+    } else {
+        $(this).find('.option').removeAttr('tabindex');
+        $(this).focus();
+    }
+});
+
+// Close when clicking outside
+$(document).on('click', function (event) {
+    if ($(event.target).closest('.dropdown-select').length === 0) {
+        $('.dropdown-select').removeClass('open');
+        $('.dropdown-select .option').removeAttr('tabindex');
+    }
+    event.stopPropagation();
+});
+
+function filter(){
+    var valThis = $('#txtSearchValue').val();
+    $('.dropdown-select ul > li').each(function(){
+     var text = $(this).text();
+        (text.toLowerCase().indexOf(valThis.toLowerCase()) > -1) ? $(this).show() : $(this).hide();         
+   });
+};
+// Search
+
+// Option click
+$(document).on('click', '.dropdown-select .option', function (event) {
+    $(this).closest('.list').find('.selected').removeClass('selected');
+    $(this).addClass('selected');
+    var text = $(this).data('display-text') || $(this).text();
+    $(this).closest('.dropdown-select').find('.current').text(text);
+    $(this).closest('.dropdown-select').prev('select').val($(this).data('value')).trigger('change');
+});
+
+// Keyboard events
+$(document).on('keydown', '.dropdown-select', function (event) {
+    var focused_option = $($(this).find('.list .option:focus')[0] || $(this).find('.list .option.selected')[0]);
+    // Space or Enter
+    //if (event.keyCode == 32 || event.keyCode == 13) {
+    if (event.keyCode == 13) {
+        if ($(this).hasClass('open')) {
+            focused_option.trigger('click');
+        } else {
+            $(this).trigger('click');
+        }
+        return false;
+        // Down
+    } else if (event.keyCode == 40) {
+        if (!$(this).hasClass('open')) {
+            $(this).trigger('click');
+        } else {
+            focused_option.next().focus();
+        }
+        return false;
+        // Up
+    } else if (event.keyCode == 38) {
+        if (!$(this).hasClass('open')) {
+            $(this).trigger('click');
+        } else {
+            var focused_option = $($(this).find('.list .option:focus')[0] || $(this).find('.list .option.selected')[0]);
+            focused_option.prev().focus();
+        }
+        return false;
+        // Esc
+    } else if (event.keyCode == 27) {
+        if ($(this).hasClass('open')) {
+            $(this).trigger('click');
+        }
+        return false;
+    }
+});
+
+$(document).ready(function () {
+    create_custom_dropdowns();
+});
+    </script>
+
 </body>
 
 </html>

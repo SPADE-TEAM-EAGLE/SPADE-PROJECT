@@ -1171,7 +1171,7 @@
                                             <table class="table border text-nowrap text-md-nowrap mb-0">
                                                 <thead>
                                                     <tr>
-                                                        <th></th>
+                                                        
                                                         <th>Image</th>
                                                         <th>TASK</th>
                                                         <th>ASSIGNED TO</th>
@@ -2306,7 +2306,166 @@
     <script src="../assets/plugins/fancyuploder/jquery.iframe-transport.js"></script>
     <script src="../assets/plugins/fancyuploder/jquery.fancy-fileupload.js"></script>
     <script src="../assets/plugins/fancyuploder/fancy-uploader.js"></script> -->
+    <script>
+        $(document).ready(()=>{
+            $.ajax({
+                url: 'http://localhost:3000/api/spade/getTenantByID',
+                type: 'GET',
+                contentType: "application/json; charset=utf-8",
+                // processData: false,
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function(response) {
+                    console.log(1111111)
+                    console.log(response)
+                    // console.log(data)
+                    $(".company-name").text(`${data[0][0].companyName} | ${data[0][0].firstName+" "+data[0][0].lastName}`)
+                },
+                error: function(xhr, status, error) {
+                    window.alert('Error: ' + error);
+                }
+            });
+            $.ajax({
+                    url: 'http://localhost:3000/api/spade/getAllTaskTenant',
+                    type: 'GET',
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        if (false) {
+                            window.location = './new-property.html'
+                        } else {
+                            $("#user-name").text(response.user)
 
+                            var tableBody = $('#table_body');
+
+                            tableBody.empty();
+                            function toTitleCase(str) {
+                                return str.replace(/\w\S*/g, function (txt) {
+                                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                                });
+                            }
+
+                            response.data[0]?.forEach(function (task) {
+                                // var image = '<td><img src="../../../../spadeAPI/uploads/' + property.images[0] + '" alt=""></td>';
+                                // var image = '<td><img src="../../../../../../Desktop/spade API 2/uploads/image-1684250579662.png" alt="hhghghgh"></td>';
+                                var image = '<td><img src="../../../../spadeAPI/uploads/' + task.taskImages?.split(',')[0] + '" alt=""></td>';
+
+                                var createdDate = new Date(task.created_at);
+                                var currentDate = new Date();
+
+                                var timeDiff = Math.abs(currentDate - createdDate);
+                                var minutesDiff = Math.floor(timeDiff / (1000 * 60));
+                                var hoursDiff = Math.floor(minutesDiff / 60);
+                                var daysDiff = Math.floor(hoursDiff / 24);
+
+                                var taskName = `<td class="task-id" id=${task.id} style="font-weight: 600;">` + '<p style="font-weight: 600;" class="mb-1">' + task.taskName + '</p>' +
+                                    `<span class="font-weight-normal" style="color: #9B9B9B;"> By ${task.createdBy} - `;
+
+                                if (daysDiff > 0) {
+                                    taskName += `${daysDiff} days`;
+                                } else if (hoursDiff > 0) {
+                                    taskName += `${hoursDiff} hours`;
+                                } else {
+                                    taskName += `${minutesDiff} minutes`;
+                                }
+
+                                taskName += '</span>' + '</td>';
+
+                                var assignTo = '<td style="font-weight: 600;text-align: center;display: flex;">' +
+                                    (task.AssignTo?.map(({ name, email }) => {
+                                        return `
+            <div class="me-2">
+                <img class="avatar brround avatar-md" src="../assets/images/users/2.jpg" alt="avatar-img">
+                <div class="media-body valign-middle mt-0">
+                    <a href="javascript:void(0)" class="text-dark fw-semibold">${name}</a>
+                </div>
+            </div>`;
+                                    }) || "Not assigned") +
+                                    '</td>';
+
+                                var dueDate = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + (task.dueDate || "Not Set") + '</p>' + `<span class="font-weight-normal text-danger"> <i
+                                                                        class="fe fe-circle me-1"></i>${task.priority}</span>` + '</td>';
+                                var relatedTo = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + (task.propertyName ? toTitleCase(task.propertyName) : "Not Set") + '</p>' + `<span class="font-weight-normal text-danger">Unit Number: ${task.unitNumber}</span>` + '</td>';
+                                var status = '<td class="property-id " style="font-weight: 600;">' + (task.status ? toTitleCase(task.status) : "Not Set") + '</td>';
+
+
+
+                                var dropdownMenu =
+                                    '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
+                                    '<ul class="dropdown-menu">' +
+
+                                    `<li><a class="dropdown-item text-success" href="./view-property.html?propertyId=${task.id}">View</a></li>`
+                                    '</ul></td>';
+                                // Create a table row and append the generated columns
+                                var row = '<tr>' + image + taskName + assignTo + dueDate +
+                                    relatedTo + status + dropdownMenu + '</tr>';
+
+                                // Append the row to the table body
+                                tableBody.append(row);
+                            });
+                            $("#global-loader").fadeOut("slow")
+                            $('.edit-option').click(function (e) {
+                                e.preventDefault();
+                                const taskIdElement = $(this).closest("tr").find(".task-id");
+
+                                taskId = taskIdElement.attr("id")
+
+                                const data = response.data[0].find(obj => obj.id.toString() == taskId);
+                                console.log(taskId)
+                                selectedFiles = data.taskImages.split(",")
+
+                                updateSelectedFilesContainer()
+                                $("#message").val(data.notes);
+                                $("#dueDate_update").val(data.dueDate);
+                                $("#taskName_update").val(data.taskName);
+                                $("#property_update").val(data.tenantID);
+
+                                $("#priority_update").find(`option[name="${data.priority.toLowerCase()}"]`).prop("selected", true);
+                                $("#status_update").find(`option[value="${data.status}"]`).prop("selected", true);
+                                data.AssignTo.forEach(({ ID, name }) => {
+                                    $("#assignee_update").find(`option[value="${ID}"]`).prop("selected", true);
+                                    $(".select2-selection__rendered").append(`<li class="select2-selection__choice" title="${name}"><span class="select2-selection__choice__remove" role="presentation">×</span>${name}</li>`)
+                                })
+
+                                $('#myModal_edit').modal('show');
+                            });
+                            $('.delete-option').click(function (e) {
+                                e.preventDefault(); // Prevent default anchor behavior
+                                const taskIdElement = $(this).closest("tr").find(".task-id");
+                                taskId = taskIdElement.attr("id");
+                                $('#myModal_delete').modal('show');
+                            });
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(error)
+                        window.alert('Error: ' + "Token expeired!, Login again");
+                        window.location = '../Landlord/login_module.html';
+                    }
+                });
+                $('#typehead').on('keyup', function() {
+                var searchValue = $(this).val().toLowerCase();
+                $('#table_body tr').filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+                });
+            });
+            $('input[type="checkbox"]').change(function () {
+                var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
+                var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
+                console.log(columnIndex, isColumnVisible)
+                // Toggle the visibility of the corresponding column
+                $('table').find('tr').each(function () {
+                    var column = $(this).find('th:nth-child(' + columnIndex + '), td:nth-child(' + columnIndex + ')');
+                    isColumnVisible ? column.show() : column.hide();
+                });
+            });
+        })
+    </script>
     <script>
         function logout() {    
           localStorage.removeItem('authtoken'); 

@@ -41,7 +41,7 @@ exports.createInvoice = async (req, res) => {
         sendmails,
         totalAmount
  } = req.body;
-console.log(req.body)
+// console.log(req.body)
     const { userId } = req.user;
     try {
         const currentDate = new Date();
@@ -110,7 +110,7 @@ exports.putInvoiceStatusUpdates = async (req, res) => {
       // console.log(req)
     // const { userId } = req.user; 
     const {userId} = req.user;
-console.log(req.body,userId)
+// console.log(req.body,userId)
       const currentDate = new Date();
       const invoiceUpdateStatusResult = await queryRunner(updateInvoiceStatus, [
         status,
@@ -143,11 +143,11 @@ console.log(req.body,userId)
 exports.getAllInvoices = async (req, res) => {
     try {
     // const { userId } = req.user; 
-    console.log(111)
+    // console.log(111)
     const {userId} = req.user; 
-    console.log(userId)
+    // console.log(userId)
       const getAllInvoicesResult = await queryRunner(getAllInvoicesquery, [userId]);
-      console.log(getAllInvoicesResult[0])
+      // console.log(getAllInvoicesResult[0])
       if (getAllInvoicesResult[0].length > 0) {
         for (let i = 0; i < getAllInvoicesResult[0].length; i++){
             const invoiceID = getAllInvoicesResult[0][i].invoiceID;

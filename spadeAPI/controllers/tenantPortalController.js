@@ -10,7 +10,8 @@ const {
   selectQuery,
   deleteQuery,
   getAllInvoiceTenantQuery,
-  AlltasksTenantsQuery
+  AlltasksTenantsQuery,
+  getTenantsById
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -26,9 +27,10 @@ const config = process.env;
     exports.getAllInvoicesTenant = async (req, res) => {
         try {
         // const {userId} = req.user; 
-        const {userId} = req.body; 
+        const {userId,userName} = req.user;
+        // console.log(userId,userName) 
           const getAllInvoicesResult = await queryRunner(getAllInvoiceTenantQuery, [userId]);
-          console.log(getAllInvoicesResult[0])
+          // console.log(getAllInvoicesResult[0])
           if (getAllInvoicesResult[0].length > 0) {
             for (let i = 0; i < getAllInvoicesResult[0].length; i++){
                 const invoiceID = getAllInvoicesResult[0][i].invoiceID;
@@ -66,8 +68,8 @@ const config = process.env;
 
       //  ############################# Get ALL Task Start ############################################################
 exports.getAllTaskTenant = async (req, res) => {
-    // const { userId } = req.user;
-    const { userId } = req.body;
+    const { userId } = req.user;
+    // const { userId } = req.body;
     try {
       const allTaskResult = await queryRunner(AlltasksTenantsQuery, [userId]);
       if (allTaskResult.length > 0) {
@@ -114,6 +116,29 @@ exports.getAllTaskTenant = async (req, res) => {
       res.send("Error Get Tasks");
     }
   };
+  exports.getTenantByID = async (req, res) => {
+    try {
+      // con
+      const { userId } = req.user;
+      // console.log(1111111)
+      const TenantsByIDResult = await queryRunner(getTenantsById, [userId])
+      if (TenantsByIDResult.length > 0) {
+        const data = JSON.parse(JSON.stringify(TenantsByIDResult))
+        console.log(data[0][0])
+        res.status(200).json({
+          data: data[0][0],
+          message: 'Tenants By ID'
+        })
+      } else {
+        res.status(400).json({
+          message: 'No data found'
+        })
+      }
+    } catch (error) {
+      res.send('Error Get Tenants By ID')
+      console.log(error)
+    }
+  }
   //  ############################# Get ALL Task End ############################################################
   
        //  ############################# Task By ID Start ############################################################
