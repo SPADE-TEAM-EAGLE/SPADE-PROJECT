@@ -809,7 +809,7 @@
                                             <li><a href="terms.php" class="sub-slide-item"> Terms</a></li>
                                             <li><a href="invoice.php" class="sub-slide-item"> Invoice</a></li>
                                             <li><a href="pricing.php" class="sub-slide-item"> Pricing Tables</a></li>
-                                            <li><a href="settings.php" class="sub-slide-item"> Settings</a></li>
+                                            <li><a href="settings.html" class="sub-slide-item"> Settings</a></li>
                                             <li><a href="blog.php" class="sub-slide-item"> Blog</a></li>
                                             <li><a href="blog-details.php" class="sub-slide-item"> Blog Details</a>
                                             </li>
