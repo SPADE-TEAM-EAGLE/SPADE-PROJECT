@@ -4,6 +4,7 @@ const userController = require("../controllers/userController");
 const tenantController = require("../controllers/tenantController");
 const invoiceController = require("../controllers/invoiceController");
 const tenantPortalController = require("../controllers/tenantPortalController");
+const settingController = require("../controllers/settingController");
 const {verifyToken,verifyTokenTenant} = require("../middleware/authenticate");
 const { upload } = require("../middleware/imageUploads");
 const { uploadExistingFiles } = require("../middleware/imageUploads");
@@ -99,5 +100,6 @@ router.get("/tenantTask", verifyToken,tenantController.tenantTask);
 router.get("/getAllInvoicesTenant",verifyTokenTenant ,tenantPortalController.getAllInvoicesTenant);
 router.get("/getAllTaskTenant",verifyTokenTenant ,tenantPortalController.getAllTaskTenant);
 router.get('/getTenantByID', verifyTokenTenant,tenantPortalController.getTenantByID);
+router.put('/changePasssword', verifyTokenTenant,tenantPortalController.changePasssword);
 
 module.exports = router;
