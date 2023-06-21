@@ -149,4 +149,5 @@ exports.getAllInvoiceTenantQuery = "SELECT i.id as invoiceID, i.dueDate, i.daysD
 exports.AlltasksTenantsQuery = 'SELECT tk.id, tk.taskName, tk.dueDate, tk.status, tk.priority, tk.notes, tk.createdBy,tk.created_at, p.propertyName, pu.unitNumber, t.firstName as tfirstName, t.lastName as tlastName FROM `task`as tk JOIN tenants as t ON tk.tenantID = t.id JOIN property as p ON t.propertyID = p.id JOIN propertyunits as pu ON t.propertyUnitID = pu.id WHERE tk.tenantID = ?';
 exports.updateTasksQuery = "UPDATE task SET taskName = ? , tenantID = ? , dueDate = ? , status = ? , priority = ? , notes = ? , notifyTenant = ? , notifyVendor = ? , updated_at = ? where id = ? ";
 exports.updatePassword = "UPDATE users SET Password = ? , updated_at = ? where id = ? ";
+exports.updatePasswordTenant = "UPDATE tenants SET tenantPassword = ? , tenantUpdated_at = ? where id = ? ";
 
