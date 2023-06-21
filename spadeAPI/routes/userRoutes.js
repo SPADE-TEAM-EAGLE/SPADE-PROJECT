@@ -100,7 +100,7 @@ router.get("/tenantTask", verifyToken,tenantController.tenantTask);
 router.get("/getAllInvoicesTenant",verifyTokenTenant ,tenantPortalController.getAllInvoicesTenant);
 router.get("/getAllTaskTenant",verifyTokenTenant ,tenantPortalController.getAllTaskTenant);
 router.get('/getTenantByID', verifyTokenTenant,tenantPortalController.getTenantByID);
-router.put('/changePasssword', settingController.changePasssword);
-router.put('/changePasswordTenant' ,settingController.changePasswordTenant);
+router.put('/changePasssword',verifyToken, settingController.changePasssword);
+router.put('/changePasswordTenant', verifyTokenTenant,settingController.changePasswordTenant);
 
 module.exports = router;

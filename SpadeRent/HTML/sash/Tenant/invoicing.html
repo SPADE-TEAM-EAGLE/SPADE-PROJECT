@@ -1985,7 +1985,112 @@
         </div>
     </div>
     <!--/Sidebar-right-->
+    <div class="modal fade" id="viewModal-invoice" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="text-justify ps-2 border-model-line">
+                        <h2 class="modal-title mb-0">View <strong class="color-primary">Invoice</strong></h2>
+                        <button type="button" class="btn btn-primary">#Invoice Number: INV-89900A</button>
+                    </div>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="viewModal-invoice">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <label><b>Tenant Name</b></label>
+                            <p class="text-primary"><b  id="tenantName">John Clark</b></p>
+                        </div>
+                        <div class="col-lg-3">
+                            <label><b>Invoice Type</b></label>
+                            <p class="text-primary"><b id="invoiceType">One Time Invoice</b></p>
+                        </div>
+                        <div class="col-lg-3">
+                            <label><b>Due Date</b></label>
+                            <p class="text-primary"><b id="dueDate">Jan-01-2023</b></p>
+                        </div>
+                        <div class="col-lg-3">
+                            <label><b>Status</b></label>
+                            <p class="text-danger"><b id="invoiceStatus"><i class="fi fi-rs-clock-three" style="color: #FB233B;"></i>
+                                    Unpaid</b></p>
+                        </div>
+                        <div class="col-lg-12 mt-5">
+                            <label><b>Property Information</b></label>
+                            <p class="text-primary"><b id="propertyAddress">3114 Stargate Ct</b></p>
+                        </div>
+                        <div class="col-lg-12 mt-5">
+                            <div style="display: flex;">
+                                <p class="text-primary"><b>Line Items</b></p>
+                                <hr
+                                    style="height: 2px; background: black; width: 88%; margin-left: 83px; position: absolute; margin-top: 10px;">
+                            </div>
+                        </div>
+                        <!-- <div class="col-lg-10 mt-5">
+                            
+                        </div> -->
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-12">
+                            <div class="table-responsive">
+                                <table class="table text-nowrap table-borderless text-md-nowrap mg-b-0 mb-0"
+                                    id="lineItemsTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Category</th>
+                                            <th>Property</th>
+                                            <th>Memo</th>
+                                            <th>Amount</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody id="view-invoice-line-item">
+                                        <tr class="tr">
+                                            <td>
+                                                <p class="text-primary"><b>Rent</b></p>
+                                            </td>
+                                            <td>
+                                                <p class="text-primary"><b>3114 Stargate Ct</b></p>
+                                            </td>
+                                            <td>
+                                                <p class="text-primary"><b>Testing</b></p>
+                                            </td>
+                                            <td>
+                                                <p class="text-primary"><b>$200.00</b></p>
+                                            </td>
+                                            <!-- <td><button type="button" class="btn" id="del-btn1">
+                                                    <i class="fi fi-rs-trash text-danger fs-5"></i>
+                                                </button></td> -->
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
 
+                        <div class="col-md-12 col-lg-8 mt-5">
+                            <label><b>Additional Information</b></label>
+                            <p class="text-primary"><b>Testing 123</b></p>
+                        </div>
+                        <div class="col-md-12 col-lg-4 mt-5">
+                            <span class="float-end">
+                                <label class="form-label fw-bold m-0">Balance Due</label>
+                                <h1 class="text-primary fw-bold m-0" id="totalAmount">$200.00</h1>
+                            </span>
+                        </div>
+                        <div class="col-lg-12 mt-5 mb-5" id="view-invoice-images">
+                            <img src="../assets/images/demo_img.png" alt=""> &nbsp;
+                            <img src="../assets/images/demo_img.png" alt=""> &nbsp;
+                            <img src="../assets/images/demo_img.png" alt=""> &nbsp;
+                            <img src="../assets/images/demo_img.png" alt=""> &nbsp;
+                            <img src="../assets/images/demo_img.png" alt="">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
     <!-- Country-selector modal-->
     <div class="modal fade" id="country-selector">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -2866,6 +2971,70 @@
 <script>
     $(document).ready(()=>{
         // console.log(1222222)
+        let invoiceData;let tenantData
+        $(document).on('click', ".view-btnn", function (e) {
+                e.preventDefault();
+                const invoiceIdElement = $(this).closest("tr").find(".invoice-id");
+                invoiceId = invoiceIdElement.text();
+                const data1 = invoiceData.find(obj => obj.invoiceID == invoiceId);
+                console.log(tenantData)
+                // const data2 = tenantData.find(obj => obj.tenantID == data1.tenantID)
+
+                const data = {
+                    ...data1,...tenantData
+                }
+                console.log(data)
+                $("#tenantName").text(data.firstName + " " + data.lastName)
+                $("#invoiceType").text(data.invoiceType)
+                $("#dueDate").text(data.dueDate)
+                $("#invoiceStatus").text(data.status)
+                $("#propertyAddress").text(data.pAddress)
+                // $("#invoiceCategory").text(data.invoiceType)
+                // $("#invoiceProperty").text(data.invoiceType)
+                // $("#invoiceMemo").text(data.invoiceType)
+                // $("#invoiceAmount").text(data.invoiceType)
+                // $("#client-id").append(`<h5 class="fw-bold" style="color: 
+                //                 #562AC8;">BILLED TO</h5>
+                //                     <p class="text-dark">${data.firstName + " " + data.lastName}<br>${data.tAddress
+                //     }<br>${data.tCity},
+                //                         ${data.tState}<br>${data.tZipcode}<br>United States<br>${data.tPhoneNumber}</p>`)
+                // console.log(1)
+                // $("#owner-id").empty()
+                // $("#owner-id").append(`                                    <h5 class="text-dark fw-bold">${data.companyName}</h5>
+                //                     <p class="text-dark">${data.pAddress}<br>${data.pCity}, ${data.pState}<br>${data.pZipCode}<br>United
+                //                         States<br>1-888-123-8910</p>`)
+                // $("#table-body").empty()
+                // var dateObj = new Date(data.created_at);
+                // var day = dateObj.getDate();
+                // var month = dateObj.getMonth() + 1;
+                // var year = dateObj.getFullYear();
+                $("#view-invoice-line-item").empty()
+                data.memo.forEach((item) => {
+
+                    console.log(item)
+                    $("#view-invoice-line-item").append(`
+                <tr>
+                                                    <td>
+                                                        <p class="text-primary"><b>${item.category}</b></p>
+                                                    </td>
+                                                    
+                                                    <td><p class="text-primary"><b>${item.property}</b></p></td>
+                                                    <td><p class="text-primary"><b>${item.memo}</b></p></td>
+                                                    <td><p class="text-primary"><b>$ ${item.amount}</b></p></td>
+                                                </tr>
+                `)
+
+
+                })
+                $("#totalAmount").text('$ '+data.totalAmount)
+                const images=data.invoiceImages.split(",")
+                $("#view-invoice-images").empty()
+                images.forEach((image)=>{
+                    $("#view-invoice-images").append(`
+                            <img src="../../../../spadeAPI/uploads/${image}" width=200px height=200px alt=""> &nbsp;`)
+                })
+                $("#viewModal-invoice").modal("show")
+            })
         $.ajax({
                 url: 'http://localhost:3000/api/spade/getTenantByID',
                 type: 'GET',
@@ -2875,10 +3044,10 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function(response) {
-                    console.log(1111111)
-                    console.log(response)
+                    // console.log(1111111)
+                    tenantData=response.data
                     // console.log(data)
-                    $(".company-name").text(`${data[0][0].companyName} | ${data[0][0].firstName+" "+data[0][0].lastName}`)
+                    // $(".company-name").text(`${data[0][0].companyName} | ${data[0][0].firstName+" "+data[0][0].lastName}`)
                 },
                 error: function(xhr, status, error) {
                     window.alert('Error: ' + error);
@@ -2898,7 +3067,7 @@
                         }
 
                         invoiceData = response.data[0]
-
+                        console.log(response.data[0])
 
                         var tableBody = $('#table_body');
                         tableBody.empty();

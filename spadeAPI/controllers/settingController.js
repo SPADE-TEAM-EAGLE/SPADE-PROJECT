@@ -21,7 +21,8 @@ exports.changePasssword = async function (req, res) {
     // const {currentPassword, NewPassword } = req.query;
     const {currentPassword, NewPassword } = req.body;
     // const {userId}=req.user
-    const {userId}=req.body
+    console.log(req.query,req.body)
+    const {userId}=req.user
     const currentDate = new Date();
 
     try {
@@ -35,8 +36,7 @@ exports.changePasssword = async function (req, res) {
             const hashPassword = await hashedPassword(NewPassword);
             const updateResult = await queryRunner(updatePassword, [hashPassword,currentDate,userId]);
               if (updateResult[0].affectedRows === 0) {
-                
-                res.status(400).send("Error");
+                res.status(401).json({ error: "Incorrect Password" });
               } else {
                 const email = selectResult[0][0].Email;
                 const token = jwt.sign({ email, NewPassword }, config.JWT_SECRET_KEY, {
@@ -48,7 +48,7 @@ exports.changePasssword = async function (req, res) {
                   });
               }
         } else {
-          res.status(400).send("Incorrect Password");
+          res.status(401).json({ error: "Incorrect Password" });
         }  
     } catch (error) {
       console.log(error);

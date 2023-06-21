@@ -155,7 +155,7 @@ exports.getAllInvoices = async (req, res) => {
             // console.log(invoicelineitemsResult[0])
             
             if (invoicelineitemsResult[0].length > 0) {
-                const memo = invoicelineitemsResult[0].map((desc)=>({memo:desc.memo, category:desc.category, amount:desc.amount}))
+                const memo = invoicelineitemsResult[0].map((desc)=>({memo:desc.memo, category:desc.category, amount:desc.amount,property:desc.property}))
                 getAllInvoicesResult[0][i].memo = memo
             } else {
                 getAllInvoicesResult[0][i].memo = ["No memo"]

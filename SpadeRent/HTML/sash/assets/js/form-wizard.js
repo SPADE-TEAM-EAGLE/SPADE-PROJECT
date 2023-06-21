@@ -615,7 +615,7 @@ validconfirmPassword.addEventListener('keyup', confirmPasswordValidation);
 var spantag1 = document.getElementById("passnotmatch1");
 
 function confirmPasswordValidation() {
-  alert("1");
+  
   if(validconfirmPassword.value.match(password_validate))
   {
     validconfirmPassword.classList.add("border-green");
@@ -751,119 +751,119 @@ function button2() {
 }
 // phone name
 
-function create_custom_dropdowns() {
-  $('select').each(function (i, select) {
-    var dropdownSelect = $(this).next('.dropdown-select');
+// function create_custom_dropdowns() {
+//   $('select').each(function (i, select) {
+//     var dropdownSelect = $(this).next('.dropdown-select');
     
-    if (dropdownSelect.length === 0) {
-      dropdownSelect = $('<div class="dropdown-select wide ' + ($(this).attr('class') || '') + '" tabindex="0"><span class="current"></span><div class="list"><ul></ul></div></div>');
-      $(this).after(dropdownSelect);
+//     if (dropdownSelect.length === 0) {
+//       dropdownSelect = $('<div class="dropdown-select wide ' + ($(this).attr('class') || '') + '" tabindex="0"><span class="current"></span><div class="list"><ul></ul></div></div>');
+//       $(this).after(dropdownSelect);
       
-      var options = $(select).find('option');
-      var selected = $(this).find('option:selected');
+//       var options = $(select).find('option');
+//       var selected = $(this).find('option:selected');
       
-      dropdownSelect.find('.current').html(selected.data('display-text') || selected.text());
+//       dropdownSelect.find('.current').html(selected.data('display-text') || selected.text());
       
-      options.each(function (j, o) {
-        var display = $(o).data('display-text') || '';
-        dropdownSelect.find('ul').append('<li class="option ' + ($(o).is(':selected') ? 'selected' : '') + '" data-value="' + $(o).val() + '" data-display-text="' + display + '">' + $(o).text() + '</li>');
-      });
-    }
-  });
+//       options.each(function (j, o) {
+//         var display = $(o).data('display-text') || '';
+//         dropdownSelect.find('ul').append('<li class="option ' + ($(o).is(':selected') ? 'selected' : '') + '" data-value="' + $(o).val() + '" data-display-text="' + display + '">' + $(o).text() + '</li>');
+//       });
+//     }
+//   });
 
-  $('.dropdown-select ul').before('<div class="dd-search"><input class="dd-searchbox" type="text"></div>');
-}
+//   $('.dropdown-select ul').before('<div class="dd-search"><input class="dd-searchbox" type="text"></div>');
+// }
 
-// Event listeners
+// // Event listeners
 
-// Open/close
-$(document).on('click', '.dropdown-select', function (event) {
-  if ($(event.target).hasClass('dd-searchbox')) {
-    return;
-  }
-  var dropdownSelect = $(this);
+// // Open/close
+// $(document).on('click', '.dropdown-select', function (event) {
+//   if ($(event.target).hasClass('dd-searchbox')) {
+//     return;
+//   }
+//   var dropdownSelect = $(this);
   
-  $('.dropdown-select').not(dropdownSelect).removeClass('open');
-  dropdownSelect.toggleClass('open');
+//   $('.dropdown-select').not(dropdownSelect).removeClass('open');
+//   dropdownSelect.toggleClass('open');
   
-  if (dropdownSelect.hasClass('open')) {
-    dropdownSelect.find('.option').attr('tabindex', 0);
-    dropdownSelect.find('.selected').focus();
-  } else {
-    dropdownSelect.find('.option').removeAttr('tabindex');
-    dropdownSelect.focus();
-  }
-});
+//   if (dropdownSelect.hasClass('open')) {
+//     dropdownSelect.find('.option').attr('tabindex', 0);
+//     dropdownSelect.find('.selected').focus();
+//   } else {
+//     dropdownSelect.find('.option').removeAttr('tabindex');
+//     dropdownSelect.focus();
+//   }
+// });
 
-// Close when clicking outside
-$(document).on('click', function (event) {
-  if ($(event.target).closest('.dropdown-select').length === 0) {
-    $('.dropdown-select').removeClass('open');
-    $('.dropdown-select .option').removeAttr('tabindex');
-  }
-  event.stopPropagation();
-});
+// // Close when clicking outside
+// $(document).on('click', function (event) {
+//   if ($(event.target).closest('.dropdown-select').length === 0) {
+//     $('.dropdown-select').removeClass('open');
+//     $('.dropdown-select .option').removeAttr('tabindex');
+//   }
+//   event.stopPropagation();
+// });
 
-// Search
-$(document).on('keyup', '.dd-searchbox', function() {
-  var searchValue = $(this).val().toLowerCase();
-  var dropdownSelect = $(this).closest('.dropdown-select');
+// // Search
+// $(document).on('keyup', '.dd-searchbox', function() {
+//   var searchValue = $(this).val().toLowerCase();
+//   var dropdownSelect = $(this).closest('.dropdown-select');
   
-  dropdownSelect.find('.option').each(function() {
-    var optionText = $(this).text().toLowerCase();
-    if (optionText.indexOf(searchValue) > -1) {
-      $(this).show();
-    } else {
-      $(this).hide();
-    }
-  });
-});
+//   dropdownSelect.find('.option').each(function() {
+//     var optionText = $(this).text().toLowerCase();
+//     if (optionText.indexOf(searchValue) > -1) {
+//       $(this).show();
+//     } else {
+//       $(this).hide();
+//     }
+//   });
+// });
 
-// Option click
-$(document).on('click', '.dropdown-select .option', function (event) {
-  var dropdownSelect = $(this).closest('.dropdown-select');
+// // Option click
+// $(document).on('click', '.dropdown-select .option', function (event) {
+//   var dropdownSelect = $(this).closest('.dropdown-select');
   
-  dropdownSelect.find('.selected').removeClass('selected');
-  $(this).addClass('selected');
+//   dropdownSelect.find('.selected').removeClass('selected');
+//   $(this).addClass('selected');
   
-  var text = $(this).data('display-text') || $(this).text();
-  dropdownSelect.find('.current').text(text);
-  dropdownSelect.prev('select').val($(this).data('value')).trigger('change');
-});
+//   var text = $(this).data('display-text') || $(this).text();
+//   dropdownSelect.find('.current').text(text);
+//   dropdownSelect.prev('select').val($(this).data('value')).trigger('change');
+// });
 
-// Keyboard events
-$(document).on('keydown', '.dropdown-select', function (event) {
-  var focused_option = $($(this).find('.list .option:focus')[0] || $(this).find('.list .option.selected')[0]);
+// // Keyboard events
+// $(document).on('keydown', '.dropdown-select', function (event) {
+//   var focused_option = $($(this).find('.list .option:focus')[0] || $(this).find('.list .option.selected')[0]);
   
-  if (event.keyCode == 13) { // Enter
-    if ($(this).hasClass('open')) {
-      focused_option.trigger('click');
-    } else {
-      $(this).trigger('click');
-    }
-    return false;
-  } else if (event.keyCode == 40) { // Down
-    if (!$(this).hasClass('open')) {
-      $(this).trigger('click');
-    } else {
-      focused_option.next().focus();
-    }
-    return false;
-  } else if (event.keyCode == 38) { // Up
-    if (!$(this).hasClass('open')) {
-      $(this).trigger('click');
-    } else {
-      focused_option.prev().focus();
-    }
-    return false;
-  } else if (event.keyCode == 27) { // Esc
-    if ($(this).hasClass('open')) {
-      $(this).trigger('click');
-    }
-    return false;
-  }
-});
+//   if (event.keyCode == 13) { // Enter
+//     if ($(this).hasClass('open')) {
+//       focused_option.trigger('click');
+//     } else {
+//       $(this).trigger('click');
+//     }
+//     return false;
+//   } else if (event.keyCode == 40) { // Down
+//     if (!$(this).hasClass('open')) {
+//       $(this).trigger('click');
+//     } else {
+//       focused_option.next().focus();
+//     }
+//     return false;
+//   } else if (event.keyCode == 38) { // Up
+//     if (!$(this).hasClass('open')) {
+//       $(this).trigger('click');
+//     } else {
+//       focused_option.prev().focus();
+//     }
+//     return false;
+//   } else if (event.keyCode == 27) { // Esc
+//     if ($(this).hasClass('open')) {
+//       $(this).trigger('click');
+//     }
+//     return false;
+//   }
+// });
 
-$(document).ready(function () {
-  create_custom_dropdowns();
-});
+// $(document).ready(function () {
+//   create_custom_dropdowns();
+// });

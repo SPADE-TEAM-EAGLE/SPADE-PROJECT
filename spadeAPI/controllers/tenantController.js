@@ -325,6 +325,7 @@ exports.verifyResetEmailCodeTenant = async (req, res) => {
 
 //  ############################# Tenant Update Password ############################################################
 exports.updatePasswordTenant = async (req, res) => {
+  console.log(req.body)
   const { id, password, confirmpassword, token } = req.body;
   try {
     if (password === confirmpassword) {
