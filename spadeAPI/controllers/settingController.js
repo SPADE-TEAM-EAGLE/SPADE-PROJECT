@@ -10,7 +10,7 @@ const {
   selectQuery,
   deleteQuery,
   updatePassword,
-  updatePasswordTenant
+  updatePasswordTenantSetting
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -77,7 +77,7 @@ exports.changePasswordTenant = async function (req, res) {
         await bcrypt.compare(currentPassword, selectResult[0][0].tenantPassword)
       ) {
           const hashPassword = await hashedPassword(NewPassword);
-          const updateResult = await queryRunner(updatePasswordTenant, [hashPassword,currentDate,userId]);
+          const updateResult = await queryRunner(updatePasswordTenantSetting, [hashPassword,currentDate,userId]);
             if (updateResult[0].affectedRows === 0) {
               
               res.status(400).send("Error");
