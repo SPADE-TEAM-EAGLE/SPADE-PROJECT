@@ -2102,22 +2102,22 @@
                                             <th>Property</th>
                                             <th>Memo</th>
                                             <th>Amount</th>
-                                            <th>Delete</th>
+                                            
                                         </tr>
                                     </thead>
-                                    <tbody id="add-item-container1">
+                                    <tbody id="view-invoice-line-item">
                                         <tr class="tr">
                                             <td>
-                                                <p class="text-primary"><b id="invoiceCategory">Rent</b></p>
+                                                <p class="text-primary"><b>Rent</b></p>
                                             </td>
                                             <td>
-                                                <p class="text-primary"><b id="invoiceProperty">3114 Stargate Ct</b></p>
+                                                <p class="text-primary"><b>3114 Stargate Ct</b></p>
                                             </td>
                                             <td>
-                                                <p class="text-primary"><b id="invoiceMemo">Testing</b></p>
+                                                <p class="text-primary"><b>Testing</b></p>
                                             </td>
                                             <td>
-                                                <p class="text-primary"><b id="invoiceAmount">$200.00</b></p>
+                                                <p class="text-primary"><b>$200.00</b></p>
                                             </td>
                                             <!-- <td><button type="button" class="btn" id="del-btn1">
                                                     <i class="fi fi-rs-trash text-danger fs-5"></i>
@@ -2138,7 +2138,7 @@
                                 <h1 class="text-primary fw-bold m-0" id="totalAmount">$200.00</h1>
                             </span>
                         </div>
-                        <div class="col-lg-12 mt-5 mb-5">
+                        <div class="col-lg-12 mt-5 mb-5" id="view-invoice-images">
                             <img src="../assets/images/demo_img.png" alt=""> &nbsp;
                             <img src="../assets/images/demo_img.png" alt=""> &nbsp;
                             <img src="../assets/images/demo_img.png" alt=""> &nbsp;
@@ -4124,79 +4124,55 @@
                     ...data1, ...data2
                 }
                 console.log(data)
-                $("#tenantName").text()
-                $("#client-id").append(`<h5 class="fw-bold" style="color: 
-                                #562AC8;">BILLED TO</h5>
-                                    <p class="text-dark">${data.firstName + " " + data.lastName}<br>${data.tAddress
-                    }<br>${data.tCity},
-                                        ${data.tState}<br>${data.tZipcode}<br>United States<br>${data.tPhoneNumber}</p>`)
-                console.log(1)
-                $("#owner-id").empty()
-                $("#owner-id").append(`                                    <h5 class="text-dark fw-bold">${data.companyName}</h5>
-                                    <p class="text-dark">${data.pAddress}<br>${data.pCity}, ${data.pState}<br>${data.pZipCode}<br>United
-                                        States<br>1-888-123-8910</p>`)
-                $("#table-body").empty()
-                var dateObj = new Date(data.created_at);
-                var day = dateObj.getDate();
-                var month = dateObj.getMonth() + 1;
-                var year = dateObj.getFullYear();
-                $("#table-body").append(
-                    `<tr>
-                        <td>${day}/${month}/${year}</td>
-                                                    <td>INV-10012</td>
-                                                    <td>$ ${data.totalAmount}</td>
-                                                    <td>${data.dueDate}</td>
-                                                    <td>Due On Receipt</td>
-                    </tr>
-                    `
-                )
-
-                $("#memo-table").empty()
+                $("#tenantName").text(data.firstName + " " + data.lastName)
+                $("#invoiceType").text(data.invoiceType)
+                $("#dueDate").text(data.dueDate)
+                $("#invoiceStatus").text(data.status)
+                $("#propertyAddress").text(data.pAddress)
+                // $("#invoiceCategory").text(data.invoiceType)
+                // $("#invoiceProperty").text(data.invoiceType)
+                // $("#invoiceMemo").text(data.invoiceType)
+                // $("#invoiceAmount").text(data.invoiceType)
+                // $("#client-id").append(`<h5 class="fw-bold" style="color: 
+                //                 #562AC8;">BILLED TO</h5>
+                //                     <p class="text-dark">${data.firstName + " " + data.lastName}<br>${data.tAddress
+                //     }<br>${data.tCity},
+                //                         ${data.tState}<br>${data.tZipcode}<br>United States<br>${data.tPhoneNumber}</p>`)
+                // console.log(1)
+                // $("#owner-id").empty()
+                // $("#owner-id").append(`                                    <h5 class="text-dark fw-bold">${data.companyName}</h5>
+                //                     <p class="text-dark">${data.pAddress}<br>${data.pCity}, ${data.pState}<br>${data.pZipCode}<br>United
+                //                         States<br>1-888-123-8910</p>`)
+                // $("#table-body").empty()
+                // var dateObj = new Date(data.created_at);
+                // var day = dateObj.getDate();
+                // var month = dateObj.getMonth() + 1;
+                // var year = dateObj.getFullYear();
+                $("#view-invoice-line-item").empty()
                 data.memo.forEach((item) => {
-                    $("#memo-table").append(`
+
+                    console.log(item)
+                    $("#view-invoice-line-item").append(`
                 <tr>
                                                     <td>
-                                                        <p style="font-weight: bold;" class="mb-1">Services</p>
-                                                        <span>${item.memo
-                        }</span>
+                                                        <p class="text-primary"><b>${item.category}</b></p>
                                                     </td>
-                                                    </td>
-                                                    <td>${data.propertyName}</td>
-                                                    <td>${item.category}</td>
-                                                    <td>$ ${item.amount}</td>
-                                                </tr>
-                `)
-                    $("#price-table").empty()
-                    $("#price-table").append(`
-                <tr>
-                                                    <td>Subtotal</td>
-                                                    <td>$ ${data.totalAmount}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Discount</td>
-                                                    <td>$ ${0}</td>
-                                                </tr>
-                                                <tr style="    border-bottom: 1px solid #AFAFAF;">
-                                                    <td>Tax (0%)</td>
-                                                    <td>$ ${0}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Total</td>
-                                                    <td>$ ${data.totalAmount + 0}</td>
-                                                </tr>
-                                                <tr style="    border-bottom: 2px solid #562AC8;">
-                                                    <td>Deposit Requested</td>
-                                                    <td>$ 0</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="fw-bold">Deposit Due</td>
-                                                    <td class="fw-bold">$ ${data.totalAmount + 0 + 0}</td>
+                                                    
+                                                    <td><p class="text-primary"><b>${item.property}</b></p></td>
+                                                    <td><p class="text-primary"><b>${item.memo}</b></p></td>
+                                                    <td><p class="text-primary"><b>$ ${item.amount}</b></p></td>
                                                 </tr>
                 `)
 
 
                 })
-                console.log(22222)
+                $("#totalAmount").text('$ '+data.totalAmount)
+                const images=data.invoiceImages.split(",")
+                $("#view-invoice-images").empty()
+                images.forEach((image)=>{
+                    $("#view-invoice-images").append(`
+                            <img src="../../../../spadeAPI/uploads/${image}" width=200px height=200px alt=""> &nbsp;`)
+                })
                 $("#viewModal-invoice").modal("show")
             })
             $(document).on('click', '.three-dots', function () {
