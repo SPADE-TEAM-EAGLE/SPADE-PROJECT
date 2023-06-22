@@ -1218,10 +1218,16 @@
                                         <!-- LOGO -->
 
                                         <!-- COUNTRY -->
-                                        <div class="d-flex country">
+                                        <div class="d-flex country mt-1">
                                             <a class="nav-link icon theme-layout nav-link-bg layout-setting">
                                                 <span class="dark-layout text-dark"><i class="fe fe-moon"></i></span>
                                                 <span class="light-layout"><i class="fe fe-sun"></i></span>
+                                            </a>
+                                        </div>
+
+                                        <div class="d-flex country mt-2">
+                                            <a class="nav-link icon text-dark" onclick="mydemoclick()">
+                                                <i class="fi fi-rs-universal-access"></i>
                                             </a>
                                         </div>
 
@@ -1439,7 +1445,7 @@
                             </li>
 
                             <li class="slide">
-                                <a class="side-menu__item" data-bs-toggle="slide" href="help.html">
+                                <a class="side-menu__item" data-bs-toggle="slide" href="coming-soon.html">
                                     <i class="side-menu__icon fi fi-rs-comment-question"></i>
                                     <span class="side-menu__label">Help</span>
                                 </a>
@@ -1606,15 +1612,33 @@
                                                 <input type="file" id="mediaFile" />
                                                 <div class="form-row mt-5">
                                                     <div class="col-xl-6 mb-3">
-                                                        <label for="validationCustom01">New Password</label>
-                                                        <input type="password" class="form-control" id="validationCustom01" placeholder="Your Password" required>
-                                                        <div class="valid-feedback">Looks good!</div>
+                                                        <div class="form-group">
+                                                            <label for="validationCustom01"><b>New Password</b></label>
+                                                            <input type="password" class="form-control" id="id_password1" aria-describedby="emailHelp" placeholder="Password" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter password here.">
+                                                                <i class="fi fi-rs-eye text-dark fs-20" id="togglePassword1" style="cursor: pointer;
+                                                                float: right;
+                                                                margin-top: -30px;
+                                                                margin-right: 15px;
+                                                                color: #4573D2;"></i>
+                                                                <span class="mt-1 text-danger" id="passnotmatch1" style="display: none;">
+                                                                    MUST be atleast 8 characters long, Must contain atleast One Uppercase and One symbol.
+                                                                </span>
+                                                        </div>
                                                     </div>
                                                     <div class="col-lg-6"></div>
-                                                    <div class="col-xl-6 mb-3 mt-3">
-                                                        <label for="validationCustom02">Confirm New Password</label>
-                                                        <input type="password" class="form-control" id="validationCustom02" placeholder="Confirm Password" required>
-                                                        <div class="valid-feedback">Looks good!</div>
+                                                    <div class="col-xl-6 mb-3 mt-3"> 
+                                                        <div class="form-group">
+                                                            <label for="validationCustom02"><b>Confirm New Password</b></label>
+                                                            <input type="password" class="form-control" id="id_password2" aria-describedby="emailHelp" placeholder="Confirm Password"  data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the same password here.">
+                                                                <i class="fi fi-rs-eye text-dark fs-20" id="togglePassword2" style="cursor: pointer;
+                                                                float: right;
+                                                                margin-top: -30px;
+                                                                margin-right: 15px;
+                                                                color: #4573D2;"></i>
+                                                                <span class="mt-1 text-danger" id="passnotmatch" style="display: none;">
+                                                                    Password does not match. Please enter a correct Password.
+                                                                </span>
+                                                        </div>
                                                     </div>
                                                     <div class="col-lg-6"></div>
                                                     <div class="col-lg-6 mt-5">
@@ -2830,6 +2854,72 @@
         <!-- CHARTJS JS -->
         <script src="../assets/plugins/chart/Chart.bundle.js"></script>
         <script src="../assets/plugins/chart/utils.js"></script>
+
+        
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
+    <script>
+    
+        
+    let password_validate1 = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
+    var validconfirmPassword1 = document.getElementById("id_password1");
+    let confirmPassword1 = document.getElementById("id_password2");
+    confirmPassword1.addEventListener('keyup', confirmPasswordValidation1);
+    validconfirmPassword1.addEventListener('keyup', confirmPasswordValidation1);
+    var spantag11 = document.getElementById("passnotmatch1");
+    
+    function confirmPasswordValidation1() {
+     
+      if(validconfirmPassword1.value.match(password_validate1))
+      {
+        console.log(11)
+        validconfirmPassword1.classList.add("border-green");
+        spantag11.style.display = "none";
+      }
+      else
+      {
+        console.log(21)
+        validconfirmPassword1.classList.remove("border-green");
+        spantag11.style.display = "block";
+      }
+        if (confirmPassword1.value == validconfirmPassword1.value && validconfirmPassword1.value.match(password_validate1)) {
+          confirmPassword1.classList.add("border-green");
+          console.log(31)
+        } else {
+            console.log(41)
+          confirmPassword1.classList.remove("border-green");
+        }
+    }
+    
+    const togglePassword11 = document.querySelector("#togglePassword1");
+    const password11 = document.querySelector("#id_password1");
+    
+    togglePassword11.addEventListener("click", function (e) {
+      const type =
+        password11.getAttribute("type") === "password" ? "text" : "password";
+      password11.setAttribute("type", type);
+     
+    });
+    const togglePassword22 = document.querySelector("#togglePassword2");
+    const password22 = document.querySelector("#id_password2");
+    
+    togglePassword22.addEventListener("click", function (e) {
+      const type =
+      password22.getAttribute("type") === "password" ? "text" : "password";
+      password22.setAttribute("type", type);
+     
+    });
+    $(document).ready(function() {
+        $('#togglePassword1').click(function() {
+          $(this).toggleClass('fi-rs-eye fi-rs-crossed-eye');
+        });
+      });
+      $(document).ready(function() {
+        $('#togglePassword2').click(function() {
+          $(this).toggleClass('fi-rs-eye fi-rs-crossed-eye');
+        });
+      });
+    </script>
 
         <!-- CHART-DONUT JS -->
         <script src="../assets/js/charts.js"></script>
