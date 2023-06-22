@@ -65,6 +65,7 @@ exports.createInvoice = async (req, res) => {
             }
         }
         // select tenants 
+        console.log(lineItems)
         if(lineItems){
         for (let i = 0; i < lineItems.length; i++) {
             const category = lineItems[i].category;
