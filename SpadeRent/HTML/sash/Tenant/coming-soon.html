@@ -26,37 +26,18 @@
     <link href="../assets/css/dark-style.css" rel="stylesheet" />
     <link href="../assets/css/transparent-style.css" rel="stylesheet">
     <link href="../assets/css/skin-modes.css" rel="stylesheet" />
+    <link href="../assets/css/responsive.css" rel="stylesheet" />
 
-    <link id="theme" rel="stylesheet" type="text/css" media="all" href="../assets/colors/color1.css" />
+
     <!--- FONT-ICONS CSS -->
     <link href="../assets/css/icons.css" rel="stylesheet" />
-    <!-- <link rel="stylesheet" href="../assets/css/"> -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+    <link rel="stylesheet" href="fancy_fileupload.css">
     <!-- COLOR SKIN CSS -->
+    <link id="theme" rel="stylesheet" type="text/css" media="all" href="../assets/colors/color1.css" />
     <style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
         .custom-file-input::-webkit-file-upload-button {
             visibility: hidden;
-        }
-        
-        #propertyTable {
-            padding: 0;
-        }
-        
-        #propertyTable_wrapper .dataTables_wrapper {
-            padding: 0;
-        }
-        
-        #propertyTable_wrapper .dataTables_scroll {
-            padding: 0;
-        }
-        
-        #propertyTable_wrapper .dataTables_scrollHead {
-            padding: 0;
-        }
-        
-        #propertyTable_wrapper .dataTables_scrollBody {
-            padding: 0;
         }
         
         .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar {
@@ -108,9 +89,6 @@
             color: white !important;
             border-radius: 50px !important;
         }
-        /* .dark-mode .create-new-link:hover {
-            border: 3px solid #1467B0 !important;
-        } */
         
         .create-new-link {
             background: transparent !important;
@@ -123,21 +101,21 @@
             margin-top: 10px;
         }
         
-        .dark-mode .selected-files span {
-            display: inline-block;
-            margin-right: 0;
-            padding: 4px 8px;
-            background: transparent;
-            color: white !important;
-            border-radius: 4px;
-        }
-        
         .selected-files span {
             display: inline-block;
             margin-right: 5px;
             padding: 4px 8px;
             background: #f8f9fa;
             color: #333;
+            border-radius: 4px;
+        }
+        
+        .dark-mode .selected-files span {
+            display: inline-block;
+            margin-right: 0;
+            padding: 4px 8px;
+            background: transparent;
+            color: white;
             border-radius: 4px;
         }
         
@@ -168,7 +146,6 @@
         .custom-file-label i {
             margin-bottom: 5px;
             font-size: 3rem;
-            color: #1467B0;
         }
         
         .custom-file-text {
@@ -192,16 +169,13 @@
             vertical-align: top;
             border: 1px solid #e9edf4;
         }
-        /* /* input:focus {
-            border: 3px solid #555 !important;
-        } */
         
-        */ .panel-body {
-            padding: 0px;
+        input:focus {
+            border: 3px solid #555 !important;
         }
         
-        .dark-mode .btn-close {
-            color: white;
+        .panel-body {
+            padding: 0px;
         }
         
         .accordion-item:first-of-type {
@@ -270,8 +244,7 @@
             color: white;
         }
         
-        .modal-footer button,
-        .modal-footer a {
+        .modal-footer button {
             border-radius: 2.75rem;
             padding: 4px 30px;
             font-family: 'Figtree';
@@ -283,12 +256,6 @@
             /* identical to box height, or 120% */
             letter-spacing: 0.0145455em;
             /* font-size: 0.938rem; */
-        }
-        
-        .disabled {
-            pointer-events: none;
-            cursor: not-allowed;
-            color: gray;
         }
         
         .modal-footer .button {
@@ -309,7 +276,7 @@
         }
         
         .tick {
-            color: #1DBC5F;
+            color: green;
             font-weight: bolder
         }
         
@@ -338,19 +305,16 @@
         .rounded-pill-Single-Family {
             color: #4A4AFF !important;
             background: #E6E6F2 !important;
-            font-weight: bold;
         }
         
         .rounded-pill-Multi-Family {
             color: #0BAAB8 !important;
             background: #C8F3F7 !important;
-            font-weight: bold;
         }
         
         .rounded-pill-Multi-Commercial {
             background: #FFF9E5 !important;
             color: #F5CA38 !important;
-            font-weight: bold;
         }
         
         .table-primary {
@@ -368,18 +332,14 @@
         .file-details {
             padding: 10px;
         }
-        /* .delete-file {
-            position: absolute !important;
-            top: -9px !important;
-            right: -4px !important;
-            font-weight: bolder !important;
-            cursor: pointer !important;
-            font-size: 13px !important;
-            color: #000000 !important;
-        } */
         
-        .dark-mode .delete-file {
-            color: #ffffff !important;
+        .delete-file {
+            position: absolute;
+            top: -1px;
+            right: 4px;
+            cursor: pointer;
+            font-size: 11px;
+            color: #000;
         }
         
         .btn-group>.btn-group:not(:last-child)>.btn,
@@ -400,19 +360,15 @@
             border-top-right-radius: calc(0.5rem - 1px);
             border-top-left-radius: calc(0.5rem - 1px);
         }
-        /* .delete-file{
-            position: absolute;
-    top: -9px;
-    right: -11px;
-    font-weight: bolder;
-    cursor: pointer;
-    font-size: 13px;
-    color: #fff;
-    border: 2px solid black;
-    border-radius: 54px;
-    background: black;
-    width: 23px;
-        } */
+        
+        .selected-files span {
+            display: inline-block;
+            margin-right: 0px;
+            padding: 0px;
+            background: none;
+            color: #333;
+            /* border-radius: 4px; */
+        }
         /* .delete-file {
         position: absolute;
         top: 0px;
@@ -423,14 +379,14 @@
     } */
         
         button.btn-close {
-            right: 6px;
+            right: -7px;
         }
         
         .btn-close {
-            width: 1.8rem;
+            width: 2.5rem;
             opacity: 1;
             position: absolute;
-            top: 6px;
+            top: -11px;
         }
         
         .del {
@@ -463,7 +419,7 @@
                 height: 220px;
             }
             #nav_links {
-                top: 153px;
+                top: 165px;
             }
         }
         
@@ -475,10 +431,10 @@
             .modal-footer .button-left {
                 margin: auto;
             }
-            /* /* .modal-footer button {
+            /* .modal-footer button {
                 width: 231px;
             } */
-            */ .border-model-line h2 {
+            .border-model-line h2 {
                 font-size: 1.6rem;
             }
             .accordion-button h3 {
@@ -508,7 +464,7 @@
                 height: 220px;
             }
             #nav_links {
-                top: 153px;
+                top: 165px;
             }
         }
         
@@ -516,13 +472,10 @@
             .border-model-line h2 {
                 font-size: 1.4rem;
             }
-            .succes-modal {
-                padding: 1rem 1rem;
-            }
         }
         
         @media (max-width:320px) {
-            /* /* .modal-footer button {
+            /* .modal-footer button {
                 width: 231px;
             } */
         }
@@ -554,136 +507,37 @@
         .light-mode th {
             background: #ECF3F9 !important;
         }
+        
+        .btn-light {
+            border-color: #000000 !important;
+        }
+
+        .media img {
+            width: 44px;
+            height: 40px;
+        }
+
+        .comingsoon-heading{
+    font-size: 60px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    margin-top: 30px;
+}
     </style>
 
 </head>
 
 <body class="app sidebar-mini ltr light-mode">
 
-    <!-- GLOBAL-LOADER -->
-    <div id="preloader" class="tlp-preloader">
-        <div class="animation-preloader">
-            <div class="tlp-spinner"></div>
-            <img src="../assets/images/logo-preloader.png" alt="Preloader" style="width: 65px;">
-        </div>
+  <!-- GLOBAL-LOADER -->
+  <div id="preloader" class="tlp-preloader">
+    <div class="animation-preloader">
+        <div class="tlp-spinner"></div>
+        <img src="../assets/images/logo-preloader.png" alt="Preloader" style="width: 65px;">
     </div>
-    <!-- /GLOBAL-LOADER -->
-    <!-- Default Offcanvas-->
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-        <div class="offcanvas-header pt-5">
-            <h1 class="offcanvas-title" id="offcanvasExampleLabel">Create <strong class="color-primary">New</strong>
-            </h1>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"><i
-                    class="fe fe-x fs-18"></i></button>
-        </div>
-        <div class="offcanvas-body">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-6 col-lg-3 col-xl-3">
-                        <div class="card">
-                            <div class="card-header" style="background-color: #1467B0;color: white;">
-                                <div class="card-title fw-bold"><a href="properties-all.html" style="color: white;">Property</a></div>
-                            </div>
-                            <div class="card-body">
-                                <div class="text-center chat-image mb-5">
-                                    <div class="avatar avatar-xxl chat-profile mb-3 brround">
-                                        <a class="" href="properties-all.html"><img alt="avatar" src="../assets/images/icons/Group 10341.png" class="brround w-100 h-100"></a>
-                                    </div>
-                                    <div class="main-chat-msg-name">
-                                        <a href="properties-all.html">
-                                            <h5 class="mb-1 text-dark fw-bold">Create New Property</h5>
-                                        </a>
-                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the benefits of an all-in-one property management tool! </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3 col-xl-3">
-                        <div class="card">
-                            <div class="card-header" style="background-color: #1467B0;color: white;">
-                                <div class="card-title fw-bold"><a href="add-tenant.html" style="color: white;">Tenant</a></div>
-                            </div>
-                            <div class="card-body">
-                                <div class="text-center chat-image mb-5">
-                                    <div class="avatar avatar-xxl chat-profile mb-3 brround">
-                                        <a class="" href="add-tenant.html"><img alt="avatar" src="../assets/images/icons/Group 10344.png" class="brround w-100 h-100"></a>
-                                    </div>
-                                    <div class="main-chat-msg-name">
-                                        <a href="add-tenant.html">
-                                            <h5 class="mb-1 text-dark fw-bold">Create New Tenant</h5>
-                                        </a>
-                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the benefits of an all-in-one property management tool! </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3 col-xl-3">
-                        <div class="card">
-                            <div class="card-header" style="background-color: #1467B0;color: white;">
-                                <div class="card-title fw-bold"><a href="create-invoicing.html" style="color: white;">Invoice</a></div>
-                            </div>
-                            <div class="card-body">
-                                <div class="text-center chat-image mb-5">
-                                    <div class="avatar avatar-xxl chat-profile mb-3 brround">
-                                        <a class="" href="create-invoicing.html"><img alt="avatar" src="../assets/images/icons/Group 10346.png" class="brround w-100 h-100"></a>
-                                    </div>
-                                    <div class="main-chat-msg-name">
-                                        <a href="create-invoicing.html">
-                                            <h5 class="mb-1 text-dark fw-bold">Create New Invoice</h5>
-                                        </a>
-                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the benefits of an all-in-one property management tool! </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3 col-xl-3">
-                        <div class="card">
-                            <div class="card-header" style="background-color: #1467B0;color: white;">
-                                <div class="card-title fw-bold"><a href="#" style="color: white;">Lead</a></div>
-                            </div>
-                            <div class="card-body">
-                                <div class="text-center chat-image mb-5">
-                                    <div class="avatar avatar-xxl chat-profile mb-3 brround">
-                                        <a class="" href="#"><img alt="avatar" src="../assets/images/icons/Group 10348.png" class="brround w-100 h-100"></a>
-                                    </div>
-                                    <div class="main-chat-msg-name">
-                                        <a href="#">
-                                            <h5 class="mb-1 text-dark fw-bold">Create New Lead</h5>
-                                        </a>
-                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the benefits of an all-in-one property management tool! </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3 col-xl-3">
-                        <div class="card">
-                            <div class="card-header" style="background-color: #1467B0;color: white;">
-                                <div class="card-title fw-bold"><a href="create-tasks.html" style="color: white;">Tasks</a></div>
-                            </div>
-                            <div class="card-body">
-                                <div class="text-center chat-image mb-5">
-                                    <div class="avatar avatar-xxl chat-profile mb-3 brround">
-                                        <a class="" href="create-tasks.html"><img alt="avatar" src="../assets/images/icons/Group 10350.png" class="brround w-100 h-100"></a>
-                                    </div>
-                                    <div class="main-chat-msg-name">
-                                        <a href="create-tasks.html">
-                                            <h5 class="mb-1 text-dark fw-bold">Create New Tasks</h5>
-                                        </a>
-                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the benefits of an all-in-one property management tool! </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--/Default Offcanvas-->
+</div>
+<!-- /GLOBAL-LOADER -->
+
     <!-- Modal -->
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
@@ -693,10 +547,9 @@
                         <h2 class="modal-title">Create <strong class="color-primary">New Property</strong></h2>
                         <span class="">Spade Rent allows you to add a range of commercial and residential properties,
                             from condos and single-family homes to retail stores and parking lots.</span>
-
                     </div>
-                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="top-close">
-                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><img src="../assets/images/cross-circle.svg" /></span>
                     </button>
                 </div>
                 <div class="modal-body">
@@ -715,67 +568,66 @@
                                     <div class="col-md-12">
                                         <label class="form-label fw-bold">Property Photo</label>
                                         <div class="custom-file" style="border: 1px dashed #00000087;">
-                                            <input id="fileInput" type="file" name="image" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Upload a photo that showcases the property" data-bs-container="#addModal" class="custom-file-input form" accept=".jpg, .png, image/jpeg, image/png"
-                                                aria-label="hello" multiple>
+                                            <input id="fileInput" type="file" name="image" class="custom-file-input form" accept=".jpg, .png, image/jpeg, image/png" aria-label="hello" multiple>
                                             <span className="d-none"></span>
                                             <label class="custom-file-label" for="fileInput">
                                                 <i class="fi fi-rs-cloud-upload"></i>
                                                 <div class="custom-file-text">
                                                     <span>Upload Photo or drag and drop here</span>
-                                                    <span>JPEG and PNG, file size no more than 10MB</span>
+                                                    <span>JPEG, PNG and PDF, file size no more than 10MB</span>
                                                 </div>
                                             </label>
                                         </div>
-                                        <div class="selected-files text-white">
+                                        <div class="selected-files">
                                             <div class="file-grid"></div>
                                         </div>
                                         <span class="text-danger d-none">Photos are required!</span>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="inputEmail4" class="form-label fw-bold">Property ID</label>
-                                        <input type="text" class="form-control form" id="propertyId" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the unique identifier for the property." data-bs-container="#addModal">
+                                        <input type="text" class="form-control form" id="propertyId">
                                         <span class="text-danger d-none">Property ID is required!</span>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="inputPassword4" class="form-label fw-bold">Property Name <spnan
                                                 class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="propertyName" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the name of the property." data-bs-container="#addModal">
+                                        <input type="text" class="form-control form" id="propertyName">
                                         <span class="text-danger d-none">Property name required!</span>
                                     </div>
                                     <div class="col-12">
                                         <label for="inputAddress" class="form-label fw-bold">Address <spnan
                                                 class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="address" placeholder="1234 Main St" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Please provide the full address of the property, including street name, number, city, and zip code."
-                                            data-bs-container="#addModal">
+                                        <input type="text" class="form-control form" id="address" placeholder="1234 Main St">
                                         <span class="text-danger d-none">Address is required!</span>
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="inputState" class="form-label fw-bold">State <span
+                                        <label for="inputCity" class="form-label fw-bold">City <spnan
                                                 class="text-danger">*</span></label>
-                                        <select id="state" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the state where you reside" data-bs-container="#addModal">
+                                        <input type="text" class="form-control form" id="city">
+                                        <span class="text-danger d-none">City is required!</span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="inputState" class="form-label fw-bold">State <spnan
+                                                class="text-danger">*</span></label>
+                                        <select id="state" class="form-select form">
                                             <option selected>Choose...</option>
+                                            <option>Sindh</option>
+                                            <option>Punjab</option>
+                                            <option>Balochistan</option>
+                                            <option>KPK</option>
                                         </select>
                                         <span class="text-danger d-none">State is required!</span>
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="inputCity" class="form-label fw-bold">City <span
-                                                class="text-danger">*</span></label>
-                                        <input type="text" id="city" class="form-control form city-select" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the name of your city" data-bs-container="#addModal">
-                                        <span class="text-danger d-none">City is required!</span>
-                                    </div>
-                                    <div class="col-md-4">
                                         <label for="inputZip" class="form-label fw-bold">Zip <spnan class="text-danger">
                                                 *</span></label>
-                                        <input class="form-control form" type="text" id="zip" name="zip" pattern="[0-9]{5}" placeholder="A valid 5-digit zip code" maxlength="5" minlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '')" data-bs-placement="top" data-bs-toggle="tooltip"
-                                            title="" data-bs-original-title="Enter Zip" data-bs-container="#addModal" required>
-
-                                        <span class="text-danger d-none">Zip code is required!</span>
+                                        <input type="text" class="form-control form" id="zip">
+                                        <span class="text-danger d-none">Zip is required!</span>
                                     </div>
-
                                     <div class="col-md-6">
                                         <label for="inputState" class="form-label fw-bold">Property Type <spnan
                                                 class="text-danger">*</span></label>
-                                        <select id="propertyType" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the type of property." data-bs-container="#addModal">
+                                        <select id="propertyType" class="form-select form">
                                             <option selected>Choose...</option>
                                             <option>Single Family</option>
                                             <option>Multi-Family</option>
@@ -784,10 +636,9 @@
                                         <span class="text-danger d-none">Property Type is required!</span>
                                     </div>
                                     <div class="col-md-6">
-                                        <label for="inputPassword4" class="form-label fw-bold">Property Total SQFT
-                                            <spnan class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="propertyTotalSF" pattern="[0-9]{5}" placeholder="Area in square feet" maxlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '')" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Please enter the total square footage of the property. Only numerical values are allowed."
-                                            data-bs-container="#addModal" required>
+                                        <label for="inputPassword4" class="form-label fw-bold">Property Total SF <spnan
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control form" id="propertyTotalSF">
                                         <span class="text-danger d-none">Property Total SF is required!</span>
                                     </div>
                                 </form>
@@ -810,8 +661,7 @@
                                 <div class="col-12 mb-3">
                                     <label for="inputAddress" class="form-label fw-bold">Number of Units<span
                                             class="text-danger">*</span></label>
-                                    <input type="text" class="form-control px-2" id="units" pattern="[0-9]{5}" placeholder="units.." maxlength="3" oninput="this.value = this.value.replace(/[^0-9]/g, '')" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Please enter the total number of units"
-                                        data-bs-container="#addModal" required>
+                                    <input type="text" class="form-control px-2" id="units" placeholder=" ">
                                     <span class="text-danger d-none">Units are required!</span>
                                 </div>
                             </form>
@@ -819,42 +669,11 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <!-- <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
-                        Draft</button> -->
-                    <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close' data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the unique identifier for the property.">Close</button>
+                    <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
+                        Draft</button>
+                    <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close'>Close</button>
                     <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
-                    <a href="javascript:void(0)" class="btn text-light button disabled" style='background-color:#1467B0;' id='next'>Next</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- succes modal -->
-
-    <div class="modal fade" id="succesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-
-                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="succes-close">
-                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
-                    </button>
-                </div>
-                <div class="modal-body succes-modal">
-                    <div class="text-justify ps-2 border-model-line">
-                        <h2 class="modal-title d-flex align-items-center ps-1">
-                            <strong class="color-primary">Success!&nbsp;</strong>
-                            <i class="fi fi-rs-check-circle text-success"></i>
-                        </h2>
-                        <a href="./property-unit.html" class="btn btn-outline-default btn-pill ms-1 my-2" style='background-color:#1467B0;color: white;'> <i class="fi fi-rs-pencil"></i> EDIT PROPERTY UNITS</a>
-                        <a class="btn btn-outline-default btn-pill button" href="./add-tenant.html">
-                            <i class="fi fi-rs-plus-small" style="vertical-align: middle;"></i>Add Tenants
-                        </a>
-                        <p class="ms-2 mb-0 text-start">Your Property has been successfully added.</p>
-                        <p class="ms-2 text-start">Please add tenant to this property.</p>
-                    </div>
-
-                </div>
-                <div class="modal-footer" style="border-top: 0">
+                    <button class="btn text-light button" style='background-color:#1467B0;' id='next' disabled>Next</button>
                 </div>
             </div>
         </div>
@@ -866,7 +685,7 @@
                     <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
                         <div class="card-header border-0 pt-3">
                             <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                                <span aria-hidden="true"><img src="../assets/images/cross-circle.svg" /></span>
                             </button>
                         </div>
                         <div class="card-body text-center">
@@ -927,17 +746,16 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="text-justify ps-2 border-model-line">
-                        <h2 class="modal-title">Update <strong class="color-primary" id="property-name">New
-                                Property</strong></h2>
+                        <h2 class="modal-title">Update <strong class="color-primary" id="property-name">New Property</strong></h2>
                         <span class="">Spade Rent allows you to add a range of commercial and residential properties,
                             from condos and single-family homes to retail stores and parking lots.</span>
                     </div>
                     <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                        <span aria-hidden="true"><img src="../assets/images/cross-circle.svg" /></span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="row g-3" enctype="multipart/form-data" id="update-form">
+                    <form class="row g-3" enctype="multipart/form-data">
                         <div class="col-md-12">
                             <label class="form-label fw-bold">Property Photo</label>
                             <div class="custom-file" style="border: 1px dashed #00000087;">
@@ -947,7 +765,7 @@
                                     <i class="fi fi-rs-cloud-upload"></i>
                                     <div class="custom-file-text">
                                         <span>Upload Photo or drag and drop here</span>
-                                        <span>JPEG and PNG, file size no more than 10MB</span>
+                                        <span>JPEG, PNG and PDF, file size no more than 10MB</span>
                                     </div>
                                 </label>
                             </div>
@@ -959,51 +777,49 @@
                         <div class="col-md-6">
                             <label for="inputPassword4" class="form-label fw-bold">Property Name <spnan
                                     class="text-danger">*</span></label>
-                            <input type="text" class="form-control form" id="propertyName_update" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Update your property name" data-bs-container="#myModal_edit">
+                            <input type="text" class="form-control form" id="propertyName_update">
                             <span class="text-danger d-none">Property name required!</span>
                         </div>
                         <div class="col-md-6">
                             <label for="inputAddress" class="form-label fw-bold">Number of Units<span
                                     class="text-danger">*</span></label>
-                            <input type="text" class="form-control form px-2" id="unit_update" pattern="[0-9]{5}" placeholder="" maxlength="3" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required readonly data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Your total units"
-                                data-bs-container="#myModal_edit">
+                            <input type="text" class="form-control px-2" id="unit_update" placeholder=" ">
                             <span class="text-danger d-none">Units are required!</span>
                         </div>
                         <div class="col-12">
                             <label for="inputAddress" class="form-label fw-bold">Address <spnan class="text-danger">
                                     *</span></label>
-                            <input type="text" class="form-control form" id="address_update" placeholder="1234 Main St" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Update your address" data-bs-container="#myModal_edit">
+                            <input type="text" class="form-control form" id="address_update" placeholder="1234 Main St">
                             <span class="text-danger d-none">Address is required!</span>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="inputCity" class="form-label fw-bold">City <spnan class="text-danger">
+                                    *</span></label>
+                            <input type="text" class="form-control form" id="city_update">
+                            <span class="text-danger d-none">City is required!</span>
                         </div>
                         <div class="col-md-4">
                             <label for="inputState" class="form-label fw-bold">State <spnan class="text-danger">
                                     *</span></label>
-                            <select id="state_update" class="form-select form state-select" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Update your state" data-bs-container="#myModal_edit">
+                            <select id="state_update" class="form-select form">
                                 <option selected>Choose...</option>
-
+                                <option>Sindh</option>
+                                <option>Punjab</option>
+                                <option>Balochistan</option>
+                                <option>KPK</option>
                             </select>
                             <span class="text-danger d-none">State is required!</span>
                         </div>
                         <div class="col-md-4">
-                            <label for="inputCity" class="form-label fw-bold">City <span
-                                    class="text-danger">*</span></label>
-                            <input type="text" id="city_update" class="form-control form city-select" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Update your city" data-bs-container="#myModal_edit">
-
-
-                            <span class="text-danger d-none">City is required!</span>
-                        </div>
-
-                        <div class="col-md-4">
                             <label for="inputZip" class="form-label fw-bold">Zip <spnan class="text-danger">
                                     *</span></label>
-                            <input class="form-control form" type="text" id="zip_update" name="zip" pattern="[0-9]{5}" placeholder="A valid 5-digit zip code" maxlength="5" minlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '')" data-bs-placement="top" data-bs-toggle="tooltip"
-                                title="" data-bs-original-title="Enter Zip" data-bs-container="#addModal" required>
+                            <input type="text" class="form-control form" id="zip_update">
                             <span class="text-danger d-none">Zip is required!</span>
                         </div>
                         <div class="col-md-6">
                             <label for="inputState" class="form-label fw-bold">Property Type <spnan class="text-danger">
                                     *</span></label>
-                            <select id="propertyType_update" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Update your property type" data-bs-container="#myModal_edit">
+                            <select id="propertyType_update" class="form-select form">
                                 <option selected>Choose...</option>
                                 <option>Single Family</option>
                                 <option>Multi-Family</option>
@@ -1012,23 +828,45 @@
                             <span class="text-danger d-none">Property Type is required!</span>
                         </div>
                         <div class="col-md-6">
-                            <label for="inputPassword4" class="form-label fw-bold">Property Total SQFT <spnan
+                            <label for="inputPassword4" class="form-label fw-bold">Property Total SF <spnan
                                     class="text-danger">*</span></label>
-                            <input type="text" class="form-control form" id="propertyTotalSF_update" pattern="[0-9]{5}" placeholder="" maxlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Update your Total SQFT"
-                                data-bs-container="#myModal_edit">
+                            <input type="text" class="form-control form" id="propertyTotalSF_update">
                             <span class="text-danger d-none">Property Total SF is required!</span>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <a class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal">Close</a>
-                    <a class="btn btn-primary disabled" id="update">Save changes</a>
+                    <button type="button" class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="update">Save changes</button>
                 </div>
             </div>
         </div>
     </div>
     <!-- MODAL EFFECTS -->
+    <div class="modal fade" id="modaldemo8">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-header">
+                    <div class="text-justify">
+                        <h2 class="modal-title">Create <strong class="color-primary">New Property</strong></h2>
+                        <span class="">Spade Rent allows you to add a range of commercial and residential properties,
+                            from condos and single-family homes to retail stores and parking lots.</span>
+                    </div>
 
+                    <button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span
+                            aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <h6>Why We Use Electoral College, Not Popular Vote</h6>
+                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to
+                        using 'Content here, content here', making it look like readable English.</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary">Save changes</button> <button class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- MODAL EFFECTS -->
 
     <!-- PAGE -->
@@ -1089,12 +927,12 @@
 
 
                                         <!-- 1 comments start  -->
-                                        <div class="d-flex country">
+                                        <!-- <div class="d-flex country">
                                             <img src="../assets\header-img\comment.svg" alt="profile-user" class="avatarr profile-user brroundd nav-link cover-image dark-layout">
-                                        </div>
-                                        <div class="d-flex country">
+                                        </div> -->
+                                        <!-- <div class="d-flex country">
                                             <img src="../assets\header-img\comment-light.webp" alt="profile-user" class="avatarr profile-user nav-link brroundd cover-image light-layout">
-                                        </div>
+                                        </div> -->
                                         <!-- 1 comments start  -->
 
                                         <!-- 2 comments start  -->
@@ -1107,9 +945,11 @@
                                         <!-- 2 comments start  -->
 
                                         <!-- 3 comments start  -->
+                                        <div class="d-flex country">
+                                            <img src="../assets\header-img\spade.svg" alt="profile-user" class="avatarr profile-user brroundd nav-link cover-image dark-layout">
+                                        </div>
                                         <div class="dropdown  d-flex notifications">
-                                            <a class="nav-link icon" data-bs-toggle="dropdown"><i
-                                                    class="fe fe-bell"></i><span class=" pulse"></span>
+                                            <a class="nav-link icon" data-bs-toggle="dropdown"><i class="fe fe-bell"></i><span class=" pulse"></span>
                                             </a>
                                             <!-- <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                                 <div class="drop-heading border-bottom">
@@ -1165,9 +1005,6 @@
                                             </div> -->
                                         </div>
                                         <div class="d-flex country">
-                                            <img src="../assets\header-img\spade.svg" alt="profile-user" class="avatarr profile-user brroundd nav-link cover-image dark-layout">
-                                        </div>
-                                        <div class="d-flex country">
                                             <img src="../assets\header-img\circlels.png" alt="profile-user" class="avatarr profile-user nav-link brroundd cover-image light-layout">
                                         </div>
                                         <div class="dropdown d-flex profile-1 country">
@@ -1182,9 +1019,9 @@
                                                         <h5 class="text-dark mb-0 fs-14 fw-semibold">Percy Kewshun</h5>
                                                         <small class="text-muted">Senior Admin</small>
                                                     </div>
-                                                </div> -->
-                                                <!-- <div class="dropdown-divider m-0"></div> -->
-                                                <!-- <a class="dropdown-item" href="profile.html">
+                                                </div>
+                                                <div class="dropdown-divider m-0"></div>
+                                                <a class="dropdown-item" href="profile.html">
                                                     <i class="dropdown-icon fe fe-user"></i> Profile
                                                 </a>
                                                 <a class="dropdown-item" href="email-inbox.html">
@@ -1207,6 +1044,8 @@
                 </div>
             </div>
             <!-- /app-Header -->
+
+
             <!--APP-SIDEBAR-->
             <!-- side bar -->
             <div class="sticky" id="sidebar-placeholder">
@@ -1223,25 +1062,24 @@
                     </div>
                     <div class="main-sidemenu">
                         <div class="slide-left disabled" id="slide-left"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24">
-                                <path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" />
-                            </svg></div>
+                            <path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" />
+                        </svg></div>
                         <ul class="side-menu">
                             <li class="sub-category">
                                 <!-- <h3>Main</h3> -->
                             </li>
-                            <li class="slide">
-                                <a class="side-menu__item has-link create-new-link" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample" style="border: 3px solid #1467B0 !important;"><i
-                                        class="side-menu__icon fi fi-rs-square-plus"></i><span
-                                        class="side-menu__label ">Create New</span>
-                                </a>
-                            </li>
+                            <!-- <li class="slide">
+                                <a class="side-menu__item has-link create-new-link" href="javascript:void(0)" target="_self"><i
+                                    class="side-menu__icon fi fi-rs-square-plus"></i><span class="side-menu__label ">Create New</span>
+                            </a>
+                            </li> -->
 
                             <!-- <li class="slide">
-                                <a class="side-menu__item has-link" href="landing-page.php" target="_blank"><i
-                                        class="side-menu__icon fe fe-plus"></i><span class="side-menu__label">Complete your
-                                        Profile</span>
-                                </a>
-                            </li> -->
+                            <a class="side-menu__item has-link" href="landing-page.php" target="_blank"><i
+                                    class="side-menu__icon fe fe-plus"></i><span class="side-menu__label">Complete your
+                                    Profile</span>
+                            </a>
+                        </li> -->
                             <li class="slide">
                                 <div class="M-0 mt-3 mb-4" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
                                     <div class="card-header pb-0 border-bottom-0">
@@ -1252,108 +1090,71 @@
                                     </div>
                                     <div class="card-body pt-0">
                                         <div class="side-menu__label progress progress-md mt-5">
-                                            <div class="progress-bar bg-info" style="width: 40%;">40%</div>
+                                            <div class="progress-bar bg-info" style="width: 20%;">20%</div>
                                         </div>
                                     </div>
                                 </div>
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html"><i
-                                        class="side-menu__icon fi fi-rs-dashboard"></i><span
-                                        class="side-menu__label">Overview</span></a>
-                            </li>
-                            <!-- <li class="sub-category">
-                                           <h3>UI Kit</h3>
-                                       </li> -->
-                            <li class="slide">
-                                <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
-                                        class="side-menu__icon fi fi-rs-building"></i><span
-                                        class="side-menu__label">Properties</span>
-                                    <i class="angle fe fe-chevron-right"></i>
-                                </a>
-                                <ul class="slide-menu">
-                                    <li class="side-menu-label1"><a href="javascript:void(0)">Properties</a></li>
-                                    <li><a href="properties-all.html" class="slide-item">All</a></li>
-                                    <!-- <li><a href="javascript:void(0)" class="slide-item">Draft</a></li> -->
-                                </ul>
-                            </li>
-                            <li class="slide">
-                                <a class="side-menu__item" data-bs-toggle="slide" href="add-tenant.html"><i
-                                        class="side-menu__icon fi fi-rs-cabin"></i><span
-                                        class="side-menu__label">Tenants</span>
-                                    <i class="angle fe fe-chevron-right"></i>
-
-                                </a>
-                                <ul class="slide-menu">
-                                    <li class="side-menu-label1"><a href="javascript:void(0)">Tenants</a></li>
-                                    <li><a href="add-tenant.html" class="slide-item">All</a></li>
-                                    <!-- <li><a href="javascript:void(0)" class="slide-item">Draft</a></li> -->
-                                </ul>
+                                    class="side-menu__icon fi fi-rs-dashboard"></i><span class="side-menu__label">Overview</span></a>
                             </li>
 
-                            <!-- <li class="sub-category">
-                                           <h3>Pre-build Pages</h3>
-                                       </li> -->
                             <li class="slide">
-                                <a class="side-menu__item" data-bs-toggle="slide" href="invoices.html"><i
-                                        class="side-menu__icon fi fi-rs-file-invoice-dollar"></i><span
-                                        class="side-menu__label">Invoicing</span>
-                                    <i class="angle fe fe-chevron-right"></i>
-                                </a>
-                                <ul class="slide-menu">
-                                    <li class="side-menu-label1"><a href="javascript:void(0)">Invoicing</a></li>
-                                    <li><a href="create-invoicing.html" class="slide-item">All</a></li>
-                                    <!-- <li><a href="javascript:void(0)" class="slide-item">Draft</a></li> -->
-                                </ul>
-
-                            </li>
-                            <li class="slide">
-                                <a class="side-menu__item" data-bs-toggle="slide" href="coming-soon.html"><i
-                                        class="side-menu__icon fi fi-rs-chart-simple"></i><span
-                                        class="side-menu__label">Leads</span>
-                                    <i class="angle fe fe-chevron-right"></i>
-
-                                </a>
+                                <a class="side-menu__item" data-bs-toggle="slide" href="invoicing.html"><i
+                                    class="side-menu__icon fi fi-rs-file-invoice-dollar"></i><span class="side-menu__label">Invoicing</span>
+                                    <!-- <i
+                                    class="angle fe fe-chevron-right"></i> -->
+                                   </a>
 
                             </li>
 
                             <li class="slide">
-                                <a class="side-menu__item" data-bs-toggle="slide" href="view-tasks.html"><i
-                                        class="side-menu__icon fi fi-rs-list-check"></i><span
-                                        class="side-menu__label">Tasks</span>
-                                    <i class="angle fe fe-chevron-right"></i>
-
-                                </a>
-                                <ul class="slide-menu">
-                                    <li class="side-menu-label1"><a href="javascript:void(0)">Tasks</a></li>
-                                    <li><a href="create-tasks.html" class="slide-item">All</a></li>
-                                    <li><a href="tasks-requests.html" class="slide-item">Requests</a></li>
-                                    <li><a href="tasks-vendors.html" class="slide-item">Vendors</a></li>
-                                </ul>
+                                <a class="side-menu__item" data-bs-toggle="slide" href="tasks.html"><i
+                                    class="side-menu__icon fi fi-rs-list-check"></i><span class="side-menu__label">Tasks</span>
+                                   </a>
                             </li>
+
                             <li class="slide">
-                                <a class="side-menu__item" data-bs-toggle="slide" href="coming-soon.html">
-                                    <i class="side-menu__icon fi fi-rs-document"></i>
-                                    <span class="side-menu__label">Reports</span>
+                                <a class="side-menu__item" data-bs-toggle="slide" href="chats.html"><i
+                                    class="side-menu__icon fi fi-rs-comment"></i><span
+                                    class="side-menu__label">Chats</span>
+                                    <!-- <i class="angle fe fe-chevron-right"></i> -->
+                                   
+                                   </a>
 
-                                    <i class="angle fe fe-chevron-right"></i>
-                                </a>
+                            </li>
 
-                                <li>
-                                    <a class="side-menu__item has-link" href="settings.html" target="_self"><i
-                                        class="side-menu__icon fi fi-rs-settings"></i><span
-                                        class="side-menu__label">Settings</span>
-                                    <!-- <span
-                                                   class="badge bg-green br-5 side-badge blink-text pb-1">New</span> -->
+
+                            <li class="slide">
+                                <a class="side-menu__item" data-bs-toggle="slide" href="notifications.html">
+                                    <i class="side-menu__icon fi fi-rs-bell"></i>
+                                    <span class="side-menu__label">Notifications</span>
                                 </a>
-                                </li>
+                            </li>
+
+                            <li class="slide">
+                                <a class="side-menu__item" data-bs-toggle="slide" href="help.html">
+                                    <i class="side-menu__icon fi fi-rs-comment-question"></i>
+                                    <span class="side-menu__label">Help</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="side-menu__item has-link" href="settings.html" target="_self"><i
+                                    class="side-menu__icon fi fi-rs-settings"></i><span class="side-menu__label">Settings</span>
+                                <!-- <span
+                                               class="badge bg-green br-5 side-badge blink-text pb-1">New</span> -->
+                            </a>
+                            </li>
                         </ul>
                         <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24">
-                                <path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z" />
-                            </svg></div>
+                            <path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z" />
+                        </svg></div>
                     </div>
                 </div>
             </div>
+
             <!--app-content open-->
             <div class="main-content app-content mt-0">
                 <div class="side-app">
@@ -1362,161 +1163,46 @@
                     <div class="main-container container-fluid">
 
                         <!-- PAGE-HEADER -->
-                        <!-- <div class="page-header">
-                            <h1 class="page-title">Dashboard 01</h1>
-                            <div>
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Dashboard 01</li>
-                                </ol>
-                            </div>
-                        </div> -->
 
-                        <div class="card mt-5" style="background: linear-gradient(180deg, #232323 0%, #434343 100%);">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-lg-9">
-                                        <h3 class="page-titlee text-white" style="font-weight: 100; margin-bottom: 0px;">Welcome to Spade Portal</h3>
-                                        <h1 class="page-titlee text-white" style="font-weight: 700;" id="user-name">
-                                        </h1>
-                                        <a href="javascript:void(0)" id="email_verification" class="btn btn-primary btn-pill btn-xl email-verification-btn"><i
-                                                class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
-                                            verification &nbsp; <i
-                                                class="angle fe fe-arrow-right create-btn-plus"></i></a>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <img src="../assets/header-img/Group1.png" alt="">
-                                    </div>
-                                </div>
+                                                <div class="card mt-5" style="background: linear-gradient(180deg, #232323 0%, #434343 100%); background: url(../assets/header-img/tenant-dashboard.png); background-size: cover; background-repeat: no-repeat;">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-lg-12 mobile-text-center">
+                                                                <!-- <h3 class="page-titlee text-white" style="font-weight: 100; margin-bottom: 0px;">Welcome to Spade Portal</h3> -->
+                                                                <h1 class="page-titlee text-white" style="font-weight: 700; margin-bottom: 0px; border-radius: 40px;"><span style="font-weight: 300;">Welcome</span> John Clark</h1>
+                                                                <div class="bottom-border-underline"><div style="width: 100px; height: 6px; background-color: #1467B0; border-radius: 40px;"></div></div>
+                                                                <h4 class="mt-3 text-white mb-3" style="font-weight: 300;">Balance Due</h4>
+                                                                <h1 class="mt-3 text-white font-weight-900" style="font-weight: 800; margin-bottom: 0px;">$356.00</h1>
+                                                                <div class="mobile-icon-text-align"><i class="side-menu__icon fi fi-rs-calendar text-white"></i><span class="side-menu__labell text-white">&nbsp;&nbsp; Your next payment of $356.00 is due on 5/1/2023&emsp; <a href="#" class="btn btn-primary btn-pill btn-paynow-banner">Pay Now</a></span></div> 
+                                                                <div class="mobile-icon-text-align"><i class="side-menu__icon fi fi-rs-building text-white"></i><span class="side-menu__labell text-white">&nbsp;&nbsp; <span><b>Pensgate St</b></span> <br>&nbsp;&nbsp;  9430 Research Blvd. Ste 2-350 Austin TX 78759</span></div>
+                        
+                                                            </div>
+                                                        </div>
+                        
+                                                    </div>
+                                                </div>
+                                                <!-- PAGE-HEADER END -->
 
                             </div>
                         </div>
                         <!-- PAGE-HEADER END -->
 
-                        <!-- Row -->
-                        <div class="row">
-                            <div class="col-lg-12 col-xl-12">
-                                <div class="card">
-                                    <div class="card-header justify-content-between">
-                                        <div class="d-flex">
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-outline-default text-dark py-1" id="filter_btn" data-bs-toggle="dropdown"><i
-                                                        class="typcn typcn-filter me-2 fs-16"></i><strong>Filter</strong></button>
-                                                <ul class="dropdown-menu" role="menu">
-                                                    <li><a href="javascript:void(0)"><strong>Filter by:</strong></a>
-                                                    </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">A-Z Alphabets</a>
-                                                        <div class="form-check m-0">
-                                                            <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="alphabets" value="option1">
-                                                        </div>
-                                                    </li>
 
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">Ascending</a>
-                                                        <div class="form-check m-0">
-                                                            <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="ascending" value="option1">
-                                                        </div>
-                                                    </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">Descending</a>
-                                                        <div class="form-check m-0">
-                                                            <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="descending" value="option1">
-                                                        </div>
-                                                    </li>
-                                                    <!-- <li class="d-flex justify-content-between"><a
-                                                            href="javascript:void(0)">Recently Added</a>
-                                                        <div class="form-check m-0">
-                                                            <input class="form-check-input mt-2" type="radio"
-                                                                name="exampleRadios" id="exampleRadios1" value="option1"
-                                                                checked>
-                                                        </div>
-                                                    </li> -->
-                                                </ul>
-                                            </div>
-                                            <div class="mx-2">
-                                                <!-- <div class="form-group m-0">
-                                                    <input class="form-control" placeholder="Search Users by Name, Email or Date" id="search_input" type="text">
-                                                </div> -->
-                                                <div class="main-header-center d-none d-lg-block m-0">
-                                                    <button class="btn px-0 pt-2"><i class="fe fe-search"
-                                                            aria-hidden="true"></i></button>
-                                                    <input type="text" class="form-control" id="typehead" placeholder="Search for results..." autocomplete="off" style="width: 230px;">
+                    <!-- </div> -->
+                    <!-- ROW-2 END -->
 
+                                            <!-- ROW-2 -->
+                                            <div class="row mt-5">
+                                                <div class="col-lg-12 text-center">
+                                                    <h1 class="comingsoon-heading">This Features Is Coming Soon!</h1>
+                                                </div>
+                                                <div class="col-lg-2"></div>
+                                                <div class="col-lg-8 text-center">
+                                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="d-flex">
-                                            <div class="btn-group">
-                                                <button type="button" class="btn font-weight-bold" id="customize_btn" data-bs-toggle="dropdown" style="border: none;"><strong>CUSTOMIZED</strong><i
-                                                        class="fe fe-chevron-down ms-2"></i></button>
-                                                <ul class="dropdown-menu" role="menu">
-                                                    <li><a href="javascript:void(0)"><strong>Coulmns to
-                                                                Show</strong></a>
-                                                    </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">IMAGE</a>
-                                                        <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
-                                                        </div>
-                                                    </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">PROPERTY ID</a>
-                                                        <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
-                                                        </div>
-                                                    </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">PROPERTY NAME</a>
-                                                        <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
-                                                        </div>
-                                                    </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">PROPERTY TYPE</a>
-                                                        <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
-                                                        </div>
-                                                    </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">PROPERTY UNITS</a>
-                                                        <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
-                                                        </div>
-                                                    </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">PROPERTY ADDRESS</a>
-                                                        <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <button type="button" class="btn btn-primary mx-2" id="add_property_btn" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal"><i
-                                                    class="fe fe-plus me-2"></i><strong>ADD NEW
-                                                    PROPERTY</strong></button>
-                                        </div>
-                                    </div>
-                                    <div class="card-body p-0">
-                                        <div class="table-responsive">
-                                            <table class="table border text-nowrap text-md-nowrap mb-0" id="responsive-datatable">
-                                                <thead>
-                                                    <tr>
-
-                                                        <th>IMAGE</th>
-                                                        <th>PROPERTY ID</th>
-
-                                                        <th>PROPERTY NAME</th>
-                                                        <th>PROPERTY Type</th>
-                                                        <th>PROPERTY UNITS</th>
-                                                        <th>PROPERTY ADDRESS</th>
-                                                        <th>ACTION</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="table_body">
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Row -->
-                    </div>
-                    <!-- ROW-2 END -->
-
+                                        <!-- ROW-2 END -->
 
 
 
@@ -2078,7 +1764,7 @@
         <div class="container">
             <div class="row align-items-center flex-row-reverse">
                 <div class="col-md-12 col-sm-12 text-center">
-                    Copyright © <a href="javascript:void(0)">Spade, LLC.</a> <span id="year"></span>
+                    Copyright © <a href="javascript:void(0)">Spade, LLC.</a> <span id="year">2023</span>
                 </div>
             </div>
         </div>
@@ -2088,10 +1774,7 @@
     </div>
 
     <!-- BACK-TO-TOP -->
-    <!-- <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a> -->
-    <a href="#addModal" data-bs-effect="effect-scale" data-bs-toggle="modal" id="add-tenant-side-btn"><i
-            class="fe fe-plus"></i></a>
-
+    <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a>
 
     <!-- JQUERY JS -->
     <script src="../assets/js/jquery.min.js"></script>
@@ -2099,8 +1782,17 @@
     <!-- BOOTSTRAP JS -->
     <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
     <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script>
+        //             // $(document).ready(function() {
 
 
+        // $(function() {
+        // $('#sidebar-placeholder').load('./sidebar.html');
+        // });
+        // $(function() {
+        // $('#navbar-placeholder').load('./header.html');
+        // });})
+    </script>
     <!-- SPARKLINE JS-->
     <script src="../assets/js/jquery.sparkline.min.js"></script>
 
@@ -2128,22 +1820,14 @@
     <script src="../assets/plugins/chart/rounded-barchart.js"></script>
     <script src="../assets/plugins/chart/utils.js"></script>
 
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+    <!-- INTERNAL SELECT2 JS -->
+    <script src="../assets/plugins/select2/select2.full.min.js"></script>
 
     <!-- INTERNAL Data tables js-->
     <script src="../assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
     <script src="../assets/plugins/datatable/js/dataTables.bootstrap5.js"></script>
-    <script src="../assets/plugins/datatable/js/dataTables.buttons.min.js"></script>
-    <script src="../assets/plugins/datatable/js/buttons.bootstrap5.min.js"></script>
-    <script src="../assets/plugins/datatable/js/jszip.min.js"></script>
-    <script src="../assets/plugins/datatable/pdfmake/pdfmake.min.js"></script>
-    <script src="../assets/plugins/datatable/pdfmake/vfs_fonts.js"></script>
-    <script src="../assets/plugins/datatable/js/buttons.html5.min.js"></script>
-    <script src="../assets/plugins/datatable/js/buttons.print.min.js"></script>
-    <script src="../assets/plugins/datatable/js/buttons.colVis.min.js"></script>
     <script src="../assets/plugins/datatable/dataTables.responsive.min.js"></script>
-    <script src="../assets/plugins/datatable/responsive.bootstrap5.min.js"></script>
-    <script src="../assets/js/table-data.js"></script>
+
     <!-- INTERNAL APEXCHART JS -->
     <script src="../assets/js/apexcharts.js"></script>
     <script src="../assets/plugins/apexchart/irregular-data-series.js"></script>
@@ -2175,6 +1859,16 @@
     <script src="../assets/js/custom.js"></script>
 
     <!-- ############################################# -->
+
+    <!-- Perfect SCROLLBAR JS-->
+    <script src="../assets/plugins/p-scroll/perfect-scrollbar.js"></script>
+    <script src="../assets/plugins/p-scroll/pscroll.js"></script>
+    <script src="../assets/plugins/p-scroll/pscroll-1.js"></script>
+
+    <!-- Internal Chat js-->
+    <script src="../assets/js/chat.js"></script>
+
+
     <!-- C3 CHART JS -->
     <script src="../assets/plugins/charts-c3/d3.v5.min.js"></script>
     <script src="../assets/plugins/charts-c3/c3-chart.js"></script>
@@ -2182,824 +1876,38 @@
     <!-- INPUT MASK JS-->
     <script src="../assets/plugins/input-mask/jquery.mask.min.js"></script>
 
-    <!-- Tooltip and Popover JS -->
-    <script src="../assets/js/tooltip&popover.js"></script>
-
     <!-- CHARTJS JS -->
     <script src="../assets/plugins/chart/Chart.bundle.js"></script>
     <script src="../assets/plugins/chart/utils.js"></script>
 
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
+
     <script>
-        function checkFieldsStatus(accordionId) {
-            var accordionFields = $('#' + accordionId + ' input[type="text"], #' + accordionId + ' select');
-            var imageField = $('#' + accordionId + ' input[type="file"]');
-            var hasEmptyFields = false;
-            var hasErrorFields = false;
-            var hasFilledFields = false;
+        // Get the user's preferred color scheme
+        const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-            accordionFields.each(function() {
-                var $field = $(this);
-                if ($field.val() === '' || $field.val() === 'Choose...') {
-                    hasEmptyFields = true;
-                }
-                if ($field.hasClass('border-danger')) {
-                    hasErrorFields = true;
-                }
-                if ($field.val() !== '' || $field.val() !== 'Choose...') {
-                    hasFilledFields = true;
-                }
-            });
-            if (imageField.length && imageField.get(0).files.length === 0) {
-                hasEmptyFields = true;
-            }
-            if (hasEmptyFields && hasErrorFields) {
-                return 1;
-            } else if (!hasEmptyFields && !hasErrorFields && hasFilledFields) {
-                return 2;
-            } else if (hasEmptyFields && !hasErrorFields && hasFilledFields) {
-                console.log(2)
-                return 3;
-            } else {
-                return 0;
-            }
+        // Get a reference to the logo element
+        const logo = document.getElementById('logo');
+
+        // Set the logo source file based on the user's preferred color scheme
+        if (userPrefersDark) {
+            // console.log(document.getElementById("myModal_delete"))
+            logo.src = '../assets/header-img/comment.svg';
+        } else {
+            logo.src = '../assets/header-img/question.svg';
         }
-
-        let counter = 0
-
-        function checkFieldsFilled(id) {
-            const status = checkFieldsStatus(id)
-            if (id === "accordion-item2" && counter === 0) {
-                counter += 1
-                return
-            }
-            const accordionItem = document.getElementById(id);
-            const formFields = accordionItem.querySelectorAll("input, select");
-            let allFieldsFilled = true;
-            formFields.forEach(function(field) {
-                if (field.value === "" || field.value === "Choose...") {
-                    allFieldsFilled = false;
-                }
-
-            });
-            const chevronIcon = accordionItem.querySelector(".icon");
-            switch (status) {
-                case 0:
-
-                    break;
-                case 1:
-                    chevronIcon.classList.remove("fi-rs-check-circle");
-                    chevronIcon.classList.remove("chevron");
-                    chevronIcon.classList.add("fi-rs-exclamation");
-                    chevronIcon.classList.add("cross");
-                    break;
-                case 2:
-                    chevronIcon.classList.remove("fi-rs-exclamation");
-                    chevronIcon.classList.remove("chevron");
-                    chevronIcon.classList.add("fi-rs-check-circle");
-                    chevronIcon.classList.remove("cross");
-                    chevronIcon.classList.add("tick");
-                    break;
-                case 3:
-                    console.log(2)
-                    chevronIcon.classList.remove("fi-rs-exclamation");
-                    chevronIcon.classList.add("chevron");
-                    // chevronIcon.classList.add("fi-rs-check-circle");
-                    chevronIcon.classList.remove("cross");
-                    chevronIcon.classList.remove("tick");
-                    break;
-                default:
-                    break;
-            }
-        }
-        var selectedFiles = [];
-        var states
-        $(document).ready(function() {
-
-            $.ajax({
-                url: 'http://localhost:3000/api/spade/getStates',
-                method: 'GET',
-                success: function({
-                    data
-                }) {
-                    console.log(data)
-                    // Handle state selection change
-                    // console.log(result)
-
-                    var stateDropdown = $('#state');
-                    var stateupdateDropdown = $('#state_update');
-                    // states = result.geonames.filter(function(place) {
-                    //     return place.fcode === "ADM1";
-                    // });
-                    states = data
-                        //   stateDropdown.append($('<option></option>').text("Choose..."));
-                    data.forEach(function(state) {
-                        stateDropdown.append($('<option></option>').text(state.states).val(state.states));
-                    });
-
-                },
-                error: function(xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
-                    // console.log('Error occurred while fetching state and city data.');
-                }
-            });
-
-
-            function areAllFieldsFilled() {
-                var accordion1Fields = $('#accordion-item1 input[type="text"], #accordion-item1 select');
-                var accordion2Fields = $('#accordion-item2 input[type="text"], #accordion-item2 select');
-                var imageInput = $('#fileInput');
-                var allFieldsFilled = accordion1Fields.filter(function() {
-                    return $(this).val() === '' || $(this).val() === 'Choose...';
-                }).length === 0 && accordion2Fields.filter(function() {
-                    return $(this).val() === '' || $(this).val() === 'Choose...';
-                }).length === 0 && imageInput.get(0).files.length > 0;
-                var zipField = $('#zip');
-                if (zipField.val().length !== 5) {
-                    allFieldsFilled = false;
-                }
-                return allFieldsFilled;
-            }
-
-            // Function to enable or disable buttons based on field status
-            function updateButtonStatus() {
-                var accordion1Fields = $('#accordion-item1 input[type="text"], #accordion-item1 select');
-                var accordion2Fields = $('#accordion-item2 input[type="text"], #accordion-item2 select');
-                var imageInput = $('#fileInput');
-
-                var isAccordion1FieldsEmpty = accordion1Fields.filter(function() {
-                    return $(this).val() !== '' || $(this).val() === 'Choose...';
-                }).length === 0;
-
-                var isAccordion2FieldsEmpty = accordion2Fields.filter(function() {
-                    return $(this).val() !== '' || $(this).val() === 'Choose...';
-                }).length === 0;
-
-                var isImageInputEmpty = imageInput.get(0).files.length === 0;
-
-                // Enable or disable the buttons based on the fields' status
-                if (!isAccordion1FieldsEmpty || !isAccordion2FieldsEmpty || !isImageInputEmpty) {
-                    $('#draft').removeAttr('disabled');
-                } else {
-                    $('#draft').attr('disabled', 'disabled');
-                }
-
-                var allFieldsFilled = areAllFieldsFilled();
-
-                // Enable or disable the buttons based on the fields' status
-                if (allFieldsFilled) {
-                    $('#next').removeClass("disabled");
-                    //   $('#draft').removeAttr("disabled");
-                } else {
-                    $('#next').addClass("disabled");
-                    //   $('#draft').removeAttr("disabled");
-
-                }
-            }
-
-            // Call the updateButtonStatus function when any field in the accordions is changed
-            $('#accordion-item1 input, #accordion-item1 select, #accordion-item2 input, #accordion-item2 select').on('input change', function() {
-                var $field = $(this);
-                var $errorMessage = $field.next('.text-danger');
-                if ($field.attr("id") === "zip") {
-                    if ($field.val().length !== 5) {
-                        $field.addClass('border-danger');
-                        $errorMessage.removeClass('d-none');
-                    } else {
-                        $field.removeClass('border-danger');
-                        $errorMessage.addClass('d-none');
-                    }
-                } else if ($field.val() === '' || $field.val() === 'Choose...') {
-                    $field.addClass('border-danger');
-                    $errorMessage.removeClass('d-none');
-                } else {
-                    $field.removeClass('border-danger');
-                    $errorMessage.addClass('d-none');
-                }
-                updateButtonStatus();
-            });
-            // Handle change event of checkboxes
-
-
-            $('#fileInput').on('change', function() {
-                var files = Array.from($(this)[0].files);
-                // console.log(files)
-                files.forEach(function(file) {
-                    selectedFiles.push(file); // Add each file to the selected files array
-                });
-
-                updateSelectedFilesContainer(); // Update the selected files container
-            });
-            $('#fileInput_update').on('change', function() {
-                // console.log($(this)[0].files)
-                var files = Array.from($(this)[0].files);
-                // console.log(files)
-                files.forEach(function(file) {
-                    selectedFiles.push(file); // Add each file to the selected files array
-                });
-
-                updateSelectedFilesContainer(); // Update the selected files container
-            });
-
-            $(document).on('click', '.delete-file', function() {
-                var index = $(this).data('index');
-                selectedFiles.splice(index, 1); // Remove the selected file from the array
-                updateSelectedFilesContainer(); // Update the selected files container
-            });
-
-            function resetAccordions() {
-                // Reset all accordions
-                $('.accordion-item').each(function() {
-                    var accordionId = $(this).attr('id');
-                    var accordionFields = $('#' + accordionId + ' input[type="text"], #' + accordionId + ' select');
-                    var imageField = $('#' + accordionId + ' input[type="file"]');
-                    var accordionButton = $('#' + accordionId + ' button.accordion-button');
-
-                    // Empty input fields
-                    accordionFields.val('');
-
-                    // Remove border-danger class
-                    accordionFields.removeClass('border-danger');
-
-                    // Hide error spans
-                    accordionFields.siblings('span.text-danger').addClass('d-none');
-
-                    accordionButton.find('.fi-rs-exclamation').addClass('fi-rs-angle-circle-down').addClass("chevron").removeClass('fi-rs-exclamation').removeClass("cross");
-                    accordionButton.find('.fi-rs-check-circle').addClass('fi-rs-angle-circle-down').addClass("chevron").removeClass('fi-rs-check-circle').removeClass("tick");
-                    $('#next').addClass("disabled");
-                    $('#draft').attr("disabled", "disabled");
-                });
-            }
-            $("#succes-close").click(() => {
-                resetAccordions()
-            })
-            $('#close,#top-close').on('click', function(e) {
-                e.preventDefault()
-                resetAccordions()
-                $('#addModal').modal('hide');
-            })
-            $("#succesModal").on('hide.bs.modal', function() {
-
-                resetAccordions()
-                    // $('#accordion-item1').find('.file-grid').empty();
-                    // getData()
-            })
-            $(document).on('click', '#next', function(e) {
-                e.preventDefault()
-                    // selectedFiles = []
-                $('#addModal').modal('hide');
-
-                // $("#largemodal").addClass("hide");
-                var formData = new FormData();
-
-                // Get the form data
-                var propertyName = $("#propertyName").val();
-                var address = $("#address").val();
-                var city = $("#city").val();
-                var state = $("#state").val();
-                var zipCode = $("#zip").val();
-                var propertyType = $("#propertyType").val();
-                var propertySQFT = $("#propertyTotalSF").val();
-                var units = $("#units").val();
-
-                // Add the form data to the FormData object
-                formData.append('propertyName', propertyName);
-                formData.append('address', address);
-                formData.append('city', city);
-                formData.append('state', state);
-                formData.append('zipCode', zipCode);
-                formData.append('propertyType', propertyType);
-                formData.append('propertySQFT', propertySQFT);
-                formData.append('units', units);
-
-                // Get the selected files
-                var files = $('#fileInput')[0].files;
-
-                // Add the files to the FormData object
-                for (var i = 0; i < selectedFiles.length; i++) {
-                    formData.append('image', selectedFiles[i]);
-                }
-
-                // Send the form data to the server using AJAX
-                $.ajax({
-                    url: 'http://localhost:3000/api/spade/property',
-                    type: 'POST',
-                    data: formData,
-                    contentType: false,
-                    processData: false,
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-
-                    success: function(response) {
-                        console.log(2)
-                            // console.log(1)
-                        getData()
-                        $('#succesModal').modal('show')
-                            // window.location = '../Landlord/properties-all.html';
-                    },
-                    error: function(xhr, status, error) {
-                        window.alert('Error: ' + error);
-                    }
-                });
-
-
-            });
-            let propertyId;
-
-
-
-            $('#myModal_edit').find('input, select').on('input change', function() {
-                var updateButton = document.getElementById('update');
-                // console.log(updateButton)
-                var isFilled = true;
-
-                // Check each field for empty value and toggle red border and span visibility
-                $('#myModal_edit').find('input, select').each(function(index) {
-                    var value = $(this).val().trim();
-                    var span = $(this).siblings('.text-danger');
-                    // console.log($(this))
-                    if (index == 0 && $('.file-grid').children()[1] ?.length === 0) {
-                        isFilled = false;
-                    } else if ($(this).attr("id") === "zip_update") {
-                        // console.log($(this).val().length)
-                        if ($(this).val().length !== 5) {
-                            // console.log("here ik am")
-                            $(this).addClass('border-danger');
-                            span.removeClass('d-none');
-                            isFilled = false;
-                        } else {
-                            $(this).removeClass('border-danger');
-                            span.addClass('d-none');
-                        }
-                    } else if (index >= 1) {
-                        if (value === '' || value === 'Choose...') {
-                            $(this).addClass('border-danger');
-                            //   console.log(1)
-                            span.removeClass('d-none');
-                            isFilled = false;
-                        } else {
-                            $(this).removeClass('border-danger');
-                            span.addClass('d-none');
-                        }
-                    }
-                });
-
-                // Toggle button behavior based on the fields' status
-                if (isFilled) {
-                    updateButton.classList.remove('disabled')
-                } else {
-                    updateButton.classList.add("disabled")
-                }
-            });
-
-
-
-            // Call the updateButtonStatus function when any field in the accordions is changed
-
-            // Handle change event of checkboxes
-            $('#propertyTable').DataTable({
-                paging: true,
-                searching: false,
-                info: false,
-                lengthChange: false,
-                pageLength: 10,
-
-
-
-            });
-        });
-
-
-
-        let result;
-        let columnsToHide = []
-        $('input[type="checkbox"]').change(function() {
-            var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
-            var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
-            console.log(columnIndex, isColumnVisible)
-                // Toggle the visibility of the corresponding column
-            $('table').find('tr').each(function() {
-                var column = $(this).find('th:nth-child(' + columnIndex + '), td:nth-child(' + columnIndex + ')');
-                isColumnVisible ? column.show() : column.hide();
-            });
-        });
-
-        function filterTable(selectedFilter) {
-            var tableBody = $('#table_body');
-            var rows = tableBody.find('tr');
-
-            if (selectedFilter === 'alphabets') {
-                rows.sort(function(a, b) {
-                    var textA = $(a).find('.propertyName').text().toLowerCase();
-                    var textB = $(b).find('.propertyName').text().toLowerCase();
-                    return textA.localeCompare(textB);
-                });
-            } else if (selectedFilter === 'ascending') {
-                rows.sort(function(a, b) {
-                    var idA = parseInt($(a).find('.propertyUnits').text());
-                    var idB = parseInt($(b).find('.propertyUnits').text());
-                    return idA - idB;
-                });
-            } else if (selectedFilter === 'descending') {
-                rows.sort(function(a, b) {
-                    var idA = parseInt($(a).find('.propertyUnits').text());
-                    var idB = parseInt($(b).find('.propertyUnits').text());
-                    return idB - idA;
-                });
-            }
-
-            tableBody.empty().append(rows);
-        }
-
-        // Filter functionality
-        $('#ascending').on('click', function() {
-            filterTable("ascending")
-        });
-        $('#descending').on('click', function() {
-            filterTable("descending")
-        });
-        $('#alphabets').on('click', function() {
-            // console.log(1)
-            filterTable("alphabets")
-        });
-        // console.log($('#alphabets'))
-        // Search functionality
-        $('#typehead').on('keyup', function() {
-            var searchValue = $(this).val().toLowerCase();
-            $('#table_body tr').filter(function() {
-                $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
-            });
-        });
-
-        // Function to update the table based on filters
-        function updateTable() {
-            $('#table_body').empty();
-            $.ajax({
-                url: 'http://localhost:3000/api/spade/allproperty',
-                type: 'GET',
-                contentType: false,
-                processData: false,
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                },
-                success: function(response) {
-                    // console.log(response);
-
-                    // Assuming response is an array of property objects
-                    var tableBody = $('#table_body');
-
-                    // Iterate over the response and populate the table
-                    response.forEach(function(property) {
-                        // Generate table rows with property data
-                        var row = '<tr>' +
-                            '<td>' + property.propertyId + '</td>' +
-                            '<td>' + property.propertyName + '</td>' +
-                            '<td>' + property.propertyType + '</td>' +
-                            '<td>' + property.units + '</td>' +
-                            '<td>' + property.address + '</td>' +
-                            '</tr>';
-
-                        // Append the row to the table body
-                        tableBody.append(row);
-                    });
-                },
-                error: function(xhr, status, error) {
-                    window.alert('Error: ' + error);
-                }
-            });
-        }
-
-        // Initial table population
-        // updateTable();
-
-
-        $('#myModal_edit').on('hidden.bs.modal', function() {
-            // Clear input values
-            // console.log(1)
-            $(this).find('input, textarea, select').val('');
-
-            // Clear file input values
-            // $(this).find('input[type="file"]').val(null);
-
-            // Clear radio button selections
-            $(this).find('input[type="radio"]').prop('checked', false);
-
-            $('#myModal_edit').find('.file-grid').empty();
-            $('#accordion-item1').find('.file-grid').empty();
-        });
-
-
-
-        // let propertyId;
-
-        $(document).on('click', '#update', function(e) {
-            e.preventDefault();
-            $("#myModal_edit").modal("hide");
-
-            var formData = new FormData();
-            var propertyName = $("#propertyName_update").val();
-            var address = $("#address_update").val();
-            var city = $("#city_update").val();
-            var state = $("#state_update").val();
-            var zipCode = $("#zip_update").val();
-            var propertyType = $("#propertyType_update").val();
-            var propertySQFT = $("#propertyTotalSF_update").val();
-            var units = $("#unit_update").val();
-
-            formData.append('id', propertyId);
-            formData.append('propertyName', propertyName);
-            formData.append('address', address);
-            formData.append('city', city);
-            formData.append('state', state);
-            formData.append('zipCode', zipCode);
-            formData.append('propertyType', propertyType);
-            formData.append('propertySQFT', propertySQFT);
-            formData.append('units', units);
-
-            // Retrieve existing image names from the DOM
-
-            var existingImageNames = [];
-            selectedFiles.forEach((file) => {
-                    if (typeof file === "string") {
-                        existingImageNames.push(file)
-                    }
-                })
-                // Get the selected files
-            var files = selectedFiles.map(function(file) {
-                return file instanceof File ? file : file.name;
-            });
-
-            // Add the selected files to the FormData object
-            files.forEach(function(file) {
-                formData.append('image', file);
-            });
-
-            formData.append("existingImages", existingImageNames)
-            $.ajax({
-                url: 'http://localhost:3000/api/spade/updateProperty',
-                // url: 'http://ec2-54-158-103-230.compute-1.amazonaws.com:3000/api/spade/updateProperty',
-                type: 'PUT',
-                data: formData,
-                contentType: false,
-                processData: false,
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                },
-                success: function(response) {
-                    e.preventDefault()
-                    getData();
-                },
-                error: function(xhr, status, error) {
-                    window.alert('Error: ' + error);
-                }
-            });
-        });
-        $(document).on('click', '#confirmDelete', function(e) {
-
-                e.preventDefault();
-                // delete using AJAX
-                $('#myModal_delete').modal('hide');
-                $.ajax({
-                    url: 'http://localhost:3000/api/spade/propertyDelete',
-                    type: 'DELETE',
-                    data: JSON.stringify({
-                        "id": propertyId
-                    }),
-                    contentType: "application/json; charset=utf-8",
-                    processData: false,
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-                    success: function(response) {
-                        getData()
-                    },
-                    error: function(xhr, status, error) {
-                        window.alert('Error: ' + error);
-                    }
-                });
-            })
-            // let data;
-        function updateSelectedFilesContainer() {
-            var selectedFilesContainer = $('.file-grid');
-            selectedFilesContainer.empty();
-            console.log(selectedFiles)
-            selectedFiles.forEach(function(file, index) {
-
-                var fileElement = $('<div>')
-                    .addClass('selected-file')
-                    .append(
-                        $('<img>')
-                        .addClass('file-preview')
-                        .attr('src', typeof file === "object" ? URL.createObjectURL(file) : '../../../../spadeAPI/uploads/' + file)
-                    )
-                    .append(
-                        $('<div>')
-                        .addClass('file-details')
-                        .append($('<span>').text("Image-" + (index + 1)))
-                        // .append($('<span>').text(fileSize))
-                    )
-                    .append(
-                        $('<p>')
-                        .addClass('delete-file')
-                        .text('X')
-                        .attr('data-index', index)
-                    )
-                    .appendTo(selectedFilesContainer);
-
-            });
-
-        }
-
-        function formatFileSize(bytes) {
-            if (bytes === 0) return '0 Bytes';
-            var k = 1024;
-            var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-            var i = Math.floor(Math.log(bytes) / Math.log(k));
-            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-        }
-
-        function truncateFileName(fileName) {
-            var maxFileNameLength = 10; // Define the maximum length of the file name
-            if (fileName.length > maxFileNameLength) {
-                return fileName.substring(0, maxFileNameLength) + '...'; // Truncate the file name
-            }
-
-            return fileName;
-        }
-
-        function getData(selectedFilter = "alphabets") {
-            // console.log(2)
-            $("#global-loader").fadeIn("fast")
-                // console.log(22)
-            $.ajax({
-                url: 'http://localhost:3000/api/spade/allproperty',
-                type: 'GET',
-                contentType: false,
-                processData: false,
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                },
-                success: function(response) {
-                    console.log(response)
-                    if (response.data[0].length === 0) {
-
-                        window.location = './new-property.html'
-                    } else {
-                        $("#user-name").text(response.user)
-
-                        var tableBody = $('#table_body');
-
-                        tableBody.empty();
-
-                        response.data[0] ?.forEach(function(property) {
-                            var image = '<td><img src="../../../../spadeAPI/uploads/' + property.images[0] + '" alt=""></td>';
-                            // var image = '<td><img src="../../../../../../Desktop/spade API 2/uploads/image-1684250579662.png" alt="hhghghgh"></td>';
-
-                            var propertyId = '<td class="property-id " style="font-weight: 600;">' + property
-                                .id + '</td>';
-
-                            var propertyName = '<td class="propertyName" style="font-weight: 600;">' +
-                                property
-                                .propertyName +
-                                '</td>';
-                            var colorClass = '';
-                            var backgroundClass = '';
-
-                            if (property.propertyType === 'Single Family') {
-                                var colorClass = 'rounded-pill-Single-Family'
-                            } else if (property.propertyType === 'Multi-Family') {
-                                var colorClass = 'rounded-pill-Multi-Family';
-
-                            } else if (property.propertyType === 'Multi-Commercial') {
-                                var colorClass = 'rounded-pill-Multi-Commercial';
-                            }
-
-                            var propertyType =
-                                '<td class="propertyType"><a class="like" href="javascript:;">' +
-                                `<span class="badge btn-light ${colorClass} rounded-pill py-2 px-3">` +
-                                '<i class="fe fe-circle me-1"></i>' + property.propertyType + '</span>' +
-                                '</a></td>';
-
-                            var propertyUnits = '<td class="propertyUnits">' +
-                                '<p style="font-weight: 600;" class="mb-1">' + property.units +
-                                ' Unit(s)</p>' +
-                                '<span class="font-weight-normal">' + property.propertySQFT +
-                                ' Square Feet</span>' +
-                                '</td>';
-
-                            var propertyAddress = '<td class="propertyAddress">' +
-                                '<p style="font-weight: 600;" class="mb-1">' + property.address + '</p>' +
-                                '<span>' + property.city + ', ' + property.state + ' ' + property.zipCode +
-                                '</span>' +
-                                '</td>';
-
-                            var dropdownMenu =
-                                '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
-                                '<ul class="dropdown-menu">' +
-
-                                `<li><a class="dropdown-item text-success" href="./view-property.html?propertyId=${property.id}">View</a></li>` +
-                                '<li><a class="edit-option dropdown-item text-primary" href="javascript:void(0)">Edit</a></li>' +
-                                '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>'
-                            '</ul></td>';
-                            // Create a table row and append the generated columns
-                            var row = '<tr>' + image + propertyId + propertyName + propertyType +
-                                propertyUnits + propertyAddress + dropdownMenu + '</tr>';
-
-                            // Append the row to the table body
-                            tableBody.append(row);
-                        });
-                        $("#global-loader").fadeOut("slow")
-                        $('.edit-option').click(function(e) {
-                            e.preventDefault();
-                            const propertyIdElement = $(this).closest("tr").find(".property-id");
-
-                            propertyId = propertyIdElement.text();
-
-                            const data = response.data[0].find(obj => obj.id.toString() === propertyId);
-                            var stateupdateDropdown = $('#state_update');
-
-                            //   stateDropdown.append($('<option></option>').text("Choose..."));
-                            states.forEach(function(state) {
-                                if (state.states === data.state) {
-                                    stateupdateDropdown.append($('<option selected></option>').text(state.states)).val(state.states);
-
-                                } else {
-                                    stateupdateDropdown.append($('<option></option>').text(state.states));
-                                }
-
-                            });
-                            selectedFiles = data.images
-
-                            // var option = $('<option>').text(data.city).val(data.city);
-
-                            // Append the option to the select element
-                            // $('#city_update').append(option);
-
-                            // Make the option selected
-                            // option.prop('selected', true);
-                            updateSelectedFilesContainer()
-                            $("#propertyId_update").val(data.id);
-                            $("#propertyName_update").val(data.propertyName);
-                            $("#address_update").val(data.address);
-                            $("#city_update").val(data.city);
-                            // $("#state_update").val(data.state);
-                            $("#zip_update").val(data.zipCode);
-                            $("#propertyType_update").val(data.propertyType);
-                            $("#propertyTotalSF_update").val(data.propertySQFT);
-                            $("#unit_update").val(data.units);
-                            $("#property-name").text(data.propertyName)
-                            $('#myModal_edit').modal('show');
-                        });
-                        $('.delete-option').click(function(e) {
-                            e.preventDefault(); // Prevent default anchor behavior
-                            const propertyIdElement = $(this).closest("tr").find(".property-id");
-                            propertyId = propertyIdElement.text();
-
-                            $('#myModal_delete').modal('show');
-                        });
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.log(error)
-                    window.alert('Error: ' + "Token expeired!, Login again");
-                    window.location = '../Landlord/login_module.html';
-                }
-            });
-
-        }
-        getData()
-    </script>
-    <script>
-        $(document).ready(function() {
-            $('#header-checkbox').change(function() {
-                $(".sorting").removeClass("sorting").removeClass("sorting_asc").remove("sorting_desc")
-                var isChecked = $(this).prop('checked'); // Check if the header checkbox is checked or unchecked
-
-                // Set the state of all row checkboxes based on the header checkbox
-                $('.row-checkbox').prop('checked', isChecked);
-            });
-            $("#responsive-datatable_info").remove()
-            $("#responsive-datatable_length").parent().parent().remove();
-            $("#responsive-datatable").css("padding", "0")
-            $(".sorting").removeClass("sorting").removeClass("sorting_asc").remove("sorting_desc")
-        })
     </script>
 
     <script>
-        function logout() {
-            localStorage.removeItem('authtoken');
-            window.close();
-            window.open('./login_module.html', "_blank")
-            console.log('Done');
+        function logout() {    
+          localStorage.removeItem('authtoken'); 
+          window.open('./login_module.html', "_blank")                  
+          window.close();
+          console.log('Done');
         }
     </script>
-
-
-
+      
 </body>
 
 </html>
