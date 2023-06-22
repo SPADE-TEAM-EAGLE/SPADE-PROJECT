@@ -1323,7 +1323,7 @@
                     <div class="row mb-3">
                         <div class="col-md-12 col-lg-6">
                             <label class="form-label fw-bold fs-18">Select Tenant</label>
-                            <select class="form-control select2 form-select" data-placeholder="Select Tenant"
+                            <select class="form-control select2 form-select d-block" data-placeholder="Select Tenant"
                                 name="tenants" id="tenants" data-bs-placement="top" data-bs-toggle="tooltip" title=""
                                 data-bs-original-title="Select Tenant" data-bs-container="#addModal">
                                 <option label="Choose one">
@@ -3586,7 +3586,7 @@
                     // Collect the line items data from the table
                     var lineItems = [];
                     $('#lineItemsTable tbody tr').each(function () {
-
+                        console.log($(this))
                         var category = $(this).find('input[name="category"]').val();
                         var property = $(this).find('input[name="property"]').val();
                         var memo = $(this).find('input[name="memo"]').val();
@@ -3599,7 +3599,7 @@
                             amount: amount
                         });
                     });
-
+                    console.log(lineItems)
                     // Create a FormData object to hold the data and files
                     var formData = new FormData();
                     var buttonText = $(this).text();
@@ -3622,7 +3622,7 @@
                     console.log($("#totalText").text().split('$')[1])
                     formData.append('totalAmount', $("#totalText").text().split(' ')[1])
                     // Loop through the lineItems array and add each line item to the FormData object
-                    for (var i = 0; i < lineItems.length; i++) {
+                    for (var i = 0; i < lineItems.length-1; i++) {
                         var lineItem = lineItems[i];
                         formData.append('lineItems[' + i + '][category]', lineItem.category);
                         formData.append('lineItems[' + i + '][property]', lineItem.property);
@@ -4185,6 +4185,18 @@
                     console.log("Invoice ID element not found.");
                 }
             });
+            $(document).on('click', '.status-option', function () {
+                // const invoiceIdElement = $(this).closest("tr").find(".invoice-id");
+                const data1 = invoiceData.find(obj => obj.invoiceID == invoiceId);
+                const data2 = tenantData.find(obj => obj.tenantID == data1.tenantID);
+
+                const data = {
+                    ...data1,
+                    ...data2
+                };
+                console.log(data)
+                $(`input[name="status"][value="${data.status}"]`).prop('checked', true);
+            });
             $(document).on('click', '.delete-option', function () {
 
                 $("#myModal_delete").modal("show")
@@ -4321,7 +4333,7 @@
                             amount: amount
                         });
                     });
-
+                    console.log(lineItems)
                     // Create a FormData object to hold the data and files
                     var formData = new FormData();
                     var buttonText = $(this).text();
@@ -4352,9 +4364,11 @@
                     })
 
                     formData.append("existingImages", existingImageNames)
-                    // Loop through the lineItems array and add each line item to the FormData object
+                    // Loop through the linems array and add each line item to the FormData object
+                    console.log(lineItems)
                     for (var i = 0; i < lineItems.length; i++) {
                         var lineItem = lineItems[i];
+                        console.log(lineItem)
                         formData.append('lineItems[' + i + '][category]', lineItem.category);
                         formData.append('lineItems[' + i + '][property]', lineItem.property);
                         formData.append('lineItems[' + i + '][memo]', lineItem.memo);
