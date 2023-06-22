@@ -746,21 +746,7 @@
 
                                 <label class="form-label fw-bold">Assign To</label>
                                 <select id="assignee" class="form-control select2" data-placeholder="Choose Browser" multiple data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Assign To here" data-bs-container="#addModal">
-                                    <option value="Firefox">
-                                        Firefox
-                                    </option>
-                                    <option value="Chrome selected">
-                                        Chrome
-                                    </option>
-                                    <option value="Safari">
-                                        Safari
-                                    </option>
-                                    <option selected value="Opera">
-                                        Opera
-                                    </option>
-                                    <option value="Internet Explorer">
-                                        Internet Explorer
-                                    </option>
+                                    
                                 </select>
                                 </select>
                                 <!-- <span class="text-danger d-none">Property name required!</span> -->
@@ -916,21 +902,7 @@
                                 <div class="form-group">
                                     <label class="form-label fw-bold">Assignee(s)</label>
                                     <select class="form-control select2" data-placeholder="Choose Assignee" multiple data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select Assignee(s)" data-bs-container="#myModal_edit" id="assignee_update">
-                                        <option value="Firefox">
-                                            Firefox
-                                        </option>
-                                        <option value="Chrome selected">
-                                            Chrome
-                                        </option>
-                                        <option value="Safari">
-                                            Safari
-                                        </option>
-                                        <option selected value="Opera">
-                                            Opera
-                                        </option>
-                                        <option value="Internet Explorer">
-                                            Internet Explorer
-                                        </option>
+                                       
                                     </select>
                                 </div>
                             </div>
@@ -2296,7 +2268,10 @@
                     $("#assignee").append($("<option></option>").text("Choose..."))
                     $("#assignee_update").empty()
                     $("#assignee_update").append($("<option></option>").text("Choose..."))
-
+                    if(response.data.length===0){
+                        $("#assignee").append($("<option></option>").text("No Vendor available.."));
+                        $("#assignee_update").append($("<option></option>").text("No Vendor available.."));
+                    }else{
                     response.data.forEach((vendor) => {
                         // console.log(property);
                         var optionText = vendor.firstName + " " + vendor.lastName;
@@ -2304,7 +2279,7 @@
                         $("#assignee").append($("<option></option>").text(optionText).val(optionValue));
                         $("#assignee_update").append($("<option></option>").text(optionText).val(optionValue));
 
-                    });
+                    });}
                     // Handle state selection change
                 }
             })
@@ -2735,7 +2710,7 @@
 
             // let propertyId;
 
-            $(document).on('click', '#update', function(e) {
+            $(document).on('click', '#save', function(e) {
                 e.preventDefault();
                 $("#myModal_edit").modal("hide");
 
