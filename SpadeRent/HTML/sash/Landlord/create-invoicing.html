@@ -1553,7 +1553,7 @@
                     <div class="row mb-3">
                         <div class="col-md-12 col-lg-6">
                             <label class="form-label fw-bold fs-18">Select Tenant</label>
-                            <select class="form-control select2 form-select" data-placeholder="Select Tenant"
+                            <select class="form-control select2 form-select d-block" data-placeholder="Select Tenant"
                                 name="tenants" id="tenants_update">
                                 <option label="Choose one">
                                 </option>
@@ -1642,7 +1642,7 @@
                                     <thead>
                                         <tr>
                                             <th>Category</th>
-                                            <th>Property</th>
+                                            <!-- <th>Property</th> -->
                                             <th>Memo</th>
                                             <th>Amount</th>
                                             <th>Delete</th>
@@ -3622,7 +3622,7 @@
                     console.log($("#totalText").text().split('$')[1])
                     formData.append('totalAmount', $("#totalText").text().split(' ')[1])
                     // Loop through the lineItems array and add each line item to the FormData object
-                    for (var i = 0; i < lineItems.length; i++) {
+                    for (var i = 0; i < lineItems.length-1; i++) {
                         var lineItem = lineItems[i];
                         formData.append('lineItems[' + i + '][category]', lineItem.category);
                         formData.append('lineItems[' + i + '][property]', lineItem.property);
@@ -3860,7 +3860,6 @@
             $("#add-item1_update").on("click", () => {
                 $("#add-item-container1_update").append(`<tr class="tr">
                                             <td><input type="text" class="form-control" name="category_update"></td>
-                                            <td><input type="text" class="form-control" name="property_update"></td>
                                             <td><input type="text" class="form-control" name="memo_update"></td>
                                             <td><input type="text" class="form-control" name="amount_update"></td>
                                             <td><button type="button" class="btn" id="del-btn_update">
@@ -4275,7 +4274,6 @@
                     $('#add-item-container1_update').append(
                         `<tr class="tr">
                                             <td><input type="text" class="form-control" name="category_update" value=${category}></td>
-                                            <td><input type="text" class="form-control" name="property_update" value=${category}></td>
                                             <td><input type="text" class="form-control" name="memo_update" value=${memo}></td>
                                             <td><input type="text" class="form-control" name="amount_update" value=${amount}></td>
                                             <td><button type="button" class="btn" id="del-btn_update">
