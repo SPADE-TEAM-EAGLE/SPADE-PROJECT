@@ -684,11 +684,11 @@
                                         class="side-menu__icon fe fe-slack"></i><span
                                         class="side-menu__label">Properties</span><i
                                         class="angle fe fe-chevron-right"></i></a>
-                                <ul class="slide-menu">
+                                <!-- <ul class="slide-menu">
                                     <li class="side-menu-label1"><a href="javascript:void(0)">Properties</a></li>
                                     <li><a href="properties-all.php" class="slide-item">All</a></li>
                                     <li><a href="calendar.php" class="slide-item">Draft</a></li>
-                                </ul>
+                                </ul> -->
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
@@ -809,7 +809,7 @@
                                             <li><a href="terms.php" class="sub-slide-item"> Terms</a></li>
                                             <li><a href="invoice.php" class="sub-slide-item"> Invoice</a></li>
                                             <li><a href="pricing.php" class="sub-slide-item"> Pricing Tables</a></li>
-                                            <li><a href="settings.php" class="sub-slide-item"> Settings</a></li>
+                                            <li><a href="settings.html" class="sub-slide-item"> Settings</a></li>
                                             <li><a href="blog.php" class="sub-slide-item"> Blog</a></li>
                                             <li><a href="blog-details.php" class="sub-slide-item"> Blog Details</a>
                                             </li>

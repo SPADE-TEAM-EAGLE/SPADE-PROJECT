@@ -105,16 +105,18 @@ $(document).ready(function () {
         method: 'GET',
         success: function({data}) {
             // Handle state selection change
-            // console.log(result)
+            console.log(data)
 
             var stateDropdown = $('#state');
-            var stateupdateDropdown = $('#state_update');
+            // console.log(stateDropdown)
+            // var stateupdateDropdown = $('#state_update');
             // states = result.geonames.filter(function(place) {
             //     return place.fcode === "ADM1";
             // });
                 states=data
             //   stateDropdown.append($('<option></option>').text("Choose..."));
             data.forEach(function(state) {
+                console.log(stateDropdown)
                 stateDropdown.append($('<option></option>').text(state.states).val(state.states));
             });
 
@@ -287,7 +289,7 @@ $(document).on('click', '#next', function (e) {
     formData.append('propertyName', propertyName);
     formData.append('address', address);
     formData.append('city', city);
-    formData.append('state', state);
+    formData.append('state', "Texas");
     formData.append('zipCode', zipCode);
     formData.append('propertyType', propertyType);
     formData.append('propertySQFT', propertySQFT);
