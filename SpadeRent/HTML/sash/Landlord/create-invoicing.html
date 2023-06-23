@@ -1201,6 +1201,12 @@
                         <span style="color: #777575;">Payment was collected outside the Spade Rent.</span>
                     </label>
                     <label class="custom-control custom-radio-md mb-3">
+                        <input type="radio" class="custom-control-input" name="status" value="Unpaid">
+                        <h4 class="custom-control-label fw-bold">Unpaid</h4>
+                        <span style="color: #777575;">Payment is not received.</span>
+
+                    </label>
+                    <label class="custom-control custom-radio-md mb-3">
                         <input type="radio" class="custom-control-input" name="status" value="void">
                         <h4 class="custom-control-label fw-bold">Void</h4>
                         <span style="color: #777575;">This invoice was accidentally finalized or contains a
@@ -1326,6 +1332,32 @@
                             <select class="form-control select2 form-select d-block" data-placeholder="Select Tenant"
                                 name="tenants" id="tenants" data-bs-placement="top" data-bs-toggle="tooltip" title=""
                                 data-bs-original-title="Select Tenant" data-bs-container="#addModal">
+                                <option label="Choose one">
+                                </option>
+                                <option value="Repeat Yearly">Repeat Yearly</option>
+                                <option value="Repeat Monthly">Repeat Monthly</option>
+                            </select>
+                            <span class="text-danger d-none">Photos are required!</span>
+                        </div>
+
+                        <div class="col-md-12 col-lg-6">
+                            <label class="form-label fw-bold fs-18">Select Property</label>
+                            <select class="form-control select2 form-select d-block" data-placeholder="Select Property"
+                                name="tenants" id="tenants" data-bs-placement="top" data-bs-toggle="tooltip" title=""
+                                data-bs-original-title="Select Property" data-bs-container="#addModal">
+                                <option label="Choose one">
+                                </option>
+                                <option value="Repeat Yearly">Repeat Yearly</option>
+                                <option value="Repeat Monthly">Repeat Monthly</option>
+                            </select>
+                            <span class="text-danger d-none">Photos are required!</span>
+                        </div>
+
+                        <div class="col-md-12 col-lg-6">
+                            <label class="form-label fw-bold fs-18">Select Unit</label>
+                            <select class="form-control select2 form-select d-block" data-placeholder="Select Unit"
+                                name="tenants" id="tenants" data-bs-placement="top" data-bs-toggle="tooltip" title=""
+                                data-bs-original-title="Select Unit" data-bs-container="#addModal">
                                 <option label="Choose one">
                                 </option>
                                 <option value="Repeat Yearly">Repeat Yearly</option>
@@ -3656,6 +3688,8 @@
 
                         success: function (response) {
                             $("#addModal").modal("hide")
+                            $('#addModal input[type="text"], #addModal input[type="date"], #addModal textarea').val('');
+    $('#addModal select').prop('selectedIndex', 0);
                             $("#succesModal").modal("show")
 
                         },
@@ -4404,8 +4438,7 @@
 
                         success: function (response) {
                             $("#myModal_edit").modal("hide")
-                            $('#addModal input[type="text"], #addModal input[type="date"], #addModal textarea').val('');
-    $('#addModal select').prop('selectedIndex', 0);
+                           
                             $("#succesModal").modal("show")
                             getData()
                         },

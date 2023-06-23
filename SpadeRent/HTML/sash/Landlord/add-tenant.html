@@ -1427,7 +1427,7 @@
                                 <ul class="slide-menu">
                                     <li class="side-menu-label1"><a href="javascript:void(0)">Invoicing</a></li>
                                     <li><a href="create-invoicing.html" class="slide-item">All</a></li>
-                                    <li><a href="javascript:void(0)" class="slide-item">Draft</a></li>
+                                    <!-- <li><a href="javascript:void(0)" class="slide-item">Draft</a></li> -->
                                 </ul>
 
                             </li>
@@ -3087,7 +3087,13 @@
                 });
             });
             $(".modal").on("click", ".btn-close,.btn-close-bottom, .modal-backdrop", function() {
+                
 
+                // Perform specific action when modal or backdrop is clicked
+                resetAccordions("update")
+                console.log("this is accordinon")
+            });
+            $(".modal").on("hidden.bs.modal",function() {
 
                 // Perform specific action when modal or backdrop is clicked
                 resetAccordions("update")

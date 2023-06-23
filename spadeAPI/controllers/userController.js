@@ -1,5 +1,5 @@
 const user = require("../models/user");
-const { sendMail } = require("../sendmail/sendmail.js");
+const sendMail = require("../sendmail/sendmail.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const fs = require("fs");
@@ -54,7 +54,11 @@ exports.createUser = async function (req, res) {
       hashPassword,
       planID,
     ]);
+    const name = firstName+" "+lastName;
+      const mailSubject = "Spade Welcome Email";
     if (insertResult[0].affectedRows > 0) {
+      
+      await sendMail.sendMail(email, mailSubject, password, name);
       return res.status(200).json({ message: "User added successfully" });
     } else {
       return res.status(500).send("Failed to add user");
@@ -392,7 +396,7 @@ exports.property = async (req, res) => {
         }
         //
         res.status(200).json({
-          message: " property created successful",
+          message: "property created successful",
         });
       }
     }
