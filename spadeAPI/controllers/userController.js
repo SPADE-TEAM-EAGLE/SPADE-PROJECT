@@ -396,7 +396,7 @@ exports.property = async (req, res) => {
         }
         //
         res.status(200).json({
-          message: " property created successful",
+          message: "property created successful",
         });
       }
     }
