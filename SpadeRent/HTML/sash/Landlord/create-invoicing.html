@@ -801,7 +801,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div id="htmlContent">
+                    <div >
                         <div class="container-fluid" style="    border-right: 1px solid #000000;
                              border-bottom: 1px solid #000000;
                               border-left: 1px solid #000000;
@@ -1318,7 +1318,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="text-justify ps-2 border-model-line">
-                        <h2 class="modal-title mb-0">Create <strong class="color-primary">New Invoice</strong></h2>
+                        <h2 class="modal-title mb-0" id="previewHeading">Create <strong class="color-primary">New Invoice</strong></h2>
                         <button type="button" class="btn btn-primary">#Invoice Number: INV-89900A</button>
                     </div>
                     <button class="btn-close top-close" data-bs-dismiss="modal" aria-label="Close" >
@@ -1480,10 +1480,11 @@
                                                     data-bs-placement="top" data-bs-toggle="tooltip" title=""
                                                     data-bs-original-title="Enter memo here"
                                                     data-bs-container="#addModal"></td>
-                                            <td><input type="text" class="form-control" name="amount"
-                                                    data-bs-placement="top" data-bs-toggle="tooltip" title=""
-                                                    data-bs-original-title="Enter amount here"
-                                                    data-bs-container="#addModal"></td>
+                                            <td><input type="text" class="form-control" name="amount" id="amountField"
+                                                data-bs-placement="top" data-bs-toggle="tooltip" title=""
+                                                data-bs-original-title="Enter amount here" data-bs-container="#addModal"
+                                                oninput="this.value = this.value.replace(/[^0-9.]/g, '')">
+                                         </td>
                                             <td><button type="button" class="btn" id="del-btn1">
                                                     <i class="fi fi-rs-trash text-danger fs-5"></i>
                                                 </button></td>
@@ -1547,17 +1548,17 @@
                         id='close'>Close</button>
                     <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
                     <div class="btn-group rounded-split mt-2 mb-2">
-                        <button type="button" class="btn btn-pill btn-primary save-invoice">Save</button>
-                        <button type="button" class="btn btn-pill btn-primary dropdown-toggle px-1"
+                        <button type="button" class="btn btn-pill btn-primary save-invoice" >Save</button>
+                        <button type="button" class="btn btn-pill btn-primary dropdown-toggle px-1" id="toggle-button"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="javascript:void(0)"><i class="fi fi-rs-eye me-2 text-primary"></i> Preview
+                            <li><a href="javascript:void(0)" id="preview"><i class="fi fi-rs-eye me-2 text-primary"></i> Preview
                                     Invoice</a></li>
                             <li><a href="javascript:void(0)" class="save-invoice"><i
-                                        class="fi fi-rs-disk me-2 text-primary "></i> Save & Send</a></li>
+                                        class="fi fi-rs-disk me-2 text-primary"></i> Save & Send</a></li>
                             <li>
                                 <a href="javascript:void(0)" class="save-invoice"> <i
                                         class="fi fi-rs-print me-2 text-primary "></i>Save & Print</a>
@@ -1569,6 +1570,7 @@
             </div>
         </div>
     </div>
+    
     <div class="modal fade" id="myModal_edit" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
@@ -1833,7 +1835,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div id="htmlContent">
+                    <div >
                         <div class="container-fluid" style="    border-right: 1px solid #000000;
                              border-bottom: 1px solid #000000;
                               border-left: 1px solid #000000;
@@ -2406,8 +2408,7 @@
                                 <!-- <h3>Main</h3> -->
                             </li>
                             <li class="slide">
-                                <a class="side-menu__item has-link create-new-link" href="javascript:void(0)"
-                                    target="_self" style="border: 3px solid #1467B0 !important;"><i
+                                <a class="side-menu__item has-link create-new-link" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample" style="border: 3px solid #1467B0 !important;"><i
                                         class="side-menu__icon fi fi-rs-square-plus"></i><span
                                         class="side-menu__label ">Create New</span>
                                 </a>
@@ -3481,6 +3482,49 @@
 
     <script>
         $(document).ready(function () {
+
+           $(document).on("click","#preview",function(){
+                // console.log(222222)
+                // console.log($('#preview').text().startsWith(" Preview"))
+                // console.log($('#preview').text().split(' ')[1].split('/')[0]=="Preview")
+                if($('#preview').text().startsWith(" Edit")){
+                    // console.log(222)
+                    $("#previewHeading").empty()
+                $("#previewHeading").append(`Create <strong class="color-primary">New Invoice</strong>`)
+                $("#addModal input,#addModal textarea").prop("readonly",false)
+                $("#addModal input[type='file']").prop("disabled",false)
+
+                $("#addModal select").prop("disabled",false)
+                $("#preview").empty()
+                $("#preview").append(`<i class="fi fi-rs-eye me-2 text-primary"></i> Preview
+                                    Invoice`)
+                                    $("#no-add-item1").attr('id',"add-item1")
+                $("#no-del-btn1").attr('id',"del-btn1")
+                $(".delete-file").each(function(){
+                    $(this).removeClass('d-none')
+                })
+
+                }else if($('#preview').text().startsWith(" Preview")){
+                    $("#previewHeading").empty()
+                    console.log(22222)
+                $("#previewHeading").append(`Update <strong class="color-primary">Invoice</strong>`)
+                $("#addModal input,#addModal textarea").prop("readonly",true)
+                $("#addModal input[type='file']").prop("disabled",true)
+
+                $("#addModal select").prop("disabled",true)
+                $("#preview").empty()
+                $("#preview").append(`<i class="fi fi-rs-edit me-2 text-primary"></i> Edit Invoice`)
+                $("#add-item1").attr('id',"no-add-item1")
+                $("#del-btn1").attr('id',"no-del-btn1")
+                $(".delete-file").each(function(){
+                    $(this).addClass('d-none')
+                })
+
+                }
+                // console.log(333)
+                // <a href="javascript:void(0)" id="preview"><i class="fi fi-rs-eye me-2 text-primary"></i> </a>
+                
+            })
             // $("#succesModal").modal("show")
             $("#succes-addtenant-close").click(() => {
                 $("#succesModal").modal("hide")
@@ -3859,33 +3903,58 @@
                 console.log(propertyName)
                 $("#propertyName").val(propertyName[0].propertyName+` (${propertyName[0].unitNumber})`)
             })
-            function checkFields() {
-                var isFilled = true;
+            // function checkFields() {
+            //     var isFilled = true;
 
-                // Check each required field for emptiness
-                $("input[type='text']:not(#fileInput), textarea, select").each(function () {
-                    if ($(this).val() === "") {
-                        isFilled = false;
-                        return false; // Exit the loop if any field is empty
-                    }
-                });
+            //     // Check each required field for emptiness
+            //     $("input[type='text']:not(#fileInput), textarea, select").each(function () {
+            //         if ($(this).val() === "") {
+            //             isFilled = false;
+            //             return false; // Exit the loop if any field is empty
+            //         }
+            //     });
 
-                // Enable or disable the save button based on field fill status
-                if (isFilled) {
-                    $("#save-button").prop("disabled", false);
-                } else {
-                    $("#save-button").prop("disabled", true);
-                }
-            }
+            //     // Enable or disable the save button based on field fill status
+            //     if (isFilled) {
+            //         $("#save-button").prop("disabled", false);
+            //     } else {
+            //         $("#save-button").prop("disabled", true);
+            //     }
+            // }
 
-            // Call the checkFields function when any input field value changes
-            $("input[type='text']:not(#fileInput), textarea, select").on("input change", function () {
-                checkFields();
-            });
+            // // Call the checkFields function when any input field value changes
+            // $("input[type='text']:not(#fileInput), textarea, select").on("input change", function () {
+            //     checkFields();
+            // });
 
-            // Call the checkFields function on page load
-            checkFields();
-            $("#add-item1").on("click", () => {
+            // // Call the checkFields function on page load
+            // checkFields();
+//             function checkFields() {
+//     var allFilled = true;
+//     $('input.form-control, select.form-control').each(function() {
+//         console.log($(this).val())
+//       if ($(this).val() === '') {
+        
+//         allFilled = false;
+//         return false; // Exit the loop if any field is empty
+//       }
+//     });
+//     return allFilled;
+//   }
+
+//   // Enable or disable the save button based on field validation
+//   $('input.form-control, select.form-control').on('change', function() {
+//     var saveButton = $('.save-invoice');
+//     if (checkFields()) {
+//       saveButton.prop('disabled', false);
+//       $("#toggle-button").prop('disabled', false);
+//     } else {
+//       saveButton.prop('disabled', true);
+//       $("#toggle-button").prop('disabled', true);
+//     }
+//   });
+  
+            $(document).on("click","#add-item1",() => {
                 $("#add-item-container1").append(`<tr class="tr">
                                             <td><input type="text" class="form-control" name="category"></td>
                                             <td><input type="text" class="form-control" name="property"></td>
@@ -3896,7 +3965,7 @@
                                             </button></td>
                                         </tr>`)
             });
-            $("#add-item1_update").on("click", () => {
+            $(document).on("click","#add-item1_update",() => {
                 $("#add-item-container1_update").append(`<tr class="tr">
                                             <td><input type="text" class="form-control" name="category_update"></td>
                                             <td><input type="text" class="form-control" name="memo_update"></td>
@@ -4508,20 +4577,76 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+
     <script>
-        (function () {
-            var
-                form = $('.form'),
-                cache_width = form.width(),
-                a3 = [655, 9000000];
-            form.submit((e) => {
-                e.preventDefault();
-            })
-            $('#create_pdf').on('click', function () {
-                $('body').scrollTop(0);
-                createPDF();
-            });
-            // function createPDF() {
+        // (function () {
+        //     var
+        //         form = $('.form'),
+        //         cache_width = form.width(),
+        //         a3 = [655, 9000000];
+        //     form.submit((e) => {
+        //         e.preventDefault();
+        //     })
+        //     $('#create_pdf').on('click', function () {
+        //         $('body').scrollTop(0);
+        //         createPDF();
+        //     });
+        //     function createPDF() {
+        //         getCanvas().then(function (canvas) {
+        //             var
+        //                 img = canvas.toDataURL("image/png"),
+        //                 doc = new jsPDF({
+        //                     unit: 'px',
+        //                     fontFamily: 'Open Sans',
+        //                     format: 'letter'
+        //                 });
+        //             var imgWidth = doc.internal.pageSize.width;
+        //             var imgHeight = doc.internal.pageSize.height;
+        //             var position = 0;
+        //             doc.addImage(img, 'JPEG', 0, position, imgWidth, imgHeight);
+        //             position -= imgHeight;
+        //             while (position > -canvas.height) {
+                       
+        //                 doc.addImage(img, 'JPEG', 0, position, imgWidth, imgHeight);
+        //                 position -= imgHeight;
+        //             }
+        //             doc.save('invoice.pdf');
+        //             form.off('submit');
+        //         });
+        //     }
+        //     function getCanvas() {
+        //         return html2canvas(form, {
+        //             imageTimeout: 2000,
+        //             removeContainer: true
+        //         });
+        //     }
+        // }());
+
+
+
+        window.onload = function () {
+    document.getElementById("create_pdf")
+        .addEventListener("click", () => {
+            const invoice = this.document.getElementById("htmlContent");
+            // console.log(invoice);
+            // console.log(window);
+            var opt = {
+                margin: 0.1,
+                filename: 'myfile.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            html2pdf().from(invoice).set(opt).save();
+        })
+}
+
+
+
+
+
+        // function createPDF() {
             //     getCanvas().then(function(canvas) {
             //         var
             //             img = canvas.toDataURL("image/png"),
@@ -4536,48 +4661,7 @@
             //         form.off('submit');
             //     });
             // }
-
-            function createPDF() {
-                getCanvas().then(function (canvas) {
-                    var
-                        img = canvas.toDataURL("image/png"),
-                        doc = new jsPDF({
-                            unit: 'px',
-                            fontFamily: 'Open Sans',
-                            format: 'letter'
-                        });
-
-                    var imgWidth = doc.internal.pageSize.width;
-                    var imgHeight = doc.internal.pageSize.height;
-
-                    var position = 0;
-                    doc.addImage(img, 'JPEG', 0, position, imgWidth, imgHeight);
-                    position -= imgHeight;
-
-                    // Determine if there are additional pages
-                    while (position > -canvas.height) {
-                        //   doc.addPage();
-                        doc.addImage(img, 'JPEG', 0, position, imgWidth, imgHeight);
-                        position -= imgHeight;
-                    }
-
-                    doc.save('invoice.pdf');
-                    // form.width(cache_width);
-                    form.off('submit');
-                });
-            }
-
-
-
-            function getCanvas() {
-                // form.width((a3[0] * 1.33333) - 80).css('max-width', 'none');
-                return html2canvas(form, {
-                    imageTimeout: 2000,
-                    removeContainer: true
-                });
-            }
-
-        }());
+            
     </script>
 </body>
 
