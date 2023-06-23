@@ -94,6 +94,7 @@ exports.getAllTaskTenant = async (req, res) => {
                 ID : vendorResult[0][0].id,
                 name: vendorResult[0][0].firstName + " "+ vendorResult[0][0].lastName,
                 email: vendorResult[0][0].email,
+                vendorPhone:vendorResult[0][0].phone
               };
               vendorData.push(vendor);
             }
