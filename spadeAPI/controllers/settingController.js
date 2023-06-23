@@ -21,7 +21,7 @@ exports.changePasssword = async function (req, res) {
     // const {currentPassword, NewPassword } = req.query;
     const {currentPassword, NewPassword } = req.body;
     // const {userId}=req.user
-    console.log(req.query,req.body)
+    // console.log(req.query,req.body)
     const {userId}=req.user
     const currentDate = new Date();
 

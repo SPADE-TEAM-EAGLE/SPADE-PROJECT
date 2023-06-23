@@ -1201,6 +1201,12 @@
                         <span style="color: #777575;">Payment was collected outside the Spade Rent.</span>
                     </label>
                     <label class="custom-control custom-radio-md mb-3">
+                        <input type="radio" class="custom-control-input" name="status" value="Unpaid">
+                        <h4 class="custom-control-label fw-bold">Unpaid</h4>
+                        <span style="color: #777575;">Payment is not received.</span>
+
+                    </label>
+                    <label class="custom-control custom-radio-md mb-3">
                         <input type="radio" class="custom-control-input" name="status" value="void">
                         <h4 class="custom-control-label fw-bold">Void</h4>
                         <span style="color: #777575;">This invoice was accidentally finalized or contains a
@@ -3657,6 +3663,8 @@
 
                         success: function (response) {
                             $("#addModal").modal("hide")
+                            $('#addModal input[type="text"], #addModal input[type="date"], #addModal textarea').val('');
+    $('#addModal select').prop('selectedIndex', 0);
                             $("#succesModal").modal("show")
 
                         },
@@ -4405,8 +4413,7 @@
 
                         success: function (response) {
                             $("#myModal_edit").modal("hide")
-                            $('#addModal input[type="text"], #addModal input[type="date"], #addModal textarea').val('');
-    $('#addModal select').prop('selectedIndex', 0);
+                           
                             $("#succesModal").modal("show")
                             getData()
                         },
