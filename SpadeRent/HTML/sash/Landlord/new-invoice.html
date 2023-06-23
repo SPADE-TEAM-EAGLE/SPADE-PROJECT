@@ -2392,7 +2392,7 @@
                     }
                 })
                 // console.log(propertyName)
-                $("#propertyName").val(propertyName[0].propertyName)
+                $("#propertyName").val(propertyName[0].propertyName+` (${propertyName[0].unitNumber})`)
             })
             function checkFields() {
                 var isFilled = true;
@@ -2865,7 +2865,7 @@ function updateTotal() {
 
             formData.append("existingImages", existingImageNames)
                     // Loop through the lineItems array and add each line item to the FormData object
-                    for (var i = 0; i < lineItems.length; i++) {
+                    for (var i = 0; i < lineItems.length-1; i++) {
                         var lineItem = lineItems[i];
                         formData.append('lineItems[' + i + '][category]', lineItem.category);
                         formData.append('lineItems[' + i + '][property]', lineItem.property);
