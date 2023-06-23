@@ -594,6 +594,115 @@
 
 <body class="app sidebar-mini ltr light-mode">
 
+        <!-- View Modal Start  -->
+        <div class="modal fade" id="viewModal-tasks" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="text-justify ps-2 border-model-line">
+                            <h2 class="modal-title mb-0">View <strong class="color-primary">Tasks</strong></h2>
+                            <!-- <button type="button" class="btn btn-primary">#Invoice Number: INV-89900A</button> -->
+                        </div>
+                        <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="viewModal-tasks">
+                            <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <label><b>Task Name</b></label>
+                                <p class="text-primary"><b  id="tenantName">John Clark</b></p>
+                            </div>
+                            <div class="col-lg-3">
+                                <label><b>Due Date</b></label>
+                                <p class="text-primary"><b id="invoiceType">June-06-2023</b></p>
+                            </div>
+                            <div class="col-lg-3">
+                                <label><b>Priority</b></label>
+                                <p class="text-primary"><b id="dueDate">High Priority</b></p>
+                            </div>
+                            <div class="col-lg-3">
+                                <label><b>Status</b></label>
+                                <p class="text-danger"><b id="invoiceStatus"><i class="fi fi-rs-clock-three" style="color: #FB233B;"></i>
+                                        Unpaid</b></p>
+                            </div>
+                            <div class="col-lg-12 mt-5">
+                                <label><b>Notes</b></label>
+                                <p class="text-primary"><b id="propertyAddress">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</b></p>
+                            </div>
+                            <div class="col-lg-12 mt-5">
+                                <div style="display: flex;">
+                                    <p class="text-primary"><b>Line Items</b></p>
+                                    <hr
+                                        style="height: 2px; background: black; width: 88%; margin-left: 83px; position: absolute; margin-top: 10px;">
+                                </div>
+                            </div>
+                            <!-- <div class="col-lg-10 mt-5">
+                                
+                            </div> -->
+                        </div>
+                        <div class="row mt-5">
+                            <div class="col-12 mb-5">
+                                <div class="table-responsive">
+                                    <table class="table text-nowrap table-borderless text-md-nowrap mg-b-0 mb-0"
+                                        id="lineItemsTable">
+                                        <thead>
+                                            <tr>
+                                                <th>Vendor</th>
+                                                <th>Property</th>
+                                                <th>Tenant</th>
+                                                <!-- <th>Amount</th> -->
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody id="view-invoice-line-item">
+                                            <tr class="tr">
+                                                <td>
+                                                    <p class="text-primary"><b>John Clark / 0321-2045564</b></p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-primary"><b>Test / 200</b></p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-primary"><b>John Smith / 0321-2045564</b></p>
+                                                </td>
+                                                <!-- <td>
+                                                    <p class="text-primary"><b>$200.00</b></p>
+                                                </td> -->
+                                                <!-- <td><button type="button" class="btn" id="del-btn1">
+                                                        <i class="fi fi-rs-trash text-danger fs-5"></i>
+                                                    </button></td> -->
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+    
+                            <!-- <div class="col-md-12 col-lg-8 mt-5">
+                                <label><b>Additional Information</b></label>
+                                <p class="text-primary"><b id="notes">Testing 123</b></p>
+                            </div>
+                            <div class="col-md-12 col-lg-4 mt-5">
+                                <span class="float-end">
+                                    <label class="form-label fw-bold m-0">Balance Due</label>
+                                    <h1 class="text-primary fw-bold m-0" id="totalAmount">$200.00</h1>
+                                </span>
+                            </div> -->
+                            <div class="col-lg-12 mt-5 mb-5" id="view-invoice-images">
+                                <img src="../assets/images/demo_img.png" alt=""> &nbsp;
+                                <img src="../assets/images/demo_img.png" alt=""> &nbsp;
+                                <img src="../assets/images/demo_img.png" alt=""> &nbsp;
+                                <img src="../assets/images/demo_img.png" alt=""> &nbsp;
+                                <img src="../assets/images/demo_img.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+        </div>
+        <!-- View Modal End  -->
+
     <!-- GLOBAL-LOADER -->
     <!-- <div id="global-loader">
         <img src="../assets/images/loader.svg" class="loader-img" alt="Loader">
@@ -2909,7 +3018,8 @@
                                     '<ul class="dropdown-menu">' +
                                     '<li><a class="edit-option dropdown-item text-primary" href="javascript:void(0)">Edit</a></li>' +
                                     '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>' +
-                                    `<li><a class="dropdown-item text-success" href="./view-property.html?propertyId=${property.id}">View</a></li>` +
+                                    `<li><a class="dropdown-item text-success" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#viewModal-tasks">View</a></li>` +
+                                    // `<li><a class="dropdown-item text-success" href="./view-property.html?propertyId=${property.id}">View</a></li>` +
                                     '</ul></td>';
                                 // Create a table row and append the generated columns
                                 var row = '<tr>' + image + taskName + assignTo + dueDate +
