@@ -2327,7 +2327,7 @@ color: #000;
                     $("#succesModal").modal("hide")
                     console.log(tenantID)
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/sendInvitationLink',
+                        url: 'https://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/sendInvitationLink',
                         type: 'POST',
                         data: JSON.stringify({
                             tenantID: tenantID
@@ -2351,7 +2351,7 @@ color: #000;
                 })
                 // $("#succesModal").modal("show")
             $.ajax({
-                url: 'http://localhost:3000/api/spade/getStates',
+                url: 'https://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getStates',
                 method: 'GET',
                 success: function({data}) {
                     // Handle state selection change
@@ -2374,7 +2374,7 @@ color: #000;
                 }
             });
             $.ajax({
-                url: 'http://localhost:3000/api/spade/getPropertyUnitsTenant',
+                url: 'https://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getPropertyUnitsTenant',
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -2572,7 +2572,7 @@ color: #000;
                 $("#addModal").modal("hide")
                     // Make the AJAX call
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/tenants',
+                    url: 'https://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/tenants',
                     type: 'POST',
                     data: JSON.stringify(formData),
                     contentType: "application/json; charset=utf-8",

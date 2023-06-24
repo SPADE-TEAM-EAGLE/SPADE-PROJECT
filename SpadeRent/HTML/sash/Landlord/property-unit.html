@@ -1984,7 +1984,7 @@
 
             // Send the form data to the server using AJAX
             $.ajax({
-                url: 'http://localhost:3000/api/spade/property',
+                url: 'https://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/property',
                 type: 'POST',
                 data: formData,
                 contentType: false,
@@ -2014,7 +2014,7 @@
             // $("#viewUnits").attr("href",`./property-unit.html?propertyId=${propertyId}`)
         $("#add-units").click(() => {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/addMoreUnits',
+                url: 'https://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/addMoreUnits',
                 type: 'POST',
                 data: JSON.stringify({
                     "propertyID": propertyId
@@ -2034,7 +2034,7 @@
 
         function getData() {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/PropertyUnits',
+                url: 'https://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/PropertyUnits',
                 type: 'GET',
                 data: {
                     propertyId
@@ -2146,7 +2146,7 @@
                         });
                         console.log(propertyId)
                         $.ajax({
-                            url: 'http://localhost:3000/api/spade/PropertyUnitsUpdates',
+                            url: 'https://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/PropertyUnitsUpdates',
                             type: 'PUT',
                             data: JSON.stringify({
                                 id: values[0],
@@ -2187,7 +2187,7 @@
                                 // console.log(values)
                         });
                         $.ajax({
-                            url: 'http://localhost:3000/api/spade/deleteMoreUnits',
+                            url: 'https://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/deleteMoreUnits',
                             type: 'DELETE',
                             data: JSON.stringify({
                                 "propertyID": propertyId,
