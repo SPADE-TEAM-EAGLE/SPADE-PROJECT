@@ -657,6 +657,112 @@
 
         </div>
     </div> -->
+    <div class="modal fade" id="viewModal-tasks" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="text-justify ps-2 border-model-line">
+                        <h2 class="modal-title mb-0">View <strong class="color-primary">Tasks</strong></h2>
+                        <!-- <button type="button" class="btn btn-primary">#Invoice Number: INV-89900A</button> -->
+                    </div>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="viewModal-tasks">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <label><b>Task Name</b></label>
+                            <p class="text-primary"><b  id="taskName_view">John Clark</b></p>
+                        </div>
+                        <div class="col-lg-3">
+                            <label><b>Due Date</b></label>
+                            <p class="text-primary"><b id="dueDate_view">June-06-2023</b></p>
+                        </div>
+                        <div class="col-lg-3">
+                            <label><b>Priority</b></label>
+                            <p class="text-primary"><b id="priority_view">High Priority</b></p>
+                        </div>
+                        <div class="col-lg-3">
+                            <label><b>Status</b></label>
+                            <p class="text-danger"><b id="status_view"><i class="fi fi-rs-clock-three" style="color: #FB233B;"></i>
+                                    Unpaid</b></p>
+                        </div>
+                        <div class="col-lg-12 mt-5">
+                            <label><b>Notes</b></label>
+                            <p class="text-primary"><b id="notes_view">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</b></p>
+                        </div>
+                        <div class="col-lg-12 mt-5">
+                            <div style="display: flex;">
+                                <p class="text-primary"><b>Line Items</b></p>
+                                <hr
+                                    style="height: 2px; background: black; width: 88%; margin-left: 83px; position: absolute; margin-top: 10px;">
+                            </div>
+                        </div>
+                        <!-- <div class="col-lg-10 mt-5">
+                            
+                        </div> -->
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-12 mb-5">
+                            <div class="table-responsive">
+                                <table class="table text-nowrap table-borderless text-md-nowrap mg-b-0 mb-0"
+                                    id="lineItemsTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Vendor</th>
+                                            <th>Property</th>
+                                            <th>Tenant</th>
+                                            <!-- <th>Amount</th> -->
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody id="view-task-line-item">
+                                        <tr class="tr">
+                                            <td>
+                                                <p class="text-primary"><b>John Clark / 0321-2045564</b></p>
+                                            </td>
+                                            <td>
+                                                <p class="text-primary"><b>Test / 200</b></p>
+                                            </td>
+                                            <td>
+                                                <p class="text-primary"><b>John Smith / 0321-2045564</b></p>
+                                            </td>
+                                            <!-- <td>
+                                                <p class="text-primary"><b>$200.00</b></p>
+                                            </td> -->
+                                            <!-- <td><button type="button" class="btn" id="del-btn1">
+                                                    <i class="fi fi-rs-trash text-danger fs-5"></i>
+                                                </button></td> -->
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- <div class="col-md-12 col-lg-8 mt-5">
+                            <label><b>Additional Information</b></label>
+                            <p class="text-primary"><b id="notes">Testing 123</b></p>
+                        </div>
+                        <div class="col-md-12 col-lg-4 mt-5">
+                            <span class="float-end">
+                                <label class="form-label fw-bold m-0">Balance Due</label>
+                                <h1 class="text-primary fw-bold m-0" id="totalAmount">$200.00</h1>
+                            </span>
+                        </div> -->
+                        <div class="col-lg-12 mt-5 mb-5" id="view-task-images">
+                            <img src="../assets/images/demo_img.png" alt=""> &nbsp;
+                            <img src="../assets/images/demo_img.png" alt=""> &nbsp;
+                            <img src="../assets/images/demo_img.png" alt=""> &nbsp;
+                            <img src="../assets/images/demo_img.png" alt=""> &nbsp;
+                            <img src="../assets/images/demo_img.png" alt="">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="myModal_edit" aria-labelledby="myModal" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-scrollable">
             <div class="modal-content">
@@ -1060,12 +1166,12 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <!-- <h3 class="page-titlee text-white" style="font-weight: 100; margin-bottom: 0px;">Welcome to Spade Portal</h3> -->
-                                        <h1 class="page-titlee text-white" style="font-weight: 700; margin-bottom: 0px; border-radius: 40px;"><span style="font-weight: 300;">Welcome</span> John Clark</h1>
+                                        <h1 class="page-titlee text-white" style="font-weight: 700; margin-bottom: 0px; border-radius: 40px;" id="tenant-name"><span style="font-weight: 300;">Welcome</span> John Clark</h1>
                                         <div style="width: 100px; height: 6px; background-color: #1467B0; border-radius: 40px;"></div>
                                         <h4 class="mt-3 text-white mb-3" style="font-weight: 300;">Balance Due</h4>
                                         <h1 class="mt-3 text-white font-weight-900" style="font-weight: 800; margin-bottom: 0px;">$356.00</h1>
                                         <div style="display: flex; align-items: center;"> <i class="side-menu__icon fi fi-rs-calendar text-white"></i><span class="side-menu__labell text-white">&nbsp;&nbsp; Your next payment of $356.00 is due on 5/1/2023&emsp;<a href="#" class="btn btn-primary btn-pill">Pay Now</a></span></div>
-                                        <div style="display: flex; align-items: center;"><i class="side-menu__icon fi fi-rs-building text-white"></i><span class="side-menu__labell text-white">&nbsp;&nbsp; <span><b>Pensgate St</b></span> <br>&nbsp;&nbsp; 9430 Research Blvd. Ste 2-350 Austin TX 78759</span>
+                                        <div style="display: flex; align-items: center;"><i class="side-menu__icon fi fi-rs-building text-white"></i><span class="side-menu__labell text-white" id="tenant-address">&nbsp;&nbsp; <span><b>Pensgate St</b></span> <br>&nbsp;&nbsp; 9430 Research Blvd. Ste 2-350 Austin TX 78759</span>
                                         </div>
 
                                     </div>
@@ -1189,258 +1295,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody id="table_body">
-                                                    <tr>
-                                                        <td></td>
-                                                        <td><img src="../assets/images/Group-user.png" alt=""></td>
-                                                        <td style="font-weight: 600;">
-                                                            <p style="font-weight: 600;" class="mb-1">Sink is Leaking
-                                                            </p>
-                                                            <span class="font-weight-normal text-default">8 Days
-                                                                ago</span>
-                                                        </td>
-                                                        <td style="font-weight: 600;text-align: center;display: flex;">
-                                                            <div class="me-2">
-                                                                <img class="avatar brround avatar-md" src="../assets/images/users/2.jpg" alt="avatar-img">
-                                                                <div class="media-body valign-middle mt-0">
-                                                                    <a href="javascript:void(0)" class="text-dark fw-semibold">User</a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="me-2">
-                                                                <img class="avatar brround avatar-md" src="../assets/images/users/2.jpg" alt="avatar-img">
-                                                                <div class="media-body valign-middle mt-0">
-                                                                    <a href="javascript:void(0)" class="text-dark fw-semibold">User</a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="me-2">
-                                                                <img class="avatar brround avatar-md" src="../assets/images/users/2.jpg" alt="avatar-img">
-                                                                <div class="media-body valign-middle mt-0">
-                                                                    <a href="javascript:void(0)" class="text-dark fw-semibold">Tenant</a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <p style="font-weight: 600;" class="mb-1">April-05-2020
-                                                            </p>
-                                                            <span class="font-weight-normal text-danger"> <i class="fe fe-circle me-1"></i>High Priority</span>
-                                                        </td>
-                                                        <td>
-                                                            <p style="font-weight: 600;" class="mb-1">Houston Shopping Center</p>
-                                                            <span class="font-weight-normal">Unit Number: 103A</span>
-                                                        </td>
-                                                        <td>
-                                                            <p style="font-weight: 600;" class="mb-1 text-warning">Not Started</p>
-                                                        </td>
-                                                        <td>
-                                                            <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
-
-                                                            <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item text-primary" href="javascript:void(0)">Edit</a></li>
-                                                                <li><a class="dropdown-item text-danger" href="javascript:void(0)">Delete</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item text-success" href="javascript:void(0)">View</a></li>
-                                                            </ul>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                      <td></td>
-                                                        <td><img src="../assets/images/Group-create.png" alt=""></td>
-                                                        <td style="font-weight: 600;">
-                                                            <p style="font-weight: 600;" class="mb-1">Electrical Issues
-                                                            </p>
-                                                            <span class="font-weight-normal text-default">By John Carter - 8 Days ago</span>
-                                                        </td>
-                                                        <td>
-                                                            <b> Not Assigned</b>
-                                                        </td>
-                                                        <td>
-                                                            <b>Not Set</b>
-                                                        </td>
-                                                        <td>
-                                                            <p style="font-weight: 600;" class="mb-1">Houston Shopping Center</p>
-                                                            <span class="font-weight-normal">Unit Number: 103A</span>
-                                                        </td>
-                                                        <td>
-                                                            <p style="font-weight: 600;" class="mb-1 text-default">Not Started</p>
-                                                        </td>
-                                                        <td>
-                                                            <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
-
-                                                            <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item text-primary" href="javascript:void(0)">Edit</a></li>
-                                                                <li><a class="dropdown-item text-danger" href="javascript:void(0)">Delete</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item text-success" href="javascript:void(0)">View</a></li>
-                                                            </ul>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td></td>
-                                                        <td><img src="../assets/images/Group-user.png" alt=""></td>
-                                                        <td style="font-weight: 600;">
-                                                            <p style="font-weight: 600;" class="mb-1">Sink is Leaking
-                                                            </p>
-                                                            <span class="font-weight-normal text-default">8 Days
-                                                                ago</span>
-                                                        </td>
-                                                        <td style="font-weight: 600;text-align: center;display: flex;">
-                                                            <div class="me-2">
-                                                                <img class="avatar brround avatar-md" src="../assets/images/users/2.jpg" alt="avatar-img">
-                                                                <div class="media-body valign-middle mt-0">
-                                                                    <a href="javascript:void(0)" class="text-dark fw-semibold">User</a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="me-2">
-                                                                <img class="avatar brround avatar-md" src="../assets/images/users/2.jpg" alt="avatar-img">
-                                                                <div class="media-body valign-middle mt-0">
-                                                                    <a href="javascript:void(0)" class="text-dark fw-semibold">User</a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="me-2">
-                                                                <img class="avatar brround avatar-md" src="../assets/images/users/2.jpg" alt="avatar-img">
-                                                                <div class="media-body valign-middle mt-0">
-                                                                    <a href="javascript:void(0)" class="text-dark fw-semibold">Tenant</a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <p style="font-weight: 600;" class="mb-1">April-05-2020
-                                                            </p>
-                                                            <span class="font-weight-normal text-danger"> <i class="fe fe-circle me-1"></i>High Priority</span>
-                                                        </td>
-                                                        <td>
-                                                            <p style="font-weight: 600;" class="mb-1">Houston Shopping Center</p>
-                                                            <span class="font-weight-normal">Unit Number: 103A</span>
-                                                        </td>
-                                                        <td>
-                                                            <p style="font-weight: 600;" class="mb-1 text-warning">Not Started</p>
-                                                        </td>
-                                                        <td>
-                                                            <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
-
-                                                            <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item text-primary" href="javascript:void(0)">Edit</a></li>
-                                                                <li><a class="dropdown-item text-danger" href="javascript:void(0)">Delete</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item text-success" href="javascript:void(0)">View</a></li>
-                                                            </ul>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                       <td></td>
-                                                        <td><img src="../assets/images/Group-create.png" alt=""></td>
-                                                        <td style="font-weight: 600;">
-                                                            <p style="font-weight: 600;" class="mb-1">Electrical Issues
-                                                            </p>
-                                                            <span class="font-weight-normal text-default">By John Carter - 8 Days ago</span>
-                                                        </td>
-                                                        <td>
-                                                            <b> Not Assigned</b>
-                                                        </td>
-                                                        <td>
-                                                            <b>Not Set</b>
-                                                        </td>
-                                                        <td>
-                                                            <p style="font-weight: 600;" class="mb-1">Houston Shopping Center</p>
-                                                            <span class="font-weight-normal">Unit Number: 103A</span>
-                                                        </td>
-                                                        <td>
-                                                            <p style="font-weight: 600;" class="mb-1 text-default">Not Started</p>
-                                                        </td>
-                                                        <td>
-                                                            <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
-
-                                                            <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item text-primary" href="javascript:void(0)">Edit</a></li>
-                                                                <li><a class="dropdown-item text-danger" href="javascript:void(0)">Delete</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item text-success" href="javascript:void(0)">View</a></li>
-                                                            </ul>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                      <td></td>
-                                                        <td><img src="../assets/images/Group-user.png" alt=""></td>
-                                                        <td style="font-weight: 600;">
-                                                            <p style="font-weight: 600;" class="mb-1">Sink is Leaking
-                                                            </p>
-                                                            <span class="font-weight-normal text-default">8 Days
-                                                                ago</span>
-                                                        </td>
-                                                        <td style="font-weight: 600;text-align: center;display: flex;">
-                                                            <div class="me-2">
-                                                                <img class="avatar brround avatar-md" src="../assets/images/users/2.jpg" alt="avatar-img">
-                                                                <div class="media-body valign-middle mt-0">
-                                                                    <a href="javascript:void(0)" class="text-dark fw-semibold">User</a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="me-2">
-                                                                <img class="avatar brround avatar-md" src="../assets/images/users/2.jpg" alt="avatar-img">
-                                                                <div class="media-body valign-middle mt-0">
-                                                                    <a href="javascript:void(0)" class="text-dark fw-semibold">User</a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="me-2">
-                                                                <img class="avatar brround avatar-md" src="../assets/images/users/2.jpg" alt="avatar-img">
-                                                                <div class="media-body valign-middle mt-0">
-                                                                    <a href="javascript:void(0)" class="text-dark fw-semibold">Tenant</a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <p style="font-weight: 600;" class="mb-1">April-05-2020
-                                                            </p>
-                                                            <span class="font-weight-normal text-danger"> <i class="fe fe-circle me-1"></i>High Priority</span>
-                                                        </td>
-                                                        <td>
-                                                            <p style="font-weight: 600;" class="mb-1">Houston Shopping Center</p>
-                                                            <span class="font-weight-normal">Unit Number: 103A</span>
-                                                        </td>
-                                                        <td>
-                                                            <p style="font-weight: 600;" class="mb-1 text-warning">Not Started</p>
-                                                        </td>
-                                                        <td>
-                                                            <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
-
-                                                            <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item text-primary" href="javascript:void(0)">Edit</a></li>
-                                                                <li><a class="dropdown-item text-danger" href="javascript:void(0)">Delete</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item text-success" href="javascript:void(0)">View</a></li>
-                                                            </ul>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                       <td></td>
-                                                        <td><img src="../assets/images/Group-create.png" alt=""></td>
-                                                        <td style="font-weight: 600;">
-                                                            <p style="font-weight: 600;" class="mb-1">Electrical Issues
-                                                            </p>
-                                                            <span class="font-weight-normal text-default">By John Carter - 8 Days ago</span>
-                                                        </td>
-                                                        <td>
-                                                            <b> Not Assigned</b>
-                                                        </td>
-                                                        <td>
-                                                            <b>Not Set</b>
-                                                        </td>
-                                                        <td>
-                                                            <p style="font-weight: 600;" class="mb-1">Houston Shopping Center</p>
-                                                            <span class="font-weight-normal">Unit Number: 103A</span>
-                                                        </td>
-                                                        <td>
-                                                            <p style="font-weight: 600;" class="mb-1 text-default">Not Started</p>
-                                                        </td>
-                                                        <td>
-                                                            <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
-
-                                                            <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item text-primary" href="javascript:void(0)">Edit</a></li>
-                                                                <li><a class="dropdown-item text-danger" href="javascript:void(0)">Delete</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item text-success" href="javascript:void(0)">View</a></li>
-                                                            </ul>
-                                                        </td>
-                                                    </tr>
+                                                    
                                                 </tbody>
                                             </table>
                                         </div>
@@ -2314,6 +2169,88 @@
     <script src="../assets/plugins/fancyuploder/fancy-uploader.js"></script> -->
     <script>
         $(document).ready(()=>{
+            var taskInfo=[]
+            $(document).on('click', ".view-task", function (e) {
+                e.preventDefault();
+                                const taskIdElement = $(this).closest("tr").find(".task-id");
+
+                                taskId = taskIdElement.attr("id")
+
+                                const data = taskInfo.find(obj => obj.id.toString() == taskId);
+                                console.log(data)
+                                selectedFiles = data.taskImages.split(",")
+
+                                updateSelectedFilesContainer()
+                                $("#taskName_view").text("huhuh");
+                                $("#dueDate_view").text(data.dueDate);
+                                $("#priority_view").text(data.priority);
+                                $("#status_view").text(data.status);
+                                $("#notes_view").text(data.notes);
+                                console.log($("#notes_view"))
+                //                 $("#priority_update").find(`option[name="${data.priority.toLowerCase()}"]`).prop("selected", true);
+                //                 $("#status_update").find(`option[value="${data.status}"]`).prop("selected", true);
+                //                 data.AssignTo.forEach(({
+                //                     ID,
+                //                     name
+                //                 }) => {
+                //                     $("#assignee_update").find(`option[value="${ID}"]`).prop("selected", true);
+                //                     $(".select2-selection__rendered").append(`<li class="select2-selection__choice" title="${name}"><span class="select2-selection__choice__remove" role="presentation">×</span>${name}</li>`)
+                //                 })
+
+                //                 $('#myModal_edit').modal('show');
+                // $("#tenantName").text(data.firstName + " " + data.lastName)
+                // $("#invoiceType").text(data.invoiceType)
+                // $("#dueDate").text(data.dueDate)
+                // $("#invoiceStatus").text(data.status)
+                // $("#propertyAddress").text(data.pAddress)
+                // // $("#invoiceCategory").text(data.invoiceType)
+                // // $("#invoiceProperty").text(data.invoiceType)
+                // // $("#invoiceMemo").text(data.invoiceType)
+                // // $("#invoiceAmount").text(data.invoiceType)
+                // // $("#client-id").append(`<h5 class="fw-bold" style="color: 
+                // //                 #562AC8;">BILLED TO</h5>
+                // //                     <p class="text-dark">${data.firstName + " " + data.lastName}<br>${data.tAddress
+                // //     }<br>${data.tCity},
+                // //                         ${data.tState}<br>${data.tZipcode}<br>United States<br>${data.tPhoneNumber}</p>`)
+                // // console.log(1)
+                // // $("#owner-id").empty()
+                // // $("#owner-id").append(`                                    <h5 class="text-dark fw-bold">${data.companyName}</h5>
+                // //                     <p class="text-dark">${data.pAddress}<br>${data.pCity}, ${data.pState}<br>${data.pZipCode}<br>United
+                // //                         States<br>1-888-123-8910</p>`)
+                // // $("#table-body").empty()
+                // // var dateObj = new Date(data.created_at);
+                // // var day = dateObj.getDate();
+                // // var month = dateObj.getMonth() + 1;
+                // // var year = dateObj.getFullYear();
+                $("#view-task-line-item").empty()
+                data.AssignTo.forEach((item) => {
+
+                    console.log(item)
+                    $("#view-task-line-item").append(`<tr class="tr">
+                                                <td>
+                                                    <p class="text-primary"><b>${item.name} / ${item.vendorPhone}</b></p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-primary"><b>${data.propertyName} / ${data.unitNumber}</b></p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-primary"><b>${data.tfirstName+" "+data.tlastName} / ${data.tenantPhone}</b></p>
+                                                </td>
+                                                
+                                            </tr>`)
+
+
+                })
+                // $("#totalAmount").text('$ ' + data.totalAmount)
+                const images = data.taskImages.split(",")
+                // $("#notes").text(data.note || "N/A")
+                $("#view-task-images").empty()
+                images.forEach((image) => {
+                    $("#view-task-images").append(`
+                            <img src="../../../../spadeAPI/uploads/${image}" width=200px height=200px alt=""> &nbsp;`)
+                })
+                $("#viewModal-tasks").modal("show")
+            })
             $.ajax({
                 url: 'http://localhost:3000/api/spade/getTenantByID',
                 type: 'GET',
@@ -2325,13 +2262,66 @@
                 success: function(response) {
                     console.log(1111111)
                     console.log(response)
-                    // console.log(data)
-                    $(".company-name").text(`${data[0][0].companyName} | ${data[0][0].firstName+" "+data[0][0].lastName}`)
+                    console.log(response.data)
+                    $("#tenant-name").empty()
+                
+
+
+                    $("#tenant-name").append(`<span style="font-weight: 300;">Welcome</span> ${response.data.firstName +" "+response.data.lastName}`)
+                    $("#tenant-address").empty()
+                    $("#tenant-address").append(`&nbsp;&nbsp; <span><b>Pensgate St</b></span> <br>&nbsp;&nbsp; ${response.data.tAddress+ " " +response.data.tCity+ " " +response.data.tState+ " " +response.data.tZipcode}`)
                 },
                 error: function(xhr, status, error) {
                     window.alert('Error: ' + error);
                 }
             });
+            function updateSelectedFilesContainer() {
+                var selectedFilesContainer = $('.file-grid');
+                selectedFilesContainer.empty();
+                console.log(selectedFiles)
+                selectedFiles.forEach(function(file, index) {
+
+                    var fileElement = $('<div>')
+                        .addClass('selected-file')
+                        .append(
+                            $('<img>')
+                            .addClass('file-preview')
+                            .attr('src', typeof file === "object" ? URL.createObjectURL(file) : '../../../../spadeAPI/uploads/' + file)
+                        )
+                        .append(
+                            $('<div>')
+                            .addClass('file-details')
+                            .append($('<span>').text("Image-" + (index + 1)))
+                            // .append($('<span>').text(fileSize))
+                        )
+                        .append(
+                            $('<span>')
+                            .addClass('delete-file')
+                            .text('X')
+                            .attr('data-index', index)
+                        )
+                        .appendTo(selectedFilesContainer);
+
+                });
+
+            }
+
+            function formatFileSize(bytes) {
+                if (bytes === 0) return '0 Bytes';
+                var k = 1024;
+                var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+                var i = Math.floor(Math.log(bytes) / Math.log(k));
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+            }
+
+            function truncateFileName(fileName) {
+                var maxFileNameLength = 10; // Define the maximum length of the file name
+                if (fileName.length > maxFileNameLength) {
+                    return fileName.substring(0, maxFileNameLength) + '...'; // Truncate the file name
+                }
+
+                return fileName;
+            }
             $.ajax({
                     url: 'http://localhost:3000/api/spade/getAllTaskTenant',
                     type: 'GET',
@@ -2348,7 +2338,7 @@
                             $("#user-name").text(response.user)
 
                             var tableBody = $('#table_body');
-
+                            taskInfo=response.data[0]
                             tableBody.empty();
                             function toTitleCase(str) {
                                 return str.replace(/\w\S*/g, function (txt) {
@@ -2405,7 +2395,7 @@
                                     '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
                                     '<ul class="dropdown-menu">' +
 
-                                    `<li><a class="dropdown-item text-success" href="./view-property.html?propertyId=${task.id}">View</a></li>`
+                                        `<li><a class="dropdown-item text-success view-task" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#">View</a></li>`
                                     '</ul></td>';
                                 // Create a table row and append the generated columns
                                 var row = '<tr>' + image + taskName + assignTo + dueDate +
@@ -2475,7 +2465,7 @@
     <script>
         function logout() {    
           localStorage.removeItem('authtoken'); 
-          window.open('./login_module.html', "_blank")                  
+          window.open('./login_module.html', "_self")                  
           window.close();
           console.log('Done');
         }
