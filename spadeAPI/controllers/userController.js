@@ -100,7 +100,7 @@ exports.getUser = (req, res) => {
 
 exports.Signin = async function (req, res) {
   const { email, password, tenant } = req.query;
-  // console.log(req.query)
+  console.log(req.query)
   // console.log(1)
   // let selectResult;
   try {
