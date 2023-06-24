@@ -10,6 +10,14 @@ const createConnection = async () => {
     user: "root",
     password: "",
     database: "spaid",
+
+
+
+    // host: "database-1.cwaiqakemhu8.us-east-1.rds.amazonaws.com",
+    // user: "admin",
+    // password: "matz1234",
+    // database: "my_db",
+  
   });
 
   return connection;

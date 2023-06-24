@@ -101,7 +101,8 @@ $(document).ready(function () {
         window.location='./properties-all.html'
     })
     $.ajax({
-        url: 'http://localhost:3000/api/spade/getStates',
+        // url: 'http://localhost:3000/api/spade/getStates',
+        url: 'https://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getStates',
         method: 'GET',
         success: function({data}) {
             // Handle state selection change
