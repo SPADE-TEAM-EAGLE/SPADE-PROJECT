@@ -65,7 +65,7 @@ exports.changePasswordTenant = async function (req, res) {
   // const {currentPassword, NewPassword } = req.query;
   const {currentPassword, NewPassword } = req.body;
   // const {userId}=req.user
-  const {userId}=req.body
+  const {userId}=req.user
   const currentDate = new Date();
 
   try {
