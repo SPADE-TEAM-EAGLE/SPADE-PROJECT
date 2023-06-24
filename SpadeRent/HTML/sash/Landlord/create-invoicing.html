@@ -810,7 +810,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div >
+                    <div>
                         <div class="container-fluid" style="    border-right: 1px solid #000000;
                              border-bottom: 1px solid #000000;
                               border-left: 1px solid #000000;
@@ -1181,8 +1181,7 @@
                                 <span class="custom-control-label">Notify Assignee(s)</span>
                             </label>
                     </div> -->
-                    <button class="btn btn-outline-default btn-pill button close" data-bs-dismiss="modal"
-                        >Close</button>
+                    <button class="btn btn-outline-default btn-pill button close" data-bs-dismiss="modal">Close</button>
                     <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
                     <a href="javascript:void(0)" class="btn text-light btn-pill button disabled"
                         style='background-color:#1467B0;'>Update Status</a>
@@ -1328,10 +1327,11 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="text-justify ps-2 border-model-line">
-                        <h2 class="modal-title mb-0">Create <strong class="color-primary">New Invoice</strong></h2>
+                        <h2 class="modal-title mb-0" id="previewHeading">Create <strong class="color-primary">New
+                                Invoice</strong></h2>
                         <button type="button" class="btn btn-primary">#Invoice Number: INV-89900A</button>
                     </div>
-                    <button class="btn-close top-close" data-bs-dismiss="modal" aria-label="Close" >
+                    <button class="btn-close top-close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
                     </button>
                 </div>
@@ -1344,8 +1344,7 @@
                                 data-bs-original-title="Select Tenant" data-bs-container="#addModal">
                                 <option label="Choose one">
                                 </option>
-                                <option value="Repeat Yearly">Repeat Yearly</option>
-                                <option value="Repeat Monthly">Repeat Monthly</option>
+
                             </select>
                             <span class="text-danger d-none">Photos are required!</span>
                         </div>
@@ -1353,12 +1352,11 @@
                         <div class="col-md-12 col-lg-6">
                             <label class="form-label fw-bold fs-18">Select Property</label>
                             <select class="form-control select2 form-select d-block" data-placeholder="Select Property"
-                                name="tenants" id="tenants" data-bs-placement="top" data-bs-toggle="tooltip" title=""
-                                data-bs-original-title="Select Property" data-bs-container="#addModal">
+                                name="tenants" id="propertyName" data-bs-placement="top" data-bs-toggle="tooltip"
+                                title="" data-bs-original-title="Select Property" data-bs-container="#addModal">
                                 <option label="Choose one">
                                 </option>
-                                <option value="Repeat Yearly">Repeat Yearly</option>
-                                <option value="Repeat Monthly">Repeat Monthly</option>
+
                             </select>
                             <span class="text-danger d-none">Photos are required!</span>
                         </div>
@@ -1366,12 +1364,11 @@
                         <div class="col-md-12 col-lg-6">
                             <label class="form-label fw-bold fs-18">Select Unit</label>
                             <select class="form-control select2 form-select d-block" data-placeholder="Select Unit"
-                                name="tenants" id="tenants" data-bs-placement="top" data-bs-toggle="tooltip" title=""
-                                data-bs-original-title="Select Unit" data-bs-container="#addModal">
+                                name="tenants" id="propertyUnit" data-bs-placement="top" data-bs-toggle="tooltip"
+                                title="" data-bs-original-title="Select Unit" data-bs-container="#addModal">
                                 <option label="Choose one">
                                 </option>
-                                <option value="Repeat Yearly">Repeat Yearly</option>
-                                <option value="Repeat Monthly">Repeat Monthly</option>
+
                             </select>
                             <span class="text-danger d-none">Photos are required!</span>
                         </div>
@@ -1393,9 +1390,9 @@
                         </div>
                         <div class="col-md-8 col-lg-6">
                             <label class="form-label fw-bold fs-18">Property Name</label>
-                            <input type="text" class="form-control form" id="propertyName" value="" readonly
-                                data-bs-placement="top" data-bs-toggle="tooltip" title=""
-                                data-bs-original-title="Enter Property Name here" data-bs-container="#addModal">
+                            <input type="text" class="form-control form" value="" readonly data-bs-placement="top"
+                                data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Property Name here"
+                                data-bs-container="#addModal">
                             <span class="text-danger d-none">Photos are required!</span>
                         </div>
                         <div class="col-md-8 col-lg-6">
@@ -1490,10 +1487,12 @@
                                                     data-bs-placement="top" data-bs-toggle="tooltip" title=""
                                                     data-bs-original-title="Enter memo here"
                                                     data-bs-container="#addModal"></td>
-                                            <td><input type="text" class="form-control" name="amount"
+                                            <td><input type="text" class="form-control" name="amount" id="amountField"
                                                     data-bs-placement="top" data-bs-toggle="tooltip" title=""
                                                     data-bs-original-title="Enter amount here"
-                                                    data-bs-container="#addModal"></td>
+                                                    data-bs-container="#addModal"
+                                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '')">
+                                            </td>
                                             <td><button type="button" class="btn" id="del-btn1">
                                                     <i class="fi fi-rs-trash text-danger fs-5"></i>
                                                 </button></td>
@@ -1558,16 +1557,17 @@
                     <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
                     <div class="btn-group rounded-split mt-2 mb-2">
                         <button type="button" class="btn btn-pill btn-primary save-invoice">Save</button>
-                        <button type="button" class="btn btn-pill btn-primary dropdown-toggle px-1"
+                        <button type="button" class="btn btn-pill btn-primary dropdown-toggle px-1" id="toggle-button"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="javascript:void(0)"><i class="fi fi-rs-eye me-2 text-primary"></i> Preview
+                            <li><a href="javascript:void(0)" id="preview"><i class="fi fi-rs-eye me-2 text-primary"></i>
+                                    Preview
                                     Invoice</a></li>
                             <li><a href="javascript:void(0)" class="save-invoice"><i
-                                        class="fi fi-rs-disk me-2 text-primary "></i> Save & Send</a></li>
+                                        class="fi fi-rs-disk me-2 text-primary"></i> Save & Send</a></li>
                             <li>
                                 <a href="javascript:void(0)" class="save-invoice"> <i
                                         class="fi fi-rs-print me-2 text-primary "></i>Save & Print</a>
@@ -1579,6 +1579,7 @@
             </div>
         </div>
     </div>
+
     <div class="modal fade" id="myModal_edit" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
@@ -1587,7 +1588,7 @@
                         <h2 class="modal-title mb-0">Edit <strong class="color-primary">Invoice</strong></h2>
                         <button type="button" class="btn btn-primary">#Invoice Number: INV-89900A</button>
                     </div>
-                    <button class="btn-close top-close" data-bs-dismiss="modal" aria-label="Close" >
+                    <button class="btn-close top-close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
                     </button>
                 </div>
@@ -1740,8 +1741,7 @@
                     </div>
                 </div>
                 <div class="modal-footer d-flex">
-                    <button class="btn btn-outline-default btn-pill button close" data-bs-dismiss="modal"
-                        >Close</button>
+                    <button class="btn btn-outline-default btn-pill button close" data-bs-dismiss="modal">Close</button>
                     <div class="btn-group rounded-split mt-2 mb-2">
                         <button type="button" class="btn btn-pill btn-primary save-invoice_update">Save</button>
                         <button type="button" class="btn btn-pill btn-primary dropdown-toggle px-1"
@@ -1838,12 +1838,12 @@
                         <button type="button" class="btn btn-github edit-btn"><i class="fi fi-rs-pencil"></i> EDIT
                             INVOICE</button>
                     </div>
-                    <button class="btn-close top-close" data-bs-dismiss="modal" aria-label="Close" >
+                    <button class="btn-close top-close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div >
+                    <div>
                         <div class="container-fluid" style="    border-right: 1px solid #000000;
                              border-bottom: 1px solid #000000;
                               border-left: 1px solid #000000;
@@ -2103,7 +2103,7 @@
                     <div class="row">
                         <div class="col-lg-3">
                             <label><b>Tenant Name</b></label>
-                            <p class="text-primary"><b  id="tenantName">John Clark</b></p>
+                            <p class="text-primary"><b id="tenantName">John Clark</b></p>
                         </div>
                         <div class="col-lg-3">
                             <label><b>Invoice Type</b></label>
@@ -2115,7 +2115,8 @@
                         </div>
                         <div class="col-lg-3">
                             <label><b>Status</b></label>
-                            <p class="text-danger"><b id="invoiceStatus"><i class="fi fi-rs-clock-three" style="color: #FB233B;"></i>
+                            <p class="text-danger"><b id="invoiceStatus"><i class="fi fi-rs-clock-three"
+                                        style="color: #FB233B;"></i>
                                     Unpaid</b></p>
                         </div>
                         <div class="col-lg-12 mt-5">
@@ -2144,7 +2145,7 @@
                                             <th>Property</th>
                                             <th>Memo</th>
                                             <th>Amount</th>
-                                            
+
                                         </tr>
                                     </thead>
                                     <tbody id="view-invoice-line-item">
@@ -2416,7 +2417,9 @@
                                 <!-- <h3>Main</h3> -->
                             </li>
                             <li class="slide">
-                                <a class="side-menu__item has-link create-new-link" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample" style="border: 3px solid #1467B0 !important;"><i
+                                <a class="side-menu__item has-link create-new-link" data-bs-toggle="offcanvas"
+                                    href="#offcanvasExample" role="button" aria-controls="offcanvasExample"
+                                    style="border: 3px solid #1467B0 !important;"><i
                                         class="side-menu__icon fi fi-rs-square-plus"></i><span
                                         class="side-menu__label ">Create New</span>
                                 </a>
@@ -3490,6 +3493,49 @@
 
     <script>
         $(document).ready(function () {
+
+            $(document).on("click", "#preview", function () {
+                // console.log(222222)
+                // console.log($('#preview').text().startsWith(" Preview"))
+                // console.log($('#preview').text().split(' ')[1].split('/')[0]=="Preview")
+                if ($('#preview').text().startsWith(" Edit")) {
+                    // console.log(222)
+                    $("#previewHeading").empty()
+                    $("#previewHeading").append(`Create <strong class="color-primary">New Invoice</strong>`)
+                    $("#addModal input,#addModal textarea").prop("readonly", false)
+                    $("#addModal input[type='file']").prop("disabled", false)
+
+                    $("#addModal select").prop("disabled", false)
+                    $("#preview").empty()
+                    $("#preview").append(`<i class="fi fi-rs-eye me-2 text-primary"></i> Preview
+                                    Invoice`)
+                    $("#no-add-item1").attr('id', "add-item1")
+                    $("#no-del-btn1").attr('id', "del-btn1")
+                    $(".delete-file").each(function () {
+                        $(this).removeClass('d-none')
+                    })
+
+                } else if ($('#preview').text().startsWith(" Preview")) {
+                    $("#previewHeading").empty()
+                    console.log(22222)
+                    $("#previewHeading").append(`Update <strong class="color-primary">Invoice</strong>`)
+                    $("#addModal input,#addModal textarea").prop("readonly", true)
+                    $("#addModal input[type='file']").prop("disabled", true)
+
+                    $("#addModal select").prop("disabled", true)
+                    $("#preview").empty()
+                    $("#preview").append(`<i class="fi fi-rs-edit me-2 text-primary"></i> Edit Invoice`)
+                    $("#add-item1").attr('id', "no-add-item1")
+                    $("#del-btn1").attr('id', "no-del-btn1")
+                    $(".delete-file").each(function () {
+                        $(this).addClass('d-none')
+                    })
+
+                }
+                // console.log(333)
+                // <a href="javascript:void(0)" id="preview"><i class="fi fi-rs-eye me-2 text-primary"></i> </a>
+
+            })
             // $("#succesModal").modal("show")
             $("#succes-addtenant-close").click(() => {
                 $("#succesModal").modal("hide")
@@ -3668,7 +3714,7 @@
                     console.log($("#totalText").text().split('$')[1])
                     formData.append('totalAmount', $("#totalText").text().split(' ')[1])
                     // Loop through the lineItems array and add each line item to the FormData object
-                    for (var i = 0; i < lineItems.length-1; i++) {
+                    for (var i = 0; i < lineItems.length - 1; i++) {
                         var lineItem = lineItems[i];
                         formData.append('lineItems[' + i + '][category]', lineItem.category);
                         formData.append('lineItems[' + i + '][property]', lineItem.property);
@@ -3699,7 +3745,7 @@
                         success: function (response) {
                             $("#addModal").modal("hide")
                             $('#addModal input[type="text"], #addModal input[type="date"], #addModal textarea').val('');
-    $('#addModal select').prop('selectedIndex', 0);
+                            $('#addModal select').prop('selectedIndex', 0);
                             $("#succesModal").modal("show")
 
                         },
@@ -3849,9 +3895,7 @@
 
                     },
                     error: function (xhr, status, error) {
-                        // console.log(error)
-                        // window.alert('Error: ' + "Token expeired!, Login again");
-                        // window.location = '../Landlord/login_module.html';
+
                     }
                 });
 
@@ -3866,35 +3910,16 @@
                     }
                 })
                 console.log(propertyName)
-                $("#propertyName").val(propertyName[0].propertyName+` (${propertyName[0].unitNumber})`)
+                $("#propertyName").empty()
+                $("#propertyUnit").empty()
+                $("#propertyName").append($('<option label="Choose one"></option>'))
+                $("#propertyUnit").append($('<option label="Choose one"></option>'))
+                $("#propertyName").append($('<option></option>').text(propertyName[0].propertyName).val(propertyName[0].propertyID))
+                $("#propertyUnit").append($('<option></option>').text(propertyName[0].unitNumber).val(propertyName[0].propertyUnitID))
             })
-            function checkFields() {
-                var isFilled = true;
 
-                // Check each required field for emptiness
-                $("input[type='text']:not(#fileInput), textarea, select").each(function () {
-                    if ($(this).val() === "") {
-                        isFilled = false;
-                        return false; // Exit the loop if any field is empty
-                    }
-                });
 
-                // Enable or disable the save button based on field fill status
-                if (isFilled) {
-                    $("#save-button").prop("disabled", false);
-                } else {
-                    $("#save-button").prop("disabled", true);
-                }
-            }
-
-            // Call the checkFields function when any input field value changes
-            $("input[type='text']:not(#fileInput), textarea, select").on("input change", function () {
-                checkFields();
-            });
-
-            // Call the checkFields function on page load
-            checkFields();
-            $("#add-item1").on("click", () => {
+            $(document).on("click", "#add-item1", () => {
                 $("#add-item-container1").append(`<tr class="tr">
                                             <td><input type="text" class="form-control" name="category"></td>
                                             <td><input type="text" class="form-control" name="property"></td>
@@ -3905,7 +3930,7 @@
                                             </button></td>
                                         </tr>`)
             });
-            $("#add-item1_update").on("click", () => {
+            $(document).on("click", "#add-item1_update", () => {
                 $("#add-item-container1_update").append(`<tr class="tr">
                                             <td><input type="text" class="form-control" name="category_update"></td>
                                             <td><input type="text" class="form-control" name="memo_update"></td>
@@ -4055,9 +4080,9 @@
             $('input[name="status"]').on('click', function () {
                 selectedValue = $(this).val();
             });
-            $('#addModal').on('click',".top-close,.close",function(){
+            $('#addModal').on('click', ".top-close,.close", function () {
                 $('#addModal input[type="text"], #addModal input[type="date"], #addModal textarea').val('');
-    $('#addModal select').prop('selectedIndex', 0);
+                $('#addModal select').prop('selectedIndex', 0);
             })
             $(document).on('click', ".view-btn,.edit-option,.resend-option", function (e) {
                 e.preventDefault();
@@ -4217,11 +4242,11 @@
 
 
                 })
-                $("#totalAmount").text('$ '+data.totalAmount)
-                const images=data.invoiceImages.split(",")
+                $("#totalAmount").text('$ ' + data.totalAmount)
+                const images = data.invoiceImages.split(",")
                 $("#notes").text(data.note || "N/A")
                 $("#view-invoice-images").empty()
-                images.forEach((image)=>{
+                images.forEach((image) => {
                     $("#view-invoice-images").append(`
                             <img src="../../../../spadeAPI/uploads/${image}" width=200px height=200px alt=""> &nbsp;`)
                 })
@@ -4448,7 +4473,7 @@
 
                         success: function (response) {
                             $("#myModal_edit").modal("hide")
-                           
+
                             $("#succesModal").modal("show")
                             getData()
                         },
@@ -4547,7 +4572,7 @@
         //             doc.addImage(img, 'JPEG', 0, position, imgWidth, imgHeight);
         //             position -= imgHeight;
         //             while (position > -canvas.height) {
-                       
+
         //                 doc.addImage(img, 'JPEG', 0, position, imgWidth, imgHeight);
         //                 position -= imgHeight;
         //             }
@@ -4566,21 +4591,21 @@
 
 
         window.onload = function () {
-    document.getElementById("create_pdf")
-        .addEventListener("click", () => {
-            const invoice = this.document.getElementById("htmlContent");
-            // console.log(invoice);
-            // console.log(window);
-            var opt = {
-                margin: 0.1,
-                filename: 'myfile.pdf',
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2 },
-                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-            };
-            html2pdf().from(invoice).set(opt).save();
-        })
-}
+            document.getElementById("create_pdf")
+                .addEventListener("click", () => {
+                    const invoice = this.document.getElementById("htmlContent");
+                    // console.log(invoice);
+                    // console.log(window);
+                    var opt = {
+                        margin: 0.1,
+                        filename: 'myfile.pdf',
+                        image: { type: 'jpeg', quality: 0.98 },
+                        html2canvas: { scale: 2 },
+                        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+                    };
+                    html2pdf().from(invoice).set(opt).save();
+                })
+        }
 
 
 
@@ -4601,7 +4626,7 @@
             //         form.off('submit');
             //     });
             // }
-            
+
     </script>
 </body>
 

@@ -611,24 +611,24 @@
                         <div class="row">
                             <div class="col-lg-3">
                                 <label><b>Task Name</b></label>
-                                <p class="text-primary"><b  id="tenantName">John Clark</b></p>
+                                <p class="text-primary"><b  id="taskName_view">John Clark</b></p>
                             </div>
                             <div class="col-lg-3">
                                 <label><b>Due Date</b></label>
-                                <p class="text-primary"><b id="invoiceType">June-06-2023</b></p>
+                                <p class="text-primary"><b id="dueDate_view">June-06-2023</b></p>
                             </div>
                             <div class="col-lg-3">
                                 <label><b>Priority</b></label>
-                                <p class="text-primary"><b id="dueDate">High Priority</b></p>
+                                <p class="text-primary"><b id="priority_view">High Priority</b></p>
                             </div>
                             <div class="col-lg-3">
                                 <label><b>Status</b></label>
-                                <p class="text-danger"><b id="invoiceStatus"><i class="fi fi-rs-clock-three" style="color: #FB233B;"></i>
+                                <p class="text-danger"><b id="status_view"><i class="fi fi-rs-clock-three" style="color: #FB233B;"></i>
                                         Unpaid</b></p>
                             </div>
                             <div class="col-lg-12 mt-5">
                                 <label><b>Notes</b></label>
-                                <p class="text-primary"><b id="propertyAddress">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</b></p>
+                                <p class="text-primary"><b id="notes_view">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</b></p>
                             </div>
                             <div class="col-lg-12 mt-5">
                                 <div style="display: flex;">
@@ -655,7 +655,7 @@
                                                 
                                             </tr>
                                         </thead>
-                                        <tbody id="view-invoice-line-item">
+                                        <tbody id="view-task-line-item">
                                             <tr class="tr">
                                                 <td>
                                                     <p class="text-primary"><b>John Clark / 0321-2045564</b></p>
@@ -688,7 +688,7 @@
                                     <h1 class="text-primary fw-bold m-0" id="totalAmount">$200.00</h1>
                                 </span>
                             </div> -->
-                            <div class="col-lg-12 mt-5 mb-5" id="view-invoice-images">
+                            <div class="col-lg-12 mt-5 mb-5" id="view-task-images">
                                 <img src="../assets/images/demo_img.png" alt=""> &nbsp;
                                 <img src="../assets/images/demo_img.png" alt=""> &nbsp;
                                 <img src="../assets/images/demo_img.png" alt=""> &nbsp;
@@ -941,6 +941,35 @@
                         <a href="javascript:void(0)" class="btn text-light btn-pill button disabled" style='background-color:#1467B0;' id='next'>Next</a>
                     </div>
 
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="succesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body succes-modal">
+                    <div class="text-justify ps-2 border-model-line">
+                        <h2 class="modal-title d-flex align-items-center ps-1">
+                            <strong class="color-primary">Success!&nbsp;</strong>
+                            <i class="fi fi-rs-check-circle text-success"></i>
+                        </h2>
+                        <a href="javascript:void(0)" class="btn btn-outline-default btn-pill ms-1 my-2" style='background-color:#1467B0;color: white;'> <i class="fi fi-rs-pencil"></i> EDIT PROPERTY UNITS</a>
+                        <a class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal">
+                            <i class="fi fi-rs-plus-small" style="vertical-align: middle;"></i>Add Tenants
+                        </a>
+                        <p class="ms-2 mb-0 text-start">Your Property has been successfully added.</p>
+                        <p class="ms-2 text-start">Please add tenant to this property.</p>
+                    </div>
+
+                </div>
+                <div class="modal-footer" style="border-top: 0">
                 </div>
             </div>
         </div>
@@ -2338,7 +2367,7 @@
     <script src="../assets/js/charts.js"></script>
 
     <script>
-        var selectedFiles = [];
+        var selectedFiles = []; var taskInfo=[]
         let taskId;
         $(document).ready(function() {
 
@@ -2479,7 +2508,87 @@
             });
             // Handle change event of checkboxes
 
+            $(document).on('click', ".view-task", function (e) {
+                e.preventDefault();
+                                const taskIdElement = $(this).closest("tr").find(".task-id");
 
+                                taskId = taskIdElement.attr("id")
+
+                                const data = taskInfo.find(obj => obj.id.toString() == taskId);
+                                console.log(data)
+                                selectedFiles = data.taskImages.split(",")
+
+                                updateSelectedFilesContainer()
+                                $("#taskName_view").text("huhuh");
+                                $("#dueDate_view").text(data.dueDate);
+                                $("#priority_view").text(data.priority);
+                                $("#status_view").text(data.status);
+                                $("#notes_view").text(data.notes);
+                                console.log($("#notes_view"))
+                //                 $("#priority_update").find(`option[name="${data.priority.toLowerCase()}"]`).prop("selected", true);
+                //                 $("#status_update").find(`option[value="${data.status}"]`).prop("selected", true);
+                //                 data.AssignTo.forEach(({
+                //                     ID,
+                //                     name
+                //                 }) => {
+                //                     $("#assignee_update").find(`option[value="${ID}"]`).prop("selected", true);
+                //                     $(".select2-selection__rendered").append(`<li class="select2-selection__choice" title="${name}"><span class="select2-selection__choice__remove" role="presentation">×</span>${name}</li>`)
+                //                 })
+
+                //                 $('#myModal_edit').modal('show');
+                // $("#tenantName").text(data.firstName + " " + data.lastName)
+                // $("#invoiceType").text(data.invoiceType)
+                // $("#dueDate").text(data.dueDate)
+                // $("#invoiceStatus").text(data.status)
+                // $("#propertyAddress").text(data.pAddress)
+                // // $("#invoiceCategory").text(data.invoiceType)
+                // // $("#invoiceProperty").text(data.invoiceType)
+                // // $("#invoiceMemo").text(data.invoiceType)
+                // // $("#invoiceAmount").text(data.invoiceType)
+                // // $("#client-id").append(`<h5 class="fw-bold" style="color: 
+                // //                 #562AC8;">BILLED TO</h5>
+                // //                     <p class="text-dark">${data.firstName + " " + data.lastName}<br>${data.tAddress
+                // //     }<br>${data.tCity},
+                // //                         ${data.tState}<br>${data.tZipcode}<br>United States<br>${data.tPhoneNumber}</p>`)
+                // // console.log(1)
+                // // $("#owner-id").empty()
+                // // $("#owner-id").append(`                                    <h5 class="text-dark fw-bold">${data.companyName}</h5>
+                // //                     <p class="text-dark">${data.pAddress}<br>${data.pCity}, ${data.pState}<br>${data.pZipCode}<br>United
+                // //                         States<br>1-888-123-8910</p>`)
+                // // $("#table-body").empty()
+                // // var dateObj = new Date(data.created_at);
+                // // var day = dateObj.getDate();
+                // // var month = dateObj.getMonth() + 1;
+                // // var year = dateObj.getFullYear();
+                $("#view-task-line-item").empty()
+                data.AssignTo.forEach((item) => {
+
+                    console.log(item)
+                    $("#view-task-line-item").append(`<tr class="tr">
+                                                <td>
+                                                    <p class="text-primary"><b>${item.name} / ${item.vendorPhone}</b></p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-primary"><b>${data.propertyName} / ${data.unitNumber}</b></p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-primary"><b>${data.tfirstName+" "+data.tlastName} / ${data.tenantPhone}</b></p>
+                                                </td>
+                                                
+                                            </tr>`)
+
+
+                })
+                // $("#totalAmount").text('$ ' + data.totalAmount)
+                const images = data.taskImages.split(",")
+                // $("#notes").text(data.note || "N/A")
+                $("#view-task-images").empty()
+                images.forEach((image) => {
+                    $("#view-task-images").append(`
+                            <img src="../../../../spadeAPI/uploads/${image}" width=200px height=200px alt=""> &nbsp;`)
+                })
+                $("#viewModal-tasks").modal("show")
+            })
             $('#fileInput').on('change', function() {
                 var files = Array.from($(this)[0].files);
                 // console.log(files)
@@ -2964,7 +3073,7 @@
                                     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                                 });
                             }
-
+                            taskInfo=response.data[0]
                             response.data[0] ?.forEach(function(task) {
                                 // var image = '<td><img src="../../../../spadeAPI/uploads/' + property.images[0] + '" alt=""></td>';
                                 // var image = '<td><img src="../../../../../../Desktop/spade API 2/uploads/image-1684250579662.png" alt="hhghghgh"></td>';
@@ -3018,7 +3127,7 @@
                                     '<ul class="dropdown-menu">' +
                                     '<li><a class="edit-option dropdown-item text-primary" href="javascript:void(0)">Edit</a></li>' +
                                     '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>' +
-                                    `<li><a class="dropdown-item text-success" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#viewModal-tasks">View</a></li>` +
+                                    `<li><a class="dropdown-item text-success view-task" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#">View</a></li>` +
                                     // `<li><a class="dropdown-item text-success" href="./view-property.html?propertyId=${property.id}">View</a></li>` +
                                     '</ul></td>';
                                 // Create a table row and append the generated columns
@@ -3034,7 +3143,7 @@
                                 const taskIdElement = $(this).closest("tr").find(".task-id");
 
                                 taskId = taskIdElement.attr("id")
-
+                                
                                 const data = response.data[0].find(obj => obj.id.toString() == taskId);
                                 console.log(taskId)
                                 selectedFiles = data.taskImages.split(",")
