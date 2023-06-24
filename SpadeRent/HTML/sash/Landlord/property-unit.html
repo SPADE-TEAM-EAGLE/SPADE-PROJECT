@@ -20,7 +20,6 @@
 
     <!-- BOOTSTRAP CSS -->
     <link id="style" href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-
     <!-- STYLE CSS -->
     <link href="../assets/css/style.css" rel="stylesheet" />
     <link href="../assets/css/dark-style.css" rel="stylesheet" />
@@ -963,9 +962,9 @@
                                         <div class="card-header justify-content-start">
                                             <button class="btn btn-primary btn-pill pt-1 pb-1 done-option" id="add-units">Add Units</button>
                                         </div>
-                                        <div class="card-body">
+                                        <div class="card-body p-0">
                                             <div class="table-responsive">
-                                                <table id="key-table" class="table table-bordered text-nowrap mb-0">
+                                                <table id="key-table" class="table table-bordered text-nowrap mb-0 ">
                                                     <thead>
                                                         <tr>
                                                             <th colspan="1">UNIT.ID</th>
@@ -1604,7 +1603,7 @@
     <script src="../assets/plugins/select2/select2.full.min.js"></script>
 
     <!-- INTERNAL Data tables js-->
-    <script src="../assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
+    <!-- <script src="../assets/plugins/datatable/js/jquery.dataTables.min.js"></script> -->
     <script src="../assets/plugins/datatable/js/dataTables.bootstrap5.js"></script>
     <script src="../assets/plugins/datatable/dataTables.responsive.min.js"></script>
 
@@ -1662,6 +1661,7 @@
 
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
+
     <script>
         const form1Inputs = document.querySelectorAll('#accordion-item1 .form');
         form1Inputs.forEach(input => {
@@ -1984,7 +1984,7 @@
 
             // Send the form data to the server using AJAX
             $.ajax({
-                url: 'http://localhost:3000/api/spade/property',
+                url: 'https://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/property',
                 type: 'POST',
                 data: formData,
                 contentType: false,
@@ -2014,7 +2014,7 @@
             // $("#viewUnits").attr("href",`./property-unit.html?propertyId=${propertyId}`)
         $("#add-units").click(() => {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/addMoreUnits',
+                url: 'https://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/addMoreUnits',
                 type: 'POST',
                 data: JSON.stringify({
                     "propertyID": propertyId
@@ -2034,7 +2034,7 @@
 
         function getData() {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/PropertyUnits',
+                url: 'https://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/PropertyUnits',
                 type: 'GET',
                 data: {
                     propertyId
@@ -2146,7 +2146,7 @@
                         });
                         console.log(propertyId)
                         $.ajax({
-                            url: 'http://localhost:3000/api/spade/PropertyUnitsUpdates',
+                            url: 'https://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/PropertyUnitsUpdates',
                             type: 'PUT',
                             data: JSON.stringify({
                                 id: values[0],
@@ -2187,7 +2187,7 @@
                                 // console.log(values)
                         });
                         $.ajax({
-                            url: 'http://localhost:3000/api/spade/deleteMoreUnits',
+                            url: 'https://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/deleteMoreUnits',
                             type: 'DELETE',
                             data: JSON.stringify({
                                 "propertyID": propertyId,

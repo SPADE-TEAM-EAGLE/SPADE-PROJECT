@@ -594,14 +594,12 @@ function firstBtnChange() {
   setTimeout(delay1, 2500);
   function delay1() {
   loader.style.display = "none";
-
     card2.style.display = "none";
     card1.style.display = "block";
     card3.style.display = "none";
     card4.style.display = "none";
     card5.style.display = "none";
   }
-  // part1.classList.add("complete1");
 }
 
 

@@ -461,6 +461,14 @@
             text-decoration: none;
             opacity: 1;
         }
+        #info-head {
+                    display: flex;
+                }
+                @media (max-width: 1300px) {
+                    #info-head {
+                    display: none;
+                }
+                }
         
         @media (max-width:992px) {
             .modal-footer button {
@@ -1543,9 +1551,9 @@
                                                         class="typcn typcn-filter fs-16"></i><strong
                                                         id="Filter-btn">Filter</strong></button>
                                                 <ul class="dropdown-menu" role="menu">
-                                                    <li><a href="javascript:void(0)"><strong>Filter by:</strong></a>
+                                                    <li><a href="javascript:void(0)"><strong class="text-dark">Filter by:</strong></a>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">A-Z Alphabets</a>
+                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">A-Z Alphabets</a>
                                                         <div class="form-check m-0">
                                                             <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="alphabets" value="option1" checked>
                                                         </div>
@@ -1558,12 +1566,12 @@
                                                                 checked>
                                                         </div>
                                                     </li> -->
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">Ascending</a>
+                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">Ascending</a>
                                                         <div class="form-check m-0">
                                                             <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="ascending" value="option1">
                                                         </div>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">Descending</a>
+                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">Descending</a>
                                                         <div class="form-check m-0">
                                                             <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="descending" value="option1">
                                                         </div>
@@ -1606,36 +1614,36 @@
                                                 <button type="button" class="btn btn-dark bg-transparent font-weight-bold text-dark" id="customize_btn" data-bs-toggle="dropdown" style="border: none;"><strong>CUSTOMIZED</strong><i
                                                         class="fe fe-chevron-down ms-2"></i></button>
                                                 <ul class="dropdown-menu" role="menu">
-                                                    <li><a href="javascript:void(0)"><strong>Columns to
+                                                    <li><a href="javascript:void(0)"><strong class="text-dark">Columns to
                                                                 show</strong></a>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">TENANT ID</a>
+                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">TENANT ID</a>
                                                         <div class="form-check m-0">
                                                             <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">TENANT NAME</a>
+                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">TENANT NAME</a>
                                                         <div class="form-check m-0">
                                                             <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">PROPERTY NAME</a>
+                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">PROPERTY NAME</a>
                                                         <div class="form-check m-0">
                                                             <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">RENT AMOUNT</a>
+                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">RENT AMOUNT</a>
                                                         <div class="form-check m-0">
                                                             <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">PROPERTY UNITS</a>
+                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">PROPERTY UNITS</a>
                                                         <div class="form-check m-0">
                                                             <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
 
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)">LEASE END DATE</a>
+                                                    <li class="d-flex justify-content-between"><a  class="text-dark" href="javascript:void(0)">LEASE END DATE</a>
                                                         <div class="form-check m-0">
                                                             <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
@@ -2391,7 +2399,7 @@
                     $("#succesModal").modal("hide")
                     console.log(tenantID)
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/sendInvitationLink',
+                        url: 'https://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/sendInvitationLink',
                         type: 'POST',
                         data: JSON.stringify({
                             tenantID: tenantID
@@ -2415,7 +2423,7 @@
                 })
                 // $("#succesModal").modal("show")
             $.ajax({
-                url: 'http://localhost:3000/api/spade/getStates',
+                url: 'https://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getStates',
                 method: 'GET',
                 success: function({
                     data
@@ -2449,7 +2457,7 @@
             });
             let tenantIdElement
             $.ajax({
-                url: 'http://localhost:3000/api/spade/getPropertyUnitsTenant',
+                url: 'https://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getPropertyUnitsTenant',
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -2668,7 +2676,7 @@
                 $("#addModal").modal("hide")
                     // Make the AJAX call
                 $.ajax({
-                    url: `http://localhost:3000/api/spade/${uri}`,
+                    url: `https://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/${uri}`,
                     type: method,
                     data: JSON.stringify(formData),
                     contentType: "application/json; charset=utf-8",
@@ -3378,7 +3386,7 @@
 
             // Send the form data to the server using AJAX
             $.ajax({
-                url: 'http://localhost:3000/api/spade/property',
+                url: 'https://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/property',
                 type: 'POST',
                 data: formData,
                 contentType: false,
@@ -3444,7 +3452,7 @@
 
             formData.append("existingImages", existingImageNames)
             $.ajax({
-                url: 'http://localhost:3000/api/spade/updateProperty',
+                url: 'https://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/updateProperty',
                 // url: 'http://ec2-54-158-103-230.compute-1.amazonaws.com:3000/api/spade/updateProperty',
                 type: 'PUT',
                 data: formData,
@@ -3467,7 +3475,7 @@
                 // delete using AJAX
                 $('#myModal_delete').modal('hide');
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade//tenantDelete',
+                    url: 'https://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade//tenantDelete',
                     type: 'DELETE',
                     data: JSON.stringify({
                         "tenantID": tenantID
@@ -3496,7 +3504,7 @@
             $("#preloader").fadeIn("fast");
             // console.log(22)
             $.ajax({
-                url: 'http://localhost:3000/api/spade/viewAllPropertyTenant',
+                url: 'https://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/viewAllPropertyTenant',
                 type: 'GET',
                 contentType: false,
                 processData: false,

@@ -683,7 +683,7 @@
                 var verification = $("#verification").val();
 
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/verifyResetEmailCode',
+                    url: 'https://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/verifyResetEmailCode',
                     type: 'POST',
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({
@@ -775,7 +775,7 @@ send_again.addEventListener("click", function() {
             const user_id = urlParams.get("id");
             $(document).on("click", "#send_again", function(a) {
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/resendCode',
+                    url: 'https://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/resendCode',
                     type: 'POST',
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({
