@@ -1616,6 +1616,21 @@
         </div>
       </div>
     <!-- Modal -->
+    <div class="modal fade" id="myModal_warning" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
+                        <div class="card-body text-center">
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24"><path fill="#fad383" d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z"/><circle cx="12" cy="16" r="1" fill="#f7b731"/><path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"/></svg></span>
+                          <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
+                          <p class="card-text text-dark">Current Password doesnot matches!!!!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
@@ -2483,7 +2498,7 @@
                                                     <div class="col-xl-8 mb-3">
                                                         <label for="validationCustom02">Business Name</label>
                                                         <input type="text" class="form-control" id="validationCustom02"
-                                                            placeholder="John Clark" required>
+                                                            placeholder="" required>
                                                         <div class="valid-feedback">Looks good!</div>
                                                     </div>
 
@@ -2599,7 +2614,7 @@
                                                         </div>
                                                         <div class="col-lg-7" style="display: flex; width: auto;">
                                                             <button class="btn btn-light btn-pill m-2">Close</button>
-                                                            <button class="btn btn-primary btn-pill m-2" id="save">Save</button>
+                                                            <button class="btn btn-primary btn-pill m-2" id="save" disabled>Save</button>
                                                         </div>
                                                     </div>
 
@@ -7551,7 +7566,7 @@
                                                                                         src="../assets/images/logo_loginmodule.png"></span>
                                                                                 &nbsp;&nbsp; <div
                                                                                     style="display: inline-block;">
-                                                                                    <h3 class="mb-0">John Clark</h3>
+                                                                                    <h3 class="mb-0"></h3>
                                                                                     <span>
                                                                                         <p>Spade Rent</p>
                                                                                     </span>
@@ -7589,7 +7604,7 @@
                                                                                         <img src="../assets/images/logo_loginmodule.png"
                                                                                             class="model-account-close-logo"
                                                                                             alt="">
-                                                                                        <h2 class="mt-5 mb-0">John Clark
+                                                                                        <h2 class="mt-5 mb-0">
                                                                                         </h2>
                                                                                         <h4>Spade Rent</h4>
                                                                                         <h2><b>Remove this account from
@@ -8503,34 +8518,42 @@
 
     
 let password_validate1 = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
-var validconfirmPassword1 = document.getElementById("id_password1");
+let validconfirmPassword1 = document.getElementById("id_password1");
 let confirmPassword1 = document.getElementById("id_password2");
+let newPassword = document.getElementById("current_password_reset");
+let spantag11 = document.getElementById("passnotmatch1");
+
 confirmPassword1.addEventListener('keyup', confirmPasswordValidation1);
 validconfirmPassword1.addEventListener('keyup', confirmPasswordValidation1);
-var spantag11 = document.getElementById("passnotmatch1");
+newPassword.addEventListener('keyup', confirmPasswordValidation1);
 
 function confirmPasswordValidation1() {
- 
-  if(validconfirmPassword1.value.match(password_validate1))
-  {
-    console.log(11)
+  if (validconfirmPassword1.value.match(password_validate1)) {
     validconfirmPassword1.classList.add("border-green");
     spantag11.style.display = "none";
-  }
-  else
-  {
-    console.log(21)
+  } else {
     validconfirmPassword1.classList.remove("border-green");
     spantag11.style.display = "block";
   }
-    if (confirmPassword1.value == validconfirmPassword1.value && validconfirmPassword1.value.match(password_validate1)) {
-      confirmPassword1.classList.add("border-green");
-      console.log(31)
-    } else {
-        console.log(41)
-      confirmPassword1.classList.remove("border-green");
-    }
+
+  if (confirmPassword1.value == validconfirmPassword1.value && validconfirmPassword1.value.match(password_validate1)) {
+    confirmPassword1.classList.add("border-green");
+  } else {
+    confirmPassword1.classList.remove("border-green");
+  }
+
+  if (newPassword.value.match(password_validate1)) {
+    newPassword.classList.add("border-green");
+  } else {
+    newPassword.classList.remove("border-green");
+  }
+  if (confirmPassword1.value == validconfirmPassword1.value && validconfirmPassword1.value.match(password_validate1) && newPassword.value.match(password_validate1)) {
+    document.getElementById("save").disabled = false;
+  } else {
+    document.getElementById("save").disabled = true;
+  }
 }
+
 
 const togglePassword11 = document.querySelector("#togglePassword1");
 const password11 = document.querySelector("#id_password1");
@@ -8818,7 +8841,7 @@ $(document).ready(function() {
     error: function (xhr, status, error) {
         // Handle the error response from the API
         if (xhr.status === 401) {
-            alert("Incorrect Password");
+            $("#myModal_warning").modal("show")
         } else {
             console.log('API error:', error);
         }

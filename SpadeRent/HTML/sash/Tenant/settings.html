@@ -1565,7 +1565,7 @@
                                                     <div class="col-lg-4"></div>
                                                     <div class="col-xl-8 mb-3">
                                                         <label for="validationCustom02">Business Name</label>
-                                                        <input type="text" class="form-control" id="validationCustom02" placeholder="John Clark" required>
+                                                        <input type="text" class="form-control" id="validationCustom02" placeholder="" required>
                                                         <div class="valid-feedback">Looks good!</div>
                                                     </div>
 
@@ -1652,14 +1652,14 @@
                                                                         <h3 class="text-white"><b>Security
                                                                                 Confirmation</b></h3>
                                                                         <p class="text-white">Any changes to this page require you to enter your current password for security purposes:</p>
-                                                                        <input type="password" class="form-control" id="validationCustom02" placeholder="Confirm Password" required>
+                                                                        <input type="password" class="form-control" id="current_password_reset" placeholder="Confirm Password" required>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-7" style="display: flex; width: auto;">
                                                             <button class="btn btn-light btn-pill m-2">Close</button>
-                                                            <button class="btn btn-primary btn-pill m-2">Save</button>
+                                                            <button class="btn btn-primary btn-pill m-2" id="save" disabled>Save</button>
                                                         </div>
                                                     </div>
 
@@ -1978,7 +1978,7 @@
                                                                                         src="../assets/images/logo_loginmodule.png"></span>
                                                                                 &nbsp;&nbsp; <div
                                                                                     style="display: inline-block;">
-                                                                                    <h3 class="mb-0">John Clark</h3>
+                                                                                    <h3 class="mb-0"></h3>
                                                                                     <span>
                                                                                         <p>Spade Rent</p>
                                                                                     </span>
@@ -2016,7 +2016,7 @@
                                                                                         <img src="../assets/images/logo_loginmodule.png"
                                                                                             class="model-account-close-logo"
                                                                                             alt="">
-                                                                                        <h2 class="mt-5 mb-0">John Clark
+                                                                                        <h2 class="mt-5 mb-0">
                                                                                         </h2>
                                                                                         <h4>Spade Rent</h4>
                                                                                         <h2><b>Remove this account from
@@ -3045,36 +3045,74 @@
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 
 <script>
-
+$("#document").ready(()=>{
+    $("#save").click(()=>{
+                console.log($("#current_password_reset").val(),$("#id_password1").val())
+                $.ajax({
+    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/changePasswordTenant',
+    type: 'PUT',
+    data: JSON.stringify({
+        currentPassword: $("#current_password_reset").val(),
+        NewPassword: $("#id_password1").val()
+    }),
+    contentType: "application/json; charset=utf-8",
+    processData: false,
+    headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+    },
+    success: function (response) {
+        $("#myModal_success").modal("show");
+              setTimeout(function () {
+                $("#myModal_success").modal("hide");
+                localStorage.setItem("authtoken", response.token);
+                // window.location = "../Landlord/index.html";
+              }, 2000);
+    },
+    error: function (xhr, status, error) {
+        // Handle the error response from the API
+        if (xhr.status === 401) {
+            $("#myModal_warning").modal("show")
+        } else {
+            console.log('API error:', error);
+        }
+    }})
+})})
     
 let password_validate1 = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
-var validconfirmPassword1 = document.getElementById("id_password1");
+let validconfirmPassword1 = document.getElementById("id_password1");
 let confirmPassword1 = document.getElementById("id_password2");
+let newPassword = document.getElementById("current_password_reset");
+let spantag11 = document.getElementById("passnotmatch1");
+
 confirmPassword1.addEventListener('keyup', confirmPasswordValidation1);
 validconfirmPassword1.addEventListener('keyup', confirmPasswordValidation1);
-var spantag11 = document.getElementById("passnotmatch1");
+newPassword.addEventListener('keyup', confirmPasswordValidation1);
 
 function confirmPasswordValidation1() {
- 
-  if(validconfirmPassword1.value.match(password_validate1))
-  {
-    console.log(11)
+  if (validconfirmPassword1.value.match(password_validate1)) {
     validconfirmPassword1.classList.add("border-green");
     spantag11.style.display = "none";
-  }
-  else
-  {
-    console.log(21)
+  } else {
     validconfirmPassword1.classList.remove("border-green");
     spantag11.style.display = "block";
   }
-    if (confirmPassword1.value == validconfirmPassword1.value && validconfirmPassword1.value.match(password_validate1)) {
-      confirmPassword1.classList.add("border-green");
-      console.log(31)
-    } else {
-        console.log(41)
-      confirmPassword1.classList.remove("border-green");
-    }
+
+  if (confirmPassword1.value == validconfirmPassword1.value && validconfirmPassword1.value.match(password_validate1)) {
+    confirmPassword1.classList.add("border-green");
+  } else {
+    confirmPassword1.classList.remove("border-green");
+  }
+
+  if (newPassword.value.match(password_validate1)) {
+    newPassword.classList.add("border-green");
+  } else {
+    newPassword.classList.remove("border-green");
+  }
+  if (confirmPassword1.value == validconfirmPassword1.value && validconfirmPassword1.value.match(password_validate1) && newPassword.value!=="") {
+    document.getElementById("save").disabled = false;
+  } else {
+    document.getElementById("save").disabled = true;
+  }
 }
 
 const togglePassword11 = document.querySelector("#togglePassword1");
