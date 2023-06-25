@@ -604,7 +604,7 @@
                                 <div class="row">
                                     <div class="col-lg-9">
                                         <h3 class="page-titlee text-white" style="font-weight: 100; margin-bottom: 0px;">Welcome to Spade Portal</h3>
-                                        <h1 class="page-titlee text-white" style="font-weight: 700;" id="user-name">John Clark</h1>
+                                        <h1 class="page-titlee text-white" style="font-weight: 700;" id="user-name"></h1>
                                         <a href="javascript:void(0)" class="btn btn-primary btn-pill btn-xl email-verification-btn mb-3" id="email_verification"><i
                                                 class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
                                             verification &nbsp; <i
@@ -1522,99 +1522,26 @@
     </script>
     <script>
         $(document).ready(() => {
-    //         $.ajax({
-    //                 url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com//api/spade/getAllTask',
-    //                 type: 'GET',
-    //                 contentType: false,
-    //                 processData: false,
-                    // headers: {
-                    //     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    // },
-    //                 success: function (response) {
-    //     console.log(response);
-    //     if (false) {
-    //         window.location = './new-property.html';
-    //     } else {
-    //         $("#user-name").text(response.user);
+            $.ajax({
+    url: 'http://ec2-44-216-142-163.compute-1.amazonaws.com:3000/api/spade/protected',
+    method: 'GET',
+    headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+    },
+    success: function({user}) {
+        $("#user-name").text(user)
 
-    //         var tableBody = $('#table-body');
-    //         tableBody.empty();
-
-    //         function toTitleCase(str) {
-    //             return str.replace(/\w\S*/g, function (txt) {
-    //                 return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-    //             });
-    //         }
-
-    //         var taskInfo = response.data[0];
-    //         taskInfo?.forEach(function (task) {
-    //             // var image = '<td><img src="../../../../spadeAPI/uploads/' + (task.taskImages?.split(',')[0] || '') + '" alt=""></td>';
-
-    //             var createdDate = new Date(task.created_at);
-    //             var currentDate = new Date();
-
-    //             var timeDiff = Math.abs(currentDate - createdDate);
-    //             var minutesDiff = Math.floor(timeDiff / (1000 * 60));
-    //             var hoursDiff = Math.floor(minutesDiff / 60);
-    //             var daysDiff = Math.floor(hoursDiff / 24);
-
-    //             var taskName = '<td class="task-id" id=' + task.id + ' style="font-weight: 600;">' +
-    //                 '<p style="font-weight: 600;" class="mb-1">' + task.taskName + '</p>' +
-    //                 '<span class="font-weight-normal" style="color: #9B9B9B;"> By ' + task.createdBy + ' - ';
-
-    //             if (daysDiff > 0) {
-    //                 taskName += daysDiff + ' days';
-    //             } else if (hoursDiff > 0) {
-    //                 taskName += hoursDiff + ' hours';
-    //             } else {
-    //                 taskName += minutesDiff + ' minutes';
-    //             }
-
-    //             taskName += '</span></td>';
-    //             var propertyName='<td class="property-id" id=' + task.id + ' style="font-weight: 600;">' +
-    //                 '<p style="font-weight: 600;" class="mb-1">' + task.propertyName + '</p>' +
-    //                 '<span class="font-weight-normal" style="color: #9B9B9B;"> Unit no. ' + task.unitNumber
-    //             var assignTo = '<td style="font-weight: 600;text-align: center;display: flex;">';
-    //             if (task.AssignTo) {
-    //                 assignTo += task.AssignTo.map(function ({ name, email }) {
-    //                     return '<div class="me-2">' +
-    //                         '<img class="avatar brround avatar-md" src="../assets/images/users/2.jpg" alt="avatar-img">' +
-    //                         '<div class="media-body valign-middle mt-0">' +
-    //                         '<a href="javascript:void(0)" class="text-dark fw-semibold">' + name + '</a>' +
-    //                         '</div>' +
-    //                         '</div>';
-    //                 }).join('');
-    //             } else {
-    //                 assignTo += 'Not assigned';
-    //             }
-    //             assignTo += '</td>';
-
-    //             var dueDate = '<td class="property-id " style="font-weight: 600;">' +
-    //                 '<p style="font-weight: 600;" class="mb-1">' + (task.dueDate || 'Not Set') + '</p>' +
-    //                 '<span class="font-weight-normal text-danger"><i class="fe fe-circle me-1"></i>' + task.priority + '</span>' +
-    //                 '</td>';
-
-    //             // Create a table row and append the generated columns
-    //             var status = '<td class="task-id" style="font-weight: 600;">' +'<p style="font-weight: 600;" class="mb-1">' +  task.status + '</p>'+'</tr>';
-    //                 // console.log(status)
-    //             var row = '<tr>' +taskName + assignTo + dueDate+propertyName+status + '</tr>';
-
-    //             // Append the row to the table body
-    //             tableBody.append(row);
-    //         });
-    //         $("#global-loader").fadeOut("slow");
-    //     }
-    // },
-    //                 error: function(xhr, status, error) {
-    //                     console.log(error)
-    //                     window.alert('Error: ' + "Token expeired!, Login again");
-    //                     window.location = '../Landlord/login_module.html';
-    //                 }
-    //             });
-      // Function to update the table with filtered data
+    },
+    error: function(xhr, status, error) {
+        console.log('Error occurred while fetching state and city data.');
+        console.log(xhr);
+        console.log(error);
+        // console.log('Error occurred while fetching state and city data.');
+    }
+});
   function updateTable(tabId) {
     var tableBody = $('#' + tabId + ' tbody');
-    var apiUrl = 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getAllTask'; // Replace with your API endpoint URL
+    var apiUrl = 'http://ec2-44-216-142-163.compute-1.amazonaws.com:3000/api/spade/getAllTask'; // Replace with your API endpoint URL
 
     // Make an API call to fetch all tasks
     $.ajax({
@@ -1624,7 +1551,7 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
       success: function(response) {
-            $("#user-name").text(response.data[0][0].createdBy);
+            // $("#user-name").text(response.data[0][0].createdBy);
             // console.log(response.data[0][0].createdBy)
         taskInfo=response.data[0]
         tableBody.empty(); // Clear existing table data

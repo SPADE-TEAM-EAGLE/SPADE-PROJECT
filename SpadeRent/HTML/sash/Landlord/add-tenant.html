@@ -1524,7 +1524,7 @@
                                 <div class="row">
                                     <div class="col-lg-9">
                                         <h3 class="page-titlee text-white" style="font-weight: 100; margin-bottom: 0px;">Welcome to Spade Portal</h3>
-                                        <h1 class="page-titlee text-white" style="font-weight: 700;" id="user-name">John Clark
+                                        <h1 class="page-titlee text-white" style="font-weight: 700;" id="user-name">
                                         </h1>
                                         <a href="javascript:void(0)" id="email_verification" class="btn btn-primary btn-pill btn-xl email-verification-btn"><i
                                                 class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
@@ -2399,7 +2399,7 @@
                     $("#succesModal").modal("hide")
                     console.log(tenantID)
                     $.ajax({
-                        url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/sendInvitationLink',
+                        url: 'http://ec2-44-216-142-163.compute-1.amazonaws.com:3000/api/spade/sendInvitationLink',
                         type: 'POST',
                         data: JSON.stringify({
                             tenantID: tenantID
@@ -2423,7 +2423,7 @@
                 })
                 // $("#succesModal").modal("show")
             $.ajax({
-                url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getStates',
+                url: 'http://ec2-44-216-142-163.compute-1.amazonaws.com:3000/api/spade/getStates',
                 method: 'GET',
                 success: function({
                     data
@@ -2456,8 +2456,9 @@
                 }
             });
             let tenantIdElement
+            
             $.ajax({
-                url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getPropertyUnitsTenant',
+                url: 'http://ec2-44-216-142-163.compute-1.amazonaws.com:3000/api/spade/getPropertyUnitsTenant',
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -2676,7 +2677,7 @@
                 $("#addModal").modal("hide")
                     // Make the AJAX call
                 $.ajax({
-                    url: `http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/${uri}`,
+                    url: `http://ec2-44-216-142-163.compute-1.amazonaws.com:3000/api/spade/${uri}`,
                     type: method,
                     data: JSON.stringify(formData),
                     contentType: "application/json; charset=utf-8",
@@ -3386,7 +3387,7 @@
 
             // Send the form data to the server using AJAX
             $.ajax({
-                url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/property',
+                url: 'http://ec2-44-216-142-163.compute-1.amazonaws.com:3000/api/spade/property',
                 type: 'POST',
                 data: formData,
                 contentType: false,
@@ -3452,7 +3453,7 @@
 
             formData.append("existingImages", existingImageNames)
             $.ajax({
-                url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/updateProperty',
+                url: 'http://ec2-44-216-142-163.compute-1.amazonaws.com:3000/api/spade/updateProperty',
                 // url: 'http://ec2-54-158-103-230.compute-1.amazonaws.com:3000/api/spade/updateProperty',
                 type: 'PUT',
                 data: formData,
@@ -3475,7 +3476,7 @@
                 // delete using AJAX
                 $('#myModal_delete').modal('hide');
                 $.ajax({
-                    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade//tenantDelete',
+                    url: 'http://ec2-44-216-142-163.compute-1.amazonaws.com:3000/api/spade//tenantDelete',
                     type: 'DELETE',
                     data: JSON.stringify({
                         "tenantID": tenantID
@@ -3504,7 +3505,7 @@
             $("#preloader").fadeIn("fast");
             // console.log(22)
             $.ajax({
-                url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/viewAllPropertyTenant',
+                url: 'http://ec2-44-216-142-163.compute-1.amazonaws.com:3000/api/spade/viewAllPropertyTenant',
                 type: 'GET',
                 contentType: false,
                 processData: false,

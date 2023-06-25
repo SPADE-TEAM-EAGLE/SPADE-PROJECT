@@ -2075,7 +2075,7 @@
                 // $("#succesModal").modal("hide")
                 // console.log(tenantID)
                 $.ajax({
-                    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/sendInvitationLink',
+                    url: 'http://ec2-44-216-142-163.compute-1.amazonaws.com:3000/api/spade/sendInvitationLink',
                     type: 'POST',
                     data: JSON.stringify({
                         tenantID:tenantId
@@ -2100,7 +2100,7 @@
                 });
             })
             $.ajax({
-                url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getTenantsByID',
+                url: 'http://ec2-44-216-142-163.compute-1.amazonaws.com:3000/api/spade/getTenantsByID',
                 type: 'GET',
                 data: {
                     id: tenantId
@@ -2188,7 +2188,7 @@
     formData.append("tenantID", tenantId);
     console.log(formData)
     $.ajax({
-        url: "http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/addAlternateEmailPhone",
+        url: "http://ec2-44-216-142-163.compute-1.amazonaws.com:3000/api/spade/addAlternateEmailPhone",
         type: "POST",
         data: JSON.stringify({
     alternatePhone: phone,

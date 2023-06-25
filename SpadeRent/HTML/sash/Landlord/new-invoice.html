@@ -1341,7 +1341,7 @@
                                 <div class="row">
                                     <div class="col-lg-9">
                                         <h3 class="page-titlee text-white" style="font-weight: 100; margin-bottom: 0px;">Welcome to Spade Portal</h3>
-                                        <h1 class="page-titlee text-white" style="font-weight: 700;" id="user-name">John Clark</h1>
+                                        <h1 class="page-titlee text-white" style="font-weight: 700;" id="user-name"></h1>
                                         <a href="javascript:void(0)" id="email_verification" class="btn btn-primary btn-pill btn-xl email-verification-btn"><i
                                                 class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
                                             verification &nbsp; <i
@@ -2149,7 +2149,7 @@
             }
             $("#resend-invoice").click(()=>{
                 $.ajax({
-    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/resendEmail',
+    url: 'http://ec2-44-216-142-163.compute-1.amazonaws.com:3000/api/spade/resendEmail',
     type: 'GET',  // Change the method to POST
     data: { invoiceID: invoiceId },  // Send the data in the request body
     contentType: 'application/json',  // Set the content type to JSON
@@ -2238,7 +2238,7 @@
 
                     // Send the data and files to the API using AJAX
                     $.ajax({
-                        url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/createInvoice',
+                        url: 'http://ec2-44-216-142-163.compute-1.amazonaws.com:3000/api/spade/createInvoice',
                         type: 'POST',
                         data: formData,
                         contentType: false,
@@ -2264,7 +2264,7 @@
                 $("#preloader").fadeIn("fast");
                 // console.log(22)
                 $.ajax({
-                    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/viewAllPropertyTenant',
+                    url: 'http://ec2-44-216-142-163.compute-1.amazonaws.com:3000/api/spade/viewAllPropertyTenant',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -2294,7 +2294,7 @@
                 });
 
                 $.ajax({
-                    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getAllInvoices',
+                    url: 'http://ec2-44-216-142-163.compute-1.amazonaws.com:3000/api/spade/getAllInvoices',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -2727,7 +2727,7 @@ function updateTotal() {
             $(document).on("click", "#confirmDelete", () => {
                 $("#myModal_delete").modal("hide")
                 $.ajax({
-                    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/invoiceDelete',
+                    url: 'http://ec2-44-216-142-163.compute-1.amazonaws.com:3000/api/spade/invoiceDelete',
                     type: 'DELETE',
                     data: JSON.stringify({
                         id: invoiceId,
@@ -2904,7 +2904,7 @@ function updateTotal() {
 
                     // Send the data and files to the API using AJAX
                     $.ajax({
-                        url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/UpdateInvoice',
+                        url: 'http://ec2-44-216-142-163.compute-1.amazonaws.com:3000/api/spade/UpdateInvoice',
                         type: 'PUT',
                         data: formData,
                         contentType: false,
@@ -2928,7 +2928,7 @@ function updateTotal() {
                 // console.log(invoiceId)
                 $("#changeStatusModal").modal("hide")
                 $.ajax({
-                    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/putInvoiceStatusUpdates',
+                    url: 'http://ec2-44-216-142-163.compute-1.amazonaws.com:3000/api/spade/putInvoiceStatusUpdates',
                     type: 'PUT',
                     data: JSON.stringify({
                         id: invoiceId,
