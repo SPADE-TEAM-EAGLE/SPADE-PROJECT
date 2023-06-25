@@ -960,7 +960,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="succesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- <div class="modal fade" id="succesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -988,7 +988,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="modal fade" id="myModal_edit" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
@@ -2385,7 +2385,25 @@
         var selectedFiles = []; var taskInfo=[]
         let taskId;
         $(document).ready(function() {
+            $.ajax({
+    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/protected',
+    method: 'GET',
+    headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+    },
+    success: function({user}) {
+        // console.log()
+        $("#user-name").text(user)
 
+
+    },
+    error: function(xhr, status, error) {
+        console.log('Error occurred while fetching state and city data.');
+        console.log(xhr);
+        console.log(error);
+        // console.log('Error occurred while fetching state and city data.');
+    }
+});
             $.ajax({
                 url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/viewAllPropertyTenant',
                 method: 'GET',
@@ -2395,7 +2413,6 @@
                 },
                 success: function(response) {
                     console.log(response.data[0])
-                    $("#user-name").text(response.user)
 
                     $("#property").empty()
                     $("#property").append($("<option></option>").text("Choose...").prop("selected", true))
@@ -2421,7 +2438,7 @@
                 },
                 success: function(response) {
                     // console.log(response.data)
-                    $("#user-name").text(response.user)
+                    // $("#user-name").text(response.user)
                         // console.log(response)
                     $("#assignee").empty()
                     $("#assignee").append($("<option></option>").text("Choose..."))
@@ -2445,7 +2462,7 @@
 
             function areAllFieldsFilled(update) {
                 if (update) {
-                    var accordion1Fields = $('#editModal input[required], #editModal select[required]');
+                    var accordion1Fields = $('#myModal_edit input[required], #myModal_edit select[required]');
 
                     var imageInput = $('#fileInput_update');
                     var allFieldsFilled = accordion1Fields.filter(function() {
@@ -2508,7 +2525,7 @@
                 }
                 updateButtonStatus();
             });
-            $('#editModal input[required], #editModal select[required]').on('input change', function() {
+            $('#myModal_edit input[required], #myModal_edit select[required]').on('input change', function() {
                 var $field = $(this);
                 var $errorMessage = $field.next('.text-danger');
 
@@ -2658,6 +2675,8 @@
             $('#close,#top-close').on('click', function(e) {
                 e.preventDefault()
                 resetAccordions()
+                selectedFiles=[]
+                $(".file-grid").empty()
                 $('#addModal').modal('hide');
             })
             $(document).on('click', '#next', function(e) {
@@ -2712,13 +2731,17 @@
                     },
                     success: function(response) {
                         console.log(2);
+                        $("#succesModal").modal("show")
+                        
                     },
                     error: function(xhr, status, error) {
                         window.alert('Error: ' + error);
                     }
                 });
             });
-
+            $(".btn-close").click(()=>{
+                getData()
+            })
             let propertyId;
 
             function updateSelectedFilesContainer() {
@@ -2770,18 +2793,24 @@
             }
 
             $('#myModal_edit').find('input, select').on('input change', function() {
-                var updateButton = document.getElementById('update');
+                var updateButton = document.getElementById('save');
                 console.log(updateButton)
                 var isFilled = true;
 
                 // Check each field for empty value and toggle red border and span visibility
                 $('#myModal_edit').find('input, select').each(function(index) {
-                    var value = $(this).val().trim();
+                    console.log($(this).val())
+                    if (Array.isArray($(this).val())) {
+    console.log(333);
+    var value = $(this).val();
+}
+                    else{
+                        var value = $(this).val().trim();
+                    }
+                    
                     var span = $(this).siblings('.text-danger');
-                    if (index == 0 && $('.file-grid').children()[1] ?.length === 0) {
-                        isFilled = false;
-                    } else if (index >= 1) {
-                        if (value === '' || value === 'Choose...') {
+                     
+                        if (value === '' || value === 'Choose...' || value.length===0) {
                             $(this).addClass('border-danger');
                             //   console.log(1)
                             span.removeClass('d-none');
@@ -2791,11 +2820,12 @@
                             span.addClass('d-none');
                         }
                     }
-                });
+                );
 
                 // Toggle button behavior based on the fields' status
                 if (isFilled) {
-                    updateButton.classList.remove('disabled')
+                    console.log("All the fields filled")
+                    updateButton.classList.remove("disabled")
                 } else {
                     updateButton.classList.add("disabled")
                 }
@@ -2827,16 +2857,16 @@
                     isColumnVisible ? column.show() : column.hide();
                 });
             });
-            $("#succesModal").on('hide.bs.modal', function() {
-                if (imageField.length) {
-                    imageField.val('');
-                    imageField.siblings('label.custom-file-label').find('.custom-file-text span').first().text('Upload Photo or drag and drop here');
-                    imageField.siblings('.selected-files').find('.file-grid').empty();
-                }
-                resetAccordions()
-                    // $('#accordion-item1').find('.file-grid').empty();
-                    // getData()
-            })
+            // $("#succesModal").on('hide.bs.modal', function() {
+            //     if (imageField.length) {
+            //         imageField.val('');
+            //         imageField.siblings('label.custom-file-label').find('.custom-file-text span').first().text('Upload Photo or drag and drop here');
+            //         imageField.siblings('.selected-files').find('.file-grid').empty();
+            //     }
+            //     resetAccordions()
+            //         // $('#accordion-item1').find('.file-grid').empty();
+            //         // getData()
+            // })
 
 
             let result;
@@ -3025,7 +3055,7 @@
                     },
                     success: function(response) {
                         e.preventDefault()
-                            // getData();
+                            getData();
                     },
                     error: function(xhr, status, error) {
                         window.alert('Error: ' + error);
@@ -3077,7 +3107,7 @@
 
                             window.location = './new-property.html'
                         } else {
-                            $("#user-name").text(response.user)
+                            // $("#user-name").text(response.user)
 
                             var tableBody = $('#table_body');
 

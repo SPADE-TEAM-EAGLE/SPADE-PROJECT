@@ -4277,6 +4277,30 @@
                 } else {
                     console.log("Invoice ID element not found.");
                 }
+                const data1 = invoiceData.find(obj => obj.invoiceID == invoiceId);
+                const data2 = tenantData.find(obj => obj.tenantID == data1.tenantID);
+
+                const data = {
+                    ...data1,
+                    ...data2
+                };
+                console.log(data)
+                window.onload = function () {
+            document.getElementById("create_pdf")
+                .addEventListener("click", () => {
+                    const invoice = this.document.getElementById("htmlContent");
+                    // console.log(invoice);
+                    // console.log(window);
+                    var opt = {
+                        margin: 0.1,
+                        filename: `${data.firstName}.pdf`,
+                        image: { type: 'jpeg', quality: 0.98 },
+                        html2canvas: { scale: 2 },
+                        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+                    };
+                    html2pdf().from(invoice).set(opt).save();
+                })
+        }
             });
             $(document).on('click', '.status-option', function () {
                 // const invoiceIdElement = $(this).closest("tr").find(".invoice-id");
@@ -4527,6 +4551,7 @@
                     }
                 });
             })
+
         });
 
     </script>
@@ -4605,23 +4630,24 @@
         // }());
 
 
-
-        window.onload = function () {
-            document.getElementById("create_pdf")
-                .addEventListener("click", () => {
-                    const invoice = this.document.getElementById("htmlContent");
-                    // console.log(invoice);
-                    // console.log(window);
-                    var opt = {
-                        margin: 0.1,
-                        filename: 'myfile.pdf',
-                        image: { type: 'jpeg', quality: 0.98 },
-                        html2canvas: { scale: 2 },
-                        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-                    };
-                    html2pdf().from(invoice).set(opt).save();
-                })
-        }
+        var name=document.getElementById("user-name").innerHTML
+        console.log(name,54344343663)
+        // window.onload = function () {
+        //     document.getElementById("create_pdf")
+        //         .addEventListener("click", () => {
+        //             const invoice = this.document.getElementById("htmlContent");
+        //             // console.log(invoice);
+        //             // console.log(window);
+        //             var opt = {
+        //                 margin: 0.1,
+        //                 filename: `${name}.pdf`,
+        //                 image: { type: 'jpeg', quality: 0.98 },
+        //                 html2canvas: { scale: 2 },
+        //                 jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+        //             };
+        //             html2pdf().from(invoice).set(opt).save();
+        //         })
+        // }
 
 
 
