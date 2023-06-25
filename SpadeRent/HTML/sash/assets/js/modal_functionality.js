@@ -1,5 +1,5 @@
 $.ajax({
-    url: 'http://ec2-44-216-142-163.compute-1.amazonaws.com:3000/api/spade/protected',
+    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/protected',
     method: 'GET',
     headers: {
         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -101,8 +101,8 @@ $(document).ready(function () {
         window.location='./properties-all.html'
     })
     $.ajax({
-        // url: 'http://ec2-44-216-142-163.compute-1.amazonaws.com:3000/api/spade/getStates',
-        url: 'http://ec2-44-216-142-163.compute-1.amazonaws.com:3000/api/spade/getStates',
+        // url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getStates',
+        url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getStates',
         method: 'GET',
         success: function({data}) {
             // Handle state selection change
@@ -306,7 +306,7 @@ $(document).on('click', '#next', function (e) {
 
     // Send the form data to the server using AJAX
     $.ajax({
-        url: 'http://ec2-44-216-142-163.compute-1.amazonaws.com:3000/api/spade/property',
+        url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/property',
         type: 'POST',
         data: formData,
         contentType: false,

@@ -2380,7 +2380,7 @@ color: #000;
         $(document).ready(function() {
 
             $.ajax({
-                url: 'http://ec2-44-216-142-163.compute-1.amazonaws.com:3000/api/spade/getStates',
+                url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getStates',
                 method: 'GET',
                 data: {
                     country: 'PK',
@@ -2627,7 +2627,7 @@ color: #000;
 
                 // Send the form data to the server using AJAX
                 $.ajax({
-                    url: 'http://ec2-44-216-142-163.compute-1.amazonaws.com:3000/api/spade/property',
+                    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/property',
                     type: 'POST',
                     data: formData,
                     contentType: false,
@@ -2822,7 +2822,7 @@ color: #000;
             function updateTable() {
                 $('#table_body').empty();
                 $.ajax({
-                    url: 'http://ec2-44-216-142-163.compute-1.amazonaws.com:3000/api/spade/allproperty',
+                    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/allproperty',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -2923,7 +2923,7 @@ color: #000;
 
                 formData.append("existingImages", existingImageNames)
                 $.ajax({
-                    url: 'http://ec2-44-216-142-163.compute-1.amazonaws.com:3000/api/spade/updateProperty',
+                    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/updateProperty',
                     // url: 'http://ec2-54-158-103-230.compute-1.amazonaws.com:3000/api/spade/updateProperty',
                     type: 'PUT',
                     data: formData,
@@ -2947,7 +2947,7 @@ color: #000;
                     // delete using AJAX
                     $('#myModal_delete').modal('hide');
                     $.ajax({
-                        url: 'http://ec2-44-216-142-163.compute-1.amazonaws.com:3000/api/spade/propertyDelete',
+                        url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/propertyDelete',
                         type: 'DELETE',
                         data: JSON.stringify({
                             "id": propertyId
@@ -2972,7 +2972,7 @@ color: #000;
                 $("#global-loader").fadeIn("fast")
                     // console.log(22)
                 $.ajax({
-                    url: 'http://ec2-44-216-142-163.compute-1.amazonaws.com:3000/api/spade/allproperty',
+                    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/allproperty',
                     type: 'GET',
                     contentType: false,
                     processData: false,
