@@ -1599,7 +1599,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="text-justify ps-2 border-model-line">
-                        <h2 class="modal-title mb-0">Edit <strong class="color-primary">Invoice</strong></h2>
+                        <h2 class="modal-title mb-0" id="previewHeading_update">Edit <strong class="color-primary">Invoice</strong></h2>
                         <button type="button" class="btn btn-primary">#Invoice Number: INV-89900A</button>
                     </div>
                     <button class="btn-close top-close" data-bs-dismiss="modal" aria-label="Close">
@@ -1764,7 +1764,7 @@
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="javascript:void(0)"><i class="fi fi-rs-eye me-2 text-primary"></i> Preview
+                            <li><a href="javascript:void(0)" id="preview_update"><i class="fi fi-rs-eye me-2 text-primary"></i> Preview
                                     Invoice</a></li>
                             <li><a href="javascript:void(0)" class="save-invoice_update"><i
                                         class="fi fi-rs-disk me-2 text-primary "></i> Save & Send</a></li>
@@ -2084,7 +2084,7 @@
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="javascript:void(0)"><i class="fi fi-rs-eye me-2 text-primary"></i> Preview
+                            <li><a href="javascript:void(0)" ><i class="fi fi-rs-eye me-2 text-primary"></i> Preview
                                     Invoice</a></li>
                             <li><a href="javascript:void(0)" class="save-invoice"><i
                                         class="fi fi-rs-disk me-2 text-primary "></i> Save & Send</a></li>
@@ -3511,8 +3511,10 @@
                 // console.log(222222)
                 // console.log($('#preview').text().startsWith(" Preview"))
                 // console.log($('#preview').text().split(' ')[1].split('/')[0]=="Preview")
-                if ($('#preview').text().startsWith(" Edit")) {
-                    // console.log(222)
+                var text = $("#preview").text().trim();
+console.log(text.startsWith("Preview"));
+                if ($('#preview').text().trim().startsWith("Edit")) {
+                    console.log(222)
                     $("#previewHeading").empty()
                     $("#previewHeading").append(`Create <strong class="color-primary">New Invoice</strong>`)
                     $("#addModal input,#addModal textarea").prop("readonly", false)
@@ -3528,10 +3530,10 @@
                         $(this).removeClass('d-none')
                     })
 
-                } else if ($('#preview').text().startsWith(" Preview")) {
+                } else if ($('#preview').text().trim().startsWith("Preview")) {
                     $("#previewHeading").empty()
                     console.log(22222)
-                    $("#previewHeading").append(`Update <strong class="color-primary">Invoice</strong>`)
+                    $("#previewHeading").append(`Preview <strong class="color-primary">Invoice</strong>`)
                     $("#addModal input,#addModal textarea").prop("readonly", true)
                     $("#addModal input[type='file']").prop("disabled", true)
 
@@ -3549,6 +3551,51 @@
                 // <a href="javascript:void(0)" id="preview"><i class="fi fi-rs-eye me-2 text-primary"></i> </a>
 
             })
+            $(document).on("click", "#preview_update", function () {
+                // console.log(222222)
+                // console.log($('#preview').text().startsWith(" Preview"))
+                // console.log($('#preview').text().split(' ')[1].split('/')[0]=="Preview")
+                // var text = $("#preview_update").text().trim();
+// console.log(text.startsWith("Preview"));
+                if ($('#preview_update').text().trim().startsWith("Edit")) {
+                    console.log(222)
+                    $("#previewHeading_update").empty()
+                    $("#previewHeading_update").append(`Edit <strong class="color-primary">New Invoice</strong>`)
+                    $("#myModal_edit input,#myModal_edit textarea").prop("readonly", false)
+                    $("#myModal_edit input[type='file']").prop("disabled", false)
+
+                    $("#myModal_edit select").prop("disabled", false)
+                    $("#preview_update").empty()
+                    $("#preview_update").append(`<i class="fi fi-rs-eye me-2 text-primary"></i> Preview
+                                    Invoice`)
+                    $("#no-add-item1_update").attr('id', "add-item1_update")
+                    $("#no-del-btn1_update").attr('id', "del-btn1_update")
+                    $(".delete-file").each(function () {
+                        $(this).removeClass('d-none')
+                    })
+
+                } else if ($('#preview_update').text().trim().startsWith("Preview")) {
+                    $("#previewHeading_update").empty()
+                    console.log(22222)
+                    $("#previewHeading_update").append(`Preview <strong class="color-primary">Invoice</strong>`)
+                    $("#myModal_edit input,#myModal_edit textarea").prop("readonly", true)
+                    $("#myModal_edit input[type='file']").prop("disabled", true)
+
+                    $("#myModal_edit select").prop("disabled", true)
+                    $("#preview_update").empty()
+                    $("#preview_update").append(`<i class="fi fi-rs-edit me-2 text-primary"></i> Edit Invoice`)
+                    $("#add-item1_update").attr('id', "no-add-item1_update")
+                    $("#del-btn1_update").attr('id', "no-del-btn1_update")
+                    $(".delete-file").each(function () {
+                        $(this).addClass('d-none')
+                    })
+
+                }
+                // console.log(333)
+                // <a href="javascript:void(0)" id="preview"><i class="fi fi-rs-eye me-2 text-primary"></i> </a>
+
+            })
+            
             // $("#succesModal").modal("show")
             $("#succes-addtenant-close").click(() => {
                 $("#succesModal").modal("hide")
@@ -4293,7 +4340,7 @@
                     // console.log(window);
                     var opt = {
                         margin: 0.1,
-                        filename: `${data.firstName}.pdf`,
+                        filename: `invoice.pdf`,
                         image: { type: 'jpeg', quality: 0.98 },
                         html2canvas: { scale: 2 },
                         jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }

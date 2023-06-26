@@ -694,7 +694,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="text-justify ps-2 border-model-line">
-                        <h2 class="modal-title mb-0">Create <strong class="color-primary">New Invoice</strong></h2>
+                        <h2 class="modal-title mb-0" id="previewHeading">Create <strong class="color-primary">New
+                            Invoice</strong></h2>
                         <button type="button" class="btn btn-primary">#Invoice Number: INV-89900A</button>
                     </div>
                     <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="top-close">
@@ -709,8 +710,31 @@
                                 name="tenants" id="tenants" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select Tenant" data-bs-container="#addModal">
                                 <option label="Choose one">
                                 </option>
-                                <option value="Repeat Yearly">Repeat Yearly</option>
-                                <option value="Repeat Monthly">Repeat Monthly</option>
+                                <!-- <option value="Repeat Yearly">Repeat Yearly</option>
+                                <option value="Repeat Monthly">Repeat Monthly</option> -->
+                            </select>
+                            <span class="text-danger d-none">Photos are required!</span>
+                        </div>
+                        <div class="col-md-12 col-lg-6">
+                            <label class="form-label fw-bold fs-18">Select Property</label>
+                            <select class="form-control select2 form-select d-block" data-placeholder="Select Property"
+                                name="tenants" id="propertyName" data-bs-placement="top" data-bs-toggle="tooltip"
+                                title="" data-bs-original-title="Select Property" data-bs-container="#addModal">
+                                <option label="Choose one">
+                                </option>
+
+                            </select>
+                            <span class="text-danger d-none">Photos are required!</span>
+                        </div>
+
+                        <div class="col-md-12 col-lg-6">
+                            <label class="form-label fw-bold fs-18">Select Unit</label>
+                            <select class="form-control select2 form-select d-block" data-placeholder="Select Unit"
+                                name="tenants" id="propertyUnit" data-bs-placement="top" data-bs-toggle="tooltip"
+                                title="" data-bs-original-title="Select Unit" data-bs-container="#addModal">
+                                <option label="Choose one">
+                                </option>
+
                             </select>
                             <span class="text-danger d-none">Photos are required!</span>
                         </div>
@@ -729,11 +753,6 @@
                                     <span class="custom-control-label">Recurring Invoice</span>
                                 </label> -->
                             </div>
-                        </div>
-                        <div class="col-md-8 col-lg-6">
-                            <label class="form-label fw-bold fs-18">Property Name</label>
-                            <input type="text" class="form-control form" id="propertyName" value="" readonly data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Property Name here" data-bs-container="#addModal">
-                            <span class="text-danger d-none">Photos are required!</span>
                         </div>
                         <div class="col-md-8 col-lg-6">
                             <label class="form-label fw-bold fs-18">Due Date</label>
@@ -874,11 +893,12 @@
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
-                        <ul class="dropdown-menu" role="menu" style="">
-                            <li><a href="javascript:void(0)"><i class="fi fi-rs-eye me-2 text-primary"></i> Preview
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="javascript:void(0)" id="preview"><i class="fi fi-rs-eye me-2 text-primary"></i>
+                                    Preview
                                     Invoice</a></li>
                             <li><a href="javascript:void(0)" class="save-invoice"><i
-                                        class="fi fi-rs-disk me-2 text-primary "></i> Save & Send</a></li>
+                                        class="fi fi-rs-disk me-2 text-primary"></i> Save & Send</a></li>
                             <li>
                                 <a href="javascript:void(0)" class="save-invoice"> <i
                                         class="fi fi-rs-print me-2 text-primary "></i>Save & Print</a>
@@ -2046,6 +2066,50 @@
     </script>
     <script>
         $(document).ready(function () {
+            $(document).on("click", "#preview", function () {
+                // console.log(222222)
+                // console.log($('#preview').text().startsWith(" Preview"))
+                // console.log($('#preview').text().split(' ')[1].split('/')[0]=="Preview")
+                var text = $("#preview").text().trim();
+console.log(text.startsWith("Preview"));
+                if ($('#preview').text().trim().startsWith("Edit")) {
+                    console.log(222)
+                    $("#previewHeading").empty()
+                    $("#previewHeading").append(`Create <strong class="color-primary">New Invoice</strong>`)
+                    $("#addModal input,#addModal textarea").prop("readonly", false)
+                    $("#addModal input[type='file']").prop("disabled", false)
+
+                    $("#addModal select").prop("disabled", false)
+                    $("#preview").empty()
+                    $("#preview").append(`<i class="fi fi-rs-eye me-2 text-primary"></i> Preview
+                                    Invoice`)
+                    $("#no-add-item1").attr('id', "add-item1")
+                    $("#no-del-btn1").attr('id', "del-btn1")
+                    $(".delete-file").each(function () {
+                        $(this).removeClass('d-none')
+                    })
+
+                } else if ($('#preview').text().trim().startsWith("Preview")) {
+                    $("#previewHeading").empty()
+                    console.log(22222)
+                    $("#previewHeading").append(`Preview <strong class="color-primary">Invoice</strong>`)
+                    $("#addModal input,#addModal textarea").prop("readonly", true)
+                    $("#addModal input[type='file']").prop("disabled", true)
+
+                    $("#addModal select").prop("disabled", true)
+                    $("#preview").empty()
+                    $("#preview").append(`<i class="fi fi-rs-edit me-2 text-primary"></i> Edit Invoice`)
+                    $("#add-item1").attr('id', "no-add-item1")
+                    $("#del-btn1").attr('id', "no-del-btn1")
+                    $(".delete-file").each(function () {
+                        $(this).addClass('d-none')
+                    })
+
+                }
+                // console.log(333)
+                // <a href="javascript:void(0)" id="preview"><i class="fi fi-rs-eye me-2 text-primary"></i> </a>
+
+            })
             $("#succes-close").click(()=>{
                 window.location='./create-invoicing.html'
             })
@@ -2411,8 +2475,13 @@
                         return tenant.propertyName
                     }
                 })
-                // console.log(propertyName)
-                $("#propertyName").val(propertyName[0].propertyName+` (${propertyName[0].unitNumber})`)
+                console.log(propertyName)
+                $("#propertyName").empty()
+                $("#propertyUnit").empty()
+                $("#propertyName").append($('<option label="Choose one"></option>'))
+                $("#propertyUnit").append($('<option label="Choose one"></option>'))
+                $("#propertyName").append($('<option></option>').text(propertyName[0].propertyName).val(propertyName[0].propertyID))
+                $("#propertyUnit").append($('<option></option>').text(propertyName[0].unitNumber).val(propertyName[0].propertyUnitID))
             })
             function checkFields() {
                 var isFilled = true;
@@ -2440,7 +2509,7 @@
 
             // Call the checkFields function on page load
             checkFields();
-            $("#add-item1").on("click", () => {
+            $(document).on("click", "#add-item1", () => {
                 $("#add-item-container1").append(`<tr class="tr">
                                             <td><input type="text" class="form-control" name="category"></td>
                                             <td><input type="text" class="form-control" name="property"></td>
@@ -2451,7 +2520,7 @@
                                             </button></td>
                                         </tr>`)
             });
-            $("#add-item1_update").on("click", () => {
+            $(document).on("click", "#add-item1_update", () => {
                 $("#add-item-container1_update").append(`<tr class="tr">
                                             <td><input type="text" class="form-control" name="category_update"></td>
                                             <td><input type="text" class="form-control" name="property_update"></td>
