@@ -1550,7 +1550,7 @@ color: #000;
                                 <div class="row">
                                     <div class="col-lg-9">
                                         <h3 class="page-titlee text-white" style="font-weight: 100; margin-bottom: 0px;">Welcome to Spade Portal</h3>
-                                        <h1 class="page-titlee text-white" style="font-weight: 700;" id="user-name">John Clark
+                                        <h1 class="page-titlee text-white" style="font-weight: 700;" id="user-name">
                                         </h1>
                                         <a href="javascript:void(0)" id="email_verification" class="btn btn-primary btn-pill btn-xl email-verification-btn"><i
                                                 class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
@@ -2327,7 +2327,7 @@ color: #000;
                     $("#succesModal").modal("hide")
                     console.log(tenantID)
                     $.ajax({
-                        url: 'https://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/sendInvitationLink',
+                        url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/sendInvitationLink',
                         type: 'POST',
                         data: JSON.stringify({
                             tenantID: tenantID
@@ -2351,7 +2351,7 @@ color: #000;
                 })
                 // $("#succesModal").modal("show")
             $.ajax({
-                url: 'https://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getStates',
+                url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getStates',
                 method: 'GET',
                 success: function({data}) {
                     // Handle state selection change
@@ -2374,7 +2374,24 @@ color: #000;
                 }
             });
             $.ajax({
-                url: 'https://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getPropertyUnitsTenant',
+    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/protected',
+    method: 'GET',
+    headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+    },
+    success: function({user}) {
+        $("#user-name").text(user)
+
+    },
+    error: function(xhr, status, error) {
+        console.log('Error occurred while fetching state and city data.');
+        console.log(xhr);
+        console.log(error);
+        // console.log('Error occurred while fetching state and city data.');
+    }
+});
+            $.ajax({
+                url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getPropertyUnitsTenant',
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -2383,7 +2400,7 @@ color: #000;
                 },
                 success: function(response) {
                     var properties = response.data; // Assuming the response data is an array of property objects
-                    $("#user-name").text(response.user)
+                    // $("#user-name").text(response.user)
                         // Populate Select Property dropdown
                     var propertySelect = $('#property');
                     propertySelect.empty(); // Clear existing options
@@ -2572,7 +2589,7 @@ color: #000;
                 $("#addModal").modal("hide")
                     // Make the AJAX call
                 $.ajax({
-                    url: 'https://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/tenants',
+                    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/tenants',
                     type: 'POST',
                     data: JSON.stringify(formData),
                     contentType: "application/json; charset=utf-8",

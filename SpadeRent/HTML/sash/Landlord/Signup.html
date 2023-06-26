@@ -281,10 +281,12 @@
             color: #0CA7B6;
             border: 2px solid #0CA7B6;
         }
+        
         .dark-mode .btn3-green {
             color: #0CA7B6;
             border: 2px solid #0CA7B6;
         }
+        
         .text3-green {
             color: #0CA7B6 !important;
         }
@@ -293,10 +295,12 @@
             color: #1D80C4;
             border: 2px solid #1D80C4;
         }
+        
         .dark-mode .btn4-blue {
             color: #1D80C4;
             border: 2px solid #1D80C4;
         }
+        
         .text4-blue {
             color: #1D80C4 !important;
         }
@@ -2694,8 +2698,8 @@
                 var phone = $("#phone1").val();
                 var password = $("#id_password2").val();
                 $.ajax({
-                    url: "https://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/Signup",
-                    type: "GET",
+                    url: "http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/Signup",
+                    type: "POST",
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({
                         firstName: fname,
@@ -2722,6 +2726,7 @@
                             setTimeout(function() {
                                 $('#myModal_warning').modal('hide');
                                 loader.style.display = "block";
+
                                 function firstBtnChange() {
                                     loader.style.display = "block";
                                     card2.classList.add("card-fade");
@@ -2733,6 +2738,7 @@
                                     part2.classList.remove("shadow-active");
                                     part3.classList.remove("shadow-active");
                                     setTimeout(delay1, 2500);
+
                                     function delay1() {
                                         loader.style.display = "none";
                                         card2.style.display = "none";

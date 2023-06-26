@@ -762,14 +762,14 @@ color: #000;
                                     data-bs-container="#addModal" id="streetAddress" required>
                                 <span class="text-danger d-none">Street address is required!</span>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label for="inputEmail3" class="form-label fw-bold">City</label>
                                 <input class="form-control" type="text" data-bs-placement="top" data-bs-toggle="tooltip"
                                     title="" data-bs-original-title="Enter your City here" data-bs-container="#addModal"
                                     id="city" required>
                                 <span class="text-danger d-none">City is required!</span>
                             </div>
-                            <div class="col-md-4">
+                            <!-- <div class="col-md-4">
                                 <label for="inputState" class="form-label fw-bold">Status</label>
                                 <select class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip"
                                     title="" data-bs-original-title="Select Status" data-bs-container="#addModal"
@@ -780,8 +780,8 @@ color: #000;
                                     <option value="Completed">Completed</option>
                                 </select>
                                 <span class="text-danger d-none">Status is required!</span>
-                            </div>
-                            <div class="col-md-4">
+                            </div> -->
+                            <div class="col-md-6">
                                 <label for="inputEmail3" class="form-label fw-bold">Zip Code</label>
                                 <input class="form-control form" type="text" id="zip" name="zip"
                                 pattern="[0-9]{5}" placeholder="A valid 5-digit zip code" maxlength="5"
@@ -881,11 +881,11 @@ color: #000;
                             <div class="col-md-4">
                                 <label for="inputState" class="form-label fw-bold">Status</label>
                                 <select id="state" class="form-select form">
-                                    <option selected>Choose...</option>
+                                    <!-- <option selected>Choose...</option>
                                     <option>Sindh</option>
                                     <option>Punjab</option>
                                     <option>Balochistan</option>
-                                    <option>KPK</option>
+                                    <option>KPK</option> -->
                                 </select>
                                 <span class="text-danger d-none">Address is required!</span>
                             </div>
@@ -2352,6 +2352,25 @@ color: #000;
 
     <script>
         $(document).ready(() => {
+            $.ajax({
+    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/protected',
+    method: 'GET',
+    headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+    },
+    success: function({user}) {
+        // console.log()
+        $("#user-name").text(user)
+
+
+    },
+    error: function(xhr, status, error) {
+        console.log('Error occurred while fetching state and city data.');
+        console.log(xhr);
+        console.log(error);
+        // console.log('Error occurred while fetching state and city data.');
+    }
+});
             let vendorData;
             function resetAccordions(update) {
   // Reset fields in the specific accordion (#collapseOne)
@@ -2391,7 +2410,7 @@ color: #000;
 }
 
             $.ajax({
-                url: 'https://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getVendorCategory',
+                url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getVendorCategory',
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -2429,7 +2448,7 @@ color: #000;
                 var businessName = $("#businessName").val();
                 var streetAddress = $("#streetAddress").val();
                 var city = $("#city").val();
-                var status = $("#status").val();
+                // var status = $("#status").val();
                 var zip = $("#zip").val();
                 var workPhone = $("#workPhone").val();
                 var phone = $("#phone").val();
@@ -2443,7 +2462,7 @@ color: #000;
                 formData.append('businessName', businessName);
                 formData.append('streetAddress', streetAddress);
                 formData.append('city', city);
-                formData.append('status', status);
+                // formData.append('status', status);
                 formData.append('zip', zip);
                 formData.append('phone', phone);
                 formData.append('workPhone', workPhone);
@@ -2452,7 +2471,8 @@ color: #000;
                 // formData.append('categoryID', 2);
                 console.log(status)
                 $.ajax({
-                    url: 'https://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/addVendor',
+                    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/addVendor',
+                    // url: 'http://localhost:3000/api/spade/addVendor',
                     type: 'POST',
                     data: JSON.stringify({
                         firstName: firstName,
@@ -2460,11 +2480,11 @@ color: #000;
                         businessName: businessName,
                         streetAddress: streetAddress,
                         city: city,
-                        status: status,
+                        // status: status,
                         zip: zip,
                         phone: phone,
                         workPhone: workPhone,
-                        status: status,
+                        // status: status,
                         email: email,
                         // formData.append(categoryID:category),
                         categoryID: category
@@ -2491,7 +2511,7 @@ color: #000;
             $("#preloader").fadeIn("fast");
             // console.log(22)
             $.ajax({
-                url: 'https://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getAllVendors',
+                url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getAllVendors',
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -2507,7 +2527,7 @@ color: #000;
                         window.location = "./new-tenant.html"
                     }
                     vendorData = response.data[0]
-                    $("#user-name").text(response.name)
+                    // $("#user-name").text(response.name)
                     var tableBody = $('#table_body');
                     tableBody.empty();
                     // console.log(data[0])

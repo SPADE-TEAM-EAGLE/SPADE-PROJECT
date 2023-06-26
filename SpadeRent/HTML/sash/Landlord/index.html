@@ -604,7 +604,7 @@
                                 <div class="row">
                                     <div class="col-lg-9">
                                         <h3 class="page-titlee text-white" style="font-weight: 100; margin-bottom: 0px;">Welcome to Spade Portal</h3>
-                                        <h1 class="page-titlee text-white" style="font-weight: 700;" id="user-name">John Clark</h1>
+                                        <h1 class="page-titlee text-white" style="font-weight: 700;" id="user-name"></h1>
                                         <a href="javascript:void(0)" class="btn btn-primary btn-pill btn-xl email-verification-btn mb-3" id="email_verification"><i
                                                 class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
                                             verification &nbsp; <i
@@ -623,21 +623,21 @@
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
                                 <div class="d-flex justify-content-end">
-                                    <div class="form-group me-3">
-                                        <select class="form-select form-select">
-                                              <option selected>Filter by Property</option>
-                                              <option value="1">Germany</option>
-                                              <option value="2">Canada</option>
-                                              <option value="3">Usa</option>
-                                              <option value="4">Aus</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
+                                        <!-- <div class="form-group me-3">
+                                            <select class="form-select form-select">
+                                                <option selected>Filter by Property</option>
+                                                <option value="1">Germany</option>
+                                                <option value="2">Canada</option>
+                                                <option value="3">Usa</option>
+                                                <option value="4">Aus</option>
+                                            </select>
+                                        </div> -->
+                                    <!-- <div class="form-group">
                                         <button class="btn btn-primary btn-pill" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i
                                             class=
                                             "fi fi-rs-settings-sliders"
                                             ></i> Customized Dashboard</button>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
@@ -1522,99 +1522,26 @@
     </script>
     <script>
         $(document).ready(() => {
-    //         $.ajax({
-    //                 url: 'https://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com//api/spade/getAllTask',
-    //                 type: 'GET',
-    //                 contentType: false,
-    //                 processData: false,
-                    // headers: {
-                    //     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    // },
-    //                 success: function (response) {
-    //     console.log(response);
-    //     if (false) {
-    //         window.location = './new-property.html';
-    //     } else {
-    //         $("#user-name").text(response.user);
+            $.ajax({
+    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/protected',
+    method: 'GET',
+    headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+    },
+    success: function({user}) {
+        $("#user-name").text(user)
 
-    //         var tableBody = $('#table-body');
-    //         tableBody.empty();
-
-    //         function toTitleCase(str) {
-    //             return str.replace(/\w\S*/g, function (txt) {
-    //                 return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-    //             });
-    //         }
-
-    //         var taskInfo = response.data[0];
-    //         taskInfo?.forEach(function (task) {
-    //             // var image = '<td><img src="../../../../spadeAPI/uploads/' + (task.taskImages?.split(',')[0] || '') + '" alt=""></td>';
-
-    //             var createdDate = new Date(task.created_at);
-    //             var currentDate = new Date();
-
-    //             var timeDiff = Math.abs(currentDate - createdDate);
-    //             var minutesDiff = Math.floor(timeDiff / (1000 * 60));
-    //             var hoursDiff = Math.floor(minutesDiff / 60);
-    //             var daysDiff = Math.floor(hoursDiff / 24);
-
-    //             var taskName = '<td class="task-id" id=' + task.id + ' style="font-weight: 600;">' +
-    //                 '<p style="font-weight: 600;" class="mb-1">' + task.taskName + '</p>' +
-    //                 '<span class="font-weight-normal" style="color: #9B9B9B;"> By ' + task.createdBy + ' - ';
-
-    //             if (daysDiff > 0) {
-    //                 taskName += daysDiff + ' days';
-    //             } else if (hoursDiff > 0) {
-    //                 taskName += hoursDiff + ' hours';
-    //             } else {
-    //                 taskName += minutesDiff + ' minutes';
-    //             }
-
-    //             taskName += '</span></td>';
-    //             var propertyName='<td class="property-id" id=' + task.id + ' style="font-weight: 600;">' +
-    //                 '<p style="font-weight: 600;" class="mb-1">' + task.propertyName + '</p>' +
-    //                 '<span class="font-weight-normal" style="color: #9B9B9B;"> Unit no. ' + task.unitNumber
-    //             var assignTo = '<td style="font-weight: 600;text-align: center;display: flex;">';
-    //             if (task.AssignTo) {
-    //                 assignTo += task.AssignTo.map(function ({ name, email }) {
-    //                     return '<div class="me-2">' +
-    //                         '<img class="avatar brround avatar-md" src="../assets/images/users/2.jpg" alt="avatar-img">' +
-    //                         '<div class="media-body valign-middle mt-0">' +
-    //                         '<a href="javascript:void(0)" class="text-dark fw-semibold">' + name + '</a>' +
-    //                         '</div>' +
-    //                         '</div>';
-    //                 }).join('');
-    //             } else {
-    //                 assignTo += 'Not assigned';
-    //             }
-    //             assignTo += '</td>';
-
-    //             var dueDate = '<td class="property-id " style="font-weight: 600;">' +
-    //                 '<p style="font-weight: 600;" class="mb-1">' + (task.dueDate || 'Not Set') + '</p>' +
-    //                 '<span class="font-weight-normal text-danger"><i class="fe fe-circle me-1"></i>' + task.priority + '</span>' +
-    //                 '</td>';
-
-    //             // Create a table row and append the generated columns
-    //             var status = '<td class="task-id" style="font-weight: 600;">' +'<p style="font-weight: 600;" class="mb-1">' +  task.status + '</p>'+'</tr>';
-    //                 // console.log(status)
-    //             var row = '<tr>' +taskName + assignTo + dueDate+propertyName+status + '</tr>';
-
-    //             // Append the row to the table body
-    //             tableBody.append(row);
-    //         });
-    //         $("#global-loader").fadeOut("slow");
-    //     }
-    // },
-    //                 error: function(xhr, status, error) {
-    //                     console.log(error)
-    //                     window.alert('Error: ' + "Token expeired!, Login again");
-    //                     window.location = '../Landlord/login_module.html';
-    //                 }
-    //             });
-      // Function to update the table with filtered data
+    },
+    error: function(xhr, status, error) {
+        console.log('Error occurred while fetching state and city data.');
+        console.log(xhr);
+        console.log(error);
+        // console.log('Error occurred while fetching state and city data.');
+    }
+});
   function updateTable(tabId) {
     var tableBody = $('#' + tabId + ' tbody');
-    var apiUrl = 'https://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getAllTask'; // Replace with your API endpoint URL
+    var apiUrl = 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getAllTask'; // Replace with your API endpoint URL
 
     // Make an API call to fetch all tasks
     $.ajax({
@@ -1624,7 +1551,7 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
       success: function(response) {
-            $("#user-name").text(response.data[0][0].createdBy);
+            // $("#user-name").text(response.data[0][0].createdBy);
             // console.log(response.data[0][0].createdBy)
         taskInfo=response.data[0]
         tableBody.empty(); // Clear existing table data
@@ -1748,7 +1675,7 @@
     </script>
     <!-- column drag and drop start  -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.5.2/dragula.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.5.2/dragula.min.js"></script> -->
     <script>
         var COL_WIDTH = 62 // should be calculated dynamically, and recalculated at window resize
         var GUTTER_WIDTH = 30
@@ -1865,8 +1792,71 @@
                     position: 'right'
                 },
                 ]
-                }).start();}
+                }).start();
+            }
           </script>
+           <script>
+            introJs().setOptions({
+            steps: [
+            {
+                element: document.querySelector('.card-demo-0'),
+                // title: 'Want to 2 minuts and learn what you can do with Rent',
+                intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4">Your browser does not support the video tag.</video> <br> <b style="font-size: 17px; color: #000;">Want to 2 minuts and learn what you can do with Rent</b> <br><br> <p style="color: #201414;">Spade Rent is your one-stop-shop to find tenants and manage your Rental property.</p>',
+                // intro: 'This step focuses on an element',
+                position: 'top-top'
+            },
+            {
+                element: document.querySelector('.card-demo-1'),
+                title: 'Manage your Properties',
+                intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px; color: #000;">Manage and grow your portfolio from anywhere with ease.</b>',
+                // intro: 'This step focuses on an element',
+                position: 'right'
+            },
+            {
+                element: document.querySelector('.card-demo-2'),
+                title: 'Manage Tenants',
+                intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px; color: #000;"">Whether you are looking to market your rental across the web or send a tenant an online application, you first need to add your property.</b>',
+                // intro: 'This step focuses on an element',
+                position: 'right'
+            },
+            {
+                element: document.querySelector('.card-demo-3'),
+                title: 'Manage Invoicing',
+                intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px; color: #000;"">Whether you are looking to market your rental across the web</b>',
+                // intro: 'This step focuses on an element',
+                position: 'right'
+            },
+            {
+                element: document.querySelector('.card-demo-4'),
+                title: 'Manage Leads',
+                intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px; color: #000;"">Whether you are looking to market your rental across the web</b>',
+                // intro: 'This step focuses on an element',
+                position: 'right'
+            },
+            {
+                element: document.querySelector('.card-demo-5'),
+                title: 'Manage Tasks',
+                intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px; color: #000;"">Whether you are looking to market your rental across the web</b>',
+                // intro: 'This step focuses on an element',
+                position: 'right'
+            },
+            {
+                element: document.querySelector('.card-demo-6'),
+                title: 'Manage Reports',
+                intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px; color: #000;"">Whether you are looking to market your rental across the web</b>',
+                // intro: 'This step focuses on an element',
+                position: 'right'
+            },
+            {
+                element: document.querySelector('.card-demo-7'),
+                title: 'Manage Setttings',
+                intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px; color: #000;"">Whether you are looking to market your rental across the web</b>',
+                // intro: 'This step focuses on an element',
+                position: 'right'
+            },
+            ]
+            }).start();
+      </script>
           <!-- demo walktrough End  -->
 
 </body>

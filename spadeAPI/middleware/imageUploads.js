@@ -12,6 +12,18 @@ const Path = require('path');
         }
     })
 }).array("image");
+// const upload = multer({
+//   storage: multer.diskStorage({
+//     destination: function (req, file, cb) {
+//       const uploadFolderPath = Path.join(__dirname, '..', 'uploads'); // Relative path to the destination folder
+//       cb(null, uploadFolderPath);
+//     },
+//     filename: function (req, file, cb) {
+//       // Generate the filename for the uploaded file
+//       cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+//     }
+//   })
+// }).array('image');
 const uploadExistingFiles = async (req, res, next) => {
     try {
     //   console.log(req)
