@@ -15,7 +15,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="../assets/images/brand/favicon.ico" />
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css'>
     <!-- TITLE -->
-    <title>Property Overview - SpadeRent</title>
+    <title>Overview - SpadeRent</title>
 
     <!-- BOOTSTRAP CSS -->
     <link id="style" href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -65,6 +65,23 @@
 
 .counter-card-hover:hover{
     border: 3px solid #1467B0 !important;
+}
+#chat-bot-btn {
+    color: #fff;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 99;
+    display: none;
+    text-align: center;
+    z-index: 50;
+    height: 50px;
+    width: 50px;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 50%;
+    background: var(--primary-bg-color);
+    font-size: 25px;
 }
     </style>
 
@@ -406,7 +423,7 @@
                                             <a href="javascript:void(0)" data-bs-toggle="dropdown" class="nav-link leading-none d-flex">
                                                 <!-- <img src="../assets/images/users/21.jpg" alt="profile-user"
                                                     class="avatar  profile-user brround cover-image"> -->
-                                                <span class="side-menu__item dynamic-text-head" style="padding: 10px 10px;">Spade Admin</span> <i class="fe fe-chevron-down text-dark text-dark" style="font-size: 20px; font-weight: 800;"></i>
+                                                <span class=" dynamic-text-head" style="padding: 10px 10px;" id="header-user">Spade Admin</span> <i class="fe fe-chevron-down text-dark text-dark" style="font-size: 20px; font-weight: 800;"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                                 <!-- <div class="drop-heading">
@@ -559,7 +576,7 @@
                                 </ul>
                             </li>
                             <li class="slide card-demo-6">
-                                <a class="side-menu__item" data-bs-toggle="slide" href="coming-soon.html">
+                                <a class="side-menu__item" data-bs-toggle="slide" href="reports.html">
                                     <i class="side-menu__icon fi fi-rs-document"></i>
                                     <span class="side-menu__label">Reports</span>
 
@@ -738,7 +755,7 @@
                                         <h3 class="card-title"><b>Properties Status</b></h3>
                                     </div>
                                     <div class="card-body">
-                                        <div id="chart-donut" class="chartsh"></div>
+                                        <div id="chart-donut4" class="chartsh"></div>
                                     </div>
                                 </div>
                             </div>
@@ -1410,9 +1427,9 @@
     <!-- FOOTER END -->
 
     </div>
-
     <!-- BACK-TO-TOP -->
-    <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a>
+    <!-- <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a> -->
+    <a class="d-flex justify-content-center align-items-center" id="chat-bot-btn"><i class= "fi fi-rs-comments"></i></a>
 
     <!-- JQUERY JS -->
     <script src="../assets/js/jquery.min.js"></script>
@@ -1530,6 +1547,8 @@
     },
     success: function({user}) {
         $("#user-name").text(user)
+        $("#header-user").text(user)
+        
 
     },
     error: function(xhr, status, error) {

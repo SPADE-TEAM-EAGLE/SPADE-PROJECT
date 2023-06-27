@@ -1132,27 +1132,26 @@
       </div>
     <div class="modal fade" id="succesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
+            <div class="modal-content success-modal-content">
                 <div class="modal-header">
 
                     <button class="btn-close-succes" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
                     </button>
                 </div>
-                <div class="modal-body succes-modal">
+                <div class="modal-body succes-modal" style="padding-top: 70px;padding-bottom: 70px;">
                     <div class="text-justify ps-2 border-model-line">
                         <h2 class="modal-title d-flex align-items-center ps-1">
                             <strong class="color-primary">Success!&nbsp;</strong>
                             <i class="fi fi-rs-check-circle text-success"></i>
                         </h2>
-                        <a href="javascript:void(0)" class="btn btn-outline-default btn-pill ms-1 my-2" style='background-color:#1467B0;color: white;'> <i class="fi fi-rs-pencil"></i> EDIT PROPERTY UNITS</a>
+                        <p class="ms-2 mb-0 text-start">Your task has been successfully added.</p>
+                        <!-- <p class="ms-2 text-start">Please add tenant to this property.</p> -->
+                        <a data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal" class="btn btn-outline-default btn-pill ms-1 my-2" style='background-color:#1467B0;color: white;'> <i class="fi fi-rs-pencil"></i> ADD NEW TASK</a>
                         <a class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal">
-                            <i class="fi fi-rs-plus-small" style="vertical-align: middle;"></i>Add Tenants
+                            Close
                         </a>
-                        <p class="ms-2 mb-0 text-start">Your Property has been successfully added.</p>
-                        <p class="ms-2 text-start">Please add tenant to this property.</p>
                     </div>
-
                 </div>
                 <div class="modal-footer" style="border-top: 0">
                 </div>
@@ -1337,7 +1336,7 @@
                                             <a href="javascript:void(0)" data-bs-toggle="dropdown" class="nav-link leading-none d-flex">
                                                 <!-- <img src="../assets/images/users/21.jpg" alt="profile-user"
                                                     class="avatar  profile-user brround cover-image"> -->
-                                                <span class="side-menu__item dynamic-text-head" style="padding: 10px 10px;">Spade Admin</span> <i class="fe fe-chevron-down dark-mode text-dark" style="font-size: 20px; font-weight: 800;"></i>
+                                                <span class="dynamic-text-head" style="padding: 10px 10px;" id="header-user">Spade Admin</span> <i class="fe fe-chevron-down dark-mode text-dark" style="font-size: 20px; font-weight: 800;"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                                 <!-- <div class="drop-heading">
@@ -1495,7 +1494,7 @@
                                 </ul>
                             </li>
                             <li class="slide">
-                                <a class="side-menu__item" data-bs-toggle="slide" href="coming-soon.html">
+                                <a class="side-menu__item" data-bs-toggle="slide" href="reports.html">
                                     <i class="side-menu__icon fi fi-rs-document"></i>
                                     <span class="side-menu__label">Reports</span>
 
@@ -1566,35 +1565,35 @@
                                                             class="typcn typcn-filter fs-16"></i><strong
                                                             id="Filter-btn">Filter</strong></button>
                                                     <ul class="dropdown-menu" role="menu">
-                                                        <li><a href="javascript:void(0)"><strong>Filter by:</strong></a>
+                                                        <li><a href="javascript:void(0)"><strong class="text-dark">Filter by:</strong></a>
                                                         </li>
-                                                        <li class="d-flex justify-content-between"><a href="javascript:void(0)" for="exampleRadio">Default</a>
+                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)" for="exampleRadio">Default</a>
                                                             <div class="form-check m-0">
                                                                 <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
                                                             </div>
                                                         </li>
-                                                        <li class="d-flex justify-content-between"><a href="javascript:void(0)" for="exampleRadio">Task
+                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)" for="exampleRadio">Task
                                                                 Name</a>
                                                             <div class="form-check m-0">
                                                                 <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
                                                             </div>
                                                         </li>
-                                                        <li class="d-flex justify-content-between"><a href="javascript:void(0)">Assigned To</a>
+                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">Assigned To</a>
                                                             <div class="form-check m-0">
                                                                 <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
                                                             </div>
                                                         </li>
-                                                        <li class="d-flex justify-content-between"><a href="javascript:void(0)">Date</a>
+                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">Date</a>
                                                             <div class="form-check m-0">
                                                                 <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
                                                             </div>
                                                         </li>
-                                                        <li class="d-flex justify-content-between"><a href="javascript:void(0)">Ascending</a>
+                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">Ascending</a>
                                                             <div class="form-check m-0">
                                                                 <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
                                                             </div>
                                                         </li>
-                                                        <li class="d-flex justify-content-between"><a href="javascript:void(0)">Descending</a>
+                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">Descending</a>
                                                             <div class="form-check m-0">
                                                                 <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
                                                             </div>
@@ -1609,39 +1608,39 @@
                                             </div>
                                             <div class="d-flex">
                                                 <div class="btn-group">
-                                                    <button type="button" class="btn btn-dark bg-transparent font-weight-bold text-dark" id="customize_btn" data-bs-toggle="dropdown"><strong>CUSTOMIZED</strong><i
-                                                            class="fe fe-chevron-down ms-2"></i></button>
+                                                    <button type="button" class="btn font-weight-bold text-dark" id="customize_btn" data-bs-toggle="dropdown" style="border: none;"><strong>CUSTOMIZED</strong><i
+                                                        class="fe fe-chevron-down ms-2"></i></button>
                                                     <ul class="dropdown-menu" role="menu">
-                                                        <li><a href="javascript:void(0)"><strong>Coulmns to
+                                                        <li><a href="javascript:void(0)"><strong class="text-dark">Coulmns to
                                                                     Show</strong></a>
                                                         </li>
-                                                        <li class="d-flex justify-content-between"><a href="javascript:void(0)">IMAGE</a>
+                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">IMAGE</a>
                                                             <div class="form-check m-0">
                                                                 <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                             </div>
                                                         </li>
-                                                        <li class="d-flex justify-content-between"><a href="javascript:void(0)">TASK</a>
+                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">TASK</a>
                                                             <div class="form-check m-0">
                                                                 <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                             </div>
                                                         </li>
 
-                                                        <li class="d-flex justify-content-between"><a href="javascript:void(0)">ASSIGNED TO</a>
+                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">ASSIGNED TO</a>
                                                             <div class="form-check m-0">
                                                                 <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                             </div>
                                                         </li>
-                                                        <li class="d-flex justify-content-between"><a href="javascript:void(0)">DUE AT</a>
+                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">DUE AT</a>
                                                             <div class="form-check m-0">
                                                                 <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                             </div>
                                                         </li>
-                                                        <li class="d-flex justify-content-between"><a href="javascript:void(0)">RELATED TO</a>
+                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">RELATED TO</a>
                                                             <div class="form-check m-0">
                                                                 <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                             </div>
                                                         </li>
-                                                        <li class="d-flex justify-content-between"><a href="javascript:void(0)">STATUS</a>
+                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">STATUS</a>
                                                             <div class="form-check m-0">
                                                                 <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                             </div>
@@ -2417,6 +2416,7 @@
     success: function({user}) {
         // console.log()
         $("#user-name").text(user)
+        $("#header-user").text(user)
 
 
     },

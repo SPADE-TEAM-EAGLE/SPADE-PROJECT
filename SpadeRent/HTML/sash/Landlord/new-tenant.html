@@ -961,8 +961,7 @@ color: #000;
                                     <div class="collapse" id="collapse2">
                                         <div class="card card-body">
                                             <div class="text-justify" id="add-item-container">
-                                                <div class="row row-multiple mb-2 pb-3"
-                                                    style="background-color: #F4FAFF !important;">
+                                                <div class="row row-multiple mb-2 pb-3">
                                                     <div class="col-md-6">
                                                         <label for="inputEmail4" class="form-label">Date of Rent
                                                             Change
@@ -1140,14 +1139,14 @@ color: #000;
     </div>
     <div class="modal fade" id="succesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered succes-modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content success-modal-content">
                 <div class="modal-header">
 
                     <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="succes-close">
                         <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
                     </button>
                 </div>
-                <div class="modal-body succes-modal">
+                <div class="modal-body succes-modal" style="padding-top: 70px;padding-bottom: 70px;">
                     <div class="text-justify ps-2 border-model-line">
                         <h2 class="modal-title d-flex align-items-center ps-1">
                             <strong class="color-primary">Success!&nbsp;</strong>
@@ -1167,8 +1166,8 @@ color: #000;
                         </div>
                       </div>
                     <div class="mt-2">                       <button type="button" class="btn btn-primary btn-pill mx-2"
-                        id="add_property_btn" data-bs-effect="effect-scale" onclick="()=>{window.location='./add-tenant.html'}"
-                        data-bs-toggle="modal" href="#addModal"><i
+                        id="add_property_btn" onclick="()=>{window.location='./add-tenant.html'}"
+                        ><i
                             class="fe fe-plus me-2"></i><strong>ADD NEW
                             TENANT</strong></button></div>
 
@@ -1350,7 +1349,7 @@ color: #000;
                                             <a href="javascript:void(0)" data-bs-toggle="dropdown" class="nav-link leading-none d-flex">
                                                 <!-- <img src="../assets/images/users/21.jpg" alt="profile-user"
                                                     class="avatar  profile-user brround cover-image"> -->
-                                                <span class="side-menu__item dynamic-text-head" style="padding: 10px 10px;">Spade Admin</span> <i class="fe fe-chevron-down dark-mode text-dark" style="font-size: 20px; font-weight: 800;"></i>
+                                                <span class="dynamic-text-head" style="padding: 10px 10px;" id="header-user"></span> <i class="fe fe-chevron-down dark-mode text-dark" style="font-size: 20px; font-weight: 800;"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                                 <!-- <div class="drop-heading">
@@ -2380,7 +2379,9 @@ color: #000;
         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
     },
     success: function({user}) {
+        
         $("#user-name").text(user)
+        $("#header-user").text(user)
 
     },
     error: function(xhr, status, error) {
