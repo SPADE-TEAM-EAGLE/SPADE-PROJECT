@@ -190,18 +190,18 @@ function responsive() {
     }
 }
 
-function hovermenu() {
+// function hovermenu() {
 
-    $(".app-sidebar").hover(function () {
-        if ($('.app').hasClass('sidenav-toggled')) {
-            $('.app').addClass('sidenav-toggled-open');
-        }
-    }, function () {
-        if ($('.app').hasClass('sidenav-toggled')) {
-            $('.app').removeClass('sidenav-toggled-open');
-        }
-    });
-}
+//     $(".app-sidebar").hover(function () {
+//         if ($('.app').hasClass('sidenav-toggled')) {
+//             $('.app').addClass('sidenav-toggled-open');
+//         }
+//     }, function () {
+//         if ($('.app').hasClass('sidenav-toggled')) {
+//             $('.app').removeClass('sidenav-toggled-open');
+//         }
+//     });
+// }
 
 
 //________________Horizontal js
@@ -221,17 +221,17 @@ hovermenu();
 
 
 // ______________HOVER JS start
-function hovermenu() {
-    $(".app-sidebar").hover(function () {
-        if ($('body').hasClass('sidenav-toggled')) {
-            $('body').addClass('sidenav-toggled-open');
-        }
-    }, function () {
-        if ($('body').hasClass('sidenav-toggled')) {
-            $('body').removeClass('sidenav-toggled-open');
-        }
-    });
-}
+// function hovermenu() {
+//     $(".app-sidebar").hover(function () {
+//         if ($('body').hasClass('sidenav-toggled')) {
+//             $('body').addClass('sidenav-toggled-open');
+//         }
+//     }, function () {
+//         if ($('body').hasClass('sidenav-toggled')) {
+//             $('body').removeClass('sidenav-toggled-open');
+//         }
+//     });
+// }
 // ______________HOVER JS end
 
 // ______________ICON-OVERLAY JS start
