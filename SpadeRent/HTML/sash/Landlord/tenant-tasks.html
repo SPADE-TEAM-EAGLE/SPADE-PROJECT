@@ -1184,7 +1184,7 @@
                                                 <div class="media-body">
                                                     <small class="text-white">Tenants</small>
                                                     <h3 class="mb-0 text-white company-name" style="font-weight: bold;">
-                                                        The Michael Scott Paper Company | Michael Scott</h3>
+                                                        </h3>
                                                 </div>
                                             </div>
                                             <!-- <div class="ms-auto">
@@ -2114,10 +2114,31 @@
     <script src="../assets/js/charts.js"></script>
     <script>
         $(document).ready(function () {
+            
             const tenantId = (new URL(document.location)).searchParams.get("tenantId");
             // console.log($("#viewUnits").attr("href"))
             //            
-
+            $.ajax({
+                url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getTenantsByID',
+                type: 'GET',
+                data: {
+                    id: tenantId
+                },
+                contentType: "application/json; charset=utf-8",
+                // processData: false,
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function({
+                    data
+                }) {
+                    console.log(data)
+                    $(".company-name").text(`${data[0][0].companyName} | ${data[0][0].firstName+" "+data[0][0].lastName}`)
+                },
+                error: function(xhr, status, error) {
+                    window.alert('Error: ' + error);
+                }
+            });
             $("#viewProperties").attr("href", `./tenant-properties.html?tenantId=${tenantId}`)
             $("#viewOverview").attr("href", `./view-tenant.html?tenantId=${tenantId}`)
             $("#viewFiles").attr("href", `./tenant-file.html?tenantId=${tenantId}`)

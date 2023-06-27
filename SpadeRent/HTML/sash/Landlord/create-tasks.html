@@ -695,7 +695,7 @@
     
                             <!-- <div class="col-md-12 col-lg-8 mt-5">
                                 <label><b>Additional Information</b></label>
-                                <p class="text-primary"><b id="notes">Testing 123</b></p>
+                                <p class="text-primary"><b id="notes"></b></p>
                             </div>
                             <div class="col-md-12 col-lg-4 mt-5">
                                 <span class="float-end">
@@ -704,11 +704,6 @@
                                 </span>
                             </div> -->
                             <div class="col-lg-12 mt-5 mb-5" id="view-task-images">
-                                <img src="../assets/images/demo_img.png" alt=""> &nbsp;
-                                <img src="../assets/images/demo_img.png" alt=""> &nbsp;
-                                <img src="../assets/images/demo_img.png" alt=""> &nbsp;
-                                <img src="../assets/images/demo_img.png" alt=""> &nbsp;
-                                <img src="../assets/images/demo_img.png" alt="">
                             </div>
                         </div>
                     </div>
@@ -916,7 +911,7 @@
                             <div class="col-md-12">
                                 <label class="form-label fw-bold">Media/ Files</label>
                                 <div class="custom-file" style="border: 1px dashed #00000087;">
-                                    <input id="fileInput" required type="file" name="image" class="custom-file-input form" accept=".jpg, .png, image/jpeg, image/png" aria-label="hello" multiple>
+                                    <input id="fileInput" type="file" name="image" class="custom-file-input form" accept=".jpg, .png, image/jpeg, image/png" aria-label="hello" multiple>
                                     <span className="d-none"></span>
                                     <label class="custom-file-label" for="fileInput">
                                         <i class="fi fi-rs-cloud-upload"></i>
@@ -1009,28 +1004,28 @@
                                 <label class="form-label fw-bold">Message</label>
 
                                 <textarea class="form-control mb-4" placeholder="Sorry about that We will look into it." rows="4" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Message here" data-bs-container="#myModal_edit" id="message"></textarea>
-                                <span class="text-danger d-none">Photos are required!</span>
+                                <span class="text-danger d-none">Message are required!</span>
                             </div>
                             <div class="col-md-4">
                                 <label for="inputEmail4" class="form-label fw-bold">Task Name</label>
-                                <input class="form-control" placeholder="Task name" type="text" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter task name here" data-bs-container="#myModal_edit" id="taskName_update">
-                                <span class="text-danger d-none">Property ID is required!</span>
+                                <input class="form-control" placeholder="Task name" type="text" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter task name here" data-bs-container="#myModal_edit" required id="taskName_update">
+                                <span class="text-danger d-none">Task name is required!</span>
                             </div>
                             <div class="col-md-4">
                                 <label for="inputState" class="form-label fw-bold">Related To</label>
-                                <select required id="property_update" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Related To here" data-bs-container="#addModal">
+                                <select required id="property_update" required class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Related To here" data-bs-container="#addModal">
                                     <option selected>Choose...</option>
                                 </select>
                                 <span class="text-danger d-none">Property name required!</span>
                             </div>
                             <div class="col-md-4">
                                 <label for="inputEmail4" class="form-label fw-bold">Due Date</label>
-                                <input class="form-control" placeholder="MM/DD/YYYY" type="date" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Due Date here" data-bs-container="#myModal_edit" id="dueDate_update">
-                                <span class="text-danger d-none">Property ID is required!</span>
+                                <input class="form-control" required placeholder="MM/DD/YYYY" type="date" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Due Date here" data-bs-container="#myModal_edit" id="dueDate_update">
+                                <span class="text-danger d-none">Due date is required!</span>
                             </div>
                             <div class="col-md-4">
                                 <label for="inputState" class="form-label fw-bold">Priority</label>
-                                <select class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select Priority" data-bs-container="#myModal_edit" id="priority_update">
+                                <select class="form-select form" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select Priority" data-bs-container="#myModal_edit" id="priority_update">
                                     <option selected>Choose...</option>
                                     <option name="high">High</option>
                                     <option name="moderate">Moderate</option>
@@ -1038,26 +1033,27 @@
 
 
                                 </select>
-                                <span class="text-danger d-none">Property name required!</span>
+                                <span class="text-danger d-none">Priority name required!</span>
                             </div>
                             <div class="col-md-4">
                                 <label for="inputState" class="form-label fw-bold">Status</label>
-                                <select class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select Status" data-bs-container="#myModal_edit" id="status_update">
+                                <select class="form-select form" required ="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select Status" data-bs-container="#myModal_edit" id="status_update">
                                     <option selected>Choose...</option>
                                     <option value="not started">Not Started</option>
                                     <option value="in progress">In progress</option>
                                     <option value="completed">Completed</option>
 
                                 </select>
-                                <span class="text-danger d-none">Address is required!</span>
+                                <span class="text-danger d-none">Status is required!</span>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
                                     <label class="form-label fw-bold">Assignee(s)</label>
-                                    <select class="form-control select2" data-placeholder="Choose Assignee" multiple data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select Assignee(s)" data-bs-container="#myModal_edit" id="assignee_update">
+                                    <select class="form-control select2" required data-placeholder="Choose Assignee" multiple data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select Assignee(s)" data-bs-container="#myModal_edit" id="assignee_update">
                                        
                                     </select>
                                 </div>
+                                <span class="text-danger d-none">Assignee is required!</span>
                             </div>
                             <div class="col-md-12">
                                 <label class="form-label fw-bold">Media/ Files</label>
@@ -1106,13 +1102,40 @@
             </div>
         </div>
     </div>
-
+    <div class="modal fade" id="infoModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+          <div class="modal-content modal-content-demo">
+            <div class="modal-body p-0">
+              <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
+                <!-- <div class="card-header border-0 pt-3">
+                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                            </button>
+                        </div> -->
+                <div class="card-body text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24"><path fill="#fad383" d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z"></path><circle cx="12" cy="16" r="1" fill="#f7b731"></circle><path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"></path></svg>
+                  <h4 class="h4 mb-0 mt-3 fw-bold">Info</h4>
+                  <p class="card-text text-dark">Task Already Exist</p>
+                </div>
+                <!-- <div class="card-footer text-center border-0 pt-0">
+                            <div class="row">
+                                <div class="text-center">
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">delete</a>
+                                </div>
+                            </div>
+                        </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     <div class="modal fade" id="succesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
 
-                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <button class="btn-close-succes" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
                     </button>
                 </div>
@@ -2462,18 +2485,19 @@
 
             function areAllFieldsFilled(update) {
                 if (update) {
+                    console.log("this is for update")
                     var accordion1Fields = $('#myModal_edit input[required], #myModal_edit select[required]');
 
-                    var imageInput = $('#fileInput_update');
+                    // var imageInput = $('#fileInput_update');
                     var allFieldsFilled = accordion1Fields.filter(function() {
                         return $(this).val() === '' || $(this).val() === 'Choose...';
                     }).length === 0;
-                    console.log()
+                    // console.log()
                     return allFieldsFilled;
                 }
                 var accordion1Fields = $('#addModal input[required], #addModal select[required]');
 
-                var imageInput = $('#fileInput');
+                // var imageInput = $('#fileInput');
                 var allFieldsFilled = accordion1Fields.filter(function() {
                     return $(this).val() === '' || $(this).val() === 'Choose...';
                 }).length === 0;
@@ -2485,6 +2509,7 @@
             // Function to enable or disable buttons based on field status
             function updateButtonStatus(update) {
                 if (update) {
+                    console.log("update button")
                     var allFieldsFilled = areAllFieldsFilled(update);
 
                     // Enable or disable the buttons based on the fields' status
@@ -2498,7 +2523,7 @@
                     }
                 } else {
                     var allFieldsFilled = areAllFieldsFilled();
-
+                    console.log(allFieldsFilled)
                     // Enable or disable the buttons based on the fields' status
                     if (allFieldsFilled) {
                         $('#next').removeClass("disabled");
@@ -2548,10 +2573,14 @@
 
                                 const data = taskInfo.find(obj => obj.id.toString() == taskId);
                                 console.log(data)
-                                selectedFiles = data.taskImages.split(",")
+                                if(data.taskImages){
+                                    selectedFiles = data.taskImages.split(",")
+                                }else{
+
+                                }
 
                                 updateSelectedFilesContainer()
-                                $("#taskName_view").text("huhuh");
+                                $("#taskName_view").text(data.taskName);
                                 $("#dueDate_view").text(data.dueDate);
                                 $("#priority_view").text(data.priority);
                                 $("#status_view").text(data.status);
@@ -2612,13 +2641,18 @@
 
                 })
                 // $("#totalAmount").text('$ ' + data.totalAmount)
-                const images = data.taskImages.split(",")
-                // $("#notes").text(data.note || "N/A")
-                $("#view-task-images").empty()
+                if(data.taskImages){
+                                    const images = data.taskImages.split(",")
+                                    $("#view-task-images").empty()
                 images.forEach((image) => {
                     $("#view-task-images").append(`
                             <img src="../../../../spadeAPI/uploads/${image}" width=200px height=200px alt=""> &nbsp;`)
                 })
+                                }else{
+
+                                }
+                // $("#notes").text(data.note || "N/A")
+                
                 $("#viewModal-tasks").modal("show")
             })
             $('#fileInput').on('change', function() {
@@ -2649,31 +2683,21 @@
 
             function resetAccordions() {
                 // Reset all accordions
-                $('.accordion-item').each(function() {
-                    var accordionId = $(this).attr('id');
-                    var accordionFields = $('#' + accordionId + ' input[type="text"], #' + accordionId + ' select');
-                    var imageField = $('#' + accordionId + ' input[type="file"]');
-                    var accordionButton = $('#' + accordionId + ' button.accordion-button');
-
-                    // Empty input fields
-                    accordionFields.val('');
-
-                    // Remove border-danger class
-                    accordionFields.removeClass('border-danger');
-
-                    // Hide error spans
-                    accordionFields.siblings('span.text-danger').addClass('d-none');
-
-
-                    accordionButton.find('.fi-rs-exclamation').addClass('fi-rs-angle-circle-down').addClass("chevron").removeClass('fi-rs-exclamation').removeClass("cross");
-                    accordionButton.find('.fi-rs-check-circle').addClass('fi-rs-angle-circle-down').addClass("chevron").removeClass('fi-rs-check-circle').removeClass("tick");
+                $('#addModal input[type="text"]').val('');
+  $('#addModal input[type="date"]').val('');
+  $('#addModal select').prop('selectedIndex', 0);
+  $('#addModal textarea').val('');
+  $('#addModal input[type="checkbox"]').prop('checked', true);
+  $('#addModal .file-grid').empty();
                     $('#next').addClass("disabled");
                     $('#draft').attr("disabled", "disabled");
-                });
+                
             }
 
             $('#close,#top-close').on('click', function(e) {
+                console.log(333)
                 e.preventDefault()
+                $(".select2-selection__rendered").empty()
                 resetAccordions()
                 selectedFiles=[]
                 $(".file-grid").empty()
@@ -2730,17 +2754,23 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function(response) {
-                        console.log(2);
-                        $("#succesModal").modal("show")
+                        if(response==="Task already exists"){
+                            $("#infoModal").modal("show")
+                        }
+                        else{
+                            window.location="./create-tasks.html"
+                            $("#succesModal").modal("show")
+                        }
+                        
                         
                     },
                     error: function(xhr, status, error) {
-                        window.alert('Error: ' + error);
+                        // window.alert('Error: ' + error);
                     }
                 });
             });
-            $(".btn-close").click(()=>{
-                getData()
+            $(".btn-close-succes").click(()=>{
+                window.location="./create-tasks.html"
             })
             let propertyId;
 
@@ -2792,44 +2822,44 @@
                 return fileName;
             }
 
-            $('#myModal_edit').find('input, select').on('input change', function() {
-                var updateButton = document.getElementById('save');
-                console.log(updateButton)
-                var isFilled = true;
+//             $('#myModal_edit').find('input, select').on('input change', function() {
+//                 var updateButton = document.getElementById('save');
+//                 console.log(updateButton)
+//                 var isFilled = true;
 
-                // Check each field for empty value and toggle red border and span visibility
-                $('#myModal_edit').find('input, select').each(function(index) {
-                    console.log($(this).val())
-                    if (Array.isArray($(this).val())) {
-    console.log(333);
-    var value = $(this).val();
-}
-                    else{
-                        var value = $(this).val().trim();
-                    }
+//                 // Check each field for empty value and toggle red border and span visibility
+//                 $('#myModal_edit').find('input, select').each(function(index) {
+//                     console.log($(this).val())
+//                     if (Array.isArray($(this).val())) {
+//     console.log(333);
+//     var value = $(this).val();
+// }
+//                     else{
+//                         var value = $(this).val().trim();
+//                     }
                     
-                    var span = $(this).siblings('.text-danger');
+//                     var span = $(this).siblings('.text-danger');
                      
-                        if (value === '' || value === 'Choose...' || value.length===0) {
-                            $(this).addClass('border-danger');
-                            //   console.log(1)
-                            span.removeClass('d-none');
-                            isFilled = false;
-                        } else {
-                            $(this).removeClass('border-danger');
-                            span.addClass('d-none');
-                        }
-                    }
-                );
+//                         if (value === '' || value === 'Choose...' || value.length===0) {
+//                             $(this).addClass('border-danger');
+//                             //   console.log(1)
+//                             span.removeClass('d-none');
+//                             isFilled = false;
+//                         } else {
+//                             $(this).removeClass('border-danger');
+//                             span.addClass('d-none');
+//                         }
+//                     }
+//                 );
 
-                // Toggle button behavior based on the fields' status
-                if (isFilled) {
-                    console.log("All the fields filled")
-                    updateButton.classList.remove("disabled")
-                } else {
-                    updateButton.classList.add("disabled")
-                }
-            });
+//                 // Toggle button behavior based on the fields' status
+//                 if (isFilled) {
+//                     console.log("All the fields filled")
+//                     updateButton.classList.remove("disabled")
+//                 } else {
+//                     updateButton.classList.add("disabled")
+//                 }
+//             });
 
 
 
@@ -2857,6 +2887,12 @@
                     isColumnVisible ? column.show() : column.hide();
                 });
             });
+            $("#succesModal,#infoModal").on('hide.bs.modal', function() {
+                $(".select2-selection__rendered").empty()
+resetAccordions()
+    // $('#accordion-item1').find('.file-grid').empty();
+    // getData()
+})
             // $("#succesModal").on('hide.bs.modal', function() {
             //     if (imageField.length) {
             //         imageField.val('');
@@ -3191,7 +3227,12 @@
                                 
                                 const data = response.data[0].find(obj => obj.id.toString() == taskId);
                                 console.log(taskId)
-                                selectedFiles = data.taskImages.split(",")
+                                if(data.taskImages){
+                                    selectedFiles = data.taskImages.split(",")
+                                }else{
+
+                                }
+                                // selectedFiles = data.taskImages.split(",")
 
                                 updateSelectedFilesContainer()
                                 $("#message").val(data.notes);
@@ -3201,6 +3242,8 @@
 
                                 $("#priority_update").find(`option[name="${data.priority.toLowerCase()}"]`).prop("selected", true);
                                 $("#status_update").find(`option[value="${data.status}"]`).prop("selected", true);
+                                // $("#assignee_update").find(`option[value="${ID}"]`).prop("selected", true);
+                                    $(".select2-selection__rendered").empty()
                                 data.AssignTo.forEach(({
                                     ID,
                                     name

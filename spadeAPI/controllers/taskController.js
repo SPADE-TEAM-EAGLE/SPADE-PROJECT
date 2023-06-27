@@ -301,7 +301,7 @@ exports.getAllTask = async (req, res) => {
 
         allTaskResult[0][i].AssignTo = vendorData;
       }
-
+      // console.log(allTaskResult)
       res.status(200).json({
         data: allTaskResult,
         message: "All Tasks",

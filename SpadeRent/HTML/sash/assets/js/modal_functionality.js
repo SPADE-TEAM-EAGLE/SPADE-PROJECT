@@ -34,9 +34,6 @@ function checkFieldsStatus(accordionId) {
             hasFilledFields = true;
         }
     });
-    if (imageField.length && imageField.get(0).files.length === 0) {
-        hasEmptyFields = true;
-    }
     if (hasEmptyFields && hasErrorFields) {
         return 1;
     } else if (!hasEmptyFields && !hasErrorFields && hasFilledFields) {
@@ -132,12 +129,12 @@ $(document).ready(function () {
     function areAllFieldsFilled() {
         var accordion1Fields = $('#accordion-item1 input[type="text"], #accordion-item1 select');
         var accordion2Fields = $('#accordion-item2 input[type="text"], #accordion-item2 select');
-        var imageInput = $('#fileInput');
+        // var imageInput = $('#fileInput');
         var allFieldsFilled = accordion1Fields.filter(function () {
             return $(this).val() === '' || $(this).val() === 'Choose...';
         }).length === 0 && accordion2Fields.filter(function () {
             return $(this).val() === '' || $(this).val() === 'Choose...';
-        }).length === 0 && imageInput.get(0).files.length > 0;
+        }).length === 0;
         var zipField = $('#zip');
         if (zipField.val().length !== 5) {
             allFieldsFilled = false;
@@ -149,7 +146,7 @@ $(document).ready(function () {
     function updateButtonStatus() {
         var accordion1Fields = $('#accordion-item1 input[type="text"], #accordion-item1 select');
         var accordion2Fields = $('#accordion-item2 input[type="text"], #accordion-item2 select');
-        var imageInput = $('#fileInput');
+        // var imageInput = $('#fileInput');
 
         var isAccordion1FieldsEmpty = accordion1Fields.filter(function () {
             return $(this).val() !== '' || $(this).val() === 'Choose...';
@@ -159,10 +156,10 @@ $(document).ready(function () {
             return $(this).val() !== '' || $(this).val() === 'Choose...';
         }).length === 0;
 
-        var isImageInputEmpty = imageInput.get(0).files.length === 0;
+        // var isImageInputEmpty = imageInput.get(0).files.length === 0;
 
         // Enable or disable the buttons based on the fields' status
-        if (!isAccordion1FieldsEmpty || !isAccordion2FieldsEmpty || !isImageInputEmpty) {
+        if (!isAccordion1FieldsEmpty || !isAccordion2FieldsEmpty) {
             $('#draft').removeAttr('disabled');
         } else {
             $('#draft').attr('disabled', 'disabled');

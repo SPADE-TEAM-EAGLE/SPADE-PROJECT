@@ -1170,7 +1170,7 @@
                                                         <td><img src="https://cdn.pixabay.com/photo/2017/07/08/02/16/house-2483336__340.jpg"
                                                                 alt=""></td>
                                                         <td style="font-weight: 600;">US-272723</td>
-                                                        <td style="font-weight: 600;">Houston Shopping Center</td>
+                                                        <td style="font-weight: 600;"></td>
                                                         <td><a class="like" href="javascript:;">
                                                                 <span
                                                                     class="badge btn-light rounded-pill-Single-Family rounded-pill py-2 px-3">
@@ -1199,7 +1199,7 @@
                                                         <td><img src="https://cdn.pixabay.com/photo/2017/07/08/02/16/house-2483336__340.jpg"
                                                                 alt=""></td>
                                                         <td>US-272723</td>
-                                                        <td>Houston Shopping Center</td>
+                                                        <td></td>
                                                         <td><a class="like" href="javascript:;">
                                                                 <span
                                                                     class="badge btn-light rounded-pill-Single-Family rounded-pill py-2 px-3">
@@ -1228,7 +1228,7 @@
                                                         <td><img src="https://cdn.pixabay.com/photo/2017/07/08/02/16/house-2483336__340.jpg"
                                                                 alt=""></td>
                                                         <td>US-272723</td>
-                                                        <td>Houston Shopping Center</td>
+                                                        <td></td>
                                                         <td><a class="like" href="javascript:;">
                                                                 <span
                                                                     class="badge btn-light rounded-pill-Multi-Family rounded-pill py-2 px-3">
@@ -1257,7 +1257,7 @@
                                                         <td><img src="https://cdn.pixabay.com/photo/2017/07/08/02/16/house-2483336__340.jpg"
                                                                 alt=""></td>
                                                         <td>US-272723</td>
-                                                        <td>Houston Shopping Center</td>
+                                                        <td></td>
                                                         <td><a class="like" href="javascript:;">
                                                                 <span
                                                                     class="badge btn-light rounded-pill-Multi-Family rounded-pill py-2 px-3">
@@ -1286,7 +1286,7 @@
                                                         <td><img src="https://cdn.pixabay.com/photo/2017/07/08/02/16/house-2483336__340.jpg"
                                                                 alt=""></td>
                                                         <td>US-272723</td>
-                                                        <td>Houston Shopping Center</td>
+                                                        <td></td>
                                                         <td><a class="like" href="javascript:;">
                                                                 <span
                                                                     class="badge btn-light rounded-pill-Multi-Commercial rounded-pill py-2 px-3">
