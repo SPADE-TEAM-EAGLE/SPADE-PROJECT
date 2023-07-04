@@ -3783,7 +3783,9 @@
                 $("#add-item-container1_update").append(`<tr class="tr">
                                             <td><input type="text" class="form-control" name="category_update"></td>
                                             <td><input type="text" class="form-control" name="memo_update"></td>
-                                            <td><input type="text" class="form-control" name="amount_update"></td>
+                                            <td><input type="text" class="form-control" name="amount_update" data-bs-placement="top" data-bs-toggle="tooltip" title=""
+                                                    data-bs-original-title="Enter amount here"
+                                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '')"></td>
                                             <td><button type="button" class="btn" id="del-btn_update">
                                                 <i class="fi fi-rs-trash text-danger fs-5"></i>
                                             </button></td>
@@ -3831,7 +3833,7 @@
                     //   alert('Cannot delete the last row.');
                 }
             });
-            $('#add-item-container1').on('click', '#del-btn_update', function() {
+            $('#add-item-container1_update').on('click', '#del-btn_update', function () {
                 console.log(11)
                 var $row = $(this).closest('.tr');
                 var $rowsContainer = $row.parent();
@@ -4270,7 +4272,10 @@
                         `<tr class="tr">
                                             <td><input type="text" class="form-control" name="category_update" value=${category}></td>
                                             <td><input type="text" class="form-control" name="memo_update" value=${memo}></td>
-                                            <td><input type="text" class="form-control" name="amount_update" value=${amount}></td>
+                                            <td><input type="text" class="form-control" name="amount_update" value=${amount} data-bs-placement="top" data-bs-toggle="tooltip" title=""
+                                                    data-bs-original-title="Enter amount here"
+                                                    
+                                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '')"></td>
                                             <td><button type="button" class="btn" id="del-btn_update">
                                                 <i class="fi fi-rs-trash text-danger fs-5"></i>
                                             </button></td>
