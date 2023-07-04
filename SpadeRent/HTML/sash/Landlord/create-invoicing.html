@@ -1815,6 +1815,34 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="infoModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+          <div class="modal-content modal-content-demo">
+            <div class="modal-body p-0">
+              <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
+                <!-- <div class="card-header border-0 pt-3">
+                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                            </button>
+                        </div> -->
+                <div class="card-body text-center">
+                    <i class="fi fi-rs-check-circle text-success"></i>
+                  <h4 class="h4 mb-0 mt-3 fw-bold">Info</h4>
+                  <p class="card-text text-dark">Email Sended Successfully</p>
+                </div>
+                <!-- <div class="card-footer text-center border-0 pt-0">
+                            <div class="row">
+                                <div class="text-center">
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">delete</a>
+                                </div>
+                            </div>
+                        </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     <div class="modal fade" id="succesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content success-modal-content">
@@ -3503,7 +3531,7 @@
 
     <script>
         $(document).ready(function () {
-
+            // $("#infoModal").modal("show")
             $(document).on("click", "#preview", function () {
                 // console.log(222222)
                 // console.log($('#preview').text().startsWith(" Preview"))
@@ -3699,26 +3727,26 @@ console.log(text.startsWith("Preview"));
 
                 return fileName;
             }
-            $("#resend-invoice").click(() => {
-                $.ajax({
-                    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/resendEmail',
-                    type: 'GET',  // Change the method to POST
-                    data: { invoiceID: invoiceId },  // Send the data in the request body
-                    contentType: 'application/json',  // Set the content type to JSON
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-                    success: function (response) {
-                        // Handle the success response from the API
-                        console.log('API response:', response);
-                    },
-                    error: function (xhr, status, error) {
-                        // Handle the error response from the API
-                        console.log('API error:', error);
-                    }
-                });
+            // $("#resend-invoice").click(() => {
+            //     $.ajax({
+            //         url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/resendEmail',
+            //         type: 'GET',  // Change the method to POST
+            //         data: { invoiceID: invoiceId },  // Send the data in the request body
+            //         contentType: 'application/json',  // Set the content type to JSON
+            //         headers: {
+            //             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+            //         },
+            //         success: function (response) {
+            //             // Handle the success response from the API
+            //             console.log('API response:', response);
+            //         },
+            //         error: function (xhr, status, error) {
+            //             // Handle the error response from the API
+            //             console.log('API error:', error);
+            //         }
+            //     });
 
-            })
+            // })
             $(".save-invoice").each(function () {
                 $(this).on("click", function () {
                     console.log(1)
@@ -4134,7 +4162,26 @@ console.log(text.startsWith("Preview"));
                 $('#addModal input[type="text"], #addModal input[type="date"], #addModal textarea').val('');
                 $('#addModal select').prop('selectedIndex', 0);
             })
-            $(document).on('click', ".view-btn,.edit-option,.resend-option", function (e) {
+            $(document).on('click',".resend-option",function(){
+                $.ajax({
+                    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/resendEmail',
+                    type: 'GET',  // Change the method to POST
+                    data: { invoiceID: invoiceId },  // Send the data in the request body
+                    contentType: 'application/json',  // Set the content type to JSON
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        // Handle the success response from the API
+                        $("#infoModal").modal("show")
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle the error response from the API
+                        console.log('API error:', error);
+                    }
+                });
+            })
+            $(document).on('click', ".view-btn,.edit-option", function (e) {
                 e.preventDefault();
                 const buttonText = $(this).text();
                 const headingElem = $("#viewModal .modal-title")
@@ -4293,13 +4340,16 @@ console.log(text.startsWith("Preview"));
 
                 })
                 $("#totalAmount").text('$ ' + data.totalAmount)
-                const images = data.invoiceImages.split(",")
-                $("#notes").text(data.note || "N/A")
-                $("#view-invoice-images").empty()
-                images.forEach((image) => {
+                if(data.invoiceImages){
+                    const images = data.invoiceImages.split(",")
+                    images.forEach((image) => {
                     $("#view-invoice-images").append(`
                             <img src="../../../../spadeAPI/uploads/${image}" width=200px height=200px alt=""> &nbsp;`)
                 })
+                }
+                $("#notes").text(data.note || "N/A")
+                $("#view-invoice-images").empty()
+
                 $("#viewModal-invoice").modal("show")
             })
             $(document).on('click', '.three-dots', function () {
@@ -4449,8 +4499,10 @@ console.log(text.startsWith("Preview"));
                 $("#totalText_update").text(`$ ${data.totalAmount}`)
                 $("#additionalNotes_update").val(data.note)
                 selectedFiles = []
-                selectedFiles = data.invoiceImages.split(",")
+                if(data.invoiceImages){
+                    selectedFiles = data.invoiceImages.split(",")
                 updateSelectedFilesContainer()
+                }
                 $("#myModal_edit").modal("show");
 
             });
