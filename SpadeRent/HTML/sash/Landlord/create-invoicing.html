@@ -18,7 +18,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="../assets/images/brand/favicon.ico" />
 
     <!-- TITLE -->
-    <title>Property Tenant - SpadeRent</title>
+    <title>Invoicing list - SpadeRent</title>
 
     <!-- BOOTSTRAP CSS -->
     <link id="style" href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -4298,13 +4298,20 @@ console.log(text.startsWith("Preview"));
 
                 })
                 $("#totalAmount").text('$ ' + data.totalAmount)
-                const images = data.invoiceImages.split(",")
-                $("#notes").text(data.note || "N/A")
-                $("#view-invoice-images").empty()
+                if(data.invoiceImages){
+                    const images = data.invoiceImages.split(",")
+                    $("#view-invoice-images").empty()
                 images.forEach((image) => {
                     $("#view-invoice-images").append(`
                             <img src="../../../../spadeAPI/uploads/${image}" width=200px height=200px alt=""> &nbsp;`)
                 })
+                }else{
+
+                }
+                $("#view-invoice-images").empty()
+
+                $("#notes").text(data.note || "N/A")
+
                 $("#viewModal-invoice").modal("show")
             })
             $(document).on('click', '.three-dots', function () {
@@ -4324,22 +4331,22 @@ console.log(text.startsWith("Preview"));
                     ...data2
                 };
                 console.log(data)
-                window.onload = function () {
-            document.getElementById("create_pdf")
-                .addEventListener("click", () => {
-                    const invoice = this.document.getElementById("htmlContent");
-                    // console.log(invoice);
-                    // console.log(window);
-                    var opt = {
-                        margin: 0.1,
-                        filename: `invoice.pdf`,
-                        image: { type: 'jpeg', quality: 0.98 },
-                        html2canvas: { scale: 2 },
-                        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-                    };
-                    html2pdf().from(invoice).set(opt).save();
-                })
-        }
+        //         window.onload = function () {
+        //     document.getElementById("create_pdf")
+        //         .addEventListener("click", () => {
+        //             const invoice = this.document.getElementById("htmlContent");
+        //             // console.log(invoice);
+        //             // console.log(window);
+        //             var opt = {
+        //                 margin: 0.1,
+        //                 filename: `invoice.pdf`,
+        //                 image: { type: 'jpeg', quality: 0.98 },
+        //                 html2canvas: { scale: 2 },
+        //                 jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+        //             };
+        //             html2pdf().from(invoice).set(opt).save();
+        //         })
+        // }
             });
             $(document).on('click', '.status-option', function () {
                 // const invoiceIdElement = $(this).closest("tr").find(".invoice-id");
@@ -4454,8 +4461,11 @@ console.log(text.startsWith("Preview"));
                 $("#totalText_update").text(`$ ${data.totalAmount}`)
                 $("#additionalNotes_update").val(data.note)
                 selectedFiles = []
-                selectedFiles = data.invoiceImages.split(",")
-                updateSelectedFilesContainer()
+                if(data.invoiceImages){
+                    selectedFiles = data.invoiceImages.split(",")
+                    updateSelectedFilesContainer()
+                }
+                
                 $("#myModal_edit").modal("show");
 
             });
@@ -4625,89 +4635,20 @@ console.log(text.startsWith("Preview"));
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
 
     <script>
-        // (function () {
-        //     var
-        //         form = $('.form'),
-        //         cache_width = form.width(),
-        //         a3 = [655, 9000000];
-        //     form.submit((e) => {
-        //         e.preventDefault();
-        //     })
-        //     $('#create_pdf').on('click', function () {
-        //         $('body').scrollTop(0);
-        //         createPDF();
-        //     });
-        //     function createPDF() {
-        //         getCanvas().then(function (canvas) {
-        //             var
-        //                 img = canvas.toDataURL("image/png"),
-        //                 doc = new jsPDF({
-        //                     unit: 'px',
-        //                     fontFamily: 'Open Sans',
-        //                     format: 'letter'
-        //                 });
-        //             var imgWidth = doc.internal.pageSize.width;
-        //             var imgHeight = doc.internal.pageSize.height;
-        //             var position = 0;
-        //             doc.addImage(img, 'JPEG', 0, position, imgWidth, imgHeight);
-        //             position -= imgHeight;
-        //             while (position > -canvas.height) {
-
-        //                 doc.addImage(img, 'JPEG', 0, position, imgWidth, imgHeight);
-        //                 position -= imgHeight;
-        //             }
-        //             doc.save('invoice.pdf');
-        //             form.off('submit');
-        //         });
-        //     }
-        //     function getCanvas() {
-        //         return html2canvas(form, {
-        //             imageTimeout: 2000,
-        //             removeContainer: true
-        //         });
-        //     }
-        // }());
-
-
-        var name=document.getElementById("user-name").innerHTML
-        console.log(name,54344343663)
-        // window.onload = function () {
-        //     document.getElementById("create_pdf")
-        //         .addEventListener("click", () => {
-        //             const invoice = this.document.getElementById("htmlContent");
-        //             // console.log(invoice);
-        //             // console.log(window);
-        //             var opt = {
-        //                 margin: 0.1,
-        //                 filename: `${name}.pdf`,
-        //                 image: { type: 'jpeg', quality: 0.98 },
-        //                 html2canvas: { scale: 2 },
-        //                 jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-        //             };
-        //             html2pdf().from(invoice).set(opt).save();
-        //         })
-        // }
-
-
-
-
-
-        // function createPDF() {
-            //     getCanvas().then(function(canvas) {
-            //         var
-            //             img = canvas.toDataURL("image/png"),
-            //             doc = new jsPDF({
-            //                 unit: 'px',
-            //                 fontFamily: 'Open Sans',
-            //                 format: 'a4'
-            //             });
-            //         doc.addImage(img, 'JPEG', 0, 0);
-            //         doc.save('invoice.pdf');
-            //         form.width(cache_width);
-            //         form.off('submit');
-            //     });
-            // }
-
+        // PDF CODE START
+            document.getElementById("create_pdf")
+                .addEventListener("click", () => {
+                    const invoice = this.document.getElementById("htmlContent");
+                    var opt = {
+                        margin: 0.1,
+                        filename: `${name}.pdf`,
+                        image: { type: 'jpeg', quality: 0.98 },
+                        html2canvas: { scale: 2 },
+                        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+                    };
+                    html2pdf().from(invoice).set(opt).save();
+                })
+                // PDF CODE END
     </script>
 </body>
 
