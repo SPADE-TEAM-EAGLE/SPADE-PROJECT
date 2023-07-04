@@ -6,6 +6,8 @@ $.ajax({
     },
     success: function({user}) {
         $("#user-name").text(user)
+        $("#header-user").text(user)
+        
 
     },
     error: function(xhr, status, error) {
