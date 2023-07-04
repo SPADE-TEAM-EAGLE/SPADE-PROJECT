@@ -2824,12 +2824,15 @@
 
                 })
                 $("#totalAmount").text('$ '+data.totalAmount)
-                const images=data.invoiceImages.split(",")
                 $("#view-invoice-images").empty()
+                if(data.invoiceImages){
+                    const images=data.invoiceImages.split(",")
+                    
                 images.forEach((image)=>{
                     $("#view-invoice-images").append(`
                             <img src="../../../../spadeAPI/uploads/${image}" width=200px height=200px alt=""> &nbsp;`)
                 })
+                }
                 $("#viewModal-invoice").modal("show")
             })
         $.ajax({

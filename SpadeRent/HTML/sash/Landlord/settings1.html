@@ -1517,6 +1517,8 @@
             display: block;
             position: relative;
             cursor: pointer;
+            padding-left: 0px;
+            padding-right: 0px;
         }
 
         .label:before {
@@ -1528,7 +1530,7 @@
             border: 1px solid grey;
             position: absolute;
             top: 15px;
-            left: 200px;
+            left: 115px;
             width: 30px;
             height: 30px;
             text-align: center;
@@ -1581,344 +1583,57 @@
         </div>
     </div>
     <!-- /GLOBAL-LOADER -->
+    <div class="modal fade" id="myModal_success" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+          <div class="modal-content modal-content-demo">
+            <div class="modal-body p-0">
+              <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
+                <!-- <div class="card-header border-0 pt-3">
+                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                            </button>
+                        </div> -->
+                <div class="card-body text-center">
+                  <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24">
+                      <path fill="#13bfa6"
+                        d="M10.3125,16.09375a.99676.99676,0,0,1-.707-.293L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328l-6.1875,6.1875A.99676.99676,0,0,1,10.3125,16.09375Z"
+                        opacity=".99" />
+                      <path fill="#71d8c9"
+                        d="M12,2A10,10,0,1,0,22,12,10.01146,10.01146,0,0,0,12,2Zm5.207,7.61328-6.1875,6.1875a.99963.99963,0,0,1-1.41406,0L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328Z" />
+                    </svg></span>
+                  <h4 class="h4 mb-0 mt-3 fw-bold">Success</h4>
+                  <p class="card-text text-dark">Successfully Loged In</p>
+                </div>
+                <!-- <div class="card-footer text-center border-0 pt-0">
+                            <div class="row">
+                                <div class="text-center">
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">delete</a>
+                                </div>
+                            </div>
+                        </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     <!-- Modal -->
-    <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div class="text-justify ps-2 border-model-line">
-                        <h2 class="modal-title">Create <strong class="color-primary">New Tenant</strong></h2>
-                        <span class="">Post your properties to thousands of potential investors,
-                            tenants and interested individuals.</span>
-                    </div>
-                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="accordion-item mb-4" id="accordion-item1">
-                        <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button text-white" type="button" id="accordion-button1"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                                aria-expanded="true" aria-controls="collapseOne">
-                                <span class="m-0 me-4 fs-1" style="font-weight: bold;">01</span>
-                                <h3 class="m-0"><strong>Tenant Information</strong> <i class="fi fi-rs-pencil"></i><i
-                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
-                                </h3>
-                            </button>
-                        </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                            data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <form class="row g-3" enctype="multipart/form-data">
-                                    <div class="col-md-6">
-                                        <label for="inputEmail4" class="form-label fw-bold">First Name<spnan
-                                                class="text-danger"> *</span></label>
-                                        <input type="text" class="form-control form" placeholder="Enter First Name"
-                                            id="firstName" required>
-                                        <span class="text-danger d-none">First name is required!</span>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="inputPassword4" class="form-label fw-bold">Last Name<spnan
-                                                class="text-danger"> *</span></label>
-                                        <input type="text" class="form-control form" placeholder="Enter Last Name"
-                                            id="lastName" required>
-                                        <span class="text-danger d-none">Last name required!</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputAddress" class="form-label fw-bold">Company Name <span
-                                                class="fw-light">(Optional)</span>
-                                        </label>
-                                        <input type="text" class="form-control form" id="company"
-                                            placeholder="Enter Company Name">
-                                        <!-- <span class="text-danger d-none">Company name is required!</span> -->
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputCity" class="form-label fw-bold">Email<spnan
-                                                class="text-danger"> *</span></label>
-                                        <input type="text" class="form-control form" placeholder="Enter Email"
-                                            id="email" required>
-                                        <span class="text-danger d-none">Email is required!</span>
-                                    </div>
-                                    <!-- <div class="col-md-4">
-                                        <label for="inputState" class="form-label fw-bold">Phone Number <span
-                                                class="fw-light">(Optional)</span></label>
-                                        <input id="phone" name="phone" type="tel" autocomplete="off">
-                                        <span id="valid-msg" class="d-none text-success">✓ Valid</span>
-                                                    <span id="error-msg" class="hide text-danger"></span>
-                                        </select>
-                                    </div> -->
-                                    <div class="col-12">
-                                        <label for="inputAddress2" class="form-label fw-bold">Address <span
-                                                class="fw-light">(Optional)</span></label>
-                                        <input type="text" class="form-control" id="address"
-                                            placeholder="Apartment, studio, or floor">
-                                        <!-- <span class="text-danger d-none">Address is required!</span> -->
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputState" class="form-label fw-bold">State<spnan
-                                                class="text-danger">*</span></label>
-                                        <select id="state" class="form-select form" required>
-                                            <option selected>Choose...</option>
-                                        </select>
-                                        <span class="text-danger d-none">State is required!</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputState" class="form-label fw-bold">City <spnan
-                                                class="text-danger">*</span></label>
-                                        <select id="city" class="form-select form" required>
-                                            <option selected>Choose...</option>
-
-                                        </select>
-                                        <span class="text-danger d-none">City is required!</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputPassword4" class="form-label fw-bold">Zip Code <spnan
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="zip" pattern="[0-9]{5}"
-                                            placeholder="A valid 5-digit zip code" maxlength="5"
-                                            oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
-                                        <span class="text-danger d-none">Zip code is required!</span>
-                                    </div>
-                                </form>
-                            </div>
+    <div class="modal fade" id="myModal_warning" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
+                        <div class="card-body text-center">
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24"><path fill="#fad383" d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z"/><circle cx="12" cy="16" r="1" fill="#f7b731"/><path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"/></svg></span>
+                          <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
+                          <p class="card-text text-dark">Current Password doesnot matches!!!!</p>
                         </div>
                     </div>
-                    <div class="accordion-item mb-4" id="accordion-item2">
-                        <h2 class="accordion-header" id="headingTwo">
-                            <button class="accordion-button collapsed text-white" type="button" id="accordion-button2"
-                                data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
-                                aria-controls="collapseTwo">
-                                <span class="m-0 me-4 fs-1" style="font-weight: bold;">02</span>
-                                <h3 class="m-0"><strong>Assign Property</strong> <i class="fi fi-rs-pencil"></i><i
-                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
-                                </h3>
-                            </button>
-                        </h2>
-                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                            data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <form class="row g-3">
-                                    <div class="col-md-4">
-                                        <label for="inputEmail4" class="form-label">Select Property<span
-                                                class="text-danger"> *</span></label>
-                                        <select id="property" class="form-select" required>
-                                            <option selected>Choose...</option>
-                                            <option>...</option>
-                                        </select>
-                                        <span class="text-danger d-none">Property is required!</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputEmail4" class="form-label">Select Property Unit<span
-                                                class="text-danger"> *</span></label>
-                                        <select id="unit" class="form-select" required>
-                                            <option selected>Choose...</option>
-                                            <option>...</option>
-                                        </select>
-                                        <span class="text-danger d-none">Property units is required!</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputAddress" class="form-label">Input Rent Amount /Per
-                                            Month<span class="text-danger"> *</span></label>
-                                        <div class="input-group">
-                                            <span class="input-group-text"
-                                                style="color: #1467B0;background-color: transparent !important;">$</span>
-                                            <input type="text" class="form-control" id="rent" pattern="[0-9]{7}"
-                                                placeholder="Enter rent amount" maxlength="7"
-                                                oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
-                                        </div>
-                                        <span class="text-danger d-none">Rent amount is required!</span>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item" id="accordion-item3">
-                        <h2 class="accordion-header" id="headingThree">
-                            <button class="accordion-button collapsed text-white" id="accordion-button3" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false"
-                                aria-controls="collapseThree">
-                                <span class="m-0 me-4 fs-1" style="font-weight: bold;">03</span>
-                                <h3 class="m-0"><strong>Lease Details</strong> <i class="fi fi-rs-pencil"></i><i
-                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
-                                </h3>
-                            </button>
-                        </h2>
-                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-                            data-bs-parent="#accordionExampe">
-                            <div class="accordion-body">
-                                <form class="row g-3">
-                                    <div class="col-md-12">
-                                        <label for="inputEmail4" class="form-label">Is this a gross lease or triple net
-                                            lease? <i class="fi fi-rs-info ms-2" style="color: #1467B0"></i></label>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" value="Gross Lease"
-                                                name="lease" id="flexCheckDefault">
-                                            <label class="form-check-label" for="flexCheckDefault">
-                                                Gross Lease
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" value="Triple Net Lease"
-                                                name="lease" id="flexCheckChecked1" href="#collapse1" role="button"
-                                                aria-expanded="false" aria-controls="collapseExample1">
-                                            <label class="form-check-label" for="flexCheckChecked1">
-                                                Triple Net Lease
-                                            </label>
-                                        </div>
-                                        <!-- <input type="hidden" name="radioOptionsHidden" required> -->
-                                        <div class="collapse" id="collapse1">
-                                            <div class="card card-body">
-                                                <div class="text-justify ps-2 border-model-line">
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <label for="inputEmail4" class="form-label">Base Rent Amount
-                                                                (Optional)</label>
-                                                            <div class="input-group">
-                                                                <span class="input-group-text"
-                                                                    style="color: #1467B0;background-color: transparent !important;">$</span>
-                                                                <input type="text" class="form-control" id="baseRent"
-                                                                    pattern="[0-9]{7}" placeholder="Enter Amount.."
-                                                                    maxlength="7"
-                                                                    oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                                                                    required>
-                                                            </div>
-                                                            <span class="text-danger d-none">Rent amount is
-                                                                required!</span>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <label for="inputPassword4" class="form-label">Triple Net
-                                                                Amount (Optional)</label>
-                                                            <div class="input-group">
-                                                                <span class="input-group-text"
-                                                                    style="color: #1467B0;background-color: transparent !important;">$</span>
-                                                                <input type="text" class="form-control" id="tripleNet"
-                                                                    pattern="[0-9]{7}" placeholder="Enter Amount.."
-                                                                    maxlength="7"
-                                                                    oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                                                                    required>
-                                                            </div>
-                                                            <span class="text-danger d-none">Rent amount is
-                                                                required!</span>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <label for="inputEmail4" class="form-label">Lease Start
-                                                                Date</label>
-                                                            <input type="date" class="form-control position-relative"
-                                                                id="leaseStart" required>
-                                                            <span class="text-danger d-none">Rent amount is
-                                                                required!</span>
-                                                            <!-- <i class="fi fi-rs-calendar"></i> -->
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <label for="inputPassword4" class="form-label">Lease End
-                                                                Date</label>
-
-                                                            <input type="date" class="form-control" id="leaseEnd"
-                                                                required>
-                                                            <span class="text-danger d-none">Rent amount is
-                                                                required!</span>
-                                                            <!-- <i class="fi fi-rs-calendar"></i> -->
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <label for="inputEmail4" class="form-label">Are there any rent increases during
-                                            the Lease Term? <i class="fi fi-rs-info ms-2"
-                                                style="color: #1467B0"></i></label>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" value="yes" name="yesno"
-                                                id="flexCheckChecked2" href="#collapse2" role="button"
-                                                aria-expanded="false" aria-controls="collapseExample2" required>
-                                            <label class="form-check-label" for="flexCheckChecked">
-                                                Yes
-                                            </label>
-                                        </div>
-
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" value="no" name="yesno"
-                                                required>
-                                            <label class="form-check-label" for="flexCheckChecked">
-                                                No
-                                            </label>
-                                        </div>
-
-                                    </div>
-                                    <div class="col-12 row">
-                                        <!-- <div class="col-md-5">
-                                            <label for="inputEmail4" class="form-label">Date of Rent Change
-                                                (Optional)</label>
-                                            <input type="email" class="form-control" id="inputEmail4">
-                                        </div>
-                                        <div class="col-md-5">
-                                            <label for="inputPassword4" class="form-label">Rent Amount Correlating to
-                                                that Date</label>
-                                            <input type="password" class="form-control" id="inputPassword4">
-                                        </div>
-                                        <div class="col-md-2">
-                                            <button>
-                                                <i class="fi fi-rs-trash"></i>
-                                            </button>
-                                        </div> -->
-                                        <div class="collapse" id="collapse2">
-                                            <div class="card card-body">
-                                                <div class="text-justify" id="add-item-container">
-                                                    <div class="row row-multiple">
-                                                        <div class="col-md-5">
-                                                            <label for="inputEmail4" class="form-label">Date of Rent
-                                                                Change
-                                                                (Optional)</label>
-                                                            <input type="date" class="form-control input-date"
-                                                                id="dateofRentchange" required>
-                                                            <span class="text-danger d-none">Rent amount is
-                                                                required!</span>
-                                                        </div>
-                                                        <div class="col-md-5">
-                                                            <label for="inputPassword4" class="form-label">Rent Amount
-                                                                Correlating to
-                                                                that Date</label>
-                                                            <input type="text" class="form-control input-amount"
-                                                                id="amountChange" pattern="[0-9]{7}"
-                                                                placeholder="Enter Amount.." maxlength="7"
-                                                                oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                                                                required>
-                                                            <span class="text-danger d-none">Rent amount is
-                                                                required!</span>
-                                                        </div>
-                                                        <div class="col-md-2 text-center d-flex align-items-center">
-                                                            <button type="button" class="btn position-relative">
-                                                                <i class="fi fi-rs-trash text-danger del-btn fs-5"></i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <a href="javascript:;" class="mt-1" id="add-item">+Add Line Item</a>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <!-- <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft'
-                        disabled>Save as
-                        Draft</button> -->
-                    <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal"
-                        id='close'>Close</button>
-                    <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
-                    <button class="btn text-light button" style='background-color:#1467B0;' id='next'
-                        disabled>Next</button>
                 </div>
             </div>
         </div>
     </div>
+   
     <!-- modal end  -->
     <div class="modal fade" id="myModal_delete">
         <div class="modal-dialog modal-dialog-centered text-center" role="document">
@@ -2357,20 +2072,20 @@
                                             <div class="tabs-menu1">
                                                 <!-- Tabs -->
                                                 <ul class="nav panel-tabs nav-width-scroll">
-                                                    <li><a href="#tab5" class="active" data-bs-toggle="tab">Profile</a>
-                                                    </li>
-                                                    <li><a href="#tab6" data-bs-toggle="tab">Security Settings</a></li>
-                                                    <li><a href="#tab7" data-bs-toggle="tab">Notification
-                                                            Preferences</a></li>
+                                                    <!-- <li><a href="#tab5" class="active" data-bs-toggle="tab">Profile</a>
+                                                    </li> -->
+                                                    <li><a href="#tab6" class="active" data-bs-toggle="tab">Security Settings</a></li>
+                                                    <!-- <li><a href="#tab7" data-bs-toggle="tab">Notification
+                                                            Preferences</a></li> -->
                                                     <li><a href="#tab8" data-bs-toggle="tab">Appearance</a></li>
-                                                    <li><a href="#tab9" data-bs-toggle="tab">Subscription</a></li>
+                                                    <!-- <li><a href="#tab9" data-bs-toggle="tab">Subscription</a></li>
                                                     <li><a href="#tab10" data-bs-toggle="tab">Users & Permissions</a>
                                                     </li>
                                                     <li><a href="#tab11" data-bs-toggle="tab">Email Templates</a></li>
                                                     <li><a href="#tab12" data-bs-toggle="tab">Invoice Settings</a></li>
                                                     <li><a href="#tab13" data-bs-toggle="tab">Merchant Services</a></li>
                                                     <li><a href="#tab14" data-bs-toggle="tab">Vendors</a></li>
-                                                    <li><a href="#tab15" data-bs-toggle="tab">Close Account</a></li>
+                                                    <li><a href="#tab15" data-bs-toggle="tab">Close Account</a></li> -->
                                                 </ul>
                                             </div>
                                         </div>
@@ -2386,7 +2101,7 @@
                                 <div class="panel panel-primary">
                                     <div class="panel-body tabs-menu-body">
                                         <div class="tab-content">
-                                            <div class="tab-pane active" id="tab5">
+                                            <div class="tab-pane" id="tab5">
                                                 <h2 class="h2-personal-inf">Personal Information</h2>
                                                 <p class="p-personal-inf">Automate everything from listing units to
                                                     moving out tenants,
@@ -2488,7 +2203,7 @@
 
                                                 </div>
                                             </div>
-                                            <div class="tab-pane" id="tab6">
+                                            <div class="tab-pane active" id="tab6">
                                                 <h2 class="h2-personal-inf">Login & Password</h2>
                                                 <p class="p-personal-inf">You can change your login email and password
                                                     below.</p>
@@ -2534,13 +2249,13 @@
                                                         <div
                                                             style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
                                                         </div>
-                                                        <div style="display: flex;">
+                                                        <!-- <div style="display: flex;">
                                                             <label class="custom-switch m-0"> <input type="radio"
                                                                     name="radio11" class="custom-switch-input"> <span
                                                                     class="custom-switch-indicator"></span> </label>
                                                             &emsp;<p>Require 2-Step verification code to log in <span
                                                                     style="color: #1467B0;">(recommended)</span></p>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                                     <div class="col-lg-6 mt-5">
                                                         <div class="card"
@@ -2557,7 +2272,7 @@
                                                                             require you to enter your
                                                                             current password for security purposes:</p>
                                                                         <input type="password" class="form-control"
-                                                                            id="validationCustom02"
+                                                                            id="current_password_reset"
                                                                             placeholder="Current Password *" required>
                                                                     </div>
                                                                 </div>
@@ -2565,7 +2280,7 @@
                                                         </div>
                                                         <div class="col-lg-7" style="display: flex; width: auto;">
                                                             <button class="btn btn-light btn-pill m-2">Close</button>
-                                                            <button class="btn btn-primary btn-pill m-2">Save</button>
+                                                            <button class="btn btn-primary btn-pill m-2" id="save" disabled>Save</button>
                                                         </div>
                                                     </div>
 
@@ -2687,14 +2402,14 @@
                                                         style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
                                                     </div>
                                                     <div class="row" id="myDIV">
-                                                        <div class="col-lg-3">
+                                                        <div class="col-lg-3" style="max-width: 19%;">
                                                             <input type="radio" name="test" id="cb5" />
                                                             <label for="cb5" class="label">
                                                                 <img src="../assets/images/light-mode.png" alt=""
                                                                     class="btnn activee" id="myonoffswitch1"></label>
                                                             <h5 style="padding: 10px;">Light Mode</h5>
                                                         </div>
-                                                        <div class="col-lg-3">
+                                                        <div class="col-lg-3" style="max-width: 19%;">
                                                             <input type="radio" name="test" id="cb6" />
                                                             <label for="cb6" class="label">
                                                                 <img src="../assets/images/dark-mode.png" alt=""
@@ -8328,8 +8043,8 @@
 
     <!-- BACK-TO-TOP -->
     <!-- <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a> -->
-    <a href="#addModal" data-bs-effect="effect-scale" data-bs-toggle="modal" id="add-tenant-side-btn"><i
-            class="fe fe-plus"></i></a>
+    <!-- <a href="#addModal" data-bs-effect="effect-scale" data-bs-toggle="modal" id="add-tenant-side-btn"><i
+            class="fe fe-plus"></i></a> -->
 
 
     <!-- JQUERY JS -->
@@ -8375,6 +8090,10 @@
     <!-- CUSTOM JS -->
     <!-- <script src="../assets/js/custom1.js"></script> -->
 
+      <!-- FORM WIZARD JS-->
+      <script src="../assets/plugins/formwizard/jquery.smartWizard.js"></script>
+      <script src="../assets/plugins/formwizard/fromwizard.js"></script>
+
     <!-- INTERNAL SELECT2 JS -->
     <script src="../assets/plugins/select2/select2.full.min.js"></script>
     <script src="../assets/js/select2.js"></script>
@@ -8404,6 +8123,14 @@
     <!-- TypeHead js -->
     <script src="../assets/plugins/bootstrap5-typehead/autocomplete.js"></script>
     <script src="../assets/js/typehead.js"></script>
+
+        <!-- INTERNAL Accordion-Wizard-Form js-->
+        <script src="../assets/plugins/accordion-Wizard-Form/jquery.accordion-wizard.min.js"></script>
+        <script src="../assets/js/form-wizard.js"></script>
+
+            <!-- INTERNAl Jquery.steps js -->
+    <script src="../assets/plugins/jquery-steps/jquery.steps.min.js"></script>
+    <script src="../assets/plugins/parsleyjs/parsley.min.js"></script>
 
     <!-- INTERNAL INDEX JS -->
     <script src="../assets/js/index1.js"></script>
@@ -8451,41 +8178,48 @@
     <script src="../assets/plugins/chart/Chart.bundle.js"></script>
     <script src="../assets/plugins/chart/utils.js"></script>
 
-    
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 
 <script>
 
     
 let password_validate1 = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
-var validconfirmPassword1 = document.getElementById("id_password1");
+let validconfirmPassword1 = document.getElementById("id_password1");
 let confirmPassword1 = document.getElementById("id_password2");
+let newPassword = document.getElementById("current_password_reset");
+let spantag11 = document.getElementById("passnotmatch1");
+
 confirmPassword1.addEventListener('keyup', confirmPasswordValidation1);
 validconfirmPassword1.addEventListener('keyup', confirmPasswordValidation1);
-var spantag11 = document.getElementById("passnotmatch1");
+newPassword.addEventListener('keyup', confirmPasswordValidation1);
 
 function confirmPasswordValidation1() {
- 
-  if(validconfirmPassword1.value.match(password_validate1))
-  {
-    console.log(11)
+  if (validconfirmPassword1.value.match(password_validate1)) {
     validconfirmPassword1.classList.add("border-green");
     spantag11.style.display = "none";
-  }
-  else
-  {
-    console.log(21)
+  } else {
     validconfirmPassword1.classList.remove("border-green");
     spantag11.style.display = "block";
   }
-    if (confirmPassword1.value == validconfirmPassword1.value && validconfirmPassword1.value.match(password_validate1)) {
-      confirmPassword1.classList.add("border-green");
-      console.log(31)
-    } else {
-        console.log(41)
-      confirmPassword1.classList.remove("border-green");
-    }
+
+  if (confirmPassword1.value == validconfirmPassword1.value && validconfirmPassword1.value.match(password_validate1)) {
+    confirmPassword1.classList.add("border-green");
+  } else {
+    confirmPassword1.classList.remove("border-green");
+  }
+
+  if (newPassword.value.match(password_validate1)) {
+    newPassword.classList.add("border-green");
+  } else {
+    newPassword.classList.remove("border-green");
+  }
+  if (confirmPassword1.value == validconfirmPassword1.value && validconfirmPassword1.value.match(password_validate1) && newPassword.value.match(password_validate1)) {
+    document.getElementById("save").disabled = false;
+  } else {
+    document.getElementById("save").disabled = true;
+  }
 }
+
 
 const togglePassword11 = document.querySelector("#togglePassword1");
 const password11 = document.querySelector("#id_password1");
@@ -8516,22 +8250,6 @@ $(document).ready(function() {
     });
   });
 </script>
-
-    <script>
-        // Get the user's preferred color scheme
-        const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-        // Get a reference to the logo element
-        const logo = document.getElementById('logo');
-
-        // Set the logo source file based on the user's preferred color scheme
-        if (userPrefersDark) {
-            // console.log(document.getElementById("myModal_delete"))
-            logo.src = '../assets/header-img/comment.svg';
-        } else {
-            logo.src = '../assets/header-img/question.svg';
-        }
-    </script>
 
     <script>
         // ----- On render -----
@@ -8763,7 +8481,42 @@ $(document).ready(function() {
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <script>
-        $(".toggle-password").click(function() {
+        $(document).ready(()=>{
+            $("#save").click(()=>{
+                console.log($("#current_password_reset").val(),$("#id_password1").val())
+                $.ajax({
+    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/changePasssword',
+    type: 'PUT',
+    data: JSON.stringify({
+        currentPassword: $("#current_password_reset").val(),
+        NewPassword: $("#id_password1").val()
+    }),
+    contentType: "application/json; charset=utf-8",
+    processData: false,
+    headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+    },
+    success: function (response) {
+        $("#myModal_success").modal("show");
+              setTimeout(function () {
+                $("#myModal_success").modal("hide");
+                localStorage.setItem("authtoken", response.token);
+                // window.location = "../Landlord/index.html";
+              }, 2000);
+    },
+    error: function (xhr, status, error) {
+        // Handle the error response from the API
+        if (xhr.status === 401) {
+            $("#myModal_warning").modal("show")
+        } else {
+            console.log('API error:', error);
+        }
+    }
+});
+
+            })
+            
+            $(".toggle-password").click(function() {
 
 $(this).toggleClass("fi-rs-eye fi-rs-crossed-eye");
 var input = $($(this).attr("toggle"));
@@ -8773,13 +8526,14 @@ if (input.attr("type") == "password") {
   input.attr("type", "password");
 }
 });
-    </script>
-
-    <script>
-	$("#form1show").click(function(e){
+$("#form1show").click(function(e){
 	$('#form1').show();
 	});
+
+            
+        })
     </script>
+
 
 
 </body>

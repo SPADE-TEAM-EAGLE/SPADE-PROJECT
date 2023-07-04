@@ -2173,11 +2173,15 @@
                                 taskId = taskIdElement.attr("id")
 
                                 const data = taskInfo.find(obj => obj.id.toString() == taskId);
-                                console.log(data)
-                                selectedFiles = data.taskImages.split(",")
+                                // console.log(data)
+                                if(data.taskImages){
+                                    selectedFiles = data.taskImages.split(",")
+                                    updateSelectedFilesContainer()
+                                }
+                                
 
-                                updateSelectedFilesContainer()
-                                $("#taskName_view").text("huhuh");
+                                
+                                $("#taskName_view").text(data.taskName);
                                 $("#dueDate_view").text(data.dueDate);
                                 $("#priority_view").text(data.priority);
                                 $("#status_view").text(data.status);
@@ -2238,13 +2242,14 @@
 
                 })
                 // $("#totalAmount").text('$ ' + data.totalAmount)
-                const images = data.taskImages.split(",")
-                // $("#notes").text(data.note || "N/A")
-                $("#view-task-images").empty()
-                images.forEach((image) => {
-                    $("#view-task-images").append(`
+                if(data.taskImages){
+                    const images = data.taskImages.split(",")
+                    $("#view-task-images").empty()
+                    images.forEach((image) => {
+                        $("#view-task-images").append(`
                             <img src="../../../../spadeAPI/uploads/${image}" width=200px height=200px alt=""> &nbsp;`)
-                })
+                    })
+                }
                 $("#viewModal-tasks").modal("show")
             })
             $.ajax({
@@ -2408,10 +2413,12 @@
                                 taskId = taskIdElement.attr("id")
 
                                 const data = response.data[0].find(obj => obj.id.toString() == taskId);
-                                console.log(taskId)
-                                selectedFiles = data.taskImages.split(",")
+                                // console.log(taskId)
+                                if(data.taskImages){
+                                    selectedFiles = data.taskImages.split(",")
 
-                                updateSelectedFilesContainer()
+updateSelectedFilesContainer()
+                                }
                                 $("#message").val(data.notes);
                                 $("#dueDate_update").val(data.dueDate);
                                 $("#taskName_update").val(data.taskName);

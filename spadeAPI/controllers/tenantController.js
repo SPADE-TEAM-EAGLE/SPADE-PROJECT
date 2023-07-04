@@ -64,7 +64,7 @@ exports.createTenants = async (req, res) => {
     const tenantsCheck = await queryRunner(selectQuery("tenants", "email"), [email]);
     if (tenantsCheck[0].length > 0) {
 
-      res.status(400).json({
+      res.status(200).json({
         message: `Tenants Already exist on this email ${email} `,
       })
     } else {
