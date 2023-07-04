@@ -611,7 +611,7 @@ var next3 = document.getElementById("next3");
 confirmPassword.addEventListener('keyup', confirmPasswordValidation);
 validconfirmPassword.addEventListener('keyup', confirmPasswordValidation);
 var spantag1 = document.getElementById("passnotmatch1");
-
+ 
 function confirmPasswordValidation() {
   
   if(validconfirmPassword.value.match(password_validate))
