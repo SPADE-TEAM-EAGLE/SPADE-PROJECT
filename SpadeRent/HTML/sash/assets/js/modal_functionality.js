@@ -314,6 +314,7 @@ $(document).on('click', '#next', function (e) {
 
         success: function (response) {
             // console.log(1)
+            $("#unit-link").attr("href",`./property-unit.html?propertyId=${response.propertyId}`)
     resetAccordions()
 
             $('#succesModal').modal('show')
