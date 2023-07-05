@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
+  <!-- BOOTSTRAP CSS -->
+  <link id="style" href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="shortcut icon" type="image/x-icon" href="../assets/images/brand/favicon.ico" />
+  <!-- STYLE CSS -->
+  <link rel="stylesheet"
+    href="https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css" />
+
+  <link href="../assets/css/style.css" rel="stylesheet" />
+  <link href="../assets/css/dark-style.css" rel="stylesheet" />
+  <link href="../assets/css/transparent-style.css" rel="stylesheet" />
+  <link href="../assets/css/skin-modes.css" rel="stylesheet" />
+  <!--- FONT ICONS CSS -->
+  <link href="../assets/css/icons.css" rel="stylesheet" />
+  <!-- COLOR SKIN CSS -->
+  <link id="theme" rel="stylesheet" type="text/css" media="all" href="../assets/colors/color1.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet" />
+  <title>Spade Rent | Login</title>
+  <style>
+    * {
+      font-family: "Figtree", sans-serif !important;
+    }
+
+    html {
+      height: 100%;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+    }
+
+    body {
+      background-image: linear-gradient(#1467b0, #4ca7cf);
+      height: 100%;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+    }
+
+    .wapper {
+      height: 100%;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+    }
+
+    .main-div {
+      padding-top: 15px;
+      padding-bottom: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+
+    .box {
+      background: white;
+      /* height: 500px;
+        width: 400px; */
+      border: transparent;
+      border-radius: 10px;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      padding: 20px;
+      text-align: center;
+      /* width: 85%; */
+      margin: auto;
+      z-index: 1;
+    }
+
+    #next1 {
+      padding: 8px 10px;
+      background: #1467b0;
+    }
+
+    .showdiv {
+      display: none;
+    }
+
+    .blue-color {
+      color: #1467b0;
+    }
+
+    .Rent-logo {
+      width: 150px;
+      margin-bottom: 20px;
+      padding-top: 25px;
+      /* background: url('../assets/images/Artboard GÇô 1.svg'); */
+    }
+
+    .btnstyle {
+      font-size: 1.5rem !important;
+      min-width: 2.75rem !important;
+      font-weight: 600;
+    }
+
+    .bg-blue {
+      background: #1467b0;
+    }
+
+    .text-p {
+      font-size: 13px;
+      /* color: black; */
+      font-weight: 500;
+    }
+
+    .login-form label {
+      font-weight: bold !important;
+    }
+
+    .anc_color {
+      color: black;
+    }
+
+    .btnn {
+      border: transparent;
+      border-radius: 60px;
+    }
+
+    .horizontalMenucontainer {
+      height: 100% !important;
+    }
+
+    .LandSoft {
+      padding-top: 15px;
+      color: #ffffff;
+    }
+
+    .dark-mode .anc_color {
+      color: #dedefd;
+    }
+
+    .hrset {
+      width: 275px;
+      border-top: 3px solid #fab74c !important;
+      opacity: 1;
+      margin-top: -15px;
+    }
+
+    .built {
+      font-size: 55px;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    #login-email,
+    #id_password1 {
+      height: 45px;
+    }
+
+    .imgforweb {
+      position: absolute;
+      z-index: 0;
+      top: -300px;
+    }
+
+    .mobileversion {
+      display: none;
+    }
+
+    .spn {
+      color: white;
+      line-height: 2;
+      font-size: 16px;
+      /* text-align: center; */
+    }
+
+    .imgforwebs {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        background-image: none;
+        height: 100%;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+      }
+
+      .ppp {
+        text-align: center;
+      }
+
+      .mobileversion {
+        display: block;
+      }
+
+      .imgforwebs {
+        display: inline;
+        height: 700px;
+        width: 100%;
+        background-image: url("../assets/images/bottom.png");
+        background-repeat: no-repeat;
+        position: absolute;
+        z-index: 0;
+        top: -400px;
+        border-radius: 40px;
+      }
+
+      .horizontalMenucontainer {
+        height: auto !important;
+        /* background-image: url('../assets/images/mobileversion.webp') ;
+        background-repeat: no-repeat;
+        background-size: cover; */
+        /* background-position: center; */
+      }
+
+      .weblogo {
+        display: none;
+      }
+
+      .LandSoft {
+        padding-top: 0px;
+        /* color: #000000; */
+        text-align: center;
+      }
+
+      .mobset {
+        display: flex;
+        justify-content: center;
+        font-weight: 600;
+      }
+
+      .imgforweb {
+        display: none;
+      }
+
+      .mobcolor {
+        color: #1467b0;
+        font-weight: 600;
+        margin-right: 5px;
+      }
+
+      .set {
+        background-image: linear-gradient(#1467b0, #4ca7cf);
+        height: 100%;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        top: -250px;
+      }
+
+      .showdiv {
+        display: block;
+      }
+
+      .hrset {
+        display: none;
+      }
+
+      .built {
+        font-size: 2rem;
+        /* font-weight: 600; */
+        color: #000000;
+        display: flex;
+        justify-content: center;
+      }
+
+      .spn {
+        color: black;
+        line-height: 2;
+        text-align: center;
+      }
+
+      .ddd {
+        color: black !important;
+      }
+    }
+  </style>
+</head>
+
+<body onload="check()">
+  <div class="modal fade" id="myModal_success" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered text-center" role="document">
+      <div class="modal-content modal-content-demo">
+        <div class="modal-body p-0">
+          <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
+            <!-- <div class="card-header border-0 pt-3">
+                        <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                        </button>
+                    </div> -->
+            <div class="card-body text-center">
+              <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24">
+                  <path fill="#13bfa6"
+                    d="M10.3125,16.09375a.99676.99676,0,0,1-.707-.293L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328l-6.1875,6.1875A.99676.99676,0,0,1,10.3125,16.09375Z"
+                    opacity=".99" />
+                  <path fill="#71d8c9"
+                    d="M12,2A10,10,0,1,0,22,12,10.01146,10.01146,0,0,0,12,2Zm5.207,7.61328-6.1875,6.1875a.99963.99963,0,0,1-1.41406,0L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328Z" />
+                </svg></span>
+              <h4 class="h4 mb-0 mt-3 fw-bold">Success</h4>
+              <p class="card-text text-dark">Successfully Loged In</p>
+            </div>
+            <!-- <div class="card-footer text-center border-0 pt-0">
+                        <div class="row">
+                            <div class="text-center">
+                                <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">cancel</a>
+                                <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">delete</a>
+                            </div>
+                        </div>
+                    </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="modal fade" id="myModal_notfound">
+  <div class="modal-dialog modal-dialog-centered text-center" role="document">
+      <div class="modal-content modal-content-demo">
+          <div class="modal-body p-0">
+              <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
+                  <div class="card-body text-center">
+                    <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24"><path fill="#fad383" d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z"/><circle cx="12" cy="16" r="1" fill="#f7b731"/><path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"/></svg></span>
+                                        <h4 class="h4 mb-0 mt-3 fw-bold">Alert</h4>
+                                        <p class="card-text text-dark" id="modal_input_notfound">Email Not found</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div> -->
+  <div class="wapper d-flex align-items-center">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 mobileversion">
+          <div class="main-div">
+            <span>
+              <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" class="Rent-logo" id="" />
+            </span>
+          </div>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-md-12 col-lg-6 col-xl-6">
+          <div>
+            <img src="../assets/images/logo_loginmodule.png" alt="" class="weblogo" />
+          </div>
+          <div class="LandSoft">
+            <h1 class="text-white mb-0 ddd">
+              <span class="mobcolor">LandLord</span> Software
+            </h1>
+            <hr class="mt-1 hrset" />
+          </div>
+          <div>
+            <h1 class="font-weight-500 mb-0 built text-white fw-bold ddd">
+              Built For <span class="mobcolor">Just You</span>
+            </h1>
+            <p class="text-white mb-3 mt-3 fs-16 ppp ddd">
+              Make rental management easier with property management software,
+              <br />and have ready-to-go tools for every step of your landlord
+              journey.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-5 col-xl-5">
+          <div class="login-div">
+            <div class="box card">
+              <span>
+                <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" class="Rent-logo" id="logo" />
+              </span>
+              <h1 class="text-center font-weight-500 mb-2">
+                Welcome <span class="font-weight-bold blue-color">Back!</span>
+              </h1>
+              <span class="text-center text-p">
+                Please enter your credentials to sign in to your account
+              </span>
+              <div class="login-form mt-5">
+                <form action="">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="form-group text-start">
+                        <label for="exampleInputEmail1">Email</label>
+                        <input type="email" class="form-control input-inside" id="login-email"
+                          aria-describedby="emailHelp" data-bs-placement="top" data-bs-toggle="tooltip" title=""
+                          data-bs-original-title="Email must have '@' symbol." placeholder="Enter Email" />
+                        <span class="text-danger" style="display: none" id="email_span">Sorry! incorrect email
+                          address</span>
+                          
+                        <!-- <i class="fi fi-rs-info text-dark fs-20" id="togglePassword1" data-bs-placement="top" data-bs-toggle="tooltip" data-bs-original-title="Email must have '@' symbol." aria-describedby="tooltip739895" style="cursor: pointer;
+                                                                    float: right;
+                                                                    margin-top: -34px;
+                                                                    margin-right: 15px;
+                                                                    "></i> -->
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="form-group text-start">
+                        <label for="exampleInputEmail1">Password</label>
+                        <input type="password" class="form-control input-inside" id="id_password1"
+                          aria-describedby="emailHelp" placeholder="Enter Password" data-bs-placement="top"
+                          data-bs-toggle="tooltip" title="" data-bs-original-title="Enter password here." />
+                        <span class="text-danger" style="display: none" id="pass_span">Sorry! incorrect password</span>
+                        <i class="fi fi-rs-eye text-dark fs-20" id="togglePassword1" style="
+                              cursor: pointer;
+                              float: right;
+                              margin-top: -34px;
+                              margin-right: 28px;
+                            "></i>
+                      </div>
+                    </div>
+                    <div class="col-12 mb-2 pb-5">
+                      <div class="form-group"></div>
+                      <button type="button" class="btn btn-lg btn-block btnn bg-blue btnstyle" id="next1">
+                        Login
+                        <!-- <img src="../assets/images/arrow.svg" class="float-right mt-1" alt=""> -->
+                        <img src="../assets/images/arrow.svg" class="float-right mt-3 mr-2" alt="" />
+                      </button>
+                    </div>
+                    <div class="col-12 mb-2">
+                      <div class="d-flex justify-content-between">
+                        <a href="Signup.html" class="text-dark">Sign up for account?</a>
+                        <a href="../Tenant/login_module.html" class="text-dark">Login with Tenant?</a>
+                        <a href="Forget-password.html" class="blue-color">Forgot Paassword?</a>
+                      </div>
+                    </div>
+                    <div class="col-12 mt-5">
+                      <p class="mb-0 text-dark fw-bold">
+                        Copyright ©
+                        <a href="javascript:void(0)">Spade, LLC.</a>
+                        <span id="year"></span>
+                      </p>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-1"></div>
+        <div class="col-8 pb-5">
+          <img src="../assets/images/dashboard.png" alt="" class="imgforweb" />
+        </div>
+
+        <div class="col-12 p-0">
+          <div class="imgforwebs">
+            <!-- for Mobile Footer -->
+          </div>
+          <!-- <div class="col-12 mt-5 pb-3 p-0 showdiv">
+            <hr>
+            <p class="mb-0 text-dark fw-bold" style="
+            text-align: center;">Copyright © <a href="javascript:void(0)">Spade, LLC.</a> <span id="year"></span></p>
+          </div> -->
+          <!-- for Mobile Footer -->
+          <!-- <img src="../assets/images/bottom.png" alt="" class="imgforwebs" style="  "> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- JQUERY JS -->
+  <script src="../assets/js/jquery.min.js"></script>
+  <!-- BOOTSTRAP JS -->
+  <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
+  <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+  <!-- SIDE-MENU JS-->
+  <script src="../assets/plugins/sidemenu/sidemenu.js"></script>
+  <!-- TypeHead js -->
+  <script src="../assets/plugins/bootstrap5-typehead/autocomplete.js"></script>
+  <script src="../assets/js/typehead.js"></script>
+  <!-- SIDEBAR JS -->
+  <script src="../assets/plugins/sidebar/sidebar.js"></script>
+  <!-- FORM WIZARD JS-->
+  <script src="../assets/plugins/formwizard/jquery.smartWizard.js"></script>
+  <script src="../assets/plugins/formwizard/fromwizard.js"></script>
+  <!-- INTERNAl Jquery.steps js -->
+  <script src="../assets/plugins/jquery-steps/jquery.steps.min.js"></script>
+  <script src="../assets/plugins/parsleyjs/parsley.min.js"></script>
+  <!-- Perfect SCROLLBAR JS-->
+  <script src="../assets/plugins/p-scroll/perfect-scrollbar.js"></script>
+  <script src="../assets/plugins/p-scroll/pscroll.js"></script>
+  <script src="../assets/plugins/p-scroll/pscroll-1.js"></script>
+  <!-- INTERNAL Accordion-Wizard-Form js-->
+  <script src="../assets/plugins/accordion-Wizard-Form/jquery.accordion-wizard.min.js"></script>
+  <script src="../assets/js/form-wizard.js"></script>
+  <!-- FILE UPLOADES JS -->
+  <script src="../assets/plugins/fileuploads/js/fileupload.js"></script>
+  <script src="../assets/plugins/fileuploads/js/file-upload.js"></script>
+  <!-- INTERNAL File-Uploads Js-->
+  <script src="../assets/plugins/fancyuploder/jquery.ui.widget.js"></script>
+  <script src="../assets/plugins/fancyuploder/jquery.fileupload.js"></script>
+  <script src="../assets/plugins/fancyuploder/jquery.iframe-transport.js"></script>
+  <script src="../assets/plugins/fancyuploder/jquery.fancy-fileupload.js"></script>
+  <script src="../assets/plugins/fancyuploder/fancy-uploader.js"></script>
+  <!-- Color Theme js -->
+  <script src="../assets/js/themeColors.js"></script>
+  <!-- Sticky js -->
+  <script src="../assets/js/sticky.js"></script>
+  <!-- CUSTOM JS -->
+  <script src="../assets/js/custom.js"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script> -->
+  <!-- JQUERY JS -->
+  <script src="../assets/js/jquery.min.js"></script>
+  <!-- BOOTSTRAP JS -->
+  <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
+  <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+  <!-- COUNTERS JS-->
+  <script src="../assets/plugins/counters/counterup.min.js"></script>
+  <script src="../assets/plugins/counters/waypoints.min.js"></script>
+  <script src="../assets/plugins/counters/counters-1.js"></script>
+  <!-- Perfect SCROLLBAR JS-->
+  <script src="../assets/plugins/owl-carousel/owl.carousel.js"></script>
+  <script src="../assets/plugins/company-slider/slider.js"></script>
+  <!-- Star Rating Js-->
+  <script src="../assets/plugins/rating/jquery-rate-picker.js"></script>
+  <script src="../assets/plugins/rating/rating-picker.js"></script>
+  <!-- Star Rating-1 Js-->
+  <script src="../assets/plugins/ratings-2/jquery.star-rating.js"></script>
+  <script src="../assets/plugins/ratings-2/star-rating.js"></script>
+  <!-- Sticky js -->
+  <script src="../assets/js/sticky.js"></script>
+  <!-- CUSTOM JS -->
+  <script src="../assets/js/landing.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      $(document).on("click", "#next1", function (a) {
+        var email = $("#login-email").val();
+        var password = $("#id_password1").val();
+        // $("#myModal_success").modal("show");
+
+        $.ajax({
+          // url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/Signin',
+          url: "http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/Signin",
+          type: "GET",
+          contentType: "application/json; charset=utf-8",
+          data: {
+            email: email,
+            password: password,
+          },
+          success: function (response) {
+            if (response.message == "Successful Login") {
+              $("#email_span").hide();
+              $("#pass_span").hide();
+              $("#id_password1").removeClass("is-invalid");
+              $("#login-email").removeClass("is-invalid");
+              $("#login-email").addClass("is-valid");
+              $("#id_password1").addClass("is-valid");
+              $("#myModal_success").modal("show");
+              setTimeout(function () {
+                $("#myModal_success").modal("hide");
+                localStorage.setItem("authtoken", response.token);
+                window.location = "../Landlord/index.html";
+              }, 2000);
+            }
+          },
+          error: function (xhr, status, error) {
+            // $("#modal_input_notfound").html(xhr.responseText);
+            //   $("#myModal_notfound").modal("show");
+            //     setTimeout(function() {
+            //     $('#myModal_notfound').modal('hide');
+            //     }, 2000);
+            if (xhr.responseText == "Email not found") {
+              $("#id_password1").removeClass("is-invalid");
+              $("#login-email").addClass("is-invalid");
+              $("#email_span").show();
+              $("#pass_span").hide();
+            } else if (xhr.responseText == "Incorrect Password") {
+              $("#login-email").removeClass("is-invalid");
+              $("#login-email").addClass("is-valid");
+              $("#id_password1").addClass("is-invalid");
+              $("#email_span").hide();
+              $("#pass_span").show();
+            } else {
+              alert(xhr.responseText);
+            }
+          },
+        });
+      });
+    });
+  </script>
+  <script>
+    $(document).ready(function() {
+  if ($('body').hasClass('dark-mode')) {
+    $('.Rent-logo').attr('src', '../assets/images/logo_white.png');
+  }
+});
+
+  </script>
+</body>
+
+</html>
