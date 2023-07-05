@@ -745,7 +745,7 @@
                                                 <a class="dropdown-item" href="lockscreen.html">
                                                     <i class="dropdown-icon fe fe-lock"></i> Lockscreen
                                                 </a> -->
-                                                <a class="dropdown-item" href="login.html">
+                                                <a class="dropdown-item" onclick="logout()">
                                                     <i class="dropdown-icon fe fe-alert-circle"></i> Sign out
                                                 </a>
                                             </div>
@@ -2083,23 +2083,23 @@
                         row.append(statusCell);
 
                         const unitNumberCell = $('<td></td>');
-                        const unitNumberInput = $(`<input type="number" class="form-control" id="inputEmail5" placeholder="Enter Unit Number" value='${unit.unitNumber}' ${unit.unitNumber ? "readonly style='background: #e9edf4;'" : ""}>`);
+                        const unitNumberInput = $(`<input type="number" class="form-control  ${unit.unitNumber ? "for-light" : ""}"   id="inputEmail5" placeholder="Enter Unit Number" value='${unit.unitNumber}' ${unit.unitNumber ? "readonly" : ""}>`);
 
                         unitNumberCell.append(unitNumberInput);
                         row.append(unitNumberCell);
 
                         const areaCell = $('<td></td>');
-                        const areaInput = $(`<input type="number" class="form-control" id="inputEmail5" placeholder="Enter Area" value='${unit.Area}' ${unit.Area ? "readonly style='background: #e9edf4;'" : ""}>`);
+                        const areaInput = $(`<input type="number" class="form-control ${unit.unitNumber ? "for-light" : ""}" id="inputEmail5" placeholder="Enter Area" value='${unit.Area}' ${unit.Area ? "readonly" : ""}>`);
                         areaCell.append(areaInput);
                         row.append(areaCell);
 
                         const unitDetailsCell = $('<td colspan="3"></td>');
-                        const unitDetailsInput = $(`<input type="text" class="form-control" id="inputEmail5" placeholder="Enter Unit Details (Optional)" value='${unit.unitDetails}' ${unit.Area ? "readonly style='background: #e9edf4;'" : ""}>`);
+                        const unitDetailsInput = $(`<input type="text" class="form-control ${unit.unitNumber ? "for-light" : ""}" id="inputEmail5" placeholder="Enter Unit Details (Optional)" value='${unit.unitDetails}' ${unit.Area ? "readonly" : ""}>`);
                         unitDetailsCell.append(unitDetailsInput);
                         row.append(unitDetailsCell);
 
                         const actionCell = $('<td></td>');
-                        const doneButton = $(`<button type="button" class="btn btn-primary me-1 btn-pill">Edit</button> <button type="button" class="btn btn-success me-1 btn-pill ${unit.unitNumber ? "d-none" : ""}">Done</button><button type="button" class="btn btn-danger btn-pill">Delete</button><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i><ul class="dropdown-menu"><li class='${unit.unitNumber ? "d-none" : ""}'><a class="dropdown-item text-success done-option" href="" disabled>Done</a></li><li class='${unit.unitNumber ? "" : "d-none"}'><a class="edit-option dropdown-item text-primary" href="javascript:void(0)" >Edit</a></li><li><a class="delete-option dropdown-item text-danger ${unit.status == "Occupied" ? "d-none" : ""}" href="javascript:void(0)">Delete</a></li></ul>`);
+                        const doneButton = $(`<button type="button" class="btn btn-primary me-1 btn-pill edit-option ${unit.unitNumber ? "" : "d-none"}">Edit</button> <button type="button" class="btn btn-success me-1 btn-pill done-option ${unit.unitNumber ? "d-none" : ""}">Done</button><button type="button" class="btn btn-danger btn-pill delete-option ${unit.status == "Occupied" ? "d-none" : ""}">Delete</button>`);
                         actionCell.append(doneButton);
                         row.append(actionCell);
 
@@ -2216,8 +2216,12 @@
                         // e.preventDefault();
                         console.log(1)
                         const unitIdElement = $(this).closest("tr").find(".unit-id");
-                        $(this).parent().addClass("d-none")
-                        $(this).parent().prev().removeClass('d-none');
+                        $(this).addClass("d-none")
+                        $(this).next().removeClass('d-none');
+                        $(this).parent().parent().find('input:input').removeClass('for-light')
+                        
+                        // $(".done-option").removeClass('d-none');
+
                         const unitId = unitIdElement.text();
 
                         $(`#${unitId}`).find('td').each(function() {
@@ -2234,6 +2238,14 @@
             });
         }
         getData()
+    </script>
+    <script>
+        function logout() {
+            localStorage.removeItem('authtoken');
+            window.close();
+            window.open('./login_module.html', "_blank")
+            console.log('Done');
+        }
     </script>
 </body>
 
