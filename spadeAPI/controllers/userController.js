@@ -24,7 +24,8 @@ const {
   selectAllTenants,
   PropertyUnitsVacant,
   propertyTaskQuery,
-  selectAllTenantsProperty
+  selectAllTenantsProperty,
+  updatePasswordLandlord
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -247,11 +248,14 @@ exports.verifyResetEmailCode = async (req, res) => {
 
 exports.updatePassword = async (req, res) => {
   const { id, password, confirmpassword, token } = req.body;
+  // const currentDate = new Date();
   try {
     if (password === confirmpassword) {
       const hashPassword = await hashedPassword(password);
-      const selectResult = await queryRunner(updatePassword, [
+      const currentDate = new Date();
+      const selectResult = await queryRunner(updatePasswordLandlord, [
         hashPassword,
+        currentDate,
         id,
         token,
       ]);
@@ -260,6 +264,7 @@ exports.updatePassword = async (req, res) => {
           message: "Successful password saved",
         });
       } else {
+        console.log("here")
         res.status(500).send("Error");
       }
     } else {
