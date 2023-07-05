@@ -11,7 +11,7 @@ const {
   deleteQuery,
   insertInUsers,
   addResetToken,
-  updatePassword,
+  updatePasswordLandlord,
   insertInProperty,
   insertInPropertyImage,
   updateProperty,
@@ -250,8 +250,10 @@ exports.updatePassword = async (req, res) => {
   try {
     if (password === confirmpassword) {
       const hashPassword = await hashedPassword(password);
-      const selectResult = await queryRunner(updatePassword, [
+      const currentDate = new Date();
+      const selectResult = await queryRunner(updatePasswordLandlord, [
         hashPassword,
+        currentDate,
         id,
         token,
       ]);

@@ -52,8 +52,9 @@ exports.deleteQuery = (table, ...field) => {
 
 exports.addResetToken =
   "UPDATE users SET token = ?, updated_at = ? where id = ?";
-exports.updatePassword =
-  "UPDATE users SET Password = ? where id = ? and token = ?";
+exports.updatePasswordLandlord =
+  // "UPDATE users SET Password = ? where id = ? and token = ?";
+  "UPDATE users SET Password = ? , updated_at = ? where id = ? AND token = ?";
 exports.insertInUsers =
   "INSERT INTO users (id,FirstName, LastName, Email, Phone, Password, PlanID) VALUES (?,?, ?, ?, ?, ?, ?)";
 exports.insertInProperty =
