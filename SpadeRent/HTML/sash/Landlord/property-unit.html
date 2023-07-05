@@ -2099,7 +2099,7 @@
                         row.append(unitDetailsCell);
 
                         const actionCell = $('<td></td>');
-                        const doneButton = $(` <button type="button" class="btn btn-success"><i class="fe fe-check me-2"></i>I agree</button><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i><ul class="dropdown-menu"><li class='${unit.unitNumber ? "d-none" : ""}'><a class="dropdown-item text-success done-option" href="" disabled>Done</a></li><li class='${unit.unitNumber ? "" : "d-none"}'><a class="edit-option dropdown-item text-primary" href="javascript:void(0)" >Edit</a></li><li><a class="delete-option dropdown-item text-danger ${unit.status == "Occupied" ? "d-none" : ""}" href="javascript:void(0)">Delete</a></li></ul>`);
+                        const doneButton = $(` <button type="button" class="btn btn-success me-2">Done</button><button type="button" class="btn btn-danger">Delete</button><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i><ul class="dropdown-menu"><li class='${unit.unitNumber ? "d-none" : ""}'><a class="dropdown-item text-success done-option" href="" disabled>Done</a></li><li class='${unit.unitNumber ? "" : "d-none"}'><a class="edit-option dropdown-item text-primary" href="javascript:void(0)" >Edit</a></li><li><a class="delete-option dropdown-item text-danger ${unit.status == "Occupied" ? "d-none" : ""}" href="javascript:void(0)">Delete</a></li></ul>`);
                         actionCell.append(doneButton);
                         row.append(actionCell);
 
