@@ -52,7 +52,7 @@ exports.deleteQuery = (table, ...field) => {
 
 exports.addResetToken =
   "UPDATE users SET token = ?, updated_at = ? where id = ?";
-  exports.updatePasswordLandlord =
+exports.updatePasswordLandlord =
   // "UPDATE users SET Password = ? where id = ? and token = ?";
   "UPDATE users SET Password = ? , updated_at = ? where id = ? AND token = ?";
 exports.insertInUsers =

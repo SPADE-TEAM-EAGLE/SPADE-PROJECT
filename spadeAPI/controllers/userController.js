@@ -11,7 +11,7 @@ const {
   deleteQuery,
   insertInUsers,
   addResetToken,
-  updatePassword,
+  updatePasswordLandlord,
   insertInProperty,
   insertInPropertyImage,
   updateProperty,
