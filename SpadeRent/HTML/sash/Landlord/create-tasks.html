@@ -593,7 +593,40 @@
 </head>
 
 <body class="app sidebar-mini ltr light-mode">
-
+    <div class="modal fade" id="successfully_changed" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+          <div class="modal-content modal-content-demo">
+            <div class="modal-body p-0">
+              <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
+                <!-- <div class="card-header border-0 pt-3">
+                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                            </button>
+                        </div> -->
+                <div class="card-body text-center">
+                  <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24">
+                      <path fill="#13bfa6"
+                        d="M10.3125,16.09375a.99676.99676,0,0,1-.707-.293L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328l-6.1875,6.1875A.99676.99676,0,0,1,10.3125,16.09375Z"
+                        opacity=".99" />
+                      <path fill="#71d8c9"
+                        d="M12,2A10,10,0,1,0,22,12,10.01146,10.01146,0,0,0,12,2Zm5.207,7.61328-6.1875,6.1875a.99963.99963,0,0,1-1.41406,0L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328Z" />
+                    </svg></span>
+                  <!-- <h4 class="h4 mb-0 mt-3 fw-bold">Success</h4> -->
+                  <p class="card-text text-dark" id="successfully_changed_text"></p>
+                </div>
+                <!-- <div class="card-footer text-center border-0 pt-0">
+                            <div class="row">
+                                <div class="text-center">
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">delete</a>
+                                </div>
+                            </div>
+                        </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     <div class="modal fade" id="myModal_warning" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered text-center" role="document">
             <div class="modal-content modal-content-demo">
@@ -601,99 +634,97 @@
                     <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
                         <div class="card-body text-center">
                             <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24"><path fill="#fad383" d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z"/><circle cx="12" cy="16" r="1" fill="#f7b731"/><path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"/></svg></span>
-                          <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
-                          <p class="card-text text-dark">Session expeired!, Login again</p>
+                            <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
+                            <p class="card-text text-dark">Session expeired!, Login again</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-        <!-- View Modal Start  -->
-        <div class="modal fade" id="viewModal-tasks" tabindex="-1" role="dialog">
-            <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <div class="text-justify ps-2 border-model-line">
-                            <h2 class="modal-title mb-0">View <strong class="color-primary">Tasks</strong></h2>
-                            <!-- <button type="button" class="btn btn-primary">#Invoice Number: INV-89900A</button> -->
-                        </div>
-                        <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="viewModal-tasks">
+    <!-- View Modal Start  -->
+    <div class="modal fade" id="viewModal-tasks" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="text-justify ps-2 border-model-line">
+                        <h2 class="modal-title mb-0">View <strong class="color-primary">Tasks</strong></h2>
+                        <!-- <button type="button" class="btn btn-primary">#Invoice Number: INV-89900A</button> -->
+                    </div>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="viewModal-tasks">
                             <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
                         </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-lg-3">
-                                <label><b>Task Name</b></label>
-                                <p class="text-primary"><b  id="taskName_view"></b></p>
-                            </div>
-                            <div class="col-lg-3">
-                                <label><b>Due Date</b></label>
-                                <p class="text-primary"><b id="dueDate_view">June-06-2023</b></p>
-                            </div>
-                            <div class="col-lg-3">
-                                <label><b>Priority</b></label>
-                                <p class="text-primary"><b id="priority_view">High Priority</b></p>
-                            </div>
-                            <div class="col-lg-3">
-                                <label><b>Status</b></label>
-                                <p class="text-danger"><b id="status_view"><i class="fi fi-rs-clock-three" style="color: #FB233B;"></i>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <label><b>Task Name</b></label>
+                            <p class="text-primary"><b id="taskName_view"></b></p>
+                        </div>
+                        <div class="col-lg-3">
+                            <label><b>Due Date</b></label>
+                            <p class="text-primary"><b id="dueDate_view">June-06-2023</b></p>
+                        </div>
+                        <div class="col-lg-3">
+                            <label><b>Priority</b></label>
+                            <p class="text-primary"><b id="priority_view">High Priority</b></p>
+                        </div>
+                        <div class="col-lg-3">
+                            <label><b>Status</b></label>
+                            <p class="text-danger"><b id="status_view"><i class="fi fi-rs-clock-three" style="color: #FB233B;"></i>
                                         Unpaid</b></p>
+                        </div>
+                        <div class="col-lg-12 mt-5">
+                            <label><b>Notes</b></label>
+                            <p class="text-primary"><b id="notes_view">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</b></p>
+                        </div>
+                        <div class="col-lg-12 mt-5">
+                            <div style="display: flex;">
+                                <p class="text-primary"><b>Line Items</b></p>
+                                <hr style="height: 2px; background: black; width: 88%; margin-left: 83px; position: absolute; margin-top: 10px;">
                             </div>
-                            <div class="col-lg-12 mt-5">
-                                <label><b>Notes</b></label>
-                                <p class="text-primary"><b id="notes_view">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</b></p>
-                            </div>
-                            <div class="col-lg-12 mt-5">
-                                <div style="display: flex;">
-                                    <p class="text-primary"><b>Line Items</b></p>
-                                    <hr
-                                        style="height: 2px; background: black; width: 88%; margin-left: 83px; position: absolute; margin-top: 10px;">
-                                </div>
-                            </div>
-                            <!-- <div class="col-lg-10 mt-5">
+                        </div>
+                        <!-- <div class="col-lg-10 mt-5">
                                 
                             </div> -->
-                        </div>
-                        <div class="row mt-5">
-                            <div class="col-12 mb-5">
-                                <div class="table-responsive">
-                                    <table class="table text-nowrap table-borderless text-md-nowrap mg-b-0 mb-0"
-                                        id="lineItemsTable">
-                                        <thead>
-                                            <tr>
-                                                <th>Vendor</th>
-                                                <th>Property</th>
-                                                <th>Tenant</th>
-                                                <!-- <th>Amount</th> -->
-                                                
-                                            </tr>
-                                        </thead>
-                                        <tbody id="view-task-line-item">
-                                            <tr class="tr">
-                                                <td>
-                                                    <p class="text-primary"><b> / 0321-2045564</b></p>
-                                                </td>
-                                                <td>
-                                                    <p class="text-primary"><b>Test / 200</b></p>
-                                                </td>
-                                                <td>
-                                                    <p class="text-primary"><b>John Smith / 0321-2045564</b></p>
-                                                </td>
-                                                <!-- <td>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-12 mb-5">
+                            <div class="table-responsive">
+                                <table class="table text-nowrap table-borderless text-md-nowrap mg-b-0 mb-0" id="lineItemsTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Vendor</th>
+                                            <th>Property</th>
+                                            <th>Tenant</th>
+                                            <!-- <th>Amount</th> -->
+
+                                        </tr>
+                                    </thead>
+                                    <tbody id="view-task-line-item">
+                                        <tr class="tr">
+                                            <td>
+                                                <p class="text-primary"><b> / 0321-2045564</b></p>
+                                            </td>
+                                            <td>
+                                                <p class="text-primary"><b>Test / 200</b></p>
+                                            </td>
+                                            <td>
+                                                <p class="text-primary"><b>John Smith / 0321-2045564</b></p>
+                                            </td>
+                                            <!-- <td>
                                                     <p class="text-primary"><b>$200.00</b></p>
                                                 </td> -->
-                                                <!-- <td><button type="button" class="btn" id="del-btn1">
+                                            <!-- <td><button type="button" class="btn" id="del-btn1">
                                                         <i class="fi fi-rs-trash text-danger fs-5"></i>
                                                     </button></td> -->
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
-    
-                            <!-- <div class="col-md-12 col-lg-8 mt-5">
+                        </div>
+
+                        <!-- <div class="col-md-12 col-lg-8 mt-5">
                                 <label><b>Additional Information</b></label>
                                 <p class="text-primary"><b id="notes"></b></p>
                             </div>
@@ -703,15 +734,15 @@
                                     <h1 class="text-primary fw-bold m-0" id="totalAmount">$200.00</h1>
                                 </span>
                             </div> -->
-                            <div class="col-lg-12 mt-5 mb-5" id="view-task-images">
-                            </div>
+                        <div class="col-lg-12 mt-5 mb-5" id="view-task-images">
                         </div>
                     </div>
-    
                 </div>
+
             </div>
         </div>
-        <!-- View Modal End  -->
+    </div>
+    <!-- View Modal End  -->
 
     <!-- GLOBAL-LOADER -->
     <!-- <div id="global-loader">
@@ -1037,7 +1068,7 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="inputState" class="form-label fw-bold">Status</label>
-                                <select class="form-select form" required ="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select Status" data-bs-container="#myModal_edit" id="status_update">
+                                <select class="form-select form" required="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select Status" data-bs-container="#myModal_edit" id="status_update">
                                     <option selected>Choose...</option>
                                     <option value="not started">Not Started</option>
                                     <option value="in progress">In progress</option>
@@ -1104,20 +1135,20 @@
     </div>
     <div class="modal fade" id="infoModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered text-center" role="document">
-          <div class="modal-content modal-content-demo">
-            <div class="modal-body p-0">
-              <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
-                <!-- <div class="card-header border-0 pt-3">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
+                        <!-- <div class="card-header border-0 pt-3">
                             <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
                             </button>
                         </div> -->
-                <div class="card-body text-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24"><path fill="#fad383" d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z"></path><circle cx="12" cy="16" r="1" fill="#f7b731"></circle><path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"></path></svg>
-                  <h4 class="h4 mb-0 mt-3 fw-bold">Info</h4>
-                  <p class="card-text text-dark">Task Already Exist</p>
-                </div>
-                <!-- <div class="card-footer text-center border-0 pt-0">
+                        <div class="card-body text-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24"><path fill="#fad383" d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z"></path><circle cx="12" cy="16" r="1" fill="#f7b731"></circle><path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"></path></svg>
+                            <h4 class="h4 mb-0 mt-3 fw-bold">Info</h4>
+                            <p class="card-text text-dark">Task Already Exist</p>
+                        </div>
+                        <!-- <div class="card-footer text-center border-0 pt-0">
                             <div class="row">
                                 <div class="text-center">
                                     <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">cancel</a>
@@ -1125,11 +1156,11 @@
                                 </div>
                             </div>
                         </div> -->
-              </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
+    </div>
     <div class="modal fade" id="succesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content success-modal-content">
@@ -1356,7 +1387,7 @@
                                                 <a class="dropdown-item" href="lockscreen.html">
                                                     <i class="dropdown-icon fe fe-lock"></i> Lockscreen
                                                 </a> -->
-                                                <a class="dropdown-item" href="login_module.html">
+                                                <a class="dropdown-item" onclick="logout()">
                                                     <i class="dropdown-icon fe fe-alert-circle"></i> Sign out
                                                 </a>
                                             </div>
@@ -1603,7 +1634,7 @@
                                                 <div class="mx-2">
                                                     <div class="form-group m-0">
                                                         <input class="form-control" placeholder="Search Users by Name, Email or Date" type="text" id="search_input" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Search Users by Name, Email or Date">
-                                                        
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -2405,7 +2436,8 @@
     <script src="../assets/js/charts.js"></script>
 
     <script>
-        var selectedFiles = []; var taskInfo=[]
+        var selectedFiles = [];
+        var taskInfo = []
         let taskId;
         $(document).ready(function() {
             // $("#succesModal").modal("show")
@@ -2427,14 +2459,14 @@
 
 
 
-    },
-    error: function(xhr, status, error) {
-        console.log('Error occurred while fetching state and city data.');
-        console.log(xhr);
-        console.log(error);
-        // console.log('Error occurred while fetching state and city data.');
-    }
-});
+                },
+                error: function(xhr, status, error) {
+                    console.log('Error occurred while fetching state and city data.');
+                    console.log(xhr);
+                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                }
+            });
             $.ajax({
                 url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/viewAllPropertyTenant',
                 method: 'GET',
@@ -2470,23 +2502,24 @@
                 success: function(response) {
                     // console.log(response.data)
                     // $("#user-name").text(response.user)
-                        // console.log(response)
+                    // console.log(response)
                     $("#assignee").empty()
                     $("#assignee").append($("<option></option>").text("Choose..."))
                     $("#assignee_update").empty()
                     $("#assignee_update").append($("<option></option>").text("Choose..."))
-                    if(response.data.length===0){
+                    if (response.data.length === 0) {
                         $("#assignee").append($("<option></option>").text("No Vendor available.."));
                         $("#assignee_update").append($("<option></option>").text("No Vendor available.."));
-                    }else{
-                    response.data.forEach((vendor) => {
-                        // console.log(property);
-                        var optionText = vendor.firstName + " " + vendor.lastName;
-                        var optionValue = vendor.id;
-                        $("#assignee").append($("<option></option>").text(optionText).val(optionValue));
-                        $("#assignee_update").append($("<option></option>").text(optionText).val(optionValue));
+                    } else {
+                        response.data.forEach((vendor) => {
+                            // console.log(property);
+                            var optionText = vendor.firstName + " " + vendor.lastName;
+                            var optionValue = vendor.id;
+                            $("#assignee").append($("<option></option>").text(optionText).val(optionValue));
+                            $("#assignee_update").append($("<option></option>").text(optionText).val(optionValue));
 
-                    });}
+                        });
+                    }
                     // Handle state selection change
                 }
             })
@@ -2532,7 +2565,7 @@
                 } else {
                     var allFieldsFilled = areAllFieldsFilled();
                     console.log(allFieldsFilled)
-                    // Enable or disable the buttons based on the fields' status
+                        // Enable or disable the buttons based on the fields' status
                     if (allFieldsFilled) {
                         $('#next').removeClass("disabled");
                         //   $('#draft').removeAttr("disabled");
@@ -2573,36 +2606,36 @@
             });
             // Handle change event of checkboxes
 
-            $(document).on('click', ".view-task", function (e) {
+            $(document).on('click', ".view-task", function(e) {
                 e.preventDefault();
-                                const taskIdElement = $(this).closest("tr").find(".task-id");
+                const taskIdElement = $(this).closest("tr").find(".task-id");
 
-                                taskId = taskIdElement.attr("id")
+                taskId = taskIdElement.attr("id")
 
-                                const data = taskInfo.find(obj => obj.id.toString() == taskId);
-                                console.log(data)
-                                if(data.taskImages){
-                                    selectedFiles = data.taskImages.split(",")
-                                }else{
+                const data = taskInfo.find(obj => obj.id.toString() == taskId);
+                console.log(data)
+                if (data.taskImages) {
+                    selectedFiles = data.taskImages.split(",")
+                } else {
 
-                                }
+                }
 
-                                updateSelectedFilesContainer()
-                                $("#taskName_view").text(data.taskName);
-                                $("#dueDate_view").text(data.dueDate);
-                                $("#priority_view").text(data.priority);
-                                $("#status_view").text(data.status);
-                                $("#notes_view").text(data.notes);
-                                console.log($("#notes_view"))
-                //                 $("#priority_update").find(`option[name="${data.priority.toLowerCase()}"]`).prop("selected", true);
-                //                 $("#status_update").find(`option[value="${data.status}"]`).prop("selected", true);
-                //                 data.AssignTo.forEach(({
-                //                     ID,
-                //                     name
-                //                 }) => {
-                //                     $("#assignee_update").find(`option[value="${ID}"]`).prop("selected", true);
-                //                     $(".select2-selection__rendered").append(`<li class="select2-selection__choice" title="${name}"><span class="select2-selection__choice__remove" role="presentation">×</span>${name}</li>`)
-                //                 })
+                updateSelectedFilesContainer()
+                $("#taskName_view").text(data.taskName);
+                $("#dueDate_view").text(data.dueDate);
+                $("#priority_view").text(data.priority);
+                $("#status_view").text(data.status);
+                $("#notes_view").text(data.notes);
+                console.log($("#notes_view"))
+                    //                 $("#priority_update").find(`option[name="${data.priority.toLowerCase()}"]`).prop("selected", true);
+                    //                 $("#status_update").find(`option[value="${data.status}"]`).prop("selected", true);
+                    //                 data.AssignTo.forEach(({
+                    //                     ID,
+                    //                     name
+                    //                 }) => {
+                    //                     $("#assignee_update").find(`option[value="${ID}"]`).prop("selected", true);
+                    //                     $(".select2-selection__rendered").append(`<li class="select2-selection__choice" title="${name}"><span class="select2-selection__choice__remove" role="presentation">×</span>${name}</li>`)
+                    //                 })
 
                 //                 $('#myModal_edit').modal('show');
                 // $("#tenantName").text(data.firstName + " " + data.lastName)
@@ -2632,8 +2665,8 @@
                 $("#view-task-line-item").empty()
                 data.AssignTo.forEach((item) => {
 
-                    console.log(item)
-                    $("#view-task-line-item").append(`<tr class="tr">
+                        console.log(item)
+                        $("#view-task-line-item").append(`<tr class="tr">
                                                 <td>
                                                     <p class="text-primary"><b>${item.name} / ${item.vendorPhone}</b></p>
                                                 </td>
@@ -2647,20 +2680,20 @@
                                             </tr>`)
 
 
-                })
-                // $("#totalAmount").text('$ ' + data.totalAmount)
-                if(data.taskImages){
-                                    const images = data.taskImages.split(",")
-                                    $("#view-task-images").empty()
-                images.forEach((image) => {
-                    $("#view-task-images").append(`
+                    })
+                    // $("#totalAmount").text('$ ' + data.totalAmount)
+                if (data.taskImages) {
+                    const images = data.taskImages.split(",")
+                    $("#view-task-images").empty()
+                    images.forEach((image) => {
+                        $("#view-task-images").append(`
                             <img src="../../../../spadeAPI/uploads/${image}" width=200px height=200px alt=""> &nbsp;`)
-                })
-                                }else{
+                    })
+                } else {
 
-                                }
+                }
                 // $("#notes").text(data.note || "N/A")
-                
+
                 $("#viewModal-tasks").modal("show")
             })
             $('#fileInput').on('change', function() {
@@ -2692,14 +2725,14 @@
             function resetAccordions() {
                 // Reset all accordions
                 $('#addModal input[type="text"]').val('');
-  $('#addModal input[type="date"]').val('');
-  $('#addModal select').prop('selectedIndex', 0);
-  $('#addModal textarea').val('');
-  $('#addModal input[type="checkbox"]').prop('checked', true);
-  $('#addModal .file-grid').empty();
-                    $('#next').addClass("disabled");
-                    $('#draft').attr("disabled", "disabled");
-                
+                $('#addModal input[type="date"]').val('');
+                $('#addModal select').prop('selectedIndex', 0);
+                $('#addModal textarea').val('');
+                $('#addModal input[type="checkbox"]').prop('checked', true);
+                $('#addModal .file-grid').empty();
+                $('#next').addClass("disabled");
+                $('#draft').attr("disabled", "disabled");
+
             }
 
             $('#close,#top-close').on('click', function(e) {
@@ -2707,7 +2740,7 @@
                 e.preventDefault()
                 $(".select2-selection__rendered").empty()
                 resetAccordions()
-                selectedFiles=[]
+                selectedFiles = []
                 $(".file-grid").empty()
                 $('#addModal').modal('hide');
             })
@@ -2762,15 +2795,14 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function(response) {
-                        if(response==="Task already exists"){
+                        if (response === "Task already exists") {
                             $("#infoModal").modal("show")
-                        }
-                        else{
-                            
+                        } else {
+                            window.location = "./create-tasks.html"
                             $("#succesModal").modal("show")
                         }
-                        
-                        
+
+
                     },
                     error: function(xhr, status, error) {
                         // window.alert('Error: ' + error);
@@ -2830,44 +2862,44 @@
                 return fileName;
             }
 
-//             $('#myModal_edit').find('input, select').on('input change', function() {
-//                 var updateButton = document.getElementById('save');
-//                 console.log(updateButton)
-//                 var isFilled = true;
+            //             $('#myModal_edit').find('input, select').on('input change', function() {
+            //                 var updateButton = document.getElementById('save');
+            //                 console.log(updateButton)
+            //                 var isFilled = true;
 
-//                 // Check each field for empty value and toggle red border and span visibility
-//                 $('#myModal_edit').find('input, select').each(function(index) {
-//                     console.log($(this).val())
-//                     if (Array.isArray($(this).val())) {
-//     console.log(333);
-//     var value = $(this).val();
-// }
-//                     else{
-//                         var value = $(this).val().trim();
-//                     }
-                    
-//                     var span = $(this).siblings('.text-danger');
-                     
-//                         if (value === '' || value === 'Choose...' || value.length===0) {
-//                             $(this).addClass('border-danger');
-//                             //   console.log(1)
-//                             span.removeClass('d-none');
-//                             isFilled = false;
-//                         } else {
-//                             $(this).removeClass('border-danger');
-//                             span.addClass('d-none');
-//                         }
-//                     }
-//                 );
+            //                 // Check each field for empty value and toggle red border and span visibility
+            //                 $('#myModal_edit').find('input, select').each(function(index) {
+            //                     console.log($(this).val())
+            //                     if (Array.isArray($(this).val())) {
+            //     console.log(333);
+            //     var value = $(this).val();
+            // }
+            //                     else{
+            //                         var value = $(this).val().trim();
+            //                     }
 
-//                 // Toggle button behavior based on the fields' status
-//                 if (isFilled) {
-//                     console.log("All the fields filled")
-//                     updateButton.classList.remove("disabled")
-//                 } else {
-//                     updateButton.classList.add("disabled")
-//                 }
-//             });
+            //                     var span = $(this).siblings('.text-danger');
+
+            //                         if (value === '' || value === 'Choose...' || value.length===0) {
+            //                             $(this).addClass('border-danger');
+            //                             //   console.log(1)
+            //                             span.removeClass('d-none');
+            //                             isFilled = false;
+            //                         } else {
+            //                             $(this).removeClass('border-danger');
+            //                             span.addClass('d-none');
+            //                         }
+            //                     }
+            //                 );
+
+            //                 // Toggle button behavior based on the fields' status
+            //                 if (isFilled) {
+            //                     console.log("All the fields filled")
+            //                     updateButton.classList.remove("disabled")
+            //                 } else {
+            //                     updateButton.classList.add("disabled")
+            //                 }
+            //             });
 
 
 
@@ -3100,7 +3132,12 @@ getData()
                     },
                     success: function(response) {
                         e.preventDefault()
-                            getData();
+                        getData();
+                        $("#successfully_changed_text").text("Successfully Updated");
+                        $("#successfully_changed").modal("show");
+                        setTimeout(function () {
+                        $("#successfully_changed").modal("hide");
+                         }, 2000);
                     },
                     error: function(xhr, status, error) {
                         window.alert('Error: ' + error);
@@ -3126,6 +3163,11 @@ getData()
                         },
                         success: function(response) {
                             getData()
+                            $("#successfully_changed_text").text("Successfully Deleted");
+                        $("#successfully_changed").modal("show");
+                        setTimeout(function () {
+                        $("#successfully_changed").modal("hide");
+                         }, 2000);
                         },
                         error: function(xhr, status, error) {
                             window.alert('Error: ' + error);
@@ -3163,7 +3205,7 @@ getData()
                                     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                                 });
                             }
-                            taskInfo=response.data[0]
+                            taskInfo = response.data[0]
                             response.data[0] ?.forEach(function(task) {
                                 // var image = '<td><img src="../../../../spadeAPI/uploads/' + property.images[0] + '" alt=""></td>';
                                 // var image = '<td><img src="../../../../../../Desktop/spade API 2/uploads/image-1684250579662.png" alt="hhghghgh"></td>';
@@ -3233,12 +3275,12 @@ getData()
                                 const taskIdElement = $(this).closest("tr").find(".task-id");
 
                                 taskId = taskIdElement.attr("id")
-                                
+
                                 const data = response.data[0].find(obj => obj.id.toString() == taskId);
                                 console.log(taskId)
-                                if(data.taskImages){
+                                if (data.taskImages) {
                                     selectedFiles = data.taskImages.split(",")
-                                }else{
+                                } else {
 
                                 }
                                 // selectedFiles = data.taskImages.split(",")
@@ -3252,7 +3294,7 @@ getData()
                                 $("#priority_update").find(`option[name="${data.priority.toLowerCase()}"]`).prop("selected", true);
                                 $("#status_update").find(`option[value="${data.status}"]`).prop("selected", true);
                                 // $("#assignee_update").find(`option[value="${ID}"]`).prop("selected", true);
-                                    $(".select2-selection__rendered").empty()
+                                $(".select2-selection__rendered").empty()
                                 data.AssignTo.forEach(({
                                     ID,
                                     name
@@ -3273,12 +3315,12 @@ getData()
                     },
                     error: function(xhr, status, error) {
                         console.log(error)
-                       
-                            $("#myModal_warning").modal("show");
-                          setTimeout(function() {
-                             $('#myModal_warning').modal('hide');
-                             window.location = '../Landlord/login_module.html';
-                            }, 2000);
+
+                        $("#myModal_warning").modal("show");
+                        setTimeout(function() {
+                            $('#myModal_warning').modal('hide');
+                            window.location = '../Landlord/login_module.html';
+                        }, 2000);
                     }
                 });
 
@@ -3286,6 +3328,14 @@ getData()
             getData()
 
         })
+    </script>
+    <script>
+        function logout() {
+            localStorage.removeItem('authtoken');
+            window.close();
+            window.open('./login_module.html', "_blank")
+            console.log('Done');
+        }
     </script>
 </body>
 

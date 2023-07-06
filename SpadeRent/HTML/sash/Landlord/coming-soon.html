@@ -435,7 +435,7 @@
                                                 <a class="dropdown-item" href="lockscreen.html">
                                                     <i class="dropdown-icon fe fe-lock"></i> Lockscreen
                                                 </a> -->
-                                                <a class="dropdown-item" href="login_module.html" onclick="logout()">
+                                                <a class="dropdown-item" onclick="logout()">
                                                     <i class="dropdown-icon fe fe-alert-circle"></i> Sign out
                                                 </a>
                                             </div>
@@ -1330,7 +1330,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.5.2/dragula.min.js"></script>
 
     <!-- column drag and drop end  -->
-
+    <script>
+        function logout() {
+            localStorage.removeItem('authtoken');
+            window.open('./login_module.html', "_blank")
+            window.close();
+            console.log('Done');
+        }
+    </script>
 </body>
 
 </html>
