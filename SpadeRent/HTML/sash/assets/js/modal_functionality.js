@@ -187,16 +187,20 @@ $(document).ready(function () {
         if ($field.attr("id") === "zip") {
             if ($field.val().length !== 5) {
                 $field.addClass('border-danger');
+                $field.removeClass('border-green');
                 $errorMessage.removeClass('d-none');
             } else {
                 $field.removeClass('border-danger');
+                $field.addClass('border-green');
                 $errorMessage.addClass('d-none');
             }
         } else if($field.val() === '' || $field.val() === 'Choose...') {
             $field.addClass('border-danger');
+            $field.removeClass('border-green');
             $errorMessage.removeClass('d-none');
         } else {
             $field.removeClass('border-danger');
+            $field.addClass('border-green');
             $errorMessage.addClass('d-none');
         }
         updateButtonStatus();
@@ -270,11 +274,10 @@ $('#close,#top-close').on('click', function (e) {
 $(document).on('click', '#next', function (e) {
     e.preventDefault()
     selectedFiles=[]
-    $('#addModal').modal('hide');
     // resetAccordions()
     // $("#largemodal").addClass("hide");
     var formData = new FormData();
-
+    
     // Get the form data
     var propertyName = $("#propertyName").val();
     var address = $("#address").val();
@@ -284,7 +287,7 @@ $(document).on('click', '#next', function (e) {
     var propertyType = $("#propertyType").val();
     var propertySQFT = $("#propertyTotalSF").val();
     var units = $("#units").val();
-
+    
     // Add the form data to the FormData object
     formData.append('propertyName', propertyName);
     formData.append('address', address);
@@ -294,15 +297,16 @@ $(document).on('click', '#next', function (e) {
     formData.append('propertyType', propertyType);
     formData.append('propertySQFT', propertySQFT);
     formData.append('units', units);
-
+    
     // Get the selected files
     var files = $('#fileInput')[0].files;
-
+    
     // Add the files to the FormData object
     for (var i = 0; i < files.length; i++) {
         formData.append('image', files[i]);
     }
-
+    
+    $('#addModal').modal('hide');
     // Send the form data to the server using AJAX
     $.ajax({
         url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/property',

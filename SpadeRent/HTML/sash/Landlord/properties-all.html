@@ -808,7 +808,7 @@
                                     <div class="col-md-4">
                                         <label for="inputCity" class="form-label fw-bold">City <span
                                                 class="text-danger">*</span></label>
-                                        <input type="text" id="city" class="form-control form city-select" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the name of your city" data-bs-container="#addModal">
+                                        <input type="text" id="city" class="form-control form city-select" pattern="[A-Za-z\s]+" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the name of your city" data-bs-container="#addModal">
                                         <span class="text-danger d-none">City is required!</span>
                                     </div>
                                     <div class="col-md-4">
@@ -1063,7 +1063,7 @@
                         <div class="col-md-4">
                             <label for="inputCity" class="form-label fw-bold">City <span
                                     class="text-danger">*</span></label>
-                            <input type="text" id="city_update" class="form-control form city-select" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Update your city" data-bs-container="#myModal_edit">
+                            <input type="text" id="city_update" class="form-control form city-select" pattern="[A-Za-z\s]+" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Update your city" data-bs-container="#myModal_edit">
 
 
                             <span class="text-danger d-none">City is required!</span>
@@ -2440,16 +2440,20 @@
                 if ($field.attr("id") === "zip") {
                     if ($field.val().length !== 5) {
                         $field.addClass('border-danger');
+                    $field.removeClass('border-green');
                         $errorMessage.removeClass('d-none');
                     } else {
                         $field.removeClass('border-danger');
+                    $field.addClass('border-green');
                         $errorMessage.addClass('d-none');
                     }
                 } else if ($field.val() === '' || $field.val() === 'Choose...') {
                     $field.addClass('border-danger');
+                    $field.removeClass('border-green');
                     $errorMessage.removeClass('d-none');
                 } else {
                     $field.removeClass('border-danger');
+                    $field.addClass('border-green');
                     $errorMessage.addClass('d-none');
                 }
                 updateButtonStatus();
@@ -2496,6 +2500,7 @@
 
                     // Remove border-danger class
                     accordionFields.removeClass('border-danger');
+                    accordionFields.removeClass('border-green');
 
                     // Hide error spans
                     accordionFields.siblings('span.text-danger').addClass('d-none');
@@ -2514,14 +2519,14 @@
                 resetAccordions()
                 $('#addModal').modal('hide');
             })
-            $("#succesModal,#infoModal").on('hide.bs.modal', function() {
+            $("#succesModal,#infoModal,#addModal").on('hide.bs.modal', function() {
 
                 resetAccordions()
             })
             $(document).on('click', '#next', function(e) {
                 e.preventDefault()
                     // selectedFiles = []
-                $('#addModal').modal('hide');
+                
 
                 // $("#largemodal").addClass("hide");
                 var formData = new FormData();
@@ -2553,7 +2558,7 @@
                 for (var i = 0; i < selectedFiles.length; i++) {
                     formData.append('image', selectedFiles[i]);
                 }
-
+                $('#addModal').modal('hide');
                 // Send the form data to the server using AJAX
                 $.ajax({
                     url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/property',
@@ -2605,20 +2610,24 @@
                         if ($(this).val().length !== 5) {
                             // console.log("here ik am")
                             $(this).addClass('border-danger');
+                            $(this).removeClass('border-green');
                             span.removeClass('d-none');
                             isFilled = false;
                         } else {
                             $(this).removeClass('border-danger');
+                            $(this).addClass('border-green');
                             span.addClass('d-none');
                         }
                     } else if (index >= 1) {
                         if (value === '' || value === 'Choose...') {
                             $(this).addClass('border-danger');
+                            $(this).removeClass('border-green');
                             //   console.log(1)
                             span.removeClass('d-none');
                             isFilled = false;
                         } else {
                             $(this).removeClass('border-danger');
+                            $(this).addClass('border-green');
                             span.addClass('d-none');
                         }
                     }

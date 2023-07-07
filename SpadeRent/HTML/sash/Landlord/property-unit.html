@@ -2083,18 +2083,18 @@
                         row.append(statusCell);
 
                         const unitNumberCell = $('<td></td>');
-                        const unitNumberInput = $(`<input type="number" class="form-control  ${unit.unitNumber ? "for-light" : ""}"   id="inputEmail5" placeholder="Enter Unit Number" value='${unit.unitNumber}' ${unit.unitNumber ? "readonly" : ""}>`);
+                        const unitNumberInput = $(`<input type="text" class="form-control  ${unit.unitNumber ? "for-light" : ""}" pattern="[0-9]{5}" oninput="this.value = this.value.replace(/[^0-9]/g, '')" style="min-width: 100px;"  id="inputEmail5" placeholder="Enter Unit Number" value='${unit.unitNumber}' ${unit.unitNumber ? "readonly" : ""}>`);
 
                         unitNumberCell.append(unitNumberInput);
                         row.append(unitNumberCell);
 
                         const areaCell = $('<td></td>');
-                        const areaInput = $(`<input type="number" class="form-control ${unit.unitNumber ? "for-light" : ""}" id="inputEmail5" placeholder="Enter Area" value='${unit.Area}' ${unit.Area ? "readonly" : ""}>`);
+                        const areaInput = $(`<input type="text" class="form-control ${unit.unitNumber ? "for-light" : ""}" pattern="[0-9]{5}" oninput="this.value = this.value.replace(/[^0-9]/g, '')" style="min-width: 100px;" id="inputEmail5" placeholder="Enter Area" value='${unit.Area}' ${unit.Area ? "readonly" : ""}>`);
                         areaCell.append(areaInput);
                         row.append(areaCell);
 
                         const unitDetailsCell = $('<td colspan="3"></td>');
-                        const unitDetailsInput = $(`<input type="text" class="form-control ${unit.unitNumber ? "for-light" : ""}" id="inputEmail5" placeholder="Enter Unit Details (Optional)" value='${unit.unitDetails}' ${unit.Area ? "readonly" : ""}>`);
+                        const unitDetailsInput = $(`<input type="text" class="form-control ${unit.unitNumber ? "for-light" : ""}" style="min-width: 100px;" id="inputEmail5" placeholder="Enter Unit Details (Optional)" value='${unit.unitDetails}' ${unit.Area ? "readonly" : ""}>`);
                         unitDetailsCell.append(unitDetailsInput);
                         row.append(unitDetailsCell);
 
