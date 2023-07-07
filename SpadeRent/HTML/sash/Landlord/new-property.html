@@ -1936,6 +1936,11 @@
     <script src="../assets/js/modal_functionality.js">
     </script>
     <script>
+        $(document).ready(function () {
+    $("#succesModal").on('hide.bs.modal', function () {
+        window.location='./properties-all.html'
+    })
+})
         function logout() {
             localStorage.removeItem('authtoken');
             window.close();
