@@ -1,5 +1,5 @@
 const user = require("../models/user");
-const {sendMail} = require("../sendmail/sendmail.js");
+const { sendMail } = require("../sendmail/sendmail.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const fs = require("fs");
@@ -24,7 +24,9 @@ const {
   selectAllTenants,
   PropertyUnitsVacant,
   propertyTaskQuery,
-  selectAllTenantsProperty
+  selectAllTenantsProperty,
+  updateUser,
+  updatePlanId
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -54,10 +56,10 @@ exports.createUser = async function (req, res) {
       hashPassword,
       planID,
     ]);
-    const name = firstName+" "+lastName;
-      const mailSubject = "Spade Welcome Email";
+    const name = firstName + " " + lastName;
+    const mailSubject = "Spade Welcome Email";
     if (insertResult[0].affectedRows > 0) {
-      
+
       await sendMail(email, mailSubject, password, name);
       return res.status(200).json({ message: "User added successfully" });
     } else {
@@ -169,6 +171,74 @@ exports.Signinall = async function (req, res) {
     res.status(400).send("Error");
   }
 };
+exports.updateUserProfile = async function (req, res) {
+  const { firstName, lastName, email, phone, planID, BusinessName, streetAddress, BusinessAddress } = req.body;
+  const { userId } = req.user;
+  try {
+    const selectResult = await queryRunner(selectQuery("users", "id"), [
+      userId,
+    ]);
+    // current date 
+    const now = new Date();
+    const created_at = now.toISOString().slice(0, 19).replace("T", " ");
+
+    const isUserExist = selectResult[0][0];
+    if (!isUserExist) {
+      throw new Error("User not found");
+    }
+    if (isUserExist) {
+      const updateUserParams = [
+        firstName || null, // Replace undefined with null
+        lastName || null,
+        email || null,
+        phone || null,
+        planID || null,
+        BusinessName || null, streetAddress || null, BusinessAddress || null, created_at,
+        userId,
+      ];
+      const updateResult = await queryRunner(updateUser, updateUserParams);
+      if (updateResult[0].affectedRows > 0) {
+        res.status(200).json({
+          message: "User updated successfully",
+        });
+      }
+    }
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+}
+
+exports.updatePlanId = async function (req, res) {
+  const { userId } = req.user;
+  try {
+    const selectResult = await queryRunner(selectQuery("users", "id"), [
+      userId,
+    ]);
+    // current date 
+    const isUserExist = selectResult[0][0];
+    if (!isUserExist) {
+      throw new Error("User not found");
+    }
+    if (isUserExist) {
+      const updateUserParams = [
+        req.body.planID || null,
+        userId,
+      ];
+      const updateResult = await queryRunner(updatePlanId, updateUserParams);
+      if (updateResult[0].affectedRows > 0) {
+        res.status(200).json({
+          message: "planID updated successfully",
+        });
+      }
+    }
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+}
 
 //  ############################# Reset Email ############################################################
 exports.createResetEmail = async (req, res) => {
@@ -400,7 +470,7 @@ exports.property = async (req, res) => {
         //
         res.status(200).json({
           message: "property created successful",
-          propertyId:propertyResult[0].insertId
+          propertyId: propertyResult[0].insertId
         });
       }
     }
@@ -632,7 +702,7 @@ exports.propertyUpdate = async (req, res) => {
         message: "No Property",
       });
     }
- 
+
   } catch (error) {
     console.log(error);
     return res.send("Error from Updating Property");
@@ -927,7 +997,7 @@ exports.getpropertyUnits = async (req, res) => {
 exports.viewPropertyTenant = async (req, res) => {
   try {
     const { userId, userName } = req.user;
-    const {id} = req.query;
+    const { id } = req.query;
     // console.log(req)
     // console.log(req.user);
     let PropertyTenantResult;
@@ -1136,7 +1206,7 @@ exports.propertyTask = async (req, res) => {
     if (taskByIDResult.length > 0) {
       for (let j = 0; j < taskByIDResult[0].length; j++) {
         const taskID = taskByIDResult[0][j].id;
-        const TaskImagesResult = await queryRunner(selectQuery("taskimages", "taskID"),[taskID]);
+        const TaskImagesResult = await queryRunner(selectQuery("taskimages", "taskID"), [taskID]);
         if (TaskImagesResult[0].length > 0) {
           const taskImages = TaskImagesResult[0].map((image) => image.taskImages);
           taskByIDResult[0][j].taskImages = taskImages;
@@ -1193,6 +1263,5 @@ exports.propertyTask = async (req, res) => {
     res.send("Error Get property Task");
   }
 };
- 
+
 //  ############################# Task property ############################################################
- 
