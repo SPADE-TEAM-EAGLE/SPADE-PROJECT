@@ -2442,7 +2442,7 @@
         $(document).ready(function() {
             // $("#succesModal").modal("show")
             $.ajax({
-    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/protected',
+    url: 'https://backend.app.spaderent.com/api/spade/protected',
     method: 'GET',
     headers: {
         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2468,7 +2468,7 @@
                 }
             });
             $.ajax({
-                url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/viewAllPropertyTenant',
+                url: 'https://backend.app.spaderent.com/api/spade/viewAllPropertyTenant',
                 method: 'GET',
                 contentType: "application/json; charset=utf-8",
                 headers: {
@@ -2493,7 +2493,7 @@
                 }
             })
             $.ajax({
-                url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getVendorAssignTo',
+                url: 'https://backend.app.spaderent.com/api/spade/getVendorAssignTo',
                 method: 'GET',
                 contentType: "application/json; charset=utf-8",
                 headers: {
@@ -2786,7 +2786,7 @@
                 }
 
                 $.ajax({
-                    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/addTasks',
+                    url: 'https://backend.app.spaderent.com/api/spade/addTasks',
                     type: 'POST',
                     data: formData,
                     contentType: false,
@@ -2999,7 +2999,7 @@ getData()
             function updateTable() {
                 $('#table_body').empty();
                 $.ajax({
-                    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/allproperty',
+                    url: 'https://backend.app.spaderent.com/api/spade/allproperty',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -3121,7 +3121,7 @@ getData()
 
                 formData.append("existingImages", existingImageNames)
                 $.ajax({
-                    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/updateTasks',
+                    url: 'https://backend.app.spaderent.com/api/spade/updateTasks',
                     // url: 'http://ec2-54-158-103-230.compute-1.amazonaws.com:3000/api/spade/updateProperty',
                     type: 'PUT',
                     data: formData,
@@ -3151,7 +3151,7 @@ getData()
 
                     $('#myModal_delete').modal('hide');
                     $.ajax({
-                        url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/deleteTask',
+                        url: 'https://backend.app.spaderent.com/api/spade/deleteTask',
                         type: 'DELETE',
                         data: JSON.stringify({
                             "taskID": taskId
@@ -3181,7 +3181,7 @@ getData()
                 $("#global-loader").fadeIn("fast")
                     // console.log(22)
                 $.ajax({
-                    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getAllTask',
+                    url: 'https://backend.app.spaderent.com/api/spade/getAllTask',
                     type: 'GET',
                     contentType: false,
                     processData: false,

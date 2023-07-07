@@ -256,7 +256,7 @@
                     <div class="col-12">
                         <div class="form-group">
                             <label class="custom-switch form-switch mb-0">
-                                <input type="checkbox" name="custom-switch-radio" class="custom-switch-input" checked>
+                                <input type="checkbox" name="custom-switch-radio" class="custom-switch-input" data-card="card1" checked>
                                 <span class="custom-switch-indicator custom-switch-indicator-md"></span>
                                 <span class="custom-switch-description text-dark fw-bold">Invoicing Widget</span>
                             </label>
@@ -265,7 +265,7 @@
                     <div class="col-12">
                         <div class="form-group">
                             <label class="custom-switch form-switch mb-0">
-                                <input type="checkbox" name="custom-switch-radio" class="custom-switch-input">
+                                <input type="checkbox" name="custom-switch-radio" class="custom-switch-input" data-card="card2" checked>
                                 <span class="custom-switch-indicator custom-switch-indicator-md"></span>
                                 <span class="custom-switch-description text-dark fw-bold">Amount Paid</span>
                             </label>
@@ -274,7 +274,7 @@
                     <div class="col-12">
                         <div class="form-group">
                             <label class="custom-switch form-switch mb-0">
-                                <input type="checkbox" name="custom-switch-radio" class="custom-switch-input" checked>
+                                <input type="checkbox" name="custom-switch-radio" class="custom-switch-input" data-card="card3" checked>
                                 <span class="custom-switch-indicator custom-switch-indicator-md"></span>
                                 <span class="custom-switch-description text-dark fw-bold">Amount Outstanding</span>
                             </label>
@@ -283,7 +283,7 @@
                     <div class="col-12">
                         <div class="form-group">
                             <label class="custom-switch form-switch mb-0">
-                                <input type="checkbox" name="custom-switch-radio" class="custom-switch-input">
+                                <input type="checkbox" name="custom-switch-radio" class="custom-switch-input" data-card="card4" checked>
                                 <span class="custom-switch-indicator custom-switch-indicator-md"></span>
                                 <span class="custom-switch-description text-dark fw-bold">Active Leads</span>
                             </label>
@@ -292,7 +292,7 @@
                     <div class="col-12">
                         <div class="form-group">
                             <label class="custom-switch form-switch mb-0">
-                                <input type="checkbox" name="custom-switch-radio" class="custom-switch-input">
+                                <input type="checkbox" name="custom-switch-radio" class="custom-switch-input" data-card="task" checked>
                                 <span class="custom-switch-indicator custom-switch-indicator-md"></span>
                                 <span class="custom-switch-description text-dark fw-bold">Recent Tasks</span>
                             </label>
@@ -301,7 +301,7 @@
                     <div class="col-12">
                         <div class="form-group">
                             <label class="custom-switch form-switch mb-0">
-                                <input type="checkbox" name="custom-switch-radio" class="custom-switch-input">
+                                <input type="checkbox" name="custom-switch-radio" class="custom-switch-input" data-card="property-status" checked>
                                 <span class="custom-switch-indicator custom-switch-indicator-md"></span>
                                 <span class="custom-switch-description text-dark fw-bold">Property Status</span>
                             </label>
@@ -701,7 +701,7 @@
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
                                 <div class="d-flex justify-content-end">
-                                    <!-- <div class="form-group me-3">
+                                    <div class="form-group me-3">
                                             <select class="form-select form-select">
                                                 <option selected>Filter by Property</option>
                                                 <option value="1">Germany</option>
@@ -709,13 +709,13 @@
                                                 <option value="3">Usa</option>
                                                 <option value="4">Aus</option>
                                             </select>
-                                        </div> -->
-                                    <!-- <div class="form-group">
+                                        </div>
+                                    <div class="form-group">
                                         <button class="btn btn-primary btn-pill" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i
                                             class=
                                             "fi fi-rs-settings-sliders"
                                             ></i> Customized Dashboard</button>
-                                    </div> -->
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1653,10 +1653,41 @@
             logo.src = '../assets/header-img/question.svg';
         }
     </script>
+<script>
+    $(document).ready(function() {
+        // Restore checkbox states and hide/show corresponding cards from local storage
+        $('input[type="checkbox"]').each(function() {
+            var cardId = $(this).data('card');
+            var storedValue = localStorage.getItem(cardId);
+            var isChecked = storedValue === 'true' || storedValue === null;
+            $(this).prop('checked', isChecked);
+            var card = $('#' + cardId);
+            if (isChecked) {
+                card.show();
+            } else {
+                card.hide();
+            }
+        });
+
+        // Handle checkbox changes
+        $('input[type="checkbox"]').on('change', function() {
+            var cardId = $(this).data('card');
+            var card = $('#' + cardId);
+            if ($(this).is(':checked')) {
+                card.show();
+                localStorage.setItem(cardId, 'true');
+            } else {
+                card.hide();
+                localStorage.setItem(cardId, 'false');
+            }
+        });
+    });
+</script>
     <script>
         $(document).ready(() => {
+            
             $.ajax({
-                url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/protected',
+                url: 'https://backend.app.spaderent.com/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1681,7 +1712,7 @@
             });
             function updateTable(tabId) {
                 var tableBody = $('#' + tabId + ' tbody');
-                var apiUrl = 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getAllTask'; // Replace with your API endpoint URL
+                var apiUrl = 'https://backend.app.spaderent.com/api/spade/getAllTask'; // Replace with your API endpoint URL
 
                 // Make an API call to fetch all tasks
                 $.ajax({
@@ -1814,140 +1845,70 @@
         })
     </script>
     <!-- column drag and drop start  -->
-    
-    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.5.2/dragula.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
     <script>
-    var COL_WIDTH = 62 // should be calculated dynamically, and recalculated at window resize
-    var GUTTER_WIDTH = 30
-
-    var COL_WIDTHS = {
+      var COL_WIDTH = 62; // should be calculated dynamically, and recalculated at window resize
+      var GUTTER_WIDTH = 30;
+    
+      var COL_WIDTHS = {
         750: 62,
         970: 81,
         1170: 97
-    }
-
-    $(function() {
-
+      };
+      var storedLayout = localStorage.getItem('htmlLayout');
+        if (storedLayout) {
+          $('#container').html(storedLayout);
+        }
+      $(document).ready(function() {
         var d = dragula({
-            invalid: function(el, target) {
-                return $(el).hasClass('ui-resizable-handle')
-            }
-        })
+          invalid: function(el, target) {
+            return $(el).hasClass('ui-resizable-handle');
+          }
+        });
+    
         $('.row').each(function() {
-            d.containers.push(this)
-        })
-
+          d.containers.push(this);
+        });
+    
         $('.card').resizable({
-            grid: COL_WIDTH - GUTTER_WIDTH,
-            handles: 'se',
-            resize: function(e, ui) {
-                console.log('resized', ui.size)
-                $(this).css('width', '').removeClass(function(index, css) {
-                        return (css.match(/(^|\s)col-sm-\S+/g) || []).join(' ')
-                    })
-                    .addClass('col-sm-' + Math.max(1, Math.round(ui.size.width / COL_WIDTH)))
-            }
-        })
-
-        var colWidth = COL_WIDTHS[$('.main-container').width()] || COL_WIDTHS[0]
+          grid: COL_WIDTH - GUTTER_WIDTH,
+          handles: 'se',
+          resize: function(e, ui) {
+            console.log('resized', ui.size);
+            $(this)
+              .css('width', '')
+              .removeClass(function(index, css) {
+                return (css.match(/(^|\s)col-sm-\S+/g) || []).join(' ');
+              })
+              .addClass('col-sm-' + Math.max(1, Math.round(ui.size.width / COL_WIDTH)));
+          }
+        });
+    
+        var colWidth = COL_WIDTHS[$('.main-container').width()] || COL_WIDTHS[0];
         $(window).resize(function() {
-            colWidth = COL_WIDTHS[$('.main-container').width()] || COL_WIDTHS[0]
-            console.log('set colWidth to', colWidth, $('.main-container').width())
-        })
-
-    })
-</script>
-   
-     -->
-     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-     <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.5.2/dragula.min.js"></script>
-     <script>
-       var COL_WIDTH = 62; // should be calculated dynamically, and recalculated at window resize
-       var GUTTER_WIDTH = 30;
-     
-       var COL_WIDTHS = {
-         750: 62,
-         970: 81,
-         1170: 97
-       };
-     
-       $(function() {
-         var d = dragula();
-         $('.row').each(function() {
-           d.containers.push(this);
-         });
-     
-         $('.card').resizable({
-           grid: COL_WIDTH - GUTTER_WIDTH,
-           handles: 'se',
-           resize: function(e, ui) {
-             console.log('resized', ui.size);
-             $(this)
-               .css('width', '')
-               .removeClass(function(index, css) {
-                 return (css.match(/(^|\s)col-sm-\S+/g) || []).join(' ');
-               })
-               .addClass('col-sm-' + Math.max(1, Math.round(ui.size.width / COL_WIDTH)));
-             saveHTMLStructure();
-           }
-         });
-     
-         $('.card').draggable({
-           revert: 'invalid',
-           helper: 'clone',
-           start: function(event, ui) {
-             $(this).addClass('no-drag');
-           },
-           stop: function(event, ui) {
-             $(this).removeClass('no-drag');
-             saveHTMLStructure();
-           }
-         });
-     
-         // Save the updated HTML structure to local storage
-         function saveHTMLStructure() {
-           var htmlStructure = $('#container').html();
-           localStorage.setItem('htmlStructure', htmlStructure);
-         }
-     
-         // Restore the HTML structure from local storage on page load
-         var storedHTMLStructure = localStorage.getItem('htmlStructure');
-         if (storedHTMLStructure) {
-           $('#container').html(storedHTMLStructure);
-         }
-       });
-     </script>
-     
-     
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.3/dragula.min.js"></script> -->
-<script>
-//   $(document).ready(function() {
-//     var container = document.getElementById('container');
-//     var drake = dragula([container]);
-
-//     // Save the updated HTML structure to local storage whenever a drag event ends
-//     drake.on('dragend', function() {
-//       saveHTMLStructure();
-//     });
-
-//     // Save the HTML structure to local storage
-//     function saveHTMLStructure() {
-//       var htmlStructure = $('#container').html();
-//       localStorage.setItem('htmlStructure', htmlStructure);
-//     }
-
-//     // Restore the HTML structure from local storage on page load
-//     var storedHTMLStructure = localStorage.getItem('htmlStructure');
-//     if (storedHTMLStructure) {
-//       $('#container').html(storedHTMLStructure);
-//     }
-//   });
-// </script>
-
-// column drag and drop end
+          colWidth = COL_WIDTHS[$('.main-container').width()] || COL_WIDTHS[0];
+          console.log('set colWidth to', colWidth, $('.main-container').width());
+        });
+    
+        // Restoring HTML layout from local storage on page load
+        // var storedLayout = localStorage.getItem('htmlLayout');
+        // if (storedLayout) {
+        //   $('#container').html(storedLayout);
+        // }
+    
+        // Saving HTML layout to local storage when changes are made by dragging
+        d.on('dragend', function() {
+          var htmlLayout = $('#container').html();
+          localStorage.setItem('htmlLayout', htmlLayout);
+        });
+      });
+    </script>
+    
+    
+      
+    
 
 
     <script>

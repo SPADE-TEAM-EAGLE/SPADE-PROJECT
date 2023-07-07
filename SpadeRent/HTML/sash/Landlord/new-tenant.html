@@ -967,7 +967,7 @@ color: #000;
                     Draft</button> -->
                     <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close'>Close</button>
                     <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
-                    <!-- <button class="btn text-light button" style='background-color:#1467B0;' onclick="tenant_data()" id='next-add-tenant'>Next</button> -->
+                    <!-- <button class="btn text-light button" style='background-color:#1467B0;' id='next-add-tenant'>Next</button> -->
                     <button class="btn text-light button" style='background-color:#1467B0;' id='next'>Next</button>
                     <button class="btn text-light button d-none" style='background-color:#1467B0;' id='submit'>Submit</button>
                     <button class="btn text-light button d-none" style='background-color:#1467B0;' id='save'>Save</button>
@@ -2202,7 +2202,7 @@ color: #000;
                     $("#succesModal").modal("hide")
                     console.log(tenantID)
                     $.ajax({
-                        url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/sendInvitationLink',
+                        url: 'https://backend.app.spaderent.com/api/spade/sendInvitationLink',
                         type: 'POST',
                         data: JSON.stringify({
                             tenantID: tenantID
@@ -2226,7 +2226,7 @@ color: #000;
                 })
                 // $("#succesModal").modal("show")
             $.ajax({
-                url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getStates',
+                url: 'https://backend.app.spaderent.com/api/spade/getStates',
                 method: 'GET',
                 success: function({
                     data
@@ -2251,7 +2251,7 @@ color: #000;
                 }
             });
             $.ajax({
-                url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/protected',
+                url: 'https://backend.app.spaderent.com/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2276,7 +2276,7 @@ color: #000;
                 }
             });
             $.ajax({
-                url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getPropertyUnitsTenant',
+                url: 'https://backend.app.spaderent.com/api/spade/getPropertyUnitsTenant',
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -2474,7 +2474,7 @@ color: #000;
                 $("#addModal").modal("hide")
                     // Make the AJAX call
                 $.ajax({
-                    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/tenants',
+                    url: 'https://backend.app.spaderent.com/api/spade/tenants',
                     type: 'POST',
                     data: JSON.stringify(formData),
                     contentType: "application/json; charset=utf-8",

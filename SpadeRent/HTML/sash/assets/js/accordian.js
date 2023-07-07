@@ -1,6 +1,5 @@
 $(document).ready(function() {
-    function tenant_data()
-    {
+    $("#next-add-tenant").click(() => {
        //first accordian
        var isEmpty1 = false;
        $('#firstName, #lastName, #company, #email, #phone, #address, #state, #city, #zip').each(function() {
@@ -109,8 +108,5 @@ if(!isEmpty3 && !isEmpty2 && !isEmpty1){
    alert("ok")
 }
 
-    }
-    // $('#next-add-tenant').click(function() {
- 
-    // });
+    });
 });
