@@ -698,13 +698,13 @@ color: #000;
                                     <div class="col-md-6">
                                         <label for="inputEmail4" class="form-label fw-bold">First Name<spnan
                                             class="text-danger"> *</span></label>
-                                        <input type="text" class="form-control form" placeholder="Enter First Name" id="firstName" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your first name here" data-bs-container="#addModal">
+                                        <input type="text" class="form-control form" placeholder="Enter First Name" id="firstName" pattern="[A-Za-z\s]+" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your first name here" data-bs-container="#addModal">
                                         <span class="text-danger d-none">First name is required!</span>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="inputPassword4" class="form-label fw-bold">Last Name<spnan
                                             class="text-danger"> *</span></label>
-                                        <input type="text" class="form-control form" placeholder="Enter Last Name" id="lastName" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your last name here" data-bs-container="#addModal">
+                                        <input type="text" class="form-control form" placeholder="Enter Last Name" id="lastName" pattern="[A-Za-z\s]+" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your last name here" data-bs-container="#addModal">
                                         <span class="text-danger d-none">Last name required!</span>
                                     </div>
                                     <div class="col-md-4">
@@ -717,7 +717,7 @@ color: #000;
                                     <div class="col-md-4">
                                         <label for="inputCity" class="form-label fw-bold">Email<spnan
                                             class="text-danger"> *</span></label>
-                                        <input type="text" class="form-control form" placeholder="Enter Email" id="email" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your email here" data-bs-container="#addModal">
+                                        <input type="email" class="form-control form" placeholder="Enter email" pattern="[A-Za-z0-9_\.@]+" oninput="this.value = this.value.replace(/[^A-Za-z0-9_\.@]/g, '').replace(/(@{2,})/g, '@')" id="email" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your email here" data-bs-container="#addModal">
                                         <span class="text-danger d-none">Email is required!</span>
                                     </div>
                                     <div class="col-md-4">
@@ -748,7 +748,7 @@ color: #000;
                                     <div class="col-md-4">
                                         <label for="inputState" class="form-label fw-bold">City <spnan
                                             class="text-danger">*</span></label>
-                                        <input id="city" class="form-control form" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your city here" data-bs-container="#addModal">
+                                        <input type="text" id="city" class="form-control form" required data-bs-placement="top" pattern="[A-Za-z\s]+" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your city here" data-bs-container="#addModal">
                                         <span class="text-danger d-none">City is required!</span>
                                     </div>
                                     <div class="col-md-4">
@@ -949,13 +949,13 @@ color: #000;
                                                         </button>
                                                         </div>
                                                     </div>
-
-
+                                                    
                                                 </div>
+                                                <a href="javascript:;" class="mt-1" id="add-item">+Add Line Item</a>
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="javascript:;" class="mt-1" id="add-item">+Add Line Item</a>
+                                    <!-- <a href="javascript:;" class="mt-1" id="add-item">+Add Line Item</a> -->
                                 </form>
                             </div>
                         </div>
@@ -968,7 +968,7 @@ color: #000;
                     <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close'>Close</button>
                     <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
                     <!-- <button class="btn text-light button" style='background-color:#1467B0;' id='next-add-tenant'>Next</button> -->
-                    <button class="btn text-light button" style='background-color:#1467B0;' id='next'>Next</button>
+                    <button class="btn text-light button" style='background-color:#1467B0;' disabled id='next'>Next</button>
                     <button class="btn text-light button d-none" style='background-color:#1467B0;' id='submit'>Submit</button>
                     <button class="btn text-light button d-none" style='background-color:#1467B0;' id='save'>Save</button>
                 </div>
@@ -2702,23 +2702,27 @@ color: #000;
             }
 
             // Call the updateButtonStatus function when any field in the accordions is changed
-            $('#accordion-item1 input[required], #accordion-item1 select[required], #accordion-item2 input[required], #accordion-item2 select[required], #accordion-item3 input[required], #accordion-item3 select[required]').on('input change', function() {
+            $('#accordion-item1 input[type="text"],#accordion-item1 input[type="tel"], #accordion-item1 select, #accordion-item2 input, #accordion-item2 select, #accordion-item3 input, #accordion-item3 select').on('input change', function() {
                 var $field = $(this);
                 var $errorMessage = $field.next('.text-danger');
 
                 if ($field.attr("id") === "zip") {
                     if ($field.val().length !== 5) {
                         $field.addClass('border-danger');
+                        $field.removeClass('border-green');
                         $errorMessage.removeClass('d-none');
                     } else {
                         $field.removeClass('border-danger');
+                        $field.addClass('border-green');
                         $errorMessage.addClass('d-none');
                     }
                 } else if ($field.val() === '' || $field.val() === 'Choose...') {
                     $field.addClass('border-danger');
+                    $field.removeClass('border-green');
                     $errorMessage.removeClass('d-none');
                 } else {
                     $field.removeClass('border-danger');
+                    $field.addClass('border-green');
                     $errorMessage.addClass('d-none');
                 }
                 updateButtonStatus();
@@ -2809,6 +2813,22 @@ color: #000;
         console.log('Done');
     }
 </script>
+<script>
+    $('#email').keyup(function() {
+      var email = $(this).val();
+      var emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z.-]+\.[A-Za-z]{2,}$/;
+      
+      if(!email.match(emailRegex)) {
+        // Invalid email format, display an error message or take appropriate action
+        console.log("invalid");
+        $(this).addClass("border-danger")
+        $(this).removeClass("border-green")
+      }else{
+          $(this).addClass("border-green")
+        $(this).removeClass("border-danger")
+      }
+    });
+  </script>
 </body>
 
 </html>
