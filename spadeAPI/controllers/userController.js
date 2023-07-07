@@ -30,6 +30,7 @@ const {
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
+const { fileUpload } = require("../helper/S3Bucket");
 const config = process.env;
 
 exports.createUser = async function (req, res) {
@@ -415,16 +416,18 @@ exports.property = async (req, res) => {
     propertySQFT,
     units,
   } = req.body;
-  const { userId } = req.user;
+  // const { userId } = req.user;
+  const { userId } = req.body;
   // const userId = 3478;
   try {
-    const propertycheckresult = await queryRunner(
-      selectQuery("property", "propertyName", "address"),
-      [propertyName, address]
-    );
+    console.log(req); 
+    console.log("111") 
+    console.log(propertyName + " " + address); 
+    const propertycheckresult = await queryRunner(selectQuery("property", "propertyName", "address"),[propertyName, address]);
     if (propertycheckresult[0].length > 0) {
       res.send("Property Already Exist");
     } else {
+      console.log("21") 
       const status = "Non-active";
       const propertyResult = await queryRunner(insertInProperty, [
         userId,
@@ -441,19 +444,26 @@ exports.property = async (req, res) => {
       if (propertyResult.affectedRows === 0) {
         res.status(400).send("Error1");
       } else {
+        console.log("1")
         const fileNames = req.files.map((file) => file.filename);
         const propertyID = propertyResult[0].insertId;
         for (let i = 0; i < fileNames.length; i++) {
           const img = fileNames[i];
+        const filesImages = await fileUpload(img); 
+        const imageDataKey = filesImages[0].key; 
+        const imageDataLocation = filesImages[0].location; 
           const propertyImageResult = await queryRunner(insertInPropertyImage, [
             propertyID,
-            img,
+            imageDataLocation,
+            imageDataKey
           ]);
           if (propertyImageResult.affectedRows === 0) {
             res.send("Error2");
             return;
           }
         } //sss
+        console.log("1")
+
         for (let i = 0; i < units; i++) {
           const propertyResult = await queryRunner(insertInPropertyUnits, [
             propertyID,
@@ -462,6 +472,7 @@ exports.property = async (req, res) => {
             "",
             "Vacant",
           ]);
+        console.log("1") 
           if (propertyResult.affectedRows === 0) {
             res.send("Error3 error occur in inserted units");
             return;
@@ -475,7 +486,7 @@ exports.property = async (req, res) => {
       }
     }
   } catch (error) {
-    res.status(400).send("Error4");
+    res.status(400).send(error);
     console.log(error);
     // console.log(req.files.map((file) => file.filename));
   }

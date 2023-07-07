@@ -14,7 +14,8 @@ const MultiUpload = upload.fields([
 
 const s3 = new aws.S3();
 
-function fileUpload(req, res) {
+// function fileUpload(req, res) {
+function fileUpload(file) {
     MultiUpload(req, res, function (err) {
         if (err) {
             return res.status(422).send({
@@ -22,7 +23,7 @@ function fileUpload(req, res) {
             });
         }
         return res.json({
-            image_url: (req.files["image"] && req.files["image"]) || null,
+            image_url: (file["image"] && file["image"]) || null,
             video_url: (req.files["video"] && req.files["video"].map((file) => file.location)) || null,
             doc_url: (req.files["doc"] && req.files["doc"].map((file) => file.location)) || null,
             audio_url: (req.files["audio"] && req.files["audio"].map((file) => file.location)) || null,
