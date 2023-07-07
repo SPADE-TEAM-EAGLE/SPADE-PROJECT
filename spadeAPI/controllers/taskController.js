@@ -256,6 +256,7 @@ exports.addTasks = async (req, res) => {
         }
 
     }
+    return res.send("Created");
   } catch (error) {
     res.status(400).send(error);
     console.log(error);

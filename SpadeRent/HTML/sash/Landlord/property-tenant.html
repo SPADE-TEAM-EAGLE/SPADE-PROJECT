@@ -2020,7 +2020,7 @@
 
             
             $.ajax({
-                url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/viewPropertyTenant',
+                url: 'https://backend.app.spaderent.com/api/spade/viewPropertyTenant',
                 type: 'GET',
                 data: {
                     "id": propertyId
@@ -2041,8 +2041,13 @@
                         // window.location = './new-property.html'
                     } else {
                         console.log(data[0][0])
-                        $("#property_name").text(data[0][0].propertyName)
-                        $("#property_address").text(data[0][0].pAddress)
+                        function toTitleCase(str) {
+                                return str.replace(/\w\S*/g, function(txt) {
+                                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                                });
+                            }
+                                $("#property_name").text(toTitleCase(data[0][0].propertyName))
+                                $("#property_address").text(toTitleCase(data[0][0].pAddress))
 
                         var tableBody = $('#table_body');
 

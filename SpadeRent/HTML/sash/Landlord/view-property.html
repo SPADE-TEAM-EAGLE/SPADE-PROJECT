@@ -1886,7 +1886,7 @@
             $("#viewTasks").attr("href", `./property-task.html?propertyId=${propertyId}`)
             console.log(propertyId)
             $.ajax({
-                url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/viewProperty',
+                url: 'https://backend.app.spaderent.com/api/spade/viewProperty',
                 type: 'GET',
                 data: {
                     propertyId
@@ -1901,9 +1901,14 @@
                 }) {
                     console.log(data)
                         // window.alert(response.message);
-                    console.log(data.propertyName)
-                    $("#property_name").text(data.propertyName)
-                    $("#property_address").text(data.address)
+                    // console.log(data.propertyName)
+                    function toTitleCase(str) {
+                                return str.replace(/\w\S*/g, function(txt) {
+                                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                                });
+                            }
+                    $("#property_name").text(toTitleCase(data.propertyName))
+                    $("#property_address").text(toTitleCase(data.address))
                     $("#property_type").text(data.propertyType)
                     $("#property_units").text(data.units)
                     $("#property_status").text(data.status)
@@ -1988,7 +1993,7 @@
             $(".viewTenants").attr("href",`./property-tenant.html?propertyId=${propertyId}`)
             $(".viewTasks").attr("href",`./property-task.html?propertyId=${propertyId}`)
             $.ajax({
-                url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/viewProperty',
+                url: 'https://backend.app.spaderent.com/api/spade/viewProperty',
                 type: 'GET',
                 data: {
                     propertyId

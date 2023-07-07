@@ -1,5 +1,5 @@
 const user = require("../models/user");
-const sendMail = require("../sendmail/sendmail.js");
+const {sendMail} = require("../sendmail/sendmail.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const fs = require("fs");
@@ -11,7 +11,6 @@ const {
   deleteQuery,
   insertInUsers,
   addResetToken,
-  updatePassword,
   insertInProperty,
   insertInPropertyImage,
   updateProperty,
@@ -24,7 +23,8 @@ const {
   selectAllTenants,
   PropertyUnitsVacant,
   propertyTaskQuery,
-  selectAllTenantsProperty
+  selectAllTenantsProperty,
+  updatePasswordLandlord
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -58,7 +58,7 @@ exports.createUser = async function (req, res) {
       const mailSubject = "Spade Welcome Email";
     if (insertResult[0].affectedRows > 0) {
       
-      await sendMail.sendMail(email, mailSubject, password, name);
+      await sendMail(email, mailSubject, password, name);
       return res.status(200).json({ message: "User added successfully" });
     } else {
       return res.status(500).send("Failed to add user");
@@ -194,7 +194,7 @@ exports.createResetEmail = async (req, res) => {
         userid,
       ]);
       if (updateResult[0].affectedRows === 0) {
-        res.status(400).send("Error");
+        res.status(400).send("Errorqqq");
       } else {
         res.status(200).json({ message: "Sended", id: userid });
       }
@@ -202,6 +202,7 @@ exports.createResetEmail = async (req, res) => {
       res.status(400).send("Email not found");
     }
   } catch (error) {
+    console.log(error)
     res.status(400).send("Error");
   }
 };
@@ -246,11 +247,14 @@ exports.verifyResetEmailCode = async (req, res) => {
 
 exports.updatePassword = async (req, res) => {
   const { id, password, confirmpassword, token } = req.body;
+  // const currentDate = new Date();
   try {
     if (password === confirmpassword) {
       const hashPassword = await hashedPassword(password);
-      const selectResult = await queryRunner(updatePassword, [
+      const currentDate = new Date();
+      const selectResult = await queryRunner(updatePasswordLandlord, [
         hashPassword,
+        currentDate,
         id,
         token,
       ]);
@@ -259,6 +263,7 @@ exports.updatePassword = async (req, res) => {
           message: "Successful password saved",
         });
       } else {
+        console.log("here")
         res.status(500).send("Error");
       }
     } else {

@@ -2074,7 +2074,7 @@
                 // $("#succesModal").modal("hide")
                 // console.log(tenantID)
                 $.ajax({
-                    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/sendInvitationLink',
+                    url: 'https://backend.app.spaderent.com/api/spade/sendInvitationLink',
                     type: 'POST',
                     data: JSON.stringify({
                         tenantID: tenantId
@@ -2098,8 +2098,9 @@
                     }
                 });
             })
+            console.log(tenantId)
             $.ajax({
-                url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getTenantsByID',
+                url: 'https://backend.app.spaderent.com/api/spade/getTenantsByID',
                 type: 'GET',
                 data: {
                     id: tenantId
@@ -2187,7 +2188,7 @@
                 formData.append("tenantID", tenantId);
                 console.log(formData)
                 $.ajax({
-                    url: "http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/addAlternateEmailPhone",
+                    url: "https://backend.app.spaderent.com/api/spade/addAlternateEmailPhone",
                     type: "POST",
                     data: JSON.stringify({
                         alternatePhone: phone,

@@ -1963,7 +1963,7 @@
             // console.log($("#viewUnits").attr("href"))
             //            
             $.ajax({
-                url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getTenantsByID',
+                url: 'https://backend.app.spaderent.com/api/spade/getTenantsByID',
                 type: 'GET',
                 data: {
                     id: tenantId
@@ -1976,8 +1976,12 @@
                 success: function({
                     data
                 }) {
-                    console.log(data)
-                    $(".company-name").text(`${data[0][0].companyName} | ${data[0][0].firstName+" "+data[0][0].lastName}`)
+                    function toTitleCase(str) {
+                                return str.replace(/\w\S*/g, function(txt) {
+                                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                                });
+                            }
+                    $(".company-name").text(`${toTitleCase(data[0][0].companyName)} | ${toTitleCase(data[0][0].firstName)+" "+toTitleCase(data[0][0].lastName)}`)
                 },
                 error: function(xhr, status, error) {
                     window.alert('Error: ' + error);
@@ -1994,7 +1998,7 @@
                 });
             }
             $.ajax({
-                url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/tenantTask',
+                url: 'https://backend.app.spaderent.com/api/spade/tenantTask',
                 type: 'GET',
                 data: {
                     Id: tenantId

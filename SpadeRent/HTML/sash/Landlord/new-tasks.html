@@ -758,7 +758,7 @@ color: #000;
                         <div class="col-md-12">
                             <label class="form-label fw-bold">Media/ Files</label>
                             <div class="custom-file" style="border: 1px dashed #00000087;">
-                                <input id="fileInput" required type="file" name="image" class="custom-file-input form" accept=".jpg, .png, image/jpeg, image/png" aria-label="hello" multiple>
+                                <input id="fileInput" type="file" name="image" class="custom-file-input form" accept=".jpg, .png, image/jpeg, image/png" aria-label="hello" multiple>
                                 <span className="d-none"></span>
                                 <label class="custom-file-label" for="fileInput">
                                     <i class="fi fi-rs-cloud-upload"></i>
@@ -833,10 +833,6 @@ color: #000;
                                 <label for="inputState" class="form-label fw-bold">Priority</label>
                                 <select id="state" class="form-select form">
                                 <option selected>Choose...</option>
-                                <option>Sindh</option>
-                                <option>Punjab</option>
-                                <option>Balochistan</option>
-                                <option>KPK</option>
                             </select>
                                 <span class="text-danger d-none">Property name required!</span>
                             </div>
@@ -844,10 +840,6 @@ color: #000;
                                 <label for="inputState" class="form-label fw-bold">Status</label>
                                 <select id="state" class="form-select form">
                                 <option selected>Choose...</option>
-                                <option>Sindh</option>
-                                <option>Punjab</option>
-                                <option>Balochistan</option>
-                                <option>KPK</option>
                             </select>
                                 <span class="text-danger d-none">Address is required!</span>
                             </div>
@@ -855,21 +847,7 @@ color: #000;
                                 <div class="form-group">
                                     <label class="form-label fw-bold">Assignee(s)</label>
                                     <select class="form-control select2" data-placeholder="Choose Browser" multiple>
-                                            <option value="Firefox">
-                                                Firefox
-                                            </option>
-                                            <option value="Chrome selected">
-                                                Chrome
-                                            </option>
-                                            <option value="Safari">
-                                                Safari
-                                            </option>
-                                            <option selected value="Opera">
-                                                Opera
-                                            </option>
-                                            <option value="Internet Explorer">
-                                                Internet Explorer
-                                            </option>
+                                            
                                         </select>
                                 </div>
                             </div>
@@ -917,7 +895,34 @@ color: #000;
             </div>
         </div>
     </div>
-
+    <div class="modal fade" id="infoModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+          <div class="modal-content modal-content-demo">
+            <div class="modal-body p-0">
+              <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
+                <!-- <div class="card-header border-0 pt-3">
+                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                            </button>
+                        </div> -->
+                <div class="card-body text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24"><path fill="#fad383" d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z"></path><circle cx="12" cy="16" r="1" fill="#f7b731"></circle><path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"></path></svg>
+                  <h4 class="h4 mb-0 mt-3 fw-bold">Info</h4>
+                  <p class="card-text text-dark">Task Already Exist</p>
+                </div>
+                <!-- <div class="card-footer text-center border-0 pt-0">
+                            <div class="row">
+                                <div class="text-center">
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">delete</a>
+                                </div>
+                            </div>
+                        </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     <div class="modal fade" id="succesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content success-modal-content">
@@ -2083,16 +2088,20 @@ color: #000;
             $(document).ready(function() {
     
                 $.ajax({
-                    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/viewAllPropertyTenant',
+                    url: 'https://backend.app.spaderent.com/api/spade/viewAllPropertyTenant',
                     method: 'GET',
                     contentType: "application/json; charset=utf-8",
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function(response) {
-                        console.log(response.data[0])
-                        $("#user-name").text(response.user)
-                        $("#header-user").text(response.user)
+                        function toTitleCase(str) {
+                                return str.replace(/\w\S*/g, function(txt) {
+                                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                                });
+                            }
+                        $("#user-name").text(toTitleCase(response.user))
+                        $("#header-user").text(toTitleCase(response.user))
     
                         $("#property").empty()
                         $("#property").append($("<option></option>").text("Choose...").prop("selected", true))
@@ -2110,15 +2119,20 @@ color: #000;
                     }
                 })
                 $.ajax({
-                    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getVendorAssignTo',
+                    url: 'https://backend.app.spaderent.com/api/spade/getVendorAssignTo',
                     method: 'GET',
                     contentType: "application/json; charset=utf-8",
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function(response) {
-                        // console.log(response.data)
-                        $("#user-name").text(response.user)
+                        function toTitleCase(str) {
+                                return str.replace(/\w\S*/g, function(txt) {
+                                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                                });
+                            }
+                        $("#user-name").text(toTitleCase(response.user))
+                        $("#header-user").text(toTitleCase(response.user))
                             // console.log(response)
                         $("#assignee").empty()
                         $("#assignee").append($("<option></option>").text("Choose..."))
@@ -2169,10 +2183,10 @@ color: #000;
     
                         // Enable or disable the buttons based on the fields' status
                         if (allFieldsFilled) {
-                            $('#save').removeClass("disabled");
+                            $('#next').removeClass("disabled");
                             //   $('#draft').removeAttr("disabled");
                         } else {
-                            $('#save').addClass("disabled");
+                            $('#next').addClass("disabled");
                             //   $('#draft').removeAttr("disabled");
     
                         }
@@ -2319,7 +2333,7 @@ color: #000;
                     }
     
                     $.ajax({
-                        url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/addTasks',
+                        url: 'https://backend.app.spaderent.com/api/spade/addTasks',
                         type: 'POST',
                         data: formData,
                         contentType: false,
@@ -2328,7 +2342,13 @@ color: #000;
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function(response) {
-                            console.log(2);
+                            if(response==="Task already exists"){
+                            $("#infoModal").modal("show")
+                        }
+                        else{
+                            
+                            $("#succesModal").modal("show")
+                        }
                         },
                         error: function(xhr, status, error) {
                             window.alert('Error: ' + error);
@@ -2451,8 +2471,7 @@ color: #000;
                         imageField.siblings('.selected-files').find('.file-grid').empty();
                     }
                     resetAccordions()
-                        // $('#accordion-item1').find('.file-grid').empty();
-                        // getData()
+                        window.location='./create-tasks.html'
                 })
     
     
@@ -2509,7 +2528,7 @@ color: #000;
                 function updateTable() {
                     $('#table_body').empty();
                     $.ajax({
-                        url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/allproperty',
+                        url: 'https://backend.app.spaderent.com/api/spade/allproperty',
                         type: 'GET',
                         contentType: false,
                         processData: false,
@@ -2631,7 +2650,7 @@ color: #000;
     
                     formData.append("existingImages", existingImageNames)
                     $.ajax({
-                        url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/updateTasks',
+                        url: 'https://backend.app.spaderent.com/api/spade/updateTasks',
                         // url: 'http://ec2-54-158-103-230.compute-1.amazonaws.com:3000/api/spade/updateProperty',
                         type: 'PUT',
                         data: formData,
@@ -2656,7 +2675,7 @@ color: #000;
     
                         $('#myModal_delete').modal('hide');
                         $.ajax({
-                            url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/deleteTask',
+                            url: 'https://backend.app.spaderent.com/api/spade/deleteTask',
                             type: 'DELETE',
                             data: JSON.stringify({
                                 "taskID": taskId
@@ -2681,7 +2700,7 @@ color: #000;
                     $("#global-loader").fadeIn("fast")
                         // console.log(22)
                     $.ajax({
-                        url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getAllTask',
+                        url: 'https://backend.app.spaderent.com/api/spade/getAllTask',
                         type: 'GET',
                         contentType: false,
                         processData: false,
@@ -2694,7 +2713,13 @@ color: #000;
     
                                 window.location = './new-property.html'
                             } else {
-                                $("#user-name").text(response.user)
+                                function toTitleCase(str) {
+                                return str.replace(/\w\S*/g, function(txt) {
+                                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                                });
+                            }
+                        $("#user-name").text(toTitleCase(response.user))
+                        $("#header-user").text(toTitleCase(response.user))
     
                                 var tableBody = $('#table_body');
     

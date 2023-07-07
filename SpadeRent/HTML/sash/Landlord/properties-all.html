@@ -2351,7 +2351,7 @@
         $(document).ready(function() {
             // $('#infoModal').modal('show')
             $.ajax({
-                url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getStates',
+                url: 'https://backend.app.spaderent.com/api/spade/getStates',
                 method: 'GET',
                 success: function({
                     data
@@ -2561,7 +2561,7 @@
                 $('#addModal').modal('hide');
                 // Send the form data to the server using AJAX
                 $.ajax({
-                    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/property',
+                    url: 'https://backend.app.spaderent.com/api/spade/property',
                     type: 'POST',
                     data: formData,
                     contentType: false,
@@ -2721,7 +2721,7 @@
         function updateTable() {
             $('#table_body').empty();
             $.ajax({
-                url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/allproperty',
+                url: 'https://backend.app.spaderent.com/api/spade/allproperty',
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -2823,7 +2823,7 @@
 
             formData.append("existingImages", existingImageNames)
             $.ajax({
-                url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/updateProperty',
+                url: 'https://backend.app.spaderent.com/api/spade/updateProperty',
                 // url: 'http://ec2-54-158-103-230.compute-1.amazonaws.com:3000/api/spade/updateProperty',
                 type: 'PUT',
                 data: formData,
@@ -2852,7 +2852,7 @@
                 // delete using AJAX
                 $('#myModal_delete').modal('hide');
                 $.ajax({
-                    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/propertyDelete',
+                    url: 'https://backend.app.spaderent.com/api/spade/propertyDelete',
                     type: 'DELETE',
                     data: JSON.stringify({
                         "id": propertyId
@@ -2929,7 +2929,7 @@
             $("#global-loader").fadeIn("fast")
                 // console.log(22)
             $.ajax({
-                url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/allproperty',
+                url: 'https://backend.app.spaderent.com/api/spade/allproperty',
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -2942,8 +2942,13 @@
 
                         window.location = './new-property.html'
                     } else {
-                        $("#user-name").text(response.user)
-                        $("#header-user").text(response.user)
+                        function toTitleCase(str) {
+                                return str.replace(/\w\S*/g, function(txt) {
+                                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                                });
+                            }
+                        $("#user-name").text(toTitleCase(response.user))
+                        $("#header-user").text(toTitleCase(response.user))
 
                         var tableBody = $('#table_body');
 

@@ -1944,7 +1944,7 @@
                                 });
                             }
             $.ajax({
-                            url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/propertyTask',
+                            url: 'https://backend.app.spaderent.com/api/spade/propertyTask',
                             type: 'GET',
                             data: {
                                 Id:propertyId
@@ -1955,8 +1955,13 @@
                             },
                             success: function (response) {
                                 console.log(response.data[0])
-                                $("#property_name").text(response.data[0][0].propertyName)
-                                $("#property_address").text(data[0][0].address)
+                                function toTitleCase(str) {
+                                return str.replace(/\w\S*/g, function(txt) {
+                                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                                });
+                            }
+                                $("#property_name").text(toTitleCase(response.data[0][0].propertyName))
+                                $("#property_address").text(toTitleCase(response.data[0][0].address))
 
                         var tableBody = $('#table_body');
 

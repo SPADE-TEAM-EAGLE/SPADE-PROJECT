@@ -1166,7 +1166,7 @@
             <div class="modal-content success-modal-content">
                 <div class="modal-header">
 
-                    <button class="btn-close-succes" data-bs-dismiss="modal" aria-label="Close">
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="succes-close">
                         <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
                     </button>
                 </div>
@@ -2440,18 +2440,23 @@
         var taskInfo = []
         let taskId;
         $(document).ready(function() {
+            // $("#succesModal").modal("show")
             $.ajax({
-                url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/protected',
-                method: 'GET',
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                },
-                success: function({
-                    user
-                }) {
-                    // console.log()
-                    $("#user-name").text(user)
-                    $("#header-user").text(user)
+    url: 'https://backend.app.spaderent.com/api/spade/protected',
+    method: 'GET',
+    headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+    },
+    success: function({user}) {
+        // console.log()
+        function toTitleCase(str) {
+                                return str.replace(/\w\S*/g, function(txt) {
+                                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                                });
+                            }
+                        $("#user-name").text(toTitleCase(user))
+                        $("#header-user").text(toTitleCase(user))
+
 
 
                 },
@@ -2463,7 +2468,7 @@
                 }
             });
             $.ajax({
-                url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/viewAllPropertyTenant',
+                url: 'https://backend.app.spaderent.com/api/spade/viewAllPropertyTenant',
                 method: 'GET',
                 contentType: "application/json; charset=utf-8",
                 headers: {
@@ -2488,7 +2493,7 @@
                 }
             })
             $.ajax({
-                url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getVendorAssignTo',
+                url: 'https://backend.app.spaderent.com/api/spade/getVendorAssignTo',
                 method: 'GET',
                 contentType: "application/json; charset=utf-8",
                 headers: {
@@ -2550,10 +2555,10 @@
 
                     // Enable or disable the buttons based on the fields' status
                     if (allFieldsFilled) {
-                        $('#save').removeClass("disabled");
+                        $('#next').removeClass("disabled");
                         //   $('#draft').removeAttr("disabled");
                     } else {
-                        $('#save').addClass("disabled");
+                        $('#next').addClass("disabled");
                         //   $('#draft').removeAttr("disabled");
 
                     }
@@ -2781,7 +2786,7 @@
                 }
 
                 $.ajax({
-                    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/addTasks',
+                    url: 'https://backend.app.spaderent.com/api/spade/addTasks',
                     type: 'POST',
                     data: formData,
                     contentType: false,
@@ -2804,9 +2809,9 @@
                     }
                 });
             });
-            $(".btn-close-succes").click(() => {
-                window.location = "./create-tasks.html"
-            })
+            // $(".btn-close-succes").click(()=>{
+            //     window.location="./create-tasks.html"
+            // })
             let propertyId;
 
             function updateSelectedFilesContainer() {
@@ -2923,21 +2928,22 @@
                 });
             });
             $("#succesModal,#infoModal").on('hide.bs.modal', function() {
-                    $(".select2-selection__rendered").empty()
-                    resetAccordions()
-                        // $('#accordion-item1').find('.file-grid').empty();
-                        // getData()
-                })
-                // $("#succesModal").on('hide.bs.modal', function() {
-                //     if (imageField.length) {
-                //         imageField.val('');
-                //         imageField.siblings('label.custom-file-label').find('.custom-file-text span').first().text('Upload Photo or drag and drop here');
-                //         imageField.siblings('.selected-files').find('.file-grid').empty();
-                //     }
-                //     resetAccordions()
-                //         // $('#accordion-item1').find('.file-grid').empty();
-                //         // getData()
-                // })
+                $(".select2-selection__rendered").empty()
+resetAccordions()
+getData()
+    // $('#accordion-item1').find('.file-grid').empty();
+    // getData()
+})
+            // $("#succesModal").on('hide.bs.modal', function() {
+            //     if (imageField.length) {
+            //         imageField.val('');
+            //         imageField.siblings('label.custom-file-label').find('.custom-file-text span').first().text('Upload Photo or drag and drop here');
+            //         imageField.siblings('.selected-files').find('.file-grid').empty();
+            //     }
+            //     resetAccordions()
+            //         // $('#accordion-item1').find('.file-grid').empty();
+            //         // getData()
+            // })
 
 
             let result;
@@ -2993,7 +2999,7 @@
             function updateTable() {
                 $('#table_body').empty();
                 $.ajax({
-                    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/allproperty',
+                    url: 'https://backend.app.spaderent.com/api/spade/allproperty',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -3115,7 +3121,7 @@
 
                 formData.append("existingImages", existingImageNames)
                 $.ajax({
-                    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/updateTasks',
+                    url: 'https://backend.app.spaderent.com/api/spade/updateTasks',
                     // url: 'http://ec2-54-158-103-230.compute-1.amazonaws.com:3000/api/spade/updateProperty',
                     type: 'PUT',
                     data: formData,
@@ -3145,7 +3151,7 @@
 
                     $('#myModal_delete').modal('hide');
                     $.ajax({
-                        url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/deleteTask',
+                        url: 'https://backend.app.spaderent.com/api/spade/deleteTask',
                         type: 'DELETE',
                         data: JSON.stringify({
                             "taskID": taskId
@@ -3175,7 +3181,7 @@
                 $("#global-loader").fadeIn("fast")
                     // console.log(22)
                 $.ajax({
-                    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getAllTask',
+                    url: 'https://backend.app.spaderent.com/api/spade/getAllTask',
                     type: 'GET',
                     contentType: false,
                     processData: false,

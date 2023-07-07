@@ -1565,6 +1565,30 @@
         .form-row{
             text-align: left;
         }
+
+        .side-headerrr{
+            display: flex;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .dark-mode .side-headerrr .header-brand-img.desktop-logo {
+            display: block;
+            width: 120px;
+        }
+
+        .dark-mode .side-headerrr .header-brand-img.light-logo1 {
+            display: none;
+        }
+
+        .side-headerrr .header-brand-img.light-logo1 {
+            display: block;
+            width: 120px;
+        }
+
+        .side-headerrr .header-brand-img.desktop-logo {
+                display: none;
+            }
    
     </style>
 
@@ -1658,6 +1682,55 @@
         </div>
     </div>
     <!-- modal end  -->
+    <div class="modal fade" id="myModal_warning" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
+                        <div class="card-body text-center">
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24"><path fill="#fad383" d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z"/><circle cx="12" cy="16" r="1" fill="#f7b731"/><path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"/></svg></span>
+                            <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
+                            <p class="card-text text-dark">Current Password doesnot matches!!!!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal_success" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
+                        <!-- <div class="card-header border-0 pt-3">
+                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                            </button>
+                        </div> -->
+                        <div class="card-body text-center">
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24">
+                      <path fill="#13bfa6"
+                        d="M10.3125,16.09375a.99676.99676,0,0,1-.707-.293L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328l-6.1875,6.1875A.99676.99676,0,0,1,10.3125,16.09375Z"
+                        opacity=".99" />
+                      <path fill="#71d8c9"
+                        d="M12,2A10,10,0,1,0,22,12,10.01146,10.01146,0,0,0,12,2Zm5.207,7.61328-6.1875,6.1875a.99963.99963,0,0,1-1.41406,0L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328Z" />
+                    </svg></span>
+                            <h4 class="h4 mb-0 mt-3 fw-bold">Success</h4>
+                            <p class="card-text text-dark">Password change successfully</p>
+                        </div>
+                        <!-- <div class="card-footer text-center border-0 pt-0">
+                            <div class="row">
+                                <div class="text-center">
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">delete</a>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="myModal_delete">
         <div class="modal-dialog modal-dialog-centered text-center" role="document">
             <div class="modal-content modal-content-demo">
@@ -1904,7 +1977,7 @@
                                                 <a class="dropdown-item" href="lockscreen.html">
                                                     <i class="dropdown-icon fe fe-lock"></i> Lockscreen
                                                 </a> -->
-                                                <a class="dropdown-item" href="login_module.html">
+                                                <a class="dropdown-item" onclick="logout()">
                                                     <i class="dropdown-icon fe fe-alert-circle"></i> Sign out
                                                 </a>
                                             </div>
@@ -2106,7 +2179,7 @@
                                                     </li>
                                                     <li><a href="#tab11" data-bs-toggle="tab">Email Templates</a></li>
                                                     <li><a href="#tab12" data-bs-toggle="tab">Invoice Settings</a></li>
-                                                    <li><a href="#tab13" data-bs-toggle="tab">Merchant Services</a></li>
+                                                    <!-- <li><a href="#tab13" data-bs-toggle="tab">Merchant Services</a></li> -->
                                                     <li><a href="#tab14" data-bs-toggle="tab">Vendors</a></li>
                                                     <li><a href="#tab15" data-bs-toggle="tab">Close Account</a></li>
                                                 </ul>
@@ -2215,11 +2288,13 @@
 
                                                             <div class="col-lg-3"></div>
                                                             <div class="col-lg-3 mt-4"
-                                                                style="display: flex; width: auto;">
+                                                                style="display: flex; width: auto; justify-content: space-evenly;">
+                                                                <a href="index.html">
+                                                                    <button
+                                                                    class="btn btn-light btn-pill m-2 w-100">Close</button>
+                                                                </a>
                                                                 <button
-                                                                    class="btn btn-light btn-pill m-2">Close</button>
-                                                                <button
-                                                                    class="btn btn-primary btn-pill m-2">Save</button>
+                                                                    class="btn btn-primary btn-pill m-2 w-40">Save</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -2295,17 +2370,20 @@
                                                                         <p class="text-white">Any changes to this page
                                                                             require you to enter your
                                                                             current password for security purposes:</p>
-                                                                        <input type="password" class="form-control"
-                                                                            id="validationCustom02"
-                                                                            placeholder="Current Password *" required>
+                                                                            <input type="password" class="form-control" id="current_password_reset" placeholder="Current Password *" required>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-7" style="display: flex; width: auto;">
-                                                            <button class="btn btn-light btn-pill m-2">Close</button>
-                                                            <button class="btn btn-primary btn-pill m-2">Save</button>
-                                                        </div>
+                                                        <div class="col-lg-7 mt-4"
+                                                                style="display: flex; width: auto; justify-content: space-evenly;">
+                                                                <a href="index.html">
+                                                                    <button
+                                                                    class="btn btn-light btn-pill m-2 w-100">Close</button>
+                                                                </a>
+                                                                <button
+                                                                    class="btn btn-primary btn-pill m-2 w-40" id="save" disabled>Save</button>
+                                                            </div>
                                                     </div>
 
                                                 </div>
@@ -2402,12 +2480,21 @@
                                                         <div class="col-lg-6"></div>
                                                         <div class="col-lg-6 mt-5">
 
-                                                            <div class="col-lg-7" style="display: flex; width: auto;">
+                                                            <div class="col-lg-7 mt-4"
+                                                            style="display: flex; width: auto; justify-content: space-evenly;">
+                                                            <a href="index.html">
+                                                                <button
+                                                                class="btn btn-light btn-pill m-2 w-100">Close</button>
+                                                            </a>
+                                                            <button
+                                                                class="btn btn-primary btn-pill m-2 w-40">Save</button>
+                                                        </div>
+                                                            <!-- <div class="col-lg-7" style="display: flex; width: auto;">
                                                                 <button
                                                                     class="btn btn-light btn-pill m-2">Close</button>
                                                                 <button
                                                                     class="btn btn-primary btn-pill m-2">Save</button>
-                                                            </div>
+                                                            </div> -->
                                                         </div>
 
                                                     </div>
@@ -7042,6 +7129,16 @@
                                                                     class="form-control">
                                                             </div>
                                                         </div>
+                                                        <div class="col-lg-6"></div>
+                                                        <div class="col-lg-3 mt-4"
+                                                        style="display: flex; width: auto; justify-content: space-evenly;">
+                                                        <a href="index.html">
+                                                            <button
+                                                            class="btn btn-light btn-pill m-2 w-100">Close</button>
+                                                        </a>
+                                                        <button
+                                                            class="btn btn-primary btn-pill m-2 w-40">Save</button>
+                                                    </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -7092,6 +7189,16 @@
                                                             <a href="javascript:;" class="mt-1 text-primary"
                                                                 id="add-item5">+Add New Vendor</a>
                                                         </div>
+                                                        <div class="col-lg-5"></div>
+                                                        <div class="col-lg-3 mt-4"
+                                                        style="display: flex; width: auto; justify-content: space-evenly;">
+                                                        <a href="index.html">
+                                                            <button
+                                                            class="btn btn-light btn-pill m-2 w-100">Close</button>
+                                                        </a>
+                                                        <button
+                                                            class="btn btn-primary btn-pill m-2 w-40">Save</button>
+                                                    </div>
                                                     </div>
 
                                                 </div>
@@ -7399,9 +7506,15 @@
                                         </div>
                                         <div
                                             class="modal-body text-center text-dark">
-                                            <img src="../assets/images/logo-preloader.png"
+                                            <div class="side-headerrr">
+                                                <a class="header-brand1" href="index.html">
+                                                    <img src="../assets/images/logo_white.png" class="header-brand-img desktop-logo" alt="logo">
+                                                    <img src="../assets/images/Artboard GÇô 1.svg" class="header-brand-img light-logo1" alt="logo">
+                                                </a>
+                                            </div>
+                                            <!-- <img src="../assets/images/logo-preloader.png"
                                                 class="model-account-request-close-logo mb-4"
-                                                alt="">
+                                                alt=""> -->
                                                 <img src="../assets/images/request-close-user.png" alt="">
                                             <h2 class="text-primary"><b>Your account closure request 
                                                 is initiated.</b>
@@ -8194,68 +8307,124 @@
     
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 
-<script>
+    <script>
+        let password_validate1 = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
+        var validconfirmPassword1 = document.getElementById("id_password1");
+        let confirmPassword1 = document.getElementById("id_password2");
+        let newPassword = document.getElementById("current_password_reset");
+        let spantag11 = document.getElementById("passnotmatch1");
+        confirmPassword1.addEventListener('keyup', confirmPasswordValidation1);
+        validconfirmPassword1.addEventListener('keyup', confirmPasswordValidation1);
+        newPassword.addEventListener('keyup', confirmPasswordValidation1);
 
-    
-let password_validate1 = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
-var validconfirmPassword1 = document.getElementById("id_password1");
-let confirmPassword1 = document.getElementById("id_password2");
-confirmPassword1.addEventListener('keyup', confirmPasswordValidation1);
-validconfirmPassword1.addEventListener('keyup', confirmPasswordValidation1);
-var spantag11 = document.getElementById("passnotmatch1");
+        function confirmPasswordValidation1() {
+                if (validconfirmPassword1.value.match(password_validate1)) {
+                    validconfirmPassword1.classList.add("border-green");
+                    spantag11.style.display = "none";
+                } else {
+                    validconfirmPassword1.classList.remove("border-green");
+                    spantag11.style.display = "block";
+                }
 
-function confirmPasswordValidation1() {
- 
-  if(validconfirmPassword1.value.match(password_validate1))
-  {
-    console.log(11)
-    validconfirmPassword1.classList.add("border-green");
-    spantag11.style.display = "none";
-  }
-  else
-  {
-    console.log(21)
-    validconfirmPassword1.classList.remove("border-green");
-    spantag11.style.display = "block";
-  }
-    if (confirmPassword1.value == validconfirmPassword1.value && validconfirmPassword1.value.match(password_validate1)) {
-      confirmPassword1.classList.add("border-green");
-      console.log(31)
-    } else {
-        console.log(41)
-      confirmPassword1.classList.remove("border-green");
-    }
-}
+                if (confirmPassword1.value == validconfirmPassword1.value && validconfirmPassword1.value.match(password_validate1)) {
+                    confirmPassword1.classList.add("border-green");
+                } else {
+                    confirmPassword1.classList.remove("border-green");
+                }
 
-const togglePassword11 = document.querySelector("#togglePassword1");
-const password11 = document.querySelector("#id_password1");
+                if (newPassword.value.match(password_validate1)) {
+                    newPassword.classList.add("border-green");
+                } else {
+                    newPassword.classList.remove("border-green");
+                }
+                if (confirmPassword1.value == validconfirmPassword1.value && validconfirmPassword1.value.match(password_validate1) && newPassword.value.match(password_validate1)) {
+                    document.getElementById("save").disabled = false;
+                } else {
+                    document.getElementById("save").disabled = true;
+                }
+            }
 
-togglePassword11.addEventListener("click", function (e) {
-  const type =
-    password11.getAttribute("type") === "password" ? "text" : "password";
-  password11.setAttribute("type", type);
- 
-});
-const togglePassword22 = document.querySelector("#togglePassword2");
-const password22 = document.querySelector("#id_password2");
 
-togglePassword22.addEventListener("click", function (e) {
-  const type =
-  password22.getAttribute("type") === "password" ? "text" : "password";
-  password22.setAttribute("type", type);
- 
-});
-$(document).ready(function() {
-    $('#togglePassword1').click(function() {
-      $(this).toggleClass('fi-rs-eye fi-rs-crossed-eye');
-    });
-  });
-  $(document).ready(function() {
-    $('#togglePassword2').click(function() {
-      $(this).toggleClass('fi-rs-eye fi-rs-crossed-eye');
-    });
-  });
-</script>
+            const togglePassword11 = document.querySelector("#togglePassword1");
+            const password11 = document.querySelector("#id_password1");
+
+            togglePassword11.addEventListener("click", function(e) {
+                const type =
+                    password11.getAttribute("type") === "password" ? "text" : "password";
+                password11.setAttribute("type", type);
+
+            });
+            const togglePassword22 = document.querySelector("#togglePassword2");
+            const password22 = document.querySelector("#id_password2");
+
+            togglePassword22.addEventListener("click", function(e) {
+                const type =
+                    password22.getAttribute("type") === "password" ? "text" : "password";
+                password22.setAttribute("type", type);
+
+            });
+            $(document).ready(function() {
+                $('#togglePassword1').click(function() {
+                    $(this).toggleClass('fi-rs-eye fi-rs-crossed-eye');
+                });
+            });
+            $(document).ready(function() {
+                $('#togglePassword2').click(function() {
+                    $(this).toggleClass('fi-rs-eye fi-rs-crossed-eye');
+                });
+            });
+            $(document).ready(() => {
+                $("#save").click(() => {
+                    console.log($("#current_password_reset").val(), $("#id_password1").val())
+                    $.ajax({
+                        url: 'https://backend.app.spaderent.com/api/spade/changePasssword',
+                        type: 'PUT',
+                        data: JSON.stringify({
+                            currentPassword: $("#current_password_reset").val(),
+                            NewPassword: $("#id_password1").val()
+                        }),
+                        contentType: "application/json; charset=utf-8",
+                        processData: false,
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function(response) {
+                            $("#myModal_success").modal("show");
+                            setTimeout(function() {
+                                $("#myModal_success").modal("hide");
+                                localStorage.setItem("authtoken", response.token);
+                                // window.location = "../Landlord/index.html";
+                            }, 2000);
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle the error response from the API
+                            if (xhr.status === 401) {
+                                $("#myModal_warning").modal("show")
+                            } else {
+                                console.log('API error:', error);
+                            }
+                        }
+                    });
+
+                })
+
+                $(".toggle-password").click(function() {
+
+                    $(this).toggleClass("fi-rs-eye fi-rs-crossed-eye");
+                    var input = $($(this).attr("toggle"));
+                    if (input.attr("type") == "password") {
+                        input.attr("type", "text");
+                    } else {
+                        input.attr("type", "password");
+                    }
+                });
+                $("#form1show").click(function(e) {
+                    $('#form1').show();
+                });
+
+
+            })
+    </script>
 
     <script>
         // Get the user's preferred color scheme
@@ -8521,7 +8690,14 @@ if (input.attr("type") == "password") {
 	$('#form1').show();
 	});
     </script>
-
+<script>
+    function logout() {
+        localStorage.removeItem('authtoken');
+        window.close();
+        window.open('./login_module.html', "_blank")
+        console.log('Done');
+    }
+</script>
 
 </body>
 

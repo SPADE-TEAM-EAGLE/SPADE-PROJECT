@@ -1,5 +1,5 @@
 const user = require("../models/user");
-const sendMail = require('../sendmail/sendmail.js');
+const {sendMail}= require('../sendmail/sendmail.js');
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt');
 const fs = require('fs');

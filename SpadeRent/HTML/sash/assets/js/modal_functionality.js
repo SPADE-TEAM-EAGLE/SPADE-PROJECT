@@ -1,12 +1,17 @@
 $.ajax({
-    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/protected',
+    url: 'https://backend.app.spaderent.com/api/spade/protected',
     method: 'GET',
     headers: {
         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
     },
     success: function({user}) {
-        $("#user-name").text(user)
-        $("#header-user").text(user)
+        function toTitleCase(str) {
+            return str.replace(/\w\S*/g, function(txt) {
+                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+            });
+        }
+    $("#user-name").text(toTitleCase(user))
+    $("#header-user").text(toTitleCase(user))
         
 
     },
@@ -100,8 +105,8 @@ $(document).ready(function () {
         window.location='./properties-all.html'
     })
     $.ajax({
-        // url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getStates',
-        url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getStates',
+        // url: 'https://backend.app.spaderent.com/api/spade/getStates',
+        url: 'https://backend.app.spaderent.com/api/spade/getStates',
         method: 'GET',
         success: function({data}) {
             // Handle state selection change
@@ -309,7 +314,7 @@ $(document).on('click', '#next', function (e) {
     $('#addModal').modal('hide');
     // Send the form data to the server using AJAX
     $.ajax({
-        url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/property',
+        url: 'https://backend.app.spaderent.com/api/spade/property',
         type: 'POST',
         data: formData,
         contentType: false,

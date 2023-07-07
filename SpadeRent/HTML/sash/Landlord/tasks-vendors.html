@@ -2165,7 +2165,7 @@ color: #000;
     <script>
         $(document).ready(() => {
             $.ajax({
-                url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/protected',
+                url: 'https://backend.app.spaderent.com/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2174,8 +2174,13 @@ color: #000;
                     user
                 }) {
                     // console.log()
-                    $("#user-name").text(user)
-                    $("#header-user").text(user)
+                    function toTitleCase(str) {
+                                return str.replace(/\w\S*/g, function(txt) {
+                                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                                });
+                            }
+                        $("#user-name").text(toTitleCase(user))
+                        $("#header-user").text(toTitleCase(user))
 
 
                 },
@@ -2226,7 +2231,7 @@ color: #000;
             }
 
             $.ajax({
-                url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getVendorCategory',
+                url: 'https://backend.app.spaderent.com/api/spade/getVendorCategory',
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -2287,8 +2292,8 @@ color: #000;
                 // formData.append('categoryID', 2);
                 console.log(status)
                 $.ajax({
-                    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/addVendor',
-                    // url: 'http://localhost:3000/api/spade/addVendor',
+                    url: 'https://backend.app.spaderent.com/api/spade/addVendor',
+                    // url: 'https://backend.app.spaderent.com/api/spade/addVendor',
                     type: 'POST',
                     data: JSON.stringify({
                         firstName: firstName,
@@ -2332,7 +2337,7 @@ color: #000;
                 $("#preloader").fadeIn("fast");
                 // console.log(22)
                 $.ajax({
-                    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getAllVendors',
+                    url: 'https://backend.app.spaderent.com/api/spade/getAllVendors',
                     type: 'GET',
                     contentType: false,
                     processData: false,

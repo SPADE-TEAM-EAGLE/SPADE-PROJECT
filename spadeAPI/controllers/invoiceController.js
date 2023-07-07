@@ -309,14 +309,14 @@ exports.getByIdInvoices = async (req, res) => {
           return res.send('Error occurred while deleting invoice line items');
         }
       }
-  
+      let invoiceCheckResult=[];
       if (req.files || existingImages.length >= 1) {
-        const invoiceCheckResult = await queryRunner(
+        invoiceCheckResult = await queryRunner(
           selectQuery("invoiceimages", "invoiceID"),
           [invoiceID]
         );
   
-        if (invoiceCheckResult[0].length > 0) {
+        if (invoiceCheckResult[0].length > 0 && invoiceCheckResult.length>0) {
           const invoiceImages = invoiceCheckResult[0].map((image) => image.InvoiceImage);
           const existingImg = existingImages.split(",");
           const imagesToDelete = invoiceImages.filter(

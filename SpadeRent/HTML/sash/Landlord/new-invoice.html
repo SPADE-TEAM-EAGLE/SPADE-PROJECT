@@ -2071,6 +2071,7 @@
     </script>
     <script>
         $(document).ready(function () {
+            
             $(document).on("click", "#preview", function () {
                 // console.log(222222)
                 // console.log($('#preview').text().startsWith(" Preview"))
@@ -2218,7 +2219,7 @@ console.log(text.startsWith("Preview"));
             }
             $("#resend-invoice").click(()=>{
                 $.ajax({
-    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/resendEmail',
+    url: 'https://backend.app.spaderent.com/api/spade/resendEmail',
     type: 'GET',  // Change the method to POST
     data: { invoiceID: invoiceId },  // Send the data in the request body
     contentType: 'application/json',  // Set the content type to JSON
@@ -2307,7 +2308,7 @@ console.log(text.startsWith("Preview"));
 
                     // Send the data and files to the API using AJAX
                     $.ajax({
-                        url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/createInvoice',
+                        url: 'https://backend.app.spaderent.com/api/spade/createInvoice',
                         type: 'POST',
                         data: formData,
                         contentType: false,
@@ -2333,7 +2334,7 @@ console.log(text.startsWith("Preview"));
                 $("#preloader").fadeIn("fast");
                 // console.log(22)
                 $.ajax({
-                    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/viewAllPropertyTenant',
+                    url: 'https://backend.app.spaderent.com/api/spade/viewAllPropertyTenant',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -2342,8 +2343,13 @@ console.log(text.startsWith("Preview"));
                     },
                     success: function ({ data, user }) {
                         console.log(data)
-                        $("#user-name").text(user)
-                        $("#header-user").text(user)
+                        function toTitleCase(str) {
+                                return str.replace(/\w\S*/g, function(txt) {
+                                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                                });
+                            }
+                        $("#user-name").text(toTitleCase(user))
+                        $("#header-user").text(toTitleCase(user))
                         $("#tenants").empty()
                         $("#tenants").append($('<option></option>').text("Choose..."));
                         tenantData = data[0]
@@ -2364,7 +2370,7 @@ console.log(text.startsWith("Preview"));
                 });
 
                 $.ajax({
-                    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getAllInvoices',
+                    url: 'https://backend.app.spaderent.com/api/spade/getAllInvoices',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -2802,7 +2808,7 @@ function updateTotal() {
             $(document).on("click", "#confirmDelete", () => {
                 $("#myModal_delete").modal("hide")
                 $.ajax({
-                    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/invoiceDelete',
+                    url: 'https://backend.app.spaderent.com/api/spade/invoiceDelete',
                     type: 'DELETE',
                     data: JSON.stringify({
                         id: invoiceId,
@@ -2979,7 +2985,7 @@ function updateTotal() {
 
                     // Send the data and files to the API using AJAX
                     $.ajax({
-                        url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/UpdateInvoice',
+                        url: 'https://backend.app.spaderent.com/api/spade/UpdateInvoice',
                         type: 'PUT',
                         data: formData,
                         contentType: false,
@@ -3003,7 +3009,7 @@ function updateTotal() {
                 // console.log(invoiceId)
                 $("#changeStatusModal").modal("hide")
                 $.ajax({
-                    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/putInvoiceStatusUpdates',
+                    url: 'https://backend.app.spaderent.com/api/spade/putInvoiceStatusUpdates',
                     type: 'PUT',
                     data: JSON.stringify({
                         id: invoiceId,
