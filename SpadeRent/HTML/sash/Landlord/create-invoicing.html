@@ -1332,7 +1332,7 @@
                                 </option>
 
                             </select>
-                            <span class="text-danger d-none">Photos are required!</span>
+                            <span class="text-danger d-none">Tenant is required!</span>
                         </div>
 
                         <div class="col-md-12 col-lg-6">
@@ -1342,7 +1342,7 @@
                                 </option>
 
                             </select>
-                            <span class="text-danger d-none">Photos are required!</span>
+                            <span class="text-danger d-none">Property is required!</span>
                         </div>
 
                         <div class="col-md-12 col-lg-6">
@@ -1352,7 +1352,7 @@
                                 </option>
 
                             </select>
-                            <span class="text-danger d-none">Photos are required!</span>
+                            <span class="text-danger d-none">Units are required!</span>
                         </div>
                         <div class="col-md-12 col-lg-6">
                             <label class="form-label fw-bold fs-18">Invoice Type</label>
@@ -1380,18 +1380,18 @@
                         <div class="col-md-8 col-lg-6">
                             <label class="form-label fw-bold fs-18">Due Date</label>
                             <input type="date" class="form-control form" id="dueDate" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select Due Date" data-bs-container="#addModal">
-                            <span class="text-danger d-none">Photos are required!</span>
+                            <span class="text-danger d-none">Due Date is required!</span>
                         </div>
                         <div class="collapse row" id="collapse1">
                             <div class="col-md-6 col-lg-4">
                                 <label class="form-label fw-bold fs-18">Start Date</label>
                                 <input type="date" class="form-control form" id="startDate" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select Start Date" data-bs-container="#addModal">
-                                <span class="text-danger d-none">Photos are required!</span>
+                                <span class="text-danger d-none">Start Date is required!</span>
                             </div>
                             <div class="col-md-6 col-lg-4">
                                 <label class="form-label fw-bold fs-18">End Date</label>
                                 <input type="date" class="form-control form" id="endDate" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter End Date" data-bs-container="#addModal">
-                                <span class="text-danger d-none">Photos are required!</span>
+                                <span class="text-danger d-none">End Date is required!</span>
                             </div>
                             <div class="col-md-12 col-lg-4">
                                 <label class="form-label fw-bold fs-18">Frequency</label>
@@ -1548,7 +1548,7 @@
                                 <option label="Choose one">
                                 </option>
                             </select>
-                            <span class="text-danger d-none">Photos are required!</span>
+                            <span class="text-danger d-none">Tenant is required!</span>
                         </div>
                         <div class="col-md-12 col-lg-6">
                             <label class="form-label fw-bold fs-18">Invoice Type</label>
@@ -1570,12 +1570,12 @@
                         <div class="col-md-8 col-lg-6">
                             <label class="form-label fw-bold fs-18">Property Name</label>
                             <input type="text" class="form-control form" id="propertyName_update" value="" readonly>
-                            <span class="text-danger d-none">Photos are required!</span>
+                            <span class="text-danger d-none">Property name is required!</span>
                         </div>
                         <div class="col-md-8 col-lg-6">
                             <label class="form-label fw-bold fs-18">Due Date</label>
                             <input type="date" class="form-control form" id="dueDate_update">
-                            <span class="text-danger d-none">Photos are required!</span>
+                            <span class="text-danger d-none">Due Date is required!</span>
                         </div>
                         <div class="collapse row" id="collapse1_update">
                             <div class="col-md-6 col-lg-4">
@@ -3829,7 +3829,7 @@
                                             </button></td>
                                         </tr>`)
             });
-            $(document).on("input", "input[name='amount'], input[name='amount_update']", updateTotal);
+            // $(document).on("input", "input[name='amount'], input[name='amount_update']", updateTotal);
 
             function updateTotal() {
                 var total = 0;
@@ -4473,7 +4473,36 @@
                     }
                 });
             })
-
+            $(document).on('input change','#addModal input, #addModal select, #addModal input, #addModal select,#addModal textarea', function() {
+                updateTotal();
+                    var $field = $(this);
+                    var $errorMessage = $field.next('.text-danger');
+                     if ($field.val() === '' || $field.val() === 'Choose...') {
+                        $field.addClass('border-danger');
+                        $field.removeClass('border-green');
+                        $errorMessage.removeClass('d-none');
+                    } else {
+                        $field.removeClass('border-danger');
+                        $field.addClass('border-green');
+                        $errorMessage.addClass('d-none');
+                    }
+                    
+                });
+                $(document).on('input change','#myModal_edit input, #myModal_edit select, #myModal_edit input, #myModal_edit select,#myModal_edit textarea', function() {
+                updateTotal();
+                    var $field = $(this);
+                    var $errorMessage = $field.next('.text-danger');
+                     if ($field.val() === '' || $field.val() === 'Choose...') {
+                        $field.addClass('border-danger');
+                        $field.removeClass('border-green');
+                        $errorMessage.removeClass('d-none');
+                    } else {
+                        $field.removeClass('border-danger');
+                        $field.addClass('border-green');
+                        $errorMessage.addClass('d-none');
+                    }
+                    
+                });
         });
     </script>
 
