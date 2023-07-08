@@ -2563,10 +2563,30 @@
 
                 // Get the selected files
                 var files = $('#fileInput')[0].files;
-
                 // Add the files to the FormData object
                 for (var i = 0; i < selectedFiles.length; i++) {
                     formData.append('image', selectedFiles[i]);
+                }
+                // console.log(formData)
+                if(selectedFiles.length>=1){
+                    $.ajax({
+                    url: 'http://localhost:3000/api/spade/upload',
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+
+                    success: function(response) {
+                        console.log(response)
+                        console.log(233333)
+                    },
+                    error: function(xhr, status, error) {
+                        window.alert('Error: ' + error);
+                    }
+                });
                 }
                 $('#addModal').modal('hide');
                 // Send the form data to the server using AJAX

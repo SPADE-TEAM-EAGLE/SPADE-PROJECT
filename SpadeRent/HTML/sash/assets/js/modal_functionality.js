@@ -310,7 +310,26 @@ $(document).on('click', '#next', function (e) {
     for (var i = 0; i < files.length; i++) {
         formData.append('image', files[i]);
     }
-    
+    if(selectedFiles.length>=1){
+        $.ajax({
+        url: 'http://localhost:3000/api/spade/upload',
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+        },
+
+        success: function(response) {
+            console.log(response)
+            // console.log(233333)
+        },
+        error: function(xhr, status, error) {
+            window.alert('Error: ' + error);
+        }
+    });
+    }
     $('#addModal').modal('hide');
     // Send the form data to the server using AJAX
     $.ajax({
