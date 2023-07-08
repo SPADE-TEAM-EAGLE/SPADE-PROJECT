@@ -31,6 +31,7 @@ const {
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
 const { fileUpload } = require("../helper/S3Bucket");
+const { verifyMailCheck } = require("../helper/emailVerify");
 const config = process.env;
 
 exports.createUser = async function (req, res) {
@@ -102,10 +103,9 @@ exports.getUser = (req, res) => {
 };
 
 exports.Signin = async function (req, res) {
-  const { email, password, tenant } = req.query;
-  console.log(req.query)
-  // console.log(1)
-  // let selectResult;
+  // const { email, password, tenant } = req.query;
+  const { email, password, tenant } = req.body;
+  
   try {
     // for tenant
     if (tenant == "tenant") {
@@ -117,6 +117,7 @@ exports.Signin = async function (req, res) {
       } else if (
         await bcrypt.compare(password, selectResult[0][0].tenantPassword)
       ) {
+        console.log(config.JWT_SECRET_KEY)
         const token = jwt.sign({ email, password }, config.JWT_SECRET_KEY, {
           expiresIn: "3h",
         });
@@ -141,11 +142,22 @@ exports.Signin = async function (req, res) {
         const token = jwt.sign({ email, password }, config.JWT_SECRET_KEY, {
           expiresIn: "3h",
         });
-        res.status(200).json({
-          token: token,
-          body: selectResult[0][0],
-          message: "Successful Login",
-        });
+        const emai = "umairnazakat2222@gmail.com"
+       const emailMessage =  await verifyMailCheck(emai);
+        if(emailMessage.message == "Your account is locked due to email verification. Firstly verify your email."){
+          res.status(200).json({
+            token: token,
+            body: selectResult[0][0],
+            message: "Email is not verified",
+          });
+        }else{
+          res.status(200).json({
+            token: token,
+            body: selectResult[0][0],
+            message: "Successful Login",
+          });
+        }
+ 
       } else {
         res.status(400).send("Incorrect Password");
       }
@@ -420,7 +432,7 @@ exports.property = async (req, res) => {
   const { userId } = req.body;
   // const userId = 3478;
   try {
-    console.log(req); 
+    console.log(req.body); 
     console.log("111") 
     console.log(propertyName + " " + address); 
     const propertycheckresult = await queryRunner(selectQuery("property", "propertyName", "address"),[propertyName, address]);
@@ -445,13 +457,15 @@ exports.property = async (req, res) => {
         res.status(400).send("Error1");
       } else {
         console.log("1")
+        console.log(req.files);
         const fileNames = req.files.map((file) => file.filename);
 
-        const data = await fileUpload(fileNames)
-        console.log(data)
+        // const data = await fileUpload(fileNames)
+        // console.log(data)
         const propertyID = propertyResult[0].insertId;
         for (let i = 0; i < fileNames.length; i++) {
           const img = fileNames[i];
+          console.log(img);
         const filesImages = await fileUpload(img); 
         const imageDataKey = filesImages[0].key; 
         const imageDataLocation = filesImages[0].location; 
@@ -1279,3 +1293,6 @@ exports.propertyTask = async (req, res) => {
 };
 
 //  ############################# Task property ############################################################
+
+
+
