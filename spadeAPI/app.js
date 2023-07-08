@@ -5,13 +5,13 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const userRoutes = require("./routes/userRoutes");
 const { connect } = require("./config/connection");
-const multer = require("multer");
+// const multer = require("multer");
 const app = express();
-const upload = multer(); // config
+// const upload = multer(); // config
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(upload.any());
+// app.use(upload.any());
 app.use(cors());
 
 app.use((req, res, next) => {
