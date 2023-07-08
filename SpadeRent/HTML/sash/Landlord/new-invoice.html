@@ -825,7 +825,7 @@
                                             <td><input type="text" class="form-control" name="category" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter category here" data-bs-container="#addModal"></td>
                                             <td><input type="text" class="form-control" name="property" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter property here" data-bs-container="#addModal"></td>
                                             <td><input type="text" class="form-control" name="memo" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter memo here" data-bs-container="#addModal"></td>
-                                            <td><input type="text" class="form-control" name="amount" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter amount here" data-bs-container="#addModal"></td>
+                                            <td><input type="text" class="form-control" name="amount" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter amount here" data-bs-container="#addModal" oninput="this.value = this.value.replace(/[^0-9.]/g, '')"></td>
                                             <td><button type="button" class="btn" id="del-btn1">
                                                     <i class="fi fi-rs-trash text-danger fs-5"></i>
                                                 </button></td>
@@ -2516,7 +2516,7 @@ console.log(text.startsWith("Preview"));
                                             <td><input type="text" class="form-control" name="category"></td>
                                             <td><input type="text" class="form-control" name="property"></td>
                                             <td><input type="text" class="form-control" name="memo"></td>
-                                            <td><input type="text" class="form-control" name="amount"></td>
+                                            <td><input type="text" class="form-control" name="amount" oninput="this.value = this.value.replace(/[^0-9.]/g, '')"></td>
                                             <td><button type="button" class="btn" id="del-btn1">
                                                 <i class="fi fi-rs-trash text-danger fs-5"></i>
                                             </button></td>
@@ -3025,6 +3025,11 @@ function updateTotal() {
         });
     </script>
     <script>
+          $(document).ready(function () {
+    $("#succesModal").on('hide.bs.modal', function () {
+        window.location='./create-invoicing.html'
+    })
+})
         function logout() {
             localStorage.removeItem('authtoken');
             window.close();

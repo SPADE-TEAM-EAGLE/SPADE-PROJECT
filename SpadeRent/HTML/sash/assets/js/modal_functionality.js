@@ -101,9 +101,9 @@ function checkFieldsFilled(id) {
 }
 var selectedFiles = [];
 $(document).ready(function () {
-    $("#succesModal").on('hide.bs.modal', function () {
-        window.location='./properties-all.html'
-    })
+    // $("#succesModal").on('hide.bs.modal', function () {
+    //     window.location='./properties-all.html'
+    // })
     $.ajax({
         // url: 'https://backend.app.spaderent.com/api/spade/getStates',
         url: 'https://backend.app.spaderent.com/api/spade/getStates',
