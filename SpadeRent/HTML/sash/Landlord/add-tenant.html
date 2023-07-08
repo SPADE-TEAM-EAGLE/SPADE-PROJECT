@@ -877,14 +877,14 @@
                 <div class="modal-body">
                     <div class="accordion-item mb-4" id="accordion-item1">
                         <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button text-white" type="button" id="accordion-button1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <button class="accordion-button text-white" type="button" id="accordion-button1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne-add-tenant" aria-expanded="true" aria-controls="collapseOne-add-tenant">
                                 <span class="m-0 me-4 fs-1" style="font-weight: bold;">01</span>
                                 <h3 class="m-0"><strong>Tenant Information</strong> <i class="fi fi-rs-pencil"></i><i
                                         class="fi fi-rs-angle-circle-down chevron icon"></i>
                                 </h3>
                             </button>
                         </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div id="collapseOne-add-tenant" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
                                 <form class="row g-3" enctype="multipart/form-data">
                                     <div class="col-md-6">
@@ -965,14 +965,14 @@
                     </div>
                     <div class="accordion-item mb-4" id="accordion-item2">
                         <h2 class="accordion-header" id="headingTwo">
-                            <button class="accordion-button collapsed text-white" type="button" id="accordion-button2" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <button class="accordion-button collapsed text-white" type="button" id="accordion-button2" data-bs-toggle="collapse" data-bs-target="#collapseTwo-add-tenant" aria-expanded="false" aria-controls="collapseTwo-add-tenant">
                                 <span class="m-0 me-4 fs-1" style="font-weight: bold;">02</span>
                                 <h3 class="m-0"><strong>Assign Property</strong> <i class="fi fi-rs-pencil"></i><i
                                         class="fi fi-rs-angle-circle-down chevron icon"></i>
                                 </h3>
                             </button>
                         </h2>
-                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                        <div id="collapseTwo-add-tenant" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
                                 <form class="row g-3">
                                     <div class="col-md-4">
@@ -987,7 +987,7 @@
                                     <div class="col-md-4">
                                         <label for="inputEmail4" class="form-label">Select Property Unit<span
                                                 class="text-danger"> *</span></label>
-                                        <select id="unit" class="form-select" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select your property units" data-bs-container="#addModal">
+                                        <select id="unit" class="form-select" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select your property units" data-bs-container="#addModal" aria-required="true">
                                             <option selected>Choose...</option>
 
                                         </select>
@@ -1009,14 +1009,14 @@
                     </div>
                     <div class="accordion-item" id="accordion-item3">
                         <h2 class="accordion-header" id="headingThree">
-                            <button class="accordion-button collapsed text-white" id="accordion-button3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            <button class="accordion-button collapsed text-white" id="accordion-button3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree-add-tenant" aria-expanded="false" aria-controls="collapseThree-add-tenant">
                                 <span class="m-0 me-4 fs-1" style="font-weight: bold;">03</span>
                                 <h3 class="m-0"><strong>Lease Details</strong> <i class="fi fi-rs-pencil"></i><i
                                         class="fi fi-rs-angle-circle-down chevron icon"></i>
                                 </h3>
                             </button>
                         </h2>
-                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExampe">
+                        <div id="collapseThree-add-tenant" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExampe">
                             <div class="accordion-body">
                                 <form class="row g-3">
                                     <div class="col-md-12">
@@ -1168,7 +1168,7 @@
                         Draft</button> -->
                     <button class="btn btn-close-bottom btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close'>Close</button>
                     <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
-                    <button class="btn text-light button" style='background-color:#1467B0;' id='next' disabled>Next</button>
+                    <button class="btn text-light button" style='background-color:#1467B0;' id='next-add-tenant'>Next</button>
                     <button class="btn text-light button d-none" style='background-color:#1467B0;' id='submit'>Submit</button>
                     <button class="btn text-light button d-none" style='background-color:#1467B0;' id='save'>Save</button>
                 </div>
@@ -2373,6 +2373,7 @@
     <!-- INTERNAL APEXCHART JS -->
     <script src="../assets/js/apexcharts.js"></script>
     <script src="../assets/plugins/apexchart/irregular-data-series.js"></script>
+    <script src="../assets/js/accordian.js"></script>
 
     <!-- INTERNAL Flot JS -->
     <script src="../assets/plugins/flot/jquery.flot.js"></script>
@@ -2940,17 +2941,12 @@
                 accordions.find('.accordion-button').attr('data-bs-toggle', 'collapse').addClass("collapsed");
                 accordions.find('.accordion-collapse').addClass("show");
                 $("#next").removeClass("d-none")
-                if (edit) {
+                
                     $("#save").addClass("d-none")
-                } else {
                     $("#submit").addClass("d-none")
-                }
-
-                // $("#submit").addClass("d-none")
-                // $("#submit").removeAttr('disabled','disabled')
             }
-            $("#next").on('click', () => {
-
+            $(document).on("click","#next", () => {
+                console.log(2222)
                 var accordions = $('.accordion-item');
                 console.log(accordions)
                     // Open all accordions
@@ -2990,7 +2986,7 @@
                 // sendData()
             })
             $("#edit-btn").on('click', () => {
-                setEditable("edit")
+                setEditable()
 
             })
 
@@ -3205,7 +3201,7 @@
                     // Reset accordion button icons
                     accordionButton.find('.fi-rs-exclamation').addClass('fi-rs-angle-circle-down').addClass("chevron").removeClass('fi-rs-exclamation').removeClass("cross");
                     accordionButton.find('.fi-rs-check-circle').addClass('fi-rs-angle-circle-down').addClass("chevron").removeClass('fi-rs-check-circle').removeClass("tick");
-                    $('#next').addClass("disabled");
+                    $('#next').attr("id","next-add-tenant");
                     $('#draft').attr("disabled", "disabled");
                 });
                 $('.row-multiple').each(function() {
@@ -3435,8 +3431,8 @@
         //     $(this).find('input[type="radio"]').prop('checked', false);
         //     $(this).find('.file-grid').empty();
         // });
-        $(document).on('click', '#next', function(e) {
-
+        $(document).on('click', '#next1', function(e) {
+            console.log(2222)
             e.preventDefault();
             // $("#largemodal").addClass("hide");
             var formData = new FormData();

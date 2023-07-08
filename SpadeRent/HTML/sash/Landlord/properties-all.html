@@ -327,7 +327,10 @@
             transform: rotate(-180deg);
             /* Rotate the chevron when accordion is open */
         }
-        
+        .accordion-button[aria-expanded="false"] .chevron {
+            transform: rotate(0deg);
+            /* Rotate the chevron when accordion is open */
+        }
         .table tbody img {
             width: 40px;
             border: transparent;
@@ -750,14 +753,14 @@
                 <div class="modal-body">
                     <div class="accordion-item mb-4" id="accordion-item1">
                         <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button text-white" id="accordian-button-1" type="button" data-bs-toggle="collapse" onclick="checkFieldsFilled('accordion-item1')" id="accordion-button1" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <button class="accordion-button text-white" id="accordian-button-1" type="button" data-bs-toggle="collapse" onclick="checkFieldsFilled('accordion-item1')" id="accordion-button1" data-bs-target="#collapseOne-add-property" aria-expanded="true" aria-controls="collapseOne-add-property">
                                 <span class="m-0 me-4 fs-1" style="font-weight: bold;">01</span>
                                 <h3 class="m-0"><strong>Property Information</strong> <i class="fi fi-rs-pencil"></i><i
                                         class="fi fi-rs-angle-circle-down chevron icon"></i>
                                 </h3>
                             </button>
                         </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div id="collapseOne-add-property" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
                                 <form class="row g-3" enctype="multipart/form-data">
                                     <div class="col-md-12">
@@ -844,7 +847,7 @@
                     </div>
                     <div class="accordion-item" id="accordion-item2">
                         <h2 class="accordion-header" id="headingTwo">
-                            <button class="accordion-button collapsed text-white" onclick="checkFieldsFilled('accordion-item2')" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <button class="accordion-button collapsed text-white" onclick="checkFieldsFilled('accordion-item2')" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo-add-property" aria-expanded="false" aria-controls="collapseTwo-add-property">
                                 <span class="m-0 me-4 fs-1" style="font-weight: bold;">02</span>
                                 <h3 class="m-0"><strong>Property Unit Information</strong> <i
                                         class="fi fi-rs-pencil"></i><i
@@ -852,7 +855,7 @@
                                 </h3>
                             </button>
                         </h2>
-                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                        <div id="collapseTwo-add-property" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                             <form class="row g-3 m-1" enctype="multipart/form-data">
 
                                 <div class="col-12 mb-3">
@@ -871,7 +874,9 @@
                         Draft</button> -->
                     <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close' data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the unique identifier for the property.">Close</button>
                     <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
-                    <a href="javascript:void(0)" class="btn text-light button disabled" style='background-color:#1467B0;' id='next'>Next</a>
+                    <a href="javascript:void(0)" class="btn text-light button d-none" style='background-color:#1467B0;' id='next'>Submit</a>
+                    <button class="btn text-light button" style='background-color:#1467B0;' id='next-add-property'>Next</button>
+
                 </div>
             </div>
         </div>
@@ -2186,6 +2191,7 @@
     <!-- CHART-CIRCLE JS-->
     <script src="../assets/js/circle-progress.min.js"></script>
     <!-- INTERNAL File-Uploads Js-->
+    <script src="../assets/js/accordian.js"></script>
 
     <!-- PIETY CHART JS-->
     <script src="../assets/plugins/peitychart/jquery.peity.min.js"></script>
@@ -2507,7 +2513,11 @@
 
                     accordionButton.find('.fi-rs-exclamation').addClass('fi-rs-angle-circle-down').addClass("chevron").removeClass('fi-rs-exclamation').removeClass("cross");
                     accordionButton.find('.fi-rs-check-circle').addClass('fi-rs-angle-circle-down').addClass("chevron").removeClass('fi-rs-check-circle').removeClass("tick");
-                    $('#next').addClass("disabled");
+                    // $(".chevron").css("transform", "rotate(0deg)");
+
+                    $('#next-add-property').removeClass("d-none");
+                    $('#next').addClass("d-none");
+
                     $('#draft').attr("disabled", "disabled");
                 });
             }
