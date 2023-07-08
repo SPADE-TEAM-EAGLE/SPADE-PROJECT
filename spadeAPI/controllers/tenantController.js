@@ -1,5 +1,5 @@
 const user = require("../models/user");
-const {sendMail} = require('../sendmail/sendmail.js');
+const { sendMail } = require('../sendmail/sendmail.js');
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt');
 const fs = require('fs');
@@ -63,7 +63,6 @@ exports.createTenants = async (req, res) => {
     // console.log(req.body)
     const tenantsCheck = await queryRunner(selectQuery("tenants", "email"), [email]);
     if (tenantsCheck[0].length > 0) {
-
       res.status(200).json({
         message: `Tenants Already exist on this email ${email} `,
       })
@@ -89,16 +88,12 @@ exports.createTenants = async (req, res) => {
             const tenantID = tenantsInsert[0].insertId;
             if (increaseRentData.length >= 1 && increaseRentData[0].date !== "") {
               for (let i = 0; i < increaseRentData.length; i++) {
-
                 const increaseDate = increaseRentData[i].date;
                 const increaseRentAmount = increaseRentData[i].amount;
                 // console.log(increaseDate,increaseRentAmount,propertyID)
                 const increaseRentDataResult = await queryRunner(insertincreaseRentData, [tenantID, propertyID, increaseDate, increaseRentAmount])
-
-
               }
             }
-
             res.status(200).json({
               message: " tenant created successful",
               data: tenantsInsert[0],
@@ -563,7 +558,7 @@ exports.getTenantsByID = async (req, res) => {
 }
 //  ############################# Get tenant ByID End ############################################################
 
- 
+
 
 //  ############################# Update tenants Start ############################################################
 exports.updateTenants = async (req, res) => {
@@ -592,75 +587,75 @@ exports.updateTenants = async (req, res) => {
     } = req.body
     // console.log(req)
     // const {userId}=req.user
-    const tenantcheckresult = await queryRunner( selectQuery("tenants", "id"), [tenantID] ); 
-    if(tenantcheckresult[0].length > 0){
+    const tenantcheckresult = await queryRunner(selectQuery("tenants", "id"), [tenantID]);
+    if (tenantcheckresult[0].length > 0) {
       const checkpropertyUnitID = tenantcheckresult[0][0].propertyUnitID;
       const checkpropertyID = tenantcheckresult[0][0].propertyID;
       const checkincreaseRent = tenantcheckresult[0][0].increaseRent;
-      if(checkpropertyUnitID !== propertyUnitID){
+      if (checkpropertyUnitID !== propertyUnitID) {
         const status = "Vacant";
-        const propertyUnitsResult = await queryRunner(updatePropertyUnitsTenant, [ status, checkpropertyUnitID, checkpropertyID ]);  
+        const propertyUnitsResult = await queryRunner(updatePropertyUnitsTenant, [status, checkpropertyUnitID, checkpropertyID]);
       }
-      if(checkincreaseRent !== increaseRent){
-        const lineItemDelete = await queryRunner(deleteQuery("tenantincreaserent", "tenantID"), [tenantID]);  
+      if (checkincreaseRent !== increaseRent) {
+        const lineItemDelete = await queryRunner(deleteQuery("tenantincreaserent", "tenantID"), [tenantID]);
       }
       currentDate = new Date();
       const ran = Math.floor(100000 + Math.random() * 900000);
       const tenantsInsert = await queryRunner(updateTenants, [firstName, lastName, companyName, email, phoneNumber, address, city, state, zipcode, propertyID, propertyUnitID, rentAmount, gross_or_triple_lease, baseRent, tripleNet, leaseStartDate, leaseEndDate, increaseRent, currentDate, tenantID]);
       if (tenantsInsert[0].affectedRows > 0) {
-        
-          const status = "Occupied";
-          const propertyUnitsResult = await queryRunner(updatePropertyUnitsTenant, [ status, propertyUnitID, propertyID ]);
-          // console.log("11");
-          // console.log(propertyUnitsResult);
-          if (propertyUnitsResult[0].affectedRows > 0) {
-            if(increaseRent == 'No'){
-              res.status(200).json({
-                  message: "Tenants save Successful",
-                  data: tenantsInsert[0],
-                  tenantId:tenantsInsert[0].insertId
-                })
-          }
-          else{
-              // const tenantID = tenantsInsert[0].insertId;
-              if(increaseRentData.length>=1 && increaseRentData[0].date!==""){
-                for(let i=0; i < increaseRentData.length; i++ ){
-                  
-                  const increaseDate = increaseRentData[i].date;
-                  const increaseRentAmount = increaseRentData[i].amount;
-                  const increaseRentDataResult = await queryRunner(insertincreaseRentData, [tenantID, propertyID, increaseDate, increaseRentAmount])
-                }
-              }
-                res.status(200).json({
-                  message: " tenant Updated successful",
-                  data: tenantsInsert[0],
-                  tenantId:tenantsInsert[0].insertId
-                });
 
-          }
-            // insert increase rent amount END
-
-          } else {
-            res.status(400).json({
-
-              message: "Error occur in update tenant property unit"
+        const status = "Occupied";
+        const propertyUnitsResult = await queryRunner(updatePropertyUnitsTenant, [status, propertyUnitID, propertyID]);
+        // console.log("11");
+        // console.log(propertyUnitsResult);
+        if (propertyUnitsResult[0].affectedRows > 0) {
+          if (increaseRent == 'No') {
+            res.status(200).json({
+              message: "Tenants save Successful",
+              data: tenantsInsert[0],
+              tenantId: tenantsInsert[0].insertId
             })
-          } 
+          }
+          else {
+            // const tenantID = tenantsInsert[0].insertId;
+            if (increaseRentData.length >= 1 && increaseRentData[0].date !== "") {
+              for (let i = 0; i < increaseRentData.length; i++) {
 
+                const increaseDate = increaseRentData[i].date;
+                const increaseRentAmount = increaseRentData[i].amount;
+                const increaseRentDataResult = await queryRunner(insertincreaseRentData, [tenantID, propertyID, increaseDate, increaseRentAmount])
+              }
+            }
+            res.status(200).json({
+              message: " tenant Updated successful",
+              data: tenantsInsert[0],
+              tenantId: tenantsInsert[0].insertId
+            });
 
-        }else{
-          res.status(200).json({
-            message: "Tenants is not found",
+          }
+          // insert increase rent amount END
+
+        } else {
+          res.status(400).json({
+
+            message: "Error occur in update tenant property unit"
           })
         }
-          
-          
+
 
       } else {
-        res.status(400).json({
-          message: "tenant not Updated"
+        res.status(200).json({
+          message: "Tenants is not found",
         })
       }
+
+
+
+    } else {
+      res.status(400).json({
+        message: "tenant not Updated"
+      })
+    }
     // }
   }
   catch (error) {
@@ -668,10 +663,10 @@ exports.updateTenants = async (req, res) => {
     res.send("Error occurs in updating Tenants  " + error)
   }
 }
-      //  ############################# Update tenants END ############################################################
+//  ############################# Update tenants END ############################################################
 
 
-      //  ############################# Task tenant ############################################################
+//  ############################# Task tenant ############################################################
 exports.tenantTask = async (req, res) => {
   const { Id } = req.query;
   try {
@@ -679,7 +674,7 @@ exports.tenantTask = async (req, res) => {
     if (taskByIDResult.length > 0) {
       for (let j = 0; j < taskByIDResult[0].length; j++) {
         const taskID = taskByIDResult[0][j].id;
-        const TaskImagesResult = await queryRunner(selectQuery("taskimages", "taskID"),[taskID]);
+        const TaskImagesResult = await queryRunner(selectQuery("taskimages", "taskID"), [taskID]);
         if (TaskImagesResult[0].length > 0) {
           const taskImages = TaskImagesResult[0].map((image) => image.taskImages);
           taskByIDResult[0][j].taskImages = taskImages;
@@ -736,6 +731,5 @@ exports.tenantTask = async (req, res) => {
     res.send("Error Get tenant Task");
   }
 };
- 
+
 //  ############################# Task tenant ############################################################
- 

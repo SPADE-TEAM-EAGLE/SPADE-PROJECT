@@ -6,10 +6,11 @@ const createConnection = async () => {
   if (connection) return connection;
 
   connection = await mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "",
-    database: "spaid",
+    host: "spaderent.cwaiqakemhu8.us-east-1.rds.amazonaws.com",
+    port:"3306",
+    user:"admin",
+    password:"matz1234",
+    database:"spade_Rent"
 
 
 
