@@ -722,12 +722,12 @@ color: #000;
                             <select required id="property" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Related To here" data-bs-container="#addModal">
                                 <option selected>Choose...</option>
                             </select>
-                            <span class="text-danger d-none">Property is required!</span>
+                            <span class="text-danger d-none">This field is required!</span>
                         </div>
                         <div class="col-md-4">
                             <label for="inputEmail4" class="form-label fw-bold">Due Date</label>
                             <input id="dueDate" class="form-control" placeholder="MM/DD/YYYY" type="date" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Due Date here" data-bs-container="#addModal">
-                            <!-- <span class="text-danger d-none">Property ID is required!</span> -->
+                            <span class="text-danger d-none">Due Date is required!</span>
                         </div>
                         <div class="col-md-4">
                             <label for="inputState" class="form-label fw-bold">Status</label>
@@ -940,7 +940,7 @@ color: #000;
                         </h2>
                         <p class="ms-2 mb-0 text-start">Your task has been successfully added.</p>
                         <!-- <p class="ms-2 text-start">Please add tenant to this property.</p> -->
-                        <a data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal" class="btn btn-outline-default btn-pill ms-1 my-2" style='background-color:#1467B0;color: white;'> <i class="fi fi-rs-pencil"></i> ADD NEW TASK</a>
+                        <a  href="create-tasks.html" class="btn btn-outline-default btn-pill ms-1 my-2" style='background-color:#1467B0;color: white;'> <i class="fi fi-rs-pencil"></i> ADD NEW TASK</a>
                         <a class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal">
                             Close
                         </a>
@@ -2135,7 +2135,7 @@ color: #000;
                         $("#header-user").text(toTitleCase(response.user))
                             // console.log(response)
                         $("#assignee").empty()
-                        $("#assignee").append($("<option></option>").text("Choose..."))
+                        // $("#assignee").append($("<option></option>").text("Choose..."))
                         $("#assignee_update").empty()
                         $("#assignee_update").append($("<option></option>").text("Choose..."))
                         if(response.data.length===0){
@@ -2843,7 +2843,21 @@ color: #000;
     
                 }
                 getData()
-    
+                $(document).on('input change','#addModal input, #addModal select, #addModal input, #addModal select,#addModal textarea', function() {
+                // updateTotal();
+                    var $field = $(this);
+                    var $errorMessage = $field.next('.text-danger');
+                     if ($field.val() === '' || $field.val() === 'Choose...') {
+                        $field.addClass('border-danger');
+                        $field.removeClass('border-green');
+                        $errorMessage.removeClass('d-none');
+                    } else {
+                        $field.removeClass('border-danger');
+                        $field.addClass('border-green');
+                        $errorMessage.addClass('d-none');
+                    }
+                    
+                });
             })
         </script>
 <script>
