@@ -441,9 +441,7 @@ exports.property = async (req, res) => {
         res.status(400).send("Error1");
       } else {
         const fileNames = req.files.map((file) => file.filename);
-
-        const data = await fileUpload(fileNames)
-        console.log(data)
+        
         const propertyID = propertyResult[0].insertId;
         for (let i = 0; i < fileNames.length; i++) {
           const img = fileNames[i];
