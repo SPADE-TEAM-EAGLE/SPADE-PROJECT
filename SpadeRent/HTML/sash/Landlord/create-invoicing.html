@@ -1472,8 +1472,8 @@
                     <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close'>Close</button>
                     <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
                     <div class="btn-group rounded-split mt-2 mb-2">
-                        <button type="button" class="btn btn-pill btn-primary save-invoice">Save</button>
-                        <button type="button" class="btn btn-pill btn-primary dropdown-toggle px-1" id="toggle-button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button type="button" class="btn btn-pill btn-primary save-invoice" disabled>Save</button>
+                        <button type="button" class="btn btn-pill btn-primary dropdown-toggle px-1" id="toggle-button" data-bs-toggle="dropdown" aria-expanded="false" disabled>
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
@@ -1749,8 +1749,8 @@
                             <strong class="color-primary">Congratulations!&nbsp;</strong>
                             <i class="fi fi-rs-check-circle text-success"></i>
                         </h2>
-                        <p class="ms-2 mb-0 text-start">Your Invoice with INV-89900A was successfully</p>
-                        <p class="ms-2 text-start">sent to John Adams.</p>
+                        <p class="ms-2 mb-0 text-start">Your Invoice was successfully</p>
+                        <p class="ms-2 text-start" id="succes-tenantName">sent to </p>
                     </div>
                     <a data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal" class="btn btn-outline-default btn-pill ms-1 my-2" id="succes-addtenant-close" style='background-color:#1467B0;color: white;'><i
                             class="fi fi-rs-plus-small" style="vertical-align: middle;"></i> Create New Invoice</a>
@@ -1986,8 +1986,8 @@
                     <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close'>Close</button>
                     <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
                     <div class="btn-group rounded-split mt-2 mb-2">
-                        <button type="button" class="btn btn-pill btn-primary save-invoice">Save</button>
-                        <button type="button" class="btn btn-pill btn-primary dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button type="button" class="btn btn-pill btn-primary save-invoice" disabled>Save</button>
+                        <button type="button" class="btn btn-pill btn-primary dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" disabled>
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
@@ -3597,10 +3597,14 @@
                         },
 
                         success: function(response) {
+                            
+                            const tenant=tenantData.find(obj => obj.tenantID == selectedTenant)
+                            console.log(tenant)
                             $("#addModal").modal("hide")
                             getData()
                             $('#addModal input[type="text"], #addModal input[type="date"], #addModal textarea').val('');
                             $('#addModal select').prop('selectedIndex', 0);
+                            $("#succes-tenantName").text(`sent to ${tenant.firstName+" "+tenant.lastName}.`)
                             $("#succesModal").modal("show")
 
                         },
