@@ -103,7 +103,6 @@ exports.getUser = (req, res) => {
 
 exports.Signin = async function (req, res) {
   const { email, password, tenant } = req.query;
-  console.log(req.query)
   // console.log(1)
   // let selectResult;
   try {
@@ -402,58 +401,68 @@ exports.pricingPlan = async (req, res) => {
 //  ############################# Property Start ############################################################
 
 exports.property = async (req, res) => {
-  // console.log(1)
-  const {
-    // landlordID,
-    propertyName,
-    address,
-    city,
-    state,
-    zipCode,
-    propertyType,
-    propertySQFT,
-    units,
-  } = req.body;
+  // let {
+  //   propertyName,
+  //   address,
+  //   city,
+  //   state,
+  //   zipCode,
+  //   propertyType,
+  //   propertySQFT,
+  //   units,
+  // } = req.body;
+
+  const uploadResponse = await fileUpload(req, res);
   const { userId } = req.user;
-  // const userId = 3478;
+
   try {
+    if (!req.body.propertyName || !req.body.address) {
+      return res.status(400).json({ error: "Missing required fields" });
+    }
     const propertycheckresult = await queryRunner(
       selectQuery("property", "propertyName", "address"),
-      [propertyName, address]
+      [req.body.propertyName, req.body.address]
     );
+
     if (propertycheckresult[0].length > 0) {
-      res.send("Property Already Exist");
+      res.send("Property Already Exists");
     } else {
       const status = "Non-active";
+
       const propertyResult = await queryRunner(insertInProperty, [
         userId,
-        propertyName,
-        address,
-        city,
-        state,
-        zipCode,
-        propertyType,
-        propertySQFT,
+        req.body.propertyName,
+        req.body.address,
+        req.body.city,
+        req.body.state,
+        req.body.zipCode,
+        req.body.propertyType,
+        req.body.propertySQFT,
         status,
-        units,
+        req.body.units,
       ]);
+
       if (propertyResult.affectedRows === 0) {
         res.status(400).send("Error1");
       } else {
-        const fileNames = req.files.map((file) => file.filename);
-        
+        console.log(uploadResponse.image_url)
+        // const fileNames = uploadResponse.map((file) => file.filename);
         const propertyID = propertyResult[0].insertId;
-        for (let i = 0; i < fileNames.length; i++) {
-          const img = fileNames[i];
+
+        for (let i = 0; i < uploadResponse.image_url.length; i++) {
+          const img = uploadResponse.image_url[i].location;
+
           const propertyImageResult = await queryRunner(insertInPropertyImage, [
             propertyID,
             img,
           ]);
+
           if (propertyImageResult.affectedRows === 0) {
             res.send("Error2");
             return;
           }
-        } //sss
+        }
+
         for (let i = 0; i < units; i++) {
           const propertyResult = await queryRunner(insertInPropertyUnits, [
             propertyID,
@@ -462,24 +471,28 @@ exports.property = async (req, res) => {
             "",
             "Vacant",
           ]);
+
           if (propertyResult.affectedRows === 0) {
-            res.send("Error3 error occur in inserted units");
+            res.send("Error3 error occurred in inserted units");
             return;
           }
         }
-        //
+
         res.status(200).json({
-          message: "property created successful",
-          propertyId: propertyResult[0].insertId
+          message: "Property created successfully",
+          propertyId: propertyResult[0].insertId,
         });
       }
     }
   } catch (error) {
-    res.status(400).send("Error4");
+    res.status(400).json({
+      message: "Error",
+      error: error.message,
+    });
     console.log(error);
-    // console.log(req.files.map((file) => file.filename));
   }
 };
+
 //  ############################# Property End ############################################################
 
 //  ############################# Get Property Start ############################################################
