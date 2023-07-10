@@ -65,7 +65,7 @@ exports.insertInProperty =
   "INSERT INTO property (landlordID, propertyName, address, city, state, zipCode, propertyType, propertySQFT,status,units) VALUES (?,?,?,?,?,?,?,?,?,?)";
 exports.insertInPropertyImage = "INSERT INTO propertyimage (propertyID, Image, imageKey) VALUES (?,?,?)";
 exports.insertInTaskImage =
-  "INSERT INTO taskimages (taskID, taskImages) VALUES (?,?)";
+  "INSERT INTO taskimages (taskID, taskImages, taskImagesKey) VALUES (?,?,?)";
 exports.insertInPropertyUnits =
   "INSERT INTO propertyunits (propertyID, unitNumber,Area,unitDetails,status) VALUES (?,?,?,?,?)";
 exports.updateProperty =
