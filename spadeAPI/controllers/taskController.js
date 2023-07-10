@@ -43,6 +43,7 @@ exports.addVendors = async (req, res) => {
     phone,
     email,
     categoryID,
+    
   } = req.body;
 const {userId}=req.user
 // console.log(userId)
@@ -134,6 +135,7 @@ exports.addTasks = async (req, res) => {
     note,
     notifyTenant,
     notifyVendor,
+    images
     // created_at,
     // created_by,
   } = req.body;
@@ -171,13 +173,15 @@ exports.addTasks = async (req, res) => {
       // else {
         const tasksID = TasksResult[0].insertId;
         // console.log(req.files)
-        if(req.files){ 
-        const fileNames = req.files.map((file) => file.filename);
+        if(images){ 
+        const fileNames = images;
         for (let i = 0; i < fileNames.length; i++) {
-          const taskImages = fileNames[i];
+          const taskImages = fileNames[i].image_url;;
+          const taskImagesKey = fileNames[i].image_key;
           const taskImageResult = await queryRunner(insertInTaskImage, [
             tasksID,
             taskImages,
+            taskImagesKey
           ]);
           if (taskImageResult.affectedRows === 0) {
             return res.send("Error2");
@@ -451,7 +455,8 @@ exports.updateTasks = async (req, res) => {
     existingImages,
     notifyTenant,
     notifyVendor,
-    message
+    message,
+    images
   } = req.body;
   const { userId, userName  } = req.user;
   // const { userId, userName } = req.user;
@@ -482,37 +487,44 @@ exports.updateTasks = async (req, res) => {
 
 
       if (taskCheckResult.length > 0) {
-        // console.log(taskCheckResult)
-        const taskimages = taskCheckResult[0].map((image) => image.taskImages);
-        // console.log(taskimages)
-        let existingImg = existingImages.split(",");
-        const imagesToDelete = taskimages.filter(
-          (element) => !existingImg.includes(element)
-        );
-
-        // Combine the common elements with array2
-          // console.log("imagesToDeleted",imagesToDelete)
-        imageToDelete(imagesToDelete);
-        let taskDeleteresult = [{ affectedRows: 0 }];
-        // delete images Data into database
-        if (imagesToDelete.length > 0) {
-          for (let i = 0; i < imagesToDelete.length; i++) {
-            taskDeleteresult = await queryRunner(
-              deleteQuery("taskimages", "taskImages"),
-              [imagesToDelete[i]]
-            );
-            // console.log(taskDeleteresult)
-          }
+        for (let i = 0; i < images.length; i++) {
+          const image = images[i].image_url;
+        const taskImagesDeleteResult = await queryRunner(deleteQuery("taskimages",), [id, images]);
         }
+        // // console.log(taskCheckResult)
+        // const taskimages = taskCheckResult[0].map((image) => image.taskImages);
+        // // console.log(taskimages)
+        // let existingImg = existingImages.split(",");
+        // const imagesToDelete = taskimages.filter(
+        //   (element) => !existingImg.includes(element)
+        // );
+
+        // // Combine the common elements with array2
+        //   // console.log("imagesToDeleted",imagesToDelete)
+        // imageToDelete(imagesToDelete);
+        // let taskDeleteresult = [{ affectedRows: 0 }];
+        // // delete images Data into database
+        // if (imagesToDelete.length > 0) {
+        //   for (let i = 0; i < imagesToDelete.length; i++) {
+        //     taskDeleteresult = await queryRunner(
+        //       deleteQuery("taskimages", "taskImages"),
+        //       [imagesToDelete[i]]
+        //     );
+        //     // console.log(taskDeleteresult)
+        //   }
+        // }
  
-        const fileNames = req.files.map((file) => file.filename);
-        existingImg = [...fileNames];
+        const fileNames = images;
+        // existingImg = [...fileNames];
         // using loop to send new images data into database
-        for (let i = 0; i < existingImg.length; i++) {
-          const img = existingImg[i];
+        for (let i = 0; i < fileNames.length; i++) {
+          // const img = existingImg[i];
+          const image = images[i].image_url;
+        const key = images[i].image_key;
           const propertyImageResult = await queryRunner(insertInTaskImage, [
             taskID,
-            img,
+            image,
+            key,
           ]);
           if (propertyImageResult.affectedRows === 0) {
             return res.send("Error2");

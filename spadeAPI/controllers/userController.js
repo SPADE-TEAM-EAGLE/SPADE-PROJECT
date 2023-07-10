@@ -30,6 +30,7 @@ const {
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
 const { fileUpload } = require("../helper/S3Bucket");
+const { verifyMailCheck } = require("../helper/emailVerify");
 const config = process.env;
 
 exports.createUser = async function (req, res) {
@@ -101,10 +102,9 @@ exports.getUser = (req, res) => {
 };
 
 exports.Signin = async function (req, res) {
-  const { email, password, tenant } = req.query;
-  console.log(req.query)
-  // console.log(1)
-  // let selectResult;
+  // const { email, password, tenant } = req.query;
+  const { email, password, tenant } = req.body;
+  
   try {
     // for tenant
     if (tenant == "tenant") {
@@ -116,6 +116,7 @@ exports.Signin = async function (req, res) {
       } else if (
         await bcrypt.compare(password, selectResult[0][0].tenantPassword)
       ) {
+        console.log(config.JWT_SECRET_KEY)
         const token = jwt.sign({ email, password }, config.JWT_SECRET_KEY, {
           expiresIn: "3h",
         });
@@ -140,11 +141,22 @@ exports.Signin = async function (req, res) {
         const token = jwt.sign({ email, password }, config.JWT_SECRET_KEY, {
           expiresIn: "3h",
         });
-        res.status(200).json({
-          token: token,
-          body: selectResult[0][0],
-          message: "Successful Login",
-        });
+        const emai = "umairnazakat2222@gmail.com"
+       const emailMessage =  await verifyMailCheck(emai);
+        if(emailMessage.message == "Your account is locked due to email verification. Firstly verify your email."){
+          res.status(200).json({
+            token: token,
+            body: selectResult[0][0],
+            message: "Email is not verified",
+          });
+        }else{
+          res.status(200).json({
+            token: token,
+            body: selectResult[0][0],
+            message: "Successful Login",
+          });
+        }
+ 
       } else {
         res.status(400).send("Incorrect Password");
       }
@@ -417,16 +429,18 @@ exports.property = async (req, res) => {
     propertySQFT,
     units,
   } = req.body;
-  const { userId } = req.user;
+  // const { userId } = req.user;
+  const { userId } = req.body;
   // const userId = 3478;
   try {
-    const propertycheckresult = await queryRunner(
-      selectQuery("property", "propertyName", "address"),
-      [propertyName, address]
-    );
+    console.log(req.body); 
+    console.log("111") 
+    console.log(propertyName + " " + address); 
+    const propertycheckresult = await queryRunner(selectQuery("property", "propertyName", "address"),[propertyName, address]);
     if (propertycheckresult[0].length > 0) {
       res.send("Property Already Exist");
     } else {
+      console.log("21") 
       const status = "Non-active";
       const propertyResult = await queryRunner(insertInProperty, [
         userId,
@@ -443,20 +457,31 @@ exports.property = async (req, res) => {
       if (propertyResult.affectedRows === 0) {
         res.status(400).send("Error1");
       } else {
+        console.log("1")
+        console.log(req.files);
         const fileNames = req.files.map((file) => file.filename);
-        
+
+        // const data = await fileUpload(fileNames)
+        // console.log(data)
         const propertyID = propertyResult[0].insertId;
         for (let i = 0; i < fileNames.length; i++) {
           const img = fileNames[i];
+          console.log(img);
+        const filesImages = await fileUpload(img); 
+        const imageDataKey = filesImages[0].key; 
+        const imageDataLocation = filesImages[0].location; 
           const propertyImageResult = await queryRunner(insertInPropertyImage, [
             propertyID,
-            img,
+            imageDataLocation,
+            imageDataKey
           ]);
           if (propertyImageResult.affectedRows === 0) {
             res.send("Error2");
             return;
           }
         } //sss
+        console.log("1")
+
         for (let i = 0; i < units; i++) {
           const propertyResult = await queryRunner(insertInPropertyUnits, [
             propertyID,
@@ -465,6 +490,7 @@ exports.property = async (req, res) => {
             "",
             "Vacant",
           ]);
+        console.log("1") 
           if (propertyResult.affectedRows === 0) {
             res.send("Error3 error occur in inserted units");
             return;
@@ -478,7 +504,7 @@ exports.property = async (req, res) => {
       }
     }
   } catch (error) {
-    res.status(400).send("Error4");
+    res.status(400).send(error);
     console.log(error);
     // console.log(req.files.map((file) => file.filename));
   }
@@ -628,6 +654,7 @@ exports.propertyUpdate = async (req, res) => {
       status,
       id,
       units,
+      images,
     } = req.body;
     const { userId } = req.user;
     // console.log(`step : 2 send all values data into database`);
@@ -653,39 +680,41 @@ exports.propertyUpdate = async (req, res) => {
       );
 
       if (propertycheckresult.length > 0) {
-        propertyimages = propertycheckresult[0].map((image) => image.Image);
-        let existingImg = existingImages.split(",");
-        const imagesToDelete = propertyimages.filter(
-          (element) => !existingImg.includes(element)
-        );
+        // propertyimages = propertycheckresult[0].map((image) => image.Image);
+        // let existingImg = existingImages.split(",");
+        // const imagesToDelete = propertyimages.filter(
+        //   (element) => !existingImg.includes(element)
+        // );
 
-        // Combine the common elements with array2
+        // // Combine the common elements with array2
 
-        imageToDelete(imagesToDelete);
-        let propertyDeleteresult = [{ affectedRows: 0 }];
-        // delete images Data into database
-        if (imagesToDelete.length > 0) {
-          for (let i = 0; i < imagesToDelete.length; i++) {
+        // imageToDelete(imagesToDelete);
+        // let propertyDeleteresult = [{ affectedRows: 0 }];
+        // // delete images Data into database
+        // if (imagesToDelete.length > 0) {
+          for (let i = 0; i < images.length; i++) {
+            const image = images[i].image_url;
             propertyDeleteresult = await queryRunner(
-              deleteQuery("propertyimage", "Image"),
-              [imagesToDelete[i]]
-            );
+              deleteQuery("propertyimage", "Image"),[image]);
             // console.log(propertyDeleteresult)
           }
-        }
+        // }
 
         // console.log(`step : 4 delete previous images data into database propertyid = ${id}`);
         // console.log(propertyDeleteresult)
         // if (propertyDeleteresult[0].affectedRows > 0) {
 
-        const fileNames = req.files.map((file) => file.filename);
-        existingImg = [...fileNames];
+        const fileNames = images;
+        // existingImg = [...fileNames];
         // using loop to send new images data into database
-        for (let i = 0; i < existingImg.length; i++) {
-          const img = existingImg[i];
+        for (let i = 0; i < fileNames.length; i++) {
+          // const img = existingImg[i];
+          const image = images[i].image_url;
+        const key = images[i].image_key;
           const propertyImageResult = await queryRunner(insertInPropertyImage, [
             id,
-            img,
+            image,
+            key
           ]);
           if (propertyImageResult.affectedRows === 0) {
             return res.send("Error2");
@@ -1268,3 +1297,6 @@ exports.propertyTask = async (req, res) => {
 };
 
 //  ############################# Task property ############################################################
+
+
+

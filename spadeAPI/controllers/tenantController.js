@@ -169,48 +169,6 @@ exports.sendInvitationLink = async (req, res) => {
 
 //  ############################# tenant email send END  ############################################################
 
-//  ############################# Tenant verify Mail Check Start  ############################################################
-
-exports.verifyMailCheck = async (req, res) => {
-  const { landlordID, email } = req.body;
-  try {
-    const selectTenantResult = await queryRunner(selectQuery("users", "id"), [landlordID])
-    if (selectTenantResult[0].length > 0) {
-
-      const createdDate = selectTenantResult[0][0].created_at;
-      // const createdDate = new Date('2023-05-27 15:34:32');
-      const currentDate = new Date();
-      const differenceInMilliseconds = currentDate - createdDate;
-      const differenceInSeconds = Math.floor(differenceInMilliseconds / 1000);
-      const differenceInMinutes = Math.floor(differenceInSeconds / 60);
-      const differenceInHours = Math.floor(differenceInMinutes / 60);
-      const differenceInDays = Math.floor(differenceInHours / 24);
-      if (differenceInDays > 0) {
-        return res.status(200).json({
-          message: `Your remaining days is ${differenceInDays} please verify your email otherwise your account will locked after ${differenceInDays} days`
-        });
-      } else if (differenceInDays == 0) {
-        return res.status(200).json({
-
-          message: `Today is your last day so Kindly verify your email otherwise your account will locked on tomorrow`
-        });
-      } else {
-        return res.status(200).json({
-          remainingDays: `Your account is locked due to email verification firstly verify your email`
-        });
-      }
-
-    } else {
-      return res.status(400).send('landlord is not exists');
-    }
-
-    // res.send("Email sent successfully"); // Sending success response
-  } catch (error) {
-    res.send("Error occurs in verifying the landlord email " + error); // Sending error response
-  }
-};
-
-//  ############################# Tenant verify Mail Check END  ############################################################
 
 //  ############################# Tenant Reset Email ############################################################
 exports.createResetEmailTenant = async (req, res) => {
@@ -733,3 +691,50 @@ exports.tenantTask = async (req, res) => {
 };
 
 //  ############################# Task tenant ############################################################
+
+
+
+//  ############################# Tenant verify Mail Check Start  ############################################################
+
+exports.verifyMailCheck = async (req, res) => {
+  const { landlordID, email } = req.body;
+  try {
+    const selectTenantResult = await queryRunner(selectQuery("users", "Email"), [email])
+    if (selectTenantResult[0].length > 0) {
+
+      const createdDate = selectTenantResult[0][0].updated_at;
+      // const createdDate = new Date('2023-05-27 15:34:32');
+      const currentDate = new Date();
+      const differenceInMilliseconds = currentDate - createdDate;
+      const differenceInSeconds = Math.floor(differenceInMilliseconds / 1000);
+      const differenceInMinutes = Math.floor(differenceInSeconds / 60);
+      const differenceInHours = Math.floor(differenceInMinutes / 60);
+      const differenceInDays = Math.floor(differenceInHours / 24);
+      if (differenceInDays > 0) {
+        return res.status(200).json({
+          message: `Your remaining days is ${differenceInDays} please verify your email otherwise your account will locked after ${differenceInDays} days`
+        });
+      } else if (differenceInDays == 0) {
+        return res.status(200).json({
+
+          message: `Today is your last day so Kindly verify your email otherwise your account will locked on tomorrow`,
+          date : createdDate
+        });
+      } else {
+        return res.status(200).json({
+          remainingDays: `Your account is locked due to email verification firstly verify your email`,
+          date : createdDate
+        });
+      }
+
+    } else {
+      return res.status(400).send('landlord is not exists');
+    }
+
+    // res.send("Email sent successfully"); // Sending success response
+  } catch (error) {
+    res.send("Error occurs in verifying the landlord email " + error); // Sending error response
+  }
+};
+
+//  ############################# Tenant verify Mail Check END  ############################################################

@@ -15,7 +15,6 @@ const MultiUpload = upload.fields([
 const s3 = new aws.S3();
 
 function fileUpload(req,res) {
-
     MultiUpload(req, res, function (err) {
         console.log(req)
         if (err) {
