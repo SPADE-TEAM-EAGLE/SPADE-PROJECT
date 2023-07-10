@@ -735,12 +735,12 @@ exports.verifyMailCheck = async (req, res) => {
         return res.status(200).json({
 
           message: `Today is your last day so Kindly verify your email otherwise your account will locked on tomorrow`,
-          date : createdDate
+          date: createdDate
         });
       } else {
         return res.status(200).json({
           remainingDays: `Your account is locked due to email verification firstly verify your email`,
-          date : createdDate
+          date: createdDate
         });
       }
 

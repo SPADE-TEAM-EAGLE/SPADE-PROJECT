@@ -6,14 +6,19 @@ const cookieParser = require("cookie-parser");
 const userRoutes = require("./routes/userRoutes");
 const { connect } = require("./config/connection");
 const multer = require("multer");
+const AWS = require("aws-sdk");
+
 const app = express();
-const upload = multer(); // config
+// const upload = multer(); // config
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(upload.any());
+// app.use(upload.any());
 app.use(cors());
-
+AWS.config.update({
+  accessKeyId: 'AKIA5HKBWH6Q3F2PKPMK',
+  secretAccessKey: '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',
+});
 app.use((req, res, next) => {
   res.header("Cache-Control", "no-cache, no-store, must-revalidate");
   res.header("Pragma", "no-cache");
