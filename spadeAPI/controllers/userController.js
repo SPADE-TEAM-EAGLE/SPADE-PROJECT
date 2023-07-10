@@ -653,6 +653,7 @@ exports.propertyUpdate = async (req, res) => {
       status,
       id,
       units,
+      images,
     } = req.body;
     const { userId } = req.user;
     // console.log(`step : 2 send all values data into database`);
@@ -678,39 +679,41 @@ exports.propertyUpdate = async (req, res) => {
       );
 
       if (propertycheckresult.length > 0) {
-        propertyimages = propertycheckresult[0].map((image) => image.Image);
-        let existingImg = existingImages.split(",");
-        const imagesToDelete = propertyimages.filter(
-          (element) => !existingImg.includes(element)
-        );
+        // propertyimages = propertycheckresult[0].map((image) => image.Image);
+        // let existingImg = existingImages.split(",");
+        // const imagesToDelete = propertyimages.filter(
+        //   (element) => !existingImg.includes(element)
+        // );
 
-        // Combine the common elements with array2
+        // // Combine the common elements with array2
 
-        imageToDelete(imagesToDelete);
-        let propertyDeleteresult = [{ affectedRows: 0 }];
-        // delete images Data into database
-        if (imagesToDelete.length > 0) {
-          for (let i = 0; i < imagesToDelete.length; i++) {
+        // imageToDelete(imagesToDelete);
+        // let propertyDeleteresult = [{ affectedRows: 0 }];
+        // // delete images Data into database
+        // if (imagesToDelete.length > 0) {
+          for (let i = 0; i < images.length; i++) {
+            const image = images[i].image_url;
             propertyDeleteresult = await queryRunner(
-              deleteQuery("propertyimage", "Image"),
-              [imagesToDelete[i]]
-            );
+              deleteQuery("propertyimage", "Image"),[image]);
             // console.log(propertyDeleteresult)
           }
-        }
+        // }
 
         // console.log(`step : 4 delete previous images data into database propertyid = ${id}`);
         // console.log(propertyDeleteresult)
         // if (propertyDeleteresult[0].affectedRows > 0) {
 
-        const fileNames = req.files.map((file) => file.filename);
-        existingImg = [...fileNames];
+        const fileNames = images;
+        // existingImg = [...fileNames];
         // using loop to send new images data into database
-        for (let i = 0; i < existingImg.length; i++) {
-          const img = existingImg[i];
+        for (let i = 0; i < fileNames.length; i++) {
+          // const img = existingImg[i];
+          const image = images[i].image_url;
+        const key = images[i].image_key;
           const propertyImageResult = await queryRunner(insertInPropertyImage, [
             id,
-            img,
+            image,
+            key
           ]);
           if (propertyImageResult.affectedRows === 0) {
             return res.send("Error2");
