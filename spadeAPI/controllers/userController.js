@@ -33,7 +33,7 @@ const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
 const { fileUpload, deleteImageFromS3 } = require("../helper/S3Bucket");
 const { verifyMailCheck } = require("../helper/emailVerify");
-const userServices = require("../../Services/userServices");
+const userServices = require("../Services/userServices");
 const config = process.env;
 
 exports.createUser = async function (req, res) {
