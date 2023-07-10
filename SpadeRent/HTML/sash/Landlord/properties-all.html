@@ -2357,7 +2357,7 @@
         $(document).ready(function() {
             // $('#infoModal').modal('show')
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getStates',
+                url: 'http://localhost:3000/api/spade/getStates',
                 method: 'GET',
                 success: function({
                     data
@@ -2536,7 +2536,6 @@
             $(document).on('click', '#next', function(e) {
     e.preventDefault();
 
-    var formData = new FormData();
     var propertyName = $("#propertyName").val();
     var address = $("#address").val();
     var city = $("#city").val();
@@ -2546,45 +2545,42 @@
     var propertySQFT = $("#propertyTotalSF").val();
     var units = $("#units").val();
 
-    formData.append('propertyName', propertyName);
-    formData.append('address', address);
-    formData.append('city', city);
-    formData.append('state', state);
-    formData.append('zipCode', zipCode);
-    formData.append('propertyType', propertyType);
-    formData.append('propertySQFT', propertySQFT);
-    formData.append('units', units);
-
     var selectedFiles = $('#fileInput')[0].files;
-    for (var i = 0; i < selectedFiles.length; i++) {
-        formData.append('image', selectedFiles[i]);
-    }
 
     if (selectedFiles.length >= 1) {
+        var uploadFormData = new FormData();
+        for (var i = 0; i < selectedFiles.length; i++) {
+            uploadFormData.append('image', selectedFiles[i]);
+        }
+$("#addModal").modal("hide")
         $.ajax({
             url: 'http://localhost:3000/api/spade/upload',
             type: 'POST',
-            data: formData,
+            data: uploadFormData,
             contentType: false,
             processData: false,
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
             },
             success: function(response) {
-                var imageArr = response.images;
-                var imageFormData = new FormData();
-                for (var j = 0; j < imageArr.length; j++) {
-                    imageFormData.append('images', imageArr[j]);
-                }
-                formData.delete("image");
-                formData.append("images", imageFormData);
+                var imageArray = response.images;
+                var propertyData = {
+                    propertyName: propertyName,
+                    address: address,
+                    city: city,
+                    state: state,
+                    zipCode: zipCode,
+                    propertyType: propertyType,
+                    propertySQFT: propertySQFT,
+                    units: units,
+                    images: imageArray
+                };
 
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/property',
+                    url: 'http://localhost:3000/api/spade/property',
                     type: 'POST',
-                    data: formData,
-                    contentType: false,
-                    processData: false,
+                    data: JSON.stringify(propertyData),
+                    contentType: 'application/json',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
@@ -2608,12 +2604,24 @@
             }
         });
     } else {
+        var propertyData = {
+            propertyName: propertyName,
+            address: address,
+            city: city,
+            state: state,
+            zipCode: zipCode,
+            propertyType: propertyType,
+            propertySQFT: propertySQFT,
+            units: units,
+            images: []
+        };
+$("#addModal").modal("hide")
+
         $.ajax({
-            url: 'https://backend.app.spaderent.com/api/spade/property',
+            url: 'http://localhost:3000/api/spade/property',
             type: 'POST',
-            data: formData,
-            contentType: false,
-            processData: false,
+            data: JSON.stringify(propertyData),
+            contentType: 'application/json',
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
             },
@@ -2633,6 +2641,7 @@
         });
     }
 });
+
 
             let propertyId;
 
@@ -2764,7 +2773,7 @@
         function updateTable() {
             $('#table_body').empty();
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/allproperty',
+                url: 'http://localhost:3000/api/spade/allproperty',
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -2866,7 +2875,7 @@
 
             formData.append("existingImages", existingImageNames)
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/updateProperty',
+                url: 'http://localhost:3000/api/spade/updateProperty',
                 // url: 'http://ec2-54-158-103-230.compute-1.amazonaws.com:3000/api/spade/updateProperty',
                 type: 'PUT',
                 data: formData,
@@ -2895,7 +2904,7 @@
                 // delete using AJAX
                 $('#myModal_delete').modal('hide');
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/propertyDelete',
+                    url: 'http://localhost:3000/api/spade/propertyDelete',
                     type: 'DELETE',
                     data: JSON.stringify({
                         "id": propertyId
@@ -2924,13 +2933,13 @@
             selectedFilesContainer.empty();
             console.log(selectedFiles)
             selectedFiles.forEach(function(file, index) {
-
+                console.log(file)
                 var fileElement = $('<div>')
                     .addClass('selected-file')
                     .append(
                         $('<img>')
                         .addClass('file-preview')
-                        .attr('src', typeof file === "object" ? URL.createObjectURL(file) : '../../../../spadeAPI/uploads/' + file)
+                        .attr('src', typeof file === "object" ? URL.createObjectURL(file) : file)
                     )
                     .append(
                         $('<div>')
@@ -2972,7 +2981,7 @@
             $("#global-loader").fadeIn("fast")
                 // console.log(22)
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/allproperty',
+                url: 'http://localhost:3000/api/spade/allproperty',
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -2996,10 +3005,8 @@
                         var tableBody = $('#table_body');
 
                         tableBody.empty();
-
-                        response.data[0] ?.forEach(function(property) {
-                            var image = '<td><img src="../../../../spadeAPI/uploads/' + property.images[0] + '" alt=""></td>';
-                            // var image = '<td><img src="../../../../../../Desktop/spade API 2/uploads/image-1684250579662.png" alt="hhghghgh"></td>';
+                        response.data[0].forEach(function(property) {
+  var image = '<td><img src="' + property.images[0] + '" alt=""></td>';
 
                             var propertyId = '<td class="property-id " style="font-weight: 600;">' + property
                                 .id + '</td>';

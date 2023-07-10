@@ -16,7 +16,7 @@ const s3 = new aws.S3();
 
 function fileUpload(req,res) {
     MultiUpload(req, res, function (err) {
-        console.log(req)
+       
         if (err) {
             return res.status(422).send({
                 errors: [{ title: "File Upload Error", detail: err.message }],
@@ -36,28 +36,28 @@ function fileUpload(req,res) {
             
     });
 }
+function fileDelete(req, res) {
+    const { key } = req.params;
 
+    // Specify the bucket and key of the file you want to delete
+    const params = {
+        Bucket: "spades3bucket",
+        Key: key,
+    };
+    // Delete the file from the bucket
+    s3.deleteObject(params, (err, data) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ error: "Failed to delete the file" });
+        }
+        // File deletion successful
+        return res.json({ message: "File deleted successfully" });
+    });
+}
 module.exports = {
     fileUpload,
+    fileDelete
 };
 
 
 
-// function fileDelete(req, res) {
-//     const { key } = req.params;
-
-//     // Specify the bucket and key of the file you want to delete
-//     const params = {
-//         Bucket: "ncai-pcm-db",
-//         Key: key,
-//     };
-//     // Delete the file from the bucket
-//     s3.deleteObject(params, (err, data) => {
-//         if (err) {
-//             console.error(err);
-//             return res.status(500).json({ error: "Failed to delete the file" });
-//         }
-//         // File deletion successful
-//         return res.json({ message: "File deleted successfully" });
-//     });
-// }

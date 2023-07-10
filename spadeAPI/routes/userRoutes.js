@@ -25,7 +25,7 @@ router.post("/verifyResetEmailCode", userController.verifyResetEmailCode);
 router.post("/updatePassword", userController.updatePassword);
 router.post("/resendCode", userController.resendCode);
 router.get("/pricingPlan", userController.pricingPlan);
-router.post("/property" , userController.property);
+router.post("/property" ,verifyToken, userController.property);
 router.put("/updateUserProfile", verifyToken, userController.updateUserProfile);
 // router.post('/property', upload , userController.property);
 router.get("/allProperty", verifyToken, userController.getproperty);
