@@ -50,6 +50,9 @@ exports.deleteQuery = (table, ...field) => {
   }
 };
 
+// delete all images where property id = id from propertyImage
+exports.delteImageFromDb  = "DELETE FROM propertyimage WHERE imageKey = ?"
+
 exports.addResetToken =
   "UPDATE users SET token = ?, updated_at = ? where id = ?";
 exports.updatePasswordLandlord =

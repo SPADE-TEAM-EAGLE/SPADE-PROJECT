@@ -37,7 +37,7 @@ router.put(
   userController.putPropertyUnitsUpdates
 );
 router.delete("/propertyDelete", verifyToken, userController.propertyDelete);
-router.put("/updateProperty",[verifyToken, upload],userController.propertyUpdate);
+router.put("/updateProperty",verifyToken,userController.propertyUpdate);
 // router.get('/viewProperty' ,userController.propertyView);
 router.get("/viewProperty", verifyToken, userController.propertyView);
 router.get('/resendEmail', verifyToken,invoiceController.resendEmail);

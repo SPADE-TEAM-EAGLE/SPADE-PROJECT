@@ -2357,7 +2357,7 @@
         $(document).ready(function() {
             // $('#infoModal').modal('show')
             $.ajax({
-                url: 'http://localhost:3000/api/spade/getStates',
+                url: 'https://backend.app.spaderent.com/api/spade/getStates',
                 method: 'GET',
                 success: function({
                     data
@@ -2554,7 +2554,7 @@
         }
 $("#addModal").modal("hide")
         $.ajax({
-            url: 'http://localhost:3000/api/spade/upload',
+            url: 'https://backend.app.spaderent.com/api/spade/upload',
             type: 'POST',
             data: uploadFormData,
             contentType: false,
@@ -2577,7 +2577,7 @@ $("#addModal").modal("hide")
                 };
 
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/property',
+                    url: 'https://backend.app.spaderent.com/api/spade/property',
                     type: 'POST',
                     data: JSON.stringify(propertyData),
                     contentType: 'application/json',
@@ -2618,7 +2618,7 @@ $("#addModal").modal("hide")
 $("#addModal").modal("hide")
 
         $.ajax({
-            url: 'http://localhost:3000/api/spade/property',
+            url: 'https://backend.app.spaderent.com/api/spade/property',
             type: 'POST',
             data: JSON.stringify(propertyData),
             contentType: 'application/json',
@@ -2773,7 +2773,7 @@ $("#addModal").modal("hide")
         function updateTable() {
             $('#table_body').empty();
             $.ajax({
-                url: 'http://localhost:3000/api/spade/allproperty',
+                url: 'https://backend.app.spaderent.com/api/spade/allproperty',
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -2845,45 +2845,65 @@ $("#addModal").modal("hide")
             var propertySQFT = $("#propertyTotalSF_update").val();
             var units = $("#unit_update").val();
 
-            formData.append('id', propertyId);
-            formData.append('propertyName', propertyName);
-            formData.append('address', address);
-            formData.append('city', city);
-            formData.append('state', state);
-            formData.append('zipCode', zipCode);
-            formData.append('propertyType', propertyType);
-            formData.append('propertySQFT', propertySQFT);
-            formData.append('units', units);
+            // formData.append('id', propertyId);
+            // formData.append('propertyName', propertyName);
+            // formData.append('address', address);
+            // formData.append('city', city);
+            // formData.append('state', state);
+            // formData.append('zipCode', zipCode);
+            // formData.append('propertyType', propertyType);
+            // formData.append('propertySQFT', propertySQFT);
+            // formData.append('units', units);
 
             // Retrieve existing image names from the DOM
 
             var existingImageNames = [];
             selectedFiles.forEach((file) => {
-                    if (typeof file === "string") {
+                    if (file instanceof File) {
+                    }
+                    else{
                         existingImageNames.push(file)
                     }
                 })
                 // Get the selected files
-            var files = selectedFiles.map(function(file) {
+                if(selectedFiles.length>=1){
+                    var files = selectedFiles.map(function(file) {
                 return file instanceof File ? file : file.name;
             });
-
-            // Add the selected files to the FormData object
             files.forEach(function(file) {
                 formData.append('image', file);
             });
-
-            formData.append("existingImages", existingImageNames)
             $.ajax({
-                url: 'http://localhost:3000/api/spade/updateProperty',
-                // url: 'http://ec2-54-158-103-230.compute-1.amazonaws.com:3000/api/spade/updateProperty',
+            url: 'https://backend.app.spaderent.com/api/spade/upload',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+            },
+            success: function(response) {
+                var imageArray = [...response.images,...existingImageNames];
+                const formData={
+                    id:propertyId,
+                    propertyName:propertyName,
+                    address:address,
+                    city:city,
+                    state:state,
+                    zipCode:zipCode,
+                    propertyType:propertyType,
+                    propertySQFT:propertySQFT,
+                    units:units,
+                    images:imageArray
+                }
+                $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/updateProperty',
                 type: 'PUT',
-                data: formData,
-                contentType: false,
-                processData: false,
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                },
+                data: JSON.stringify(formData),
+                    contentType: 'application/json',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
                 success: function(response) {
                     e.preventDefault()
                     getData();
@@ -2897,6 +2917,47 @@ $("#addModal").modal("hide")
                     window.alert('Error: ' + error);
                 }
             });
+                // var propertyData = {
+                //     propertyName: propertyName,
+                //     address: address,
+                //     city: city,
+                //     state: state,
+                //     zipCode: zipCode,
+                //     propertyType: propertyType,
+                //     propertySQFT: propertySQFT,
+                //     units: units,
+                //     images: imageArray
+                // };
+
+                // $.ajax({
+                //     url: 'https://backend.app.spaderent.com/api/spade/property',
+                //     type: 'POST',
+                //     data: JSON.stringify(propertyData),
+                //     contentType: 'application/json',
+                //     headers: {
+                //         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                //     },
+                //     success: function(response) {
+                //         console.log(response);
+                //         $("#unit-link").attr("href", `./property-unit.html?propertyId=${response.propertyId}`);
+                //         if (response === "Property Already Exist") {
+                //             $('#infoModal').modal('show');
+                //         } else {
+                //             getData();
+                //             $('#succesModal').modal('show');
+                //         }
+                //     },
+                //     error: function(xhr, status, error) {
+                //         window.alert('Error: ' + error);
+                //     }
+                // });
+            },
+            error: function(xhr, status, error) {
+                window.alert('Error: ' + error);
+            }
+        });
+            // formData.append("existingImages", existingImageNames)
+                }
         });
         $(document).on('click', '#confirmDelete', function(e) {
 
@@ -2904,7 +2965,7 @@ $("#addModal").modal("hide")
                 // delete using AJAX
                 $('#myModal_delete').modal('hide');
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/propertyDelete',
+                    url: 'https://backend.app.spaderent.com/api/spade/propertyDelete',
                     type: 'DELETE',
                     data: JSON.stringify({
                         "id": propertyId
@@ -2930,16 +2991,16 @@ $("#addModal").modal("hide")
             // let data;
         function updateSelectedFilesContainer() {
             var selectedFilesContainer = $('.file-grid');
-            selectedFilesContainer.empty();
-            console.log(selectedFiles)
-            selectedFiles.forEach(function(file, index) {
-                console.log(file)
-                var fileElement = $('<div>')
-                    .addClass('selected-file')
-                    .append(
-                        $('<img>')
-                        .addClass('file-preview')
-                        .attr('src', typeof file === "object" ? URL.createObjectURL(file) : file)
+selectedFilesContainer.empty();
+console.log(selectedFiles);
+selectedFiles.forEach(function(file, index) {
+    console.log(file);
+    var fileElement = $('<div>')
+        .addClass('selected-file')
+        .append(
+            $('<img>')
+            .addClass('file-preview')
+            .attr('src', (typeof file === "object" && file instanceof File) ? URL.createObjectURL(file) : file.imageURL)
                     )
                     .append(
                         $('<div>')
@@ -2981,7 +3042,7 @@ $("#addModal").modal("hide")
             $("#global-loader").fadeIn("fast")
                 // console.log(22)
             $.ajax({
-                url: 'http://localhost:3000/api/spade/allproperty',
+                url: 'https://backend.app.spaderent.com/api/spade/allproperty',
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -3006,7 +3067,7 @@ $("#addModal").modal("hide")
 
                         tableBody.empty();
                         response.data[0].forEach(function(property) {
-  var image = '<td><img src="' + property.images[0] + '" alt=""></td>';
+  var image = '<td><img src="' + property.images[0]?.imageURL + '" alt=""></td>';
 
                             var propertyId = '<td class="property-id " style="font-weight: 600;">' + property
                                 .id + '</td>';
@@ -3081,7 +3142,7 @@ $("#addModal").modal("hide")
 
                             });
                             selectedFiles = data.images
-
+                            // console.log(selectedFiles)
                             // var option = $('<option>').text(data.city).val(data.city);
 
                             // Append the option to the select element

@@ -297,7 +297,7 @@ $(document).on('click', '#next', function(e) {
         }
 $("#addModal").modal("hide")
         $.ajax({
-            url: 'http://localhost:3000/api/spade/upload',
+            url: 'https://backend.app.spaderent.com/api/spade/upload',
             type: 'POST',
             data: uploadFormData,
             contentType: false,
@@ -320,7 +320,7 @@ $("#addModal").modal("hide")
                 };
 
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/property',
+                    url: 'https://backend.app.spaderent.com/api/spade/property',
                     type: 'POST',
                     data: JSON.stringify(propertyData),
                     contentType: 'application/json',
@@ -359,7 +359,7 @@ $("#addModal").modal("hide")
         };
 
         $.ajax({
-            url: 'http://localhost:3000/api/spade/property',
+            url: 'https://backend.app.spaderent.com/api/spade/property',
             type: 'POST',
             data: JSON.stringify(propertyData),
             contentType: 'application/json',

@@ -36,27 +36,26 @@ function fileUpload(req,res) {
             
     });
 }
-function fileDelete(req, res) {
-    const { key } = req.params;
-
-    // Specify the bucket and key of the file you want to delete
+const deleteImageFromS3 = (key) => {
     const params = {
-        Bucket: "spades3bucket",
-        Key: key,
+      Bucket: 'spades3bucket',
+      Key: key
     };
-    // Delete the file from the bucket
+  
     s3.deleteObject(params, (err, data) => {
-        if (err) {
-            console.error(err);
-            return res.status(500).json({ error: "Failed to delete the file" });
-        }
-        // File deletion successful
-        return res.json({ message: "File deleted successfully" });
+      if (err) {
+        console.error('Error deleting image from S3:', err);
+        // Handle the error accordingly
+      } else {
+        console.log('Image deleted successfully from S3');
+        // Perform any desired actions after successful deletion
+      }
     });
-}
+  };
+  
 module.exports = {
     fileUpload,
-    fileDelete
+    deleteImageFromS3
 };
 
 
