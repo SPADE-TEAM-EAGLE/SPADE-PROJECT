@@ -413,8 +413,10 @@ exports.property = async (req, res) => {
     propertyType,
     propertySQFT,
     units,
+    images
   } = req.body;
-  const { userId } = req.user;
+  // const { userId } = req.user;
+  const { userId } = req.body;
   // const userId = 3478;
   try {
     const propertycheckresult = await queryRunner(
@@ -440,14 +442,17 @@ exports.property = async (req, res) => {
       if (propertyResult.affectedRows === 0) {
         res.status(400).send("Error1");
       } else {
-        const fileNames = req.files.map((file) => file.filename);
-        
-        const propertyID = propertyResult[0].insertId;
-        for (let i = 0; i < fileNames.length; i++) {
-          const img = fileNames[i];
+        // const fileNames = req.files.map((file) => file.filename);
+        console.log(images)
+        // console.log(images[0][0].image_url)
+        const propertyID = propertyResult[0].insertId; 
+        for (let i = 0; i < images.length; i++) {
+          const image = images[i].image_url;
+        const key = images[i].image_key;
           const propertyImageResult = await queryRunner(insertInPropertyImage, [
             propertyID,
-            img,
+            image,
+            key
           ]);
           if (propertyImageResult.affectedRows === 0) {
             res.send("Error2");
@@ -475,7 +480,7 @@ exports.property = async (req, res) => {
       }
     }
   } catch (error) {
-    res.status(400).send("Error4");
+    res.status(400).send(error);
     console.log(error);
     // console.log(req.files.map((file) => file.filename));
   }

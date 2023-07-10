@@ -22,7 +22,7 @@ function fileUpload(req,res) {
             });
         }
         return res.json({
-            image_url: (req.files["image"] && req.files["image"].map((file) => file.location)) || null,
+            image_url: (req.files["image"] && req.files["image"] ) || null,
             // video_url: (req.files["video"] && req.files["video"].map((file) => file.location)) || null,
             // doc_url: (req.files["doc"] && req.files["doc"].map((file) => file.location)) || null,
             // audio_url: (req.files["audio"] && req.files["audio"].map((file) => file.location)) || null,
