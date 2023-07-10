@@ -2534,62 +2534,51 @@
                 resetAccordions()
             })
             $(document).on('click', '#next', function(e) {
-                e.preventDefault()
-                    // selectedFiles = []
-                
+    e.preventDefault();
 
-                // $("#largemodal").addClass("hide");
-                var formData = new FormData();
+    var formData = new FormData();
+    var propertyName = $("#propertyName").val();
+    var address = $("#address").val();
+    var city = $("#city").val();
+    var state = $("#state").val();
+    var zipCode = $("#zip").val();
+    var propertyType = $("#propertyType").val();
+    var propertySQFT = $("#propertyTotalSF").val();
+    var units = $("#units").val();
 
-                // Get the form data
-                var propertyName = $("#propertyName").val();
-                var address = $("#address").val();
-                var city = $("#city").val();
-                var state = $("#state").val();
-                var zipCode = $("#zip").val();
-                var propertyType = $("#propertyType").val();
-                var propertySQFT = $("#propertyTotalSF").val();
-                var units = $("#units").val();
+    formData.append('propertyName', propertyName);
+    formData.append('address', address);
+    formData.append('city', city);
+    formData.append('state', state);
+    formData.append('zipCode', zipCode);
+    formData.append('propertyType', propertyType);
+    formData.append('propertySQFT', propertySQFT);
+    formData.append('units', units);
 
-                // Add the form data to the FormData object
-                formData.append('propertyName', propertyName);
-                formData.append('address', address);
-                formData.append('city', city);
-                formData.append('state', state);
-                formData.append('zipCode', zipCode);
-                formData.append('propertyType', propertyType);
-                formData.append('propertySQFT', propertySQFT);
-                formData.append('units', units);
+    var selectedFiles = $('#fileInput')[0].files;
+    for (var i = 0; i < selectedFiles.length; i++) {
+        formData.append('image', selectedFiles[i]);
+    }
 
-                // Get the selected files
-                var files = $('#fileInput')[0].files;
-                // Add the files to the FormData object
-                for (var i = 0; i < selectedFiles.length; i++) {
-                    formData.append('image', selectedFiles[i]);
+    if (selectedFiles.length >= 1) {
+        $.ajax({
+            url: 'http://localhost:3000/api/spade/upload',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+            },
+            success: function(response) {
+                var imageArr = response.images;
+                var imageFormData = new FormData();
+                for (var j = 0; j < imageArr.length; j++) {
+                    imageFormData.append('images', imageArr[j]);
                 }
-                // console.log(formData)
-                // if(selectedFiles.length>=1){
-                //     $.ajax({
-                //     url: 'http://localhost:3000/api/spade/upload',
-                //     type: 'POST',
-                //     data: formData,
-                //     contentType: false,
-                //     processData: false,
-                //     headers: {
-                //         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                //     },
+                formData.delete("image");
+                formData.append("images", imageFormData);
 
-                //     success: function(response) {
-                //         console.log(response)
-                //         console.log(233333)
-                //     },
-                //     error: function(xhr, status, error) {
-                //         window.alert('Error: ' + error);
-                //     }
-                // });
-                // }
-                $('#addModal').modal('hide');
-                // Send the form data to the server using AJAX
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/property',
                     type: 'POST',
@@ -2599,28 +2588,52 @@
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
-
                     success: function(response) {
-                        console.log(response)
-                        $("#unit-link").attr("href", `./property-unit.html?propertyId=${response.propertyId}`)
-                            // $("#add-tenant-link").attr("href",`./add-tenant.html`)
+                        console.log(response);
+                        $("#unit-link").attr("href", `./property-unit.html?propertyId=${response.propertyId}`);
                         if (response === "Property Already Exist") {
-                            $('#infoModal').modal('show')
-
+                            $('#infoModal').modal('show');
                         } else {
-                            getData()
-                            $('#succesModal').modal('show')
-                        } // console.log(1)
-
-                        // window.location = '../Landlord/properties-all.html';
+                            getData();
+                            $('#succesModal').modal('show');
+                        }
                     },
                     error: function(xhr, status, error) {
                         window.alert('Error: ' + error);
                     }
                 });
+            },
+            error: function(xhr, status, error) {
+                window.alert('Error: ' + error);
+            }
+        });
+    } else {
+        $.ajax({
+            url: 'https://backend.app.spaderent.com/api/spade/property',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+            },
+            success: function(response) {
+                console.log(response);
+                $("#unit-link").attr("href", `./property-unit.html?propertyId=${response.propertyId}`);
+                if (response === "Property Already Exist") {
+                    $('#infoModal').modal('show');
+                } else {
+                    getData();
+                    $('#succesModal').modal('show');
+                }
+            },
+            error: function(xhr, status, error) {
+                window.alert('Error: ' + error);
+            }
+        });
+    }
+});
 
-
-            });
             let propertyId;
 
 
