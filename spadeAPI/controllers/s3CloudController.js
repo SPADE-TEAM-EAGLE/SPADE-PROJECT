@@ -31,7 +31,7 @@ const upload = multer({
     storage: multerS3({
         acl: "public-read-write",
         s3: s3,
-        bucket: "ncai-pcm-db",
+        bucket: "spades3bucket",
         metadata: function (req, file, cb) {
             cb(null, { fieldName: "TESTING_METADATA" });
         },
