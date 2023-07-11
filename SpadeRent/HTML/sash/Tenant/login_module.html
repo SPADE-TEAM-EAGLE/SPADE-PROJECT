@@ -41,8 +41,8 @@
     }
 
     body {
-      background-image: linear-gradient(#1467b0, #4CA7CF);
-      height: 100%;
+      /* background-image: linear-gradient(#1467b0, #4CA7CF); */
+      height: auto;
       width: 100%;
       padding: 0;
       margin: 0;
@@ -127,7 +127,10 @@
     }
 
     .horizontalMenucontainer {
-      height: 100% !important;
+      background-image: url(../assets/images/buildings.png);
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position-x: right;
     }
 
     .LandSoft {
@@ -141,7 +144,7 @@
 
     .hrset {
       width: 275px;
-      border-top: 3px solid #FAB74C;
+      border-top: 3px solid #FAB74C !important;
       opacity: 1;
       margin-top: -15px;
     }
@@ -212,9 +215,9 @@
         /* background-position: center; */
       }
 
-      .weblogo {
+      /* .weblogo {
         display: none;
-      }
+      } */
 
       .LandSoft {
         padding-top: 0px;
@@ -347,34 +350,34 @@
 
   <div class="wapper d-flex align-items-center">
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-12 mobileversion">
+      <div class="row justify-content-center">
+        <!-- <div class="col-12 mobileversion">
           <div class="main-div">
             <span>
               <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" class="Rent-logo" id="">
             </span>
           </div>
-        </div>
-        <div class="col-1"></div>
-        <div class="col-md-12 col-lg-6 col-xl-6">
-          <div>
+        </div> -->
+        <!-- <div class="col-1"></div> -->
+        <div class="col-md-12 col-lg-12 col-xl-12" style="text-align: center;">
+          <div class="mt-5">
             <img src="../assets/images/logo_loginmodule.png" alt="" class="weblogo">
           </div>
           <div class="LandSoft">
-            <h1 class="text-white mb-0"><span class="mobcolor">LandLord</span> Software</h1>
-            <hr class="mt-1 hrset">
+            <h1 class="text-dark mb-0"><span class="mobcolor">LandLord</span> Software</h1>
+            <hr class="mt-1 hrset m-auto">
           </div>
           <div>
-            <h1 class="font-weight-500 mb-0 built text-white fw-bold">
+            <h1 class="font-weight-500 mb-0 built text-dark fw-bold">
               Built For <span class="mobcolor">Just You</span>
             </h1>
-            <p class="text-white mb-0 fs-16 ppp">Make rental management easier with property management software, 
+            <p class="text-dark mb-5 fs-16 ppp">Make rental management easier with property management software, 
               <br>and have ready-to-go tools for every step of your landlord journey.</p>
               
           </div>
 
         </div>
-        <div class="col-md-12 col-lg-5 col-xl-5">
+        <div class="col-md-12 col-lg-5 col-xl-5 mb-5">
           <div class="login-div">
             <div class="box card">
               <span>
@@ -440,7 +443,7 @@
         </div>
 
       </div>
-      <div class="row">
+      <div class="row d-none">
         <div class="col-1"></div>
         <div class="col-11 pb-5">
           <img src="../assets/images/dashboard.png" alt="" class="imgforweb">
@@ -628,6 +631,18 @@
 
             });
         });
+  </script>
+   <script>
+    $(document).ready(function() {
+      
+      if ($('body').hasClass('dark-mode')) {
+        $('.Rent-logo').attr('src', '../assets/images/logo_white.png');
+      }else{
+        $('.Rent-logo').attr('src', '../assets/images/Artboard GÇô 1.svg');
+      }
+   
+});
+
   </script>
 </body>
 
