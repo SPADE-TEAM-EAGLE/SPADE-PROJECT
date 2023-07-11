@@ -472,7 +472,7 @@ exports.updateTasks = async (req, res) => {
     message,
     images
   } = req.body;
-  
+
   try {
     const currentDate = new Date();
     const { userId } = req.user;
