@@ -14,7 +14,7 @@ router.post("/Signup", userController.createUser);
 router.get("/protected", verifyToken, userController.getUser);
 router.get("/protectedTenant", verifyTokenTenant, userController.getUser);
 router.get("/checkemail", userController.checkemail);
-router.post("/Signin", userController.Signin);
+router.get("/Signin", userController.Signin);
 router.get("/Signinall", userController.Signinall);
 router.post("/upload",verifyToken ,fileUpload.fileUpload);
 // router.delete("/delete/:key", fileUpload.fileDelete);
