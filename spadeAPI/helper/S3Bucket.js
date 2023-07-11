@@ -16,19 +16,24 @@ const s3 = new aws.S3();
 
 function fileUpload(req,res) {
     MultiUpload(req, res, function (err) {
+       
         if (err) {
             return res.status(422).send({
                 errors: [{ title: "File Upload Error", detail: err.message }],
             });
         }
-        return  res.status(200).json({
-            image_url: (req.files["image"] && req.files["image"]) || null,
-            // video_url: (req.files["video"] && req.files["video"].map((file) => file.location)) || null,
-            // doc_url: (req.files["doc"] && req.files["doc"].map((file) => file.location)) || null,
-            // audio_url: (req.files["audio"] && req.files["audio"].map((file) => file.location)) || null,
+        return res.json({
+            images: (req.files["image"] && req.files["image"].map((file) => {
+                return {
+                    image_url: file.location,
+                    image_key: file.key
+                };
+            })) || [],
             success: true,
-            message: "File uploaded successfully",
+            message: "File uploaded successfully"
         });
+        
+            
     });
 }
 const deleteImageFromS3 = (key) => {

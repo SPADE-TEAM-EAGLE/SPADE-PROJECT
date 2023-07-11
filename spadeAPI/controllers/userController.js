@@ -11,7 +11,6 @@ const {
   deleteQuery,
   insertInUsers,
   addResetToken,
-  updatePasswordLandlord,
   insertInProperty,
   insertInPropertyImage,
   updateProperty,
@@ -105,9 +104,10 @@ exports.getUser = (req, res) => {
 };
 
 exports.Signin = async function (req, res) {
-  // const { email, password, tenant } = req.query;
-  const { email, password, tenant } = req.body;
-
+  const { email, password, tenant } = req.query;
+  console.log(req.query)
+  // console.log(1)
+  // let selectResult;
   try {
     // for tenant
     if (tenant == "tenant") {
@@ -119,7 +119,6 @@ exports.Signin = async function (req, res) {
       } else if (
         await bcrypt.compare(password, selectResult[0][0].tenantPassword)
       ) {
-        console.log(config.JWT_SECRET_KEY)
         const token = jwt.sign({ email, password }, config.JWT_SECRET_KEY, {
           expiresIn: "3h",
         });
@@ -144,22 +143,11 @@ exports.Signin = async function (req, res) {
         const token = jwt.sign({ email, password }, config.JWT_SECRET_KEY, {
           expiresIn: "3h",
         });
-        const emai = "umairnazakat2222@gmail.com"
-        const emailMessage = await verifyMailCheck(emai);
-        if (emailMessage.message == "Your account is locked due to email verification. Firstly verify your email.") {
-          res.status(200).json({
-            token: token,
-            body: selectResult[0][0],
-            message: "Email is not verified",
-          });
-        } else {
-          res.status(200).json({
-            token: token,
-            body: selectResult[0][0],
-            message: "Successful Login",
-          });
-        }
-
+        res.status(200).json({
+          token: token,
+          body: selectResult[0][0],
+          message: "Successful Login",
+        });
       } else {
         res.status(400).send("Incorrect Password");
       }
@@ -169,7 +157,6 @@ exports.Signin = async function (req, res) {
     res.status(400).send(error.message);
   }
 };
-
 exports.Signinall = async function (req, res) {
   try {
     const selectResult = await queryRunner(selectQuery("users"));
@@ -332,6 +319,7 @@ exports.verifyResetEmailCode = async (req, res) => {
 
 exports.updatePassword = async (req, res) => {
   const { id, password, confirmpassword, token } = req.body;
+  // const currentDate = new Date();
   try {
     if (password === confirmpassword) {
       const hashPassword = await hashedPassword(password);
@@ -347,6 +335,7 @@ exports.updatePassword = async (req, res) => {
           message: "Successful password saved",
         });
       } else {
+        console.log("here")
         res.status(500).send("Error");
       }
     } else {
@@ -500,6 +489,7 @@ exports.property = async (req, res) => {
 
 exports.getproperty = async (req, res) => {
   const { userId, userName } = req.user;
+  console.log(userId)
   try {
     const allPropertyResult = await queryRunner(
       selectQuery("property", "landlordID"),
@@ -514,10 +504,12 @@ exports.getproperty = async (req, res) => {
           selectQuery("propertyimage", "propertyID"),
           [propertyID]
         );
-
+          console.log(allPropertyImageResult[0])
         if (allPropertyImageResult.length > 0) {
           const propertyImages = allPropertyImageResult[0].map(
-            (image) => image.Image
+            (image) => {
+              return {imageURL:image.Image,imageKey:image.imageKey}
+            }
           );
           // Extract image URLs from the result
           allPropertyResult[0][i].images = propertyImages; // Add property images to the current property object
@@ -603,7 +595,7 @@ exports.propertyDelete = async (req, res) => {
           });
         }
       } else {
-        res.status(400).json({
+        res.status(200).json({
           message: "No Property Image data found ",
         });
       }
@@ -631,28 +623,45 @@ exports.propertyUpdate = async (req, res) => {
     const updatedPropertyData = await queryRunner(updateProperty, updateData);
 
     if (updatedPropertyData[0].affectedRows) {
-      // get property images from database 
+      // Get property images from the database
       const propertycheckresult = await queryRunner(
         selectQuery("propertyimage", "propertyID"),
         [id]
       );
-      const isPropertImage = propertycheckresult[0].length > 0
-      if (isPropertImage) {
-        for (let i = 0; i < propertycheckresult[0].length; i++) {
-          deleteImageFromS3(propertycheckresult[0][i].imageKey)
-        }
-        await queryRunner(delteImageFromDb, [id])
+      // console.log(images, propertycheckresult[0])
+
+      // Extract the image keys from propertycheckresult
+      const propertyImageKeys = propertycheckresult[0].map(image => image.imageKey);
+
+      // Find the images to delete from S3 (present in propertycheckresult but not in images)
+      const imagesToDelete = propertycheckresult[0].filter(image => !images.some(img => img.imageKey === image.imageKey));
+
+      // Delete images from S3
+      for (let i = 0; i < imagesToDelete.length; i++) {
+        deleteImageFromS3(imagesToDelete[i].imageKey);
+        await queryRunner(delteImageFromDb, [imagesToDelete[i].imageKey]);
       }
-      await userServices.addImagesInDB(images, id)
+
+      // Find the images to insert into the database (present in images but not in propertycheckresult)
+      const imagesToInsert = images.filter(image => !propertyImageKeys.includes(image.imageKey));
+
+      // Delete images from the database
+
+      // Insert new images into the database
+      await userServices.addImagesInDB(imagesToInsert, id);
+
       res.status(200).json({
-        message: "Propert Updated SuccessFully !"
-      })
+        message: "Property Updated Successfully!"
+      });
     }
   } catch (error) {
+    console.log(error);
     res.status(400).json({
       message: error.message,
     });
   }
+}
+
 
   // try {
   //   const {
@@ -755,7 +764,6 @@ exports.propertyUpdate = async (req, res) => {
   //   console.log(error);
   //   return res.send("Error from Updating Property");
   // }
-};
 
 //  ############################# Update Property End ############################################################
 

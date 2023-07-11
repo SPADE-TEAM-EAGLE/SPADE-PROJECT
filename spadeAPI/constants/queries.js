@@ -51,8 +51,9 @@ exports.deleteQuery = (table, ...field) => {
 };
 
 // delete all images where property id = id from propertyImage
-exports.delteImageFromDb  = "DELETE FROM propertyimage WHERE propertyID = ?"
-
+exports.delteImageFromDb = "DELETE FROM propertyimage WHERE imageKey = ?"
+exports.delteImageForInvoiceImages = "DELETE FROM invoiceimages WHERE imageKey = ?"
+exports.delteImageForTaskImages = "DELETE FROM taskimages WHERE taskImagesKey = ?"
 exports.addResetToken =
   "UPDATE users SET token = ?, updated_at = ? where id = ?";
 exports.updatePasswordLandlord =
@@ -91,7 +92,7 @@ exports.putUnitsUpdate = 'UPDATE property SET  units = ?  where id = ? ';
 exports.insertTenantAttachFile = 'INSERT INTO tenantattachfiles (landlordID, tenantID, fileName) VALUES (?,?,?)';
 exports.insertInvoice = 'INSERT INTO invoice (landlordID, tenantID, invoiceType, startDate, endDate, frequency, dueDate,daysDue, repeatTerms, terms,note,status,created_at,totalAmount) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
 exports.insertLineItems = 'INSERT INTO invoicelineitems (invoiceID, category, property, memo, amount ) VALUES (?,?,?,?,?)';
-exports.insertInvoiceImage = 'INSERT INTO invoiceimages (invoiceID, InvoiceImage) VALUES (?,?)';
+exports.insertInvoiceImage = 'INSERT INTO invoiceimages (invoiceID, InvoiceImage,imageKey) VALUES (?,?,?)';
 exports.updateUnitsTenant = 'UPDATE propertyunits SET  status = ?  where id = ? ';
 exports.getTenantsById = `SELECT p.id AS propertyID, p.propertyName, p.address AS pAddress, p.city AS pCity, p.state AS pState, p.zipCode AS pZipCode, p.propertyType, p.propertySQFT, p.status AS pStatus, p.units AS pUnits, t.id AS tenantID, t.firstName, t.lastName, t.companyName, t.email AS tEmail, t.phoneNumber AS tPhoneNumber, t.Address AS tAddress, t.city AS tCity, t.state AS tState, t.zipcode AS tZipcode, t.rentAmount, t.gross_or_triple_lease, t.baseRent, t.tripleNet, t.leaseStartDate, t.leaseEndDate, t.increaseRent, pu.unitNumber, pu.Area AS unitArea, pu.unitDetails, pu.status AS unitStatus, GROUP_CONCAT(pi.image) AS images
 FROM tenants AS t
