@@ -364,22 +364,34 @@ exports.addAlternateEmailPhone = async (req, res) => {
 exports.tenantAttachFile = async (req, res) => {
   // console.log(1)
   const {
-    tenantID
+    tenantID, images
   } = req.body;
   // console.log(req.files)
   const { userId } = req.user
   try {
-
-    const fileNames = req.files.map((file) => file.filename);
-    for (let i = 0; i < fileNames.length; i++) {
-      const attachFile = fileNames[i];
-      const tenantAttachFileResult = await queryRunner(insertTenantAttachFile, [userId, tenantID, attachFile])
-      if (tenantAttachFileResult.affectedRows === 0) {
-        res.send('Error');
-        return;
+    // const fileNames = req.files.map((file) => file.filename);
+    // for (let i = 0; i < fileNames.length; i++) {
+    //   const attachFile = fileNames[i];
+    //   const tenantAttachFileResult = await queryRunner(insertTenantAttachFile, [userId, tenantID, attachFile])
+    //   if (tenantAttachFileResult.affectedRows === 0) {
+    //     res.send('Error');
+    //     return;
+    //   }
+    // } //sss
+    for (let i = 0; i < images.length; i++) {
+      const { image_url } = images[i];
+      const { image_key } = images[i];
+      const propertyImageResult = await queryRunner(insertTenantAttachFile, [
+        userId,
+        tenantID,
+        image_url,
+        image_key
+      ]);
+      // if property image data not inserted into property image table then throw error
+      if (propertyImageResult.affectedRows === 0) {
+        throw new Error("data doesn't inserted in property image table");
       }
-    } //sss
-
+    }
     res.status(200).json({
       message: " Tenant Files save successful"
     });
@@ -449,9 +461,13 @@ exports.tenantDelete = async (req, res) => {
 
         const tenantAdditionalEmailCheckResult = await queryRunner(selectQuery("tenantalternateemail", "tenantID"), [tenantID]);
         if (tenantAdditionalEmailCheckResult[0].length > 0) {
+          const tenantAdditionalEmailresult = await queryRunner(deleteQuery("tenantalternateemail", "tenantID"), [tenantID]);
+        }
+
+        const tenantAdditionalEmailCheckResult = await queryRunner(selectQuery("tenantalternateemail", "tenantID"), [tenantID]);
+        if (tenantAdditionalEmailCheckResult[0].length > 0) {
         const tenantAdditionalEmailresult = await queryRunner(deleteQuery("tenantalternateemail", "tenantID"), [tenantID]);
         } 
-
 
         const tenantAdditionalPhoneCheckResult = await queryRunner(selectQuery("tenantalternatephone", "tenantID"), [tenantID]);
         if (tenantAdditionalPhoneCheckResult[0].length > 0) {
@@ -463,10 +479,10 @@ exports.tenantDelete = async (req, res) => {
           const tenantIncreaseRentResult = await queryRunner(deleteQuery("tenantincreaserent", "tenantID"), [tenantID]);
         }
 
-          const status = "Vacant";
-          const propertyUnitsResult = await queryRunner(updateUnitsTenant, [status, propertyUnitID]);
-        
-        
+        const status = "Vacant";
+        const propertyUnitsResult = await queryRunner(updateUnitsTenant, [status, propertyUnitID]);
+
+
         res.status(200).json({
           message: " tenant deleted successfully"
         })
