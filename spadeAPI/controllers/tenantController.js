@@ -452,7 +452,10 @@ exports.tenantDelete = async (req, res) => {
           const tenantFileDeleteresult = await queryRunner(deleteQuery("tenantattachfiles", "tenantID"), [tenantID]);
         }
 
-       
+        const tenantAdditionalEmailCheckResult = await queryRunner(selectQuery("tenantalternateemail", "tenantID"), [tenantID]);
+        if (tenantAdditionalEmailCheckResult[0].length > 0) {
+          const tenantAdditionalEmailresult = await queryRunner(deleteQuery("tenantalternateemail", "tenantID"), [tenantID]);
+        }
 
         // const tenantAdditionalEmailCheckResult = await queryRunner(selectQuery("tenantalternateemail", "tenantID"), [tenantID]);
         // if (tenantAdditionalEmailCheckResult[0].length > 0) {
