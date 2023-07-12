@@ -2,7 +2,7 @@ $(document).ready(function() {
     $("#next-add-tenant").click(() => {
        //first accordian
        var isEmpty1 = false;
-       $('#firstName, #lastName, #company, #email, #phone, #address, #state, #city, #zip').each(function() {
+       $('#firstName, #lastName, #email, #state, #city, #zip').each(function() {
            if ($(this).val() === '' || $(this).val() === 'Choose...') {
                isEmpty1 = true;
                return false;

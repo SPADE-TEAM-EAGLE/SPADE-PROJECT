@@ -11,17 +11,17 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.use((req, res, next) => {
-  res.header("Cache-Control", "no-cache, no-store, must-revalidate");
-  res.header("Pragma", "no-cache");
-  res.header("Expires", "0");
-  next();
+    res.header("Cache-Control", "no-cache, no-store, must-revalidate");
+    res.header("Pragma", "no-cache");
+    res.header("Expires", "0");
+    next();
 });
 
 app.use("/api/spade", userRoutes);
 connect();
 const port = 3000;
 app.listen(port, () => {
-  console.log(`Server started on port ${port}`);
+    console.log(`Server started on port ${port}`);
 });
 // const options = {
 //   key: fs.readFileSync("Certificate/ssl.key"),

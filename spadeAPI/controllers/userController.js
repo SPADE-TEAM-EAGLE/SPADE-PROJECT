@@ -190,9 +190,12 @@ exports.Signinall = async function (req, res) {
   }
 };
 exports.updateUserProfile = async function (req, res) {
-  const { firstName, lastName, email, phone, planID, BusinessName, streetAddress, BusinessAddress } = req.body;
+  const { firstName, lastName, email, phone, planID, BusinessName, streetAddress, BusinessAddress, imageUrl, imageKey } = req.body;
   const { userId } = req.user;
   try {
+    if(!firstName || !lastName || !email || !phone || !planID || !BusinessName || !streetAddress || !BusinessAddress || !imageUrl || !imageKey){
+      throw new Error("Please fill all the fields");
+    }
     const selectResult = await queryRunner(selectQuery("users", "id"), [
       userId,
     ]);
@@ -206,12 +209,14 @@ exports.updateUserProfile = async function (req, res) {
     }
     if (isUserExist) {
       const updateUserParams = [
-        firstName || null, // Replace undefined with null
-        lastName || null,
-        email || null,
-        phone || null,
-        planID || null,
-        BusinessName || null, streetAddress || null, BusinessAddress || null, created_at,
+        firstName, // Replace undefined with null
+        lastName,
+        email,
+        phone,
+        planID,
+        BusinessName, streetAddress, BusinessAddress, created_at,
+        imageUrl,
+        imageKey,
         userId,
       ];
       const updateResult = await queryRunner(updateUser, updateUserParams);
