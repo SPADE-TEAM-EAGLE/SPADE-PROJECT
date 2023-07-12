@@ -14,52 +14,49 @@ const MultiUpload = upload.fields([
 
 const s3 = new aws.S3();
 
-function fileUpload(req, res) {
-    return new Promise((resolve, reject) => {
-      MultiUpload(req, res, function (err) {
+function fileUpload(req,res) {
+    MultiUpload(req, res, function (err) {
+       
         if (err) {
           return res.status(422).send({
             errors: [{ title: "File Upload Error", detail: err.message }],
           });
         }
-        const response = {
-          image_url: (req.files["image"] && req.files["image"]) || null,
-          video_url:
-            (req.files["video"] && req.files["video"].map((file) => file.location)) || null,
-          doc_url:
-            (req.files["doc"] && req.files["doc"].map((file) => file.location)) || null,
-          audio_url:
-            (req.files["audio"] && req.files["audio"].map((file) => file.location)) || null,
-          success: true,
-          message: "File uploaded successfully",
-        };
-        resolve(response);
-      });
+        return res.json({
+            images: (req.files["image"] && req.files["image"].map((file) => {
+                return {
+                    image_url: file.location,
+                    image_key: file.key
+                };
+            })) || [],
+            success: true,
+            message: "File uploaded successfully"
+        });
+        
+            
     });
-  }
+}
+const deleteImageFromS3 = (key) => {
+    const params = {
+      Bucket: 'spades3bucket',
+      Key: key
+    };
   
-
+    s3.deleteObject(params, (err, data) => {
+      if (err) {
+        console.error('Error deleting image from S3:', err);
+        // Handle the error accordingly
+      } else {
+        console.log('Image deleted successfully from S3');
+        // Perform any desired actions after successful deletion
+      }
+    });
+  };
+  
 module.exports = {
     fileUpload,
+    deleteImageFromS3
 };
 
 
 
-// function fileDelete(req, res) {
-//     const { key } = req.params;
-
-//     // Specify the bucket and key of the file you want to delete
-//     const params = {
-//         Bucket: "ncai-pcm-db",
-//         Key: key,
-//     };
-//     // Delete the file from the bucket
-//     s3.deleteObject(params, (err, data) => {
-//         if (err) {
-//             console.error(err);
-//             return res.status(500).json({ error: "Failed to delete the file" });
-//         }
-//         // File deletion successful
-//         return res.json({ message: "File deleted successfully" });
-//     });
-// }
