@@ -496,18 +496,21 @@ function cardbtnchange() {
     }
   }
 }
+const checkbox = document.getElementById('check1');
 
 firstname.addEventListener("keyup", button1);
 email.addEventListener("keyup", button1);
 lastname.addEventListener("keyup", button1);
 input.addEventListener("keyup", button1);
 input.addEventListener("change", button1);
+checkbox.addEventListener("change", button1);
+
 function button1() {
   if (
     email.value.match(validEmail) &&
     lastname.value.match(validname) &&
     firstname.value.match(validname) &&
-    iti.isValidNumber()
+    iti.isValidNumber() && checkbox.checked
     // &&
     // phone.value.match(validPhone)
   ) {

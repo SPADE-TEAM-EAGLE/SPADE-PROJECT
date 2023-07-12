@@ -25,11 +25,16 @@ const {
   propertyTaskQuery,
   selectAllTenantsProperty,
   updateUser,
-  updatePlanId
+  updatePlanId,
+  updateEmailQuery,
+  updateVerifiedStatusQuery,
+  delteImageFromDb
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
-const { fileUpload } = require("../helper/S3Bucket");
+const { fileUpload, deleteImageFromS3 } = require("../helper/S3Bucket");
+const { verifyMailCheck } = require("../helper/emailVerify");
+const userServices = require("../Services/userServices");
 const config = process.env;
 
 exports.createUser = async function (req, res) {
@@ -140,11 +145,25 @@ exports.Signin = async function (req, res) {
         const token = jwt.sign({ email, password }, config.JWT_SECRET_KEY, {
           expiresIn: "3h",
         });
-        res.status(200).json({
-          token: token,
-          body: selectResult[0][0],
-          message: "Successful Login",
-        });
+        // const emai = "umairnazakat2222@gmail.com"
+      //  const emailMessage =  await verifyMailCheck(email);
+       const emailMessage =  await verifyMailCheck(email);
+       if(emailMessage.message == "Your account is locked due to email verification. Please verify your email."){
+         res.status(200).json({
+           body: selectResult[0][0],
+           message: "Email is not verified",
+           msg : emailMessage.message
+         });
+       }else{
+       res.status(200).json({
+         token: token,
+         body: selectResult[0][0],
+         message: "Successful Loginsss",
+         msg : emailMessage.message,
+         email : email
+       });
+     }
+ 
       } else {
         res.status(400).send("Incorrect Password");
       }
@@ -154,7 +173,6 @@ exports.Signin = async function (req, res) {
     res.status(400).send(error.message);
   }
 };
-
 exports.Signinall = async function (req, res) {
   try {
     const selectResult = await queryRunner(selectQuery("users"));
@@ -172,9 +190,12 @@ exports.Signinall = async function (req, res) {
   }
 };
 exports.updateUserProfile = async function (req, res) {
-  const { firstName, lastName, email, phone, planID, BusinessName, streetAddress, BusinessAddress } = req.body;
+  const { firstName, lastName, email, phone, planID, BusinessName, streetAddress, BusinessAddress, imageUrl, imageKey } = req.body;
   const { userId } = req.user;
   try {
+    if(!firstName || !lastName || !email || !phone || !planID || !BusinessName || !streetAddress || !BusinessAddress || !imageUrl || !imageKey){
+      throw new Error("Please fill all the fields");
+    }
     const selectResult = await queryRunner(selectQuery("users", "id"), [
       userId,
     ]);
@@ -188,12 +209,14 @@ exports.updateUserProfile = async function (req, res) {
     }
     if (isUserExist) {
       const updateUserParams = [
-        firstName || null, // Replace undefined with null
-        lastName || null,
-        email || null,
-        phone || null,
-        planID || null,
-        BusinessName || null, streetAddress || null, BusinessAddress || null, created_at,
+        firstName, // Replace undefined with null
+        lastName,
+        email,
+        phone,
+        planID,
+        BusinessName, streetAddress, BusinessAddress, created_at,
+        imageUrl,
+        imageKey,
         userId,
       ];
       const updateResult = await queryRunner(updateUser, updateUserParams);
@@ -405,7 +428,6 @@ exports.pricingPlan = async (req, res) => {
 //  ############################# Property Start ############################################################
 
 exports.property = async (req, res) => {
-  // console.log(1)
   const {
     // landlordID,
     propertyName,
@@ -416,71 +438,70 @@ exports.property = async (req, res) => {
     propertyType,
     propertySQFT,
     units,
+    images
   } = req.body;
-  const { userId } = req.user;
-  // const userId = 3478;
   try {
-    const propertycheckresult = await queryRunner(
-      selectQuery("property", "propertyName", "address"),
-      [propertyName, address]
-    );
+    const { userId } = req.user;
+    if (!propertyName || !address || !city || !state || !zipCode || !propertyType || !propertySQFT || !units) {
+      throw new Error("Please fill all the fields");
+    }
+    // this line check property already exist or not
+    const propertycheckresult = await queryRunner(selectQuery("property", "propertyName", "address"), [propertyName, address]);
     if (propertycheckresult[0].length > 0) {
-      res.send("Property Already Exist");
-    } else {
-      const status = "Non-active";
-      const propertyResult = await queryRunner(insertInProperty, [
-        userId,
-        propertyName,
-        address,
-        city,
-        state,
-        zipCode,
-        propertyType,
-        propertySQFT,
-        status,
-        units,
+      throw new Error("Property Already Exist");
+    }
+    const status = "Non-active";
+    // this line insert data into property table 
+    const propertyResult = await queryRunner(insertInProperty, [
+      userId,
+      propertyName,
+      address,
+      city,
+      state,
+      zipCode,
+      propertyType,
+      propertySQFT,
+      status,
+      units,
+    ]);
+    // if property data not inserted into property table then throw error
+    if (propertyResult.affectedRows === 0) {
+      throw new Error("Data doesn't inserted in property table");
+    }
+    const { insertId } = propertyResult[0];
+    // we are using loop to send images data into 
+
+    for (let i = 0; i < images.length; i++) {
+      const { image_url } = images[i];
+      const { image_key } = images[i];
+      const propertyImageResult = await queryRunner(insertInPropertyImage, [
+        insertId,
+        image_url,
+        image_key
       ]);
-      if (propertyResult.affectedRows === 0) {
-        res.status(400).send("Error1");
-      } else {
-        const fileNames = req.files.map((file) => file.filename);
-        
-        const propertyID = propertyResult[0].insertId;
-        for (let i = 0; i < fileNames.length; i++) {
-          const img = fileNames[i];
-          const propertyImageResult = await queryRunner(insertInPropertyImage, [
-            propertyID,
-            img,
-          ]);
-          if (propertyImageResult.affectedRows === 0) {
-            res.send("Error2");
-            return;
-          }
-        } //sss
-        for (let i = 0; i < units; i++) {
-          const propertyResult = await queryRunner(insertInPropertyUnits, [
-            propertyID,
-            "",
-            "",
-            "",
-            "Vacant",
-          ]);
-          if (propertyResult.affectedRows === 0) {
-            res.send("Error3 error occur in inserted units");
-            return;
-          }
-        }
-        //
-        res.status(200).json({
-          message: "property created successful",
-          propertyId: propertyResult[0].insertId
-        });
+      // if property image data not inserted into property image table then throw error
+      if (propertyImageResult.affectedRows === 0) {
+        throw new Error("data doesn't inserted in property image table");
       }
     }
+    // we are using loop to send units data into database
+    for (let i = 0; i < units; i++) {
+      const propertyResult = await queryRunner(insertInPropertyUnits, [insertId, "", "", "", "Vacant",]);
+      // if property units data not inserted into property units table then throw error
+      if (propertyResult.affectedRows === 0) {
+        throw new Error("data doesn't inserted in property units table");
+      }
+    }
+    // if everything is ok then send message and property id
+    res.status(200).json({
+      message: "property created successful",
+      propertyId: propertyResult[0].insertId
+    });
+
   } catch (error) {
-    res.status(400).send("Error4");
-    console.log(error);
-    // console.log(req.files.map((file) => file.filename));
+    res.status(400).json({
+      message: error.message,
+    });
   }
 };
 //  ############################# Property End ############################################################
@@ -489,6 +510,7 @@ exports.property = async (req, res) => {
 
 exports.getproperty = async (req, res) => {
   const { userId, userName } = req.user;
+  console.log(userId)
   try {
     const allPropertyResult = await queryRunner(
       selectQuery("property", "landlordID"),
@@ -503,10 +525,12 @@ exports.getproperty = async (req, res) => {
           selectQuery("propertyimage", "propertyID"),
           [propertyID]
         );
-
+          console.log(allPropertyImageResult[0])
         if (allPropertyImageResult.length > 0) {
           const propertyImages = allPropertyImageResult[0].map(
-            (image) => image.Image
+            (image) => {
+              return {imageURL:image.Image,imageKey:image.imageKey}
+            }
           );
           // Extract image URLs from the result
           allPropertyResult[0][i].images = propertyImages; // Add property images to the current property object
@@ -592,7 +616,7 @@ exports.propertyDelete = async (req, res) => {
           });
         }
       } else {
-        res.status(400).json({
+        res.status(200).json({
           message: "No Property Image data found ",
         });
       }
@@ -614,103 +638,153 @@ exports.propertyDelete = async (req, res) => {
 
 exports.propertyUpdate = async (req, res) => {
   try {
-    // console.log(`step : 1 get all values into body`);
-
-    const {
-      existingImages,
-      propertyName,
-      address,
-      city,
-      state,
-      zipCode,
-      propertyType,
-      propertySQFT,
-      status,
-      id,
-      units,
-    } = req.body;
+    const { propertyName, address, city, state, zipCode, propertyType, propertySQFT, status, id, units, images } = req.body;
     const { userId } = req.user;
-    // console.log(`step : 2 send all values data into database`);
-    const propertyUpdateResult = await queryRunner(updateProperty, [
-      userId,
-      propertyName,
-      address,
-      city,
-      state,
-      zipCode,
-      propertyType,
-      propertySQFT,
-      "Active",
-      units,
-      id,
-    ]);
-    // console.log(req.files)
-    if (propertyUpdateResult[0].affectedRows > 0) {
-      // console.log(`step : 3 check property images into database propertyid = ${id}`);
+    const updateData = [userId, propertyName, address, city, state, zipCode, propertyType, propertySQFT, "Active", units, id]
+    const updatedPropertyData = await queryRunner(updateProperty, updateData);
+
+    if (updatedPropertyData[0].affectedRows) {
+      // Get property images from the database
       const propertycheckresult = await queryRunner(
         selectQuery("propertyimage", "propertyID"),
         [id]
       );
+      // console.log(images, propertycheckresult[0])
 
-      if (propertycheckresult.length > 0) {
-        propertyimages = propertycheckresult[0].map((image) => image.Image);
-        let existingImg = existingImages.split(",");
-        const imagesToDelete = propertyimages.filter(
-          (element) => !existingImg.includes(element)
-        );
+      // Extract the image keys from propertycheckresult
+      const propertyImageKeys = propertycheckresult[0].map(image => image.imageKey);
 
-        // Combine the common elements with array2
+      // Find the images to delete from S3 (present in propertycheckresult but not in images)
+      const imagesToDelete = propertycheckresult[0].filter(image => !images.some(img => img.imageKey === image.imageKey));
 
-        imageToDelete(imagesToDelete);
-        let propertyDeleteresult = [{ affectedRows: 0 }];
-        // delete images Data into database
-        if (imagesToDelete.length > 0) {
-          for (let i = 0; i < imagesToDelete.length; i++) {
-            propertyDeleteresult = await queryRunner(
-              deleteQuery("propertyimage", "Image"),
-              [imagesToDelete[i]]
-            );
-            // console.log(propertyDeleteresult)
-          }
-        }
-
-        // console.log(`step : 4 delete previous images data into database propertyid = ${id}`);
-        // console.log(propertyDeleteresult)
-        // if (propertyDeleteresult[0].affectedRows > 0) {
-
-        const fileNames = req.files.map((file) => file.filename);
-        existingImg = [...fileNames];
-        // using loop to send new images data into database
-        for (let i = 0; i < existingImg.length; i++) {
-          const img = existingImg[i];
-          const propertyImageResult = await queryRunner(insertInPropertyImage, [
-            id,
-            img,
-          ]);
-          if (propertyImageResult.affectedRows === 0) {
-            return res.send("Error2");
-          }
-        }
-
-        return res.status(201).json({
-          message: "Form Submited",
-        });
-      } else {
-        return res.status(400).json({
-          message: "No Property data found",
-        });
+      // Delete images from S3
+      for (let i = 0; i < imagesToDelete.length; i++) {
+        deleteImageFromS3(imagesToDelete[i].imageKey);
+        await queryRunner(delteImageFromDb, [imagesToDelete[i].imageKey]);
       }
-    } else {
-      return res.status(400).json({
-        message: "No Property",
+
+      // Find the images to insert into the database (present in images but not in propertycheckresult)
+      const imagesToInsert = images.filter(image => !propertyImageKeys.includes(image.imageKey));
+
+      // Delete images from the database
+
+      // Insert new images into the database
+      await userServices.addImagesInDB(imagesToInsert, id);
+
+      res.status(200).json({
+        message: "Property Updated Successfully!"
       });
     }
-
   } catch (error) {
     console.log(error);
-    return res.send("Error from Updating Property");
+    res.status(400).json({
+      message: error.message,
+    });
   }
-};
+}
+
+
+  // try {
+  //   const {
+  //     // existingImages,
+  //     propertyName,
+  //     address,
+  //     city,
+  //     state,
+  //     zipCode,
+  //     propertyType,
+  //     propertySQFT,
+  //     status,
+  //     id,
+  //     units,
+  //     images,
+  //   } = req.body;
+  //   const { userId } = req.user;
+  //   // console.log(`step : 2 send all values data into database`);
+  //   // const propertyUpdateResult = await queryRunner(updateProperty, [
+  //   //   userId,
+  //   //   propertyName,
+  //   //   address,
+  //   //   city,
+  //   //   state,
+  //   //   zipCode,
+  //   //   propertyType,
+  //   //   propertySQFT,
+  //   //   "Active",
+  //   //   units,
+  //   //   id,
+  //   // ]);
+
+
+  //   console.log(propertycheckresult , "propertycheckresult")
+  //   if (propertyUpdateResult[0].affectedRows > 0) {
+  //     // console.log(`step : 3 check property images into database propertyid = ${id}`);
+  //     // check property images into database propertyid = ${id}
+  //     const propertycheckresult = await queryRunner(
+  //       selectQuery("propertyimage", "propertyID"),
+  //       [id]
+  //     );
+
+  //     if (propertycheckresult.length > 0) {
+  //       // propertyimages = propertycheckresult[0].map((image) => image.Image);
+  //       // let existingImg = existingImages.split(",");
+  //       // const imagesToDelete = propertyimages.filter(
+  //       //   (element) => !existingImg.includes(element)
+  //       // );
+
+  //       // // Combine the common elements with array2
+
+  //       // imageToDelete(imagesToDelete);
+  //       // let propertyDeleteresult = [{ affectedRows: 0 }];
+  //       // // delete images Data into database
+  //       // if (imagesToDelete.length > 0) {
+  //       for (let i = 0; i < images.length; i++) {
+  //         const image = images[i].image_url;
+  //         propertyDeleteresult = await queryRunner(
+  //           deleteQuery("propertyimage", "Image"), [image]);
+  //         // console.log(propertyDeleteresult)
+  //       }
+  //       // }
+
+  //       // console.log(`step : 4 delete previous images data into database propertyid = ${id}`);
+  //       // console.log(propertyDeleteresult)
+  //       // if (propertyDeleteresult[0].affectedRows > 0) {
+
+  //       const fileNames = images;
+  //       // existingImg = [...fileNames];
+  //       // using loop to send new images data into database
+  //       for (let i = 0; i < fileNames.length; i++) {
+  //         // const img = existingImg[i];
+  //         const image = images[i].image_url;
+  //         const key = images[i].image_key;
+  //         const propertyImageResult = await queryRunner(insertInPropertyImage, [
+  //           id,
+  //           image,
+  //           key
+  //         ]);
+  //         if (propertyImageResult.affectedRows === 0) {
+  //           return res.send("Error2");
+  //         }
+  //       }
+
+  //       return res.status(201).json({
+  //         message: "Form Submited",
+  //       });
+  //     } else {
+  //       return res.status(400).json({
+  //         message: "No Property data found",
+  //       });
+  //     }
+  //   } else {
+  //     return res.status(400).json({
+  //       message: "No Property",
+  //     });
+  //   }
+
+  // } catch (error) {
+  //   console.log(error);
+  //   return res.send("Error from Updating Property");
+  // }
 
 //  ############################# Update Property End ############################################################
 
@@ -1268,3 +1342,130 @@ exports.propertyTask = async (req, res) => {
 };
 
 //  ############################# Task property ############################################################
+
+
+
+//  ############################# Tenant verify Mail Check Start  ############################################################
+
+exports.verifyMailCheck = async (req, res) => {
+  const { email } = req.body;
+  try {
+    const selectTenantResult = await queryRunner(selectQuery("users", "Email"), [email]);
+    if (selectTenantResult[0].length > 0) {
+      const createdDate = new Date(selectTenantResult[0][0].created_at);
+      const newDate = new Date(createdDate.getTime());
+      newDate.setDate(newDate.getDate() + 7); // Adding 7 days to the createdDate
+      
+      const currentDate = new Date();
+
+      if (currentDate <= newDate) {
+        const differenceInMilliseconds = newDate - currentDate;
+        const differenceInDays = Math.ceil(differenceInMilliseconds / (1000 * 60 * 60 * 24));
+        
+        if (differenceInDays === 0) {
+          return res.status(200).json({
+            message: `Today is your last day, so kindly verify your email.`,
+            date: createdDate,
+          });
+        } else {
+          return res.status(200).json({
+            message: `Your remaining days to verify your email: ${differenceInDays}`,
+            data: differenceInDays,
+            createdDate: createdDate,
+            newDate: newDate,
+            currentDate: currentDate,
+          });
+        }
+      } else {
+        return res.status(200).json({
+          message: `Your account is locked due to email verification. Please verify your email.`,
+        });
+      }
+    } else {
+      return res.status(400).send('landlord is not found');
+    }
+  } catch (error) {
+    res.send("Error occurred while verifying the landlord's email: " + error);
+  }
+};
+
+
+//  ############################# Tenant verify Mail Check END  ############################################################
+
+
+//  ############################# Email Start ############################################################
+exports.emailUpdate = async (req, res) => {
+  const {id, email} = req.body;
+  try {
+    const userCheckResult = await queryRunner(
+      selectQuery("users", "id"),
+      [id]
+    );
+
+    
+    if (userCheckResult[0].length > 0) {
+      const emailExist = userCheckResult[0][0].Email;
+      // console.log(userCheckResult[0]);
+      console.log(emailExist);
+      const emailResult = await queryRunner(updateEmailQuery, [
+        email,
+        emailExist
+      ]);
+      if (emailResult[0].affectedRows > 0) {
+        return res.status(200).json({
+          message: " Email updated successful ",
+        });
+      }else {
+    return res.status(400).send("Error1");
+  
+      }
+    } else {
+      return res.send("User is not found");
+    }
+
+  } catch (error) {
+    res.send("Error Get Email updated landlord  " + error);
+    console.log(error);
+  }
+};
+//  ############################# Email End ############################################################
+
+
+
+//  ############################# verify Email Update Start ############################################################
+exports.verifyEmailUpdate = async (req, res) => {
+  const {id, token} = req.body;
+  const status = 'Email Verified';
+  try {
+    const userCheckResult = await queryRunner(selectQuery("users", "id"),[id]); 
+    
+    if (userCheckResult[0].length > 0) {
+      const emailExist = userCheckResult[0][0].Email;
+      const existToken = userCheckResult[0][0].token;
+if(token == existToken){ 
+    const emailResult = await queryRunner(updateVerifiedStatusQuery, [
+      status,
+      id
+    ]);
+    if (emailResult.affectedRows === 0) {
+      return res.status(400).send("Email Verified status is not updated");
+    } 
+else {
+  return res.status(200).json({
+    message: " Email verified successful ",
+  });
+    }
+    }else{
+      return res.status(200).json({
+        message: " token code is not match ",
+      }); 
+    }
+  } else {
+    return res.send("User is not found");
+  }
+  } catch (error) {
+    res.send("Error Get Email Verified updated landlord  " + error);
+    console.log(error);
+  }
+};
+//  ############################# verify Email Update End ############################################################

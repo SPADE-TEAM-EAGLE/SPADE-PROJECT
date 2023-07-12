@@ -25,7 +25,7 @@ router.post("/verifyResetEmailCode", userController.verifyResetEmailCode);
 router.post("/updatePassword", userController.updatePassword);
 router.post("/resendCode", userController.resendCode);
 router.get("/pricingPlan", userController.pricingPlan);
-router.post("/property", verifyToken, userController.property);
+router.post("/property" ,verifyToken, userController.property);
 router.put("/updateUserProfile", verifyToken, userController.updateUserProfile);
 // router.post('/property', upload , userController.property);
 router.get("/allProperty", verifyToken, userController.getproperty);
@@ -37,7 +37,7 @@ router.put(
   userController.putPropertyUnitsUpdates
 );
 router.delete("/propertyDelete", verifyToken, userController.propertyDelete);
-router.put("/updateProperty",[verifyToken, upload],userController.propertyUpdate);
+router.put("/updateProperty",verifyToken,userController.propertyUpdate);
 // router.get('/viewProperty' ,userController.propertyView);
 router.get("/viewProperty", verifyToken, userController.propertyView);
 router.get('/resendEmail', verifyToken,invoiceController.resendEmail);
@@ -73,7 +73,7 @@ router.post(
 );
 // router.post('/tenantIncreaseRent' , userController.tenantIncreaseRent);
 // router.get('/verifyMailCheck',verifyToken,  userController.verifyMailCheck);
-router.get('/verifyMailCheck', tenantController.verifyMailCheck);
+router.get('/verifyMailCheck', userController.verifyMailCheck);
 router.get('/resetEmailTenant', tenantController.createResetEmailTenant);
 router.post('/verifyResetEmailCodeTenant', tenantController.verifyResetEmailCodeTenant);
 router.put('/updatePasswordTenant', tenantController.updatePasswordTenant);
@@ -83,23 +83,23 @@ router.post('/tenantAttachFile',[verifyToken,upload], tenantController.tenantAtt
 router.delete('/tenantAttachFileDelete' ,verifyToken, tenantController.tenantAttachFileDelete);
 router.delete('/tenantDelete',verifyToken ,tenantController.tenantDelete);
 router.get('/getTenantsByID', verifyToken,tenantController.getTenantsByID);
-router.post('/createInvoice',[verifyToken,upload], invoiceController.createInvoice);
+router.post('/createInvoice',verifyToken, invoiceController.createInvoice);
 router.put('/putInvoiceStatusUpdates',verifyToken ,invoiceController.putInvoiceStatusUpdates);
 router.get('/getAllInvoices', verifyToken ,invoiceController.getAllInvoices);
 router.get('/getByIdInvoices', verifyToken ,invoiceController.getByIdInvoices);
-router.put('/UpdateInvoice', [verifyToken,upload], invoiceController.UpdateInvoice);
+router.put('/UpdateInvoice', verifyToken, invoiceController.UpdateInvoice);
 router.delete('/invoiceDelete',verifyToken ,invoiceController.invoiceDelete);
 router.post("/addVendor", verifyToken,taskController.addVendors);
 // router.get("/getAllVendors",verifyToken ,taskController.getAllVendors);
 router.get("/getAllVendors",verifyToken ,taskController.getAllVendors);
-router.post("/addTasks",[verifyToken ,upload], taskController.addTasks);
+router.post("/addTasks",verifyToken, taskController.addTasks);
 router.get("/getAllTask",verifyToken ,taskController.getAllTask);
 router.get("/taskByID",verifyToken ,taskController.taskByID);
 router.put("/updateTenants", verifyToken,tenantController.updateTenants);
 router.get("/getStates", userController.getStates);
 router.get("/getVendorCategory" ,taskController.getVendorCategory);
 router.get("/getVendorAssignTo",verifyToken ,taskController.getVendorAssignTo);
-router.put("/updateTasks",[verifyToken,upload] ,taskController.updateTasks);
+router.put("/updateTasks",verifyToken ,taskController.updateTasks);
 router.delete("/deleteTask" ,taskController.deleteTask);
 router.get("/propertyTask",verifyToken ,userController.propertyTask);
 router.get("/tenantTask", verifyToken,tenantController.tenantTask);
@@ -108,5 +108,7 @@ router.get("/getAllTaskTenant",verifyTokenTenant ,tenantPortalController.getAllT
 router.get('/getTenantByID', verifyTokenTenant,tenantPortalController.getTenantByID);
 router.put('/changePasssword',verifyToken, settingController.changePasssword);
 router.put('/changePasswordTenant', verifyTokenTenant,settingController.changePasswordTenant);
+router.put('/emailUpdate' ,userController.emailUpdate);
+router.put('/verifyEmailUpdate' ,userController.verifyEmailUpdate);
 
 module.exports = router;
