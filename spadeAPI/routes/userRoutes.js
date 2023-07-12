@@ -73,7 +73,7 @@ router.post(
 );
 // router.post('/tenantIncreaseRent' , userController.tenantIncreaseRent);
 // router.get('/verifyMailCheck',verifyToken,  userController.verifyMailCheck);
-router.get('/verifyMailCheck', tenantController.verifyMailCheck);
+router.get('/verifyMailCheck', userController.verifyMailCheck);
 router.get('/resetEmailTenant', tenantController.createResetEmailTenant);
 router.post('/verifyResetEmailCodeTenant', tenantController.verifyResetEmailCodeTenant);
 router.put('/updatePasswordTenant', tenantController.updatePasswordTenant);
@@ -108,5 +108,7 @@ router.get("/getAllTaskTenant",verifyTokenTenant ,tenantPortalController.getAllT
 router.get('/getTenantByID', verifyTokenTenant,tenantPortalController.getTenantByID);
 router.put('/changePasssword',verifyToken, settingController.changePasssword);
 router.put('/changePasswordTenant', verifyTokenTenant,settingController.changePasswordTenant);
+router.put('/emailUpdate' ,userController.emailUpdate);
+router.put('/verifyEmailUpdate' ,userController.verifyEmailUpdate);
 
 module.exports = router;

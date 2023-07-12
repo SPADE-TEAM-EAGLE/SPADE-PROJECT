@@ -181,4 +181,6 @@ taskimages AS ti ON tk.id = ti.taskID WHERE tk.tenantID = ?`;
 exports.updateTasksQuery = "UPDATE task SET taskName = ? , tenantID = ? , dueDate = ? , status = ? , priority = ? , notes = ? , notifyTenant = ? , notifyVendor = ? , updated_at = ? where id = ? ";
 exports.updatePassword = "UPDATE users SET Password = ? , updated_at = ? where id = ? ";
 exports.updatePasswordTenantSetting = "UPDATE tenants SET tenantPassword = ? , tenantUpdated_at = ? where id = ? ";
+exports.updateEmailQuery = "UPDATE users SET Email = ? where Email = ? ";
+exports.updateVerifiedStatusQuery = "UPDATE users SET userVerified = ? where id = ? ";
 
