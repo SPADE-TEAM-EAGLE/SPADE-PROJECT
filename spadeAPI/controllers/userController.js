@@ -26,6 +26,8 @@ const {
   selectAllTenantsProperty,
   updateUser,
   updatePlanId,
+  updateEmailQuery,
+  updateVerifiedStatusQuery,
   delteImageFromDb
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
@@ -105,8 +107,9 @@ exports.getUser = (req, res) => {
 
 exports.Signin = async function (req, res) {
   const { email, password, tenant } = req.query;
-  // const { email, password, tenant } = req.body;
-
+  console.log(req.query)
+  // console.log(1)
+  // let selectResult;
   try {
     // for tenant
     if (tenant == "tenant") {
@@ -118,7 +121,6 @@ exports.Signin = async function (req, res) {
       } else if (
         await bcrypt.compare(password, selectResult[0][0].tenantPassword)
       ) {
-        console.log(config.JWT_SECRET_KEY)
         const token = jwt.sign({ email, password }, config.JWT_SECRET_KEY, {
           expiresIn: "3h",
         });
@@ -142,23 +144,26 @@ exports.Signin = async function (req, res) {
       } else if (await bcrypt.compare(password, selectResult[0][0].Password)) {
         const token = jwt.sign({ email, password }, config.JWT_SECRET_KEY, {
           expiresIn: "3h",
-        });
-        const emai = "umairnazakat2222@gmail.com"
-        const emailMessage = await verifyMailCheck(emai);
-        if (emailMessage.message == "Your account is locked due to email verification. Firstly verify your email.") {
-          res.status(200).json({
-            token: token,
-            body: selectResult[0][0],
-            message: "Email is not verified",
-          });
-        } else {
-          res.status(200).json({
-            token: token,
-            body: selectResult[0][0],
-            message: "Successful Login",
-          });
-        }
-
+        }); 
+        // const emai = "umairnazakat2222@gmail.com"
+      //  const emailMessage =  await verifyMailCheck(email);
+       const emailMessage =  await verifyMailCheck(email);
+       if(emailMessage.message == "Your account is locked due to email verification. Please verify your email."){
+         res.status(200).json({
+           body: selectResult[0][0],
+           message: "Email is not verified",
+           msg : emailMessage.message
+         });
+       }else{
+       res.status(200).json({
+         token: token,
+         body: selectResult[0][0],
+         message: "Successful Loginsss",
+         msg : emailMessage.message,
+         email : email
+       });
+     }
+ 
       } else {
         res.status(400).send("Incorrect Password");
       }
@@ -168,7 +173,6 @@ exports.Signin = async function (req, res) {
     res.status(400).send(error.message);
   }
 };
-
 exports.Signinall = async function (req, res) {
   try {
     const selectResult = await queryRunner(selectQuery("users"));
@@ -1336,3 +1340,127 @@ exports.propertyTask = async (req, res) => {
 
 
 
+//  ############################# Tenant verify Mail Check Start  ############################################################
+
+exports.verifyMailCheck = async (req, res) => {
+  const { email } = req.body;
+  try {
+    const selectTenantResult = await queryRunner(selectQuery("users", "Email"), [email]);
+    if (selectTenantResult[0].length > 0) {
+      const createdDate = new Date(selectTenantResult[0][0].created_at);
+      const newDate = new Date(createdDate.getTime());
+      newDate.setDate(newDate.getDate() + 7); // Adding 7 days to the createdDate
+      
+      const currentDate = new Date();
+
+      if (currentDate <= newDate) {
+        const differenceInMilliseconds = newDate - currentDate;
+        const differenceInDays = Math.ceil(differenceInMilliseconds / (1000 * 60 * 60 * 24));
+        
+        if (differenceInDays === 0) {
+          return res.status(200).json({
+            message: `Today is your last day, so kindly verify your email.`,
+            date: createdDate,
+          });
+        } else {
+          return res.status(200).json({
+            message: `Your remaining days to verify your email: ${differenceInDays}`,
+            data: differenceInDays,
+            createdDate: createdDate,
+            newDate: newDate,
+            currentDate: currentDate,
+          });
+        }
+      } else {
+        return res.status(200).json({
+          message: `Your account is locked due to email verification. Please verify your email.`,
+        });
+      }
+    } else {
+      return res.status(400).send('landlord is not found');
+    }
+  } catch (error) {
+    res.send("Error occurred while verifying the landlord's email: " + error);
+  }
+};
+
+
+//  ############################# Tenant verify Mail Check END  ############################################################
+
+
+//  ############################# Email Start ############################################################
+exports.emailUpdate = async (req, res) => {
+  const {id, email} = req.body;
+  try {
+    const userCheckResult = await queryRunner(
+      selectQuery("users", "id"),
+      [id]
+    );
+
+    
+    if (userCheckResult[0].length > 0) {
+      const emailExist = userCheckResult[0][0].Email;
+      // console.log(userCheckResult[0]);
+      console.log(emailExist);
+      const emailResult = await queryRunner(updateEmailQuery, [
+        email,
+        emailExist
+      ]);
+      if (emailResult[0].affectedRows > 0) {
+        return res.status(200).json({
+          message: " Email updated successful ",
+        });
+      }else {
+    return res.status(400).send("Error1");
+  
+      }
+    } else {
+      return res.send("User is not found");
+    }
+
+  } catch (error) {
+    res.send("Error Get Email updated landlord  " + error);
+    console.log(error);
+  }
+};
+//  ############################# Email End ############################################################
+
+
+
+//  ############################# verify Email Update Start ############################################################
+exports.verifyEmailUpdate = async (req, res) => {
+  const {id, token} = req.body;
+  const status = 'Email Verified';
+  try {
+    const userCheckResult = await queryRunner(selectQuery("users", "id"),[id]); 
+    
+    if (userCheckResult[0].length > 0) {
+      const emailExist = userCheckResult[0][0].Email;
+      const existToken = userCheckResult[0][0].token;
+if(token == existToken){ 
+    const emailResult = await queryRunner(updateVerifiedStatusQuery, [
+      status,
+      id
+    ]);
+    if (emailResult.affectedRows === 0) {
+      return res.status(400).send("Email Verified status is not updated");
+    } 
+else {
+  return res.status(200).json({
+    message: " Email verified successful ",
+  });
+    }
+    }else{
+      return res.status(200).json({
+        message: " token code is not match ",
+      }); 
+    }
+  } else {
+    return res.send("User is not found");
+  }
+  } catch (error) {
+    res.send("Error Get Email Verified updated landlord  " + error);
+    console.log(error);
+  }
+};
+//  ############################# verify Email Update End ############################################################
