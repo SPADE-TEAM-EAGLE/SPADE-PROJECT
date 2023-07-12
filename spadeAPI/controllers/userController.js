@@ -107,7 +107,6 @@ exports.getUser = (req, res) => {
 
 exports.Signin = async function (req, res) {
   const { email, password, tenant } = req.query;
-  console.log(req.query)
   // console.log(1)
   // let selectResult;
   try {
@@ -500,10 +499,13 @@ exports.property = async (req, res) => {
 
   } catch (error) {
     res.status(400).json({
-      message: error.message,
+      message: "Error",
+      error: error.message,
     });
+    console.log(error);
   }
 };
+
 //  ############################# Property End ############################################################
 
 //  ############################# Get Property Start ############################################################

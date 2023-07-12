@@ -489,3 +489,43 @@ exports.resendEmail = async (req, res) => {
   }
 }
 //  ############################# Resend Email Invoice END ############################################################
+// ############################# create invoice categories ############################################################
+exports.createInvoiceCategories = async (req, res) => {
+  try {
+    const { category } = req.body;
+    const { userId } = req.user;
+    const createInvoiceCategoriesResult = await queryRunner(createInvoiceCategories, [userId, category]);
+    if (createInvoiceCategoriesResult[0].affectedRows > 0) {
+      res.status(200).json({
+        message: "Invoice Categories created successfully"
+      });
+    } else {
+      res.status(400).json({
+        message: "No data found"
+      });
+    }
+  } catch (error) {
+    console.log(error)
+    res.send("Error from create invoice categories");
+  }
+};
+// update categories text 
+exports.updateInvoiceCategories = async (req, res) => {
+  try {
+    const { setTaxes, catId } = req.body;
+    const { userId } = req.user;
+    const updateInvoiceCategoriesResult = await queryRunner(updateInvoiceCategories, [setTaxes, catId, userId]);
+    if (updateInvoiceCategoriesResult[0].affectedRows > 0) {
+      res.status(200).json({
+        message: "Invoice Categories updated successfully"
+      });
+    } else {
+      res.status(400).json({
+        message: "No data found"
+      });
+    }
+  } catch (error) {
+    console.log(error)
+    res.send("Error from update invoice categories");
+  }
+};

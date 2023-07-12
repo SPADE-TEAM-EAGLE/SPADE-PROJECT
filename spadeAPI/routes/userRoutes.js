@@ -25,7 +25,7 @@ router.post("/verifyResetEmailCode", userController.verifyResetEmailCode);
 router.post("/updatePassword", userController.updatePassword);
 router.post("/resendCode", userController.resendCode);
 router.get("/pricingPlan", userController.pricingPlan);
-router.post("/property" ,verifyToken, userController.property);
+router.post("/property", verifyToken, userController.property);
 router.put("/updateUserProfile", verifyToken, userController.updateUserProfile);
 // router.post('/property', upload , userController.property);
 router.get("/allProperty", verifyToken, userController.getproperty);
@@ -110,5 +110,8 @@ router.put('/changePasssword',verifyToken, settingController.changePasssword);
 router.put('/changePasswordTenant', verifyTokenTenant,settingController.changePasswordTenant);
 router.put('/emailUpdate' ,userController.emailUpdate);
 router.put('/verifyEmailUpdate' ,userController.verifyEmailUpdate);
-
+ 
+router.post("/addInvoiceCategory",verifyToken ,invoiceController.createInvoiceCategories);
+// updated category route
+router.put("/updatedInvoiceCategory",verifyToken ,invoiceController.updateInvoiceCategories);
 module.exports = router;
