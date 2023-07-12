@@ -50,6 +50,9 @@ exports.deleteQuery = (table, ...field) => {
   }
 };
 
+// delete all images where property id = id from propertyImage
+exports.delteImageFromDb  = "DELETE FROM propertyimage WHERE imageKey = ?"
+
 exports.addResetToken =
   "UPDATE users SET token = ?, updated_at = ? where id = ?";
 exports.updatePasswordLandlord =
@@ -63,9 +66,9 @@ exports.updateUser = "UPDATE users SET FirstName = ?, LastName = ?, Email = ?, P
 exports.updatePlanId = "UPDATE users SET PlanID = ? WHERE id = ?";
 exports.insertInProperty =
   "INSERT INTO property (landlordID, propertyName, address, city, state, zipCode, propertyType, propertySQFT,status,units) VALUES (?,?,?,?,?,?,?,?,?,?)";
-exports.insertInPropertyImage = "INSERT INTO propertyimage (propertyID, Image) VALUES (?,?)";
+exports.insertInPropertyImage = "INSERT INTO propertyimage (propertyID, Image, imageKey) VALUES (?,?,?)";
 exports.insertInTaskImage =
-  "INSERT INTO taskimages (taskID, taskImages) VALUES (?,?)";
+  "INSERT INTO taskimages (taskID, taskImages, taskImagesKey) VALUES (?,?,?)";
 exports.insertInPropertyUnits =
   "INSERT INTO propertyunits (propertyID, unitNumber,Area,unitDetails,status) VALUES (?,?,?,?,?)";
 exports.updateProperty =

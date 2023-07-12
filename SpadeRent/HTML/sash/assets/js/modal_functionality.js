@@ -276,14 +276,9 @@ $('#close,#top-close').on('click', function (e) {
     resetAccordions()
     $('#addModal').modal('hide');
 })
-$(document).on('click', '#next', function (e) {
-    e.preventDefault()
-    selectedFiles=[]
-    // resetAccordions()
-    // $("#largemodal").addClass("hide");
-    var formData = new FormData();
-    
-    // Get the form data
+$(document).on('click', '#next', function(e) {
+    e.preventDefault();
+
     var propertyName = $("#propertyName").val();
     var address = $("#address").val();
     var city = $("#city").val();
@@ -292,71 +287,99 @@ $(document).on('click', '#next', function (e) {
     var propertyType = $("#propertyType").val();
     var propertySQFT = $("#propertyTotalSF").val();
     var units = $("#units").val();
-    
-    // Add the form data to the FormData object
-    formData.append('propertyName', propertyName);
-    formData.append('address', address);
-    formData.append('city', city);
-    formData.append('state', "Texas");
-    formData.append('zipCode', zipCode);
-    formData.append('propertyType', propertyType);
-    formData.append('propertySQFT', propertySQFT);
-    formData.append('units', units);
-    
-    // Get the selected files
-    var files = $('#fileInput')[0].files;
-    
-    // Add the files to the FormData object
-    for (var i = 0; i < files.length; i++) {
-        formData.append('image', files[i]);
-    }
-    // if(selectedFiles.length>=1){
-    //     $.ajax({
-    //     url: 'http://localhost:3000/api/spade/upload',
-    //     type: 'POST',
-    //     data: formData,
-    //     contentType: false,
-    //     processData: false,
-    //     headers: {
-    //         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-    //     },
 
-    //     success: function(response) {
-    //         console.log(response)
-    //         // console.log(233333)
-    //     },
-    //     error: function(xhr, status, error) {
-    //         window.alert('Error: ' + error);
-    //     }
-    // });
-    // }
-    $('#addModal').modal('hide');
-    // Send the form data to the server using AJAX
-    $.ajax({
-        url: 'https://backend.app.spaderent.com/api/spade/property',
-        type: 'POST',
-        data: formData,
-        contentType: false,
-        processData: false,
-        headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-        },
+    var selectedFiles = $('#fileInput')[0].files;
 
-        success: function (response) {
-            // console.log(1)
-            $("#unit-link").attr("href",`./property-unit.html?propertyId=${response.propertyId}`)
-    resetAccordions()
-
-            $('#succesModal').modal('show')
-
-            // window.location = '../Landlord/properties-all.html';
-        },
-        error: function (xhr, status, error) {
-            window.alert('Error: ' + error);
+    if (selectedFiles.length >= 1) {
+        var uploadFormData = new FormData();
+        for (var i = 0; i < selectedFiles.length; i++) {
+            uploadFormData.append('image', selectedFiles[i]);
         }
-    });
+$("#addModal").modal("hide")
+        $.ajax({
+            url: 'https://backend.app.spaderent.com/api/spade/upload',
+            type: 'POST',
+            data: uploadFormData,
+            contentType: false,
+            processData: false,
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+            },
+            success: function(response) {
+                var imageArray = response.images;
+                var propertyData = {
+                    propertyName: propertyName,
+                    address: address,
+                    city: city,
+                    state: state,
+                    zipCode: zipCode,
+                    propertyType: propertyType,
+                    propertySQFT: propertySQFT,
+                    units: units,
+                    images: imageArray
+                };
 
+                $.ajax({
+                    url: 'https://backend.app.spaderent.com/api/spade/property',
+                    type: 'POST',
+                    data: JSON.stringify(propertyData),
+                    contentType: 'application/json',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        // console.log(1)
+                        $("#unit-link").attr("href",`./property-unit.html?propertyId=${response.propertyId}`)
+                resetAccordions()
+            
+                        $('#succesModal').modal('show')
+            
+                        // window.location = '../Landlord/properties-all.html';
+                    },
+                    error: function (xhr, status, error) {
+                        window.alert('Error: ' + error);
+                    }
+                });
+            },
+            error: function(xhr, status, error) {
+                window.alert('Error: ' + error);
+            }
+        });
+    } else {
+        var propertyData = {
+            propertyName: propertyName,
+            address: address,
+            city: city,
+            state: state,
+            zipCode: zipCode,
+            propertyType: propertyType,
+            propertySQFT: propertySQFT,
+            units: units,
+            images: []
+        };
 
+        $.ajax({
+            url: 'https://backend.app.spaderent.com/api/spade/property',
+            type: 'POST',
+            data: JSON.stringify(propertyData),
+            contentType: 'application/json',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+            },
+            success: function (response) {
+                // console.log(1)
+                $("#unit-link").attr("href",`./property-unit.html?propertyId=${response.propertyId}`)
+        resetAccordions()
+    
+                $('#succesModal').modal('show')
+    
+                // window.location = '../Landlord/properties-all.html';
+            },
+            error: function (xhr, status, error) {
+                window.alert('Error: ' + error);
+            }
+        });
+    }
 });
 let propertyId;
 

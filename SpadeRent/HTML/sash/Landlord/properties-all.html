@@ -562,6 +562,35 @@
 </head>
 
 <body class="app sidebar-mini ltr light-mode">
+    <div class="modal fade effect-scale" id="modaldemo8" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-l" role="document">
+            <div class="modal-content">
+                <!-- <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+                </div> -->
+                <div class="modal-body pt-5">
+                    <div class="d-flex flex-column justify-content-center align-items-center p-5" style="text-align: center;">
+                        <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" style="max-width: 110px;" class="Rent-logo mb-5"  />
+                        <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
+                        <h6 class="text-default mb-3">Get started with Spade Rent! Continue with Google to verify</h6>
+                        <input type="email" class="form-control form mb-2" style="min-width: 200px;max-width: 350px;" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the name of the property.">
+                        <a class="text-primary mb-4" href="javascript:void(0)">Change Email</a>
+                        <div class="">
+                            <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2">Remind me Later</a>
+                            <a href="javascript:void(0)" class="btn btn-primary btn-pill">Resend Mail</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-primary">Save changes</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="successfully_changed" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered text-center" role="document">
             <div class="modal-content modal-content-demo">
@@ -1460,7 +1489,7 @@
                                         <h3 class="page-titlee text-white" style="font-weight: 100; margin-bottom: 0px;">Welcome to Spade Portal</h3>
                                         <h1 class="page-titlee text-white" style="font-weight: 700;" id="user-name">
                                         </h1>
-                                        <a href="javascript:void(0)" id="email_verification" class="btn btn-primary btn-pill btn-xl email-verification-btn"><i
+                                        <a id="email_verification" data-bs-toggle="modal" href="#modaldemo8" class="btn btn-primary btn-pill btn-xl email-verification-btn"><i
                                                 class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
                                             verification &nbsp; <i
                                                 class="angle fe fe-arrow-right create-btn-plus"></i></a>
@@ -2274,6 +2303,18 @@
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
     <script>
+        $(document).ready(function() {
+            $('#email_verification').on('click', function() {
+      if ($('body').hasClass('dark-mode')) {
+        $('.Rent-logo').attr('src', '../assets/images/logo_white.png');
+      }else{
+        $('.Rent-logo').attr('src', '../assets/images/Artboard GÇô 1.svg');
+      }
+    });
+    });
+    
+      </script>
+    <script>
         function checkFieldsStatus(accordionId) {
             var accordionFields = $('#' + accordionId + ' input[type="text"], #' + accordionId + ' select');
             var imageField = $('#' + accordionId + ' input[type="file"]');
@@ -2534,93 +2575,115 @@
                 resetAccordions()
             })
             $(document).on('click', '#next', function(e) {
-                e.preventDefault()
-                    // selectedFiles = []
-                
+    e.preventDefault();
 
-                // $("#largemodal").addClass("hide");
-                var formData = new FormData();
+    var propertyName = $("#propertyName").val();
+    var address = $("#address").val();
+    var city = $("#city").val();
+    var state = $("#state").val();
+    var zipCode = $("#zip").val();
+    var propertyType = $("#propertyType").val();
+    var propertySQFT = $("#propertyTotalSF").val();
+    var units = $("#units").val();
 
-                // Get the form data
-                var propertyName = $("#propertyName").val();
-                var address = $("#address").val();
-                var city = $("#city").val();
-                var state = $("#state").val();
-                var zipCode = $("#zip").val();
-                var propertyType = $("#propertyType").val();
-                var propertySQFT = $("#propertyTotalSF").val();
-                var units = $("#units").val();
+    var selectedFiles = $('#fileInput')[0].files;
+                console.log(selectedFiles,909090)
+    if (selectedFiles.length >= 1) {
+        var uploadFormData = new FormData();
+        for (var i = 0; i < selectedFiles.length; i++) {
+            uploadFormData.append('image', selectedFiles[i]);
+        }
+$("#addModal").modal("hide")
+        $.ajax({
+            url: 'https://backend.app.spaderent.com/api/spade/upload',
+            type: 'POST',
+            data: uploadFormData,
+            contentType: false,
+            processData: false,
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+            },
+            success: function(response) {
+                var imageArray = response.images;
+                var propertyData = {
+                    propertyName: propertyName,
+                    address: address,
+                    city: city,
+                    state: state,
+                    zipCode: zipCode,
+                    propertyType: propertyType,
+                    propertySQFT: propertySQFT,
+                    units: units,
+                    images: imageArray
+                };
 
-                // Add the form data to the FormData object
-                formData.append('propertyName', propertyName);
-                formData.append('address', address);
-                formData.append('city', city);
-                formData.append('state', state);
-                formData.append('zipCode', zipCode);
-                formData.append('propertyType', propertyType);
-                formData.append('propertySQFT', propertySQFT);
-                formData.append('units', units);
-
-                // Get the selected files
-                var files = $('#fileInput')[0].files;
-                // Add the files to the FormData object
-                for (var i = 0; i < selectedFiles.length; i++) {
-                    formData.append('image', selectedFiles[i]);
-                }
-                // console.log(formData)
-                // if(selectedFiles.length>=1){
-                //     $.ajax({
-                //     url: 'http://localhost:3000/api/spade/upload',
-                //     type: 'POST',
-                //     data: formData,
-                //     contentType: false,
-                //     processData: false,
-                //     headers: {
-                //         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                //     },
-
-                //     success: function(response) {
-                //         console.log(response)
-                //         console.log(233333)
-                //     },
-                //     error: function(xhr, status, error) {
-                //         window.alert('Error: ' + error);
-                //     }
-                // });
-                // }
-                $('#addModal').modal('hide');
-                // Send the form data to the server using AJAX
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/property',
                     type: 'POST',
-                    data: formData,
-                    contentType: false,
-                    processData: false,
+                    data: JSON.stringify(propertyData),
+                    contentType: 'application/json',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
-
                     success: function(response) {
-                        console.log(response)
-                        $("#unit-link").attr("href", `./property-unit.html?propertyId=${response.propertyId}`)
-                            // $("#add-tenant-link").attr("href",`./add-tenant.html`)
+                        console.log(response);
+                        $("#unit-link").attr("href", `./property-unit.html?propertyId=${response.propertyId}`);
                         if (response === "Property Already Exist") {
-                            $('#infoModal').modal('show')
-
+                            $('#infoModal').modal('show');
                         } else {
-                            getData()
-                            $('#succesModal').modal('show')
-                        } // console.log(1)
-
-                        // window.location = '../Landlord/properties-all.html';
+                            getData();
+                            $('#succesModal').modal('show');
+                        }
                     },
                     error: function(xhr, status, error) {
                         window.alert('Error: ' + error);
                     }
                 });
+            },
+            error: function(xhr, status, error) {
+                window.alert('Error: ' + error);
+            }
+        });
+    } else {
+        var propertyData = {
+            propertyName: propertyName,
+            address: address,
+            city: city,
+            state: state,
+            zipCode: zipCode,
+            propertyType: propertyType,
+            propertySQFT: propertySQFT,
+            units: units,
+            images: []
+        };
+$("#addModal").modal("hide")
+
+        $.ajax({
+            url: 'https://backend.app.spaderent.com/api/spade/property',
+            type: 'POST',
+            data: JSON.stringify(propertyData),
+            contentType: 'application/json',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+            },
+            success: function(response) {
+                console.log(response);
+                $("#unit-link").attr("href", `./property-unit.html?propertyId=${response.propertyId}`);
+                if (response === "Property Already Exist") {
+                    $('#infoModal').modal('show');
+                } else {
+                    getData();
+                    $('#succesModal').modal('show');
+                }
+            },
+            error: function(xhr, status, error) {
+                window.alert('Error: ' + error);
+            }
+        });
+    }
+});
 
 
-            });
             let propertyId;
 
 
@@ -2823,45 +2886,65 @@
             var propertySQFT = $("#propertyTotalSF_update").val();
             var units = $("#unit_update").val();
 
-            formData.append('id', propertyId);
-            formData.append('propertyName', propertyName);
-            formData.append('address', address);
-            formData.append('city', city);
-            formData.append('state', state);
-            formData.append('zipCode', zipCode);
-            formData.append('propertyType', propertyType);
-            formData.append('propertySQFT', propertySQFT);
-            formData.append('units', units);
+            // formData.append('id', propertyId);
+            // formData.append('propertyName', propertyName);
+            // formData.append('address', address);
+            // formData.append('city', city);
+            // formData.append('state', state);
+            // formData.append('zipCode', zipCode);
+            // formData.append('propertyType', propertyType);
+            // formData.append('propertySQFT', propertySQFT);
+            // formData.append('units', units);
 
             // Retrieve existing image names from the DOM
 
             var existingImageNames = [];
             selectedFiles.forEach((file) => {
-                    if (typeof file === "string") {
+                    if (file instanceof File) {
+                    }
+                    else{
                         existingImageNames.push(file)
                     }
                 })
                 // Get the selected files
-            var files = selectedFiles.map(function(file) {
+                if(selectedFiles.length>=1){
+                    var files = selectedFiles.map(function(file) {
                 return file instanceof File ? file : file.name;
             });
-
-            // Add the selected files to the FormData object
             files.forEach(function(file) {
                 formData.append('image', file);
             });
-
-            formData.append("existingImages", existingImageNames)
             $.ajax({
+            url: 'https://backend.app.spaderent.com/api/spade/upload',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+            },
+            success: function(response) {
+                var imageArray = [...response.images,...existingImageNames];
+                const formData={
+                    id:propertyId,
+                    propertyName:propertyName,
+                    address:address,
+                    city:city,
+                    state:state,
+                    zipCode:zipCode,
+                    propertyType:propertyType,
+                    propertySQFT:propertySQFT,
+                    units:units,
+                    images:imageArray
+                }
+                $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/updateProperty',
-                // url: 'http://ec2-54-158-103-230.compute-1.amazonaws.com:3000/api/spade/updateProperty',
                 type: 'PUT',
-                data: formData,
-                contentType: false,
-                processData: false,
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                },
+                data: JSON.stringify(formData),
+                    contentType: 'application/json',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
                 success: function(response) {
                     e.preventDefault()
                     getData();
@@ -2875,6 +2958,47 @@
                     window.alert('Error: ' + error);
                 }
             });
+                // var propertyData = {
+                //     propertyName: propertyName,
+                //     address: address,
+                //     city: city,
+                //     state: state,
+                //     zipCode: zipCode,
+                //     propertyType: propertyType,
+                //     propertySQFT: propertySQFT,
+                //     units: units,
+                //     images: imageArray
+                // };
+
+                // $.ajax({
+                //     url: 'https://backend.app.spaderent.com/api/spade/property',
+                //     type: 'POST',
+                //     data: JSON.stringify(propertyData),
+                //     contentType: 'application/json',
+                //     headers: {
+                //         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                //     },
+                //     success: function(response) {
+                //         console.log(response);
+                //         $("#unit-link").attr("href", `./property-unit.html?propertyId=${response.propertyId}`);
+                //         if (response === "Property Already Exist") {
+                //             $('#infoModal').modal('show');
+                //         } else {
+                //             getData();
+                //             $('#succesModal').modal('show');
+                //         }
+                //     },
+                //     error: function(xhr, status, error) {
+                //         window.alert('Error: ' + error);
+                //     }
+                // });
+            },
+            error: function(xhr, status, error) {
+                window.alert('Error: ' + error);
+            }
+        });
+            // formData.append("existingImages", existingImageNames)
+                }
         });
         $(document).on('click', '#confirmDelete', function(e) {
 
@@ -2908,16 +3032,16 @@
             // let data;
         function updateSelectedFilesContainer() {
             var selectedFilesContainer = $('.file-grid');
-            selectedFilesContainer.empty();
-            console.log(selectedFiles)
-            selectedFiles.forEach(function(file, index) {
-
-                var fileElement = $('<div>')
-                    .addClass('selected-file')
-                    .append(
-                        $('<img>')
-                        .addClass('file-preview')
-                        .attr('src', typeof file === "object" ? URL.createObjectURL(file) : '../../../../spadeAPI/uploads/' + file)
+selectedFilesContainer.empty();
+console.log(selectedFiles);
+selectedFiles.forEach(function(file, index) {
+    console.log(file);
+    var fileElement = $('<div>')
+        .addClass('selected-file')
+        .append(
+            $('<img>')
+            .addClass('file-preview')
+            .attr('src', (typeof file === "object" && file instanceof File) ? URL.createObjectURL(file) : file.imageURL)
                     )
                     .append(
                         $('<div>')
@@ -2983,10 +3107,8 @@
                         var tableBody = $('#table_body');
 
                         tableBody.empty();
-
-                        response.data[0] ?.forEach(function(property) {
-                            var image = '<td><img src="../../../../spadeAPI/uploads/' + property.images[0] + '" alt=""></td>';
-                            // var image = '<td><img src="../../../../../../Desktop/spade API 2/uploads/image-1684250579662.png" alt="hhghghgh"></td>';
+                        response.data[0].forEach(function(property) {
+  var image = '<td><img src="' + property.images[0]?.imageURL + '" alt=""></td>';
 
                             var propertyId = '<td class="property-id " style="font-weight: 600;">' + property
                                 .id + '</td>';
@@ -3061,7 +3183,7 @@
 
                             });
                             selectedFiles = data.images
-
+                            // console.log(selectedFiles)
                             // var option = $('<option>').text(data.city).val(data.city);
 
                             // Append the option to the select element

@@ -495,6 +495,35 @@
         </div>
     </div>
     <!-- /GLOBAL-LOADER -->
+    <div class="modal fade effect-scale" id="modaldemo8" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-l" role="document">
+            <div class="modal-content">
+                <!-- <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+                </div> -->
+                <div class="modal-body pt-5">
+                    <div class="d-flex flex-column justify-content-center align-items-center p-5" style="text-align: center;">
+                        <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" style="max-width: 110px;" class="Rent-logo mb-5"  />
+                        <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
+                        <h6 class="text-default mb-3">Get started with Spade Rent! Continue with Google to verify</h6>
+                        <input type="email" class="form-control form mb-2" style="min-width: 200px;max-width: 350px;" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the name of the property.">
+                        <a class="text-primary mb-4" href="javascript:void(0)">Change Email</a>
+                        <div class="">
+                            <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2">Remind me Later</a>
+                            <a href="javascript:void(0)" class="btn btn-primary btn-pill">Resend Mail</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-primary">Save changes</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
     <!-- Default Offcanvas-->
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
         <div class="offcanvas-header pt-5">
@@ -1006,7 +1035,7 @@
                                             id="property_name"></h1>
                                         <h5 class="page-titlee text-white" style="font-weight: 100;"
                                             id="property_address"></h5>
-                                        <a href="javascript:void(0)" id="email_verification"
+                                        <a data-bs-toggle="modal" href="#modaldemo8" id="email_verification"
                                                                     class="btn btn-primary btn-pill btn-xl email-verification-btn"><i
                                                                         class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
                                                                     verification &nbsp; <i
@@ -1915,7 +1944,18 @@
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
 
-
+    <script>
+        $(document).ready(function() {
+            $('#email_verification').on('click', function() {
+      if ($('body').hasClass('dark-mode')) {
+        $('.Rent-logo').attr('src', '../assets/images/logo_white.png');
+      }else{
+        $('.Rent-logo').attr('src', '../assets/images/Artboard GÇô 1.svg');
+      }
+    });
+    });
+    
+      </script>
     <script>
         // Get the user's preferred color scheme
         const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;

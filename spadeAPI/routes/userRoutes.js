@@ -25,7 +25,7 @@ router.post("/verifyResetEmailCode", userController.verifyResetEmailCode);
 router.post("/updatePassword", userController.updatePassword);
 router.post("/resendCode", userController.resendCode);
 router.get("/pricingPlan", userController.pricingPlan);
-router.post("/property", verifyToken, userController.property);
+router.post("/property" ,verifyToken, userController.property);
 router.put("/updateUserProfile", verifyToken, userController.updateUserProfile);
 // router.post('/property', upload , userController.property);
 router.get("/allProperty", verifyToken, userController.getproperty);
@@ -37,7 +37,7 @@ router.put(
   userController.putPropertyUnitsUpdates
 );
 router.delete("/propertyDelete", verifyToken, userController.propertyDelete);
-router.put("/updateProperty",[verifyToken, upload],userController.propertyUpdate);
+router.put("/updateProperty",verifyToken,userController.propertyUpdate);
 // router.get('/viewProperty' ,userController.propertyView);
 router.get("/viewProperty", verifyToken, userController.propertyView);
 router.get('/resendEmail', verifyToken,invoiceController.resendEmail);
