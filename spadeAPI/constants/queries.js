@@ -60,7 +60,7 @@ exports.updatePasswordLandlord =
   // "UPDATE users SET Password = ? where id = ? and token = ?";
   "UPDATE users SET Password = ? , updated_at = ? where id = ? AND token = ?";
 exports.insertInUsers =
-  "INSERT INTO users (id,FirstName, LastName, Email, Phone, Password, PlanID) VALUES (?,?, ?, ?, ?, ?, ?)";
+  "INSERT INTO users (id,FirstName, LastName, Email, Phone, Password, PlanID,created_at) VALUES (?,?, ?, ?, ?, ?, ?, ?)";
 // updated user query
 exports.updateUser = "UPDATE users SET FirstName = ?, LastName = ?, Email = ?, Phone = ?, updated_at = ?, BusinessName = ?, streetAddress = ?, BusinessAddress = ?, created_at = ? WHERE id = ?";
 // update plan id in user table

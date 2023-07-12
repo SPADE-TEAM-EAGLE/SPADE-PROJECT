@@ -39,6 +39,7 @@ const config = process.env;
 
 exports.createUser = async function (req, res) {
   const { firstName, lastName, email, phone, password, planID } = req.body;
+  currentDate = new Date();
   try {
     const selectResult = await queryRunner(selectQuery("users", "Email"), [
       email,
@@ -60,6 +61,7 @@ exports.createUser = async function (req, res) {
       phone,
       hashPassword,
       planID,
+      currentDate
     ]);
     const name = firstName + " " + lastName;
     const mailSubject = "Spade Welcome Email";
@@ -440,7 +442,8 @@ exports.property = async (req, res) => {
     images
   } = req.body;
   try {
-    const { userId } = req.user;
+    // const { userId } = req.user;
+    const { userId } = req.body;
     if (!propertyName || !address || !city || !state || !zipCode || !propertyType || !propertySQFT || !units) {
       throw new Error("Please fill all the fields");
     }
@@ -449,6 +452,7 @@ exports.property = async (req, res) => {
     if (propertycheckresult[0].length > 0) {
       throw new Error("Property Already Exist");
     }
+    // console.log("1");
     const status = "Non-active";
     // this line insert data into property table 
     const propertyResult = await queryRunner(insertInProperty, [
@@ -463,6 +467,7 @@ exports.property = async (req, res) => {
       status,
       units,
     ]);
+    // console.log("2");
     // if property data not inserted into property table then throw error
     if (propertyResult.affectedRows === 0) {
       throw new Error("Data doesn't inserted in property table");
