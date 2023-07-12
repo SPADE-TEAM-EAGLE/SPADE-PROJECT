@@ -279,7 +279,7 @@
   </style>
 </head>
 
-<body onload="check()">
+<body>
 
   <div class="modal fade" id="myModal_success" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered text-center" role="document">
@@ -570,7 +570,7 @@
                         tenant:"tenant"
                     },
                     success: function(response) {
-                        if(response.message == "Successful Login")
+                        if(response.message == "Successful Login" || response.message == "Email is not verified")
                         {
                           $("#id_password1").removeClass("is-invalid");
                           $("#login-email").removeClass("is-invalid");
