@@ -22,7 +22,8 @@ const {
   updateTasksQuery,
   selectVendorCategory,
   getVendors,
-  delteImageForTaskImages
+  delteImageForTaskImages,
+  addVendorCategory
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -672,3 +673,32 @@ exports.deleteTask = async (req, res) => {
   }
 };
 //  #############################  Delete Task ENDS HERE ##################################################
+
+// add vendor category
+exports.addVendorCategory = async (req, res) => {
+  const { category } = req.body;
+  try {
+    const { userId } = req.user;
+    const categoryCheckResult = await queryRunner(
+      selectQuery("vendorcategory", "category"),
+      [category]
+    );
+    if (categoryCheckResult[0].length > 0) {
+      return res.send("Category already exists");
+    } else {
+      const categoryResult = await queryRunner(
+        addVendorCategory,
+        [category,userId]
+      );
+      if (categoryResult.affectedRows === 0) {
+        return res.status(400).send("Error1");
+      }
+    }
+    res.status(200).json({
+      message: " Category created successful",
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send(error);
+  }
+}

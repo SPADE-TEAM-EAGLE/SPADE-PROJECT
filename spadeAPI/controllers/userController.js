@@ -145,24 +145,25 @@ exports.Signin = async function (req, res) {
           expiresIn: "3h",
         });
         // const emai = "umairnazakat2222@gmail.com"
-      //  const emailMessage =  await verifyMailCheck(email);
-       const emailMessage =  await verifyMailCheck(email);
-       if(emailMessage.message == "Your account is locked due to email verification. Please verify your email."){
-         res.status(200).json({
-           body: selectResult[0][0],
-           message: "Email is not verified",
-           msg : emailMessage.message
-         });
-       }else{
-       res.status(200).json({
-         token: token,
-         body: selectResult[0][0],
-         message: "Successful Loginsss",
-         msg : emailMessage.message,
-         email : email
-       });
-     }
- 
+        //  const emailMessage =  await verifyMailCheck(email);
+        const emailMessage = await verifyMailCheck(email);
+        if (emailMessage.message == "Your account is locked due to email verification. Please verify your email.") {
+          res.status(200).json({
+            body: selectResult[0][0],
+            message: "Email is not verified",
+            token: token,
+            msg: emailMessage.message
+          });
+        } else {
+          res.status(200).json({
+            token: token,
+            body: selectResult[0][0],
+            message: "Successful Loginsss",
+            msg: emailMessage.message,
+            email: email
+          });
+        }
+
       } else {
         res.status(400).send("Incorrect Password");
       }
@@ -189,9 +190,12 @@ exports.Signinall = async function (req, res) {
   }
 };
 exports.updateUserProfile = async function (req, res) {
-  const { firstName, lastName, email, phone, planID, BusinessName, streetAddress, BusinessAddress } = req.body;
+  const { firstName, lastName, email, phone, planID, BusinessName, streetAddress, BusinessAddress, imageUrl, imageKey } = req.body;
   const { userId } = req.user;
   try {
+    if(!firstName || !lastName || !email || !phone || !planID || !BusinessName || !streetAddress || !BusinessAddress || !imageUrl || !imageKey){
+      throw new Error("Please fill all the fields");
+    }
     const selectResult = await queryRunner(selectQuery("users", "id"), [
       userId,
     ]);
@@ -205,12 +209,14 @@ exports.updateUserProfile = async function (req, res) {
     }
     if (isUserExist) {
       const updateUserParams = [
-        firstName || null, // Replace undefined with null
-        lastName || null,
-        email || null,
-        phone || null,
-        planID || null,
-        BusinessName || null, streetAddress || null, BusinessAddress || null, created_at,
+        firstName, // Replace undefined with null
+        lastName,
+        email,
+        phone,
+        planID,
+        BusinessName, streetAddress, BusinessAddress, created_at,
+        imageUrl,
+        imageKey,
         userId,
       ];
       const updateResult = await queryRunner(updateUser, updateUserParams);
@@ -522,11 +528,11 @@ exports.getproperty = async (req, res) => {
           selectQuery("propertyimage", "propertyID"),
           [propertyID]
         );
-          console.log(allPropertyImageResult[0])
+        console.log(allPropertyImageResult[0])
         if (allPropertyImageResult.length > 0) {
           const propertyImages = allPropertyImageResult[0].map(
             (image) => {
-              return {imageURL:image.Image,imageKey:image.imageKey}
+              return { imageURL: image.Image, imageKey: image.imageKey }
             }
           );
           // Extract image URLs from the result
@@ -681,107 +687,107 @@ exports.propertyUpdate = async (req, res) => {
 }
 
 
-  // try {
-  //   const {
-  //     // existingImages,
-  //     propertyName,
-  //     address,
-  //     city,
-  //     state,
-  //     zipCode,
-  //     propertyType,
-  //     propertySQFT,
-  //     status,
-  //     id,
-  //     units,
-  //     images,
-  //   } = req.body;
-  //   const { userId } = req.user;
-  //   // console.log(`step : 2 send all values data into database`);
-  //   // const propertyUpdateResult = await queryRunner(updateProperty, [
-  //   //   userId,
-  //   //   propertyName,
-  //   //   address,
-  //   //   city,
-  //   //   state,
-  //   //   zipCode,
-  //   //   propertyType,
-  //   //   propertySQFT,
-  //   //   "Active",
-  //   //   units,
-  //   //   id,
-  //   // ]);
+// try {
+//   const {
+//     // existingImages,
+//     propertyName,
+//     address,
+//     city,
+//     state,
+//     zipCode,
+//     propertyType,
+//     propertySQFT,
+//     status,
+//     id,
+//     units,
+//     images,
+//   } = req.body;
+//   const { userId } = req.user;
+//   // console.log(`step : 2 send all values data into database`);
+//   // const propertyUpdateResult = await queryRunner(updateProperty, [
+//   //   userId,
+//   //   propertyName,
+//   //   address,
+//   //   city,
+//   //   state,
+//   //   zipCode,
+//   //   propertyType,
+//   //   propertySQFT,
+//   //   "Active",
+//   //   units,
+//   //   id,
+//   // ]);
 
 
-  //   console.log(propertycheckresult , "propertycheckresult")
-  //   if (propertyUpdateResult[0].affectedRows > 0) {
-  //     // console.log(`step : 3 check property images into database propertyid = ${id}`);
-  //     // check property images into database propertyid = ${id}
-  //     const propertycheckresult = await queryRunner(
-  //       selectQuery("propertyimage", "propertyID"),
-  //       [id]
-  //     );
+//   console.log(propertycheckresult , "propertycheckresult")
+//   if (propertyUpdateResult[0].affectedRows > 0) {
+//     // console.log(`step : 3 check property images into database propertyid = ${id}`);
+//     // check property images into database propertyid = ${id}
+//     const propertycheckresult = await queryRunner(
+//       selectQuery("propertyimage", "propertyID"),
+//       [id]
+//     );
 
-  //     if (propertycheckresult.length > 0) {
-  //       // propertyimages = propertycheckresult[0].map((image) => image.Image);
-  //       // let existingImg = existingImages.split(",");
-  //       // const imagesToDelete = propertyimages.filter(
-  //       //   (element) => !existingImg.includes(element)
-  //       // );
+//     if (propertycheckresult.length > 0) {
+//       // propertyimages = propertycheckresult[0].map((image) => image.Image);
+//       // let existingImg = existingImages.split(",");
+//       // const imagesToDelete = propertyimages.filter(
+//       //   (element) => !existingImg.includes(element)
+//       // );
 
-  //       // // Combine the common elements with array2
+//       // // Combine the common elements with array2
 
-  //       // imageToDelete(imagesToDelete);
-  //       // let propertyDeleteresult = [{ affectedRows: 0 }];
-  //       // // delete images Data into database
-  //       // if (imagesToDelete.length > 0) {
-  //       for (let i = 0; i < images.length; i++) {
-  //         const image = images[i].image_url;
-  //         propertyDeleteresult = await queryRunner(
-  //           deleteQuery("propertyimage", "Image"), [image]);
-  //         // console.log(propertyDeleteresult)
-  //       }
-  //       // }
+//       // imageToDelete(imagesToDelete);
+//       // let propertyDeleteresult = [{ affectedRows: 0 }];
+//       // // delete images Data into database
+//       // if (imagesToDelete.length > 0) {
+//       for (let i = 0; i < images.length; i++) {
+//         const image = images[i].image_url;
+//         propertyDeleteresult = await queryRunner(
+//           deleteQuery("propertyimage", "Image"), [image]);
+//         // console.log(propertyDeleteresult)
+//       }
+//       // }
 
-  //       // console.log(`step : 4 delete previous images data into database propertyid = ${id}`);
-  //       // console.log(propertyDeleteresult)
-  //       // if (propertyDeleteresult[0].affectedRows > 0) {
+//       // console.log(`step : 4 delete previous images data into database propertyid = ${id}`);
+//       // console.log(propertyDeleteresult)
+//       // if (propertyDeleteresult[0].affectedRows > 0) {
 
-  //       const fileNames = images;
-  //       // existingImg = [...fileNames];
-  //       // using loop to send new images data into database
-  //       for (let i = 0; i < fileNames.length; i++) {
-  //         // const img = existingImg[i];
-  //         const image = images[i].image_url;
-  //         const key = images[i].image_key;
-  //         const propertyImageResult = await queryRunner(insertInPropertyImage, [
-  //           id,
-  //           image,
-  //           key
-  //         ]);
-  //         if (propertyImageResult.affectedRows === 0) {
-  //           return res.send("Error2");
-  //         }
-  //       }
+//       const fileNames = images;
+//       // existingImg = [...fileNames];
+//       // using loop to send new images data into database
+//       for (let i = 0; i < fileNames.length; i++) {
+//         // const img = existingImg[i];
+//         const image = images[i].image_url;
+//         const key = images[i].image_key;
+//         const propertyImageResult = await queryRunner(insertInPropertyImage, [
+//           id,
+//           image,
+//           key
+//         ]);
+//         if (propertyImageResult.affectedRows === 0) {
+//           return res.send("Error2");
+//         }
+//       }
 
-  //       return res.status(201).json({
-  //         message: "Form Submited",
-  //       });
-  //     } else {
-  //       return res.status(400).json({
-  //         message: "No Property data found",
-  //       });
-  //     }
-  //   } else {
-  //     return res.status(400).json({
-  //       message: "No Property",
-  //     });
-  //   }
+//       return res.status(201).json({
+//         message: "Form Submited",
+//       });
+//     } else {
+//       return res.status(400).json({
+//         message: "No Property data found",
+//       });
+//     }
+//   } else {
+//     return res.status(400).json({
+//       message: "No Property",
+//     });
+//   }
 
-  // } catch (error) {
-  //   console.log(error);
-  //   return res.send("Error from Updating Property");
-  // }
+// } catch (error) {
+//   console.log(error);
+//   return res.send("Error from Updating Property");
+// }
 
 //  ############################# Update Property End ############################################################
 
@@ -1352,13 +1358,13 @@ exports.verifyMailCheck = async (req, res) => {
       const createdDate = new Date(selectTenantResult[0][0].created_at);
       const newDate = new Date(createdDate.getTime());
       newDate.setDate(newDate.getDate() + 7); // Adding 7 days to the createdDate
-      
+
       const currentDate = new Date();
 
       if (currentDate <= newDate) {
         const differenceInMilliseconds = newDate - currentDate;
         const differenceInDays = Math.ceil(differenceInMilliseconds / (1000 * 60 * 60 * 24));
-        
+
         if (differenceInDays === 0) {
           return res.status(200).json({
             message: `Today is your last day, so kindly verify your email.`,
@@ -1392,14 +1398,14 @@ exports.verifyMailCheck = async (req, res) => {
 
 //  ############################# Email Start ############################################################
 exports.emailUpdate = async (req, res) => {
-  const {id, email} = req.body;
+  const { id, email } = req.body;
   try {
     const userCheckResult = await queryRunner(
       selectQuery("users", "id"),
       [id]
     );
 
-    
+
     if (userCheckResult[0].length > 0) {
       const emailExist = userCheckResult[0][0].Email;
       // console.log(userCheckResult[0]);
@@ -1412,9 +1418,9 @@ exports.emailUpdate = async (req, res) => {
         return res.status(200).json({
           message: " Email updated successful ",
         });
-      }else {
-    return res.status(400).send("Error1");
-  
+      } else {
+        return res.status(400).send("Error1");
+
       }
     } else {
       return res.send("User is not found");
@@ -1431,35 +1437,35 @@ exports.emailUpdate = async (req, res) => {
 
 //  ############################# verify Email Update Start ############################################################
 exports.verifyEmailUpdate = async (req, res) => {
-  const {id, token} = req.body;
+  const { id, token } = req.body;
   const status = 'Email Verified';
   try {
-    const userCheckResult = await queryRunner(selectQuery("users", "id"),[id]); 
-    
+    const userCheckResult = await queryRunner(selectQuery("users", "id"), [id]);
+
     if (userCheckResult[0].length > 0) {
       const emailExist = userCheckResult[0][0].Email;
       const existToken = userCheckResult[0][0].token;
-if(token == existToken){ 
-    const emailResult = await queryRunner(updateVerifiedStatusQuery, [
-      status,
-      id
-    ]);
-    if (emailResult.affectedRows === 0) {
-      return res.status(400).send("Email Verified status is not updated");
-    } 
-else {
-  return res.status(200).json({
-    message: " Email verified successful ",
-  });
+      if (token == existToken) {
+        const emailResult = await queryRunner(updateVerifiedStatusQuery, [
+          status,
+          id
+        ]);
+        if (emailResult.affectedRows === 0) {
+          return res.status(400).send("Email Verified status is not updated");
+        }
+        else {
+          return res.status(200).json({
+            message: " Email verified successful ",
+          });
+        }
+      } else {
+        return res.status(200).json({
+          message: " token code is not match ",
+        });
+      }
+    } else {
+      return res.send("User is not found");
     }
-    }else{
-      return res.status(200).json({
-        message: " token code is not match ",
-      }); 
-    }
-  } else {
-    return res.send("User is not found");
-  }
   } catch (error) {
     res.send("Error Get Email Verified updated landlord  " + error);
     console.log(error);
