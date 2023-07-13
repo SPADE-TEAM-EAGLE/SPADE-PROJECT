@@ -159,7 +159,7 @@ exports.Signin = async function (req, res) {
        res.status(200).json({
          token: token,
          body: selectResult[0][0],
-         message: "Successful Loginsss",
+         message: "Successful Login",
          msg : emailMessage.message,
          email : email
        });
