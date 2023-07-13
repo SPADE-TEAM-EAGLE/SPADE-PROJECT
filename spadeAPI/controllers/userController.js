@@ -1441,7 +1441,7 @@ exports.emailUpdate = async (req, res) => {
 
 //  ############################# verify Email Update Start ############################################################
 exports.verifyEmailUpdate = async (req, res) => {
-  const {id, token} = req.body;
+  const {id, token, email, password } = req.body;
   const status = 'Email Verified';
   try {
     const userCheckResult = await queryRunner(selectQuery("users", "id"),[id]); 
@@ -1458,7 +1458,11 @@ if(token == existToken){
       return res.status(400).send("Email Verified status is not updated");
     } 
 else {
+  const token = jwt.sign({ email, password }, config.JWT_SECRET_KEY, {
+    expiresIn: "3h",
+  });
   return res.status(200).json({
+    token : token,
     message: " Email verified successful ",
   });
     }
