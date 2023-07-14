@@ -59,15 +59,15 @@ exports.createInvoice = async (req, res) => {
       // select tenants 
       const invoiceID = invoiceResult[0].insertId;
       console.log(invoiceID, "invoiceID")
-      const selectTenantsResult = await queryRunner(selectQuery('tenants', 'id'), [tenantID])
+      const selectTenantsResult = await queryRunner(selectQuery('users', 'id'), [userId])
       if (selectTenantsResult[0].length > 0) {
-        const tenantEmail = selectTenantsResult[0][0].email;
-        const tenantName = selectTenantsResult[0][0].firstName + " " + selectTenantsResult[0][0].lastName;
+        const landlordEmail = selectTenantsResult[0][0].Email;
+        const landlordName = selectTenantsResult[0][0].FirstName + " " + selectTenantsResult[0][0].LastName;
 
-        if (sendmails == "Yes") {
+        // if (sendmails == "Yes") {
           const mailSubject = invoiceID + " From " + frequency;
-          sendMail.invoiceSendMail(tenantName, tenantEmail, mailSubject, dueDays, invoiceID, frequency);
-        }
+          sendMail.invoiceSendMail(landlordName, landlordEmail, mailSubject, dueDays, invoiceID, frequency);
+        // }
       }
 
 
@@ -278,7 +278,7 @@ exports.UpdateInvoice = async (req, res) => {
   } = req.body;
   try {
     const { userId } = req.user
-    console.log(req.body)
+    // console.log(req.body)
     const currentDate = new Date();
     const invoiceUpdatedResult = await queryRunner(updateInvoice, [
       tenantID,
@@ -342,12 +342,12 @@ exports.UpdateInvoice = async (req, res) => {
       console.log(invoiceCheckResult[0])
 console.log(propertyImageKeys)
       // Find the images to delete from S3 (present in propertycheckresult but not in images)
-      const imagesToDelete = invoiceCheckResult[0].filter(image => !images.some(img => img.ImageKey === image.ImageKey));
+      const imagesToDelete = invoiceCheckResult[0].filter(image => !images.some(img => img.imageKey === image.ImageKey));
         console.log(imagesToDelete)
       // Delete images from S3
       for (let i = 0; i < imagesToDelete.length; i++) {
-        await deleteImageFromS3(imagesToDelete[i].imageKey);
-        await queryRunner(delteImageForInvoiceImages, [imagesToDelete[i].imageKey]);
+        await deleteImageFromS3(imagesToDelete[i].ImageKey);
+        await queryRunner(delteImageForInvoiceImages, [imagesToDelete[i].ImageKey]);
       }
 
       // Find the images to insert into the database (present in images but not in propertycheckresult)
