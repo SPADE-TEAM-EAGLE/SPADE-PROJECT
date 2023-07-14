@@ -46,6 +46,7 @@ exports.createInvoice = async (req, res) => {
   } = req.body;
   try {
     const { userId } = req.user;
+    console.log(req.body)
     // console.log(userId)
     // if (!tenantID || !invoiceType || !startDate || !endDate || !frequency || !dueDate || !dueDays || !repeatTerms || !terms || !additionalNotes || !lineItems || !sendmails || !totalAmount) {
     //   throw new Error("Please fill all the fields");
@@ -73,14 +74,16 @@ exports.createInvoice = async (req, res) => {
 
       if (lineItems) {
         for (let i = 0; i < lineItems.length; i++) {
-          const category = lineItems[i].category;
-          const property = lineItems[i].property;
-          const memo = lineItems[i].memo;
-          const amount = lineItems[i].amount;
-          const invoiceLineItemsResult = await queryRunner(insertLineItems, [invoiceID, category, property, memo, amount])
-          if (invoiceLineItemsResult.affectedRows === 0) {
-            res.send('Error2');
-            return;
+          if(Object.keys(lineItems[i]).length>=1){
+            const category = lineItems[i].category;
+            const property = lineItems[i].property;
+            const memo = lineItems[i].memo;
+            const amount = lineItems[i].amount;
+            const invoiceLineItemsResult = await queryRunner(insertLineItems, [invoiceID, category, property, memo, amount])
+            if (invoiceLineItemsResult.affectedRows === 0) {
+              res.send('Error2');
+              return;
+            }
           }
         }
       }
@@ -275,6 +278,7 @@ exports.UpdateInvoice = async (req, res) => {
   } = req.body;
   try {
     const { userId } = req.user
+    console.log(req.body)
     const currentDate = new Date();
     const invoiceUpdatedResult = await queryRunner(updateInvoice, [
       tenantID,
@@ -315,7 +319,7 @@ exports.UpdateInvoice = async (req, res) => {
           const memo = lineItems[i].memo;
           const amount = lineItems[i].amount;
 
-          const invoiceLineItemsResult = await queryRunner(insertLineItems, [invoiceID, category, property, memo, amount]);
+          const invoiceLineItemsResult = await queryRunner(insertLineItems, [invoiceID, category,property, memo, amount]);
 
           if (invoiceLineItemsResult.affectedRows === 0) {
             return res.send('Error occurred while inserting invoice line items');
@@ -349,13 +353,15 @@ exports.UpdateInvoice = async (req, res) => {
       const imagesToInsert = images.filter(image => !propertyImageKeys.includes(image.imageKey));
 
       for (let i = 0; i < imagesToInsert.length; i++) {
-        const { image_url } = imagesToInsert[i];
-        const { image_key } = imagesToInsert[i];
-        const propertyImageResult = await queryRunner(insertInvoiceImage, [
-          invoiceID,
-          image_url,
-          image_key
-        ]);
+  const { image_url, image_key, Image, imageKey } = imagesToInsert[i];
+  const imageUrl = image_url || Image;
+  const imageKeyVal = image_key || imageKey;
+  
+  const propertyImageResult = await queryRunner(insertInvoiceImage, [
+    invoiceID,
+    imageUrl,
+    imageKeyVal
+  ]);
         // if property image data not inserted into property image table then throw error
         if (propertyImageResult.affectedRows === 0) {
           throw new Error("data doesn't inserted in property image table");
@@ -483,3 +489,43 @@ exports.resendEmail = async (req, res) => {
   }
 }
 //  ############################# Resend Email Invoice END ############################################################
+// ############################# create invoice categories ############################################################
+exports.createInvoiceCategories = async (req, res) => {
+  try {
+    const { category } = req.body;
+    const { userId } = req.user;
+    const createInvoiceCategoriesResult = await queryRunner(createInvoiceCategories, [userId, category]);
+    if (createInvoiceCategoriesResult[0].affectedRows > 0) {
+      res.status(200).json({
+        message: "Invoice Categories created successfully"
+      });
+    } else {
+      res.status(400).json({
+        message: "No data found"
+      });
+    }
+  } catch (error) {
+    console.log(error)
+    res.send("Error from create invoice categories");
+  }
+};
+// update categories text 
+exports.updateInvoiceCategories = async (req, res) => {
+  try {
+    const { setTaxes, catId } = req.body;
+    const { userId } = req.user;
+    const updateInvoiceCategoriesResult = await queryRunner(updateInvoiceCategories, [setTaxes, catId, userId]);
+    if (updateInvoiceCategoriesResult[0].affectedRows > 0) {
+      res.status(200).json({
+        message: "Invoice Categories updated successfully"
+      });
+    } else {
+      res.status(400).json({
+        message: "No data found"
+      });
+    }
+  } catch (error) {
+    console.log(error)
+    res.send("Error from update invoice categories");
+  }
+};

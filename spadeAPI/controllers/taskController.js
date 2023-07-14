@@ -141,8 +141,8 @@ exports.addTasks = async (req, res) => {
     // created_at,
     // created_by,
   } = req.body;
-  // console.log(req)
-  const vendorID = assignee.split(",")
+  console.log(req.body)
+  const vendorID = assignee
   //   const { userId } = req.user
   const { userId, userName } = req.user;
   // console.log(userId, userName)
@@ -640,6 +640,7 @@ exports.updateTasks = async (req, res) => {
     });
 
   } catch (error) {
+    console.log()
     res.status(400).json({
       message: error.message,
     });

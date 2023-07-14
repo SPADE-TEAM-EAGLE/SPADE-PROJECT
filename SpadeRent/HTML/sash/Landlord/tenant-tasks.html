@@ -2049,7 +2049,7 @@
                     tableBody.empty();
 
                     response.data[0] ?.forEach(function(task) {
-                        var image = '<td><img src="../../../../spadeAPI/uploads/' + task.taskImages[0] + '" alt=""></td>';
+                        var image = '<td><img src="../assets/images/Group-user.png" alt=""></td>';
 
                         var createdDate = new Date(task.created_at);
                         var currentDate = new Date();
@@ -2060,7 +2060,7 @@
                         var daysDiff = Math.floor(hoursDiff / 24);
 
                         var taskName = `<td class="task-id" id=${task.id} style="font-weight: 600;">` + '<p style="font-weight: 600;" class="mb-1">' + task.taskName + '</p>' +
-                            `<span class="font-weight-normal" style="color: #9B9B9B;"> By ${task.createdBy} - `;
+                            `<span class="font-weight-normal" style="color: #9B9B9B;"> `;
 
                         if (daysDiff > 0) {
                             taskName += `${daysDiff} days`;
@@ -2070,7 +2070,7 @@
                             taskName += `${minutesDiff} minutes`;
                         }
 
-                        taskName += '</span>' + '</td>';
+                        taskName += ' ago</span>' + '</td>';
 
                         var assignTo = '<td style="font-weight: 600;text-align: center;display: flex;">' +
                             (task.vendor ?.map(({

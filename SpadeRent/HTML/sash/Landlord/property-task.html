@@ -1964,11 +1964,33 @@
             $("#viewOverview").attr("href", `./view-property.html?propertyId=${propertyId}`)
             $("#viewTenants").attr("href", `./property-tenant.html?propertyId=${propertyId}`)
             $("#viewTasks").attr("href", `./property-task.html?propertyId=${propertyId}`)
-            function toTitleCase(str) {
-                                return str.replace(/\w\S*/g, function (txt) {
+            $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/viewProperty',
+                type: 'GET',
+                data: {
+                    propertyId
+                },
+                contentType: "application/json; charset=utf-8",
+                // processData: false,
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function({
+                    data
+                }) {
+                    function toTitleCase(str) {
+                                return str.replace(/\w\S*/g, function(txt) {
                                     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                                 });
                             }
+                    $("#property_name").text(toTitleCase(data.propertyName))
+                    $("#property_address").text(toTitleCase(data.address))
+                    
+                },
+                error: function(xhr, status, error) {
+                    window.alert('Error: ' + error);
+                }
+            });
             $.ajax({
                             url: 'https://backend.app.spaderent.com/api/spade/propertyTask',
                             type: 'GET',
@@ -1981,20 +2003,17 @@
                             },
                             success: function (response) {
                                 console.log(response.data[0])
-                                function toTitleCase(str) {
-                                return str.replace(/\w\S*/g, function(txt) {
-                                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-                                });
-                            }
-                                $("#property_name").text(toTitleCase(response.data[0][0].propertyName))
-                                $("#property_address").text(toTitleCase(response.data[0][0].address))
 
                         var tableBody = $('#table_body');
 
                         tableBody.empty();
-
+                        function toTitleCase(str) {
+                                return str.replace(/\w\S*/g, function(txt) {
+                                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                                });
+                            }
                         response.data[0]?.forEach(function (task) {
-                            var image = '<td><img src="../../../../spadeAPI/uploads/' + task.taskImages[0] + '" alt=""></td>';
+                            var image = '<td><img src="../assets/images/Group-user.png" alt=""></td>';
 
                                 var createdDate = new Date(task.created_at);
                                 var currentDate = new Date();
@@ -2005,7 +2024,7 @@
                                 var daysDiff = Math.floor(hoursDiff / 24);
 
                                 var taskName = `<td class="task-id" id=${task.id} style="font-weight: 600;">` + '<p style="font-weight: 600;" class="mb-1">' + task.taskName + '</p>' +
-                                    `<span class="font-weight-normal" style="color: #9B9B9B;"> By ${task.createdBy} - `;
+                                    `<span class="font-weight-normal" style="color: #9B9B9B;"> `;
 
                                 if (daysDiff > 0) {
                                     taskName += `${daysDiff} days`;
@@ -2015,7 +2034,7 @@
                                     taskName += `${minutesDiff} minutes`;
                                 }
 
-                                taskName += '</span>' + '</td>';
+                                taskName += ' ago</span>' + '</td>';
 
                                 var assignTo = '<td style="font-weight: 600;text-align: center;display: flex;">' +
                                     (task.vendor?.map(({ name, email }) => {

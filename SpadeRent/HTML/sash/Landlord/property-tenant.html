@@ -1979,12 +1979,41 @@
         $(document).ready(function () {
 
             const propertyId = (new URL(document.location)).searchParams.get("propertyId");
-            console.log(propertyId)
             $("#viewUnits").attr("href", `./property-unit.html?propertyId=${propertyId}`)
             $("#viewOverview").attr("href", `./view-property.html?propertyId=${propertyId}`)
             $("#viewTenants").attr("href", `./property-tenant.html?propertyId=${propertyId}`)
             $("#viewTasks").attr("href", `./property-task.html?propertyId=${propertyId}`)
             let columnsToHide = []
+            $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/viewProperty',
+                type: 'GET',
+                data: {
+                    propertyId
+                },
+                contentType: "application/json; charset=utf-8",
+                // processData: false,
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function({
+                    data
+                }) {
+                    console.log(data)
+                        // window.alert(response.message);
+                    // console.log(data.propertyName)
+                    function toTitleCase(str) {
+                                return str.replace(/\w\S*/g, function(txt) {
+                                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                                });
+                            }
+                    $("#property_name").text(toTitleCase(data.propertyName))
+                    $("#property_address").text(toTitleCase(data.address))
+                    
+                },
+                error: function(xhr, status, error) {
+                    window.alert('Error: ' + error);
+                }
+            });
             $('input[type="checkbox"]').change(function () {
                 var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
                 var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
@@ -2067,13 +2096,6 @@
                         // window.location = './new-property.html'
                     } else {
                         console.log(data[0][0])
-                        function toTitleCase(str) {
-                                return str.replace(/\w\S*/g, function(txt) {
-                                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-                                });
-                            }
-                                $("#property_name").text(toTitleCase(data[0][0].propertyName))
-                                $("#property_address").text(toTitleCase(data[0][0].pAddress))
 
                         var tableBody = $('#table_body');
 

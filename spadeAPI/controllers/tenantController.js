@@ -366,21 +366,14 @@ exports.tenantAttachFile = async (req, res) => {
   const {
     tenantID, images
   } = req.body;
-  // console.log(req.files)
+
   const { userId } = req.user
   try {
-    // const fileNames = req.files.map((file) => file.filename);
-    // for (let i = 0; i < fileNames.length; i++) {
-    //   const attachFile = fileNames[i];
-    //   const tenantAttachFileResult = await queryRunner(insertTenantAttachFile, [userId, tenantID, attachFile])
-    //   if (tenantAttachFileResult.affectedRows === 0) {
-    //     res.send('Error');
-    //     return;
-    //   }
-    // } //sss
+
     for (let i = 0; i < images.length; i++) {
       const { image_url } = images[i];
       const { image_key } = images[i];
+
       const propertyImageResult = await queryRunner(insertTenantAttachFile, [
         userId,
         tenantID,
@@ -459,10 +452,7 @@ exports.tenantDelete = async (req, res) => {
           const tenantFileDeleteresult = await queryRunner(deleteQuery("tenantattachfiles", "tenantID"), [tenantID]);
         }
 
-        const tenantAdditionalEmailCheckResult = await queryRunner(selectQuery("tenantalternateemail", "tenantID"), [tenantID]);
-        if (tenantAdditionalEmailCheckResult[0].length > 0) {
-          const tenantAdditionalEmailresult = await queryRunner(deleteQuery("tenantalternateemail", "tenantID"), [tenantID]);
-        }
+       
 
         // const tenantAdditionalEmailCheckResult = await queryRunner(selectQuery("tenantalternateemail", "tenantID"), [tenantID]);
         // if (tenantAdditionalEmailCheckResult[0].length > 0) {
@@ -707,50 +697,4 @@ exports.tenantTask = async (req, res) => {
 };
 
 //  ############################# Task tenant ############################################################
-
-
-
-//  ############################# Tenant verify Mail Check Start  ############################################################
-
-exports.verifyMailCheck = async (req, res) => {
-  const { landlordID, email } = req.body;
-  try {
-    const selectTenantResult = await queryRunner(selectQuery("users", "Email"), [email])
-    if (selectTenantResult[0].length > 0) {
-
-      const createdDate = selectTenantResult[0][0].updated_at;
-      // const createdDate = new Date('2023-05-27 15:34:32');
-      const currentDate = new Date();
-      const differenceInMilliseconds = currentDate - createdDate;
-      const differenceInSeconds = Math.floor(differenceInMilliseconds / 1000);
-      const differenceInMinutes = Math.floor(differenceInSeconds / 60);
-      const differenceInHours = Math.floor(differenceInMinutes / 60);
-      const differenceInDays = Math.floor(differenceInHours / 24);
-      if (differenceInDays > 0) {
-        return res.status(200).json({
-          message: `Your remaining days is ${differenceInDays} please verify your email otherwise your account will locked after ${differenceInDays} days`
-        });
-      } else if (differenceInDays == 0) {
-        return res.status(200).json({
-
-          message: `Today is your last day so Kindly verify your email otherwise your account will locked on tomorrow`,
-          date: createdDate
-        });
-      } else {
-        return res.status(200).json({
-          remainingDays: `Your account is locked due to email verification firstly verify your email`,
-          date: createdDate
-        });
-      }
-
-    } else {
-      return res.status(400).send('landlord is not exists');
-    }
-
-    // res.send("Email sent successfully"); // Sending success response
-  } catch (error) {
-    res.send("Error occurs in verifying the landlord email " + error); // Sending error response
-  }
-};
-
-//  ############################# Tenant verify Mail Check END  ############################################################
+ 
