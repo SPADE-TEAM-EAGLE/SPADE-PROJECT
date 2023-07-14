@@ -150,9 +150,17 @@ exports.Signin = async function (req, res) {
         }); 
         // const emai = "umairnazakat2222@gmail.com"
       //  const emailMessage =  await verifyMailCheck(email);
+      if(selectResult[0][0].userVerified == "Email Verified"){
+        res.status(200).json({
+          token : token,
+          body: selectResult[0][0],
+          message: "Email is verified",
+        });
+      }else{ 
        const emailMessage =  await verifyMailCheck(email);
        if(emailMessage.message == "Your account is locked due to email verification. Please verify your email."){
          res.status(200).json({
+          token : token,
            body: selectResult[0][0],
            message: "Email is not verified",
            msg : emailMessage.message
@@ -165,6 +173,7 @@ exports.Signin = async function (req, res) {
          msg : emailMessage.message,
          email : email
        });
+     }
      }
  
       } else {
