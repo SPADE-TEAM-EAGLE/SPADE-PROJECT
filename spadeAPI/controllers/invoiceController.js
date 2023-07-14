@@ -58,15 +58,15 @@ exports.createInvoice = async (req, res) => {
       // select tenants 
       const invoiceID = invoiceResult[0].insertId;
       console.log(invoiceID, "invoiceID")
-      const selectTenantsResult = await queryRunner(selectQuery('tenants', 'id'), [tenantID])
+      const selectTenantsResult = await queryRunner(selectQuery('users', 'id'), [userId])
       if (selectTenantsResult[0].length > 0) {
-        const tenantEmail = selectTenantsResult[0][0].email;
-        const tenantName = selectTenantsResult[0][0].firstName + " " + selectTenantsResult[0][0].lastName;
+        const landlordEmail = selectTenantsResult[0][0].Email;
+        const landlordName = selectTenantsResult[0][0].FirstName + " " + selectTenantsResult[0][0].LastName;
 
-        if (sendmails == "Yes") {
+        // if (sendmails == "Yes") {
           const mailSubject = invoiceID + " From " + frequency;
-          sendMail.invoiceSendMail(tenantName, tenantEmail, mailSubject, dueDays, invoiceID, frequency);
-        }
+          sendMail.invoiceSendMail(landlordName, landlordEmail, mailSubject, dueDays, invoiceID, frequency);
+        // }
       }
 
 

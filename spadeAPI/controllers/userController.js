@@ -1,5 +1,5 @@
 const user = require("../models/user");
-const { sendMail } = require("../sendmail/sendmail.js");
+const { sendMail, taskSendMail } = require("../sendmail/sendmail.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const fs = require("fs");
@@ -28,7 +28,8 @@ const {
   updatePlanId,
   updateEmailQuery,
   updateVerifiedStatusQuery,
-  delteImageFromDb
+  delteImageFromDb,
+  updateNotify
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -39,6 +40,7 @@ const config = process.env;
 
 exports.createUser = async function (req, res) {
   const { firstName, lastName, email, phone, password, planID } = req.body;
+  currentDate = new Date();
   try {
     const selectResult = await queryRunner(selectQuery("users", "Email"), [
       email,
@@ -60,6 +62,7 @@ exports.createUser = async function (req, res) {
       phone,
       hashPassword,
       planID,
+      currentDate
     ]);
     const name = firstName + " " + lastName;
     const mailSubject = "Spade Welcome Email";
@@ -112,12 +115,14 @@ exports.Signin = async function (req, res) {
   try {
     // for tenant
     if (tenant == "tenant") {
+      console.log("tenant")
       const selectResult = await queryRunner(selectQuery("tenants", "email"), [
         email,
       ]);
+      console.log(selectResult[0][0])
       if (selectResult[0].length === 0) {
         res.status(400).send("Email not found");
-      } else if (
+      } else if (!
         await bcrypt.compare(password, selectResult[0][0].tenantPassword)
       ) {
         const token = jwt.sign({ email, password }, config.JWT_SECRET_KEY, {
@@ -193,7 +198,7 @@ exports.updateUserProfile = async function (req, res) {
   const { firstName, lastName, email, phone, planID, BusinessName, streetAddress, BusinessAddress, imageUrl, imageKey } = req.body;
   const { userId } = req.user;
   try {
-    if(!firstName || !lastName || !email || !phone || !planID || !BusinessName || !streetAddress || !BusinessAddress || !imageUrl || !imageKey){
+    if (!firstName || !lastName || !email || !phone || !planID || !BusinessName || !streetAddress || !BusinessAddress || !imageUrl || !imageKey) {
       throw new Error("Please fill all the fields");
     }
     const selectResult = await queryRunner(selectQuery("users", "id"), [
@@ -441,6 +446,7 @@ exports.property = async (req, res) => {
     images
   } = req.body;
   try {
+    // const { userId } = req.user;
     const { userId } = req.user;
     if (!propertyName || !address || !city || !state || !zipCode || !propertyType || !propertySQFT || !units) {
       throw new Error("Please fill all the fields");
@@ -450,7 +456,9 @@ exports.property = async (req, res) => {
     if (propertycheckresult[0].length > 0) {
       throw new Error("Property Already Exist");
     }
+    // console.log("1");
     const status = "Non-active";
+    console.log(userId)
     // this line insert data into property table 
     const propertyResult = await queryRunner(insertInProperty, [
       userId,
@@ -464,9 +472,19 @@ exports.property = async (req, res) => {
       status,
       units,
     ]);
+    console.log(req.body)
+    // console.log("2");
     // if property data not inserted into property table then throw error
     if (propertyResult.affectedRows === 0) {
       throw new Error("Data doesn't inserted in property table");
+    }
+    if (propertyResult[0].affectedRows > 0) {
+      const mailSubject = "Property Maintenance: " + propertyName;
+      const landlordUser = await queryRunner(selectQuery("users", "id"), [
+        userId
+      ]);
+      const FullName = landlordUser[0][0].FirstName + " " + landlordUser[0][0].LastName;
+      await taskSendMail("tenantName", mailSubject, "dueDate", FullName, "property", "assignedTo", "priority", "companyName", "contactLandlord", landlordUser[0][0].id, landlordUser[0][0].Email);
     }
     const { insertId } = propertyResult[0];
     // we are using loop to send images data into 
@@ -1472,3 +1490,27 @@ exports.verifyEmailUpdate = async (req, res) => {
   }
 };
 //  ############################# verify Email Update End ############################################################
+exports.updatedNotification = async (req, res) => {
+  const {
+    isEmailNotify,
+    isPushNotify,
+  } = req.body;
+  const { userId } = req.user;
+  try {
+    const updateNotifyResult = await queryRunner(updateNotify, [
+      isEmailNotify,
+      isPushNotify,
+      userId
+    ]);
+    if (updateNotifyResult[0].affectedRows > 0) {
+      return res.status(200).json({
+        email: isEmailNotify === "yes" ? "Email notifications enabled" : "Email notifications disabled",
+        push: isPushNotify === "yes" ? "push notifications enabled" : "push notifications disabled",
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      message: error.message
+    })
+  }
+}
