@@ -60,7 +60,11 @@
             border-top: 1px solid;
             margin: 10px 0 20px 0;
         }
-
+        .disabled {
+            pointer-events: none;
+            cursor: not-allowed;
+            color: gray;
+        }
         .custom-switch-input:checked~.custom-switch-indicator {
             background: #11D247;
         }
@@ -111,10 +115,14 @@
                         <h6 class="text-default mb-3">Enter a 6-digit code to verify email address</h6>
                         <input id="token" name="token" type="phone" class="form-control form mb-2" pattern="[0-9]{5}" maxlength="6"
                         oninput="this.value = this.value.replace(/[^0-9]/g, '')" style="min-width: 200px;max-width: 350px;" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the name of the property.">
+                        <input type="password" class="form-control form mb-2" id="id_password1" aria-describedby="emailHelp" placeholder="Password" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter password here.">
                         <!-- <a class="text-primary mb-4" href="javascript:void(0)">Change Email</a> -->
+                        <span class="mt-1 text-danger" id="passnotmatch1" style="display: none;">
+                            MUST be atleast 8 characters long, Must contain atleast One Uppercase and One symbol.
+                        </span>
                         <div class="">
                             <!-- <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2">Remind me Later</a> -->
-                            <a href="javascript:void(0)" class="btn btn-primary btn-pill" id="verify-btn">Verify</a>
+                            <a href="javascript:void(0)" class="btn btn-primary btn-pill disabled" id="verify-btn">Verify</a>
                         </div>
                     </div>
                 </div>
@@ -1757,7 +1765,7 @@
         $(document).ready(() => {
             let id;let userEmail;let emailChange=false
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/protected',
+                url: 'http://localhost:3000/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1782,7 +1790,7 @@
                 }
             });
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
+                url: 'http://localhost:3000/api/spade/verifyMailCheck',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1856,7 +1864,7 @@
       })
       $("#verify-btn").on("click",()=>{
         $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/verifyEmailUpdate',
+                    url: 'http://localhost:3000/api/spade/verifyEmailUpdate',
                     type: 'PUT',
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({
@@ -1872,7 +1880,7 @@
 
                           $("#modaldemo8").modal("hide")
                           $("#myModal_success").modal("show")
-                          window.location="./index.html"
+                        //   window.location="./index.html"
                         }else if(response.message==" token code is not match "){
                           // $("#modaldemo8").modal("hide")
                           $("#info-text").text(response.message || response)
@@ -2025,6 +2033,32 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.5.2/dragula.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+    <script>
+        let password_validate1 = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
+            var validconfirmPassword1 = document.getElementById("id_password1");
+            validconfirmPassword1.addEventListener('keyup', confirmPasswordValidation1);
+            var spantag11 = document.getElementById("passnotmatch1");
+
+            function confirmPasswordValidation1() {
+
+                if (validconfirmPassword1.value.match(password_validate1)) {
+                    console.log(11)
+                    validconfirmPassword1.classList.add("border-green");
+                    spantag11.style.display = "none";
+                } else {
+                    console.log(21)
+                    validconfirmPassword1.classList.remove("border-green");
+                    spantag11.style.display = "block";
+                }
+                if ($("#token").val()!==" " && validconfirmPassword1.value.match(password_validate1)) {
+                    validconfirmPassword1.classList.add("border-green");
+                    $("#verify-btn").removeClass("disabled")
+                } else {
+                    $("#verify-btn").addClass("disabled")
+                    validconfirmPassword1.classList.remove("border-green");
+                }
+            }
+    </script>
     <script>
       var COL_WIDTH = 62; // should be calculated dynamically, and recalculated at window resize
       var GUTTER_WIDTH = 30;

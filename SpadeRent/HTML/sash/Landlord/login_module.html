@@ -635,7 +635,7 @@
 
         $.ajax({
           // url: 'https://backend.app.spaderent.com/api/spade/Signin',
-          url: "https://backend.app.spaderent.com/api/spade/Signin",
+          url: "http://localhost:3000/api/spade/Signin",
           type: "GET",
           contentType: "application/json; charset=utf-8",
           data: {
@@ -643,7 +643,7 @@
             password: password,
           },
           success: function (response) {
-            if (response.message == "Successful Loginsss") {
+            if (response.message == "Successful Login" || response.message=="Email is verified") {
               $("#email_span").hide();
               $("#pass_span").hide();
               $("#id_password1").removeClass("is-invalid");

@@ -338,11 +338,12 @@ exports.UpdateInvoice = async (req, res) => {
       // console.log(images, propertycheckresult[0])
 
       // Extract the image keys from propertycheckresult
-      const propertyImageKeys = invoiceCheckResult[0].map(image => image.imageKey);
-
+      const propertyImageKeys = invoiceCheckResult[0].map(image => image.ImageKey);
+      console.log(invoiceCheckResult[0])
+console.log(propertyImageKeys)
       // Find the images to delete from S3 (present in propertycheckresult but not in images)
-      const imagesToDelete = invoiceCheckResult[0].filter(image => !images.some(img => img.imageKey === image.imageKey));
-
+      const imagesToDelete = invoiceCheckResult[0].filter(image => !images.some(img => img.ImageKey === image.ImageKey));
+        console.log(imagesToDelete)
       // Delete images from S3
       for (let i = 0; i < imagesToDelete.length; i++) {
         await deleteImageFromS3(imagesToDelete[i].imageKey);

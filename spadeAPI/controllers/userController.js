@@ -1368,6 +1368,7 @@ exports.propertyTask = async (req, res) => {
 
 exports.verifyMailCheck = async (req, res) => {
   const { email } = req.user;
+  console.log(email)
   try {
     const selectTenantResult = await queryRunner(selectQuery("users", "Email"), [email]);
     if (selectTenantResult[0].length > 0) {
