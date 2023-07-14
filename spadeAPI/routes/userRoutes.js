@@ -73,7 +73,7 @@ router.post(
 );
 // router.post('/tenantIncreaseRent' , userController.tenantIncreaseRent);
 // router.get('/verifyMailCheck',verifyToken,  userController.verifyMailCheck);
-router.get('/verifyMailCheck', userController.verifyMailCheck);
+router.get('/verifyMailCheck',verifyToken ,userController.verifyMailCheck);
 router.get('/resetEmailTenant', tenantController.createResetEmailTenant);
 router.post('/verifyResetEmailCodeTenant', tenantController.verifyResetEmailCodeTenant);
 router.put('/updatePasswordTenant', tenantController.updatePasswordTenant);

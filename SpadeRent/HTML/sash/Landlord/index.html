@@ -108,12 +108,43 @@
                     <div class="d-flex flex-column justify-content-center align-items-center p-5" style="text-align: center;">
                         <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" style="max-width: 110px;" class="Rent-logo mb-5"  />
                         <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
-                        <h6 class="text-default mb-3">Get started with Spade Rent! Continue with Google to verify</h6>
-                        <input type="email" class="form-control form mb-2" style="min-width: 200px;max-width: 350px;" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the name of the property.">
-                        <a class="text-primary mb-4" href="javascript:void(0)">Change Email</a>
+                        <h6 class="text-default mb-3">Enter a 6-digit code to verify email address</h6>
+                        <input id="token" name="token" type="phone" class="form-control form mb-2" pattern="[0-9]{5}" maxlength="6"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '')" style="min-width: 200px;max-width: 350px;" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the name of the property.">
+                        <!-- <a class="text-primary mb-4" href="javascript:void(0)">Change Email</a> -->
                         <div class="">
-                            <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2">Remind me Later</a>
-                            <a href="javascript:void(0)" class="btn btn-primary btn-pill">Resend Mail</a>
+                            <!-- <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2">Remind me Later</a> -->
+                            <a href="javascript:void(0)" class="btn btn-primary btn-pill" id="verify-btn">Verify</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-primary">Save changes</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <div class="modal fade effect-scale" id="modaldemo00" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-l" role="document">
+            <div class="modal-content">
+                <!-- <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+                </div> -->
+                <div class="modal-body pt-5">
+                    <div class="d-flex flex-column justify-content-center align-items-center p-5" style="text-align: center;">
+                        <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" style="max-width: 110px;" class="Rent-logo mb-5"  />
+                        <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
+                        <h6 class="text-default mb-3">Get started with Spade Rent! You have<span id="days-left"></span> left</h6>
+                        <input type="email" class="form-control form mb-2" style="min-width: 200px;max-width: 350px;" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the name of the property." readonly id="user-email">
+                        <a class="text-primary mb-4" href="javascript:void(0)" id="change-email">Change Email</a>
+                        <a class="text-primary mb-4 d-none" href="javascript:void(0)" id="save-email">Save Email</a>
+                        <div class="">
+                            <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2" id="remind-later">Remind me Later</a>
+                            <a href="javascript:void(0)" class="btn btn-primary btn-pill" id="send-email">Send Mail</a>
                         </div>
                     </div>
                 </div>
@@ -724,7 +755,7 @@
                                             style="font-weight: 100; margin-bottom: 0px;">Welcome to Spade Portal</h3>
                                         <h1 class="page-titlee text-white" style="font-weight: 700;" id="user-name">
                                         </h1>
-                                        <a data-bs-toggle="modal" href="#modaldemo8"
+                                        <a data-bs-toggle="modal" href="#modaldemo00"
                                             class="btn btn-primary btn-pill btn-xl email-verification-btn mb-3"
                                             id="email_verification"><i
                                                 class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
@@ -1724,14 +1755,14 @@
 </script>
     <script>
         $(document).ready(() => {
-            
+            let id;let userEmail;let emailChange=false
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function ({ user }) {
+                success: function ({ user,email,userId }) {
                     function toTitleCase(str) {
                         return str.replace(/\w\S*/g, function (txt) {
                             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
@@ -1739,8 +1770,9 @@
                     }
                     $("#user-name").text(toTitleCase(user))
                     $("#header-user").text(toTitleCase(user))
-
-
+                    userEmail=email
+                    id=userId
+                    console.log(id,userEmail)
                 },
                 error: function (xhr, status, error) {
                     console.log('Error occurred while fetching state and city data.');
@@ -1749,6 +1781,112 @@
                     // console.log('Error occurred while fetching state and city data.');
                 }
             });
+            $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    console.log("here")
+                    if (response.message.split(":")[0]=="Your remaining days to verify your email"){
+                        $("#days-left").text(response.data>1?" "+response.data+" days":" "+response.data+" day")
+                        console.log("here")
+                        $("#user-email").val(userEmail)
+                        $("#modaldemo00").modal("show")
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.log('Error occurred while fetching state and city data.');
+                    console.log(xhr);
+                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                }
+            });
+            $("#change-email").on("click",()=>{
+        $("#user-email").prop("readonly",false)
+        $("#change-email").addClass("d-none")
+        $("#send-email").addClass("d-none")
+        $("#save-email").removeClass("d-none")
+      })
+      $("#remind-later").click(()=>{
+        $("#modaldemo00").modal("hide")
+      })
+      $(document).on("click","#save-email",()=>{
+        emailChange=true
+        $.ajax({
+                    url: 'https://backend.app.spaderent.com/api/spade/emailUpdate',
+                    type: 'PUT',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({
+                        id: id,
+                        email:$("#user-email").val()
+                    }),
+                    success: function(response) {
+                      $("#user-email").prop("readonly",true)
+        $("#change-email").removeClass("d-none")
+        $("#send-email").removeClass("d-none")
+        
+        $("#save-email").addClass("d-none")
+                    },
+                    error: function(xhr, status, error) {
+                        // window.alert(xhr.statusText)
+                        console.error(xhr.responseText);
+                    }
+                });
+      })
+      $("#send-email").on("click",()=>{
+        console.log(id)
+        $.ajax({
+                    url: 'https://backend.app.spaderent.com/api/spade/resendCode',
+                    type: 'POST',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({
+                        id: id
+                    }),
+                    success: function(response) {
+                      $("#modaldemo00").modal("hide")
+                      $("#modaldemo8").modal("show")
+                    },
+                    error: function(xhr, status, error) {
+                        // window.alert(xhr.statusText)
+                        console.error(xhr.responseText);
+                    }
+                });
+      })
+      $("#verify-btn").on("click",()=>{
+        $.ajax({
+                    url: 'https://backend.app.spaderent.com/api/spade/verifyEmailUpdate',
+                    type: 'PUT',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({
+                        id: id,
+                        token: $("#token").val(),
+                        email:emailChange?$("#user-email").val():userEmail,
+                        password:$("#id_password1").val(),
+                    }),
+                    success: function(response) {
+                        console.log(response)
+                        if(response.message==" Email verified successful "){
+                localStorage.setItem("authtoken", response.token);
+
+                          $("#modaldemo8").modal("hide")
+                          $("#myModal_success").modal("show")
+                          window.location="./index.html"
+                        }else if(response.message==" token code is not match "){
+                          // $("#modaldemo8").modal("hide")
+                          $("#info-text").text(response.message || response)
+                          $("#infoModal").modal("show")
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        // window.alert(xhr.statusText)
+                        document.getElementById("verification-spans").style.display = "block";
+                        $("#verification").addClass("is-invalid")
+                        console.error(xhr.responseText);
+                    }
+                });
+      })
             function updateTable(tabId) {
                 var tableBody = $('#' + tabId + ' tbody');
                 var apiUrl = 'https://backend.app.spaderent.com/api/spade/getAllTask'; // Replace with your API endpoint URL

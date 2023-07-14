@@ -104,6 +104,8 @@ exports.getUser = (req, res) => {
   // console.log(req.user);
   res.status(200).json({
     user: req.user.userName,
+    email:req.user.email,
+    userId:req.user.userId
   });
 };
 
@@ -373,6 +375,7 @@ exports.updatePassword = async (req, res) => {
 //  ############################# resend Code ############################################################
 exports.resendCode = async (req, res) => {
   const { id } = req.body;
+  console.log(req.body)
   const mailSubject = "Spade Reset Email";
   const random = Math.floor(100000 + Math.random() * 900000);
   try {
@@ -1355,38 +1358,43 @@ exports.propertyTask = async (req, res) => {
 //  ############################# Tenant verify Mail Check Start  ############################################################
 
 exports.verifyMailCheck = async (req, res) => {
-  const { email } = req.body;
+  const { email } = req.user;
   try {
     const selectTenantResult = await queryRunner(selectQuery("users", "Email"), [email]);
     if (selectTenantResult[0].length > 0) {
-      const createdDate = new Date(selectTenantResult[0][0].created_at);
-      const newDate = new Date(createdDate.getTime());
-      newDate.setDate(newDate.getDate() + 7); // Adding 7 days to the createdDate
-      
-      const currentDate = new Date();
-
-      if (currentDate <= newDate) {
-        const differenceInMilliseconds = newDate - currentDate;
-        const differenceInDays = Math.ceil(differenceInMilliseconds / (1000 * 60 * 60 * 24));
+      const verified = new Date(selectTenantResult[0][0].userVerified);
+      if(verified=="Email Verified"){
+        res.send("User Verified")
+      }else{
+        const createdDate = new Date(selectTenantResult[0][0].created_at);
+        const newDate = new Date(createdDate.getTime());
+        newDate.setDate(newDate.getDate() + 7); // Adding 7 days to the createdDate
         
-        if (differenceInDays === 0) {
-          return res.status(200).json({
-            message: `Today is your last day, so kindly verify your email.`,
-            date: createdDate,
-          });
+        const currentDate = new Date();
+  
+        if (currentDate <= newDate) {
+          const differenceInMilliseconds = newDate - currentDate;
+          const differenceInDays = Math.ceil(differenceInMilliseconds / (1000 * 60 * 60 * 24));
+          
+          if (differenceInDays === 0) {
+            return res.status(200).json({
+              message: `Today is your last day, so kindly verify your email.`,
+              date: createdDate,
+            });
+          } else {
+            return res.status(200).json({
+              message: `Your remaining days to verify your email: ${differenceInDays}`,
+              data: differenceInDays,
+              createdDate: createdDate,
+              newDate: newDate,
+              currentDate: currentDate,
+            });
+          }
         } else {
           return res.status(200).json({
-            message: `Your remaining days to verify your email: ${differenceInDays}`,
-            data: differenceInDays,
-            createdDate: createdDate,
-            newDate: newDate,
-            currentDate: currentDate,
+            message: `Your account is locked due to email verification. Please verify your email.`,
           });
         }
-      } else {
-        return res.status(200).json({
-          message: `Your account is locked due to email verification. Please verify your email.`,
-        });
       }
     } else {
       return res.status(400).send('landlord is not found');
