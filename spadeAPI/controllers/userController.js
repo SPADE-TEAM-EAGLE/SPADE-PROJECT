@@ -458,7 +458,7 @@ exports.property = async (req, res) => {
   } = req.body;
   try {
     // const { userId } = req.user;
-    const { userId } = req.user;
+    const { userId,email } = req.user;
     if (!propertyName || !address || !city || !state || !zipCode || !propertyType || !propertySQFT || !units) {
       throw new Error("Please fill all the fields");
     }
@@ -495,7 +495,7 @@ exports.property = async (req, res) => {
         userId
       ]);
       const FullName = landlordUser[0][0].FirstName + " " + landlordUser[0][0].LastName;
-      await taskSendMail("tenantName", mailSubject, "dueDate", FullName, "property", "assignedTo", "priority", "companyName", "contactLandlord", landlordUser[0][0].id, landlordUser[0][0].Email);
+      // await taskSendMail("tenantName", mailSubject, "dueDate", FullName, "property", "assignedTo", "priority", "companyName", "contactLandlord", userId, email);
     }
     const { insertId } = propertyResult[0];
     // we are using loop to send images data into 
@@ -561,9 +561,10 @@ exports.getproperty = async (req, res) => {
         if (allPropertyImageResult.length > 0) {
           const propertyImages = allPropertyImageResult[0].map(
             (image) => {
-              return { imageURL: image.Image, imageKey: image.imageKey }
+              return { imageURL: image.Image, imageKey: image.ImageKey }
             }
           );
+          console.log(propertyImages)
           // Extract image URLs from the result
           allPropertyResult[0][i].images = propertyImages; // Add property images to the current property object
         } else {
@@ -682,17 +683,18 @@ exports.propertyUpdate = async (req, res) => {
         [id]
       );
       // console.log(images, propertycheckresult[0])
-
+        console.log(propertycheckresult[0])
+        console.log(images)
       // Extract the image keys from propertycheckresult
-      const propertyImageKeys = propertycheckresult[0].map(image => image.imageKey);
-
+      const propertyImageKeys = propertycheckresult[0].map(image => image.ImageKey);
+console.log(propertyImageKeys)
       // Find the images to delete from S3 (present in propertycheckresult but not in images)
-      const imagesToDelete = propertycheckresult[0].filter(image => !images.some(img => img.imageKey === image.imageKey));
-
+      const imagesToDelete = propertycheckresult[0].filter(image => !images.some(img => img.imageKey === image.ImageKey));
+console.log(imagesToDelete)
       // Delete images from S3
       for (let i = 0; i < imagesToDelete.length; i++) {
-        deleteImageFromS3(imagesToDelete[i].imageKey);
-        await queryRunner(delteImageFromDb, [imagesToDelete[i].imageKey]);
+        deleteImageFromS3(imagesToDelete[i].ImageKey);
+        await queryRunner(delteImageFromDb, [imagesToDelete[i].ImageKey]);
       }
 
       // Find the images to insert into the database (present in images but not in propertycheckresult)
@@ -1385,15 +1387,16 @@ exports.verifyMailCheck = async (req, res) => {
   try {
     const selectTenantResult = await queryRunner(selectQuery("users", "Email"), [email]);
     if (selectTenantResult[0].length > 0) {
-      const verified = new Date(selectTenantResult[0][0].userVerified);
-      if(verified=="Email Verified"){
-        res.send("User Verified")
-      }else{
-        const createdDate = new Date(selectTenantResult[0][0].created_at);
-        const newDate = new Date(createdDate.getTime());
-        newDate.setDate(newDate.getDate() + 7); // Adding 7 days to the createdDate
-        
-        const currentDate = new Date();
+      const createdDate = new Date(selectTenantResult[0][0].created_at);
+      const newDate = new Date(createdDate.getTime());
+      newDate.setDate(newDate.getDate() + 7); // Adding 7 days to the createdDate
+      
+      const currentDate = new Date();
+      if(selectTenantResult[0][0].userVerified == "Email Verified"){
+        res.status(200).json({
+          message: "Email is verified",
+        });
+      }else{ 
   
         if (currentDate <= newDate) {
           const differenceInMilliseconds = newDate - currentDate;

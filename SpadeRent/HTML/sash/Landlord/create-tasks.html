@@ -1263,7 +1263,7 @@
                     <div class=""><button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal"
                             id='close'>Close</button>
                         <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
-                        <a href="javascript:void(0)" class="btn text-light btn-pill button disabled"
+                        <a href="javascript:void(0)" class="btn text-light btn-pill button"
                             style='background-color:#1467B0;' id='save'>Save</a>
                     </div>
 
@@ -2912,7 +2912,7 @@
                 const data = taskInfo.find(obj => obj.id.toString() == taskId);
                 console.log(data)
                 if (data.taskImages) {
-                    selectedFiles = data.taskImages.split(",")
+                    selectedFiles = data.taskImages
                 } else {
 
                 }
@@ -2922,7 +2922,7 @@
                 $("#dueDate_view").text(data.dueDate);
                 $("#priority_view").text(data.priority);
                 $("#status_view").text(data.status);
-                $("#notes_view").text(data.notes);
+                $("#notes_view").text(data.notes || "N/A");
                 console.log($("#notes_view"))
                 //                 $("#priority_update").find(`option[name="${data.priority.toLowerCase()}"]`).prop("selected", true);
                 //                 $("#status_update").find(`option[value="${data.status}"]`).prop("selected", true);
@@ -2980,11 +2980,11 @@
                 })
                 // $("#totalAmount").text('$ ' + data.totalAmount)
                 if (data.taskImages) {
-                    const images = data.taskImages.split(",")
+                    const images = data.taskImages
                     $("#view-task-images").empty()
                     images.forEach((image) => {
                         $("#view-task-images").append(`
-                            <img src="${image}" width=200px height=200px alt=""> &nbsp;`)
+                            <img src="${image.Image}" width=200px height=200px alt=""> &nbsp;`)
                     })
                 } else {
 
@@ -3079,7 +3079,8 @@
                 if (selectedFiles.length >= 1) {
                     for (var i = 0; i < selectedFiles.length; i++) {
                         formData.append('image', selectedFiles[i]);
-                        $.ajax({
+                    }
+                    $.ajax({
                             url: 'https://backend.app.spaderent.com/api/spade/upload',
                             type: 'POST',
                             data: formData,
@@ -3104,7 +3105,7 @@
                                     // Loop through the lineItems array and add each line item to the FormData object
                                 }
                                 $.ajax({
-                                    url: 'http://localhost:3000/api/spade/addTasks',
+                                    url: 'https://backend.app.spaderent.com/api/spade/addTasks',
                                     type: 'POST',
                                     data: JSON.stringify(taskData),
                                     contentType: 'application/json',
@@ -3129,7 +3130,6 @@
                                 window.alert('Error: ' + error);
                             }
                         });
-                    }
                 } else {
                     taskData = {
                         task: task,
@@ -3145,7 +3145,7 @@
                         // Loop through the lineItems array and add each line item to the FormData object
                     }
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/addTasks',
+                        url: 'https://backend.app.spaderent.com/api/spade/addTasks',
                         type: 'POST',
                         data: JSON.stringify(taskData),
                         contentType: 'application/json',
@@ -3184,7 +3184,7 @@
                         .append(
                             $('<img>')
                                 .addClass('file-preview')
-                                .attr('src', (typeof file === "object" && file instanceof File) ? URL.createObjectURL(file) : file)
+                                .attr('src', (typeof file === "object" && file instanceof File) ? URL.createObjectURL(file) : file.Image)
                         )
 
                         .append(
@@ -3602,7 +3602,7 @@
                 },
                 success: function (response) {
                     console.log(response);
-                    if (response == "Error Get Tasks") {
+                    if (response.data[0].length===0) {
                         window.location = './new-tasks.html'
                     } else {
                         // $("#user-name").text(response.user)
@@ -3620,7 +3620,7 @@
                         response.data[0]?.forEach(function (task) {
                             // var image = '<td><img src="../../../../spadeAPI/uploads/' + property.images[0] + '" alt=""></td>';
                             // var image = '<td><img src="../../../../../../Desktop/spade API 2/uploads/image-1684250579662.png" alt="hhghghgh"></td>';
-                            var image = '<td><img src="' + task.taskImages?.split(',')[0] + '" alt=""></td>';
+                            var image = '<td><img src="' + task?.taskImages[0]?.Image + '" alt=""></td>';
 
                             var createdDate = new Date(task.created_at);
                             var currentDate = new Date();
@@ -3690,7 +3690,7 @@
                             const data = response.data[0].find(obj => obj.id.toString() == taskId);
                             console.log(taskId)
                             if (data.taskImages) {
-                                selectedFiles = data.taskImages.split(",")
+                                selectedFiles = data.taskImages
                             } else {
 
                             }
