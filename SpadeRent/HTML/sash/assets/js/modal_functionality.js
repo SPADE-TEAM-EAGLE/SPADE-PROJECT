@@ -389,7 +389,6 @@ $("#addModal").modal("hide")
                 $("#myModal_warning_connection").modal("show");
                             setTimeout(function() {
                                 $('#myModal_warning_connection').modal('hide');
-
                             }, 2000);
                 console.log('Error: ' + error);
             }
