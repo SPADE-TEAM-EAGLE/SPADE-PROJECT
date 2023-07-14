@@ -1366,7 +1366,11 @@ exports.verifyMailCheck = async (req, res) => {
       newDate.setDate(newDate.getDate() + 7); // Adding 7 days to the createdDate
       
       const currentDate = new Date();
-
+      if(selectTenantResult[0][0].userVerified == "Email Verified"){
+        res.status(200).json({
+          message: "Email is verified",
+        });
+      }else{ 
       if (currentDate <= newDate) {
         const differenceInMilliseconds = newDate - currentDate;
         const differenceInDays = Math.ceil(differenceInMilliseconds / (1000 * 60 * 60 * 24));
@@ -1389,6 +1393,7 @@ exports.verifyMailCheck = async (req, res) => {
         return res.status(200).json({
           message: `Your account is locked due to email verification. Please verify your email.`,
         });
+      }
       }
     } else {
       return res.status(400).send('landlord is not found');
