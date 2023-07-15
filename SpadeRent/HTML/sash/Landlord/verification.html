@@ -711,7 +711,7 @@ var counterElement = document.getElementById("counter");
 var send_again = document.getElementById("send_again");
 var interval;
 
-if (localStorage.getItem('countdown_seconds') !== null) {
+if (localStorage.getItem('countdown_seconds') !== 0 || localStorage.getItem('countdown_seconds') === null) {
   var seconds = localStorage.getItem("countdown_seconds") || 120; // Get the saved value or default to 120 seconds
   interval = setInterval(countDown, 1000);
   document.getElementById("verification-text").style.display = "inline";
