@@ -381,7 +381,7 @@ exports.updatePassword = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.status(400).send("Error");
+    res.status(400).send("Error" + error);
   }
 };
 //  ############################# Update Password ############################################################

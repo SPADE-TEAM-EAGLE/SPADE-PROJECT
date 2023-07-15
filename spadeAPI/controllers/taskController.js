@@ -40,7 +40,6 @@ exports.addVendors = async (req, res) => {
     phone,
     email,
     categoryID,
-
   } = req.body;
   const { userId } = req.user
   // console.log(userId)
