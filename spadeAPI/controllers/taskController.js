@@ -12,9 +12,6 @@ const {
   addVendor,
   addTasksQuery,
   insertInTaskImage,
-  selectEmailQuery,
-  selectNameQuery,
-  selectAnyQuery,
   addVendorList,
   getLandlordTenant,
   Alltasks,
@@ -25,12 +22,9 @@ const {
   delteImageForTaskImages,
   addVendorCategory
 } = require("../constants/queries");
-const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
-const { file } = require("googleapis/build/src/apis/file");
-const e = require("express");
 const { deleteImageFromS3 } = require("../helper/S3Bucket");
-const config = process.env;
+
 
 //  #############################  ADD VENDOR ##################################################
 exports.addVendors = async (req, res) => {
@@ -86,7 +80,6 @@ exports.addVendors = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(400).send(error);
-
   }
 };
 //  #############################  ADD VENDOR ENDS HERE ##################################################
@@ -142,8 +135,8 @@ exports.addTasks = async (req, res) => {
     // created_at,
     // created_by,
   } = req.body;
-  // console.log(req)
-  const vendorID = assignee.split(",")
+  // assigne task as a array of tenant and user ids
+  const vendorID = assignee;
   //   const { userId } = req.user
   const { userId, userName, email } = req.user;
   // console.log(userId, userName)
@@ -214,32 +207,31 @@ exports.addTasks = async (req, res) => {
         }
       }
       //   //  add vendor
-      // for (let i = 0; i < vendorID.length; i++) {
-      //   const Vendorid = vendorID[i];
-      //   const vendorResults = await queryRunner(addVendorList, [
-      //     tasksID,
-      //     Vendorid,
-      //   ]);
-      //   if (vendorResults.affectedRows === 0) {
-      //     return res.send("Error2");
-      //   }
-      // }
+      for (let i = 0; i < vendorID.length; i++) {
+        const Vendorid = vendorID[i];
+        const vendorResults = await queryRunner(addVendorList, [
+          tasksID,
+          Vendorid,
+        ]);
+        if (vendorResults.affectedRows === 0) {
+          return res.send("Error2");
+        }
+      }
       // get data from database for email send 
       const tenantLandlordResult = await queryRunner(getLandlordTenant, [userId, property]);
       let vendorEmailarr = [];
       let vendorNamearr = [];
-      // for (let i = 0; i < vendorID.length; i++) {
-      //   const vendorCheckResult = await queryRunner(selectQuery("vendor", "id"), [vendorID[i]]);
-      //   if (vendorCheckResult.length > 0) {
-      //     let vendorName = vendorCheckResult[0][0].firstName + " " + vendorCheckResult[0][0].lastName;
-      //     let vendorEmail = vendorCheckResult[0][0].email;
-      //     vendorNamearr.push(vendorName);
-      //     vendorEmailarr.push(vendorEmail);
-
-      //   } else {
-      //     return res.send("Vendor not found");
-      //   }
-      // }
+      for (let i = 0; i < vendorID.length; i++) {
+        const vendorCheckResult = await queryRunner(selectQuery("vendor", "id"), [vendorID[i]]);
+        if (vendorCheckResult.length > 0) {
+          let vendorName = vendorCheckResult[0][0].firstName + " " + vendorCheckResult[0][0].lastName;
+          let vendorEmail = vendorCheckResult[0][0].email;
+          vendorNamearr.push(vendorName);
+          vendorEmailarr.push(vendorEmail);
+        } else {
+          return res.send("Vendor not found");
+        }
+      }
       // console.log(tenantLandlordResult[0])
       if (tenantLandlordResult[0][0]) {
         const tenantName = tenantLandlordResult[0][0].firstName + " " + tenantLandlordResult[0][0].lastName;
@@ -282,7 +274,6 @@ exports.addTasks = async (req, res) => {
               landlordContact
             );
           }
-          // console.log("vendor3");
         }
       }
     }

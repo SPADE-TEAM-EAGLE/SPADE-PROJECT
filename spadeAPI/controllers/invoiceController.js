@@ -63,10 +63,10 @@ exports.createInvoice = async (req, res) => {
         const landlordEmail = selectTenantsResult[0][0].Email;
         const landlordName = selectTenantsResult[0][0].FirstName + " " + selectTenantsResult[0][0].LastName;
 
-        // if (sendmails == "Yes") {
+          // send mail to tenant from landlord company
           const mailSubject = invoiceID + " From " + frequency;
           sendMail.invoiceSendMail(landlordName, landlordEmail, mailSubject, dueDays, invoiceID, frequency);
-        // }
+
       }
 
 

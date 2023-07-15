@@ -150,24 +150,32 @@ exports.Signin = async function (req, res) {
           expiresIn: "3h",
         });
         // const emai = "umairnazakat2222@gmail.com"
-        //  const emailMessage =  await verifyMailCheck(email);
-        const emailMessage = await verifyMailCheck(email);
-        if (emailMessage.message == "Your account is locked due to email verification. Please verify your email.") {
-          res.status(200).json({
-            body: selectResult[0][0],
-            message: "Email is not verified",
-            token: token,
-            msg: emailMessage.message
-          });
-        } else {
-          res.status(200).json({
-            token: token,
-            body: selectResult[0][0],
-            message: "Successful Loginsss",
-            msg: emailMessage.message,
-            email: email
-          });
-        }
+      //  const emailMessage =  await verifyMailCheck(email);
+      if(selectResult[0][0].userVerified == "Email Verified"){
+        res.status(200).json({
+          token : token,
+          body: selectResult[0][0],
+          message: "Email is verified",
+        });
+      }else{
+       const emailMessage =  await verifyMailCheck(email);
+       if(emailMessage.message == "Your account is locked due to email verification. Please verify your email."){
+         res.status(200).json({
+          token : token,
+           body: selectResult[0][0],
+           message: "Email is not verified",
+           msg : emailMessage.message
+         });
+       }else{
+       res.status(200).json({
+         token: token,
+         body: selectResult[0][0],
+         message: "Successful Loginsss",
+         msg : emailMessage.message,
+         email : email
+       });
+     }
+     }
 
       } else {
         res.status(400).send("Incorrect Password");
@@ -1378,29 +1386,34 @@ exports.verifyMailCheck = async (req, res) => {
       newDate.setDate(newDate.getDate() + 7); // Adding 7 days to the createdDate
 
       const currentDate = new Date();
+      if (selectTenantResult[0][0].userVerified == "Email Verified") {
+        res.status(200).json({
+          message: "Email is verified",
+        });
+      } else {
+        if (currentDate <= newDate) {
+          const differenceInMilliseconds = newDate - currentDate;
+          const differenceInDays = Math.ceil(differenceInMilliseconds / (1000 * 60 * 60 * 24));
 
-      if (currentDate <= newDate) {
-        const differenceInMilliseconds = newDate - currentDate;
-        const differenceInDays = Math.ceil(differenceInMilliseconds / (1000 * 60 * 60 * 24));
-
-        if (differenceInDays === 0) {
-          return res.status(200).json({
-            message: `Today is your last day, so kindly verify your email.`,
-            date: createdDate,
-          });
+          if (differenceInDays === 0) {
+            return res.status(200).json({
+              message: `Today is your last day, so kindly verify your email.`,
+              date: createdDate,
+            });
+          } else {
+            return res.status(200).json({
+              message: `Your remaining days to verify your email: ${differenceInDays}`,
+              data: differenceInDays,
+              createdDate: createdDate,
+              newDate: newDate,
+              currentDate: currentDate,
+            });
+          }
         } else {
           return res.status(200).json({
-            message: `Your remaining days to verify your email: ${differenceInDays}`,
-            data: differenceInDays,
-            createdDate: createdDate,
-            newDate: newDate,
-            currentDate: currentDate,
+            message: `Your account is locked due to email verification. Please verify your email.`,
           });
         }
-      } else {
-        return res.status(200).json({
-          message: `Your account is locked due to email verification. Please verify your email.`,
-        });
       }
     } else {
       return res.status(400).send('landlord is not found');
@@ -1455,7 +1468,7 @@ exports.emailUpdate = async (req, res) => {
 
 //  ############################# verify Email Update Start ############################################################
 exports.verifyEmailUpdate = async (req, res) => {
-  const { id, token } = req.body;
+  const { id, token, email, password } = req.body;
   const status = 'Email Verified';
   try {
     const userCheckResult = await queryRunner(selectQuery("users", "id"), [id]);
@@ -1472,17 +1485,15 @@ exports.verifyEmailUpdate = async (req, res) => {
           return res.status(400).send("Email Verified status is not updated");
         }
         else {
+          const token = jwt.sign({ email, password }, config.JWT_SECRET_KEY, {
+            expiresIn: "3h",
+          });
           return res.status(200).json({
+            token: token,
             message: " Email verified successful ",
           });
         }
-      } else {
-        return res.status(200).json({
-          message: " token code is not match ",
-        });
       }
-    } else {
-      return res.send("User is not found");
     }
   } catch (error) {
     res.send("Error Get Email Verified updated landlord  " + error);

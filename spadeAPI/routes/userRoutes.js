@@ -10,6 +10,7 @@ const { upload } = require("../middleware/imageUploads");
 const { uploadExistingFiles } = require("../middleware/imageUploads");
 const taskController = require("../controllers/taskController");
 const fileUpload = require("../helper/S3Bucket");
+const notifyController = require("../controllers/notifyController");
 router.post("/Signup", userController.createUser);
 router.get("/protected", verifyToken, userController.getUser);
 router.get("/protectedTenant", verifyTokenTenant, userController.getUser);
@@ -112,6 +113,7 @@ router.put('/verifyEmailUpdate', userController.verifyEmailUpdate);
 router.post("/addInvoiceCategory", verifyToken, invoiceController.createInvoiceCategories);
 router.put("/updatedInvoiceCategory", verifyToken, invoiceController.updateInvoiceCategories);
 // updated notification route
-router.put("/notify", verifyToken, userController.updatedNotification);
+router.put("/notify", verifyToken, notifyController.updateNotify);
+router.get("/notify", verifyToken, notifyController.getNotify);
 
 module.exports = router;

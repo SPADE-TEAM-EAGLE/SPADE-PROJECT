@@ -1,5 +1,5 @@
 const user = require("../models/user");
-const { sendMail } = require('../sendmail/sendmail.js');
+const { sendMail, invoiceSendMail } = require('../sendmail/sendmail.js');
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt');
 const fs = require('fs');
@@ -83,7 +83,7 @@ exports.createTenants = async (req, res) => {
 
           // if (sendmails == "Yes") {
           const mailSubject = "You created a new tenant";
-        await  sendMail.invoiceSendMail(landlordName, landlordEmail, mailSubject, "dueDays", "invoiceID", "frequency");
+          await invoiceSendMail(landlordName, landlordEmail, mailSubject, "dueDays", "invoiceID", "frequency");
           if (increaseRent == 'No') {
             res.status(200).json({
               message: "Tenants save Successful",
