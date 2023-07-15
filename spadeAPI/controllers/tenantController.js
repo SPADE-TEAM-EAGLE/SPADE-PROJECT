@@ -77,6 +77,13 @@ exports.createTenants = async (req, res) => {
         const status = "Occupied";
         const propertyUnitsResult = await queryRunner(updatePropertyUnitsTenant, [status, propertyUnitID, propertyID]);
         if (propertyUnitsResult[0].affectedRows > 0) {
+          const selectTenantsResult = await queryRunner(selectQuery('users', 'id'), [userId])
+          const landlordEmail = selectTenantsResult[0][0].Email;
+          const landlordName = selectTenantsResult[0][0].FirstName + " " + selectTenantsResult[0][0].LastName;
+
+          // if (sendmails == "Yes") {
+          const mailSubject = "You created a new tenant";
+        await  sendMail.invoiceSendMail(landlordName, landlordEmail, mailSubject, "dueDays", "invoiceID", "frequency");
           if (increaseRent == 'No') {
             res.status(200).json({
               message: "Tenants save Successful",

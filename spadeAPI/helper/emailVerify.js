@@ -11,13 +11,13 @@ const verifyMailCheck = async (email) => {
       const createdDate = new Date(selectTenantResult[0][0].created_at);
       const newDate = new Date(createdDate.getTime());
       newDate.setDate(newDate.getDate() + 7); // Adding 7 days to the createdDate
-      
-      const currentDate = new Date();
 
+      const currentDate = new Date();
+      
       if (currentDate <= newDate) {
         const differenceInMilliseconds = newDate - currentDate;
         const differenceInDays = Math.ceil(differenceInMilliseconds / (1000 * 60 * 60 * 24));
-        
+
         if (differenceInDays === 0) {
           return {
             status: 200,

@@ -53,7 +53,8 @@ exports.deleteQuery = (table, ...field) => {
 // delete all images where property id = id from propertyImage
 exports.delteImageFromDb = "DELETE FROM propertyimage WHERE imageKey = ?"
 exports.delteImageForInvoiceImages = "DELETE FROM invoiceimages WHERE imageKey = ?"
-exports.delteImageForTaskImages = "DELETE FROM taskimages WHERE taskImagesKey = ?"
+exports.delteImageForTaskImages = "DELETE FROM taskimages WHERE ImageKey = ?"
+exports.updateNotify = "UPDATE notification SET emailNotification = ? , pushNotification = ? WHERE landlordID = ? ";
 exports.addResetToken =
   "UPDATE users SET token = ?, updated_at = ? where id = ?";
 exports.updatePasswordLandlord =
@@ -62,14 +63,14 @@ exports.updatePasswordLandlord =
 exports.insertInUsers =
   "INSERT INTO users (id,FirstName, LastName, Email, Phone, Password, PlanID,created_at) VALUES (?,?, ?, ?, ?, ?, ?, ?)";
 // updated user query
-exports.updateUser = "UPDATE users SET FirstName = ?, LastName = ?, Email = ?, Phone = ?, updated_at = ?, BusinessName = ?, streetAddress = ?, BusinessAddress = ?, created_at = ? WHERE id = ?";
+exports.updateUser = "UPDATE users SET FirstName = ?, LastName = ?, Email = ?, Phone = ?, updated_at = ?, BusinessName = ?, streetAddress = ?, BusinessAddress = ?, created_at = ?, image = ? , imageKey = ? WHERE id = ?";
 // update plan id in user table
 exports.updatePlanId = "UPDATE users SET PlanID = ? WHERE id = ?";
 exports.insertInProperty =
   "INSERT INTO property (landlordID, propertyName, address, city, state, zipCode, propertyType, propertySQFT,status,units) VALUES (?,?,?,?,?,?,?,?,?,?)";
 exports.insertInPropertyImage = "INSERT INTO propertyimage (propertyID, Image, imageKey) VALUES (?,?,?)";
 exports.insertInTaskImage =
-  "INSERT INTO taskimages (taskID, taskImages, taskImagesKey) VALUES (?,?,?)";
+  "INSERT INTO taskimages (taskID, Image, ImageKey) VALUES (?,?,?)";
 exports.insertInPropertyUnits =
   "INSERT INTO propertyunits (propertyID, unitNumber,Area,unitDetails,status) VALUES (?,?,?,?,?)";
 exports.updateProperty =
@@ -162,8 +163,8 @@ pu.unitNumber,
 t.firstName AS tfirstName,
 t.lastName AS tlastName,
 t.phoneNumber AS tenantPhone,
-t.id as tenantID,
-GROUP_CONCAT(ti.taskImages) AS taskImages
+t.id AS tenantID,
+JSON_ARRAYAGG(JSON_OBJECT('imageKey', ti.imageKey, 'Image', ti.Image)) AS taskImages
 FROM
 task AS tk
 JOIN
@@ -177,7 +178,8 @@ taskimages AS ti ON tk.id = ti.taskID
 WHERE
 tk.landlordID = ?
 GROUP BY
-tk.id;`;
+tk.id;
+`;
 exports.taskByIDQuery = 'SELECT tk.id, tk.taskName, tk.dueDate, tk.status, tk.priority, tk.notes, tk.createdBy,tk.created_at, p.propertyName, pu.unitNumber, t.firstName as tfirstName, t.lastName as tlastName FROM `task`as tk JOIN tenants as t ON tk.tenantID = t.id JOIN property as p ON t.propertyID = p.id JOIN propertyunits as pu ON t.propertyUnitID = pu.id WHERE tk.id = ?';
 exports.resendEmailQuery = 'SELECT * FROM tenants JOIN invoice ON tenants.id = invoice.tenantID WHERE invoice.id = ?';
 exports.updateTenants = "UPDATE tenants SET firstName = ? , lastName = ? , companyName = ? , email = ? , phoneNumber = ? , address = ? , city = ? , state = ? , zipcode = ? , propertyID = ? , propertyUnitID = ? , rentAmount = ? , gross_or_triple_lease = ? , baseRent = ? , tripleNet = ? , leaseStartDate = ? , leaseEndDate = ? , increaseRent = ? , tenantUpdated_at = ? WHERE id = ?";
@@ -200,7 +202,7 @@ t.firstName AS tfirstName,
 t.lastName AS tlastName,
 t.phoneNumber AS tenantPhone,
 t.id as tenantID,
-GROUP_CONCAT(ti.taskImages) AS taskImages
+GROUP_CONCAT(ti.Image) AS ImageKey
 FROM
 task AS tk
 JOIN
@@ -216,4 +218,7 @@ exports.updatePassword = "UPDATE users SET Password = ? , updated_at = ? where i
 exports.updatePasswordTenantSetting = "UPDATE tenants SET tenantPassword = ? , tenantUpdated_at = ? where id = ? ";
 exports.updateEmailQuery = "UPDATE users SET Email = ? where Email = ? ";
 exports.updateVerifiedStatusQuery = "UPDATE users SET userVerified = ? where id = ? ";
+
+// add category in vendorcategory table
+exports.addVendorCategory = "INSERT INTO vendorcategory (category,landLordId) VALUES (?,?)";
 

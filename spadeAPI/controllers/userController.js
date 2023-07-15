@@ -1,5 +1,5 @@
 const user = require("../models/user");
-const { sendMail } = require("../sendmail/sendmail.js");
+const { sendMail, taskSendMail } = require("../sendmail/sendmail.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const fs = require("fs");
@@ -28,7 +28,8 @@ const {
   updatePlanId,
   updateEmailQuery,
   updateVerifiedStatusQuery,
-  delteImageFromDb
+  delteImageFromDb,
+  updateNotify
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -104,6 +105,8 @@ exports.getUser = (req, res) => {
   // console.log(req.user);
   res.status(200).json({
     user: req.user.userName,
+    email:req.user.email,
+    userId:req.user.userId
   });
 };
 
@@ -114,12 +117,14 @@ exports.Signin = async function (req, res) {
   try {
     // for tenant
     if (tenant == "tenant") {
+      console.log("tenant")
       const selectResult = await queryRunner(selectQuery("tenants", "email"), [
         email,
       ]);
+      console.log(selectResult[0][0])
       if (selectResult[0].length === 0) {
         res.status(400).send("Email not found");
-      } else if (
+      } else if (!
         await bcrypt.compare(password, selectResult[0][0].tenantPassword)
       ) {
         const token = jwt.sign({ email, password }, config.JWT_SECRET_KEY, {
@@ -148,9 +153,17 @@ exports.Signin = async function (req, res) {
         }); 
         // const emai = "umairnazakat2222@gmail.com"
       //  const emailMessage =  await verifyMailCheck(email);
+      if(selectResult[0][0].userVerified == "Email Verified"){
+        res.status(200).json({
+          token : token,
+          body: selectResult[0][0],
+          message: "Email is verified",
+        });
+      }else{ 
        const emailMessage =  await verifyMailCheck(email);
        if(emailMessage.message == "Your account is locked due to email verification. Please verify your email."){
          res.status(200).json({
+          token : token,
            body: selectResult[0][0],
            message: "Email is not verified",
            msg : emailMessage.message
@@ -159,10 +172,11 @@ exports.Signin = async function (req, res) {
        res.status(200).json({
          token: token,
          body: selectResult[0][0],
-         message: "Successful Loginsss",
+         message: "Successful Login",
          msg : emailMessage.message,
          email : email
        });
+     }
      }
  
       } else {
@@ -373,6 +387,7 @@ exports.updatePassword = async (req, res) => {
 //  ############################# resend Code ############################################################
 exports.resendCode = async (req, res) => {
   const { id } = req.body;
+  console.log(req.body)
   const mailSubject = "Spade Reset Email";
   const random = Math.floor(100000 + Math.random() * 900000);
   try {
@@ -443,7 +458,7 @@ exports.property = async (req, res) => {
   } = req.body;
   try {
     // const { userId } = req.user;
-    const { userId } = req.body;
+    const { userId,email } = req.user;
     if (!propertyName || !address || !city || !state || !zipCode || !propertyType || !propertySQFT || !units) {
       throw new Error("Please fill all the fields");
     }
@@ -454,6 +469,7 @@ exports.property = async (req, res) => {
     }
     // console.log("1");
     const status = "Non-active";
+    console.log(userId)
     // this line insert data into property table 
     const propertyResult = await queryRunner(insertInProperty, [
       userId,
@@ -467,10 +483,19 @@ exports.property = async (req, res) => {
       status,
       units,
     ]);
+    console.log(req.body)
     // console.log("2");
     // if property data not inserted into property table then throw error
     if (propertyResult.affectedRows === 0) {
       throw new Error("Data doesn't inserted in property table");
+    }
+    if (propertyResult[0].affectedRows > 0) {
+      const mailSubject = "Property Maintenance: " + propertyName;
+      const landlordUser = await queryRunner(selectQuery("users", "id"), [
+        userId
+      ]);
+      const FullName = landlordUser[0][0].FirstName + " " + landlordUser[0][0].LastName;
+      // await taskSendMail("tenantName", mailSubject, "dueDate", FullName, "property", "assignedTo", "priority", "companyName", "contactLandlord", userId, email);
     }
     const { insertId } = propertyResult[0];
     // we are using loop to send images data into 
@@ -532,13 +557,14 @@ exports.getproperty = async (req, res) => {
           selectQuery("propertyimage", "propertyID"),
           [propertyID]
         );
-          console.log(allPropertyImageResult[0])
+        console.log(allPropertyImageResult[0])
         if (allPropertyImageResult.length > 0) {
           const propertyImages = allPropertyImageResult[0].map(
             (image) => {
-              return {imageURL:image.Image,imageKey:image.imageKey}
+              return { imageURL: image.Image, imageKey: image.ImageKey }
             }
           );
+          console.log(propertyImages)
           // Extract image URLs from the result
           allPropertyResult[0][i].images = propertyImages; // Add property images to the current property object
         } else {
@@ -657,17 +683,18 @@ exports.propertyUpdate = async (req, res) => {
         [id]
       );
       // console.log(images, propertycheckresult[0])
-
+        console.log(propertycheckresult[0])
+        console.log(images)
       // Extract the image keys from propertycheckresult
-      const propertyImageKeys = propertycheckresult[0].map(image => image.imageKey);
-
+      const propertyImageKeys = propertycheckresult[0].map(image => image.ImageKey);
+console.log(propertyImageKeys)
       // Find the images to delete from S3 (present in propertycheckresult but not in images)
-      const imagesToDelete = propertycheckresult[0].filter(image => !images.some(img => img.imageKey === image.imageKey));
-
+      const imagesToDelete = propertycheckresult[0].filter(image => !images.some(img => img.imageKey === image.ImageKey));
+console.log(imagesToDelete)
       // Delete images from S3
       for (let i = 0; i < imagesToDelete.length; i++) {
-        deleteImageFromS3(imagesToDelete[i].imageKey);
-        await queryRunner(delteImageFromDb, [imagesToDelete[i].imageKey]);
+        deleteImageFromS3(imagesToDelete[i].ImageKey);
+        await queryRunner(delteImageFromDb, [imagesToDelete[i].ImageKey]);
       }
 
       // Find the images to insert into the database (present in images but not in propertycheckresult)
@@ -691,107 +718,107 @@ exports.propertyUpdate = async (req, res) => {
 }
 
 
-  // try {
-  //   const {
-  //     // existingImages,
-  //     propertyName,
-  //     address,
-  //     city,
-  //     state,
-  //     zipCode,
-  //     propertyType,
-  //     propertySQFT,
-  //     status,
-  //     id,
-  //     units,
-  //     images,
-  //   } = req.body;
-  //   const { userId } = req.user;
-  //   // console.log(`step : 2 send all values data into database`);
-  //   // const propertyUpdateResult = await queryRunner(updateProperty, [
-  //   //   userId,
-  //   //   propertyName,
-  //   //   address,
-  //   //   city,
-  //   //   state,
-  //   //   zipCode,
-  //   //   propertyType,
-  //   //   propertySQFT,
-  //   //   "Active",
-  //   //   units,
-  //   //   id,
-  //   // ]);
+// try {
+//   const {
+//     // existingImages,
+//     propertyName,
+//     address,
+//     city,
+//     state,
+//     zipCode,
+//     propertyType,
+//     propertySQFT,
+//     status,
+//     id,
+//     units,
+//     images,
+//   } = req.body;
+//   const { userId } = req.user;
+//   // console.log(`step : 2 send all values data into database`);
+//   // const propertyUpdateResult = await queryRunner(updateProperty, [
+//   //   userId,
+//   //   propertyName,
+//   //   address,
+//   //   city,
+//   //   state,
+//   //   zipCode,
+//   //   propertyType,
+//   //   propertySQFT,
+//   //   "Active",
+//   //   units,
+//   //   id,
+//   // ]);
 
 
-  //   console.log(propertycheckresult , "propertycheckresult")
-  //   if (propertyUpdateResult[0].affectedRows > 0) {
-  //     // console.log(`step : 3 check property images into database propertyid = ${id}`);
-  //     // check property images into database propertyid = ${id}
-  //     const propertycheckresult = await queryRunner(
-  //       selectQuery("propertyimage", "propertyID"),
-  //       [id]
-  //     );
+//   console.log(propertycheckresult , "propertycheckresult")
+//   if (propertyUpdateResult[0].affectedRows > 0) {
+//     // console.log(`step : 3 check property images into database propertyid = ${id}`);
+//     // check property images into database propertyid = ${id}
+//     const propertycheckresult = await queryRunner(
+//       selectQuery("propertyimage", "propertyID"),
+//       [id]
+//     );
 
-  //     if (propertycheckresult.length > 0) {
-  //       // propertyimages = propertycheckresult[0].map((image) => image.Image);
-  //       // let existingImg = existingImages.split(",");
-  //       // const imagesToDelete = propertyimages.filter(
-  //       //   (element) => !existingImg.includes(element)
-  //       // );
+//     if (propertycheckresult.length > 0) {
+//       // propertyimages = propertycheckresult[0].map((image) => image.Image);
+//       // let existingImg = existingImages.split(",");
+//       // const imagesToDelete = propertyimages.filter(
+//       //   (element) => !existingImg.includes(element)
+//       // );
 
-  //       // // Combine the common elements with array2
+//       // // Combine the common elements with array2
 
-  //       // imageToDelete(imagesToDelete);
-  //       // let propertyDeleteresult = [{ affectedRows: 0 }];
-  //       // // delete images Data into database
-  //       // if (imagesToDelete.length > 0) {
-  //       for (let i = 0; i < images.length; i++) {
-  //         const image = images[i].image_url;
-  //         propertyDeleteresult = await queryRunner(
-  //           deleteQuery("propertyimage", "Image"), [image]);
-  //         // console.log(propertyDeleteresult)
-  //       }
-  //       // }
+//       // imageToDelete(imagesToDelete);
+//       // let propertyDeleteresult = [{ affectedRows: 0 }];
+//       // // delete images Data into database
+//       // if (imagesToDelete.length > 0) {
+//       for (let i = 0; i < images.length; i++) {
+//         const image = images[i].image_url;
+//         propertyDeleteresult = await queryRunner(
+//           deleteQuery("propertyimage", "Image"), [image]);
+//         // console.log(propertyDeleteresult)
+//       }
+//       // }
 
-  //       // console.log(`step : 4 delete previous images data into database propertyid = ${id}`);
-  //       // console.log(propertyDeleteresult)
-  //       // if (propertyDeleteresult[0].affectedRows > 0) {
+//       // console.log(`step : 4 delete previous images data into database propertyid = ${id}`);
+//       // console.log(propertyDeleteresult)
+//       // if (propertyDeleteresult[0].affectedRows > 0) {
 
-  //       const fileNames = images;
-  //       // existingImg = [...fileNames];
-  //       // using loop to send new images data into database
-  //       for (let i = 0; i < fileNames.length; i++) {
-  //         // const img = existingImg[i];
-  //         const image = images[i].image_url;
-  //         const key = images[i].image_key;
-  //         const propertyImageResult = await queryRunner(insertInPropertyImage, [
-  //           id,
-  //           image,
-  //           key
-  //         ]);
-  //         if (propertyImageResult.affectedRows === 0) {
-  //           return res.send("Error2");
-  //         }
-  //       }
+//       const fileNames = images;
+//       // existingImg = [...fileNames];
+//       // using loop to send new images data into database
+//       for (let i = 0; i < fileNames.length; i++) {
+//         // const img = existingImg[i];
+//         const image = images[i].image_url;
+//         const key = images[i].image_key;
+//         const propertyImageResult = await queryRunner(insertInPropertyImage, [
+//           id,
+//           image,
+//           key
+//         ]);
+//         if (propertyImageResult.affectedRows === 0) {
+//           return res.send("Error2");
+//         }
+//       }
 
-  //       return res.status(201).json({
-  //         message: "Form Submited",
-  //       });
-  //     } else {
-  //       return res.status(400).json({
-  //         message: "No Property data found",
-  //       });
-  //     }
-  //   } else {
-  //     return res.status(400).json({
-  //       message: "No Property",
-  //     });
-  //   }
+//       return res.status(201).json({
+//         message: "Form Submited",
+//       });
+//     } else {
+//       return res.status(400).json({
+//         message: "No Property data found",
+//       });
+//     }
+//   } else {
+//     return res.status(400).json({
+//       message: "No Property",
+//     });
+//   }
 
-  // } catch (error) {
-  //   console.log(error);
-  //   return res.send("Error from Updating Property");
-  // }
+// } catch (error) {
+//   console.log(error);
+//   return res.send("Error from Updating Property");
+// }
 
 //  ############################# Update Property End ############################################################
 
@@ -1355,7 +1382,8 @@ exports.propertyTask = async (req, res) => {
 //  ############################# Tenant verify Mail Check Start  ############################################################
 
 exports.verifyMailCheck = async (req, res) => {
-  const { email } = req.body;
+  const { email } = req.user;
+  console.log(email)
   try {
     const selectTenantResult = await queryRunner(selectQuery("users", "Email"), [email]);
     if (selectTenantResult[0].length > 0) {
@@ -1364,29 +1392,35 @@ exports.verifyMailCheck = async (req, res) => {
       newDate.setDate(newDate.getDate() + 7); // Adding 7 days to the createdDate
       
       const currentDate = new Date();
-
-      if (currentDate <= newDate) {
-        const differenceInMilliseconds = newDate - currentDate;
-        const differenceInDays = Math.ceil(differenceInMilliseconds / (1000 * 60 * 60 * 24));
-        
-        if (differenceInDays === 0) {
-          return res.status(200).json({
-            message: `Today is your last day, so kindly verify your email.`,
-            date: createdDate,
-          });
+      if(selectTenantResult[0][0].userVerified == "Email Verified"){
+        res.status(200).json({
+          message: "Email is verified",
+        });
+      }else{ 
+  
+        if (currentDate <= newDate) {
+          const differenceInMilliseconds = newDate - currentDate;
+          const differenceInDays = Math.ceil(differenceInMilliseconds / (1000 * 60 * 60 * 24));
+          
+          if (differenceInDays === 0) {
+            return res.status(200).json({
+              message: `Today is your last day, so kindly verify your email.`,
+              date: createdDate,
+            });
+          } else {
+            return res.status(200).json({
+              message: `Your remaining days to verify your email: ${differenceInDays}`,
+              data: differenceInDays,
+              createdDate: createdDate,
+              newDate: newDate,
+              currentDate: currentDate,
+            });
+          }
         } else {
           return res.status(200).json({
-            message: `Your remaining days to verify your email: ${differenceInDays}`,
-            data: differenceInDays,
-            createdDate: createdDate,
-            newDate: newDate,
-            currentDate: currentDate,
+            message: `Your account is locked due to email verification. Please verify your email.`,
           });
         }
-      } else {
-        return res.status(200).json({
-          message: `Your account is locked due to email verification. Please verify your email.`,
-        });
       }
     } else {
       return res.status(400).send('landlord is not found');
@@ -1402,14 +1436,14 @@ exports.verifyMailCheck = async (req, res) => {
 
 //  ############################# Email Start ############################################################
 exports.emailUpdate = async (req, res) => {
-  const {id, email} = req.body;
+  const { id, email } = req.body;
   try {
     const userCheckResult = await queryRunner(
       selectQuery("users", "id"),
       [id]
     );
 
-    
+
     if (userCheckResult[0].length > 0) {
       const emailExist = userCheckResult[0][0].Email;
       // console.log(userCheckResult[0]);
@@ -1422,9 +1456,9 @@ exports.emailUpdate = async (req, res) => {
         return res.status(200).json({
           message: " Email updated successful ",
         });
-      }else {
-    return res.status(400).send("Error1");
-  
+      } else {
+        return res.status(400).send("Error1");
+
       }
     } else {
       return res.send("User is not found");
@@ -1440,8 +1474,9 @@ exports.emailUpdate = async (req, res) => {
 
 
 //  ############################# verify Email Update Start ############################################################
+//  ############################# verify Email Update Start ############################################################
 exports.verifyEmailUpdate = async (req, res) => {
-  const {id, token} = req.body;
+  const {id, token, email, password } = req.body;
   const status = 'Email Verified';
   try {
     const userCheckResult = await queryRunner(selectQuery("users", "id"),[id]); 
@@ -1458,7 +1493,11 @@ if(token == existToken){
       return res.status(400).send("Email Verified status is not updated");
     } 
 else {
+  const token = jwt.sign({ email, password }, config.JWT_SECRET_KEY, {
+    expiresIn: "3h",
+  });
   return res.status(200).json({
+    token : token,
     message: " Email verified successful ",
   });
     }
@@ -1476,3 +1515,28 @@ else {
   }
 };
 //  ############################# verify Email Update End ############################################################
+//  ############################# verify Email Update End ############################################################
+exports.updatedNotification = async (req, res) => {
+  const {
+    isEmailNotify,
+    isPushNotify,
+  } = req.body;
+  const { userId } = req.user;
+  try {
+    const updateNotifyResult = await queryRunner(updateNotify, [
+      isEmailNotify,
+      isPushNotify,
+      userId
+    ]);
+    if (updateNotifyResult[0].affectedRows > 0) {
+      return res.status(200).json({
+        email: isEmailNotify === "yes" ? "Email notifications enabled" : "Email notifications disabled",
+        push: isPushNotify === "yes" ? "push notifications enabled" : "push notifications disabled",
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      message: error.message
+    })
+  }
+}
