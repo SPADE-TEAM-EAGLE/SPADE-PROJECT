@@ -538,7 +538,7 @@ exports.getproperty = async (req, res) => {
         if (allPropertyImageResult.length > 0) {
           const propertyImages = allPropertyImageResult[0].map(
             (image) => {
-              return {imageURL:image.Image,imageKey:image.imageKey}
+              return {imageURL:image.Image,imageKey:image.ImageKey}
             }
           );
           // Extract image URLs from the result
