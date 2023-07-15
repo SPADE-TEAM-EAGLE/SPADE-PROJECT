@@ -26,7 +26,6 @@ exports.changePasssword = async function (req, res) {
     const currentDate = new Date();
 
     try {
-      
         const selectResult = await queryRunner(selectQuery("users", "id"), [userId]);
         if (selectResult[0].length === 0) {
           res.status(400).send("User Not Found");
@@ -51,7 +50,6 @@ exports.changePasssword = async function (req, res) {
           res.status(401).json({ error: "Incorrect Password" });
         }  
     } catch (error) {
-      console.log(error);
       res.status(400).send(error.message);
     }
   };

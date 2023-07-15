@@ -1,6 +1,8 @@
 const nodemailer = require("nodemailer");
 const { createTransporter } = require("../helper/googleAuth");
 const codeHTML = require("./codeHTML");
+const { queryRunner } = require("../helper/queryRunner");
+const { selectQuery } = require("../constants/queries");
 const constants = process.env;
 
 exports.sendMail = async (email, mailSubject, random, name) => {
@@ -11,7 +13,6 @@ exports.sendMail = async (email, mailSubject, random, name) => {
       to: email,
       // to:"aj8706786@gmail.com",
       subject: mailSubject,
-
       html:
         mailSubject == "Spade Welcome Email"
           ? codeHTML.welcomeHTML(email, random, name)
@@ -67,7 +68,6 @@ exports.invoiceSendMail = async (
 // Task Invoice email
 exports.taskSendMail = async (
   tenantName,
-  tenantEmail,
   mailSubject,
   dueDays,
   landlordName,
@@ -75,13 +75,31 @@ exports.taskSendMail = async (
   assignedTo,
   priority,
   companyName,
-  contactLandlord
+  contactLandlord,
+  id,
+  email
 ) => {
   try {
+    // const selectResult = await queryRunner(selectQuery("property", "id"), [
+    //   property,
+    // ]);
+    // const landLordUser = selectResult[0][0].landlordID
+    // const landlordUser = await queryRunner(selectQuery("users", "id"), [
+    //   landLordUser
+    // ]);
+    console.log(id)
+    const islandlordNotify = await queryRunner(selectQuery("notification", "landlordID"), [
+      id
+    ]);
+    console.log(islandlordNotify[0])
+    if (islandlordNotify[0][0].emailNotification === "no") {
+      console.log("email notification is off");
+      return;
+    }
     let transpoter = await createTransporter();
     var mailOptions = {
       from: constants.EMAIL_HOST,
-      to: tenantEmail,
+      to: email,
       // to:"aj8706786@gmail.com",
       subject: mailSubject,
 
