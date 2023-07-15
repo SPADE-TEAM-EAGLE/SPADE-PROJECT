@@ -55,9 +55,14 @@ exports.delteImageFromDb = "DELETE FROM propertyimage WHERE imageKey = ?"
 exports.delteImageForInvoiceImages = "DELETE FROM invoiceimages WHERE imageKey = ?"
 exports.delteImageForTaskImages = "DELETE FROM taskimages WHERE ImageKey = ?"
 
+exports.createInvoiceCategories = "INSERT INTO InvoiceCategories (categorieName,landLordId) VALUES (?,?)";
+// updated category query setTaxes, catId, userId
+exports.updateInvoiceCategories = "UPDATE InvoiceCategories SET categorieName = ?,setTaxes = ? WHERE id = ? AND landLordId = ?";
 exports.getPropertyReport = "SELECT property.id, property.propertyName, property.propertyType, property.units, tenants.firstName,tenants.lastName , tenants.phoneNumber FROM property JOIN tenants ON property.id = tenants.propertyID WHERE property.landlordID = ?";
 exports.getTenantReport = "SELECT tenants.id AS tenantID, tenants.companyName, tenants.firstName, tenants.lastName, tenants.phoneNumber, property.propertyType, property.units FROM tenants JOIN property ON tenants.propertyID = property.id WHERE tenants.landlordID = ?";
-exports.getTaskReportData = "SELECT task.id AS taskID, task.taskName, task.dueDate, task.status FROM task JOIN property ON tenants.propertyID = property.id WHERE task.landlordID  = ?";
+// exports.getTaskReportData = "SELECT task.id AS taskID, task.taskName, task.dueDate, task.status, property.propertyName FROM task JOIN tenants ON tenants.tenantID = task.tenantID JOIN property ON property.id = tenants.propertyID WHERE task.landlordID = ?";
+exports.getTaskReportData = "SELECT task.id AS taskID, task.taskName, task.dueDate, task.status, property.propertyName FROM task JOIN tenants ON tenants.propertyId = property.propertyId JOIN property ON property.propertyId = tenants.propertyId WHERE task.landlordID = ?";
+
 exports.getInvoiceReportData = "SELECT invoice.id AS invoiceID, invoice.created_at,invoice.totalAmount, property.propertyName, property.address ,tenants.email ,tenants.firstName, tenants.lastName FROM invoice JOIN tenants ON tenants.id = invoice.tenantID JOIN property ON property.id = tenants.propertyID WHERE invoice.landlordID = ?";
 
 // property.propertyType

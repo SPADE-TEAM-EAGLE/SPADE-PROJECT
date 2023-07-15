@@ -33,7 +33,8 @@ const {
   getAllProperty,
   getPropertyReport,
   getTenantReport,
-  getInvoiceReportData
+  getInvoiceReportData,
+  getTaskReportData
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -1565,7 +1566,7 @@ exports.getAllProperty = async (req, res) => {
 exports.getTaskReportData = async (req, res) => {
   try {
     const { userId } = req.user;
-    const getAllPropertyData = await queryRunner(getPropertyReport, [
+    const getAllPropertyData = await queryRunner(getTaskReportData, [
       userId
     ]);
 

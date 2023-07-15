@@ -120,4 +120,5 @@ router.put("/notify", verifyToken, notifyController.updateNotify);
 router.get("/notify", verifyToken, notifyController.getNotify);
 router.get("/property", verifyToken, userController.getAllProperty);
 router.get("/invoice", verifyToken, userController.getInvoiceReportData);
+router.get("/task", verifyToken, userController.getTaskReportData);
 module.exports = router;

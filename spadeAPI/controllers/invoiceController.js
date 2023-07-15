@@ -17,7 +17,9 @@ const {
   getByIdInvoicesQuery,
   updateInvoice,
   resendEmailQuery,
-  delteImageForInvoiceImages
+  delteImageForInvoiceImages,
+  createInvoiceCategories,
+  updateInvoiceCategories
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -489,7 +491,7 @@ exports.createInvoiceCategories = async (req, res) => {
   try {
     const { category } = req.body;
     const { userId } = req.user;
-    const createInvoiceCategoriesResult = await queryRunner(createInvoiceCategories, [userId, category]);
+    const createInvoiceCategoriesResult = await queryRunner(createInvoiceCategories, [category, userId]);
     if (createInvoiceCategoriesResult[0].affectedRows > 0) {
       res.status(200).json({
         message: "Invoice Categories created successfully"
@@ -513,7 +515,7 @@ exports.getInvoiceCategories = async (req, res) => {
     );
     if (invoiceImagecheckresult[0].length > 0) {
       res.status(200).json({
-        data : invoiceImagecheckresult[0],
+        data: invoiceImagecheckresult[0],
       });
     } else {
       res.status(400).json({
@@ -531,9 +533,9 @@ exports.getInvoiceCategories = async (req, res) => {
 // update categories text 
 exports.updateInvoiceCategories = async (req, res) => {
   try {
-    const { setTaxes, catId } = req.body;
+    const { setTaxes, catId, category } = req.body;
     const { userId } = req.user;
-    const updateInvoiceCategoriesResult = await queryRunner(updateInvoiceCategories, [setTaxes, catId, userId]);
+    const updateInvoiceCategoriesResult = await queryRunner(updateInvoiceCategories, [category, setTaxes, catId, userId]);
     if (updateInvoiceCategoriesResult[0].affectedRows > 0) {
       res.status(200).json({
         message: "Invoice Categories updated successfully"
