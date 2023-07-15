@@ -43,8 +43,6 @@ const notifyController = {
             const invoice = await queryRunner(selectQuery("invoice", "landlordID"), [
                 userId,
             ]);
-            
-
             res.status(200).json({
                 tenantNotify: {
                     count: tenants[0].length,

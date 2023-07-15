@@ -39,9 +39,20 @@ exports.invoiceSendMail = async (
   mailSubject,
   dueDays,
   invoiceID,
-  landlordName
+  landlordName,
+  id
 ) => {
   try {
+    console.log(id)
+    const islandlordNotify = await queryRunner(selectQuery("notification", "landlordID"), [
+      id
+    ]);
+    console.log(islandlordNotify[0])
+    if (islandlordNotify[0][0].emailNotification === "no") {
+      console.log("email notification is off");
+      return;
+    }
+
     let transpoter = await createTransporter();
     var mailOptions = {
       from: constants.EMAIL_HOST,
@@ -90,6 +101,7 @@ exports.taskSendMail = async (
     const islandlordNotify = await queryRunner(selectQuery("notification", "landlordID"), [
       id
     ]);
+    console.log(islandlordNotify[0])
     if (islandlordNotify[0][0].emailNotification === "no") {
       console.log("email notification is off");
       return;

@@ -1003,8 +1003,8 @@
 
 <body class="app sidebar-mini ltr light-mode">
 
-     <!-- GLOBAL-LOADER -->
-     <div id="preloader" class="tlp-preloader">
+    <!-- GLOBAL-LOADER -->
+    <div id="preloader" class="tlp-preloader">
         <div class="animation-preloader">
             <div class="tlp-spinner"></div>
             <img src="../assets/images/logo-preloader.png" alt="Preloader" style="width: 65px;">
@@ -1499,7 +1499,7 @@
                                                 <a class="dropdown-item" href="lockscreen.html">
                                                     <i class="dropdown-icon fe fe-lock"></i> Lockscreen
                                                 </a>
-                                                <a class="dropdown-item" href="login_module.html">
+                                                <a class="dropdown-item" onclick="logout()">
                                                     <i class="dropdown-icon fe fe-alert-circle"></i> Sign out
                                                 </a>
                                             </div> -->
@@ -2772,7 +2772,7 @@
                 // Populate the table with the updated data
                 // Call your AJAX request or any other method to fetch the filtered data and populate the table
                 $.ajax({
-                    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/allproperty',
+                    url: 'https://backend.app.spaderent.com/api/spade/allproperty',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -2870,7 +2870,7 @@
 
             // Send the form data to the server using AJAX
             $.ajax({
-                url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/property',
+                url: 'https://backend.app.spaderent.com/api/spade/property',
                 type: 'POST',
                 data: formData,
                 contentType: false,
@@ -2936,7 +2936,7 @@
 
             formData.append("existingImages", existingImageNames)
             $.ajax({
-                url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/updateProperty',
+                url: 'https://backend.app.spaderent.com/api/spade/updateProperty',
                 // url: 'http://ec2-54-158-103-230.compute-1.amazonaws.com:3000/api/spade/updateProperty',
                 type: 'PUT',
                 data: formData,
@@ -2959,7 +2959,7 @@
                 // delete using AJAX
                 $('#myModal_delete').modal('hide');
                 $.ajax({
-                    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/propertyDelete',
+                    url: 'https://backend.app.spaderent.com/api/spade/propertyDelete',
                     type: 'DELETE',
                     data: JSON.stringify({
                         "id": propertyId
@@ -2985,7 +2985,7 @@
             $("#global-loader").fadeIn("fast")
                 // console.log(22)
             $.ajax({
-                url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/allproperty',
+                url: 'https://backend.app.spaderent.com/api/spade/allproperty',
                 type: 'GET',
                 contentType: false,
                 processData: false,

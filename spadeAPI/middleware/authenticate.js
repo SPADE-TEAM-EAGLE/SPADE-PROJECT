@@ -115,7 +115,6 @@ const verifyToken = async (req, res, next) => {
       userId: result[0][0].id,
       userName: result[0][0].FirstName + " " + result[0][0].LastName,
     };
-
     next();
     // console.log("hello")
   } catch (err) {

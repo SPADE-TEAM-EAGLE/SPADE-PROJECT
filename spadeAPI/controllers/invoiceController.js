@@ -46,6 +46,7 @@ exports.createInvoice = async (req, res) => {
   } = req.body;
   try {
     const { userId } = req.user;
+    console.log(req.body)
     // console.log(userId)
     // if (!tenantID || !invoiceType || !startDate || !endDate || !frequency || !dueDate || !dueDays || !repeatTerms || !terms || !additionalNotes || !lineItems || !sendmails || !totalAmount) {
     //   throw new Error("Please fill all the fields");
@@ -62,25 +63,23 @@ exports.createInvoice = async (req, res) => {
       if (selectTenantsResult[0].length > 0) {
         const landlordEmail = selectTenantsResult[0][0].Email;
         const landlordName = selectTenantsResult[0][0].FirstName + " " + selectTenantsResult[0][0].LastName;
-
-          // send mail to tenant from landlord company
-          const mailSubject = invoiceID + " From " + frequency;
-          sendMail.invoiceSendMail(landlordName, landlordEmail, mailSubject, dueDays, invoiceID, frequency);
-
+        // send mail to tenant from landlord company
+        const mailSubject = invoiceID + " From " + frequency;
+        sendMail.invoiceSendMail(landlordName, landlordEmail, mailSubject, dueDays, invoiceID, frequency, userId);
       }
-
-
 
       if (lineItems) {
         for (let i = 0; i < lineItems.length; i++) {
-          const category = lineItems[i].category;
-          const property = lineItems[i].property;
-          const memo = lineItems[i].memo;
-          const amount = lineItems[i].amount;
-          const invoiceLineItemsResult = await queryRunner(insertLineItems, [invoiceID, category, property, memo, amount])
-          if (invoiceLineItemsResult.affectedRows === 0) {
-            res.send('Error2');
-            return;
+          if (Object.keys(lineItems[i]).length >= 1) {
+            const category = lineItems[i].category;
+            const property = lineItems[i].property;
+            const memo = lineItems[i].memo;
+            const amount = lineItems[i].amount;
+            const invoiceLineItemsResult = await queryRunner(insertLineItems, [invoiceID, category, property, memo, amount])
+            if (invoiceLineItemsResult.affectedRows === 0) {
+              res.send('Error2');
+              return;
+            }
           }
         }
       }
@@ -275,6 +274,7 @@ exports.UpdateInvoice = async (req, res) => {
   } = req.body;
   try {
     const { userId } = req.user
+    // console.log(req.body)
     const currentDate = new Date();
     const invoiceUpdatedResult = await queryRunner(updateInvoice, [
       tenantID,
@@ -298,10 +298,8 @@ exports.UpdateInvoice = async (req, res) => {
       const tenantEmail = selectTenantsResult[0][0].email;
       const tenantName = selectTenantsResult[0][0].firstName + " " + selectTenantsResult[0][0].lastName;
 
-      if (sendmails === "Yes") {
         const mailSubject = invoiceID + " From " + frequency;
-        sendMail.invoiceSendMail(tenantName, tenantEmail, mailSubject, dueDays, invoiceID, frequency);
-      }
+        sendMail.invoiceSendMail(tenantName, tenantEmail, mailSubject, dueDays, invoiceID, frequency, userId);
     }
     //  if line items is not empty then delete line items and insert new line items
     if (lineItems) {
@@ -334,27 +332,30 @@ exports.UpdateInvoice = async (req, res) => {
       // console.log(images, propertycheckresult[0])
 
       // Extract the image keys from propertycheckresult
-      const propertyImageKeys = invoiceCheckResult[0].map(image => image.imageKey);
-
+      const propertyImageKeys = invoiceCheckResult[0].map(image => image.ImageKey);
+      console.log(invoiceCheckResult[0])
+      console.log(propertyImageKeys)
       // Find the images to delete from S3 (present in propertycheckresult but not in images)
-      const imagesToDelete = invoiceCheckResult[0].filter(image => !images.some(img => img.imageKey === image.imageKey));
-
+      const imagesToDelete = invoiceCheckResult[0].filter(image => !images.some(img => img.imageKey === image.ImageKey));
+      console.log(imagesToDelete)
       // Delete images from S3
       for (let i = 0; i < imagesToDelete.length; i++) {
-        await deleteImageFromS3(imagesToDelete[i].imageKey);
-        await queryRunner(delteImageForInvoiceImages, [imagesToDelete[i].imageKey]);
+        await deleteImageFromS3(imagesToDelete[i].ImageKey);
+        await queryRunner(delteImageForInvoiceImages, [imagesToDelete[i].ImageKey]);
       }
 
       // Find the images to insert into the database (present in images but not in propertycheckresult)
       const imagesToInsert = images.filter(image => !propertyImageKeys.includes(image.imageKey));
 
       for (let i = 0; i < imagesToInsert.length; i++) {
-        const { image_url } = imagesToInsert[i];
-        const { image_key } = imagesToInsert[i];
+        const { image_url, image_key, Image, imageKey } = imagesToInsert[i];
+        const imageUrl = image_url || Image;
+        const imageKeyVal = image_key || imageKey;
+
         const propertyImageResult = await queryRunner(insertInvoiceImage, [
           invoiceID,
-          image_url,
-          image_key
+          imageUrl,
+          imageKeyVal
         ]);
         // if property image data not inserted into property image table then throw error
         if (propertyImageResult.affectedRows === 0) {
@@ -459,7 +460,7 @@ exports.invoiceDelete = async (req, res) => {
 
 exports.resendEmail = async (req, res) => {
   const { invoiceID } = req.query;
-  // const { userId } = req.user;
+  const { userId } = req.user;
   // console.log(req)
   try {
     const resendEmailResult = await queryRunner(resendEmailQuery, [invoiceID])
@@ -471,9 +472,8 @@ exports.resendEmail = async (req, res) => {
       const frequency = resendEmailResult[0][0].frequency;
       const tenantName = resendEmailResult[0][0].firstName + " " + resendEmailResult[0][0].lastName;
       const mailSubject = invoiceID + " From " + frequency;
-      sendMail.invoiceSendMail(tenantName, tenantEmail, mailSubject, dueDays, invoiceID, frequency);
+      sendMail.invoiceSendMail(tenantName, tenantEmail, mailSubject, dueDays, invoiceID, frequency, userId);
     }
-
     res.status(200).json({
       message: " Resend Email successful"
     });

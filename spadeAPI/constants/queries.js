@@ -53,7 +53,12 @@ exports.deleteQuery = (table, ...field) => {
 // delete all images where property id = id from propertyImage
 exports.delteImageFromDb = "DELETE FROM propertyimage WHERE imageKey = ?"
 exports.delteImageForInvoiceImages = "DELETE FROM invoiceimages WHERE imageKey = ?"
-exports.delteImageForTaskImages = "DELETE FROM taskimages WHERE taskImagesKey = ?"
+exports.delteImageForTaskImages = "DELETE FROM taskimages WHERE ImageKey = ?"
+
+exports.getPropertyReport = "SELECT property.id, property.propertyName, property.propertyType, property.units, tenants.firstName,tenants.lastName , tenants.phoneNumber FROM property JOIN tenants ON property.id = tenants.propertyID WHERE property.landlordID = ?";
+exports.getTenantReport = "SELECT tenants.id AS tenantID, tenants.companyName, tenants.firstName, tenants.lastName, tenants.phoneNumber, property.propertyType, property.units FROM tenants JOIN property ON tenants.propertyID = property.id WHERE tenants.landlordID = ?";
+
+// property.propertyType
 exports.updateNotify = "UPDATE notification SET emailNotification = ? , pushNotification = ? WHERE landlordID = ? ";
 exports.addResetToken =
   "UPDATE users SET token = ?, updated_at = ? where id = ?";
@@ -93,7 +98,7 @@ exports.putUnitsUpdate = 'UPDATE property SET  units = ?  where id = ? ';
 exports.insertTenantAttachFile = 'INSERT INTO tenantattachfiles (landlordID, tenantID, fileName,imageKey) VALUES (?,?,?,?)';
 exports.insertInvoice = 'INSERT INTO invoice (landlordID, tenantID, invoiceType, startDate, endDate, frequency, dueDate,daysDue, repeatTerms, terms,note,status,created_at,totalAmount) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
 exports.insertLineItems = 'INSERT INTO invoicelineitems (invoiceID, category, property, memo, amount ) VALUES (?,?,?,?,?)';
-exports.insertInvoiceImage = 'INSERT INTO invoiceimages (invoiceID, Image,ImageKey) VALUES (?,?,?)';
+exports.insertInvoiceImage = 'INSERT INTO invoiceimages (invoiceID, Image,imageKey) VALUES (?,?,?)';
 exports.updateUnitsTenant = 'UPDATE propertyunits SET  status = ?  where id = ? ';
 exports.getTenantsById = `SELECT p.id AS propertyID, p.propertyName, p.address AS pAddress, p.city AS pCity, p.state AS pState, p.zipCode AS pZipCode, p.propertyType, p.propertySQFT, p.status AS pStatus, p.units AS pUnits, t.id AS tenantID, t.firstName, t.lastName, t.companyName, t.email AS tEmail, t.phoneNumber AS tPhoneNumber, t.Address AS tAddress, t.city AS tCity, t.state AS tState, t.zipcode AS tZipcode, t.rentAmount, t.gross_or_triple_lease, t.baseRent, t.tripleNet, t.leaseStartDate, t.leaseEndDate, t.increaseRent, pu.unitNumber, pu.Area AS unitArea, pu.unitDetails, pu.status AS unitStatus, GROUP_CONCAT(pi.image) AS images
 FROM tenants AS t
@@ -103,7 +108,36 @@ INNER JOIN propertyimage AS pi ON p.id = pi.propertyID
 WHERE t.id = ?
 GROUP BY t.id;`;
 exports.updateInvoiceStatus = 'UPDATE invoice SET  status = ?, note = ?, updated_at = ?  where id = ? AND landlordID = ? ';
-exports.getAllInvoicesquery = 'SELECT i.id as invoiceID, i.dueDate, i.daysDue , i.startDate,i.endDate,i.repeatTerms,i.terms ,i.note, i.totalAmount, i.frequency,i.created_at, i.invoiceType, i.status, t.firstName, t.lastName, t.id as tenantID, t.phoneNumber as tPhone, p.propertyName, GROUP_CONCAT(ii.InvoiceImage) as invoiceImages FROM invoice as i JOIN tenants as t ON i.tenantID = t.id JOIN property as p ON t.propertyID = p.id LEFT JOIN invoiceimages as ii ON i.id = ii.invoiceID WHERE i.landlordID = ? GROUP BY i.id';
+exports.getAllInvoicesquery = `SELECT
+i.id AS invoiceID,
+i.dueDate,
+i.daysDue,
+i.startDate,
+i.endDate,
+i.repeatTerms,
+i.terms,
+i.note,
+i.totalAmount,
+i.frequency,
+i.created_at,
+i.invoiceType,
+i.status,
+t.firstName,
+t.lastName,
+t.id AS tenantID,
+t.phoneNumber AS tPhone,
+p.propertyName,
+JSON_ARRAYAGG(JSON_OBJECT('imageKey', ii.imageKey, 'Image', ii.Image)) AS invoiceImages
+FROM
+invoice AS i
+JOIN tenants AS t ON i.tenantID = t.id
+JOIN property AS p ON t.propertyID = p.id
+LEFT JOIN invoiceimages AS ii ON i.id = ii.invoiceID
+WHERE
+i.landlordID = ?
+GROUP BY
+i.id;
+`
 exports.resendEmailQuery = 'SELECT * FROM tenants JOIN invoice ON tenants.id = invoice.tenantID WHERE invoice.id = ?';
 exports.getByIdInvoicesQuery = 'SELECT i.id as invoiceID,i.dueDate, i.daysDue , i.startDate, i.totalAmount, i.status,i.created_at, t.firstName AS tFName, t.lastName AS tLName, t.phoneNumber as tPhone, p.propertyName, pu.unitNumber, l.FirstName as landlordFName, l.LastName as landlordLName, l.phone as landlordPhone FROM invoice as i JOIN tenants as t ON i.tenantID = t.id JOIN property as p ON t.propertyID = p.id JOIN propertyunits AS pu ON t.propertyUnitID = pu.id JOIN users as l ON l.id = i.landlordID WHERE i.id = ? ';
 exports.updateInvoice = 'UPDATE invoice SET tenantID = ?, invoiceType = ? , startDate = ? , endDate = ? , frequency = ? , dueDate = ? ,daysDue=? ,repeatTerms = ? , terms = ? , totalAmount = ? , note = ? , updated_at = ? where id = ? AND landlordID = ? ';
@@ -134,8 +168,8 @@ pu.unitNumber,
 t.firstName AS tfirstName,
 t.lastName AS tlastName,
 t.phoneNumber AS tenantPhone,
-t.id as tenantID,
-GROUP_CONCAT(ti.taskImages) AS taskImages
+t.id AS tenantID,
+JSON_ARRAYAGG(JSON_OBJECT('imageKey', ti.imageKey, 'Image', ti.Image)) AS taskImages
 FROM
 task AS tk
 JOIN
@@ -149,7 +183,8 @@ taskimages AS ti ON tk.id = ti.taskID
 WHERE
 tk.landlordID = ?
 GROUP BY
-tk.id;`;
+tk.id;
+`;
 exports.taskByIDQuery = 'SELECT tk.id, tk.taskName, tk.dueDate, tk.status, tk.priority, tk.notes, tk.createdBy,tk.created_at, p.propertyName, pu.unitNumber, t.firstName as tfirstName, t.lastName as tlastName FROM `task`as tk JOIN tenants as t ON tk.tenantID = t.id JOIN property as p ON t.propertyID = p.id JOIN propertyunits as pu ON t.propertyUnitID = pu.id WHERE tk.id = ?';
 exports.resendEmailQuery = 'SELECT * FROM tenants JOIN invoice ON tenants.id = invoice.tenantID WHERE invoice.id = ?';
 exports.updateTenants = "UPDATE tenants SET firstName = ? , lastName = ? , companyName = ? , email = ? , phoneNumber = ? , address = ? , city = ? , state = ? , zipcode = ? , propertyID = ? , propertyUnitID = ? , rentAmount = ? , gross_or_triple_lease = ? , baseRent = ? , tripleNet = ? , leaseStartDate = ? , leaseEndDate = ? , increaseRent = ? , tenantUpdated_at = ? WHERE id = ?";
@@ -172,7 +207,7 @@ t.firstName AS tfirstName,
 t.lastName AS tlastName,
 t.phoneNumber AS tenantPhone,
 t.id as tenantID,
-GROUP_CONCAT(ti.taskImages) AS taskImages
+GROUP_CONCAT(ti.Image) AS ImageKey
 FROM
 task AS tk
 JOIN
