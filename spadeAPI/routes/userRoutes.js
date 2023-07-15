@@ -11,6 +11,7 @@ const { uploadExistingFiles } = require("../middleware/imageUploads");
 const taskController = require("../controllers/taskController");
 const fileUpload = require("../helper/S3Bucket");
 const notifyController = require("../controllers/notifyController");
+
 router.post("/Signup", userController.createUser);
 router.get("/protected", verifyToken, userController.getUser);
 router.get("/protectedTenant", verifyTokenTenant, userController.getUser);
@@ -68,23 +69,23 @@ router.get(
 );
 // router.post('/tenants',verifyToken,tenantController.createTenants);
 router.post("/tenants", verifyToken, tenantController.createTenants);
-router.post("/sendInvitationLink",verifyToken,tenantController.sendInvitationLink);
+router.post("/sendInvitationLink", verifyToken, tenantController.sendInvitationLink);
 // router.post('/tenantIncreaseRent' , userController.tenantIncreaseRent);
 // router.get('/verifyMailCheck',verifyToken,  userController.verifyMailCheck);
-router.get('/verifyMailCheck',verifyToken ,userController.verifyMailCheck);
+router.get('/verifyMailCheck', verifyToken, userController.verifyMailCheck);
 router.get('/resetEmailTenant', tenantController.createResetEmailTenant);
 router.post('/verifyResetEmailCodeTenant', tenantController.verifyResetEmailCodeTenant);
 router.put('/updatePasswordTenant', tenantController.updatePasswordTenant);
 router.put('/resendCodeTenants', tenantController.resendCodeTenants);
-router.post('/addAlternateEmailPhone' ,verifyToken, tenantController.addAlternateEmailPhone);
-router.post('/tenantAttachFile',[verifyToken,upload], tenantController.tenantAttachFile);
-router.delete('/tenantAttachFileDelete' ,verifyToken, tenantController.tenantAttachFileDelete);
-router.delete('/tenantDelete',verifyToken ,tenantController.tenantDelete);
-router.get('/getTenantsByID', verifyToken,tenantController.getTenantsByID);
-router.post('/createInvoice',verifyToken, invoiceController.createInvoice);
-router.put('/putInvoiceStatusUpdates',verifyToken ,invoiceController.putInvoiceStatusUpdates);
-router.get('/getAllInvoices', verifyToken ,invoiceController.getAllInvoices);
-router.get('/getByIdInvoices', verifyToken ,invoiceController.getByIdInvoices);
+router.post('/addAlternateEmailPhone', verifyToken, tenantController.addAlternateEmailPhone);
+router.post('/tenantAttachFile', verifyToken, tenantController.tenantAttachFile);
+router.delete('/tenantAttachFileDelete', verifyToken, tenantController.tenantAttachFileDelete);
+router.delete('/tenantDelete', verifyToken, tenantController.tenantDelete);
+router.get('/getTenantsByID', verifyToken, tenantController.getTenantsByID);
+router.post('/createInvoice', verifyToken, invoiceController.createInvoice);
+router.put('/putInvoiceStatusUpdates', verifyToken, invoiceController.putInvoiceStatusUpdates);
+router.get('/getAllInvoices', verifyToken, invoiceController.getAllInvoices);
+router.get('/getByIdInvoices', verifyToken, invoiceController.getByIdInvoices);
 router.put('/UpdateInvoice', verifyToken, invoiceController.UpdateInvoice);
 router.delete('/invoiceDelete', verifyToken, invoiceController.invoiceDelete);
 router.post("/addVendor", verifyToken, taskController.addVendors);
@@ -112,8 +113,11 @@ router.put('/verifyEmailUpdate', userController.verifyEmailUpdate);
 // updated category route
 router.post("/addInvoiceCategory", verifyToken, invoiceController.createInvoiceCategories);
 router.put("/updatedInvoiceCategory", verifyToken, invoiceController.updateInvoiceCategories);
+router.get("/invoiceCategory", verifyToken, invoiceController.getInvoiceCategories);
+
 // updated notification route
 router.put("/notify", verifyToken, notifyController.updateNotify);
 router.get("/notify", verifyToken, notifyController.getNotify);
 router.get("/property", verifyToken, userController.getAllProperty);
+router.get("/invoice", verifyToken, userController.getInvoiceReportData);
 module.exports = router;

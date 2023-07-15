@@ -298,8 +298,8 @@ exports.UpdateInvoice = async (req, res) => {
       const tenantEmail = selectTenantsResult[0][0].email;
       const tenantName = selectTenantsResult[0][0].firstName + " " + selectTenantsResult[0][0].lastName;
 
-        const mailSubject = invoiceID + " From " + frequency;
-        sendMail.invoiceSendMail(tenantName, tenantEmail, mailSubject, dueDays, invoiceID, frequency, userId);
+      const mailSubject = invoiceID + " From " + frequency;
+      sendMail.invoiceSendMail(tenantName, tenantEmail, mailSubject, dueDays, invoiceID, frequency, userId);
     }
     //  if line items is not empty then delete line items and insert new line items
     if (lineItems) {
@@ -504,7 +504,27 @@ exports.createInvoiceCategories = async (req, res) => {
     res.send("Error from create invoice categories");
   }
 };
-
+exports.getInvoiceCategories = async (req, res) => {
+  try {
+    const { userId } = req.user;
+    const invoiceImagecheckresult = await queryRunner(
+      selectQuery("InvoiceCategories", "landLordId"),
+      [userId]
+    );
+    if (invoiceImagecheckresult[0].length > 0) {
+      res.status(200).json({
+        data : invoiceImagecheckresult[0],
+      });
+    } else {
+      res.status(400).json({
+        message: "No data found"
+      });
+    }
+  } catch (error) {
+    console.log(error)
+    res.send("Error from create invoice categories");
+  }
+};
 // ############################# create invoice categories ############################################################
 
 

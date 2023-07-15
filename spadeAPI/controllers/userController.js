@@ -32,7 +32,8 @@ const {
   updateNotify,
   getAllProperty,
   getPropertyReport,
-  getTenantReport
+  getTenantReport,
+  getInvoiceReportData
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -427,7 +428,7 @@ exports.pricingPlan = async (req, res) => {
     if (pricingPlanResult.length > 0) {
       const data = JSON.parse(JSON.stringify(pricingPlanResult));
       res.status(200).json({
-        data: data,
+        data: data[0],
         message: "property By ID",
       });
     } else {
@@ -437,7 +438,6 @@ exports.pricingPlan = async (req, res) => {
     }
   } catch (error) {
     res.send("Error Get Property By ID");
-    // console.log(req.body)
     console.log(error);
   }
 };
@@ -1555,6 +1555,38 @@ exports.getAllProperty = async (req, res) => {
     res.status(200).json({
       property: getAllPropertyData[0],
       tenants: getTenantsReport[0]
+    })
+  } catch (error) {
+    res.status(400).json({
+      message: error.message
+    })
+  }
+}
+exports.getTaskReportData = async (req, res) => {
+  try {
+    const { userId } = req.user;
+    const getAllPropertyData = await queryRunner(getPropertyReport, [
+      userId
+    ]);
+
+    res.status(200).json({
+      property: getAllPropertyData[0],
+    })
+  } catch (error) {
+    res.status(400).json({
+      message: error.message
+    })
+  }
+}
+exports.getInvoiceReportData = async (req, res) => {
+  try {
+    const { userId } = req.user;
+    const getAllPropertyData = await queryRunner(getInvoiceReportData, [
+      userId
+    ]);
+
+    res.status(200).json({
+      property: getAllPropertyData[0],
     })
   } catch (error) {
     res.status(400).json({

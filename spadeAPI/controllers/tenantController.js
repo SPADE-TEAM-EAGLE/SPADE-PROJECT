@@ -159,7 +159,6 @@ exports.sendInvitationLink = async (req, res) => {
           message: "Tenants Welcome email send Successful",
           data: tenantsInsert[0]
         })
-
       } else {
         res.status(400).json({
           message: "welcome email not sent to tenant "
