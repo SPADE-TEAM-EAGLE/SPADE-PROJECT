@@ -483,6 +483,7 @@ exports.resendEmail = async (req, res) => {
   }
 }
 //  ############################# Resend Email Invoice END ############################################################
+
 // ############################# create invoice categories ############################################################
 exports.createInvoiceCategories = async (req, res) => {
   try {
@@ -503,6 +504,10 @@ exports.createInvoiceCategories = async (req, res) => {
     res.send("Error from create invoice categories");
   }
 };
+
+// ############################# create invoice categories ############################################################
+
+
 // update categories text 
 exports.updateInvoiceCategories = async (req, res) => {
   try {

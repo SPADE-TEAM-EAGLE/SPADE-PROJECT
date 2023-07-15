@@ -29,7 +29,8 @@ const {
   updateEmailQuery,
   updateVerifiedStatusQuery,
   delteImageFromDb,
-  updateNotify
+  updateNotify,
+  updatePasswordLandlord
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -369,7 +370,7 @@ exports.updatePassword = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.status(400).send("Error");
+    res.status(400).send("Error" + error);
   }
 };
 //  ############################# Update Password ############################################################
