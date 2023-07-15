@@ -50,21 +50,27 @@ exports.deleteQuery = (table, ...field) => {
   }
 };
 
+// delete all images where property id = id from propertyImage
+exports.delteImageFromDb = "DELETE FROM propertyimage WHERE imageKey = ?"
+exports.delteImageForInvoiceImages = "DELETE FROM invoiceimages WHERE imageKey = ?"
+exports.delteImageForTaskImages = "DELETE FROM taskimages WHERE taskImagesKey = ?"
+exports.updateNotify = "UPDATE notification SET emailNotification = ? , pushNotification = ? WHERE landlordID = ? ";
 exports.addResetToken =
   "UPDATE users SET token = ?, updated_at = ? where id = ?";
-exports.updatePassword =
-  "UPDATE users SET Password = ? where id = ? and token = ?";
+exports.updatePasswordLandlord =
+  // "UPDATE users SET Password = ? where id = ? and token = ?";
+  "UPDATE users SET Password = ? , updated_at = ? where id = ? AND token = ?";
 exports.insertInUsers =
-  "INSERT INTO users (id,FirstName, LastName, Email, Phone, Password, PlanID) VALUES (?,?, ?, ?, ?, ?, ?)";
+  "INSERT INTO users (id,FirstName, LastName, Email, Phone, Password, PlanID,created_at) VALUES (?,?, ?, ?, ?, ?, ?, ?)";
 // updated user query
-exports.updateUser = "UPDATE users SET FirstName = ?, LastName = ?, Email = ?, Phone = ?, updated_at = ?, BusinessName = ?, streetAddress = ?, BusinessAddress = ?, created_at = ? WHERE id = ?";
+exports.updateUser = "UPDATE users SET FirstName = ?, LastName = ?, Email = ?, Phone = ?, updated_at = ?, BusinessName = ?, streetAddress = ?, BusinessAddress = ?, created_at = ?, image = ? , imageKey = ? WHERE id = ?";
 // update plan id in user table
 exports.updatePlanId = "UPDATE users SET PlanID = ? WHERE id = ?";
 exports.insertInProperty =
   "INSERT INTO property (landlordID, propertyName, address, city, state, zipCode, propertyType, propertySQFT,status,units) VALUES (?,?,?,?,?,?,?,?,?,?)";
-exports.insertInPropertyImage = "INSERT INTO propertyimage (propertyID, Image,imageKey) VALUES (?,?,?)";
+exports.insertInPropertyImage = "INSERT INTO propertyimage (propertyID, Image, imageKey) VALUES (?,?,?)";
 exports.insertInTaskImage =
-  "INSERT INTO taskimages (taskID, taskImages, taskImagesKey) VALUES (?,?,?)";
+  "INSERT INTO taskimages (taskID, Image, ImageKey) VALUES (?,?,?)";
 exports.insertInPropertyUnits =
   "INSERT INTO propertyunits (propertyID, unitNumber,Area,unitDetails,status) VALUES (?,?,?,?,?)";
 exports.updateProperty =
@@ -84,10 +90,10 @@ exports.insertAlternateEmailData = 'INSERT INTO tenantalternateemail ( tenantID,
 exports.getUnitsCount = 'SELECT COUNT(propertyID) as unitCount FROM `propertyunits` WHERE propertyID = ? ';
 exports.insertMoreUnits = 'INSERT INTO propertyunits (propertyID, unitNumber,Area,unitDetails,status) VALUES (?,?,?,?,?)';
 exports.putUnitsUpdate = 'UPDATE property SET  units = ?  where id = ? ';
-exports.insertTenantAttachFile = 'INSERT INTO tenantattachfiles (landlordID, tenantID, fileName) VALUES (?,?,?)';
+exports.insertTenantAttachFile = 'INSERT INTO tenantattachfiles (landlordID, tenantID, fileName,imageKey) VALUES (?,?,?,?)';
 exports.insertInvoice = 'INSERT INTO invoice (landlordID, tenantID, invoiceType, startDate, endDate, frequency, dueDate,daysDue, repeatTerms, terms,note,status,created_at,totalAmount) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
 exports.insertLineItems = 'INSERT INTO invoicelineitems (invoiceID, category, property, memo, amount ) VALUES (?,?,?,?,?)';
-exports.insertInvoiceImage = 'INSERT INTO invoiceimages (invoiceID, InvoiceImage) VALUES (?,?)';
+exports.insertInvoiceImage = 'INSERT INTO invoiceimages (invoiceID, Image,ImageKey) VALUES (?,?,?)';
 exports.updateUnitsTenant = 'UPDATE propertyunits SET  status = ?  where id = ? ';
 exports.getTenantsById = `SELECT p.id AS propertyID, p.propertyName, p.address AS pAddress, p.city AS pCity, p.state AS pState, p.zipCode AS pZipCode, p.propertyType, p.propertySQFT, p.status AS pStatus, p.units AS pUnits, t.id AS tenantID, t.firstName, t.lastName, t.companyName, t.email AS tEmail, t.phoneNumber AS tPhoneNumber, t.Address AS tAddress, t.city AS tCity, t.state AS tState, t.zipcode AS tZipcode, t.rentAmount, t.gross_or_triple_lease, t.baseRent, t.tripleNet, t.leaseStartDate, t.leaseEndDate, t.increaseRent, pu.unitNumber, pu.Area AS unitArea, pu.unitDetails, pu.status AS unitStatus, GROUP_CONCAT(pi.image) AS images
 FROM tenants AS t
@@ -180,4 +186,9 @@ taskimages AS ti ON tk.id = ti.taskID WHERE tk.tenantID = ?`;
 exports.updateTasksQuery = "UPDATE task SET taskName = ? , tenantID = ? , dueDate = ? , status = ? , priority = ? , notes = ? , notifyTenant = ? , notifyVendor = ? , updated_at = ? where id = ? ";
 exports.updatePassword = "UPDATE users SET Password = ? , updated_at = ? where id = ? ";
 exports.updatePasswordTenantSetting = "UPDATE tenants SET tenantPassword = ? , tenantUpdated_at = ? where id = ? ";
+exports.updateEmailQuery = "UPDATE users SET Email = ? where Email = ? ";
+exports.updateVerifiedStatusQuery = "UPDATE users SET userVerified = ? where id = ? ";
+
+// add category in vendorcategory table
+exports.addVendorCategory = "INSERT INTO vendorcategory (category,landLordId) VALUES (?,?)";
 

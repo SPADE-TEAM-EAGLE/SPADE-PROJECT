@@ -77,6 +77,13 @@ exports.createTenants = async (req, res) => {
         const status = "Occupied";
         const propertyUnitsResult = await queryRunner(updatePropertyUnitsTenant, [status, propertyUnitID, propertyID]);
         if (propertyUnitsResult[0].affectedRows > 0) {
+          const selectTenantsResult = await queryRunner(selectQuery('users', 'id'), [userId])
+          const landlordEmail = selectTenantsResult[0][0].Email;
+          const landlordName = selectTenantsResult[0][0].FirstName + " " + selectTenantsResult[0][0].LastName;
+
+          // if (sendmails == "Yes") {
+          const mailSubject = "You created a new tenant";
+        await  sendMail.invoiceSendMail(landlordName, landlordEmail, mailSubject, "dueDays", "invoiceID", "frequency");
           if (increaseRent == 'No') {
             res.status(200).json({
               message: "Tenants save Successful",
@@ -169,48 +176,6 @@ exports.sendInvitationLink = async (req, res) => {
 
 //  ############################# tenant email send END  ############################################################
 
-//  ############################# Tenant verify Mail Check Start  ############################################################
-
-exports.verifyMailCheck = async (req, res) => {
-  const { landlordID, email } = req.body;
-  try {
-    const selectTenantResult = await queryRunner(selectQuery("users", "id"), [landlordID])
-    if (selectTenantResult[0].length > 0) {
-
-      const createdDate = selectTenantResult[0][0].created_at;
-      // const createdDate = new Date('2023-05-27 15:34:32');
-      const currentDate = new Date();
-      const differenceInMilliseconds = currentDate - createdDate;
-      const differenceInSeconds = Math.floor(differenceInMilliseconds / 1000);
-      const differenceInMinutes = Math.floor(differenceInSeconds / 60);
-      const differenceInHours = Math.floor(differenceInMinutes / 60);
-      const differenceInDays = Math.floor(differenceInHours / 24);
-      if (differenceInDays > 0) {
-        return res.status(200).json({
-          message: `Your remaining days is ${differenceInDays} please verify your email otherwise your account will locked after ${differenceInDays} days`
-        });
-      } else if (differenceInDays == 0) {
-        return res.status(200).json({
-
-          message: `Today is your last day so Kindly verify your email otherwise your account will locked on tomorrow`
-        });
-      } else {
-        return res.status(200).json({
-          remainingDays: `Your account is locked due to email verification firstly verify your email`
-        });
-      }
-
-    } else {
-      return res.status(400).send('landlord is not exists');
-    }
-
-    // res.send("Email sent successfully"); // Sending success response
-  } catch (error) {
-    res.send("Error occurs in verifying the landlord email " + error); // Sending error response
-  }
-};
-
-//  ############################# Tenant verify Mail Check END  ############################################################
 
 //  ############################# Tenant Reset Email ############################################################
 exports.createResetEmailTenant = async (req, res) => {
@@ -406,22 +371,34 @@ exports.addAlternateEmailPhone = async (req, res) => {
 exports.tenantAttachFile = async (req, res) => {
   // console.log(1)
   const {
-    tenantID
+    tenantID, images
   } = req.body;
   // console.log(req.files)
   const { userId } = req.user
   try {
-
-    const fileNames = req.files.map((file) => file.filename);
-    for (let i = 0; i < fileNames.length; i++) {
-      const attachFile = fileNames[i];
-      const tenantAttachFileResult = await queryRunner(insertTenantAttachFile, [userId, tenantID, attachFile])
-      if (tenantAttachFileResult.affectedRows === 0) {
-        res.send('Error');
-        return;
+    // const fileNames = req.files.map((file) => file.filename);
+    // for (let i = 0; i < fileNames.length; i++) {
+    //   const attachFile = fileNames[i];
+    //   const tenantAttachFileResult = await queryRunner(insertTenantAttachFile, [userId, tenantID, attachFile])
+    //   if (tenantAttachFileResult.affectedRows === 0) {
+    //     res.send('Error');
+    //     return;
+    //   }
+    // } //sss
+    for (let i = 0; i < images.length; i++) {
+      const { image_url } = images[i];
+      const { image_key } = images[i];
+      const propertyImageResult = await queryRunner(insertTenantAttachFile, [
+        userId,
+        tenantID,
+        image_url,
+        image_key
+      ]);
+      // if property image data not inserted into property image table then throw error
+      if (propertyImageResult.affectedRows === 0) {
+        throw new Error("data doesn't inserted in property image table");
       }
-    } //sss
-
+    }
     res.status(200).json({
       message: " Tenant Files save successful"
     });
@@ -475,68 +452,51 @@ exports.tenantDelete = async (req, res) => {
     const { tenantID } = req.body
     const tenantResult = await queryRunner(selectQuery("tenants", "id"), [tenantID]);
     // console.log(tenantResult[0][0])
-    const propertyUnitID = tenantResult[0][0].propertyUnitID;
-    const tenantDeleteResult = await queryRunner(deleteQuery("tenants", "id"), [tenantID]);
-    // console.log(tenantDeleteResult[0])
-    if (tenantDeleteResult[0].affectedRows > 0) {
+    if (tenantResult[0].length > 0) {
+      const propertyUnitID = tenantResult[0][0].propertyUnitID;
+      const tenantDeleteResult = await queryRunner(deleteQuery("tenants", "id"), [tenantID]);
+      // console.log(tenantDeleteResult[0])
+      if (tenantDeleteResult[0].affectedRows > 0) {
 
-      const tenantCheckResult = await queryRunner(selectQuery("tenantattachfiles", "tenantID"), [tenantID]);
-      // console.log(tenantCheckResult)
-      if (tenantCheckResult[0].length > 0) {
-        tenantimages = tenantCheckResult[0].map((image) => image.fileName);
-        // delete folder images
-        imageToDelete(tenantimages);
-        const tenantFileDeleteresult = await queryRunner(deleteQuery("tenantattachfiles", "tenantID"), [tenantID]);
-        // console.log(tenantFileDeleteresult
-      }
-      const tenantAdditionalEmailresult = await queryRunner(deleteQuery("tenantalternateemail", "tenantID"), [tenantID]);
-      if (tenantAdditionalEmailresult[0].affectedRows > 0) {
-        const tenantAdditionalPhoneResult = await queryRunner(deleteQuery("tenantalternatephone", "tenantID"), [tenantID]);
-        if (tenantAdditionalPhoneResult[0].affectedRows > 0) {
-          const tenantIncreaseRentResult = await queryRunner(deleteQuery("tenantincreaserent", "tenantID"), [tenantID]);
+        const tenantCheckResult = await queryRunner(selectQuery("tenantattachfiles", "tenantID"), [tenantID]);
+        if (tenantCheckResult[0].length > 0) {
+          const tenantimages = tenantCheckResult[0].map((image) => image.fileName);
+          // delete folder images
+          imageToDelete(tenantimages);
+          const tenantFileDeleteresult = await queryRunner(deleteQuery("tenantattachfiles", "tenantID"), [tenantID]);
+        }
 
-
-          if (tenantIncreaseRentResult[0].affectedRows > 0) {
-            //dddddd
-            const status = "Vacant";
-            const propertyUnitsResult = await queryRunner(updateUnitsTenant, [status, propertyUnitID]);
-
-
-            if (propertyUnitsResult[0].affectedRows > 0) {
-
-              res.status(200).json({
-                message: " tenant deleted successfully"
-              })
-            } else {
-              // " tenant Error occur in increase rent "
-              res.status(200).json({
-                message: " tenant Error occur in updating property units "
-              })
-            }
-          } else {
-            // " tenant Error occur in increase rent "
-            res.status(200).json({
-              message: " tenant Error occur in delete increase rent "
-            })
-          }
-          // }
-
-        } else {
-          res.status(200).json({
-            message: " tenant Error occur in delete alternate phone "
-          })
+        const tenantAdditionalEmailCheckResult = await queryRunner(selectQuery("tenantalternateemail", "tenantID"), [tenantID]);
+        if (tenantAdditionalEmailCheckResult[0].length > 0) {
+          const tenantAdditionalEmailresult = await queryRunner(deleteQuery("tenantalternateemail", "tenantID"), [tenantID]);
         }
 
 
-      } else {
+        const tenantAdditionalPhoneCheckResult = await queryRunner(selectQuery("tenantalternatephone", "tenantID"), [tenantID]);
+        if (tenantAdditionalPhoneCheckResult[0].length > 0) {
+          const tenantAdditionalPhoneResult = await queryRunner(deleteQuery("tenantalternatephone", "tenantID"), [tenantID]);
+        }
+
+        const tenantIncreaseRentCheckResult = await queryRunner(selectQuery("tenantincreaserent", "tenantID"), [tenantID]);
+        if (tenantIncreaseRentCheckResult[0].length > 0) {
+          const tenantIncreaseRentResult = await queryRunner(deleteQuery("tenantincreaserent", "tenantID"), [tenantID]);
+        }
+
+        const status = "Vacant";
+        const propertyUnitsResult = await queryRunner(updateUnitsTenant, [status, propertyUnitID]);
+
+
         res.status(200).json({
-          message: " tenant Error occur in delete alternate email "
+          message: " tenant deleted successfully"
+        })
+      } else { // tenantCheckResult
+        res.status(200).json({
+          message: "Error occur in delete tenant "
         })
       }
-
     } else { // tenantCheckResult
       res.status(200).json({
-        message: "No tenant file data found "
+        message: "No tenant found "
       })
     }
 
@@ -750,3 +710,50 @@ exports.tenantTask = async (req, res) => {
 };
 
 //  ############################# Task tenant ############################################################
+
+
+
+//  ############################# Tenant verify Mail Check Start  ############################################################
+
+exports.verifyMailCheck = async (req, res) => {
+  const { landlordID, email } = req.body;
+  try {
+    const selectTenantResult = await queryRunner(selectQuery("users", "Email"), [email])
+    if (selectTenantResult[0].length > 0) {
+
+      const createdDate = selectTenantResult[0][0].updated_at;
+      // const createdDate = new Date('2023-05-27 15:34:32');
+      const currentDate = new Date();
+      const differenceInMilliseconds = currentDate - createdDate;
+      const differenceInSeconds = Math.floor(differenceInMilliseconds / 1000);
+      const differenceInMinutes = Math.floor(differenceInSeconds / 60);
+      const differenceInHours = Math.floor(differenceInMinutes / 60);
+      const differenceInDays = Math.floor(differenceInHours / 24);
+      if (differenceInDays > 0) {
+        return res.status(200).json({
+          message: `Your remaining days is ${differenceInDays} please verify your email otherwise your account will locked after ${differenceInDays} days`
+        });
+      } else if (differenceInDays == 0) {
+        return res.status(200).json({
+
+          message: `Today is your last day so Kindly verify your email otherwise your account will locked on tomorrow`,
+          date: createdDate
+        });
+      } else {
+        return res.status(200).json({
+          remainingDays: `Your account is locked due to email verification firstly verify your email`,
+          date: createdDate
+        });
+      }
+
+    } else {
+      return res.status(400).send('landlord is not exists');
+    }
+
+    // res.send("Email sent successfully"); // Sending success response
+  } catch (error) {
+    res.send("Error occurs in verifying the landlord email " + error); // Sending error response
+  }
+};
+
+//  ############################# Tenant verify Mail Check END  ############################################################

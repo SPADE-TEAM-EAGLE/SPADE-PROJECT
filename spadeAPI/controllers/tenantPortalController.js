@@ -121,11 +121,11 @@ exports.getAllTaskTenant = async (req, res) => {
     try {
       // con
       const { userId } = req.user;
-      // console.log(1111111)
+      console.log(userId)
       const TenantsByIDResult = await queryRunner(getTenantsById, [userId])
       if (TenantsByIDResult.length > 0) {
         const data = JSON.parse(JSON.stringify(TenantsByIDResult))
-        console.log(data[0][0])
+        // console.log(data[0][0])
         res.status(200).json({
           data: data[0][0],
           message: 'Tenants By ID'
