@@ -28,7 +28,8 @@ const {
   updatePlanId,
   updateEmailQuery,
   updateVerifiedStatusQuery,
-  delteImageFromDb
+  delteImageFromDb,
+  updatePasswordLandlord
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
