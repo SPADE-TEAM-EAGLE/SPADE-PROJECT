@@ -114,6 +114,15 @@ const verifyToken = async (req, res, next) => {
       email: decoded.email,
       userId: result[0][0].id,
       userName: result[0][0].FirstName + " " + result[0][0].LastName,
+      businessName:result[0][0].BusinessName,
+      phone:result[0][0].Phone,
+      streetAddress:result[0][0].streetAddress,
+      BusinessAddress:result[0][0].BusinessAddress,
+      firstName:result[0][0].FirstName,
+      lastName:result[0][0].LastName,
+      image:result[0][0].image,
+      imageKey:result[0][0].imageKey,
+      planID:result[0][0].PlanID,
     };
 
     next();
