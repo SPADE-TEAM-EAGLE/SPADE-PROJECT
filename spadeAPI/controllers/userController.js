@@ -1084,10 +1084,7 @@ exports.getpropertyUnits = async (req, res) => {
       selectQuery("propertyunits", "propertyID"),
       [propertyId]
     );
-    // console.log(propertyUnitsResult)
     if (propertyUnitsResult.length > 0) {
-      // propertyUnitsResult.append(property[0][0])
-      // console.log(property[0][0].propertyName);
       res.status(200).json({
         data: propertyUnitsResult,
         propertyName: property[0][0]?.propertyName,
@@ -1112,12 +1109,8 @@ exports.viewPropertyTenant = async (req, res) => {
   try {
     const { userId, userName } = req.user;
     const { id } = req.query;
-    // console.log(req)
-    // console.log(req.user);
     let PropertyTenantResult;
-    console.log(id)
     PropertyTenantResult = await queryRunner(selectAllTenantsProperty, [id]);
-    console.log(PropertyTenantResult[0])
     if (PropertyTenantResult[0].length > 0) {
       for (let i = 0; i < PropertyTenantResult[0].length; i++) {
         const tenantID = PropertyTenantResult[0][i].tenantID;

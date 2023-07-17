@@ -491,16 +491,19 @@ exports.createInvoiceCategories = async (req, res) => {
   try {
     const { category } = req.body;
     const { userId } = req.user;
-    const createInvoiceCategoriesResult = await queryRunner(createInvoiceCategories, [category, userId]);
-    if (createInvoiceCategoriesResult[0].affectedRows > 0) {
-      res.status(200).json({
-        message: "Invoice Categories created successfully"
-      });
-    } else {
-      res.status(400).json({
-        message: "No data found"
-      });
-    }
+    const categorie = await queryRunner(selectQuery("InvoiceCategories", "landLordId"), [userId]);
+    console.log(categorie[0])
+
+    // const createInvoiceCategoriesResult = await queryRunner(createInvoiceCategories, [category, userId]);
+    // if (createInvoiceCategoriesResult[0].affectedRows > 0) {
+    //   res.status(200).json({
+    //     message: "Invoice Categories created successfully"
+    //   });
+    // } else {
+    //   res.status(400).json({
+    //     message: "No data found"
+    //   });
+    // }
   } catch (error) {
     console.log(error)
     res.send("Error from create invoice categories");

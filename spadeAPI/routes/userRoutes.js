@@ -44,7 +44,7 @@ router.put("/updateProperty", verifyToken, userController.propertyUpdate);
 // router.get('/viewProperty' ,userController.propertyView);
 router.get("/viewProperty", verifyToken, userController.propertyView);
 router.get('/resendEmail', verifyToken, invoiceController.resendEmail);
-router.get("/PropertyUnits", verifyToken, userController.getpropertyUnits);
+// router.get("/PropertyUnits", verifyToken, userController.getpropertyUnits);
 router.post("/addMoreUnits", userController.addMoreUnits);
 router.delete("/deleteMoreUnits", userController.deleteMoreUnits);
 router.put(
