@@ -19,7 +19,8 @@ const {
   resendEmailQuery,
   delteImageForInvoiceImages,
   createInvoiceCategories,
-  updateInvoiceCategories
+  updateInvoiceCategories,
+  getAmountByCategoriesID
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -550,3 +551,26 @@ exports.updateInvoiceCategories = async (req, res) => {
     res.send("Error from update invoice categories");
   }
 };
+// get Invoice categories by userId and catId
+exports.getInvoiceCategoriesText = async (req, res) => {
+  try {
+    const { catId } = req.query;
+    const { userId } = req.user;
+    // getAmountByCategoriesID
+    const invoiceImagecheckresult = await queryRunner(getAmountByCategoriesID, [
+      catId, userId
+    ]);
+    if (invoiceImagecheckresult[0].length > 0) {
+      res.status(200).json({
+        data: invoiceImagecheckresult[0][0],
+      });
+    } else {
+      res.status(400).json({
+        message: "No data found"
+      });
+    }
+  } catch (error) {
+    console.log(error)
+    res.send("Error from create invoice categories");
+  }
+}
