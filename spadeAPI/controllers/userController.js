@@ -36,7 +36,11 @@ const {
   getTenantReport,
   getInvoiceReportData,
   getTaskReportData,
-  getLeaseReport
+  getLeaseReport,
+  getTotalAmount,
+  getTotalAmountUnpaid,
+  getTotalAmountPaid,
+  getNumPropertyTenant
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -1601,6 +1605,34 @@ exports.getInvoiceReportData = async (req, res) => {
 
     res.status(200).json({
       property: getAllPropertyData[0],
+    })
+  } catch (error) {
+    res.status(400).json({
+      message: error.message
+    })
+  }
+}
+
+exports.getDashboardData = async (req, res) => {
+  try {
+    const { userId } = req.user;
+    const totalAmount = await queryRunner(getTotalAmount, [
+      userId
+    ]);
+    const totalAmountUnpaid = await queryRunner(getTotalAmountUnpaid, [
+      userId
+    ]);
+    const totalAmountPaid = await queryRunner(getTotalAmountPaid, [
+      userId
+    ]);
+    const numPropertyTenant = await queryRunner(getNumPropertyTenant, [
+      userId,userId
+    ]);
+    res.status(200).json({
+      totalAmount: totalAmount[0][0],
+      totalAmountUnpaid: totalAmountUnpaid[0][0],
+      totalAmountPaid: totalAmountPaid[0][0],
+      numPropertyTenant: numPropertyTenant[0][0]
     })
   } catch (error) {
     res.status(400).json({

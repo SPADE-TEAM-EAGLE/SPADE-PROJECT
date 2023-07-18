@@ -115,7 +115,7 @@ router.post("/addInvoiceCategory", verifyToken, invoiceController.createInvoiceC
 router.put("/updatedInvoiceCategory", verifyToken, invoiceController.updateInvoiceCategories);
 router.get("/invoiceCategory", verifyToken, invoiceController.getInvoiceCategories);
 router.get("/getInvoiceCategoriesText", verifyToken, invoiceController.getInvoiceCategoriesText);
-
+router.get("/deshboard", verifyToken, userController.getDashboardData);
 
 
 // updated notification route
