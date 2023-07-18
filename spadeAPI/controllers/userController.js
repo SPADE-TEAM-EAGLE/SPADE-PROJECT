@@ -210,7 +210,7 @@ exports.updateUserProfile = async function (req, res) {
     ]);
     // current date 
     const now = new Date();
-    const created_at = now.toISOString().slice(0, 19).replace("T", " ");
+    // const created_at = now.toISOString().slice(0, 19).replace("T", " ");
 
     const isUserExist = selectResult[0][0];
     if (!isUserExist) {
@@ -223,7 +223,11 @@ exports.updateUserProfile = async function (req, res) {
         email || null,
         phone || null,
         planID || null,
-        BusinessName || null, streetAddress || null, BusinessAddress || null, created_at,
+        BusinessName || null, 
+        streetAddress || null, 
+        BusinessAddress || null, 
+        // created_at,
+        now,
         userId,
       ];
       const updateResult = await queryRunner(updateUser, updateUserParams);
@@ -411,7 +415,7 @@ exports.resendCode = async (req, res) => {
 
 //  ############################# Get Pricing Plan Start ############################################################
 exports.pricingPlan = async (req, res) => {
-  try {
+  try { 
     const pricingPlanResult = await queryRunner(selectQuery("plan"));
     if (pricingPlanResult.length > 0) {
       const data = JSON.parse(JSON.stringify(pricingPlanResult));
