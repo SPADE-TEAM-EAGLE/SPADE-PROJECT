@@ -66,8 +66,22 @@ exports.getInvoiceReportData = "SELECT invoice.id AS invoiceID, invoice.created_
 exports.getLeaseReport = "SELECT tenants.firstName, tenants.lastName, tenants.leaseEndDate AS LeaseExpire, tenants.phoneNumber, property.propertyType, property.propertyName, property.units FROM tenants JOIN property ON tenants.propertyID = property.id WHERE tenants.landlordID = ?";
 
 
+// getTotalAmount getTotalAmountUnpaid getTotalAmountPaid getNumPropertyTenant
+// get total amount from invoice table
+exports.getTotalAmount = "SELECT SUM(invoice.totalAmount) AS totalAmount FROM invoice WHERE invoice.landlordID = ?";
+// get total amount where status is unpaid
+exports.getTotalAmountUnpaid = "SELECT SUM(invoice.totalAmount) AS totalUnPaid FROM invoice WHERE invoice.landlordID = ? AND invoice.status = 'Unpaid'";
+// get total amount where status is paid
+exports.getTotalAmountPaid = "SELECT SUM(invoice.totalAmount) AS totalPaid FROM invoice WHERE invoice.landlordID = ? AND invoice.status = 'paid'";
+// get num propery and tenant of landlord
+exports.getNumPropertyTenant = `SELECT 
+    (SELECT COUNT(property.id) FROM property WHERE property.landlordID = ?) AS propertyCount,
+    (SELECT COUNT(tenants.id) FROM tenants WHERE tenants.landlordID = ?) AS tenantCount;
+`;
 
-exports.getAmountByCategoriesID  = "SELECT InvoiceCategories.setTaxes FROM InvoiceCategories WHERE InvoiceCategories.id = ? AND InvoiceCategories.landLordId = ?";
+
+
+exports.getAmountByCategoriesID = "SELECT InvoiceCategories.setTaxes FROM InvoiceCategories WHERE InvoiceCategories.id = ? AND InvoiceCategories.landLordId = ?";
 // getTenantNotify using joins query
 // exports.getTenantNotify = "SELECT tenants.id AS tenantID, tenants.companyName, tenants.firstName, tenants.lastName, tenants.phoneNumber , tenantattachfiles.Image ,tenantattachfiles.ImageKey FROM tenants JOIN tenantattachfiles ON tenants.id = tenantattachfiles.tenantID WHERE tenants.landlordID = ?";
 exports.getTenantNotify = `SELECT 
@@ -94,11 +108,12 @@ exports.getPropertyNotify = `SELECT
     property.address,
     property.propertyType,
     property.created_at,
+    property.city,
     GROUP_CONCAT(propertyimage.Image) AS Image,
     GROUP_CONCAT(propertyimage.ImageKey) AS ImageKey
 FROM 
     property
-JOIN 
+LEFT JOIN 
     propertyimage ON property.id = propertyimage.propertyID
 WHERE 
     property.landlordID = ?
@@ -107,6 +122,7 @@ GROUP BY
 ORDER BY 
     property.created_at DESC;
 `;
+
 
 
 exports.getTaskNotify = `SELECT 
