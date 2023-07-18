@@ -1,4 +1,4 @@
-const { selectQuery } = require("../constants/queries");
+const { selectQuery, getTenantNotify, getPropertyNotify, getTaskNotify, getInvoiceNotify } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
 
 const notifyController = {
@@ -28,42 +28,32 @@ const notifyController = {
         const { userId } = req.user;
         try {
             // get data from property table
-            const tenants = await queryRunner(selectQuery("tenants", "landlordID"), [
-                userId,
+            const getTenantsNotify = await queryRunner(getTenantNotify, [
+                userId
             ]);
-            // get data from tenants table
-            const property = await queryRunner(selectQuery("property", "landlordID"), [
-                userId,
+            const property = await queryRunner(getPropertyNotify, [
+                userId
             ]);
+            
             // get data from task table
-            const task = await await queryRunner(selectQuery("task", "landlordID"), [
-                userId,
+            const task =  await queryRunner(getTaskNotify, [
+                userId
             ]);
+            
             // get data from invoice table
-            const invoice = await queryRunner(selectQuery("invoice", "landlordID"), [
-                userId,
+            const invoice = await queryRunner(getInvoiceNotify, [
+                userId
             ]);
             res.status(200).json({
-                tenantNotify: {
-                    count: tenants[0].length,
-                    userCreatedId: tenants[0].map((item) => item.landlordID),
-                    tenantCreated_at: tenants[0].map((item) => item.tenantCreated_at),
-                },
-                propertyNotify: {
-                    count: property[0].length,
-                    userCreatedId: property[0].map((item) => item.landlordID),
-                    propertyCreated_at: property[0].map((item) => item.created_at),
-                },
-                taskNotify: {
-                    count: task[0].length,
-                    userCreatedId: task[0].map((item) => item.landlordID),
-                    taskCreated_at: task[0].map((item) => item.created_at),
-                },
-                invoiceNotify: {
-                    count: invoice[0].length,
-                    userCreatedId: invoice[0].map((item) => item.landlordID),
-                    invoiceCreated_at: invoice[0].map((item) => item.created_at),
-                }
+                tenantNotify: getTenantsNotify[0],
+                // {
+                //     count: tenants[0].length,
+                //     userCreatedId: tenants[0].map((item) => item.landlordID),
+                //     tenantCreated_at: tenants[0].map((item) => item.tenantCreated_at),
+                // },
+                propertyNotify: property[0],
+                taskNotify:task[0],
+                invoiceNotify: invoice[0]
             });
         } catch (error) {
             res.status(400).json({
