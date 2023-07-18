@@ -438,7 +438,7 @@ exports.resendCode = async (req, res) => {
 
 //  ############################# Get Pricing Plan Start ############################################################
 exports.pricingPlan = async (req, res) => {
-  try {
+  try { 
     const pricingPlanResult = await queryRunner(selectQuery("plan"));
     if (pricingPlanResult.length > 0) {
       const data = JSON.parse(JSON.stringify(pricingPlanResult));
