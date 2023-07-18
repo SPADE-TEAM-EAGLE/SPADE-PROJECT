@@ -54,6 +54,96 @@ exports.deleteQuery = (table, ...field) => {
 exports.delteImageFromDb = "DELETE FROM propertyimage WHERE imageKey = ?"
 exports.delteImageForInvoiceImages = "DELETE FROM invoiceimages WHERE imageKey = ?"
 exports.delteImageForTaskImages = "DELETE FROM taskimages WHERE ImageKey = ?"
+
+exports.createInvoiceCategories = "INSERT INTO InvoiceCategories (categorieName,landLordId) VALUES (?,?)";
+// updated category query setTaxes, catId, userId
+exports.updateInvoiceCategories = "UPDATE InvoiceCategories SET categorieName = ?,setTaxes = ? WHERE id = ? AND landLordId = ?";
+
+exports.getPropertyReport = "SELECT property.id, property.propertyName, property.propertyType, property.units, tenants.firstName,tenants.lastName , tenants.phoneNumber FROM property JOIN tenants ON property.id = tenants.propertyID WHERE property.landlordID = ?";
+exports.getTenantReport = "SELECT tenants.id AS tenantID, tenants.companyName, tenants.firstName, tenants.lastName, tenants.phoneNumber, property.propertyType, property.units FROM tenants JOIN property ON tenants.propertyID = property.id WHERE tenants.landlordID = ?";
+exports.getTaskReportData = "SELECT task.id AS taskID, task.taskName, task.dueDate, task.status, property.propertyName FROM task JOIN tenants ON task.tenantID = tenants.id JOIN property ON tenants.propertyID = property.id WHERE task.landlordID = ?";
+exports.getInvoiceReportData = "SELECT invoice.id AS invoiceID, invoice.created_at,invoice.totalAmount, property.propertyName, property.address ,tenants.email ,tenants.firstName, tenants.lastName FROM invoice JOIN tenants ON tenants.id = invoice.tenantID JOIN property ON property.id = tenants.propertyID WHERE invoice.landlordID = ?";
+exports.getLeaseReport = "SELECT tenants.firstName, tenants.lastName, tenants.leaseEndDate AS LeaseExpire, tenants.phoneNumber, property.propertyType, property.propertyName, property.units FROM tenants JOIN property ON tenants.propertyID = property.id WHERE tenants.landlordID = ?";
+
+// getTenantNotify using joins query
+// exports.getTenantNotify = "SELECT tenants.id AS tenantID, tenants.companyName, tenants.firstName, tenants.lastName, tenants.phoneNumber , tenantattachfiles.Image ,tenantattachfiles.ImageKey FROM tenants JOIN tenantattachfiles ON tenants.id = tenantattachfiles.tenantID WHERE tenants.landlordID = ?";
+exports.getTenantNotify = `SELECT 
+tenants.id AS tenantID,
+tenants.companyName, tenants.firstName, tenants.lastName, tenants.phoneNumber,tenantCreated_at,
+GROUP_CONCAT(tenantattachfiles.Image) AS Image,
+GROUP_CONCAT(tenantattachfiles.ImageKey) AS ImageKey
+FROM 
+tenants
+JOIN 
+tenantattachfiles ON tenantattachfiles.tenantID = tenants.id
+WHERE 
+tenants.landlordID = ?
+GROUP BY 
+tenants.companyName, tenants.firstName, tenants.lastName, tenants.phoneNumber,tenantCreated_at
+ORDER BY 
+tenantCreated_at DESC;`
+
+exports.getPropertyNotify = `SELECT 
+    property.id AS propertyID,
+    property.propertyName,
+    property.address,
+    property.propertyType,
+    property.created_at,
+    GROUP_CONCAT(propertyimage.Image) AS Image,
+    GROUP_CONCAT(propertyimage.ImageKey) AS ImageKey
+FROM 
+    property
+JOIN 
+    propertyimage ON property.id = propertyimage.propertyID
+WHERE 
+    property.landlordID = ?
+GROUP BY 
+    property.id, property.propertyName, property.address, property.propertyType, property.created_at
+ORDER BY 
+    property.created_at DESC;
+`;
+
+
+exports.getTaskNotify = `SELECT 
+task.id AS taskID,
+task.taskName,
+task.status,
+task.priority,
+task.created_at,
+GROUP_CONCAT(taskimages.Image) AS Image,
+GROUP_CONCAT(taskimages.ImageKey) AS ImageKey
+FROM 
+task
+JOIN 
+taskimages ON task.id = taskimages.taskID
+WHERE 
+task.landlordID = ?
+GROUP BY 
+task.id, task.taskName, task.status, task.priority, task.created_at
+ORDER BY 
+task.created_at DESC;
+`
+exports.getInvoiceNotify = `SELECT 
+invoice.id AS invoiceID,
+invoice.invoiceType,
+invoice.startDate,
+invoice.endDate,
+invoice.status,
+invoice.created_at,
+GROUP_CONCAT(invoiceimages.Image) AS Image,
+GROUP_CONCAT(invoiceimages.ImageKey) AS ImageKey
+FROM 
+invoice
+JOIN 
+invoiceimages ON invoice.id = invoiceimages.invoiceID
+WHERE 
+invoice.landlordID = ?
+GROUP BY 
+invoice.id, invoice.invoiceType, invoice.status, invoice.startDate, invoice.endDate, invoice.created_at
+ORDER BY 
+invoice.created_at DESC;
+`
+// property.propertyType
 exports.updateNotify = "UPDATE notification SET emailNotification = ? , pushNotification = ? WHERE landlordID = ? ";
 exports.addResetToken =
   "UPDATE users SET token = ?, updated_at = ? where id = ?";
@@ -184,7 +274,23 @@ exports.taskByIDQuery = 'SELECT tk.id, tk.taskName, tk.dueDate, tk.status, tk.pr
 exports.resendEmailQuery = 'SELECT * FROM tenants JOIN invoice ON tenants.id = invoice.tenantID WHERE invoice.id = ?';
 exports.updateTenants = "UPDATE tenants SET firstName = ? , lastName = ? , companyName = ? , email = ? , phoneNumber = ? , address = ? , city = ? , state = ? , zipcode = ? , propertyID = ? , propertyUnitID = ? , rentAmount = ? , gross_or_triple_lease = ? , baseRent = ? , tripleNet = ? , leaseStartDate = ? , leaseEndDate = ? , increaseRent = ? , tenantUpdated_at = ? WHERE id = ?";
 exports.selectVendorCategory = "SELECT * FROM `vendorcategory` JOIN `vendor` ON `vendorcategory`.`id` = `vendor`.`categoryID` WHERE `vendor`.`LandlordID` = ?";
-exports.propertyTaskQuery = "SELECT tk.id, tk.taskName, tk.dueDate, tk.status, tk.priority, tk.notes, tk.createdBy,tk.created_at, p.propertyName, p.address,pu.unitNumber, t.firstName as tfirstName, t.lastName as tlastName FROM `task`as tk JOIN tenants as t ON tk.tenantID = t.id JOIN property as p ON t.propertyID = p.id JOIN propertyunits as pu ON t.propertyUnitID = pu.id WHERE t.propertyID = ?";
+
+exports.propertyTaskQuery = `
+SELECT 
+    tk.id, tk.taskName, tk.dueDate, tk.status, tk.priority, tk.notes, tk.createdBy, tk.created_at,
+    p.propertyName, p.address, pu.unitNumber,
+    t.firstName AS tfirstName, t.lastName AS tlastName
+FROM 
+    task AS tk
+JOIN 
+    tenants AS t ON tk.tenantID = t.id
+JOIN 
+    property AS p ON t.propertyID = p.id
+JOIN 
+    propertyunits AS pu ON t.propertyUnitID = pu.id
+WHERE 
+    t.propertyID = ?
+`
 exports.tenantTaskQuery = "SELECT tk.id, tk.taskName, tk.dueDate, tk.status, tk.priority, tk.notes, tk.createdBy,tk.created_at, p.propertyName, pu.unitNumber, t.firstName as tfirstName, t.lastName as tlastName FROM `task`as tk JOIN tenants as t ON tk.tenantID = t.id JOIN property as p ON t.propertyID = p.id JOIN propertyunits as pu ON t.propertyUnitID = pu.id where tk.tenantID  = ?";
 exports.getAllInvoiceTenantQuery = "SELECT i.id as invoiceID, i.dueDate, i.daysDue , i.startDate,i.endDate,i.repeatTerms,i.terms ,i.note, i.totalAmount, i.frequency,i.created_at, i.invoiceType, i.status, t.firstName, t.lastName, t.id as tenantID, t.phoneNumber as tPhone, p.propertyName, GROUP_CONCAT(ii.InvoiceImage) as invoiceImages FROM invoice as i JOIN tenants as t ON i.tenantID = t.id JOIN property as p ON t.propertyID = p.id LEFT JOIN invoiceimages as ii ON i.id = ii.invoiceID WHERE i.tenantID = ? GROUP BY i.id;";
 exports.AlltasksTenantsQuery = `SELECT

@@ -124,7 +124,6 @@ const verifyToken = async (req, res, next) => {
       imageKey:result[0][0].imageKey,
       planID:result[0][0].PlanID,
     };
-
     next();
     // console.log("hello")
   } catch (err) {

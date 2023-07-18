@@ -12,9 +12,6 @@ const {
   addVendor,
   addTasksQuery,
   insertInTaskImage,
-  selectEmailQuery,
-  selectNameQuery,
-  selectAnyQuery,
   addVendorList,
   getLandlordTenant,
   Alltasks,
@@ -25,12 +22,9 @@ const {
   delteImageForTaskImages,
   addVendorCategory
 } = require("../constants/queries");
-const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
-const { file } = require("googleapis/build/src/apis/file");
-const e = require("express");
 const { deleteImageFromS3 } = require("../helper/S3Bucket");
-const config = process.env;
+
 
 //  #############################  ADD VENDOR ##################################################
 exports.addVendors = async (req, res) => {
@@ -46,7 +40,6 @@ exports.addVendors = async (req, res) => {
     phone,
     email,
     categoryID,
-
   } = req.body;
   const { userId } = req.user
   // console.log(userId)
@@ -86,7 +79,6 @@ exports.addVendors = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(400).send(error);
-
   }
 };
 //  #############################  ADD VENDOR ENDS HERE ##################################################
@@ -418,7 +410,6 @@ exports.addTasks = async (req, res) => {
       if (notifyTenant.toLowerCase() === "yes") {
         await taskSendMail(
           tenantName,
-          
           "Property Maintenance: " + task,
           dueDate,
           landlordName,
@@ -429,7 +420,6 @@ exports.addTasks = async (req, res) => {
           landlordContact,
           userId,
           tenantEmail,
-          
         );
       }
       if (notifyVendor.toLowerCase() === "yes") {
