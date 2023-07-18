@@ -34,7 +34,8 @@ const {
   getPropertyReport,
   getTenantReport,
   getInvoiceReportData,
-  getTaskReportData
+  getTaskReportData,
+  getLeaseReport
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -1314,6 +1315,7 @@ exports.propertyTask = async (req, res) => {
       for (let j = 0; j < taskByIDResult[0].length; j++) {
         const taskID = taskByIDResult[0][j].id;
         const TaskImagesResult = await queryRunner(selectQuery("taskimages", "taskID"), [taskID]);
+        // this is for task images 
         if (TaskImagesResult[0].length > 0) {
           const taskImages = TaskImagesResult[0].map((image) => image.taskImages);
           taskByIDResult[0][j].taskImages = taskImages;
@@ -1546,9 +1548,13 @@ exports.getAllProperty = async (req, res) => {
     const getTenantsReport = await queryRunner(getTenantReport, [
       userId
     ]);
+    const getLeaseReportData = await queryRunner(getLeaseReport, [
+      userId
+    ]);
     res.status(200).json({
       property: getAllPropertyData[0],
-      tenants: getTenantsReport[0]
+      tenants: getTenantsReport[0],
+      lease: getLeaseReportData[0]
     })
   } catch (error) {
     res.status(400).json({
@@ -1588,3 +1594,4 @@ exports.getInvoiceReportData = async (req, res) => {
     })
   }
 }
+

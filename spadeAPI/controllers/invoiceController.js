@@ -439,7 +439,6 @@ exports.invoiceDelete = async (req, res) => {
         deleteQuery("invoicelineitems", "invoiceID"),
         [id]
       );
-
       res.status(200).json({
         message: " Invoice deleted successfully",
       });
@@ -463,11 +462,9 @@ exports.invoiceDelete = async (req, res) => {
 exports.resendEmail = async (req, res) => {
   const { invoiceID } = req.query;
   const { userId } = req.user;
-  // console.log(req)
   try {
     const resendEmailResult = await queryRunner(resendEmailQuery, [invoiceID])
-    // console.log(111)
-    // console.log(resendEmailResult);
+
     if (resendEmailResult[0].length > 0) {
       const tenantEmail = resendEmailResult[0][0].email;
       const dueDays = resendEmailResult[0][0].dueDate;
