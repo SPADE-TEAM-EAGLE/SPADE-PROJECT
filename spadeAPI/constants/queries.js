@@ -65,21 +65,26 @@ exports.getTaskReportData = "SELECT task.id AS taskID, task.taskName, task.dueDa
 exports.getInvoiceReportData = "SELECT invoice.id AS invoiceID, invoice.created_at,invoice.totalAmount, property.propertyName, property.address ,tenants.email ,tenants.firstName, tenants.lastName FROM invoice JOIN tenants ON tenants.id = invoice.tenantID JOIN property ON property.id = tenants.propertyID WHERE invoice.landlordID = ?";
 exports.getLeaseReport = "SELECT tenants.firstName, tenants.lastName, tenants.leaseEndDate AS LeaseExpire, tenants.phoneNumber, property.propertyType, property.propertyName, property.units FROM tenants JOIN property ON tenants.propertyID = property.id WHERE tenants.landlordID = ?";
 
+
+
+exports.getAmountByCategoriesID  = "SELECT InvoiceCategories.setTaxes FROM InvoiceCategories WHERE InvoiceCategories.id = ? AND InvoiceCategories.landLordId = ?";
 // getTenantNotify using joins query
 // exports.getTenantNotify = "SELECT tenants.id AS tenantID, tenants.companyName, tenants.firstName, tenants.lastName, tenants.phoneNumber , tenantattachfiles.Image ,tenantattachfiles.ImageKey FROM tenants JOIN tenantattachfiles ON tenants.id = tenantattachfiles.tenantID WHERE tenants.landlordID = ?";
 exports.getTenantNotify = `SELECT 
 tenants.id AS tenantID,
-tenants.companyName, tenants.firstName, tenants.lastName, tenants.phoneNumber,tenantCreated_at,
+tenants.companyName, tenants.firstName, tenants.lastName, tenants.phoneNumber,tenants.tenantCreated_at,property.propertyName ,property.address,property.propertyType,property.units,
 GROUP_CONCAT(tenantattachfiles.Image) AS Image,
 GROUP_CONCAT(tenantattachfiles.ImageKey) AS ImageKey
 FROM 
 tenants
-JOIN 
+LEFT JOIN
 tenantattachfiles ON tenantattachfiles.tenantID = tenants.id
+JOIN
+    property ON property.id = tenants.propertyID
 WHERE 
 tenants.landlordID = ?
 GROUP BY 
-tenants.companyName, tenants.firstName, tenants.lastName, tenants.phoneNumber,tenantCreated_at
+tenants.companyName, tenants.firstName, tenants.lastName, tenants.phoneNumber,tenantCreated_at,property.propertyName ,property.address,property.propertyType,property.units
 ORDER BY 
 tenantCreated_at DESC;`
 
@@ -87,13 +92,14 @@ exports.getPropertyNotify = `SELECT
     property.id AS propertyID,
     property.propertyName,
     property.address,
+    property.city,
     property.propertyType,
     property.created_at,
     GROUP_CONCAT(propertyimage.Image) AS Image,
     GROUP_CONCAT(propertyimage.ImageKey) AS ImageKey
 FROM 
     property
-JOIN 
+LEFT JOIN 
     propertyimage ON property.id = propertyimage.propertyID
 WHERE 
     property.landlordID = ?
@@ -105,37 +111,53 @@ ORDER BY
 
 
 exports.getTaskNotify = `SELECT 
-task.id AS taskID,
-task.taskName,
-task.status,
-task.priority,
-task.created_at,
-GROUP_CONCAT(taskimages.Image) AS Image,
-GROUP_CONCAT(taskimages.ImageKey) AS ImageKey
+    task.id AS taskID,
+    task.taskName,
+    task.status,
+    task.priority,
+    task.created_at,
+    tenants.firstName,
+    tenants.lastName,
+    tenants.email,
+    tenants.Address,
+    tenants.city,
+    GROUP_CONCAT(taskimages.Image) AS Image,
+    GROUP_CONCAT(taskimages.ImageKey) AS ImageKey
 FROM 
-task
-JOIN 
-taskimages ON task.id = taskimages.taskID
+    task
+  LEFT JOIN
+    taskimages ON task.id = taskimages.taskID
+JOIN
+    tenants ON task.tenantID = tenants.id
 WHERE 
-task.landlordID = ?
+    task.landlordID = ?
 GROUP BY 
-task.id, task.taskName, task.status, task.priority, task.created_at
+    task.id, task.taskName, task.status, task.priority, task.created_at
 ORDER BY 
-task.created_at DESC;
-`
+    task.created_at DESC;
+`;
+
 exports.getInvoiceNotify = `SELECT 
 invoice.id AS invoiceID,
 invoice.invoiceType,
 invoice.startDate,
 invoice.endDate,
 invoice.status,
+invoice.totalAmount,
 invoice.created_at,
+tenants.firstName,
+tenants.lastName,
+tenants.email,
+tenants.Address,
+tenants.city,
 GROUP_CONCAT(invoiceimages.Image) AS Image,
 GROUP_CONCAT(invoiceimages.ImageKey) AS ImageKey
 FROM 
 invoice
-JOIN 
+LEFT JOIN
 invoiceimages ON invoice.id = invoiceimages.invoiceID
+JOIN
+    tenants ON invoice.tenantID = tenants.id
 WHERE 
 invoice.landlordID = ?
 GROUP BY 
@@ -157,7 +179,7 @@ exports.updateUser = "UPDATE users SET FirstName = ?, LastName = ?, Email = ?, P
 // update plan id in user table
 exports.updatePlanId = "UPDATE users SET PlanID = ? WHERE id = ?";
 exports.insertInProperty =
-  "INSERT INTO property (landlordID, propertyName, address, city, state, zipCode, propertyType, propertySQFT,status,units) VALUES (?,?,?,?,?,?,?,?,?,?)";
+  "INSERT INTO property (landlordID, propertyName, address, city, state, zipCode, propertyType, propertySQFT,status,units,created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 exports.insertInPropertyImage = "INSERT INTO propertyimage (propertyID, Image, imageKey) VALUES (?,?,?)";
 exports.insertInTaskImage =
   "INSERT INTO taskimages (taskID, Image, ImageKey) VALUES (?,?,?)";

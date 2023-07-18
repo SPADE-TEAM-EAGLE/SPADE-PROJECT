@@ -114,8 +114,9 @@ router.put('/verifyEmailUpdate', userController.verifyEmailUpdate);
 router.post("/addInvoiceCategory", verifyToken, invoiceController.createInvoiceCategories);
 router.put("/updatedInvoiceCategory", verifyToken, invoiceController.updateInvoiceCategories);
 router.get("/invoiceCategory", verifyToken, invoiceController.getInvoiceCategories);
-// updated notification route
-// router.put("/notify", verifyToken, userController.updatedNotification);
+router.get("/getInvoiceCategoriesText", verifyToken, invoiceController.getInvoiceCategoriesText);
+
+
 
 // updated notification route
 router.put("/notify", verifyToken, notifyController.updateNotify);

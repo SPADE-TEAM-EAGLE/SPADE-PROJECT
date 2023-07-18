@@ -479,6 +479,7 @@ exports.property = async (req, res) => {
     if (!propertyName || !address || !city || !state || !zipCode || !propertyType || !propertySQFT || !units) {
       throw new Error("Please fill all the fields");
     }
+    const currentDate = new Date();
     // this line check property already exist or not
     const propertycheckresult = await queryRunner(selectQuery("property", "propertyName", "address"), [propertyName, address]);
     if (propertycheckresult[0].length > 0) {
@@ -499,8 +500,8 @@ exports.property = async (req, res) => {
       propertySQFT,
       status,
       units,
+      currentDate
     ]);
-    console.log(req.body)
     // console.log("2");
     // if property data not inserted into property table then throw error
     if (propertyResult.affectedRows === 0) {
