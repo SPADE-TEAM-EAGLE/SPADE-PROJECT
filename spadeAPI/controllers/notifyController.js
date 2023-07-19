@@ -90,11 +90,6 @@ const notifyController = {
             ]);
             res.status(200).json({
                 tenantNotify: getTenantsNotify[0],
-                // {
-                //     count: tenants[0].length,
-                //     userCreatedId: tenants[0].map((item) => item.landlordID),
-                //     tenantCreated_at: tenants[0].map((item) => item.tenantCreated_at),
-                // },
                 propertyNotify: property[0],
                 taskNotify: task[0],
                 invoiceNotify: invoice[0]
@@ -105,7 +100,6 @@ const notifyController = {
             })
         }
     }
-
 }
 
 module.exports = notifyController;
