@@ -17,10 +17,9 @@ const {
   getByIdInvoicesQuery,
   updateInvoice,
   resendEmailQuery,
-  delteImageForInvoiceImages,
   createInvoiceCategories,
-  updateInvoiceCategories,
-  getAmountByCategoriesID
+  delteImageForInvoiceImages,
+  updateInvoiceCategories
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -55,7 +54,7 @@ exports.createInvoice = async (req, res) => {
     //   throw new Error("Please fill all the fields");
     // }
     const currentDate = new Date();
-    const invoiceResult = await queryRunner(insertInvoice, [userId, tenantID, invoiceType, startDate, endDate, frequency, dueDate, dueDays, repeatTerms, terms, additionalNotes, "Unpaid", currentDate, totalAmount]);
+    const invoiceResult = await queryRunner(insertInvoice, [userId, tenantID, invoiceType, startDate, endDate, frequency, dueDate, dueDays, repeatTerms, terms, additionalNotes, "Unpaid", currentDate, totalAmount, startDate]);
     if (invoiceResult.affectedRows === 0) {
       res.status(400).send('Error occur in creating invoice');
     } else {
@@ -485,36 +484,65 @@ exports.resendEmail = async (req, res) => {
 //  ############################# Resend Email Invoice END ############################################################
 
 // ############################# create invoice categories ############################################################
+// exports.createInvoiceCategories = async (req, res) => {
+//   try {
+//     const { category } = req.body;
+//     const { userId } = req.user;
+//     const createInvoiceCategoriesResult = await queryRunner(createInvoiceCategories, [userId, category]);
+//     if (createInvoiceCategoriesResult[0].affectedRows > 0) {
+//       res.status(200).json({
+//         message: "Invoice Categories created successfully"
+//       });
+//     } else {
+//       res.status(400).json({
+//         message: "No data found"
+//       });
+//     }
+//   } catch (error) {
+//     console.log(error)
+//     res.send("Error from create invoice categories");
+//   }
+// };
 exports.createInvoiceCategories = async (req, res) => {
   try {
-    const { category } = req.body;
+    const data= req.body;
     const { userId } = req.user;
-    const categorie = await queryRunner(selectQuery("InvoiceCategories", "landLordId"), [userId]);
-    console.log(categorie[0])
-
-    // const createInvoiceCategoriesResult = await queryRunner(createInvoiceCategories, [category, userId]);
-    // if (createInvoiceCategoriesResult[0].affectedRows > 0) {
-    //   res.status(200).json({
-    //     message: "Invoice Categories created successfully"
-    //   });
-    // } else {
-    //   res.status(400).json({
-    //     message: "No data found"
-    //   });
-    // }
-  } catch (error) {
-    console.log(error)
-    res.send("Error from create invoice categories");
-  }
-};
-exports.getInvoiceCategories = async (req, res) => {
-  try {
-    const { userId } = req.user;
-    const invoiceImagecheckresult = await queryRunner(
-      selectQuery("InvoiceCategories", "landLordId"),
-      [userId]
-    );
-    if (invoiceImagecheckresult[0].length > 0) {
+    let createInvoiceCategoriesResult
+    const categoriesFromDb=await queryRunner(selectQuery("InvoiceCategories", "landLordId"),
+    [userId])
+    for (const category of data) {
+      const matchingCategory = categoriesFromDb[0].find((categoryFromDb) => {
+        return category.categoryName === categoryFromDb.categorieName;
+      });
+    
+      if (matchingCategory) {
+        const isDifferent = Object.keys(category).some((key) => {
+          return category[key] !== matchingCategory[key];
+        });
+    
+        if (isDifferent) {
+          const updateInvoiceCategoriesResult = await queryRunner(updateInvoiceCategories, [category.categoryName, category.taxAmount, category.taxable, matchingCategory.id, userId]);
+    
+          console.log(`Updating row for category ${category.categoryName}`);
+        } else {
+          console.log(`No difference found for category ${category.categoryName}`);
+        }
+      } else {
+        console.log(`Category ${category.categoryName} not found in the database`);
+      }
+    }
+    
+    
+    const filteredCategories = data.filter((category) => {
+      return !categoriesFromDb[0].some((categoryFromDb) => {
+        return category.categoryName === categoryFromDb.categorieName;
+      });
+    });
+    for(let item of filteredCategories){
+      const {categoryName,taxable,taxAmount}=item
+      createInvoiceCategoriesResult = await queryRunner(createInvoiceCategories, [categoryName,userId,taxAmount,taxable]);
+    }
+    if (filteredCategories.length>=1 && createInvoiceCategoriesResult[0].affectedRows > 0) {
       res.status(200).json({
         data: invoiceImagecheckresult[0],
       });
@@ -551,18 +579,16 @@ exports.updateInvoiceCategories = async (req, res) => {
     res.send("Error from update invoice categories");
   }
 };
-// get Invoice categories by userId and catId
-exports.getInvoiceCategoriesText = async (req, res) => {
+exports.getInvoiceCategories = async (req, res) => {
   try {
-    const { catId } = req.query;
     const { userId } = req.user;
-    // getAmountByCategoriesID
-    const invoiceImagecheckresult = await queryRunner(getAmountByCategoriesID, [
-      catId, userId
-    ]);
+    const invoiceImagecheckresult = await queryRunner(
+      selectQuery("InvoiceCategories", "landLordId"),
+      [userId]
+    );
     if (invoiceImagecheckresult[0].length > 0) {
       res.status(200).json({
-        data: invoiceImagecheckresult[0][0],
+        data : invoiceImagecheckresult[0],
       });
     } else {
       res.status(400).json({
@@ -573,4 +599,4 @@ exports.getInvoiceCategoriesText = async (req, res) => {
     console.log(error)
     res.send("Error from create invoice categories");
   }
-}
+};

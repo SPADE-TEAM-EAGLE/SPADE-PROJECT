@@ -1,5 +1,5 @@
 const user = require("../models/user");
-const { sendMail, invoiceSendMail } = require('../sendmail/sendmail.js');
+const sendMail = require('../sendmail/sendmail.js');
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt');
 const fs = require('fs');
@@ -458,7 +458,10 @@ exports.tenantDelete = async (req, res) => {
           const tenantFileDeleteresult = await queryRunner(deleteQuery("tenantattachfiles", "tenantID"), [tenantID]);
         }
 
-
+        const tenantAdditionalEmailCheckResult = await queryRunner(selectQuery("tenantalternateemail", "tenantID"), [tenantID]);
+        if (tenantAdditionalEmailCheckResult[0].length > 0) {
+          const tenantAdditionalEmailresult = await queryRunner(deleteQuery("tenantalternateemail", "tenantID"), [tenantID]);
+        }
 
         // const tenantAdditionalEmailCheckResult = await queryRunner(selectQuery("tenantalternateemail", "tenantID"), [tenantID]);
         // if (tenantAdditionalEmailCheckResult[0].length > 0) {

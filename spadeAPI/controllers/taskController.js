@@ -797,9 +797,6 @@ exports.updateTasks = async (req, res) => {
 };
 //  #############################  Update TASK ENDS HERE ##################################################
 
-
-
-
 //  #############################  Delete Task Start HERE ##################################################
 
 exports.deleteTask = async (req, res) => {

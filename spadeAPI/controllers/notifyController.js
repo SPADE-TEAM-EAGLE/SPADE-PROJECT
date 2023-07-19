@@ -1,21 +1,43 @@
-const { selectQuery, getTenantNotify, getPropertyNotify, getTaskNotify, getInvoiceNotify } = require("../constants/queries");
+const { selectQuery, getTenantNotify, getPropertyNotify, getTaskNotify, getInvoiceNotify, insertNotify, updateNotify } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
 
 const notifyController = {
-    updateNotify: async (req, res) => {
-        const { isEmailNotify, isPushNotify } = req.body;
+    updateNotifyData: async (req, res) => {
+        const { isEmailNotify, isPushNotify, textNotification } = req.body;
         const { userId } = req.user;
         try {
-            const updateNotifyResult = await queryRunner(updateNotify, [
-                isEmailNotify,
-                isPushNotify,
+            // find notifTable by userId
+            const getNotifyResult = await queryRunner(selectQuery("notification", "landlordID"), [
                 userId
             ]);
-            if (updateNotifyResult[0].affectedRows > 0) {
-                return res.status(200).json({
-                    email: isEmailNotify === "yes" ? "Email notifications enabled" : "Email notifications disabled",
-                    push: isPushNotify === "yes" ? "push notifications enabled" : "push notifications disabled",
-                });
+            if (getNotifyResult[0].length > 0) {
+                // update notifTable
+                const updateNotifyResult = await queryRunner(updateNotify, [
+                    isEmailNotify,
+                    isPushNotify,
+                    textNotification,
+                    userId
+                ]);
+                if (updateNotifyResult[0].affectedRows > 0) {
+                    return res.status(200).json({
+                        email: isEmailNotify === "yes" ? "Email notifications enabled" : "Email notifications disabled",
+                        push: isPushNotify === "yes" ? "push notifications enabled" : "push notifications disabled",
+                    });
+                }
+            } else {
+                // create notifTable and insert data
+                const insertNotifyResult = await queryRunner(insertNotify, [
+                    userId,
+                    isEmailNotify,
+                    isPushNotify,
+                    textNotification
+                ]);
+                if (insertNotifyResult[0].affectedRows > 0) {
+                    return res.status(200).json({
+                        email: isEmailNotify === "yes" ? "Email notifications enabled" : "Email notifications disabled",
+                        push: isPushNotify === "yes" ? "push notifications enabled" : "push notifications disabled",
+                    });
+                }
             }
         } catch (error) {
             res.status(400).json({
@@ -24,7 +46,7 @@ const notifyController = {
         }
     },
     getCheckedNotify: async (req, res) => {
-            try {
+        try {
             // find notifTable by userId
             const { userId } = req.user;
             const getNotifyResult = await queryRunner(selectQuery("notification", "landlordID"), [
@@ -39,12 +61,11 @@ const notifyController = {
             res.status(400).json({
                 message: "No data found"
             })
-            } catch (error) {
-                res.status(400).json({
-                    message: error.message
-                })     
-            }
-
+        } catch (error) {
+            res.status(400).json({
+                message: error.message
+            })
+        }
     },
     getNotify: async (req, res) => {
         //get property , tenants , task invoice from tables individually
@@ -57,12 +78,12 @@ const notifyController = {
             const property = await queryRunner(getPropertyNotify, [
                 userId
             ]);
-            
+
             // get data from task table
-            const task =  await queryRunner(getTaskNotify, [
+            const task = await queryRunner(getTaskNotify, [
                 userId
             ]);
-            
+
             // get data from invoice table
             const invoice = await queryRunner(getInvoiceNotify, [
                 userId
@@ -75,7 +96,7 @@ const notifyController = {
                 //     tenantCreated_at: tenants[0].map((item) => item.tenantCreated_at),
                 // },
                 propertyNotify: property[0],
-                taskNotify:task[0],
+                taskNotify: task[0],
                 invoiceNotify: invoice[0]
             });
         } catch (error) {

@@ -177,7 +177,9 @@ ORDER BY
 invoice.created_at DESC;
 `
 // property.propertyType
-exports.updateNotify = "UPDATE notification SET emailNotification = ? , pushNotification = ? WHERE landlordID = ? ";
+// insertNotify notify
+exports.insertNotify = "INSERT INTO notification (landlordID, emailNotification, pushNotification, textNotification) VALUES (?,?,?,?)";
+exports.updateNotify = "UPDATE notification SET emailNotification = ? , pushNotification = ?, textNotification = ? WHERE landlordID = ? ";
 exports.addResetToken =
   "UPDATE users SET token = ?, updated_at = ? where id = ?";
 exports.updatePasswordLandlord =
@@ -186,7 +188,7 @@ exports.updatePasswordLandlord =
 exports.insertInUsers =
   "INSERT INTO users (id,FirstName, LastName, Email, Phone, Password, PlanID,created_at) VALUES (?,?, ?, ?, ?, ?, ?, ?)";
 // updated user query
-exports.updateUser = "UPDATE users SET FirstName = ?, LastName = ?, Email = ?, Phone = ?, updated_at = ?, BusinessName = ?, streetAddress = ?, BusinessAddress = ?, created_at = ?, image = ? , imageKey = ? WHERE id = ?";
+exports.updateUser = "UPDATE users SET FirstName = ?, LastName = ?, Email = ?, Phone = ?, updated_at = ?, BusinessName = ?, streetAddress = ?, BusinessAddress = ?, image = ? , imageKey = ? WHERE id = ?";
 // update plan id in user table
 exports.updatePlanId = "UPDATE users SET PlanID = ? WHERE id = ?";
 exports.insertInProperty =
@@ -214,9 +216,9 @@ exports.getUnitsCount = 'SELECT COUNT(propertyID) as unitCount FROM `propertyuni
 exports.insertMoreUnits = 'INSERT INTO propertyunits (propertyID, unitNumber,Area,unitDetails,status) VALUES (?,?,?,?,?)';
 exports.putUnitsUpdate = 'UPDATE property SET  units = ?  where id = ? ';
 exports.insertTenantAttachFile = 'INSERT INTO tenantattachfiles (landlordID, tenantID, fileName,imageKey) VALUES (?,?,?,?)';
-exports.insertInvoice = 'INSERT INTO invoice (landlordID, tenantID, invoiceType, startDate, endDate, frequency, dueDate,daysDue, repeatTerms, terms,note,status,created_at,totalAmount) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+exports.insertInvoice = 'INSERT INTO invoice (landlordID, tenantID, invoiceType, startDate, endDate, frequency, dueDate,daysDue, repeatTerms, terms,note,status,created_at,totalAmount, recurringNextDate) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
 exports.insertLineItems = 'INSERT INTO invoicelineitems (invoiceID, category, property, memo, amount ) VALUES (?,?,?,?,?)';
-exports.insertInvoiceImage = 'INSERT INTO invoiceimages (invoiceID, Image,imageKey) VALUES (?,?,?)';
+exports.insertInvoiceImage = 'INSERT INTO invoiceimages (invoiceID, Image, ImageKey) VALUES (?,?,?)';
 exports.updateUnitsTenant = 'UPDATE propertyunits SET  status = ?  where id = ? ';
 exports.getTenantsById = `SELECT p.id AS propertyID, p.propertyName, p.address AS pAddress, p.city AS pCity, p.state AS pState, p.zipCode AS pZipCode, p.propertyType, p.propertySQFT, p.status AS pStatus, p.units AS pUnits, t.id AS tenantID, t.firstName, t.lastName, t.companyName, t.email AS tEmail, t.phoneNumber AS tPhoneNumber, t.Address AS tAddress, t.city AS tCity, t.state AS tState, t.zipcode AS tZipcode, t.rentAmount, t.gross_or_triple_lease, t.baseRent, t.tripleNet, t.leaseStartDate, t.leaseEndDate, t.increaseRent, pu.unitNumber, pu.Area AS unitArea, pu.unitDetails, pu.status AS unitStatus, GROUP_CONCAT(pi.image) AS images
 FROM tenants AS t
@@ -357,7 +359,48 @@ exports.updatePassword = "UPDATE users SET Password = ? , updated_at = ? where i
 exports.updatePasswordTenantSetting = "UPDATE tenants SET tenantPassword = ? , tenantUpdated_at = ? where id = ? ";
 exports.updateEmailQuery = "UPDATE users SET Email = ? where Email = ? ";
 exports.updateVerifiedStatusQuery = "UPDATE users SET userVerified = ? where id = ? ";
+exports.recurringInvoice = "SELECT * FROM invoice WHERE DATE(recurringNextDate) = CURDATE() AND CURDATE() BETWEEN startDate AND endDate ";
+exports.recurringInvoiceCheck = "SELECT * FROM invoice WHERE DATE(created_at) = CURDATE() AND landlordID = ? AND tenantID = ? AND invoiceType = ? ";
 
 // add category in vendorcategory table
 exports.addVendorCategory = "INSERT INTO vendorcategory (category,landLordId) VALUES (?,?)";
+// exports.createInvoiceCategories = "INSERT INTO InvoiceCategories (categorieName,landLordId) VALUES (?,?)";
+
+// added some column fields
+exports.createInvoiceCategories = "INSERT INTO InvoiceCategories (categorieName,landLordId,setTaxes,taxable) VALUES (?,?,?,?)";
+exports.updateInvoiceCategories = "UPDATE InvoiceCategories SET categorieName = ?,setTaxes = ?, taxable=? WHERE id = ? AND landLordId = ?";
+
+
+
+// =============================================chats start=====================================================================================
+exports.insertChat = "INSERT INTO chats (senderId, receiverID, created_at) VALUES (?,?,?)";
+// find already exist chat between two users
+exports.findChat = "SELECT * FROM chats WHERE (senderId = ? AND receiverID = ?) OR (senderID = ? AND receiverID = ?)";
+
+// create new Message in messages table
+exports.insertMessage = "INSERT INTO messages (chatID, senderID, receiverID, message, created_at) VALUES (?,?,?,?,?)";
+
+// FullChat get using Joins with tenants grop by senderID and receiverID
+exports.getFullChat = `SELECT
+    c.id AS chatID,
+    c.senderID,
+    c.receiverID,
+    c.created_at,
+    t.firstName,
+    t.lastName,
+    t.email,
+    t.phoneNumber,
+    t.Address
+FROM
+    chats AS c
+JOIN
+    tenants AS t ON c.senderID = t.id
+WHERE
+    c.receiverID = ?
+GROUP BY
+    c.senderID
+ORDER BY
+    c.created_at DESC`;
+
+
 

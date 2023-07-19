@@ -30,16 +30,7 @@ const {
   updateVerifiedStatusQuery,
   delteImageFromDb,
   updateNotify,
-  getAllProperty,
-  getPropertyReport,
-  getTenantReport,
-  getInvoiceReportData,
-  getTaskReportData,
-  getLeaseReport,
-  getTotalAmount,
-  getTotalAmountUnpaid,
-  getTotalAmountPaid,
-  getNumPropertyTenant
+  updatePasswordLandlord
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -115,8 +106,17 @@ exports.getUser = (req, res) => {
   // console.log(req.user);
   res.status(200).json({
     user: req.user.userName,
-    email: req.user.email,
-    userId: req.user.userId
+    email:req.user.email,
+    userId:req.user.userId,
+    businessName:req.user.businessName,
+    phone:req.user.phone,
+    streetAddress:req.user.streetAddress,
+    businessAddress:req.user.BusinessAddress,
+    lastName:req.user.lastName,
+    firstName:req.user.firstName,
+    image:req.user.image,
+    imageKey:req.user.imageKey,
+    planID:req.user.planID
   });
 };
 
@@ -214,10 +214,12 @@ exports.Signinall = async function (req, res) {
   }
 };
 exports.updateUserProfile = async function (req, res) {
-  const { firstName, lastName, email, phone, planID, BusinessName, streetAddress, BusinessAddress, imageUrl, imageKey } = req.body;
+  const { firstName, lastName, email, phone, businessName, streetAddress, businessAddress, imageUrl, imageKey } = req.body;
   const { userId } = req.user;
+  console.log(req.body)
+  console.log(userId)
   try {
-    if (!firstName || !lastName || !email || !phone || !planID || !BusinessName || !streetAddress || !BusinessAddress || !imageUrl || !imageKey) {
+    if(!firstName || !lastName || !email || !phone || !businessName || !streetAddress || !businessAddress || !imageUrl || !imageKey){
       throw new Error("Please fill all the fields");
     }
     const selectResult = await queryRunner(selectQuery("users", "id"), [
@@ -225,7 +227,7 @@ exports.updateUserProfile = async function (req, res) {
     ]);
     // current date 
     const now = new Date();
-    const created_at = now.toISOString().slice(0, 19).replace("T", " ");
+    // const created_at = now.toISOString().slice(0, 19).replace("T", " ");
 
     const isUserExist = selectResult[0][0];
     if (!isUserExist) {
@@ -237,8 +239,8 @@ exports.updateUserProfile = async function (req, res) {
         lastName,
         email,
         phone,
-        planID,
-        BusinessName, streetAddress, BusinessAddress, created_at,
+        now,
+        businessName, streetAddress, businessAddress,
         imageUrl,
         imageKey,
         userId,
@@ -251,6 +253,7 @@ exports.updateUserProfile = async function (req, res) {
       }
     }
   } catch (error) {
+    console.log(error)
     res.status(400).json({
       message: error.message,
     });
@@ -270,7 +273,7 @@ exports.updatePlanId = async function (req, res) {
     }
     if (isUserExist) {
       const updateUserParams = [
-        req.body.planID || null,
+        req.body.planID,
         userId,
       ];
       const updateResult = await queryRunner(updatePlanId, updateUserParams);
@@ -429,7 +432,7 @@ exports.resendCode = async (req, res) => {
 
 //  ############################# Get Pricing Plan Start ############################################################
 exports.pricingPlan = async (req, res) => {
-  try {
+  try { 
     const pricingPlanResult = await queryRunner(selectQuery("plan"));
     if (pricingPlanResult.length > 0) {
       const data = JSON.parse(JSON.stringify(pricingPlanResult));
