@@ -757,7 +757,7 @@
 
                         <div class="card mt-5" style="background: linear-gradient(180deg, #232323 0%, #434343 100%);">
                             <div class="card-body">
-                                <div class="row">
+                                <div class="roww" style="display: flex;">
                                     <div class="col-lg-9">
                                         <h3 class="page-titlee text-white"
                                             style="font-weight: 100; margin-bottom: 0px;">Welcome to Spade Portal</h3>
@@ -780,7 +780,7 @@
                         </div>
                         <!-- PAGE-HEADER END -->
                         <!-- ROW 0  -->
-                        <div class="row">
+                        <div class="roww" style="display: flex;">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
                                 <div class="d-flex justify-content-end">
                                     <div class="form-group me-3">
@@ -897,19 +897,64 @@
 
                             <!-- ROW-2 -->
                             <div class="row">
-                                <div class="col-lg-4 col-md-12">
+                                <!-- <div class="col-lg-4 col-md-12">
                                     <div class="card" style="height: 440px;" id="property-status">
                                         <div class="card-header justify-content-start">
-                                            <h3 class="card-title"><b>Properties Status</b></h3>
+                                            <h3 class="card-title"><b>Properties Statusssssss</b></h3>
                                         </div>
                                         <div class="card-body">
                                             <div id="chart-donut4" class="chartsh"></div>
                                         </div>
                                     </div>
+                                </div> -->
+
+                                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
+                                    <div class="card overflow-hidden counter-card-hover" id="card4">
+                                        <div class="card-body">
+                                            <div class="d-flex">
+                                                <div class="mt-2">
+                                                    <h6 class=""><b>Total Property</b></h6>
+                                                    <h1 class="mb-0 number-font"><b>$0</b></h1>
+                                                </div>
+                                                <div class="ms-auto">
+                                                    <div class="chart-wrapper mt-1">
+                                                        <canvas id="costchart"
+                                                            class="h-8 w-9 chart-dropshadow"></canvas>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <span class="text-muted fs-12 float-start"><span
+                                                    class="text-warning"><i
+                                                        class="fe fe-plus text-warning"></i>4.5%
+                                        </div>
+                                    </div>
                                 </div>
+
+                                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
+                                    <div class="card overflow-hidden counter-card-hover" id="card4">
+                                        <div class="card-body">
+                                            <div class="d-flex">
+                                                <div class="mt-2">
+                                                    <h6 class=""><b>Total Tenant</b></h6>
+                                                    <h1 class="mb-0 number-font"><b>$0</b></h1>
+                                                </div>
+                                                <div class="ms-auto">
+                                                    <div class="chart-wrapper mt-1">
+                                                        <canvas id="costchart"
+                                                            class="h-8 w-9 chart-dropshadow"></canvas>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <span class="text-muted fs-12 float-start"><span
+                                                    class="text-warning"><i
+                                                        class="fe fe-plus text-warning"></i>4.5%
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <!-- COL END -->
 
-                                <div class="col-xl-8">
+                                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12">
                                     <div class="card" id="task">
                                         <div class="card-header" style="display: flex; justify-content: space-between;">
                                             <h2 class="card-title text-dark"><b>Recent Tasks</b></h2>
@@ -2098,7 +2143,7 @@
             }
     </script>
     <script>
-      var COL_WIDTH = 62; // should be calculated dynamically, and recalculated at window resize
+      var COL_WIDTH = 62; 
       var GUTTER_WIDTH = 30;
     
       var COL_WIDTHS = {
@@ -2141,13 +2186,6 @@
           console.log('set colWidth to', colWidth, $('.main-container').width());
         });
     
-        // Restoring HTML layout from local storage on page load
-        // var storedLayout = localStorage.getItem('htmlLayout');
-        // if (storedLayout) {
-        //   $('#container').html(storedLayout);
-        // }
-    
-        // Saving HTML layout to local storage when changes are made by dragging
         d.on('dragend', function() {
           var htmlLayout = $('#container').html();
           localStorage.setItem('htmlLayout', htmlLayout);
