@@ -585,7 +585,9 @@ exports.taskByID = async (req, res) => {
 //  ############################# Get vendor category End ############################################################
 exports.getVendorCategory = async (req, res) => {
   try {
-    const categoryResult = await queryRunner(selectQuery("vendorcategory"));
+    // const landlordID = req.userid;
+    const { userId} = req.user
+    const categoryResult = await queryRunner( selectQuery("vendorcategory", "landLordId"),[userId]);
     if (categoryResult[0].length > 0) {
       res.status(200).json({
         data: categoryResult[0],
