@@ -7210,8 +7210,8 @@
                                                                         <tr class="tr">
                                                                             <td>
                                                                                 <label for=""><b>Categories</b></label>
-                                                                                <input type="text" name=""
-                                                                                    class="form-control">
+                                                                                <input type="text" name="vendor-category"
+                                                                                    class="form-control vendor-category">
                                                                             </td>
                                                                             <td><button type="button" class="btn"
                                                                                     id="del-btn5"
@@ -7234,7 +7234,7 @@
                                                                     class="btn btn-light btn-pill m-2 w-100">Close</button>
                                                             </a>
                                                             <button
-                                                                class="btn btn-primary btn-pill m-2 w-40">Save</button>
+                                                                class="btn btn-primary btn-pill m-2 w-40" id="save-vendor">Save</button>
                                                         </div>
                                                     </div>
 
@@ -8378,7 +8378,7 @@
         <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 
         <script>
-            let categoryData; var counter = 0;
+            let categoryData; var counter = 0;var image_url=" ";var image_key=" ";
             let password_validate1 = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
             var validconfirmPassword1 = document.getElementById("id_password1");
             let confirmPassword1 = document.getElementById("id_password2");
@@ -8468,6 +8468,10 @@
                             $("#businessName").val(toTitleCase(response.businessName || ""))
                             $("#streetAddress").val(toTitleCase(response.streetAddress || ""))
                             $("#businessAddress").val(toTitleCase(response.businessAddress || ""))
+                            if(response.image){
+                                image_url=response.image
+                                image_key=response.imageKey
+                            }
                             $('#profile').css('background-image', 'url(' + response.image + ')').addClass('hasImage');
                             $(`#${response.planID}`).addClass("card-primary")
                         },
@@ -8545,6 +8549,44 @@
                     });
                 }
                 getData()
+                $("#save-vendor").click(()=>{
+                    const data=[]
+                    $('#add-item-container5 .tr').each(function () {
+                        var categoryName = $(this).find('.vendor-category').val();
+                        if (typeof categoryName !== 'undefined') {
+
+                            var row = {
+                                category: categoryName,
+                            };
+                            data.push(row);
+                        }
+                        // Create an object for each row's data
+
+                    });
+                    console.log(data)
+                    $.ajax({
+                        url: 'http://localhost:3000/api/spade/addVendorCategory', // Replace with your actual backend endpoint URL
+                        method: 'POST',
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        data: JSON.stringify(data),
+                        contentType: 'application/json',
+                        success: function (response) {
+                            // Handle the success response
+                            $("#myModal_success p").text("Succesfully Updated!!!")
+                            $("#myModal_success").modal("show")
+                            getData()
+                            // Perform any additional actions or show success message
+                        },
+                        error: function (xhr, status, error) {
+                            // Handle the error response
+                            console.log('Error occurred:', error);
+                            // Perform error handling or show error message
+                        }
+                    });
+                })
+                
                 $('#save-categories').click(function () {
                     var data = []; // Array to store data for each row
 
@@ -8725,8 +8767,8 @@
                         businessName: $("#businessName").val(),
                         businessAddress: $("#businessAddress").val(),
                         streetAddress: $("#streetAddress").val(),
-                        imageUrl: " ",
-                        imageKey: " "
+                        imageUrl: image_url,
+                        imageKey: image_key
                     }
                     const userForm = new FormData()
                     if (file) {
@@ -9141,7 +9183,7 @@
                                                                             <td>
                                                                                 <label for=""><b>Categories</b></label>
                                                                                 <input type="text" name=""
-                                                                                    class="form-control">
+                                                                                    class="form-control vendor-category">
                                                                             </td>
                                                                             <td><button type="button" class="btn"
                                                                                     id="del-btn5"

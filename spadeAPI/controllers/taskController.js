@@ -848,26 +848,29 @@ exports.deleteTask = async (req, res) => {
 
 // add vendor category
 exports.addVendorCategory = async (req, res) => {
-  const { category } = req.body;
+  const categories = req.body;
+  const { userId } = req.user;
   try {
-    const { userId } = req.user;
-    const categoryCheckResult = await queryRunner(
-      selectQuery("vendorcategory", "category"),
-      [category]
-    );
-    if (categoryCheckResult[0].length > 0) {
-      return res.send("Category already exists");
-    } else {
-      const categoryResult = await queryRunner(
-        addVendorCategory,
-        [category, userId]
+    for(let item of categories){
+      const {category}=item
+      const categoryCheckResult = await queryRunner(
+        selectQuery("vendorcategory", "category"),
+        [category]
       );
-      if (categoryResult.affectedRows === 0) {
-        return res.status(400).send("Error1");
+      if (categoryCheckResult[0].length > 0) {
+        
+      }else {
+        const categoryResult = await queryRunner(
+          addVendorCategory,
+          [category, userId]
+        );
+        if (categoryResult.affectedRows === 0) {
+          return res.status(400).send("Error1");
+        }
       }
     }
     res.status(200).json({
-      message: " Category created successful",
+      message: "Category created successful",
     });
   } catch (error) {
     console.log(error);

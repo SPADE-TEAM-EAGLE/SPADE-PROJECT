@@ -1,4 +1,4 @@
-const sendMail = require('../sendmail/sendmail.js');
+const sendMail = require('../sendmail/sendmail');
 const {
   selectQuery,
   deleteQuery,
