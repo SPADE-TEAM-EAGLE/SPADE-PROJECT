@@ -923,7 +923,7 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-lg-3 col-xl-3 col-md-8 col-sm-12 mb-3">
-                                                                                <div class="h-100 card p-3 pricing-card card-boder-warning" style="border-top: 17px solid #F7C042 !important;">
+                                                                                <div class="h-100 card p-3 pricing-card card-boder-warning" style="border-top: 17px solid #F7C042 !important;" id="5">
                                                                                     <div class="card-header d-block text-justified pt-2">
                                                                                         <strong class="fs-30 mb-1 font-weight-bold">
                                                                                         Basic
@@ -1001,7 +1001,7 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-lg-3 col-xl-3 col-md-8 col-sm-12 mb-3">
-                                                                                <div class="h-100 card p-3 pricing-card card-boder-light-green" style="border-top: 17px solid #0CA7B6 !important;">
+                                                                                <div class="h-100 card p-3 pricing-card card-boder-light-green" style="border-top: 17px solid #0CA7B6 !important;" id="6">
                                                                                     <div class="card-header d-block text-justified pt-2">
                                                                                         <b class="fs-30 mb-1 font-weight-bold">
                                                                                         Pro
@@ -1077,7 +1077,7 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-lg-3 col-xl-3 col-md-8 col-sm-12 mb-3">
-                                                                                <div class="h-100 card p-3 pricing-card card-boder-light-blue" style="border-top: 17px solid #1D80C4 !important;">
+                                                                                <div class="h-100 card p-3 pricing-card card-boder-light-blue" style="border-top: 17px solid #1D80C4 !important;" id="7">
                                                                                     <div class="d-flex justify-content-end" style="
                                                                                 margin-top: -29px;
                                                                             ">
@@ -1239,7 +1239,7 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-lg-3 col-xl-3 col-md-8 col-sm-12 mb-3">
-                                                                                <div class="h-100 card p-3 pricing-card card-boder-warning" style="border-top: 17px solid #F7C042 !important;">
+                                                                                <div class="h-100 card p-3 pricing-card card-boder-warning" style="border-top: 17px solid #F7C042 !important;" id="2">
                                                                                     <div class="card-header d-block text-justified pt-2">
                                                                                         <strong class="fs-30 mb-1 font-weight-bold">
                                                                                         Basic
@@ -1337,7 +1337,7 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-lg-3 col-xl-3 col-md-8 col-sm-12 mb-3">
-                                                                                <div class="h-100 card p-3 pricing-card card-boder-light-green " style="border-top: 17px solid #0CA7B6 !important;">
+                                                                                <div class="h-100 card p-3 pricing-card card-boder-light-green " style="border-top: 17px solid #0CA7B6 !important;" id="3">
                                                                                     <div class="card-header d-block text-justified pt-2">
                                                                                         <span class="fs-30 mb-1 font-weight-bold">
                                                                                         Pro
@@ -1428,7 +1428,7 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-lg-3 col-xl-3 col-md-8 col-sm-12 mb-3">
-                                                                                <div class="h-100 card p-3 pricing-card card-boder-light-blue" style="border-top: 17px solid #1D80C4 !important;">
+                                                                                <div class="h-100 card p-3 pricing-card card-boder-light-blue" style="border-top: 17px solid #1D80C4 !important;" id="4">
                                                                                     <div class="d-flex justify-content-end" style="
                                                                            margin-top: -29px;
                                                                        ">
@@ -2668,6 +2668,30 @@
             });
         });
         $(document).ready(function() {
+            $.ajax({
+                    url: 'https://backend.app.spaderent.com/api/spade/pricingPlan',
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        // console.log()
+                        response.data[0].forEach((card)=>{
+                            // $(`.${card.id}`).each(function(){
+                            //     this
+                            // })
+                            console.log($(`#${card.id}`))
+                            $(`#${card.id} .total-amount`).text(card.plantotalAmount)
+                            $(`#${card.id} .amount-payable`).text(card.planDiscountedAmount)
+                        })
+                    },
+                    error: function (xhr, status, error) {
+                        console.log('Error occurred while fetching state and city data.');
+                        console.log(xhr);
+                        console.log(error);
+                        // console.log('Error occurred while fetching state and city data.');
+                    }
+                });
             // $(document).on("focusout", "#email", function(a) {
             //     var email = $("#email").val();
             //     $.ajax({

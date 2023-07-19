@@ -63,7 +63,7 @@ exports.updatePasswordLandlord =
 exports.insertInUsers =
   "INSERT INTO users (id,FirstName, LastName, Email, Phone, Password, PlanID,created_at) VALUES (?,?, ?, ?, ?, ?, ?, ?)";
 // updated user query
-exports.updateUser = "UPDATE users SET FirstName = ?, LastName = ?, Email = ?, Phone = ?, updated_at = ?, BusinessName = ?, streetAddress = ?, BusinessAddress = ?, created_at = ?, image = ? , imageKey = ? WHERE id = ?";
+exports.updateUser = "UPDATE users SET FirstName = ?, LastName = ?, Email = ?, Phone = ?, updated_at = ?, BusinessName = ?, streetAddress = ?, BusinessAddress = ?, image = ? , imageKey = ? WHERE id = ?";
 // update plan id in user table
 exports.updatePlanId = "UPDATE users SET PlanID = ? WHERE id = ?";
 exports.insertInProperty =
@@ -221,4 +221,8 @@ exports.updateVerifiedStatusQuery = "UPDATE users SET userVerified = ? where id 
 
 // add category in vendorcategory table
 exports.addVendorCategory = "INSERT INTO vendorcategory (category,landLordId) VALUES (?,?)";
+// exports.createInvoiceCategories = "INSERT INTO InvoiceCategories (categorieName,landLordId) VALUES (?,?)";
 
+// added some column fields
+exports.createInvoiceCategories = "INSERT INTO InvoiceCategories (categorieName,landLordId,setTaxes,taxable) VALUES (?,?,?,?)";
+exports.updateInvoiceCategories = "UPDATE InvoiceCategories SET categorieName = ?,setTaxes = ?, taxable=? WHERE id = ? AND landLordId = ?";
