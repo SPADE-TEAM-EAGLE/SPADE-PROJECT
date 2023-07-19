@@ -518,7 +518,7 @@
                                         Verification Code has been expired!
     </span>
                                                                         <span class="mt-1" id="verify" style="float: right; font-weight: 700">
-                                        Verification Code will expire in
+                                        <span id="verification-text">Verification Code will expire in</span>
                                         <span style="color: #1467b0" id="counter">
                                           2:00</span
                                         >
@@ -683,7 +683,7 @@
                 var verification = $("#verification").val();
 
                 $.ajax({
-                    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/verifyResetEmailCode',
+                    url: 'https://backend.app.spaderent.com/api/spade/verifyResetEmailCode',
                     type: 'POST',
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({
@@ -708,33 +708,44 @@
     </script>
     <script>
 var counterElement = document.getElementById("counter");
-        
 var send_again = document.getElementById("send_again");
+var interval;
 
-var seconds = localStorage.getItem("countdown_seconds") || 120; // Get the saved value or default to 120 seconds
-var interval = setInterval(countDown, 1000);
+if (localStorage.getItem('countdown_seconds') !== 0 || localStorage.getItem('countdown_seconds') === null) {
+  var seconds = localStorage.getItem("countdown_seconds") || 120; // Get the saved value or default to 120 seconds
+  interval = setInterval(countDown, 1000);
+  document.getElementById("verification-text").style.display = "inline";
+} else {
+  counterElement.style.display = "none";
+  send_again.style.display = "inline";
+  document.getElementById("verification-text").style.display = "none";
+}
 
 function countDown() {
   var minutes = Math.floor(seconds / 60);
   var remainingSeconds = seconds % 60;
 
-
   if (remainingSeconds < 10) {
     remainingSeconds = "0" + remainingSeconds;
   }
 
-  counterElement.innerHTML = minutes + ":" + remainingSeconds + " minutes";
+  if (minutes === 0) {
+    counterElement.innerHTML = remainingSeconds + " seconds";
+  } else {
+    counterElement.innerHTML = minutes + ":" + remainingSeconds + " minutes";
+  }
 
-  if (seconds == 0) {
+  if (seconds === 0) {
     clearInterval(interval);
     counterElement.style.display = "none";
     send_again.style.display = "inline";
-    
+    document.getElementById("verification-text").style.display = "none";
     document.getElementById("expired-spans").style.display = "block";
-    localStorage.removeItem('countdown_seconds')
+    localStorage.removeItem('countdown_seconds');
   } else {
     seconds--;
     localStorage.setItem("countdown_seconds", seconds); // Save the current value of seconds
+    document.getElementById("verification-text").style.display = "inline";
   }
 }
 
@@ -742,6 +753,7 @@ function countDown() {
 send_again.addEventListener("click", function() {
   localStorage.removeItem("countdown_seconds");
 });
+
 
         // var seconds = 120;
         // var counterElement = document.getElementById("counter");
@@ -775,7 +787,7 @@ send_again.addEventListener("click", function() {
             const user_id = urlParams.get("id");
             $(document).on("click", "#send_again", function(a) {
                 $.ajax({
-                    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/resendCode',
+                    url: 'https://backend.app.spaderent.com/api/spade/resendCode',
                     type: 'POST',
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({
@@ -787,6 +799,7 @@ send_again.addEventListener("click", function() {
                         counterElement.innerHTML = "2:00";
                         counterElement.style.display = "inline";
                         send_again.style.display = "none";
+                        document.getElementById("verification-text").style.display="inline"
                         interval = setInterval(countDown, 1000);
                     },
                     error: function(xhr, status, error) {

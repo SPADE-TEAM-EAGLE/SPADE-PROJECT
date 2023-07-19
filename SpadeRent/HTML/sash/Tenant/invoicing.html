@@ -520,15 +520,15 @@
 
 <body class="app sidebar-mini ltr light-mode">
 
-  <!-- GLOBAL-LOADER -->
-  <div id="preloader" class="tlp-preloader">
-    <div class="animation-preloader">
-        <div class="tlp-spinner"></div>
-        <img src="../assets/images/logo-preloader.png" alt="Preloader" style="width: 65px;">
+    <!-- GLOBAL-LOADER -->
+    <div id="preloader" class="tlp-preloader">
+        <div class="animation-preloader">
+            <div class="tlp-spinner"></div>
+            <img src="../assets/images/logo-preloader.png" alt="Preloader" style="width: 65px;">
+        </div>
     </div>
-</div>
-<!-- /GLOBAL-LOADER -->
-    
+    <!-- /GLOBAL-LOADER -->
+
     <!-- Modal -->
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
@@ -999,7 +999,7 @@
                                                 <a class="dropdown-item" href="lockscreen.html">
                                                     <i class="dropdown-icon fe fe-lock"></i> Lockscreen
                                                 </a> -->
-                                                <a class="dropdown-item" href="login_module.html" onclick="logout()">
+                                                <a class="dropdown-item" onclick="logout()" onclick="logout()">
                                                     <i class="dropdown-icon fe fe-alert-circle"></i> Sign out
                                                 </a>
                                             </div>
@@ -1082,9 +1082,9 @@
                             </li>
 
                             <li class="slide">
-                                <a class="side-menu__item" data-bs-toggle="slide" href="chats.html"><i
+                                <a class="side-menu__item" data-bs-toggle="slide" href="coming-soon.html"><i
                                     class="side-menu__icon fi fi-rs-comment"></i><span
-                                    class="side-menu__label">Chats</span>
+                                    class="side-menu__label">Messages</span>
                                     <!-- <i class="angle fe fe-chevron-right"></i> -->
                                    
                                    </a>
@@ -1093,7 +1093,7 @@
 
 
                             <li class="slide">
-                                <a class="side-menu__item" data-bs-toggle="slide" href="notifications.html">
+                                <a class="side-menu__item" data-bs-toggle="slide" href="coming-soon.html">
                                     <i class="side-menu__icon fi fi-rs-bell"></i>
                                     <span class="side-menu__label">Notifications</span>
                                 </a>
@@ -1204,7 +1204,7 @@
                                                 </div> -->
                                                 <div class="main-header-center d-none d-lg-block m-0">
                                                     <button class="btn px-0 pt-2"><i class="fe fe-search" aria-hidden="true"></i></button>
-                                                    <input type="text" class="form-control" id="typehead" placeholder="Search for results..." autocomplete="off" style="width: 230px;">    
+                                                    <input type="text" class="form-control" id="typehead" placeholder="Search for results..." autocomplete="off" style="width: 230px;">
                                                 </div>
                                             </div>
                                         </div>
@@ -1268,7 +1268,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody id="table_body">
-                                                    
+
 
 
                                                 </tbody>
@@ -1777,7 +1777,7 @@
                     <div class="row">
                         <div class="col-lg-3">
                             <label><b>Tenant Name</b></label>
-                            <p class="text-primary"><b  id="tenantName"></b></p>
+                            <p class="text-primary"><b id="tenantName"></b></p>
                         </div>
                         <div class="col-lg-3">
                             <label><b>Invoice Type</b></label>
@@ -1799,8 +1799,7 @@
                         <div class="col-lg-12 mt-5">
                             <div style="display: flex;">
                                 <p class="text-primary"><b>Line Items</b></p>
-                                <hr
-                                    style="height: 2px; background: black; width: 88%; margin-left: 83px; position: absolute; margin-top: 10px;">
+                                <hr style="height: 2px; background: black; width: 88%; margin-left: 83px; position: absolute; margin-top: 10px;">
                             </div>
                         </div>
                         <!-- <div class="col-lg-10 mt-5">
@@ -1810,15 +1809,14 @@
                     <div class="row mt-5">
                         <div class="col-12">
                             <div class="table-responsive">
-                                <table class="table text-nowrap table-borderless text-md-nowrap mg-b-0 mb-0"
-                                    id="lineItemsTable">
+                                <table class="table text-nowrap table-borderless text-md-nowrap mg-b-0 mb-0" id="lineItemsTable">
                                     <thead>
                                         <tr>
                                             <th>Category</th>
                                             <th>Property</th>
                                             <th>Memo</th>
                                             <th>Amount</th>
-                                            
+
                                         </tr>
                                     </thead>
                                     <tbody id="view-invoice-line-item">
@@ -2330,7 +2328,7 @@
                 // Populate the table with the updated data
                 // Call your AJAX request or any other method to fetch the filtered data and populate the table
                 $.ajax({
-                    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/allproperty',
+                    url: 'https://backend.app.spaderent.com/api/spade/allproperty',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -2428,7 +2426,7 @@
 
             // Send the form data to the server using AJAX
             $.ajax({
-                url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/property',
+                url: 'https://backend.app.spaderent.com/api/spade/property',
                 type: 'POST',
                 data: formData,
                 contentType: false,
@@ -2494,7 +2492,7 @@
 
             formData.append("existingImages", existingImageNames)
             $.ajax({
-                url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/updateProperty',
+                url: 'https://backend.app.spaderent.com/api/spade/updateProperty',
                 // url: 'http://ec2-54-158-103-230.compute-1.amazonaws.com:3000/api/spade/updateProperty',
                 type: 'PUT',
                 data: formData,
@@ -2517,7 +2515,7 @@
                 // delete using AJAX
                 $('#myModal_delete').modal('hide');
                 $.ajax({
-                    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/propertyDelete',
+                    url: 'https://backend.app.spaderent.com/api/spade/propertyDelete',
                     type: 'DELETE',
                     data: JSON.stringify({
                         "id": propertyId
@@ -2543,7 +2541,7 @@
             $("#global-loader").fadeIn("fast")
                 // console.log(22)
             $.ajax({
-                url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/allproperty',
+                url: 'https://backend.app.spaderent.com/api/spade/allproperty',
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -2740,10 +2738,10 @@
         }
         getData()
     </script> -->
-<script>
-    $(document).ready(()=>{
+    <script>
+        $(document).ready(() => {
             $.ajax({
-                url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getTenantByID',
+                url: 'https://backend.app.spaderent.com/api/spade/getTenantByID',
                 type: 'GET',
                 contentType: "application/json; charset=utf-8",
                 // processData: false,
@@ -2755,7 +2753,7 @@
                     console.log(response)
                     console.log(response.data)
                     $("#tenant-name").empty()
-                
+
 
 
                     $("#tenant-name").append(`<span style="font-weight: 300;">Welcome</span> ${response.data.firstName +" "+response.data.lastName}`)
@@ -2766,18 +2764,20 @@
                     window.alert('Error: ' + error);
                 }
             });
-        // console.log(1222222)
-        let invoiceData;let tenantData
-        $(document).on('click', ".view-btnn", function (e) {
+            // console.log(1222222)
+            let invoiceData;
+            let tenantData
+            $(document).on('click', ".view-btnn", function(e) {
                 e.preventDefault();
                 const invoiceIdElement = $(this).closest("tr").find(".invoice-id");
                 invoiceId = invoiceIdElement.text();
                 const data1 = invoiceData.find(obj => obj.invoiceID == invoiceId);
                 console.log(tenantData)
-                // const data2 = tenantData.find(obj => obj.tenantID == data1.tenantID)
+                    // const data2 = tenantData.find(obj => obj.tenantID == data1.tenantID)
 
                 const data = {
-                    ...data1,...tenantData
+                    ...data1,
+                    ...tenantData
                 }
                 console.log(data)
                 $("#tenantName").text(data.firstName + " " + data.lastName)
@@ -2786,25 +2786,25 @@
                 $("#invoiceStatus").text(data.status)
                 $("#propertyAddress").text(data.pAddress)
                 $("#notes").text(data.note)
-                // $("#invoiceCategory").text(data.invoiceType)
-                // $("#invoiceProperty").text(data.invoiceType)
-                // $("#invoiceMemo").text(data.invoiceType)
-                // $("#invoiceAmount").text(data.invoiceType)
-                // $("#client-id").append(`<h5 class="fw-bold" style="color: 
-                //                 #562AC8;">BILLED TO</h5>
-                //                     <p class="text-dark">${data.firstName + " " + data.lastName}<br>${data.tAddress
-                //     }<br>${data.tCity},
-                //                         ${data.tState}<br>${data.tZipcode}<br>United States<br>${data.tPhoneNumber}</p>`)
-                // console.log(1)
-                // $("#owner-id").empty()
-                // $("#owner-id").append(`                                    <h5 class="text-dark fw-bold">${data.companyName}</h5>
-                //                     <p class="text-dark">${data.pAddress}<br>${data.pCity}, ${data.pState}<br>${data.pZipCode}<br>United
-                //                         States<br>1-888-123-8910</p>`)
-                // $("#table-body").empty()
-                // var dateObj = new Date(data.created_at);
-                // var day = dateObj.getDate();
-                // var month = dateObj.getMonth() + 1;
-                // var year = dateObj.getFullYear();
+                    // $("#invoiceCategory").text(data.invoiceType)
+                    // $("#invoiceProperty").text(data.invoiceType)
+                    // $("#invoiceMemo").text(data.invoiceType)
+                    // $("#invoiceAmount").text(data.invoiceType)
+                    // $("#client-id").append(`<h5 class="fw-bold" style="color: 
+                    //                 #562AC8;">BILLED TO</h5>
+                    //                     <p class="text-dark">${data.firstName + " " + data.lastName}<br>${data.tAddress
+                    //     }<br>${data.tCity},
+                    //                         ${data.tState}<br>${data.tZipcode}<br>United States<br>${data.tPhoneNumber}</p>`)
+                    // console.log(1)
+                    // $("#owner-id").empty()
+                    // $("#owner-id").append(`                                    <h5 class="text-dark fw-bold">${data.companyName}</h5>
+                    //                     <p class="text-dark">${data.pAddress}<br>${data.pCity}, ${data.pState}<br>${data.pZipCode}<br>United
+                    //                         States<br>1-888-123-8910</p>`)
+                    // $("#table-body").empty()
+                    // var dateObj = new Date(data.created_at);
+                    // var day = dateObj.getDate();
+                    // var month = dateObj.getMonth() + 1;
+                    // var year = dateObj.getFullYear();
                 $("#view-invoice-line-item").empty()
                 data.memo.forEach((item) => {
 
@@ -2823,20 +2823,20 @@
 
 
                 })
-                $("#totalAmount").text('$ '+data.totalAmount)
+                $("#totalAmount").text('$ ' + data.totalAmount)
                 $("#view-invoice-images").empty()
-                if(data.invoiceImages){
-                    const images=data.invoiceImages.split(",")
-                    
-                images.forEach((image)=>{
-                    $("#view-invoice-images").append(`
+                if (data.invoiceImages) {
+                    const images = data.invoiceImages.split(",")
+
+                    images.forEach((image) => {
+                        $("#view-invoice-images").append(`
                             <img src="../../../../spadeAPI/uploads/${image}" width=200px height=200px alt=""> &nbsp;`)
-                })
+                    })
                 }
                 $("#viewModal-invoice").modal("show")
             })
-        $.ajax({
-                url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getTenantByID',
+            $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/getTenantByID',
                 type: 'GET',
                 contentType: "application/json; charset=utf-8",
                 // processData: false,
@@ -2845,52 +2845,52 @@
                 },
                 success: function(response) {
                     // console.log(1111111)
-                    tenantData=response.data
-                    // console.log(data)
-                    // $(".company-name").text(`${data[0][0].companyName} | ${data[0][0].firstName+" "+data[0][0].lastName}`)
+                    tenantData = response.data
+                        // console.log(data)
+                        // $(".company-name").text(`${data[0][0].companyName} | ${data[0][0].firstName+" "+data[0][0].lastName}`)
                 },
                 error: function(xhr, status, error) {
                     window.alert('Error: ' + error);
                 }
             });
-        $.ajax({
-                    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getAllInvoicesTenant',
-                    type: 'GET',
-                    contentType: false,
-                    processData: false,
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-                    success: function (response) {
-                        if (response.message == "No data found") {
-                            // window.location = './invoicing.html'
-                        }
+            $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/getAllInvoicesTenant',
+                type: 'GET',
+                contentType: false,
+                processData: false,
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function(response) {
+                    if (response.message == "No data found") {
+                        // window.location = './invoicing.html'
+                    }
 
-                        invoiceData = response.data[0]
-                        console.log(response.data[0])
+                    invoiceData = response.data[0]
+                    console.log(response.data[0])
 
-                        var tableBody = $('#table_body');
-                        tableBody.empty();
-                        // console.log(data[0])
-                        let tenantNames = []
+                    var tableBody = $('#table_body');
+                    tableBody.empty();
+                    // console.log(data[0])
+                    let tenantNames = []
 
-                        response.data[0]?.forEach(function (invoice) {
+                    response.data[0] ?.forEach(function(invoice) {
 
 
-                            var invoiceNumber = '<td class="invoice-id" style="font-weight: 600;">' + invoice.invoiceID + '</td>';
+                        var invoiceNumber = '<td class="invoice-id" style="font-weight: 600;">' + invoice.invoiceID + '</td>';
 
-                            // var tenantName = '<td class="tenantName" style="font-weight: 600;">' + invoice.firstName + invoice.lastName + `<br><small>${invoice.tPhone}</small>` + '</td>';
-                            var memoDescription = '<td class="memo" style="font-weight: 600;">' + invoice.memo[0].memo + `<br><small>${invoice.invoiceType}</small>` + '</td>';
+                        // var tenantName = '<td class="tenantName" style="font-weight: 600;">' + invoice.firstName + invoice.lastName + `<br><small>${invoice.tPhone}</small>` + '</td>';
+                        var memoDescription = '<td class="memo" style="font-weight: 600;">' + invoice.memo[0].memo + `<br><small>${invoice.invoiceType}</small>` + '</td>';
 
-                            var dateObj = new Date(invoice.created_at);
-                            var day = dateObj.getDate();
-                            var month = dateObj.getMonth() + 1;
-                            var year = dateObj.getFullYear();
-                            var invoiceDate = '<td class="date" style="font-weight: 600;">' + day + "/" + month + "/" + year + '</td>';
-                            var propertyName = '<td class="propertyName" style="font-weight: 600;">' + invoice.propertyName + `<br><small>${invoice.tPhone}</small>` + '</td>';
-                            var invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + invoice.totalAmount + '<span> $</span>' + `<br><small>Next Due Date: November-12-2020</small>` + '</td>';
-                            var status = `<td class="status" style="font-weight: 600;${invoice.status === "Unpaid" ? 'color:blue;' : 'color:green'}">` + invoice.status + '</td>';
-                            var dropdownMenu = `<td><i class="fe fe-more-vertical three-dots"
+                        var dateObj = new Date(invoice.created_at);
+                        var day = dateObj.getDate();
+                        var month = dateObj.getMonth() + 1;
+                        var year = dateObj.getFullYear();
+                        var invoiceDate = '<td class="date" style="font-weight: 600;">' + day + "/" + month + "/" + year + '</td>';
+                        var propertyName = '<td class="propertyName" style="font-weight: 600;">' + invoice.propertyName + `<br><small>${invoice.tPhone}</small>` + '</td>';
+                        var invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + invoice.totalAmount + '<span> $</span>' + `<br><small>Next Due Date: November-12-2020</small>` + '</td>';
+                        var status = `<td class="status" style="font-weight: 600;${invoice.status === "Unpaid" ? 'color:blue;' : 'color:green'}">` + invoice.status + '</td>';
+                        var dropdownMenu = `<td><i class="fe fe-more-vertical three-dots"
                                                                 data-bs-toggle="dropdown"></i>
 
                                                             <ul class="dropdown-menu">
@@ -2909,41 +2909,44 @@
                                                         </td>`
 
 
-                            var row = '<tr>' + invoiceNumber +  memoDescription + invoiceDate +
-                                propertyName + invoiceAmount + status + dropdownMenu + '</tr>';
+                        var row = '<tr>' + invoiceNumber + memoDescription + invoiceDate +
+                            propertyName + invoiceAmount + status + dropdownMenu + '</tr>';
 
-                            // Append the row to the table body
-                            tableBody.append(row);
-                        });},error:function(){
+                        // Append the row to the table body
+                        tableBody.append(row);
+                    });
+                },
+                error: function() {
 
-                        }})
-                        $('#typehead').on('keyup', function() {
+                }
+            })
+            $('#typehead').on('keyup', function() {
                 var searchValue = $(this).val().toLowerCase();
                 $('#table_body tr').filter(function() {
                     $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
                 });
             });
-            $('input[type="checkbox"]').change(function () {
+            $('input[type="checkbox"]').change(function() {
                 var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
                 var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
                 console.log(columnIndex, isColumnVisible)
-                // Toggle the visibility of the corresponding column
-                $('table').find('tr').each(function () {
+                    // Toggle the visibility of the corresponding column
+                $('table').find('tr').each(function() {
                     var column = $(this).find('th:nth-child(' + columnIndex + '), td:nth-child(' + columnIndex + ')');
                     isColumnVisible ? column.show() : column.hide();
                 });
             });
-    })
-</script>
+        })
+    </script>
     <script>
-        function logout() {    
-          localStorage.removeItem('authtoken'); 
-          window.open('./login_module.html', "_self")                 
-          window.close();
-          console.log('Done');
+        function logout() {
+            localStorage.removeItem('authtoken');
+            window.open('./login_module.html', "_self")
+            window.close();
+            console.log('Done');
         }
-      </script>
-    
+    </script>
+
 </body>
 
 </html>

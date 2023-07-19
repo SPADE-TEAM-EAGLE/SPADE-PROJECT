@@ -553,6 +553,35 @@ color: #000;
         </div>
     </div>
     <!-- /GLOBAL-LOADER -->
+    <div class="modal fade effect-scale" id="modaldemo8" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-l" role="document">
+            <div class="modal-content">
+                <!-- <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+                </div> -->
+                <div class="modal-body pt-5">
+                    <div class="d-flex flex-column justify-content-center align-items-center p-5" style="text-align: center;">
+                        <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" style="max-width: 110px;" class="Rent-logo mb-5"  />
+                        <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
+                        <h6 class="text-default mb-3">Get started with Spade Rent! Continue with Google to verify</h6>
+                        <input type="email" class="form-control form mb-2" style="min-width: 200px;max-width: 350px;" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the name of the property.">
+                        <a class="text-primary mb-4" href="javascript:void(0)">Change Email</a>
+                        <div class="">
+                            <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2">Remind me Later</a>
+                            <a href="javascript:void(0)" class="btn btn-primary btn-pill">Resend Mail</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-primary">Save changes</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
     <!-- Default Offcanvas-->
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
         <div class="offcanvas-header pt-5">
@@ -687,12 +716,12 @@ color: #000;
                         <form class="row g-3" enctype="multipart/form-data">
                             <div class="col-md-4">
                                 <label for="inputEmail1" class="form-label fw-bold">First Name *</label>
-                                <input class="form-control" type="text" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your first name here" data-bs-container="#addModal" id="firstName" required>
+                                <input class="form-control" type="text" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your first name here" pattern="[A-Za-z\s]+" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')" data-bs-container="#addModal" id="firstName" required>
                                 <span class="text-danger d-none">First name is required!</span>
                             </div>
                             <div class="col-md-4">
                                 <label for="inputEmail2" class="form-label fw-bold">Last Name *</label>
-                                <input class="form-control" type="text" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your last name here" data-bs-container="#addModal" id="lastName" required>
+                                <input class="form-control" type="text" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your last name here" pattern="[A-Za-z\s]+" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')" data-bs-container="#addModal" id="lastName" required>
                                 <span class="text-danger d-none">Last name is required!</span>
                             </div>
                             <div class="col-md-4">
@@ -707,7 +736,7 @@ color: #000;
                             </div>
                             <div class="col-md-6">
                                 <label for="inputEmail3" class="form-label fw-bold">City</label>
-                                <input class="form-control" type="text" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your City here" data-bs-container="#addModal" id="city" required>
+                                <input class="form-control" type="text" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your City here" pattern="[A-Za-z\s]+" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')" data-bs-container="#addModal" id="city" required>
                                 <span class="text-danger d-none">City is required!</span>
                             </div>
                             <!-- <div class="col-md-4">
@@ -730,8 +759,8 @@ color: #000;
                             </div>
                             <div class="col-md-6">
                                 <label for="inputEmail3" class="form-label fw-bold">Work Phone Number</label>
-                                <input class="form-control" type="tel" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your Work Phone Number here" data-bs-container="#addModal" id="workPhone">
-                                <!-- <span class="text-danger d-none">Phone number is required!</span> -->
+                                <input class="form-control" type="tel" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your Work Phone Number here" pattern="[0-9]+" oninput="this.value = this.value.replace(/[^0-9]/g, '');" data-bs-container="#addModal" id="workPhone">
+                                <span class="text-danger d-none">Work Phone number is required!</span>
                             </div>
                             <div class="col-md-6">
                                 <label for="inputEmail3" class="form-label fw-bold">Mobile Number</label>
@@ -741,7 +770,7 @@ color: #000;
                             </div>
                             <div class="col-md-6">
                                 <label for="inputEmail3" class="form-label fw-bold">Email</label>
-                                <input class="form-control" type="email" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your email here" data-bs-container="#addModal" id="email" required>
+                                <input class="form-control" type="email" data-bs-placement="top" pattern="[A-Za-z0-9_\.@]+" oninput="this.value = this.value.replace(/[^A-Za-z0-9_\.@]/g, '').replace(/(@+)/g, '@')" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your email here" data-bs-container="#addModal" id="email" required>
                                 <span class="text-danger d-none">Email is required!</span>
                             </div>
                             <div class="col-md-6">
@@ -1030,9 +1059,9 @@ color: #000;
 
                                         <!-- 3 comments start  -->
                                         <div class="dropdown  d-flex notifications">
-                                            <a class="nav-link icon" data-bs-toggle="dropdown"><i
-                                                    class="fe fe-bell"></i><span class=" pulse"></span>
-                                            </a>
+                                            <a class="nav-link icon" data-bs-toggle="sidebar-right" data-target=".sidebar-right"><i
+                                                class="fe fe-bell"></i><span class=" pulse"></span>
+                                        </a>
                                             <!-- <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                                 <div class="drop-heading border-bottom">
                                                     <div class="d-flex">
@@ -1116,7 +1145,7 @@ color: #000;
                                                 <a class="dropdown-item" href="lockscreen.html">
                                                     <i class="dropdown-icon fe fe-lock"></i> Lockscreen
                                                 </a> -->
-                                                <a class="dropdown-item" href="login_module.html">
+                                                <a class="dropdown-item" onclick="logout()">
                                                     <i class="dropdown-icon fe fe-alert-circle"></i> Sign out
                                                 </a>
                                             </div>
@@ -1300,10 +1329,11 @@ color: #000;
                                         <h3 class="page-titlee text-white" style="font-weight: 100; margin-bottom: 0px;">Welcome to Spade Portal</h3>
                                         <h1 class="page-titlee text-white" style="font-weight: 700;" id="user-name">
                                         </h1>
-                                        <a href="javascript:void(0)" id="email_verification" class="btn btn-primary btn-pill btn-xl email-verification-btn"><i
+                                        <a data-bs-toggle="modal" href="#modaldemo8" id="email_verification" class="btn btn-primary btn-pill btn-xl email-verification-btn"><i
                                                 class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
                                             verification &nbsp; <i
                                                 class="angle fe fe-arrow-right create-btn-plus"></i></a>
+                                                <p class="text-white m-0 mt-3" id="account-text">Your account will be locked after 7-Days</p>
                                     </div>
                                     <div class="col-lg-3">
                                         <img src="../assets/header-img/Group1.png" alt="">
@@ -1463,29 +1493,32 @@ color: #000;
 
     </div>
 
-    <!-- Sidebar-right -->
-    <div class="sidebar sidebar-right sidebar-animate">
+     <!-- Sidebar-right -->
+     <div class="sidebar sidebar-right sidebar-animate">
         <div class="panel panel-primary card mb-0 shadow-none border-0">
             <div class="tab-menu-heading border-0 d-flex p-3">
-                <div class="card-title mb-0"><i class="fe fe-bell me-2"></i><span class=" pulse"></span>Notifications
+                <div class="card-title mb-0 text-dark fw-bold">
+                    <!-- <i class="fe fe-bell me-2"></i> -->
+                    <!-- <span class=" pulse"></span> -->
+                    Notifications <a href="javascript:void(0);" class="text-primary text-decoration-underline">Mark all as read</a>
                 </div>
                 <div class="card-options ms-auto">
                     <a href="javascript:void(0);" class="sidebar-icon text-end float-end me-3 mb-1" data-bs-toggle="sidebar-right" data-target=".sidebar-right"><i
-                            class="fe fe-x text-white"></i></a>
+                            class="fe fe-x text-dark"></i></a>
                 </div>
             </div>
             <div class="panel-body tabs-menu-body latest-tasks p-0 border-0">
                 <div class="tabs-menu border-bottom">
                     <!-- Tabs -->
                     <ul class="nav panel-tabs">
-                        <li class=""><a href="#side1" class="active" data-bs-toggle="tab"><i
-                                    class="fe fe-settings me-1"></i>Feeds</a></li>
-                        <li><a href="#side2" data-bs-toggle="tab"><i class="fe fe-message-circle"></i> Chat</a></li>
-                        <li><a href="#side3" data-bs-toggle="tab"><i class="fe fe-anchor me-1"></i>Timeline</a></li>
+                        <li><a href="#side1" data-bs-toggle="tab" class="text-dark">All</a></li>
+                        <li><a href="#side2" data-bs-toggle="tab" class="text-dark">Inbox (25)</a></li>
+                        <li><a href="#side3" data-bs-toggle="tab" class="text-dark">Unread (5)</a></li>
+                        <li><a href="#side4" data-bs-toggle="tab" class="text-dark">Archive (0)</a></li>
                     </ul>
                 </div>
                 <div class="tab-content">
-                    <div class="tab-pane active" id="side1">
+                    <!-- <div class="tab-pane " id="side1">
                         <div class="p-3 fw-semibold ps-5">Feeds</div>
                         <div class="card-body pt-2">
                             <div class="browser-stats">
@@ -1656,177 +1689,206 @@ color: #000;
                                 </div>
                             </div>
                         </div>
+                    </div> -->
+                    <div class="tab-pane active" id="side1">
+                        <div class="list-group list-group-flush">
+                            <!-- <div class="pt-3 fw-semibold ps-5">Today</div> -->
+                            <div class="list-group-item d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center">
+                                <div class="me-2">
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/2.jpg"><span
+                                        class="avatar-status bg-success"></span>
+                                </div>
+                                <div class="">
+                                    <a href="javascript:void(0);">
+                                        <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">William</div> <span class="text-dark"> 1436 Jersey Street > Jersey</span>
+                                        <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="">
+                                <span class="fs-12 text-dark">2 min ago</span>
+                            </div>
+                            </div>
+                            <div class="list-group-item d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center">
+                                <div class="me-2">
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/2.jpg"><span
+                                        class="avatar-status bg-success"></span>
+                                </div>
+                                <div class="">
+                                    <a href="javascript:void(0);">
+                                        <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">Henry</div> <span class="text-dark"> 1436 Jersey Street > Jersey</span>
+                                        <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="">
+                                <span class="fs-12 text-dark">2 min ago</span>
+                            </div>
+                            </div>
+                            <div class="list-group-item d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center">
+                                <div class="me-2">
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/2.jpg"><span
+                                        class="avatar-status bg-success"></span>
+                                </div>
+                                <div class="">
+                                    <a href="javascript:void(0);">
+                                        <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">David</div> <span class="text-dark"> 1436 Jersey Street > Jersey</span>
+                                        <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="">
+                                <span class="fs-12 text-dark">2 min ago</span>
+                            </div>
+                            </div>
+                            <div class="list-group-item d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center">
+                                <div class="me-2">
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/2.jpg"><span
+                                        class="avatar-status bg-success"></span>
+                                </div>
+                                <div class="">
+                                    <a href="javascript:void(0);">
+                                        <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">David</div> <span class="text-dark"> 1436 Jersey Street > Jersey</span>
+                                        <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="">
+                                <span class="fs-12 text-dark">2 min ago</span>
+                            </div>
+                            </div>
+                            <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
+                            
+                        </div>
                     </div>
                     <div class="tab-pane" id="side2">
                         <div class="list-group list-group-flush">
-                            <div class="pt-3 fw-semibold ps-5">Today</div>
-                            <div class="list-group-item d-flex align-items-center">
-                                <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/2.jpg"></span>
-                                </div>
-                                <div class="">
-                                    <a href="chat.html">
-                                        <div class="fw-semibold text-dark" data-bs-toggle="modal" data-target="#chatmodel">Addie Minstra</div>
-                                        <p class="mb-0 fs-12 text-muted"> Hey! there I' am available.... </p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="list-group-item d-flex align-items-center">
-                                <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/11.jpg"><span
-                                            class="avatar-status bg-success"></span></span>
-                                </div>
-                                <div class="">
-                                    <a href="chat.html">
-                                        <div class="fw-semibold text-dark" data-bs-toggle="modal" data-target="#chatmodel">Rose Bush</div>
-                                        <p class="mb-0 fs-12 text-muted"> Okay...I will be waiting for you </p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="list-group-item d-flex align-items-center">
-                                <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/10.jpg"></span>
-                                </div>
-                                <div class="">
-                                    <a href="chat.html">
-                                        <div class="fw-semibold text-dark" data-bs-toggle="modal" data-target="#chatmodel">Claude Strophobia</div>
-                                        <p class="mb-0 fs-12 text-muted"> Hi we can explain our new project......
-                                        </p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="list-group-item d-flex align-items-center">
-                                <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/13.jpg"></span>
-                                </div>
-                                <div class="">
-                                    <a href="chat.html">
-                                        <div class="fw-semibold text-dark" data-bs-toggle="modal" data-target="#chatmodel">Eileen Dover</div>
-                                        <p class="mb-0 fs-12 text-muted"> New product Launching... </p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="list-group-item d-flex align-items-center">
-                                <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/12.jpg"><span
-                                            class="avatar-status bg-success"></span></span>
-                                </div>
-                                <div class="">
-                                    <a href="chat.html">
-                                        <div class="fw-semibold text-dark" data-bs-toggle="modal" data-target="#chatmodel">Willie Findit</div>
-                                        <p class="mb-0 fs-12 text-muted"> Okay...I will be waiting for you </p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="list-group-item d-flex align-items-center">
-                                <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/15.jpg"></span>
-                                </div>
-                                <div class="">
-                                    <a href="chat.html">
-                                        <div class="fw-semibold text-dark" data-bs-toggle="modal" data-target="#chatmodel">Manny Jah</div>
-                                        <p class="mb-0 fs-12 text-muted"> Hi we can explain our new project......
-                                        </p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="list-group-item d-flex align-items-center">
-                                <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/4.jpg"></span>
-                                </div>
-                                <div class="">
-                                    <a href="chat.html">
-                                        <div class="fw-semibold text-dark" data-bs-toggle="modal" data-target="#chatmodel">Cherry Blossom</div>
-                                        <p class="mb-0 fs-12 text-muted"> Hey! there I' am available....</p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="pt-3 fw-semibold ps-5">Yesterday</div>
-                            <div class="list-group-item d-flex align-items-center">
-                                <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/7.jpg"><span
-                                            class="avatar-status bg-success"></span></span>
-                                </div>
-                                <div class="">
-                                    <a href="chat.html">
-                                        <div class="fw-semibold text-dark" data-bs-toggle="modal" data-target="#chatmodel">Simon Sais</div>
-                                        <p class="mb-0 fs-12 text-muted">Schedule Realease...... </p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="list-group-item d-flex align-items-center">
-                                <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/9.jpg"></span>
-                                </div>
-                                <div class="">
-                                    <a href="chat.html">
-                                        <div class="fw-semibold text-dark" data-bs-toggle="modal" data-target="#chatmodel">Laura Biding</div>
-                                        <p class="mb-0 fs-12 text-muted"> Hi we can explain our new project......
-                                        </p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="list-group-item d-flex align-items-center">
+                            <!-- <div class="pt-3 fw-semibold ps-5">Today</div> -->
+                            <div class="list-group-item d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center">
                                 <div class="me-2">
                                     <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/2.jpg"><span
-                                            class="avatar-status bg-success"></span></span>
+                                        class="avatar-status bg-success"></span>
                                 </div>
                                 <div class="">
-                                    <a href="chat.html">
-                                        <div class="fw-semibold text-dark" data-bs-toggle="modal" data-target="#chatmodel">Addie Minstra</div>
-                                        <p class="mb-0 fs-12 text-muted">Contact me for details....</p>
+                                    <a href="javascript:void(0);">
+                                        <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">David</div> <span class="text-dark"> 1436 Jersey Street > Jersey</span>
+                                        <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
                                     </a>
                                 </div>
                             </div>
-                            <div class="list-group-item d-flex align-items-center">
+                            <div class="">
+                                <span class="fs-12 text-dark">2 min ago</span>
+                            </div>
+                            </div>
+                            <div class="list-group-item d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center">
                                 <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/9.jpg"></span>
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/2.jpg"><span
+                                        class="avatar-status bg-success"></span>
                                 </div>
                                 <div class="">
-                                    <a href="chat.html">
-                                        <div class="fw-semibold text-dark" data-bs-toggle="modal" data-target="#chatmodel">Ivan Notheridiya</div>
-                                        <p class="mb-0 fs-12 text-muted"> Hi we can explain our new project......
-                                        </p>
+                                    <a href="javascript:void(0);">
+                                        <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">Michael</div> <span class="text-dark"> 1436 Jersey Street > Jersey</span>
+                                        <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
                                     </a>
                                 </div>
                             </div>
-                            <div class="list-group-item d-flex align-items-center">
-                                <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/14.jpg"></span>
-                                </div>
-                                <div class="">
-                                    <a href="chat.html">
-                                        <div class="fw-semibold text-dark" data-bs-toggle="modal" data-target="#chatmodel">Dulcie Veeta</div>
-                                        <p class="mb-0 fs-12 text-muted"> Okay...I will be waiting for you </p>
-                                    </a>
-                                </div>
+                            <div class="">
+                                <span class="fs-12 text-dark">2 min ago</span>
                             </div>
-                            <div class="list-group-item d-flex align-items-center">
-                                <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/11.jpg"></span>
-                                </div>
-                                <div class="">
-                                    <a href="chat.html">
-                                        <div class="fw-semibold text-dark" data-bs-toggle="modal" data-target="#chatmodel">Florinda Carasco</div>
-                                        <p class="mb-0 fs-12 text-muted">New product Launching...</p>
-                                    </a>
-                                </div>
                             </div>
-                            <div class="list-group-item d-flex align-items-center">
-                                <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/4.jpg"><span
-                                            class="avatar-status bg-success"></span></span>
-                                </div>
-                                <div class="">
-                                    <a href="chat.html">
-                                        <div class="fw-semibold text-dark" data-bs-toggle="modal" data-target="#chatmodel">Cherry Blossom</div>
-                                        <p class="mb-0 fs-12 text-muted">cherryblossom@gmail.com</p>
-                                    </a>
-                                </div>
-                            </div>
+                            <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
+                            
                         </div>
                     </div>
                     <div class="tab-pane" id="side3">
+                        <div class="list-group list-group-flush">
+                            <!-- <div class="pt-3 fw-semibold ps-5">Today</div> -->
+                            <div class="list-group-item d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center">
+                                <div class="me-2">
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/2.jpg"><span
+                                        class="avatar-status bg-success"></span>
+                                </div>
+                                <div class="">
+                                    <a href="javascript:void(0);">
+                                        <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">Michael</div> <span class="text-dark"> 1436 Jersey Street > Jersey</span>
+                                        <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="">
+                                <span class="fs-12 text-dark">2 min ago</span>
+                            </div>
+                            </div>
+                            <div class="list-group-item d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center">
+                                <div class="me-2">
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/2.jpg"><span
+                                        class="avatar-status bg-success"></span>
+                                </div>
+                                <div class="">
+                                    <a href="javascript:void(0);">
+                                        <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">Thomas</div> <span class="text-dark"> 1436 Jersey Street > Jersey</span>
+                                        <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="">
+                                <span class="fs-12 text-dark">2 min ago</span>
+                            </div>
+                            </div>
+                            <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
+                            
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="side4">
+                        <div class="list-group list-group-flush">
+                            <!-- <div class="pt-3 fw-semibold ps-5">Today</div> -->
+                            <div class="list-group-item d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center">
+                                <div class="me-2">
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/2.jpg"><span
+                                        class="avatar-status bg-success"></span>
+                                </div>
+                                <div class="">
+                                    <a href="javascript:void(0);">
+                                        <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">Daniel</div> <span class="text-dark"> 1436 Jersey Street > Jersey</span>
+                                        <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="">
+                                <span class="fs-12 text-dark">2 min ago</span>
+                            </div>
+                            </div>
+                            <div class="list-group-item d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center">
+                                <div class="me-2">
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/2.jpg"><span
+                                        class="avatar-status bg-success"></span>
+                                </div>
+                                <div class="">
+                                    <a href="javascript:void(0);">
+                                        <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">Daniel</div> <span class="text-dark"> 1436 Jersey Street > Jersey</span>
+                                        <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="">
+                                <span class="fs-12 text-dark">2 min ago</span>
+                            </div>
+                            </div>
+                            <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
+                            
+                        </div>
+                    </div>
+                    <!-- <div class="tab-pane" id="side3">
                         <ul class="task-list timeline-task">
                             <li class="d-sm-flex mt-4">
                                 <div>
@@ -1917,7 +1979,7 @@ color: #000;
                                 </div>
                             </li>
                         </ul>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -2161,11 +2223,22 @@ color: #000;
 
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
-
+    <script>
+        $(document).ready(function() {
+            $('#email_verification').on('click', function() {
+      if ($('body').hasClass('dark-mode')) {
+        $('.Rent-logo').attr('src', '../assets/images/logo_white.png');
+      }else{
+        $('.Rent-logo').attr('src', '../assets/images/Artboard GÇô 1.svg');
+      }
+    });
+    });
+    
+      </script>
     <script>
         $(document).ready(() => {
             $.ajax({
-                url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/protected',
+                url: 'https://backend.app.spaderent.com/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2231,7 +2304,7 @@ color: #000;
             }
 
             $.ajax({
-                url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getVendorCategory',
+                url: 'https://backend.app.spaderent.com/api/spade/getVendorCategory',
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -2292,8 +2365,8 @@ color: #000;
                 // formData.append('categoryID', 2);
                 console.log(status)
                 $.ajax({
-                    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/addVendor',
-                    // url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/addVendor',
+                    url: 'https://backend.app.spaderent.com/api/spade/addVendor',
+                    // url: 'https://backend.app.spaderent.com/api/spade/addVendor',
                     type: 'POST',
                     data: JSON.stringify({
                         firstName: firstName,
@@ -2337,7 +2410,7 @@ color: #000;
                 $("#preloader").fadeIn("fast");
                 // console.log(22)
                 $.ajax({
-                    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getAllVendors',
+                    url: 'https://backend.app.spaderent.com/api/spade/getAllVendors',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -2558,8 +2631,75 @@ color: #000;
             $("#succes-close").click(() => {
                 getData()
             })
+            $(document).on('input change','#addModal input[type="text"],#addModal input[type="tel"],#addModal input[type="phone"], #addModal select,#addModal textarea', function() {
+                // updateTotal();
+                    var $field = $(this);
+                    var $errorMessage = $field.next('.text-danger');
+                     if ($field.val() === '' || $field.val() === 'Choose...') {
+                        $field.addClass('border-danger');
+                        $field.removeClass('border-green');
+                        $errorMessage.removeClass('d-none');
+                    } else {
+                        $field.removeClass('border-danger');
+                        $field.addClass('border-green');
+                        $errorMessage.addClass('d-none');
+                    }
+                    
+                });
+                $('#email').keyup(function() {
+          var email = $(this).val();
+          var emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z.-]+\.[A-Za-z]{2,}$/;
+          
+          if(!email.match(emailRegex)) {
+            // Invalid email format, display an error message or take appropriate action
+            console.log("invalid");
+            $(this).addClass("border-danger")
+            $(this).removeClass("border-green")
+          }else{
+              $(this).addClass("border-green")
+            $(this).removeClass("border-danger")
+          }
+        });
         })
     </script>
+    <script>
+        function logout() {
+            localStorage.removeItem('authtoken');
+            window.close();
+            window.open('./login_module.html', "_blank")
+            console.log('Done');
+        }
+    </script>
+
+<script>
+    $(document).ready(()=>{
+        $.ajax({
+            url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+            },
+            success: function (response) {
+                console.log("here")
+                if (response.message.split(":")[0]=="Your remaining days to verify your email"){
+                    $("#days-left").text(response.data>1?" "+response.data+" days":" "+response.data+" day")
+                    console.log("here")
+                    $("#user-email").val(userEmail)
+                    $("#modaldemo00").modal("show")
+                }else if(response.message=="Email is verified"){
+                    $("#account-text").remove()
+                      $("#email_verification").remove()
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log('Error occurred while fetching state and city data.');
+                console.log(xhr);
+                console.log(error);
+                // console.log('Error occurred while fetching state and city data.');
+            }
+        });
+    })
+</script>
 </body>
 
 </html>

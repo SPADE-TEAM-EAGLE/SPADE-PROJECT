@@ -16,11 +16,11 @@ const s3 = new aws.S3();
 
 function fileUpload(req,res) {
     MultiUpload(req, res, function (err) {
-       
+       console.log(req.files)
         if (err) {
-            return res.status(422).send({
-                errors: [{ title: "File Upload Error", detail: err.message }],
-            });
+          return res.status(422).send({
+            errors: [{ title: "File Upload Error", detail: err.message }],
+          });
         }
         return res.json({
             images: (req.files["image"] && req.files["image"].map((file) => {

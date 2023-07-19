@@ -34,9 +34,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.css">
     <!-- drag and drop end  -->
 
-        <!-- demo walktrough start  -->
-        <link rel="stylesheet" href="../assets/css/walkthrough-demo.css">
-        <!-- demo walktrough End  -->
+    <!-- demo walktrough start  -->
+    <link rel="stylesheet" href="../assets/css/walkthrough-demo.css">
+    <!-- demo walktrough End  -->
 
     <!-- COLOR SKIN CSS -->
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="../assets/colors/color1.css" />
@@ -52,20 +52,23 @@
         .panel-body {
             padding: 0px;
         }
+        
         .divider {
-  border-top: 1px solid;
-  margin: 10px 0 20px 0;
-}
-.custom-switch-input:checked~.custom-switch-indicator {
-    background: #11D247;
-}
-.form-select{
-    border-radius: 45px;
-}
-
-.counter-card-hover:hover{
-    border: 3px solid #1467B0 !important;
-}
+            border-top: 1px solid;
+            margin: 10px 0 20px 0;
+        }
+        
+        .custom-switch-input:checked~.custom-switch-indicator {
+            background: #11D247;
+        }
+        
+        .form-select {
+            border-radius: 45px;
+        }
+        
+        .counter-card-hover:hover {
+            border: 3px solid #1467B0 !important;
+        }
     </style>
 
 </head>
@@ -200,9 +203,8 @@
             <h1 class="offcanvas-title" id="offcanvasExampleLabel">Customize <strong class="color-primary">Widgets</strong></h1>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"><i class="fe fe-x fs-18"></i></button>
         </div>
-        <p class="text-default pe-5 ps-5">To add and remove widgets, use switches 
-            from this panel to your Dashboard and back.</p>
-            <div class="divider text-default pe-5 ps-5"></div>
+        <p class="text-default pe-5 ps-5">To add and remove widgets, use switches from this panel to your Dashboard and back.</p>
+        <div class="divider text-default pe-5 ps-5"></div>
         <div class="offcanvas-body">
             <div class="container-fluid">
                 <div class="row">
@@ -426,7 +428,7 @@
                                                 <a class="dropdown-item" href="lockscreen.html">
                                                     <i class="dropdown-icon fe fe-lock"></i> Lockscreen
                                                 </a> -->
-                                                <a class="dropdown-item" href="login_module.html" onclick="logout()">
+                                                <a class="dropdown-item" onclick="logout()" onclick="logout()">
                                                     <i class="dropdown-icon fe fe-alert-circle"></i> Sign out
                                                 </a>
                                             </div>
@@ -439,7 +441,7 @@
                 </div>
             </div>
             <!-- /app-Header -->
-      
+
             <!-- include sidebar start  -->
             <div id="header-placeholder"></div>
             <!-- include sidebar End  -->
@@ -1494,7 +1496,7 @@
     <script>
         $(document).ready(() => {
             $.ajax({
-                url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/allproperty',
+                url: 'https://backend.app.spaderent.com/api/spade/allproperty',
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -1559,150 +1561,132 @@
     <!-- column drag and drop end  -->
 
 
-  <script>
-  function logout() {    
-    localStorage.removeItem('authtoken'); 
-    window.close();
-    window.open('./login_module.html', "_self")               
-    console.log('Done');
-  }
-</script>
+    <script>
+        function logout() {
+            localStorage.removeItem('authtoken');
+            window.close();
+            window.open('./login_module.html', "_blank")
+            console.log('Done');
+        }
+    </script>
 
-          <!-- demo walktrough start  -->
-          <script src="../assets/js/walkthrough-demo.js"></script>
-          <script>
-                function mydemoclick(){
-                introJs().setOptions({
-                steps: [
-                {
+    <!-- demo walktrough start  -->
+    <script src="../assets/js/walkthrough-demo.js"></script>
+    <script>
+        function mydemoclick() {
+            introJs().setOptions({
+                steps: [{
                     element: document.querySelector('.card-demo-0'),
                     // title: 'Want to 2 minuts and learn what you can do with Rent',
                     intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4">Your browser does not support the video tag.</video> <br> <b style="font-size: 17px; color: #000;">Want to 2 minuts and learn what you can do with Rent</b> <br><br> <p style="color: #201414;">Spade Rent is your one-stop-shop to find tenants and manage your Rental property.</p>',
                     // intro: 'This step focuses on an element',
                     position: 'top-bottom'
-                },
-                {
+                }, {
                     element: document.querySelector('.card-demo-1'),
                     title: 'Manage your Properties',
                     intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px; color: #000;">Manage and grow your portfolio from anywhere with ease.</b>',
                     // intro: 'This step focuses on an element',
                     position: 'right'
-                },
-                {
+                }, {
                     element: document.querySelector('.card-demo-2'),
                     title: 'Manage Tenants',
                     intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px; color: #000;"">Whether you are looking to market your rental across the web or send a tenant an online application, you first need to add your property.</b>',
                     // intro: 'This step focuses on an element',
                     position: 'right'
-                },
-                {
+                }, {
                     element: document.querySelector('.card-demo-3'),
                     title: 'Manage Invoicing',
                     intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px; color: #000;"">Whether you are looking to market your rental across the web</b>',
                     // intro: 'This step focuses on an element',
                     position: 'right'
-                },
-                {
+                }, {
                     element: document.querySelector('.card-demo-4'),
                     title: 'Manage Leads',
                     intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px; color: #000;"">Whether you are looking to market your rental across the web</b>',
                     // intro: 'This step focuses on an element',
                     position: 'right'
-                },
-                {
+                }, {
                     element: document.querySelector('.card-demo-5'),
                     title: 'Manage Tasks',
                     intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px; color: #000;"">Whether you are looking to market your rental across the web</b>',
                     // intro: 'This step focuses on an element',
                     position: 'right'
-                },
-                {
+                }, {
                     element: document.querySelector('.card-demo-6'),
                     title: 'Manage Reports',
                     intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px; color: #000;"">Whether you are looking to market your rental across the web</b>',
                     // intro: 'This step focuses on an element',
                     position: 'right'
-                },
-                {
+                }, {
                     element: document.querySelector('.card-demo-7'),
                     title: 'Manage Setttings',
                     intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px; color: #000;"">Whether you are looking to market your rental across the web</b>',
                     // intro: 'This step focuses on an element',
                     position: 'right'
-                },
-                ]
-                }).start();
-            }
-          </script>
-           <script>
-            introJs().setOptions({
-            steps: [
-            {
+                }, ]
+            }).start();
+        }
+    </script>
+    <script>
+        introJs().setOptions({
+            steps: [{
                 element: document.querySelector('.card-demo-0'),
                 // title: 'Want to 2 minuts and learn what you can do with Rent',
                 intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4">Your browser does not support the video tag.</video> <br> <b style="font-size: 17px; color: #000;">Want to 2 minuts and learn what you can do with Rent</b> <br><br> <p style="color: #201414;">Spade Rent is your one-stop-shop to find tenants and manage your Rental property.</p>',
                 // intro: 'This step focuses on an element',
                 position: 'top-top'
-            },
-            {
+            }, {
                 element: document.querySelector('.card-demo-1'),
                 title: 'Manage your Properties',
                 intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px; color: #000;">Manage and grow your portfolio from anywhere with ease.</b>',
                 // intro: 'This step focuses on an element',
                 position: 'right'
-            },
-            {
+            }, {
                 element: document.querySelector('.card-demo-2'),
                 title: 'Manage Tenants',
                 intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px; color: #000;"">Whether you are looking to market your rental across the web or send a tenant an online application, you first need to add your property.</b>',
                 // intro: 'This step focuses on an element',
                 position: 'right'
-            },
-            {
+            }, {
                 element: document.querySelector('.card-demo-3'),
                 title: 'Manage Invoicing',
                 intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px; color: #000;"">Whether you are looking to market your rental across the web</b>',
                 // intro: 'This step focuses on an element',
                 position: 'right'
-            },
-            {
+            }, {
                 element: document.querySelector('.card-demo-4'),
                 title: 'Manage Leads',
                 intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px; color: #000;"">Whether you are looking to market your rental across the web</b>',
                 // intro: 'This step focuses on an element',
                 position: 'right'
-            },
-            {
+            }, {
                 element: document.querySelector('.card-demo-5'),
                 title: 'Manage Tasks',
                 intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px; color: #000;"">Whether you are looking to market your rental across the web</b>',
                 // intro: 'This step focuses on an element',
                 position: 'right'
-            },
-            {
+            }, {
                 element: document.querySelector('.card-demo-6'),
                 title: 'Manage Reports',
                 intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px; color: #000;"">Whether you are looking to market your rental across the web</b>',
                 // intro: 'This step focuses on an element',
                 position: 'right'
-            },
-            {
+            }, {
                 element: document.querySelector('.card-demo-7'),
                 title: 'Manage Setttings',
                 intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px; color: #000;"">Whether you are looking to market your rental across the web</b>',
                 // intro: 'This step focuses on an element',
                 position: 'right'
-            },
-            ]
-            }).start();
-      </script>
-          <!-- demo walktrough End  -->
+            }, ]
+        }).start();
+    </script>
+    <!-- demo walktrough End  -->
 
-          <script>
-            $(document).ready(function() {
-              $('#header-placeholder').load('testtest.html');
-            });
-          </script>
+    <script>
+        $(document).ready(function() {
+            $('#header-placeholder').load('testtest.html');
+        });
+    </script>
 
 </body>
 

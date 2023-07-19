@@ -1,5 +1,5 @@
 const user = require("../models/user");
-const { sendMail } = require('../sendmail/sendmail.js');
+const sendMail = require('../sendmail/sendmail.js');
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt');
 const fs = require('fs');
@@ -77,6 +77,13 @@ exports.createTenants = async (req, res) => {
         const status = "Occupied";
         const propertyUnitsResult = await queryRunner(updatePropertyUnitsTenant, [status, propertyUnitID, propertyID]);
         if (propertyUnitsResult[0].affectedRows > 0) {
+          const selectTenantsResult = await queryRunner(selectQuery('users', 'id'), [userId])
+          const landlordEmail = selectTenantsResult[0][0].Email;
+          const landlordName = selectTenantsResult[0][0].FirstName + " " + selectTenantsResult[0][0].LastName;
+
+          // if (sendmails == "Yes") {
+          const mailSubject = "You created a new tenant";
+        await  sendMail.invoiceSendMail(landlordName, landlordEmail, mailSubject, "dueDays", "invoiceID", "frequency");
           if (increaseRent == 'No') {
             res.status(200).json({
               message: "Tenants save Successful",
@@ -366,21 +373,14 @@ exports.tenantAttachFile = async (req, res) => {
   const {
     tenantID, images
   } = req.body;
-  // console.log(req.files)
+
   const { userId } = req.user
   try {
-    // const fileNames = req.files.map((file) => file.filename);
-    // for (let i = 0; i < fileNames.length; i++) {
-    //   const attachFile = fileNames[i];
-    //   const tenantAttachFileResult = await queryRunner(insertTenantAttachFile, [userId, tenantID, attachFile])
-    //   if (tenantAttachFileResult.affectedRows === 0) {
-    //     res.send('Error');
-    //     return;
-    //   }
-    // } //sss
+
     for (let i = 0; i < images.length; i++) {
       const { image_url } = images[i];
       const { image_key } = images[i];
+
       const propertyImageResult = await queryRunner(insertTenantAttachFile, [
         userId,
         tenantID,
@@ -464,6 +464,10 @@ exports.tenantDelete = async (req, res) => {
           const tenantAdditionalEmailresult = await queryRunner(deleteQuery("tenantalternateemail", "tenantID"), [tenantID]);
         }
 
+        // const tenantAdditionalEmailCheckResult = await queryRunner(selectQuery("tenantalternateemail", "tenantID"), [tenantID]);
+        // if (tenantAdditionalEmailCheckResult[0].length > 0) {
+        // const tenantAdditionalEmailresult = await queryRunner(deleteQuery("tenantalternateemail", "tenantID"), [tenantID]);
+        // } 
 
         const tenantAdditionalPhoneCheckResult = await queryRunner(selectQuery("tenantalternatephone", "tenantID"), [tenantID]);
         if (tenantAdditionalPhoneCheckResult[0].length > 0) {

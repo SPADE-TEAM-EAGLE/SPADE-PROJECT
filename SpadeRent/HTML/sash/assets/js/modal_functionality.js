@@ -1,5 +1,5 @@
 $.ajax({
-    url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/protected',
+    url: 'https://backend.app.spaderent.com/api/spade/protected',
     method: 'GET',
     headers: {
         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -101,12 +101,12 @@ function checkFieldsFilled(id) {
 }
 var selectedFiles = [];
 $(document).ready(function () {
-    $("#succesModal").on('hide.bs.modal', function () {
-        window.location='./properties-all.html'
-    })
+    // $("#succesModal").on('hide.bs.modal', function () {
+    //     window.location='./properties-all.html'
+    // })
     $.ajax({
-        // url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getStates',
-        url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/getStates',
+        // url: 'https://backend.app.spaderent.com/api/spade/getStates',
+        url: 'https://backend.app.spaderent.com/api/spade/getStates',
         method: 'GET',
         success: function({data}) {
             // Handle state selection change
@@ -192,16 +192,20 @@ $(document).ready(function () {
         if ($field.attr("id") === "zip") {
             if ($field.val().length !== 5) {
                 $field.addClass('border-danger');
+                $field.removeClass('border-green');
                 $errorMessage.removeClass('d-none');
             } else {
                 $field.removeClass('border-danger');
+                $field.addClass('border-green');
                 $errorMessage.addClass('d-none');
             }
         } else if($field.val() === '' || $field.val() === 'Choose...') {
             $field.addClass('border-danger');
+            $field.removeClass('border-green');
             $errorMessage.removeClass('d-none');
         } else {
             $field.removeClass('border-danger');
+            $field.addClass('border-green');
             $errorMessage.addClass('d-none');
         }
         updateButtonStatus();
@@ -272,15 +276,9 @@ $('#close,#top-close').on('click', function (e) {
     resetAccordions()
     $('#addModal').modal('hide');
 })
-$(document).on('click', '#next', function (e) {
-    e.preventDefault()
-    selectedFiles=[]
-    $('#addModal').modal('hide');
-    // resetAccordions()
-    // $("#largemodal").addClass("hide");
-    var formData = new FormData();
+$(document).on('click', '#next', function(e) {
+    e.preventDefault();
 
-    // Get the form data
     var propertyName = $("#propertyName").val();
     var address = $("#address").val();
     var city = $("#city").val();
@@ -290,50 +288,98 @@ $(document).on('click', '#next', function (e) {
     var propertySQFT = $("#propertyTotalSF").val();
     var units = $("#units").val();
 
-    // Add the form data to the FormData object
-    formData.append('propertyName', propertyName);
-    formData.append('address', address);
-    formData.append('city', city);
-    formData.append('state', "Texas");
-    formData.append('zipCode', zipCode);
-    formData.append('propertyType', propertyType);
-    formData.append('propertySQFT', propertySQFT);
-    formData.append('units', units);
+    var selectedFiles = $('#fileInput')[0].files;
 
-    // Get the selected files
-    var files = $('#fileInput')[0].files;
-
-    // Add the files to the FormData object
-    for (var i = 0; i < files.length; i++) {
-        formData.append('image', files[i]);
-    }
-
-    // Send the form data to the server using AJAX
-    $.ajax({
-        url: 'http://spaderentbackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com/api/spade/property',
-        type: 'POST',
-        data: formData,
-        contentType: false,
-        processData: false,
-        headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-        },
-
-        success: function (response) {
-            // console.log(1)
-            $("#unit-link").attr("href",`./property-unit.html?propertyId=${response.propertyId}`)
-    resetAccordions()
-
-            $('#succesModal').modal('show')
-
-            // window.location = '../Landlord/properties-all.html';
-        },
-        error: function (xhr, status, error) {
-            window.alert('Error: ' + error);
+    if (selectedFiles.length >= 1) {
+        var uploadFormData = new FormData();
+        for (var i = 0; i < selectedFiles.length; i++) {
+            uploadFormData.append('image', selectedFiles[i]);
         }
-    });
+$("#addModal").modal("hide")
+        $.ajax({
+            url: 'https://backend.app.spaderent.com/api/spade/upload',
+            type: 'POST',
+            data: uploadFormData,
+            contentType: false,
+            processData: false,
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+            },
+            success: function(response) {
+                var imageArray = response.images;
+                var propertyData = {
+                    propertyName: propertyName,
+                    address: address,
+                    city: city,
+                    state: state,
+                    zipCode: zipCode,
+                    propertyType: propertyType,
+                    propertySQFT: propertySQFT,
+                    units: units,
+                    images: imageArray
+                };
 
+                $.ajax({
+                    url: 'https://backend.app.spaderent.com/api/spade/property',
+                    type: 'POST',
+                    data: JSON.stringify(propertyData),
+                    contentType: 'application/json',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        // console.log(1)
+                        $("#unit-link").attr("href",`./property-unit.html?propertyId=${response.propertyId}`)
+                resetAccordions()
+            
+                        $('#succesModal').modal('show')
+            
+                        // window.location = '../Landlord/properties-all.html';
+                    },
+                    error: function (xhr, status, error) {
+                        window.alert('Error: ' + error);
+                    }
+                });
+            },
+            error: function(xhr, status, error) {
+                window.alert('Error: ' + error);
+            }
+        });
+    } else {
+        var propertyData = {
+            propertyName: propertyName,
+            address: address,
+            city: city,
+            state: state,
+            zipCode: zipCode,
+            propertyType: propertyType,
+            propertySQFT: propertySQFT,
+            units: units,
+            images: []
+        };
 
+        $.ajax({
+            url: 'https://backend.app.spaderent.com/api/spade/property',
+            type: 'POST',
+            data: JSON.stringify(propertyData),
+            contentType: 'application/json',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+            },
+            success: function (response) {
+                // console.log(1)
+                $("#unit-link").attr("href",`./property-unit.html?propertyId=${response.propertyId}`)
+        resetAccordions()
+    
+                $('#succesModal').modal('show')
+    
+                // window.location = '../Landlord/properties-all.html';
+            },
+            error: function (xhr, status, error) {
+                window.alert('Error: ' + error);
+            }
+        });
+    }
 });
 let propertyId;
 
