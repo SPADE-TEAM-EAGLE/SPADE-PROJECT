@@ -1599,7 +1599,6 @@ exports.getInvoiceReportData = async (req, res) => {
     })
   }
 }
-
 exports.getDashboardData = async (req, res) => {
   try {
     const { userId } = req.user;

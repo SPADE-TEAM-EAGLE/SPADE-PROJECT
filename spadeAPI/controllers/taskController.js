@@ -309,10 +309,8 @@ exports.addTasks = async (req, res) => {
   } = req.body;
   console.log(req.body)
   const vendorID = assignee
-  //   const { userId } = req.user
   const { userId, userName } = req.user;
-  // console.log(userId, userName)
-  // console.log(req.body)
+  
   const currentDate = new Date();
   try {
     // console.log(1);
@@ -320,7 +318,6 @@ exports.addTasks = async (req, res) => {
       selectQuery("task", "taskName", "tenantID"),
       [task, property]
     );
-    // console.log(addTasksCheckResult);
     if (addTasksCheckResult[0].length > 0) {
       return res.send("Task already exists");
     } else {
@@ -342,22 +339,6 @@ exports.addTasks = async (req, res) => {
       }
       // else {
       const tasksID = TasksResult[0].insertId;
-      // console.log(req.files)
-      // if (images) {
-      //   const fileNames = images;
-      //   for (let i = 0; i < fileNames.length; i++) {
-      //     const taskImages = fileNames[i].image_url;;
-      //     const taskImagesKey = fileNames[i].image_key;
-      //     const taskImageResult = await queryRunner(insertInTaskImage, [
-      //       tasksID,
-      //       taskImages,
-      //       taskImagesKey
-      //     ]);
-      //     if (taskImageResult.affectedRows === 0) {
-      //       return res.send("Error2");
-      //     }
-      //   }
-      // }
       for (let i = 0; i < images.length; i++) {
         const { image_url } = images[i];
         const { image_key } = images[i];
@@ -403,7 +384,6 @@ exports.addTasks = async (req, res) => {
       const CompanyName = tenantLandlordResult[0][0].companyName;
       const landlordName = tenantLandlordResult[0][0].FirstName + " " + tenantLandlordResult[0][0].LastName;
       const landlordContact = tenantLandlordResult[0][0].Phone;
-      const landlordEmail = tenantLandlordResult[0][0].Email;
 
       const vendorNames = vendorNamearr.toString();
 
@@ -445,7 +425,6 @@ exports.addTasks = async (req, res) => {
     return res.send("Created");
   } catch (error) {
     res.status(400).send(error);
-    console.log(error);
   }
 };
 //  #############################  ADD TASK ENDS HERE ##################################################
@@ -485,7 +464,6 @@ exports.getAllTask = async (req, res) => {
             vendorData.push(vendor);
           }
         }
-
         allTaskResult[0][i].AssignTo = vendorData;
       }
       // console.log(allTaskResult)
@@ -760,7 +738,6 @@ exports.updateTasks = async (req, res) => {
         vendorNamearr.push(vendorName);
         vendorEmailarr.push(vendorEmail);
       } else {
-        // return res.send("Vendor not found");
         throw new Error("Vendor not found");
       }
     }
@@ -776,7 +753,7 @@ exports.updateTasks = async (req, res) => {
     if (notifyTenant.toLowerCase() === "yes") {
       await taskSendMail(
         tenantName,
-        
+
         "Property Maintenance: " + taskName,
         dueDate,
         landlordName,

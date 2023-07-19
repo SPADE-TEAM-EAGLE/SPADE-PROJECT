@@ -120,6 +120,8 @@ router.get("/deshboard", verifyToken, userController.getDashboardData);
 
 // updated notification route
 router.put("/notify", verifyToken, notifyController.updateNotify);
+// checkNotify
+router.get("/checkNotify", verifyToken, notifyController.getCheckedNotify);
 router.get("/notify", verifyToken, notifyController.getNotify);
 router.get("/property", verifyToken, userController.getAllProperty);
 router.get("/invoice", verifyToken, userController.getInvoiceReportData);

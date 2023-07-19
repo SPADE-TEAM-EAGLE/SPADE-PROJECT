@@ -65,7 +65,6 @@ exports.getTaskReportData = "SELECT task.id AS taskID, task.taskName, task.dueDa
 exports.getInvoiceReportData = "SELECT invoice.id AS invoiceID, invoice.created_at,invoice.totalAmount, property.propertyName, property.address ,tenants.email ,tenants.firstName, tenants.lastName FROM invoice JOIN tenants ON tenants.id = invoice.tenantID JOIN property ON property.id = tenants.propertyID WHERE invoice.landlordID = ?";
 exports.getLeaseReport = "SELECT tenants.firstName, tenants.lastName, tenants.leaseEndDate AS LeaseExpire, tenants.phoneNumber, property.propertyType, property.propertyName, property.units FROM tenants JOIN property ON tenants.propertyID = property.id WHERE tenants.landlordID = ?";
 
-
 // getTotalAmount getTotalAmountUnpaid getTotalAmountPaid getNumPropertyTenant
 // get total amount from invoice table
 exports.getTotalAmount = "SELECT SUM(invoice.totalAmount) AS totalAmount FROM invoice WHERE invoice.landlordID = ?";
@@ -79,11 +78,8 @@ exports.getNumPropertyTenant = `SELECT
     (SELECT COUNT(tenants.id) FROM tenants WHERE tenants.landlordID = ?) AS tenantCount;
 `;
 
-
-
 exports.getAmountByCategoriesID = "SELECT InvoiceCategories.setTaxes FROM InvoiceCategories WHERE InvoiceCategories.id = ? AND InvoiceCategories.landLordId = ?";
-// getTenantNotify using joins query
-// exports.getTenantNotify = "SELECT tenants.id AS tenantID, tenants.companyName, tenants.firstName, tenants.lastName, tenants.phoneNumber , tenantattachfiles.Image ,tenantattachfiles.ImageKey FROM tenants JOIN tenantattachfiles ON tenants.id = tenantattachfiles.tenantID WHERE tenants.landlordID = ?";
+
 exports.getTenantNotify = `SELECT 
 tenants.id AS tenantID,
 tenants.companyName, tenants.firstName, tenants.lastName, tenants.phoneNumber,tenants.tenantCreated_at,property.propertyName ,property.address,property.propertyType,property.units,

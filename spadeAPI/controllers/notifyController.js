@@ -23,6 +23,29 @@ const notifyController = {
             })
         }
     },
+    getCheckedNotify: async (req, res) => {
+            try {
+            // find notifTable by userId
+            const { userId } = req.user;
+            const getNotifyResult = await queryRunner(selectQuery("notification", "landlordID"), [
+                userId
+            ]);
+            if (getNotifyResult[0].length > 0) {
+                return res.status(200).json({
+                    email: getNotifyResult[0][0].emailNotification,
+                    push: getNotifyResult[0][0].pushNotification,
+                });
+            }
+            res.status(400).json({
+                message: "No data found"
+            })
+            } catch (error) {
+                res.status(400).json({
+                    message: error.message
+                })     
+            }
+
+    },
     getNotify: async (req, res) => {
         //get property , tenants , task invoice from tables individually
         const { userId } = req.user;
