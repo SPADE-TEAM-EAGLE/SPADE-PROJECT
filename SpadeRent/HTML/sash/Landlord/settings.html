@@ -8447,6 +8447,7 @@
             $(document).ready(() => {
                 // ----- On render -----\\
                 function getData() {
+                    
                     $.ajax({
                         url: 'https://backend.app.spaderent.com/api/spade/protected',
                         method: 'GET',
@@ -8498,12 +8499,12 @@
                                 $("#add-item-container1").append(`<tr class="tr">
                     <td>
                         <label for=""><b>Categories</b></label>
-                        <input type="text" name="category" class="form-control category" value="${categorieName}">
+                        <input type="text" name="category" class="form-control category" value="${categorieName}" readonly>
                     </td>
                     <td style="width: 1px;">
                         <label for=""><b>Taxable</b></label>
                         <div class="material-switch pull-right mt-1"> <input id="someSwitchOptionInfo${counter}" class="category-tax" name="someSwitchOption${counter}" type="checkbox" ${taxable == 1 ? 'checked' : ''}> <label for="someSwitchOptionInfo` + counter + `" class="label-info"></label> </div></td>
-                    <td><button type="button" class="btn" id="del-btn1" style="text-align: left;">
+                    <td><button type="button" class="btn" id="" style="text-align: left;">
                         <i class="fi fi-rs-trash text-danger fs-5"></i>
                     </button></td>
                 </tr>`)
@@ -8523,22 +8524,43 @@
                                     }
                                 }
                             })
-
-                            // function toTitleCase(str) {
-                            //     return str.replace(/\w\S*/g, function (txt) {
-                            //         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-                            //     });
-                            // }
-                            // console.log(response)
-                            // $("#firstName").val(toTitleCase(response.firstName))
-                            // $("#lastName").val(toTitleCase(response.lastName))
-                            // $("#email").val(response.email)
-                            // $("#phone1").val(response.phone)
-                            // $("#businessName").val(toTitleCase(response.businessName || ""))
-                            // $("#streetAddress").val(toTitleCase(response.streetAddress || ""))
-                            // $("#businessAddress").val(toTitleCase(response.businessAddress || ""))
-                            // $('#profile').css('background-image', 'url(' + response.image + ')').addClass('hasImage');
-                            // $(`#${response.planID}`).addClass("card-primary")
+                        },
+                        error: function (xhr, status, error) {
+                            console.log('Error occurred while fetching state and city data.');
+                            console.log(xhr);
+                            console.log(error);
+                            // console.log('Error occurred while fetching state and city data.');
+                        }
+                    });
+                    $.ajax({
+                        url: 'http://localhost:3000/api/spade/getVendorCategory',
+                        method: 'GET',
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            vendorCategoryData = response.data
+                            console.log(response.data)
+                            var vendorCategory = 0
+                            $("#add-item-container1").empty()
+                            $("#add-item-container5").empty()
+                            response.data?.forEach(({ category,landLordId }, index) => {
+                                counter++
+                                
+                                $("#add-item-container5").append(`<tr class="tr">
+                                                                            <td>
+                                                                                <label for=""><b>Categories</b></label>
+                                                                                <input type="text" name=""
+                                                                                    class="form-control vendor-category" value='${category}' readonly>
+                                                                            </td>
+                                                                            <td><button type="button" class="btn"
+                                                                                    id=""
+                                                                                    style="text-align: left;">
+                                                                                    <i
+                                                                                        class="fi fi-rs-trash text-danger fs-5"></i>
+                                                                                </button></td>
+                                                                        </tr>`)
+                            })
                         },
                         error: function (xhr, status, error) {
                             console.log('Error occurred while fetching state and city data.');
@@ -8552,8 +8574,9 @@
                 $("#save-vendor").click(()=>{
                     const data=[]
                     $('#add-item-container5 .tr').each(function () {
+                        
                         var categoryName = $(this).find('.vendor-category').val();
-                        if (typeof categoryName !== 'undefined') {
+                        if (typeof categoryName !== 'undefined' && !$(this).find('.vendor-category').prop('readonly')) {
 
                             var row = {
                                 category: categoryName,
@@ -8625,7 +8648,7 @@
                     // console.log(data)
                     // Send the data to the backend using AJAX
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/addInvoiceCategory', // Replace with your actual backend endpoint URL
+                        url: 'http://localhost:3000/api/spade/addInvoiceCategory', // Replace with your actual backend endpoint URL
                         method: 'POST',
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -8740,7 +8763,7 @@
                     },
                     success: function (response) {
                         // console.log()
-                        response.data[0].forEach((card) => {
+                        response.data.forEach((card) => {
                             // $(`.${card.id}`).each(function(){
                             //     this
                             // })
