@@ -10,13 +10,10 @@ const {
 } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
 const cron = require('node-cron');
-
 const task = cron.schedule('0 9,20 * * *', async () => {
-
   const currentDate = new Date();
   const selectTenantsResult = await queryRunner(recurringInvoice)
   if (selectTenantsResult[0].length > 0) {
-
     for (let i = 0; i < selectTenantsResult[0].length; i++) {
       const PreviousInvoiceID = selectTenantsResult[0][i].id;
       const landlordID = selectTenantsResult[0][i].landlordID;
@@ -34,7 +31,6 @@ const task = cron.schedule('0 9,20 * * *', async () => {
       const createdAt = new Date();
       const recurringNextDate = selectTenantsResult[0][i].recurringNextDate;
       const created_atPrevious = selectTenantsResult[0][i].created_at;
-
       const recurringInvoiceCheckResult = await queryRunner(recurringInvoiceCheck, [landlordID, tenantID, invoiceType]);
       if (recurringInvoiceCheckResult[0].length > 0) {
         console.log("user Exist")
@@ -50,40 +46,32 @@ const task = cron.schedule('0 9,20 * * *', async () => {
           const minute = String(currentDate.getMinutes()).padStart(2, '0');
           const second = String(currentDate.getSeconds()).padStart(2, '0');
           const recurringNextDate = `${year}-${month}-${day} ${hour}:${minute}:${second}`;
-
           // Recurring Next Date END 
           const invoiceResult = await queryRunner(insertInvoice, [landlordID, tenantID, invoiceType, startDate, endDate, frequency, dueDate, dueDays, repeatTerms, terms, additionalNotes, "Unpaid", createdAt, totalAmount, recurringNextDate]);
           if (invoiceResult.affectedRows === 0) {
             res.status(400).send('Error occur in creating invoice');
           } else {
-
             // Invoice Email Start
             const invoiceID = invoiceResult[0].insertId;
             const selectTenantsResult = await queryRunner(selectQuery('tenants', 'id'), [tenantID])
             if (selectTenantsResult[0].length > 0) {
               const tenantEmail = selectTenantsResult[0][0].email;
               const tenantName = selectTenantsResult[0][0].firstName + " " + selectTenantsResult[0][0].lastName;
-
               const mailSubject = invoiceID + " From " + frequency;
               sendMail.invoiceSendMail(tenantName, tenantEmail, mailSubject, dueDays, invoiceID, frequency);
             }
-
             const lineItemsResult = await queryRunner(selectQuery('invoicelineitems', 'invoiceID'), [PreviousInvoiceID])
             if (lineItemsResult[0].length > 0) {
-
               for (let j = 0; j < lineItemsResult[0].length; j++) {
                 const category = lineItemsResult[0][j].category;
-
                 const property = lineItemsResult[0][j].property;
                 const memo = lineItemsResult[0][j].memo;
                 const amount = lineItemsResult[0][j].amount;
                 const invoiceLineItemsResult = await queryRunner(insertLineItems, [invoiceID, category, property, memo, amount])
                 console.log("line item");
               }
-            }    // Insert END
-
-            //Line item END
-
+            }    // Insert END 
+            //Line item END 
             // Invoice Images Start
             console.log("invoice Image");
             const invoiceImagesResult = await queryRunner(selectQuery('invoiceimages', 'invoiceID'), [PreviousInvoiceID])

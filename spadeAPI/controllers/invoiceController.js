@@ -543,9 +543,11 @@ exports.createInvoiceCategories = async (req, res) => {
       const {categoryName,taxable,taxAmount}=item
       createInvoiceCategoriesResult = await queryRunner(createInvoiceCategories, [categoryName,userId,taxAmount,taxable]);
     }
-    if (filteredCategories.length>=1 && createInvoiceCategoriesResult[0].affectedRows > 0) {
+    if ((filteredCategories.length>=1 && createInvoiceCategoriesResult[0].affectedRows > 0) || filteredCategories.length==0) {
+      const categoriesFromDb=await queryRunner(selectQuery("InvoiceCategories", "landLordId"),
+      [userId])
       res.status(200).json({
-        data: invoiceImagecheckresult[0],
+        data: categoriesFromDb[0],
       });
     } else {
       res.status(400).json({

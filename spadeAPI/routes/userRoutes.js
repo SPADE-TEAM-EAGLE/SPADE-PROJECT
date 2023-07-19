@@ -97,7 +97,7 @@ router.get("/getAllTask", verifyToken, taskController.getAllTask);
 router.get("/taskByID", verifyToken, taskController.taskByID);
 router.put("/updateTenants", verifyToken, tenantController.updateTenants);
 router.get("/getStates", userController.getStates);
-router.get("/getVendorCategory", taskController.getVendorCategory);
+router.get("/getVendorCategory", verifyToken,taskController.getVendorCategory);
 router.get("/getVendorAssignTo", verifyToken, taskController.getVendorAssignTo);
 router.put("/updateTasks", verifyToken, taskController.updateTasks);
 router.delete("/deleteTask", taskController.deleteTask);
