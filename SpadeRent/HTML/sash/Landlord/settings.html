@@ -1858,7 +1858,7 @@
                                         </div>
 
                                         <div class="d-flex country mt-2">
-                                            <a class="nav-link icon text-dark" onclick="mydemoclick()">
+                                            <a class="nav-link icon text-dark" >
                                                 <i class="fi fi-rs-universal-access"></i>
                                             </a>
                                         </div>
@@ -2439,7 +2439,7 @@
                                                                             <input type="radio"
                                                                                 class="custom-control-input"
                                                                                 name="example-radios1" value="Disable"
-                                                                                checked=""> <span
+                                                                                > <span
                                                                                 class="custom-control-label">Disable</span>
                                                                         </label>
                                                                     </div>
@@ -2465,7 +2465,7 @@
                                                                             <input type="radio"
                                                                                 class="custom-control-input"
                                                                                 name="example-radios2" value="Disable"
-                                                                                checked=""> <span
+                                                                                > <span
                                                                                 class="custom-control-label">Disable</span>
                                                                         </label>
                                                                     </div>
@@ -2484,7 +2484,7 @@
                                                                             <input type="radio"
                                                                                 class="custom-control-input"
                                                                                 name="example-radios3" value="Enable"
-                                                                                checked="">
+                                                                                >
                                                                             <span
                                                                                 class="custom-control-label">Enable</span>
                                                                         </label> &emsp;
@@ -2511,7 +2511,7 @@
                                                                         class="btn btn-light btn-pill m-2 w-100">Close</button>
                                                                 </a>
                                                                 <button
-                                                                    class="btn btn-primary btn-pill m-2 w-40">Save</button>
+                                                                    class="btn btn-primary btn-pill m-2 w-40" id="save-notification-setting">Save</button>
                                                             </div>
                                                             <!-- <div class="col-lg-7" style="display: flex; width: auto;">
                                                                 <button
@@ -8542,7 +8542,7 @@
                             vendorCategoryData = response.data
                             console.log(response.data)
                             var vendorCategory = 0
-                            $("#add-item-container1").empty()
+                            
                             $("#add-item-container5").empty()
                             response.data?.forEach(({ category,landLordId }, index) => {
                                 counter++
@@ -8569,8 +8569,98 @@
                             // console.log('Error occurred while fetching state and city data.');
                         }
                     });
+                    $.ajax({
+                        url: 'http://localhost:3000/api/spade/checkNotify',
+                        method: 'GET',
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            // vendorCategoryData = response.data
+                            // console.log(response.data)
+                            // var vendorCategory = 0
+                            // $("#add-item-container1").empty()
+                            // $("#add-item-container5").empty()
+                            // response.data?.forEach(({ category,landLordId }, index) => {
+                            //     counter++
+                                
+                            //     $("#add-item-container5").append(`<tr class="tr">
+                            //                                                 <td>
+                            //                                                     <label for=""><b>Categories</b></label>
+                            //                                                     <input type="text" name=""
+                            //                                                         class="form-control vendor-category" value='${category}' readonly>
+                            //                                                 </td>
+                            //                                                 <td><button type="button" class="btn"
+                            //                                                         id=""
+                            //                                                         style="text-align: left;">
+                            //                                                         <i
+                            //                                                             class="fi fi-rs-trash text-danger fs-5"></i>
+                            //                                                     </button></td>
+                            //                                             </tr>`)
+                            // })
+                            console.log(response)
+                            
+                            if(response.email=="yes"){
+                                $("input[name='example-radios1'][value='Enable']").prop("checked", true);
+                            }else{
+                                $("input[name='example-radios1'][value='Disable']").prop("checked", true);
+                            }if(response.push=="yes"){
+                                $("input[name='example-radios2'][value='Enable']").prop("checked", true);
+
+
+}else{
+    $("input[name='example-radios2'][value='Disable']").prop("checked", true);
+    
+}if(response.text=="yes"){
+    $("input[name='example-radios3'][value='Enable']").prop("checked", true);
+
+
+}else{
+    $("input[name='example-radios3'][value='Disable']").prop("checked", true);
+
+    
+}
+                        },
+                        error: function (xhr, status, error) {
+                            console.log('Error occurred while fetching state and city data.');
+                            console.log(xhr);
+                            console.log(error);
+                            // console.log('Error occurred while fetching state and city data.');
+                        }
+                    });
+                 
                 }
                 getData()
+                // /notify
+                $("#save-notification-setting").click(()=>{
+                    // console.log($("#example-radios1").val())
+                    const data={
+                        isEmailNotify:$("input[name='example-radios1']:checked").val()=="Enable"?"yes":"no",
+                        isPushNotify:$("input[name='example-radios2']:checked").val()=="Enable"?"yes":"no",
+                        textNotification:$("input[name='example-radios3']:checked").val()=="Enable"?"yes":"no"
+                    }
+                    $.ajax({
+                        url: 'http://localhost:3000/api/spade/notify',
+                        method: 'PUT',
+                        data: JSON.stringify(data),
+                        contentType: 'application/json',
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            $("#myModal_success p").text("Succesfully Updated!!!")
+                            $("#myModal_success").modal("show")
+                            getData()
+                        },
+                        error: function (xhr, status, error) {
+                            console.log('Error occurred while fetching state and city data.');
+                            console.log(xhr);
+                            console.log(error);
+                            // console.log('Error occurred while fetching state and city data.');
+                        }
+                    });
+                })
+                
                 $("#save-vendor").click(()=>{
                     const data=[]
                     $('#add-item-container5 .tr').each(function () {
@@ -8645,7 +8735,7 @@
                         // Create an object for each row's data
 
                     });
-                    // console.log(data)
+                    
                     // Send the data to the backend using AJAX
                     $.ajax({
                         url: 'http://localhost:3000/api/spade/addInvoiceCategory', // Replace with your actual backend endpoint URL

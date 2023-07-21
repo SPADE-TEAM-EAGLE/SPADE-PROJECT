@@ -91,7 +91,8 @@ exports.createUser = async function (req, res) {
 };
 
 exports.checkemail = async function (req, res) {
-  const { email } = req.body;
+  const { email } = req.query;
+  console.log(req.query)
   try {
     const selectResult = await queryRunner(selectQuery("users", "Email"), [
       email,
@@ -141,10 +142,9 @@ exports.Signin = async function (req, res) {
       const selectResult = await queryRunner(selectQuery("tenants", "email"), [
         email,
       ]);
-      console.log(selectResult[0][0])
       if (selectResult[0].length === 0) {
         res.status(400).send("Email not found");
-      } else if (!
+      } else if (
         await bcrypt.compare(password, selectResult[0][0].tenantPassword)
       ) {
         const token = jwt.sign({ email, password }, config.JWT_SECRET_KEY, {
@@ -1612,7 +1612,6 @@ exports.getInvoiceReportData = async (req, res) => {
     })
   }
 }
-
 exports.getDashboardData = async (req, res) => {
   try {
     const { userId } = req.user;

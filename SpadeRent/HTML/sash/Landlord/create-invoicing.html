@@ -82,16 +82,6 @@
             background: #0069d9;
         }
 
-        /* .fi-rs-calendar {
-    position: absolute;
-    top: 78%;
-    right: 24px;
-    transform: translateY(-50%);
-    background-size: cover;
-    cursor: pointer;
-    font-size: 1.2rem;
-    color: #1467B0;
-} */
 
         .dark-mode .link-text {
             color: #000;
@@ -1432,7 +1422,7 @@
                             <label class="form-label fw-bold fs-18">Select Tenant</label>
                             <select class="form-control select2 form-select d-block" data-placeholder="Select Tenant"
                                 name="tenants" id="tenants" data-bs-placement="top" data-bs-toggle="tooltip" title=""
-                                data-bs-original-title="Select Tenant" data-bs-container="#addModal">
+                                data-bs-original-title="Select Tenant" data-bs-container="#addModal" required>
                                 <option label="Choose one">
                                 </option>
 
@@ -1444,7 +1434,7 @@
                             <label class="form-label fw-bold fs-18">Select Property</label>
                             <select class="form-control select2 form-select d-block" data-placeholder="Select Property"
                                 name="tenants" id="propertyName" data-bs-placement="top" data-bs-toggle="tooltip"
-                                title="" data-bs-original-title="Select Property" data-bs-container="#addModal">
+                                title="" data-bs-original-title="Select Property" data-bs-container="#addModal" required>
                                 <option label="Choose one">
                                 </option>
 
@@ -1456,7 +1446,7 @@
                             <label class="form-label fw-bold fs-18">Select Unit</label>
                             <select class="form-control select2 form-select d-block" data-placeholder="Select Unit"
                                 name="tenants" id="propertyUnit" data-bs-placement="top" data-bs-toggle="tooltip"
-                                title="" data-bs-original-title="Select Unit" data-bs-container="#addModal">
+                                title="" data-bs-original-title="Select Unit" data-bs-container="#addModal" required>
                                 <option label="Choose one">
                                 </option>
 
@@ -1471,12 +1461,12 @@
                                         name="invoice" id="invoice" checked>
                                     <span class="custom-control-label">One Time Invoice</span>
                                 </label>
-                                <!-- <label class="custom-control custom-radio mb-0">
+                                <label class="custom-control custom-radio mb-0">
                                     <input class="custom-control-input" type="radio" value="Recurring Invoice"
                                         name="invoice" id="recurring" data-bs-toggle="collapse" href="#collapse1"
                                         role="button" aria-expanded="false" aria-controls="collapseExample1">
                                     <span class="custom-control-label">Recurring Invoice</span>
-                                </label> -->
+                                </label>
                             </div>
                         </div>
                         <!-- <div class="col-md-8 col-lg-6">
@@ -1490,7 +1480,7 @@
                             <label class="form-label fw-bold fs-18">Due Date</label>
                             <input type="date" class="form-control form" id="dueDate" data-bs-placement="top"
                                 data-bs-toggle="tooltip" title="" data-bs-original-title="Select Due Date"
-                                data-bs-container="#addModal">
+                                data-bs-container="#addModal" required>
                             <span class="text-danger d-none">Due Date is required!</span>
                         </div>
                         <div class="collapse row" id="collapse1">
@@ -1567,26 +1557,24 @@
                                     <tbody id="add-item-container1">
                                         <tr class="tr">
                                             <td>
-                                                <select id="state" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the state where you reside" data-bs-container="#addModal">
+                                                <select id="state" name="category" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the state where you reside" data-bs-container="#addModal" required>
                                                     <option selected="">Choose...</option>
-                                                <option value="Alabama">Alabama</option>
-                                                <option value="Alaska">Alaska</option></select>
+                                                </select>
                                                 <span class="text-danger d-none">State is required!</span>
                                             </td>
-                                            <td><select id="state" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the state where you reside" data-bs-container="#addModal">
-                                                <option selected="">Choose...</option>
-                                            <option value="Alabama">Alabama</option>
-                                            <option value="Alaska">Alaska</option></select>
+                                            <td><select id="state" name="property" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the state where you reside" data-bs-container="#addModal" required>
+                                                <option selected="">Choose...</option></select>
+                                            
                                             <span class="text-danger d-none">State is required!</span></td>
                                             <td><input type="text" class="form-control" name="memo"
                                                     data-bs-placement="top" data-bs-toggle="tooltip" title=""
                                                     data-bs-original-title="Enter memo here"
-                                                    data-bs-container="#addModal"></td>
+                                                    data-bs-container="#addModal" required></td>
                                             <td><input type="text" class="form-control" name="amount" id="amountField"
                                                     data-bs-placement="top" data-bs-toggle="tooltip" title=""
                                                     data-bs-original-title="Enter amount here"
                                                     data-bs-container="#addModal"
-                                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '')">
+                                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '')" required>
                                             </td>
                                             <td><button type="button" class="btn" id="del-btn1">
                                                     <i class="fi fi-rs-trash text-danger fs-5"></i>
@@ -1693,7 +1681,7 @@
                         <div class="col-md-12 col-lg-6">
                             <label class="form-label fw-bold fs-18">Select Tenant</label>
                             <select class="form-control select2 form-select d-block" data-placeholder="Select Tenant"
-                                name="tenants" id="tenants_update">
+                                name="tenants" id="tenants_update" required>
                                 <option label="Choose one">
                                 </option>
                             </select>
@@ -1704,7 +1692,7 @@
                             <div class="d-flex">
                                 <label class="custom-control custom-radio me-3 mb-0">
                                     <input class="custom-control-input" type="radio" value="One Time Invoice"
-                                        name="invoice_update" id="invoice_update" checked>
+                                        name="invoice_update" id="invoice_update" checked >
                                     <span class="custom-control-label">One Time Invoice</span>
                                 </label>
                                 <!-- <label class="custom-control custom-radio mb-0">
@@ -1718,12 +1706,12 @@
                         </div>
                         <div class="col-md-8 col-lg-6">
                             <label class="form-label fw-bold fs-18">Property Name</label>
-                            <input type="text" class="form-control form" id="propertyName_update" value="" readonly>
+                            <input type="text" class="form-control form" id="propertyName_update" value="" readonly required>
                             <span class="text-danger d-none">Property name is required!</span>
                         </div>
                         <div class="col-md-8 col-lg-6">
                             <label class="form-label fw-bold fs-18">Due Date</label>
-                            <input type="date" class="form-control form" id="dueDate_update">
+                            <input type="date" class="form-control form" id="dueDate_update" required>
                             <span class="text-danger d-none">Due Date is required!</span>
                         </div>
                         <div class="collapse row" id="collapse1_update">
@@ -1789,10 +1777,18 @@
                                     </thead>
                                     <tbody id="add-item-container1_update">
                                         <tr class="tr">
-                                            <td><input type="text" class="form-control" name="category"></td>
-                                            <td><input type="text" class="form-control" name="property"></td>
+                                            <td>
+                                                <select id="state" name="category" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the state where you reside" data-bs-container="#addModal" required>
+                                                    <option selected="">Choose...</option>
+                                                </select>
+                                                <span class="text-danger d-none">State is required!</span>
+                                            </td>
+                                            <td><select id="state" name="property" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the state where you reside" data-bs-container="#addModal" required>
+                                                <option selected="">Choose...</option></select>
+                                            
+                                            <span class="text-danger d-none">State is required!</span></td>
                                             <td><input type="text" class="form-control" name="memo"></td>
-                                            <td><input type="text" class="form-control" name="amount"></td>
+                                            <td><input type="text" class="form-control" name="amount" required></td>
                                             <td><button type="button" class="btn" id="del-btn_update">
                                                     <i class="fi fi-rs-trash text-danger fs-5"></i>
                                                 </button></td>
@@ -3570,16 +3566,42 @@
                     })
 
                 }
-                // console.log(333)
-                // <a href="javascript:void(0)" id="preview"><i class="fi fi-rs-eye me-2 text-primary"></i> </a>
+                
 
             })
+            function resetAccordions(){
+                selectedFiles=[]
+
+                $("#addModal input, #addModal select").each(function(){
+                    $(this).removeClass("border-green")
+                    $(this).removeClass("border-danger")
+                })
+                $("#add-item-container1 .tr").each(function(){
+                    if($("#add-item-container1 .tr").length>1){
+                        $(this).remove()
+                    }  
+                })
+                $("[name='property']").empty()
+                $("[name='property']").append($('<option label="Choose one"></option>'))
+                $("[name='property_update']").empty()
+                $("[name='category']").empty()
+                $("[name='category']").append($('<option label="Choose one"></option>'))
+                $("[name='category_update']").append($('<option label="Choose one"></option>'))
+                $("#totalText").text("$ " + 0)
+                $('#toggle-button,.save-invoice').attr("disabled", true);
+                $(".file-grid").empty()
+            }
+            $("#succesModal,#infoModal,#addModal,#myModal_edit").on('hide.bs.modal', function() {
+
+resetAccordions()
+})
+$("#succesModal").on('hide.bs.modal', function() {
+    resetAccordions()
+getData()
+})
+    
             $(document).on("click", "#preview_update", function () {
-                // console.log(222222)
-                // console.log($('#preview').text().startsWith(" Preview"))
-                // console.log($('#preview').text().split(' ')[1].split('/')[0]=="Preview")
-                // var text = $("#preview_update").text().trim();
-                // console.log(text.startsWith("Preview"));
+                
                 if ($('#preview_update').text().trim().startsWith("Edit")) {
                     console.log(222)
                     $("#previewHeading_update").empty()
@@ -3624,9 +3646,7 @@
                 $("#succesModal").modal("hide")
                 $("#addModal").modal("show")
             })
-            $("#succes-close").click(() => {
-                getData()
-            })
+            
             $('input[name="invoice"],input[name="invoice_update"]').change(function () {
                 console.log($(this).val())
                 if ($(this).val() === 'Recurring Invoice') {
@@ -3675,7 +3695,8 @@
 
             $(document).on('click', '.delete-file', function () {
                 var index = $(this).data('index');
-                selectedFiles.splice(index, 1); // Remove the selected file from the array
+                selectedFiles.splice(index, 1);
+                $('#fileInput').empty() // Remove the selected file from the array
                 updateSelectedFilesContainer(); // Update the selected files container
             });
 
@@ -3726,125 +3747,6 @@
 
                 return fileName;
             }
-            // $("#resend-invoice").click(() => {
-            //     $.ajax({
-            //         url: 'https://backend.app.spaderent.com/api/spade/resendEmail',
-            //         type: 'GET',  // Change the method to POST
-            //         data: { invoiceID: invoiceId },  // Send the data in the request body
-            //         contentType: 'application/json',  // Set the content type to JSON
-            //         headers: {
-            //             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-            //         },
-            //         success: function (response) {
-            //             // Handle the success response from the API
-            //             console.log('API response:', response);
-            //         },
-            //         error: function (xhr, status, error) {
-            //             // Handle the error response from the API
-            //             console.log('API error:', error);
-            //         }
-            //     });
-
-            // })
-            // $(".save-invoice").each(function() {
-            //     $(this).on("click", function() {
-            //         console.log(1)
-            //         var selectedTenant = $('#tenants').val();
-            //         var selectedInvoiceType = $('input[name="invoice"]:checked').val();
-            //         var startDate = $('#startDate').val();
-            //         var endDate = $('#endDate').val();
-            //         var dueDate = $('#dueDate').val()
-            //         var selectedFrequency = $('#frequency').val();
-            //         var daysUntilDue = $('#daysUntilDue').val();
-            //         var selectedTerms = $('#terms').val();
-            //         var additionalNotes = $('#additionalNotes').val();
-            //         var switchValue = $("input[name='custom-switch-radio']").is(":checked");
-            //         // Collect the line items data from the table
-            //         var lineItems = [];
-            //         $('#lineItemsTable tbody tr').each(function() {
-            //             console.log($(this))
-            //             var category = $(this).find('input[name="category"]').val();
-            //             var property = $(this).find('input[name="property"]').val();
-            //             var memo = $(this).find('input[name="memo"]').val();
-            //             var amount = $(this).find('input[name="amount"]').val();
-
-            //             lineItems.push({
-            //                 category: category,
-            //                 property: property,
-            //                 memo: memo,
-            //                 amount: amount
-            //             });
-            //         });
-            //         console.log(lineItems)
-            //             // Create a FormData object to hold the data and files
-            //         var formData = new FormData();
-            //         var buttonText = $(this).text();
-
-            //         if (buttonText !== "Save" && buttonText.indexOf("Print") === -1) {
-            //             console.log("here")
-            //             formData.append("sendmails", "Yes")
-            //         }
-            //         // Add the data to the FormData object
-            //         formData.append('tenantID', selectedTenant);
-            //         formData.append('invoiceType', selectedInvoiceType);
-            //         formData.append('startDate', startDate);
-            //         formData.append('endDate', endDate);
-            //         formData.append('frequency', selectedFrequency);
-            //         formData.append('dueDate', dueDate);
-            //         formData.append('dueDays', daysUntilDue);
-            //         formData.append('terms', selectedTerms);
-            //         formData.append('repeatTerms', switchValue);
-            //         formData.append('additionalNotes', additionalNotes);
-            //         console.log($("#totalText").text().split('$')[1])
-            //         formData.append('totalAmount', $("#totalText").text().split(' ')[1])
-            //             // Loop through the lineItems array and add each line item to the FormData object
-            //         for (var i = 0; i < lineItems.length - 1; i++) {
-            //             var lineItem = lineItems[i];
-            //             formData.append('lineItems[' + i + '][category]', lineItem.category);
-            //             formData.append('lineItems[' + i + '][property]', lineItem.property);
-            //             formData.append('lineItems[' + i + '][memo]', lineItem.memo);
-            //             formData.append('lineItems[' + i + '][amount]', lineItem.amount);
-            //         }
-
-            //         // Add the files to the FormData object
-            //         var fileInput = document.getElementById('fileInput');
-            //         var files = fileInput.files;
-
-            //         for (var i = 0; i < files.length; i++) {
-            //             var file = files[i];
-            //             formData.append('image', file);
-            //         }
-
-            //         // Send the data and files to the API using AJAX
-            //         $.ajax({
-            //             url: 'https://backend.app.spaderent.com/api/spade/createInvoice',
-            //             type: 'POST',
-            //             data: formData,
-            //             contentType: false,
-            //             processData: false,
-            //             headers: {
-            //                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-            //             },
-
-            // success: function(response) {
-
-            // const tenant=tenantData.find(obj => obj.tenantID == selectedTenant)
-            // console.log(tenant)
-            // $("#addModal").modal("hide")
-            // $('#addModal input[type="text"], #addModal input[type="date"], #addModal textarea').val('');
-            // $('#addModal select').prop('selectedIndex', 0);
-            // $("#succes-tenantName").text(`sent to ${tenant.firstName+" "+tenant.lastName}.`)
-            // $("#succesModal").modal("show")
-            // getData()
-
-            // },
-            //             error: function(xhr, status, error) {
-            //                 // Handle the error response from the API
-            //                 console.log('API error:', error);
-            //             }
-            //         });
-            //     });
-            // });
             $(".save-invoice").each(function () {
                 $(this).on("click", function () {
                     var selectedTenant = $('#tenants').val();
@@ -3860,8 +3762,8 @@
                     var lineItems = [];
                     $('#lineItemsTable tbody tr').each(function () {
 
-                        var category = $(this).find('input[name="category"]').val();
-                        var property = $(this).find('input[name="property"]').val();
+                        var category = $(this).find('[name="category"]').val();
+                        var property = $(this).find('[name="property"]').val();
                         var memo = $(this).find('input[name="memo"]').val();
                         var amount = $(this).find('input[name="amount"]').val();
 
@@ -3936,7 +3838,7 @@
                                         $('#addModal select').prop('selectedIndex', 0);
                                         $("#succes-tenantName").text(`sent to ${tenant.firstName + " " + tenant.lastName}.`)
                                         $("#succesModal").modal("show")
-                                        getData()
+                                        
                                     },
                                     error: function (xhr, status, error) {
                                         // Handle the error response from the API
@@ -3984,7 +3886,7 @@
                                 $('#addModal select').prop('selectedIndex', 0);
                                 $("#succes-tenantName").text(`sent to ${tenant.firstName + " " + tenant.lastName}.`)
                                 $("#succesModal").modal("show")
-                                getData()
+                                
                             },
                             error: function (xhr, status, error) {
                                 // Handle the error response from the API
@@ -3996,10 +3898,28 @@
             });
             let tenantData = [];
             let invoiceData = []
-
+            let categoryData=[]
             function getData() {
+                $.ajax({
+                        url: 'http://localhost:3000/api/spade/invoiceCategory',
+                        method: 'GET',
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            categoryData = response.data
+                            console.log(categoryData)
+                            categoryData.forEach(function(category){
+                                $("[name='category']").append($('<option></option>').text(category.categorieName).val(category.id))
+                            })
+                        },
+                        error: function (xhr, status, error) {
+                            console.log('Error occurred while fetching state and city data.');
+                            console.log(xhr);
+                            console.log(error);
+                        }
+                    });
                 $("#preloader").fadeIn("fast");
-                // console.log(22)
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/viewAllPropertyTenant',
                     type: 'GET',
@@ -4148,32 +4068,128 @@ console.log(response.data[0])
                 console.log(propertyName)
                 $("#propertyName").empty()
                 $("#propertyUnit").empty()
-                $("#propertyName").append($('<option label="Choose one"></option>'))
+                $("[name='property']").empty()
+                $("[name='property']").append($('<option label="Choose one"></option>'))
+                $("[name='property']").append($('<option></option>').text(propertyName[0].propertyName).val(propertyName[0].propertyID))
                 $("#propertyUnit").append($('<option label="Choose one"></option>'))
                 $("#propertyName").append($('<option></option>').text(propertyName[0].propertyName).val(propertyName[0].propertyID))
                 $("#propertyUnit").append($('<option></option>').text(propertyName[0].unitNumber).val(propertyName[0].propertyUnitID))
             })
+            $(document).on("change", ".tr [name='category'], .tr [name='category_update']", function(){
+    const selectedCategoryId = $(this).val();
+    console.log(selectedCategoryId);
+
+    // Determine if the changed element is a category or category_update input
+    const isCategory = $(this).attr("name") === "category";
+
+    // Find the matching category object in the categoryData array
+    const matchingCategory = categoryData.find((category) => category.id == selectedCategoryId);
+
+    // Get the parent row of the changed input
+    const parentRow = $(this).closest(".tr");
+
+    // Find the corresponding amount input within that row based on whether it's a category or category_update input
+    const amountInput = isCategory ? parentRow.find("[name='amount']") : parentRow.find("[name='amount_update']");
+
+    // Check if a matching category is found
+    if (matchingCategory) {
+        const amount = matchingCategory.setTaxes;
+        // Set the corresponding amount for the current row
+        amountInput.val(amount);
+    } else {
+        // Handle the case when no matching category is found for the current row
+        amountInput.val("No matching category found.");
+    }
+});
+
+
+
+
+
+
+
 
 
             $(document).on("click", "#add-item1", () => {
-                $("#add-item-container1").append(`<tr class="tr">
-                                            <td><input type="text" class="form-control" name="category"></td>
-                                            <td><input type="text" class="form-control" name="property"></td>
-                                            <td><input type="text" class="form-control" name="memo"></td>
-                                            <td><input type="text" class="form-control" name="amount" oninput="this.value = this.value.replace(/[^0-9.]/g, '')"></td>
-                                            <td><button type="button" class="btn" id="del-btn1">
-                                                <i class="fi fi-rs-trash text-danger fs-5"></i>
-                                            </button></td>
-                                        </tr>`)
-            });
+  const property = $("#tenants").val();
+  
+  if (property == "Choose...") {
+    $("#add-item-container1").append(`
+      <tr class="tr">
+        <td>
+          <select id="state" name="category" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the state where you reside" data-bs-container="#addModal" required>
+            <option selected="">Choose...</option>
+            ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
+          </select>
+          <span class="text-danger d-none">State is required!</span>
+        </td>
+        <td>
+          <select id="state" name="property" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the state where you reside" data-bs-container="#addModal" required>
+            <option selected="">Choose...</option>
+          </select>
+          <span class="text-danger d-none">State is required!</span>
+        </td>
+        <td><input type="text" class="form-control" name="memo"></td>
+        <td><input type="text" class="form-control" name="amount" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" required></td>
+        <td>
+          <button type="button" class="btn" id="del-btn1">
+            <i class="fi fi-rs-trash text-danger fs-5"></i>
+          </button>
+        </td>
+      </tr>
+    `);
+  } else {
+    const propertyName = tenantData.filter((tenant) => tenant.tenantID == property);
+    $("#add-item-container1").append(`
+      <tr class="tr">
+        <td>
+          <select id="state" name="category" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the state where you reside" data-bs-container="#addModal" required>
+            <option selected="">Choose...</option>
+            ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
+          </select>
+          <span class="text-danger d-none">State is required!</span>
+        </td>
+        <td>
+          <select id="state" name="property" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the state where you reside" data-bs-container="#addModal" required>
+            <option selected="">Choose...</option>
+            <option value="${propertyName[0].propertyID}">${propertyName[0].propertyName}</option>
+          </select>
+          <span class="text-danger d-none">State is required!</span>
+        </td>
+        <td><input type="text" class="form-control" name="memo"></td>
+        <td><input type="text" class="form-control" name="amount" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" required></td>
+        <td>
+          <button type="button" class="btn" id="del-btn1">
+            <i class="fi fi-rs-trash text-danger fs-5"></i>
+          </button>
+        </td>
+      </tr>
+    `);
+  }
+});
+
             $(document).on("click", "#add-item1_update", () => {
+                const property=$("#tenants_update").val()
+                const propertyName = tenantData.filter((tenant) => tenant.tenantID == property);
                 $("#add-item-container1_update").append(`<tr class="tr">
-                                            <td><input type="text" class="form-control" name="category_update"></td>
+                    <td>
+          <select id="state" name="category_update" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the state where you reside" data-bs-container="#addModal" required>
+            <option selected="">Choose...</option>
+            ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
+          </select>
+          <span class="text-danger d-none">State is required!</span>
+        </td>
+        <td>
+          <select id="state" name="property_update" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the state where you reside" data-bs-container="#addModal" required>
+            <option selected="">Choose...</option>
+            <option value="${propertyName[0].propertyID}">${propertyName[0].propertyName}</option>
+          </select>
+          <span class="text-danger d-none">State is required!</span>
+        </td>
                                             <td><input type="text" class="form-control" name="memo_update"></td>
-                                            <td><input type="text" class="form-control" name="property_update"></td>
                                             <td><input type="text" class="form-control" name="amount_update" data-bs-placement="top" data-bs-toggle="tooltip" title=""
                                                     data-bs-original-title="Enter amount here"
-                                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '')"></td>
+                                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '')" required></td>
                                             <td><button type="button" class="btn" id="del-btn_update">
                                                 <i class="fi fi-rs-trash text-danger fs-5"></i>
                                             </button></td>
@@ -4467,25 +4483,7 @@ console.log(response.data[0])
                 $("#dueDate").text(data.dueDate)
                 $("#invoiceStatus").text(data.status)
                 $("#propertyAddress").text(data.pAddress)
-                // $("#invoiceCategory").text(data.invoiceType)
-                // $("#invoiceProperty").text(data.invoiceType)
-                // $("#invoiceMemo").text(data.invoiceType)
-                // $("#invoiceAmount").text(data.invoiceType)
-                // $("#client-id").append(`<h5 class="fw-bold" style="color: 
-                //                 #562AC8;">BILLED TO</h5>
-                //                     <p class="text-dark">${data.firstName + " " + data.lastName}<br>${data.tAddress
-                //     }<br>${data.tCity},
-                //                         ${data.tState}<br>${data.tZipcode}<br>United States<br>${data.tPhoneNumber}</p>`)
-                // console.log(1)
-                // $("#owner-id").empty()
-                // $("#owner-id").append(`                                    <h5 class="text-dark fw-bold">${data.companyName}</h5>
-                //                     <p class="text-dark">${data.pAddress}<br>${data.pCity}, ${data.pState}<br>${data.pZipCode}<br>United
-                //                         States<br>1-888-123-8910</p>`)
-                // $("#table-body").empty()
-                // var dateObj = new Date(data.created_at);
-                // var day = dateObj.getDate();
-                // var month = dateObj.getMonth() + 1;
-                // var year = dateObj.getFullYear();
+                
                 $("#view-invoice-line-item").empty()
                 data.memo.forEach((item) => {
 
@@ -4538,22 +4536,7 @@ console.log(response.data[0])
                     ...data2
                 };
                 console.log(data)
-                //         window.onload = function () {
-                //     document.getElementById("create_pdf")
-                //         .addEventListener("click", () => {
-                //             const invoice = this.document.getElementById("htmlContent");
-                //             // console.log(invoice);
-                //             // console.log(window);
-                //             var opt = {
-                //                 margin: 0.1,
-                //                 filename: `invoice.pdf`,
-                //                 image: { type: 'jpeg', quality: 0.98 },
-                //                 html2canvas: { scale: 2 },
-                //                 jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-                //             };
-                //             html2pdf().from(invoice).set(opt).save();
-                //         })
-                // }
+              
             });
             $(document).on('click', '.status-option', function () {
                 // const invoiceIdElement = $(this).closest("tr").find(".invoice-id");
@@ -4654,17 +4637,35 @@ console.log(response.data[0])
                 })
                 $("#propertyName_update").val(propertyName[0].propertyName)
                 $("#dueDate_update").val(data.dueDate)
+                let sum=0
                 $('#add-item-container1_update').empty()
                 data.memo.forEach(({
                     memo,
                     category,
                     amount
                 }) => {
+                    
+                    const categoryid= category
+                    $("#totalText_update").text(`$ ${parseInt(amount)+sum}`)
+                    sum=parseInt(amount)
                     $('#add-item-container1_update').append(
                         `<tr class="tr">
-                                            <td><input type="text" class="form-control" name="category_update" value=${category}></td>
+                            <td>
+                                <select id="state" name="category_update" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the state where you reside" data-bs-container="#addModal" required>
+    <option>Choose...</option>
+    ${categoryData.map((category) => `<option value="${category.id}" ${category.id == categoryid ? 'selected=" "' : ''}>${category.categorieName}</option>`).join("")}
+</select>
+
+          <span class="text-danger d-none">State is required!</span>
+        </td>
+        <td>
+          <select id="state" name="property_update" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the state where you reside" data-bs-container="#addModal" required>
+            <option selected="">Choose...</option>
+            <option value="${propertyName[0].propertyID}" selected=" ">${propertyName[0].propertyName}</option>
+          </select>
+          <span class="text-danger d-none">State is required!</span>
+        </td>
                                             <td><input type="text" class="form-control" name="memo_update" value=${memo}></td>
-                                            <td><input type="text" class="form-control" name="property_update" value=${property}></td>
                                             <td><input type="text" class="form-control" name="amount_update" value=${amount} data-bs-placement="top" data-bs-toggle="tooltip" title=""
                                                     data-bs-original-title="Enter amount here"
                                                     
@@ -4675,7 +4676,7 @@ console.log(response.data[0])
                                         </tr>`
                     )
                 })
-                $("#totalText_update").text(`$ ${data.totalAmount}`)
+                
                 $("#additionalNotes_update").val(data.note)
                 selectedFiles = []
                 if (data.invoiceImages[0].Image!==null) {
@@ -4702,8 +4703,8 @@ console.log(response.data[0])
                     var lineItems = [];
                     $('#lineItemsTable_update tbody tr').each(function () {
 
-                        var category = $(this).find('input[name="category_update"]').val();
-                        var property = $(this).find('input[name="property_update"]').val();
+                        var category = $(this).find('[name="category_update"]').val();
+                        var property = $(this).find('[name="property_update"]').val();
                         var memo = $(this).find('input[name="memo_update"]').val();
                         var amount = $(this).find('input[name="amount_update"]').val();
 
@@ -4742,7 +4743,7 @@ console.log(response.data[0])
                             formData.append('image', file);
                         });
                         $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/upload',
+                            url: 'http://localhost:3000/api/spade/upload',
                             type: 'POST',
                             data: formData,
                             contentType: false,
@@ -4769,7 +4770,7 @@ console.log(response.data[0])
                                     images: imageArray
                                 }
                                 $.ajax({
-                                    url: 'https://backend.app.spaderent.com/api/spade/updateInvoice',
+                                    url: 'http://localhost:3000/api/spade/updateInvoice',
                                     type: 'PUT',
                                     data: JSON.stringify(invoiceData),
                                     contentType: 'application/json',
@@ -4813,7 +4814,7 @@ console.log(response.data[0])
                             images: []
                         }
                         $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/UpdateInvoice',
+                            url: 'http://localhost:3000/api/spade/UpdateInvoice',
                             type: 'PUT',
                             data: JSON.stringify(invoiceData),
                             contentType: 'application/json',
@@ -4836,31 +4837,7 @@ console.log(response.data[0])
                     }
 
                 });
-                // Send the data and files to the API using AJAX
-                // $.ajax({
-                //     url: 'https://backend.app.spaderent.com/api/spade/UpdateInvoice',
-                //     type: 'PUT',
-                //     data: formData,
-                //     contentType: false,
-                //     processData: false,
-                //     headers: {
-                //         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                //     },
-
-                //     success: function (response) {
-                        // $("#myModal_edit").modal("hide")
-                        // getData()
-                        // $("#successfully_changed_text").text("Successfully Updated");
-                        // $("#successfully_changed").modal("show");
-                        // setTimeout(function () {
-                        //     $("#successfully_changed").modal("hide");
-                        // }, 2000);
-                //     },
-                //     error: function (xhr, status, error) {
-                //         // Handle the error response from the API
-                //         console.log('API error:', error);
-                //     }
-                // });
+                
             });
         
         $("#update-status").click(() => {
@@ -4895,6 +4872,29 @@ console.log(response.data[0])
                 }
             });
         })
+        function areAllFieldsFilled() {
+                var accordion1Fields = $('#addModal input[required], #addModal select[required]');
+                var unitField = $('#unit');
+                var allFieldsFilled =
+                    accordion1Fields.filter(function() {
+                        return $(this).val() === '' || $(this).val() === 'Choose...';
+                    }).length === 0
+                    console.log(allFieldsFilled)
+                return allFieldsFilled;
+            }
+
+            // Function to enable or disable buttons based on field status
+            // Function to enable or disable buttons based on field status
+            function updateButtonStatus() {
+                var allFieldsFilled = areAllFieldsFilled();
+
+                // Enable or disable the buttons based on the fields' status
+                if (allFieldsFilled) {
+                    $('#toggle-button,.save-invoice').removeAttr("disabled");
+                } else {
+                    $('#toggle-button,.save-invoice').attr("disabled", true);
+                }
+            }
         $(document).on('input change', '#addModal input, #addModal select, #addModal input, #addModal select,#addModal textarea', function () {
             updateTotal();
             var $field = $(this);
@@ -4908,8 +4908,11 @@ console.log(response.data[0])
                 $field.addClass('border-green');
                 $errorMessage.addClass('d-none');
             }
-
+            updateButtonStatus()
         });
+        $("#add-item1").click(()=>{
+            updateButtonStatus()
+        })
         $(document).on('input change', '#myModal_edit input, #myModal_edit select, #myModal_edit input, #myModal_edit select,#myModal_edit textarea', function () {
             updateTotal();
             var $field = $(this);

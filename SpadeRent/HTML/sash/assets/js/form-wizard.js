@@ -497,29 +497,76 @@ function cardbtnchange() {
   }
 }
 const checkbox = document.getElementById('check1');
+$(document).ready(function() {
+  let valid=false
+  $("#email").on("input",()=>{
+      var email = $("#email").val();
+      $.ajax({
+          url: "http://localhost:3000/api/spade/checkemail",
+          type: "GET",
+          contentType: "application/json",
+          data: {
+              email: email
+          },
+          success: function(response) {
+              button1()
+              if(response.message == "New user")
+              {
+                valid=true
+               document.getElementById("email-span-invalid").style.display = "none";
+               button1()
+              }
+              else{
+                valid=false
+               document.getElementById("email-span-invalid").style.display = "block";
+               button1()
+              }
+          },
+          error: function(xhr, status, error) {
+              document.getElementById("email-span-invalid").style.display = "block";
+              valid=false
+              button1()
+          },
+      });
 
-firstname.addEventListener("keyup", button1);
-email.addEventListener("keyup", button1);
+  })
+  firstname.addEventListener("keyup", button1);
+
 lastname.addEventListener("keyup", button1);
 input.addEventListener("keyup", button1);
 input.addEventListener("change", button1);
 checkbox.addEventListener("change", button1);
 
 function button1() {
+  // Get the element with id 'email-span-invalid'
+  const emailSpan = document.getElementById('email-span-invalid');
+
+  // Get the computed style of the element
+  const computedStyle = window.getComputedStyle(emailSpan);
+
+  // Check if the element is hidden (display: none)
+  const isEmailSpanHidden = computedStyle.display === 'none';
+
+  // Check all the form input conditions and whether the 'email-span-invalid' element is hidden
   if (
-    email.value.match(validEmail) &&
-    lastname.value.match(validname) &&
-    firstname.value.match(validname) &&
-    iti.isValidNumber() && checkbox.checked
-    // &&
-    // phone.value.match(validPhone)
+    email.value.match(validEmail) &&         // Check email validity
+    valid &&                     // Check if 'email-span-invalid' is hidden
+    lastname.value.match(validname) &&       // Check lastname validity
+    firstname.value.match(validname) &&      // Check firstname validity
+    iti.isValidNumber() &&                   // Check phone number validity using 'iti' (which is probably an instance of the International Telephone Input library)
+    checkbox.checked                         // Check if checkbox is checked
+    // && phone.value.match(validPhone)      // You seem to have commented out this line, so it's not part of the condition
   ) {
+    // If all conditions are met, enable the "Next" button
     document.getElementById("next1").disabled = false;
-    // part2.disabled = false;
   } else {
+    // If any of the conditions fail, disable the "Next" button
     document.getElementById("next1").disabled = true;
   }
 }
+})
+
+
 
 let next1 = document.getElementById("next1");
 let part2 = document.getElementById("part2");

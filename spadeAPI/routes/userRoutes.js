@@ -11,6 +11,7 @@ const { uploadExistingFiles } = require("../middleware/imageUploads");
 const taskController = require("../controllers/taskController");
 const fileUpload = require("../helper/S3Bucket");
 const notifyController = require("../controllers/notifyController");
+const { chatsController } = require("../controllers/chatsController");
 
 router.post("/Signup", userController.createUser);
 router.get("/protected", verifyToken, userController.getUser);
@@ -89,6 +90,7 @@ router.get('/getByIdInvoices', verifyToken, invoiceController.getByIdInvoices);
 router.put('/UpdateInvoice', verifyToken, invoiceController.UpdateInvoice);
 router.delete('/invoiceDelete', verifyToken, invoiceController.invoiceDelete);
 router.post("/addVendor", verifyToken, taskController.addVendors);
+
 router.post("/addVendorCategory", verifyToken, taskController.addVendorCategory);
 // router.get("/getAllVendors",verifyToken ,taskController.getAllVendors);
 router.get("/getAllVendors", verifyToken, taskController.getAllVendors);
@@ -116,12 +118,21 @@ router.put("/updatedInvoiceCategory", verifyToken, invoiceController.updateInvoi
 router.get("/invoiceCategory", verifyToken, invoiceController.getInvoiceCategories);
 router.get("/getInvoiceCategoriesText", verifyToken, invoiceController.getInvoiceCategoriesText);
 router.get("/dashboard", verifyToken, userController.getDashboardData);
-
+router.get("/checkNotify", verifyToken, notifyController.getCheckedNotify);
 
 // updated notification route
-router.put("/notify", verifyToken, notifyController.updateNotify);
+router.put("/notify", verifyToken, notifyController.updateNotifyData);
 router.get("/notify", verifyToken, notifyController.getNotify);
 router.get("/property", verifyToken, userController.getAllProperty);
 router.get("/invoice", verifyToken, userController.getInvoiceReportData);
 router.get("/task", verifyToken, userController.getTaskReportData);
+
+
+
+// chats start
+router.post("/accessChats", verifyToken, chatsController.accessChats);
+router.get("/fetchChats", verifyToken, chatsController.fetchChats);
+
+
+
 module.exports = router;

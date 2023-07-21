@@ -327,17 +327,22 @@ exports.UpdateInvoice = async (req, res) => {
       }
     }
     let invoiceCheckResult;
-    if (images.length > 0) {
-      invoiceCheckResult = await queryRunner(
-        selectQuery("invoiceimages", "invoiceID"),
-        [invoiceID]
-      );
+    console.log(images)
+    invoiceCheckResult = await queryRunner(
+      selectQuery("invoiceimages", "invoiceID"),
+      [invoiceID]
+    );
+    if(images.length===invoiceCheckResult[0].length){
+      res.json({message:"Invoice updated successfully"})
+    }
+    else if (images.length!==invoiceCheckResult[0].length) {
+      
       // console.log(images, propertycheckresult[0])
 
       // Extract the image keys from propertycheckresult
       const propertyImageKeys = invoiceCheckResult[0].map(image => image.ImageKey);
-      console.log(invoiceCheckResult[0])
-      console.log(propertyImageKeys)
+      // console.log(invoiceCheckResult[0])
+      // console.log(propertyImageKeys)
       // Find the images to delete from S3 (present in propertycheckresult but not in images)
       const imagesToDelete = invoiceCheckResult[0].filter(image => !images.some(img => img.imageKey === image.ImageKey));
       console.log(imagesToDelete)
@@ -365,44 +370,16 @@ exports.UpdateInvoice = async (req, res) => {
           throw new Error("data doesn't inserted in property image table");
         }
       }
-      // if (invoiceCheckResult[0].length > 0 && invoiceCheckResult.length > 0) {
-      //   const invoiceImages = invoiceCheckResult[0].map((image) => image.InvoiceImage);
-      //   const existingImg = existingImages.split(",");
-      //   const imagesToDelete = invoiceImages.filter(
-      //     (element) => !existingImg.includes(element)
-      //   );
-
-      //   imageToDelete(imagesToDelete);
-
-      //   if (imagesToDelete.length > 0) {
-      //     for (let i = 0; i < imagesToDelete.length; i++) {
-      //       await queryRunner(
-      //         deleteQuery("invoiceimages", "invoiceID", "InvoiceImage"),
-      //         [invoiceID, imagesToDelete[i]]
-      //       );
-      //     }
-      //   }
-      // }
-
-      // const fileNames = req.files.map((file) => file.filename);
-
-      // for (let i = 0; i < fileNames.length; i++) {
-      //   const img = fileNames[i];
-      //   const invoiceImageResult = await queryRunner(insertInvoiceImage, [invoiceID, img]);
-
-      //   if (invoiceImageResult.affectedRows === 0) {
-      //     return res.send('Error occurred while inserting invoice images');
-      //   }
-      // }
+      
 
       return res.status(200).json({
         message: "Invoice updated successfully"
       });
+    }else{
+      res.json({message:"Invoice updated successfully"})
     }
 
-    return res.status(400).json({
-      message: "No tenants found"
-    });
+   
   } catch (error) {
     console.log(error);
     return res.status(400).send("Error occurred while updating invoice");

@@ -65,7 +65,6 @@ exports.getTaskReportData = "SELECT task.id AS taskID, task.taskName, task.dueDa
 exports.getInvoiceReportData = "SELECT invoice.id AS invoiceID, invoice.created_at,invoice.totalAmount, property.propertyName, property.address ,tenants.email ,tenants.firstName, tenants.lastName FROM invoice JOIN tenants ON tenants.id = invoice.tenantID JOIN property ON property.id = tenants.propertyID WHERE invoice.landlordID = ?";
 exports.getLeaseReport = "SELECT tenants.firstName, tenants.lastName, tenants.leaseEndDate AS LeaseExpire, tenants.phoneNumber, property.propertyType, property.propertyName, property.units FROM tenants JOIN property ON tenants.propertyID = property.id WHERE tenants.landlordID = ?";
 
-
 // getTotalAmount getTotalAmountUnpaid getTotalAmountPaid getNumPropertyTenant
 // get total amount from invoice table
 exports.getTotalAmount = "SELECT SUM(invoice.totalAmount) AS totalAmount FROM invoice WHERE invoice.landlordID = ?";
@@ -79,11 +78,8 @@ exports.getNumPropertyTenant = `SELECT
     (SELECT COUNT(tenants.id) FROM tenants WHERE tenants.landlordID = ?) AS tenantCount;
 `;
 
-
-
 exports.getAmountByCategoriesID = "SELECT InvoiceCategories.setTaxes FROM InvoiceCategories WHERE InvoiceCategories.id = ? AND InvoiceCategories.landLordId = ?";
-// getTenantNotify using joins query
-// exports.getTenantNotify = "SELECT tenants.id AS tenantID, tenants.companyName, tenants.firstName, tenants.lastName, tenants.phoneNumber , tenantattachfiles.Image ,tenantattachfiles.ImageKey FROM tenants JOIN tenantattachfiles ON tenants.id = tenantattachfiles.tenantID WHERE tenants.landlordID = ?";
+
 exports.getTenantNotify = `SELECT 
 tenants.id AS tenantID,
 tenants.companyName, tenants.firstName, tenants.lastName, tenants.phoneNumber,tenants.tenantCreated_at,property.propertyName ,property.address,property.propertyType,property.units,
@@ -182,7 +178,9 @@ ORDER BY
 invoice.created_at DESC;
 `
 // property.propertyType
-exports.updateNotify = "UPDATE notification SET emailNotification = ? , pushNotification = ? WHERE landlordID = ? ";
+// insertNotify notify
+exports.insertNotify = "INSERT INTO notification (landlordID, emailNotification, pushNotification, textNotification) VALUES (?,?,?,?)";
+exports.updateNotify = "UPDATE notification SET emailNotification = ? , pushNotification = ?, textNotification = ? WHERE landlordID = ? ";
 exports.addResetToken =
   "UPDATE users SET token = ?, updated_at = ? where id = ?";
 exports.updatePasswordLandlord =
@@ -372,3 +370,38 @@ exports.addVendorCategory = "INSERT INTO vendorcategory (category,landLordId) VA
 // added some column fields
 exports.createInvoiceCategories = "INSERT INTO InvoiceCategories (categorieName,landLordId,setTaxes,taxable) VALUES (?,?,?,?)";
 exports.updateInvoiceCategories = "UPDATE InvoiceCategories SET categorieName = ?,setTaxes = ?, taxable=? WHERE id = ? AND landLordId = ?";
+
+
+
+// =============================================chats start=====================================================================================
+exports.insertChat = "INSERT INTO chats (senderId, receiverID, created_at) VALUES (?,?,?)";
+// find already exist chat between two users
+exports.findChat = "SELECT * FROM chats WHERE (senderId = ? AND receiverID = ?) OR (senderID = ? AND receiverID = ?)";
+
+// create new Message in messages table
+exports.insertMessage = "INSERT INTO messages (chatID, senderID, receiverID, message, created_at) VALUES (?,?,?,?,?)";
+
+// FullChat get using Joins with tenants grop by senderID and receiverID
+exports.getFullChat = `SELECT
+    c.id AS chatID,
+    c.senderID,
+    c.receiverID,
+    c.created_at,
+    t.firstName,
+    t.lastName,
+    t.email,
+    t.phoneNumber,
+    t.Address
+FROM
+    chats AS c
+JOIN
+    tenants AS t ON c.senderID = t.id
+WHERE
+    c.receiverID = ?
+GROUP BY
+    c.senderID
+ORDER BY
+    c.created_at DESC`;
+
+
+
