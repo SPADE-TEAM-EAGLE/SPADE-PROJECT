@@ -674,7 +674,13 @@
               $("#email_span").hide();
               $("#pass_span").show();
             } else {
-              alert(xhr.responseText);
+                $("#myModal_warning_connection").modal("show");
+                            setTimeout(function() {
+                                $('#myModal_warning_connection').modal('hide');
+
+                            }, 2000);
+                    // console.log('Error: ' + error);
+                    console.log(xhr.responseText);
             }
           },
         });
@@ -761,7 +767,7 @@
       })
     });
   </script>
-  <script>
+  <!-- <script>
     $(document).ready(function() {
       
       if ($('body').hasClass('dark-mode')) {
@@ -770,10 +776,8 @@
         $('.Rent-logo').attr('src', '../assets/images/Artboard GÇô 1.svg');
       }
    
-});
-
-           
-    </script>
+});  
+    </script> -->
 </body>
 
 </html>
