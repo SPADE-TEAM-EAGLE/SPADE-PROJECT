@@ -1509,6 +1509,8 @@
                                                 class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
                                             verification &nbsp; <i
                                                 class="angle fe fe-arrow-right create-btn-plus"></i></a>
+                                                <p class="text-white m-0 mt-3" id="account-text">Your account will be locked after 7-Days</p>
+
                                     </div>
                                     <div class="col-lg-3">
                                         <img src="../assets/header-img/Group1.png" alt="">
@@ -3329,7 +3331,35 @@ selectedFiles.forEach(function(file, index) {
         }
     </script>
 
-
+<script>
+    $(document).ready(()=>{
+        $.ajax({
+            url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+            },
+            success: function (response) {
+                console.log("here")
+                if (response.message.split(":")[0]=="Your remaining days to verify your email"){
+                    $("#days-left").text(response.data>1?" "+response.data+" days":" "+response.data+" day")
+                    console.log("here")
+                    $("#user-email").val(userEmail)
+                    $("#modaldemo00").modal("show")
+                }else if(response.message=="Email is verified"){
+                    $("#account-text").remove()
+                      $("#email_verification").remove()
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log('Error occurred while fetching state and city data.');
+                console.log(xhr);
+                console.log(error);
+                // console.log('Error occurred while fetching state and city data.');
+            }
+        });
+    })
+</script>
 
 </body>
 
