@@ -229,9 +229,7 @@ exports.updateUserProfile = async function (req, res) {
   console.log(req.body)
   console.log(userId)
   try {
-    if(!firstName || !lastName || !email || !phone || !businessName || !streetAddress || !businessAddress || !imageUrl || !imageKey){
-      throw new Error("Please fill all the fields");
-    }
+    
     const selectResult = await queryRunner(selectQuery("users", "id"), [
       userId,
     ]);

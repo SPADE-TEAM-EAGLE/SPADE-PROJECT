@@ -8499,7 +8499,7 @@
                                 $("#add-item-container1").append(`<tr class="tr">
                     <td>
                         <label for=""><b>Categories</b></label>
-                        <input type="text" name="category" class="form-control category" value="${categorieName}" readonly>
+                        <input type="text" name="category" class="form-control category" value="${categorieName}" id="${id}">
                     </td>
                     <td style="width: 1px;">
                         <label for=""><b>Taxable</b></label>
@@ -8533,7 +8533,7 @@
                         }
                     });
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/getVendorCategory',
+                        url: 'https://backend.app.spaderent.com/api/spade/getVendorCategory',
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -8544,14 +8544,14 @@
                             var vendorCategory = 0
                             
                             $("#add-item-container5").empty()
-                            response.data?.forEach(({ category,landLordId }, index) => {
+                            response.data?.forEach(({id,category,landLordId }, index) => {
                                 counter++
                                 
                                 $("#add-item-container5").append(`<tr class="tr">
                                                                             <td>
                                                                                 <label for=""><b>Categories</b></label>
                                                                                 <input type="text" name=""
-                                                                                    class="form-control vendor-category" value='${category}' readonly>
+                                                                                    class="form-control vendor-category" value='${category}' id='${id}'>
                                                                             </td>
                                                                             <td><button type="button" class="btn"
                                                                                     id=""
@@ -8570,7 +8570,7 @@
                         }
                     });
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/checkNotify',
+                        url: 'https://backend.app.spaderent.com/api/spade/checkNotify',
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -8640,7 +8640,7 @@
                         textNotification:$("input[name='example-radios3']:checked").val()=="Enable"?"yes":"no"
                     }
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/notify',
+                        url: 'https://backend.app.spaderent.com/api/spade/notify',
                         method: 'PUT',
                         data: JSON.stringify(data),
                         contentType: 'application/json',
@@ -8666,10 +8666,12 @@
                     $('#add-item-container5 .tr').each(function () {
                         
                         var categoryName = $(this).find('.vendor-category').val();
-                        if (typeof categoryName !== 'undefined' && !$(this).find('.vendor-category').prop('readonly')) {
+                        var categoryId=$(this).find('.vendor-category').attr("id")
+                        if (typeof categoryName !== 'undefined') {
 
                             var row = {
                                 category: categoryName,
+                                categoryId:categoryId
                             };
                             data.push(row);
                         }
@@ -8686,6 +8688,7 @@
                         data: JSON.stringify(data),
                         contentType: 'application/json',
                         success: function (response) {
+                            
                             // Handle the success response
                             $("#myModal_success p").text("Succesfully Updated!!!")
                             $("#myModal_success").modal("show")
@@ -8706,13 +8709,14 @@
                     // Iterate over each table row
                     $('.tr').each(function () {
                         var categoryName = $(this).find('.category').val();
+                        var categoryId=$(this).find('.category').attr('id')
                         //   var taxAmount = $(this).find('.tax-amount').val();
                         var taxable = $(this).find('.category-tax').is(':checked');
                         if (typeof categoryName !== 'undefined') {
 
                             var row = {
                                 categoryName: categoryName,
-                                // taxAmount: taxAmount,
+                                categoryId:categoryId,
                                 taxable: taxable
                             };
                             if (localStorage.getItem(categoryName)) {
@@ -8900,7 +8904,7 @@
                                 userData.imageUrl = response.images[0].image_url
                                 userData.imageKey = response.images[0].image_key
                                 $.ajax({
-                                    url: 'https://backend.app.spaderent.com/api/spade/updateUserProfile',
+                                    url: 'http://localhost:3000/api/spade/updateUserProfile',
                                     method: 'PUT',
                                     data: JSON.stringify(userData),
                                     contentType: 'application/json',
@@ -8928,7 +8932,7 @@
                         });
                     } else {
                         $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/updateUserProfile',
+                            url: 'http://localhost:3000/api/spade/updateUserProfile',
                             method: 'PUT',
                             data: JSON.stringify(userData),
                             contentType: 'application/json',

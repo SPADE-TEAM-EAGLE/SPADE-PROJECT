@@ -365,6 +365,7 @@ exports.recurringInvoiceCheck = "SELECT * FROM invoice WHERE DATE(created_at) = 
 
 // add category in vendorcategory table
 exports.addVendorCategory = "INSERT INTO vendorcategory (category,landLordId) VALUES (?,?)";
+exports.updateVendorCategory="UPDATE vendorcategory SET category=? where id=? AND landLordId=?";
 // exports.createInvoiceCategories = "INSERT INTO InvoiceCategories (categorieName,landLordId) VALUES (?,?)";
 
 // added some column fields

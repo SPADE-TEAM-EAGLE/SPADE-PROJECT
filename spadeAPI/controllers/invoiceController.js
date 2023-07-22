@@ -484,13 +484,15 @@ exports.resendEmail = async (req, res) => {
 exports.createInvoiceCategories = async (req, res) => {
   try {
     const data= req.body;
+    // console.log(data)
     const { userId } = req.user;
     let createInvoiceCategoriesResult
     const categoriesFromDb=await queryRunner(selectQuery("InvoiceCategories", "landLordId"),
     [userId])
     for (const category of data) {
       const matchingCategory = categoriesFromDb[0].find((categoryFromDb) => {
-        return category.categoryName === categoryFromDb.categorieName;
+
+        return category.categoryId == categoryFromDb.id;
       });
     
       if (matchingCategory) {
@@ -513,7 +515,7 @@ exports.createInvoiceCategories = async (req, res) => {
     
     const filteredCategories = data.filter((category) => {
       return !categoriesFromDb[0].some((categoryFromDb) => {
-        return category.categoryName === categoryFromDb.categorieName;
+        return category.categoryId == categoryFromDb.id;
       });
     });
     for(let item of filteredCategories){

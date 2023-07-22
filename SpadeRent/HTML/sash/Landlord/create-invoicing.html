@@ -3901,7 +3901,7 @@ getData()
             let categoryData=[]
             function getData() {
                 $.ajax({
-                        url: 'http://localhost:3000/api/spade/invoiceCategory',
+                        url: 'https://backend.app.spaderent.com/api/spade/invoiceCategory',
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -4743,7 +4743,7 @@ console.log(response.data[0])
                             formData.append('image', file);
                         });
                         $.ajax({
-                            url: 'http://localhost:3000/api/spade/upload',
+                            url: 'https://backend.app.spaderent.com/api/spade/upload',
                             type: 'POST',
                             data: formData,
                             contentType: false,
@@ -4770,7 +4770,7 @@ console.log(response.data[0])
                                     images: imageArray
                                 }
                                 $.ajax({
-                                    url: 'http://localhost:3000/api/spade/updateInvoice',
+                                    url: 'https://backend.app.spaderent.com/api/spade/updateInvoice',
                                     type: 'PUT',
                                     data: JSON.stringify(invoiceData),
                                     contentType: 'application/json',
@@ -4814,7 +4814,7 @@ console.log(response.data[0])
                             images: []
                         }
                         $.ajax({
-                            url: 'http://localhost:3000/api/spade/UpdateInvoice',
+                            url: 'https://backend.app.spaderent.com/api/spade/UpdateInvoice',
                             type: 'PUT',
                             data: JSON.stringify(invoiceData),
                             contentType: 'application/json',

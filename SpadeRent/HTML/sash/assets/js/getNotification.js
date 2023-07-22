@@ -24,7 +24,7 @@ function convertTimestamp(timestamp) {
     }
   }
 $.ajax({
-    url: 'http://localhost:3000/api/spade/notify',
+    url: 'https://backend.app.spaderent.com/api/spade/notify',
     method: 'GET',
     headers: {
         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
