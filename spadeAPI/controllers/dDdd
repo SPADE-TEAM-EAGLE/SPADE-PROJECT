@@ -1,4 +1,4 @@
-const { sendMail,invoiceSendMail } = require('../sendmail/sendmail');
+const sendMail = require('../sendmail/sendmail');
 const {
   selectQuery,
   deleteQuery,
@@ -10,13 +10,11 @@ const {
 } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
 const cron = require('node-cron');
-const task = cron.schedule('0 9,20 * * *', async () => {
-// const task = cron.schedule('* * * * *', async () => {
-  console.log("run");
+// const task = cron.schedule('0 9,20 * * *', async () => {
+const task = cron.schedule('*,* * * *', async () => {
   const currentDate = new Date();
   const selectTenantsResult = await queryRunner(recurringInvoice)
   if (selectTenantsResult[0].length > 0) {
-    console.log("user is found");
     for (let i = 0; i < selectTenantsResult[0].length; i++) {
       const PreviousInvoiceID = selectTenantsResult[0][i].id;
       const landlordID = selectTenantsResult[0][i].landlordID;
@@ -25,11 +23,11 @@ const task = cron.schedule('0 9,20 * * *', async () => {
       const startDate = selectTenantsResult[0][i].startDate;
       const endDate = selectTenantsResult[0][i].endDate;
       const frequency = selectTenantsResult[0][i].frequency;
-      const dueDate = selectTenantsResult[0][i].dueDate ;
-      const dueDays = selectTenantsResult[0][i].daysDue ;
-      const repeatTerms = selectTenantsResult[0][i].repeatTerms ;
-      const terms = selectTenantsResult[0][i].terms ;
-      const additionalNotes = selectTenantsResult[0][i].note ;
+      const dueDate = selectTenantsResult[0][i].dueDate;
+      const dueDays = selectTenantsResult[0][i].daysDue;
+      const repeatTerms = selectTenantsResult[0][i].repeatTerms;
+      const terms = selectTenantsResult[0][i].terms;
+      const additionalNotes = selectTenantsResult[0][i].note;
       const totalAmount = selectTenantsResult[0][i].totalAmount;
       const createdAt = new Date();
       const recurringNextDate = selectTenantsResult[0][i].recurringNextDate;
@@ -65,18 +63,13 @@ const task = cron.schedule('0 9,20 * * *', async () => {
 
 
 
-console.log("ready");
+
           // ############################################################# MONthly Rest of the code remains the same...
           // Recurring Next Date END 
-          const invoiceResult = await queryRunner(insertInvoice, [ landlordID, tenantID, invoiceType, startDate, endDate, frequency, dueDate, dueDays, repeatTerms, terms, additionalNotes, "Unpaid", createdAt, totalAmount, recurringNextDate ]);
+          const invoiceResult = await queryRunner(insertInvoice, [landlordID, tenantID, invoiceType, startDate, endDate, frequency, dueDate, dueDays, repeatTerms, terms, additionalNotes, "Unpaid", createdAt, totalAmount, recurringNextDate]);
           if (invoiceResult.affectedRows === 0) {
             res.status(400).send('Error occur in creating invoice');
-            console.log("object");
           } else {
-            console.log("object2")
-            // console.log(landlordID, tenantID, invoiceType, startDate, endDate, frequency, dueDate, dueDays, repeatTerms, terms, additionalNotes, "Unpaid", createdAt, totalAmount, recurringNextDate);
-            // console.log(repeatTerms, terms);
-            // console.log("repeatTerms, terms");
             // Invoice Email Start
             const invoiceID = invoiceResult[0].insertId;
             const selectTenantsResult = await queryRunner(selectQuery('tenants', 'id'), [tenantID])
@@ -84,10 +77,7 @@ console.log("ready");
               const tenantEmail = selectTenantsResult[0][0].email;
               const tenantName = selectTenantsResult[0][0].firstName + " " + selectTenantsResult[0][0].lastName;
               const mailSubject = invoiceID + " From " + frequency;
-              console.log("1234")
-              await invoiceSendMail(tenantName, tenantEmail, mailSubject, dueDays, invoiceID, frequency,landlordID);
-              console.log("1234222")
-              console.log(tenantName, tenantEmail, mailSubject, dueDays, invoiceID, frequency)
+              sendMail.invoiceSendMail(tenantName, tenantEmail, mailSubject, dueDays, invoiceID, frequency);
             }
             const lineItemsResult = await queryRunner(selectQuery('invoicelineitems', 'invoiceID'), [PreviousInvoiceID])
             if (lineItemsResult[0].length > 0) {
@@ -145,7 +135,7 @@ console.log("ready");
               const tenantEmail = selectTenantsResult[0][0].email;
               const tenantName = selectTenantsResult[0][0].firstName + " " + selectTenantsResult[0][0].lastName;
               const mailSubject = invoiceID + " From " + frequency;
-              await invoiceSendMail(tenantName, tenantEmail, mailSubject, dueDays, invoiceID, frequency,landlordID);
+              sendMail.invoiceSendMail(tenantName, tenantEmail, mailSubject, dueDays, invoiceID, frequency);
             }
             const lineItemsResult = await queryRunner(selectQuery('invoicelineitems', 'invoiceID'), [PreviousInvoiceID])
             if (lineItemsResult[0].length > 0) {
