@@ -143,7 +143,6 @@ const verifyTokenTenant = async (req, res, next) => {
     const result = await queryRunner(selectQuery("tenants", "email"), [
       decoded.email,
     ]);
-    console.log(result)
     req.user = {
       email: decoded.email,
       userId: result[0][0].id,

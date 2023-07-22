@@ -125,7 +125,6 @@ exports.Signin = async function (req, res) {
   // console.log(1)
   // let selectResult;
   try {
-    // for tenant
     if (tenant == "tenant") {
       console.log("tenant")
       const selectResult = await queryRunner(selectQuery("tenants", "email"), [
@@ -134,9 +133,7 @@ exports.Signin = async function (req, res) {
       console.log(selectResult[0][0])
       if (selectResult[0].length === 0) {
         res.status(400).send("Email not found");
-      } else if (!
-        await bcrypt.compare(password, selectResult[0][0].tenantPassword)
-      ) {
+      } else if (await bcrypt.compare(password, selectResult[0][0].tenantPassword)){
         const token = jwt.sign({ email, password }, config.JWT_SECRET_KEY, {
           expiresIn: "3h",
         });

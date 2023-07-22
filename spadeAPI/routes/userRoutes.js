@@ -12,6 +12,7 @@ const taskController = require("../controllers/taskController");
 const fileUpload = require("../helper/S3Bucket");
 const notifyController = require("../controllers/notifyController");
 const { chatsController } = require("../controllers/chatsController");
+const messageClt = require("../controllers/messageController");
 
 router.post("/Signup", userController.createUser);
 router.get("/protected", verifyToken, userController.getUser);
@@ -124,13 +125,21 @@ router.get("/notify", verifyToken, notifyController.getNotify);
 router.get("/property", verifyToken, userController.getAllProperty);
 router.get("/invoice", verifyToken, userController.getInvoiceReportData);
 router.get("/task", verifyToken, userController.getTaskReportData);
-
-
+// dekete invoice catergory
+router.delete("/deleteInvoiceCategory", verifyToken, invoiceController.deleteInCategories);
+router.delete("/deleteVendorCategory", verifyToken, invoiceController.deleteVendCategories);
 
 // chats start
 router.post("/accessChats", verifyToken, chatsController.accessChats);
-router.get("/fetchChats", verifyToken, chatsController.fetchChats);
+router.get("/fetchTenantChats", verifyTokenTenant, chatsController.fetchUsersChats);
+router.get("/fetchUsersChats", verifyToken, chatsController.fetchUsersTenants);
 
 
+
+// create tenant message
+router.post("/createNewMessageTenant", verifyTokenTenant, messageClt.createNewMessageTenant);
+router.post("/createNewMessage", verifyToken, messageClt.createNewMessage);
+router.get("/TenantMessages/:chatId", verifyTokenTenant, messageClt.getAllMessages);
+router.get("/LandlordMessages/:chatId", verifyToken, messageClt.getAllMessages);
 
 module.exports = router;
