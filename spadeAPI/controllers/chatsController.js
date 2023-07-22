@@ -48,7 +48,6 @@ const chatsController = {
     },
     fetchUsersTenants: async (req, res) => {
         const senderId = req.user.userId;
-        console.log(senderId)
         try {
             const getChatsData = await queryRunner(getChatTenants, [senderId]);
             res.status(200).json({

@@ -134,9 +134,7 @@ router.post("/accessChats", verifyToken, chatsController.accessChats);
 router.get("/fetchTenantChats", verifyTokenTenant, chatsController.fetchUsersChats);
 router.get("/fetchUsersChats", verifyToken, chatsController.fetchUsersTenants);
 
-
-
-// create tenant message
+// this api is for messages  
 router.post("/createNewMessageTenant", verifyTokenTenant, messageClt.createNewMessageTenant);
 router.post("/createNewMessage", verifyToken, messageClt.createNewMessage);
 router.get("/TenantMessages/:chatId", verifyTokenTenant, messageClt.getAllMessages);
