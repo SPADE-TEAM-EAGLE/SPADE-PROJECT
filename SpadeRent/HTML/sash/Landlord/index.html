@@ -380,12 +380,30 @@
                             </label>
                         </div>
                     </div>
-                    <div class="col-12">
+                    <!-- <div class="col-12">
                         <div class="form-group">
                             <label class="custom-switch form-switch mb-0">
                                 <input type="checkbox" name="custom-switch-radio" class="custom-switch-input" data-card="property-status" checked>
                                 <span class="custom-switch-indicator custom-switch-indicator-md"></span>
                                 <span class="custom-switch-description text-dark fw-bold">Property Status</span>
+                            </label>
+                        </div>
+                    </div> -->
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label class="custom-switch form-switch mb-0">
+                                <input type="checkbox" name="custom-switch-radio" class="custom-switch-input" data-card="card5" checked>
+                                <span class="custom-switch-indicator custom-switch-indicator-md"></span>
+                                <span class="custom-switch-description text-dark fw-bold">Properties</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label class="custom-switch form-switch mb-0">
+                                <input type="checkbox" name="custom-switch-radio" class="custom-switch-input" data-card="card6" checked>
+                                <span class="custom-switch-indicator custom-switch-indicator-md"></span>
+                                <span class="custom-switch-description text-dark fw-bold">Tenants</span>
                             </label>
                         </div>
                     </div>
@@ -816,7 +834,7 @@
                                                     <div class="d-flex">
                                                         <div class="mt-2">
                                                             <h6 class=""><b>Invoicing</b></h6>
-                                                            <h1 class="mb-0 number-font"><b>$0</b></h1>
+                                                            <h1 class="mb-0 number-font" id="invoicing-amount"><b>$0</b></h1>
                                                         </div>
                                                         <div class="ms-auto">
                                                             <div class="chart-wrapper mt-1">
@@ -826,8 +844,9 @@
                                                         </div>
                                                     </div>
                                                     <span class="text-muted fs-12 float-start"><span
-                                                            class="text-secondary"><i
-                                                                class="fe fe-plus  text-secondary"></i>2.5%
+                                                            class="text-secondary">
+                                                            <!-- <i
+                                                                class="fe fe-plus  text-secondary"></i> -->
                                                 </div>
                                             </div>
                                         </div>
@@ -837,7 +856,7 @@
                                                     <div class="d-flex">
                                                         <div class="mt-2">
                                                             <h6 class=""><b>Amount Paid</b></h6>
-                                                            <h1 class="mb-0 number-font"><b>$0</b></h1>
+                                                            <h1 class="mb-0 number-font" id="total-amount"><b>$0</b></h1>
                                                         </div>
                                                         <div class="ms-auto">
                                                             <div class="chart-wrapper mt-1">
@@ -847,8 +866,9 @@
                                                         </div>
                                                     </div>
                                                     <span class="text-muted fs-12 float-start"><span
-                                                            class="text-danger"><i
-                                                                class="fe fe-minus text-danger"></i>4.4%
+                                                            class="text-danger">
+                                                            <!-- <i
+                                                                class="fe fe-minus text-danger"></i> -->
                                                 </div>
                                             </div>
                                         </div>
@@ -858,7 +878,7 @@
                                                     <div class="d-flex">
                                                         <div class="mt-2">
                                                             <h6 class=""><b>Amount Outstanding</b></h6>
-                                                            <h1 class="mb-0 number-font text-start"><b>$0</b></h1>
+                                                            <h1 class="mb-0 number-font text-start" id="outstanding-amount"><b>$0</b></h1>
                                                         </div>
                                                         <div class="ms-auto">
                                                             <div class="chart-wrapper mt-1">
@@ -868,7 +888,8 @@
                                                         </div>
                                                     </div>
                                                     <span class="text-muted fs-12 float-start"><span
-                                                            class="text-green"><i class="fe fe-plus text-green"></i>1.5%
+                                                            class="text-green">
+                                                            <!-- <i class="fe fe-plus text-green"></i> -->
                                                 </div>
                                             </div>
                                         </div>
@@ -888,8 +909,9 @@
                                                         </div>
                                                     </div>
                                                     <span class="text-muted fs-12 float-start"><span
-                                                            class="text-warning"><i
-                                                                class="fe fe-plus text-warning"></i>4.5%
+                                                            class="text-warning">
+                                                            <!-- <i
+                                                                class="fe fe-plus text-warning"></i> -->
                                                 </div>
                                             </div>
                                         </div>
@@ -912,12 +934,12 @@
                                 </div> -->
 
                                 <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
-                                    <div class="card overflow-hidden counter-card-hover" id="card4">
+                                    <div class="card overflow-hidden counter-card-hover" id="card5">
                                         <div class="card-body">
                                             <div class="d-flex">
                                                 <div class="mt-2">
                                                     <h6 class=""><b>Total Property</b></h6>
-                                                    <h1 class="mb-0 number-font"><b>$0</b></h1>
+                                                    <h1 class="mb-0 number-font" id="total-property"><b>$0</b></h1>
                                                 </div>
                                                 <div class="ms-auto">
                                                     <div class="chart-wrapper mt-1">
@@ -927,19 +949,20 @@
                                                 </div>
                                             </div>
                                             <span class="text-muted fs-12 float-start"><span
-                                                    class="text-warning"><i
-                                                        class="fe fe-plus text-warning"></i>4.5%
+                                                    class="text-warning">
+                                                    <!-- <i
+                                                        class="fe fe-plus text-warning"></i> -->
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
-                                    <div class="card overflow-hidden counter-card-hover" id="card4">
+                                    <div class="card overflow-hidden counter-card-hover" id="card6">
                                         <div class="card-body">
                                             <div class="d-flex">
                                                 <div class="mt-2">
                                                     <h6 class=""><b>Total Tenant</b></h6>
-                                                    <h1 class="mb-0 number-font"><b>$0</b></h1>
+                                                    <h1 class="mb-0 number-font" id="total-tenant"><b>$0</b></h1>
                                                 </div>
                                                 <div class="ms-auto">
                                                     <div class="chart-wrapper mt-1">
@@ -949,8 +972,9 @@
                                                 </div>
                                             </div>
                                             <span class="text-muted fs-12 float-start"><span
-                                                    class="text-warning"><i
-                                                        class="fe fe-plus text-warning"></i>4.5%
+                                                    class="text-warning">
+                                                    <!-- <i
+                                                        class="fe fe-plus text-warning"></i> -->
                                         </div>
                                     </div>
                                 </div>
@@ -1306,76 +1330,9 @@
                         </div>
                     </div> -->
                     <div class="tab-pane active" id="side1">
-                        <div class="list-group list-group-flush">
+                        <div class="list-group list-group-flush" id="notification-container">
                             <!-- <div class="pt-3 fw-semibold ps-5">Today</div> -->
-                            <div class="list-group-item d-flex align-items-center justify-content-between">
-                                <div class="d-flex align-items-center">
-                                <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/2.jpg"><span
-                                        class="avatar-status bg-success"></span>
-                                </div>
-                                <div class="">
-                                    <a href="javascript:void(0);">
-                                        <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">William</div> <span class="text-dark"> 1436 Jersey Street > Jersey</span>
-                                        <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="">
-                                <span class="fs-12 text-dark">2 min ago</span>
-                            </div>
-                            </div>
-                            <div class="list-group-item d-flex align-items-center justify-content-between">
-                                <div class="d-flex align-items-center">
-                                <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/2.jpg"><span
-                                        class="avatar-status bg-success"></span>
-                                </div>
-                                <div class="">
-                                    <a href="javascript:void(0);">
-                                        <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">Henry</div> <span class="text-dark"> 1436 Jersey Street > Jersey</span>
-                                        <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="">
-                                <span class="fs-12 text-dark">2 min ago</span>
-                            </div>
-                            </div>
-                            <div class="list-group-item d-flex align-items-center justify-content-between">
-                                <div class="d-flex align-items-center">
-                                <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/2.jpg"><span
-                                        class="avatar-status bg-success"></span>
-                                </div>
-                                <div class="">
-                                    <a href="javascript:void(0);">
-                                        <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">David</div> <span class="text-dark"> 1436 Jersey Street > Jersey</span>
-                                        <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="">
-                                <span class="fs-12 text-dark">2 min ago</span>
-                            </div>
-                            </div>
-                            <div class="list-group-item d-flex align-items-center justify-content-between">
-                                <div class="d-flex align-items-center">
-                                <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/2.jpg"><span
-                                        class="avatar-status bg-success"></span>
-                                </div>
-                                <div class="">
-                                    <a href="javascript:void(0);">
-                                        <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">David</div> <span class="text-dark"> 1436 Jersey Street > Jersey</span>
-                                        <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="">
-                                <span class="fs-12 text-dark">2 min ago</span>
-                            </div>
-                            </div>
+                            
                             <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
                             
                         </div>
@@ -1764,7 +1721,7 @@
     <script src="../assets/js/themeColors.js"></script>
 
     <!-- CUSTOM JS -->
-    <script src="../assets/js/custom.js"></script>
+    <script src="../assets/js/custom.js"></script><script src="../assets/js/getNotification.js"></script>
 
     <!-- ############################################# -->
 
@@ -1870,6 +1827,37 @@
                     // console.log('Error occurred while fetching state and city data.');
                 }
             });
+            $.ajax({
+                url: 'http://localhost:3000/api/spade/dashboard',
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    
+                    const responseObject={...response.totalAmount,...response.totalAmountUnpaid,...response.totalAmountPaid,...response.numPropertyTenant}
+                    console.log(responseObject)
+                    $("#invoicing-amount").empty()
+                    $("#total-amount").empty()
+                    $("#outstanding-amount").empty()
+                    $("#total-property").empty()
+                    $("#total-tenant").empty()
+                    $("#invoicing-amount").append('<b>$ ' + (responseObject.totalAmount || 0) + "</b>");
+$("#total-amount").append('<b>$ ' + (responseObject.totalPaid || 0) + "</b>");
+$("#outstanding-amount").append('<b>$ ' + (responseObject.totalUnPaid || 0) + "</b>");
+$("#total-property").append(responseObject.propertyCount || 0);
+$("#total-tenant").append(responseObject.tenantCount || 0);
+
+
+                },
+                error: function (xhr, status, error) {
+                    console.log('Error occurred while fetching state and city data.');
+                    console.log(xhr);
+                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                }
+            });
+            
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
                 method: 'GET',
@@ -2233,7 +2221,7 @@
                     {
                         element: document.querySelector('.card-demo-2'),
                         title: 'Manage Tenants',
-                        intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px; color: #000;"">Whether you are looking to market your rental across the web or send a tenant an online application, you first need to add your property.</b>',
+                        intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px; color: #000;"">Whether you are looking to market your rental across the web or send a tenant an online application, you first need to add your property.</>',
                         // intro: 'This step focuses on an element',
                         position: 'right'
                     },

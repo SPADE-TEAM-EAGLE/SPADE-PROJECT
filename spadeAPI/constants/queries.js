@@ -54,7 +54,133 @@ exports.deleteQuery = (table, ...field) => {
 exports.delteImageFromDb = "DELETE FROM propertyimage WHERE imageKey = ?"
 exports.delteImageForInvoiceImages = "DELETE FROM invoiceimages WHERE imageKey = ?"
 exports.delteImageForTaskImages = "DELETE FROM taskimages WHERE ImageKey = ?"
-exports.updateNotify = "UPDATE notification SET emailNotification = ? , pushNotification = ? WHERE landlordID = ? ";
+
+exports.createInvoiceCategories = "INSERT INTO InvoiceCategories (categorieName,landLordId) VALUES (?,?)";
+// updated category query setTaxes, catId, userId
+exports.updateInvoiceCategories = "UPDATE InvoiceCategories SET categorieName = ?,setTaxes = ? WHERE id = ? AND landLordId = ?";
+
+exports.getPropertyReport = "SELECT property.id, property.propertyName, property.propertyType, property.units, tenants.firstName,tenants.lastName , tenants.phoneNumber FROM property JOIN tenants ON property.id = tenants.propertyID WHERE property.landlordID = ?";
+exports.getTenantReport = "SELECT tenants.id AS tenantID, tenants.companyName, tenants.firstName, tenants.lastName, tenants.phoneNumber, property.propertyType, property.units FROM tenants JOIN property ON tenants.propertyID = property.id WHERE tenants.landlordID = ?";
+exports.getTaskReportData = "SELECT task.id AS taskID, task.taskName, task.dueDate, task.status, property.propertyName FROM task JOIN tenants ON task.tenantID = tenants.id JOIN property ON tenants.propertyID = property.id WHERE task.landlordID = ?";
+exports.getInvoiceReportData = "SELECT invoice.id AS invoiceID, invoice.created_at,invoice.totalAmount, property.propertyName, property.address ,tenants.email ,tenants.firstName, tenants.lastName FROM invoice JOIN tenants ON tenants.id = invoice.tenantID JOIN property ON property.id = tenants.propertyID WHERE invoice.landlordID = ?";
+exports.getLeaseReport = "SELECT tenants.firstName, tenants.lastName, tenants.leaseEndDate AS LeaseExpire, tenants.phoneNumber, property.propertyType, property.propertyName, property.units FROM tenants JOIN property ON tenants.propertyID = property.id WHERE tenants.landlordID = ?";
+
+// getTotalAmount getTotalAmountUnpaid getTotalAmountPaid getNumPropertyTenant
+// get total amount from invoice table
+exports.getTotalAmount = "SELECT SUM(invoice.totalAmount) AS totalAmount FROM invoice WHERE invoice.landlordID = ?";
+// get total amount where status is unpaid
+exports.getTotalAmountUnpaid = "SELECT SUM(invoice.totalAmount) AS totalUnPaid FROM invoice WHERE invoice.landlordID = ? AND invoice.status = 'Unpaid'";
+// get total amount where status is paid
+exports.getTotalAmountPaid = "SELECT SUM(invoice.totalAmount) AS totalPaid FROM invoice WHERE invoice.landlordID = ? AND invoice.status = 'paid'";
+// get num propery and tenant of landlord
+exports.getNumPropertyTenant = `SELECT 
+    (SELECT COUNT(property.id) FROM property WHERE property.landlordID = ?) AS propertyCount,
+    (SELECT COUNT(tenants.id) FROM tenants WHERE tenants.landlordID = ?) AS tenantCount;
+`;
+
+exports.getAmountByCategoriesID = "SELECT InvoiceCategories.setTaxes FROM InvoiceCategories WHERE InvoiceCategories.id = ? AND InvoiceCategories.landLordId = ?";
+
+exports.getTenantNotify = `SELECT 
+tenants.id AS tenantID,
+tenants.companyName, tenants.firstName, tenants.lastName, tenants.phoneNumber,tenants.tenantCreated_at,property.propertyName ,property.address,property.propertyType,property.units,
+GROUP_CONCAT(tenantattachfiles.Image) AS Image,
+GROUP_CONCAT(tenantattachfiles.ImageKey) AS ImageKey
+FROM 
+tenants
+LEFT JOIN
+tenantattachfiles ON tenantattachfiles.tenantID = tenants.id
+JOIN
+    property ON property.id = tenants.propertyID
+WHERE 
+tenants.landlordID = ?
+GROUP BY 
+tenants.companyName, tenants.firstName, tenants.lastName, tenants.phoneNumber,tenantCreated_at,property.propertyName ,property.address,property.propertyType,property.units
+ORDER BY 
+tenantCreated_at DESC;`
+
+exports.getPropertyNotify = `SELECT 
+    property.id AS propertyID,
+    property.propertyName,
+    property.address,
+    property.city,
+    property.propertyType,
+    property.created_at,
+    property.city,
+    GROUP_CONCAT(propertyimage.Image) AS Image,
+    GROUP_CONCAT(propertyimage.ImageKey) AS ImageKey
+FROM 
+    property
+LEFT JOIN 
+    propertyimage ON property.id = propertyimage.propertyID
+WHERE 
+    property.landlordID = ?
+GROUP BY 
+    property.id, property.propertyName, property.address, property.propertyType, property.created_at
+ORDER BY 
+    property.created_at DESC;
+`;
+
+
+
+exports.getTaskNotify = `SELECT 
+    task.id AS taskID,
+    task.taskName,
+    task.status,
+    task.priority,
+    task.created_at,
+    tenants.firstName,
+    tenants.lastName,
+    tenants.email,
+    tenants.Address,
+    tenants.city,
+    GROUP_CONCAT(taskimages.Image) AS Image,
+    GROUP_CONCAT(taskimages.ImageKey) AS ImageKey
+FROM 
+    task
+  LEFT JOIN
+    taskimages ON task.id = taskimages.taskID
+JOIN
+    tenants ON task.tenantID = tenants.id
+WHERE 
+    task.landlordID = ?
+GROUP BY 
+    task.id, task.taskName, task.status, task.priority, task.created_at
+ORDER BY 
+    task.created_at DESC;
+`;
+
+exports.getInvoiceNotify = `SELECT 
+invoice.id AS invoiceID,
+invoice.invoiceType,
+invoice.startDate,
+invoice.endDate,
+invoice.status,
+invoice.totalAmount,
+invoice.created_at,
+tenants.firstName,
+tenants.lastName,
+tenants.email,
+tenants.Address,
+tenants.city,
+GROUP_CONCAT(invoiceimages.Image) AS Image,
+GROUP_CONCAT(invoiceimages.ImageKey) AS ImageKey
+FROM 
+invoice
+LEFT JOIN
+invoiceimages ON invoice.id = invoiceimages.invoiceID
+JOIN
+    tenants ON invoice.tenantID = tenants.id
+WHERE 
+invoice.landlordID = ?
+GROUP BY 
+invoice.id, invoice.invoiceType, invoice.status, invoice.startDate, invoice.endDate, invoice.created_at
+ORDER BY 
+invoice.created_at DESC;
+`
+// property.propertyType
+// insertNotify notify
+exports.insertNotify = "INSERT INTO notification (landlordID, emailNotification, pushNotification, textNotification) VALUES (?,?,?,?)";
+exports.updateNotify = "UPDATE notification SET emailNotification = ? , pushNotification = ?, textNotification = ? WHERE landlordID = ? ";
 exports.addResetToken =
   "UPDATE users SET token = ?, updated_at = ? where id = ?";
 exports.updatePasswordLandlord =
@@ -67,7 +193,7 @@ exports.updateUser = "UPDATE users SET FirstName = ?, LastName = ?, Email = ?, P
 // update plan id in user table
 exports.updatePlanId = "UPDATE users SET PlanID = ? WHERE id = ?";
 exports.insertInProperty =
-  "INSERT INTO property (landlordID, propertyName, address, city, state, zipCode, propertyType, propertySQFT,status,units) VALUES (?,?,?,?,?,?,?,?,?,?)";
+  "INSERT INTO property (landlordID, propertyName, address, city, state, zipCode, propertyType, propertySQFT,status,units,created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 exports.insertInPropertyImage = "INSERT INTO propertyimage (propertyID, Image, imageKey) VALUES (?,?,?)";
 exports.insertInTaskImage =
   "INSERT INTO taskimages (taskID, Image, ImageKey) VALUES (?,?,?)";
@@ -91,7 +217,7 @@ exports.getUnitsCount = 'SELECT COUNT(propertyID) as unitCount FROM `propertyuni
 exports.insertMoreUnits = 'INSERT INTO propertyunits (propertyID, unitNumber,Area,unitDetails,status) VALUES (?,?,?,?,?)';
 exports.putUnitsUpdate = 'UPDATE property SET  units = ?  where id = ? ';
 exports.insertTenantAttachFile = 'INSERT INTO tenantattachfiles (landlordID, tenantID, fileName,imageKey) VALUES (?,?,?,?)';
-exports.insertInvoice = 'INSERT INTO invoice (landlordID, tenantID, invoiceType, startDate, endDate, frequency, dueDate,daysDue, repeatTerms, terms,note,status,created_at,totalAmount) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+exports.insertInvoice = 'INSERT INTO invoice (landlordID, tenantID, invoiceType, startDate, endDate, frequency, dueDate,daysDue, repeatTerms, terms,note,status,created_at,totalAmount, recurringNextDate) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
 exports.insertLineItems = 'INSERT INTO invoicelineitems (invoiceID, category, property, memo, amount ) VALUES (?,?,?,?,?)';
 exports.insertInvoiceImage = 'INSERT INTO invoiceimages (invoiceID, Image,imageKey) VALUES (?,?,?)';
 exports.updateUnitsTenant = 'UPDATE propertyunits SET  status = ?  where id = ? ';
@@ -184,7 +310,23 @@ exports.taskByIDQuery = 'SELECT tk.id, tk.taskName, tk.dueDate, tk.status, tk.pr
 exports.resendEmailQuery = 'SELECT * FROM tenants JOIN invoice ON tenants.id = invoice.tenantID WHERE invoice.id = ?';
 exports.updateTenants = "UPDATE tenants SET firstName = ? , lastName = ? , companyName = ? , email = ? , phoneNumber = ? , address = ? , city = ? , state = ? , zipcode = ? , propertyID = ? , propertyUnitID = ? , rentAmount = ? , gross_or_triple_lease = ? , baseRent = ? , tripleNet = ? , leaseStartDate = ? , leaseEndDate = ? , increaseRent = ? , tenantUpdated_at = ? WHERE id = ?";
 exports.selectVendorCategory = "SELECT * FROM `vendorcategory` JOIN `vendor` ON `vendorcategory`.`id` = `vendor`.`categoryID` WHERE `vendor`.`LandlordID` = ?";
-exports.propertyTaskQuery = "SELECT tk.id, tk.taskName, tk.dueDate, tk.status, tk.priority, tk.notes, tk.createdBy,tk.created_at, p.propertyName, p.address,pu.unitNumber, t.firstName as tfirstName, t.lastName as tlastName FROM `task`as tk JOIN tenants as t ON tk.tenantID = t.id JOIN property as p ON t.propertyID = p.id JOIN propertyunits as pu ON t.propertyUnitID = pu.id WHERE t.propertyID = ?";
+
+exports.propertyTaskQuery = `
+SELECT 
+    tk.id, tk.taskName, tk.dueDate, tk.status, tk.priority, tk.notes, tk.createdBy, tk.created_at,
+    p.propertyName, p.address, pu.unitNumber,
+    t.firstName AS tfirstName, t.lastName AS tlastName
+FROM 
+    task AS tk
+JOIN 
+    tenants AS t ON tk.tenantID = t.id
+JOIN 
+    property AS p ON t.propertyID = p.id
+JOIN 
+    propertyunits AS pu ON t.propertyUnitID = pu.id
+WHERE 
+    t.propertyID = ?
+`
 exports.tenantTaskQuery = "SELECT tk.id, tk.taskName, tk.dueDate, tk.status, tk.priority, tk.notes, tk.createdBy,tk.created_at, p.propertyName, pu.unitNumber, t.firstName as tfirstName, t.lastName as tlastName FROM `task`as tk JOIN tenants as t ON tk.tenantID = t.id JOIN property as p ON t.propertyID = p.id JOIN propertyunits as pu ON t.propertyUnitID = pu.id where tk.tenantID  = ?";
 exports.getAllInvoiceTenantQuery = "SELECT i.id as invoiceID, i.dueDate, i.daysDue , i.startDate,i.endDate,i.repeatTerms,i.terms ,i.note, i.totalAmount, i.frequency,i.created_at, i.invoiceType, i.status, t.firstName, t.lastName, t.id as tenantID, t.phoneNumber as tPhone, p.propertyName, GROUP_CONCAT(ii.InvoiceImage) as invoiceImages FROM invoice as i JOIN tenants as t ON i.tenantID = t.id JOIN property as p ON t.propertyID = p.id LEFT JOIN invoiceimages as ii ON i.id = ii.invoiceID WHERE i.tenantID = ? GROUP BY i.id;";
 exports.AlltasksTenantsQuery = `SELECT
@@ -218,6 +360,8 @@ exports.updatePassword = "UPDATE users SET Password = ? , updated_at = ? where i
 exports.updatePasswordTenantSetting = "UPDATE tenants SET tenantPassword = ? , tenantUpdated_at = ? where id = ? ";
 exports.updateEmailQuery = "UPDATE users SET Email = ? where Email = ? ";
 exports.updateVerifiedStatusQuery = "UPDATE users SET userVerified = ? where id = ? ";
+exports.recurringInvoice = "SELECT * FROM invoice WHERE DATE(recurringNextDate) = CURDATE() AND CURDATE() BETWEEN startDate AND endDate ";
+exports.recurringInvoiceCheck = "SELECT * FROM invoice WHERE DATE(created_at) = CURDATE() AND landlordID = ? AND tenantID = ? AND invoiceType = ? ";
 
 // add category in vendorcategory table
 exports.addVendorCategory = "INSERT INTO vendorcategory (category,landLordId) VALUES (?,?)";
@@ -226,3 +370,38 @@ exports.addVendorCategory = "INSERT INTO vendorcategory (category,landLordId) VA
 // added some column fields
 exports.createInvoiceCategories = "INSERT INTO InvoiceCategories (categorieName,landLordId,setTaxes,taxable) VALUES (?,?,?,?)";
 exports.updateInvoiceCategories = "UPDATE InvoiceCategories SET categorieName = ?,setTaxes = ?, taxable=? WHERE id = ? AND landLordId = ?";
+
+
+
+// =============================================chats start=====================================================================================
+exports.insertChat = "INSERT INTO chats (senderId, receiverID, created_at) VALUES (?,?,?)";
+// find already exist chat between two users
+exports.findChat = "SELECT * FROM chats WHERE (senderId = ? AND receiverID = ?) OR (senderID = ? AND receiverID = ?)";
+
+// create new Message in messages table
+exports.insertMessage = "INSERT INTO messages (chatID, senderID, receiverID, message, created_at) VALUES (?,?,?,?,?)";
+
+// FullChat get using Joins with tenants grop by senderID and receiverID
+exports.getFullChat = `SELECT
+    c.id AS chatID,
+    c.senderID,
+    c.receiverID,
+    c.created_at,
+    t.firstName,
+    t.lastName,
+    t.email,
+    t.phoneNumber,
+    t.Address
+FROM
+    chats AS c
+JOIN
+    tenants AS t ON c.senderID = t.id
+WHERE
+    c.receiverID = ?
+GROUP BY
+    c.senderID
+ORDER BY
+    c.created_at DESC`;
+
+
+

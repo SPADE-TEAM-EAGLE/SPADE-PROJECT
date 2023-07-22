@@ -784,8 +784,9 @@
                                                                     (example: john@gmail.com)
                                                                 </span>
                                                                 <span class="mt-1 text-danger" id="email-span-invalid" style="display: none;">
-                                                                    Email is not associated with this account. Please enter a Valid Email Address
+                                                                    This email address is associated with another account. Please enter a different valid email address.
                                                                 </span>
+                                                                
                                                             </div>
                                                         </div>
                                                         <div class="col-12">
@@ -2589,7 +2590,7 @@
     <!-- Sticky js -->
     <script src="../assets/js/sticky.js"></script>
     <!-- CUSTOM JS -->
-    <script src="../assets/js/custom.js"></script>
+    <script src="../assets/js/custom.js"></script><script src="../assets/js/getNotification.js"></script>
 
     <script src="../assets/plugins/counters/counterup.min.js"></script>
     <script src="../assets/plugins/counters/waypoints.min.js"></script>
@@ -2658,7 +2659,7 @@
         }
 
 
-        let selectedButtonId = null;
+        let selectedButtonId = 1;
         const buttons = document.querySelectorAll('.card-btnn');
 
         buttons.forEach(button => {
@@ -2668,6 +2669,32 @@
             });
         });
         $(document).ready(function() {
+            $("#email").on("change",()=>{
+                var email = $("#email").val();
+                $.ajax({
+                    url: "http://localhost:3000/api/spade/checkemail",
+                    type: "GET",
+                    contentType: "application/json",
+                    data: {
+                        email: email
+                    },
+                    success: function(response) {
+                        button1()
+                        if(response.message == "New user")
+                        {
+                         document.getElementById("email-span-invalid").style.display = "none";  
+                        }
+                        else{
+                         document.getElementById("email-span-invalid").style.display = "block";
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        document.getElementById("email-span-invalid").style.display = "block";
+                        $("#next1").attr("disabled",true)
+                        
+                    },
+                });
+            })
             $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/pricingPlan',
                     method: 'GET',

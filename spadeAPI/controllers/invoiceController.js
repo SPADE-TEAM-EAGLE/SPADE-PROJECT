@@ -19,7 +19,8 @@ const {
   resendEmailQuery,
   createInvoiceCategories,
   delteImageForInvoiceImages,
-  updateInvoiceCategories
+  updateInvoiceCategories,
+  getAmountByCategoriesID
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -54,7 +55,7 @@ exports.createInvoice = async (req, res) => {
     //   throw new Error("Please fill all the fields");
     // }
     const currentDate = new Date();
-    const invoiceResult = await queryRunner(insertInvoice, [userId, tenantID, invoiceType, startDate, endDate, frequency, dueDate, dueDays, repeatTerms, terms, additionalNotes, "Unpaid", currentDate, totalAmount]);
+    const invoiceResult = await queryRunner(insertInvoice, [userId, tenantID, invoiceType, startDate, endDate, frequency, dueDate, dueDays, repeatTerms, terms, additionalNotes, "Unpaid", currentDate, totalAmount, startDate]);
     if (invoiceResult.affectedRows === 0) {
       res.status(400).send('Error occur in creating invoice');
     } else {
@@ -65,18 +66,14 @@ exports.createInvoice = async (req, res) => {
       if (selectTenantsResult[0].length > 0) {
         const landlordEmail = selectTenantsResult[0][0].Email;
         const landlordName = selectTenantsResult[0][0].FirstName + " " + selectTenantsResult[0][0].LastName;
-
-        // if (sendmails == "Yes") {
-          const mailSubject = invoiceID + " From " + frequency;
-          sendMail.invoiceSendMail(landlordName, landlordEmail, mailSubject, dueDays, invoiceID, frequency);
-        // }
+        // send mail to tenant from landlord company
+        const mailSubject = invoiceID + " From " + frequency;
+        sendMail.invoiceSendMail(landlordName, landlordEmail, mailSubject, dueDays, invoiceID, frequency, userId);
       }
-
-
 
       if (lineItems) {
         for (let i = 0; i < lineItems.length; i++) {
-          if(Object.keys(lineItems[i]).length>=1){
+          if (Object.keys(lineItems[i]).length >= 1) {
             const category = lineItems[i].category;
             const property = lineItems[i].property;
             const memo = lineItems[i].memo;
@@ -304,10 +301,8 @@ exports.UpdateInvoice = async (req, res) => {
       const tenantEmail = selectTenantsResult[0][0].email;
       const tenantName = selectTenantsResult[0][0].firstName + " " + selectTenantsResult[0][0].lastName;
 
-      if (sendmails === "Yes") {
-        const mailSubject = invoiceID + " From " + frequency;
-        sendMail.invoiceSendMail(tenantName, tenantEmail, mailSubject, dueDays, invoiceID, frequency);
-      }
+      const mailSubject = invoiceID + " From " + frequency;
+      sendMail.invoiceSendMail(tenantName, tenantEmail, mailSubject, dueDays, invoiceID, frequency, userId);
     }
     //  if line items is not empty then delete line items and insert new line items
     if (lineItems) {
@@ -321,7 +316,7 @@ exports.UpdateInvoice = async (req, res) => {
           const memo = lineItems[i].memo;
           const amount = lineItems[i].amount;
 
-          const invoiceLineItemsResult = await queryRunner(insertLineItems, [invoiceID, category,property, memo, amount]);
+          const invoiceLineItemsResult = await queryRunner(insertLineItems, [invoiceID, category, property, memo, amount]);
 
           if (invoiceLineItemsResult.affectedRows === 0) {
             return res.send('Error occurred while inserting invoice line items');
@@ -332,20 +327,25 @@ exports.UpdateInvoice = async (req, res) => {
       }
     }
     let invoiceCheckResult;
-    if (images.length > 0) {
-      invoiceCheckResult = await queryRunner(
-        selectQuery("invoiceimages", "invoiceID"),
-        [invoiceID]
-      );
+    console.log(images)
+    invoiceCheckResult = await queryRunner(
+      selectQuery("invoiceimages", "invoiceID"),
+      [invoiceID]
+    );
+    if(images.length===invoiceCheckResult[0].length){
+      res.json({message:"Invoice updated successfully"})
+    }
+    else if (images.length!==invoiceCheckResult[0].length) {
+      
       // console.log(images, propertycheckresult[0])
 
       // Extract the image keys from propertycheckresult
       const propertyImageKeys = invoiceCheckResult[0].map(image => image.ImageKey);
-      console.log(invoiceCheckResult[0])
-console.log(propertyImageKeys)
+      // console.log(invoiceCheckResult[0])
+      // console.log(propertyImageKeys)
       // Find the images to delete from S3 (present in propertycheckresult but not in images)
       const imagesToDelete = invoiceCheckResult[0].filter(image => !images.some(img => img.imageKey === image.ImageKey));
-        console.log(imagesToDelete)
+      console.log(imagesToDelete)
       // Delete images from S3
       for (let i = 0; i < imagesToDelete.length; i++) {
         await deleteImageFromS3(imagesToDelete[i].ImageKey);
@@ -356,58 +356,30 @@ console.log(propertyImageKeys)
       const imagesToInsert = images.filter(image => !propertyImageKeys.includes(image.imageKey));
 
       for (let i = 0; i < imagesToInsert.length; i++) {
-  const { image_url, image_key, Image, imageKey } = imagesToInsert[i];
-  const imageUrl = image_url || Image;
-  const imageKeyVal = image_key || imageKey;
-  
-  const propertyImageResult = await queryRunner(insertInvoiceImage, [
-    invoiceID,
-    imageUrl,
-    imageKeyVal
-  ]);
+        const { image_url, image_key, Image, imageKey } = imagesToInsert[i];
+        const imageUrl = image_url || Image;
+        const imageKeyVal = image_key || imageKey;
+
+        const propertyImageResult = await queryRunner(insertInvoiceImage, [
+          invoiceID,
+          imageUrl,
+          imageKeyVal
+        ]);
         // if property image data not inserted into property image table then throw error
         if (propertyImageResult.affectedRows === 0) {
           throw new Error("data doesn't inserted in property image table");
         }
       }
-      // if (invoiceCheckResult[0].length > 0 && invoiceCheckResult.length > 0) {
-      //   const invoiceImages = invoiceCheckResult[0].map((image) => image.InvoiceImage);
-      //   const existingImg = existingImages.split(",");
-      //   const imagesToDelete = invoiceImages.filter(
-      //     (element) => !existingImg.includes(element)
-      //   );
-
-      //   imageToDelete(imagesToDelete);
-
-      //   if (imagesToDelete.length > 0) {
-      //     for (let i = 0; i < imagesToDelete.length; i++) {
-      //       await queryRunner(
-      //         deleteQuery("invoiceimages", "invoiceID", "InvoiceImage"),
-      //         [invoiceID, imagesToDelete[i]]
-      //       );
-      //     }
-      //   }
-      // }
-
-      // const fileNames = req.files.map((file) => file.filename);
-
-      // for (let i = 0; i < fileNames.length; i++) {
-      //   const img = fileNames[i];
-      //   const invoiceImageResult = await queryRunner(insertInvoiceImage, [invoiceID, img]);
-
-      //   if (invoiceImageResult.affectedRows === 0) {
-      //     return res.send('Error occurred while inserting invoice images');
-      //   }
-      // }
+      
 
       return res.status(200).json({
         message: "Invoice updated successfully"
       });
+    }else{
+      res.json({message:"Invoice updated successfully"})
     }
 
-    return res.status(400).json({
-      message: "No tenants found"
-    });
+   
   } catch (error) {
     console.log(error);
     return res.status(400).send("Error occurred while updating invoice");
@@ -445,7 +417,6 @@ exports.invoiceDelete = async (req, res) => {
         deleteQuery("invoicelineitems", "invoiceID"),
         [id]
       );
-
       res.status(200).json({
         message: " Invoice deleted successfully",
       });
@@ -468,21 +439,18 @@ exports.invoiceDelete = async (req, res) => {
 
 exports.resendEmail = async (req, res) => {
   const { invoiceID } = req.query;
-  // const { userId } = req.user;
-  // console.log(req)
+  const { userId } = req.user;
   try {
     const resendEmailResult = await queryRunner(resendEmailQuery, [invoiceID])
-    // console.log(111)
-    // console.log(resendEmailResult);
+
     if (resendEmailResult[0].length > 0) {
       const tenantEmail = resendEmailResult[0][0].email;
       const dueDays = resendEmailResult[0][0].dueDate;
       const frequency = resendEmailResult[0][0].frequency;
       const tenantName = resendEmailResult[0][0].firstName + " " + resendEmailResult[0][0].lastName;
       const mailSubject = invoiceID + " From " + frequency;
-      sendMail.invoiceSendMail(tenantName, tenantEmail, mailSubject, dueDays, invoiceID, frequency);
+      sendMail.invoiceSendMail(tenantName, tenantEmail, mailSubject, dueDays, invoiceID, frequency, userId);
     }
-
     res.status(200).json({
       message: " Resend Email successful"
     });
@@ -492,6 +460,7 @@ exports.resendEmail = async (req, res) => {
   }
 }
 //  ############################# Resend Email Invoice END ############################################################
+
 // ############################# create invoice categories ############################################################
 // exports.createInvoiceCategories = async (req, res) => {
 //   try {
@@ -551,9 +520,11 @@ exports.createInvoiceCategories = async (req, res) => {
       const {categoryName,taxable,taxAmount}=item
       createInvoiceCategoriesResult = await queryRunner(createInvoiceCategories, [categoryName,userId,taxAmount,taxable]);
     }
-    if (filteredCategories.length>=1 && createInvoiceCategoriesResult[0].affectedRows > 0) {
+    if ((filteredCategories.length>=1 && createInvoiceCategoriesResult[0].affectedRows > 0) || filteredCategories.length==0) {
+      const categoriesFromDb=await queryRunner(selectQuery("InvoiceCategories", "landLordId"),
+      [userId])
       res.status(200).json({
-        message: "Invoice Categories created successfully"
+        data: categoriesFromDb[0],
       });
     } else {
       res.status(400).json({
@@ -565,12 +536,15 @@ exports.createInvoiceCategories = async (req, res) => {
     res.send("Error from create invoice categories");
   }
 };
+// ############################# create invoice categories ############################################################
+
+
 // update categories text 
 exports.updateInvoiceCategories = async (req, res) => {
   try {
-    const { setTaxes, catId } = req.body;
+    const { setTaxes, catId, category } = req.body;
     const { userId } = req.user;
-    const updateInvoiceCategoriesResult = await queryRunner(updateInvoiceCategories, [setTaxes, catId, userId]);
+    const updateInvoiceCategoriesResult = await queryRunner(updateInvoiceCategories, [category, setTaxes, catId, userId]);
     if (updateInvoiceCategoriesResult[0].affectedRows > 0) {
       res.status(200).json({
         message: "Invoice Categories updated successfully"
@@ -606,3 +580,25 @@ exports.getInvoiceCategories = async (req, res) => {
     res.send("Error from create invoice categories");
   }
 };
+exports.getInvoiceCategoriesText = async (req, res) => {
+  try {
+    const { catId } = req.query;
+    const { userId } = req.user;
+    // getAmountByCategoriesID
+    const invoiceImagecheckresult = await queryRunner(getAmountByCategoriesID, [
+      catId, userId
+    ]);
+    if (invoiceImagecheckresult[0].length > 0) {
+      res.status(200).json({
+        data: invoiceImagecheckresult[0][0],
+      });
+    } else {
+      res.status(400).json({
+        message: "No data found"
+      });
+    }
+  } catch (error) {
+    console.log(error)
+    res.send("Error from create invoice categories");
+  }
+}

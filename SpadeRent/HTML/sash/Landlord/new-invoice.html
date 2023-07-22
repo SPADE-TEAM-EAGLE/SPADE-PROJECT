@@ -779,7 +779,7 @@
                                 Invoice</strong></h2>
                         <button type="button" class="btn btn-primary">#Invoice Number: INV-89900A</button>
                     </div>
-                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="top-close">
+                    <button class="btn-close top-close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
                     </button>
                 </div>
@@ -787,21 +787,21 @@
                     <div class="row mb-3">
                         <div class="col-md-12 col-lg-6">
                             <label class="form-label fw-bold fs-18">Select Tenant</label>
-                            <select class="form-control select2 form-select" data-placeholder="Select Tenant"
+                            <select class="form-control select2 form-select d-block" data-placeholder="Select Tenant"
                                 name="tenants" id="tenants" data-bs-placement="top" data-bs-toggle="tooltip" title=""
-                                data-bs-original-title="Select Tenant" data-bs-container="#addModal">
+                                data-bs-original-title="Select Tenant" data-bs-container="#addModal" required>
                                 <option label="Choose one">
                                 </option>
-                                <!-- <option value="Repeat Yearly">Repeat Yearly</option>
-                                <option value="Repeat Monthly">Repeat Monthly</option> -->
+
                             </select>
                             <span class="text-danger d-none">Tenant is required!</span>
                         </div>
+
                         <div class="col-md-12 col-lg-6">
                             <label class="form-label fw-bold fs-18">Select Property</label>
                             <select class="form-control select2 form-select d-block" data-placeholder="Select Property"
                                 name="tenants" id="propertyName" data-bs-placement="top" data-bs-toggle="tooltip"
-                                title="" data-bs-original-title="Select Property" data-bs-container="#addModal">
+                                title="" data-bs-original-title="Select Property" data-bs-container="#addModal" required>
                                 <option label="Choose one">
                                 </option>
 
@@ -813,7 +813,7 @@
                             <label class="form-label fw-bold fs-18">Select Unit</label>
                             <select class="form-control select2 form-select d-block" data-placeholder="Select Unit"
                                 name="tenants" id="propertyUnit" data-bs-placement="top" data-bs-toggle="tooltip"
-                                title="" data-bs-original-title="Select Unit" data-bs-container="#addModal">
+                                title="" data-bs-original-title="Select Unit" data-bs-container="#addModal" required>
                                 <option label="Choose one">
                                 </option>
 
@@ -836,28 +836,40 @@
                                 </label> -->
                             </div>
                         </div>
+                        <!-- <div class="col-md-8 col-lg-6">
+                            <label class="form-label fw-bold fs-18">Property Name</label>
+                            <input type="text" class="form-control form" value="" readonly data-bs-placement="top"
+                                data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Property Name here"
+                                data-bs-container="#addModal">
+                            <span class="text-danger d-none">Photos are required!</span>
+                        </div> -->
                         <div class="col-md-8 col-lg-6">
                             <label class="form-label fw-bold fs-18">Due Date</label>
                             <input type="date" class="form-control form" id="dueDate" data-bs-placement="top"
                                 data-bs-toggle="tooltip" title="" data-bs-original-title="Select Due Date"
-                                data-bs-container="#addModal">
+                                data-bs-container="#addModal" required>
                             <span class="text-danger d-none">Due Date is required!</span>
                         </div>
                         <div class="collapse row" id="collapse1">
-                            <!-- <div class="col-md-6 col-lg-4">
+                            <div class="col-md-6 col-lg-4">
                                 <label class="form-label fw-bold fs-18">Start Date</label>
-                                <input type="date" class="form-control form" id="startDate" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select Start Date" data-bs-container="#addModal">
-                                <span class="text-danger d-none">Photos are required!</span>
+                                <input type="date" class="form-control form" id="startDate" data-bs-placement="top"
+                                    data-bs-toggle="tooltip" title="" data-bs-original-title="Select Start Date"
+                                    data-bs-container="#addModal">
+                                <span class="text-danger d-none">Start Date is required!</span>
                             </div>
                             <div class="col-md-6 col-lg-4">
                                 <label class="form-label fw-bold fs-18">End Date</label>
-                                <input type="date" class="form-control form" id="endDate" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter End Date" data-bs-container="#addModal">
-                                <span class="text-danger d-none">Photos are required!</span>
+                                <input type="date" class="form-control form" id="endDate" data-bs-placement="top"
+                                    data-bs-toggle="tooltip" title="" data-bs-original-title="Enter End Date"
+                                    data-bs-container="#addModal">
+                                <span class="text-danger d-none">End Date is required!</span>
                             </div>
                             <div class="col-md-12 col-lg-4">
                                 <label class="form-label fw-bold fs-18">Frequency</label>
                                 <select class="form-control select2 form-select" data-placeholder="Every Month"
-                                    id="frequency" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select Frequency" data-bs-container="#addModal">
+                                    id="frequency" data-bs-placement="top" data-bs-toggle="tooltip" title=""
+                                    data-bs-original-title="Select Frequency" data-bs-container="#addModal">
                                     <option label="Choose one">
                                     </option>
                                     <option value="Repeat Yearly">Repeat Yearly</option>
@@ -867,27 +879,32 @@
                             </div>
                             <div class="col-md-8 col-lg-5">
                                 <label class="form-label fw-bold fs-18">Number of Days until due</label>
-                                <input type="text" class="form-control form" id="daysUntilDue" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Number of Days until due" data-bs-container="#addModal">
+                                <input type="text" class="form-control form" id="daysUntilDue" data-bs-placement="top"
+                                    data-bs-toggle="tooltip" title=""
+                                    data-bs-original-title="Enter Number of Days until due"
+                                    data-bs-container="#addModal">
                                 <span class="text-danger d-none">Photos are required!</span>
                             </div>
                             <div class="col-md-2 col-lg-3">
                                 <label class="form-label fw-bold fs-18">Repeat</label>
                                 <label class="custom-switch form-switch mb-0">
-                                    <input type="checkbox" name="custom-switch-radio" class="custom-switch-input" id="" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select to repeat" data-bs-container="#addModal">
+                                    <input type="checkbox" name="custom-switch-radio" class="custom-switch-input" id=""
+                                        data-bs-placement="top" data-bs-toggle="tooltip" title=""
+                                        data-bs-original-title="Select to repeat" data-bs-container="#addModal">
                                     <span class="custom-switch-indicator custom-switch-indicator-md"></span>
                                 </label>
                             </div>
                             <div class="col-md-12 col-lg-4">
                                 <label class="form-label fw-bold fs-18">Terms</label>
                                 <select class="form-control select2 form-select" data-placeholder="Every Month"
-                                    id="terms" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select Terms" data-bs-container="#addModal">
+                                    id="terms" data-bs-placement="top" data-bs-toggle="tooltip" title=""
+                                    data-bs-original-title="Select Terms" data-bs-container="#addModal">
                                     <option label="Choose one">
                                     </option>
                                     <option value="Due on Receipt">Due on Receipt</option>
                                 </select>
                                 <span class="text-danger d-none">Photos are required!</span>
-                            </div> -->
-                            <p>Coming Soon!!!</p>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -906,23 +923,26 @@
                                     </thead>
                                     <tbody id="add-item-container1">
                                         <tr class="tr">
-                                            <td><input type="text" class="form-control" name="category"
-                                                    data-bs-placement="top" data-bs-toggle="tooltip" title=""
-                                                    data-bs-original-title="Enter category here"
-                                                    data-bs-container="#addModal"></td>
-                                            <td><input type="text" class="form-control" name="property"
-                                                    data-bs-placement="top" data-bs-toggle="tooltip" title=""
-                                                    data-bs-original-title="Enter property here"
-                                                    data-bs-container="#addModal"></td>
+                                            <td>
+                                                <select id="state" name="category" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the state where you reside" data-bs-container="#addModal" required>
+                                                    <option selected="">Choose...</option>
+                                                </select>
+                                                <span class="text-danger d-none">State is required!</span>
+                                            </td>
+                                            <td><select id="state" name="property" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the state where you reside" data-bs-container="#addModal" required>
+                                                <option selected="">Choose...</option></select>
+                                            
+                                            <span class="text-danger d-none">State is required!</span></td>
                                             <td><input type="text" class="form-control" name="memo"
                                                     data-bs-placement="top" data-bs-toggle="tooltip" title=""
                                                     data-bs-original-title="Enter memo here"
-                                                    data-bs-container="#addModal"></td>
-                                            <td><input type="text" class="form-control" name="amount"
+                                                    data-bs-container="#addModal" required></td>
+                                            <td><input type="text" class="form-control" name="amount" id="amountField"
                                                     data-bs-placement="top" data-bs-toggle="tooltip" title=""
                                                     data-bs-original-title="Enter amount here"
                                                     data-bs-container="#addModal"
-                                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '')"></td>
+                                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '')" required>
+                                            </td>
                                             <td><button type="button" class="btn" id="del-btn1">
                                                     <i class="fi fi-rs-trash text-danger fs-5"></i>
                                                 </button></td>
@@ -986,9 +1006,9 @@
                         id='close'>Close</button>
                     <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
                     <div class="btn-group rounded-split mt-2 mb-2">
-                        <button type="button" class="btn btn-pill btn-primary save-invoice">Save</button>
-                        <button type="button" class="btn btn-pill btn-primary dropdown-toggle px-1"
-                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <button type="button" class="btn btn-pill btn-primary save-invoice" disabled>Save</button>
+                        <button type="button" class="btn btn-pill btn-primary dropdown-toggle px-1" id="toggle-button"
+                            data-bs-toggle="dropdown" aria-expanded="false" disabled>
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
@@ -1679,88 +1699,9 @@
                         </div>
                     </div> -->
                     <div class="tab-pane active" id="side1">
-                        <div class="list-group list-group-flush">
+                        <div class="list-group list-group-flush" id="notification-container">
                             <!-- <div class="pt-3 fw-semibold ps-5">Today</div> -->
-                            <div class="list-group-item d-flex align-items-center justify-content-between">
-                                <div class="d-flex align-items-center">
-                                    <div class="me-2">
-                                        <span class="avatar avatar-md brround cover-image"
-                                            data-bs-image-src="../assets/images/users/2.jpg"><span
-                                                class="avatar-status bg-success"></span>
-                                    </div>
-                                    <div class="">
-                                        <a href="javascript:void(0);">
-                                            <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal"
-                                                data-target="#chatmodel">William</div> <span class="text-dark"> 1436
-                                                Jersey Street > Jersey</span>
-                                            <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="">
-                                    <span class="fs-12 text-dark">2 min ago</span>
-                                </div>
-                            </div>
-                            <div class="list-group-item d-flex align-items-center justify-content-between">
-                                <div class="d-flex align-items-center">
-                                    <div class="me-2">
-                                        <span class="avatar avatar-md brround cover-image"
-                                            data-bs-image-src="../assets/images/users/2.jpg"><span
-                                                class="avatar-status bg-success"></span>
-                                    </div>
-                                    <div class="">
-                                        <a href="javascript:void(0);">
-                                            <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal"
-                                                data-target="#chatmodel">Henry</div> <span class="text-dark"> 1436
-                                                Jersey Street > Jersey</span>
-                                            <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="">
-                                    <span class="fs-12 text-dark">2 min ago</span>
-                                </div>
-                            </div>
-                            <div class="list-group-item d-flex align-items-center justify-content-between">
-                                <div class="d-flex align-items-center">
-                                    <div class="me-2">
-                                        <span class="avatar avatar-md brround cover-image"
-                                            data-bs-image-src="../assets/images/users/2.jpg"><span
-                                                class="avatar-status bg-success"></span>
-                                    </div>
-                                    <div class="">
-                                        <a href="javascript:void(0);">
-                                            <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal"
-                                                data-target="#chatmodel">David</div> <span class="text-dark"> 1436
-                                                Jersey Street > Jersey</span>
-                                            <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="">
-                                    <span class="fs-12 text-dark">2 min ago</span>
-                                </div>
-                            </div>
-                            <div class="list-group-item d-flex align-items-center justify-content-between">
-                                <div class="d-flex align-items-center">
-                                    <div class="me-2">
-                                        <span class="avatar avatar-md brround cover-image"
-                                            data-bs-image-src="../assets/images/users/2.jpg"><span
-                                                class="avatar-status bg-success"></span>
-                                    </div>
-                                    <div class="">
-                                        <a href="javascript:void(0);">
-                                            <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal"
-                                                data-target="#chatmodel">David</div> <span class="text-dark"> 1436
-                                                Jersey Street > Jersey</span>
-                                            <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="">
-                                    <span class="fs-12 text-dark">2 min ago</span>
-                                </div>
-                            </div>
+                            
                             <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
 
                         </div>
@@ -1862,46 +1803,7 @@
                     <div class="tab-pane" id="side4">
                         <div class="list-group list-group-flush">
                             <!-- <div class="pt-3 fw-semibold ps-5">Today</div> -->
-                            <div class="list-group-item d-flex align-items-center justify-content-between">
-                                <div class="d-flex align-items-center">
-                                    <div class="me-2">
-                                        <span class="avatar avatar-md brround cover-image"
-                                            data-bs-image-src="../assets/images/users/2.jpg"><span
-                                                class="avatar-status bg-success"></span>
-                                    </div>
-                                    <div class="">
-                                        <a href="javascript:void(0);">
-                                            <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal"
-                                                data-target="#chatmodel">Daniel</div> <span class="text-dark"> 1436
-                                                Jersey Street > Jersey</span>
-                                            <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="">
-                                    <span class="fs-12 text-dark">2 min ago</span>
-                                </div>
-                            </div>
-                            <div class="list-group-item d-flex align-items-center justify-content-between">
-                                <div class="d-flex align-items-center">
-                                    <div class="me-2">
-                                        <span class="avatar avatar-md brround cover-image"
-                                            data-bs-image-src="../assets/images/users/2.jpg"><span
-                                                class="avatar-status bg-success"></span>
-                                    </div>
-                                    <div class="">
-                                        <a href="javascript:void(0);">
-                                            <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal"
-                                                data-target="#chatmodel">Daniel</div> <span class="text-dark"> 1436
-                                                Jersey Street > Jersey</span>
-                                            <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="">
-                                    <span class="fs-12 text-dark">2 min ago</span>
-                                </div>
-                            </div>
+                            
                             <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
 
                         </div>
@@ -2169,7 +2071,7 @@
     <script src="../assets/js/themeColors.js"></script>
 
     <!-- CUSTOM JS -->
-    <script src="../assets/js/custom.js"></script>
+    <script src="../assets/js/custom.js"></script><script src="../assets/js/getNotification.js"></script>
 
     <!-- ############################################# -->
 
@@ -2188,7 +2090,7 @@
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
 
-    <script src="../assets/js/modal_functionality.js">
+ 
     </script>
     <script>
         $(document).ready(function () {
@@ -2387,8 +2289,8 @@
                     var lineItems = [];
                     $('#lineItemsTable tbody tr').each(function () {
 
-                        var category = $(this).find('input[name="category"]').val();
-                        var property = $(this).find('input[name="property"]').val();
+                        var category = $(this).find('[name="category"]').val();
+                        var property = $(this).find('[name="property"]').val();
                         var memo = $(this).find('input[name="memo"]').val();
                         var amount = $(this).find('input[name="amount"]').val();
 
@@ -2521,9 +2423,29 @@
                    
                 });
             });
-            let tenantData = []; let invoiceData = []
+            let categoryData=[]
+            let tenantData = []; let invoiceData = [];
             function getData() {
                 $("#preloader").fadeIn("fast");
+                $.ajax({
+                        url: 'http://localhost:3000/api/spade/invoiceCategory',
+                        method: 'GET',
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            categoryData = response.data
+                            console.log(categoryData)
+                            categoryData.forEach(function(category){
+                                $("[name='category']").append($('<option></option>').text(category.categorieName).val(category.id))
+                            })
+                        },
+                        error: function (xhr, status, error) {
+                            console.log('Error occurred while fetching state and city data.');
+                            console.log(xhr);
+                            console.log(error);
+                        }
+                    });
                 // console.log(22)
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/viewAllPropertyTenant',
@@ -2671,52 +2593,58 @@
 
             }
             getData()
+            $(document).on("change", ".tr [name='category'], .tr [name='category_update']", function(){
+    const selectedCategoryId = $(this).val();
+    console.log(selectedCategoryId);
+
+    // Determine if the changed element is a category or category_update input
+    const isCategory = $(this).attr("name") === "category";
+
+    // Find the matching category object in the categoryData array
+    const matchingCategory = categoryData.find((category) => category.id == selectedCategoryId);
+
+    // Get the parent row of the changed input
+    const parentRow = $(this).closest(".tr");
+
+    // Find the corresponding amount input within that row based on whether it's a category or category_update input
+    const amountInput = isCategory ? parentRow.find("[name='amount']") : parentRow.find("[name='amount_update']");
+
+    // Check if a matching category is found
+    if (matchingCategory) {
+        const amount = matchingCategory.setTaxes;
+        // Set the corresponding amount for the current row
+        amountInput.val(amount);
+    } else {
+        // Handle the case when no matching category is found for the current row
+        amountInput.val("No matching category found.");
+    }
+});
             function areAllFieldsFilled() {
-                var accordion1Fields = $('#addModal input[type="text"], #addModal select');
+                var accordion1Fields = $('#addModal input[required], #addModal select[required]');
                 // var accordion2Fields = $('#accordion-item2 input[type="text"], #accordion-item2 select');
                 // var imageInput = $('#fileInput');
                 var allFieldsFilled = accordion1Fields.filter(function () {
                     return $(this).val() === '' || $(this).val() === 'Choose...';
                 }).length === 0
-                var zipField = $('#zip');
-                if (zipField.val().length !== 5) {
-                    allFieldsFilled = false;
-                }
+                
                 return allFieldsFilled;
             }
 
             // Function to enable or disable buttons based on field status
             function updateButtonStatus() {
-                var accordion1Fields = $('#addModal input[type="text"], #addModal select');
-                // var accordion2Fields = $('#accordion-item2 input[type="text"], #accordion-item2 select');
-                // var imageInput = $('#fileInput');
-
-                var isAccordion1FieldsEmpty = accordion1Fields.filter(function () {
-                    return $(this).val() !== '' || $(this).val() === 'Choose...';
-                }).length === 0;
-
-
-                if (!isAccordion1FieldsEmpty || !isAccordion2FieldsEmpty) {
-                    $('#draft').removeAttr('disabled');
-                } else {
-                    $('#draft').attr('disabled', 'disabled');
-                }
-
                 var allFieldsFilled = areAllFieldsFilled();
 
                 // Enable or disable the buttons based on the fields' status
                 if (allFieldsFilled) {
-                    $('#next').removeClass("disabled");
-                    //   $('#draft').removeAttr("disabled");
+                    $('#toggle-button,.save-invoice').removeAttr("disabled")
                 } else {
-                    $('#next').addClass("disabled");
-                    //   $('#draft').removeAttr("disabled");
+                    $('#toggle-button,.save-invoice').attr("disabled",true);
 
                 }
             }
 
             // Call the updateButtonStatus function when any field in the accordions is changed
-            $('#accordion-item1 input, #accordion-item1 select, #accordion-item2 input, #accordion-item2 select').on('input change', function () {
+            $('#addModal input[required], #addModal select[required]').on('input change', function () {
                 var $field = $(this);
                 var $errorMessage = $field.next('.text-danger');
                 if ($field.attr("id") === "zip") {
@@ -2751,6 +2679,9 @@
                 console.log(propertyName)
                 $("#propertyName").empty()
                 $("#propertyUnit").empty()
+                $("[name='property']").empty()
+                $("[name='property']").append($('<option label="Choose one"></option>'))
+                $("[name='property']").append($('<option></option>').text(propertyName[0].propertyName).val(propertyName[0].propertyID))
                 $("#propertyName").append($('<option label="Choose one"></option>'))
                 $("#propertyUnit").append($('<option label="Choose one"></option>'))
                 $("#propertyName").append($('<option></option>').text(propertyName[0].propertyName).val(propertyName[0].propertyID))
@@ -2783,16 +2714,62 @@
             // Call the checkFields function on page load
             checkFields();
             $(document).on("click", "#add-item1", () => {
-                $("#add-item-container1").append(`<tr class="tr">
-                                            <td><input type="text" class="form-control" name="category"></td>
-                                            <td><input type="text" class="form-control" name="property"></td>
-                                            <td><input type="text" class="form-control" name="memo"></td>
-                                            <td><input type="text" class="form-control" name="amount" oninput="this.value = this.value.replace(/[^0-9.]/g, '')"></td>
-                                            <td><button type="button" class="btn" id="del-btn1">
-                                                <i class="fi fi-rs-trash text-danger fs-5"></i>
-                                            </button></td>
-                                        </tr>`)
-            });
+  const property = $("#tenants").val();
+  
+  if (property == "Choose...") {
+    $("#add-item-container1").append(`
+      <tr class="tr">
+        <td>
+          <select id="state" name="category" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the state where you reside" data-bs-container="#addModal" required>
+            <option selected="">Choose...</option>
+            ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
+          </select>
+          <span class="text-danger d-none">State is required!</span>
+        </td>
+        <td>
+          <select id="state" name="property" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the state where you reside" data-bs-container="#addModal" required>
+            <option selected="">Choose...</option>
+          </select>
+          <span class="text-danger d-none">State is required!</span>
+        </td>
+        <td><input type="text" class="form-control" name="memo"></td>
+        <td><input type="text" class="form-control" name="amount" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" required></td>
+        <td>
+          <button type="button" class="btn" id="del-btn1">
+            <i class="fi fi-rs-trash text-danger fs-5"></i>
+          </button>
+        </td>
+      </tr>
+    `);
+  } else {
+    const propertyName = tenantData.filter((tenant) => tenant.tenantID == property);
+    $("#add-item-container1").append(`
+      <tr class="tr">
+        <td>
+          <select id="state" name="category" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the state where you reside" data-bs-container="#addModal" required>
+            <option selected="">Choose...</option>
+            ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
+          </select>
+          <span class="text-danger d-none">State is required!</span>
+        </td>
+        <td>
+          <select id="state" name="property" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the state where you reside" data-bs-container="#addModal" required>
+            <option selected="">Choose...</option>
+            <option value="${propertyName[0].propertyID}">${propertyName[0].propertyName}</option>
+          </select>
+          <span class="text-danger d-none">State is required!</span>
+        </td>
+        <td><input type="text" class="form-control" name="memo"></td>
+        <td><input type="text" class="form-control" name="amount" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" required></td>
+        <td>
+          <button type="button" class="btn" id="del-btn1">
+            <i class="fi fi-rs-trash text-danger fs-5"></i>
+          </button>
+        </td>
+      </tr>
+    `);
+  }
+});
             $(document).on("click", "#add-item1_update", () => {
                 $("#add-item-container1_update").append(`<tr class="tr">
                                             <td><input type="text" class="form-control" name="category_update"></td>

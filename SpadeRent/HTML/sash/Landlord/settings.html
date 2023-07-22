@@ -1858,7 +1858,7 @@
                                         </div>
 
                                         <div class="d-flex country mt-2">
-                                            <a class="nav-link icon text-dark" onclick="mydemoclick()">
+                                            <a class="nav-link icon text-dark" >
                                                 <i class="fi fi-rs-universal-access"></i>
                                             </a>
                                         </div>
@@ -2439,7 +2439,7 @@
                                                                             <input type="radio"
                                                                                 class="custom-control-input"
                                                                                 name="example-radios1" value="Disable"
-                                                                                checked=""> <span
+                                                                                > <span
                                                                                 class="custom-control-label">Disable</span>
                                                                         </label>
                                                                     </div>
@@ -2465,7 +2465,7 @@
                                                                             <input type="radio"
                                                                                 class="custom-control-input"
                                                                                 name="example-radios2" value="Disable"
-                                                                                checked=""> <span
+                                                                                > <span
                                                                                 class="custom-control-label">Disable</span>
                                                                         </label>
                                                                     </div>
@@ -2484,7 +2484,7 @@
                                                                             <input type="radio"
                                                                                 class="custom-control-input"
                                                                                 name="example-radios3" value="Enable"
-                                                                                checked="">
+                                                                                >
                                                                             <span
                                                                                 class="custom-control-label">Enable</span>
                                                                         </label> &emsp;
@@ -2511,7 +2511,7 @@
                                                                         class="btn btn-light btn-pill m-2 w-100">Close</button>
                                                                 </a>
                                                                 <button
-                                                                    class="btn btn-primary btn-pill m-2 w-40">Save</button>
+                                                                    class="btn btn-primary btn-pill m-2 w-40" id="save-notification-setting">Save</button>
                                                             </div>
                                                             <!-- <div class="col-lg-7" style="display: flex; width: auto;">
                                                                 <button
@@ -7210,8 +7210,8 @@
                                                                         <tr class="tr">
                                                                             <td>
                                                                                 <label for=""><b>Categories</b></label>
-                                                                                <input type="text" name=""
-                                                                                    class="form-control">
+                                                                                <input type="text" name="vendor-category"
+                                                                                    class="form-control vendor-category">
                                                                             </td>
                                                                             <td><button type="button" class="btn"
                                                                                     id="del-btn5"
@@ -7234,7 +7234,7 @@
                                                                     class="btn btn-light btn-pill m-2 w-100">Close</button>
                                                             </a>
                                                             <button
-                                                                class="btn btn-primary btn-pill m-2 w-40">Save</button>
+                                                                class="btn btn-primary btn-pill m-2 w-40" id="save-vendor">Save</button>
                                                         </div>
                                                     </div>
 
@@ -7823,7 +7823,7 @@
                         </div>
                     </div> -->
                             <div class="tab-pane active" id="side1">
-                                <div class="list-group list-group-flush">
+                                <div class="list-group list-group-flush" id="notification-container">
                                     <!-- <div class="pt-3 fw-semibold ps-5">Today</div> -->
                                     <div class="list-group-item d-flex align-items-center justify-content-between">
                                         <div class="d-flex align-items-center">
@@ -7835,8 +7835,8 @@
                                             <div class="">
                                                 <a href="javascript:void(0);">
                                                     <div class="fw-semibold text-dark fw-bold fs-15"
-                                                        data-bs-toggle="modal" data-target="#chatmodel">William</div>
-                                                    <span class="text-dark"> 1436 Jersey Street > Jersey</span>
+                                                        data-bs-toggle="modal" data-target="#chatmodel">Wccxvilliam</div>
+                                                    <span class="text-dark"> 1sey Street > Jersey</span>
                                                     <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
                                                 </a>
                                             </div>
@@ -8343,7 +8343,7 @@
         <script src="../assets/switcher/js/switcher.js"></script>
 
         <!-- CUSTOM JS -->
-        <!-- <script src="../assets/js/custom.js"></script> -->
+        <!-- <script src="../assets/js/custom.js"></script><script src="../assets/js/getNotification.js"></script> -->
 
         <!-- CUSTOM JS -->
         <script src="../assets/js/custom-swicher.js"></script>
@@ -8373,12 +8373,12 @@
         <!-- CHARTJS JS -->
         <script src="../assets/plugins/chart/Chart.bundle.js"></script>
         <script src="../assets/plugins/chart/utils.js"></script>
-        <!-- <script src="../assets/js/modal_functionality.js"></script> -->
+        <!-- <script src="../assets/js/getNotification.js"></script></script> -->
 
         <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 
         <script>
-            let categoryData; var counter = 0;
+            let categoryData; var counter = 0;var image_url=" ";var image_key=" ";
             let password_validate1 = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
             var validconfirmPassword1 = document.getElementById("id_password1");
             let confirmPassword1 = document.getElementById("id_password2");
@@ -8447,6 +8447,7 @@
             $(document).ready(() => {
                 // ----- On render -----\\
                 function getData() {
+                    
                     $.ajax({
                         url: 'https://backend.app.spaderent.com/api/spade/protected',
                         method: 'GET',
@@ -8468,6 +8469,10 @@
                             $("#businessName").val(toTitleCase(response.businessName || ""))
                             $("#streetAddress").val(toTitleCase(response.streetAddress || ""))
                             $("#businessAddress").val(toTitleCase(response.businessAddress || ""))
+                            if(response.image){
+                                image_url=response.image
+                                image_key=response.imageKey
+                            }
                             $('#profile').css('background-image', 'url(' + response.image + ')').addClass('hasImage');
                             $(`#${response.planID}`).addClass("card-primary")
                         },
@@ -8494,12 +8499,12 @@
                                 $("#add-item-container1").append(`<tr class="tr">
                     <td>
                         <label for=""><b>Categories</b></label>
-                        <input type="text" name="category" class="form-control category" value="${categorieName}">
+                        <input type="text" name="category" class="form-control category" value="${categorieName}" readonly>
                     </td>
                     <td style="width: 1px;">
                         <label for=""><b>Taxable</b></label>
                         <div class="material-switch pull-right mt-1"> <input id="someSwitchOptionInfo${counter}" class="category-tax" name="someSwitchOption${counter}" type="checkbox" ${taxable == 1 ? 'checked' : ''}> <label for="someSwitchOptionInfo` + counter + `" class="label-info"></label> </div></td>
-                    <td><button type="button" class="btn" id="del-btn1" style="text-align: left;">
+                    <td><button type="button" class="btn" id="" style="text-align: left;">
                         <i class="fi fi-rs-trash text-danger fs-5"></i>
                     </button></td>
                 </tr>`)
@@ -8519,22 +8524,6 @@
                                     }
                                 }
                             })
-
-                            // function toTitleCase(str) {
-                            //     return str.replace(/\w\S*/g, function (txt) {
-                            //         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-                            //     });
-                            // }
-                            // console.log(response)
-                            // $("#firstName").val(toTitleCase(response.firstName))
-                            // $("#lastName").val(toTitleCase(response.lastName))
-                            // $("#email").val(response.email)
-                            // $("#phone1").val(response.phone)
-                            // $("#businessName").val(toTitleCase(response.businessName || ""))
-                            // $("#streetAddress").val(toTitleCase(response.streetAddress || ""))
-                            // $("#businessAddress").val(toTitleCase(response.businessAddress || ""))
-                            // $('#profile').css('background-image', 'url(' + response.image + ')').addClass('hasImage');
-                            // $(`#${response.planID}`).addClass("card-primary")
                         },
                         error: function (xhr, status, error) {
                             console.log('Error occurred while fetching state and city data.');
@@ -8543,8 +8532,174 @@
                             // console.log('Error occurred while fetching state and city data.');
                         }
                     });
+                    $.ajax({
+                        url: 'http://localhost:3000/api/spade/getVendorCategory',
+                        method: 'GET',
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            vendorCategoryData = response.data
+                            console.log(response.data)
+                            var vendorCategory = 0
+                            
+                            $("#add-item-container5").empty()
+                            response.data?.forEach(({ category,landLordId }, index) => {
+                                counter++
+                                
+                                $("#add-item-container5").append(`<tr class="tr">
+                                                                            <td>
+                                                                                <label for=""><b>Categories</b></label>
+                                                                                <input type="text" name=""
+                                                                                    class="form-control vendor-category" value='${category}' readonly>
+                                                                            </td>
+                                                                            <td><button type="button" class="btn"
+                                                                                    id=""
+                                                                                    style="text-align: left;">
+                                                                                    <i
+                                                                                        class="fi fi-rs-trash text-danger fs-5"></i>
+                                                                                </button></td>
+                                                                        </tr>`)
+                            })
+                        },
+                        error: function (xhr, status, error) {
+                            console.log('Error occurred while fetching state and city data.');
+                            console.log(xhr);
+                            console.log(error);
+                            // console.log('Error occurred while fetching state and city data.');
+                        }
+                    });
+                    $.ajax({
+                        url: 'http://localhost:3000/api/spade/checkNotify',
+                        method: 'GET',
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            // vendorCategoryData = response.data
+                            // console.log(response.data)
+                            // var vendorCategory = 0
+                            // $("#add-item-container1").empty()
+                            // $("#add-item-container5").empty()
+                            // response.data?.forEach(({ category,landLordId }, index) => {
+                            //     counter++
+                                
+                            //     $("#add-item-container5").append(`<tr class="tr">
+                            //                                                 <td>
+                            //                                                     <label for=""><b>Categories</b></label>
+                            //                                                     <input type="text" name=""
+                            //                                                         class="form-control vendor-category" value='${category}' readonly>
+                            //                                                 </td>
+                            //                                                 <td><button type="button" class="btn"
+                            //                                                         id=""
+                            //                                                         style="text-align: left;">
+                            //                                                         <i
+                            //                                                             class="fi fi-rs-trash text-danger fs-5"></i>
+                            //                                                     </button></td>
+                            //                                             </tr>`)
+                            // })
+                            console.log(response)
+                            
+                            if(response.email=="yes"){
+                                $("input[name='example-radios1'][value='Enable']").prop("checked", true);
+                            }else{
+                                $("input[name='example-radios1'][value='Disable']").prop("checked", true);
+                            }if(response.push=="yes"){
+                                $("input[name='example-radios2'][value='Enable']").prop("checked", true);
+
+
+}else{
+    $("input[name='example-radios2'][value='Disable']").prop("checked", true);
+    
+}if(response.text=="yes"){
+    $("input[name='example-radios3'][value='Enable']").prop("checked", true);
+
+
+}else{
+    $("input[name='example-radios3'][value='Disable']").prop("checked", true);
+
+    
+}
+                        },
+                        error: function (xhr, status, error) {
+                            console.log('Error occurred while fetching state and city data.');
+                            console.log(xhr);
+                            console.log(error);
+                            // console.log('Error occurred while fetching state and city data.');
+                        }
+                    });
+                 
                 }
                 getData()
+                // /notify
+                $("#save-notification-setting").click(()=>{
+                    // console.log($("#example-radios1").val())
+                    const data={
+                        isEmailNotify:$("input[name='example-radios1']:checked").val()=="Enable"?"yes":"no",
+                        isPushNotify:$("input[name='example-radios2']:checked").val()=="Enable"?"yes":"no",
+                        textNotification:$("input[name='example-radios3']:checked").val()=="Enable"?"yes":"no"
+                    }
+                    $.ajax({
+                        url: 'http://localhost:3000/api/spade/notify',
+                        method: 'PUT',
+                        data: JSON.stringify(data),
+                        contentType: 'application/json',
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            $("#myModal_success p").text("Succesfully Updated!!!")
+                            $("#myModal_success").modal("show")
+                            getData()
+                        },
+                        error: function (xhr, status, error) {
+                            console.log('Error occurred while fetching state and city data.');
+                            console.log(xhr);
+                            console.log(error);
+                            // console.log('Error occurred while fetching state and city data.');
+                        }
+                    });
+                })
+                
+                $("#save-vendor").click(()=>{
+                    const data=[]
+                    $('#add-item-container5 .tr').each(function () {
+                        
+                        var categoryName = $(this).find('.vendor-category').val();
+                        if (typeof categoryName !== 'undefined' && !$(this).find('.vendor-category').prop('readonly')) {
+
+                            var row = {
+                                category: categoryName,
+                            };
+                            data.push(row);
+                        }
+                        // Create an object for each row's data
+
+                    });
+                    console.log(data)
+                    $.ajax({
+                        url: 'http://localhost:3000/api/spade/addVendorCategory', // Replace with your actual backend endpoint URL
+                        method: 'POST',
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        data: JSON.stringify(data),
+                        contentType: 'application/json',
+                        success: function (response) {
+                            // Handle the success response
+                            $("#myModal_success p").text("Succesfully Updated!!!")
+                            $("#myModal_success").modal("show")
+                            getData()
+                            // Perform any additional actions or show success message
+                        },
+                        error: function (xhr, status, error) {
+                            // Handle the error response
+                            console.log('Error occurred:', error);
+                            // Perform error handling or show error message
+                        }
+                    });
+                })
+                
                 $('#save-categories').click(function () {
                     var data = []; // Array to store data for each row
 
@@ -8580,10 +8735,10 @@
                         // Create an object for each row's data
 
                     });
-                    // console.log(data)
+                    
                     // Send the data to the backend using AJAX
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/addInvoiceCategory', // Replace with your actual backend endpoint URL
+                        url: 'http://localhost:3000/api/spade/addInvoiceCategory', // Replace with your actual backend endpoint URL
                         method: 'POST',
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -8698,7 +8853,7 @@
                     },
                     success: function (response) {
                         // console.log()
-                        response.data[0].forEach((card) => {
+                        response.data.forEach((card) => {
                             // $(`.${card.id}`).each(function(){
                             //     this
                             // })
@@ -8725,8 +8880,8 @@
                         businessName: $("#businessName").val(),
                         businessAddress: $("#businessAddress").val(),
                         streetAddress: $("#streetAddress").val(),
-                        imageUrl: " ",
-                        imageKey: " "
+                        imageUrl: image_url,
+                        imageKey: image_key
                     }
                     const userForm = new FormData()
                     if (file) {
@@ -9141,7 +9296,7 @@
                                                                             <td>
                                                                                 <label for=""><b>Categories</b></label>
                                                                                 <input type="text" name=""
-                                                                                    class="form-control">
+                                                                                    class="form-control vendor-category">
                                                                             </td>
                                                                             <td><button type="button" class="btn"
                                                                                     id="del-btn5"

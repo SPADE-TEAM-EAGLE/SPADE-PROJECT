@@ -5,7 +5,7 @@ class UserServices {
     constructor() {
 
     }
-    async addImagesInDB(Images,id) {
+    async addImagesInDB(Images, id) {
         for (let i = 0; i < Images.length; i++) {
             const { image_url } = Images[i];
             const { image_key } = Images[i];

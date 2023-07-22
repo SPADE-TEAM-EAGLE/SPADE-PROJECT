@@ -10,6 +10,9 @@ const { upload } = require("../middleware/imageUploads");
 const { uploadExistingFiles } = require("../middleware/imageUploads");
 const taskController = require("../controllers/taskController");
 const fileUpload = require("../helper/S3Bucket");
+const notifyController = require("../controllers/notifyController");
+const { chatsController } = require("../controllers/chatsController");
+
 router.post("/Signup", userController.createUser);
 router.get("/protected", verifyToken, userController.getUser);
 router.get("/protectedTenant", verifyTokenTenant, userController.getUser);
@@ -42,7 +45,7 @@ router.put("/updateProperty", verifyToken, userController.propertyUpdate);
 // router.get('/viewProperty' ,userController.propertyView);
 router.get("/viewProperty", verifyToken, userController.propertyView);
 router.get('/resendEmail', verifyToken, invoiceController.resendEmail);
-router.get("/PropertyUnits", verifyToken, userController.getpropertyUnits);
+// router.get("/PropertyUnits", verifyToken, userController.getpropertyUnits);
 router.post("/addMoreUnits", userController.addMoreUnits);
 router.delete("/deleteMoreUnits", userController.deleteMoreUnits);
 router.put(
@@ -67,26 +70,27 @@ router.get(
 );
 // router.post('/tenants',verifyToken,tenantController.createTenants);
 router.post("/tenants", verifyToken, tenantController.createTenants);
-router.post("/sendInvitationLink",verifyToken,tenantController.sendInvitationLink);
+router.post("/sendInvitationLink", verifyToken, tenantController.sendInvitationLink);
 // router.post('/tenantIncreaseRent' , userController.tenantIncreaseRent);
 // router.get('/verifyMailCheck',verifyToken,  userController.verifyMailCheck);
-router.get('/verifyMailCheck',verifyToken ,userController.verifyMailCheck);
+router.get('/verifyMailCheck', verifyToken, userController.verifyMailCheck);
 router.get('/resetEmailTenant', tenantController.createResetEmailTenant);
 router.post('/verifyResetEmailCodeTenant', tenantController.verifyResetEmailCodeTenant);
 router.put('/updatePasswordTenant', tenantController.updatePasswordTenant);
 router.put('/resendCodeTenants', tenantController.resendCodeTenants);
-router.post('/addAlternateEmailPhone' ,verifyToken, tenantController.addAlternateEmailPhone);
-router.post('/tenantAttachFile',[verifyToken,upload], tenantController.tenantAttachFile);
-router.delete('/tenantAttachFileDelete' ,verifyToken, tenantController.tenantAttachFileDelete);
-router.delete('/tenantDelete',verifyToken ,tenantController.tenantDelete);
-router.get('/getTenantsByID', verifyToken,tenantController.getTenantsByID);
-router.post('/createInvoice',verifyToken, invoiceController.createInvoice);
-router.put('/putInvoiceStatusUpdates',verifyToken ,invoiceController.putInvoiceStatusUpdates);
-router.get('/getAllInvoices', verifyToken ,invoiceController.getAllInvoices);
-router.get('/getByIdInvoices', verifyToken ,invoiceController.getByIdInvoices);
+router.post('/addAlternateEmailPhone', verifyToken, tenantController.addAlternateEmailPhone);
+router.post('/tenantAttachFile', verifyToken, tenantController.tenantAttachFile);
+router.delete('/tenantAttachFileDelete', verifyToken, tenantController.tenantAttachFileDelete);
+router.delete('/tenantDelete', verifyToken, tenantController.tenantDelete);
+router.get('/getTenantsByID', verifyToken, tenantController.getTenantsByID);
+router.post('/createInvoice', verifyToken, invoiceController.createInvoice);
+router.put('/putInvoiceStatusUpdates', verifyToken, invoiceController.putInvoiceStatusUpdates);
+router.get('/getAllInvoices', verifyToken, invoiceController.getAllInvoices);
+router.get('/getByIdInvoices', verifyToken, invoiceController.getByIdInvoices);
 router.put('/UpdateInvoice', verifyToken, invoiceController.UpdateInvoice);
 router.delete('/invoiceDelete', verifyToken, invoiceController.invoiceDelete);
 router.post("/addVendor", verifyToken, taskController.addVendors);
+
 router.post("/addVendorCategory", verifyToken, taskController.addVendorCategory);
 // router.get("/getAllVendors",verifyToken ,taskController.getAllVendors);
 router.get("/getAllVendors", verifyToken, taskController.getAllVendors);
@@ -95,7 +99,7 @@ router.get("/getAllTask", verifyToken, taskController.getAllTask);
 router.get("/taskByID", verifyToken, taskController.taskByID);
 router.put("/updateTenants", verifyToken, tenantController.updateTenants);
 router.get("/getStates", userController.getStates);
-router.get("/getVendorCategory", taskController.getVendorCategory);
+router.get("/getVendorCategory", verifyToken,taskController.getVendorCategory);
 router.get("/getVendorAssignTo", verifyToken, taskController.getVendorAssignTo);
 router.put("/updateTasks", verifyToken, taskController.updateTasks);
 router.delete("/deleteTask", taskController.deleteTask);
@@ -112,7 +116,23 @@ router.put('/verifyEmailUpdate', userController.verifyEmailUpdate);
 router.post("/addInvoiceCategory", verifyToken, invoiceController.createInvoiceCategories);
 router.put("/updatedInvoiceCategory", verifyToken, invoiceController.updateInvoiceCategories);
 router.get("/invoiceCategory", verifyToken, invoiceController.getInvoiceCategories);
+router.get("/getInvoiceCategoriesText", verifyToken, invoiceController.getInvoiceCategoriesText);
+router.get("/dashboard", verifyToken, userController.getDashboardData);
+router.get("/checkNotify", verifyToken, notifyController.getCheckedNotify);
+
 // updated notification route
-router.put("/notify", verifyToken, userController.updatedNotification);
+router.put("/notify", verifyToken, notifyController.updateNotifyData);
+router.get("/notify", verifyToken, notifyController.getNotify);
+router.get("/property", verifyToken, userController.getAllProperty);
+router.get("/invoice", verifyToken, userController.getInvoiceReportData);
+router.get("/task", verifyToken, userController.getTaskReportData);
+
+
+
+// chats start
+router.post("/accessChats", verifyToken, chatsController.accessChats);
+router.get("/fetchChats", verifyToken, chatsController.fetchChats);
+
+
 
 module.exports = router;
