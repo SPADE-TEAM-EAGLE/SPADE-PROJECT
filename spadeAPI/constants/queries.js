@@ -55,6 +55,12 @@ exports.delteImageFromDb = "DELETE FROM propertyimage WHERE imageKey = ?"
 exports.delteImageForInvoiceImages = "DELETE FROM invoiceimages WHERE imageKey = ?"
 exports.delteImageForTaskImages = "DELETE FROM taskimages WHERE ImageKey = ?"
 
+// delete invoice categories by id and landLordId
+exports.deleteInvoiceCategories = "DELETE FROM InvoiceCategories WHERE id = ? AND landLordId = ?";
+exports.deleteVendorCategories = "DELETE FROM vendorcategory WHERE id = ? AND landLordId = ?";
+
+
+
 exports.createInvoiceCategories = "INSERT INTO InvoiceCategories (categorieName,landLordId) VALUES (?,?)";
 // updated category query setTaxes, catId, userId
 exports.updateInvoiceCategories = "UPDATE InvoiceCategories SET categorieName = ?,setTaxes = ? WHERE id = ? AND landLordId = ?";
@@ -380,29 +386,24 @@ exports.insertChat = "INSERT INTO chats (senderId, receiverID, created_at) VALUE
 exports.findChat = "SELECT * FROM chats WHERE (senderId = ? AND receiverID = ?) OR (senderID = ? AND receiverID = ?)";
 
 // create new Message in messages table
-exports.insertMessage = "INSERT INTO messages (chatID, senderID, receiverID, message, created_at) VALUES (?,?,?,?,?)";
+exports.insertMessage = "INSERT INTO messages (message,chatId,messageType, created_at,sender) VALUES (?,?,?,?,?)";
 
-// FullChat get using Joins with tenants grop by senderID and receiverID
-exports.getFullChat = `SELECT
-    c.id AS chatID,
-    c.senderID,
-    c.receiverID,
-    c.created_at,
-    t.firstName,
-    t.lastName,
-    t.email,
-    t.phoneNumber,
-    t.Address
-FROM
-    chats AS c
-JOIN
-    tenants AS t ON c.senderID = t.id
-WHERE
-    c.receiverID = ?
-GROUP BY
-    c.senderID
-ORDER BY
-    c.created_at DESC`;
+// get all chats of user by senderId using joining chats and users table
+exports.getChatUsers = `
+SELECT c.id AS chatId, c.senderId, c.receiverID, c.created_at, u.id AS userId, u.FirstName, u.LastName, u.Email, u.Phone, u.image, u.imageKey FROM chats AS c
+JOIN 
+users AS u ON c.senderId = u.id 
+WHERE c.receiverID = ?
+ORDER BY c.created_at DESC`;
 
+exports.getChatTenants = `
+SELECT c.id AS chatId, c.senderId, c.receiverID, c.created_at, t.id AS tenantId, t.firstName, t.lastName, t.email, t.phoneNumber FROM chats AS c
+JOIN 
+tenants AS t ON c.receiverID = t.id 
+WHERE c.senderId = ?
+ORDER BY c.created_at DESC`;
+
+// get all messages of chat by chatId
+exports.getMessages = "SELECT * FROM messages WHERE chatId = ? ORDER BY created_at ASC";
 
 

@@ -136,7 +136,6 @@ exports.Signin = async function (req, res) {
   // console.log(1)
   // let selectResult;
   try {
-    // for tenant
     if (tenant == "tenant") {
       console.log("tenant")
       const selectResult = await queryRunner(selectQuery("tenants", "email"), [

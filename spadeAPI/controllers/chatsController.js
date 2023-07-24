@@ -1,4 +1,4 @@
-const { insertChat, selectQuery, getFullChat } = require("../constants/queries");
+const { insertChat, selectQuery, getFullChat, getChatUsers, getChatTenants } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
 
 
@@ -17,7 +17,7 @@ const chatsController = {
             if (isChat[0].length > 0) {
                 res.send(isChat[0]);
             } else {
-                // insert into chats table
+                // insert into chats table if chat does not exist
                 const insertChats = await queryRunner(
                     insertChat, [senderId, recieverId, created_at]
                 );
@@ -32,13 +32,28 @@ const chatsController = {
             })
         }
     },
-    fetchChats: async (req, res) => {
+    fetchUsersChats: async (req, res) => {
         const senderId = req.user.userId;
         try {
-            const getChats = await queryRunner(selectQuery("chats", "senderId"), [senderId]);
+            const getChatsData = await queryRunner(getChatUsers, [senderId]);
             res.status(200).json({
                 message: "Chats fetched successfully",
-                data: getChats[0]
+                data: getChatsData[0]
+            })
+        } catch (error) {
+            res.status(400).json({
+                message: error.message
+            })
+        }
+    },
+    fetchUsersTenants: async (req, res) => {
+        const senderId = req.user.userId;
+        console.log(senderId)
+        try {
+            const getChatsData = await queryRunner(getChatTenants, [senderId]);
+            res.status(200).json({
+                message: "Chats fetched successfully",
+                data: getChatsData[0]
             })
         } catch (error) {
             res.status(400).json({

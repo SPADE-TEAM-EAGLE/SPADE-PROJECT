@@ -840,7 +840,7 @@ exports.addVendorCategory = async (req, res) => {
     const categoriesToInsert = [];
 
     for (const category of categories) {
-      const existingCategory = existingCategories.find((cat) => cat.categoryId == category.categoryId);
+      const existingCategory = existingCategories.find((cat) => cat.id == category.categoryId);
       if (existingCategory) {
         // Category exists, check if it needs to be updated
         if (existingCategory.category !== category.category) {
@@ -853,6 +853,7 @@ exports.addVendorCategory = async (req, res) => {
     }
 
     // Batch update existing vendor categories
+    console.log(categoriesToUpdate)
     for (const categoryToUpdate of categoriesToUpdate) {
       const { categoryId, category } = categoryToUpdate;
       const categoryResult = await queryRunner(updateVendorCategory, [category, categoryId, userId]);
