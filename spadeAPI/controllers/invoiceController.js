@@ -45,7 +45,7 @@ exports.createInvoice = async (req, res) => {
     lineItems,
     sendmails,
     totalAmount,
-    images
+    images,
   } = req.body;
   try {
     const { userId } = req.user;
@@ -78,9 +78,10 @@ exports.createInvoice = async (req, res) => {
             const property = lineItems[i].property;
             const memo = lineItems[i].memo;
             const amount = lineItems[i].amount;
-            const invoiceLineItemsResult = await queryRunner(insertLineItems, [invoiceID, category, property, memo, amount])
+            const lineItemTax = lineItems[i].tax;
+            const invoiceLineItemsResult = await queryRunner(insertLineItems, [invoiceID, category, property, memo, amount, lineItemTax])
             if (invoiceLineItemsResult.affectedRows === 0) {
-              res.send('Error2');
+              res.send('Error2 in line item invoice');
               return;
             }
           }
