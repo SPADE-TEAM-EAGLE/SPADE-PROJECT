@@ -108,6 +108,9 @@ router.get("/propertyTask", verifyToken, userController.propertyTask);
 router.get("/tenantTask", verifyToken, tenantController.tenantTask);
 router.get("/getAllInvoicesTenant", verifyTokenTenant, tenantPortalController.getAllInvoicesTenant);
 router.get("/getAllTaskTenant", verifyTokenTenant, tenantPortalController.getAllTaskTenant);
+// router.get("/getAllTaskLoggedInTenant", verifyTokenTenant, tenantPortalController.getAllLoggedInTenantTask);
+// get tenante dashboard
+router.get("/getTenantDashData", verifyTokenTenant, tenantPortalController.getTenantDashboardData);
 router.get('/getTenantByID', verifyTokenTenant, tenantPortalController.getTenantByID);
 router.put('/changePasssword', verifyToken, settingController.changePasssword);
 router.put('/changePasswordTenant', verifyTokenTenant, settingController.changePasswordTenant);
@@ -122,6 +125,8 @@ router.put("/notify", verifyToken, notifyController.updateNotifyData);    //****
 // checkNotify
 router.get("/checkNotify", verifyToken, notifyController.getCheckedNotify);
 router.get("/notify", verifyToken, notifyController.getNotify);
+router.get("/tenantNotify", verifyTokenTenant, notifyController.getTenantNotify);
+
 router.get("/property", verifyToken, userController.getAllProperty);
 router.get("/invoice", verifyToken, userController.getInvoiceReportData);
 router.get("/task", verifyToken, userController.getTaskReportData);

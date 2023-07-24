@@ -70,8 +70,7 @@ const task = cron.schedule('0 9,20 * * *', async () => {
                 const invoiceLineItemsResult = await queryRunner(insertLineItems, [invoiceID, category, property, memo, amount])
                 console.log("line item");
               }
-            }    // Insert END 
-            //Line item END 
+            }   
             // Invoice Images Start
             console.log("invoice Image");
             const invoiceImagesResult = await queryRunner(selectQuery('invoiceimages', 'invoiceID'), [PreviousInvoiceID])

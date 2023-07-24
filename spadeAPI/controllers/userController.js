@@ -33,6 +33,7 @@ const {
   updatePasswordLandlord,
   insertNotify
 } = require("../constants/queries");
+
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
 const { fileUpload, deleteImageFromS3 } = require("../helper/S3Bucket");
@@ -89,7 +90,6 @@ exports.createUser = async function (req, res) {
     return res.status(400).json({ message: error.message });
   }
 };
-
 exports.checkemail = async function (req, res) {
   const { email } = req.body;
   try {
@@ -108,7 +108,12 @@ exports.checkemail = async function (req, res) {
       });
     }
   } catch (error) {
-    res.status(500).send("Error");
+    // res.status(500).send("Error");
+    res
+      .status(400)
+      .json({
+        message: error.message,
+      });
   }
 };
 

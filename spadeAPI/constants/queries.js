@@ -60,7 +60,6 @@ exports.deleteInvoiceCategories = "DELETE FROM InvoiceCategories WHERE id = ? AN
 exports.deleteVendorCategories = "DELETE FROM vendorcategory WHERE id = ? AND landLordId = ?";
 
 
-
 exports.createInvoiceCategories = "INSERT INTO InvoiceCategories (categorieName,landLordId) VALUES (?,?)";
 // updated category query setTaxes, catId, userId
 exports.updateInvoiceCategories = "UPDATE InvoiceCategories SET categorieName = ?,setTaxes = ? WHERE id = ? AND landLordId = ?";
@@ -79,6 +78,12 @@ exports.getTotalAmountUnpaid = "SELECT SUM(invoice.totalAmount) AS totalUnPaid F
 // get total amount where status is paid
 exports.getTotalAmountPaid = "SELECT SUM(invoice.totalAmount) AS totalPaid FROM invoice WHERE invoice.landlordID = ? AND invoice.status = 'paid'";
 // get num propery and tenant of landlord
+exports.getTotalAmountUnpaid = "SELECT SUM(invoice.totalAmount) AS totalUnPaid FROM invoice WHERE invoice.landlordID = ? AND invoice.status = 'Unpaid'";
+
+exports.getTenantTotalAmountPaid = "SELECT SUM(invoice.totalAmount) AS totalPaid FROM invoice WHERE invoice.tenantID = ? AND invoice.status = 'paid'";
+exports.getTenantTotalAmountUnpaid = "SELECT SUM(invoice.totalAmount) AS totalUnPaid FROM invoice WHERE invoice.tenantID = ? AND invoice.status = 'Unpaid'";
+exports.getTenantTotalAmount = "SELECT SUM(invoice.totalAmount) AS totalAmount FROM invoice WHERE invoice.tenantID = ?";
+
 exports.getNumPropertyTenant = `SELECT 
     (SELECT COUNT(property.id) FROM property WHERE property.landlordID = ?) AS propertyCount,
     (SELECT COUNT(tenants.id) FROM tenants WHERE tenants.landlordID = ?) AS tenantCount;
@@ -182,7 +187,103 @@ invoice.id, invoice.invoiceType, invoice.status, invoice.startDate, invoice.endD
 ORDER BY 
 invoice.created_at DESC;
 `
-// property.propertyType
+
+// tenant notify query
+exports.getTenantPropertyNotify = `SELECT 
+    property.id AS propertyID,
+    property.propertyName,
+    property.address,
+    property.propertyType,
+    property.created_at,
+    property.city,
+    users.FirstName AS landlordFirstName,
+    users.LastName AS landlordLastName,
+    users.id AS landlordID,
+    users.image AS landlordImage,
+    GROUP_CONCAT(propertyimage.Image) AS propertyImage,
+    GROUP_CONCAT(propertyimage.ImageKey) AS propertyImageKey
+FROM 
+    property
+JOIN 
+    tenants ON property.id = tenants.propertyID
+JOIN 
+    users ON users.id = tenants.landlordID
+LEFT JOIN 
+    propertyimage ON property.id = propertyimage.propertyID
+WHERE 
+    tenants.id = ?
+GROUP BY 
+    property.id, property.propertyName, property.address, property.propertyType, property.created_at
+ORDER BY 
+    property.created_at DESC;
+`;
+
+
+
+exports.getTenantTaskNotify = `SELECT 
+    task.id AS taskID,
+    task.taskName,
+    task.status,
+    task.priority,
+    task.created_at,
+    tenants.firstName,
+    tenants.lastName,
+    tenants.email,
+    tenants.Address,
+    tenants.city,
+    users.FirstName AS landlordFirstName,
+    users.LastName AS landlordLastName,
+    users.id AS landlordID,
+    users.image AS landlordImage,
+    GROUP_CONCAT(taskimages.Image) AS Image,
+    GROUP_CONCAT(taskimages.ImageKey) AS ImageKey
+FROM 
+    task
+JOIN 
+    users ON users.id = task.landlordID
+JOIN 
+    tenants ON task.tenantID = tenants.id
+JOIN 
+    taskimages ON task.id = taskimages.taskID
+WHERE 
+    task.tenantID = ?
+GROUP BY 
+    task.id, task.taskName, task.status, task.priority, task.created_at
+ORDER BY 
+    task.created_at DESC;
+`;
+
+exports.getTenantInvoiceNotify = `SELECT 
+invoice.id AS invoiceID,
+invoice.invoiceType,
+invoice.startDate,
+invoice.endDate,
+invoice.status,
+invoice.totalAmount,
+invoice.created_at,
+users.FirstName AS landlordFirstName,
+users.LastName AS landlordLastName,
+users.id AS landlordID,
+users.image AS landlordImage,
+GROUP_CONCAT(invoiceimages.Image) AS Image,
+GROUP_CONCAT(invoiceimages.ImageKey) AS ImageKey
+FROM 
+invoice
+LEFT JOIN 
+invoiceimages ON invoice.id = invoiceimages.invoiceID
+JOIN
+    users ON users.id = invoice.landlordID 
+WHERE 
+invoice.tenantID = ?
+GROUP BY 
+invoice.id, invoice.invoiceType, invoice.status, invoice.startDate, invoice.endDate, invoice.created_at
+ORDER BY 
+invoice.created_at DESC;
+`
+
+
+
+
 // insertNotify notify
 exports.insertNotify = "INSERT INTO notification (landlordID, emailNotification, pushNotification, textNotification) VALUES (?,?,?,?)";
 exports.updateNotify = "UPDATE notification SET emailNotification = ? , pushNotification = ?, textNotification = ? WHERE landlordID = ? ";
