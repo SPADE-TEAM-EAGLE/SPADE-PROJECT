@@ -12,7 +12,7 @@ const app = express();
 // const io = new Server(server);
 
 // const options = {
-//     origin: ["http://localhost:3000"],
+//     origin: ["https://backend.app.spaderent.com"],
 // }
 app.use(cookieParser());
 app.use(bodyParser.json());

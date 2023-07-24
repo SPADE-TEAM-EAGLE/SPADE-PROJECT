@@ -828,12 +828,12 @@
                                         name="invoice" id="invoice" checked>
                                     <span class="custom-control-label">One Time Invoice</span>
                                 </label>
-                                <!-- <label class="custom-control custom-radio mb-0">
+                                <label class="custom-control custom-radio mb-0">
                                     <input class="custom-control-input" type="radio" value="Recurring Invoice"
                                         name="invoice" id="recurring" data-bs-toggle="collapse" href="#collapse1"
                                         role="button" aria-expanded="false" aria-controls="collapseExample1">
                                     <span class="custom-control-label">Recurring Invoice</span>
-                                </label> -->
+                                </label>
                             </div>
                         </div>
                         <!-- <div class="col-md-8 col-lg-6">
@@ -1011,9 +1011,9 @@
                         id='close'>Close</button>
                     <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
                     <div class="btn-group rounded-split mt-2 mb-2">
-                        <button type="button" class="btn btn-pill btn-primary save-invoice" disabled>Save</button>
+                        <button type="button" class="btn btn-pill btn-primary save-invoice" >Save</button>
                         <button type="button" class="btn btn-pill btn-primary dropdown-toggle px-1" id="toggle-button"
-                            data-bs-toggle="dropdown" aria-expanded="false" disabled>
+                            data-bs-toggle="dropdown" aria-expanded="false">
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
@@ -2297,12 +2297,14 @@
                         var category = $(this).find('[name="category"]').val();
                         var property = $(this).find('[name="property"]').val();
                         var memo = $(this).find('input[name="memo"]').val();
+                        var tax = $(this).find('input[name="tax"]').val();
                         var amount = $(this).find('input[name="amount"]').val();
 
                         lineItems.push({
                             category: category,
                             property: property,
                             memo: memo,
+                            tax:tax,
                             amount: amount
                         });
                     });

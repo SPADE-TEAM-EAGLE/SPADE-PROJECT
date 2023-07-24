@@ -103,21 +103,17 @@ exports.createInvoice = async (req, res) => {
       }
 
       if (lineItems) {
+        console.log(lineItems)
         for (let i = 0; i < lineItems.length; i++) {
           if (Object.keys(lineItems[i]).length >= 1) {
             const category = lineItems[i].category;
             const property = lineItems[i].property;
             const memo = lineItems[i].memo;
             const amount = lineItems[i].amount;
-            const invoiceLineItemsResult = await queryRunner(insertLineItems, [
-              invoiceID,
-              category,
-              property,
-              memo,
-              amount,
-            ]);
+            const lineItemTax = lineItems[i].tax;
+            const invoiceLineItemsResult = await queryRunner(insertLineItems, [invoiceID, category, property, memo, amount, lineItemTax])
             if (invoiceLineItemsResult.affectedRows === 0) {
-              res.send("Error2");
+              res.send('Error2 in line item invoice');
               return;
             }
           }
@@ -215,13 +211,8 @@ exports.getAllInvoices = async (req, res) => {
         // console.log(invoicelineitemsResult[0])
 
         if (invoicelineitemsResult[0].length > 0) {
-          const memo = invoicelineitemsResult[0].map((desc) => ({
-            memo: desc.memo,
-            category: desc.category,
-            amount: desc.amount,
-            property: desc.property,
-          }));
-          getAllInvoicesResult[0][i].memo = memo;
+          const memo = invoicelineitemsResult[0].map((desc) => ({ memo: desc.memo, category: desc.category, amount: desc.amount, property: desc.property, tax: desc.tax }))
+          getAllInvoicesResult[0][i].memo = memo
         } else {
           getAllInvoicesResult[0][i].memo = ["No memo"];
         }
@@ -371,6 +362,7 @@ exports.UpdateInvoice = async (req, res) => {
           const category = lineItems[i].category;
           const property = lineItems[i].property;
           const memo = lineItems[i].memo;
+          const tax = lineItems[i].tax;
           const amount = lineItems[i].amount;
 
           const invoiceLineItemsResult = await queryRunner(insertLineItems, [
@@ -379,6 +371,8 @@ exports.UpdateInvoice = async (req, res) => {
             property,
             memo,
             amount,
+            tax,
+            
           ]);
 
           if (invoiceLineItemsResult.affectedRows === 0) {

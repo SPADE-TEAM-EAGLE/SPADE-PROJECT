@@ -1103,6 +1103,7 @@
                                                         <th>DESCRIPTION</th>
                                                         <th>PROPERTY</th>
                                                         <th>CATEGORY</th>
+                                                        <th>TAX %</th>
                                                         <th>AMOUNT</th>
                                                     </tr>
                                                 </thead>
@@ -3792,11 +3793,13 @@
                         var property = $(this).find('[name="property"]').val();
                         var memo = $(this).find('input[name="memo"]').val();
                         var amount = $(this).find('input[name="amount"]').val();
+                        var tax = $(this).find('input[name="tax"]').val()
 
                         lineItems.push({
                             category: category,
                             property: property,
                             memo: memo,
+                            tax: tax,
                             amount: amount
                         });
                     });
@@ -4140,23 +4143,23 @@
         </td>
       </tr>
     `)
-            
-                
-                
-                    $("[name='category']").append($('<option></option>').text("Rent Amount").val("rent"));
-               
+
+
+
+                $("[name='category']").append($('<option></option>').text("Rent Amount").val("rent"));
+
 
                 if (propertyName[0].gross_or_triple_lease === "Triple Net Lease") {
-                    
-                        $("[name='category']").append($('<option></option>').text("Triple Net").val("triple"));
-                    
-                        $("[name='category']").append($('<option></option>').text("Base Rent").val("base"));
+
+                    $("[name='category']").append($('<option></option>').text("Triple Net").val("triple"));
+
+                    $("[name='category']").append($('<option></option>').text("Base Rent").val("base"));
 
                 }
 
             })
             $(document).on("change", ".tr [name='category'], .tr [name='category_update']", function () {
-                const property = $("#tenants").val();
+
 
                 const selectedCategoryId = $(this).val();
 
@@ -4165,7 +4168,7 @@
 
                 // Determine if the changed element is a category or category_update input
                 const isCategory = $(this).attr("name") === "category";
-
+                const property = isCategory ? $("#tenants").val() : $("#tenants_update").val()
                 // Find the matching category object in the categoryData array
                 const matchingCategory = categoryData.find((category) => category.id == selectedCategoryId);
                 const tenant = tenantData.filter((tenant) => {
@@ -4185,15 +4188,16 @@
                     } else {
                         amount = tenant[0].baseRent
                     }
-
-                    parentRow.find("[name='tax']").val(0)
+                    const taxField = isCategory ? "[name='tax']" : "[name='tax_update']"
+                    parentRow.find(taxField).val(0)
                     amountInput.val(amount);
 
                 } else {
                     amountInput = isCategory ? parentRow.find("[name='tax']") : parentRow.find("[name='tax_update']");
                     if (matchingCategory) {
                         const amount = matchingCategory.setTaxes;
-                        parentRow.find("[name='amount']").val("")
+                        const amountField = isCategory ? "[name='amount']" : "[name='amount_update']"
+                        parentRow.find(amountField).val("")
                         amountInput.val(amount);
                     } else {
                         // Handle the case when no matching category is found for the current row
@@ -4283,31 +4287,65 @@
         </td>
       </tr>
     `);
-    const categorySelect = $("#add-item-container1").find(".tr").last().find("[name='category']");
-        const optionExists = (value) => categorySelect.find('option[value="' + value + '"]').length > 0;
+                    const categorySelect = $("#add-item-container1").find(".tr").last().find("[name='category']");
+                    const optionExists = (value) => categorySelect.find('option[value="' + value + '"]').length > 0;
 
-        // Append options only if they don't exist in the current "category" select of the row
-        if (!optionExists("rent")) {
-            categorySelect.append($('<option></option>').text("Rent Amount").val("rent"));
-        }
+                    // Append options only if they don't exist in the current "category" select of the row
+                    if (!optionExists("rent")) {
+                        categorySelect.append($('<option></option>').text("Rent Amount").val("rent"));
+                    }
 
-        if (propertyName[0].gross_or_triple_lease === "Triple Net Lease") {
-            if (!optionExists("triple")) {
-                categorySelect.append($('<option></option>').text("Triple Net").val("triple"));
-            }
+                    if (propertyName[0].gross_or_triple_lease === "Triple Net Lease") {
+                        if (!optionExists("triple")) {
+                            categorySelect.append($('<option></option>').text("Triple Net").val("triple"));
+                        }
 
-            if (!optionExists("base")) {
-                categorySelect.append($('<option></option>').text("Base Rent").val("base"));
-            }
-        }     
+                        if (!optionExists("base")) {
+                            categorySelect.append($('<option></option>').text("Base Rent").val("base"));
+                        }
+                    }
                 }
             });
 
             $(document).on("click", "#add-item1_update", () => {
                 const property = $("#tenants_update").val()
                 const propertyName = tenantData.filter((tenant) => tenant.tenantID == property);
-                $("#add-item-container1_update").append(`<tr class="tr">
-                    <td>
+                console.log(propertyName)
+                if (property == "Choose...") {
+                    $("#add-item-container1_update").append(`
+      <tr class="tr">
+        <td>
+          <select id="state" name="category_update" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the state where you reside" data-bs-container="#addModal" required>
+            <option selected="">Choose...</option>
+            ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
+          </select>
+          <span class="text-danger d-none">State is required!</span>
+        </td>
+        <td>
+          <select id="state" name="property_update" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the state where you reside" data-bs-container="#addModal" required>
+            <option selected="">Choose...</option>
+          </select>
+          <span class="text-danger d-none">State is required!</span>
+        </td>
+        <td><input type="text" class="form-control" name="memo_update"></td>
+        <td><input type="text" class="form-control" name="tax_update"
+                                                    data-bs-placement="top" data-bs-toggle="tooltip" title=""
+                                                    data-bs-original-title="Tax associated with this category"
+                                                    data-bs-container="#addModal" readonly></td>
+        <td><input type="text" class="form-control" name="amount_update" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" required></td>
+        <td>
+          <button type="button" class="btn" id="del-btn_update">
+            <i class="fi fi-rs-trash text-danger fs-5"></i>
+          </button>
+        </td>
+      </tr>
+    `);
+
+                } else {
+
+                    $("#add-item-container1_update").append(`
+      <tr class="tr">
+        <td>
           <select id="state" name="category_update" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the state where you reside" data-bs-container="#addModal" required>
             <option selected="">Choose...</option>
             ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
@@ -4321,31 +4359,58 @@
           </select>
           <span class="text-danger d-none">State is required!</span>
         </td>
-                                            <td><input type="text" class="form-control" name="memo_update"></td>
-                                            <td><input type="text" class="form-control" name="tax_update"
+        <td><input type="text" class="form-control" name="memo_update"></td>
+        <td><input type="text" class="form-control" name="tax_update"
                                                     data-bs-placement="top" data-bs-toggle="tooltip" title=""
                                                     data-bs-original-title="Tax associated with this category"
                                                     data-bs-container="#addModal" readonly></td>
-                                            <td><input type="text" class="form-control" name="amount_update" data-bs-placement="top" data-bs-toggle="tooltip" title=""
-                                                    data-bs-original-title="Enter amount here"
-                                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '')" required></td>
-                                            <td><button type="button" class="btn" id="del-btn_update">
-                                                <i class="fi fi-rs-trash text-danger fs-5"></i>
-                                            </button></td>
-                                        </tr>`)
+        <td><input type="text" class="form-control" name="amount_update" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" required></td>
+        <td>
+          <button type="button" class="btn" id="del-btn_update">
+            <i class="fi fi-rs-trash text-danger fs-5"></i>
+          </button>
+        </td>
+      </tr>
+    `);
+                    const categorySelect = $("#add-item-container1_update").find(".tr").last().find("[name='category_update']");
+                    const optionExists = (value) => categorySelect.find('option[value="' + value + '"]').length > 0;
+
+                    // Append options only if they don't exist in the current "category" select of the row
+                    if (!optionExists("rent")) {
+                        categorySelect.append($('<option></option>').text("Rent Amount").val("rent"));
+                    }
+
+                    if (propertyName[0].gross_or_triple_lease === "Triple Net Lease") {
+                        if (!optionExists("triple")) {
+                            categorySelect.append($('<option></option>').text("Triple Net").val("triple"));
+                        }
+
+                        if (!optionExists("base")) {
+                            categorySelect.append($('<option></option>').text("Base Rent").val("base"));
+                        }
+                    }
+                }
             });
             // $(document).on("input", "input[name='amount'], input[name='amount_update']", updateTotal);
 
-            function updateTotal() {
+            function updateTotal(isUpdate) {
                 var total = 0;
 
-                $("input[name='amount'], input[name='amount_update']").each(function () {
+                // Debugging statement to check the selector
+
+
+                $("input[name='amount" + isUpdate + "']").each(function () {
                     var inputValue = $(this).val();
-                    var tax = $(this).closest(".tr").find("[name='tax']").val()
+                    console.log(inputValue);
+                    var tax = $(this).closest(".tr").find("input[name='tax" + isUpdate + "']").val();
                     if (inputValue !== "") {
                         var numericValue = parseFloat(inputValue);
+
                         if (!isNaN(numericValue)) {
-                            total += numericValue + ((numericValue * parseFloat(tax)) / 100);
+                            console.log(tax)
+                            total += numericValue + ((numericValue * parseFloat(isNaN(tax) ? 0 : tax)) / 100);
+
+                            console.log(total)
                         }
                     }
                 });
@@ -4355,15 +4420,17 @@
                 }
 
                 if (total === 0) {
-                    $("#totalText").text("$ 0.00");
-                    $("#totalText_update").text("$ 0.00"); // Update the 'textTotal_update' field as well
+                    console.log($("#totalText" + isUpdate))
+                    $("#totalText" + isUpdate).text("$ 0.00");
+                    // Update the 'textTotal_update' field as well
                 } else {
-                    $("#totalText").text("$ " + total);
-                    $("#totalText_update").text("$ " + total); // Update the 'textTotal_update' field as well
+                    $("#totalText" + isUpdate).text("$ " + total);
+                    // Update the 'textTotal_update' field as well
                 }
 
                 // Perform other operations on the dynamically added input element as needed
             }
+
 
             $('#add-item-container1').on('click', '#del-btn1', function () {
                 var $row = $(this).closest('.tr');
@@ -4371,7 +4438,7 @@
 
                 if ($rowsContainer.children('.tr').length > 1) {
                     $row.remove();
-                    updateTotal()
+                    updateTotal("")
                 } else {
                     //   alert('Cannot delete the last row.');
                 }
@@ -4383,7 +4450,7 @@
 
                 if ($rowsContainer.children('.tr').length > 1) {
                     $row.remove();
-                    updateTotal()
+                    updateTotal("_update")
                 } else {
                     //   alert('Cannot delete the last row.');
                 }
@@ -4559,20 +4626,41 @@
                 )
 
                 $("#memo-table").empty()
+                let totalTaxAmount = 0; 
+                
                 data.memo.forEach((item) => {
-                    $("#memo-table").append(`
-                <tr class="text-black">
-                                                    <td style="    border-bottom: 2px solid black;">
-                                                        <p style="font-weight: bold;" class="mb-1">Services</p>
-                                                        <span>${item.memo
-                        }</span>
-                                                    </td>
-                                                    </td>
-                                                    <td style="    border-bottom: 2px solid black;">${data.propertyName}</td>
-                                                    <td style="    border-bottom: 2px solid black;">${item.category}</td>
-                                                    <td style="    border-bottom: 2px solid black;">$ ${item.amount}</td>
-                                                </tr>
-                `)
+    // Calculate the tax amount as a percentage of the item amount
+    const taxAmount = (parseFloat(item.amount) * parseFloat(item.tax)) / 100;
+
+    // Add the tax amount to the totalTaxAmount variable
+    totalTaxAmount += taxAmount;
+    let categoryname;
+    if(item.category=="rent"){
+        categoryname="Rent Amount"
+    }else if(item.category=="triple"){
+        categoryname="Triple Net"
+    }else if(item.category=="base"){
+        categoryname="Base Rent"
+    }else{
+        const category=categoryData.filter((categorydata)=>{
+        return categorydata.id==item.category
+    })
+    categoryname=category[0].categorieName
+    }
+    
+    $("#memo-table").append(`
+        <tr class="text-black">
+            <td style="border-bottom: 2px solid black;">
+                <p style="font-weight: bold;" class="mb-1">Services</p>
+                <span>${item.memo}</span>
+            </td>
+            <td style="border-bottom: 2px solid black;">${data.propertyName}</td>
+            <td style="border-bottom: 2px solid black;">${categoryname}</td>
+            <td style="border-bottom: 2px solid black;">$ ${item.tax}</td>
+            <td style="border-bottom: 2px solid black;">${item.amount}</td>
+            
+        </tr>
+    `);
                     $("#price-table").empty()
                     $("#price-table").append(`
                 <tr class="text-black">
@@ -4585,11 +4673,11 @@
                                                 </tr>
                                                 <tr class="text-black" style="    border-bottom: 1px solid #AFAFAF;">
                                                     <td>Tax (0%)</td>
-                                                    <td>$ ${0}</td>
+                                                    <td>$ ${totalTaxAmount}</td>
                                                 </tr>
                                                 <tr class="text-black">
                                                     <td>Total</td>
-                                                    <td>$ ${data.totalAmount + 0}</td>
+                                                    <td>$ ${data.totalAmount + totalTaxAmount}</td>
                                                 </tr>
                                                 <tr class="text-black" style="    border-bottom: 2px solid #562AC8;">
                                                     <td>Deposit Requested</td>
@@ -4597,7 +4685,7 @@
                                                 </tr>
                                                 <tr class="text-black">
                                                     <td class="fw-bold">Deposit Due</td>
-                                                    <td class="fw-bold">$ ${data.totalAmount + 0 + 0}</td>
+                                                    <td class="fw-bold">$ ${data.totalAmount + totalTaxAmount+ 0}</td>
                                                 </tr>
                 `)
 
@@ -4607,6 +4695,7 @@
             })
             $(document).on('click', ".view-btnn", function (e) {
                 e.preventDefault();
+
                 const invoiceIdElement = $(this).closest("tr").find(".invoice-id");
                 invoiceId = invoiceIdElement.text();
                 const data1 = invoiceData.find(obj => obj.invoiceID == invoiceId);
@@ -4626,18 +4715,42 @@
                 $("#view-invoice-line-item").empty()
                 data.memo.forEach((item) => {
 
-                    console.log(item)
-                    $("#view-invoice-line-item").append(`
+                    const category = categoryData.filter((cat) => { return item.category == cat.id })
+
+                    if (category.length == 0) {
+                        let categoryname;
+                        if (item.category == "rent") {
+                            categoryname = "Rent Amount"
+                        } else if (item.category == "triple") {
+                            categoryname = "Triple Net"
+                        } else {
+                            categoryname = "Base Rent"
+                        }
+                        $("#view-invoice-line-item").append(`
                 <tr>
                                                     <td>
-                                                        <p class="text-primary"><b>${item.category}</b></p>
+                                                        <p class="text-primary"><b>${categoryname}</b></p>
                                                     </td>
                                                     
-                                                    <td><p class="text-primary"><b>${item.property}</b></p></td>
+                                                    <td><p class="text-primary"><b>${data.propertyName}</b></p></td>
                                                     <td><p class="text-primary"><b>${item.memo}</b></p></td>
                                                     <td><p class="text-primary"><b>$ ${item.amount}</b></p></td>
                                                 </tr>
                 `)
+                    } else {
+                        $("#view-invoice-line-item").append(`
+                <tr>
+                                                    <td>
+                                                        <p class="text-primary"><b>${category[0]?.categorieName}</b></p>
+                                                    </td>
+                                                    
+                                                    <td><p class="text-primary"><b>${data.propertyName}</b></p></td>
+                                                    <td><p class="text-primary"><b>${item.memo}</b></p></td>
+                                                    <td><p class="text-primary"><b>$ ${item.amount}</b></p></td>
+                                                </tr>
+                `)
+                    }
+
 
 
                 })
@@ -4783,7 +4896,7 @@
                     category,
                     tax,
                     amount
-                }) => {
+                }, index) => {
 
                     const categoryid = category
                     $("#totalText_update").text(`$ ${parseInt(amount) + sum}`)
@@ -4806,7 +4919,7 @@
           <span class="text-danger d-none">State is required!</span>
         </td>
                                             <td><input type="text" class="form-control" name="memo_update" value=${memo}></td>
-                                            <td><input type="text" class="form-control" name="tax_update" value=${tax?tax:0}
+                                            <td><input type="text" class="form-control" name="tax_update" value=${tax ? tax : 0}
                                                     data-bs-placement="top" data-bs-toggle="tooltip" title=""
                                                     data-bs-original-title="Tax associated with this category"
                                                     data-bs-container="#addModal" readonly></td>
@@ -4818,9 +4931,25 @@
                                             </button></td>
                                         </tr>`
                     )
+
+                    if ($("[name='category_update']").eq(index).val() == "Choose...") {
+                        console.log(category == "rent")
+                        // Add the "Rent Amount" option to the select element with the name "category_update"
+                        $("[name='category_update']").append($('<option></option>').text("Rent Amount").val("rent").prop("selected", category === "rent" ? true : false));
+                        // Check the property's "gross_or_triple_lease" and add options accordingly
+                        if (propertyName[0].gross_or_triple_lease === "Triple Net Lease") {
+                            $("[name='category_update']").append($('<option></option>').text("Triple Net").val("triple").prop("selected", category === "triple" ? true : false));
+                            $("[name='category_update']").append($('<option></option>').text("Base Rent").val("base").prop("selected", category === "base" ? true : false));
+                        }
+
+
+                    }
+
+
                 })
 
                 $("#additionalNotes_update").val(data.note)
+                $("#totalText_update").val(data.totalAmount)
                 selectedFiles = []
                 if (data.invoiceImages[0].Image !== null) {
                     selectedFiles = data.invoiceImages
@@ -4850,11 +4979,13 @@
                         var property = $(this).find('[name="property_update"]').val();
                         var memo = $(this).find('input[name="memo_update"]').val();
                         var amount = $(this).find('input[name="amount_update"]').val();
+                        var tax = $(this).find('input[name="tax_update"]').val();
 
                         lineItems.push({
                             category: category,
                             property: property,
                             memo: memo,
+                            tax: tax,
                             amount: amount
                         });
                     });
@@ -5039,7 +5170,7 @@
                 }
             }
             $(document).on('input change', '#addModal input, #addModal select, #addModal input, #addModal select,#addModal textarea', function () {
-                updateTotal();
+                updateTotal("");
                 var $field = $(this);
                 var $errorMessage = $field.next('.text-danger');
                 if ($field.val() === '' || $field.val() === 'Choose...') {
@@ -5057,7 +5188,7 @@
                 updateButtonStatus()
             })
             $(document).on('input change', '#myModal_edit input, #myModal_edit select, #myModal_edit input, #myModal_edit select,#myModal_edit textarea', function () {
-                updateTotal();
+                updateTotal("_update");
                 var $field = $(this);
                 var $errorMessage = $field.next('.text-danger');
                 if ($field.val() === '' || $field.val() === 'Choose...') {
