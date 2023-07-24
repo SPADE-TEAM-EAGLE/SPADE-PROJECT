@@ -316,8 +316,9 @@ exports.UpdateInvoice = async (req, res) => {
           const property = lineItems[i].property;
           const memo = lineItems[i].memo;
           const amount = lineItems[i].amount;
+          const lineItemTax = lineItems[i].tax;
 
-          const invoiceLineItemsResult = await queryRunner(insertLineItems, [invoiceID, category, property, memo, amount]);
+          const invoiceLineItemsResult = await queryRunner(insertLineItems, [invoiceID, category, property, memo, amount,lineItemTax]);
 
           if (invoiceLineItemsResult.affectedRows === 0) {
             return res.send('Error occurred while inserting invoice line items');
