@@ -1,4 +1,4 @@
-const { selectQuery, getTenantNotify, getPropertyNotify, getTaskNotify, getInvoiceNotify, insertNotify, updateNotify } = require("../constants/queries");
+const { selectQuery, getTenantNotify, getPropertyNotify, getTaskNotify, getInvoiceNotify, insertNotify, updateNotify, getTenantPropertyNotify, getTenantTaskNotify, getTenantInvoiceNotify } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
 
 const notifyController = {
@@ -79,18 +79,42 @@ const notifyController = {
             const property = await queryRunner(getPropertyNotify, [
                 userId
             ]);
-
             // get data from task table
             const task = await queryRunner(getTaskNotify, [
                 userId
             ]);
-
             // get data from invoice table
             const invoice = await queryRunner(getInvoiceNotify, [
                 userId
             ]);
             res.status(200).json({
                 tenantNotify: getTenantsNotify[0],
+                propertyNotify: property[0],
+                taskNotify: task[0],
+                invoiceNotify: invoice[0]
+            });
+        } catch (error) {
+            res.status(400).json({
+                message: error.message
+            })
+        }
+    },
+    getTenantNotify: async (req, res) => {
+        //get property , tenants , task invoice from tables individually
+        const { userId } = req.user;
+        try {
+            const property = await queryRunner(getTenantPropertyNotify, [
+                userId
+            ]);
+            // get data from task table
+            const task = await queryRunner(getTenantTaskNotify, [
+                userId
+            ]);
+            // // get data from invoice table
+            const invoice = await queryRunner(getTenantInvoiceNotify, [
+                userId
+            ]);
+            res.status(200).json({
                 propertyNotify: property[0],
                 taskNotify: task[0],
                 invoiceNotify: invoice[0]

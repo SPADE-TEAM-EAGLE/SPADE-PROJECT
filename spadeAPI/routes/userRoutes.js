@@ -108,6 +108,9 @@ router.get("/propertyTask", verifyToken, userController.propertyTask);
 router.get("/tenantTask", verifyToken, tenantController.tenantTask);
 router.get("/getAllInvoicesTenant", verifyTokenTenant, tenantPortalController.getAllInvoicesTenant);
 router.get("/getAllTaskTenant", verifyTokenTenant, tenantPortalController.getAllTaskTenant);
+// router.get("/getAllTaskLoggedInTenant", verifyTokenTenant, tenantPortalController.getAllLoggedInTenantTask);
+// get tenante dashboard
+router.get("/getTenantDashData", verifyTokenTenant, tenantPortalController.getTenantDashboardData);
 router.get('/getTenantByID', verifyTokenTenant, tenantPortalController.getTenantByID);
 router.put('/changePasssword', verifyToken, settingController.changePasssword);
 router.put('/changePasswordTenant', verifyTokenTenant, settingController.changePasswordTenant);
@@ -124,6 +127,8 @@ router.get("/checkNotify", verifyToken, notifyController.getCheckedNotify);
 // updated notification route
 router.put("/notify", verifyToken, notifyController.updateNotifyData);
 router.get("/notify", verifyToken, notifyController.getNotify);
+router.get("/tenantNotify", verifyTokenTenant, notifyController.getTenantNotify);
+
 router.get("/property", verifyToken, userController.getAllProperty);
 router.get("/invoice", verifyToken, userController.getInvoiceReportData);
 router.get("/task", verifyToken, userController.getTaskReportData);
@@ -136,9 +141,7 @@ router.post("/accessChats", verifyToken, chatsController.accessChats);
 router.get("/fetchTenantChats", verifyTokenTenant, chatsController.fetchUsersChats);
 router.get("/fetchUsersChats", verifyToken, chatsController.fetchUsersTenants);
 
-
-
-// create tenant message
+// this api is for messages  
 router.post("/createNewMessageTenant", verifyTokenTenant, messageClt.createNewMessageTenant);
 router.post("/createNewMessage", verifyToken, messageClt.createNewMessage);
 router.get("/TenantMessages/:chatId", verifyTokenTenant, messageClt.getAllMessages);

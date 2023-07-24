@@ -40,8 +40,10 @@ const {
   getTotalAmount,
   getTotalAmountUnpaid,
   getTotalAmountPaid,
-  getNumPropertyTenant
+  getNumPropertyTenant,
+  insertNotify
 } = require("../constants/queries");
+
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
 const { fileUpload, deleteImageFromS3 } = require("../helper/S3Bucket");
@@ -78,18 +80,26 @@ exports.createUser = async function (req, res) {
     const name = firstName + " " + lastName;
     const mailSubject = "Spade Welcome Email";
     if (insertResult[0].affectedRows > 0) {
-
+      // update notification table with user id
+      // landlordID, emailNotification, pushNotification, textNotification
+      const selectResult = await queryRunner(selectQuery("users", "Email"), [
+        email,
+      ]);
+      await queryRunner(insertNotify, [
+        selectResult[0][0].id,
+        "no",
+        "no",
+        "no"
+      ]);
       await sendMail(email, mailSubject, password, name);
       return res.status(200).json({ message: "User added successfully" });
     } else {
       return res.status(500).send("Failed to add user");
     }
   } catch (error) {
-    console.error(error);
-    return res.status(500).send("Internal Server Error");
+    return res.status(400).json({ message: error.message });
   }
 };
-
 exports.checkemail = async function (req, res) {
   const { email } = req.query;
   console.log(req.query)
@@ -109,7 +119,12 @@ exports.checkemail = async function (req, res) {
       });
     }
   } catch (error) {
-    res.status(500).send("Error");
+    // res.status(500).send("Error");
+    res
+      .status(400)
+      .json({
+        message: error.message,
+      });
   }
 };
 
@@ -117,17 +132,17 @@ exports.getUser = (req, res) => {
   // console.log(req.user);
   res.status(200).json({
     user: req.user.userName,
-    email:req.user.email,
-    userId:req.user.userId,
-    businessName:req.user.businessName,
-    phone:req.user.phone,
-    streetAddress:req.user.streetAddress,
-    businessAddress:req.user.BusinessAddress,
-    lastName:req.user.lastName,
-    firstName:req.user.firstName,
-    image:req.user.image,
-    imageKey:req.user.imageKey,
-    planID:req.user.planID
+    email: req.user.email,
+    userId: req.user.userId,
+    businessName: req.user.businessName,
+    phone: req.user.phone,
+    streetAddress: req.user.streetAddress,
+    businessAddress: req.user.BusinessAddress,
+    lastName: req.user.lastName,
+    firstName: req.user.firstName,
+    image: req.user.image,
+    imageKey: req.user.imageKey,
+    planID: req.user.planID
   });
 };
 
@@ -439,7 +454,7 @@ exports.resendCode = async (req, res) => {
 
 //  ############################# Get Pricing Plan Start ############################################################
 exports.pricingPlan = async (req, res) => {
-  try { 
+  try {
     const pricingPlanResult = await queryRunner(selectQuery("plan"));
     if (pricingPlanResult.length > 0) {
       const data = JSON.parse(JSON.stringify(pricingPlanResult));
@@ -1623,7 +1638,7 @@ exports.getDashboardData = async (req, res) => {
       userId
     ]);
     const numPropertyTenant = await queryRunner(getNumPropertyTenant, [
-      userId,userId
+      userId, userId
     ]);
     res.status(200).json({
       totalAmount: totalAmount[0][0],
