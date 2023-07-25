@@ -1677,6 +1677,41 @@
         </div>
     </div> -->
     <!-- modal end  -->
+    <div class="modal fade" id="successfully_changed" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
+                        <!-- <div class="card-header border-0 pt-3">
+                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                            </button>
+                        </div> -->
+                        <div class="card-body text-center">
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
+                                    viewBox="0 0 24 24">
+                                    <path fill="#13bfa6"
+                                        d="M10.3125,16.09375a.99676.99676,0,0,1-.707-.293L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328l-6.1875,6.1875A.99676.99676,0,0,1,10.3125,16.09375Z"
+                                        opacity=".99" />
+                                    <path fill="#71d8c9"
+                                        d="M12,2A10,10,0,1,0,22,12,10.01146,10.01146,0,0,0,12,2Zm5.207,7.61328-6.1875,6.1875a.99963.99963,0,0,1-1.41406,0L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328Z" />
+                                </svg></span>
+                            <!-- <h4 class="h4 mb-0 mt-3 fw-bold">Success</h4> -->
+                            <p class="card-text text-dark" id="successfully_changed_text"></p>
+                        </div>
+                        <!-- <div class="card-footer text-center border-0 pt-0">
+                            <div class="row">
+                                <div class="text-center">
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">delete</a>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="myModal_warning" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered text-center" role="document">
             <div class="modal-content modal-content-demo">
@@ -1739,9 +1774,7 @@
                 <div class="modal-body p-0">
                     <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
                         <div class="card-header border-0 pt-3">
-                            <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
-                            </button>
+                            
                         </div>
                         <div class="card-body text-center">
                             <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
@@ -1751,8 +1784,10 @@
                                     <circle cx="12" cy="17" r="1" fill="#e62a45" />
                                     <path fill="#e62a45" d="M12,14a1,1,0,0,1-1-1V9a1,1,0,0,1,2,0v4A1,1,0,0,1,12,14Z" />
                                 </svg></span>
-                            <h4 class="h4 mb-0 mt-3 fw-bold fs-4">Warning</h4>
-                            <p class="card-text">This will delete your property. Are you sure?</p>
+                            <h4 class="h4 mb-0 mt-3 fw-bold fs-4">Delete this category?</h4>
+                            <p class="card-text">The action can lead to sever problems. <strong>It is
+                                    not recommended</strong>. You may lose access to data associated with this category.
+                            </p>
 
                         </div>
                         <div class="card-footer text-center border-0 pt-0">
@@ -1760,7 +1795,8 @@
                                 <div class="text-center">
                                     <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal"
                                         aria-label="Close">cancel</a>
-                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">delete</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete <span
+                                            id="counter_delete"> (5)</span></a>
                                 </div>
                             </div>
                         </div>
@@ -1858,7 +1894,7 @@
                                         </div>
 
                                         <div class="d-flex country mt-2">
-                                            <a class="nav-link icon text-dark" >
+                                            <a class="nav-link icon text-dark">
                                                 <i class="fi fi-rs-universal-access"></i>
                                             </a>
                                         </div>
@@ -2438,8 +2474,8 @@
                                                                         <label class="custom-control custom-radio">
                                                                             <input type="radio"
                                                                                 class="custom-control-input"
-                                                                                name="example-radios1" value="Disable"
-                                                                                > <span
+                                                                                name="example-radios1" value="Disable">
+                                                                            <span
                                                                                 class="custom-control-label">Disable</span>
                                                                         </label>
                                                                     </div>
@@ -2464,8 +2500,8 @@
                                                                         <label class="custom-control custom-radio">
                                                                             <input type="radio"
                                                                                 class="custom-control-input"
-                                                                                name="example-radios2" value="Disable"
-                                                                                > <span
+                                                                                name="example-radios2" value="Disable">
+                                                                            <span
                                                                                 class="custom-control-label">Disable</span>
                                                                         </label>
                                                                     </div>
@@ -2483,8 +2519,7 @@
                                                                         <label class="custom-control custom-radio">
                                                                             <input type="radio"
                                                                                 class="custom-control-input"
-                                                                                name="example-radios3" value="Enable"
-                                                                                >
+                                                                                name="example-radios3" value="Enable">
                                                                             <span
                                                                                 class="custom-control-label">Enable</span>
                                                                         </label> &emsp;
@@ -2510,8 +2545,8 @@
                                                                     <button
                                                                         class="btn btn-light btn-pill m-2 w-100">Close</button>
                                                                 </a>
-                                                                <button
-                                                                    class="btn btn-primary btn-pill m-2 w-40" id="save-notification-setting">Save</button>
+                                                                <button class="btn btn-primary btn-pill m-2 w-40"
+                                                                    id="save-notification-setting">Save</button>
                                                             </div>
                                                             <!-- <div class="col-lg-7" style="display: flex; width: auto;">
                                                                 <button
@@ -2748,7 +2783,7 @@
                                                                                         <div
                                                                                             class="col-lg-3 col-xl-3 col-md-8 col-sm-12 mb-3">
                                                                                             <div class="h-100 card p-3 pricing-card card-boder-warning card-primary
-                                                                                                id="5">
+                                                                                                id=" 5">
                                                                                                 <div
                                                                                                     class="card-headerr d-block text-justified pt-2">
                                                                                                     <strong
@@ -7210,7 +7245,8 @@
                                                                         <tr class="tr">
                                                                             <td>
                                                                                 <label for=""><b>Categories</b></label>
-                                                                                <input type="text" name="vendor-category"
+                                                                                <input type="text"
+                                                                                    name="vendor-category"
                                                                                     class="form-control vendor-category">
                                                                             </td>
                                                                             <td><button type="button" class="btn"
@@ -7233,8 +7269,8 @@
                                                                 <button
                                                                     class="btn btn-light btn-pill m-2 w-100">Close</button>
                                                             </a>
-                                                            <button
-                                                                class="btn btn-primary btn-pill m-2 w-40" id="save-vendor">Save</button>
+                                                            <button class="btn btn-primary btn-pill m-2 w-40"
+                                                                id="save-vendor">Save</button>
                                                         </div>
                                                     </div>
 
@@ -7835,7 +7871,8 @@
                                             <div class="">
                                                 <a href="javascript:void(0);">
                                                     <div class="fw-semibold text-dark fw-bold fs-15"
-                                                        data-bs-toggle="modal" data-target="#chatmodel">Wccxvilliam</div>
+                                                        data-bs-toggle="modal" data-target="#chatmodel">Wccxvilliam
+                                                    </div>
                                                     <span class="text-dark"> 1sey Street > Jersey</span>
                                                     <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
                                                 </a>
@@ -8378,7 +8415,7 @@
         <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 
         <script>
-            let categoryData; var counter = 0;var image_url=" ";var image_key=" ";
+            let categoryData; var counter = 0; var image_url = " "; var image_key = " ";
             let password_validate1 = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
             var validconfirmPassword1 = document.getElementById("id_password1");
             let confirmPassword1 = document.getElementById("id_password2");
@@ -8447,7 +8484,7 @@
             $(document).ready(() => {
                 // ----- On render -----\\
                 function getData() {
-                    
+
                     $.ajax({
                         url: 'https://backend.app.spaderent.com/api/spade/protected',
                         method: 'GET',
@@ -8469,9 +8506,9 @@
                             $("#businessName").val(toTitleCase(response.businessName || ""))
                             $("#streetAddress").val(toTitleCase(response.streetAddress || ""))
                             $("#businessAddress").val(toTitleCase(response.businessAddress || ""))
-                            if(response.image){
-                                image_url=response.image
-                                image_key=response.imageKey
+                            if (response.image) {
+                                image_url = response.image
+                                image_key = response.imageKey
                             }
                             $('#profile').css('background-image', 'url(' + response.image + ')').addClass('hasImage');
                             $(`#${response.planID}`).addClass("card-primary")
@@ -8499,12 +8536,12 @@
                                 $("#add-item-container1").append(`<tr class="tr">
                     <td>
                         <label for=""><b>Categories</b></label>
-                        <input type="text" name="category" class="form-control category" value="${categorieName}" readonly>
+                        <input type="text" name="category" class="form-control category" value="${categorieName}" id="${id}">
                     </td>
                     <td style="width: 1px;">
                         <label for=""><b>Taxable</b></label>
                         <div class="material-switch pull-right mt-1"> <input id="someSwitchOptionInfo${counter}" class="category-tax" name="someSwitchOption${counter}" type="checkbox" ${taxable == 1 ? 'checked' : ''}> <label for="someSwitchOptionInfo` + counter + `" class="label-info"></label> </div></td>
-                    <td><button type="button" class="btn" id="" style="text-align: left;">
+                    <td><button type="button" class="btn" id="del-btn-complete" style="text-align: left;">
                         <i class="fi fi-rs-trash text-danger fs-5"></i>
                     </button></td>
                 </tr>`)
@@ -8533,7 +8570,7 @@
                         }
                     });
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/getVendorCategory',
+                        url: 'https://backend.app.spaderent.com/api/spade/getVendorCategory',
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -8542,19 +8579,19 @@
                             vendorCategoryData = response.data
                             console.log(response.data)
                             var vendorCategory = 0
-                            
+
                             $("#add-item-container5").empty()
-                            response.data?.forEach(({ category,landLordId }, index) => {
+                            response.data?.forEach(({ id, category, landLordId }, index) => {
                                 counter++
-                                
+
                                 $("#add-item-container5").append(`<tr class="tr">
                                                                             <td>
                                                                                 <label for=""><b>Categories</b></label>
                                                                                 <input type="text" name=""
-                                                                                    class="form-control vendor-category" value='${category}' readonly>
+                                                                                    class="form-control vendor-category" value='${category}' id='${id}'>
                                                                             </td>
                                                                             <td><button type="button" class="btn"
-                                                                                    id=""
+                                                                                    id="del-btn-complete"
                                                                                     style="text-align: left;">
                                                                                     <i
                                                                                         class="fi fi-rs-trash text-danger fs-5"></i>
@@ -8570,7 +8607,7 @@
                         }
                     });
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/checkNotify',
+                        url: 'https://backend.app.spaderent.com/api/spade/checkNotify',
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -8583,7 +8620,7 @@
                             // $("#add-item-container5").empty()
                             // response.data?.forEach(({ category,landLordId }, index) => {
                             //     counter++
-                                
+
                             //     $("#add-item-container5").append(`<tr class="tr">
                             //                                                 <td>
                             //                                                     <label for=""><b>Categories</b></label>
@@ -8599,27 +8636,27 @@
                             //                                             </tr>`)
                             // })
                             console.log(response)
-                            
-                            if(response.email=="yes"){
+
+                            if (response.email == "yes") {
                                 $("input[name='example-radios1'][value='Enable']").prop("checked", true);
-                            }else{
+                            } else {
                                 $("input[name='example-radios1'][value='Disable']").prop("checked", true);
-                            }if(response.push=="yes"){
+                            } if (response.push == "yes") {
                                 $("input[name='example-radios2'][value='Enable']").prop("checked", true);
 
 
-}else{
-    $("input[name='example-radios2'][value='Disable']").prop("checked", true);
-    
-}if(response.text=="yes"){
-    $("input[name='example-radios3'][value='Enable']").prop("checked", true);
+                            } else {
+                                $("input[name='example-radios2'][value='Disable']").prop("checked", true);
+
+                            } if (response.text == "yes") {
+                                $("input[name='example-radios3'][value='Enable']").prop("checked", true);
 
 
-}else{
-    $("input[name='example-radios3'][value='Disable']").prop("checked", true);
+                            } else {
+                                $("input[name='example-radios3'][value='Disable']").prop("checked", true);
 
-    
-}
+
+                            }
                         },
                         error: function (xhr, status, error) {
                             console.log('Error occurred while fetching state and city data.');
@@ -8628,19 +8665,101 @@
                             // console.log('Error occurred while fetching state and city data.');
                         }
                     });
-                 
+
                 }
                 getData()
+                var vendor;var categoryId;var vendorCategoryId
+                $('#add-item-container1,#add-item-container5').on('click', '#del-btn-complete', function () {
+                    vendor = false
+                    var $row = $(this).closest('.tr');
+                    var category = $row.find('.category').val();
+                    var vendorCategory = $row.find('.vendor-category').val()
+                    categoryId = $row.find('.category').attr("id");
+                    
+                    if (vendorCategory?.length >= 1) {
+                        vendor = true
+                        vendorCategoryId = $row.find('.vendor-category').attr("id");
+                    }
+                    var interval;
+                    var counter = 5;
+
+                    function startCounter() {
+                        document.getElementById('confirmDelete').disabled = true;
+                        $('#confirmDelete').css('opacity', '0.7');
+
+                        var counterElement = document.getElementById('counter_delete');
+                        counterElement.style.display = "inline";
+                        counterElement.textContent = ' (' + counter + ')';
+
+                        interval = setInterval(function () {
+                            counter--;
+                            counterElement.textContent = ' (' + counter + ')';
+
+                            if (counter === 0) {
+                                document.getElementById('confirmDelete').disabled = false;
+                                $('#confirmDelete').css('opacity', '1');
+
+                                counterElement.style.display = "none";
+                                clearInterval(interval);
+                            }
+                        }, 1000);
+                    }
+
+                    function resetCounter() {
+                        clearInterval(interval);
+                        counter = 5;
+                    }
+
+                    // Call the startCounter function when the modal is shown
+                    $('#myModal_delete').on('shown.bs.modal', function () {
+                        startCounter();
+                    });
+
+                    // Call the resetCounter function when the modal is closed
+                    $('#myModal_delete').on('hidden.bs.modal', function () {
+                        resetCounter();
+                    });
+
+                    // counter for delete                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+                    $('#myModal_delete').modal('show');
+                    
+                })
+                $("#confirmDelete").click(() => {
+                        $.ajax({
+                            url: vendor ? "https://backend.app.spaderent.com/api/spade/deleteVendorCategory" : "https://backend.app.spaderent.com/api/spade/deleteInvoiceCategory",
+                            type: 'DELETE',
+                            data: JSON.stringify({
+                                "catId": vendor ? vendorCategoryId : categoryId
+                            }),
+                            contentType: "application/json; charset=utf-8",
+                            processData: false,
+                            headers: {
+                                'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                            },
+                            success: function (response) {
+                                getData()
+                                $("#myModal_delete").modal("hide")
+                                $("#successfully_changed_text").text("Successfully Deleted");
+                                $("#successfully_changed").modal("show");
+                                setTimeout(function () {
+                                    $("#successfully_changed").modal("hide");
+                                }, 2000);
+                            },
+                            error: function (xhr, status, error) {
+                                window.alert('Error: ' + error);
+                            }
+                        });
+                    })
                 // /notify
-                $("#save-notification-setting").click(()=>{
+                $("#save-notification-setting").click(() => {
                     // console.log($("#example-radios1").val())
-                    const data={
-                        isEmailNotify:$("input[name='example-radios1']:checked").val()=="Enable"?"yes":"no",
-                        isPushNotify:$("input[name='example-radios2']:checked").val()=="Enable"?"yes":"no",
-                        textNotification:$("input[name='example-radios3']:checked").val()=="Enable"?"yes":"no"
+                    const data = {
+                        isEmailNotify: $("input[name='example-radios1']:checked").val() == "Enable" ? "yes" : "no",
+                        isPushNotify: $("input[name='example-radios2']:checked").val() == "Enable" ? "yes" : "no",
+                        textNotification: $("input[name='example-radios3']:checked").val() == "Enable" ? "yes" : "no"
                     }
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/notify',
+                        url: 'https://backend.app.spaderent.com/api/spade/notify',
                         method: 'PUT',
                         data: JSON.stringify(data),
                         contentType: 'application/json',
@@ -8660,16 +8779,18 @@
                         }
                     });
                 })
-                
-                $("#save-vendor").click(()=>{
-                    const data=[]
+
+                $("#save-vendor").click(() => {
+                    const data = []
                     $('#add-item-container5 .tr').each(function () {
-                        
+
                         var categoryName = $(this).find('.vendor-category').val();
-                        if (typeof categoryName !== 'undefined' && !$(this).find('.vendor-category').prop('readonly')) {
+                        var categoryId = $(this).find('.vendor-category').attr("id")
+                        if (typeof categoryName !== 'undefined') {
 
                             var row = {
                                 category: categoryName,
+                                categoryId: categoryId
                             };
                             data.push(row);
                         }
@@ -8678,7 +8799,7 @@
                     });
                     console.log(data)
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/addVendorCategory', // Replace with your actual backend endpoint URL
+                        url: 'https://backend.app.spaderent.com/api/spade/addVendorCategory', // Replace with your actual backend endpoint URL
                         method: 'POST',
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -8686,6 +8807,7 @@
                         data: JSON.stringify(data),
                         contentType: 'application/json',
                         success: function (response) {
+
                             // Handle the success response
                             $("#myModal_success p").text("Succesfully Updated!!!")
                             $("#myModal_success").modal("show")
@@ -8699,20 +8821,21 @@
                         }
                     });
                 })
-                
+
                 $('#save-categories').click(function () {
                     var data = []; // Array to store data for each row
 
                     // Iterate over each table row
                     $('.tr').each(function () {
                         var categoryName = $(this).find('.category').val();
+                        var categoryId = $(this).find('.category').attr('id')
                         //   var taxAmount = $(this).find('.tax-amount').val();
                         var taxable = $(this).find('.category-tax').is(':checked');
                         if (typeof categoryName !== 'undefined') {
 
                             var row = {
                                 categoryName: categoryName,
-                                // taxAmount: taxAmount,
+                                categoryId: categoryId,
                                 taxable: taxable
                             };
                             if (localStorage.getItem(categoryName)) {
@@ -8735,10 +8858,10 @@
                         // Create an object for each row's data
 
                     });
-                    
+
                     // Send the data to the backend using AJAX
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/addInvoiceCategory', // Replace with your actual backend endpoint URL
+                        url: 'https://backend.app.spaderent.com/api/spade/addInvoiceCategory', // Replace with your actual backend endpoint URL
                         method: 'POST',
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -8998,72 +9121,7 @@
 
                     localStorage.setItem(selectedCategory, taxAmount);
                 });
-                // $("#update_save_profile").click(() => {
-                //     var fname1 = $("#fname1").val();
-                //     var lname1 = $("#lname1").val();
-                //     var email1 = $("#email1").val();
-                //     var phone1 = $("#phone1").val();
-                //     var bname1 = $("#bname1").val();
-                //     var saddress1 = $("#saddress1").val();
-                //     var baddress1 = $("#baddress1").val();
 
-                //     var imageData = $('#profile').css('background-image');
-                //     var fileData = imageData.replace(/^url\(['"](.+)['"]\)/, '$1');
-                //     var blobData = dataURItoBlob(fileData);
-
-                //     var formData = new FormData();
-                //     formData.append('image', blobData, 'image.jpg'); 
-                //     formData.append('firstName', fname1);
-                //     formData.append('lastName', lname1);
-                //     formData.append('email', email1);
-                //     formData.append('BusinessName', phone1);
-                //     formData.append('streetAddress', bname1);
-                //     formData.append('BusinessAddress', saddress1);
-
-
-
-                //     $.ajax({
-                //         url: 'https://backend.app.spaderent.com/api/spade/updateUserProfile',
-                //         type: 'PUT',
-                //         data: formData,
-                //         processData: false,
-                //         contentType: false,
-                //         headers: {
-                //             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                //         },
-                //         success: function(response) {
-                //             // $("#myModal_success").modal("show");
-                //             // setTimeout(function() {
-                //             //     $("#myModal_success").modal("hide");
-                //             //     localStorage.setItem("authtoken", response.token);
-                //             // }, 2000);
-                //             alert(1)
-                //         },
-                //         error: function(xhr, status, error) {
-                //             console.log(xhr.message);
-                //             console.log(error);
-                //             // if (xhr.status === 401) {
-                //             //     $("#myModal_warning").modal("show")
-                //             // } else {
-                //             //     console.log('API error:', error);
-                //             // }
-                //         }
-                //     });
-                //     // Helper function to convert data URI to Blob object
-                //     function dataURItoBlob(dataURI) {
-                //         var byteString = atob(dataURI.split(',')[1]);
-                //         var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-                //         var ab = new ArrayBuffer(byteString.length);
-                //         var ia = new Uint8Array(ab);
-                //         for (var i = 0; i < byteString.length; i++) {
-                //             ia[i] = byteString.charCodeAt(i);
-                //         }
-                //         return new Blob([ab], {
-                //             type: mimeString
-                //         });
-                //     }
-
-                // })
                 $("#save").click(() => {
                     console.log($("#current_password_reset").val(), $("#id_password1").val())
                     $.ajax({
@@ -9114,28 +9172,8 @@
 
 
             })
-        </script>
 
-        <script>
-            // Get the user's preferred color scheme
-            const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-            // Get a reference to the logo element
-            const logo = document.getElementById('logo');
-
-            // Set the logo source file based on the user's preferred color scheme
-            if (userPrefersDark) {
-                // console.log(document.getElementById("myModal_delete"))
-                logo.src = '../assets/header-img/comment.svg';
-            } else {
-                logo.src = '../assets/header-img/question.svg';
-            }
-        </script>
-
-        <script>
-        </script>
-
-        <script>
             // Add active class to the current button (highlight it)
             var header = document.getElementById("myDIV");
             var btns = header.getElementsByClassName("btnn");
@@ -9146,8 +9184,7 @@
                     this.className += " activee";
                 });
             }
-        </script>
-        <script>
+
             $(document).ready(function () {
                 $('input[type="radio"]').click(function () {
                     var inputValue = $(this).attr("value");
@@ -9156,10 +9193,7 @@
                     $(targetBox).show();
                 });
             });
-        </script>
 
-        <!-- cards active deactive start  -->
-        <script>
             function activateCard(cardNumber) {
                 var cards = document.getElementsByClassName("card-color");
                 for (var i = 0; i < cards.length; i++) {
@@ -9193,10 +9227,7 @@
                 var selectedborderleft = document.querySelector(".border-left:nth-child(" + cardNumber + ")");
                 selectedborderleft.classList.add("active");
             }
-        </script>
-        <!-- cards active deactive End  -->
 
-        <script>
             function activateTab(tabIndex) {
                 var tabs = document.getElementsByClassName("card-color");
                 var tabContents = document.getElementsByClassName("tab-contentt1");
@@ -9211,9 +9242,7 @@
                     tabContents[tabIndex - 1].classList.add("active");
                 }
             }
-        </script>
 
-        <script>
             $(document).ready(function () {
 
                 $("#add-item1").on("click", () => {
@@ -9232,6 +9261,8 @@
                 </tr>`)
 
                 });
+
+
                 $('#add-item-container1').on('click', '#del-btn1', function () {
                     var $row = $(this).closest('.tr');
                     var $rowsContainer = $row.parent();
@@ -9257,7 +9288,7 @@
                         // alert('Cannot delete the last row.');
                     }
                 });
-                
+
 
 
                 $("#add-item2").on("click", () => {
@@ -9286,10 +9317,7 @@
                 });
 
             });
-        </script>
 
-        <!-- vendor start  -->
-        <script>
             $(document).ready(function () {
                 $("#add-item5").on("click", () => {
                     $("#add-item-container5").append(`<tr class="tr">

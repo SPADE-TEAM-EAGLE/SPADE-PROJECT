@@ -1,6 +1,4 @@
 
-const express = require("express");
-const router = express.Router();
 const aws = require("aws-sdk");
 
 const upload = require("../controllers/s3CloudController");
@@ -32,8 +30,6 @@ function fileUpload(req,res) {
             success: true,
             message: "File uploaded successfully"
         });
-        
-            
     });
 }
 const deleteImageFromS3 = (key) => {
