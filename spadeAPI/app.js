@@ -8,10 +8,16 @@ const { connect } = require("./config/connection");
 
 const recurringController = require("./controllers/recurringController"); 
 const app = express();
+// const server = http.createServer(app);
+// const io = new Server(server);
+
+// const options = {
+//     origin: ["https://backend.app.spaderent.com"],
+// }
 app.use(cookieParser());
 app.use(bodyParser.json());
-app.use(cors());
 
+app.use(cors());
 app.use((req, res, next) => {
     res.header("Cache-Control", "no-cache, no-store, must-revalidate");
     res.header("Pragma", "no-cache");
@@ -23,11 +29,30 @@ app.use("/api/spade", userRoutes);
 connect();
 recurringController.start();
 
+// io.on("connection", (socket) => {
+//     console.log("Connected to socket.io");
+//     socket.on('join chat', (room) => {
+//         socket.join(room);
+//         console.log("User Joined Room: " + room);
+//     });
 
+//     socket.on("leave chat", (room) => {
+//         socket.leave(room);
+//         console.log("User left Room: " + room);
+//     });
+    
+//     socket.on("new message", (data) => {
+//         console.log(data);
+//         const senderId = data.chat._id;
+//         console.log('room id', senderId);
+//         chats = data.chat;
 
-const port = 3000;
-app.listen(port, () => {
-    console.log(`Server started on port ${port}`);
+//         io.in(data.chat._id).emit("message-recieved", data);
+//     });
+// })
+
+app.listen(3000, () => {
+    console.log('listening on *:3000');
 });
 // const options = {
 //   key: fs.readFileSync("Certificate/ssl.key"),

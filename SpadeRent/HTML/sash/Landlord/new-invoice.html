@@ -828,12 +828,12 @@
                                         name="invoice" id="invoice" checked>
                                     <span class="custom-control-label">One Time Invoice</span>
                                 </label>
-                                <!-- <label class="custom-control custom-radio mb-0">
+                                <label class="custom-control custom-radio mb-0">
                                     <input class="custom-control-input" type="radio" value="Recurring Invoice"
                                         name="invoice" id="recurring" data-bs-toggle="collapse" href="#collapse1"
                                         role="button" aria-expanded="false" aria-controls="collapseExample1">
                                     <span class="custom-control-label">Recurring Invoice</span>
-                                </label> -->
+                                </label>
                             </div>
                         </div>
                         <!-- <div class="col-md-8 col-lg-6">
@@ -917,6 +917,7 @@
                                             <th>Category</th>
                                             <th>Property</th>
                                             <th>Memo</th>
+                                            <th>Tax</th>
                                             <th>Amount</th>
                                             <th>Delete</th>
                                         </tr>
@@ -937,6 +938,10 @@
                                                     data-bs-placement="top" data-bs-toggle="tooltip" title=""
                                                     data-bs-original-title="Enter memo here"
                                                     data-bs-container="#addModal" required></td>
+                                            <td><input type="text" class="form-control" name="tax"
+                                                    data-bs-placement="top" data-bs-toggle="tooltip" title=""
+                                                    data-bs-original-title="Tax associated with this category"
+                                                    data-bs-container="#addModal" readonly></td>
                                             <td><input type="text" class="form-control" name="amount" id="amountField"
                                                     data-bs-placement="top" data-bs-toggle="tooltip" title=""
                                                     data-bs-original-title="Enter amount here"
@@ -1006,9 +1011,9 @@
                         id='close'>Close</button>
                     <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
                     <div class="btn-group rounded-split mt-2 mb-2">
-                        <button type="button" class="btn btn-pill btn-primary save-invoice" disabled>Save</button>
+                        <button type="button" class="btn btn-pill btn-primary save-invoice" >Save</button>
                         <button type="button" class="btn btn-pill btn-primary dropdown-toggle px-1" id="toggle-button"
-                            data-bs-toggle="dropdown" aria-expanded="false" disabled>
+                            data-bs-toggle="dropdown" aria-expanded="false">
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
@@ -2292,12 +2297,14 @@
                         var category = $(this).find('[name="category"]').val();
                         var property = $(this).find('[name="property"]').val();
                         var memo = $(this).find('input[name="memo"]').val();
+                        var tax = $(this).find('input[name="tax"]').val();
                         var amount = $(this).find('input[name="amount"]').val();
 
                         lineItems.push({
                             category: category,
                             property: property,
                             memo: memo,
+                            tax:tax,
                             amount: amount
                         });
                     });
@@ -2428,7 +2435,7 @@
             function getData() {
                 $("#preloader").fadeIn("fast");
                 $.ajax({
-                        url: 'http://localhost:3000/api/spade/invoiceCategory',
+                        url: 'https://backend.app.spaderent.com/api/spade/invoiceCategory',
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2594,30 +2601,55 @@
             }
             getData()
             $(document).on("change", ".tr [name='category'], .tr [name='category_update']", function(){
-    const selectedCategoryId = $(this).val();
-    console.log(selectedCategoryId);
+                const property = $("#tenants").val();
 
-    // Determine if the changed element is a category or category_update input
-    const isCategory = $(this).attr("name") === "category";
+const selectedCategoryId = $(this).val();
 
-    // Find the matching category object in the categoryData array
-    const matchingCategory = categoryData.find((category) => category.id == selectedCategoryId);
+// Find the selected <option> element within the <select> and get its text
+const selectedCategory = $(this).find("option:selected").text();
 
-    // Get the parent row of the changed input
-    const parentRow = $(this).closest(".tr");
+// Determine if the changed element is a category or category_update input
+const isCategory = $(this).attr("name") === "category";
 
-    // Find the corresponding amount input within that row based on whether it's a category or category_update input
-    const amountInput = isCategory ? parentRow.find("[name='amount']") : parentRow.find("[name='amount_update']");
+// Find the matching category object in the categoryData array
+const matchingCategory = categoryData.find((category) => category.id == selectedCategoryId);
+const tenant = tenantData.filter((tenant) => {
+    return tenant.tenantID == property
+})
 
-    // Check if a matching category is found
+// Get the parent row of the changed input
+const parentRow = $(this).closest(".tr");
+let amountInput;
+if (selectedCategory == "Rent Amount" || selectedCategory == "Triple Net" || selectedCategory == "Base Rent") {
+    amountInput = isCategory ? parentRow.find("[name='amount']") : parentRow.find("[name='amount_update']");
+    let amount = tenant[0].rentAmount
+    if (selectedCategory == "Rent Amount") {
+        amount = tenant[0].rentAmount
+    } else if (selectedCategory == "Triple Net") {
+        amount = tenant[0].tripleNet
+    } else {
+        amount = tenant[0].baseRent
+    }
+
+    parentRow.find("[name='tax']").val(0)
+    amountInput.val(amount);
+
+} else {
+    amountInput = isCategory ? parentRow.find("[name='tax']") : parentRow.find("[name='tax_update']");
     if (matchingCategory) {
         const amount = matchingCategory.setTaxes;
-        // Set the corresponding amount for the current row
+        parentRow.find("[name='amount']").val("")
         amountInput.val(amount);
     } else {
         // Handle the case when no matching category is found for the current row
         amountInput.val("No matching category found.");
     }
+}
+// Find the corresponding amount input within that row based on whether it's a category or category_update input
+
+
+// Check if a matching category is found
+
 });
             function areAllFieldsFilled() {
                 var accordion1Fields = $('#addModal input[required], #addModal select[required]');
@@ -2676,16 +2708,58 @@
                         return tenant.propertyName
                     }
                 })
-                console.log(propertyName)
                 $("#propertyName").empty()
                 $("#propertyUnit").empty()
                 $("[name='property']").empty()
                 $("[name='property']").append($('<option label="Choose one"></option>'))
                 $("[name='property']").append($('<option></option>').text(propertyName[0].propertyName).val(propertyName[0].propertyID))
-                $("#propertyName").append($('<option label="Choose one"></option>'))
                 $("#propertyUnit").append($('<option label="Choose one"></option>'))
                 $("#propertyName").append($('<option></option>').text(propertyName[0].propertyName).val(propertyName[0].propertyID))
                 $("#propertyUnit").append($('<option></option>').text(propertyName[0].unitNumber).val(propertyName[0].propertyUnitID))
+                $("#add-item-container1 .tr").empty()
+                $("#add-item-container1").append(`
+      <tr class="tr">
+        <td>
+          <select id="state" name="category" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the state where you reside" data-bs-container="#addModal" required>
+            <option selected="">Choose...</option>
+            ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
+          </select>
+          <span class="text-danger d-none">State is required!</span>
+        </td>
+        <td>
+          <select id="state" name="property" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the state where you reside" data-bs-container="#addModal" required>
+            <option selected="">Choose...</option>
+            <option value="${propertyName[0].propertyID}">${propertyName[0].propertyName}</option>
+          </select>
+          <span class="text-danger d-none">State is required!</span>
+        </td>
+        <td><input type="text" class="form-control" name="memo"></td>
+        <td><input type="text" class="form-control" name="tax"
+                                                    data-bs-placement="top" data-bs-toggle="tooltip" title=""
+                                                    data-bs-original-title="Tax associated with this category"
+                                                    data-bs-container="#addModal" readonly></td>
+        <td><input type="text" class="form-control" name="amount" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" required></td>
+        <td>
+          <button type="button" class="btn" id="del-btn1">
+            <i class="fi fi-rs-trash text-danger fs-5"></i>
+          </button>
+        </td>
+      </tr>
+    `)
+            
+                
+                
+                    $("[name='category']").append($('<option></option>').text("Rent Amount").val("rent"));
+               
+
+                if (propertyName[0].gross_or_triple_lease === "Triple Net Lease") {
+                    
+                        $("[name='category']").append($('<option></option>').text("Triple Net").val("triple"));
+                    
+                        $("[name='category']").append($('<option></option>').text("Base Rent").val("base"));
+
+                }
+
             })
             function checkFields() {
                 var isFilled = true;
@@ -2714,10 +2788,11 @@
             // Call the checkFields function on page load
             checkFields();
             $(document).on("click", "#add-item1", () => {
-  const property = $("#tenants").val();
-  
-  if (property == "Choose...") {
-    $("#add-item-container1").append(`
+                const property = $("#tenants").val();
+                const propertyName = tenantData.filter((tenant) => tenant.tenantID == property);
+                console.log(propertyName)
+                if (property == "Choose...") {
+                    $("#add-item-container1").append(`
       <tr class="tr">
         <td>
           <select id="state" name="category" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the state where you reside" data-bs-container="#addModal" required>
@@ -2733,6 +2808,10 @@
           <span class="text-danger d-none">State is required!</span>
         </td>
         <td><input type="text" class="form-control" name="memo"></td>
+        <td><input type="text" class="form-control" name="tax"
+                                                    data-bs-placement="top" data-bs-toggle="tooltip" title=""
+                                                    data-bs-original-title="Tax associated with this category"
+                                                    data-bs-container="#addModal" readonly></td>
         <td><input type="text" class="form-control" name="amount" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" required></td>
         <td>
           <button type="button" class="btn" id="del-btn1">
@@ -2741,9 +2820,10 @@
         </td>
       </tr>
     `);
-  } else {
-    const propertyName = tenantData.filter((tenant) => tenant.tenantID == property);
-    $("#add-item-container1").append(`
+
+                } else {
+
+                    $("#add-item-container1").append(`
       <tr class="tr">
         <td>
           <select id="state" name="category" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the state where you reside" data-bs-container="#addModal" required>
@@ -2760,6 +2840,10 @@
           <span class="text-danger d-none">State is required!</span>
         </td>
         <td><input type="text" class="form-control" name="memo"></td>
+        <td><input type="text" class="form-control" name="tax"
+                                                    data-bs-placement="top" data-bs-toggle="tooltip" title=""
+                                                    data-bs-original-title="Tax associated with this category"
+                                                    data-bs-container="#addModal" readonly></td>
         <td><input type="text" class="form-control" name="amount" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" required></td>
         <td>
           <button type="button" class="btn" id="del-btn1">
@@ -2768,8 +2852,25 @@
         </td>
       </tr>
     `);
-  }
-});
+    const categorySelect = $("#add-item-container1").find(".tr").last().find("[name='category']");
+        const optionExists = (value) => categorySelect.find('option[value="' + value + '"]').length > 0;
+
+        // Append options only if they don't exist in the current "category" select of the row
+        if (!optionExists("rent")) {
+            categorySelect.append($('<option></option>').text("Rent Amount").val("rent"));
+        }
+
+        if (propertyName[0].gross_or_triple_lease === "Triple Net Lease") {
+            if (!optionExists("triple")) {
+                categorySelect.append($('<option></option>').text("Triple Net").val("triple"));
+            }
+
+            if (!optionExists("base")) {
+                categorySelect.append($('<option></option>').text("Base Rent").val("base"));
+            }
+        }     
+                }
+            });
             $(document).on("click", "#add-item1_update", () => {
                 $("#add-item-container1_update").append(`<tr class="tr">
                                             <td><input type="text" class="form-control" name="category_update"></td>
@@ -2782,17 +2883,38 @@
                                         </tr>`)
             });
             $(document).on("input", "input[name='amount'], input[name='amount_update']", updateTotal);
+function resetAccordions() {
+                selectedFiles = []
 
+                $("#addModal input, #addModal select").each(function () {
+                    $(this).removeClass("border-green")
+                    $(this).removeClass("border-danger")
+                })
+                $("#add-item-container1 .tr").each(function () {
+                    if ($("#add-item-container1 .tr").length > 1) {
+                        $(this).remove()
+                    }
+                })
+                $("[name='property']").empty()
+                $("[name='property']").append($('<option label="Choose one"></option>'))
+                $("[name='property_update']").empty()
+                $("[name='category']").empty()
+                $("[name='category']").append($('<option label="Choose one"></option>'))
+                $("[name='category_update']").append($('<option label="Choose one"></option>'))
+                $("#totalText").text("$ " + 0)
+                $('#toggle-button,.save-invoice').attr("disabled", true);
+                $(".file-grid").empty()
+            }
             function updateTotal() {
                 var total = 0;
 
                 $("input[name='amount'], input[name='amount_update']").each(function () {
                     var inputValue = $(this).val();
-
+                    var tax = $(this).closest(".tr").find("[name='tax']").val()
                     if (inputValue !== "") {
                         var numericValue = parseFloat(inputValue);
                         if (!isNaN(numericValue)) {
-                            total += numericValue;
+                            total += numericValue + ((numericValue * parseFloat(tax)) / 100);
                         }
                     }
                 });

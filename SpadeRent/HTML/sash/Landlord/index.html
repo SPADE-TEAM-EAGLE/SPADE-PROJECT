@@ -1871,6 +1871,37 @@
                 }
             });
             $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/dashboard',
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    
+                    const responseObject={...response.totalAmount,...response.totalAmountUnpaid,...response.totalAmountPaid,...response.numPropertyTenant}
+                    console.log(responseObject)
+                    $("#invoicing-amount").empty()
+                    $("#total-amount").empty()
+                    $("#outstanding-amount").empty()
+                    $("#total-property").empty()
+                    $("#total-tenant").empty()
+                    $("#invoicing-amount").append('<b>$ ' + (responseObject.totalAmount || 0) + "</b>");
+$("#total-amount").append('<b>$ ' + (responseObject.totalPaid || 0) + "</b>");
+$("#outstanding-amount").append('<b>$ ' + (responseObject.totalUnPaid || 0) + "</b>");
+$("#total-property").append(responseObject.propertyCount || 0);
+$("#total-tenant").append(responseObject.tenantCount || 0);
+
+
+                },
+                error: function (xhr, status, error) {
+                    console.log('Error occurred while fetching state and city data.');
+                    console.log(xhr);
+                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                }
+            });
+            
+            $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
                 method: 'GET',
                 headers: {
