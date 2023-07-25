@@ -50,10 +50,7 @@ exports.createInvoice = async (req, res) => {
   try {
     const { userId } = req.user;
     console.log(req.body)
-    // console.log(userId)
-    // if (!tenantID || !invoiceType || !startDate || !endDate || !frequency || !dueDate || !dueDays || !repeatTerms || !terms || !additionalNotes || !lineItems || !sendmails || !totalAmount) {
-    //   throw new Error("Please fill all the fields");
-    // }
+     
     const currentDate = new Date();
     const invoiceResult = await queryRunner(insertInvoice, [userId, tenantID, invoiceType, startDate, endDate, frequency, dueDate, dueDays, repeatTerms, terms, additionalNotes, "Unpaid", currentDate, totalAmount, startDate]);
     if (invoiceResult.affectedRows === 0) {
