@@ -126,10 +126,10 @@ router.put("/notify", verifyToken, notifyController.updateNotifyData);    //****
 router.get("/checkNotify", verifyToken, notifyController.getCheckedNotify);
 router.get("/notify", verifyToken, notifyController.getNotify);
 router.get("/tenantNotify", verifyTokenTenant, notifyController.getTenantNotify);
-
-router.get("/property", verifyToken, userController.getAllProperty);
-router.get("/invoice", verifyToken, userController.getInvoiceReportData);
-router.get("/task", verifyToken, userController.getTaskReportData);
+// property report task
+router.get("/propertyReport", verifyToken, userController.getAllProperty);
+router.get("/invoiceReport", verifyToken, userController.getInvoiceReportData);
+router.get("/taskReport", verifyToken, userController.getTaskReportData);
 // dekete invoice catergory
 router.delete("/deleteInvoiceCategory", verifyToken, invoiceController.deleteInCategories);
 router.delete("/deleteVendorCategory", verifyToken, invoiceController.deleteVendCategories);
