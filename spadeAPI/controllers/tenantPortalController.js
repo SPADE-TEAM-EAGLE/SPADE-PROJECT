@@ -73,7 +73,7 @@ exports.getAllTaskTenant = async (req, res) => {
     try {
       // get data from task table by landlordID
       const allTaskResult = await queryRunner(AlltasksTenantsQuery, [userId]);
-      // if data found then
+      // if data found then\
       if (allTaskResult.length > 0) {
         // loop through all task result
         for (let i = 0; i < allTaskResult[0].length; i++) {

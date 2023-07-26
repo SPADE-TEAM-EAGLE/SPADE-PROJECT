@@ -1584,6 +1584,7 @@ exports.getAllProperty = async (req, res) => {
     const getLeaseReportData = await queryRunner(getLeaseReport, [
       userId
     ]);
+    
     res.status(200).json({
       property: getAllPropertyData[0],
       tenants: getTenantsReport[0],
