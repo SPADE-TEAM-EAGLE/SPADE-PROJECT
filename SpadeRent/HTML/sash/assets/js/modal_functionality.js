@@ -338,12 +338,22 @@ $("#addModal").modal("hide")
                         // window.location = '../Landlord/properties-all.html';
                     },
                     error: function (xhr, status, error) {
-                        window.alert('Error: ' + error);
+                        $("#myModal_warning_connection").modal("show");
+                            setTimeout(function() {
+                                $('#myModal_warning_connection').modal('hide');
+
+                            }, 2000);
+                        console.log('Error: ' + error);
                     }
                 });
             },
             error: function(xhr, status, error) {
-                window.alert('Error: ' + error);
+                $("#myModal_warning_connection").modal("show");
+                            setTimeout(function() {
+                                $('#myModal_warning_connection').modal('hide');
+
+                            }, 2000);
+                            console.log('Error: ' + error);
             }
         });
     } else {
@@ -378,7 +388,11 @@ $("#addModal").modal("hide")
                 // window.location = '../Landlord/properties-all.html';
             },
             error: function (xhr, status, error) {
-                window.alert('Error: ' + error);
+                $("#myModal_warning_connection").modal("show");
+                            setTimeout(function() {
+                                $('#myModal_warning_connection').modal('hide');
+                            }, 2000);
+                console.log('Error: ' + error);
             }
         });
     }
