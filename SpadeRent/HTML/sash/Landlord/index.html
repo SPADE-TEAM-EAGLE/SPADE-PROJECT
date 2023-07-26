@@ -570,7 +570,7 @@
                                             </div> -->
                                         </div>
                                         <div class="d-flex country">
-                                            <img src="../assets\header-img\spade.svg" alt="profile-user"
+                                            <img id="user-img" src="../assets\header-img\spade.svg" alt="profile-user"
                                                 class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
 
@@ -1821,12 +1821,13 @@
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function ({ user,email,userId }) {
+                success: function ({ user,email,userId,image }) {
                     function toTitleCase(str) {
                         return str.replace(/\w\S*/g, function (txt) {
                             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                         });
                     }
+                    $("#user-img").attr("src",image)
                     $("#user-name").text(toTitleCase(user))
                     $("#header-user").text(toTitleCase(user))
                 },

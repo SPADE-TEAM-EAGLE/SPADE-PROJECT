@@ -1982,7 +1982,7 @@
                                             </div> -->
                                         </div>
                                         <div class="d-flex country">
-                                            <img src="../assets\header-img\spade.svg" alt="profile-user"
+                                            <img id="user-img" src="../assets\header-img\spade.svg" alt="profile-user"
                                                 class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
                                         <div class="d-flex country">
@@ -8534,6 +8534,7 @@
                                 });
                             }
                             console.log(response)
+                            $("#user-img").attr("src",response.image)
                             $("#firstName").val(toTitleCase(response.firstName))
                             $("#lastName").val(toTitleCase(response.lastName))
                             $("#email").val(response.email)
@@ -8541,6 +8542,8 @@
                             $("#businessName").val(toTitleCase(response.businessName || ""))
                             $("#streetAddress").val(toTitleCase(response.streetAddress || ""))
                             $("#businessAddress").val(toTitleCase(response.businessAddress || ""))
+                            console.log(response.user)
+                            $("#header-user").text(toTitleCase(response.user))
                             if (response.image) {
                                 image_url = response.image
                                 image_key = response.imageKey
