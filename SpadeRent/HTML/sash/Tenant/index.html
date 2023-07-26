@@ -398,7 +398,7 @@
                                                 <div class="d-flex">
                                                     <div class="mt-2">
                                                         <h6 class=""><b>Invoicing</b></h6>
-                                                        <h1 class="mb-0 number-font"><b>$0</b></h1>
+                                                        <h1 class="mb-0 number-font"><b id="invoice-amount">$0</b></h1>
                                                     </div>
                                                     <div class="ms-auto">
                                                         <div class="chart-wrapper mt-1">
@@ -407,7 +407,7 @@
                                                     </div>
                                                 </div>
                                                 <span class="text-muted fs-12"><span class="text-secondary"><i
-                                                            class="fe fe-plus  text-secondary"></i>2.5%
+                                                            class="fe fe-plus  text-secondary"></i>0%
                                             </div>
                                         </div>
                                     </div>
@@ -417,7 +417,7 @@
                                                 <div class="d-flex">
                                                     <div class="mt-2">
                                                         <h6 class=""><b>Amount Paid</b></h6>
-                                                        <h1 class="mb-0 number-font"><b>$0</b></h1>
+                                                        <h1 class="mb-0 number-font"><b id="amount-paid">$0</b></h1>
                                                     </div>
                                                     <div class="ms-auto">
                                                         <div class="chart-wrapper mt-1">
@@ -427,7 +427,7 @@
                                                     </div>
                                                 </div>
                                                 <span class="text-muted fs-12"><span class="text-danger"><i
-                                                            class="fe fe-minus text-danger"></i>4.4%
+                                                            class="fe fe-minus text-danger"></i>0%
                                             </div>
                                         </div>
                                     </div>
@@ -437,7 +437,7 @@
                                                 <div class="d-flex">
                                                     <div class="mt-2">
                                                         <h6 class=""><b>Amount Outstanding</b></h6>
-                                                        <h1 class="mb-0 number-font"><b>$0</b></h1>
+                                                        <h1 class="mb-0 number-font"><b id="amount-outstanding">$0</b></h1>
                                                     </div>
                                                     <div class="ms-auto">
                                                         <div class="chart-wrapper mt-1">
@@ -447,7 +447,7 @@
                                                     </div>
                                                 </div>
                                                 <span class="text-muted fs-12"><span class="text-green"><i
-                                                            class="fe fe-plus text-green"></i>1.5%
+                                                            class="fe fe-plus text-green"></i>0%
                                             </div>
                                         </div>
                                     </div>
@@ -628,7 +628,7 @@
                                     <!-- COL END -->
 
                                     <div class="col-lg-7 scol-xl-7">
-                                        <div class="card">
+                                        <div class="card" id="task">
                                             <div class="card-header recent-announcement-tabs">
                                                 <h2 class="card-title recent-title">Recent <span style="color: #1467B0;">Tasks</span></h2>
                                                 <div class="tab-menu-heading float-right" style="background-color: #e0e0e0; border-radius: 30px; padding: 4px; width: fit-content;">
@@ -674,31 +674,7 @@
                                                                                 <td><button class="btn btn-success">
                                                                                 Active</button></td>
                                                                             </tr>
-                                                                            <tr>
-                                                                                <td><b>Electricity Problems</b></td>
-                                                                                <td>Half Time</td>
-                                                                                <td>12</td>
-                                                                                <td>135</td>
-                                                                                <td><button class="btn btn-warning">
-                                                                                Inactive</button></td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td><b>Sink is leaking</b></td>
-                                                                                <td>Full Time</td>
-                                                                                <td>12</td>
-                                                                                <td>135</td>
-                                                                                <td><button class="btn btn-success">
-                                                                                Active</button></td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td><b>Electricity Problems</b></td>
-                                                                                <td>Half Time</td>
-                                                                                <td>12</td>
-                                                                                <td>135</td>
-                                                                                <td><button class="btn btn-warning">
-                                                                                Inactive</button></td>
-                                                                            </tr>
-
+                                                                            
                                                                         </tbody>
                                                                     </table>
                                                                 </div>
@@ -1523,6 +1499,157 @@
                         window.alert('Error: ' + error);
                     }
                 });
+                $.ajax({
+                    url: 'http://localhost:3000/api/spade/getTenantDashData',
+                    type: 'GET',
+                    contentType: "application/json; charset=utf-8",
+                    // processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function(response) {
+                        // console.log(1111111)
+                        const {totalAmount,totalAmountPaid,totalAmountUnpaid}=response
+                        console.log(totalAmount,totalAmountPaid,totalAmountUnpaid)
+                        $("#invoice-amount").text("$ "+totalAmount.totalAmount)
+                        $("#amount-paid").text("$ "+totalAmountPaid.totalPaid)
+                        $("#amount-unpaid").text("$ "+totalAmountUnpaid.totalUnPaid)
+
+                    },
+                    error: function(xhr, status, error) {
+                        window.alert('Error: ' + error);
+                    }
+                });
+                function updateTable(tabId) {
+                var tableBody = $('#' + tabId + ' tbody');
+                var apiUrl = 'https://backend.app.spaderent.com/api/spade/getAllTask'; // Replace with your API endpoint URL
+
+                // Make an API call to fetch all tasks
+                $.ajax({
+                    url: apiUrl,
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        
+                        taskInfo = response.data[0]
+                        tableBody.empty(); // Clear existing table data
+
+                        // Filter tasks based on tab selection
+                        var filteredTasks = [];
+                        if (tabId === 'tab21') {
+                            // Today tab is selected, filter tasks created today
+                            filteredTasks = response.data[0].filter(function (task) {
+                                var taskDate = new Date(task.created_at).toLocaleDateString();
+                                var currentDate = new Date().toLocaleDateString();
+                                return taskDate === currentDate;
+                            });
+                        } else if (tabId === 'tab22') {
+                            // Weekly tab is selected, filter tasks created this week
+                            filteredTasks = response.data[0].filter(function (task) {
+                                var taskDate = new Date(task.created_at);
+                                var currentDate = new Date();
+                                var daysSinceCreation = Math.floor((currentDate - taskDate) / (1000 * 60 * 60 * 24));
+                                return daysSinceCreation <= 7;
+                            });
+                        } else if (tabId === 'tab23') {
+                            // Monthly tab is selected, filter tasks created this month
+                            filteredTasks = response.data[0].filter(function (task) {
+                                var taskDate = new Date(task.created_at);
+                                var currentDate = new Date();
+                                var monthsSinceCreation = (currentDate.getMonth() - taskDate.getMonth()) + 12 * (currentDate.getFullYear() - taskDate.getFullYear());
+                                return monthsSinceCreation <= 1;
+                            });
+                        }
+                        function toTitleCase(str) {
+                            return str.replace(/\w\S*/g, function (txt) {
+                                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                            });
+                        }
+                        // Iterate over the filtered tasks and populate the table rows
+                        filteredTasks.forEach(function (task) {
+                            var row = $('<tr></tr>');
+
+                            //   var taskCell = $('<td></td>').html('<b>' + task.taskName + '</b><br><span class="td-span">' + task.timestamp + '</span>');
+                            //   var assignedToCell = $('<td></td>').text(task.assignedTo);
+                            //   var dueAtCell = $('<td></td>').text(task.dueAt);
+                            //   var relatedToCell = $('<td></td>').text(task.relatedTo);
+                            //   var statusCell = $('<td></td>').append($('<button class="btn btn-' + task.status.toLowerCase() + '">' + task.status + '</button>'));
+                            // function toTitleCase(str) {
+                            //         return str.replace(/\w\S*/g, function (txt) {
+                            //             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                            //         });
+                            //     }
+
+                            // var taskInfo = response.data[0];
+                            // taskInfo?.forEach(function (task) {
+                            // var image = '<td><img src="../../../../spadeAPI/uploads/' + (task.taskImages?.split(',')[0] || '') + '" alt=""></td>';
+
+                            var createdDate = new Date(task.created_at);
+                            var currentDate = new Date();
+
+                            var timeDiff = Math.abs(currentDate - createdDate);
+                            var minutesDiff = Math.floor(timeDiff / (1000 * 60));
+                            var hoursDiff = Math.floor(minutesDiff / 60);
+                            var daysDiff = Math.floor(hoursDiff / 24);
+
+                            var taskName = '<td class="task-id" id=' + task.id + ' style="font-weight: 600;">' +
+                                '<p style="font-weight: 600;" class="mb-1">' + task.taskName + '</p>' +
+                                '<span class="font-weight-normal" style="color: #9B9B9B;"> By ' + task.createdBy + ' - ';
+
+                            if (daysDiff > 0) {
+                                taskName += daysDiff + ' days';
+                            } else if (hoursDiff > 0) {
+                                taskName += hoursDiff + ' hours';
+                            } else {
+                                taskName += minutesDiff + ' minutes';
+                            }
+
+                            taskName += '</span></td>';
+                            var propertyName = '<td class="property-id" id=' + task.id + ' style="font-weight: 600;">' +
+                                '<p style="font-weight: 600;" class="mb-1">' + task.propertyName + '</p>' +
+                                '<span class="font-weight-normal" style="color: #9B9B9B;"> Unit no. ' + task.unitNumber
+                            var assignTo = '<td style="font-weight: 600;text-align: center;display: flex;">';
+                            if (task.AssignTo) {
+                                assignTo += task.AssignTo.map(function ({ name, email }) {
+                                    return '<div class="me-2">' +
+                                        '<img class="avatar brround avatar-md" src="../assets/images/users/2.jpg" alt="avatar-img">' +
+                                        '<div class="media-body valign-middle mt-0">' +
+                                        '<a href="javascript:void(0)" class="text-dark fw-semibold">' + name + '</a>' +
+                                        '</div>' +
+                                        '</div>';
+                                }).join('');
+                            } else {
+                                assignTo += 'Not assigned';
+                            }
+                            assignTo += '</td>';
+
+                            var dueDate = '<td class="property-id " style="font-weight: 600;">' +
+                                '<p style="font-weight: 600;" class="mb-1">' + (task.dueDate || 'Not Set') + '</p>' +
+                                '<span class="font-weight-normal text-danger"><i class="fe fe-circle me-1"></i>' + task.priority + '</span>' +
+                                '</td>';
+
+                            // Create a table row and append the generated columns
+                            var status = '<td class="task-id" style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + toTitleCase(task.status) + '</p>' + '</tr>';
+                            // console.log(status)
+                            //   row.append(taskCell, assignedToCell, dueAtCell, relatedToCell, statusCell);
+                            var row = '<tr>' + taskName + assignTo + dueDate + propertyName + status + '</tr>';
+                            tableBody.append(row);
+                        });
+                    },
+                    error: function (error) {
+                        console.log('Error fetching data from API:', error);
+                    }
+                });
+            }
+
+            // Change the active tab and update the table when a tab is clicked
+            $('.nav a[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
+                var activeTab = $(e.target).attr('href').substring(1); // Remove the '#' from the tab ID
+                updateTable(activeTab);
+            });
+            updateTable('tab23');
             })
         </script>
         <!-- column drag and drop start  -->

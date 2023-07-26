@@ -41,7 +41,7 @@ const {
   getTotalAmountUnpaid,
   getTotalAmountPaid,
   getNumPropertyTenant,
-  insertNotify
+  insertNotify,
 } = require("../constants/queries");
 
 const { hashedPassword } = require("../helper/hash");
@@ -76,7 +76,7 @@ exports.createUser = async function (req, res) {
       hashPassword,
       planID,
       currentDate
-    ]);
+    ]); 
     const name = firstName + " " + lastName;
     const mailSubject = "Spade Welcome Email";
     if (insertResult[0].affectedRows > 0) {
@@ -1592,6 +1592,8 @@ exports.getAllProperty = async (req, res) => {
     })
   }
 }
+// getLeaseReport getInvoiceReportData getTaskReportData getTenantReport  getPropertyReport
+
 exports.getTaskReportData = async (req, res) => {
   try {
     const { userId } = req.user;

@@ -58,7 +58,6 @@ exports.invoiceSendMail = async (
       to: tenantEmail,
       // to:"aj8706786@gmail.com",
       subject: mailSubject,
-
       html: codeHTML.invoiceHTML(tenantName, dueDays, invoiceID, landlordName),
     };
     transpoter.sendMail(mailOptions, function (error, info) {
