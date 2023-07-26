@@ -54,13 +54,3 @@ recurringController.start();
 app.listen(3000, () => {
     console.log('listening on *:3000');
 });
-// const options = {
-//   key: fs.readFileSync("Certificate/ssl.key"),
-//   cert: fs.readFileSync("Certificate/ssl.crt"),
-//   ca: fs.readFileSync('Certificate/ca_bundle.pem'),
-//   checkServerIdentity: () => undefined
-// };
-
-// https.createServer(options, app).listen(process.env.PORT || 5000, () => {
-// console.log("Backend server is running!", process.env.PORT);
-// });

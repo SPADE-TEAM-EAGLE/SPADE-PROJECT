@@ -1,5 +1,5 @@
 const user = require("../models/user");
-const { sendMail, taskSendMail } = require("../sendmail/sendmail.js");
+const { sendMail, taskSendMail, sendMailLandlord } = require("../sendmail/sendmail.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const fs = require("fs");
@@ -80,6 +80,8 @@ exports.createUser = async function (req, res) {
     const name = firstName + " " + lastName;
     const mailSubject = "Spade Welcome Email";
     if (insertResult[0].affectedRows > 0) {
+
+      // console.log(name)
       // update notification table with user id
       // landlordID, emailNotification, pushNotification, textNotification
       const selectResult = await queryRunner(selectQuery("users", "Email"), [
@@ -87,11 +89,12 @@ exports.createUser = async function (req, res) {
       ]);
       await queryRunner(insertNotify, [
         selectResult[0][0].id,
-        "no",
-        "no",
-        "no"
+        "yes",
+        "yes",
+        "yes"
       ]);
-      await sendMail(email, mailSubject, password, name);
+      // await sendMail(email, mailSubject, password, name);
+      await sendMailLandlord(email, mailSubject, name);
       return res.status(200).json({ message: "User added successfully" });
     } else {
       return res.status(500).send("Failed to add user");
