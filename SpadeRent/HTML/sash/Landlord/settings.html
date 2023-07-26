@@ -2151,7 +2151,7 @@
                                             </div> -->
                                         </div>
                                         <div class="d-flex country">
-                                            <img src="../assets\header-img\spade.svg" alt="profile-user"
+                                            <img id="user-img" src="../assets\header-img\spade.svg" alt="profile-user"
                                                 class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
                                         <div class="d-flex country">
@@ -2374,7 +2374,7 @@
                                             <div class="tabs-menu1">
                                                 <!-- Tabs -->
                                                 <ul class="nav panel-tabs nav-width-scroll">
-                                                    <li><a href="#tab5" class="active" data-bs-toggle="tab">Profile</a>
+                                                    <li><a href="#tab5"  data-bs-toggle="tab">Profile</a>
                                                     </li>
                                                     <li><a href="#tab6" data-bs-toggle="tab">Security Settings</a></li>
                                                     <li><a href="#tab7" data-bs-toggle="tab">Notification
@@ -2383,7 +2383,7 @@
                                                     <li><a href="#tab9" data-bs-toggle="tab">Subscription</a></li>
                                                     <li><a href="#tab10" data-bs-toggle="tab">Users & Permissions</a>
                                                     </li>
-                                                    <li><a href="#tab11" data-bs-toggle="tab">Email Templates</a></li>
+                                                    <li><a href="#tab11" class="active" data-bs-toggle="tab">Email Templates</a></li>
                                                     <li><a href="#tab12" data-bs-toggle="tab">Invoice Settings</a></li>
                                                     <!-- <li><a href="#tab13" data-bs-toggle="tab">Merchant Services</a></li> -->
                                                     <li><a href="#tab14" data-bs-toggle="tab">Vendors</a></li>
@@ -2403,7 +2403,7 @@
                                 <div class="panel panel-primary">
                                     <div class="panel-body tabs-menu-body">
                                         <div class="tab-content">
-                                            <div class="tab-pane active" id="tab5">
+                                            <div class="tab-pane " id="tab5">
                                                 <h2 class="h2-personal-inf">Personal Information</h2>
                                                 <p class="p-personal-inf">Automate everything from listing units to
                                                     moving out tenants, and everything in between.</p>
@@ -7208,8 +7208,8 @@
                                             </div>
 
 
-                                            <div class="tab-pane mt-0" id="tab11">
-                                                <div class="card-body pt-0">
+                                            <div class="tab-pane mt-0 active" id="tab11">
+                                                <div class="card-body pt-0" id="tab11_tab_preview">
                                                     <h2 class="h2-personal-inf text-dark">Select a Template</h2>
                                                     .
                                                     <hr style="background-color: #D3D3D3;">
@@ -7246,7 +7246,7 @@
                                                                         Lorem Ipsum is simply dummy text of the printing
                                                                         and typesetting industry. Lorem Ipsum has been
                                                                         the industry's
-                                                                    </p><a href="javascript:void(0)"
+                                                                    </p><a href="javascript:void(0)" id="preview_invoice"
                                                                         class="text-primary float-right"><b>Preview
                                                                             Template</b></a>
                                                                 </div>
@@ -7292,6 +7292,28 @@
                                                         </div>
                                                     </div>
 
+                                                </div>
+                                                <div class="card-body p-0 d-none" id="tab11_tab_preview_invoice">
+                                                    <div class="page-header">
+                                                        <h1 class="page-title fw-bold">Email Template / Invoice</h1>
+                                                        <div>
+                                                            <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2 fw-bold" id="close_invoice_template_button">Close</a>
+                                                            <a href="javascript:void(0)" class="btn btn-primary btn-pill fw-bold" id="save_invoice_template_button">Save</a>
+                                                        </div>
+                                                    </div>
+                                                    <div id="invoice_div">
+                                                    <div class="p-5"  style="border-radius: 24px;
+                                                    border: 4.5px solid #1467B0;
+                                                    ">
+                                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                                        <img src="../assets/images/Artboard GÇô 1.svg" style="max-width: 110px;" alt="logo">
+                                                        <span class="fw-bold">Date: 02/03/2022</span>
+                                                    </div>
+                                                    <div id="summernote">
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
                                                 </div>
                                             </div>
 
@@ -7749,7 +7771,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <!-- request close account model box start  -->
                                 <div class="modal fade" id="requestcloseaccount" tabindex="-1" role="dialog">
                                     <div class="modal-dialog modal-md modal-dialog-scrollable" role="document">
@@ -8538,7 +8559,21 @@
         <script src="../assets/plugins/intl-tel-input-master/intlTelInput.js"></script>
         <script src="../assets/plugins/intl-tel-input-master/country-select.js"></script>
         <script src="../assets/plugins/intl-tel-input-master/utils.js"></script>
+ <!-- INTERNAL WYSIWYG Editor JS -->
+ <script src="../assets/plugins/wysiwyag/jquery.richtext.js"></script>
+ <script src="../assets/plugins/wysiwyag/wysiwyag.js"></script>
 
+ <!-- INTERNAL SUMMERNOTE Editor JS -->
+ <script src="../assets/plugins/summernote/summernote1.js"></script>
+ <script src="../assets/js/summernote.js"></script>
+
+ <!-- INTERNAL FORMEDITOR JS -->
+ <script src="../assets/plugins/quill/quill.min.js"></script>
+ <script src="../assets/js/form-editor2.js"></script>
+
+ <!-- Froala Editor JS-->
+ <script src='https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js'></script>
+ <script src="../assets/js/froala.js"></script>
         <!-- Color Theme js -->
         <script src="../assets/js/themeColors.js"></script>
 
@@ -8750,6 +8785,7 @@
                                 });
                             }
                             console.log(response)
+                            $("#user-img").attr("src",response.image)
                             $("#firstName").val(toTitleCase(response.firstName))
                             $("#lastName").val(toTitleCase(response.lastName))
                             $("#email").val(response.email)
@@ -8757,6 +8793,8 @@
                             $("#businessName").val(toTitleCase(response.businessName || ""))
                             $("#streetAddress").val(toTitleCase(response.streetAddress || ""))
                             $("#businessAddress").val(toTitleCase(response.businessAddress || ""))
+                            console.log(response.user)
+                            $("#header-user").text(toTitleCase(response.user))
                             if (response.image) {
                                 image_url = response.image
                                 image_key = response.imageKey
@@ -9433,6 +9471,29 @@
             }
 
             $(document).ready(function () {
+                
+                $('#save_invoice_template_button').click(function () {
+    const divToSave = document.getElementById('invoice_div');
+    const divContent = divToSave.innerHTML;
+    // console.log(divContent); 
+    
+    const summernoteDiv = document.getElementById('myform_editor');
+    const htmlContent = summernoteDiv.innerHTML;
+    console.log(htmlContent);
+  
+                });
+                $('#close_invoice_template_button').click(function () {
+                    const tab11_tab_preview = document.getElementById('tab11_tab_preview');
+                    const tab11_tab_preview_invoice = document.getElementById('tab11_tab_preview_invoice');
+                    tab11_tab_preview.classList.remove('d-none');
+                    tab11_tab_preview_invoice.classList.add('d-none');
+                });
+                $('#preview_invoice').click(function () {
+                    const tab11_tab_preview = document.getElementById('tab11_tab_preview');
+                    const tab11_tab_preview_invoice = document.getElementById('tab11_tab_preview_invoice');
+                    tab11_tab_preview.classList.add('d-none');
+                    tab11_tab_preview_invoice.classList.remove('d-none');
+                });
                 $('input[type="radio"]').click(function () {
                     var inputValue = $(this).attr("value");
                     var targetBox = $("." + inputValue);

@@ -50,7 +50,7 @@ exports.createInvoice = async (req, res) => {
   } = req.body;
   try {
     const { userId } = req.user;
-    console.log(req.body);
+    console.log(req.body)
     // console.log(userId)
     // if (!tenantID || !invoiceType || !startDate || !endDate || !frequency || !dueDate || !dueDays || !repeatTerms || !terms || !additionalNotes || !lineItems || !sendmails || !totalAmount) {
     //   throw new Error("Please fill all the fields");
@@ -364,16 +364,9 @@ exports.UpdateInvoice = async (req, res) => {
           const memo = lineItems[i].memo;
           const tax = lineItems[i].tax;
           const amount = lineItems[i].amount;
+          const lineItemTax = lineItems[i].tax;
 
-          const invoiceLineItemsResult = await queryRunner(insertLineItems, [
-            invoiceID,
-            category,
-            property,
-            memo,
-            amount,
-            tax,
-            
-          ]);
+          const invoiceLineItemsResult = await queryRunner(insertLineItems, [invoiceID, category, property, memo, amount]);
 
           if (invoiceLineItemsResult.affectedRows === 0) {
             return res.send(

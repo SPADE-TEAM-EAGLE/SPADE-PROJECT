@@ -1,5 +1,5 @@
 const user = require("../models/user");
-const { sendMail, taskSendMail } = require("../sendmail/sendmail.js");
+const { sendMail, taskSendMail, sendMailLandlord } = require("../sendmail/sendmail.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const fs = require("fs");
@@ -41,7 +41,7 @@ const {
   getTotalAmountUnpaid,
   getTotalAmountPaid,
   getNumPropertyTenant,
-  insertNotify
+  insertNotify,
 } = require("../constants/queries");
 
 const { hashedPassword } = require("../helper/hash");
@@ -76,10 +76,12 @@ exports.createUser = async function (req, res) {
       hashPassword,
       planID,
       currentDate
-    ]);
+    ]); 
     const name = firstName + " " + lastName;
     const mailSubject = "Spade Welcome Email";
     if (insertResult[0].affectedRows > 0) {
+
+      // console.log(name)
       // update notification table with user id
       // landlordID, emailNotification, pushNotification, textNotification
       const selectResult = await queryRunner(selectQuery("users", "Email"), [
@@ -87,11 +89,12 @@ exports.createUser = async function (req, res) {
       ]);
       await queryRunner(insertNotify, [
         selectResult[0][0].id,
-        "no",
-        "no",
-        "no"
+        "yes",
+        "yes",
+        "yes"
       ]);
-      await sendMail(email, mailSubject, password, name);
+      // await sendMail(email, mailSubject, password, name);
+      await sendMailLandlord(email, mailSubject, name);
       return res.status(200).json({ message: "User added successfully" });
     } else {
       return res.status(500).send("Failed to add user");
@@ -1581,6 +1584,7 @@ exports.getAllProperty = async (req, res) => {
     const getLeaseReportData = await queryRunner(getLeaseReport, [
       userId
     ]);
+    
     res.status(200).json({
       property: getAllPropertyData[0],
       tenants: getTenantsReport[0],
@@ -1592,6 +1596,8 @@ exports.getAllProperty = async (req, res) => {
     })
   }
 }
+// getLeaseReport getInvoiceReportData getTaskReportData getTenantReport  getPropertyReport
+
 exports.getTaskReportData = async (req, res) => {
   try {
     const { userId } = req.user;

@@ -31,7 +31,31 @@ exports.sendMail = async (email, mailSubject, random, name) => {
     console.log(error);
   }
 };
-
+// ################################## Landlord ###########################################
+exports.sendMailLandlord = async (email, mailSubject , name) => {
+  try {
+    let transpoter = await createTransporter();
+    var mailOptions = {
+      from: constants.EMAIL_HOST,
+      to: email,
+      // to:"aj8706786@gmail.com",
+      subject: mailSubject,
+      html: codeHTML.welcomeHTMLLANDLORD(email , name) ,
+    };
+    transpoter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log("Error occur to send email" + error);
+      } else {
+        // console.log("email send sucessfully" + info.response);
+        console.log("email send sucessfully");
+      }
+    });
+  } catch (error) {
+    // console.log("sendmail "+error.message);
+    console.log(error);
+  }
+};
+// ################################## Landlord ###########################################
 // Invoice email
 exports.invoiceSendMail = async (
   tenantName,
@@ -58,7 +82,6 @@ exports.invoiceSendMail = async (
       to: tenantEmail,
       // to:"aj8706786@gmail.com",
       subject: mailSubject,
-
       html: codeHTML.invoiceHTML(tenantName, dueDays, invoiceID, landlordName),
     };
     transpoter.sendMail(mailOptions, function (error, info) {
