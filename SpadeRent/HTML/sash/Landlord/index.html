@@ -99,6 +99,22 @@
 </head>
 
 <body class="app sidebar-mini ltr light-mode">
+    <div class="modal fade" id="myModal_warning_connection" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
+                        <div class="card-body text-center">
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24"><path fill="#fad383" d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z"/><circle cx="12" cy="16" r="1" fill="#f7b731"/><path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"/></svg></span>
+                            <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
+                            <p class="card-text text-dark m-0">Sorry! Something went wrong.</p>
+                            <p class="card-text text-dark m-0">Kindly check your internet connection or please try again later.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade effect-scale" id="modaldemo8" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered modal-l" role="document">
             <div class="modal-content">
@@ -316,6 +332,32 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-md-6 col-lg-3 col-xl-3">
+                        <div class="card">
+                            <div class="card-header" style="background-color: #1467B0;color: white;">
+                                <div class="card-title fw-bold"><a href="tasks-vendors.html"
+                                        style="color: white;">Vendor</a></div>
+                            </div>
+                            <div class="card-body">
+                                <div class="text-center chat-image mb-5">
+                                    <div class="avatar avatar-xxl chat-profile mb-3 brround">
+                                        <a class="" href="tasks-vendors.html"><img alt="avatar"
+                                                src="../assets/images/icons/create-vendor.png"
+                                                class="brround w-100 h-100"></a>
+                                    </div>
+                                    <div class="main-chat-msg-name">
+                                        <a href="tasks-vendors.html">
+                                            <h5 class="mb-1 text-dark fw-bold">Create New Vendors</h5>
+                                        </a>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the
+                                            benefits of an all-in-one property management tool! </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -380,30 +422,12 @@
                             </label>
                         </div>
                     </div>
-                    <!-- <div class="col-12">
+                    <div class="col-12">
                         <div class="form-group">
                             <label class="custom-switch form-switch mb-0">
                                 <input type="checkbox" name="custom-switch-radio" class="custom-switch-input" data-card="property-status" checked>
                                 <span class="custom-switch-indicator custom-switch-indicator-md"></span>
                                 <span class="custom-switch-description text-dark fw-bold">Property Status</span>
-                            </label>
-                        </div>
-                    </div> -->
-                    <div class="col-12">
-                        <div class="form-group">
-                            <label class="custom-switch form-switch mb-0">
-                                <input type="checkbox" name="custom-switch-radio" class="custom-switch-input" data-card="card5" checked>
-                                <span class="custom-switch-indicator custom-switch-indicator-md"></span>
-                                <span class="custom-switch-description text-dark fw-bold">Properties</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="form-group">
-                            <label class="custom-switch form-switch mb-0">
-                                <input type="checkbox" name="custom-switch-radio" class="custom-switch-input" data-card="card6" checked>
-                                <span class="custom-switch-indicator custom-switch-indicator-md"></span>
-                                <span class="custom-switch-description text-dark fw-bold">Tenants</span>
                             </label>
                         </div>
                     </div>
@@ -554,7 +578,7 @@
                                             </div> -->
                                         </div>
                                         <div class="d-flex country">
-                                            <img src="../assets\header-img\spade.svg" alt="profile-user"
+                                            <img id="user-img" src="../assets\header-img\spade.svg" alt="profile-user"
                                                 class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
 
@@ -777,7 +801,10 @@
                             <div class="card-body">
                                 <div class="roww" style="display: flex;">
                                     <div class="col-lg-9">
+                                        <!-- <a href="https://wa.me/923353236388">Click here to chat on WhatsApp</a> -->
+
                                         <h3 class="page-titlee text-white"
+                                        
                                             style="font-weight: 100; margin-bottom: 0px;">Welcome to Spade Portal</h3>
                                         <h1 class="page-titlee text-white" style="font-weight: 700;" id="user-name">
                                         </h1>
@@ -831,7 +858,7 @@
                                                     <div class="d-flex">
                                                         <div class="mt-2">
                                                             <h6 class=""><b>Invoicing</b></h6>
-                                                            <h1 class="mb-0 number-font" id="invoicing-amount"><b>$0</b></h1>
+                                                            <h1 class="mb-0 number-font"><b>$0</b></h1>
                                                         </div>
                                                         <div class="ms-auto">
                                                             <div class="chart-wrapper mt-1">
@@ -841,9 +868,8 @@
                                                         </div>
                                                     </div>
                                                     <span class="text-muted fs-12 float-start"><span
-                                                            class="text-secondary">
-                                                            <!-- <i
-                                                                class="fe fe-plus  text-secondary"></i> -->
+                                                            class="text-secondary"><i
+                                                                class="fe fe-plus  text-secondary"></i>2.5%
                                                 </div>
                                             </div>
                                         </div>
@@ -853,7 +879,7 @@
                                                     <div class="d-flex">
                                                         <div class="mt-2">
                                                             <h6 class=""><b>Amount Paid</b></h6>
-                                                            <h1 class="mb-0 number-font" id="total-amount"><b>$0</b></h1>
+                                                            <h1 class="mb-0 number-font"><b>$0</b></h1>
                                                         </div>
                                                         <div class="ms-auto">
                                                             <div class="chart-wrapper mt-1">
@@ -863,9 +889,8 @@
                                                         </div>
                                                     </div>
                                                     <span class="text-muted fs-12 float-start"><span
-                                                            class="text-danger">
-                                                            <!-- <i
-                                                                class="fe fe-minus text-danger"></i> -->
+                                                            class="text-danger"><i
+                                                                class="fe fe-minus text-danger"></i>4.4%
                                                 </div>
                                             </div>
                                         </div>
@@ -875,7 +900,7 @@
                                                     <div class="d-flex">
                                                         <div class="mt-2">
                                                             <h6 class=""><b>Amount Outstanding</b></h6>
-                                                            <h1 class="mb-0 number-font text-start" id="outstanding-amount"><b>$0</b></h1>
+                                                            <h1 class="mb-0 number-font text-start"><b>$0</b></h1>
                                                         </div>
                                                         <div class="ms-auto">
                                                             <div class="chart-wrapper mt-1">
@@ -885,8 +910,7 @@
                                                         </div>
                                                     </div>
                                                     <span class="text-muted fs-12 float-start"><span
-                                                            class="text-green">
-                                                            <!-- <i class="fe fe-plus text-green"></i> -->
+                                                            class="text-green"><i class="fe fe-plus text-green"></i>1.5%
                                                 </div>
                                             </div>
                                         </div>
@@ -896,7 +920,7 @@
                                                     <div class="d-flex">
                                                         <div class="mt-2">
                                                             <h6 class=""><b>Active Leads</b></h6>
-                                                            <h1 class="mb-0 number-font"><b>$0</b></h1>
+                                                            <h1 class="mb-0 number-font"><b>0</b></h1>
                                                         </div>
                                                         <div class="ms-auto">
                                                             <div class="chart-wrapper mt-1">
@@ -906,9 +930,8 @@
                                                         </div>
                                                     </div>
                                                     <span class="text-muted fs-12 float-start"><span
-                                                            class="text-warning">
-                                                            <!-- <i
-                                                                class="fe fe-plus text-warning"></i> -->
+                                                            class="text-warning"><i
+                                                                class="fe fe-plus text-warning"></i>4.5%
                                                 </div>
                                             </div>
                                         </div>
@@ -931,12 +954,12 @@
                                 </div> -->
 
                                 <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
-                                    <div class="card overflow-hidden counter-card-hover" id="card5">
+                                    <div class="card overflow-hidden counter-card-hover" id="card4">
                                         <div class="card-body">
                                             <div class="d-flex">
                                                 <div class="mt-2">
                                                     <h6 class=""><b>Total Property</b></h6>
-                                                    <h1 class="mb-0 number-font" id="total-property"><b>$0</b></h1>
+                                                    <h1 class="mb-0 number-font"><b>$0</b></h1>
                                                 </div>
                                                 <div class="ms-auto">
                                                     <div class="chart-wrapper mt-1">
@@ -946,20 +969,19 @@
                                                 </div>
                                             </div>
                                             <span class="text-muted fs-12 float-start"><span
-                                                    class="text-warning">
-                                                    <!-- <i
-                                                        class="fe fe-plus text-warning"></i> -->
+                                                    class="text-warning"><i
+                                                        class="fe fe-plus text-warning"></i>4.5%
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
-                                    <div class="card overflow-hidden counter-card-hover" id="card6">
+                                    <div class="card overflow-hidden counter-card-hover" id="card4">
                                         <div class="card-body">
                                             <div class="d-flex">
                                                 <div class="mt-2">
                                                     <h6 class=""><b>Total Tenant</b></h6>
-                                                    <h1 class="mb-0 number-font" id="total-tenant"><b>$0</b></h1>
+                                                    <h1 class="mb-0 number-font"><b>$0</b></h1>
                                                 </div>
                                                 <div class="ms-auto">
                                                     <div class="chart-wrapper mt-1">
@@ -969,9 +991,8 @@
                                                 </div>
                                             </div>
                                             <span class="text-muted fs-12 float-start"><span
-                                                    class="text-warning">
-                                                    <!-- <i
-                                                        class="fe fe-plus text-warning"></i> -->
+                                                    class="text-warning"><i
+                                                        class="fe fe-plus text-warning"></i>4.5%
                                         </div>
                                     </div>
                                 </div>
@@ -987,14 +1008,14 @@
                                                 <div class="tabs-menu">
                                                     <!-- Tabs -->
                                                     <ul class="nav panel-tabs panel-info">
-                                                        <li><a href="#tab23" class="active"
+                                                        <li><a href="#tab23" 
                                                                 data-bs-toggle="tab"><span><i
                                                                         class="fe fe-user me-1"></i></span>Monthly</a>
                                                         </li>
                                                         <li><a href="#tab22" data-bs-toggle="tab"><span><i
                                                                         class="fe fe-calendar me-1"></i></span>Weekly</a>
                                                         </li>
-                                                        <li><a href="#tab21" data-bs-toggle="tab"><span><i
+                                                        <li><a href="#tab21" data-bs-toggle="tab" class="active"><span><i
                                                                         class="fe fe-settings me-1"></i></span>Today</a>
                                                         </li>
                                                     </ul>
@@ -1327,9 +1348,76 @@
                         </div>
                     </div> -->
                     <div class="tab-pane active" id="side1">
-                        <div class="list-group list-group-flush" id="notification-container">
+                        <div class="list-group list-group-flush">
                             <!-- <div class="pt-3 fw-semibold ps-5">Today</div> -->
-                            
+                            <div class="list-group-item d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center">
+                                <div class="me-2">
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/2.jpg"><span
+                                        class="avatar-status bg-success"></span>
+                                </div>
+                                <div class="">
+                                    <a href="javascript:void(0);">
+                                        <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">William</div> <span class="text-dark"> 1436 Jersey Street > Jersey</span>
+                                        <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="">
+                                <span class="fs-12 text-dark">2 min ago</span>
+                            </div>
+                            </div>
+                            <div class="list-group-item d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center">
+                                <div class="me-2">
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/2.jpg"><span
+                                        class="avatar-status bg-success"></span>
+                                </div>
+                                <div class="">
+                                    <a href="javascript:void(0);">
+                                        <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">Henry</div> <span class="text-dark"> 1436 Jersey Street > Jersey</span>
+                                        <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="">
+                                <span class="fs-12 text-dark">2 min ago</span>
+                            </div>
+                            </div>
+                            <div class="list-group-item d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center">
+                                <div class="me-2">
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/2.jpg"><span
+                                        class="avatar-status bg-success"></span>
+                                </div>
+                                <div class="">
+                                    <a href="javascript:void(0);">
+                                        <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">David</div> <span class="text-dark"> 1436 Jersey Street > Jersey</span>
+                                        <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="">
+                                <span class="fs-12 text-dark">2 min ago</span>
+                            </div>
+                            </div>
+                            <div class="list-group-item d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center">
+                                <div class="me-2">
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/2.jpg"><span
+                                        class="avatar-status bg-success"></span>
+                                </div>
+                                <div class="">
+                                    <a href="javascript:void(0);">
+                                        <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">David</div> <span class="text-dark"> 1436 Jersey Street > Jersey</span>
+                                        <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="">
+                                <span class="fs-12 text-dark">2 min ago</span>
+                            </div>
+                            </div>
                             <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
                             
                         </div>
@@ -1718,7 +1806,7 @@
     <script src="../assets/js/themeColors.js"></script>
 
     <!-- CUSTOM JS -->
-    <script src="../assets/js/custom.js"></script><script src="../assets/js/getNotification.js"></script>
+    <script src="../assets/js/custom.js"></script>
 
     <!-- ############################################# -->
 
@@ -1805,19 +1893,22 @@
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function ({ user,email,userId }) {
+                success: function ({ user,email,userId,image }) {
                     function toTitleCase(str) {
                         return str.replace(/\w\S*/g, function (txt) {
                             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                         });
                     }
+                    $("#user-img").attr("src",image)
                     $("#user-name").text(toTitleCase(user))
                     $("#header-user").text(toTitleCase(user))
-                    userEmail=email
-                    id=userId
-                    console.log(id,userEmail)
                 },
                 error: function (xhr, status, error) {
+                    $("#myModal_warning_connection").modal("show");
+                            setTimeout(function() {
+                                $('#myModal_warning_connection').modal('hide');
+
+                            }, 2000);
                     console.log('Error occurred while fetching state and city data.');
                     console.log(xhr);
                     console.log(error);
@@ -1978,8 +2069,7 @@ $("#total-tenant").append(responseObject.tenantCount || 0);
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        // $("#user-name").text(response.data[0][0].createdBy);
-                        // console.log(response.data[0][0].createdBy)
+                        
                         taskInfo = response.data[0]
                         tableBody.empty(); // Clear existing table data
 
@@ -2086,6 +2176,11 @@ $("#total-tenant").append(responseObject.tenantCount || 0);
                         });
                     },
                     error: function (error) {
+                        $("#myModal_warning_connection").modal("show");
+                            setTimeout(function() {
+                                $('#myModal_warning_connection').modal('hide');
+
+                            }, 2000);
                         console.log('Error fetching data from API:', error);
                     }
                 });
@@ -2204,7 +2299,7 @@ $("#total-tenant").append(responseObject.tenantCount || 0);
                     {
                         element: document.querySelector('.card-demo-0'),
                         // title: 'Want to 2 minuts and learn what you can do with Rent',
-                        intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4">Your browser does not support the video tag.</video> <br> <b style="font-size: 17px; color: #000;">Want to 2 minuts and learn what you can do with Rent</b> <br><br> <p style="color: #201414;">Spade Rent is your one-stop-shop to find tenants and manage your Rental property.</p>',
+                        intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4">Your browser does not support the video tag.</video> <br> <b style="font-size: 17px; color: #000;">Want to 2 minutes and learn what you can do with Rent</b> <br><br> <p style="color: #201414;">Spade Rent is your one-stop-shop to find tenants and manage your Rental property.</p>',
                         // intro: 'This step focuses on an element',
                         position: 'top-bottom'
                     },
@@ -2218,7 +2313,7 @@ $("#total-tenant").append(responseObject.tenantCount || 0);
                     {
                         element: document.querySelector('.card-demo-2'),
                         title: 'Manage Tenants',
-                        intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px; color: #000;"">Whether you are looking to market your rental across the web or send a tenant an online application, you first need to add your property.</>',
+                        intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px; color: #000;"">Whether you are looking to market your rental across the web or send a tenant an online application, you first need to add your property.</b>',
                         // intro: 'This step focuses on an element',
                         position: 'right'
                     },
@@ -2267,7 +2362,7 @@ $("#total-tenant").append(responseObject.tenantCount || 0);
                 {
                     element: document.querySelector('.card-demo-0'),
                     // title: 'Want to 2 minuts and learn what you can do with Rent',
-                    intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4">Your browser does not support the video tag.</video> <br> <b style="font-size: 17px; color: #000;">Want to 2 minuts and learn what you can do with Rent</b> <br><br> <p style="color: #201414;">Spade Rent is your one-stop-shop to find tenants and manage your Rental property.</p>',
+                    intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4">Your browser does not support the video tag.</video> <br> <b style="font-size: 17px; color: #000;">Want to 2 minutes and learn what you can do with Rent</b> <br><br> <p style="color: #201414;">Spade Rent is your one-stop-shop to find tenants and manage your Rental property.</p>',
                     // intro: 'This step focuses on an element',
                     position: 'top-top'
                 },

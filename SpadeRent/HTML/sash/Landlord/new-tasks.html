@@ -767,6 +767,32 @@ color: #000;
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-md-6 col-lg-3 col-xl-3">
+                        <div class="card">
+                            <div class="card-header" style="background-color: #1467B0;color: white;">
+                                <div class="card-title fw-bold"><a href="tasks-vendors.html"
+                                        style="color: white;">Vendor</a></div>
+                            </div>
+                            <div class="card-body">
+                                <div class="text-center chat-image mb-5">
+                                    <div class="avatar avatar-xxl chat-profile mb-3 brround">
+                                        <a class="" href="tasks-vendors.html"><img alt="avatar"
+                                                src="../assets/images/icons/create-vendor.png"
+                                                class="brround w-100 h-100"></a>
+                                    </div>
+                                    <div class="main-chat-msg-name">
+                                        <a href="tasks-vendors.html">
+                                            <h5 class="mb-1 text-dark fw-bold">Create New Vendors</h5>
+                                        </a>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the
+                                            benefits of an all-in-one property management tool! </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -1250,7 +1276,7 @@ color: #000;
                                             </div> -->
                                         </div>
                                         <div class="d-flex country">
-                                            <img src="../assets\header-img\spade.svg" alt="profile-user"
+                                            <img id="user-img" src="../assets\header-img\spade.svg" alt="profile-user"
                                                 class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
                                         <div class="d-flex country">
@@ -2204,7 +2230,24 @@ color: #000;
             var selectedFiles = [];
             let taskId;
             $(document).ready(function () {
-
+                $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/protected',
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function ({ image,user }) {
+                    
+                    $("#user-img").attr("src",image)
+                   
+                },
+                error: function (xhr, status, error) {
+                    console.log('Error occurred while fetching state and city data.');
+                    console.log(xhr);
+                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                }
+            });
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/viewAllPropertyTenant',
                     method: 'GET',

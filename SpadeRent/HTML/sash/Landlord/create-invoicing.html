@@ -630,6 +630,22 @@
 </head>
 
 <body class="app sidebar-mini ltr light-mode">
+    <div class="modal fade" id="myModal_warning_connection" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
+                        <div class="card-body text-center">
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24"><path fill="#fad383" d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z"/><circle cx="12" cy="16" r="1" fill="#f7b731"/><path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"/></svg></span>
+                            <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
+                            <p class="card-text text-dark m-0">Sorry! Something went wrong.</p>
+                            <p class="card-text text-dark m-0">Kindly check your internet connection or please try again later.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade effect-scale" id="modaldemo8" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered modal-l" role="document">
             <div class="modal-content">
@@ -861,6 +877,32 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-md-6 col-lg-3 col-xl-3">
+                        <div class="card">
+                            <div class="card-header" style="background-color: #1467B0;color: white;">
+                                <div class="card-title fw-bold"><a href="tasks-vendors.html"
+                                        style="color: white;">Vendor</a></div>
+                            </div>
+                            <div class="card-body">
+                                <div class="text-center chat-image mb-5">
+                                    <div class="avatar avatar-xxl chat-profile mb-3 brround">
+                                        <a class="" href="tasks-vendors.html"><img alt="avatar"
+                                                src="../assets/images/icons/create-vendor.png"
+                                                class="brround w-100 h-100"></a>
+                                    </div>
+                                    <div class="main-chat-msg-name">
+                                        <a href="tasks-vendors.html">
+                                            <h5 class="mb-1 text-dark fw-bold">Create New Vendors</h5>
+                                        </a>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the
+                                            benefits of an all-in-one property management tool! </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -2486,7 +2528,7 @@
                                             </div> -->
                                         </div>
                                         <div class="d-flex country">
-                                            <img src="../assets\header-img\spade.svg" alt="profile-user"
+                                            <img id="user-img" src="../assets\header-img\spade.svg" alt="profile-user"
                                                 class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
                                         <div class="d-flex country">
@@ -3821,7 +3863,6 @@
                             var file = files[i];
                             uploadFormData.append('image', file);
                         }
-                        $("#addModal").modal("hide")
                         $.ajax({
                             url: 'https://backend.app.spaderent.com/api/spade/upload',
                             type: 'POST',
@@ -3863,6 +3904,7 @@
                                         const tenant = tenantData.find(obj => obj.tenantID == selectedTenant)
                                         console.log(tenant)
                                         $("#addModal").modal("hide")
+                                        
                                         $('#addModal input[type="text"], #addModal input[type="date"], #addModal textarea').val('');
                                         $('#addModal select').prop('selectedIndex', 0);
                                         $("#succes-tenantName").text(`sent to ${tenant.firstName + " " + tenant.lastName}.`)
@@ -3876,7 +3918,12 @@
                                 });
                             },
                             error: function (xhr, status, error) {
-                                window.alert('Error: ' + error);
+                                $("#myModal_warning_connection").modal("show");
+                            setTimeout(function() {
+                                $('#myModal_warning_connection').modal('hide');
+
+                            }, 2000);
+                    console.log('Error: ' + error);
                             }
                         });
                     } else {
@@ -4831,7 +4878,12 @@
                         }, 2000);
                     },
                     error: function (xhr, status, error) {
-                        window.alert('Error: ' + error);
+                        $("#myModal_warning_connection").modal("show");
+                            setTimeout(function() {
+                                $('#myModal_warning_connection').modal('hide');
+
+                            }, 2000);
+                    console.log('Error: ' + error);
                     }
                 });
             })
@@ -4958,6 +5010,55 @@
                 $("#myModal_edit").modal("show");
 
             });
+            function areAllFieldsFilled() {
+                var accordion1Fields = $('#addModal input[required], #addModal select[required]');
+                // var accordion2Fields = $('#accordion-item2 input[type="text"], #accordion-item2 select');
+                // var imageInput = $('#fileInput');
+                var allFieldsFilled = accordion1Fields.filter(function () {
+                    return $(this).val() === '' || $(this).val() === 'Choose...';
+                }).length === 0
+                
+                return allFieldsFilled;
+            }
+
+            // Function to enable or disable buttons based on field status
+            function updateButtonStatus() {
+                var allFieldsFilled = areAllFieldsFilled();
+
+                // Enable or disable the buttons based on the fields' status
+                if (allFieldsFilled) {
+                    $('#toggle-button,.save-invoice').removeAttr("disabled")
+                } else {
+                    $('#toggle-button,.save-invoice').attr("disabled",true);
+
+                }
+            }
+
+            // Call the updateButtonStatus function when any field in the accordions is changed
+            $('#addModal input[required], #addModal select[required]').on('input change', function () {
+                var $field = $(this);
+                var $errorMessage = $field.next('.text-danger');
+                if ($field.attr("id") === "zip") {
+                    if ($field.val().length !== 5) {
+                        $field.addClass('border-danger');
+                        $field.removeClass('border-green');
+                        $errorMessage.removeClass('d-none');
+                    } else {
+                        $field.removeClass('border-danger');
+                        $field.addClass('border-green');
+                        $errorMessage.addClass('d-none');
+                    }
+                } else if ($field.val() === '' || $field.val() === 'Choose...') {
+                    $field.addClass('border-danger');
+                    $field.removeClass('border-green');
+                    $errorMessage.removeClass('d-none');
+                } else {
+                    $field.removeClass('border-danger');
+                    $field.addClass('border-green');
+                    $errorMessage.addClass('d-none');
+                }
+                updateButtonStatus();
+            });
             $(".save-invoice_update").each(function () {
                 $(this).on("click", function () {
                     // console.log(1)
@@ -5044,7 +5145,7 @@
                                     images: imageArray
                                 }
                                 $.ajax({
-                                    url: 'https://backend.app.spaderent.com/api/spade/updateInvoice',
+                                    url: 'http://localhost:3000/api/spade/updateInvoice',
                                     type: 'PUT',
                                     data: JSON.stringify(invoiceData),
                                     contentType: 'application/json',
@@ -5061,13 +5162,23 @@
                                         }, 2000);
                                     },
                                     error: function (xhr, status, error) {
-                                        window.alert('Error: ' + error);
+                                        $("#myModal_warning_connection").modal("show");
+                            setTimeout(function() {
+                                $('#myModal_warning_connection').modal('hide');
+
+                            }, 2000);
+                    console.log('Error: ' + error);
                                     }
                                 });
 
                             },
                             error: function (xhr, status, error) {
-                                window.alert('Error: ' + error);
+                                $("#myModal_warning_connection").modal("show");
+                            setTimeout(function() {
+                                $('#myModal_warning_connection').modal('hide');
+
+                            }, 2000);
+                    console.log('Error: ' + error);
                             }
                         })
                     } else {
@@ -5105,7 +5216,12 @@
                                 }, 2000);
                             },
                             error: function (xhr, status, error) {
-                                window.alert('Error: ' + error);
+                                $("#myModal_warning_connection").modal("show");
+                            setTimeout(function() {
+                                $('#myModal_warning_connection').modal('hide');
+
+                            }, 2000);
+                    console.log('Error: ' + error);
                             }
                         });
                     }
@@ -5113,62 +5229,43 @@
                 });
 
             });
+        
+        $("#update-status").click(() => {
+            // console.log(invoiceId)
+            $("#changeStatusModal").modal("hide")
+            $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/putInvoiceStatusUpdates',
+                type: 'PUT',
+                data: JSON.stringify({
+                    id: invoiceId,
+                    status: selectedValue,
+                    note: $("#add-note").val()
+                }),
+                contentType: "application/json; charset=utf-8",
+                processData: false,
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    // console.log(response);
+                    // window.alert(response.message);
+                    getData()
+                    $("#successfully_changed_text").text("Successfully Updated");
+                    $("#successfully_changed").modal("show");
+                    setTimeout(function () {
+                        $("#successfully_changed").modal("hide");
+                    }, 2000);
+                    // window.location = '../Landlord/properties-all.html';
+                },
+                error: function (xhr, status, error) {
+                    $("#myModal_warning_connection").modal("show");
+                            setTimeout(function() {
+                                $('#myModal_warning_connection').modal('hide');
 
-            $("#update-status").click(() => {
-                // console.log(invoiceId)
-                $("#changeStatusModal").modal("hide")
-                $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/putInvoiceStatusUpdates',
-                    type: 'PUT',
-                    data: JSON.stringify({
-                        id: invoiceId,
-                        status: selectedValue,
-                        note: $("#add-note").val()
-                    }),
-                    contentType: "application/json; charset=utf-8",
-                    processData: false,
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-                    success: function (response) {
-                        // console.log(response);
-                        // window.alert(response.message);
-                        getData()
-                        $("#successfully_changed_text").text("Successfully Updated");
-                        $("#successfully_changed").modal("show");
-                        setTimeout(function () {
-                            $("#successfully_changed").modal("hide");
-                        }, 2000);
-                        // window.location = '../Landlord/properties-all.html';
-                    },
-                    error: function (xhr, status, error) {
-                        window.alert('Error: ' + error);
-                    }
-                });
-            })
-            function areAllFieldsFilled() {
-                var accordion1Fields = $('#addModal input[required], #addModal select[required]');
-                var unitField = $('#unit');
-                var allFieldsFilled =
-                    accordion1Fields.filter(function () {
-                        return $(this).val() === '' || $(this).val() === 'Choose...';
-                    }).length === 0
-                console.log(allFieldsFilled)
-                return allFieldsFilled;
-            }
-
-            // Function to enable or disable buttons based on field status
-            // Function to enable or disable buttons based on field status
-            function updateButtonStatus() {
-                var allFieldsFilled = areAllFieldsFilled();
-
-                // Enable or disable the buttons based on the fields' status
-                if (allFieldsFilled) {
-                    $('#toggle-button,.save-invoice').removeAttr("disabled");
-                } else {
-                    $('#toggle-button,.save-invoice').attr("disabled", true);
+                            }, 2000);
+                    console.log('Error: ' + error);
                 }
-            }
+            })})
             $(document).on('input change', '#addModal input, #addModal select, #addModal input, #addModal select,#addModal textarea', function () {
                 updateTotal("");
                 var $field = $(this);
@@ -5263,6 +5360,23 @@
     <script>
         $(document).ready(() => {
             $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/protected',
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function ({ image }) {
+                    
+                    $("#user-img").attr("src",image)
+                },
+                error: function (xhr, status, error) {
+                    console.log('Error occurred while fetching state and city data.');
+                    console.log(xhr);
+                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                }
+            });
+            $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
                 method: 'GET',
                 headers: {
@@ -5287,3 +5401,4 @@
 </body>
 
 </html>
+
