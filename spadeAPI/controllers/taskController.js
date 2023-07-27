@@ -851,7 +851,6 @@ exports.addVendorCategory = async (req, res) => {
         categoriesToInsert.push(category);
       }
     }
-
     // Batch update existing vendor categories
     console.log(categoriesToUpdate)
     for (const categoryToUpdate of categoriesToUpdate) {
