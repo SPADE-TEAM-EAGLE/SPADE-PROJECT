@@ -132,7 +132,7 @@
 						superscript: "Superscript",
 						size: "Font Size",
 						sizeunit: "Font Size Unit"
-					},
+					}, 
 					image: {
 						image: "Picture",
 						insert: "Insert Image",

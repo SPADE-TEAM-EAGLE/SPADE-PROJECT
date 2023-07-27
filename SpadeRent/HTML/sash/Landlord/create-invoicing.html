@@ -2532,8 +2532,7 @@
                                                 class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
                                         <div class="d-flex country">
-                                            <img src="../assets\header-img\circlels.png" alt="profile-user"
-                                                class="avatarr profile-user nav-link brroundd cover-image light-layout">
+                                            <img id="user-img-dark" src="../assets\header-img\circlels.png" alt="profile-user" class="avatarr profile-user nav-link brroundd cover-image light-layout">
                                         </div>
                                         <div class="dropdown d-flex profile-1 country">
                                             <a href="javascript:void(0)" data-bs-toggle="dropdown"
@@ -5333,8 +5332,7 @@
 
     <script>
         // PDF CODE START
-        document.getElementById("create_pdf")
-            .addEventListener("click", () => {
+        document.getElementById("create_pdf").addEventListener("click", () => {
                 const invoice = this.document.getElementById("htmlContent");
                 var opt = {
                     margin: 0.1,
@@ -5367,8 +5365,8 @@
                 },
                 success: function ({ image }) {
                     
-                    $("#user-img").attr("src",image)
-                },
+$("#user-img").attr("src",image)
+                    $("#user-img-dark").attr("src",image)                },
                 error: function (xhr, status, error) {
                     console.log('Error occurred while fetching state and city data.');
                     console.log(xhr);
