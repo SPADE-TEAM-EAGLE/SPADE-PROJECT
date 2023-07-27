@@ -2738,7 +2738,7 @@
                                                         style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
                                                     </div>
                                                     <div class="row" id="myDIV">
-                                                        <div class="col-lg-3"
+                                                        <div class="col-lg-3 layout-setting11"
                                                             style="max-width: 17%; width: fit-content;">
                                                             <input type="radio" name="test" id="cb5" />
                                                             <label for="cb5" class="label">
@@ -2746,7 +2746,7 @@
                                                                     class="btnn activee" id="myonoffswitch1"></label>
                                                             <h5 style="padding: 10px;">Light Mode</h5>
                                                         </div>
-                                                        <div class="col-lg-3"
+                                                        <div class="col-lg-3 layout-setting22"
                                                             style="max-width: 17%; width: fit-content;">
                                                             <input type="radio" name="test" id="cb6" />
                                                             <label for="cb6" class="label">
@@ -8523,8 +8523,8 @@
         <!-- <script src="../assets/js/custom1.js"></script> -->
 
         <!-- INTERNAL SELECT2 JS -->
-        <script src="../assets/plugins/select2/select2.full.min.js"></script>
-        <script src="../assets/js/select2.js"></script>
+        <!-- <script src="../assets/plugins/select2/select2.full.min.js"></script>
+        <script src="../assets/js/select2.js"></script> -->
 
         <!-- INTERNAL Data tables js-->
         <script src="../assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
@@ -8553,7 +8553,7 @@
         <script src="../assets/js/typehead.js"></script>
 
         <!-- INTERNAL INDEX JS -->
-        <script src="../assets/js/index1.js"></script>
+        <!-- <script src="../assets/js/index1.js"></script> -->
 
         <!-- INTERNAL intlTelInput js-->
         <script src="../assets/plugins/intl-tel-input-master/intlTelInput.js"></script>
@@ -8581,11 +8581,12 @@
         <script src="../assets/switcher/js/switcher.js"></script>
 
         <!-- CUSTOM JS -->
-        <!-- <script src="../assets/js/custom.js"></script><script src="../assets/js/getNotification.js"></script> -->
-
+        <!--     <script src="../assets/js/getNotification.js"></script> -->
+        
         <!-- CUSTOM JS -->
         <script src="../assets/js/custom-swicher.js"></script>
         <script src="../assets/js/custom1.js"></script>
+        <!-- <script src="../assets/js/custom.js"></script> -->
 
         <!-- ############################################# -->
 
@@ -8614,7 +8615,91 @@
         <!-- <script src="../assets/js/getNotification.js"></script></script> -->
 
         <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+    	$('.layout-setting').on("click", function(e) {
+		if (!(document.querySelector('body').classList.contains('dark-mode'))) {
+			$('body').addClass('dark-mode');
+			$('body').removeClass('light-mode');
+			$('body').removeClass('transparent-mode');
 
+            $('body')?.removeClass('color-menu');
+            $('body')?.removeClass('gradient-menu');
+            $('body')?.removeClass('light-menu');
+            $('body')?.removeClass('color-header');
+            $('body')?.removeClass('gradient-header');
+            $('body')?.removeClass('header-light');
+
+            $('#myonoffswitch5').prop('checked', true);
+            $('#myonoffswitch8').prop('checked', true);
+
+
+            $('#light-mode-carousel').css("display","none");
+			$('#dark-mode-carousel').css("display","block");
+
+			localStorage.setItem('sashdarkMode', true);
+			localStorage.removeItem('sashlightMode');
+			localStorage.removeItem('sashtransparentMode');
+            $('#myonoffswitch2').prop('checked', true);
+            
+		} else {
+			$('body').removeClass('dark-mode');
+			$('body').addClass('light-mode');
+            $('#myonoffswitch3').prop('checked', true);
+            $('#myonoffswitch6').prop('checked', true);
+
+            $('#light-mode-carousel').css("display","block");
+			$('#dark-mode-carousel').css("display","none");
+
+			localStorage.setItem('sashlightMode', true);
+			localStorage.removeItem('sashtransparentMode');
+			localStorage.removeItem('sashdarkMode');
+            $('#myonoffswitch1').prop('checked', true);
+		}
+	});
+    $('.layout-setting11').on("click", function(e) {
+		
+			$('body').addClass('dark-mode');
+			$('body').removeClass('light-mode');
+			$('body').removeClass('transparent-mode');
+
+            $('body')?.removeClass('color-menu');
+            $('body')?.removeClass('gradient-menu');
+            $('body')?.removeClass('light-menu');
+            $('body')?.removeClass('color-header');
+            $('body')?.removeClass('gradient-header');
+            $('body')?.removeClass('header-light');
+
+            $('#myonoffswitch5').prop('checked', true);
+            $('#myonoffswitch8').prop('checked', true);
+
+
+            $('#light-mode-carousel').css("display","none");
+			$('#dark-mode-carousel').css("display","block");
+
+			localStorage.setItem('sashdarkMode', true);
+			localStorage.removeItem('sashlightMode');
+			localStorage.removeItem('sashtransparentMode');
+            $('#myonoffswitch2').prop('checked', true);
+            
+		
+	});
+    $('.layout-setting22').on("click", function(e) {
+		
+			$('body').removeClass('dark-mode');
+			$('body').addClass('light-mode');
+            $('#myonoffswitch3').prop('checked', true);
+            $('#myonoffswitch6').prop('checked', true);
+
+            $('#light-mode-carousel').css("display","block");
+			$('#dark-mode-carousel').css("display","none");
+
+			localStorage.setItem('sashlightMode', true);
+			localStorage.removeItem('sashtransparentMode');
+			localStorage.removeItem('sashdarkMode');
+            $('#myonoffswitch1').prop('checked', true);
+		
+	});
+</script>
         <script>
             let categoryData; var counter = 0; var image_url = " "; var image_key = " ";
             let password_validate1 = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
