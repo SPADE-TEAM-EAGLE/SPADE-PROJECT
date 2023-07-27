@@ -3863,7 +3863,6 @@
                             var file = files[i];
                             uploadFormData.append('image', file);
                         }
-                        $("#addModal").modal("hide")
                         $.ajax({
                             url: 'https://backend.app.spaderent.com/api/spade/upload',
                             type: 'POST',
@@ -3905,6 +3904,7 @@
                                         const tenant = tenantData.find(obj => obj.tenantID == selectedTenant)
                                         console.log(tenant)
                                         $("#addModal").modal("hide")
+                                        
                                         $('#addModal input[type="text"], #addModal input[type="date"], #addModal textarea').val('');
                                         $('#addModal select').prop('selectedIndex', 0);
                                         $("#succes-tenantName").text(`sent to ${tenant.firstName + " " + tenant.lastName}.`)
@@ -5010,6 +5010,55 @@
                 $("#myModal_edit").modal("show");
 
             });
+            function areAllFieldsFilled() {
+                var accordion1Fields = $('#addModal input[required], #addModal select[required]');
+                // var accordion2Fields = $('#accordion-item2 input[type="text"], #accordion-item2 select');
+                // var imageInput = $('#fileInput');
+                var allFieldsFilled = accordion1Fields.filter(function () {
+                    return $(this).val() === '' || $(this).val() === 'Choose...';
+                }).length === 0
+                
+                return allFieldsFilled;
+            }
+
+            // Function to enable or disable buttons based on field status
+            function updateButtonStatus() {
+                var allFieldsFilled = areAllFieldsFilled();
+
+                // Enable or disable the buttons based on the fields' status
+                if (allFieldsFilled) {
+                    $('#toggle-button,.save-invoice').removeAttr("disabled")
+                } else {
+                    $('#toggle-button,.save-invoice').attr("disabled",true);
+
+                }
+            }
+
+            // Call the updateButtonStatus function when any field in the accordions is changed
+            $('#addModal input[required], #addModal select[required]').on('input change', function () {
+                var $field = $(this);
+                var $errorMessage = $field.next('.text-danger');
+                if ($field.attr("id") === "zip") {
+                    if ($field.val().length !== 5) {
+                        $field.addClass('border-danger');
+                        $field.removeClass('border-green');
+                        $errorMessage.removeClass('d-none');
+                    } else {
+                        $field.removeClass('border-danger');
+                        $field.addClass('border-green');
+                        $errorMessage.addClass('d-none');
+                    }
+                } else if ($field.val() === '' || $field.val() === 'Choose...') {
+                    $field.addClass('border-danger');
+                    $field.removeClass('border-green');
+                    $errorMessage.removeClass('d-none');
+                } else {
+                    $field.removeClass('border-danger');
+                    $field.addClass('border-green');
+                    $errorMessage.addClass('d-none');
+                }
+                updateButtonStatus();
+            });
             $(".save-invoice_update").each(function () {
                 $(this).on("click", function () {
                     // console.log(1)
@@ -5096,7 +5145,7 @@
                                     images: imageArray
                                 }
                                 $.ajax({
-                                    url: 'https://backend.app.spaderent.com/api/spade/updateInvoice',
+                                    url: 'http://localhost:3000/api/spade/updateInvoice',
                                     type: 'PUT',
                                     data: JSON.stringify(invoiceData),
                                     contentType: 'application/json',
