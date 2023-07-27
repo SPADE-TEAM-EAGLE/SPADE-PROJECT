@@ -1677,6 +1677,22 @@
         </div>
     </div> -->
     <!-- modal end  -->
+    <div class="modal fade" id="myModal_warning_connection" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
+                        <div class="card-body text-center">
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24"><path fill="#fad383" d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z"/><circle cx="12" cy="16" r="1" fill="#f7b731"/><path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"/></svg></span>
+                            <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
+                            <p class="card-text text-dark m-0">Sorry! Something went wrong.</p>
+                            <p class="card-text text-dark m-0">Kindly check your internet connection or please try again later.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="myModal_warning" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered text-center" role="document">
             <div class="modal-content modal-content-demo">
@@ -7010,7 +7026,7 @@
                                             <div class="tab-pane mt-0 active" id="tab11">
                                                 <div class="card-body pt-0" id="tab11_tab_preview">
                                                     <h2 class="h2-personal-inf text-dark">Select a Template</h2>
-                                                    .
+                                                    
                                                     <hr style="background-color: #D3D3D3;">
                                                     <div class="row">
                                                         <div class="col-xl-3 col-md-6 col-sm-12">
@@ -7108,8 +7124,10 @@
                                                         <img src="../assets/images/Artboard GÇô 1.svg" style="max-width: 110px;" alt="logo">
                                                         <span class="fw-bold">Date: 02/03/2022</span>
                                                     </div>
+                                                    <!-- <div class=""><input type="checkbox" id="spanToggle"></div> -->
                                                     <div id="summernote">
-                                                        
+                                                        <p><b>Subject:</b> <font color="#1467b0"><b>INV-89900A</b></font> <font color="#000000">from John Adams (IT Company)</font></p><p><font color="#000000"><br></font></p><p><font color="#000000">Please find attached your rent invoice with number INV-89900A.&nbsp;</font></p><p><span style="color: rgb(0, 0, 0);">and Due Date: 02/03/2022 If you have any questions, please&nbsp;</span></p><p><font color="#000000">let us know.&nbsp;</font></p><p><font color="#000000">Have a great day and thank you for your business!&nbsp;</font></p><p><font color="#000000">Sincerely</font></p><p><font color="#000000"><b>John Adams</b><br></font></p><p><font color="#1467b0">IT Company</font><br></p><p><font color="#000000"><br></font></p>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -8352,6 +8370,8 @@
         <!-- INTERNAL INDEX JS -->
         <script src="../assets/js/index1.js"></script>
 
+        <script src="../assets/js/modal_functionality.js"></script>
+
         <!-- INTERNAL intlTelInput js-->
         <script src="../assets/plugins/intl-tel-input-master/intlTelInput.js"></script>
         <script src="../assets/plugins/intl-tel-input-master/country-select.js"></script>
@@ -8411,7 +8431,28 @@
         <!-- <script src="../assets/js/modal_functionality.js"></script> -->
 
         <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-
+        <!-- <script>
+            function toggleSpan() {
+              var summernoteDiv = document.getElementById('myform_editor');
+              var radioButton = document.getElementById('spanToggle');
+              var fontElement = document.createElement('font');
+              fontElement.setAttribute('color', '#1467b0');
+              var boldElement = document.createElement('b');
+              boldElement.textContent = 'INV-89900A';
+              fontElement.appendChild(boldElement);
+          
+              if (radioButton.checked) {
+                summernoteDiv.appendChild(fontElement);
+              } else {
+                summernoteDiv.removeChild(fontElement);
+              }
+            }
+          
+            document.getElementById('spanToggle').addEventListener('click', toggleSpan);
+          </script> -->
+          
+          
+          
         <script>
             let categoryData; var counter = 0;
             let password_validate1 = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
