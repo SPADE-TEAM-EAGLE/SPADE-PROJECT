@@ -124,7 +124,6 @@ const verifyToken = async (req, res, next) => {
       imageKey:result[0][0].imageKey,
       planID:result[0][0].PlanID,
     };
-
     next();
     // console.log("hello")
   } catch (err) {
@@ -144,7 +143,6 @@ const verifyTokenTenant = async (req, res, next) => {
     const result = await queryRunner(selectQuery("tenants", "email"), [
       decoded.email,
     ]);
-    console.log(result)
     req.user = {
       email: decoded.email,
       userId: result[0][0].id,

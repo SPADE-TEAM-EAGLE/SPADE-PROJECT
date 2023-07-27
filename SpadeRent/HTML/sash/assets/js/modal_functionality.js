@@ -331,7 +331,8 @@ $("#addModal").modal("hide")
                         // console.log(1)
                         $("#unit-link").attr("href",`./property-unit.html?propertyId=${response.propertyId}`)
                 resetAccordions()
-            
+                $('#addModal').modal('hide')
+                        
                         $('#succesModal').modal('show')
             
                         // window.location = '../Landlord/properties-all.html';
@@ -380,6 +381,7 @@ $("#addModal").modal("hide")
                 // console.log(1)
                 $("#unit-link").attr("href",`./property-unit.html?propertyId=${response.propertyId}`)
         resetAccordions()
+        $('#addModal').modal('hide')
     
                 $('#succesModal').modal('show')
     

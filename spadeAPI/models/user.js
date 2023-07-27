@@ -28,7 +28,7 @@ module.exports = {
     // const sql = 'SELECT * FROM signups WHERE Email = ? AND Password = ?';
     const sql = 'SELECT * FROM signups WHERE Email = ?';
       db.query(sql,email, async(err, result) => {
-
+        
         if (err) {
           return callback(err, null);
         }
@@ -41,7 +41,6 @@ module.exports = {
         else{
           return callback("Wrong Password!!!", null);
         }
-        
       });
     // db.query(sql, [ email, password], (err, result) => {
     //     if (err) {

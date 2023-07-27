@@ -11,7 +11,10 @@ const {
   deleteQuery,
   getAllInvoiceTenantQuery,
   AlltasksTenantsQuery,
-  getTenantsById
+  getTenantsById,
+  getTenantTotalAmountUnpaid,
+  getTenantTotalAmountPaid,
+  getTenantTotalAmount
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -35,8 +38,6 @@ const config = process.env;
             for (let i = 0; i < getAllInvoicesResult[0].length; i++){
                 const invoiceID = getAllInvoicesResult[0][i].invoiceID;
                 const invoicelineitemsResult = await queryRunner(selectQuery("invoicelineitems", "invoiceID"), [invoiceID]);
-                // console.log(invoicelineitemsResult[0])
-                
                 if (invoicelineitemsResult[0].length > 0) {
                     const memo = invoicelineitemsResult[0].map((desc)=>({memo:desc.memo, category:desc.category, amount:desc.amount,property:desc.property}))
                     getAllInvoicesResult[0][i].memo = memo
@@ -69,26 +70,32 @@ const config = process.env;
       //  ############################# Get ALL Task Start ############################################################
 exports.getAllTaskTenant = async (req, res) => {
     const { userId } = req.user;
-    // const { userId } = req.body;
     try {
+      // get data from task table by landlordID
       const allTaskResult = await queryRunner(AlltasksTenantsQuery, [userId]);
+      // if data found then\
       if (allTaskResult.length > 0) {
+        // loop through all task result
         for (let i = 0; i < allTaskResult[0].length; i++) {
+          // get task id from task table
           const taskID = allTaskResult[0][i].id;
+          // get data from taskassignto table by taskID
           const assignToResult = await queryRunner(
             selectQuery("taskassignto", "taskId"),
             [taskID]
           );
+          // if data found then get vendor id from taskassignto table
           const vendorIDs = assignToResult[0].map((vendor) => vendor.vendorId);
   
           const vendorData = [];
-  
+        //  loop through vendor id 
           for (let j = 0; j < vendorIDs.length; j++) {
+            // get data from vendor table by vendor id
             const vendorResult = await queryRunner(
               selectQuery("vendor", "id"),
               [vendorIDs[j]]
             );
-  
+            // if data found then push data in vendorData array
             if (vendorResult.length > 0) {
               const vendor = {
                 ID : vendorResult[0][0].id,
@@ -99,10 +106,9 @@ exports.getAllTaskTenant = async (req, res) => {
               vendorData.push(vendor);
             }
           }
-  
+          // assign vendorData array to assignTo property of allTaskResult
           allTaskResult[0][i].AssignTo = vendorData;
         }
-  
         res.status(200).json({
           data: allTaskResult,
           message: "All Tasks",
@@ -117,6 +123,86 @@ exports.getAllTaskTenant = async (req, res) => {
       res.send("Error Get Tasks");
     }
   };
+// get tenant dashboard data
+exports.getTenantDashboardData = async (req, res) => {
+  try {
+    const { userId } = req.user;
+    const totalAmount = await queryRunner(getTenantTotalAmount, [
+      userId
+    ]);
+    const totalAmountUnpaid = await queryRunner(getTenantTotalAmountUnpaid, [
+      userId
+    ]);
+    const totalAmountPaid = await queryRunner(getTenantTotalAmountPaid, [
+      userId
+    ]);
+    res.status(200).json({
+      totalAmount: totalAmount[0][0],
+      totalAmountUnpaid: totalAmountUnpaid[0][0],
+      totalAmountPaid: totalAmountPaid[0][0],
+    })
+  } catch (error) {
+    res.status(400).json({
+      message: error.message
+    })
+  }
+}
+// get tenant dashboard data
+  // exports.getAllLoggedInTenantTask = async (req, res) => {
+  //   const { userId } = req.user;
+  //   try {
+  //     // get data from task table by landlordID
+  //     const allTaskResult = await queryRunner(AlltasksTenantsQuery, [userId]);
+  //     // if data found then
+  //     if (allTaskResult.length > 0) {
+  //       // loop through all task result
+  //       for (let i = 0; i < allTaskResult[0].length; i++) {
+  //         // get task id from task table
+  //         const taskID = allTaskResult[0][i].id;
+  //         // get data from taskassignto table by taskID
+  //         const assignToResult = await queryRunner(
+  //           selectQuery("taskassignto", "taskId"),
+  //           [taskID]
+  //         );
+  //         // if data found then get vendor id from taskassignto table
+  //         const vendorIDs = assignToResult[0].map((vendor) => vendor.vendorId);
+  
+  //         const vendorData = [];
+  //       //  loop through vendor id 
+  //         for (let j = 0; j < vendorIDs.length; j++) {
+  //           // get data from vendor table by vendor id
+  //           const vendorResult = await queryRunner(
+  //             selectQuery("vendor", "id"),
+  //             [vendorIDs[j]]
+  //           );
+  //           // if data found then push data in vendorData array
+  //           if (vendorResult.length > 0) {
+  //             const vendor = {
+  //               ID : vendorResult[0][0].id,
+  //               name: vendorResult[0][0].firstName + " "+ vendorResult[0][0].lastName,
+  //               email: vendorResult[0][0].email,
+  //               vendorPhone:vendorResult[0][0].phone
+  //             };
+  //             vendorData.push(vendor);
+  //           }
+  //         }
+  //         // assign vendorData array to assignTo property of allTaskResult
+  //         allTaskResult[0][i].AssignTo = vendorData;
+  //       }
+  //       res.status(200).json({
+  //         data: allTaskResult,
+  //         message: "All Tasks",
+  //       });
+  //     } else {
+  //       res.status(400).json({
+  //         message: "No Tasks data found",
+  //       });
+  //     }
+  //   } catch (error) {
+  //     console.log("Error:", error);
+  //     res.send("Error Get Tasks");
+  //   }
+  // };
   exports.getTenantByID = async (req, res) => {
     try {
       // con

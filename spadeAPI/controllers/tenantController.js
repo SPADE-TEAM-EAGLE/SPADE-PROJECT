@@ -1,5 +1,6 @@
 const user = require("../models/user");
-const sendMail = require('../sendmail/sendmail.js');
+// const {sendMail} = require('../sendmail/sendmail.js');
+const { sendMail, invoiceSendMail } = require('../sendmail/sendmail.js');
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt');
 const fs = require('fs');
@@ -71,8 +72,8 @@ exports.createTenants = async (req, res) => {
       const ran = Math.floor(100000 + Math.random() * 900000);
       const tenantPassword = "Spade" + ran;
       const hashPassword = await hashedPassword(tenantPassword);
-
       const tenantsInsert = await queryRunner(insertTenants, [userId, firstName, lastName, companyName, email, phoneNumber, address, city, state, zipcode, propertyID, propertyUnitID, rentAmount, gross_or_triple_lease, baseRent, tripleNet, leaseStartDate, leaseEndDate, increaseRent, hashPassword, currentDate]);
+     
       if (tenantsInsert[0].affectedRows > 0) {
         const status = "Occupied";
         const propertyUnitsResult = await queryRunner(updatePropertyUnitsTenant, [status, propertyUnitID, propertyID]);
@@ -82,8 +83,8 @@ exports.createTenants = async (req, res) => {
           const landlordName = selectTenantsResult[0][0].FirstName + " " + selectTenantsResult[0][0].LastName;
 
           // if (sendmails == "Yes") {
-          const mailSubject = "You created a new tenant";
-        await  sendMail.invoiceSendMail(landlordName, landlordEmail, mailSubject, "dueDays", "invoiceID", "frequency");
+          // const mailSubject = "You created a new tenant";
+          // await invoiceSendMail(landlordName, landlordEmail, mailSubject, "dueDays", "invoiceID", "frequency");
           if (increaseRent == 'No') {
             res.status(200).json({
               message: "Tenants save Successful",
@@ -159,7 +160,6 @@ exports.sendInvitationLink = async (req, res) => {
           message: "Tenants Welcome email send Successful",
           data: tenantsInsert[0]
         })
-
       } else {
         res.status(400).json({
           message: "welcome email not sent to tenant "
@@ -707,4 +707,4 @@ exports.tenantTask = async (req, res) => {
 };
 
 //  ############################# Task tenant ############################################################
- 
+
