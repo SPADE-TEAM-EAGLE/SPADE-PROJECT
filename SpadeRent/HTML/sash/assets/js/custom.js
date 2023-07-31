@@ -332,6 +332,30 @@
 	/******* Full Width Layout Start ********/
 
 	// $('body').addClass('layout-boxed'); 
+
+      // FULL WIDTH LAYOUT START
+      $(document).on("click", '#myonoffswitch99', function () {
+        if (this.checked) {
+            $('body').addClass('layout-fullwidth');
+            $('body').removeClass('layout-boxed');
+            checkHoriMenu();
+        } else {
+            $('body').removeClass('layout-fullwidth');
+        }
+    });
+    // FULL WIDTH LAYOUT END
+
+    // BOXED LAYOUT START
+    $(document).on("click", '#myonoffswitch100', function () {
+        if (this.checked) {
+            $('body').addClass('layout-boxed');
+            $('body').removeClass('layout-fullwidth');
+            checkHoriMenu();
+        } else {
+            $('body').removeClass('layout-boxed');
+        }
+    });
+    // BOXED LAYOUT END
 	
 
 	/******** *Header-Position Styles Start* ********/
