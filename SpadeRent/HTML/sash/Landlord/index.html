@@ -1937,11 +1937,11 @@ $("#user-img").attr("src",image)
                     id=userId
                 },
                 error: function (xhr, status, error) {
-                    $("#myModal_warning_connection").modal("show");
-                            setTimeout(function() {
-                                $('#myModal_warning_connection').modal('hide');
-
-                            }, 2000);
+                    $("#myModal_warning").modal("show");
+                    setTimeout(function() {
+                        $('#myModal_warning').modal('hide');
+                        window.location = '../Landlord/login_module.html';
+                    }, 2000);
                     console.log('Error occurred while fetching state and city data.');
                     console.log(xhr);
                     console.log(error);

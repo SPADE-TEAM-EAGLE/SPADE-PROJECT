@@ -8868,6 +8868,11 @@
                         
                         },
                         error: function (xhr, status, error) {
+                            $("#myModal_warning").modal("show");
+                    setTimeout(function() {
+                        $('#myModal_warning').modal('hide');
+                        window.location = '../Landlord/login_module.html';
+                    }, 2000);
                             console.log('Error occurred while fetching state and city data.');
                             console.log(xhr);
                             console.log(error);
@@ -9123,6 +9128,9 @@
                         success: function (response) {
                             $("#myModal_success p").text("Succesfully Updated!!!")
                             $("#myModal_success").modal("show")
+                            setTimeout(function () {
+                                    $("#myModal_success").modal("hide");
+                                }, 2000);
                             getData()
                         },
                         error: function (xhr, status, error) {
@@ -9165,6 +9173,9 @@
                             // Handle the success response
                             $("#myModal_success p").text("Succesfully Updated!!!")
                             $("#myModal_success").modal("show")
+                            setTimeout(function () {
+                                    $("#myModal_success").modal("hide");
+                                }, 2000);
                             getData()
                             // Perform any additional actions or show success message
                         },
@@ -9226,6 +9237,9 @@
                             // Handle the success response
                             $("#myModal_success p").text("Succesfully Updated!!!")
                             $("#myModal_success").modal("show")
+                            setTimeout(function () {
+                                    $("#myModal_success").modal("hide");
+                                }, 2000);
                             getData()
                             // Perform any additional actions or show success message
                         },
@@ -9252,9 +9266,9 @@
 
                             $("#myModal_success p").text("Succesfully Updated!!!")
                             $("#myModal_success").modal("show")
-
-                            
-                            
+                            setTimeout(function () {
+                                    $("#myModal_success").modal("hide");
+                                }, 2000);
                             getData()
                         },
                         error: function (xhr, status, error) {
@@ -9392,6 +9406,9 @@
                                     success: function (response) {
                                         $("#myModal_success p").text("Succesfully Updated!!!")
                                         $("#myModal_success").modal("show")
+                            setTimeout(function () {
+                                    $("#myModal_success").modal("hide");
+                                }, 2000);
                                         getData()
                                     },
                                     error: function (xhr, status, error) {
@@ -9420,6 +9437,9 @@
                             success: function (response) {
                                 $("#myModal_success p").text("Succesfully Updated!!!")
                                 $("#myModal_success").modal("show")
+                            setTimeout(function () {
+                                    $("#myModal_success").modal("hide");
+                                }, 2000);
                                 getData()
 
                             },
