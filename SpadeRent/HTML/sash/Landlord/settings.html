@@ -1593,7 +1593,7 @@
 
 </head>
 
-<body class="app sidebar-mini ltr light-mode sidenav-toggledd">
+<body class="app sidebar-mini ltr light-mode">
 
     <!-- GLOBAL-LOADER -->
     <!-- <div id="global-loader">
@@ -2718,7 +2718,7 @@
                                                         style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
                                                     </div>
                                                     <div class="row" id="myDIV">
-                                                        <div class="col-lg-3 layout-setting11"
+                                                        <div class="col-lg-3 layout-setting22"
                                                             style="max-width: 17%; width: fit-content;">
                                                             <input type="radio" name="test" id="cb5" />
                                                             <label for="cb5" class="label">
@@ -2726,7 +2726,7 @@
                                                                     class="btnn activee" id="myonoffswitch1"></label>
                                                             <h5 style="padding: 10px;">Light Mode</h5>
                                                         </div>
-                                                        <div class="col-lg-3 layout-setting22"
+                                                        <div class="col-lg-3 layout-setting11"
                                                             style="max-width: 17%; width: fit-content;">
                                                             <input type="radio" name="test" id="cb6" />
                                                             <label for="cb6" class="label">
@@ -2777,18 +2777,18 @@
                                                                     <div class="switch-toggle d-flex">
                                                                         <span class="me-auto">Full Width</span>
                                                                         <p class="onoffswitch2"><input type="radio"
-                                                                                name="onoffswitch4" id="myonoffswitch9"
+                                                                                name="onoffswitch4" id="myonoffswitch99"
                                                                                 class="onoffswitch2-checkbox" checked>
-                                                                            <label for="myonoffswitch9"
+                                                                            <label for="myonoffswitch99"
                                                                                 class="onoffswitch2-label"></label>
                                                                         </p>
                                                                     </div>
                                                                     <div class="switch-toggle d-flex mt-2">
                                                                         <span class="me-auto">Boxed</span>
                                                                         <p class="onoffswitch2"><input type="radio"
-                                                                                name="onoffswitch4" id="myonoffswitch10"
+                                                                                name="onoffswitch4" id="myonoffswitch100"
                                                                                 class="onoffswitch2-checkbox">
-                                                                            <label for="myonoffswitch10"
+                                                                            <label for="myonoffswitch100"
                                                                                 class="onoffswitch2-label"></label>
                                                                         </p>
                                                                     </div>
@@ -8468,6 +8468,9 @@
         <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
         <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
+                <!-- CUSTOM JS -->
+                <script src="../assets/js/custom1.js"></script>
+
         <!-- SPARKLINE JS-->
         <script src="../assets/js/jquery.sparkline.min.js"></script>
 
@@ -8500,9 +8503,6 @@
 
         <!-- Switcher js -->
         <!-- <script src="../assets/switcher/js/switcher.js"></script> -->
-
-        <!-- CUSTOM JS -->
-        <!-- <script src="../assets/js/custom1.js"></script> -->
 
         <!-- INTERNAL SELECT2 JS -->
         <!-- <script src="../assets/plugins/select2/select2.full.min.js"></script>
@@ -8562,14 +8562,14 @@
         <script src="../assets/js/themeColors.js"></script>
 
         <!-- Switcher js -->
-        <script src="../assets/switcher/js/switcher.js"></script>
+        <!-- <script src="../assets/switcher/js/switcher.js"></script> -->
 
         <!-- CUSTOM JS -->
         <!--     <script src="../assets/js/getNotification.js"></script> -->
         
         <!-- CUSTOM JS -->
-        <script src="../assets/js/custom-swicher.js"></script>
-        <script src="../assets/js/custom1.js"></script>
+        <!-- <script src="../assets/js/custom-swicher.js"></script> -->
+        <!-- <script src="../assets/js/custom1.js"></script> -->
         <!-- <script src="../assets/js/custom.js"></script> -->
 
         <!-- ############################################# -->
@@ -8598,7 +8598,33 @@
         <script src="../assets/plugins/chart/utils.js"></script>
         <!-- <script src="../assets/js/getNotification.js"></script></script> -->
 
-        <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+        <script>
+                     // FULL WIDTH LAYOUT START
+          $(document).on("click", '#myonoffswitch99', function () {
+            if (this.checked) {
+                $('body').addClass('layout-fullwidth');
+                $('body').removeClass('layout-boxed');
+                checkHoriMenu();
+            } else {
+                $('body').removeClass('layout-fullwidth');
+            }
+        });
+        // FULL WIDTH LAYOUT END
+    
+        // BOXED LAYOUT START
+        $(document).on("click", '#myonoffswitch100', function () {
+            if (this.checked) {
+                $('body').addClass('layout-boxed');
+                $('body').removeClass('layout-fullwidth');
+                checkHoriMenu();
+            } else {
+                $('body').removeClass('layout-boxed');
+            }
+        });
+        // BOXED LAYOUT END
+        </script>
+
+        <!-- <script src="https://code.jquery.com/jquery-latest.min.js"></script> -->
 <script>
     $(document).ready(function () {
         $('#save_invoice_template_button').click(function () {
