@@ -214,12 +214,13 @@ $(document).ready(function () {
 
 
     $('#fileInput').on('change', function () {
+        
         var files = Array.from($(this)[0].files);
         // console.log(files)
         files.forEach(function (file) {
             selectedFiles.push(file); // Add each file to the selected files array
         });
-
+        
         updateSelectedFilesContainer(); // Update the selected files container
     });
     $('#fileInput_update').on('change', function () {
@@ -404,7 +405,7 @@ function updateSelectedFilesContainer() {
     selectedFilesContainer.empty();
     console.log(selectedFiles)
     selectedFiles.forEach(function (file, index) {
-
+        console.log(file)
         var fileElement = $('<div>')
             .addClass('selected-file')
             .append(

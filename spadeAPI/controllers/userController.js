@@ -560,7 +560,7 @@ exports.property = async (req, res) => {
     }
     // if everything is ok then send message and property id
     res.status(200).json({
-      message: "property created successful",
+      message: "p  y created successful",
       propertyId: propertyResult[0].insertId
     });
 

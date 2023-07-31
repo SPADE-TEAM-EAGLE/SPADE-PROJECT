@@ -1320,7 +1320,7 @@
                 <div class="modal-header">
                     <div class="text-justify ps-2 border-model-line">
                         <h2 class="modal-title mb-0">Change <strong class="color-primary">Invoice Status</strong></h2>
-                        <button type="button" class="btn btn-primary">#Invoice Number: INV-89900A</button>
+                        <button type="button" class="btn btn-primary invoice-number">#Invoice Number: INV-89900A</button>
                     </div>
                     <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="top-clos">
                         <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
@@ -1453,7 +1453,7 @@
                     <div class="text-justify ps-2 border-model-line">
                         <h2 class="modal-title mb-0" id="previewHeading">Create <strong class="color-primary">New
                                 Invoice</strong></h2>
-                        <button type="button" class="btn btn-primary">#Invoice Number: INV-89900A</button>
+                        <!-- <button type="button" class="btn btn-primary">#Invoice Number: INV-89900A</button> -->
                     </div>
                     <button class="btn-close top-close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
@@ -1727,7 +1727,7 @@
                     <div class="text-justify ps-2 border-model-line">
                         <h2 class="modal-title mb-0" id="previewHeading_update">Edit <strong
                                 class="color-primary">Invoice</strong></h2>
-                        <button type="button" class="btn btn-primary">#Invoice Number: INV-89900A</button>
+                        <button type="button" class="btn btn-primary invoice-number">#Invoice Number: INV-89900A</button>
                     </div>
                     <button class="btn-close top-close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
@@ -2282,7 +2282,7 @@
                 <div class="modal-header">
                     <div class="text-justify ps-2 border-model-line">
                         <h2 class="modal-title mb-0">View <strong class="color-primary">Invoice</strong></h2>
-                        <button type="button" class="btn btn-primary">#Invoice Number: INV-89900A</button>
+                        <button type="button" class="btn btn-primary invoice-number">#Invoice Number: INV-89900A</button>
                     </div>
                     <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="viewModal-invoice">
                         <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
@@ -3852,7 +3852,7 @@
                         console.log("here")
                         invoiceData.sendmails = "Yes"
                     }
-
+                    console.log($("#totalText").text().split(' ')[1])
                     var fileInput = document.getElementById('fileInput');
                     var files = fileInput.files;
 
@@ -4044,7 +4044,11 @@
 
 
 
-
+                function formatDate(dateString) {
+    const date = new Date(dateString);
+    const options = { year: 'numeric', month: 'short', day: 'numeric' };
+    return date.toLocaleDateString('en-US', options);
+}
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/getAllInvoices',
                     type: 'GET',
@@ -4080,7 +4084,7 @@
                             var year = dateObj.getFullYear();
                             var invoiceDate = '<td class="date" style="font-weight: 600;">' + day + "/" + month + "/" + year + '</td>';
                             var propertyName = '<td class="propertyName" style="font-weight: 600;">' + invoice.propertyName + `<br><small>${invoice.tPhone}</small>` + '</td>';
-                            var invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + invoice.totalAmount + '<span> $</span>' + `<br><small>Next Due Date: November-12-2020</small>` + '</td>';
+                            var invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + invoice.totalAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(formatDate(invoice.recurringNextDate)=="Invalid Date"?"N/A":formatDate(invoice.recurringNextDate))}</small>` + '</td>';
                             const toShow = invoice.status
                             var status = `<td class="status" style="font-weight: 600;${invoice.status === "Unpaid" ? 'color:blue;' : 'color:green'}">` + invoice.status + '</td>';
                             var dropdownMenu = `<td><i class="fe fe-more-vertical three-dots"
@@ -4702,7 +4706,7 @@
             </td>
             <td style="border-bottom: 2px solid black;">${data.propertyName}</td>
             <td style="border-bottom: 2px solid black;">${categoryname}</td>
-            <td style="border-bottom: 2px solid black;">$ ${item.tax}</td>
+            <td style="border-bottom: 2px solid black;"> ${item.tax} %</td>
             <td style="border-bottom: 2px solid black;">${item.amount}</td>
             
         </tr>
@@ -4711,19 +4715,19 @@
                     $("#price-table").append(`
                 <tr class="text-black">
                                                     <td>Subtotal</td>
-                                                    <td>$ ${data.totalAmount}</td>
+                                                    <td>$ ${data.totalAmount-totalTaxAmount}</td>
                                                 </tr>
                                                 <tr class="text-black">
                                                     <td>Discount</td>
                                                     <td>$ ${0}</td>
                                                 </tr>
                                                 <tr class="text-black" style="    border-bottom: 1px solid #AFAFAF;">
-                                                    <td>Tax (0%)</td>
+                                                    <td>Tax</td>
                                                     <td>$ ${totalTaxAmount}</td>
                                                 </tr>
                                                 <tr class="text-black">
                                                     <td>Total</td>
-                                                    <td>$ ${data.totalAmount + totalTaxAmount}</td>
+                                                    <td>$ ${data.totalAmount}</td>
                                                 </tr>
                                                 <tr class="text-black" style="    border-bottom: 2px solid #562AC8;">
                                                     <td>Deposit Requested</td>
@@ -4731,7 +4735,7 @@
                                                 </tr>
                                                 <tr class="text-black">
                                                     <td class="fw-bold">Deposit Due</td>
-                                                    <td class="fw-bold">$ ${data.totalAmount + totalTaxAmount+ 0}</td>
+                                                    <td class="fw-bold">$ ${data.totalAmount}</td>
                                                 </tr>
                 `)
 
@@ -4833,8 +4837,12 @@
                     ...data1,
                     ...data2
                 };
-                console.log(data)
+                console.log($(".invoice-numebr"))
+                $(".invoice-number").each(function(){
+                    console.log($(this))
+                    $(this).text("#Invoice Number: INV-"+ data.invoiceID)
 
+                })
             });
             $(document).on('click', '.status-option', function () {
                 // const invoiceIdElement = $(this).closest("tr").find(".invoice-id");
@@ -4924,7 +4932,8 @@
                     $("#terms_update").append($('<option></option>').text((data.terms)).val((data.terms)).attr("selected", "selected"))
                     $("#daysUntilDue_update").val(data.daysDue)
                     // $("#terms_update").val(data.terms)
-                    if (data.repeatTerms == "true") {
+                    console.log()
+                    if (data.repeatTerms == "1") {
                         $("input[name='custom-switch-radio_update']").prop("checked", true);
                     } else {
                         $("input[name='custom-switch-radio_update']").prop("checked", false);
@@ -4950,7 +4959,6 @@
                 }, index) => {
 
                     const categoryid = category
-                    $("#totalText_update").text(`$ ${parseInt(amount) + sum}`)
                     sum = parseInt(amount)
                     $('#add-item-container1_update').append(
                         `<tr class="tr">
@@ -5000,7 +5008,7 @@
                 })
 
                 $("#additionalNotes_update").val(data.note)
-                $("#totalText_update").val(data.totalAmount)
+                $("#totalText_update").text("$ "+data.totalAmount)
                 selectedFiles = []
                 if (data.invoiceImages[0].Image !== null) {
                     selectedFiles = data.invoiceImages
@@ -5144,7 +5152,7 @@
                                     images: imageArray
                                 }
                                 $.ajax({
-                                    url: 'http://localhost:3000/api/spade/updateInvoice',
+                                    url: 'https://backend.app.spaderent.com/api/spade/updateInvoice',
                                     type: 'PUT',
                                     data: JSON.stringify(invoiceData),
                                     contentType: 'application/json',

@@ -4526,7 +4526,7 @@ $.ajax({
                 '<td class="memo" style="font-weight: 600;">' + invoice.email + '</td>' +
                 '<td class="date" style="font-weight: 600;">' + formatDate(invoice.created_at) + '<br><small>Due Date: ' + formatDate(invoice.dueDate) + '</small></td>' +
                 '<td class="propertyName" style="font-weight: 600;">' + invoice.propertyName + '<br><small>' + invoice.userPhone + '</small></td>' +
-                '<td class="rentAmount" style="font-weight: 600;">' + formatCurrency(invoice.totalAmount) + '<br><small>Next Due Date: ' + formatDate(invoice.recurringNextDate) + '</small></td>' +
+                '<td class="rentAmount" style="font-weight: 600;">' + formatCurrency(invoice.totalAmount) + '<br><small>Next Due Date: ' + (formatDate(invoice.recurringNextDate)=="Invalid Date"?"N/A":formatDate(invoice.recurringNextDate)) + '</small></td>' +
                 '<td class="status" style="font-weight: 600;">' + invoice.address + '<br><small>' + invoice.state+" "+invoice.zipCode+ '</small></td>' +
                 '<td><i class="fe fe-more-vertical three-dots" data-bs-toggle="dropdown"></i>' +
                 '<ul class="dropdown-menu">' +
