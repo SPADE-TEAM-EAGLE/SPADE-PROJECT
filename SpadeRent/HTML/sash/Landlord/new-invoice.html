@@ -820,7 +820,7 @@
                     <div class="text-justify ps-2 border-model-line">
                         <h2 class="modal-title mb-0" id="previewHeading">Create <strong class="color-primary">New
                                 Invoice</strong></h2>
-                        <button type="button" class="btn btn-primary">#Invoice Number: INV-89900A</button>
+                        <!-- <button type="button" class="btn btn-primary">#Invoice Number: INV-89900A</button> -->
                     </div>
                     <button class="btn-close top-close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
@@ -971,12 +971,12 @@
                                                 <select id="state" name="category" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the state where you reside" data-bs-container="#addModal" required>
                                                     <option selected="">Choose...</option>
                                                 </select>
-                                                <span class="text-danger d-none">State is required!</span>
+                                                <!-- <span class="text-danger d-none">State is required!</span> -->
                                             </td>
                                             <td><select id="state" name="property" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the state where you reside" data-bs-container="#addModal" required>
                                                 <option selected="">Choose...</option></select>
                                             
-                                            <span class="text-danger d-none">State is required!</span></td>
+                                            <!-- <span class="text-danger d-none">State is required!</span></td> -->
                                             <td><input type="text" class="form-control" name="memo"
                                                     data-bs-placement="top" data-bs-toggle="tooltip" title=""
                                                     data-bs-original-title="Enter memo here"
@@ -1056,7 +1056,7 @@
                     <div class="btn-group rounded-split mt-2 mb-2">
                         <button type="button" class="btn btn-pill btn-primary save-invoice" >Save</button>
                         <button type="button" class="btn btn-pill btn-primary dropdown-toggle px-1" id="toggle-button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
+                            data-bs-toggle="dropdown" aria-expanded="false" >
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
@@ -2726,9 +2726,10 @@ if (selectedCategory == "Rent Amount" || selectedCategory == "Triple Net" || sel
                 // var accordion2Fields = $('#accordion-item2 input[type="text"], #accordion-item2 select');
                 // var imageInput = $('#fileInput');
                 var allFieldsFilled = accordion1Fields.filter(function () {
+                    console.log($(this).val())
                     return $(this).val() === '' || $(this).val() === 'Choose...';
                 }).length === 0
-                
+                console.log(allFieldsFilled)
                 return allFieldsFilled;
             }
 
@@ -2746,7 +2747,7 @@ if (selectedCategory == "Rent Amount" || selectedCategory == "Triple Net" || sel
             }
 
             // Call the updateButtonStatus function when any field in the accordions is changed
-            $('#addModal input[required], #addModal select[required]').on('input change', function () {
+            $('#addModal input, #addModal select').on('input change', function () {
                 var $field = $(this);
                 var $errorMessage = $field.next('.text-danger');
                 if ($field.attr("id") === "zip") {
@@ -2794,14 +2795,14 @@ if (selectedCategory == "Rent Amount" || selectedCategory == "Triple Net" || sel
             <option selected="">Choose...</option>
             ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
           </select>
-          <span class="text-danger d-none">State is required!</span>
+          
         </td>
         <td>
           <select id="state" name="property" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the state where you reside" data-bs-container="#addModal" required>
             <option selected="">Choose...</option>
             <option value="${propertyName[0].propertyID}">${propertyName[0].propertyName}</option>
           </select>
-          <span class="text-danger d-none">State is required!</span>
+          
         </td>
         <td><input type="text" class="form-control" name="memo"></td>
         <td><input type="text" class="form-control" name="tax"

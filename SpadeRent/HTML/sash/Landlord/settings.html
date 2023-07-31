@@ -2961,7 +2961,7 @@
                                                                                                         <button
                                                                                                             class="btn btn-lg btn-block btn-free font-weight-bold text-warning border-btn card-btnn"
                                                                                                             data-id="2">
-                                                                                                            Upgrade to
+                                        <span>Upgrade</span> to
                                                                                                             Basic
                                                                                                             <!-- <i class="fa fa-long-arrow-right mt-1 float-right text-warning" aria-hidden="true"></i> -->
                                                                                                             <img src="../assets/images/arrow-yellow.svg"
@@ -3090,7 +3090,7 @@
                                                                                                         <button
                                                                                                             class="btn btn-lg btn-block btn-free font-weight-bold btn3-green card-btnn"
                                                                                                             data-id="3">
-                                                                                                            Upgrade to
+                                                                                                            <span>Upgrade</span> to
                                                                                                             Pro
                                                                                                             <!-- <i class="fa fa-long-arrow-right mt-1 float-right text3-green" aria-hidden="true"></i> -->
                                                                                                             <img src="../assets/images/arrow-blue.svg"
@@ -3225,7 +3225,7 @@
                                                                                                         <button
                                                                                                             class="btn btn-lg btn-block btn-free font-weight-bold btn4-blue border-btn card-btnn"
                                                                                                             data-id="4">
-                                                                                                            Upgrade to
+                                                                                                            <span>Upgrade</span> to
                                                                                                             Basic
                                                                                                             <!-- <i class="fa fa-long-arrow-right mt-1 float-right text4-blue" aria-hidden="true"></i> -->
                                                                                                             <img src="../assets/images/arrow-blue1.svg"
@@ -3474,7 +3474,7 @@
                                                                                                         <button
                                                                                                             class="btn btn-lg btn-block btn-free font-weight-bold text-white btn-warning border-btn card-btnn"
                                                                                                             data-id="6">
-                                                                                                            Upgrade to
+                                                                                                            <span>Upgrade</span> to
                                                                                                             Basic
                                                                                                             <!-- <i class="fa fa-long-arrow-right mt-1 float-right text-warning" aria-hidden="true"></i> -->
                                                                                                             <img src="../assets/images/arrow-yellow.svg"
@@ -3625,7 +3625,7 @@
                                                                                                         <button
                                                                                                             class="btn btn-lg btn-block btn-free font-weight-bold btn3-green card-btnn"
                                                                                                             data-id="7">
-                                                                                                            Upgrade to
+                                                                                                            <span>Upgrade</span> to
                                                                                                             Pro
                                                                                                             <!-- <i class="fa fa-long-arrow-right mt-1 float-right text3-green" aria-hidden="true"></i> -->
                                                                                                             <img src="../assets/images/arrow-blue.svg"
@@ -3778,7 +3778,7 @@
                                                                                                         <button
                                                                                                             class="btn btn-lg btn-block btn-free font-weight-bold btn4-blue border-btn card-btnn"
                                                                                                             data-id="8">
-                                                                                                            Upgrade to
+                                                                                                            <span>Upgrade</span> to
                                                                                                             Basic
                                                                                                             <!-- <i class="fa fa-long-arrow-right mt-1 float-right text4-blue" aria-hidden="true"></i> -->
                                                                                                             <img src="../assets/images/arrow-blue1.svg"
@@ -8709,7 +8709,7 @@
 });
 </script>
         <script>
-            let categoryData; var counter = 0; var image_url = " "; var image_key = " ";
+            let categoryData; var image_url = " "; var image_key = " ";
             let password_validate1 = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
             var validconfirmPassword1 = document.getElementById("id_password1");
             let confirmPassword1 = document.getElementById("id_password2");
@@ -8809,7 +8809,26 @@
                                 image_key = response.imageKey
                             }
                             $('#profile').css('background-image', 'url(' + response.image + ')').addClass('hasImage');
-                            $(`#${response.planID}`).addClass("card-primary")
+                            [2,3,4,5,6,7].forEach(function(item){
+                                if(item<parseInt(response.planID)){
+                                    $(`#${item} `).removeClass("bg-primary")
+                                    $(`#${item} .card-btnn span`).text("Downgrade")
+                                    $(`#${item} `).removeClass("bg-primary")
+                                    $(`#${item} .card-btnn span`).text("Downgrade")
+                                }else if(item>parseInt(response.planID)){
+                                    $(`#${item}`).removeClass("bg-primary")
+                                    $(`#${item} .card-btnn span`).text("Upgrade")
+                                }else{
+                                    $(`#${item} .card-btnn`).addClass("bg-primary").text("Selected")
+                                    $(`#${parseInt(response.planID)+3} .card-btnn`).addClass("bg-primary").text("Selected")
+                                    
+                                }
+                                
+                            })
+                            
+                            $(`#${response.planID}`).addClass("bg-primary")
+                            $(`#${parseInt(response.planID)+3}`).addClass("bg-primary")
+                        
                         },
                         error: function (xhr, status, error) {
                             $("#myModal_warning").modal("show");
@@ -9207,6 +9226,7 @@
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
+
                             $("#myModal_success p").text("Succesfully Updated!!!")
                             $("#myModal_success").modal("show")
                             setTimeout(function () {
@@ -9296,6 +9316,7 @@
                             //     this
                             // })
                             console.log($(`#${card.id}`))
+                            // $(`#${card.id}`).css("bg-primary")
                             $(`#${card.id} .total-amount`).text(card.plantotalAmount)
                             $(`#${card.id} .amount-payable`).text(card.planDiscountedAmount)
                         })

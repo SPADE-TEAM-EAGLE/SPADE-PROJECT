@@ -44,7 +44,7 @@ $.ajax({
         ...response.taskNotify,
         ...response.tenantNotify
       ];
-      console.log(notification)
+      notification.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
     notification?.forEach((item) => {
         if(item.invoiceID){
             $("#notification-container").append(
