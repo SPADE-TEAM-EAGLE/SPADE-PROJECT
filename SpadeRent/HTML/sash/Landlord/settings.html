@@ -1846,36 +1846,17 @@
         </div>
     </div> -->
     <!-- modal end  -->
-    <div class="modal fade" id="successfully_changed" tabindex="-1" role="dialog">
+    <div class="modal fade" id="myModal_warning_connection" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered text-center" role="document">
             <div class="modal-content modal-content-demo">
                 <div class="modal-body p-0">
-                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
-                        <!-- <div class="card-header border-0 pt-3">
-                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
-                            </button>
-                        </div> -->
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
                         <div class="card-body text-center">
-                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
-                                    viewBox="0 0 24 24">
-                                    <path fill="#13bfa6"
-                                        d="M10.3125,16.09375a.99676.99676,0,0,1-.707-.293L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328l-6.1875,6.1875A.99676.99676,0,0,1,10.3125,16.09375Z"
-                                        opacity=".99" />
-                                    <path fill="#71d8c9"
-                                        d="M12,2A10,10,0,1,0,22,12,10.01146,10.01146,0,0,0,12,2Zm5.207,7.61328-6.1875,6.1875a.99963.99963,0,0,1-1.41406,0L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328Z" />
-                                </svg></span>
-                            <!-- <h4 class="h4 mb-0 mt-3 fw-bold">Success</h4> -->
-                            <p class="card-text text-dark" id="successfully_changed_text"></p>
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24"><path fill="#fad383" d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z"/><circle cx="12" cy="16" r="1" fill="#f7b731"/><path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"/></svg></span>
+                            <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
+                            <p class="card-text text-dark m-0">Sorry! Something went wrong.</p>
+                            <p class="card-text text-dark m-0">Kindly check your internet connection or please try again later.</p>
                         </div>
-                        <!-- <div class="card-footer text-center border-0 pt-0">
-                            <div class="row">
-                                <div class="text-center">
-                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">cancel</a>
-                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">delete</a>
-                                </div>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
             </div>
@@ -2155,8 +2136,7 @@
                                                 class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
                                         <div class="d-flex country">
-                                            <img src="../assets\header-img\circlels.png" alt="profile-user"
-                                                class="avatarr profile-user nav-link brroundd cover-image light-layout">
+                                            <img id="user-img-dark" src="../assets\header-img\circlels.png" alt="profile-user" class="avatarr profile-user nav-link brroundd cover-image light-layout">
                                         </div>
                                         <div class="dropdown d-flex profile-1 country">
                                             <a href="javascript:void(0)" data-bs-toggle="dropdown"
@@ -2981,7 +2961,7 @@
                                                                                                         <button
                                                                                                             class="btn btn-lg btn-block btn-free font-weight-bold text-warning border-btn card-btnn"
                                                                                                             data-id="2">
-                                                                                                            Upgrade to
+                                        <span>Upgrade</span> to
                                                                                                             Basic
                                                                                                             <!-- <i class="fa fa-long-arrow-right mt-1 float-right text-warning" aria-hidden="true"></i> -->
                                                                                                             <img src="../assets/images/arrow-yellow.svg"
@@ -3110,7 +3090,7 @@
                                                                                                         <button
                                                                                                             class="btn btn-lg btn-block btn-free font-weight-bold btn3-green card-btnn"
                                                                                                             data-id="3">
-                                                                                                            Upgrade to
+                                                                                                            <span>Upgrade</span> to
                                                                                                             Pro
                                                                                                             <!-- <i class="fa fa-long-arrow-right mt-1 float-right text3-green" aria-hidden="true"></i> -->
                                                                                                             <img src="../assets/images/arrow-blue.svg"
@@ -3245,7 +3225,7 @@
                                                                                                         <button
                                                                                                             class="btn btn-lg btn-block btn-free font-weight-bold btn4-blue border-btn card-btnn"
                                                                                                             data-id="4">
-                                                                                                            Upgrade to
+                                                                                                            <span>Upgrade</span> to
                                                                                                             Basic
                                                                                                             <!-- <i class="fa fa-long-arrow-right mt-1 float-right text4-blue" aria-hidden="true"></i> -->
                                                                                                             <img src="../assets/images/arrow-blue1.svg"
@@ -3494,7 +3474,7 @@
                                                                                                         <button
                                                                                                             class="btn btn-lg btn-block btn-free font-weight-bold text-white btn-warning border-btn card-btnn"
                                                                                                             data-id="6">
-                                                                                                            Upgrade to
+                                                                                                            <span>Upgrade</span> to
                                                                                                             Basic
                                                                                                             <!-- <i class="fa fa-long-arrow-right mt-1 float-right text-warning" aria-hidden="true"></i> -->
                                                                                                             <img src="../assets/images/arrow-yellow.svg"
@@ -3645,7 +3625,7 @@
                                                                                                         <button
                                                                                                             class="btn btn-lg btn-block btn-free font-weight-bold btn3-green card-btnn"
                                                                                                             data-id="7">
-                                                                                                            Upgrade to
+                                                                                                            <span>Upgrade</span> to
                                                                                                             Pro
                                                                                                             <!-- <i class="fa fa-long-arrow-right mt-1 float-right text3-green" aria-hidden="true"></i> -->
                                                                                                             <img src="../assets/images/arrow-blue.svg"
@@ -3798,7 +3778,7 @@
                                                                                                         <button
                                                                                                             class="btn btn-lg btn-block btn-free font-weight-bold btn4-blue border-btn card-btnn"
                                                                                                             data-id="8">
-                                                                                                            Upgrade to
+                                                                                                            <span>Upgrade</span> to
                                                                                                             Basic
                                                                                                             <!-- <i class="fa fa-long-arrow-right mt-1 float-right text4-blue" aria-hidden="true"></i> -->
                                                                                                             <img src="../assets/images/arrow-blue1.svg"
@@ -7211,7 +7191,7 @@
                                             <div class="tab-pane mt-0 active" id="tab11">
                                                 <div class="card-body pt-0" id="tab11_tab_preview">
                                                     <h2 class="h2-personal-inf text-dark">Select a Template</h2>
-                                                    .
+                                                    
                                                     <hr style="background-color: #D3D3D3;">
                                                     <div class="row">
                                                         <div class="col-xl-3 col-md-6 col-sm-12">
@@ -7309,8 +7289,10 @@
                                                         <img src="../assets/images/Artboard GÇô 1.svg" style="max-width: 110px;" alt="logo">
                                                         <span class="fw-bold">Date: 02/03/2022</span>
                                                     </div>
+                                                    <!-- <div class=""><input type="checkbox" id="spanToggle"></div> -->
                                                     <div id="summernote">
-                                                        
+                                                        <p><b>Subject:</b> <font color="#1467b0"><b>INV-89900A</b></font> <font color="#000000">from John Adams (IT Company)</font></p><p><font color="#000000"><br></font></p><p><font color="#000000">Please find attached your rent invoice with number INV-89900A.&nbsp;</font></p><p><span style="color: rgb(0, 0, 0);">and Due Date: 02/03/2022 If you have any questions, please&nbsp;</span></p><p><font color="#000000">let us know.&nbsp;</font></p><p><font color="#000000">Have a great day and thank you for your business!&nbsp;</font></p><p><font color="#000000">Sincerely</font></p><p><font color="#000000"><b>John Adams</b><br></font></p><p><font color="#1467b0">IT Company</font><br></p><p><font color="#000000"><br></font></p>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -8555,6 +8537,8 @@
         <!-- INTERNAL INDEX JS -->
         <!-- <script src="../assets/js/index1.js"></script> -->
 
+        <script src="../assets/js/modal_functionality.js"></script>
+
         <!-- INTERNAL intlTelInput js-->
         <script src="../assets/plugins/intl-tel-input-master/intlTelInput.js"></script>
         <script src="../assets/plugins/intl-tel-input-master/country-select.js"></script>
@@ -8642,6 +8626,29 @@
 
         <!-- <script src="https://code.jquery.com/jquery-latest.min.js"></script> -->
 <script>
+    $(document).ready(function () {
+        $('#save_invoice_template_button').click(function () {
+    const divToSave = document.getElementById('invoice_div');
+    const divContent = divToSave.innerHTML;
+    // console.log(divContent); 
+    
+    const summernoteDiv = document.getElementById('myform_editor');
+    const htmlContent = summernoteDiv.innerHTML;
+    console.log(htmlContent);
+  
+                });
+                $('#close_invoice_template_button').click(function () {
+                    const tab11_tab_preview = document.getElementById('tab11_tab_preview');
+                    const tab11_tab_preview_invoice = document.getElementById('tab11_tab_preview_invoice');
+                    tab11_tab_preview.classList.remove('d-none');
+                    tab11_tab_preview_invoice.classList.add('d-none');
+                });
+                $('#preview_invoice').click(function () {
+                    const tab11_tab_preview = document.getElementById('tab11_tab_preview');
+                    const tab11_tab_preview_invoice = document.getElementById('tab11_tab_preview_invoice');
+                    tab11_tab_preview.classList.add('d-none');
+                    tab11_tab_preview_invoice.classList.remove('d-none');
+                });
     	$('.layout-setting').on("click", function(e) {
 		if (!(document.querySelector('body').classList.contains('dark-mode'))) {
 			$('body').addClass('dark-mode');
@@ -8725,9 +8732,10 @@
             $('#myonoffswitch1').prop('checked', true);
 		
 	});
+});
 </script>
         <script>
-            let categoryData; var counter = 0; var image_url = " "; var image_key = " ";
+            let categoryData; var image_url = " "; var image_key = " ";
             let password_validate1 = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
             var validconfirmPassword1 = document.getElementById("id_password1");
             let confirmPassword1 = document.getElementById("id_password2");
@@ -8812,6 +8820,7 @@
                             }
                             console.log(response)
                             $("#user-img").attr("src",response.image)
+                            $("#user-img-dark").attr("src",response.image)
                             $("#firstName").val(toTitleCase(response.firstName))
                             $("#lastName").val(toTitleCase(response.lastName))
                             $("#email").val(response.email)
@@ -8826,7 +8835,26 @@
                                 image_key = response.imageKey
                             }
                             $('#profile').css('background-image', 'url(' + response.image + ')').addClass('hasImage');
-                            $(`#${response.planID}`).addClass("card-primary")
+                            [2,3,4,5,6,7].forEach(function(item){
+                                if(item<parseInt(response.planID)){
+                                    $(`#${item} `).removeClass("bg-primary")
+                                    $(`#${item} .card-btnn span`).text("Downgrade")
+                                    $(`#${item} `).removeClass("bg-primary")
+                                    $(`#${item} .card-btnn span`).text("Downgrade")
+                                }else if(item>parseInt(response.planID)){
+                                    $(`#${item}`).removeClass("bg-primary")
+                                    $(`#${item} .card-btnn span`).text("Upgrade")
+                                }else{
+                                    $(`#${item} .card-btnn`).addClass("bg-primary").text("Selected")
+                                    $(`#${parseInt(response.planID)+3} .card-btnn`).addClass("bg-primary").text("Selected")
+                                    
+                                }
+                                
+                            })
+                            
+                            $(`#${response.planID}`).addClass("bg-primary")
+                            $(`#${parseInt(response.planID)+3}`).addClass("bg-primary")
+                        
                         },
                         error: function (xhr, status, error) {
                             console.log('Error occurred while fetching state and city data.');
@@ -9210,8 +9238,12 @@
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
+
                             $("#myModal_success p").text("Succesfully Updated!!!")
                             $("#myModal_success").modal("show")
+
+                            
+                            
                             getData()
                         },
                         error: function (xhr, status, error) {
@@ -9296,6 +9328,7 @@
                             //     this
                             // })
                             console.log($(`#${card.id}`))
+                            // $(`#${card.id}`).css("bg-primary")
                             $(`#${card.id} .total-amount`).text(card.plantotalAmount)
                             $(`#${card.id} .amount-payable`).text(card.planDiscountedAmount)
                         })
@@ -9498,28 +9531,7 @@
 
             $(document).ready(function () {
                 
-                $('#save_invoice_template_button').click(function () {
-    const divToSave = document.getElementById('invoice_div');
-    const divContent = divToSave.innerHTML;
-    // console.log(divContent); 
-    
-    const summernoteDiv = document.getElementById('myform_editor');
-    const htmlContent = summernoteDiv.innerHTML;
-    console.log(htmlContent);
-  
-                });
-                $('#close_invoice_template_button').click(function () {
-                    const tab11_tab_preview = document.getElementById('tab11_tab_preview');
-                    const tab11_tab_preview_invoice = document.getElementById('tab11_tab_preview_invoice');
-                    tab11_tab_preview.classList.remove('d-none');
-                    tab11_tab_preview_invoice.classList.add('d-none');
-                });
-                $('#preview_invoice').click(function () {
-                    const tab11_tab_preview = document.getElementById('tab11_tab_preview');
-                    const tab11_tab_preview_invoice = document.getElementById('tab11_tab_preview_invoice');
-                    tab11_tab_preview.classList.add('d-none');
-                    tab11_tab_preview_invoice.classList.remove('d-none');
-                });
+               
                 $('input[type="radio"]').click(function () {
                     var inputValue = $(this).attr("value");
                     var targetBox = $("." + inputValue);

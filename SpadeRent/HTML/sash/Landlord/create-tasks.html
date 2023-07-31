@@ -1562,8 +1562,7 @@
                                                 class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
                                         <div class="d-flex country">
-                                            <img src="../assets\header-img\circlels.png" alt="profile-user"
-                                                class="avatarr profile-user nav-link brroundd cover-image light-layout">
+                                            <img id="user-img-dark" src="../assets\header-img\circlels.png" alt="profile-user" class="avatarr profile-user nav-link brroundd cover-image light-layout">
                                         </div>
                                         <div class="dropdown d-flex profile-1 country">
                                             <a href="javascript:void(0)" data-bs-toggle="dropdown"
@@ -2665,7 +2664,8 @@
                 },
                 success: function ({ user,image }) {
                     // console.log()
-                    $("#user-img").attr("src",image)
+$("#user-img").attr("src",image)
+                    $("#user-img-dark").attr("src",image)                    
                     function toTitleCase(str) {
                         return str.replace(/\w\S*/g, function (txt) {
                             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
@@ -3542,7 +3542,7 @@
                             setTimeout(function() {
                                 $('#myModal_warning_connection').modal('hide');
 
-                            }, 2000);
+                            }, 2000); 
                     console.log('Error: ' + error);
                 }
             });

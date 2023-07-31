@@ -1086,7 +1086,7 @@
                                             <img id="user-img" src="../assets\header-img\spade.svg" alt="profile-user" class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
                                         <div class="d-flex country">
-                                            <img src="../assets\header-img\circlels.png" alt="profile-user" class="avatarr profile-user nav-link brroundd cover-image light-layout">
+                                            <img id="user-img-dark" src="../assets\header-img\circlels.png" alt="profile-user" class="avatarr profile-user nav-link brroundd cover-image light-layout">
                                         </div>
                                         <div class="dropdown d-flex profile-1 country">
                                             <a href="javascript:void(0)" data-bs-toggle="dropdown" class="nav-link leading-none d-flex">
@@ -1887,6 +1887,7 @@
     <!-- PIETY CHART JS-->
     <script src="../assets/plugins/peitychart/jquery.peity.min.js"></script>
     <script src="../assets/plugins/peitychart/peitychart.init.js"></script>
+    <script src="../assets/js/modal_functionality.js"></script>
 
     <!-- SIDEBAR JS -->
     <script src="../assets/plugins/sidebar/sidebar.js"></script>
@@ -1998,6 +1999,29 @@
             window.open('./login_module.html', "_blank")
             console.log('Done');
         }
+        $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/protected',
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function ({ image,user }) {
+                    function toTitleCase(str) {
+            return str.replace(/\w\S*/g, function(txt) {
+                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+            });
+        }
+$("#user-img").attr("src",image)
+$("#header-user").text(toTitleCase(user))
+$("#user-name").text(user)
+                    $("#user-img-dark").attr("src",image)                },
+                error: function (xhr, status, error) {
+                    console.log('Error occurred while fetching state and city data.');
+                    console.log(xhr);
+                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                }
+            });
     </script>
 </body>
 
