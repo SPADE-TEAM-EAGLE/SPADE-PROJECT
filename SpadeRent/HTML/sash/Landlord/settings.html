@@ -2928,8 +2928,8 @@
                                                                                         </div>
                                                                                         <div
                                                                                             class="col-lg-3 col-xl-3 col-md-8 col-sm-12 mb-3">
-                                                                                            <div class="h-100 card p-3 pricing-card card-boder-warning card-primary
-                                                                                                id=" 5">
+                                                                                            <div class="h-100 card p-3 pricing-card card-boder-warning card-primary"
+                                                                                                id="5">
                                                                                                 <div
                                                                                                     class="card-headerr d-block text-justified pt-2">
                                                                                                     <strong
@@ -2961,8 +2961,8 @@
                                                                                                         <button
                                                                                                             class="btn btn-lg btn-block btn-free font-weight-bold text-warning border-btn card-btnn"
                                                                                                             data-id="2">
-                                        <span>Upgrade</span> to
-                                                                                                            Basic
+                                        <span>Upgrade to Basic</span>
+                                                                                                            
                                                                                                             <!-- <i class="fa fa-long-arrow-right mt-1 float-right text-warning" aria-hidden="true"></i> -->
                                                                                                             <img src="../assets/images/arrow-yellow.svg"
                                                                                                                 class="float-right mt-1 mr-2 "
@@ -3090,8 +3090,8 @@
                                                                                                         <button
                                                                                                             class="btn btn-lg btn-block btn-free font-weight-bold btn3-green card-btnn"
                                                                                                             data-id="3">
-                                                                                                            <span>Upgrade</span> to
-                                                                                                            Pro
+                                                                                                            <span>Upgrade to Pro</span>
+                                                                                                            
                                                                                                             <!-- <i class="fa fa-long-arrow-right mt-1 float-right text3-green" aria-hidden="true"></i> -->
                                                                                                             <img src="../assets/images/arrow-blue.svg"
                                                                                                                 class="float-right mt-1 mr-2 "
@@ -3225,8 +3225,8 @@
                                                                                                         <button
                                                                                                             class="btn btn-lg btn-block btn-free font-weight-bold btn4-blue border-btn card-btnn"
                                                                                                             data-id="4">
-                                                                                                            <span>Upgrade</span> to
-                                                                                                            Basic
+                                                                                                            <span>Upgrade to Basic</span>
+                                                                                                            
                                                                                                             <!-- <i class="fa fa-long-arrow-right mt-1 float-right text4-blue" aria-hidden="true"></i> -->
                                                                                                             <img src="../assets/images/arrow-blue1.svg"
                                                                                                                 class="float-right mt-1 mr-2 "
@@ -8811,16 +8811,27 @@
                             $('#profile').css('background-image', 'url(' + response.image + ')').addClass('hasImage');
                             [2,3,4,5,6,7].forEach(function(item){
                                 if(item<parseInt(response.planID)){
+                                    
+                                    
+                                    $(`#${item} .card-btnn span`).text(function(_, currentText) {
+  const splitText = currentText.split(" ");
+  // Concatenate all elements except the first one (index 0)
+  const concatenatedText = splitText.slice(1).join("");
+  return "Downgrade" + concatenatedText;
+});
                                     $(`#${item} `).removeClass("bg-primary")
-                                    $(`#${item} .card-btnn span`).text("Downgrade")
-                                    $(`#${item} `).removeClass("bg-primary")
-                                    $(`#${item} .card-btnn span`).text("Downgrade")
+                                    
                                 }else if(item>parseInt(response.planID)){
                                     $(`#${item}`).removeClass("bg-primary")
-                                    $(`#${item} .card-btnn span`).text("Upgrade")
+                                    $(`#${item} .card-btnn span`).text(function(_, currentText) {
+  const splitText = currentText.split(" ");
+  // Concatenate all elements except the first one (index 0)
+  const concatenatedText = splitText.slice(1).join("");
+  return "Upgrade" + concatenatedText;
+});
                                 }else{
-                                    $(`#${item} .card-btnn`).addClass("bg-primary").text("Selected")
-                                    $(`#${parseInt(response.planID)+3} .card-btnn`).addClass("bg-primary").text("Selected")
+                                    $(`#${item} .card-btnn span`).empty()
+                                    $(`#${item} .card-btnn span`).text("Selected")
                                     
                                 }
                                 

@@ -3605,19 +3605,20 @@ $("#user-img").attr("src",image)
                             taskName += '</span>' + '</td>';
 
                             var assignTo = '<td style="font-weight: 600;text-align: center;display: flex;">' +
-                                (task.AssignTo?.map(({
-                                    name,
-                                    email
-                                }) => {
-                                    return `
-            <div class="me-2">
-                <img class="avatar brround avatar-md" src="../assets/images/users/2.jpg" alt="avatar-img">
-                <div class="media-body valign-middle mt-0">
-                    <a href="javascript:void(0)" class="text-dark fw-semibold">${name}</a>
-                </div>
-            </div>`;
-                                }) || "Not assigned") +
-                                '</td>';
+    (task.AssignTo?.map(({
+        name,
+        email
+    }) => {
+        return `
+        <div class="me-2">
+            <img class="avatar brround avatar-md" src="../assets/images/users/2.jpg" alt="avatar-img">
+            <div class="media-body valign-middle mt-0">
+                <a href="javascript:void(0)" class="text-dark fw-semibold">${name}</a>
+            </div>
+        </div>`;
+    }).join("") || "Not assigned") +
+    '</td>';
+
 
                             var dueDate = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + (task.dueDate || "Not Set") + '</p>' + `<span class="font-weight-normal text-danger"> <i
                                                                         class="fe fe-circle me-1"></i>${task.priority}</span>` + '</td>';
