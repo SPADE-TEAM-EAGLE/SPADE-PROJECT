@@ -311,9 +311,9 @@
             transition: all 1s ease;
         }
         
-        .fade {
+        /* .fade {
             opacity: 0;
-        }
+        } */
         
         .btnstyle {
             font-size: 1.5rem !important;
@@ -463,6 +463,40 @@
                             <p class="card-text text-dark m-0">Sorry! Something went wrong.</p>
                             <p class="card-text text-dark m-0">Kindly check your internet connection or please try again later.</p>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="infoModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
+                        <!-- <div class="card-header border-0 pt-3">
+                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                            </button>
+                        </div> -->
+                        <div class="card-body text-center">
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24">
+                                <path fill="#13bfa6"
+                                  d="M10.3125,16.09375a.99676.99676,0,0,1-.707-.293L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328l-6.1875,6.1875A.99676.99676,0,0,1,10.3125,16.09375Z"
+                                  opacity=".99" />
+                                <path fill="#71d8c9"
+                                  d="M12,2A10,10,0,1,0,22,12,10.01146,10.01146,0,0,0,12,2Zm5.207,7.61328-6.1875,6.1875a.99963.99963,0,0,1-1.41406,0L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328Z" />
+                              </svg></span>
+                            <h4 class="h4 mb-0 mt-3 fw-bold">Info</h4>
+                            <p class="card-text text-dark">Sended Successfully</p>
+                        </div>
+                        <!-- <div class="card-footer text-center border-0 pt-0">
+                            <div class="row">
+                                <div class="text-center">
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">delete</a>
+                                </div>
+                            </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -715,7 +749,7 @@
                         // window.alert(xhr.statusText)
                         document.getElementById("verification-spans").style.display = "block";
                         $("#verification").addClass("is-invalid")
-                        console.error(xhr.responseText);
+                        // console.error(xhr.responseText);
                     }
                 });
 
@@ -810,12 +844,12 @@ send_again.addEventListener("click", function() {
                         id: user_id
                     }),
                     success: function(response) {
-                        $("#myModal_warning_connection").modal("show");
+                        $("#infoModal").modal("show");
                             setTimeout(function() {
-                                $('#myModal_warning_connection').modal('hide');
+                                $('#infoModal').modal('hide');
 
-                            }, 2000);
-                    console.log(xhr.responseText);
+                            }, 4000);
+                    // console.log(xhr.responseText);
                         // window.alert(response.message)
                         seconds = 120
                         counterElement.innerHTML = "2:00";
@@ -826,7 +860,7 @@ send_again.addEventListener("click", function() {
                     },
                     error: function(xhr, status, error) {
                         // window.alert(xhr.statusText)
-                        console.error(xhr.responseText);
+                        // console.error(xhr.responseText);
                     }
                 });
 
