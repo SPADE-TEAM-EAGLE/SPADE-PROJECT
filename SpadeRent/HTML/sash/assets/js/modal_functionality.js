@@ -258,7 +258,7 @@ function resetAccordions() {
         // Reset image input
         if (imageField.length) {
             imageField.val('');
-            imageField.siblings('label.custom-file-label').find('.custom-file-text span').first().text('Upload Photo or drag and drop here');
+            imageField.siblings('label.custom-file-label').find('.custom-file-text span').first().text('Upload Photo here');
             imageField.siblings('.selected-files').find('.file-grid').empty();
         }
         $('#accordion-item1').find('.file-grid').empty();
