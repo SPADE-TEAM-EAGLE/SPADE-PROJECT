@@ -401,7 +401,7 @@ exports.selectAllTenants = `SELECT p.id as propertyID, p.propertyName, p.address
 FROM tenants AS t 
 INNER JOIN property AS p ON t.propertyID = p.id 
 INNER JOIN propertyunits AS pu ON t.propertyUnitID = pu.id 
-INNER JOIN invoice AS i ON t.id = i.tenantID
+LEFT JOIN invoice AS i ON t.id = i.tenantID
 WHERE t.landlordID = ?;
 `;
 exports.addTasksQuery = "INSERT INTO task (taskName, tenantID, dueDate,status, priority, notes, notifyTenant, notifyVendor, created_at , createdBy,landlordID) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
