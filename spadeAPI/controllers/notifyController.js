@@ -115,7 +115,7 @@ const notifyController = {
                 userId
             ]);
             res.status(200).json({
-                propertyNotify: property[0],
+                propertyNotify: property[0], 
                 taskNotify: task[0],
                 invoiceNotify: invoice[0]
             });
