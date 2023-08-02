@@ -12,8 +12,6 @@ $.ajax({
         }
     $("#user-name").text(toTitleCase(user))
     $("#header-user").text(toTitleCase(user))
-        
-
     },
     error: function(xhr, status, error) {
         console.log('Error occurred while fetching state and city data.');
