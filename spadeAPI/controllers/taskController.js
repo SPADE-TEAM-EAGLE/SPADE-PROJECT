@@ -303,14 +303,15 @@ exports.addTasks = async (req, res) => {
     note,
     notifyTenant,
     notifyVendor,
-    images
+    images,
+    notify
     // created_at,
     // created_by,
   } = req.body;
-  console.log(req.body)
+
   const vendorID = assignee
   const { userId, userName } = req.user;
-  
+
   const currentDate = new Date();
   try {
     // console.log(1);
@@ -321,6 +322,7 @@ exports.addTasks = async (req, res) => {
     if (addTasksCheckResult[0].length > 0) {
       return res.send("Task already exists");
     } else {
+      // taskName, tenantID, dueDate,status, priority, notes, notifyTenant, notifyVendor, created_at , createdBy,landlordID
       const TasksResult = await queryRunner(addTasksQuery, [
         task,
         property,
@@ -332,7 +334,8 @@ exports.addTasks = async (req, res) => {
         notifyVendor,
         currentDate,
         userName,
-        userId
+        userId,
+        notify
       ]);
       if (TasksResult.affectedRows === 0) {
         return res.status(400).send("Error1");
@@ -633,7 +636,8 @@ exports.updateTasks = async (req, res) => {
       taskID
     ]);
     if (TasksResult.affectedRows === 0) {
-      throw new Error("data doesn't inserted in task table");
+      // throw new Error("data doesn't inserted in task table");
+      res.send("Error1");
     }
     const propertycheckresult = await queryRunner(
       selectQuery("taskimages", "taskID"),

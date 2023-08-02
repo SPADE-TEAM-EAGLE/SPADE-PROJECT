@@ -1,4 +1,4 @@
-const { selectQuery, getTenantNotify, getPropertyNotify, getTaskNotify, getInvoiceNotify, insertNotify, updateNotify, getTenantPropertyNotify, getTenantTaskNotify, getTenantInvoiceNotify } = require("../constants/queries");
+const { selectQuery, getTenantNotify, getPropertyNotify, getTaskNotify, getInvoiceNotify, insertNotify, updateNotify, getTenantPropertyNotify, getTenantTaskNotify, getTenantInvoiceNotify, updatePropertyNotifyReadUnRead, updateTenantNotifyReadUnRead, updateTaskNotifyReadUnRead, updateInvoiceNotifyReadUnRead } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
 
 const notifyController = {
@@ -70,6 +70,7 @@ const notifyController = {
     getNotify: async (req, res) => {
         //get property , tenants , task invoice from tables individually
         const { userId } = req.user;
+        console.log(userId)
         try {
             // get data from property table
             const getTenantsNotify = await queryRunner(getTenantNotify, [
@@ -123,7 +124,45 @@ const notifyController = {
                 message: error.message
             })
         }
+    },
+    updateUserPropertyReadUnRead: async (req, res) => {
+        try {
+            const { notify, id, type } = req.body;
+            const updateData = [notify, id]
+            const updateFunctions = {
+                property: updatePropertyNotifyReadUnRead,
+                tenant: updateTenantNotifyReadUnRead,
+                task: updateTaskNotifyReadUnRead,
+                invoice: updateInvoiceNotifyReadUnRead,
+            };
+            const updateQueryFunction = updateFunctions[type];
+            if (updateQueryFunction) {
+                updateQueryReadUnRead(updateQueryFunction, updateData, res);
+            } else {
+                res.status(400).json({
+                    message: 'Invalid type provided.',
+                });
+            }
+        } catch (error) {
+            res.status(400).json({
+                message: error.message,
+            });
+        }
     }
 }
 
 module.exports = notifyController;
+
+
+async function updateQueryReadUnRead(queryFun, updateData, res) {
+    const updatedNotifyData = await queryRunner(queryFun, updateData);
+    if (updatedNotifyData[0].affectedRows) {
+        res.status(200).json({
+            message: "Updated Successfully!"
+        });
+    } else {
+        res.status(400).json({
+            message: "Something went wrong!"
+        });
+    }
+}

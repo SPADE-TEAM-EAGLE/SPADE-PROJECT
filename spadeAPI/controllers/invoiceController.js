@@ -46,7 +46,8 @@ exports.createInvoice = async (req, res) => {
     lineItems,
     sendmails,
     totalAmount,
-    images
+    images,
+    notify
   } = req.body;
   try {
     const { userId } = req.user;
@@ -56,7 +57,7 @@ exports.createInvoice = async (req, res) => {
     //   throw new Error("Please fill all the fields");
     // }
     const currentDate = new Date();
-    const invoiceResult = await queryRunner(insertInvoice, [userId, tenantID, invoiceType, startDate, endDate, frequency, dueDate, dueDays, repeatTerms, terms, additionalNotes, "Unpaid", currentDate, totalAmount, startDate]);
+    const invoiceResult = await queryRunner(insertInvoice, [userId, tenantID, invoiceType, startDate, endDate, frequency, dueDate, dueDays, repeatTerms, terms, additionalNotes, "Unpaid", currentDate, totalAmount, startDate,notify]);
     if (invoiceResult.affectedRows === 0) {
       res.status(400).send('Error occur in creating invoice');
     } else {
@@ -301,7 +302,6 @@ exports.UpdateInvoice = async (req, res) => {
     if (selectTenantsResult[0].length > 0) {
       const tenantEmail = selectTenantsResult[0][0].email;
       const tenantName = selectTenantsResult[0][0].firstName + " " + selectTenantsResult[0][0].lastName;
-
       const mailSubject = invoiceID + " From " + frequency;
       sendMail.invoiceSendMail(tenantName, tenantEmail, mailSubject, dueDays, invoiceID, frequency, userId);
     }
@@ -316,9 +316,7 @@ exports.UpdateInvoice = async (req, res) => {
           const property = lineItems[i].property;
           const memo = lineItems[i].memo;
           const amount = lineItems[i].amount;
-
           const invoiceLineItemsResult = await queryRunner(insertLineItems, [invoiceID, category, property, memo, amount]);
-
           if (invoiceLineItemsResult.affectedRows === 0) {
             return res.send('Error occurred while inserting invoice line items');
           }
@@ -333,21 +331,15 @@ exports.UpdateInvoice = async (req, res) => {
         selectQuery("invoiceimages", "invoiceID"),
         [invoiceID]
       );
-      // console.log(images, propertycheckresult[0])
-
       // Extract the image keys from propertycheckresult
       const propertyImageKeys = invoiceCheckResult[0].map(image => image.ImageKey);
-      console.log(invoiceCheckResult[0])
-      console.log(propertyImageKeys)
       // Find the images to delete from S3 (present in propertycheckresult but not in images)
       const imagesToDelete = invoiceCheckResult[0].filter(image => !images.some(img => img.imageKey === image.ImageKey));
-      console.log(imagesToDelete)
       // Delete images from S3
       for (let i = 0; i < imagesToDelete.length; i++) {
         await deleteImageFromS3(imagesToDelete[i].ImageKey);
         await queryRunner(delteImageForInvoiceImages, [imagesToDelete[i].ImageKey]);
       }
-
       // Find the images to insert into the database (present in images but not in propertycheckresult)
       const imagesToInsert = images.filter(image => !propertyImageKeys.includes(image.imageKey));
 
@@ -400,7 +392,6 @@ exports.UpdateInvoice = async (req, res) => {
         message: "Invoice updated successfully"
       });
     }
-
     return res.status(400).json({
       message: "No tenants found"
     });
@@ -409,11 +400,7 @@ exports.UpdateInvoice = async (req, res) => {
     return res.status(400).send("Error occurred while updating invoice");
   }
 };
-
 //  ############################# Update Invoice END ############################################################
-
-
-
 //  ############################# Delete invoice Start ############################################################
 exports.invoiceDelete = async (req, res) => {
   try {
@@ -456,11 +443,7 @@ exports.invoiceDelete = async (req, res) => {
   }
 };
 //  ############################# Delete invoice End ############################################################
-
-
-
 //  ############################# Create Invoice Start ############################################################
-
 exports.resendEmail = async (req, res) => {
   const { invoiceID } = req.query;
   const { userId } = req.user;
@@ -484,7 +467,6 @@ exports.resendEmail = async (req, res) => {
   }
 }
 //  ############################# Resend Email Invoice END ############################################################
-
 // ############################# create invoice categories ############################################################
 // exports.createInvoiceCategories = async (req, res) => {
 //   try {
@@ -533,8 +515,6 @@ exports.createInvoiceCategories = async (req, res) => {
         console.log(`Category ${category.categoryName} not found in the database`);
       }
     }
-
-
     const filteredCategories = data.filter((category) => {
       return !categoriesFromDb[0].some((categoryFromDb) => {
         return category.categoryName === categoryFromDb.categorieName;

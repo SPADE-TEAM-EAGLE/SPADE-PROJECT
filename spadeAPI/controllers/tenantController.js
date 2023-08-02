@@ -57,7 +57,8 @@ exports.createTenants = async (req, res) => {
       leaseStartDate,
       leaseEndDate,
       increaseRent,
-      increaseRentData
+      increaseRentData,
+      notify
     } = req.body
     const { userId } = req.user
     // console.log(req.body)
@@ -71,7 +72,7 @@ exports.createTenants = async (req, res) => {
       const ran = Math.floor(100000 + Math.random() * 900000);
       const tenantPassword = "Spade" + ran;
       const hashPassword = await hashedPassword(tenantPassword);
-      const tenantsInsert = await queryRunner(insertTenants, [userId, firstName, lastName, companyName, email, phoneNumber, address, city, state, zipcode, propertyID, propertyUnitID, rentAmount, gross_or_triple_lease, baseRent, tripleNet, leaseStartDate, leaseEndDate, increaseRent, hashPassword, currentDate]);
+      const tenantsInsert = await queryRunner(insertTenants, [userId, firstName, lastName, companyName, email, phoneNumber, address, city, state, zipcode, propertyID, propertyUnitID, rentAmount, gross_or_triple_lease, baseRent, tripleNet, leaseStartDate, leaseEndDate, increaseRent, hashPassword, currentDate,notify]);
      
       if (tenantsInsert[0].affectedRows > 0) {
         const status = "Occupied";
@@ -83,7 +84,7 @@ exports.createTenants = async (req, res) => {
 
           // if (sendmails == "Yes") {
           const mailSubject = "You created a new tenant";
-          await invoiceSendMail(landlordName, landlordEmail, mailSubject, "dueDays", "invoiceID", "frequency");
+          await sendMail.invoiceSendMail(landlordName, landlordEmail, mailSubject, "dueDays", "invoiceID", "frequency");
           if (increaseRent == 'No') {
             res.status(200).json({
               message: "Tenants save Successful",
