@@ -100,6 +100,7 @@
 
 </head>
 
+  
 <body class="app sidebar-mini ltr light-mode">
     <div class="modal fade" id="myModal_warning_connection" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered text-center" role="document">
@@ -545,7 +546,7 @@
                                         <!-- 2 comments start  -->
                                         <div class="d-flex country">
                                             <img src="../assets\header-img\question.svg" 
-                                                class="avatarr profile-user brroundd nav-link cover-image dark-layout">
+                                                class="avatarr profile-user brroundd nav-link cover-image dark-layout" id="customIntercomButton">
                                         </div>
                                         <div class="d-flex country">
                                             <img src="../assets\header-img\question-light.webp" 
@@ -1933,6 +1934,58 @@
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
     <script>
+        console.log(document.getElementById('customIntercomButton'))
+        // Your Intercom settings (replace with your actual app_id)
+        window.intercomSettings = {
+          api_base: "https://api-iam.intercom.io",
+          app_id: "fjpx1kt1"
+        };
+      
+        // Function to open the Intercom side popup
+        function openIntercomPopup() {
+            
+          window.Intercom('show'); // This will open the Intercom side popup
+        }
+      
+        // Attach a click event listener to your custom button
+        document.getElementById('customIntercomButton').addEventListener('click', openIntercomPopup);
+      
+        // Load the Intercom widget
+        (function() {
+          var w = window;
+          var ic = w.Intercom;
+          if (typeof ic === "function") {
+            ic('reattach_activator');
+            ic('update', w.intercomSettings);
+          } else {
+            var d = document;
+            var i = function() {
+              i.c(arguments);
+            };
+            i.q = [];
+            i.c = function(args) {
+              i.q.push(args);
+            };
+            w.Intercom = i;
+            var l = function() {
+              var s = d.createElement('script');
+              s.type = 'text/javascript';
+              s.async = true;
+              s.src = 'https://widget.intercom.io/widget/fjpx1kt1';
+              var x = d.getElementsByTagName('script')[0];
+              x.parentNode.insertBefore(s, x);
+            };
+            if (document.readyState === 'complete') {
+              l();
+            } else if (w.attachEvent) {
+              w.attachEvent('onload', l);
+            } else {
+              w.addEventListener('load', l, false);
+            }
+          }
+        })();
+      </script>
+    <script>
         $(document).ready(function () {
             $('#email_verification').on('click', function () {
                 if ($('body').hasClass('dark-mode')) {
@@ -2534,6 +2587,7 @@
             ]
         }).start();
     </script>
+    
 
     <!-- demo walktrough End  -->
 

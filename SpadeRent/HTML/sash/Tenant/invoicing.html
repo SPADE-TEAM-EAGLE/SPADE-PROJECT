@@ -979,7 +979,7 @@
                                             <a href="javascript:void(0)" data-bs-toggle="dropdown" class="nav-link leading-none d-flex">
                                                 <!-- <img src="../assets/images/users/21.jpg" 
                                                     class="avatar  profile-user brround cover-image"> -->
-                                                <span class="side-menu__item dynamic-text-head" style="padding: 10px 10px;">Spade Admin</span> <i class="fe fe-chevron-down dark-mode text-dark" style="font-size: 20px; font-weight: 800;"></i>
+                                                <span class="side-menu__item dynamic-text-head" style="padding: 10px 10px;" id="tenantName">Spade Admin</span> <i class="fe fe-chevron-down dark-mode text-dark" style="font-size: 20px; font-weight: 800;"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                                 <!-- <div class="drop-heading">
@@ -2757,6 +2757,7 @@
 
 
                     $("#tenant-name").append(`<span style="font-weight: 300;">Welcome</span> ${response.data.firstName +" "+response.data.lastName}`)
+                    $("#tenantName").text(`${response.data.firstName + " " + response.data.lastName}`)
                     $("#tenant-address").empty()
                     $("#tenant-address").append(`&nbsp;&nbsp; <span><b>Pensgate St</b></span> <br>&nbsp;&nbsp; ${response.data.tAddress+ " " +response.data.tCity+ " " +response.data.tState+ " " +response.data.tZipcode}`)
                 },
@@ -2866,15 +2867,15 @@
                         // window.location = './invoicing.html'
                     }
 
-                    invoiceData = response.data[0]
-                    console.log(response.data[0])
+                    invoiceData = response?.data[0]
+                    
 
                     var tableBody = $('#table_body');
                     tableBody.empty();
                     // console.log(data[0])
                     let tenantNames = []
 
-                    response.data[0] ?.forEach(function(invoice) {
+                    response.data[0]?.forEach(function(invoice) {
 
 
                         var invoiceNumber = '<td class="invoice-id" style="font-weight: 600;">' + invoice.invoiceID + '</td>';
