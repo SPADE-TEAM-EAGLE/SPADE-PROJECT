@@ -1589,6 +1589,10 @@
         .side-headerrr .header-brand-img.desktop-logo {
             display: none;
         }
+
+        .tab-content .btn i {
+                color: #000;
+            }
     </style>
 
 </head>
@@ -2378,7 +2382,7 @@
                                                     </li>
                                                     <li><a href="#tab11"  data-bs-toggle="tab">Email Templates</a></li>
                                                     <li><a href="#tab12" data-bs-toggle="tab">Invoice Settings</a></li>
-                                                    <!-- <li><a href="#tab13" data-bs-toggle="tab">Merchant Services</a></li> -->
+                                                    <li><a href="#tab13" data-bs-toggle="tab">Bank Account</a></li>
                                                     <li><a href="#tab14" data-bs-toggle="tab">Vendors</a></li>
                                                     <li><a href="#tab15" data-bs-toggle="tab">Close Account</a></li>
                                                 </ul>
@@ -7450,18 +7454,222 @@
                                             </div>
 
                                             <div class="tab-pane mt-0" id="tab13">
-                                                <div class="card-body pt-0">
-                                                    <h2 class="h2-personal-inf">Change System Theme</h2>
-                                                    <p class="p-personal-inf">easiest all-in-one property management
-                                                        software. Lease your properties, manage work orders, automate
-                                                        accounting, and more.</p>
-                                                    <hr style="background-color: #D3D3D3;">
-                                                    <h2 class="h2-personal-inf text-dark mb-3">Appearance</h2>
-                                                    <div
-                                                        style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
-                                                    </div>
+                                                <!-- Row -->
+                        <div class="row">
+                            <div class="col-lg-12 col-xl-12">
+                                <div class="card">
+                                    <div class="card-header justify-content-between" style="display: flex; align-items: flex-end;">
+                                        <div class="d-flex">
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-outline-default text-dark py-1 mt-0" id="filter_btn" data-bs-toggle="dropdown"><i
+                                                        class="typcn typcn-filter me-2 fs-16"></i><strong >Filter</strong></button>
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <li><a href="javascript:void(0)"><strong class="text-dark">Filter by:</strong></a>
+                                                    </li>
+                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">A-Z Alphabets</a>
+                                                        <div class="form-check m-0">
+                                                            <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="alphabets" value="option1">
+                                                        </div>
+                                                    </li>
+
+                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">Ascending</a>
+                                                        <div class="form-check m-0">
+                                                            <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="ascending" value="option1">
+                                                        </div>
+                                                    </li>
+                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">Descending</a>
+                                                        <div class="form-check m-0">
+                                                            <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="descending" value="option1">
+                                                        </div>
+                                                    </li>
+                                                    <!-- <li class="d-flex justify-content-between"><a
+                                                            href="javascript:void(0)">Recently Added</a>
+                                                        <div class="form-check m-0">
+                                                            <input class="form-check-input mt-2" type="radio"
+                                                                name="exampleRadios" id="exampleRadios1" value="option1"
+                                                                checked>
+                                                        </div>
+                                                    </li> -->
+                                                </ul>
+                                            </div>
+                                            <div class="mx-2">
+                                                <!-- <div class="form-group m-0">
+                                                    <input class="form-control" placeholder="Search Users by Name, Email or Date" id="search_input" type="text">
+                                                </div> -->
+                                                <div class="main-header-center d-none d-lg-block m-0 dropdown">
+                                                    <button class="btn" style="width: fit-content; margin-top: 0px;"><i class="fe fe-search"
+                                                            aria-hidden="true"></i></button>
+                                                            <input type="text" class="form-control dropdown-toggle" id="typehead" placeholder="Search for results..." autocomplete="off" style="width: 230px;" data-bs-toggle="dropdown">
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="d-flex">
+                                            <div class="btn-group">
+                                                <button type="button" class="btn font-weight-bold text-dark" id="customize_btn" data-bs-toggle="dropdown" style="border: none;"><strong>CUSTOMIZED</strong><i
+                                                        class="fe fe-chevron-down ms-2"></i></button>
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <li><a href="javascript:void(0)" class="text-dark"><strong>Coulmns to
+                                                                Show</strong></a>
+                                                    </li>
+                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">IMAGE</a>
+                                                        <div class="form-check m-0">
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
+                                                        </div>
+                                                    </li>
+                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">PROPERTY ID</a>
+                                                        <div class="form-check m-0">
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
+                                                        </div>
+                                                    </li>
+                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">PROPERTY NAME</a>
+                                                        <div class="form-check m-0">
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
+                                                        </div>
+                                                    </li>
+                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">PROPERTY TYPE</a>
+                                                        <div class="form-check m-0">
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
+                                                        </div>
+                                                    </li>
+                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">PROPERTY UNITS</a>
+                                                        <div class="form-check m-0">
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
+                                                        </div>
+                                                    </li>
+                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">PROPERTY ADDRESS</a>
+                                                        <div class="form-check m-0">
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <button type="button" class="btn btn-primary mx-2" id="add_property_btn" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal-account"><i
+                                                    class="fe fe-plus me-2"></i><strong>ADD NEW ACCOUNT</strong></button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body p-0">
+                                        <div class="table-responsive">
+                                            <table class="table border text-nowrap text-md-nowrap mb-0" id="responsive-datatable">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th>ACCOUNT</th>
+                                                        <th>DESCRIPTION</th>
+                                                        <th>STATUS</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="table_body">
+                                                    <tr>
+                                                        <td></td>
+                                                        <td><b>Operating Account</b></td>
+                                                        <td>Generate Lorem Ipsum placeholder text for use in your graphic discover plugins for <br> your favorite writing, design and blogging tools</td>
+                                                        <td><b style="color: #25CF54;">Active</b></td>
+                                                        <td><button type="button" class="btn btn-light btn-pill mt-0" id="add_property_btn" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModalll"><strong>Connect to Bank</strong></button></td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td></td>
+                                                        <!-- <td><label class="custom-control custom-checkbox-md">
+                                                            <input type="checkbox" class="custom-control-input" name="example-checkbox5" value="option5" checked="">
+                                                            <span class="custom-control-label"></span>
+                                                        </label></td> -->
+                                                        <td><b>Payment Test</b></td>
+                                                        <td>Generate Lorem Ipsum placeholder text for use in your graphic discover plugins for <br> your favorite writing, design and blogging tools</td>
+                                                        <td><b style="color: #898989;">Not Started</b></td>
+                                                        <td><button type="button" class="btn btn-light btn-pill mt-0" id="add_property_btn" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModalll"><strong>Connect to Bank</strong></button></td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Row -->
+                                            </div>
+
+                                                <!-- Modal -->
+    <div class="modal fade" id="addModal-account" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="text-justify ps-2 border-model-line">
+                        <h2 class="modal-title">New <strong class="color-primary">Account</strong></h2>
+                        <span class="">Spade Rent allows you to add a range of commercial and residential properties,
+                            from condos and single-family homes to retail stores and parking lots.</span>
+
+                    </div>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="top-close">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="accordion-item mb-4" id="accordion-item1">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button text-white" id="accordian-button-1" type="button" data-bs-toggle="collapse" onclick="checkFieldsFilled('accordion-item1')" id="accordion-button1" data-bs-target="#collapseOne-add-property" aria-expanded="true" aria-controls="collapseOne-add-property">
+                                <span class="m-0 me-4 fs-1" style="font-weight: bold;">01</span>
+                                <h3 class="m-0"><strong>Account Info</strong> <i class="fi fi-rs-pencil"></i><i
+                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
+                                </h3>
+                            </button>
+                        </h2>
+                        <div id="collapseOne-add-property" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <form class="row g-3" enctype="multipart/form-data">
+                                    <div class="col-md-12">
+                                        <label for="inputPassword4" class="form-label fw-bold">Account Name <spnan
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control form" id="propertyName" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the name of the property." data-bs-container="#addModal">
+                                        <span class="text-danger d-none">Property name required!</span>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="inputAddress" class="form-label fw-bold">Description <spnan
+                                                class="text-danger">*</span></label>
+                                                <textarea class="form-control mb-4" placeholder="Enter Description" required="" rows="3"></textarea>
+                                        <span class="text-danger d-none">Description is required!</span>
+                                    </div>
+                                    
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item" id="accordion-item2">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed text-white" onclick="checkFieldsFilled('accordion-item2')" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo-add-property" aria-expanded="false" aria-controls="collapseTwo-add-property">
+                                <span class="m-0 me-4 fs-1" style="font-weight: bold;">02</span>
+                                <h3 class="m-0"><strong>ADDITIONAL Options</strong> <i
+                                        class="fi fi-rs-pencil"></i><i
+                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
+                                </h3>
+                            </button>
+                        </h2>
+                        <div id="collapseTwo-add-property" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                            <form class="row g-3 m-1" enctype="multipart/form-data">
+
+                                <div class="col-12 mb-3">
+                                    <div class="material-switch pull-left" style="display: flex; align-items: center;"> <input id="someSwitchOptionSuccess" name="someSwitchOption001" type="checkbox"> <label for="someSwitchOptionSuccess" class="label-success"></label> 
+                                        <div style="margin-left: 25px;"><h5><b>Use this account to receive payment</b></h5>
+                                       This will allow you to select this account when receiving payment.</div></div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <!-- <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
+                        Draft</button> -->
+                    <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close' data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the unique identifier for the property." style="width: auto;">Close</button>
+                    <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
+                    <a href="javascript:void(0)" class="btn text-light button d-none" style='background-color:#1467B0;' id='next'>Submit</a>
+                    <button class="btn text-light button" style='background-color:#1467B0; width: auto;' id='next-add-property'>Next</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- succes modal -->
 
                                             <div class="tab-pane mt-0" id="tab14">
                                                 <div class="card-body pt-0">
