@@ -59,6 +59,14 @@ exports.delteImageForTaskImages = "DELETE FROM taskimages WHERE ImageKey = ?"
 exports.deleteInvoiceCategories = "DELETE FROM InvoiceCategories WHERE id = ? AND landLordId = ?";
 exports.deleteVendorCategories = "DELETE FROM vendorcategory WHERE id = ? AND landLordId = ?";
 
+exports.updatePropertyNotifyReadUnRead =
+  "UPDATE property SET notify = ?  WHERE id = ? ";
+exports.updateTenantNotifyReadUnRead =
+  "UPDATE tenants SET notify = ?  WHERE id = ? ";
+exports.updateTaskNotifyReadUnRead =
+  "UPDATE task SET notify = ?  WHERE id = ? ";
+exports.updateInvoiceNotifyReadUnRead =
+  "UPDATE invoice SET notify = ?  WHERE id = ? ";
 
 exports.createInvoiceCategories = "INSERT INTO InvoiceCategories (categorieName,landLordId) VALUES (?,?)";
 // updated category query setTaxes, catId, userId
@@ -156,7 +164,7 @@ ORDER BY
     property.created_at DESC;
 `;
 
-
+exports.createLead = 'INSERT INTO leads (firstName, middleName, lastName, phoneNum,Email,propertyInfo,unitInfo,leadDetails,sourceCampaign,landlordId) VALUES (?,?,?,?,?,?,?,?,?,?)';
 
 exports.getTaskNotify = `SELECT 
     task.id AS taskID,
@@ -175,7 +183,7 @@ FROM
     task
   LEFT JOIN
     taskimages ON task.id = taskimages.taskID
-JOIN
+JOIN 
     tenants ON task.tenantID = tenants.id
 WHERE 
     task.landlordID = ?
@@ -325,7 +333,7 @@ exports.updateUser = "UPDATE users SET FirstName = ?, LastName = ?, Email = ?, P
 // update plan id in user table
 exports.updatePlanId = "UPDATE users SET PlanID = ? WHERE id = ?";
 exports.insertInProperty =
-  "INSERT INTO property (landlordID, propertyName, address, city, state, zipCode, propertyType, propertySQFT,status,units,created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+  "INSERT INTO property (landlordID, propertyName, address, city, state, zipCode, propertyType, propertySQFT,status,units,created_at,notify) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 exports.insertInPropertyImage = "INSERT INTO propertyimage (propertyID, Image, imageKey) VALUES (?,?,?)";
 exports.insertInTaskImage =
   "INSERT INTO taskimages (taskID, Image, ImageKey) VALUES (?,?,?)";
@@ -335,7 +343,7 @@ exports.updateProperty =
   "UPDATE property SET landlordID = ?, propertyName = ? , address = ? , city = ? , state = ? , zipCode = ? , propertyType = ? , propertySQFT = ? , status = ?, units = ?  WHERE id = ? ";
 exports.updatePropertyUnits =
   "UPDATE propertyunits SET unitNumber = ?, Area = ?, unitDetails = ? where id = ? AND propertyID = ? ";
-exports.insertTenants = "INSERT INTO tenants ( landlordID, firstName, lastName, companyName, email, phoneNumber, address, city, state, zipcode, propertyID, propertyUnitID, rentAmount, gross_or_triple_lease, baseRent, tripleNet, leaseStartDate, leaseEndDate, increaseRent, tenantPassword,tenantCreated_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+exports.insertTenants = "INSERT INTO tenants ( landlordID, firstName, lastName, companyName, email, phoneNumber, address, city, state, zipcode, propertyID, propertyUnitID, rentAmount, gross_or_triple_lease, baseRent, tripleNet, leaseStartDate, leaseEndDate, increaseRent, tenantPassword,tenantCreated_at,notify) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 // exports.UpdateTenants = 'UPDATE tenants SET landlordID = ?, firstName = ?, lastName = ?, companyName = ?, email = ?, phoneNumber = ?, address = ?, city = ?, state = ?, zipcode = ?, propertyID = ?, propertyUnitID = ?, rentAmount = ?, gross_or_triple_lease = ?, baseRent = ?, tripleNet = ?, leaseStartDate = ?, leaseEndDate = ?, increaseRent = ?, tenantPassword = ?  ';
 exports.UpdateTenants = 'UPDATE tenants SET tenantPassword = ?, tenantUpdated_at = ? WHERE id = ?  ';
 exports.addResetTokenTenants = 'UPDATE tenants SET token = ?, tenantUpdated_at = ? where id = ?';
@@ -401,7 +409,7 @@ exports.selectAllTenants = `SELECT p.id as propertyID, p.propertyName, p.address
 FROM tenants AS t 
 INNER JOIN property AS p ON t.propertyID = p.id 
 INNER JOIN propertyunits AS pu ON t.propertyUnitID = pu.id 
-INNER JOIN invoice AS i ON t.id = i.tenantID
+LEFT JOIN invoice AS i ON t.id = i.tenantID
 WHERE t.landlordID = ?;
 `;
 exports.addTasksQuery = "INSERT INTO task (taskName, tenantID, dueDate,status, priority, notes, notifyTenant, notifyVendor, created_at , createdBy,landlordID) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
