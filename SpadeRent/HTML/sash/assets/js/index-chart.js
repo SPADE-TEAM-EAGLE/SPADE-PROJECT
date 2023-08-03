@@ -102,6 +102,29 @@ var chart = c3.generate({
     },
 });
 
+ /* Account status chart-donut*/
+  /*---- morrisBar8----*/
+  new Morris.Donut({
+    element: 'morrisBar88',
+    data: [{
+        value: 25,
+        label: 'data2'
+    }, {
+        value: 75,
+        label: 'data1'
+    }],
+    backgroundColor: 'rgba(119, 119, 142, 0.2)',
+    labelColor: '#77778e',
+    colors: ['#529EE0', '#1467B0'],
+    resize: true,
+    formatter: function(x) {
+        return x + "%"
+    }
+}).on('click', function(i, row) {
+    console.log(i, row);
+});
+ /* Account status chart-donut*/
+
 
 // <!-- date start  -->
     $('.date').datepicker({
