@@ -2040,22 +2040,25 @@
         // Your Intercom settings (replace with your actual app_id)
         window.intercomSettings = {
           api_base: "https://api-iam.intercom.io",
-          app_id: "fjpx1kt1"
+          app_id: "fjpx1kt1",
+          
         };
       
         // Function to open the Intercom side popup
         function openIntercomPopup() {
             
           window.Intercom('show'); // This will open the Intercom side popup
+          
         }
       
         // Attach a click event listener to your custom button
         document.getElementById('customIntercomButton').addEventListener('click', openIntercomPopup);
-      
+        
         // Load the Intercom widget
         (function() {
           var w = window;
           var ic = w.Intercom;
+          
           if (typeof ic === "function") {
             ic('reattach_activator');
             ic('update', w.intercomSettings);
@@ -2071,6 +2074,7 @@
             w.Intercom = i;
             var l = function() {
               var s = d.createElement('script');
+              
               s.type = 'text/javascript';
               s.async = true;
               s.src = 'https://widget.intercom.io/widget/fjpx1kt1';
@@ -2086,6 +2090,7 @@
             }
           }
         })();
+        
       </script>
     <script>
         $(document).ready(function () {
@@ -2148,6 +2153,21 @@
         });
     </script>
     <script>
+//         const settings = {
+//   async: true,
+//   crossDomain: true,
+//   url: 'https://api.intercom.io/articles',
+//   method: 'GET',
+//   headers: {
+//     accept: 'application/json',
+//     'Intercom-Version': '2.9',
+//     authorization: 'Bearer dG9rOmRlM2ZkNzA0X2IxZmRfNDY4M185NjE5XzI4MmFiOTUxOGFhOToxOjA='
+//   }
+// };
+
+// $.ajax(settings).done(function (response) {
+//   console.log(response);
+// });
         $(document).ready(() => {
             let id; let userEmail; let emailChange = false
             $.ajax({
@@ -2563,7 +2583,7 @@
 
     <!-- demo walktrough start  -->
     <!-- <script src="../assets/js/walkthrough-demo.js"></script> -->
-    <script>
+    <!-- <script>
         function mydemoclick() {
             introJs().setOptions({
                 steps: [
@@ -2626,8 +2646,8 @@
                 ]
             }).start();
         }
-    </script>
-    <script>
+    </script> -->
+    <!-- <script>
         introJs().setOptions({
             steps: [
                 {
@@ -2689,7 +2709,7 @@
             ]
         }).start();
     </script>
-    
+     -->
 
     <!-- demo walktrough End  -->
 
