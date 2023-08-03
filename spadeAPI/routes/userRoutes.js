@@ -13,6 +13,7 @@ const fileUpload = require("../helper/S3Bucket");
 const notifyController = require("../controllers/notifyController");
 const { chatsController } = require("../controllers/chatsController");
 const messageClt = require("../controllers/messageController");
+const leadsClt = require("../controllers/Leads");
 
 router.post("/Signup", userController.createUser);
 router.get("/protected", verifyToken, userController.getUser);
@@ -128,6 +129,10 @@ router.get("/checkNotify", verifyToken, notifyController.getCheckedNotify);
 router.put("/notify", verifyToken, notifyController.updateNotifyData);
 router.get("/notify", verifyToken, notifyController.getNotify);
 router.get("/tenantNotify", verifyTokenTenant, notifyController.getTenantNotify);
+router.put("/updateReadUnRead", verifyToken, notifyController.updateUserPropertyReadUnRead);
+router.put("/updateReadUnRead", verifyTokenTenant, notifyController.updateUserPropertyReadUnRead);
+
+
 // property report task
 router.get("/propertyReport", verifyToken, userController.getAllProperty);
 router.get("/invoiceReport", verifyToken, userController.getInvoiceReportData);
@@ -146,5 +151,12 @@ router.post("/createNewMessageTenant", verifyTokenTenant, messageClt.createNewMe
 router.post("/createNewMessage", verifyToken, messageClt.createNewMessage);
 router.get("/TenantMessages/:chatId", verifyTokenTenant, messageClt.getAllMessages);
 router.get("/LandlordMessages/:chatId", verifyToken, messageClt.getAllMessages);
+
+
+
+
+// leads routes start
+router.post("/createLead", verifyToken, leadsClt.createNewLead);
+
 
 module.exports = router;
