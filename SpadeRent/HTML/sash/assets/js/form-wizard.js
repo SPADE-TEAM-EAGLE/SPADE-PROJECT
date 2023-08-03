@@ -666,12 +666,14 @@ function confirmPasswordValidation() {
   
   if(validconfirmPassword.value.match(password_validate))
   {
-    validconfirmPassword.classList.add("border-green");
+    validconfirmPassword.classList.add("border-green"); 
+    validconfirmPassword.classList.remove("border-red"); 
     spantag1.style.display = "none";
   }
   else
   {
     validconfirmPassword.classList.remove("border-green");
+    validconfirmPassword.classList.add("border-red"); 
     spantag1.style.display = "block";
 
   }
