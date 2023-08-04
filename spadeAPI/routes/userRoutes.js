@@ -6,8 +6,6 @@ const invoiceController = require("../controllers/invoiceController");
 const tenantPortalController = require("../controllers/tenantPortalController");
 const settingController = require("../controllers/settingController");
 const { verifyToken, verifyTokenTenant } = require("../middleware/authenticate");
-const { upload } = require("../middleware/imageUploads");
-const { uploadExistingFiles } = require("../middleware/imageUploads");
 const taskController = require("../controllers/taskController");
 const fileUpload = require("../helper/S3Bucket");
 const notifyController = require("../controllers/notifyController");
@@ -127,8 +125,9 @@ router.put("/notify", verifyToken, notifyController.updateNotifyData);    //****
 router.get("/checkNotify", verifyToken, notifyController.getCheckedNotify);
 router.get("/notify", verifyToken, notifyController.getNotify);
 router.get("/tenantNotify", verifyTokenTenant, notifyController.getTenantNotify);
-router.put("/updateReadUnRead", verifyToken, notifyController.updateUserPropertyReadUnRead);
-router.put("/updateReadUnRead", verifyTokenTenant, notifyController.updateUserPropertyReadUnRead);
+router.put("/updateReadUnRead", verifyToken, notifyController.updateUserReadUnRead);
+router.put("/updateReadUnRead", verifyTokenTenant, notifyController.updateUserReadUnRead);
+
 
 
 // property report task

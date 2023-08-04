@@ -10,6 +10,7 @@ const {
 } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
 const cron = require('node-cron');
+
 const task = cron.schedule('0 9,20 * * *', async () => {
   const currentDate = new Date();
   const selectTenantsResult = await queryRunner(recurringInvoice)
@@ -32,9 +33,11 @@ const task = cron.schedule('0 9,20 * * *', async () => {
       const recurringNextDate = selectTenantsResult[0][i].recurringNextDate;
       const created_atPrevious = selectTenantsResult[0][i].created_at;
       const recurringInvoiceCheckResult = await queryRunner(recurringInvoiceCheck, [landlordID, tenantID, invoiceType]);
+      
       if (recurringInvoiceCheckResult[0].length > 0) {
         console.log("user Exist")
       }
+      
       else {
         if (frequency == "monthly") {
           const currentDate = new Date();
