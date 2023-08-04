@@ -31,7 +31,7 @@
 
     <!--- FONT-ICONS CSS -->
     <link href="../assets/css/icons.css" rel="stylesheet" />
-    <link rel="stylesheet" href="fancy_fileupload.css">
+    <!-- <link rel="stylesheet" href="fancy_fileupload.css"> -->
     <!-- COLOR SKIN CSS -->
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="../assets/colors/color1.css" />
     <link rel="stylesheet" href="cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css"
@@ -82,16 +82,6 @@
             background: #0069d9;
         }
 
-        /* .fi-rs-calendar {
-    position: absolute;
-    top: 78%;
-    right: 24px;
-    transform: translateY(-50%);
-    background-size: cover;
-    cursor: pointer;
-    font-size: 1.2rem;
-    color: #1467B0;
-} */
 
         .dark-mode .link-text {
             color: #000;
@@ -640,6 +630,22 @@
 </head>
 
 <body class="app sidebar-mini ltr light-mode">
+    <div class="modal fade" id="myModal_warning_connection" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
+                        <div class="card-body text-center">
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24"><path fill="#fad383" d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z"/><circle cx="12" cy="16" r="1" fill="#f7b731"/><path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"/></svg></span>
+                            <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
+                            <p class="card-text text-dark m-0">Sorry! Something went wrong.</p>
+                            <p class="card-text text-dark m-0">Kindly check your internet connection or please try again later.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade effect-scale" id="modaldemo8" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered modal-l" role="document">
             <div class="modal-content">
@@ -871,6 +877,32 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-md-6 col-lg-3 col-xl-3">
+                        <div class="card">
+                            <div class="card-header" style="background-color: #1467B0;color: white;">
+                                <div class="card-title fw-bold"><a href="tasks-vendors.html"
+                                        style="color: white;">Vendor</a></div>
+                            </div>
+                            <div class="card-body">
+                                <div class="text-center chat-image mb-5">
+                                    <div class="avatar avatar-xxl chat-profile mb-3 brround">
+                                        <a class="" href="tasks-vendors.html"><img alt="avatar"
+                                                src="../assets/images/icons/create-vendor.png"
+                                                class="brround w-100 h-100"></a>
+                                    </div>
+                                    <div class="main-chat-msg-name">
+                                        <a href="tasks-vendors.html">
+                                            <h5 class="mb-1 text-dark fw-bold">Create New Vendors</h5>
+                                        </a>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the
+                                            benefits of an all-in-one property management tool! </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -1113,6 +1145,7 @@
                                                         <th>DESCRIPTION</th>
                                                         <th>PROPERTY</th>
                                                         <th>CATEGORY</th>
+                                                        <th>TAX %</th>
                                                         <th>AMOUNT</th>
                                                     </tr>
                                                 </thead>
@@ -1287,7 +1320,7 @@
                 <div class="modal-header">
                     <div class="text-justify ps-2 border-model-line">
                         <h2 class="modal-title mb-0">Change <strong class="color-primary">Invoice Status</strong></h2>
-                        <button type="button" class="btn btn-primary">#Invoice Number: INV-89900A</button>
+                        <button type="button" class="btn btn-primary invoice-number">#Invoice Number: INV-89900A</button>
                     </div>
                     <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="top-clos">
                         <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
@@ -1420,7 +1453,7 @@
                     <div class="text-justify ps-2 border-model-line">
                         <h2 class="modal-title mb-0" id="previewHeading">Create <strong class="color-primary">New
                                 Invoice</strong></h2>
-                        <button type="button" class="btn btn-primary">#Invoice Number: INV-89900A</button>
+                        <!-- <button type="button" class="btn btn-primary">#Invoice Number: INV-89900A</button> -->
                     </div>
                     <button class="btn-close top-close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
@@ -1432,7 +1465,7 @@
                             <label class="form-label fw-bold fs-18">Select Tenant</label>
                             <select class="form-control select2 form-select d-block" data-placeholder="Select Tenant"
                                 name="tenants" id="tenants" data-bs-placement="top" data-bs-toggle="tooltip" title=""
-                                data-bs-original-title="Select Tenant" data-bs-container="#addModal">
+                                data-bs-original-title="Select Tenant" data-bs-container="#addModal" required>
                                 <option label="Choose one">
                                 </option>
 
@@ -1444,7 +1477,8 @@
                             <label class="form-label fw-bold fs-18">Select Property</label>
                             <select class="form-control select2 form-select d-block" data-placeholder="Select Property"
                                 name="tenants" id="propertyName" data-bs-placement="top" data-bs-toggle="tooltip"
-                                title="" data-bs-original-title="Select Property" data-bs-container="#addModal">
+                                title="" data-bs-original-title="Select Property" data-bs-container="#addModal"
+                                required>
                                 <option label="Choose one">
                                 </option>
 
@@ -1456,7 +1490,7 @@
                             <label class="form-label fw-bold fs-18">Select Unit</label>
                             <select class="form-control select2 form-select d-block" data-placeholder="Select Unit"
                                 name="tenants" id="propertyUnit" data-bs-placement="top" data-bs-toggle="tooltip"
-                                title="" data-bs-original-title="Select Unit" data-bs-container="#addModal">
+                                title="" data-bs-original-title="Select Unit" data-bs-container="#addModal" required>
                                 <option label="Choose one">
                                 </option>
 
@@ -1471,12 +1505,12 @@
                                         name="invoice" id="invoice" checked>
                                     <span class="custom-control-label">One Time Invoice</span>
                                 </label>
-                                <!-- <label class="custom-control custom-radio mb-0">
+                                <label class="custom-control custom-radio mb-0">
                                     <input class="custom-control-input" type="radio" value="Recurring Invoice"
                                         name="invoice" id="recurring" data-bs-toggle="collapse" href="#collapse1"
                                         role="button" aria-expanded="false" aria-controls="collapseExample1">
                                     <span class="custom-control-label">Recurring Invoice</span>
-                                </label> -->
+                                </label>
                             </div>
                         </div>
                         <!-- <div class="col-md-8 col-lg-6">
@@ -1490,7 +1524,7 @@
                             <label class="form-label fw-bold fs-18">Due Date</label>
                             <input type="date" class="form-control form" id="dueDate" data-bs-placement="top"
                                 data-bs-toggle="tooltip" title="" data-bs-original-title="Select Due Date"
-                                data-bs-container="#addModal">
+                                data-bs-container="#addModal" required>
                             <span class="text-danger d-none">Due Date is required!</span>
                         </div>
                         <div class="collapse row" id="collapse1">
@@ -1560,29 +1594,44 @@
                                             <th>Category</th>
                                             <th>Property</th>
                                             <th>Memo</th>
+                                            <th>Tax</th>
                                             <th>Amount</th>
                                             <th>Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody id="add-item-container1">
                                         <tr class="tr">
-                                            <td><input type="text" class="form-control" name="category"
+                                            <td>
+                                                <select id="state" name="category" class="form-select form"
                                                     data-bs-placement="top" data-bs-toggle="tooltip" title=""
-                                                    data-bs-original-title="Enter category here"
-                                                    data-bs-container="#addModal"></td>
-                                            <td><input type="text" class="form-control" name="property"
+                                                    data-bs-original-title="Enter the state where you reside"
+                                                    data-bs-container="#addModal" required>
+                                                    <option selected="">Choose...</option>
+                                                </select>
+                                                <span class="text-danger d-none">State is required!</span>
+                                            </td>
+                                            <td><select id="state" name="property" class="form-select form"
                                                     data-bs-placement="top" data-bs-toggle="tooltip" title=""
-                                                    data-bs-original-title="Enter property here"
-                                                    data-bs-container="#addModal"></td>
+                                                    data-bs-original-title="Enter the state where you reside"
+                                                    data-bs-container="#addModal" required>
+                                                    <option selected="">Choose...</option>
+                                                </select>
+
+                                                <span class="text-danger d-none">State is required!</span>
+                                            </td>
                                             <td><input type="text" class="form-control" name="memo"
                                                     data-bs-placement="top" data-bs-toggle="tooltip" title=""
                                                     data-bs-original-title="Enter memo here"
-                                                    data-bs-container="#addModal"></td>
+                                                    data-bs-container="#addModal" required></td>
+                                            <td><input type="text" class="form-control" name="tax"
+                                                    data-bs-placement="top" data-bs-toggle="tooltip" title=""
+                                                    data-bs-original-title="Tax associated with this category"
+                                                    data-bs-container="#addModal" readonly></td>
                                             <td><input type="text" class="form-control" name="amount" id="amountField"
                                                     data-bs-placement="top" data-bs-toggle="tooltip" title=""
                                                     data-bs-original-title="Enter amount here"
                                                     data-bs-container="#addModal"
-                                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '')">
+                                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '')" required>
                                             </td>
                                             <td><button type="button" class="btn" id="del-btn1">
                                                     <i class="fi fi-rs-trash text-danger fs-5"></i>
@@ -1617,7 +1666,7 @@
                                 <label class="custom-file-label" for="fileInput">
                                     <i class="fi fi-rs-cloud-upload"></i>
                                     <div class="custom-file-text">
-                                        <span>Upload Photo or drag and drop here</span>
+                                        <span>Upload Photo here</span>
                                         <span>JPEG and PNG, file size no more than 10MB</span>
                                     </div>
                                 </label>
@@ -1678,7 +1727,7 @@
                     <div class="text-justify ps-2 border-model-line">
                         <h2 class="modal-title mb-0" id="previewHeading_update">Edit <strong
                                 class="color-primary">Invoice</strong></h2>
-                        <button type="button" class="btn btn-primary">#Invoice Number: INV-89900A</button>
+                        <button type="button" class="btn btn-primary invoice-number">#Invoice Number: INV-89900A</button>
                     </div>
                     <button class="btn-close top-close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
@@ -1689,7 +1738,7 @@
                         <div class="col-md-12 col-lg-6">
                             <label class="form-label fw-bold fs-18">Select Tenant</label>
                             <select class="form-control select2 form-select d-block" data-placeholder="Select Tenant"
-                                name="tenants" id="tenants_update">
+                                name="tenants" id="tenants_update" required>
                                 <option label="Choose one">
                                 </option>
                             </select>
@@ -1714,12 +1763,13 @@
                         </div>
                         <div class="col-md-8 col-lg-6">
                             <label class="form-label fw-bold fs-18">Property Name</label>
-                            <input type="text" class="form-control form" id="propertyName_update" value="" readonly>
+                            <input type="text" class="form-control form" id="propertyName_update" value="" readonly
+                                required>
                             <span class="text-danger d-none">Property name is required!</span>
                         </div>
                         <div class="col-md-8 col-lg-6">
                             <label class="form-label fw-bold fs-18">Due Date</label>
-                            <input type="date" class="form-control form" id="dueDate_update">
+                            <input type="date" class="form-control form" id="dueDate_update" required>
                             <span class="text-danger d-none">Due Date is required!</span>
                         </div>
                         <div class="collapse row" id="collapse1_update">
@@ -1779,16 +1829,33 @@
                                             <th>Category</th>
                                             <th>Property</th>
                                             <th>Memo</th>
+                                            <th>Tax</th>
                                             <th>Amount</th>
                                             <th>Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody id="add-item-container1_update">
                                         <tr class="tr">
-                                            <td><input type="text" class="form-control" name="category"></td>
-                                            <td><input type="text" class="form-control" name="property"></td>
+                                            <td>
+                                                <select id="state" name="category" class="form-select form"
+                                                    data-bs-placement="top" data-bs-toggle="tooltip" title=""
+                                                    data-bs-original-title="Enter the state where you reside"
+                                                    data-bs-container="#addModal" required>
+                                                    <option selected="">Choose...</option>
+                                                </select>
+                                                <span class="text-danger d-none">State is required!</span>
+                                            </td>
+                                            <td><select id="state" name="property" class="form-select form"
+                                                    data-bs-placement="top" data-bs-toggle="tooltip" title=""
+                                                    data-bs-original-title="Enter the state where you reside"
+                                                    data-bs-container="#addModal" required>
+                                                    <option selected="">Choose...</option>
+                                                </select>
+
+                                                <span class="text-danger d-none">State is required!</span>
+                                            </td>
                                             <td><input type="text" class="form-control" name="memo"></td>
-                                            <td><input type="text" class="form-control" name="amount"></td>
+                                            <td><input type="text" class="form-control" name="amount" required></td>
                                             <td><button type="button" class="btn" id="del-btn_update">
                                                     <i class="fi fi-rs-trash text-danger fs-5"></i>
                                                 </button></td>
@@ -1820,7 +1887,7 @@
                                 <label class="custom-file-label" for="fileInput">
                                     <i class="fi fi-rs-cloud-upload"></i>
                                     <div class="custom-file-text">
-                                        <span>Upload Photo or drag and drop here</span>
+                                        <span>Upload Photo here</span>
                                         <span>JPEG and PNG, file size no more than 10MB</span>
                                     </div>
                                 </label>
@@ -2215,7 +2282,7 @@
                 <div class="modal-header">
                     <div class="text-justify ps-2 border-model-line">
                         <h2 class="modal-title mb-0">View <strong class="color-primary">Invoice</strong></h2>
-                        <button type="button" class="btn btn-primary">#Invoice Number: INV-89900A</button>
+                        <button type="button" class="btn btn-primary invoice-number">#Invoice Number: INV-89900A</button>
                     </div>
                     <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="viewModal-invoice">
                         <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
@@ -2381,22 +2448,22 @@
 
                                         <!-- 1 comments start  -->
                                         <div class="d-flex country">
-                                            <img src="../assets\header-img\comment.svg" alt="profile-user"
+                                            <img src="../assets\header-img\comment.svg" 
                                                 class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
                                         <div class="d-flex country">
-                                            <img src="../assets\header-img\comment-light.webp" alt="profile-user"
+                                            <img src="../assets\header-img\comment-light.webp" 
                                                 class="avatarr profile-user nav-link brroundd cover-image light-layout">
                                         </div>
                                         <!-- 1 comments start  -->
 
                                         <!-- 2 comments start  -->
                                         <div class="d-flex country">
-                                            <img src="../assets\header-img\question.svg" alt="profile-user"
+                                            <img src="../assets\header-img\question.svg" 
                                                 class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
                                         <div class="d-flex country">
-                                            <img src="../assets\header-img\question-light.webp" alt="profile-user"
+                                            <img src="../assets\header-img\question-light.webp" 
                                                 class="avatarr profile-user nav-link brroundd cover-image light-layout">
                                         </div>
                                         <!-- 2 comments start  -->
@@ -2461,17 +2528,16 @@
                                             </div> -->
                                         </div>
                                         <div class="d-flex country">
-                                            <img src="../assets\header-img\spade.svg" alt="profile-user"
+                                            <img id="user-img" src="../assets\header-img\spade.svg" 
                                                 class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
                                         <div class="d-flex country">
-                                            <img src="../assets\header-img\circlels.png" alt="profile-user"
-                                                class="avatarr profile-user nav-link brroundd cover-image light-layout">
+                                            <img id="user-img-dark" src="../assets\header-img\circlels.png"  class="avatarr profile-user nav-link brroundd cover-image light-layout">
                                         </div>
                                         <div class="dropdown d-flex profile-1 country">
                                             <a href="javascript:void(0)" data-bs-toggle="dropdown"
                                                 class="nav-link leading-none d-flex">
-                                                <!-- <img src="../assets/images/users/21.jpg" alt="profile-user"
+                                                <!-- <img src="../assets/images/users/21.jpg" 
                                                     class="avatar  profile-user brround cover-image"> -->
                                                 <span class="dynamic-text-head" id="header-user"
                                                     style="padding: 10px 10px;"></span> <i
@@ -2693,7 +2759,8 @@
                                                 class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
                                             verification &nbsp; <i
                                                 class="angle fe fe-arrow-right create-btn-plus"></i></a>
-                                                <p class="text-white m-0 mt-3" id="account-text">Your account will be locked after 7-Days</p>
+                                        <p class="text-white m-0 mt-3" id="account-text">Your account will be locked
+                                            after 7-Days</p>
                                     </div>
                                     <div class="col-lg-3">
                                         <img src="../assets/header-img/Group1.png" alt="">
@@ -3105,88 +3172,8 @@
                         </div>
                     </div> -->
                     <div class="tab-pane active" id="side1">
-                        <div class="list-group list-group-flush">
-                            <!-- <div class="pt-3 fw-semibold ps-5">Today</div> -->
-                            <div class="list-group-item d-flex align-items-center justify-content-between">
-                                <div class="d-flex align-items-center">
-                                    <div class="me-2">
-                                        <span class="avatar avatar-md brround cover-image"
-                                            data-bs-image-src="../assets/images/users/2.jpg"><span
-                                                class="avatar-status bg-success"></span>
-                                    </div>
-                                    <div class="">
-                                        <a href="javascript:void(0);">
-                                            <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal"
-                                                data-target="#chatmodel">William</div> <span class="text-dark"> 1436
-                                                Jersey Street > Jersey</span>
-                                            <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="">
-                                    <span class="fs-12 text-dark">2 min ago</span>
-                                </div>
-                            </div>
-                            <div class="list-group-item d-flex align-items-center justify-content-between">
-                                <div class="d-flex align-items-center">
-                                    <div class="me-2">
-                                        <span class="avatar avatar-md brround cover-image"
-                                            data-bs-image-src="../assets/images/users/2.jpg"><span
-                                                class="avatar-status bg-success"></span>
-                                    </div>
-                                    <div class="">
-                                        <a href="javascript:void(0);">
-                                            <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal"
-                                                data-target="#chatmodel">Henry</div> <span class="text-dark"> 1436
-                                                Jersey Street > Jersey</span>
-                                            <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="">
-                                    <span class="fs-12 text-dark">2 min ago</span>
-                                </div>
-                            </div>
-                            <div class="list-group-item d-flex align-items-center justify-content-between">
-                                <div class="d-flex align-items-center">
-                                    <div class="me-2">
-                                        <span class="avatar avatar-md brround cover-image"
-                                            data-bs-image-src="../assets/images/users/2.jpg"><span
-                                                class="avatar-status bg-success"></span>
-                                    </div>
-                                    <div class="">
-                                        <a href="javascript:void(0);">
-                                            <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal"
-                                                data-target="#chatmodel">David</div> <span class="text-dark"> 1436
-                                                Jersey Street > Jersey</span>
-                                            <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="">
-                                    <span class="fs-12 text-dark">2 min ago</span>
-                                </div>
-                            </div>
-                            <div class="list-group-item d-flex align-items-center justify-content-between">
-                                <div class="d-flex align-items-center">
-                                    <div class="me-2">
-                                        <span class="avatar avatar-md brround cover-image"
-                                            data-bs-image-src="../assets/images/users/2.jpg"><span
-                                                class="avatar-status bg-success"></span>
-                                    </div>
-                                    <div class="">
-                                        <a href="javascript:void(0);">
-                                            <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal"
-                                                data-target="#chatmodel">David</div> <span class="text-dark"> 1436
-                                                Jersey Street > Jersey</span>
-                                            <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="">
-                                    <span class="fs-12 text-dark">2 min ago</span>
-                                </div>
-                            </div>
+                        <div class="list-group list-group-flush" id="notification-container">
+
                             <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
 
                         </div>
@@ -3288,46 +3275,7 @@
                     <div class="tab-pane" id="side4">
                         <div class="list-group list-group-flush">
                             <!-- <div class="pt-3 fw-semibold ps-5">Today</div> -->
-                            <div class="list-group-item d-flex align-items-center justify-content-between">
-                                <div class="d-flex align-items-center">
-                                    <div class="me-2">
-                                        <span class="avatar avatar-md brround cover-image"
-                                            data-bs-image-src="../assets/images/users/2.jpg"><span
-                                                class="avatar-status bg-success"></span>
-                                    </div>
-                                    <div class="">
-                                        <a href="javascript:void(0);">
-                                            <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal"
-                                                data-target="#chatmodel">Daniel</div> <span class="text-dark"> 1436
-                                                Jersey Street > Jersey</span>
-                                            <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="">
-                                    <span class="fs-12 text-dark">2 min ago</span>
-                                </div>
-                            </div>
-                            <div class="list-group-item d-flex align-items-center justify-content-between">
-                                <div class="d-flex align-items-center">
-                                    <div class="me-2">
-                                        <span class="avatar avatar-md brround cover-image"
-                                            data-bs-image-src="../assets/images/users/2.jpg"><span
-                                                class="avatar-status bg-success"></span>
-                                    </div>
-                                    <div class="">
-                                        <a href="javascript:void(0);">
-                                            <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal"
-                                                data-target="#chatmodel">Daniel</div> <span class="text-dark"> 1436
-                                                Jersey Street > Jersey</span>
-                                            <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="">
-                                    <span class="fs-12 text-dark">2 min ago</span>
-                                </div>
-                            </div>
+
                             <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
 
                         </div>
@@ -3613,6 +3561,7 @@
 
     <!-- CUSTOM JS -->
     <script src="../assets/js/custom.js"></script>
+    <script src="../assets/js/getNotification.js"></script>
 
     <!-- ############################################# -->
 
@@ -3685,16 +3634,42 @@
                     })
 
                 }
-                // console.log(333)
-                // <a href="javascript:void(0)" id="preview"><i class="fi fi-rs-eye me-2 text-primary"></i> </a>
+
 
             })
+            function resetAccordions() {
+                selectedFiles = []
+
+                $("#addModal input, #addModal select").each(function () {
+                    $(this).removeClass("border-green")
+                    $(this).removeClass("border-danger")
+                })
+                $("#add-item-container1 .tr").each(function () {
+                    if ($("#add-item-container1 .tr").length > 1) {
+                        $(this).remove()
+                    }
+                })
+                $("[name='property']").empty()
+                $("[name='property']").append($('<option label="Choose one"></option>'))
+                $("[name='property_update']").empty()
+                $("[name='category']").empty()
+                $("[name='category']").append($('<option label="Choose one"></option>'))
+                $("[name='category_update']").append($('<option label="Choose one"></option>'))
+                $("#totalText").text("$ " + 0)
+                $('#toggle-button,.save-invoice').attr("disabled", true);
+                $(".file-grid").empty()
+            }
+            $("#succesModal,#infoModal,#addModal,#myModal_edit").on('hide.bs.modal', function () {
+
+                resetAccordions()
+            })
+            $("#succesModal").on('hide.bs.modal', function () {
+                resetAccordions()
+                getData()
+            })
+
             $(document).on("click", "#preview_update", function () {
-                // console.log(222222)
-                // console.log($('#preview').text().startsWith(" Preview"))
-                // console.log($('#preview').text().split(' ')[1].split('/')[0]=="Preview")
-                // var text = $("#preview_update").text().trim();
-                // console.log(text.startsWith("Preview"));
+
                 if ($('#preview_update').text().trim().startsWith("Edit")) {
                     console.log(222)
                     $("#previewHeading_update").empty()
@@ -3739,9 +3714,7 @@
                 $("#succesModal").modal("hide")
                 $("#addModal").modal("show")
             })
-            $("#succes-close").click(() => {
-                getData()
-            })
+
             $('input[name="invoice"],input[name="invoice_update"]').change(function () {
                 console.log($(this).val())
                 if ($(this).val() === 'Recurring Invoice') {
@@ -3790,7 +3763,8 @@
 
             $(document).on('click', '.delete-file', function () {
                 var index = $(this).data('index');
-                selectedFiles.splice(index, 1); // Remove the selected file from the array
+                selectedFiles.splice(index, 1);
+                $('#fileInput').empty() // Remove the selected file from the array
                 updateSelectedFilesContainer(); // Update the selected files container
             });
 
@@ -3841,125 +3815,6 @@
 
                 return fileName;
             }
-            // $("#resend-invoice").click(() => {
-            //     $.ajax({
-            //         url: 'https://backend.app.spaderent.com/api/spade/resendEmail',
-            //         type: 'GET',  // Change the method to POST
-            //         data: { invoiceID: invoiceId },  // Send the data in the request body
-            //         contentType: 'application/json',  // Set the content type to JSON
-            //         headers: {
-            //             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-            //         },
-            //         success: function (response) {
-            //             // Handle the success response from the API
-            //             console.log('API response:', response);
-            //         },
-            //         error: function (xhr, status, error) {
-            //             // Handle the error response from the API
-            //             console.log('API error:', error);
-            //         }
-            //     });
-
-            // })
-            // $(".save-invoice").each(function() {
-            //     $(this).on("click", function() {
-            //         console.log(1)
-            //         var selectedTenant = $('#tenants').val();
-            //         var selectedInvoiceType = $('input[name="invoice"]:checked').val();
-            //         var startDate = $('#startDate').val();
-            //         var endDate = $('#endDate').val();
-            //         var dueDate = $('#dueDate').val()
-            //         var selectedFrequency = $('#frequency').val();
-            //         var daysUntilDue = $('#daysUntilDue').val();
-            //         var selectedTerms = $('#terms').val();
-            //         var additionalNotes = $('#additionalNotes').val();
-            //         var switchValue = $("input[name='custom-switch-radio']").is(":checked");
-            //         // Collect the line items data from the table
-            //         var lineItems = [];
-            //         $('#lineItemsTable tbody tr').each(function() {
-            //             console.log($(this))
-            //             var category = $(this).find('input[name="category"]').val();
-            //             var property = $(this).find('input[name="property"]').val();
-            //             var memo = $(this).find('input[name="memo"]').val();
-            //             var amount = $(this).find('input[name="amount"]').val();
-
-            //             lineItems.push({
-            //                 category: category,
-            //                 property: property,
-            //                 memo: memo,
-            //                 amount: amount
-            //             });
-            //         });
-            //         console.log(lineItems)
-            //             // Create a FormData object to hold the data and files
-            //         var formData = new FormData();
-            //         var buttonText = $(this).text();
-
-            //         if (buttonText !== "Save" && buttonText.indexOf("Print") === -1) {
-            //             console.log("here")
-            //             formData.append("sendmails", "Yes")
-            //         }
-            //         // Add the data to the FormData object
-            //         formData.append('tenantID', selectedTenant);
-            //         formData.append('invoiceType', selectedInvoiceType);
-            //         formData.append('startDate', startDate);
-            //         formData.append('endDate', endDate);
-            //         formData.append('frequency', selectedFrequency);
-            //         formData.append('dueDate', dueDate);
-            //         formData.append('dueDays', daysUntilDue);
-            //         formData.append('terms', selectedTerms);
-            //         formData.append('repeatTerms', switchValue);
-            //         formData.append('additionalNotes', additionalNotes);
-            //         console.log($("#totalText").text().split('$')[1])
-            //         formData.append('totalAmount', $("#totalText").text().split(' ')[1])
-            //             // Loop through the lineItems array and add each line item to the FormData object
-            //         for (var i = 0; i < lineItems.length - 1; i++) {
-            //             var lineItem = lineItems[i];
-            //             formData.append('lineItems[' + i + '][category]', lineItem.category);
-            //             formData.append('lineItems[' + i + '][property]', lineItem.property);
-            //             formData.append('lineItems[' + i + '][memo]', lineItem.memo);
-            //             formData.append('lineItems[' + i + '][amount]', lineItem.amount);
-            //         }
-
-            //         // Add the files to the FormData object
-            //         var fileInput = document.getElementById('fileInput');
-            //         var files = fileInput.files;
-
-            //         for (var i = 0; i < files.length; i++) {
-            //             var file = files[i];
-            //             formData.append('image', file);
-            //         }
-
-            //         // Send the data and files to the API using AJAX
-            //         $.ajax({
-            //             url: 'https://backend.app.spaderent.com/api/spade/createInvoice',
-            //             type: 'POST',
-            //             data: formData,
-            //             contentType: false,
-            //             processData: false,
-            //             headers: {
-            //                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-            //             },
-
-            // success: function(response) {
-
-            // const tenant=tenantData.find(obj => obj.tenantID == selectedTenant)
-            // console.log(tenant)
-            // $("#addModal").modal("hide")
-            // $('#addModal input[type="text"], #addModal input[type="date"], #addModal textarea').val('');
-            // $('#addModal select').prop('selectedIndex', 0);
-            // $("#succes-tenantName").text(`sent to ${tenant.firstName+" "+tenant.lastName}.`)
-            // $("#succesModal").modal("show")
-            // getData()
-
-            // },
-            //             error: function(xhr, status, error) {
-            //                 // Handle the error response from the API
-            //                 console.log('API error:', error);
-            //             }
-            //         });
-            //     });
-            // });
             $(".save-invoice").each(function () {
                 $(this).on("click", function () {
                     var selectedTenant = $('#tenants').val();
@@ -3975,15 +3830,17 @@
                     var lineItems = [];
                     $('#lineItemsTable tbody tr').each(function () {
 
-                        var category = $(this).find('input[name="category"]').val();
-                        var property = $(this).find('input[name="property"]').val();
+                        var category = $(this).find('[name="category"]').val();
+                        var property = $(this).find('[name="property"]').val();
                         var memo = $(this).find('input[name="memo"]').val();
                         var amount = $(this).find('input[name="amount"]').val();
+                        var tax = $(this).find('input[name="tax"]').val()
 
                         lineItems.push({
                             category: category,
                             property: property,
                             memo: memo,
+                            tax: tax,
                             amount: amount
                         });
                     });
@@ -3995,7 +3852,7 @@
                         console.log("here")
                         invoiceData.sendmails = "Yes"
                     }
-
+                    console.log($("#totalText").text().split(' ')[1])
                     var fileInput = document.getElementById('fileInput');
                     var files = fileInput.files;
 
@@ -4005,7 +3862,6 @@
                             var file = files[i];
                             uploadFormData.append('image', file);
                         }
-                        $("#addModal").modal("hide")
                         $.ajax({
                             url: 'https://backend.app.spaderent.com/api/spade/upload',
                             type: 'POST',
@@ -4047,11 +3903,12 @@
                                         const tenant = tenantData.find(obj => obj.tenantID == selectedTenant)
                                         console.log(tenant)
                                         $("#addModal").modal("hide")
+                                        
                                         $('#addModal input[type="text"], #addModal input[type="date"], #addModal textarea').val('');
                                         $('#addModal select').prop('selectedIndex', 0);
                                         $("#succes-tenantName").text(`sent to ${tenant.firstName + " " + tenant.lastName}.`)
                                         $("#succesModal").modal("show")
-                                        getData()
+
                                     },
                                     error: function (xhr, status, error) {
                                         // Handle the error response from the API
@@ -4060,7 +3917,12 @@
                                 });
                             },
                             error: function (xhr, status, error) {
-                                window.alert('Error: ' + error);
+                                $("#myModal_warning_connection").modal("show");
+                            setTimeout(function() {
+                                $('#myModal_warning_connection').modal('hide');
+
+                            }, 2000);
+                    console.log('Error: ' + error);
                             }
                         });
                     } else {
@@ -4099,7 +3961,7 @@
                                 $('#addModal select').prop('selectedIndex', 0);
                                 $("#succes-tenantName").text(`sent to ${tenant.firstName + " " + tenant.lastName}.`)
                                 $("#succesModal").modal("show")
-                                getData()
+
                             },
                             error: function (xhr, status, error) {
                                 // Handle the error response from the API
@@ -4111,10 +3973,10 @@
             });
             let tenantData = [];
             let invoiceData = []
-
+            let categoryData = []
             function getData() {
+
                 $("#preloader").fadeIn("fast");
-                // console.log(22)
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/viewAllPropertyTenant',
                     type: 'GET',
@@ -4123,10 +3985,13 @@
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
-                    success: function (response) {
+                    success: async function (response) {
+
                         if (response.message == "No data found") {
                             window.location = './new-invoice.html'
                         }
+                        tenantData = response.data[0]
+                        console.log(tenantData)
                         // console.log(data,user)
                         function toTitleCase(str) {
                             return str.replace(/\w\S*/g, function (txt) {
@@ -4137,7 +4002,7 @@
                         $("#header-user").text(toTitleCase(response.user))
                         $("#tenants").empty()
                         $("#tenants").append($('<option></option>').text("Choose..."));
-                        tenantData = response.data[0]
+
                         // var tableBody = $('#table_body');
 
                         response.data[0]?.forEach(function (tenant) {
@@ -4154,6 +4019,36 @@
                     }
                 });
 
+
+
+                $.ajax({
+                    url: 'https://backend.app.spaderent.com/api/spade/invoiceCategory',
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: async function (response) {
+                        categoryData = response.data
+
+                        categoryData.forEach(function (category) {
+                            $("[name='category']").append($('<option></option>').text(category.categorieName).val(category.id))
+                        })
+                    },
+                    error: function (xhr, status, error) {
+                        console.log('Error occurred while fetching state and city data.');
+                        console.log(xhr);
+                        console.log(error);
+                    }
+                });
+
+
+
+
+                function formatDate(dateString) {
+    const date = new Date(dateString);
+    const options = { year: 'numeric', month: 'short', day: 'numeric' };
+    return date.toLocaleDateString('en-US', options);
+}
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/getAllInvoices',
                     type: 'GET',
@@ -4162,11 +4057,11 @@
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
-                    success: function (response) {
+                    success: async function (response) {
                         if (response.message == "No data found") {
                             window.location = './new-invoice.html'
                         }
-console.log(response.data[0])
+                        console.log(tenantData)
                         invoiceData = response.data[0]
 
 
@@ -4189,7 +4084,7 @@ console.log(response.data[0])
                             var year = dateObj.getFullYear();
                             var invoiceDate = '<td class="date" style="font-weight: 600;">' + day + "/" + month + "/" + year + '</td>';
                             var propertyName = '<td class="propertyName" style="font-weight: 600;">' + invoice.propertyName + `<br><small>${invoice.tPhone}</small>` + '</td>';
-                            var invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + invoice.totalAmount + '<span> $</span>' + `<br><small>Next Due Date: November-12-2020</small>` + '</td>';
+                            var invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + invoice.totalAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(formatDate(invoice.recurringNextDate)=="Invalid Date"?"N/A":formatDate(invoice.recurringNextDate))}</small>` + '</td>';
                             const toShow = invoice.status
                             var status = `<td class="status" style="font-weight: 600;${invoice.status === "Unpaid" ? 'color:blue;' : 'color:green'}">` + invoice.status + '</td>';
                             var dropdownMenu = `<td><i class="fe fe-more-vertical three-dots"
@@ -4260,52 +4155,312 @@ console.log(response.data[0])
                         return tenant.propertyName
                     }
                 })
-                console.log(propertyName)
                 $("#propertyName").empty()
                 $("#propertyUnit").empty()
-                $("#propertyName").append($('<option label="Choose one"></option>'))
+                $("[name='property']").empty()
+                $("[name='property']").append($('<option label="Choose one"></option>'))
+                $("[name='property']").append($('<option></option>').text(propertyName[0].propertyName).val(propertyName[0].propertyID))
                 $("#propertyUnit").append($('<option label="Choose one"></option>'))
                 $("#propertyName").append($('<option></option>').text(propertyName[0].propertyName).val(propertyName[0].propertyID))
                 $("#propertyUnit").append($('<option></option>').text(propertyName[0].unitNumber).val(propertyName[0].propertyUnitID))
-            })
+                $("#add-item-container1 .tr").empty()
+                $("#add-item-container1").append(`
+      <tr class="tr">
+        <td>
+          <select id="state" name="category" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the state where you reside" data-bs-container="#addModal" required>
+            <option selected="">Choose...</option>
+            ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
+          </select>
+          <span class="text-danger d-none">State is required!</span>
+        </td>
+        <td>
+          <select id="state" name="property" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the state where you reside" data-bs-container="#addModal" required>
+            <option selected="">Choose...</option>
+            <option value="${propertyName[0].propertyID}">${propertyName[0].propertyName}</option>
+          </select>
+          <span class="text-danger d-none">State is required!</span>
+        </td>
+        <td><input type="text" class="form-control" name="memo"></td>
+        <td><input type="text" class="form-control" name="tax"
+                                                    data-bs-placement="top" data-bs-toggle="tooltip" title=""
+                                                    data-bs-original-title="Tax associated with this category"
+                                                    data-bs-container="#addModal" readonly></td>
+        <td><input type="text" class="form-control" name="amount" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" required></td>
+        <td>
+          <button type="button" class="btn" id="del-btn1">
+            <i class="fi fi-rs-trash text-danger fs-5"></i>
+          </button>
+        </td>
+      </tr>
+    `)
 
+
+
+                $("[name='category']").append($('<option></option>').text("Rent Amount").val("rent"));
+
+
+                if (propertyName[0].gross_or_triple_lease === "Triple Net Lease") {
+
+                    $("[name='category']").append($('<option></option>').text("Triple Net").val("triple"));
+
+                    $("[name='category']").append($('<option></option>').text("Base Rent").val("base"));
+
+                }
+
+            })
+            $(document).on("change", ".tr [name='category'], .tr [name='category_update']", function () {
+
+
+                const selectedCategoryId = $(this).val();
+
+                // Find the selected <option> element within the <select> and get its text
+                const selectedCategory = $(this).find("option:selected").text();
+
+                // Determine if the changed element is a category or category_update input
+                const isCategory = $(this).attr("name") === "category";
+                const property = isCategory ? $("#tenants").val() : $("#tenants_update").val()
+                // Find the matching category object in the categoryData array
+                const matchingCategory = categoryData.find((category) => category.id == selectedCategoryId);
+                const tenant = tenantData.filter((tenant) => {
+                    return tenant.tenantID == property
+                })
+
+                // Get the parent row of the changed input
+                const parentRow = $(this).closest(".tr");
+                let amountInput;
+                if (selectedCategory == "Rent Amount" || selectedCategory == "Triple Net" || selectedCategory == "Base Rent") {
+                    amountInput = isCategory ? parentRow.find("[name='amount']") : parentRow.find("[name='amount_update']");
+                    let amount = tenant[0].rentAmount
+                    if (selectedCategory == "Rent Amount") {
+                        amount = tenant[0].rentAmount
+                    } else if (selectedCategory == "Triple Net") {
+                        amount = tenant[0].tripleNet
+                    } else {
+                        amount = tenant[0].baseRent
+                    }
+                    const taxField = isCategory ? "[name='tax']" : "[name='tax_update']"
+                    parentRow.find(taxField).val(0)
+                    amountInput.val(amount);
+
+                } else {
+                    amountInput = isCategory ? parentRow.find("[name='tax']") : parentRow.find("[name='tax_update']");
+                    if (matchingCategory) {
+                        const amount = matchingCategory.setTaxes;
+                        const amountField = isCategory ? "[name='amount']" : "[name='amount_update']"
+                        parentRow.find(amountField).val("")
+                        amountInput.val(amount);
+                    } else {
+                        // Handle the case when no matching category is found for the current row
+                        amountInput.val("No matching category found.");
+                    }
+                }
+                // Find the corresponding amount input within that row based on whether it's a category or category_update input
+
+
+                // Check if a matching category is found
+
+            });
+
+
+
+
+
+
+
+            function optionExists(value) {
+                console.log($("[name='category']").find('option[value="' + value + '"]').length > 0)
+                return $("[name='category']").find('option[value="' + value + '"]').length > 0;
+            }
 
             $(document).on("click", "#add-item1", () => {
-                $("#add-item-container1").append(`<tr class="tr">
-                                            <td><input type="text" class="form-control" name="category"></td>
-                                            <td><input type="text" class="form-control" name="property"></td>
-                                            <td><input type="text" class="form-control" name="memo"></td>
-                                            <td><input type="text" class="form-control" name="amount" oninput="this.value = this.value.replace(/[^0-9.]/g, '')"></td>
-                                            <td><button type="button" class="btn" id="del-btn1">
-                                                <i class="fi fi-rs-trash text-danger fs-5"></i>
-                                            </button></td>
-                                        </tr>`)
+                const property = $("#tenants").val();
+                const propertyName = tenantData.filter((tenant) => tenant.tenantID == property);
+                console.log(propertyName)
+                if (property == "Choose...") {
+                    $("#add-item-container1").append(`
+      <tr class="tr">
+        <td>
+          <select id="state" name="category" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the state where you reside" data-bs-container="#addModal" required>
+            <option selected="">Choose...</option>
+            ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
+          </select>
+          <span class="text-danger d-none">State is required!</span>
+        </td>
+        <td>
+          <select id="state" name="property" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the state where you reside" data-bs-container="#addModal" required>
+            <option selected="">Choose...</option>
+          </select>
+          <span class="text-danger d-none">State is required!</span>
+        </td>
+        <td><input type="text" class="form-control" name="memo"></td>
+        <td><input type="text" class="form-control" name="tax"
+                                                    data-bs-placement="top" data-bs-toggle="tooltip" title=""
+                                                    data-bs-original-title="Tax associated with this category"
+                                                    data-bs-container="#addModal" readonly></td>
+        <td><input type="text" class="form-control" name="amount" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" required></td>
+        <td>
+          <button type="button" class="btn" id="del-btn1">
+            <i class="fi fi-rs-trash text-danger fs-5"></i>
+          </button>
+        </td>
+      </tr>
+    `);
+
+                } else {
+
+                    $("#add-item-container1").append(`
+      <tr class="tr">
+        <td>
+          <select id="state" name="category" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the state where you reside" data-bs-container="#addModal" required>
+            <option selected="">Choose...</option>
+            ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
+          </select>
+          <span class="text-danger d-none">State is required!</span>
+        </td>
+        <td>
+          <select id="state" name="property" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the state where you reside" data-bs-container="#addModal" required>
+            <option selected="">Choose...</option>
+            <option value="${propertyName[0].propertyID}">${propertyName[0].propertyName}</option>
+          </select>
+          <span class="text-danger d-none">State is required!</span>
+        </td>
+        <td><input type="text" class="form-control" name="memo"></td>
+        <td><input type="text" class="form-control" name="tax"
+                                                    data-bs-placement="top" data-bs-toggle="tooltip" title=""
+                                                    data-bs-original-title="Tax associated with this category"
+                                                    data-bs-container="#addModal" readonly></td>
+        <td><input type="text" class="form-control" name="amount" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" required></td>
+        <td>
+          <button type="button" class="btn" id="del-btn1">
+            <i class="fi fi-rs-trash text-danger fs-5"></i>
+          </button>
+        </td>
+      </tr>
+    `);
+                    const categorySelect = $("#add-item-container1").find(".tr").last().find("[name='category']");
+                    const optionExists = (value) => categorySelect.find('option[value="' + value + '"]').length > 0;
+
+                    // Append options only if they don't exist in the current "category" select of the row
+                    if (!optionExists("rent")) {
+                        categorySelect.append($('<option></option>').text("Rent Amount").val("rent"));
+                    }
+
+                    if (propertyName[0].gross_or_triple_lease === "Triple Net Lease") {
+                        if (!optionExists("triple")) {
+                            categorySelect.append($('<option></option>').text("Triple Net").val("triple"));
+                        }
+
+                        if (!optionExists("base")) {
+                            categorySelect.append($('<option></option>').text("Base Rent").val("base"));
+                        }
+                    }
+                }
             });
+
             $(document).on("click", "#add-item1_update", () => {
-                $("#add-item-container1_update").append(`<tr class="tr">
-                                            <td><input type="text" class="form-control" name="category_update"></td>
-                                            <td><input type="text" class="form-control" name="memo_update"></td>
-                                            <td><input type="text" class="form-control" name="property_update"></td>
-                                            <td><input type="text" class="form-control" name="amount_update" data-bs-placement="top" data-bs-toggle="tooltip" title=""
-                                                    data-bs-original-title="Enter amount here"
-                                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '')"></td>
-                                            <td><button type="button" class="btn" id="del-btn_update">
-                                                <i class="fi fi-rs-trash text-danger fs-5"></i>
-                                            </button></td>
-                                        </tr>`)
+                const property = $("#tenants_update").val()
+                const propertyName = tenantData.filter((tenant) => tenant.tenantID == property);
+                console.log(propertyName)
+                if (property == "Choose...") {
+                    $("#add-item-container1_update").append(`
+      <tr class="tr">
+        <td>
+          <select id="state" name="category_update" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the state where you reside" data-bs-container="#addModal" required>
+            <option selected="">Choose...</option>
+            ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
+          </select>
+          <span class="text-danger d-none">State is required!</span>
+        </td>
+        <td>
+          <select id="state" name="property_update" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the state where you reside" data-bs-container="#addModal" required>
+            <option selected="">Choose...</option>
+          </select>
+          <span class="text-danger d-none">State is required!</span>
+        </td>
+        <td><input type="text" class="form-control" name="memo_update"></td>
+        <td><input type="text" class="form-control" name="tax_update"
+                                                    data-bs-placement="top" data-bs-toggle="tooltip" title=""
+                                                    data-bs-original-title="Tax associated with this category"
+                                                    data-bs-container="#addModal" readonly></td>
+        <td><input type="text" class="form-control" name="amount_update" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" required></td>
+        <td>
+          <button type="button" class="btn" id="del-btn_update">
+            <i class="fi fi-rs-trash text-danger fs-5"></i>
+          </button>
+        </td>
+      </tr>
+    `);
+
+                } else {
+
+                    $("#add-item-container1_update").append(`
+      <tr class="tr">
+        <td>
+          <select id="state" name="category_update" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the state where you reside" data-bs-container="#addModal" required>
+            <option selected="">Choose...</option>
+            ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
+          </select>
+          <span class="text-danger d-none">State is required!</span>
+        </td>
+        <td>
+          <select id="state" name="property_update" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the state where you reside" data-bs-container="#addModal" required>
+            <option selected="">Choose...</option>
+            <option value="${propertyName[0].propertyID}">${propertyName[0].propertyName}</option>
+          </select>
+          <span class="text-danger d-none">State is required!</span>
+        </td>
+        <td><input type="text" class="form-control" name="memo_update"></td>
+        <td><input type="text" class="form-control" name="tax_update"
+                                                    data-bs-placement="top" data-bs-toggle="tooltip" title=""
+                                                    data-bs-original-title="Tax associated with this category"
+                                                    data-bs-container="#addModal" readonly></td>
+        <td><input type="text" class="form-control" name="amount_update" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" required></td>
+        <td>
+          <button type="button" class="btn" id="del-btn_update">
+            <i class="fi fi-rs-trash text-danger fs-5"></i>
+          </button>
+        </td>
+      </tr>
+    `);
+                    const categorySelect = $("#add-item-container1_update").find(".tr").last().find("[name='category_update']");
+                    const optionExists = (value) => categorySelect.find('option[value="' + value + '"]').length > 0;
+
+                    // Append options only if they don't exist in the current "category" select of the row
+                    if (!optionExists("rent")) {
+                        categorySelect.append($('<option></option>').text("Rent Amount").val("rent"));
+                    }
+
+                    if (propertyName[0].gross_or_triple_lease === "Triple Net Lease") {
+                        if (!optionExists("triple")) {
+                            categorySelect.append($('<option></option>').text("Triple Net").val("triple"));
+                        }
+
+                        if (!optionExists("base")) {
+                            categorySelect.append($('<option></option>').text("Base Rent").val("base"));
+                        }
+                    }
+                }
             });
             // $(document).on("input", "input[name='amount'], input[name='amount_update']", updateTotal);
 
-            function updateTotal() {
+            function updateTotal(isUpdate) {
                 var total = 0;
 
-                $("input[name='amount'], input[name='amount_update']").each(function () {
-                    var inputValue = $(this).val();
+                // Debugging statement to check the selector
 
+
+                $("input[name='amount" + isUpdate + "']").each(function () {
+                    var inputValue = $(this).val();
+                    console.log(inputValue);
+                    var tax = $(this).closest(".tr").find("input[name='tax" + isUpdate + "']").val();
                     if (inputValue !== "") {
                         var numericValue = parseFloat(inputValue);
+
                         if (!isNaN(numericValue)) {
-                            total += numericValue;
+                            console.log(tax)
+                            total += numericValue + ((numericValue * parseFloat(isNaN(tax) ? 0 : tax)) / 100);
+
+                            console.log(total)
                         }
                     }
                 });
@@ -4315,15 +4470,17 @@ console.log(response.data[0])
                 }
 
                 if (total === 0) {
-                    $("#totalText").text("$ 0.00");
-                    $("#totalText_update").text("$ 0.00"); // Update the 'textTotal_update' field as well
+                    console.log($("#totalText" + isUpdate))
+                    $("#totalText" + isUpdate).text("$ 0.00");
+                    // Update the 'textTotal_update' field as well
                 } else {
-                    $("#totalText").text("$ " + total);
-                    $("#totalText_update").text("$ " + total); // Update the 'textTotal_update' field as well
+                    $("#totalText" + isUpdate).text("$ " + total);
+                    // Update the 'textTotal_update' field as well
                 }
 
                 // Perform other operations on the dynamically added input element as needed
             }
+
 
             $('#add-item-container1').on('click', '#del-btn1', function () {
                 var $row = $(this).closest('.tr');
@@ -4331,7 +4488,7 @@ console.log(response.data[0])
 
                 if ($rowsContainer.children('.tr').length > 1) {
                     $row.remove();
-                    updateTotal()
+                    updateTotal("")
                 } else {
                     //   alert('Cannot delete the last row.');
                 }
@@ -4343,7 +4500,7 @@ console.log(response.data[0])
 
                 if ($rowsContainer.children('.tr').length > 1) {
                     $row.remove();
-                    updateTotal()
+                    updateTotal("_update")
                 } else {
                     //   alert('Cannot delete the last row.');
                 }
@@ -4519,37 +4676,58 @@ console.log(response.data[0])
                 )
 
                 $("#memo-table").empty()
+                let totalTaxAmount = 0; 
+                
                 data.memo.forEach((item) => {
-                    $("#memo-table").append(`
-                <tr class="text-black">
-                                                    <td style="    border-bottom: 2px solid black;">
-                                                        <p style="font-weight: bold;" class="mb-1">Services</p>
-                                                        <span>${item.memo
-                        }</span>
-                                                    </td>
-                                                    </td>
-                                                    <td style="    border-bottom: 2px solid black;">${data.propertyName}</td>
-                                                    <td style="    border-bottom: 2px solid black;">${item.category}</td>
-                                                    <td style="    border-bottom: 2px solid black;">$ ${item.amount}</td>
-                                                </tr>
-                `)
+    // Calculate the tax amount as a percentage of the item amount
+    const taxAmount = (parseFloat(item.amount) * parseFloat(item.tax)) / 100;
+
+    // Add the tax amount to the totalTaxAmount variable
+    totalTaxAmount += taxAmount;
+    let categoryname;
+    if(item.category=="rent"){
+        categoryname="Rent Amount"
+    }else if(item.category=="triple"){
+        categoryname="Triple Net"
+    }else if(item.category=="base"){
+        categoryname="Base Rent"
+    }else{
+        const category=categoryData.filter((categorydata)=>{
+        return categorydata.id==item.category
+    })
+    categoryname=category[0].categorieName
+    }
+    
+    $("#memo-table").append(`
+        <tr class="text-black">
+            <td style="border-bottom: 2px solid black;">
+                <p style="font-weight: bold;" class="mb-1">Services</p>
+                <span>${item.memo}</span>
+            </td>
+            <td style="border-bottom: 2px solid black;">${data.propertyName}</td>
+            <td style="border-bottom: 2px solid black;">${categoryname}</td>
+            <td style="border-bottom: 2px solid black;"> ${item.tax} %</td>
+            <td style="border-bottom: 2px solid black;">${item.amount}</td>
+            
+        </tr>
+    `);
                     $("#price-table").empty()
                     $("#price-table").append(`
                 <tr class="text-black">
                                                     <td>Subtotal</td>
-                                                    <td>$ ${data.totalAmount}</td>
+                                                    <td>$ ${data.totalAmount-totalTaxAmount}</td>
                                                 </tr>
                                                 <tr class="text-black">
                                                     <td>Discount</td>
                                                     <td>$ ${0}</td>
                                                 </tr>
                                                 <tr class="text-black" style="    border-bottom: 1px solid #AFAFAF;">
-                                                    <td>Tax (0%)</td>
-                                                    <td>$ ${0}</td>
+                                                    <td>Tax</td>
+                                                    <td>$ ${totalTaxAmount}</td>
                                                 </tr>
                                                 <tr class="text-black">
                                                     <td>Total</td>
-                                                    <td>$ ${data.totalAmount + 0}</td>
+                                                    <td>$ ${data.totalAmount}</td>
                                                 </tr>
                                                 <tr class="text-black" style="    border-bottom: 2px solid #562AC8;">
                                                     <td>Deposit Requested</td>
@@ -4557,7 +4735,7 @@ console.log(response.data[0])
                                                 </tr>
                                                 <tr class="text-black">
                                                     <td class="fw-bold">Deposit Due</td>
-                                                    <td class="fw-bold">$ ${data.totalAmount + 0 + 0}</td>
+                                                    <td class="fw-bold">$ ${data.totalAmount}</td>
                                                 </tr>
                 `)
 
@@ -4567,6 +4745,7 @@ console.log(response.data[0])
             })
             $(document).on('click', ".view-btnn", function (e) {
                 e.preventDefault();
+
                 const invoiceIdElement = $(this).closest("tr").find(".invoice-id");
                 invoiceId = invoiceIdElement.text();
                 const data1 = invoiceData.find(obj => obj.invoiceID == invoiceId);
@@ -4582,40 +4761,46 @@ console.log(response.data[0])
                 $("#dueDate").text(data.dueDate)
                 $("#invoiceStatus").text(data.status)
                 $("#propertyAddress").text(data.pAddress)
-                // $("#invoiceCategory").text(data.invoiceType)
-                // $("#invoiceProperty").text(data.invoiceType)
-                // $("#invoiceMemo").text(data.invoiceType)
-                // $("#invoiceAmount").text(data.invoiceType)
-                // $("#client-id").append(`<h5 class="fw-bold" style="color: 
-                //                 #562AC8;">BILLED TO</h5>
-                //                     <p class="text-dark">${data.firstName + " " + data.lastName}<br>${data.tAddress
-                //     }<br>${data.tCity},
-                //                         ${data.tState}<br>${data.tZipcode}<br>United States<br>${data.tPhoneNumber}</p>`)
-                // console.log(1)
-                // $("#owner-id").empty()
-                // $("#owner-id").append(`                                    <h5 class="text-dark fw-bold">${data.companyName}</h5>
-                //                     <p class="text-dark">${data.pAddress}<br>${data.pCity}, ${data.pState}<br>${data.pZipCode}<br>United
-                //                         States<br>1-888-123-8910</p>`)
-                // $("#table-body").empty()
-                // var dateObj = new Date(data.created_at);
-                // var day = dateObj.getDate();
-                // var month = dateObj.getMonth() + 1;
-                // var year = dateObj.getFullYear();
+
                 $("#view-invoice-line-item").empty()
                 data.memo.forEach((item) => {
 
-                    console.log(item)
-                    $("#view-invoice-line-item").append(`
+                    const category = categoryData.filter((cat) => { return item.category == cat.id })
+
+                    if (category.length == 0) {
+                        let categoryname;
+                        if (item.category == "rent") {
+                            categoryname = "Rent Amount"
+                        } else if (item.category == "triple") {
+                            categoryname = "Triple Net"
+                        } else {
+                            categoryname = "Base Rent"
+                        }
+                        $("#view-invoice-line-item").append(`
                 <tr>
                                                     <td>
-                                                        <p class="text-primary"><b>${item.category}</b></p>
+                                                        <p class="text-primary"><b>${categoryname}</b></p>
                                                     </td>
                                                     
-                                                    <td><p class="text-primary"><b>${item.property}</b></p></td>
+                                                    <td><p class="text-primary"><b>${data.propertyName}</b></p></td>
                                                     <td><p class="text-primary"><b>${item.memo}</b></p></td>
                                                     <td><p class="text-primary"><b>$ ${item.amount}</b></p></td>
                                                 </tr>
                 `)
+                    } else {
+                        $("#view-invoice-line-item").append(`
+                <tr>
+                                                    <td>
+                                                        <p class="text-primary"><b>${category[0]?.categorieName}</b></p>
+                                                    </td>
+                                                    
+                                                    <td><p class="text-primary"><b>${data.propertyName}</b></p></td>
+                                                    <td><p class="text-primary"><b>${item.memo}</b></p></td>
+                                                    <td><p class="text-primary"><b>$ ${item.amount}</b></p></td>
+                                                </tr>
+                `)
+                    }
+
 
 
                 })
@@ -4623,7 +4808,7 @@ console.log(response.data[0])
                 if (data.invoiceImages) {
                     const images = data.invoiceImages
                     $("#view-invoice-images").empty()
-                    images.forEach(({Image}) => {
+                    images.forEach(({ Image }) => {
                         $("#view-invoice-images").append(`
                             <img src="${Image}" width=200px height=200px alt=""> &nbsp;`)
                     })
@@ -4652,23 +4837,12 @@ console.log(response.data[0])
                     ...data1,
                     ...data2
                 };
-                console.log(data)
-                //         window.onload = function () {
-                //     document.getElementById("create_pdf")
-                //         .addEventListener("click", () => {
-                //             const invoice = this.document.getElementById("htmlContent");
-                //             // console.log(invoice);
-                //             // console.log(window);
-                //             var opt = {
-                //                 margin: 0.1,
-                //                 filename: `invoice.pdf`,
-                //                 image: { type: 'jpeg', quality: 0.98 },
-                //                 html2canvas: { scale: 2 },
-                //                 jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-                //             };
-                //             html2pdf().from(invoice).set(opt).save();
-                //         })
-                // }
+                console.log($(".invoice-numebr"))
+                $(".invoice-number").each(function(){
+                    console.log($(this))
+                    $(this).text("#Invoice Number: INV-"+ data.invoiceID)
+
+                })
             });
             $(document).on('click', '.status-option', function () {
                 // const invoiceIdElement = $(this).closest("tr").find(".invoice-id");
@@ -4711,7 +4885,12 @@ console.log(response.data[0])
                         }, 2000);
                     },
                     error: function (xhr, status, error) {
-                        window.alert('Error: ' + error);
+                        $("#myModal_warning_connection").modal("show");
+                            setTimeout(function() {
+                                $('#myModal_warning_connection').modal('hide');
+
+                            }, 2000);
+                    console.log('Error: ' + error);
                     }
                 });
             })
@@ -4753,7 +4932,8 @@ console.log(response.data[0])
                     $("#terms_update").append($('<option></option>').text((data.terms)).val((data.terms)).attr("selected", "selected"))
                     $("#daysUntilDue_update").val(data.daysDue)
                     // $("#terms_update").val(data.terms)
-                    if (data.repeatTerms == "true") {
+                    console.log()
+                    if (data.repeatTerms == "1") {
                         $("input[name='custom-switch-radio_update']").prop("checked", true);
                     } else {
                         $("input[name='custom-switch-radio_update']").prop("checked", false);
@@ -4769,36 +4949,122 @@ console.log(response.data[0])
                 })
                 $("#propertyName_update").val(propertyName[0].propertyName)
                 $("#dueDate_update").val(data.dueDate)
+                let sum = 0
                 $('#add-item-container1_update').empty()
                 data.memo.forEach(({
                     memo,
                     category,
+                    tax,
                     amount
-                }) => {
+                }, index) => {
+
+                    const categoryid = category
+                    sum = parseInt(amount)
                     $('#add-item-container1_update').append(
                         `<tr class="tr">
-                                            <td><input type="text" class="form-control" name="category_update" value=${category}></td>
+                            <td>
+                                <select id="state" name="category_update" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the state where you reside" data-bs-container="#addModal" required>
+    <option>Choose...</option>
+    ${categoryData.map((category) => `<option value="${category.id}" ${category.id == categoryid ? 'selected=" "' : ''}>${category.categorieName}</option>`).join("")}
+</select>
+
+          <span class="text-danger d-none">State is required!</span>
+        </td>
+        <td>
+          <select id="state" name="property_update" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the state where you reside" data-bs-container="#addModal" required>
+            <option selected="">Choose...</option>
+            <option value="${propertyName[0].propertyID}" selected=" ">${propertyName[0].propertyName}</option>
+          </select>
+          <span class="text-danger d-none">State is required!</span>
+        </td>
                                             <td><input type="text" class="form-control" name="memo_update" value=${memo}></td>
-                                            <td><input type="text" class="form-control" name="property_update" value=${property}></td>
+                                            <td><input type="text" class="form-control" name="tax_update" value=${tax ? tax : 0}
+                                                    data-bs-placement="top" data-bs-toggle="tooltip" title=""
+                                                    data-bs-original-title="Tax associated with this category"
+                                                    data-bs-container="#addModal" readonly></td>
                                             <td><input type="text" class="form-control" name="amount_update" value=${amount} data-bs-placement="top" data-bs-toggle="tooltip" title=""
                                                     data-bs-original-title="Enter amount here"
-                                                    
                                                     oninput="this.value = this.value.replace(/[^0-9.]/g, '')"></td>
                                             <td><button type="button" class="btn" id="del-btn_update">
                                                 <i class="fi fi-rs-trash text-danger fs-5"></i>
                                             </button></td>
                                         </tr>`
                     )
+
+                    if ($("[name='category_update']").eq(index).val() == "Choose...") {
+                        console.log(category == "rent")
+                        // Add the "Rent Amount" option to the select element with the name "category_update"
+                        $("[name='category_update']").append($('<option></option>').text("Rent Amount").val("rent").prop("selected", category === "rent" ? true : false));
+                        // Check the property's "gross_or_triple_lease" and add options accordingly
+                        if (propertyName[0].gross_or_triple_lease === "Triple Net Lease") {
+                            $("[name='category_update']").append($('<option></option>').text("Triple Net").val("triple").prop("selected", category === "triple" ? true : false));
+                            $("[name='category_update']").append($('<option></option>').text("Base Rent").val("base").prop("selected", category === "base" ? true : false));
+                        }
+
+
+                    }
+
+
                 })
-                $("#totalText_update").text(`$ ${data.totalAmount}`)
+
                 $("#additionalNotes_update").val(data.note)
+                $("#totalText_update").text("$ "+data.totalAmount)
                 selectedFiles = []
-                if (data.invoiceImages[0].Image!==null) {
+                if (data.invoiceImages[0].Image !== null) {
                     selectedFiles = data.invoiceImages
                     updateSelectedFilesContainer()
                 }
                 $("#myModal_edit").modal("show");
 
+            });
+            function areAllFieldsFilled() {
+                var accordion1Fields = $('#addModal input[required], #addModal select[required]');
+                // var accordion2Fields = $('#accordion-item2 input[type="text"], #accordion-item2 select');
+                // var imageInput = $('#fileInput');
+                var allFieldsFilled = accordion1Fields.filter(function () {
+                    return $(this).val() === '' || $(this).val() === 'Choose...';
+                }).length === 0
+                
+                return allFieldsFilled;
+            }
+
+            // Function to enable or disable buttons based on field status
+            function updateButtonStatus() {
+                var allFieldsFilled = areAllFieldsFilled();
+
+                // Enable or disable the buttons based on the fields' status
+                if (allFieldsFilled) {
+                    $('#toggle-button,.save-invoice').removeAttr("disabled")
+                } else {
+                    $('#toggle-button,.save-invoice').attr("disabled",true);
+
+                }
+            }
+
+            // Call the updateButtonStatus function when any field in the accordions is changed
+            $('#addModal input[required], #addModal select[required]').on('input change', function () {
+                var $field = $(this);
+                var $errorMessage = $field.next('.text-danger');
+                if ($field.attr("id") === "zip") {
+                    if ($field.val().length !== 5) {
+                        $field.addClass('border-danger');
+                        $field.removeClass('border-green');
+                        $errorMessage.removeClass('d-none');
+                    } else {
+                        $field.removeClass('border-danger');
+                        $field.addClass('border-green');
+                        $errorMessage.addClass('d-none');
+                    }
+                } else if ($field.val() === '' || $field.val() === 'Choose...') {
+                    $field.addClass('border-danger');
+                    $field.removeClass('border-green');
+                    $errorMessage.removeClass('d-none');
+                } else {
+                    $field.removeClass('border-danger');
+                    $field.addClass('border-green');
+                    $errorMessage.addClass('d-none');
+                }
+                updateButtonStatus();
             });
             $(".save-invoice_update").each(function () {
                 $(this).on("click", function () {
@@ -4817,15 +5083,17 @@ console.log(response.data[0])
                     var lineItems = [];
                     $('#lineItemsTable_update tbody tr').each(function () {
 
-                        var category = $(this).find('input[name="category_update"]').val();
-                        var property = $(this).find('input[name="property_update"]').val();
+                        var category = $(this).find('[name="category_update"]').val();
+                        var property = $(this).find('[name="property_update"]').val();
                         var memo = $(this).find('input[name="memo_update"]').val();
                         var amount = $(this).find('input[name="amount_update"]').val();
+                        var tax = $(this).find('input[name="tax_update"]').val();
 
                         lineItems.push({
                             category: category,
                             property: property,
                             memo: memo,
+                            tax: tax,
                             amount: amount
                         });
                     });
@@ -4893,21 +5161,31 @@ console.log(response.data[0])
                                     },
                                     success: function (response) {
                                         $("#myModal_edit").modal("hide")
-                        getData()
-                        $("#successfully_changed_text").text("Successfully Updated");
-                        $("#successfully_changed").modal("show");
-                        setTimeout(function () {
-                            $("#successfully_changed").modal("hide");
-                        }, 2000);
+                                        getData()
+                                        $("#successfully_changed_text").text("Successfully Updated");
+                                        $("#successfully_changed").modal("show");
+                                        setTimeout(function () {
+                                            $("#successfully_changed").modal("hide");
+                                        }, 2000);
                                     },
                                     error: function (xhr, status, error) {
-                                        window.alert('Error: ' + error);
+                                        $("#myModal_warning_connection").modal("show");
+                            setTimeout(function() {
+                                $('#myModal_warning_connection').modal('hide');
+
+                            }, 2000);
+                    console.log('Error: ' + error);
                                     }
                                 });
 
                             },
                             error: function (xhr, status, error) {
-                                window.alert('Error: ' + error);
+                                $("#myModal_warning_connection").modal("show");
+                            setTimeout(function() {
+                                $('#myModal_warning_connection').modal('hide');
+
+                            }, 2000);
+                    console.log('Error: ' + error);
                             }
                         })
                     } else {
@@ -4937,45 +5215,26 @@ console.log(response.data[0])
                             },
                             success: function (response) {
                                 $("#myModal_edit").modal("hide")
-                        getData()
-                        $("#successfully_changed_text").text("Successfully Updated");
-                        $("#successfully_changed").modal("show");
-                        setTimeout(function () {
-                            $("#successfully_changed").modal("hide");
-                        }, 2000);
+                                getData()
+                                $("#successfully_changed_text").text("Successfully Updated");
+                                $("#successfully_changed").modal("show");
+                                setTimeout(function () {
+                                    $("#successfully_changed").modal("hide");
+                                }, 2000);
                             },
                             error: function (xhr, status, error) {
-                                window.alert('Error: ' + error);
+                                $("#myModal_warning_connection").modal("show");
+                            setTimeout(function() {
+                                $('#myModal_warning_connection').modal('hide');
+
+                            }, 2000);
+                    console.log('Error: ' + error);
                             }
                         });
                     }
 
                 });
-                // Send the data and files to the API using AJAX
-                // $.ajax({
-                //     url: 'https://backend.app.spaderent.com/api/spade/UpdateInvoice',
-                //     type: 'PUT',
-                //     data: formData,
-                //     contentType: false,
-                //     processData: false,
-                //     headers: {
-                //         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                //     },
 
-                //     success: function (response) {
-                        // $("#myModal_edit").modal("hide")
-                        // getData()
-                        // $("#successfully_changed_text").text("Successfully Updated");
-                        // $("#successfully_changed").modal("show");
-                        // setTimeout(function () {
-                        //     $("#successfully_changed").modal("hide");
-                        // }, 2000);
-                //     },
-                //     error: function (xhr, status, error) {
-                //         // Handle the error response from the API
-                //         console.log('API error:', error);
-                //     }
-                // });
             });
         
         $("#update-status").click(() => {
@@ -5006,40 +5265,47 @@ console.log(response.data[0])
                     // window.location = '../Landlord/properties-all.html';
                 },
                 error: function (xhr, status, error) {
-                    window.alert('Error: ' + error);
+                    $("#myModal_warning_connection").modal("show");
+                            setTimeout(function() {
+                                $('#myModal_warning_connection').modal('hide');
+
+                            }, 2000);
+                    console.log('Error: ' + error);
                 }
+            })})
+            $(document).on('input change', '#addModal input, #addModal select, #addModal input, #addModal select,#addModal textarea', function () {
+                updateTotal("");
+                var $field = $(this);
+                var $errorMessage = $field.next('.text-danger');
+                if ($field.val() === '' || $field.val() === 'Choose...') {
+                    $field.addClass('border-danger');
+                    $field.removeClass('border-green');
+                    $errorMessage.removeClass('d-none');
+                } else {
+                    $field.removeClass('border-danger');
+                    $field.addClass('border-green');
+                    $errorMessage.addClass('d-none');
+                }
+                updateButtonStatus()
             });
-        })
-        $(document).on('input change', '#addModal input, #addModal select, #addModal input, #addModal select,#addModal textarea', function () {
-            updateTotal();
-            var $field = $(this);
-            var $errorMessage = $field.next('.text-danger');
-            if ($field.val() === '' || $field.val() === 'Choose...') {
-                $field.addClass('border-danger');
-                $field.removeClass('border-green');
-                $errorMessage.removeClass('d-none');
-            } else {
-                $field.removeClass('border-danger');
-                $field.addClass('border-green');
-                $errorMessage.addClass('d-none');
-            }
+            $("#add-item1").click(() => {
+                updateButtonStatus()
+            })
+            $(document).on('input change', '#myModal_edit input, #myModal_edit select, #myModal_edit input, #myModal_edit select,#myModal_edit textarea', function () {
+                updateTotal("_update");
+                var $field = $(this);
+                var $errorMessage = $field.next('.text-danger');
+                if ($field.val() === '' || $field.val() === 'Choose...') {
+                    $field.addClass('border-danger');
+                    $field.removeClass('border-green');
+                    $errorMessage.removeClass('d-none');
+                } else {
+                    $field.removeClass('border-danger');
+                    $field.addClass('border-green');
+                    $errorMessage.addClass('d-none');
+                }
 
-        });
-        $(document).on('input change', '#myModal_edit input, #myModal_edit select, #myModal_edit input, #myModal_edit select,#myModal_edit textarea', function () {
-            updateTotal();
-            var $field = $(this);
-            var $errorMessage = $field.next('.text-danger');
-            if ($field.val() === '' || $field.val() === 'Choose...') {
-                $field.addClass('border-danger');
-                $field.removeClass('border-green');
-                $errorMessage.removeClass('d-none');
-            } else {
-                $field.removeClass('border-danger');
-                $field.addClass('border-green');
-                $errorMessage.addClass('d-none');
-            }
-
-        });
+            });
         });
     </script>
 
@@ -5074,8 +5340,7 @@ console.log(response.data[0])
 
     <script>
         // PDF CODE START
-        document.getElementById("create_pdf")
-            .addEventListener("click", () => {
+        document.getElementById("create_pdf").addEventListener("click", () => {
                 const invoice = this.document.getElementById("htmlContent");
                 var opt = {
                     margin: 0.1,
@@ -5098,35 +5363,53 @@ console.log(response.data[0])
             // PDF CODE END
     </script>
 
-<script>
-    $(document).ready(()=>{
-        $.ajax({
-            url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
-            method: 'GET',
-            headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-            },
-            success: function (response) {
-                console.log("here")
-                if (response.message.split(":")[0]=="Your remaining days to verify your email"){
-                    $("#days-left").text(response.data>1?" "+response.data+" days":" "+response.data+" day")
-                    console.log("here")
-                    $("#user-email").val(userEmail)
-                    $("#modaldemo00").modal("show")
-                }else if(response.message=="Email is verified"){
-                    $("#account-text").remove()
-                      $("#email_verification").remove()
+    <script>
+        $(document).ready(() => {
+            $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/protected',
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function ({ image }) {
+                    
+$("#user-img").attr("src",image)
+                    $("#user-img-dark").attr("src",image)                },
+                error: function (xhr, status, error) {
+                    $("#myModal_warning").modal("show");
+                    setTimeout(function() {
+                        $('#myModal_warning').modal('hide');
+                        window.location = '../Landlord/login_module.html';
+                    }, 2000);
+                    console.log('Error occurred while fetching state and city data.');
+                    console.log(xhr);
+                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
                 }
-            },
-            error: function (xhr, status, error) {
-                console.log('Error occurred while fetching state and city data.');
-                console.log(xhr);
-                console.log(error);
-                // console.log('Error occurred while fetching state and city data.');
-            }
-        });
-    })
-</script>
+            });
+            $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    console.log("here")
+                    if (response.message == "Email is verified") {
+                        $("#account-text").remove()
+                        $("#email_verification").remove()
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.log('Error occurred while fetching state and city data.');
+                    console.log(xhr);
+                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                }
+            });
+        })
+    </script>
 </body>
 
 </html>
+

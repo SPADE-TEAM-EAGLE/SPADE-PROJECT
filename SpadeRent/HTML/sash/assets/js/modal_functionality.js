@@ -12,8 +12,6 @@ $.ajax({
         }
     $("#user-name").text(toTitleCase(user))
     $("#header-user").text(toTitleCase(user))
-        
-
     },
     error: function(xhr, status, error) {
         console.log('Error occurred while fetching state and city data.');
@@ -214,12 +212,13 @@ $(document).ready(function () {
 
 
     $('#fileInput').on('change', function () {
+        
         var files = Array.from($(this)[0].files);
         // console.log(files)
         files.forEach(function (file) {
             selectedFiles.push(file); // Add each file to the selected files array
         });
-
+        
         updateSelectedFilesContainer(); // Update the selected files container
     });
     $('#fileInput_update').on('change', function () {
@@ -259,7 +258,7 @@ function resetAccordions() {
         // Reset image input
         if (imageField.length) {
             imageField.val('');
-            imageField.siblings('label.custom-file-label').find('.custom-file-text span').first().text('Upload Photo or drag and drop here');
+            imageField.siblings('label.custom-file-label').find('.custom-file-text span').first().text('Upload Photo here');
             imageField.siblings('.selected-files').find('.file-grid').empty();
         }
         $('#accordion-item1').find('.file-grid').empty();
@@ -331,18 +330,29 @@ $("#addModal").modal("hide")
                         // console.log(1)
                         $("#unit-link").attr("href",`./property-unit.html?propertyId=${response.propertyId}`)
                 resetAccordions()
-            
+                $('#addModal').modal('hide')
+                        
                         $('#succesModal').modal('show')
             
                         // window.location = '../Landlord/properties-all.html';
                     },
                     error: function (xhr, status, error) {
-                        window.alert('Error: ' + error);
+                        $("#myModal_warning_connection").modal("show");
+                            setTimeout(function() {
+                                $('#myModal_warning_connection').modal('hide');
+
+                            }, 2000);
+                        console.log('Error: ' + error);
                     }
                 });
             },
             error: function(xhr, status, error) {
-                window.alert('Error: ' + error);
+                $("#myModal_warning_connection").modal("show");
+                            setTimeout(function() {
+                                $('#myModal_warning_connection').modal('hide');
+
+                            }, 2000);
+                            console.log('Error: ' + error);
             }
         });
     } else {
@@ -370,13 +380,18 @@ $("#addModal").modal("hide")
                 // console.log(1)
                 $("#unit-link").attr("href",`./property-unit.html?propertyId=${response.propertyId}`)
         resetAccordions()
+        $('#addModal').modal('hide')
     
                 $('#succesModal').modal('show')
     
                 // window.location = '../Landlord/properties-all.html';
             },
             error: function (xhr, status, error) {
-                window.alert('Error: ' + error);
+                $("#myModal_warning_connection").modal("show");
+                            setTimeout(function() {
+                                $('#myModal_warning_connection').modal('hide');
+                            }, 2000);
+                console.log('Error: ' + error);
             }
         });
     }
@@ -388,7 +403,7 @@ function updateSelectedFilesContainer() {
     selectedFilesContainer.empty();
     console.log(selectedFiles)
     selectedFiles.forEach(function (file, index) {
-
+        console.log(file)
         var fileElement = $('<div>')
             .addClass('selected-file')
             .append(

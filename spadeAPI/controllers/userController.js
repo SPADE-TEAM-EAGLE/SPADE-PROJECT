@@ -1,5 +1,5 @@
 const user = require("../models/user");
-const { sendMail, taskSendMail } = require("../sendmail/sendmail.js");
+const { sendMail, taskSendMail, sendMailLandlord } = require("../sendmail/sendmail.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const fs = require("fs");
@@ -31,10 +31,17 @@ const {
   delteImageFromDb,
   updateNotify,
   updatePasswordLandlord,
-  insertNotify,
-  getLeaseReport,
+  getAllProperty,
+  getPropertyReport,
   getTenantReport,
-  getPropertyReport
+  getInvoiceReportData,
+  getTaskReportData,
+  getLeaseReport,
+  getTotalAmount,
+  getTotalAmountUnpaid,
+  getTotalAmountPaid,
+  getNumPropertyTenant,
+  insertNotify,
 } = require("../constants/queries");
 
 const { hashedPassword } = require("../helper/hash");
@@ -73,6 +80,8 @@ exports.createUser = async function (req, res) {
     const name = firstName + " " + lastName;
     const mailSubject = "Spade Welcome Email";
     if (insertResult[0].affectedRows > 0) {
+
+      // console.log(name)
       // update notification table with user id
       // landlordID, emailNotification, pushNotification, textNotification
       const selectResult = await queryRunner(selectQuery("users", "Email"), [
@@ -80,11 +89,12 @@ exports.createUser = async function (req, res) {
       ]);
       await queryRunner(insertNotify, [
         selectResult[0][0].id,
-        "no",
-        "no",
-        "no"
+        "yes",
+        "yes",
+        "yes"
       ]);
-      await sendMail(email, mailSubject, password, name);
+      // await sendMail(email, mailSubject, password, name);
+      await sendMailLandlord(email, mailSubject, name);
       return res.status(200).json({ message: "User added successfully" });
     } else {
       return res.status(500).send("Failed to add user");
@@ -94,7 +104,8 @@ exports.createUser = async function (req, res) {
   }
 };
 exports.checkemail = async function (req, res) {
-  const { email } = req.body;
+  const { email } = req.query;
+  console.log(req.query)
   try {
     const selectResult = await queryRunner(selectQuery("users", "Email"), [
       email,
@@ -148,10 +159,11 @@ exports.Signin = async function (req, res) {
       const selectResult = await queryRunner(selectQuery("tenants", "email"), [
         email,
       ]);
-      console.log(selectResult[0][0])
       if (selectResult[0].length === 0) {
         res.status(400).send("Email not found");
-      } else if (await bcrypt.compare(password, selectResult[0][0].tenantPassword)) {
+      } else if (
+        await bcrypt.compare(password, selectResult[0][0].tenantPassword)
+      ) {
         const token = jwt.sign({ email, password }, config.JWT_SECRET_KEY, {
           expiresIn: "3h",
         });
@@ -234,12 +246,7 @@ exports.updateUserProfile = async function (req, res) {
   console.log(req.body)
   console.log(userId)
   try {
-    if (!firstName || !lastName || !email || !phone || !businessName || !streetAddress || !businessAddress || !imageUrl || !imageKey) {
-      // throw new Error("Please fill all the fields");
-      res.status(400).json({
-        message: "Please fill all the fields",
-      });
-    }
+    
     const selectResult = await queryRunner(selectQuery("users", "id"), [
       userId,
     ]);
@@ -577,7 +584,7 @@ exports.property = async (req, res) => {
     }
     // if everything is ok then send message and property id
     res.status(200).json({
-      message: "property created successful",
+      message: "p  y created successful",
       propertyId: propertyResult[0].insertId
     });
 
@@ -1593,6 +1600,7 @@ exports.getAllProperty = async (req, res) => {
     const getLeaseReportData = await queryRunner(getLeaseReport, [
       userId
     ]);
+    
     res.status(200).json({
       property: getAllPropertyData[0],
       tenants: getTenantsReport[0],
@@ -1641,6 +1649,7 @@ exports.getInvoiceReportData = async (req, res) => {
 exports.getDashboardData = async (req, res) => {
   try {
     const { userId } = req.user;
+    console.log(userId)
     const totalAmount = await queryRunner(getTotalAmount, [
       userId
     ]);

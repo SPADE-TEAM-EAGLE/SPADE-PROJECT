@@ -55,6 +55,7 @@ const notifyController = {
                 return res.status(200).json({
                     email: getNotifyResult[0][0].emailNotification,
                     push: getNotifyResult[0][0].pushNotification,
+                    text: getNotifyResult[0][0].textNotification,
                 });
             }
             res.status(400).json({

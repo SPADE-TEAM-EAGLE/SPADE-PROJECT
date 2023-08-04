@@ -99,7 +99,7 @@ router.get("/getAllTask", verifyToken, taskController.getAllTask);
 router.get("/taskByID", verifyToken, taskController.taskByID);
 router.put("/updateTenants", verifyToken, tenantController.updateTenants);
 router.get("/getStates", userController.getStates);
-router.get("/getVendorCategory", taskController.getVendorCategory);
+router.get("/getVendorCategory", verifyToken,taskController.getVendorCategory);
 router.get("/getVendorAssignTo", verifyToken, taskController.getVendorAssignTo);
 router.put("/updateTasks", verifyToken, taskController.updateTasks);
 router.delete("/deleteTask", taskController.deleteTask);
@@ -119,10 +119,12 @@ router.put('/verifyEmailUpdate', userController.verifyEmailUpdate);
 router.post("/addInvoiceCategory", verifyToken, invoiceController.createInvoiceCategories);
 router.put("/updatedInvoiceCategory", verifyToken, invoiceController.updateInvoiceCategories);
 router.get("/invoiceCategory", verifyToken, invoiceController.getInvoiceCategories);
-// updated notification route
-router.put("/notify", verifyToken, notifyController.updateNotifyData);    //*************************************** */
-// checkNotify
+router.get("/getInvoiceCategoriesText", verifyToken, invoiceController.getInvoiceCategoriesText);
+router.get("/dashboard", verifyToken, userController.getDashboardData);
 router.get("/checkNotify", verifyToken, notifyController.getCheckedNotify);
+
+// updated notification route
+router.put("/notify", verifyToken, notifyController.updateNotifyData);
 router.get("/notify", verifyToken, notifyController.getNotify);
 router.get("/tenantNotify", verifyTokenTenant, notifyController.getTenantNotify);
 router.put("/updateReadUnRead", verifyToken, notifyController.updateUserReadUnRead);

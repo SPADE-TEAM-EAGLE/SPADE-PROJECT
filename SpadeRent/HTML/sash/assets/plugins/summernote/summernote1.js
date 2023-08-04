@@ -132,7 +132,7 @@
 						superscript: "Superscript",
 						size: "Font Size",
 						sizeunit: "Font Size Unit"
-					},
+					}, 
 					image: {
 						image: "Picture",
 						insert: "Insert Image",
@@ -5230,7 +5230,7 @@
 				l = r.a.create('<div class="panel-heading note-toolbar" role="toolbar"/>'),
 				c = r.a.create('<div class="note-editing-area"/>'),
 				u = r.a.create('<textarea class="note-codable" aria-multiline="true"/>'),
-				d = r.a.create('<div class="note-editable" contentEditable="true" role="textbox" aria-multiline="true"/>'),
+				d = r.a.create('<div class="note-editable" id="myform_editor" contentEditable="true" role="textbox" aria-multiline="true"/>'),
 				h = r.a.create(['<output class="note-status-output" role="status" aria-live="polite"></output>', '<div class="note-statusbar" role="status">', '<div class="note-resizebar" aria-label="Resize">', '<div class="note-icon-bar"></div>', '<div class="note-icon-bar"></div>', '<div class="note-icon-bar"></div>', "</div>", "</div>"].join("")),
 				f = r.a.create('<div class="note-editor note-airframe"/>'),
 				p = r.a.create(['<div class="note-editable" contentEditable="true" role="textbox" aria-multiline="true"></div>', '<output class="note-status-output" role="status" aria-live="polite"></output>'].join("")),

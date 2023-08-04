@@ -655,6 +655,22 @@
 </head>
 
 <body onload="check()">
+    <div class="modal fade" id="myModal_warning_connection" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
+                        <div class="card-body text-center">
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24"><path fill="#fad383" d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z"/><circle cx="12" cy="16" r="1" fill="#f7b731"/><path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"/></svg></span>
+                            <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
+                            <p class="card-text text-dark m-0">Sorry! Something went wrong.</p>
+                            <p class="card-text text-dark m-0">Kindly check your internet connection or please try again later.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="myModal_warning" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered text-center" role="document">
             <div class="modal-content modal-content-demo">
@@ -678,7 +694,7 @@
                         <div class="card-body text-center">
                             <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24"><path fill="#13bfa6" d="M10.3125,16.09375a.99676.99676,0,0,1-.707-.293L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328l-6.1875,6.1875A.99676.99676,0,0,1,10.3125,16.09375Z" opacity=".99"/><path fill="#71d8c9" d="M12,2A10,10,0,1,0,22,12,10.01146,10.01146,0,0,0,12,2Zm5.207,7.61328-6.1875,6.1875a.99963.99963,0,0,1-1.41406,0L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328Z"/></svg></span>
                             <h4 class="h4 mb-0 mt-3 fw-bold">Success</h4>
-                            <p class="card-text text-dark">Successfully Signed Up</p>
+                            <p class="card-text text-dark">Account successfully created</p>
                         </div>
                     </div>
                 </div>
@@ -784,8 +800,9 @@
                                                                     (example: john@gmail.com)
                                                                 </span>
                                                                 <span class="mt-1 text-danger" id="email-span-invalid" style="display: none;">
-                                                                    Email is not associated with this account. Please enter a Valid Email Address
+                                                                    This email address is associated with another account. Please enter a different valid email address.
                                                                 </span>
+                                                                
                                                             </div>
                                                         </div>
                                                         <div class="col-12">
@@ -2589,7 +2606,7 @@
     <!-- Sticky js -->
     <script src="../assets/js/sticky.js"></script>
     <!-- CUSTOM JS -->
-    <script src="../assets/js/custom.js"></script>
+    <script src="../assets/js/custom.js"></script><script src="../assets/js/getNotification.js"></script>
 
     <script src="../assets/plugins/counters/counterup.min.js"></script>
     <script src="../assets/plugins/counters/waypoints.min.js"></script>
@@ -2658,7 +2675,7 @@
         }
 
 
-        let selectedButtonId = null;
+        let selectedButtonId = 1;
         const buttons = document.querySelectorAll('.card-btnn');
 
         buttons.forEach(button => {
@@ -2668,6 +2685,32 @@
             });
         });
         $(document).ready(function() {
+            $("#email").on("change",()=>{
+                var email = $("#email").val();
+                $.ajax({
+                    url: "https://backend.app.spaderent.com/api/spade/checkemail",
+                    type: "GET",
+                    contentType: "application/json",
+                    data: {
+                        email: email
+                    },
+                    success: function(response) {
+                        button1()
+                        if(response.message == "New user")
+                        {
+                         document.getElementById("email-span-invalid").style.display = "none";  
+                        }
+                        else{
+                         document.getElementById("email-span-invalid").style.display = "block";
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        document.getElementById("email-span-invalid").style.display = "block";
+                        $("#next1").attr("disabled",true)
+                        
+                    },
+                });
+            })
             $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/pricingPlan',
                     method: 'GET',

@@ -5,16 +5,14 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const userRoutes = require("./routes/userRoutes");
 const { connect } = require("./config/connection");
-const recurringController = require("./controllers/recurringController");
 
-// const { Server } = require("socket.io");
-// const http = require("http");
+const recurringController = require("./controllers/recurringController"); 
 const app = express();
 // const server = http.createServer(app);
 // const io = new Server(server);
 
 // const options = {
-//     origin: ["http://localhost:3000"],
+//     origin: ["https://backend.app.spaderent.com"],
 // }
 app.use(cookieParser());
 app.use(bodyParser.json());
