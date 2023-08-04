@@ -1377,19 +1377,19 @@
 
                                         <!-- 1 comments start  -->
                                         <div class="d-flex country">
-                                            <img src="../assets\header-img\comment.svg" alt="profile-user" class="avatarr profile-user brroundd nav-link cover-image dark-layout">
+                                            <img src="../assets\header-img\comment.svg"  class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
                                         <div class="d-flex country">
-                                            <img src="../assets\header-img\comment-light.webp" alt="profile-user" class="avatarr profile-user nav-link brroundd cover-image light-layout">
+                                            <img src="../assets\header-img\comment-light.webp"  class="avatarr profile-user nav-link brroundd cover-image light-layout">
                                         </div>
                                         <!-- 1 comments start  -->
 
                                         <!-- 2 comments start  -->
                                         <div class="d-flex country">
-                                            <img src="../assets\header-img\question.svg" alt="profile-user" class="avatarr profile-user brroundd nav-link cover-image dark-layout">
+                                            <img src="../assets\header-img\question.svg"  class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
                                         <div class="d-flex country">
-                                            <img src="../assets\header-img\question-light.webp" alt="profile-user" class="avatarr profile-user nav-link brroundd cover-image light-layout">
+                                            <img src="../assets\header-img\question-light.webp"  class="avatarr profile-user nav-link brroundd cover-image light-layout">
                                         </div>
                                         <!-- 2 comments start  -->
 
@@ -1452,14 +1452,14 @@
                                             </div> -->
                                         </div>
                                         <div class="d-flex country">
-                                            <img id="user-img" src="../assets\header-img\spade.svg" alt="profile-user" class="avatarr profile-user brroundd nav-link cover-image dark-layout">
+                                            <img id="user-img" src="../assets\header-img\spade.svg"  class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
                                         <div class="d-flex country">
-                                            <img src="../assets\header-img\circlels.png" alt="profile-user" class="avatarr profile-user nav-link brroundd cover-image light-layout">
+                                            <img id="user-img-dark" src="../assets\header-img\circlels.png"  class="avatarr profile-user nav-link brroundd cover-image light-layout">
                                         </div>
                                         <div class="dropdown d-flex profile-1 country">
                                             <a href="javascript:void(0)" data-bs-toggle="dropdown" class="nav-link leading-none d-flex">
-                                                <!-- <img src="../assets/images/users/21.jpg" alt="profile-user"
+                                                <!-- <img src="../assets/images/users/21.jpg" 
                                                     class="avatar  profile-user brround cover-image"> -->
                                                 <span class="dynamic-text-head text-dark" style="padding: 10px 10px;" id="header-user"></span> <i class="fe fe-chevron-down  text-dark" style="font-size: 20px; font-weight: 800;"></i>
                                             </a>
@@ -2927,7 +2927,7 @@
                             // $('#collapseSecond').removeClass('show')
                             // $('#collapseThird').removeClass('show')
                             $('#succesModal').modal('show')
-                            $("#succes-text").text(`Tenant has been successfully created and linked to ${formData.propertyUnitID} Unit with ${formData.propertyID}.`)
+                            $("#succes-text").text(`Tenant has been successfully created and linked to ${formData.propertyUnitID} Unit with Property ID ${formData.propertyID}.`)
                             getData()
                                 // $("#succesModal").modal("show")
                             resetAccordions()
@@ -3261,7 +3261,7 @@
                     // Reset image input
                     // if (imageField.length) {
                     //     imageField.val('');
-                    //     imageField.siblings('label.custom-file-label').find('.custom-file-text span').first().text('Upload Photo or drag and drop here');
+                    //     imageField.siblings('label.custom-file-label').find('.custom-file-text span').first().text('Upload Photo here');
                     //     imageField.siblings('.selected-files').find('.file-grid').empty();
                     // }
                     // // $('#accordion-item1').find('.file-grid').empty();
@@ -3681,15 +3681,25 @@
                 },
                 success: function ({ image }) {
                     
-                    $("#user-img").attr("src",image)
-                },
+$("#user-img").attr("src",image)
+                    $("#user-img-dark").attr("src",image)                },
                 error: function (xhr, status, error) {
+                    $("#myModal_warning").modal("show");
+                    setTimeout(function() {
+                        $('#myModal_warning').modal('hide');
+                        window.location = '../Landlord/login_module.html';
+                    }, 2000);
                     console.log('Error occurred while fetching state and city data.');
                     console.log(xhr);
                     console.log(error);
                     // console.log('Error occurred while fetching state and city data.');
                 }
             });
+            function formatDate(dateString) {
+    const date = new Date(dateString);
+    const options = { year: 'numeric', month: 'short', day: 'numeric' };
+    return date.toLocaleDateString('en-US', options);
+}
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/viewAllPropertyTenant',
                 type: 'GET',
@@ -3729,7 +3739,7 @@
                         // .id + '</td>';
                         var tenantName = '<td class="tenantName" style="font-weight: 600;">' + tenant.firstName + tenant.lastName + `<br><small>${tenant.tEmail}</small>` + '</td>';
                         var propertyName = '<td class="propertyName" style="font-weight: 600;">' + tenant.propertyName + `<br><small>${tenant.pAddress}</small>` + '</td>';
-                        var rentAmount = '<td class="rentAmount" style="font-weight: 600;">' + tenant.rentAmount + '<span> $</span>' + `<br><small>Next Due Date: November-12-2020</small>` + '</td>';
+                        var rentAmount = '<td class="rentAmount" style="font-weight: 600;">' + tenant.rentAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(formatDate(tenant.recurringNextDate)=="Invalid Date"?"N/A":formatDate(tenant.recurringNextDate))}` + '</td>';
                         var assignUnit = '<td class="assignUnit" style="font-weight: 600;">' + tenant.unitNumber + `<br><small>${tenant.unitArea} Square/Feet</small>` + '</td>';
                         var dropdownMenu =
                             '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +

@@ -47,6 +47,7 @@ exports.createInvoice = async (req, res) => {
     sendmails,
     totalAmount,
     images,
+    notify
   } = req.body;
   try {
     const { userId } = req.user;
@@ -56,23 +57,7 @@ exports.createInvoice = async (req, res) => {
     //   throw new Error("Please fill all the fields");
     // }
     const currentDate = new Date();
-    const invoiceResult = await queryRunner(insertInvoice, [
-      userId,
-      tenantID,
-      invoiceType,
-      startDate,
-      endDate,
-      frequency,
-      dueDate,
-      dueDays,
-      repeatTerms,
-      terms,
-      additionalNotes,
-      "Unpaid",
-      currentDate,
-      totalAmount,
-      startDate,
-    ]);
+    const invoiceResult = await queryRunner(insertInvoice, [userId, tenantID, invoiceType, startDate, endDate, frequency, dueDate, dueDays, repeatTerms, terms, additionalNotes, "Unpaid", currentDate, totalAmount, startDate,notify]);
     if (invoiceResult.affectedRows === 0) {
       res.status(400).send("Error occur in creating invoice");
     } else {
@@ -366,7 +351,7 @@ exports.UpdateInvoice = async (req, res) => {
           const amount = lineItems[i].amount;
           const lineItemTax = lineItems[i].tax;
 
-          const invoiceLineItemsResult = await queryRunner(insertLineItems, [invoiceID, category, property, memo, amount]);
+          const invoiceLineItemsResult = await queryRunner(insertLineItems, [invoiceID, category, property, memo, amount,tax]);
 
           if (invoiceLineItemsResult.affectedRows === 0) {
             return res.send(
@@ -407,7 +392,6 @@ exports.UpdateInvoice = async (req, res) => {
           imagesToDelete[i].ImageKey,
         ]);
       }
-
       // Find the images to insert into the database (present in images but not in propertycheckresult)
       const imagesToInsert = images.filter(
         (image) => !propertyImageKeys.includes(image.imageKey)
@@ -440,9 +424,7 @@ exports.UpdateInvoice = async (req, res) => {
     return res.status(400).send("Error occurred while updating invoice");
   }
 };
-
 //  ############################# Update Invoice END ############################################################
-
 //  ############################# Delete invoice Start ############################################################
 exports.invoiceDelete = async (req, res) => {
   try {
@@ -486,9 +468,7 @@ exports.invoiceDelete = async (req, res) => {
   }
 };
 //  ############################# Delete invoice End ############################################################
-
 //  ############################# Create Invoice Start ############################################################
-
 exports.resendEmail = async (req, res) => {
   const { invoiceID } = req.query;
   const { userId } = req.user;
@@ -523,7 +503,6 @@ exports.resendEmail = async (req, res) => {
   }
 };
 //  ############################# Resend Email Invoice END ############################################################
-
 // ############################# create invoice categories ############################################################
 // exports.createInvoiceCategories = async (req, res) => {
 //   try {
@@ -588,7 +567,6 @@ exports.createInvoiceCategories = async (req, res) => {
         );
       }
     }
-
     const filteredCategories = data.filter((category) => {
       return !categoriesFromDb[0].some((categoryFromDb) => {
         return category.categoryId == categoryFromDb.id;
