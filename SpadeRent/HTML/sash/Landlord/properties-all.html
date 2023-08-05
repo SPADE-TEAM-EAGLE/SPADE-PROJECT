@@ -1326,7 +1326,7 @@
                                             <a href="javascript:void(0)" data-bs-toggle="dropdown" class="nav-link leading-none d-flex">
                                                 <!-- <img src="../assets/images/users/21.jpg" 
                                                     class="avatar  profile-user brround cover-image"> -->
-                                                <span class="dynamic-text-head" style="padding: 10px 10px;" id="header-user"></span> <i class="fe fe-chevron-down dark-mode text-dark" style="font-size: 20px; font-weight: 800;"></i>
+                                                <span class="dynamic-text-head text-dark" style="padding: 10px 10px;" id="header-user"></span> <i class="fe fe-chevron-down dark-mode text-dark" style="font-size: 20px; font-weight: 800;"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                                 <!-- <div class="drop-heading">
@@ -1488,7 +1488,7 @@
                                     <i class="side-menu__icon fi fi-rs-document"></i>
                                     <span class="side-menu__label">Reports</span>
 
-                                    <i class="angle fe fe-chevron-right"></i>
+                                    <!-- <i class="angle fe fe-chevron-right"></i> -->
                                 </a>
 
                                 <li>
@@ -3065,8 +3065,9 @@ selectedFiles.forEach(function(file, index) {
                         var tableBody = $('#table_body');
 
                         tableBody.empty();
+                        console.log(response.data[0].length);
                         response.data[0].forEach(function(property) {
-  var image = '<td><img src="' + property.images[0]?.imageURL + '" alt=""></td>';
+                             var image = '<td><img src="' + property.images[0]?.imageURL + '" alt=""></td>';
 
                             var propertyId = '<td class="property-id " style="font-weight: 600;">' + property
                                 .id + '</td>';
