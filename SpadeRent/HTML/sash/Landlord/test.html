@@ -1,57 +1,38 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <form action="/charge" method="post" id="payment-form">
-        <div class="form-row">
-            <label for="card-field-placeholder">
-                Credit or debit card
-            </label>
-            <div id="card-field-placeholder" class="some initial css-classes">
-                <!-- SFC Card widget is inserted here. -->
-            </div>
-            <!-- Used to display form errors. -->
-            <div id="scard-errors" role="alert"></div>
-        </div>
-    </form>
-    <button onclick="main();">Submit Payment</button>
+<html>
+  <head>
     <script src="https://cdn.safecharge.com/safecharge_resources/v1/websdk/safecharge.js"></script>
-<script>// Instantiate Nuvei API
-    var sfc = SafeCharge({
-            env: 'int', // Nuvei API environment - 'int' (integration) or 'prod' (production - default if omitted)
-            merchantId: '6400701569295268447', // your Merchant ID provided by Nuvei
-            merchantSiteId: '244298' // your Merchant site ID provided by Nuvei
-    });
-    
-    //Instantiate Nuvei Fields
-    var ScFields = sfc.fields({
-        fonts: [ { cssUrl: ''} ]  // e.g.  https://fonts.googleapis.com/css?family=Source+Code+Pro 
-    })
-    
-    // set state field style/ check Nuvei Fields for details.
-    var style = { /* state styles */ };
-    
-    // Instantiate Nuvei Fields
-    var scard = ScFields.create('card', {style: style});
-    
-    // attach the Nuvei fields to the html placeholder
-    scard.attach(document.getElementById('card-field-placeholder'));
-    // call this from your main() in order for it to work with the html sample
-    
-      sfc.createPayment({
-          "sessionToken": "{as received from openOrder}",
-          "clientUniqueId": "251003981", // optional
-          "cardHolderName": "john smith",
-          "paymentOption": scard,
-          "billingAddress": {
-            "email": "john.smith@email.com",
-            "country": "US"
-          }
-      }, function(res) {
-            console.log(res);
-      })</script>
-</body>
+  </head>
+  <body>
+    <form action="/charge" method="post" id="payment-form">
+      <div class="row">
+        <div class="field">
+          <div id="card-number" class="input"></div>
+          <label for="card-number" data-tid="scwsdk.form.card_number_label">
+            Card number
+          </label>
+          <div class="underline">
+            
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="field col6">
+          <div id="card-expiry" class="input empty"></div>
+          <label for="card-expiry" data-tid="scwsdk.form.card_expiry_label">
+            Expiration
+          </label>
+          <div class="underline "></div>
+        </div>
+        <div class="field col6">
+          <div id="card-cvc" class="input empty"></div>
+          <label for="card-cvc" data-tid="scwsdk.form.card_cvc_label">
+            CVC
+          </label>
+          <div class="underline "></div>
+        </div>
+      </div>
+    </form>
+      <button onclick="main()">Submit Payment</button>
+      <script src="https://cdn.safecharge.com/safecharge_resources/v1/websdk/safecharge.js"></script>
+  </body>
 </html>
