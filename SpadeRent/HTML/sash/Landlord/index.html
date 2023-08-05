@@ -27,6 +27,7 @@
     <link href="../assets/css/dark-style.css" rel="stylesheet" />
     <link href="../assets/css/transparent-style.css" rel="stylesheet">
     <link href="../assets/css/skin-modes.css" rel="stylesheet" />
+    <link href="../assets/css/responsive.css" rel="stylesheet" />
 
     <!--- FONT-ICONS CSS -->
     <link href="../assets/css/icons.css" rel="stylesheet" />
@@ -1195,7 +1196,9 @@
                                                     </ul>
                                         </div>
                                         <div class="card-body">
-                                            <div id="chart-monthlyy" class="chartsh"></div>
+                                            <!-- <div id="chart-monthlyy" class="chartsh"></div> -->
+                                            <canvas id="chartBar11" class="h-275"></canvas>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -1352,6 +1355,7 @@
                                             </div>
 
                                             <div id="morrisBar88" class="chartsh"></div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -1491,6 +1495,33 @@
                                     </div>
                                 </div>
                                 <!-- Amount status end  -->
+
+                                <!-- Property Status Start  -->
+                                <div class="col-lg-6 col-md-12 mb-5">
+                                    <div class="card h-100">
+                                        <div class="card-header" style="display: flex; justify-content: space-between;">
+                                            <div style="display: flex; align-items: end;">
+                                            <label for=""><b>Property Status </b></label> &emsp;
+                                            <input type="date" class="form-control"
+                                                placeholder="Jan 6, 2022 – Jan 13, 2022" style="width: 140px;">&emsp;
+                                                <input type="date" class="form-control"
+                                                placeholder="Jan 6, 2022 – Jan 13, 2022" style="width: 140px;">
+                                            </div>
+                                                <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
+                                                    <ul class="dropdown-menu dropdown-menu-top">
+                                                        <li><a class="dropdown-item text-danger" href="#">X Remove</a></li>
+                                                    </ul>
+                                        </div>
+                                        <div class="card-body">
+                                                <center class="property-status-chart-count"><h5></h5><span style="font-size: 40px; font-weight: 800; margin-bottom: -10px;">56</span><span>Total Properties</span></center>
+                                            <div class="chart-containerr">
+                                                <canvas id="donutchartt"></canvas>
+                                                <!-- <div id="donutchartt" class="chartsh"></div> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Property Status End  -->
 
                             </div>
                         </div>
@@ -2216,6 +2247,8 @@
     <!-- Sticky js -->
     <script src="../assets/js/sticky.js"></script>
 
+    <script src="../assets/js/chart.js"></script>
+
     <!-- CHART-CIRCLE JS-->
     <script src="../assets/js/circle-progress.min.js"></script>
 
@@ -2276,6 +2309,11 @@
 
     <!-- ############################################# -->
 
+    <!-- <script src="../assets/js/chart.js"></script> -->
+        <!-- CHART-DONUT JS -->
+        <script src="../assets/js/charts.js"></script>
+        
+
     <!-- MORRIS-CHART JS -->
     <script src="../assets/plugins/morris/raphael-min.js"></script>
     <script src="../assets/plugins/morris/morris.js"></script>
@@ -2293,10 +2331,11 @@
     <script src="../assets/plugins/chart/Chart.bundle.js"></script>
     <script src="../assets/plugins/chart/utils.js"></script>
 
-    <!-- CHART-DONUT JS -->
-    <script src="../assets/js/charts.js"></script>
+
 
     <script src="../assets/js/index-chart.js"></script>
+    
+   
     <script>
         console.log(document.getElementById('customIntercomButton'))
         // Your Intercom settings (replace with your actual app_id)
@@ -2965,7 +3004,12 @@
 
     </script>
     <script src="../assets/js/index-date.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
     <!-- date picker js start  -->
+
+    
 
 
 </body>

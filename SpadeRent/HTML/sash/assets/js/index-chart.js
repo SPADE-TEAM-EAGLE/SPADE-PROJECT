@@ -1,38 +1,64 @@
+
+
 /* Prospect chart-bar*/
-var chart = c3.generate({
-    bindto: '#chart-monthlyy', // id of chart wrapper
+var ctx = document.getElementById("chartBar11").getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
     data: {
-        columns: [
-            // each columns data
-            ['data1', 17, 30, 9]
-        ],
-        type: 'bar', // default type of chart
-        colors: {
-            data1: '#2086C8'
+        labels: ["Won", "Active", "Lost"],
+        datasets: [{
+            label: 'Sales',
+            data: [290, 450, 190],
+            borderWidth: 2,
+            backgroundColor: ['#09AD95', '#2086C8', '#F82649'],
+            borderColor: ['#09AD95', '#2086C8', '#F82649'],
+            borderWidth: 2.0,
+            pointBackgroundColor: '#ffffff',
+        
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        legend: {
+            display: true
         },
-        names: {
-            // name of each serie
-            'data1': 'Maximum'
-        }
-    },
-    axis: {
-        x: {
-            type: 'category',
-            // name of each category
-            categories: ['Won', 'Active', 'Lost']
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    stepSize: 150,
+                    fontColor: "#9ba6b5",
+                },
+                gridLines: {
+                    color: 'rgba(119, 119, 142, 0.2)'
+                }
+            }],
+            xAxes: [{
+                barPercentage: 0.9,
+                barValueSpacing: 0,
+                barDatasetSpacing: 0,
+                barRadius: 0,
+                ticks: {
+                    display: true,
+                    fontColor: "#9ba6b55",
+                },
+                gridLines: {
+                    display: false,
+                    color: 'rgba(119, 119, 142, 0.2)'
+                }
+            }]
         },
-    },
-    bar: {
-        width: 120
-    },
-    legend: {
-        show: false, //hide legend
-    },
-    padding: {
-        bottom: 0,
-        top: 0
-    },
+
+        legend: {
+            labels: {
+                fontColor: "#9ba6b5"
+            },
+        },
+    }
 });
+
+
 
 /* invoice chart */
 var ctx = document.getElementById("chartPolarr");
@@ -62,6 +88,8 @@ var myChart = new Chart(ctx, {
         },
     }
 });
+
+
 
 /*Banking stats chart-bar*/
 var chart = c3.generate({
@@ -101,6 +129,8 @@ var chart = c3.generate({
         top: 0
     },
 });
+
+
 
  /* Account status chart-donut*/
   /*---- morrisBar8----*/
@@ -183,6 +213,60 @@ var chart = c3.generate({
              },
          }
      });
+     /////////////////
+
+//////////////  Property Status chart ///////////////
+
+var datapie = {
+    labels: ["Total Properties", "Vacant Properties", "Occupied Properties"],
+    datasets: [{
+        data: [70, 80, 300],
+        backgroundColor: ['#DACECE', '#529EE0', '#1467B0'],
+        hoverBackgroundColor: ['#DACECE', '#529EE0', '#1467B0']
+    }]
+};
+
+// Define the options for the doughnut chart, including the datalabels plugin
+var optionpie = {
+    responsive: true,
+    maintainAspectRatio: false,
+    legend: {
+        labels: {
+            fontColor: "#9ba6b5"
+        },
+    },
+    cutoutPercentage: 65,
+    data: [{
+        value: 25,
+        label: 'data2'
+    }, {
+        value: 75,
+        label: 'data1'
+    }],
+    backgroundColor: 'rgba(119, 119, 142, 0.2)',
+    labelColor: '#77778e',
+    colors: ['#529EE0', '#1467B0'],
+    resize: true,
+    formatter: function(x) {
+        return x + "%"
+    }
+};
+
+// Get the canvas element and set its dimensions
+var canvas = document.getElementById('donutchartt');
+canvas.width = 280;
+canvas.height = 280;
+
+// Create the doughnut chart with the datalabels plugin
+var ctx6 = canvas.getContext('2d');
+var myPieChart6 = new Chart(ctx6, {
+    type: 'doughnut',
+    data: datapie,
+    options: optionpie
+});
+
+
+   //////// //  Property Status chart ///////////////
 
 
 // <!-- date start  -->
