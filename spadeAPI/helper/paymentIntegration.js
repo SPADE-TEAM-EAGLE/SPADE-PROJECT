@@ -19,18 +19,18 @@ function getTimestamp() {
 // ############################ timestamp #################################
 
 exports.openOrder = async (req,res) => {
-    const {} = req.body;
-  const apiUrl = "https://ppp-test.nuvei.com/ppp/api/v1/openOrder.do";
+    const {currency,amount} = req.body;
+  const apiUrl = config.APIKey;
   const requestData = {
-    merchantId: "6400701569295268447",
-    merchantSiteId: "244298",
-    clientRequestId: "561ccf70-336b-11ee-a309-4f00ef0ed1ad",
-    clientUniqueId: "251003981",
-    currency: "USD",
-    amount: "200",
+    merchantId: config.merchantId,
+    merchantSiteId: config.merchantSiteId,
+    clientRequestId: config.clientRequestId,
+    clientUniqueId: config.clientUniqueId,
+    currency: currency,
+    amount: amount,
     // userTokenId: "230811147",
     timeStamp: timestamp,
-    checksum: sha256('6400701569295268447244298561ccf70-336b-11ee-a309-4f00ef0ed1ad200USD'+timestamp+'xp8GrYWC6n9wHbxWuDwRPtAPICRLbBvvY2DuLYVRu8v5ip4GHPNymd0MA8KsEpbU')
+    checksum: sha256(config.merchantId+config.merchantSiteId+config.clientRequestId+amount+currency+timestamp+config.Secret_Key)
   };
 
   const requestOptions = {
@@ -50,7 +50,8 @@ exports.openOrder = async (req,res) => {
         const data = JSON.parse(responseData);
         // console.log(data);
         res.status(200).json({
-            sessionToken:data.sessionToken
+            sessionToken:data.sessionToken,
+            clientUniqueId:data.clientUniqueId
         })
       } catch (error) {
         console.error('Error parsing response:', error);
