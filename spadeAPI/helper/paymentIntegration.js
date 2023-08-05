@@ -20,7 +20,7 @@ function getTimestamp() {
 
 exports.openOrder = async (req,res) => {
     const {currency,amount} = req.body;
-  const apiUrl = "https://ppp-test.nuvei.com/ppp/api/v1/openOrder.do";
+  const apiUrl = config.APIKey;
   const requestData = {
     merchantId: config.merchantId,
     merchantSiteId: config.merchantSiteId,
