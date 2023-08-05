@@ -28,7 +28,6 @@ exports.openOrder = async (req,res) => {
     clientUniqueId: config.clientUniqueId,
     currency: currency,
     amount: amount,
-    // userTokenId: "230811147",
     timeStamp: timestamp,
     checksum: sha256(config.merchantId+config.merchantSiteId+config.clientRequestId+amount+currency+timestamp+config.Secret_Key)
   };
@@ -50,8 +49,11 @@ exports.openOrder = async (req,res) => {
         const data = JSON.parse(responseData);
         // console.log(data);
         res.status(200).json({
+            // data
             sessionToken:data.sessionToken,
-            clientUniqueId:data.clientUniqueId
+            clientUniqueId:data.clientUniqueId,
+            merchantId:data.merchantId,
+            merchantSiteId:data.merchantSiteId,
         })
       } catch (error) {
         console.error('Error parsing response:', error);
