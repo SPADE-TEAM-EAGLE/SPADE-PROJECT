@@ -1,8 +1,8 @@
 const config = process.env;
-const safecharge = require('safecharge');
+// const safecharge = require('safecharge');
 const { request } = require('https'); // Use the built-in https module for HTTPS requests
 const sha256 = require('js-sha256');
-safecharge.initiate(config.merchantId, config.merchantSiteId, config.Secret_Key);
+// safecharge.initiate(config.merchantId, config.merchantSiteId, config.Secret_Key);
 
 // ############################ timestamp #################################
 function getTimestamp() {
