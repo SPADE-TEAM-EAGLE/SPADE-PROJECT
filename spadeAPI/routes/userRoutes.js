@@ -154,7 +154,7 @@ router.get("/TenantMessages/:chatId", verifyTokenTenant, messageClt.getAllMessag
 router.get("/LandlordMessages/:chatId", verifyToken, messageClt.getAllMessages);
 
 
-
+ 
 
 // leads routes start
 router.post("/createLead", verifyToken, leadsClt.createNewLead);

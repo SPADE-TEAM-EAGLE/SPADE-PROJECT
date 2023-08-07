@@ -786,18 +786,17 @@
         }
 
         .dark-mode .nav.panel-tabs a.active {
-            color: white;
+            color: white; 
         }
 
         #myonoffswitch1 {
             border-radius: 25px;
         }
 
-        /* .activee,
-        .btnn:hover {
-            border-radius: 25px;
-            border: 5px solid #1467B0;
-        } */
+        .activee {
+            border-radius: 31px !important;
+            border: 5px solid #1467B0 !important;
+        }
 
         .btn-actives:focus {
             border: 2px solid black;
@@ -1540,10 +1539,10 @@
             transform: scale(0);
         }
 
-        :checked+.label {
+        /* :checked+.label {
             border: 5px solid #1467B0;
-            border-radius: 26px;
-        }
+            border-radius: 32px;
+        } */
 
         /* :checked+.label:before {
             content: "✔";
@@ -1591,13 +1590,13 @@
         }
 
         .tab-content .btn i {
-                color: #000;
-            }
+            color: #000;
+        }
     </style>
 
 </head>
 
-<body class="app sidebar-mini ltr light-mode">
+<body class="app sidebar-mini ltr light-mode" onload="DarkLightChecked()">
 
     <!-- GLOBAL-LOADER -->
     <!-- <div id="global-loader">
@@ -1879,15 +1878,9 @@
                 <div class="modal-body p-0">
                     <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
                         <div class="card-body text-center">
-                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
-                                    viewBox="0 0 24 24">
-                                    <path fill="#fad383"
-                                        d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z" />
-                                    <circle cx="12" cy="16" r="1" fill="#f7b731" />
-                                    <path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z" />
-                                </svg></span>
-                            <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
-                            <p class="card-text text-dark">Current Password doesnot matches!!!!</p>
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24"><path fill="#fad383" d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z"/><circle cx="12" cy="16" r="1" fill="#f7b731"/><path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"/></svg></span>
+                          <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
+                          <p class="card-text text-dark">Session expeired!, Login again</p>
                         </div>
                     </div>
                 </div>
@@ -2047,45 +2040,44 @@
                                         <!-- LOGO -->
 
                                         <!-- COUNTRY -->
-                                        <div class="d-flex country mt-1">
+                                        <div class="d-flex country mt-2">
                                             <a class="nav-link icon theme-layout nav-link-bg layout-setting">
-                                                <span class="dark-layout text-dark"><i class="fe fe-moon"></i></span>
-                                                <span class="light-layout"><i class="fe fe-sun"></i></span>
+                                                <span class="dark-layout text-dark"><i class="fi fi-rs-moon"></i></span>
+                                                <span class="light-layout"><i class="fi fi-rs-brightness"></i></span>
                                             </a>
                                         </div>
-
                                         <div class="d-flex country mt-2">
                                             <a class="nav-link icon text-dark">
                                                 <i class="fi fi-rs-universal-access"></i>
                                             </a>
                                         </div>
-
-
                                         <!-- 1 comments start  -->
-                                        <div class="d-flex country">
-                                            <img src="../assets\header-img\comment.svg" 
+                                        <!-- <div class="d-flex country">
+                                            <img src="../assets\header-img\comment.svg"
                                                 class="avatarr profile-user brroundd nav-link cover-image dark-layout">
-                                        </div>
-                                        <div class="d-flex country">
-                                            <img src="../assets\header-img\comment-light.webp" 
-                                                class="avatarr profile-user nav-link brroundd cover-image light-layout">
+                                        </div> -->
+                                        <div class="d-flex country mt-2">
+                                            <a class="nav-link icon text-dark">
+                                                <i class="fi fi-rs-comment"></i>
+                                            </a>
+                                            <!-- <img src="../assets\header-img\comment-light.webp"
+                                                class="avatarr profile-user nav-link brroundd cover-image light-layout"> -->
                                         </div>
                                         <!-- 1 comments start  -->
-
                                         <!-- 2 comments start  -->
-                                        <div class="d-flex country">
-                                            <img src="../assets\header-img\question.svg" 
-                                                class="avatarr profile-user brroundd nav-link cover-image dark-layout">
+                                        <div class="d-flex country mt-2">
+                                            <a class="nav-link icon text-dark">
+                                                <i class="fi fi-rs-interrogation"></i>
+                                            </a>
                                         </div>
-                                        <div class="d-flex country">
-                                            <img src="../assets\header-img\question-light.webp" 
+                                        <!-- <div class="d-flex country">
+                                            <img src="../assets\header-img\question-light.webp"
                                                 class="avatarr profile-user nav-link brroundd cover-image light-layout">
-                                        </div>
+                                        </div> -->
                                         <!-- 2 comments start  -->
-
                                         <!-- 3 comments start  -->
                                         <div class="dropdown  d-flex notifications">
-                                            <a class="nav-link icon" data-bs-toggle="sidebar-right"
+                                            <a class="nav-link icon text-dark" data-bs-toggle="sidebar-right"
                                                 data-target=".sidebar-right"><i class="fe fe-bell"></i><span
                                                     class=" pulse"></span>
                                             </a>
@@ -2143,7 +2135,7 @@
                                             </div> -->
                                         </div>
                                         <div class="d-flex country">
-                                            <img id="user-img" src="../assets\header-img\spade.svg" 
+                                            <img id="user-img" src="../assets\header-img\spade.svg"
                                                 class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
                                         <div class="d-flex country">
@@ -2156,7 +2148,7 @@
                                                 class="nav-link leading-none d-flex">
                                                 <!-- <img src="../assets/images/users/21.jpg" 
                                                     class="avatar  profile-user brround cover-image"> -->
-                                                <span class="dynamic-text-head" style="padding: 10px 10px;"
+                                                <span class="dynamic-text-head text-dark text-dark" tyle="padding: 10px 10px;"
                                                     id="header-user"></span> <i
                                                     class="fe fe-chevron-down dark-mode text-dark"
                                                     style="font-size: 20px; font-weight: 800;"></i>
@@ -2329,7 +2321,15 @@
 
                                     <!-- <i class="angle fe fe-chevron-right"></i> -->
                                 </a>
+</li>
+<li class="slide">
+    <a class="side-menu__item" data-bs-toggle="slide" href="chats.html">
+        <i class="side-menu__icon fi fi-rs-comment"></i>
+        <span class="side-menu__label">Chat</span>
 
+        <!-- <i class="angle fe fe-chevron-right"></i> -->
+    </a>
+</li>
                             <li>
                                 <a class="side-menu__item has-link" href="settings.html" target="_self"><i
                                         class="side-menu__icon fi fi-rs-settings"></i><span
@@ -2380,7 +2380,7 @@
                                                     <li><a href="#tab9" data-bs-toggle="tab">Subscription</a></li>
                                                     <li><a href="#tab10" data-bs-toggle="tab">Users & Permissions</a>
                                                     </li>
-                                                    <li><a href="#tab11"  data-bs-toggle="tab">Email Templates</a></li>
+                                                    <li><a href="#tab11" data-bs-toggle="tab">Email Templates</a></li>
                                                     <li><a href="#tab12" data-bs-toggle="tab">Invoice Settings</a></li>
                                                     <li><a href="#tab13" data-bs-toggle="tab">Bank Account</a></li>
                                                     <li><a href="#tab14" data-bs-toggle="tab">Vendors</a></li>
@@ -2593,7 +2593,7 @@
                                                                             for security purposes:</p>
                                                                         <input type="password" class="form-control"
                                                                             id="current_password_reset"
-                                                                            placeholder="Current Password *" required>
+                                                                            placeholder="Old Password *" required>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -2740,7 +2740,7 @@
                                                             <input type="radio" name="test" id="cb5" />
                                                             <label for="cb5" class="label">
                                                                 <img src="../assets/images/light-mode.png" alt=""
-                                                                    class="btnn activee" id="myonoffswitch1"></label>
+                                                                    class="btnn" id="myonoffswitch1"></label>
                                                             <h5 style="padding: 10px;">Light Mode</h5>
                                                         </div>
                                                         <div class="col-lg-3 layout-setting11"
@@ -2760,7 +2760,7 @@
                                                             style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
                                                         </div>
                                                     </div>
-                                                    <div class="skin-body switch_section">
+                                                    <div class="skin-body">
                                                         <div class="switch-toggle d-flex mt-2">
                                                             <a class="bg-img1 me-2" href="javascript:void(0);"
                                                                 onclick="bgImage(this)"><img
@@ -2790,7 +2790,7 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-lg-3">
-                                                                <div class="switch_section">
+                                                                <div class="">
                                                                     <div class="switch-toggle d-flex">
                                                                         <span class="me-auto">Full Width</span>
                                                                         <p class="onoffswitch2"><input type="radio"
@@ -2982,12 +2982,12 @@
                                                                                                             <span>Upgrade
                                                                                                                 to
                                                                                                                 Basic
-                                                                                                                 <img src="../assets/images/arrow-yellow.svg"
-                                                                                                                class="float-right mt-1 mr-2 "
-                                                                                                                alt=""></span>
+                                                                                                                <img src="../assets/images/arrow-yellow.svg"
+                                                                                                                    class="float-right mt-1 mr-2 "
+                                                                                                                    alt=""></span>
 
                                                                                                             <!-- <i class="fa fa-long-arrow-right mt-1 float-right text-warning" aria-hidden="true"></i> -->
-                                                                                                            
+
                                                                                                         </button>
                                                                                                     </div>
                                                                                                 </div>
@@ -3113,12 +3113,13 @@
                                                                                                             data-id="3">
                                                                                                             <span>Upgrade
                                                                                                                 to
-                                                                                                                Pro <img src="../assets/images/arrow-blue.svg"
-                                                                                                                class="float-right mt-1 mr-2 "
-                                                                                                                alt=""></span>
+                                                                                                                Pro <img
+                                                                                                                    src="../assets/images/arrow-blue.svg"
+                                                                                                                    class="float-right mt-1 mr-2 "
+                                                                                                                    alt=""></span>
 
                                                                                                             <!-- <i class="fa fa-long-arrow-right mt-1 float-right text3-green" aria-hidden="true"></i> -->
-                                                                                                            
+
                                                                                                         </button>
                                                                                                     </div>
                                                                                                     <p
@@ -3250,12 +3251,13 @@
                                                                                                             data-id="4">
                                                                                                             <span>Upgrade
                                                                                                                 to
-                                                                                                                Basic <img src="../assets/images/arrow-blue1.svg"
-                                                                                                                class="float-right mt-1 mr-2 "
-                                                                                                                alt=""></span>
+                                                                                                                Basic
+                                                                                                                <img src="../assets/images/arrow-blue1.svg"
+                                                                                                                    class="float-right mt-1 mr-2 "
+                                                                                                                    alt=""></span>
 
                                                                                                             <!-- <i class="fa fa-long-arrow-right mt-1 float-right text4-blue" aria-hidden="true"></i> -->
-                                                                                                            
+
                                                                                                         </button>
                                                                                                     </div>
                                                                                                     <p
@@ -3499,7 +3501,8 @@
                                                                                                         <button
                                                                                                             class="btn btn-lg btn-block btn-free font-weight-bold text-white btn-warning border-btn card-btnn"
                                                                                                             data-id="6">
-                                                                                                            <span>Upgrade to
+                                                                                                            <span>Upgrade
+                                                                                                                to
                                                                                                                 Basic
                                                                                                                 <!-- <i class="fa fa-long-arrow-right mt-1 float-right text-warning" aria-hidden="true"></i> -->
                                                                                                                 <img src="../assets/images/arrow-yellow.svg"
@@ -3650,13 +3653,14 @@
                                                                                                         <button
                                                                                                             class="btn btn-lg btn-block btn-free font-weight-bold btn3-green card-btnn"
                                                                                                             data-id="7">
-                                                                                                            <span>Upgrade to
+                                                                                                            <span>Upgrade
+                                                                                                                to
                                                                                                                 Pro
                                                                                                                 <!-- <i class="fa fa-long-arrow-right mt-1 float-right text3-green" aria-hidden="true"></i> -->
                                                                                                                 <img src="../assets/images/arrow-blue.svg"
                                                                                                                     class="float-right mt-0 mr-2 "
                                                                                                                     alt=""></span>
-                                                                                                            
+
                                                                                                         </button>
                                                                                                     </div>
                                                                                                     <p
@@ -3804,13 +3808,14 @@
                                                                                                         <button
                                                                                                             class="btn btn-lg btn-block btn-free font-weight-bold btn4-blue border-btn card-btnn"
                                                                                                             data-id="8">
-                                                                                                            <span>Upgrade to
+                                                                                                            <span>Upgrade
+                                                                                                                to
                                                                                                                 Basic
                                                                                                                 <!-- <i class="fa fa-long-arrow-right mt-1 float-right text4-blue" aria-hidden="true"></i> -->
                                                                                                                 <img src="../assets/images/arrow-blue1.svg"
                                                                                                                     class="float-right mt-0 mr-2 "
                                                                                                                     alt=""></span>
-                                                                                                            
+
                                                                                                         </button>
                                                                                                     </div>
                                                                                                     <p
@@ -7455,34 +7460,54 @@
 
                                             <div class="tab-pane mt-0" id="tab13">
                                                 <!-- Row -->
-                        <div class="row">
-                            <div class="col-lg-12 col-xl-12">
-                                <div class="card">
-                                    <div class="card-header justify-content-between" style="display: flex; align-items: flex-end;">
-                                        <div class="d-flex">
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-outline-default text-dark py-1 mt-0" id="filter_btn" data-bs-toggle="dropdown"><i
-                                                        class="typcn typcn-filter me-2 fs-16"></i><strong >Filter</strong></button>
-                                                <ul class="dropdown-menu" role="menu">
-                                                    <li><a href="javascript:void(0)"><strong class="text-dark">Filter by:</strong></a>
-                                                    </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">A-Z Alphabets</a>
-                                                        <div class="form-check m-0">
-                                                            <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="alphabets" value="option1">
-                                                        </div>
-                                                    </li>
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-xl-12">
+                                                        <div class="card">
+                                                            <div class="card-header justify-content-between"
+                                                                style="display: flex; align-items: flex-end;">
+                                                                <div class="d-flex">
+                                                                    <div class="btn-group">
+                                                                        <button type="button"
+                                                                            class="btn btn-outline-default text-dark py-1 mt-0"
+                                                                            id="filter_btn" data-bs-toggle="dropdown"><i
+                                                                                class="typcn typcn-filter me-2 fs-16"></i><strong>Filter</strong></button>
+                                                                        <ul class="dropdown-menu" role="menu">
+                                                                            <li><a href="javascript:void(0)"><strong
+                                                                                        class="text-dark">Filter
+                                                                                        by:</strong></a>
+                                                                            </li>
+                                                                            <li class="d-flex justify-content-between">
+                                                                                <a href="javascript:void(0)"
+                                                                                    class="text-dark">A-Z Alphabets</a>
+                                                                                <div class="form-check m-0">
+                                                                                    <input class="form-check-input mt-2"
+                                                                                        type="radio"
+                                                                                        name="exampleRadios"
+                                                                                        id="alphabets" value="option1">
+                                                                                </div>
+                                                                            </li>
 
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">Ascending</a>
-                                                        <div class="form-check m-0">
-                                                            <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="ascending" value="option1">
-                                                        </div>
-                                                    </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">Descending</a>
-                                                        <div class="form-check m-0">
-                                                            <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="descending" value="option1">
-                                                        </div>
-                                                    </li>
-                                                    <!-- <li class="d-flex justify-content-between"><a
+                                                                            <li class="d-flex justify-content-between">
+                                                                                <a href="javascript:void(0)"
+                                                                                    class="text-dark">Ascending</a>
+                                                                                <div class="form-check m-0">
+                                                                                    <input class="form-check-input mt-2"
+                                                                                        type="radio"
+                                                                                        name="exampleRadios"
+                                                                                        id="ascending" value="option1">
+                                                                                </div>
+                                                                            </li>
+                                                                            <li class="d-flex justify-content-between">
+                                                                                <a href="javascript:void(0)"
+                                                                                    class="text-dark">Descending</a>
+                                                                                <div class="form-check m-0">
+                                                                                    <input class="form-check-input mt-2"
+                                                                                        type="radio"
+                                                                                        name="exampleRadios"
+                                                                                        id="descending" value="option1">
+                                                                                </div>
+                                                                            </li>
+                                                                            <!-- <li class="d-flex justify-content-between"><a
                                                             href="javascript:void(0)">Recently Added</a>
                                                         <div class="form-check m-0">
                                                             <input class="form-check-input mt-2" type="radio"
@@ -7490,186 +7515,326 @@
                                                                 checked>
                                                         </div>
                                                     </li> -->
-                                                </ul>
-                                            </div>
-                                            <div class="mx-2">
-                                                <!-- <div class="form-group m-0">
+                                                                        </ul>
+                                                                    </div>
+                                                                    <div class="mx-2">
+                                                                        <!-- <div class="form-group m-0">
                                                     <input class="form-control" placeholder="Search Users by Name, Email or Date" id="search_input" type="text">
                                                 </div> -->
-                                                <div class="main-header-center d-none d-lg-block m-0 dropdown">
-                                                    <button class="btn" style="width: fit-content; margin-top: 0px;"><i class="fe fe-search"
-                                                            aria-hidden="true"></i></button>
-                                                            <input type="text" class="form-control dropdown-toggle" id="typehead" placeholder="Search for results..." autocomplete="off" style="width: 230px;" data-bs-toggle="dropdown">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex">
-                                            <div class="btn-group">
-                                                <button type="button" class="btn font-weight-bold text-dark" id="customize_btn" data-bs-toggle="dropdown" style="border: none;"><strong>CUSTOMIZED</strong><i
-                                                        class="fe fe-chevron-down ms-2"></i></button>
-                                                <ul class="dropdown-menu" role="menu">
-                                                    <li><a href="javascript:void(0)" class="text-dark"><strong>Coulmns to
-                                                                Show</strong></a>
-                                                    </li>
-                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">IMAGE</a>
-                                                        <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
-                                                        </div>
-                                                    </li>
-                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">PROPERTY ID</a>
-                                                        <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
-                                                        </div>
-                                                    </li>
-                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">PROPERTY NAME</a>
-                                                        <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
-                                                        </div>
-                                                    </li>
-                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">PROPERTY TYPE</a>
-                                                        <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
-                                                        </div>
-                                                    </li>
-                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">PROPERTY UNITS</a>
-                                                        <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
-                                                        </div>
-                                                    </li>
-                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">PROPERTY ADDRESS</a>
-                                                        <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <button type="button" class="btn btn-primary mx-2" id="add_property_btn" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal-account"><i
-                                                    class="fe fe-plus me-2"></i><strong>ADD NEW ACCOUNT</strong></button>
-                                        </div>
-                                    </div>
-                                    <div class="card-body p-0">
-                                        <div class="table-responsive">
-                                            <table class="table border text-nowrap text-md-nowrap mb-0" id="responsive-datatable">
-                                                <thead>
-                                                    <tr>
-                                                        <th></th>
-                                                        <th>ACCOUNT</th>
-                                                        <th>DESCRIPTION</th>
-                                                        <th>STATUS</th>
-                                                        <th></th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="table_body">
-                                                    <tr>
-                                                        <td></td>
-                                                        <td><b>Operating Account</b></td>
-                                                        <td>Generate Lorem Ipsum placeholder text for use in your graphic discover plugins for <br> your favorite writing, design and blogging tools</td>
-                                                        <td><b style="color: #25CF54;">Active</b></td>
-                                                        <td><button type="button" class="btn btn-light btn-pill mt-0" id="add_property_btn" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModalll"><strong>Connect to Bank</strong></button></td>
-                                                    </tr>
+                                                                        <div
+                                                                            class="main-header-center d-none d-lg-block m-0 dropdown">
+                                                                            <button class="btn"
+                                                                                style="width: fit-content; margin-top: 0px;"><i
+                                                                                    class="fe fe-search"
+                                                                                    aria-hidden="true"></i></button>
+                                                                            <input type="text"
+                                                                                class="form-control dropdown-toggle"
+                                                                                id="typehead"
+                                                                                placeholder="Search for results..."
+                                                                                autocomplete="off" style="width: 230px;"
+                                                                                data-bs-toggle="dropdown">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="d-flex">
+                                                                    <div class="btn-group">
+                                                                        <button type="button"
+                                                                            class="btn font-weight-bold text-dark"
+                                                                            id="customize_btn" data-bs-toggle="dropdown"
+                                                                            style="border: none;"><strong>CUSTOMIZED</strong><i
+                                                                                class="fe fe-chevron-down ms-2"></i></button>
+                                                                        <ul class="dropdown-menu" role="menu">
+                                                                            <li><a href="javascript:void(0)"
+                                                                                    class="text-dark"><strong>Coulmns to
+                                                                                        Show</strong></a>
+                                                                            </li>
+                                                                            <li class="d-flex justify-content-between">
+                                                                                <a class="text-dark"
+                                                                                    href="javascript:void(0)">IMAGE</a>
+                                                                                <div class="form-check m-0">
+                                                                                    <input type="checkbox"
+                                                                                        class="form-check-input mt-2"
+                                                                                        id="exampleCheck1" checked>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li class="d-flex justify-content-between">
+                                                                                <a class="text-dark"
+                                                                                    href="javascript:void(0)">PROPERTY
+                                                                                    ID</a>
+                                                                                <div class="form-check m-0">
+                                                                                    <input type="checkbox"
+                                                                                        class="form-check-input mt-2"
+                                                                                        id="exampleCheck1" checked>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li class="d-flex justify-content-between">
+                                                                                <a class="text-dark"
+                                                                                    href="javascript:void(0)">PROPERTY
+                                                                                    NAME</a>
+                                                                                <div class="form-check m-0">
+                                                                                    <input type="checkbox"
+                                                                                        class="form-check-input mt-2"
+                                                                                        id="exampleCheck1" checked>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li class="d-flex justify-content-between">
+                                                                                <a class="text-dark"
+                                                                                    href="javascript:void(0)">PROPERTY
+                                                                                    TYPE</a>
+                                                                                <div class="form-check m-0">
+                                                                                    <input type="checkbox"
+                                                                                        class="form-check-input mt-2"
+                                                                                        id="exampleCheck1" checked>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li class="d-flex justify-content-between">
+                                                                                <a class="text-dark"
+                                                                                    href="javascript:void(0)">PROPERTY
+                                                                                    UNITS</a>
+                                                                                <div class="form-check m-0">
+                                                                                    <input type="checkbox"
+                                                                                        class="form-check-input mt-2"
+                                                                                        id="exampleCheck1" checked>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li class="d-flex justify-content-between">
+                                                                                <a class="text-dark"
+                                                                                    href="javascript:void(0)">PROPERTY
+                                                                                    ADDRESS</a>
+                                                                                <div class="form-check m-0">
+                                                                                    <input type="checkbox"
+                                                                                        class="form-check-input mt-2"
+                                                                                        id="exampleCheck1" checked>
+                                                                                </div>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <button type="button" class="btn btn-primary mx-2"
+                                                                        id="add_property_btn"
+                                                                        data-bs-effect="effect-scale"
+                                                                        data-bs-toggle="modal"
+                                                                        href="#addModal-account"><i
+                                                                            class="fe fe-plus me-2"></i><strong>ADD NEW
+                                                                            ACCOUNT</strong></button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-body p-0">
+                                                                <div class="table-responsive">
+                                                                    <table
+                                                                        class="table border text-nowrap text-md-nowrap mb-0"
+                                                                        id="responsive-datatable">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th></th>
+                                                                                <th>ACCOUNT</th>
+                                                                                <th>DESCRIPTION</th>
+                                                                                <th>STATUS</th>
+                                                                                <th></th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody id="table_body">
+                                                                            <tr>
+                                                                                <td></td>
+                                                                                <td><b>Operating Account</b></td>
+                                                                                <td>Generate Lorem Ipsum placeholder
+                                                                                    text for use in your graphic
+                                                                                    discover plugins for <br> your
+                                                                                    favorite writing, design and
+                                                                                    blogging tools</td>
+                                                                                <td><b
+                                                                                        style="color: #25CF54;">Active</b>
+                                                                                </td>
+                                                                                <td><button type="button"
+                                                                                        class="btn btn-light btn-pill mt-0"
+                                                                                        id="add_property_btn"
+                                                                                        data-bs-effect="effect-scale"
+                                                                                        data-bs-toggle="modal"
+                                                                                        href="#addModalll"><strong>Connect
+                                                                                            to Bank</strong></button>
+                                                                                </td>
+                                                                            </tr>
 
-                                                    <tr>
-                                                        <td></td>
-                                                        <!-- <td><label class="custom-control custom-checkbox-md">
+                                                                            <tr>
+                                                                                <td></td>
+                                                                                <!-- <td><label class="custom-control custom-checkbox-md">
                                                             <input type="checkbox" class="custom-control-input" name="example-checkbox5" value="option5" checked="">
                                                             <span class="custom-control-label"></span>
                                                         </label></td> -->
-                                                        <td><b>Payment Test</b></td>
-                                                        <td>Generate Lorem Ipsum placeholder text for use in your graphic discover plugins for <br> your favorite writing, design and blogging tools</td>
-                                                        <td><b style="color: #898989;">Not Started</b></td>
-                                                        <td><button type="button" class="btn btn-light btn-pill mt-0" id="add_property_btn" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModalll"><strong>Connect to Bank</strong></button></td>
-                                                    </tr>
+                                                                                <td><b>Payment Test</b></td>
+                                                                                <td>Generate Lorem Ipsum placeholder
+                                                                                    text for use in your graphic
+                                                                                    discover plugins for <br> your
+                                                                                    favorite writing, design and
+                                                                                    blogging tools</td>
+                                                                                <td><b style="color: #898989;">Not
+                                                                                        Started</b></td>
+                                                                                <td><button type="button"
+                                                                                        class="btn btn-light btn-pill mt-0"
+                                                                                        id="add_property_btn"
+                                                                                        data-bs-effect="effect-scale"
+                                                                                        data-bs-toggle="modal"
+                                                                                        href="#addModalll"><strong>Connect
+                                                                                            to Bank</strong></button>
+                                                                                </td>
+                                                                            </tr>
 
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Row -->
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Row -->
                                             </div>
 
-                                                <!-- Modal -->
-    <div class="modal fade" id="addModal-account" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div class="text-justify ps-2 border-model-line">
-                        <h2 class="modal-title">New <strong class="color-primary">Account</strong></h2>
-                        <span class="">Spade Rent allows you to add a range of commercial and residential properties,
-                            from condos and single-family homes to retail stores and parking lots.</span>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="addModal-account" tabindex="-1" role="dialog">
+                                                <div class="modal-dialog modal-lg modal-dialog-scrollable"
+                                                    role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <div class="text-justify ps-2 border-model-line">
+                                                                <h2 class="modal-title">New <strong
+                                                                        class="color-primary">Account</strong></h2>
+                                                                <span class="">Spade Rent allows you to add a range of
+                                                                    commercial and residential properties,
+                                                                    from condos and single-family homes to retail stores
+                                                                    and parking lots.</span>
 
-                    </div>
-                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="top-close">
-                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="accordion-item mb-4" id="accordion-item1">
-                        <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button text-white" id="accordian-button-1" type="button" data-bs-toggle="collapse" onclick="checkFieldsFilled('accordion-item1')" id="accordion-button1" data-bs-target="#collapseOne-add-property" aria-expanded="true" aria-controls="collapseOne-add-property">
-                                <span class="m-0 me-4 fs-1" style="font-weight: bold;">01</span>
-                                <h3 class="m-0"><strong>Account Info</strong> <i class="fi fi-rs-pencil"></i><i
-                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
-                                </h3>
-                            </button>
-                        </h2>
-                        <div id="collapseOne-add-property" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <form class="row g-3" enctype="multipart/form-data">
-                                    <div class="col-md-12">
-                                        <label for="inputPassword4" class="form-label fw-bold">Account Name <spnan
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="propertyName" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the name of the property." data-bs-container="#addModal">
-                                        <span class="text-danger d-none">Property name required!</span>
-                                    </div>
-                                    <div class="col-12">
-                                        <label for="inputAddress" class="form-label fw-bold">Description <spnan
-                                                class="text-danger">*</span></label>
-                                                <textarea class="form-control mb-4" placeholder="Enter Description" required="" rows="3"></textarea>
-                                        <span class="text-danger d-none">Description is required!</span>
-                                    </div>
-                                    
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item" id="accordion-item2">
-                        <h2 class="accordion-header" id="headingTwo">
-                            <button class="accordion-button collapsed text-white" onclick="checkFieldsFilled('accordion-item2')" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo-add-property" aria-expanded="false" aria-controls="collapseTwo-add-property">
-                                <span class="m-0 me-4 fs-1" style="font-weight: bold;">02</span>
-                                <h3 class="m-0"><strong>ADDITIONAL Options</strong> <i
-                                        class="fi fi-rs-pencil"></i><i
-                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
-                                </h3>
-                            </button>
-                        </h2>
-                        <div id="collapseTwo-add-property" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                            <form class="row g-3 m-1" enctype="multipart/form-data">
+                                                            </div>
+                                                            <button class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="Close" id="top-close">
+                                                                <span aria-hidden="true"><i
+                                                                        class="fi fi-rs-circle-xmark"></i></span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="accordion-item mb-4" id="accordion-item1">
+                                                                <h2 class="accordion-header" id="headingOne">
+                                                                    <button class="accordion-button text-white"
+                                                                        id="accordian-button-1" type="button"
+                                                                        data-bs-toggle="collapse"
+                                                                        onclick="checkFieldsFilled('accordion-item1')"
+                                                                        id="accordion-button1"
+                                                                        data-bs-target="#collapseOne-add-property"
+                                                                        aria-expanded="true"
+                                                                        aria-controls="collapseOne-add-property">
+                                                                        <span class="m-0 me-4 fs-1"
+                                                                            style="font-weight: bold;">01</span>
+                                                                        <h3 class="m-0"><strong>Account Info</strong> <i
+                                                                                class="fi fi-rs-pencil"></i><i
+                                                                                class="fi fi-rs-angle-circle-down chevron icon"></i>
+                                                                        </h3>
+                                                                    </button>
+                                                                </h2>
+                                                                <div id="collapseOne-add-property"
+                                                                    class="accordion-collapse collapse show"
+                                                                    aria-labelledby="headingOne"
+                                                                    data-bs-parent="#accordionExample">
+                                                                    <div class="accordion-body">
+                                                                        <form class="row g-3"
+                                                                            enctype="multipart/form-data">
+                                                                            <div class="col-md-12">
+                                                                                <label for="inputPassword4"
+                                                                                    class="form-label fw-bold">Account
+                                                                                    Name <spnan class="text-danger">
+                                                                                        *</span></label>
+                                                                                <input type="text"
+                                                                                    class="form-control form"
+                                                                                    id="propertyName"
+                                                                                    data-bs-placement="top"
+                                                                                    data-bs-toggle="tooltip" title=""
+                                                                                    data-bs-original-title="Enter the name of the property."
+                                                                                    data-bs-container="#addModal">
+                                                                                <span
+                                                                                    class="text-danger d-none">Property
+                                                                                    name required!</span>
+                                                                            </div>
+                                                                            <div class="col-12">
+                                                                                <label for="inputAddress"
+                                                                                    class="form-label fw-bold">Description
+                                                                                    <spnan class="text-danger">
+                                                                                        *</span></label>
+                                                                                <textarea class="form-control mb-4"
+                                                                                    placeholder="Enter Description"
+                                                                                    required="" rows="3"></textarea>
+                                                                                <span
+                                                                                    class="text-danger d-none">Description
+                                                                                    is required!</span>
+                                                                            </div>
 
-                                <div class="col-12 mb-3">
-                                    <div class="material-switch pull-left" style="display: flex; align-items: center;"> <input id="someSwitchOptionSuccess" name="someSwitchOption001" type="checkbox"> <label for="someSwitchOptionSuccess" class="label-success"></label> 
-                                        <div style="margin-left: 25px;"><h5><b>Use this account to receive payment</b></h5>
-                                       This will allow you to select this account when receiving payment.</div></div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <!-- <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="accordion-item" id="accordion-item2">
+                                                                <h2 class="accordion-header" id="headingTwo">
+                                                                    <button
+                                                                        class="accordion-button collapsed text-white"
+                                                                        onclick="checkFieldsFilled('accordion-item2')"
+                                                                        type="button" data-bs-toggle="collapse"
+                                                                        data-bs-target="#collapseTwo-add-property"
+                                                                        aria-expanded="false"
+                                                                        aria-controls="collapseTwo-add-property">
+                                                                        <span class="m-0 me-4 fs-1"
+                                                                            style="font-weight: bold;">02</span>
+                                                                        <h3 class="m-0"><strong>ADDITIONAL
+                                                                                Options</strong> <i
+                                                                                class="fi fi-rs-pencil"></i><i
+                                                                                class="fi fi-rs-angle-circle-down chevron icon"></i>
+                                                                        </h3>
+                                                                    </button>
+                                                                </h2>
+                                                                <div id="collapseTwo-add-property"
+                                                                    class="accordion-collapse collapse"
+                                                                    aria-labelledby="headingTwo"
+                                                                    data-bs-parent="#accordionExample">
+                                                                    <form class="row g-3 m-1"
+                                                                        enctype="multipart/form-data">
+
+                                                                        <div class="col-12 mb-3">
+                                                                            <div class="material-switch pull-left"
+                                                                                style="display: flex; align-items: center;">
+                                                                                <input id="someSwitchOptionSuccess"
+                                                                                    name="someSwitchOption001"
+                                                                                    type="checkbox"> <label
+                                                                                    for="someSwitchOptionSuccess"
+                                                                                    class="label-success"></label>
+                                                                                <div style="margin-left: 25px;">
+                                                                                    <h5><b>Use this account to receive
+                                                                                            payment</b></h5>
+                                                                                    This will allow you to select this
+                                                                                    account when receiving payment.
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <!-- <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
                         Draft</button> -->
-                    <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close' data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the unique identifier for the property." style="width: auto;">Close</button>
-                    <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
-                    <a href="javascript:void(0)" class="btn text-light button d-none" style='background-color:#1467B0;' id='next'>Submit</a>
-                    <button class="btn text-light button" style='background-color:#1467B0; width: auto;' id='next-add-property'>Next</button>
+                                                            <button class="btn btn-outline-default btn-pill button"
+                                                                data-bs-dismiss="modal" id='close'
+                                                                data-bs-placement="top" data-bs-toggle="tooltip"
+                                                                title=""
+                                                                data-bs-original-title="Enter the unique identifier for the property."
+                                                                style="width: auto;">Close</button>
+                                                            <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
+                                                            <a href="javascript:void(0)"
+                                                                class="btn text-light button d-none"
+                                                                style='background-color:#1467B0;' id='next'>Submit</a>
+                                                            <button class="btn text-light button"
+                                                                style='background-color:#1467B0; width: auto;'
+                                                                id='next-add-property'>Next</button>
 
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- succes modal -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- succes modal -->
 
                                             <div class="tab-pane mt-0" id="tab14">
                                                 <div class="card-body pt-0">
@@ -8869,8 +9034,68 @@
         <script src="../assets/plugins/chart/utils.js"></script>
         <!-- <script src="../assets/js/form-wizard.js"></script> -->
         <!-- <script src="../assets/js/getNotification.js"></script></script> -->
-
+        <!-- <script src="https://code.jquery.com/jquery-latest.min.js"></script> -->
         <script>
+            $(document).ready(function () {
+    $(".label").click(function () {
+        $(".activee").removeClass("activee");
+        $(this).addClass("activee");
+    });
+});
+
+            const labelInputs = document.querySelectorAll(".label");
+            function DarkLightChecked() {
+                const isLightMode = document.body.classList.contains("light-mode");
+                const isDarkMode = document.body.classList.contains("dark-mode");
+                if (isLightMode) {
+                    labelInputs[0].classList.add("activee");
+                    labelInputs[1].classList.remove("activee");
+                } else if (isDarkMode) {
+                    labelInputs[1].classList.add("activee");
+                    labelInputs[0].classList.remove("activee");
+
+                }else if(document.body.classList.contains("bg-img1")){
+                    const imageIds = ["bgimage1", "bgimage2", "bgimage3", "bgimage4"];
+
+imageIds.forEach(id => {
+  const element = document.getElementById(id);
+  if (element) {
+    element.classList.toggle("activee", id === "bgimage1");
+  }
+});
+
+                }
+                else if(document.body.classList.contains("bg-img2")){
+                    const imageIds = ["bgimage1", "bgimage2", "bgimage3", "bgimage4"];
+
+imageIds.forEach(id => {
+  const element = document.getElementById(id);
+  if (element) {
+    element.classList.toggle("activee", id === "bgimage2");
+  }
+});
+                }
+                else if(document.body.classList.contains("bg-img3")){
+                    const imageIds = ["bgimage1", "bgimage2", "bgimage3", "bgimage4"];
+
+imageIds.forEach(id => {
+  const element = document.getElementById(id);
+  if (element) {
+    element.classList.toggle("activee", id === "bgimage3");
+  }
+});
+                }
+                else if(document.body.classList.contains("bg-img4")){
+                    const imageIds = ["bgimage1", "bgimage2", "bgimage3", "bgimage4"];
+
+imageIds.forEach(id => {
+  const element = document.getElementById(id);
+  if (element) {
+    element.classList.toggle("activee", id === "bgimage4");
+  }
+});
+                }
+            };
             // FULL WIDTH LAYOUT START
             $(document).on("click", '#myonoffswitch99', function () {
                 if (this.checked) {
@@ -8893,150 +9118,161 @@
                     $('body').removeClass('layout-boxed');
                 }
             });
-        // BOXED LAYOUT END
-        </script>
-
-        <!-- <script src="https://code.jquery.com/jquery-latest.min.js"></script> -->
-        <script>
+            // BOXED LAYOUT END
+            const DLlabel = $('.label');
             $(document).ready(function () {
+
+
                 $(document).on("click", '#bgimage1', function () {
-        $('body').addClass('bg-img1');
-        $('body').removeClass('bg-img2');
-        $('body').removeClass('bg-img3');
-        $('body').removeClass('bg-img4');
+                    $(this).addClass('activee');
+                    $('#bgimage2, #bgimage3, #bgimage4').removeClass('activee');
+                    DLlabel.removeClass("activee");
+                    $('body').addClass('bg-img1');
+                    $('body').removeClass('bg-img2');
+                    $('body').removeClass('bg-img3');
+                    $('body').removeClass('bg-img4');
 
-        $('#myonoffswitch3').prop('checked', false);
-        $('#myonoffswitch4').prop('checked', false);
-        $('#myonoffswitch19').prop('checked', false);
-        $('#myonoffswitch6').prop('checked', false);
-        $('#myonoffswitch7').prop('checked', false);
-        $('#myonoffswitch5').prop('checked', false);
-        $('#myonoffswitch8').prop('checked', false);
-        $('#myonoffswitch20').prop('checked', false);
+                    $('#myonoffswitch3').prop('checked', false);
+                    $('#myonoffswitch4').prop('checked', false);
+                    $('#myonoffswitch19').prop('checked', false);
+                    $('#myonoffswitch6').prop('checked', false);
+                    $('#myonoffswitch7').prop('checked', false);
+                    $('#myonoffswitch5').prop('checked', false);
+                    $('#myonoffswitch8').prop('checked', false);
+                    $('#myonoffswitch20').prop('checked', false);
 
-        $('body')?.removeClass('color-menu');
-        $('body')?.removeClass('light-menu');
-        $('body')?.removeClass('dark-menu');
-        $('body')?.removeClass('gradient-menu');
-        $('body')?.removeClass('color-header');
-        $('body')?.removeClass('gradient-header');
-        $('body')?.removeClass('header-light');
-        $('body')?.removeClass('dark-header');
+                    $('body')?.removeClass('color-menu');
+                    $('body')?.removeClass('light-menu');
+                    $('body')?.removeClass('dark-menu');
+                    $('body')?.removeClass('gradient-menu');
+                    $('body')?.removeClass('color-header');
+                    $('body')?.removeClass('gradient-header');
+                    $('body')?.removeClass('header-light');
+                    $('body')?.removeClass('dark-header');
 
-        document.querySelector('body').classList.add('transparent-mode');
-        document.querySelector('body').classList.remove('light-mode');
-        document.querySelector('body').classList.remove('dark-mode');
+                    document.querySelector('body').classList.add('transparent-mode');
+                    document.querySelector('body').classList.remove('light-mode');
+                    document.querySelector('body').classList.remove('dark-mode');
 
-        $('#myonoffswitch2').prop('checked', false);
-        $('#myonoffswitch1').prop('checked', false);
-        $('#myonoffswitchTransparent').prop('checked', true);
+                    $('#myonoffswitch2').prop('checked', false);
+                    $('#myonoffswitch1').prop('checked', false);
+                    $('#myonoffswitchTransparent').prop('checked', true);
 
-        checkOptions();
-    })
+                    checkOptions();
+                })
 
-    $(document).on("click", '#bgimage2', function () {
-        $('body').addClass('bg-img2');
-        $('body').removeClass('bg-img1');
-        $('body').removeClass('bg-img3');
-        $('body').removeClass('bg-img4');
+                $(document).on("click", '#bgimage2', function () {
+                    DLlabel.removeClass("activee");
+                    $(this).addClass('activee');
+                    $('#bgimage1, #bgimage3, #bgimage4').removeClass('activee');
+                    $('body').addClass('bg-img2');
+                    $('body').removeClass('bg-img1');
+                    $('body').removeClass('bg-img3');
+                    $('body').removeClass('bg-img4');
 
-        $('#myonoffswitch3').prop('checked', false);
-        $('#myonoffswitch4').prop('checked', false);
-        $('#myonoffswitch19').prop('checked', false);
-        $('#myonoffswitch6').prop('checked', false);
-        $('#myonoffswitch7').prop('checked', false);
-        $('#myonoffswitch5').prop('checked', false);
-        $('#myonoffswitch8').prop('checked', false);
-        $('#myonoffswitch20').prop('checked', false);
+                    $('#myonoffswitch3').prop('checked', false);
+                    $('#myonoffswitch4').prop('checked', false);
+                    $('#myonoffswitch19').prop('checked', false);
+                    $('#myonoffswitch6').prop('checked', false);
+                    $('#myonoffswitch7').prop('checked', false);
+                    $('#myonoffswitch5').prop('checked', false);
+                    $('#myonoffswitch8').prop('checked', false);
+                    $('#myonoffswitch20').prop('checked', false);
 
-        $('body')?.removeClass('color-menu');
-        $('body')?.removeClass('light-menu');
-        $('body')?.removeClass('dark-menu');
-        $('body')?.removeClass('gradient-menu');
-        $('body')?.removeClass('color-header');
-        $('body')?.removeClass('gradient-header');
-        $('body')?.removeClass('header-light');
-        $('body')?.removeClass('dark-header');
+                    $('body')?.removeClass('color-menu');
+                    $('body')?.removeClass('light-menu');
+                    $('body')?.removeClass('dark-menu');
+                    $('body')?.removeClass('gradient-menu');
+                    $('body')?.removeClass('color-header');
+                    $('body')?.removeClass('gradient-header');
+                    $('body')?.removeClass('header-light');
+                    $('body')?.removeClass('dark-header');
 
-        document.querySelector('body').classList.add('transparent-mode');
-        document.querySelector('body').classList.remove('light-mode');
-        document.querySelector('body').classList.remove('dark-mode');
+                    document.querySelector('body').classList.add('transparent-mode');
+                    document.querySelector('body').classList.remove('light-mode');
+                    document.querySelector('body').classList.remove('dark-mode');
 
-        $('#myonoffswitch2').prop('checked', false);
-        $('#myonoffswitch1').prop('checked', false);
-        $('#myonoffswitchTransparent').prop('checked', true);
+                    $('#myonoffswitch2').prop('checked', false);
+                    $('#myonoffswitch1').prop('checked', false);
+                    $('#myonoffswitchTransparent').prop('checked', true);
 
-        checkOptions();
-    })
+                    checkOptions();
+                })
 
-    $(document).on("click", '#bgimage3', function () {
-        $('body').addClass('bg-img3');
-        $('body').removeClass('bg-img1');
-        $('body').removeClass('bg-img2');
-        $('body').removeClass('bg-img4');
-        
-        $('#myonoffswitch3').prop('checked', false);
-        $('#myonoffswitch4').prop('checked', false);
-        $('#myonoffswitch19').prop('checked', false);
-        $('#myonoffswitch6').prop('checked', false);
-        $('#myonoffswitch7').prop('checked', false);
-        $('#myonoffswitch5').prop('checked', false);
-        $('#myonoffswitch8').prop('checked', false);
-        $('#myonoffswitch20').prop('checked', false);
+                $(document).on("click", '#bgimage3', function () {
+                    DLlabel.removeClass("activee");
+                    $(this).addClass('activee');
+                    $('#bgimage2, #bgimage1, #bgimage4').removeClass('activee');
+                    $('body').addClass('bg-img3');
+                    $('body').removeClass('bg-img1');
+                    $('body').removeClass('bg-img2');
+                    $('body').removeClass('bg-img4');
 
-        $('body')?.removeClass('color-menu');
-        $('body')?.removeClass('light-menu');
-        $('body')?.removeClass('dark-menu');
-        $('body')?.removeClass('gradient-menu');
-        $('body')?.removeClass('color-header');
-        $('body')?.removeClass('gradient-header');
-        $('body')?.removeClass('header-light');
-        $('body')?.removeClass('dark-header');
+                    $('#myonoffswitch3').prop('checked', false);
+                    $('#myonoffswitch4').prop('checked', false);
+                    $('#myonoffswitch19').prop('checked', false);
+                    $('#myonoffswitch6').prop('checked', false);
+                    $('#myonoffswitch7').prop('checked', false);
+                    $('#myonoffswitch5').prop('checked', false);
+                    $('#myonoffswitch8').prop('checked', false);
+                    $('#myonoffswitch20').prop('checked', false);
 
-        document.querySelector('body').classList.add('transparent-mode');
-        document.querySelector('body').classList.remove('light-mode');
-        document.querySelector('body').classList.remove('dark-mode');
+                    $('body')?.removeClass('color-menu');
+                    $('body')?.removeClass('light-menu');
+                    $('body')?.removeClass('dark-menu');
+                    $('body')?.removeClass('gradient-menu');
+                    $('body')?.removeClass('color-header');
+                    $('body')?.removeClass('gradient-header');
+                    $('body')?.removeClass('header-light');
+                    $('body')?.removeClass('dark-header');
 
-        $('#myonoffswitch2').prop('checked', false);
-        $('#myonoffswitch1').prop('checked', false);
-        $('#myonoffswitchTransparent').prop('checked', true);
+                    document.querySelector('body').classList.add('transparent-mode');
+                    document.querySelector('body').classList.remove('light-mode');
+                    document.querySelector('body').classList.remove('dark-mode');
 
-        checkOptions();
-    })
+                    $('#myonoffswitch2').prop('checked', false);
+                    $('#myonoffswitch1').prop('checked', false);
+                    $('#myonoffswitchTransparent').prop('checked', true);
 
-    $(document).on("click", '#bgimage4', function () {
-        $('body').addClass('bg-img4');
-        $('body').removeClass('bg-img1');
-        $('body').removeClass('bg-img2');
-        $('body').removeClass('bg-img3');
-        
-        $('#myonoffswitch3').prop('checked', false);
-        $('#myonoffswitch4').prop('checked', false);
-        $('#myonoffswitch19').prop('checked', false);
-        $('#myonoffswitch6').prop('checked', false);
-        $('#myonoffswitch7').prop('checked', false);
-        $('#myonoffswitch5').prop('checked', false);
-        $('#myonoffswitch8').prop('checked', false);
-        $('#myonoffswitch20').prop('checked', false);
+                    checkOptions();
+                })
 
-        $('body')?.removeClass('color-menu');
-        $('body')?.removeClass('light-menu');
-        $('body')?.removeClass('dark-menu');
-        $('body')?.removeClass('gradient-menu');
-        $('body')?.removeClass('color-header');
-        $('body')?.removeClass('gradient-header');
-        $('body')?.removeClass('header-light');
-        $('body')?.removeClass('dark-header');
+                $(document).on("click", '#bgimage4', function () {
+                    DLlabel.removeClass("activee");
+                    $(this).addClass('activee');
+                    $('#bgimage2, #bgimage3, #bgimage1').removeClass('activee');
+                    $('body').addClass('bg-img4');
+                    $('body').removeClass('bg-img1');
+                    $('body').removeClass('bg-img2');
+                    $('body').removeClass('bg-img3');
 
-        document.querySelector('body').classList.add('transparent-mode');
-        document.querySelector('body').classList.remove('light-mode');
-        document.querySelector('body').classList.remove('dark-mode');
-        $('#myonoffswitch2').prop('checked', false);
-        $('#myonoffswitch1').prop('checked', false);
-        $('#myonoffswitchTransparent').prop('checked', true);
+                    $('#myonoffswitch3').prop('checked', false);
+                    $('#myonoffswitch4').prop('checked', false);
+                    $('#myonoffswitch19').prop('checked', false);
+                    $('#myonoffswitch6').prop('checked', false);
+                    $('#myonoffswitch7').prop('checked', false);
+                    $('#myonoffswitch5').prop('checked', false);
+                    $('#myonoffswitch8').prop('checked', false);
+                    $('#myonoffswitch20').prop('checked', false);
 
-        checkOptions();
-    })
+                    $('body')?.removeClass('color-menu');
+                    $('body')?.removeClass('light-menu');
+                    $('body')?.removeClass('dark-menu');
+                    $('body')?.removeClass('gradient-menu');
+                    $('body')?.removeClass('color-header');
+                    $('body')?.removeClass('gradient-header');
+                    $('body')?.removeClass('header-light');
+                    $('body')?.removeClass('dark-header');
+
+                    document.querySelector('body').classList.add('transparent-mode');
+                    document.querySelector('body').classList.remove('light-mode');
+                    document.querySelector('body').classList.remove('dark-mode');
+                    $('#myonoffswitch2').prop('checked', false);
+                    $('#myonoffswitch1').prop('checked', false);
+                    $('#myonoffswitchTransparent').prop('checked', true);
+
+                    checkOptions();
+                })
                 $('#save_invoice_template_button').click(function () {
                     const divToSave = document.getElementById('invoice_div');
                     const divContent = divToSave.innerHTML;
@@ -9061,6 +9297,8 @@
                 });
                 $('.layout-setting').on("click", function (e) {
                     if (!(document.querySelector('body').classList.contains('dark-mode'))) {
+                        labelInputs[1].classList.add("activee");
+                        labelInputs[0].classList.remove("activee");
                         $('body').addClass('dark-mode');
                         $('body').removeClass('light-mode');
                         $('body').removeClass('transparent-mode');
@@ -9085,6 +9323,8 @@
                         $('#myonoffswitch2').prop('checked', true);
 
                     } else {
+                        labelInputs[1].classList.remove("activee");
+                        labelInputs[0].classList.add("activee");
                         $('body').removeClass('dark-mode');
                         $('body').addClass('light-mode');
                         $('#myonoffswitch3').prop('checked', true);
@@ -9158,21 +9398,21 @@
             function confirmPasswordValidation1() {
                 if (validconfirmPassword1.value.match(password_validate1)) {
                     validconfirmPassword1.classList.add("border-green");
-                    validconfirmPassword1.classList.remove("border-red"); 
+                    validconfirmPassword1.classList.remove("border-red");
                     spantag11.style.display = "none";
                 } else {
                     validconfirmPassword1.classList.remove("border-green");
-                    validconfirmPassword1.classList.add("border-red"); 
+                    validconfirmPassword1.classList.add("border-red");
                     spantag11.style.display = "block";
                 }
 
                 if (confirmPassword1.value == validconfirmPassword1.value && validconfirmPassword1.value.match(password_validate1)) {
                     confirmPassword1.classList.add("border-green");
-                    confirmPassword1.classList.remove("border-red"); 
+                    confirmPassword1.classList.remove("border-red");
 
                 } else {
                     confirmPassword1.classList.remove("border-green");
-                    confirmPassword1.classList.add("border-red"); 
+                    confirmPassword1.classList.add("border-red");
 
                 }
 
@@ -9253,24 +9493,24 @@
                                 image_key = response.imageKey
                             }
                             $('#profile').css('background-image', 'url(' + response.image + ')').addClass('hasImage');
-                            const names={2:"to Basic",3:"to Pro",4:"to Premium",5:"to Basic",6:"to Pro",7:"to Premium"};
-                            [2, 3, 4, 5, 6, 7].forEach(function(item) {
-  if (item < parseInt(response.planID)) {
-    console.log(names[item])
-    $(`#${item} .card-btnn span`).empty();
-    $(`#${item} .card-btnn span`).append("Downgrade " + names[item] + " " + `<img src="../assets/images/arrow-yellow.svg" class="float-right mt-0 mr-2" alt="">`);
-    $(`#${item}`).removeClass("bg-primary");
-  } else if (item > parseInt(response.planID)) {
-    $(`#${item} .card-btnn span`).empty();
-    $(`#${item} .card-btnn span`).append("Upgrade " + names[item] + " " + `<img src="../assets/images/arrow-yellow.svg" class="float-right mt-0 mr-2" alt="">`);
-    $(`#${item}`).removeClass("bg-primary");
-  } else {
-    $(`#${item} .card-btnn span`).empty();
-    $(`#${item} .card-btnn span`).text("Selected");
-  }
-});
+                            const names = { 2: "to Basic", 3: "to Pro", 4: "to Premium", 5: "to Basic", 6: "to Pro", 7: "to Premium" };
+                            [2, 3, 4, 5, 6, 7].forEach(function (item) {
+                                if (item < parseInt(response.planID)) {
+                                    console.log(names[item])
+                                    $(`#${item} .card-btnn span`).empty();
+                                    $(`#${item} .card-btnn span`).append("Downgrade " + names[item] + " " + `<img src="../assets/images/arrow-yellow.svg" class="float-right mt-0 mr-2" alt="">`);
+                                    $(`#${item}`).removeClass("bg-primary");
+                                } else if (item > parseInt(response.planID)) {
+                                    $(`#${item} .card-btnn span`).empty();
+                                    $(`#${item} .card-btnn span`).append("Upgrade " + names[item] + " " + `<img src="../assets/images/arrow-yellow.svg" class="float-right mt-0 mr-2" alt="">`);
+                                    $(`#${item}`).removeClass("bg-primary");
+                                } else {
+                                    $(`#${item} .card-btnn span`).empty();
+                                    $(`#${item} .card-btnn span`).text("Selected");
+                                }
+                            });
 
-$(`#${response.planID}`).addClass("bg-primary");
+                            $(`#${response.planID}`).addClass("bg-primary");
 
 
                         },
@@ -9957,15 +10197,7 @@ $(`#${response.planID}`).addClass("bg-primary");
 
 
             // Add active class to the current button (highlight it)
-            var header = document.getElementById("myDIV");
-            var btns = header.getElementsByClassName("btnn");
-            for (var i = 0; i < btns.length; i++) {
-                btns[i].addEventListener("click", function () {
-                    var current = document.getElementsByClassName("activee");
-                    current[0].className = current[0].className.replace(" activee", "");
-                    this.className += " activee";
-                });
-            }
+            
 
             $(document).ready(function () {
 
