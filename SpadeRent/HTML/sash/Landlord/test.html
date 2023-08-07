@@ -1,0 +1,161 @@
+<html>
+
+<head>
+    <script src="https://cdn.safecharge.com/safecharge_resources/v1/websdk/safecharge.js"></script>
+</head>
+
+<body>
+    <form action="/charge" method="post" id="payment-form">
+        <div class="row">
+            <div class="field">
+                <div id="card-number" class="input"></div>
+                <label for="card-number" data-tid="scwsdk.form.card_number_label">
+                    Card number
+                </label>
+                <div class="underline">
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="field">
+                <div class="input"></div>
+                <label for="amount" data-tid="amount">
+                    Amount
+                </label>
+                <div class="underline">
+                    <input id="amount">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="field col6">
+                <div id="card-expiry" class="input empty"></div>
+                <label for="card-expiry" data-tid="scwsdk.form.card_expiry_label">
+                    Expiration
+                </label>
+                <div class="underline "></div>
+            </div>
+            <div class="field col6">
+                <div id="card-cvc" class="input empty"></div>
+                <label for="card-cvc" data-tid="scwsdk.form.card_cvc_label">
+                    CVC
+                </label>
+                <div class="underline "></div>
+            </div>
+        </div>
+    </form>
+    <button onclick="main()">Submit Payment</button>
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="https://cdn.safecharge.com/safecharge_resources/v1/websdk/safecharge.js"></script>
+    <script>
+        var sfc = SafeCharge({
+            env: 'int', // Nuvei API environment - 'int' (integration) or 'prod' (production - default if omitted)
+            merchantId: '6400701569295268447', // your Merchant ID provided by Nuvei
+            merchantSiteId: '244298' // your Merchant Site ID provided by Nuvei
+        });
+        var ScFields = sfc.fields({
+            fonts: [
+                { cssUrl: 'https://fonts.googleapis.com/css?family=Roboto' }, // include your custom fonts
+            ]
+        })
+        var ScFieldStyles = {
+            base: {
+                color: '#32325D',
+                fontWeight: 500,
+                fontFamily: 'Roboto, Consolas, Menlo, monospace',
+                fontSize: '16px',
+                fontSmoothing: 'antialiased',
+                '::placeholder': {
+                    color: '#CFD7DF',
+                },
+                ':-webkit-autofill': {
+                    color: '#e39f48',
+                },
+            },
+            invalid: {
+                color: '#E25950',
+                '::placeholder': {
+                    color: '#FFCCA5',
+                },
+            },
+        };
+
+        var ScFieldClasses = {
+            focus: 'focused',
+            empty: 'empty',
+            invalid: 'invalid',
+            complete: 'complete',
+        };
+        var scard = ScFields.create('ccNumber', {
+            style: ScFieldStyles,
+            classes: ScFieldClasses,
+        });
+        scard.attach('#card-number');
+
+        var cardExpiry = ScFields.create('ccExpiration', {
+            style: ScFieldStyles,
+            classes: ScFieldClasses,
+        });
+        cardExpiry.attach('#card-expiry');
+
+        var cardCvc = ScFields.create('ccCvc', {
+            style: ScFieldStyles,
+            classes: ScFieldClasses,
+        });
+        cardCvc.attach('#card-cvc');
+        function main() {
+            $.ajax({
+                url: 'http://localhost:3000/api/spade/openOrder',
+                type: 'POST',
+                data: JSON.stringify({
+                    amount:$("#amount").val(),
+                    currency:"USD"
+                }),
+                contentType: "application/json; charset=utf-8",
+                processData: false,
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    console.log(response)
+                    sfc.createPayment({
+                        sessionToken: response.sessionToken, //received from openOrder API
+                        // clientUniqueId: "695701003", // optional
+                        cardHolderName: "<card_holder>",
+                        paymentOption: scard,
+                        billingAddress: {
+                            email: "someone@somedomain.com",
+                            country: "GB"
+                        }
+                    }, function (res) {
+                        console.log(res)
+                    });
+                    sfc.createPayment({
+    sessionToken   : response.sessionToken, //received from openOrder API
+    merchantId     : "6400701569295268447", //as assigned by Nuvei
+    merchantSiteId : "6400701569295268447", //as assigned by Nuvei
+    clientUniqueId : response.clientUniqueId, // optional
+    paymentOption  : scard,
+    billingAddress: {
+       email: "someone@somedomain.com",
+       country:"GB"
+     }
+  }, function (res) {
+ console.log(res)
+})
+                },
+                error: function (xhr, status, error) {
+                    // Handle the error response
+                    console.log(xhr)
+                    console.log(status)
+                    console.log(error)
+                    console.error('Error sending data:', error);
+                }
+            });
+
+        }
+    </script>
+</body>
+
+</html>

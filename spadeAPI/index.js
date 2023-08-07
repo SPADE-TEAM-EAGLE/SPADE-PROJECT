@@ -10,10 +10,14 @@ const app = express();
 
 app.use(cookieParser());
 app.use(bodyParser.json());
-app.use(cors());
+const corseOptions={
+  credentials:true,
+  optionSuccessStatus:200
+}
+app.use(cors(corseOptions));
 
 
-
+app.options("*",cors())
 
 app.use((req, res, next) => {
   res.header("Cache-Control", "no-cache, no-store, must-revalidate");

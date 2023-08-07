@@ -8867,6 +8867,7 @@
         <!-- CHARTJS JS -->
         <script src="../assets/plugins/chart/Chart.bundle.js"></script>
         <script src="../assets/plugins/chart/utils.js"></script>
+        <!-- <script src="../assets/js/form-wizard.js"></script> -->
         <!-- <script src="../assets/js/getNotification.js"></script></script> -->
 
         <script>
@@ -9157,22 +9158,30 @@
             function confirmPasswordValidation1() {
                 if (validconfirmPassword1.value.match(password_validate1)) {
                     validconfirmPassword1.classList.add("border-green");
+                    validconfirmPassword1.classList.remove("border-red"); 
                     spantag11.style.display = "none";
                 } else {
                     validconfirmPassword1.classList.remove("border-green");
+                    validconfirmPassword1.classList.add("border-red"); 
                     spantag11.style.display = "block";
                 }
 
                 if (confirmPassword1.value == validconfirmPassword1.value && validconfirmPassword1.value.match(password_validate1)) {
                     confirmPassword1.classList.add("border-green");
+                    confirmPassword1.classList.remove("border-red"); 
+
                 } else {
                     confirmPassword1.classList.remove("border-green");
+                    confirmPassword1.classList.add("border-red"); 
+
                 }
 
                 if (newPassword.value.match(password_validate1)) {
                     newPassword.classList.add("border-green");
+                    newPassword.classList.remove("border-red");
                 } else {
                     newPassword.classList.remove("border-green");
+                    newPassword.classList.add("border-red");
                 }
                 if (confirmPassword1.value == validconfirmPassword1.value && validconfirmPassword1.value.match(password_validate1) && newPassword.value.match(password_validate1)) {
                     document.getElementById("save").disabled = false;
