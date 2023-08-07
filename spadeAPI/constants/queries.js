@@ -538,7 +538,7 @@ exports.insertChat = "INSERT INTO chats (senderId, receiverID, created_at) VALUE
 exports.findChat = "SELECT * FROM chats WHERE (senderId = ? AND receiverID = ?) OR (senderID = ? AND receiverID = ?)";
 
 // create new Message in messages table
-exports.insertMessage = "INSERT INTO messages (message,chatId,messageType, created_at,sender) VALUES (?,?,?,?,?)";
+exports.insertMessage = "INSERT INTO messages (message,chatId,messageType, created_at,sender,userType) VALUES (?,?,?,?,?,?)";
 
 // get all chats of user by senderId using joining chats and users table
 exports.getChatUsers = `

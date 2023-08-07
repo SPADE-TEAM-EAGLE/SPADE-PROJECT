@@ -8,14 +8,14 @@ const messageClt = {
     createNewMessage: async (req, res) => {
         try {
             const sender = req.user.userId;
-            const { chatId, message, messageType } = req.body;
+            const { chatId, message, messageType,userType } = req.body;
             const created_at = new Date().toISOString().slice(0, 19).replace('T', ' ');
             if (!chatId || !message || !messageType) {
                 throw new Error("Please provide all required fields");
             }
             // message,chatId,messageType, created_at
             const sendMessage = await queryRunner(
-                insertMessage, [message, chatId, messageType, created_at,sender]
+                insertMessage, [message, chatId, messageType, created_at,sender,userType]
             );
             if (sendMessage[0].affectedRows > 0) {
                 res.status(200).json({
@@ -74,7 +74,6 @@ const messageClt = {
         }
 
     }
-
 }
 
 
