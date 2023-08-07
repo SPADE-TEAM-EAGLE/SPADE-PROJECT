@@ -6,7 +6,6 @@ const notifyController = {
         const { isEmailNotify, isPushNotify, textNotification } = req.body;
         const { userId } = req.user;
         try {
-            // find notifTable by userId
             const getNotifyResult = await queryRunner(selectQuery("notification", "landlordID"), [
                 userId
             ]);
@@ -71,7 +70,6 @@ const notifyController = {
     getNotify: async (req, res) => {
         //get property , tenants , task invoice from tables individually
         const { userId } = req.user;
-        console.log(userId)
         try {
             // get data from property table
             const getTenantsNotify = await queryRunner(getTenantNotify, [
@@ -84,6 +82,7 @@ const notifyController = {
             const task = await queryRunner(getTaskNotify, [
                 userId
             ]);
+            // add all above steps on my video
             // get data from invoice table
             const invoice = await queryRunner(getInvoiceNotify, [
                 userId
@@ -116,7 +115,7 @@ const notifyController = {
                 userId
             ]);
             res.status(200).json({
-                propertyNotify: property[0], 
+                propertyNotify: property[0],
                 taskNotify: task[0],
                 invoiceNotify: invoice[0]
             });
@@ -126,7 +125,7 @@ const notifyController = {
             })
         }
     },
-    updateUserPropertyReadUnRead: async (req, res) => {
+    updateUserReadUnRead: async (req, res) => {
         try {
             const { notify, id, type } = req.body;
             const updateData = [notify, id]
@@ -143,7 +142,7 @@ const notifyController = {
                 res.status(400).json({
                     message: 'Invalid type provided.',
                 });
-            }
+            } 
         } catch (error) {
             res.status(400).json({
                 message: error.message,
@@ -153,6 +152,8 @@ const notifyController = {
 }
 
 module.exports = notifyController;
+
+
 
 
 async function updateQueryReadUnRead(queryFun, updateData, res) {

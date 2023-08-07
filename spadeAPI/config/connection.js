@@ -5,7 +5,8 @@ let connection;
 const createConnection = async () => {
   if (connection) return connection;
 
-  connection = await mysql.createConnection({
+
+connection = await mysql.createConnection({
     host: "spaderent.cwaiqakemhu8.us-east-1.rds.amazonaws.com",
     port:"3306",
     user:"admin",
@@ -13,7 +14,7 @@ const createConnection = async () => {
     database:"spade_Rent"
     // host: "database-1.cwaiqakemhu8.us-east-1.rds.amazonaws.com",
     // user: "admin",
-    // password: "matz1234",
+    // password: "matz1234", 
     // database: "my_db",
   });
 
