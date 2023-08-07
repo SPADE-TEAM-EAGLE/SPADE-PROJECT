@@ -126,7 +126,7 @@ exports.getAmountByCategoriesID = "SELECT InvoiceCategories.setTaxes FROM Invoic
 
 exports.getTenantNotify = `SELECT 
 tenants.id AS tenantID,
-tenants.companyName, tenants.firstName, tenants.lastName, tenants.phoneNumber,tenants.tenantCreated_at,property.propertyName ,property.address,property.propertyType,property.units,
+tenants.companyName, tenants.firstName, tenants.lastName, tenants.phoneNumber,tenants.tenantCreated_at, tenants.notify, property.propertyName ,property.address,property.propertyType,property.units,
 GROUP_CONCAT(tenantattachfiles.Image) AS Image,
 GROUP_CONCAT(tenantattachfiles.ImageKey) AS ImageKey
 FROM 
@@ -149,6 +149,7 @@ exports.getPropertyNotify = `SELECT
     property.city,
     property.propertyType,
     property.created_at,
+    property.notify,
     property.city,
     GROUP_CONCAT(propertyimage.Image) AS Image,
     GROUP_CONCAT(propertyimage.ImageKey) AS ImageKey
@@ -169,6 +170,7 @@ exports.createLead = 'INSERT INTO leads (firstName, middleName, lastName, phoneN
 exports.getTaskNotify = `SELECT 
     task.id AS taskID,
     task.taskName,
+    task.notify,
     task.status,
     task.priority,
     task.created_at,
@@ -197,6 +199,7 @@ exports.getInvoiceNotify = `SELECT
 invoice.id AS invoiceID,
 invoice.invoiceType,
 invoice.startDate,
+invoice.notify,
 invoice.endDate,
 invoice.status,
 invoice.totalAmount,
@@ -227,6 +230,7 @@ exports.getTenantPropertyNotify = `SELECT
     property.id AS propertyID,
     property.propertyName,
     property.address,
+    property.notify,
     property.propertyType,
     property.created_at,
     property.city,
@@ -259,6 +263,7 @@ exports.getTenantTaskNotify = `SELECT
     task.taskName,
     task.status,
     task.priority,
+    task.notify,
     task.created_at,
     tenants.firstName,
     tenants.lastName,
@@ -291,6 +296,7 @@ exports.getTenantInvoiceNotify = `SELECT
 invoice.id AS invoiceID,
 invoice.invoiceType,
 invoice.startDate,
+invoice.notify,
 invoice.endDate,
 invoice.status,
 invoice.totalAmount,

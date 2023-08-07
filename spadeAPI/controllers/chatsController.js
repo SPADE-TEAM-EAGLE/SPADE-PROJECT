@@ -18,13 +18,14 @@ const chatsController = {
                 res.send(isChat[0]);
             } else {
                 // insert into chats table if chat does not exist
-                const insertChats = await queryRunner(
+                await queryRunner(
                     insertChat, [senderId, recieverId, created_at]
                 );
-                res.status(200).json({
-                    message: "Chat created successfully",
-                    data: insertChats[0]
-                })
+                const isChat = await queryRunner(
+                    selectQuery("chats", "senderId", "receiverID"),
+                    [senderId, recieverId]
+                );
+                res.send(isChat[0]);
             }
         } catch (error) {
             res.status(400).json({
