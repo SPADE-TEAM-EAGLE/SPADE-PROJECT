@@ -3399,6 +3399,7 @@
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
     <script>
+        $(document).ready(function() {
         //api
         $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/viewAllPropertyTenant',
@@ -3411,7 +3412,7 @@
                 success: function(response) {
                     console.log(response);
                     var tab_pane = $('#tab-pane-ll');
-                    // tab_pane.empty();
+                    tab_pane.empty();
                     // console.log(data[0])
                     let tenantNames = []
                     response.data[0] ?.forEach(function(tenant) {
@@ -3440,6 +3441,7 @@
                     //         }, 2000);
                 }
             });
+            });
         //api
     </script>
         <script>
@@ -3452,6 +3454,7 @@
         </script>
         <!-- chats js start  -->
     <script>
+        $(document).ready(function() {
         //Selector
         const $ = (selector) => document.querySelector(selector);
 
@@ -3533,6 +3536,7 @@
             input.value = '';
             input.focus();
         };
+    });
     </script>
     <!-- chats js End  -->
 </body>
