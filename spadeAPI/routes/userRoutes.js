@@ -29,9 +29,15 @@ router.post("/updatePassword", userController.updatePassword);
 router.post("/resendCode", userController.resendCode);
 router.get("/pricingPlan", userController.pricingPlan);
 router.post("/property", verifyToken, userController.property);
+router.get("/getDashPropertyData/:start/:end", verifyToken, userController.getPropertyDashboardData);
+router.get("/getDashTaskData/:start/:end", verifyToken, userController.getTaskDashboardData);
+router.get("/getDashInvoiceData/:start/:end", verifyToken, userController.getInvoiceDashboardData);
+router.put("/inactiveUser", verifyToken, userController.inactiveUser);
+
 // router.post("/property" ,verifyToken, userController.property);
 router.put("/updateUserProfile", verifyToken, userController.updateUserProfile);
 // router.post('/property', upload , userController.property);
+// start, end 
 router.get("/allProperty", verifyToken, userController.getproperty);
 // router.get('/allProperty', userController.getproperty);
 router.get("/PropertyUnits", verifyToken, userController.getpropertyUnits);
@@ -145,7 +151,7 @@ router.post("/accessChats", verifyToken, chatsController.accessChats);
 router.get("/fetchTenantChats", verifyTokenTenant, chatsController.fetchUsersChats);
 router.get("/fetchUsersChats", verifyToken, chatsController.fetchUsersTenants);
 
-// this api is for messages  
+// this api is f or messages  
 router.post("/createNewMessageTenant", verifyTokenTenant, messageClt.createNewMessageTenant);
 router.post("/createNewMessage", verifyToken, messageClt.createNewMessage);
 router.get("/TenantMessages/:chatId", verifyTokenTenant, messageClt.getAllMessages);
