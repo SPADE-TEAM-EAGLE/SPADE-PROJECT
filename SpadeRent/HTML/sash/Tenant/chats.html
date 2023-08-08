@@ -3432,6 +3432,31 @@
             localStorage.removeItem('tenantName');
             $(document).ready(function () {
                 $.ajax({
+                            url: 'http://localhost:3000/api/spade/accessChats/',
+                            type: 'GET',
+                            data: JSON.stringify({
+                                recieverId : 95
+                            }),
+                            contentType: "application/json; charset=utf-8",
+                            // processData: false,
+                            headers: {
+                                'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                            },
+                            success: function (response) {
+                                console.log(response)
+                                localStorage.setItem("chatId", response[0].id)
+                                localStorage.setItem("tenantId", tenatId)
+                                localStorage.setItem("tenantName", tenatName)
+                            },
+                            error: function (xhr, status, error) {
+                                $("#myModal_warning_connection").modal("show");
+                                setTimeout(function () {
+                                    $('#myModal_warning_connection').modal('hide');
+                                }, 2000);
+                                console.log('Error: ' + error);
+                            }
+                        });
+                $.ajax({
                     url: 'http://localhost:3000/api/spade/getTenantByID',
                     type: 'GET',
                     contentType: "application/json; charset=utf-8",
@@ -3441,7 +3466,7 @@
                     },
                     success: function (response) {
                         // console.log(1111111)
-                        console.log(response.data.landlordID)
+                        console.log(response)
                         localStorage.setItem("landloadId", Number(response.data.landlordID))
                         // console.log(response.data)
                         $("#tenant-name").empty()
@@ -3459,8 +3484,8 @@
                                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                             },
                             success: function (response) {
-                                console.log(response.data.landlordID)
-    
+                                console.log(response)
+                                $('#person-name-bold').text(response.data.FirstName + " " + response.data.LastName)
                             },
                             error: function (xhr, status, error) {
                                 $("#myModal_warning_connection").modal("show");
