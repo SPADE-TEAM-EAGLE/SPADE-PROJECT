@@ -33,7 +33,7 @@ router.get("/getDashPropertyData/:start/:end", verifyToken, userController.getPr
 router.get("/getDashTaskData/:start/:end", verifyToken, userController.getTaskDashboardData);
 router.get("/getDashInvoiceData/:start/:end", verifyToken, userController.getInvoiceDashboardData);
 router.put("/inactiveUser", verifyToken, userController.inactiveUser);
-
+ 
 // router.post("/property" ,verifyToken, userController.property);
 router.put("/updateUserProfile", verifyToken, userController.updateUserProfile);
 // router.post('/property', upload , userController.property);
