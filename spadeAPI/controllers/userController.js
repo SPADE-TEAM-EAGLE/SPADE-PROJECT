@@ -152,6 +152,7 @@ exports.getUser = (req, res) => {
     image: req.user.image,
     imageKey: req.user.imageKey,
     planID: req.user.planID,
+    isActive : req.user.isActive
   });
 };
 
