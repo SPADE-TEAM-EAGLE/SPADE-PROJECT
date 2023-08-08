@@ -710,6 +710,7 @@
             gap: 0.25em;
             padding: 1em;
             overflow: auto;
+            /* max-height: calc(100vh - 340px); */
         }
 
         .chat .conversation .messages .time {
@@ -1012,6 +1013,11 @@
             gap: 0.5em;
             color: #000;
             text-decoration: none;
+        }
+
+        #chat {
+            height: calc(100vh - 250px);
+            border-radius: 0;
         }
 
         @media screen and (max-width: 768px) {
@@ -3553,47 +3559,59 @@
         <script src="../assets/js/charts.js"></script>
         <script>
             var tenantId = [];
+            var chatId = 0;
+            var tenantIid = 0;
+            var tenantName = "";
             $(document).ready(function () {
                 // setInterval(check, 1000);
                 // function check(){
                 //     chatTenant(Number(localStorage.getItem("tenantId")), String(localStorage.getItem("tenantName")))
-                    
+
                 // }
                 $('#send-text').on('click', function (event) {
-                   
-                        var input_message = $('#input-message').val();
-                        var messageData = {
-                            chatId: localStorage.getItem("chatId"),
-                            message: input_message,
-                            messageType: "text",
-                            userType: "landlord"
-                        };
-                        $.ajax({
-                            url: 'http://localhost:3000/api/spade/createNewMessage',
-                            type: 'POST',
-                            data: JSON.stringify(messageData),
-                            contentType: 'application/json',
-                            processData: false,
-                            headers: {
-                                'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                            },
-                            success: function (response) {
-                                console.log(response);
-                                chatTenant(Number(localStorage.getItem("tenantId")), String(localStorage.getItem("tenantName")))
-                            },
-                            error: function (xhr, status, error) {
-                                console.log(error);
-                            }
-                        });
+
+                    var input_message = $('#input-message').val();
+                    var messageData = {
+                        chatId: localStorage.getItem("chatId"),
+                        message: input_message,
+                        messageType: "text",
+                        userType: "landlord"
+                    };
+                    $.ajax({
+                        url: 'http://localhost:3000/api/spade/createNewMessage',
+                        type: 'POST',
+                        data: JSON.stringify(messageData),
+                        contentType: 'application/json',
+                        processData: false,
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            // console.log(response);
+                            // console.log(tenantIid);
+                            // console.log(tenantName);
+                            chatTenant(Number(localStorage.getItem("tenantId")), String(localStorage.getItem("tenantName")))
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(error);
+                        }
+                    });
                 });
             });
-            function chatTenant(tenatId, tenatName) {
+            function chatTenant(tenatId, tenatName, element) {
+                console.log(element);
+                const parentDiv = $(element).find(".media.new");
+console.log(parentDiv[0]);
+if (parentDiv.length > 0) {
+    $(".media.new").removeClass("selected");
+    $(parentDiv[0]).addClass("selected");
+}
                 // console.log(tenatId);
+                // console.log(tenatName);
                 $(document).ready(function () {
                     var messs1 = "";
                     var messs2 = "";
                     var messDiv = $('#messages')
-                    $('#person-name-bold').text(tenatName)
                     var tenantIdd = {
                         recieverId: tenatId
                     };
@@ -3607,10 +3625,12 @@
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
-                            console.log(response[0]);
-                            // tenantId.push(response[0].id);
+                            // console.log(response[0]);
                             setTimeout(myGreeting, 500)
                             function myGreeting() {
+                                chatId = response[0].id;
+                                tenatIid = tenatId;
+                                tenatName = tenatName;
                                 localStorage.setItem("chatId", response[0].id)
                                 localStorage.setItem("tenantId", tenatId)
                                 localStorage.setItem("tenantName", tenatName)
@@ -3623,25 +3643,29 @@
                                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                     },
                                     success: function (response) {
+                                        $('#person-name-bold').text(tenatName)
                                         $('#chat').show()
-
-                                        console.log(response);
+                                        console.log(response.data.length);
                                         if (response.message == 'Messages fetched successfully' && response.data.length > 0) {
                                             for (var i = 0; i < response.data.length; i++) {
                                                 if (response.data[i]['userType'] == "landlord") {
+                                                    const timeArray = response.data[i]['created_at'].split(" ")[1].split(":");
+                                                    const time = timeArray.slice(0, 2).join(":");
                                                     messs1 += `<div class="msg-text owner">
                                                 <span class="text">`+ response.data[i]['message'] + `</span>
-                                                <span style="float: right;">`+ response.data[i]['created_at'] + `</span>
+                                                <span style="float: right;">`+ time + `</span>
                                             </div>`;
                                                 } else if (response.data[i]['userType'] == "tenant") {
+                                                    const timeArray = response.data[i]['created_at'].split(" ")[1].split(":");
+                                                    const time = timeArray.slice(0, 2).join(":");
                                                     messs1 += `<div class="msg-text">
                                                 <span class="text">`+ response.data[i]['message'] + `</span>
-                                                <span style="float: left;">`+ response.data[i]['created_at'] + `</span>
+                                                <span style="float: left;">`+ time + `</span>
                                             </div>`;
                                                 }
                                             }
                                         } else {
-                                            messs = `<div class="time">No Message</div>`;
+                                            messs1 = `<div class="time">No Message</div>`;
                                         }
                                         messDiv.html(messs1);
                                     },
@@ -3650,7 +3674,6 @@
                                     }
                                 });
                             }
-
                         },
                         error: function (xhr, status, error) {
                             console.log(error);
@@ -3658,9 +3681,7 @@
                     });
 
                 });
-                // console.log(tenantId[0]);
             }
-
             $(document).ready(function () {
                 $.ajax({
                     url: 'http://localhost:3000/api/spade/viewAllPropertyTenant',
@@ -3676,7 +3697,7 @@
                         tab_pane.empty();
                         let tenantNames = []
                         response.data[0]?.forEach(function (tenant) {
-                            var row = `<a href="javascript:void(0)" onclick="chatTenant(` + tenant.tenantID + `,'` + tenant.firstName + ` ` + tenant.lastName + `')"><div class="media new border-top-0 " href="javascript:void(0)" data-id="` + tenant.tenantID + `">
+                            var row = `<a href="javascript:void(0)" onclick="chatTenant(` + tenant.tenantID + `,'` + tenant.firstName + ` ` + tenant.lastName + `',this)"><div class="media new border-top-0 " data-id="` + tenant.tenantID + `">
                                                             <div class="main-img-user online">
                                                                 <img alt="" src="../assets/images/users/5.jpg">
                                                             </div>
@@ -3684,7 +3705,7 @@
                                                                 <div class="media-contact-name">
                                                                     <span>`+ tenant.firstName + ` ` + tenant.lastName + `</span> <span>10 min</span>
                                                                 </div>
-                                                                <p> Hey! there I'm available </p>
+                                                                <p>`+ tenant.tEmail + `</p>
                                                             </div>
                                                         </div></a>`;
                             tab_pane.append(row);
