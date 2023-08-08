@@ -50,6 +50,7 @@ const {
   getTaskGraphData,
   getInvoiceGraphData,
   updateUserActive,
+  getUserById,
 } = require("../constants/queries");
 
 const { hashedPassword } = require("../helper/hash");
@@ -1796,3 +1797,18 @@ exports.inactiveUser = async (req, res) => {
     });
   }
 };
+// getUserById
+exports.getUserByIdData = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const getUserByIdResult = await queryRunner(getUserById, [id]);
+    res.status(200).json({
+      data: getUserByIdResult[0][0],
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+
+}

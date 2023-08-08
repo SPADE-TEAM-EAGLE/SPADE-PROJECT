@@ -49,6 +49,8 @@ exports.deleteQuery = (table, ...field) => {
     return `DELETE FROM ${table} WHERE ${field[0]} = ? AND ${field[1]} = ?`;
   }
 };
+// get user data by id
+exports.getUserById = `SELECT * FROM users WHERE id = ?`;
 // update user Active or Deactive
 exports.updateUserActive = `UPDATE users SET active = ? WHERE Email = ?`;
 // creat api get total properties of landlord and vacant or occupied properties using join with units table
