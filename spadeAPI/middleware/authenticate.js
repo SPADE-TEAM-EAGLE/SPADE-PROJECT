@@ -110,7 +110,7 @@ const verifyToken = async (req, res, next) => {
     const result = await queryRunner(selectQuery("users", "Email"), [
       decoded.email,
     ]);
-  console.log(result[0][0].active);
+  // console.log(result[0][0].active);
     req.user = {
       email: decoded.email,
       userId: result[0][0].id,

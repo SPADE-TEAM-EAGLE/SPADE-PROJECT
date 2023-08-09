@@ -3495,7 +3495,7 @@
                     var messs2 = "";
                     var messDiv = $('#messages')
                     var recieverIdd = {
-                        recieverId: Number(localStorage.getItem("tenantId"))
+                        recieverId: Number(localStorage.getItem("landloadId"))
                     };
                     $('#person-name-bold').text(String(localStorage.getItem("tenantName")))
                     $.ajax({
@@ -3509,9 +3509,9 @@
                         },
                         success: function (response) {
                             console.log("accessTenantChats");
-                            console.log(response.data[0]);
+                            console.log(response[0]);
                             function myGreeting() {
-                                chatId = response.data[0].id;
+                                chatId = response[0].id;
                                 // tenatIid = tenatId;
                                 // tenatName = tenatName;
                                 localStorage.setItem("chatId", chatId)
@@ -3711,7 +3711,7 @@
                         recieverId: tenatId
                     };
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/accessChats',
+                        url: 'http://localhost:3000/api/spade/accessTenantChats',
                         type: 'POST',
                         data: JSON.stringify(tenantIdd),
                         contentType: 'application/json',
@@ -3720,8 +3720,8 @@
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
-                            // console.log(response[0]);
-                            setTimeout(myGreeting, 500)
+                            console.log(response[0]);
+                            
                             function myGreeting() {
                                 chatId = response[0].id;
                                 tenatIid = tenatId;
@@ -3769,6 +3769,7 @@
                                     }
                                 });
                             }
+                            myGreeting()
                         },
                         error: function (xhr, status, error) {
                             console.log(error);
