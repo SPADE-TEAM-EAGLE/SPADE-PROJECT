@@ -50,7 +50,7 @@ exports.deleteQuery = (table, ...field) => {
   }
 };
 // check chat whether reciever and sender id  recieverID senderID
-exports.checkChatQuery = `SELECT * FROM chats WHERE (receiverID = ? AND senderId = ?)`;
+exports.checkChatQuery = `SELECT * FROM chats WHERE receiverID = ? AND senderId = ?`;
 // get user data by id
 exports.getUserById = `SELECT * FROM users WHERE id = ?`;
 // update user Active or Deactive
@@ -64,7 +64,7 @@ FROM
 property
 LEFT JOIN
 propertyunits ON property.id = propertyunits.propertyID
-WHERE
+WHERE 
 property.landlordID = ?
 AND STR_TO_DATE(property.created_at, '%Y-%m-%d') >= STR_TO_DATE(?, '%Y-%m-%d')  
 AND STR_TO_DATE(property.created_at, '%Y-%m-%d') <= STR_TO_DATE(?, '%Y-%m-%d'); 
