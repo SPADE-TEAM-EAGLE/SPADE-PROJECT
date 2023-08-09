@@ -14,7 +14,7 @@ const chatsController = {
     const { recieverId } = req.body;
     try {
       // check if chat already exists
-      const isChat = await queryRunner(checkChatQuery, [senderId, recieverId , recieverId, senderId]);
+      const isChat = await queryRunner(checkChatQuery, [recieverId , senderId, senderId ,recieverId]);
         console.log(isChat[0])
       // const isChat = await queryRunner(
       //     selectQuery("chats", "senderId", "receiverID"),
