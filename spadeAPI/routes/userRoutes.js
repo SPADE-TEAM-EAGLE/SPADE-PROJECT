@@ -78,7 +78,7 @@ router.get(
 router.post("/tenants", verifyToken, tenantController.createTenants);
 router.post("/sendInvitationLink", verifyToken, tenantController.sendInvitationLink);
 // router.post('/tenantIncreaseRent' , userController.tenantIncreaseRent);
-// router.get('/verifyMailCheck',verifyToken,  userController.verifyMailCheck);
+// router.get('/ ',verifyToken,  userController.verifyMailCheck);
 router.get('/verifyMailCheck', verifyToken, userController.verifyMailCheck);
 router.get('/resetEmailTenant', tenantController.createResetEmailTenant);
 router.post('/verifyResetEmailCodeTenant', tenantController.verifyResetEmailCodeTenant);

@@ -49,6 +49,8 @@ exports.deleteQuery = (table, ...field) => {
     return `DELETE FROM ${table} WHERE ${field[0]} = ? AND ${field[1]} = ?`;
   }
 };
+// check chat whether reciever and sender id  recieverID senderID
+exports.checkChatQuery = `SELECT * FROM chats WHERE (receiverID = ? AND senderId = ?)`;
 // get user data by id
 exports.getUserById = `SELECT * FROM users WHERE id = ?`;
 // update user Active or Deactive

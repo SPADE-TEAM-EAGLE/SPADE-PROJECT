@@ -1,4 +1,4 @@
-const { insertChat, selectQuery, getFullChat, getChatUsers, getChatTenants } = require("../constants/queries");
+const { insertChat, selectQuery, getFullChat, getChatUsers, getChatTenants, checkChatQuery } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
 
 
@@ -9,10 +9,12 @@ const chatsController = {
         const { recieverId } = req.body;
         try {
             // check if chat already exists
-            const isChat = await queryRunner(
-                selectQuery("chats", "senderId", "receiverID"),
-                [senderId, recieverId]
-            );
+            const isChat = await queryRunner(checkChatQuery, [senderId, recieverId]);
+            console.log("isChat[0]" , isChat[0]);
+            // const isChat = await queryRunner(
+            //     selectQuery("chats", "senderId", "receiverID"),
+            //     [senderId, recieverId]
+            // );
             const created_at = new Date().toISOString().slice(0, 19).replace('T', ' ');
             if (isChat[0].length > 0) {
                 res.status(200).json({

@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en" dir="ltr">
+
 <head>
     <!-- META DATA -->
     <meta charset="UTF-8">
@@ -37,13 +38,16 @@
     <link href="../assets/switcher/demo.css" rel="stylesheet" /> -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
         .custom-file-input::-webkit-file-upload-button {
             visibility: hidden;
         }
+
         .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar {
             width: 7px;
             /* Width of the scrollbar */
         }
+
         .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb {
             background-color: rgb(136, 136, 136, 0.2);
             /* Color of the scrollbar thumb */
@@ -51,10 +55,12 @@
             transition: all 1ms;
             /* Rounded corners for the thumb */
         }
+
         .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb:hover {
             background-color: rgb(136, 136, 136, 0.5);
             /* Color of the scrollbar thumb on hover */
         }
+
         .custom-file-input::before {
             content: 'Select Files';
             display: inline-block;
@@ -66,31 +72,38 @@
             cursor: pointer;
             border-radius: 4px;
         }
+
         .custom-file-input:hover::before {
             background: #0069d9;
         }
+
         .custom-file-input:active::before {
             background: #0062cc;
         }
+
         .custom-file-input.selected::before {
             content: 'Change Files';
             background: #28a745;
         }
+
         .dark-mode .create-new-link {
             background: transparent !important;
             border: 3px solid #1467B0 !important;
             color: white !important;
             border-radius: 50px !important;
         }
+
         .create-new-link {
             background: transparent !important;
             border: 3px solid #1467B0 !important;
             color: black;
             border-radius: 50px !important;
         }
+
         .selected-files {
             margin-top: 10px;
         }
+
         .selected-files span {
             display: inline-block;
             margin-right: 5px;
@@ -99,6 +112,7 @@
             color: #333;
             border-radius: 4px;
         }
+
         .dark-mode .selected-files span {
             display: inline-block;
             margin-right: 0;
@@ -107,9 +121,11 @@
             color: white;
             border-radius: 4px;
         }
+
         .custom-file-input {
             visibility: hidden;
         }
+
         .custom-file-label {
             cursor: pointer;
             display: flex;
@@ -119,6 +135,7 @@
             padding: 6px 12px;
             background-color: #fff;
         }
+
         .dark-mode .custom-file-label {
             cursor: pointer;
             display: flex;
@@ -128,59 +145,72 @@
             padding: 6px 12px;
             background-color: transparent;
         }
+
         .custom-file-label i {
             margin-bottom: 5px;
             font-size: 3rem;
         }
+
         .custom-file-text {
             text-align: center;
             line-height: 1.2;
             margin-top: 5px;
         }
+
         .custom-file-text span {
             display: block;
             font-size: 14px;
         }
+
         .remove-file {
             cursor: pointer;
         }
+
         .border {
             border: 0px solid #e9edf4 !important;
             padding: 0.75rem;
             vertical-align: top;
             border: 1px solid #e9edf4;
         }
+
         input:focus {
             border: 3px solid #555 !important;
         }
+
         .panel-body {
             padding: 0px;
         }
+
         .accordion-item:first-of-type {
             border-bottom-left-radius: 0.25rem;
             border-bottom-right-radius: 0.25rem;
             box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
         }
+
         .accordion-item:last-of-type {
             border-top-right-radius: 0.25rem;
             border-top-left-radius: 0.25rem;
             box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
         }
+
         .table-primary th {
             font-weight: 600 !important;
             vertical-align: middle !important;
         }
+
         .border-model-line {
             border-top-left-radius: 3px;
             border-bottom-left-radius: 3px;
             border-top-right-radius: 3px !important;
             border-bottom-right-radius: 3px !important;
         }
+
         .file-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
             grid-gap: 10px;
         }
+
         .selected-file {
             display: flex;
             flex-direction: column;
@@ -191,19 +221,23 @@
             border: 1px solid #ccc;
             border-radius: 5px;
         }
+
         .file-preview {
             width: 80px;
             height: 80px;
             object-fit: cover;
             border-radius: 5px;
         }
+
         .file-details {
             margin-top: 5px;
             font-size: 12px;
         }
+
         .table td {
             vertical-align: middle !important;
         }
+
         /* .card-header {
         padding: 0.5rem 1rem;
     } */
@@ -212,6 +246,7 @@
             margin: 0rem 1rem;
             color: white;
         }
+
         .modal-footer button {
             border-radius: 2.75rem;
             padding: 4px 30px;
@@ -225,66 +260,82 @@
             letter-spacing: 0.0145455em;
             /* font-size: 0.938rem; */
         }
+
         .modal-footer .button {
             font-size: 0.938rem;
         }
+
         .accordion-button::after {
             content: "";
             display: inline-block;
             /* Replace with the path to your default chevron image */
         }
+
         .chevron,
         .tick,
         .cross {
             position: absolute;
             right: 15px;
         }
+
         .tick {
             color: green;
             font-weight: bolder
         }
+
         .cross {
             color: red;
             font-weight: bolder
         }
+
         .accordion-button .chevron {
             transition: transform 0.3s;
             /* Transition for smooth animation */
         }
+
         .accordion-button[aria-expanded="true"] .chevron {
             transform: rotate(-180deg);
             /* Rotate the chevron when accordion is open */
         }
+
         .table tbody img {
             width: 40px;
             border: transparent;
             border-radius: 5px;
             height: 40px;
         }
+
         .rounded-pill-Single-Family {
             color: #4A4AFF !important;
             background: #E6E6F2 !important;
         }
+
         .rounded-pill-Multi-Family {
             color: #0BAAB8 !important;
             background: #C8F3F7 !important;
         }
+
         .rounded-pill-Multi-Commercial {
             background: #FFF9E5 !important;
             color: #F5CA38 !important;
         }
+
         .table-primary {
             background: #1467B014;
         }
+
         .selected-file {
             position: relative;
         }
+
         .file-preview {
             width: 100%;
         }
+
         .file-details {
             padding: 10px;
         }
+
         .delete-file {
             position: absolute;
             top: -1px;
@@ -293,21 +344,26 @@
             font-size: 11px;
             color: #000;
         }
+
         .btn-group>.btn-group:not(:last-child)>.btn,
         .btn-group>.btn:not(:last-child):not(.dropdown-toggle) {
             border-top-right-radius: 5px;
             border-bottom-right-radius: 5px;
         }
+
         .color-primary {
             color: #1467B0;
         }
+
         .border-model-line {
             border-left: 5px solid #1467B0;
         }
+
         .accordion-item:first-of-type .accordion-button {
             border-top-right-radius: calc(0.5rem - 1px);
             border-top-left-radius: calc(0.5rem - 1px);
         }
+
         .selected-files span {
             display: inline-block;
             margin-right: 0px;
@@ -316,6 +372,7 @@
             color: #333;
             /* border-radius: 4px; */
         }
+
         /* .delete-file {
         position: absolute;
         top: 0px;
@@ -327,21 +384,25 @@
         button.btn-close {
             right: -7px;
         }
+
         .btn-close {
             width: 2.5rem;
             opacity: 1;
             position: absolute;
             top: -11px;
         }
+
         .del {
             width: 2rem !important;
         }
+
         .btn-close:hover,
         .btn-close:focus {
             color: #000;
             text-decoration: none;
             opacity: 1;
         }
+
         @media (max-width:992px) {
             .modal-footer button {
                 border-radius: 2.75rem;
@@ -354,116 +415,147 @@
                 /* identical to box height, or 120% */
                 letter-spacing: 0.0145455em;
             }
+
             #top_main_image {
                 display: none;
             }
+
             #top_main_card {
                 height: 220px;
             }
+
             #nav_links {
                 top: 165px;
             }
         }
+
         @media (max-width:425px) {
             .modal-footer {
                 flex-direction: column !important;
                 justify-content: flex-center !important;
             }
+
             .modal-footer .button-left {
                 margin: auto;
             }
+
             /* .modal-footer button {
                 width: 231px;
             } */
             .border-model-line h2 {
                 font-size: 1.6rem;
             }
+
             .accordion-button h3 {
                 font-size: 15px;
             }
+
             #filter_btn {
                 font-size: 12px;
                 margin: 0 !important;
             }
+
             #customize_btn {
                 display: none;
             }
+
             #add_property_btn {
                 font-size: 12px;
                 margin: 0 !important;
             }
+
             #typehead {
                 display: none;
             }
+
             #email_verification {
                 font-size: 12px;
             }
+
             #top_main_image {
                 display: none;
             }
+
             #top_main_card {
                 height: 220px;
             }
+
             #nav_links {
                 top: 165px;
             }
         }
+
         @media (max-width:375px) {
             .border-model-line h2 {
                 font-size: 1.4rem;
             }
         }
+
         @media (max-width:320px) {
             /* .modal-footer button {
                 width: 231px;
             } */
         }
+
         @media (max-width: 767px) {
             .file-select-area {
                 display: block;
                 text-align: center;
             }
+
             .selected-files {
                 margin-top: 10px;
                 text-align: center;
             }
+
             .file-details {
                 padding: 5px;
             }
         }
+
         th,
         td {
             border-left-color: transparent !important;
             border-right-color: transparent !important;
         }
+
         .dark-mode th {
             background: #212121 !important;
         }
+
         .light-mode th {
             background: #ECF3F9 !important;
         }
+
         .btn-light {
             border-color: #000000 !important;
         }
+
         /* chats start css  */
         .text {
             height: auto;
         }
+
         * {
             box-sizing: border-box;
         }
+
         ::-webkit-scrollbar {
             width: 6px;
         }
+
         ::-webkit-scrollbar-track {
             background: transparent;
         }
+
         ::-webkit-scrollbar-thumb {
             background: #000 80;
         }
+
         ::-webkit-scrollbar-thumb:hover {
             background: #000 cc;
         }
+
         /* html, body {
 	 height: 100%;
 	 margin: 0;
@@ -485,13 +577,16 @@
             border: none;
             background: #000 20;
         }
+
         .icon {
             cursor: pointer;
             transition: all ease 0.5s;
         }
+
         .icon:hover {
             opacity: 0.5;
         }
+
         .person {
             --size: 2em;
             width: fit-content;
@@ -504,15 +599,19 @@
             background-position: center;
             border-radius: 50%;
         }
+
         .person.avatar {
             --size: 3em;
         }
+
         .person.photo {
             --size: 6em;
         }
+
         .person.photo .online {
             --size: 1.5em;
         }
+
         .person .online {
             --size: 0.75em;
             width: fit-content;
@@ -524,6 +623,7 @@
             background: #09db84;
             border-radius: 50%;
         }
+
         .chat {
             --bg: #fff;
             --bg-secundary: #e1e1e8;
@@ -544,20 +644,25 @@
             box-shadow: 0 8px 8px -4px #000 20;
             transition: all ease 0.5s;
         }
+
         .chat.dark {
             --bg: #1f2024;
             --bg-secundary: #292a30;
             --color: #dde4f0;
         }
+
         .chat[data-color='red'] {
             --bg-highlight: #f70546;
         }
+
         .chat[data-color='green'] {
             --bg-highlight: #10915c;
         }
+
         .chat[data-color='purple'] {
             --bg-highlight: #b600f2;
         }
+
         .chat .conversation {
             width: 100%;
             height: 100%;
@@ -565,6 +670,7 @@
             flex-direction: column;
             transition: all ease 0.5s;
         }
+
         .chat .conversation .head {
             width: 100%;
             min-height: 4em;
@@ -574,12 +680,14 @@
             background: var(--bg-secundary);
             padding: 0.5em;
         }
+
         .chat .conversation .head .buttons {
             display: flex;
             align-items: center;
             gap: 1em;
             margin-left: auto;
         }
+
         .chat .conversation .messages {
             width: 100%;
             height: 100%;
@@ -590,6 +698,7 @@
             overflow: auto;
             /* max-height: calc(100vh - 340px); */
         }
+
         .chat .conversation .messages .time {
             width: fit-content;
             font-size: 0.75em;
@@ -598,12 +707,14 @@
             border-radius: 6px;
             background: #000 20;
         }
+
         .chat .conversation .messages .msg-text {
             width: fit-content;
             font-size: 12px;
             font-weight: 800;
             /* animation: appear-msg ease 0.25s forwards; */
         }
+
         .chat .conversation .messages .msg-text .text {
             display: block;
             padding: 1.5em;
@@ -611,14 +722,17 @@
             background: var(--bg-secundary);
             box-shadow: 0 2px 0 #000 20;
         }
+
         .chat .conversation .messages .msg-text.owner {
             margin-left: auto;
         }
+
         .chat .conversation .messages .msg-text.owner .text {
             color: #fff;
             background: var(--bg-highlight);
             border-radius: 0.75em 0.75em 0 0.75em;
         }
+
         .chat .conversation .field {
             width: 100%;
             height: 4em;
@@ -630,6 +744,7 @@
             border-top: 1px solid var(--bg-secundary);
             transition: all ease 0.5s;
         }
+
         .chat .conversation .field .input-message {
             width: 100%;
             height: 100%;
@@ -641,15 +756,19 @@
             background: var(--bg-secundary);
             transition: all ease 0.5s;
         }
+
         .chat .conversation .field .input-message:placeholder-shown~.text {
             display: none;
         }
+
         .chat .conversation .field .input-message:not(:placeholder-shown)~.plus {
             display: none;
         }
+
         .chat .conversation .field .input-message:not(:placeholder-shown)~.audio {
             display: none;
         }
+
         .chat .conversation .field .plus {
             display: flex;
             justify-content: center;
@@ -658,6 +777,7 @@
             border-radius: 50%;
             background: var(--bg-secundary);
         }
+
         .chat .conversation .field .send {
             min-width: 32px;
             display: flex;
@@ -668,9 +788,11 @@
             border-radius: 50%;
             overflow: hidden;
         }
+
         .chat .conversation .field .send .audio {
             display: none;
         }
+
         .chat .options {
             min-width: 50%;
             height: 100%;
@@ -682,13 +804,16 @@
             overflow: auto;
             transition: all ease 0.5s;
         }
+
         .chat .options.active {
             right: 0;
         }
+
         .chat .options .head {
             display: flex;
             align-items: center;
         }
+
         .chat .options .info {
             display: flex;
             flex-direction: column;
@@ -696,15 +821,18 @@
             align-items: center;
             gap: 0.5em;
         }
+
         .chat .options .buttons {
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 1em;
         }
+
         .chat .options .buttons .button {
             text-align: center;
         }
+
         .chat .options .buttons .button .icon {
             --size: 2em;
             width: var(--size);
@@ -717,11 +845,13 @@
             background: var(--bg-secundary);
             border-radius: 50%;
         }
+
         .chat .options .buttons .button .title {
             font-size: 0.9em;
             margin: 0.25em;
             opacity: 0.5;
         }
+
         .chat .options .details {
             width: 100%;
             display: flex;
@@ -730,6 +860,7 @@
             font-size: 0.9em;
             padding: 1em 2em;
         }
+
         .chat .options .details>* {
             width: 100%;
             display: flex;
@@ -737,10 +868,12 @@
             padding: 1em 0;
             border-bottom: 1px solid #000 20;
         }
+
         .chat .options .details .search-field .icon {
             display: flex;
             align-items: center;
         }
+
         .chat .options .details .search-field .search {
             width: 100%;
             padding: 0.25em;
@@ -748,13 +881,16 @@
             outline: none;
             background: transparent;
         }
+
         .chat .options .details .dark-mode .input-dark {
             display: none;
         }
+
         .chat .options .details .dark-mode .input-dark:checked~.toggle .circle {
             left: 50%;
             background: var(--bg-highlight);
         }
+
         .chat .options .details .dark-mode .toggle {
             cursor: pointer;
             --size: 1.5em;
@@ -764,6 +900,7 @@
             border-radius: var(--size);
             outline: 2px solid var(--bg-secundary);
         }
+
         .chat .options .details .dark-mode .toggle .circle {
             width: var(--size);
             height: var(--size);
@@ -773,10 +910,12 @@
             border-radius: var(--size);
             transition: all ease 0.5s;
         }
+
         .chat .options .details .theme .colors {
             display: flex;
             gap: 0.5em;
         }
+
         .chat .options .details .theme .colors .color {
             cursor: pointer;
             --size: 1.25em;
@@ -784,30 +923,38 @@
             height: var(--size);
             border-radius: 50%;
         }
+
         .chat .options .details .theme .colors .color:hover {
             outline: 2px solid var(--bg-secundary);
         }
+
         .chat .options .details .theme .colors .color.blue {
             background: #057ef7;
         }
+
         .chat .options .details .theme .colors .color.red {
             background: #f70546;
         }
+
         .chat .options .details .theme .colors .color.green {
             background: #10915c;
         }
+
         .chat .options .details .theme .colors .color.purple {
             background: #b600f2;
         }
+
         .chat .options .details .media {
             flex-direction: column;
             gap: 1em;
         }
+
         .chat .options .details .media .label {
             display: flex;
             align-items: center;
             gap: 0.5em;
         }
+
         .chat .options .details .media .photos {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -815,6 +962,7 @@
             grid-column-gap: 6px;
             grid-row-gap: 6px;
         }
+
         .chat .options .details .media .photos .img {
             cursor: pointer;
             height: 100%;
@@ -823,6 +971,7 @@
             border-radius: 8px;
             object-position: center;
         }
+
         .chat .options .details .view-more {
             cursor: pointer;
             width: fit-content;
@@ -835,6 +984,7 @@
             border-radius: 8px;
             padding: 0.5em;
         }
+
         .social {
             width: 100%;
             display: flex;
@@ -842,6 +992,7 @@
             justify-content: flex-end;
             gap: 1em;
         }
+
         .social .button {
             display: flex;
             align-items: center;
@@ -849,29 +1000,36 @@
             color: #000;
             text-decoration: none;
         }
+
         #chat {
             height: calc(100vh - 250px);
             border-radius: 0;
         }
+
         @media screen and (max-width: 768px) {
+
             .chat .conversation,
             .chat .options {
                 width: 100%;
             }
         }
+
         @keyframes appear-msg {
             from {
                 opacity: 0;
                 transform: translateY(50%);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
+
         /* chats End css  */
     </style>
 </head>
+
 <body class="app sidebar-mini ltr light-mode sidenav-toggledd">
     <!-- GLOBAL-LOADER -->
     <!-- <div id="global-loader">
@@ -3375,34 +3533,36 @@
                 });
                 $('#input-message').on('keypress', function (ev) {
                     if (ev.key === 'Enter') {
-                    var input_message = $('#input-message').val();
-                    var messageData = {
-                        chatId: localStorage.getItem("chatId"),
-                        message: input_message,
-                        messageType: "text",
-                        userType: "landlord"
-                    };
-                    $.ajax({
-                        url: 'http://localhost:3000/api/spade/createNewMessage',
-                        type: 'POST',
-                        data: JSON.stringify(messageData),
-                        contentType: 'application/json',
-                        processData: false,
-                        headers: {
-                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                        },
-                        success: function (response) {
-                            // console.log(response);
-                            // console.log(tenantIid);
-                            // console.log(tenantName);
-                            chatTenant(Number(localStorage.getItem("tenantId")), String(localStorage.getItem("tenantName")))
-                        },
-                        error: function (xhr, status, error) {
-                            console.log(error);
-                        }
-                    });
-                }
+                        var input_message = $('#input-message').val();
+                        var messageData = {
+                            chatId: localStorage.getItem("chatId"),
+                            message: input_message,
+                            messageType: "text",
+                            userType: "landlord"
+                        };
+                        $.ajax({
+                            url: 'http://localhost:3000/api/spade/createNewMessage',
+                            type: 'POST',
+                            data: JSON.stringify(messageData),
+                            contentType: 'application/json',
+                            processData: false,
+                            headers: {
+                                'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                            },
+                            success: function (response) {
+                                // console.log(response);
+                                // console.log(tenantIid);
+                                // console.log(tenantName);
+                                chatTenant(Number(localStorage.getItem("tenantId")), String(localStorage.getItem("tenantName")))
+                            },
+                            error: function (xhr, status, error) {
+                                console.log(error);
+                            }
+                        });
+                    }
                 });
+           
+           
             });
             function chatTenant(tenatId, tenatName, element) {
                 // console.log(element);
@@ -3621,4 +3781,5 @@
         </script>
         <!-- chats js End  -->
 </body>
+
 </html>
