@@ -229,9 +229,8 @@ $.ajax({
     unread?.forEach((item) => {
       // read-notification-container
       if (item.invoiceID) {
-        if (item.invoiceID) {
-          $("#unread-notification-container").append(
-            `<div class="list-group-item d-flex align-items-center justify-content-between">
+        $("#unread-notification-container").append(
+          `<div class="list-group-item d-flex align-items-center justify-content-between notification-item" data-id="${item.invoiceID}">
                     <div class="d-flex align-items-center">
                     <div class="me-2">
                         <span class="avatar avatar-md brround cover-image" data-bs-image-src="${
@@ -244,8 +243,8 @@ $.ajax({
                             <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">${
                               item.firstName
                             }</div> <span class="text-dark"> ${
-              item.Address
-            } > ${item.city}</span>
+            item.Address
+          } > ${item.city}</span>
                             <p class="mb-0 fw-bold text-dark fs-15 ">${0}$ Received</p>
                         </a>
                     </div>
@@ -254,11 +253,15 @@ $.ajax({
                   item.created_at
                 )}</span>
                   </div></div>`
-          );
-        }
+        );
+        $(".notification-item").on("click", function () {
+          const itemId = $(this).data("id");
+          console.log("itemId", itemId);
+          updateDataNotify(itemId, "invoice");
+        });
       } else if (item.propertyID) {
         $("#unread-notification-container").append(
-          `<div class="list-group-item d-flex align-items-center justify-content-between">
+          `<div class="list-group-item d-flex align-items-center justify-content-between notification-item" data-id="${item.propertyID}">
             <div class="d-flex align-items-center">
             <div class="me-2">
                 <span class="avatar avatar-md brround cover-image" data-bs-image-src="${
@@ -284,9 +287,14 @@ $.ajax({
         )}</span>
          </div></div>`
         );
+        $(".notification-item").on("click", function () {
+          const itemId = $(this).data("id");
+          console.log("itemId", itemId);
+          updateDataNotify(itemId, "property");
+        });
       } else if (item.taskID) {
         $("#unread-notification-container").append(
-          `<div class="list-group-item d-flex align-items-center justify-content-between">
+          `<div class="list-group-item d-flex align-items-center justify-content-between notification-item" data-id="${item.taskID}">
             <div class="d-flex align-items-center">
             <div class="me-2">
                 <span class="avatar avatar-md brround cover-image" data-bs-image-src="${
@@ -311,6 +319,11 @@ $.ajax({
         )}</span>
         </div></div>`
         );
+        $(".notification-item").on("click", function () {
+          const itemId = $(this).data("id");
+          console.log("itemId", itemId);
+          updateDataNotify(itemId, "task");
+        });
       }
     });
     notification?.forEach((item) => {
@@ -418,3 +431,25 @@ $(document).ready(function () {
     console.log($(this).attr("id"));
   });
 });
+
+function updateDataNotify(notificationId, type) {
+  $.ajax({
+    url: "http://localhost:3000/api/spade/updateReadUnRead",
+    type: "PUT",
+    data: JSON.stringify({
+      notify: 1,
+      id: notificationId,
+      type: type,
+    }),
+    contentType: "application/json",
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("authtoken"),
+    },
+    success: function (response) {
+      console.log(response);
+    },
+    error: function (xhr, status, error) {
+      console.log("Error: " + error);
+    },
+  });
+}
