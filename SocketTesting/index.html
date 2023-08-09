@@ -1,40 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Socket.IO chat</title>
-    <style>
-        /* Your CSS styles here */
-    </style>
+  <title>Socket.io Frontend</title>
+  <!-- Include your CSS and other head elements -->
 </head>
 <body>
-    <ul id="messages"></ul>
-    <form id="form" action="">
-        <input id="input" autocomplete="off" /><button>Send</button>
-    </form>
+  <h1>Socket.io Frontend</h1>
+  <!-- Your frontend content here -->
 
-    <!-- Include the Socket.IO library -->
-   <!-- Include the Socket.IO library from the backend Elastic Beanstalk URL -->
- <!-- Include the Socket.IO library from your proxy server -->
-<script src="/socket.io/socket.io.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+  <script>
+    // Connect to the WebSocket server on your backend
+    const backendURL = 'https://SpadeRentBackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com';
+    const socket = io("https://SpadeRentBackend-env.eba-658p5f5v.us-east-1.elasticbeanstalk.com");
 
+    // Handle incoming messages
+    socket.on('chat message', (message) => {
+      console.log('Received message:', message);
+      // Handle the message on the frontend
+    });
 
-    
-    <!-- Your client-side Socket.IO code -->
-    <script>
-        // Connect to the Socket.IO server via proxy
-        const socket = io('https://backend.app.spaderent.com');
-    
-        socket.on("connect", () => {
-            console.log("Connected to Socket.IO server");
-        });
-    
-        socket.on("disconnect", () => {
-            console.log("Disconnected from Socket.IO server");
-        });
-    </script>
-    
+    // Your frontend JavaScript code here
+  </script>
 </body>
 </html>
+
 
 
 

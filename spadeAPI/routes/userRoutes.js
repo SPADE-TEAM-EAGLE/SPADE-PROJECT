@@ -78,7 +78,7 @@ router.get(
 router.post("/tenants", verifyToken, tenantController.createTenants);
 router.post("/sendInvitationLink", verifyToken, tenantController.sendInvitationLink);
 // router.post('/tenantIncreaseRent' , userController.tenantIncreaseRent);
-// router.get('/verifyMailCheck',verifyToken,  userController.verifyMailCheck);
+// router.get('/ ',verifyToken,  userController.verifyMailCheck);
 router.get('/verifyMailCheck', verifyToken, userController.verifyMailCheck);
 router.get('/resetEmailTenant', tenantController.createResetEmailTenant);
 router.post('/verifyResetEmailCodeTenant', tenantController.verifyResetEmailCodeTenant);
@@ -148,6 +148,8 @@ router.delete("/deleteVendorCategory", verifyToken, invoiceController.deleteVend
 
 // chats start
 router.post("/accessChats", verifyToken, chatsController.accessChats);
+router.post("/accessTenantChats", verifyTokenTenant, chatsController.accessChats);
+
 router.get("/fetchTenantChats", verifyTokenTenant, chatsController.fetchUsersChats);
 router.get("/fetchUsersChats", verifyToken, chatsController.fetchUsersTenants);
 
