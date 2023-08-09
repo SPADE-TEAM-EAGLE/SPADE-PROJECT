@@ -3407,7 +3407,7 @@
             function chatTenant(tenatId, tenatName, element) {
                 // console.log(element);
                 const parentDiv = $(element).find(".media.new");
-                console.log(parentDiv[0]);
+                // console.log(parentDiv[0]);
                 if (parentDiv.length > 0) {
                     $(".media.new").removeClass("selected");
                     $(parentDiv[0]).addClass("selected");
@@ -3431,13 +3431,13 @@
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
-                            // console.log(response[0]);
+                            console.log(response.data[0].id);
                             setTimeout(myGreeting, 500)
                             function myGreeting() {
-                                chatId = response[0].id;
+                                chatId = response.data[0].id;
                                 tenatIid = tenatId;
                                 tenatName = tenatName;
-                                localStorage.setItem("chatId", response[0].id)
+                                localStorage.setItem("chatId", response.data[0].id)
                                 localStorage.setItem("tenantId", tenatId)
                                 localStorage.setItem("tenantName", tenatName)
                                 $.ajax({

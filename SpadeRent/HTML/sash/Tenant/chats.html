@@ -2598,7 +2598,7 @@
                             </div>
                             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-5">
                                 <!-- chats start  -->
-                                <div id="chat" class="chat">
+                                <div id="chat" class="chat" style="display: none;">
                                     <div class="conversation">
                                         <div class="head">
                                             <div class="person avatar">
@@ -3431,31 +3431,7 @@
             localStorage.removeItem('tenantId');
             localStorage.removeItem('tenantName');
             $(document).ready(function () {
-                $.ajax({
-                            url: 'http://localhost:3000/api/spade/accessChats/',
-                            type: 'GET',
-                            data: JSON.stringify({
-                                recieverId : 95
-                            }),
-                            contentType: "application/json; charset=utf-8",
-                            // processData: false,
-                            headers: {
-                                'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                            },
-                            success: function (response) {
-                                console.log(response)
-                                localStorage.setItem("chatId", response[0].id)
-                                localStorage.setItem("tenantId", tenatId)
-                                localStorage.setItem("tenantName", tenatName)
-                            },
-                            error: function (xhr, status, error) {
-                                $("#myModal_warning_connection").modal("show");
-                                setTimeout(function () {
-                                    $('#myModal_warning_connection').modal('hide');
-                                }, 2000);
-                                console.log('Error: ' + error);
-                            }
-                        });
+
                 $.ajax({
                     url: 'http://localhost:3000/api/spade/getTenantByID',
                     type: 'GET',
@@ -3465,7 +3441,7 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        // console.log(1111111)
+
                         console.log(response)
                         localStorage.setItem("landloadId", Number(response.data.landlordID))
                         // console.log(response.data)
@@ -3476,7 +3452,7 @@
                         $("#tenant-address").empty()
                         $("#tenant-address").append(`&nbsp;&nbsp; <span><b>Pensgate St</b></span> <br>&nbsp;&nbsp; ${response.data.tAddress + " " + response.data.tCity + " " + response.data.tState + " " + response.data.tZipcode}`)
                         $.ajax({
-                            url: 'http://localhost:3000/api/spade/getUserById/'+Number(response.data.landlordID),
+                            url: 'http://localhost:3000/api/spade/getUserById/' + Number(response.data.landlordID),
                             type: 'GET',
                             contentType: "application/json; charset=utf-8",
                             // processData: false,
@@ -3484,8 +3460,79 @@
                                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                             },
                             success: function (response) {
+                                console.log(1111111)
                                 console.log(response)
+                                var messs1 = "";
+                    var messs2 = "";
+                    var messDiv = $('#messages')
+                                var recieverIdd = {
+                                    recieverId: response.data.id
+                                };
                                 $('#person-name-bold').text(response.data.FirstName + " " + response.data.LastName)
+                                $.ajax({
+                                    url: 'http://localhost:3000/api/spade/accessTenantChats',
+                                    type: 'POST',
+                                    data: JSON.stringify(recieverIdd),
+                                    contentType: 'application/json',
+                                    processData: false,
+                                    headers: {
+                                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                                    },
+                                    success: function (response) {
+                                        console.log(response.data[0]);
+                                        function myGreeting() {
+                                            chatId = response.data[0].id;
+                                            // tenatIid = tenatId;
+                                            // tenatName = tenatName;
+                                            localStorage.setItem("chatId", response.data[0].id)
+                                            // localStorage.setItem("tenantId", tenatId)
+                                            // localStorage.setItem("tenantName", tenatName)
+                                            $.ajax({
+                                                url: 'http://localhost:3000/api/spade/TenantMessages/' + response.data[0].id,
+                                                type: 'GET',
+                                                contentType: 'application/json',
+                                                processData: false,
+                                                headers: {
+                                                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                                                },
+                                                success: function (response) {
+                                                    // $('#person-name-bold').text(tenatName)
+                                                    $('#chat').show()
+                                                    console.log(response);
+                                                    if (response.message == 'Messages fetched successfully' && response.data.length > 0) {
+                                                        for (var i = 0; i < response.data.length; i++) {
+                                                            if (response.data[i]['userType'] == "landlord") {
+                                                                const timeArray = response.data[i]['created_at'].split(" ")[1].split(":");
+                                                                const time = timeArray.slice(0, 2).join(":");
+                                                                messs1 += `<div class="msg-text owner">
+                                                <span class="text">`+ response.data[i]['message'] + `</span>
+                                                <span style="float: right;">`+ time + `</span>
+                                            </div>`;
+                                                            } else if (response.data[i]['userType'] == "tenant") {
+                                                                const timeArray = response.data[i]['created_at'].split(" ")[1].split(":");
+                                                                const time = timeArray.slice(0, 2).join(":");
+                                                                messs1 += `<div class="msg-text">
+                                                <span class="text">`+ response.data[i]['message'] + `</span>
+                                                <span style="float: left;">`+ time + `</span>
+                                            </div>`;
+                                                            }
+                                                        }
+                                                    } else {
+                                                        messs1 = `<div class="time">No Message</div>`;
+                                                    }
+                                                    messDiv.html(messs1);
+                                                },
+                                                error: function (xhr, status, error) {
+                                                    console.log(error);
+                                                }
+                                            });
+                                        }
+                                        myGreeting();
+                                    },
+                                    error: function (xhr, status, error) {
+                                        console.log(error);
+                                    }
+                                });
                             },
                             error: function (xhr, status, error) {
                                 $("#myModal_warning_connection").modal("show");
@@ -3495,6 +3542,7 @@
                                 console.log('Error: ' + error);
                             }
                         });
+
                     },
                     error: function (xhr, status, error) {
                         $("#myModal_warning_connection").modal("show");

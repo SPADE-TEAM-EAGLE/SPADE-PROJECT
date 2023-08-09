@@ -15,7 +15,9 @@ const chatsController = {
             );
             const created_at = new Date().toISOString().slice(0, 19).replace('T', ' ');
             if (isChat[0].length > 0) {
-                res.send(isChat[0]);
+                res.status(200).json({
+                    data : isChat[0]
+                });
             } else {
                 // insert into chats table if chat does not exist
                 await queryRunner(
@@ -25,7 +27,9 @@ const chatsController = {
                     selectQuery("chats", "senderId", "receiverID"),
                     [senderId, recieverId]
                 );
-                res.send(isChat[0]);
+                res.status(200).json({
+                    data : isChat[0]
+                });
             }
         } catch (error) {
             res.status(400).json({
