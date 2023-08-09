@@ -50,7 +50,7 @@ exports.deleteQuery = (table, ...field) => {
   }
 };
 // check chat whether reciever and sender id  recieverID senderID
-exports.checkChatQuery = `SELECT * FROM chats WHERE (receiverID = ? AND senderId = ?) OR (senderId = ? AND receiverID = ?)`;
+exports.checkChatQuery = `SELECT * FROM chats WHERE receiverID = ? AND senderId = ? OR senderId = ? AND receiverID = ?`;
 // get user data by id
 exports.getUserById = `SELECT * FROM users WHERE id = ?`;
 // update user Active or Deactive
