@@ -54,7 +54,7 @@ exports.checkChatQuery = `SELECT * FROM chats WHERE receiverID = ? AND senderId 
 exports.checkTenantsChatQuery = `SELECT * FROM chats WHERE senderId = ? AND  receiverID = ?  OR receiverID = ? AND senderId = ?  `;
 
 // get user data by id
-exports.getUserById = `SELECT active As isUserActive FirstName,LastName FROM users WHERE id = ?`;
+exports.getUserById = `SELECT active As isUserActive ,FirstName,LastName FROM users WHERE id = ?`;
 exports.getTenantById = `SELECT active As isTenantActive ,firstName,lastName FROM tenants WHERE id = ?`;
 
 // SELECT 'user' AS type, id, email, name FROM users WHERE email = ?
