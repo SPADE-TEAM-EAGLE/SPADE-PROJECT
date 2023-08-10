@@ -92,8 +92,8 @@ AND STR_TO_DATE(task.created_at, '%Y-%m-%d') <= STR_TO_DATE(?, '%Y-%m-%d');
 exports.getInvoiceGraphData = `
 SELECT
     SUM(invoice.totalAmount) AS totalAmount,
-    (SELECT SUM(invoice.totalAmount) FROM invoice WHERE invoice.status = 'paid') AS totalPaid,
-    (SELECT SUM(invoice.totalAmount) FROSM invoice WHERE invoice.status = 'Unpaid') AS totalUnPaid
+    (SELECT COUNT(invoice.totalAmount) FROM invoice WHERE invoice.status = 'paid') AS totalPaid,
+    (SELECT COUNT(invoice.totalAmount) FROM invoice WHERE invoice.status = 'Unpaid') AS totalUnPaid
 FROM
     invoice
 WHERE
@@ -101,6 +101,7 @@ WHERE
     AND STR_TO_DATE(invoice.created_at, '%Y-%m-%d') >= STR_TO_DATE(?, '%Y-%m-%d')
     AND STR_TO_DATE(invoice.created_at, '%Y-%m-%d') <= STR_TO_DATE(?, '%Y-%m-%d');
 `;
+
 // delete all images where property id = id from propertyImage
 exports.delteImageFromDb = "DELETE FROM propertyimage WHERE imageKey = ?";
 exports.delteImageForInvoiceImages =
