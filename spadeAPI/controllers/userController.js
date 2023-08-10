@@ -1819,5 +1819,4 @@ exports.getUserByIdData = async (req, res) => {
       message: error.message,
     });
   }
-
 }
