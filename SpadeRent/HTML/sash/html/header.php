@@ -380,7 +380,7 @@
                                                 class="nav-link leading-none d-flex">
                                                 <!-- <img src="../assets/images/users/21.jpg" 
                                                     class="avatar  profile-user brround cover-image"> -->
-                                                <span class="side-menu__item dynamic-text-head"
+                                                <span class="side-menu__item dynamic-text-head text-dark"
                                                     style="padding: 10px 0px;">Spade Admin</span> <i
                                                     class="fe fe-chevron-down dark-mode"
                                                     style="font-size: 20px; font-weight: 800;"></i>
