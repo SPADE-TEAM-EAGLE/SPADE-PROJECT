@@ -35,33 +35,34 @@ var chart = c3.generate({
 });
 
 /* invoice chart */
-var ctx = document.getElementById("chartPolarr");
-var myChart = new Chart(ctx, {
-    type: 'polarArea',
-    data: {
-        datasets: [{
-            data: [18, 15, 9],
-            backgroundColor: ['#1467B0', '#529EE0', '#414141'],
-            hoverBackgroundColor: ['#1467B0', '#529EE0', '#414141'],
-            borderColor: 'transparent',
-        }],
-        labels: ["Paid", "Unpaid", "Overdue"]
-    },
-    options: {
-        scale: {
-            gridLines: {
-                color: 'rgba(119, 119, 142, 0.2)'
-            }
-        },
-        responsive: true,
-        maintainAspectRatio: false,
-        legend: {
-            labels: {
-                fontColor: "#9ba6b5"
-            },
-        },
-    }
-});
+// var ctx = document.getElementById("chartPolarr");
+// console.log(invoiceData)
+// var myChart = new Chart(ctx, {
+//     type: 'polarArea',
+//     data: {
+//         datasets: [{
+//             data: [19,16,10],
+//             backgroundColor: ['#1467B0', '#529EE0', '#414141'],
+//             hoverBackgroundColor: ['#1467B0', '#529EE0', '#414141'],
+//             borderColor: 'transparent',
+//         }],
+//         labels: ["Paid", "Unpaid", "Overdue"]
+//     },
+//     options: {
+//         scale: {
+//             gridLines: {
+//                 color: 'rgba(119, 119, 142, 0.2)'
+//             }
+//         },
+//         responsive: true,
+//         maintainAspectRatio: false,
+//         legend: {
+//             labels: {
+//                 fontColor: "#9ba6b5"
+//             },
+//         },
+//     }
+// });
 
 /*Banking stats chart-bar*/
 var chart = c3.generate({
