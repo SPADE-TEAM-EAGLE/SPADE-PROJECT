@@ -65,6 +65,12 @@
         .counter-card-hover:hover {
             border: 3px solid #1467B0 !important;
         }
+
+        .model-account-close-logo {
+            border: 4px solid orange;
+            border-radius: 50%;
+            padding: 10px 17px 10px 17px;
+        }
     </style>
 
 </head>
@@ -363,23 +369,23 @@
                             </li>
 
                             <li class="slide card-demo">
-                                <a class="side-menu__item" data-bs-toggle="slide" href="invoicing.html"><i
+                                <a class="side-menu__item" data-bs-toggle="slide" href="payments.html"><i
                                         class="side-menu__icon fi fi-rs-file-invoice-dollar"></i><span
-                                        class="side-menu__label">Invoicing</span>
+                                        class="side-menu__label">Payments</span>
                                 </a>
                             </li>
 
                             <li class="slide card-demo1">
-                                <a class="side-menu__item" data-bs-toggle="slide" href="tasks.html"><i
+                                <a class="side-menu__item" data-bs-toggle="slide" href="maintenance-request.html"><i
                                         class="side-menu__icon fi fi-rs-list-check"></i><span
-                                        class="side-menu__label">Tasks</span>
+                                        class="side-menu__label">Maintenance Request</span>
                                 </a>
                             </li>
 
                             <li class="slide">
-                                <a class="side-menu__item" data-bs-toggle="slide" href="coming-soon.html"><i
+                                <a class="side-menu__item" data-bs-toggle="slide" href="chats.html"><i
                                         class="side-menu__icon fi fi-rs-comment"></i><span
-                                        class="side-menu__label">Messages</span>
+                                        class="side-menu__label">Chats</span>
                                     <!-- <i class="angle fe fe-chevron-right"></i> -->
 
                                 </a>
@@ -387,19 +393,19 @@
                             </li>
 
 
-                            <li class="slide">
+                            <!-- <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="coming-soon.html">
                                     <i class="side-menu__icon fi fi-rs-bell"></i>
                                     <span class="side-menu__label">Notifications</span>
                                 </a>
-                            </li>
+                            </li> -->
 
-                            <li class="slide">
+                            <!-- <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="coming-soon.html">
                                     <i class="side-menu__icon fi fi-rs-comment-question"></i>
                                     <span class="side-menu__label">Help</span>
                                 </a>
-                            </li>
+                            </li> -->
 
                             <li>
                                 <a class="side-menu__item has-link" href="settings.html" target="_self"><i
@@ -432,7 +438,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-lg-12 mobile-text-center">
-                                        <!-- <h3 class="page-titlee text-white" style="font-weight: 100; margin-bottom: 0px;">Welcome to Spade Portal</h3> -->
+                                        <!-- <h3 class="page-titlee text-white" style="font-weight: 100; margin-bottom: 0px;">Welcome To Spade Rent Portal</h3> -->
                                         <h1 class="page-titlee text-white"
                                             style="font-weight: 700; margin-bottom: 0px; border-radius: 40px;"
                                             id="tenant-name"><span style="font-weight: 300;">Welcome</span> </h1>
@@ -447,16 +453,62 @@
                                         <div class="mobile-icon-text-align"><i
                                                 class="side-menu__icon fi fi-rs-calendar text-white"></i><span
                                                 class="side-menu__labell text-white">&nbsp;&nbsp; Your next payment of
-                                                $0 is due on 5/1/2023&emsp; <a href="#"
+                                                $0 is due on 5/1/2023&emsp; <a href="" data-bs-target="#pay-now"
+                                                data-bs-toggle="modal"
                                                     class="btn btn-primary btn-pill btn-paynow-banner">Pay
                                                     Now</a></span></div>
                                         <div class="mobile-icon-text-align"><i
                                                 class="side-menu__icon fi fi-rs-building text-white"></i><span
                                                 class="side-menu__labell text-white" id="tenant-address">&nbsp;&nbsp;
-                                                <span><b>Pensgate St</b></span> <br>&nbsp;&nbsp; </span>
+                                                <span><b>Pensgate St</b></span> <br>&nbsp;&nbsp;9430 Research Blvd. Ste 2-350 Austin TX 78759 </span>
                                         </div>
 
                                     </div>
+                                     <!-- Paynow model box start  -->
+                                     <div class="modal fade" id="pay-now"
+                                     tabindex="-1" role="dialog">
+                                     <div class="modal-dialog modal-md modal-dialog-scrollable"
+                                         role="document">
+                                         <div class="modal-content">
+                                             <div class="modal-header">
+                                                 <button class="btn-close"
+                                                     data-bs-dismiss="modal"
+                                                     aria-label="Close">
+                                                     <span
+                                                         aria-hidden="true"><img
+                                                             src="../assets/images/cross-circle.svg" /></span>
+                                                 </button>
+                                             </div>
+                                             <div
+                                                 class="modal-body text-center text-dark">
+                                                 <img src="../assets/images/logo_loginmodule.png"
+                                                     class="model-account-close-logo"
+                                                     alt="">
+                                                 <h2 class="mt-5 mb-0">
+                                                 </h2>
+                                                 <h4 style="margin-bottom: 0px;">Spade Tenant</h4>
+                                                 <span>Spade Rent</span>
+                                                 <h2><b>Do you want to pay your due balance?</b>
+                                                 </h2>
+
+                                                 <button
+                                                     class="btn btn-primary btn-pill m-2"
+                                                     id="form1show" type="button"
+                                                     data-bs-dismiss="modal"
+                                                     aria-label="Close"
+                                                     style="width: fit-content;">
+                                                     &nbsp; Pay Now &nbsp;
+                                                 </button>
+                                             </div>
+                                             <div class="modal-footer">
+
+                                             </div>
+                                         </div>
+                                     </div>
+                                     <!-- Paynow model box start  -->
+
+                                 </div>
+                                 <!-- close account model box End  -->
                                 </div>
 
                             </div>

@@ -1009,7 +1009,7 @@
                                 <div class="row">
                                     <div class="col-lg-9">
                                         <h3 class="page-titlee text-white"
-                                            style="font-weight: 100; margin-bottom: 0px;">Welcome to Spade Portal</h3>
+                                            style="font-weight: 100; margin-bottom: 0px;">Welcome To Spade Rent Portal</h3>
                                         <h1 class="page-titlee text-white" style="font-weight: 700;"></h1>
                                         <a href="javascript:void(0)"
                                             class="btn btn-primary btn-pill btn-xl email-verification-btn"><i

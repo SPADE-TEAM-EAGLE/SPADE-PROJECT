@@ -66,7 +66,7 @@ $(document).ready(function() {
            isEmpty3 = false;
        } else if (lease == "Triple Net Lease" && yesno == "yes") {
            var date2 = false;
-           $('.input-amount, .dateofRentchange, #baseRent , #tripleNet , #leaseStart , #leaseEnd').each(function() {
+           $('.input-amount, .dateofRentchange , #leaseStart , #leaseEnd').each(function() {
                if ($(this).val() === '' || $(this).val() === 'Choose...') {
                    date2 = true;
                    isEmpty3 = true;
@@ -84,7 +84,7 @@ $(document).ready(function() {
            }
        }else if(lease == "Triple Net Lease" && yesno == "no"){
            var date3 = false;
-           $('#baseRent , #tripleNet , #leaseStart , #leaseEnd').each(function() {
+           $('#leaseStart , #leaseEnd').each(function() {
                if ($(this).val() === '' || $(this).val() === 'Choose...') {
                    date3 = true;
                    isEmpty3 = true;
