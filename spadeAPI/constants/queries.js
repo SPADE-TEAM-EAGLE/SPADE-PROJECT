@@ -63,6 +63,8 @@ exports.getTenantById = `SELECT active As isTenantActive ,firstName,lastName FRO
 
 // update user Active or Deactive
 exports.updateUserActive = `UPDATE users SET active = ? WHERE Email = ?`;
+exports.updateTenantActive = `UPDATE tenants SET active = ? WHERE Email = ?`;
+
 // creat api get total properties of landlord and vacant or occupied properties using join with units table
 exports.getPropertiesGraphData = `SELECT
 COUNT(DISTINCT property.id) AS propertyCount,
