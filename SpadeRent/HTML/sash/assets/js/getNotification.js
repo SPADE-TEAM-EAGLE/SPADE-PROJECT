@@ -22,19 +22,12 @@ function convertTimestamp(timestamp) {
   }
 }
 $.ajax({
-  url: "http://localhost:3000/api/spade/notify",
+  url: "https://backend.app.spaderent.com/api/spade/notify",
   method: "GET",
   headers: {
     Authorization: "Bearer " + localStorage.getItem("authtoken"),
   },
   success: function (response) {
-    //     function toTitleCase(str) {
-    //         return str.replace(/\w\S*/g, function(txt) {
-    //             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-    //         });
-    //     }
-    // $("#user-name").text(toTitleCase(user))
-    // $("#header-user").text(toTitleCase(user))
     const notification = [
       ...response.invoiceNotify,
       ...response.propertyNotify,

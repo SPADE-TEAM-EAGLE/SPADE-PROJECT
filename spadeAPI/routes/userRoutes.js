@@ -5,6 +5,7 @@ const tenantController = require("../controllers/tenantController");
 const invoiceController = require("../controllers/invoiceController");
 const tenantPortalController = require("../controllers/tenantPortalController");
 const settingController = require("../controllers/settingController");
+const paymentHelper = require("../helper/paymentIntegration");
 const { verifyToken, verifyTokenTenant } = require("../middleware/authenticate");
 const taskController = require("../controllers/taskController");
 const fileUpload = require("../helper/S3Bucket");
@@ -166,6 +167,9 @@ router.get("/LandlordMessages/:chatId", verifyToken, messageClt.getAllMessages);
 
 // leads routes start
 router.post("/createLead", verifyToken, leadsClt.createNewLead);
+
+// payment 
+router.post("/openOrder", paymentHelper.openOrder);
 
 
 module.exports = router;
