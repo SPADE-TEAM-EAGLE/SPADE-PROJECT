@@ -3503,11 +3503,28 @@ function resetAccordions() {
             })
         })
         function logout() {
-            localStorage.removeItem('authtoken');
-            window.close();
-            window.open('./login_module.html', "_blank")
-            console.log('Done');
-        }
+                $(document).ready(function () {
+                    $.ajax({
+                        url: 'http://localhost:3000/api/spade/inactiveUser',
+                        type: 'PUT',
+                        contentType: false,
+                        processData: false,
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            console.log(response);
+                            localStorage.removeItem('authtoken');
+                            window.close();
+                            window.open('./login_module.html', "_blank")
+                            console.log('Done');
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(error);
+                        }
+                    });
+                });
+            }
     </script>
 
 </body>
