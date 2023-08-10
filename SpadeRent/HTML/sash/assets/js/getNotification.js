@@ -594,7 +594,7 @@ $("#updateAllNotifyRead").on("click", function () {
 
 function updateAllNotifyRead() {
   $.ajax({
-    url: "http://localhost:3000/api/spade/updateAllNotifyRead",
+    url: "https://backend.app.spaderent.com/api/spade/updateAllNotifyRead",
     type: "PUT",
     data: JSON.stringify({
       notify: 1,
