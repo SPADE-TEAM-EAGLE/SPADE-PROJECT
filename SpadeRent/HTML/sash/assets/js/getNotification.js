@@ -59,8 +59,10 @@ $.ajax({
     notification?.forEach((item) => {
       // read-notification-container
       if (item.invoiceID) {
+        const colorClass = item.notify === 0 ? "my_blue" : "bg-transparent";
+
         $("#notification-container").append(
-          `<div class="list-group-item d-flex align-items-center justify-content-between dumy" id='${
+          `<div class="list-group-item d-flex align-items-center ${colorClass}  justify-content-between dumy" id='${
             item.invoiceID
           }'>
             <div class="d-flex align-items-center">
@@ -87,8 +89,9 @@ $.ajax({
           </div></div>`
         );
       } else if (item.propertyID) {
+        const colorClass = item.notify === 0 ? "my_blue" : "bg-transparent";
         $("#notification-container").append(
-          `<div class="list-group-item d-flex align-items-center justify-content-between dumy" id='${
+          `<div class="list-group-item d-flex align-items-center ${colorClass}  justify-content-between dumy" id='${
             item.invoiceID
           }'>
             <div class="d-flex align-items-center">
@@ -117,8 +120,9 @@ $.ajax({
          </div></div>`
         );
       } else if (item.taskID) {
+        const colorClass = item.notify === 0 ? "my_blue" : "bg-transparent";
         $("#notification-container").append(
-          `<div class="list-group-item d-flex align-items-center justify-content-between dumy" id='${
+          `<div class="list-group-item d-flex align-items-center ${colorClass} justify-content-between dumy" id='${
             item.invoiceID
           }'>
             <div class="d-flex align-items-center">
@@ -146,7 +150,7 @@ $.ajax({
         </div></div>`
         );
       } else if (item.tenantID) {
-        const colorClass = item.notify === 0 ? 'bg-transparent' : 'bg-transparent';
+        const colorClass = item.notify === 0 ? "my_blue" : "bg-transparent";
         $("#notification-container").append(
           `<div class="list-group-item d-flex align-items-center ${colorClass} justify-content-between notification-item" data-id="${
             item.tenantID
@@ -590,6 +594,30 @@ $(document).ready(function () {
     console.log($(this).attr("id"));
   });
 });
+
+$("#updateAllNotifyRead").on("click", function () {
+  updateAllNotifyRead();
+});
+
+function updateAllNotifyRead() {
+  $.ajax({
+    url: "http://localhost:3000/api/spade/updateAllNotifyRead",
+    type: "PUT",
+    data: JSON.stringify({
+      notify: 1,
+    }),
+    contentType: "application/json",
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("authtoken"),
+    },
+    success: function (response) {
+      console.log(response);
+    },
+    error: function (xhr, status, error) {
+      console.log("Error: " + error);
+    },
+  });
+}
 
 function updateDataNotify(notificationId, type) {
   $.ajax({
