@@ -54,7 +54,13 @@ exports.checkChatQuery = `SELECT * FROM chats WHERE receiverID = ? AND senderId 
 exports.checkTenantsChatQuery = `SELECT * FROM chats WHERE senderId = ? AND  receiverID = ?  OR receiverID = ? AND senderId = ?  `;
 
 // get user data by id
-exports.getUserById = `SELECT * FROM users WHERE id = ?`;
+exports.getUserById = `SELECT active As isUserActive FROM users WHERE id = ?`;
+exports.getTenantById = `SELECT active As isTenantActive FROM tenants WHERE id = ?`;
+
+// SELECT 'user' AS type, id, email, name FROM users WHERE email = ?
+// UNION
+// SELECT 'tenant' AS type, id, email, name FROM tenants WHERE email = ?;
+
 // update user Active or Deactive
 exports.updateUserActive = `UPDATE users SET active = ? WHERE Email = ?`;
 // creat api get total properties of landlord and vacant or occupied properties using join with units table

@@ -3518,14 +3518,14 @@
                                     // tenatName = tenatName;
                                     localStorage.setItem("chatId", chatId)
                                     $.ajax({
-                                        url: 'http://localhost:3000/api/spade/getUserById/' + Number(response[0].senderId) ,
+                                        url: 'http://localhost:3000/api/spade/getUserById/' + Number(response[0].senderId)+ '/landload' ,
                                         type: 'GET',
                                         contentType: false,
                                         processData: false,
                                         success: function (response) {
                                             console.log("getUserById");
                                             console.log(response);
-                                            if(response.data.active == 1){
+                                            if(response.data.isTenantActive == 1){
                                                 $('.online').show()
                                             }else{
                                                 $('.online').hide()
