@@ -3566,6 +3566,8 @@
 
             });
             function chatTenant(tenatId, tenatName, element) {
+                // console.log(typeof String(tenatId));
+
                 // console.log(element);
                 const parentDiv = $(element).find(".media.new");
                 // console.log(parentDiv[0]);
@@ -3581,7 +3583,7 @@
                         var messs2 = "";
                         var messDiv = $('#messages')
                         var tenantIdd = {
-                            recieverId: tenatId
+                            recieverId: String(tenatId)
                         };
                         $.ajax({
                             url: 'http://localhost:3000/api/spade/accessChats',

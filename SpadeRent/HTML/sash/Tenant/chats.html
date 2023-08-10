@@ -3490,12 +3490,13 @@
                     }
                 });
                 function chatTenant() {
+                    // console.log(typeof localStorage.getItem("landloadId"));
                     // console.log(Number(localStorage.getItem("tenantId")));
                     var messs1 = "";
                     var messs2 = "";
                     var messDiv = $('#messages')
                     var recieverIdd = {
-                        recieverId: Number(localStorage.getItem("landloadId"))
+                        recieverId: localStorage.getItem("landloadId")
                     };
                     $('#person-name-bold').text(String(localStorage.getItem("tenantName")))
                     $.ajax({
