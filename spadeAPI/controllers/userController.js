@@ -52,6 +52,7 @@ const {
   updateUserActive,
   getUserById,
   getTenantById,
+  updateTenantActive,
 } = require("../constants/queries");
 
 const { hashedPassword } = require("../helper/hash");
@@ -1787,6 +1788,21 @@ exports.inactiveUser = async (req, res) => {
   try {
     const { email } = req.user;
     const inactiveUserResult = await queryRunner(updateUserActive, [0, email]);
+    // if (inactiveUserResult[0].affectedRows > 0) {
+      res.status(200).json({
+        message: "User is inactive",
+      });
+    // }
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+};
+exports.inactiveTenant = async (req, res) => {
+  try {
+    const { email } = req.user;
+    const inactiveUserResult = await queryRunner(updateTenantActive, [0, email]);
     // if (inactiveUserResult[0].affectedRows > 0) {
       res.status(200).json({
         message: "User is inactive",

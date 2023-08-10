@@ -55,12 +55,10 @@ $.ajax({
     $(".inbox_span").text(`(${read.length})`);
     $(".Unread_span").text(`(${unread.length})`);
     $(".archive_span").text(`(${notification.length})`);
-
-    $("#notification-container").empty()
+    $("#notification-container").empty();
     notification?.forEach((item) => {
       // read-notification-container
       if (item.invoiceID) {
-       
         $("#notification-container").append(
           `<div class="list-group-item d-flex align-items-center justify-content-between dumy" id='${
             item.invoiceID
@@ -147,9 +145,12 @@ $.ajax({
         )}</span>
         </div></div>`
         );
-      }else if (item.tenantID) {
+      } else if (item.tenantID) {
+        const colorClass = item.notify === 0 ? 'bg-transparent' : 'bg-transparent';
         $("#notification-container").append(
-          `<div class="list-group-item d-flex align-items-center justify-content-between notification-item" data-id="${item.tenantID}">
+          `<div class="list-group-item d-flex align-items-center ${colorClass} justify-content-between notification-item" data-id="${
+            item.tenantID
+          }">
             <div class="d-flex align-items-center">
             <div class="me-2">
                 <span class="avatar avatar-md brround cover-image" data-bs-image-src="${
@@ -160,8 +161,8 @@ $.ajax({
             <div class="">
                 <a href="javascript:void(0);">
                     <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">${
-                      item.propertyName
-                    }</div> <span class="text-dark">${item.propertyName } | ${
+                      item.firstName
+                    }</div> <span class="text-dark">${item.propertyName} | ${
             item.propertyType
           }</span>
                     <p class="mb-0 fw-bold text-dark fs-15 ">Task Assigned</p>
@@ -171,7 +172,7 @@ $.ajax({
         </div><div class="">
         <span class="fs-12 text-dark">${convertTimestamp(
           item.tenantCreated_at
-          )}</span>
+        )}</span>
         </div></div>`
         );
         $(".notification-item").on("click", function () {
@@ -181,11 +182,10 @@ $.ajax({
         });
       }
     });
-    $("#inbox-notification-container").empty()
+    $("#inbox-notification-container").empty();
     read?.forEach((item) => {
       // read-notification-container
       if (item.invoiceID) {
-      
         $("#inbox-notification-container").append(
           `<div class="list-group-item d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
@@ -239,9 +239,11 @@ $.ajax({
         )}</span>
          </div></div>`
         );
-      }else if (item.taskID) {
+      } else if (item.taskID) {
         $("#inbox-notification-container").append(
-          `<div class="list-group-item d-flex align-items-center justify-content-between notification-item" data-id="${item.taskID}">
+          `<div class="list-group-item d-flex align-items-center justify-content-between notification-item" data-id="${
+            item.taskID
+          }">
             <div class="d-flex align-items-center">
             <div class="me-2">
                 <span class="avatar avatar-md brround cover-image" data-bs-image-src="${
@@ -271,9 +273,11 @@ $.ajax({
           console.log("itemId", itemId);
           updateDataNotify(itemId, "task");
         });
-      }else if (item.tenantID) {
+      } else if (item.tenantID) {
         $("#inbox-notification-container").append(
-          `<div class="list-group-item d-flex align-items-center justify-content-between notification-item" data-id="${item.tenantID}">
+          `<div class="list-group-item d-flex align-items-center justify-content-between notification-item" data-id="${
+            item.tenantID
+          }">
           <div class="d-flex align-items-center">
           <div class="me-2">
               <span class="avatar avatar-md brround cover-image" data-bs-image-src="${
@@ -285,17 +289,15 @@ $.ajax({
               <a href="javascript:void(0);">
                   <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">${
                     item.propertyName
-                  }</div> <span class="text-dark">${item.propertyName } | ${
-          item.propertyType
-        }</span>
+                  }</div> <span class="text-dark">${item.propertyName} | ${
+            item.propertyType
+          }</span>
                   <p class="mb-0 fw-bold text-dark fs-15 ">Task Assigned</p>
               </a>
           </div>
           
       </div><div class="">
-      <span class="fs-12 text-dark">${convertTimestamp(
-        item.created_at
-      )}</span>
+      <span class="fs-12 text-dark">${convertTimestamp(item.created_at)}</span>
       </div></div>`
         );
         $(".notification-item").on("click", function () {
@@ -305,12 +307,14 @@ $.ajax({
         });
       }
     });
-    $("#unread-notification-container").empty()
+    $("#unread-notification-container").empty();
     unread?.forEach((item) => {
       // read-notification-container
       if (item.invoiceID) {
         $("#unread-notification-container").append(
-          `<div class="list-group-item d-flex align-items-center justify-content-between notification-item" data-id="${item.invoiceID}">
+          `<div class="list-group-item d-flex align-items-center justify-content-between notification-item" data-id="${
+            item.invoiceID
+          }">
                     <div class="d-flex align-items-center">
                     <div class="me-2">
                         <span class="avatar avatar-md brround cover-image" data-bs-image-src="${
@@ -341,7 +345,9 @@ $.ajax({
         });
       } else if (item.propertyID) {
         $("#unread-notification-container").append(
-          `<div class="list-group-item d-flex align-items-center justify-content-between notification-item" data-id="${item.propertyID}">
+          `<div class="list-group-item d-flex align-items-center justify-content-between notification-item" data-id="${
+            item.propertyID
+          }">
             <div class="d-flex align-items-center">
             <div class="me-2">
                 <span class="avatar avatar-md brround cover-image" data-bs-image-src="${
@@ -374,7 +380,9 @@ $.ajax({
         });
       } else if (item.taskID) {
         $("#unread-notification-container").append(
-          `<div class="list-group-item d-flex align-items-center justify-content-between notification-item" data-id="${item.taskID}">
+          `<div class="list-group-item d-flex align-items-center justify-content-between notification-item" data-id="${
+            item.taskID
+          }">
             <div class="d-flex align-items-center">
             <div class="me-2">
                 <span class="avatar avatar-md brround cover-image" data-bs-image-src="${
@@ -404,9 +412,11 @@ $.ajax({
           console.log("itemId", itemId);
           updateDataNotify(itemId, "task");
         });
-      }else if (item.tenantID) {
+      } else if (item.tenantID) {
         $("#unread-notification-container").append(
-          `<div class="list-group-item d-flex align-items-center justify-content-between notification-item" data-id="${item.tenantID}">
+          `<div class="list-group-item d-flex align-items-center justify-content-between notification-item" data-id="${
+            item.tenantID
+          }">
             <div class="d-flex align-items-center">
             <div class="me-2">
                 <span class="avatar avatar-md brround cover-image" data-bs-image-src="${
@@ -439,8 +449,7 @@ $.ajax({
       }
     });
 
-
-    $("#Archieve-notification-container").empty()
+    $("#Archieve-notification-container").empty();
 
     notification?.forEach((item) => {
       // read-notification-container
@@ -531,9 +540,11 @@ $.ajax({
         )}</span>
         </div></div>`
         );
-      }else if (item.tenantID) {
+      } else if (item.tenantID) {
         $("#Archieve-notification-container").append(
-          `<div class="list-group-item d-flex align-items-center justify-content-between notification-item" data-id="${item.tenantID}">
+          `<div class="list-group-item d-flex align-items-center justify-content-between notification-item" data-id="${
+            item.tenantID
+          }">
             <div class="d-flex align-items-center">
             <div class="me-2">
                 <span class="avatar avatar-md brround cover-image" data-bs-image-src="${
@@ -545,8 +556,7 @@ $.ajax({
                 <a href="javascript:void(0);">
                     <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">${
                       item.firstName
-                    }</div> <span class="text-dark">${item.propertyName
-                    } | ${
+                    }</div> <span class="text-dark">${item.propertyName} | ${
             item.propertyType
           }</span>
                     <p class="mb-0 fw-bold text-dark fs-15 ">Task Assigned</p>
