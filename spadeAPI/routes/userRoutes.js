@@ -34,7 +34,9 @@ router.get("/getDashPropertyData/:start/:end", verifyToken, userController.getPr
 router.get("/getDashTaskData/:start/:end", verifyToken, userController.getTaskDashboardData);
 router.get("/getDashInvoiceData/:start/:end", verifyToken, userController.getInvoiceDashboardData);
 router.put("/inactiveUser", verifyToken, userController.inactiveUser);
-router.get("/getUserById/:id", verifyTokenTenant, userController.getUserByIdData);
+router.put("/inactiveTenant", verifyTokenTenant, userController.inactiveTenant);
+
+router.get("/getUserById/:id/:type", userController.getUserByIdData);
 // router.post("/property" ,verifyToken, userController.property);
 router.put("/updateUserProfile", verifyToken, userController.updateUserProfile);
 // router.post('/property', upload , userController.property);
@@ -149,7 +151,7 @@ router.delete("/deleteVendorCategory", verifyToken, invoiceController.deleteVend
 
 // chats start
 router.post("/accessChats", verifyToken, chatsController.accessChats);
-router.post("/accessTenantChats", verifyTokenTenant, chatsController.accessChats);
+router.post("/accessTenantChats", verifyTokenTenant, chatsController.accessTenantsChats);
 
 router.get("/fetchTenantChats", verifyTokenTenant, chatsController.fetchUsersChats);
 router.get("/fetchUsersChats", verifyToken, chatsController.fetchUsersTenants);

@@ -51,6 +51,8 @@ const {
   getInvoiceGraphData,
   updateUserActive,
   getUserById,
+  getTenantById,
+  updateTenantActive,
 } = require("../constants/queries");
 
 const { hashedPassword } = require("../helper/hash");
@@ -1757,8 +1759,8 @@ exports.getInvoiceDashboardData = async (req, res) => {
     const { start, end } = req.params;
     const getAllInvoiceData = await queryRunner(getInvoiceGraphData, [
       userId,
-      start,
-      end,
+      // start,
+      // end,
     ]);
     res.status(200).json(getAllInvoiceData[0]);
   } catch (error) {
@@ -1809,18 +1811,40 @@ exports.inactiveUser = async (req, res) => {
     });
   }
 };
-// getUserById
-exports.getUserByIdData = async (req, res) => {
+exports.inactiveTenant = async (req, res) => {
   try {
-    const { id } = req.params;
-    const getUserByIdResult = await queryRunner(getUserById, [id]);
-    res.status(200).json({
-      data: getUserByIdResult[0][0],
-    });
+    const { email } = req.user;
+    const inactiveUserResult = await queryRunner(updateTenantActive, [0, email]);
+    // if (inactiveUserResult[0].affectedRows > 0) {
+      res.status(200).json({
+        message: "User is inactive",
+      });
+    // }
   } catch (error) {
     res.status(400).json({
       message: error.message,
     });
   }
-
+};
+// getUserById
+exports.getUserByIdData = async (req, res) => {
+  try {
+    const { id ,type} = req.params;
+    console.log(id,type);
+    if(type === 'tenant'){
+      const getUserByIdResult = await queryRunner(getTenantById, [id]);
+      res.status(200).json({
+        data: getUserByIdResult[0][0],
+      });
+    }else if(type === 'landlord'){
+      const getUserByIdResult = await queryRunner(getUserById, [id]);
+      res.status(200).json({
+        data: getUserByIdResult[0][0],
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
 }

@@ -634,16 +634,16 @@
                                             </a>
                                         </div>
 
-                                        <div class="d-flex country mt-2">
+                                        <!-- <div class="d-flex country mt-2">
                                             <a class="nav-link icon text-dark" onclick="mydemoclick()">
                                                 <i class="fi fi-rs-universal-access"></i>
                                             </a>
-                                        </div>
+                                        </div> -->
 
 
                                         <!-- 1 comments start  -->
                                         <div class="d-flex country mt-2">
-                                            <a class="nav-link icon text-dark">
+                                            <a class="nav-link icon text-dark" href="./chats.html">
                                                 <i class="fi fi-rs-comment"></i>
                                             </a>
                                             <!-- <img src="../assets\header-img\comment-light.webp"
@@ -1708,11 +1708,11 @@
                 <div class="tabs-menu border-bottom">
                     <!-- Tabs -->
                     <ul class="nav panel-tabs">
-                        <li><a href="#side1" data-bs-toggle="tab" class="text-dark">All</a></li>
-                        <li><a href="#side2" data-bs-toggle="tab" class="text-dark">Inbox (25)</a></li>
-                        <li><a href="#side3" data-bs-toggle="tab" class="text-dark">Unread (5)</a></li>
-                        <li><a href="#side4" data-bs-toggle="tab" class="text-dark">Archive (0)</a></li>
-                    </ul>
+                        <li><a href="#side1" data-bs-toggle="tab" class="text-dark active">All<span class="all_span"></span></a></li>
+                        <li><a href="#side2" data-bs-toggle="tab" class="text-dark">Inbox <span class="inbox_span"></span></a></li>
+                        <li><a href="#side3" data-bs-toggle="tab" class="text-dark">Unread <span class="Unread_span"></span></a></li>
+                        <li><a href="#side4" data-bs-toggle="tab" class="text-dark">Archive <span class="archive_span"></span></a></li>
+                    </ul>   
                 </div>
                 <div class="tab-content">
                     <!-- <div class="tab-pane " id="side1">
@@ -1894,18 +1894,18 @@
                         </div>
                     </div>
                   
-                    <div class="tab-pane active" id="side2">
+                    <div class="tab-pane " id="side2">
                         <div class="list-group list-group-flush" id="inbox-notification-container">
 
                         </div>
                     </div>
-                    <div class="tab-pane active" id="side3">
+                    <div class="tab-pane " id="side3">
                         <div class="list-group list-group-flush" id="unread-notification-container">
                             
 
                         </div>
                     </div>
-                    <div class="tab-pane active" id="side4">
+                    <div class="tab-pane " id="side4">
                         <div class="list-group list-group-flush" id="Archieve-notification-container">
                             
 
@@ -1919,7 +1919,7 @@
                     </div> -->
                     <!-- <div class="tab-pane" id="side2">
                         <div class="list-group list-group-flush">
-                            <!-- <div class="pt-3 fw-semibold ps-5">Today</div> -->
+                            <div class="pt-3 fw-semibold ps-5">Today</div> -->
                             <!-- <div class="list-group-item d-flex align-items-center justify-content-between">
                                 <div class="d-flex align-items-center">
                                     <div class="me-2">
@@ -1963,10 +1963,10 @@
                             <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
 
                         <!-- </div>
-                    </div> --> -->
+                    </div> --> 
                     <!-- <div class="tab-pane" id="side3">
                         <div class="list-group list-group-flush">
-                            <!-- <div class="pt-3 fw-semibold ps-5">Today</div> -->
+                            <div class="pt-3 fw-semibold ps-5">Today</div> -->
                             <!-- <div class="list-group-item d-flex align-items-center justify-content-between">
                                 <div class="d-flex align-items-center">
                                     <div class="me-2">
@@ -2010,10 +2010,10 @@
                             <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
 
                         <!-- </div>
-                    </div> --> -->
+                    </div> --> 
                     <!-- <div class="tab-pane" id="side4">
                         <div class="list-group list-group-flush">
-                            <!-- <div class="pt-3 fw-semibold ps-5">Today</div> -->
+                             <div class="pt-3 fw-semibold ps-5">Today</div> -->
                             <!-- <div class="list-group-item d-flex align-items-center justify-content-between">
                                 <div class="d-flex align-items-center">
                                     <div class="me-2">
@@ -2057,7 +2057,7 @@
                             <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
 
                         <!-- </div>
-                    </div> --> -->
+                    </div> --> 
                     <!-- <div class="tab-pane" id="side3">
                         <ul class="task-list timeline-task">
                             <li class="d-sm-flex mt-4">
@@ -2558,7 +2558,7 @@ const invoiceData=[]
                 }
             });
             $.ajax({
-                url: `http://localhost:3000/api/spade/getDashInvoiceData/${'2023-06-09'}/${'2023-08-09'}`,
+                url: `https://backend.app.spaderent.com/api/spade/getDashInvoiceData/${'2023-06-09'}/${'2023-08-09'}`,
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2949,12 +2949,29 @@ var myChart = new Chart(ctx, {
 
 
     <script>
-        function logout() {
-            localStorage.removeItem('authtoken');
-            window.open('./login_module.html', "_blank")
-            window.close();
-            console.log('Done');
-        }
+       function logout() {
+                $(document).ready(function () {
+                    $.ajax({
+                        url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                        type: 'PUT',
+                        contentType: false,
+                        processData: false,
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            console.log(response);
+                            localStorage.removeItem('authtoken');
+                            window.close();
+                            window.open('./login_module.html', "_blank")
+                            console.log('Done');
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(error);
+                        }
+                    });
+                });
+            }
     </script>
 <script src="../assets/js/index-chart.js"></script>
     <!-- demo walktrough start  -->
