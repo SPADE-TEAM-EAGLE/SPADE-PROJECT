@@ -1748,8 +1748,8 @@ exports.getInvoiceDashboardData = async (req, res) => {
     const { start, end } = req.params;
     const getAllInvoiceData = await queryRunner(getInvoiceGraphData, [
       userId,
-      start,
-      end,
+      // start,
+      // end,
     ]);
     res.status(200).json(getAllInvoiceData[0]);
   } catch (error) {

@@ -54,8 +54,8 @@ exports.checkChatQuery = `SELECT * FROM chats WHERE receiverID = ? AND senderId 
 exports.checkTenantsChatQuery = `SELECT * FROM chats WHERE senderId = ? AND  receiverID = ?  OR receiverID = ? AND senderId = ?  `;
 
 // get user data by id
-exports.getUserById = `SELECT active As isUserActive FROM users WHERE id = ?`;
-exports.getTenantById = `SELECT active As isTenantActive FROM tenants WHERE id = ?`;
+exports.getUserById = `SELECT active As isUserActive FirstName,LastName FROM users WHERE id = ?`;
+exports.getTenantById = `SELECT active As isTenantActive ,firstName,lastName FROM tenants WHERE id = ?`;
 
 // SELECT 'user' AS type, id, email, name FROM users WHERE email = ?
 // UNION
@@ -85,22 +85,23 @@ FROM
 task
 WHERE
 task.landlordID = ?
-AND STR_TO_DATE(task.created_at, '%Y-%m-%d') >= STR_TO_DATE(?, '%Y-%m-%d')  
-AND STR_TO_DATE(task.created_at, '%Y-%m-%d') <= STR_TO_DATE(?, '%Y-%m-%d'); 
+AND task.created_at >= ?
+AND task.created_at <= ?;
 `;
 // SELECT SUM(invoice.totalAmount) AS totalPaid FROM invoice
 exports.getInvoiceGraphData = `
 SELECT
     SUM(invoice.totalAmount) AS totalAmount,
-    (SELECT COUNT(invoice.totalAmount) FROM invoice WHERE invoice.status = 'paid') AS totalPaid,
-    (SELECT COUNT(invoice.totalAmount) FROM invoice WHERE invoice.status = 'Unpaid') AS totalUnPaid
+    COUNT(CASE WHEN invoice.status = 'paid' THEN 1 ELSE NULL END) AS totalPaid,
+    COUNT(CASE WHEN invoice.status = 'Unpaid' THEN 1 ELSE NULL END) AS totalUnPaid
 FROM
     invoice
 WHERE
     invoice.landlordID = ?
-    AND STR_TO_DATE(invoice.created_at, '%Y-%m-%d') >= STR_TO_DATE(?, '%Y-%m-%d')
-    AND STR_TO_DATE(invoice.created_at, '%Y-%m-%d') <= STR_TO_DATE(?, '%Y-%m-%d');
+    AND invoice.created_at >= ?
+    AND invoice.created_at <= ?;
 `;
+
 
 // delete all images where property id = id from propertyImage
 exports.delteImageFromDb = "DELETE FROM propertyimage WHERE imageKey = ?";
