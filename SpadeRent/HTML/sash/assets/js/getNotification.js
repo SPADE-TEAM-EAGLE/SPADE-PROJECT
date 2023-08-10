@@ -586,7 +586,7 @@ $(document).ready(function () {
 
 function updateDataNotify(notificationId, type) {
   $.ajax({
-    url: "http://localhost:3000/api/spade/updateReadUnRead",
+    url: "https://backend.app.spaderent.com/api/spade/updateReadUnRead",
     type: "PUT",
     data: JSON.stringify({
       notify: 1,

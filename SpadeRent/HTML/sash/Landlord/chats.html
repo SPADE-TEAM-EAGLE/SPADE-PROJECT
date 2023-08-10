@@ -3315,7 +3315,7 @@
             $(document).ready(function () {
                 let id; let userEmail; let emailChange = false
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/protected',
+                    url: 'https://backend.app.spaderent.com/api/spade/protected',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3356,7 +3356,7 @@
                         userType: "landlord"
                     };
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/createNewMessage',
+                        url: 'https://backend.app.spaderent.com/api/spade/createNewMessage',
                         type: 'POST',
                         data: JSON.stringify(messageData),
                         contentType: 'application/json',
@@ -3385,7 +3385,7 @@
                             userType: "landlord"
                         };
                         $.ajax({
-                            url: 'http://localhost:3000/api/spade/createNewMessage',
+                            url: 'https://backend.app.spaderent.com/api/spade/createNewMessage',
                             type: 'POST',
                             data: JSON.stringify(messageData),
                             contentType: 'application/json',
@@ -3429,7 +3429,7 @@
                             recieverId: String(tenatId)
                         };
                         $.ajax({
-                            url: 'http://localhost:3000/api/spade/accessChats',
+                            url: 'https://backend.app.spaderent.com/api/spade/accessChats',
                             type: 'POST',
                             data: JSON.stringify(tenantIdd),
                             contentType: 'application/json',
@@ -3448,7 +3448,7 @@
                                     localStorage.setItem("tenantId", tenatId)
                                     localStorage.setItem("tenantName", tenatName)
                                     $.ajax({
-                                        url: 'http://localhost:3000/api/spade/getUserById/'+ Number(tenatId)+ '/tenant',
+                                        url: 'https://backend.app.spaderent.com/api/spade/getUserById/'+ Number(tenatId)+ '/tenant',
                                         type: 'GET',
                                         contentType: false,
                                         processData: false,
@@ -3461,7 +3461,7 @@
                                                 $('.online').hide()
                                             }
                                                 $.ajax({
-                                                    url: 'http://localhost:3000/api/spade/LandlordMessages/' + localStorage.getItem("chatId"),
+                                                    url: 'https://backend.app.spaderent.com/api/spade/LandlordMessages/' + localStorage.getItem("chatId"),
                                                     type: 'GET',
                                                     contentType: 'application/json',
                                                     processData: false,
@@ -3529,7 +3529,7 @@
             }
             $(document).ready(function () {
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/viewAllPropertyTenant',
+                    url: 'https://backend.app.spaderent.com/api/spade/viewAllPropertyTenant',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -3566,7 +3566,7 @@
             function logout() {
                 $(document).ready(function () {
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/inactiveUser',
+                        url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
                         type: 'PUT',
                         contentType: false,
                         processData: false,
