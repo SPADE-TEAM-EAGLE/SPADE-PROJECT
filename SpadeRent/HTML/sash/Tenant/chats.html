@@ -3490,79 +3490,107 @@
                     }
                 });
                 function chatTenant() {
-                    // console.log(typeof localStorage.getItem("landloadId"));
-                    // console.log(Number(localStorage.getItem("tenantId")));
-                    var messs1 = "";
-                    var messs2 = "";
-                    var messDiv = $('#messages')
-                    var recieverIdd = {
-                        recieverId: localStorage.getItem("landloadId")
-                    };
-                    $('#person-name-bold').text(String(localStorage.getItem("tenantName")))
-                    $.ajax({
-                        url: 'http://localhost:3000/api/spade/accessTenantChats',
-                        type: 'POST',
-                        data: JSON.stringify(recieverIdd),
-                        contentType: 'application/json',
-                        processData: false,
-                        headers: {
-                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                        },
-                        success: function (response) {
-                            console.log("accessTenantChats");
-                            console.log(response[0]);
-                            function myGreeting() {
-                                chatId = response[0].id;
-                                // tenatIid = tenatId;
-                                // tenatName = tenatName;
-                                localStorage.setItem("chatId", chatId)
-                                $.ajax({
-                                    url: 'http://localhost:3000/api/spade/TenantMessages/' + chatId,
-                                    type: 'GET',
-                                    contentType: 'application/json',
-                                    processData: false,
-                                    headers: {
-                                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                                    },
-                                    success: function (response) {
-                                        // $('#person-name-bold').text(tenatName)
-                                        $('#chat').show()
-                                        console.log("TenantMessages");
-                                        console.log(response);
-                                        if (response.message == 'Messages fetched successfully' && response.data.length > 0) {
-                                            for (var i = 0; i < response.data.length; i++) {
-                                                if (response.data[i]['userType'] == "tenant") {
-                                                    const timeArray = response.data[i]['created_at'].split(" ")[1].split(":");
-                                                    const time = timeArray.slice(0, 2).join(":");
-                                                    messs1 += `<div class="msg-text owner">
+                    function fetchChatMessages() {
+                        // console.log(typeof localStorage.getItem("landloadId"));
+                        // console.log(Number(localStorage.getItem("tenantId")));
+                        var messs1 = "";
+                        var messs2 = "";
+                        var messDiv = $('#messages')
+                        var recieverIdd = {
+                            recieverId: localStorage.getItem("landloadId")
+                        };
+                        // $('#person-name-bold').text(String(localStorage.getItem("tenantName")))
+                        $.ajax({
+                            url: 'http://localhost:3000/api/spade/accessTenantChats',
+                            type: 'POST',
+                            data: JSON.stringify(recieverIdd),
+                            contentType: 'application/json',
+                            processData: false,
+                            headers: {
+                                'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                            },
+                            success: function (response) {
+                                console.log("accessTenantChats");
+                                console.log(response[0].senderId);
+                                function myGreeting() {
+                                    chatId = response[0].id;
+                                    // tenatIid = tenatId;
+                                    // tenatName = tenatName;
+                                    localStorage.setItem("chatId", chatId)
+                                    $.ajax({
+                                        url: 'http://localhost:3000/api/spade/getUserById/' + Number(response[0].senderId) ,
+                                        type: 'GET',
+                                        contentType: false,
+                                        processData: false,
+                                        success: function (response) {
+                                            console.log("getUserById");
+                                            console.log(response);
+                                            if(response.data.active == 1){
+                                                $('.online').show()
+                                            }else{
+                                                $('.online').hide()
+                                            }
+                                            $.ajax({
+                                                url: 'http://localhost:3000/api/spade/TenantMessages/' + chatId,
+                                                type: 'GET',
+                                                contentType: 'application/json',
+                                                processData: false,
+                                                headers: {
+                                                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                                                },
+                                                success: function (response) {
+                                                    // $('#person-name-bold').text(tenatName)
+                                                    $('#chat').show()
+                                                    console.log("TenantMessages");
+                                                    console.log(response);
+                                                    if (response.message == 'Messages fetched successfully' && response.data.length > 0) {
+                                                        for (var i = 0; i < response.data.length; i++) {
+                                                            if (response.data[i]['userType'] == "tenant") {
+                                                                const timeArray = response.data[i]['created_at'].split(" ")[1].split(":");
+                                                                const time = timeArray.slice(0, 2).join(":");
+                                                                messs1 += `<div class="msg-text owner">
                                                     <span class="text">`+ response.data[i]['message'] + `</span>
                                                     <span style="float: right;">`+ time + `</span>
                                                 </div>`;
-                                                } else if (response.data[i]['userType'] == "landlord") {
-                                                    const timeArray = response.data[i]['created_at'].split(" ")[1].split(":");
-                                                    const time = timeArray.slice(0, 2).join(":");
-                                                    messs1 += `<div class="msg-text">
+                                                            } else if (response.data[i]['userType'] == "landlord") {
+                                                                const timeArray = response.data[i]['created_at'].split(" ")[1].split(":");
+                                                                const time = timeArray.slice(0, 2).join(":");
+                                                                messs1 += `<div class="msg-text">
                                                     <span class="text">`+ response.data[i]['message'] + `</span>
                                                     <span style="float: left;">`+ time + `</span>
                                                 </div>`;
+                                                            }
+                                                        }
+                                                    } else {
+                                                        messs1 = `<div class="time">No Message</div>`;
+                                                    }
+                                                    messDiv.html(messs1);
+                                                },
+                                                error: function (xhr, status, error) {
+                                                    console.log(error);
                                                 }
-                                            }
-                                        } else {
-                                            messs1 = `<div class="time">No Message</div>`;
+                                            });
+
+
+
+                                        },
+                                        error: function (xhr, status, error) {
+                                            console.log(error);
                                         }
-                                        messDiv.html(messs1);
-                                    },
-                                    error: function (xhr, status, error) {
-                                        console.log(error);
-                                    }
-                                });
+                                    });
+
+                                }
+                                myGreeting();
+                            },
+                            error: function (xhr, status, error) {
+                                console.log(error);
                             }
-                            myGreeting();
-                        },
-                        error: function (xhr, status, error) {
-                            console.log(error);
-                        }
-                    });
+                        });
+
+
+                    }
+                    setInterval(fetchChatMessages, 10000);
+
                 }
 
 
@@ -3576,7 +3604,8 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response.data.tenantID);
+                        console.log("getTenantByID");
+                        console.log(response.data);
                         localStorage.setItem("tenantId", response.data.tenantID)
                         localStorage.setItem("tenantName", response.data.firstName + " " + response.data.lastName)
                         console.log(response)
@@ -3597,8 +3626,9 @@
                                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                             },
                             success: function (response) {
-                                console.log(1111111)
-                                console.log(response)
+                                // console.log(1111111)
+                                // console.log()
+                                $('#person-name-bold').text(response.data.FirstName + " " + response.data.LastName)
                                 chatTenant()
                             },
                             error: function (xhr, status, error) {
@@ -3653,9 +3683,6 @@
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
-                            // console.log(response);
-                            // console.log(tenantIid);
-                            // console.log(tenantName);
                             chatTenant(Number(localStorage.getItem("tenantId")), String(localStorage.getItem("tenantName")))
                         },
                         error: function (xhr, status, error) {
@@ -3722,7 +3749,7 @@
                         },
                         success: function (response) {
                             console.log(response[0]);
-                            
+
                             function myGreeting() {
                                 chatId = response[0].id;
                                 tenatIid = tenatId;
@@ -3739,7 +3766,6 @@
                                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                     },
                                     success: function (response) {
-                                        $('#person-name-bold').text(tenatName)
                                         // $('#chat').show()
                                         console.log(response.data.length);
                                         if (response.message == 'Messages fetched successfully' && response.data.length > 0) {
@@ -3764,6 +3790,10 @@
                                             messs1 = `<div class="time">No Message</div>`;
                                         }
                                         messDiv.html(messs1);
+                                        messDiv.scrollTop(messDiv[0].scrollHeight);
+                                        // var chatContent = $("#chatContent");
+                                        var scrollBottom = messDiv.prop("scrollHeight");
+                                        messDiv.scrollTop(scrollBottom);
                                     },
                                     error: function (xhr, status, error) {
                                         console.log(error);
