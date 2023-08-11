@@ -2213,7 +2213,7 @@ color: #000;
 
     <!-- Color Theme js -->
     <script src="../assets/js/themeColors.js"></script>
-
+<script src="../assets/js/intercom.js"></script>
     <!-- CUSTOM JS -->
     <script src="../assets/js/custom.js"></script><script src="../assets/js/getNotification.js"></script>
 
@@ -2322,14 +2322,14 @@ color: #000;
 
                 },
                 error: function(xhr, status, error) {
-                    $("#myModal_warning").modal("show");
-                    setTimeout(function() {
-                        $('#myModal_warning').modal('hide');
-                        window.location = '../Landlord/login_module.html';
-                    }, 2000);
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+                    // $("#myModal_warning").modal("show");
+                    // setTimeout(function() {
+                    //     $('#myModal_warning').modal('hide');
+                    //     window.location = '../Landlord/login_module.html';
+                    // }, 2000);
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                     // console.log('Error occurred while fetching state and city data.');
                 }
             });
@@ -2395,12 +2395,12 @@ color: #000;
                     // window.location = '../Landlord/properties-all.html';
                 },
                 error: function(xhr, status, error) {
-                    $("#myModal_warning_connection").modal("show");
-                            setTimeout(function() {
-                                $('#myModal_warning_connection').modal('hide');
+                    // $("#myModal_warning_connection").modal("show");
+                    //         setTimeout(function() {
+                    //             $('#myModal_warning_connection').modal('hide');
 
-                            }, 2000);
-                    console.log(xhr.responseText);
+                    //         }, 2000);
+                    // console.log(xhr.responseText);
                 }
             });
             $(document).on('click', '#next', function(e) {
@@ -2479,12 +2479,12 @@ color: #000;
                         
                     },
                     error: function(xhr, status, error) {
-                        $("#myModal_warning_connection").modal("show");
-                            setTimeout(function() {
-                                $('#myModal_warning_connection').modal('hide');
+                    //     $("#myModal_warning_connection").modal("show");
+                    //         setTimeout(function() {
+                    //             $('#myModal_warning_connection').modal('hide');
 
-                            }, 2000);
-                    console.log(xhr.responseText);
+                    //         }, 2000);
+                    // console.log(xhr.responseText);
                     }
                 });
 
@@ -2509,7 +2509,7 @@ color: #000;
                         if (response.message == "No data found") {
                             
                         }
-                        vendorData = response?.data[0]
+                        vendorData = (response.data[0]?response.data[0]:[])
                             // $("#user-name").text(response.name)
                         var tableBody = $('#table_body');
                         tableBody.empty();

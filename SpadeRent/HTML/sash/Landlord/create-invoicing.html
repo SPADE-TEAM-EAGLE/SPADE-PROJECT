@@ -1518,7 +1518,7 @@
                             <label class="form-label fw-bold fs-18">Due Date</label>
                             <input type="date" class="form-control form" id="dueDate" data-bs-placement="top"
                                 data-bs-toggle="tooltip" title="" data-bs-original-title="Select Due Date"
-                                data-bs-container="#addModal" required>
+                                data-bs-container="#addModal">
                             <span class="text-danger d-none">Due Date is required!</span>
                         </div>
                         <div class="collapse row" id="collapse1">
@@ -3737,6 +3737,8 @@
                     if (!$('#collapse1').hasClass('show')) {
                         $('#collapse1').collapse('show');
                         $("#dueDate").addClass("d-none")
+                        $("#dueDate").siblings("label").addClass("d-none")
+
                     }
                     $('.row-multiple').each(function () {
                         var date = $(this).find('.input-date')
@@ -3750,9 +3752,11 @@
                     if ($('#collapse1').hasClass('show')) {
                         $('#collapse1').collapse('hide');
                         $("#dueDate").removeClass("d-none")
+                        $("#dueDate").siblings("label").removeClass("d-none")
                     }
                     $('.row-multiple').each(function () {
                         $("#dueDate").removeClass("d-none")
+                        $("#dueDate").siblings("label").removeClass("d-none")
                         var date = $(this).find('.input-date')
                         var amount = $(this).find('.input-amount')
                         date.prop('required', false)
@@ -3911,7 +3915,7 @@
                                 }
 
                                 $.ajax({
-                                    url: 'https://backend.app.spaderent.com/api/spade/createInvoice',
+                                    url: 'https://localhost:3000/api/spade/createInvoice',
                                     type: 'POST',
                                     data: JSON.stringify(invoiceData),
                                     contentType: 'application/json',
@@ -3965,7 +3969,7 @@
                         console.log(invoiceData)
                         $.ajax({
                             // url: 'https://backend.app.spaderent.com/api/spade/createInvoice',
-                            url: 'https://backend.app.spaderent.com/api/spade/createInvoice',
+                            url: 'http://localhost:3000/api/spade/createInvoice',
                             type: 'POST',
                             data: JSON.stringify(invoiceData),
                             contentType: 'application/json',

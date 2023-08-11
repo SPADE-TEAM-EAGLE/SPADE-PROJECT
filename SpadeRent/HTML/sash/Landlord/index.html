@@ -990,10 +990,14 @@
                                             <option value="4">Aus</option>
                                         </select>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group mx-3">
                                         <button class="btn btn-primary btn-pill" data-bs-toggle="offcanvas"
                                             data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i
                                                 class="fi fi-rs-settings-sliders"></i> Customized Dashboard</button>
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn-primary btn-pill" id="resetLayout"
+                                            ><i class="fi fi-rs-replace"></i>&nbsp;Reset Layout</button>
                                     </div>
                                 </div>
                             </div>
@@ -1259,9 +1263,9 @@
                                             <div style="display: flex; align-items: end;">
                                             <label for=""><b>Prospects Status </b></label> &emsp;
                                             <input type="date" class="form-control form-control-date-width"
-                                                placeholder="Jan 6, 2022 – Jan 13, 2022">&emsp;
+                                                placeholder="Jan 6, 2022 – Jan 13, 2022" >&emsp;
                                                 <input type="date" class="form-control form-control-date-width"
-                                                placeholder="Jan 6, 2022 – Jan 13, 2022">
+                                                placeholder="Jan 6, 2022 – Jan 13, 2022" >
                                             </div>
                                                 <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
                                                     <ul class="dropdown-menu dropdown-menu-top">
@@ -1284,9 +1288,9 @@
                                             <div style="display: flex; align-items: end;">
                                             <label for=""><b>Invoices </b></label> &emsp;
                                             <input type="date" class="form-control form-control-date-width"
-                                                placeholder="Jan 6, 2022 – Jan 13, 2022">&emsp;
+                                                placeholder="Jan 6, 2022 – Jan 13, 2022" id="startDate">&emsp;
                                                 <input type="date" class="form-control form-control-date-width"
-                                                placeholder="Jan 6, 2022 – Jan 13, 2022">
+                                                placeholder="Jan 6, 2022 – Jan 13, 2022" id="endDate">
                                             </div>
                                                 <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
                                                     <ul class="dropdown-menu dropdown-menu-top">
@@ -2292,6 +2296,7 @@
     <script src="../assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
     <script src="../assets/plugins/datatable/js/dataTables.bootstrap5.js"></script>
     <script src="../assets/plugins/datatable/dataTables.responsive.min.js"></script>
+    
 
     <!-- INTERNAL APEXCHART JS -->
     <script src="../assets/js/apexcharts.js"></script>
@@ -2351,7 +2356,7 @@
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
     <script src="../assets/js/getNotification.js"></script>
-    
+    <script src="../assets/js/index-chart.js"></script>
     
     <!-- <script>
 
@@ -2491,8 +2496,98 @@
 // $.ajax(settings).done(function (response) {
 //   console.log(response);
 // });
-const invoiceData=[]
+var invoiceData=[];var startDate;var endDate;
+function formatDate(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+                    const currentDate = new Date();
+const oneMonthAgo = new Date(currentDate);
+oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+
+startDate = formatDate(oneMonthAgo); // Format the date if needed
+endDate = formatDate(currentDate); 
+$("#startDate").val(startDate)
+$("#endDate").val(endDate)
         $(document).ready(() => {
+            
+            $("#startDate").on('change',function(){
+                startDate=$(this).val()
+                $.ajax({
+                url: `http://localhost:3000/api/spade/getDashInvoiceData/${startDate}/${endDate}`,
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    // console.log(response)
+                       // Format the date if needed
+
+                    if(response.length<1){
+                    
+                    }
+                    else{
+                        const result=response[0]
+                        invoiceData=[]
+                        // console.log(result?.totalPaid,result?.totalUnPaid)
+                        invoiceData.push(result?.totalPaid)
+                        invoiceData.push(result?.totalUnPaid)
+                        invoiceData.push(0)
+                        // console.log(invoiceData)
+                        updateInvoiceChart(invoiceData)
+                    }
+                    
+                },
+                error: function (xhr, status, error) {
+                    console.log('Error occurred while fetching state and city data.');
+                    console.log(xhr);
+                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                }
+            });
+            })
+            $("#endDate").on('change',function(){
+                endDate=$(this).val()
+                $.ajax({
+                url: `http://localhost:3000/api/spade/getDashInvoiceData/${startDate}/${endDate}`,
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    // console.log(response)
+                       // Format the date if needed
+
+                    if(response.length<1){
+                    
+                    }
+                    else{
+                        const result=response[0]
+                        invoiceData=[]
+                        // console.log(result?.totalPaid,result?.totalUnPaid)
+                        invoiceData.push(result?.totalPaid)
+                        invoiceData.push(result?.totalUnPaid)
+                        invoiceData.push(0)
+                        // console.log(invoiceData)
+                        updateInvoiceChart(invoiceData)
+                    }
+                    
+                },
+                error: function (xhr, status, error) {
+                    console.log('Error occurred while fetching state and city data.');
+                    console.log(xhr);
+                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                }
+            });
+                
+            })
+            $("#resetLayout").on('click',function(){
+                localStorage.removeItem("htmlLayout")
+                window.location='../Landlord/index.html'
+            })
             let id; let userEmail; let emailChange = false
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/protected',
@@ -2558,47 +2653,26 @@ const invoiceData=[]
                 }
             });
             $.ajax({
-                url: `https://backend.app.spaderent.com/api/spade/getDashInvoiceData/${'2023-06-09'}/${'2023-08-09'}`,
+                url: `http://localhost:3000/api/spade/getDashInvoiceData/${startDate}/${endDate}`,
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    if(response.length>=1){
+                    // console.log(response)
+                       // Format the date if needed
+                    if(response.length<1){
                     
                     }
                     else{
                         const result=response[0]
+                        
+                        // console.log(result?.totalPaid,result?.totalUnPaid)
                         invoiceData.push(result?.totalPaid)
-                        invoiceData.push(result?.totalUnpaid)
-                        var ctx = document.getElementById("chartPolarr");
-console.log(invoiceData)
-var myChart = new Chart(ctx, {
-    type: 'polarArea',
-    data: {
-        datasets: [{
-            data: invoiceData,
-            backgroundColor: ['#1467B0', '#529EE0', '#414141'],
-            hoverBackgroundColor: ['#1467B0', '#529EE0', '#414141'],
-            borderColor: 'transparent',
-        }],
-        labels: ["Paid", "Unpaid", "Overdue"]
-    },
-    options: {
-        scale: {
-            gridLines: {
-                color: 'rgba(119, 119, 142, 0.2)'
-            }
-        },
-        responsive: true,
-        maintainAspectRatio: false,
-        legend: {
-            labels: {
-                fontColor: "#9ba6b5"
-            },
-        },
-    }
-});
+                        invoiceData.push(result?.totalUnPaid)
+                        invoiceData.push(0)
+                        // console.log(invoiceData)
+                        createInvoiceChart(invoiceData)
                     }
                     
                 },
@@ -2722,6 +2796,7 @@ var myChart = new Chart(ctx, {
                     }
                 });
             })
+            
             function updateTable(tabId) {
                 var tableBody = $('#' + tabId + ' tbody');
                 var apiUrl = 'https://backend.app.spaderent.com/api/spade/getAllTask'; // Replace with your API endpoint URL
@@ -2973,7 +3048,6 @@ var myChart = new Chart(ctx, {
                 });
             }
     </script>
-<script src="../assets/js/index-chart.js"></script>
     <!-- demo walktrough start  -->
     <!-- <script src="../assets/js/walkthrough-demo.js"></script> -->
     <!-- <script>
