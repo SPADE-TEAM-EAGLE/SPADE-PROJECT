@@ -162,7 +162,7 @@ router.get("/TenantMessages/:chatId", verifyTokenTenant, messageClt.getAllMessag
 router.get("/LandlordMessages/:chatId", verifyToken, messageClt.getAllMessages);
 
 // profile complition
-router.get('/ProfileComplete',userController.ProfileComplete);
+router.get('/ProfileComplete',verifyToken,userController.ProfileComplete);
  
 
 // leads routes start

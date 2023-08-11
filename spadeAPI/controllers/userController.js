@@ -1931,8 +1931,8 @@ exports.getUserByIdData = async (req, res) => {
 // Profile Complete
 exports.ProfileComplete = async (req, res) => {
   try {
+    
     const { userId } = req.user; 
-    // const { userId } = req.body; 
     const propertycheckresult = await queryRunner(selectQuery("users", "id" ),[userId]);
     if (propertycheckresult[0].length > 0) {
       count = 0;
