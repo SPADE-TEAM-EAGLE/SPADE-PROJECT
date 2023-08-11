@@ -138,6 +138,7 @@ exports.createTenants = async (req, res) => {
 
 
 //  ############################# tenant email send Start  ############################################################
+
 exports.sendInvitationLink = async (req, res) => {
   const { tenantID } = req.body;
   try {

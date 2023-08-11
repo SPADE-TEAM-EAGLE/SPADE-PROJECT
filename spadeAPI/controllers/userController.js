@@ -1688,31 +1688,21 @@ exports.verifyEmailUpdate = async (req, res) => {
     if (userCheckResult[0].length > 0) {
       const emailExist = userCheckResult[0][0].Email;
       const existToken = userCheckResult[0][0].token;
-      const existPassowrd = userCheckResult[0][0].Password;
       if (token == existToken) {
         const emailResult = await queryRunner(updateVerifiedStatusQuery, [
           status,
           id,
         ]);
         if (emailResult.affectedRows === 0) {
-          return res.status(201).send("Email Verified status is not updated");
-        }
-        else {
-          if(await bcrypt.compare(password, existPassowrd)){
-            const token = jwt.sign({ email, password }, config.JWT_SECRET_KEY, {
-              expiresIn: "3h",
-            });
-            return res.status(200).json({
-              token: token,
-              message: " Email verified successful ",
-            });
-          }else{
-            return res.status(201).json({
-              message: "Password is not correct",
-            });
-          }
-          
-          
+          return res.status(400).send("Email Verified status is not updated");
+        } else {
+          const token = jwt.sign({ email, password }, config.JWT_SECRET_KEY, {
+            expiresIn: "3h",
+          });
+          return res.status(200).json({
+            token: token,
+            message: " Email verified successful ",
+          });
         }
       } else {
         return res.status(200).json({
@@ -1856,9 +1846,7 @@ exports.getInvoiceDashboardData = async (req, res) => {
     ]);
     res.status(200).json(getAllInvoiceData[0]);
   } catch (error) {
-    console.log(error)
     res.status(400).json({
-      
       message: error.message,
     });
   }
@@ -1939,4 +1927,48 @@ exports.getUserByIdData = async (req, res) => {
       message: error.message,
     });
   }
+}
+// Profile Complete
+exports.ProfileComplete = async (req, res) => {
+  try {
+    const { userId } = req.user; 
+    // const { userId } = req.body; 
+    const propertycheckresult = await queryRunner(selectQuery("users", "id" ),[userId]);
+    if (propertycheckresult[0].length > 0) {
+      count = 0;
+      if(propertycheckresult[0][0].image){
+        count += 30;
+      }
+      if(propertycheckresult[0][0].FirstName){
+        count += 10;
+      } 
+      if(propertycheckresult[0][0].LastName){
+        count += 10;
+      }
+      if(propertycheckresult[0][0].Email){
+        count += 10;
+      }
+      if(propertycheckresult[0][0].Phone){
+        count += 10;
+      }
+      if(propertycheckresult[0][0].BusinessName){
+        count += 10;
+      }
+      if(propertycheckresult[0][0].streetAddress){
+        count += 10;
+      }
+      if(propertycheckresult[0][0].BusinessAddress){
+        count += 10;
+      }
+      res.status(200).json({
+        // data : propertycheckresult,
+        count : count
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+
 }

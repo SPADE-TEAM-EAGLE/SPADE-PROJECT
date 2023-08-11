@@ -28,6 +28,13 @@ $.ajax({
     Authorization: "Bearer " + localStorage.getItem("authtoken"),
   },
   success: function (response) {
+    //     function toTitleCase(str) {
+    //         return str.replace(/\w\S*/g, function(txt) {
+    //             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    //         });
+    //     }
+    // $("#user-name").text(toTitleCase(user))
+    // $("#header-user").text(toTitleCase(user))
     const notification = [
       ...response.invoiceNotify,
       ...response.propertyNotify,
