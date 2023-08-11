@@ -21,8 +21,14 @@ function convertTimestamp(timestamp) {
     return seconds + (seconds === 1 ? " second ago" : " seconds ago");
   }
 }
+
+
+
+
+
+
 $.ajax({
-  url: "http://localhost:3000/api/spade/notify",
+  url: "https://backend.app.spaderent.com/api/spade/notify",
   method: "GET",
   headers: {
     Authorization: "Bearer " + localStorage.getItem("authtoken"),
@@ -588,20 +594,38 @@ $.ajax({
     // console.log('Error occurred while fetching state and city data.');
   },
 });
-$(document).ready(function () {
-  $(".dumy").click(function () {
-    // get this.id and update notification table
-    console.log($(this).attr("id"));
-  });
-});
+// $(document).ready(function () {
+//   $(".dumy").click(function () {
+//     // get this.id and update notification table
+//     console.log($(this).attr("id"));
+//   });
+// });
 
 $("#updateAllNotifyRead").on("click", function () {
   updateAllNotifyRead();
 });
-
-function updateAllNotifyRead() {
+function getNotifyData(){
   $.ajax({
-    url: "http://localhost:3000/api/spade/updateAllNotifyRead",
+    url: "https://backend.app.spaderent.com/api/spade/notify",
+    method: "GET",
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("authtoken"),
+    },
+    success: function (response) {
+
+    },
+    error: function (xhr, status, error) {
+      console.log("Error occurred while fetching state and city data.");
+      console.log(xhr);
+      console.log(error);
+      // console.log('Error occurred while fetching state and city data.');
+    },
+  });
+}
+function updateAllNotifyRead() {
+  getNotifyData()
+  $.ajax({
+    url: "https://backend.app.spaderent.com/api/spade/updateAllNotifyRead",
     type: "PUT",
     data: JSON.stringify({
       notify: 1,
@@ -621,7 +645,7 @@ function updateAllNotifyRead() {
 
 function updateDataNotify(notificationId, type) {
   $.ajax({
-    url: "http://localhost:3000/api/spade/updateReadUnRead",
+    url: "https://backend.app.spaderent.com/api/spade/updateReadUnRead",
     type: "PUT",
     data: JSON.stringify({
       notify: 1,

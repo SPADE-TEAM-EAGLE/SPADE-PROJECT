@@ -11,6 +11,7 @@
     <meta name="author" content="Spruko Technologies Private Limited">
     <meta name="keywords"
         content="admin,admin dashboard,admin panel,admin template,bootstrap,clean,dashboard,flat,jquery,modern,responsive,premium admin templates,responsive admin,ui,ui kit.">
+        <!-- <script src="http://localhost:3000/socket.io/socket.io.js"></script> -->
 
     <!-- FAVICON -->
     <link rel="shortcut icon" type="image/x-icon" href="../assets/images/brand/favicon.ico" />
@@ -44,9 +45,11 @@
     <!-- demo walktrough start  -->
     <link rel="stylesheet" href="../assets/css/walkthrough-demo.css">
     <!-- demo walktrough End  -->
+    <!-- <script src="socket.io/socket.io.js"></script> -->
 
     <!-- COLOR SKIN CSS -->
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="../assets/colors/color1.css" />
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script> -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
@@ -2284,7 +2287,21 @@
     <script src="../assets/js/charts.js"></script>
     <script src="../assets/js/getNotification.js"></script>
     <script src="../assets/js/index-chart.js"></script>
-    
+    <script src="http://localhost:3000/"></script>
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+
+    <script>
+        const socket = io('http://localhost:3000'); 
+        socket.on('connect', () => {
+          console.log('Connected to Socket.IO server');
+        });
+        // Handle events from the server
+        socket.on('messageFromServer', (data) => {
+          console.log('Received message from server:', data);
+        });
+        // Emit events to the server
+        socket.emit('messageToServer', 'Hello from the client');
+      </script>
     <script>
 
         console.log(document.getElementById('customIntercomButton'))
@@ -2741,6 +2758,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.5.2/dragula.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+
+    <!-- <script src="socket.io/socket.io.js"></script> -->
+    
+
+    </script>
     <script>
         let password_validate1 = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
         var validconfirmPassword1 = document.getElementById("id_password1");

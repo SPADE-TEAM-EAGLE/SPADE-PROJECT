@@ -11,7 +11,7 @@ const { Server } = require("socket.io");
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
-
+const path = require('path');
 app.use(cookieParser());
 app.use(bodyParser.json());
 
@@ -26,28 +26,19 @@ app.use((req, res, next) => {
 app.use("/api/spade", userRoutes);
 connect();
 recurringController.start();
+io.on('connection', socket => {
+    console.log('A user connected');
 
-io.on("connection", (socket) => {
-    console.log("Connected to socket.io");
-    socket.on('join chat', (room) => {
-        socket.join(room);
-        console.log("User Joined Room: " + room);
+    socket.on('message', message => {
+        console.log('Received message:', message);
+        // Broadcast the message to all connected clients
+        io.emit('message', message);
     });
 
-    socket.on("leave chat", (room) => {
-        socket.leave(room);
-        console.log("User left Room: " + room);
+    socket.on('disconnect', () => {
+        console.log('A user disconnected');
     });
-    
-    socket.on("new message", (data) => {
-        console.log(data);
-        const senderId = data.chat._id;
-        console.log('room id', senderId);
-        chats = data.chat;
-
-        io.in(data.chat._id).emit("message-recieved", data);
-    });
-})
+});
 
 app.listen(3000, () => {
     console.log('listening on *:3000');
