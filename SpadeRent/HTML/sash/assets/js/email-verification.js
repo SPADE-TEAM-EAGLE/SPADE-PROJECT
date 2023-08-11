@@ -1,5 +1,5 @@
 //js code
-let id; let userEmail; let emailChange = false
+let id1; let userEmail; let emailChange = false
 $.ajax({
     url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
     method: 'GET',
@@ -42,7 +42,7 @@ $(document).on("click", "#save-email", () => {
         type: 'PUT',
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify({
-            id: id,
+            id: id1,
             email: $("#user-email").val()
         }),
         success: function (response) {
@@ -65,7 +65,7 @@ $("#send-email").on("click", () => {
         type: 'POST',
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify({
-            id: id
+            id: id1
         }),
         success: function (response) {
             $("#modaldemo00").modal("hide")
@@ -83,7 +83,7 @@ $("#verify-btn").on("click", () => {
         type: 'PUT',
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify({
-            id: id,
+            id: id1,
             token: $("#token").val(),
             email: emailChange ? $("#user-email").val() : userEmail,
             password: $("#id_password1").val(),
