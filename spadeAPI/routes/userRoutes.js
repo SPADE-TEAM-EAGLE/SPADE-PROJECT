@@ -130,7 +130,7 @@ router.get("/invoiceCategory", verifyToken, invoiceController.getInvoiceCategori
 router.get("/getInvoiceCategoriesText", verifyToken, invoiceController.getInvoiceCategoriesText);
 router.get("/dashboard", verifyToken, userController.getDashboardData);
 router.get("/checkNotify", verifyToken, notifyController.getCheckedNotify);
-
+router.put("/updateAllNotifyRead", verifyToken, notifyController.updateUserAllReadNotify);
 // updated notification route
 router.put("/notify", verifyToken, notifyController.updateNotifyData);
 router.get("/notify", verifyToken, notifyController.getNotify);
