@@ -110,6 +110,7 @@ const verifyToken = async (req, res, next) => {
     const result = await queryRunner(selectQuery("users", "Email"), [
       decoded.email,
     ]);
+  console.log(result[0][0].active);
     req.user = {
       email: decoded.email,
       userId: result[0][0].id,
@@ -123,6 +124,7 @@ const verifyToken = async (req, res, next) => {
       image:result[0][0].image,
       imageKey:result[0][0].imageKey,
       planID:result[0][0].PlanID,
+      isActive : result[0][0].active
     };
     next();
     // console.log("hello")

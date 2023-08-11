@@ -415,6 +415,8 @@
     // BACKGROUND IMAGE STYLE START
 
     $(document).on("click", '#bgimage1', function () {
+        $(this).addClass('activee');
+                    $('#bgimage2, #bgimage3, #bgimage4').removeClass('activee');
         $('body').addClass('bg-img1');
         $('body').removeClass('bg-img2');
         $('body').removeClass('bg-img3');
@@ -450,6 +452,8 @@
     })
 
     $(document).on("click", '#bgimage2', function () {
+        $(this).addClass('activee');
+                    $('#bgimage1, #bgimage3, #bgimage4').removeClass('activee');
         $('body').addClass('bg-img2');
         $('body').removeClass('bg-img1');
         $('body').removeClass('bg-img3');
@@ -485,6 +489,8 @@
     })
 
     $(document).on("click", '#bgimage3', function () {
+        $(this).addClass('activee');
+                    $('#bgimage2, #bgimage1, #bgimage4').removeClass('activee');
         $('body').addClass('bg-img3');
         $('body').removeClass('bg-img1');
         $('body').removeClass('bg-img2');
@@ -520,6 +526,8 @@
     })
 
     $(document).on("click", '#bgimage4', function () {
+        $(this).addClass('activee');
+                    $('#bgimage2, #bgimage3, #bgimage1').removeClass('activee');
         $('body').addClass('bg-img4');
         $('body').removeClass('bg-img1');
         $('body').removeClass('bg-img2');

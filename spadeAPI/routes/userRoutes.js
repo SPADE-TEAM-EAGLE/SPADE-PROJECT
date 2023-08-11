@@ -7,8 +7,6 @@ const tenantPortalController = require("../controllers/tenantPortalController");
 const settingController = require("../controllers/settingController");
 const paymentHelper = require("../helper/paymentIntegration");
 const { verifyToken, verifyTokenTenant } = require("../middleware/authenticate");
-const { upload } = require("../middleware/imageUploads");
-const { uploadExistingFiles } = require("../middleware/imageUploads");
 const taskController = require("../controllers/taskController");
 const fileUpload = require("../helper/S3Bucket");
 const notifyController = require("../controllers/notifyController");
@@ -32,9 +30,15 @@ router.post("/updatePassword", userController.updatePassword);
 router.post("/resendCode", userController.resendCode);
 router.get("/pricingPlan", userController.pricingPlan);
 router.post("/property", verifyToken, userController.property);
+router.get("/getDashPropertyData/:start/:end", verifyToken, userController.getPropertyDashboardData);
+router.get("/getDashTaskData/:start/:end", verifyToken, userController.getTaskDashboardData);
+router.get("/getDashInvoiceData/:start/:end", verifyToken, userController.getInvoiceDashboardData);
+router.put("/inactiveUser", verifyToken, userController.inactiveUser);
+router.get("/getUserById/:id", verifyTokenTenant, userController.getUserByIdData);
 // router.post("/property" ,verifyToken, userController.property);
 router.put("/updateUserProfile", verifyToken, userController.updateUserProfile);
 // router.post('/property', upload , userController.property);
+// start, end 
 router.get("/allProperty", verifyToken, userController.getproperty);
 // router.get('/allProperty', userController.getproperty);
 router.get("/PropertyUnits", verifyToken, userController.getpropertyUnits);
@@ -75,7 +79,7 @@ router.get(
 router.post("/tenants", verifyToken, tenantController.createTenants);
 router.post("/sendInvitationLink", verifyToken, tenantController.sendInvitationLink);
 // router.post('/tenantIncreaseRent' , userController.tenantIncreaseRent);
-// router.get('/verifyMailCheck',verifyToken,  userController.verifyMailCheck);
+// router.get('/ ',verifyToken,  userController.verifyMailCheck);
 router.get('/verifyMailCheck', verifyToken, userController.verifyMailCheck);
 router.get('/resetEmailTenant', tenantController.createResetEmailTenant);
 router.post('/verifyResetEmailCodeTenant', tenantController.verifyResetEmailCodeTenant);
@@ -130,8 +134,9 @@ router.get("/checkNotify", verifyToken, notifyController.getCheckedNotify);
 router.put("/notify", verifyToken, notifyController.updateNotifyData);
 router.get("/notify", verifyToken, notifyController.getNotify);
 router.get("/tenantNotify", verifyTokenTenant, notifyController.getTenantNotify);
-router.put("/updateReadUnRead", verifyToken, notifyController.updateUserPropertyReadUnRead);
-router.put("/updateReadUnRead", verifyTokenTenant, notifyController.updateUserPropertyReadUnRead);
+router.put("/updateReadUnRead", verifyToken, notifyController.updateUserReadUnRead);
+router.put("/updateReadUnRead", verifyTokenTenant, notifyController.updateUserReadUnRead);
+
 
 
 // property report task
@@ -144,17 +149,19 @@ router.delete("/deleteVendorCategory", verifyToken, invoiceController.deleteVend
 
 // chats start
 router.post("/accessChats", verifyToken, chatsController.accessChats);
+router.post("/accessTenantChats", verifyTokenTenant, chatsController.accessChats);
+
 router.get("/fetchTenantChats", verifyTokenTenant, chatsController.fetchUsersChats);
 router.get("/fetchUsersChats", verifyToken, chatsController.fetchUsersTenants);
 
-// this api is for messages  
+// this api is f or messages  
 router.post("/createNewMessageTenant", verifyTokenTenant, messageClt.createNewMessageTenant);
 router.post("/createNewMessage", verifyToken, messageClt.createNewMessage);
 router.get("/TenantMessages/:chatId", verifyTokenTenant, messageClt.getAllMessages);
 router.get("/LandlordMessages/:chatId", verifyToken, messageClt.getAllMessages);
 
 
-
+ 
 
 // leads routes start
 router.post("/createLead", verifyToken, leadsClt.createNewLead);
