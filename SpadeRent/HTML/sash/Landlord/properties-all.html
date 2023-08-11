@@ -593,18 +593,9 @@
                         <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" style="max-width: 110px;"
                             class="Rent-logo mb-5" />
                         <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
-                        <h6 class="text-default mb-3">Enter a 6-digit code to verify email address</h6>
-                        <input id="token" name="token" type="phone" class="form-control form mb-2" pattern="[0-9]{5}"
-                            maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                            style="min-width: 200px;max-width: 350px;" data-bs-placement="top" data-bs-toggle="tooltip"
-                            title="" data-bs-original-title="Enter the name of the property.">
-                        <input type="password" class="form-control form mb-2" id="id_password1"
-                            aria-describedby="emailHelp" placeholder="Password" data-bs-placement="top"
-                            data-bs-toggle="tooltip" title="" data-bs-original-title="Enter password here.">
-                        <!-- <a class="text-primary mb-4" href="javascript:void(0)">Change Email</a> -->
-                        <span class="mt-1 text-danger" id="passnotmatch1" style="display: none;">
-                            MUST be atleast 8 characters long, Must contain atleast One Uppercase and One symbol.
-                        </span>
+                        <h6 class="text-default mb-3">Get started with Spade Rent! Continue with Google to verify</h6>
+                        <input type="email" class="form-control form mb-2" style="min-width: 200px;max-width: 350px;" placeholder="Enter Verify your Email Address">
+                        <a class="text-primary mb-4" href="javascript:void(0)">Change Email</a>
                         <div class="">
                             <!-- <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2">Remind me Later</a> -->
                             <a href="javascript:void(0)" class="btn btn-primary btn-pill disabled"
@@ -885,7 +876,7 @@
                                     <div class="col-md-12">
                                         <label class="form-label fw-bold">Property Photo</label>
                                         <div class="custom-file" style="border: 1px dashed #00000087;">
-                                            <input id="fileInput" type="file" name="image" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Upload a photo that showcases the property" data-bs-container="#addModal" class="custom-file-input form" accept=".jpg, .png, image/jpeg, image/png"
+                                            <input id="fileInput" type="file" name="image" placeholder="Enter Photo" class="custom-file-input form" accept=".jpg, .png, image/jpeg, image/png"
                                                 aria-label="hello" multiple>
                                             <span className="d-none"></span>
                                             <label class="custom-file-label" for="fileInput">
@@ -903,26 +894,25 @@
                                     </div>
                                     <!-- <div class="col-md-6">
                                         <label for="inputEmail4" class="form-label fw-bold">Property ID</label>
-                                        <input type="text" class="form-control form" id="propertyId" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the unique identifier for the property." data-bs-container="#addModal">
+                                        <input type="text" class="form-control form" id="propertyId">
                                         <span class="text-danger d-none">Property ID is required!</span>
                                     </div> -->
                                     <div class="col-md-12">
                                         <label for="inputPassword4" class="form-label fw-bold">Property Name <spnan
                                                 class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="propertyName" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the name of the property." data-bs-container="#addModal">
+                                        <input type="text" class="form-control form" id="propertyName" placeholder="Enter Property Name">
                                         <span class="text-danger d-none">Property name required!</span>
                                     </div>
                                     <div class="col-12">
                                         <label for="inputAddress" class="form-label fw-bold">Address <spnan
                                                 class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="address" placeholder="1234 Main St" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Please provide the full address of the property, including street name, number, city, and zip code."
-                                            data-bs-container="#addModal">
+                                        <input type="text" class="form-control form" id="address" placeholder="1234 Main St">
                                         <span class="text-danger d-none">Address is required!</span>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="inputState" class="form-label fw-bold">State <span
                                                 class="text-danger">*</span></label>
-                                        <select id="state" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the state where you reside" data-bs-container="#addModal">
+                                        <select id="state" class="form-select form">
                                             <option selected>Choose...</option>
                                         </select>
                                         <span class="text-danger d-none">State is required!</span>
@@ -930,14 +920,13 @@
                                     <div class="col-md-4">
                                         <label for="inputCity" class="form-label fw-bold">City <span
                                                 class="text-danger">*</span></label>
-                                        <input type="text" id="city" class="form-control form city-select" pattern="[A-Za-z\s]+" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the name of your city" data-bs-container="#addModal">
+                                        <input type="text" id="city" class="form-control form city-select" pattern="[A-Za-z\s]+" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')" placeholder="Enter City">
                                         <span class="text-danger d-none">City is required!</span>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="inputZip" class="form-label fw-bold">Zip <spnan class="text-danger">
                                                 *</span></label>
-                                        <input class="form-control form" type="text" id="zip" name="zip" pattern="[0-9]{5}" placeholder="A valid 5-digit zip code" maxlength="5" minlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '')" data-bs-placement="top" data-bs-toggle="tooltip"
-                                            title="" data-bs-original-title="Enter Zip" data-bs-container="#addModal" required>
+                                        <input class="form-control form" type="text" id="zip" name="zip" pattern="[0-9]{5}" placeholder="A valid 5-digit zip code" maxlength="5" minlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '')" placeholder="Enter Zip" required>
 
                                         <span class="text-danger d-none">Zip code is required!</span>
                                     </div>
@@ -945,7 +934,7 @@
                                     <div class="col-md-6">
                                         <label for="inputState" class="form-label fw-bold">Property Type <spnan
                                                 class="text-danger">*</span></label>
-                                        <select id="propertyType" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the type of property." data-bs-container="#addModal">
+                                        <select id="propertyType" class="form-select form">
                                             <option selected>Choose...</option>
                                             <option>Single Family</option>
                                             <option>Multi-Family</option>
@@ -956,8 +945,7 @@
                                     <div class="col-md-6">
                                         <label for="inputPassword4" class="form-label fw-bold">Property Total SQFT
                                             <spnan class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="propertyTotalSF" pattern="[0-9]{5}" placeholder="Area in square feet" maxlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '')" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Please enter the total square footage of the property. Only numerical values are allowed."
-                                            data-bs-container="#addModal" required>
+                                        <input type="text" class="form-control form" id="propertyTotalSF" pattern="[0-9]{5}" placeholder="Area in square feet" maxlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                                         <span class="text-danger d-none">Property Total SF is required!</span>
                                     </div>
                                 </form>
@@ -980,8 +968,7 @@
                                 <div class="col-12 mb-3">
                                     <label for="inputAddress" class="form-label fw-bold">Number of Units<span
                                             class="text-danger">*</span></label>
-                                    <input type="text" class="form-control px-2" id="units" pattern="[0-9]{5}" placeholder="units.." maxlength="3" oninput="this.value = this.value.replace(/[^0-9]/g, '')" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Please enter the total number of units"
-                                        data-bs-container="#addModal" required>
+                                    <input type="text" class="form-control px-2" id="units" pattern="[0-9]{5}" placeholder="Enter Number of Units" maxlength="3" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                                     <span class="text-danger d-none">Units are required!</span>
                                 </div>
                             </form>
@@ -991,7 +978,7 @@
                 <div class="modal-footer">
                     <!-- <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
                         Draft</button> -->
-                    <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close' data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the unique identifier for the property.">Close</button>
+                    <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close'>Close</button>
                     <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
                     <a href="javascript:void(0)" class="btn text-light button d-none" style='background-color:#1467B0;' id='next'>Submit</a>
                     <button class="btn text-light button" style='background-color:#1467B0;' id='next-add-property'>Next</button>
@@ -1159,26 +1146,25 @@
                         <div class="col-md-6">
                             <label for="inputPassword4" class="form-label fw-bold">Property Name <spnan
                                     class="text-danger">*</span></label>
-                            <input type="text" class="form-control form" id="propertyName_update" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Update your property name" data-bs-container="#myModal_edit">
+                            <input type="text" class="form-control form" id="propertyName_update" placeholder="Enter Property Name">
                             <span class="text-danger d-none">Property name required!</span>
                         </div>
                         <div class="col-md-6">
                             <label for="inputAddress" class="form-label fw-bold">Number of Units<span
                                     class="text-danger">*</span></label>
-                            <input type="text" class="form-control form px-2" id="unit_update" pattern="[0-9]{5}" placeholder="" maxlength="3" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required readonly data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Your total units"
-                                data-bs-container="#myModal_edit">
+                            <input type="text" class="form-control form px-2" id="unit_update" pattern="[0-9]{5}" placeholder="Enter Number of Units" maxlength="3" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required readonly>
                             <span class="text-danger d-none">Units are required!</span>
                         </div>
                         <div class="col-12">
                             <label for="inputAddress" class="form-label fw-bold">Address <spnan class="text-danger">
                                     *</span></label>
-                            <input type="text" class="form-control form" id="address_update" placeholder="1234 Main St" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Update your address" data-bs-container="#myModal_edit">
+                            <input type="text" class="form-control form" id="address_update" placeholder="1234 Main St">
                             <span class="text-danger d-none">Address is required!</span>
                         </div>
                         <div class="col-md-4">
                             <label for="inputState" class="form-label fw-bold">State <spnan class="text-danger">
                                     *</span></label>
-                            <select id="state_update" class="form-select form state-select" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Update your state" data-bs-container="#myModal_edit">
+                            <select id="state_update" class="form-select form state-select">
                                 <option selected>Choose...</option>
 
                             </select>
@@ -1187,7 +1173,7 @@
                         <div class="col-md-4">
                             <label for="inputCity" class="form-label fw-bold">City <span
                                     class="text-danger">*</span></label>
-                            <input type="text" id="city_update" class="form-control form city-select" pattern="[A-Za-z\s]+" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Update your city" data-bs-container="#myModal_edit">
+                            <input type="text" id="city_update" class="form-control form city-select" pattern="[A-Za-z\s]+" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')" placeholder="Enter City">
 
 
                             <span class="text-danger d-none">City is required!</span>
@@ -1196,14 +1182,13 @@
                         <div class="col-md-4">
                             <label for="inputZip" class="form-label fw-bold">Zip <spnan class="text-danger">
                                     *</span></label>
-                            <input class="form-control form" type="text" id="zip_update" name="zip" pattern="[0-9]{5}" placeholder="A valid 5-digit zip code" maxlength="5" minlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '')" data-bs-placement="top" data-bs-toggle="tooltip"
-                                title="" data-bs-original-title="Enter Zip" data-bs-container="#addModal" required>
+                            <input class="form-control form" type="text" id="zip_update" name="zip" pattern="[0-9]{5}" placeholder="A valid 5-digit zip code" maxlength="5" minlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                             <span class="text-danger d-none">Zip is required!</span>
                         </div>
                         <div class="col-md-6">
                             <label for="inputState" class="form-label fw-bold">Property Type <spnan class="text-danger">
                                     *</span></label>
-                            <select id="propertyType_update" class="form-select form" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Update your property type" data-bs-container="#myModal_edit">
+                            <select id="propertyType_update" class="form-select form">
                                 <option selected>Choose...</option>
                                 <option>Single Family</option>
                                 <option>Multi-Family</option>
@@ -1214,8 +1199,7 @@
                         <div class="col-md-6">
                             <label for="inputPassword4" class="form-label fw-bold">Property Total SQFT <spnan
                                     class="text-danger">*</span></label>
-                            <input type="text" class="form-control form" id="propertyTotalSF_update" pattern="[0-9]{5}" placeholder="" maxlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Update your Total SQFT"
-                                data-bs-container="#myModal_edit">
+                            <input type="text" class="form-control form" id="propertyTotalSF_update" pattern="[0-9]{5}" placeholder="Enter Property Total SQFT" maxlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                             <span class="text-danger d-none">Property Total SF is required!</span>
                         </div>
                     </form>
@@ -1278,6 +1262,12 @@
                                             <a class="nav-link icon theme-layout nav-link-bg layout-setting">
                                                 <span class="dark-layout text-dark"><i class="fi fi-rs-moon"></i></span>
                                                 <span class="light-layout"><i class="fi fi-rs-brightness"></i></span>
+                                            </a>
+                                        </div>
+                                        <div class="d-flex country mt-2">
+                                            <a class="nav-link icon text-dark customIntercomButton">
+                                        <i class="fi fi-rs-interrogation"></i>
+                                       
                                             </a>
                                         </div>
 
@@ -1604,7 +1594,20 @@
                             </div>
                         </div>
                         <!-- PAGE-HEADER END -->
-
+                        <div>
+                            <p class="d-inline-flex gap-1">
+                                <span>Add Invoicing | </span><a data-bs-toggle="collapse" href="#collapseHelp" role="button" aria-expanded="false" aria-controls="collapseHelp">
+                                  Help ? 
+                                </a>
+                            
+                              </p>
+                              <div class="collapse" id="collapseHelp" style="width: 20%;">
+                                <div class="card card-body">
+                                  <span><a href="#" onclick="Intercom('showArticle', 8210506)"><i class="fi fi-rs-question text-light"></i>  How to create Properties? </a></span>
+                                  <span><a href="#" onclick="Intercom('showArticle', 8210444)"><i class="fi fi-rs-question text-light"></i>  How to update Properties? </a></span>
+                                </div>
+                              </div>
+                        </div>
                         <!-- Row -->
                         <div class="row">
                             <div class="col-lg-12 col-xl-12">
@@ -2273,10 +2276,11 @@
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
     <script src="../assets/js/email-verification.js"></script>
+    <script src="../assets/js/intercom.js"></script>
     <script>
         $(document).ready(function() {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/ProfileComplete',
+                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2637,7 +2641,7 @@ $("#addModal").modal("hide")
                 };
 
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/property',
+                    url: 'https://backend.app.spaderent.com/api/spade/property',
                     type: 'POST',
                     data: JSON.stringify(propertyData),
                     contentType: 'application/json',
@@ -2694,7 +2698,7 @@ $("#addModal").modal("hide")
 $("#addModal").modal("hide")
 
         $.ajax({
-            url: 'http://localhost:3000/api/spade/property',
+            url: 'https://backend.app.spaderent.com/api/spade/property',
             type: 'POST',
             data: JSON.stringify(propertyData),
             contentType: 'application/json',
