@@ -190,11 +190,9 @@
                         <h6 class="text-default mb-3">Enter a 6-digit code to verify email address</h6>
                         <input id="token" name="token" type="phone" class="form-control form mb-2" pattern="[0-9]{5}"
                             maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                            style="min-width: 200px;max-width: 350px;" data-bs-placement="top" data-bs-toggle="tooltip"
-                            title="" data-bs-original-title="Enter the name of the property.">
+                            style="min-width: 200px;max-width: 350px;" placeholder="Enter the name of the property.">
                         <input type="password" class="form-control form mb-2" id="id_password1"
-                            aria-describedby="emailHelp" placeholder="Password" data-bs-placement="top"
-                            data-bs-toggle="tooltip" title="" data-bs-original-title="Enter password here.">
+                            aria-describedby="emailHelp" placeholder="Enter Password">
                         <!-- <a class="text-primary mb-4" href="javascript:void(0)">Change Email</a> -->
                         <span class="mt-1 text-danger" id="passnotmatch1" style="display: none;">
                             MUST be atleast 8 characters long, Must contain atleast One Uppercase and One symbol.
@@ -231,8 +229,7 @@
                         <h6 class="text-default mb-3">Get started with Spade Rent! You have<span id="days-left"></span>
                             left</h6>
                         <input type="email" class="form-control form mb-2" style="min-width: 200px;max-width: 350px;"
-                            data-bs-placement="top" data-bs-toggle="tooltip" title=""
-                            data-bs-original-title="Enter the name of the property." readonly id="user-email">
+                            placeholder="Enter Verify your Email Address" readonly id="user-email">
                         <a class="text-primary mb-4" href="javascript:void(0)" id="change-email">Change Email</a>
                         <a class="text-primary mb-4 d-none" href="javascript:void(0)" id="save-email">Save Email</a>
                         <div class="">
@@ -570,7 +567,18 @@
                                                 <span class="light-layout"><i class="fi fi-rs-brightness"></i></span>
                                             </a>
                                         </div>
-
+                                        <div class="d-flex country mt-2">
+                                            <a class="nav-link icon text-dark customIntercomButton">
+                                        <i class="fi fi-rs-interrogation"></i>
+                                       
+                                            </a>
+                                        </div>
+                                        <!-- <div class="d-flex country mt-2">
+                                            <a class="nav-link icon text-dark customIntercomButton">
+                                        <i class="fi fi-rs-interrogation"></i>
+                                       
+                                            </a>
+                                        </div> -->
                                         <!-- <div class="d-flex country mt-2">
                                             <a class="nav-link icon text-dark" onclick="mydemoclick()">
                                                 <i class="fi fi-rs-universal-access"></i>
@@ -926,10 +934,14 @@
                                             <option value="4">Aus</option>
                                         </select>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group mx-3">
                                         <button class="btn btn-primary btn-pill" data-bs-toggle="offcanvas"
                                             data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i
                                                 class="fi fi-rs-settings-sliders"></i> Customized Dashboard</button>
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn-primary btn-pill" id="resetLayout"
+                                            ><i class="fi fi-rs-replace"></i>&nbsp;Reset Layout</button>
                                     </div>
                                 </div>
                             </div>
@@ -1192,13 +1204,12 @@
                                 <div class="col-lg-6 col-md-12 mb-5">
                                     <div class="card h-100">
                                         <div class="card-header" style="display: flex; justify-content: space-between;">
-                                            <div style="display: flex; align-items: end;">
-                                                <label for=""><b>Prospects Status </b></label> &emsp;
-                                                <input type="date" class="form-control"
-                                                    placeholder="Jan 6, 2022 – Jan 13, 2022"
-                                                    style="width: 140px;">&emsp;
-                                                <input type="date" class="form-control"
-                                                    placeholder="Jan 6, 2022 – Jan 13, 2022" style="width: 140px;">
+                                            <div style="display: flex; flex-wrap: wrap; align-items: baseline;">
+                                            <label for=""><b>Prospects Status </b></label> &emsp;
+                                            <input type="date" class="form-control form-control-date-width"
+                                                placeholder="Jan 6, 2022 – Jan 13, 2022">&emsp;
+                                                <input type="date" class="form-control form-control-date-width"
+                                                placeholder="Jan 6, 2022 – Jan 13, 2022">
                                             </div>
                                             <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
                                             <ul class="dropdown-menu dropdown-menu-top">
@@ -1218,13 +1229,12 @@
                                 <div class="col-lg-6 col-md-12 mb-5">
                                     <div class="card h-100">
                                         <div class="card-header" style="display: flex; justify-content: space-between;">
-                                            <div style="display: flex; align-items: end;">
-                                                <label for=""><b>Invoices </b></label> &emsp;
-                                                <input type="date" class="form-control"
-                                                    placeholder="Jan 6, 2022 – Jan 13, 2022"
-                                                    style="width: 140px;">&emsp;
-                                                <input type="date" class="form-control"
-                                                    placeholder="Jan 6, 2022 – Jan 13, 2022" style="width: 140px;">
+                                            <div style="display: flex; flex-wrap: wrap; align-items: baseline;">
+                                            <label for=""><b>Invoices </b></label> &emsp;
+                                            <input type="date" class="form-control form-control-date-width"
+                                                placeholder="Jan 6, 2022 – Jan 13, 2022" id="startDate">&emsp;
+                                                <input type="date" class="form-control form-control-date-width"
+                                                placeholder="Jan 6, 2022 – Jan 13, 2022" id="endDate">
                                             </div>
                                             <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
                                             <ul class="dropdown-menu dropdown-menu-top">
@@ -1244,13 +1254,14 @@
                                 <div class="col-lg-6 col-md-12 mb-5">
                                     <div class="card h-100">
                                         <div class="card-header" style="display: flex; justify-content: space-between;">
-                                            <div style="display: flex; align-items: end;">
-                                                <label for=""><b>Banking Stats </b></label> &emsp;
+                                            <div style="display: flex; flex-wrap: wrap; align-items: baseline;">
+                                            <label for=""><b>Banking Stats </b></label> &emsp;
+                                            <input type="date" class="form-control"
+                                                placeholder="Jan 6, 2022 – Jan 13, 2022" style="width: 140px;">&emsp;
                                                 <input type="date" class="form-control"
                                                     placeholder="Jan 6, 2022 – Jan 13, 2022"
                                                     style="width: 140px;">&emsp;
-                                                <input type="date" class="form-control"
-                                                    placeholder="Jan 6, 2022 – Jan 13, 2022" style="width: 140px;">
+                                                
                                             </div>
                                             <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
                                             <ul class="dropdown-menu dropdown-menu-top">
@@ -1268,13 +1279,14 @@
                                 <div class="col-lg-6 col-md-12 mb-5">
                                     <div class="card h-100">
                                         <div class="card-header" style="display: flex; justify-content: space-between;">
-                                            <div style="display: flex; align-items: end;">
-                                                <label for=""><b>Task Overview </b></label> &emsp;
+                                            <div style="display: flex; flex-wrap: wrap; align-items: baseline;">
+                                            <label for=""><b>Task Overview </b></label> &emsp;
+                                            <input type="date" class="form-control"
+                                                placeholder="Jan 6, 2022 – Jan 13, 2022" style="width: 140px;">&emsp;
                                                 <input type="date" class="form-control"
                                                     placeholder="Jan 6, 2022 – Jan 13, 2022"
                                                     style="width: 140px;">&emsp;
-                                                <input type="date" class="form-control"
-                                                    placeholder="Jan 6, 2022 – Jan 13, 2022" style="width: 140px;">
+                                                
                                             </div>
                                             <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
                                             <ul class="dropdown-menu dropdown-menu-top">
@@ -1342,13 +1354,14 @@
                                 <div class="col-lg-6 col-md-12 mb-5">
                                     <div class="card h-100">
                                         <div class="card-header" style="display: flex; justify-content: space-between;">
-                                            <div style="display: flex; align-items: end;">
-                                                <label for=""><b>Accounts Status </b></label> &emsp;
+                                            <div style="display: flex; flex-wrap: wrap; align-items: baseline;">
+                                            <label for=""><b>Accounts Status </b></label> &emsp;
+                                            <input type="date" class="form-control"
+                                                placeholder="Jan 6, 2022 – Jan 13, 2022" style="width: 140px;">&emsp;
                                                 <input type="date" class="form-control"
                                                     placeholder="Jan 6, 2022 – Jan 13, 2022"
                                                     style="width: 140px;">&emsp;
-                                                <input type="date" class="form-control"
-                                                    placeholder="Jan 6, 2022 – Jan 13, 2022" style="width: 140px;">
+                                                
                                             </div>
                                             <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
                                             <ul class="dropdown-menu dropdown-menu-top">
@@ -1379,13 +1392,14 @@
                                 <div class="col-lg-6 col-md-12 mb-5">
                                     <div class="card h-100">
                                         <div class="card-header" style="display: flex; justify-content: space-between;">
-                                            <div style="display: flex; align-items: end;">
-                                                <label for=""><b>Tenants Status </b></label> &emsp;
+                                            <div style="display: flex; flex-wrap: wrap; align-items: baseline;">
+                                            <label for=""><b>Tenants Status </b></label> &emsp;
+                                            <input type="date" class="form-control"
+                                                placeholder="Jan 6, 2022 – Jan 13, 2022" style="width: 140px;">&emsp;
                                                 <input type="date" class="form-control"
                                                     placeholder="Jan 6, 2022 – Jan 13, 2022"
                                                     style="width: 140px;">&emsp;
-                                                <input type="date" class="form-control"
-                                                    placeholder="Jan 6, 2022 – Jan 13, 2022" style="width: 140px;">
+                                                
                                             </div>
                                             <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
                                             <ul class="dropdown-menu dropdown-menu-top">
@@ -2257,6 +2271,7 @@
     <script src="../assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
     <script src="../assets/plugins/datatable/js/dataTables.bootstrap5.js"></script>
     <script src="../assets/plugins/datatable/dataTables.responsive.min.js"></script>
+    
 
     <!-- INTERNAL APEXCHART JS -->
     <script src="../assets/js/apexcharts.js"></script>
@@ -2315,23 +2330,13 @@
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
     <script src="../assets/js/getNotification.js"></script>
-    <script src="../assets/js/index-chart.js"></script>
-    <script src="https://cdn.socket.io/4.0.1/socket.io.js"></script>
+    
     <script src="../assets/js/email-verification.js"></script>
-    <script>
-        console.log("Attempting to load socket.io.js");
-        var socket = io.connect('http://localhost:3000');
-        // const socket = io("http://localhost:3000");
-        socket.on('connect', () => {
-            console.log('Connected to the server.');
-        });
-        socket.on('disconnect', () => {
-            console.log('Disconnected from the server.');
-        });
-    </script>
-    <script>
+    <script src="../assets/js/intercom.js"></script>
+    
+    <!-- <script>
 
-        console.log(document.getElementById('customIntercomButton'))
+        console.log(document.getElementsByClassName('customIntercomButton'))
         // Your Intercom settings (replace with your actual app_id)
         window.intercomSettings = {
             api_base: "https://api-iam.intercom.io",
@@ -2386,9 +2391,32 @@
             }
         })();
 
-    </script>
+    </script> -->
     <script>
         $(document).ready(function () {
+            $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    console.log(response);
+                    var myprogress = `<div class="progress-bar bg-info" style="width: `+response.count+`%;">`+response.count+`%</div>`;
+                    $(".progress").html(myprogress)
+                },
+                error: function (xhr, status, error) {
+                    // $("#myModal_warning").modal("show");
+                    // setTimeout(function () {
+                    //     $('#myModal_warning').modal('hide');
+                    //     window.location = '../Landlord/login_module.html';
+                    // }, 2000);
+                    console.log('Error occurred while fetching state and city data.');
+                    console.log(xhr);
+                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                }
+            });
             $('#email_verification').on('click', function () {
                 if ($('body').hasClass('dark-mode')) {
                     $('.Rent-logo').attr('src', '../assets/images/logo_white.png');
@@ -2460,33 +2488,102 @@
         //   }
         // };
 
-        // $.ajax(settings).done(function (response) {
-        //   console.log(response);
-        // });
+// $.ajax(settings).done(function (response) {
+//   console.log(response);
+// });
+var invoiceData=[];var startDate;
+var endDate;
+function formatDate(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+const currentDate = new Date();
+const oneMonthAgo = new Date(currentDate);
+oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+
+startDate = formatDate(oneMonthAgo); // Format the date if needed
+endDate = formatDate(currentDate);
         $(document).ready(() => {
-            $.ajax({
-                url: 'http://localhost:3000/api/spade/ProfileComplete',
+            $("#startDate").val(startDate)
+            $("#endDate").val(endDate)
+
+            $("#startDate").on('change',function(){
+                startDate=$(this).val()
+                $.ajax({
+                url: `https://backend.app.spaderent.com/api/spade/getDashInvoiceData/${startDate}/${endDate}`,
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response);
-                    var myprogress = `<div class="progress-bar bg-info" style="width: ` + response.count + `%;">` + response.count + `%</div>`;
-                    $(".progress").html(myprogress)
+                    // console.log(response)
+                       // Format the date if needed
+
+                    if(response.length<1){
+                    
+                    }
+                    else{
+                        const result=response[0]
+                        invoiceData=[]
+                        // console.log(result?.totalPaid,result?.totalUnPaid)
+                        invoiceData.push(result?.totalPaid)
+                        invoiceData.push(result?.totalUnPaid)
+                        invoiceData.push(0)
+                        // console.log(invoiceData)
+                        updateInvoiceChart(invoiceData)
+                    }
+                    
                 },
                 error: function (xhr, status, error) {
-                    // $("#myModal_warning").modal("show");
-                    // setTimeout(function () {
-                    //     $('#myModal_warning').modal('hide');
-                    //     window.location = '../Landlord/login_module.html';
-                    // }, 2000);
                     console.log('Error occurred while fetching state and city data.');
                     console.log(xhr);
                     console.log(error);
                     // console.log('Error occurred while fetching state and city data.');
                 }
             });
+            })
+            $("#endDate").on('change',function(){
+                endDate=$(this).val()
+                $.ajax({
+                url: `https://backend.app.spaderent.com/api/spade/getDashInvoiceData/${startDate}/${endDate}`,
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    // console.log(response)
+                       // Format the date if needed
+
+                    if(response.length<1){
+                    
+                    }
+                    else{
+                        const result=response[0]
+                        invoiceData=[]
+                        // console.log(result?.totalPaid,result?.totalUnPaid)
+                        invoiceData.push(result?.totalPaid)
+                        invoiceData.push(result?.totalUnPaid)
+                        invoiceData.push(0)
+                        // console.log(invoiceData)
+                        updateInvoiceChart(invoiceData)
+                    }
+                    
+                },
+                error: function (xhr, status, error) {
+                    console.log('Error occurred while fetching state and city data.');
+                    console.log(xhr);
+                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                }
+            });
+                
+            })
+            $("#resetLayout").on('click',function(){
+                localStorage.removeItem("htmlLayout")
+                window.location='../Landlord/index.html'
+            })
             let id; let userEmail; let emailChange = false
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/protected',
@@ -2543,6 +2640,31 @@
                     $("#total-tenant").append(responseObject.tenantCount || 0);
 
 
+                },
+                error: function (xhr, status, error) {
+                    console.log('Error occurred while fetching state and city data.');
+                    console.log(xhr);
+                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                }
+            });
+            $.ajax({
+                url: `https://backend.app.spaderent.com/api/spade/getDashInvoiceData/${startDate}/${endDate}`,
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    if(response.length<1){
+                    
+                    }
+                    else{
+                        const result=response[0]
+                        invoiceData.push(result?.totalPaid)
+                        invoiceData.push(result?.totalUnPaid)
+                        createInvoiceChart(invoiceData)
+                    }
+                    
                 },
                 error: function (xhr, status, error) {
                     console.log('Error occurred while fetching state and city data.');
@@ -2804,7 +2926,7 @@
             });
         }
     </script>
-
+<script src="../assets/js/index-chart.js"></script>
     <!-- demo walktrough start  -->
     <!-- <script src="../assets/js/walkthrough-demo.js"></script> -->
     <!-- <script>

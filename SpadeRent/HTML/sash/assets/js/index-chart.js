@@ -59,36 +59,46 @@ var myChart = new Chart(ctx, {
 });
 
 
-
+// var ctx = document.getElementById("chartPolarr");
+    var myChart;
 /* invoice chart */
-var ctx = document.getElementById("chartPolarr");
-var myChart = new Chart(ctx, {
-    type: 'polarArea',
-    data: {
-        datasets: [{
-            data: [18, 15, 9],
-            backgroundColor: ['#1467B0', '#529EE0', '#414141'],
-            hoverBackgroundColor: ['#1467B0', '#529EE0', '#414141'],
-            borderColor: 'transparent',
-        }],
-        labels: ["Paid", "Unpaid", "Overdue"]
-    },
-    options: {
-        scale: {
-            gridLines: {
-                color: 'rgba(119, 119, 142, 0.2)'
-            }
+function createInvoiceChart(data){
+    console.log(data)
+    var ctx = document.getElementById("chartPolarr");
+    // var myChart;
+    myChart = new Chart(ctx, {
+        type: 'polarArea',
+        data: {
+            datasets: [{
+                data: data,
+                backgroundColor: ['#1467B0', '#529EE0', '#414141'],
+                hoverBackgroundColor: ['#1467B0', '#529EE0', '#414141'],
+                borderColor: 'transparent',
+            }],
+            labels: ["Paid", "Unpaid", "Overdue"]
         },
-        responsive: true,
-        maintainAspectRatio: false,
-        legend: {
-            labels: {
-                fontColor: "#9ba6b5"
+        options: {
+            scale: {
+                gridLines: {
+                    color: 'rgba(119, 119, 142, 0.2)'
+                }
             },
-        },
-    }
-});
-
+            responsive: true,
+            maintainAspectRatio: false,
+            legend: {
+                labels: {
+                    fontColor: "#9ba6b5"
+                },
+            },
+        }
+    });
+}
+function updateInvoiceChart(data){
+    console.log(data)
+    myChart.data.datasets[0].data = data;
+    myChart.update();
+}
+// createInvoiceChart([20,10,60])
 
 
 /*Banking stats chart-bar*/
@@ -269,9 +279,9 @@ var myPieChart6 = new Chart(ctx6, {
    //////// //  Property Status chart ///////////////
 
 
-// <!-- date start  -->
-    $('.date').datepicker({
-        multidate: true,
-        format: 'dd-mm-yyyy '
-    });
-// <!-- date End  -->
+// // <!-- date start  -->
+//     $('.date').datepicker({
+//         multidate: true,
+//         format: 'dd-mm-yyyy '
+//     });
+// // <!-- date End  -->

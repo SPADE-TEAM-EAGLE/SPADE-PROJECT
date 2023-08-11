@@ -507,6 +507,133 @@ exports.pricingPlan = async (req, res) => {
 
 //  ############################# Property Start ############################################################
 
+// exports.property = async (req, res) => {
+//   const {
+//     // landlordID,
+//     propertyName,
+//     address,
+//     city,
+//     state,
+//     zipCode,
+//     propertyType,
+//     propertySQFT,
+//     units,
+//     images,
+    
+//   } = req.body;
+//   try {
+//     // const { userId } = req.user;
+//     const { userId, email } = req.user;
+//     // if (
+//     //   !propertyName ||
+//     //   !address ||
+//     //   !city ||
+//     //   !state ||
+//     //   !zipCode ||
+//     //   !propertyType ||
+//     //   !propertySQFT ||
+//     //   !units
+      
+//     // ) {
+//     //   // throw new Error("Please fill all the fields");
+//     //   res.status(200).json({
+//     //     message: "Please fill all the fields",
+//     //   });
+//     // }
+//     const currentDate = new Date();
+//     // this line check property already exist or not
+//     const propertycheckresult = await queryRunner(
+//       selectQuery("property", "propertyName", "address"),
+//       [propertyName, address]
+//     );
+//     if (propertycheckresult[0].length > 0) {
+//       // throw new Error("Property Already Exist");
+//       res.status(200).json({
+//         message: "Property Already Exist",
+//       });
+//     }
+//     // console.log("1");
+//     const status = "Non-active";
+//     console.log(userId);
+//     // this line insert data into property table
+//     const propertyResult = await queryRunner(insertInProperty, [
+//       userId,
+//       propertyName,
+//       address,
+//       city,
+//       state,
+//       zipCode,
+//       propertyType,
+//       propertySQFT,
+//       status,
+//       units,
+//       currentDate
+//     ]);
+//     // console.log("2");
+//     // if property data not inserted into property table then throw error
+//     if (propertyResult.affectedRows === 0) {
+//       // throw new Error("Data doesn't inserted in property table");
+//       res.status(200).json({
+//         message: "Data doesn't inserted in property table",
+//       });
+//     }
+//     if (propertyResult[0].affectedRows > 0) {
+//       const mailSubject = "Property Maintenance: " + propertyName;
+//       const landlordUser = await queryRunner(selectQuery("users", "id"), [
+//         userId,
+//       ]);
+//       const FullName =
+//         landlordUser[0][0].FirstName + " " + landlordUser[0][0].LastName;
+//       // await taskSendMail("tenantName", mailSubject, "dueDate", FullName, "property", "assignedTo", "priority", "companyName", "contactLandlord", userId, email);
+//     }
+//     const { insertId } = propertyResult[0];
+//     // we are using loop to send images data into
+
+//     for (let i = 0; i < images.length; i++) {
+//       const { image_url } = images[i];
+//       const { image_key } = images[i];
+//       const propertyImageResult = await queryRunner(insertInPropertyImage, [
+//         insertId,
+//         image_url,
+//         image_key,
+//       ]);
+    
+//       if (propertyImageResult.affectedRows === 0) {
+//         return res.status(400).json({
+//           message: "data doesn't inserted in property image table",
+//         });
+//       }
+//     }
+    
+//     // we are using loop to send units data into database
+//     for (let i = 0; i < units; i++) {
+//       const propertyResult = await queryRunner(insertInPropertyUnits, [
+//         insertId,
+//         "",
+//         "",
+//         "",
+//         "Vacant",
+//       ]);
+//       // if property units data not inserted into property units table then throw error
+//       if (propertyResult.affectedRows === 0) {
+//         // throw new Error("data doesn't inserted in property units table");
+//         res.status(200).json({
+//           message: "data doesn't inserted in property units table",
+//         });
+//       }
+//     }
+//     // if everything is ok then send message and property id
+//     res.status(200).json({
+//       message: "Property created successful",
+//       propertyId: propertyResult[0].insertId,
+//     });
+//   } catch (error) {
+//     res.status(400).json({
+//       message: "Error",
+//       error: error.message,
+//     });
+//   }
+// };
 exports.property = async (req, res) => {
   const {
     // landlordID,
@@ -518,44 +645,24 @@ exports.property = async (req, res) => {
     propertyType,
     propertySQFT,
     units,
-    images,
-    notify,
+    images
   } = req.body;
   try {
     // const { userId } = req.user;
     const { userId, email } = req.user;
-    if (
-      !propertyName ||
-      !address ||
-      !city ||
-      !state ||
-      !zipCode ||
-      !propertyType ||
-      !propertySQFT ||
-      !units ||
-      !notify
-    ) {
-      // throw new Error("Please fill all the fields");
-      res.status(200).json({
-        message: "Please fill all the fields",
-      });
+    if (!propertyName || !address || !city || !state || !zipCode || !propertyType || !propertySQFT || !units) {
+      throw new Error("Please fill all the fields");
     }
     const currentDate = new Date();
     // this line check property already exist or not
-    const propertycheckresult = await queryRunner(
-      selectQuery("property", "propertyName", "address"),
-      [propertyName, address]
-    );
+    const propertycheckresult = await queryRunner(selectQuery("property", "propertyName", "address"), [propertyName, address]);
     if (propertycheckresult[0].length > 0) {
-      // throw new Error("Property Already Exist");
-      res.status(200).json({
-        message: "Property Already Exist",
-      });
+      throw new Error("Property Already Exist");
     }
     // console.log("1");
     const status = "Non-active";
-    console.log(userId);
-    // this line insert data into property table
+    console.log(userId)
+    // this line insert data into property table 
     const propertyResult = await queryRunner(insertInProperty, [
       userId,
       propertyName,
@@ -567,28 +674,23 @@ exports.property = async (req, res) => {
       propertySQFT,
       status,
       units,
-      currentDate,
-      notify,
+      currentDate
     ]);
     // console.log("2");
     // if property data not inserted into property table then throw error
     if (propertyResult.affectedRows === 0) {
-      // throw new Error("Data doesn't inserted in property table");
-      res.status(200).json({
-        message: "Data doesn't inserted in property table",
-      });
+      throw new Error("Data doesn't inserted in property table");
     }
     if (propertyResult[0].affectedRows > 0) {
       const mailSubject = "Property Maintenance: " + propertyName;
       const landlordUser = await queryRunner(selectQuery("users", "id"), [
-        userId,
+        userId
       ]);
-      const FullName =
-        landlordUser[0][0].FirstName + " " + landlordUser[0][0].LastName;
+      const FullName = landlordUser[0][0].FirstName + " " + landlordUser[0][0].LastName;
       // await taskSendMail("tenantName", mailSubject, "dueDate", FullName, "property", "assignedTo", "priority", "companyName", "contactLandlord", userId, email);
     }
     const { insertId } = propertyResult[0];
-    // we are using loop to send images data into
+    // we are using loop to send images data into 
 
     for (let i = 0; i < images.length; i++) {
       const { image_url } = images[i];
@@ -596,43 +698,33 @@ exports.property = async (req, res) => {
       const propertyImageResult = await queryRunner(insertInPropertyImage, [
         insertId,
         image_url,
-        image_key,
+        image_key
       ]);
       // if property image data not inserted into property image table then throw error
       if (propertyImageResult.affectedRows === 0) {
-        // throw new Error("data doesn't inserted in property image table");
-        res.status(200).json({
-          message: "data doesn't inserted in property image table",
-        });
+        throw new Error("data doesn't inserted in property image table");
       }
     }
     // we are using loop to send units data into database
     for (let i = 0; i < units; i++) {
-      const propertyResult = await queryRunner(insertInPropertyUnits, [
-        insertId,
-        "",
-        "",
-        "",
-        "Vacant",
-      ]);
+      const propertyResult = await queryRunner(insertInPropertyUnits, [insertId, "", "", "", "Vacant",]);
       // if property units data not inserted into property units table then throw error
       if (propertyResult.affectedRows === 0) {
-        // throw new Error("data doesn't inserted in property units table");
-        res.status(200).json({
-          message: "data doesn't inserted in property units table",
-        });
+        throw new Error("data doesn't inserted in property units table");
       }
     }
     // if everything is ok then send message and property id
     res.status(200).json({
-      message: "p  y created successful",
-      propertyId: propertyResult[0].insertId,
+      message: "Property created successful!!!",
+      propertyId: propertyResult[0].insertId
     });
+
   } catch (error) {
     res.status(400).json({
       message: "Error",
       error: error.message,
     });
+    console.log(error);
   }
 };
 
@@ -1749,8 +1841,8 @@ exports.getInvoiceDashboardData = async (req, res) => {
     const { start, end } = req.params;
     const getAllInvoiceData = await queryRunner(getInvoiceGraphData, [
       userId,
-      // start,
-      // end,
+      start,
+      end,
     ]);
     res.status(200).json(getAllInvoiceData[0]);
   } catch (error) {

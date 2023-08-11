@@ -319,7 +319,7 @@ $("#addModal").modal("hide")
                 };
 
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/property',
+                    url: 'http://localhost:3000/api/spade/property',
                     type: 'POST',
                     data: JSON.stringify(propertyData),
                     contentType: 'application/json',
@@ -332,7 +332,11 @@ $("#addModal").modal("hide")
                 resetAccordions()
                 $('#addModal').modal('hide')
                         
-                        $('#succesModal').modal('show')
+                if (response.message === "Property Already Exist") {
+                    $('#infoModal').modal('show');
+                }else {
+                    $('#succesModal').modal('show');
+                }
             
                         // window.location = '../Landlord/properties-all.html';
                     },
@@ -343,6 +347,7 @@ $("#addModal").modal("hide")
 
                             }, 2000);
                         console.log('Error: ' + error);
+                        console.log(xhr)
                     }
                 });
             },
@@ -369,7 +374,7 @@ $("#addModal").modal("hide")
         };
 
         $.ajax({
-            url: 'https://backend.app.spaderent.com/api/spade/property',
+            url: 'http://localhost:3000/api/spade/property',
             type: 'POST',
             data: JSON.stringify(propertyData),
             contentType: 'application/json',
@@ -382,16 +387,29 @@ $("#addModal").modal("hide")
         resetAccordions()
         $('#addModal').modal('hide')
     
-                $('#succesModal').modal('show')
+        if (response.message === "Property Already Exist") {
+            $('#infoModal').modal('show');
+        } else {
+            
+            $('#succesModal').modal('show');
+        }
     
                 // window.location = '../Landlord/properties-all.html';
             },
             error: function (xhr, status, error) {
-                $("#myModal_warning_connection").modal("show");
+                if(xhr.responseJSON.error==='Property Already Exist'){
+                    $('#addModal').modal('hide');
+                    $('#infoModal').modal('show');
+                    setTimeout(function() {
+                        $('#infoModal').modal('hide');
+                    }, 2000);
+                }else{
+                    $('#addModal').modal('hide');
+                    $("#myModal_warning_connection").modal("show");
                             setTimeout(function() {
                                 $('#myModal_warning_connection').modal('hide');
                             }, 2000);
-                console.log('Error: ' + error);
+                }
             }
         });
     }
