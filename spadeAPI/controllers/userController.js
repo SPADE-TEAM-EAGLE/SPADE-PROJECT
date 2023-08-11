@@ -521,23 +521,7 @@ exports.property = async (req, res) => {
   } = req.body;
   try {
     // const { userId } = req.user;
-    const { userId, email } = req.user;
-    if (
-      !propertyName ||
-      !address ||
-      !city ||
-      !state ||
-      !zipCode ||
-      !propertyType ||
-      !propertySQFT ||
-      !units ||
-      !notify
-    ) {
-      // throw new Error("Please fill all the fields");
-      res.status(200).json({
-        message: "Please fill all the fields",
-      });
-    }
+    const { userId, email } = req.user; 
     const currentDate = new Date();
     // this line check property already exist or not
     const propertycheckresult = await queryRunner(
@@ -577,12 +561,12 @@ exports.property = async (req, res) => {
       });
     }
     if (propertyResult[0].affectedRows > 0) {
-      const mailSubject = "Property Maintenance: " + propertyName;
-      const landlordUser = await queryRunner(selectQuery("users", "id"), [
-        userId,
-      ]);
-      const FullName =
-        landlordUser[0][0].FirstName + " " + landlordUser[0][0].LastName;
+      // const mailSubject = "Property Maintenance: " + propertyName;
+      // const landlordUser = await queryRunner(selectQuery("users", "id"), [
+      //   userId,
+      // ]);
+      // const FullName =
+      //   landlordUser[0][0].FirstName + " " + landlordUser[0][0].LastName;
       // await taskSendMail("tenantName", mailSubject, "dueDate", FullName, "property", "assignedTo", "priority", "companyName", "contactLandlord", userId, email);
     }
     const { insertId } = propertyResult[0];
@@ -1817,6 +1801,52 @@ exports.getUserByIdData = async (req, res) => {
     res.status(200).json({
       data: getUserByIdResult[0][0],
     });
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+
+}
+
+
+
+// Profile Complete
+exports.ProfileComplete = async (req, res) => {
+  try {
+    const { userId } = req.body; 
+    const propertycheckresult = await queryRunner(selectQuery("users", "id" ),[userId]);
+    if (propertycheckresult[0].length > 0) {
+      count = 0;
+      if(propertycheckresult[0][0].image){
+        count += 30;
+      }
+      if(propertycheckresult[0][0].FirstName){
+        count += 10;
+      } 
+      if(propertycheckresult[0][0].LastName){
+        count += 10;
+      }
+      if(propertycheckresult[0][0].Email){
+        count += 10;
+      }
+      if(propertycheckresult[0][0].Phone){
+        count += 10;
+      }
+      if(propertycheckresult[0][0].BusinessName){
+        count += 10;
+      }
+      if(propertycheckresult[0][0].streetAddress){
+        count += 10;
+      }
+      if(propertycheckresult[0][0].BusinessAddress){
+        count += 10;
+      }
+      res.status(200).json({
+        // data : propertycheckresult,
+        count : count
+      });
+    }
   } catch (error) {
     res.status(400).json({
       message: error.message,

@@ -75,6 +75,8 @@ router.get(
   verifyToken,
   userController.viewAllPropertyTenant
 );
+
+router.get('/ProfileComplete',userController.ProfileComplete);
 // router.post('/tenants',verifyToken,tenantController.createTenants);
 router.post("/tenants", verifyToken, tenantController.createTenants);
 router.post("/sendInvitationLink", verifyToken, tenantController.sendInvitationLink);
