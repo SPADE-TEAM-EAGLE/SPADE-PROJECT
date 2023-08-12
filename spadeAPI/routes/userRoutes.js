@@ -163,6 +163,7 @@ router.get("/LandlordMessages/:chatId", verifyToken, messageClt.getAllMessages);
 
 // profile complition
 router.get('/ProfileComplete',verifyToken,userController.ProfileComplete);
+router.get('/checkSystem' ,userController.checkSystem);
  
 
 // leads routes start
