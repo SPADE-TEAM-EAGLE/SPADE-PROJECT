@@ -665,15 +665,56 @@
                         <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" style="max-width: 110px;"
                             class="Rent-logo mb-5" />
                         <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
-                        <h6 class="text-default mb-3">Get started with Spade Rent! Continue with Google to verify</h6>
+                        <h6 class="text-default mb-3">Enter a 6-digit code to verify email address</h6>
+                        <input id="token" name="token" type="phone" class="form-control form mb-2" pattern="[0-9]{5}"
+                            maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                            style="min-width: 200px;max-width: 350px;" data-bs-placement="top" data-bs-toggle="tooltip"
+                            title="" data-bs-original-title="Enter the name of the property.">
+                        <input type="password" class="form-control form mb-2" id="id_password1"
+                            aria-describedby="emailHelp" placeholder="Password" data-bs-placement="top"
+                            data-bs-toggle="tooltip" title="" data-bs-original-title="Enter password here.">
+                        <!-- <a class="text-primary mb-4" href="javascript:void(0)">Change Email</a> -->
+                        <span class="mt-1 text-danger" id="passnotmatch1" style="display: none;">
+                            MUST be atleast 8 characters long, Must contain atleast One Uppercase and One symbol.
+                        </span>
+                        <div class="">
+                            <!-- <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2">Remind me Later</a> -->
+                            <a href="javascript:void(0)" class="btn btn-primary btn-pill disabled"
+                                id="verify-btn">Verify</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-primary">Save changes</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <div class="modal fade effect-scale" id="modaldemo00" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-l" role="document">
+            <div class="modal-content">
+                <!-- <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+                </div> -->
+                <div class="modal-body pt-5">
+                    <div class="d-flex flex-column justify-content-center align-items-center p-5"
+                        style="text-align: center;">
+                        <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" style="max-width: 110px;"
+                            class="Rent-logo mb-5" />
+                        <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
+                        <h6 class="text-default mb-3">Get started with Spade Rent! You have<span id="days-left"></span>
+                            left</h6>
                         <input type="email" class="form-control form mb-2" style="min-width: 200px;max-width: 350px;"
-                            data-bs-placement="top" data-bs-toggle="tooltip" title=""
-                            data-bs-original-title="Enter the name of the property.">
+                           placeholder="Enter Property.">
                         <a class="text-primary mb-4" href="javascript:void(0)">Change Email</a>
                         <div class="">
-                            <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2">Remind me
-                                Later</a>
-                            <a href="javascript:void(0)" class="btn btn-primary btn-pill">Resend Mail</a>
+                            <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2"
+                                id="remind-later">Remind me Later</a>
+                            <a href="javascript:void(0)" class="btn btn-primary btn-pill" id="send-email">Send Mail</a>
                         </div>
                     </div>
                 </div>
@@ -709,8 +750,8 @@
                         <!-- <div class="card-footer text-center border-0 pt-0">
                             <div class="row">
                                 <div class="text-center">
-                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
-                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">delete</a>
                                 </div>
                             </div>
                         </div> -->
@@ -869,7 +910,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-6 col-lg-3 col-xl-3">
-                        <div class="card h-90">
+                        <div class="card">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
                                 <div class="card-title fw-bold"><a href="properties-all.html"
                                         style="color: white;">Property</a></div>
@@ -885,14 +926,15 @@
                                         <a href="properties-all.html">
                                             <h5 class="mb-1 text-dark fw-bold">Create New Property</h5>
                                         </a>
-                                        <p class="text-default mt-0 mb-0 pt-0 fs-13"> Easily create new property listings, streamline tenant communication, and track rent payments. Start optimizing your rental business today! </p>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the
+                                            benefits of an all-in-one property management tool! </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-3 col-xl-3">
-                        <div class="card h-90">
+                        <div class="card">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
                                 <div class="card-title fw-bold"><a href="add-tenant.html"
                                         style="color: white;">Tenant</a></div>
@@ -908,14 +950,15 @@
                                         <a href="add-tenant.html">
                                             <h5 class="mb-1 text-dark fw-bold">Create New Tenant</h5>
                                         </a>
-                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Effortlessly add new tenants, streamline communication, and ensure smooth rent tracking. Elevate your property rental process now! </p>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the
+                                            benefits of an all-in-one property management tool! </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-3 col-xl-3">
-                        <div class="card h-90">
+                        <div class="card">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
                                 <div class="card-title fw-bold"><a href="create-invoicing.html"
                                         style="color: white;">Invoice</a></div>
@@ -931,14 +974,15 @@
                                         <a href="create-invoicing.html">
                                             <h5 class="mb-1 text-dark fw-bold">Create New Invoice</h5>
                                         </a>
-                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Create and send invoices seamlessly, ensuring transparent and efficient rent management. Simplify your property rental finances today! </p>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the
+                                            benefits of an all-in-one property management tool! </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-3 col-xl-3">
-                        <div class="card h-90">
+                        <div class="card">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
                                 <div class="card-title fw-bold"><a href="#" style="color: white;">Lead</a></div>
                             </div>
@@ -953,14 +997,15 @@
                                         <a href="#">
                                             <h5 class="mb-1 text-dark fw-bold">Create New Lead</h5>
                                         </a>
-                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Our software facilitates easy lead creation. Capture, organize, and convert leads seamlessly, optimizing tenant acquisition for your property rental business! </p>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the
+                                            benefits of an all-in-one property management tool! </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-3 col-xl-3">
-                        <div class="card h-90">
+                        <div class="card">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
                                 <div class="card-title fw-bold"><a href="create-tasks.html"
                                         style="color: white;">Tasks</a></div>
@@ -976,7 +1021,8 @@
                                         <a href="create-tasks.html">
                                             <h5 class="mb-1 text-dark fw-bold">Create New Tasks</h5>
                                         </a>
-                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Our software simplifies property task management. Easily create, assign, and track tasks, ensuring seamless maintenance and tenant satisfaction! </p>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the
+                                            benefits of an all-in-one property management tool! </p>
                                     </div>
                                 </div>
                             </div>
@@ -984,7 +1030,7 @@
                     </div>
 
                     <div class="col-md-6 col-lg-3 col-xl-3">
-                        <div class="card h-90">
+                        <div class="card">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
                                 <div class="card-title fw-bold"><a href="tasks-vendors.html"
                                         style="color: white;">Vendor</a></div>
@@ -1000,7 +1046,8 @@
                                         <a href="tasks-vendors.html">
                                             <h5 class="mb-1 text-dark fw-bold">Create New Vendors</h5>
                                         </a>
-                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Effortlessly integrate and manage vendor information, ensuring timely property maintenance and service! </p>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the
+                                            benefits of an all-in-one property management tool! </p>
                                     </div>
                                 </div>
                             </div>
@@ -1031,17 +1078,15 @@
                         <form class="row g-3" enctype="multipart/form-data">
                             <div class="col-md-4">
                                 <label for="inputEmail4" class="form-label fw-bold">Task Name</label>
-                                <input id="task" required class="form-control" placeholder="" type="text"
-                                    data-bs-placement="top" data-bs-toggle="tooltip" title=""
-                                    data-bs-original-title="Enter Task Name here" data-bs-container="#addModal">
+                                <input id="task" required class="form-control" placeholder="Sink in Leaked" type="text"
+                                    placeholder="Enter Task Name">
                                 <span class="text-danger d-none">Task name is required!</span>
                             </div>
                             <div class="col-md-4">
 
                                 <label class="form-label fw-bold">Assign To</label>
                                 <select id="assignee" class="form-control select2" data-placeholder="Choose Browser"
-                                    multiple data-bs-placement="top" data-bs-toggle="tooltip" title=""
-                                    data-bs-original-title="Enter Assign To here" data-bs-container="#addModal">
+                                    multiple placeholder="Enter Assign To">
 
                                 </select>
                                 </select>
@@ -1049,9 +1094,7 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="inputState" class="form-label fw-bold">Related To</label>
-                                <select required id="property" class="form-select form" data-bs-placement="top"
-                                    data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Related To here"
-                                    data-bs-container="#addModal">
+                                <select required id="property" class="form-select form"placeholder="Enter Related To">
                                     <option selected>Choose...</option>
                                 </select>
                                 <span class="text-danger d-none">This field is required!</span>
@@ -1059,15 +1102,13 @@
                             <div class="col-md-4">
                                 <label for="inputEmail4" class="form-label fw-bold">Due Date</label>
                                 <input id="dueDate" class="form-control" placeholder="MM/DD/YYYY" type="date"
-                                    data-bs-placement="top" data-bs-toggle="tooltip" title=""
-                                    data-bs-original-title="Enter Due Date here" data-bs-container="#addModal">
+                                   placeholder="Enter Due Date">
                                 <span class="text-danger d-none">Due Date is required!</span>
                             </div>
                             <div class="col-md-4">
                                 <label for="inputState" class="form-label fw-bold">Status</label>
-                                <select id="status" required class="form-select form" data-bs-placement="top"
-                                    data-bs-toggle="tooltip" title="" data-bs-original-title="Select Status"
-                                    data-bs-container="#addModal">
+                                <select id="status" required class="form-select form"placeholder="Select Status"
+                                    >
                                     <option selected>Choose...</option>
                                     <option value="not started">Not Started</option>
                                     <option value="in progress">In progress</option>
@@ -1078,9 +1119,8 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="inputState" class="form-label fw-bold">Priority</label>
-                                <select id="priority" required class="form-select form" data-bs-placement="top"
-                                    data-bs-toggle="tooltip" title="" data-bs-original-title="Select Priority"
-                                    data-bs-container="#addModal">
+                                <select id="priority" required class="form-select form" placeholder="Select Priority"
+                                    >
                                     <option selected>Choose...</option>
                                     <option name="high">High</option>
                                     <option name="moderate">Moderate</option>
@@ -1092,8 +1132,7 @@
                                 <label class="form-label fw-bold">Notes</label>
                                 <textarea id="notes" class="form-control mb-4"
                                     placeholder="Sorry about that We will look into it." rows="4"
-                                    data-bs-placement="top" data-bs-toggle="tooltip" title=""
-                                    data-bs-original-title="Enter Notes" data-bs-container="#addModal"></textarea>
+                                    ></textarea>
                                 <!-- <span class="text-danger d-none">Photos are required!</span> -->
                             </div>
                             <div class="col-md-12">
@@ -1196,23 +1235,20 @@
                                 <label class="form-label fw-bold">Message</label>
 
                                 <textarea class="form-control mb-4" placeholder="Sorry about that We will look into it."
-                                    rows="4" data-bs-placement="top" data-bs-toggle="tooltip" title=""
-                                    data-bs-original-title="Enter Message here" data-bs-container="#myModal_edit"
-                                    id="message"></textarea>
+                                    rows="4" placeholder="Enter Message" id="message"></textarea>
                                 <span class="text-danger d-none">Message are required!</span>
                             </div>
                             <div class="col-md-4">
                                 <label for="inputEmail4" class="form-label fw-bold">Task Name</label>
-                                <input class="form-control" placeholder="Task name" type="text" data-bs-placement="top"
-                                    data-bs-toggle="tooltip" title="" data-bs-original-title="Enter task name here"
-                                    data-bs-container="#myModal_edit" required id="taskName_update">
+                                <input class="form-control" placeholder="Task name" type="text"
+                                    placeholder="Enter Task Name"
+                                    required id="taskName_update">
                                 <span class="text-danger d-none">Task name is required!</span>
                             </div>
                             <div class="col-md-4">
                                 <label for="inputState" class="form-label fw-bold">Related To</label>
                                 <select required id="property_update" required class="form-select form"
-                                    data-bs-placement="top" data-bs-toggle="tooltip" title=""
-                                    data-bs-original-title="Enter Related To here" data-bs-container="#addModal">
+                                   placeholder="Enter Related To">
                                     <option selected>Choose...</option>
                                 </select>
                                 <span class="text-danger d-none">Property name required!</span>
@@ -1220,16 +1256,14 @@
                             <div class="col-md-4">
                                 <label for="inputEmail4" class="form-label fw-bold">Due Date</label>
                                 <input class="form-control" required placeholder="MM/DD/YYYY" type="date"
-                                    data-bs-placement="top" data-bs-toggle="tooltip" title=""
-                                    data-bs-original-title="Enter Due Date here" data-bs-container="#myModal_edit"
+                                   placeholder="Enter Due Date"
                                     id="dueDate_update">
                                 <span class="text-danger d-none">Due date is required!</span>
                             </div>
                             <div class="col-md-4">
                                 <label for="inputState" class="form-label fw-bold">Priority</label>
-                                <select class="form-select form" required data-bs-placement="top"
-                                    data-bs-toggle="tooltip" title="" data-bs-original-title="Select Priority"
-                                    data-bs-container="#myModal_edit" id="priority_update">
+                                <select class="form-select form" required placeholder="Select Priority"
+                                    id="priority_update">
                                     <option selected>Choose...</option>
                                     <option name="high">High</option>
                                     <option name="moderate">Moderate</option>
@@ -1241,8 +1275,7 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="inputState" class="form-label fw-bold">Status</label>
-                                <select class="form-select form" required="top" data-bs-toggle="tooltip" title=""
-                                    data-bs-original-title="Select Status" data-bs-container="#myModal_edit"
+                                <select class="form-select form" required="top" placeholder="Select Status"
                                     id="status_update">
                                     <option selected>Choose...</option>
                                     <option value="not started">Not Started</option>
@@ -1256,8 +1289,7 @@
                                 <div class="form-group">
                                     <label class="form-label fw-bold">Assignee(s)</label>
                                     <select class="form-control select2" required data-placeholder="Choose Assignee"
-                                        multiple data-bs-placement="top" data-bs-toggle="tooltip" title=""
-                                        data-bs-original-title="Select Assignee(s)" data-bs-container="#myModal_edit"
+                                        multiple placeholder="Select Assignee(s)"
                                         id="assignee_update">
 
                                     </select>
@@ -1338,8 +1370,8 @@
                         <!-- <div class="card-footer text-center border-0 pt-0">
                             <div class="row">
                                 <div class="text-center">
-                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
-                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">delete</a>
                                 </div>
                             </div>
                         </div> -->
@@ -1405,8 +1437,8 @@
                             <div class="row">
                                 <div class="text-center">
                                     <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal"
-                                        aria-label="Close">Cancel</a>
-                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
+                                        aria-label="Close">cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">delete</a>
                                 </div>
                             </div>
                         </div>
@@ -1469,12 +1501,18 @@
                                                 <span class="light-layout"><i class="fi fi-rs-brightness"></i></span>
                                             </a>
                                         </div>
-
                                         <div class="d-flex country mt-2">
+                                            <a class="nav-link icon text-dark customIntercomButton">
+                                        <i class="fi fi-rs-interrogation"></i>
+                                       
+                                            </a>
+                                        </div>
+
+                                        <!-- <div class="d-flex country mt-2">
                                             <a class="nav-link icon text-dark" onclick="mydemoclick()">
                                                 <i class="fi fi-rs-universal-access"></i>
                                             </a>
-                                        </div>
+                                        </div> -->
 
 
                                         <!-- 1 comments start  -->
@@ -1488,14 +1526,11 @@
                                         <!-- 1 comments start  -->
 
                                         <!-- 2 comments start  -->
-                                        <div class="d-flex country">
-                                            <img src="../assets\header-img\question.svg" 
-                                                class="avatarr profile-user brroundd nav-link cover-image dark-layout customIntercomButton">
-                                        </div>
-                                        <div class="d-flex country">
-                                            <img src="../assets\header-img\question-light.webp" 
-                                                class="avatarr profile-user nav-link brroundd cover-image light-layout customIntercomButton">
-                                        </div>
+                                        <!-- <div class="d-flex country mt-2">
+                                            <a class="nav-link icon text-dark">
+                                                <i class="fi fi-rs-interrogation"></i>
+                                            </a>
+                                        </div> -->
                                         <!-- 2 comments start  -->
 
                                         <!-- 3 comments start  -->
@@ -1647,6 +1682,7 @@
                                     Profile</span>
                             </a>
                         </li> -->
+                        <a href="settings.html" class="text-dark">
                             <li class="slide">
                                 <div class="M-0 mt-3 mb-4" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
                                     <div class="card-header pb-0 border-bottom-0">
@@ -1657,11 +1693,12 @@
                                     </div>
                                     <div class="card-body pt-0">
                                         <div class="side-menu__label progress progress-md mt-5">
-                                            <div class="progress-bar bg-info" style="width: 40%;">40%</div>
+                                            <!-- <div class="progress-bar bg-info" style="width: 40%;">40%</div> -->
                                         </div>
                                     </div>
                                 </div>
                             </li>
+                        </a>
                             <li class="slide">
                                 <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html"><i
                                         class="side-menu__icon fi fi-rs-dashboard"></i><span
@@ -1791,10 +1828,10 @@
                                 <div class="row">
                                     <div class="col-lg-9">
                                         <h3 class="page-titlee text-white"
-                                            style="font-weight: 100; margin-bottom: 0px;">Welcome To Spade Rent Portal</h3>
+                                            style="font-weight: 100; margin-bottom: 0px;">Welcome to Spade Portal</h3>
                                         <h1 class="page-titlee text-white" style="font-weight: 700;" id="user-name">
                                         </h1>
-                                        <a data-bs-toggle="modal" href="#modaldemo8" id="email_verification"
+                                        <a data-bs-toggle="modal" href="#modaldemo00" id="email_verification"
                                             class="btn btn-primary btn-pill btn-xl email-verification-btn"><i
                                                 class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
                                             verification &nbsp; <i
@@ -1802,7 +1839,6 @@
                                         <p class="text-white m-0 mt-3" id="account-text">Your account will be locked
                                             after 7-Days</p>
                                     </div>
-                                    
                                     <div class="col-lg-3">
                                         <img src="../assets/header-img/Group1.png" alt="">
                                     </div>
@@ -1810,20 +1846,21 @@
 
                             </div>
                         </div>
-                        <!-- PAGE-HEADER END --><div>
-                                        <p class="d-inline-flex gap-1">
-                                            <span>Add Task | </span><a data-bs-toggle="collapse" href="#collapseHelp" role="button" aria-expanded="false" aria-controls="collapseHelp">
-                                              Help ? 
-                                            </a>
-                                        
-                                          </p>
-                                          <div class="collapse" id="collapseHelp" style="width: 20%;">
-                                            <div class="card card-body">
-                                              <span><a href="#" onclick="Intercom('showArticle', 8210506)"><i class="fi fi-rs-question text-light"></i>  How to create Task? </a></span>
-                                              <span><a href="#" onclick="Intercom('showArticle', 8210444)"><i class="fi fi-rs-question text-light"></i>  How to update Task? </a></span>
-                                            </div>
-                                          </div>
-                                    </div>
+                        <div>
+                            <p class="d-inline-flex gap-1">
+                                <span>Add Invoicing | </span><a data-bs-toggle="collapse" href="#collapseHelp" role="button" aria-expanded="false" aria-controls="collapseHelp">
+                                  Help ? 
+                                </a>
+                            
+                              </p>
+                              <div class="collapse" id="collapseHelp" style="width: 20%;">
+                                <div class="card card-body">
+                                  <span><a href="#" onclick="Intercom('showArticle', 8210506)"><i class="fi fi-rs-question text-light"></i>  How to create Task? </a></span>
+                                  <span><a href="#" onclick="Intercom('showArticle', 8210444)"><i class="fi fi-rs-question text-light"></i>  How to update Task? </a></span>
+                                </div>
+                              </div>
+                        </div>
+                        <!-- PAGE-HEADER END -->
                         <div class="over_view" id="Overview">
                             <!-- ROW-2 OPEN -->
                             <div class="row">
@@ -1895,9 +1932,7 @@
                                                     <div class="form-group m-0">
                                                         <input class="form-control"
                                                             placeholder="Search Users by Name, Email or Date"
-                                                            type="text" id="search_input" data-bs-placement="top"
-                                                            data-bs-toggle="tooltip" title=""
-                                                            data-bs-original-title="Search Users by Name, Email or Date">
+                                                            type="text" id="search_input">
 
                                                     </div>
                                                 </div>
@@ -2640,7 +2675,6 @@
 
     <!-- INTERNAL jquery transfer js-->
     <script src="../assets/plugins/jQuerytransfer/jquery.transfer.js"></script>
-    <script src="../assets/js/intercom.js"></script>
 
     <!-- INTERNAL multi js-->
     <script src="../assets/plugins/multi/multi.min.js"></script>
@@ -2664,8 +2698,33 @@
 
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
+    <script src="../assets/js/email-verification.js"></script>
+    <script src="../assets/js/intercom.js"></script>
     <script>
         $(document).ready(function () {
+            $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    console.log(response);
+                    var myprogress = `<div class="progress-bar bg-info" style="width: `+response.count+`%;">`+response.count+`%</div>`;
+                    $(".progress").html(myprogress)
+                },
+                error: function (xhr, status, error) {
+                    // $("#myModal_warning").modal("show");
+                    // setTimeout(function () {
+                    //     $('#myModal_warning').modal('hide');
+                    //     window.location = '../Landlord/login_module.html';
+                    // }, 2000);
+                    console.log('Error occurred while fetching state and city data.');
+                    console.log(xhr);
+                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                }
+            });
             $('#email_verification').on('click', function () {
                 if ($('body').hasClass('dark-mode')) {
                     $('.Rent-logo').attr('src', '../assets/images/logo_white.png');
@@ -3753,11 +3812,28 @@
     </script>
     <script>
         function logout() {
-            localStorage.removeItem('authtoken');
-            window.close();
-            window.open('./login_module.html', "_blank")
-            console.log('Done');
-        }
+                $(document).ready(function () {
+                    $.ajax({
+                        url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                        type: 'PUT',
+                        contentType: false,
+                        processData: false,
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            console.log(response);
+                            localStorage.removeItem('authtoken');
+                            window.close();
+                            window.open('./login_module.html', "_blank")
+                            console.log('Done');
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(error);
+                        }
+                    });
+                });
+            }
     </script>
 
     <script>

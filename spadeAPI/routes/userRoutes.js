@@ -5,7 +5,6 @@ const tenantController = require("../controllers/tenantController");
 const invoiceController = require("../controllers/invoiceController");
 const tenantPortalController = require("../controllers/tenantPortalController");
 const settingController = require("../controllers/settingController");
-const paymentHelper = require("../helper/paymentIntegration");
 const { verifyToken, verifyTokenTenant } = require("../middleware/authenticate");
 const taskController = require("../controllers/taskController");
 const fileUpload = require("../helper/S3Bucket");
@@ -34,7 +33,9 @@ router.get("/getDashPropertyData/:start/:end", verifyToken, userController.getPr
 router.get("/getDashTaskData/:start/:end", verifyToken, userController.getTaskDashboardData);
 router.get("/getDashInvoiceData/:start/:end", verifyToken, userController.getInvoiceDashboardData);
 router.put("/inactiveUser", verifyToken, userController.inactiveUser);
-router.get("/getUserById/:id", verifyTokenTenant, userController.getUserByIdData);
+router.put("/inactiveTenant", verifyTokenTenant, userController.inactiveTenant);
+
+router.get("/getUserById/:id/:type", userController.getUserByIdData);
 // router.post("/property" ,verifyToken, userController.property);
 router.put("/updateUserProfile", verifyToken, userController.updateUserProfile);
 // router.post('/property', upload , userController.property);
@@ -75,8 +76,6 @@ router.get(
   verifyToken,
   userController.viewAllPropertyTenant
 );
-
-router.get('/ProfileComplete',userController.ProfileComplete);
 // router.post('/tenants',verifyToken,tenantController.createTenants);
 router.post("/tenants", verifyToken, tenantController.createTenants);
 router.post("/sendInvitationLink", verifyToken, tenantController.sendInvitationLink);
@@ -131,7 +130,7 @@ router.get("/invoiceCategory", verifyToken, invoiceController.getInvoiceCategori
 router.get("/getInvoiceCategoriesText", verifyToken, invoiceController.getInvoiceCategoriesText);
 router.get("/dashboard", verifyToken, userController.getDashboardData);
 router.get("/checkNotify", verifyToken, notifyController.getCheckedNotify);
-
+router.put("/updateAllNotifyRead", verifyToken, notifyController.updateUserAllReadNotify);
 // updated notification route
 router.put("/notify", verifyToken, notifyController.updateNotifyData);
 router.get("/notify", verifyToken, notifyController.getNotify);
@@ -151,7 +150,7 @@ router.delete("/deleteVendorCategory", verifyToken, invoiceController.deleteVend
 
 // chats start
 router.post("/accessChats", verifyToken, chatsController.accessChats);
-router.post("/accessTenantChats", verifyTokenTenant, chatsController.accessChats);
+router.post("/accessTenantChats", verifyTokenTenant, chatsController.accessTenantsChats);
 
 router.get("/fetchTenantChats", verifyTokenTenant, chatsController.fetchUsersChats);
 router.get("/fetchUsersChats", verifyToken, chatsController.fetchUsersTenants);
@@ -162,14 +161,12 @@ router.post("/createNewMessage", verifyToken, messageClt.createNewMessage);
 router.get("/TenantMessages/:chatId", verifyTokenTenant, messageClt.getAllMessages);
 router.get("/LandlordMessages/:chatId", verifyToken, messageClt.getAllMessages);
 
-
+// profile complition
+router.get('/ProfileComplete',verifyToken,userController.ProfileComplete);
  
 
 // leads routes start
 router.post("/createLead", verifyToken, leadsClt.createNewLead);
-
-// payment 
-router.post("/openOrder", paymentHelper.openOrder);
 
 
 module.exports = router;

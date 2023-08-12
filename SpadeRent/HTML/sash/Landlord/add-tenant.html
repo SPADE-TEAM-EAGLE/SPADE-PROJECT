@@ -637,15 +637,18 @@
             </button>
                 </div> -->
                 <div class="modal-body pt-5">
-                    <div class="d-flex flex-column justify-content-center align-items-center p-5" style="text-align: center;">
-                        <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" style="max-width: 110px;" class="Rent-logo mb-5" />
+                    <div class="d-flex flex-column justify-content-center align-items-center p-5"
+                        style="text-align: center;">
+                        <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" style="max-width: 110px;"
+                            class="Rent-logo mb-5" />
                         <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
                         <h6 class="text-default mb-3">Get started with Spade Rent! Continue with Google to verify</h6>
-                        <input type="email" class="form-control form mb-2" style="min-width: 200px;max-width: 350px;" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the name of the property.">
+                        <input type="email" class="form-control form mb-2" style="min-width: 200px;max-width: 350px;"placeholder="Enter the name of the property.">
                         <a class="text-primary mb-4" href="javascript:void(0)">Change Email</a>
                         <div class="">
-                            <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2">Remind me Later</a>
-                            <a href="javascript:void(0)" class="btn btn-primary btn-pill">Resend Mail</a>
+                            <!-- <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2">Remind me Later</a> -->
+                            <a href="javascript:void(0)" class="btn btn-primary btn-pill disabled"
+                                id="verify-btn">Verify</a>
                         </div>
                     </div>
                 </div>
@@ -656,37 +659,39 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="successfully_changed" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-dialog-centered text-center" role="document">
-            <div class="modal-content modal-content-demo">
-                <div class="modal-body p-0">
-                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
-                        <!-- <div class="card-header border-0 pt-3">
-                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
-                            </button>
-                        </div> -->
-                        <div class="card-body text-center">
-                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24">
-                      <path fill="#13bfa6"
-                        d="M10.3125,16.09375a.99676.99676,0,0,1-.707-.293L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328l-6.1875,6.1875A.99676.99676,0,0,1,10.3125,16.09375Z"
-                        opacity=".99" />
-                      <path fill="#71d8c9"
-                        d="M12,2A10,10,0,1,0,22,12,10.01146,10.01146,0,0,0,12,2Zm5.207,7.61328-6.1875,6.1875a.99963.99963,0,0,1-1.41406,0L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328Z" />
-                    </svg></span>
-                            <!-- <h4 class="h4 mb-0 mt-3 fw-bold">Success</h4> -->
-                            <p class="card-text text-dark" id="successfully_changed_text"></p>
+    <div class="modal fade effect-scale" id="modaldemo00" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-l" role="document">
+            <div class="modal-content">
+                <!-- <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+                </div> -->
+                <div class="modal-body pt-5">
+                    <div class="d-flex flex-column justify-content-center align-items-center p-5"
+                        style="text-align: center;">
+                        <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" style="max-width: 110px;"
+                            class="Rent-logo mb-5" />
+                        <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
+                        <h6 class="text-default mb-3">Get started with Spade Rent! You have<span id="days-left"></span>
+                            left</h6>
+                        <input type="email" class="form-control form mb-2" style="min-width: 200px;max-width: 350px;"
+                            data-bs-placement="top" data-bs-toggle="tooltip" title=""
+                            data-bs-original-title="Enter the name of the property." readonly id="user-email">
+                        <a class="text-primary mb-4" href="javascript:void(0)" id="change-email">Change Email</a>
+                        <a class="text-primary mb-4 d-none" href="javascript:void(0)" id="save-email">Save Email</a>
+                        <div class="">
+                            <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2"
+                                id="remind-later">Remind me Later</a>
+                            <a href="javascript:void(0)" class="btn btn-primary btn-pill" id="send-email">Send Mail</a>
                         </div>
-                        <!-- <div class="card-footer text-center border-0 pt-0">
-                            <div class="row">
-                                <div class="text-center">
-                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
-                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
-                                </div>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
+                <!-- <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-primary">Save changes</button>
+                </div> -->
             </div>
         </div>
     </div>
@@ -708,8 +713,8 @@
                         <!-- <div class="card-footer text-center border-0 pt-0">
                             <div class="row">
                                 <div class="text-center">
-                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
-                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">delete</a>
                                 </div>
                             </div>
                         </div> -->
@@ -756,114 +761,100 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-6 col-lg-3 col-xl-3">
-                        <div class="card h-90">
+                        <div class="card">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
-                                <div class="card-title fw-bold"><a href="properties-all.html"
-                                        style="color: white;">Property</a></div>
+                                <div class="card-title fw-bold"><a href="properties-all.html" style="color: white;">Property</a></div>
                             </div>
                             <div class="card-body">
                                 <div class="text-center chat-image mb-5">
                                     <div class="avatar avatar-xxl chat-profile mb-3 brround">
-                                        <a class="" href="properties-all.html"><img alt="avatar"
-                                                src="../assets/images/icons/Group 10341.png"
-                                                class="brround w-100 h-100"></a>
+                                        <a class="" href="properties-all.html"><img alt="avatar" src="../assets/images/icons/Group 10341.png" class="brround w-100 h-100"></a>
                                     </div>
                                     <div class="main-chat-msg-name">
                                         <a href="properties-all.html">
                                             <h5 class="mb-1 text-dark fw-bold">Create New Property</h5>
                                         </a>
-                                        <p class="text-default mt-0 mb-0 pt-0 fs-13"> Easily create new property listings, streamline tenant communication, and track rent payments. Start optimizing your rental business today! </p>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the benefits of an all-in-one property management tool! </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-3 col-xl-3">
-                        <div class="card h-90">
+                        <div class="card">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
-                                <div class="card-title fw-bold"><a href="add-tenant.html"
-                                        style="color: white;">Tenant</a></div>
+                                <div class="card-title fw-bold"><a href="add-tenant.html" style="color: white;">Tenant</a></div>
                             </div>
                             <div class="card-body">
                                 <div class="text-center chat-image mb-5">
                                     <div class="avatar avatar-xxl chat-profile mb-3 brround">
-                                        <a class="" href="add-tenant.html"><img alt="avatar"
-                                                src="../assets/images/icons/Group 10344.png"
-                                                class="brround w-100 h-100"></a>
+                                        <a class="" href="add-tenant.html"><img alt="avatar" src="../assets/images/icons/Group 10344.png" class="brround w-100 h-100"></a>
                                     </div>
                                     <div class="main-chat-msg-name">
                                         <a href="add-tenant.html">
                                             <h5 class="mb-1 text-dark fw-bold">Create New Tenant</h5>
                                         </a>
-                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Effortlessly add new tenants, streamline communication, and ensure smooth rent tracking. Elevate your property rental process now! </p>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the benefits of an all-in-one property management tool! </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-3 col-xl-3">
-                        <div class="card h-90">
+                        <div class="card">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
-                                <div class="card-title fw-bold"><a href="create-invoicing.html"
-                                        style="color: white;">Invoice</a></div>
+                                <div class="card-title fw-bold"><a href="create-invoicing.html" style="color: white;">Invoice</a></div>
                             </div>
                             <div class="card-body">
                                 <div class="text-center chat-image mb-5">
                                     <div class="avatar avatar-xxl chat-profile mb-3 brround">
-                                        <a class="" href="create-invoicing.html"><img alt="avatar"
-                                                src="../assets/images/icons/Group 10346.png"
-                                                class="brround w-100 h-100"></a>
+                                        <a class="" href="create-invoicing.html"><img alt="avatar" src="../assets/images/icons/Group 10346.png" class="brround w-100 h-100"></a>
                                     </div>
                                     <div class="main-chat-msg-name">
                                         <a href="create-invoicing.html">
                                             <h5 class="mb-1 text-dark fw-bold">Create New Invoice</h5>
                                         </a>
-                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Create and send invoices seamlessly, ensuring transparent and efficient rent management. Simplify your property rental finances today! </p>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the benefits of an all-in-one property management tool! </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-3 col-xl-3">
-                        <div class="card h-90">
+                        <div class="card">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
                                 <div class="card-title fw-bold"><a href="#" style="color: white;">Lead</a></div>
                             </div>
                             <div class="card-body">
                                 <div class="text-center chat-image mb-5">
                                     <div class="avatar avatar-xxl chat-profile mb-3 brround">
-                                        <a class="" href="#"><img alt="avatar"
-                                                src="../assets/images/icons/Group 10348.png"
-                                                class="brround w-100 h-100"></a>
+                                        <a class="" href="#"><img alt="avatar" src="../assets/images/icons/Group 10348.png" class="brround w-100 h-100"></a>
                                     </div>
                                     <div class="main-chat-msg-name">
                                         <a href="#">
                                             <h5 class="mb-1 text-dark fw-bold">Create New Lead</h5>
                                         </a>
-                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Our software facilitates easy lead creation. Capture, organize, and convert leads seamlessly, optimizing tenant acquisition for your property rental business! </p>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the benefits of an all-in-one property management tool! </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-3 col-xl-3">
-                        <div class="card h-90">
+                        <div class="card">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
-                                <div class="card-title fw-bold"><a href="create-tasks.html"
-                                        style="color: white;">Tasks</a></div>
+                                <div class="card-title fw-bold"><a href="create-tasks.html" style="color: white;">Tasks</a></div>
                             </div>
                             <div class="card-body">
                                 <div class="text-center chat-image mb-5">
                                     <div class="avatar avatar-xxl chat-profile mb-3 brround">
-                                        <a class="" href="create-tasks.html"><img alt="avatar"
-                                                src="../assets/images/icons/Group 10350.png"
-                                                class="brround w-100 h-100"></a>
+                                        <a class="" href="create-tasks.html"><img alt="avatar" src="../assets/images/icons/Group 10350.png" class="brround w-100 h-100"></a>
                                     </div>
                                     <div class="main-chat-msg-name">
                                         <a href="create-tasks.html">
                                             <h5 class="mb-1 text-dark fw-bold">Create New Tasks</h5>
                                         </a>
-                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Our software simplifies property task management. Easily create, assign, and track tasks, ensuring seamless maintenance and tenant satisfaction! </p>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the benefits of an all-in-one property management tool! </p>
                                     </div>
                                 </div>
                             </div>
@@ -871,7 +862,7 @@
                     </div>
 
                     <div class="col-md-6 col-lg-3 col-xl-3">
-                        <div class="card h-90">
+                        <div class="card">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
                                 <div class="card-title fw-bold"><a href="tasks-vendors.html"
                                         style="color: white;">Vendor</a></div>
@@ -887,13 +878,14 @@
                                         <a href="tasks-vendors.html">
                                             <h5 class="mb-1 text-dark fw-bold">Create New Vendors</h5>
                                         </a>
-                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Effortlessly integrate and manage vendor information, ensuring timely property maintenance and service! </p>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the
+                                            benefits of an all-in-one property management tool! </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
+                    
                 </div>
             </div>
         </div>
@@ -974,44 +966,40 @@
                                     <div class="col-md-6">
                                         <label for="inputEmail4" class="form-label fw-bold">First Name<spnan
                                                 class="text-danger"> *</span></label>
-                                        <input type="text" class="form-control form" placeholder="Enter First Name" id="firstName" required data-bs-placement="top" pattern="[A-Za-z\s]+" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your first name here"
-                                            data-bs-container="#addModal">
+                                        <input type="text" class="form-control form" placeholder="Enter First Name" id="firstName" required pattern="[A-Za-z\s]+" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
                                         <span class="text-danger d-none">First name is required!</span>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="inputPassword4" class="form-label fw-bold">Last Name<spnan
                                                 class="text-danger"> *</span></label>
-                                        <input type="text" class="form-control form" placeholder="Enter Last Name" id="lastName" required data-bs-placement="top" data-bs-toggle="tooltip" pattern="[A-Za-z\s]+" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')" title="" data-bs-original-title="Enter your last name here"
-                                            data-bs-container="#addModal">
+                                        <input type="text" class="form-control form" placeholder="Enter Last Name" id="lastName" required pattern="[A-Za-z\s]+" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
                                         <span class="text-danger d-none">Last name required!</span>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="inputAddress" class="form-label fw-bold">Company Name <span
                                                 class="fw-light">(Optional)</span>
                                         </label>
-                                        <input type="text" class="form-control form" id="company" placeholder="Enter Company Name" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your company name here" data-bs-container="#addModal">
+                                        <input type="text" class="form-control form" id="company" placeholder="Enter Company Name">
                                         <!-- <span class="text-danger d-none">Company name is required!</span> -->
                                     </div>
                                     <div class="col-md-4">
                                         <label for="inputCity" class="form-label fw-bold">Email<spnan
                                                 class="text-danger"> *</span></label>
-                                        <input type="email" class="form-control form" placeholder="Enter Email" pattern="[A-Za-z0-9_\.@]+" oninput="this.value = this.value.replace(/[^A-Za-z0-9_\.@]/g, '').replace(/(@{2,})/g, '@')" id="email" required data-bs-placement="top" data-bs-toggle="tooltip"
-                                            title="" data-bs-original-title="Enter your email here" data-bs-container="#addModal">
+                                        <input type="email" class="form-control form" placeholder="Enter Email" pattern="[A-Za-z0-9_\.@]+" oninput="this.value = this.value.replace(/[^A-Za-z0-9_\.@]/g, '').replace(/(@{2,})/g, '@')" id="email" required>
 
                                         <!-- <label for="inputCity" class="form-label fw-bold">Email<span
                                                         class="text-danger"> *</span></label>
-                                        <input type="email" class="form-control form" placeholder="Enter Email" id="email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your email here"
-                                            data-bs-container="#addModal"> -->
+                                        <input type="email" class="form-control form" placeholder="Enter Email" id="email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"> -->
                                         <span class="text-danger d-none">Email is required!</span>
                                     </div>
 
                                     <div class="col-md-4">
                                         <label for="inputState" class="form-label fw-bold">Phone Number <span
                                                 class="fw-light">(Optional)</span></label>
-                                        <input id="phone" name="phone" type="tel" autocomplete="off" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your phone number here" data-bs-container="#addModal" pattern="[0-9]{5}" placeholder="" maxlength="15"
-                                            oninput="this.value = this.value.replace(/[^0-9]/g, '')" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Your total units">
-                                        <!-- <input id="phone" name="phone" type="tel" autocomplete="off" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your phone number here" data-bs-container="#addModal" pattern="[0-9]" placeholder="" maxlength="13" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                                            required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Your total units"> -->
+                                        <input id="phone" name="phone" type="tel" autocomplete="off" placeholder="Enter Phone Number" pattern="[0-9]{5}" maxlength="15"
+                                            oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                                        <!-- <input id="phone" name="phone" type="tel" autocomplete="off" pattern="[0-9]" placeholder="" maxlength="13" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                            required> -->
                                         <span id="valid-msg" class="d-none text-success">✓ Valid</span>
                                         <span id="error-msg" class="hide text-danger"></span>
 
@@ -1020,14 +1008,14 @@
                                     <div class="col-12">
                                         <label for="inputAddress2" class="form-label fw-bold">Address <span
                                                 class="fw-light">(Optional)</span></label>
-                                        <input type="text" class="form-control" id="address" placeholder="Apartment, studio, or floor" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your address here" data-bs-container="#addModal">
+                                        <input type="text" class="form-control" id="address" placeholder="Apartment, studio, or floor">
                                         <!-- <span class="text-danger d-none">Address is required!</span> -->
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="inputState" class="form-label fw-bold">State<spnan
                                                 class="text-danger">*</span></label>
-                                            <select id="state" class="form-select form form-select" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your state here" data-bs-container="#addModal">
+                                            <select id="state" class="form-select form form-select" required>
                                             <option selected>Choose...</option>
                                             </select>
                                             <span class="text-danger d-none">State is required!</span>
@@ -1036,15 +1024,13 @@
                                     <div class="col-md-4">
                                         <label for="inputState" class="form-label fw-bold">City <spnan
                                                 class="text-danger">*</span></label>
-                                        <input type="text" id="city" class="form-control form" required data-bs-placement="top" pattern="[A-Za-z\s]+" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter your city here"
-                                            data-bs-container="#addModal">
+                                        <input type="text" id="city" class="form-control form" placeholder="Enter City" required pattern="[A-Za-z\s]+" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
                                         <span class="text-danger d-none">City is required!</span>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="inputPassword4" class="form-label fw-bold">Zip Code <spnan
                                                 class="text-danger">*</span></label>
-                                        <input class="form-control form" type="text" id="zip" name="zip" pattern="[0-9]{5}" placeholder="A valid 5-digit zip code" maxlength="5" minlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '')" data-bs-placement="top" data-bs-toggle="tooltip"
-                                            title="" data-bs-original-title="Enter Zip" data-bs-container="#addModal" required>
+                                        <input class="form-control form" type="text" id="zip" name="zip" pattern="[0-9]{5}" placeholder="A valid 5-digit zip code" maxlength="5" minlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                                         <span class="text-danger d-none">Zip code is required!</span>
                                     </div>
                                 </form>
@@ -1066,7 +1052,7 @@
                                     <div class="col-md-4">
                                         <label for="inputEmail4" class="form-label">Select Property<span
                                                 class="text-danger"> *</span></label>
-                                        <select id="property" class="form-select form form-select" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select your property" data-bs-container="#addModal">
+                                        <select id="property" class="form-select form form-select" required>
                                             <option selected>Choose...</option>
 
                                         </select>
@@ -1075,7 +1061,7 @@
                                     <div class="col-md-4">
                                         <label for="inputEmail4" class="form-label">Select Property Unit<span
                                                 class="text-danger"> *</span></label>
-                                        <select id="unit" class="form-select" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Select your property units" data-bs-container="#addModal" aria-required="true">
+                                        <select id="unit" class="form-select" required>
                                             <option selected>Choose...</option>
 
                                         </select>
@@ -1086,8 +1072,7 @@
                                             Month<span class="text-danger"> *</span></label>
                                         <div class="input-group">
                                             <span class="input-group-text" style="color: #1467B0;background-color: transparent !important;">$</span>
-                                            <input type="text" class="form-control" id="rent" pattern="[0-9]{7}" placeholder="Enter rent amount" maxlength="7" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Rent Amount /Per Month"
-                                                data-bs-container="#addModal">
+                                            <input type="text" class="form-control" id="rent" pattern="[0-9]{7}" placeholder="Enter Rent Amount" maxlength="7" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                                         </div>
                                         <span class="text-danger d-none">Rent amount is required!</span>
                                     </div>
@@ -1109,7 +1094,7 @@
                                 <form class="row g-3">
                                     <div class="col-md-12">
                                         <label for="inputEmail4" class="form-label">Is this a gross lease or triple net
-                                            lease? <i class="fi fi-rs-info ms-2" style="color: #1467B0" data-toggle="tooltip" data-placement="top" title="Property costs like taxes, insurance, and maintenance are included in the rent.Triple Net Lease: Tenants cover property taxes, insurance, and maintenance costs in addition to rent."></i></label>
+                                            lease? <i class="fi fi-rs-info ms-2" style="color: #1467B0"></i></label>
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" value="Gross Lease" name="lease" id="flexCheckDefault">
                                             <label class="form-check-label" for="flexCheckDefault">
@@ -1132,8 +1117,7 @@
                                                                 (Optional)</label>
                                                             <div class="input-group">
                                                                 <span class="input-group-text" style="color: #1467B0;background-color: transparent !important;">$</span>
-                                                                <input type="text" class="form-control" id="baseRent" pattern="[0-9]{7}" placeholder="Enter Amount.." maxlength="7" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Base Rent Amount"
-                                                                    data-bs-container="#addModal">
+                                                                <input type="text" class="form-control" id="baseRent" pattern="[0-9]{7}" placeholder="Enter Amount.." maxlength="7" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                                                             </div>
                                                             <span class="text-danger d-none">Rent amount is
                                                                 required!</span>
@@ -1143,8 +1127,7 @@
                                                                 Amount (Optional)</label>
                                                             <div class="input-group">
                                                                 <span class="input-group-text" style="color: #1467B0;background-color: transparent !important;">$</span>
-                                                                <input type="text" class="form-control" id="tripleNet" pattern="[0-9]{7}" placeholder="Enter Amount.." maxlength="7" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Triple Net Amount"
-                                                                    data-bs-container="#addModal">
+                                                                <input type="text" class="form-control" id="tripleNet" pattern="[0-9]{7}" placeholder="Enter Amount.." maxlength="7" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                                                             </div>
                                                             <span class="text-danger d-none">Rent amount is
                                                                 required!</span>
@@ -1152,8 +1135,7 @@
                                                         <div class="col-md-6">
                                                             <label for="inputEmail4" class="form-label">Lease Start
                                                                 Date</label>
-                                                            <input type="date" class="form-control position-relative" id="leaseStart" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Lease Start
-                                                                Date" data-bs-container="#addModal">
+                                                            <input type="date" class="form-control position-relative" id="leaseStart" placeholder="Enter Lease Start Date">
                                                             <span class="text-danger d-none">Rent amount is
                                                                 required!</span>
                                                             <!-- <i class="fi fi-rs-calendar"></i> -->
@@ -1162,8 +1144,7 @@
                                                             <label for="inputPassword4" class="form-label">Lease End
                                                                 Date</label>
 
-                                                            <input type="date" class="form-control" id="leaseEnd" required data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Lease End
-                                                                Date" data-bs-container="#addModal">
+                                                            <input type="date" class="form-control" id="leaseEnd" required placeholder="Enter Lease End Date">
                                                             <span class="text-danger d-none">Rent amount is
                                                                 required!</span>
                                                             <!-- <i class="fi fi-rs-calendar"></i> -->
@@ -1177,7 +1158,7 @@
                                     <div class="col-md-12">
                                         <label for="inputEmail4" class="form-label">Are there any rent increases during
                                             the Lease Term? <i class="fi fi-rs-info ms-2"
-                                                style="color: #1467B0" data-toggle="tooltip" data-placement="top" title="The rent will remain fixed or might be subject to increases during the Lease term."></i></label>
+                                                style="color: #1467B0"></i></label>
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" value="yes" name="yesno" id="flexCheckChecked2" href="#collapse2" role="button" aria-expanded="false" aria-controls="collapseExample2" required>
                                             <label class="form-check-label" for="flexCheckChecked">
@@ -1217,8 +1198,7 @@
                                                             <label for="inputEmail4" class="form-label">Date of Rent
                                                                 Change
                                                                 (Optional)</label>
-                                                            <input type="date" class="form-control input-date dateofRentchange" name="dateofRentchange" id="dateofRentchange" required data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Date of Rent
-                                                               Change" data-bs-container="#addModal">
+                                                            <input type="date" class="form-control input-date dateofRentchange" name="dateofRentchange" id="dateofRentchange" required placeholder="Enter Date of Rent Change">
                                                             <span class="text-danger d-none">Rent amount is
                                                                 required!</span>
                                                         </div>
@@ -1226,9 +1206,7 @@
                                                             <label for="inputPassword4" class="form-label">Rent Amount
                                                                 Correlating to
                                                                 that Date</label>
-                                                            <input type="text" class="form-control input-amount" id="amountChange" pattern="[0-9]{7}" placeholder="Enter Amount.." maxlength="7" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Rent Amount
-                                                                Correlating to
-                                                                that Date" data-bs-container="#addModal">
+                                                            <input type="text" class="form-control input-amount" id="amountChange" pattern="[0-9]{7}" placeholder="Enter Rent Amount.." maxlength="7" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                                                             <span class="text-danger d-none">Rent amount is
                                                                 required!</span>
                                                         </div>
@@ -1288,8 +1266,8 @@
                         <div class="card-footer text-center border-0 pt-0">
                             <div class="row">
                                 <div class="text-center">
-                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
-                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">delete</a>
                                 </div>
                             </div>
                         </div>
@@ -1381,11 +1359,11 @@
                                         </a>
                                     </div>
 
-                                    <div class="d-flex country mt-2">
+                                    <!-- <div class="d-flex country mt-2">
                                         <a class="nav-link icon text-dark" onclick="mydemoclick()">
                                             <i class="fi fi-rs-universal-access"></i>
                                         </a>
-                                    </div>
+                                    </div> -->
 
 
                                     <!-- 1 comments start  -->
@@ -1398,16 +1376,13 @@
                                     </div>
                                     <!-- 1 comments start  -->
 
-                                        <!-- 2 comments start  -->
-                                        <div class="d-flex country">
-                                            <img src="../assets\header-img\question.svg" 
-                                                class="avatarr profile-user brroundd nav-link cover-image dark-layout customIntercomButton">
-                                        </div>
-                                        <div class="d-flex country">
-                                            <img src="../assets\header-img\question-light.webp" 
-                                                class="avatarr profile-user nav-link brroundd cover-image light-layout customIntercomButton">
-                                        </div>
-                                        <!-- 2 comments start  -->
+                                    <!-- 2 comments start  -->
+                                    <!-- <div class="d-flex country mt-2">
+                                        <a class="nav-link icon text-dark">
+                                            <i class="fi fi-rs-interrogation"></i>
+                                        </a>
+                                    </div> -->
+                                    <!-- 2 comments start  -->
 
                                         <!-- 3 comments start  -->
                                         <div class="dropdown  d-flex notifications">
@@ -1545,21 +1520,23 @@
                                         Profile</span>
                                 </a>
                             </li> -->
-                            <li class="slide">
-                                <div class="M-0 mt-3 mb-4" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
-                                    <div class="card-header pb-0 border-bottom-0">
-                                        <i class="side-menu__icon fi fi-rs-rocket-lunch mb-0"></i>
-                                        <h3 class="card-title side-menu__label">&nbsp; Complete your Profile
-                                        </h3>
-
-                                    </div>
-                                    <div class="card-body pt-0">
-                                        <div class="side-menu__label progress progress-md mt-5">
-                                            <div class="progress-bar bg-info" style="width: 40%;">40%</div>
+                            <a href="settings.html" class="text-dark">
+                                <li class="slide">
+                                    <div class="M-0 mt-3 mb-4" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
+                                        <div class="card-header pb-0 border-bottom-0">
+                                            <i class="side-menu__icon fi fi-rs-rocket-lunch mb-0"></i>
+                                            <h3 class="card-title side-menu__label">&nbsp; Complete your Profile
+                                            </h3>
+    
+                                        </div>
+                                        <div class="card-body pt-0">
+                                            <div class="side-menu__label progress progress-md mt-5">
+                                                <!-- <div class="progress-bar bg-info" style="width: 40%;">40%</div> -->
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </li>
+                                </li>
+                            </a>
                             <li class="slide">
                                 <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html"><i
                                         class="side-menu__icon fi fi-rs-dashboard"></i><span
@@ -1687,16 +1664,15 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-lg-9">
-                                        <h3 class="page-titlee text-white" style="font-weight: 100; margin-bottom: 0px;">Welcome To Spade Rent Portal</h3>
+                                        <h3 class="page-titlee text-white" style="font-weight: 100; margin-bottom: 0px;">Welcome to Spade Portal</h3>
                                         <h1 class="page-titlee text-white" style="font-weight: 700;" id="user-name">
                                         </h1>
-                                        <a data-bs-toggle="modal" href="#modaldemo8" id="email_verification" class="btn btn-primary btn-pill btn-xl email-verification-btn"><i
+                                        <a data-bs-toggle="modal" href="#modaldemo00" id="email_verification" class="btn btn-primary btn-pill btn-xl email-verification-btn"><i
                                                 class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
                                             verification &nbsp; <i
                                                 class="angle fe fe-arrow-right create-btn-plus"></i></a>
                                                 <p class="text-white m-0 mt-3" id="account-text">Your account will be locked after 7-Days</p>
                                     </div>
-                                    
                                     <div class="col-lg-3">
                                         <img src="../assets/header-img/Group1.png" alt="">
                                     </div>
@@ -1707,15 +1683,15 @@
                         <!-- PAGE-HEADER END -->
                         <div>
                             <p class="d-inline-flex gap-1">
-                                <span>Add Tenant | </span><a data-bs-toggle="collapse" href="#collapseHelp" role="button" aria-expanded="false" aria-controls="collapseHelp">
+                                <span>Add Invoicing | </span><a data-bs-toggle="collapse" href="#collapseHelp" role="button" aria-expanded="false" aria-controls="collapseHelp">
                                   Help ? 
                                 </a>
                             
                               </p>
                               <div class="collapse" id="collapseHelp" style="width: 20%;">
                                 <div class="card card-body">
-                                  <span><a href="#" onclick="Intercom('showArticle', 8210506)"><i class="fi fi-rs-question text-light"></i>  How to create Tenant? </a></span>
-                                  <span><a href="#" onclick="Intercom('showArticle', 8210444)"><i class="fi fi-rs-question text-light"></i>  How to update Tenant? </a></span>
+                                  <span><a href="#" onclick="Intercom('showArticle', 8210506)"><i class="fi fi-rs-question text-light"></i>  How to create Task? </a></span>
+                                  <span><a href="#" onclick="Intercom('showArticle', 8210444)"><i class="fi fi-rs-question text-light"></i>  How to update Task? </a></span>
                                 </div>
                               </div>
                         </div>
@@ -2480,7 +2456,6 @@
     <script src="../assets/js/custom.js"></script><script src="../assets/js/getNotification.js"></script>
 
     <!-- ############################################# -->
-    <script src="../assets/js/intercom.js"></script>
 
 
     <!-- C3 CHART JS -->
@@ -2495,8 +2470,33 @@
     <script src="../assets/plugins/chart/utils.js"></script>
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
+    <script src="../assets/js/email-verification.js"></script>
+    <script src="../assets/js/intercom.js"></script>
     <script>
         $(document).ready(function() {
+            $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    console.log(response);
+                    var myprogress = `<div class="progress-bar bg-info" style="width: `+response.count+`%;">`+response.count+`%</div>`;
+                    $(".progress").html(myprogress)
+                },
+                error: function (xhr, status, error) {
+                    // $("#myModal_warning").modal("show");
+                    // setTimeout(function () {
+                    //     $('#myModal_warning').modal('hide');
+                    //     window.location = '../Landlord/login_module.html';
+                    // }, 2000);
+                    console.log('Error occurred while fetching state and city data.');
+                    console.log(xhr);
+                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                }
+            });
             $('#email_verification').on('click', function() {
                 if ($('body').hasClass('dark-mode')) {
                     $('.Rent-logo').attr('src', '../assets/images/logo_white.png');
@@ -2645,8 +2645,7 @@
 
                 $("#add-item-container").append(`<div class="row row-multiple mb-2 pb-3"><div class="col-md-6">
                                             <label for="inputEmail4" class="form-label">Date of Rent Change (Optional)</label>
-                                            <input type="date" class="form-control input-date dateofRentchange" name="dateofRentchange" id="dateofRentchange" required data-bs-toggle="tooltip" title="" data-bs-original-title="Enter Date of Rent
-                                                               Change" data-bs-container="#addModal">
+                                            <input type="date" class="form-control input-date dateofRentchange" name="dateofRentchange" id="dateofRentchange" required placeholder="Date of Rent Change">
                                           </div>
                                           <div class="col-md-5">
                                             <label for="inputPassword4" class="form-label">Rent Amount Correlating to that Date</label>
@@ -2966,7 +2965,7 @@
                             // $('#collapseSecond').removeClass('show')
                             // $('#collapseThird').removeClass('show')
                             $('#succesModal').modal('show')
-                            $("#succes-text").text(`Tenant has been successfully created and linked to ${formData.propertyUnitID} Unit with Property ID ${formData.propertyID}.`)
+                            $("#succes-text").text(`Tenant has been successfully created!!.`)
                             getData()
                                 // $("#succesModal").modal("show")
                             resetAccordions()
@@ -3883,11 +3882,28 @@ $("#user-img").attr("src",image)
 
     <script>
         function logout() {
-            localStorage.removeItem('authtoken');
-            window.open('./login_module.html', "_blank")
-            window.close();
-            console.log('Done');
-        }
+                $(document).ready(function () {
+                    $.ajax({
+                        url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                        type: 'PUT',
+                        contentType: false,
+                        processData: false,
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            console.log(response);
+                            localStorage.removeItem('authtoken');
+                            window.close();
+                            window.open('./login_module.html', "_blank")
+                            console.log('Done');
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(error);
+                        }
+                    });
+                });
+            }
     </script>
     <!-- <script>
         $(document).ready(function() {

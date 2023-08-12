@@ -50,11 +50,30 @@ exports.deleteQuery = (table, ...field) => {
   }
 };
 // check chat whether reciever and sender id  recieverID senderID
-exports.checkChatQuery = `SELECT * FROM chats WHERE receiverID = ? AND senderId = ?`;
+exports.checkChatQuery = `SELECT * FROM chats WHERE receiverID = ? AND senderId = ? OR senderId = ? AND receiverID = ?`;
+exports.checkTenantsChatQuery = `SELECT * FROM chats WHERE senderId = ? AND  receiverID = ?  OR receiverID = ? AND senderId = ?  `;
+
 // get user data by id
-exports.getUserById = `SELECT * FROM users WHERE id = ?`;
+exports.getUserById = `SELECT active As isUserActive ,FirstName,LastName FROM users WHERE id = ?`;
+exports.getTenantById = `SELECT active As isTenantActive ,firstName,lastName FROM tenants WHERE id = ?`;
+
+// SELECT 'user' AS type, id, email, name FROM users WHERE email = ?
+// UNION
+// SELECT 'tenant' AS type, id, email, name FROM tenants WHERE email = ?;
+
 // update user Active or Deactive
 exports.updateUserActive = `UPDATE users SET active = ? WHERE Email = ?`;
+exports.updateTenantActive = `UPDATE tenants SET active = ? WHERE Email = ?`;
+
+// update all notify to 1 where landlord id = id
+exports.updateAllNotifyReadQuery =  {
+  property: `UPDATE property SET notify = ? WHERE landlordID = ?`,
+  task: `UPDATE task SET notify = ? WHERE landlordID = ?`,
+  invoice: `UPDATE invoice SET notify = ? WHERE landlordID = ?`,
+  tenants: `UPDATE tenants SET notify = ? WHERE landlordID = ?`,
+};
+ 
+
 // creat api get total properties of landlord and vacant or occupied properties using join with units table
 exports.getPropertiesGraphData = `SELECT
 COUNT(DISTINCT property.id) AS propertyCount,
@@ -77,8 +96,8 @@ FROM
 task
 WHERE
 task.landlordID = ?
-AND STR_TO_DATE(task.created_at, '%Y-%m-%d') >= STR_TO_DATE(?, '%Y-%m-%d')  
-AND STR_TO_DATE(task.created_at, '%Y-%m-%d') <= STR_TO_DATE(?, '%Y-%m-%d'); 
+AND task.created_at >= ?
+AND task.created_at <= ?;
 `;
 // SELECT SUM(invoice.totalAmount) AS totalPaid FROM invoice
 exports.getInvoiceGraphData = `
@@ -93,6 +112,8 @@ WHERE
     AND invoice.created_at >= ?
     AND invoice.created_at <= ?;
 `;
+
+
 // delete all images where property id = id from propertyImage
 exports.delteImageFromDb = "DELETE FROM propertyimage WHERE imageKey = ?";
 exports.delteImageForInvoiceImages =
@@ -398,7 +419,7 @@ exports.updateUser =
 // update plan id in user table
 exports.updatePlanId = "UPDATE users SET PlanID = ? WHERE id = ?";
 exports.insertInProperty =
-  "INSERT INTO property (landlordID, propertyName, address, city, state, zipCode, propertyType, propertySQFT,status,units,created_at,notify) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+  "INSERT INTO property (landlordID, propertyName, address, city, state, zipCode, propertyType, propertySQFT,status,units,created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 exports.insertInPropertyImage =
   "INSERT INTO propertyimage (propertyID, Image, imageKey) VALUES (?,?,?)";
 exports.insertInTaskImage =
@@ -410,7 +431,7 @@ exports.updateProperty =
 exports.updatePropertyUnits =
   "UPDATE propertyunits SET unitNumber = ?, Area = ?, unitDetails = ? where id = ? AND propertyID = ? ";
 exports.insertTenants =
-  "INSERT INTO tenants ( landlordID, firstName, lastName, companyName, email, phoneNumber, address, city, state, zipcode, propertyID, propertyUnitID, rentAmount, gross_or_triple_lease, baseRent, tripleNet, leaseStartDate, leaseEndDate, increaseRent, tenantPassword,tenantCreated_at,notify) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+  "INSERT INTO tenants ( landlordID, firstName, lastName, companyName, email, phoneNumber, address, city, state, zipcode, propertyID, propertyUnitID, rentAmount, gross_or_triple_lease, baseRent, tripleNet, leaseStartDate, leaseEndDate, increaseRent, tenantPassword,tenantCreated_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 // exports.UpdateTenants = 'UPDATE tenants SET landlordID = ?, firstName = ?, lastName = ?, companyName = ?, email = ?, phoneNumber = ?, address = ?, city = ?, state = ?, zipcode = ?, propertyID = ?, propertyUnitID = ?, rentAmount = ?, gross_or_triple_lease = ?, baseRent = ?, tripleNet = ?, leaseStartDate = ?, leaseEndDate = ?, increaseRent = ?, tenantPassword = ?  ';
 exports.UpdateTenants =
   "UPDATE tenants SET tenantPassword = ?, tenantUpdated_at = ? WHERE id = ?  ";
