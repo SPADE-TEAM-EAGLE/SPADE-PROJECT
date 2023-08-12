@@ -2512,7 +2512,7 @@ endDate = formatDate(currentDate);
             $("#startDate").on('change',function(){
                 startDate=$(this).val()
                 $.ajax({
-                url: `https://backend.app.spaderent.com/api/spade/getDashInvoiceData/${startDate}/${endDate}`,
+                url: `https://backend.app.spaderent.com/api/spade/getDashInvoiceData/`+`${startDate}/${endDate}`,
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
