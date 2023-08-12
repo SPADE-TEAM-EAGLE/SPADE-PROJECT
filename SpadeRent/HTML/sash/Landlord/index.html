@@ -2288,14 +2288,16 @@
     <script src="../assets/js/getNotification.js"></script>
     <script src="../assets/js/index-chart.js"></script>
     <script src="http://localhost:3000/"></script>
-    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
-
+    <script src="http://ec2-52-45-181-206.compute-1.amazonaws.com:3000/socket.io/socket.io.js"></script>
     <script>
       // Connect to the socket.io server
-      const socket = io('http://localhost:3000');
+      const socket = io('http://ec2-52-45-181-206.compute-1.amazonaws.com:3000');
       // This code won't emit a 'connection' event, as it's automatically handled by socket.io
       // Handle events from the server
-      socket.emit('message', 'Hello from the client');
+    // socket.on('notification', (data) => {
+    //   alert(data.message); // You can customize how you want to display the notification
+    // });
+    //   socket.emit('message', 'Hello from the client');
     </script>
     <script>
 
@@ -2304,7 +2306,6 @@
         window.intercomSettings = {
           api_base: "https://api-iam.intercom.io",
           app_id: "fjpx1kt1",
-          
         };
       
         // Function to open the Intercom side popup

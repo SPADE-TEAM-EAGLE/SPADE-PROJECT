@@ -161,7 +161,8 @@ router.post("/createNewMessage", verifyToken, messageClt.createNewMessage);
 router.get("/TenantMessages/:chatId", verifyTokenTenant, messageClt.getAllMessages);
 router.get("/LandlordMessages/:chatId", verifyToken, messageClt.getAllMessages);
 
-
+// profile complition
+router.get('/ProfileComplete',verifyToken,userController.ProfileComplete);
  
 
 // leads routes start

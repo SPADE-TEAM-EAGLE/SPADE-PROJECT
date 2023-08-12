@@ -644,7 +644,36 @@
             box-shadow: 0 8px 8px -4px #000 20;
             transition: all ease 0.5s;
         }
-
+        .dark-mode .chat {
+            --bg: #212121;
+            --bg-secundary: #e1e1e8;
+            --bg-highlight: #057ef7;
+            --color: #2a2b2e;
+            max-width: 100%;
+            width: 100%;
+            height: 95%;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: flex-start;
+            position: relative;
+            color: var(--color);
+            background: var(--bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 8px 8px -4px #000 20;
+            transition: all ease 0.5s;
+        }
+.dark-mode .chat .conversation .head {
+    width: 100%;
+    min-height: 4em;
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    background: black;
+    padding: 0.5em;
+    color: white;
+}
         .chat.dark {
             --bg: #1f2024;
             --bg-secundary: #292a30;
@@ -1042,6 +1071,83 @@
         </div>
     </div>
     <!-- /GLOBAL-LOADER -->
+    <div class="modal fade effect-scale" id="modaldemo8" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-l" role="document">
+            <div class="modal-content">
+                <!-- <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+                </div> -->
+                <div class="modal-body pt-5">
+                    <div class="d-flex flex-column justify-content-center align-items-center p-5"
+                        style="text-align: center;">
+                        <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" style="max-width: 110px;"
+                            class="Rent-logo mb-5" />
+                        <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
+                        <h6 class="text-default mb-3">Enter a 6-digit code to verify email address</h6>
+                        <input id="token" name="token" type="phone" class="form-control form mb-2" pattern="[0-9]{5}"
+                            maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                            style="min-width: 200px;max-width: 350px;" data-bs-placement="top" data-bs-toggle="tooltip"
+                            title="" data-bs-original-title="Enter the name of the property.">
+                        <input type="password" class="form-control form mb-2" id="id_password1"
+                            aria-describedby="emailHelp" placeholder="Password" data-bs-placement="top"
+                            data-bs-toggle="tooltip" title="" data-bs-original-title="Enter password here.">
+                        <!-- <a class="text-primary mb-4" href="javascript:void(0)">Change Email</a> -->
+                        <span class="mt-1 text-danger" id="passnotmatch1" style="display: none;">
+                            MUST be atleast 8 characters long, Must contain atleast One Uppercase and One symbol.
+                        </span>
+                        <div class="">
+                            <!-- <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2">Remind me Later</a> -->
+                            <a href="javascript:void(0)" class="btn btn-primary btn-pill disabled"
+                                id="verify-btn">Verify</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-primary">Save changes</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <div class="modal fade effect-scale" id="modaldemo00" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-l" role="document">
+            <div class="modal-content">
+                <!-- <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+                </div> -->
+                <div class="modal-body pt-5">
+                    <div class="d-flex flex-column justify-content-center align-items-center p-5"
+                        style="text-align: center;">
+                        <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" style="max-width: 110px;"
+                            class="Rent-logo mb-5" />
+                        <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
+                        <h6 class="text-default mb-3">Get started with Spade Rent! You have<span id="days-left"></span>
+                            left</h6>
+                        <input type="email" class="form-control form mb-2" style="min-width: 200px;max-width: 350px;"
+                            data-bs-placement="top" data-bs-toggle="tooltip" title=""
+                            data-bs-original-title="Enter the name of the property." readonly id="user-email">
+                        <a class="text-primary mb-4" href="javascript:void(0)" id="change-email">Change Email</a>
+                        <a class="text-primary mb-4 d-none" href="javascript:void(0)" id="save-email">Save Email</a>
+                        <div class="">
+                            <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2"
+                                id="remind-later">Remind me Later</a>
+                            <a href="javascript:void(0)" class="btn btn-primary btn-pill" id="send-email">Send Mail</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-primary">Save changes</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="myModal_warning_connection" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered text-center" role="document">
             <div class="modal-content modal-content-demo">
@@ -1730,11 +1836,11 @@
                                                 <span class="light-layout"><i class="fi fi-rs-brightness"></i></span>
                                             </a>
                                         </div>
-                                        <div class="d-flex country mt-2">
+                                        <!-- <div class="d-flex country mt-2">
                                             <a class="nav-link icon text-dark" onclick="mydemoclick()">
                                                 <i class="fi fi-rs-universal-access"></i>
                                             </a>
-                                        </div>
+                                        </div> -->
                                         <!-- 1 comments start  -->
                                         <div class="d-flex country mt-2">
                                             <a class="nav-link icon text-dark">
@@ -1745,11 +1851,11 @@
                                         </div>
                                         <!-- 1 comments start  -->
                                         <!-- 2 comments start  -->
-                                        <div class="d-flex country mt-2">
+                                        <!-- <div class="d-flex country mt-2">
                                             <a class="nav-link icon text-dark">
                                                 <i class="fi fi-rs-interrogation"></i>
                                             </a>
-                                        </div>
+                                        </div> -->
                                         <!-- 2 comments start  -->
                                         <!-- 3 comments start  -->
                                         <div class="dropdown  d-flex notifications">
@@ -1899,20 +2005,23 @@
                                     Profile</span>
                             </a>
                         </li> -->
+                        <a href="settings.html" class="text-dark">
                             <li class="slide">
                                 <div class="M-0 mt-3 mb-4" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
                                     <div class="card-header pb-0 border-bottom-0">
                                         <i class="side-menu__icon fi fi-rs-rocket-lunch mb-0"></i>
                                         <h3 class="card-title side-menu__label">&nbsp; Complete your Profile
                                         </h3>
+
                                     </div>
                                     <div class="card-body pt-0">
                                         <div class="side-menu__label progress progress-md mt-5">
-                                            <div class="progress-bar bg-info" style="width: 40%;">40%</div>
+                                            <!-- <div class="progress-bar bg-info" style="width: 40%;">40%</div> -->
                                         </div>
                                     </div>
                                 </div>
                             </li>
+                        </a>
                             <li class="slide">
                                 <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html"><i
                                         class="side-menu__icon fi fi-rs-dashboard"></i><span
@@ -2038,146 +2147,7 @@
                                             <div class="tab-content main-chat-list flex-2 ">
                                                 <div class="tab-pane active" id="ChatList">
                                                     <div class="main-chat-list tab-pane" id="tab-pane-ll">
-                                                        <div class="media new border-top-0" href="javascript:void(0)">
-                                                            <div class="main-img-user online">
-                                                                <img alt="" src="../assets/images/users/5.jpg">
-                                                            </div>
-                                                            <div class="media-body">
-                                                                <div class="media-contact-name">
-                                                                    <span>Raymart Santiago</span> <span>10 min</span>
-                                                                </div>
-                                                                <p> Hey! there I'm available </p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="media new" href="javascript:void(0)">
-                                                            <div class="main-img-user">
-                                                                <img alt="" src="../assets/images/users/6.jpg">
-                                                                <span>3</span>
-                                                            </div>
-                                                            <div class="media-body">
-                                                                <div class="media-contact-name">
-                                                                    <span>Ariana Monino</span> <span>30 min</span>
-                                                                </div>
-                                                                <p>Good Morning</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="media selected" href="javascript:void(0)">
-                                                            <div class="main-img-user online"><img alt=""
-                                                                    src="../assets/images/users/9.jpg"></div>
-                                                            <div class="media-body">
-                                                                <div class="media-contact-name">
-                                                                    <span>Reynante Labares</span> <span>9.40 am</span>
-                                                                </div>
-                                                                <p> Nice to meet you </p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="media new" href="javascript:void(0)">
-                                                            <span
-                                                                class="avatar avatar-md brround bg-danger-transparent text-danger">J</span>
-                                                            <div class="media-body">
-                                                                <div class="media-contact-name">
-                                                                    <span>Joyce Chua</span> <span>11.20 am</span>
-                                                                </div>
-                                                                <p> Hi, How are you? </p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="media new" href="javascript:void(0)">
-                                                            <div class="main-img-user"><img alt=""
-                                                                    src="../assets/images/users/4.jpg"></div>
-                                                            <div class="media-body">
-                                                                <div class="media-contact-name">
-                                                                    <span>Rolando Paloso</span> <span>1.38 pm</span>
-                                                                </div>
-                                                                <p> Hey! there I'm available </p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="media new" href="javascript:void(0)">
-                                                            <div class="main-img-user">
-                                                                <div
-                                                                    class="avatar avatar-md brround bg-primary-transparent text-primary">
-                                                                    D</div><span>1</span>
-                                                            </div>
-                                                            <div class="media-body">
-                                                                <div class="media-contact-name">
-                                                                    <span>Dexter dela Cruz</span> <span>4.08 pm</span>
-                                                                </div>
-                                                                <p>Typing...</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="media new" href="javascript:void(0)">
-                                                            <div class="main-img-user"><img alt=""
-                                                                    src="../assets/images/users/21.jpg"></div>
-                                                            <div class="media-body">
-                                                                <div class="media-contact-name">
-                                                                    <span>Maricel Villalon</span> <span>8.09 pm</span>
-                                                                </div>
-                                                                <p> Hey! there I'm available </p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="media new" href="javascript:void(0)">
-                                                            <span
-                                                                class="avatar avatar-md brround bg-success-transparent text-success">M</span>
-                                                            <div class="media-body">
-                                                                <div class="media-contact-name">
-                                                                    <span>Maryjane Pechon</span> <span>1 day ago</span>
-                                                                </div>
-                                                                <p>I have some work</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="media new" href="javascript:void(0)">
-                                                            <div class="main-img-user"><img alt=""
-                                                                    src="../assets/images/users/5.jpg"></div>
-                                                            <div class="media-body">
-                                                                <div class="media-contact-name">
-                                                                    <span>Lovely Dela Cruz</span> <span>3 days
-                                                                        ago</span>
-                                                                </div>
-                                                                <p>I have some work</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="media new" href="javascript:void(0)">
-                                                            <div
-                                                                class="avatar avatar-md brround bg-secondary-transparent">
-                                                                <i class="fe fe-user text-secondary"></i>
-                                                            </div>
-                                                            <div class="media-body">
-                                                                <div class="media-contact-name">
-                                                                    <span>Daniel Padilla</span> <span>5 days ago</span>
-                                                                </div>
-                                                                <p>I have some work</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="media new" href="javascript:void(0)">
-                                                            <div class="main-img-user"><img alt=""
-                                                                    src="../assets/images/users/3.jpg"></div>
-                                                            <div class="media-body">
-                                                                <div class="media-contact-name">
-                                                                    <span>John Pratts</span> <span>20/06/2021</span>
-                                                                </div>
-                                                                <p>I have some work</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="media new" href="javascript:void(0)">
-                                                            <div class="main-img-user"><img alt=""
-                                                                    src="../assets/images/users/7.jpg"></div>
-                                                            <div class="media-body">
-                                                                <div class="media-contact-name">
-                                                                    <span>Socrates Itumay</span> <span>18/07/2021</span>
-                                                                </div>
-                                                                <p> Hey! there I'm available </p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="media new border-bottom-0"
-                                                            href="javascript:void(0)">
-                                                            <div class="main-img-user"><img alt=""
-                                                                    src="../assets/images/users/6.jpg"></div>
-                                                            <div class="media-body">
-                                                                <div class="media-contact-name">
-                                                                    <span>Samuel Lerin</span> <span>29/07/2021</span>
-                                                                </div>
-                                                                <p> Hey! there I'm available </p>
-                                                            </div>
-                                                        </div>
+
                                                     </div>
                                                     <!-- main-chat-list -->
                                                 </div>
@@ -3387,7 +3357,18 @@
         <!-- <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a> -->
         <a href="#addModal" data-bs-effect="effect-scale" data-bs-toggle="modal" id="add-tenant-side-btn"><i
                 class="fe fe-plus"></i></a>
-        <!-- JQUERY JS -->
+        <!-- socket      -->
+        <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+
+        <script>
+          // Connect to the socket.io server
+          const socket = io('http://localhost:3000');
+          // This code won't emit a 'connection' event, as it's automatically handled by socket.io
+          // Handle events from the server
+        //   socket.emit('message', 'Hello from the client');
+        </script>
+        
+                <!-- JQUERY JS -->
         <script src="../assets/js/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"
             integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg=="
@@ -3463,6 +3444,7 @@
         <script src="../assets/plugins/chart/utils.js"></script>
         <!-- CHART-DONUT JS -->
         <script src="../assets/js/charts.js"></script>
+        <script src="../assets/js/email-verification.js"></script>
         <script>
             var tenantId = [];
             var chatId = 0;
@@ -3471,6 +3453,29 @@
             localStorage.removeItem('tenantId');
             localStorage.removeItem('tenantName');
             $(document).ready(function () {
+                $.ajax({
+                url: 'http://localhost:3000/api/spade/ProfileComplete',
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    console.log(response);
+                    var myprogress = `<div class="progress-bar bg-info" style="width: `+response.count+`%;">`+response.count+`%</div>`;
+                    $(".progress").html(myprogress)
+                },
+                error: function (xhr, status, error) {
+                    // $("#myModal_warning").modal("show");
+                    // setTimeout(function () {
+                    //     $('#myModal_warning').modal('hide');
+                    //     window.location = '../Landlord/login_module.html';
+                    // }, 2000);
+                    console.log('Error occurred while fetching state and city data.');
+                    console.log(xhr);
+                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                }
+            });
                 let id; let userEmail; let emailChange = false
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/protected',
@@ -3479,6 +3484,7 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
+                        console.log(response);
                         function toTitleCase(str) {
                             return str.replace(/\w\S*/g, function (txt) {
                                 return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
@@ -3504,6 +3510,8 @@
                         // console.log('Error occurred while fetching state and city data.');
                     }
                 });
+                const socket = io('http://localhost:3000');
+                socket.emit('joinRoom', { chatId: localStorage.getItem("chatId") });
                 $('#send-text').on('click', function (ev) {
                     var input_message = $('#input-message').val();
                     var messageData = {
@@ -3522,9 +3530,10 @@
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
-                            // console.log(response);
-                            // console.log(tenantIid);
-                            // console.log(tenantName);
+                            // socket use
+                            console.log(messageData);
+                            socket.emit('chatMessage', messageData);
+                            
                             chatTenant(Number(localStorage.getItem("tenantId")), String(localStorage.getItem("tenantName")))
                         },
                         error: function (xhr, status, error) {
@@ -3597,6 +3606,10 @@
                             success: function (response) {
                                 console.log(response[0]);
                                 // setTimeout(myGreeting, 500)
+
+                                const socket = io('http://localhost:3000');
+                                socket.emit('joinRoom', { chatId: response[0].id });
+
                                 function myGreeting() {
                                     chatId = response[0].id;
                                     tenatIid = tenatId;
@@ -3605,47 +3618,75 @@
                                     localStorage.setItem("tenantId", tenatId)
                                     localStorage.setItem("tenantName", tenatName)
                                     $.ajax({
-                                        url: 'https://backend.app.spaderent.com/api/spade/LandlordMessages/' + localStorage.getItem("chatId"),
+                                        url: 'https://backend.app.spaderent.com/api/spade/getUserById/'+ Number(tenatId)+ '/tenant',
                                         type: 'GET',
-                                        contentType: 'application/json',
+                                        contentType: false,
                                         processData: false,
-                                        headers: {
-                                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                                        },
                                         success: function (response) {
-                                            $('#person-name-bold').text(tenatName)
-                                            $('#chat').show()
-                                            console.log(response.data.length);
-                                            if (response.message == 'Messages fetched successfully' && response.data.length > 0) {
-                                                for (var i = 0; i < response.data.length; i++) {
-                                                    if (response.data[i]['userType'] == "landlord") {
-                                                        const timeArray = response.data[i]['created_at'].split(" ")[1].split(":");
-                                                        const time = timeArray.slice(0, 2).join(":");
-                                                        messs1 += `<div class="msg-text owner">
+                                            console.log("getUserById");
+                                            console.log(response);
+                                            if(response.data.isTenantActive == 1){
+                                                $('.online').show()
+                                            }else{
+                                                $('.online').hide()
+                                            }
+                                                $.ajax({
+                                                    url: 'https://backend.app.spaderent.com/api/spade/LandlordMessages/' + localStorage.getItem("chatId"),
+                                                    type: 'GET',
+                                                    contentType: 'application/json',
+                                                    processData: false,
+                                                    headers: {
+                                                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                                                    },
+                                                    success: function (response) {
+
+                                                        $('#person-name-bold').text(tenatName)
+                                                        $('#chat').show()
+                                                        console.log(response.data.length);
+                                                        if (response.message == 'Messages fetched successfully' && response.data.length > 0) {
+                                                            for (var i = 0; i < response.data.length; i++) {
+                                                                if (response.data[i]['userType'] == "landlord") {
+                                                                    const timeArray = response.data[i]['created_at'].split(" ")[1].split(":");
+                                                                    const time = timeArray.slice(0, 2).join(":");
+                                                                    messs1 += `<div class="msg-text owner">
                                                 <span class="text">`+ response.data[i]['message'] + `</span>
                                                 <span style="float: right;">`+ time + `</span>
                                             </div>`;
-                                                    } else if (response.data[i]['userType'] == "tenant") {
-                                                        const timeArray = response.data[i]['created_at'].split(" ")[1].split(":");
-                                                        const time = timeArray.slice(0, 2).join(":");
-                                                        messs1 += `<div class="msg-text">
+                                                                } else if (response.data[i]['userType'] == "tenant") {
+                                                                    const timeArray = response.data[i]['created_at'].split(" ")[1].split(":");
+                                                                    const time = timeArray.slice(0, 2).join(":");
+                                                                    messs1 += `<div class="msg-text">
                                                 <span class="text">`+ response.data[i]['message'] + `</span>
                                                 <span style="float: left;">`+ time + `</span>
                                             </div>`;
-                                                    }
-                                                }
-                                            } else {
-                                                messs1 = `<div class="time">No Message</div>`;
-                                            }
+                                                                }
+                                                            }
+                                                        } else {
+                                                            messs1 = `<div class="time">No Message</div>`;
+                                                        }
 
-                                            messDiv.html(messs1);
+                                                        messDiv.html(messs1);
+                                                        messDiv.scrollTop(messDiv[0].scrollHeight);
+                                                        // var chatContent = $("#chatContent");
+                                                        var scrollBottom = messDiv.prop("scrollHeight");
+                                                        messDiv.scrollTop(scrollBottom);
+                                                    },
+                                                    error: function (xhr, status, error) {
+                                                        console.log(error);
+                                                    }
+                                                });
+                                            
                                         },
                                         error: function (xhr, status, error) {
                                             console.log(error);
                                         }
                                     });
+
                                 }
                                 myGreeting();
+
+
+
                             },
                             error: function (xhr, status, error) {
                                 console.log(error);
@@ -3654,7 +3695,7 @@
                     });
                 };
                 fetchChatMessages(); // Run immediately
-    setInterval(fetchChatMessages, 10000); 
+                // setInterval(fetchChatMessages, 10000);
             }
             $(document).ready(function () {
                 $.ajax({
@@ -3672,7 +3713,7 @@
                         let tenantNames = []
                         response.data[0]?.forEach(function (tenant) {
                             var row = `<a href="javascript:void(0)" onclick="chatTenant(` + tenant.tenantID + `,'` + tenant.firstName + ` ` + tenant.lastName + `',this)"><div class="media new border-top-0 " data-id="` + tenant.tenantID + `">
-                                                            <div class="main-img-user online">
+                                                            <div class="main-img-user">
                                                                 <img alt="" src="../assets/images/users/5.jpg">
                                                             </div>
                                                             <div class="media-body">

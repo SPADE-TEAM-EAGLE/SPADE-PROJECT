@@ -1609,7 +1609,83 @@
         </div>
     </div>
     <!-- /GLOBAL-LOADER -->
-
+    <div class="modal fade effect-scale" id="modaldemo8" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-l" role="document">
+            <div class="modal-content">
+                <!-- <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+                </div> -->
+                <div class="modal-body pt-5">
+                    <div class="d-flex flex-column justify-content-center align-items-center p-5"
+                        style="text-align: center;">
+                        <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" style="max-width: 110px;"
+                            class="Rent-logo mb-5" />
+                        <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
+                        <h6 class="text-default mb-3">Enter a 6-digit code to verify email address</h6>
+                        <input id="token" name="token" type="phone" class="form-control form mb-2" pattern="[0-9]{5}"
+                            maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                            style="min-width: 200px;max-width: 350px;" data-bs-placement="top" data-bs-toggle="tooltip"
+                            title="" data-bs-original-title="Enter the name of the property.">
+                        <input type="password" class="form-control form mb-2" id="id_password1"
+                            aria-describedby="emailHelp" placeholder="Password" data-bs-placement="top"
+                            data-bs-toggle="tooltip" title="" data-bs-original-title="Enter password here.">
+                        <!-- <a class="text-primary mb-4" href="javascript:void(0)">Change Email</a> -->
+                        <span class="mt-1 text-danger" id="passnotmatch1" style="display: none;">
+                            MUST be atleast 8 characters long, Must contain atleast One Uppercase and One symbol.
+                        </span>
+                        <div class="">
+                            <!-- <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2">Remind me Later</a> -->
+                            <a href="javascript:void(0)" class="btn btn-primary btn-pill disabled"
+                                id="verify-btn">Verify</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-primary">Save changes</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <div class="modal fade effect-scale" id="modaldemo00" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-l" role="document">
+            <div class="modal-content">
+                <!-- <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+                </div> -->
+                <div class="modal-body pt-5">
+                    <div class="d-flex flex-column justify-content-center align-items-center p-5"
+                        style="text-align: center;">
+                        <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" style="max-width: 110px;"
+                            class="Rent-logo mb-5" />
+                        <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
+                        <h6 class="text-default mb-3">Get started with Spade Rent! You have<span id="days-left"></span>
+                            left</h6>
+                        <input type="email" class="form-control form mb-2" style="min-width: 200px;max-width: 350px;"
+                            data-bs-placement="top" data-bs-toggle="tooltip" title=""
+                            data-bs-original-title="Enter the name of the property." readonly id="user-email">
+                        <a class="text-primary mb-4" href="javascript:void(0)" id="change-email">Change Email</a>
+                        <a class="text-primary mb-4 d-none" href="javascript:void(0)" id="save-email">Save Email</a>
+                        <div class="">
+                            <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2"
+                                id="remind-later">Remind me Later</a>
+                            <a href="javascript:void(0)" class="btn btn-primary btn-pill" id="send-email">Send Mail</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-primary">Save changes</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
     <!-- Default Offcanvas-->
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
         <div class="offcanvas-header pt-5">
@@ -1841,7 +1917,7 @@
                 <div class="modal-footer">
                     <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
                         Draft</button>
-                    <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id="close" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the unique identifier for the property." style="width: fit-content;">Close</button>
+                    <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id="close" data-bs-placement="top" style="width: fit-content;">Close</button>
                     <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a>
                     <a href="javascript:void(0)" class="btn btn-outline-primary text-light button btn-pill" style="background-color:#1467B0;" id="next">Next</a>
                 </div>
@@ -2047,10 +2123,16 @@
                                             </a>
                                         </div>
                                         <div class="d-flex country mt-2">
+                                            <a class="nav-link icon text-dark customIntercomButton">
+                                        <i class="fi fi-rs-interrogation"></i>
+                                       
+                                            </a>
+                                        </div>
+                                        <!-- <div class="d-flex country mt-2">
                                             <a class="nav-link icon text-dark">
                                                 <i class="fi fi-rs-universal-access"></i>
                                             </a>
-                                        </div>
+                                        </div> -->
                                         <!-- 1 comments start  -->
                                         <!-- <div class="d-flex country">
                                             <img src="../assets\header-img\comment.svg"
@@ -2065,11 +2147,11 @@
                                         </div>
                                         <!-- 1 comments start  -->
                                         <!-- 2 comments start  -->
-                                        <div class="d-flex country mt-2">
+                                        <!-- <div class="d-flex country mt-2">
                                             <a class="nav-link icon text-dark">
                                                 <i class="fi fi-rs-interrogation"></i>
                                             </a>
-                                        </div>
+                                        </div> -->
                                         <!-- <div class="d-flex country">
                                             <img src="../assets\header-img\question-light.webp"
                                                 class="avatarr profile-user nav-link brroundd cover-image light-layout">
@@ -2225,21 +2307,23 @@
                                         Profile</span>
                                 </a>
                             </li> -->
-                            <li class="slide">
-                                <div class="M-0 mt-3 mb-4" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
-                                    <div class="card-header pb-0 border-bottom-0">
-                                        <i class="side-menu__icon fi fi-rs-rocket-lunch mb-0"></i>
-                                        <h3 class="card-title side-menu__label">&nbsp; Complete your Profile
-                                        </h3>
-
-                                    </div>
-                                    <div class="card-body pt-0">
-                                        <div class="side-menu__label progress progress-md mt-5">
-                                            <div class="progress-bar bg-info" style="width: 40%;">40%</div>
+                            <a href="settings.html" class="text-dark">
+                                <li class="slide">
+                                    <div class="M-0 mt-3 mb-4" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
+                                        <div class="card-header pb-0 border-bottom-0">
+                                            <i class="side-menu__icon fi fi-rs-rocket-lunch mb-0"></i>
+                                            <h3 class="card-title side-menu__label">&nbsp; Complete your Profile
+                                            </h3>
+    
+                                        </div>
+                                        <div class="card-body pt-0">
+                                            <div class="side-menu__label progress progress-md mt-5">
+                                                <!-- <div class="progress-bar bg-info" style="width: 40%;">40%</div> -->
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </li>
+                                </li>
+                            </a>
                             <li class="slide">
                                 <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html"><i
                                         class="side-menu__icon fi fi-rs-dashboard"></i><span
@@ -2436,13 +2520,13 @@
                                                     <div class="col-xl-4 mb-3 mt-5">
                                                         <label for="fname1"><b>First name</b></label>
                                                         <input type="text" class="form-control" id="firstName"
-                                                            placeholder="John" required>
+                                                            placeholder="Enter First name" required>
                                                         <div class="valid-feedback">Looks good!</div>
                                                     </div>
                                                     <div class="col-xl-4 mb-3 mt-5">
                                                         <label for="lname1"><b>Last name</b></label>
                                                         <input type="text" class="form-control" id="lastName"
-                                                            placeholder="Clark" required>
+                                                            placeholder="Enter Last name" required>
                                                         <div class="valid-feedback">Looks good!</div>
                                                     </div>
                                                     <div class="col-lg-4"></div>
@@ -2455,14 +2539,14 @@
 
                                                     <div class="col-xl-4 mb-3">
                                                         <label for="phone1"><b>Phone</b></label><br>
-                                                        <input id="phone1" name="phone" class="form-control" type="tel">
+                                                        <input id="phone1" name="phone" class="form-control" type="tel" placeholder="Enter Phone">
                                                         <div class="valid-feedback">Looks good!</div>
                                                     </div>
                                                     <div class="col-lg-4"></div>
                                                     <div class="col-xl-8 mb-3">
                                                         <label for="bname1"><b>Business Name</b></label>
                                                         <input type="text" class="form-control" id="businessName"
-                                                            placeholder="" required>
+                                                            placeholder="Enter Business Name" required>
                                                         <div class="valid-feedback">Looks good!</div>
                                                     </div>
 
@@ -2475,14 +2559,14 @@
                                                             <div class="col-xl-8 mb-3">
                                                                 <label for="saddress1"><b>Street Address</b></label>
                                                                 <input type="text" class="form-control"
-                                                                    id="streetAddress" placeholder=" Houston" required>
+                                                                    id="streetAddress" placeholder="Enter My Mailing Address" required>
                                                                 <div class="valid-feedback">Looks good!</div>
                                                             </div>
 
                                                             <div class="col-xl-8 mb-3">
                                                                 <label for="baddress1"><b>Business Address</b></label>
                                                                 <input type="text" class="form-control"
-                                                                    id="businessAddress" placeholder="Taxes" required>
+                                                                    id="businessAddress" placeholder="Enter Business Address" required>
                                                                 <div class="valid-feedback">Looks good!</div>
                                                             </div>
 
@@ -2518,9 +2602,7 @@
                                                             <label for="validationCustom01"><b>New Password</b></label>
                                                             <input type="password" class="form-control"
                                                                 id="id_password1" aria-describedby="emailHelp"
-                                                                placeholder="Password" data-bs-placement="top"
-                                                                data-bs-toggle="tooltip" title=""
-                                                                data-bs-original-title="Enter password here.">
+                                                                placeholder="Enter Password">
                                                             <i class="fi fi-rs-eye text-dark fs-20" id="togglePassword1"
                                                                 style="cursor: pointer;
                                                                 float: right;
@@ -2541,9 +2623,7 @@
                                                                     Password</b></label>
                                                             <input type="password" class="form-control"
                                                                 id="id_password2" aria-describedby="emailHelp"
-                                                                placeholder="Confirm Password" data-bs-placement="top"
-                                                                data-bs-toggle="tooltip" title=""
-                                                                data-bs-original-title="Enter the same password here.">
+                                                                placeholder="Confirm Password">
                                                             <i class="fi fi-rs-eye text-dark fs-20" id="togglePassword2"
                                                                 style="cursor: pointer;
                                                                 float: right;
@@ -2946,7 +3026,7 @@
                                                                                         </div>
                                                                                         <div
                                                                                             class="col-lg-3 col-xl-3 col-md-8 col-sm-12 mb-3">
-                                                                                            <div class="h-100 card p-3 pricing-card card-boder-warning card-primary"
+                                                                                            <div class="h-100 card p-3 pricing-card card-boder-warning"
                                                                                                 id="5">
                                                                                                 <div
                                                                                                     class="card-headerr d-block text-justified pt-2">
@@ -7742,11 +7822,7 @@
                                                                                         *</span></label>
                                                                                 <input type="text"
                                                                                     class="form-control form"
-                                                                                    id="propertyName"
-                                                                                    data-bs-placement="top"
-                                                                                    data-bs-toggle="tooltip" title=""
-                                                                                    data-bs-original-title="Enter the name of the property."
-                                                                                    data-bs-container="#addModal">
+                                                                                    id="propertyName" placeholder="Enter Account Name">
                                                                                 <span
                                                                                     class="text-danger d-none">Property
                                                                                     name required!</span>
@@ -7818,9 +7894,6 @@
                         Draft</button> -->
                                                             <button class="btn btn-outline-default btn-pill button"
                                                                 data-bs-dismiss="modal" id='close'
-                                                                data-bs-placement="top" data-bs-toggle="tooltip"
-                                                                title=""
-                                                                data-bs-original-title="Enter the unique identifier for the property."
                                                                 style="width: auto;">Close</button>
                                                             <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
                                                             <a href="javascript:void(0)"
@@ -7910,7 +7983,7 @@
                                                                     <th>PROPERTY NAME</th>
                                                                     <th>AMOUNT</th>
                                                                     <th>STATUS</th>
-                                                                    <th><i class="fe fe-more-vertical" data-bs-toggle="tooltip" title="" data-bs-original-title="fe fe-more-vertical" aria-label="fe fe-more-vertical"></i></th>
+                                                                    <th><i class="fe fe-more-vertical"></i></th>
                                                                 </tr>
                                                             </thead> -->
                                                             <tbody id="table_body">
@@ -8121,11 +8194,7 @@
                                                                         Account Closure</b>
                                                                     <spnan class="text-danger">*</span>
                                                                 </label>
-                                                                <select id="state" class="form-select form" required
-                                                                    data-bs-placement="top" data-bs-toggle="tooltip"
-                                                                    title=""
-                                                                    data-bs-original-title="Enter your state here"
-                                                                    data-bs-container="#addModal">
+                                                                <select id="state" class="form-select form" required>
                                                                     <option selected>Select Reason</option>
                                                                     <option>1</option>
                                                                     <option>2</option>
@@ -8142,9 +8211,7 @@
                                                                     <input type="password" class="form-control"
                                                                         name="password" id="current_password"
                                                                         aria-describedby="emailHelp"
-                                                                        placeholder="Password" data-bs-placement="top"
-                                                                        data-bs-toggle="tooltip" title=""
-                                                                        data-bs-original-title="Enter password here.">
+                                                                        placeholder="Enter Current Password">
                                                                     <i class="fi fi-rs-eye text-dark fs-20 toggle-password"
                                                                         toggle="#current_password" style="cursor: pointer;
                                                                 float: right;
@@ -8161,9 +8228,7 @@
                                                                     <input type="password" class="form-control"
                                                                         name="password" id="confirm_password"
                                                                         aria-describedby="emailHelp"
-                                                                        placeholder="Password" data-bs-placement="top"
-                                                                        data-bs-toggle="tooltip" title=""
-                                                                        data-bs-original-title="Enter password here.">
+                                                                        placeholder="Enter Confirm Password">
                                                                     <i class="fi fi-rs-eye text-dark fs-20 toggle-password"
                                                                         toggle="#confirm_password" style="cursor: pointer;
                                                                 float: right;
@@ -8996,7 +9061,7 @@
         <script src="../assets/js/froala.js"></script>
         <!-- Color Theme js -->
         <script src="../assets/js/themeColors.js"></script>
-
+<script src="../assets/js/intercom.js"></script>
         <!-- Switcher js -->
         <!-- <script src="../assets/switcher/js/switcher.js"></script> -->
 
@@ -9035,8 +9100,33 @@
         <!-- <script src="../assets/js/form-wizard.js"></script> -->
         <!-- <script src="../assets/js/getNotification.js"></script></script> -->
         <!-- <script src="https://code.jquery.com/jquery-latest.min.js"></script> -->
+        <script src="../assets/js/email-verification.js"></script>
+    <script src="../assets/js/intercom.js"></script>
         <script>
             $(document).ready(function () {
+                $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    console.log(response);
+                    var myprogress = `<div class="progress-bar bg-info" style="width: `+response.count+`%;">`+response.count+`%</div>`;
+                    $(".progress").html(myprogress)
+                },
+                error: function (xhr, status, error) {
+                    // $("#myModal_warning").modal("show");
+                    // setTimeout(function () {
+                    //     $('#myModal_warning').modal('hide');
+                    //     window.location = '../Landlord/login_module.html';
+                    // }, 2000);
+                    console.log('Error occurred while fetching state and city data.');
+                    console.log(xhr);
+                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                }
+            });
     $(".label").click(function () {
         $(".activee").removeClass("activee");
         $(this).addClass("activee");
@@ -10385,10 +10475,27 @@ imageIds.forEach(id => {
         </script>
         <script>
             function logout() {
-                localStorage.removeItem('authtoken');
-                window.close();
-                window.open('./login_module.html', "_blank")
-                console.log('Done');
+                $(document).ready(function () {
+                    $.ajax({
+                        url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                        type: 'PUT',
+                        contentType: false,
+                        processData: false,
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            console.log(response);
+                            localStorage.removeItem('authtoken');
+                            window.close();
+                            window.open('./login_module.html', "_blank")
+                            console.log('Done');
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(error);
+                        }
+                    });
+                });
             }
         </script>
 
