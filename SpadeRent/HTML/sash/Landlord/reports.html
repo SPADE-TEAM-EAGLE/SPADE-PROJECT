@@ -2947,10 +2947,10 @@
                                                                 </div>
                                                             </div>
                                                             <div class="d-flex">
-                                                                <button type="button" class="btn btn-primary mx-2"
+                                                                <button type="button" class="btn btn-primary mx-2" onclick="exportTableToCSV2('person.csv')"
                                                                     id="add_property_btn"><strong>Export as CSV</strong></button>
                                                                 <button type="button" class="btn btn-primary mx-2"
-                                                                    id="add_property_btn"><strong>Export as PDF</strong></button>
+                                                                    id="download_pdf_reports2"><strong>Export as PDF</strong></button>
                                                                 <div class="btn-group">
                                                                     <button type="button"
                                                                         class="btn font-weight-bold text-dark"
@@ -3023,9 +3023,9 @@
                                                             </div>
                                                         </div>
                                                         <div class="card-body p-0">
-                                                            <div class="table-responsive">
+                                                            <div class="table-responsive" id="htmlContent2">
                                                                 <table
-                                                                    class="table border text-nowrap text-md-nowrap mb-0"
+                                                                    class="table border text-nowrap text-md-nowrap mb-0 property-reports2"
                                                                     id="responsive-datatable">
                                                                     <thead>
                                                                         <tr>
@@ -3034,7 +3034,8 @@
                                                                             <th>PROPERTY TYPE</th>
                                                                             <th>UNIT NUMBER</th>
                                                                             <th>LEASE EXPIRY</th>
-                                                                            <th>TENANT NAME & PHONE</th>
+                                                                            <th>TENANT NAME</th>
+                                                                            <th>TENANT PHONE</th>
                                                                             
                                                                         </tr>
                                                                     </thead>
@@ -3137,10 +3138,10 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="d-flex">
-                                                                    <button type="button" class="btn btn-primary mx-2"
+                                                                    <button type="button" class="btn btn-primary mx-2" onclick="exportTableToCSV3('person.csv')"
                                                                         id="add_property_btn"><strong>Export as CSV</strong></button>
                                                                     <button type="button" class="btn btn-primary mx-2"
-                                                                        id="add_property_btn"><strong>Export as PDF</strong></button>
+                                                                        id="download_pdf_reports3"><strong>Export as PDF</strong></button>
                                                                     <div class="btn-group">
                                                                         <button type="button"
                                                                             class="btn font-weight-bold text-dark"
@@ -3221,9 +3222,9 @@
                                                                 </div>
                                                             </div>
                                                             <div class="card-body p-0">
-                                                                <div class="table-responsive">
+                                                                <div class="table-responsive" id="htmlContent3">
                                                                     <table
-                                                                        class="table border text-nowrap text-md-nowrap mb-0"
+                                                                        class="table border text-nowrap text-md-nowrap mb-0 property-reports3"
                                                                         id="responsive-datatable">
                                                                         <thead>
                                                                             <tr>
@@ -3234,7 +3235,8 @@
                                                                                 <th>UNIT NUMBER</th>
                                                                                 <th>LEASE START DATE</th>
                                                                                 <th>LEASE END DATE</th>
-                                                                                <th>TENANT NAME & PHONE</th>
+                                                                                <th>TENANT NAME</th>
+                                                                                <th>TENANT PHONE</th>
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody id="table_body_tenant_report">
@@ -3346,11 +3348,11 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="d-flex">
-                                                                <button type="button" class="btn btn-primary mx-2"
+                                                            <div class="d-flex"> 
+                                                                <button type="button" class="btn btn-primary mx-2" onclick="exportTableToCSV4('person.csv')"
                                                                     id="add_property_btn"><strong>Export as CSV</strong></button>
                                                                 <button type="button" class="btn btn-primary mx-2"
-                                                                    id="add_property_btn"><strong>Export as PDF</strong></button>
+                                                                    id="download_pdf_reports4"><strong>Export as PDF</strong></button>
                                                                 <div class="btn-group">
                                                                     <button type="button"
                                                                         class="btn font-weight-bold text-dark"
@@ -3413,8 +3415,8 @@
                                                             </div>
                                                         </div>
                                                         <div class="card-body p-0">
-                                                            <div class="table-responsive">
-                                                                <table class="table border text-nowrap text-md-nowrap mb-0" id="myTable">
+                                                            <div class="table-responsive" id="htmlContent4">
+                                                                <table class="table border text-nowrap text-md-nowrap mb-0 property-reports4" id="myTable">
                                                                     <thead>
                                                                         <tr>
                                                                             <th>INVOICE NO</th>
@@ -3517,10 +3519,10 @@
                                                                 </div>
                                                             </div>
                                                             <div class="d-flex">
-                                                                <button type="button" class="btn btn-primary mx-2"
+                                                                <button type="button" class="btn btn-primary mx-2" onclick="exportTableToCSV5('person.csv')"
                                                                     id="add_property_btn"><strong>Export as CSV</strong></button>
                                                                 <button type="button" class="btn btn-primary mx-2"
-                                                                    id="add_property_btn"><strong>Export as PDF</strong></button>
+                                                                    id="download_pdf_reports5"><strong>Export as PDF</strong></button>
                                                                 <div class="btn-group">
                                                                     <button type="button"
                                                                         class="btn font-weight-bold text-dark"
@@ -3593,8 +3595,8 @@
                                                                 
                                                             </div>
                                                         </div>
-                                                        <div class="card-body p-0">
-                                                            <table class="table border text-nowrap text-md-nowrap mb-0">
+                                                        <div class="card-body p-0" id="htmlContent5">
+                                                            <table class="table border text-nowrap text-md-nowrap mb-0 property-reports5">
                                                     <thead>
                                                         <tr>
 
@@ -4441,6 +4443,90 @@
                 };
                 html2pdf().from(invoice).set(opt).save();
             })
+            document.getElementById("download_pdf_reports2").addEventListener("click", () => {
+            
+            const invoice = this.document.getElementById("htmlContent2");
+            var opt = {
+                margin: 0.1,
+                filename: `${name}.pdf`,
+                image: {
+                    type: 'jpeg',
+                    quality: 0.98
+                },
+                html2canvas: {
+                    scale: 2
+                },
+                jsPDF: {
+                    unit: 'in',
+                    format: 'A3',
+                    orientation: 'portrait'
+                }
+            };
+            html2pdf().from(invoice).set(opt).save();
+        })
+        document.getElementById("download_pdf_reports3").addEventListener("click", () => {
+            
+            const invoice = this.document.getElementById("htmlContent3");
+            var opt = {
+                margin: 0.1,
+                filename: `${name}.pdf`,
+                image: {
+                    type: 'jpeg',
+                    quality: 0.98
+                },
+                html2canvas: {
+                    scale: 2
+                },
+                jsPDF: {
+                    unit: 'in',
+                    format: 'A3',
+                    orientation: 'portrait'
+                }
+            };
+            html2pdf().from(invoice).set(opt).save();
+        })
+        document.getElementById("download_pdf_reports4").addEventListener("click", () => {
+            
+            const invoice = this.document.getElementById("htmlContent4");
+            var opt = {
+                margin: 0.1,
+                filename: `${name}.pdf`,
+                image: {
+                    type: 'jpeg',
+                    quality: 0.98
+                },
+                html2canvas: {
+                    scale: 2
+                },
+                jsPDF: {
+                    unit: 'in',
+                    format: 'A3',
+                    orientation: 'portrait'
+                }
+            };
+            html2pdf().from(invoice).set(opt).save();
+        })
+        document.getElementById("download_pdf_reports5").addEventListener("click", () => {
+            
+            const invoice = this.document.getElementById("htmlContent5");
+            var opt = {
+                margin: 0.1,
+                filename: `${name}.pdf`,
+                image: {
+                    type: 'jpeg',
+                    quality: 0.98
+                },
+                html2canvas: {
+                    scale: 2
+                },
+                jsPDF: {
+                    unit: 'in',
+                    format: 'A3',
+                    orientation: 'portrait'
+                }
+            };
+            html2pdf().from(invoice).set(opt).save();
+        })
             // PDF CODE END
     </script>
         <script>
@@ -4465,6 +4551,66 @@
                //declare a JavaScript variable of array type
                var csv = [];
                var rows = document.querySelectorAll(".property-reports tr");
+             
+               //merge the whole data in tabular form 
+               for(var i=0; i<rows.length; i++) {
+                var row = [], cols = rows[i].querySelectorAll("td, th");
+                for( var j=0; j<cols.length; j++)
+                   row.push(cols[j].innerText);
+                csv.push(row.join(","));
+               } 
+               //call the function to download the CSV file
+               downloadCSV(csv.join("\n"), filename);
+            }
+            function exportTableToCSV2(filename) {
+               //declare a JavaScript variable of array type
+               var csv = [];
+               var rows = document.querySelectorAll(".property-reports2 tr");
+             
+               //merge the whole data in tabular form 
+               for(var i=0; i<rows.length; i++) {
+                var row = [], cols = rows[i].querySelectorAll("td, th");
+                for( var j=0; j<cols.length; j++)
+                   row.push(cols[j].innerText);
+                csv.push(row.join(","));
+               } 
+               //call the function to download the CSV file
+               downloadCSV(csv.join("\n"), filename);
+            }
+            function exportTableToCSV3(filename) {
+               //declare a JavaScript variable of array type
+               var csv = [];
+               var rows = document.querySelectorAll(".property-reports3 tr");
+             
+               //merge the whole data in tabular form 
+               for(var i=0; i<rows.length; i++) {
+                var row = [], cols = rows[i].querySelectorAll("td, th");
+                for( var j=0; j<cols.length; j++)
+                   row.push(cols[j].innerText);
+                csv.push(row.join(","));
+               } 
+               //call the function to download the CSV file
+               downloadCSV(csv.join("\n"), filename);
+            }
+            function exportTableToCSV4(filename) {
+               //declare a JavaScript variable of array type
+               var csv = [];
+               var rows = document.querySelectorAll(".property-reports4 tr");
+             
+               //merge the whole data in tabular form 
+               for(var i=0; i<rows.length; i++) {
+                var row = [], cols = rows[i].querySelectorAll("td, th");
+                for( var j=0; j<cols.length; j++)
+                   row.push(cols[j].innerText);
+                csv.push(row.join(","));
+               } 
+               //call the function to download the CSV file
+               downloadCSV(csv.join("\n"), filename);
+            }
+            function exportTableToCSV5(filename) {
+               //declare a JavaScript variable of array type
+               var csv = [];
+               var rows = document.querySelectorAll(".property-reports5 tr");
              
                //merge the whole data in tabular form 
                for(var i=0; i<rows.length; i++) {
@@ -4574,10 +4720,12 @@ $("#user-img").attr("src",image)
                 '<td class="property-id" style="font-weight: 600;">' + lease.units + '</td>' +
                 '<td class="propertyAddress">' +
                 '<p style="font-weight: 600;" class="mb-1">' + formatDate(lease.LeaseExpire) + '</p>' +
-                '<span style="color: #4573D2;">' + remainingDays + ' Days Remaining</span>' +
+                // '<span style="color: #4573D2;">' + remainingDays + ' Days Remaining</span>' +
                 '</td>' +
                 '<td class="propertyUnits">' +
                 '<p style="font-weight: 800; color: #000;" class="mb-1">' + lease.firstName+" "+lease.lastName + '</p>' +
+                '</td>' +
+                '<td class="propertyUnits">' +
                 '<span class="font-weight-normal">Phone: ' + lease.phoneNumber + '</span>' +
                 '</td>' +
                 '</tr>';
@@ -4607,14 +4755,18 @@ $("#user-img").attr("src",image)
                 '<td class="property-id" style="font-weight: 600;">' + tenant.units + '</td>' +
                 '<td class="propertyAddress">' +
                 '<p style="font-weight: 600;" class="mb-1">' + formatDate(tenant.leaseEndDate) + '</p>' +
-                '<span style="color: #4573D2;">' + remainingDays + ' Days Remaining</span>' +
+                // '<span style="color: #4573D2;">' + remainingDays + ' Days Remaining</span>' +
                 '</td>' +
                 '<td class="propertyAddress">' +
                 '<p style="font-weight: 600;" class="mb-1">' + formatDate(tenant.leaseStartDate) + '</p>' +
-                '<span style="color: #4573D2;">' + remainingDays + ' Days Remaining</span>' +
+                // '<span style="color: #4573D2;">' + remainingDays + ' Days Remaining</span>' +
                 '</td>' +
                 '<td class="propertyUnits">' +
                 '<p style="font-weight: 800; color: #000;" class="mb-1">' + tenant.firstName+" "+tenant.lastName + '</p>' +
+                // '<span class="font-weight-normal">Phone: ' + tenant.phoneNumber + '</span>' +
+                '</td>' +
+                '<td class="propertyUnits">' +
+                // '<p style="font-weight: 800; color: #000;" class="mb-1">' + tenant.firstName+" "+tenant.lastName + '</p>' +
                 '<span class="font-weight-normal">Phone: ' + tenant.phoneNumber + '</span>' +
                 '</td>' +
                 '</tr>';

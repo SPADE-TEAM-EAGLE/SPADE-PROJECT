@@ -540,9 +540,9 @@
             box-sizing: border-box;
         }
 
-        ::-webkit-scrollbar {
+        /* ::-webkit-scrollbar {
             width: 6px;
-        }
+        } */
 
         ::-webkit-scrollbar-track {
             background: transparent;
@@ -623,7 +623,9 @@
             background: #09db84;
             border-radius: 50%;
         }
-
+        #input-message::placeholder {
+      color: rgba(20, 103, 176, 0.69); /* Set the desired color for the placeholder text */
+    }
         .chat {
             --bg: #fff;
             --bg-secundary: #e1e1e8;
@@ -639,7 +641,7 @@
             position: relative;
             color: var(--color);
             background: var(--bg);
-            border-radius: 20px;
+            border-radius: 7px;
             overflow: hidden;
             box-shadow: 0 8px 8px -4px #000 20;
             transition: all ease 0.5s;
@@ -680,6 +682,17 @@
             background: #EDF3F9;
             padding: 0.5em;
         }
+        .dark-mode .chat .conversation .head {
+            width: 100%;
+            min-height: 4em;
+            display: flex;
+            align-items: center;
+            gap: 1em;
+            background: black;
+            color: white;
+            padding: 0.5em;
+        }
+        
 
         .chat .conversation .head .buttons {
             display: flex;
@@ -697,6 +710,9 @@
             padding: 1em;
             overflow: auto;
             /* max-height: calc(100vh - 340px); */
+        }
+        .dark-mode .chat .conversation .messages{
+            background: #212121;
         }
 
         .chat .conversation .messages .time {
@@ -719,18 +735,18 @@
             display: block;
             padding: 1.5em;
             border-radius: 0.75em 0.75em 0.75em 0;
-            background: var(--bg-secundary);
+            background: #F8F8F8;
             box-shadow: 0 2px 0 #000 20;
         }
 
         .chat .conversation .messages .msg-text.owner {
-            margin-left: auto;
+            /* margin-left: auto; */
         }
 
         .chat .conversation .messages .msg-text.owner .text {
             color: #fff;
-            background: var(--bg-highlight);
-            border-radius: 0.75em 0.75em 0 0.75em;
+            background: #1467B0;
+            border-radius: 0.75em;
         }
 
         .chat .conversation .field {
@@ -743,6 +759,9 @@
             padding: 0.25em 0.5em;
             /* border-top: 1px solid var(--bg-secundary); */
             transition: all ease 0.5s;
+        }
+        .dark-mode .chat .conversation .field{
+background-color: black;
         }
 
         .chat .conversation .field .input-message {
@@ -786,7 +805,7 @@ background: #EDF3F9;
     display: flex;
     align-items: center;
     color: #fff;
-    background: var(--bg-highlight);
+    background: #1467B0;
     padding: 0.5em;
     border-radius: 50%;
     overflow: hidden;
@@ -796,6 +815,12 @@ background: #EDF3F9;
         .chat .conversation .field .send .audio {
             display: none;
         }
+        #messages::-webkit-scrollbar {
+  width: 5px; /* Set the width of the scrollbar */
+}
+.main-content-app::-webkit-scrollbar{
+    width: 5px; /* Set the width of the scrollbar */
+}
 
         .chat .options {
             min-width: 50%;
@@ -3542,6 +3567,7 @@ background: #EDF3F9;
                         console.log("getTenantByID");
                         // console.log(response.data);
                         localStorage.setItem("tenantId", response.data.tenantID)
+                        localStorage.setItem("TenantImg", response.data.images)
                         localStorage.setItem("tenantName", response.data.firstName + " " + response.data.lastName)
                         console.log(response)
                         localStorage.setItem("landloadId", Number(response.data.landlordID))
@@ -3644,17 +3670,26 @@ background: #EDF3F9;
                                                             if (response.data[i]['userType'] == "tenant") {
                                                                 const timeArray = response.data[i]['created_at'].split(" ")[1].split(":");
                                                                 const time = timeArray.slice(0, 2).join(":");
-                                                                messs1 += `<div class="msg-text owner">
-                                                    <span class="text">`+ response.data[i]['message'] + `</span>
-                                                    <span style="float: right;">`+ time + `</span>
-                                                </div>`;
+                                                                messs1 += `<div class="d-flex " style="align-items: flex-start;justify-content: end;"> 
+                                                                    <div class="msg-text owner">
+                                                                    <span class="text">`+ response.data[i]['message'] + `</span>
+                                                                    <span style="float: right;" class="text-primary">`+ time + `</span>
+                                                                    </div>
+                                                                    <div style="width: 36px;height: 36px;" class="ms-1"> 
+                                                                        <img src="`+localStorage.getItem("TenantImg")+`" style="border-radius: 50%;height: inherit;" class="message-image" />
+                                                                        </div> 
+                                                                    </div>`;
                                                             } else if (response.data[i]['userType'] == "landlord") {
                                                                 const timeArray = response.data[i]['created_at'].split(" ")[1].split(":");
                                                                 const time = timeArray.slice(0, 2).join(":");
-                                                                messs1 += `<div class="msg-text">
-                                                    <span class="text">`+ response.data[i]['message'] + `</span>
-                                                    <span style="float: right;">`+ time + `</span>
-                                                </div>`;
+                                                                messs1 += `<div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
+                                                                    <div style="width: 36px;height: 36px;" class="me-1"> 
+                                                                        <img src="../assets/images/users/5.jpg" style="border-radius: 50%;height: inherit;" class="message-image" />
+                                                                        </div> 
+                                                                    <div class="msg-text">
+                                                <span class="text">`+ response.data[i]['message'] + `</span>
+                                                <span style="float: right;" class="text-primary">`+ time + `</span>
+                                            </div> </div>`;
                                                             }
                                                         }
                                                     } else {
@@ -3803,17 +3838,50 @@ background: #EDF3F9;
                     if (msg) sendMessage(msg);
                 });
                 const sendMessage = (msg) => {
-                    //Create message
-                    const block = document.createElement('div');
-                    block.setAttribute('class', 'msg-text owner');
-                    const message = document.createElement('span');
-                    message.setAttribute('class', 'text');
-                    message.innerText = String(msg);
-                    //Append message
-                    block.appendChild(message);
-                    messages.appendChild(block);
-                    messages.scrollTo(0, 99999);
-                    //Clear input
+                    // Create main message container
+                    const mainContainer = document.createElement('div');
+                    mainContainer.setAttribute('class', 'd-flex');
+                    mainContainer.style.alignItems = 'flex-start';
+                    mainContainer.style.justifyContent = 'end';
+
+                    // Create message text container
+                    const messageContainer = document.createElement('div');
+                    messageContainer.setAttribute('class', 'msg-text owner');
+
+                    // Create message text span
+                    const messageText = document.createElement('span');
+                    messageText.setAttribute('class', 'text');
+                    messageText.innerText = msg;
+
+                    // Create timestamp span
+                    const timestampSpan = document.createElement('span');
+                    timestampSpan.setAttribute('style', 'float: right;');
+                    timestampSpan.setAttribute('class', 'text-primary');
+                    // const currentTime = new Date();
+                    // const time = currentTime.getHours() + ':' + currentTime.getMinutes();
+                    // timestampSpan.innerText = time;
+
+                    // Create image container
+                    const imageContainer = document.createElement('div');
+                    imageContainer.setAttribute('style', 'width: 36px; height: 36px;');
+                    imageContainer.setAttribute('class', 'ms-1');
+                    const image = document.createElement('img');
+                    image.setAttribute('src', localStorage.getItem("LandlordImg"));
+                    image.setAttribute('style', 'border-radius: 50%; height: inherit;');
+                    image.setAttribute('class', 'message-image');
+
+                    // Append elements
+                    mainContainer.appendChild(messageContainer);
+                    messageContainer.appendChild(messageText);
+                    messageContainer.appendChild(timestampSpan);
+                    mainContainer.appendChild(imageContainer);
+                    imageContainer.appendChild(image);
+
+                    // Append main container to the messages div
+                    messages.appendChild(mainContainer);
+                    messages.scrollTo(0, messages.scrollHeight);
+
+                    // Clear input
                     input.value = '';
                     input.focus();
                 };
