@@ -2291,17 +2291,12 @@
     <script src="http://localhost:3000/socket.io/socket.io.js"></script>
 
     <script>
-        const socket = io('http://localhost:3000'); 
-        socket.on('connect', () => {
-          console.log('Connected to Socket.IO server');
-        });
-        // Handle events from the server
-        socket.on('messageFromServer', (data) => {
-          console.log('Received message from server:', data);
-        });
-        // Emit events to the server
-        socket.emit('messageToServer', 'Hello from the client');
-      </script>
+      // Connect to the socket.io server
+      const socket = io('http://localhost:3000');
+      // This code won't emit a 'connection' event, as it's automatically handled by socket.io
+      // Handle events from the server
+      socket.emit('message', 'Hello from the client');
+    </script>
     <script>
 
         console.log(document.getElementById('customIntercomButton'))
