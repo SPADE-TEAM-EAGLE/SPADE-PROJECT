@@ -46,8 +46,7 @@ exports.createInvoice = async (req, res) => {
     lineItems,
     sendmails,
     totalAmount,
-    images,
-    notify
+    images
   } = req.body;
   try {
     const { userId } = req.user;
@@ -57,7 +56,7 @@ exports.createInvoice = async (req, res) => {
     //   throw new Error("Please fill all the fields");
     // }
     const currentDate = new Date();
-    const invoiceResult = await queryRunner(insertInvoice, [userId, tenantID, invoiceType, startDate, endDate, frequency, dueDate, dueDays, repeatTerms, terms, additionalNotes, "Unpaid", currentDate, totalAmount, startDate,notify]);
+    const invoiceResult = await queryRunner(insertInvoice, [userId, tenantID, invoiceType, startDate, endDate, frequency, dueDate, dueDays, repeatTerms, terms, additionalNotes, "Unpaid", currentDate, totalAmount, startDate]);
     if (invoiceResult.affectedRows === 0) {
       res.status(400).send("Error occur in creating invoice");
     } else {

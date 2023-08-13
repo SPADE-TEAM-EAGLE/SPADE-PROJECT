@@ -1,5 +1,9 @@
 const user = require("../models/user");
-const { sendMail, taskSendMail, sendMailLandlord } = require("../sendmail/sendmail.js");
+const {
+  sendMail,
+  taskSendMail,
+  sendMailLandlord,
+} = require("../sendmail/sendmail.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const fs = require("fs");
@@ -42,6 +46,13 @@ const {
   getTotalAmountPaid,
   getNumPropertyTenant,
   insertNotify,
+  getPropertiesGraphData,
+  getTaskGraphData,
+  getInvoiceGraphData,
+  updateUserActive,
+  getUserById,
+  getTenantById,
+  updateTenantActive,
 } = require("../constants/queries");
 
 const { hashedPassword } = require("../helper/hash");
@@ -49,6 +60,7 @@ const { queryRunner } = require("../helper/queryRunner");
 const { fileUpload, deleteImageFromS3 } = require("../helper/S3Bucket");
 const { verifyMailCheck } = require("../helper/emailVerify");
 const userServices = require("../Services/userServices");
+const { log } = require("console");
 const config = process.env;
 
 exports.createUser = async function (req, res) {
@@ -75,12 +87,11 @@ exports.createUser = async function (req, res) {
       phone,
       hashPassword,
       planID,
-      currentDate
+      currentDate,
     ]);
     const name = firstName + " " + lastName;
     const mailSubject = "Spade Welcome Email";
     if (insertResult[0].affectedRows > 0) {
-
       // console.log(name)
       // update notification table with user id
       // landlordID, emailNotification, pushNotification, textNotification
@@ -91,7 +102,7 @@ exports.createUser = async function (req, res) {
         selectResult[0][0].id,
         "yes",
         "yes",
-        "yes"
+        "yes",
       ]);
       // await sendMail(email, mailSubject, password, name);
       await sendMailLandlord(email, mailSubject, name);
@@ -105,7 +116,7 @@ exports.createUser = async function (req, res) {
 };
 exports.checkemail = async function (req, res) {
   const { email } = req.query;
-  console.log(req.query)
+  console.log(req.query);
   try {
     const selectResult = await queryRunner(selectQuery("users", "Email"), [
       email,
@@ -123,11 +134,9 @@ exports.checkemail = async function (req, res) {
     }
   } catch (error) {
     // res.status(500).send("Error");
-    res
-      .status(400)
-      .json({
-        message: error.message,
-      });
+    res.status(400).json({
+      message: error.message,
+    });
   }
 };
 
@@ -145,7 +154,8 @@ exports.getUser = (req, res) => {
     firstName: req.user.firstName,
     image: req.user.image,
     imageKey: req.user.imageKey,
-    planID: req.user.planID
+    planID: req.user.planID,
+    isActive : req.user.isActive
   });
 };
 
@@ -155,7 +165,7 @@ exports.Signin = async function (req, res) {
   // let selectResult;
   try {
     if (tenant == "tenant") {
-      console.log("tenant")
+      console.log("tenant");
       const selectResult = await queryRunner(selectQuery("tenants", "email"), [
         email,
       ]);
@@ -177,10 +187,10 @@ exports.Signin = async function (req, res) {
       }
     } else {
       // for landlord
+      await queryRunner(updateUserActive, [1, email])
       const selectResult = await queryRunner(selectQuery("users", "Email"), [
         email,
       ]);
-
       // }
       if (selectResult[0].length === 0) {
         res.status(400).send("Email not found");
@@ -188,6 +198,7 @@ exports.Signin = async function (req, res) {
         const token = jwt.sign({ email, password }, config.JWT_SECRET_KEY, {
           expiresIn: "3h",
         });
+        
         // const emai = "umairnazakat2222@gmail.com"
         //  const emailMessage =  await verifyMailCheck(email);
         if (selectResult[0][0].userVerified == "Email Verified") {
@@ -198,12 +209,15 @@ exports.Signin = async function (req, res) {
           });
         } else {
           const emailMessage = await verifyMailCheck(email);
-          if (emailMessage.message == "Your account is locked due to email verification. Please verify your email.") {
+          if (
+            emailMessage.message ==
+            "Your account is locked due to email verification. Please verify your email."
+          ) {
             res.status(200).json({
               token: token,
               body: selectResult[0][0],
               message: "Email is not verified",
-              msg: emailMessage.message
+              msg: emailMessage.message,
             });
           } else {
             res.status(200).json({
@@ -211,7 +225,7 @@ exports.Signin = async function (req, res) {
               body: selectResult[0][0],
               message: "Successful Login",
               msg: emailMessage.message,
-              email: email
+              email: email,
             });
           }
         }
@@ -241,16 +255,25 @@ exports.Signinall = async function (req, res) {
   }
 };
 exports.updateUserProfile = async function (req, res) {
-  const { firstName, lastName, email, phone, businessName, streetAddress, businessAddress, imageUrl, imageKey } = req.body;
+  const {
+    firstName,
+    lastName,
+    email,
+    phone,
+    businessName,
+    streetAddress,
+    businessAddress,
+    imageUrl,
+    imageKey,
+  } = req.body;
   const { userId } = req.user;
-  console.log(req.body)
-  console.log(userId)
+  console.log(req.body);
+  console.log(userId);
   try {
-    
     const selectResult = await queryRunner(selectQuery("users", "id"), [
       userId,
     ]);
-    // current date 
+    // current date
     const now = new Date();
     // const created_at = now.toISOString().slice(0, 19).replace("T", " ");
 
@@ -268,7 +291,9 @@ exports.updateUserProfile = async function (req, res) {
         email,
         phone,
         now,
-        businessName, streetAddress, businessAddress,
+        businessName,
+        streetAddress,
+        businessAddress,
         imageUrl,
         imageKey,
         userId,
@@ -281,12 +306,12 @@ exports.updateUserProfile = async function (req, res) {
       }
     }
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.status(400).json({
       message: error.message,
     });
   }
-}
+};
 
 exports.updatePlanId = async function (req, res) {
   const { userId } = req.user;
@@ -294,20 +319,16 @@ exports.updatePlanId = async function (req, res) {
     const selectResult = await queryRunner(selectQuery("users", "id"), [
       userId,
     ]);
-    // current date 
+    // current date
     const isUserExist = selectResult[0][0];
     if (!isUserExist) {
       // throw new Error("User not found");
       res.status(200).json({
-        message: "User not found"
+        message: "User not found",
       });
-
     }
     if (isUserExist) {
-      const updateUserParams = [
-        req.body.planID,
-        userId,
-      ];
+      const updateUserParams = [req.body.planID, userId];
       const updateResult = await queryRunner(updatePlanId, updateUserParams);
       if (updateResult[0].affectedRows > 0) {
         res.status(200).json({
@@ -320,7 +341,7 @@ exports.updatePlanId = async function (req, res) {
       message: error.message,
     });
   }
-}
+};
 
 //  ############################# Reset Email ############################################################
 exports.createResetEmail = async (req, res) => {
@@ -354,7 +375,7 @@ exports.createResetEmail = async (req, res) => {
       res.status(400).send("Email not found");
     }
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.status(400).send("Error");
   }
 };
@@ -415,7 +436,7 @@ exports.updatePassword = async (req, res) => {
           message: "Successful password saved",
         });
       } else {
-        console.log("here")
+        console.log("here");
         res.status(500).send("Error");
       }
     } else {
@@ -431,7 +452,7 @@ exports.updatePassword = async (req, res) => {
 //  ############################# resend Code ############################################################
 exports.resendCode = async (req, res) => {
   const { id } = req.body;
-  console.log(req.body)
+  console.log(req.body);
   const mailSubject = "Spade Reset Email";
   const random = Math.floor(100000 + Math.random() * 900000);
   try {
@@ -486,6 +507,133 @@ exports.pricingPlan = async (req, res) => {
 
 //  ############################# Property Start ############################################################
 
+// exports.property = async (req, res) => {
+//   const {
+//     // landlordID,
+//     propertyName,
+//     address,
+//     city,
+//     state,
+//     zipCode,
+//     propertyType,
+//     propertySQFT,
+//     units,
+//     images,
+    
+//   } = req.body;
+//   try {
+//     // const { userId } = req.user;
+//     const { userId, email } = req.user;
+//     // if (
+//     //   !propertyName ||
+//     //   !address ||
+//     //   !city ||
+//     //   !state ||
+//     //   !zipCode ||
+//     //   !propertyType ||
+//     //   !propertySQFT ||
+//     //   !units
+      
+//     // ) {
+//     //   // throw new Error("Please fill all the fields");
+//     //   res.status(200).json({
+//     //     message: "Please fill all the fields",
+//     //   });
+//     // }
+//     const currentDate = new Date();
+//     // this line check property already exist or not
+//     const propertycheckresult = await queryRunner(
+//       selectQuery("property", "propertyName", "address"),
+//       [propertyName, address]
+//     );
+//     if (propertycheckresult[0].length > 0) {
+//       // throw new Error("Property Already Exist");
+//       res.status(200).json({
+//         message: "Property Already Exist",
+//       });
+//     }
+//     // console.log("1");
+//     const status = "Non-active";
+//     console.log(userId);
+//     // this line insert data into property table
+//     const propertyResult = await queryRunner(insertInProperty, [
+//       userId,
+//       propertyName,
+//       address,
+//       city,
+//       state,
+//       zipCode,
+//       propertyType,
+//       propertySQFT,
+//       status,
+//       units,
+//       currentDate
+//     ]);
+//     // console.log("2");
+//     // if property data not inserted into property table then throw error
+//     if (propertyResult.affectedRows === 0) {
+//       // throw new Error("Data doesn't inserted in property table");
+//       res.status(200).json({
+//         message: "Data doesn't inserted in property table",
+//       });
+//     }
+//     if (propertyResult[0].affectedRows > 0) {
+//       const mailSubject = "Property Maintenance: " + propertyName;
+//       const landlordUser = await queryRunner(selectQuery("users", "id"), [
+//         userId,
+//       ]);
+//       const FullName =
+//         landlordUser[0][0].FirstName + " " + landlordUser[0][0].LastName;
+//       // await taskSendMail("tenantName", mailSubject, "dueDate", FullName, "property", "assignedTo", "priority", "companyName", "contactLandlord", userId, email);
+//     }
+//     const { insertId } = propertyResult[0];
+//     // we are using loop to send images data into
+
+//     for (let i = 0; i < images.length; i++) {
+//       const { image_url } = images[i];
+//       const { image_key } = images[i];
+//       const propertyImageResult = await queryRunner(insertInPropertyImage, [
+//         insertId,
+//         image_url,
+//         image_key,
+//       ]);
+    
+//       if (propertyImageResult.affectedRows === 0) {
+//         return res.status(400).json({
+//           message: "data doesn't inserted in property image table",
+//         });
+//       }
+//     }
+    
+//     // we are using loop to send units data into database
+//     for (let i = 0; i < units; i++) {
+//       const propertyResult = await queryRunner(insertInPropertyUnits, [
+//         insertId,
+//         "",
+//         "",
+//         "",
+//         "Vacant",
+//       ]);
+//       // if property units data not inserted into property units table then throw error
+//       if (propertyResult.affectedRows === 0) {
+//         // throw new Error("data doesn't inserted in property units table");
+//         res.status(200).json({
+//           message: "data doesn't inserted in property units table",
+//         });
+//       }
+//     }
+//     // if everything is ok then send message and property id
+//     res.status(200).json({
+//       message: "Property created successful",
+//       propertyId: propertyResult[0].insertId,
+//     });
+//   } catch (error) {
+//     res.status(400).json({
+//       message: "Error",
+//       error: error.message,
+//     });
+//   }
+// };
 exports.property = async (req, res) => {
   const {
     // landlordID,
@@ -497,26 +645,19 @@ exports.property = async (req, res) => {
     propertyType,
     propertySQFT,
     units,
-    images,
-    notify
+    images
   } = req.body;
   try {
     // const { userId } = req.user;
     const { userId, email } = req.user;
-    if (!propertyName || !address || !city || !state || !zipCode || !propertyType || !propertySQFT || !units || !notify) {
-      // throw new Error("Please fill all the fields");
-      res.status(200).json({
-        message: "Please fill all the fields",
-      });
+    if (!propertyName || !address || !city || !state || !zipCode || !propertyType || !propertySQFT || !units) {
+      throw new Error("Please fill all the fields");
     }
     const currentDate = new Date();
     // this line check property already exist or not
     const propertycheckresult = await queryRunner(selectQuery("property", "propertyName", "address"), [propertyName, address]);
     if (propertycheckresult[0].length > 0) {
-      // throw new Error("Property Already Exist");
-      res.status(200).json({
-        message: "Property Already Exist",
-      });
+      throw new Error("Property Already Exist");
     }
     // console.log("1");
     const status = "Non-active";
@@ -533,16 +674,12 @@ exports.property = async (req, res) => {
       propertySQFT,
       status,
       units,
-      currentDate,
-      notify
+      currentDate
     ]);
     // console.log("2");
     // if property data not inserted into property table then throw error
     if (propertyResult.affectedRows === 0) {
-      // throw new Error("Data doesn't inserted in property table");
-      res.status(200).json({
-        message: "Data doesn't inserted in property table",
-      });
+      throw new Error("Data doesn't inserted in property table");
     }
     if (propertyResult[0].affectedRows > 0) {
       const mailSubject = "Property Maintenance: " + propertyName;
@@ -565,10 +702,7 @@ exports.property = async (req, res) => {
       ]);
       // if property image data not inserted into property image table then throw error
       if (propertyImageResult.affectedRows === 0) {
-        // throw new Error("data doesn't inserted in property image table");
-        res.status(200).json({
-          message: "data doesn't inserted in property image table",
-        });
+        throw new Error("data doesn't inserted in property image table");
       }
     }
     // we are using loop to send units data into database
@@ -576,15 +710,12 @@ exports.property = async (req, res) => {
       const propertyResult = await queryRunner(insertInPropertyUnits, [insertId, "", "", "", "Vacant",]);
       // if property units data not inserted into property units table then throw error
       if (propertyResult.affectedRows === 0) {
-        // throw new Error("data doesn't inserted in property units table");
-        res.status(200).json({
-          message: "data doesn't inserted in property units table",
-        });
+        throw new Error("data doesn't inserted in property units table");
       }
     }
     // if everything is ok then send message and property id
     res.status(200).json({
-      message: "p  y created successful",
+      message: "Property created successful!!!",
       propertyId: propertyResult[0].insertId
     });
 
@@ -593,6 +724,7 @@ exports.property = async (req, res) => {
       message: "Error",
       error: error.message,
     });
+    console.log(error);
   }
 };
 
@@ -602,7 +734,7 @@ exports.property = async (req, res) => {
 
 exports.getproperty = async (req, res) => {
   const { userId, userName } = req.user;
-  console.log(userId)
+  console.log(userId);
   try {
     const allPropertyResult = await queryRunner(
       selectQuery("property", "landlordID"),
@@ -617,14 +749,12 @@ exports.getproperty = async (req, res) => {
           selectQuery("propertyimage", "propertyID"),
           [propertyID]
         );
-        console.log(allPropertyImageResult[0])
+        console.log(allPropertyImageResult[0]);
         if (allPropertyImageResult.length > 0) {
-          const propertyImages = allPropertyImageResult[0].map(
-            (image) => {
-              return { imageURL: image.Image, imageKey: image.ImageKey }
-            }
-          );
-          console.log(propertyImages)
+          const propertyImages = allPropertyImageResult[0].map((image) => {
+            return { imageURL: image.Image, imageKey: image.ImageKey };
+          });
+          console.log(propertyImages);
           // Extract image URLs from the result
           allPropertyResult[0][i].images = propertyImages; // Add property images to the current property object
         } else {
@@ -731,9 +861,33 @@ exports.propertyDelete = async (req, res) => {
 
 exports.propertyUpdate = async (req, res) => {
   try {
-    const { propertyName, address, city, state, zipCode, propertyType, propertySQFT, status, id, units, images } = req.body;
+    const {
+      propertyName,
+      address,
+      city,
+      state,
+      zipCode,
+      propertyType,
+      propertySQFT,
+      status,
+      id,
+      units,
+      images,
+    } = req.body;
     const { userId } = req.user;
-    const updateData = [userId, propertyName, address, city, state, zipCode, propertyType, propertySQFT, "Active", units, id]
+    const updateData = [
+      userId,
+      propertyName,
+      address,
+      city,
+      state,
+      zipCode,
+      propertyType,
+      propertySQFT,
+      "Active",
+      units,
+      id,
+    ];
     const updatedPropertyData = await queryRunner(updateProperty, updateData);
 
     if (updatedPropertyData[0].affectedRows) {
@@ -744,23 +898,29 @@ exports.propertyUpdate = async (req, res) => {
       );
       // console.log(images, propertycheckresult[0])
       // Extract the image keys from propertycheckresult
-      const propertyImageKeys = propertycheckresult[0].map(image => image.ImageKey);
-      console.log(propertyImageKeys)
+      const propertyImageKeys = propertycheckresult[0].map(
+        (image) => image.ImageKey
+      );
+      console.log(propertyImageKeys);
       // Find the images to delete from S3 (present in propertycheckresult but not in images)
-      const imagesToDelete = propertycheckresult[0].filter(image => !images.some(img => img.imageKey === image.ImageKey));
+      const imagesToDelete = propertycheckresult[0].filter(
+        (image) => !images.some((img) => img.imageKey === image.ImageKey)
+      );
       // Delete images from S3
       for (let i = 0; i < imagesToDelete.length; i++) {
         deleteImageFromS3(imagesToDelete[i].ImageKey);
         await queryRunner(delteImageFromDb, [imagesToDelete[i].ImageKey]);
       }
       // Find the images to insert into the database (present in images but not in propertycheckresult)
-      const imagesToInsert = images.filter(image => !propertyImageKeys.includes(image.imageKey));
+      const imagesToInsert = images.filter(
+        (image) => !propertyImageKeys.includes(image.imageKey)
+      );
       // Delete images from the database
       // Insert new images into the database
       await userServices.addImagesInDB(imagesToInsert, id);
 
       res.status(200).json({
-        message: "Property Updated Successfully!"
+        message: "Property Updated Successfully!",
       });
     }
   } catch (error) {
@@ -768,8 +928,7 @@ exports.propertyUpdate = async (req, res) => {
       message: error.message,
     });
   }
-}
-
+};
 
 // try {
 //   const {
@@ -801,7 +960,6 @@ exports.propertyUpdate = async (req, res) => {
 //   //   units,
 //   //   id,
 //   // ]);
-
 
 //   console.log(propertycheckresult , "propertycheckresult")
 //   if (propertyUpdateResult[0].affectedRows > 0) {
@@ -1204,7 +1362,7 @@ exports.viewAllPropertyTenant = async (req, res) => {
     let PropertyTenantResult;
     // console.log(id)
     PropertyTenantResult = await queryRunner(selectAllTenants, [userId]);
-    console.log(PropertyTenantResult[0])
+    console.log(PropertyTenantResult[0]);
     if (PropertyTenantResult[0].length > 0) {
       for (let i = 0; i < PropertyTenantResult[0].length; i++) {
         const tenantID = PropertyTenantResult[0][i].tenantID;
@@ -1352,8 +1510,6 @@ exports.getStates = async (req, res) => {
 };
 //  ############################# Get Property States End ############################################################
 
-
-
 //  ############################# Task property ############################################################
 exports.propertyTask = async (req, res) => {
   const { Id } = req.query;
@@ -1363,10 +1519,15 @@ exports.propertyTask = async (req, res) => {
     if (taskByIDResult.length > 0) {
       for (let j = 0; j < taskByIDResult[0].length; j++) {
         const taskID = taskByIDResult[0][j].id;
-        const TaskImagesResult = await queryRunner(selectQuery("taskimages", "taskID"), [taskID]);
-        // this is for task images 
+        const TaskImagesResult = await queryRunner(
+          selectQuery("taskimages", "taskID"),
+          [taskID]
+        );
+        // this is for task images
         if (TaskImagesResult[0].length > 0) {
-          const taskImages = TaskImagesResult[0].map((image) => image.taskImages);
+          const taskImages = TaskImagesResult[0].map(
+            (image) => image.taskImages
+          );
           taskByIDResult[0][j].taskImages = taskImages;
         } else {
           taskByIDResult[0][j].taskImages = ["No Task Images Found"];
@@ -1375,14 +1536,15 @@ exports.propertyTask = async (req, res) => {
           selectQuery("taskassignto", "taskId"),
           [taskID]
         );
-        const vendorIDs = TaskAssignToResult[0].map((vendorID) => vendorID.vendorId);
+        const vendorIDs = TaskAssignToResult[0].map(
+          (vendorID) => vendorID.vendorId
+        );
         const vendorData = [];
         for (let i = 0; i < vendorIDs.length; i++) {
           const vID = vendorIDs[i];
-          const vendorResult = await queryRunner(
-            selectQuery("vendor", "id"),
-            [vID]
-          );
+          const vendorResult = await queryRunner(selectQuery("vendor", "id"), [
+            vID,
+          ]);
           if (vendorResult.length > 0) {
             const categoryIDs = vendorResult[0][0].categoryID;
             const VendorCategoryResult = await queryRunner(
@@ -1391,7 +1553,10 @@ exports.propertyTask = async (req, res) => {
             );
             if (VendorCategoryResult.length > 0) {
               const vendorDataObject = {
-                name: vendorResult[0][0].firstName + " " + vendorResult[0][0].lastName,
+                name:
+                  vendorResult[0][0].firstName +
+                  " " +
+                  vendorResult[0][0].lastName,
                 businessName: vendorResult[0][0].businessName,
                 streetAddress: vendorResult[0][0].streetAddress,
                 workNumber: vendorResult[0][0].workNumber,
@@ -1424,15 +1589,16 @@ exports.propertyTask = async (req, res) => {
 
 //  ############################# Task property ############################################################
 
-
-
 //  ############################# Tenant verify Mail Check Start  ############################################################
 
 exports.verifyMailCheck = async (req, res) => {
   const { email } = req.user;
-  console.log(email)
+  console.log(email);
   try {
-    const selectTenantResult = await queryRunner(selectQuery("users", "Email"), [email]);
+    const selectTenantResult = await queryRunner(
+      selectQuery("users", "Email"),
+      [email]
+    );
     if (selectTenantResult[0].length > 0) {
       const createdDate = new Date(selectTenantResult[0][0].created_at);
       const newDate = new Date(createdDate.getTime());
@@ -1444,10 +1610,11 @@ exports.verifyMailCheck = async (req, res) => {
           message: "Email is verified",
         });
       } else {
-
         if (currentDate <= newDate) {
           const differenceInMilliseconds = newDate - currentDate;
-          const differenceInDays = Math.ceil(differenceInMilliseconds / (1000 * 60 * 60 * 24));
+          const differenceInDays = Math.ceil(
+            differenceInMilliseconds / (1000 * 60 * 60 * 24)
+          );
 
           if (differenceInDays === 0) {
             return res.status(200).json({
@@ -1470,26 +1637,20 @@ exports.verifyMailCheck = async (req, res) => {
         }
       }
     } else {
-      return res.status(400).send('landlord is not found');
+      return res.status(400).send("landlord is not found");
     }
   } catch (error) {
     res.send("Error occurred while verifying the landlord's email: " + error);
   }
 };
 
-
 //  ############################# Tenant verify Mail Check END  ############################################################
-
 
 //  ############################# Email Start ############################################################
 exports.emailUpdate = async (req, res) => {
   const { id, email } = req.body;
   try {
-    const userCheckResult = await queryRunner(
-      selectQuery("users", "id"),
-      [id]
-    );
-
+    const userCheckResult = await queryRunner(selectQuery("users", "id"), [id]);
 
     if (userCheckResult[0].length > 0) {
       const emailExist = userCheckResult[0][0].Email;
@@ -1497,7 +1658,7 @@ exports.emailUpdate = async (req, res) => {
       console.log(emailExist);
       const emailResult = await queryRunner(updateEmailQuery, [
         email,
-        emailExist
+        emailExist,
       ]);
       if (emailResult[0].affectedRows > 0) {
         return res.status(200).json({
@@ -1505,12 +1666,10 @@ exports.emailUpdate = async (req, res) => {
         });
       } else {
         return res.status(400).send("Error1");
-
       }
     } else {
       return res.send("User is not found");
     }
-
   } catch (error) {
     res.send("Error Get Email updated landlord  " + error);
     console.log(error);
@@ -1518,44 +1677,32 @@ exports.emailUpdate = async (req, res) => {
 };
 //  ############################# Email End ############################################################
 
-
-
 //  ############################# verify Email Update Start ############################################################
 //  ############################# verify Email Update Start ############################################################
 exports.verifyEmailUpdate = async (req, res) => {
   const { id, token, email, password } = req.body;
-  const status = 'Email Verified';
+  const status = "Email Verified";
   try {
     const userCheckResult = await queryRunner(selectQuery("users", "id"), [id]);
 
     if (userCheckResult[0].length > 0) {
       const emailExist = userCheckResult[0][0].Email;
       const existToken = userCheckResult[0][0].token;
-      const existPassowrd = userCheckResult[0][0].Password;
       if (token == existToken) {
         const emailResult = await queryRunner(updateVerifiedStatusQuery, [
           status,
-          id
+          id,
         ]);
         if (emailResult.affectedRows === 0) {
-          return res.status(201).send("Email Verified status is not updated");
-        }
-        else {
-          if(await bcrypt.compare(password, existPassowrd)){
-            const token = jwt.sign({ email, password }, config.JWT_SECRET_KEY, {
-              expiresIn: "3h",
-            });
-            return res.status(200).json({
-              token: token,
-              message: " Email verified successful ",
-            });
-          }else{
-            return res.status(201).json({
-              message: "Password is not correct",
-            });
-          }
-          
-          
+          return res.status(400).send("Email Verified status is not updated");
+        } else {
+          const token = jwt.sign({ email, password }, config.JWT_SECRET_KEY, {
+            expiresIn: "3h",
+          });
+          return res.status(200).json({
+            token: token,
+            message: " Email verified successful ",
+          });
         }
       } else {
         return res.status(200).json({
@@ -1573,114 +1720,255 @@ exports.verifyEmailUpdate = async (req, res) => {
 //  ############################# verify Email Update End ############################################################
 //  ############################# verify Email Update End ############################################################
 exports.updatedNotification = async (req, res) => {
-  const {
-    isEmailNotify,
-    isPushNotify,
-  } = req.body;
+  const { isEmailNotify, isPushNotify } = req.body;
   const { userId } = req.user;
   try {
     const updateNotifyResult = await queryRunner(updateNotify, [
       isEmailNotify,
       isPushNotify,
-      userId
+      userId,
     ]);
     if (updateNotifyResult[0].affectedRows > 0) {
       return res.status(200).json({
-        email: isEmailNotify === "yes" ? "Email notifications enabled" : "Email notifications disabled",
-        push: isPushNotify === "yes" ? "push notifications enabled" : "push notifications disabled",
+        email:
+          isEmailNotify === "yes"
+            ? "Email notifications enabled"
+            : "Email notifications disabled",
+        push:
+          isPushNotify === "yes"
+            ? "push notifications enabled"
+            : "push notifications disabled",
       });
     }
   } catch (error) {
     res.status(400).json({
-      message: error.message
-    })
+      message: error.message,
+    });
   }
-}
+};
 // get All property data
 exports.getAllProperty = async (req, res) => {
   try {
     const { userId } = req.user;
-    const getAllPropertyData = await queryRunner(getPropertyReport, [
-      userId
-    ]);
-    const getTenantsReport = await queryRunner(getTenantReport, [
-      userId
-    ]);
-    const getLeaseReportData = await queryRunner(getLeaseReport, [
-      userId
-    ]);
-    
+    const getAllPropertyData = await queryRunner(getPropertyReport, [userId]);
+    const getTenantsReport = await queryRunner(getTenantReport, [userId]);
+    const getLeaseReportData = await queryRunner(getLeaseReport, [userId]);
+
     res.status(200).json({
       property: getAllPropertyData[0],
       tenants: getTenantsReport[0],
-      lease: getLeaseReportData[0]
-    })
+      lease: getLeaseReportData[0],
+    });
   } catch (error) {
     res.status(400).json({
-      message: error.message
-    })
+      message: error.message,
+    });
   }
-}
+};
 // getLeaseReport getInvoiceReportData getTaskReportData getTenantReport  getPropertyReport
 
 exports.getTaskReportData = async (req, res) => {
   try {
     const { userId } = req.user;
-    const getAllPropertyData = await queryRunner(getTaskReportData, [
-      userId
-    ]);
+    const getAllPropertyData = await queryRunner(getTaskReportData, [userId]);
 
     res.status(200).json({
       property: getAllPropertyData[0],
-    })
+    });
   } catch (error) {
     res.status(400).json({
-      message: error.message
-    })
+      message: error.message,
+    });
   }
-}
+};
 exports.getInvoiceReportData = async (req, res) => {
   try {
     const { userId } = req.user;
     const getAllPropertyData = await queryRunner(getInvoiceReportData, [
-      userId
+      userId,
     ]);
 
     res.status(200).json({
       property: getAllPropertyData[0],
-    })
+    });
   } catch (error) {
     res.status(400).json({
-      message: error.message
-    })
+      message: error.message,
+    });
   }
-}
+};
+exports.getPropertyDashboardData = async (req, res) => {
+  try {
+    const { userId } = req.user;
+    const { start, end } = req.params;
+    const getAllPropertyData = await queryRunner(getPropertiesGraphData, [
+      userId,
+      start,
+      end,
+    ]);
+    console.log(getAllPropertyData[0]);
+    res.status(200).json({
+      property: getAllPropertyData[0],
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+};
+exports.getTaskDashboardData = async (req, res) => {
+  try {
+    const { userId } = req.user;
+    const { start, end } = req.params;
+    const getAllTaskData = await queryRunner(getTaskGraphData, [
+      userId,
+      start,
+      end,
+    ]);
+    console.log(getAllTaskData[0]);
+    res.status(200).json({
+      property: getAllTaskData[0],
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+};
+exports.getInvoiceDashboardData = async (req, res) => {
+  try {
+    const { userId } = req.user;
+    const { start, end } = req.params;
+    const getAllInvoiceData = await queryRunner(getInvoiceGraphData, [
+      userId,
+      start,
+      end,
+    ]);
+    res.status(200).json(getAllInvoiceData[0]);
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+};
 exports.getDashboardData = async (req, res) => {
   try {
     const { userId } = req.user;
-    console.log(userId)
-    const totalAmount = await queryRunner(getTotalAmount, [
-      userId
-    ]);
-    const totalAmountUnpaid = await queryRunner(getTotalAmountUnpaid, [
-      userId
-    ]);
-    const totalAmountPaid = await queryRunner(getTotalAmountPaid, [
-      userId
-    ]);
+    console.log(userId);
+    const totalAmount = await queryRunner(getTotalAmount, [userId]);
+    const totalAmountUnpaid = await queryRunner(getTotalAmountUnpaid, [userId]);
+    const totalAmountPaid = await queryRunner(getTotalAmountPaid, [userId]);
     const numPropertyTenant = await queryRunner(getNumPropertyTenant, [
-      userId, userId
+      userId,
+      userId,
     ]);
     res.status(200).json({
       totalAmount: totalAmount[0][0],
       totalAmountUnpaid: totalAmountUnpaid[0][0],
       totalAmountPaid: totalAmountPaid[0][0],
-      numPropertyTenant: numPropertyTenant[0][0]
-    })
+      numPropertyTenant: numPropertyTenant[0][0],
+    });
   } catch (error) {
     res.status(400).json({
-      message: error.message
-    })
+      message: error.message,
+    });
+  }
+};
+
+// inactive user
+exports.inactiveUser = async (req, res) => {
+  try {
+    const { email } = req.user;
+    const inactiveUserResult = await queryRunner(updateUserActive, [0, email]);
+    // if (inactiveUserResult[0].affectedRows > 0) {
+      res.status(200).json({
+        message: "User is inactive",
+      });
+    // }
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+};
+exports.inactiveTenant = async (req, res) => {
+  try {
+    const { email } = req.user;
+    const inactiveUserResult = await queryRunner(updateTenantActive, [0, email]);
+    // if (inactiveUserResult[0].affectedRows > 0) {
+      res.status(200).json({
+        message: "User is inactive",
+      });
+    // }
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+};
+// getUserById
+exports.getUserByIdData = async (req, res) => {
+  try {
+    const { id ,type} = req.params;
+    console.log(id,type);
+    if(type === 'tenant'){
+      const getUserByIdResult = await queryRunner(getTenantById, [id]);
+      res.status(200).json({
+        data: getUserByIdResult[0][0],
+      });
+    }else if(type === 'landlord'){
+      const getUserByIdResult = await queryRunner(getUserById, [id]);
+      res.status(200).json({
+        data: getUserByIdResult[0][0],
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
   }
 }
+// Profile Complete
+exports.ProfileComplete = async (req, res) => {
+  try {
+    
+    const { userId } = req.user; 
+    const propertycheckresult = await queryRunner(selectQuery("users", "id" ),[userId]);
+    if (propertycheckresult[0].length > 0) {
+      count = 0;
+      if(propertycheckresult[0][0].image){
+        count += 30;
+      }
+      if(propertycheckresult[0][0].FirstName){
+        count += 10;
+      } 
+      if(propertycheckresult[0][0].LastName){
+        count += 10;
+      }
+      if(propertycheckresult[0][0].Email){
+        count += 10;
+      }
+      if(propertycheckresult[0][0].Phone){
+        count += 10;
+      }
+      if(propertycheckresult[0][0].BusinessName){
+        count += 10;
+      }
+      if(propertycheckresult[0][0].streetAddress){
+        count += 10;
+      }
+      if(propertycheckresult[0][0].BusinessAddress){
+        count += 10;
+      }
+      res.status(200).json({
+        // data : propertycheckresult,
+        count : count
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
 
+}

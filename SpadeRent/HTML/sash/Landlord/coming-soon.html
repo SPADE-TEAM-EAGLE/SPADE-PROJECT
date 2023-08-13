@@ -74,6 +74,21 @@
 </head>
 
 <body class="app sidebar-mini ltr light-mode">
+    <div class="modal fade" id="myModal_warning" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
+                        <div class="card-body text-center">
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24"><path fill="#fad383" d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z"/><circle cx="12" cy="16" r="1" fill="#f7b731"/><path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"/></svg></span>
+                          <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
+                          <p class="card-text text-dark">Session expeired!, Login again</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade effect-scale" id="modaldemo8" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered modal-l" role="document">
             <div class="modal-content">
@@ -84,15 +99,63 @@
             </button>
                 </div> -->
                 <div class="modal-body pt-5">
-                    <div class="d-flex flex-column justify-content-center align-items-center p-5" style="text-align: center;">
-                        <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" style="max-width: 110px;" class="Rent-logo mb-5"  />
+                    <div class="d-flex flex-column justify-content-center align-items-center p-5"
+                        style="text-align: center;">
+                        <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" style="max-width: 110px;"
+                            class="Rent-logo mb-5" />
                         <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
-                        <h6 class="text-default mb-3">Get started with Spade Rent! Continue with Google to verify</h6>
-                        <input type="email" class="form-control form mb-2" style="min-width: 200px;max-width: 350px;" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the name of the property.">
-                        <a class="text-primary mb-4" href="javascript:void(0)">Change Email</a>
+                        <h6 class="text-default mb-3">Enter a 6-digit code to verify email address</h6>
+                        <input id="token" name="token" type="phone" class="form-control form mb-2" pattern="[0-9]{5}"
+                            maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                            style="min-width: 200px;max-width: 350px;" data-bs-placement="top" data-bs-toggle="tooltip"
+                            title="" data-bs-original-title="Enter the name of the property.">
+                        <input type="password" class="form-control form mb-2" id="id_password1"
+                            aria-describedby="emailHelp" placeholder="Password" data-bs-placement="top"
+                            data-bs-toggle="tooltip" title="" data-bs-original-title="Enter password here.">
+                        <!-- <a class="text-primary mb-4" href="javascript:void(0)">Change Email</a> -->
+                        <span class="mt-1 text-danger" id="passnotmatch1" style="display: none;">
+                            MUST be atleast 8 characters long, Must contain atleast One Uppercase and One symbol.
+                        </span>
                         <div class="">
-                            <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2">Remind me Later</a>
-                            <a href="javascript:void(0)" class="btn btn-primary btn-pill">Resend Mail</a>
+                            <!-- <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2">Remind me Later</a> -->
+                            <a href="javascript:void(0)" class="btn btn-primary btn-pill disabled"
+                                id="verify-btn">Verify</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-primary">Save changes</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <div class="modal fade effect-scale" id="modaldemo00" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-l" role="document">
+            <div class="modal-content">
+                <!-- <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+                </div> -->
+                <div class="modal-body pt-5">
+                    <div class="d-flex flex-column justify-content-center align-items-center p-5"
+                        style="text-align: center;">
+                        <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" style="max-width: 110px;"
+                            class="Rent-logo mb-5" />
+                        <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
+                        <h6 class="text-default mb-3">Get started with Spade Rent! You have<span id="days-left"></span>
+                            left</h6>
+                        <input type="email" class="form-control form mb-2" style="min-width: 200px;max-width: 350px;"
+                            data-bs-placement="top" data-bs-toggle="tooltip" title=""
+                            data-bs-original-title="Enter the name of the property." readonly id="user-email">
+                        <a class="text-primary mb-4" href="javascript:void(0)" id="change-email">Change Email</a>
+                        <a class="text-primary mb-4 d-none" href="javascript:void(0)" id="save-email">Save Email</a>
+                        <div class="">
+                            <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2"
+                                id="remind-later">Remind me Later</a>
+                            <a href="javascript:void(0)" class="btn btn-primary btn-pill" id="send-email">Send Mail</a>
                         </div>
                     </div>
                 </div>
@@ -362,44 +425,38 @@
                                         </div> -->
                                         <!-- LOGO -->
 
-                                        <!-- COUNTRY -->
-                                        <div class="d-flex country mt-1">
-                                            <a class="nav-link icon theme-layout nav-link-bg layout-setting card-domo-0">
-                                                <span class="dark-layout text-dark"><i class="fe fe-moon"></i></span>
-                                                <span class="light-layout"><i class="fe fe-sun"></i></span>
-                                            </a>
-                                        </div>
+                                       <!-- COUNTRY -->
+                                       <div class="d-flex country mt-2">
+                                        <a class="nav-link icon theme-layout nav-link-bg layout-setting">
+                                            <span class="dark-layout text-dark"><i class="fi fi-rs-moon"></i></span>
+                                            <span class="light-layout"><i class="fi fi-rs-brightness"></i></span>
+                                        </a>
+                                    </div>
 
-                                        <!-- <div class="d-flex country mt-1">
-                                            <a class="nav-link icon text-dark" onclick="mydemoclick()">
-                                                <i class="fi fi-rs-universal-access"></i>
-                                            </a>
-                                        </div> -->
-
-                                        <div class="d-flex country mt-2">
-                                            <a class="nav-link icon text-dark" onclick="mydemoclick()">
-                                                <i class="fi fi-rs-universal-access"></i>
-                                            </a>
-                                        </div>
+                                    <!-- <div class="d-flex country mt-2">
+                                        <a class="nav-link icon text-dark" onclick="mydemoclick()">
+                                            <i class="fi fi-rs-universal-access"></i>
+                                        </a>
+                                    </div> -->
 
 
-                                        <!-- 1 comments start  -->
-                                        <div class="d-flex country">
-                                            <img src="../assets\header-img\comment.svg"  class="avatarr profile-user brroundd nav-link cover-image dark-layout">
-                                        </div>
-                                        <div class="d-flex country">
-                                            <img src="../assets\header-img\comment-light.webp"  class="avatarr profile-user nav-link brroundd cover-image light-layout">
-                                        </div>
-                                        <!-- 1 comments start  -->
+                                    <!-- 1 comments start  -->
+                                    <div class="d-flex country mt-2">
+                                        <a class="nav-link icon text-dark">
+                                            <i class="fi fi-rs-comment"></i>
+                                        </a>
+                                        <!-- <img src="../assets\header-img\comment-light.webp"
+                                            class="avatarr profile-user nav-link brroundd cover-image light-layout"> -->
+                                    </div>
+                                    <!-- 1 comments start  -->
 
-                                        <!-- 2 comments start  -->
-                                        <div class="d-flex country">
-                                            <img src="../assets\header-img\question.svg"  class="avatarr profile-user brroundd nav-link cover-image dark-layout">
-                                        </div>
-                                        <div class="d-flex country">
-                                            <img src="../assets\header-img\question-light.webp"  class="avatarr profile-user nav-link brroundd cover-image light-layout">
-                                        </div>
-                                        <!-- 2 comments start  -->
+                                    <!-- 2 comments start  -->
+                                    <!-- <div class="d-flex country mt-2">
+                                        <a class="nav-link icon text-dark">
+                                            <i class="fi fi-rs-interrogation"></i>
+                                        </a>
+                                    </div> -->
+                                    <!-- 2 comments start  -->
 
                                         <!-- 3 comments start  -->
                                         <div class="dropdown  d-flex notifications">
@@ -470,7 +527,7 @@
                                             <a href="javascript:void(0)" data-bs-toggle="dropdown" class="nav-link leading-none d-flex">
                                                 <!-- <img src="../assets/images/users/21.jpg" 
                                                     class="avatar  profile-user brround cover-image"> -->
-                                                <span class="side-menu__item dynamic-text-head" style="padding: 10px 10px;">Spade Admin</span> <i class="fe fe-chevron-down text-dark text-dark" style="font-size: 20px; font-weight: 800;"></i>
+                                                <span class="dynamic-text-head text-dark" style="padding: 10px 10px;">Spade Admin</span> <i class="fe fe-chevron-down text-dark text-dark" style="font-size: 20px; font-weight: 800;"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                                 <!-- <div class="drop-heading">
@@ -537,6 +594,7 @@
                                     Profile</span>
                             </a>
                         </li> -->
+                        <a href="settings.html" class="text-dark">
                             <li class="slide">
                                 <div class="M-0 mt-3 mb-4" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
                                     <div class="card-header pb-0 border-bottom-0">
@@ -547,11 +605,12 @@
                                     </div>
                                     <div class="card-body pt-0">
                                         <div class="side-menu__label progress progress-md mt-5">
-                                            <div class="progress-bar bg-info" style="width: 40%;">40%</div>
+                                            <!-- <div class="progress-bar bg-info" style="width: 40%;">40%</div> -->
                                         </div>
                                     </div>
                                 </div>
                             </li>
+                        </a>
                             <li class="slide">
                                 <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html"><i
                                     class="side-menu__icon fi fi-rs-dashboard"></i><span class="side-menu__label">Overview</span></a>
@@ -629,7 +688,15 @@
 
                                     <!-- <i class="angle fe fe-chevron-right"></i> -->
                                 </a>
+                            </li>
+                            <li class="slide">
+                                <a class="side-menu__item" data-bs-toggle="slide" href="chats.html">
+                                    <i class="side-menu__icon fi fi-rs-comment"></i>
+                                    <span class="side-menu__label">Chat</span>
 
+                                    <!-- <i class="angle fe fe-chevron-right"></i> -->
+                                </a>
+                            </li>
                                 <li class="card-demo-7">
                                     <a class="side-menu__item has-link" href="settings.html" target="_self"><i
                                     class="side-menu__icon fi fi-rs-settings"></i><span class="side-menu__label">Settings</span>
@@ -669,7 +736,7 @@
                                     <div class="col-lg-9">
                                         <h3 class="page-titlee text-white" style="font-weight: 100; margin-bottom: 0px;">Welcome to Spade Portal</h3>
                                         <h1 class="page-titlee text-white" style="font-weight: 700;" id="user-name"></h1>
-                                        <a data-bs-toggle="modal" href="#modaldemo8" class="btn btn-primary btn-pill btn-xl email-verification-btn mb-3" id="email_verification"><i
+                                        <a data-bs-toggle="modal" href="#modaldemo00" class="btn btn-primary btn-pill btn-xl email-verification-btn mb-3" id="email_verification"><i
                                                 class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
                                             verification &nbsp; <i
                                                 class="angle fe fe-arrow-right create-btn-plus"></i></a>
@@ -1330,9 +1397,33 @@
 
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
-
+    <script src="../assets/js/email-verification.js"></script>
+    <script src="../assets/js/intercom.js"></script>
     <script>
         $(document).ready(function() {
+            $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    console.log(response);
+                    var myprogress = `<div class="progress-bar bg-info" style="width: `+response.count+`%;">`+response.count+`%</div>`;
+                    $(".progress").html(myprogress)
+                },
+                error: function (xhr, status, error) {
+                    // $("#myModal_warning").modal("show");
+                    // setTimeout(function () {
+                    //     $('#myModal_warning').modal('hide');
+                    //     window.location = '../Landlord/login_module.html';
+                    // }, 2000);
+                    console.log('Error occurred while fetching state and city data.');
+                    console.log(xhr);
+                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                }
+            });
             $('#email_verification').on('click', function() {
       if ($('body').hasClass('dark-mode')) {
         $('.Rent-logo').attr('src', '../assets/images/logo_white.png');
@@ -1367,12 +1458,29 @@
 
     <!-- column drag and drop end  -->
     <script>
-        function logout() {
-            localStorage.removeItem('authtoken');
-            window.open('./login_module.html', "_blank")
-            window.close();
-            console.log('Done');
-        }
+       function logout() {
+                $(document).ready(function () {
+                    $.ajax({
+                        url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                        type: 'PUT',
+                        contentType: false,
+                        processData: false,
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            console.log(response);
+                            localStorage.removeItem('authtoken');
+                            window.close();
+                            window.open('./login_module.html', "_blank")
+                            console.log('Done');
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(error);
+                        }
+                    });
+                });
+            }
     </script>
 
 <script>

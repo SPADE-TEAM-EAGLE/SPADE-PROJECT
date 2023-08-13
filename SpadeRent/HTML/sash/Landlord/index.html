@@ -11,6 +11,7 @@
     <meta name="author" content="Spruko Technologies Private Limited">
     <meta name="keywords"
         content="admin,admin dashboard,admin panel,admin template,bootstrap,clean,dashboard,flat,jquery,modern,responsive,premium admin templates,responsive admin,ui,ui kit.">
+        <!-- <script src="http://localhost:3000/socket.io/socket.io.js"></script> -->
 
     <!-- FAVICON -->
     <link rel="shortcut icon" type="image/x-icon" href="../assets/images/brand/favicon.ico" />
@@ -27,6 +28,7 @@
     <link href="../assets/css/dark-style.css" rel="stylesheet" />
     <link href="../assets/css/transparent-style.css" rel="stylesheet">
     <link href="../assets/css/skin-modes.css" rel="stylesheet" />
+    <link href="../assets/css/responsive.css" rel="stylesheet" />
 
     <!--- FONT-ICONS CSS -->
     <link href="../assets/css/icons.css" rel="stylesheet" />
@@ -43,9 +45,11 @@
     <!-- demo walktrough start  -->
     <link rel="stylesheet" href="../assets/css/walkthrough-demo.css">
     <!-- demo walktrough End  -->
+    <!-- <script src="socket.io/socket.io.js"></script> -->
 
     <!-- COLOR SKIN CSS -->
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="../assets/colors/color1.css" />
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script> -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
@@ -99,6 +103,47 @@
             border-radius: 50%;
             background: var(--primary-bg-color);
             font-size: 25px;
+        }
+
+        .dark-mode .font-counter-chart {
+            margin: 0px;
+            font-size: 100px;
+            font-weight: 100;
+            color: #fff;
+        }
+
+        .font-counter-chart{
+            margin: 0px;
+            font-size: 100px;
+            font-weight: 100;
+            color: #1467B0;
+        }
+
+        .dark-mode .chart-counter-number{
+            color: #fff;
+        }
+
+        .chart-counter-number{
+            color: #1467B0;
+        }
+
+        .chart-paragraph{
+            color: #1467B0;
+        }
+
+        .dark-mode .chart-paragraph{
+           color: #fff;
+        }
+
+        .chart-number-fonttt{
+            color: #1467B0;
+        }
+
+        .dark-mode .chart-number-fonttt{
+            color: #fff;
+        }
+        .ui-resizable-handle{
+            display: none !important;
         }
     </style>
 
@@ -521,11 +566,10 @@
                                         <!-- LOGO -->
 
                                         <!-- COUNTRY -->
-                                        <div class="d-flex country mt-1">
-                                            <a
-                                                class="nav-link icon theme-layout nav-link-bg layout-setting card-domo-0">
-                                                <span class="dark-layout text-dark"><i class="fe fe-moon"></i></span>
-                                                <span class="light-layout"><i class="fe fe-sun"></i></span>
+                                        <div class="d-flex country mt-2">
+                                            <a class="nav-link icon theme-layout nav-link-bg layout-setting">
+                                                <span class="dark-layout text-dark"><i class="fi fi-rs-moon"></i></span>
+                                                <span class="light-layout"><i class="fi fi-rs-brightness"></i></span>
                                             </a>
                                         </div>
 
@@ -537,24 +581,20 @@
 
 
                                         <!-- 1 comments start  -->
-                                        <div class="d-flex country">
-                                            <img src="../assets\header-img\comment.svg" 
-                                                class="avatarr profile-user brroundd nav-link cover-image dark-layout">
-                                        </div>
-                                        <div class="d-flex country">
-                                            <img src="../assets\header-img\comment-light.webp" 
-                                                class="avatarr profile-user nav-link brroundd cover-image light-layout">
+                                        <div class="d-flex country mt-2">
+                                            <a class="nav-link icon text-dark">
+                                                <i class="fi fi-rs-comment"></i>
+                                            </a>
+                                            <!-- <img src="../assets\header-img\comment-light.webp"
+                                                class="avatarr profile-user nav-link brroundd cover-image light-layout"> -->
                                         </div>
                                         <!-- 1 comments start  -->
 
                                         <!-- 2 comments start  -->
-                                        <div class="d-flex country">
-                                            <img src="../assets\header-img\question.svg" 
-                                                class="avatarr profile-user brroundd nav-link cover-image dark-layout" id="customIntercomButton">
-                                        </div>
-                                        <div class="d-flex country">
-                                            <img src="../assets\header-img\question-light.webp" 
-                                                class="avatarr profile-user nav-link brroundd cover-image light-layout">
+                                        <div class="d-flex country mt-2">
+                                            <a class="nav-link icon text-dark">
+                                                <i class="fi fi-rs-interrogation"></i>
+                                            </a>
                                         </div>
                                         <!-- 2 comments start  -->
 
@@ -632,7 +672,7 @@
                                                 class="nav-link leading-none d-flex">
                                                 <!-- <img src="../assets/images/users/21.jpg" 
                                                     class="avatar  profile-user brround cover-image"> -->
-                                                <span class=" dynamic-text-head" style="padding: 10px 10px;"
+                                                <span class=" dynamic-text-head text-dark" style="padding: 10px 10px;"
                                                     id="header-user"></span> <i
                                                     class="fe fe-chevron-down text-dark text-dark"
                                                     style="font-size: 20px; font-weight: 800;"></i>
@@ -802,7 +842,15 @@
 
                                     <!-- <i class="angle fe fe-chevron-right"></i> -->
                                 </a>
+                            </li>
+                            <li class="slide">
+                                <a class="side-menu__item" data-bs-toggle="slide" href="chats.html">
+                                    <i class="side-menu__icon fi fi-rs-comment"></i>
+                                    <span class="side-menu__label">Chat</span>
 
+                                    <!-- <i class="angle fe fe-chevron-right"></i> -->
+                                </a>
+                            </li>
                             <li class="card-demo-7">
                                 <a class="side-menu__item has-link" href="settings.html" target="_self"><i
                                         class="side-menu__icon fi fi-rs-settings"></i><span
@@ -901,12 +949,12 @@
                                                             <h1 class="mb-0 number-font" id="invoicing-amount"><b>$0</b>
                                                             </h1>
                                                         </div>
-                                                        <div class="ms-auto">
+                                                        <!-- <div class="ms-auto">
                                                             <div class="chart-wrapper mt-1">
                                                                 <canvas id="saleschart"
                                                                     class="h-8 w-9 chart-dropshadow"></canvas>
                                                             </div>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                                     <span class="text-muted fs-12 float-start"><span
                                                             class="text-secondary">
@@ -924,12 +972,12 @@
                                                             <h1 class="mb-0 number-font" id="total-amount"><b>$0</b>
                                                             </h1>
                                                         </div>
-                                                        <div class="ms-auto">
+                                                        <!-- <div class="ms-auto">
                                                             <div class="chart-wrapper mt-1">
                                                                 <canvas id="leadschart"
                                                                     class="h-8 w-9 chart-dropshadow"></canvas>
                                                             </div>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                                     <span class="text-muted fs-12 float-start"><span
                                                             class="text-danger">
@@ -947,12 +995,12 @@
                                                             <h1 class="mb-0 number-font text-start"
                                                                 id="outstanding-amount"><b>$0</b></h1>
                                                         </div>
-                                                        <div class="ms-auto">
+                                                        <!-- <div class="ms-auto">
                                                             <div class="chart-wrapper mt-1">
                                                                 <canvas id="profitchart"
                                                                     class="h-8 w-9 chart-dropshadow"></canvas>
                                                             </div>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                                     <span class="text-muted fs-12 float-start"><span class="text-green">
                                                             <!-- <i class="fe fe-plus text-green"></i>1.5% -->
@@ -967,12 +1015,12 @@
                                                             <h6 class=""><b>Active Leads</b></h6>
                                                             <h1 class="mb-0 number-font"><b>0</b></h1>
                                                         </div>
-                                                        <div class="ms-auto">
+                                                        <!-- <div class="ms-auto">
                                                             <div class="chart-wrapper mt-1">
                                                                 <canvas id="costchart"
                                                                     class="h-8 w-9 chart-dropshadow"></canvas>
                                                             </div>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                                     <span class="text-muted fs-12 float-start"><span
                                                             class="text-warning">
@@ -999,7 +1047,7 @@
                                     </div>
                                 </div> -->
 
-                                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                     <div class="card overflow-hidden counter-card-hover" id="card4">
                                         <div class="card-body">
                                             <div class="d-flex">
@@ -1007,12 +1055,12 @@
                                                     <h6 class=""><b>Total Property</b></h6>
                                                     <h1 class="mb-0 number-font" id="total-property"><b>$0</b></h1>
                                                 </div>
-                                                <div class="ms-auto">
+                                                <!-- <div class="ms-auto">
                                                     <div class="chart-wrapper mt-1">
                                                         <canvas id="costchart"
                                                             class="h-8 w-9 chart-dropshadow"></canvas>
                                                     </div>
-                                                </div>
+                                                </div> -->
                                             </div>
                                             <span class="text-muted fs-12 float-start"><span class="text-warning">
                                                     <!-- <i
@@ -1021,7 +1069,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                     <div class="card overflow-hidden counter-card-hover" id="card4">
                                         <div class="card-body">
                                             <div class="d-flex">
@@ -1029,12 +1077,12 @@
                                                     <h6 class=""><b>Total Tenant</b></h6>
                                                     <h1 class="mb-0 number-font" id="total-tenant"><b>$0</b></h1>
                                                 </div>
-                                                <div class="ms-auto">
+                                                <!-- <div class="ms-auto">
                                                     <div class="chart-wrapper mt-1">
                                                         <canvas id="costchart"
                                                             class="h-8 w-9 chart-dropshadow"></canvas>
                                                     </div>
-                                                </div>
+                                                </div> -->
                                             </div>
                                             <span class="text-muted fs-12 float-start"><span class="text-warning">
                                                     <!-- <i
@@ -1045,7 +1093,7 @@
 
                                 <!-- COL END -->
 
-                                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                     <div class="card" id="task">
                                         <div class="card-header" style="display: flex; justify-content: space-between;">
                                             <h2 class="card-title text-dark"><b>Recent Tasks</b></h2>
@@ -1146,8 +1194,10 @@
                                         <div class="card-header" style="display: flex; justify-content: space-between;">
                                             <div style="display: flex; align-items: end;">
                                             <label for=""><b>Prospects Status </b></label> &emsp;
-                                            <input type="text" class="form-control date"
-                                                placeholder="Jan 6, 2022 – Jan 13, 2022" style="width: 230px;">
+                                            <input type="date" class="form-control"
+                                                placeholder="Jan 6, 2022 – Jan 13, 2022" style="width: 140px;">&emsp;
+                                                <input type="date" class="form-control"
+                                                placeholder="Jan 6, 2022 – Jan 13, 2022" style="width: 140px;">
                                             </div>
                                                 <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
                                                     <ul class="dropdown-menu dropdown-menu-top">
@@ -1155,7 +1205,9 @@
                                                     </ul>
                                         </div>
                                         <div class="card-body">
-                                            <div id="chart-monthlyy" class="chartsh"></div>
+                                            <!-- <div id="chart-monthlyy" class="chartsh"></div> -->
+                                            <canvas id="chartBar11" class="h-275"></canvas>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -1167,8 +1219,10 @@
                                         <div class="card-header" style="display: flex; justify-content: space-between;">
                                             <div style="display: flex; align-items: end;">
                                             <label for=""><b>Invoices </b></label> &emsp;
-                                            <input type="text" class="form-control date"
-                                                placeholder="Jan 6, 2022 – Jan 13, 2022" style="width: 230px;">
+                                            <input type="date" class="form-control"
+                                                placeholder="Jan 6, 2022 – Jan 13, 2022" style="width: 140px;">&emsp;
+                                                <input type="date" class="form-control"
+                                                placeholder="Jan 6, 2022 – Jan 13, 2022" style="width: 140px;">
                                             </div>
                                                 <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
                                                     <ul class="dropdown-menu dropdown-menu-top">
@@ -1190,8 +1244,10 @@
                                         <div class="card-header" style="display: flex; justify-content: space-between;">
                                             <div style="display: flex; align-items: end;">
                                             <label for=""><b>Banking Stats </b></label> &emsp;
-                                            <input type="text" class="form-control date"
-                                                placeholder="Jan 6, 2022 – Jan 13, 2022" style="width: 230px;">
+                                            <input type="date" class="form-control"
+                                                placeholder="Jan 6, 2022 – Jan 13, 2022" style="width: 140px;">&emsp;
+                                                <input type="date" class="form-control"
+                                                placeholder="Jan 6, 2022 – Jan 13, 2022" style="width: 140px;">
                                             </div>
                                                 <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
                                                     <ul class="dropdown-menu dropdown-menu-top">
@@ -1211,8 +1267,10 @@
                                         <div class="card-header" style="display: flex; justify-content: space-between;">
                                             <div style="display: flex; align-items: end;">
                                             <label for=""><b>Task Overview </b></label> &emsp;
-                                            <input type="text" class="form-control date"
-                                                placeholder="Jan 6, 2022 – Jan 13, 2022" style="width: 230px;">
+                                            <input type="date" class="form-control"
+                                                placeholder="Jan 6, 2022 – Jan 13, 2022" style="width: 140px;">&emsp;
+                                                <input type="date" class="form-control"
+                                                placeholder="Jan 6, 2022 – Jan 13, 2022" style="width: 140px;">
                                             </div>
                                                 <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
                                                     <ul class="dropdown-menu dropdown-menu-top">
@@ -1282,8 +1340,10 @@
                                         <div class="card-header" style="display: flex; justify-content: space-between;">
                                             <div style="display: flex; align-items: end;">
                                             <label for=""><b>Accounts Status </b></label> &emsp;
-                                            <input type="text" class="form-control date"
-                                                placeholder="Jan 6, 2022 – Jan 13, 2022" style="width: 230px;">
+                                            <input type="date" class="form-control"
+                                                placeholder="Jan 6, 2022 – Jan 13, 2022" style="width: 140px;">&emsp;
+                                                <input type="date" class="form-control"
+                                                placeholder="Jan 6, 2022 – Jan 13, 2022" style="width: 140px;">
                                             </div>
                                                 <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
                                                     <ul class="dropdown-menu dropdown-menu-top">
@@ -1294,16 +1354,17 @@
                                             <div style="display: flex; justify-content: space-around;">
                                                 <div>
                                                     <h5 class="text-dark mb-0"><b>Total Deposit</b></h5>
-                                                    <h2 style="color: #1467B0;" class="mb-0"><b>$99,890</b></h2>
+                                                    <h2 class="mb-0 chart-counter-number"><b>$99,890</b></h2>
                                                 </div>
 
                                                 <div>
                                                     <h5 class="text-dark mb-0"><b>Pending Balance</b></h5>
-                                                    <h2 style="color: #1467B0;" class="mb-0"><b>$22,620</b></h2>
+                                                    <h2 class="mb-0 chart-counter-number"><b>$22,620</b></h2>
                                                 </div>
                                             </div>
 
                                             <div id="morrisBar88" class="chartsh"></div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -1315,8 +1376,10 @@
                                         <div class="card-header" style="display: flex; justify-content: space-between;">
                                             <div style="display: flex; align-items: end;">
                                             <label for=""><b>Tenants Status </b></label> &emsp;
-                                            <input type="text" class="form-control date"
-                                                placeholder="Jan 6, 2022 – Jan 13, 2022" style="width: 230px;">
+                                            <input type="date" class="form-control"
+                                                placeholder="Jan 6, 2022 – Jan 13, 2022" style="width: 140px;">&emsp;
+                                                <input type="date" class="form-control"
+                                                placeholder="Jan 6, 2022 – Jan 13, 2022" style="width: 140px;">
                                             </div>
                                                 <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
                                                     <ul class="dropdown-menu dropdown-menu-top">
@@ -1335,7 +1398,7 @@
                                                 <div class="text-center"
                                                     style="background-color: #fff; border-radius: 12px; display: flex; justify-content: center; align-items: center; height: 50px; width: 60px;">
                                                     <h4 style="margin-bottom: 0em !important;"><b
-                                                            class="text-lightt">12</b>
+                                                        style="color: #000">12</b>
                                                     </h4>
                                                 </div>
                                             </div>
@@ -1350,7 +1413,7 @@
                                                 <div class="text-center"
                                                     style="background-color: #fff; border-radius: 12px; display: flex; justify-content: center; align-items: center; height: 50px; width: 60px;">
                                                     <h4 style="margin-bottom: 0em !important;"><b
-                                                            class="text-lightt">5</b>
+                                                            style="color: #000">5</b>
                                                     </h4>
                                                 </div>
                                             </div>
@@ -1361,6 +1424,113 @@
                                     </div>
                                 </div>
                                 <!-- Tenants Status end  -->
+
+                                <!-- Amount status start  -->
+                                <div class="col-lg-6 col-md-12 mb-5">
+                                    <div class="card h-100">
+                                        <div class="card-header" style="display: flex; justify-content: space-between;">
+                                            <div style="display: flex; align-items: end;">
+                                            <label for=""><b>Amount Status </b></label> &emsp;
+                                            <input type="date" class="form-control"
+                                                placeholder="Jan 6, 2022 – Jan 13, 2022" style="width: 140px;">&emsp;
+                                                <input type="date" class="form-control"
+                                                placeholder="Jan 6, 2022 – Jan 13, 2022" style="width: 140px;">
+                                            </div>
+                                                <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
+                                                    <ul class="dropdown-menu dropdown-menu-top">
+                                                        <li><a class="dropdown-item text-danger" href="#">X Remove</a></li>
+                                                    </ul>
+                                        </div>
+                                        <div class="card-body" style="padding: 0px 25px 0px 25px;">
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-sm-12 col-xl-5">
+                                                    <p class="font-counter-chart">$74</p>
+                                                    <p class="chart-paragraph">Total Amount</p>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-sm-12 col-xl-7">
+                                                    <!-- <div class="card">
+                                                        <div class="card-header">
+                                                            <h3 class="card-title">Area Chart</h3>
+                                                        </div>
+                                                        <div class="card-body"> -->
+                                                            <div class="chart-container">
+                                                                <canvas id="chartAreaa" class="h-180"></canvas>
+                                                            </div>
+                                                        <!-- </div> -->
+                                                    <!-- </div> -->
+                                                </div>
+                                            </div>
+                                            <hr style="border-top: 2px solid #868789; margin-top: 0px;">
+                                            <div class="row">     
+                                                <div class="col-lg-6 col-md-6 col-sm-12 col-xl-6">
+                                                    <div class="card overflow-hidden" id="card2" style="background: #529ee036;">
+                                                        <div class="card-body text-center" style="padding: 5px;">
+                                                            <div class="d-flexx">
+                                                                <div class="mt-2">
+                                                                    <h6 class=""><b>Amount Outstanding</b></h6>
+                                                                    <div style="display: flex; justify-content: center;">
+                                                                    <h1 class="mb-0 number-font chart-number-fonttt" id="total-amount"><b>$123</b>&nbsp;
+                                                                    </h1><span class="text-warning mt-4"> (+1.5%)</span></div>
+                                                                </div>
+                                                            </div>
+                                                            <span class="text-muted fs-12 float-start"><span
+                                                                    class="text-danger">
+                                                                    <!-- <i
+                                                                        class="fe fe-minus text-danger"></i>4.4% -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-6 col-md-6 col-sm-12 col-xl-6">
+                                                    <div class="card overflow-hidden" id="card2" style="background: #529ee036;">
+                                                        <div class="card-body text-center" style="padding: 5px;">
+                                                            <div class="d-flexx">
+                                                                <div class="mt-2">
+                                                                    <h6 class=""><b>Amount Paid</b></h6>
+                                                                    <div style="display: flex; justify-content: center;">
+                                                                    <h1 class="mb-0 number-font chart-number-fonttt" id="total-amount"><b>$12</b>&nbsp;
+                                                                    </h1><span class="text-warning mt-4"> (+1.5%)</span></div>
+                                                                </div>
+                                                            </div>
+                                                            <span class="text-muted fs-12 float-start"><span
+                                                                    class="text-danger">
+                                                                    <!-- <i
+                                                                        class="fe fe-minus text-danger"></i>4.4% -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Amount status end  -->
+
+                                <!-- Property Status Start  -->
+                                <div class="col-lg-6 col-md-12 mb-5">
+                                    <div class="card h-100">
+                                        <div class="card-header" style="display: flex; justify-content: space-between;">
+                                            <div style="display: flex; align-items: end;">
+                                            <label for=""><b>Property Status </b></label> &emsp;
+                                            <input type="date" class="form-control"
+                                                placeholder="Jan 6, 2022 – Jan 13, 2022" style="width: 140px;">&emsp;
+                                                <input type="date" class="form-control"
+                                                placeholder="Jan 6, 2022 – Jan 13, 2022" style="width: 140px;">
+                                            </div>
+                                                <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
+                                                    <ul class="dropdown-menu dropdown-menu-top">
+                                                        <li><a class="dropdown-item text-danger" href="#">X Remove</a></li>
+                                                    </ul>
+                                        </div>
+                                        <div class="card-body">
+                                                <center class="property-status-chart-count"><h5></h5><span style="font-size: 40px; font-weight: 800; margin-bottom: -10px;">56</span><span>Total Properties</span></center>
+                                            <div class="chart-containerr">
+                                                <canvas id="donutchartt"></canvas>
+                                                <!-- <div id="donutchartt" class="chartsh"></div> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Property Status End  -->
 
                             </div>
                         </div>
@@ -1461,7 +1631,7 @@
                 <div class="card-title mb-0 text-dark fw-bold">
                     <!-- <i class="fe fe-bell me-2"></i> -->
                     <!-- <span class=" pulse"></span> -->
-                    Notifications <a href="javascript:void(0);" class="text-primary text-decoration-underline">Mark all
+                    Notifications <a href="javascript:void(0);" class="text-primary text-decoration-underline " id="updateAllNotifyRead">Mark all
                         as read</a>
                 </div>
                 <div class="card-options ms-auto">
@@ -1474,11 +1644,11 @@
                 <div class="tabs-menu border-bottom">
                     <!-- Tabs -->
                     <ul class="nav panel-tabs">
-                        <li><a href="#side1" data-bs-toggle="tab" class="text-dark">All</a></li>
-                        <li><a href="#side2" data-bs-toggle="tab" class="text-dark">Inbox (25)</a></li>
-                        <li><a href="#side3" data-bs-toggle="tab" class="text-dark">Unread (5)</a></li>
-                        <li><a href="#side4" data-bs-toggle="tab" class="text-dark">Archive (0)</a></li>
-                    </ul>
+                        <li><a href="#side1" data-bs-toggle="tab" class="text-dark active">All<span class="all_span"></span></a></li>
+                        <li><a href="#side2" data-bs-toggle="tab" class="text-dark">Inbox <span class="inbox_span"></span></a></li>
+                        <li><a href="#side3" data-bs-toggle="tab" class="text-dark">Unread <span class="Unread_span"></span></a></li>
+                        <li><a href="#side4" data-bs-toggle="tab" class="text-dark">Archive <span class="archive_span"></span></a></li>
+                    </ul>   
                 </div>
                 <div class="tab-content">
                     <!-- <div class="tab-pane " id="side1">
@@ -1659,10 +1829,34 @@
 
                         </div>
                     </div>
-                    <div class="tab-pane" id="side2">
+                  
+                    <div class="tab-pane " id="side2">
+                        <div class="list-group list-group-flush" id="inbox-notification-container">
+
+                        </div>
+                    </div>
+                    <div class="tab-pane " id="side3">
+                        <div class="list-group list-group-flush" id="unread-notification-container">
+                            
+
+                        </div>
+                    </div>
+                    <div class="tab-pane " id="side4">
+                        <div class="list-group list-group-flush" id="Archieve-notification-container">
+                            
+
+                        </div>
+                    </div>
+                    <!-- <div class="tab-pane active" id="side4">
+                        <div class="list-group list-group-flush" id="read-notification-container">
+                            
+
+                        </div>
+                    </div> -->
+                    <!-- <div class="tab-pane" id="side2">
                         <div class="list-group list-group-flush">
-                            <!-- <div class="pt-3 fw-semibold ps-5">Today</div> -->
-                            <div class="list-group-item d-flex align-items-center justify-content-between">
+                            <div class="pt-3 fw-semibold ps-5">Today</div> -->
+                            <!-- <div class="list-group-item d-flex align-items-center justify-content-between">
                                 <div class="d-flex align-items-center">
                                     <div class="me-2">
                                         <span class="avatar avatar-md brround cover-image"
@@ -1701,15 +1895,15 @@
                                 <div class="">
                                     <span class="fs-12 text-dark">2 min ago</span>
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
 
-                        </div>
-                    </div>
-                    <div class="tab-pane" id="side3">
+                        <!-- </div>
+                    </div> --> 
+                    <!-- <div class="tab-pane" id="side3">
                         <div class="list-group list-group-flush">
-                            <!-- <div class="pt-3 fw-semibold ps-5">Today</div> -->
-                            <div class="list-group-item d-flex align-items-center justify-content-between">
+                            <div class="pt-3 fw-semibold ps-5">Today</div> -->
+                            <!-- <div class="list-group-item d-flex align-items-center justify-content-between">
                                 <div class="d-flex align-items-center">
                                     <div class="me-2">
                                         <span class="avatar avatar-md brround cover-image"
@@ -1748,15 +1942,15 @@
                                 <div class="">
                                     <span class="fs-12 text-dark">2 min ago</span>
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
 
-                        </div>
-                    </div>
-                    <div class="tab-pane" id="side4">
+                        <!-- </div>
+                    </div> --> 
+                    <!-- <div class="tab-pane" id="side4">
                         <div class="list-group list-group-flush">
-                            <!-- <div class="pt-3 fw-semibold ps-5">Today</div> -->
-                            <div class="list-group-item d-flex align-items-center justify-content-between">
+                             <div class="pt-3 fw-semibold ps-5">Today</div> -->
+                            <!-- <div class="list-group-item d-flex align-items-center justify-content-between">
                                 <div class="d-flex align-items-center">
                                     <div class="me-2">
                                         <span class="avatar avatar-md brround cover-image"
@@ -1795,11 +1989,11 @@
                                 <div class="">
                                     <span class="fs-12 text-dark">2 min ago</span>
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
 
-                        </div>
-                    </div>
+                        <!-- </div>
+                    </div> --> 
                     <!-- <div class="tab-pane" id="side3">
                         <ul class="task-list timeline-task">
                             <li class="d-sm-flex mt-4">
@@ -2005,6 +2199,8 @@
     <!-- Sticky js -->
     <script src="../assets/js/sticky.js"></script>
 
+    <script src="../assets/js/chart.js"></script>
+
     <!-- CHART-CIRCLE JS-->
     <script src="../assets/js/circle-progress.min.js"></script>
 
@@ -2065,6 +2261,11 @@
 
     <!-- ############################################# -->
 
+    <!-- <script src="../assets/js/chart.js"></script> -->
+        <!-- CHART-DONUT JS -->
+        <script src="../assets/js/charts.js"></script>
+        
+
     <!-- MORRIS-CHART JS -->
     <script src="../assets/plugins/morris/raphael-min.js"></script>
     <script src="../assets/plugins/morris/morris.js"></script>
@@ -2086,7 +2287,18 @@
     <script src="../assets/js/charts.js"></script>
     <script src="../assets/js/getNotification.js"></script>
     <script src="../assets/js/index-chart.js"></script>
-    
+    <script src="http://localhost:3000/"></script>
+    <script src="http://ec2-52-45-181-206.compute-1.amazonaws.com:3000/socket.io/socket.io.js"></script>
+    <script>
+      // Connect to the socket.io server
+      const socket = io('http://ec2-52-45-181-206.compute-1.amazonaws.com:3000');
+      // This code won't emit a 'connection' event, as it's automatically handled by socket.io
+      // Handle events from the server
+    // socket.on('notification', (data) => {
+    //   alert(data.message); // You can customize how you want to display the notification
+    // });
+    //   socket.emit('message', 'Hello from the client');
+    </script>
     <script>
 
         console.log(document.getElementById('customIntercomButton'))
@@ -2094,7 +2306,6 @@
         window.intercomSettings = {
           api_base: "https://api-iam.intercom.io",
           app_id: "fjpx1kt1",
-          
         };
       
         // Function to open the Intercom side popup
@@ -2495,7 +2706,7 @@
                             if (task.AssignTo) {
                                 assignTo += task.AssignTo.map(function ({ name, email }) {
                                     return '<div class="me-2">' +
-                                        '<img class="avatar brround avatar-md" src="../assets/images/users/2.jpg" alt="avatar-img">' +
+                                        '<i class="fi fi-rs-circle-user avatar-md fs-30 text-dark" ></i>' +
                                         '<div class="media-body valign-middle mt-0">' +
                                         '<a href="javascript:void(0)" class="text-dark fw-semibold">' + name + '</a>' +
                                         '</div>' +
@@ -2543,6 +2754,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.5.2/dragula.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+
+    <!-- <script src="socket.io/socket.io.js"></script> -->
+    
+
+    </script>
     <script>
         let password_validate1 = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
         var validconfirmPassword1 = document.getElementById("id_password1");
@@ -2776,7 +2993,12 @@
 
     </script>
     <script src="../assets/js/index-date.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
     <!-- date picker js start  -->
+
+    
 
 
 </body>

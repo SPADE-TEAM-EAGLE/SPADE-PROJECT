@@ -1045,7 +1045,7 @@
                                             <a href="javascript:void(0)" data-bs-toggle="dropdown" class="nav-link leading-none d-flex">
                                                 <!-- <img src="../assets/images/users/21.jpg" 
                                                     class="avatar  profile-user brround cover-image"> -->
-                                                <span class="dynamic-text-head" id="header-user" style="padding: 10px 10px;"></span> <i class="fe fe-chevron-down dark-mode text-dark" style="font-size: 20px; font-weight: 800;"></i>
+                                                <span class="dynamic-text-head text-dark" id="header-user" style="padding: 10px 10px;"></span> <i class="fe fe-chevron-down dark-mode text-dark" style="font-size: 20px; font-weight: 800;"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                                 <!-- <div class="drop-heading">
@@ -2523,12 +2523,29 @@ updateSelectedFilesContainer()
         })
     </script>
     <script>
-        function logout() {    
-          localStorage.removeItem('authtoken'); 
-          window.open('./login_module.html', "_self ")                  
-          window.close();
-          console.log('Done');
-        }
+        function logout() {
+                $(document).ready(function () {
+                    $.ajax({
+                        url: 'https://backend.app.spaderent.com/api/spade/inactiveTenant',
+                        type: 'PUT',
+                        contentType: false,
+                        processData: false,
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            console.log(response);
+                            localStorage.removeItem('authtoken');
+                            window.close();
+                            window.open('./login_module.html', "_blank")
+                            console.log('Done');
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(error);
+                        }
+                    });
+                });
+            }
       </script>
       
       

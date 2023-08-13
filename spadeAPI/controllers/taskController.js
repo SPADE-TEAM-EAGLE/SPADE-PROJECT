@@ -101,8 +101,8 @@ exports.getAllVendors = async (req, res) => {
         message: "All vendor retrieved successfully",
       });
     } else {
-      res.status(201).json({
-        message: "No Vendor data found",
+      res.status(400).json({
+        message: "No data found",
       });
     }
   } catch (error) {
@@ -855,13 +855,14 @@ exports.addVendorCategory = async (req, res) => {
         categoriesToInsert.push(category);
       }
     }
+
     // Batch update existing vendor categories
     console.log(categoriesToUpdate)
     for (const categoryToUpdate of categoriesToUpdate) {
       const { categoryId, category } = categoryToUpdate;
       const categoryResult = await queryRunner(updateVendorCategory, [category, categoryId, userId]);
       if (categoryResult.affectedRows === 0) {
-        return res.status(201).send("Error updating category");
+        return res.status(400).send("Error updating category");
       }
     }
 
@@ -870,7 +871,7 @@ exports.addVendorCategory = async (req, res) => {
       const { category } = categoryToInsert;
       const categoryResult = await queryRunner(addVendorCategory, [category, userId]);
       if (categoryResult.affectedRows === 0) {
-        return res.status(201).send("Error adding category");
+        return res.status(400).send("Error adding category");
       }
     }
 
