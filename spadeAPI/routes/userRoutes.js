@@ -144,8 +144,8 @@ router.delete("/deleteVendorCategory", verifyToken, invoiceController.deleteVend
 
 // chats start
 router.post("/accessChats", verifyToken, chatsController.accessChats);
-router.get("/fetchTenantChats", verifyTokenTenant, chatsController.fetchUsersChats);
-router.get("/fetchUsersChats", verifyToken, chatsController.fetchUsersTenants);
+// router.get("/fetchTenantChats", verifyTokenTenant, chatsController.fetchUsersChats);
+// router.get("/fetchUsersChats", verifyToken, chatsController.fetchUsersTenants);
 
 // this api is for messages  
 router.post("/createNewMessageTenant", verifyTokenTenant, messageClt.createNewMessageTenant);
