@@ -3555,7 +3555,8 @@
                             // console.log(response);
                             // console.log(tenantIid);
                             // console.log(tenantName);
-                            chatTenant()
+                            // chatTenant()
+                            // fetchChatMessages()
                         },
                         error: function (xhr, status, error) {
                             console.log(error);
@@ -3581,10 +3582,12 @@
                                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                             },
                             success: function (response) {
+                                socket.emit('chatMessage', messageData);
                                 // console.log(response);
                                 // console.log(tenantIid);
                                 // console.log(tenantName);
-                                chatTenant()
+                                // chatTenant()
+                                // fetchChatMessages()
                             },
                             error: function (xhr, status, error) {
                                 console.log(error);
@@ -3649,29 +3652,53 @@
                         console.log('Error: ' + error);
                     }
                 });
+                // var messs1 = "";
+                //         var messDiv = $('#messages')
+                var formattedTime;
+                function updateTime() {
+        const currentTime = new Date();
+        const hours = currentTime.getHours();
+        const minutes = currentTime.getMinutes();
+        const seconds = currentTime.getSeconds();
+
+        formattedTime = hours + ":" + (minutes < 10 ? "0" : "") + minutes  ;
+
+        // $('#time').text(formattedTime);
+      }
+      updateTime(); // Call it initially to set the time immediately
+
+                function fetchChatMessages() {
+                            var messs2 = "";
+                            var messDiv = $('#messages')
+                            
+                            socket.on('recieveMessage', (message) => {
+                    updateTime();
+
+                            console.log("check rec" , message.message);
+
+                                messs2 = `<div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
+                                                                    <div style="width: 36px;height: 36px;" class="me-1"> 
+                                                                        <img src="../assets/images/users/5.jpg" style="border-radius: 50%;height: inherit;" class="message-image" />
+                                                                        </div> 
+                                                                    <div class="msg-text">
+                                                <span class="text">`+ message.message+ `</span>
+                                                <span style="float: right;" class="text-primary">`+formattedTime+`</span>
+                                            </div> </div>
+                                                            `;
+                                                            messDiv.append(messs2);
+                                // chatTenant()
+                                                            
+                        });
+                        }
                 function chatTenant() {
-                    function fetchChatMessages() {
+                    fetchChatMessages()
                         // console.log(typeof localStorage.getItem("landloadId"));
                         // console.log(Number(localStorage.getItem("tenantId")));
-                        var messs1 = "";
-                        var messs2 = "";
-                        var messDiv = $('#messages')
+                       
                         var recieverIdd = {
                             recieverId: localStorage.getItem("landloadId")
                         };
-                        socket.on('recieveMessage', (message) => {
-                            console.log("check rec" , message);
-
-                                messs1 += `<div class="d-flex " style="align-items: flex-start;justify-content: end;"> 
-                                                                    <div class="msg-text owner">
-                                                                    <span class="text">` + message.message + `</span>
-                                                                    </div>
-                                                                    <div style="width: 36px;height: 36px;" class="ms-1"> 
-                                                                        <img src="` + localStorage.getItem("LandlordImg") + `" style="border-radius: 50%;height: inherit;" class="message-image" />
-                                                                        </div> 
-                                                                    </div> 
-                                                            `;
-                        });
+                        
 
                         // $('#person-name-bold').text(String(localStorage.getItem("tenantName")))
                         $.ajax({
@@ -3714,6 +3741,10 @@
                                                 },
                                                 success: function (response) {
                                                     // $('#person-name-bold').text(tenatName)
+                                                    var messs1 = "";
+                        // var messs2 = "";
+                        var messDiv = $('#messages')
+                                                    messDiv.empty();
                                                     $('#chat').show()
 
                                                     console.log("TenantMessages");
@@ -3800,8 +3831,8 @@
                         });
 
 
-                    }
-                    fetchChatMessages()
+                    
+                   
                     // setInterval(fetchChatMessages, 10000);
 
                 }
@@ -3838,6 +3869,18 @@
         </script>
         <!-- chats js start  -->
         <script>
+            var formattedTime;
+                function updateTime() {
+        const currentTime = new Date();
+        const hours = currentTime.getHours();
+        const minutes = currentTime.getMinutes();
+        const seconds = currentTime.getSeconds();
+
+        formattedTime = hours + ":" + (minutes < 10 ? "0" : "") + minutes  ;
+
+        // $('#time').text(formattedTime);
+      }
+      
             $(document).ready(function () {
                 //Selector
                 const $ = (selector) => document.querySelector(selector);
@@ -3892,6 +3935,7 @@
                     if (msg) sendMessage(msg);
                 });
                 const sendMessage = (msg) => {
+                    updateTime();
                     // Create main message container
                     const mainContainer = document.createElement('div');
                     mainContainer.setAttribute('class', 'd-flex');
@@ -3911,6 +3955,7 @@
                     const timestampSpan = document.createElement('span');
                     timestampSpan.setAttribute('style', 'float: right;');
                     timestampSpan.setAttribute('class', 'text-primary');
+                    timestampSpan.innerText = formattedTime;
                     // const currentTime = new Date();
                     // const time = currentTime.getHours() + ':' + currentTime.getMinutes();
                     // timestampSpan.innerText = time;

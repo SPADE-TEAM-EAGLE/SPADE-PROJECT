@@ -3409,8 +3409,8 @@
     console.error("Error handling chatMessage event:", error);
   }
 });
-
-                            chatTenant(Number(localStorage.getItem("tenantId")), String(localStorage.getItem("tenantName")))
+// chatTenant(Number(localStorage.getItem("tenantId")), String(localStorage.getItem("tenantName")))
+// fetchChatMessages(); 
                         },
                         error: function(xhr, status, error) {
                             console.log(error);
@@ -3442,7 +3442,8 @@
                                 // console.log(response);
                                 // console.log(tenantIid);
                                 // console.log(tenantName);
-                                chatTenant(Number(localStorage.getItem("tenantId")), String(localStorage.getItem("tenantName")))
+                                // chatTenant(Number(localStorage.getItem("tenantId")), String(localStorage.getItem("tenantName")))
+                                // fetchChatMessages(); 
                             },
                             error: function(xhr, status, error) {
                                 console.log(error);
@@ -3453,10 +3454,41 @@
 
 
             });
+            var formattedTime;
+            function updateTime() {
+        const currentTime = new Date();
+        const hours = currentTime.getHours();
+        const minutes = currentTime.getMinutes();
+        const seconds = currentTime.getSeconds();
 
+         formattedTime = hours + ":" + (minutes < 10 ? "0" : "") + minutes  ;
+
+        // $('#time').text(formattedTime);
+      }
+      updateTime(); // Call it initially to set the time immediately
+    
+                        function fetchChatMessages() {
+                            var messs2 = "";
+                            var messDiv = $('#messages')
+                        socket.on('recieveMessage', (message) => {
+                            updateTime();
+                            console.log("check rec" , message);
+                            messs2 = `<div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
+                                                                    <div style="width: 36px;height: 36px;" class="me-1"> 
+                                                                        <img src="../assets/images/users/5.jpg" style="border-radius: 50%;height: inherit;" class="message-image" />
+                                                                        </div> 
+                                                                    <div class="msg-text">
+                                                <span class="text">` + message.message + `</span>
+                                                <span style="float: right;" class="text-primary">`+formattedTime+`</span>
+                                            </div> </div>
+                                                            `;
+                                                            messDiv.append(messs2);
+                            //   chatTenant(Number(localStorage.getItem("tenantId")), String(localStorage.getItem("tenantName")))
+                        });
+                    }
             function chatTenant(tenatId, tenatName, element) {
                 // console.log(typeof String(tenatId));
-
+                fetchChatMessages()
                 // console.log(element);
                 const parentDiv = $(element).find(".media.new");
                 // console.log(parentDiv[0]);
@@ -3466,27 +3498,13 @@
                 }
                 // console.log(tenatId);
                 // console.log(tenatName);
-                function fetchChatMessages() {
+               
                     $(document).ready(function() {
-                        var messs1 = "";
-                        var messs2 = "";
-                        var messDiv = $('#messages')
+                       
                         var tenantIdd = {
                             recieverId: String(tenatId)
                         };
-                        socket.on('recieveMessage', (message) => {
-                            console.log("check rec" , message);
-
-                                messs1 += `<div class="d-flex " style="align-items: flex-start;justify-content: end;"> 
-                                                                    <div class="msg-text owner">
-                                                                    <span class="text">` + message.message + `</span>
-                                                                    </div>
-                                                                    <div style="width: 36px;height: 36px;" class="ms-1"> 
-                                                                        <img src="` + localStorage.getItem("LandlordImg") + `" style="border-radius: 50%;height: inherit;" class="message-image" />
-                                                                        </div> 
-                                                                    </div> 
-                                                            `;
-                        });
+                        
                         $.ajax({
                             url: 'https://backend.app.spaderent.com/api/spade/accessChats',
                             type: 'POST',
@@ -3532,7 +3550,10 @@
                                                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                                 },
                                                 success: function(response) {
-
+                                                    var messs1 = "";
+                        
+                        var messDiv = $('#messages')
+                                                    messDiv.empty();
                                                     $('#person-name-bold').text(tenatName)
                                                     $('#chat').show()
                                                     console.log(response.data.length);
@@ -3598,9 +3619,9 @@
                         });
                     });
                 };
-                fetchChatMessages(); // Run immediately
+                // Run immediately
                 // setInterval(fetchChatMessages, 10000);
-            }
+            
             $(document).ready(function() {
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/viewAllPropertyTenant',
@@ -3663,6 +3684,17 @@
         </script>
         <!-- chats js start  -->
         <script>
+             var formattedTime;
+            function updateTime() {
+        const currentTime = new Date();
+        const hours = currentTime.getHours();
+        const minutes = currentTime.getMinutes();
+        const seconds = currentTime.getSeconds();
+
+         formattedTime = hours + ":" + (minutes < 10 ? "0" : "") + minutes  ;
+
+        // $('#time').text(formattedTime);
+      }
             $(document).ready(function() {
                 //Selector
                 const $ = (selector) => document.querySelector(selector);
@@ -3717,6 +3749,8 @@
                     if (msg) sendMessage(msg);
                 });
                 const sendMessage = (msg) => {
+      updateTime(); // Call it initially to set the time immediately
+
                     // Create main message container
                     const mainContainer = document.createElement('div');
                     mainContainer.setAttribute('class', 'd-flex');
@@ -3736,6 +3770,7 @@
                     const timestampSpan = document.createElement('span');
                     timestampSpan.setAttribute('style', 'float: right;');
                     timestampSpan.setAttribute('class', 'text-primary');
+                    timestampSpan.innerText = formattedTime;
                     // const currentTime = new Date();
                     // const time = currentTime.getHours() + ':' + currentTime.getMinutes();
                     // timestampSpan.innerText = time;
