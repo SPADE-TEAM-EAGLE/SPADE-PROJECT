@@ -30,7 +30,10 @@ const io = new Server(server, {
     methods: ["GET", "POST"],
   },
 });
-
+app.use((req, res, next) => {
+  req.io = io; // Attach io to the request object
+  next();
+});
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
@@ -52,9 +55,13 @@ io.on("connection", (socket) => {
         `User ${socket.id} sent message to room ${data.chatId} and message ${data.message}`
     );
     const roomId = data.chatId;
-    
     // Emit the chat message to everyone in the room, including the sender
     io.to(roomId).emit("chatMessage", data.message);
+});
+socket.on("notification", (data) => {
+ console.log("data",data);
+  // Emit the chat message to everyone in the room, including the sender
+  io.emit("chatMessage", data);
 });
 //   socket.emit("notification", { message: "New notification received!" });
 
@@ -66,4 +73,3 @@ io.on("connection", (socket) => {
 server.listen(3000, () => {
   console.log("Server is running on port 3000");
 });
-module.exports = io;
