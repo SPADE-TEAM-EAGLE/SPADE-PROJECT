@@ -3222,7 +3222,18 @@
         <!-- <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a> -->
         <a href="#addModal" data-bs-effect="effect-scale" data-bs-toggle="modal" id="add-tenant-side-btn"><i
                 class="fe fe-plus"></i></a>
-        <!-- JQUERY JS -->
+        <!-- socket      -->
+        <script src="http://ec2-52-45-181-206.compute-1.amazonaws.com:3000/socket.io/socket.io.js"></script>
+
+        <script>
+          // Connect to the socket.io server
+          var socket = io('http://ec2-52-45-181-206.compute-1.amazonaws.com:3000');
+          // This code won't emit a 'connection' event, as it's automatically handled by socket.io
+          // Handle events from the server
+        //   socket.emit('message', 'Hello from the client');
+        </script>
+        
+                <!-- JQUERY JS -->
         <script src="../assets/js/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js" integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <!-- BOOTSTRAP JS -->
@@ -3368,7 +3379,9 @@
                         // console.log('Error occurred while fetching state and city data.');
                     }
                 });
-                $('#send-text').on('click', function(ev) {
+                // const socket = io("http://ec2-52-45-181-206.compute-1.amazonaws.com:3000");
+                socket.emit('joinRoom', { chatId: localStorage.getItem("chatId") });
+                $('#send-text').on('click', function (ev) {
                     var input_message = $('#input-message').val();
                     var messageData = {
                         chatId: localStorage.getItem("chatId"),
@@ -3385,10 +3398,18 @@
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
-                        success: function(response) {
-                            // console.log(response);
-                            // console.log(tenantIid);
-                            // console.log(tenantName);
+                        success: function (response) {
+                            // socket use
+                            console.log(messageData);
+                            socket.emit('chatMessage', messageData);
+                            socket.on('recieveMessage', (message) => {
+  try {
+    console.log("Received message:", message);
+  } catch (error) {
+    console.error("Error handling chatMessage event:", error);
+  }
+});
+
                             chatTenant(Number(localStorage.getItem("tenantId")), String(localStorage.getItem("tenantName")))
                         },
                         error: function(xhr, status, error) {
@@ -3415,6 +3436,9 @@
                                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                             },
                             success: function(response) {
+                                console.log(messageData);
+                            socket.emit('chatMessage', messageData);
+                            
                                 // console.log(response);
                                 // console.log(tenantIid);
                                 // console.log(tenantName);
@@ -3450,6 +3474,19 @@
                         var tenantIdd = {
                             recieverId: String(tenatId)
                         };
+                        socket.on('recieveMessage', (message) => {
+                            console.log("check rec" , message);
+
+                                messs1 += `<div class="d-flex " style="align-items: flex-start;justify-content: end;"> 
+                                                                    <div class="msg-text owner">
+                                                                    <span class="text">` + message.message + `</span>
+                                                                    </div>
+                                                                    <div style="width: 36px;height: 36px;" class="ms-1"> 
+                                                                        <img src="` + localStorage.getItem("LandlordImg") + `" style="border-radius: 50%;height: inherit;" class="message-image" />
+                                                                        </div> 
+                                                                    </div> 
+                                                            `;
+                        });
                         $.ajax({
                             url: 'https://backend.app.spaderent.com/api/spade/accessChats',
                             type: 'POST',
@@ -3462,6 +3499,10 @@
                             success: function(response) {
                                 console.log(response[0]);
                                 // setTimeout(myGreeting, 500)
+
+                                const socket = io('http://ec2-52-45-181-206.compute-1.amazonaws.com:3000');
+                                socket.emit('joinRoom', { chatId: response[0].id });
+
                                 function myGreeting() {
                                     chatId = response[0].id;
                                     tenatIid = tenatId;

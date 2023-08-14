@@ -150,10 +150,15 @@ router.delete("/deleteVendorCategory", verifyToken, invoiceController.deleteVend
 
 // chats start
 router.post("/accessChats", verifyToken, chatsController.accessChats);
+<<<<<<< HEAD
+// router.get("/fetchTenantChats", verifyTokenTenant, chatsController.fetchUsersChats);
+// router.get("/fetchUsersChats", verifyToken, chatsController.fetchUsersTenants);
+=======
 router.post("/accessTenantChats", verifyTokenTenant, chatsController.accessTenantsChats);
 
 router.get("/fetchTenantChats", verifyTokenTenant, chatsController.fetchUsersChats);
 router.get("/fetchUsersChats", verifyToken, chatsController.fetchUsersTenants);
+>>>>>>> b547855ccc2c73e4d685ec5fea49fe4abff1fa97
 
 // this api is f or messages  
 router.post("/createNewMessageTenant", verifyTokenTenant, messageClt.createNewMessageTenant);

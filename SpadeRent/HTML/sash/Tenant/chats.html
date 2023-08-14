@@ -623,9 +623,12 @@
             background: #09db84;
             border-radius: 50%;
         }
+
         #input-message::placeholder {
-      color: rgba(20, 103, 176, 0.69); /* Set the desired color for the placeholder text */
-    }
+            color: rgba(20, 103, 176, 0.69);
+            /* Set the desired color for the placeholder text */
+        }
+
         .chat {
             --bg: #fff;
             --bg-secundary: #e1e1e8;
@@ -682,6 +685,7 @@
             background: #EDF3F9;
             padding: 0.5em;
         }
+
         .dark-mode .chat .conversation .head {
             width: 100%;
             min-height: 4em;
@@ -692,7 +696,7 @@
             color: white;
             padding: 0.5em;
         }
-        
+
 
         .chat .conversation .head .buttons {
             display: flex;
@@ -711,7 +715,8 @@
             overflow: auto;
             /* max-height: calc(100vh - 340px); */
         }
-        .dark-mode .chat .conversation .messages{
+
+        .dark-mode .chat .conversation .messages {
             background: #212121;
         }
 
@@ -760,8 +765,9 @@
             /* border-top: 1px solid var(--bg-secundary); */
             transition: all ease 0.5s;
         }
-        .dark-mode .chat .conversation .field{
-background-color: black;
+
+        .dark-mode .chat .conversation .field {
+            background-color: black;
         }
 
         .chat .conversation .field .input-message {
@@ -773,7 +779,7 @@ background-color: black;
             /* border-radius: 50px; */
             color: var(--color);
             border-radius: 10px;
-background: #EDF3F9;
+            background: #EDF3F9;
             transition: all ease 0.5s;
         }
 
@@ -800,27 +806,31 @@ background: #EDF3F9;
 
         .chat .conversation .field .send {
             min-width: 40px;
-    min-height: 40px;
-    justify-content: center;
-    display: flex;
-    align-items: center;
-    color: #fff;
-    background: #1467B0;
-    padding: 0.5em;
-    border-radius: 50%;
-    overflow: hidden;
-    font-size: 20px;
+            min-height: 40px;
+            justify-content: center;
+            display: flex;
+            align-items: center;
+            color: #fff;
+            background: #1467B0;
+            padding: 0.5em;
+            border-radius: 50%;
+            overflow: hidden;
+            font-size: 20px;
         }
 
         .chat .conversation .field .send .audio {
             display: none;
         }
+
         #messages::-webkit-scrollbar {
-  width: 5px; /* Set the width of the scrollbar */
-}
-.main-content-app::-webkit-scrollbar{
-    width: 5px; /* Set the width of the scrollbar */
-}
+            width: 5px;
+            /* Set the width of the scrollbar */
+        }
+
+        .main-content-app::-webkit-scrollbar {
+            width: 5px;
+            /* Set the width of the scrollbar */
+        }
 
         .chat .options {
             min-width: 50%;
@@ -2665,11 +2675,14 @@ background: #EDF3F9;
                                     <div class="conversation">
                                         <div class="head">
                                             <div class="person avatar">
-                                                
+
                                             </div>
-                                            <h4 class="person-name mb-0" style="line-height: initial;"><b id="person-name-bold"></b> <br><p class="text-success fw-bold fs-12 m-0" id="online">Online</p></h4>
-                                            
-                                            
+                                            <h4 class="person-name mb-0" style="line-height: initial;"><b
+                                                    id="person-name-bold"></b> <br>
+                                                <p class="text-success fw-bold fs-12 m-0" id="online">Online</p>
+                                            </h4>
+
+
                                             <div class="buttons" style="display: none;">
                                                 <svg title="Call" class="audio-call icon" stroke="currentColor"
                                                     fill="none" stroke-width="2" viewBox="0 0 24 24"
@@ -3412,6 +3425,17 @@ background: #EDF3F9;
         <!-- <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a> -->
         <a href="#addModal" data-bs-effect="effect-scale" data-bs-toggle="modal" id="add-tenant-side-btn"><i
                 class="fe fe-plus"></i></a>
+
+        <!-- socket IO  -->
+        <script src="http://ec2-52-45-181-206.compute-1.amazonaws.com:3000/socket.io/socket.io.js"></script>
+
+        <script>
+            // Connect to the socket.io server
+            var socket = io('http://ec2-52-45-181-206.compute-1.amazonaws.com:3000');
+                  // This code won't emit a 'connection' event, as it's automatically handled by socket.io
+                  // Handle events from the server
+                //   socket.emit('message', 'Hello from the client');
+        </script>
         <!-- JQUERY JS -->
         <script src="../assets/js/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"
@@ -3488,15 +3512,19 @@ background: #EDF3F9;
         <script src="../assets/plugins/chart/utils.js"></script>
         <!-- CHART-DONUT JS -->
         <script src="../assets/js/charts.js"></script>
+        
         <script>
+        // const socket = io("http://ec2-52-45-181-206.compute-1.amazonaws.com:3000");
             var tenantId = [];
             var chatId = 0;
             var tenantIid = 0;
             var tenantName = "";
             localStorage.removeItem('tenantId');
             localStorage.removeItem('tenantName');
+
             $(document).ready(function () {
                 var hasScrolled = 0;
+                socket.emit('joinRoom', { chatId: localStorage.getItem("chatId") });
                 $('#send-text').on('click', function (ev) {
                     var input_message = $('#input-message').val();
                     var messageData = {
@@ -3515,6 +3543,15 @@ background: #EDF3F9;
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
+                            socket.emit('chatMessage', messageData);
+                            socket.on('recieveMessage', (message) => {
+                                try {
+                                    console.log("Received message:", message);
+                                } catch (error) {
+                                    console.error("Error handling chatMessage event:", error);
+                                }
+                            });
+
                             // console.log(response);
                             // console.log(tenantIid);
                             // console.log(tenantName);
@@ -3622,6 +3659,20 @@ background: #EDF3F9;
                         var recieverIdd = {
                             recieverId: localStorage.getItem("landloadId")
                         };
+                        socket.on('recieveMessage', (message) => {
+                            console.log("check rec" , message);
+
+                                messs1 += `<div class="d-flex " style="align-items: flex-start;justify-content: end;"> 
+                                                                    <div class="msg-text owner">
+                                                                    <span class="text">` + message.message + `</span>
+                                                                    </div>
+                                                                    <div style="width: 36px;height: 36px;" class="ms-1"> 
+                                                                        <img src="` + localStorage.getItem("LandlordImg") + `" style="border-radius: 50%;height: inherit;" class="message-image" />
+                                                                        </div> 
+                                                                    </div> 
+                                                            `;
+                        });
+
                         // $('#person-name-bold').text(String(localStorage.getItem("tenantName")))
                         $.ajax({
                             url: 'https://backend.app.spaderent.com/api/spade/accessTenantChats',
@@ -3633,6 +3684,8 @@ background: #EDF3F9;
                                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                             },
                             success: function (response) {
+                                // const socket = io('http://ec2-52-45-181-206.compute-1.amazonaws.com:3000');
+                                socket.emit('joinRoom', { chatId: response[0].id });
                                 console.log("accessTenantChats");
                                 console.log(response[0]);
                                 function myGreeting() {
@@ -3665,6 +3718,7 @@ background: #EDF3F9;
 
                                                     console.log("TenantMessages");
                                                     console.log(response);
+
                                                     if (response.message == 'Messages fetched successfully' && response.data.length > 0) {
                                                         for (var i = 0; i < response.data.length; i++) {
                                                             if (response.data[i]['userType'] == "tenant") {
@@ -3676,7 +3730,7 @@ background: #EDF3F9;
                                                                     <span style="float: right;" class="text-primary">`+ time + `</span>
                                                                     </div>
                                                                     <div style="width: 36px;height: 36px;" class="ms-1"> 
-                                                                        <img src="`+localStorage.getItem("TenantImg")+`" style="border-radius: 50%;height: inherit;" class="message-image" />
+                                                                        <img src="`+ localStorage.getItem("TenantImg") + `" style="border-radius: 50%;height: inherit;" class="message-image" />
                                                                         </div> 
                                                                     </div>`;
                                                             } else if (response.data[i]['userType'] == "landlord") {
@@ -3696,7 +3750,7 @@ background: #EDF3F9;
                                                         messs1 = `<div class="time">No Message</div>`;
                                                     }
                                                     messDiv.html(messs1);
-                                                    
+
                                                     var parentDiv = $("#chat");
                                                     var parentDiv2 = $(".head");
                                                     var childDiv = $("#messages");
@@ -3712,11 +3766,11 @@ background: #EDF3F9;
 
                                                             childDiv.animate({ scrollTop: scrollAmount }, 500);
 
-                                                            hasScrolled ++; // Set the flag to true after scrolling
-                                                            console.log("if: "+hasScrolled);
+                                                            hasScrolled++; // Set the flag to true after scrolling
+                                                            console.log("if: " + hasScrolled);
 
-                                                        }else{
-                                                            console.log("else: "+hasScrolled);
+                                                        } else {
+                                                            console.log("else: " + hasScrolled);
                                                         }
                                                     }
 
