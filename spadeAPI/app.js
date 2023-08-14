@@ -49,11 +49,13 @@ io.on("connection", (socket) => {
   });
   socket.on("chatMessage", (data) => {
     console.log(
-      `User ${socket.id} sent message to room ${data.chatId} and message ${data.message}`
+        `User ${socket.id} sent message to room ${data.chatId} and message ${data.message}`
     );
     const roomId = data.chatId;
-    socket.to(roomId).emit("chatMessage", data.message); // Emit to the room except the sender
-  });
+    
+    // Emit the chat message to everyone in the room, including the sender
+    io.to(roomId).emit("chatMessage", data.message);
+});
 //   socket.emit("notification", { message: "New notification received!" });
 
   socket.on("disconnect", () => {
