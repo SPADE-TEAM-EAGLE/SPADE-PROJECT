@@ -3553,7 +3553,7 @@
                     }
                 });
                 // const socket = io("http://ec2-52-45-181-206.compute-1.amazonaws.com:3000");
-                socket.emit('joinRoom', { chatId: localStorage.getItem("chatId") });
+                // socket.emit('joinRoom', { chatId: localStorage.getItem("chatId") });
                 $('#send-text').on('click', function (ev) {
                     var input_message = $('#input-message').val();
                     var messageData = {
@@ -3573,6 +3573,7 @@
                         },
                         success: function (response) {
                             // socket use
+                            // socket.emit('joinRoom', { chatId: localStorage.getItem("chatId") });
                             console.log(messageData);
                             socket.emit('chatMessage', messageData);
                             // chatTenant(Number(localStorage.getItem("tenantId")), String(localStorage.getItem("tenantName")))
@@ -3602,6 +3603,7 @@
                                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                             },
                             success: function (response) {
+                                // socket.emit('joinRoom', { chatId: localStorage.getItem("chatId") });
                                 console.log(messageData);
                                 socket.emit('chatMessage', messageData);
                                 // console.log(response);
@@ -3620,37 +3622,40 @@
 
             });
             var formattedTime;
-            function updateTime() {
-                const currentTime = new Date();
-                const hours = currentTime.getHours();
-                const minutes = currentTime.getMinutes();
-                const seconds = currentTime.getSeconds();
+                function updateTime() {
+                    const currentTime = new Date();
+                    const hours = currentTime.getHours();
+                    const minutes = currentTime.getMinutes();
+                    const seconds = currentTime.getSeconds();
 
-                formattedTime = hours + ":" + (minutes < 10 ? "0" : "") + minutes;
+                    formattedTime = hours + ":" + (minutes < 10 ? "0" : "") + minutes;
 
-                // $('#time').text(formattedTime);
-            }
-            updateTime(); // Call it initially to set the time immediately
+                    // $('#time').text(formattedTime);
+                }
+                updateTime(); // Call it initially to set the time immediately
 
-            function fetchChatMessages() {
-                var messs2 = "";
-                var messDiv = $('#messages')
-                socket.on('recieveMessage', (message) => {
-                    updateTime();
-                    console.log("check rec", message);
-                    messs2 = `<div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
+                function fetchChatMessages() {
+                    var messs2 = "";
+                    var messDiv = $('#messages')
+
+                    socket.on('recieveMessage', (message) => {
+                    alert("123")
+                        updateTime();
+                        console.log("check rec", message.message);
+                        messs2 = `<div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
                                                                     <div style="width: 36px;height: 36px;" class="me-1"> 
                                                                         <img src="../assets/images/users/5.jpg" style="border-radius: 50%;height: inherit;" class="message-image" />
                                                                         </div> 
                                                                     <div class="msg-text">
-                                                <span class="text">` + message.message + `</span>
+                                                <span class="text">`+ message.message + `</span>
                                                 <span style="float: right;" class="text-primary">`+ formattedTime + `</span>
                                             </div> </div>
                                                             `;
-                    messDiv.append(messs2);
-                    //   chatTenant(Number(localStorage.getItem("tenantId")), String(localStorage.getItem("tenantName")))
-                });
-            }
+                        messDiv.append(messs2);
+                        // chatTenant()
+
+                    });
+                }
             function chatTenant(tenatId, tenatName, element) {
                 // console.log(typeof String(tenatId));
                 fetchChatMessages()
@@ -3662,11 +3667,9 @@
                     $(parentDiv[0]).addClass("selected");
                 }
                 $(document).ready(function () {
-
                     var tenantIdd = {
                         recieverId: String(tenatId)
                     };
-
                     $.ajax({
                         url: 'https://backend.app.spaderent.com/api/spade/accessChats',
                         type: 'POST',
@@ -3678,13 +3681,16 @@
                         },
                         success: function (response) {
                             console.log(response[0]);
-                            // socket.emit('joinRoom', { chatId: response[0].id });
+                            // alert(typeof response[0].id)
+                            socket.emit('joinRoom', { chatId: response[0].id });
                             chatId = response[0].id;
                             tenatIid = tenatId;
                             tenatName = tenatName;
                             localStorage.setItem("chatId", response[0].id)
                             localStorage.setItem("tenantId", tenatId)
                             localStorage.setItem("tenantName", tenatName)
+                            // alert(typeof localStorage.getItem("chatId"))
+
                             $.ajax({
                                 url: 'https://backend.app.spaderent.com/api/spade/getUserById/' + Number(tenatId) + '/tenant',
                                 type: 'GET',

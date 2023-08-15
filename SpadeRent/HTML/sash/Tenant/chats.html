@@ -3675,6 +3675,7 @@
                     var messDiv = $('#messages')
 
                     socket.on('recieveMessage', (message) => {
+                    alert("123")
                         updateTime();
                         console.log("check rec", message.message);
                         messs2 = `<div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
@@ -3925,7 +3926,7 @@
                 //Send messages
                 input.addEventListener('keypress', function (ev) {
                     if (ev.key === 'Enter' && input.value) {
-                        ev.preventDefault();
+                        // ev.preventDefault();
                         const msg = input.value;
                         sendMessage(msg);
                     };

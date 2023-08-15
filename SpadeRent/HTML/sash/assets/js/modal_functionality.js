@@ -319,7 +319,7 @@ $("#addModal").modal("hide")
                 };
 
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/property',
+                    url: '  /api/spade/property',
                     type: 'POST',
                     data: JSON.stringify(propertyData),
                     contentType: 'application/json',
