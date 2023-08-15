@@ -681,3 +681,15 @@ ORDER BY c.created_at DESC`;
 // get all messages of chat by chatId
 exports.getMessages =
   "SELECT * FROM messages WHERE chatId = ? ORDER BY created_at ASC";
+
+// dashboard task Count
+exports.taskCount = `SELECT count(CASE WHEN status = "not started" THEN 0 END ) as notStarted, COUNT(CASE WHEN status = "in progress" then 0 END ) as inProgress, COUNT(CASE WHEN status = "completed" THEN 0 END) as completed FROM spade_Rent.task WHERE landlordID = ? AND  task.created_at >= ? AND task.created_at <= ?`;
+
+
+// dashboard invoice Amount 
+exports.invoiceAmountQuery = `SELECT
+SUM(totalAmount) AS TotalAmount,
+SUM(CASE WHEN status = "paid" THEN totalAmount ELSE 0 END) AS TotalDeposit,
+SUM(CASE WHEN status = "uncollectible" OR status = "Unpaid" THEN totalAmount ELSE 0 END) AS PendingBalance
+FROM spade_Rent.invoice
+WHERE landlordID = ? AND invoice.created_at >= ? AND invoice.created_at <= ?`;
