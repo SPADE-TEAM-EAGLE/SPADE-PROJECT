@@ -3352,6 +3352,7 @@
                         messageType: "text",
                         userType: "tenant"
                     };
+                    
                     $.ajax({
                         url: 'https://backend.app.spaderent.com/api/spade/createNewMessageTenant',
                         type: 'POST',
@@ -3370,7 +3371,7 @@
                                     console.error("Error handling chatMessage event:", error);
                                 }
                             });
-
+                            socket.emit('chatMessage', messageData);
                             // console.log(response);
                             // console.log(tenantIid);
                             // console.log(tenantName);
@@ -3391,6 +3392,7 @@
                             messageType: "text",
                             userType: "tenant"
                         };
+                        console.log(messageData);
                         $.ajax({
                             url: 'https://backend.app.spaderent.com/api/spade/createNewMessageTenant',
                             type: 'POST',
@@ -3401,6 +3403,7 @@
                                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                             },
                             success: function(response) {
+                                // alert(1)
                                 socket.emit('chatMessage', messageData);
                                 // console.log(response);
                                 // console.log(tenantIid);
@@ -3490,7 +3493,6 @@
                 function fetchChatMessages() {
                     var messs2 = "";
                     var messDiv = $('#messages')
-
                     socket.on('recieveMessage', (message) => {
                         updateTime();
                         console.log("check rec", message.message);
@@ -3790,7 +3792,7 @@
                     imageContainer.setAttribute('style', 'width: 36px; height: 36px;');
                     imageContainer.setAttribute('class', 'ms-1');
                     const image = document.createElement('img');
-                    image.setAttribute('src', localStorage.getItem("LandlordImg"));
+                    image.setAttribute('src', "../assets/images/users/5.jpg");
                     image.setAttribute('style', 'border-radius: 50%; height: inherit;');
                     image.setAttribute('class', 'message-image');
 
