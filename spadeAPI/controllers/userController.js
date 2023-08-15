@@ -2086,3 +2086,28 @@ exports.checkSystem = async (req, res) => {
   }
 
 }
+
+
+
+
+
+
+
+
+// // filter By Property Dashboard
+// exports.filterByPropertyDashboard = async (req, res) => {
+//   try {
+//     const {propertyID} = req.body
+    
+//       // res.status(200).json({
+//       //   vendors : vendors,
+//       // });
+//   } catch (error) {
+//     res.status(400).json({
+//       message: error.message,
+//     });
+//   }
+
+// }
+
+
