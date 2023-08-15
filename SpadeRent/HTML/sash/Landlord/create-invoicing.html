@@ -37,6 +37,11 @@
     <link rel="stylesheet" href="cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css"
         integrity="sha512-BMbq2It2D3J17/C7aRklzOODG1IQ3+MHw3ifzBHMBwGO/0yUqYmsStgBjI0z5EYlaDEFnvYV7gNYdD3vFLRKsA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script>
+            if(localStorage.getItem("invoice")=="false"){
+                    window.location="./new-invoice.html"
+            }
+        </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
@@ -2963,7 +2968,7 @@
                                             <table class="table border text-nowrap text-md-nowrap mb-0" id="myTable">
                                                 <thead>
                                                     <tr>
-
+                                                        <th>#</th>
                                                         <th>INVOICE NO</th>
                                                         <th>TENANT NAME</th>
                                                         <th>MEMO/DESCRIPTION</th>
@@ -4024,6 +4029,7 @@
                                 const tenant = tenantData.find(obj => obj.tenantID == selectedTenant)
                                 console.log(tenant)
                                 $("#addModal").modal("hide")
+                                
                                 $('#addModal input[type="text"], #addModal input[type="date"], #addModal textarea').val('');
                                 $('#addModal select').prop('selectedIndex', 0);
                                 $("#succes-tenantName").text(`sent to ${tenant.firstName + " " + tenant.lastName}.`)
@@ -4055,6 +4061,7 @@
                     success: async function (response) {
 
                         if (response.message == "No data found") {
+                            localStorage.setItem("invoice","false")
                             window.location = './new-invoice.html'
                         }
                         tenantData = response.data[0]
@@ -4126,6 +4133,7 @@
                     },
                     success: async function (response) {
                         if (response.message == "No data found") {
+                            localStorage.setItem("invoice","false")
                             window.location = './new-invoice.html'
                         }
                         console.log(tenantData)
@@ -4137,9 +4145,9 @@
                         // console.log(data[0])
                         let tenantNames = []
 
-                        response.data[0]?.forEach(function (invoice) {
+                        response.data[0]?.forEach(function (invoice,index) {
 
-
+                            var serial='<td style="font-weight: 600;">' + (index+1) + '</td>';
                             var invoiceNumber = '<td class="invoice-id" style="font-weight: 600;">' + invoice.invoiceID + '</td>';
 
                             var tenantName = '<td class="tenantName" style="font-weight: 600;">' + invoice.firstName + invoice.lastName + `<br><small>${invoice.tPhone}</small>` + '</td>';
@@ -4177,7 +4185,7 @@
                                                         </td>`
 
 
-                            var row = '<tr>' + invoiceNumber + tenantName + memoDescription + invoiceDate +
+                            var row = '<tr>'+serial + invoiceNumber + tenantName + memoDescription + invoiceDate +
                                 propertyName + invoiceAmount + status + dropdownMenu + '</tr>';
 
                             // Append the row to the table body

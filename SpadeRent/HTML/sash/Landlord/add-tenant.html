@@ -35,7 +35,11 @@
 
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/dataTables.bootstrap.min.css" integrity="sha512-BMbq2It2D3J17/C7aRklzOODG1IQ3+MHw3ifzBHMBwGO/0yUqYmsStgBjI0z5EYlaDEFnvYV7gNYdD3vFLRKsA==" crossorigin="anonymous"
         referrerpolicy="no-referrer" /> -->
-
+        <script>
+            if(localStorage.getItem("tenants")=="false"){
+                    window.location="./new-tenant.html"
+            }
+        </script>
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
@@ -1816,7 +1820,8 @@
                                             <table class="table border text-nowrap text-md-nowrap mb-0" id="">
                                                 <thead>
                                                     <tr>
-                                                        <th>TENANT ID</th>
+                                                        <th>#</th>
+                                                        <th class="d-none">TENANT ID</th>
                                                         <th>TENANT NAME</th>
                                                         <th>PROPERTY NAME</th>
                                                         <th>RENT AMOUNT</th>
@@ -2953,6 +2958,7 @@
                             resetAccordions()
                         } else if (response.message.includes(" tenant Updated successful")) {
                             getData()
+                            localStorage.setItem("tenants","true")
                             $("#successfully_changed_text").text("Successfully Updated");
                             $("#successfully_changed").modal("show");
                             resetAccordions("edit")
@@ -3753,6 +3759,7 @@ $("#user-img").attr("src",image)
                     // console.log(response)
                     if (response.message == "No data found") {
                         console.log("tenantData")
+                        localStorage.setItem("tenants","false")
                         window.location = "./new-tenant.html"
                     }
                     tenantData = response.data[0]
@@ -3768,12 +3775,12 @@ $("#user-img").attr("src",image)
                     tableBody.empty();
                     // console.log(data[0])
                     let tenantNames = []
-                    response.data[0] ?.forEach(function(tenant) {
+                    response.data[0] ?.forEach(function(tenant,index) {
 
                         // var image = '<td><img src="../../../../spadeApi/uploads/' + tenant.images[0] + '" alt=""></td>';
                         // var image = '<td><img src="../../../../../../Desktop/spadeApi/uploads/image-1684250579662.png" alt="hhghghgh"></td>';
-
-                        var tenantId = '<td class="tenant-id" style="font-weight: 600;">' + tenant.tenantID + '</td>';
+var serial='<td style="font-weight: 600;">' + (index+1) + '</td>';
+                        var tenantId = '<td class="tenant-id d-none" style="font-weight: 600;">' + tenant.tenantID + '</td>';
                         // var tenantId = '<td class="tenant-id" style="font-weight: 600;">' + tenant
                         // .id + '</td>';
                         var tenantName = '<td class="tenantName" style="font-weight: 600;">' + tenant.firstName + tenant.lastName + `<br><small>${tenant.tEmail}</small>` + '</td>';
@@ -3802,7 +3809,7 @@ $("#user-img").attr("src",image)
 
                         }
 
-                        var row = '<tr>' + tenantId + tenantName + propertyName + rentAmount +
+                        var row = '<tr>'+serial + tenantId + tenantName + propertyName + rentAmount +
                             assignUnit + leaseEndDate + dropdownMenu + '</tr>';
 
                         // Append the row to the table body

@@ -305,11 +305,11 @@ exports.addTasks = async (req, res) => {
     notifyTenant,
     notifyVendor,
     images,
-    notify
+    
     // created_at,
     // created_by,
   } = req.body;
-
+console.log(req.body)
   const vendorID = assignee
   const { userId, userName } = req.user;
 
@@ -336,7 +336,7 @@ exports.addTasks = async (req, res) => {
         currentDate,
         userName,
         userId,
-        notify
+        
       ]);
       if (TasksResult.affectedRows === 0) {
         return res.status(400).send("Error1");
@@ -428,6 +428,7 @@ exports.addTasks = async (req, res) => {
     }
     return res.send("Created");
   } catch (error) {
+    console.log(error)
     res.status(400).send(error);
   }
 };

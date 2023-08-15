@@ -336,6 +336,7 @@ $("#addModal").modal("hide")
                     $('#infoModal').modal('show');
                 }else {
                     $('#succesModal').modal('show');
+                    localStorage.setItem("property","true")
                 }
             
                         // window.location = '../Landlord/properties-all.html';
@@ -392,6 +393,7 @@ $("#addModal").modal("hide")
         } else {
             
             $('#succesModal').modal('show');
+            localStorage.setItem("property","true")
         }
     
                 // window.location = '../Landlord/properties-all.html';

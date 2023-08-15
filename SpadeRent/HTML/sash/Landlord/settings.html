@@ -1963,6 +1963,21 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="myModal_incorrect" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
+                        <div class="card-body text-center">
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24"><path fill="#fad383" d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z"/><circle cx="12" cy="16" r="1" fill="#f7b731"/><path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"/></svg></span>
+                          <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
+                          <p class="card-text text-dark">Password is Incorrect!!!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="myModal_success" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered text-center" role="document">
             <div class="modal-content modal-content-demo">
@@ -2117,7 +2132,7 @@
 
                                         <!-- COUNTRY -->
                                         <div class="d-flex country mt-2">
-                                            <a class="nav-link icon theme-layout nav-link-bg layout-setting">
+                                            <a class="nav-link icon theme-layout nav-link-bg layout-setting1">
                                                 <span class="dark-layout text-dark"><i class="fi fi-rs-moon"></i></span>
                                                 <span class="light-layout"><i class="fi fi-rs-brightness"></i></span>
                                             </a>
@@ -2601,7 +2616,7 @@
                                                         <div class="form-group">
                                                             <label for="validationCustom01"><b>New Password</b></label>
                                                             <input type="password" class="form-control"
-                                                                id="id_password1" aria-describedby="emailHelp"
+                                                                id="id_password_new" aria-describedby="emailHelp"
                                                                 placeholder="Enter Password">
                                                             <i class="fi fi-rs-eye text-dark fs-20" id="togglePassword1"
                                                                 style="cursor: pointer;
@@ -9216,6 +9231,7 @@ imageIds.forEach(id => {
                 $(document).on("click", '#bgimage1', function () {
                     $(this).addClass('activee');
                     $('#bgimage2, #bgimage3, #bgimage4').removeClass('activee');
+                    $('.layout-setting1').addClass('d-none');
                     DLlabel.removeClass("activee");
                     $('body').addClass('bg-img1');
                     $('body').removeClass('bg-img2');
@@ -9255,6 +9271,7 @@ imageIds.forEach(id => {
                     DLlabel.removeClass("activee");
                     $(this).addClass('activee');
                     $('#bgimage1, #bgimage3, #bgimage4').removeClass('activee');
+                    $('.layout-setting1').addClass('d-none');
                     $('body').addClass('bg-img2');
                     $('body').removeClass('bg-img1');
                     $('body').removeClass('bg-img3');
@@ -9293,6 +9310,7 @@ imageIds.forEach(id => {
                     DLlabel.removeClass("activee");
                     $(this).addClass('activee');
                     $('#bgimage2, #bgimage1, #bgimage4').removeClass('activee');
+                    $('.layout-setting1').addClass('d-none');
                     $('body').addClass('bg-img3');
                     $('body').removeClass('bg-img1');
                     $('body').removeClass('bg-img2');
@@ -9331,6 +9349,7 @@ imageIds.forEach(id => {
                     DLlabel.removeClass("activee");
                     $(this).addClass('activee');
                     $('#bgimage2, #bgimage3, #bgimage1').removeClass('activee');
+                    $('.layout-setting1').addClass('d-none');
                     $('body').addClass('bg-img4');
                     $('body').removeClass('bg-img1');
                     $('body').removeClass('bg-img2');
@@ -9385,7 +9404,7 @@ imageIds.forEach(id => {
                     tab11_tab_preview.classList.add('d-none');
                     tab11_tab_preview_invoice.classList.remove('d-none');
                 });
-                $('.layout-setting').on("click", function (e) {
+                $('.layout-setting1').on("click", function (e) {
                     if (!(document.querySelector('body').classList.contains('dark-mode'))) {
                         labelInputs[1].classList.add("activee");
                         labelInputs[0].classList.remove("activee");
@@ -9430,7 +9449,7 @@ imageIds.forEach(id => {
                     }
                 });
                 $('.layout-setting11').on("click", function (e) {
-
+                    $('.layout-setting1').removeClass('d-none');
                     $('body').addClass('dark-mode');
                     $('body').removeClass('light-mode');
                     $('body').removeClass('transparent-mode');
@@ -9457,6 +9476,7 @@ imageIds.forEach(id => {
 
                 });
                 $('.layout-setting22').on("click", function (e) {
+                    $('.layout-setting1').removeClass('d-none');
 
                     $('body').removeClass('dark-mode');
                     $('body').addClass('light-mode');
@@ -9477,7 +9497,7 @@ imageIds.forEach(id => {
         <script>
             let categoryData; var image_url = " "; var image_key = " ";
             let password_validate1 = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
-            var validconfirmPassword1 = document.getElementById("id_password1");
+            var validconfirmPassword1 = document.getElementById("id_password_new");
             let confirmPassword1 = document.getElementById("id_password2");
             let newPassword = document.getElementById("current_password_reset");
             let spantag11 = document.getElementById("passnotmatch1");
@@ -9495,7 +9515,7 @@ imageIds.forEach(id => {
                     validconfirmPassword1.classList.add("border-red");
                     spantag11.style.display = "block";
                 }
-
+console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPassword1.value.match(password_validate1))
                 if (confirmPassword1.value == validconfirmPassword1.value && validconfirmPassword1.value.match(password_validate1)) {
                     confirmPassword1.classList.add("border-green");
                     confirmPassword1.classList.remove("border-red");
@@ -9522,7 +9542,7 @@ imageIds.forEach(id => {
 
 
             const togglePassword11 = document.querySelector("#togglePassword1");
-            const password11 = document.querySelector("#id_password1");
+            const password11 = document.querySelector("#id_password_new");
 
             togglePassword11.addEventListener("click", function (e) {
                 const type =
@@ -10235,13 +10255,13 @@ imageIds.forEach(id => {
                 });
 
                 $("#save").click(() => {
-                    console.log($("#current_password_reset").val(), $("#id_password1").val())
+                    console.log($("#current_password_reset").val(), $("#id_password1_new").val())
                     $.ajax({
                         url: 'https://backend.app.spaderent.com/api/spade/changePasssword',
                         type: 'PUT',
                         data: JSON.stringify({
                             currentPassword: $("#current_password_reset").val(),
-                            NewPassword: $("#id_password1").val()
+                            NewPassword: $("#id_password_new").val()
                         }),
                         contentType: "application/json; charset=utf-8",
                         processData: false,
@@ -10258,7 +10278,10 @@ imageIds.forEach(id => {
                         },
                         error: function (xhr, status, error) {
                             // Handle the error response from the API
-                            if (xhr.status === 401) {
+                            if(xhr.responseJSON.error=="Incorrect Password"){
+                                $("#myModal_incorrect").modal("show")
+                            }
+                            else if (xhr.status === 401) {
                                 $("#myModal_warning").modal("show")
                             } else {
                                 console.log('API error:', error);
