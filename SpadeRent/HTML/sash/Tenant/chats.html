@@ -3524,10 +3524,10 @@
             // socket.on('recieveMessage', (message) => {
             //      console.log("check rec" , message.message);
             // });
+            socket.emit('joinRoom', { chatId: localStorage.getItem("chatId") });
 
             $(document).ready(function () {
                 var hasScrolled = 0;
-                socket.emit('joinRoom', { chatId: localStorage.getItem("chatId") });
                 $('#send-text').on('click', function (ev) {
                     var input_message = $('#input-message').val();
                     var messageData = {
@@ -3547,6 +3547,7 @@
                         },
                         success: function (response) {
                             socket.emit('chatMessage', messageData);
+                            
                             socket.on('recieveMessage', (message) => {
                                 try {
                                     console.log("Received message:", message);
@@ -3669,14 +3670,12 @@
         // $('#time').text(formattedTime);
       }
       updateTime(); // Call it initially to set the time immediately
-
                 function fetchChatMessages() {
                             var messs2 = "";
                             var messDiv = $('#messages')
                             
                             socket.on('recieveMessage', (message) => {
                     updateTime();
-
                             console.log("check rec" , message.message);
 
                                 messs2 = `<div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
@@ -3715,7 +3714,7 @@
                             },
                             success: function (response) {
                                 // const socket = io('http://ec2-52-45-181-206.compute-1.amazonaws.com:3000');
-                                socket.emit('joinRoom', { chatId: response[0].id });
+                                // socket.emit('joinRoom', { chatId: response[0].id });
                                 console.log("accessTenantChats");
                                 console.log(response[0]);
                                 function myGreeting() {
@@ -3968,7 +3967,7 @@
                     imageContainer.setAttribute('style', 'width: 36px; height: 36px;');
                     imageContainer.setAttribute('class', 'ms-1');
                     const image = document.createElement('img');
-                    image.setAttribute('src', localStorage.getItem("LandlordImg"));
+                    image.setAttribute('src', "../assets/images/users/5.jpg");
                     image.setAttribute('style', 'border-radius: 50%; height: inherit;');
                     image.setAttribute('class', 'message-image');
 
