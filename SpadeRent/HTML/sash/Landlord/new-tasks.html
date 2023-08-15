@@ -932,14 +932,15 @@ color: #000;
                             <div class="col-md-12">
                                 <label class="form-label fw-bold">Media/ Files</label>
                                 <div class="custom-file" style="border: 1px dashed #00000087;">
-                                    <input id="fileInput" type="file" name="image" class="custom-file-input form"
-                                        accept=".jpg, .png, image/jpeg, image/png" aria-label="hello" multiple>
+                                    <input id="fileInput" type="file" name="media" class="custom-file-input form"
+    accept=".jpg, .jpeg, .png, .pdf, image/jpeg, image/png, application/pdf" aria-label="hello" multiple>
+
                                     <span className="d-none"></span>
                                     <label class="custom-file-label" for="fileInput">
                                         <i class="fi fi-rs-cloud-upload"></i>
                                         <div class="custom-file-text">
                                             <span>Upload Photo here</span>
-                                            <span>JPEG and PNG, file size no more than 10MB</span>
+                                            <span>JPEG, PNG & PDF file size no more than 10MB</span>
                                         </div>
                                     </label>
                                 </div>
@@ -2620,6 +2621,7 @@ $("#user-img").attr("src",image)
                                             else {
 
                                                 $("#succesModal").modal("show")
+                                                localStorage.setItem("task","true")
                                             }
                                         },
                                         error: function (xhr, status, error) {
@@ -2671,6 +2673,8 @@ $("#user-img").attr("src",image)
                                             else {
 
                                                 $("#succesModal").modal("show")
+                                                localStorage.setItem("task","true")
+
                                             }
                                         },
                                         error: function (xhr, status, error) {
@@ -2689,35 +2693,52 @@ $("#user-img").attr("src",image)
                 let propertyId;
 
                 function updateSelectedFilesContainer() {
-                    var selectedFilesContainer = $('.file-grid');
-                    selectedFilesContainer.empty();
-                    console.log(selectedFiles)
-                    selectedFiles.forEach(function (file, index) {
+    var selectedFilesContainer = $('.file-grid');
+    selectedFilesContainer.empty();
 
-                        var fileElement = $('<div>')
-                            .addClass('selected-file')
-                            .append(
-                                $('<img>')
-                                    .addClass('file-preview')
-                                    .attr('src', typeof file === "object" ? URL.createObjectURL(file) : '../../../../spadeAPI/uploads/' + file)
-                            )
-                            .append(
-                                $('<div>')
-                                    .addClass('file-details')
-                                    .append($('<span>').text("Image-" + (index + 1)))
-                                // .append($('<span>').text(fileSize))
-                            )
-                            .append(
-                                $('<span>')
-                                    .addClass('delete-file')
-                                    .text('X')
-                                    .attr('data-index', index)
-                            )
-                            .appendTo(selectedFilesContainer);
+    selectedFiles.forEach(function (file, index) {
+        var fileElement = $('<div>')
+            .addClass('selected-file');
 
-                    });
+        if (file.type && file.type.includes('image')) {
+            // Handle image files
+            fileElement.append(
+                $('<div>').addClass('file-preview')
+                    .append($('<img style="height:80px">').attr('src', URL.createObjectURL(file)))
+            );
+        } else if (file.type && file.type.includes('pdf')) {
+            // Handle PDF files
+            fileElement.append(
+                $('<div>').addClass('file-preview')
+                    .append($('<i style="font-size:50px">').addClass('fi fi-rs-file-pdf')) // Add your PDF icon class here
+            );
+        } else {
+            // Handle other files (you can modify this part as needed)
+            fileElement.append(
+                $('<div>').addClass('file-preview')
+                    .append($('<i>').addClass('fi fi-rs-file')) // Add an appropriate class for other files
+            );
+        }
 
-                }
+        fileElement
+            .append(
+                $('<div>')
+                    .addClass('file-details')
+                    .append($('<span>').text(file.type && file.type.includes('image') ? "Image-" + (index + 1) : "PDF-" + (index + 1)))
+            )
+            .append(
+                $('<span>')
+                    .addClass('delete-file')
+                    .text('X')
+                    .attr('data-index', index)
+            )
+            .appendTo(selectedFilesContainer);
+    });
+}
+
+
+
+
 
                 function formatFileSize(bytes) {
                     if (bytes === 0) return '0 Bytes';
@@ -3076,9 +3097,10 @@ $("#user-img").attr("src",image)
                                     });
                                 }
 
-                                response.data[0]?.forEach(function (task) {
+                                response.data[0]?.forEach(function (task,index) {
                                     // var image = '<td><img src="../../../../spadeAPI/uploads/' + property.images[0] + '" alt=""></td>';
                                     // var image = '<td><img src="../../../../../../Desktop/spade API 2/uploads/image-1684250579662.png" alt="hhghghgh"></td>';
+                                    
                                     var image = '<td><img src="../../../../spadeAPI/uploads/' + task.taskImages?.split(',')[0] + '" alt=""></td>';
 
                                     var createdDate = new Date(task.created_at);

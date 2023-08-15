@@ -33,6 +33,11 @@
     <!-- <link rel="stylesheet" href="../assets/css/"> -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
     <!-- COLOR SKIN CSS -->
+    <script>
+        if(localStorage.getItem("property")=="false"){
+                window.location="./new-property.html"
+        }
+    </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
         .custom-file-input::-webkit-file-upload-button {
@@ -1708,10 +1713,9 @@
                                             <table class="table border text-nowrap text-md-nowrap mb-0" id="responsive-datatable">
                                                 <thead>
                                                     <tr>
-
+                                                        <th>#</th>
                                                         <th>IMAGE</th>
-                                                        <th>PROPERTY ID</th>
-
+                                                        <th class="d-none">PROPERTY ID</th>
                                                         <th>PROPERTY NAME</th>
                                                         <th>PROPERTY Type</th>
                                                         <th>PROPERTY UNITS</th>
@@ -2279,6 +2283,7 @@
     <script src="../assets/js/intercom.js"></script>
     <script>
         $(document).ready(function() {
+            
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
                 method: 'GET',
@@ -3153,8 +3158,9 @@ selectedFiles.forEach(function(file, index) {
                 success: function(response) {
                     console.log(response)
                     if (response.data[0].length === 0) {
-
+                        localStorage.setItem("property","false")
                         window.location = './new-property.html'
+
                     } else {
                         function toTitleCase(str) {
                                 return str.replace(/\w\S*/g, function(txt) {
@@ -3168,10 +3174,11 @@ selectedFiles.forEach(function(file, index) {
 
                         tableBody.empty();
                         console.log(response.data[0].length);
-                        response.data[0].forEach(function(property) {
+                        response.data[0].forEach(function(property,index) {
+                            var serial=`<td style="font-weight: 600;">${(index + 1)}</td>`
                              var image = '<td><img src="' + property.images[0]?.imageURL + '" alt=""></td>';
 
-                            var propertyId = '<td class="property-id " style="font-weight: 600;">' + property
+                            var propertyId = '<td class="property-id d-none" style="font-weight: 600;">' + property
                                 .id + '</td>';
 
                             var propertyName = '<td class="propertyName" style="font-weight: 600;">' +
@@ -3217,11 +3224,12 @@ selectedFiles.forEach(function(file, index) {
                                 '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>'
                             '</ul></td>';
                             // Create a table row and append the generated columns
-                            var row = '<tr>' + image + propertyId + propertyName + propertyType +
-                                propertyUnits + propertyAddress + dropdownMenu + '</tr>';
+                            var row = '<tr>' + serial + image + propertyId + propertyName +
+          propertyType + propertyUnits + propertyAddress + dropdownMenu + '</tr>';
 
-                            // Append the row to the table body
-                            tableBody.append(row);
+// Append the row to the table body
+tableBody.append(row);
+
                         });
                         $("#global-loader").fadeOut("slow")
                         $('.edit-option').click(function(e) {

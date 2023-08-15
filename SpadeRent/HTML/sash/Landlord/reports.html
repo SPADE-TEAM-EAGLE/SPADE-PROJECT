@@ -2702,12 +2702,8 @@
                                                         <div class="form-group">
                                                             <label class="form-label"><b>Property</b></label>
                                                             <select class="form-control select2-show-search form-select"
-                                                                data-placeholder="Choose one">
+                                                                id="propertySelect" data-placeholder="Choose one">
                                                                 <option label="Choose one"></option>
-                                                                <option value="AZ" selected>9430 Research Blvd. Ste
-                                                                    2-350 Austin</option>
-                                                                <option value="CO">Colorado</option>
-                                                                <option value="ID">Idaho</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -2756,7 +2752,7 @@
                                                                 </div>
                                                                 <div class="d-flex">
                                                                     <button type="button" class="btn btn-primary mx-2"
-                                                                    onclick="exportTableToCSV('person.csv')"><strong>Export as CSV</strong></button>
+                                                                    onclick="exportTableToCSV('person.csv')" id="download_csv_reports"><strong>Export as CSV</strong></button>
                                                                     <button type="button" class="btn btn-primary mx-2"
                                                                         id="download_pdf_reports"><strong>Export as PDF</strong></button>
                                                                     <div class="btn-group">
@@ -2855,8 +2851,8 @@
                                                                         id="responsive-datatable">
                                                                         <thead>
                                                                             <tr>
-
-                                                                                <th>PROPERTY ID</th>
+                                                                                <th>#</th>
+                                                                                <th class="d-none">PROPERTY ID</th>
                                                                                 <th>PROPERTY NAME</th>
                                                                                 <th>PROPERTY TYPE</th>
                                                                                 <th>UNIT NUMBER</th>
@@ -2948,9 +2944,9 @@
                                                             </div>
                                                             <div class="d-flex">
                                                                 <button type="button" class="btn btn-primary mx-2"
-                                                                    id="add_property_btn"><strong>Export as CSV</strong></button>
+                                                                id="#download_csv_reports_lease"><strong>Export as CSV</strong></button>
                                                                 <button type="button" class="btn btn-primary mx-2"
-                                                                    id="add_property_btn"><strong>Export as PDF</strong></button>
+                                                                id="#download_pdf_reports_lease"><strong>Export as PDF</strong></button>
                                                                 <div class="btn-group">
                                                                     <button type="button"
                                                                         class="btn font-weight-bold text-dark"
@@ -3029,7 +3025,8 @@
                                                                     id="responsive-datatable">
                                                                     <thead>
                                                                         <tr>
-                                                                            <th>PROPERTY ID</th>
+                                                                            <th>#</th>
+                                                                            <th class="d-none">PROPERTY ID</th>
                                                                             <th>PROPERTY NAME</th>
                                                                             <th>PROPERTY TYPE</th>
                                                                             <th>UNIT NUMBER</th>
@@ -3081,7 +3078,7 @@
                                                                     <div class="btn-group">
                                                                         <button type="button"
                                                                             class="btn btn-outline-default text-dark py-1"
-                                                                            id="filter_btn" data-bs-toggle="dropdown"><i
+                                                                            id="filter_btn-tenant" data-bs-toggle="dropdown"><i
                                                                                 class="typcn typcn-filter me-2 fs-16"></i><strong>Filter</strong></button>
                                                                         <ul class="dropdown-menu" role="menu">
                                                                             <li><a href="javascript:void(0)"><strong
@@ -3227,8 +3224,8 @@
                                                                         id="responsive-datatable">
                                                                         <thead>
                                                                             <tr>
-
-                                                                                <th>PROPERTY ID</th>
+                                                                                <th>#</th>
+                                                                                <th class="d-none">PROPERTY ID</th>
                                                                                 <th>PROPERTY NAME</th>
                                                                                 <th>PROPERTY TYPE</th>
                                                                                 <th>UNIT NUMBER</th>
@@ -3417,7 +3414,8 @@
                                                                 <table class="table border text-nowrap text-md-nowrap mb-0" id="myTable">
                                                                     <thead>
                                                                         <tr>
-                                                                            <th>INVOICE NO</th>
+                                                                            <th>#</th>
+                                                                            <th class="d-none">INVOICE NO</th>
                                                                             <th>TENANT NAME</th>
                                                                             <th>EMAIL</th>
                                                                             <th>INVOICE DATE</th>
@@ -3597,7 +3595,7 @@
                                                             <table class="table border text-nowrap text-md-nowrap mb-0">
                                                     <thead>
                                                         <tr>
-
+                                                            <th>#</th>
                                                             <th>Image</th>
                                                             <th>TASK</th>
                                                             <th>ASSIGNED TO</th>
@@ -4480,6 +4478,47 @@
             
 
 <script>
+    let propertyData;
+        let leaseData;
+        let tenantData;
+    function constructPropertyTable(propertyData){
+        $('#table_body_property_report').empty()
+        propertyData.forEach((property,index) => {
+            
+            if ($("#propertySelect option:contains('" + property.propertyName + "')").length === 0) {
+        $("#propertySelect").append($('<option></option>').text(property.propertyName).val(property.id));
+    }
+console.log(index)
+            // Construct the HTML for the new row
+            var newRowHtml = '<tr>' +
+                '<td style="font-weight: 600;">' + (index+1) + '</td>'+
+                '<td class="property-id d-none" style="font-weight: 600;">' + property.id + '</td>' +
+                '<td class="propertyName" style="font-weight: 600;">' + property.propertyName + '</td>' +
+                '<td class="propertyType"><a class="like" href="javascript:;"><span class="badge btn-light rounded-pill-Single-Family rounded-pill py-2 px-3"><i class="fe fe-circle me-1"></i>'+property.propertyType+'</span></a></td>' +
+                '<td class="property-id" style="font-weight: 600;">' + property.units + '</td>' +
+                '<td class="propertyAddress">' +
+                '<p style="font-weight: 600;" class="mb-1">' + property.address + '</p>' +
+                '</td>' +
+                '<td class="propertyUnits">' +
+                '<p style="font-weight: 600; color: #1467B0;" class="mb-1">' +property.firstName +" "+property.lastName + '</p>' +
+                '</td>' +
+                '<td class="propertyUnits">' +
+                '<p style="font-weight: 600;" class="mb-1">' + property.email + '</p>' +
+                '</td>' +
+                '<td class="property-id" style="font-weight: 600;">' + property.phoneNumber + '</td>' +
+                '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
+                '<ul class="dropdown-menu dropdown-menu-top">' +
+                '<li><a class="dropdown-item text-success" href="./view-property.html?propertyId=' + property.propertyId + '">View</a></li>' +
+                '<li><a class="edit-option dropdown-item text-primary" href="javascript:void(0)">Edit</a></li>' +
+                '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>' +
+                '</ul>' +
+                '</td>' +
+                '</tr>';
+
+            // Append the new row to the table body
+            $('#table_body_property_report').append(newRowHtml);
+        });
+    }
     console.log("hhdhdhcc");
 
     function formatDate(dateString) {
@@ -4494,6 +4533,11 @@ $.ajax({
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function ({ image,user }) {
+                    function toTitleCase(str) {
+                                return str.replace(/\w\S*/g, function(txt) {
+                                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                                });
+                            }
                     console.log(user);
                     $("#header-user").text(toTitleCase(user))
 $("#user-img").attr("src",image)
@@ -4520,41 +4564,19 @@ $("#user-img").attr("src",image)
         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
     },
     success: function (response) {
-        const propertyData = response.property;
-        const leaseData = response.lease;
-        const tenantData=response.tenants
-        console.log(tenantData)
-        propertyData.forEach(property => {
-            
-            // Construct the HTML for the new row
-            var newRowHtml = '<tr>' +
-                '<td class="property-id" style="font-weight: 600;">' + property.id + '</td>' +
-                '<td class="propertyName" style="font-weight: 600;">' + property.propertyName + '</td>' +
-                '<td class="propertyType"><a class="like" href="javascript:;"><span class="badge btn-light rounded-pill-Single-Family rounded-pill py-2 px-3"><i class="fe fe-circle me-1"></i>'+property.propertyType+'</span></a></td>' +
-                '<td class="property-id" style="font-weight: 600;">' + property.units + '</td>' +
-                '<td class="propertyAddress">' +
-                '<p style="font-weight: 600;" class="mb-1">' + property.address + '</p>' +
-                '</td>' +
-                '<td class="propertyUnits">' +
-                '<p style="font-weight: 600; color: #1467B0;" class="mb-1">' +property.firstName +" "+property.lastName + '</p>' +
-                '</td>' +
-                '<td class="propertyUnits">' +
-                '<p style="font-weight: 600;" class="mb-1">' + property.email + '</p>' +
-                '</td>' +
-                '<td class="property-id" style="font-weight: 600;">' + property.phoneNumber + '</td>' +
-                '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
-                '<ul class="dropdown-menu dropdown-menu-top">' +
-                '<li><a class="dropdown-item text-success" href="./view-property.html?propertyId=' + property.propertyId + '">View</a></li>' +
-                '<li><a class="edit-option dropdown-item text-primary" href="javascript:void(0)">Edit</a></li>' +
-                '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>' +
-                '</ul>' +
-                '</td>' +
-                '</tr>';
-
-            // Append the new row to the table body
-            $('#table_body_property_report').append(newRowHtml);
-        });
-        leaseData.forEach(lease => {
+        propertyData = response.property;
+        leaseData = response.lease;
+        tenantData=response.tenants
+        if(propertyData.length==0){
+$("#download_csv_reports").attr("disabled",true)
+$("#download_pdf_reports").attr("disabled",true)
+        }
+        constructPropertyTable(propertyData)
+        if(leaseData.length>1){
+            $("#download_csv_reports_lease").attr("disabled",true)
+$("#download_pdf_reports_lease").attr("disabled",true)
+        }
+        leaseData.forEach((lease,index) => {
             var remainingDays;
             if (lease.LeaseExpire) {
                 var leaseDate = new Date(lease.LeaseExpire);
@@ -4568,7 +4590,8 @@ $("#user-img").attr("src",image)
 
             // Construct the HTML for the new row
             var newRowHtml = '<tr>' +
-                '<td class="property-id" style="font-weight: 600;">' + lease.propertyId + '</td>' +
+'<td style="font-weight: 600;">' + (index+1) + '</td>'+
+                '<td class="property-id d-none" style="font-weight: 600;">' + lease.propertyId + '</td>' +
                 '<td class="propertyName" style="font-weight: 600;">' + lease.propertyName + '</td>' +
                 '<td class="propertyType"><a class="like" href="javascript:;"><span class="badge btn-light rounded-pill-Single-Family rounded-pill py-2 px-3"><i class="fe fe-circle me-1"></i>'+lease.propertyType+'</span></a></td>' +
                 '<td class="property-id" style="font-weight: 600;">' + lease.units + '</td>' +
@@ -4586,7 +4609,7 @@ $("#user-img").attr("src",image)
             $('#table_body_lease_report').append(newRowHtml);
         });
 
-            tenantData.forEach(tenant => {
+            tenantData.forEach((tenant,index) => {
             // Calculate remaining days only if expirydate is provided
             var remainingDays;
             if (tenant.expirydate) {
@@ -4601,7 +4624,8 @@ $("#user-img").attr("src",image)
 
             // Construct the HTML for the new row
             var newRowHtml = '<tr>' +
-                '<td class="property-id" style="font-weight: 600;">' + tenant.propertyId + '</td>' +
+                '<td style="font-weight: 600;">' + (index+1) + '</td>'+
+                '<td class="property-id d-none" style="font-weight: 600;">' + tenant.propertyId + '</td>' +
                 '<td class="propertyName" style="font-weight: 600;">' + tenant.propertyName + '</td>' +
                 '<td class="propertyType"><a class="like" href="javascript:;"><span class="badge btn-light rounded-pill-Single-Family rounded-pill py-2 px-3"><i class="fe fe-circle me-1"></i>Single Family</span></a></td>' +
                 '<td class="property-id" style="font-weight: 600;">' + tenant.units + '</td>' +
@@ -4632,6 +4656,40 @@ $("#user-img").attr("src",image)
         }
     }
 });
+function filterAndRenderTable(selectedValue) {
+    if(selectedValue){
+        var filteredData = propertyData.filter(property => property.id == selectedValue);
+
+    // Call the constructPropertyTable function to render the filtered data
+    constructPropertyTable(filteredData);
+    }
+    else{
+       
+
+    // Call the constructPropertyTable function to render the filtered data
+    constructPropertyTable(propertyData);
+    }
+}
+
+function searchAndRenderTable(query) {
+    // Convert the query to lowercase for case-insensitive search
+    query = query.toLowerCase();
+
+    // Filter propertyData based on the search query
+    var filteredData = propertyData.filter(property => property.propertyName.toLowerCase().includes(query));
+
+    // Call the constructPropertyTable function to render the filtered data
+    constructPropertyTable(filteredData);
+}
+// Attach an event handler to the select element
+$("#propertySelect").on('change', function() {
+    var selectedValue = $(this).val();
+    filterAndRenderTable(selectedValue);
+});
+$("#typehead").on('input', function() {
+    var searchQuery = $(this).val();
+    searchAndRenderTable(searchQuery);
+});
 function formatCurrency(amount) {
     // Convert amount to a number
     const numericAmount = Number(amount);
@@ -4642,6 +4700,41 @@ function formatCurrency(amount) {
     // Format the number with two decimal places and add the dollar sign
     return '$' + numericAmount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
 }
+$()
+$('.dropdown-menu li').on('click', function() {
+        var selectedFilter = $(this).find('a').text().trim();
+        $('#selectedFilterText').text(selectedFilter);
+        
+        // Perform filtering based on the selected filter
+        filterTable(selectedFilter);
+    });
+    
+    function filterTable(filter) {
+        // Get the current date
+        var currentDate = new Date();
+
+        // Loop through each row in the table
+        $('#table_body_lease_report tr').each(function() {
+            var expiryDateText = $(this).find('.propertyAddress p').text();
+            var expiryDate = new Date(expiryDateText);
+            
+            var daysRemaining = Math.ceil((expiryDate - currentDate) / (1000 * 60 * 60 * 24));
+
+            // Apply the filter logic based on the selected filter
+            if (filter === '60 Days' && daysRemaining <= 60) {
+                $(this).show();
+            } else if (filter === '15 Days' && daysRemaining <= 15) {
+                $(this).show();
+            } else if (filter === 'Monthly' && daysRemaining <= 30) {
+                $(this).show();
+            } else if (filter === 'Weekly' && daysRemaining <= 7) {
+                $(this).show();
+            } else if (filter === 'All') {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });}
 $.ajax({
     url: 'https://backend.app.spaderent.com/api/spade/invoiceReport',
     type: 'GET',
@@ -4653,10 +4746,11 @@ $.ajax({
     success: function (response) {
         const invoiceData=response.property
         console.log(invoiceData)
-        invoiceData.forEach(invoice => {
+        invoiceData.forEach((invoice,index) => {
             // Construct the HTML for the new row
             var newRowHtml = '<tr>' +
-                '<td class="invoice-id" style="font-weight: 600;">' + invoice.invoiceID + '</td>' +
+                '<td style="font-weight: 600;">' + (index+1) + '</td>'+
+                '<td class="invoice-id d-none" style="font-weight: 600;">' + invoice.invoiceID + '</td>' +
                 '<td class="tenantName" style="font-weight: 600; color: #4573D2;">' + invoice.firstName+" "+ invoice.lastName+ '<br><small><span style="color: gray;">Phone: ' + invoice.phoneNumber + '</span></small></td>' +
                 '<td class="memo" style="font-weight: 600;">' + invoice.email + '</td>' +
                 '<td class="date" style="font-weight: 600;">' + formatDate(invoice.created_at) + '<br><small>Due Date: ' + formatDate(invoice.dueDate) + '</small></td>' +
@@ -4694,7 +4788,7 @@ $.ajax({
         
         const taskData = response.property;
         console.log(taskData)
-        taskData.forEach(task => {
+        taskData.forEach((task,index) => {
             // Calculate time difference between task created_at and current date
             var createdDate = new Date(task.created_at);
             var currentDate = new Date();
@@ -4703,6 +4797,7 @@ $.ajax({
 
             // Construct the HTML for the new row
             var newRowHtml = '<tr>' +
+                '<td style="font-weight: 600;">' + (index+1) + '</td>'+
                 '<td><img src="../assets/images/Group-user.png" alt=""></td>' +
                 '<td class="task-id" id="' + task.taskID + '" style="font-weight: 600;">' +
                 '<p style="font-weight: 600;" class="mb-1">' + task.taskName + '</p>' +

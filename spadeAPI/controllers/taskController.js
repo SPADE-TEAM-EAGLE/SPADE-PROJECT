@@ -306,11 +306,11 @@ exports.addTasks = async (req, res) => {
     notifyTenant,
     notifyVendor,
     images,
-    notify
+    
     // created_at,
     // created_by,
   } = req.body;
-
+console.log(req.body)
   const vendorID = assignee
   const { userId, userName } = req.user;
 
@@ -337,7 +337,7 @@ exports.addTasks = async (req, res) => {
         currentDate,
         userName,
         userId,
-        notify
+        
       ]);
       if (TasksResult.affectedRows === 0) {
         return res.status(400).send("Error1");
@@ -429,6 +429,7 @@ exports.addTasks = async (req, res) => {
     }
     return res.send("Created");
   } catch (error) {
+    console.log(error)
     res.status(400).send(error);
   }
 };
@@ -894,8 +895,8 @@ exports.addVendorCategory = async (req, res) => {
 exports.taskCount = async (req, res) => {
   try {
     // const { userId } = req.user; 
-    console.log("1")
-    const {userId, startDate, endDate } = req.body; 
+    const {userId} =req.user
+    const {startDate, endDate } = req.body; 
     console.log("2")
     const taskCountResult = await queryRunner(taskCount ,[userId, startDate, endDate]);
     console.log("3")
