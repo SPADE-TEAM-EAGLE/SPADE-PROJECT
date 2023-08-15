@@ -895,8 +895,8 @@ exports.addVendorCategory = async (req, res) => {
 exports.taskCount = async (req, res) => {
   try {
     // const { userId } = req.user; 
-    console.log("1")
-    const {userId, startDate, endDate } = req.body; 
+    const {userId} =req.user
+    const {startDate, endDate } = req.body; 
     console.log("2")
     const taskCountResult = await queryRunner(taskCount ,[userId, startDate, endDate]);
     console.log("3")
