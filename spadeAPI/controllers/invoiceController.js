@@ -23,6 +23,7 @@ const {
   getAmountByCategoriesID,
   deleteInvoiceCategories,
   deleteVendorCategories,
+  invoiceAmountQuery,
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -709,3 +710,29 @@ exports.deleteVendCategories = async (req, res) => {
     res.send("Error from delete Vendor categories");
   }
 };
+
+
+
+// ####################################### Invoice Amount Count ################################################
+
+exports.invoiceAmountCount = async (req, res) => {
+  try {
+    // const { userId } = req.user; 
+    console.log("1")
+    const {userId, startDate, endDate } = req.body; 
+    console.log("2")
+    const invoiceAmountResult = await queryRunner(invoiceAmountQuery ,[userId, startDate, endDate]);
+    console.log("3")
+ 
+      res.status(200).json({
+        data : invoiceAmountResult
+      });
+    // }
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+
+}
+// ####################################### Invoice Amount Count ################################################

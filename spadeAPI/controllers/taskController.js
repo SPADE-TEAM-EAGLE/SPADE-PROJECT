@@ -21,7 +21,8 @@ const {
   getVendors,
   delteImageForTaskImages,
   addVendorCategory,
-  updateVendorCategory
+  updateVendorCategory,
+  taskCount
 } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
 const { deleteImageFromS3 } = require("../helper/S3Bucket");
@@ -883,3 +884,31 @@ exports.addVendorCategory = async (req, res) => {
     res.status(400).send(error);
   }
 };
+
+
+
+
+
+// ####################################### Task Count ################################################
+
+exports.taskCount = async (req, res) => {
+  try {
+    // const { userId } = req.user; 
+    console.log("1")
+    const {userId, startDate, endDate } = req.body; 
+    console.log("2")
+    const taskCountResult = await queryRunner(taskCount ,[userId, startDate, endDate]);
+    console.log("3")
+ 
+      res.status(200).json({
+        data : taskCountResult
+      });
+    // }
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+
+}
+// ####################################### Task Count ################################################

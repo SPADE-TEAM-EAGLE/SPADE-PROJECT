@@ -169,5 +169,10 @@ router.get('/checkSystem' ,userController.checkSystem);
 // leads routes start
 router.post("/createLead", verifyToken, leadsClt.createNewLead);
 
+// Dashboard
+// router.get("/taskCount", verifyToken, taskController.taskCount);
+router.get("/taskCount", verifyToken, taskController.taskCount);
+router.get("/invoiceAmountCount" , invoiceController.invoiceAmountCount);
+
 
 module.exports = router;
