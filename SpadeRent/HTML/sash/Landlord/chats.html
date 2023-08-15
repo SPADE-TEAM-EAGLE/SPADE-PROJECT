@@ -3225,13 +3225,13 @@
         <!-- socket      -->
         <script src="http://ec2-52-45-181-206.compute-1.amazonaws.com:3000/socket.io/socket.io.js"></script>
 
-        <script>
+        <!-- <script>
           // Connect to the socket.io server
           var socket = io('http://ec2-52-45-181-206.compute-1.amazonaws.com:3000');
           // This code won't emit a 'connection' event, as it's automatically handled by socket.io
           // Handle events from the server
         //   socket.emit('message', 'Hello from the client');
-        </script>
+        </script> -->
         
                 <!-- JQUERY JS -->
         <script src="../assets/js/jquery.min.js"></script>
@@ -3309,6 +3309,7 @@
         <script src="../assets/js/charts.js"></script>
         <script src="../assets/js/email-verification.js"></script>
         <script>
+            var socket = io('http://ec2-52-45-181-206.compute-1.amazonaws.com:3000');
             var tenantId = [];
             var chatId = 0;
             var tenantIid = 0;
@@ -3401,13 +3402,13 @@
                             // socket use
                             console.log(messageData);
                             socket.emit('chatMessage', messageData);
-                            socket.on('recieveMessage', (message) => {
-  try {
-    console.log("Received message:", message);
-  } catch (error) {
-    console.error("Error handling chatMessage event:", error);
-  }
-});
+//                             socket.on('recieveMessage', (message) => {
+//   try {
+//     console.log("Received message:", message);
+//   } catch (error) {
+//     console.error("Error handling chatMessage event:", error);
+//   }
+// });
 // chatTenant(Number(localStorage.getItem("tenantId")), String(localStorage.getItem("tenantName")))
 // fetchChatMessages(); 
                         },
@@ -3519,14 +3520,13 @@
                                 console.log(response[0]);
                                 // setTimeout(myGreeting, 500)
 
-                                const socket = io('http://ec2-52-45-181-206.compute-1.amazonaws.com:3000');
-                                // socket.emit('joinRoom', { chatId: response[0].id });
+                                socket.emit('joinRoom', { chatId: response[0].id });
 
                                 function myGreeting() {
                                     chatId = response[0].id;
                                     tenatIid = tenatId;
                                     tenatName = tenatName;
-                socket.emit('joinRoom', { chatId: chatId });
+                                    // socket.emit('joinRoom', { chatId: chatId });
 
                                     localStorage.setItem("chatId", response[0].id)
                                     localStorage.setItem("tenantId", tenatId)
