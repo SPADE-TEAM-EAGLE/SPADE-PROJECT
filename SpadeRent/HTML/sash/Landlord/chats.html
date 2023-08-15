@@ -3380,7 +3380,6 @@
                     }
                 });
                 // const socket = io("http://ec2-52-45-181-206.compute-1.amazonaws.com:3000");
-                socket.emit('joinRoom', { chatId: localStorage.getItem("chatId") });
                 $('#send-text').on('click', function (ev) {
                     var input_message = $('#input-message').val();
                     var messageData = {
@@ -3436,6 +3435,7 @@
                                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                             },
                             success: function(response) {
+                                console.log("landlord message:");
                                 console.log(messageData);
                             socket.emit('chatMessage', messageData);
                             
@@ -3487,6 +3487,7 @@
                         });
                     }
             function chatTenant(tenatId, tenatName, element) {
+                
                 // console.log(typeof String(tenatId));
                 fetchChatMessages()
                 // console.log(element);
@@ -3525,6 +3526,8 @@
                                     chatId = response[0].id;
                                     tenatIid = tenatId;
                                     tenatName = tenatName;
+                socket.emit('joinRoom', { chatId: chatId });
+
                                     localStorage.setItem("chatId", response[0].id)
                                     localStorage.setItem("tenantId", tenatId)
                                     localStorage.setItem("tenantName", tenatName)
