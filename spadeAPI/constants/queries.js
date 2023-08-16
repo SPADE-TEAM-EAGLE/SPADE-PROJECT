@@ -54,16 +54,15 @@ exports.checkChatQuery = `SELECT * FROM chats WHERE receiverID = ? AND senderId 
 exports.checkTenantsChatQuery = `SELECT * FROM chats WHERE senderId = ? AND  receiverID = ?  OR receiverID = ? AND senderId = ?  `;
 
 // get user data by id
-exports.getUserById = `SELECT active As isUserActive ,FirstName,LastName FROM users WHERE id = ?`;
-exports.getTenantById = `SELECT active As isTenantActive ,firstName,lastName FROM tenants WHERE id = ?`;
-
+exports.getUserById = `SELECT active As isUserActive ,image,FirstName,LastName FROM users WHERE id = ?`;
+exports.getTenantById = `SELECT active As isUserActive ,FirstName,LastName, Image FROM tenants LEFT JOIN tenantattachfiles ON tenants.id = tenantattachfiles.tenantID WHERE tenants.id = ?`;
 // SELECT 'user' AS type, id, email, name FROM users WHERE email = ?
 // UNION
 // SELECT 'tenant' AS type, id, email, name FROM tenants WHERE email = ?;
 
 // update user Active or Deactive
 exports.updateUserActive = `UPDATE users SET active = ? WHERE Email = ?`;
-exports.updateTenantActive = `UPDATE tenants SET active = ? WHERE Email = ?`;
+exports.updateTenantActive = `UPDATE tenants SET active = ? WHERE email = ?`;
 
 // update all notify to 1 where landlord id = id
 exports.updateAllNotifyReadQuery =  {
@@ -512,11 +511,12 @@ exports.updateInvoice =
   "UPDATE invoice SET tenantID = ?, invoiceType = ? , startDate = ? , endDate = ? , frequency = ? , dueDate = ? ,daysDue=? ,repeatTerms = ? , terms = ? , totalAmount = ? , note = ? , updated_at = ? where id = ? AND landlordID = ? ";
 // invoiceType, startDate, endDate, frequency, dueDays, repeatTerms, terms,totalAmount,additionalNotes,currentDate,invoiceID,userId
 exports.selectAllTenantsProperty = `SELECT p.id as propertyID, p.propertyName, p.address AS pAddress, p.city AS pCity, p.state AS pState, p.zipCode AS pZipCode, p.propertyType, p.propertySQFT, p.status AS pStatus,p.units AS pUnits, t.id AS tenantID ,t.firstName,t.lastName, t.companyName, t.email AS tEmail, t.phoneNumber AS tPhoneNumber, t.Address AS tAddress, t.city AS tCity, t.state AS tState, t.zipcode AS tZipcode, t.rentAmount, t.gross_or_triple_lease, t.baseRent, t.tripleNet, t.leaseStartDate, t.leaseEndDate, t.increaseRent, pu.id as propertyUnitID ,pu.unitNumber, pu.Area AS unitArea, pu.unitDetails, pu.status AS unitStatus FROM tenants AS t INNER JOIN property AS p ON t.propertyID = p.id INNER JOIN propertyunits AS pu ON t.propertyUnitID = pu.id WHERE t.propertyID = ?`;
-exports.selectAllTenants = `SELECT p.id as propertyID, p.propertyName, p.address AS pAddress, p.city AS pCity, p.state AS pState, p.zipCode AS pZipCode, p.propertyType, p.propertySQFT, p.status AS pStatus, p.units AS pUnits, i.recurringNextDate , t.id AS tenantID, t.firstName, t.lastName, t.companyName, t.email AS tEmail, t.phoneNumber AS tPhoneNumber, t.Address AS tAddress, t.city AS tCity, t.state AS tState, t.zipcode AS tZipcode, t.rentAmount, t.gross_or_triple_lease, t.baseRent, t.tripleNet, t.leaseStartDate, t.leaseEndDate, t.increaseRent, pu.id as propertyUnitID, pu.unitNumber, pu.Area AS unitArea, pu.unitDetails, pu.status AS unitStatus 
+exports.selectAllTenants = `SELECT p.id as propertyID, p.propertyName, p.address AS pAddress, p.city AS pCity, p.state AS pState, p.zipCode AS pZipCode, p.propertyType, p.propertySQFT, p.status AS pStatus, p.units AS pUnits, i.recurringNextDate , t.id AS tenantID, t.firstName, t.lastName, t.companyName, t.email AS tEmail, t.phoneNumber AS tPhoneNumber, t.Address AS tAddress, t.city AS tCity, t.state AS tState, t.zipcode AS tZipcode, t.rentAmount, t.gross_or_triple_lease, t.baseRent, t.tripleNet, t.leaseStartDate, t.leaseEndDate, t.increaseRent, pu.id as propertyUnitID, pu.unitNumber, pu.Area AS unitArea, pu.unitDetails, pu.status AS unitStatus ,ta.Image AS tenantImage
 FROM tenants AS t 
 INNER JOIN property AS p ON t.propertyID = p.id 
 INNER JOIN propertyunits AS pu ON t.propertyUnitID = pu.id 
 LEFT JOIN invoice AS i ON t.id = i.tenantID
+LEFT JOIN tenantattachfiles AS ta ON t.id = ta.tenantID
 WHERE t.landlordID = ?;
 `;
 exports.addTasksQuery =
