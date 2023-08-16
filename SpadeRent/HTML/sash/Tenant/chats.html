@@ -3620,7 +3620,7 @@
                         $("#tenant-address").empty()
                         $("#tenant-address").append(`&nbsp;&nbsp; <span><b>Pensgate St</b></span> <br>&nbsp;&nbsp; ${response.data.tAddress + " " + response.data.tCity + " " + response.data.tState + " " + response.data.tZipcode}`)
                         $.ajax({
-                            url: 'http://localhost:3000/api/spade/getUserById/' + Number(response.data.landlordID) + '/landlord',
+                            url: 'https://backend.app.spaderent.com/api/spade/getUserById/' + Number(response.data.landlordID) + '/landlord',
                             type: 'GET',
                             contentType: "application/json; charset=utf-8",
                             // processData: false,
@@ -3645,7 +3645,7 @@
                             }
                         });
                         $.ajax({
-                            url: 'http://localhost:3000/api/spade/getUserById/' + Number(response.data.tenantID) + '/tenant',
+                            url: 'https://backend.app.spaderent.com/api/spade/getUserById/' + Number(response.data.tenantID) + '/tenant',
                             type: 'GET',
                             contentType: "application/json; charset=utf-8",
                             // processData: false,
@@ -3885,7 +3885,7 @@ messs2 = `<div class="d-flex " style="align-items: flex-start;justify-content: f
             function logout() {
                 $(document).ready(function () {
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/inactiveTenant',
+                        url: 'https://backend.app.spaderent.com/api/spade/inactiveTenant',
                         type: 'PUT',
                         contentType: false,
                         processData: false,

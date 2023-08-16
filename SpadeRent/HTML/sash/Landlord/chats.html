@@ -3536,7 +3536,7 @@
                                     localStorage.setItem("tenantName", tenatName)
                                     socket.emit('joinRoom', { chatId: localStorage.getItem("chatId") });
                                     $.ajax({
-                                        url: 'http://localhost:3000/api/spade/getUserById/' + Number(tenatId) + '/tenant',
+                                        url: 'https://backend.app.spaderent.com/api/spade/getUserById/' + Number(tenatId) + '/tenant',
                                         type: 'GET',
                                         contentType: false,
                                         processData: false,
@@ -3646,7 +3646,7 @@ $(".person").css("background-image", newBgImageUrl);
             
             $(document).ready(function() {
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/viewAllPropertyTenant',
+                    url: 'https://backend.app.spaderent.com/api/spade/viewAllPropertyTenant',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -3685,7 +3685,7 @@ $(".person").css("background-image", newBgImageUrl);
             function logout() {
                 $(document).ready(function() {
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/inactiveUser',
+                        url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
                         type: 'PUT',
                         contentType: false,
                         processData: false,
