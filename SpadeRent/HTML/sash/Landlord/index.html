@@ -11,6 +11,7 @@
     <meta name="author" content="Spruko Technologies Private Limited">
     <meta name="keywords"
         content="admin,admin dashboard,admin panel,admin template,bootstrap,clean,dashboard,flat,jquery,modern,responsive,premium admin templates,responsive admin,ui,ui kit.">
+    <!-- <script src="http://localhost:3000/socket.io/socket.io.js"></script> -->
 
     <!-- FAVICON -->
     <link rel="shortcut icon" type="image/x-icon" href="../assets/images/brand/favicon.ico" />
@@ -44,9 +45,11 @@
     <!-- demo walktrough start  -->
     <link rel="stylesheet" href="../assets/css/walkthrough-demo.css">
     <!-- demo walktrough End  -->
+    <!-- <script src="socket.io/socket.io.js"></script> -->
 
     <!-- COLOR SKIN CSS -->
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="../assets/colors/color1.css" />
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script> -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
@@ -190,9 +193,11 @@
                         <h6 class="text-default mb-3">Enter a 6-digit code to verify email address</h6>
                         <input id="token" name="token" type="phone" class="form-control form mb-2" pattern="[0-9]{5}"
                             maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                            style="min-width: 200px;max-width: 350px;" placeholder="Enter the name of the property.">
+                            style="min-width: 200px;max-width: 350px;" data-bs-placement="top" data-bs-toggle="tooltip"
+                            title="" data-bs-original-title="Enter the name of the property.">
                         <input type="password" class="form-control form mb-2" id="id_password1"
-                            aria-describedby="emailHelp" placeholder="Enter Password">
+                            aria-describedby="emailHelp" placeholder="Password" data-bs-placement="top"
+                            data-bs-toggle="tooltip" title="" data-bs-original-title="Enter password here.">
                         <!-- <a class="text-primary mb-4" href="javascript:void(0)">Change Email</a> -->
                         <span class="mt-1 text-danger" id="passnotmatch1" style="display: none;">
                             MUST be atleast 8 characters long, Must contain atleast One Uppercase and One symbol.
@@ -229,7 +234,8 @@
                         <h6 class="text-default mb-3">Get started with Spade Rent! You have<span id="days-left"></span>
                             left</h6>
                         <input type="email" class="form-control form mb-2" style="min-width: 200px;max-width: 350px;"
-                            placeholder="Enter Verify your Email Address" readonly id="user-email">
+                            data-bs-placement="top" data-bs-toggle="tooltip" title=""
+                            data-bs-original-title="Enter the name of the property." readonly id="user-email">
                         <a class="text-primary mb-4" href="javascript:void(0)" id="change-email">Change Email</a>
                         <a class="text-primary mb-4 d-none" href="javascript:void(0)" id="save-email">Save Email</a>
                         <div class="">
@@ -657,6 +663,7 @@
                                                 <span class="light-layout"><i class="fi fi-rs-brightness"></i></span>
                                             </a>
                                         </div>
+
                                         <div class="d-flex country mt-2">
                                             <a class="nav-link icon text-dark customIntercomButton">
                                                 <i class="fi fi-rs-interrogation"></i>
@@ -673,7 +680,7 @@
                                             <a class="nav-link icon text-dark" onclick="mydemoclick()">
                                                 <i class="fi fi-rs-universal-access"></i>
                                             </a>
-                                        </div> -->
+                                        </div>
 
 
                                         <!-- 1 comments start  -->
@@ -687,11 +694,11 @@
                                         <!-- 1 comments start  -->
 
                                         <!-- 2 comments start  -->
-                                        <!-- <div class="d-flex country mt-2">
+                                        <div class="d-flex country mt-2">
                                             <a class="nav-link icon text-dark">
                                                 <i class="fi fi-rs-interrogation"></i>
                                             </a>
-                                        </div> -->
+                                        </div>
                                         <!-- 2 comments start  -->
 
                                         <!-- 3 comments start  -->
@@ -845,23 +852,21 @@
                                     Profile</span>
                             </a>
                         </li> -->
-                            <a href="settings.html" class="text-dark">
-                                <li class="slide">
-                                    <div class="M-0 mt-3 mb-4" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
-                                        <div class="card-header pb-0 border-bottom-0">
-                                            <i class="side-menu__icon fi fi-rs-rocket-lunch mb-0"></i>
-                                            <h3 class="card-title side-menu__label">&nbsp; Complete your Profile
-                                            </h3>
+                            <li class="slide">
+                                <div class="M-0 mt-3 mb-4" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
+                                    <div class="card-header pb-0 border-bottom-0">
+                                        <i class="side-menu__icon fi fi-rs-rocket-lunch mb-0"></i>
+                                        <h3 class="card-title side-menu__label">&nbsp; Complete your Profile
+                                        </h3>
 
-                                        </div>
-                                        <div class="card-body pt-0">
-                                            <div class="side-menu__label progress progress-md mt-5">
-                                                <!-- <div class="progress-bar bg-info" style="width: 40%;">40%</div> -->
-                                            </div>
+                                    </div>
+                                    <div class="card-body pt-0">
+                                        <div class="side-menu__label progress progress-md mt-5">
+                                            <div class="progress-bar bg-info" style="width: 40%;">40%</div>
                                         </div>
                                     </div>
-                                </li>
-                            </a>
+                                </div>
+                            </li>
                             <li class="slide">
                                 <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html"><i
                                         class="side-menu__icon fi fi-rs-dashboard"></i><span
@@ -1024,7 +1029,7 @@
                                             <option value="4">Aus</option>
                                         </select>
                                     </div>
-                                    <div class="form-group mx-3">
+                                    <div class="form-group">
                                         <button class="btn btn-primary btn-pill" data-bs-toggle="offcanvas"
                                             data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i
                                                 class="fi fi-rs-settings-sliders"></i> Customized Dashboard</button>
@@ -1630,9 +1635,10 @@
                                             <div style="display: flex; flex-wrap: wrap; align-items: baseline;">
                                                 <label for=""><b>Property Status </b></label> &emsp;
                                                 <input type="date" class="form-control form-control-date-width"
-                                                    placeholder="Jan 6, 2022 – Jan 13, 2022">&emsp;
+                                                    placeholder="Jan 6, 2022 – Jan 13, 2022"
+                                                    id="startDate_property">&emsp;
                                                 <input type="date" class="form-control form-control-date-width"
-                                                    placeholder="Jan 6, 2022 – Jan 13, 2022">
+                                                    placeholder="Jan 6, 2022 – Jan 13, 2022" id="endDate_property">
                                             </div>
                                             <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
                                             <ul class="dropdown-menu dropdown-menu-top">
@@ -1642,7 +1648,7 @@
                                         <div class="card-body">
                                             <center class="property-status-chart-count">
                                                 <h5></h5><span
-                                                    style="font-size: 40px; font-weight: 800; margin-bottom: -10px;">56</span><span>Total
+                                                    style="font-size: 40px; font-weight: 800; margin-bottom: -10px;" id="totalProperties_chart">56</span><span>Total
                                                     Properties</span>
                                             </center>
                                             <div class="chart-containerr">
@@ -2356,7 +2362,6 @@
     <script src="../assets/plugins/datatable/js/dataTables.bootstrap5.js"></script>
     <script src="../assets/plugins/datatable/dataTables.responsive.min.js"></script>
 
-
     <!-- INTERNAL APEXCHART JS -->
     <script src="../assets/js/apexcharts.js"></script>
     <script src="../assets/plugins/apexchart/irregular-data-series.js"></script>
@@ -2414,18 +2419,28 @@
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
     <script src="../assets/js/getNotification.js"></script>
-
+    <script src="../assets/js/index-chart.js"></script>
+    <script src="http://localhost:3000/"></script>
     <script src="../assets/js/email-verification.js"></script>
     <script src="../assets/js/intercom.js"></script>
+    <script src="http://ec2-52-45-181-206.compute-1.amazonaws.com:3000/socket.io/socket.io.js"></script>
+    <script>
+        // Connect to the socket.io server
+        const socket = io('http://ec2-52-45-181-206.compute-1.amazonaws.com:3000');
+      // This code won't emit a 'connection' event, as it's automatically handled by socket.ipulo
+      // Handle events from the server
+    // socket.on('notification', (data) => {
+    //   alert(data.message); // You can customize how you want to display the notification
+    // });
+    //   socket.emit('message', 'Hello from the client');
+    </script>
+    <script>
 
-    <!-- <script>
-
-        console.log(document.getElementsByClassName('customIntercomButton'))
+        console.log(document.getElementById('customIntercomButton'))
         // Your Intercom settings (replace with your actual app_id)
         window.intercomSettings = {
             api_base: "https://api-iam.intercom.io",
             app_id: "fjpx1kt1",
-
         };
 
         // Function to open the Intercom side popup
@@ -2475,7 +2490,7 @@
             }
         })();
 
-    </script> -->
+    </script>
     <script>
         $(document).ready(function () {
             $.ajax({
@@ -2576,7 +2591,7 @@
         // $.ajax(settings).done(function (response) {
         //   console.log(response);
         // });
-        var invoiceData = []; var startDate;
+        var invoiceData = []; var startDate;var propertyData=[]
         var endDate;
         function formatDate(date) {
             const year = date.getFullYear();
@@ -2595,7 +2610,9 @@
             $("#endDate_invoice").val(endDate)
             $("#startDate_task").val(startDate)
             $("#endDate_task").val(endDate)
-
+            $("#startDate_property").val(startDate)
+            $("#endDate_property").val(endDate)
+            // /getDashPropertyData
             $("#startDate_invoice").on('change', function () {
                 startDate = $(this).val()
                 $.ajax({
@@ -2682,35 +2699,35 @@
 
                         if (response?.property.length < 1) {
 
-}
-else {
-    $("#task-count").text(response?.property[0]?.taskCount);
-// Update the text content of the element with the id "task-ongoing"
-var onGoingTaskCount = response?.property[0]?.onGoingTaskCount;
-$("#task-ongoing").text(onGoingTaskCount !== null ? onGoingTaskCount : 0);
+                        }
+                        else {
+                            $("#task-count").text(response?.property[0]?.taskCount);
+                            // Update the text content of the element with the id "task-ongoing"
+                            var onGoingTaskCount = response?.property[0]?.onGoingTaskCount;
+                            $("#task-ongoing").text(onGoingTaskCount !== null ? onGoingTaskCount : 0);
 
-// Update the text content of the element with the id "task-finished"
-var finishedTaskCount = response?.property[0]?.finishedTaskCount;
-$("#task-finished").text(finishedTaskCount !== null ? finishedTaskCount : 0);
+                            // Update the text content of the element with the id "task-finished"
+                            var finishedTaskCount = response?.property[0]?.finishedTaskCount;
+                            $("#task-finished").text(finishedTaskCount !== null ? finishedTaskCount : 0);
 
-// Calculate and update the text content of the element with the id "task-incomplete-percent"
-var taskCount = parseInt(response?.property[0]?.taskCount) || 1; // Handle 0 taskCount case
-if (onGoingTaskCount !== null) {
-    var incompletePercent = (parseInt(onGoingTaskCount) / taskCount) * 100;
-    $("#task-incomplete-percent").text(incompletePercent.toFixed(2) + " %");
-} else {
-    $("#task-incomplete-percent").text("0.00 %");
-}
+                            // Calculate and update the text content of the element with the id "task-incomplete-percent"
+                            var taskCount = parseInt(response?.property[0]?.taskCount) || 1; // Handle 0 taskCount case
+                            if (onGoingTaskCount !== null) {
+                                var incompletePercent = (parseInt(onGoingTaskCount) / taskCount) * 100;
+                                $("#task-incomplete-percent").text(incompletePercent.toFixed(2) + " %");
+                            } else {
+                                $("#task-incomplete-percent").text("0.00 %");
+                            }
 
-// Calculate and update the text content of the element with the id "task-complete-percent"
-if (finishedTaskCount !== null) {
-    var completePercent = (parseInt(finishedTaskCount) / taskCount) * 100;
-    $("#task-complete-percent").text(completePercent.toFixed(2) + " %");
-} else {
-    $("#task-complete-percent").text("0.00 %");
-}
+                            // Calculate and update the text content of the element with the id "task-complete-percent"
+                            if (finishedTaskCount !== null) {
+                                var completePercent = (parseInt(finishedTaskCount) / taskCount) * 100;
+                                $("#task-complete-percent").text(completePercent.toFixed(2) + " %");
+                            } else {
+                                $("#task-complete-percent").text("0.00 %");
+                            }
 
-}
+                        }
 
                     },
                     error: function (xhr, status, error) {
@@ -2738,30 +2755,30 @@ if (finishedTaskCount !== null) {
                         }
                         else {
                             $("#task-count").text(response?.property[0]?.taskCount);
-// Update the text content of the element with the id "task-ongoing"
-var onGoingTaskCount = response?.property[0]?.onGoingTaskCount;
-$("#task-ongoing").text(onGoingTaskCount !== null ? onGoingTaskCount : 0);
+                            // Update the text content of the element with the id "task-ongoing"
+                            var onGoingTaskCount = response?.property[0]?.onGoingTaskCount;
+                            $("#task-ongoing").text(onGoingTaskCount !== null ? onGoingTaskCount : 0);
 
-// Update the text content of the element with the id "task-finished"
-var finishedTaskCount = response?.property[0]?.finishedTaskCount;
-$("#task-finished").text(finishedTaskCount !== null ? finishedTaskCount : 0);
+                            // Update the text content of the element with the id "task-finished"
+                            var finishedTaskCount = response?.property[0]?.finishedTaskCount;
+                            $("#task-finished").text(finishedTaskCount !== null ? finishedTaskCount : 0);
 
-// Calculate and update the text content of the element with the id "task-incomplete-percent"
-var taskCount = parseInt(response?.property[0]?.taskCount) || 1; // Handle 0 taskCount case
-if (onGoingTaskCount !== null) {
-    var incompletePercent = (parseInt(onGoingTaskCount) / taskCount) * 100;
-    $("#task-incomplete-percent").text(incompletePercent.toFixed(2) + " %");
-} else {
-    $("#task-incomplete-percent").text("0.00 %");
-}
+                            // Calculate and update the text content of the element with the id "task-incomplete-percent"
+                            var taskCount = parseInt(response?.property[0]?.taskCount) || 1; // Handle 0 taskCount case
+                            if (onGoingTaskCount !== null) {
+                                var incompletePercent = (parseInt(onGoingTaskCount) / taskCount) * 100;
+                                $("#task-incomplete-percent").text(incompletePercent.toFixed(2) + " %");
+                            } else {
+                                $("#task-incomplete-percent").text("0.00 %");
+                            }
 
-// Calculate and update the text content of the element with the id "task-complete-percent"
-if (finishedTaskCount !== null) {
-    var completePercent = (parseInt(finishedTaskCount) / taskCount) * 100;
-    $("#task-complete-percent").text(completePercent.toFixed(2) + " %");
-} else {
-    $("#task-complete-percent").text("0.00 %");
-}
+                            // Calculate and update the text content of the element with the id "task-complete-percent"
+                            if (finishedTaskCount !== null) {
+                                var completePercent = (parseInt(finishedTaskCount) / taskCount) * 100;
+                                $("#task-complete-percent").text(completePercent.toFixed(2) + " %");
+                            } else {
+                                $("#task-complete-percent").text("0.00 %");
+                            }
                         }
 
                     },
@@ -2773,6 +2790,53 @@ if (finishedTaskCount !== null) {
                     }
                 });
             })
+            $("#startDate_property").on('change', function () {
+                startDate = $(this).val()
+                $.ajax({
+                    url: `https://backend.app.spaderent.com/api/spade/getDashPropertyData/` + `${startDate}/${endDate}`,
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        console.log(response)
+                        $("#totalProperties_chart").text(response?.property[0]?.propertyCount)
+                        propertyData=[response?.property[0]?.propertyCount,response?.property[0]?.vacantCount,response?.property[0]?.occupiedCount]
+                            updatePropertyStatus(propertyData)
+                        
+                    },
+                    error: function (xhr, status, error) {
+                        console.log('Error occurred while fetching state and city data.');
+                        console.log(xhr);
+                        console.log(error);
+                        // console.log('Error occurred while fetching state and city data.');
+                    }
+                });
+            })
+            $("#endDate_property").on('change', function () {
+                endDate = $(this).val()
+                $.ajax({
+                    url: `https://backend.app.spaderent.com/api/spade/getDashPropertyData/` + `${startDate}/${endDate}`,
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        $("#totalProperties_chart").text(response?.property[0]?.propertyCount)
+                      
+                        console.log(response)
+                        propertyData=[response?.property[0]?.propertyCount,response?.property[0]?.vacantCount,response?.property[0]?.occupiedCount]
+                            updatePropertyStatus(propertyData)
+                    },
+                    error: function (xhr, status, error) {
+                        console.log('Error occurred while fetching state and city data.');
+                        console.log(xhr);
+                        console.log(error);
+                        // console.log('Error occurred while fetching state and city data.');
+                    }
+                });
+            })
+
             $("#resetLayout").on('click', function () {
                 localStorage.removeItem("htmlLayout")
                 window.location = '../Landlord/index.html'
@@ -2841,6 +2905,32 @@ if (finishedTaskCount !== null) {
                     // console.log('Error occurred while fetching state and city data.');
                 }
             });
+
+            $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    if (response.length < 1) {
+
+                    }
+                    else {
+                        const result = response[0]
+                        invoiceData.push(result?.totalPaid)
+                        invoiceData.push(result?.totalUnPaid)
+                        createInvoiceChart(invoiceData)
+                    }
+
+                },
+                error: function (xhr, status, error) {
+                    console.log('Error occurred while fetching state and city data.');
+                    console.log(xhr);
+                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                }
+            });
             $.ajax({
                 url: `https://backend.app.spaderent.com/api/spade/getDashInvoiceData/${startDate}/${endDate}`,
                 method: 'GET',
@@ -2867,7 +2957,7 @@ if (finishedTaskCount !== null) {
                 }
             });
             $.ajax({
-                url: `http://localhost:3000/api/spade/getDashTaskData/${startDate}/${endDate}`,
+                url: `https://backend.app.spaderent.com/api/spade/getDashTaskData/${startDate}/${endDate}`,
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2898,8 +2988,113 @@ if (finishedTaskCount !== null) {
                     // console.log('Error occurred while fetching state and city data.');
                 }
             });
+            $.ajax({
+                    url: `https://backend.app.spaderent.com/api/spade/getDashPropertyData/` + `${startDate}/${endDate}`,
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        $("#totalProperties_chart").text(response?.property[0]?.propertyCount)
+                        
+                        console.log(response?.property[0]?.propertyCount)
+                            propertyData=[response?.property[0]?.propertyCount,response?.property[0]?.vacantCount,response?.property[0]?.occupiedCount]
+                            createPropertyStatus(propertyData)
+                    },
+                    error: function (xhr, status, error) {
+                        console.log('Error occurred while fetching state and city data.');
+                        console.log(xhr);
+                        console.log(error);
+                        // console.log('Error occurred while fetching state and city data.');
+                    }
+                });
+            $("#change-email").on("click", () => {
+                $("#user-email").prop("readonly", false)
+                $("#change-email").addClass("d-none")
+                $("#send-email").addClass("d-none")
+                $("#save-email").removeClass("d-none")
+            })
+            $("#remind-later").click(() => {
+                $("#modaldemo00").modal("hide")
+            })
+            $(document).on("click", "#save-email", () => {
+                emailChange = true
+                console.log(id)
+                $.ajax({
+                    url: 'https://backend.app.spaderent.com/api/spade/emailUpdate',
+                    type: 'PUT',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({
+                        id: id,
+                        email: $("#user-email").val()
+                    }),
+                    success: function (response) {
+                        $("#user-email").prop("readonly", true)
+                        $("#change-email").removeClass("d-none")
+                        $("#send-email").removeClass("d-none")
 
+                        $("#save-email").addClass("d-none")
+                    },
+                    error: function (xhr, status, error) {
+                        // window.alert(xhr.statusText)
+                        console.error(xhr.responseText);
+                    }
+                });
+            })
+            $("#send-email").on("click", () => {
+                console.log(id)
+                $.ajax({
+                    url: 'https://backend.app.spaderent.com/api/spade/resendCode',
+                    type: 'POST',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({
+                        id: id
+                    }),
+                    success: function (response) {
+                        $("#modaldemo00").modal("hide")
+                        $("#modaldemo8").modal("show")
+                    },
+                    error: function (xhr, status, error) {
+                        // window.alert(xhr.statusText)
+                        console.error(xhr.responseText);
+                    }
+                });
+            })
+            $("#verify-btn").on("click", () => {
+                $.ajax({
+                    url: 'https://backend.app.spaderent.com/api/spade/verifyEmailUpdate',
+                    type: 'PUT',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({
+                        id: id,
+                        token: $("#token").val(),
+                        email: emailChange ? $("#user-email").val() : userEmail,
+                        password: $("#id_password1").val(),
+                    }),
+                    success: function (response) {
+                        console.log(response)
+                        if (response.message == " Email verified successful ") {
+                            localStorage.setItem("authtoken", response.token);
 
+                            $("#modaldemo8").modal("hide")
+                            $("#succesModal").modal("show")
+                            $("#account-text").empty()
+                            $("#email_verification").remove()
+                            //   window.location="./index.html"
+                        } else if (response.message == " token code is not match ") {
+                            // $("#modaldemo8").modal("hide")
+                            //   $("#info-text").text(response.message || response)
+                            $("#infoModal").modal("show")
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        // window.alert(xhr.statusText)
+                        document.getElementById("verification-spans").style.display = "block";
+                        $("#verification").addClass("is-invalid")
+                        console.error(xhr.responseText);
+                    }
+                });
+            })
             function updateTable(tabId) {
                 var tableBody = $('#' + tabId + ' tbody');
                 var apiUrl = 'https://backend.app.spaderent.com/api/spade/getAllTask'; // Replace with your API endpoint URL
@@ -3044,6 +3239,12 @@ if (finishedTaskCount !== null) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.5.2/dragula.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+
+    <!-- <script src="socket.io/socket.io.js"></script> -->
+
+
+    </script>
     <script>
         let password_validate1 = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
         var validconfirmPassword1 = document.getElementById("id_password1");
@@ -3128,27 +3329,10 @@ if (finishedTaskCount !== null) {
 
     <script>
         function logout() {
-            $(document).ready(function () {
-                $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
-                    type: 'PUT',
-                    contentType: false,
-                    processData: false,
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-                    success: function (response) {
-                        console.log(response);
-                        localStorage.removeItem('authtoken');
-                        window.close();
-                        window.open('./login_module.html', "_blank")
-                        console.log('Done');
-                    },
-                    error: function (xhr, status, error) {
-                        console.log(error);
-                    }
-                });
-            });
+            localStorage.removeItem('authtoken');
+            window.open('./login_module.html', "_blank")
+            window.close();
+            console.log('Done');
         }
     </script>
     <script src="../assets/js/index-chart.js"></script>

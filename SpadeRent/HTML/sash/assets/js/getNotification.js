@@ -21,6 +21,12 @@ function convertTimestamp(timestamp) {
     return seconds + (seconds === 1 ? " second ago" : " seconds ago");
   }
 }
+
+
+
+
+
+
 $.ajax({
   url: "https://backend.app.spaderent.com/api/spade/notify",
   method: "GET",
@@ -588,18 +594,36 @@ $.ajax({
     // console.log('Error occurred while fetching state and city data.');
   },
 });
-$(document).ready(function () {
-  $(".dumy").click(function () {
-    // get this.id and update notification table
-    console.log($(this).attr("id"));
-  });
-});
+// $(document).ready(function () {
+//   $(".dumy").click(function () {
+//     // get this.id and update notification table
+//     console.log($(this).attr("id"));
+//   });
+// });
 
 $("#updateAllNotifyRead").on("click", function () {
   updateAllNotifyRead();
 });
+function getNotifyData(){
+  $.ajax({
+    url: "https://backend.app.spaderent.com/api/spade/notify",
+    method: "GET",
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("authtoken"),
+    },
+    success: function (response) {
 
+    },
+    error: function (xhr, status, error) {
+      console.log("Error occurred while fetching state and city data.");
+      console.log(xhr);
+      console.log(error);
+      // console.log('Error occurred while fetching state and city data.');
+    },
+  });
+}
 function updateAllNotifyRead() {
+  getNotifyData()
   $.ajax({
     url: "https://backend.app.spaderent.com/api/spade/updateAllNotifyRead",
     type: "PUT",

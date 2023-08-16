@@ -61,7 +61,9 @@ const { fileUpload, deleteImageFromS3 } = require("../helper/S3Bucket");
 const { verifyMailCheck } = require("../helper/emailVerify");
 const userServices = require("../Services/userServices");
 const { log } = require("console");
+const { NotificationSocket } = require("../app.js");
 const config = process.env;
+
 
 exports.createUser = async function (req, res) {
   const { firstName, lastName, email, phone, password, planID } = req.body;
@@ -700,8 +702,12 @@ exports.property = async (req, res) => {
     images
   } = req.body;
   try {
-    // const { userId } = req.user;
-    const { userId, email } = req.user;
+    //  await NotificationSocket("notification", "New notification received!")
+    
+  const { userId, email } = req.user;
+  const io = req.io;  
+  io.emit('notification', req.body);
+    // io.emit("notification", { message: "New notification received!" });
     if (!propertyName || !address || !city || !state || !zipCode || !propertyType || !propertySQFT || !units) {
       throw new Error("Please fill all the fields");
     }
@@ -734,6 +740,10 @@ exports.property = async (req, res) => {
       throw new Error("Data doesn't inserted in property table");
     }
     if (propertyResult[0].affectedRows > 0) {
+      //  notify user using socket  
+      // io.to(userId).emit('notification', req.body);
+
+
       const mailSubject = "Property Maintenance: " + propertyName;
       const landlordUser = await queryRunner(selectQuery("users", "id"), [
         userId

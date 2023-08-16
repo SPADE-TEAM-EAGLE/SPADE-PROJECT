@@ -63,7 +63,7 @@ var myChart = new Chart(ctx, {
     var myChart;
 /* invoice chart */
 function createInvoiceChart(data){
-    console.log(data)
+    
     var ctx = document.getElementById("chartPolarr");
     // var myChart;
     myChart = new Chart(ctx, {
@@ -226,56 +226,63 @@ var chart = c3.generate({
      /////////////////
 
 //////////////  Property Status chart ///////////////
-
-var datapie = {
-    labels: ["Total Properties", "Vacant Properties", "Occupied Properties"],
-    datasets: [{
-        data: [70, 80, 300],
-        backgroundColor: ['#DACECE', '#529EE0', '#1467B0'],
-        hoverBackgroundColor: ['#DACECE', '#529EE0', '#1467B0']
-    }]
-};
-
-// Define the options for the doughnut chart, including the datalabels plugin
-var optionpie = {
-    responsive: true,
-    maintainAspectRatio: false,
-    legend: {
-        labels: {
-            fontColor: "#9ba6b5"
+var myPieChart6;
+function createPropertyStatus(data){
+    var datapie = {
+        labels: ["Total Properties", "Vacant Properties", "Occupied Properties"],
+        datasets: [{
+            data: data,
+            backgroundColor: ['#DACECE', '#529EE0', '#1467B0'],
+            hoverBackgroundColor: ['#DACECE', '#529EE0', '#1467B0']
+        }]
+    };
+    
+    // Define the options for the doughnut chart, including the datalabels plugin
+    var optionpie = {
+        responsive: true,
+        maintainAspectRatio: false,
+        legend: {
+            labels: {
+                fontColor: "#9ba6b5"
+            },
         },
-    },
-    cutoutPercentage: 65,
-    data: [{
-        value: 25,
-        label: 'data2'
-    }, {
-        value: 75,
-        label: 'data1'
-    }],
-    backgroundColor: 'rgba(119, 119, 142, 0.2)',
-    labelColor: '#77778e',
-    colors: ['#529EE0', '#1467B0'],
-    resize: true,
-    formatter: function(x) {
-        return x + "%"
-    }
-};
-
-// Get the canvas element and set its dimensions
-var canvas = document.getElementById('donutchartt');
-canvas.width = 280;
-canvas.height = 280;
-
-// Create the doughnut chart with the datalabels plugin
-var ctx6 = canvas.getContext('2d');
-var myPieChart6 = new Chart(ctx6, {
-    type: 'doughnut',
-    data: datapie,
-    options: optionpie
-});
-
-
+        cutoutPercentage: 65,
+        data: [{
+            value: 25,
+            label: 'data2'
+        }, {
+            value: 75,
+            label: 'data1'
+        }],
+        backgroundColor: 'rgba(119, 119, 1426)',
+        labelColor: '#77778e',
+        colors: ['#529EE0', '#1467B0'],
+        resize: true,
+        formatter: function(x) {
+            return x + "%"
+        }
+    };
+    
+    // Get the canvas element and set its dimensions
+    var canvas = document.getElementById('donutchartt');
+    canvas.width = 280;
+    canvas.height = 280;
+    
+    // Create the doughnut chart with the datalabels plugin
+    var ctx6 = canvas.getContext('2d');
+    myPieChart6 = new Chart(ctx6, {
+        type: 'doughnut',
+        data: datapie,
+        options: optionpie
+    });
+    
+}
+function updatePropertyStatus(data)
+{
+    console.log(data)
+    myPieChart6.data.datasets[0].data = data;
+    myPieChart6.update();
+}
    //////// //  Property Status chart ///////////////
 
 
