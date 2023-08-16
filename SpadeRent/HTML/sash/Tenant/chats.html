@@ -3429,13 +3429,7 @@
         <!-- socket IO  -->
         <script src="http://ec2-52-45-181-206.compute-1.amazonaws.com:3000/socket.io/socket.io.js"></script>
 
-        <!-- <script>
-            // Connect to the socket.io server
-            var socket = io('http://ec2-52-45-181-206.compute-1.amazonaws.com:3000');
-                  // This code won't emit a 'connection' event, as it's automatically handled by socket.io
-                  // Handle events from the server
-                //   socket.emit('message', 'Hello from the client');
-        </script> -->
+   
         <!-- JQUERY JS -->
         <script src="../assets/js/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"
@@ -3512,32 +3506,32 @@
         <script src="../assets/plugins/chart/utils.js"></script>
         <!-- CHART-DONUT JS -->
         <script src="../assets/js/charts.js"></script>
-
+        
         <script>
-    
+        // const socket = io("http://ec2-52-45-181-206.compute-1.amazonaws.com:3000");
             var tenantId = [];
             var chatId = 0;
             var tenantIid = 0;
             var tenantName = "";
             localStorage.removeItem('tenantId');
             localStorage.removeItem('tenantName');
-            // socket.on('recieveMessage', (message) => {
-            //      console.log("check rec" , message.message);
-            // });
-            
-
+            var socket = io('http://ec2-52-45-181-206.compute-1.amazonaws.com:3000');
+            function joinChatRoom(chatId) {
+                // alert(typeof chatId)
+             socket.emit('joinRoom', { chatId: String(chatId) }); // Emit the joinRoom event
+               }
             $(document).ready(function () {
                 var hasScrolled = 0;
                 // socket.emit('joinRoom', { chatId: localStorage.getItem("chatId") });
                 $('#send-text').on('click', function (ev) {
                     var input_message = $('#input-message').val();
-
                     var messageData = {
                         chatId: localStorage.getItem("chatId"),
                         message: input_message,
                         messageType: "text",
                         userType: "tenant"
                     };
+                    // joinChatRoom(localStorage.getItem("chatId"));
                     $.ajax({
                         url: 'https://backend.app.spaderent.com/api/spade/createNewMessageTenant',
                         type: 'POST',
@@ -3548,8 +3542,9 @@
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
-                            socket.emit('chatMessage', messageData);
-                              // socket.emit('joinRoom', { chatId: localStorage.getItem("chatId") });
+                            setTimeout(() => {
+                                socket.emit('chatMessage', messageData);
+                            }, 1000);
                             // socket.on('recieveMessage', (message) => {
                             //     try {
                             //         console.log("Received message:", message);
@@ -3662,120 +3657,119 @@
                 //         var messDiv = $('#messages')
                 var formattedTime;
                 function updateTime() {
-                    const currentTime = new Date();
-                    const hours = currentTime.getHours();
-                    const minutes = currentTime.getMinutes();
-                    const seconds = currentTime.getSeconds();
+        const currentTime = new Date();
+        const hours = currentTime.getHours();
+        const minutes = currentTime.getMinutes();
+        const seconds = currentTime.getSeconds();
 
-                    formattedTime = hours + ":" + (minutes < 10 ? "0" : "") + minutes;
+        formattedTime = hours + ":" + (minutes < 10 ? "0" : "") + minutes  ;
 
-                }
-                // $('#time').text(formattedTime);
-                updateTime(); // Call it initially to set the time immediately
-                var socket = io('http://ec2-52-45-181-206.compute-1.amazonaws.com:3000');
+        // $('#time').text(formattedTime);
+      }
+      updateTime(); // Call it initially to set the time immediately
+
                 function fetchChatMessages() {
-                    var messs2 = "";
-                    var messDiv = $('#messages')
-                    const chatId = localStorage.getItem("chatId");
-                   
-                    socket.on('recieveMessage', (message) => {
-                    // alert("123")
-                        updateTime();
-                        console.log("check rec", message);
-                        if(message.userType == "landlord" && message.chatId == chatId){
-                            messs2 = `<div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
-                                                                    <div style="width: 36px;height: 36px;" class="me-1"> 
-                                                                        <img src="../assets/images/users/5.jpg" style="border-radius: 50%;height: inherit;" class="message-image" />
-                                                                        </div> 
-                                                                    <div class="msg-text">
-                                                <span class="text">`+ message.message + `</span>
-                                                <span style="float: right;" class="text-primary">`+ formattedTime + `</span>
-                                            </div> </div>
-                                                            `;
-                        messDiv.append(messs2);
+                            var messs2 = "";
+                            var messDiv = $('#messages')
+                            
+                            socket.on('recieveMessage', (message) => {
+                    updateTime();
+                    if (message.userType == "landlord" && message.chatId == localStorage.getItem("chatId")) {
+                        console.log("check rec" , message.message);
+
+messs2 = `<div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
+                                    <div style="width: 36px;height: 36px;" class="me-1"> 
+                                        <img src="../assets/images/users/5.jpg" style="border-radius: 50%;height: inherit;" class="message-image" />
+                                        </div> 
+                                    <div class="msg-text">
+                <span class="text">`+ message.message+ `</span>
+                <span style="float: right;" class="text-primary">`+formattedTime+`</span>
+            </div> </div>
+                            `;
+                            messDiv.append(messs2);
+                    }
+                                                            
+                        });
                         }
-        // socket.off('recieveMessage');
-                    });
-                    
-                }
                 function chatTenant() {
                     fetchChatMessages()
-                    // console.log(typeof localStorage.getItem("landloadId"));
-                    // console.log(Number(localStorage.getItem("tenantId")));
+                        // console.log(typeof localStorage.getItem("landloadId"));
+                        // console.log(Number(localStorage.getItem("tenantId")));
+                       
+                        var recieverIdd = {
+                            recieverId: localStorage.getItem("landloadId")
+                        };
+                        
 
-                    var recieverIdd = {
-                        recieverId: localStorage.getItem("landloadId")
-                    };
-
-
-                    // $('#person-name-bold').text(String(localStorage.getItem("tenantName")))
-                    $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/accessTenantChats',
-                        type: 'POST',
-                        data: JSON.stringify(recieverIdd),
-                        contentType: 'application/json',
-                        processData: false,
-                        headers: {
-                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                        },
-                        success: function (response) {
-                            // const socket = io('http://ec2-52-45-181-206.compute-1.amazonaws.com:3000');
-                            // socket.emit('joinRoom', { chatId: response[0].id });
-                            console.log("accessTenantChats");
-                            console.log(response[0]);
-                            chatId = response[0].id;
-                            localStorage.setItem("chatId", chatId)
-                            socket.emit('joinRoom', { chatId: String(response[0].id) });
-                            $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/getUserById/' + Number(localStorage.getItem("landloadId")) + '/landlord',
-                                type: 'GET',
-                                contentType: false,
-                                processData: false,
-                                success: function (response) {
-                                    console.log("getUserById");
-                                    console.log(response);
-                                    if (response.data.isUserActive == 1) {
-                                        $('#online').show()
-                                    } else {
-                                        $('#online').hide()
-                                    }
+                        // $('#person-name-bold').text(String(localStorage.getItem("tenantName")))
+                        $.ajax({
+                            url: 'https://backend.app.spaderent.com/api/spade/accessTenantChats',
+                            type: 'POST',
+                            data: JSON.stringify(recieverIdd),
+                            contentType: 'application/json',
+                            processData: false,
+                            headers: {
+                                'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                            },
+                            success: function (response) {
+                                // const socket = io('http://ec2-52-45-181-206.compute-1.amazonaws.com:3000');
+                                // socket.emit('joinRoom', { chatId: String(response[0].id) });
+                                console.log("accessTenantChats");
+                                console.log(response[0]);
+                                function myGreeting() {
+                                    chatId = response[0].id;
+                                    joinChatRoom(chatId);
+                                    localStorage.setItem("chatId", chatId)
                                     $.ajax({
-                                        url: 'https://backend.app.spaderent.com/api/spade/TenantMessages/' + chatId,
+                                        url: 'https://backend.app.spaderent.com/api/spade/getUserById/' + Number(localStorage.getItem("landloadId")) + '/landlord',
                                         type: 'GET',
-                                        contentType: 'application/json',
+                                        contentType: false,
                                         processData: false,
-                                        headers: {
-                                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                                        },
                                         success: function (response) {
-                                            // $('#person-name-bold').text(tenatName)
-                                            var messs1 = "";
-                                            // var messs2 = "";
-                                            var messDiv = $('#messages')
-                                            messDiv.empty();
-                                            $('#chat').show()
-
-                                            console.log("TenantMessages");
+                                            console.log("getUserById");
                                             console.log(response);
+                                            if (response.data.isUserActive == 1) {
+                                                $('#online').show()
+                                            } else {
+                                                $('#online').hide()
+                                            }
+                                            $.ajax({
+                                                url: 'https://backend.app.spaderent.com/api/spade/TenantMessages/' + chatId,
+                                                type: 'GET',
+                                                contentType: 'application/json',
+                                                processData: false,
+                                                headers: {
+                                                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                                                },
+                                                success: function (response) {
+                                                    // $('#person-name-bold').text(tenatName)
+                                                    var messs1 = "";
+                        // var messs2 = "";
+                        var messDiv = $('#messages')
+                                                    messDiv.empty();
+                                                    $('#chat').show()
 
-                                            if (response.message == 'Messages fetched successfully' && response.data.length > 0) {
-                                                for (var i = 0; i < response.data.length; i++) {
-                                                    if (response.data[i]['userType'] == "tenant") {
-                                                        const timeArray = response.data[i]['created_at'].split(" ")[1].split(":");
-                                                        const time = timeArray.slice(0, 2).join(":");
-                                                        messs1 += `<div class="d-flex " style="align-items: flex-start;justify-content: end;"> 
+                                                    console.log("TenantMessages");
+                                                    console.log(response);
+
+                                                    if (response.message == 'Messages fetched successfully' && response.data.length > 0) {
+                                                        for (var i = 0; i < response.data.length; i++) {
+                                                            if (response.data[i]['userType'] == "tenant") {
+                                                                const timeArray = response.data[i]['created_at'].split(" ")[1].split(":");
+                                                                const time = timeArray.slice(0, 2).join(":");
+                                                                messs1 += `<div class="d-flex " style="align-items: flex-start;justify-content: end;"> 
                                                                     <div class="msg-text owner">
                                                                     <span class="text">`+ response.data[i]['message'] + `</span>
                                                                     <span style="float: right;" class="text-primary">`+ time + `</span>
                                                                     </div>
                                                                     <div style="width: 36px;height: 36px;" class="ms-1"> 
-                                                                        <img src="`+ localStorage.getItem("TenantImg") + `" style="border-radius: 50%;height: inherit;" class="message-image" />
+                                                                        <img src="../assets/images/users/5.jpg" style="border-radius: 50%;height: inherit;" class="message-image" />
                                                                         </div> 
                                                                     </div>`;
-                                                    } else if (response.data[i]['userType'] == "landlord") {
-                                                        const timeArray = response.data[i]['created_at'].split(" ")[1].split(":");
-                                                        const time = timeArray.slice(0, 2).join(":");
-                                                        messs1 += `<div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
+                                                            } else if (response.data[i]['userType'] == "landlord") {
+                                                                const timeArray = response.data[i]['created_at'].split(" ")[1].split(":");
+                                                                const time = timeArray.slice(0, 2).join(":");
+                                                                messs1 += `<div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
                                                                     <div style="width: 36px;height: 36px;" class="me-1"> 
                                                                         <img src="../assets/images/users/5.jpg" style="border-radius: 50%;height: inherit;" class="message-image" />
                                                                         </div> 
@@ -3783,38 +3777,45 @@
                                                 <span class="text">`+ response.data[i]['message'] + `</span>
                                                 <span style="float: right;" class="text-primary">`+ time + `</span>
                                             </div> </div>`;
+                                                            }
+                                                        }
+                                                    } else {
+                                                        messs1 = `<div class="time">No Message</div>`;
                                                     }
+                                                    messDiv.html(messs1);
+
+                                                    var parentDiv = $("#chat");
+                                                    var parentDiv2 = $(".head");
+                                                    var childDiv = $("#messages");
+                                                    function scrollToBottomOnce() {
+                                                        if (hasScrolled == 0) {
+                                                            var scrollAmount = childDiv.prop("scrollHeight") - parentDiv.prop("clientHeight") + parentDiv2.prop("clientHeight") + 100;
+
+                                                            // console.log("childDiv: " + childDiv.prop("scrollHeight"));
+                                                            // console.log("parentDiv: " + parentDiv.prop("clientHeight"));
+                                                            // console.log("parentDiv2: " + parentDiv2.prop("clientHeight"));
+
+                                                            // console.log(scrollAmount);
+
+                                                            childDiv.animate({ scrollTop: scrollAmount }, 500);
+
+                                                            hasScrolled++; // Set the flag to true after scrolling
+                                                            console.log("if: " + hasScrolled);
+
+                                                        } else {
+                                                            console.log("else: " + hasScrolled);
+                                                        }
+                                                    }
+
+                                                    // Call the function to scroll to the desired position
+                                                    scrollToBottomOnce();
+
+                                                },
+                                                error: function (xhr, status, error) {
+                                                    console.log(error);
                                                 }
-                                            } else {
-                                                messs1 = `<div class="time">No Message</div>`;
-                                            }
-                                            messDiv.html(messs1);
+                                            });
 
-                                            var parentDiv = $("#chat");
-                                            var parentDiv2 = $(".head");
-                                            var childDiv = $("#messages");
-                                            function scrollToBottomOnce() {
-                                                if (hasScrolled == 0) {
-                                                    var scrollAmount = childDiv.prop("scrollHeight") - parentDiv.prop("clientHeight") + parentDiv2.prop("clientHeight") + 100;
-
-                                                    // console.log("childDiv: " + childDiv.prop("scrollHeight"));
-                                                    // console.log("parentDiv: " + parentDiv.prop("clientHeight"));
-                                                    // console.log("parentDiv2: " + parentDiv2.prop("clientHeight"));
-
-                                                    // console.log(scrollAmount);
-
-                                                    childDiv.animate({ scrollTop: scrollAmount }, 500);
-
-                                                    hasScrolled++; // Set the flag to true after scrolling
-                                                    console.log("if: " + hasScrolled);
-
-                                                } else {
-                                                    console.log("else: " + hasScrolled);
-                                                }
-                                            }
-
-                                            // Call the function to scroll to the desired position
-                                            scrollToBottomOnce();
 
                                         },
                                         error: function (xhr, status, error) {
@@ -3823,23 +3824,17 @@
                                     });
 
 
-                                },
-                                error: function (xhr, status, error) {
-                                    console.log(error);
                                 }
-                            });
+                                myGreeting();
+                            },
+                            error: function (xhr, status, error) {
+                                console.log(error);
+                            }
+                        });
 
 
-
-                        },
-                        error: function (xhr, status, error) {
-                            console.log(error);
-                        }
-                    });
-
-
-
-
+                    
+                   
                     // setInterval(fetchChatMessages, 10000);
 
                 }
@@ -3877,17 +3872,17 @@
         <!-- chats js start  -->
         <script>
             var formattedTime;
-            function updateTime() {
-                const currentTime = new Date();
-                const hours = currentTime.getHours();
-                const minutes = currentTime.getMinutes();
-                const seconds = currentTime.getSeconds();
+                function updateTime() {
+        const currentTime = new Date();
+        const hours = currentTime.getHours();
+        const minutes = currentTime.getMinutes();
+        const seconds = currentTime.getSeconds();
 
-                formattedTime = hours + ":" + (minutes < 10 ? "0" : "") + minutes;
+        formattedTime = hours + ":" + (minutes < 10 ? "0" : "") + minutes  ;
 
-                // $('#time').text(formattedTime);
-            }
-
+        // $('#time').text(formattedTime);
+      }
+      
             $(document).ready(function () {
                 //Selector
                 const $ = (selector) => document.querySelector(selector);
@@ -3932,7 +3927,7 @@
                 //Send messages
                 input.addEventListener('keypress', function (ev) {
                     if (ev.key === 'Enter' && input.value) {
-                        // ev.preventDefault();
+                        ev.preventDefault();
                         const msg = input.value;
                         sendMessage(msg);
                     };
@@ -3972,7 +3967,7 @@
                     imageContainer.setAttribute('style', 'width: 36px; height: 36px;');
                     imageContainer.setAttribute('class', 'ms-1');
                     const image = document.createElement('img');
-                    image.setAttribute('src', "../assets/images/users/5.jpg");
+                    image.setAttribute('src', localStorage.getItem("TenantImg") ? localStorage.getItem("TenantImg") : "../assets/images/users/5.jpg");
                     image.setAttribute('style', 'border-radius: 50%; height: inherit;');
                     image.setAttribute('class', 'message-image');
 
