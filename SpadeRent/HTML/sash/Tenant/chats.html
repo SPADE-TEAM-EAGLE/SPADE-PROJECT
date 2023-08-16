@@ -3708,7 +3708,7 @@ $(".person").css("background-image", newBgImageUrl);
                 function fetchChatMessages() {
                             var messs2 = "";
                             var messDiv = $('#messages')
-                            
+                            var randomImg = "../assets/images/users/5.jpg";
                             socket.on('recieveMessage', (message) => {
                     updateTime();
                     if (message.userType == "landlord" && message.chatId == localStorage.getItem("chatId")) {
@@ -3716,7 +3716,7 @@ $(".person").css("background-image", newBgImageUrl);
 
 messs2 = `<div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
                                     <div style="width: 36px;height: 36px;" class="me-1"> 
-                                        <img src="../assets/images/users/5.jpg" style="border-radius: 50%;height: inherit;" class="message-image" />
+                                        <img src="` + (localStorage.getItem("LandlordImg") ? localStorage.getItem("LandlordImg") : randomImg) + `" style="border-radius: 50%;height: inherit;" class="message-image"/>
                                         </div> 
                                     <div class="msg-text">
                 <span class="text">`+ message.message+ `</span>
