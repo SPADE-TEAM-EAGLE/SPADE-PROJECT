@@ -4605,7 +4605,7 @@
                 console.log(columnIndex, isColumnVisible)
                 // Toggle the visibility of the corresponding column
                 $('table').find('tr').each(function () {
-                    var column = $(this).find('th:nth-child(' + columnIndex + '), td:nth-child(' + columnIndex + ')');
+                    var column = $(this).find('th:nth-child(' + (columnIndex+1) + '), td:nth-child(' + (columnIndex+1) + ')');
                     isColumnVisible ? column.show() : column.hide();
                 });
             });
@@ -4875,9 +4875,11 @@
 
                 })
                 $("#totalAmount").text('$ ' + data.totalAmount)
-                if (data.invoiceImages) {
+                // console.log(data?.invoiceImages[0]?.imageKey)
+                $("#view-invoice-images").empty()
+                if (data?.invoiceImages[0]?.imageKey) {
                     const images = data.invoiceImages
-                    $("#view-invoice-images").empty()
+                    
                     images.forEach(({ Image }) => {
                         $("#view-invoice-images").append(`
                             <img src="${Image}" width=200px height=200px alt=""> &nbsp;`)

@@ -2797,7 +2797,7 @@ function areAllFieldsFilled() {
             // Function to enable or disable buttons based on field status
             function updateButtonStatus() {
                 var allFieldsFilled = areAllFieldsFilled();
-
+console.log(allFieldsFilled)
                 // Enable or disable the buttons based on the fields' status
                 if (allFieldsFilled) {
                     $('#toggle-button,.save-invoice').attr("disabled",false)
@@ -2806,7 +2806,7 @@ function areAllFieldsFilled() {
 
                 }
             }
-            $('#add-item-container1 select').on('change', function () {
+            $('#add-item-container1').on('change', 'input, select', function() {
                 var $field = $(this);
                 var $errorMessage = $field.next('.text-danger');
                 if ($field.attr("id") === "zip") {
@@ -2830,30 +2830,7 @@ function areAllFieldsFilled() {
                 }
                 updateButtonStatus();
             })
-            $('#add-item-container1 input').on('change', function () {
-                var $field = $(this);
-                var $errorMessage = $field.next('.text-danger');
-                if ($field.attr("id") === "zip") {
-                    if ($field.val().length !== 5) {
-                        $field.addClass('border-danger');
-                        $field.removeClass('border-green');
-                        $errorMessage.removeClass('d-none');
-                    } else {
-                        $field.removeClass('border-danger');
-                        $field.addClass('border-green');
-                        $errorMessage.addClass('d-none');
-                    }
-                } else if ($field.val() === '' || $field.val() === 'Choose...') {
-                    $field.addClass('border-danger');
-                    $field.removeClass('border-green');
-                    $errorMessage.removeClass('d-none');
-                } else {
-                    $field.removeClass('border-danger');
-                    $field.addClass('border-green');
-                    $errorMessage.addClass('d-none');
-                }
-                updateButtonStatus();
-            })
+            
             // Call the updateButtonStatus function when any field in the accordions is changed
             $('#addModal input[required], #addModal select[required]').on('input change', function () {
                 var $field = $(this);

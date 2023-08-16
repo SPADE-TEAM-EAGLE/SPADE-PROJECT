@@ -921,7 +921,7 @@
 
                         </div>
                         <div class="flex-shrink-0">
-                            <a href="javascript:void(0)" class="btn btn-primary btn-pill" id="send-email">Send
+                            <a href="javascript:void(0)" class="btn btn-primary btn-pill" id="send-email-invite">Send
                                 Invite</a>
                         </div>
                     </div>
@@ -1777,11 +1777,7 @@
                                                     <li><a href="javascript:void(0)"><strong class="text-dark">Columns to
                                                                 show</strong></a>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">TENANT ID</a>
-                                                        <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
-                                                        </div>
-                                                    </li>
+        
                                                     <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">TENANT NAME</a>
                                                         <div class="form-check m-0">
                                                             <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
@@ -2993,7 +2989,7 @@
                     }
                 });
             }
-            $("#send-email").click(() => {
+            $("#send-email-invite").click(() => {
                 $("#succesModal").modal("hide")
                 console.log(tenantID)
                 $.ajax({
@@ -3376,7 +3372,7 @@
                 console.log(columnIndex, isColumnVisible)
                     // Toggle the visibility of the corresponding column
                 $('table').find('tr').each(function() {
-                    var column = $(this).find('th:nth-child(' + columnIndex + '), td:nth-child(' + columnIndex + ')');
+                    var column = $(this).find('th:nth-child(' + (columnIndex+2) + '), td:nth-child(' + (columnIndex+2) + ')');
                     isColumnVisible ? column.show() : column.hide();
                 });
             });
