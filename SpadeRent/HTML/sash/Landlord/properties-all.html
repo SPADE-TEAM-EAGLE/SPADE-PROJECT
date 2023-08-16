@@ -1676,11 +1676,7 @@
                                                             <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">PROPERTY ID</a>
-                                                        <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
-                                                        </div>
-                                                    </li>
+                                    
                                                     <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">PROPERTY NAME</a>
                                                         <div class="form-check m-0">
                                                             <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
@@ -2812,11 +2808,20 @@ $("#addModal").modal("hide")
             var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
             var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
             console.log(columnIndex, isColumnVisible)
+            console.log( $(this).find('th:nth-child(' + (columnIndex) + ')'))
                 // Toggle the visibility of the corresponding column
-            $('table').find('tr').each(function() {
-                var column = $(this).find('th:nth-child(' + columnIndex + '), td:nth-child(' + columnIndex + ')');
+                if(columnIndex>=2){
+                    $('table').find('tr').each(function() {
+                var column = $(this).find('th:nth-child(' + (columnIndex+2) + '), td:nth-child(' + (columnIndex+2) + ')');
                 isColumnVisible ? column.show() : column.hide();
             });
+                }else{
+                    $('table').find('tr').each(function() {
+                var column = $(this).find('th:nth-child(' + (columnIndex+1) + '), td:nth-child(' + (columnIndex+1) + ')');
+                isColumnVisible ? column.show() : column.hide();
+            });
+                }
+            
         });
 
         function filterTable(selectedFilter) {
