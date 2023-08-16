@@ -2518,6 +2518,7 @@
                                             <div class="person avatar">
                                                 <!-- <div class="online"></div> -->
                                             </div>
+                                            
                                             <h4 class="person-name mb-0" style="line-height: initial;"><b id="person-name-bold"></b> <br>
                                                 <p class="text-success fw-bold fs-12 m-0" id="online">Online</p>
                                             </h4>
@@ -3466,6 +3467,7 @@
                         function fetchChatMessages() {
                             var messs2 = "";
                             var messDiv = $('#messages')
+                            var randomImg = "../assets/images/users/5.jpg";
                             socket.on('recieveMessage', (message) => {
     updateTime();
     
@@ -3475,15 +3477,15 @@
 
         if (message.userType == "tenant" && message.chatId == localStorage.getItem("chatId")) {
             console.log("check rec", message);
-            messs2 = `<div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
-                        <div style="width: 36px;height: 36px;" class="me-1"> 
-                            <img src="../assets/images/users/5.jpg" style="border-radius: 50%;height: inherit;" class="message-image" />
-                        </div> 
-                        <div class="msg-text">
-                            <span class="text">${message.message}</span>
-                            <span style="float: right;" class="text-primary">${formattedTime}</span>
-                        </div>
-                    </div>`;
+            messs2 = `
+                    <div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
+                                                                    <div style="width: 36px;height: 36px;" class="me-1"> 
+                                                                        <img src="` + (localStorage.getItem("TenantImg") ? localStorage.getItem("TenantImg") : randomImg) + `" style="border-radius: 50%;height: inherit;" class="message-image" />
+                                                                        </div> 
+                                                                    <div class="msg-text">
+                                                <span class="text">${message.message}</span>
+                                                <span style="float: right;" class="text-primary">${formattedTime}</span>
+                                            </div> </div>`;
             messDiv.append(messs2);
         }
     }
@@ -3534,17 +3536,30 @@
                                     localStorage.setItem("tenantName", tenatName)
                                     socket.emit('joinRoom', { chatId: localStorage.getItem("chatId") });
                                     $.ajax({
-                                        url: 'https://backend.app.spaderent.com/api/spade/getUserById/' + Number(tenatId) + '/tenant',
+                                        url: 'http://localhost:3000/api/spade/getUserById/' + Number(tenatId) + '/tenant',
                                         type: 'GET',
                                         contentType: false,
                                         processData: false,
                                         success: function(response) {
                                             console.log("getUserById");
                                             console.log(response);
+                                            // console.log();
+                                            localStorage.setItem("TenantImg", response.data.Image)
                                             if (response.data.isTenantActive == 1) {
                                                 $('#online').show()
                                             } else {
                                                 $('#online').hide()
+                                            }
+                                            if (localStorage.getItem("TenantImg")) {
+                                                var newBgImageUrl = `url('`+localStorage.getItem("TenantImg")+`')`;
+
+// Select the div with the class "person" and change its background image
+$(".person").css("background-image", newBgImageUrl);
+                                            } else {
+                                                var newBgImageUrl = "url('../assets/images/users/5.jpg')";
+
+// Select the div with the class "person" and change its background image
+$(".person").css("background-image", newBgImageUrl);
                                             }
                                             $.ajax({
                                                 url: 'https://backend.app.spaderent.com/api/spade/LandlordMessages/' + localStorage.getItem("chatId"),
@@ -3563,6 +3578,7 @@
                                                     $('#chat').show()
                                                     console.log(response.data.length);
                                                     if (response.message == 'Messages fetched successfully' && response.data.length > 0) {
+                                                        var randomImg = "../assets/images/users/5.jpg";
                                                         for (var i = 0; i < response.data.length; i++) {
                                                             if (response.data[i]['userType'] == "landlord") {
                                                                 const timeArray = response.data[i]['created_at'].split(" ")[1].split(":");
@@ -3577,12 +3593,13 @@
                                                                         </div> 
                                                                     </div> 
                                                                     `;
+                                                                    
                                                             } else if (response.data[i]['userType'] == "tenant") {
                                                                 const timeArray = response.data[i]['created_at'].split(" ")[1].split(":");
                                                                 const time = timeArray.slice(0, 2).join(":");
                                                                 messs1 += `<div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
                                                                     <div style="width: 36px;height: 36px;" class="me-1"> 
-                                                                        <img src="../assets/images/users/5.jpg" style="border-radius: 50%;height: inherit;" class="message-image" />
+                                                                        <img src="` + (localStorage.getItem("TenantImg") ? localStorage.getItem("TenantImg") : randomImg) + `" style="border-radius: 50%;height: inherit;" class="message-image" />
                                                                         </div> 
                                                                     <div class="msg-text">
                                                 <span class="text">` + response.data[i]['message'] + `</span>
@@ -3629,7 +3646,7 @@
             
             $(document).ready(function() {
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/viewAllPropertyTenant',
+                    url: 'http://localhost:3000/api/spade/viewAllPropertyTenant',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -3637,14 +3654,16 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function(response) {
-                        // console.log(response);
+                        console.log("viewAllPropertyTenant");
+                        // console.log(response.data[0]);
+                        var randomImg1 = "../assets/images/users/5.jpg";
                         var tab_pane = $('#tab-pane-ll');
                         tab_pane.empty();
                         let tenantNames = []
                         response.data[0] ?.forEach(function(tenant) {
                             var row = `<a href="javascript:void(0)" onclick="chatTenant(` + tenant.tenantID + `,'` + tenant.firstName + ` ` + tenant.lastName + `',this)"><div class="media new border-top-0 " data-id="` + tenant.tenantID + `">
                                                             <div class="main-img-user">
-                                                                <img alt="" src="../assets/images/users/5.jpg">
+                                                                <img alt="" src="` + (tenant.tenantImage ? tenant.tenantImage : randomImg1) + `">
                                                             </div>
                                                             <div class="media-body">
                                                                 <div class="media-contact-name">
@@ -3666,7 +3685,7 @@
             function logout() {
                 $(document).ready(function() {
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                        url: 'http://localhost:3000/api/spade/inactiveUser',
                         type: 'PUT',
                         contentType: false,
                         processData: false,
