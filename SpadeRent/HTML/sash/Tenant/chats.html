@@ -3606,9 +3606,9 @@
                     },
                     success: function (response) {
                         console.log("getTenantByID");
-                        // console.log(response.data);
-                        localStorage.setItem("tenantId", response.data.tenantID)
-                        localStorage.setItem("TenantImg", response.data.images)
+                        console.log(response.data.images);
+                        
+                        // localStorage.setItem("TenantImg", response.data.images)  
                         localStorage.setItem("tenantName", response.data.firstName + " " + response.data.lastName)
                         console.log(response)
                         localStorage.setItem("landloadId", Number(response.data.landlordID))
@@ -3620,13 +3620,14 @@
                         $("#tenant-address").empty()
                         $("#tenant-address").append(`&nbsp;&nbsp; <span><b>Pensgate St</b></span> <br>&nbsp;&nbsp; ${response.data.tAddress + " " + response.data.tCity + " " + response.data.tState + " " + response.data.tZipcode}`)
                         $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/getUserById/' + Number(response.data.landlordID) + '/landlord',
+                            url: 'http://localhost:3000/api/spade/getUserById/' + Number(response.data.landlordID) + '/landlord',
                             type: 'GET',
                             contentType: "application/json; charset=utf-8",
                             // processData: false,
                             success: function (response) {
-                                // console.log(1111111)
-                                // console.log()
+                                console.log(1111111)
+                                console.log(response)
+                                localStorage.setItem("LandlordImg", response.data.image)
                                 if (response.data.isUserActive == 1) {
                                     $('#online').show()
                                 } else {
@@ -3634,6 +3635,41 @@
                                 }
                                 $('#person-name-bold').text(response.data.FirstName + " " + response.data.LastName)
                                 chatTenant()
+                            },
+                            error: function (xhr, status, error) {
+                                $("#myModal_warning_connection").modal("show");
+                                setTimeout(function () {
+                                    $('#myModal_warning_connection').modal('hide');
+                                }, 2000);
+                                console.log('Error: ' + error);
+                            }
+                        });
+                        $.ajax({
+                            url: 'http://localhost:3000/api/spade/getUserById/' + Number(response.data.tenantID) + '/tenant',
+                            type: 'GET',
+                            contentType: "application/json; charset=utf-8",
+                            // processData: false,
+                            success: function (response) {
+                                console.log(22222)
+                                console.log(response)
+                                var imgggg = response.data.Image;
+                                var urlArray = imgggg.split(",");
+                                
+                                var firstUrl = urlArray[0];
+                                localStorage.setItem("tenantImg", firstUrl)
+                                if (localStorage.getItem("tenantImg")) {
+                                                var newBgImageUrl = `url('`+localStorage.getItem("tenantImg")+`')`;
+
+// Select the div with the class "person" and change its background image
+$(".person").css("background-image", newBgImageUrl);
+                                            } else {
+                                                var newBgImageUrl = "url('../assets/images/users/5.jpg')";
+
+// Select the div with the class "person" and change its background image
+$(".person").css("background-image", newBgImageUrl);
+                                            }
+                                // console.log("First URL:", firstUrl);
+                               
                             },
                             error: function (xhr, status, error) {
                                 $("#myModal_warning_connection").modal("show");
@@ -3653,6 +3689,7 @@
                         console.log('Error: ' + error);
                     }
                 });
+                
                 // var messs1 = "";
                 //         var messDiv = $('#messages')
                 var formattedTime;
@@ -3753,6 +3790,7 @@ messs2 = `<div class="d-flex " style="align-items: flex-start;justify-content: f
                                                     console.log(response);
 
                                                     if (response.message == 'Messages fetched successfully' && response.data.length > 0) {
+                                                        var randomImg = "../assets/images/users/5.jpg";
                                                         for (var i = 0; i < response.data.length; i++) {
                                                             if (response.data[i]['userType'] == "tenant") {
                                                                 const timeArray = response.data[i]['created_at'].split(" ")[1].split(":");
@@ -3763,7 +3801,7 @@ messs2 = `<div class="d-flex " style="align-items: flex-start;justify-content: f
                                                                     <span style="float: right;" class="text-primary">`+ time + `</span>
                                                                     </div>
                                                                     <div style="width: 36px;height: 36px;" class="ms-1"> 
-                                                                        <img src="../assets/images/users/5.jpg" style="border-radius: 50%;height: inherit;" class="message-image" />
+                                                                        <img src="` + (localStorage.getItem("tenantImg") ? localStorage.getItem("tenantImg") : randomImg) + `" style="border-radius: 50%;height: inherit;" class="message-image" />
                                                                         </div> 
                                                                     </div>`;
                                                             } else if (response.data[i]['userType'] == "landlord") {
@@ -3771,7 +3809,7 @@ messs2 = `<div class="d-flex " style="align-items: flex-start;justify-content: f
                                                                 const time = timeArray.slice(0, 2).join(":");
                                                                 messs1 += `<div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
                                                                     <div style="width: 36px;height: 36px;" class="me-1"> 
-                                                                        <img src="../assets/images/users/5.jpg" style="border-radius: 50%;height: inherit;" class="message-image" />
+                                                                        <img src="` + (localStorage.getItem("LandlordImg") ? localStorage.getItem("LandlordImg") : randomImg) + `" style="border-radius: 50%;height: inherit;" class="message-image" />
                                                                         </div> 
                                                                     <div class="msg-text">
                                                 <span class="text">`+ response.data[i]['message'] + `</span>
@@ -3967,7 +4005,7 @@ messs2 = `<div class="d-flex " style="align-items: flex-start;justify-content: f
                     imageContainer.setAttribute('style', 'width: 36px; height: 36px;');
                     imageContainer.setAttribute('class', 'ms-1');
                     const image = document.createElement('img');
-                    image.setAttribute('src', localStorage.getItem("TenantImg") ? localStorage.getItem("TenantImg") : "../assets/images/users/5.jpg");
+                    image.setAttribute('src', localStorage.getItem("tenantImg") ? localStorage.getItem("tenantImg") : "../assets/images/users/5.jpg");
                     image.setAttribute('style', 'border-radius: 50%; height: inherit;');
                     image.setAttribute('class', 'message-image');
 
