@@ -3635,25 +3635,42 @@
             }
             updateTime(); // Call it initially to set the time immediately
 
-            function fetchChatMessages() {
-                var messs2 = "";
-                var messDiv = $('#messages')
-                socket.on('recieveMessage', (message) => {
-                    updateTime();
-                    console.log("check rec", message);
-                    messs2 = `<div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
-                                                                    <div style="width: 36px;height: 36px;" class="me-1"> 
-                                                                        <img src="../assets/images/users/5.jpg" style="border-radius: 50%;height: inherit;" class="message-image" />
-                                                                        </div> 
-                                                                    <div class="msg-text">
-                                                <span class="text">`+ message.message + `</span>
-                                                <span style="float: right;" class="text-primary">`+ formattedTime + `</span>
-                                            </div> </div>
-                                                            `;
-                    messDiv.append(messs2);
-                    //   chatTenant(Number(localStorage.getItem("tenantId")), String(localStorage.getItem("tenantName")))
-                });
-            }
+            // Declare an array to store chat messages
+var chatMessages = [];
+
+function fetchChatMessages() {
+    var messDiv = $('#messages');
+    socket.on('recieveMessage', (message) => {
+        updateTime();
+        console.log("check rec", message);
+        
+        // Store the new message in the array
+        chatMessages.push(message.message);
+
+        // Check if the current message is the same as the previous one
+        if (chatMessages.length > 1 && chatMessages[chatMessages.length - 1] === chatMessages[chatMessages.length - 2]) {
+            // Display the previous message only
+            return;
+        }
+
+        if (message.userType == "tenant" && message.chatId == chatId) {
+            var messs2 = `
+                <div class="d-flex" style="align-items: flex-start; justify-content: flex-start;">
+                    <div style="width: 36px; height: 36px;" class="me-1">
+                        <img src="../assets/images/users/5.jpg" style="border-radius: 50%; height: inherit;" class="message-image" />
+                    </div>
+                    <div class="msg-text">
+                        <span class="text">${message.message}</span>
+                        <span style="float: right;" class="text-primary">${formattedTime}</span>
+                    </div>
+                </div>
+            `;
+
+            messDiv.append(messs2);
+        }
+    });
+}
+
             function chatTenant(tenatId, tenatName, element) {
                 // console.log(typeof String(tenatId));
                 fetchChatMessages()
@@ -3679,7 +3696,7 @@
                         },
                         success: function (response) {
                             console.log(response[0]);
-                            // socket.emit('joinRoom', { chatId: response[0].id });
+                            socket.emit('joinRoom', { chatId: String(response[0].id) });
                             chatId = response[0].id;
                             tenatIid = tenatId;
                             tenatName = tenatName;
@@ -3760,6 +3777,7 @@
                                             console.log(error);
                                         }
                                     });
+
 
                                 },
                                 error: function (xhr, status, error) {
@@ -3940,7 +3958,7 @@
                     imageContainer.setAttribute('style', 'width: 36px; height: 36px;');
                     imageContainer.setAttribute('class', 'ms-1');
                     const image = document.createElement('img');
-                    image.setAttribute('src', "../assets/images/users/5.jpg");
+                    image.setAttribute('src', localStorage.getItem("LandlordImg") ? localStorage.getItem("LandlordImg") : "../assets/images/users/5.jpg");
                     image.setAttribute('style', 'border-radius: 50%; height: inherit;');
                     image.setAttribute('class', 'message-image');
 
