@@ -1450,9 +1450,9 @@
                                             <div style="display: flex; align-items: end;">
                                                 <label for=""><b>Accounts Status </b></label> &emsp;
                                                 <input type="date" class="form-control form-control-date-width"
-                                                    placeholder="Jan 6, 2022 – Jan 13, 2022">&emsp;
+                                                    placeholder="Jan 6, 2022 – Jan 13, 2022" id="startDate_account">&emsp;
                                                 <input type="date" class="form-control form-control-date-width"
-                                                    placeholder="Jan 6, 2022 – Jan 13, 2022">
+                                                    placeholder="Jan 6, 2022 – Jan 13, 2022" id="endDate_account">
                                             </div>
                                             <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
                                             <ul class="dropdown-menu dropdown-menu-top">
@@ -1544,9 +1544,9 @@
                                             <div style="display: flex; flex-wrap: wrap; align-items: baseline;">
                                                 <label for=""><b>Amount Status</b></label> &emsp;
                                                 <input type="date" class="form-control form-control-date-width"
-                                                    placeholder="Jan 6, 2022 – Jan 13, 2022">&emsp;
+                                                    placeholder="Jan 6, 2022 – Jan 13, 2022" id="startDate_amount">&emsp;
                                                 <input type="date" class="form-control form-control-date-width"
-                                                    placeholder="Jan 6, 2022 – Jan 13, 2022">
+                                                    placeholder="Jan 6, 2022 – Jan 13, 2022" id="endDate_amount">
                                             </div>
                                             <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
                                             <ul class="dropdown-menu dropdown-menu-top">
@@ -2421,7 +2421,7 @@
     <script src="../assets/js/charts.js"></script>
     <script src="../assets/js/getNotification.js"></script>
     <script src="../assets/js/index-chart.js"></script>
-    <script src="http://localhost:3000/"></script>
+    <!-- <script src="http://localhost:3000/"></script> -->
     <script src="../assets/js/email-verification.js"></script>
     <script src="../assets/js/intercom.js"></script>
     <script src="http://ec2-52-45-181-206.compute-1.amazonaws.com:3000/socket.io/socket.io.js"></script>
@@ -2613,6 +2613,10 @@
             $("#endDate_task").val(endDate)
             $("#startDate_property").val(startDate)
             $("#endDate_property").val(endDate)
+            $("#startDate_account").val(startDate)
+            $("#endDate_account").val(endDate)
+            $("#startDate_amount").val(startDate)
+            $("#endDate_amount").val(endDate)
             // /getDashPropertyData
             $("#startDate_invoice").on('change', function () {
                 startDate = $(this).val()
@@ -2837,28 +2841,144 @@
                     }
                 });
             })
-            $("#startDate").on('click',function(){
+            $("#startDate_account").on('change',function(){
                 startDate = $(this).val()
                 $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/dashboard',
+                url: `https://backend.app.spaderent.com/api/spade/invoiceAmountCount/${startDate}/${endDate}`,
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
+                    
+                    // Extract values from the response object
+var totalDeposit = parseInt(response?.data?.TotalDeposit) || 0;
+var pendingBalance = parseInt(response?.data?.PendingBalance) || 0;
+var totalAmount = parseInt(response?.data?.TotalAmount) || 1; // Avoid division by zero
 
-                    const responseObject = { ...response.totalAmount, ...response.totalAmountUnpaid, ...response.totalAmountPaid, ...response.numPropertyTenant }
-                    console.log(responseObject)
-                    // $("#invoicing-amount").empty()
-                    // $("#paid-amount").empty()
-                    // $("#outstanding-amount").empty()
-                    // $("#total-property").empty()
-                    // $("#total-tenant").empty()
-                    $("#invoicing-amount").text('$ ' + (responseObject.totalAmount || 0));
-                    $("#paid-amount").text('$ ' + (responseObject.totalPaid || 0));
-                    $("#outstanding-amount").text('$ ' + (responseObject.totalUnPaid || 0));
-                    // $("#total-property").append(responseObject.propertyCount || 0);
-                    // $("#total-tenant").append(responseObject.tenantCount || 0);
+// Update the displayed values
+$("#total-deposit").text("$ " + totalDeposit);
+$("#pending-balance").text("$ " + pendingBalance);
+
+// Calculate percentages and update the donut chart
+updateDonutChart([
+    {
+        value: (totalDeposit / totalAmount) * 100,
+        label: 'Total Deposit'
+    },
+    {
+        value: (pendingBalance / totalAmount) * 100,
+        label: 'Pending Balance'
+    }
+]);
+
+
+                },
+                error: function (xhr, status, error) {
+                    console.log('Error occurred while fetching state and city data.');
+                    console.log(xhr);
+                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                }
+            });
+            })
+            $("#endDate_account").on('change',function(){
+                endDate = $(this).val()
+                $.ajax({
+                url: `https://backend.app.spaderent.com/api/spade/invoiceAmountCount/${startDate}/${endDate}`,
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    
+                    // Extract values from the response object
+var totalDeposit = parseInt(response?.data?.TotalDeposit) || 0;
+var pendingBalance = parseInt(response?.data?.PendingBalance) || 0;
+var totalAmount = parseInt(response?.data?.TotalAmount) || 1; // Avoid division by zero
+
+// Update the displayed values
+$("#total-deposit").text("$ " + totalDeposit);
+$("#pending-balance").text("$ " + pendingBalance);
+
+// Calculate percentages and update the donut chart
+updateDonutChart([
+    {
+        value: (totalDeposit / totalAmount) * 100,
+        label: 'Total Deposit'
+    },
+    {
+        value: (pendingBalance / totalAmount) * 100,
+        label: 'Pending Balance'
+    }
+]);
+
+
+                },
+                error: function (xhr, status, error) {
+                    console.log('Error occurred while fetching state and city data.');
+                    console.log(xhr);
+                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                }
+            });
+            })
+
+
+
+
+
+            $("#startDate_amount").on('change',function(){
+                startDate = $(this).val()
+                $.ajax({
+                url: `https://backend.app.spaderent.com/api/spade/invoiceAmountCount/${startDate}/${endDate}`,
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    
+                    // Extract values from the response object
+var totalDeposit = parseInt(response?.data?.TotalDeposit) || 0;
+var pendingBalance = parseInt(response?.data?.PendingBalance) || 0;
+var totalAmount = parseInt(response?.data?.TotalAmount) || 0; // Avoid division by zero
+
+// Update the displayed values
+$("#invoicing-amount").text("$ " + totalAmount);
+$("#amount-paid").text("$ " + totalDeposit);
+$("#outstanding-amount").text("$ " + pendingBalance);
+
+
+
+                },
+                error: function (xhr, status, error) {
+                    console.log('Error occurred while fetching state and city data.');
+                    console.log(xhr);
+                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                }
+            });
+            })
+            $("#endDate_amount").on('change',function(){
+                endDate = $(this).val()
+                $.ajax({
+                url: `https://backend.app.spaderent.com/api/spade/invoiceAmountCount/${startDate}/${endDate}`,
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    
+                    // Extract values from the response object
+var totalDeposit = parseInt(response?.data?.TotalDeposit) || 0;
+var pendingBalance = parseInt(response?.data?.PendingBalance) || 0;
+var totalAmount = parseInt(response?.data?.TotalAmount) || 0; // Avoid division by zero
+
+// Update the displayed values
+$("#invoicing-amount").text("$ " + totalAmount);
+$("#amount-paid").text("$ " + totalDeposit);
+$("#outstanding-amount").text("$ " + pendingBalance);
+
 
 
                 },
@@ -2909,26 +3029,36 @@
                 }
             });
             $.ajax({
-                url: `http://localhost:3000/api/spade/invoiceAmountCount/${startDate}/${endDate}`,
+                url: `https://backend.app.spaderent.com/api/spade/invoiceAmountCount/${startDate}/${endDate}`,
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
+                    
+                    // Extract values from the response object
+var totalDeposit = parseInt(response?.data?.TotalDeposit) || 0;
+var pendingBalance = parseInt(response?.data?.PendingBalance) || 0;
+var totalAmount = parseInt(response?.data?.TotalAmount) || 1; // Avoid division by zero
 
-                    const responseObject = { ...response.totalAmount, ...response.totalAmountUnpaid, ...response.totalAmountPaid, ...response.numPropertyTenant }
-                    console.log(responseObject)
-                    // $("#invoicing-amount").empty()
-                    // $("#paid-amount").empty()
-                    // $("#outstanding-amount").empty()
-                    // $("#total-property").empty()
-                    // $("#total-tenant").empty()
-                    $("#invoicing-amount").text('$ ' + (responseObject.totalAmount || 0));
-                    $("#total-deposit").text('$ ' + (responseObject.totalPaid || 0));
-                    $("#pending-balance").text('$ ' + (responseObject.totalUnPaid || 0));
-                    // $("#total-property").append(responseObject.propertyCount || 0);
-                    // $("#total-tenant").append(responseObject.tenantCount || 0);
+// Update the displayed values
+$("#total-deposit").text("$ " + totalDeposit);
+$("#pending-balance").text("$ " + pendingBalance);
 
+// Calculate percentages and update the donut chart
+createDonutChart([
+    {
+        value: (totalDeposit / totalAmount) * 100,
+        label: 'Total Deposit'
+    },
+    {
+        value: (pendingBalance / totalAmount) * 100,
+        label: 'Pending Balance'
+    }
+]);
+$("#invoicing-amount").text("$ " + totalAmount);
+$("#amount-paid").text("$ " + totalDeposit);
+$("#outstanding-amount").text("$ " + pendingBalance);
 
                 },
                 error: function (xhr, status, error) {
