@@ -32,11 +32,14 @@ const config = process.env;
     //  ############################# View All Invoices Tenant Start ############################################################
     exports.getAllInvoicesTenant = async (req, res) => {
         try {
-        // const {userId} = req.user; 
-        const {userId,userName} = req.user;
+          // console.log("1");
+        const {userId} = req.body; 
+        // const {userId,userName} = req.user;
         // console.log(userId,userName) 
           const getAllInvoicesResult = await queryRunner(getAllInvoiceTenantQuery, [userId]);
           // console.log(getAllInvoicesResult[0])
+          // console.log("2");
+
           if (getAllInvoicesResult[0].length > 0) {
             for (let i = 0; i < getAllInvoicesResult[0].length; i++){
                 const invoiceID = getAllInvoicesResult[0][i].invoiceID;
@@ -50,7 +53,7 @@ const config = process.env;
             }
             res.status(200).json({
               data: getAllInvoicesResult,
-              message: 'All Invoice successful'
+              message: 'All Invoice get successful'
             })
           } else {
             res.status(200).json({
@@ -59,7 +62,7 @@ const config = process.env;
           }
         } catch (error) {
           console.log(error)
-          res.send('All Invoice ')
+          res.send('Error in All Invoice ' , error)
         }
       }
       //  ############################# View All Invoice Tenant End ############################################################
