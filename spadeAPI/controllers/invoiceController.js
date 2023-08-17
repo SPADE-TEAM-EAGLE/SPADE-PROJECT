@@ -134,6 +134,7 @@ exports.createInvoice = async (req, res) => {
       res.status(200).json({
         invoiceID : invoiceID,
         message: " Invoice created successful",
+        invoiceId:invoiceID
       });
     }
   } catch (error) {
@@ -718,13 +719,9 @@ exports.deleteVendCategories = async (req, res) => {
 
 exports.invoiceAmountCount = async (req, res) => {
   try {
-    // const { userId } = req.user; 
-    console.log("1")
-    const {userId, startDate, endDate } = req.params; 
-    console.log("2")
-    const invoiceAmountResult = await queryRunner(invoiceAmountQuery ,[userId, startDate, endDate]);
-    console.log("3")
- 
+    const { userId } = req.user; 
+    const {start, end } = req.params; 
+    const invoiceAmountResult = await queryRunner(invoiceAmountQuery ,[userId, start, end]);
       res.status(200).json({
         data : invoiceAmountResult
       });

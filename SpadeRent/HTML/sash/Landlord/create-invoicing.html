@@ -2033,6 +2033,37 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="succesModal_invoice" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content success-modal-content">
+                <div class="modal-header">
+
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="succes-close">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body succes-modal" style="padding-top: 70px;padding-bottom: 70px;">
+                    <div class="text-justify ps-2 border-model-line">
+                        <h2 class="modal-title d-flex align-items-center ps-1">
+                            <strong class="color-primary">Congratulations!&nbsp;</strong>
+                            <i class="fi fi-rs-check-circle text-success"></i>
+                        </h2>
+                        <p class="ms-2 mb-0 text-start">Your Invoice is successfully created!!!</p>
+                        
+                    </div>
+                    <a data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal"
+                        class="btn btn-outline-default btn-pill ms-1 my-2" id="succes-addtenant-close"
+                        style='background-color:#1467B0;color: white;'><i class="fi fi-rs-plus-small"
+                            style="vertical-align: middle;"></i> Create New Invoice</a>
+                            <a data-bs-effect="effect-scale"
+                        class="btn btn-outline-default btn-pill ms-1 my-2 resend-option" 
+                        style='background-color:#1467B0;color: white;'><i class="fi fi-rs-paper-plane" style="vertical-align: middle;"></i> Send to tenant</a>
+                </div>
+                <div class="modal-footer" style="border-top: 0">
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
@@ -3622,6 +3653,7 @@
     <script src="../assets/js/intercom.js"></script>
     <script>
         $(document).ready(function () {
+            
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
                 method: 'GET',
@@ -3920,9 +3952,10 @@
                     // Create a FormData object to hold the data and files
                     var buttonText = $(this).text();
                     var invoiceData = {}
+                    var send=""
                     if (buttonText !== "Save" && buttonText.indexOf("Print") === -1) {
-                        console.log("here")
                         invoiceData.sendmails = "Yes"
+                        send="yes"
                     }
                     console.log($("#totalText").text().split(' ')[1])
                     var fileInput = document.getElementById('fileInput');
@@ -3975,11 +4008,16 @@
                                         const tenant = tenantData.find(obj => obj.tenantID == selectedTenant)
                                         console.log(tenant)
                                         $("#addModal").modal("hide")
+                                        invoiceId=response.invoiceId
                                         
                                         $('#addModal input[type="text"], #addModal input[type="date"], #addModal textarea').val('');
                                         $('#addModal select').prop('selectedIndex', 0);
-                                        $("#succes-tenantName").text(`sent to ${tenant.firstName + " " + tenant.lastName}.`)
-                                        $("#succesModal").modal("show")
+                                        if(send=="yes"){
+                                            $("#succes-tenantName").text(`sent to ${tenant.firstName + " " + tenant.lastName}.`)
+                                            $("#succesModal").modal("show")
+                                        }else{
+                                            $("#succesModal_invoice").modal("show")
+                                        }
 
                                     },
                                     error: function (xhr, status, error) {
@@ -4029,11 +4067,16 @@
                                 const tenant = tenantData.find(obj => obj.tenantID == selectedTenant)
                                 console.log(tenant)
                                 $("#addModal").modal("hide")
+                                invoiceId=response.invoiceId
                                 
                                 $('#addModal input[type="text"], #addModal input[type="date"], #addModal textarea').val('');
                                 $('#addModal select').prop('selectedIndex', 0);
-                                $("#succes-tenantName").text(`sent to ${tenant.firstName + " " + tenant.lastName}.`)
-                                $("#succesModal").modal("show")
+                                if(send=="yes"){
+                                            $("#succes-tenantName").text(`sent to ${tenant.firstName + " " + tenant.lastName}.`)
+                                            $("#succesModal").modal("show")
+                                        }else{
+                                            $("#succesModal_invoice").modal("show")
+                                        }
 
                             },
                             error: function (xhr, status, error) {
@@ -4678,7 +4721,10 @@
                     },
                     success: function (response) {
                         // Handle the success response from the API
+                        getData()
+                        $("#succesModal_invoice").modal("hide")
                         $("#infoModal").modal("show")
+
                     },
                     error: function (xhr, status, error) {
                         // Handle the error response from the API

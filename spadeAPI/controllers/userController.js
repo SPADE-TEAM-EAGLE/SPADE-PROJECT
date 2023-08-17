@@ -61,6 +61,7 @@ const { fileUpload, deleteImageFromS3 } = require("../helper/S3Bucket");
 const { verifyMailCheck } = require("../helper/emailVerify");
 const userServices = require("../Services/userServices");
 const { log } = require("console");
+const { NotificationSocket } = require("../app.js");
 const config = process.env;
 
 exports.createUser = async function (req, res) {
@@ -155,7 +156,7 @@ exports.getUser = (req, res) => {
     image: req.user.image,
     imageKey: req.user.imageKey,
     planID: req.user.planID,
-    isActive : req.user.isActive
+    isActive: req.user.isActive,
   });
 };
 
@@ -167,6 +168,7 @@ exports.Signin = async function (req, res) {
   try {
     if (tenant == "tenant") {
       console.log("tenant");
+      await queryRunner(updateTenantActive, [1, email]);
       const selectResult = await queryRunner(selectQuery("tenants", "email"), [
         email,
       ]);
@@ -189,8 +191,7 @@ exports.Signin = async function (req, res) {
       }
     } else {
       // for landlord
-      // console.log("1");
-      // await queryRunner(updateUserActive, [1, email])
+      await queryRunner(updateUserActive, [1, email]);
       const selectResult = await queryRunner(selectQuery("users", "Email"), [
         email,
       ]);
@@ -202,7 +203,7 @@ exports.Signin = async function (req, res) {
         const token = jwt.sign({ email, password }, config.JWT_SECRET_KEY, {
           expiresIn: "3h",
         });
-        
+
         // const emai = "umairnazakat2222@gmail.com"
         //  const emailMessage =  await verifyMailCheck(email);
         if (selectResult[0][0].userVerified == "Email Verified") {
@@ -571,7 +572,7 @@ exports.pricingPlan = async (req, res) => {
 //     propertySQFT,
 //     units,
 //     images,
-    
+
 //   } = req.body;
 //   try {
 //     // const { userId } = req.user;
@@ -585,7 +586,7 @@ exports.pricingPlan = async (req, res) => {
 //     //   !propertyType ||
 //     //   !propertySQFT ||
 //     //   !units
-      
+
 //     // ) {
 //     //   // throw new Error("Please fill all the fields");
 //     //   res.status(200).json({
@@ -649,14 +650,14 @@ exports.pricingPlan = async (req, res) => {
 //         image_url,
 //         image_key,
 //       ]);
-    
+
 //       if (propertyImageResult.affectedRows === 0) {
 //         return res.status(400).json({
 //           message: "data doesn't inserted in property image table",
 //         });
 //       }
 //     }
-    
+
 //     // we are using loop to send units data into database
 //     for (let i = 0; i < units; i++) {
 //       const propertyResult = await queryRunner(insertInPropertyUnits, [
@@ -697,24 +698,40 @@ exports.property = async (req, res) => {
     propertyType,
     propertySQFT,
     units,
-    images
+    images,
   } = req.body;
   try {
-    // const { userId } = req.user;
+    //  await NotificationSocket("notification", "New notification received!")
+
     const { userId, email } = req.user;
-    if (!propertyName || !address || !city || !state || !zipCode || !propertyType || !propertySQFT || !units) {
+    const io = req.io;
+    io.emit("notification", req.body);
+    // io.emit("notification", { message: "New notification received!" });
+    if (
+      !propertyName ||
+      !address ||
+      !city ||
+      !state ||
+      !zipCode ||
+      !propertyType ||
+      !propertySQFT ||
+      !units
+    ) {
       throw new Error("Please fill all the fields");
     }
     const currentDate = new Date();
     // this line check property already exist or not
-    const propertycheckresult = await queryRunner(selectQuery("property", "propertyName", "address"), [propertyName, address]);
+    const propertycheckresult = await queryRunner(
+      selectQuery("property", "propertyName", "address"),
+      [propertyName, address]
+    );
     if (propertycheckresult[0].length > 0) {
       throw new Error("Property Already Exist");
     }
     // console.log("1");
     const status = "Non-active";
-    console.log(userId)
-    // this line insert data into property table 
+    console.log(userId);
+    // this line insert data into property table
     const propertyResult = await queryRunner(insertInProperty, [
       userId,
       propertyName,
@@ -726,7 +743,7 @@ exports.property = async (req, res) => {
       propertySQFT,
       status,
       units,
-      currentDate
+      currentDate,
     ]);
     // console.log("2");
     // if property data not inserted into property table then throw error
@@ -734,15 +751,19 @@ exports.property = async (req, res) => {
       throw new Error("Data doesn't inserted in property table");
     }
     if (propertyResult[0].affectedRows > 0) {
+      //  notify user using socket
+      // io.to(userId).emit('notification', req.body);
+
       const mailSubject = "Property Maintenance: " + propertyName;
       const landlordUser = await queryRunner(selectQuery("users", "id"), [
-        userId
+        userId,
       ]);
-      const FullName = landlordUser[0][0].FirstName + " " + landlordUser[0][0].LastName;
+      const FullName =
+        landlordUser[0][0].FirstName + " " + landlordUser[0][0].LastName;
       // await taskSendMail("tenantName", mailSubject, "dueDate", FullName, "property", "assignedTo", "priority", "companyName", "contactLandlord", userId, email);
     }
     const { insertId } = propertyResult[0];
-    // we are using loop to send images data into 
+    // we are using loop to send images data into
 
     for (let i = 0; i < images.length; i++) {
       const { image_url } = images[i];
@@ -750,7 +771,7 @@ exports.property = async (req, res) => {
       const propertyImageResult = await queryRunner(insertInPropertyImage, [
         insertId,
         image_url,
-        image_key
+        image_key,
       ]);
       // if property image data not inserted into property image table then throw error
       if (propertyImageResult.affectedRows === 0) {
@@ -759,7 +780,13 @@ exports.property = async (req, res) => {
     }
     // we are using loop to send units data into database
     for (let i = 0; i < units; i++) {
-      const propertyResult = await queryRunner(insertInPropertyUnits, [insertId, "", "", "", "Vacant",]);
+      const propertyResult = await queryRunner(insertInPropertyUnits, [
+        insertId,
+        "",
+        "",
+        "",
+        "Vacant",
+      ]);
       // if property units data not inserted into property units table then throw error
       if (propertyResult.affectedRows === 0) {
         throw new Error("data doesn't inserted in property units table");
@@ -768,9 +795,8 @@ exports.property = async (req, res) => {
     // if everything is ok then send message and property id
     res.status(200).json({
       message: "Property created successful!!!",
-      propertyId: propertyResult[0].insertId
+      propertyId: propertyResult[0].insertId,
     });
-
   } catch (error) {
     res.status(400).json({
       message: "Error",
@@ -1933,9 +1959,9 @@ exports.inactiveUser = async (req, res) => {
     const { email } = req.user;
     const inactiveUserResult = await queryRunner(updateUserActive, [0, email]);
     // if (inactiveUserResult[0].affectedRows > 0) {
-      res.status(200).json({
-        message: "User is inactive",
-      });
+    res.status(200).json({
+      message: "User is inactive",
+    });
     // }
   } catch (error) {
     res.status(400).json({
@@ -1946,11 +1972,14 @@ exports.inactiveUser = async (req, res) => {
 exports.inactiveTenant = async (req, res) => {
   try {
     const { email } = req.user;
-    const inactiveUserResult = await queryRunner(updateTenantActive, [0, email]);
+    const inactiveUserResult = await queryRunner(updateTenantActive, [
+      0,
+      email,
+    ]);
     // if (inactiveUserResult[0].affectedRows > 0) {
-      res.status(200).json({
-        message: "User is inactive",
-      });
+    res.status(200).json({
+      message: "User is inactive",
+    });
     // }
   } catch (error) {
     res.status(400).json({
@@ -1961,14 +1990,14 @@ exports.inactiveTenant = async (req, res) => {
 // getUserById
 exports.getUserByIdData = async (req, res) => {
   try {
-    const { id ,type} = req.params;
-    console.log(id,type);
-    if(type === 'tenant'){
+    const { id, type } = req.params;
+    console.log(id, type);
+    if (type === "tenant") {
       const getUserByIdResult = await queryRunner(getTenantById, [id]);
       res.status(200).json({
         data: getUserByIdResult[0][0],
       });
-    }else if(type === 'landlord'){
+    } else if (type === "landlord") {
       const getUserByIdResult = await queryRunner(getUserById, [id]);
       res.status(200).json({
         data: getUserByIdResult[0][0],
@@ -1979,42 +2008,43 @@ exports.getUserByIdData = async (req, res) => {
       message: error.message,
     });
   }
-}
+};
 // Profile Complete
 exports.ProfileComplete = async (req, res) => {
   try {
-    
-    const { userId } = req.user; 
-    const propertycheckresult = await queryRunner(selectQuery("users", "id" ),[userId]);
+    const { userId } = req.user;
+    const propertycheckresult = await queryRunner(selectQuery("users", "id"), [
+      userId,
+    ]);
     if (propertycheckresult[0].length > 0) {
       count = 0;
-      if(propertycheckresult[0][0].image){
+      if (propertycheckresult[0][0].image) {
         count += 30;
       }
-      if(propertycheckresult[0][0].FirstName){
-        count += 10;
-      } 
-      if(propertycheckresult[0][0].LastName){
+      if (propertycheckresult[0][0].FirstName) {
         count += 10;
       }
-      if(propertycheckresult[0][0].Email){
+      if (propertycheckresult[0][0].LastName) {
         count += 10;
       }
-      if(propertycheckresult[0][0].Phone){
+      if (propertycheckresult[0][0].Email) {
         count += 10;
       }
-      if(propertycheckresult[0][0].BusinessName){
+      if (propertycheckresult[0][0].Phone) {
         count += 10;
       }
-      if(propertycheckresult[0][0].streetAddress){
+      if (propertycheckresult[0][0].BusinessName) {
         count += 10;
       }
-      if(propertycheckresult[0][0].BusinessAddress){
+      if (propertycheckresult[0][0].streetAddress) {
+        count += 10;
+      }
+      if (propertycheckresult[0][0].BusinessAddress) {
         count += 10;
       }
       res.status(200).json({
         // data : propertycheckresult,
-        count : count
+        count: count,
       });
     }
   } catch (error) {
@@ -2086,28 +2116,3 @@ exports.checkSystem = async (req, res) => {
   }
 
 }
-
-
-
-
-
-
-
-
-// // filter By Property Dashboard
-// exports.filterByPropertyDashboard = async (req, res) => {
-//   try {
-//     const {propertyID} = req.body
-    
-//       // res.status(200).json({
-//       //   vendors : vendors,
-//       // });
-//   } catch (error) {
-//     res.status(400).json({
-//       message: error.message,
-//     });
-//   }
-
-// }
-
-
