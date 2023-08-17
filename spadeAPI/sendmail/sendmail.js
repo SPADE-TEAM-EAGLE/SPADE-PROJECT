@@ -124,7 +124,8 @@ exports.taskSendMail = async (
       id
     ]);
     console.log(islandlordNotify[0])
-    if (islandlordNotify[0][0].emailNotification === "no") {
+    if ( islandlordNotify[0][0] && islandlordNotify[0][0].emailNotification === "no" || assignedTo != "Not Assigned") {
+    // if ( assignedTo !== "Not Assigned") {
       console.log("email notification is off");
       return;
     }

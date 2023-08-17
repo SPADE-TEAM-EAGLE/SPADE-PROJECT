@@ -132,6 +132,7 @@ exports.createInvoice = async (req, res) => {
       // }
 
       res.status(200).json({
+        invoiceID : invoiceID,
         message: " Invoice created successful",
         invoiceId:invoiceID
       });
@@ -140,7 +141,7 @@ exports.createInvoice = async (req, res) => {
     console.log(error);
     res.status(400).send("Error");
   }
-};
+ };
 //  ############################# Create Invoice END ############################################################
 
 //  ############################# update Invoice Status Start ############################################################

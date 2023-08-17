@@ -1,5 +1,5 @@
 const user = require("../models/user");
-const {sendMail}= require('../sendmail/sendmail.js');
+const { sendMail, taskSendMail } = require("../sendmail/sendmail");
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt');
 const fs = require('fs');
@@ -14,7 +14,10 @@ const {
   getTenantsById,
   getTenantTotalAmountUnpaid,
   getTenantTotalAmountPaid,
-  getTenantTotalAmount
+  getTenantTotalAmount,
+  addTasksQuerytenant,
+  insertInTaskImage,
+  addVendorList
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -69,7 +72,8 @@ const config = process.env;
 
       //  ############################# Get ALL Task Start ############################################################
 exports.getAllTaskTenant = async (req, res) => {
-    const { userId } = req.user;
+    // const { userId } = req.user;
+    const { userId } = req.body;
     try {
       // get data from task table by landlordID
       const allTaskResult = await queryRunner(AlltasksTenantsQuery, [userId]);
@@ -96,12 +100,12 @@ exports.getAllTaskTenant = async (req, res) => {
               [vendorIDs[j]]
             );
             // if data found then push data in vendorData array
-            if (vendorResult.length > 0) {
+            if (vendorResult[0].length > 0) {
               const vendor = {
-                ID : vendorResult[0][0].id,
-                name: vendorResult[0][0].firstName + " "+ vendorResult[0][0].lastName,
-                email: vendorResult[0][0].email,
-                vendorPhone:vendorResult[0][0].phone
+                ID : vendorResult[0][0].id || "N/A",
+                name: vendorResult[0][0].firstName + " "+ vendorResult[0][0].lastName || "N/A",
+                email: vendorResult[0][0].email || "N/A",
+                vendorPhone:vendorResult[0][0].phone || "N/A"
               };
               vendorData.push(vendor);
             }
@@ -120,7 +124,7 @@ exports.getAllTaskTenant = async (req, res) => {
       }
     } catch (error) {
       console.log("Error:", error);
-      res.send("Error Get Tasks");
+      res.send("Error Get Tasks" + error);
     }
   };
 // get tenant dashboard data
@@ -209,7 +213,7 @@ exports.getTenantDashboardData = async (req, res) => {
       const { userId } = req.user;
       console.log(userId)
       const TenantsByIDResult = await queryRunner(getTenantsById, [userId])
-      if (TenantsByIDResult.length > 0) {
+      if (TenantsByIDResult[0].length > 0) {
         const data = JSON.parse(JSON.stringify(TenantsByIDResult))
         // console.log(data[0][0])
         res.status(200).json({
@@ -227,7 +231,105 @@ exports.getTenantDashboardData = async (req, res) => {
     }
   }
   //  ############################# Get ALL Task End ############################################################
-  
-       //  ############################# Task By ID Start ############################################################
-    //   getByIdTask from TaskController file
-      //  ############################# Task By ID END  ############################################################
+
+  //  #############################  ADD TASK Start HERE ##################################################
+exports.addTasksTenant = async (req, res) => {
+  const {
+    task,
+    // assignee,
+    tenantID,
+    dueDate,
+    status,
+    priority,
+    note,
+    notifyTenant,
+    // notifyVendor,
+    images,
+    
+    // created_at,
+    // created_by,
+  } = req.body;
+  // const { userId, userName, landlordID,phoneNumber, email } = req.user;
+  const { userId, userName, landlordID,phoneNumber, email } = req.body;
+  const currentDate = new Date();
+  try {
+    // console.log(1);
+    const addTasksCheckResult = await queryRunner(
+      selectQuery("task", "taskName", "tenantID"),
+      [task, tenantID]
+    );
+    if (addTasksCheckResult[0].length > 0) {
+      return res.send("Task already exists");
+    } else {
+      const TasksResult = await queryRunner(addTasksQuerytenant, [
+        task,
+        userId,
+        "Not Set",
+        status,
+        priority,
+        note,
+        notifyTenant,
+        currentDate,
+        "Tenant",
+        landlordID,
+      ]);
+      if (TasksResult.affectedRows === 0) {
+        return res.status(400).send("Error1");
+      }
+      // else {
+      const tasksID = TasksResult[0].insertId;
+      if(images){ 
+      for (let i = 0; i < images.length; i++) {
+        const { image_url } = images[i];
+        const { image_key } = images[i];
+        const propertyImageResult = await queryRunner(insertInTaskImage, [
+          tasksID,
+          image_url,
+          image_key
+        ]);
+        if (propertyImageResult.affectedRows === 0) {
+          throw new Error("data doesn't inserted in property image table");
+        }
+      }
+      }
+      //   //  add vendor
+        const Vendorid = "Not Assigned";
+        const vendorResults = await queryRunner(addVendorList, [
+          tasksID,
+          Vendorid,
+        ]);
+        if (vendorResults.affectedRows === 0) {
+          return res.send("Error2");
+        }
+        const landlordCheckResult = await queryRunner(selectQuery("users", "id"),[landlordID]);
+        // if()
+      const landlordName = landlordCheckResult[0][0].FirstName + " " + landlordCheckResult[0][0].LastName;
+      const landlordEmail = landlordCheckResult[0][0].Email;
+      const CompanyName = landlordCheckResult[0][0].BusinessName || "N/A";
+      // const landlordName = landlordCheckResult[0][0].FirstName + " " + landlordCheckResult[0][0].LastName;
+      // const landlordContact = landlordCheckResult[0][0].Phone;
+      // const vendorNames = vendorNamearr.toString();
+      if (notifyTenant.toLowerCase() === "yes") {
+        await taskSendMail(
+          landlordName,
+          "Property Maintenance: " + task,
+          dueDate,
+          userName,
+          task,
+          "Not Assigned",
+          priority,
+          CompanyName,
+          phoneNumber,
+          userId,
+          landlordEmail,
+        );
+      }
+    }
+    return res.send("Task Created Successfully");
+  } catch (error) {
+    console.log(error)
+    res.status(400).send(error);
+  }
+};
+//  #############################  ADD TASK ENDS HERE ##################################################
+
