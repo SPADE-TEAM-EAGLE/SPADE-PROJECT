@@ -536,6 +536,39 @@ exports.getLandlordTenant =
   "SELECT t.firstName ,t.lastName ,t.email ,t.companyName , l.FirstName , l.LastName , l.Phone , l.Email FROM tenants as t JOIN task as tsk ON t.id = tsk.tenantID JOIN users as l ON tsk.landlordID = l.id WHERE tsk.landlordID = ? AND tsk.tenantID = ?";
 exports.PropertyUnitsVacant =
   'SELECT * FROM `propertyunits`WHERE propertyID = ? AND status = ? AND unitNumber !=""';
+// exports.Alltasks = `SELECT
+// tk.id,
+// tk.taskName,
+// tk.dueDate,
+// tk.status,
+// tk.priority,
+// tk.notes,
+// tk.createdBy,
+// tk.created_at,
+// p.propertyName,
+// pu.unitNumber,
+// t.firstName AS tfirstName,
+// t.lastName AS tlastName,
+// t.phoneNumber AS tenantPhone,
+// t.id AS tenantID,
+// JSON_ARRAYAGG(JSON_OBJECT('imageKey', ti.imageKey, 'Image', ti.Image)) AS taskImages
+// FROM
+// task AS tk
+// JOIN
+// tenants AS t ON tk.tenantID = t.id
+// JOIN
+// property AS p ON t.propertyID = p.id
+// JOIN
+// propertyunits AS pu ON t.propertyUnitID = pu.id
+// LEFT JOIN
+// taskimages AS ti ON tk.id = ti.taskID
+// WHERE
+// tk.landlordID = ?
+// GROUP BY
+// tk.id;
+// `;
+
+// Those task is not included which was createdBy Tenant
 exports.Alltasks = `SELECT
 tk.id,
 tk.taskName,
@@ -563,10 +596,42 @@ propertyunits AS pu ON t.propertyUnitID = pu.id
 LEFT JOIN
 taskimages AS ti ON tk.id = ti.taskID
 WHERE
-tk.landlordID = ?
+tk.landlordID = ? AND createdBy != "Tenant"
 GROUP BY
-tk.id;
+tk.id
 `;
+exports.AlltasksTenantsLandlord = `SELECT
+tk.id,
+tk.taskName,
+tk.dueDate,
+tk.status,
+tk.priority,
+tk.notes,
+tk.createdBy,
+tk.created_at,
+p.propertyName,
+pu.unitNumber,
+t.firstName AS tfirstName,
+t.lastName AS tlastName,
+t.phoneNumber AS tenantPhone,
+t.id AS tenantID,
+JSON_ARRAYAGG(JSON_OBJECT('imageKey', ti.imageKey, 'Image', ti.Image)) AS taskImages
+FROM
+task AS tk
+JOIN
+tenants AS t ON tk.tenantID = t.id
+JOIN
+property AS p ON t.propertyID = p.id
+JOIN
+propertyunits AS pu ON t.propertyUnitID = pu.id
+LEFT JOIN
+taskimages AS ti ON tk.id = ti.taskID
+WHERE
+tk.landlordID = ? AND createdBy = "Tenant"
+GROUP BY
+tk.id
+`;
+
 exports.taskByIDQuery =
   "SELECT tk.id, tk.taskName, tk.dueDate, tk.status, tk.priority, tk.notes, tk.createdBy,tk.created_at, p.propertyName, pu.unitNumber, t.firstName as tfirstName, t.lastName as tlastName FROM `task`as tk JOIN tenants as t ON tk.tenantID = t.id JOIN property as p ON t.propertyID = p.id JOIN propertyunits as pu ON t.propertyUnitID = pu.id WHERE tk.id = ?";
 exports.resendEmailQuery =

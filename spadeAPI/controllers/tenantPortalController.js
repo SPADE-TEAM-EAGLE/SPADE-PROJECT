@@ -72,7 +72,8 @@ const config = process.env;
 
       //  ############################# Get ALL Task Start ############################################################
 exports.getAllTaskTenant = async (req, res) => {
-    const { userId } = req.user;
+    // const { userId } = req.user;
+    const { userId } = req.body;
     try {
       // get data from task table by landlordID
       const allTaskResult = await queryRunner(AlltasksTenantsQuery, [userId]);
@@ -99,12 +100,12 @@ exports.getAllTaskTenant = async (req, res) => {
               [vendorIDs[j]]
             );
             // if data found then push data in vendorData array
-            if (vendorResult.length > 0) {
+            if (vendorResult[0].length > 0) {
               const vendor = {
-                ID : vendorResult[0][0].id,
-                name: vendorResult[0][0].firstName + " "+ vendorResult[0][0].lastName,
-                email: vendorResult[0][0].email,
-                vendorPhone:vendorResult[0][0].phone
+                ID : vendorResult[0][0].id || "N/A",
+                name: vendorResult[0][0].firstName + " "+ vendorResult[0][0].lastName || "N/A",
+                email: vendorResult[0][0].email || "N/A",
+                vendorPhone:vendorResult[0][0].phone || "N/A"
               };
               vendorData.push(vendor);
             }
@@ -123,7 +124,7 @@ exports.getAllTaskTenant = async (req, res) => {
       }
     } catch (error) {
       console.log("Error:", error);
-      res.send("Error Get Tasks");
+      res.send("Error Get Tasks" + error);
     }
   };
 // get tenant dashboard data
@@ -331,3 +332,4 @@ exports.addTasksTenant = async (req, res) => {
   }
 };
 //  #############################  ADD TASK ENDS HERE ##################################################
+
