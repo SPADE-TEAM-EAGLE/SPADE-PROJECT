@@ -65,13 +65,12 @@ exports.updateUserActive = `UPDATE users SET active = ? WHERE Email = ?`;
 exports.updateTenantActive = `UPDATE tenants SET active = ? WHERE email = ?`;
 
 // update all notify to 1 where landlord id = id
-exports.updateAllNotifyReadQuery =  {
+exports.updateAllNotifyReadQuery = {
   property: `UPDATE property SET notify = ? WHERE landlordID = ?`,
   task: `UPDATE task SET notify = ? WHERE landlordID = ?`,
   invoice: `UPDATE invoice SET notify = ? WHERE landlordID = ?`,
   tenants: `UPDATE tenants SET notify = ? WHERE landlordID = ?`,
 };
- 
 
 // creat api get total properties of landlord and vacant or occupied properties using join with units table
 exports.getPropertiesGraphData = `SELECT
@@ -111,7 +110,6 @@ WHERE
     AND invoice.created_at >= ?
     AND invoice.created_at <= ?;
 `;
-
 
 // delete all images where property id = id from propertyImage
 exports.delteImageFromDb = "DELETE FROM propertyimage WHERE imageKey = ?";
@@ -511,14 +509,50 @@ exports.updateInvoice =
   "UPDATE invoice SET tenantID = ?, invoiceType = ? , startDate = ? , endDate = ? , frequency = ? , dueDate = ? ,daysDue=? ,repeatTerms = ? , terms = ? , totalAmount = ? , note = ? , updated_at = ? where id = ? AND landlordID = ? ";
 // invoiceType, startDate, endDate, frequency, dueDays, repeatTerms, terms,totalAmount,additionalNotes,currentDate,invoiceID,userId
 exports.selectAllTenantsProperty = `SELECT p.id as propertyID, p.propertyName, p.address AS pAddress, p.city AS pCity, p.state AS pState, p.zipCode AS pZipCode, p.propertyType, p.propertySQFT, p.status AS pStatus,p.units AS pUnits, t.id AS tenantID ,t.firstName,t.lastName, t.companyName, t.email AS tEmail, t.phoneNumber AS tPhoneNumber, t.Address AS tAddress, t.city AS tCity, t.state AS tState, t.zipcode AS tZipcode, t.rentAmount, t.gross_or_triple_lease, t.baseRent, t.tripleNet, t.leaseStartDate, t.leaseEndDate, t.increaseRent, pu.id as propertyUnitID ,pu.unitNumber, pu.Area AS unitArea, pu.unitDetails, pu.status AS unitStatus FROM tenants AS t INNER JOIN property AS p ON t.propertyID = p.id INNER JOIN propertyunits AS pu ON t.propertyUnitID = pu.id WHERE t.propertyID = ?`;
-exports.selectAllTenants = `SELECT p.id as propertyID, p.propertyName, p.address AS pAddress, p.city AS pCity, p.state AS pState, p.zipCode AS pZipCode, p.propertyType, p.propertySQFT, p.status AS pStatus, p.units AS pUnits, i.recurringNextDate , t.id AS tenantID, t.firstName, t.lastName, t.companyName, t.email AS tEmail, t.phoneNumber AS tPhoneNumber, t.Address AS tAddress, t.city AS tCity, t.state AS tState, t.zipcode AS tZipcode, t.rentAmount, t.gross_or_triple_lease, t.baseRent, t.tripleNet, t.leaseStartDate, t.leaseEndDate, t.increaseRent, pu.id as propertyUnitID, pu.unitNumber, pu.Area AS unitArea, pu.unitDetails, pu.status AS unitStatus ,ta.Image AS tenantImage
+exports.selectAllTenants = `SELECT
+p.id as propertyID,
+p.propertyName,
+p.address AS pAddress,
+p.city AS pCity,
+p.state AS pState,
+p.zipCode AS pZipCode,
+p.propertyType,
+p.propertySQFT,
+p.status AS pStatus,
+p.units AS pUnits,
+i.recurringNextDate,
+t.id AS tenantID,
+t.firstName,
+t.lastName,
+t.companyName,
+t.email AS tEmail,
+t.phoneNumber AS tPhoneNumber,
+t.Address AS tAddress,
+t.city AS tCity,
+t.state AS tState,
+t.zipcode AS tZipcode,
+t.rentAmount,
+t.gross_or_triple_lease,
+t.baseRent,
+t.tripleNet,
+t.leaseStartDate,
+t.leaseEndDate,
+t.increaseRent,
+pu.id as propertyUnitID,
+pu.unitNumber,
+pu.Area AS unitArea,
+pu.unitDetails,
+pu.status AS unitStatus,
+GROUP_CONCAT(ta.Image) AS tenantImages
 FROM tenants AS t 
 INNER JOIN property AS p ON t.propertyID = p.id 
 INNER JOIN propertyunits AS pu ON t.propertyUnitID = pu.id 
 LEFT JOIN invoice AS i ON t.id = i.tenantID
 LEFT JOIN tenantattachfiles AS ta ON t.id = ta.tenantID
-WHERE t.landlordID = ?;
+WHERE t.landlordID = ?
+GROUP BY t.id;
 `;
+
 exports.addTasksQuery =
   "INSERT INTO task (taskName, tenantID, dueDate,status, priority, notes, notifyTenant, notifyVendor, created_at , createdBy,landlordID) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 exports.addVendorList =

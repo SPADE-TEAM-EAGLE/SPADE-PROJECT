@@ -1388,9 +1388,9 @@ exports.viewAllPropertyTenant = async (req, res) => {
     // console.log(req)
     // console.log(req.user);
     let PropertyTenantResult;
-    // console.log(id)
+    console.log("imran")
     PropertyTenantResult = await queryRunner(selectAllTenants, [userId]);
-    console.log(PropertyTenantResult[0]);
+    // console.log(PropertyTenantResult[0]);
     if (PropertyTenantResult[0].length > 0) {
       for (let i = 0; i < PropertyTenantResult[0].length; i++) {
         const tenantID = PropertyTenantResult[0][i].tenantID;
