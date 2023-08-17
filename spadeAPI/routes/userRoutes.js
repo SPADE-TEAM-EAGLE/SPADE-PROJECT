@@ -173,6 +173,7 @@ router.post("/createLead", verifyToken, leadsClt.createNewLead);
 // router.get("/taskCount", verifyToken, taskController.taskCount);
 router.get("/taskCount", verifyToken, taskController.taskCount);
 router.get("/invoiceAmountCount" , invoiceController.invoiceAmountCount);
+router.post("/addTasksTenant" , tenantPortalController.addTasksTenant);
 
 
 module.exports = router;

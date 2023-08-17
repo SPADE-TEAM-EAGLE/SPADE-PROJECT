@@ -140,7 +140,7 @@ exports.createInvoice = async (req, res) => {
     console.log(error);
     res.status(400).send("Error");
   }
-};
+ };
 //  ############################# Create Invoice END ############################################################
 
 //  ############################# update Invoice Status Start ############################################################
@@ -720,7 +720,7 @@ exports.invoiceAmountCount = async (req, res) => {
   try {
     // const { userId } = req.user; 
     console.log("1")
-    const {userId, startDate, endDate } = req.body; 
+    const {userId, startDate, endDate } = req.params; 
     console.log("2")
     const invoiceAmountResult = await queryRunner(invoiceAmountQuery ,[userId, startDate, endDate]);
     console.log("3")
