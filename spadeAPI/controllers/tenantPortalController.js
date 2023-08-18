@@ -239,27 +239,21 @@ exports.getTenantDashboardData = async (req, res) => {
 exports.addTasksTenant = async (req, res) => {
   const {
     task,
-    // assignee,
-    tenantID,
-    dueDate,
     status,
     priority,
     note,
     notifyTenant,
-    // notifyVendor,
     images,
     
-    // created_at,
-    // created_by,
   } = req.body;
-  // const { userId, userName, landlordID,phoneNumber, email } = req.user;
-  const { userId, userName, landlordID,phoneNumber, email } = req.body;
+  const { userId, userName, landlordID,phoneNumber, email } = req.user;
+  // const { userId, userName, landlordID,phoneNumber, email } = req.body;
   const currentDate = new Date();
   try {
     // console.log(1);
     const addTasksCheckResult = await queryRunner(
       selectQuery("task", "taskName", "tenantID"),
-      [task, tenantID]
+      [task, userId]
     );
     if (addTasksCheckResult[0].length > 0) {
       return res.send("Task already exists");
@@ -316,7 +310,7 @@ exports.addTasksTenant = async (req, res) => {
         await taskSendMail(
           landlordName,
           "Property Maintenance: " + task,
-          dueDate,
+          "Not Set",
           userName,
           task,
           "Not Assigned",

@@ -704,8 +704,8 @@ exports.property = async (req, res) => {
     //  await NotificationSocket("notification", "New notification received!")
 
     const { userId, email } = req.user;
-    const io = req.io;
-    io.emit("notification", req.body);
+    // const io = req.io;
+    // io.emit("notification", req.body);
     // io.emit("notification", { message: "New notification received!" });
     if (
       !propertyName ||
