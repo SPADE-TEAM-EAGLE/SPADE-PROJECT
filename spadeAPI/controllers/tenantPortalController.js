@@ -34,7 +34,7 @@ const config = process.env;
     exports.getAllInvoicesTenant = async (req, res) => {
         try {
           // console.log("1");
-        const {userId} = req.body; 
+        const {userId} = req.user; 
         // const {userId,userName} = req.user;
         // console.log(userId,userName) 
           const getAllInvoicesResult = await queryRunner(getAllInvoiceTenantQuery, [userId]);
@@ -77,7 +77,7 @@ const config = process.env;
       //  ############################# Get ALL Task Start ############################################################
 exports.getAllTaskTenant = async (req, res) => {
     // const { userId } = req.user;
-    const { userId } = req.body;
+    const { userId } = req.user;
     try {
       // get data from task table by landlordID
       const allTaskResult = await queryRunner(AlltasksTenantsQuery, [userId]);
@@ -245,13 +245,15 @@ exports.addTasksTenant = async (req, res) => {
     status,
     priority,
     note,
-    notifyTenant,
+    notifyLandlord,
     images,
     
   } = req.body;
+  
+  // const { userId, userName, landlordID,phoneNumber, email } = req.user;
   const { userId, userName, landlordID,phoneNumber, email } = req.user;
-  // const { userId, userName, landlordID,phoneNumber, email } = req.body;
   const currentDate = new Date();
+  
   try {
     // console.log(1);
     const addTasksCheckResult = await queryRunner(
@@ -268,7 +270,7 @@ exports.addTasksTenant = async (req, res) => {
         status,
         priority,
         note,
-        notifyTenant,
+        notifyLandlord,
         currentDate,
         "Tenant",
         landlordID,
@@ -309,7 +311,7 @@ exports.addTasksTenant = async (req, res) => {
       // const landlordName = landlordCheckResult[0][0].FirstName + " " + landlordCheckResult[0][0].LastName;
       // const landlordContact = landlordCheckResult[0][0].Phone;
       // const vendorNames = vendorNamearr.toString();
-      if (notifyTenant.toLowerCase() === "yes") {
+      if (notifyLandlord.toLowerCase() === "yes") {
         await taskSendMail(
           landlordName,
           "Property Maintenance: " + task,
