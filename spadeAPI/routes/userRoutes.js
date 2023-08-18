@@ -103,7 +103,8 @@ router.post("/addVendorCategory", verifyToken, taskController.addVendorCategory)
 // router.get("/getAllVendors",verifyToken ,taskController.getAllVendors);
 router.get("/getAllVendors", verifyToken, taskController.getAllVendors);
 router.post("/addTasks", verifyToken, taskController.addTasks);
-router.get("/getAllTask", verifyToken, taskController.getAllTask);
+// router.get("/getAllTask", verifyToken, taskController.getAllTask);
+router.get("/getAllTask", taskController.getAllTask);
 router.get("/getAllTaskTenantRequest", verifyToken, taskController.getAllTaskTenantRequest);
 // router.get("/getAllTask", taskController.getAllTask);
 router.get("/taskByID", verifyToken, taskController.taskByID);
@@ -179,6 +180,7 @@ router.get("/taskCount", verifyToken, taskController.taskCount);
 // router.get("/invoiceAmountCount" , invoiceController.invoiceAmountCount);
 router.post("/addTasksTenant" ,verifyTokenTenant,tenantPortalController.addTasksTenant);
 router.get("/invoiceAmountCount/:start/:end" ,verifyToken ,invoiceController.invoiceAmountCount);
+router.get("/getAllTaskTenantRequest", verifyToken, taskController.getAllTaskTenantRequest);
 
 
 module.exports = router;

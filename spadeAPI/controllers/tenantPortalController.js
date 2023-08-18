@@ -245,8 +245,6 @@ exports.addTasksTenant = async (req, res) => {
     notifyLandlord,
     images,
     
-    // created_at,
-    // created_by,
   } = req.body;
   
   // const { userId, userName, landlordID,phoneNumber, email } = req.user;
