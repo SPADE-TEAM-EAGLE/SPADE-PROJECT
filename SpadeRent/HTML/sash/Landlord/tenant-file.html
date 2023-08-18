@@ -2190,6 +2190,7 @@
         // } else {
         //     logo.src = '../assets/header-img/question.svg';
         // }
+        let selectedFiles = []
         $(document).ready(() => {
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
@@ -2214,7 +2215,7 @@
                     // console.log('Error occurred while fetching state and city data.');
                 }
             });
-            let selectedFiles = []
+            
             const tenantId = (new URL(document.location)).searchParams.get("tenantId");
             // console.log($("#viewUnits").attr("href"))
             //            
