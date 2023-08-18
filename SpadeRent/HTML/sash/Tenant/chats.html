@@ -1886,7 +1886,7 @@
                                                 <a class="dropdown-item" href="lockscreen.html">
                                                     <i class="dropdown-icon fe fe-lock"></i> Lockscreen
                                                 </a> -->
-                                                <a class="dropdown-item" onclick="logout()">
+                                                <a class="dropdown-item" onclick="logout()" style="cursor: pointer;">
                                                     <i class="dropdown-icon fe fe-alert-circle"></i> Sign out
                                                 </a>
                                             </div>
@@ -3620,7 +3620,7 @@
                         $("#tenant-address").empty()
                         $("#tenant-address").append(`&nbsp;&nbsp; <span><b>Pensgate St</b></span> <br>&nbsp;&nbsp; ${response.data.tAddress + " " + response.data.tCity + " " + response.data.tState + " " + response.data.tZipcode}`)
                         $.ajax({
-                            url: 'http://localhost:3000/api/spade/getUserById/' + Number(response.data.landlordID) + '/landlord',
+                            url: 'https://backend.app.spaderent.com/api/spade/getUserById/' + Number(response.data.landlordID) + '/landlord',
                             type: 'GET',
                             contentType: "application/json; charset=utf-8",
                             // processData: false,
@@ -3628,6 +3628,17 @@
                                 console.log(1111111)
                                 console.log(response)
                                 localStorage.setItem("LandlordImg", response.data.image)
+                                if (localStorage.getItem("LandlordImg")) {
+                                                var newBgImageUrl = `url('`+localStorage.getItem("LandlordImg")+`')`;
+
+// Select the div with the class "person" and change its background image
+$(".person").css("background-image", newBgImageUrl);
+                                            } else {
+                                                var newBgImageUrl = "url('../assets/images/users/5.jpg')";
+
+// Select the div with the class "person" and change its background image
+$(".person").css("background-image", newBgImageUrl);
+                                            }
                                 if (response.data.isUserActive == 1) {
                                     $('#online').show()
                                 } else {
@@ -3645,7 +3656,7 @@
                             }
                         });
                         $.ajax({
-                            url: 'http://localhost:3000/api/spade/getUserById/' + Number(response.data.tenantID) + '/tenant',
+                            url: 'https://backend.app.spaderent.com/api/spade/getUserById/' + Number(response.data.tenantID) + '/tenant',
                             type: 'GET',
                             contentType: "application/json; charset=utf-8",
                             // processData: false,
@@ -3657,17 +3668,7 @@
                                 
                                 var firstUrl = urlArray[0];
                                 localStorage.setItem("tenantImg", firstUrl)
-                                if (localStorage.getItem("tenantImg")) {
-                                                var newBgImageUrl = `url('`+localStorage.getItem("tenantImg")+`')`;
-
-// Select the div with the class "person" and change its background image
-$(".person").css("background-image", newBgImageUrl);
-                                            } else {
-                                                var newBgImageUrl = "url('../assets/images/users/5.jpg')";
-
-// Select the div with the class "person" and change its background image
-$(".person").css("background-image", newBgImageUrl);
-                                            }
+                                
                                 // console.log("First URL:", firstUrl);
                                
                             },
@@ -3885,7 +3886,7 @@ messs2 = `<div class="d-flex " style="align-items: flex-start;justify-content: f
             function logout() {
                 $(document).ready(function () {
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/inactiveTenant',
+                        url: 'https://backend.app.spaderent.com/api/spade/inactiveTenant',
                         type: 'PUT',
                         contentType: false,
                         processData: false,

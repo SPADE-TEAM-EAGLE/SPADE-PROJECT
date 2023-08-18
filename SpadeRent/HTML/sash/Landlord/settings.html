@@ -2253,7 +2253,7 @@
                                                 <a class="dropdown-item" href="lockscreen.html">
                                                     <i class="dropdown-icon fe fe-lock"></i> Lockscreen
                                                 </a> -->
-                                                <a class="dropdown-item" onclick="logout()">
+                                                <a class="dropdown-item" onclick="logout()" style="cursor: pointer;">
                                                     <i class="dropdown-icon fe fe-alert-circle"></i> Sign out
                                                 </a>
                                             </div>
@@ -8329,34 +8329,34 @@
 
             </div>
 
-            <!-- Sidebar-right -->
-            <div class="sidebar sidebar-right sidebar-animate">
-                <div class="panel panel-primary card mb-0 shadow-none border-0">
-                    <div class="tab-menu-heading border-0 d-flex p-3">
-                        <div class="card-title mb-0 text-dark fw-bold">
-                            <!-- <i class="fe fe-bell me-2"></i> -->
-                            <!-- <span class=" pulse"></span> -->
-                            Notifications <a href="javascript:void(0);"
-                                class="text-primary text-decoration-underline">Mark all as read</a>
-                        </div>
-                        <div class="card-options ms-auto">
-                            <a href="javascript:void(0);" class="sidebar-icon text-end float-end me-3 mb-1"
-                                data-bs-toggle="sidebar-right" data-target=".sidebar-right"><i
-                                    class="fe fe-x text-dark"></i></a>
-                        </div>
-                    </div>
-                    <div class="panel-body tabs-menu-body latest-tasks p-0 border-0">
-                        <div class="tabs-menu border-bottom">
-                            <!-- Tabs -->
-                            <ul class="nav panel-tabs">
-                                <li><a href="#side1" data-bs-toggle="tab" class="text-dark">All</a></li>
-                                <li><a href="#side2" data-bs-toggle="tab" class="text-dark">Inbox (25)</a></li>
-                                <li><a href="#side3" data-bs-toggle="tab" class="text-dark">Unread (5)</a></li>
-                                <li><a href="#side4" data-bs-toggle="tab" class="text-dark">Archive (0)</a></li>
-                            </ul>
-                        </div>
-                        <div class="tab-content">
-                            <!-- <div class="tab-pane " id="side1">
+             <!-- Sidebar-right -->
+    <div class="sidebar sidebar-right sidebar-animate">
+        <div class="panel panel-primary card mb-0 shadow-none border-0">
+            <div class="tab-menu-heading border-0 d-flex p-3">
+                <div class="card-title mb-0 text-dark fw-bold">
+                    <!-- <i class="fe fe-bell me-2"></i> -->
+                    <!-- <span class=" pulse"></span> -->
+                    Notifications <a href="javascript:void(0);" class="text-primary text-decoration-underline " id="updateAllNotifyRead">Mark all
+                        as read</a>
+                </div>
+                <div class="card-options ms-auto">
+                    <a href="javascript:void(0);" class="sidebar-icon text-end float-end me-3 mb-1"
+                        data-bs-toggle="sidebar-right" data-target=".sidebar-right"><i
+                            class="fe fe-x text-dark"></i></a>
+                </div>
+            </div>
+            <div class="panel-body tabs-menu-body latest-tasks p-0 border-0">
+                <div class="tabs-menu border-bottom">
+                    <!-- Tabs -->
+                    <ul class="nav panel-tabs">
+                        <li><a href="#side1" data-bs-toggle="tab" class="text-dark active">All<span class="all_span"></span></a></li>
+                        <li><a href="#side2" data-bs-toggle="tab" class="text-dark">Inbox <span class="inbox_span"></span></a></li>
+                        <li><a href="#side3" data-bs-toggle="tab" class="text-dark">Unread <span class="Unread_span"></span></a></li>
+                        <li><a href="#side4" data-bs-toggle="tab" class="text-dark">Archive <span class="archive_span"></span></a></li>
+                    </ul>   
+                </div>
+                <div class="tab-content">
+                    <!-- <div class="tab-pane " id="side1">
                         <div class="p-3 fw-semibold ps-5">Feeds</div>
                         <div class="card-body pt-2">
                             <div class="browser-stats">
@@ -8528,236 +8528,178 @@
                             </div>
                         </div>
                     </div> -->
-                            <div class="tab-pane active" id="side1">
-                                <div class="list-group list-group-flush" id="notification-container">
-                                    <!-- <div class="pt-3 fw-semibold ps-5">Today</div> -->
-                                    <div class="list-group-item d-flex align-items-center justify-content-between">
-                                        <div class="d-flex align-items-center">
-                                            <div class="me-2">
-                                                <span class="avatar avatar-md brround cover-image"
-                                                    data-bs-image-src="../assets/images/users/2.jpg"><span
-                                                        class="avatar-status bg-success"></span>
-                                            </div>
-                                            <div class="">
-                                                <a href="javascript:void(0);">
-                                                    <div class="fw-semibold text-dark fw-bold fs-15"
-                                                        data-bs-toggle="modal" data-target="#chatmodel">Wccxvilliam
-                                                    </div>
-                                                    <span class="text-dark"> 1sey Street > Jersey</span>
-                                                    <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="">
-                                            <span class="fs-12 text-dark">2 min ago</span>
-                                        </div>
-                                    </div>
-                                    <div class="list-group-item d-flex align-items-center justify-content-between">
-                                        <div class="d-flex align-items-center">
-                                            <div class="me-2">
-                                                <span class="avatar avatar-md brround cover-image"
-                                                    data-bs-image-src="../assets/images/users/2.jpg"><span
-                                                        class="avatar-status bg-success"></span>
-                                            </div>
-                                            <div class="">
-                                                <a href="javascript:void(0);">
-                                                    <div class="fw-semibold text-dark fw-bold fs-15"
-                                                        data-bs-toggle="modal" data-target="#chatmodel">Henry</div>
-                                                    <span class="text-dark"> 1436 Jersey Street > Jersey</span>
-                                                    <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="">
-                                            <span class="fs-12 text-dark">2 min ago</span>
-                                        </div>
-                                    </div>
-                                    <div class="list-group-item d-flex align-items-center justify-content-between">
-                                        <div class="d-flex align-items-center">
-                                            <div class="me-2">
-                                                <span class="avatar avatar-md brround cover-image"
-                                                    data-bs-image-src="../assets/images/users/2.jpg"><span
-                                                        class="avatar-status bg-success"></span>
-                                            </div>
-                                            <div class="">
-                                                <a href="javascript:void(0);">
-                                                    <div class="fw-semibold text-dark fw-bold fs-15"
-                                                        data-bs-toggle="modal" data-target="#chatmodel">David</div>
-                                                    <span class="text-dark"> 1436 Jersey Street > Jersey</span>
-                                                    <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="">
-                                            <span class="fs-12 text-dark">2 min ago</span>
-                                        </div>
-                                    </div>
-                                    <div class="list-group-item d-flex align-items-center justify-content-between">
-                                        <div class="d-flex align-items-center">
-                                            <div class="me-2">
-                                                <span class="avatar avatar-md brround cover-image"
-                                                    data-bs-image-src="../assets/images/users/2.jpg"><span
-                                                        class="avatar-status bg-success"></span>
-                                            </div>
-                                            <div class="">
-                                                <a href="javascript:void(0);">
-                                                    <div class="fw-semibold text-dark fw-bold fs-15"
-                                                        data-bs-toggle="modal" data-target="#chatmodel">David</div>
-                                                    <span class="text-dark"> 1436 Jersey Street > Jersey</span>
-                                                    <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="">
-                                            <span class="fs-12 text-dark">2 min ago</span>
-                                        </div>
-                                    </div>
-                                    <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
+                    <div class="tab-pane active" id="side1">
+                        <div class="list-group list-group-flush" id="notification-container">
+                            
 
+                        </div>
+                    </div>
+                  
+                    <div class="tab-pane " id="side2">
+                        <div class="list-group list-group-flush" id="inbox-notification-container">
+
+                        </div>
+                    </div>
+                    <div class="tab-pane " id="side3">
+                        <div class="list-group list-group-flush" id="unread-notification-container">
+                            
+
+                        </div>
+                    </div>
+                    <div class="tab-pane " id="side4">
+                        <div class="list-group list-group-flush" id="Archieve-notification-container">
+                            
+
+                        </div>
+                    </div>
+                    <!-- <div class="tab-pane active" id="side4">
+                        <div class="list-group list-group-flush" id="read-notification-container">
+                            
+
+                        </div>
+                    </div> -->
+                    <!-- <div class="tab-pane" id="side2">
+                        <div class="list-group list-group-flush">
+                            <div class="pt-3 fw-semibold ps-5">Today</div> -->
+                            <!-- <div class="list-group-item d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <div class="me-2">
+                                        <span class="avatar avatar-md brround cover-image"
+                                            data-bs-image-src="../assets/images/users/2.jpg"><span
+                                                class="avatar-status bg-success"></span>
+                                    </div>
+                                    <div class="">
+                                        <a href="javascript:void(0);">
+                                            <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal"
+                                                data-target="#chatmodel">David</div> <span class="text-dark"> 1436
+                                                Jersey Street > Jersey</span>
+                                            <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="">
+                                    <span class="fs-12 text-dark">2 min ago</span>
                                 </div>
                             </div>
-                            <div class="tab-pane" id="side2">
-                                <div class="list-group list-group-flush">
-                                    <!-- <div class="pt-3 fw-semibold ps-5">Today</div> -->
-                                    <div class="list-group-item d-flex align-items-center justify-content-between">
-                                        <div class="d-flex align-items-center">
-                                            <div class="me-2">
-                                                <span class="avatar avatar-md brround cover-image"
-                                                    data-bs-image-src="../assets/images/users/2.jpg"><span
-                                                        class="avatar-status bg-success"></span>
-                                            </div>
-                                            <div class="">
-                                                <a href="javascript:void(0);">
-                                                    <div class="fw-semibold text-dark fw-bold fs-15"
-                                                        data-bs-toggle="modal" data-target="#chatmodel">David</div>
-                                                    <span class="text-dark"> 1436 Jersey Street > Jersey</span>
-                                                    <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="">
-                                            <span class="fs-12 text-dark">2 min ago</span>
-                                        </div>
+                            <div class="list-group-item d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <div class="me-2">
+                                        <span class="avatar avatar-md brround cover-image"
+                                            data-bs-image-src="../assets/images/users/2.jpg"><span
+                                                class="avatar-status bg-success"></span>
                                     </div>
-                                    <div class="list-group-item d-flex align-items-center justify-content-between">
-                                        <div class="d-flex align-items-center">
-                                            <div class="me-2">
-                                                <span class="avatar avatar-md brround cover-image"
-                                                    data-bs-image-src="../assets/images/users/2.jpg"><span
-                                                        class="avatar-status bg-success"></span>
-                                            </div>
-                                            <div class="">
-                                                <a href="javascript:void(0);">
-                                                    <div class="fw-semibold text-dark fw-bold fs-15"
-                                                        data-bs-toggle="modal" data-target="#chatmodel">Michael</div>
-                                                    <span class="text-dark"> 1436 Jersey Street > Jersey</span>
-                                                    <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="">
-                                            <span class="fs-12 text-dark">2 min ago</span>
-                                        </div>
+                                    <div class="">
+                                        <a href="javascript:void(0);">
+                                            <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal"
+                                                data-target="#chatmodel">Michael</div> <span class="text-dark"> 1436
+                                                Jersey Street > Jersey</span>
+                                            <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
+                                        </a>
                                     </div>
-                                    <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
+                                </div>
+                                <div class="">
+                                    <span class="fs-12 text-dark">2 min ago</span>
+                                </div>
+                            </div> -->
+                            <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
 
+                        <!-- </div>
+                    </div> --> 
+                    <!-- <div class="tab-pane" id="side3">
+                        <div class="list-group list-group-flush">
+                            <div class="pt-3 fw-semibold ps-5">Today</div> -->
+                            <!-- <div class="list-group-item d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <div class="me-2">
+                                        <span class="avatar avatar-md brround cover-image"
+                                            data-bs-image-src="../assets/images/users/2.jpg"><span
+                                                class="avatar-status bg-success"></span>
+                                    </div>
+                                    <div class="">
+                                        <a href="javascript:void(0);">
+                                            <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal"
+                                                data-target="#chatmodel">Michael</div> <span class="text-dark"> 1436
+                                                Jersey Street > Jersey</span>
+                                            <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="">
+                                    <span class="fs-12 text-dark">2 min ago</span>
                                 </div>
                             </div>
-                            <div class="tab-pane" id="side3">
-                                <div class="list-group list-group-flush">
-                                    <!-- <div class="pt-3 fw-semibold ps-5">Today</div> -->
-                                    <div class="list-group-item d-flex align-items-center justify-content-between">
-                                        <div class="d-flex align-items-center">
-                                            <div class="me-2">
-                                                <span class="avatar avatar-md brround cover-image"
-                                                    data-bs-image-src="../assets/images/users/2.jpg"><span
-                                                        class="avatar-status bg-success"></span>
-                                            </div>
-                                            <div class="">
-                                                <a href="javascript:void(0);">
-                                                    <div class="fw-semibold text-dark fw-bold fs-15"
-                                                        data-bs-toggle="modal" data-target="#chatmodel">Michael</div>
-                                                    <span class="text-dark"> 1436 Jersey Street > Jersey</span>
-                                                    <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="">
-                                            <span class="fs-12 text-dark">2 min ago</span>
-                                        </div>
+                            <div class="list-group-item d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <div class="me-2">
+                                        <span class="avatar avatar-md brround cover-image"
+                                            data-bs-image-src="../assets/images/users/2.jpg"><span
+                                                class="avatar-status bg-success"></span>
                                     </div>
-                                    <div class="list-group-item d-flex align-items-center justify-content-between">
-                                        <div class="d-flex align-items-center">
-                                            <div class="me-2">
-                                                <span class="avatar avatar-md brround cover-image"
-                                                    data-bs-image-src="../assets/images/users/2.jpg"><span
-                                                        class="avatar-status bg-success"></span>
-                                            </div>
-                                            <div class="">
-                                                <a href="javascript:void(0);">
-                                                    <div class="fw-semibold text-dark fw-bold fs-15"
-                                                        data-bs-toggle="modal" data-target="#chatmodel">Thomas</div>
-                                                    <span class="text-dark"> 1436 Jersey Street > Jersey</span>
-                                                    <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="">
-                                            <span class="fs-12 text-dark">2 min ago</span>
-                                        </div>
+                                    <div class="">
+                                        <a href="javascript:void(0);">
+                                            <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal"
+                                                data-target="#chatmodel">Thomas</div> <span class="text-dark"> 1436
+                                                Jersey Street > Jersey</span>
+                                            <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
+                                        </a>
                                     </div>
-                                    <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
+                                </div>
+                                <div class="">
+                                    <span class="fs-12 text-dark">2 min ago</span>
+                                </div>
+                            </div> -->
+                            <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
 
+                        <!-- </div>
+                    </div> --> 
+                    <!-- <div class="tab-pane" id="side4">
+                        <div class="list-group list-group-flush">
+                             <div class="pt-3 fw-semibold ps-5">Today</div> -->
+                            <!-- <div class="list-group-item d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <div class="me-2">
+                                        <span class="avatar avatar-md brround cover-image"
+                                            data-bs-image-src="../assets/images/users/2.jpg"><span
+                                                class="avatar-status bg-success"></span>
+                                    </div>
+                                    <div class="">
+                                        <a href="javascript:void(0);">
+                                            <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal"
+                                                data-target="#chatmodel">Daniel</div> <span class="text-dark"> 1436
+                                                Jersey Street > Jersey</span>
+                                            <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="">
+                                    <span class="fs-12 text-dark">2 min ago</span>
                                 </div>
                             </div>
-                            <div class="tab-pane" id="side4">
-                                <div class="list-group list-group-flush">
-                                    <!-- <div class="pt-3 fw-semibold ps-5">Today</div> -->
-                                    <div class="list-group-item d-flex align-items-center justify-content-between">
-                                        <div class="d-flex align-items-center">
-                                            <div class="me-2">
-                                                <span class="avatar avatar-md brround cover-image"
-                                                    data-bs-image-src="../assets/images/users/2.jpg"><span
-                                                        class="avatar-status bg-success"></span>
-                                            </div>
-                                            <div class="">
-                                                <a href="javascript:void(0);">
-                                                    <div class="fw-semibold text-dark fw-bold fs-15"
-                                                        data-bs-toggle="modal" data-target="#chatmodel">Daniel</div>
-                                                    <span class="text-dark"> 1436 Jersey Street > Jersey</span>
-                                                    <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="">
-                                            <span class="fs-12 text-dark">2 min ago</span>
-                                        </div>
+                            <div class="list-group-item d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <div class="me-2">
+                                        <span class="avatar avatar-md brround cover-image"
+                                            data-bs-image-src="../assets/images/users/2.jpg"><span
+                                                class="avatar-status bg-success"></span>
                                     </div>
-                                    <div class="list-group-item d-flex align-items-center justify-content-between">
-                                        <div class="d-flex align-items-center">
-                                            <div class="me-2">
-                                                <span class="avatar avatar-md brround cover-image"
-                                                    data-bs-image-src="../assets/images/users/2.jpg"><span
-                                                        class="avatar-status bg-success"></span>
-                                            </div>
-                                            <div class="">
-                                                <a href="javascript:void(0);">
-                                                    <div class="fw-semibold text-dark fw-bold fs-15"
-                                                        data-bs-toggle="modal" data-target="#chatmodel">Daniel</div>
-                                                    <span class="text-dark"> 1436 Jersey Street > Jersey</span>
-                                                    <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="">
-                                            <span class="fs-12 text-dark">2 min ago</span>
-                                        </div>
+                                    <div class="">
+                                        <a href="javascript:void(0);">
+                                            <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal"
+                                                data-target="#chatmodel">Daniel</div> <span class="text-dark"> 1436
+                                                Jersey Street > Jersey</span>
+                                            <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
+                                        </a>
                                     </div>
-                                    <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
-
                                 </div>
-                            </div>
-                            <!-- <div class="tab-pane" id="side3">
+                                <div class="">
+                                    <span class="fs-12 text-dark">2 min ago</span>
+                                </div>
+                            </div> -->
+                            <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
+
+                        <!-- </div>
+                    </div> --> 
+                    <!-- <div class="tab-pane" id="side3">
                         <ul class="task-list timeline-task">
                             <li class="d-sm-flex mt-4">
                                 <div>
@@ -8849,11 +8791,11 @@
                             </li>
                         </ul>
                     </div> -->
-                        </div>
-                    </div>
                 </div>
             </div>
-            <!--/Sidebar-right-->
+        </div>
+    </div>
+    <!--/Sidebar-right-->
 
             <!-- Country-selector modal-->
             <div class="modal fade" id="country-selector">
@@ -9102,6 +9044,7 @@
         <!-- <script src="https://code.jquery.com/jquery-latest.min.js"></script> -->
         <script src="../assets/js/email-verification.js"></script>
     <script src="../assets/js/intercom.js"></script>
+    <script src="../assets/js/getNotification.js"></script>
         <script>
             $(document).ready(function () {
                 $.ajax({
