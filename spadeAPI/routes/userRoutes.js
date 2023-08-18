@@ -123,7 +123,8 @@ router.get("/getAllTaskTenant", tenantPortalController.getAllTaskTenant);
 // router.get("/getAllTaskLoggedInTenant", verifyTokenTenant, tenantPortalController.getAllLoggedInTenantTask);
 // get tenante dashboard
 router.get("/getTenantDashData", verifyTokenTenant, tenantPortalController.getTenantDashboardData);
-router.get('/getTenantByID', verifyTokenTenant, tenantPortalController.getTenantByID);
+// router.get('/getTenantByID', verifyTokenTenant, tenantPortalController.getTenantByID);
+router.get('/getTenantByID', tenantPortalController.getTenantByID);
 router.put('/changePasssword', verifyToken, settingController.changePasssword);
 router.put('/changePasswordTenant', verifyTokenTenant, settingController.changePasswordTenant);
 router.put('/emailUpdate', userController.emailUpdate);
@@ -181,6 +182,8 @@ router.get("/taskCount", verifyToken, taskController.taskCount);
 router.post("/addTasksTenant" , tenantPortalController.addTasksTenant);
 router.get("/invoiceAmountCount/:start/:end" ,verifyToken ,invoiceController.invoiceAmountCount);
 router.get("/getAllTaskTenantRequest", verifyToken, taskController.getAllTaskTenantRequest);
+router.get("/taskByIDTenant" ,verifyToken ,tenantPortalController.taskByIDTenant);
+// router.get("/taskByIDTenant" , tenantPortalController.taskByIDTenant);
 
 
 module.exports = router;

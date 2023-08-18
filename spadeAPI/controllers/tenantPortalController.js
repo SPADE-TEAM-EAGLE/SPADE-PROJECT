@@ -17,7 +17,8 @@ const {
   getTenantTotalAmount,
   addTasksQuerytenant,
   insertInTaskImage,
-  addVendorList
+  addVendorList,
+  taskByIDQuery
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -210,10 +211,12 @@ exports.getTenantDashboardData = async (req, res) => {
   //     res.send("Error Get Tasks");
   //   }
   // };
+
   exports.getTenantByID = async (req, res) => {
     try {
       // con
-      const { userId } = req.user;
+      // const { userId } = req.user;
+      const { userId } = req.body;
       console.log(userId)
       const TenantsByIDResult = await queryRunner(getTenantsById, [userId])
       if (TenantsByIDResult[0].length > 0) {
@@ -330,3 +333,74 @@ exports.addTasksTenant = async (req, res) => {
 };
 //  #############################  ADD TASK ENDS HERE ##################################################
 
+//  ############################# Task By ID Tenant Start ############################################################
+exports.taskByIDTenant = async (req, res) => {
+  // const { Id } = req.body;
+  const { Id } = req.user;
+  try {
+    const taskByIDResult = await queryRunner(taskByIDQuery, [Id]);
+    if (taskByIDResult.length > 0) {
+      const TaskImagesResult = await queryRunner(selectQuery("taskimages", "taskID"), [Id]);
+      if (TaskImagesResult[0].length > 0) {
+        const taskImages = TaskImagesResult[0].map((image) => image.Image);
+        taskByIDResult[0][0].taskImages = taskImages;
+      } else {
+        taskByIDResult[0][0].taskImages = ["No Task Images Found"];
+      }
+      const TaskAssignToResult = await queryRunner(
+        selectQuery("taskassignto", "taskId"),
+        [Id]
+      );
+      if (TaskAssignToResult[0].length > 0) {
+      const vendorIDs = TaskAssignToResult[0].map((vendorID) => vendorID.vendorId);
+      const vendorData = [];
+      for (let i = 0; i < vendorIDs.length; i++) {
+        const vID = vendorIDs[i];
+        const vendorResult = await queryRunner(
+          selectQuery("vendor", "id"),
+          [vID]
+        );
+        if (vendorResult[0].length > 0) {
+          const categoryIDs = vendorResult[0][0].categoryID;
+          const VendorCategoryResult = await queryRunner(
+            selectQuery("vendorcategory", "id"),
+            [categoryIDs]
+          );
+          if (VendorCategoryResult.length > 0) {
+            const vendorDataObject = {
+              name: vendorResult[0][0].firstName + " " + vendorResult[0][0].lastName,
+              businessName: vendorResult[0][0].businessName,
+              streetAddress: vendorResult[0][0].streetAddress,
+              workNumber: vendorResult[0][0].workNumber,
+              mobileNumber: vendorResult[0][0].mobileNumber,
+              email: vendorResult[0][0].email,
+              category: VendorCategoryResult[0][0].category,
+            };
+            vendorData.push(vendorDataObject);
+          } else {
+            vendorData.push(["No Vendor Data Found"]);
+          }
+        }
+      }
+      taskByIDResult[0][0].vendor = vendorData;
+      }else{
+        taskByIDResult[0][0].vendor = ["No vendor data found"];
+      }
+
+      
+      res.status(200).json({
+        data: taskByIDResult,
+        message: "Task data retrieved successfully",
+      });
+    } else {
+      res.status(400).json({
+        message: "No Tasks data found",
+      });
+    }
+  } catch (error) {
+    console.log("Error:", error);
+    res.send("Error Get Tasks",error);
+  }
+};
+
+//  ############################# Task By ID Tenant End ############################################################
