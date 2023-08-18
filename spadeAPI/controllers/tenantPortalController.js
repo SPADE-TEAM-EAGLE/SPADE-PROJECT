@@ -239,27 +239,25 @@ exports.getTenantDashboardData = async (req, res) => {
 exports.addTasksTenant = async (req, res) => {
   const {
     task,
-    // assignee,
-    tenantID,
-    dueDate,
     status,
     priority,
     note,
-    notifyTenant,
-    // notifyVendor,
+    notifyLandlord,
     images,
     
     // created_at,
     // created_by,
   } = req.body;
+  
   // const { userId, userName, landlordID,phoneNumber, email } = req.user;
-  const { userId, userName, landlordID,phoneNumber, email } = req.body;
+  const { userId, userName, landlordID,phoneNumber, email } = req.user;
   const currentDate = new Date();
+  
   try {
     // console.log(1);
     const addTasksCheckResult = await queryRunner(
       selectQuery("task", "taskName", "tenantID"),
-      [task, tenantID]
+      [task, userId]
     );
     if (addTasksCheckResult[0].length > 0) {
       return res.send("Task already exists");
@@ -271,7 +269,7 @@ exports.addTasksTenant = async (req, res) => {
         status,
         priority,
         note,
-        notifyTenant,
+        notifyLandlord,
         currentDate,
         "Tenant",
         landlordID,
@@ -312,11 +310,11 @@ exports.addTasksTenant = async (req, res) => {
       // const landlordName = landlordCheckResult[0][0].FirstName + " " + landlordCheckResult[0][0].LastName;
       // const landlordContact = landlordCheckResult[0][0].Phone;
       // const vendorNames = vendorNamearr.toString();
-      if (notifyTenant.toLowerCase() === "yes") {
+      if (notifyLandlord.toLowerCase() === "yes") {
         await taskSendMail(
           landlordName,
           "Property Maintenance: " + task,
-          dueDate,
+          "Not Set",
           userName,
           task,
           "Not Assigned",

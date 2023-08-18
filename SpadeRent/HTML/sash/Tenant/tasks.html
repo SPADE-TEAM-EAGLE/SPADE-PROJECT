@@ -612,56 +612,121 @@
                     <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
                         data-bs-parent="#accordionExample">
                         <form class="row g-3" enctype="multipart/form-data">
-                            <div class="col-md-6">
-                                <label for="inputEmail4" class="form-label fw-bold">Task</label>
-                                <input type="text" class="form-control form" id="task">
-                                <span class="text-danger d-none">Task is required!</span>
+                            <div class="col-md-4">
+                                <label for="inputEmail4" class="form-label fw-bold">Task Name</label>
+                                <input id="task" required class="form-control" placeholder="Sink in Leaked" type="text"
+                                    placeholder="Enter Task Name">
+                                <span class="text-danger d-none">Task name is required!</span>
                             </div>
-                            <div class="col-md-6"></div>
-                            <div class="col-md-6">
-                                <label for="inputState" class="form-label fw-bold">Property Name <spnan
-                                        class="text-danger">*</span></label>
-                                <select id="state" class="form-select form">
-                                    <option selected>Select Option</option>
-                                    <option>Sindh</option>
-                                    <option>Punjab</option>
-                                    <option>Balochistan</option>
-                                    <option>KPK</option>
+                            
+                            
+                            
+                            <div class="col-md-4">
+                                <label for="inputState" class="form-label fw-bold">Status</label>
+                                <select id="status" required class="form-select form"placeholder="Select Status"
+                                    >
+                                    <option selected>Choose...</option>
+                                    <option value="not started">Not Started</option>
+                                    <option value="in progress">In progress</option>
+                                    <option value="completed">Completed</option>
+
                                 </select>
-                                <span class="text-danger d-none">Property Name is required!</span>
+                                <span class="text-danger d-none">Status is required!</span>
                             </div>
-                            <div class="col-md-6">
-                                <label for="inputState" class="form-label fw-bold">Unit <spnan class="text-danger">
-                                        *</span></label>
-                                <select id="propertyType" class="form-select form">
-                                    <option selected>Select Option</option>
-                                    <option>Single Family</option>
-                                    <option>Multi-Family</option>
-                                    <option>Multi-Commercial</option>
+                            <div class="col-md-4">
+                                <label for="inputState" class="form-label fw-bold">Priority</label>
+                                <select id="priority" required class="form-select form" placeholder="Select Priority"
+                                    >
+                                    <option selected>Choose...</option>
+                                    <option name="high">High</option>
+                                    <option name="moderate">Moderate</option>
+                                    <option name="low">Low</option>
                                 </select>
-                                <span class="text-danger d-none">Unit is required!</span>
+                                <span class="text-danger d-none">Priority is required!</span>
                             </div>
                             <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="exampleFormControlTextarea1">Message</label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+                                <label class="form-label fw-bold">Notes</label>
+                                <textarea id="notes" class="form-control mb-4"
+                                    placeholder="Sorry about that We will look into it." rows="4"
+                                    ></textarea>
+                                <!-- <span class="text-danger d-none">Photos are required!</span> -->
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label fw-bold">Media/ Files</label>
+                                <div class="custom-file" style="border: 1px dashed #00000087;">
+                                    <input id="fileInput" type="file" name="media" class="custom-file-input form"
+    accept=".jpg, .jpeg, .png, .pdf, image/jpeg, image/png, application/pdf" aria-label="hello" multiple>
+                                    <span className="d-none"></span>
+                                    <label class="custom-file-label" for="fileInput">
+                                        <i class="fi fi-rs-cloud-upload"></i>
+                                        <div class="custom-file-text">
+                                            <span>Upload Photo here</span>
+                                            <span>JPEG, PNG & PDF file size no more than 10MB</span>
+                                        </div>
+                                    </label>
                                 </div>
-                                <span class="text-danger d-none">Message is required!</span>
+                                <div class="selected-files">
+                                    <div class="file-grid"></div>
+                                </div>
+                                <span class="text-danger d-none">Photos are required!</span>
                             </div>
                         </form>
                     </div>
 
                 </div>
-                <div class="modal-footer d-flex>
-                    <div class=" "><button class=" btn btn-outline-default btn-pill button " data-bs-dismiss=" modal " id='close'>Close</button>
-                        <!-- <a href=" javascript:void(0) " class=" btn btn-outline-secondary ">Secondary</a> -->
-                        <a type=" submit " class=" btn text-light btn-pill button " style='background-color:#1467B0;' id='next'>Next</a></div>
+                <div class="modal-footer d-flex justify-content-between">
+                    <!-- <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
+                        Draft</button> -->
+                    <div class="d-flex">
+                        <label class="custom-control custom-checkbox me-2">
+                            <input type="checkbox" class="custom-control-input" name="example-checkbox1" value=""
+                                checked="">
+                            <span class="custom-control-label">Notify landlorad</span>
+                        </label>
+                    </div>
+                    <div class=""><button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal"
+                            id='close'>Close</button>
+                        <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
+                        <a href="javascript:void(0)" class="btn text-light btn-pill button disabled"
+                            style='background-color:#1467B0;' id='next'>Next</a>
+                    </div>
+
                 </div>
             </div>
         </div>
-    </div>
+    </div>
+    <div class="modal fade" id="succesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content success-modal-content">
+                <div class="modal-header">
 
-    <div class=" modal fade " id=" myModal_delete ">
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="succes-close">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body succes-modal" style="padding-top: 70px;padding-bottom: 70px;">
+                    <div class="text-justify ps-2 border-model-line">
+                        <h2 class="modal-title d-flex align-items-center ps-1">
+                            <strong class="color-primary">Success!&nbsp;</strong>
+                            <i class="fi fi-rs-check-circle text-success"></i>
+                        </h2>
+                        <p class="ms-2 mb-0 text-start">Your task request has been sent successfully.</p>
+                        <!-- <p class="ms-2 text-start">Please add tenant to this property.</p> -->
+                        <a data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal"
+                            class="btn btn-outline-default btn-pill ms-1 my-2"
+                            style='background-color:#1467B0;color: white;'> <i class="fi fi-rs-pencil"></i> ADD NEW
+                            TASK</a>
+                        <a class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal">
+                            Close
+                        </a>
+                    </div>
+                </div>
+                <div class="modal-footer" style="border-top: 0">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class=" modal fade " id="myModal_delete">
         <div class=" modal-dialog modal-dialog-centered text-center " role=" document ">
             <div class=" modal-content modal-content-demo ">
                 <div class=" modal-body p-0 ">
@@ -1409,10 +1474,11 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <button type="button " class="btn btn-primary btn-pill mx-2 " id="add_property_btn "
-                                        data-bs-effect="effect-scale " data-bs-toggle="modal " href="#addModal "><i
-                                            class="fe fe-plus me-2 "></i><strong>ADD NEW
-                                            TASK</strong></button>
+                                    <button type="button" class="btn btn-primary btn-pill mx-2"
+                                                    id="add_property_btn" data-bs-effect="effect-scale"
+                                                    data-bs-toggle="modal" href="#addModal"><i
+                                                        class="fe fe-plus me-2"></i><strong>ADD NEW
+                                                        TASK</strong></button>
                                 </div>
                             </div>
                             <div class="card-body p-0 ">
@@ -2169,175 +2235,470 @@
 
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js "></script>
-    <script>
-        const form1Inputs = document.querySelectorAll('#accordion-item1 .form');
-        form1Inputs.forEach(input => {
-            input.addEventListener('blur', function () {
-                if (validateInput(input)) {
-                    input.nextElementSibling.classList.add('d-none');
-                } else {
-                    input.nextElementSibling.classList.remove('d-none');
-                }
-            });
-        });
+<script>
+    var selectedFiles=[]
+    function areAllFieldsFilled(update) {
+                if (update) {
+                    console.log("this is for update")
+                    var accordion1Fields = $('#myModal_edit input[required], #myModal_edit select[required]');
 
-        // Attach event listeners to input fields in second form
-        const form2Inputs = document.querySelectorAll('#accordion-item2 .form-control');
-        form2Inputs.forEach(input => {
-            input.addEventListener('blur', function () {
-                // console.log(input.nextElementSibling)
-                if (validateInput(input)) {
-                    input.nextElementSibling.classList.add('d-none');
-                } else {
-                    input.nextElementSibling.classList.remove('d-none');
+                    // var imageInput = $('#fileInput_update');
+                    var allFieldsFilled = accordion1Fields.filter(function () {
+                        return $(this).val() === '' || $(this).val() === 'Choose...';
+                    }).length === 0;
+                    // console.log()
+                    return allFieldsFilled;
                 }
-            });
-        });
-        const check = 0
-        const updateformInputs = document.querySelectorAll('#myModal_edit .form-control');
-        updateformInputs.forEach(input => {
-            input.addEventListener('blur', function () {
-                // console.log(input.nextElementSibling)
-                if (validateInput(input)) {
-                    input.nextElementSibling.classList.add('d-none');
+                var accordion1Fields = $('#addModal input[required], #addModal select[required]');
 
-                } else {
-                    input.nextElementSibling.classList.remove('d-none');
-                }
-            });
-        });
-        counter = 0
-        const draftButton = document.getElementById('draft');
-        const nextButton = document.getElementById('next');
-        let isForm1Valid = false;
-        let isForm2Valid = false;
+                // var imageInput = $('#fileInput');
+                var allFieldsFilled = accordion1Fields.filter(function () {
+                    return $(this).val() === '' || $(this).val() === 'Choose...';
+                }).length === 0;
+                console.log()
+                return allFieldsFilled;
 
-        function checkFieldsFilled(id) {
-            if (id === "accordion-item2 " && counter === 0) {
-                counter += 1
-                return
             }
-            const accordionItem = document.getElementById(id);
-            // console.log(accordionItem)
-            const formFields = accordionItem.querySelectorAll("input, select ");
-            let allFieldsFilled = true;
-            // console.log(formFields)
-            formFields.forEach(function (field) {
-                // console.log(field.type, field.value)
-                // console.log(field)
-                if (field.value === " ") {
-                    allFieldsFilled = false;
-                }
 
-            });
+            // Function to enable or disable buttons based on field status
+            function updateButtonStatus(update) {
+                if (update) {
+                    console.log("update button")
+                    var allFieldsFilled = areAllFieldsFilled(update);
 
-            const chevronIcon = accordionItem.querySelector(".icon ");
-
-            if (accordionItem.querySelector(".accordion-button ").classList.contains("collapsed ")) {
-                if (allFieldsFilled) {
-                    chevronIcon.classList.remove("fi-rs-exclamation ");
-                    chevronIcon.classList.remove("chevron ");
-                    chevronIcon.classList.add("fi-rs-check ");
-                    chevronIcon.classList.add("tick ");
-                } else {
-                    chevronIcon.classList.remove("fi-rs-check ");
-                    chevronIcon.classList.remove("chevron ");
-                    chevronIcon.classList.add("fi-rs-exclamation ");
-                    chevronIcon.classList.add("cross ");
-                }
-            } else {
-                chevronIcon.classList.remove("fi-rs-check ");
-                // chevronIcon.classList.remove("chevron ");
-                chevronIcon.classList.add("chevron ");
-                chevronIcon.classList.remove("fi-rs-exclamation ");
-                chevronIcon.classList.remove("cross ");
-                chevronIcon.classList.remove("tick ");
-            }
-            if (id === "accordion-item1 ") {
-                // console.log(1)
-                form1Inputs.forEach(input => {
-                    if (validateInput(input)) {
-
-                        input.nextElementSibling.classList.add('d-none');
+                    // Enable or disable the buttons based on the fields' status
+                    if (allFieldsFilled) {
+                        $('#next').removeClass("disabled");
+                        //   $('#draft').removeAttr("disabled");
                     } else {
-                        input.nextElementSibling.classList.remove('d-none');
-                    }
-                });
-            } else if (id === "accordion-item2 ") {
-                // console.log(form2Inputs)
-                form2Inputs.forEach(input => {
-                    if (validateInput(input)) {
-                        input.nextElementSibling.classList.add('d-none');
-                    } else {
-                        input.nextElementSibling.classList.remove('d-none');
-                    }
-                });
-            } else {
-                updateformInputs.forEach(input => {
-                    if (validateInput(input)) {
-                        input.nextElementSibling.classList.add('d-none');
-                    } else {
-                        input.nextElementSibling.classList.remove('d-none');
-                    }
-                });
-            }
-            if (id === 'accordion-item1') {
-                isForm1Valid = validateForm(document.getElementById('accordion-item1'));
-            } else if (id === 'accordion-item1') {
-                isForm2Valid = validateForm(document.getElementById('accordion-item2'));
-            } else {
-                updateFormValid = validateForm(document.getElementById('myModal_edit'));
-            }
-            // const isForm1Valid = validateForm(document.getElementById('accordion-item1'));
-            // const isForm2Valid = validateForm(document.getElementById('accordion-item2'));
+                        $('#next').addClass("disabled");
+                        //   $('#draft').removeAttr("disabled");
 
-            // Enable/Disable buttons based on form validity
-            if (isForm1Valid && isForm2Valid) {
-                draftButton.disabled = false;
-                nextButton.disabled = false;
+                    }
+                } else {
+                    var allFieldsFilled = areAllFieldsFilled();
+                    console.log(allFieldsFilled)
+                    // Enable or disable the buttons based on the fields' status
+                    if (allFieldsFilled) {
+                        $('#next').removeClass("disabled");
+                        //   $('#draft').removeAttr("disabled");
+                    } else {
+                        $('#next').addClass("disabled");
+                        //   $('#draft').removeAttr("disabled");
+
+                    }
+                }
+            }
+
+            // Call the updateButtonStatus function when any field in the accordions is changed
+            $('#addModal input[required], #addModal select[required]').on('input', function () {
+                var $field = $(this);
+                var $errorMessage = $field.next('.text-danger');
+
+                if ($field.val() === '' || $field.val() === 'Choose...') {
+                    $field.addClass('border-danger');
+                    $field.removeClass('border-green');
+                    $errorMessage.removeClass('d-none');
+                } else {
+                    $field.removeClass('border-danger');
+                    $field.addClass('border-green');
+                    $errorMessage.addClass('d-none');
+                }
+                updateButtonStatus();
+            });
+            function resetAccordions() {
+                // Reset all accordions
+                $('#addModal input[type="text"]').val('');
+                $('#addModal input[type="date"]').val('');
+                $('#addModal select').prop('selectedIndex', 0);
+                $('#addModal textarea').val('');
+                $('#addModal input[type="checkbox"]').prop('checked', true);
+                $('#addModal .file-grid').empty();
+                $('#next').addClass("disabled");
+                $('#draft').attr("disabled", "disabled");
+
+            }
+            $('#close,#top-close').on('click', function (e) {
+                console.log(333)
+                e.preventDefault()
+                $(".select2-selection__rendered").empty()
+                resetAccordions()
+                selectedFiles = []
+                $(".file-grid").empty()
+                $('#addModal').modal('hide');
+            })
+            function getData(){
+                $.ajax({
+                url: 'http://localhost:3000/api/spade/getAllTaskTenant',
+                type: 'GET',
+                contentType: false,
+                processData: false,
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    console.log(response);
+                    if (false) {
+                        window.location = './new-property.html'
+                    } else {
+                        function toTitleCase(str) {
+                            console.log(str)
+                            return str.replace(/\w\S*/g, function (txt) {
+                                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                            });
+                        }
+                        $("#user-name").text(toTitleCase(response.user))
+                        $("#header-user").text(toTitleCase(response.user))
+
+                        var tableBody = $('#table_body');
+                        taskInfo = response.data[0]
+                        tableBody.empty();
+                        function toTitleCase(str) {
+                            if (typeof str == String) {
+                                return str.replace(/\w\S*/g, function (txt) {
+                                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                                });
+                            }
+
+                        }
+                        console.log(tableBody)
+                        response.data[0]?.forEach(function (task) {
+                            // console.log(task.status)
+                            // var image = '<td><img src="../../../../spadeAPI/uploads/ ' + property.images[0] + ' " alt=" "></td>';
+                            // var image = '<td><img src="../../../../../../Desktop/spade API 2/uploads/image-1684250579662.png " alt="hhghghgh "></td>';
+                            var image;
+if (task.ImageKey) {
+    if (task.ImageKey.includes(',')) {
+        var firstImage = task.ImageKey.split(',')[0];
+        if (firstImage.endsWith('.pdf')) {
+            image = '<td><i class="fi fi-rs-file-pdf"></i></td>';
+        } else {
+            image = '<td><img src="' + firstImage + '" alt=""></td>';
+        }
+    } else if (task.ImageKey.endsWith('.pdf')) {
+        image = '<td><i class="fi fi-rs-file-pdf"></i></td>';
+    } else {
+        image = '<td><img src="' + task.ImageKey + '" alt=""></td>';
+    }
+} else {
+    image = '<td><i class="fi fi-rs-picture"></i></td>';
+}
+
+
+
+                            var createdDate = new Date(task.created_at);
+                            var currentDate = new Date();
+
+                            var timeDiff = Math.abs(currentDate - createdDate);
+                            var minutesDiff = Math.floor(timeDiff / (1000 * 60));
+                            var hoursDiff = Math.floor(minutesDiff / 60);
+                            var daysDiff = Math.floor(hoursDiff / 24);
+
+                            var taskName = `<td class="task-id " id=${task.id} style="font-weight: 600; ">` + '<p style="font-weight: 600; " class="mb-1 ">' + task.taskName + '</p>' +
+                                `<span class="font-weight-normal " style="color: #9B9B9B; "> By ${task.createdBy} - `;
+
+                            if (daysDiff > 0) {
+                                taskName += `${daysDiff} days`;
+                            } else if (hoursDiff > 0) {
+                                taskName += `${hoursDiff} hours`;
+                            } else {
+                                taskName += `${minutesDiff} minutes`;
+                            }
+
+                            taskName += '</span>' + '</td>';
+
+                            var assignTo = '<td style="font-weight: 600;text-align: center;display: flex; ">' +
+                                (task.AssignTo?.map(({ name, email }) => {
+                                    return `
+            <div class="me-2 ">
+                <img class="avatar brround avatar-md " src="../assets/images/users/2.jpg " alt="avatar-img ">
+                <div class="media-body valign-middle mt-0 ">
+                    <a href="javascript:void(0) " class="text-dark fw-semibold ">${name}</a>
+                </div>
+            </div>`;
+                                }) || "Not assigned ") +
+                                '</td>';
+
+                            var dueDate = '<td class="property-id " style="font-weight: 600; ">' + '<p style="font-weight: 600; " class="mb-1 ">' + (task.dueDate || "Not Set ") + '</p>' + `<span class="font-weight-normal text-danger "> <i
+                                                                        class="fe fe-circle me-1 "></i>${task.priority}</span>` + '</td>';
+                            var relatedTo = '<td class="property-id " style="font-weight: 600; ">' + '<p style="font-weight: 600; " class="mb-1 ">' + (task.propertyName ? toTitleCase(task.propertyName) : "Not Set ") + '</p>' + `<span class="font-weight-normal
+                    text-danger ">Unit Number: ${task.unitNumber}</span>` + '</td>';
+                   
+                    var status = '<td class="property-id" style="font-weight: 600;">' + (task.status) + '</td>';
+                            var dropdownMenu =
+                                '<td><i class="fe fe-more-vertical " data-bs-toggle="dropdown "></i>' +
+                                '<ul class="dropdown-menu ">' +
+
+                                `<li><a class="dropdown-item text-success view-task " data-bs-effect="effect-scale " data-bs-toggle="modal " href="# ">View</a></li>`
+                            '</ul></td>';
+                            // Create a table row and append the generated columns
+                            var row = '<tr>' + image + taskName + assignTo + dueDate +
+                                relatedTo + status + dropdownMenu + '</tr>';
+
+                            // Append the row to the table body
+                            tableBody.append(row);
+                        });
+                        $("#global-loader ").fadeOut("slow ")
+                        $('.edit-option').click(function (e) {
+                            e.preventDefault();
+                            const taskIdElement = $(this).closest("tr ").find(".task-id ");
+
+                            taskId = taskIdElement.attr("id ")
+
+                            const data = response.data[0].find(obj => obj.id.toString() == taskId);
+                            // console.log(taskId)
+                            if (data.taskImages) {
+                                selectedFiles = data.taskImages.split(", ")
+
+                                updateSelectedFilesContainer()
+                            }
+                            $("#message ").val(data.notes);
+                            $("#dueDate_update ").val(data.dueDate);
+                            $("#taskName_update ").val(data.taskName);
+                            $("#property_update ").val(data.tenantID);
+
+                            $("#priority_update ").find(`option[name="${data.priority.toLowerCase()} "]`).prop("selected ", true);
+                            $("#status_update ").find(`option[value="${data.status} "]`).prop("selected ", true);
+                            data.AssignTo.forEach(({ ID, name }) => {
+                                $("#assignee_update ").find(`option[value="${ID} "]`).prop("selected ", true);
+                                $(".select2-selection__rendered ").append(`<li class="select2-selection__choice " title="${name} "><span class="select2-selection__choice__remove " role="presentation ">×</span>${name}</li>`)
+                            })
+
+                            $('#myModal_edit').modal('show');
+                        });
+                        $('.delete-option').click(function (e) {
+                            e.preventDefault(); // Prevent default anchor behavior
+                            const taskIdElement = $(this).closest("tr ").find(".task-id ");
+                            taskId = taskIdElement.attr("id ");
+                            $('#myModal_delete').modal('show');
+                        });
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.log(error)
+                    $("#myModal_warning").modal("show");
+                    setTimeout(function () {
+                        $('#myModal_warning').modal('hide');
+                        // window.location = './login_module.html';
+                    }, 2000);
+                }
+            });
+            }
+            getData()
+            $(document).on('click', '#next', function (e) {
+                e.preventDefault();
+                //   selectedFiles = [];
+                $('#addModal').modal('hide');
+
+                var task = $("#task").val();
+                var status = $("#status").val();
+                var priority = $("#priority").val();
+                var note = $("#notes").val();
+
+                var formData = new FormData();
+                var taskData = {}
+                // Check if the first checkbox is checked
+                var isNotifylandlordChecked = $('input[name="example-checkbox1"]:eq(0)').is(':checked') ? "yes" : "no";
+
+                
+
+                var files = $('#fileInput')[0].files;
+                if (selectedFiles.length >= 1) {
+                    for (var i = 0; i < selectedFiles.length; i++) {
+                        formData.append('image', selectedFiles[i]);
+                    }
+                    $.ajax({
+                        url: 'https://backend.app.spaderent.com/api/spade/upload',
+                        type: 'POST',
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            var imageArray = response.images;
+                            taskData = {
+                                task: task,
+                                status: status,
+                                priority: priority,
+                                note: note,
+                                notifyLandlord: isNotifylandlordChecked,
+                                images: imageArray,
+                                // Loop through the lineItems array and add each line item to the FormData object
+                            }
+                            $.ajax({
+                                url: 'http://localhost:3000/api/spade//addTasksTenant',
+                                type: 'POST',
+                                data: JSON.stringify(taskData),
+                                contentType: 'application/json',
+                                headers: {
+                                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                                },
+                                success: function (response) {
+                                    if (response === "Task already exists") {
+                                        $("#infoModal").modal("show")
+                                    }
+                                    else {
+
+                                        $("#succesModal").modal("show")
+                                        localStorage.setItem("task","true")
+                                        getData()
+                                    }
+                                },
+                                error: function (xhr, status, error) {
+                                    $("#myModal_warning_connection").modal("show");
+                                    setTimeout(function () {
+                                        $('#myModal_warning_connection').modal('hide');
+
+                                    }, 2000);
+                                    console.log('Error: ' + error);
+                                }
+                            });
+                        },
+                        error: function (xhr, status, error) {
+                            $("#myModal_warning_connection").modal("show");
+                            setTimeout(function () {
+                                $('#myModal_warning_connection').modal('hide');
+
+                            }, 2000);
+                            console.log('Error: ' + error);
+                        }
+                    });
+                } else {
+                    taskData = {
+                        task: task,
+                        status: status,
+                        priority: priority,
+                        note: note,
+                        notifyLandlord: isNotifylandlordChecked,
+                        images: [],
+                        // Loop through the lineItems array and add each line item to the FormData object
+                    }
+                    $.ajax({
+                        url: 'http://localhost:3000/api/spade//addTasksTenant',
+                        type: 'POST',
+                        data: JSON.stringify(taskData),
+                        contentType: 'application/json',
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            if (response === "Task already exists") {
+                                $("#infoModal").modal("show")
+                            }
+                            else {
+
+                                $("#succesModal").modal("show")
+                                getData()
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            $("#myModal_warning_connection").modal("show");
+                            setTimeout(function () {
+                                $('#myModal_warning_connection').modal('hide');
+
+                            }, 2000);
+                            console.log('Error: ' + error);
+                        }
+                    });
+                }
+                // Add the files to the FormData object
+            });
+            function updateSelectedFilesContainer() {
+    var selectedFilesContainer = $('.file-grid');
+    selectedFilesContainer.empty();
+
+    selectedFiles.forEach(function (file, index) {
+        console.log(selectedFiles.length)
+        console.log(file)
+        var fileElement = $('<div>')
+            .addClass('selected-file');
+
+        if (file.type && file.type.includes('image')) {
+            // Handle image files
+            fileElement.append(
+                $('<div>').addClass('file-preview')
+                    .append($('<img style="height:80px">').attr('src', URL.createObjectURL(file)))
+            );
+        } else if (file.type && file.type.includes('pdf')) {
+            // Handle PDF files
+            fileElement.append(
+                $('<div>').addClass('file-preview')
+                    .append($('<i style="font-size:50px">').addClass('fi fi-rs-file-pdf')) // Add your PDF icon class here
+            );
+        } else {
+            // Handle S3 bucket URLs for images and PDFs
+            if (file.imageKey
+.endsWith('.jpg') || file.imageKey
+.endsWith('.png')) {
+                fileElement.append(
+                    $('<div>').addClass('file-preview')
+                        .append($('<img style="height:80px">').attr('src', file.Image))
+                );
+            } else if (file.imageKey.endsWith('.pdf')) {
+                fileElement.append(
+                    $('<div>').addClass('file-preview')
+                        .append($('<i style="font-size:50px">').addClass('fi fi-rs-file-pdf'))
+                );
             } else {
-                draftButton.disabled = true;
-                nextButton.disabled = true;
+                // Handle other files (you can modify this part as needed)
+                fileElement.append(
+                    $('<div>').addClass('file-preview')
+                        .append($('<i>').addClass('fi fi-rs-file')) // Add an appropriate class for other files
+                );
             }
         }
-
-        function validateInput(inputElement) {
-            // console.log(inputElement)
-            if (inputElement.value.trim() === '' || inputElement.value.trim() === "Choose... ") {
-                inputElement.style.border = '1px solid red';
-
-                return false
-                // inputElement.siblings('.text-danger').show();
-            } else {
-
-                inputElement.style.border = '1px solid #ced4da'
-                return true
-                // inputElement.siblings('.text-danger').hide();
-            }
+        console.log(file)
+        if (file instanceof File)  {
+            fileElement
+            .append(
+                $('<div>')
+                    .addClass('file-details')
+                    .append($('<span>').text(file.type.includes('pdf') ? "PDF-" + (index + 1) : "Image-" + (index + 1)))
+            )
+            .append(
+                $('<span>')
+                    .addClass('delete-file')
+                    .text('X')
+                    .attr('data-index', index)
+            )
+            .appendTo(selectedFilesContainer);
+        }else{
+            fileElement
+            .append(
+                $('<div>')
+                    .addClass('file-details')
+                    .append($('<span>').text(file.imageKey.includes('pdf') ? "PDF-" + (index + 1) : "Image-" + (index + 1)))
+            )
+            .append(
+                $('<span>')
+                    .addClass('delete-file')
+                    .text('X')
+                    .attr('data-index', index)
+            )
+            .appendTo(selectedFilesContainer);
         }
+        
+    });
+}
+$('#fileInput').on('change', function () {
+                var files = Array.from($(this)[0].files);
+                // console.log(files)
+                files.forEach(function (file) {
+                    console.log(file)
+                    selectedFiles.push(file); // Add each file to the selected files array
+                    
+                });
 
-        function validateForm(form) {
-            let inputs
-            if (form.id === "accordion-item1 ") {
-                // console.log(form.id)
-                inputs = form.querySelectorAll('.form');
-            } else if (form.id === "accordion-item2 ") {
-                // console.log(form.id)
-                inputs = form.querySelectorAll('.form-control');
-            }
-            let isValid = true;
-            inputs.forEach(input => {
-                validateInput(input);
-
-                if (input.value.trim() === '') {
-                    isValid = false;
-                }
+                updateSelectedFilesContainer(); // Update the selected files container
             });
-
-            return isValid;
-        }
-    </script>
-
+            $(document).on('click', '.delete-file', function () {
+                var index = $(this).data('index');
+                selectedFiles.splice(index, 1); // Remove the selected file from the array
+                updateSelectedFilesContainer(); // Update the selected files container
+            });
+</script>
     <script>
         // Get the user's preferred color scheme
         const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -2353,11 +2714,7 @@
             logo.src = '../assets/header-img/question.svg';
         }
     </script>
-    <!-- <script src="../assets/plugins/fancyuploder/jquery.ui.widget.js "></script>
-    <script src="../assets/plugins/fancyuploder/jquery.fileupload.js "></script>
-    <script src="../assets/plugins/fancyuploder/jquery.iframe-transport.js "></script>
-    <script src="../assets/plugins/fancyuploder/jquery.fancy-fileupload.js "></script>
-    <script src="../assets/plugins/fancyuploder/fancy-uploader.js "></script> -->
+    
     <script>
         $(document).ready(() => {
             var taskInfo = []
@@ -2382,40 +2739,7 @@
                 $("#status_view ").text(data.status);
                 $("#notes_view ").text(data.notes);
                 console.log($("#notes_view "))
-                //                 $("#priority_update ").find(`option[name="${data.priority.toLowerCase()} "]`).prop("selected ", true);
-                //                 $("#status_update ").find(`option[value="${data.status} "]`).prop("selected ", true);
-                //                 data.AssignTo.forEach(({
-                //                     ID,
-                //                     name
-                //                 }) => {
-                //                     $("#assignee_update ").find(`option[value="${ID} "]`).prop("selected ", true);
-                //                     $(".select2-selection__rendered ").append(`<li class="select2-selection__choice " title="${name} "><span class="select2-selection__choice__remove " role="presentation ">×</span>${name}</li>`)
-                //                 })
-
-                //                 $('#myModal_edit').modal('show');
-                // $("#tenantName ").text(data.firstName + " " + data.lastName)
-                // $("#invoiceType ").text(data.invoiceType)
-                // $("#dueDate ").text(data.dueDate)
-                // $("#invoiceStatus ").text(data.status)
-                // $("#propertyAddress ").text(data.pAddress)
-                // // $("#invoiceCategory ").text(data.invoiceType)
-                // // $("#invoiceProperty ").text(data.invoiceType)
-                // // $("#invoiceMemo ").text(data.invoiceType)
-                // // $("#invoiceAmount ").text(data.invoiceType)
-                // // $("#client-id ").append(`<h5 class="fw-bold " style="color: // // #562AC8; ">BILLED TO</h5>
-                // //                     <p class="text-dark ">${data.firstName + " " + data.lastName}<br>${data.tAddress
-                // //     }<br>${data.tCity},
-                // //                         ${data.tState}<br>${data.tZipcode}<br>United States<br>${data.tPhoneNumber}</p>`)
-                // // console.log(1)
-                // // $("#owner-id ").empty()
-                // // $("#owner-id ").append(`                                    <h5 class="text-dark fw-bold ">${data.companyName}</h5>
-                // //                     <p class="text-dark ">${data.pAddress}<br>${data.pCity}, ${data.pState}<br>${data.pZipCode}<br>United
-                // //                         States<br>1-888-123-8910</p>`)
-                // // $("#table-body ").empty()
-                // // var dateObj = new Date(data.created_at);
-                // // var day = dateObj.getDate();
-                // // var month = dateObj.getMonth() + 1;
-                // // var year = dateObj.getFullYear();
+               
                 $("#view-task-line-item ").empty()
                 data.AssignTo.forEach((item) => {
 
@@ -2522,144 +2846,7 @@
 
                 return fileName;
             }
-            $.ajax({
-                url: 'http://localhost:3000/api/spade/getAllTaskTenant',
-                type: 'GET',
-                contentType: false,
-                processData: false,
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                },
-                success: function (response) {
-                    console.log(response);
-                    if (false) {
-                        window.location = './new-property.html'
-                    } else {
-                        function toTitleCase(str) {
-                            return str.replace(/\w\S*/g, function (txt) {
-                                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-                            });
-                        }
-                        $("#user-name").text(toTitleCase(response.user))
-                        $("#header-user").text(toTitleCase(response.user))
-
-                        var tableBody = $('#table_body');
-                        taskInfo = response.data[0]
-                        tableBody.empty();
-                        function toTitleCase(str) {
-                            if (typeof str == String) {
-                                return str.replace(/\w\S*/g, function (txt) {
-                                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-                                });
-                            }
-
-                        }
-                        console.log(tableBody)
-                        response.data[0]?.forEach(function (task) {
-                            console.log(task)
-                            // var image = '<td><img src="../../../../spadeAPI/uploads/ ' + property.images[0] + ' " alt=" "></td>';
-                            // var image = '<td><img src="../../../../../../Desktop/spade API 2/uploads/image-1684250579662.png " alt="hhghghgh "></td>';
-                            var image = '<td><img src="../../../../spadeAPI/uploads/ ' + task.taskImages?.split(', ')[0] + ' " alt=" "></td>';
-
-                            var createdDate = new Date(task.created_at);
-                            var currentDate = new Date();
-
-                            var timeDiff = Math.abs(currentDate - createdDate);
-                            var minutesDiff = Math.floor(timeDiff / (1000 * 60));
-                            var hoursDiff = Math.floor(minutesDiff / 60);
-                            var daysDiff = Math.floor(hoursDiff / 24);
-
-                            var taskName = `<td class="task-id " id=${task.id} style="font-weight: 600; ">` + '<p style="font-weight: 600; " class="mb-1 ">' + task.taskName + '</p>' +
-                                `<span class="font-weight-normal " style="color: #9B9B9B; "> By ${task.createdBy} - `;
-
-                            if (daysDiff > 0) {
-                                taskName += `${daysDiff} days`;
-                            } else if (hoursDiff > 0) {
-                                taskName += `${hoursDiff} hours`;
-                            } else {
-                                taskName += `${minutesDiff} minutes`;
-                            }
-
-                            taskName += '</span>' + '</td>';
-
-                            var assignTo = '<td style="font-weight: 600;text-align: center;display: flex; ">' +
-                                (task.AssignTo?.map(({ name, email }) => {
-                                    return `
-            <div class="me-2 ">
-                <img class="avatar brround avatar-md " src="../assets/images/users/2.jpg " alt="avatar-img ">
-                <div class="media-body valign-middle mt-0 ">
-                    <a href="javascript:void(0) " class="text-dark fw-semibold ">${name}</a>
-                </div>
-            </div>`;
-                                }) || "Not assigned ") +
-                                '</td>';
-
-                            var dueDate = '<td class="property-id " style="font-weight: 600; ">' + '<p style="font-weight: 600; " class="mb-1 ">' + (task.dueDate || "Not Set ") + '</p>' + `<span class="font-weight-normal text-danger "> <i
-                                                                        class="fe fe-circle me-1 "></i>${task.priority}</span>` + '</td>';
-                            var relatedTo = '<td class="property-id " style="font-weight: 600; ">' + '<p style="font-weight: 600; " class="mb-1 ">' + (task.propertyName ? toTitleCase(task.propertyName) : "Not Set ") + '</p>' + `<span class="font-weight-normal
-                    text-danger ">Unit Number: ${task.unitNumber}</span>` + '</td>';
-                            var status = '<td class="property-id " style="font-weight: 600; ">' + (task.status ? toTitleCase(task.status) : "Not Set") + '</td>';
-
-
-
-                            var dropdownMenu =
-                                '<td><i class="fe fe-more-vertical " data-bs-toggle="dropdown "></i>' +
-                                '<ul class="dropdown-menu ">' +
-
-                                `<li><a class="dropdown-item text-success view-task " data-bs-effect="effect-scale " data-bs-toggle="modal " href="# ">View</a></li>`
-                            '</ul></td>';
-                            // Create a table row and append the generated columns
-                            var row = '<tr>' + image + taskName + assignTo + dueDate +
-                                relatedTo + status + dropdownMenu + '</tr>';
-
-                            // Append the row to the table body
-                            tableBody.append(row);
-                        });
-                        $("#global-loader ").fadeOut("slow ")
-                        $('.edit-option').click(function (e) {
-                            e.preventDefault();
-                            const taskIdElement = $(this).closest("tr ").find(".task-id ");
-
-                            taskId = taskIdElement.attr("id ")
-
-                            const data = response.data[0].find(obj => obj.id.toString() == taskId);
-                            // console.log(taskId)
-                            if (data.taskImages) {
-                                selectedFiles = data.taskImages.split(", ")
-
-                                updateSelectedFilesContainer()
-                            }
-                            $("#message ").val(data.notes);
-                            $("#dueDate_update ").val(data.dueDate);
-                            $("#taskName_update ").val(data.taskName);
-                            $("#property_update ").val(data.tenantID);
-
-                            $("#priority_update ").find(`option[name="${data.priority.toLowerCase()} "]`).prop("selected ", true);
-                            $("#status_update ").find(`option[value="${data.status} "]`).prop("selected ", true);
-                            data.AssignTo.forEach(({ ID, name }) => {
-                                $("#assignee_update ").find(`option[value="${ID} "]`).prop("selected ", true);
-                                $(".select2-selection__rendered ").append(`<li class="select2-selection__choice " title="${name} "><span class="select2-selection__choice__remove " role="presentation ">×</span>${name}</li>`)
-                            })
-
-                            $('#myModal_edit').modal('show');
-                        });
-                        $('.delete-option').click(function (e) {
-                            e.preventDefault(); // Prevent default anchor behavior
-                            const taskIdElement = $(this).closest("tr ").find(".task-id ");
-                            taskId = taskIdElement.attr("id ");
-                            $('#myModal_delete').modal('show');
-                        });
-                    }
-                },
-                error: function (xhr, status, error) {
-                    console.log(error)
-                    $("#myModal_warning").modal("show");
-                    setTimeout(function () {
-                        $('#myModal_warning').modal('hide');
-                        window.location = './login_module.html';
-                    }, 2000);
-                }
-            });
+           
             $('#typehead').on('keyup', function () {
                 var searchValue = $(this).val().toLowerCase();
                 $('#table_body tr').filter(function () {

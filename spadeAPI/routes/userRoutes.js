@@ -177,7 +177,7 @@ router.post("/createLead", verifyToken, leadsClt.createNewLead);
 // router.get("/taskCount", verifyToken, taskController.taskCount);
 router.get("/taskCount", verifyToken, taskController.taskCount);
 // router.get("/invoiceAmountCount" , invoiceController.invoiceAmountCount);
-router.post("/addTasksTenant" , tenantPortalController.addTasksTenant);
+router.post("/addTasksTenant" ,verifyTokenTenant,tenantPortalController.addTasksTenant);
 router.get("/invoiceAmountCount/:start/:end" ,verifyToken ,invoiceController.invoiceAmountCount);
 
 
