@@ -521,6 +521,8 @@ WHERE t.landlordID = ?;
 `;
 exports.addTasksQuery =
   "INSERT INTO task (taskName, tenantID, dueDate,status, priority, notes, notifyTenant, notifyVendor, created_at , createdBy,landlordID) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+exports.addTasksQuerytenant =
+  "INSERT INTO task (taskName, tenantID, dueDate,status, priority, notes, notifyTenant, created_at , createdBy,landlordID) VALUES ( ?,?,?,?,?,?,?,?,?,?)";
 exports.addVendorList =
   "INSERT INTO taskassignto (taskId, vendorId) VALUES (?, ?)";
 exports.addVendor =
@@ -534,6 +536,39 @@ exports.getLandlordTenant =
   "SELECT t.firstName ,t.lastName ,t.email ,t.companyName , l.FirstName , l.LastName , l.Phone , l.Email FROM tenants as t JOIN task as tsk ON t.id = tsk.tenantID JOIN users as l ON tsk.landlordID = l.id WHERE tsk.landlordID = ? AND tsk.tenantID = ?";
 exports.PropertyUnitsVacant =
   'SELECT * FROM `propertyunits`WHERE propertyID = ? AND status = ? AND unitNumber !=""';
+// exports.Alltasks = `SELECT
+// tk.id,
+// tk.taskName,
+// tk.dueDate,
+// tk.status,
+// tk.priority,
+// tk.notes,
+// tk.createdBy,
+// tk.created_at,
+// p.propertyName,
+// pu.unitNumber,
+// t.firstName AS tfirstName,
+// t.lastName AS tlastName,
+// t.phoneNumber AS tenantPhone,
+// t.id AS tenantID,
+// JSON_ARRAYAGG(JSON_OBJECT('imageKey', ti.imageKey, 'Image', ti.Image)) AS taskImages
+// FROM
+// task AS tk
+// JOIN
+// tenants AS t ON tk.tenantID = t.id
+// JOIN
+// property AS p ON t.propertyID = p.id
+// JOIN
+// propertyunits AS pu ON t.propertyUnitID = pu.id
+// LEFT JOIN
+// taskimages AS ti ON tk.id = ti.taskID
+// WHERE
+// tk.landlordID = ?
+// GROUP BY
+// tk.id;
+// `;
+
+// Those task is not included which was createdBy Tenant
 exports.Alltasks = `SELECT
 tk.id,
 tk.taskName,
@@ -561,10 +596,42 @@ propertyunits AS pu ON t.propertyUnitID = pu.id
 LEFT JOIN
 taskimages AS ti ON tk.id = ti.taskID
 WHERE
-tk.landlordID = ?
+tk.landlordID = ? AND createdBy != "Tenant"
 GROUP BY
-tk.id;
+tk.id
 `;
+exports.AlltasksTenantsLandlord = `SELECT
+tk.id,
+tk.taskName,
+tk.dueDate,
+tk.status,
+tk.priority,
+tk.notes,
+tk.createdBy,
+tk.created_at,
+p.propertyName,
+pu.unitNumber,
+t.firstName AS tfirstName,
+t.lastName AS tlastName,
+t.phoneNumber AS tenantPhone,
+t.id AS tenantID,
+JSON_ARRAYAGG(JSON_OBJECT('imageKey', ti.imageKey, 'Image', ti.Image)) AS taskImages
+FROM
+task AS tk
+JOIN
+tenants AS t ON tk.tenantID = t.id
+JOIN
+property AS p ON t.propertyID = p.id
+JOIN
+propertyunits AS pu ON t.propertyUnitID = pu.id
+LEFT JOIN
+taskimages AS ti ON tk.id = ti.taskID
+WHERE
+tk.landlordID = ? AND createdBy = "Tenant"
+GROUP BY
+tk.id
+`;
+
 exports.taskByIDQuery =
   "SELECT tk.id, tk.taskName, tk.dueDate, tk.status, tk.priority, tk.notes, tk.createdBy,tk.created_at, p.propertyName, pu.unitNumber, t.firstName as tfirstName, t.lastName as tlastName FROM `task`as tk JOIN tenants as t ON tk.tenantID = t.id JOIN property as p ON t.propertyID = p.id JOIN propertyunits as pu ON t.propertyUnitID = pu.id WHERE tk.id = ?";
 exports.resendEmailQuery =
@@ -593,7 +660,7 @@ WHERE
 exports.tenantTaskQuery =
   "SELECT tk.id, tk.taskName, tk.dueDate, tk.status, tk.priority, tk.notes, tk.createdBy,tk.created_at, p.propertyName, pu.unitNumber, t.firstName as tfirstName, t.lastName as tlastName FROM `task`as tk JOIN tenants as t ON tk.tenantID = t.id JOIN property as p ON t.propertyID = p.id JOIN propertyunits as pu ON t.propertyUnitID = pu.id where tk.tenantID  = ?";
 exports.getAllInvoiceTenantQuery =
-  "SELECT i.id as invoiceID, i.dueDate, i.daysDue , i.startDate,i.endDate,i.repeatTerms,i.terms ,i.note, i.totalAmount, i.frequency,i.created_at, i.invoiceType, i.status, t.firstName, t.lastName, t.id as tenantID, t.phoneNumber as tPhone, p.propertyName, GROUP_CONCAT(ii.InvoiceImage) as invoiceImages FROM invoice as i JOIN tenants as t ON i.tenantID = t.id JOIN property as p ON t.propertyID = p.id LEFT JOIN invoiceimages as ii ON i.id = ii.invoiceID WHERE i.tenantID = ? GROUP BY i.id;";
+  "SELECT i.id as invoiceID, i.dueDate, i.daysDue , i.startDate,i.endDate,i.repeatTerms,i.terms ,i.note, i.totalAmount, i.frequency,i.created_at, i.invoiceType, i.status, t.firstName, t.lastName, t.id as tenantID, t.phoneNumber as tPhone, p.propertyName FROM invoice as i JOIN tenants as t ON i.tenantID = t.id JOIN property as p ON t.propertyID = p.id LEFT JOIN invoiceimages as ii ON i.id = ii.invoiceID WHERE i.tenantID = ? GROUP BY i.id;";
 exports.AlltasksTenantsQuery = `SELECT
 tk.id,
 tk.taskName,
@@ -681,3 +748,15 @@ ORDER BY c.created_at DESC`;
 // get all messages of chat by chatId
 exports.getMessages =
   "SELECT * FROM messages WHERE chatId = ? ORDER BY created_at ASC";
+
+// dashboard task Count
+exports.taskCount = `SELECT count(CASE WHEN status = "not started" THEN 0 END ) as notStarted, COUNT(CASE WHEN status = "in progress" then 0 END ) as inProgress, COUNT(CASE WHEN status = "completed" THEN 0 END) as completed FROM spade_Rent.task WHERE landlordID = ? AND  task.created_at >= ? AND task.created_at <= ?`;
+
+
+// dashboard invoice Amount 
+exports.invoiceAmountQuery = `SELECT
+SUM(totalAmount) AS TotalAmount,
+SUM(CASE WHEN status = "paid" THEN totalAmount ELSE 0 END) AS TotalDeposit,
+SUM(CASE WHEN status = "uncollectible" OR status = "Unpaid" THEN totalAmount ELSE 0 END) AS PendingBalance
+FROM spade_Rent.invoice
+WHERE landlordID = ? AND invoice.created_at >= ? AND invoice.created_at <= ?`;

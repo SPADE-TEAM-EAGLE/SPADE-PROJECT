@@ -149,6 +149,7 @@ const verifyTokenTenant = async (req, res, next) => {
       email: decoded.email,
       userId: result[0][0].id,
       userName: result[0][0].firstName + " " + result[0][0].lastName,
+      landlordID: result[0][0].landlordID,
     };
 
     next();

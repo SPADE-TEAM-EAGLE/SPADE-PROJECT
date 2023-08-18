@@ -1604,13 +1604,14 @@ color: #000;
                                                 <table class="table border text-nowrap text-md-nowrap mb-0">
                                                     <thead>
                                                         <tr>
+                                                            <th>#</th>
 
-                                                            <th>company name</th>
-                                                            <th>vendor name</th>
-                                                            <th>phone number</th>
+                                                            <th>Company name</th>
+                                                            <th>Vendor name</th>
+                                                            <th>Phone number</th>
                                                             <th>Address</th>
                                                             <th>Work phone number</th>
-                                                            <th>category</th>
+                                                            <th>Category</th>
                                                             <!-- <th>Action</th> -->
 
 
@@ -2481,10 +2482,15 @@ color: #000;
                 success: function(response) {
                     console.log(response.data)
                     $("#category").empty()
-                    $("#category").append($('<option></option>').text("Choose..."))
-                    response.data.forEach((category) => {
+                    
+                    if(response?.data?.length===0){
+                        $("#category").append($('<option></option>').text("Add vendor categories first!!"))
+                    }else{
+                        $("#category").append($('<option></option>').text("Choose..."))
+                        response.data.forEach((category) => {
                         $("#category").append($('<option></option>').text(category.category).val(category.id))
                     })
+                    }
                     $("#category option:first").prop("selected", true);
                     // console.log(1)
                     // getData()
@@ -2565,6 +2571,7 @@ color: #000;
                         if(response=="Vendor already exists"){
                             $("#infoModal").modal("show");
                         }else if(response.message==" Vendor created successful"){
+                            GetNotification();
                             $("#addModal").modal("hide")
                         $("#succesModal").modal("show");
                         getData()
@@ -2612,9 +2619,10 @@ color: #000;
                         tableBody.empty();
                         // console.log(data[0])
                         let tenantNames = []
-                        response.data[0] ?.forEach(function(vendor) {
+                        response.data[0] ?.forEach(function(vendor,index) {
 
-                            console.log(vendor.workPhone.length >= 1 ? vendor.workPhone : "N/A")
+                            var serial='<td style="font-weight: 600;">' + (index+1) + '</td>';
+
                             var vendorName = '<td class="vendorName" style="font-weight: 600;">' + vendor.firstName + vendor.lastName + `<br><small>${vendor.email}</small>` + '</td>';
                             var businessName = '<td class="businessName" style="font-weight: 600;">' + vendor.businessName + '</td>';
                             var phone = '<td class="phone" style="font-weight: 600;">' + vendor.phone + '</td>';
@@ -2632,7 +2640,7 @@ color: #000;
                             '</ul></td>';
 
 
-                            var row = '<tr>' + businessName + vendorName + phone +
+                            var row = '<tr>'+serial + businessName + vendorName + phone +
                                 address + workPhone + category + '</tr>';
 
                             // Append the row to the table body
@@ -2661,7 +2669,7 @@ color: #000;
                 console.log(columnIndex, isColumnVisible)
                     // Toggle the visibility of the corresponding column
                 $('table').find('tr').each(function() {
-                    var column = $(this).find('th:nth-child(' + columnIndex + '), td:nth-child(' + columnIndex + ')');
+                    var column = $(this).find('th:nth-child(' + (columnIndex+1) + '), td:nth-child(' + (columnIndex+1) + ')');
                     isColumnVisible ? column.show() : column.hide();
                 });
             });

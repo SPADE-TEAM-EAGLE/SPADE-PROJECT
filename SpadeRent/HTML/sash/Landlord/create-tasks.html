@@ -33,6 +33,11 @@
     <link href="../assets/css/icons.css" rel="stylesheet" />
     <!-- <link rel="stylesheet" href="fancy_fileupload.css"> -->
     <!-- COLOR SKIN CSS -->
+    <script>
+        if(localStorage.getItem("task")=="false"){
+                window.location="./new-tasks.html"
+        }
+    </script>
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="../assets/colors/color1.css" />
     <style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
@@ -1138,14 +1143,14 @@
                             <div class="col-md-12">
                                 <label class="form-label fw-bold">Media/ Files</label>
                                 <div class="custom-file" style="border: 1px dashed #00000087;">
-                                    <input id="fileInput" type="file" name="image" class="custom-file-input form"
-                                        accept=".jpg, .png, image/jpeg, image/png" aria-label="hello" multiple>
+                                    <input id="fileInput" type="file" name="media" class="custom-file-input form"
+    accept=".jpg, .jpeg, .png, .pdf, image/jpeg, image/png, application/pdf" aria-label="hello" multiple>
                                     <span className="d-none"></span>
                                     <label class="custom-file-label" for="fileInput">
                                         <i class="fi fi-rs-cloud-upload"></i>
                                         <div class="custom-file-text">
                                             <span>Upload Photo here</span>
-                                            <span>JPEG and PNG, file size no more than 10MB</span>
+                                            <span>JPEG, PNG & PDF file size no more than 10MB</span>
                                         </div>
                                     </label>
                                 </div>
@@ -1299,14 +1304,14 @@
                             <div class="col-md-12">
                                 <label class="form-label fw-bold">Media/ Files</label>
                                 <div class="custom-file" style="border: 1px dashed #00000087;">
-                                    <input id="fileInput_update" type="file" name="image" class="custom-file-input form"
-                                        accept=".jpg, .png, image/jpeg, image/png" aria-label="hello" multiple>
+                                    <input id="fileInput_update" type="file" name="media" class="custom-file-input form"
+    accept=".jpg, .jpeg, .png, .pdf, image/jpeg, image/png, application/pdf" aria-label="hello" multiple>
                                     <span className="d-none"></span>
                                     <label class="custom-file-label" for="fileInput_update">
                                         <i class="fi fi-rs-cloud-upload"></i>
                                         <div class="custom-file-text">
                                             <span>Upload Photo here</span>
-                                            <span>JPEG and PNG, file size no more than 10MB</span>
+                                            <span>JPEG, PNG & PDF file size no more than 10MB</span>
                                         </div>
                                     </label>
                                 </div>
@@ -2006,6 +2011,7 @@
                                                 <table class="table border text-nowrap text-md-nowrap mb-0">
                                                     <thead>
                                                         <tr>
+                                                            <th>#</th>
 
                                                             <th>Image</th>
                                                             <th>TASK</th>
@@ -3058,15 +3064,23 @@
                 })
                 // $("#totalAmount").text('$ ' + data.totalAmount)
                 if (data.taskImages) {
-                    const images = data.taskImages
-                    $("#view-task-images").empty()
-                    images.forEach((image) => {
-                        $("#view-task-images").append(`
-                            <img src="${image.Image}" width=200px height=200px alt=""> &nbsp;`)
-                    })
-                } else {
+    const files = data.taskImages;
+    $("#view-task-images").empty();
+    files.forEach((file) => {
+        if (file.Image?.endsWith(".pdf")) {
+            $("#view-task-images").append(`
+                <a href="${file.Image}" download="${file.imageKey}">
+                    <i class="fi fi-rs-file-pdf" style="font-size: 100px;"></i>
+                </a>&nbsp;`);
+        } else {
+            $("#view-task-images").append(`
+                <img src="${file.Image}" width="200px" height="200px" alt="">&nbsp;`);
+        }
+    });
+} else {
 
-                }
+}
+
                 // $("#notes").text(data.note || "N/A")
 
                 $("#viewModal-tasks").modal("show")
@@ -3197,6 +3211,7 @@
                                     else {
 
                                         $("#succesModal").modal("show")
+                                        localStorage.setItem("task","true")
                                     }
                                 },
                                 error: function (xhr, status, error) {
@@ -3265,38 +3280,85 @@
             //     window.location="./create-tasks.html"
             // })
             let propertyId;
-
             function updateSelectedFilesContainer() {
-                var selectedFilesContainer = $('.file-grid');
-                selectedFilesContainer.empty();
-                console.log(selectedFiles)
-                selectedFiles.forEach(function (file, index) {
-                    console.log(file)
-                    var fileElement = $('<div>')
-                        .addClass('selected-file')
-                        .append(
-                            $('<img>')
-                                .addClass('file-preview')
-                                .attr('src', (typeof file === "object" && file instanceof File) ? URL.createObjectURL(file) : file.Image)
-                        )
+    var selectedFilesContainer = $('.file-grid');
+    selectedFilesContainer.empty();
 
-                        .append(
-                            $('<div>')
-                                .addClass('file-details')
-                                .append($('<span>').text("Image-" + (index + 1)))
-                            // .append($('<span>').text(fileSize))
-                        )
-                        .append(
-                            $('<span>')
-                                .addClass('delete-file')
-                                .text('X')
-                                .attr('data-index', index)
-                        )
-                        .appendTo(selectedFilesContainer);
+    selectedFiles.forEach(function (file, index) {
+        console.log(selectedFiles.length)
+        console.log(file)
+        var fileElement = $('<div>')
+            .addClass('selected-file');
 
-                });
-
+        if (file.type && file.type.includes('image')) {
+            // Handle image files
+            fileElement.append(
+                $('<div>').addClass('file-preview')
+                    .append($('<img style="height:80px">').attr('src', URL.createObjectURL(file)))
+            );
+        } else if (file.type && file.type.includes('pdf')) {
+            // Handle PDF files
+            fileElement.append(
+                $('<div>').addClass('file-preview')
+                    .append($('<i style="font-size:50px">').addClass('fi fi-rs-file-pdf')) // Add your PDF icon class here
+            );
+        } else {
+            // Handle S3 bucket URLs for images and PDFs
+            if (file.imageKey
+.endsWith('.jpg') || file.imageKey
+.endsWith('.png')) {
+                fileElement.append(
+                    $('<div>').addClass('file-preview')
+                        .append($('<img style="height:80px">').attr('src', file.Image))
+                );
+            } else if (file.imageKey.endsWith('.pdf')) {
+                fileElement.append(
+                    $('<div>').addClass('file-preview')
+                        .append($('<i style="font-size:50px">').addClass('fi fi-rs-file-pdf'))
+                );
+            } else {
+                // Handle other files (you can modify this part as needed)
+                fileElement.append(
+                    $('<div>').addClass('file-preview')
+                        .append($('<i>').addClass('fi fi-rs-file')) // Add an appropriate class for other files
+                );
             }
+        }
+        console.log(file)
+        if (file instanceof File)  {
+            fileElement
+            .append(
+                $('<div>')
+                    .addClass('file-details')
+                    .append($('<span>').text(file.type.includes('pdf') ? "PDF-" + (index + 1) : "Image-" + (index + 1)))
+            )
+            .append(
+                $('<span>')
+                    .addClass('delete-file')
+                    .text('X')
+                    .attr('data-index', index)
+            )
+            .appendTo(selectedFilesContainer);
+        }else{
+            fileElement
+            .append(
+                $('<div>')
+                    .addClass('file-details')
+                    .append($('<span>').text(file.imageKey.includes('pdf') ? "PDF-" + (index + 1) : "Image-" + (index + 1)))
+            )
+            .append(
+                $('<span>')
+                    .addClass('delete-file')
+                    .text('X')
+                    .attr('data-index', index)
+            )
+            .appendTo(selectedFilesContainer);
+        }
+        
+    });
+}
+
+
 
             function formatFileSize(bytes) {
                 if (bytes === 0) return '0 Bytes';
@@ -3376,7 +3438,7 @@
                 console.log(columnIndex, isColumnVisible)
                 // Toggle the visibility of the corresponding column
                 $('table').find('tr').each(function () {
-                    var column = $(this).find('th:nth-child(' + columnIndex + '), td:nth-child(' + columnIndex + ')');
+                    var column = $(this).find('th:nth-child(' + (columnIndex+1) + '), td:nth-child(' + (columnIndex+1) + ')');
                     isColumnVisible ? column.show() : column.hide();
                 });
             });
@@ -3716,6 +3778,7 @@
                     success: function (response) {
                         console.log(response);
                         if (response.data[0].length === 0) {
+                            localStorage.setItem("task","false")
                             window.location = './new-tasks.html'
                         } else {
                             // $("#user-name").text(response.user)
@@ -3730,10 +3793,18 @@
                                 });
                             }
                             taskInfo = response.data[0]
-                            response.data[0]?.forEach(function (task) {
+                            response.data[0]?.forEach(function (task,index) {
+                                console.log(task?.taskImages[0])
                                 // var image = '<td><img src="../../../../spadeAPI/uploads/' + property.images[0] + '" alt=""></td>';
                                 // var image = '<td><img src="../../../../../../Desktop/spade API 2/uploads/image-1684250579662.png" alt="hhghghgh"></td>';
-                                var image = '<td><img src="' + task?.taskImages[0]?.Image + '" alt=""></td>';
+var serial='<td style="font-weight: 600;">' + (index+1) + '</td>';
+                                if(task?.taskImages[0]?.imageKey?.includes('pdf')){
+                                    var image = '<td><i style="font-size:50px" class="fi fi-rs-file-pdf"></i></td>';
+                                    
+                                }else{
+                                    var image = '<td><img src="' + task?.taskImages[0]?.Image + '" alt=""></td>';
+                                }
+                                
 
                                 var createdDate = new Date(task.created_at);
                                 var currentDate = new Date();
@@ -3792,7 +3863,7 @@
                                     // `<li><a class="dropdown-item text-success" href="./view-property.html?propertyId=${property.id}">View</a></li>` +
                                     '</ul></td>';
                                 // Create a table row and append the generated columns
-                                var row = '<tr>' + image + taskName + assignTo + dueDate +
+                                var row = '<tr>'+serial + image + taskName + assignTo + dueDate +
                                     relatedTo + status + dropdownMenu + '</tr>';
 
                                 // Append the row to the table body

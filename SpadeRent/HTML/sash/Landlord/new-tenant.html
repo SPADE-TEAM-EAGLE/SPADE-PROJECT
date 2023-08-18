@@ -1124,7 +1124,7 @@ color: #000;
 
                         </div>
                         <div class="flex-shrink-0">
-                            <a href="javascript:void(0)" class="btn btn-primary btn-pill" id="send-email">Send Invite</a>
+                            <a href="javascript:void(0)" class="btn btn-primary btn-pill" id="send-email-invite">Send Invite</a>
                         </div>
                     </div>
                     <div class="mt-2">
@@ -2384,7 +2384,7 @@ color: #000;
             // $("#preloader").fadeIn("fast");
             // $("#succesModal").modal("show")
             let tenantID;
-            $("#send-email").click(() => {
+            $("#send-email-invite").click(() => {
                     $("#succesModal").modal("hide")
                     console.log(tenantID)
                     $.ajax({
@@ -2505,13 +2505,16 @@ color: #000;
                         var propertyUnitSelect = $('#unit');
                         // Clear existing options
                         propertyUnitSelect.empty()
-                        propertyUnitSelect.append($('<option></option>')
-                            .text("Choose..."))
+                        
                         if (selectedProperty.vacantUnits.length === 0) {
-                            // propertyUnitSelect.attr("disabled","disabled")
                             propertyUnitSelect.prop("disabled", true);
+                            propertyUnitSelect.append($('<option></option>')
+                                .text("No unit available!!"))
                         } else {
                             propertyUnitSelect.prop("disabled", false);
+                            propertyUnitSelect.append($('<option></option>')
+                                .text("Choose..."))
+
 
                             selectedProperty.vacantUnits.forEach(function(unit) {
                                 console.log(unit.unitNumber)
@@ -2689,6 +2692,7 @@ color: #000;
                             
                             $("#succes-text").text(`Tenant has been successfully created!!.`)
                             $("#succesModal").modal("show")
+                            localStorage.setItem("tenants","true")
                             resetAccordions()
                             tenantID = response.tenantId
                         }

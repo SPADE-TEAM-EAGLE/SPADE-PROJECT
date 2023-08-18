@@ -23,6 +23,7 @@ const {
   getAmountByCategoriesID,
   deleteInvoiceCategories,
   deleteVendorCategories,
+  invoiceAmountQuery,
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -131,14 +132,16 @@ exports.createInvoice = async (req, res) => {
       // }
 
       res.status(200).json({
+        invoiceID : invoiceID,
         message: " Invoice created successful",
+        invoiceId:invoiceID
       });
     }
   } catch (error) {
     console.log(error);
     res.status(400).send("Error");
   }
-};
+ };
 //  ############################# Create Invoice END ############################################################
 
 //  ############################# update Invoice Status Start ############################################################
@@ -709,3 +712,25 @@ exports.deleteVendCategories = async (req, res) => {
     res.send("Error from delete Vendor categories");
   }
 };
+
+
+
+// ####################################### Invoice Amount Count ################################################
+
+exports.invoiceAmountCount = async (req, res) => {
+  try {
+    const { userId } = req.user; 
+    const {start, end } = req.params; 
+    const invoiceAmountResult = await queryRunner(invoiceAmountQuery ,[userId, start, end]);
+      res.status(200).json({
+        data : invoiceAmountResult
+      });
+    // }
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+
+}
+// ####################################### Invoice Amount Count ################################################

@@ -37,6 +37,11 @@
     <link rel="stylesheet" href="cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css"
         integrity="sha512-BMbq2It2D3J17/C7aRklzOODG1IQ3+MHw3ifzBHMBwGO/0yUqYmsStgBjI0z5EYlaDEFnvYV7gNYdD3vFLRKsA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script>
+            if(localStorage.getItem("invoice")=="false"){
+                    window.location="./new-invoice.html"
+            }
+        </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
@@ -1983,7 +1988,14 @@
                             </button>
                         </div> -->
                         <div class="card-body text-center">
-                            <i class="fi fi-rs-check-circle text-success"></i>
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
+                                viewBox="0 0 24 24">
+                                <path fill="#13bfa6"
+                                    d="M10.3125,16.09375a.99676.99676,0,0,1-.707-.293L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328l-6.1875,6.1875A.99676.99676,0,0,1,10.3125,16.09375Z"
+                                    opacity=".99" />
+                                <path fill="#71d8c9"
+                                    d="M12,2A10,10,0,1,0,22,12,10.01146,10.01146,0,0,0,12,2Zm5.207,7.61328-6.1875,6.1875a.99963.99963,0,0,1-1.41406,0L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328Z" />
+                            </svg></span>
                             <h4 class="h4 mb-0 mt-3 fw-bold">Info</h4>
                             <p class="card-text text-dark">Email Sended Successfully</p>
                         </div>
@@ -2022,6 +2034,37 @@
                         class="btn btn-outline-default btn-pill ms-1 my-2" id="succes-addtenant-close"
                         style='background-color:#1467B0;color: white;'><i class="fi fi-rs-plus-small"
                             style="vertical-align: middle;"></i> Create New Invoice</a>
+                </div>
+                <div class="modal-footer" style="border-top: 0">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="succesModal_invoice" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content success-modal-content">
+                <div class="modal-header">
+
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="succes-close">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body succes-modal" style="padding-top: 70px;padding-bottom: 70px;">
+                    <div class="text-justify ps-2 border-model-line">
+                        <h2 class="modal-title d-flex align-items-center ps-1">
+                            <strong class="color-primary">Congratulations!&nbsp;</strong>
+                            <i class="fi fi-rs-check-circle text-success"></i>
+                        </h2>
+                        <p class="ms-2 mb-0 text-start">Your Invoice is successfully created!!!</p>
+                        
+                    </div>
+                    <a data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal"
+                        class="btn btn-outline-default btn-pill ms-1 my-2" id="succes-addtenant-close"
+                        style='background-color:#1467B0;color: white;'><i class="fi fi-rs-plus-small"
+                            style="vertical-align: middle;"></i> Create New Invoice</a>
+                            <a data-bs-effect="effect-scale"
+                        class="btn btn-outline-default btn-pill ms-1 my-2 resend-option" 
+                        style='background-color:#1467B0;color: white;'><i class="fi fi-rs-paper-plane" style="vertical-align: middle;"></i> Send to tenant</a>
                 </div>
                 <div class="modal-footer" style="border-top: 0">
                 </div>
@@ -2963,7 +3006,7 @@
                                             <table class="table border text-nowrap text-md-nowrap mb-0" id="myTable">
                                                 <thead>
                                                     <tr>
-
+                                                        <th>#</th>
                                                         <th>INVOICE NO</th>
                                                         <th>TENANT NAME</th>
                                                         <th>MEMO/DESCRIPTION</th>
@@ -3680,6 +3723,7 @@
     <script src="../assets/js/getNotification.js"></script>
     <script>
         $(document).ready(function () {
+            
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
                 method: 'GET',
@@ -3978,9 +4022,10 @@
                     // Create a FormData object to hold the data and files
                     var buttonText = $(this).text();
                     var invoiceData = {}
+                    var send=""
                     if (buttonText !== "Save" && buttonText.indexOf("Print") === -1) {
-                        console.log("here")
                         invoiceData.sendmails = "Yes"
+                        send="yes"
                     }
                     console.log($("#totalText").text().split(' ')[1])
                     var fileInput = document.getElementById('fileInput');
@@ -4033,11 +4078,17 @@
                                         const tenant = tenantData.find(obj => obj.tenantID == selectedTenant)
                                         console.log(tenant)
                                         $("#addModal").modal("hide")
+                                        invoiceId=response.invoiceId
                                         
                                         $('#addModal input[type="text"], #addModal input[type="date"], #addModal textarea').val('');
                                         $('#addModal select').prop('selectedIndex', 0);
-                                        $("#succes-tenantName").text(`sent to ${tenant.firstName + " " + tenant.lastName}.`)
-                                        $("#succesModal").modal("show")
+                                        if(send=="yes"){
+                                            $("#succes-tenantName").text(`sent to ${tenant.firstName + " " + tenant.lastName}.`)
+                                            $("#succesModal").modal("show")
+                                        }else{
+                                            GetNotification();
+                                            $("#succesModal_invoice").modal("show")
+                                        }
 
                                     },
                                     error: function (xhr, status, error) {
@@ -4087,10 +4138,16 @@
                                 const tenant = tenantData.find(obj => obj.tenantID == selectedTenant)
                                 console.log(tenant)
                                 $("#addModal").modal("hide")
+                                invoiceId=response.invoiceId
+                                
                                 $('#addModal input[type="text"], #addModal input[type="date"], #addModal textarea').val('');
                                 $('#addModal select').prop('selectedIndex', 0);
-                                $("#succes-tenantName").text(`sent to ${tenant.firstName + " " + tenant.lastName}.`)
-                                $("#succesModal").modal("show")
+                                if(send=="yes"){
+                                            $("#succes-tenantName").text(`sent to ${tenant.firstName + " " + tenant.lastName}.`)
+                                            $("#succesModal").modal("show")
+                                        }else{
+                                            $("#succesModal_invoice").modal("show")
+                                        }
 
                             },
                             error: function (xhr, status, error) {
@@ -4118,6 +4175,7 @@
                     success: async function (response) {
 
                         if (response.message == "No data found") {
+                            localStorage.setItem("invoice","false")
                             window.location = './new-invoice.html'
                         }
                         tenantData = response.data[0]
@@ -4189,6 +4247,7 @@
                     },
                     success: async function (response) {
                         if (response.message == "No data found") {
+                            localStorage.setItem("invoice","false")
                             window.location = './new-invoice.html'
                         }
                         console.log(tenantData)
@@ -4200,9 +4259,9 @@
                         // console.log(data[0])
                         let tenantNames = []
 
-                        response.data[0]?.forEach(function (invoice) {
+                        response.data[0]?.forEach(function (invoice,index) {
 
-
+                            var serial='<td style="font-weight: 600;">' + (index+1) + '</td>';
                             var invoiceNumber = '<td class="invoice-id" style="font-weight: 600;">' + invoice.invoiceID + '</td>';
 
                             var tenantName = '<td class="tenantName" style="font-weight: 600;">' + invoice.firstName + invoice.lastName + `<br><small>${invoice.tPhone}</small>` + '</td>';
@@ -4240,7 +4299,7 @@
                                                         </td>`
 
 
-                            var row = '<tr>' + invoiceNumber + tenantName + memoDescription + invoiceDate +
+                            var row = '<tr>'+serial + invoiceNumber + tenantName + memoDescription + invoiceDate +
                                 propertyName + invoiceAmount + status + dropdownMenu + '</tr>';
 
                             // Append the row to the table body
@@ -4660,7 +4719,7 @@
                 console.log(columnIndex, isColumnVisible)
                 // Toggle the visibility of the corresponding column
                 $('table').find('tr').each(function () {
-                    var column = $(this).find('th:nth-child(' + columnIndex + '), td:nth-child(' + columnIndex + ')');
+                    var column = $(this).find('th:nth-child(' + (columnIndex+1) + '), td:nth-child(' + (columnIndex+1) + ')');
                     isColumnVisible ? column.show() : column.hide();
                 });
             });
@@ -4733,7 +4792,13 @@
                     },
                     success: function (response) {
                         // Handle the success response from the API
+                        getData()
+                        $("#succesModal_invoice").modal("hide")
                         $("#infoModal").modal("show")
+                        setTimeout(function () {
+                            $("#infoModal").modal("hide")
+                        }, 2000);
+
                     },
                     error: function (xhr, status, error) {
                         // Handle the error response from the API
@@ -4930,9 +4995,11 @@
 
                 })
                 $("#totalAmount").text('$ ' + data.totalAmount)
-                if (data.invoiceImages) {
+                // console.log(data?.invoiceImages[0]?.imageKey)
+                $("#view-invoice-images").empty()
+                if (data?.invoiceImages[0]?.imageKey) {
                     const images = data.invoiceImages
-                    $("#view-invoice-images").empty()
+                    
                     images.forEach(({ Image }) => {
                         $("#view-invoice-images").append(`
                             <img src="${Image}" width=200px height=200px alt=""> &nbsp;`)
@@ -5284,6 +5351,7 @@
                                     },
                                     success: function (response) {
                                         $("#myModal_edit").modal("hide")
+                                        GetNotification();
                                         getData()
                                         $("#successfully_changed_text").text("Successfully Updated");
                                         $("#successfully_changed").modal("show");
@@ -5338,6 +5406,7 @@
                             },
                             success: function (response) {
                                 $("#myModal_edit").modal("hide")
+                                GetNotification();
                                 getData()
                                 $("#successfully_changed_text").text("Successfully Updated");
                                 $("#successfully_changed").modal("show");
@@ -5379,6 +5448,7 @@
                 success: function (response) {
                     // console.log(response);
                     // window.alert(response.message);
+                    GetNotification();
                     getData()
                     $("#successfully_changed_text").text("Successfully Updated");
                     $("#successfully_changed").modal("show");

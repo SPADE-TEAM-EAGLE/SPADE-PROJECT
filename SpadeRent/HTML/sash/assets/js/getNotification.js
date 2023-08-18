@@ -597,9 +597,9 @@ function GetNotification(){
 
 }  
 GetNotification();
-setInterval(function() {
-  GetNotification();
-}, 60000);
+// setInterval(function() {
+//   GetNotification();
+// }, 60000);
 // $(document).ready(function () {
 //   $(".dumy").click(function () {
 //     // get this.id and update notification table

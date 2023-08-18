@@ -104,6 +104,8 @@ router.post("/addVendorCategory", verifyToken, taskController.addVendorCategory)
 router.get("/getAllVendors", verifyToken, taskController.getAllVendors);
 router.post("/addTasks", verifyToken, taskController.addTasks);
 router.get("/getAllTask", verifyToken, taskController.getAllTask);
+router.get("/getAllTaskTenantRequest", verifyToken, taskController.getAllTaskTenantRequest);
+// router.get("/getAllTask", taskController.getAllTask);
 router.get("/taskByID", verifyToken, taskController.taskByID);
 router.put("/updateTenants", verifyToken, tenantController.updateTenants);
 router.get("/getStates", userController.getStates);
@@ -113,8 +115,10 @@ router.put("/updateTasks", verifyToken, taskController.updateTasks);
 router.delete("/deleteTask", taskController.deleteTask);
 router.get("/propertyTask", verifyToken, userController.propertyTask);
 router.get("/tenantTask", verifyToken, tenantController.tenantTask);
-router.get("/getAllInvoicesTenant", verifyTokenTenant, tenantPortalController.getAllInvoicesTenant);
+// router.get("/getAllInvoicesTenant", verifyTokenTenant, tenantPortalController.getAllInvoicesTenant);
+router.get("/getAllInvoicesTenant",verifyTokenTenant,tenantPortalController.getAllInvoicesTenant);
 router.get("/getAllTaskTenant", verifyTokenTenant, tenantPortalController.getAllTaskTenant);
+// router.get("/getAllTaskTenant", tenantPortalController.getAllTaskTenant);
 // router.get("/getAllTaskLoggedInTenant", verifyTokenTenant, tenantPortalController.getAllLoggedInTenantTask);
 // get tenante dashboard
 router.get("/getTenantDashData", verifyTokenTenant, tenantPortalController.getTenantDashboardData);
@@ -163,10 +167,18 @@ router.get("/LandlordMessages/:chatId", verifyToken, messageClt.getAllMessages);
 
 // profile complition
 router.get('/ProfileComplete',verifyToken,userController.ProfileComplete);
+router.get('/checkSystem' ,userController.checkSystem);
  
 
 // leads routes start
 router.post("/createLead", verifyToken, leadsClt.createNewLead);
+
+// Dashboard
+// router.get("/taskCount", verifyToken, taskController.taskCount);
+router.get("/taskCount", verifyToken, taskController.taskCount);
+// router.get("/invoiceAmountCount" , invoiceController.invoiceAmountCount);
+router.post("/addTasksTenant" , tenantPortalController.addTasksTenant);
+router.get("/invoiceAmountCount/:start/:end" ,verifyToken ,invoiceController.invoiceAmountCount);
 
 
 module.exports = router;
