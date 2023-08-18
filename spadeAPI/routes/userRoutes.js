@@ -116,7 +116,7 @@ router.delete("/deleteTask", taskController.deleteTask);
 router.get("/propertyTask", verifyToken, userController.propertyTask);
 router.get("/tenantTask", verifyToken, tenantController.tenantTask);
 // router.get("/getAllInvoicesTenant", verifyTokenTenant, tenantPortalController.getAllInvoicesTenant);
-router.get("/getAllInvoicesTenant", tenantPortalController.getAllInvoicesTenant);
+router.get("/getAllInvoicesTenant",verifyTokenTenant,tenantPortalController.getAllInvoicesTenant);
 router.get("/getAllTaskTenant", verifyTokenTenant, tenantPortalController.getAllTaskTenant);
 // router.get("/getAllTaskTenant", tenantPortalController.getAllTaskTenant);
 // router.get("/getAllTaskLoggedInTenant", verifyTokenTenant, tenantPortalController.getAllLoggedInTenantTask);

@@ -33,7 +33,7 @@ const config = process.env;
     exports.getAllInvoicesTenant = async (req, res) => {
         try {
           // console.log("1");
-        const {userId} = req.body; 
+        const {userId} = req.user; 
         // const {userId,userName} = req.user;
         // console.log(userId,userName) 
           const getAllInvoicesResult = await queryRunner(getAllInvoiceTenantQuery, [userId]);
@@ -76,7 +76,7 @@ const config = process.env;
       //  ############################# Get ALL Task Start ############################################################
 exports.getAllTaskTenant = async (req, res) => {
     // const { userId } = req.user;
-    const { userId } = req.body;
+    const { userId } = req.user;
     try {
       // get data from task table by landlordID
       const allTaskResult = await queryRunner(AlltasksTenantsQuery, [userId]);
