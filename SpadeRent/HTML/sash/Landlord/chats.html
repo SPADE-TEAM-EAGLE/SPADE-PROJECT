@@ -648,7 +648,7 @@
             position: relative;
             color: var(--color);
             background: var(--bg);
-            border-radius: 7px;
+            border-radius: 0px;
             overflow: hidden;
             box-shadow: 0 8px 8px -4px #000 20;
             transition: all ease 0.5s;
@@ -3598,7 +3598,7 @@
                 // socket.emit('joinRoom', { chatId: localStorage.getItem("chatId") });
                 $('#send-text').on('click', function (ev) {
                     const msg_again1 = $('#input-message').val().trim();
-                    if(msg_again1 !== ""){
+                    if (msg_again1 !== "") {
 
                         var messageData = {
                             chatId: localStorage.getItem("chatId"),
@@ -3619,14 +3619,14 @@
                                 socket.emit('chatMessage', messageData);
                                 // socket use
                                 console.log(messageData);
-    
+
                             },
                             error: function (xhr, status, error) {
                                 console.log(error);
                             }
                         });
-                   
-                   
+
+
                     }
                 });
                 $('#input-message').on('keypress', function (ev) {
@@ -3680,21 +3680,30 @@
                 // $('#time').text(formattedTime);
             }
             updateTime(); // Call it initially to set the time immediately
-
+            var chatMessages = [];
             function fetchChatMessages() {
                 var messs2 = "";
                 var messDiv = $('#messages')
                 var randomImg = "../assets/images/users/5.jpg";
                 socket.on('recieveMessage', (message) => {
+
                     updateTime();
 
                     // Check if the message is not a duplicate
-                    if (!receivedMessages.has(message.message)) {
-                        receivedMessages.add(message.message);
-
-                        if (message.userType == "tenant" && message.chatId == localStorage.getItem("chatId")) {
-                            console.log("check rec", message);
-                            messs2 = `
+                    // if (!receivedMessages.has(message.message)) {
+                    chatMessages.push(message.message);
+                    // receivedMessages.add(message.message);
+                    if (chatMessages.length > 1 && chatMessages[chatMessages.length - 1] === chatMessages[chatMessages.length - 2]) {
+                        // Display the previous message only
+                        // $("#myModal_warning").modal("show");
+                        // setTimeout(function () {
+                        //     $('#myModal_warning').modal('hide');
+                        // }, 2000);
+                        return;
+                    }
+                    if (message.userType == "tenant" && message.chatId == localStorage.getItem("chatId")) {
+                        console.log("check rec", message);
+                        messs2 = `
                     <div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
                                                                     <div style="width: 36px;height: 36px;" class="me-1"> 
                                                                         <img src="` + (localStorage.getItem("TenantImg") ? localStorage.getItem("TenantImg") : randomImg) + `" style="border-radius: 50%;height: inherit;" class="message-image" />
@@ -3703,14 +3712,16 @@
                                                 <span class="text">${message.message}</span>
                                                 <span style="float: right;" class="text-primary">${formattedTime}</span>
                                             </div> </div>`;
-                            messDiv.append(messs2);
-                        }
+                        messDiv.append(messs2);
                     }
+                    // }
                 });
+                // receivedMessages.clear();
+
             }
             function chatTenant(tenatId, tenatName, element) {
                 // console.log(typeof String(tenatId));
-                receivedMessages.clear();
+                // receivedMessages.clear();
                 fetchChatMessages()
 
                 // console.log(element);
@@ -3983,7 +3994,7 @@
                 //Send messages
                 input.addEventListener('keypress', function (ev) {
                     const msg = input.value.trim();
-                    if (ev.key === 'Enter' && msg !== "" ) {
+                    if (ev.key === 'Enter' && msg !== "") {
                         ev.preventDefault();
                         const msg = input.value;
                         sendMessage(msg);

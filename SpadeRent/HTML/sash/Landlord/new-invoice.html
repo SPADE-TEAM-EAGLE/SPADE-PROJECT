@@ -2558,6 +2558,7 @@ $("#user-img").attr("src",image)
                                         $("#addModal").modal("hide")
                                         localStorage.setItem("invoice","true")
                                         $("#succes-tenantName").text(`sent to ${tenant.firstName + " " + tenant.lastName}.`)
+                                        GetNotification();
                                         $("#succesModal").modal("show")
                                         $("#addModal").mods
                                     },
@@ -2610,6 +2611,7 @@ $("#user-img").attr("src",image)
                                         $("#addModal").modal("hide")
                                         localStorage.setItem("invoice","true")
                                         $("#succes-tenantName").text(`sent to ${tenant.firstName + " " + tenant.lastName}.`)
+                                        GetNotification();
                                         $("#succesModal").modal("show")
                                         $("#addModal").mods
                                     },
@@ -3574,6 +3576,7 @@ function resetAccordions() {
                         success: function (response) {
                             // Handle the success response from the API
                             console.log('API response:', response);
+                            GetNotification();
                         },
                         error: function (xhr, status, error) {
                             // Handle the error response from the API
@@ -3601,6 +3604,7 @@ function resetAccordions() {
                     success: function (response) {
                         // console.log(response);
                         // window.alert(response.message);
+                        GetNotification();
                         getData()
                         // window.location = '../Landlord/properties-all.html';
                     },

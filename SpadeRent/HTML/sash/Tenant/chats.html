@@ -645,7 +645,7 @@
             position: relative;
             color: var(--color);
             background: var(--bg);
-            border-radius: 7px;
+            border-radius: 0px;
             overflow: hidden;
             box-shadow: 0 8px 8px -4px #000 20;
             transition: all ease 0.5s;
@@ -3575,6 +3575,7 @@
                                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                             },
                             success: function (response) {
+                                console.log(messageData);
                                 socket.emit('chatMessage', messageData);
                                 // console.log(response);
                                 // console.log(tenantIid);
