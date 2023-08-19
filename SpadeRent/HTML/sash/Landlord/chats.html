@@ -3661,7 +3661,7 @@
                     }
                 });
             });
-            var receivedMessages = new Set();
+            // var receivedMessages = new Set();
             var formattedTime;
             function updateTime() {
                 const currentTime = new Date();
@@ -3672,7 +3672,7 @@
                 // $('#time').text(formattedTime);
             }
             updateTime(); // Call it initially to set the time immediately
-            // var chatMessages = [];
+            var chatMessages = [];
             function fetchChatMessages() {
                 var messs2 = "";
                 var messDiv = $('#messages')
@@ -3680,9 +3680,12 @@
                 socket.on('recieveMessage', (message) => {
                     updateTime();
                     // Check if the message is not a duplicate
-                    if (!receivedMessages.has(message.message)) {
-                    // chatMessages.push(message.message);
-                    receivedMessages.add(message.message);
+                    // if (!receivedMessages.has(message.message)) {
+                    chatMessages.push(message.message);
+                    // receivedMessages.add(message.message);
+                    if (chatMessages.length > 1 && chatMessages[chatMessages.length - 1] === chatMessages[chatMessages.length - 2]) {
+                        return;
+                    }
                     if (message.userType == "tenant" && message.chatId == localStorage.getItem("chatId")) {
                         console.log("check rec", message);
                         messs2 = `<div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
@@ -3695,7 +3698,7 @@
                                             </div> </div>`;
                         messDiv.append(messs2);
                     }
-                    }
+                    // }
                 });
                 // receivedMessages.clear();
             }
