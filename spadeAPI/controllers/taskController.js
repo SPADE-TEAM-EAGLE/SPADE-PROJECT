@@ -641,7 +641,7 @@ exports.updateTasks = async (req, res) => {
       currentDate,
       taskID
     ]);
-    if (TasksResult.affectedRows === 0) {
+    if (TasksResult[0].affectedRows === 0) {
       // throw new Error("data doesn't inserted in task table");
       res.send("Error1");
     }
@@ -721,8 +721,21 @@ exports.updateTasks = async (req, res) => {
       //     return res.send("Error2");
       //   }
       // }
+    }else{
+      for (let i = 0; i < images.length; i++) {
+        const { image_url } = images[i];
+        const { image_key } = images[i];
+        const propertyImageResult = await queryRunner(insertInTaskImage, [
+          taskID,
+          image_url,
+          image_key
+        ]);
+        // if property image data not inserted into property image table then throw error
+        if (propertyImageResult.affectedRows === 0) {
+          throw new Error("data doesn't inserted in property image table");
+        }
+      }
     }
-
     const taskVendorDeleteResult = await queryRunner(deleteQuery("taskassignto", "taskId"), [taskID]);
     const vendorID = assignee
     for (let i = 0; i < vendorID.length; i++) {
