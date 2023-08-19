@@ -335,6 +335,7 @@ $("#addModal").modal("hide")
                 if (response.message === "Property Already Exist") {
                     $('#infoModal').modal('show');
                 }else {
+                    GetNotification();
                     $('#succesModal').modal('show');
                     localStorage.setItem("property","true")
                 }
@@ -391,7 +392,7 @@ $("#addModal").modal("hide")
         if (response.message === "Property Already Exist") {
             $('#infoModal').modal('show');
         } else {
-            
+            GetNotification();
             $('#succesModal').modal('show');
             localStorage.setItem("property","true")
         }

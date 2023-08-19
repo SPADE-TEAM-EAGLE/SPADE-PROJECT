@@ -534,6 +534,7 @@
         /* chats start css  */
         .text {
             height: auto;
+            word-wrap: break-word;
         }
 
         * {
@@ -644,7 +645,7 @@
             position: relative;
             color: var(--color);
             background: var(--bg);
-            border-radius: 7px;
+            border-radius: 0px;
             overflow: hidden;
             box-shadow: 0 8px 8px -4px #000 20;
             transition: all ease 0.5s;
@@ -730,7 +731,7 @@
         }
 
         .chat .conversation .messages .msg-text {
-            width: fit-content;
+            max-width: calc(100% - 20%);
             font-size: 12px;
             font-weight: 800;
             /* animation: appear-msg ease 0.25s forwards; */
@@ -771,6 +772,7 @@
         }
 
         .chat .conversation .field .input-message {
+            font-weight: bold;
             width: 100%;
             height: 100%;
             border: none;
@@ -2726,7 +2728,7 @@
                                         </div>
                                         <div class="field">
                                             <input id="input-message" class="input-message" type="text"
-                                                placeholder="Type something..." />
+                                                placeholder="Type Message..." maxlength="255" />
                                             <!-- <div class="icon plus">
                                                 <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
@@ -3524,10 +3526,11 @@
                 var hasScrolled = 0;
                 // socket.emit('joinRoom', { chatId: localStorage.getItem("chatId") });
                 $('#send-text').on('click', function (ev) {
-                    var input_message = $('#input-message').val();
+                    const msg_again1 = $('#input-message').val().trim();
+                    if(msg_again1 !== ""){
                     var messageData = {
                         chatId: localStorage.getItem("chatId"),
-                        message: input_message,
+                        message: msg_again1,
                         messageType: "text",
                         userType: "tenant"
                     };
@@ -3545,31 +3548,20 @@
                             setTimeout(() => {
                                 socket.emit('chatMessage', messageData);
                             }, 1000);
-                            // socket.on('recieveMessage', (message) => {
-                            //     try {
-                            //         console.log("Received message:", message);
-                            //     } catch (error) {
-                            //         console.error("Error handling chatMessage event:", error);
-                            //     }
-                            // });
-
-                            // console.log(response);
-                            // console.log(tenantIid);
-                            // console.log(tenantName);
-                            // chatTenant()
-                            // fetchChatMessages()
                         },
                         error: function (xhr, status, error) {
                             console.log(error);
                         }
                     });
+                }
                 });
                 $('#input-message').on('keypress', function (ev) {
-                    if (ev.key === 'Enter') {
-                        var input_message = $('#input-message').val();
+                    const msg_again2 = $('#input-message').val().trim();
+                    if (ev.key === 'Enter' && msg_again2 !== "") {
+                        // var input_message = $('#input-message').val();
                         var messageData = {
                             chatId: localStorage.getItem("chatId"),
-                            message: input_message,
+                            message: msg_again2,
                             messageType: "text",
                             userType: "tenant"
                         };
@@ -3583,6 +3575,7 @@
                                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                             },
                             success: function (response) {
+                                console.log(messageData);
                                 socket.emit('chatMessage', messageData);
                                 // console.log(response);
                                 // console.log(tenantIid);
@@ -3961,15 +3954,18 @@
                     send = $('#send-text');
                 //Send messages
                 input.addEventListener('keypress', function (ev) {
-                    if (ev.key === 'Enter' && input.value) {
+                    const msg = input.value.trim();
+                    if (ev.key === 'Enter' && msg !== "" ) {
                         ev.preventDefault();
                         const msg = input.value;
                         sendMessage(msg);
                     };
                 });
                 send.addEventListener('click', () => {
-                    const msg = input.value;
-                    if (msg) sendMessage(msg);
+                    const msg = input.value.trim(); // Remove leading and trailing spaces
+                    if (msg !== "") {
+                        sendMessage(msg);
+                    }
                 });
                 const sendMessage = (msg) => {
                     updateTime();
