@@ -11,7 +11,7 @@
     <meta name="author" content="Spruko Technologies Private Limited">
     <meta name="keywords"
         content="admin,admin dashboard,admin panel,admin template,bootstrap,clean,dashboard,flat,jquery,modern,responsive,premium admin templates,responsive admin,ui,ui kit.">
-    <!-- <script src="http://localhost:3000/socket.io/socket.io.js"></script> -->
+    <!-- <script src="https://backend.app.spaderent.com/socket.io/socket.io.js"></script> -->
 
     <!-- FAVICON -->
     <link rel="shortcut icon" type="image/x-icon" href="../assets/images/brand/favicon.ico" />
@@ -798,7 +798,7 @@
                                                 <a class="dropdown-item" href="lockscreen.html">
                                                     <i class="dropdown-icon fe fe-lock"></i> Lockscreen
                                                 </a> -->
-                                                <a class="dropdown-item" onclick="logout()">
+                                                <a class="dropdown-item" onclick="logout()" style="cursor: pointer;">
                                                     <i class="dropdown-icon fe fe-alert-circle"></i> Sign out
                                                 </a>
                                             </div>
@@ -1753,7 +1753,7 @@
             </div>
         </div>
     </div>
-    <!-- Sidebar-right -->
+     <!-- Sidebar-right -->
     <div class="sidebar sidebar-right sidebar-animate">
         <div class="panel panel-primary card mb-0 shadow-none border-0">
             <div class="tab-menu-heading border-0 d-flex p-3">
@@ -2421,7 +2421,7 @@
     <script src="../assets/js/charts.js"></script>
     <script src="../assets/js/getNotification.js"></script>
     <script src="../assets/js/index-chart.js"></script>
-    <!-- <script src="http://localhost:3000/"></script> -->
+    <!-- <script src="https://backend.app.spaderent.com/"></script> -->
     <script src="../assets/js/email-verification.js"></script>
     <script src="../assets/js/intercom.js"></script>
     <script src="http://ec2-52-45-181-206.compute-1.amazonaws.com:3000/socket.io/socket.io.js"></script>
@@ -2718,19 +2718,20 @@
                             // Calculate and update the text content of the element with the id "task-incomplete-percent"
                             var taskCount = parseInt(response?.property[0]?.taskCount) || 1; // Handle 0 taskCount case
                             if (onGoingTaskCount !== null) {
-                                var incompletePercent = (parseInt(onGoingTaskCount) / taskCount) * 100;
-                                $("#task-incomplete-percent").text(incompletePercent.toFixed(2) + " %");
-                            } else {
-                                $("#task-incomplete-percent").text("0.00 %");
-                            }
+    var incompletePercent = (parseInt(onGoingTaskCount) / taskCount) * 100;
+    $("#task-incomplete-percent").text(incompletePercent.toFixed(3) + " %");
+} else {
+    $("#task-incomplete-percent").text("0.000 %");
+}
 
-                            // Calculate and update the text content of the element with the id "task-complete-percent"
-                            if (finishedTaskCount !== null) {
-                                var completePercent = (parseInt(finishedTaskCount) / taskCount) * 100;
-                                $("#task-complete-percent").text(completePercent.toFixed(2) + " %");
-                            } else {
-                                $("#task-complete-percent").text("0.00 %");
-                            }
+// Calculate and update the text content of the element with the id "task-complete-percent"
+if (finishedTaskCount !== null) {
+    var completePercent = (parseInt(finishedTaskCount) / taskCount) * 100;
+    $("#task-complete-percent").text(completePercent.toFixed(3) + " %");
+} else {
+    $("#task-complete-percent").text("0.000 %");
+}
+
 
                         }
 
@@ -2769,21 +2770,22 @@
                             $("#task-finished").text(finishedTaskCount !== null ? finishedTaskCount : 0);
 
                             // Calculate and update the text content of the element with the id "task-incomplete-percent"
-                            var taskCount = parseInt(response?.property[0]?.taskCount) || 1; // Handle 0 taskCount case
+                            var taskCount = parseInt(response?.property[0]?.taskCount) || 0; // Handle 0 taskCount case
                             if (onGoingTaskCount !== null) {
-                                var incompletePercent = (parseInt(onGoingTaskCount) / taskCount) * 100;
-                                $("#task-incomplete-percent").text(incompletePercent.toFixed(2) + " %");
-                            } else {
-                                $("#task-incomplete-percent").text("0.00 %");
-                            }
+    var incompletePercent = (parseInt(onGoingTaskCount) / taskCount) * 100;
+    $("#task-incomplete-percent").text(incompletePercent.toFixed(3) + " %");
+} else {
+    $("#task-incomplete-percent").text("0.000 %");
+}
 
-                            // Calculate and update the text content of the element with the id "task-complete-percent"
-                            if (finishedTaskCount !== null) {
-                                var completePercent = (parseInt(finishedTaskCount) / taskCount) * 100;
-                                $("#task-complete-percent").text(completePercent.toFixed(2) + " %");
-                            } else {
-                                $("#task-complete-percent").text("0.00 %");
-                            }
+// Calculate and update the text content of the element with the id "task-complete-percent"
+if (finishedTaskCount !== null) {
+    var completePercent = (parseInt(finishedTaskCount) / taskCount) * 100;
+    $("#task-complete-percent").text(completePercent.toFixed(3) + " %");
+} else {
+    $("#task-complete-percent").text("0.000 %");
+}
+
                         }
 
                     },
@@ -2863,11 +2865,11 @@ $("#pending-balance").text("$ " + pendingBalance);
 // Calculate percentages and update the donut chart
 updateDonutChart([
     {
-        value: (totalDeposit / totalAmount) * 100,
+        value: ((totalDeposit / totalAmount) * 100).toFixed(3),
         label: 'Total Deposit'
     },
     {
-        value: (pendingBalance / totalAmount) * 100,
+        value: ((pendingBalance / totalAmount) * 100).toFixed(3),
         label: 'Pending Balance'
     }
 ]);
@@ -2904,11 +2906,11 @@ $("#pending-balance").text("$ " + pendingBalance);
 // Calculate percentages and update the donut chart
 updateDonutChart([
     {
-        value: (totalDeposit / totalAmount) * 100,
+        value: ((totalDeposit / totalAmount) * 100).toFixed(3),
         label: 'Total Deposit'
     },
     {
-        value: (pendingBalance / totalAmount) * 100,
+        value: ((pendingBalance / totalAmount) * 100).toFixed(3),
         label: 'Pending Balance'
     }
 ]);
@@ -3048,11 +3050,11 @@ $("#pending-balance").text("$ " + pendingBalance);
 // Calculate percentages and update the donut chart
 createDonutChart([
     {
-        value: (totalDeposit / totalAmount) * 100,
+        value: ((totalDeposit / totalAmount) * 100).toFixed(3),
         label: 'Total Deposit'
     },
     {
-        value: (pendingBalance / totalAmount) * 100,
+        value: ((pendingBalance / totalAmount) * 100).toFixed(3),
         label: 'Pending Balance'
     }
 ]);
@@ -3138,8 +3140,9 @@ $("#outstanding-amount").text("$ " + pendingBalance);
                     $("#task-count").text(response?.property[0]?.taskCount)
                     $("#task-ongoing").text(response?.property[0]?.onGoingTaskCount)
                     $("#task-finished").text(response?.property[0]?.finishedTaskCount)
-                    $("#task-incomplete-percent").text((parseInt(response?.property[0]?.onGoingTaskCount) / parseInt(response?.property[0]?.taskCount)) * 100 + " %")
-                    $("#task-complete-percent").text((parseInt(response?.property[0]?.finishedTaskCount) / parseInt(response?.property[0]?.taskCount)) * 100 + " %")
+                    $("#task-incomplete-percent").text(((parseInt(response?.property[0]?.onGoingTaskCount) / parseInt(response?.property[0]?.taskCount)) * 100).toFixed(3) + " %");
+$("#task-complete-percent").text(((parseInt(response?.property[0]?.finishedTaskCount) / parseInt(response?.property[0]?.taskCount)) * 100).toFixed(3) + " %");
+
 
                     // console.log(response.property[0])
 
@@ -3270,22 +3273,22 @@ $("#outstanding-amount").text("$ " + pendingBalance);
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-
-                        taskInfo = response.data[0]
+                        if(response?.data?.length>=1){
+                            taskInfo = response?.data[0]
                         tableBody.empty(); // Clear existing table data
 
                         // Filter tasks based on tab selection
                         var filteredTasks = [];
                         if (tabId === 'tab21') {
                             // Today tab is selected, filter tasks created today
-                            filteredTasks = response.data[0].filter(function (task) {
+                            filteredTasks = response?.data[0].filter(function (task) {
                                 var taskDate = new Date(task.created_at).toLocaleDateString();
                                 var currentDate = new Date().toLocaleDateString();
                                 return taskDate === currentDate;
                             });
                         } else if (tabId === 'tab22') {
                             // Weekly tab is selected, filter tasks created this week
-                            filteredTasks = response.data[0].filter(function (task) {
+                            filteredTasks = response?.data[0].filter(function (task) {
                                 var taskDate = new Date(task.created_at);
                                 var currentDate = new Date();
                                 var daysSinceCreation = Math.floor((currentDate - taskDate) / (1000 * 60 * 60 * 24));
@@ -3311,20 +3314,6 @@ $("#outstanding-amount").text("$ " + pendingBalance);
                         filteredTasks.forEach(function (task) {
                             var row = $('<tr></tr>');
 
-                            //   var taskCell = $('<td></td>').html('<b>' + task.taskName + '</b><br><span class="td-span">' + task.timestamp + '</span>');
-                            //   var assignedToCell = $('<td></td>').text(task.assignedTo);
-                            //   var dueAtCell = $('<td></td>').text(task.dueAt);
-                            //   var relatedToCell = $('<td></td>').text(task.relatedTo);
-                            //   var statusCell = $('<td></td>').append($('<button class="btn btn-' + task.status.toLowerCase() + '">' + task.status + '</button>'));
-                            // function toTitleCase(str) {
-                            //         return str.replace(/\w\S*/g, function (txt) {
-                            //             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-                            //         });
-                            //     }
-
-                            // var taskInfo = response.data[0];
-                            // taskInfo?.forEach(function (task) {
-                            // var image = '<td><img src="../../../../spadeAPI/uploads/' + (task.taskImages?.split(',')[0] || '') + '" alt=""></td>';
 
                             var createdDate = new Date(task.created_at);
                             var currentDate = new Date();
@@ -3377,6 +3366,8 @@ $("#outstanding-amount").text("$ " + pendingBalance);
                             var row = '<tr>' + taskName + assignTo + dueDate + propertyName + status + '</tr>';
                             tableBody.append(row);
                         });
+                        }
+                        
                     },
                     error: function (error) {
                         $("#myModal_warning_connection").modal("show");
