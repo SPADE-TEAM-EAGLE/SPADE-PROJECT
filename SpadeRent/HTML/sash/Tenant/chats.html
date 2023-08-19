@@ -534,6 +534,7 @@
         /* chats start css  */
         .text {
             height: auto;
+            word-wrap: break-word;
         }
 
         * {
@@ -644,7 +645,7 @@
             position: relative;
             color: var(--color);
             background: var(--bg);
-            border-radius: 7px;
+            border-radius: 0px;
             overflow: hidden;
             box-shadow: 0 8px 8px -4px #000 20;
             transition: all ease 0.5s;
@@ -730,7 +731,7 @@
         }
 
         .chat .conversation .messages .msg-text {
-            width: fit-content;
+            max-width: calc(100% - 20%);
             font-size: 12px;
             font-weight: 800;
             /* animation: appear-msg ease 0.25s forwards; */
@@ -771,6 +772,7 @@
         }
 
         .chat .conversation .field .input-message {
+            font-weight: bold;
             width: 100%;
             height: 100%;
             border: none;
@@ -1886,7 +1888,7 @@
                                                 <a class="dropdown-item" href="lockscreen.html">
                                                     <i class="dropdown-icon fe fe-lock"></i> Lockscreen
                                                 </a> -->
-                                                <a class="dropdown-item" onclick="logout()">
+                                                <a class="dropdown-item" onclick="logout()" style="cursor: pointer;">
                                                     <i class="dropdown-icon fe fe-alert-circle"></i> Sign out
                                                 </a>
                                             </div>
@@ -2726,7 +2728,7 @@
                                         </div>
                                         <div class="field">
                                             <input id="input-message" class="input-message" type="text"
-                                                placeholder="Type something..." />
+                                                placeholder="Type Message..." maxlength="255" />
                                             <!-- <div class="icon plus">
                                                 <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
@@ -3427,9 +3429,9 @@
                 class="fe fe-plus"></i></a>
 
         <!-- socket IO  -->
-        <script src="http://ec2-52-45-181-206.compute-1.amazonaws.com:3000/socket.io/socket.io.js"></script>
+        <script src="https://engage.app.spaderent.com/socket.io/socket.io.js"></script>
 
-   
+
         <!-- JQUERY JS -->
         <script src="../assets/js/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"
@@ -3506,28 +3508,29 @@
         <script src="../assets/plugins/chart/utils.js"></script>
         <!-- CHART-DONUT JS -->
         <script src="../assets/js/charts.js"></script>
-        
+
         <script>
-        // const socket = io("http://ec2-52-45-181-206.compute-1.amazonaws.com:3000");
+            // const socket = io("http://ec2-52-45-181-206.compute-1.amazonaws.com:3000");
             var tenantId = [];
             var chatId = 0;
             var tenantIid = 0;
             var tenantName = "";
             localStorage.removeItem('tenantId');
             localStorage.removeItem('tenantName');
-            var socket = io('http://ec2-52-45-181-206.compute-1.amazonaws.com:3000');
+            var socket = io('https://engage.app.spaderent.com');
             function joinChatRoom(chatId) {
                 // alert(typeof chatId)
-             socket.emit('joinRoom', { chatId: String(chatId) }); // Emit the joinRoom event
-               }
+                socket.emit('joinRoom', { chatId: String(chatId) }); // Emit the joinRoom event
+            }
             $(document).ready(function () {
                 var hasScrolled = 0;
                 // socket.emit('joinRoom', { chatId: localStorage.getItem("chatId") });
                 $('#send-text').on('click', function (ev) {
-                    var input_message = $('#input-message').val();
+                    const msg_again1 = $('#input-message').val().trim();
+                    if(msg_again1 !== ""){
                     var messageData = {
                         chatId: localStorage.getItem("chatId"),
-                        message: input_message,
+                        message: msg_again1,
                         messageType: "text",
                         userType: "tenant"
                     };
@@ -3545,31 +3548,20 @@
                             setTimeout(() => {
                                 socket.emit('chatMessage', messageData);
                             }, 1000);
-                            // socket.on('recieveMessage', (message) => {
-                            //     try {
-                            //         console.log("Received message:", message);
-                            //     } catch (error) {
-                            //         console.error("Error handling chatMessage event:", error);
-                            //     }
-                            // });
-
-                            // console.log(response);
-                            // console.log(tenantIid);
-                            // console.log(tenantName);
-                            // chatTenant()
-                            // fetchChatMessages()
                         },
                         error: function (xhr, status, error) {
                             console.log(error);
                         }
                     });
+                }
                 });
                 $('#input-message').on('keypress', function (ev) {
-                    if (ev.key === 'Enter') {
-                        var input_message = $('#input-message').val();
+                    const msg_again2 = $('#input-message').val().trim();
+                    if (ev.key === 'Enter' && msg_again2 !== "") {
+                        // var input_message = $('#input-message').val();
                         var messageData = {
                             chatId: localStorage.getItem("chatId"),
-                            message: input_message,
+                            message: msg_again2,
                             messageType: "text",
                             userType: "tenant"
                         };
@@ -3583,6 +3575,7 @@
                                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                             },
                             success: function (response) {
+                                console.log(messageData);
                                 socket.emit('chatMessage', messageData);
                                 // console.log(response);
                                 // console.log(tenantIid);
@@ -3607,7 +3600,7 @@
                     success: function (response) {
                         console.log("getTenantByID");
                         console.log(response.data.images);
-                        
+
                         // localStorage.setItem("TenantImg", response.data.images)  
                         localStorage.setItem("tenantName", response.data.firstName + " " + response.data.lastName)
                         console.log(response)
@@ -3628,6 +3621,13 @@
                                 console.log(1111111)
                                 console.log(response)
                                 localStorage.setItem("LandlordImg", response.data.image)
+                                if (localStorage.getItem("LandlordImg")) {
+                                    var newBgImageUrl = `url('` + localStorage.getItem("LandlordImg") + `')`;
+                                    $(".person").css("background-image", newBgImageUrl);
+                                } else {
+                                    var newBgImageUrl = "url('../assets/images/users/5.jpg')";
+                                    $(".person").css("background-image", newBgImageUrl);
+                                }
                                 if (response.data.isUserActive == 1) {
                                     $('#online').show()
                                 } else {
@@ -3654,22 +3654,12 @@
                                 console.log(response)
                                 var imgggg = response.data.Image;
                                 var urlArray = imgggg.split(",");
-                                
+
                                 var firstUrl = urlArray[0];
                                 localStorage.setItem("tenantImg", firstUrl)
-                                if (localStorage.getItem("tenantImg")) {
-                                                var newBgImageUrl = `url('`+localStorage.getItem("tenantImg")+`')`;
 
-// Select the div with the class "person" and change its background image
-$(".person").css("background-image", newBgImageUrl);
-                                            } else {
-                                                var newBgImageUrl = "url('../assets/images/users/5.jpg')";
-
-// Select the div with the class "person" and change its background image
-$(".person").css("background-image", newBgImageUrl);
-                                            }
                                 // console.log("First URL:", firstUrl);
-                               
+
                             },
                             error: function (xhr, status, error) {
                                 $("#myModal_warning_connection").modal("show");
@@ -3689,113 +3679,113 @@ $(".person").css("background-image", newBgImageUrl);
                         console.log('Error: ' + error);
                     }
                 });
-                
+
                 // var messs1 = "";
                 //         var messDiv = $('#messages')
                 var formattedTime;
                 function updateTime() {
-        const currentTime = new Date();
-        const hours = currentTime.getHours();
-        const minutes = currentTime.getMinutes();
-        const seconds = currentTime.getSeconds();
+                    const currentTime = new Date();
+                    const hours = currentTime.getHours();
+                    const minutes = currentTime.getMinutes();
+                    const seconds = currentTime.getSeconds();
 
-        formattedTime = hours + ":" + (minutes < 10 ? "0" : "") + minutes  ;
+                    formattedTime = hours + ":" + (minutes < 10 ? "0" : "") + minutes;
 
-        // $('#time').text(formattedTime);
-      }
-      updateTime(); // Call it initially to set the time immediately
+                    // $('#time').text(formattedTime);
+                }
+                updateTime(); // Call it initially to set the time immediately
 
                 function fetchChatMessages() {
-                            var messs2 = "";
-                            var messDiv = $('#messages')
-                            var randomImg = "../assets/images/users/5.jpg";
-                            socket.on('recieveMessage', (message) => {
-                    updateTime();
-                    if (message.userType == "landlord" && message.chatId == localStorage.getItem("chatId")) {
-                        console.log("check rec" , message.message);
+                    var messs2 = "";
+                    var messDiv = $('#messages')
+                    var randomImg = "../assets/images/users/5.jpg";
+                    socket.on('recieveMessage', (message) => {
+                        updateTime();
+                        if (message.userType == "landlord" && message.chatId == localStorage.getItem("chatId")) {
+                            console.log("check rec", message.message);
 
-messs2 = `<div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
+                            messs2 = `<div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
                                     <div style="width: 36px;height: 36px;" class="me-1"> 
                                         <img src="` + (localStorage.getItem("LandlordImg") ? localStorage.getItem("LandlordImg") : randomImg) + `" style="border-radius: 50%;height: inherit;" class="message-image"/>
                                         </div> 
                                     <div class="msg-text">
-                <span class="text">`+ message.message+ `</span>
-                <span style="float: right;" class="text-primary">`+formattedTime+`</span>
+                <span class="text">`+ message.message + `</span>
+                <span style="float: right;" class="text-primary">`+ formattedTime + `</span>
             </div> </div>
                             `;
                             messDiv.append(messs2);
-                    }
-                                                            
-                        });
                         }
+
+                    });
+                }
                 function chatTenant() {
                     fetchChatMessages()
-                        // console.log(typeof localStorage.getItem("landloadId"));
-                        // console.log(Number(localStorage.getItem("tenantId")));
-                       
-                        var recieverIdd = {
-                            recieverId: localStorage.getItem("landloadId")
-                        };
-                        
+                    // console.log(typeof localStorage.getItem("landloadId"));
+                    // console.log(Number(localStorage.getItem("tenantId")));
 
-                        // $('#person-name-bold').text(String(localStorage.getItem("tenantName")))
-                        $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/accessTenantChats',
-                            type: 'POST',
-                            data: JSON.stringify(recieverIdd),
-                            contentType: 'application/json',
-                            processData: false,
-                            headers: {
-                                'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                            },
-                            success: function (response) {
-                                // const socket = io('http://ec2-52-45-181-206.compute-1.amazonaws.com:3000');
-                                // socket.emit('joinRoom', { chatId: String(response[0].id) });
-                                console.log("accessTenantChats");
-                                console.log(response[0]);
-                                function myGreeting() {
-                                    chatId = response[0].id;
-                                    joinChatRoom(chatId);
-                                    localStorage.setItem("chatId", chatId)
-                                    $.ajax({
-                                        url: 'https://backend.app.spaderent.com/api/spade/getUserById/' + Number(localStorage.getItem("landloadId")) + '/landlord',
-                                        type: 'GET',
-                                        contentType: false,
-                                        processData: false,
-                                        success: function (response) {
-                                            console.log("getUserById");
-                                            console.log(response);
-                                            if (response.data.isUserActive == 1) {
-                                                $('#online').show()
-                                            } else {
-                                                $('#online').hide()
-                                            }
-                                            $.ajax({
-                                                url: 'https://backend.app.spaderent.com/api/spade/TenantMessages/' + chatId,
-                                                type: 'GET',
-                                                contentType: 'application/json',
-                                                processData: false,
-                                                headers: {
-                                                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                                                },
-                                                success: function (response) {
-                                                    // $('#person-name-bold').text(tenatName)
-                                                    var messs1 = "";
-                        // var messs2 = "";
-                        var messDiv = $('#messages')
-                                                    messDiv.empty();
-                                                    $('#chat').show()
+                    var recieverIdd = {
+                        recieverId: localStorage.getItem("landloadId")
+                    };
 
-                                                    console.log("TenantMessages");
-                                                    console.log(response);
 
-                                                    if (response.message == 'Messages fetched successfully' && response.data.length > 0) {
-                                                        var randomImg = "../assets/images/users/5.jpg";
-                                                        for (var i = 0; i < response.data.length; i++) {
-                                                            if (response.data[i]['userType'] == "tenant") {
-                                                                const timeArray = response.data[i]['created_at'].split(" ")[1].split(":");
-                                                                const time = timeArray.slice(0, 2).join(":");
-                                                                messs1 += `<div class="d-flex " style="align-items: flex-start;justify-content: end;"> 
+                    // $('#person-name-bold').text(String(localStorage.getItem("tenantName")))
+                    $.ajax({
+                        url: 'https://backend.app.spaderent.com/api/spade/accessTenantChats',
+                        type: 'POST',
+                        data: JSON.stringify(recieverIdd),
+                        contentType: 'application/json',
+                        processData: false,
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            // const socket = io('http://ec2-52-45-181-206.compute-1.amazonaws.com:3000');
+                            // socket.emit('joinRoom', { chatId: String(response[0].id) });
+                            console.log("accessTenantChats");
+                            console.log(response[0]);
+                            function myGreeting() {
+                                chatId = response[0].id;
+                                joinChatRoom(chatId);
+                                localStorage.setItem("chatId", chatId)
+                                $.ajax({
+                                    url: 'https://backend.app.spaderent.com/api/spade/getUserById/' + Number(localStorage.getItem("landloadId")) + '/landlord',
+                                    type: 'GET',
+                                    contentType: false,
+                                    processData: false,
+                                    success: function (response) {
+                                        console.log("getUserById");
+                                        console.log(response);
+                                        if (response.data.isUserActive == 1) {
+                                            $('#online').show()
+                                        } else {
+                                            $('#online').hide()
+                                        }
+                                        $.ajax({
+                                            url: 'https://backend.app.spaderent.com/api/spade/TenantMessages/' + chatId,
+                                            type: 'GET',
+                                            contentType: 'application/json',
+                                            processData: false,
+                                            headers: {
+                                                'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                                            },
+                                            success: function (response) {
+                                                // $('#person-name-bold').text(tenatName)
+                                                var messs1 = "";
+                                                // var messs2 = "";
+                                                var messDiv = $('#messages')
+                                                messDiv.empty();
+                                                $('#chat').show()
+
+                                                console.log("TenantMessages");
+                                                console.log(response);
+
+                                                if (response.message == 'Messages fetched successfully' && response.data.length > 0) {
+                                                    var randomImg = "../assets/images/users/5.jpg";
+                                                    for (var i = 0; i < response.data.length; i++) {
+                                                        if (response.data[i]['userType'] == "tenant") {
+                                                            const timeArray = response.data[i]['created_at'].split(" ")[1].split(":");
+                                                            const time = timeArray.slice(0, 2).join(":");
+                                                            messs1 += `<div class="d-flex " style="align-items: flex-start;justify-content: end;"> 
                                                                     <div class="msg-text owner">
                                                                     <span class="text">`+ response.data[i]['message'] + `</span>
                                                                     <span style="float: right;" class="text-primary">`+ time + `</span>
@@ -3804,10 +3794,10 @@ messs2 = `<div class="d-flex " style="align-items: flex-start;justify-content: f
                                                                         <img src="` + (localStorage.getItem("tenantImg") ? localStorage.getItem("tenantImg") : randomImg) + `" style="border-radius: 50%;height: inherit;" class="message-image" />
                                                                         </div> 
                                                                     </div>`;
-                                                            } else if (response.data[i]['userType'] == "landlord") {
-                                                                const timeArray = response.data[i]['created_at'].split(" ")[1].split(":");
-                                                                const time = timeArray.slice(0, 2).join(":");
-                                                                messs1 += `<div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
+                                                        } else if (response.data[i]['userType'] == "landlord") {
+                                                            const timeArray = response.data[i]['created_at'].split(" ")[1].split(":");
+                                                            const time = timeArray.slice(0, 2).join(":");
+                                                            messs1 += `<div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
                                                                     <div style="width: 36px;height: 36px;" class="me-1"> 
                                                                         <img src="` + (localStorage.getItem("LandlordImg") ? localStorage.getItem("LandlordImg") : randomImg) + `" style="border-radius: 50%;height: inherit;" class="message-image" />
                                                                         </div> 
@@ -3815,64 +3805,64 @@ messs2 = `<div class="d-flex " style="align-items: flex-start;justify-content: f
                                                 <span class="text">`+ response.data[i]['message'] + `</span>
                                                 <span style="float: right;" class="text-primary">`+ time + `</span>
                                             </div> </div>`;
-                                                            }
-                                                        }
-                                                    } else {
-                                                        messs1 = `<div class="time">No Message</div>`;
-                                                    }
-                                                    messDiv.html(messs1);
-
-                                                    var parentDiv = $("#chat");
-                                                    var parentDiv2 = $(".head");
-                                                    var childDiv = $("#messages");
-                                                    function scrollToBottomOnce() {
-                                                        if (hasScrolled == 0) {
-                                                            var scrollAmount = childDiv.prop("scrollHeight") - parentDiv.prop("clientHeight") + parentDiv2.prop("clientHeight") + 100;
-
-                                                            // console.log("childDiv: " + childDiv.prop("scrollHeight"));
-                                                            // console.log("parentDiv: " + parentDiv.prop("clientHeight"));
-                                                            // console.log("parentDiv2: " + parentDiv2.prop("clientHeight"));
-
-                                                            // console.log(scrollAmount);
-
-                                                            childDiv.animate({ scrollTop: scrollAmount }, 500);
-
-                                                            hasScrolled++; // Set the flag to true after scrolling
-                                                            console.log("if: " + hasScrolled);
-
-                                                        } else {
-                                                            console.log("else: " + hasScrolled);
                                                         }
                                                     }
-
-                                                    // Call the function to scroll to the desired position
-                                                    scrollToBottomOnce();
-
-                                                },
-                                                error: function (xhr, status, error) {
-                                                    console.log(error);
+                                                } else {
+                                                    messs1 = `<div class="time">No Message</div>`;
                                                 }
-                                            });
+                                                messDiv.html(messs1);
+
+                                                var parentDiv = $("#chat");
+                                                var parentDiv2 = $(".head");
+                                                var childDiv = $("#messages");
+                                                function scrollToBottomOnce() {
+                                                    if (hasScrolled == 0) {
+                                                        var scrollAmount = childDiv.prop("scrollHeight") - parentDiv.prop("clientHeight") + parentDiv2.prop("clientHeight") + 100;
+
+                                                        // console.log("childDiv: " + childDiv.prop("scrollHeight"));
+                                                        // console.log("parentDiv: " + parentDiv.prop("clientHeight"));
+                                                        // console.log("parentDiv2: " + parentDiv2.prop("clientHeight"));
+
+                                                        // console.log(scrollAmount);
+
+                                                        childDiv.animate({ scrollTop: scrollAmount }, 500);
+
+                                                        hasScrolled++; // Set the flag to true after scrolling
+                                                        console.log("if: " + hasScrolled);
+
+                                                    } else {
+                                                        console.log("else: " + hasScrolled);
+                                                    }
+                                                }
+
+                                                // Call the function to scroll to the desired position
+                                                scrollToBottomOnce();
+
+                                            },
+                                            error: function (xhr, status, error) {
+                                                console.log(error);
+                                            }
+                                        });
 
 
-                                        },
-                                        error: function (xhr, status, error) {
-                                            console.log(error);
-                                        }
-                                    });
+                                    },
+                                    error: function (xhr, status, error) {
+                                        console.log(error);
+                                    }
+                                });
 
 
-                                }
-                                myGreeting();
-                            },
-                            error: function (xhr, status, error) {
-                                console.log(error);
                             }
-                        });
+                            myGreeting();
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(error);
+                        }
+                    });
 
 
-                    
-                   
+
+
                     // setInterval(fetchChatMessages, 10000);
 
                 }
@@ -3910,17 +3900,17 @@ messs2 = `<div class="d-flex " style="align-items: flex-start;justify-content: f
         <!-- chats js start  -->
         <script>
             var formattedTime;
-                function updateTime() {
-        const currentTime = new Date();
-        const hours = currentTime.getHours();
-        const minutes = currentTime.getMinutes();
-        const seconds = currentTime.getSeconds();
+            function updateTime() {
+                const currentTime = new Date();
+                const hours = currentTime.getHours();
+                const minutes = currentTime.getMinutes();
+                const seconds = currentTime.getSeconds();
 
-        formattedTime = hours + ":" + (minutes < 10 ? "0" : "") + minutes  ;
+                formattedTime = hours + ":" + (minutes < 10 ? "0" : "") + minutes;
 
-        // $('#time').text(formattedTime);
-      }
-      
+                // $('#time').text(formattedTime);
+            }
+
             $(document).ready(function () {
                 //Selector
                 const $ = (selector) => document.querySelector(selector);
@@ -3964,15 +3954,18 @@ messs2 = `<div class="d-flex " style="align-items: flex-start;justify-content: f
                     send = $('#send-text');
                 //Send messages
                 input.addEventListener('keypress', function (ev) {
-                    if (ev.key === 'Enter' && input.value) {
+                    const msg = input.value.trim();
+                    if (ev.key === 'Enter' && msg !== "" ) {
                         ev.preventDefault();
                         const msg = input.value;
                         sendMessage(msg);
                     };
                 });
                 send.addEventListener('click', () => {
-                    const msg = input.value;
-                    if (msg) sendMessage(msg);
+                    const msg = input.value.trim(); // Remove leading and trailing spaces
+                    if (msg !== "") {
+                        sendMessage(msg);
+                    }
                 });
                 const sendMessage = (msg) => {
                     updateTime();

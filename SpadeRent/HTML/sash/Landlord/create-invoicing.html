@@ -1988,7 +1988,14 @@
                             </button>
                         </div> -->
                         <div class="card-body text-center">
-                            <i class="fi fi-rs-check-circle text-success"></i>
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
+                                viewBox="0 0 24 24">
+                                <path fill="#13bfa6"
+                                    d="M10.3125,16.09375a.99676.99676,0,0,1-.707-.293L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328l-6.1875,6.1875A.99676.99676,0,0,1,10.3125,16.09375Z"
+                                    opacity=".99" />
+                                <path fill="#71d8c9"
+                                    d="M12,2A10,10,0,1,0,22,12,10.01146,10.01146,0,0,0,12,2Zm5.207,7.61328-6.1875,6.1875a.99963.99963,0,0,1-1.41406,0L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328Z" />
+                            </svg></span>
                             <h4 class="h4 mb-0 mt-3 fw-bold">Info</h4>
                             <p class="card-text text-dark">Email Sended Successfully</p>
                         </div>
@@ -2611,7 +2618,7 @@
                                                 <a class="dropdown-item" href="lockscreen.html">
                                                     <i class="dropdown-icon fe fe-lock"></i> Lockscreen
                                                 </a> -->
-                                                <a class="dropdown-item" onclick="logout()">
+                                                <a class="dropdown-item" onclick="logout()" style="cursor: pointer;">
                                                     <i class="dropdown-icon fe fe-alert-circle"></i> Sign out
                                                 </a>
                                             </div>
@@ -3042,14 +3049,14 @@
 
     </div>
 
-    <!-- Sidebar-right -->
+    < <!-- Sidebar-right -->
     <div class="sidebar sidebar-right sidebar-animate">
         <div class="panel panel-primary card mb-0 shadow-none border-0">
             <div class="tab-menu-heading border-0 d-flex p-3">
                 <div class="card-title mb-0 text-dark fw-bold">
                     <!-- <i class="fe fe-bell me-2"></i> -->
                     <!-- <span class=" pulse"></span> -->
-                    Notifications <a href="javascript:void(0);" class="text-primary text-decoration-underline">Mark all
+                    Notifications <a href="javascript:void(0);" class="text-primary text-decoration-underline " id="updateAllNotifyRead">Mark all
                         as read</a>
                 </div>
                 <div class="card-options ms-auto">
@@ -3062,11 +3069,11 @@
                 <div class="tabs-menu border-bottom">
                     <!-- Tabs -->
                     <ul class="nav panel-tabs">
-                        <li><a href="#side1" data-bs-toggle="tab" class="text-dark">All</a></li>
-                        <li><a href="#side2" data-bs-toggle="tab" class="text-dark">Inbox (25)</a></li>
-                        <li><a href="#side3" data-bs-toggle="tab" class="text-dark">Unread (5)</a></li>
-                        <li><a href="#side4" data-bs-toggle="tab" class="text-dark">Archive (0)</a></li>
-                    </ul>
+                        <li><a href="#side1" data-bs-toggle="tab" class="text-dark active">All<span class="all_span"></span></a></li>
+                        <li><a href="#side2" data-bs-toggle="tab" class="text-dark">Inbox <span class="inbox_span"></span></a></li>
+                        <li><a href="#side3" data-bs-toggle="tab" class="text-dark">Unread <span class="Unread_span"></span></a></li>
+                        <li><a href="#side4" data-bs-toggle="tab" class="text-dark">Archive <span class="archive_span"></span></a></li>
+                    </ul>   
                 </div>
                 <div class="tab-content">
                     <!-- <div class="tab-pane " id="side1">
@@ -3243,15 +3250,38 @@
                     </div> -->
                     <div class="tab-pane active" id="side1">
                         <div class="list-group list-group-flush" id="notification-container">
-
-                            <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
+                            
 
                         </div>
                     </div>
-                    <div class="tab-pane" id="side2">
+                  
+                    <div class="tab-pane " id="side2">
+                        <div class="list-group list-group-flush" id="inbox-notification-container">
+
+                        </div>
+                    </div>
+                    <div class="tab-pane " id="side3">
+                        <div class="list-group list-group-flush" id="unread-notification-container">
+                            
+
+                        </div>
+                    </div>
+                    <div class="tab-pane " id="side4">
+                        <div class="list-group list-group-flush" id="Archieve-notification-container">
+                            
+
+                        </div>
+                    </div>
+                    <!-- <div class="tab-pane active" id="side4">
+                        <div class="list-group list-group-flush" id="read-notification-container">
+                            
+
+                        </div>
+                    </div> -->
+                    <!-- <div class="tab-pane" id="side2">
                         <div class="list-group list-group-flush">
-                            <!-- <div class="pt-3 fw-semibold ps-5">Today</div> -->
-                            <div class="list-group-item d-flex align-items-center justify-content-between">
+                            <div class="pt-3 fw-semibold ps-5">Today</div> -->
+                            <!-- <div class="list-group-item d-flex align-items-center justify-content-between">
                                 <div class="d-flex align-items-center">
                                     <div class="me-2">
                                         <span class="avatar avatar-md brround cover-image"
@@ -3290,15 +3320,15 @@
                                 <div class="">
                                     <span class="fs-12 text-dark">2 min ago</span>
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
 
-                        </div>
-                    </div>
-                    <div class="tab-pane" id="side3">
+                        <!-- </div>
+                    </div> --> 
+                    <!-- <div class="tab-pane" id="side3">
                         <div class="list-group list-group-flush">
-                            <!-- <div class="pt-3 fw-semibold ps-5">Today</div> -->
-                            <div class="list-group-item d-flex align-items-center justify-content-between">
+                            <div class="pt-3 fw-semibold ps-5">Today</div> -->
+                            <!-- <div class="list-group-item d-flex align-items-center justify-content-between">
                                 <div class="d-flex align-items-center">
                                     <div class="me-2">
                                         <span class="avatar avatar-md brround cover-image"
@@ -3337,19 +3367,58 @@
                                 <div class="">
                                     <span class="fs-12 text-dark">2 min ago</span>
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
 
-                        </div>
-                    </div>
-                    <div class="tab-pane" id="side4">
+                        <!-- </div>
+                    </div> --> 
+                    <!-- <div class="tab-pane" id="side4">
                         <div class="list-group list-group-flush">
-                            <!-- <div class="pt-3 fw-semibold ps-5">Today</div> -->
-
+                             <div class="pt-3 fw-semibold ps-5">Today</div> -->
+                            <!-- <div class="list-group-item d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <div class="me-2">
+                                        <span class="avatar avatar-md brround cover-image"
+                                            data-bs-image-src="../assets/images/users/2.jpg"><span
+                                                class="avatar-status bg-success"></span>
+                                    </div>
+                                    <div class="">
+                                        <a href="javascript:void(0);">
+                                            <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal"
+                                                data-target="#chatmodel">Daniel</div> <span class="text-dark"> 1436
+                                                Jersey Street > Jersey</span>
+                                            <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="">
+                                    <span class="fs-12 text-dark">2 min ago</span>
+                                </div>
+                            </div>
+                            <div class="list-group-item d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <div class="me-2">
+                                        <span class="avatar avatar-md brround cover-image"
+                                            data-bs-image-src="../assets/images/users/2.jpg"><span
+                                                class="avatar-status bg-success"></span>
+                                    </div>
+                                    <div class="">
+                                        <a href="javascript:void(0);">
+                                            <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal"
+                                                data-target="#chatmodel">Daniel</div> <span class="text-dark"> 1436
+                                                Jersey Street > Jersey</span>
+                                            <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="">
+                                    <span class="fs-12 text-dark">2 min ago</span>
+                                </div>
+                            </div> -->
                             <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
 
-                        </div>
-                    </div>
+                        <!-- </div>
+                    </div> --> 
                     <!-- <div class="tab-pane" id="side3">
                         <ul class="task-list timeline-task">
                             <li class="d-sm-flex mt-4">
@@ -3651,6 +3720,7 @@
     <script src="../assets/js/charts.js"></script>
     <script src="../assets/js/email-verification.js"></script>
     <script src="../assets/js/intercom.js"></script>
+    <script src="../assets/js/getNotification.js"></script>
     <script>
         $(document).ready(function () {
             
@@ -4016,6 +4086,7 @@
                                             $("#succes-tenantName").text(`sent to ${tenant.firstName + " " + tenant.lastName}.`)
                                             $("#succesModal").modal("show")
                                         }else{
+                                            GetNotification();
                                             $("#succesModal_invoice").modal("show")
                                         }
 
@@ -4724,6 +4795,9 @@
                         getData()
                         $("#succesModal_invoice").modal("hide")
                         $("#infoModal").modal("show")
+                        setTimeout(function () {
+                            $("#infoModal").modal("hide")
+                        }, 2000);
 
                     },
                     error: function (xhr, status, error) {
@@ -5277,6 +5351,7 @@
                                     },
                                     success: function (response) {
                                         $("#myModal_edit").modal("hide")
+                                        GetNotification();
                                         getData()
                                         $("#successfully_changed_text").text("Successfully Updated");
                                         $("#successfully_changed").modal("show");
@@ -5331,6 +5406,7 @@
                             },
                             success: function (response) {
                                 $("#myModal_edit").modal("hide")
+                                GetNotification();
                                 getData()
                                 $("#successfully_changed_text").text("Successfully Updated");
                                 $("#successfully_changed").modal("show");
@@ -5372,6 +5448,7 @@
                 success: function (response) {
                     // console.log(response);
                     // window.alert(response.message);
+                    GetNotification();
                     getData()
                     $("#successfully_changed_text").text("Successfully Updated");
                     $("#successfully_changed").modal("show");

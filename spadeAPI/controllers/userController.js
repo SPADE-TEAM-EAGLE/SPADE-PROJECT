@@ -1849,7 +1849,7 @@ exports.getTaskReportData = async (req, res) => {
   try {
     const { userId } = req.user;
     const getAllPropertyData = await queryRunner(getTaskReportData, [userId]);
-
+    console.log(getAllPropertyData)
     res.status(200).json({
       property: getAllPropertyData[0],
     });
