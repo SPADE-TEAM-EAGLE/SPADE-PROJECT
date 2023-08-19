@@ -727,7 +727,7 @@
         .chat .conversation .messages .msg-text .text {
             display: block;
             padding: 1.5em;
-            border-radius: 0.75em 0.75em 0.75em 0;
+            border-radius: 0.75em;
             background: #F8F8F8;
             box-shadow: 0 2px 0 #000 20;
         }
@@ -808,12 +808,12 @@
         }
 
         #messages::-webkit-scrollbar {
-            width: 5px;
+            width: 10px;
             /* Set the width of the scrollbar */
         }
 
         .main-content-app::-webkit-scrollbar {
-            width: 5px;
+            width: 10px;
             /* Set the width of the scrollbar */
         }
 
@@ -3531,6 +3531,7 @@
             localStorage.removeItem('tenantName');
             var socket = io('https://engage.app.spaderent.com');
             $(document).ready(function () {
+
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
                     method: 'GET',
@@ -3599,7 +3600,6 @@
                 $('#send-text').on('click', function (ev) {
                     const msg_again1 = $('#input-message').val().trim();
                     if (msg_again1 !== "") {
-
                         var messageData = {
                             chatId: localStorage.getItem("chatId"),
                             message: msg_again1,
@@ -3619,14 +3619,11 @@
                                 socket.emit('chatMessage', messageData);
                                 // socket use
                                 console.log(messageData);
-
                             },
                             error: function (xhr, status, error) {
                                 console.log(error);
                             }
                         });
-
-
                     }
                 });
                 $('#input-message').on('keypress', function (ev) {
@@ -3651,7 +3648,6 @@
                             success: function (response) {
                                 console.log(messageData);
                                 socket.emit('chatMessage', messageData);
-
                                 // console.log(response);
                                 // console.log(tenantIid);
                                 // console.log(tenantName);
@@ -3664,19 +3660,15 @@
                         });
                     }
                 });
-
-
             });
-            var receivedMessages = new Set();
+            // var receivedMessages = new Set();
             var formattedTime;
             function updateTime() {
                 const currentTime = new Date();
                 const hours = currentTime.getHours();
                 const minutes = currentTime.getMinutes();
                 const seconds = currentTime.getSeconds();
-
                 formattedTime = hours + ":" + (minutes < 10 ? "0" : "") + minutes;
-
                 // $('#time').text(formattedTime);
             }
             updateTime(); // Call it initially to set the time immediately
@@ -3686,25 +3678,17 @@
                 var messDiv = $('#messages')
                 var randomImg = "../assets/images/users/5.jpg";
                 socket.on('recieveMessage', (message) => {
-
                     updateTime();
-
                     // Check if the message is not a duplicate
                     // if (!receivedMessages.has(message.message)) {
                     chatMessages.push(message.message);
                     // receivedMessages.add(message.message);
                     if (chatMessages.length > 1 && chatMessages[chatMessages.length - 1] === chatMessages[chatMessages.length - 2]) {
-                        // Display the previous message only
-                        // $("#myModal_warning").modal("show");
-                        // setTimeout(function () {
-                        //     $('#myModal_warning').modal('hide');
-                        // }, 2000);
                         return;
                     }
                     if (message.userType == "tenant" && message.chatId == localStorage.getItem("chatId")) {
                         console.log("check rec", message);
-                        messs2 = `
-                    <div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
+                        messs2 = `<div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
                                                                     <div style="width: 36px;height: 36px;" class="me-1"> 
                                                                         <img src="` + (localStorage.getItem("TenantImg") ? localStorage.getItem("TenantImg") : randomImg) + `" style="border-radius: 50%;height: inherit;" class="message-image" />
                                                                         </div> 
@@ -3717,13 +3701,11 @@
                     // }
                 });
                 // receivedMessages.clear();
-
             }
             function chatTenant(tenatId, tenatName, element) {
                 // console.log(typeof String(tenatId));
                 // receivedMessages.clear();
                 fetchChatMessages()
-
                 // console.log(element);
                 const parentDiv = $(element).find(".media.new");
                 // console.log(parentDiv[0]);
