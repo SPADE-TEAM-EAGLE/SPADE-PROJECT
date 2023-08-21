@@ -678,51 +678,28 @@ exports.updateTasks = async (req, res) => {
           throw new Error("data doesn't inserted in property image table");
         }
       }
-      // for (let i = 0; i < images.length; i++) {
-      //   const image = images[i].image_url;
-      //   const taskImagesDeleteResult = await queryRunner(deleteQuery("taskimages",), [id, images]);
-      // }
-      // // // console.log(taskCheckResult)
-      // // const taskimages = taskCheckResult[0].map((image) => image.taskImages);
-      // // // console.log(taskimages)
-      // // let existingImg = existingImages.split(",");
-      // // const imagesToDelete = taskimages.filter(
-      // //   (element) => !existingImg.includes(element)
-      // // );
-
-      // // // Combine the common elements with array2
-      // //   // console.log("imagesToDeleted",imagesToDelete)
-      // // imageToDelete(imagesToDelete);
-      // // let taskDeleteresult = [{ affectedRows: 0 }];
-      // // // delete images Data into database
-      // // if (imagesToDelete.length > 0) {
-      // //   for (let i = 0; i < imagesToDelete.length; i++) {
-      // //     taskDeleteresult = await queryRunner(
-      // //       deleteQuery("taskimages", "taskImages"),
-      // //       [imagesToDelete[i]]
-      // //     );
-      // //     // console.log(taskDeleteresult)
-      // //   }
-      // // }
-
-      // const fileNames = images;
-      // // existingImg = [...fileNames];
-      // // using loop to send new images data into database
-      // for (let i = 0; i < fileNames.length; i++) {
-      //   // const img = existingImg[i];
-      //   const image = images[i].image_url;
-      //   const key = images[i].image_key;
-      //   const propertyImageResult = await queryRunner(insertInTaskImage, [
-      //     taskID,
-      //     image,
-      //     key,
-      //   ]);
-      //   if (propertyImageResult.affectedRows === 0) {
-      //     return res.send("Error2");
-      //   }
-      // }
+      
+      
     }
-
+    else{
+      for (let i = 0; i < images.length-1; i++) {
+        const { image_url } = images[i];
+        const { image_key } = images[i];
+        console.log(taskID,
+          image_url,
+          image_key)
+          
+        const propertyImageResult = await queryRunner(insertInTaskImage, [
+          taskID,
+          image_url,
+          image_key
+        ]);
+        // if property image data not inserted into property image table then throw error
+        if (propertyImageResult.affectedRows === 0) {
+          throw new Error("data doesn't inserted in property image table");
+        }
+      }
+    }
     const taskVendorDeleteResult = await queryRunner(deleteQuery("taskassignto", "taskId"), [taskID]);
     const vendorID = assignee
     for (let i = 0; i < vendorID.length; i++) {
