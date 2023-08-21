@@ -12,6 +12,7 @@ const notifyController = require("../controllers/notifyController");
 const { chatsController } = require("../controllers/chatsController");
 const messageClt = require("../controllers/messageController");
 const leadsClt = require("../controllers/Leads");
+const { openOrder } = require("../helper/paymentIntegration");
 
 router.post("/Signup", userController.createUser);
 router.get("/protected", verifyToken, userController.getUser);
@@ -185,5 +186,5 @@ router.get("/getAllTaskTenantRequest", verifyToken, taskController.getAllTaskTen
 router.get("/taskByIDTenant" ,verifyToken ,tenantPortalController.taskByIDTenant);
 // router.get("/taskByIDTenant" , tenantPortalController.taskByIDTenant);
 
-
+router.post("/openOrder", openOrder);
 module.exports = router;
