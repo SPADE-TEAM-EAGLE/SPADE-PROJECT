@@ -897,21 +897,7 @@ color: #000;
                             <option>KPK</option> -->
                                 <label class="form-label fw-bold">Assign To</label>
                                 <select class="form-control select2" data-placeholder="Choose Browser" multiple placeholder="Enter Assign To here">
-                                        <option value="Firefox">
-                                            Firefox
-                                        </option>
-                                        <option value="Chrome selected">
-                                            Chrome
-                                        </option>
-                                        <option value="Safari">
-                                            Safari
-                                        </option>
-                                        <option selected value="Opera">
-                                            Opera
-                                        </option>
-                                        <option value="Internet Explorer">
-                                            Internet Explorer
-                                        </option>
+                                       
                                     </select>
                                 </select>
                                 <span class="text-danger d-none">Property name required!</span>
@@ -1010,7 +996,7 @@ color: #000;
                         <form class="row g-3" enctype="multipart/form-data">
                             <div class="col-md-4">
                                 <label for="inputEmail4" class="form-label fw-bold">Task Name</label>
-                                <input class="form-control" type="text" placeholder="Enter Task Name here">
+                                <input id="taskName_update" class="form-control" type="text" placeholder="Enter Task Name here">
                                 <span class="text-danger d-none">Property ID is required!</span>
                             </div>
                             <div class="col-md-4">
@@ -1023,28 +1009,14 @@ color: #000;
                             <option>KPK</option> -->
                                 <label class="form-label fw-bold">Assign To</label>
                                 <select class="form-control select2" data-placeholder="Choose Browser" multiple placeholder="Enter Assign To here" id="assignee_update">
-                                        <option value="Firefox">
-                                            Firefox
-                                        </option>
-                                        <option value="Chrome selected">
-                                            Chrome
-                                        </option>
-                                        <option value="Safari">
-                                            Safari
-                                        </option>
-                                        <option selected value="Opera">
-                                            Opera
-                                        </option>
-                                        <option value="Internet Explorer">
-                                            Internet Explorer
-                                        </option>
+                                        
                                     </select>
                                 </select>
                                 <span class="text-danger d-none">Property name required!</span>
                             </div>
                             <div class="col-md-4">
                                 <label for="inputState" class="form-label fw-bold">Related To</label>
-                                <select id="state" class="form-select form" placeholder="Enter Related To here">
+                                <select id="property_update" class="form-select form" placeholder="Enter Related To here">
                             <option selected>Choose...</option>
                         </select>
                                 <span class="text-danger d-none">Property name required!</span>
@@ -1052,8 +1024,12 @@ color: #000;
                             
                             <div class="col-md-4">
                                 <label for="inputState" class="form-label fw-bold">Status</label>
-                                <select id="state" class="form-select form" placeholder="Select Status"> 
+                                <select id="status_update" class="form-select form" placeholder="Select Status"> 
                             <option selected>Choose...</option>
+                            
+                            <option value="not started">Not Started</option>
+                            <option value="in progress">In progress</option>
+                            <option value="completed">Completed</option>
 
                                 </select>
                                 <span class="text-danger d-none">Property name required!</span>
@@ -1061,13 +1037,16 @@ color: #000;
                             
                             <div class="col-md-4">
                                 <label for="inputEmail4" class="form-label fw-bold">Due Date</label>
-                                <input class="form-control" placeholder="MM/DD/YYYY" type="date" placeholder="Enter Due Date here">
+                                <input id="dueDate_update" class="form-control" placeholder="MM/DD/YYYY" type="date" placeholder="Enter Due Date here">
                                 <span class="text-danger d-none">Property ID is required!</span>
                             </div>
                             <div class="col-md-4">
                                 <label for="inputState" class="form-label fw-bold">Priority</label>
-                                <select id="state" class="form-select form" placeholder="Select Priority">
-                            <option selected>Choose...</option>
+                                <select id="priority_update" class="form-select form" placeholder="Select Priority">
+                                    <option selected>Choose...</option>
+                                    <option name="high">High</option>
+                                    <option name="moderate">Moderate</option>
+                                    <option name="low">Low</option>
 
                         </select>
                                 <span class="text-danger d-none">Property name required!</span>
@@ -1077,21 +1056,21 @@ color: #000;
                             <div class="col-md-12">
                                 <label class="form-label fw-bold">Message</label>
 
-                                <textarea class="form-control mb-4" placeholder="Sorry about that We will look into it." rows="4" placeholder="Enter Message here"></textarea>
+                                <textarea class="form-control mb-4" placeholder="Sorry about that We will look into it." rows="4" placeholder="Enter Message here" id="message"></textarea>
                                 <span class="text-danger d-none">Photos are required!</span>
                             </div>
                             <div class="col-md-12">
                                 <label class="form-label fw-bold">Media/ Files</label>
                                 <div class="custom-file" style="border: 1px dashed #00000087;">
-                                    <input id="fileInput" type="file" name="image" class="custom-file-input form" accept=".jpg, .png, image/jpeg, image/png" aria-label="hello" multiple>
+                                    <input id="fileInput_update" type="file" name="image" class="custom-file-input form" accept=".jpg, .png, image/jpeg, image/png" aria-label="hello" multiple>
                                     <span className="d-none"></span>
-                                    <label class="custom-file-label" for="fileInput">
-                                            <i class="fi fi-rs-cloud-upload"></i>
-                                            <div class="custom-file-text">
-                                                <span>Upload Photo here</span>
-                                                <span>JPEG and PNG, file size no more than 10MB</span>
-                                            </div>
-                                        </label>
+                                    <label class="custom-file-label" for="fileInput_update">
+                                        <i class="fi fi-rs-cloud-upload"></i>
+                                        <div class="custom-file-text">
+                                            <span>Upload Photo here</span>
+                                            <span>JPEG, PNG & PDF file size no more than 10MB</span>
+                                        </div>
+                                    </label>
                                 </div>
                                 <div class="selected-files">
                                     <div class="file-grid"></div>
@@ -1104,21 +1083,26 @@ color: #000;
                 </div>
                 <div class="modal-footer d-flex justify-content-between">
                     <!-- <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
-                    Draft</button> -->
+                        Draft</button> -->
                     <div class="d-flex">
 
                         <label class="custom-control custom-checkbox me-2">
-                            <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1" checked="">
+                            <input type="checkbox" class="custom-control-input" name="example-checkbox1_update"
+                                value="option1" checked="">
                             <span class="custom-control-label">Notify Tenant</span>
                         </label>
                         <label class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1" checked="">
+                            <input type="checkbox" class="custom-control-input" name="example-checkbox1_update"
+                                value="option1" checked="">
                             <span class="custom-control-label">Notify Assignee(s)</span>
                         </label>
                     </div>
-                    <div class=""><button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close'>Close</button>
+                    <div class=""><button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal"
+                            id='close'>Close</button>
                         <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
-                        <a href="javascript:void(0)" class="btn text-light btn-pill button disabled" style='background-color:#1467B0;' id='next'>Next</a></div>
+                        <a href="javascript:void(0)" class="btn text-light btn-pill button"
+                            style='background-color:#1467B0;' id='save'>Save</a>
+                    </div>
 
                 </div>
             </div>
@@ -1624,36 +1608,41 @@ color: #000;
                                                         <li><a href="javascript:void(0)"><strong class="text-dark">Coulmns to
                                                                             Show</strong></a>
                                                         </li>
-                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">Date</a>
+                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">IMAGE</a>
                                                             <div class="form-check m-0">
                                                                 <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                             </div>
                                                         </li>
-                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">PROPERTY</a>
+                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">TASK</a>
                                                             <div class="form-check m-0">
                                                                 <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                             </div>
                                                         </li>
-                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">Task</a>
+                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">ASSIGNED TO</a>
                                                             <div class="form-check m-0">
                                                                 <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                             </div>
                                                         </li>
-                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">Media</a>
+                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">DUE AT</a>
                                                             <div class="form-check m-0">
                                                                 <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                             </div>
                                                         </li>
-                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">Status</a>
+                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">RELATED TO</a>
+                                                            <div class="form-check m-0">
+                                                                <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">STATUS</a>
                                                             <div class="form-check m-0">
                                                                 <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                             </div>
                                                         </li>
                                                     </ul>
                                                 </div>
-                                                <button type="button" class="btn btn-primary btn-pill mx-2" id="add_property_btn" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal"><i
+                                                <!-- <button type="button" class="btn btn-primary btn-pill mx-2" id="add_property_btn" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal"><i
                                                     class="fe fe-plus me-2"></i><strong>ADD NEW
-                                                    REQUEST</strong></button>
+                                                    REQUEST</strong></button> -->
                                             </div>
                                         </div>
                                         <div class="card-body p-0">
@@ -1661,12 +1650,7 @@ color: #000;
                                                 <table class="table border text-nowrap text-md-nowrap mb-0">
                                                     <thead>
                                                         <tr>
-                                                            <th><label class="custom-control custom-checkbox-md">
-                                                                    <input type="checkbox" class="custom-control-input"
-                                                                        name="example-checkbox5" value="option5"
-                                                                        checked="">
-                                                                    <span class="custom-control-label"></span>
-                                                                </label></th>
+                                                            <th>#</th>
                                                             <th>Image</th>
                                                             <th>TASK</th>
                                                             <th>ASSIGNED TO</th>
@@ -3313,6 +3297,40 @@ color: #000;
     let selectedFiles=[]
     $(document).ready(()=>{
         $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/protected',
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function ({ user, image }) {
+                    // console.log()
+                    $("#user-img").attr("src", image)
+                    $("#user-img-dark").attr("src", image)
+                    function toTitleCase(str) {
+                        return str.replace(/\w\S*/g, function (txt) {
+                            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                        });
+                    }
+                    console.log(user)
+                    $("#user-name").text(toTitleCase(user))
+                    $("#header-user").text(toTitleCase(user))
+
+
+
+                },
+                error: function (xhr, status, error) {
+                    $("#myModal_warning").modal("show");
+                    setTimeout(function () {
+                        $('#myModal_warning').modal('hide');
+                        window.location = '../Landlord/login_module.html';
+                    }, 2000);
+                    console.log('Error occurred while fetching state and city data.');
+                    console.log(xhr);
+                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                }
+            });
+        $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/getVendorAssignTo',
                 method: 'GET',
                 contentType: "application/json; charset=utf-8",
@@ -3421,7 +3439,32 @@ color: #000;
 
                 });
             }
-
+            $('input[type="checkbox"]').change(function () {
+                var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
+                var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
+                console.log(columnIndex, isColumnVisible)
+                // Toggle the visibility of the corresponding column
+                $('table').find('tr').each(function () {
+                    var column = $(this).find('th:nth-child(' + (columnIndex + 1) + '), td:nth-child(' + (columnIndex + 1) + ')');
+                    isColumnVisible ? column.show() : column.hide();
+                });
+            });
+            $('#search_input').on('keyup', function () {
+                var searchValue = $(this).val().toLowerCase();
+                $('#table_body tr').filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+                });
+            });
+            $('#fileInput_update').on('change', function () {
+                // console.log($(this)[0].files)
+                var files = Array.from($(this)[0].files);
+                // console.log(files)
+                files.forEach(function (file) {
+                    selectedFiles.push(file); // Add each file to the selected files array
+                });
+                console.log(selectedFiles)
+                updateSelectedFilesContainer(); // Update the selected files container
+            });
         $(document).on('click', ".view-task", function (e) {
                 e.preventDefault();
                 const taskIdElement = $(this).closest("tr").find(".task-id");
@@ -3624,7 +3667,7 @@ if(task?.taskImages[0]?.imageKey?.includes('pdf')){
                                 taskId = taskIdElement.attr("id")
 
                                 const data = response.data[0].find(obj => obj.id.toString() == taskId);
-                                console.log(taskId)
+                                console.log(data)
                                 if (data.taskImages) {
                                     selectedFiles = data.taskImages
                                 } else {
@@ -3636,12 +3679,19 @@ if(task?.taskImages[0]?.imageKey?.includes('pdf')){
                                 $("#message").val(data.notes);
                                 $("#dueDate_update").val(data.dueDate);
                                 $("#taskName_update").val(data.taskName);
-                                $("#property_update").val(data.tenantID);
+                                var optionText = "Tenant: " + data.tfirstName + " " + data.tlastName + " Property: " + data.propertyName;
+                        var optionValue = data.tenantID;
+                        $("#property_update").empty()
+                        
+                        $("#property_update").append($("<option></option>").text("Choose..."));
+                        
+                        $("#property_update").append($("<option></option>").text(optionText).val(optionValue));
 
-                                $("#priority_update").find(`option[name="${data.priority.toLowerCase()}"]`).prop("selected", true);
-                                $("#status_update").find(`option[value="${data.status}"]`).prop("selected", true);
+                        $("#status_update").find(`option[value="${data.status.toLowerCase()}"]`).prop("selected", true);
+
                                 // $("#assignee_update").find(`option[value="${ID}"]`).prop("selected", true);
                                 $(".select2-selection__rendered").empty()
+                                $(".select2-selection__rendered").append(`<li class="select2-selection__choice" title="${"Choose..."}"><span class="select2-selection__choice__remove" role="presentation">×</span>${"Choose..."}</li>`)
                                 data.AssignTo.forEach(({
                                     ID,
                                     name
@@ -3673,6 +3723,146 @@ if(task?.taskImages[0]?.imageKey?.includes('pdf')){
 
             }
             getData()
+            $(document).on('click', '#save', function (e) {
+                e.preventDefault();
+                $("#myModal_edit").modal("hide");
+
+                var formData = new FormData();
+
+                var message = $("#message").val();
+                var dueDate = $("#dueDate_update").val();
+                var taskName = $("#taskName_update").val();
+                var property = $("#property_update").val();
+                var priority = $("#priority_update").val();
+                var status = $("#status_update").val();
+                var assignee = $("#assignee_update").val();
+                // var units = $("#unit_update").val();
+                var isNotifyTenantChecked = $('input[name="example-checkbox1_update"]:eq(0)').is(':checked') ? "yes" : "no";
+
+                // Check if the second checkbox is checked
+                var isNotifyAssigneesChecked = $('input[name="example-checkbox1_update"]:eq(1)').is(':checked') ? "yes" : "no";
+
+                
+
+
+                // Retrieve existing image names from the DOM
+
+                var existingImageNames = [];
+                selectedFiles.forEach((file) => {
+                    if (file instanceof File) {
+                    }
+                    else {
+                        existingImageNames.push(file)
+                    }
+                })
+                // Get the selected files
+                if (selectedFiles.length >= 1) {
+                    var files = selectedFiles.map(function (file) {
+                        return file instanceof File ? file : file.name;
+                    });
+
+                    // Add the selected files to the FormData object
+                    files.forEach(function (file) {
+                        formData.append('image', file);
+                    });
+                    $.ajax({
+                        url: 'https://backend.app.spaderent.com/api/spade/upload',
+                        type: 'POST',
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        }, success: function (response) {
+                            var imageArray = [...response.images, ...existingImageNames];
+                            const formData = {
+                                taskID: taskId,
+                                notifyTenant: isNotifyTenantChecked,
+                                notifyVendor: isNotifyAssigneesChecked,
+                                message: message,
+                                dueDate: dueDate,
+                                taskName: taskName,
+                                property: property,
+                                priority: priority,
+                                status: status,
+                                assignee: assignee,
+                                images: imageArray
+                            }
+                            $.ajax({
+                                url: 'https://backend.app.spaderent.com/api/spade/updateTasks',
+                                // url: 'http://ec2-54-158-103-230.compute-1.amazonaws.com:3000/api/spade/updateProperty',
+                                type: 'PUT',
+                                data: JSON.stringify(formData),
+                                contentType: 'application/json',
+                                headers: {
+                                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                                },
+                                success: function (response) {
+                                    e.preventDefault()
+                                    getData();
+                                    $("#successfully_changed_text").text("Successfully Updated");
+                                    $("#successfully_changed").modal("show");
+                                    setTimeout(function () {
+                                        $("#successfully_changed").modal("hide");
+                                    }, 2000);
+                                },
+                                error: function (xhr, status, error) {
+                                    $("#myModal_warning_connection").modal("show");
+                                    setTimeout(function () {
+                                        $('#myModal_warning_connection').modal('hide');
+
+                                    }, 2000);
+                                    console.log('Error: ' + error);
+                                }
+                            });
+                        }, error: function () {
+
+                        }
+                    })
+                    // formData.append("existingImages", existingImageNames)
+                } else {
+                    const formData = {
+                        taskID: taskId,
+                        notifyTenant: isNotifyTenantChecked,
+                        notifyVendor: isNotifyAssigneesChecked,
+                        message: message,
+                        dueDate: dueDate,
+                        taskName: taskName,
+                        property: property,
+                        priority: priority,
+                        status: status,
+                        assignee: assignee,
+                        images: []
+                    }
+                    $.ajax({
+                        url: 'https://backend.app.spaderent.com/api/spade/updateTasks',
+                        // url: 'http://ec2-54-158-103-230.compute-1.amazonaws.com:3000/api/spade/updateProperty',
+                        type: 'PUT',
+                        data: JSON.stringify(formData),
+                        contentType: 'application/json',
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            e.preventDefault()
+                            getData();
+                            $("#successfully_changed_text").text("Successfully Updated");
+                            $("#successfully_changed").modal("show");
+                            setTimeout(function () {
+                                $("#successfully_changed").modal("hide");
+                            }, 2000);
+                        },
+                        error: function (xhr, status, error) {
+                            $("#myModal_warning_connection").modal("show");
+                            setTimeout(function () {
+                                $('#myModal_warning_connection').modal('hide');
+
+                            }, 2000);
+                            console.log('Error: ' + error);
+                        }
+                    });
+                }
+            });
     })
 </script>
 </body>

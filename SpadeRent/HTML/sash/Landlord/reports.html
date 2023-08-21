@@ -4869,64 +4869,36 @@ $("#propertySelect").on('change', function() {
     filterAndRenderTable(selectedValue);
 });
 $("#typehead").on('input', function() {
-    var searchQuery = $(this).val();
-    query = searchQuery.toLowerCase();
-
-// Filter propertyData based on the search query
-var filteredData = propertyData.filter(property => property.propertyName.toLowerCase().includes(query));
-
-// Call the constructPropertyTable function to render the filtered data
-constructPropertyTable(filteredData);
+    var searchValue = $(this).val().toLowerCase();
+                $('#table_body_property_report tr').filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+                });
 });
 $("#typehead_lease").on('input', function() {
-    var searchQuery = $(this).val();
-    query = searchQuery.toLowerCase();
-
-// Filter propertyData based on the search query
-var filteredData = leaseData.filter(lease => {
-    const fullName = `${lease.firstName} ${lease.lastName}`.toLowerCase();
-    const phone = lease.tenantPhone || "";
-    const propertyName = lease.propertyName.toLowerCase();
-
-    return (
-        fullName.includes(query) ||
-        phone.includes(query) ||
-        propertyName.includes(query)
-    );
-});
-console.log(filteredData)
-// Call the constructPropertyTable function to render the filtered data
-constructPropertyTable(filteredData);
+    
+                var searchValue = $(this).val().toLowerCase();
+                $('#table_body_lease_report tr').filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+                });
+           
 });
 $("#typehead_tenant").on('input', function() {
-    var searchQuery = $(this).val();
-    query = searchQuery.toLowerCase();
-
-// Filter propertyData based on the search query
-var filteredData = tenantData.filter(property => property.propertyName.toLowerCase().includes(query));
-
-// Call the constructPropertyTable function to render the filtered data
-constructPropertyTable(filteredData);
+    var searchValue = $(this).val().toLowerCase();
+                $('#table_body_tenant_report tr').filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+                });
 });
 $("#typehead_invoice").on('input', function() {
-    var searchQuery = $(this).val();
-    query = searchQuery.toLowerCase();
-
-// Filter propertyData based on the search query
-var filteredData = invoiceData.filter(property => property.propertyName.toLowerCase().includes(query));
-
-// Call the constructPropertyTable function to render the filtered data
-constructPropertyTable(filteredData);
+    var searchValue = $(this).val().toLowerCase();
+                $('#table_body_invoice_report tr').filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+                });
 });
 $("#typehead_task").on('input', function() {
-    var searchQuery = $(this).val();
-    query = searchQuery.toLowerCase();
-
-// Filter propertyData based on the search query
-var filteredData = taskData.filter(property => property.propertyName.toLowerCase().includes(query));
-
-// Call the constructPropertyTable function to render the filtered data
-constructPropertyTable(filteredData);
+    var searchValue = $(this).val().toLowerCase();
+                $('#table_body_task_report tr').filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+                });
 });
 function formatCurrency(amount) {
     // Convert amount to a number
@@ -5014,7 +4986,7 @@ $.ajax({
     }
 })
 $.ajax({
-    url: 'http://localhost:3000/api/spade/taskReport',
+    url: 'https://backend.app.spaderent.com/api/spade/taskReport',
     type: 'GET',
     contentType: "application/json; charset=utf-8",
     processData: false,
