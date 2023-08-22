@@ -1,6 +1,6 @@
 var username;
 $.ajax({
-    url: 'https://backend.app.spaderent.com/api/spade/protected',
+    url: 'https://backend.app.spaderent.com/api/spade/protectedTenant',
     method: 'GET',
     headers: {
         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -27,9 +27,6 @@ $.ajax({
         // Attach a click event listener to your custom button
         document.querySelectorAll('.customIntercomButton').forEach(element => {
     element.addEventListener('click', openIntercomPopup);
-    document.addEventListener("click",function(){
-      window.Intercom("hide")
-    })
 });
 
         

@@ -1285,7 +1285,7 @@
 
                                         <!-- 1 comments start  -->
                                         <div class="d-flex country mt-2">
-                                            <a class="nav-link icon text-dark">
+                                            <a class="nav-link icon text-dark" href="./chats.html">
                                                 <i class="fi fi-rs-comment"></i>
                                             </a>
                                             <!-- <img src="../assets\header-img\comment-light.webp"
@@ -2310,7 +2310,7 @@
     </div>
 
     <!-- BACK-TO-TOP -->
-    <!-- <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a> -->
+    <!-- <!-- <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a> --> -->
     <a href="#addModal" data-bs-effect="effect-scale" data-bs-toggle="modal" id="add-tenant-side-btn"><i
             class="fe fe-plus"></i></a>
 
@@ -2417,6 +2417,8 @@
     <script src="../assets/js/email-verification.js"></script>
     <script src="../assets/js/intercom.js"></script>
     <script src="../assets/js/getNotification.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.8/sjcl.min.js"></script>
+
     <script>
         $(document).ready(function() {
             
@@ -3364,11 +3366,15 @@ selectedFiles.forEach(function(file, index) {
                                 '<span>' + property.city + ', ' + property.state + ' ' + property.zipCode +
                                 '</span>' +
                                 '</td>';
+                                var password = 'your-secret-password';
+var encryptedPropertyId = sjcl.encrypt(password, property.id.toString());
 
+// Include the encrypted value in the URL
+var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                             var dropdownMenu =
                                 '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
                                 '<ul class="dropdown-menu dropdown-menu-top">' +
-                                `<li><a class="dropdown-item text-success" href="./view-property.html?propertyId=${property.id}">View</a></li>` +
+                                    `<li><a class="dropdown-item text-success" href="./view-property.html?property=${encodedPropertyId}">View</a></li>` +
                                 '<li><a class="edit-option dropdown-item text-primary" href="javascript:void(0)">Edit</a></li>' +
                                 '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>'
                             '</ul></td>';

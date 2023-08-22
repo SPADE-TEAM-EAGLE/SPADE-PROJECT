@@ -157,6 +157,7 @@ exports.getUser = (req, res) => {
     imageKey: req.user.imageKey,
     planID: req.user.planID,
     isActive: req.user.isActive,
+    landlordId:req.user.landlordID
   });
 };
 
