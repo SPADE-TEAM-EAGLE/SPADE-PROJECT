@@ -14,6 +14,10 @@ const {
   updateTaskNotifyReadUnRead,
   updateInvoiceNotifyReadUnRead,
   updateAllNotifyReadQuery,
+  updateTenantPropertyNotifyReadUnRead,
+  updateTenantTaskNotifyReadUnRead,
+  updateTenantInvoiceNotifyReadUnRead,
+  updateAllTenantNotifyReadQuery,
 } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
 
@@ -165,6 +169,61 @@ const notifyController = {
       });
     }
   },
+  updateTenantReadUnRead: async (req, res) => {
+    try {
+      const { notify, id, type } = req.body;
+      const updateData = [notify, id];
+      const updateFunctions = {
+        property: updateTenantPropertyNotifyReadUnRead,
+        task: updateTenantTaskNotifyReadUnRead,
+        invoice: updateTenantInvoiceNotifyReadUnRead,
+      };
+      const updateQueryFunction = updateFunctions[type];
+      if (updateQueryFunction) {
+        updateQueryReadUnRead(updateQueryFunction, updateData, res);
+      } else {
+        res.status(400).json({
+          message: "Invalid type provided.",
+        });
+      }
+    } catch (error) {
+      res.status(400).json({
+        message: error.message,
+      });
+    }
+  },
+updatetTenantAllReadNotify: async (req, res) => {
+  try {
+    const { userId } = req.user;
+    const { notify , propertyID } = req.body;
+    // console.log(req.body);
+    const updateData = [notify, userId];
+
+    const invoice = await queryRunner(
+      updateAllTenantNotifyReadQuery.invoice,
+      updateData
+    );
+    const property = await queryRunner(
+      updateAllTenantNotifyReadQuery.property,
+      [notify, propertyID]
+    );
+    const task = await queryRunner(updateAllTenantNotifyReadQuery.task, updateData);
+
+    if (
+      invoice[0].affectedRows ||
+      property[0].affectedRows ||
+      task[0].affectedRows 
+    ) {
+      res.status(200).json({
+        message: "Updated Successfully!",
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+    }
+  },
   updateUserAllReadNotify: async (req, res) => {
     try {
       const { userId } = req.user;

@@ -71,7 +71,14 @@ exports.updateAllNotifyReadQuery =  {
   invoice: `UPDATE invoice SET notify = ? WHERE landlordID = ?`,
   tenants: `UPDATE tenants SET notify = ? WHERE landlordID = ?`,
 };
- 
+exports.updateAllTenantNotifyReadQuery = {
+  property: `UPDATE property SET tenantNotify = ? WHERE property.id = ?`,
+  task: `UPDATE task SET tenantNotify = ? WHERE task.tenantID = ?`,
+  invoice: `UPDATE invoice SET tenantNotify = ? WHERE invoice.tenantID = ?`
+};
+
+
+
 
 // creat api get total properties of landlord and vacant or occupied properties using join with units table
 exports.getPropertiesGraphData = `SELECT
@@ -133,6 +140,14 @@ exports.updateTaskNotifyReadUnRead =
   "UPDATE task SET notify = ?  WHERE id = ? ";
 exports.updateInvoiceNotifyReadUnRead =
   "UPDATE invoice SET notify = ?  WHERE id = ? ";
+
+
+  exports.updateTenantPropertyNotifyReadUnRead =
+  "UPDATE property SET tenantNotify = ? WHERE id = ?";
+exports.updateTenantTaskNotifyReadUnRead =
+  "UPDATE task SET tenantNotify = ? WHERE id = ?";
+exports.updateTenantInvoiceNotifyReadUnRead =
+  "UPDATE invoice SET tenantNotify = ? WHERE id = ?";
 
 exports.createInvoiceCategories =
   "INSERT INTO InvoiceCategories (categorieName,landLordId) VALUES (?,?)";
@@ -311,7 +326,7 @@ exports.getTenantPropertyNotify = `SELECT
     property.id AS propertyID,
     property.propertyName,
     property.address,
-    property.notify,
+    property.tenantNotify,
     property.propertyType,
     property.created_at,
     property.city,
@@ -342,7 +357,7 @@ exports.getTenantTaskNotify = `SELECT
     task.taskName,
     task.status,
     task.priority,
-    task.notify,
+    task.tenantNotify,
     task.created_at,
     tenants.firstName,
     tenants.lastName,
@@ -361,7 +376,7 @@ JOIN
     users ON users.id = task.landlordID
 JOIN 
     tenants ON task.tenantID = tenants.id
-JOIN 
+LEFT JOIN 
     taskimages ON task.id = taskimages.taskID
 WHERE 
     task.tenantID = ?
@@ -375,7 +390,7 @@ exports.getTenantInvoiceNotify = `SELECT
 invoice.id AS invoiceID,
 invoice.invoiceType,
 invoice.startDate,
-invoice.notify,
+invoice.tenantNotify,
 invoice.endDate,
 invoice.status,
 invoice.totalAmount,
@@ -396,9 +411,9 @@ WHERE
 invoice.tenantID = ?
 GROUP BY 
 invoice.id, invoice.invoiceType, invoice.status, invoice.startDate, invoice.endDate, invoice.created_at
-ORDER BY 
-invoice.created_at DESC;
 `;
+// ORDER BY 
+// invoice.created_at DESC;
 
 // insertNotify notify
 exports.insertNotify =

@@ -142,8 +142,8 @@ router.put("/notify", verifyToken, notifyController.updateNotifyData);
 router.get("/notify", verifyToken, notifyController.getNotify);
 router.get("/tenantNotify", verifyTokenTenant, notifyController.getTenantNotify);
 router.put("/updateReadUnRead", verifyToken, notifyController.updateUserReadUnRead);
-router.put("/updateReadUnRead", verifyTokenTenant, notifyController.updateUserReadUnRead);
-
+router.put("/updateTenantReadUnRead", verifyTokenTenant, notifyController.updateTenantReadUnRead);
+router.put("/updateAllTenantNotifyRead", verifyTokenTenant, notifyController.updatetTenantAllReadNotify);
 
 
 // property report task
