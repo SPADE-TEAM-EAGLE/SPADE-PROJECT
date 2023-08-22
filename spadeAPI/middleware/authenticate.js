@@ -150,6 +150,7 @@ const verifyTokenTenant = async (req, res, next) => {
       userId: result[0][0].id,
       userName: result[0][0].firstName + " " + result[0][0].lastName,
       landlordID: result[0][0].landlordID,
+      propertyID: result[0][0].propertyID,
     };
 
     next();
