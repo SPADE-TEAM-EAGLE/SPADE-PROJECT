@@ -2241,6 +2241,12 @@ if (task.ImageKey) {
         
     });
 }
+// $("#typehead").on("input",()=>{
+//     var searchValue = $(this).val().toLowerCase();
+//     console.log(searchValue)
+//                 $('#table_body tr').filter(function () {
+//                     $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);})
+// })
 $('#fileInput').on('change', function () {
                 var files = Array.from($(this)[0].files);
                 // console.log(files)
@@ -2408,6 +2414,7 @@ $('#fileInput').on('change', function () {
            
             $('#typehead').on('keyup', function () {
                 var searchValue = $(this).val().toLowerCase();
+                console.log(searchValue)
                 $('#table_body tr').filter(function () {
                     $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
                 });

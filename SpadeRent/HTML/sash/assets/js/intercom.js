@@ -1,4 +1,4 @@
-let username;
+var username;
 $.ajax({
     url: 'https://backend.app.spaderent.com/api/spade/protected',
     method: 'GET',

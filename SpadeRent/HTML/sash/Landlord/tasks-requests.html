@@ -2691,11 +2691,7 @@ color: #000;
                 updateSelectedFilesContainer(); // Update the selected files container
             });
 
-            $(document).on('click', '.delete-file', function() {
-                var index = $(this).data('index');
-                selectedFiles.splice(index, 1); // Remove the selected file from the array
-                updateSelectedFilesContainer(); // Update the selected files container
-            });
+            
 
             function resetAccordions() {
                 // Reset all accordions
@@ -3465,6 +3461,11 @@ color: #000;
                 console.log(selectedFiles)
                 updateSelectedFilesContainer(); // Update the selected files container
             });
+            $(document).on('click', '.delete-file', function() {
+                var index = $(this).data('index');
+                selectedFiles.splice(index, 1); // Remove the selected file from the array
+                updateSelectedFilesContainer(); // Update the selected files container
+            });
         $(document).on('click', ".view-task", function (e) {
                 e.preventDefault();
                 const taskIdElement = $(this).closest("tr").find(".task-id");
@@ -3679,26 +3680,28 @@ if(task?.taskImages[0]?.imageKey?.includes('pdf')){
                                 $("#message").val(data.notes);
                                 $("#dueDate_update").val(data.dueDate);
                                 $("#taskName_update").val(data.taskName);
+                                $("#priority_update").val(data.priority)
                                 var optionText = "Tenant: " + data.tfirstName + " " + data.tlastName + " Property: " + data.propertyName;
                         var optionValue = data.tenantID;
                         $("#property_update").empty()
-                        
-                        $("#property_update").append($("<option></option>").text("Choose..."));
-                        
                         $("#property_update").append($("<option></option>").text(optionText).val(optionValue));
 
                         $("#status_update").find(`option[value="${data.status.toLowerCase()}"]`).prop("selected", true);
 
                                 // $("#assignee_update").find(`option[value="${ID}"]`).prop("selected", true);
                                 $(".select2-selection__rendered").empty()
-                                $(".select2-selection__rendered").append(`<li class="select2-selection__choice" title="${"Choose..."}"><span class="select2-selection__choice__remove" role="presentation">×</span>${"Choose..."}</li>`)
-                                data.AssignTo.forEach(({
+                                if(data.AssignTo.length>=1){
+                                    data.AssignTo.forEach(({
                                     ID,
                                     name
                                 }) => {
                                     $("#assignee_update").find(`option[value="${ID}"]`).prop("selected", true);
                                     $(".select2-selection__rendered").append(`<li class="select2-selection__choice" title="${name}"><span class="select2-selection__choice__remove" role="presentation">×</span>${name}</li>`)
                                 })
+                                }else{
+                                    $(".select2-selection__rendered").append(`<li class="select2-selection__choice" title="${"Choose..."}"><span class="select2-selection__choice__remove" role="presentation">×</span>${"Choose..."}</li>`)
+                                }
+                                
 
                                 $('#myModal_edit').modal('show');
                             });
