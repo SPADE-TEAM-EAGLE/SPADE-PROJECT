@@ -810,7 +810,7 @@
 
                                     <!-- 1 comments start  -->
                                     <div class="d-flex country mt-2">
-                                        <a class="nav-link icon text-dark">
+                                        <a class="nav-link icon text-dark" href="./chats.html">
                                             <i class="fi fi-rs-comment"></i>
                                         </a>
                                         <!-- <img src="../assets\header-img\comment-light.webp"
@@ -819,11 +819,12 @@
                                     <!-- 1 comments start  -->
 
                                     <!-- 2 comments start  -->
-                                    <!-- <div class="d-flex country mt-2">
-                                        <a class="nav-link icon text-dark">
+                                    <div class="d-flex country mt-2">
+                                        <a class="nav-link icon text-dark customIntercomButton">
                                             <i class="fi fi-rs-interrogation"></i>
-                                        </a>
-                                    </div> -->
+                                           
+                                                </a>
+                                    </div>
                                     <!-- 2 comments start  -->
 
                                         <!-- 3 comments start  -->
@@ -1887,7 +1888,7 @@
     </div>
 
     <!-- BACK-TO-TOP -->
-    <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a>
+    <!-- <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a> -->
 
 
     <!-- JQUERY JS -->
@@ -1989,6 +1990,7 @@
     <!-- CHARTJS JS -->
     <script src="../assets/plugins/chart/Chart.bundle.js"></script>
     <script src="../assets/plugins/chart/utils.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.8/sjcl.min.js"></script>
 
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
@@ -2047,12 +2049,52 @@
     </script>
     <script>
         $(document).ready(() => {
-            const propertyId = (new URL(document.location)).searchParams.get("propertyId");
-            // // console.log($("#viewUnits").attr("href"))
-            $("#viewUnits").attr("href", `./property-unit.html?propertyId=${propertyId}`)
-            $("#viewOverview").attr("href", `./view-property.html?propertyId=${propertyId}`)
-            $("#viewTenants").attr("href", `./property-tenant.html?propertyId=${propertyId}`)
-            $("#viewTasks").attr("href", `./property-task.html?propertyId=${propertyId}`)
+            $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/protected',
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function ({ user, image }) {
+                    // console.log()
+                    $("#user-img").attr("src", image)
+                    $("#user-img-dark").attr("src", image)
+                    function toTitleCase(str) {
+                        return str.replace(/\w\S*/g, function (txt) {
+                            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                        });
+                    }
+                    $("#user-name").text(toTitleCase(user))
+                    $("#header-user").text(toTitleCase(user))
+
+
+
+                },
+                error: function (xhr, status, error) {
+                    $("#myModal_warning").modal("show");
+                    setTimeout(function () {
+                        $('#myModal_warning').modal('hide');
+                        window.location = '../Landlord/login_module.html';
+                    }, 2000);
+                    console.log('Error occurred while fetching state and city data.');
+                    console.log(xhr);
+                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                }
+            });
+            const encryptedPropertyId = decodeURIComponent((new URL(document.location)).searchParams.get("property"));
+
+// Decryption
+var password = 'your-secret-password';
+const propertyId = sjcl.decrypt(password, encryptedPropertyId);
+            // const propertyId = (new URL(document.location)).searchParams.get("propertyId");
+            var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
+            // const propertyId = (new URL(document.location)).searchParams.get("propertyId");
+            
+            $("#viewUnits").attr("href", `./property-unit.html?property=${encodedPropertyId}`)
+            $("#viewOverview").attr("href", `./view-property.html?property=${encodedPropertyId}`)
+            $("#viewTenants").attr("href", `./property-tenant.html?property=${encodedPropertyId}`)
+            $("#viewTasks").attr("href", `./property-task.html?property=${encodedPropertyId}`)
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/viewProperty',
                 type: 'GET',
