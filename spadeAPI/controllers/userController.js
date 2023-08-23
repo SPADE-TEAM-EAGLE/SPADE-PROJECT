@@ -53,6 +53,7 @@ const {
   getUserById,
   getTenantById,
   updateTenantActive,
+  getPropertyDashboardData,
 } = require("../constants/queries");
 
 const { hashedPassword } = require("../helper/hash");
@@ -2057,7 +2058,23 @@ exports.ProfileComplete = async (req, res) => {
 
 }
 
+exports.filterOutDashbordDataByProperty = async (req, res) => {
+  try {
+    const { propertyId } = req.params;
+    
+    const getAllPropertyData = await queryRunner(getPropertyDashboardData, [
+      propertyId,
+    ]);
+    res.status(200).json({
+      property: getAllPropertyData[0],
+    });
 
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+};
 // check property etc
 exports.checkSystem = async (req, res) => {
   try {
@@ -2116,5 +2133,4 @@ exports.checkSystem = async (req, res) => {
       message: error.message,
     });
   }
-
 }

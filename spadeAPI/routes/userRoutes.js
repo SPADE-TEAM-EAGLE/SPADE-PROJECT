@@ -171,6 +171,7 @@ router.get("/LandlordMessages/:chatId", verifyToken, messageClt.getAllMessages);
 router.get('/ProfileComplete',verifyToken,userController.ProfileComplete);
 router.get('/checkSystem' ,userController.checkSystem);
  
+router.get("/getPropertyDashboard/:propertyId", verifyToken, userController.filterOutDashbordDataByProperty);
 
 // leads routes start
 router.post("/createLead", verifyToken, leadsClt.createNewLead);

@@ -259,7 +259,59 @@ GROUP BY
 ORDER BY 
     property.created_at DESC;
 `;
-
+exports.getPropertyDashboardData = `
+  SELECT
+  property.propertyCount,
+  propertyunits.vacantCount,
+  propertyunits.occupiedCount,
+  task.onGoingTaskCount,
+  task.finishedTaskCount,
+  task.totalTask,
+  invoice.totalAmount,
+  invoice.totalPaidAmount,
+  invoice.totalUnPaidAmount
+FROM
+  (SELECT
+      property.id AS propertyId,
+      COUNT(DISTINCT property.id) AS propertyCount
+  FROM
+      property
+  WHERE
+      property.id = ?) AS property
+LEFT JOIN
+  (SELECT
+      propertyId,
+      SUM(CASE WHEN status = 'Vacant' THEN 1 ELSE 0 END) AS vacantCount,
+      SUM(CASE WHEN status = 'Occupied' THEN 1 ELSE 0 END) AS occupiedCount
+  FROM
+      propertyunits
+  GROUP BY
+      propertyId) AS propertyunits ON property.propertyId = propertyunits.propertyId
+LEFT JOIN
+  (SELECT
+      tenants.propertyID AS propertyId,
+      COUNT(CASE WHEN task.status = 'in progress' THEN 1 END) AS onGoingTaskCount,
+      COUNT(CASE WHEN task.status = 'completed' THEN 1 END) AS finishedTaskCount,
+      COUNT(task.id) AS totalTask
+  FROM
+      tenants
+  LEFT JOIN
+      task ON tenants.id = task.tenantID
+  GROUP BY
+      tenants.propertyID) AS task ON property.propertyId = task.propertyId
+LEFT JOIN
+  (SELECT
+      tenants.propertyID AS propertyId,
+      SUM(CASE WHEN invoice.status = 'paid' THEN invoice.totalAmount ELSE 0 END) AS totalPaidAmount,
+      SUM(CASE WHEN invoice.status = 'Unpaid' THEN invoice.totalAmount ELSE 0 END) AS totalUnPaidAmount,
+      SUM(invoice.totalAmount) AS totalAmount
+  FROM
+      tenants
+  LEFT JOIN
+      invoice ON tenants.id = invoice.tenantID
+  GROUP BY
+      tenants.propertyID) AS invoice ON property.propertyId = invoice.propertyId;
+`
 exports.createLead =
   "INSERT INTO leads (firstName, middleName, lastName, phoneNum,Email,propertyInfo,unitInfo,leadDetails,sourceCampaign,landlordId) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
