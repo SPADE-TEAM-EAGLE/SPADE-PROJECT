@@ -83,7 +83,6 @@ exports.openOrder = async (req,res) => {
 
 // ###################################### CREATE USER #############################################################
 exports.createUserPayment = async (req,res) => {
-// const apiUrl = config.APIKey;
 const requestData = {
   merchantId: config.merchantId,
   merchantSiteId: config.merchantSiteId,
@@ -102,35 +101,15 @@ const requestData = {
   dateOfBirth: "01-01-2023",
   county:"Pakistan",
   timeStamp: timestamp,
-  // checksum: sha256(config.merchantId+config.merchantSiteId+"123"+config.clientRequestId+"John"+"Smith"+"some street"+"Sindh"+"Karachi"+"234567"+"GB"+"090078601"+"en_UK"+"john.smith@test.com"+""+timestamp+config.Secret_Key)
-  // checksum: sha256(config.merchantId+config.merchantSiteId+"123"+config.clientRequestId+"John"+"Smith"+timestamp+config.Secret_Key)
-  // checksum: sha256(utf8.encode(config.merchantId)+utf8.encode(config.merchantSiteId)+utf8.encode("123")+utf8.encode(config.clientRequestId)+utf8.encode("John")+utf8.encode("Smith")+""+""+""+""+""+""+""+""+""+timestamp+config.Secret_Key)
-  checksum: sha256(utf8.encode(config.merchantId)+utf8.encode(config.merchantSiteId)+utf8.encode("123")+utf8.encode(config.clientRequestId)+utf8.encode("John")+utf8.encode("Smith")+utf8.encode(timestamp)+utf8.encode(config.Secret_Key))
-
+  checksum: sha256(utf8.encode(config.merchantId)+utf8.encode(config.merchantSiteId)+utf8.encode("123")+utf8.encode(config.clientRequestId)+utf8.encode("John")+
+            utf8.encode("Smith")+utf8.encode(timestamp)+utf8.encode(config.Secret_Key))
 };
-console.log(timestamp);
-console.log(requestData);
-console.log(utf8.encode(config.merchantId));
-console.log(utf8.encode(config.merchantSiteId));
-console.log(utf8.encode(config.merchantId)+utf8.encode(config.merchantSiteId));
-// const requestData = {
-//   merchantId: config.merchantId,
-//   merchantSiteId: config.merchantSiteId,
-//   clientRequestId: config.clientRequestId,
-//   clientUniqueId: config.clientUniqueId,
-//   currency: currency,
-//   amount: amount,
-//   timeStamp: timestamp,
-//   checksum: sha256(config.merchantId+config.merchantSiteId+config.clientRequestId+amount+currency+timestamp+config.Secret_Key)
-// };
-
 const requestOptions = {
   method: "POST",
   headers: {
     "Content-Type": "application/json"
   }
 };
-
 const reqq = request("https://ppp-test.nuvei.com/ppp/api/v1/createUser.do", requestOptions, (response) => {
   let responseData = ''; 
   response.on('data', (chunk) => {
@@ -139,13 +118,8 @@ const reqq = request("https://ppp-test.nuvei.com/ppp/api/v1/createUser.do", requ
   response.on('end', () => {
     try {
       const data = JSON.parse(responseData);
-      // console.log(data);
       res.status(200).json({
           data
-          // sessionToken:data.sessionToken,
-          // clientUniqueId:data.clientUniqueId,
-          // merchantId:data.merchantId,
-          // merchantSiteId:data.merchantSiteId,
       })
     } catch (error) {
       console.error('Error parsing response:', error);
@@ -163,7 +137,6 @@ reqq.on('error', (error) => {
       error,
   })
 }); 
-// Send the request body
 reqq.write(JSON.stringify(requestData));
 reqq.end();
 };

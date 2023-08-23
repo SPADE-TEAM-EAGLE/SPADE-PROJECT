@@ -188,5 +188,5 @@ router.get("/taskByIDTenant" ,verifyToken ,tenantPortalController.taskByIDTenant
 
 router.post("/openOrder", paymentIntegration.openOrder);
 router.post("/createUserPayment", paymentIntegration.createUserPayment);
-router.post("/createUserPaymentasdfgh", paymentIntegration.createUserPaymentasdfgh);
+// router.post("/createUserPaymentasdfgh", paymentIntegration.createUserPaymentasdfgh);
 module.exports = router;
