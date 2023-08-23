@@ -53,6 +53,7 @@ function GetNotification(){
       $(".all_span").text(`(${notification.length})`);
       $(".inbox_span").text(`(${read.length})`);
       $(".Unread_span").text(`(${unread.length})`);
+      $("#count_unread").text(unread.length > 0 ? unread.length : '0');
       $(".archive_span").text(`(${notification.length})`);
       $("#notification-container").empty();
       notification?.forEach((item) => {
