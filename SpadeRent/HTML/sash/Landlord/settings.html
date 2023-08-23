@@ -2953,7 +2953,7 @@
                                                                                     <div
                                                                                         class="row d-flex align-items-stretch justify-content-center">
                                                                                         <div
-                                                                                            class="col-lg-3 col-xl-3 col-md-8 col-sm-12 mb-3">
+                                                                                            class="col-lg-3 col-xl-3 col-md-8 col-sm-12 mb-3 free-card">
                                                                                             <div
                                                                                                 class="h-100 card p-5 border-primary pricing-card advanced 1">
                                                                                                 <div
@@ -3471,7 +3471,7 @@
                                                                                     <div
                                                                                         class="row d-flex align-items-stretch justify-content-center">
                                                                                         <div
-                                                                                            class="col-lg-3 col-xl-3 col-md-8 col-sm-12 mb-3">
+                                                                                            class="col-lg-3 col-xl-3 col-md-8 col-sm-12 mb-3 free-card">
                                                                                             <div
                                                                                                 class="h-100 card p-5 border-primary pricing-card advanced 1">
                                                                                                 <div
@@ -9567,11 +9567,17 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                                     $(`#${item} .card-btnn span`).append("Upgrade " + names[item] + " " + `<img src="../assets/images/arrow-yellow.svg" class="float-right mt-0 mr-2" alt="">`);
                                     $(`#${item}`).removeClass("bg-primary");
                                     })
+                                    // console.log($(".free-card"))
+                                    $(".free-card").each(function(){
+                                        $(this).addClass("d-none");
+                                        
+                                    
+                                    })
                                 }
                             });
                                 }
 
-                                else{
+                                else if(4<parseInt(response.planID)){
                                     [5,6,7].forEach(function (item) {
                                         if (item < parseInt(response.planID)) {
                                     console.log(names[item])
@@ -9590,10 +9596,22 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                                     $(`#${item} .card-btnn span`).append("Upgrade " + names[item] + " " + `<img src="../assets/images/arrow-yellow.svg" class="float-right mt-0 mr-2" alt="">`);
                                     $(`#${item}`).removeClass("bg-primary");
                                     })
+                                    $(".free-card").each(function(){
+                                        $(this).addClass("d-none");
+                                        
+                                    
+                                    })
                                 }
                             });
                                 }
-                                
+                                else{
+                                    $(".free-card .card").each(function(){
+                                        $(this).addClass("bg-primary");
+                                        $(this).find(".card-btnn span").empty();
+                                        $(this).find(".card-btnn span").text("Selected");
+                                    
+                                    })
+                                }
 
                             $(`#${response.planID}`).addClass("bg-primary");
 

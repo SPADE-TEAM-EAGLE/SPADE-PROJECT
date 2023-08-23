@@ -962,7 +962,7 @@
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
                                 <div class="d-flex justify-content-end">
                                     <div class="form-group me-3">
-                                        <select class="form-select form-select">
+                                        <select class="form-select form-select" id="property-select">
                                             <option selected>Filter by Property</option>
                                         
                                         </select>
@@ -2153,6 +2153,7 @@
             $("#startDate_amount").val(startDate)
             $("#endDate_amount").val(endDate)
             // /getDashPropertyData
+
             $("#startDate_invoice").on('change', function () {
                 startDate = $(this).val()
                 $.ajax({
@@ -2528,6 +2529,9 @@
                 });
             })
             $("#resetLayout").on('click', function () {
+                ["property-status",	"amount-status","task-card","task-overview","tenants-status","prospect-status","invoice-card","banking-stats","account-status"].forEach((item) => {
+                    localStorage.setItem(item,true)
+                })
                 localStorage.removeItem("htmlLayout")
                 window.location = '../Landlord/index.html'
             })
@@ -2563,6 +2567,42 @@
                     console.log(xhr);
                     console.log(error);
                     // console.log('Error occurred while fetching state and city data.');
+                }
+            });
+            
+            $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/allproperty',
+                type: 'GET',
+                contentType: false,
+                processData: false,
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function(response) {
+                    if(!response?.data[0]){
+                        var properties = response?.data[0];
+                        console.log(properties)
+                    var propertySelect = $('#property-select');
+                    propertySelect.empty(); // Clear existing options
+                    propertySelect.append($('<option></option>')
+                        .text("Choose...")
+                    )
+                    properties.forEach(function(property) {
+                        var option = $('<option></option>')
+                            .text(property.propertyName)
+                            .val(property.id);
+                        propertySelect.append(option);
+                    });              
+                    }
+                    
+                },
+                error: function(xhr, status, error) {
+                    $("#myModal_warning_connection").modal("show");
+                            setTimeout(function() {
+                                $('#myModal_warning_connection').modal('hide');
+
+                            }, 2000);
+                    console.log('Error: ' + error);
                 }
             });
             $.ajax({
