@@ -1865,7 +1865,7 @@
                             tenants and interested individuals.</span>
                     </div>
                     <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
                     </button>
                 </div>
                 <div class="modal-body">
@@ -1985,7 +1985,7 @@
                     <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
                         <!-- <div class="card-header border-0 pt-3">
                             <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
                             </button>
                         </div> -->
                         <div class="card-body text-center">
@@ -2154,7 +2154,7 @@
                                                 class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div> -->
                                         <div class="d-flex country mt-2">
-                                            <a class="nav-link icon text-dark">
+                                            <a class="nav-link icon text-dark" href="./chats.html">
                                                 <i class="fi fi-rs-comment"></i>
                                             </a>
                                             <!-- <img src="../assets\header-img\comment-light.webp"
@@ -2953,7 +2953,7 @@
                                                                                     <div
                                                                                         class="row d-flex align-items-stretch justify-content-center">
                                                                                         <div
-                                                                                            class="col-lg-3 col-xl-3 col-md-8 col-sm-12 mb-3">
+                                                                                            class="col-lg-3 col-xl-3 col-md-8 col-sm-12 mb-3 free-card">
                                                                                             <div
                                                                                                 class="h-100 card p-5 border-primary pricing-card advanced 1">
                                                                                                 <div
@@ -3471,7 +3471,7 @@
                                                                                     <div
                                                                                         class="row d-flex align-items-stretch justify-content-center">
                                                                                         <div
-                                                                                            class="col-lg-3 col-xl-3 col-md-8 col-sm-12 mb-3">
+                                                                                            class="col-lg-3 col-xl-3 col-md-8 col-sm-12 mb-3 free-card">
                                                                                             <div
                                                                                                 class="h-100 card p-5 border-primary pricing-card advanced 1">
                                                                                                 <div
@@ -7801,7 +7801,7 @@
                                                             <button class="btn-close" data-bs-dismiss="modal"
                                                                 aria-label="Close" id="top-close">
                                                                 <span aria-hidden="true"><i
-                                                                        class="fi fi-rs-circle-xmark"></i></span>
+                                                                        class="fi fi-rs-circle-xmark text-dark"></i></span>
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
@@ -8914,7 +8914,7 @@
         </div>
 
         <!-- BACK-TO-TOP -->
-        <!-- <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a> -->
+        <!-- <!-- <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a> --> -->
         <a href="#addModal" data-bs-effect="effect-scale" data-bs-toggle="modal" id="add-tenant-side-btn"><i
                 class="fe fe-plus"></i></a>
 
@@ -9547,8 +9547,10 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                             }
                             $('#profile').css('background-image', 'url(' + response.image + ')').addClass('hasImage');
                             const names = { 2: "to Basic", 3: "to Pro", 4: "to Premium", 5: "to Basic", 6: "to Pro", 7: "to Premium" };
-                            [2, 3, 4, 5, 6, 7].forEach(function (item) {
-                                if (item < parseInt(response.planID)) {
+                            
+                                if(4>=parseInt(response.planID)){
+                                    [2, 3, 4].forEach(function (item) {
+                                        if (item < parseInt(response.planID)) {
                                     console.log(names[item])
                                     $(`#${item} .card-btnn span`).empty();
                                     $(`#${item} .card-btnn span`).append("Downgrade " + names[item] + " " + `<img src="../assets/images/arrow-yellow.svg" class="float-right mt-0 mr-2" alt="">`);
@@ -9557,11 +9559,59 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                                     $(`#${item} .card-btnn span`).empty();
                                     $(`#${item} .card-btnn span`).append("Upgrade " + names[item] + " " + `<img src="../assets/images/arrow-yellow.svg" class="float-right mt-0 mr-2" alt="">`);
                                     $(`#${item}`).removeClass("bg-primary");
-                                } else {
+                                } else if(item == parseInt(response.planID)){
                                     $(`#${item} .card-btnn span`).empty();
                                     $(`#${item} .card-btnn span`).text("Selected");
+                                    [5,6,7].forEach(function(item){
+                                        $(`#${item} .card-btnn span`).empty();
+                                    $(`#${item} .card-btnn span`).append("Upgrade " + names[item] + " " + `<img src="../assets/images/arrow-yellow.svg" class="float-right mt-0 mr-2" alt="">`);
+                                    $(`#${item}`).removeClass("bg-primary");
+                                    })
+                                    // console.log($(".free-card"))
+                                    $(".free-card").each(function(){
+                                        $(this).addClass("d-none");
+                                        
+                                    
+                                    })
                                 }
                             });
+                                }
+
+                                else if(4<parseInt(response.planID)){
+                                    [5,6,7].forEach(function (item) {
+                                        if (item < parseInt(response.planID)) {
+                                    console.log(names[item])
+                                    $(`#${item} .card-btnn span`).empty();
+                                    $(`#${item} .card-btnn span`).append("Downgrade " + names[item] + " " + `<img src="../assets/images/arrow-yellow.svg" class="float-right mt-0 mr-2" alt="">`);
+                                    $(`#${item}`).removeClass("bg-primary");
+                                } else if (item > parseInt(response.planID)) {
+                                    $(`#${item} .card-btnn span`).empty();
+                                    $(`#${item} .card-btnn span`).append("Upgrade " + names[item] + " " + `<img src="../assets/images/arrow-yellow.svg" class="float-right mt-0 mr-2" alt="">`);
+                                    $(`#${item}`).removeClass("bg-primary");
+                                } else if(item == parseInt(response.planID)){
+                                    $(`#${item} .card-btnn span`).empty();
+                                    $(`#${item} .card-btnn span`).text("Selected");
+                                    [2,3,4].forEach(function(item){
+                                        $(`#${item} .card-btnn span`).empty();
+                                    $(`#${item} .card-btnn span`).append("Upgrade " + names[item] + " " + `<img src="../assets/images/arrow-yellow.svg" class="float-right mt-0 mr-2" alt="">`);
+                                    $(`#${item}`).removeClass("bg-primary");
+                                    })
+                                    $(".free-card").each(function(){
+                                        $(this).addClass("d-none");
+                                        
+                                    
+                                    })
+                                }
+                            });
+                                }
+                                else{
+                                    $(".free-card .card").each(function(){
+                                        $(this).addClass("bg-primary");
+                                        $(this).find(".card-btnn span").empty();
+                                        $(this).find(".card-btnn span").text("Selected");
+                                    
+                                    })
+                                }
 
                             $(`#${response.planID}`).addClass("bg-primary");
 

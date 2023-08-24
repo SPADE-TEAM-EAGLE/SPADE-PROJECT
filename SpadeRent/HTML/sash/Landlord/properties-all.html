@@ -658,7 +658,7 @@
                     <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
                         <!-- <div class="card-header border-0 pt-3">
                             <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
                             </button>
                         </div> -->
                         <div class="card-body text-center">
@@ -862,7 +862,7 @@
 
                     </div>
                     <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="top-close">
-                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
                     </button>
                 </div>
                 <div class="modal-body">
@@ -1000,7 +1000,7 @@
                 <div class="modal-header">
 
                     <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="succes-close">
-                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
                     </button>
                 </div>
                 <div class="modal-body succes-modal" style="padding-top: 70px;padding-bottom: 70px;">
@@ -1030,7 +1030,7 @@
                     <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
                         <!-- <div class="card-header border-0 pt-3">
                             <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
                             </button>
                         </div> -->
                         <div class="card-body text-center">
@@ -1058,7 +1058,7 @@
                     <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
                         <div class="card-header border-0 pt-3">
                             <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
                             </button>
                         </div>
                         <div class="card-body text-center">
@@ -1125,7 +1125,7 @@
                             from condos and single-family homes to retail stores and parking lots.</span>
                     </div>
                     <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
                     </button>
                 </div>
                 <div class="modal-body">
@@ -1285,7 +1285,7 @@
 
                                         <!-- 1 comments start  -->
                                         <div class="d-flex country mt-2">
-                                            <a class="nav-link icon text-dark">
+                                            <a class="nav-link icon text-dark" href="./chats.html">
                                                 <i class="fi fi-rs-comment"></i>
                                             </a>
                                             <!-- <img src="../assets\header-img\comment-light.webp"
@@ -2310,7 +2310,7 @@
     </div>
 
     <!-- BACK-TO-TOP -->
-    <!-- <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a> -->
+    <!-- <!-- <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a> --> -->
     <a href="#addModal" data-bs-effect="effect-scale" data-bs-toggle="modal" id="add-tenant-side-btn"><i
             class="fe fe-plus"></i></a>
 
@@ -2417,6 +2417,8 @@
     <script src="../assets/js/email-verification.js"></script>
     <script src="../assets/js/intercom.js"></script>
     <script src="../assets/js/getNotification.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.8/sjcl.min.js"></script>
+
     <script>
         $(document).ready(function() {
             
@@ -3364,11 +3366,15 @@ selectedFiles.forEach(function(file, index) {
                                 '<span>' + property.city + ', ' + property.state + ' ' + property.zipCode +
                                 '</span>' +
                                 '</td>';
+                                var password = 'your-secret-password';
+var encryptedPropertyId = sjcl.encrypt(password, property.id.toString());
 
+// Include the encrypted value in the URL
+var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                             var dropdownMenu =
                                 '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
                                 '<ul class="dropdown-menu dropdown-menu-top">' +
-                                `<li><a class="dropdown-item text-success" href="./view-property.html?propertyId=${property.id}">View</a></li>` +
+                                    `<li><a class="dropdown-item text-success" href="./view-property.html?property=${encodedPropertyId}">View</a></li>` +
                                 '<li><a class="edit-option dropdown-item text-primary" href="javascript:void(0)">Edit</a></li>' +
                                 '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>'
                             '</ul></td>';
@@ -3381,7 +3387,7 @@ tableBody.append(row);
 
                         });
                         $("#global-loader").fadeOut("slow")
-                        $('.edit-option').click(function(e) {
+                        $(document).on("click",".edit-option",function(e) {
                             e.preventDefault();
                             const propertyIdElement = $(this).closest("tr").find(".property-id");
 
@@ -3422,7 +3428,7 @@ tableBody.append(row);
                             $("#property-name").text(data.propertyName)
                             $('#myModal_edit').modal('show');
                         });
-                        $('.delete-option').click(function(e) {
+                        $(document).on("click",".delete-option",function(e) {
                             e.preventDefault(); // Prevent default anchor behavior
                             const propertyIdElement = $(this).closest("tr").find(".property-id");
                             propertyId = propertyIdElement.text();

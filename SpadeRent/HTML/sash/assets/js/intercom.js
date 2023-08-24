@@ -27,6 +27,7 @@ $.ajax({
         // Attach a click event listener to your custom button
         document.querySelectorAll('.customIntercomButton').forEach(element => {
     element.addEventListener('click', openIntercomPopup);
+    
 });
 
         

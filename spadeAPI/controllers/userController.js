@@ -61,7 +61,7 @@ const { fileUpload, deleteImageFromS3 } = require("../helper/S3Bucket");
 const { verifyMailCheck } = require("../helper/emailVerify");
 const userServices = require("../Services/userServices");
 const { log } = require("console");
-const { NotificationSocket } = require("../app.js");
+// const { NotificationSocket } = require("../app.js");
 const config = process.env;
 
 exports.createUser = async function (req, res) {
@@ -157,6 +157,8 @@ exports.getUser = (req, res) => {
     imageKey: req.user.imageKey,
     planID: req.user.planID,
     isActive: req.user.isActive,
+    landlordId:req.user.landlordID,
+    propertyID:req.user.propertyID
   });
 };
 

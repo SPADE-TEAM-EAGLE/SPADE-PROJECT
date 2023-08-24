@@ -1113,7 +1113,7 @@
                     <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
                         <!-- <div class="card-header border-0 pt-3">
                             <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
                             </button>
                         </div> -->
                         <div class="card-body text-center">
@@ -1173,7 +1173,7 @@
                             tenants and interested individuals.</span>
                     </div>
                     <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark text-dark"></i></span>
                     </button>
                 </div>
                 <div class="modal-body">
@@ -1502,7 +1502,7 @@
                     <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
                         <div class="card-header border-0 pt-3">
                             <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark text-dark"></i></span>
                             </button>
                         </div>
                         <div class="card-body text-center">
@@ -1785,13 +1785,11 @@
                                         </div> -->
                                         <!-- 1 comments start  -->
                                         <!-- 2 comments start  -->
-                                        <div class="d-flex country">
-                                            <img src="../assets\header-img\question.svg"
-                                                class="avatarr profile-user brroundd nav-link cover-image dark-layout">
-                                        </div>
-                                        <div class="d-flex country">
-                                            <img src="../assets\header-img\question-light.webp"
-                                                class="avatarr profile-user nav-link brroundd cover-image light-layout">
+                                        <div class="d-flex country mt-2">
+                                            <a class="nav-link icon text-dark customIntercomButton">
+                                        <i class="fi fi-rs-interrogation"></i>
+                                       
+                                            </a>
                                         </div>
                                         <!-- 2 comments start  -->
                                         <!-- 3 comments start  -->
@@ -1800,8 +1798,9 @@
                                                 class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
                                         <div class="dropdown  d-flex notifications">
-                                            <a class="nav-link icon" data-bs-toggle="dropdown"><i
-                                                    class="fe fe-bell"></i><span class=" pulse"></span>
+                                            <a class="nav-link icon" data-bs-toggle="sidebar-right"
+                                                data-target=".sidebar-right"><i class="fe fe-bell"></i><span
+                                                    class=" pulse"></span>
                                             </a>
                                             <!-- <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                                 <div class="drop-heading border-bottom">
@@ -1969,13 +1968,12 @@
                                         class="side-menu__label">Tasks</span>
                                 </a>
                             </li>
-                            <li class="slide">
+                            <!-- <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="coming-soon.html"><i
                                         class="side-menu__icon fi fi-rs-comment"></i><span
                                         class="side-menu__label">Messages</span>
-                                    <!-- <i class="angle fe fe-chevron-right"></i> -->
                                 </a>
-                            </li>
+                            </li> -->
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="coming-soon.html">
                                     <i class="side-menu__icon fi fi-rs-bell"></i>
@@ -2885,446 +2883,67 @@
                 <!--app-content close-->
             </div>
             <!-- Sidebar-right -->
-            <div class="sidebar sidebar-right sidebar-animate">
-                <div class="panel panel-primary card mb-0 shadow-none border-0">
-                    <div class="tab-menu-heading border-0 d-flex p-3">
-                        <div class="card-title mb-0 text-dark fw-bold">
-                            <!-- <i class="fe fe-bell me-2"></i> -->
-                            <!-- <span class=" pulse"></span> -->
-                            Notifications <a href="javascript:void(0);"
-                                class="text-primary text-decoration-underline">Mark all as read</a>
-                        </div>
-                        <div class="card-options ms-auto">
-                            <a href="javascript:void(0);" class="sidebar-icon text-end float-end me-3 mb-1"
-                                data-bs-toggle="sidebar-right" data-target=".sidebar-right"><i
-                                    class="fe fe-x text-dark"></i></a>
-                        </div>
+   <div class="sidebar sidebar-right sidebar-animate">
+    <div class="panel panel-primary card mb-0 shadow-none border-0">
+        <div class="tab-menu-heading border-0 d-flex p-3">
+            <div class="card-title mb-0 text-dark fw-bold">
+                <!-- <i class="fe fe-bell me-2"></i> -->
+                <!-- <span class=" pulse"></span> -->
+                Notifications <a href="javascript:void(0);" class="text-primary text-decoration-underline "
+                    id="updateAllNotifyRead">Mark all
+                    as read</a>
+            </div>
+            <div class="card-options ms-auto">
+                <a href="javascript:void(0);" class="sidebar-icon text-end float-end me-3 mb-1"
+                    data-bs-toggle="sidebar-right" data-target=".sidebar-right"><i
+                        class="fe fe-x text-dark"></i></a>
+            </div>
+        </div>
+        <div class="panel-body tabs-menu-body latest-tasks p-0 border-0">
+            <div class="tabs-menu border-bottom">
+                <!-- Tabs -->
+                <ul class="nav panel-tabs">
+                    <li><a href="#side1" data-bs-toggle="tab" class="text-dark active">All<span
+                                class="all_span"></span></a></li>
+                    <li><a href="#side2" data-bs-toggle="tab" class="text-dark">Inbox <span
+                                class="inbox_span"></span></a></li>
+                    <li><a href="#side3" data-bs-toggle="tab" class="text-dark">Unread <span
+                                class="Unread_span"></span></a></li>
+                    <li><a href="#side4" data-bs-toggle="tab" class="text-dark">Archive <span
+                                class="archive_span"></span></a></li>
+                </ul>
+            </div>
+            <div class="tab-content">
+               
+                <div class="tab-pane active" id="side1">
+                    <div class="list-group list-group-flush" id="notification-container">
+
+
                     </div>
-                    <div class="panel-body tabs-menu-body latest-tasks p-0 border-0">
-                        <div class="tabs-menu border-bottom">
-                            <!-- Tabs -->
-                            <ul class="nav panel-tabs">
-                                <li><a href="#side1" data-bs-toggle="tab" class="text-dark">All</a></li>
-                                <li><a href="#side2" data-bs-toggle="tab" class="text-dark">Inbox (25)</a></li>
-                                <li><a href="#side3" data-bs-toggle="tab" class="text-dark">Unread (5)</a></li>
-                                <li><a href="#side4" data-bs-toggle="tab" class="text-dark">Archive (0)</a></li>
-                            </ul>
-                        </div>
-                        <div class="tab-content">
-                            <!-- <div class="tab-pane " id="side1">
-                        <div class="p-3 fw-semibold ps-5">Feeds</div>
-                        <div class="card-body pt-2">
-                            <div class="browser-stats">
-                                <div class=""></div>
-                                <div class="row mb-4">
-                                    <div class="col-sm-2 mb-sm-0 mb-3">
-                                        <span class="feeds avatar-circle brround bg-primary-transparent"><i
-                                                class="fe fe-user text-primary"></i></span>
-                                    </div>
-                                    <div class="col-sm-10 ps-sm-0">
-                                        <div class="d-flex align-items-end justify-content-between ms-2">
-                                            <h6 class="">New user registered</h6>
-                                            <div>
-                                                <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
-                                                <a href="javascript:void(0)"><i class="fe fe-x"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mb-4">
-                                    <div class="col-sm-2 mb-sm-0 mb-3">
-                                        <span class="feeds avatar-circle avatar-circle-secondary brround bg-secondary-transparent"><i
-                                                class="fe fe-shopping-cart text-secondary"></i></span>
-                                    </div>
-                                    <div class="col-sm-10 ps-sm-0">
-                                        <div class="d-flex align-items-end justify-content-between ms-2">
-                                            <h6 class="">New order delivered</h6>
-                                            <div>
-                                                <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
-                                                <a href="javascript:void(0)"><i class="fe fe-x"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mb-4">
-                                    <div class="col-sm-2 mb-sm-0 mb-3">
-                                        <span class="feeds avatar-circle avatar-circle-danger brround bg-danger-transparent"><i
-                                                class="fe fe-bell text-danger"></i></span>
-                                    </div>
-                                    <div class="col-sm-10 ps-sm-0">
-                                        <div class="d-flex align-items-end justify-content-between ms-2">
-                                            <h6 class="">You have pending tasks</h6>
-                                            <div>
-                                                <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
-                                                <a href="javascript:void(0)"><i class="fe fe-x"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mb-4">
-                                    <div class="col-sm-2 mb-sm-0 mb-3">
-                                        <span class="feeds avatar-circle avatar-circle-warning brround bg-warning-transparent"><i
-                                                class="fe fe-gitlab text-warning"></i></span>
-                                    </div>
-                                    <div class="col-sm-10 ps-sm-0">
-                                        <div class="d-flex align-items-end justify-content-between ms-2">
-                                            <h6 class="">New version arrived</h6>
-                                            <div>
-                                                <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
-                                                <a href="javascript:void(0)"><i class="fe fe-x"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mb-4">
-                                    <div class="col-sm-2 mb-sm-0 mb-3">
-                                        <span class="feeds avatar-circle avatar-circle-pink brround bg-pink-transparent"><i
-                                                class="fe fe-database text-pink"></i></span>
-                                    </div>
-                                    <div class="col-sm-10 ps-sm-0">
-                                        <div class="d-flex align-items-end justify-content-between ms-2">
-                                            <h6 class="">Server #1 overloaded</h6>
-                                            <div>
-                                                <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
-                                                <a href="javascript:void(0)"><i class="fe fe-x"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-2 mb-sm-0 mb-3">
-                                        <span class="feeds avatar-circle avatar-circle-info brround bg-info-transparent"><i
-                                                class="fe fe-check-circle text-info"></i></span>
-                                    </div>
-                                    <div class="col-sm-10 ps-sm-0">
-                                        <div class="d-flex align-items-end justify-content-between ms-2">
-                                            <h6 class="">New project launched</h6>
-                                            <div>
-                                                <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
-                                                <a href="javascript:void(0)"><i class="fe fe-x"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-3 fw-semibold ps-5">Settings</div>
-                        <div class="card-body pt-2">
-                            <div class="browser-stats">
-                                <div class="row mb-4">
-                                    <div class="col-sm-2 mb-sm-0 mb-3">
-                                        <span class="feeds avatar-circle brround bg-primary-transparent"><i
-                                                class="fe fe-settings text-primary"></i></span>
-                                    </div>
-                                    <div class="col-sm-10 ps-sm-0">
-                                        <div class="d-flex align-items-end justify-content-between ms-2">
-                                            <h6 class="">General Settings</h6>
-                                            <div>
-                                                <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mb-4">
-                                    <div class="col-sm-2 mb-sm-0 mb-3">
-                                        <span class="feeds avatar-circle avatar-circle-secondary brround bg-secondary-transparent"><i
-                                                class="fe fe-map-pin text-secondary"></i></span>
-                                    </div>
-                                    <div class="col-sm-10 ps-sm-0">
-                                        <div class="d-flex align-items-end justify-content-between ms-2">
-                                            <h6 class="">Map Settings</h6>
-                                            <div>
-                                                <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mb-4">
-                                    <div class="col-sm-2 mb-sm-0 mb-3">
-                                        <span class="feeds avatar-circle avatar-circle-danger brround bg-danger-transparent"><i
-                                                class="fe fe-headphones text-danger"></i></span>
-                                    </div>
-                                    <div class="col-sm-10 ps-sm-0">
-                                        <div class="d-flex align-items-end justify-content-between ms-2">
-                                            <h6 class="">Support Settings</h6>
-                                            <div>
-                                                <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mb-4">
-                                    <div class="col-sm-2 mb-sm-0 mb-3">
-                                        <span class="feeds avatar-circle avatar-circle-warning brround bg-warning-transparent"><i
-                                                class="fe fe-credit-card text-warning"></i></span>
-                                    </div>
-                                    <div class="col-sm-10 ps-sm-0">
-                                        <div class="d-flex align-items-end justify-content-between ms-2">
-                                            <h6 class="">Payment Settings</h6>
-                                            <div>
-                                                <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mb-4">
-                                    <div class="col-sm-2 mb-sm-0 mb-3">
-                                        <span class="feeds avatar-circle avatar-circle-pink brround bg-pink-transparent"><i
-                                                class="fe fe-bell text-pink"></i></span>
-                                    </div>
-                                    <div class="col-sm-10 ps-sm-0">
-                                        <div class="d-flex align-items-end justify-content-between ms-2">
-                                            <h6 class="">Notification Settings</h6>
-                                            <div>
-                                                <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
-                            <div class="tab-pane active" id="side1">
-                                <div class="list-group list-group-flush" id="notification-container">
-                                    <!-- <div class="pt-3 fw-semibold ps-5">Today</div> -->
-                                    <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
-                                </div>
-                            </div>
-                            <div class="tab-pane" id="side2">
-                                <div class="list-group list-group-flush">
-                                    <!-- <div class="pt-3 fw-semibold ps-5">Today</div> -->
-                                    <div class="list-group-item d-flex align-items-center justify-content-between">
-                                        <div class="d-flex align-items-center">
-                                            <div class="me-2">
-                                                <span class="avatar avatar-md brround cover-image"
-                                                    data-bs-image-src="../assets/images/users/2.jpg"><span
-                                                        class="avatar-status bg-success"></span>
-                                            </div>
-                                            <div class="">
-                                                <a href="javascript:void(0);">
-                                                    <div class="fw-semibold text-dark fw-bold fs-15"
-                                                        data-bs-toggle="modal" data-target="#chatmodel">David</div>
-                                                    <span class="text-dark"> 1436 Jersey Street > Jersey</span>
-                                                    <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="">
-                                            <span class="fs-12 text-dark">2 min ago</span>
-                                        </div>
-                                    </div>
-                                    <div class="list-group-item d-flex align-items-center justify-content-between">
-                                        <div class="d-flex align-items-center">
-                                            <div class="me-2">
-                                                <span class="avatar avatar-md brround cover-image"
-                                                    data-bs-image-src="../assets/images/users/2.jpg"><span
-                                                        class="avatar-status bg-success"></span>
-                                            </div>
-                                            <div class="">
-                                                <a href="javascript:void(0);">
-                                                    <div class="fw-semibold text-dark fw-bold fs-15"
-                                                        data-bs-toggle="modal" data-target="#chatmodel">Michael</div>
-                                                    <span class="text-dark"> 1436 Jersey Street > Jersey</span>
-                                                    <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="">
-                                            <span class="fs-12 text-dark">2 min ago</span>
-                                        </div>
-                                    </div>
-                                    <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
-                                </div>
-                            </div>
-                            <div class="tab-pane" id="side3">
-                                <div class="list-group list-group-flush">
-                                    <!-- <div class="pt-3 fw-semibold ps-5">Today</div> -->
-                                    <div class="list-group-item d-flex align-items-center justify-content-between">
-                                        <div class="d-flex align-items-center">
-                                            <div class="me-2">
-                                                <span class="avatar avatar-md brround cover-image"
-                                                    data-bs-image-src="../assets/images/users/2.jpg"><span
-                                                        class="avatar-status bg-success"></span>
-                                            </div>
-                                            <div class="">
-                                                <a href="javascript:void(0);">
-                                                    <div class="fw-semibold text-dark fw-bold fs-15"
-                                                        data-bs-toggle="modal" data-target="#chatmodel">Michael</div>
-                                                    <span class="text-dark"> 1436 Jersey Street > Jersey</span>
-                                                    <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="">
-                                            <span class="fs-12 text-dark">2 min ago</span>
-                                        </div>
-                                    </div>
-                                    <div class="list-group-item d-flex align-items-center justify-content-between">
-                                        <div class="d-flex align-items-center">
-                                            <div class="me-2">
-                                                <span class="avatar avatar-md brround cover-image"
-                                                    data-bs-image-src="../assets/images/users/2.jpg"><span
-                                                        class="avatar-status bg-success"></span>
-                                            </div>
-                                            <div class="">
-                                                <a href="javascript:void(0);">
-                                                    <div class="fw-semibold text-dark fw-bold fs-15"
-                                                        data-bs-toggle="modal" data-target="#chatmodel">Thomas</div>
-                                                    <span class="text-dark"> 1436 Jersey Street > Jersey</span>
-                                                    <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="">
-                                            <span class="fs-12 text-dark">2 min ago</span>
-                                        </div>
-                                    </div>
-                                    <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
-                                </div>
-                            </div>
-                            <div class="tab-pane" id="side4">
-                                <div class="list-group list-group-flush">
-                                    <!-- <div class="pt-3 fw-semibold ps-5">Today</div> -->
-                                    <div class="list-group-item d-flex align-items-center justify-content-between">
-                                        <div class="d-flex align-items-center">
-                                            <div class="me-2">
-                                                <span class="avatar avatar-md brround cover-image"
-                                                    data-bs-image-src="../assets/images/users/2.jpg"><span
-                                                        class="avatar-status bg-success"></span>
-                                            </div>
-                                            <div class="">
-                                                <a href="javascript:void(0);">
-                                                    <div class="fw-semibold text-dark fw-bold fs-15"
-                                                        data-bs-toggle="modal" data-target="#chatmodel">Daniel</div>
-                                                    <span class="text-dark"> 1436 Jersey Street > Jersey</span>
-                                                    <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="">
-                                            <span class="fs-12 text-dark">2 min ago</span>
-                                        </div>
-                                    </div>
-                                    <div class="list-group-item d-flex align-items-center justify-content-between">
-                                        <div class="d-flex align-items-center">
-                                            <div class="me-2">
-                                                <span class="avatar avatar-md brround cover-image"
-                                                    data-bs-image-src="../assets/images/users/2.jpg"><span
-                                                        class="avatar-status bg-success"></span>
-                                            </div>
-                                            <div class="">
-                                                <a href="javascript:void(0);">
-                                                    <div class="fw-semibold text-dark fw-bold fs-15"
-                                                        data-bs-toggle="modal" data-target="#chatmodel">Daniel</div>
-                                                    <span class="text-dark"> 1436 Jersey Street > Jersey</span>
-                                                    <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="">
-                                            <span class="fs-12 text-dark">2 min ago</span>
-                                        </div>
-                                    </div>
-                                    <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
-                                </div>
-                            </div>
-                            <!-- <div class="tab-pane" id="side3">
-                        <ul class="task-list timeline-task">
-                            <li class="d-sm-flex mt-4">
-                                <div>
-                                    <i class="task-icon1"></i>
-                                    <h6 class="fw-semibold">Task Finished<span class="text-muted fs-11 mx-2 fw-normal">09 July 2021</span></h6>
-                                    <p class="text-muted fs-12">Adam Berry finished task on<a href="javascript:void(0)" class="fw-semibold"> Project Management</a>
-                                    </p>
-                                </div>
-                                <div class="ms-auto d-md-flex me-3">
-                                    <a href="javascript:void(0)" class="text-muted me-2"><span
-                                            class="fe fe-edit"></span></a>
-                                    <a href="javascript:void(0)" class="text-muted"><span
-                                            class="fe fe-trash-2"></span></a>
-                                </div>
-                            </li>
-                            <li class="d-sm-flex">
-                                <div>
-                                    <i class="task-icon1"></i>
-                                    <h6 class="fw-semibold">New Comment<span class="text-muted fs-11 mx-2 fw-normal">05
-                                            July 2021</span></h6>
-                                    <p class="text-muted fs-12">Victoria commented on Project <a href="javascript:void(0)" class="fw-semibold"> AngularJS Template</a>
-                                    </p>
-                                </div>
-                                <div class="ms-auto d-md-flex me-3">
-                                    <a href="javascript:void(0)" class="text-muted me-2"><span
-                                            class="fe fe-edit"></span></a>
-                                    <a href="javascript:void(0)" class="text-muted"><span
-                                            class="fe fe-trash-2"></span></a>
-                                </div>
-                            </li>
-                            <li class="d-sm-flex">
-                                <div>
-                                    <i class="task-icon1"></i>
-                                    <h6 class="fw-semibold">New Comment<span class="text-muted fs-11 mx-2 fw-normal">25
-                                            June 2021</span></h6>
-                                    <p class="text-muted fs-12">Victoria commented on Project <a href="javascript:void(0)" class="fw-semibold"> AngularJS Template</a>
-                                    </p>
-                                </div>
-                                <div class="ms-auto d-md-flex me-3">
-                                    <a href="javascript:void(0)" class="text-muted me-2"><span
-                                            class="fe fe-edit"></span></a>
-                                    <a href="javascript:void(0)" class="text-muted"><span
-                                            class="fe fe-trash-2"></span></a>
-                                </div>
-                            </li>
-                            <li class="d-sm-flex">
-                                <div>
-                                    <i class="task-icon1"></i>
-                                    <h6 class="fw-semibold">Task Overdue<span class="text-muted fs-11 mx-2 fw-normal">14
-                                            June 2021</span></h6>
-                                    <p class="text-muted mb-0 fs-12">Petey Cruiser finished task <a href="javascript:void(0)" class="fw-semibold"> Integrated management</a>
-                                    </p>
-                                </div>
-                                <div class="ms-auto d-md-flex me-3">
-                                    <a href="javascript:void(0)" class="text-muted me-2"><span
-                                            class="fe fe-edit"></span></a>
-                                    <a href="javascript:void(0)" class="text-muted"><span
-                                            class="fe fe-trash-2"></span></a>
-                                </div>
-                            </li>
-                            <li class="d-sm-flex">
-                                <div>
-                                    <i class="task-icon1"></i>
-                                    <h6 class="fw-semibold">Task Overdue<span class="text-muted fs-11 mx-2 fw-normal">29
-                                            June 2021</span></h6>
-                                    <p class="text-muted mb-0 fs-12">Petey Cruiser finished task <a href="javascript:void(0)" class="fw-semibold"> Integrated management</a>
-                                    </p>
-                                </div>
-                                <div class="ms-auto d-md-flex me-3">
-                                    <a href="javascript:void(0)" class="text-muted me-2"><span
-                                            class="fe fe-edit"></span></a>
-                                    <a href="javascript:void(0)" class="text-muted"><span
-                                            class="fe fe-trash-2"></span></a>
-                                </div>
-                            </li>
-                            <li class="d-sm-flex">
-                                <div>
-                                    <i class="task-icon1"></i>
-                                    <h6 class="fw-semibold">Task Finished<span class="text-muted fs-11 mx-2 fw-normal">09 July 2021</span></h6>
-                                    <p class="text-muted fs-12">Adam Berry finished task on<a href="javascript:void(0)" class="fw-semibold"> Project Management</a>
-                                    </p>
-                                </div>
-                                <div class="ms-auto d-md-flex me-3">
-                                    <a href="javascript:void(0)" class="text-muted me-2"><span
-                                            class="fe fe-edit"></span></a>
-                                    <a href="javascript:void(0)" class="text-muted"><span
-                                            class="fe fe-trash-2"></span></a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div> -->
-                        </div>
+                </div>
+
+                <div class="tab-pane " id="side2">
+                    <div class="list-group list-group-flush" id="inbox-notification-container">
+
+                    </div>
+                </div>
+                <div class="tab-pane " id="side3">
+                    <div class="list-group list-group-flush" id="unread-notification-container">
+
+
+                    </div>
+                </div>
+                <div class="tab-pane " id="side4">
+                    <div class="list-group list-group-flush" id="Archieve-notification-container">
+
+
                     </div>
                 </div>
             </div>
-            <!--/Sidebar-right-->
+        </div>
+    </div>
+</div>
+<!--/Sidebar-right-->
             <!-- Country-selector modal-->
             <div class="modal fade" id="country-selector">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -3424,7 +3043,7 @@
             <!-- FOOTER END -->
         </div>
         <!-- BACK-TO-TOP -->
-        <!-- <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a> -->
+        <!-- <!-- <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a> --> -->
         <a href="#addModal" data-bs-effect="effect-scale" data-bs-toggle="modal" id="add-tenant-side-btn"><i
                 class="fe fe-plus"></i></a>
 
@@ -3507,7 +3126,9 @@
         <script src="../assets/plugins/chart/Chart.bundle.js"></script>
         <script src="../assets/plugins/chart/utils.js"></script>
         <!-- CHART-DONUT JS -->
+        <script src="../assets/js/intercom-tenant.js"></script>
         <script src="../assets/js/charts.js"></script>
+        <script src="../assets/js/getNotificationTenant.js"></script>
 
         <script>
             // const socket = io("http://ec2-52-45-181-206.compute-1.amazonaws.com:3000");
@@ -3808,7 +3429,7 @@
                                                         }
                                                     }
                                                 } else {
-                                                    messs1 = `<div class="time">No Message</div>`;
+                                                    messs1 = `<div class="time text-dark">No Message</div>`;
                                                 }
                                                 messDiv.html(messs1);
 

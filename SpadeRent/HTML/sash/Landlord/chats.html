@@ -1194,7 +1194,7 @@
                     <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
                         <!-- <div class="card-header border-0 pt-3">
                             <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
                             </button>
                         </div> -->
                         <div class="card-body text-center">
@@ -1254,7 +1254,7 @@
                             tenants and interested individuals.</span>
                     </div>
                     <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
                     </button>
                 </div>
                 <div class="modal-body">
@@ -1583,7 +1583,7 @@
                     <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
                         <div class="card-header border-0 pt-3">
                             <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark"></i></span>
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
                             </button>
                         </div>
                         <div class="card-body text-center">
@@ -1854,7 +1854,7 @@
                                         </div> -->
                                         <!-- 1 comments start  -->
                                         <div class="d-flex country mt-2">
-                                            <a class="nav-link icon text-dark">
+                                            <a class="nav-link icon text-dark" href="./chats.html">
                                                 <i class="fi fi-rs-comment"></i>
                                             </a>
                                             <!-- <img src="../assets\header-img\comment-light.webp"
@@ -3427,7 +3427,7 @@
             <!-- FOOTER END -->
         </div>
         <!-- BACK-TO-TOP -->
-        <!-- <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a> -->
+        <!-- <!-- <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a> --> -->
         <a href="#addModal" data-bs-effect="effect-scale" data-bs-toggle="modal" id="add-tenant-side-btn"><i
                 class="fe fe-plus"></i></a>
         <!-- socket      -->
@@ -3690,7 +3690,7 @@
                         console.log("check rec", message);
                         messs2 = `<div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
                                                                     <div style="width: 36px;height: 36px;" class="me-1"> 
-                                                                        <img src="` + (localStorage.getItem("TenantImg") ? localStorage.getItem("TenantImg") : randomImg) + `" style="border-radius: 50%;height: inherit;" class="message-image" />
+                                                                        <img src="` + (localStorage.getItem("TenantImg") == null ? localStorage.getItem("TenantImg") : randomImg) + `" style="border-radius: 50%;height: inherit;" class="message-image" />
                                                                         </div> 
                                                                     <div class="msg-text">
                                                 <span class="text">${message.message}</span>
@@ -3809,7 +3809,7 @@
                                                             const time = timeArray.slice(0, 2).join(":");
                                                             messs1 += `<div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
                                                                     <div style="width: 36px;height: 36px;" class="me-1"> 
-                                                                        <img src="` + (localStorage.getItem("TenantImg") ? localStorage.getItem("TenantImg") : randomImg) + `" style="border-radius: 50%;height: inherit;" class="message-image" />
+                                                                        <img src="` + (localStorage.getItem("TenantImg") == null ? localStorage.getItem("TenantImg") : randomImg) + `" style="border-radius: 50%;height: inherit;" class="message-image" />
                                                                         </div> 
                                                                     <div class="msg-text">
                                                 <span class="text">` + response.data[i]['message'] + `</span>
@@ -3819,7 +3819,7 @@
                                                         }
                                                     }
                                                 } else {
-                                                    messs1 = `<div class="time">No Message</div>`;
+                                                    messs1 = `<div class="time text-dark">No Message</div>`;
                                                 }
 
                                                 messDiv.html(messs1);
