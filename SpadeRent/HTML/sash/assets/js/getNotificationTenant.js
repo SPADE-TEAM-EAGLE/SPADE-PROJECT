@@ -424,6 +424,7 @@ GetNotification();
 
 $("#updateAllNotifyRead").on("click", function () {
   updateAllNotifyRead();
+  GetNotification();
 });
 function getNotifyData() {
   $.ajax({
