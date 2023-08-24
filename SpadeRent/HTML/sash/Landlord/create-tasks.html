@@ -3040,11 +3040,11 @@
 
                 })
                 // $("#totalAmount").text('$ ' + data.totalAmount)
-                if (data.taskImages) {
+                if (data.taskImages[0].Image) {
                     const files = data.taskImages;
                     $("#view-task-images").empty();
                     files.forEach((file) => {
-                        if (file.Image?.endsWith(".pdf")) {
+                        if (file?.Image?.endsWith(".pdf")) {
                             $("#view-task-images").append(`
                 <a href="${file.Image}" download="${file.imageKey}">
                     <i class="fi fi-rs-file-pdf" style="font-size: 100px;"></i>
@@ -3281,14 +3281,12 @@
                         );
                     } else {
                         // Handle S3 bucket URLs for images and PDFs
-                        if (file.imageKey
-                            .endsWith('.jpg') || file.imageKey
-                                .endsWith('.png')) {
+                        if (file?.imageKey?.endsWith('.jpg') || file?.imageKey?.endsWith('.png')) {
                             fileElement.append(
                                 $('<div>').addClass('file-preview')
                                     .append($('<img style="height:80px">').attr('src', file.Image))
                             );
-                        } else if (file.imageKey.endsWith('.pdf')) {
+                        } else if (file?.imageKey?.endsWith('.pdf')) {
                             fileElement.append(
                                 $('<div>').addClass('file-preview')
                                     .append($('<i style="font-size:50px">').addClass('fi fi-rs-file-pdf'))
@@ -3301,7 +3299,6 @@
                             );
                         }
                     }
-                    console.log(file)
                     if (file instanceof File) {
                         fileElement
                             .append(
@@ -3316,12 +3313,13 @@
                                     .attr('data-index', index)
                             )
                             .appendTo(selectedFilesContainer);
-                    } else {
-                        fileElement
+                    } else if(file instanceof Object) {
+                        if(file.Image){
+                            fileElement
                             .append(
                                 $('<div>')
                                     .addClass('file-details')
-                                    .append($('<span>').text(file.imageKey.includes('pdf') ? "PDF-" + (index + 1) : "Image-" + (index + 1)))
+                                    .append($('<span>').text(file?.imageKey?.includes('pdf') ? "PDF-" + (index + 1) : "Image-" + (index + 1)))
                             )
                             .append(
                                 $('<span>')
@@ -3330,6 +3328,7 @@
                                     .attr('data-index', index)
                             )
                             .appendTo(selectedFilesContainer);
+                        }
                     }
 
                 });

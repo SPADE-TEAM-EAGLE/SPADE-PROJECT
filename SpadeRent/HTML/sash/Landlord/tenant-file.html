@@ -2207,6 +2207,7 @@
     <script src="../assets/js/email-verification.js"></script>
     <script src="../assets/js/intercom.js"></script>
     <script src="../assets/js/getNotification.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.8/sjcl.min.js"></script>
     <script>
     </script>
 
@@ -2224,6 +2225,43 @@
         // }
         let selectedFiles = []
         $(document).ready(() => {
+            $.ajax({
+                    url: 'https://backend.app.spaderent.com/api/spade/protected',
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        console.log(response);
+
+                        function toTitleCase(str) {
+                            return str.replace(/\w\S*/g, function (txt) {
+                                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                            });
+                        }
+                        localStorage.setItem("LandlordImg", response.image)
+                        localStorage.setItem("landlordId", response.userId)
+                        // LandlordImg = response.image;
+                        $("#user-img").attr("src", response.image)
+                        $("#user-img-dark").attr("src", response.image)
+                        $("#user-name").text(toTitleCase(response.user))
+                        $("#header-user").text(toTitleCase(response.user))
+                        // userEmail = email
+                        // id = userId
+                    },
+                    error: function (xhr, status, error) {
+                        localStorage.removeItem('authtoken');
+                        $("#myModal_warning").modal("show");
+                        setTimeout(function () {
+                            $('#myModal_warning').modal('hide');
+                            window.location = '../Landlord/login_module.html';
+                        }, 2000);
+                        console.log('Error occurred while fetching state and city data.');
+                        console.log(xhr);
+                        console.log(error);
+                        // console.log('Error occurred while fetching state and city data.');
+                    }
+                });
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
                 method: 'GET',
@@ -2248,14 +2286,21 @@
                 }
             });
             
-            const tenantId = (new URL(document.location)).searchParams.get("tenantId");
-            // console.log($("#viewUnits").attr("href"))
-            //            
+            const encryptedPropertyId = decodeURIComponent((new URL(document.location)).searchParams.get("tenant"));
 
-            $("#viewProperties").attr("href", `./tenant-properties.html?tenantId=${tenantId}`)
-            $("#viewOverview").attr("href", `./view-tenant.html?tenantId=${tenantId}`)
-            $("#viewFiles").attr("href", `./tenant-file.html?tenantId=${tenantId}`)
-            $("#viewTasks").attr("href", `./tenant-tasks.html?tenantId=${tenantId}`)
+// Decryption
+var password = 'your-secret-password';
+const tenantId = sjcl.decrypt(password, encryptedPropertyId);
+var encodedTenantId = encodeURIComponent(encryptedPropertyId);
+            
+                        
+            $(".company-name").text()
+            $("#viewProperties").attr("href", `./tenant-properties.html?tenant=${encodedTenantId}`)
+            $("#viewOverview").attr("href", `./view-tenant.html?tenant=${encodedTenantId}`)
+            $("#viewFiles").attr("href", `./tenant-file.html?tenant=${encodedTenantId}`)
+            $("#viewTasks").attr("href", `./tenant-tasks.html?tenant=${encodedTenantId}`)         
+
+        
             // console.log(propertyId)
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/getTenantsByID',

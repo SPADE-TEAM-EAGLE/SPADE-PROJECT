@@ -1361,29 +1361,34 @@
                                                 <ul class="dropdown-menu" role="menu">
                                                     <li><a href="javascript:void(0)"><strong class="text-dark">Filter by:</strong></a>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">A-Z Alphabets</a>
+                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">IMAGE</a>
                                                         <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1">
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">Date Modified</a>
+                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">TASK</a>
                                                         <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1">
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">Ascending</a>
+                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">ASSIGNED TO</a>
                                                         <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1">
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">Descending</a>
+                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">DUE AT</a>
                                                         <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1">
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">Recently Added</a>
+                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">RELATED TO</a>
                                                         <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1">
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
+                                                        </div>
+                                                    </li>
+                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">STATUS</a>
+                                                        <div class="form-check m-0">
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
                                                 </ul>
@@ -2108,8 +2113,46 @@
     <script src="../assets/js/email-verification.js"></script>
     <script src="../assets/js/intercom.js"></script>
     <script src="../assets/js/getNotification.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.8/sjcl.min.js"></script>
     <script>
         $(document).ready(function() {
+            $.ajax({
+                    url: 'https://backend.app.spaderent.com/api/spade/protected',
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        console.log(response);
+
+                        function toTitleCase(str) {
+                            return str.replace(/\w\S*/g, function (txt) {
+                                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                            });
+                        }
+                        localStorage.setItem("LandlordImg", response.image)
+                        localStorage.setItem("landlordId", response.userId)
+                        // LandlordImg = response.image;
+                        $("#user-img").attr("src", response.image)
+                        $("#user-img-dark").attr("src", response.image)
+                        $("#user-name").text(toTitleCase(response.user))
+                        $("#header-user").text(toTitleCase(response.user))
+                        // userEmail = email
+                        // id = userId
+                    },
+                    error: function (xhr, status, error) {
+                        localStorage.removeItem('authtoken');
+                        $("#myModal_warning").modal("show");
+                        setTimeout(function () {
+                            $('#myModal_warning').modal('hide');
+                            window.location = '../Landlord/login_module.html';
+                        }, 2000);
+                        console.log('Error occurred while fetching state and city data.');
+                        console.log(xhr);
+                        console.log(error);
+                        // console.log('Error occurred while fetching state and city data.');
+                    }
+                });
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
                 method: 'GET',
@@ -2133,8 +2176,19 @@
                     // console.log('Error occurred while fetching state and city data.');
                 }
             });
-            const tenantId = (new URL(document.location)).searchParams.get("tenantId");
-            // console.log($("#viewUnits").attr("href"))
+            const encryptedPropertyId = decodeURIComponent((new URL(document.location)).searchParams.get("tenant"));
+
+// Decryption
+var password = 'your-secret-password';
+const tenantId = sjcl.decrypt(password, encryptedPropertyId);
+var encodedTenantId = encodeURIComponent(encryptedPropertyId);
+            
+                        
+            $(".company-name").text()
+            $("#viewProperties").attr("href", `./tenant-properties.html?tenant=${encodedTenantId}`)
+            $("#viewOverview").attr("href", `./view-tenant.html?tenant=${encodedTenantId}`)
+            $("#viewFiles").attr("href", `./tenant-file.html?tenant=${encodedTenantId}`)
+            $("#viewTasks").attr("href", `./tenant-tasks.html?tenant=${encodedTenantId}`)
             //            
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/getTenantsByID',
@@ -2166,18 +2220,14 @@
                     console.log(xhr.responseText);
                 }
             });
-            $("#viewProperties").attr("href", `./tenant-properties.html?tenantId=${tenantId}`)
-            $("#viewOverview").attr("href", `./view-tenant.html?tenantId=${tenantId}`)
-            $("#viewFiles").attr("href", `./tenant-file.html?tenantId=${tenantId}`)
-            $("#viewTasks").attr("href", `./tenant-tasks.html?tenantId=${tenantId}`)
-
+            
             function toTitleCase(str) {
                 return str.replace(/\w\S*/g, function(txt) {
                     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                 });
             }
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/tenantTask',
+                url: 'http://localhost:3000/api/spade/tenantTask',
                 type: 'GET',
                 data: {
                     Id: tenantId
@@ -2187,8 +2237,11 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function(response) {
-                    console.log(response.data[0])
-                    $("#property_name").text(response.data[0][0].propertyName)
+                    console.log(response)
+                   if(response?.data[0]?.length > 0){
+                        $("#no-task").show()
+                        $("#task-table").hide()
+                    $("#property_name").text(response?.data[0][0]?.propertyName)
                         // $("#property_address").text(data[0][0].pAddress)
 
                     var tableBody = $('#table_body');
@@ -2254,7 +2307,7 @@
 
                         // Append the row to the table body
                         tableBody.append(row);
-                    })
+                    })}
                 },
                 error: function(xhr, status, error) {
                     $("#myModal_warning_connection").modal("show");
@@ -2265,6 +2318,24 @@
                     console.log(xhr.responseText);
                 }
             })
+            $('input[type="checkbox"]').click(function() {
+            console.log($(this).closest('li').index())
+            var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
+            var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
+            console.log(columnIndex, isColumnVisible)
+            console.log( $(this).find('th:nth-child(' + (columnIndex) + ')'))
+                // Toggle the visibility of the corresponding column
+                    $('table').find('tr').each(function() {
+                var column = $(this).find('th:nth-child(' + (columnIndex) + '), td:nth-child(' + (columnIndex) + ')');
+                isColumnVisible ? column.show() : column.hide();
+            });
+        });
+        $('#typehead').on('keyup', function() {
+                var searchValue = $(this).val().toLowerCase();
+                $('#table_body tr').filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+                });
+            });
         });
     </script>
 
@@ -2280,6 +2351,7 @@
         } else {
             logo.src = '../assets/header-img/question.svg';
         }
+        
     </script>
 
     <script>
