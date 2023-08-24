@@ -3401,7 +3401,7 @@ tableBody.append(row);
 
                         });
                         $("#global-loader").fadeOut("slow")
-                        $('.edit-option').click(function(e) {
+                        $(document).on("click",".edit-option",function(e) {
                             e.preventDefault();
                             const propertyIdElement = $(this).closest("tr").find(".property-id");
 
@@ -3442,7 +3442,7 @@ tableBody.append(row);
                             $("#property-name").text(data.propertyName)
                             $('#myModal_edit').modal('show');
                         });
-                        $('.delete-option').click(function(e) {
+                        $(document).on("click",".delete-option",function(e) {
                             e.preventDefault(); // Prevent default anchor behavior
                             const propertyIdElement = $(this).closest("tr").find(".property-id");
                             propertyId = propertyIdElement.text();
