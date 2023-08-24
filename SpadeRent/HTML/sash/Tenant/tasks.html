@@ -1373,7 +1373,7 @@
                             <div class="card-header justify-content-between">
                                 <div class="d-flex">
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-light font-weight-bold" id="filter_btn"
+                                        <button type="button" class="btn btn-outline-default text-dark py-1" id="filter_btn"
                                             data-bs-toggle="dropdown"><i class="typcn typcn-filter me-2"></i><strong
                                                 id="Filter-btn" style="border: none;">Filter</strong></button>
                                         <ul class="dropdown-menu" role="menu">
@@ -1975,13 +1975,13 @@ if (task.ImageKey) {
                             var assignTo = '<td style="font-weight: 600;text-align: center;display: flex;">' +
                                 (task.AssignTo?.map(({ name, email }) => {
                                     return `
-            <div class="me-2">
-                <img class="avatar brround avatar-md" src="../assets/images/users/2.jpg" alt="avatar-img">
-                <div class="media-body valign-middle mt-0">
-                    <a href="javascript:void(0)" class="text-dark fw-semibold">${name}</a>
-                </div>
-            </div>`;
-                                }) ||"Not assigned") +
+        <div class="me-2">
+            <i class="fi fi-rs-circle-user avatar-md fs-30" ></i>
+            <div class="media-body valign-middle mt-0">
+                <a href="javascript:void(0)" class="text-dark fw-semibold">${name}</a>
+            </div>
+        </div>`;
+                                }).join("") ||"Not assigned") +
                                 '</td>';
 
                             var dueDate = '<td class="dueDate" style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + (task.dueDate ||"Not Set") + '</p>' + `<span class="font-weight-normal text-danger"> <i
