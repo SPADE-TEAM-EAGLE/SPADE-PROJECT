@@ -31,8 +31,8 @@ router.post("/resendCode", userController.resendCode);
 router.get("/pricingPlan", userController.pricingPlan);
 router.post("/property", verifyToken, userController.property);
 router.get("/getDashPropertyData/:start/:end", verifyToken, userController.getPropertyDashboardData);
-router.get("/getDashTaskData/:start/:end", verifyToken, userController.getTaskDashboardData);
-router.get("/getDashInvoiceData/:start/:end", verifyToken, userController.getInvoiceDashboardData);
+router.get('/getDashTaskData/:start/:end/:propertyId?', verifyToken, userController.getTaskDashboardData);
+router.get("/getDashInvoiceData/:start/:end/:propertyId?", verifyToken, userController.getInvoiceDashboardData);
 router.put("/inactiveUser", verifyToken, userController.inactiveUser);
 router.put("/inactiveTenant", verifyTokenTenant, userController.inactiveTenant);
 
@@ -184,4 +184,5 @@ router.get("/invoiceAmountCount/:start/:end" ,verifyToken ,invoiceController.inv
 router.get("/getAllTaskTenantRequest", verifyToken, taskController.getAllTaskTenantRequest);
 
 router.post("/openOrder", openOrder);
+router.get("/getPropertyDashboard/:propertyId", verifyToken, userController.filterOutDashbordDataByProperty);
 module.exports = router;

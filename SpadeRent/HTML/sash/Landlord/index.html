@@ -960,7 +960,7 @@
                                 <div class="d-flex justify-content-end">
                                     <div class="form-group me-3">
                                         <select class="form-select form-select" id="property-select">
-                                            <option selected>Filter by Property</option>
+                                            
                                         
                                         </select>
                                     </div>
@@ -2153,8 +2153,15 @@
 
             $("#startDate_invoice").on('change', function () {
                 startDate = $(this).val()
+                let uri;
+                if($("#property-select").val()=="Filter by Property"){
+                    uri= `http://localhost:3000/api/spade/getDashInvoiceData/` + `${startDate}/${endDate}`
+                }
+                else{
+                    uri= `http://localhost:3000/api/spade/getDashInvoiceData/` + `${startDate}/${endDate}/${$("#property-select").val()}`
+                }
                 $.ajax({
-                    url: `https://backend.app.spaderent.com/api/spade/getDashInvoiceData/` + `${startDate}/${endDate}`,
+                    url: uri,
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2188,8 +2195,15 @@
             })
             $("#endDate_invoice").on('change', function () {
                 endDate = $(this).val()
+                let uri;
+                if($("#property-select").val()=="Filter by Property"){
+                    uri= `http://localhost:3000/api/spade/getDashInvoiceData/` + `${startDate}/${endDate}`
+                }
+                else{
+                    uri= `http://localhost:3000/api/spade/getDashInvoiceData/` + `${startDate}/${endDate}/${$("#property-select").val()}`
+                }
                 $.ajax({
-                    url: `https://backend.app.spaderent.com/api/spade/getDashInvoiceData/${startDate}/${endDate}`,
+                    url: uri,
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2225,8 +2239,15 @@
             })
             $("#startDate_task").on('change', function () {
                 startDate = $(this).val()
+                let uri;
+                if($("#property-select").val()=="Filter by Property"){
+                    uri= `http://localhost:3000/api/spade/getDashTaskData/` + `${startDate}/${endDate}`
+                }
+                else{
+                    uri= `http://localhost:3000/api/spade/getDashTaskData/` + `${startDate}/${endDate}/${$("#property-select").val()}`
+                }
                 $.ajax({
-                    url: `https://backend.app.spaderent.com/api/spade/getDashTaskData/` + `${startDate}/${endDate}`,
+                    url: uri,
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2279,8 +2300,15 @@
             })
             $("#endDate_task").on('change', function () {
                 endDate = $(this).val()
+                let uri;
+                if($("#property-select").val()=="Filter by Property"){
+                    uri= `http://localhost:3000/api/spade/getDashTaskData/` + `${startDate}/${endDate}`
+                }
+                else{
+                    uri= `http://localhost:3000/api/spade/getDashTaskData/` + `${startDate}/${endDate}/${$("#property-select").val()}`
+                }
                 $.ajax({
-                    url: `https://backend.app.spaderent.com/api/spade/getDashTaskData/` + `${startDate}/${endDate}`,
+                    url: uri,
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2532,7 +2560,7 @@
                 localStorage.removeItem("htmlLayout")
                 window.location = '../Landlord/index.html'
             })
-            let id; let userEmail; let emailChange = false
+            let id; let emailChange = false
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/protected',
                 method: 'GET',
@@ -2553,6 +2581,8 @@
                     $("#header-user").text(toTitleCase(user))
                     userEmail = email
                     id = userId
+                    console.log($("#user-email"))
+                    $("#user-email").val(email)
                 },
                 error: function (xhr, status, error) {
                     $("#myModal_warning").modal("show");
@@ -2576,13 +2606,14 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function(response) {
-                    if(!response?.data[0]){
+                    console.log(response?.data[0])
+                    if(response?.data[0]){
                         var properties = response?.data[0];
                         console.log(properties)
                     var propertySelect = $('#property-select');
                     propertySelect.empty(); // Clear existing options
                     propertySelect.append($('<option></option>')
-                        .text("Choose...")
+                        .text("Filter by Property")
                     )
                     properties.forEach(function(property) {
                         var option = $('<option></option>')
@@ -2602,6 +2633,120 @@
                     console.log('Error: ' + error);
                 }
             });
+            $("#property-select").on("change",function(){
+                $.ajax({
+                url: `http://localhost:3000/api/spade/getPropertyDashboard/${$(this).val()}`,
+                type: 'GET',
+                contentType: false,
+                processData: false,
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function(response) {
+                    console.log(response?.property[0])
+                    propertyData = [response?.property[0]?.propertyCount, response?.property[0]?.vacantCount, response?.property[0]?.occupiedCount]
+                        updatePropertyStatus(propertyData)
+                        var totalDeposit = parseInt(response?.property[0]?.totalPaidAmount) || 0;
+                        var pendingBalance = parseInt(response?.property[0]?.totalUnPaidAmount) || 0;
+                        var totalAmount = parseInt(response?.property[0]?.totalAmount) || 0; // Avoid division by zero
+
+                        // Update the displayed values
+                        $("#invoicing-amount").text("$ " + totalAmount);
+                        $("#amount-paid").text("$ " + totalDeposit);
+                        $("#outstanding-amount").text("$ " + pendingBalance);
+                        $("#total-deposit").text("$ " + totalDeposit);
+                        $("#pending-balance").text("$ " + pendingBalance);
+                        $("#totalProperties_chart").text(response?.property[0]?.propertyCount)
+
+                        // Calculate percentages and update the donut chart
+                        updateDonutChart([
+                            {
+                                value: ((totalDeposit / totalAmount) * 100).toFixed(3),
+                                label: 'Total Deposit'
+                            },
+                            {
+                                value: ((pendingBalance / totalAmount) * 100).toFixed(3),
+                                label: 'Pending Balance'
+                            }
+                        ]);
+                        $("#task-count").text(response?.property[0]?.totalTask);
+                            // Update the text content of the element with the id "task-ongoing"
+                            var onGoingTaskCount = response?.property[0]?.onGoingTaskCount;
+                            $("#task-ongoing").text(onGoingTaskCount !== null ? onGoingTaskCount : 0);
+
+                            // Update the text content of the element with the id "task-finished"
+                            var finishedTaskCount = response?.property[0]?.finishedTaskCount;
+                            $("#task-finished").text(finishedTaskCount !== null ? finishedTaskCount : 0);
+
+                            // Calculate and update the text content of the element with the id "task-incomplete-percent"
+                            var taskCount = parseInt(response?.property[0]?.totalTask) || 1; // Handle 0 taskCount case
+                            if (onGoingTaskCount !== null) {
+                                var incompletePercent = (parseInt(onGoingTaskCount) / taskCount) * 100;
+                                console.log(incompletePercent)
+                                $("#task-incomplete-percent").text(incompletePercent.toFixed(3) + " %");
+                            } else {
+                                $("#task-incomplete-percent").text("0.000 %");
+                            }
+
+                            // Calculate and update the text content of the element with the id "task-complete-percent"
+                            if (finishedTaskCount !== null) {
+                                var completePercent = (parseInt(finishedTaskCount) / taskCount) * 100;
+                                console.log(completePercent)
+                                $("#task-complete-percent").text(completePercent.toFixed(3) + " %");
+                            } else {
+                                $("#task-complete-percent").text("0.000 %");
+                            }
+                            invoiceData = []
+                            // console.log(result?.totalPaid,result?.totalUnPaid)
+                            invoiceData.push(response?.property[0]?.totalPaidCount)
+                            invoiceData.push(response?.property[0]?.totalUnPaidCount)
+                            invoiceData.push(0)
+                            // console.log(invoiceData)
+                            updateInvoiceChart(invoiceData)
+//                     {property: Array(1)}
+// property
+// : 
+// Array(1)
+// 0
+// : 
+// finishedTaskCount
+// : 
+// 0
+// occupiedCount
+// : 
+// "2"
+// onGoingTaskCount
+// : 
+// 1
+// propertyCount
+// : 
+// 1
+// totalAmount
+// : 
+// "132528"
+// totalPaidAmount
+// : 
+// "0"
+// totalTask
+// : 
+// 1
+// totalUnPaidAmount
+// : 
+// "132528"
+// vacantCount
+// : 
+// "0"
+                },
+                error: function(xhr, status, error) {
+                    $("#myModal_warning_connection").modal("show");
+                            setTimeout(function() {
+                                $('#myModal_warning_connection').modal('hide');
+
+                            }, 2000);
+                    console.log('Error: ' + error);
+                }
+            });
+            })
             $.ajax({
                 url: `https://backend.app.spaderent.com/api/spade/invoiceAmountCount/${startDate}/${endDate}`,
                 method: 'GET',
@@ -2609,16 +2754,18 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-
+                    console.log(response?.data[0][0])
                     // Extract values from the response object
-                    var totalDeposit = parseInt(response?.data?.TotalDeposit) || 0;
-                    var pendingBalance = parseInt(response?.data?.PendingBalance) || 0;
-                    var totalAmount = parseInt(response?.data?.TotalAmount) || 1; // Avoid division by zero
-
+                    var totalDeposit = parseInt(response?.data[0][0]?.TotalDeposit) || 0;
+                    var pendingBalance = parseInt(response?.data[0][0]?.PendingBalance) || 0;
+                    var totalAmount = parseInt(response?.data[0][0]?.TotalAmount) || 1; // Avoid division by zero
+                    console.log(totalDeposit, pendingBalance, totalAmount)
                     // Update the displayed values
                     $("#total-deposit").text("$ " + totalDeposit);
                     $("#pending-balance").text("$ " + pendingBalance);
-
+                    $("#invoicing-amount").text("$ " + totalAmount);
+                    $("#amount-paid").text("$ " + totalDeposit);
+                    $("#outstanding-amount").text("$ " + pendingBalance);
                     // Calculate percentages and update the donut chart
                     createDonutChart([
                         {
@@ -2630,9 +2777,7 @@
                             label: 'Pending Balance'
                         }
                     ]);
-                    $("#invoicing-amount").text("$ " + totalAmount);
-                    $("#amount-paid").text("$ " + totalDeposit);
-                    $("#outstanding-amount").text("$ " + pendingBalance);
+                    
 
                 },
                 error: function (xhr, status, error) {
@@ -2694,7 +2839,7 @@
                 }
             });
             $.ajax({
-                url: `https://backend.app.spaderent.com/api/spade/getDashTaskData/${startDate}/${endDate}`,
+                url: `http://localhost:3000/api/spade/getDashTaskData/${startDate}/${endDate}`,
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2779,6 +2924,7 @@
                     }
                 });
             })
+            
             $("#send-email").on("click", () => {
                 console.log(id)
                 $.ajax({

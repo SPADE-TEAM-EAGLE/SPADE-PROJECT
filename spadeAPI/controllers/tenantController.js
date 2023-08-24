@@ -668,13 +668,15 @@ exports.tenantTask = async (req, res) => {
             selectQuery("vendor", "id"),
             [vID]
           );
+          let VendorCategoryResult;
           if (vendorResult.length > 0) {
             const categoryIDs = vendorResult[0][0].categoryID;
-            const VendorCategoryResult = await queryRunner(
+            VendorCategoryResult = await queryRunner(
               selectQuery("vendorcategory", "id"),
               [categoryIDs]
             );
-            if (VendorCategoryResult.length > 0) {
+            
+            if (VendorCategoryResult[0].length > 0) {
               const vendorDataObject = {
                 name: vendorResult[0][0].firstName + " " + vendorResult[0][0].lastName,
                 businessName: vendorResult[0][0].businessName,
