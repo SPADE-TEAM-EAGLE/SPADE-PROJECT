@@ -2597,6 +2597,8 @@
     <script src="../assets/js/email-verification.js"></script>
     <script src="../assets/js/intercom.js"></script>
     <script src="../assets/js/getNotification.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.8/sjcl.min.js"></script>
+
 
     <script>
         $(document).ready(function() {
@@ -3912,10 +3914,15 @@ var serial='<td style="font-weight: 600;">' + (index+1) + '</td>';
                         var propertyName = '<td class="propertyName" style="font-weight: 600;">' + tenant.propertyName + `<br><small>${tenant.pAddress}</small>` + '</td>';
                         var rentAmount = '<td class="rentAmount" style="font-weight: 600;">' + tenant.rentAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(formatDate(tenant.recurringNextDate)=="Invalid Date"?"N/A":formatDate(tenant.recurringNextDate))}` + '</td>';
                         var assignUnit = '<td class="assignUnit" style="font-weight: 600;">' + tenant.unitNumber + `<br><small>${tenant.unitArea} Square/Feet</small>` + '</td>';
+                        var password = 'your-secret-password';
+var encryptedPropertyId = sjcl.encrypt(password, tenant.tenantID.toString());
+
+// Include the encrypted value in the URL
+var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                         var dropdownMenu =
                             '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
                             '<ul class="dropdown-menu">' +
-                            `<li><a class="dropdown-item text-success" href="./view-tenant.html?tenantId=${tenant.tenantID}">View</a></li>` +
+                            `<li><a class="dropdown-item text-success" href="./view-tenant.html?tenant=${encodedPropertyId}">View</a></li>` +
                             '<li><a class="edit-option dropdown-item text-primary"  href="javascript:void(0) ">Edit</a></li>' +
                             '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>'
                         '</ul></td>';
@@ -3942,7 +3949,7 @@ var serial='<td style="font-weight: 600;">' + (index+1) + '</td>';
                     });
                     $("#preloader").fadeOut("slow")
 
-                    $('.delete-option').click(function(e) {
+                    $(document).on("click",'.delete-option',function(e) {
                         e.preventDefault(); // Prevent default anchor behavior
                         const tenantIdElement = $(this).closest("tr").find(".tenant-id");
                         tenantID = tenantIdElement.text();
