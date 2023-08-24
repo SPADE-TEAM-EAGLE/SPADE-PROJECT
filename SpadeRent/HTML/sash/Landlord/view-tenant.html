@@ -32,7 +32,12 @@
     <!-- <link rel="stylesheet" href="fancy_fileupload.css"> -->
     <!-- COLOR SKIN CSS -->
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="../assets/colors/color1.css" />
-    <style>
+    <script>
+         if(!localStorage.getItem("authtoken")){
+                window.location="./login_module.html"
+            }
+    </script>
+<style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
         .custom-file-input::-webkit-file-upload-button {
             visibility: hidden;
@@ -778,7 +783,7 @@
                                     <div class="col-12">
                                         <label for="inputAddress" class="form-label fw-bold">Address <spnan
                                                 class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="address" placeholder="1234 Main St">
+                                        <input type="text" class="form-control form" id="address" placeholder="Enter Address">
                                         <span class="text-danger d-none">Address is required!</span>
                                     </div>
                                     <div class="col-md-4">
@@ -983,9 +988,10 @@
 
                                         <!-- 3 comments start  -->
                                         <div class="dropdown  d-flex notifications">
-                                            <a class="nav-link icon" data-bs-toggle="sidebar-right" data-target=".sidebar-right"><i
-                                                class="fe fe-bell"></i><span class=" pulse"></span>
-                                        </a>
+                                            <a class="nav-link icon" data-bs-toggle="sidebar-right"
+                                                data-target=".sidebar-right"><i class="fe fe-bell"></i> 
+                                                <span class="badge bg-secondary header-badge bg-primary" id="count_unread"></span>
+                                            </a>
                                             <!-- <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                                 <div class="drop-heading border-bottom">
                                                     <div class="d-flex">
@@ -2485,28 +2491,28 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
     </script>
     <script>
         function logout() {
-                $(document).ready(function () {
-                    $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
-                        type: 'PUT',
-                        contentType: false,
-                        processData: false,
-                        headers: {
-                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                        },
-                        success: function (response) {
-                            console.log(response);
-                            localStorage.removeItem('authtoken');
-                            window.close();
-                            window.open('./login_module.html', "_blank")
-                            console.log('Done');
-                        },
-                        error: function (xhr, status, error) {
-                            console.log(error);
-                        }
-                    });
+            $(document).ready(function () {
+                $.ajax({
+                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                    type: 'PUT',
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        localStorage.removeItem('authtoken');
+                        // window.close();
+                        window.open('./login_module.html', "_self")
+                        console.log('Done');
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(error);
+                    }
                 });
-            }
+            });
+        }
     </script>
 </body>
 
