@@ -2969,7 +2969,7 @@
                                                             </div>
                                                             <div class="d-flex">
                                                                 <button type="button" class="btn btn-primary mx-2" onclick="exportTableToCSV2('person.csv')"
-                                                                    id="add_property_btn"><strong>Export as CSV</strong></button>
+                                                                    id="download_csv_reports2"><strong>Export as CSV</strong></button>
                                                                 <button type="button" class="btn btn-primary mx-2"
                                                                     id="download_pdf_reports2"><strong>Export as PDF</strong></button>
                                                                 <div class="btn-group">
@@ -3165,7 +3165,7 @@
                                                                 </div>
                                                                 <div class="d-flex">
                                                                     <button type="button" class="btn btn-primary mx-2" onclick="exportTableToCSV3('person.csv')"
-                                                                        id="add_property_btn"><strong>Export as CSV</strong></button>
+                                                                        id="download_csv_reports3"><strong>Export as CSV</strong></button>
                                                                     <button type="button" class="btn btn-primary mx-2"
                                                                         id="download_pdf_reports3"><strong>Export as PDF</strong></button>
                                                                     <div class="btn-group">
@@ -3376,7 +3376,7 @@
                                                             </div>
                                                             <div class="d-flex"> 
                                                                 <button type="button" class="btn btn-primary mx-2" onclick="exportTableToCSV4('person.csv')"
-                                                                    id="add_property_btn"><strong>Export as CSV</strong></button>
+                                                                    id="download_csv_reports4"><strong>Export as CSV</strong></button>
                                                                 <button type="button" class="btn btn-primary mx-2"
                                                                     id="download_pdf_reports4"><strong>Export as PDF</strong></button>
                                                                 <div class="btn-group">
@@ -3556,7 +3556,7 @@
                                                             </div>
                                                             <div class="d-flex">
                                                                 <button type="button" class="btn btn-primary mx-2" onclick="exportTableToCSV5('person.csv')"
-                                                                    id="add_property_btn"><strong>Export as CSV</strong></button>
+                                                                    id="download_csv_reports5"><strong>Export as CSV</strong></button>
                                                                 <button type="button" class="btn btn-primary mx-2"
                                                                     id="download_pdf_reports5"><strong>Export as PDF</strong></button>
                                                                 <div class="btn-group">
@@ -4754,9 +4754,17 @@ $("#user-img").attr("src",image)
         propertyData = response.property;
         leaseData = response.lease;
         tenantData=response.tenants
-        if(propertyData.length==0){
+        if(propertyData.length<1){
 $("#download_csv_reports").attr("disabled",true)
 $("#download_pdf_reports").attr("disabled",true)
+        }
+        if(leaseData.length<1){
+$("#download_csv_reports2").attr("disabled",true)
+$("#download_pdf_reports2").attr("disabled",true)
+        }
+        if(tenantData.length<1){
+$("#download_csv_reports3").attr("disabled",true)
+$("#download_pdf_reports3").attr("disabled",true)
         }
         constructPropertyTable(propertyData)
         if(leaseData.length>1){
@@ -4963,7 +4971,10 @@ $.ajax({
     },
     success: function (response) {
         invoiceData=response.property
-        console.log(invoiceData)
+        if(invoiceData?.length<1){
+$("#download_csv_reports4").attr("disabled",true)
+$("#download_pdf_reports4").attr("disabled",true)
+        }
         invoiceData.forEach((invoice,index) => {
             // Construct the HTML for the new row
             var newRowHtml = '<tr>' +
@@ -5005,7 +5016,10 @@ $.ajax({
     success: function (response) {
         
         taskData = response.property;
-        console.log(taskData)
+        if(taskData.length<1){
+$("#download_csv_reports5").attr("disabled",true)
+$("#download_pdf_reports5").attr("disabled",true)
+        }
         taskData.forEach((task,index) => {
             // Calculate time difference between task created_at and current date
             var createdDate = new Date(task.created_at);
