@@ -1832,7 +1832,7 @@
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function ({ user, image }) {
+                success: function ({ userName, image }) {
                     // console.log()
                     $("#user-img").attr("src", image)
                     $("#user-img-dark").attr("src", image)
@@ -1841,8 +1841,8 @@
                             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                         });
                     }
-                    $("#user-name").text(toTitleCase(user))
-                    $("#header-user").text(toTitleCase(user))
+                    $("#user-name").text(toTitleCase(userName))
+                        $("#header-user").text(toTitleCase(userName))
 
 
 
