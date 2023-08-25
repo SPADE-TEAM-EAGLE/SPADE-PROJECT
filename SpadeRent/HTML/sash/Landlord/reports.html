@@ -4506,11 +4506,12 @@ console.log(index)
     }
     function constructPropertyTableTenant(propertyData,id){
         $("#table_body_tenant_report").empty()
-        propertyData.forEach((property,index) => {
-            console.log(property)
-            if ($("#tenantSelect option:contains('" + property.propertyName + "')").length === 0) {
-        $("#tenantSelect").append($('<option></option>').text(property.propertyName).val(property.id));
-    }
+        propertyData.forEach((tenant,index) => {
+            console.log(tenant)
+            if ($("#tenantSelect option:contains('" + tenant.firstName + " " + tenant.lastName + "')").length === 0) {
+    $("#tenantSelect").append($('<option></option>').text(tenant.firstName + " " + tenant.lastName).val(tenant.tenantID));
+}
+
             
             var newRowHtml = '<tr>' +
                 '<td style="font-weight: 600;">' + (index+1) + '</td>'+
@@ -4559,7 +4560,7 @@ $.ajax({
                                     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                                 });
                             }
-                    console.log(user);
+                   
                     // $("#user-name").text(toTitleCase(userName))
                         $("#header-user").text(toTitleCase(userName))
 $("#user-img").attr("src",image)
@@ -4666,7 +4667,7 @@ function filterAndRenderTable(selectedValue) {
 }
 function filterAndRenderTableTenant(selectedValue) {
     if(selectedValue){
-        var filteredData = tenantData.filter(property => property.id == selectedValue);
+        var filteredData = tenantData.filter(property => property.tenantID == selectedValue);
     constructPropertyTableTenant(filteredData);
     }
     else{
@@ -4694,7 +4695,7 @@ $("#propertySelect").on('change', function() {
 });
 $("#tenantSelect").on('change', function() {
     var selectedValue = $(this).val();
-    filterAndRenderTable(selectedValue);
+    filterAndRenderTableTenant(selectedValue);
 });
 $("#typehead").on('input', function() {
     var searchValue = $(this).val().toLowerCase();
