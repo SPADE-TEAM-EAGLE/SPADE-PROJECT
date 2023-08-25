@@ -67,7 +67,7 @@ const { fileUpload, deleteImageFromS3 } = require("../helper/S3Bucket");
 const { verifyMailCheck } = require("../helper/emailVerify");
 const userServices = require("../Services/userServices");
 const { log } = require("console");
-const { encryptJwtToken } = require("../helper/EnccryptDecryptToken");
+// const { encryptJwtToken } = require("../helper/EnccryptDecryptToken");
 // const { NotificationSocket } = require("../app.js");
 const config = process.env;
 
