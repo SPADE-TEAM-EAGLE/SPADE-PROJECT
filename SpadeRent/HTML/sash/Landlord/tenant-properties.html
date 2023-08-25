@@ -38,7 +38,12 @@
         integrity="sha512-BMbq2It2D3J17/C7aRklzOODG1IQ3+MHw3ifzBHMBwGO/0yUqYmsStgBjI0z5EYlaDEFnvYV7gNYdD3vFLRKsA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
 
-    <style>
+    <script>
+         if(!localStorage.getItem("authtoken")){
+                window.location="./login_module.html"
+            }
+    </script>
+<style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
         .custom-file-input::-webkit-file-upload-button {
             visibility: hidden;
@@ -971,8 +976,9 @@
 
                                         <!-- 3 comments start  -->
                                         <div class="dropdown  d-flex notifications">
-                                            <a class="nav-link icon" data-bs-toggle="sidebar-right" data-target=".sidebar-right"><i
-                                                class="fe fe-bell"></i><span class=" pulse"></span>
+                                            <a class="nav-link icon" data-bs-toggle="sidebar-right"
+                                            data-target=".sidebar-right"><i class="fe fe-bell"></i> 
+                                            <span class="badge bg-secondary header-badge bg-primary" id="count_unread"></span>
                                         </a>
                                             <!-- <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                                 <div class="drop-heading border-bottom">
@@ -1377,11 +1383,11 @@
                                                             <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">PROPERTY ID</a>
+                                                    <!-- <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">PROPERTY ID</a>
                                                         <div class="form-check m-0">
                                                             <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
-                                                    </li>
+                                                    </li> -->
                                                     <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">PROPERTY NAME</a>
                                                         <div class="form-check m-0">
                                                             <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
@@ -1417,9 +1423,10 @@
                                             <table class="table border text-nowrap text-md-nowrap mb-0 " id="table-body">
                                                 <thead>
                                                     <tr>
-
+                                                        <th>#</th>
+                                                        <th class="d-none">PROPERTY ID</th>
                                                         <th>IMAGE</th>
-                                                        <th>PROPERTY ID</th>
+                                                        
                                                         <th>PROPERTY NAME</th>
                                                         <th>RENT AMOUNT</th>
                                                         <th>PROPERTY TYPE</th>
@@ -2216,7 +2223,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                 console.log(columnIndex, isColumnVisible)
                     // Toggle the visibility of the corresponding column
                 $('table').find('tr').each(function() {
-                    var column = $(this).find('th:nth-child(' + columnIndex + '), td:nth-child(' + columnIndex + ')');
+                    var column = $(this).find('th:nth-child(' + (columnIndex+2) + '), td:nth-child(' + (columnIndex+2) + ')');
                     isColumnVisible ? column.show() : column.hide();
                 });
             });
@@ -2287,8 +2294,10 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                     $.each(data[0], function(index, item) {
                         var row = $('<tr>');
                         // row.append('<td><label class="custom-control custom-checkbox-md"><input type="checkbox" class="custom-control-input" name="example-checkbox5" value="option5" checked=""><span class="custom-control-label"></span></label></td>');
+                        row.append('<td>'+(index+1)+'</td>');
+                        row.append('<td class="d-none">' + item.propertyID + '</td>');
                         row.append('<td><img src="' + item.images.split(',')[0] + '" alt=""></td>');
-                        row.append('<td>' + item.propertyID + '</td>');
+                        
                         row.append('<td class="property-name">' + item.propertyName + '</td>');
                         row.append('<td class="rentAmount"><p style="font-weight: bold;" class="mb-1">' + item.rentAmount + '</p><span style="color: #6E6893;">Next Due Date: ' + item.nextDueDate + '</span></td>');
                         row.append('<td><a class="like" href="javascript:;"><span class="badge btn-light rounded-pill-Single-Family rounded-pill py-2 px-3"><i class="fe fe-circle me-1"></i>' + item.propertyType + '</span></a></td>');
@@ -2324,28 +2333,28 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
     </script>
 <script>
     function logout() {
-                $(document).ready(function () {
-                    $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
-                        type: 'PUT',
-                        contentType: false,
-                        processData: false,
-                        headers: {
-                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                        },
-                        success: function (response) {
-                            console.log(response);
-                            localStorage.removeItem('authtoken');
-                            window.close();
-                            window.open('./login_module.html', "_blank")
-                            console.log('Done');
-                        },
-                        error: function (xhr, status, error) {
-                            console.log(error);
-                        }
-                    });
+            $(document).ready(function () {
+                $.ajax({
+                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                    type: 'PUT',
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        localStorage.removeItem('authtoken');
+                        // window.close();
+                        window.open('./login_module.html', "_self")
+                        console.log('Done');
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(error);
+                    }
                 });
-            }
+            });
+        }
 </script>
     <!-- 
     <script>

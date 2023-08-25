@@ -39,7 +39,12 @@
         }
     </script>
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="../assets/colors/color1.css" />
-    <style>
+    <script>
+         if(!localStorage.getItem("authtoken")){
+                window.location="./login_module.html"
+            }
+    </script>
+<style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
         .custom-file-input::-webkit-file-upload-button {
@@ -1133,7 +1138,7 @@
                                 <!-- <span class="text-danger d-none">Photos are required!</span> -->
                             </div>
                             <div class="col-md-12">
-                                <label class="form-label fw-bold">Media/ Files</label>
+                                <label class="form-label fw-bold">Media/ Files (Optional)</label>
                                 <div class="custom-file" style="border: 1px dashed #00000087;">
                                     <input id="fileInput" type="file" name="media" class="custom-file-input form"
                                         accept=".jpg, .jpeg, .png, .pdf, image/jpeg, image/png, application/pdf"
@@ -1292,7 +1297,7 @@
                                 <span class="text-danger d-none">Assignee is required!</span>
                             </div>
                             <div class="col-md-12">
-                                <label class="form-label fw-bold">Media/ Files</label>
+                                <label class="form-label fw-bold">Media/ Files (Optional)</label>
                                 <div class="custom-file" style="border: 1px dashed #00000087;">
                                     <input id="fileInput_update" type="file" name="media" class="custom-file-input form"
                                         accept=".jpg, .jpeg, .png, .pdf, image/jpeg, image/png, application/pdf"
@@ -1532,8 +1537,8 @@
                                         <!-- 3 comments start  -->
                                         <div class="dropdown  d-flex notifications">
                                             <a class="nav-link icon" data-bs-toggle="sidebar-right"
-                                                data-target=".sidebar-right"><i class="fe fe-bell"></i><span
-                                                    class=" pulse"></span>
+                                                data-target=".sidebar-right"><i class="fe fe-bell"></i> 
+                                                <span class="badge bg-secondary header-badge bg-primary" id="count_unread"></span>
                                             </a>
                                             <!-- <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                                 <div class="drop-heading border-bottom">
@@ -3916,28 +3921,28 @@
     </script>
     <script>
         function logout() {
-            $(document).ready(function () {
-                $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
-                    type: 'PUT',
-                    contentType: false,
-                    processData: false,
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-                    success: function (response) {
-                        console.log(response);
-                        localStorage.removeItem('authtoken');
-                        window.close();
-                        window.open('./login_module.html', "_blank")
-                        console.log('Done');
-                    },
-                    error: function (xhr, status, error) {
-                        console.log(error);
-                    }
+                $(document).ready(function () {
+                    $.ajax({
+                        url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                        type: 'PUT',
+                        contentType: false,
+                        processData: false,
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            console.log(response);
+                            localStorage.removeItem('authtoken');
+                            // window.close();
+                            window.open('./login_module.html', "_self")
+                            console.log('Done');
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(error);
+                        }
+                    });
                 });
-            });
-        }
+            }
     </script>
 
     <script>
