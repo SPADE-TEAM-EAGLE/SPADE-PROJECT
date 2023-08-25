@@ -46,7 +46,12 @@
     <!-- <link href="../assets/switcher/css/switcher.css" rel="stylesheet" />
     <link href="../assets/switcher/demo.css" rel="stylesheet" /> -->
 
-    <style>
+    <script>
+         if(!localStorage.getItem("authtoken")){
+                window.location="./login_module.html"
+            }
+    </script>
+<style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
         .custom-file-input::-webkit-file-upload-button {
@@ -1806,7 +1811,7 @@
                                         <label for="inputAddress2" class="form-label fw-bold">Address <span
                                                 class="fw-light">(Optional)</span></label>
                                         <input type="text" class="form-control" id="address"
-                                            placeholder="Apartment, studio, or floor">
+                                            placeholder="Enter Address">
                                         <!-- <span class="text-danger d-none">Address is required!</span> -->
                                     </div>
                                     <div class="col-md-4">
@@ -2111,150 +2116,161 @@
         </div>
     </div>
     <!-- Default Offcanvas-->
-<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-    <div class="offcanvas-header pt-5">
-        <h1 class="offcanvas-title" id="offcanvasExampleLabel">Create <strong class="color-primary">New</strong></h1>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"><i class="fe fe-x fs-18"></i></button>
-    </div>
-    <div class="offcanvas-body">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-6 col-lg-3 col-xl-3">
-                    <div class="card">
-                        <div class="card-header" style="background-color: #1467B0;color: white;">
-                            <div class="card-title fw-bold"><a href="properties-all.html" style="color: white;">Property</a></div>
-                        </div>
-                        <div class="card-body">
-                            <div class="text-center chat-image mb-5">
-                                <div class="avatar avatar-xxl chat-profile mb-3 brround">
-                                    <a class="" href="properties-all.html"><img alt="avatar" src="../assets/images/icons/Group 10341.png" class="brround w-100 h-100"></a>
-                                </div>
-                                <div class="main-chat-msg-name">
-                                    <a href="properties-all.html">
-                                        <h5 class="mb-1 text-dark fw-bold">Create New Property</h5>
-                                    </a>
-                                    <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the benefits
-                                        of an all-in-one property management tool! </p>
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header pt-5">
+            <h1 class="offcanvas-title" id="offcanvasExampleLabel">Create <strong class="color-primary">New</strong>
+            </h1>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"><i
+                    class="fe fe-x fs-18"></i></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6 col-lg-3 col-xl-3 mb-5">
+                        <div class="card h-100">
+                            <div class="card-header" style="background-color: #1467B0;color: white;">
+                                <div class="card-title fw-bold"><a href="properties-all.html"
+                                        style="color: white;">Property</a></div>
+                            </div>
+                            <div class="card-body">
+                                <div class="text-center chat-image mb-5">
+                                    <div class="avatar avatar-xxl chat-profile mb-3 brround">
+                                        <a class="" href="properties-all.html"><img alt="avatar"
+                                                src="../assets/images/icons/Group 10341.png"
+                                                class="brround w-100 h-100"></a>
+                                    </div>
+                                    <div class="main-chat-msg-name">
+                                        <a href="properties-all.html">
+                                            <h5 class="mb-1 text-dark fw-bold">Create New Property</h5>
+                                        </a>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Simplify property management. Effortlessly create and manage rental properties with our software, making life easier for landlords and property managers. </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6 col-lg-3 col-xl-3">
-                    <div class="card">
-                        <div class="card-header" style="background-color: #1467B0;color: white;">
-                            <div class="card-title fw-bold"><a href="add-tenant.html" style="color: white;">Tenant</a></div>
-                        </div>
-                        <div class="card-body">
-                            <div class="text-center chat-image mb-5">
-                                <div class="avatar avatar-xxl chat-profile mb-3 brround">
-                                    <a class="" href="add-tenant.html"><img alt="avatar" src="../assets/images/icons/Group 10344.png" class="brround w-100 h-100"></a>
-                                </div>
-                                <div class="main-chat-msg-name">
-                                    <a href="add-tenant.html">
-                                        <h5 class="mb-1 text-dark fw-bold">Create New Tenant</h5>
-                                    </a>
-                                    <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the benefits
-                                        of an all-in-one property management tool! </p>
+                    <div class="col-md-6 col-lg-3 col-xl-3 mb-5">
+                        <div class="card h-100">
+                            <div class="card-header" style="background-color: #1467B0;color: white;">
+                                <div class="card-title fw-bold"><a href="add-tenant.html"
+                                        style="color: white;">Tenant</a></div>
+                            </div>
+                            <div class="card-body">
+                                <div class="text-center chat-image mb-5">
+                                    <div class="avatar avatar-xxl chat-profile mb-3 brround">
+                                        <a class="" href="add-tenant.html"><img alt="avatar"
+                                                src="../assets/images/icons/Group 10344.png"
+                                                class="brround w-100 h-100"></a>
+                                    </div>
+                                    <div class="main-chat-msg-name">
+                                        <a href="add-tenant.html">
+                                            <h5 class="mb-1 text-dark fw-bold">Create New Tenant</h5>
+                                        </a>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Effortlessly add new tenants with our rental software, streamlining the tenant onboarding process for property managers and landlords. </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6 col-lg-3 col-xl-3">
-                    <div class="card">
-                        <div class="card-header" style="background-color: #1467B0;color: white;">
-                            <div class="card-title fw-bold"><a href="create-invoicing.html" style="color: white;">Invoice</a></div>
-                        </div>
-                        <div class="card-body">
-                            <div class="text-center chat-image mb-5">
-                                <div class="avatar avatar-xxl chat-profile mb-3 brround">
-                                    <a class="" href="create-invoicing.html"><img alt="avatar" src="../assets/images/icons/Group 10346.png" class="brround w-100 h-100"></a>
-                                </div>
-                                <div class="main-chat-msg-name">
-                                    <a href="create-invoicing.html">
-                                        <h5 class="mb-1 text-dark fw-bold">Create New Invoice</h5>
-                                    </a>
-                                    <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the benefits
-                                        of an all-in-one property management tool! </p>
+                    <div class="col-md-6 col-lg-3 col-xl-3 mb-5">
+                        <div class="card h-100">
+                            <div class="card-header" style="background-color: #1467B0;color: white;">
+                                <div class="card-title fw-bold"><a href="create-invoicing.html"
+                                        style="color: white;">Invoice</a></div>
+                            </div>
+                            <div class="card-body">
+                                <div class="text-center chat-image mb-5">
+                                    <div class="avatar avatar-xxl chat-profile mb-3 brround">
+                                        <a class="" href="create-invoicing.html"><img alt="avatar"
+                                                src="../assets/images/icons/Group 10346.png"
+                                                class="brround w-100 h-100"></a>
+                                    </div>
+                                    <div class="main-chat-msg-name">
+                                        <a href="create-invoicing.html">
+                                            <h5 class="mb-1 text-dark fw-bold">Create New Invoice</h5>
+                                        </a>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Effortlessly onboard new tenants with our user-friendly rental software, streamlining the tenant registration process for property managers and landlords. </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6 col-lg-3 col-xl-3">
-                    <div class="card">
-                        <div class="card-header" style="background-color: #1467B0;color: white;">
-                            <div class="card-title fw-bold"><a href="#" style="color: white;">Lead</a></div>
-                        </div>
-                        <div class="card-body">
-                            <div class="text-center chat-image mb-5">
-                                <div class="avatar avatar-xxl chat-profile mb-3 brround">
-                                    <a class="" href="#"><img alt="avatar" src="../assets/images/icons/Group 10348.png" class="brround w-100 h-100"></a>
-                                </div>
-                                <div class="main-chat-msg-name">
-                                    <a href="#">
-                                        <h5 class="mb-1 text-dark fw-bold">Create New Lead</h5>
-                                    </a>
-                                    <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the benefits
-                                        of an all-in-one property management tool! </p>
-                                </div>
+                    <div class="col-md-6 col-lg-3 col-xl-3 mb-5">
+                        <div class="card h-100">
+                            <div class="card-header" style="background-color: #1467B0;color: white;">
+                                <div class="card-title fw-bold"><a href="coming-soon.html" style="color: white;">Lead</a></div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 col-xl-3">
-                    <div class="card">
-                        <div class="card-header" style="background-color: #1467B0;color: white;">
-                            <div class="card-title fw-bold"><a href="create-tasks.html" style="color: white;">Tasks</a></div>
-                        </div>
-                        <div class="card-body">
-                            <div class="text-center chat-image mb-5">
-                                <div class="avatar avatar-xxl chat-profile mb-3 brround">
-                                    <a class="" href="create-tasks.html"><img alt="avatar" src="../assets/images/icons/Group 10350.png" class="brround w-100 h-100"></a>
-                                </div>
-                                <div class="main-chat-msg-name">
-                                    <a href="create-tasks.html">
-                                        <h5 class="mb-1 text-dark fw-bold">Create New Tasks</h5>
-                                    </a>
-                                    <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the benefits
-                                        of an all-in-one property management tool! </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                            <div class="card-body">
+                                <div class="text-center chat-image mb-5">
+                                    <div class="avatar avatar-xxl chat-profile mb-3 brround">
+                                        <a class="" href="coming-soon.html"><img alt="avatar"
+                                                src="../assets/images/icons/Group 10348.png"
+                                                class="brround w-100 h-100"></a>
+                                    </div>
 
-                <div class="col-md-6 col-lg-3 col-xl-3">
-                    <div class="card">
-                        <div class="card-header" style="background-color: #1467B0;color: white;">
-                            <div class="card-title fw-bold"><a href="tasks-vendors.html"
-                                    style="color: white;">Vendor</a></div>
-                        </div>
-                        <div class="card-body">
-                            <div class="text-center chat-image mb-5">
-                                <div class="avatar avatar-xxl chat-profile mb-3 brround">
-                                    <a class="" href="tasks-vendors.html"><img alt="avatar"
-                                            src="../assets/images/icons/create-vendor.png"
-                                            class="brround w-100 h-100"></a>
-                                </div>
-                                <div class="main-chat-msg-name">
-                                    <a href="tasks-vendors.html">
-                                        <h5 class="mb-1 text-dark fw-bold">Create New Vendors</h5>
-                                    </a>
-                                    <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the
-                                        benefits of an all-in-one property management tool! </p>
+                                    <div class="main-chat-msg-name">
+                                        <a href="coming-soon.html">
+                                            <h5 class="mb-1 text-dark fw-bold">Create New Lead</h5>
+                                        </a>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Effortlessly generate and manage leads with our property rental software, making it easier for landlords to find potential tenants. </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-6 col-lg-3 col-xl-3 mb-5">
+                        <div class="card h-100">
+                            <div class="card-header" style="background-color: #1467B0;color: white;">
+                                <div class="card-title fw-bold"><a href="create-tasks.html"
+                                        style="color: white;">Tasks</a></div>
+                            </div>
+                            <div class="card-body">
+                                <div class="text-center chat-image mb-5">
+                                    <div class="avatar avatar-xxl chat-profile mb-3 brround">
+                                        <a class="" href="create-tasks.html"><img alt="avatar"
+                                                src="../assets/images/icons/Group 10350.png"
+                                                class="brround w-100 h-100"></a>
+                                    </div>
+                                    <div class="main-chat-msg-name">
+                                        <a href="create-tasks.html">
+                                            <h5 class="mb-1 text-dark fw-bold">Create New Tasks</h5>
+                                        </a>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Effortlessly manage tasks with our property rental software. Stay organized and boost productivity in property management. </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3 col-xl-3 mb-5">
+                        <div class="card h-100">
+                            <div class="card-header" style="background-color: #1467B0;color: white;">
+                                <div class="card-title fw-bold"><a href="tasks-vendors.html"
+                                        style="color: white;">Vendor</a></div>
+                            </div>
+                            <div class="card-body">
+                                <div class="text-center chat-image mb-5">
+                                    <div class="avatar avatar-xxl chat-profile mb-3 brround">
+                                        <a class="" href="tasks-vendors.html"><img alt="avatar"
+                                                src="../assets/images/icons/create-vendor.png"
+                                                class="brround w-100 h-100"></a>
+                                    </div>
+                                    <div class="main-chat-msg-name">
+                                        <a href="tasks-vendors.html">
+                                            <h5 class="mb-1 text-dark fw-bold">Create New Vendors</h5>
+                                        </a>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Effortlessly onboard vendors with our property rental software, streamlining property maintenance for landlords and property managers. </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-                
             </div>
         </div>
     </div>
-</div>
-<!--/Default Offcanvas-->
+    <!--/Default Offcanvas-->
     <!-- <div class="modal fade" id="myModal_delete" aria-labelledby="myModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
 
@@ -2384,8 +2400,9 @@
                                                 class="avatarr profile-user nav-link brroundd cover-image light-layout customIntercomButton">
                                         </div>
                                         <div class="dropdown  d-flex notifications">
-                                            <a class="nav-link icon text-dark" data-bs-toggle="sidebar-right" data-target=".sidebar-right"><i
-                                                class="fe fe-bell"></i><span class=" pulse"></span>
+                                            <a class="nav-link icon" data-bs-toggle="sidebar-right"
+                                            data-target=".sidebar-right"><i class="fe fe-bell"></i> 
+                                            <span class="badge bg-secondary header-badge bg-primary" id="count_unread"></span>
                                         </a>
                                             <!-- <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                                 <div class="drop-heading border-bottom">
@@ -2958,7 +2975,7 @@
                                                             </div>
                                                             <div class="d-flex">
                                                                 <button type="button" class="btn btn-primary mx-2" onclick="exportTableToCSV2('person.csv')"
-                                                                    id="add_property_btn"><strong>Export as CSV</strong></button>
+                                                                    id="download_csv_reports2"><strong>Export as CSV</strong></button>
                                                                 <button type="button" class="btn btn-primary mx-2"
                                                                     id="download_pdf_reports2"><strong>Export as PDF</strong></button>
                                                                 <div class="btn-group">
@@ -3154,7 +3171,7 @@
                                                                 </div>
                                                                 <div class="d-flex">
                                                                     <button type="button" class="btn btn-primary mx-2" onclick="exportTableToCSV3('person.csv')"
-                                                                        id="add_property_btn"><strong>Export as CSV</strong></button>
+                                                                        id="download_csv_reports3"><strong>Export as CSV</strong></button>
                                                                     <button type="button" class="btn btn-primary mx-2"
                                                                         id="download_pdf_reports3"><strong>Export as PDF</strong></button>
                                                                     <div class="btn-group">
@@ -3365,7 +3382,7 @@
                                                             </div>
                                                             <div class="d-flex"> 
                                                                 <button type="button" class="btn btn-primary mx-2" onclick="exportTableToCSV4('person.csv')"
-                                                                    id="add_property_btn"><strong>Export as CSV</strong></button>
+                                                                    id="download_csv_reports4"><strong>Export as CSV</strong></button>
                                                                 <button type="button" class="btn btn-primary mx-2"
                                                                     id="download_pdf_reports4"><strong>Export as PDF</strong></button>
                                                                 <div class="btn-group">
@@ -3450,7 +3467,9 @@
                                                                             <th>EMAIL</th>
                                                                             <th>INVOICE DATE</th>
                                                                             <th>PROPERTY NAME</th>
+                                                                            <th>PHONE</th>
                                                                             <th>AMOUNT</th>
+                                                                            <th>NEXT DUE DATE</th>
                                                                             <th>PROPERTY ADDRESS</th>
                                                                             <th>ACTION</th>
                                                                         </tr>
@@ -3545,7 +3564,7 @@
                                                             </div>
                                                             <div class="d-flex">
                                                                 <button type="button" class="btn btn-primary mx-2" onclick="exportTableToCSV5('person.csv')"
-                                                                    id="add_property_btn"><strong>Export as CSV</strong></button>
+                                                                    id="download_csv_reports5"><strong>Export as CSV</strong></button>
                                                                 <button type="button" class="btn btn-primary mx-2"
                                                                     id="download_pdf_reports5"><strong>Export as PDF</strong></button>
                                                                 <div class="btn-group">
@@ -3719,10 +3738,13 @@
                 <div class="card-title mb-0 text-dark fw-bold">
                     <!-- <i class="fe fe-bell me-2"></i> -->
                     <!-- <span class=" pulse"></span> -->
-                    Notifications <a href="javascript:void(0);" class="text-primary text-decoration-underline">Mark all as read</a>
+                    Notifications <a href="javascript:void(0);" class="text-primary text-decoration-underline "
+                        id="updateAllNotifyRead">Mark all
+                        as read</a>
                 </div>
                 <div class="card-options ms-auto">
-                    <a href="javascript:void(0);" class="sidebar-icon text-end float-end me-3 mb-1" data-bs-toggle="sidebar-right" data-target=".sidebar-right"><i
+                    <a href="javascript:void(0);" class="sidebar-icon text-end float-end me-3 mb-1"
+                        data-bs-toggle="sidebar-right" data-target=".sidebar-right"><i
                             class="fe fe-x text-dark"></i></a>
                 </div>
             </div>
@@ -3730,409 +3752,42 @@
                 <div class="tabs-menu border-bottom">
                     <!-- Tabs -->
                     <ul class="nav panel-tabs">
-                        <li><a href="#side1" data-bs-toggle="tab" class="text-dark">All</a></li>
-                        <li><a href="#side2" data-bs-toggle="tab" class="text-dark">Inbox (25)</a></li>
-                        <li><a href="#side3" data-bs-toggle="tab" class="text-dark">Unread (5)</a></li>
-                        <li><a href="#side4" data-bs-toggle="tab" class="text-dark">Archive (0)</a></li>
+                        <li><a href="#side1" data-bs-toggle="tab" class="text-dark active">All<span
+                                    class="all_span"></span></a></li>
+                        <li><a href="#side2" data-bs-toggle="tab" class="text-dark">Inbox <span
+                                    class="inbox_span"></span></a></li>
+                        <li><a href="#side3" data-bs-toggle="tab" class="text-dark">Unread <span
+                                    class="Unread_span"></span></a></li>
+                        <li><a href="#side4" data-bs-toggle="tab" class="text-dark">Archive <span
+                                    class="archive_span"></span></a></li>
                     </ul>
                 </div>
                 <div class="tab-content">
-                    <!-- <div class="tab-pane " id="side1">
-                        <div class="p-3 fw-semibold ps-5">Feeds</div>
-                        <div class="card-body pt-2">
-                            <div class="browser-stats">
-                                <div class=""></div>
-                                <div class="row mb-4">
-                                    <div class="col-sm-2 mb-sm-0 mb-3">
-                                        <span class="feeds avatar-circle brround bg-primary-transparent"><i
-                                                class="fe fe-user text-primary"></i></span>
-                                    </div>
-                                    <div class="col-sm-10 ps-sm-0">
-                                        <div class="d-flex align-items-end justify-content-between ms-2">
-                                            <h6 class="">New user registered</h6>
-                                            <div>
-                                                <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
-                                                <a href="javascript:void(0)"><i class="fe fe-x"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mb-4">
-                                    <div class="col-sm-2 mb-sm-0 mb-3">
-                                        <span class="feeds avatar-circle avatar-circle-secondary brround bg-secondary-transparent"><i
-                                                class="fe fe-shopping-cart text-secondary"></i></span>
-                                    </div>
-                                    <div class="col-sm-10 ps-sm-0">
-                                        <div class="d-flex align-items-end justify-content-between ms-2">
-                                            <h6 class="">New order delivered</h6>
-                                            <div>
-                                                <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
-                                                <a href="javascript:void(0)"><i class="fe fe-x"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mb-4">
-                                    <div class="col-sm-2 mb-sm-0 mb-3">
-                                        <span class="feeds avatar-circle avatar-circle-danger brround bg-danger-transparent"><i
-                                                class="fe fe-bell text-danger"></i></span>
-                                    </div>
-                                    <div class="col-sm-10 ps-sm-0">
-                                        <div class="d-flex align-items-end justify-content-between ms-2">
-                                            <h6 class="">You have pending tasks</h6>
-                                            <div>
-                                                <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
-                                                <a href="javascript:void(0)"><i class="fe fe-x"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mb-4">
-                                    <div class="col-sm-2 mb-sm-0 mb-3">
-                                        <span class="feeds avatar-circle avatar-circle-warning brround bg-warning-transparent"><i
-                                                class="fe fe-gitlab text-warning"></i></span>
-                                    </div>
-                                    <div class="col-sm-10 ps-sm-0">
-                                        <div class="d-flex align-items-end justify-content-between ms-2">
-                                            <h6 class="">New version arrived</h6>
-                                            <div>
-                                                <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
-                                                <a href="javascript:void(0)"><i class="fe fe-x"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mb-4">
-                                    <div class="col-sm-2 mb-sm-0 mb-3">
-                                        <span class="feeds avatar-circle avatar-circle-pink brround bg-pink-transparent"><i
-                                                class="fe fe-database text-pink"></i></span>
-                                    </div>
-                                    <div class="col-sm-10 ps-sm-0">
-                                        <div class="d-flex align-items-end justify-content-between ms-2">
-                                            <h6 class="">Server #1 overloaded</h6>
-                                            <div>
-                                                <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
-                                                <a href="javascript:void(0)"><i class="fe fe-x"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-2 mb-sm-0 mb-3">
-                                        <span class="feeds avatar-circle avatar-circle-info brround bg-info-transparent"><i
-                                                class="fe fe-check-circle text-info"></i></span>
-                                    </div>
-                                    <div class="col-sm-10 ps-sm-0">
-                                        <div class="d-flex align-items-end justify-content-between ms-2">
-                                            <h6 class="">New project launched</h6>
-                                            <div>
-                                                <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
-                                                <a href="javascript:void(0)"><i class="fe fe-x"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-3 fw-semibold ps-5">Settings</div>
-                        <div class="card-body pt-2">
-                            <div class="browser-stats">
-                                <div class="row mb-4">
-                                    <div class="col-sm-2 mb-sm-0 mb-3">
-                                        <span class="feeds avatar-circle brround bg-primary-transparent"><i
-                                                class="fe fe-settings text-primary"></i></span>
-                                    </div>
-                                    <div class="col-sm-10 ps-sm-0">
-                                        <div class="d-flex align-items-end justify-content-between ms-2">
-                                            <h6 class="">General Settings</h6>
-                                            <div>
-                                                <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mb-4">
-                                    <div class="col-sm-2 mb-sm-0 mb-3">
-                                        <span class="feeds avatar-circle avatar-circle-secondary brround bg-secondary-transparent"><i
-                                                class="fe fe-map-pin text-secondary"></i></span>
-                                    </div>
-                                    <div class="col-sm-10 ps-sm-0">
-                                        <div class="d-flex align-items-end justify-content-between ms-2">
-                                            <h6 class="">Map Settings</h6>
-                                            <div>
-                                                <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mb-4">
-                                    <div class="col-sm-2 mb-sm-0 mb-3">
-                                        <span class="feeds avatar-circle avatar-circle-danger brround bg-danger-transparent"><i
-                                                class="fe fe-headphones text-danger"></i></span>
-                                    </div>
-                                    <div class="col-sm-10 ps-sm-0">
-                                        <div class="d-flex align-items-end justify-content-between ms-2">
-                                            <h6 class="">Support Settings</h6>
-                                            <div>
-                                                <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mb-4">
-                                    <div class="col-sm-2 mb-sm-0 mb-3">
-                                        <span class="feeds avatar-circle avatar-circle-warning brround bg-warning-transparent"><i
-                                                class="fe fe-credit-card text-warning"></i></span>
-                                    </div>
-                                    <div class="col-sm-10 ps-sm-0">
-                                        <div class="d-flex align-items-end justify-content-between ms-2">
-                                            <h6 class="">Payment Settings</h6>
-                                            <div>
-                                                <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mb-4">
-                                    <div class="col-sm-2 mb-sm-0 mb-3">
-                                        <span class="feeds avatar-circle avatar-circle-pink brround bg-pink-transparent"><i
-                                                class="fe fe-bell text-pink"></i></span>
-                                    </div>
-                                    <div class="col-sm-10 ps-sm-0">
-                                        <div class="d-flex align-items-end justify-content-between ms-2">
-                                            <h6 class="">Notification Settings</h6>
-                                            <div>
-                                                <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
+
                     <div class="tab-pane active" id="side1">
                         <div class="list-group list-group-flush" id="notification-container">
-                            <!-- <div class="pt-3 fw-semibold ps-5">Today</div> -->
-                            
-                            <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
-                            
+
+
                         </div>
                     </div>
-                    <div class="tab-pane" id="side2">
-                        <div class="list-group list-group-flush">
-                            <!-- <div class="pt-3 fw-semibold ps-5">Today</div> -->
-                            <div class="list-group-item d-flex align-items-center justify-content-between">
-                                <div class="d-flex align-items-center">
-                                <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/2.jpg"><span
-                                        class="avatar-status bg-success"></span>
-                                </div>
-                                <div class="">
-                                    <a href="javascript:void(0);">
-                                        <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">David</div> <span class="text-dark"> 1436 Jersey Street > Jersey</span>
-                                        <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="">
-                                <span class="fs-12 text-dark">2 min ago</span>
-                            </div>
-                            </div>
-                            <div class="list-group-item d-flex align-items-center justify-content-between">
-                                <div class="d-flex align-items-center">
-                                <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/2.jpg"><span
-                                        class="avatar-status bg-success"></span>
-                                </div>
-                                <div class="">
-                                    <a href="javascript:void(0);">
-                                        <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">Michael</div> <span class="text-dark"> 1436 Jersey Street > Jersey</span>
-                                        <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="">
-                                <span class="fs-12 text-dark">2 min ago</span>
-                            </div>
-                            </div>
-                            <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
-                            
+
+                    <div class="tab-pane " id="side2">
+                        <div class="list-group list-group-flush" id="inbox-notification-container">
+
                         </div>
                     </div>
-                    <div class="tab-pane" id="side3">
-                        <div class="list-group list-group-flush">
-                            <!-- <div class="pt-3 fw-semibold ps-5">Today</div> -->
-                            <div class="list-group-item d-flex align-items-center justify-content-between">
-                                <div class="d-flex align-items-center">
-                                <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/2.jpg"><span
-                                        class="avatar-status bg-success"></span>
-                                </div>
-                                <div class="">
-                                    <a href="javascript:void(0);">
-                                        <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">Michael</div> <span class="text-dark"> 1436 Jersey Street > Jersey</span>
-                                        <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="">
-                                <span class="fs-12 text-dark">2 min ago</span>
-                            </div>
-                            </div>
-                            <div class="list-group-item d-flex align-items-center justify-content-between">
-                                <div class="d-flex align-items-center">
-                                <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/2.jpg"><span
-                                        class="avatar-status bg-success"></span>
-                                </div>
-                                <div class="">
-                                    <a href="javascript:void(0);">
-                                        <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">Thomas</div> <span class="text-dark"> 1436 Jersey Street > Jersey</span>
-                                        <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="">
-                                <span class="fs-12 text-dark">2 min ago</span>
-                            </div>
-                            </div>
-                            <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
-                            
+                    <div class="tab-pane " id="side3">
+                        <div class="list-group list-group-flush" id="unread-notification-container">
+
+
                         </div>
                     </div>
-                    <div class="tab-pane" id="side4">
-                        <div class="list-group list-group-flush">
-                            <!-- <div class="pt-3 fw-semibold ps-5">Today</div> -->
-                            <div class="list-group-item d-flex align-items-center justify-content-between">
-                                <div class="d-flex align-items-center">
-                                <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/2.jpg"><span
-                                        class="avatar-status bg-success"></span>
-                                </div>
-                                <div class="">
-                                    <a href="javascript:void(0);">
-                                        <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">Daniel</div> <span class="text-dark"> 1436 Jersey Street > Jersey</span>
-                                        <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="">
-                                <span class="fs-12 text-dark">2 min ago</span>
-                            </div>
-                            </div>
-                            <div class="list-group-item d-flex align-items-center justify-content-between">
-                                <div class="d-flex align-items-center">
-                                <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/2.jpg"><span
-                                        class="avatar-status bg-success"></span>
-                                </div>
-                                <div class="">
-                                    <a href="javascript:void(0);">
-                                        <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">Daniel</div> <span class="text-dark"> 1436 Jersey Street > Jersey</span>
-                                        <p class="mb-0 fw-bold text-dark fs-15 ">1685$ Received</p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="">
-                                <span class="fs-12 text-dark">2 min ago</span>
-                            </div>
-                            </div>
-                            <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
-                            
+                    <div class="tab-pane " id="side4">
+                        <div class="list-group list-group-flush" id="Archieve-notification-container">
+
+
                         </div>
                     </div>
-                    <!-- <div class="tab-pane" id="side3">
-                        <ul class="task-list timeline-task">
-                            <li class="d-sm-flex mt-4">
-                                <div>
-                                    <i class="task-icon1"></i>
-                                    <h6 class="fw-semibold">Task Finished<span class="text-muted fs-11 mx-2 fw-normal">09 July 2021</span></h6>
-                                    <p class="text-muted fs-12">Adam Berry finished task on<a href="javascript:void(0)" class="fw-semibold"> Project Management</a>
-                                    </p>
-                                </div>
-                                <div class="ms-auto d-md-flex me-3">
-                                    <a href="javascript:void(0)" class="text-muted me-2"><span
-                                            class="fe fe-edit"></span></a>
-                                    <a href="javascript:void(0)" class="text-muted"><span
-                                            class="fe fe-trash-2"></span></a>
-                                </div>
-                            </li>
-                            <li class="d-sm-flex">
-                                <div>
-                                    <i class="task-icon1"></i>
-                                    <h6 class="fw-semibold">New Comment<span class="text-muted fs-11 mx-2 fw-normal">05
-                                            July 2021</span></h6>
-                                    <p class="text-muted fs-12">Victoria commented on Project <a href="javascript:void(0)" class="fw-semibold"> AngularJS Template</a>
-                                    </p>
-                                </div>
-                                <div class="ms-auto d-md-flex me-3">
-                                    <a href="javascript:void(0)" class="text-muted me-2"><span
-                                            class="fe fe-edit"></span></a>
-                                    <a href="javascript:void(0)" class="text-muted"><span
-                                            class="fe fe-trash-2"></span></a>
-                                </div>
-                            </li>
-                            <li class="d-sm-flex">
-                                <div>
-                                    <i class="task-icon1"></i>
-                                    <h6 class="fw-semibold">New Comment<span class="text-muted fs-11 mx-2 fw-normal">25
-                                            June 2021</span></h6>
-                                    <p class="text-muted fs-12">Victoria commented on Project <a href="javascript:void(0)" class="fw-semibold"> AngularJS Template</a>
-                                    </p>
-                                </div>
-                                <div class="ms-auto d-md-flex me-3">
-                                    <a href="javascript:void(0)" class="text-muted me-2"><span
-                                            class="fe fe-edit"></span></a>
-                                    <a href="javascript:void(0)" class="text-muted"><span
-                                            class="fe fe-trash-2"></span></a>
-                                </div>
-                            </li>
-                            <li class="d-sm-flex">
-                                <div>
-                                    <i class="task-icon1"></i>
-                                    <h6 class="fw-semibold">Task Overdue<span class="text-muted fs-11 mx-2 fw-normal">14
-                                            June 2021</span></h6>
-                                    <p class="text-muted mb-0 fs-12">Petey Cruiser finished task <a href="javascript:void(0)" class="fw-semibold"> Integrated management</a>
-                                    </p>
-                                </div>
-                                <div class="ms-auto d-md-flex me-3">
-                                    <a href="javascript:void(0)" class="text-muted me-2"><span
-                                            class="fe fe-edit"></span></a>
-                                    <a href="javascript:void(0)" class="text-muted"><span
-                                            class="fe fe-trash-2"></span></a>
-                                </div>
-                            </li>
-                            <li class="d-sm-flex">
-                                <div>
-                                    <i class="task-icon1"></i>
-                                    <h6 class="fw-semibold">Task Overdue<span class="text-muted fs-11 mx-2 fw-normal">29
-                                            June 2021</span></h6>
-                                    <p class="text-muted mb-0 fs-12">Petey Cruiser finished task <a href="javascript:void(0)" class="fw-semibold"> Integrated management</a>
-                                    </p>
-                                </div>
-                                <div class="ms-auto d-md-flex me-3">
-                                    <a href="javascript:void(0)" class="text-muted me-2"><span
-                                            class="fe fe-edit"></span></a>
-                                    <a href="javascript:void(0)" class="text-muted"><span
-                                            class="fe fe-trash-2"></span></a>
-                                </div>
-                            </li>
-                            <li class="d-sm-flex">
-                                <div>
-                                    <i class="task-icon1"></i>
-                                    <h6 class="fw-semibold">Task Finished<span class="text-muted fs-11 mx-2 fw-normal">09 July 2021</span></h6>
-                                    <p class="text-muted fs-12">Adam Berry finished task on<a href="javascript:void(0)" class="fw-semibold"> Project Management</a>
-                                    </p>
-                                </div>
-                                <div class="ms-auto d-md-flex me-3">
-                                    <a href="javascript:void(0)" class="text-muted me-2"><span
-                                            class="fe fe-edit"></span></a>
-                                    <a href="javascript:void(0)" class="text-muted"><span
-                                            class="fe fe-trash-2"></span></a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div> -->
                 </div>
             </div>
         </div>
@@ -4347,7 +4002,8 @@
         <script src="../assets/switcher/js/switcher.js"></script>
 
         <!-- CUSTOM JS -->
-        <!-- <script src="../assets/js/custom.js"></script><script src="../assets/js/getNotification.js"></script> -->
+        <!-- <script src="../assets/js/custom.js"></script>-->
+            <script src="../assets/js/getNotification.js"></script> 
 
         <!-- CUSTOM JS -->
         <script src="../assets/js/custom-swicher.js"></script>
@@ -4743,9 +4399,17 @@ $("#user-img").attr("src",image)
         propertyData = response.property;
         leaseData = response.lease;
         tenantData=response.tenants
-        if(propertyData.length==0){
+        if(propertyData.length<1){
 $("#download_csv_reports").attr("disabled",true)
 $("#download_pdf_reports").attr("disabled",true)
+        }
+        if(leaseData.length<1){
+$("#download_csv_reports2").attr("disabled",true)
+$("#download_pdf_reports2").attr("disabled",true)
+        }
+        if(tenantData.length<1){
+$("#download_csv_reports3").attr("disabled",true)
+$("#download_pdf_reports3").attr("disabled",true)
         }
         constructPropertyTable(propertyData)
         if(leaseData.length>1){
@@ -4776,7 +4440,7 @@ $("#download_pdf_reports_lease").attr("disabled",true)
                 // '<span style="color: #4573D2;">' + remainingDays + ' Days Remaining</span>' +
                 '</td>' +
                 '<td class="propertyUnits">' +
-                '<p style="font-weight: 800; color: #000;" class="mb-1">' + lease.firstName+" "+lease.lastName + '</p>' +
+                '<p style="font-weight: 800;" class="mb-1 text-dark">' + lease.firstName+" "+lease.lastName + '</p>' +
                 '</td>' +
                 '<td class="propertyUnits">' +
                 '<span class="font-weight-normal">Phone: ' + lease.phoneNumber + '</span>' +
@@ -4816,7 +4480,7 @@ $("#download_pdf_reports_lease").attr("disabled",true)
                 // '<span style="color: #4573D2;">' + remainingDays + ' Days Remaining</span>' +
                 '</td>' +
                 '<td class="propertyUnits">' +
-                '<p style="font-weight: 800; color: #000;" class="mb-1">' + tenant.firstName+" "+tenant.lastName + '</p>' +
+                '<p style="font-weight: 800; " class="mb-1 text-dark">' + tenant.firstName+" "+tenant.lastName + '</p>' +
                 // '<span class="font-weight-normal">Phone: ' + tenant.phoneNumber + '</span>' +
                 '</td>' +
                 '<td class="propertyUnits">' +
@@ -4952,18 +4616,23 @@ $.ajax({
     },
     success: function (response) {
         invoiceData=response.property
-        console.log(invoiceData)
+        if(invoiceData?.length<1){
+$("#download_csv_reports4").attr("disabled",true)
+$("#download_pdf_reports4").attr("disabled",true)
+        }
         invoiceData.forEach((invoice,index) => {
             // Construct the HTML for the new row
             var newRowHtml = '<tr>' +
                 '<td style="font-weight: 600;">' + (index+1) + '</td>'+
                 '<td class="invoice-id" style="font-weight: 600;">' + invoice.invoiceID + '</td>' +
-                '<td class="tenantName" style="font-weight: 600; color: #4573D2;">' + invoice.firstName+" "+ invoice.lastName+ '<br><small><span style="color: gray;">Phone: ' + invoice.phoneNumber + '</span></small></td>' +
+                '<td class="tenantName" style="font-weight: 600; color: #4573D2;">' + invoice.firstName+" "+ invoice.lastName+ '</td>' +
                 '<td class="memo" style="font-weight: 600;">' + invoice.email + '</td>' +
-                '<td class="date" style="font-weight: 600;">' + formatDate(invoice.created_at) + '<br><small>Due Date: ' + formatDate(invoice.dueDate) + '</small></td>' +
-                '<td class="propertyName" style="font-weight: 600;">' + invoice.propertyName + '<br><small>' + invoice.userPhone + '</small></td>' +
-                '<td class="rentAmount" style="font-weight: 600;">' + formatCurrency(invoice.totalAmount) + '<br><small>Next Due Date: ' + (formatDate(invoice.recurringNextDate)=="Invalid Date"?"N/A":formatDate(invoice.recurringNextDate)) + '</small></td>' +
-                '<td class="status" style="font-weight: 600;">' + invoice.address + '<br><small>' + invoice.state+" "+invoice.zipCode+ '</small></td>' +
+                '<td class="date" style="font-weight: 600;">' + formatDate(invoice.created_at) + '</td>' +
+                '<td class="propertyName" style="font-weight: 600;">' + invoice.propertyName + '</td>' +
+                '<td class="propertyName" style="font-weight: 600;">' + invoice.userPhone + '</td>' +
+                '<td class="rentAmount" style="font-weight: 600;">' + formatCurrency(invoice.totalAmount) + '</td>' +
+                '<td class="rentAmount" style="font-weight: 600;">Next Due Date: ' + (formatDate(invoice.recurringNextDate)=="Invalid Date"?"N/A":formatDate(invoice.recurringNextDate)) + '</td>' +
+                '<td class="status" style="font-weight: 600;">' + invoice.address + '</td>' +
                 '<td><i class="fe fe-more-vertical three-dots" data-bs-toggle="dropdown"></i>' +
                 '<ul class="dropdown-menu">' +
                 '<li><a class="dropdown-item text-dark view-btnn" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#viewModal-invoice">View</a></li>' +
@@ -4994,7 +4663,10 @@ $.ajax({
     success: function (response) {
         
         taskData = response.property;
-        console.log(taskData)
+        if(taskData.length<1){
+$("#download_csv_reports5").attr("disabled",true)
+$("#download_pdf_reports5").attr("disabled",true)
+        }
         taskData.forEach((task,index) => {
             // Calculate time difference between task created_at and current date
             var createdDate = new Date(task.created_at);
@@ -5261,28 +4933,28 @@ $.ajax({
         
         <script>
             function logout() {
-                $(document).ready(function () {
-                    $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
-                        type: 'PUT',
-                        contentType: false,
-                        processData: false,
-                        headers: {
-                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                        },
-                        success: function (response) {
-                            console.log(response);
-                            localStorage.removeItem('authtoken');
-                            window.close();
-                            window.open('./login_module.html', "_blank")
-                            console.log('Done');
-                        },
-                        error: function (xhr, status, error) {
-                            console.log(error);
-                        }
-                    });
+            $(document).ready(function () {
+                $.ajax({
+                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                    type: 'PUT',
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        localStorage.removeItem('authtoken');
+                        // window.close();
+                        window.open('./login_module.html', "_self")
+                        console.log('Done');
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(error);
+                    }
                 });
-            }
+            });
+        }
         </script>
 </body>
 

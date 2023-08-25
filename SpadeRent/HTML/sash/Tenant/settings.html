@@ -967,19 +967,19 @@
                                         <label for="inputAddress" class="form-label fw-bold">Address <spnan
                                                 class="text-danger">*</span></label>
                                         <input type="text" class="form-control form" id="address"
-                                            placeholder="1234 Main St">
+                                            placeholder="Enter Address">
                                         <span class="text-danger d-none">Address is required!</span>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="inputCity" class="form-label fw-bold">City <spnan
                                                 class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="city">
+                                        <input type="text" class="form-control form" >
                                         <span class="text-danger d-none">City is required!</span>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="inputState" class="form-label fw-bold">State <spnan
                                                 class="text-danger">*</span></label>
-                                        <select id="state" class="form-select form">
+                                        <select  class="form-select form">
                                             <option selected>Choose...</option>
                                             <option>Sindh</option>
                                             <option>Punjab</option>
@@ -991,7 +991,7 @@
                                     <div class="col-md-4">
                                         <label for="inputZip" class="form-label fw-bold">Zip <spnan class="text-danger">
                                                 *</span></label>
-                                        <input type="text" class="form-control form" id="zip">
+                                        <input type="text" class="form-control form" >
                                         <span class="text-danger d-none">Zip is required!</span>
                                     </div>
                                     <div class="col-md-6">
@@ -1246,7 +1246,7 @@
                         <div class="col-12">
                             <label for="inputAddress" class="form-label fw-bold">Address <spnan class="text-danger">
                                     *</span></label>
-                            <input type="text" class="form-control form" id="address_update" placeholder="1234 Main St">
+                            <input type="text" class="form-control form" id="address_update" placeholder="Enter Address">
                             <span class="text-danger d-none">Address is required!</span>
                         </div>
                         <div class="col-md-4">
@@ -1419,8 +1419,8 @@
                                         </div>
                                         <div class="dropdown  d-flex notifications">
                                             <a class="nav-link icon" data-bs-toggle="sidebar-right"
-                                                data-target=".sidebar-right"><i class="fe fe-bell"></i><span
-                                                    class=" pulse"></span>
+                                                data-target=".sidebar-right"><i class="fe fe-bell"></i> 
+                                                <span class="badge bg-secondary header-badge bg-primary" id="count_unread"></span>
                                             </a>
                                             <!-- <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                                 <div class="drop-heading border-bottom">
@@ -1668,9 +1668,9 @@
                                             <div class="tabs-menu1">
                                                 <!-- Tabs -->
                                                 <ul class="nav panel-tabs">
-                                                    <!-- <li><a href="#tab5" class="active" data-bs-toggle="tab">Profile</a>
-                                                    </li> -->
-                                                    <li><a href="#tab6" class="active" data-bs-toggle="tab">Security
+                                                    <li><a href="#tab5" class="active" data-bs-toggle="tab">Profile</a>
+                                                    </li>
+                                                    <li><a href="#tab6" data-bs-toggle="tab">Security
                                                             Settings</a></li>
                                                     <li><a href="#tab7" data-bs-toggle="tab">Appearance</a></li>
                                                     <!-- <li><a href="#tab8" data-bs-toggle="tab">Payment Method</a></li>
@@ -1690,7 +1690,7 @@
                                 <div class="panel panel-primary">
                                     <div class="panel-body tabs-menu-body">
                                         <div class="tab-content">
-                                            <div class="tab-pane" id="tab5">
+                                            <div class="tab-pane active" id="tab5">
                                                 <h2 class="h2-personal-inf">Personal Information</h2>
                                                 <p class="p-personal-inf">Automate everything from listing units to
                                                     moving out tenants, and everything in between.</p>
@@ -1725,20 +1725,20 @@
                                                 <div class="form-row mt-5">
                                                     <div class="col-xl-4 mb-3 mt-5">
                                                         <label for="validationCustom01">First name</label>
-                                                        <input type="text" class="form-control" id="validationCustom01"
+                                                        <input type="text" class="form-control" id="firstName"
                                                             placeholder="John" required>
                                                         <div class="valid-feedback">Looks good!</div>
                                                     </div>
                                                     <div class="col-xl-4 mb-3 mt-5">
                                                         <label for="validationCustom02">Last name</label>
-                                                        <input type="text" class="form-control" id="validationCustom02"
+                                                        <input type="text" class="form-control" id="lastName"
                                                             placeholder="Clark" required>
                                                         <div class="valid-feedback">Looks good!</div>
                                                     </div>
                                                     <div class="col-lg-4"></div>
                                                     <div class="col-xl-4 mb-3">
                                                         <label for="validationCustom02">Email</label>
-                                                        <input type="email" class="form-control" id="validationCustom02"
+                                                        <input type="email" class="form-control" id="email"
                                                             placeholder="johnclark@outlook.com" required>
                                                         <div class="valid-feedback">Looks good!</div>
                                                     </div>
@@ -1751,7 +1751,7 @@
                                                     <div class="col-lg-4"></div>
                                                     <div class="col-xl-8 mb-3">
                                                         <label for="validationCustom02">Business Name</label>
-                                                        <input type="text" class="form-control" id="validationCustom02"
+                                                        <input type="text" class="form-control" id="businessName"
                                                             placeholder="" required>
                                                         <div class="valid-feedback">Looks good!</div>
                                                     </div>
@@ -1765,40 +1765,47 @@
                                                             <div class="col-xl-3 mb-3">
                                                                 <label for="validationCustom02">City</label>
                                                                 <input type="text" class="form-control"
-                                                                    id="validationCustom02" placeholder="Houston"
+                                                                    id="city" placeholder="Houston"
                                                                     required>
                                                                 <div class="valid-feedback">Looks good!</div>
                                                             </div>
 
                                                             <div class="col-xl-3 mb-3">
-                                                                <label for="validationCustom02">State</label>
+                                                                <label for="state">State</label>
                                                                 <input type="text" class="form-control"
-                                                                    id="validationCustom02" placeholder="Taxes"
+                                                                    id="state" placeholder="Taxes"
                                                                     required>
                                                                 <div class="valid-feedback">Looks good!</div>
                                                             </div>
 
                                                             <div class="col-xl-3 mb-3">
-                                                                <label for="validationCustom02">Zip Code</label>
+                                                                <label for="zip">Zip Code</label>
                                                                 <input type="text" class="form-control"
-                                                                    id="validationCustom02" placeholder="67863"
+                                                                    id="zip" placeholder="67863"
                                                                     required>
                                                                 <div class="valid-feedback">Looks good!</div>
                                                             </div>
+
+                                                            <div class="col-xl-9 mb-3">
+                                                                <label for="saddress1"><b>Address</b></label>
+                                                                <input type="text" class="form-control" id="address" placeholder="Enter Address" required="">
+                                                                <div class="valid-feedback">Looks good!</div>
+                                                            </div>
+
                                                             <div class="col-lg-3"></div>
                                                             <div class="col-lg-3 mt-4"
                                                                 style="display: flex; width: auto;">
+                                                                <button class="btn btn-light btn-pill m-2" onclick="window.location='./index.html'">Close</button>
+
                                                                 <button
-                                                                    class="btn btn-light btn-pill m-2">Close</button>
-                                                                <button
-                                                                    class="btn btn-primary btn-pill m-2">Save</button>
+                                                                    class="btn btn-primary btn-pill m-2" id="save_profile">Save</button>
                                                             </div>
                                                         </div>
                                                     </div>
 
                                                 </div>
                                             </div>
-                                            <div class="tab-pane active" id="tab6">
+                                            <div class="tab-pane" id="tab6">
                                                 <h2 class="h2-personal-inf">Login & Password</h2>
                                                 <p class="p-personal-inf">You can change your login email and password
                                                     below.
@@ -3264,6 +3271,7 @@
 
             <script>
                 $("#document").ready(() => {
+
                     $("#save").click(() => {
                         console.log($("#current_password_reset").val(), $("#id_password1").val())
                         $.ajax({
@@ -3371,6 +3379,7 @@
 
             <script>
                 // ----- On render -----
+                var file;var image_url = " "; var image_key = " ";
                 $(function () {
 
                     $('#profile').addClass('dragging').removeClass('dragging');
@@ -3384,7 +3393,7 @@
                     $('#profile').removeClass('dragging hasImage');
 
                     if (e.originalEvent) {
-                        var file = e.originalEvent.dataTransfer.files[0];
+                        file = e.originalEvent.dataTransfer.files[0];
                         console.log(file);
 
                         var reader = new FileReader();
@@ -3395,11 +3404,13 @@
                         reader.onload = function (e) {
                             console.log(reader.result);
                             $('#profile').css('background-image', 'url(' + reader.result + ')').addClass('hasImage');
+                           
 
                         }
 
                     }
                 })
+                
                 $('#profile').on('click', function (e) {
                     console.log('clicked')
                     $('#mediaFile').click();
@@ -3416,17 +3427,143 @@
 
                     var input = e.target;
                     if (input.files && input.files[0]) {
-                        var file = input.files[0];
-
+                        file = input.files[0];
+                        console.log(file)
                         var reader = new FileReader();
 
                         reader.readAsDataURL(file);
                         reader.onload = function (e) {
-                            console.log(reader.result);
+                        
                             $('#profile').css('background-image', 'url(' + reader.result + ')').addClass('hasImage');
+                            
                         }
                     }
                 })
+                $(document).on("click", "#save_profile", () => {
+                    let userData = {
+                        firstName: $("#firstName").val(),
+                        lastName: $("#lastName").val(),
+                        email: $("#email").val(),
+                        phone: $("#phone").val(),
+                        companyName: $("#businessName").val(),
+                        city: $("#city").val(),
+                        state: $("#state").val(),
+                        zipcode: $("#zip").val(),
+                        address: $("#address").val(),
+                        Image: image_url,
+                        imageKey: image_key
+                    }
+                    const userForm = new FormData()
+                    if (file) {
+                        console.log(file)
+                        userForm.append("image", file)
+                        $.ajax({
+                            url: 'http://localhost:3000/api/spade/uploadTenant',
+                            type: 'POST',
+                            data: userForm,
+                            headers: {
+                                'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                            },
+                            contentType: false,
+                            processData: false,
+                            success: function (response) {
+                                console.log(response.images[0].image_url);
+                                userData.Image = response.images[0].image_url
+                                userData.imageKey = response.images[0].image_key
+                                $.ajax({
+                                    url: 'http://localhost:3000/api/spade/updateTenantProfile',
+                                    method: 'PUT',
+                                    data: JSON.stringify(userData),
+                                    contentType: 'application/json',
+                                    headers: {
+                                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                                    },
+                                    success: function (response) {
+                                        $("#myModal_success p").text("Succesfully Updated!!!")
+                                        $("#myModal_success").modal("show")
+                                        setTimeout(function () {
+                                            $("#myModal_success").modal("hide");
+                                        }, 2000);
+                                        getData()
+                                    },
+                                    error: function (xhr, status, error) {
+                                        console.log('Error occurred while fetching state and city data.');
+                                        console.log(xhr);
+                                        console.log(error);
+                                        // console.log('Error occurred while fetching state and city data.');
+                                    }
+                                });
+
+                            },
+                            error: function (error) {
+                                console.error('Error submitting image:', error);
+                                // Handle the error here
+                            }
+                        });
+                    } else {
+                        $.ajax({
+                            url: 'http://localhost:3000/api/spade/updateTenantProfile',
+                            method: 'PUT',
+                            data: JSON.stringify(userData),
+                            contentType: 'application/json',
+                            headers: {
+                                'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                            },
+                            success: function (response) {
+                                $("#myModal_success p").text("Succesfully Updated!!!")
+                                $("#myModal_success").modal("show")
+                                setTimeout(function () {
+                                    $("#myModal_success").modal("hide");
+                                }, 2000);
+                                getData()
+
+                            },
+                            error: function (xhr, status, error) {
+                                console.log('Error occurred while fetching state and city data.');
+                                console.log(xhr);
+                                console.log(error);
+                                // console.log('Error occurred while fetching state and city data.');
+                            }
+                        });
+                    }
+                })
+                $.ajax({
+                url: 'http://localhost:3000/api/spade/protectedTenant',
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    $("#firstName").val(response.firstName)
+                    $("#lastName").val(response.lastName)
+                    $("#city").val(response.city)
+                    $("#zip").val(response.zipCode)
+                    $("#address").val(response.address)
+                    $("#state").val(response.state)
+                    $("#email").val(response.email)
+                    $("#businessName").val(response.businessName)
+                    $("#phone").val(response.phoneNumber)
+                    if (response.imageKey) {
+                                image_url = response.image
+                                image_key = response.imageKey
+                            }
+                            $('#profile').css('background-image', 'url(' + response.image + ')').addClass('hasImage');
+
+                console.log(response)    
+$("#user-img").attr("src",image)
+                    $("#user-img-dark").attr("src",image)                },
+                error: function (xhr, status, error) {
+                    $("#myModal_warning").modal("show");
+                    setTimeout(function() {
+                        $('#myModal_warning').modal('hide');
+                        window.location = '../Landlord/login_module.html';
+                    }, 2000);
+                    console.log('Error occurred while fetching state and city data.');
+                    console.log(xhr);
+                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                }
+            });
             </script>
 
             <script>

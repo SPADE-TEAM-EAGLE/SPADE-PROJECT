@@ -35,7 +35,12 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/dataTables.bootstrap.min.css" integrity="sha512-BMbq2It2D3J17/C7aRklzOODG1IQ3+MHw3ifzBHMBwGO/0yUqYmsStgBjI0z5EYlaDEFnvYV7gNYdD3vFLRKsA==" crossorigin="anonymous"
         referrerpolicy="no-referrer" />
-    <style>
+    <script>
+         if(!localStorage.getItem("authtoken")){
+                window.location="./login_module.html"
+            }
+    </script>
+<style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
         .custom-file-input::-webkit-file-upload-button {
             visibility: hidden;
@@ -587,109 +592,124 @@
         <div class="offcanvas-body">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-6 col-lg-3 col-xl-3">
-                        <div class="card">
+                    <div class="col-md-6 col-lg-3 col-xl-3 mb-5">
+                        <div class="card h-100">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
-                                <div class="card-title fw-bold"><a href="properties-all.html" style="color: white;">Property</a></div>
+                                <div class="card-title fw-bold"><a href="properties-all.html"
+                                        style="color: white;">Property</a></div>
                             </div>
                             <div class="card-body">
                                 <div class="text-center chat-image mb-5">
                                     <div class="avatar avatar-xxl chat-profile mb-3 brround">
-                                        <a class="" href="properties-all.html"><img alt="avatar" src="../assets/images/icons/Group 10341.png" class="brround w-100 h-100"></a>
+                                        <a class="" href="properties-all.html"><img alt="avatar"
+                                                src="../assets/images/icons/Group 10341.png"
+                                                class="brround w-100 h-100"></a>
                                     </div>
                                     <div class="main-chat-msg-name">
                                         <a href="properties-all.html">
                                             <h5 class="mb-1 text-dark fw-bold">Create New Property</h5>
                                         </a>
-                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the benefits of an all-in-one property management tool! </p>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Simplify property management. Effortlessly create and manage rental properties with our software, making life easier for landlords and property managers. </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-3 col-xl-3">
-                        <div class="card">
+                    <div class="col-md-6 col-lg-3 col-xl-3 mb-5">
+                        <div class="card h-100">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
-                                <div class="card-title fw-bold"><a href="add-tenant.html" style="color: white;">Tenant</a></div>
+                                <div class="card-title fw-bold"><a href="add-tenant.html"
+                                        style="color: white;">Tenant</a></div>
                             </div>
                             <div class="card-body">
                                 <div class="text-center chat-image mb-5">
                                     <div class="avatar avatar-xxl chat-profile mb-3 brround">
-                                        <a class="" href="add-tenant.html"><img alt="avatar" src="../assets/images/icons/Group 10344.png" class="brround w-100 h-100"></a>
+                                        <a class="" href="add-tenant.html"><img alt="avatar"
+                                                src="../assets/images/icons/Group 10344.png"
+                                                class="brround w-100 h-100"></a>
                                     </div>
                                     <div class="main-chat-msg-name">
                                         <a href="add-tenant.html">
                                             <h5 class="mb-1 text-dark fw-bold">Create New Tenant</h5>
                                         </a>
-                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the benefits of an all-in-one property management tool! </p>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Effortlessly add new tenants with our rental software, streamlining the tenant onboarding process for property managers and landlords. </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-3 col-xl-3">
-                        <div class="card">
+                    <div class="col-md-6 col-lg-3 col-xl-3 mb-5">
+                        <div class="card h-100">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
-                                <div class="card-title fw-bold"><a href="create-invoicing.html" style="color: white;">Invoice</a></div>
+                                <div class="card-title fw-bold"><a href="create-invoicing.html"
+                                        style="color: white;">Invoice</a></div>
                             </div>
                             <div class="card-body">
                                 <div class="text-center chat-image mb-5">
                                     <div class="avatar avatar-xxl chat-profile mb-3 brround">
-                                        <a class="" href="create-invoicing.html"><img alt="avatar" src="../assets/images/icons/Group 10346.png" class="brround w-100 h-100"></a>
+                                        <a class="" href="create-invoicing.html"><img alt="avatar"
+                                                src="../assets/images/icons/Group 10346.png"
+                                                class="brround w-100 h-100"></a>
                                     </div>
                                     <div class="main-chat-msg-name">
                                         <a href="create-invoicing.html">
                                             <h5 class="mb-1 text-dark fw-bold">Create New Invoice</h5>
                                         </a>
-                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the benefits of an all-in-one property management tool! </p>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Effortlessly onboard new tenants with our user-friendly rental software, streamlining the tenant registration process for property managers and landlords. </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-3 col-xl-3">
-                        <div class="card">
+                    <div class="col-md-6 col-lg-3 col-xl-3 mb-5">
+                        <div class="card h-100">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
-                                <div class="card-title fw-bold"><a href="#" style="color: white;">Lead</a></div>
+                                <div class="card-title fw-bold"><a href="coming-soon.html" style="color: white;">Lead</a></div>
                             </div>
                             <div class="card-body">
                                 <div class="text-center chat-image mb-5">
                                     <div class="avatar avatar-xxl chat-profile mb-3 brround">
-                                        <a class="" href="#"><img alt="avatar" src="../assets/images/icons/Group 10348.png" class="brround w-100 h-100"></a>
+                                        <a class="" href="coming-soon.html"><img alt="avatar"
+                                                src="../assets/images/icons/Group 10348.png"
+                                                class="brround w-100 h-100"></a>
                                     </div>
+
                                     <div class="main-chat-msg-name">
-                                        <a href="#">
+                                        <a href="coming-soon.html">
                                             <h5 class="mb-1 text-dark fw-bold">Create New Lead</h5>
                                         </a>
-                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the benefits of an all-in-one property management tool! </p>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Effortlessly generate and manage leads with our property rental software, making it easier for landlords to find potential tenants. </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-3 col-xl-3">
-                        <div class="card">
+                    <div class="col-md-6 col-lg-3 col-xl-3 mb-5">
+                        <div class="card h-100">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
-                                <div class="card-title fw-bold"><a href="create-tasks.html" style="color: white;">Tasks</a></div>
+                                <div class="card-title fw-bold"><a href="create-tasks.html"
+                                        style="color: white;">Tasks</a></div>
                             </div>
                             <div class="card-body">
                                 <div class="text-center chat-image mb-5">
                                     <div class="avatar avatar-xxl chat-profile mb-3 brround">
-                                        <a class="" href="create-tasks.html"><img alt="avatar" src="../assets/images/icons/Group 10350.png" class="brround w-100 h-100"></a>
+                                        <a class="" href="create-tasks.html"><img alt="avatar"
+                                                src="../assets/images/icons/Group 10350.png"
+                                                class="brround w-100 h-100"></a>
                                     </div>
                                     <div class="main-chat-msg-name">
                                         <a href="create-tasks.html">
                                             <h5 class="mb-1 text-dark fw-bold">Create New Tasks</h5>
                                         </a>
-                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the benefits of an all-in-one property management tool! </p>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Effortlessly manage tasks with our property rental software. Stay organized and boost productivity in property management. </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-md-6 col-lg-3 col-xl-3">
-                        <div class="card">
+                    <div class="col-md-6 col-lg-3 col-xl-3 mb-5">
+                        <div class="card h-100">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
                                 <div class="card-title fw-bold"><a href="tasks-vendors.html"
                                         style="color: white;">Vendor</a></div>
@@ -705,14 +725,13 @@
                                         <a href="tasks-vendors.html">
                                             <h5 class="mb-1 text-dark fw-bold">Create New Vendors</h5>
                                         </a>
-                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the
-                                            benefits of an all-in-one property management tool! </p>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Effortlessly onboard vendors with our property rental software, streamlining property maintenance for landlords and property managers. </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -954,8 +973,9 @@
 
                                         <!-- 3 comments start  -->
                                         <div class="dropdown  d-flex notifications">
-                                            <a class="nav-link icon" data-bs-toggle="sidebar-right" data-target=".sidebar-right"><i
-                                                class="fe fe-bell"></i><span class=" pulse"></span>
+                                            <a class="nav-link icon" data-bs-toggle="sidebar-right"
+                                            data-target=".sidebar-right"><i class="fe fe-bell"></i> 
+                                            <span class="badge bg-secondary header-badge bg-primary" id="count_unread"></span>
                                         </a>
                                             <!-- <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                                 <div class="drop-heading border-bottom">
@@ -1355,29 +1375,34 @@
                                                 <ul class="dropdown-menu" role="menu">
                                                     <li><a href="javascript:void(0)"><strong class="text-dark">Filter by:</strong></a>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">A-Z Alphabets</a>
+                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">IMAGE</a>
                                                         <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1">
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">Date Modified</a>
+                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">TASK</a>
                                                         <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1">
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">Ascending</a>
+                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">ASSIGNED TO</a>
                                                         <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1">
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">Descending</a>
+                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">DUE AT</a>
                                                         <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1">
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">Recently Added</a>
+                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">RELATED TO</a>
                                                         <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1">
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
+                                                        </div>
+                                                    </li>
+                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">STATUS</a>
+                                                        <div class="form-check m-0">
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
                                                 </ul>
@@ -2102,8 +2127,46 @@
     <script src="../assets/js/email-verification.js"></script>
     <script src="../assets/js/intercom.js"></script>
     <script src="../assets/js/getNotification.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.8/sjcl.min.js"></script>
     <script>
         $(document).ready(function() {
+            $.ajax({
+                    url: 'https://backend.app.spaderent.com/api/spade/protected',
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        console.log(response);
+
+                        function toTitleCase(str) {
+                            return str.replace(/\w\S*/g, function (txt) {
+                                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                            });
+                        }
+                        localStorage.setItem("LandlordImg", response.image)
+                        localStorage.setItem("landlordId", response.userId)
+                        // LandlordImg = response.image;
+                        $("#user-img").attr("src", response.image)
+                        $("#user-img-dark").attr("src", response.image)
+                        $("#user-name").text(toTitleCase(response.user))
+                        $("#header-user").text(toTitleCase(response.user))
+                        // userEmail = email
+                        // id = userId
+                    },
+                    error: function (xhr, status, error) {
+                        localStorage.removeItem('authtoken');
+                        $("#myModal_warning").modal("show");
+                        setTimeout(function () {
+                            $('#myModal_warning').modal('hide');
+                            window.location = '../Landlord/login_module.html';
+                        }, 2000);
+                        console.log('Error occurred while fetching state and city data.');
+                        console.log(xhr);
+                        console.log(error);
+                        // console.log('Error occurred while fetching state and city data.');
+                    }
+                });
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
                 method: 'GET',
@@ -2127,8 +2190,19 @@
                     // console.log('Error occurred while fetching state and city data.');
                 }
             });
-            const tenantId = (new URL(document.location)).searchParams.get("tenantId");
-            // console.log($("#viewUnits").attr("href"))
+            const encryptedPropertyId = decodeURIComponent((new URL(document.location)).searchParams.get("tenant"));
+
+// Decryption
+var password = 'your-secret-password';
+const tenantId = sjcl.decrypt(password, encryptedPropertyId);
+var encodedTenantId = encodeURIComponent(encryptedPropertyId);
+            
+                        
+            $(".company-name").text()
+            $("#viewProperties").attr("href", `./tenant-properties.html?tenant=${encodedTenantId}`)
+            $("#viewOverview").attr("href", `./view-tenant.html?tenant=${encodedTenantId}`)
+            $("#viewFiles").attr("href", `./tenant-file.html?tenant=${encodedTenantId}`)
+            $("#viewTasks").attr("href", `./tenant-tasks.html?tenant=${encodedTenantId}`)
             //            
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/getTenantsByID',
@@ -2160,18 +2234,14 @@
                     console.log(xhr.responseText);
                 }
             });
-            $("#viewProperties").attr("href", `./tenant-properties.html?tenantId=${tenantId}`)
-            $("#viewOverview").attr("href", `./view-tenant.html?tenantId=${tenantId}`)
-            $("#viewFiles").attr("href", `./tenant-file.html?tenantId=${tenantId}`)
-            $("#viewTasks").attr("href", `./tenant-tasks.html?tenantId=${tenantId}`)
-
+            
             function toTitleCase(str) {
                 return str.replace(/\w\S*/g, function(txt) {
                     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                 });
             }
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/tenantTask',
+                url: 'http://localhost:3000/api/spade/tenantTask',
                 type: 'GET',
                 data: {
                     Id: tenantId
@@ -2181,8 +2251,11 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function(response) {
-                    console.log(response.data[0])
-                    $("#property_name").text(response.data[0][0].propertyName)
+                    console.log(response)
+                   if(response?.data[0]?.length > 0){
+                        $("#no-task").show()
+                        $("#task-table").hide()
+                    $("#property_name").text(response?.data[0][0]?.propertyName)
                         // $("#property_address").text(data[0][0].pAddress)
 
                     var tableBody = $('#table_body');
@@ -2248,7 +2321,7 @@
 
                         // Append the row to the table body
                         tableBody.append(row);
-                    })
+                    })}
                 },
                 error: function(xhr, status, error) {
                     $("#myModal_warning_connection").modal("show");
@@ -2259,6 +2332,24 @@
                     console.log(xhr.responseText);
                 }
             })
+            $('input[type="checkbox"]').click(function() {
+            console.log($(this).closest('li').index())
+            var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
+            var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
+            console.log(columnIndex, isColumnVisible)
+            console.log( $(this).find('th:nth-child(' + (columnIndex) + ')'))
+                // Toggle the visibility of the corresponding column
+                    $('table').find('tr').each(function() {
+                var column = $(this).find('th:nth-child(' + (columnIndex) + '), td:nth-child(' + (columnIndex) + ')');
+                isColumnVisible ? column.show() : column.hide();
+            });
+        });
+        $('#typehead').on('keyup', function() {
+                var searchValue = $(this).val().toLowerCase();
+                $('#table_body tr').filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+                });
+            });
         });
     </script>
 
@@ -2274,6 +2365,7 @@
         } else {
             logo.src = '../assets/header-img/question.svg';
         }
+        
     </script>
 
     <script>
@@ -2284,28 +2376,28 @@
     </script>
     <script>
         function logout() {
-                $(document).ready(function () {
-                    $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
-                        type: 'PUT',
-                        contentType: false,
-                        processData: false,
-                        headers: {
-                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                        },
-                        success: function (response) {
-                            console.log(response);
-                            localStorage.removeItem('authtoken');
-                            window.close();
-                            window.open('./login_module.html', "_blank")
-                            console.log('Done');
-                        },
-                        error: function (xhr, status, error) {
-                            console.log(error);
-                        }
-                    });
+            $(document).ready(function () {
+                $.ajax({
+                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                    type: 'PUT',
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        localStorage.removeItem('authtoken');
+                        // window.close();
+                        window.open('./login_module.html', "_self")
+                        console.log('Done');
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(error);
+                    }
                 });
-            }
+            });
+        }
     </script>
 </body>
 

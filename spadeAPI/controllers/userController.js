@@ -58,6 +58,8 @@ const {
   getInvoiceGraphDataByPropertId,
   getInvoiceGraphDataByPropertyId,
   getTaskGraphDataByPropertyId,
+  getTaskGraphDataByPropertyId,
+  getInvoiceGraphDataByPropertyId,
 } = require("../constants/queries");
 
 const { hashedPassword } = require("../helper/hash");
@@ -66,8 +68,7 @@ const { fileUpload, deleteImageFromS3 } = require("../helper/S3Bucket");
 const { verifyMailCheck } = require("../helper/emailVerify");
 const userServices = require("../Services/userServices");
 const { log } = require("console");
-const { NotificationSocket } = require("../app.js");
-const { encryptJwtToken } = require("../helper/EnccryptDecryptToken");
+// const { NotificationSocket } = require("../app.js");
 const config = process.env;
 
 exports.createUser = async function (req, res) {
@@ -148,24 +149,8 @@ exports.checkemail = async function (req, res) {
 };
 
 exports.getUser = (req, res) => {
-  // console.log(req.user);
-  res.status(200).json({
-    user: req.user.userName,
-    email: req.user.email,
-    userId: req.user.userId,
-    businessName: req.user.businessName,
-    phone: req.user.phone,
-    streetAddress: req.user.streetAddress,
-    businessAddress: req.user.BusinessAddress,
-    lastName: req.user.lastName,
-    firstName: req.user.firstName,
-    image: req.user.image,
-    imageKey: req.user.imageKey,
-    planID: req.user.planID,
-    isActive: req.user.isActive,
-    landlordId: req.user.landlordID,
-    propertyID: req.user.propertyID,
-  });
+
+  res.status(200).json(req.user);
 };
 
 exports.Signin = async function (req, res) {
@@ -1921,8 +1906,9 @@ exports.getPropertyDashboardData = async (req, res) => {
 exports.getTaskDashboardData = async (req, res) => {
   try {
     const { userId } = req.user;
-    const { start, end, propertyId } = req.query;
-    if (propertyId) {
+    const { start, end ,propertyId} = req.params;
+    
+    if(propertyId){
       const getAllTaskData = await queryRunner(getTaskGraphDataByPropertyId, [
         propertyId,
         userId,
@@ -1932,7 +1918,7 @@ exports.getTaskDashboardData = async (req, res) => {
       res.status(200).json({
         property: getAllTaskData[0],
       });
-    } else {
+    }else{
       const getAllTaskData = await queryRunner(getTaskGraphData, [
         userId,
         start,
@@ -1951,15 +1937,17 @@ exports.getTaskDashboardData = async (req, res) => {
 exports.getInvoiceDashboardData = async (req, res) => {
   try {
     const { userId } = req.user;
-    const { start, end, propertyId } = req.query;
-    if (propertyId) {
-      console.log(propertyId);
-      const getAllInvoiceData = await queryRunner(
-        getInvoiceGraphDataByPropertyId,
-        [propertyId, userId, start, end]
-      );
+    const { start, end ,propertyId } = req.params;
+    if(propertyId){
+      console.log(propertyId)
+      const getAllInvoiceData = await queryRunner(getInvoiceGraphDataByPropertyId, [
+        propertyId,
+        userId,
+        start,
+        end
+      ]);
       res.status(200).json(getAllInvoiceData[0]);
-    } else {
+    }else{
       const getAllInvoiceData = await queryRunner(getInvoiceGraphData, [
         userId,
         start,
@@ -2180,6 +2168,24 @@ exports.checkSystem = async (req, res) => {
       // data : propertycheckresult,
     });
     // }
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+
+}
+exports.filterOutDashbordDataByProperty = async (req, res) => {
+  try {
+    const { propertyId } = req.params;
+    
+    const getAllPropertyData = await queryRunner(getPropertyDashboardData, [
+      propertyId,
+    ]);
+    res.status(200).json({
+      property: getAllPropertyData[0],
+    });
+
   } catch (error) {
     res.status(400).json({
       message: error.message,

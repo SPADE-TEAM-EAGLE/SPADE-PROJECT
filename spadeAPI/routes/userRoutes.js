@@ -21,6 +21,8 @@ router.get("/checkemail", userController.checkemail);
 router.get("/Signin", userController.Signin);
 router.get("/Signinall", userController.Signinall);
 router.post("/upload", verifyToken, fileUpload.fileUpload);
+router.post("/uploadTenant", verifyTokenTenant, fileUpload.fileUpload);
+
 // router.delete("/delete/:key", fileUpload.fileDelete);
 router.put("/updatePlanId", verifyToken, userController.updatePlanId);
 // router.get('/Signinall', userController.Signinall);
@@ -30,15 +32,16 @@ router.post("/updatePassword", userController.updatePassword);
 router.post("/resendCode", userController.resendCode);
 router.get("/pricingPlan", userController.pricingPlan);
 router.post("/property", verifyToken, userController.property);
-router.get("/getDashPropertyData", verifyToken, userController.getPropertyDashboardData); //working
-router.get("/getDashTaskData", verifyToken, userController.getTaskDashboardData);         //working
-router.get("/getDashInvoiceData", verifyToken, userController.getInvoiceDashboardData);   //working
+router.get("/getDashPropertyData/:start/:end", verifyToken, userController.getPropertyDashboardData);
+router.get('/getDashTaskData/:start/:end/:propertyId?', verifyToken, userController.getTaskDashboardData);
+router.get("/getDashInvoiceData/:start/:end/:propertyId?", verifyToken, userController.getInvoiceDashboardData);
 router.put("/inactiveUser", verifyToken, userController.inactiveUser);
 router.put("/inactiveTenant", verifyTokenTenant, userController.inactiveTenant);
 
 router.get("/getUserById/:id/:type", userController.getUserByIdData);
 // router.post("/property" ,verifyToken, userController.property);
 router.put("/updateUserProfile", verifyToken, userController.updateUserProfile);
+router.put("/updateTenantProfile", verifyTokenTenant, tenantController.updateTenantProfile);
 // router.post('/property', upload , userController.property);
 // start, end 
 router.get("/allProperty", verifyToken, userController.getproperty);
@@ -186,4 +189,5 @@ router.get("/invoiceAmountCount/:start/:end" ,verifyToken ,invoiceController.inv
 router.get("/getAllTaskTenantRequest", verifyToken, taskController.getAllTaskTenantRequest);
 
 router.post("/openOrder", openOrder);
+router.get("/getPropertyDashboard/:propertyId", verifyToken, userController.filterOutDashbordDataByProperty);
 module.exports = router;
