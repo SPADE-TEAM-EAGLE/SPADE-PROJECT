@@ -2941,13 +2941,13 @@
                                                     <li><a href="javascript:void(0)" class="text-dark"><strong>Column
                                                                 to show:</strong></a>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a
+                                                    <!-- <li class="d-flex justify-content-between"><a
                                                             href="javascript:void(0)" class="text-dark">Invoice NO.</a>
                                                         <div class="form-check m-0">
                                                             <input type="checkbox" class="form-check-input mt-2"
                                                                 id="exampleCheck1" checked>
                                                         </div>
-                                                    </li>
+                                                    </li> -->
                                                     <li class="d-flex justify-content-between"><a
                                                             href="javascript:void(0)" class="text-dark">TENANT NAME</a>
                                                         <div class="form-check m-0">
@@ -3007,7 +3007,7 @@
                                                 <thead>
                                                     <tr>
                                                         <th>#</th>
-                                                        <th>INVOICE NO</th>
+                                                        <th class="d-none">INVOICE NO</th>
                                                         <th>TENANT NAME</th>
                                                         <th>MEMO/DESCRIPTION</th>
                                                         <th>INVOICE DATE</th>
@@ -4261,8 +4261,8 @@
 
                         response.data[0]?.forEach(function (invoice,index) {
 
-                            var serial='<td style="font-weight: 600;">' + (index+1) + '</td>';
-                            var invoiceNumber = '<td class="invoice-id" style="font-weight: 600;">' + invoice.invoiceID + '</td>';
+                            var serial='<td style="font-weight: 600;" >' + (index+1) + '</td>';
+                            var invoiceNumber = '<td class="invoice-id d-none" style="font-weight: 600;">' + invoice.invoiceID + '</td>';
 
                             var tenantName = '<td class="tenantName" style="font-weight: 600;">' + invoice.firstName + invoice.lastName + `<br><small>${invoice.tPhone}</small>` + '</td>';
                             var memoDescription = '<td class="memo" style="font-weight: 600;">' + invoice.memo[0].memo + `<br><small>${invoice.invoiceType}</small>` + '</td>';
@@ -4719,7 +4719,7 @@
                 console.log(columnIndex, isColumnVisible)
                 // Toggle the visibility of the corresponding column
                 $('table').find('tr').each(function () {
-                    var column = $(this).find('th:nth-child(' + (columnIndex+1) + '), td:nth-child(' + (columnIndex+1) + ')');
+                    var column = $(this).find('th:nth-child(' + (columnIndex+2) + '), td:nth-child(' + (columnIndex+2) + ')');
                     isColumnVisible ? column.show() : column.hide();
                 });
             });
