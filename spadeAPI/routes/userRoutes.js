@@ -30,9 +30,9 @@ router.post("/updatePassword", userController.updatePassword);
 router.post("/resendCode", userController.resendCode);
 router.get("/pricingPlan", userController.pricingPlan);
 router.post("/property", verifyToken, userController.property);
-router.get("/getDashPropertyData/:start/:end", verifyToken, userController.getPropertyDashboardData);
-router.get("/getDashTaskData/:start/:end", verifyToken, userController.getTaskDashboardData);
-router.get("/getDashInvoiceData/:start/:end", verifyToken, userController.getInvoiceDashboardData);
+router.get("/getDashPropertyData", verifyToken, userController.getPropertyDashboardData); //working
+router.get("/getDashTaskData", verifyToken, userController.getTaskDashboardData);         //working
+router.get("/getDashInvoiceData", verifyToken, userController.getInvoiceDashboardData);   //working
 router.put("/inactiveUser", verifyToken, userController.inactiveUser);
 router.put("/inactiveTenant", verifyTokenTenant, userController.inactiveTenant);
 
@@ -172,7 +172,8 @@ router.get('/ProfileComplete',verifyToken,userController.ProfileComplete);
 router.get('/checkSystem' ,userController.checkSystem);
  
 router.get("/getPropertyDashboard/:propertyId", verifyToken, userController.filterOutDashbordDataByProperty);
-
+// update tenant profile
+router.put("/updateTenantProfile", verifyTokenTenant, tenantController.updateTenantProfile);
 // leads routes start
 router.post("/createLead", verifyToken, leadsClt.createNewLead);
 

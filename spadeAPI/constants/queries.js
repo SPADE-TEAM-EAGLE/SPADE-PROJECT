@@ -105,6 +105,26 @@ task.landlordID = ?
 AND task.created_at >= ?
 AND task.created_at <= ?;
 `;
+exports.getTaskGraphDataByPropertyId = `
+SELECT
+    tenants.propertyID,
+    COUNT(DISTINCT task.id) AS taskCount,
+    SUM(CASE WHEN task.status = 'in progress' THEN 1 ELSE 0 END) AS onGoingTaskCount,
+    SUM(CASE WHEN task.status = 'completed' THEN 1 ELSE 0 END) AS finishedTaskCount
+FROM
+    task
+INNER JOIN
+    tenants ON task.tenantID = tenants.id
+WHERE
+    tenants.propertyID = ? 
+    AND task.landlordID = ?
+    AND task.created_at >= ?
+    AND task.created_at <= ?
+GROUP BY
+    tenants.propertyID;
+`;
+
+
 // SELECT SUM(invoice.totalAmount) AS totalPaid FROM invoice
 exports.getInvoiceGraphData = `
 SELECT
@@ -118,7 +138,25 @@ WHERE
     AND invoice.created_at >= ?
     AND invoice.created_at <= ?;
 `;
+exports.getInvoiceGraphDataByPropertyId = `
+SELECT
+    SUM(invoice.totalAmount) AS totalAmount,
+    COUNT(CASE WHEN invoice.status = 'paid' THEN 1 ELSE 0 END) AS totalPaid,
+    COUNT(CASE WHEN invoice.status = 'Unpaid' THEN 1 ELSE 0 END) AS totalUnPaid
+FROM
+    invoice
+INNER JOIN
+    tenants ON invoice.tenantID = tenants.id
+WHERE
+    tenants.propertyID = ?  
+    AND invoice.landlordID = ?
+    AND invoice.created_at >= ?
+    AND invoice.created_at <= ?
+GROUP BY
+    tenants.propertyID;
+`;
 
+// 
 
 // delete all images where property id = id from propertyImage
 exports.delteImageFromDb = "DELETE FROM propertyimage WHERE imageKey = ?";
@@ -269,7 +307,9 @@ exports.getPropertyDashboardData = `
   task.totalTask,
   invoice.totalAmount,
   invoice.totalPaidAmount,
-  invoice.totalUnPaidAmount
+  invoice.totalUnPaidAmount,
+  invoice.totalPaidCount,
+  invoice.totalUnPaidCount
 FROM
   (SELECT
       property.id AS propertyId,
@@ -304,6 +344,8 @@ LEFT JOIN
       tenants.propertyID AS propertyId,
       SUM(CASE WHEN invoice.status = 'paid' THEN invoice.totalAmount ELSE 0 END) AS totalPaidAmount,
       SUM(CASE WHEN invoice.status = 'Unpaid' THEN invoice.totalAmount ELSE 0 END) AS totalUnPaidAmount,
+      COUNT(CASE WHEN invoice.status = 'paid' THEN 1 END) AS totalPaidCount,
+      COUNT(CASE WHEN invoice.status = 'Unpaid' THEN 1 END) AS totalUnPaidCount,
       SUM(invoice.totalAmount) AS totalAmount
   FROM
       tenants
@@ -318,7 +360,7 @@ exports.createLead =
 exports.getTaskNotify = `SELECT 
     task.id AS taskID,
     task.taskName,
-    task.notify,
+    task.notify,  
     task.status,
     task.priority,
     task.created_at,
@@ -828,6 +870,10 @@ exports.insertChat =
 exports.findChat =
   "SELECT * FROM chats WHERE (senderId = ? AND receiverID = ?) OR (senderID = ? AND receiverID = ?)";
 
+
+// updateTenants profile data
+exports.updateTenantsProfile =
+  "UPDATE tenants SET firstName = ?, lastName = ?, companyName = ?, email = ?, phoneNumber = ?, address = ?, city = ?, state = ?, zipcode = ?, Image = ?, ImageKey = ? WHERE id = ?";
 // create new Message in messages table
 exports.insertMessage =
   "INSERT INTO messages (message,chatId,messageType, created_at,sender,userType) VALUES (?,?,?,?,?,?)";

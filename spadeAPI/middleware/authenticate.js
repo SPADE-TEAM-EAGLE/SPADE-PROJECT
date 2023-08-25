@@ -97,15 +97,18 @@
 const jwt = require("jsonwebtoken");
 const { queryRunner } = require("../helper/queryRunner");
 const { selectQuery } = require("../constants/queries");
+const { decryptJwtToken } = require("../helper/EnccryptDecryptToken");
 const config = process.env;
 const verifyToken = async (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
   // console.log(req.body)
-  if (!token) {
+ const decryptToken =   decryptJwtToken(token);
+console.log(decryptToken)
+  if (!decryptToken) {
     return res.status(401).send("Access Denied");
   }
   try {
-    const decoded = jwt.verify(token, config.JWT_SECRET_KEY);
+    const decoded = jwt.verify(decryptToken, config.JWT_SECRET_KEY);
     // console.log("landlord",decoded)
     const result = await queryRunner(selectQuery("users", "Email"), [
       decoded.email,
@@ -136,12 +139,12 @@ const verifyToken = async (req, res, next) => {
 const verifyTokenTenant = async (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
   // console.log(req.body)
-  if (!token) {
+  const decryptToken =   decryptJwtToken(token);
+  if (!decryptToken) {
     return res.status(401).send("Access Denied");
   }
   try {
-    const decoded = jwt.verify(token, config.JWT_SECRET_KEY);
-    // console.log("tenant",decoded)
+    const decoded = jwt.verify(decryptToken, config.JWT_SECRET_KEY);
     const result = await queryRunner(selectQuery("tenants", "email"), [
       decoded.email,
     ]);
