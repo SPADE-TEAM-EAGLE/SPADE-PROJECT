@@ -2521,56 +2521,58 @@
                     if (response.message == "No data found") {
                         // window.location = './invoicing.html'
                     }
+                    else{
+                        invoiceData = response?.data[0]
+                        
+    
+                        var tableBody = $('#table_body');
+                        tableBody.empty();
+                        // console.log(data[0])
+                        let tenantNames = []
+    
+                        response.data[0]?.forEach(function(invoice) {
+    
+    
+                            var invoiceNumber = '<td class="invoice-id" style="font-weight: 600;">' + invoice.invoiceID + '</td>';
+    
+                            // var tenantName = '<td class="tenantName" style="font-weight: 600;">' + invoice.firstName + invoice.lastName + `<br><small>${invoice.tPhone}</small>` + '</td>';
+                            var memoDescription = '<td class="memo" style="font-weight: 600;">' + invoice.memo[0].memo + `<br><small>${invoice.invoiceType}</small>` + '</td>';
+    
+                            var dateObj = new Date(invoice.created_at);
+                            var day = dateObj.getDate();
+                            var month = dateObj.getMonth() + 1;
+                            var year = dateObj.getFullYear();
+                            var invoiceDate = '<td class="date" style="font-weight: 600;">' + day + "/" + month + "/" + year + '</td>';
+                            var propertyName = '<td class="propertyName" style="font-weight: 600;">' + invoice.propertyName + `<br><small>${invoice.tPhone}</small>` + '</td>';
+                            var invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + invoice.totalAmount + '<span> $</span>' + `<br><small>Next Due Date: November-12-2020</small>` + '</td>';
+                            var status = `<td class="status" style="font-weight: 600;${invoice.status === "Unpaid" ? 'color:blue;' : 'color:green'}">` + invoice.status + '</td>';
+                            var dropdownMenu = `<td><i class="fe fe-more-vertical three-dots"
+                                                                    data-bs-toggle="dropdown"></i>
+    
+                                                                <ul class="dropdown-menu">
+                                                                    <li><a class="dropdown-item text-dark view-btnn"
+                                                                            data-bs-effect="effect-scale"
+                                                                            data-bs-toggle="modal"
+                                                                            href="#viewModal-invoice">View</a>
+                                                                    </li>
+                                                                    <li><a class="dropdown-item text-dark view-btn"
+                                                                            data-bs-effect="effect-scale"
+                                                                            data-bs-toggle="modal"
+                                                                            href="#viewModal">View PDF Invoice</a>
+                                                                    </li>
+                                                                    
+                                                                </ul>
+                                                            </td>`
+    
+    
+                            var row = '<tr>' + invoiceNumber + memoDescription + invoiceDate +
+                                propertyName + invoiceAmount + status + dropdownMenu + '</tr>';
+    
+                            // Append the row to the table body
+                            tableBody.append(row);
+                        });
 
-                    invoiceData = response?.data[0]
-                    
-
-                    var tableBody = $('#table_body');
-                    tableBody.empty();
-                    // console.log(data[0])
-                    let tenantNames = []
-
-                    response.data[0]?.forEach(function(invoice) {
-
-
-                        var invoiceNumber = '<td class="invoice-id" style="font-weight: 600;">' + invoice.invoiceID + '</td>';
-
-                        // var tenantName = '<td class="tenantName" style="font-weight: 600;">' + invoice.firstName + invoice.lastName + `<br><small>${invoice.tPhone}</small>` + '</td>';
-                        var memoDescription = '<td class="memo" style="font-weight: 600;">' + invoice.memo[0].memo + `<br><small>${invoice.invoiceType}</small>` + '</td>';
-
-                        var dateObj = new Date(invoice.created_at);
-                        var day = dateObj.getDate();
-                        var month = dateObj.getMonth() + 1;
-                        var year = dateObj.getFullYear();
-                        var invoiceDate = '<td class="date" style="font-weight: 600;">' + day + "/" + month + "/" + year + '</td>';
-                        var propertyName = '<td class="propertyName" style="font-weight: 600;">' + invoice.propertyName + `<br><small>${invoice.tPhone}</small>` + '</td>';
-                        var invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + invoice.totalAmount + '<span> $</span>' + `<br><small>Next Due Date: November-12-2020</small>` + '</td>';
-                        var status = `<td class="status" style="font-weight: 600;${invoice.status === "Unpaid" ? 'color:blue;' : 'color:green'}">` + invoice.status + '</td>';
-                        var dropdownMenu = `<td><i class="fe fe-more-vertical three-dots"
-                                                                data-bs-toggle="dropdown"></i>
-
-                                                            <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item text-dark view-btnn"
-                                                                        data-bs-effect="effect-scale"
-                                                                        data-bs-toggle="modal"
-                                                                        href="#viewModal-invoice">View</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item text-dark view-btn"
-                                                                        data-bs-effect="effect-scale"
-                                                                        data-bs-toggle="modal"
-                                                                        href="#viewModal">View PDF Invoice</a>
-                                                                </li>
-                                                                
-                                                            </ul>
-                                                        </td>`
-
-
-                        var row = '<tr>' + invoiceNumber + memoDescription + invoiceDate +
-                            propertyName + invoiceAmount + status + dropdownMenu + '</tr>';
-
-                        // Append the row to the table body
-                        tableBody.append(row);
-                    });
+                    }
                 },
                 error: function() {
 

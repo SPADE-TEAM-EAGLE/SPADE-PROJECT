@@ -56,8 +56,7 @@ const {
   getPropertyDashboardData,
   getPropertiesGraphDataBypropertyID,
   getInvoiceGraphDataByPropertId,
-  getInvoiceGraphDataByPropertyId,
-  getTaskGraphDataByPropertyId,
+  
   getTaskGraphDataByPropertyId,
   getInvoiceGraphDataByPropertyId,
 } = require("../constants/queries");
@@ -68,6 +67,7 @@ const { fileUpload, deleteImageFromS3 } = require("../helper/S3Bucket");
 const { verifyMailCheck } = require("../helper/emailVerify");
 const userServices = require("../Services/userServices");
 const { log } = require("console");
+const { encryptJwtToken } = require("../helper/EnccryptDecryptToken");
 // const { NotificationSocket } = require("../app.js");
 const config = process.env;
 
@@ -173,9 +173,9 @@ exports.Signin = async function (req, res) {
         const token = jwt.sign({ email, password }, config.JWT_SECRET_KEY, {
           expiresIn: "3h",
         });
-        const encryptToken = await encryptJwtToken(token);
+        
         res.status(200).json({
-          token: encryptToken,
+          token: token,
           body: selectResult[0][0],
           message: "Successful Login",
         });
@@ -196,7 +196,7 @@ exports.Signin = async function (req, res) {
         const token = jwt.sign({ email, password }, config.JWT_SECRET_KEY, {
           expiresIn: "3h",
         });
-        const encryptToken = await encryptJwtToken(token);
+        
 
         // const emai = "umairnazakat2222@gmail.com"
         //  const emailMessage =  await verifyMailCheck(email);
@@ -263,7 +263,7 @@ exports.Signin = async function (req, res) {
             invoice: invoice,
             task: task,
             vendors: vendors,
-            token: encryptToken,
+            token: token,
             body: selectResult[0][0],
             message: "Email is verified",
           });
@@ -274,14 +274,14 @@ exports.Signin = async function (req, res) {
             "Your account is locked due to email verification. Please verify your email."
           ) {
             res.status(200).json({
-              token: encryptToken,
+              token: token,
               body: selectResult[0][0],
               message: "Email is not verified",
               msg: emailMessage.message,
             });
           } else {
             res.status(200).json({
-              token: encryptToken,
+              token: token,
               body: selectResult[0][0],
               message: "Successful Login",
               msg: emailMessage.message,
@@ -445,11 +445,11 @@ exports.createResetEmail = async (req, res) => {
 exports.verifyResetEmailCode = async (req, res) => {
   const { id, token } = req.body;
   // console.log(req.body)
-  const encryptToken = await encryptJwtToken(token);
+  
   try {
     const selectResult = await queryRunner(
       selectQuery("users", "id", "token"),
-      [id, encryptToken]
+      [id, token]
     );
     if (selectResult[0].length > 0) {
       const now = new Date(selectResult[0][0].updated_at);
@@ -463,7 +463,7 @@ exports.verifyResetEmailCode = async (req, res) => {
         res.status(200).json({
           message: "Successful",
           id: id,
-          token: encryptToken,
+          token: token,
         });
       }
     } else {
@@ -482,7 +482,7 @@ exports.verifyResetEmailCode = async (req, res) => {
 exports.updatePassword = async (req, res) => {
   const { id, password, confirmpassword, token } = req.body;
   // const currentDate = new Date();
-  const encryptToken = await encryptJwtToken(token);
+
   try {
     if (password === confirmpassword) {
       const hashPassword = await hashedPassword(password);
@@ -491,7 +491,7 @@ exports.updatePassword = async (req, res) => {
         hashPassword,
         currentDate,
         id,
-        encryptToken,
+        token,
       ]);
       if (selectResult[0].affectedRows > 0) {
         res.status(200).json({
@@ -1771,11 +1771,11 @@ exports.verifyEmailUpdate = async (req, res) => {
   const status = "Email Verified";
   try {
     const userCheckResult = await queryRunner(selectQuery("users", "id"), [id]);
-    const encryptToken = await encryptJwtToken(token);
+
     if (userCheckResult[0].length > 0) {
       const emailExist = userCheckResult[0][0].Email;
       const existToken = userCheckResult[0][0].token;
-      if (encryptToken == existToken) {
+      if (token == existToken) {
         const emailResult = await queryRunner(updateVerifiedStatusQuery, [
           status,
           id,
@@ -1786,9 +1786,9 @@ exports.verifyEmailUpdate = async (req, res) => {
           const token = jwt.sign({ email, password }, config.JWT_SECRET_KEY, {
             expiresIn: "3h",
           });
-          const encryptToken = await encryptJwtToken(token);
+          
           return res.status(200).json({
-            token: encryptToken,
+            token: token,
             message: " Email verified successful ",
           });
         }
@@ -1888,7 +1888,7 @@ exports.getInvoiceReportData = async (req, res) => {
 exports.getPropertyDashboardData = async (req, res) => {
   try {
     const { userId } = req.user;
-    const { start, end } = req.query;
+    const { start, end } = req.params;
     const getAllPropertyData = await queryRunner(getPropertiesGraphData, [
       userId,
       start,

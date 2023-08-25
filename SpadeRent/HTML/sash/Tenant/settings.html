@@ -3458,7 +3458,7 @@
                         console.log(file)
                         userForm.append("image", file)
                         $.ajax({
-                            url: 'http://localhost:3000/api/spade/uploadTenant',
+                            url: 'https://backend.app.spaderent.com/api/spade/uploadTenant',
                             type: 'POST',
                             data: userForm,
                             headers: {
@@ -3471,7 +3471,7 @@
                                 userData.Image = response.images[0].image_url
                                 userData.imageKey = response.images[0].image_key
                                 $.ajax({
-                                    url: 'http://localhost:3000/api/spade/updateTenantProfile',
+                                    url: 'https://backend.app.spaderent.com/api/spade/updateTenantProfile',
                                     method: 'PUT',
                                     data: JSON.stringify(userData),
                                     contentType: 'application/json',
@@ -3502,7 +3502,7 @@
                         });
                     } else {
                         $.ajax({
-                            url: 'http://localhost:3000/api/spade/updateTenantProfile',
+                            url: 'https://backend.app.spaderent.com/api/spade/updateTenantProfile',
                             method: 'PUT',
                             data: JSON.stringify(userData),
                             contentType: 'application/json',
@@ -3528,7 +3528,7 @@
                     }
                 })
                 $.ajax({
-                url: 'http://localhost:3000/api/spade/protectedTenant',
+                url: 'https://backend.app.spaderent.com/api/spade/protectedTenant',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3556,7 +3556,7 @@ $("#user-img").attr("src",image)
                     $("#myModal_warning").modal("show");
                     setTimeout(function() {
                         $('#myModal_warning').modal('hide');
-                        window.location = '../Landlord/login_module.html';
+                        // window.location = './login_module.html';
                     }, 2000);
                     console.log('Error occurred while fetching state and city data.');
                     console.log(xhr);

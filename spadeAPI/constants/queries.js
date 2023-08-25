@@ -55,7 +55,8 @@ exports.checkTenantsChatQuery = `SELECT * FROM chats WHERE senderId = ? AND  rec
 
 // get user data by id
 exports.getUserById = `SELECT active As isUserActive ,image,FirstName,LastName FROM users WHERE id = ?`;
-exports.getTenantById = `SELECT active As isTenantActive ,FirstName,LastName, Image FROM tenants LEFT JOIN tenantattachfiles ON tenants.id = tenantattachfiles.tenantID WHERE tenants.id = ?`;
+// exports.getTenantById = `SELECT active As isTenantActive ,FirstName,LastName, Image FROM tenants LEFT JOIN tenantattachfiles ON tenants.id = tenantattachfiles.tenantID WHERE tenants.id = ?`;
+exports.getTenantById = `SELECT active As isTenantActive ,FirstName,LastName,image FROM tenants WHERE tenants.id = ?`;
 // SELECT 'user' AS type, id, email, name FROM users WHERE email = ?
 // UNION
 // SELECT 'tenant' AS type, id, email, name FROM tenants WHERE email = ?;
