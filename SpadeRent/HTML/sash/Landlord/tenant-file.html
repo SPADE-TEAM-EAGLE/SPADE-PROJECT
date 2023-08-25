@@ -1442,9 +1442,8 @@
                                                 <label class="custom-file-label" for="fileInput">
                                                     <i class="fi fi-rs-cloud-upload color-primary"></i>
                                                     <div class="custom-file-text">
-                                                        <h4 class="mb-0" style="font-weight: bold;">Upload Photo or drag
-                                                            and drop here</h4>
-                                                        <span class="fs-12">JPEG, PNG and PDF, file size no more than
+                                                        <h4 class="mb-0" style="font-weight: bold;">Upload Photo</h4>
+                                                        <span class="fs-12">JPEG and PNG, file size no more than
                                                             10MB</span>
                                                     </div>
                                                 </label>
@@ -1453,8 +1452,8 @@
                                                 <div class="file-grid"></div>
                                             </div>
                                         </div>
-                                        <a class="btn btn-outline-default btn-pill button btn-primary btn-lg w-100"
-                                            id="submit-pics">Submit</a>
+                                        <button class="btn btn-outline-default btn-pill button btn-primary btn-lg w-100"
+                                            id="submit-pics" disabled>Submit</button>
                                     </div>
                                 </div>
                             </div>
@@ -2315,7 +2314,6 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                 },
                 error: {}
             })
-
             $("#submit-pics").click(() => {
                 var formData = new FormData();
                 formData.append('tenantID', tenantId);
@@ -2366,7 +2364,8 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                     console.log(xhr.responseText);
                             }
                         });
-
+                        selectedFiles=[]
+                        updateSelectedFilesContainer()
                     },
                     error: function (xhr, status, error) {
                         $("#myModal_warning_connection").modal("show");
@@ -2397,6 +2396,11 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
             })
 
             function updateSelectedFilesContainer() {
+                if(selectedFiles.length>=1){
+                $("#submit-pics").attr("disabled", false)
+            }else{
+                $("#submit-pics").attr("disabled", true)
+            }
                 var selectedFilesContainer = $('.file-grid');
                 selectedFilesContainer.empty();
                 console.log(selectedFiles)
