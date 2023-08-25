@@ -3231,16 +3231,16 @@
                         console.log(response.data.images);
 
                         // localStorage.setItem("TenantImg", response.data.images)  
-                        localStorage.setItem("tenantName", response.data.firstName + " " + response.data.lastName)
+                        // localStorage.setItem("tenantName", response.data.firstName + " " + response.data.lastName)
                         console.log(response)
-                        localStorage.setItem("landloadId", Number(response.data.landlordID))
+                        // localStorage.setItem("landloadId", Number(response.data.landlordID))
                         // console.log(response.data)
-                        $("#tenant-name").empty()
-                        $("#header-user").html(`${response.data.firstName + " " + response.data.lastName}`)
-                        $("#tenant-name").append(`<span style="font-weight: 300;">Welcome</span> ${response.data.firstName + " " + response.data.lastName}`)
-                        $("#tenantName").text(`${response.data.firstName + " " + response.data.lastName}`)
-                        $("#tenant-address").empty()
-                        $("#tenant-address").append(`&nbsp;&nbsp; <span><b>Pensgate St</b></span> <br>&nbsp;&nbsp; ${response.data.tAddress + " " + response.data.tCity + " " + response.data.tState + " " + response.data.tZipcode}`)
+                        // $("#tenant-name").empty()
+                        // $("#header-user").html(`${response.data.firstName + " " + response.data.lastName}`)
+                        // $("#tenant-name").append(`<span style="font-weight: 300;">Welcome</span> ${response.data.firstName + " " + response.data.lastName}`)
+                        // $("#tenantName").text(`${response.data.firstName + " " + response.data.lastName}`)
+                        // $("#tenant-address").empty()
+                        // $("#tenant-address").append(`&nbsp;&nbsp; <span><b>Pensgate St</b></span> <br>&nbsp;&nbsp; ${response.data.tAddress + " " + response.data.tCity + " " + response.data.tState + " " + response.data.tZipcode}`)
                         $.ajax({
                             url: 'https://backend.app.spaderent.com/api/spade/getUserById/' + Number(response.data.landlordID) + '/landlord',
                             type: 'GET',

@@ -1807,6 +1807,7 @@
     <script src="../assets/js/getNotificationTenant.js"></script>
 <script>
     var selectedFiles=[]
+    var taskInfo=[]
     function areAllFieldsFilled(update) {
                 if (update) {
                     console.log("this is for update")
@@ -2017,8 +2018,8 @@ if (task.ImageKey) {
 
                             const data = response.data[0].find(obj => obj.id.toString() == taskId);
                             // console.log(taskId)
-                            if (data.taskImages) {
-                                selectedFiles = data.taskImages.split(",")
+                            if (data.ImageKey) {
+                                selectedFiles = data.ImageKey.split(",")
 
                                 updateSelectedFilesContainer()
                             }
@@ -2078,7 +2079,7 @@ if (task.ImageKey) {
                         formData.append('image', selectedFiles[i]);
                     }
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/upload',
+                        url: 'https://backend.app.spaderent.com/api/spade/uploadTenant',
                         type: 'POST',
                         data: formData,
                         contentType: false,
@@ -2199,14 +2200,14 @@ if (task.ImageKey) {
             );
         } else {
             // Handle S3 bucket URLs for images and PDFs
-            if (file.imageKey
-.endsWith('.jpg') || file.imageKey
+            if (file.ImageKey
+.endsWith('.jpg') || file.ImageKey
 .endsWith('.png')) {
                 fileElement.append(
                     $('<div>').addClass('file-preview')
                         .append($('<img style="height:80px">').attr('src', file.Image))
                 );
-            } else if (file.imageKey.endsWith('.pdf')) {
+            } else if (file.ImageKey.endsWith('.pdf')) {
                 fileElement.append(
                     $('<div>').addClass('file-preview')
                         .append($('<i style="font-size:50px">').addClass('fi fi-rs-file-pdf'))
@@ -2239,7 +2240,7 @@ if (task.ImageKey) {
             .append(
                 $('<div>')
                     .addClass('file-details')
-                    .append($('<span>').text(file.imageKey.includes('pdf') ?"PDF-" + (index + 1) :"Image-" + (index + 1)))
+                    .append($('<span>').text(file.ImageKey.includes('pdf') ?"PDF-" + (index + 1) :"Image-" + (index + 1)))
             )
             .append(
                 $('<span>')
@@ -2335,7 +2336,7 @@ $('#fileInput').on('change', function () {
     
     <script>
         $(document).ready(() => {
-            var taskInfo = []
+            
             $(document).on('click',".view-task", function (e) {
                 e.preventDefault();
                 const taskIdElement = $(this).closest("tr").find(".task-id");
@@ -2343,9 +2344,9 @@ $('#fileInput').on('change', function () {
                 taskId = taskIdElement.attr("id")
 
                 const data = taskInfo.find(obj => obj.id.toString() == taskId);
-                // console.log(data)
-                if (data.taskImages) {
-                    selectedFiles = data.taskImages.split(",")
+                console.log(data)
+                if (data.ImageKey) {
+                    selectedFiles = data.ImageKey.split(",")
                     updateSelectedFilesContainer()
                 }
 
@@ -2378,8 +2379,8 @@ $('#fileInput').on('change', function () {
 
                 })
                 // $("#totalAmount").text('$ ' + data.totalAmount)
-                if (data.taskImages) {
-                    const images = data.taskImages.split(",")
+                if (data.ImageKey) {
+                    const images = data.ImageKey.split(",")
                     $("#view-task-images").empty()
                     images.forEach((image) => {
                         $("#view-task-images").append(`
@@ -2399,14 +2400,14 @@ $('#fileInput').on('change', function () {
                 success: function (response) {
 
                     console.log($("#tenant-address"))
-                    $("#tenant-name").empty()
+                    // $("#tenant-name").empty()
 
 
 
-                    $("#tenant-name").append(`<span style="font-weight: 300;">Welcome</span> ${response.data.firstName +"" + response.data.lastName}`)
-                    $("#tenantName").text(`${response.data.firstName +"" + response.data.lastName}`)
-                    $("#tenant-address").empty()
-                    $("#tenant-address").append(`&nbsp;&nbsp; <span><b>Pensgate St</b></span> <br>&nbsp;&nbsp; ${response.data.tAddress +"" + response.data.tCity +"" + response.data.tState +"" + response.data.tZipcode}`)
+                    // $("#tenant-name").append(`<span style="font-weight: 300;">Welcome</span> ${response.data.firstName +"" + response.data.lastName}`)
+                    // $("#tenantName").text(`${response.data.firstName +"" + response.data.lastName}`)
+                    // $("#tenant-address").empty()
+                    // $("#tenant-addresss").append(`&nbsp;&nbsp; <span><b>Pensgate St</b></span> <br>&nbsp;&nbsp; ${response.data.tAddress +"" + response.data.tCity +"" + response.data.tState +"" + response.data.tZipcode}`)
                 },
                 error: function (xhr, status, error) {
                     $("#myModal_warning_connection").modal("show");
