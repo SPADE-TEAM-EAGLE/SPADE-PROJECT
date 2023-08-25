@@ -956,9 +956,9 @@
                                         <!-- 2 comments start  -->
 
                                         <!-- 3 comments start  -->
-                                        <div class="d-flex country">
+                                        <!-- <div class="d-flex country">
                                             <img src="../assets\header-img\spade.svg"  class="avatarr profile-user brroundd nav-link cover-image dark-layout">
-                                        </div>
+                                        </div> -->
                                         <div class="dropdown  d-flex notifications">
                                             <a class="nav-link icon" data-bs-toggle="sidebar-right"
                                                 data-target=".sidebar-right"><i class="fe fe-bell"></i> 
@@ -1017,9 +1017,9 @@
                                                     Notification</a>
                                             </div> -->
                                         </div>
-                                        <div class="d-flex country">
+                                        <!-- <div class="d-flex country">
                                             <img src="../assets\header-img\circlels.png"  class="avatarr profile-user nav-link brroundd cover-image light-layout">
-                                        </div>
+                                        </div> -->
                                         <div class="dropdown d-flex profile-1 country">
                                             <a href="javascript:void(0)" data-bs-toggle="dropdown" class="nav-link leading-none d-flex">
                                                 <!-- <img src="../assets/images/users/21.jpg" 
@@ -2384,6 +2384,38 @@
     </script> -->
     <script>
         $(document).ready(() => {
+            $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/protectedTenant',
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                   
+                    function toTitleCase(str) {
+                            console.log(str)
+                            return str.replace(/\w\S*/g, function (txt) {
+                                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                            });
+                        }
+                        $("#tenant-address").empty()
+                    $("#tenant-address").append(`&nbsp;&nbsp; <span><b>Pensgate St</b></span> <br>&nbsp;&nbsp; ${response.address + " " + response.city + " " + response.state + " " + response.zipCode}`)
+                    $("#header-user").text(toTitleCase(response.userName))
+                    $("#tenant-name").empty()
+                    $("#tenant-name").append(`<span style="font-weight: 300;">Welcome</span> ${response.userName}`)
+                                 },
+                error: function (xhr, status, error) {
+                    $("#myModal_warning").modal("show");
+                    setTimeout(function() {
+                        $('#myModal_warning').modal('hide');
+                        window.location = './login_module.html';
+                    }, 2000);
+                    console.log('Error occurred while fetching state and city data.');
+                    console.log(xhr);
+                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                }
+            });
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/getTenantByID',
                 type: 'GET',

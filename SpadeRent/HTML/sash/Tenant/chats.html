@@ -1799,10 +1799,10 @@
                                         </div>
                                         <!-- 2 comments start  -->
                                         <!-- 3 comments start  -->
-                                        <div class="d-flex country">
+                                        <!-- <div class="d-flex country">
                                             <img src="../assets\header-img\spade.svg"
                                                 class="avatarr profile-user brroundd nav-link cover-image dark-layout">
-                                        </div>
+                                        </div> -->
                                         <div class="dropdown  d-flex notifications">
                                             <a class="nav-link icon" data-bs-toggle="sidebar-right"
                                                 data-target=".sidebar-right"><i class="fe fe-bell"></i> 
@@ -1943,7 +1943,7 @@
                                     Profile</span>
                             </a>
                         </li> -->
-                        <a href="chats.html">
+                        <a href="settings.html">
                             <li class="slide">
                                 <div class="M-0 mt-3 mb-4" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
                                     <div class="card-header pb-0 border-bottom-0">
@@ -2044,9 +2044,11 @@
                                         <div class="mobile-icon-text-align"><i
                                                 class="side-menu__icon fi fi-rs-calendar text-white"></i><span
                                                 class="side-menu__labell text-white">&nbsp;&nbsp; Your next payment of
-                                                $0 is due on 5/1/2023&emsp; <a href="#"
+                                                $0 is due on 5/1/2023&emsp; 
+                                                <!-- <a href="#"
                                                     class="btn btn-primary btn-pill btn-paynow-banner">Pay
-                                                    Now</a></span></div>
+                                                    Now</a> -->
+                                                </span></div>
                                         <div class="mobile-icon-text-align"><i
                                                 class="side-menu__icon fi fi-rs-building text-white"></i><span
                                                 class="side-menu__labell text-white" id="tenant-address">&nbsp;&nbsp;
@@ -3051,7 +3053,7 @@
             <!-- FOOTER END -->
         </div>
         <!-- BACK-TO-TOP -->
-        <!-- <!-- <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a> --> -->
+        <!--  <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a> --> 
         <a href="#addModal" data-bs-effect="effect-scale" data-bs-toggle="modal" id="add-tenant-side-btn"><i
                 class="fe fe-plus"></i></a>
 
@@ -3154,6 +3156,39 @@
             $(document).ready(function () {
                 var hasScrolled = 0;
                 // socket.emit('joinRoom', { chatId: localStorage.getItem("chatId") });
+                $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/protectedTenant',
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                   
+                    function toTitleCase(str) {
+                            console.log(str)
+                            return str.replace(/\w\S*/g, function (txt) {
+                                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                            });
+                        }
+                        $("#tenant-address").empty()
+                    $("#tenant-address").append(`&nbsp;&nbsp; <span><b>Pensgate St</b></span> <br>&nbsp;&nbsp; ${response.address + " " + response.city + " " + response.state + " " + response.zipCode}`)
+
+                    $("#header-user").text(toTitleCase(response.userName))
+                    $("#tenant-name").empty()
+                    $("#tenant-name").append(`<span style="font-weight: 300;">Welcome</span> ${response.userName}`)
+                                 },
+                error: function (xhr, status, error) {
+                    $("#myModal_warning").modal("show");
+                    setTimeout(function() {
+                        $('#myModal_warning').modal('hide');
+                        window.location = './login_module.html';
+                    }, 2000);
+                    console.log('Error occurred while fetching state and city data.');
+                    console.log(xhr);
+                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                }
+            });
                 $('#send-text').on('click', function (ev) {
                     const msg_again1 = $('#input-message').val().trim();
                     if(msg_again1 !== ""){
@@ -3228,7 +3263,8 @@
                     },
                     success: function (response) {
                         console.log("getTenantByID");
-                        console.log(response.data.images);
+                        console.log(response);
+                        // console.log(response.data.images);
 
                         // localStorage.setItem("TenantImg", response.data.images)  
                         // localStorage.setItem("tenantName", response.data.firstName + " " + response.data.lastName)
