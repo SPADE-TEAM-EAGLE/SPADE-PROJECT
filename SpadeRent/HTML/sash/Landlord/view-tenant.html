@@ -880,7 +880,7 @@
                             <i class="fi fi-rs-check-circle text-success"></i>
 
                         </h2>
-                        <p class="ps-1 text-justify" id="succes-text">Invite send successfully!!!</p>
+                        <p class="ps-1 text-justify" id="succes-text">Data saved successfully!!!</p>
 
                     </div>
                     <!-- <div class="d-flex align-items-center p-2 my-3">
@@ -2246,8 +2246,8 @@
                         // LandlordImg = response.image;
                         $("#user-img").attr("src", response.image)
                         $("#user-img-dark").attr("src", response.image)
-                        $("#user-name").text(toTitleCase(response.user))
-                        $("#header-user").text(toTitleCase(response.user))
+                        $("#user-name").text(toTitleCase(response.userName))
+                        $("#header-user").text(toTitleCase(response.userName))
                         // userEmail = email
                         // id = userId
                     },
@@ -2448,7 +2448,10 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function(response) {
-                        console.log("Data sent successfully!");
+                        
+                            $("#contactInfoModal").modal("hide")
+                            $("#succesModal").modal("show")
+                       
                         // Handle the success response from the backend
                     },
                     error: function(xhr, status, error) {
@@ -2468,6 +2471,9 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                 if ($(this).val() === '' || $(this).val() === 'Choose...') {
                     allFieldsFilled = false;
                     return false; // Exit the loop early if any field is empty
+                }else{
+                    allFieldsFilled = true;
+                    return true;
                 }
             });
 
@@ -2476,6 +2482,9 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                 if ($(this).val() === '' || $(this).val() === 'Choose...') {
                     allFieldsFilled = false;
                     return false; // Exit the loop early if any field is empty
+                }else{
+                    allFieldsFilled = true;
+                    return true;
                 }
             });
 

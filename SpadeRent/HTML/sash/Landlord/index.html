@@ -1361,10 +1361,10 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-lg-6 mt-5">
+                                                <div class="col-lg-6 mt-5 disabled">
                                                     <span>On Time Finished Rate</span>
                                                 </div>
-                                                <div class="col-lg-6 mt-4"
+                                                <div class="col-lg-6 mt-4 disabled">
                                                     style="display: flex; justify-content: space-around;">
                                                     <h3><b id="task-complete-percent">97%</b></h3>
                                                     <div class="text-center"
@@ -1499,11 +1499,11 @@
                                         </div>
                                         <div class="card-body" style="padding: 0px 25px 0px 25px;">
                                             <div class="row">
-                                                <div class="col-lg-6 col-md-6 col-sm-12 col-xl-5">
+                                                <div class="col-lg-6 col-md-6 col-sm-12 col-xl-5 disabled">
                                                     <h1 class="font-counter-chart" id="invoicing-amount"></h1>
                                                     <p class="chart-paragraph">Total Amount</p>
                                                 </div>
-                                                <div class="col-lg-6 col-md-6 col-sm-12 col-xl-7">
+                                                <div class="col-lg-6 col-md-6 col-sm-12 col-xl-7 disabled">
                                                     <!-- <div class="card">
                                                         <div class="card-header">
                                                             <h3 class="card-title">Area Chart</h3>
@@ -1971,7 +1971,7 @@
     //   alert(data.message); // You can customize how you want to display the notification
     // });
     //   socket.emit('message', 'Hello from the client');
-    </script>
+    </script> -->
     <script>
 
         console.log(document.getElementById('customIntercomButton'))
@@ -2160,10 +2160,10 @@
                 startDate = $(this).val()
                 let uri;
                 if($("#property-select").val()=="Filter by Property"){
-                    uri= `http://localhost:3000/api/spade/getDashInvoiceData/` + `${startDate}/${endDate}`
+                    uri= `https://backend.app.spaderent.com/api/spade/getDashInvoiceData/` + `${startDate}/${endDate}`
                 }
                 else{
-                    uri= `http://localhost:3000/api/spade/getDashInvoiceData/` + `${startDate}/${endDate}/${$("#property-select").val()}`
+                    uri= `https://backend.app.spaderent.com/api/spade/getDashInvoiceData/` + `${startDate}/${endDate}/${$("#property-select").val()}`
                 }
                 $.ajax({
                     url: uri,
@@ -2202,10 +2202,10 @@
                 endDate = $(this).val()
                 let uri;
                 if($("#property-select").val()=="Filter by Property"){
-                    uri= `http://localhost:3000/api/spade/getDashInvoiceData/` + `${startDate}/${endDate}`
+                    uri= `https://backend.app.spaderent.com/api/spade/getDashInvoiceData/` + `${startDate}/${endDate}`
                 }
                 else{
-                    uri= `http://localhost:3000/api/spade/getDashInvoiceData/` + `${startDate}/${endDate}/${$("#property-select").val()}`
+                    uri= `https://backend.app.spaderent.com/api/spade/getDashInvoiceData/` + `${startDate}/${endDate}/${$("#property-select").val()}`
                 }
                 $.ajax({
                     url: uri,
@@ -2246,10 +2246,10 @@
                 startDate = $(this).val()
                 let uri;
                 if($("#property-select").val()=="Filter by Property"){
-                    uri= `http://localhost:3000/api/spade/getDashTaskData/` + `${startDate}/${endDate}`
+                    uri= `https://backend.app.spaderent.com/api/spade/getDashTaskData/` + `${startDate}/${endDate}`
                 }
                 else{
-                    uri= `http://localhost:3000/api/spade/getDashTaskData/` + `${startDate}/${endDate}/${$("#property-select").val()}`
+                    uri= `https://backend.app.spaderent.com/api/spade/getDashTaskData/` + `${startDate}/${endDate}/${$("#property-select").val()}`
                 }
                 $.ajax({
                     url: uri,
@@ -2307,10 +2307,10 @@
                 endDate = $(this).val()
                 let uri;
                 if($("#property-select").val()=="Filter by Property"){
-                    uri= `http://localhost:3000/api/spade/getDashTaskData/` + `${startDate}/${endDate}`
+                    uri= `https://backend.app.spaderent.com/api/spade/getDashTaskData/` + `${startDate}/${endDate}`
                 }
                 else{
-                    uri= `http://localhost:3000/api/spade/getDashTaskData/` + `${startDate}/${endDate}/${$("#property-select").val()}`
+                    uri= `https://backend.app.spaderent.com/api/spade/getDashTaskData/` + `${startDate}/${endDate}/${$("#property-select").val()}`
                 }
                 $.ajax({
                     url: uri,
@@ -2572,7 +2572,7 @@
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function ({ user, email, userId, image }) {
+                success: function ({ userName, email, userId, image }) {
                     function toTitleCase(str) {
                         return str.replace(/\w\S*/g, function (txt) {
                             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
@@ -2582,8 +2582,8 @@
                     $("#user-img-dark").attr("src", image)
 
 
-                    $("#user-name").text(toTitleCase(user))
-                    $("#header-user").text(toTitleCase(user))
+                    $("#user-name").text(toTitleCase(userName))
+                        $("#header-user").text(toTitleCase(userName))
                     userEmail = email
                     id = userId
                     console.log($("#user-email"))
@@ -2640,7 +2640,7 @@
             });
             $("#property-select").on("change",function(){
                 $.ajax({
-                url: `http://localhost:3000/api/spade/getPropertyDashboard/${$(this).val()}`,
+                url: `https://backend.app.spaderent.com/api/spade/getPropertyDashboard/${$(this).val()}`,
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -2844,7 +2844,7 @@
                 }
             });
             $.ajax({
-                url: `http://localhost:3000/api/spade/getDashTaskData/${startDate}/${endDate}`,
+                url: `https://backend.app.spaderent.com/api/spade/getDashTaskData/${startDate}/${endDate}`,
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")

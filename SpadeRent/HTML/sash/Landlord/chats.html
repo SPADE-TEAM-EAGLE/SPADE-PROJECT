@@ -3597,6 +3597,7 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
+                        console.log("protected");
                         console.log(response);
 
                         function toTitleCase(str) {
@@ -3609,8 +3610,8 @@
                         // LandlordImg = response.image;
                         $("#user-img").attr("src", response.image)
                         $("#user-img-dark").attr("src", response.image)
-                        $("#user-name").text(toTitleCase(response.user))
-                        $("#header-user").text(toTitleCase(response.user))
+                        $("#user-name").text(toTitleCase(response.userName))
+                        $("#header-user").text(toTitleCase(response.userName))
                         // userEmail = email
                         // id = userId
                     },
@@ -3722,7 +3723,7 @@
                         console.log("check rec", message);
                         messs2 = `<div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
                                                                     <div style="width: 36px;height: 36px;" class="me-1"> 
-                                                                        <img src="` + (localStorage.getItem("TenantImg") == null ? localStorage.getItem("TenantImg") : randomImg) + `" style="border-radius: 50%;height: inherit;" class="message-image" />
+                                                                        <img src="` + (localStorage.getItem("TenantImg")  ? localStorage.getItem("TenantImg") : randomImg) + `" style="border-radius: 50%;height: inherit;" class="message-image" />
                                                                         </div> 
                                                                     <div class="msg-text">
                                                 <span class="text">${message.message}</span>
@@ -3841,7 +3842,7 @@
                                                             const time = timeArray.slice(0, 2).join(":");
                                                             messs1 += `<div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
                                                                     <div style="width: 36px;height: 36px;" class="me-1"> 
-                                                                        <img src="` + (localStorage.getItem("TenantImg") == null ? localStorage.getItem("TenantImg") : randomImg) + `" style="border-radius: 50%;height: inherit;" class="message-image" />
+                                                                        <img src="` + (localStorage.getItem("TenantImg") ? localStorage.getItem("TenantImg") : randomImg) + `" style="border-radius: 50%;height: inherit;" class="message-image" />
                                                                         </div> 
                                                                     <div class="msg-text">
                                                 <span class="text">` + response.data[i]['message'] + `</span>
@@ -3897,7 +3898,7 @@
                     },
                     success: function (response) {
                         console.log("viewAllPropertyTenant");
-                        // console.log(response.data[0]);
+                        console.log(response.data[0]);
                         var randomImg1 = "../assets/images/users/5.jpg";
                         var tab_pane = $('#tab-pane-ll');
                         tab_pane.empty();

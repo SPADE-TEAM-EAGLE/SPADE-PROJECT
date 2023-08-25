@@ -2730,7 +2730,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-lg-4">
+                                                    <!-- <div class="col-lg-4">
                                                         <div class="form-group">
                                                             <label class="form-label"><b>Report Type</b></label>
                                                             <select class="form-control select2-show-search form-select"
@@ -2742,11 +2742,11 @@
                                                                 <option value="ID">Idaho</option>
                                                             </select>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-lg-2 mt-5">
+                                                    </div> -->
+                                                    <!-- <div class="col-lg-2 mt-5">
                                                    
                                                             <button type="button" class="btn btn-info text-white mt-3"><i class="fi fi-rs-search me-1 text-white"></i>Search</button>
-                                                    </div>
+                                                    </div> -->
                                                 </div>
                                                 <!-- Row -->
                                                 <div class="row">
@@ -2883,7 +2883,7 @@
                                                                                 <th>TENANT NAME</th>
                                                                                 <th>TENANT EMAIL</th>
                                                                                 <th>PHONE</th>
-                                                                                <th>ACTION</th>
+                                                                                
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody id="table_body_property_report">
@@ -3081,7 +3081,7 @@
                                             <!-- Tenant Reports start  -->
                                             <div class="tab-pane" id="tab77">
                                                 <div class="row">
-                                                    <div class="col-lg-4">
+                                                    <!-- <div class="col-lg-4">
                                                         <div class="form-group">
                                                             <label class="form-label"><b>Report Type</b></label>
                                                             <select class="form-control select2-show-search form-select"
@@ -3093,10 +3093,19 @@
                                                                 <option value="ID">Idaho</option>
                                                             </select>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-lg-2 mt-5">
+                                                    </div> -->
+                                                    <!-- <div class="col-lg-2 mt-5">
                                                    
                                                             <button type="button" class="btn btn-info text-white mt-3"><i class="fi fi-rs-search me-1 text-white"></i>Search</button>
+                                                    </div> -->
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label class="form-label"><b>Tenant</b></label>
+                                                            <select class="form-control select2-show-search form-select"
+                                                                id="tenantSelect" data-placeholder="Choose one">
+                                                                <option label="Choose one"></option>
+                                                            </select>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <!-- Row -->
@@ -3296,7 +3305,7 @@
 
                                             <!-- Invoice Reports start  -->
                                             <div class="tab-pane" id="tab88">
-                                            <div class="row">
+                                            <!-- <div class="row">
                                                 <div class="col-lg-4">
                                                     <div class="form-group">
                                                         <label class="form-label"><b>Report Type</b></label>
@@ -3314,7 +3323,7 @@
                                                 
                                                         <button type="button" class="btn btn-info text-white mt-3"><i class="fi fi-rs-search me-1 text-white"></i>Search</button>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                             <!-- Row -->
                                             <div class="row">
                                                 <div class="col-lg-12 col-xl-12">
@@ -3483,7 +3492,7 @@
                                                                             <th>AMOUNT</th>
                                                                             <th>NEXT DUE DATE</th>
                                                                             <th>PROPERTY ADDRESS</th>
-                                                                            <th>ACTION</th>
+                                                                            
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody id="table_body_invoice_report">
@@ -3666,7 +3675,7 @@
                                                             <th>DUE AT</th>
                                                             <th>RELATED TO</th>
                                                             <th>STATUS</th>
-                                                            <th>ACTION</th>
+                                                            
 
                                                         </tr>
                                                     </thead>
@@ -4487,18 +4496,49 @@ console.log(index)
                 '<p style="font-weight: 600;" class="mb-1">' + property.email + '</p>' +
                 '</td>' +
                 '<td class="property-id" style="font-weight: 600;">' + property.phoneNumber + '</td>' +
-                '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
-                '<ul class="dropdown-menu dropdown-menu-top">' +
-                '<li><a class="dropdown-item text-success" href="./view-property.html?propertyId=' + property.propertyId + '">View</a></li>' +
-                '<li><a class="edit-option dropdown-item text-primary" href="javascript:void(0)">Edit</a></li>' +
-                '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>' +
-                '</ul>' +
-                '</td>' +
+                
                 '</tr>';
 
             // Append the new row to the table body
             $('#table_body_property_report').append(newRowHtml);
          
+        });
+    }
+    function constructPropertyTableTenant(propertyData,id){
+        $("#table_body_tenant_report").empty()
+        propertyData.forEach((tenant,index) => {
+            console.log(tenant)
+            if ($("#tenantSelect option:contains('" + tenant.firstName + " " + tenant.lastName + "')").length === 0) {
+    $("#tenantSelect").append($('<option></option>').text(tenant.firstName + " " + tenant.lastName).val(tenant.tenantID));
+}
+
+            
+            var newRowHtml = '<tr>' +
+                '<td style="font-weight: 600;">' + (index+1) + '</td>'+
+                '<td class="property-id d-none" style="font-weight: 600;">' + tenant.propertyId + '</td>' +
+                '<td class="propertyName" style="font-weight: 600;">' + tenant.propertyName + '</td>' +
+                '<td class="propertyType"><a class="like" href="javascript:;"><span class="badge btn-light rounded-pill-Single-Family rounded-pill py-2 px-3"><i class="fe fe-circle me-1"></i>Single Family</span></a></td>' +
+                '<td class="property-id" style="font-weight: 600;">' + tenant.units + '</td>' +
+                '<td class="propertyAddress">' +
+                '<p style="font-weight: 600;" class="mb-1">' + formatDate(tenant.leaseEndDate) + '</p>' +
+                // '<span style="color: #4573D2;">' + remainingDays + ' Days Remaining</span>' +
+                '</td>' +
+                '<td class="propertyAddress">' +
+                '<p style="font-weight: 600;" class="mb-1">' + formatDate(tenant.leaseStartDate) + '</p>' +
+                // '<span style="color: #4573D2;">' + remainingDays + ' Days Remaining</span>' +
+                '</td>' +
+                '<td class="propertyUnits">' +
+                '<p style="font-weight: 800; " class="mb-1 text-dark">' + tenant.firstName+" "+tenant.lastName + '</p>' +
+                // '<span class="font-weight-normal">Phone: ' + tenant.phoneNumber + '</span>' +
+                '</td>' +
+                '<td class="propertyUnits">' +
+                // '<p style="font-weight: 800; color: #000;" class="mb-1">' + tenant.firstName+" "+tenant.lastName + '</p>' +
+                '<span class="font-weight-normal">Phone: ' + tenant.phoneNumber + '</span>' +
+                '</td>' +
+                '</tr>';
+
+            // Append the new row to the table body
+            $('#table_body_tenant_report').append(newRowHtml);
         });
     }
     console.log("hhdhdhcc");
@@ -4514,14 +4554,15 @@ $.ajax({
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function ({ image,user }) {
+                success: function ({ image,userName }) {
                     function toTitleCase(str) {
                                 return str.replace(/\w\S*/g, function(txt) {
                                     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                                 });
                             }
-                    console.log(user);
-                    $("#header-user").text(toTitleCase(user))
+                   
+                    // $("#user-name").text(toTitleCase(userName))
+                        $("#header-user").text(toTitleCase(userName))
 $("#user-img").attr("src",image)
                     $("#user-img-dark").attr("src",image)                   
                 },
@@ -4601,49 +4642,7 @@ $("#download_pdf_reports_lease").attr("disabled",true)
             $('#table_body_lease_report').append(newRowHtml);
         });
 
-            tenantData.forEach((tenant,index) => {
-            // Calculate remaining days only if expirydate is provided
-            var remainingDays;
-            if (tenant.expirydate) {
-                var leaseDate = new Date(tenant.expirydate);
-                var currentDate = new Date();
-                var timeDiff = Math.abs(leaseDate - currentDate);
-                remainingDays = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-            } else {
-                // Set a default value or display a message for empty expirydate
-                remainingDays = 'Not provided';
-            }
-
-            // Construct the HTML for the new row
-            var newRowHtml = '<tr>' +
-                '<td style="font-weight: 600;">' + (index+1) + '</td>'+
-                '<td class="property-id d-none" style="font-weight: 600;">' + tenant.propertyId + '</td>' +
-                '<td class="propertyName" style="font-weight: 600;">' + tenant.propertyName + '</td>' +
-                '<td class="propertyType"><a class="like" href="javascript:;"><span class="badge btn-light rounded-pill-Single-Family rounded-pill py-2 px-3"><i class="fe fe-circle me-1"></i>Single Family</span></a></td>' +
-                '<td class="property-id" style="font-weight: 600;">' + tenant.units + '</td>' +
-                '<td class="propertyAddress">' +
-                '<p style="font-weight: 600;" class="mb-1">' + formatDate(tenant.leaseEndDate) + '</p>' +
-                // '<span style="color: #4573D2;">' + remainingDays + ' Days Remaining</span>' +
-                '</td>' +
-                '<td class="propertyAddress">' +
-                '<p style="font-weight: 600;" class="mb-1">' + formatDate(tenant.leaseStartDate) + '</p>' +
-                // '<span style="color: #4573D2;">' + remainingDays + ' Days Remaining</span>' +
-                '</td>' +
-                '<td class="propertyUnits">' +
-                '<p style="font-weight: 800; " class="mb-1">' + tenant.firstName+" "+tenant.lastName + '</p>' +
-                // '<span class="font-weight-normal">Phone: ' + tenant.phoneNumber + '</span>' +
-                '</td>' +
-                '<td class="propertyUnits">' +
-                // '<p style="font-weight: 800; color: #000;" class="mb-1">' + tenant.firstName+" "+tenant.lastName + '</p>' +
-                '<span class="font-weight-normal">Phone: ' + tenant.phoneNumber + '</span>' +
-                '</td>' +
-                '</tr>';
-
-            // Append the new row to the table body
-            $('#table_body_tenant_report').append(newRowHtml);
-
-
-        });
+        constructPropertyTableTenant(tenantData)
     },
     error: function (xhr, status, error) {
         // Handle the error response from the API
@@ -4666,6 +4665,18 @@ function filterAndRenderTable(selectedValue) {
     constructPropertyTable(propertyData);
     }
 }
+function filterAndRenderTableTenant(selectedValue) {
+    if(selectedValue){
+        var filteredData = tenantData.filter(property => property.tenantID == selectedValue);
+    constructPropertyTableTenant(filteredData);
+    }
+    else{
+       
+
+    // Call the constructPropertyTable function to render the filtered data
+    constructPropertyTableTenant(tenantData);
+    }
+}
 
 // function searchAndRenderTable(query,data) {
 //     // Convert the query to lowercase for case-insensitive search
@@ -4681,6 +4692,10 @@ function filterAndRenderTable(selectedValue) {
 $("#propertySelect").on('change', function() {
     var selectedValue = $(this).val();
     filterAndRenderTable(selectedValue);
+});
+$("#tenantSelect").on('change', function() {
+    var selectedValue = $(this).val();
+    filterAndRenderTableTenant(selectedValue);
 });
 $("#typehead").on('input', function() {
     var searchValue = $(this).val().toLowerCase();
@@ -4785,16 +4800,7 @@ $("#download_pdf_reports4").attr("disabled",true)
                 '<td class="rentAmount" style="font-weight: 600;">' + formatCurrency(invoice.totalAmount) + '</td>' +
                 '<td class="rentAmount" style="font-weight: 600;">Next Due Date: ' + (formatDate(invoice.recurringNextDate)=="Invalid Date"?"N/A":formatDate(invoice.recurringNextDate)) + '</td>' +
                 '<td class="status" style="font-weight: 600;">' + invoice.address + '</td>' +
-                '<td><i class="fe fe-more-vertical three-dots" data-bs-toggle="dropdown"></i>' +
-                '<ul class="dropdown-menu">' +
-                '<li><a class="dropdown-item text-dark view-btnn" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#viewModal-invoice">View</a></li>' +
-                '<li><a class="dropdown-item text-dark view-btn" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#viewModal">View PDF Invoice</a></li>' +
-                '<li><a class="dropdown-item text-dark edit-option" data-bs-effect="effect-scale" href="#">Edit</a></li>' +
-                '<li><a class="dropdown-item text-dark status-option" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#changeStatusModal">Change Status</a></li>' +
-                '<li><a class="dropdown-item text-dark resend-option" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#">Resend Invoice</a></li>' +
-                '<li><a class="dropdown-item text-danger delete-option" href="javascript:void(0)">Delete</a></li>' +
-                '</ul>' +
-                '</td>' +
+                
                 '</tr>';
 
             // Append the new row to the table body

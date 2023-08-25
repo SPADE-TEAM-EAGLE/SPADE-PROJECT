@@ -7,7 +7,7 @@ $(document).ready(function () {
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
         },
-        success: function ({ user, email, userId, image }) {
+        success: function ({ userName, email, userId, image }) {
             function toTitleCase(str) {
                 return str.replace(/\w\S*/g, function (txt) {
                     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
@@ -17,8 +17,8 @@ $(document).ready(function () {
             $("#user-img-dark").attr("src", image)
 
 
-            $("#user-name").text(toTitleCase(user))
-            $("#header-user").text(toTitleCase(user))
+            $("#user-name").text(toTitleCase(userName))
+            $("#header-user").text(toTitleCase(userName))
             userEmail = email
             id1 = userId
             console.log($("#user-email"))

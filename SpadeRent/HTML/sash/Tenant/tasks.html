@@ -35,7 +35,12 @@
     <!-- <link rel="stylesheet" href="fancy_fileupload.css"> -->
     <!-- COLOR SKIN CSS -->
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="../assets/colors/color1.css" />
-    <style>
+    <script>
+         if(!localStorage.getItem("authtoken")){
+                window.location="./login_module.html"
+            }
+    </script>
+<style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
         .custom-file-input::-webkit-file-upload-button {
@@ -1063,11 +1068,11 @@
                                             </a>
                                         </div>
 
-                                        <div class=" d-flex country mt-2">
+                                        <!-- <div class=" d-flex country mt-2">
                                             <a class=" nav-link icon text-dark" onclick=" mydemoclick()">
                                                 <i class=" fi fi-rs-universal-access"></i>
                                             </a>
-                                        </div>
+                                        </div> -->
 
 
                                         <!-- 1 comments start  -->
@@ -1091,10 +1096,10 @@
                                         <!-- 2 comments start  -->
 
                                         <!-- 3 comments start  -->
-                                        <div class=" d-flex country">
+                                        <!-- <div class=" d-flex country">
                                             <img src=" ../assets\header-img\spade.svg" alt=" profile-user" class="
                     avatarr profile-user brroundd nav-link cover-image dark-layout">
-                                        </div>
+                                        </div> -->
                                         <div class=" dropdown d-flex notifications ">
                                             <a class="nav-link icon" data-bs-toggle="sidebar-right"
                                                 data-target=".sidebar-right"><i class="fe fe-bell"></i> 
@@ -1160,10 +1165,10 @@
                                                     Notification</a>
                                             </div> -->
                                         </div>
-                                        <div class=" d-flex country">
+                                        <!-- <div class=" d-flex country">
                                             <img src=" ../assets\header-img\circlels.png" alt=" profile-user" class="
                     avatarr profile-user nav-link brroundd cover-image light-layout">
-                                        </div>
+                                        </div> -->
                                         <div class=" dropdown d-flex profile-1 country">
                     <a href="javascript:void(0)" data-bs-toggle="dropdown" class="nav-link leading-none d-flex">
                         <!-- <img src="../assets/images/users/21.jpg" 
@@ -1246,21 +1251,22 @@
                                     Profile</span>
                             </a>
                         </li> -->
-                    <li class="slide">
-                        <div class="M-0 mt-3 mb-4" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
-                            <div class="card-header pb-0 border-bottom-0">
-                                <i class="side-menu__icon fi fi-rs-rocket-lunch mb-0"></i>
-                                <h3 class="card-title side-menu__label">&nbsp; Complete your Profile
-                                </h3>
-
-                            </div>
-                            <div class="card-body pt-0">
-                                <div class="side-menu__label progress progress-md mt-5">
-                                    <div class="progress-bar bg-info" style="width: 20%;">20%</div>
+                        <a href="settings.html">
+                            <li class="slide">
+                                <div class="M-0 mt-3 mb-4" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
+                                    <div class="card-header pb-0 border-bottom-0">
+                                        <i class="side-menu__icon fi fi-rs-rocket-lunch mb-0"></i>
+                                        <h3 class="card-title side-menu__label">&nbsp; Complete your Profile
+                                        </h3>
+                                    </div>
+                                    <div class="card-body pt-0">
+                                        <div class="side-menu__label progress progress-md mt-5">
+                                            <div class="progress-bar bg-info" style="width: 20%;">20%</div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </li>
+                            </li>
+                        </a> 
                     <li class="slide">
                         <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html"><i
                                 class="side-menu__icon fi fi-rs-dashboard"></i><span
@@ -1281,14 +1287,13 @@
                         </a>
                     </li>
 
-                    <!-- <li class="slide ">
-                        <a class="side-menu__item " data-bs-toggle="slide " href="coming-soon.html "><i
-                                class="side-menu__icon fi fi-rs-comment "></i><span
-                                class="side-menu__label ">Messages</span>
-
+                    <li class="slide">
+                        <a class="side-menu__item" data-bs-toggle="slide" href="chats.html">
+                            <i class="side-menu__icon fi fi-rs-comment"></i>
+                            <span class="side-menu__label">Chat</span>
+                            <!-- <i class="angle fe fe-chevron-right"></i> -->
                         </a>
-
-                    </li> -->
+                    </li>
 
 
                     <li class="slide">
@@ -1801,6 +1806,38 @@
     <script src="../assets/js/charts.js "></script>
     <script src="../assets/js/getNotificationTenant.js"></script>
 <script>
+    $(document).ready(function() {
+        $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/protectedTenant',
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                   
+                    function toTitleCase(str) {
+                            console.log(str)
+                            return str.replace(/\w\S*/g, function (txt) {
+                                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                            });
+                        }
+                    $("#header-user").text(toTitleCase(response.userName))
+                    $("#tenant-name").empty()
+                    $("#tenant-name").append(`<span style="font-weight: 300;">Welcome</span> ${response.userName}`)
+                                 },
+                error: function (xhr, status, error) {
+                    $("#myModal_warning").modal("show");
+                    setTimeout(function() {
+                        $('#myModal_warning').modal('hide');
+                        window.location = './login_module.html';
+                    }, 2000);
+                    console.log('Error occurred while fetching state and city data.');
+                    console.log(xhr);
+                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                }
+            });
+    })
     var selectedFiles=[]
     function areAllFieldsFilled(update) {
                 if (update) {
@@ -1972,17 +2009,25 @@ if (task.ImageKey) {
 
                             taskName += '</span>' + '</td>';
 
-                            var assignTo = '<td style="font-weight: 600;text-align: center;display: flex;">' +
-                                (task.AssignTo?.map(({ name, email }) => {
-                                    return `
+                            if (task.AssignTo.length >= 1) { 
+                                    var assignTo = '<td style="font-weight: 600;text-align: center;display: flex;">' +
+                                        (task.AssignTo?.map(({
+                                            name,
+                                            email
+                                        }) => {
+                                            return `
         <div class="me-2">
             <i class="fi fi-rs-circle-user avatar-md fs-30" ></i>
             <div class="media-body valign-middle mt-0">
                 <a href="javascript:void(0)" class="text-dark fw-semibold">${name}</a>
             </div>
         </div>`;
-                                }).join("") ||"Not assigned") +
-                                '</td>';
+                                        }).join("")) +
+                                        '</td>';
+                                } else {
+
+                                    var assignTo = '<td>Not Assigned</td>';
+                                }
 
                             var dueDate = '<td class="dueDate" style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + (task.dueDate ||"Not Set") + '</p>' + `<span class="font-weight-normal text-danger"> <i
                                                                         class="fe fe-circle me-1"></i>${task.priority}</span>` + '</td>';
@@ -2480,29 +2525,30 @@ $('#fileInput').on('change', function () {
         })
     </script>
     <script>
-        function logout() {
-            $(document).ready(function () {
-                $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/inactiveTenant',
-                    type: 'PUT',
-                    contentType: false,
-                    processData: false,
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-                    success: function (response) {
-                        console.log(response);
-                        localStorage.removeItem('authtoken');
-                        window.close();
-                        window.open('./login_module.html',"_blank")
-                        console.log('Done');
-                    },
-                    error: function (xhr, status, error) {
-                        console.log(error);
-                    }
+       function logout() {
+                $(document).ready(function () {
+                    $.ajax({
+                        url: 'https://backend.app.spaderent.com/api/spade/inactiveTenant',
+                        type: 'PUT',
+                        contentType: false,
+                        processData: false,
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            console.log(response);
+                            localStorage.removeItem('authtoken');
+                            localStorage.clear();
+                            // window.close();
+                            window.open('./login_module.html', "_self")
+                            console.log('Done');
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(error);
+                        }
+                    });
                 });
-            });
-        }
+            }
     </script>
 
 

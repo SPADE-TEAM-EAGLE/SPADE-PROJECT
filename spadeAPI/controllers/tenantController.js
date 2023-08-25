@@ -264,11 +264,10 @@ exports.verifyResetEmailCodeTenant = async (req, res) => {
       if (time2 >= 120) {
         res.status(408).send("Time out");
       } else {
-        const encryptToken = await encryptJwtToken(token);
         res.status(200).json({
           message: "Successful",
           id: id,
-          token: encryptToken
+          token: token
         });
       }
     }
@@ -294,8 +293,8 @@ exports.updatePasswordTenant = async (req, res) => {
     if (password === confirmpassword) {
       const now = new Date();
       const hashPassword = await hashedPassword(password)
-      const encryptToken = await encryptJwtToken(token);
-      const selectResult = await queryRunner(updatePasswordTenant, [hashPassword, now, id, encryptToken]);
+      
+      const selectResult = await queryRunner(updatePasswordTenant, [hashPassword, now, id, token]);
       if (selectResult[0].affectedRows > 0) {
         res.status(200).json({
           message: "Successful password saved"

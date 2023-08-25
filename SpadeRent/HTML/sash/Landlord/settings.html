@@ -9055,8 +9055,12 @@
     <script src="../assets/js/intercom.js"></script>
     <script src="../assets/js/getNotification.js"></script>
         <script>
+            function profileComplete(){
+                
+            }
             $(document).ready(function () {
-                $.ajax({
+                function profileComplete(){
+                    $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
                 method: 'GET',
                 headers: {
@@ -9079,6 +9083,8 @@
                     // console.log('Error occurred while fetching state and city data.');
                 }
             });
+                }
+                profileComplete();
     $(".label").click(function () {
         $(".activee").removeClass("activee");
         $(this).addClass("activee");
@@ -9534,7 +9540,8 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                             $("#streetAddress").val(toTitleCase(response.streetAddress || ""))
                             $("#businessAddress").val(toTitleCase(response.businessAddress || ""))
                             console.log(response.user)
-                            $("#header-user").text(toTitleCase(response.user))
+                            // $("#user-name").text(toTitleCase(response.userName))
+                        $("#header-user").text(toTitleCase(response.userName))
                             if (response.image) {
                                 image_url = response.image
                                 image_key = response.imageKey
@@ -10149,6 +10156,7 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                                     },
                                     success: function (response) {
                                         $("#myModal_success p").text("Succesfully Updated!!!")
+                                        profileComplete();
                                         $("#myModal_success").modal("show")
                                         setTimeout(function () {
                                             $("#myModal_success").modal("hide");
@@ -10180,6 +10188,7 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                             },
                             success: function (response) {
                                 $("#myModal_success p").text("Succesfully Updated!!!")
+                                profileComplete();
                                 $("#myModal_success").modal("show")
                                 setTimeout(function () {
                                     $("#myModal_success").modal("hide");
@@ -10256,6 +10265,10 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
+                            $("#id_password_new").val("")
+                            $("#id_password2").val("")
+                            $("#current_password_reset").val("")
+                            
                             $("#myModal_success").modal("show");
                             setTimeout(function () {
                                 $("#myModal_success").modal("hide");
@@ -10267,6 +10280,11 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                             // Handle the error response from the API
                             if(xhr.responseJSON.error=="Incorrect Password"){
                                 $("#myModal_incorrect").modal("show")
+                                setTimeout(function () {
+                                $("#myModal_incorrect").modal("hide");
+                                // localStorage.setItem("authtoken", response.token);
+                                // window.location = "../Landlord/index.html";
+                            }, 2000);
                             }
                             else if (xhr.status === 401) {
                                 $("#myModal_warning").modal("show")

@@ -956,9 +956,9 @@
                                         <!-- 2 comments start  -->
 
                                         <!-- 3 comments start  -->
-                                        <div class="d-flex country">
+                                        <!-- <div class="d-flex country">
                                             <img src="../assets\header-img\spade.svg"  class="avatarr profile-user brroundd nav-link cover-image dark-layout">
-                                        </div>
+                                        </div> -->
                                         <div class="dropdown  d-flex notifications">
                                             <a class="nav-link icon" data-bs-toggle="sidebar-right"
                                                 data-target=".sidebar-right"><i class="fe fe-bell"></i> 
@@ -1017,9 +1017,9 @@
                                                     Notification</a>
                                             </div> -->
                                         </div>
-                                        <div class="d-flex country">
+                                        <!-- <div class="d-flex country">
                                             <img src="../assets\header-img\circlels.png"  class="avatarr profile-user nav-link brroundd cover-image light-layout">
-                                        </div>
+                                        </div> -->
                                         <div class="dropdown d-flex profile-1 country">
                                             <a href="javascript:void(0)" data-bs-toggle="dropdown" class="nav-link leading-none d-flex">
                                                 <!-- <img src="../assets/images/users/21.jpg" 
@@ -2385,6 +2385,36 @@
     <script>
         $(document).ready(() => {
             $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/protectedTenant',
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                   
+                    function toTitleCase(str) {
+                            console.log(str)
+                            return str.replace(/\w\S*/g, function (txt) {
+                                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                            });
+                        }
+                    $("#header-user").text(toTitleCase(response.userName))
+                    $("#tenant-name").empty()
+                    $("#tenant-name").append(`<span style="font-weight: 300;">Welcome</span> ${response.userName}`)
+                                 },
+                error: function (xhr, status, error) {
+                    $("#myModal_warning").modal("show");
+                    setTimeout(function() {
+                        $('#myModal_warning').modal('hide');
+                        window.location = './login_module.html';
+                    }, 2000);
+                    console.log('Error occurred while fetching state and city data.');
+                    console.log(xhr);
+                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                }
+            });
+            $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/getTenantByID',
                 type: 'GET',
                 contentType: "application/json; charset=utf-8",
@@ -2521,56 +2551,58 @@
                     if (response.message == "No data found") {
                         // window.location = './invoicing.html'
                     }
+                    else{
+                        invoiceData = response?.data[0]
+                        
+    
+                        var tableBody = $('#table_body');
+                        tableBody.empty();
+                        // console.log(data[0])
+                        let tenantNames = []
+    
+                        response.data[0]?.forEach(function(invoice) {
+    
+    
+                            var invoiceNumber = '<td class="invoice-id" style="font-weight: 600;">' + invoice.invoiceID + '</td>';
+    
+                            // var tenantName = '<td class="tenantName" style="font-weight: 600;">' + invoice.firstName + invoice.lastName + `<br><small>${invoice.tPhone}</small>` + '</td>';
+                            var memoDescription = '<td class="memo" style="font-weight: 600;">' + invoice.memo[0].memo + `<br><small>${invoice.invoiceType}</small>` + '</td>';
+    
+                            var dateObj = new Date(invoice.created_at);
+                            var day = dateObj.getDate();
+                            var month = dateObj.getMonth() + 1;
+                            var year = dateObj.getFullYear();
+                            var invoiceDate = '<td class="date" style="font-weight: 600;">' + day + "/" + month + "/" + year + '</td>';
+                            var propertyName = '<td class="propertyName" style="font-weight: 600;">' + invoice.propertyName + `<br><small>${invoice.tPhone}</small>` + '</td>';
+                            var invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + invoice.totalAmount + '<span> $</span>' + `<br><small>Next Due Date: November-12-2020</small>` + '</td>';
+                            var status = `<td class="status" style="font-weight: 600;${invoice.status === "Unpaid" ? 'color:blue;' : 'color:green'}">` + invoice.status + '</td>';
+                            var dropdownMenu = `<td><i class="fe fe-more-vertical three-dots"
+                                                                    data-bs-toggle="dropdown"></i>
+    
+                                                                <ul class="dropdown-menu">
+                                                                    <li><a class="dropdown-item text-dark view-btnn"
+                                                                            data-bs-effect="effect-scale"
+                                                                            data-bs-toggle="modal"
+                                                                            href="#viewModal-invoice">View</a>
+                                                                    </li>
+                                                                    <li><a class="dropdown-item text-dark view-btn"
+                                                                            data-bs-effect="effect-scale"
+                                                                            data-bs-toggle="modal"
+                                                                            href="#viewModal">View PDF Invoice</a>
+                                                                    </li>
+                                                                    
+                                                                </ul>
+                                                            </td>`
+    
+    
+                            var row = '<tr>' + invoiceNumber + memoDescription + invoiceDate +
+                                propertyName + invoiceAmount + status + dropdownMenu + '</tr>';
+    
+                            // Append the row to the table body
+                            tableBody.append(row);
+                        });
 
-                    invoiceData = response?.data[0]
-                    
-
-                    var tableBody = $('#table_body');
-                    tableBody.empty();
-                    // console.log(data[0])
-                    let tenantNames = []
-
-                    response.data[0]?.forEach(function(invoice) {
-
-
-                        var invoiceNumber = '<td class="invoice-id" style="font-weight: 600;">' + invoice.invoiceID + '</td>';
-
-                        // var tenantName = '<td class="tenantName" style="font-weight: 600;">' + invoice.firstName + invoice.lastName + `<br><small>${invoice.tPhone}</small>` + '</td>';
-                        var memoDescription = '<td class="memo" style="font-weight: 600;">' + invoice.memo[0].memo + `<br><small>${invoice.invoiceType}</small>` + '</td>';
-
-                        var dateObj = new Date(invoice.created_at);
-                        var day = dateObj.getDate();
-                        var month = dateObj.getMonth() + 1;
-                        var year = dateObj.getFullYear();
-                        var invoiceDate = '<td class="date" style="font-weight: 600;">' + day + "/" + month + "/" + year + '</td>';
-                        var propertyName = '<td class="propertyName" style="font-weight: 600;">' + invoice.propertyName + `<br><small>${invoice.tPhone}</small>` + '</td>';
-                        var invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + invoice.totalAmount + '<span> $</span>' + `<br><small>Next Due Date: November-12-2020</small>` + '</td>';
-                        var status = `<td class="status" style="font-weight: 600;${invoice.status === "Unpaid" ? 'color:blue;' : 'color:green'}">` + invoice.status + '</td>';
-                        var dropdownMenu = `<td><i class="fe fe-more-vertical three-dots"
-                                                                data-bs-toggle="dropdown"></i>
-
-                                                            <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item text-dark view-btnn"
-                                                                        data-bs-effect="effect-scale"
-                                                                        data-bs-toggle="modal"
-                                                                        href="#viewModal-invoice">View</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item text-dark view-btn"
-                                                                        data-bs-effect="effect-scale"
-                                                                        data-bs-toggle="modal"
-                                                                        href="#viewModal">View PDF Invoice</a>
-                                                                </li>
-                                                                
-                                                            </ul>
-                                                        </td>`
-
-
-                        var row = '<tr>' + invoiceNumber + memoDescription + invoiceDate +
-                            propertyName + invoiceAmount + status + dropdownMenu + '</tr>';
-
-                        // Append the row to the table body
-                        tableBody.append(row);
-                    });
+                    }
                 },
                 error: function() {
 

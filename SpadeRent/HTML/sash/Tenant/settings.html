@@ -40,7 +40,12 @@
     <link href="../assets/switcher/css/switcher.css" rel="stylesheet" />
     <link href="../assets/switcher/demo.css" rel="stylesheet" />
 
-    <style>
+    <script>
+         if(!localStorage.getItem("authtoken")){
+                window.location="./login_module.html"
+            }
+    </script>
+<style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
         .custom-file-input::-webkit-file-upload-button {
@@ -177,9 +182,9 @@
             border: 1px solid #e9edf4;
         }
 
-        input:focus {
+        /* input:focus {
             border: 3px solid #555 !important;
-        }
+        } */
 
         .panel-body {
             padding: 0px;
@@ -792,6 +797,7 @@
         #myonoffswitch1,
         #myonoffswitch2 {
             border-radius: 18px;
+            width: -webkit-fill-available;
         }
 
         .activee {
@@ -1385,11 +1391,11 @@
                                             </a>
                                         </div>
 
-                                        <div class="d-flex country mt-2">
+                                        <!-- <div class="d-flex country mt-2">
                                             <a class="nav-link icon text-dark" onclick="mydemoclick()">
                                                 <i class="fi fi-rs-universal-access"></i>
                                             </a>
-                                        </div>
+                                        </div> -->
 
 
                                         <!-- 1 comments start  -->
@@ -1413,10 +1419,10 @@
                                         <!-- 2 comments start  -->
 
                                         <!-- 3 comments start  -->
-                                        <div class="d-flex country">
+                                        <!-- <div class="d-flex country">
                                             <img src="../assets\header-img\spade.svg"
                                                 class="avatarr profile-user brroundd nav-link cover-image dark-layout">
-                                        </div>
+                                        </div> -->
                                         <div class="dropdown  d-flex notifications">
                                             <a class="nav-link icon" data-bs-toggle="sidebar-right"
                                                 data-target=".sidebar-right"><i class="fe fe-bell"></i> 
@@ -1475,17 +1481,17 @@
                                                     Notification</a>
                                             </div> -->
                                         </div>
-                                        <div class="d-flex country">
+                                        <!-- <div class="d-flex country">
                                             <img src="../assets\header-img\circlels.png"
                                                 class="avatarr profile-user nav-link brroundd cover-image light-layout">
-                                        </div>
+                                        </div> -->
                                         <div class="dropdown d-flex profile-1 country">
                                             <a href="javascript:void(0)" data-bs-toggle="dropdown"
                                                 class="nav-link leading-none d-flex">
                                                 <!-- <img src="../assets/images/users/21.jpg" 
                                                     class="avatar  profile-user brround cover-image"> -->
-                                                <span class="side-menu__item dynamic-text-head text-dark"
-                                                    style="padding: 10px 10px;">Spade Admin</span> <i
+                                                <span class="dynamic-text-head text-dark"
+                                                    style="padding: 10px 10px;" id="header-user"></span> <i
                                                     class="fe fe-chevron-down dark-mode text-dark"
                                                     style="font-size: 20px; font-weight: 800;"></i>
                                             </a>
@@ -1560,13 +1566,13 @@
                                     Profile</span>
                             </a>
                         </li> -->
+                        <a href="settings.html">
                             <li class="slide">
                                 <div class="M-0 mt-3 mb-4" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
                                     <div class="card-header pb-0 border-bottom-0">
                                         <i class="side-menu__icon fi fi-rs-rocket-lunch mb-0"></i>
                                         <h3 class="card-title side-menu__label">&nbsp; Complete your Profile
                                         </h3>
-
                                     </div>
                                     <div class="card-body pt-0">
                                         <div class="side-menu__label progress progress-md mt-5">
@@ -1575,6 +1581,7 @@
                                     </div>
                                 </div>
                             </li>
+                        </a>
                             <li class="slide">
                                 <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html"><i
                                         class="side-menu__icon fi fi-rs-dashboard"></i><span
@@ -3458,7 +3465,7 @@
                         console.log(file)
                         userForm.append("image", file)
                         $.ajax({
-                            url: 'http://localhost:3000/api/spade/uploadTenant',
+                            url: 'https://backend.app.spaderent.com/api/spade/uploadTenant',
                             type: 'POST',
                             data: userForm,
                             headers: {
@@ -3471,7 +3478,7 @@
                                 userData.Image = response.images[0].image_url
                                 userData.imageKey = response.images[0].image_key
                                 $.ajax({
-                                    url: 'http://localhost:3000/api/spade/updateTenantProfile',
+                                    url: 'https://backend.app.spaderent.com/api/spade/updateTenantProfile',
                                     method: 'PUT',
                                     data: JSON.stringify(userData),
                                     contentType: 'application/json',
@@ -3502,7 +3509,7 @@
                         });
                     } else {
                         $.ajax({
-                            url: 'http://localhost:3000/api/spade/updateTenantProfile',
+                            url: 'https://backend.app.spaderent.com/api/spade/updateTenantProfile',
                             method: 'PUT',
                             data: JSON.stringify(userData),
                             contentType: 'application/json',
@@ -3528,7 +3535,7 @@
                     }
                 })
                 $.ajax({
-                url: 'http://localhost:3000/api/spade/protectedTenant',
+                url: 'https://backend.app.spaderent.com/api/spade/protectedTenant',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3543,6 +3550,13 @@
                     $("#email").val(response.email)
                     $("#businessName").val(response.businessName)
                     $("#phone").val(response.phoneNumber)
+                    function toTitleCase(str) {
+                            console.log(str)
+                            return str.replace(/\w\S*/g, function (txt) {
+                                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                            });
+                        }
+                    $("#header-user").text(toTitleCase(response.userName))
                     if (response.imageKey) {
                                 image_url = response.image
                                 image_key = response.imageKey
@@ -3556,7 +3570,7 @@ $("#user-img").attr("src",image)
                     $("#myModal_warning").modal("show");
                     setTimeout(function() {
                         $('#myModal_warning').modal('hide');
-                        window.location = '../Landlord/login_module.html';
+                        window.location = './login_module.html';
                     }, 2000);
                     console.log('Error occurred while fetching state and city data.');
                     console.log(xhr);
@@ -3564,7 +3578,9 @@ $("#user-img").attr("src",image)
                     // console.log('Error occurred while fetching state and city data.');
                 }
             });
-            </script>
+           
+           
+           </script>
 
             <script>
                 // Add active class to the current button (highlight it)
@@ -3625,7 +3641,7 @@ $("#user-img").attr("src",image)
                 });
             </script>
             <script>
-                function logout() {
+               function logout() {
                 $(document).ready(function () {
                     $.ajax({
                         url: 'https://backend.app.spaderent.com/api/spade/inactiveTenant',
@@ -3638,8 +3654,9 @@ $("#user-img").attr("src",image)
                         success: function (response) {
                             console.log(response);
                             localStorage.removeItem('authtoken');
-                            window.close();
-                            window.open('./login_module.html', "_blank")
+                            localStorage.clear();
+                            // window.close();
+                            window.open('./login_module.html', "_self")
                             console.log('Done');
                         },
                         error: function (xhr, status, error) {
