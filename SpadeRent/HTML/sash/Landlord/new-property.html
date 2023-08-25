@@ -2170,15 +2170,15 @@
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function ({ image,user }) {
+                success: function ({ image,userName }) {
                     function toTitleCase(str) {
             return str.replace(/\w\S*/g, function(txt) {
                 return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
             });
         }
 $("#user-img").attr("src",image)
-$("#header-user").text(toTitleCase(user))
-$("#user-name").text(user)
+$("#header-user").text(toTitleCase(userName))
+$("#user-name").text(userName)
                     $("#user-img-dark").attr("src",image)                },
                 error: function (xhr, status, error) {
                     console.log('Error occurred while fetching state and city data.');

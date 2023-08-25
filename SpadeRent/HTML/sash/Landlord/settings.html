@@ -9534,7 +9534,8 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                             $("#streetAddress").val(toTitleCase(response.streetAddress || ""))
                             $("#businessAddress").val(toTitleCase(response.businessAddress || ""))
                             console.log(response.user)
-                            $("#header-user").text(toTitleCase(response.user))
+                            // $("#user-name").text(toTitleCase(response.userName))
+                        $("#header-user").text(toTitleCase(response.userName))
                             if (response.image) {
                                 image_url = response.image
                                 image_key = response.imageKey
@@ -10267,6 +10268,11 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                             // Handle the error response from the API
                             if(xhr.responseJSON.error=="Incorrect Password"){
                                 $("#myModal_incorrect").modal("show")
+                                setTimeout(function () {
+                                $("#myModal_incorrect").modal("hide");
+                                // localStorage.setItem("authtoken", response.token);
+                                // window.location = "../Landlord/index.html";
+                            }, 2000);
                             }
                             else if (xhr.status === 401) {
                                 $("#myModal_warning").modal("show")

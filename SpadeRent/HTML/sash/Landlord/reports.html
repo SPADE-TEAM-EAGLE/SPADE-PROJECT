@@ -4505,14 +4505,15 @@ $.ajax({
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function ({ image,user }) {
+                success: function ({ image,userName }) {
                     function toTitleCase(str) {
                                 return str.replace(/\w\S*/g, function(txt) {
                                     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                                 });
                             }
                     console.log(user);
-                    $("#header-user").text(toTitleCase(user))
+                    // $("#user-name").text(toTitleCase(userName))
+                        $("#header-user").text(toTitleCase(userName))
 $("#user-img").attr("src",image)
                     $("#user-img-dark").attr("src",image)                   
                 },

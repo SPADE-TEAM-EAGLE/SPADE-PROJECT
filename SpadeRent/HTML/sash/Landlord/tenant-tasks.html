@@ -2149,8 +2149,8 @@
                         // LandlordImg = response.image;
                         $("#user-img").attr("src", response.image)
                         $("#user-img-dark").attr("src", response.image)
-                        $("#user-name").text(toTitleCase(response.user))
-                        $("#header-user").text(toTitleCase(response.user))
+                        $("#user-name").text(toTitleCase(response.userName))
+                        $("#header-user").text(toTitleCase(response.userName))
                         // userEmail = email
                         // id = userId
                     },
@@ -2241,7 +2241,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                 });
             }
             $.ajax({
-                url: 'http://localhost:3000/api/spade/tenantTask',
+                url: 'https://backend.app.spaderent.com/api/spade/tenantTask',
                 type: 'GET',
                 data: {
                     Id: tenantId

@@ -33,7 +33,12 @@
     <!-- <link rel="stylesheet" href="fancy_fileupload.css"> -->
     <!-- COLOR SKIN CSS -->
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="../assets/colors/color1.css" />
-    <style>
+    <script>
+         if(!localStorage.getItem("authtoken")){
+                window.location="./login_module.html"
+            }
+    </script>
+<style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
         .custom-file-input::-webkit-file-upload-button {
             visibility: hidden;
@@ -914,11 +919,11 @@
                                             </a>
                                         </div>
 
-                                        <div class="d-flex country mt-2">
+                                        <!-- <div class="d-flex country mt-2">
                                             <a class="nav-link icon text-dark" onclick="mydemoclick()">
                                                 <i class="fi fi-rs-universal-access"></i>
                                             </a>
-                                        </div>
+                                        </div> -->
 
 
                                         <!-- 1 comments start  -->
@@ -1075,13 +1080,13 @@
                                     Profile</span>
                             </a>
                         </li> -->
+                        <a href="chats.html">
                             <li class="slide">
                                 <div class="M-0 mt-3 mb-4" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
                                     <div class="card-header pb-0 border-bottom-0">
                                         <i class="side-menu__icon fi fi-rs-rocket-lunch mb-0"></i>
                                         <h3 class="card-title side-menu__label">&nbsp; Complete your Profile
                                         </h3>
-
                                     </div>
                                     <div class="card-body pt-0">
                                         <div class="side-menu__label progress progress-md mt-5">
@@ -1090,6 +1095,7 @@
                                     </div>
                                 </div>
                             </li>
+                        </a>
                             <li class="slide">
                                 <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html"><i
                                     class="side-menu__icon fi fi-rs-dashboard"></i><span class="side-menu__label">Overview</span></a>
@@ -2702,7 +2708,7 @@
     </script> -->
 
     <script>
-        function logout() {
+       function logout() {
                 $(document).ready(function () {
                     $.ajax({
                         url: 'https://backend.app.spaderent.com/api/spade/inactiveTenant',
@@ -2715,8 +2721,9 @@
                         success: function (response) {
                             console.log(response);
                             localStorage.removeItem('authtoken');
-                            window.close();
-                            window.open('./login_module.html', "_blank")
+                            localStorage.clear();
+                            // window.close();
+                            window.open('./login_module.html', "_self")
                             console.log('Done');
                         },
                         error: function (xhr, status, error) {
