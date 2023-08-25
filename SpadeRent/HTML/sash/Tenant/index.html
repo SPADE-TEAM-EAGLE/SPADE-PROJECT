@@ -1145,6 +1145,9 @@
                     $("#header-user").text(toTitleCase(response.userName))
                     $("#tenant-name").empty()
                     $("#tenant-name").append(`<span style="font-weight: 300;">Welcome</span> ${response.userName}`)
+                    $("#tenant-address").empty()
+                    $("#tenant-address").append(`&nbsp;&nbsp; <span><b>Pensgate St</b></span> <br>&nbsp;&nbsp; ${response.address + " " + response.city + " " + response.state + " " + response.zipCode}`)
+
                                  },
                 error: function (xhr, status, error) {
                     $("#myModal_warning").modal("show");
