@@ -215,8 +215,8 @@ exports.getTenantDashboardData = async (req, res) => {
   exports.getTenantByID = async (req, res) => {
     try {
       // con
-      // const { userId } = req.user;
-      const { userId } = req.body;
+      const { userId } = req.user;
+      // const { userId } = req.body;
       console.log(userId)
       const TenantsByIDResult = await queryRunner(getTenantsById, [userId])
       if (TenantsByIDResult[0].length > 0) {

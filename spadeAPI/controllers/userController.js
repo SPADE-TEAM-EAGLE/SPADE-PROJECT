@@ -1909,11 +1909,12 @@ exports.getAllProperty = async (req, res) => {
 
 exports.getTaskReportData = async (req, res) => {
   try {
-    const { userId } = req.user;
+    // const { userId } = req.user;
+    const { userId } = req.body;
     const getAllPropertyData = await queryRunner(getTaskReportData, [userId]);
-    console.log(getAllPropertyData);
+    // console.log(getAllPropertyData);
     res.status(200).json({
-      property: getAllPropertyData[0],
+      property: getAllPropertyData,
     });
   } catch (error) {
     res.status(400).json({

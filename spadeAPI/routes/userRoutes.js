@@ -127,8 +127,8 @@ router.get("/getAllTaskTenant", verifyTokenTenant, tenantPortalController.getAll
 // router.get("/getAllTaskLoggedInTenant", verifyTokenTenant, tenantPortalController.getAllLoggedInTenantTask);
 // get tenante dashboard
 router.get("/getTenantDashData", verifyTokenTenant, tenantPortalController.getTenantDashboardData);
-// router.get('/getTenantByID', verifyTokenTenant, tenantPortalController.getTenantByID);
-router.get('/getTenantByID', tenantPortalController.getTenantByID);
+router.get('/getTenantByID', verifyTokenTenant, tenantPortalController.getTenantByID);
+// router.get('/getTenantByID', tenantPortalController.getTenantByID);
 router.put('/changePasssword', verifyToken, settingController.changePasssword);
 router.put('/changePasswordTenant', verifyTokenTenant, settingController.changePasswordTenant);
 router.put('/emailUpdate', userController.emailUpdate);
@@ -154,6 +154,7 @@ router.put("/updateAllTenantNotifyRead", verifyTokenTenant, notifyController.upd
 router.get("/propertyReport", verifyToken, userController.getAllProperty);
 router.get("/invoiceReport", verifyToken, userController.getInvoiceReportData);
 router.get("/taskReport", verifyToken, userController.getTaskReportData);
+// router.get("/taskReport", userController.getTaskReportData);
 // dekete invoice catergory
 router.delete("/deleteInvoiceCategory", verifyToken, invoiceController.deleteInCategories);
 router.delete("/deleteVendorCategory", verifyToken, invoiceController.deleteVendCategories);
