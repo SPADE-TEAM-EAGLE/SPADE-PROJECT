@@ -2465,7 +2465,7 @@ color: #000;
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function({
-                    user,image
+                    userName,image
                 }) {
                     function toTitleCase(str) {
                                 return str.replace(/\w\S*/g, function(txt) {
@@ -2473,9 +2473,9 @@ color: #000;
                                 });
                             }
         $("#user-img").attr("src",image)
-        $("#user-name").text(toTitleCase(user))
+        $("#user-name").text(toTitleCase(userName))
                     $("#user-img-dark").attr("src",image)                     
-                        $("#header-user").text(toTitleCase(user))
+                        $("#header-user").text(toTitleCase(userName))
 
                 },
                 error: function(xhr, status, error) {

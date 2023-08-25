@@ -1580,7 +1580,12 @@
         .light-mode .tab-content .btn i {
                 color: #000;
             }
-    </style>
+.table> :not(caption)>*>*  {
+    background: white;
+    color: #000;
+}
+
+</style>
 
 </head>
 
@@ -2323,7 +2328,7 @@
                         <!-- LOGO -->
                         <!-- <div class="main-header-center ms-3 d-none d-lg-block">
                             <input type="text" class="form-control" id="typehead" placeholder="Search for results...">
-                            <button class="btn px-0 pt-2"><i class="fe fe-search" aria-hidden="true"></i></button>
+                            <button class="btn px-0"><i class="fe fe-search" aria-hidden="true"></i></button>
                         </div> -->
                         <div class="d-flex order-lg-2 ms-auto header-right-icons">
                             <!-- SEARCH -->
@@ -2395,10 +2400,10 @@
                                             <img src="../assets\header-img\question.svg" 
                                                 class="avatarr profile-user brroundd nav-link cover-image dark-layout customIntercomButton">
                                         </div>
-                                        <div class="d-flex country">
+                                        <!-- <div class="d-flex country">
                                             <img src="../assets\header-img\question-light.webp" 
                                                 class="avatarr profile-user nav-link brroundd cover-image light-layout customIntercomButton">
-                                        </div>
+                                        </div> -->
                                         <div class="dropdown  d-flex notifications">
                                             <a class="nav-link icon" data-bs-toggle="sidebar-right"
                                             data-target=".sidebar-right"><i class="fe fe-bell"></i> 
@@ -2717,7 +2722,7 @@
                                                 <div class="row">
                                                     <div class="col-lg-4">
                                                         <div class="form-group">
-                                                            <label class="form-label"><b>Property</b></label>
+                                                            <label class="form-label"><b>Report Type</b></label>
                                                             <select class="form-control select2-show-search form-select"
                                                                 id="propertySelect" data-placeholder="Choose one">
                                                                 <option label="Choose one"></option>
@@ -2755,7 +2760,7 @@
                                                                        </div> -->
                                                                         <div
                                                                             class="main-header-center d-none d-lg-block m-0">
-                                                                            <button class="btn px-0 pt-2"><i
+                                                                            <button class="btn px-0"><i
                                                                                     class="fe fe-search"
                                                                                     aria-hidden="true"></i></button>
                                                                             <input type="text" class="form-control"
@@ -2959,18 +2964,20 @@
                                                                     </ul>
                                                                 </div>
                                                                 <div class="mx-2">
+                                                                    <div class="main-header-center d-none d-lg-block m-0 dropdown">
+                                                                        <button class="btn px-0"><i class="fe fe-search" aria-hidden="true"></i></button>
+                                                                        <input type="text" class="form-control dropdown-toggle" id="typehead_lease" placeholder="Search for results..." autocomplete="off" style="width: 230px;" data-bs-toggle="dropdown" aria-expanded="false"><div class="dropdown-menu" style=""></div>
+
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                             <div class="d-flex">
                                                                 <div class="mx-2">
-                                                                    <!-- <div class="form-group m-0">
-                                                                      <input class="form-control" placeholder="Search Users by Name, Email or Date" id="search_input" type="text">
-                                                                   </div> -->
-                                                                    <div class="main-header-center d-none d-lg-block m-0 dropdown">
-                                                                        <button class="btn px-0 pt-2"><i class="fe fe-search" aria-hidden="true"></i></button>
+                                                                    <!-- <div class="main-header-center d-none d-lg-block m-0 dropdown">
+                                                                        <button class="btn px-0"><i class="fe fe-search" aria-hidden="true"></i></button>
                                                                         <input type="text" class="form-control dropdown-toggle" id="typehead_lease" placeholder="Search for results..." autocomplete="off" style="width: 230px;" data-bs-toggle="dropdown" aria-expanded="false"><div class="dropdown-menu" style=""></div>
 
-                                                                    </div>
+                                                                    </div> -->
                                                                 </div>
                                                             </div>
                                                             <div class="d-flex">
@@ -3093,7 +3100,7 @@
                                                     </div> -->
                                                     <div class="col-lg-4">
                                                         <div class="form-group">
-                                                            <label class="form-label"><b>Tenant</b></label>
+                                                            <label class="form-label"><b>Report Type</b></label>
                                                             <select class="form-control select2-show-search form-select"
                                                                 id="tenantSelect" data-placeholder="Choose one">
                                                                 <option label="Choose one"></option>
@@ -3112,7 +3119,8 @@
                                                                         <button type="button"
                                                                             class="btn btn-outline-default text-dark py-1"
                                                                             id="filter_btn-tenant" data-bs-toggle="dropdown"><i
-                                                                                class="typcn typcn-filter me-2 fs-16"></i><strong>Filter</strong></button>
+                                                                                class="typcn typcn-filter fs-16"></i><strong>Filter</strong></button>
+                                                                                
                                                                         <ul class="dropdown-menu" role="menu">
                                                                             <li><a href="javascript:void(0)"><strong
                                                                                         class="text-dark">Filter
@@ -3163,19 +3171,20 @@
                                                                         </ul>
                                                                     </div>
                                                                     <div class="mx-2">
-                                                                       
+                                                                        <div class="main-header-center d-none d-lg-block m-0 dropdown">
+                                                                            <button class="btn px-0"><i class="fe fe-search" aria-hidden="true"></i></button>
+                                                                            <input type="text" class="form-control dropdown-toggle" id="typehead_tenant" placeholder="Search for results..." autocomplete="off" style="width: 230px;" data-bs-toggle="dropdown"><div class="dropdown-menu"></div>
+
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="d-flex">
                                                                     <div class="mx-2">
-                                                                        <!-- <div class="form-group m-0">
-                                                                          <input class="form-control" placeholder="Search Users by Name, Email or Date" id="search_input" type="text">
-                                                                       </div> -->
-                                                                        <div class="main-header-center d-none d-lg-block m-0 dropdown">
-                                                                            <button class="btn px-0 pt-2"><i class="fe fe-search" aria-hidden="true"></i></button>
+                                                                        <!-- <div class="main-header-center d-none d-lg-block m-0 dropdown">
+                                                                            <button class="btn px-0"><i class="fe fe-search" aria-hidden="true"></i></button>
                                                                             <input type="text" class="form-control dropdown-toggle" id="typehead_tenant" placeholder="Search for results..." autocomplete="off" style="width: 230px;" data-bs-toggle="dropdown"><div class="dropdown-menu"></div>
 
-                                                                        </div>
+                                                                        </div> -->
                                                                     </div>
                                                                 </div>
                                                                 <div class="d-flex">
@@ -3375,19 +3384,22 @@
                                                                         </li>
                                                                     </ul>
                                                                 </div>
-                                                                
-                                                            </div>
-                                                            <div class="d-flex">
                                                                 <div class="mx-2">
-                                                                    <!-- <div class="form-group m-0">
-                                                                      <input class="form-control" placeholder="Search Users by Name, Email or Date" id="search_input" type="text">
-                                                                   </div> -->
                                                                     <div class="main-header-center d-none d-lg-block m-0 dropdown">
-                                                                        <button class="btn px-0 pt-2"><i class="fe fe-search" aria-hidden="true"></i></button>
+                                                                        <button class="btn px-0"><i class="fe fe-search" aria-hidden="true"></i></button>
                                                                         <input type="text" class="form-control dropdown-toggle" id="typehead_invoice" placeholder="Search for results..." autocomplete="off" style="width: 230px;" data-bs-toggle="dropdown"><div class="dropdown-menu"></div>
 
                                                                     </div>
                                                                 </div>
+                                                            </div>
+                                                            <div class="d-flex">
+                                                                <!-- <div class="mx-2">
+                                                                    <div class="main-header-center d-none d-lg-block m-0 dropdown">
+                                                                        <button class="btn px-0"><i class="fe fe-search" aria-hidden="true"></i></button>
+                                                                        <input type="text" class="form-control dropdown-toggle" id="typehead_invoice" placeholder="Search for results..." autocomplete="off" style="width: 230px;" data-bs-toggle="dropdown"><div class="dropdown-menu"></div>
+
+                                                                    </div>
+                                                                </div> -->
                                                             </div>
                                                             <div class="d-flex"> 
                                                                 <button type="button" class="btn btn-primary mx-2" onclick="exportTableToCSV4('person.csv')"
@@ -3557,19 +3569,22 @@
                                                                         </li>
                                                                     </ul>
                                                                 </div>
-                                                                
-                                                            </div>
-                                                            <div class="d-flex">
                                                                 <div class="mx-2">
-                                                                    <!-- <div class="form-group m-0">
-                                                                      <input class="form-control" placeholder="Search Users by Name, Email or Date" id="search_input" type="text">
-                                                                   </div> -->
                                                                     <div class="main-header-center d-none d-lg-block m-0 dropdown">
-                                                                        <button class="btn px-0 pt-2"><i class="fe fe-search" aria-hidden="true"></i></button>
+                                                                        <button class="btn px-0"><i class="fe fe-search" aria-hidden="true"></i></button>
                                                                         <input type="text" class="form-control dropdown-toggle" id="typehead_task" placeholder="Search for results..." autocomplete="off" style="width: 230px;" data-bs-toggle="dropdown"><div class="dropdown-menu"></div>
 
                                                                     </div>
                                                                 </div>
+                                                            </div>
+                                                            <div class="d-flex">
+                                                                <!-- <div class="mx-2">
+                                                                    <div class="main-header-center d-none d-lg-block m-0 dropdown">
+                                                                        <button class="btn px-0"><i class="fe fe-search" aria-hidden="true"></i></button>
+                                                                        <input type="text" class="form-control dropdown-toggle" id="typehead_task" placeholder="Search for results..." autocomplete="off" style="width: 230px;" data-bs-toggle="dropdown"><div class="dropdown-menu"></div>
+
+                                                                    </div>
+                                                                </div> -->
                                                             </div>
                                                             <div class="d-flex">
                                                                 <button type="button" class="btn btn-primary mx-2" onclick="exportTableToCSV5('person.csv')"
@@ -4113,27 +4128,73 @@
             });
         });
         // PDF CODE START
-        document.getElementById("download_pdf_reports").addEventListener("click", () => {
-            
-                const invoice = this.document.getElementById("htmlContent");
-                var opt = {
-                    margin: 0.1,
-                    filename: `${name}.pdf`,
-                    image: {
-                        type: 'jpeg',
-                        quality: 0.98
-                    },
-                    html2canvas: {
-                        scale: 2
-                    },
-                    jsPDF: {
-                        unit: 'in',
-                        format: 'A3',
-                        orientation: 'portrait'
-                    }
-                };
-                html2pdf().from(invoice).set(opt).save();
-            })
+        document.getElementById("download_pdf_reports").addEventListener("click", async () => {
+    const invoice = document.getElementById("htmlContent");
+
+    // Store the references and initial display state of the last column cells and header cells
+    const tableRows = invoice.querySelectorAll("tr");
+    const rowStates = [];
+    tableRows.forEach(row => {
+        const cells = row.querySelectorAll("td");
+        if (cells.length > 0) {
+            const lastCell = cells[cells.length - 1];
+            rowStates.push({
+                cell: lastCell,
+                display: lastCell.style.display
+            });
+            lastCell.style.display = "none";
+        }
+    });
+
+    const tableHeader = invoice.querySelector("thead");
+    const headerStates = [];
+    if (tableHeader) {
+        const headerCells = tableHeader.querySelectorAll("th");
+        if (headerCells.length > 0) {
+            const lastHeaderCell = headerCells[headerCells.length - 1];
+            headerStates.push({
+                cell: lastHeaderCell,
+                display: lastHeaderCell.style.display
+            });
+            lastHeaderCell.style.display = "none";
+        }
+    }
+
+    // Create a copy of the modified invoice content for generating PDF
+    const pdfContent = invoice.cloneNode(true);
+
+    // Restore the initial display state after creating the PDF content
+    rowStates.forEach(state => {
+        state.cell.style.display = state.display;
+    });
+
+    headerStates.forEach(state => {
+        state.cell.style.display = state.display;
+    });
+
+    var opt = {
+        margin: 0.1,
+        filename: `${name}.pdf`,
+        image: {
+            type: 'jpeg',
+            quality: 0.98
+        },
+        html2canvas: {
+            scale: 2
+        },
+        jsPDF: {
+            unit: 'in',
+            format: 'A3',
+            orientation: 'portrait'
+        }
+    };
+
+    // Generate the PDF
+    await html2pdf().from(pdfContent).set(opt).save();
+});
+
+
+
             document.getElementById("download_pdf_reports2").addEventListener("click", () => {
             
             const invoice = this.document.getElementById("htmlContent2");
@@ -4176,48 +4237,136 @@
             };
             html2pdf().from(invoice).set(opt).save();
         })
-        document.getElementById("download_pdf_reports4").addEventListener("click", () => {
-            
-            const invoice = this.document.getElementById("htmlContent4");
-            var opt = {
-                margin: 0.1,
-                filename: `${name}.pdf`,
-                image: {
-                    type: 'jpeg',
-                    quality: 0.98
-                },
-                html2canvas: {
-                    scale: 2
-                },
-                jsPDF: {
-                    unit: 'in',
-                    format: 'A3',
-                    orientation: 'portrait'
-                }
-            };
-            html2pdf().from(invoice).set(opt).save();
-        })
-        document.getElementById("download_pdf_reports5").addEventListener("click", () => {
-            
-            const invoice = this.document.getElementById("htmlContent5");
-            var opt = {
-                margin: 0.1,
-                filename: `${name}.pdf`,
-                image: {
-                    type: 'jpeg',
-                    quality: 0.98
-                },
-                html2canvas: {
-                    scale: 2
-                },
-                jsPDF: {
-                    unit: 'in',
-                    format: 'A3',
-                    orientation: 'portrait'
-                }
-            };
-            html2pdf().from(invoice).set(opt).save();
-        })
+        document.getElementById("download_pdf_reports4").addEventListener("click", async () => {
+    const invoice = document.getElementById("htmlContent4");
+
+    // Store the references and initial display state of the last column cells and header cells
+    const tableRows = invoice.querySelectorAll("tr");
+    const rowStates = [];
+    tableRows.forEach(row => {
+        const cells = row.querySelectorAll("td");
+        if (cells.length > 0) {
+            const lastCell = cells[cells.length - 1];
+            rowStates.push({
+                cell: lastCell,
+                display: lastCell.style.display
+            });
+            lastCell.style.display = "none";
+        }
+    });
+
+    const tableHeader = invoice.querySelector("thead");
+    const headerStates = [];
+    if (tableHeader) {
+        const headerCells = tableHeader.querySelectorAll("th");
+        if (headerCells.length > 0) {
+            const lastHeaderCell = headerCells[headerCells.length - 1];
+            headerStates.push({
+                cell: lastHeaderCell,
+                display: lastHeaderCell.style.display
+            });
+            lastHeaderCell.style.display = "none";
+        }
+    }
+
+    // Create a copy of the modified invoice content for generating PDF
+    const pdfContent = invoice.cloneNode(true);
+
+    // Restore the initial display state after creating the PDF content
+    rowStates.forEach(state => {
+        state.cell.style.display = state.display;
+    });
+
+    headerStates.forEach(state => {
+        state.cell.style.display = state.display;
+    });
+
+    var opt = {
+        margin: 0.1,
+        filename: `${name}.pdf`,
+        image: {
+            type: 'jpeg',
+            quality: 0.98
+        },
+        html2canvas: {
+            scale: 2
+        },
+        jsPDF: {
+            unit: 'in',
+            format: 'A2',
+            orientation: 'portrait'
+        }
+    };
+
+    // Generate the PDF
+    await html2pdf().from(pdfContent).set(opt).save();
+});
+
+document.getElementById("download_pdf_reports5").addEventListener("click", async () => {
+    const invoice = document.getElementById("htmlContent5");
+
+    // Store the references and initial display state of the last column cells and header cells
+    const tableRows = invoice.querySelectorAll("tr");
+    const rowStates = [];
+    tableRows.forEach(row => {
+        const cells = row.querySelectorAll("td");
+        if (cells.length > 0) {
+            const lastCell = cells[cells.length - 1];
+            rowStates.push({
+                cell: lastCell,
+                display: lastCell.style.display
+            });
+            lastCell.style.display = "none";
+        }
+    });
+
+    const tableHeader = invoice.querySelector("thead");
+    const headerStates = [];
+    if (tableHeader) {
+        const headerCells = tableHeader.querySelectorAll("th");
+        if (headerCells.length > 0) {
+            const lastHeaderCell = headerCells[headerCells.length - 1];
+            headerStates.push({
+                cell: lastHeaderCell,
+                display: lastHeaderCell.style.display
+            });
+            lastHeaderCell.style.display = "none";
+        }
+    }
+
+    // Create a copy of the modified invoice content for generating PDF
+    const pdfContent = invoice.cloneNode(true);
+
+    // Restore the initial display state after creating the PDF content
+    rowStates.forEach(state => {
+        state.cell.style.display = state.display;
+    });
+
+    headerStates.forEach(state => {
+        state.cell.style.display = state.display;
+    });
+
+    var opt = {
+        margin: 0.1,
+        filename: `${name}.pdf`,
+        image: {
+            type: 'jpeg',
+            quality: 0.98
+        },
+        html2canvas: {
+            scale: 2
+        },
+        jsPDF: {
+            unit: 'in',
+            format: 'A3',
+            orientation: 'portrait'
+        }
+    };
+
+    // Generate the PDF
+    await html2pdf().from(pdfContent).set(opt).save();
+});
+
             // PDF CODE END
     </script>
         <script>
@@ -4352,15 +4501,17 @@ console.log(index)
 
             // Append the new row to the table body
             $('#table_body_property_report').append(newRowHtml);
+         
         });
     }
     function constructPropertyTableTenant(propertyData,id){
         $("#table_body_tenant_report").empty()
-        propertyData.forEach((property,index) => {
-            console.log(property)
-            if ($("#tenantSelect option:contains('" + property.propertyName + "')").length === 0) {
-        $("#tenantSelect").append($('<option></option>').text(property.propertyName).val(property.id));
-    }
+        propertyData.forEach((tenant,index) => {
+            console.log(tenant)
+            if ($("#tenantSelect option:contains('" + tenant.firstName + " " + tenant.lastName + "')").length === 0) {
+    $("#tenantSelect").append($('<option></option>').text(tenant.firstName + " " + tenant.lastName).val(tenant.tenantID));
+}
+
             
             var newRowHtml = '<tr>' +
                 '<td style="font-weight: 600;">' + (index+1) + '</td>'+
@@ -4403,14 +4554,15 @@ $.ajax({
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function ({ image,user }) {
+                success: function ({ image,userName }) {
                     function toTitleCase(str) {
                                 return str.replace(/\w\S*/g, function(txt) {
                                     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                                 });
                             }
-                    console.log(user);
-                    $("#header-user").text(toTitleCase(user))
+                   
+                    // $("#user-name").text(toTitleCase(userName))
+                        $("#header-user").text(toTitleCase(userName))
 $("#user-img").attr("src",image)
                     $("#user-img-dark").attr("src",image)                   
                 },
@@ -4479,7 +4631,7 @@ $("#download_pdf_reports_lease").attr("disabled",true)
                 // '<span style="color: #4573D2;">' + remainingDays + ' Days Remaining</span>' +
                 '</td>' +
                 '<td class="propertyUnits">' +
-                '<p style="font-weight: 800;" class="mb-1 text-dark">' + lease.firstName+" "+lease.lastName + '</p>' +
+                '<p style="font-weight: 800;" class="mb-1">' + lease.firstName+" "+lease.lastName + '</p>' +
                 '</td>' +
                 '<td class="propertyUnits">' +
                 '<span class="font-weight-normal">Phone: ' + lease.phoneNumber + '</span>' +
@@ -4515,7 +4667,7 @@ function filterAndRenderTable(selectedValue) {
 }
 function filterAndRenderTableTenant(selectedValue) {
     if(selectedValue){
-        var filteredData = tenantData.filter(property => property.id == selectedValue);
+        var filteredData = tenantData.filter(property => property.tenantID == selectedValue);
     constructPropertyTableTenant(filteredData);
     }
     else{
@@ -4543,7 +4695,7 @@ $("#propertySelect").on('change', function() {
 });
 $("#tenantSelect").on('change', function() {
     var selectedValue = $(this).val();
-    filterAndRenderTable(selectedValue);
+    filterAndRenderTableTenant(selectedValue);
 });
 $("#typehead").on('input', function() {
     var searchValue = $(this).val().toLowerCase();
@@ -4659,7 +4811,7 @@ $("#download_pdf_reports4").attr("disabled",true)
     }
 })
 $.ajax({
-    url: 'https://backend.app.spaderent.com/api/spade/taskReport',
+    url: 'https://backend.app.spaderent.com/api/spade/getAllTask',
     type: 'GET',
     contentType: "application/json; charset=utf-8",
     processData: false,
@@ -4667,8 +4819,8 @@ $.ajax({
         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
     },
     success: function (response) {
-        
-        taskData = response.property;
+        console.log(response.data[0])
+        taskData = response.data[0];
         if(taskData.length<1){
 $("#download_csv_reports5").attr("disabled",true)
 $("#download_pdf_reports5").attr("disabled",true)
@@ -4682,34 +4834,45 @@ $("#download_pdf_reports5").attr("disabled",true)
 
             // Construct the HTML for the new row
             var newRowHtml = '<tr>' +
-                '<td style="font-weight: 600;">' + (index+1) + '</td>'+
-                '<td style="font-weight: 600;" class="d-none">' + "" + '</td>'+
-                '<td><img src="../assets/images/Group-user.png" alt=""></td>' +
-                '<td class="task-id" id="' + task.taskID + '" style="font-weight: 600;">' +
-                '<p style="font-weight: 600;" class="mb-1">' + task.taskName + '</p>' +
-                '<span class="font-weight-normal" style="color: #9B9B9B;"> By ' + task.createdBy + ' - ' + hoursDiff + ' hours</span>' +
-                '</td>' +
-                '<td style="font-weight: 600;text-align: center;display: flex;">' + task.firstName+" "+ task.lastName+ '</td>' +
-                '<td class="property-id" style="font-weight: 600;">' +
-                '<p style="font-weight: 600;" class="mb-1">' + formatDate(task.dueDate) + '</p>' +
-                '<span class="font-weight-normal text-danger"> <i class="fe fe-circle me-1"></i>' + task.priority + '</span>' +
-                '</td>' +
-                '<td class="property-id" style="font-weight: 600;">' +
-                '<p style="font-weight: 600;" class="mb-1">' + task.propertyName + '</p>' +
-                '<span class="font-weight-normal text-danger">Unit Number: ' + task.units + '</span>' +
-                '</td>' +
-                '<td class="property-id" style="font-weight: 600;">' + task.status + '</td>' +
-                '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
-                '<ul class="dropdown-menu">' +
-                '<li><a class="dropdown-item text-success view-task" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#">View</a></li>' +
-                '<li><a class="edit-option dropdown-item text-primary" href="javascript:void(0)">Edit</a></li>' +
-                '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>' +
-                '</ul>' +
-                '</td>' +
-                '</tr>';
+    '<td style="font-weight: 600;">' + (index + 1) + '</td>' +
+    '<td style="font-weight: 600;" class="d-none">' + "" + '</td>' +
+    '<td><img src="../assets/images/Group-user.png" alt=""></td>' +
+    '<td class="task-id" id="' + task.taskID + '" style="font-weight: 600;">' +
+    '<p style="font-weight: 600;" class="mb-1">' + task.taskName + '</p>' +
+    '<span class="font-weight-normal" style="color: #9B9B9B;"> By ' + task.createdBy + ' - ' + hoursDiff + ' hours</span>' +
+    '</td>';
 
-            // Append the new row to the table body
-            $('#table_body_task_report').append(newRowHtml);
+if (task.AssignTo.length>0) {
+    newRowHtml += task.AssignTo.map(function ({ name, email }) {
+        return '<td style="font-weight: 600;text-align: center;display: flex;"><div class="me-2">' +
+            '<i class="fi fi-rs-circle-user avatar-md fs-30 text-dark"></i>' +
+            '<div class="media-body valign-middle mt-0">' +
+            '<a href="javascript:void(0)" class="text-dark fw-semibold">' + name + '</a>' +
+            '</div>' +
+            '</div></td>';
+    }).join('');
+} else {
+    newRowHtml += '<td>Not assigned</td>';
+}
+newRowHtml +=
+    '<td class="property-id" style="font-weight: 600;">' +
+    '<p style="font-weight: 600;" class="mb-1">' + formatDate(task.dueDate) + '</p>' +
+    '<span class="font-weight-normal text-danger"> <i class="fe fe-circle me-1"></i>' + task.priority + '</span>' +
+    '</td>' +
+    '<td class="property-id" style="font-weight: 600;">' +
+    '<p style="font-weight: 600;" class="mb-1">' + task.propertyName + '</p>' +
+    '<span class="font-weight-normal text-danger">Unit Number: ' + task.unitNumber
+ + '</span>' +
+    '</td>' +
+    '<td class="property-id" style="font-weight: 600;">' + task.status + '</td>' +
+    
+    '</tr>';
+
+// Append the new row to the table body
+$('#table_body_task_report').append(newRowHtml);
+
+        
+
         });
     },
     error: function (xhr, status, error) {

@@ -36,7 +36,12 @@
     <!-- INTERNAL Switcher css -->
     <!-- <link href="../assets/switcher/css/switcher.css" rel="stylesheet" />
     <link href="../assets/switcher/demo.css" rel="stylesheet" /> -->
-    <style>
+    <script>
+         if(!localStorage.getItem("authtoken")){
+                window.location="./login_module.html"
+            }
+    </script>
+<style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
         .custom-file-input::-webkit-file-upload-button {
@@ -1772,11 +1777,11 @@
                                                 <span class="light-layout"><i class="fe fe-sun"></i></span>
                                             </a>
                                         </div>
-                                        <div class="d-flex country mt-2">
+                                        <!-- <div class="d-flex country mt-2">
                                             <a class="nav-link icon text-dark" onclick="mydemoclickk()">
                                                 <i class="fi fi-rs-universal-access"></i>
                                             </a>
-                                        </div>
+                                        </div> -->
                                         <!-- 1 comments start  -->
                                         <!-- <div class="d-flex country">
                                             <img src="../assets\header-img\comment.svg"  class="avatarr profile-user brroundd nav-link cover-image dark-layout">
@@ -1856,10 +1861,10 @@
                                                     Notification</a>
                                             </div> -->
                                         </div>
-                                        <div class="d-flex country">
+                                        <!-- <div class="d-flex country">
                                             <img src="../assets\header-img\circlels.png"
                                                 class="avatarr profile-user nav-link brroundd cover-image light-layout">
-                                        </div>
+                                        </div> -->
                                         <div class="dropdown d-flex profile-1 country">
                                             <a href="javascript:void(0)" data-bs-toggle="dropdown"
                                                 class="nav-link leading-none d-flex">
@@ -1938,6 +1943,7 @@
                                     Profile</span>
                             </a>
                         </li> -->
+                        <a href="chats.html">
                             <li class="slide">
                                 <div class="M-0 mt-3 mb-4" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
                                     <div class="card-header pb-0 border-bottom-0">
@@ -1952,6 +1958,7 @@
                                     </div>
                                 </div>
                             </li>
+                        </a>
                             <li class="slide">
                                 <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html"><i
                                         class="side-menu__icon fi fi-rs-dashboard"></i><span
@@ -3224,16 +3231,16 @@
                         console.log(response.data.images);
 
                         // localStorage.setItem("TenantImg", response.data.images)  
-                        localStorage.setItem("tenantName", response.data.firstName + " " + response.data.lastName)
+                        // localStorage.setItem("tenantName", response.data.firstName + " " + response.data.lastName)
                         console.log(response)
-                        localStorage.setItem("landloadId", Number(response.data.landlordID))
+                        // localStorage.setItem("landloadId", Number(response.data.landlordID))
                         // console.log(response.data)
-                        $("#tenant-name").empty()
-                        $("#header-user").html(`${response.data.firstName + " " + response.data.lastName}`)
-                        $("#tenant-name").append(`<span style="font-weight: 300;">Welcome</span> ${response.data.firstName + " " + response.data.lastName}`)
-                        $("#tenantName").text(`${response.data.firstName + " " + response.data.lastName}`)
-                        $("#tenant-address").empty()
-                        $("#tenant-address").append(`&nbsp;&nbsp; <span><b>Pensgate St</b></span> <br>&nbsp;&nbsp; ${response.data.tAddress + " " + response.data.tCity + " " + response.data.tState + " " + response.data.tZipcode}`)
+                        // $("#tenant-name").empty()
+                        // $("#header-user").html(`${response.data.firstName + " " + response.data.lastName}`)
+                        // $("#tenant-name").append(`<span style="font-weight: 300;">Welcome</span> ${response.data.firstName + " " + response.data.lastName}`)
+                        // $("#tenantName").text(`${response.data.firstName + " " + response.data.lastName}`)
+                        // $("#tenant-address").empty()
+                        // $("#tenant-address").append(`&nbsp;&nbsp; <span><b>Pensgate St</b></span> <br>&nbsp;&nbsp; ${response.data.tAddress + " " + response.data.tCity + " " + response.data.tState + " " + response.data.tZipcode}`)
                         $.ajax({
                             url: 'https://backend.app.spaderent.com/api/spade/getUserById/' + Number(response.data.landlordID) + '/landlord',
                             type: 'GET',
@@ -3508,8 +3515,8 @@
                             console.log(response);
                             localStorage.removeItem('authtoken');
                             localStorage.clear();
-                            window.close();
-                            window.open('./login_module.html', "_blank")
+                            // window.close();
+                            window.open('./login_module.html', "_self")
                             console.log('Done');
                         },
                         error: function (xhr, status, error) {
