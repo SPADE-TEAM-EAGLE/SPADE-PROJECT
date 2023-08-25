@@ -41,6 +41,7 @@ exports.changePasssword = async function (req, res) {
                 const token = jwt.sign({ email, NewPassword }, config.JWT_SECRET_KEY, {
                   expiresIn: "3h",
                 });
+                
                 res.status(200).json({
                   token: token,
                     message: "Successful password Change",
@@ -84,6 +85,7 @@ exports.changePasswordTenant = async function (req, res) {
               const token = jwt.sign({ email, NewPassword }, config.JWT_SECRET_KEY, {
                 expiresIn: "3h",
               });
+              
               res.status(200).json({
                 token: token,
                   message: "Successful password Change",

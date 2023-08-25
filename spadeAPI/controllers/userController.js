@@ -53,6 +53,12 @@ const {
   getUserById,
   getTenantById,
   updateTenantActive,
+  getPropertyDashboardData,
+  getPropertiesGraphDataBypropertyID,
+  getInvoiceGraphDataByPropertId,
+  
+  getTaskGraphDataByPropertyId,
+  getInvoiceGraphDataByPropertyId,
 } = require("../constants/queries");
 
 const { hashedPassword } = require("../helper/hash");
@@ -61,6 +67,7 @@ const { fileUpload, deleteImageFromS3 } = require("../helper/S3Bucket");
 const { verifyMailCheck } = require("../helper/emailVerify");
 const userServices = require("../Services/userServices");
 const { log } = require("console");
+const { encryptJwtToken } = require("../helper/EnccryptDecryptToken");
 // const { NotificationSocket } = require("../app.js");
 const config = process.env;
 
@@ -142,24 +149,8 @@ exports.checkemail = async function (req, res) {
 };
 
 exports.getUser = (req, res) => {
-  // console.log(req.user);
-  res.status(200).json({
-    user: req.user.userName,
-    email: req.user.email,
-    userId: req.user.userId,
-    businessName: req.user.businessName,
-    phone: req.user.phone,
-    streetAddress: req.user.streetAddress,
-    businessAddress: req.user.BusinessAddress,
-    lastName: req.user.lastName,
-    firstName: req.user.firstName,
-    image: req.user.image,
-    imageKey: req.user.imageKey,
-    planID: req.user.planID,
-    isActive: req.user.isActive,
-    landlordId:req.user.landlordID,
-    propertyID:req.user.propertyID
-  });
+
+  res.status(200).json(req.user);
 };
 
 exports.Signin = async function (req, res) {
@@ -205,6 +196,7 @@ exports.Signin = async function (req, res) {
         const token = jwt.sign({ email, password }, config.JWT_SECRET_KEY, {
           expiresIn: "3h",
         });
+        
 
         // const emai = "umairnazakat2222@gmail.com"
         //  const emailMessage =  await verifyMailCheck(email);
@@ -251,8 +243,62 @@ exports.Signin = async function (req, res) {
          }
          // ################################# Count ##############################################
         if (selectResult[0][0].userVerified == "Email Verified") {
+          // ################################# Count ##############################################
+          const userId = selectResult[0][0].id;
+          console.log(userId);
+          // Property
+          const propertycheckresult = await queryRunner(
+            selectQuery("property", "landlordID"),
+            [userId]
+          );
+          if (propertycheckresult[0].length > 0) {
+            property = "true";
+          } else {
+            property = "false";
+          }
+          // Tenant
+          const tenantcheckresult = await queryRunner(
+            selectQuery("tenants", "landlordID"),
+            [userId]
+          );
+          if (tenantcheckresult[0].length > 0) {
+            tenants = "true";
+          } else {
+            tenants = "false";
+          }
 
-         
+          //Invoice
+          const invoicecheckresult = await queryRunner(
+            selectQuery("invoice", "landlordID"),
+            [userId]
+          );
+          if (invoicecheckresult[0].length > 0) {
+            invoice = "true";
+          } else {
+            invoice = "false";
+          }
+
+          //Task
+          const taskcheckresult = await queryRunner(
+            selectQuery("task", "landlordID"),
+            [userId]
+          );
+          if (taskcheckresult[0].length > 0) {
+            task = "true";
+          } else {
+            task = "false";
+          }
+          //vendors
+          const vendorscheckresult = await queryRunner(
+            selectQuery("vendor", "LandlordID"),
+            [userId]
+          );
+          if (vendorscheckresult[0].length > 0) {
+            vendors = "true";
+          } else {
+            vendors = "false";
+          }
+          // ################################# Count ##############################################
           res.status(200).json({
             property: property,
             tenants: tenants,
@@ -451,6 +497,7 @@ exports.createResetEmail = async (req, res) => {
 exports.verifyResetEmailCode = async (req, res) => {
   const { id, token } = req.body;
   // console.log(req.body)
+  
   try {
     const selectResult = await queryRunner(
       selectQuery("users", "id", "token"),
@@ -487,6 +534,7 @@ exports.verifyResetEmailCode = async (req, res) => {
 exports.updatePassword = async (req, res) => {
   const { id, password, confirmpassword, token } = req.body;
   // const currentDate = new Date();
+
   try {
     if (password === confirmpassword) {
       const hashPassword = await hashedPassword(password);
@@ -1790,6 +1838,7 @@ exports.verifyEmailUpdate = async (req, res) => {
           const token = jwt.sign({ email, password }, config.JWT_SECRET_KEY, {
             expiresIn: "3h",
           });
+          
           return res.status(200).json({
             token: token,
             message: " Email verified successful ",
@@ -1862,7 +1911,7 @@ exports.getTaskReportData = async (req, res) => {
   try {
     const { userId } = req.user;
     const getAllPropertyData = await queryRunner(getTaskReportData, [userId]);
-    console.log(getAllPropertyData)
+    console.log(getAllPropertyData);
     res.status(200).json({
       property: getAllPropertyData[0],
     });
@@ -1897,7 +1946,6 @@ exports.getPropertyDashboardData = async (req, res) => {
       start,
       end,
     ]);
-    console.log(getAllPropertyData[0]);
     res.status(200).json({
       property: getAllPropertyData[0],
     });
@@ -1910,16 +1958,28 @@ exports.getPropertyDashboardData = async (req, res) => {
 exports.getTaskDashboardData = async (req, res) => {
   try {
     const { userId } = req.user;
-    const { start, end } = req.params;
-    const getAllTaskData = await queryRunner(getTaskGraphData, [
-      userId,
-      start,
-      end,
-    ]);
-    console.log(getAllTaskData[0]);
-    res.status(200).json({
-      property: getAllTaskData[0],
-    });
+    const { start, end ,propertyId} = req.params;
+    
+    if(propertyId){
+      const getAllTaskData = await queryRunner(getTaskGraphDataByPropertyId, [
+        propertyId,
+        userId,
+        start,
+        end,
+      ]);
+      res.status(200).json({
+        property: getAllTaskData[0],
+      });
+    }else{
+      const getAllTaskData = await queryRunner(getTaskGraphData, [
+        userId,
+        start,
+        end,
+      ]);
+      res.status(200).json({
+        property: getAllTaskData[0],
+      });
+    }
   } catch (error) {
     res.status(400).json({
       message: error.message,
@@ -1929,13 +1989,24 @@ exports.getTaskDashboardData = async (req, res) => {
 exports.getInvoiceDashboardData = async (req, res) => {
   try {
     const { userId } = req.user;
-    const { start, end } = req.params;
-    const getAllInvoiceData = await queryRunner(getInvoiceGraphData, [
-      userId,
-      start,
-      end,
-    ]);
-    res.status(200).json(getAllInvoiceData[0]);
+    const { start, end ,propertyId } = req.params;
+    if(propertyId){
+      console.log(propertyId)
+      const getAllInvoiceData = await queryRunner(getInvoiceGraphDataByPropertyId, [
+        propertyId,
+        userId,
+        start,
+        end
+      ]);
+      res.status(200).json(getAllInvoiceData[0]);
+    }else{
+      const getAllInvoiceData = await queryRunner(getInvoiceGraphData, [
+        userId,
+        start,
+        end,
+      ]);
+      res.status(200).json(getAllInvoiceData[0]);
+    }
   } catch (error) {
     res.status(400).json({
       message: error.message,
@@ -2065,53 +2136,80 @@ exports.ProfileComplete = async (req, res) => {
       message: error.message,
     });
   }
+};
 
-}
-
-
+exports.filterOutDashbordDataByProperty = async (req, res) => {
+  try {
+    const { propertyId } = req.params;
+    const getAllPropertyData = await queryRunner(getPropertyDashboardData, [
+      propertyId,
+    ]);
+    res.status(200).json({
+      property: getAllPropertyData[0],
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+};
 // check property etc
 exports.checkSystem = async (req, res) => {
   try {
-
-    // const { userId } = req.user; 
+    // const { userId } = req.user;
     const { userId } = req.body;
     // Property
-    const propertycheckresult = await queryRunner(selectQuery("property", "landlordID"), [userId]);
+    const propertycheckresult = await queryRunner(
+      selectQuery("property", "landlordID"),
+      [userId]
+    );
     if (propertycheckresult[0].length > 0) {
       property = "true";
     } else {
-      property = "false"
+      property = "false";
     }
     // Tenant
-    const tenantcheckresult = await queryRunner(selectQuery("tenants", "landlordID"), [userId]);
+    const tenantcheckresult = await queryRunner(
+      selectQuery("tenants", "landlordID"),
+      [userId]
+    );
     if (tenantcheckresult[0].length > 0) {
       tenant = "true";
     } else {
-      tenant = "false"
+      tenant = "false";
     }
 
     //Invoice
-    const invoicecheckresult = await queryRunner(selectQuery("invoice", "landlordID"), [userId]);
+    const invoicecheckresult = await queryRunner(
+      selectQuery("invoice", "landlordID"),
+      [userId]
+    );
     if (invoicecheckresult[0].length > 0) {
       invoice = "true";
     } else {
-      invoice = "false"
+      invoice = "false";
     }
 
     //Task
-    const taskcheckresult = await queryRunner(selectQuery("task", "landlordID"), [userId]);
+    const taskcheckresult = await queryRunner(
+      selectQuery("task", "landlordID"),
+      [userId]
+    );
     if (taskcheckresult[0].length > 0) {
       task = "true";
     } else {
-      task = "false"
+      task = "false";
     }
 
     //vendors
-    const vendorscheckresult = await queryRunner(selectQuery("vendor", "LandlordID"), [userId]);
+    const vendorscheckresult = await queryRunner(
+      selectQuery("vendor", "LandlordID"),
+      [userId]
+    );
     if (vendorscheckresult[0].length > 0) {
       vendors = "true";
     } else {
-      vendors = "false"
+      vendors = "false";
     }
     res.status(200).json({
       property: property,
@@ -2129,3 +2227,20 @@ exports.checkSystem = async (req, res) => {
   }
 
 }
+exports.filterOutDashbordDataByProperty = async (req, res) => {
+  try {
+    const { propertyId } = req.params;
+    
+    const getAllPropertyData = await queryRunner(getPropertyDashboardData, [
+      propertyId,
+    ]);
+    res.status(200).json({
+      property: getAllPropertyData[0],
+    });
+
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+};

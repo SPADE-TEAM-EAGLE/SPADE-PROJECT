@@ -22,7 +22,8 @@ const {
   updateUnitsTenant,
   getTenantsById,
   updateTenants,
-  tenantTaskQuery
+  tenantTaskQuery,
+  updateTenantsProfile
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -292,6 +293,7 @@ exports.updatePasswordTenant = async (req, res) => {
     if (password === confirmpassword) {
       const now = new Date();
       const hashPassword = await hashedPassword(password)
+      
       const selectResult = await queryRunner(updatePasswordTenant, [hashPassword, now, id, token]);
       if (selectResult[0].affectedRows > 0) {
         res.status(200).json({
@@ -639,7 +641,30 @@ exports.updateTenants = async (req, res) => {
   }
 }
 //  ############################# Update tenants END ############################################################
-
+exports.updateTenantProfile = async (req, res) => {
+  try {
+      const { userId } = req.user;
+      const { firstName, lastName, companyName, email, phoneNumber, address, city, state, zipcode, Image, imageKey } = req.body;
+      const tenantcheckresult = await queryRunner(selectQuery("tenants", "id"), [userId]);
+      if (tenantcheckresult[0].length > 0) {
+          const tenantsInsert = await queryRunner(updateTenantsProfile, [firstName, lastName, companyName, email, phoneNumber, address, city, state, zipcode, Image, imageKey, userId]);
+          if (tenantsInsert[0].affectedRows > 0) {
+              res.status(200).json({
+                  message: "Tenants save Successful",
+                  data: tenantsInsert[0],
+              })
+          } else {
+              res.status(200).json({
+                  message: "Tenants is not found"
+              });
+          }
+      } 
+      
+  } catch (error) {
+    res.send('Error Get Tenants By ID')
+    console.log(error)
+  }
+}
 
 //  ############################# Task tenant ############################################################
 exports.tenantTask = async (req, res) => {
@@ -668,13 +693,15 @@ exports.tenantTask = async (req, res) => {
             selectQuery("vendor", "id"),
             [vID]
           );
+          let VendorCategoryResult;
           if (vendorResult.length > 0) {
             const categoryIDs = vendorResult[0][0].categoryID;
-            const VendorCategoryResult = await queryRunner(
+            VendorCategoryResult = await queryRunner(
               selectQuery("vendorcategory", "id"),
               [categoryIDs]
             );
-            if (VendorCategoryResult.length > 0) {
+            
+            if (VendorCategoryResult[0].length > 0) {
               const vendorDataObject = {
                 name: vendorResult[0][0].firstName + " " + vendorResult[0][0].lastName,
                 businessName: vendorResult[0][0].businessName,
@@ -706,6 +733,31 @@ exports.tenantTask = async (req, res) => {
     res.send("Error Get tenant Task");
   }
 };
-
+exports.updateTenantProfile = async (req, res) => {
+  try {
+      const { userId } = req.user;
+      console.log(userId)
+      console.log(req.body)
+      const { firstName, lastName, companyName, email, phone, address, city, state, zipcode, Image, imageKey } = req.body;
+      const tenantcheckresult = await queryRunner(selectQuery("tenants", "id"), [userId]);
+      if (tenantcheckresult[0].length > 0) {
+          const tenantsInsert = await queryRunner(updateTenantsProfile, [firstName, lastName, companyName, email, phone, address, city, state, zipcode, Image, imageKey, userId]);
+          if (tenantsInsert[0].affectedRows > 0) {
+              res.status(200).json({
+                  message: "Tenants save Successful",
+                  data: tenantsInsert[0],
+              })
+          } else {
+              res.status(200).json({
+                  message: "Tenants is not found"
+              });
+          }
+      } 
+      
+  } catch (error) {
+    res.send('Error Get Tenants By ID')
+    console.log(error)
+  }
+}
 //  ############################# Task tenant ############################################################
 

@@ -21,6 +21,8 @@ router.get("/checkemail", userController.checkemail);
 router.get("/Signin", userController.Signin);
 router.get("/Signinall", userController.Signinall);
 router.post("/upload", verifyToken, fileUpload.fileUpload);
+router.post("/uploadTenant", verifyTokenTenant, fileUpload.fileUpload);
+
 // router.delete("/delete/:key", fileUpload.fileDelete);
 router.put("/updatePlanId", verifyToken, userController.updatePlanId);
 // router.get('/Signinall', userController.Signinall);
@@ -31,14 +33,15 @@ router.post("/resendCode", userController.resendCode);
 router.get("/pricingPlan", userController.pricingPlan);
 router.post("/property", verifyToken, userController.property);
 router.get("/getDashPropertyData/:start/:end", verifyToken, userController.getPropertyDashboardData);
-router.get("/getDashTaskData/:start/:end", verifyToken, userController.getTaskDashboardData);
-router.get("/getDashInvoiceData/:start/:end", verifyToken, userController.getInvoiceDashboardData);
+router.get('/getDashTaskData/:start/:end/:propertyId?', verifyToken, userController.getTaskDashboardData);
+router.get("/getDashInvoiceData/:start/:end/:propertyId?", verifyToken, userController.getInvoiceDashboardData);
 router.put("/inactiveUser", verifyToken, userController.inactiveUser);
 router.put("/inactiveTenant", verifyTokenTenant, userController.inactiveTenant);
 
 router.get("/getUserById/:id/:type", userController.getUserByIdData);
 // router.post("/property" ,verifyToken, userController.property);
 router.put("/updateUserProfile", verifyToken, userController.updateUserProfile);
+router.put("/updateTenantProfile", verifyTokenTenant, tenantController.updateTenantProfile);
 // router.post('/property', upload , userController.property);
 // start, end 
 router.get("/allProperty", verifyToken, userController.getproperty);
@@ -172,7 +175,9 @@ router.get("/LandlordMessages/:chatId", verifyToken, messageClt.getAllMessages);
 router.get('/ProfileComplete',verifyToken,userController.ProfileComplete);
 router.get('/checkSystem' ,userController.checkSystem);
  
-
+router.get("/getPropertyDashboard/:propertyId", verifyToken, userController.filterOutDashbordDataByProperty);
+// update tenant profile
+router.put("/updateTenantProfile", verifyTokenTenant, tenantController.updateTenantProfile);
 // leads routes start
 router.post("/createLead", verifyToken, leadsClt.createNewLead);
 
@@ -189,4 +194,6 @@ router.get("/taskByIDTenant" ,verifyToken ,tenantPortalController.taskByIDTenant
 router.post("/openOrder", paymentIntegration.openOrder);
 router.post("/createUserPayment", paymentIntegration.createUserPayment);
 // router.post("/createUserPaymentasdfgh", paymentIntegration.createUserPaymentasdfgh);
+// router.post("/openOrder", openOrder);
+router.get("/getPropertyDashboard/:propertyId", verifyToken, userController.filterOutDashbordDataByProperty);
 module.exports = router;

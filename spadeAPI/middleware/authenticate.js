@@ -97,10 +97,12 @@
 const jwt = require("jsonwebtoken");
 const { queryRunner } = require("../helper/queryRunner");
 const { selectQuery } = require("../constants/queries");
+// const { decryptJwtToken } = require("../helper/EnccryptDecryptToken");
 const config = process.env;
 const verifyToken = async (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
   // console.log(req.body)
+
   if (!token) {
     return res.status(401).send("Access Denied");
   }
@@ -135,22 +137,35 @@ const verifyToken = async (req, res, next) => {
 };
 const verifyTokenTenant = async (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
-  // console.log(req.body)
+
   if (!token) {
     return res.status(401).send("Access Denied");
   }
   try {
     const decoded = jwt.verify(token, config.JWT_SECRET_KEY);
-    // console.log("tenant",decoded)
     const result = await queryRunner(selectQuery("tenants", "email"), [
       decoded.email,
     ]);
+    
     req.user = {
       email: decoded.email,
       userId: result[0][0].id,
       userName: result[0][0].firstName + " " + result[0][0].lastName,
       landlordID: result[0][0].landlordID,
       propertyID: result[0][0].propertyID,
+      firstName: result[0][0].firstName,
+      lastName: result[0][0].lastName,
+      phoneNumber: result[0][0].phoneNumber,
+      city: result[0][0].city,
+      state: result[0][0].state,
+      zipCode: result[0][0].zipcode,
+      state: result[0][0].state,
+      address: result[0][0].Address,
+      state: result[0][0].state,
+      image: result[0][0].image,
+      imageKey: result[0][0].imageKey,
+      businessName: result[0][0].companyName,
+
     };
 
     next();
