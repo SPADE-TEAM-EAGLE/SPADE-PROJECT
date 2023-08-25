@@ -22,7 +22,8 @@ const {
   updateUnitsTenant,
   getTenantsById,
   updateTenants,
-  tenantTaskQuery
+  tenantTaskQuery,
+  updateTenantsProfile
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -708,6 +709,31 @@ exports.tenantTask = async (req, res) => {
     res.send("Error Get tenant Task");
   }
 };
-
+exports.updateTenantProfile = async (req, res) => {
+  try {
+      const { userId } = req.user;
+      console.log(userId)
+      console.log(req.body)
+      const { firstName, lastName, companyName, email, phone, address, city, state, zipcode, Image, imageKey } = req.body;
+      const tenantcheckresult = await queryRunner(selectQuery("tenants", "id"), [userId]);
+      if (tenantcheckresult[0].length > 0) {
+          const tenantsInsert = await queryRunner(updateTenantsProfile, [firstName, lastName, companyName, email, phone, address, city, state, zipcode, Image, imageKey, userId]);
+          if (tenantsInsert[0].affectedRows > 0) {
+              res.status(200).json({
+                  message: "Tenants save Successful",
+                  data: tenantsInsert[0],
+              })
+          } else {
+              res.status(200).json({
+                  message: "Tenants is not found"
+              });
+          }
+      } 
+      
+  } catch (error) {
+    res.send('Error Get Tenants By ID')
+    console.log(error)
+  }
+}
 //  ############################# Task tenant ############################################################
 

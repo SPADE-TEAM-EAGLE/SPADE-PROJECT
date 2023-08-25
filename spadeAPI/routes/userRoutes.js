@@ -21,6 +21,8 @@ router.get("/checkemail", userController.checkemail);
 router.get("/Signin", userController.Signin);
 router.get("/Signinall", userController.Signinall);
 router.post("/upload", verifyToken, fileUpload.fileUpload);
+router.post("/uploadTenant", verifyTokenTenant, fileUpload.fileUpload);
+
 // router.delete("/delete/:key", fileUpload.fileDelete);
 router.put("/updatePlanId", verifyToken, userController.updatePlanId);
 // router.get('/Signinall', userController.Signinall);
@@ -39,6 +41,7 @@ router.put("/inactiveTenant", verifyTokenTenant, userController.inactiveTenant);
 router.get("/getUserById/:id/:type", userController.getUserByIdData);
 // router.post("/property" ,verifyToken, userController.property);
 router.put("/updateUserProfile", verifyToken, userController.updateUserProfile);
+router.put("/updateTenantProfile", verifyTokenTenant, tenantController.updateTenantProfile);
 // router.post('/property', upload , userController.property);
 // start, end 
 router.get("/allProperty", verifyToken, userController.getproperty);

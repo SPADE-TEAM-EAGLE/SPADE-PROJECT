@@ -145,24 +145,8 @@ exports.checkemail = async function (req, res) {
 };
 
 exports.getUser = (req, res) => {
-  // console.log(req.user);
-  res.status(200).json({
-    user: req.user.userName,
-    email: req.user.email,
-    userId: req.user.userId,
-    businessName: req.user.businessName,
-    phone: req.user.phone,
-    streetAddress: req.user.streetAddress,
-    businessAddress: req.user.BusinessAddress,
-    lastName: req.user.lastName,
-    firstName: req.user.firstName,
-    image: req.user.image,
-    imageKey: req.user.imageKey,
-    planID: req.user.planID,
-    isActive: req.user.isActive,
-    landlordId:req.user.landlordID,
-    propertyID:req.user.propertyID
-  });
+
+  res.status(200).json(req.user);
 };
 
 exports.Signin = async function (req, res) {

@@ -519,6 +519,8 @@ INNER JOIN propertyunits AS pu ON t.propertyUnitID = pu.id
 INNER JOIN propertyimage AS pi ON p.id = pi.propertyID
 WHERE t.id = ?
 GROUP BY t.id;`;
+exports.updateTenantsProfile =
+  "UPDATE tenants SET firstName = ?, lastName = ?, companyName = ?, email = ?, phoneNumber = ?, address = ?, city = ?, state = ?, zipcode = ?, Image = ?, ImageKey = ? WHERE id = ?";
 exports.updateInvoiceStatus =
   "UPDATE invoice SET  status = ?, note = ?, updated_at = ?  where id = ? AND landlordID = ? ";
 exports.getAllInvoicesquery = `SELECT
