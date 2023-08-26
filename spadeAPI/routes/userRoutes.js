@@ -77,7 +77,7 @@ router.get(
 );
 router.get(
   "/viewAllPropertyTenant",
-  verifyToken,
+  // verifyToken,
   userController.viewAllPropertyTenant
 );
 // router.post('/tenants',verifyToken,tenantController.createTenants);
