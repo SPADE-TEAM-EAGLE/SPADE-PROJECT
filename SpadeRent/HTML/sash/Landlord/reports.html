@@ -1689,7 +1689,7 @@
                             maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                             style="min-width: 200px;max-width: 350px;" data-bs-placement="top" data-bs-toggle="tooltip"
                             title="" data-bs-original-title="Enter the name of the property.">
-                        <input type="password" class="form-control form mb-2" id="id_password1"
+                        <input type="password" class="form-control form mb-2" id="email-verify-password"
                             aria-describedby="emailHelp" placeholder="Password" data-bs-placement="top"
                             data-bs-toggle="tooltip" title="" data-bs-original-title="Enter password here.">
                         <!-- <a class="text-primary mb-4" href="javascript:void(0)">Change Email</a> -->
@@ -5103,28 +5103,31 @@ $('#table_body_task_report').append(newRowHtml);
         
         <script>
             function logout() {
-            $(document).ready(function () {
-                $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
-                    type: 'PUT',
-                    contentType: false,
-                    processData: false,
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-                    success: function (response) {
-                        console.log(response);
-                        localStorage.removeItem('authtoken');
-                        // window.close();
-                        window.open('./login_module.html', "_self")
-                        console.log('Done');
-                    },
-                    error: function (xhr, status, error) {
-                        console.log(error);
-                    }
+                $(document).ready(function () {
+                    $.ajax({
+                        url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                        type: 'PUT',
+                        contentType: false,
+                        processData: false,
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            console.log(response);
+                            const htmlLayoutValue = localStorage.getItem("htmlLayout");
+                            localStorage.clear();
+                            localStorage.setItem("htmlLayout", htmlLayoutValue);
+                            // localStorage.removeItem('authtoken');
+                            // window.close();
+                            window.open('./login_module.html', "_self")
+                            console.log('Done');
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(error);
+                        }
+                    });
                 });
-            });
-        }
+            }
         </script>
 </body>
 

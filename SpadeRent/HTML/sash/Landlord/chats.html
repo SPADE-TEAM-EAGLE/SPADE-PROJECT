@@ -1111,7 +1111,7 @@
                             maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                             style="min-width: 200px;max-width: 350px;" data-bs-placement="top" data-bs-toggle="tooltip"
                             title="" data-bs-original-title="Enter the name of the property.">
-                        <input type="password" class="form-control form mb-2" id="id_password1"
+                        <input type="password" class="form-control form mb-2" id="email-verify-password"
                             aria-describedby="emailHelp" placeholder="Password" data-bs-placement="top"
                             data-bs-toggle="tooltip" title="" data-bs-original-title="Enter password here.">
                         <!-- <a class="text-primary mb-4" href="javascript:void(0)">Change Email</a> -->
@@ -3444,7 +3444,7 @@
             <!-- FOOTER END -->
         </div>
         <!-- BACK-TO-TOP -->
-        <!-- <!-- <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a> --> -->
+        <!--  <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a> -->
         <a href="#addModal" data-bs-effect="effect-scale" data-bs-toggle="modal" id="add-tenant-side-btn"><i
                 class="fe fe-plus"></i></a>
         <!-- socket      -->
@@ -3551,7 +3551,7 @@
                 });
                 return socket;
             }
-            var socket = initializeWebSocket(); 
+            var socket = initializeWebSocket();
             window.onbeforeunload = function () {
                 socket.disconnect();
             };
@@ -3723,7 +3723,7 @@
                         console.log("check rec", message);
                         messs2 = `<div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
                                                                     <div style="width: 36px;height: 36px;" class="me-1"> 
-                                                                        <img src="` + (localStorage.getItem("TenantImg")  ? localStorage.getItem("TenantImg") : randomImg) + `" style="border-radius: 50%;height: inherit;" class="message-image" />
+                                                                        <img src="` + (localStorage.getItem("TenantImg") ? localStorage.getItem("TenantImg") : randomImg) + `" style="border-radius: 50%;height: inherit;" class="message-image" />
                                                                         </div> 
                                                                     <div class="msg-text">
                                                 <span class="text">${message.message}</span>
@@ -3832,7 +3832,7 @@
                                                                     <span style="float: right;" class="text-primary">` + time + `</span>
                                                                     </div>
                                                                     <div style="width: 36px;height: 36px;" class="ms-1"> 
-                                                                        <img src="` + localStorage.getItem("LandlordImg") + `" style="border-radius: 50%;height: inherit;" class="message-image" />
+                                                                        <img src="` + (localStorage.getItem("LandlordImg") != "null" ? localStorage.getItem("LandlordImg") : randomImg) + `" style="border-radius: 50%;height: inherit;" class="message-image" />
                                                                         </div> 
                                                                     </div> 
                                                                     `;
@@ -3903,15 +3903,15 @@
                         var tab_pane = $('#tab-pane-ll');
                         tab_pane.empty();
                         let tenantNames = []
-                        if(response.message == "No data found"){
+                        if (response.message == "No data found") {
                             var row = '<div class="mt-5 text-dark" style="text-align: center;">No Tenant Found</div>'
                             tab_pane.append(row);
-                        }else{
+                        } else {
                             response.data[0]?.forEach(function (tenant) {
                                 console.log("viewAllPropertyTenant")
                                 console.log(tenant)
                                 console.log(tenant.tenantImages?.split(",")[0])
-                               
+
                                 var row = `
                                 <a href="javascript:void(0)" onclick="chatTenant(` + tenant.tenantID + `,'` + tenant.firstName + ` ` + tenant.lastName + `',this)"><div class="media new border-top-0 " data-id="` + tenant.tenantID + `">
                                                                 <div class="main-img-user">
@@ -3947,7 +3947,10 @@
                         },
                         success: function (response) {
                             console.log(response);
-                            localStorage.removeItem('authtoken');
+                            const htmlLayoutValue = localStorage.getItem("htmlLayout");
+                            localStorage.clear();
+                            localStorage.setItem("htmlLayout", htmlLayoutValue);
+                            // localStorage.removeItem('authtoken');
                             // window.close();
                             window.open('./login_module.html', "_self")
                             console.log('Done');
@@ -4060,7 +4063,7 @@
                     imageContainer.setAttribute('style', 'width: 36px; height: 36px;');
                     imageContainer.setAttribute('class', 'ms-1');
                     const image = document.createElement('img');
-                    image.setAttribute('src', localStorage.getItem("LandlordImg") ? localStorage.getItem("LandlordImg") : "../assets/images/users/5.jpg");
+                    image.setAttribute('src', localStorage.getItem("LandlordImg") != "null" ? localStorage.getItem("LandlordImg") : "../assets/images/users/5.jpg");
                     image.setAttribute('style', 'border-radius: 50%; height: inherit;');
                     image.setAttribute('class', 'message-image');
 
