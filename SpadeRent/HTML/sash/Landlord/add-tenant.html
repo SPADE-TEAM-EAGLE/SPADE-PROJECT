@@ -1859,6 +1859,9 @@
                                         </div>
                                         <div class="d-flex">
                                             <div id="info-head">
+                                                <a href="javascript:void(0)" id="all" class="d-flex align-items-center me-3 text-dark">
+                                                    <span class="w-3 h-3 brround me-2" style="background-color: #ff0000;"></span> All Types
+                                                </a>
                                                 <a href="javascript:void(0)" id="single-link" class="d-flex align-items-center me-3 text-dark">
                                                     <span class="w-3 h-3 brround me-2" style="background-color: #1467B0;"></span> Single Type
                                                 </a>
@@ -4045,7 +4048,7 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
     const options = { year: 'numeric', month: 'short', day: 'numeric' };
     return date.toLocaleDateString('en-US', options);
 }
-        function filterTableByPropertyType(propertyType) {
+function filterTableByPropertyType(propertyType) {
     // Clear the existing table
     $('#table_body').empty();
 
@@ -4090,8 +4093,56 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
         }
     });
 }
+function filterTableByPropertyAll() {
+    // Clear the existing table
+    $('#table_body').empty();
+
+    // Iterate through tenantData and filter based on propertyType
+    tenantData.forEach(function(tenant, index) {
+        
+            var serial = '<td style="font-weight: 600;">' + (index + 1) + '</td>';
+            var tenantId = '<td class="tenant-id d-none" style="font-weight: 600;">' + tenant.tenantID + '</td>';
+            var tenantName = '<td class="tenantName" style="font-weight: 600;">' + tenant.firstName + tenant.lastName + `<br><small>${tenant.tEmail}</small>` + '</td>';
+            var propertyName = '<td class="propertyName" style="font-weight: 600;">' + tenant.propertyName + `<br><small>${tenant.pAddress}</small>` + '</td>';
+            var rentAmount = '<td class="rentAmount" style="font-weight: 600;">' + tenant.rentAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(formatDate(tenant.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(tenant.recurringNextDate))}` + '</td>';
+            var assignUnit = '<td class="assignUnit" style="font-weight: 600;">' + tenant.unitNumber + `<br><small>${tenant.unitArea} Square/Feet</small>` + '</td>';
+            var password = 'your-secret-password';
+            var encryptedPropertyId = sjcl.encrypt(password, tenant.tenantID.toString());
+            var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
+            
+            var dropdownMenu = '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
+                '<ul class="dropdown-menu">' +
+                `<li><a class="dropdown-item text-success" href="./view-tenant.html?tenant=${encodedPropertyId}">View</a></li>` +
+                '<li><a class="edit-option dropdown-item text-primary"  href="javascript:void(0) ">Edit</a></li>' +
+                '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>' +
+                '</ul></td>';
+            
+            var currentDate = new Date();
+            var leaseEndDate = '';
+            
+            if (tenant.leaseEndDate) {
+                var targetDate = new Date(tenant.leaseEndDate);
+                var timeDiff = targetDate.getTime() - currentDate.getTime();
+                var daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+                
+                leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + `<small class="${daysLeft > 10 ? 'text-primary' : 'text-danger'} d-block">` + daysLeft + ' day(s) remaining</small>' + '</td>';
+            } else {
+                leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + '</td>';
+            }
+
+            var row = '<tr>' + serial + tenantId + tenantName + propertyName + rentAmount +
+                assignUnit + leaseEndDate + dropdownMenu + '</tr>';
+            
+            // Append the row to the table body
+            $('#table_body').append(row);
+        
+    });
+}
         $('#single-link').click(function() {
         filterTableByPropertyType('Single Family');
+    });
+    $('#all').click(function() {
+        filterTableByPropertyAll();
     });
 
     $('#multi-family-link').click(function() {
