@@ -123,7 +123,7 @@ $(document).ready(function () {
                 id: id1,
                 token: $("#token").val(),
                 email: emailChange ? $("#user-email").val() : userEmail,
-                password: $("#id_password1").val(),
+                password: $("#email-verify-password").val(),
             }),
             success: function (response) {
                 console.log(response)
