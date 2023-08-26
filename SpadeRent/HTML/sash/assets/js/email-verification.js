@@ -155,14 +155,14 @@ $(document).ready(function () {
                     localStorage.setItem("authtoken", response.token);
     
                     $("#modaldemo8").modal("hide")
-                    $("#succesModal").modal("show")
+                    $("#succesModal_verify").modal("show")
                     $("#account-text").empty()
                     $("#email_verification").remove()
                     //   window.location="./index.html"
                 } else if (response.message == " token code is not match ") {
                     // $("#modaldemo8").modal("hide")
                     //   $("#info-text").text(response.message || response)
-                    $("#infoModal").modal("show")
+                    $("#infoModal_verify").modal("show")
                 }
             },
             error: function (xhr, status, error) {
