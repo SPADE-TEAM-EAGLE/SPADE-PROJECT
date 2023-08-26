@@ -15,6 +15,8 @@ const leadsClt = require("../controllers/Leads");
 const paymentIntegration = require("../helper/paymentIntegration");
 
 router.post("/Signup", userController.createUser);
+router.get("/tenantAllPaidInvoice", verifyTokenTenant, tenantController.tenantAllPaidInvoice);
+router.get("/userCheckTenantPaidInvoice", verifyToken, userController.checkAllTenantsPaid);
 router.get("/protected", verifyToken, userController.getUser);
 router.get("/protectedTenant", verifyTokenTenant, userController.getUser);
 router.get("/checkemail", userController.checkemail);

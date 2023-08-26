@@ -59,6 +59,8 @@ const {
   
   getTaskGraphDataByPropertyId,
   getInvoiceGraphDataByPropertyId,
+  updateUserAccountQuery,
+  checkMyAllTenantsInvoicePaidQuery,
 } = require("../constants/queries");
 
 const { hashedPassword } = require("../helper/hash");
@@ -1933,6 +1935,37 @@ exports.getInvoiceReportData = async (req, res) => {
     res.status(200).json({
       property: getAllPropertyData[0],
     });
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+};
+exports.checkAllTenantsPaid = async (req, res) => {
+  try {
+    const { userId } = req.user;
+    // Check if tenant has any unpaid invoices
+    const tenantAllPaidInvoiceResult = await queryRunner(
+      checkMyAllTenantsInvoicePaidQuery,
+      [userId]
+    );
+    console.log(tenantAllPaidInvoiceResult[0].length);
+    // No un-paid invoices found, update tenant account
+    if (tenantAllPaidInvoiceResult[0].length === 0) {
+      const tenantAllPaid = await queryRunner(updateUserAccountQuery, [
+        0,
+        userId,
+      ]);
+      if (tenantAllPaid[0].affectedRows > 0) {
+        res.status(200).json({
+          message: "Tenant has paid invoices",
+        });
+      }
+    } else {
+      res.status(200).json({
+        message: "Tenant has unpaid invoices",
+      });
+    }
   } catch (error) {
     res.status(400).json({
       message: error.message,
