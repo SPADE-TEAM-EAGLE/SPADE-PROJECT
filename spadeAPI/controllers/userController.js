@@ -1494,8 +1494,8 @@ exports.viewPropertyTenant = async (req, res) => {
 };
 exports.viewAllPropertyTenant = async (req, res) => {
   try {
-    // const { userId, userName } = req.user;
-    const { userId, userName } = req.body;
+    const { userId, userName } = req.user;
+    // const { userId, userName } = req.body;
     // const {id} = req.query;
     // console.log(req)
     // console.log(req.user);
