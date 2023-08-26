@@ -1,5 +1,29 @@
 //js code
 let id1; let userEmail; let emailChange = false
+let password_validate1 = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
+        var validconfirmPassword1 = document.getElementById("email-verify-password");
+        validconfirmPassword1.addEventListener('keyup', confirmPasswordValidation1);
+        // var spantag11 = document.getElementById("passnotmatch1");
+
+        function confirmPasswordValidation1() {
+
+            // if (validconfirmPassword1.value.match(password_validate1)) {
+            //     console.log(11)
+            //     validconfirmPassword1.classList.add("border-green");
+            //     spantag11.style.display = "none";
+            // } else {
+            //     console.log(21)
+            //     validconfirmPassword1.classList.remove("border-green");
+            //     spantag11.style.display = "block";
+            // }
+            if ($("#token").val() !== " " && validconfirmPassword1.value.match(password_validate1)) {
+                validconfirmPassword1.classList.add("border-green");
+                $("#verify-btn").removeClass("disabled")
+            } else {
+                $("#verify-btn").addClass("disabled")
+                validconfirmPassword1.classList.remove("border-green");
+            }
+        }
 $(document).ready(function () {
     $.ajax({
         url: 'https://backend.app.spaderent.com/api/spade/protected',
