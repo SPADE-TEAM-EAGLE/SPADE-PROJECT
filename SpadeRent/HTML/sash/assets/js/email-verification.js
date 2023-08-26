@@ -120,7 +120,7 @@ $(document).ready(function () {
         });
     })
     $("#send-email").on("click", () => {
-        console.log(id)
+        
         $.ajax({
             url: 'https://backend.app.spaderent.com/api/spade/resendCode',
             type: 'POST',
