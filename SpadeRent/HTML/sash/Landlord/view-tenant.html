@@ -2567,34 +2567,40 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
         //   $('input[type="tel"], input[type="email"]').on('input', checkFields);
         // });
     </script>
-    <script>
-        function logout() {
-            $(document).ready(function () {
-                $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
-                    type: 'PUT',
-                    contentType: false,
-                    processData: false,
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-                    success: function (response) {
-                        console.log(response);
+<script>
+    function logout() {
+        $(document).ready(function () {
+            $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                type: 'PUT',
+                contentType: false,
+                processData: false,
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    console.log(response);
+                    if(localStorage.getItem("htmlLayout")){
+
                         const htmlLayoutValue = localStorage.getItem("htmlLayout");
                         localStorage.clear();
                         localStorage.setItem("htmlLayout", htmlLayoutValue);
-                        // localStorage.removeItem('authtoken');
-                        // window.close();
-                        window.open('./login_module.html', "_self")
-                        console.log('Done');
-                    },
-                    error: function (xhr, status, error) {
-                        console.log(error);
+                    }else{
+                        localStorage.clear();
+
                     }
-                });
+                    // localStorage.removeItem('authtoken');
+                    // window.close();
+                    window.open('./login_module.html', "_self")
+                    console.log('Done');
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }
             });
-        }
-    </script>
+        });
+    }
+</script>
 </body>
 
 </html>

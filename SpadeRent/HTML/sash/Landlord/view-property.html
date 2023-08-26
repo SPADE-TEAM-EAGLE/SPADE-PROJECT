@@ -2224,9 +2224,15 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                     },
                     success: function (response) {
                         console.log(response);
-                        const htmlLayoutValue = localStorage.getItem("htmlLayout");
-                        localStorage.clear();
-                        localStorage.setItem("htmlLayout", htmlLayoutValue);
+                        if(localStorage.getItem("htmlLayout")){
+    
+                            const htmlLayoutValue = localStorage.getItem("htmlLayout");
+                            localStorage.clear();
+                            localStorage.setItem("htmlLayout", htmlLayoutValue);
+                        }else{
+                            localStorage.clear();
+    
+                        }
                         // localStorage.removeItem('authtoken');
                         // window.close();
                         window.open('./login_module.html', "_self")
