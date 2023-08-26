@@ -1,6 +1,6 @@
 //js code
 let id1; let userEmail; let emailChange = false
-let password_validate1 = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
+var password_validate1 = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
         var validconfirmPassword1 = document.getElementById("email-verify-password");
         validconfirmPassword1.addEventListener('keyup', confirmPasswordValidation1);
         // var spantag11 = document.getElementById("passnotmatch1");
