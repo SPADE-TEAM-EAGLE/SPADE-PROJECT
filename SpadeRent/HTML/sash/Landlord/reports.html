@@ -2914,7 +2914,7 @@
                                                                         class="btn btn-outline-default text-dark py-1"
                                                                         id="filter_btn" data-bs-toggle="dropdown"><i
                                                                             class="typcn typcn-filter me-2 fs-16"></i><strong>Filter</strong></button>
-                                                                    <ul class="dropdown-menu" role="menu">
+                                                                    <ul class="dropdown-menu filter" role="menu">
                                                                         <li><a href="javascript:void(0)"><strong
                                                                                     class="text-dark">Filter
                                                                                     by:</strong></a>
@@ -4739,7 +4739,8 @@ function formatCurrency(amount) {
     // Format the number with two decimal places and add the dollar sign
     return '$' + numericAmount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
 }
-$('.dropdown-menu li').on('click', function() {
+$(".filter li").click(function () {
+    console.log($(this))
         var selectedFilter = $(this).find('a').text().trim();
         $('#selectedFilterText').text(selectedFilter);
         
