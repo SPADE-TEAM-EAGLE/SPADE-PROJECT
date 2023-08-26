@@ -1,0 +1,31 @@
+1) first SpadeRent ka folder open krna hy and CMD open kr k 
+                      aws s3 sync . s3://websitespade/
+ya command run krne hy after successful (2) step
+
+
+2) spadeFrontend ka folder open kr k hosting spade website on ec2 ka folder open krna hy anc CMD open krna hy and ya command run krne hy 
+                                                      use this command to connect to ec2
+                                      ssh -i spadewebTAS.pem ec2-user@ec2-54-157-4-66.compute-1.amazonaws.com 
+
+
+
+
+3)                                             sudo rm -r /usr/share/nginx/html/*
+4)                                             sudo rm -r /var/www/html/*
+5)                                             aws s3 cp s3://websitespade /var/www/html/ --recursive
+6)                                             sudo cp -r /var/www/html/* /usr/share/nginx/html/
+7)                                             sudo systemctl restart nginx
+8)                                             Sudo systemctl status nginx
+
+
+and final status ya ho ga 
+
+
+
+
+
+
+"
+ Loaded: loaded (/usr/lib/systemd/system/nginx.service; enabled; preset: disabled)
+     Active: active (running) since Sat 2023-08-26 08:23:14 UTC; 2min 0s ago
+"

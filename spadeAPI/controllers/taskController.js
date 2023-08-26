@@ -641,7 +641,7 @@ exports.updateTasks = async (req, res) => {
       currentDate,
       taskID
     ]);
-    if (TasksResult.affectedRows === 0) {
+    if (TasksResult[0].affectedRows === 0) {
       // throw new Error("data doesn't inserted in task table");
       res.send("Error1");
     }
