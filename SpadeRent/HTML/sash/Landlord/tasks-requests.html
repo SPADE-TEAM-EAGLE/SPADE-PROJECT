@@ -653,16 +653,30 @@ color: #000;
     <div class="modal fade effect-scale" id="modaldemo8" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered modal-l" role="document">
             <div class="modal-content">
-                
+                <!-- <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+                </div> -->
                 <div class="modal-body pt-5">
                     <div class="d-flex flex-column justify-content-center align-items-center p-5"
                         style="text-align: center;">
                         <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" style="max-width: 110px;"
                             class="Rent-logo mb-5" />
                         <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
-                        <h6 class="text-default mb-3">Get started with Spade Rent! Continue with Google to verify</h6>
-                        <input type="email" class="form-control form mb-2" style="min-width: 200px;max-width: 350px;" placeholder="Enter the name of the property">
-                        <a class="text-primary mb-4" href="javascript:void(0)">Change Email</a>
+                        <h6 class="text-default mb-3">Enter a 6-digit code to verify email address</h6>
+                        <input id="token" name="token" type="phone" class="form-control form mb-2" pattern="[0-9]{5}"
+                            maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                            style="min-width: 200px;max-width: 350px;" data-bs-placement="top" data-bs-toggle="tooltip"
+                            title="" data-bs-original-title="Enter the name of the property.">
+                        <input type="password" class="form-control form mb-2" id="email-verify-password"
+                            aria-describedby="emailHelp" placeholder="Password" data-bs-placement="top"
+                            data-bs-toggle="tooltip" title="" data-bs-original-title="Enter password here.">
+                        <!-- <a class="text-primary mb-4" href="javascript:void(0)">Change Email</a> -->
+                        <span class="mt-1 text-danger" id="passnotmatch1" style="display: none;">
+                            MUST be atleast 8 characters long, Must contain atleast One Uppercase and One symbol.
+                        </span>
                         <div class="">
                             <!-- <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2">Remind me Later</a> -->
                             <a href="javascript:void(0)" class="btn btn-primary btn-pill disabled"
@@ -670,7 +684,10 @@ color: #000;
                         </div>
                     </div>
                 </div>
-                
+                <!-- <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-primary">Save changes</button>
+                </div> -->
             </div>
         </div>
     </div>
@@ -3298,7 +3315,10 @@ color: #000;
                     },
                     success: function (response) {
                         console.log(response);
-                        localStorage.removeItem('authtoken');
+                        const htmlLayoutValue = localStorage.getItem("htmlLayout");
+                        localStorage.clear();
+                        localStorage.setItem("htmlLayout", htmlLayoutValue);
+                        // localStorage.removeItem('authtoken');
                         // window.close();
                         window.open('./login_module.html', "_self")
                         console.log('Done');
