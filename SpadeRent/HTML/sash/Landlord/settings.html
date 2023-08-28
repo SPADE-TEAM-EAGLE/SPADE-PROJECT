@@ -1902,7 +1902,7 @@
                                 <path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"></path>
                             </svg>
                             <h4 class="h4 mb-0 mt-3 fw-bold">Info</h4>
-                            <p class="card-text text-dark">Incorrect Password !!</p>
+                            <p class="card-text text-dark" id="info-text"></p>
                         </div>
                         <!-- <div class="card-footer text-center border-0 pt-0">
                             <div class="row">
@@ -9952,7 +9952,16 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
         "password": $("#current_password_acount_close").val(),
     },
     success: function (response) {
+        if(response.message=="Tenant has unpaid invoices"){
+            $("#info-text").text("show");
+            $("#infoModal_account").modal("show");
+            setTimeout(function () {
+                $('#infoModal_account').modal('hide');
+            }, 2000);
+        }else if(response.message=="Tenant has paid invoices"){
             $("#requestcloseaccount").modal("show")
+        }
+            
     },
     error: function (xhr, status, error) {
         console.log('Error occurred while fetching invoices.');
