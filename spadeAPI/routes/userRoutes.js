@@ -96,6 +96,7 @@ router.post('/addAlternateEmailPhone', verifyToken, tenantController.addAlternat
 router.post('/tenantAttachFile', verifyToken, tenantController.tenantAttachFile);
 router.delete('/tenantAttachFileDelete', verifyToken, tenantController.tenantAttachFileDelete);
 router.delete('/tenantDelete', verifyToken, tenantController.tenantDelete);
+// router.delete('/tenantDelete', tenantController.tenantDelete);
 router.get('/getTenantsByID', verifyToken, tenantController.getTenantsByID);
 router.post('/createInvoice', verifyToken, invoiceController.createInvoice);
 router.put('/putInvoiceStatusUpdates', verifyToken, invoiceController.putInvoiceStatusUpdates);
