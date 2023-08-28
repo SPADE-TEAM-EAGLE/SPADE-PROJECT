@@ -23,7 +23,9 @@ const {
   getTenantsById,
   updateTenants,
   tenantTaskQuery,
-  updateTenantsProfile
+  updateTenantsProfile,
+  updateTenantAccountQuery,
+  checkTenantInvoicePaidQuery
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -286,6 +288,37 @@ exports.verifyResetEmailCodeTenant = async (req, res) => {
 
 
 //  ############################# Tenant Update Password ############################################################
+exports.tenantAllPaidInvoice = async (req, res) => {
+  try {
+    const { userId } = req.user;
+    // Check if tenant has any unpaid invoices
+    const tenantAllPaidInvoiceResult = await queryRunner(
+      checkTenantInvoicePaidQuery,
+      [userId]
+    );
+    console.log(tenantAllPaidInvoiceResult[0].length);
+    // No un-paid invoices found, update tenant account
+    if (tenantAllPaidInvoiceResult[0].length === 0) {
+      const tenantAllPaid = await queryRunner(updateTenantAccountQuery, [
+        0,
+        userId,
+      ]);
+      if (tenantAllPaid[0].affectedRows > 0) {
+        res.status(200).json({
+          message: "Tenant has paid invoices",
+        });
+      }
+    } else {
+      res.status(200).json({
+        message: "Tenant has unpaid invoices",
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+};
 exports.updatePasswordTenant = async (req, res) => {
   console.log(req.body)
   const { id, password, confirmpassword, token } = req.body;

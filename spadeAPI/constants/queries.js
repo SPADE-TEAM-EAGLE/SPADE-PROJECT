@@ -52,7 +52,14 @@ exports.deleteQuery = (table, ...field) => {
 // check chat whether reciever and sender id  recieverID senderID
 exports.checkChatQuery = `SELECT * FROM chats WHERE receiverID = ? AND senderId = ? OR senderId = ? AND receiverID = ?`;
 exports.checkTenantsChatQuery = `SELECT * FROM chats WHERE senderId = ? AND  receiverID = ?  OR receiverID = ? AND senderId = ?  `;
-
+// check tenant invoice all paid or not
+exports.checkTenantInvoicePaidQuery = `SELECT * FROM invoice WHERE tenantID = ? AND status = 'Unpaid'`;
+// update isTenantAccount in tenant table by id
+exports.updateTenantAccountQuery = `UPDATE tenants SET isTenantAccount = ? WHERE id = ?`;
+exports.updateUserAccountQuery = `UPDATE users SET isUserAccount = ? WHERE id = ?`;
+exports.updateAllTenantsAccountQuery = `UPDATE tenants SET isTenantAccount = ? WHERE landlordID = ?`;
+// check my all tenants invoices are paid 
+exports.checkMyAllTenantsInvoicePaidQuery = `SELECT * FROM invoice WHERE landlordID = ? AND status = 'Unpaid'`;
 // get user data by id
 exports.getUserById = `SELECT active As isUserActive ,image,FirstName,LastName FROM users WHERE id = ?`;
 // exports.getTenantById = `SELECT active As isTenantActive ,FirstName,LastName, Image FROM tenants LEFT JOIN tenantattachfiles ON tenants.id = tenantattachfiles.tenantID WHERE tenants.id = ?`;
@@ -648,6 +655,7 @@ t.tripleNet,
 t.leaseStartDate,
 t.leaseEndDate,
 t.increaseRent,
+t.image,
 pu.id as propertyUnitID,
 pu.unitNumber,
 pu.Area AS unitArea,
