@@ -59,6 +59,7 @@ exports.updateTenantAccountQuery = `UPDATE tenants SET isTenantAccount = ? WHERE
 exports.updateUserAccountQuery = `UPDATE users SET isUserAccount = ? WHERE id = ?`;
 // check my all tenants invoices are paid 
 exports.checkMyAllTenantsInvoicePaidQuery = `SELECT * FROM invoice WHERE landlordID = ? AND status = 'Unpaid'`;
+exports.checkMyAllTenantsInvoicePaidQuerytenant = `SELECT * FROM invoice WHERE tenantID = ? AND status = 'Unpaid'`;
 // get user data by id
 exports.getUserById = `SELECT active As isUserActive ,image,FirstName,LastName FROM users WHERE id = ?`;
 // exports.getTenantById = `SELECT active As isTenantActive ,FirstName,LastName, Image FROM tenants LEFT JOIN tenantattachfiles ON tenants.id = tenantattachfiles.tenantID WHERE tenants.id = ?`;

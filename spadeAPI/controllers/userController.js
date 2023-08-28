@@ -60,7 +60,7 @@ const {
   getTaskGraphDataByPropertyId,
   getInvoiceGraphDataByPropertyId,
   updateUserAccountQuery,
-  checkMyAllTenantsInvoicePaidQuery,
+  checkMyAllTenantsInvoicePaidQuerytenant,
 } = require("../constants/queries");
 
 const { hashedPassword } = require("../helper/hash");
@@ -1980,7 +1980,7 @@ exports.checkAllTenantsPaid = async (req, res) => {
     const { userId } = req.user;
     // Check if tenant has any unpaid invoices
     const tenantAllPaidInvoiceResult = await queryRunner(
-      checkMyAllTenantsInvoicePaidQuery,
+      checkMyAllTenantsInvoicePaidQuerytenant,
       [userId]
     );
     console.log(tenantAllPaidInvoiceResult[0].length);
