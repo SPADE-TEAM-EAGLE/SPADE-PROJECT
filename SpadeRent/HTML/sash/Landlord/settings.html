@@ -1882,6 +1882,41 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="infoModal_account" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
+                        <!-- <div class="card-header border-0 pt-3">
+                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                            </button>
+                        </div> -->
+                        <div class="card-body text-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24">
+                                <path fill="#fad383"
+                                    d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z">
+                                </path>
+                                <circle cx="12" cy="16" r="1" fill="#f7b731"></circle>
+                                <path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"></path>
+                            </svg>
+                            <h4 class="h4 mb-0 mt-3 fw-bold">Info</h4>
+                            <p class="card-text text-dark">Incorrect Password !!</p>
+                        </div>
+                        <!-- <div class="card-footer text-center border-0 pt-0">
+                            <div class="row">
+                                <div class="text-center">
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">delete</a>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="succesModal_verify" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered text-center" role="document">
             <div class="modal-content modal-content-demo">
@@ -8198,7 +8233,9 @@
                                                                                         <p>Spade Rent</p>
                                                                                     </span>
                                                                                 </div>
+                                                                                
                                                                             </div>
+                                                                            <p class="text-danger d-none text-bolder mt-2" id="unpaid-text"><span class="text-danger">*</span> Before closure please resolve the unpaid invoice</p>
 
                                                                         </div>
                                                                         <div class="col-xl-6 col-sm-6 col-md-12"
@@ -8207,6 +8244,7 @@
                                                                                 class="btn btn-light text-primaryy btn-pill m-2"
                                                                                 data-bs-target="#closeaccount"
                                                                                 data-bs-toggle="modal"
+                                                                                id="closeButton"
                                                                                 style="width: fit-content; border: transparent;"><b>Close
                                                                                     Account</b></button>
                                                                         </div>
@@ -8266,7 +8304,7 @@
 
                                                     <div id="form1" style="display: none;">
                                                         <div class="row">
-                                                            <div class="col-lg-6 mb-3" id="account_closure_show">
+                                                            <!-- <div class="col-lg-6 mb-3" id="account_closure_show">
                                                                 <label for="inputState" class="form-label"><b>Reason for
                                                                         Account Closure</b>
                                                                     <spnan class="text-danger">*</span>
@@ -8279,14 +8317,14 @@
                                                                 </select>
                                                                 <span class="text-danger d-none">State is
                                                                     required!</span>
-                                                            </div>
+                                                            </div> -->
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-lg-6" id="current_password_show">
                                                                 <div class="form-group">
                                                                     <label for=""><b>Current Password</b></label>
                                                                     <input type="password" class="form-control"
-                                                                        name="password" id="current_password"
+                                                                        name="password" id="current_password_acount_close"
                                                                         aria-describedby="emailHelp"
                                                                         placeholder="Enter Current Password">
                                                                     <i class="fi fi-rs-eye text-dark fs-20 toggle-password"
@@ -8303,7 +8341,7 @@
                                                                 <div class="form-group">
                                                                     <label for=""><b>Confirm Password</b></label>
                                                                     <input type="password" class="form-control"
-                                                                        name="password" id="confirm_password"
+                                                                        name="password" id="confirm_password_acount_close"
                                                                         aria-describedby="emailHelp"
                                                                         placeholder="Enter Confirm Password">
                                                                     <i class="fi fi-rs-eye text-dark fs-20 toggle-password"
@@ -8316,9 +8354,10 @@
                                                                 <div class="col-lg-12">
                                                                     <button
                                                                         class="btn btn-primary text-light btn-pill mt-2"
-                                                                        data-bs-target="#requestcloseaccount"
+                                                                        
                                                                         data-bs-toggle="modal"
-                                                                        style="width: fit-content; border: transparent;"><b>Request
+                                                                        disabled
+                                                                        style="width: fit-content; border: transparent;" id="close-request"><b>Request
                                                                             to Close the Account</b></button>
                                                                 </div>
                                                             </div>
@@ -9516,6 +9555,26 @@ imageIds.forEach(id => {
             validconfirmPassword1.addEventListener('keyup', confirmPasswordValidation1);
             newPassword.addEventListener('keyup', confirmPasswordValidation1);
 
+            var password_account=document.getElementById("current_password_acount_close");
+            var confim_password_account=document.getElementById("confirm_password_acount_close");
+            password_account.addEventListener('keyup', confirmPasswordValidation2);
+            confim_password_account.addEventListener('keyup', confirmPasswordValidation2);
+            function confirmPasswordValidation2(){
+                if (password_account.value == confim_password_account.value && confim_password_account.value.match(password_validate1)) {
+                    password_account.classList.add("border-green");
+                    password_account.classList.remove("border-red");
+                    confim_password_account.classList.add("border-green");
+                    confim_password_account.classList.remove("border-red");
+                    document.getElementById("close-request").disabled = false;
+                } else if(password_account.value.match(password_validate1)) {
+                    password_account.classList.add("border-green");
+                    password_account.classList.remove("border-red");
+                }else{
+                    password_account.classList.remove("border-green");
+                    password_account.classList.add("border-red");
+                    document.getElementById("close-request").disabled = true;
+                }
+            }
             function confirmPasswordValidation1() {
                 if (validconfirmPassword1.value.match(password_validate1)) {
                     validconfirmPassword1.classList.add("border-green");
@@ -9580,6 +9639,7 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                     $(this).toggleClass('fi-rs-eye fi-rs-crossed-eye');
                 });
             });
+            var invoiceData=[]
             $(document).ready(() => {
                 // ----- On render -----\\
                 function getData() {
@@ -9761,91 +9821,17 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
 
         // Clear the existing content in the table body
         tableBody.empty();
-//         created_at
-// : 
-// "2023-08-16T09:17:06.000Z"
-// daysDue
-// : 
-// 0
-// dueDate
-// : 
-// "2023-08-25"
-// endDate
-// : 
-// ""
-// firstName
-// : 
-// "Azeem"
-// frequency
-// : 
-// ""
-// invoiceID
-// : 
-// 350
-// invoiceImages
-// : 
-// Array(1)
-// 0
-// : 
-// {Image: null, imageKey: null}
-// length
-// : 
-// 1
-// [[Prototype]]
-// : 
-// Array(0)
-// invoiceType
-// : 
-// "One Time Invoice"
-// lastName
-// : 
-// "Fahad Ahad"
-// memo
-// : 
-// Array(1)
-// 0
-// : 
-// {memo: 'asdasd', category: 'triple', amount: '00099', property: '225', tax: '0'}
-// length
-// : 
-// 1
-// [[Prototype]]
-// : 
-// Array(0)
-// note
-// : 
-// ""
-// propertyName
-// : 
-// "QDEWSD"
-// recurringNextDate
-// : 
-// ""
-// repeatTerms
-// : 
-// ""
-// startDate
-// : 
-// ""
-// status
-// : 
-// "Unpaid"
-// tPhone
-// : 
-// "2015346987"
-// tenantID
-// : 
-// 230
-// terms
-// : 
-// ""
-// totalAmount
-// : 
-// 99
-        // Loop through the response and populate the table
-        var invoiceData=response?.data[0].filter(function(invoice){
+
+        invoiceData=response?.data[0].filter(function(invoice){
             return invoice.status=="Unpaid"
         })
+        // if(invoiceData.length>=1){
+        //     $("#closeButton").prop("disabled",true)
+        //     $("#unpaid-text").removeClass("d-none")
+        // }else{
+        //     $("#closeButton").prop("disabled",false)
+        //     $("#unpaid-text").addClass("d-none")
+        // }
         invoiceData.forEach(function (invoice) {
             var row = $("<tr>");
 
@@ -9947,6 +9933,44 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
 
                 }
                 getData()
+                $("#requestcloseaccount").on('hide.bs.modal', function () {
+                   
+            
+                        localStorage.clear();
+                        window.open('./login_module.html', "_self")
+       
+
+})
+                $("#close-request").on("click",function(){
+                    $.ajax({
+    url: 'http://localhost:3000/api/spade/userCheckTenantPaidInvoice',
+    method: 'GET',
+    headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+    },
+    data: {
+        "password": $("#current_password_acount_close").val(),
+    },
+    success: function (response) {
+            $("#requestcloseaccount").modal("show")
+    },
+    error: function (xhr, status, error) {
+        console.log('Error occurred while fetching invoices.');
+        if(xhr?.responseJSON?.message=="Password is incorrect"){
+            $("#infoModal_account").modal("show");
+            setTimeout(function () {
+                $('#infoModal_account').modal('hide');
+            }, 2000);
+        }else{
+            $("#myModal_warning").modal("show");
+            setTimeout(function () {
+                $('#myModal_warning').modal('hide');
+                window.location = '../Landlord/login_module.html';
+            }, 2000);
+        }
+    }
+});
+                })
                 var vendor; var categoryId; var vendorCategoryId
                 $('#add-item-container1,#add-item-container5').on('click', '#del-btn-complete', function () {
                     vendor = false
@@ -10201,7 +10225,7 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                     // Use the cardId as needed
                     console.log('Clicked card ID:', cardId);
                 });
-
+                
                 var file;
                 $(function () {
 
