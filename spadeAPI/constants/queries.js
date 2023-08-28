@@ -57,6 +57,7 @@ exports.checkTenantInvoicePaidQuery = `SELECT * FROM invoice WHERE tenantID = ? 
 // update isTenantAccount in tenant table by id
 exports.updateTenantAccountQuery = `UPDATE tenants SET isTenantAccount = ? WHERE id = ?`;
 exports.updateUserAccountQuery = `UPDATE users SET isUserAccount = ? WHERE id = ?`;
+exports.updateAllTenantsAccountQuery = `UPDATE tenants SET isTenantAccount = ? WHERE landlordID = ?`;
 // check my all tenants invoices are paid 
 exports.checkMyAllTenantsInvoicePaidQuery = `SELECT * FROM invoice WHERE landlordID = ? AND status = 'Unpaid'`;
 // get user data by id

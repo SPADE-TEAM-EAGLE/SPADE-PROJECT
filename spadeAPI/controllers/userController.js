@@ -61,6 +61,7 @@ const {
   getInvoiceGraphDataByPropertyId,
   updateUserAccountQuery,
   checkMyAllTenantsInvoicePaidQuery,
+  updateAllTenantsAccountQuery,
 } = require("../constants/queries");
 
 const { hashedPassword } = require("../helper/hash");
@@ -1949,13 +1950,13 @@ exports.checkAllTenantsPaid = async (req, res) => {
       checkMyAllTenantsInvoicePaidQuery,
       [userId]
     );
-    console.log(tenantAllPaidInvoiceResult[0].length);
     // No un-paid invoices found, update tenant account
     if (tenantAllPaidInvoiceResult[0].length === 0) {
       const tenantAllPaid = await queryRunner(updateUserAccountQuery, [
         0,
         userId,
       ]);
+      await queryRunner(updateAllTenantsAccountQuery, [0, userId]);
       if (tenantAllPaid[0].affectedRows > 0) {
         res.status(200).json({
           message: "Tenant has paid invoices",
