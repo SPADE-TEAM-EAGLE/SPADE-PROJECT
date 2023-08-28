@@ -333,7 +333,7 @@ $("#addModal").modal("hide")
                         
                         // Include the encrypted value in the URL
                         var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
-                                                $("#unit-link").attr("href", `./property-unit.html?propertyId=${encodedPropertyId}`);
+                                                $("#unit-link").attr("href", `./property-unit.html?property=${encodedPropertyId}`);
                 resetAccordions()
                 $('#addModal').modal('hide')
                         
@@ -394,7 +394,7 @@ $("#addModal").modal("hide")
                 
                 // Include the encrypted value in the URL
                 var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
-                                        $("#unit-link").attr("href", `./property-unit.html?propertyId=${encodedPropertyId}`);
+                                        $("#unit-link").attr("href", `./property-unit.html?property=${encodedPropertyId}`);
         resetAccordions()
         $('#addModal').modal('hide')
     
