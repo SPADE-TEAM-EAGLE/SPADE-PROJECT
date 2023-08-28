@@ -56,7 +56,7 @@ const {
   getPropertyDashboardData,
   getPropertiesGraphDataBypropertyID,
   getInvoiceGraphDataByPropertId,
-  
+
   getTaskGraphDataByPropertyId,
   getInvoiceGraphDataByPropertyId,
   updateUserAccountQuery,
@@ -157,13 +157,13 @@ exports.getUser = (req, res) => {
 };
 
 exports.Signin = async function (req, res) {
+  const { email, password, tenant } = req.body;
   // const { email, password, tenant } = req.query;
-  const { email, password, tenant } = req.query;
   // console.log(1)
   // let selectResult;
   try {
     if (tenant == "tenant") {
-      console.log("tenant");
+      // console.log("tenant");
       await queryRunner(updateTenantActive, [1, email]);
       const selectResult = await queryRunner(selectQuery("tenants", "email"), [
         email,
@@ -176,16 +176,24 @@ exports.Signin = async function (req, res) {
         const token = jwt.sign({ email, password }, config.JWT_SECRET_KEY, {
           expiresIn: "3h",
         });
-
-        res.status(200).json({
-          token: token,
-          body: selectResult[0][0],
-          message: "Successful Login",
-        });
+        if (selectResult[0][0].isTenantAccount == "1") {
+          res.status(200).json({
+            token: token,
+            body: selectResult[0][0],
+            message: "Successful Login",
+          });
+        } else {
+          res.status(200).json({
+            // token: token,
+            // body: selectResult[0][0],
+            message: "Your Account is Closed",
+          });
+        }
       } else {
         res.status(400).send("Incorrect Password");
       }
     } else {
+      // console.log("111",email);
       // for landlord
       await queryRunner(updateUserActive, [1, email]);
       const selectResult = await queryRunner(selectQuery("users", "Email"), [
@@ -199,150 +207,176 @@ exports.Signin = async function (req, res) {
         const token = jwt.sign({ email, password }, config.JWT_SECRET_KEY, {
           expiresIn: "3h",
         });
-        
+
 
         // const emai = "umairnazakat2222@gmail.com"
         //  const emailMessage =  await verifyMailCheck(email);
-         // ################################# Count ##############################################
-         const userId = selectResult[0][0].id;
-         console.log(userId);
-         // Property
-         const propertycheckresult = await queryRunner(selectQuery("property", "landlordID"), [userId]);
-         if (propertycheckresult[0].length > 0) {
-           property = "true";
-         } else {
-           property = "false"
-         }
-         // Tenant
-         const tenantcheckresult = await queryRunner(selectQuery("tenants", "landlordID"), [userId]);
-         if (tenantcheckresult[0].length > 0) {
-           tenants = "true";
-         } else {
-           tenants = "false";
-         }
-
-         //Invoice
-         const invoicecheckresult = await queryRunner(selectQuery("invoice", "landlordID"), [userId]);
-         if (invoicecheckresult[0].length > 0) {
-           invoice = "true";
-         } else {
-           invoice = "false"
-         }
-
-         //Task
-         const taskcheckresult = await queryRunner(selectQuery("task", "landlordID"), [userId]);
-         if (taskcheckresult[0].length > 0) {
-           task = "true";
-         } else {
-           task = "false"
-         }
-
-         //vendors
-         const vendorscheckresult = await queryRunner(selectQuery("vendor", "LandlordID"), [userId]);
-         if (vendorscheckresult[0].length > 0) {
-           vendors = "true";
-         } else {
-           vendors = "false"
-         }
-         // ################################# Count ##############################################
-        if (selectResult[0][0].userVerified == "Email Verified") {
-          // ################################# Count ##############################################
-          const userId = selectResult[0][0].id;
-          console.log(userId);
-          // Property
-          const propertycheckresult = await queryRunner(
-            selectQuery("property", "landlordID"),
-            [userId]
-          );
-          if (propertycheckresult[0].length > 0) {
-            property = "true";
-          } else {
-            property = "false";
-          }
-          // Tenant
-          const tenantcheckresult = await queryRunner(
-            selectQuery("tenants", "landlordID"),
-            [userId]
-          );
-          if (tenantcheckresult[0].length > 0) {
-            tenants = "true";
-          } else {
-            tenants = "false";
-          }
-
-          //Invoice
-          const invoicecheckresult = await queryRunner(
-            selectQuery("invoice", "landlordID"),
-            [userId]
-          );
-          if (invoicecheckresult[0].length > 0) {
-            invoice = "true";
-          } else {
-            invoice = "false";
-          }
-
-          //Task
-          const taskcheckresult = await queryRunner(
-            selectQuery("task", "landlordID"),
-            [userId]
-          );
-          if (taskcheckresult[0].length > 0) {
-            task = "true";
-          } else {
-            task = "false";
-          }
-          //vendors
-          const vendorscheckresult = await queryRunner(
-            selectQuery("vendor", "LandlordID"),
-            [userId]
-          );
-          if (vendorscheckresult[0].length > 0) {
-            vendors = "true";
-          } else {
-            vendors = "false";
-          }
-          // ################################# Count ##############################################
-          res.status(200).json({
-            property: property,
-            tenants: tenants,
-            invoice: invoice,
-            task: task,
-            vendors: vendors,
-            token: token,
-            body: selectResult[0][0],
-            message: "Email is verified",
-          });
+        // ################################# Count ##############################################
+        const userId = selectResult[0][0].id;
+        console.log(userId);
+        // Property
+        const propertycheckresult = await queryRunner(selectQuery("property", "landlordID"), [userId]);
+        if (propertycheckresult[0].length > 0) {
+          property = "true";
         } else {
-          const emailMessage = await verifyMailCheck(email);
-          if (
-            emailMessage.message ==
-            "Your account is locked due to email verification. Please verify your email."
-          ) {
+          property = "false"
+        }
+        // Tenant
+        const tenantcheckresult = await queryRunner(selectQuery("tenants", "landlordID"), [userId]);
+        if (tenantcheckresult[0].length > 0) {
+          tenants = "true";
+        } else {
+          tenants = "false";
+        }
+
+        //Invoice
+        const invoicecheckresult = await queryRunner(selectQuery("invoice", "landlordID"), [userId]);
+        if (invoicecheckresult[0].length > 0) {
+          invoice = "true";
+        } else {
+          invoice = "false"
+        }
+
+        //Task
+        const taskcheckresult = await queryRunner(selectQuery("task", "landlordID"), [userId]);
+        if (taskcheckresult[0].length > 0) {
+          task = "true";
+        } else {
+          task = "false"
+        }
+
+        //vendors
+        const vendorscheckresult = await queryRunner(selectQuery("vendor", "LandlordID"), [userId]);
+        if (vendorscheckresult[0].length > 0) {
+          vendors = "true";
+        } else {
+          vendors = "false"
+        }
+        // ################################# Count ##############################################
+
+
+
+        if (selectResult[0][0].isUserAccount == "1") {
+          // res.status(200).json({
+          //   token: token,
+          //   body: selectResult[0][0],
+          //   message: "Successful Login",
+          // });
+          // }
+
+
+
+
+
+
+
+
+          if (selectResult[0][0].userVerified == "Email Verified") {
+            // ################################# Count ##############################################
+            const userId = selectResult[0][0].id;
+            console.log(userId);
+            // Property
+            const propertycheckresult = await queryRunner(
+              selectQuery("property", "landlordID"),
+              [userId]
+            );
+            if (propertycheckresult[0].length > 0) {
+              property = "true";
+            } else {
+              property = "false";
+            }
+            // Tenant
+            const tenantcheckresult = await queryRunner(
+              selectQuery("tenants", "landlordID"),
+              [userId]
+            );
+            if (tenantcheckresult[0].length > 0) {
+              tenants = "true";
+            } else {
+              tenants = "false";
+            }
+
+            //Invoice
+            const invoicecheckresult = await queryRunner(
+              selectQuery("invoice", "landlordID"),
+              [userId]
+            );
+            if (invoicecheckresult[0].length > 0) {
+              invoice = "true";
+            } else {
+              invoice = "false";
+            }
+
+            //Task
+            const taskcheckresult = await queryRunner(
+              selectQuery("task", "landlordID"),
+              [userId]
+            );
+            if (taskcheckresult[0].length > 0) {
+              task = "true";
+            } else {
+              task = "false";
+            }
+            //vendors
+            const vendorscheckresult = await queryRunner(
+              selectQuery("vendor", "LandlordID"),
+              [userId]
+            );
+            if (vendorscheckresult[0].length > 0) {
+              vendors = "true";
+            } else {
+              vendors = "false";
+            }
+            // ################################# Count ##############################################
             res.status(200).json({
               property: property,
-            tenants: tenants,
-            invoice: invoice,
-            task: task,
-            vendors: vendors,
+              tenants: tenants,
+              invoice: invoice,
+              task: task,
+              vendors: vendors,
               token: token,
               body: selectResult[0][0],
-              message: "Email is not verified",
-              msg: emailMessage.message,
+              message: "Email is verified",
             });
           } else {
-            res.status(200).json({
-              property: property,
-            tenants: tenants,
-            invoice: invoice,
-            task: task,
-            vendors: vendors,
-              token: token,
-              body: selectResult[0][0],
-              message: "Successful Login",
-              msg: emailMessage.message,
-              email: email,
-            });
+            const emailMessage = await verifyMailCheck(email);
+            if (
+              emailMessage.message ==
+              "Your account is locked due to email verification. Please verify your email."
+            ) {
+              res.status(200).json({
+                property: property,
+                tenants: tenants,
+                invoice: invoice,
+                task: task,
+                vendors: vendors,
+                token: token,
+                body: selectResult[0][0],
+                message: "Email is not verified",
+                msg: emailMessage.message,
+              });
+            } else {
+              res.status(200).json({
+                property: property,
+                tenants: tenants,
+                invoice: invoice,
+                task: task,
+                vendors: vendors,
+                token: token,
+                body: selectResult[0][0],
+                message: "Successful Login",
+                msg: emailMessage.message,
+                email: email,
+              });
+            }
           }
+
+        } else {
+          res.status(200).json({
+            // token: token,
+            // body: selectResult[0][0],
+            message: "Your Account is Closed",
+          });
         }
       } else {
         res.status(400).send("Incorrect Password");
@@ -500,7 +534,7 @@ exports.createResetEmail = async (req, res) => {
 exports.verifyResetEmailCode = async (req, res) => {
   const { id, token } = req.body;
   // console.log(req.body)
-  
+
   try {
     const selectResult = await queryRunner(
       selectQuery("users", "id", "token"),
@@ -1842,7 +1876,7 @@ exports.verifyEmailUpdate = async (req, res) => {
           const token = jwt.sign({ email, password }, config.JWT_SECRET_KEY, {
             expiresIn: "3h",
           });
-          
+
           return res.status(200).json({
             token: token,
             message: " Email verified successful ",
@@ -1994,9 +2028,9 @@ exports.getPropertyDashboardData = async (req, res) => {
 exports.getTaskDashboardData = async (req, res) => {
   try {
     const { userId } = req.user;
-    const { start, end ,propertyId} = req.params;
-    
-    if(propertyId){
+    const { start, end, propertyId } = req.params;
+
+    if (propertyId) {
       const getAllTaskData = await queryRunner(getTaskGraphDataByPropertyId, [
         propertyId,
         userId,
@@ -2006,7 +2040,7 @@ exports.getTaskDashboardData = async (req, res) => {
       res.status(200).json({
         property: getAllTaskData[0],
       });
-    }else{
+    } else {
       const getAllTaskData = await queryRunner(getTaskGraphData, [
         userId,
         start,
@@ -2025,8 +2059,8 @@ exports.getTaskDashboardData = async (req, res) => {
 exports.getInvoiceDashboardData = async (req, res) => {
   try {
     const { userId } = req.user;
-    const { start, end ,propertyId } = req.params;
-    if(propertyId){
+    const { start, end, propertyId } = req.params;
+    if (propertyId) {
       console.log(propertyId)
       const getAllInvoiceData = await queryRunner(getInvoiceGraphDataByPropertyId, [
         propertyId,
@@ -2035,7 +2069,7 @@ exports.getInvoiceDashboardData = async (req, res) => {
         end
       ]);
       res.status(200).json(getAllInvoiceData[0]);
-    }else{
+    } else {
       const getAllInvoiceData = await queryRunner(getInvoiceGraphData, [
         userId,
         start,
@@ -2266,7 +2300,7 @@ exports.checkSystem = async (req, res) => {
 exports.filterOutDashbordDataByProperty = async (req, res) => {
   try {
     const { propertyId } = req.params;
-    
+
     const getAllPropertyData = await queryRunner(getPropertyDashboardData, [
       propertyId,
     ]);
