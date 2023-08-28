@@ -15,7 +15,7 @@
         href='https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css'>
     <link rel="shortcut icon" type="image/x-icon" href="../assets/images/brand/favicon.ico" />
     <!-- TITLE -->
-    <title>Property Tenant - SpadeRent</title>
+    <title>Chat - SpadeRent</title>
     <!-- BOOTSTRAP CSS -->
     <link id="style" href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <!-- STYLE CSS -->
@@ -1108,9 +1108,9 @@
                         <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
                         <h6 class="text-default mb-3">Enter a 6-digit code to verify email address</h6>
                         <input id="token" name="token" type="phone" class="form-control form mb-2" pattern="[0-9]{5}"
-                            maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                            style="width: 100%;" data-bs-placement="top" data-bs-toggle="tooltip"
-                            title="" data-bs-original-title="Enter the name of the property.">
+                            maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '')" style="width: 100%;"
+                            data-bs-placement="top" data-bs-toggle="tooltip" title=""
+                            data-bs-original-title="Enter the name of the property.">
                         <input type="password" class="form-control form mb-2" id="email-verify-password"
                             aria-describedby="emailHelp" placeholder="Password" data-bs-placement="top"
                             data-bs-toggle="tooltip" title="" data-bs-original-title="Enter password here.">
@@ -1150,9 +1150,9 @@
                         <h6 class="text-default mb-3">Get started with Spade Rent! You have<span id="days-left"></span>
                             left
                         </h6>
-                        <input type="email" class="form-control form mb-2" style="width: 100%;"
-                            data-bs-placement="top" data-bs-toggle="tooltip" title=""
-                            data-bs-original-title="Enter the name of the property." readonly id="user-email">
+                        <input type="email" class="form-control form mb-2" style="width: 100%;" data-bs-placement="top"
+                            data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the name of the property."
+                            readonly id="user-email">
                         <a class="text-primary mb-4" href="javascript:void(0)" id="change-email">Change Email</a>
                         <a class="text-primary mb-4 d-none" href="javascript:void(0)" id="save-email">Save Email</a>
                         <div class="">
@@ -2969,8 +2969,8 @@
                                             class="inbox_span"></span></a></li>
                                 <li><a href="#side3" data-bs-toggle="tab" class="text-dark">Unread <span
                                             class="Unread_span"></span></a></li>
-                                <li><a href="#side4" data-bs-toggle="tab" class="text-dark">Archive <span
-                                            class="archive_span"></span></a></li>
+                                <!-- <li><a href="#side4" data-bs-toggle="tab" class="text-dark">Archive <span
+                                            class="archive_span"></span></a></li> -->
                             </ul>
                         </div>
                         <div class="tab-content">
@@ -3791,8 +3791,10 @@
                     if (message.userType == "tenant" && message.chatId == localStorage.getItem("chatId")) {
                         console.log("check rec", message);
                         messs2 = `<div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
-                                                                    <div style="width: 36px;height: 36px;" class="me-1"> 
-                                                                        <img src="` + (localStorage.getItem("TenantImg") !== "null" ? localStorage.getItem("TenantImg") : randomImg) + `" style="border-radius: 50%;height: inherit;" class="message-image" />
+                                                                    <div style="width: 36px;height: 36px;    border-radius: 50%;
+    background: url(` + (localStorage.getItem("TenantImg") !== "null" ? localStorage.getItem("TenantImg") : randomImg) + `);
+    background-position: center;
+    background-size: cover;" class="me-1"> 
                                                                         </div> 
                                                                     <div class="msg-text">
                                                 <span class="text">${message.message}</span>
@@ -3900,8 +3902,10 @@
                                                                     <span class="text">` + response.data[i]['message'] + `</span>
                                                                     <span style="float: right;" class="text-primary">` + time + `</span>
                                                                     </div>
-                                                                    <div style="width: 36px;height: 36px;" class="ms-1"> 
-                                                                        <img src="` + (localStorage.getItem("LandlordImg") != "null" ? localStorage.getItem("LandlordImg") : randomImg) + `" style="border-radius: 50%;height: inherit;" class="message-image" />
+                                                                    <div style="width: 36px;height: 36px;    border-radius: 50%;
+    background: url(` + (localStorage.getItem("LandlordImg") != "null" ? localStorage.getItem("LandlordImg") : randomImg) + `);
+    background-position: center;
+    background-size: cover;" class="ms-1"> 
                                                                         </div> 
                                                                     </div> 
                                                                     `;
@@ -3910,8 +3914,10 @@
                                                             const timeArray = response.data[i]['created_at'].split(" ")[1].split(":");
                                                             const time = timeArray.slice(0, 2).join(":");
                                                             messs1 += `<div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
-                                                                    <div style="width: 36px;height: 36px;" class="me-1"> 
-                                                                        <img src="` + (localStorage.getItem("TenantImg") ? localStorage.getItem("TenantImg") : randomImg) + `" style="border-radius: 50%;height: inherit;" class="message-image" />
+                                                                <div style="width: 36px;height: 36px;    border-radius: 50%;
+    background: url(` + (localStorage.getItem("TenantImg") !== "null" && localStorage.getItem("TenantImg") ? localStorage.getItem("TenantImg") : randomImg) + `);
+    background-position: center;
+    background-size: cover;" class="me-1"> 
                                                                         </div> 
                                                                     <div class="msg-text">
                                                 <span class="text">` + response.data[i]['message'] + `</span>
@@ -4003,40 +4009,40 @@
                 });
             });
         </script>
-      <script>
-        function logout() {
-            $(document).ready(function () {
-                $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
-                    type: 'PUT',
-                    contentType: false,
-                    processData: false,
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-                    success: function (response) {
-                        console.log(response);
-                        if(localStorage.getItem("htmlLayout")){
-    
-                            const htmlLayoutValue = localStorage.getItem("htmlLayout");
-                            localStorage.clear();
-                            localStorage.setItem("htmlLayout", htmlLayoutValue);
-                        }else{
-                            localStorage.clear();
-    
+        <script>
+            function logout() {
+                $(document).ready(function () {
+                    $.ajax({
+                        url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                        type: 'PUT',
+                        contentType: false,
+                        processData: false,
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            console.log(response);
+                            if (localStorage.getItem("htmlLayout")) {
+
+                                const htmlLayoutValue = localStorage.getItem("htmlLayout");
+                                localStorage.clear();
+                                localStorage.setItem("htmlLayout", htmlLayoutValue);
+                            } else {
+                                localStorage.clear();
+
+                            }
+                            // localStorage.removeItem('authtoken');
+                            // window.close();
+                            window.open('./login_module.html', "_self")
+                            console.log('Done');
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(error);
                         }
-                        // localStorage.removeItem('authtoken');
-                        // window.close();
-                        window.open('./login_module.html', "_self")
-                        console.log('Done');
-                    },
-                    error: function (xhr, status, error) {
-                        console.log(error);
-                    }
+                    });
                 });
-            });
-        }
-    </script>
+            }
+        </script>
         <!-- chats js start  -->
         <script>
             var formattedTime;
@@ -4135,19 +4141,19 @@
 
                     // Create image container
                     const imageContainer = document.createElement('div');
-                    imageContainer.setAttribute('style', 'width: 36px; height: 36px;');
+                    imageContainer.setAttribute('style', `width: 36px; height: 36px;border-radius: 50%;background: url(` + (localStorage.getItem("LandlordImg") != "null" && localStorage.getItem("LandlordImg") ? localStorage.getItem("LandlordImg") : randomImg) + `);background-position: center;background-size: cover;`);
                     imageContainer.setAttribute('class', 'ms-1');
-                    const image = document.createElement('img');
-                    image.setAttribute('src', localStorage.getItem("LandlordImg") != "null" ? localStorage.getItem("LandlordImg") : "../assets/images/users/5.jpg");
-                    image.setAttribute('style', 'border-radius: 50%; height: inherit;');
-                    image.setAttribute('class', 'message-image');
+                    // const image = document.createElement('img');
+                    // image.setAttribute('src', localStorage.getItem("LandlordImg") != "null" ? localStorage.getItem("LandlordImg") : "../assets/images/users/5.jpg");
+                    // image.setAttribute('style', 'border-radius: 50%; height: inherit;');
+                    // image.setAttribute('class', 'message-image');
 
                     // Append elements
                     mainContainer.appendChild(messageContainer);
                     messageContainer.appendChild(messageText);
                     messageContainer.appendChild(timestampSpan);
                     mainContainer.appendChild(imageContainer);
-                    imageContainer.appendChild(image);
+                    // imageContainer.appendChild(image);
 
                     // Append main container to the messages div
                     messages.appendChild(mainContainer);

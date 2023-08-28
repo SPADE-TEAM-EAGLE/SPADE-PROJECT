@@ -2919,8 +2919,8 @@
                                 class="inbox_span"></span></a></li>
                     <li><a href="#side3" data-bs-toggle="tab" class="text-dark">Unread <span
                                 class="Unread_span"></span></a></li>
-                    <li><a href="#side4" data-bs-toggle="tab" class="text-dark">Archive <span
-                                class="archive_span"></span></a></li>
+                    <!-- <li><a href="#side4" data-bs-toggle="tab" class="text-dark">Archive <span
+                                class="archive_span"></span></a></li> -->
                 </ul>
             </div>
             <div class="tab-content">
@@ -3370,8 +3370,10 @@
                             console.log("check rec", message.message);
 
                             messs2 = `<div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
-                                    <div style="width: 36px;height: 36px;" class="me-1"> 
-                                        <img src="` + (localStorage.getItem("LandlordImg") ? localStorage.getItem("LandlordImg") : randomImg) + `" style="border-radius: 50%;height: inherit;" class="message-image"/>
+                                <div style="width: 36px;height: 36px;    border-radius: 50%;
+    background: url(` + (localStorage.getItem("LandlordImg") || localStorage.getItem("LandlordImg") != "null"  ? localStorage.getItem("LandlordImg") : randomImg) + `);
+    background-position: center;
+    background-size: cover;" class="me-1">  
                                         </div> 
                                     <div class="msg-text">
                 <span class="text">`+ message.message + `</span>
@@ -3455,16 +3457,20 @@
                                                                     <span class="text">`+ response.data[i]['message'] + `</span>
                                                                     <span style="float: right;" class="text-primary">`+ time + `</span>
                                                                     </div>
-                                                                    <div style="width: 36px;height: 36px;" class="ms-1"> 
-                                                                        <img src="` + (localStorage.getItem("tenantImg") ? localStorage.getItem("tenantImg") : randomImg) + `" style="border-radius: 50%;height: inherit;" class="message-image" />
+                                                                    <div style="width: 36px;height: 36px;    border-radius: 50%;
+    background: url(` + (localStorage.getItem("tenantImg") && localStorage.getItem("tenantImg") != "null" ? localStorage.getItem("tenantImg") : randomImg) + `);
+    background-position: center;
+    background-size: cover;" class="ms-1"> 
                                                                         </div> 
                                                                     </div>`;
                                                         } else if (response.data[i]['userType'] == "landlord") {
                                                             const timeArray = response.data[i]['created_at'].split(" ")[1].split(":");
                                                             const time = timeArray.slice(0, 2).join(":");
                                                             messs1 += `<div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
-                                                                    <div style="width: 36px;height: 36px;" class="me-1"> 
-                                                                        <img src="` + (localStorage.getItem("LandlordImg") ? localStorage.getItem("LandlordImg") : randomImg) + `" style="border-radius: 50%;height: inherit;" class="message-image" />
+                                                                <div style="width: 36px;height: 36px;    border-radius: 50%;
+    background: url(` + (localStorage.getItem("LandlordImg") && localStorage.getItem("LandlordImg") != "null" ? localStorage.getItem("LandlordImg") : randomImg) + `);
+    background-position: center;
+    background-size: cover;" class="me-1"> 
                                                                         </div> 
                                                                     <div class="msg-text">
                                                 <span class="text">`+ response.data[i]['message'] + `</span>
@@ -3660,19 +3666,19 @@
 
                     // Create image container
                     const imageContainer = document.createElement('div');
-                    imageContainer.setAttribute('style', 'width: 36px; height: 36px;');
+                    imageContainer.setAttribute('style', `width: 36px; height: 36px;border-radius: 50%;background: url(` + (localStorage.getItem("tenantImg") && localStorage.getItem("tenantImg") != "null" ? localStorage.getItem("tenantImg") : "../assets/images/users/5.jpg") + `);background-position: center;background-size: cover;`);
                     imageContainer.setAttribute('class', 'ms-1');
-                    const image = document.createElement('img');
-                    image.setAttribute('src', localStorage.getItem("tenantImg") ? localStorage.getItem("tenantImg") : "../assets/images/users/5.jpg");
-                    image.setAttribute('style', 'border-radius: 50%; height: inherit;');
-                    image.setAttribute('class', 'message-image');
+                    // const image = document.createElement('img');
+                    // image.setAttribute('src', localStorage.getItem("tenantImg") ? localStorage.getItem("tenantImg") : "../assets/images/users/5.jpg");
+                    // image.setAttribute('style', 'border-radius: 50%; height: inherit;');
+                    // image.setAttribute('class', 'message-image');
 
                     // Append elements
                     mainContainer.appendChild(messageContainer);
                     messageContainer.appendChild(messageText);
                     messageContainer.appendChild(timestampSpan);
                     mainContainer.appendChild(imageContainer);
-                    imageContainer.appendChild(image);
+                    // imageContainer.appendChild(image);
 
                     // Append main container to the messages div
                     messages.appendChild(mainContainer);
