@@ -25,7 +25,9 @@ const {
   tenantTaskQuery,
   updateTenantsProfile,
   updateTenantAccountQuery,
-  checkTenantInvoicePaidQuery
+  checkTenantInvoicePaidQuery,
+  updateAllStatusVacantQuery,
+  getLandlordDetailedQuery
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -296,13 +298,32 @@ exports.tenantAllPaidInvoice = async (req, res) => {
       checkTenantInvoicePaidQuery,
       [userId]
     );
-    console.log(tenantAllPaidInvoiceResult[0].length);
     // No un-paid invoices found, update tenant account
     if (tenantAllPaidInvoiceResult[0].length === 0) {
       const tenantAllPaid = await queryRunner(updateTenantAccountQuery, [
         0,
         userId,
       ]);
+      // updateAllStatusVacantQuery
+      await queryRunner(updateAllStatusVacantQuery, [
+        "Vacant",
+        userId,
+      ]);
+      const getLandlordDetailed = await queryRunner(
+        getLandlordDetailedQuery,
+        [userId]
+      );
+      const mailSubject = "Tenant has paid all invoices and is now Inactive";
+      if(getLandlordDetailed[0].length > 0){
+        await sendMail(
+          getLandlordDetailed[0][0].Email,
+          mailSubject,
+          "as",
+          `${getLandlordDetailed[0][0].FirstName} ${getLandlordDetailed[0][0].LastName}`
+        );
+      }
+        // console.log(tenantData[i].emai);
+    
       if (tenantAllPaid[0].affectedRows > 0) {
         res.status(200).json({
           message: "Tenant has paid invoices",
