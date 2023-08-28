@@ -8063,7 +8063,7 @@
                                                                     <th><i class="fe fe-more-vertical"></i></th>
                                                                 </tr>
                                                             </thead> -->
-                                                            <tbody id="table_body">
+                                                            <tbody id="table_body_unpaid_invoice">
                                                                 <tr>
                                                                     <td class="text-primary">INV-5C5B28</td>
                                                                     <td>
@@ -9747,43 +9747,144 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                             // console.log('Error occurred while fetching state and city data.');
                         }
                     });
+                    
+                    
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/getVendorCategory',
-                        method: 'GET',
-                        headers: {
-                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                        },
-                        success: function (response) {
-                            vendorCategoryData = response.data
-                            console.log(response.data)
-                            var vendorCategory = 0
+    url: 'https://backend.app.spaderent.com/api/spade/getAllInvoices',
+    method: 'GET',
+    headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+    },
+    success: function (response) {
+        console.log(response?.data[0])
+        var tableBody = $("#table_body_unpaid_invoice");
 
-                            $("#add-item-container5").empty()
-                            response.data?.forEach(({ id, category, landLordId }, index) => {
-                                counter++
+        // Clear the existing content in the table body
+        tableBody.empty();
+//         created_at
+// : 
+// "2023-08-16T09:17:06.000Z"
+// daysDue
+// : 
+// 0
+// dueDate
+// : 
+// "2023-08-25"
+// endDate
+// : 
+// ""
+// firstName
+// : 
+// "Azeem"
+// frequency
+// : 
+// ""
+// invoiceID
+// : 
+// 350
+// invoiceImages
+// : 
+// Array(1)
+// 0
+// : 
+// {Image: null, imageKey: null}
+// length
+// : 
+// 1
+// [[Prototype]]
+// : 
+// Array(0)
+// invoiceType
+// : 
+// "One Time Invoice"
+// lastName
+// : 
+// "Fahad Ahad"
+// memo
+// : 
+// Array(1)
+// 0
+// : 
+// {memo: 'asdasd', category: 'triple', amount: '00099', property: '225', tax: '0'}
+// length
+// : 
+// 1
+// [[Prototype]]
+// : 
+// Array(0)
+// note
+// : 
+// ""
+// propertyName
+// : 
+// "QDEWSD"
+// recurringNextDate
+// : 
+// ""
+// repeatTerms
+// : 
+// ""
+// startDate
+// : 
+// ""
+// status
+// : 
+// "Unpaid"
+// tPhone
+// : 
+// "2015346987"
+// tenantID
+// : 
+// 230
+// terms
+// : 
+// ""
+// totalAmount
+// : 
+// 99
+        // Loop through the response and populate the table
+        var invoiceData=response?.data[0].filter(function(invoice){
+            return invoice.status=="Unpaid"
+        })
+        invoiceData.forEach(function (invoice) {
+            var row = $("<tr>");
 
-                                $("#add-item-container5").append(`<tr class="tr">
-                                                                            <td>
-                                                                                <label for=""><b>Categories</b></label>
-                                                                                <input type="text" name=""
-                                                                                    class="form-control vendor-category" value='${category}' id='${id}'>
-                                                                            </td>
-                                                                            <td><button type="button" class="btn"
-                                                                                    id="del-btn-complete"
-                                                                                    style="text-align: left;">
-                                                                                    <i
-                                                                                        class="fi fi-rs-trash text-danger fs-5"></i>
-                                                                                </button></td>
-                                                                        </tr>`)
-                            })
-                        },
-                        error: function (xhr, status, error) {
-                            console.log('Error occurred while fetching state and city data.');
-                            console.log(xhr);
-                            console.log(error);
-                            // console.log('Error occurred while fetching state and city data.');
-                        }
-                    });
+            // Populate invoice properties into cells
+            var invoiceNumber = $("<td>").text(invoice.invoiceID);
+            var customerInfo = $("<td>").html(`
+                <p style="font-weight: 600;" class="mb-1 text-primary">${invoice.firstName+" "+invoice.lastName}</p>
+                <span>Phone: ${invoice.tPhone}</span>
+            `);
+            var description = $("<td>").html(`
+                <p style="font-weight: 600;" class="mb-1">${(invoice.note==""?"N/A":invoice.note)}</p>
+                <span>${invoice.invoiceType}</span>
+            `);
+            var dates = $("<td>").html(`
+                <p style="font-weight: 600;" class="mb-1">${invoice.startDate}</p>
+                <span>Due Date: ${invoice.dueDate}</span>
+            `);
+            var address = $("<td>").html(`<b>${invoice.propertyName}</b>`);
+            var amount = $("<td>").html(`<p style="font-weight: 600;" class="mb-1">${invoice.totalAmount}</p>`);
+            var status = $("<td>").html(`
+                <b style="color: red;"><i class="fi fi-rs-clock-three" style="color: red;"></i> ${invoice.status}</b>
+            `);
+            
+            row.append(
+                invoiceNumber, customerInfo, description, dates, address, amount, status
+            );
+
+            // Append the row to the table body
+            tableBody.append(row);
+        });
+    },
+    error: function (xhr, status, error) {
+        console.log('Error occurred while fetching invoices.');
+        console.log(xhr);
+        console.log(error);
+    }
+});
+
+                    
                     $.ajax({
                         url: 'https://backend.app.spaderent.com/api/spade/checkNotify',
                         method: 'GET',
