@@ -256,11 +256,11 @@ exports.Signin = async function (req, res) {
 
 
         if (selectResult[0][0].isUserAccount == "1") {
-          res.status(200).json({
-            token: token,
-            body: selectResult[0][0],
-            message: "Successful Login",
-          });
+          // res.status(200).json({
+          //   token: token,
+          //   body: selectResult[0][0],
+          //   message: "Successful Login",
+          // });
           // }
 
 
