@@ -972,3 +972,16 @@ LEFT JOIN
   GROUP BY
       tenants.propertyID) AS invoice ON property.propertyId = invoice.propertyId;
 `;
+exports.getAllTenantsQuery = `SELECT DISTINCT tenants.firstName, tenants.lastName, tenants.email
+FROM tenants
+JOIN invoice ON tenants.id = invoice.tenantID
+WHERE invoice.landlordID = ? AND invoice.status = 'paid';
+`;
+exports.getLandlordDetailedQuery = `SELECT DISTINCT users.FirstName, users.LastName, users.Email
+FROM users
+JOIN invoice ON users.id = invoice.landlordID
+WHERE invoice.tenantID = ? AND invoice.status = 'paid';
+`;
+
+exports.updateAllStatusVacantQuery = `UPDATE propertyunits, tenants SET propertyunits.status = ? WHERE tenants.propertyID = propertyunits.propertyID AND tenants.id = ?`;
+
