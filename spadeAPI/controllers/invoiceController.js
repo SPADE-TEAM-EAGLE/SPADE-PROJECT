@@ -51,13 +51,14 @@ exports.createInvoice = async (req, res) => {
   } = req.body;
   try {
     const { userId } = req.user;
+    const notify = 0;
     console.log(req.body)
     // console.log(userId)
     // if (!tenantID || !invoiceType || !startDate || !endDate || !frequency || !dueDate || !dueDays || !repeatTerms || !terms || !additionalNotes || !lineItems || !sendmails || !totalAmount) {
     //   throw new Error("Please fill all the fields");
     // }
     const currentDate = new Date();
-    const invoiceResult = await queryRunner(insertInvoice, [userId, tenantID, invoiceType, startDate, endDate, frequency, dueDate, dueDays, repeatTerms, terms, additionalNotes, "Unpaid", currentDate, totalAmount, startDate]);
+    const invoiceResult = await queryRunner(insertInvoice, [userId, tenantID, invoiceType, startDate, endDate, frequency, dueDate, dueDays, repeatTerms, terms, additionalNotes, "Unpaid", currentDate, totalAmount,notify, startDate]);
     if (invoiceResult.affectedRows === 0) {
       res.status(400).send("Error occur in creating invoice");
     } else {
@@ -80,7 +81,7 @@ exports.createInvoice = async (req, res) => {
           landlordName,
           landlordEmail,
           mailSubject,
-          dueDays,
+          dueDate,
           invoiceID,
           frequency,
           userId
@@ -330,7 +331,7 @@ exports.UpdateInvoice = async (req, res) => {
         tenantName,
         tenantEmail,
         mailSubject,
-        dueDays,
+        dueDate,
         invoiceID,
         frequency,
         userId
@@ -490,7 +491,7 @@ exports.resendEmail = async (req, res) => {
         tenantName,
         tenantEmail,
         mailSubject,
-        dueDays,
+        dueDate,
         invoiceID,
         frequency,
         userId

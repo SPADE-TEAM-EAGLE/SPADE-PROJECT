@@ -643,7 +643,7 @@
                                         <!-- 2 comments start  -->
 
                                         <!-- 3 comments start  -->
-                                        <div class="dropdown  d-flex notifications">
+                                        <div class="dropdown  d-flex notifications" id="notifications_icon">
                                             <a class="nav-link icon" data-bs-toggle="sidebar-right"
                                                 data-target=".sidebar-right"><i class="fe fe-bell"></i> 
                                                 <span class="badge bg-secondary header-badge bg-primary" id="count_unread"></span>
@@ -1971,6 +1971,7 @@
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
     <script src="../assets/js/getNotification.js"></script>
+<script src="../assets/js/push_notification.js"></script>
     <script src="../assets/js/index-chart.js"></script>
     <!-- <script src="https://backend.app.spaderent.com/"></script> -->
     <script src="../assets/js/email-verification.js"></script>
@@ -2057,15 +2058,9 @@
                     $(".progress").html(myprogress)
                 },
                 error: function (xhr, status, error) {
-                    // $("#myModal_warning").modal("show");
-                    // setTimeout(function () {
-                    //     $('#myModal_warning').modal('hide');
-                    //     window.location = '../Landlord/login_module.html';
-                    // }, 2000);
                     console.log('Error occurred while fetching state and city data.');
                     console.log(xhr);
                     console.log(error);
-                    // console.log('Error occurred while fetching state and city data.');
                 }
             });
             $('#email_verification').on('click', function () {
