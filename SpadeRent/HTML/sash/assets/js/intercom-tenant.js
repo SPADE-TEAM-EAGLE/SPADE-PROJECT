@@ -5,8 +5,8 @@ $.ajax({
     headers: {
         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
     },
-    success: function ({ user, email, userId, image }) {
-        username=user
+    success: function ({ userName, email, userId, image }) {
+        username=userName
         console.log(username)
         window.intercomSettings = {
           api_base: "https://api-iam.intercom.io",

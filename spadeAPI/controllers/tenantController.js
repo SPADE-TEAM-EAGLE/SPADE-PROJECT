@@ -23,7 +23,12 @@ const {
   getTenantsById,
   updateTenants,
   tenantTaskQuery,
-  updateTenantsProfile
+  updateTenantsProfile,
+  updateTenantAccountQuery,
+  checkTenantInvoicePaidQuery,
+  updateAllStatusVacantQuery,
+  getLandlordDetailedQuery,
+  checkMyAllTenantsInvoicePaidQuerytenant,
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -86,7 +91,7 @@ exports.createTenants = async (req, res) => {
 
           // if (sendmails == "Yes") {
           // const mailSubject = "You created a new tenant";
-          // await invoiceSendMail(landlordName, landlordEmail, mailSubject, "dueDays", "invoiceID", "frequency");
+          await invoiceSendMail(landlordName, landlordEmail, mailSubject, "dueDays", "invoiceID", "frequency");
           if (increaseRent == 'No') {
             res.status(200).json({
               message: "Tenants save Successful",
@@ -286,6 +291,56 @@ exports.verifyResetEmailCodeTenant = async (req, res) => {
 
 
 //  ############################# Tenant Update Password ############################################################
+exports.tenantAllPaidInvoice = async (req, res) => {
+  try {
+    const { userId } = req.user;
+    // Check if tenant has any unpaid invoices
+    const tenantAllPaidInvoiceResult = await queryRunner(
+      checkTenantInvoicePaidQuery,
+      [userId]
+    );
+    // No un-paid invoices found, update tenant account
+    if (tenantAllPaidInvoiceResult[0].length === 0) {
+      const tenantAllPaid = await queryRunner(updateTenantAccountQuery, [
+        0,
+        userId,
+      ]);
+      // updateAllStatusVacantQuery
+      await queryRunner(updateAllStatusVacantQuery, [
+        "Vacant",
+        userId,
+      ]);
+      const getLandlordDetailed = await queryRunner(
+        getLandlordDetailedQuery,
+        [userId]
+      );
+      const mailSubject = "Tenant has paid all invoices and is now Inactive";
+      if(getLandlordDetailed[0].length > 0){
+        await sendMail(
+          getLandlordDetailed[0][0].Email,
+          mailSubject,
+          "as",
+          `${getLandlordDetailed[0][0].FirstName} ${getLandlordDetailed[0][0].LastName}`
+        );
+      }
+        // console.log(tenantData[i].emai);
+    
+      if (tenantAllPaid[0].affectedRows > 0) {
+        res.status(200).json({
+          message: "Tenant has paid invoices",
+        });
+      }
+    } else {
+      res.status(200).json({
+        message: "Tenant has unpaid invoices",
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+};
 exports.updatePasswordTenant = async (req, res) => {
   console.log(req.body)
   const { id, password, confirmpassword, token } = req.body;
@@ -448,7 +503,33 @@ exports.tenantDelete = async (req, res) => {
     const { tenantID } = req.body
     const tenantResult = await queryRunner(selectQuery("tenants", "id"), [tenantID]);
     // console.log(tenantResult[0][0])
+
+
+    // const tenantAllPaidInvoiceResult = await queryRunner(
+    //   checkMyAllTenantsInvoicePaidQuery,
+    //   [tenantID]
+    // );
+    // // console.log(tenantAllPaidInvoiceResult[0].length);
+    // // No un-paid invoices found, update tenant account
+    // if (tenantAllPaidInvoiceResult[0].length === 0) {
+    //   res.status(200).json({
+    //     message: "Tenant Invoice is pending Kindly Paid invoice "
+    //   })
+    // }else{
+
+    // if(){}
     if (tenantResult[0].length > 0) {
+      const tenantAllPaidInvoiceResult = await queryRunner(
+        checkMyAllTenantsInvoicePaidQuerytenant,
+      [tenantID]
+    );
+    // console.log(tenantAllPaidInvoiceResult[0].length);
+    // No un-paid invoices found, update tenant account
+    if (tenantAllPaidInvoiceResult[0].length > 0) {
+      res.status(200).json({
+        message: "Tenant Invoice is pending Kindly Paid invoice "
+      })
+    }else{
       const propertyUnitID = tenantResult[0][0].propertyUnitID;
       const tenantDeleteResult = await queryRunner(deleteQuery("tenants", "id"), [tenantID]);
       // console.log(tenantDeleteResult[0])
@@ -494,16 +575,18 @@ exports.tenantDelete = async (req, res) => {
           message: "Error occur in delete tenant "
         })
       }
+      }
+
     } else { // tenantCheckResult
       res.status(200).json({
         message: "No tenant found "
       })
     }
-
+  // }
   }
   catch (error) {
     console.log(error)
-    res.send("Error from delete tenants ");
+    res.send("Error from delete tenants " , error);
     // console.log(req.body)
 
   }

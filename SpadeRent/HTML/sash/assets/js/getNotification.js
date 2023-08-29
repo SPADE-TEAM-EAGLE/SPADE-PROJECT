@@ -62,15 +62,14 @@ function GetNotification(){
           const colorClass = item.notify === 0 ? "my_blue" : "bg-transparent";
   
           $("#notification-container").append(
-            `<div class="list-group-item d-flex align-items-center ${colorClass}  justify-content-between dumy" id='${
+            `<div class="list-group-item d-flex align-items-center ${colorClass}  justify-content-between notification-item" data-id="${
               item.invoiceID
-            }'>
+            }">
               <div class="d-flex align-items-center">
               <div class="me-2">
                   <span class="avatar avatar-md brround cover-image" data-bs-image-src="${
                     item.Image?.split(",")[0]
-                  }"><span
-                      class="avatar-status bg-success"></span>
+                  }">
               </div>
               <div class="">
                   <a href="javascript:void(0);">
@@ -91,15 +90,14 @@ function GetNotification(){
         } else if (item.propertyID) {
           const colorClass = item.notify === 0 ? "my_blue" : "bg-transparent";
           $("#notification-container").append(
-            `<div class="list-group-item d-flex align-items-center ${colorClass}  justify-content-between dumy" id='${
-              item.invoiceID
-            }'>
+            `<div class="list-group-item d-flex align-items-center ${colorClass}  justify-content-between notification-item" data-id="${
+              item.propertyID
+            }">
               <div class="d-flex align-items-center">
               <div class="me-2">
                   <span class="avatar avatar-md brround cover-image" data-bs-image-src="${
                     item.Image?.split(",")[0]
-                  }"><span
-                      class="avatar-status bg-success"></span>
+                  }">
               </div>
               <div class="">
                   <a href="javascript:void(0);">
@@ -122,15 +120,14 @@ function GetNotification(){
         } else if (item.taskID) {
           const colorClass = item.notify === 0 ? "my_blue" : "bg-transparent";
           $("#notification-container").append(
-            `<div class="list-group-item d-flex align-items-center ${colorClass} justify-content-between dumy" id='${
-              item.invoiceID
-            }'>
+            `<div class="list-group-item d-flex align-items-center ${colorClass} justify-content-between notification-item" data-id="${
+              item.taskID
+            }">
               <div class="d-flex align-items-center">
               <div class="me-2">
                   <span class="avatar avatar-md brround cover-image" data-bs-image-src="${
                     item.Image?.split(",")[0]
-                  }"><span
-                      class="avatar-status bg-success"></span>
+                  }">
               </div>
               <div class="">
                   <a href="javascript:void(0);">
@@ -159,8 +156,7 @@ function GetNotification(){
               <div class="me-2">
                   <span class="avatar avatar-md brround cover-image" data-bs-image-src="${
                     item.Image?.split(",")[0]
-                  }"><span
-                      class="avatar-status bg-success"></span>
+                  }">
               </div>
               <div class="">
                   <a href="javascript:void(0);">
@@ -191,13 +187,14 @@ function GetNotification(){
         // read-notification-container
         if (item.invoiceID) {
           $("#inbox-notification-container").append(
-            `<div class="list-group-item d-flex align-items-center justify-content-between">
+            `<div class="list-group-item d-flex align-items-center justify-content-between notification-item" data-id="${
+              item.invoiceID
+            }">
               <div class="d-flex align-items-center">
               <div class="me-2">
                   <span class="avatar avatar-md brround cover-image" data-bs-image-src="${
                     item.Image?.split(",")[0]
-                  }"><span
-                      class="avatar-status bg-success"></span>
+                  }">
               </div>
               <div class="">
                   <a href="javascript:void(0);">
@@ -217,13 +214,14 @@ function GetNotification(){
           );
         } else if (item.propertyID) {
           $("#inbox-notification-container").append(
-            `<div class="list-group-item d-flex align-items-center justify-content-between">
+            `<div class="list-group-item d-flex align-items-center justify-content-between notification-item" data-id="${
+              item.propertyID
+            }">
               <div class="d-flex align-items-center">
               <div class="me-2">
                   <span class="avatar avatar-md brround cover-image" data-bs-image-src="${
                     item.Image?.split(",")[0]
-                  }"><span
-                      class="avatar-status bg-success"></span>
+                  }">
               </div>
               <div class="">
                   <a href="javascript:void(0);">
@@ -252,8 +250,7 @@ function GetNotification(){
               <div class="me-2">
                   <span class="avatar avatar-md brround cover-image" data-bs-image-src="${
                     item.Image?.split(",")[0]
-                  }"><span
-                      class="avatar-status bg-success"></span>
+                  }">
               </div>
               <div class="">
                   <a href="javascript:void(0);">
@@ -286,8 +283,7 @@ function GetNotification(){
             <div class="me-2">
                 <span class="avatar avatar-md brround cover-image" data-bs-image-src="${
                   item.Image?.split(",")[0]
-                }"><span
-                    class="avatar-status bg-success"></span>
+                }">
             </div>
             <div class="">
                 <a href="javascript:void(0);">
@@ -323,8 +319,7 @@ function GetNotification(){
                       <div class="me-2">
                           <span class="avatar avatar-md brround cover-image" data-bs-image-src="${
                             item.Image?.split(",")[0]
-                          }"><span
-                              class="avatar-status bg-success"></span>
+                          }">
                       </div>
                       <div class="">
                           <a href="javascript:void(0);">
@@ -356,8 +351,7 @@ function GetNotification(){
               <div class="me-2">
                   <span class="avatar avatar-md brround cover-image" data-bs-image-src="${
                     item.Image?.split(",")[0]
-                  }"><span
-                      class="avatar-status bg-success"></span>
+                  }">
               </div>
               <div class="">
                   <a href="javascript:void(0);">
@@ -391,8 +385,7 @@ function GetNotification(){
               <div class="me-2">
                   <span class="avatar avatar-md brround cover-image" data-bs-image-src="${
                     item.Image?.split(",")[0]
-                  }"><span
-                      class="avatar-status bg-success"></span>
+                  }">
               </div>
               <div class="">
                   <a href="javascript:void(0);">
@@ -416,7 +409,7 @@ function GetNotification(){
             console.log("itemId", itemId);
             updateDataNotify(itemId, "task");
           });
-        } else if (item.tenantID) {
+        } else if (item.tenantID) { 
           $("#unread-notification-container").append(
             `<div class="list-group-item d-flex align-items-center justify-content-between notification-item" data-id="${
               item.tenantID
@@ -425,8 +418,7 @@ function GetNotification(){
               <div class="me-2">
                   <span class="avatar avatar-md brround cover-image" data-bs-image-src="${
                     item.Image?.split(",")[0]
-                  }"><span
-                      class="avatar-status bg-success"></span>
+                  }">
               </div>
               <div class="">
                   <a href="javascript:void(0);">
@@ -452,134 +444,6 @@ function GetNotification(){
           });
         }
       });
-  
-      $("#Archieve-notification-container").empty();
-  
-      notification?.forEach((item) => {
-        // read-notification-container
-        if (item.invoiceID) {
-          $("#Archieve-notification-container").append(
-          //   `<div class="list-group-item d-flex align-items-center justify-content-between dumy" id='${
-          //     item.invoiceID
-          //   }'>
-          //     <div class="d-flex align-items-center">
-          //     <div class="me-2">
-          //         <span class="avatar avatar-md brround cover-image" data-bs-image-src="${
-          //           item.Image?.split(",")[0]
-          //         }"><span
-          //             class="avatar-status bg-success"></span>
-          //     </div>
-          //     <div class="">
-          //         <a href="javascript:void(0);">
-          //             <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">${
-          //               item.firstName
-          //             }</div> <span class="text-dark"> ${item.Address} > ${
-          //     item.city
-          //   }</span>
-          //             <p class="mb-0 fw-bold text-dark fs-15 ">${0}$ Received</p>
-          //         </a>
-          //     </div>
-          // </div><div class="">
-          // <span class="fs-12 text-dark">${convertTimestamp(
-          //   item.created_at
-          // )}</span>
-          //   </div></div>`
-          );
-        } else if (item.propertyID) {
-          $("#Archieve-notification-container").append(
-          //   `<div class="list-group-item d-flex align-items-center justify-content-between dumy" id='${
-          //     item.invoiceID
-          //   }'>
-          //     <div class="d-flex align-items-center">
-          //     <div class="me-2">
-          //         <span class="avatar avatar-md brround cover-image" data-bs-image-src="${
-          //           item.Image?.split(",")[0]
-          //         }"><span
-          //             class="avatar-status bg-success"></span>
-          //     </div>
-          //     <div class="">
-          //         <a href="javascript:void(0);">
-          //             <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">${
-          //               item.propertyName
-          //             }</div> <span class="text-dark"> ${item.address} > ${
-          //     item.city
-          //   }</span>
-          //             <p class="mb-0 fw-bold text-dark fs-15 ">${
-          //               item.propertyType
-          //             }</p>
-          //         </a>
-          //     </div>
-          // </div><div class="">
-          // <span class="fs-12 text-dark">${convertTimestamp(
-          //   item.created_at
-          // )}</span>
-          //  </div></div>`
-          );
-        } else if (item.taskID) {
-          $("#Archieve-notification-container").append(
-          //   `<div class="list-group-item d-flex align-items-center justify-content-between dumy" id='${
-          //     item.invoiceID
-          //   }'>
-          //     <div class="d-flex align-items-center">
-          //     <div class="me-2">
-          //         <span class="avatar avatar-md brround cover-image" data-bs-image-src="${
-          //           item.Image?.split(",")[0]
-          //         }"><span
-          //             class="avatar-status bg-success"></span>
-          //     </div>
-          //     <div class="">
-          //         <a href="javascript:void(0);">
-          //             <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">${
-          //               item.firstName
-          //             }</div> <span class="text-dark">${item.priority} | ${
-          //     item.status
-          //   }</span>
-          //             <p class="mb-0 fw-bold text-dark fs-15 ">Task Assigned</p>
-          //         </a>
-          //     </div>
-              
-          // </div><div class="">
-          // <span class="fs-12 text-dark">${convertTimestamp(
-          //   item.created_at
-          // )}</span>
-          // </div></div>`
-          );
-        } else if (item.tenantID) {
-          $("#Archieve-notification-container").append(
-          //   `<div class="list-group-item d-flex align-items-center justify-content-between notification-item" data-id="${
-          //     item.tenantID
-          //   }">
-          //     <div class="d-flex align-items-center">
-          //     <div class="me-2">
-          //         <span class="avatar avatar-md brround cover-image" data-bs-image-src="${
-          //           item.Image?.split(",")[0]
-          //         }"><span
-          //             class="avatar-status bg-success"></span>
-          //     </div>
-          //     <div class="">
-          //         <a href="javascript:void(0);">
-          //             <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">${
-          //               item.firstName
-          //             }</div> <span class="text-dark">${item.propertyName} | ${
-          //     item.propertyType
-          //   }</span>
-          //             <p class="mb-0 fw-bold text-dark fs-15 ">Task Assigned</p>
-          //         </a>
-          //     </div>
-              
-          // </div><div class="">
-          // <span class="fs-12 text-dark">${convertTimestamp(
-          //   item.tenantCreated_at
-          // )}</span>
-          // </div></div>`
-          );
-          $(".notification-item").on("click", function () {
-            const itemId = $(this).data("id");
-            console.log("itemId", itemId);
-            updateDataNotify(itemId, "tenant");
-          });
-        }
-      });
     },
     error: function (xhr, status, error) {
       console.log("Error occurred while fetching state and city data.");
@@ -591,15 +455,7 @@ function GetNotification(){
 
 }  
 GetNotification();
-// setInterval(function() {
-//   GetNotification();
-// }, 60000);
-// $(document).ready(function () {
-//   $(".dumy").click(function () {
-//     // get this.id and update notification table
-//     console.log($(this).attr("id"));
-//   });
-// });
+
 
 $("#updateAllNotifyRead").on("click", function () {
   updateAllNotifyRead();
@@ -658,6 +514,7 @@ function updateDataNotify(notificationId, type) {
       Authorization: "Bearer " + localStorage.getItem("authtoken"),
     },
     success: function (response) {
+      GetNotification();
       console.log(response);
     },
     error: function (xhr, status, error) {

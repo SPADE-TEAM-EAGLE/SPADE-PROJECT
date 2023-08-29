@@ -12,9 +12,11 @@ const notifyController = require("../controllers/notifyController");
 const { chatsController } = require("../controllers/chatsController");
 const messageClt = require("../controllers/messageController");
 const leadsClt = require("../controllers/Leads");
-const { openOrder } = require("../helper/paymentIntegration");
+const paymentIntegration = require("../helper/paymentIntegration");
 
 router.post("/Signup", userController.createUser);
+router.get("/tenantAllPaidInvoice", verifyTokenTenant, tenantController.tenantAllPaidInvoice);
+router.get("/userCheckTenantPaidInvoice", verifyToken, userController.checkAllTenantsPaid);
 router.get("/protected", verifyToken, userController.getUser);
 router.get("/protectedTenant", verifyTokenTenant, userController.getUser);
 router.get("/checkemail", userController.checkemail);
@@ -94,6 +96,7 @@ router.post('/addAlternateEmailPhone', verifyToken, tenantController.addAlternat
 router.post('/tenantAttachFile', verifyToken, tenantController.tenantAttachFile);
 router.delete('/tenantAttachFileDelete', verifyToken, tenantController.tenantAttachFileDelete);
 router.delete('/tenantDelete', verifyToken, tenantController.tenantDelete);
+// router.delete('/tenantDelete', tenantController.tenantDelete);
 router.get('/getTenantsByID', verifyToken, tenantController.getTenantsByID);
 router.post('/createInvoice', verifyToken, invoiceController.createInvoice);
 router.put('/putInvoiceStatusUpdates', verifyToken, invoiceController.putInvoiceStatusUpdates);
@@ -128,6 +131,7 @@ router.get("/getAllTaskTenant", verifyTokenTenant, tenantPortalController.getAll
 // get tenante dashboard
 router.get("/getTenantDashData", verifyTokenTenant, tenantPortalController.getTenantDashboardData);
 router.get('/getTenantByID', verifyTokenTenant, tenantPortalController.getTenantByID);
+// router.get('/getTenantByID', tenantPortalController.getTenantByID);
 router.put('/changePasssword', verifyToken, settingController.changePasssword);
 router.put('/changePasswordTenant', verifyTokenTenant, settingController.changePasswordTenant);
 router.put('/emailUpdate', userController.emailUpdate);
@@ -153,6 +157,7 @@ router.put("/updateAllTenantNotifyRead", verifyTokenTenant, notifyController.upd
 router.get("/propertyReport", verifyToken, userController.getAllProperty);
 router.get("/invoiceReport", verifyToken, userController.getInvoiceReportData);
 router.get("/taskReport", verifyToken, userController.getTaskReportData);
+// router.get("/taskReport", userController.getTaskReportData);
 // dekete invoice catergory
 router.delete("/deleteInvoiceCategory", verifyToken, invoiceController.deleteInCategories);
 router.delete("/deleteVendorCategory", verifyToken, invoiceController.deleteVendCategories);
@@ -187,7 +192,12 @@ router.get("/taskCount", verifyToken, taskController.taskCount);
 router.post("/addTasksTenant" ,verifyTokenTenant,tenantPortalController.addTasksTenant);
 router.get("/invoiceAmountCount/:start/:end" ,verifyToken ,invoiceController.invoiceAmountCount);
 router.get("/getAllTaskTenantRequest", verifyToken, taskController.getAllTaskTenantRequest);
+router.get("/taskByIDTenant" ,verifyToken ,tenantPortalController.taskByIDTenant);
+// router.get("/taskByIDTenant" , tenantPortalController.taskByIDTenant);
 
-router.post("/openOrder", openOrder);
+router.post("/openOrder", paymentIntegration.openOrder);
+router.post("/createUserPayment", paymentIntegration.createUserPayment);
+// router.post("/createUserPaymentasdfgh", paymentIntegration.createUserPaymentasdfgh);
+// router.post("/openOrder", openOrder);
 router.get("/getPropertyDashboard/:propertyId", verifyToken, userController.filterOutDashbordDataByProperty);
 module.exports = router;

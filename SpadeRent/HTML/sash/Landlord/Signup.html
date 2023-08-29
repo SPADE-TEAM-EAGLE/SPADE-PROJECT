@@ -656,6 +656,45 @@
 </head>
 
 <body onload="check()">
+    <div class="modal fade" id="privacy_policy_modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><strong class="text-primary">Privacy Policy</strong></h5>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
+                </div>
+                <div class="modal-body">
+                    <ul>
+                        <li>
+                            <h2 class="m-0">Point 1: Balancing Pleasure and Pain</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique possimus saepe tempora eius quo dolor deserunt quis neque. Iure excepturi deleniti omnis molestias temporibus suscipit architecto iste odio repudiandae esse.</p>
+                        <ol>
+                            <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
+                            <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
+                            <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
+                            <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
+                        </ol>
+                        </li>
+                        <li>
+                            <h2 class="m-0">Point 2: Unveiling the Dance of Temptation and Consequence</h2>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur excepturi molestiae ipsam laboriosam earum fugit architecto quae dolore sed numquam. Pariatur temporibus, soluta saepe quidem iste veritatis voluptatem iure. Ipsa?</p>
+                        </li>
+                        <li>
+                            <h2 class="m-0">Point 3: The Virtuosity of Choice</h2>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel autem facilis asperiores mollitia inventore ipsum ad labore cum esse adipisci. Quis exercitationem eveniet autem qui modi placeat? Voluptatem, quidem similique. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laboriosam, possimus! Hic accusantium fugiat animi, necessitatibus quod molestiae expedita nobis corrupti incidunt asperiores eius fugit sequi quae. Minus adipisci hic cupiditate.</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline-default" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-primary">Accept</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade" id="myModal_warning_connection" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered text-center" role="document">
             <div class="modal-content modal-content-demo">
@@ -811,12 +850,12 @@
                                                         </div>
                                                         <div class="col-12">
                                                             <div class="form-check checker">
-                                                                <input class="form-check-input" type="checkbox" id="check1" required>
+                                                                <input class="form-check-input" type="checkbox" id="check1" required checked>
                                                                 <label class="form-check-label">
                                                                     By clicking next, I agree to spade Rent's
-                                                                    <span>Privacy Policy</span>
+                                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#privacy_policy_modal"><span>Privacy Policy</span>
                                                                     and
-                                                                    <span>Terms of Use</span>
+                                                                    <span>Terms of Use</span></a>
                                                                 </label>
                                                             </div>
                                                         </div>
@@ -2604,6 +2643,7 @@
     <script src="../assets/js/sticky.js"></script>
     <!-- CUSTOM JS -->
     <script src="../assets/js/custom.js"></script><script src="../assets/js/getNotification.js"></script>
+<script src="../assets/js/push_notification.js"></script>
 
     <script src="../assets/plugins/counters/counterup.min.js"></script>
     <script src="../assets/plugins/counters/waypoints.min.js"></script>
@@ -2624,7 +2664,67 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
 
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-
+    <script>
+        window.intercomSettings = {
+               api_base: "https://api-iam.intercom.io",
+               app_id: "fjpx1kt1",
+               name:"Dear User", // Full name
+         
+             };
+           
+             // Function to open the Intercom side popup
+             function openIntercomPopup() {
+                 const articleid=8210506
+             //   window.Intercom('showNewMessage', '#help-center-article-' + articleid);;
+             window.Intercom('showSpace', 'help');
+     
+               
+             }
+           
+             // Attach a click event listener to your custom button
+             document.querySelectorAll('.customIntercomButton').forEach(element => {
+         element.addEventListener('click', openIntercomPopup);
+         
+     });
+     
+             
+             // Load the Intercom widget
+             (function() {
+               var w = window;
+               var ic = w.Intercom;
+               
+               if (typeof ic === "function") {
+                 ic('reattach_activator');
+                 ic('update', w.intercomSettings);
+               } else {
+                 var d = document;
+                 var i = function() {
+                   i.c(arguments);
+                 };
+                 i.q = [];
+                 i.c = function(args) {
+                   i.q.push(args);
+                 };
+                 w.Intercom = i;
+                 var l = function() {
+                   var s = d.createElement('script');
+                   
+                   s.type = 'text/javascript';
+                   s.async = true;
+                   s.src = 'https://widget.intercom.io/widget/fjpx1kt1';
+                   var x = d.getElementsByTagName('script')[0];
+                   x.parentNode.insertBefore(s, x);
+                 };
+                 if (document.readyState === 'complete') {
+                   l();
+                 } else if (w.attachEvent) {
+                   w.attachEvent('onload', l);
+                 } else {
+                   w.addEventListener('load', l, false);
+                 }
+               }
+             })();`x`
+     </script>
     <!-- <script src="build/js/intlTelInput-jquery.min.js"></script>
     <script>
         const phoneInputField = document.querySelector("#phone1");

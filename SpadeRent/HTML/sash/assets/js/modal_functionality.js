@@ -328,7 +328,12 @@ $("#addModal").modal("hide")
                     },
                     success: function (response) {
                         // console.log(1)
-                        $("#unit-link").attr("href",`./property-unit.html?propertyId=${response.propertyId}`)
+                        var password = 'your-secret-password';
+                        var encryptedPropertyId = sjcl.encrypt(password, response.propertyId.toString());
+                        
+                        // Include the encrypted value in the URL
+                        var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
+                                                $("#unit-link").attr("href", `./property-unit.html?property=${encodedPropertyId}`);
                 resetAccordions()
                 $('#addModal').modal('hide')
                         
@@ -384,8 +389,12 @@ $("#addModal").modal("hide")
                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
             },
             success: function (response) {
-                // console.log(1)
-                $("#unit-link").attr("href",`./property-unit.html?propertyId=${response.propertyId}`)
+                var password = 'your-secret-password';
+                var encryptedPropertyId = sjcl.encrypt(password, response.propertyId.toString());
+                
+                // Include the encrypted value in the URL
+                var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
+                                        $("#unit-link").attr("href", `./property-unit.html?property=${encodedPropertyId}`);
         resetAccordions()
         $('#addModal').modal('hide')
     

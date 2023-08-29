@@ -6485,7 +6485,7 @@
                         <li><a href="#side1" data-bs-toggle="tab" class="text-dark active">All<span class="all_span"></span></a></li>
                         <li><a href="#side2" data-bs-toggle="tab" class="text-dark">Inbox <span class="inbox_span"></span></a></li>
                         <li><a href="#side3" data-bs-toggle="tab" class="text-dark">Unread <span class="Unread_span"></span></a></li>
-                        <li><a href="#side4" data-bs-toggle="tab" class="text-dark">Archive <span class="archive_span"></span></a></li>
+                        <!-- <li><a href="#side4" data-bs-toggle="tab" class="text-dark">Archive <span class="archive_span"></span></a></li> -->
                     </ul>   
                 </div>
                 <div class="tab-content">
@@ -7156,7 +7156,7 @@
         <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 
         <script>
-            let password_validate1 = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
+            var password_validate1 = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
             var validconfirmPassword1 = document.getElementById("id_password1");
             let confirmPassword1 = document.getElementById("id_password2");
             confirmPassword1.addEventListener('keyup', confirmPasswordValidation1);
@@ -7478,28 +7478,37 @@
 
 <script>
     function logout() {
-            $(document).ready(function () {
-                $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
-                    type: 'PUT',
-                    contentType: false,
-                    processData: false,
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-                    success: function (response) {
-                        console.log(response);
-                        localStorage.removeItem('authtoken');
-                        // window.close();
-                        window.open('./login_module.html', "_self")
-                        console.log('Done');
-                    },
-                    error: function (xhr, status, error) {
-                        console.log(error);
+        $(document).ready(function () {
+            $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                type: 'PUT',
+                contentType: false,
+                processData: false,
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    console.log(response);
+                    if(localStorage.getItem("htmlLayout")){
+
+                        const htmlLayoutValue = localStorage.getItem("htmlLayout");
+                        localStorage.clear();
+                        localStorage.setItem("htmlLayout", htmlLayoutValue);
+                    }else{
+                        localStorage.clear();
+
                     }
-                });
+                    // localStorage.removeItem('authtoken');
+                    // window.close();
+                    window.open('./login_module.html', "_self")
+                    console.log('Done');
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }
             });
-        }
+        });
+    }
 </script>
 </body>
 

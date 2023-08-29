@@ -18,7 +18,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="../assets/images/brand/favicon.ico" />
 
     <!-- TITLE -->
-    <title>Property Tenant - SpadeRent</title>
+    <title>Settings - SpadeRent</title>
 
     <!-- BOOTSTRAP CSS -->
     <link id="style" href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -1632,9 +1632,9 @@
                         <h6 class="text-default mb-3">Enter a 6-digit code to verify email address</h6>
                         <input id="token" name="token" type="phone" class="form-control form mb-2" pattern="[0-9]{5}"
                             maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                            style="min-width: 200px;max-width: 350px;" data-bs-placement="top" data-bs-toggle="tooltip"
+                            style="width: 100%;" data-bs-placement="top" data-bs-toggle="tooltip"
                             title="" data-bs-original-title="Enter the name of the property.">
-                        <input type="password" class="form-control form mb-2" id="id_password1"
+                        <input type="password" class="form-control form mb-2" id="email-verify-password"
                             aria-describedby="emailHelp" placeholder="Password" data-bs-placement="top"
                             data-bs-toggle="tooltip" title="" data-bs-original-title="Enter password here.">
                         <!-- <a class="text-primary mb-4" href="javascript:void(0)">Change Email</a> -->
@@ -1672,7 +1672,7 @@
                         <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
                         <h6 class="text-default mb-3">Get started with Spade Rent! You have<span id="days-left"></span>
                             left</h6>
-                        <input type="email" class="form-control form mb-2" style="min-width: 200px;max-width: 350px;"
+                        <input type="email" class="form-control form mb-2" style="width: 100%;"
                             data-bs-placement="top" data-bs-toggle="tooltip" title=""
                             data-bs-original-title="Enter the name of the property." readonly id="user-email">
                         <a class="text-primary mb-4" href="javascript:void(0)" id="change-email">Change Email</a>
@@ -1848,7 +1848,110 @@
     </div>
     <!--/Default Offcanvas-->
     <!-- Modal -->
+    <div class="modal fade" id="infoModal_verify" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
+                        <!-- <div class="card-header border-0 pt-3">
+                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                            </button>
+                        </div> -->
+                        <div class="card-body text-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24">
+                                <path fill="#fad383"
+                                    d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z">
+                                </path>
+                                <circle cx="12" cy="16" r="1" fill="#f7b731"></circle>
+                                <path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"></path>
+                            </svg>
+                            <h4 class="h4 mb-0 mt-3 fw-bold">Info</h4>
+                            <p class="card-text text-dark">Token code or Password not matched</p>
+                        </div>
+                        <!-- <div class="card-footer text-center border-0 pt-0">
+                            <div class="row">
+                                <div class="text-center">
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">delete</a>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div class="modal fade" id="infoModal_account" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
+                        <!-- <div class="card-header border-0 pt-3">
+                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                            </button>
+                        </div> -->
+                        <div class="card-body text-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24">
+                                <path fill="#fad383"
+                                    d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z">
+                                </path>
+                                <circle cx="12" cy="16" r="1" fill="#f7b731"></circle>
+                                <path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"></path>
+                            </svg>
+                            <h4 class="h4 mb-0 mt-3 fw-bold">Info</h4>
+                            <p class="card-text text-dark" id="info-text"></p>
+                        </div>
+                        <!-- <div class="card-footer text-center border-0 pt-0">
+                            <div class="row">
+                                <div class="text-center">
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">delete</a>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="succesModal_verify" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
+                        <!-- <div class="card-header border-0 pt-3">
+                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                            </button>
+                        </div> -->
+                        <div class="card-body text-center">
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
+                                    viewBox="0 0 24 24">
+                                    <path fill="#13bfa6"
+                                        d="M10.3125,16.09375a.99676.99676,0,0,1-.707-.293L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328l-6.1875,6.1875A.99676.99676,0,0,1,10.3125,16.09375Z"
+                                        opacity=".99" />
+                                    <path fill="#71d8c9"
+                                        d="M12,2A10,10,0,1,0,22,12,10.01146,10.01146,0,0,0,12,2Zm5.207,7.61328-6.1875,6.1875a.99963.99963,0,0,1-1.41406,0L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328Z" />
+                                </svg></span>
+                            <h4 class="h4 mb-0 mt-3 fw-bold">Success</h4>
+                            <p class="card-text text-dark">Your Email has been verified</p>
+                        </div>
+                        <!-- <div class="card-footer text-center border-0 pt-0">
+                            <div class="row">
+                                <div class="text-center">
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">delete</a>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Modal -->
     <!-- <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
@@ -2488,7 +2591,20 @@
                             </div>
                         </div>
                         <!-- PAGE-HEADER END -->
-
+                        <div>
+                            <p class="d-inline-flex gap-1">
+                                <span>Add Invoicing | </span><a data-bs-toggle="collapse" href="#collapseHelp" role="button" aria-expanded="false" aria-controls="collapseHelp" class="collapsed active">
+                                  Help ? 
+                                </a>
+                            
+                              </p>
+                              <div class="collapse" id="collapseHelp" style="width: 40%;">
+                                <div class="card card-body">
+                                  <span><a href="#" onclick="Intercom('showArticle', 8210506)"><i class="fi fi-rs-question text-light"></i>  How to create Properties? </a></span>
+                                  <span><a href="#" onclick="Intercom('showArticle', 8210444)"><i class="fi fi-rs-question text-light"></i>  How to update Properties? </a></span>
+                                </div>
+                              </div>
+                        </div>
                         <div class="cardd">
                             <div class="card-body pt-0">
                                 <div class="panel panel-primary">
@@ -7995,7 +8111,7 @@
                                                                     <th><i class="fe fe-more-vertical"></i></th>
                                                                 </tr>
                                                             </thead> -->
-                                                            <tbody id="table_body">
+                                                            <tbody id="table_body_unpaid_invoice">
                                                                 <tr>
                                                                     <td class="text-primary">INV-5C5B28</td>
                                                                     <td>
@@ -8130,7 +8246,9 @@
                                                                                         <p>Spade Rent</p>
                                                                                     </span>
                                                                                 </div>
+                                                                                
                                                                             </div>
+                                                                            <p class="text-danger d-none text-bolder mt-2" id="unpaid-text"><span class="text-danger">*</span> Before closure please resolve the unpaid invoice</p>
 
                                                                         </div>
                                                                         <div class="col-xl-6 col-sm-6 col-md-12"
@@ -8139,6 +8257,7 @@
                                                                                 class="btn btn-light text-primaryy btn-pill m-2"
                                                                                 data-bs-target="#closeaccount"
                                                                                 data-bs-toggle="modal"
+                                                                                id="closeButton"
                                                                                 style="width: fit-content; border: transparent;"><b>Close
                                                                                     Account</b></button>
                                                                         </div>
@@ -8198,7 +8317,7 @@
 
                                                     <div id="form1" style="display: none;">
                                                         <div class="row">
-                                                            <div class="col-lg-6 mb-3" id="account_closure_show">
+                                                            <!-- <div class="col-lg-6 mb-3" id="account_closure_show">
                                                                 <label for="inputState" class="form-label"><b>Reason for
                                                                         Account Closure</b>
                                                                     <spnan class="text-danger">*</span>
@@ -8211,14 +8330,14 @@
                                                                 </select>
                                                                 <span class="text-danger d-none">State is
                                                                     required!</span>
-                                                            </div>
+                                                            </div> -->
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-lg-6" id="current_password_show">
                                                                 <div class="form-group">
                                                                     <label for=""><b>Current Password</b></label>
                                                                     <input type="password" class="form-control"
-                                                                        name="password" id="current_password"
+                                                                        name="password" id="current_password_acount_close"
                                                                         aria-describedby="emailHelp"
                                                                         placeholder="Enter Current Password">
                                                                     <i class="fi fi-rs-eye text-dark fs-20 toggle-password"
@@ -8235,7 +8354,7 @@
                                                                 <div class="form-group">
                                                                     <label for=""><b>Confirm Password</b></label>
                                                                     <input type="password" class="form-control"
-                                                                        name="password" id="confirm_password"
+                                                                        name="password" id="confirm_password_acount_close"
                                                                         aria-describedby="emailHelp"
                                                                         placeholder="Enter Confirm Password">
                                                                     <i class="fi fi-rs-eye text-dark fs-20 toggle-password"
@@ -8248,9 +8367,10 @@
                                                                 <div class="col-lg-12">
                                                                     <button
                                                                         class="btn btn-primary text-light btn-pill mt-2"
-                                                                        data-bs-target="#requestcloseaccount"
+                                                                        
                                                                         data-bs-toggle="modal"
-                                                                        style="width: fit-content; border: transparent;"><b>Request
+                                                                        disabled
+                                                                        style="width: fit-content; border: transparent;" id="close-request"><b>Request
                                                                             to Close the Account</b></button>
                                                                 </div>
                                                             </div>
@@ -8361,7 +8481,7 @@
                         <li><a href="#side1" data-bs-toggle="tab" class="text-dark active">All<span class="all_span"></span></a></li>
                         <li><a href="#side2" data-bs-toggle="tab" class="text-dark">Inbox <span class="inbox_span"></span></a></li>
                         <li><a href="#side3" data-bs-toggle="tab" class="text-dark">Unread <span class="Unread_span"></span></a></li>
-                        <li><a href="#side4" data-bs-toggle="tab" class="text-dark">Archive <span class="archive_span"></span></a></li>
+                        <!-- <li><a href="#side4" data-bs-toggle="tab" class="text-dark">Archive <span class="archive_span"></span></a></li> -->
                     </ul>   
                 </div>
                 <div class="tab-content">
@@ -9017,7 +9137,8 @@
         <!-- <script src="../assets/switcher/js/switcher.js"></script> -->
 
         <!-- CUSTOM JS -->
-        <!--     <script src="../assets/js/getNotification.js"></script> -->
+        <!--     <script src="../assets/js/getNotification.js"></script>
+<script src="../assets/js/push_notification.js"></script> -->
 
         <!-- CUSTOM JS -->
         <!-- <script src="../assets/js/custom-swicher.js"></script> -->
@@ -9049,11 +9170,13 @@
         <script src="../assets/plugins/chart/Chart.bundle.js"></script>
         <script src="../assets/plugins/chart/utils.js"></script>
         <!-- <script src="../assets/js/form-wizard.js"></script> -->
-        <!-- <script src="../assets/js/getNotification.js"></script></script> -->
+        <!-- <script src="../assets/js/getNotification.js"></script>
+<script src="../assets/js/push_notification.js"></script></script> -->
         <!-- <script src="https://code.jquery.com/jquery-latest.min.js"></script> -->
         <script src="../assets/js/email-verification.js"></script>
     <script src="../assets/js/intercom.js"></script>
     <script src="../assets/js/getNotification.js"></script>
+<script src="../assets/js/push_notification.js"></script>
         <script>
             function profileComplete(){
                 
@@ -9438,16 +9561,36 @@ imageIds.forEach(id => {
             });
         </script>
         <script>
-            let categoryData; var image_url = " "; var image_key = " ";
-            let password_validate1 = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
+            var categoryData; var image_url = " "; var image_key = " ";
+            var password_validate1 = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
             var validconfirmPassword1 = document.getElementById("id_password_new");
-            let confirmPassword1 = document.getElementById("id_password2");
-            let newPassword = document.getElementById("current_password_reset");
-            let spantag11 = document.getElementById("passnotmatch1");
+            var confirmPassword1 = document.getElementById("id_password2");
+            var newPassword = document.getElementById("current_password_reset");
+            var spantag11 = document.getElementById("passnotmatch1");
             confirmPassword1.addEventListener('keyup', confirmPasswordValidation1);
             validconfirmPassword1.addEventListener('keyup', confirmPasswordValidation1);
             newPassword.addEventListener('keyup', confirmPasswordValidation1);
 
+            var password_account=document.getElementById("current_password_acount_close");
+            var confim_password_account=document.getElementById("confirm_password_acount_close");
+            password_account.addEventListener('keyup', confirmPasswordValidation2);
+            confim_password_account.addEventListener('keyup', confirmPasswordValidation2);
+            function confirmPasswordValidation2(){
+                if (password_account.value == confim_password_account.value && confim_password_account.value.match(password_validate1)) {
+                    password_account.classList.add("border-green");
+                    password_account.classList.remove("border-red");
+                    confim_password_account.classList.add("border-green");
+                    confim_password_account.classList.remove("border-red");
+                    document.getElementById("close-request").disabled = false;
+                } else if(password_account.value.match(password_validate1)) {
+                    password_account.classList.add("border-green");
+                    password_account.classList.remove("border-red");
+                }else{
+                    password_account.classList.remove("border-green");
+                    password_account.classList.add("border-red");
+                    document.getElementById("close-request").disabled = true;
+                }
+            }
             function confirmPasswordValidation1() {
                 if (validconfirmPassword1.value.match(password_validate1)) {
                     validconfirmPassword1.classList.add("border-green");
@@ -9512,6 +9655,7 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                     $(this).toggleClass('fi-rs-eye fi-rs-crossed-eye');
                 });
             });
+            var invoiceData=[]
             $(document).ready(() => {
                 // ----- On render -----\\
                 function getData() {
@@ -9538,7 +9682,7 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                             $("#phone1").val(response.phone)
                             $("#businessName").val(toTitleCase(response.businessName || ""))
                             $("#streetAddress").val(toTitleCase(response.streetAddress || ""))
-                            $("#businessAddress").val(toTitleCase(response.businessAddress || ""))
+                            $("#businessAddress").val(toTitleCase(response.BusinessAddress || ""))
                             console.log(response.user)
                             // $("#user-name").text(toTitleCase(response.userName))
                         $("#header-user").text(toTitleCase(response.userName))
@@ -9679,43 +9823,70 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                             // console.log('Error occurred while fetching state and city data.');
                         }
                     });
+                    
+                    
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/getVendorCategory',
-                        method: 'GET',
-                        headers: {
-                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                        },
-                        success: function (response) {
-                            vendorCategoryData = response.data
-                            console.log(response.data)
-                            var vendorCategory = 0
+    url: 'https://backend.app.spaderent.com/api/spade/getAllInvoices',
+    method: 'GET',
+    headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+    },
+    success: function (response) {
+        console.log(response?.data[0])
+        var tableBody = $("#table_body_unpaid_invoice");
 
-                            $("#add-item-container5").empty()
-                            response.data?.forEach(({ id, category, landLordId }, index) => {
-                                counter++
+        // Clear the existing content in the table body
+        tableBody.empty();
 
-                                $("#add-item-container5").append(`<tr class="tr">
-                                                                            <td>
-                                                                                <label for=""><b>Categories</b></label>
-                                                                                <input type="text" name=""
-                                                                                    class="form-control vendor-category" value='${category}' id='${id}'>
-                                                                            </td>
-                                                                            <td><button type="button" class="btn"
-                                                                                    id="del-btn-complete"
-                                                                                    style="text-align: left;">
-                                                                                    <i
-                                                                                        class="fi fi-rs-trash text-danger fs-5"></i>
-                                                                                </button></td>
-                                                                        </tr>`)
-                            })
-                        },
-                        error: function (xhr, status, error) {
-                            console.log('Error occurred while fetching state and city data.');
-                            console.log(xhr);
-                            console.log(error);
-                            // console.log('Error occurred while fetching state and city data.');
-                        }
-                    });
+        invoiceData=response?.data[0].filter(function(invoice){
+            return invoice.status=="Unpaid"
+        })
+        if(invoiceData.length>=1){
+            $("#closeButton").prop("disabled",true)
+            $("#unpaid-text").removeClass("d-none")
+        }else{
+            $("#closeButton").prop("disabled",false)
+            $("#unpaid-text").addClass("d-none")
+        }
+        invoiceData.forEach(function (invoice) {
+            var row = $("<tr>");
+
+            // Populate invoice properties into cells
+            var invoiceNumber = $("<td>").text(invoice.invoiceID);
+            var customerInfo = $("<td>").html(`
+                <p style="font-weight: 600;" class="mb-1 text-primary">${invoice.firstName+" "+invoice.lastName}</p>
+                <span>Phone: ${invoice.tPhone}</span>
+            `);
+            var description = $("<td>").html(`
+                <p style="font-weight: 600;" class="mb-1">${(invoice.note==""?"N/A":invoice.note)}</p>
+                <span>${invoice.invoiceType}</span>
+            `);
+            var dates = $("<td>").html(`
+                <p style="font-weight: 600;" class="mb-1">${invoice.startDate}</p>
+                <span>Due Date: ${invoice.dueDate}</span>
+            `);
+            var address = $("<td>").html(`<b>${invoice.propertyName}</b>`);
+            var amount = $("<td>").html(`<p style="font-weight: 600;" class="mb-1">${invoice.totalAmount}</p>`);
+            var status = $("<td>").html(`
+                <b style="color: red;"><i class="fi fi-rs-clock-three" style="color: red;"></i> ${invoice.status}</b>
+            `);
+            
+            row.append(
+                invoiceNumber, customerInfo, description, dates, address, amount, status
+            );
+
+            // Append the row to the table body
+            tableBody.append(row);
+        });
+    },
+    error: function (xhr, status, error) {
+        console.log('Error occurred while fetching invoices.');
+        console.log(xhr);
+        console.log(error);
+    }
+});
+
+                    
                     $.ajax({
                         url: 'https://backend.app.spaderent.com/api/spade/checkNotify',
                         method: 'GET',
@@ -9748,25 +9919,26 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                             console.log(response)
 
                             if (response.email == "yes") {
-                                $("input[name='example-radios1'][value='Enable']").prop("checked", true);
-                            } else {
-                                $("input[name='example-radios1'][value='Disable']").prop("checked", true);
-                            } if (response.push == "yes") {
-                                $("input[name='example-radios2'][value='Enable']").prop("checked", true);
-
-
-                            } else {
-                                $("input[name='example-radios2'][value='Disable']").prop("checked", true);
-
-                            } if (response.text == "yes") {
                                 $("input[name='example-radios3'][value='Enable']").prop("checked", true);
-
-
                             } else {
                                 $("input[name='example-radios3'][value='Disable']").prop("checked", true);
+                            } if (response.push == "yes") {
+                                $("input[name='example-radios1'][value='Enable']").prop("checked", true);
 
 
-                            }
+                            } else {
+                                $("input[name='example-radios1'][value='Disable']").prop("checked", true);
+
+                            } 
+                            // if (response.text == "yes") {
+                            //     $("input[name='example-radios3'][value='Enable']").prop("checked", true);
+
+
+                            // } else {
+                            //     $("input[name='example-radios3'][value='Disable']").prop("checked", true);
+
+
+                            // }
                         },
                         error: function (xhr, status, error) {
                             console.log('Error occurred while fetching state and city data.');
@@ -9778,6 +9950,53 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
 
                 }
                 getData()
+                $("#requestcloseaccount").on('hide.bs.modal', function () {
+                   
+            
+                        localStorage.clear();
+                        window.open('./login_module.html', "_self")
+       
+
+})
+                $("#close-request").on("click",function(){
+                    $.ajax({
+    url: 'http://localhost:3000/api/spade/userCheckTenantPaidInvoice',
+    method: 'GET',
+    headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+    },
+    data: {
+        "password": $("#current_password_acount_close").val(),
+    },
+    success: function (response) {
+        if(response.message=="Tenant has unpaid invoices"){
+            $("#info-text").text("show");
+            $("#infoModal_account").modal("show");
+            setTimeout(function () {
+                $('#infoModal_account').modal('hide');
+            }, 2000);
+        }else if(response.message=="Tenant has paid invoices"){
+            $("#requestcloseaccount").modal("show")
+        }
+            
+    },
+    error: function (xhr, status, error) {
+        console.log('Error occurred while fetching invoices.');
+        if(xhr?.responseJSON?.message=="Password is incorrect"){
+            $("#infoModal_account").modal("show");
+            setTimeout(function () {
+                $('#infoModal_account').modal('hide');
+            }, 2000);
+        }else{
+            $("#myModal_warning").modal("show");
+            setTimeout(function () {
+                $('#myModal_warning').modal('hide');
+                window.location = '../Landlord/login_module.html';
+            }, 2000);
+        }
+    }
+});
+                })
                 var vendor; var categoryId; var vendorCategoryId
                 $('#add-item-container1,#add-item-container5').on('click', '#del-btn-complete', function () {
                     vendor = false
@@ -9864,9 +10083,9 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                 $("#save-notification-setting").click(() => {
                     // console.log($("#example-radios1").val())
                     const data = {
-                        isEmailNotify: $("input[name='example-radios1']:checked").val() == "Enable" ? "yes" : "no",
-                        isPushNotify: $("input[name='example-radios2']:checked").val() == "Enable" ? "yes" : "no",
-                        textNotification: $("input[name='example-radios3']:checked").val() == "Enable" ? "yes" : "no"
+                        isEmailNotify: $("input[name='example-radios3']:checked").val() == "Enable" ? "yes" : "no",
+                        isPushNotify: $("input[name='example-radios1']:checked").val() == "Enable" ? "yes" : "no",
+                        textNotification: $("input[name='example-radios2']:checked").val() == "Enable" ? "yes" : "no"
                     }
                     $.ajax({
                         url: 'https://backend.app.spaderent.com/api/spade/notify',
@@ -9877,6 +10096,7 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
+                            notificationIconDisplay()
                             $("#myModal_success p").text("Succesfully Updated!!!")
                             $("#myModal_success").modal("show")
                             setTimeout(function () {
@@ -10032,7 +10252,7 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                     // Use the cardId as needed
                     console.log('Clicked card ID:', cardId);
                 });
-
+                
                 var file;
                 $(function () {
 
@@ -10501,31 +10721,40 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                 $('#form1').show();
             });
         </script>
-        <script>
-            function logout() {
-            $(document).ready(function () {
-                $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
-                    type: 'PUT',
-                    contentType: false,
-                    processData: false,
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-                    success: function (response) {
-                        console.log(response);
-                        localStorage.removeItem('authtoken');
-                        // window.close();
-                        window.open('./login_module.html', "_self")
-                        console.log('Done');
-                    },
-                    error: function (xhr, status, error) {
-                        console.log(error);
+  <script>
+    function logout() {
+        $(document).ready(function () {
+            $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                type: 'PUT',
+                contentType: false,
+                processData: false,
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    console.log(response);
+                    if(localStorage.getItem("htmlLayout")){
+
+                        const htmlLayoutValue = localStorage.getItem("htmlLayout");
+                        localStorage.clear();
+                        localStorage.setItem("htmlLayout", htmlLayoutValue);
+                    }else{
+                        localStorage.clear();
+
                     }
-                });
+                    // localStorage.removeItem('authtoken');
+                    // window.close();
+                    window.open('./login_module.html', "_self")
+                    console.log('Done');
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }
             });
-        }
-        </script>
+        });
+    }
+</script>
 
 </body>
 

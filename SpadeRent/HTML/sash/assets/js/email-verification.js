@@ -1,5 +1,29 @@
 //js code
 let id1; let userEmail; let emailChange = false
+var password_varify_match = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
+        var email_verify_password = document.getElementById("email-verify-password");
+        email_verify_password.addEventListener('keyup', confirmPasswordValidation1_verify);
+        // var spantag11 = document.getElementById("passnotmatch1");
+
+        function confirmPasswordValidation1_verify() {
+
+            // if (email_verify_password.value.match(password_varify_match)) {
+            //     console.log(11)
+            //     email_verify_password.classList.add("border-green");
+            //     spantag11.style.display = "none";
+            // } else {
+            //     console.log(21)
+            //     email_verify_password.classList.remove("border-green");
+            //     spantag11.style.display = "block";
+            // }
+            if ($("#token").val() !== " " && email_verify_password.value.match(password_varify_match)) {
+                email_verify_password.classList.add("border-green");
+                $("#verify-btn").removeClass("disabled")
+            } else {
+                $("#verify-btn").addClass("disabled")
+                email_verify_password.classList.remove("border-green");
+            }
+        }
 $(document).ready(function () {
     $.ajax({
         url: 'https://backend.app.spaderent.com/api/spade/protected',
@@ -96,7 +120,7 @@ $(document).ready(function () {
         });
     })
     $("#send-email").on("click", () => {
-        console.log(id)
+        
         $.ajax({
             url: 'https://backend.app.spaderent.com/api/spade/resendCode',
             type: 'POST',
@@ -123,7 +147,7 @@ $(document).ready(function () {
                 id: id1,
                 token: $("#token").val(),
                 email: emailChange ? $("#user-email").val() : userEmail,
-                password: $("#id_password1").val(),
+                password: $("#email-verify-password").val(),
             }),
             success: function (response) {
                 console.log(response)
@@ -131,14 +155,14 @@ $(document).ready(function () {
                     localStorage.setItem("authtoken", response.token);
     
                     $("#modaldemo8").modal("hide")
-                    $("#succesModal").modal("show")
+                    $("#succesModal_verify").modal("show")
                     $("#account-text").empty()
                     $("#email_verification").remove()
                     //   window.location="./index.html"
                 } else if (response.message == " token code is not match ") {
                     // $("#modaldemo8").modal("hide")
                     //   $("#info-text").text(response.message || response)
-                    $("#infoModal").modal("show")
+                    $("#infoModal_verify").modal("show")
                 }
             },
             error: function (xhr, status, error) {

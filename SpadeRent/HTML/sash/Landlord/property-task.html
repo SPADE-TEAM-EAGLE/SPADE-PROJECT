@@ -530,9 +530,18 @@
                         <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" style="max-width: 110px;"
                             class="Rent-logo mb-5" />
                         <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
-                        <h6 class="text-default mb-3">Get started with Spade Rent! Continue with Google to verify</h6>
-                        <input type="email" class="form-control form mb-2" style="min-width: 200px;max-width: 350px;" placeholder="Enter the name of the property.">
-                        <a class="text-primary mb-4" href="javascript:void(0)">Change Email</a>
+                        <h6 class="text-default mb-3">Enter a 6-digit code to verify email address</h6>
+                        <input id="token" name="token" type="phone" class="form-control form mb-2" pattern="[0-9]{5}"
+                            maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                            style="width: 100%;" data-bs-placement="top" data-bs-toggle="tooltip"
+                            title="" data-bs-original-title="Enter the name of the property.">
+                        <input type="password" class="form-control form mb-2" id="email-verify-password"
+                            aria-describedby="emailHelp" placeholder="Password" data-bs-placement="top"
+                            data-bs-toggle="tooltip" title="" data-bs-original-title="Enter password here.">
+                        <!-- <a class="text-primary mb-4" href="javascript:void(0)">Change Email</a> -->
+                        <span class="mt-1 text-danger" id="passnotmatch1" style="display: none;">
+                            MUST be atleast 8 characters long, Must contain atleast One Uppercase and One symbol.
+                        </span>
                         <div class="">
                             <!-- <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2">Remind me Later</a> -->
                             <a href="javascript:void(0)" class="btn btn-primary btn-pill disabled"
@@ -564,7 +573,7 @@
                         <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
                         <h6 class="text-default mb-3">Get started with Spade Rent! You have<span id="days-left"></span>
                             left</h6>
-                        <input type="email" class="form-control form mb-2" style="min-width: 200px;max-width: 350px;"
+                        <input type="email" class="form-control form mb-2" style="width: 100%;"
                             data-bs-placement="top" data-bs-toggle="tooltip" title=""
                             data-bs-original-title="Enter the name of the property." readonly id="user-email">
                         <a class="text-primary mb-4" href="javascript:void(0)" id="change-email">Change Email</a>
@@ -1151,6 +1160,20 @@
 
                             </div>
                         </div>
+                        <div>
+                            <p class="d-inline-flex gap-1">
+                                <span>Add Properties | </span><a data-bs-toggle="collapse" href="#collapseHelp" role="button" aria-expanded="false" aria-controls="collapseHelp">
+                                  Help ? 
+                                </a>
+                            
+                              </p>
+                              <div class="collapse" id="collapseHelp" style="width: 40%;">
+                                <div class="card card-body">
+                                  <span><a href="#" onclick="Intercom('showArticle', 8210506)"><i class="fi fi-rs-question text-light"></i>  How to create Properties? </a></span>
+                                  <span><a href="#" onclick="Intercom('showArticle', 8210444)"><i class="fi fi-rs-question text-light"></i>  How to update Properties? </a></span>
+                                </div>
+                              </div>
+                        </div>
                         <!-- PAGE-HEADER END -->
                         <div class="over_view" id="Overview">
                             <!-- ROW-2 OPEN -->
@@ -1346,7 +1369,7 @@
                         <li><a href="#side1" data-bs-toggle="tab" class="text-dark active">All<span class="all_span"></span></a></li>
                         <li><a href="#side2" data-bs-toggle="tab" class="text-dark">Inbox <span class="inbox_span"></span></a></li>
                         <li><a href="#side3" data-bs-toggle="tab" class="text-dark">Unread <span class="Unread_span"></span></a></li>
-                        <li><a href="#side4" data-bs-toggle="tab" class="text-dark">Archive <span class="archive_span"></span></a></li>
+                        <!-- <li><a href="#side4" data-bs-toggle="tab" class="text-dark">Archive <span class="archive_span"></span></a></li> -->
                     </ul>   
                 </div>
                 <div class="tab-content">
@@ -1959,7 +1982,8 @@
 
     <!-- Color Theme js -->
     <script src="../assets/js/themeColors.js"></script>
-    <script src="../assets/js/getNotification.js"></script></script>
+    <script src="../assets/js/getNotification.js"></script>
+<script src="../assets/js/push_notification.js"></script></script>
 
     <!-- CUSTOM JS -->
     <script src="../assets/js/custom.js"></script>
@@ -1992,6 +2016,7 @@
     <script src="../assets/js/email-verification.js"></script>
     <script src="../assets/js/intercom.js"></script>
     <script src="../assets/js/getNotification.js"></script>
+<script src="../assets/js/push_notification.js"></script>
 
     <script>
         $(document).ready(function() {
@@ -2214,31 +2239,40 @@ class=
                         })
         })
     </script>
-    <script>
-        function logout() {
-            $(document).ready(function () {
-                $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
-                    type: 'PUT',
-                    contentType: false,
-                    processData: false,
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-                    success: function (response) {
-                        console.log(response);
-                        localStorage.removeItem('authtoken');
-                        // window.close();
-                        window.open('./login_module.html', "_self")
-                        console.log('Done');
-                    },
-                    error: function (xhr, status, error) {
-                        console.log(error);
+<script>
+    function logout() {
+        $(document).ready(function () {
+            $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                type: 'PUT',
+                contentType: false,
+                processData: false,
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    console.log(response);
+                    if(localStorage.getItem("htmlLayout")){
+
+                        const htmlLayoutValue = localStorage.getItem("htmlLayout");
+                        localStorage.clear();
+                        localStorage.setItem("htmlLayout", htmlLayoutValue);
+                    }else{
+                        localStorage.clear();
+
                     }
-                });
+                    // localStorage.removeItem('authtoken');
+                    // window.close();
+                    window.open('./login_module.html', "_self")
+                    console.log('Done');
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }
             });
-        }
-    </script>
+        });
+    }
+</script>
     <!-- <script>
         $(document).ready(function () {
             $('#myTable').DataTable({

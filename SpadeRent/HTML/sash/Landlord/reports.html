@@ -18,7 +18,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="../assets/images/brand/favicon.ico" />
 
     <!-- TITLE -->
-    <title>Property Tenant - SpadeRent</title>
+    <title>Reports - SpadeRent</title>
 
     <!-- BOOTSTRAP CSS -->
     <link id="style" href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -1687,9 +1687,9 @@
                         <h6 class="text-default mb-3">Enter a 6-digit code to verify email address</h6>
                         <input id="token" name="token" type="phone" class="form-control form mb-2" pattern="[0-9]{5}"
                             maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                            style="min-width: 200px;max-width: 350px;" data-bs-placement="top" data-bs-toggle="tooltip"
+                            style="width: 100%;" data-bs-placement="top" data-bs-toggle="tooltip"
                             title="" data-bs-original-title="Enter the name of the property.">
-                        <input type="password" class="form-control form mb-2" id="id_password1"
+                        <input type="password" class="form-control form mb-2" id="email-verify-password"
                             aria-describedby="emailHelp" placeholder="Password" data-bs-placement="top"
                             data-bs-toggle="tooltip" title="" data-bs-original-title="Enter password here.">
                         <!-- <a class="text-primary mb-4" href="javascript:void(0)">Change Email</a> -->
@@ -1727,7 +1727,7 @@
                         <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
                         <h6 class="text-default mb-3">Get started with Spade Rent! You have<span id="days-left"></span>
                             left</h6>
-                        <input type="email" class="form-control form mb-2" style="min-width: 200px;max-width: 350px;"
+                        <input type="email" class="form-control form mb-2" style="width: 100%;"
                             data-bs-placement="top" data-bs-toggle="tooltip" title=""
                             data-bs-original-title="Enter the name of the property." readonly id="user-email">
                         <a class="text-primary mb-4" href="javascript:void(0)" id="change-email">Change Email</a>
@@ -1743,6 +1743,75 @@
                     <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button class="btn btn-primary">Save changes</button>
                 </div> -->
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="infoModal_verify" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
+                        <!-- <div class="card-header border-0 pt-3">
+                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                            </button>
+                        </div> -->
+                        <div class="card-body text-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24">
+                                <path fill="#fad383"
+                                    d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z">
+                                </path>
+                                <circle cx="12" cy="16" r="1" fill="#f7b731"></circle>
+                                <path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"></path>
+                            </svg>
+                            <h4 class="h4 mb-0 mt-3 fw-bold">Info</h4>
+                            <p class="card-text text-dark">Token code or Password not matched</p>
+                        </div>
+                        <!-- <div class="card-footer text-center border-0 pt-0">
+                            <div class="row">
+                                <div class="text-center">
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">delete</a>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="succesModal_verify" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
+                        <!-- <div class="card-header border-0 pt-3">
+                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                            </button>
+                        </div> -->
+                        <div class="card-body text-center">
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
+                                    viewBox="0 0 24 24">
+                                    <path fill="#13bfa6"
+                                        d="M10.3125,16.09375a.99676.99676,0,0,1-.707-.293L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328l-6.1875,6.1875A.99676.99676,0,0,1,10.3125,16.09375Z"
+                                        opacity=".99" />
+                                    <path fill="#71d8c9"
+                                        d="M12,2A10,10,0,1,0,22,12,10.01146,10.01146,0,0,0,12,2Zm5.207,7.61328-6.1875,6.1875a.99963.99963,0,0,1-1.41406,0L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328Z" />
+                                </svg></span>
+                            <h4 class="h4 mb-0 mt-3 fw-bold">Success</h4>
+                            <p class="card-text text-dark">Your Email has been verified</p>
+                        </div>
+                        <!-- <div class="card-footer text-center border-0 pt-0">
+                            <div class="row">
+                                <div class="text-center">
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">delete</a>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -2396,10 +2465,7 @@
                                         <!-- 2 comments start  -->
 
                                         <!-- 3 comments start  -->
-                                        <div class="d-flex country">
-                                            <img src="../assets\header-img\question.svg" 
-                                                class="avatarr profile-user brroundd nav-link cover-image dark-layout customIntercomButton">
-                                        </div>
+                                       
                                         <!-- <div class="d-flex country">
                                             <img src="../assets\header-img\question-light.webp" 
                                                 class="avatarr profile-user nav-link brroundd cover-image light-layout customIntercomButton">
@@ -2722,7 +2788,7 @@
                                                 <div class="row">
                                                     <div class="col-lg-4">
                                                         <div class="form-group">
-                                                            <label class="form-label"><b>Property</b></label>
+                                                            <label class="form-label"><b>Report Type</b></label>
                                                             <select class="form-control select2-show-search form-select"
                                                                 id="propertySelect" data-placeholder="Choose one">
                                                                 <option label="Choose one"></option>
@@ -2914,7 +2980,7 @@
                                                                         class="btn btn-outline-default text-dark py-1"
                                                                         id="filter_btn" data-bs-toggle="dropdown"><i
                                                                             class="typcn typcn-filter me-2 fs-16"></i><strong>Filter</strong></button>
-                                                                    <ul class="dropdown-menu" role="menu">
+                                                                    <ul class="dropdown-menu filter" role="menu">
                                                                         <li><a href="javascript:void(0)"><strong
                                                                                     class="text-dark">Filter
                                                                                     by:</strong></a>
@@ -3100,7 +3166,7 @@
                                                     </div> -->
                                                     <div class="col-lg-4">
                                                         <div class="form-group">
-                                                            <label class="form-label"><b>Tenant</b></label>
+                                                            <label class="form-label"><b>Report Type</b></label>
                                                             <select class="form-control select2-show-search form-select"
                                                                 id="tenantSelect" data-placeholder="Choose one">
                                                                 <option label="Choose one"></option>
@@ -3782,8 +3848,8 @@
                                     class="inbox_span"></span></a></li>
                         <li><a href="#side3" data-bs-toggle="tab" class="text-dark">Unread <span
                                     class="Unread_span"></span></a></li>
-                        <li><a href="#side4" data-bs-toggle="tab" class="text-dark">Archive <span
-                                    class="archive_span"></span></a></li>
+                        <!-- <li><a href="#side4" data-bs-toggle="tab" class="text-dark">Archive <span
+                                    class="archive_span"></span></a></li> -->
                     </ul>
                 </div>
                 <div class="tab-content">
@@ -4027,7 +4093,8 @@
 
         <!-- CUSTOM JS -->
         <!-- <script src="../assets/js/custom.js"></script>-->
-            <script src="../assets/js/getNotification.js"></script> 
+            <script src="../assets/js/getNotification.js"></script>
+<script src="../assets/js/push_notification.js"></script> 
 
         <!-- CUSTOM JS -->
         <script src="../assets/js/custom-swicher.js"></script>
@@ -4739,7 +4806,8 @@ function formatCurrency(amount) {
     // Format the number with two decimal places and add the dollar sign
     return '$' + numericAmount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
 }
-$('.dropdown-menu li').on('click', function() {
+$(".filter li").click(function () {
+    console.log($(this))
         var selectedFilter = $(this).find('a').text().trim();
         $('#selectedFilterText').text(selectedFilter);
         
@@ -4811,7 +4879,7 @@ $("#download_pdf_reports4").attr("disabled",true)
     }
 })
 $.ajax({
-    url: 'https://backend.app.spaderent.com/api/spade/taskReport',
+    url: 'https://backend.app.spaderent.com/api/spade/getAllTask',
     type: 'GET',
     contentType: "application/json; charset=utf-8",
     processData: false,
@@ -4819,8 +4887,8 @@ $.ajax({
         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
     },
     success: function (response) {
-        
-        taskData = response.property;
+        console.log(response.data[0])
+        taskData = response.data[0];
         if(taskData.length<1){
 $("#download_csv_reports5").attr("disabled",true)
 $("#download_pdf_reports5").attr("disabled",true)
@@ -4834,34 +4902,43 @@ $("#download_pdf_reports5").attr("disabled",true)
 
             // Construct the HTML for the new row
             var newRowHtml = '<tr>' +
-                '<td style="font-weight: 600;">' + (index+1) + '</td>'+
-                '<td style="font-weight: 600;" class="d-none">' + "" + '</td>'+
-                '<td><img src="../assets/images/Group-user.png" alt=""></td>' +
-                '<td class="task-id" id="' + task.taskID + '" style="font-weight: 600;">' +
-                '<p style="font-weight: 600;" class="mb-1">' + task.taskName + '</p>' +
-                '<span class="font-weight-normal" style="color: #9B9B9B;"> By ' + task.createdBy + ' - ' + hoursDiff + ' hours</span>' +
-                '</td>' +
-                '<td style="font-weight: 600;text-align: center;display: flex;">' + task.firstName+" "+ task.lastName+ '</td>' +
-                '<td class="property-id" style="font-weight: 600;">' +
-                '<p style="font-weight: 600;" class="mb-1">' + formatDate(task.dueDate) + '</p>' +
-                '<span class="font-weight-normal text-danger"> <i class="fe fe-circle me-1"></i>' + task.priority + '</span>' +
-                '</td>' +
-                '<td class="property-id" style="font-weight: 600;">' +
-                '<p style="font-weight: 600;" class="mb-1">' + task.propertyName + '</p>' +
-                '<span class="font-weight-normal text-danger">Unit Number: ' + task.units + '</span>' +
-                '</td>' +
-                '<td class="property-id" style="font-weight: 600;">' + task.status + '</td>' +
-                '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
-                '<ul class="dropdown-menu">' +
-                '<li><a class="dropdown-item text-success view-task" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#">View</a></li>' +
-                '<li><a class="edit-option dropdown-item text-primary" href="javascript:void(0)">Edit</a></li>' +
-                '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>' +
-                '</ul>' +
-                '</td>' +
-                '</tr>';
+    '<td style="font-weight: 600;">' + (index + 1) + '</td>' +
+    '<td style="font-weight: 600;" class="d-none">' + "" + '</td>' +
+    '<td><img src="../assets/images/Group-user.png" alt=""></td>' +
+    '<td class="task-id" id="' + task.taskID + '" style="font-weight: 600;">' +
+    '<p style="font-weight: 600;" class="mb-1">' + task.taskName + '</p>' +
+    '<span class="font-weight-normal" style="color: #9B9B9B;"> By ' + task.createdBy + ' - ' + hoursDiff + ' hours</span>' +
+    '</td>';
 
-            // Append the new row to the table body
-            $('#table_body_task_report').append(newRowHtml);
+if (task.AssignTo.length>0) {
+    newRowHtml += task.AssignTo.map(function ({ name, email }) {
+        return '<td style="font-weight: 600;text-align: center;display: flex;"><div class="me-2">' +
+            '<i class="fi fi-rs-circle-user avatar-md fs-30 text-dark"></i>' +
+            '<div class="media-body valign-middle mt-0">' +
+            '<a href="javascript:void(0)" class="text-dark fw-semibold">' + name + '</a>' +
+            '</div>' +
+            '</div></td>';
+    }).join('');
+} else {
+    newRowHtml += '<td>Not assigned</td>';
+}
+newRowHtml +=
+    '<td class="property-id" style="font-weight: 600;">' +
+    '<p style="font-weight: 600;" class="mb-1">' + formatDate(task.dueDate) + '</p>' +
+    '<span class="font-weight-normal text-danger"> <i class="fe fe-circle me-1"></i>' + task.priority + '</span>' +
+    '</td>' +
+    '<td class="property-id" style="font-weight: 600;">' +
+    '<p style="font-weight: 600;" class="mb-1">' + task.propertyName + '</p>' +
+    '<span class="font-weight-normal text-danger">Unit Number: ' + task.unitNumber
+ + '</span>' +
+    '</td>' +
+    '<td class="property-id" style="font-weight: 600;">' + task.status + '</td>' +
+    
+    '</tr>';
+
+// Append the new row to the table body
+$('#table_body_task_report').append(newRowHtml);
+
         
 
         });
@@ -4884,7 +4961,7 @@ $("#download_pdf_reports5").attr("disabled",true)
         <script>
 
 
-            let password_validate1 = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
+            var password_validate1 = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
             let validconfirmPassword1 = document.getElementById("id_password1");
             let confirmPassword1 = document.getElementById("id_password2");
             let newPassword = document.getElementById("current_password_reset");
@@ -5093,28 +5170,37 @@ $("#download_pdf_reports5").attr("disabled",true)
         
         <script>
             function logout() {
-            $(document).ready(function () {
-                $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
-                    type: 'PUT',
-                    contentType: false,
-                    processData: false,
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-                    success: function (response) {
-                        console.log(response);
-                        localStorage.removeItem('authtoken');
-                        // window.close();
-                        window.open('./login_module.html', "_self")
-                        console.log('Done');
-                    },
-                    error: function (xhr, status, error) {
-                        console.log(error);
-                    }
+                $(document).ready(function () {
+                    $.ajax({
+                        url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                        type: 'PUT',
+                        contentType: false,
+                        processData: false,
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            console.log(response);
+                            if(localStorage.getItem("htmlLayout")){
+        
+                                const htmlLayoutValue = localStorage.getItem("htmlLayout");
+                                localStorage.clear();
+                                localStorage.setItem("htmlLayout", htmlLayoutValue);
+                            }else{
+                                localStorage.clear();
+        
+                            }
+                            // localStorage.removeItem('authtoken');
+                            // window.close();
+                            window.open('./login_module.html', "_self")
+                            console.log('Done');
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(error);
+                        }
+                    });
                 });
-            });
-        }
+            }
         </script>
 </body>
 

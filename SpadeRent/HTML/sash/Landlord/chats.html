@@ -15,7 +15,7 @@
         href='https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css'>
     <link rel="shortcut icon" type="image/x-icon" href="../assets/images/brand/favicon.ico" />
     <!-- TITLE -->
-    <title>Property Tenant - SpadeRent</title>
+    <title>Chat - SpadeRent</title>
     <!-- BOOTSTRAP CSS -->
     <link id="style" href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <!-- STYLE CSS -->
@@ -1108,10 +1108,10 @@
                         <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
                         <h6 class="text-default mb-3">Enter a 6-digit code to verify email address</h6>
                         <input id="token" name="token" type="phone" class="form-control form mb-2" pattern="[0-9]{5}"
-                            maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                            style="min-width: 200px;max-width: 350px;" data-bs-placement="top" data-bs-toggle="tooltip"
-                            title="" data-bs-original-title="Enter the name of the property.">
-                        <input type="password" class="form-control form mb-2" id="id_password1"
+                            maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '')" style="width: 100%;"
+                            data-bs-placement="top" data-bs-toggle="tooltip" title=""
+                            data-bs-original-title="Enter the name of the property.">
+                        <input type="password" class="form-control form mb-2" id="email-verify-password"
                             aria-describedby="emailHelp" placeholder="Password" data-bs-placement="top"
                             data-bs-toggle="tooltip" title="" data-bs-original-title="Enter password here.">
                         <!-- <a class="text-primary mb-4" href="javascript:void(0)">Change Email</a> -->
@@ -1150,9 +1150,9 @@
                         <h6 class="text-default mb-3">Get started with Spade Rent! You have<span id="days-left"></span>
                             left
                         </h6>
-                        <input type="email" class="form-control form mb-2" style="min-width: 200px;max-width: 350px;"
-                            data-bs-placement="top" data-bs-toggle="tooltip" title=""
-                            data-bs-original-title="Enter the name of the property." readonly id="user-email">
+                        <input type="email" class="form-control form mb-2" style="width: 100%;" data-bs-placement="top"
+                            data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the name of the property."
+                            readonly id="user-email">
                         <a class="text-primary mb-4" href="javascript:void(0)" id="change-email">Change Email</a>
                         <a class="text-primary mb-4 d-none" href="javascript:void(0)" id="save-email">Save Email</a>
                         <div class="">
@@ -1245,6 +1245,75 @@
                             <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
                             <p class="card-text text-dark">Session expeired!, Login again</p>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="infoModal_verify" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
+                        <!-- <div class="card-header border-0 pt-3">
+                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                            </button>
+                        </div> -->
+                        <div class="card-body text-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24">
+                                <path fill="#fad383"
+                                    d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z">
+                                </path>
+                                <circle cx="12" cy="16" r="1" fill="#f7b731"></circle>
+                                <path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"></path>
+                            </svg>
+                            <h4 class="h4 mb-0 mt-3 fw-bold">Info</h4>
+                            <p class="card-text text-dark">Token code or Password not matched</p>
+                        </div>
+                        <!-- <div class="card-footer text-center border-0 pt-0">
+                            <div class="row">
+                                <div class="text-center">
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">delete</a>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="succesModal_verify" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
+                        <!-- <div class="card-header border-0 pt-3">
+                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                            </button>
+                        </div> -->
+                        <div class="card-body text-center">
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
+                                    viewBox="0 0 24 24">
+                                    <path fill="#13bfa6"
+                                        d="M10.3125,16.09375a.99676.99676,0,0,1-.707-.293L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328l-6.1875,6.1875A.99676.99676,0,0,1,10.3125,16.09375Z"
+                                        opacity=".99" />
+                                    <path fill="#71d8c9"
+                                        d="M12,2A10,10,0,1,0,22,12,10.01146,10.01146,0,0,0,12,2Zm5.207,7.61328-6.1875,6.1875a.99963.99963,0,0,1-1.41406,0L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328Z" />
+                                </svg></span>
+                            <h4 class="h4 mb-0 mt-3 fw-bold">Success</h4>
+                            <p class="card-text text-dark">Your Email has been verified</p>
+                        </div>
+                        <!-- <div class="card-footer text-center border-0 pt-0">
+                            <div class="row">
+                                <div class="text-center">
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">delete</a>
+                                </div>
+                            </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -1863,6 +1932,12 @@
                                                 <span class="light-layout"><i class="fi fi-rs-brightness"></i></span>
                                             </a>
                                         </div>
+                                        <div class="d-flex country mt-2">
+                                            <a class="nav-link icon text-dark customIntercomButton">
+                                        <i class="fi fi-rs-interrogation"></i>
+                                       
+                                            </a>
+                                        </div>
                                         <!-- <div class="d-flex country mt-2">
                                             <a class="nav-link icon text-dark" onclick="mydemoclick()">
                                                 <i class="fi fi-rs-universal-access"></i>
@@ -2181,6 +2256,20 @@
                                 </div>
 
                             </div>
+                        </div>
+                        <div>
+                            <p class="d-inline-flex gap-1">
+                                <span>Chats | </span><a data-bs-toggle="collapse" href="#collapseHelp" role="button" aria-expanded="false" aria-controls="collapseHelp" class="collapsed active">
+                                  Help ? 
+                                </a>
+                            
+                              </p>
+                              <div class="collapse" id="collapseHelp" style="width: 40%;">
+                                <div class="card card-body">
+                                  <span><a href="#" onclick="Intercom('showArticle', 8210506)"><i class="fi fi-rs-question text-light"></i>  How to Chat? </a></span>
+                                  <span><a href="#" onclick="Intercom('showArticle', 8210444)"><i class="fi fi-rs-question text-light"></i>  Send files? </a></span>
+                                </div>
+                              </div>
                         </div>
                         <div class="row">
                             <!-- <input type="text" id="inputField"> -->
@@ -2900,8 +2989,8 @@
                                             class="inbox_span"></span></a></li>
                                 <li><a href="#side3" data-bs-toggle="tab" class="text-dark">Unread <span
                                             class="Unread_span"></span></a></li>
-                                <li><a href="#side4" data-bs-toggle="tab" class="text-dark">Archive <span
-                                            class="archive_span"></span></a></li>
+                                <!-- <li><a href="#side4" data-bs-toggle="tab" class="text-dark">Archive <span
+                                            class="archive_span"></span></a></li> -->
                             </ul>
                         </div>
                         <div class="tab-content">
@@ -3444,7 +3533,7 @@
             <!-- FOOTER END -->
         </div>
         <!-- BACK-TO-TOP -->
-        <!-- <!-- <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a> --> -->
+        <!--  <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a> -->
         <a href="#addModal" data-bs-effect="effect-scale" data-bs-toggle="modal" id="add-tenant-side-btn"><i
                 class="fe fe-plus"></i></a>
         <!-- socket      -->
@@ -3511,6 +3600,7 @@
         <script src="../assets/plugins/flot/jquery.flot.fillbetween.js"></script>
         <script src="../assets/plugins/flot/chart.flot.sampledata.js"></script>
         <script src="../assets/plugins/flot/dashboard.sampledata.js"></script>
+        <script src="../assets/js/intercom.js"></script>
         <!-- INTERNAL Vector js -->
         <script src="../assets/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
         <script src="../assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
@@ -3538,6 +3628,7 @@
         <script src="../assets/js/charts.js"></script>
         <script src="../assets/js/email-verification.js"></script>
         <script src="../assets/js/getNotification.js"></script>
+<script src="../assets/js/push_notification.js"></script>
 
         <script>
             function initializeWebSocket() {
@@ -3551,7 +3642,7 @@
                 });
                 return socket;
             }
-            var socket = initializeWebSocket(); 
+            var socket = initializeWebSocket();
             window.onbeforeunload = function () {
                 socket.disconnect();
             };
@@ -3564,6 +3655,7 @@
             localStorage.removeItem('tenantName');
             // var socket = io('https://engage.app.spaderent.com');
             $(document).ready(function () {
+                
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
                     method: 'GET',
@@ -3722,8 +3814,10 @@
                     if (message.userType == "tenant" && message.chatId == localStorage.getItem("chatId")) {
                         console.log("check rec", message);
                         messs2 = `<div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
-                                                                    <div style="width: 36px;height: 36px;" class="me-1"> 
-                                                                        <img src="` + (localStorage.getItem("TenantImg")  ? localStorage.getItem("TenantImg") : randomImg) + `" style="border-radius: 50%;height: inherit;" class="message-image" />
+                                                                    <div style="width: 36px;height: 36px;    border-radius: 50%;
+    background: url(` + (localStorage.getItem("TenantImg") && localStorage.getItem("TenantImg") !== "null" ? localStorage.getItem("TenantImg") : randomImg) + `);
+    background-position: center;
+    background-size: cover;" class="me-1"> 
                                                                         </div> 
                                                                     <div class="msg-text">
                                                 <span class="text">${message.message}</span>
@@ -3831,8 +3925,10 @@
                                                                     <span class="text">` + response.data[i]['message'] + `</span>
                                                                     <span style="float: right;" class="text-primary">` + time + `</span>
                                                                     </div>
-                                                                    <div style="width: 36px;height: 36px;" class="ms-1"> 
-                                                                        <img src="` + localStorage.getItem("LandlordImg") + `" style="border-radius: 50%;height: inherit;" class="message-image" />
+                                                                    <div style="width: 36px;height: 36px;    border-radius: 50%;
+    background: url(` + (localStorage.getItem("LandlordImg") && localStorage.getItem("LandlordImg") != "null" ? localStorage.getItem("LandlordImg") : randomImg) + `);
+    background-position: center;
+    background-size: cover;" class="ms-1"> 
                                                                         </div> 
                                                                     </div> 
                                                                     `;
@@ -3841,8 +3937,10 @@
                                                             const timeArray = response.data[i]['created_at'].split(" ")[1].split(":");
                                                             const time = timeArray.slice(0, 2).join(":");
                                                             messs1 += `<div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
-                                                                    <div style="width: 36px;height: 36px;" class="me-1"> 
-                                                                        <img src="` + (localStorage.getItem("TenantImg") ? localStorage.getItem("TenantImg") : randomImg) + `" style="border-radius: 50%;height: inherit;" class="message-image" />
+                                                                <div style="width: 36px;height: 36px;    border-radius: 50%;
+    background: url(` + (localStorage.getItem("TenantImg") !== "null" && localStorage.getItem("TenantImg") ? localStorage.getItem("TenantImg") : randomImg) + `);
+    background-position: center;
+    background-size: cover;" class="me-1"> 
                                                                         </div> 
                                                                     <div class="msg-text">
                                                 <span class="text">` + response.data[i]['message'] + `</span>
@@ -3903,19 +4001,19 @@
                         var tab_pane = $('#tab-pane-ll');
                         tab_pane.empty();
                         let tenantNames = []
-                        if(response.message == "No data found"){
+                        if (response.message == "No data found") {
                             var row = '<div class="mt-5 text-dark" style="text-align: center;">No Tenant Found</div>'
                             tab_pane.append(row);
-                        }else{
+                        } else {
                             response.data[0]?.forEach(function (tenant) {
                                 console.log("viewAllPropertyTenant")
                                 console.log(tenant)
                                 console.log(tenant.tenantImages?.split(",")[0])
-                               
+
                                 var row = `
                                 <a href="javascript:void(0)" onclick="chatTenant(` + tenant.tenantID + `,'` + tenant.firstName + ` ` + tenant.lastName + `',this)"><div class="media new border-top-0 " data-id="` + tenant.tenantID + `">
                                                                 <div class="main-img-user">
-                                                                    <img alt="" src="` + (tenant.tenantImages ? (tenant.tenantImages?.split(",")[0]) : randomImg1) + `">
+                                                                    <img alt="" src="` + (tenant.image ? tenant.image : randomImg1) + `">
                                                                 </div>
                                                                 <div class="media-body">
                                                                     <div class="media-contact-name">
@@ -3947,7 +4045,16 @@
                         },
                         success: function (response) {
                             console.log(response);
-                            localStorage.removeItem('authtoken');
+                            if (localStorage.getItem("htmlLayout")) {
+
+                                const htmlLayoutValue = localStorage.getItem("htmlLayout");
+                                localStorage.clear();
+                                localStorage.setItem("htmlLayout", htmlLayoutValue);
+                            } else {
+                                localStorage.clear();
+
+                            }
+                            // localStorage.removeItem('authtoken');
                             // window.close();
                             window.open('./login_module.html', "_self")
                             console.log('Done');
@@ -4057,19 +4164,19 @@
 
                     // Create image container
                     const imageContainer = document.createElement('div');
-                    imageContainer.setAttribute('style', 'width: 36px; height: 36px;');
+                    imageContainer.setAttribute('style', `width: 36px; height: 36px;border-radius: 50%;background: url(` + (localStorage.getItem("LandlordImg") != "null" && localStorage.getItem("LandlordImg") ? localStorage.getItem("LandlordImg") : randomImg) + `);background-position: center;background-size: cover;`);
                     imageContainer.setAttribute('class', 'ms-1');
-                    const image = document.createElement('img');
-                    image.setAttribute('src', localStorage.getItem("LandlordImg") ? localStorage.getItem("LandlordImg") : "../assets/images/users/5.jpg");
-                    image.setAttribute('style', 'border-radius: 50%; height: inherit;');
-                    image.setAttribute('class', 'message-image');
+                    // const image = document.createElement('img');
+                    // image.setAttribute('src', localStorage.getItem("LandlordImg") != "null" ? localStorage.getItem("LandlordImg") : "../assets/images/users/5.jpg");
+                    // image.setAttribute('style', 'border-radius: 50%; height: inherit;');
+                    // image.setAttribute('class', 'message-image');
 
                     // Append elements
                     mainContainer.appendChild(messageContainer);
                     messageContainer.appendChild(messageText);
                     messageContainer.appendChild(timestampSpan);
                     mainContainer.appendChild(imageContainer);
-                    imageContainer.appendChild(image);
+                    // imageContainer.appendChild(image);
 
                     // Append main container to the messages div
                     messages.appendChild(mainContainer);

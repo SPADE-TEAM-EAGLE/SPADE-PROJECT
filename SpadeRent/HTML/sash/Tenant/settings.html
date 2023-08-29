@@ -2513,8 +2513,8 @@
                                 class="inbox_span"></span></a></li>
                     <li><a href="#side3" data-bs-toggle="tab" class="text-dark">Unread <span
                                 class="Unread_span"></span></a></li>
-                    <li><a href="#side4" data-bs-toggle="tab" class="text-dark">Archive <span
-                                class="archive_span"></span></a></li>
+                    <!-- <li><a href="#side4" data-bs-toggle="tab" class="text-dark">Archive <span
+                                class="archive_span"></span></a></li> -->
                 </ul>
             </div>
             <div class="tab-content">
@@ -3317,11 +3317,11 @@
                     })
                 })
 
-                let password_validate1 = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
-                let validconfirmPassword1 = document.getElementById("id_password1");
-                let confirmPassword1 = document.getElementById("id_password2");
-                let newPassword = document.getElementById("current_password_reset");
-                let spantag11 = document.getElementById("passnotmatch1");
+                var password_validate1 = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
+                var validconfirmPassword1 = document.getElementById("id_password1");
+                var confirmPassword1 = document.getElementById("id_password2");
+                var newPassword = document.getElementById("current_password_reset");
+                var spantag11 = document.getElementById("passnotmatch1");
 
                 confirmPassword1.addEventListener('keyup', confirmPasswordValidation1);
                 validconfirmPassword1.addEventListener('keyup', confirmPasswordValidation1);
@@ -3541,6 +3541,7 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
+                    
                     $("#firstName").val(response.firstName)
                     $("#lastName").val(response.lastName)
                     $("#city").val(response.city)

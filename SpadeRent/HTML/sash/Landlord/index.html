@@ -198,9 +198,9 @@
                         <h6 class="text-default mb-3">Enter a 6-digit code to verify email address</h6>
                         <input id="token" name="token" type="phone" class="form-control form mb-2" pattern="[0-9]{5}"
                             maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                            style="min-width: 200px;max-width: 350px;" data-bs-placement="top" data-bs-toggle="tooltip"
+                            style="width: 100%;" data-bs-placement="top" data-bs-toggle="tooltip"
                             title="" data-bs-original-title="Enter the name of the property.">
-                        <input type="password" class="form-control form mb-2" id="id_password1"
+                        <input type="password" class="form-control form mb-2" id="email-verify-password"
                             aria-describedby="emailHelp" placeholder="Password" data-bs-placement="top"
                             data-bs-toggle="tooltip" title="" data-bs-original-title="Enter password here.">
                         <!-- <a class="text-primary mb-4" href="javascript:void(0)">Change Email</a> -->
@@ -238,7 +238,7 @@
                         <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
                         <h6 class="text-default mb-3">Get started with Spade Rent! You have<span id="days-left"></span>
                             left</h6>
-                        <input type="email" class="form-control form mb-2" style="min-width: 200px;max-width: 350px;"
+                        <input type="email" class="form-control form mb-2" style="width: 100%;"
                             data-bs-placement="top" data-bs-toggle="tooltip" title=""
                             data-bs-original-title="Enter the name of the property." readonly id="user-email">
                         <a class="text-primary mb-4" href="javascript:void(0)" id="change-email">Change Email</a>
@@ -643,7 +643,7 @@
                                         <!-- 2 comments start  -->
 
                                         <!-- 3 comments start  -->
-                                        <div class="dropdown  d-flex notifications">
+                                        <div class="dropdown  d-flex notifications" id="notifications_icon">
                                             <a class="nav-link icon" data-bs-toggle="sidebar-right"
                                                 data-target=".sidebar-right"><i class="fe fe-bell"></i> 
                                                 <span class="badge bg-secondary header-badge bg-primary" id="count_unread"></span>
@@ -960,6 +960,20 @@
                         </div>
                         <!-- PAGE-HEADER END -->
                         <!-- ROW 0  -->
+                        <div>
+                            <p class="d-inline-flex gap-1">
+                                <span>Add Invoicing | </span><a data-bs-toggle="collapse" href="#collapseHelp" role="button" aria-expanded="false" aria-controls="collapseHelp" class="collapsed active">
+                                  Help ? 
+                                </a>
+                            
+                              </p>
+                              <div class="collapse" id="collapseHelp" style="width: 40%;">
+                                <div class="card card-body">
+                                  <span><a href="#" onclick="Intercom('showArticle', 8210506)"><i class="fi fi-rs-question text-light"></i>  How to create Properties? </a></span>
+                                  <span><a href="#" onclick="Intercom('showArticle', 8210444)"><i class="fi fi-rs-question text-light"></i>  How to update Properties? </a></span>
+                                </div>
+                              </div>
+                        </div>
                         <div class="roww" style="display: flex;">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
                                 <div class="d-flex justify-content-end">
@@ -1364,7 +1378,7 @@
                                                 <div class="col-lg-6 mt-5 disabled">
                                                     <span>On Time Finished Rate</span>
                                                 </div>
-                                                <div class="col-lg-6 mt-4 disabled">
+                                                <div class="col-lg-6 mt-4 disabled"
                                                     style="display: flex; justify-content: space-around;">
                                                     <h3><b id="task-complete-percent">97%</b></h3>
                                                     <div class="text-center"
@@ -1631,7 +1645,7 @@
         </div>
         <!--app-content close-->
     </div>
-    <div class="modal fade" id="infoModal" tabindex="-1" role="dialog">
+    <div class="modal fade" id="infoModal_verify" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered text-center" role="document">
             <div class="modal-content modal-content-demo">
                 <div class="modal-body p-0">
@@ -1650,7 +1664,7 @@
                                 <path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"></path>
                             </svg>
                             <h4 class="h4 mb-0 mt-3 fw-bold">Info</h4>
-                            <p class="card-text text-dark">Token code is not match</p>
+                            <p class="card-text text-dark">Token code or Password not matched</p>
                         </div>
                         <!-- <div class="card-footer text-center border-0 pt-0">
                             <div class="row">
@@ -1665,7 +1679,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="succesModal" tabindex="-1" role="dialog">
+    <div class="modal fade" id="succesModal_verify" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered text-center" role="document">
             <div class="modal-content modal-content-demo">
                 <div class="modal-body p-0">
@@ -1727,8 +1741,8 @@
                                     class="inbox_span"></span></a></li>
                         <li><a href="#side3" data-bs-toggle="tab" class="text-dark">Unread <span
                                     class="Unread_span"></span></a></li>
-                        <li><a href="#side4" data-bs-toggle="tab" class="text-dark">Archive <span
-                                    class="archive_span"></span></a></li>
+                        <!-- <li><a href="#side4" data-bs-toggle="tab" class="text-dark">Archive <span
+                                    class="archive_span"></span></a></li> -->
                     </ul>
                 </div>
                 <div class="tab-content">
@@ -1957,6 +1971,7 @@
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
     <script src="../assets/js/getNotification.js"></script>
+<script src="../assets/js/push_notification.js"></script>
     <script src="../assets/js/index-chart.js"></script>
     <!-- <script src="https://backend.app.spaderent.com/"></script> -->
     <script src="../assets/js/email-verification.js"></script>
@@ -1971,7 +1986,7 @@
     //   alert(data.message); // You can customize how you want to display the notification
     // });
     //   socket.emit('message', 'Hello from the client');
-    </script> -->
+    </script> 
     <script>
 
         console.log(document.getElementById('customIntercomButton'))
@@ -2043,15 +2058,9 @@
                     $(".progress").html(myprogress)
                 },
                 error: function (xhr, status, error) {
-                    // $("#myModal_warning").modal("show");
-                    // setTimeout(function () {
-                    //     $('#myModal_warning').modal('hide');
-                    //     window.location = '../Landlord/login_module.html';
-                    // }, 2000);
                     console.log('Error occurred while fetching state and city data.');
                     console.log(xhr);
                     console.log(error);
-                    // console.log('Error occurred while fetching state and city data.');
                 }
             });
             $('#email_verification').on('click', function () {
@@ -2949,41 +2958,7 @@
                     }
                 });
             })
-            $("#verify-btn").on("click", () => {
-                $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/verifyEmailUpdate',
-                    type: 'PUT',
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({
-                        id: id,
-                        token: $("#token").val(),
-                        email: emailChange ? $("#user-email").val() : userEmail,
-                        password: $("#id_password1").val(),
-                    }),
-                    success: function (response) {
-                        console.log(response)
-                        if (response.message == " Email verified successful ") {
-                            localStorage.setItem("authtoken", response.token);
-
-                            $("#modaldemo8").modal("hide")
-                            $("#succesModal").modal("show")
-                            $("#account-text").empty()
-                            $("#email_verification").remove()
-                            //   window.location="./index.html"
-                        } else if (response.message == " token code is not match ") {
-                            // $("#modaldemo8").modal("hide")
-                            //   $("#info-text").text(response.message || response)
-                            $("#infoModal").modal("show")
-                        }
-                    },
-                    error: function (xhr, status, error) {
-                        // window.alert(xhr.statusText)
-                        document.getElementById("verification-spans").style.display = "block";
-                        $("#verification").addClass("is-invalid")
-                        console.error(xhr.responseText);
-                    }
-                });
-            })
+           
             function updateTable(tabId) {
                 var tableBody = $('#' + tabId + ' tbody');
                 var apiUrl = 'https://backend.app.spaderent.com/api/spade/getAllTask'; // Replace with your API endpoint URL
@@ -3123,7 +3098,7 @@
 
     </script>
     <script>
-        let password_validate1 = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
+        var password_validate1 = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
         var validconfirmPassword1 = document.getElementById("id_password1");
         validconfirmPassword1.addEventListener('keyup', confirmPasswordValidation1);
         var spantag11 = document.getElementById("passnotmatch1");
@@ -3206,28 +3181,37 @@
 
 <script>
     function logout() {
-            $(document).ready(function () {
-                $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
-                    type: 'PUT',
-                    contentType: false,
-                    processData: false,
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-                    success: function (response) {
-                        console.log(response);
-                        localStorage.removeItem('authtoken');
-                        // window.close();
-                        window.open('./login_module.html', "_self")
-                        console.log('Done');
-                    },
-                    error: function (xhr, status, error) {
-                        console.log(error);
+        $(document).ready(function () {
+            $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                type: 'PUT',
+                contentType: false,
+                processData: false,
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    console.log(response);
+                    if(localStorage.getItem("htmlLayout")){
+
+                        const htmlLayoutValue = localStorage.getItem("htmlLayout");
+                        localStorage.clear();
+                        localStorage.setItem("htmlLayout", htmlLayoutValue);
+                    }else{
+                        localStorage.clear();
+
                     }
-                });
+                    // localStorage.removeItem('authtoken');
+                    // window.close();
+                    window.open('./login_module.html', "_self")
+                    console.log('Done');
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }
             });
-        }
+        });
+    }
 </script>
     <script src="../assets/js/index-chart.js"></script>
     <!-- demo walktrough start  -->

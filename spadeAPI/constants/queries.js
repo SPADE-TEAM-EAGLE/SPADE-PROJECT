@@ -52,7 +52,15 @@ exports.deleteQuery = (table, ...field) => {
 // check chat whether reciever and sender id  recieverID senderID
 exports.checkChatQuery = `SELECT * FROM chats WHERE receiverID = ? AND senderId = ? OR senderId = ? AND receiverID = ?`;
 exports.checkTenantsChatQuery = `SELECT * FROM chats WHERE senderId = ? AND  receiverID = ?  OR receiverID = ? AND senderId = ?  `;
-
+// check tenant invoice all paid or not
+exports.checkTenantInvoicePaidQuery = `SELECT * FROM invoice WHERE tenantID = ? AND status = 'Unpaid'`;
+// update isTenantAccount in tenant table by id
+exports.updateTenantAccountQuery = `UPDATE tenants SET isTenantAccount = ? WHERE id = ?`;
+exports.updateUserAccountQuery = `UPDATE users SET isUserAccount = ? WHERE id = ?`;
+exports.updateAllTenantsAccountQuery = `UPDATE tenants SET isTenantAccount = ? WHERE landlordID = ?`;
+// check my all tenants invoices are paid 
+exports.checkMyAllTenantsInvoicePaidQuery = `SELECT * FROM invoice WHERE landlordID = ? AND status = 'Unpaid'`;
+exports.checkMyAllTenantsInvoicePaidQuerytenant = `SELECT * FROM invoice WHERE tenantID = ? AND status = 'Unpaid'`;
 // get user data by id
 exports.getUserById = `SELECT active As isUserActive ,image,FirstName,LastName FROM users WHERE id = ?`;
 // exports.getTenantById = `SELECT active As isTenantActive ,FirstName,LastName, Image FROM tenants LEFT JOIN tenantattachfiles ON tenants.id = tenantattachfiles.tenantID WHERE tenants.id = ?`;
@@ -562,7 +570,7 @@ exports.putUnitsUpdate = "UPDATE property SET  units = ?  where id = ? ";
 exports.insertTenantAttachFile =
   "INSERT INTO tenantattachfiles (landlordID, tenantID, Image,imageKey) VALUES (?,?,?,?)";
 exports.insertInvoice =
-  "INSERT INTO invoice (landlordID, tenantID, invoiceType, startDate, endDate, frequency, dueDate,daysDue, repeatTerms, terms,note,status,created_at,totalAmount, recurringNextDate) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+  "INSERT INTO invoice (landlordID, tenantID, invoiceType, startDate, endDate, frequency, dueDate,daysDue, repeatTerms, terms,note,status,created_at,totalAmount,notify, recurringNextDate) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 exports.insertLineItems =
   "INSERT INTO invoicelineitems (invoiceID, category, property, memo,amount,tax) VALUES (?,?,?,?,?,?)";
 exports.insertInvoiceImage =
@@ -648,6 +656,7 @@ t.tripleNet,
 t.leaseStartDate,
 t.leaseEndDate,
 t.increaseRent,
+t.image,
 pu.id as propertyUnitID,
 pu.unitNumber,
 pu.Area AS unitArea,
@@ -964,3 +973,16 @@ LEFT JOIN
   GROUP BY
       tenants.propertyID) AS invoice ON property.propertyId = invoice.propertyId;
 `;
+exports.getAllTenantsQuery = `SELECT DISTINCT tenants.firstName, tenants.lastName, tenants.email
+FROM tenants
+JOIN invoice ON tenants.id = invoice.tenantID
+WHERE invoice.landlordID = ? AND invoice.status = 'paid';
+`;
+exports.getLandlordDetailedQuery = `SELECT DISTINCT users.FirstName, users.LastName, users.Email
+FROM users
+JOIN invoice ON users.id = invoice.landlordID
+WHERE invoice.tenantID = ? AND invoice.status = 'paid';
+`;
+
+exports.updateAllStatusVacantQuery = `UPDATE propertyunits, tenants SET propertyunits.status = ? WHERE tenants.propertyID = propertyunits.propertyID AND tenants.id = ?`;
+

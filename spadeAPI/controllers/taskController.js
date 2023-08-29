@@ -393,7 +393,7 @@ console.log(req.body)
 
       const vendorNames = vendorNamearr.toString();
 
-      if (notifyTenant.toLowerCase() === "yes") {
+      // if (notifyTenant.toLowerCase() === "yes") {
         await taskSendMail(
           tenantName,
           "Property Maintenance: " + task,
@@ -407,8 +407,8 @@ console.log(req.body)
           userId,
           tenantEmail,
         );
-      }
-      if (notifyVendor.toLowerCase() === "yes") {
+      // }
+      // if (notifyVendor.toLowerCase() === "yes") {
         console.log("vendor1");
         for (let i = 0; i < vendorEmailarr.length > 0; i++) {
           console.log("vendor2");
@@ -425,7 +425,7 @@ console.log(req.body)
             userId,
             vendorEmailarr[i],
           );
-        }
+        // }
       }
     }
     return res.send("Created");
@@ -641,7 +641,7 @@ exports.updateTasks = async (req, res) => {
       currentDate,
       taskID
     ]);
-    if (TasksResult.affectedRows === 0) {
+    if (TasksResult[0].affectedRows === 0) {
       // throw new Error("data doesn't inserted in task table");
       res.send("Error1");
     }
@@ -737,7 +737,7 @@ exports.updateTasks = async (req, res) => {
 
     const vendorNames = vendorNamearr.toString();
 
-    if (notifyTenant.toLowerCase() === "yes") {
+    // if (notifyTenant.toLowerCase() === "yes") {
       await taskSendMail(
         tenantName,
 
@@ -752,8 +752,8 @@ exports.updateTasks = async (req, res) => {
         userId,
         tenantEmail,
       );
-    }
-    if (notifyVendor.toLowerCase() === "yes") {
+    // }
+    // if (notifyVendor.toLowerCase() === "yes") {
       for (let i = 0; i < vendorEmailarr.length > 0; i++) {
         console.log("vendor2");
         await taskSendMail(
@@ -769,7 +769,7 @@ exports.updateTasks = async (req, res) => {
           userId,
           vendorEmailarr[i],
         );
-      }
+      // }
     }
     return res.status(200).json({
       message: " task updated successful ",

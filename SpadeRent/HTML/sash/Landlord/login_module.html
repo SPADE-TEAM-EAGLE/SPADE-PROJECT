@@ -285,7 +285,7 @@
   </style>
 </head>
 
-<body onload="check()"> 
+<body> 
   <!-- Modal -->
   <div class="modal fade" id="myModal_warning_connection" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered text-center" role="document">
@@ -318,7 +318,7 @@
                     <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
                     <h6 class="text-default mb-3">Enter a 6-digit code to verify email address</h6>
                     <input id="token" name="token" type="phone" class="form-control form mb-2" pattern="[0-9]{5}" maxlength="6"
-                    oninput="this.value = this.value.replace(/[^0-9]/g, '')" style="min-width: 200px;max-width: 350px;" placeholder="Enter the name of the property.">
+                    oninput="this.value = this.value.replace(/[^0-9]/g, '')" style="width: 100%;" placeholder="Enter 6-digit code">
                     <!-- <a class="text-primary mb-4" href="javascript:void(0)">Change Email</a> -->
                     <div class="">
                         <!-- <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2">Remind me Later</a> -->
@@ -347,7 +347,7 @@
                   <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" style="max-width: 110px;" class="Rent-logo mb-5"  />
                   <h1 class="mb-4 text-dark fw-bold">Verify your Email Address to continue</h1>
                   <h6 class="text-default mb-3">Get started with Spade Rent! Continue with Google to verify</h6>
-                  <input type="email" class="form-control form mb-2" style="min-width: 200px;max-width: 350px;" placeholder="Enter the name of the property." readonly id="user-email">
+                  <input type="email" class="form-control form mb-2" style="width: 100%;" placeholder="Enter the name of the property." readonly id="user-email">
                   <a class="text-primary mb-4" href="javascript:void(0)" id="change-email">Change Email</a>
                   <a class="text-primary mb-4 d-none" href="javascript:void(0)" id="save-email">Save Email</a>
                   <div class="">
@@ -607,6 +607,7 @@
   <script src="../assets/js/sticky.js"></script>
   <!-- CUSTOM JS -->
   <script src="../assets/js/custom.js"></script><script src="../assets/js/getNotification.js"></script>
+<script src="../assets/js/push_notification.js"></script>
   <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J 6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
     </script>
@@ -634,6 +635,68 @@
   <!-- Star Rating-1 Js-->
   <script src="../assets/plugins/ratings-2/jquery.star-rating.js"></script>
   <script src="../assets/plugins/ratings-2/star-rating.js"></script>
+  <!-- <script src="../assets/js/intercom.js"></script> -->
+<script>
+   window.intercomSettings = {
+          api_base: "https://api-iam.intercom.io",
+          app_id: "fjpx1kt1",
+          name:"Dear User", // Full name
+    
+        };
+      
+        // Function to open the Intercom side popup
+        function openIntercomPopup() {
+            const articleid=8210506
+        //   window.Intercom('showNewMessage', '#help-center-article-' + articleid);;
+        window.Intercom('showSpace', 'help');
+
+          
+        }
+      
+        // Attach a click event listener to your custom button
+        document.querySelectorAll('.customIntercomButton').forEach(element => {
+    element.addEventListener('click', openIntercomPopup);
+    
+});
+
+        
+        // Load the Intercom widget
+        (function() {
+          var w = window;
+          var ic = w.Intercom;
+          
+          if (typeof ic === "function") {
+            ic('reattach_activator');
+            ic('update', w.intercomSettings);
+          } else {
+            var d = document;
+            var i = function() {
+              i.c(arguments);
+            };
+            i.q = [];
+            i.c = function(args) {
+              i.q.push(args);
+            };
+            w.Intercom = i;
+            var l = function() {
+              var s = d.createElement('script');
+              
+              s.type = 'text/javascript';
+              s.async = true;
+              s.src = 'https://widget.intercom.io/widget/fjpx1kt1';
+              var x = d.getElementsByTagName('script')[0];
+              x.parentNode.insertBefore(s, x);
+            };
+            if (document.readyState === 'complete') {
+              l();
+            } else if (w.attachEvent) {
+              w.attachEvent('onload', l);
+            } else {
+              w.addEventListener('load', l, false);
+            }
+          }
+        })();`x`
+</script>
   <!-- Sticky js -->
   <script src="../assets/js/sticky.js"></script>
   <!-- CUSTOM JS -->
