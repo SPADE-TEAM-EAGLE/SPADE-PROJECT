@@ -50,7 +50,7 @@ exports.createInvoice = async (req, res) => {
     images
   } = req.body;
   try {
-    const { userId,userName } = req.user;
+    const { userId,userName,businessName } = req.user;
     console.log(req.body)
     // console.log(userId)
     // if (!tenantID || !invoiceType || !startDate || !endDate || !frequency || !dueDate || !dueDays || !repeatTerms || !terms || !additionalNotes || !lineItems || !sendmails || !totalAmount) {
@@ -73,14 +73,16 @@ exports.createInvoice = async (req, res) => {
         const TenantName = selectTenantsResult[0][0].firstName + " " + selectTenantsResult[0][0].lastName;
         // send mail to tenant from landlord company
         const mailSubject = "invoice From " + userName;
+        var businessNames = businessName || "N/A";
         sendMail.invoiceSendMail(
           TenantName,
           TenantEmail,
           mailSubject,
           dueDate,
           invoiceID,
-          frequency,
-          userId
+          userName,
+          userId,
+          businessNames
         );
       }
 
@@ -291,7 +293,7 @@ exports.UpdateInvoice = async (req, res) => {
     images,
   } = req.body;
   try {
-    const { userId,userName } = req.user;
+    const { userId,userName,businessName } = req.user;
     // console.log(req.body)
     const currentDate = new Date();
     const invoiceUpdatedResult = await queryRunner(updateInvoice, [
@@ -323,14 +325,17 @@ exports.UpdateInvoice = async (req, res) => {
         selectTenantsResult[0][0].lastName;
 
       const mailSubject = "invoice From " + userName;
+      var businessNames = businessName || "N/A";
       sendMail.invoiceSendMail(
+
         tenantName,
         tenantEmail,
         mailSubject,
         dueDate,
         invoiceID,
-        frequency,
-        userId
+        userName,
+        userId,
+        businessNames
       );
     }
     //  if line items is not empty then delete line items and insert new line items
@@ -470,7 +475,7 @@ exports.invoiceDelete = async (req, res) => {
 //  ############################# Create Invoice Start ############################################################
 exports.resendEmail = async (req, res) => {
   const { invoiceID } = req.query;
-  const { userId,userName } = req.user;
+  const { userId,userName,businessName } = req.user;
   try {
     const resendEmailResult = await queryRunner(resendEmailQuery, [invoiceID]);
 
@@ -483,14 +488,16 @@ exports.resendEmail = async (req, res) => {
         " " +
         resendEmailResult[0][0].lastName;
       const mailSubject = "Invoice From " + userName;
+      var businessNames = businessName || "N/A";
       sendMail.invoiceSendMail(
         tenantName,
         tenantEmail,
         mailSubject,
         dueDays,
         invoiceID,
-        frequency,
-        userId
+        userName,
+        userId,
+        businessNames
       );
     }
     res.status(200).json({

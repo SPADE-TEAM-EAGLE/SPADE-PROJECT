@@ -493,7 +493,7 @@ exports.welcomeHTMLLANDLORD = (email, name) => {
     </body></html>`;
 };
 
-exports.invoiceHTML = (tenantName, dueDays, invoiceID, landlordName) => {
+exports.invoiceHTML = (tenantName, dueDays, invoiceID, landlordName,businessName) => {
   return `<!DOCTYPE html>
   <html lang="en">
   <head>
@@ -505,15 +505,14 @@ exports.invoiceHTML = (tenantName, dueDays, invoiceID, landlordName) => {
   <body>
       <h4>Dear <span style="  color: #1467B0; ">${tenantName},</span></h4>
       <br>
-      <p>Please find attached your rent invoice with number <b>${invoiceID}</b>.
-           and Due Date: <b>${dueDays}</b> If you have any questions,
+      <p>Please find attached your rent and Due Date: <b>${dueDays}</b> If you have any questions,
             please let us know. </p>
   
             <p>Have a great day and thank you for your business<b>!</b></p>
   
             <p>Sincerely</p>
             <h4>${landlordName}</h4> 
-            <p>company Name</p>
+            <p>${businessName}</p>
   </body>
   </html>`;
 };

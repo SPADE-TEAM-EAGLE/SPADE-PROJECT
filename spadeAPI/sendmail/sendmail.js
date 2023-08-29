@@ -64,7 +64,8 @@ exports.invoiceSendMail = async (
   dueDays,
   invoiceID,
   landlordName,
-  id
+  id,
+  businessName
 ) => {
   try {
     console.log(id)
@@ -82,7 +83,7 @@ exports.invoiceSendMail = async (
       to: tenantEmail,
       // to:"aj8706786@gmail.com",
       subject: mailSubject,
-      html: codeHTML.invoiceHTML(tenantName, dueDays, invoiceID, landlordName),
+      html: codeHTML.invoiceHTML(tenantName, dueDays, invoiceID, landlordName,businessName),
     };
     transpoter.sendMail(mailOptions, function (error, info) {
       if (error) {
