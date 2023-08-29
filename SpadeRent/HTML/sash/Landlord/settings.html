@@ -9959,8 +9959,9 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
 
 })
                 $("#close-request").on("click",function(){
+
                     $.ajax({
-    url: 'http://localhost:3000/api/spade/userCheckTenantPaidInvoice',
+    url: 'https://backend.app.spaderent.com/api/spade/userCheckTenantPaidInvoice',
     method: 'GET',
     headers: {
         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -9991,12 +9992,13 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
             $("#myModal_warning").modal("show");
             setTimeout(function () {
                 $('#myModal_warning').modal('hide');
-                window.location = '../Landlord/login_module.html';
+                // window.location = '../Landlord/login_module.html';
             }, 2000);
         }
     }
 });
                 })
+                
                 var vendor; var categoryId; var vendorCategoryId
                 $('#add-item-container1,#add-item-container5').on('click', '#del-btn-complete', function () {
                     vendor = false
