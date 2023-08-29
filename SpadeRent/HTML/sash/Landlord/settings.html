@@ -9906,22 +9906,22 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                             console.log(response)
 
                             if (response.email == "yes") {
+                                $("input[name='example-radios3'][value='Enable']").prop("checked", true);
+                            } else {
+                                $("input[name='example-radios3'][value='Disable']").prop("checked", true);
+                            } if (response.push == "yes") {
                                 $("input[name='example-radios1'][value='Enable']").prop("checked", true);
+
+
                             } else {
                                 $("input[name='example-radios1'][value='Disable']").prop("checked", true);
-                            } if (response.push == "yes") {
+
+                            } if (response.text == "yes") {
                                 $("input[name='example-radios2'][value='Enable']").prop("checked", true);
 
 
                             } else {
                                 $("input[name='example-radios2'][value='Disable']").prop("checked", true);
-
-                            } if (response.text == "yes") {
-                                $("input[name='example-radios3'][value='Enable']").prop("checked", true);
-
-
-                            } else {
-                                $("input[name='example-radios3'][value='Disable']").prop("checked", true);
 
 
                             }
@@ -10069,9 +10069,9 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                 $("#save-notification-setting").click(() => {
                     // console.log($("#example-radios1").val())
                     const data = {
-                        isEmailNotify: $("input[name='example-radios1']:checked").val() == "Enable" ? "yes" : "no",
-                        isPushNotify: $("input[name='example-radios2']:checked").val() == "Enable" ? "yes" : "no",
-                        textNotification: $("input[name='example-radios3']:checked").val() == "Enable" ? "yes" : "no"
+                        isEmailNotify: $("input[name='example-radios3']:checked").val() == "Enable" ? "yes" : "no",
+                        isPushNotify: $("input[name='example-radios1']:checked").val() == "Enable" ? "yes" : "no",
+                        textNotification: $("input[name='example-radios2']:checked").val() == "Enable" ? "yes" : "no"
                     }
                     $.ajax({
                         url: 'https://backend.app.spaderent.com/api/spade/notify',
@@ -10082,6 +10082,7 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
+                            notificationIconDisplay()
                             $("#myModal_success p").text("Succesfully Updated!!!")
                             $("#myModal_success").modal("show")
                             setTimeout(function () {
