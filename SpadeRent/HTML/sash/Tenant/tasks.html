@@ -2507,8 +2507,12 @@ $('#fileInput').on('change', function () {
                     const images = data.ImageKey.split(",")
                     $("#view-task-images").empty()
                     images.forEach((image) => {
-                        $("#view-task-images").append(`
-                            <img src="../../../../spadeAPI/uploads/${image}" width=200px height=200px alt=""> &nbsp;`)
+                        if(image.includes(".pdf")){
+                            $("#view-task-images").append(``)
+                        }else{
+                            $("#view-task-images").append(`
+                            <img src="${image}" width=200px height=200px alt=""> &nbsp;`)
+                        }
                     })
                 }
                 $("#viewModal-tasks").modal("show")
@@ -2545,34 +2549,81 @@ $('#fileInput').on('change', function () {
             function updateSelectedFilesContainer() {
                 var selectedFilesContainer = $('.file-grid');
                 selectedFilesContainer.empty();
-                console.log(selectedFiles)
-                selectedFiles.forEach(function (file, index) {
 
+                selectedFiles.forEach(function (file, index) {
                     var fileElement = $('<div>')
-                        .addClass('selected-file')
-                        .append(
-                            $('<img>')
-                                .addClass('file-preview')
-                                .attr('src', typeof file ==="object" ? URL.createObjectURL(file) : '../../../../spadeAPI/uploads/' + file)
-                        )
-                        .append(
-                            $('<div>')
-                                .addClass('file-details')
-                                .append($('<span>').text("Image-" + (index + 1)))
-                            // .append($('<span>').text(fileSize))
-                        )
-                        .append(
-                            $('<span>')
-                                .addClass('delete-file')
-                                .text('X')
-                                .attr('data-index', index)
-                        )
-                        .appendTo(selectedFilesContainer);
+                        .addClass('selected-file');
+
+                    if (file.type && file.type.includes('image')) {
+                        // Handle image files
+                        fileElement.append(
+                            $('<div>').addClass('file-preview')
+                                .append($('<img style="height:80px">').attr('src', URL.createObjectURL(file)))
+                        );
+                    } else if (file.type && file.type.includes('pdf')) {
+                        // Handle PDF files
+                        fileElement.append(
+                            $('<div>').addClass('file-preview')
+                                .append($('<i style="font-size:50px">').addClass('fi fi-rs-file-pdf')) // Add your PDF icon class here
+                        );
+                    } else {
+                        // Handle S3 bucket URLs for images and PDFs
+                        if (file?.endsWith('.jpg') || file?.endsWith('.png')) {
+                            fileElement.append(
+                                $('<div>').addClass('file-preview')
+                                    .append($('<img style="height:80px">').attr('src', file))
+                                    
+                            );
+                            console.log(file)
+                        } else if (file?.endsWith('.pdf')) {
+                            fileElement.append(
+                                $('<div>').addClass('file-preview')
+                                    .append($('<i style="font-size:50px">').addClass('fi fi-rs-file-pdf'))
+                            );
+                            console.log(file)
+                        } else {
+                            // Handle other files (you can modify this part as needed)
+                            fileElement.append(
+                                $('<div>').addClass('file-preview')
+                                    .append($('<i>').addClass('fi fi-rs-file')) // Add an appropriate class for other files
+                            );
+                            console.log(file)
+                        }
+                    }
+                    if (file instanceof File) {
+                        fileElement
+                            .append(
+                                $('<div>')
+                                    .addClass('file-details')
+                                    .append($('<span>').text(file.type.includes('pdf') ? "PDF-" + (index + 1) : "Image-" + (index + 1)))
+                            )
+                            .append(
+                                $('<span>')
+                                    .addClass('delete-file')
+                                    .text('X')
+                                    .attr('data-index', index)
+                            )
+                            .appendTo(selectedFilesContainer);
+                    } else if(file instanceof Object) {
+                        if(file.Image){
+                            fileElement
+                            .append(
+                                $('<div>')
+                                    .addClass('file-details')
+                                    .append($('<span>').text(file?.imageKey?.includes('pdf') ? "PDF-" + (index + 1) : "Image-" + (index + 1)))
+                            )
+                            .append(
+                                $('<span>')
+                                    .addClass('delete-file')
+                                    .text('X')
+                                    .attr('data-index', index)
+                            )
+                            .appendTo(selectedFilesContainer);
+                        }
+                    }
 
                 });
-
             }
-
             function formatFileSize(bytes) {
                 if (bytes === 0) return '0 Bytes';
                 var k = 1024;
