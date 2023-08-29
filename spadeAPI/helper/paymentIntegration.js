@@ -101,8 +101,8 @@ const requestData = {
   dateOfBirth: "01-01-2023",
   county:"Pakistan",
   timeStamp: timestamp,
-  checksum: sha256(utf8.encode(config.merchantId)+utf8.encode(config.merchantSiteId)+utf8.encode("123")+utf8.encode(config.clientRequestId)+utf8.encode("John")+
-            utf8.encode("Smith")+utf8.encode(timestamp)+utf8.encode(config.Secret_Key))
+  // checksum: sha256(config.merchantId)+config.merchantSiteId)+"123")+utf8.encode(config.clientRequestId)+utf8.encode("John")+ utf8.encode("Smith")+utf8.encode(timestamp)+utf8.encode(config.Secret_Key))
+  checksum: sha256(config.merchantId+config.merchantSiteId+"123"+config.clientRequestId+"John"+ "Smith"+timestamp+config.Secret_Key)
 };
 const requestOptions = {
   method: "POST",
