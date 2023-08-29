@@ -153,7 +153,6 @@ exports.checkemail = async function (req, res) {
 };
 
 exports.getUser = (req, res) => {
-
   res.status(200).json(req.user);
 };
 
@@ -209,21 +208,26 @@ exports.Signin = async function (req, res) {
           expiresIn: "3h",
         });
 
-
         // const emai = "umairnazakat2222@gmail.com"
         //  const emailMessage =  await verifyMailCheck(email);
         // ################################# Count ##############################################
         const userId = selectResult[0][0].id;
         console.log(userId);
         // Property
-        const propertycheckresult = await queryRunner(selectQuery("property", "landlordID"), [userId]);
+        const propertycheckresult = await queryRunner(
+          selectQuery("property", "landlordID"),
+          [userId]
+        );
         if (propertycheckresult[0].length > 0) {
           property = "true";
         } else {
-          property = "false"
+          property = "false";
         }
         // Tenant
-        const tenantcheckresult = await queryRunner(selectQuery("tenants", "landlordID"), [userId]);
+        const tenantcheckresult = await queryRunner(
+          selectQuery("tenants", "landlordID"),
+          [userId]
+        );
         if (tenantcheckresult[0].length > 0) {
           tenants = "true";
         } else {
@@ -231,31 +235,38 @@ exports.Signin = async function (req, res) {
         }
 
         //Invoice
-        const invoicecheckresult = await queryRunner(selectQuery("invoice", "landlordID"), [userId]);
+        const invoicecheckresult = await queryRunner(
+          selectQuery("invoice", "landlordID"),
+          [userId]
+        );
         if (invoicecheckresult[0].length > 0) {
           invoice = "true";
         } else {
-          invoice = "false"
+          invoice = "false";
         }
 
         //Task
-        const taskcheckresult = await queryRunner(selectQuery("task", "landlordID"), [userId]);
+        const taskcheckresult = await queryRunner(
+          selectQuery("task", "landlordID"),
+          [userId]
+        );
         if (taskcheckresult[0].length > 0) {
           task = "true";
         } else {
-          task = "false"
+          task = "false";
         }
 
         //vendors
-        const vendorscheckresult = await queryRunner(selectQuery("vendor", "LandlordID"), [userId]);
+        const vendorscheckresult = await queryRunner(
+          selectQuery("vendor", "LandlordID"),
+          [userId]
+        );
         if (vendorscheckresult[0].length > 0) {
           vendors = "true";
         } else {
-          vendors = "false"
+          vendors = "false";
         }
         // ################################# Count ##############################################
-
-
 
         if (selectResult[0][0].isUserAccount == "1") {
           // res.status(200).json({
@@ -264,13 +275,6 @@ exports.Signin = async function (req, res) {
           //   message: "Successful Login",
           // });
           // }
-
-
-
-
-
-
-
 
           if (selectResult[0][0].userVerified == "Email Verified") {
             // ################################# Count ##############################################
@@ -371,7 +375,6 @@ exports.Signin = async function (req, res) {
               });
             }
           }
-
         } else {
           res.status(200).json({
             // token: token,
@@ -859,7 +862,19 @@ exports.property = async (req, res) => {
       ]);
       const FullName =
         landlordUser[0][0].FirstName + " " + landlordUser[0][0].LastName;
-      // await taskSendMail("tenantName", mailSubject, "dueDate", FullName, "property", "assignedTo", "priority", "companyName", "contactLandlord", userId, email);
+      await taskSendMail(
+        "tenantName",
+        mailSubject,
+        "dueDate",
+        FullName,
+        "property",
+        "assignedTo",
+        "priority",
+        "companyName",
+        "contactLandlord",
+        userId,
+        email
+      );
     }
     const { insertId } = propertyResult[0];
     // we are using loop to send images data into
@@ -1981,7 +1996,7 @@ exports.checkAllTenantsPaid = async (req, res) => {
   try {
     const { userId, email } = req.user;
     const { password } = req.query;
-    console.log(req.query)
+    console.log(req.query);
 
     const selectResult = await queryRunner(selectQuery("users", "Email"), [
       email,
@@ -2092,13 +2107,11 @@ exports.getInvoiceDashboardData = async (req, res) => {
     const { userId } = req.user;
     const { start, end, propertyId } = req.params;
     if (propertyId) {
-      console.log(propertyId)
-      const getAllInvoiceData = await queryRunner(getInvoiceGraphDataByPropertyId, [
-        propertyId,
-        userId,
-        start,
-        end
-      ]);
+      console.log(propertyId);
+      const getAllInvoiceData = await queryRunner(
+        getInvoiceGraphDataByPropertyId,
+        [propertyId, userId, start, end]
+      );
       res.status(200).json(getAllInvoiceData[0]);
     } else {
       const getAllInvoiceData = await queryRunner(getInvoiceGraphData, [
@@ -2326,8 +2339,7 @@ exports.checkSystem = async (req, res) => {
       message: error.message,
     });
   }
-
-}
+};
 exports.filterOutDashbordDataByProperty = async (req, res) => {
   try {
     const { propertyId } = req.params;
@@ -2338,7 +2350,6 @@ exports.filterOutDashbordDataByProperty = async (req, res) => {
     res.status(200).json({
       property: getAllPropertyData[0],
     });
-
   } catch (error) {
     res.status(400).json({
       message: error.message,
