@@ -2591,7 +2591,20 @@
                             </div>
                         </div>
                         <!-- PAGE-HEADER END -->
-
+                        <div>
+                            <p class="d-inline-flex gap-1">
+                                <span>Add Invoicing | </span><a data-bs-toggle="collapse" href="#collapseHelp" role="button" aria-expanded="false" aria-controls="collapseHelp" class="collapsed active">
+                                  Help ? 
+                                </a>
+                            
+                              </p>
+                              <div class="collapse" id="collapseHelp" style="width: 40%;">
+                                <div class="card card-body">
+                                  <span><a href="#" onclick="Intercom('showArticle', 8210506)"><i class="fi fi-rs-question text-light"></i>  How to create Properties? </a></span>
+                                  <span><a href="#" onclick="Intercom('showArticle', 8210444)"><i class="fi fi-rs-question text-light"></i>  How to update Properties? </a></span>
+                                </div>
+                              </div>
+                        </div>
                         <div class="cardd">
                             <div class="card-body pt-0">
                                 <div class="panel panel-primary">
@@ -9825,13 +9838,13 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
         invoiceData=response?.data[0].filter(function(invoice){
             return invoice.status=="Unpaid"
         })
-        // if(invoiceData.length>=1){
-        //     $("#closeButton").prop("disabled",true)
-        //     $("#unpaid-text").removeClass("d-none")
-        // }else{
-        //     $("#closeButton").prop("disabled",false)
-        //     $("#unpaid-text").addClass("d-none")
-        // }
+        if(invoiceData.length>=1){
+            $("#closeButton").prop("disabled",true)
+            $("#unpaid-text").removeClass("d-none")
+        }else{
+            $("#closeButton").prop("disabled",false)
+            $("#unpaid-text").addClass("d-none")
+        }
         invoiceData.forEach(function (invoice) {
             var row = $("<tr>");
 
@@ -9903,25 +9916,26 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                             console.log(response)
 
                             if (response.email == "yes") {
-                                $("input[name='example-radios1'][value='Enable']").prop("checked", true);
-                            } else {
-                                $("input[name='example-radios1'][value='Disable']").prop("checked", true);
-                            } if (response.push == "yes") {
-                                $("input[name='example-radios2'][value='Enable']").prop("checked", true);
-
-
-                            } else {
-                                $("input[name='example-radios2'][value='Disable']").prop("checked", true);
-
-                            } if (response.text == "yes") {
                                 $("input[name='example-radios3'][value='Enable']").prop("checked", true);
-
-
                             } else {
                                 $("input[name='example-radios3'][value='Disable']").prop("checked", true);
+                            } if (response.push == "yes") {
+                                $("input[name='example-radios1'][value='Enable']").prop("checked", true);
 
 
-                            }
+                            } else {
+                                $("input[name='example-radios1'][value='Disable']").prop("checked", true);
+
+                            } 
+                            // if (response.text == "yes") {
+                            //     $("input[name='example-radios3'][value='Enable']").prop("checked", true);
+
+
+                            // } else {
+                            //     $("input[name='example-radios3'][value='Disable']").prop("checked", true);
+
+
+                            // }
                         },
                         error: function (xhr, status, error) {
                             console.log('Error occurred while fetching state and city data.');
@@ -10066,9 +10080,9 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                 $("#save-notification-setting").click(() => {
                     // console.log($("#example-radios1").val())
                     const data = {
-                        isEmailNotify: $("input[name='example-radios1']:checked").val() == "Enable" ? "yes" : "no",
-                        isPushNotify: $("input[name='example-radios2']:checked").val() == "Enable" ? "yes" : "no",
-                        textNotification: $("input[name='example-radios3']:checked").val() == "Enable" ? "yes" : "no"
+                        isEmailNotify: $("input[name='example-radios3']:checked").val() == "Enable" ? "yes" : "no",
+                        isPushNotify: $("input[name='example-radios1']:checked").val() == "Enable" ? "yes" : "no",
+                        textNotification: $("input[name='example-radios2']:checked").val() == "Enable" ? "yes" : "no"
                     }
                     $.ajax({
                         url: 'https://backend.app.spaderent.com/api/spade/notify',

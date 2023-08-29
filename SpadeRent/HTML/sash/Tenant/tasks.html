@@ -2507,8 +2507,12 @@ $('#fileInput').on('change', function () {
                     const images = data.ImageKey.split(",")
                     $("#view-task-images").empty()
                     images.forEach((image) => {
-                        if(image.includes(".pdf")){
-                            $("#view-task-images").append(``)
+                        if(image.endsWith(".pdf")){
+                            
+                            $("#view-task-images").append(
+                                $('<div>').addClass('file-preview d-inline')
+                                    .append($('<i style="font-size:100px">').addClass('fi fi-rs-file-pdf'))
+                            );
                         }else{
                             $("#view-task-images").append(`
                             <img src="${image}" width=200px height=200px alt=""> &nbsp;`)
@@ -2580,7 +2584,7 @@ $('#fileInput').on('change', function () {
                                 $('<div>').addClass('file-preview')
                                     .append($('<i style="font-size:50px">').addClass('fi fi-rs-file-pdf'))
                             );
-                            console.log(file)
+                            console.log(file,"pdf")
                         } else {
                             // Handle other files (you can modify this part as needed)
                             fileElement.append(
