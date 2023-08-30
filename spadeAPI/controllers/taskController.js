@@ -137,11 +137,11 @@ exports.deleteVendor = async (req, res) => {
       );
       if (deleteVendorResult[0].affectedRows > 0) {
         res.status(200).json({
-          message: " Vendor Deleted successful",
+          message: "Vendor Deleted successful",
         });
       }else{
         res.status(400).json({
-          message: " Vendor not Deleted successful",
+          message: "Vendor not Deleted successful",
         });
       }     
     } catch (error) {
