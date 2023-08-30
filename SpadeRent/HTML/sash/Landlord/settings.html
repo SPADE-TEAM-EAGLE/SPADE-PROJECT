@@ -9137,7 +9137,8 @@
         <!-- <script src="../assets/switcher/js/switcher.js"></script> -->
 
         <!-- CUSTOM JS -->
-        <!--     <script src="../assets/js/getNotification.js"></script> -->
+        <!--     <script src="../assets/js/getNotification.js"></script>
+<script src="../assets/js/push_notification.js"></script> -->
 
         <!-- CUSTOM JS -->
         <!-- <script src="../assets/js/custom-swicher.js"></script> -->
@@ -9169,11 +9170,13 @@
         <script src="../assets/plugins/chart/Chart.bundle.js"></script>
         <script src="../assets/plugins/chart/utils.js"></script>
         <!-- <script src="../assets/js/form-wizard.js"></script> -->
-        <!-- <script src="../assets/js/getNotification.js"></script></script> -->
+        <!-- <script src="../assets/js/getNotification.js"></script>
+<script src="../assets/js/push_notification.js"></script></script> -->
         <!-- <script src="https://code.jquery.com/jquery-latest.min.js"></script> -->
         <script src="../assets/js/email-verification.js"></script>
     <script src="../assets/js/intercom.js"></script>
     <script src="../assets/js/getNotification.js"></script>
+<script src="../assets/js/push_notification.js"></script>
         <script>
             function profileComplete(){
                 
@@ -9956,8 +9959,9 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
 
 })
                 $("#close-request").on("click",function(){
+
                     $.ajax({
-    url: 'http://localhost:3000/api/spade/userCheckTenantPaidInvoice',
+    url: 'https://backend.app.spaderent.com/api/spade/userCheckTenantPaidInvoice',
     method: 'GET',
     headers: {
         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -9988,12 +9992,13 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
             $("#myModal_warning").modal("show");
             setTimeout(function () {
                 $('#myModal_warning').modal('hide');
-                window.location = '../Landlord/login_module.html';
+                // window.location = '../Landlord/login_module.html';
             }, 2000);
         }
     }
 });
                 })
+                
                 var vendor; var categoryId; var vendorCategoryId
                 $('#add-item-container1,#add-item-container5').on('click', '#del-btn-complete', function () {
                     vendor = false
@@ -10093,6 +10098,7 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
+                            notificationIconDisplay()
                             $("#myModal_success p").text("Succesfully Updated!!!")
                             $("#myModal_success").modal("show")
                             setTimeout(function () {

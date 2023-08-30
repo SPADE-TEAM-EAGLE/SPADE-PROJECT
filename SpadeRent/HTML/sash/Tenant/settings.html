@@ -906,8 +906,92 @@
         </div>
     </div>
     <!-- /GLOBAL-LOADER -->
+<div class="modal fade" id="requestcloseaccount" tabindex="-1" role="dialog">
+                                    <div class="modal-dialog modal-md modal-dialog-scrollable" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true"><img
+                                                            src="../assets/images/cross-circle.svg" /></span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body text-center text-dark">
+                                                <div class="side-headerrr">
+                                                    <a class="header-brand1" href="index.html">
+                                                        <img src="../assets/images/logo_white.png"
+                                                            class="header-brand-img desktop-logo" alt="logo">
+                                                        <img src="../assets/images/Artboard GÇô 1.svg"
+                                                            class="header-brand-img light-logo1" alt="logo">
+                                                    </a>
+                                                </div>
+                                                <!-- <img src="../assets/images/logo-preloader.png"
+                                                class="model-account-request-close-logo mb-4"
+                                                alt=""> -->
+                                                <img src="../assets/images/request-close-user.png" alt="">
+                                                <h2 class="text-primary"><b>Your account closure request
+                                                        is initiated.</b>
+                                                </h2>
+                                                <p>Your account will be closed soon and you will receive email on
+                                                    closure.</p>
 
+                                                <button class="btn btn-primary btn-pill m-2" id="form1showw"
+                                                    type="button" data-bs-dismiss="modal" aria-label="Close"
+                                                    style="width: fit-content;">
+                                                    &nbsp; Ok &nbsp;
+                                                </button>
+                                            </div>
+                                            <div class="modal-footer">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- request close account model box start  -->
+
+
+                                    <div class="card-body pb-0 bg-recentorder" style="display: none;">
+                                        <h3 class="card-title text-white">Recent Orders</h3>
+                                        <div class="chartjs-wrapper-demo">
+                                            <canvas id="recentorders" class="chart-dropshadow"></canvas>
+                                        </div>
+                                    </div>
+                                    <div id="flotback-chart" class="flot-background" style="display: none;"></div>
+
+                                </div>
     <!-- Modal -->
+    <div class="modal fade" id="infoModal_account" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
+                        <!-- <div class="card-header border-0 pt-3">
+                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                            </button>
+                        </div> -->
+                        <div class="card-body text-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24">
+                                <path fill="#fad383"
+                                    d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z">
+                                </path>
+                                <circle cx="12" cy="16" r="1" fill="#f7b731"></circle>
+                                <path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"></path>
+                            </svg>
+                            <h4 class="h4 mb-0 mt-3 fw-bold">Info</h4>
+                            <p class="card-text text-dark" id="info-text"></p>
+                        </div>
+                        <!-- <div class="card-footer text-center border-0 pt-0">
+                            <div class="row">
+                                <div class="text-center">
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">delete</a>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
@@ -1680,8 +1764,8 @@
                                                     <li><a href="#tab6" data-bs-toggle="tab">Security
                                                             Settings</a></li>
                                                     <li><a href="#tab7" data-bs-toggle="tab">Appearance</a></li>
-                                                    <!-- <li><a href="#tab8" data-bs-toggle="tab">Payment Method</a></li>
-                                                    <li><a href="#tab9" data-bs-toggle="tab">Close Account</a></li> -->
+                                                    <!-- <li><a href="#tab8" data-bs-toggle="tab">Payment Method</a></li> -->
+                                                    <li><a href="#tab9" data-bs-toggle="tab">Close Account</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -2385,7 +2469,7 @@
                                                                 <div class="form-group">
                                                                     <label for=""><b>Current Password</b></label>
                                                                     <input type="password" class="form-control"
-                                                                        name="password" id="current_password"
+                                                                        name="password" id="current_password_acount_close"
                                                                         aria-describedby="emailHelp"
                                                                         placeholder="Password" data-bs-placement="top"
                                                                         data-bs-toggle="tooltip" title=""
@@ -2404,11 +2488,9 @@
                                                                 <div class="form-group">
                                                                     <label for=""><b>Confirm Password</b></label>
                                                                     <input type="password" class="form-control"
-                                                                        name="password" id="confirm_password"
+                                                                        name="password" id="confirm_password_acount_close"
                                                                         aria-describedby="emailHelp"
-                                                                        placeholder="Password" data-bs-placement="top"
-                                                                        data-bs-toggle="tooltip" title=""
-                                                                        data-bs-original-title="Enter password here.">
+                                                                        placeholder="Enter Confirm Password">
                                                                     <i class="fi fi-rs-eye text-dark fs-20 toggle-password"
                                                                         toggle="#confirm_password" style="cursor: pointer;
                                                                 float: right;
@@ -2419,9 +2501,10 @@
                                                                 <div class="col-lg-12">
                                                                     <button
                                                                         class="btn btn-primary text-light btn-pill mt-2"
-                                                                        data-bs-target="#requestcloseaccount"
+                                                                        
                                                                         data-bs-toggle="modal"
-                                                                        style="width: fit-content; border: transparent;"><b>Request
+                                                                        disabled
+                                                                        style="width: fit-content; border: transparent;" id="close-request"><b>Request
                                                                             to Close the Account</b></button>
                                                                 </div>
                                                             </div>
@@ -2778,6 +2861,30 @@
             <!-- CHART-DONUT JS -->
             <script src="../assets/js/charts.js"></script>
             <script src="../assets/js/getNotificationTenant.js"></script>
+            <script>
+            var password_validate1 = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
+                
+                var password_account=document.getElementById("current_password_acount_close");
+            var confim_password_account=document.getElementById("confirm_password_acount_close");
+            password_account.addEventListener('keyup', confirmPasswordValidation2);
+            confim_password_account.addEventListener('keyup', confirmPasswordValidation2);
+            function confirmPasswordValidation2(){
+                if (password_account.value == confim_password_account.value && confim_password_account.value.match(password_validate1)) {
+                    password_account.classList.add("border-green");
+                    password_account.classList.remove("border-red");
+                    confim_password_account.classList.add("border-green");
+                    confim_password_account.classList.remove("border-red");
+                    document.getElementById("close-request").disabled = false;
+                } else if(password_account.value.match(password_validate1)) {
+                    password_account.classList.add("border-green");
+                    password_account.classList.remove("border-red");
+                }else{
+                    password_account.classList.remove("border-green");
+                    password_account.classList.add("border-red");
+                    document.getElementById("close-request").disabled = true;
+                }
+            }
+            </script>
             <script>
                 //dark and light mode settings
                 const labelInputs = document.querySelectorAll(".label");
@@ -3446,6 +3553,47 @@
                         }
                     }
                 })
+                $("#close-request").on("click",function(){
+
+$.ajax({
+url: 'https://backend.app.spaderent.com/api/spade/tenantAllPaidInvoice',
+method: 'GET',
+headers: {
+'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+},
+data: {
+"password": $("#current_password_acount_close").val(),
+},
+success: function (response) {
+if(response.message=="Tenant has unpaid invoices"){
+$("#info-text").text("show");
+$("#infoModal_account").modal("show");
+setTimeout(function () {
+$('#infoModal_account').modal('hide');
+}, 2000);
+}else if(response.message=="Tenant has paid invoices"){
+$("#requestcloseaccount").modal("show")
+}
+
+},
+error: function (xhr, status, error) {
+console.log('Error occurred while fetching invoices.');
+if(xhr?.responseJSON?.message=="Password is incorrect"){
+$("#infoModal_account").modal("show");
+setTimeout(function () {
+$('#infoModal_account').modal('hide');
+}, 2000);
+}else{
+$("#myModal_warning").modal("show");
+setTimeout(function () {
+$('#myModal_warning').modal('hide');
+// window.location = '../Landlord/login_module.html';
+}, 2000);
+}
+}
+});
+})
+
                 $(document).on("click", "#save_profile", () => {
                     let userData = {
                         firstName: $("#firstName").val(),
@@ -3491,7 +3639,7 @@
                                         setTimeout(function () {
                                             $("#myModal_success").modal("hide");
                                         }, 2000);
-                                        getData()
+
                                     },
                                     error: function (xhr, status, error) {
                                         console.log('Error occurred while fetching state and city data.');
