@@ -799,7 +799,7 @@
         }
 
         .activee {
-            border-radius: 31px !important;
+            border-radius: 25px !important;
             border: 5px solid #1467B0 !important;
         }
 
@@ -1596,6 +1596,10 @@
 
         .tab-content .btn i {
             color: #000;
+        }
+
+        #tenant-invite-none {
+            display: none;
         }
     </style>
 
@@ -7431,7 +7435,7 @@
 
                                                     <hr style="background-color: #D3D3D3;">
                                                     <div class="row">
-                                                        <div class="col-xl-3 col-md-6 col-sm-12">
+                                                        <div class="col-xl-3 col-md-6 col-sm-12" id="tenant-invite-show">
                                                             <div class="card overflow-hidden card-preview-templates">
                                                                 <input type="radio" name="test" id="cb1" />
                                                                 <label for="cb1" class="label">
@@ -7511,6 +7515,54 @@
                                                     </div>
 
                                                 </div>
+
+                                                <!-- preview template start  -->
+                                                <div id="tenant-invite-none">
+                                                <div class="row">
+                                                    <div class="col-xl-3 col-md-6 col-sm-12 tenant-invite-none">
+                                                        <div class="card overflow-hidden card-preview-templates h-100">
+                                                            <input type="radio" name="test" id="cb1" />
+                                                            <label for="cb1" class="label h-100">
+                                                                <img src="../assets/images/email-sent.png"
+                                                                    class="card-img-top" alt="img" style="height: 100%;"></label>
+                                                            <div class="card-body card-body-preview-templates">
+                                                                <h3 class="card-titlee mb-1"><b>Tenant Invite 1</b>
+                                                                </h3>
+                                                                <p class="card-text">
+                                                                    Lorem Ipsum is simply dummy text of the printing
+                                                                    and typesetting industry. Lorem Ipsum has been
+                                                                    the industry's
+                                                                </p><a href="javascript:void(0)"
+                                                                    class="text-primary float-right"><b>Preview
+                                                                        Template</b></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-xl-3 col-md-6 col-sm-12 tenant-invite-none">
+                                                        <div class="card overflow-hidden card-preview-templates h-100">
+                                                            <input type="radio" name="test" id="cb1" />
+                                                            <label for="cb1" class="label h-100">
+                                                                <img src="../assets/images/email-sent-building.png"
+                                                                    class="card-img-top" alt="img" style="height: 100%;"></label>
+                                                            <div class="card-body card-body-preview-templates">
+                                                                <h3 class="card-titlee mb-1"><b>Tenant Invite 2</b>
+                                                                </h3>
+                                                                <p class="card-text">
+                                                                    Lorem Ipsum is simply dummy text of the printing
+                                                                    and typesetting industry. Lorem Ipsum has been
+                                                                    the industry's
+                                                                </p><a href="javascript:void(0)"
+                                                                    class="text-primary float-right"><b>Preview
+                                                                        Template</b></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                    </div>
+                                                <!-- preview template end  -->
+
+
                                                 <div class="card-body p-0 d-none" id="tab11_tab_preview_invoice">
                                                     <div class="page-header">
                                                         <h1 class="page-title fw-bold">Email Template / Invoice</h1>
@@ -10756,6 +10808,13 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
     }
 </script>
 
-</body>
+<script>
+    var button = document.getElementById("tenant-invite-show");
+    var hiddenText = document.getElementById("tenant-invite-none");
 
+    button.addEventListener("click", function () {
+        hiddenText.style.display = "block";
+    });
+</script>
+</body>
 </html>
