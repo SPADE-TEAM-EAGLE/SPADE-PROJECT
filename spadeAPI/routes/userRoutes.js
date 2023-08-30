@@ -105,7 +105,8 @@ router.get('/getByIdInvoices', verifyToken, invoiceController.getByIdInvoices);
 router.put('/UpdateInvoice', verifyToken, invoiceController.UpdateInvoice);
 router.delete('/invoiceDelete', verifyToken, invoiceController.invoiceDelete);
 router.post("/addVendor", verifyToken, taskController.addVendors);
-
+router.put("/updateVendor", verifyToken, taskController.updateVendor);
+router.delete("/deleteVendor/:vendorID", verifyToken, taskController.deleteVendor);
 router.post("/addVendorCategory", verifyToken, taskController.addVendorCategory);
 // router.get("/getAllVendors",verifyToken ,taskController.getAllVendors);
 router.get("/getAllVendors", verifyToken, taskController.getAllVendors);
