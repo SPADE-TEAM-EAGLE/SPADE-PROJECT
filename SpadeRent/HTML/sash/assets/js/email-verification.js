@@ -7,15 +7,6 @@ var password_varify_match = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
 
         function confirmPasswordValidation1_verify() {
 
-            // if (email_verify_password.value.match(password_varify_match)) {
-            //     console.log(11)
-            //     email_verify_password.classList.add("border-green");
-            //     spantag11.style.display = "none";
-            // } else {
-            //     console.log(21)
-            //     email_verify_password.classList.remove("border-green");
-            //     spantag11.style.display = "block";
-            // }
             if ($("#token").val() !== " " && email_verify_password.value.match(password_varify_match)) {
                 email_verify_password.classList.add("border-green");
                 $("#verify-btn").removeClass("disabled")
@@ -70,7 +61,7 @@ $(document).ready(function () {
             
             if (response.message.split(":")[0] == "Your remaining days to verify your email") {
                 $("#days-left").text(response.data > 1 ? " " + response.data + " days" : " " + response.data + " day")
-                
+                $("#account-text").text("Your accoutn will be locked after "+(response.data > 1 ? " " + response.data + " days" : " " + response.data + " day"))
                 $("#user-email").val(userEmail)
                 $("#modaldemo00").modal("show")
             } else if (response.message == "Email is verified") {

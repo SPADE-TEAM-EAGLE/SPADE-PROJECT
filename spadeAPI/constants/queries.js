@@ -57,8 +57,29 @@ exports.checkTenantInvoicePaidQuery = `SELECT * FROM invoice WHERE tenantID = ? 
 // update isTenantAccount in tenant table by id
 exports.updateTenantAccountQuery = `UPDATE tenants SET isTenantAccount = ? WHERE id = ?`;
 exports.updateUserAccountQuery = `UPDATE users SET isUserAccount = ? WHERE id = ?`;
+
+exports.deleteUserAccountData = {
+  property: `DELETE FROM property WHERE landlordID = ?`,
+  task: `DELETE FROM task WHERE landlordID = ?`,
+  invoice: `DELETE FROM invoice WHERE landlordID = ?`,
+  tenants: `DELETE FROM tenants WHERE landlordID = ?`,
+  deletePropertyImages: `DELETE FROM propertyimage
+  WHERE propertyID IN (SELECT id FROM property WHERE landlordID = ?);`,
+  deletePropertyUnits: `DELETE FROM propertyunits
+  WHERE propertyID IN (SELECT id FROM property WHERE landlordID = ?);`,
+  deleteItself: `DELETE FROM users WHERE id = ?`,
+};
+// delete all properties , task , invoice and tenants by landlord id
+exports.deleteAllPropertiesQuery = `DELETE FROM property WHERE landlordID = ?`;
+// delete all  task  by landlord id
+exports.deleteAllTaskQuery = `DELETE FROM task WHERE landlordID = ?`;
+// delete all invoiceby landlord id
+exports.deleteAllInvoiceQuery = `DELETE FROM invoice WHERE landlordID = ?`;
+// delete all tenants by landlord id
+exports.deleteAllTenantsQuery = `DELETE FROM tenants WHERE landlordID = ?`;
+
 exports.updateAllTenantsAccountQuery = `UPDATE tenants SET isTenantAccount = ? WHERE landlordID = ?`;
-// check my all tenants invoices are paid 
+// check my all tenants invoices are paid
 exports.checkMyAllTenantsInvoicePaidQuery = `SELECT * FROM invoice WHERE landlordID = ? AND status = 'Unpaid'`;
 exports.checkMyAllTenantsInvoicePaidQuerytenant = `SELECT * FROM invoice WHERE tenantID = ? AND status = 'Unpaid'`;
 // get user data by id
@@ -74,7 +95,7 @@ exports.updateUserActive = `UPDATE users SET active = ? WHERE Email = ?`;
 exports.updateTenantActive = `UPDATE tenants SET active = ? WHERE email = ?`;
 
 // update all notify to 1 where landlord id = id
-exports.updateAllNotifyReadQuery =  {
+exports.updateAllNotifyReadQuery = {
   property: `UPDATE property SET notify = ? WHERE landlordID = ?`,
   task: `UPDATE task SET notify = ? WHERE landlordID = ?`,
   invoice: `UPDATE invoice SET notify = ? WHERE landlordID = ?`,
@@ -83,11 +104,11 @@ exports.updateAllNotifyReadQuery =  {
 exports.updateAllTenantNotifyReadQuery = {
   property: `UPDATE property SET tenantNotify = ? WHERE property.id = ?`,
   task: `UPDATE task SET tenantNotify = ? WHERE task.tenantID = ?`,
-  invoice: `UPDATE invoice SET tenantNotify = ? WHERE invoice.tenantID = ?`
+  invoice: `UPDATE invoice SET tenantNotify = ? WHERE invoice.tenantID = ?`,
 };
 
-
-
+// update vendor for these fields firstName,lastName,businessName,streetAddress,city,zip,workPhone,phone,email,categoryID
+exports.updateVendor = `UPDATE vendor SET firstName = ?,lastName = ?,businessName = ?,streetAddress = ?,city = ?,zip = ?,workPhone = ?,phone = ?,email = ?,categoryID = ? WHERE id = ?`;
 
 // creat api get total properties of landlord and vacant or occupied properties using join with units table
 exports.getPropertiesGraphData = `SELECT
@@ -184,8 +205,7 @@ exports.updateTaskNotifyReadUnRead =
 exports.updateInvoiceNotifyReadUnRead =
   "UPDATE invoice SET notify = ?  WHERE id = ? ";
 
-
-  exports.updateTenantPropertyNotifyReadUnRead =
+exports.updateTenantPropertyNotifyReadUnRead =
   "UPDATE property SET tenantNotify = ? WHERE id = ?";
 exports.updateTenantTaskNotifyReadUnRead =
   "UPDATE task SET tenantNotify = ? WHERE id = ?";
@@ -358,7 +378,7 @@ LEFT JOIN
       invoice ON tenants.id = invoice.tenantID
   GROUP BY
       tenants.propertyID) AS invoice ON property.propertyId = invoice.propertyId;
-`
+`;
 exports.createLead =
   "INSERT INTO leads (firstName, middleName, lastName, phoneNum,Email,propertyInfo,unitInfo,leadDetails,sourceCampaign,landlordId) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
@@ -511,7 +531,7 @@ invoice.tenantID = ?
 GROUP BY 
 invoice.id, invoice.invoiceType, invoice.status, invoice.startDate, invoice.endDate, invoice.created_at
 `;
-// ORDER BY 
+// ORDER BY
 // invoice.created_at DESC;
 
 // insertNotify notify
@@ -878,7 +898,6 @@ exports.insertChat =
 exports.findChat =
   "SELECT * FROM chats WHERE (senderId = ? AND receiverID = ?) OR (senderID = ? AND receiverID = ?)";
 
-
 // updateTenants profile data
 exports.updateTenantsProfile =
   "UPDATE tenants SET firstName = ?, lastName = ?, companyName = ?, email = ?, phoneNumber = ?, address = ?, city = ?, state = ?, zipcode = ?, Image = ?, ImageKey = ? WHERE id = ?";
@@ -908,8 +927,7 @@ exports.getMessages =
 // dashboard task Count
 exports.taskCount = `SELECT count(CASE WHEN status = "not started" THEN 0 END ) as notStarted, COUNT(CASE WHEN status = "in progress" then 0 END ) as inProgress, COUNT(CASE WHEN status = "completed" THEN 0 END) as completed FROM spade_Rent.task WHERE landlordID = ? AND  task.created_at >= ? AND task.created_at <= ?`;
 
-
-// dashboard invoice Amount 
+// dashboard invoice Amount
 exports.invoiceAmountQuery = `SELECT
 SUM(totalAmount) AS TotalAmount,
 SUM(CASE WHEN status = "paid" THEN totalAmount ELSE 0 END) AS TotalDeposit,
@@ -985,4 +1003,3 @@ WHERE invoice.tenantID = ? AND invoice.status = 'paid';
 `;
 
 exports.updateAllStatusVacantQuery = `UPDATE propertyunits, tenants SET propertyunits.status = ? WHERE tenants.propertyID = propertyunits.propertyID AND tenants.id = ?`;
-
