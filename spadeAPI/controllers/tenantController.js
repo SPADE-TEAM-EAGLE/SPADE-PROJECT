@@ -91,7 +91,7 @@ exports.createTenants = async (req, res) => {
 
           // if (sendmails == "Yes") {
           // const mailSubject = "You created a new tenant";
-          // await invoiceSendMail(landlordName, landlordEmail, mailSubject, "dueDays", "invoiceID", "frequency");
+          await invoiceSendMail(landlordName, landlordEmail, mailSubject, "dueDays", "invoiceID", "frequency");
           if (increaseRent == 'No') {
             res.status(200).json({
               message: "Tenants save Successful",
