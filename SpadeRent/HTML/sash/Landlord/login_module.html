@@ -746,6 +746,9 @@
               $("#modaldemo00").modal("show")
               
               
+            }else if(response.message=="Your Account is Closed"){
+              $("#info-text").text(response.message || response)
+                          $("#infoModal").modal("show")
             }
           },
           error: function (xhr, status, error) {

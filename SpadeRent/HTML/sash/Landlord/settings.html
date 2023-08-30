@@ -9971,7 +9971,7 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
     },
     success: function (response) {
         if(response.message=="Tenant has unpaid invoices"){
-            $("#info-text").text("show");
+            $("#info-text").text("Tenant has unpaid invoices")
             $("#infoModal_account").modal("show");
             setTimeout(function () {
                 $('#infoModal_account').modal('hide');
@@ -9984,14 +9984,15 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
     error: function (xhr, status, error) {
         console.log('Error occurred while fetching invoices.');
         if(xhr?.responseJSON?.message=="Password is incorrect"){
+            $("#info-text").text("Password is incorrect")
             $("#infoModal_account").modal("show");
             setTimeout(function () {
                 $('#infoModal_account').modal('hide');
             }, 2000);
         }else{
-            $("#myModal_warning").modal("show");
+            $("#myModal_warning_connection").modal("show");
             setTimeout(function () {
-                $('#myModal_warning').modal('hide');
+                $('#myModal_warning_connection').modal('hide');
                 // window.location = '../Landlord/login_module.html';
             }, 2000);
         }
