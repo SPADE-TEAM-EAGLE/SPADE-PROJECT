@@ -63,6 +63,7 @@ const {
   checkMyAllTenantsInvoicePaidQuery,
   updateAllTenantsAccountQuery,
   getAllTenantsQuery,
+  deleteUserAccountData,
 } = require("../constants/queries");
 
 const { hashedPassword } = require("../helper/hash");
@@ -1992,11 +1993,71 @@ exports.getInvoiceReportData = async (req, res) => {
     });
   }
 };
+// exports.checkAllTenantsPaid = async (req, res) => {
+//   try {
+//     const { userId, email } = req.user;
+//     const { password } = req.query;
+//     console.log(req.query);
+
+//     const selectResult = await queryRunner(selectQuery("users", "Email"), [
+//       email,
+//     ]);
+//     const isMatchPwd = await bcrypt.compare(
+//       password,
+//       selectResult[0][0].Password
+//     );
+//     console.log(Boolean());
+//     if (isMatchPwd) {
+//       // Check if tenant has any unpaid invoices
+//       const tenantAllPaidInvoiceResult = await queryRunner(
+//         checkMyAllTenantsInvoicePaidQuery,
+//         [userId]
+//       );
+//       const tenantData = await queryRunner(getAllTenantsQuery, [userId]);
+//       // console.log(tenantData[0]);
+//       // No un-paid invoices found, update tenant account
+//       if (tenantAllPaidInvoiceResult[0].length === 0) {
+//         const tenantAllPaid = await queryRunner(updateUserAccountQuery, [
+//           0,
+//           userId,
+//         ]);
+//         await queryRunner(updateAllTenantsAccountQuery, [0, userId]);
+//         const mailSubject = "Your account has been deactivated";
+//         for (let i = 0; i < tenantData[0].length; i++) {
+//           // console.log(tenantData[i].emai);
+//           await sendMail(
+//             tenantData[0][i].email,
+//             mailSubject,
+//             "as",
+//             `${tenantData[0][i].firstName} ${tenantData[0][i].lastName}`
+//           );
+//         }
+//         if (tenantAllPaid[0].affectedRows > 0) {
+//           res.status(200).json({
+//             message: "Tenant has paid invoices",
+//           });
+//         }
+//       } else {
+//         res.status(200).json({
+//           message: "Tenant has unpaid invoices",
+//         });
+//       }
+//     } else {
+//       res.status(400).json({
+//         message: "Password is incorrect",
+//       });
+//     }
+//   } catch (error) {
+//     res.status(400).json({
+//       message: error.message,
+//     });
+//   }
+// };
 exports.checkAllTenantsPaid = async (req, res) => {
   try {
     const { userId, email } = req.user;
     const { password } = req.query;
-    console.log(req.query);
+    // console.log(req.query);
 
     const selectResult = await queryRunner(selectQuery("users", "Email"), [
       email,
@@ -2004,9 +2065,9 @@ exports.checkAllTenantsPaid = async (req, res) => {
     const isMatchPwd = await bcrypt.compare(
       password,
       selectResult[0][0].Password
-    );
-    console.log(Boolean());
-    if (isMatchPwd) {
+      );
+      if (isMatchPwd) {
+      console.log(isMatchPwd);
       // Check if tenant has any unpaid invoices
       const tenantAllPaidInvoiceResult = await queryRunner(
         checkMyAllTenantsInvoicePaidQuery,
@@ -2031,6 +2092,14 @@ exports.checkAllTenantsPaid = async (req, res) => {
             `${tenantData[0][i].firstName} ${tenantData[0][i].lastName}`
           );
         }
+        // deleteUserAccountData
+        await queryRunner(deleteUserAccountData.task, [userId]);
+        await queryRunner(deleteUserAccountData.invoice, [userId]);
+        await queryRunner(deleteUserAccountData.tenants, [userId]);
+        await queryRunner(deleteUserAccountData.deletePropertyImages, [userId]);
+        await queryRunner(deleteUserAccountData.deletePropertyUnits, [userId]);
+        await queryRunner(deleteUserAccountData.deleteUserData, [userId]);
+
         if (tenantAllPaid[0].affectedRows > 0) {
           res.status(200).json({
             message: "Tenant has paid invoices",
