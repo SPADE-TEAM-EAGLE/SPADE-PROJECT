@@ -86,6 +86,8 @@ exports.updateAllTenantNotifyReadQuery = {
   invoice: `UPDATE invoice SET tenantNotify = ? WHERE invoice.tenantID = ?`
 };
 
+// update vendor for these fields firstName,lastName,businessName,streetAddress,city,zip,workPhone,phone,email,categoryID
+exports.updateVendor = `UPDATE vendor SET firstName = ?,lastName = ?,businessName = ?,streetAddress = ?,city = ?,zip = ?,workPhone = ?,phone = ?,email = ?,categoryID = ? WHERE id = ?`;
 
 
 
