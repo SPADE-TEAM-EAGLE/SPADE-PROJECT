@@ -61,12 +61,12 @@ $(document).ready(function () {
             
             if (response.message.split(":")[0] == "Your remaining days to verify your email") {
                 $("#days-left").text(response.data > 1 ? " " + response.data + " days" : " " + response.data + " day")
-                $("#account-text").text("Your accoutn will be locked after "+(response.data > 1 ? " " + response.data + " days" : " " + response.data + " day"))
+                $("#account-text").text("Your account will be locked after "+(response.data > 1 ? " " + response.data + " days" : " " + response.data + " day"))
                 $("#user-email").val(userEmail)
                 $("#modaldemo00").modal("show")
             } else if (response.message == "Email is verified") {
                
-                $("#account-text").empty()
+                $("#account-text").addClass("d-none")
                 $("#email_verification").remove()
             }
         },

@@ -63,21 +63,15 @@ exports.deleteUserAccountData = {
   task: `DELETE FROM task WHERE landlordID = ?`,
   invoice: `DELETE FROM invoice WHERE landlordID = ?`,
   tenants: `DELETE FROM tenants WHERE landlordID = ?`,
-  deletePropertyImages: `DELETE FROM propertyimage
-  WHERE propertyID IN (SELECT id FROM property WHERE landlordID = ?);`,
-  deletePropertyUnits: `DELETE FROM propertyunits
-  WHERE propertyID IN (SELECT id FROM property WHERE landlordID = ?);`,
-  deleteItself: `DELETE FROM users WHERE id = ?`,
+  deletePropertyImages: `DELETE FROM propertyimage WHERE propertyID IN (SELECT id FROM property WHERE landlordID = ?);`,
+  deletePropertyUnits: `DELETE FROM propertyunits WHERE propertyID IN (SELECT id FROM property WHERE landlordID = ?);`,
+  deleteUserData: `DELETE FROM users WHERE id = ?`,
 };
-// delete all properties , task , invoice and tenants by landlord id
-exports.deleteAllPropertiesQuery = `DELETE FROM property WHERE landlordID = ?`;
-// delete all  task  by landlord id
-exports.deleteAllTaskQuery = `DELETE FROM task WHERE landlordID = ?`;
-// delete all invoiceby landlord id
-exports.deleteAllInvoiceQuery = `DELETE FROM invoice WHERE landlordID = ?`;
-// delete all tenants by landlord id
-exports.deleteAllTenantsQuery = `DELETE FROM tenants WHERE landlordID = ?`;
-
+exports.deleteTenantAccountData = {
+  task: `DELETE FROM task WHERE tenantID = ?`,
+  invoice: `DELETE FROM invoice WHERE tenantID = ?`,
+  deleteTenantData: `DELETE FROM tenants WHERE id = ?`,
+}
 exports.updateAllTenantsAccountQuery = `UPDATE tenants SET isTenantAccount = ? WHERE landlordID = ?`;
 // check my all tenants invoices are paid
 exports.checkMyAllTenantsInvoicePaidQuery = `SELECT * FROM invoice WHERE landlordID = ? AND status = 'Unpaid'`;

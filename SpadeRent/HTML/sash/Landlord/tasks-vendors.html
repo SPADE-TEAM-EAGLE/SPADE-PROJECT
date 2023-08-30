@@ -1635,7 +1635,7 @@ color: #000;
                                                 class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
                                             verification &nbsp; <i
                                                 class="angle fe fe-arrow-right create-btn-plus"></i></a>
-                                                <p class="text-white m-0 mt-3" id="account-text">Your account will be locked after 7-Days</p>
+                                                <p class="text-white m-0 mt-3" id="account-text"></p>
                                     </div>
                                     <div class="col-lg-3">
                                         <img src="../assets/header-img/Group1.png" alt="">
@@ -2861,7 +2861,7 @@ color: #000;
             })
             $("#confirmDelete").on("click",function(){
                 $.ajax({
-                    url: `http://localhost:3000/api/spade/deleteVendor/${vendorID}`,
+                    url: `https://backend.app.spaderent.com/api/spade/deleteVendor/${vendorID}`,
                     type: 'DELETE',
                     contentType: false,
                     processData: false,
@@ -2908,7 +2908,7 @@ color: #000;
 
             $("#save").on("click",function(){
                 $.ajax({
-                    url: `http://localhost:3000/api/spade/updateVendor`,
+                    url: `https://backend.app.spaderent.com/api/spade/updateVendor`,
                     type: 'PUT',
                     data:JSON.stringify({
                         vendId:vendorID,
