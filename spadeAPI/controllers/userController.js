@@ -2098,8 +2098,8 @@ exports.checkAllTenantsPaid = async (req, res) => {
         await queryRunner(deleteUserAccountData.tenants, [userId]);
         await queryRunner(deleteUserAccountData.deletePropertyImages, [userId]);
         await queryRunner(deleteUserAccountData.deletePropertyUnits, [userId]);
-        await queryRunner(deleteUserAccountData.deleteItself, [userId]);
-        
+        await queryRunner(deleteUserAccountData.deleteUserData, [userId]);
+
         if (tenantAllPaid[0].affectedRows > 0) {
           res.status(200).json({
             message: "Tenant has paid invoices",
