@@ -381,8 +381,8 @@
                   <!-- <div class="card-footer text-center border-0 pt-0">
                       <div class="row">
                           <div class="text-center">
-                              <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">cancel</a>
-                              <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">delete</a>
+                              <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
+                              <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
                           </div>
                       </div>
                   </div> -->
@@ -415,8 +415,8 @@
             <!-- <div class="card-footer text-center border-0 pt-0">
                         <div class="row">
                             <div class="text-center">
-                                <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">cancel</a>
-                                <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">delete</a>
+                                <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
+                                <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
                             </div>
                         </div>
                     </div> -->
@@ -606,8 +606,8 @@
   <!-- Sticky js -->
   <script src="../assets/js/sticky.js"></script>
   <!-- CUSTOM JS -->
-  <script src="../assets/js/custom.js"></script><script src="../assets/js/getNotification.js"></script>
-<script src="../assets/js/push_notification.js"></script>
+  <script src="../assets/js/custom.js"></script>
+<!-- <script src="../assets/js/push_notification.js"></script> -->
   <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J 6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
     </script>
@@ -746,6 +746,9 @@
               $("#modaldemo00").modal("show")
               
               
+            }else if(response.message=="Your Account is Closed"){
+              $("#info-text").text(response.message || response)
+                          $("#infoModal").modal("show")
             }
           },
           error: function (xhr, status, error) {
@@ -837,13 +840,15 @@
                     success: function(response) {
                         console.log(response)
                         if(response.message==" Email verified successful "){
-                localStorage.setItem("authtoken", response.token);
-
+                          localStorage.setItem("authtoken", response.token);
                           $("#modaldemo8").modal("hide")
                           $("#myModal_success").modal("show")
                           window.location="./index.html"
                         }else if(response.message==" token code is not match "){
                           // $("#modaldemo8").modal("hide")
+                          $("#info-text").text(response.message || response)
+                          $("#infoModal").modal("show")
+                        }else{
                           $("#info-text").text(response.message || response)
                           $("#infoModal").modal("show")
                         }

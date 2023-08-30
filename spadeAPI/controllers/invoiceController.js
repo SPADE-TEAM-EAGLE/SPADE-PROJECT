@@ -50,8 +50,7 @@ exports.createInvoice = async (req, res) => {
     images
   } = req.body;
   try {
-    const { userId } = req.user;
-    const notify = 0;
+    const { userId,userName,businessName } = req.user;
     console.log(req.body)
     // console.log(userId)
     // if (!tenantID || !invoiceType || !startDate || !endDate || !frequency || !dueDate || !dueDays || !repeatTerms || !terms || !additionalNotes || !lineItems || !sendmails || !totalAmount) {
@@ -66,25 +65,24 @@ exports.createInvoice = async (req, res) => {
       const invoiceID = invoiceResult[0].insertId;
       console.log(invoiceID, "invoiceID");
       const selectTenantsResult = await queryRunner(
-        selectQuery("users", "id"),
-        [userId]
+        selectQuery("tenants", "id"),
+        [tenantID]
       );
       if (selectTenantsResult[0].length > 0) {
-        const landlordEmail = selectTenantsResult[0][0].Email;
-        const landlordName =
-          selectTenantsResult[0][0].FirstName +
-          " " +
-          selectTenantsResult[0][0].LastName;
+        const TenantEmail = selectTenantsResult[0][0].email;
+        const TenantName = selectTenantsResult[0][0].firstName + " " + selectTenantsResult[0][0].lastName;
         // send mail to tenant from landlord company
-        const mailSubject = invoiceID + " From " + frequency;
+        const mailSubject = "invoice From " + userName;
+        var businessNames = businessName || "N/A";
         sendMail.invoiceSendMail(
-          landlordName,
-          landlordEmail,
+          TenantName,
+          TenantEmail,
           mailSubject,
           dueDate,
           invoiceID,
-          frequency,
-          userId
+          userName,
+          userId,
+          businessNames
         );
       }
 
@@ -295,7 +293,7 @@ exports.UpdateInvoice = async (req, res) => {
     images,
   } = req.body;
   try {
-    const { userId } = req.user;
+    const { userId,userName,businessName } = req.user;
     // console.log(req.body)
     const currentDate = new Date();
     const invoiceUpdatedResult = await queryRunner(updateInvoice, [
@@ -326,15 +324,18 @@ exports.UpdateInvoice = async (req, res) => {
         " " +
         selectTenantsResult[0][0].lastName;
 
-      const mailSubject = invoiceID + " From " + frequency;
+      const mailSubject = "invoice From " + userName;
+      var businessNames = businessName || "N/A";
       sendMail.invoiceSendMail(
+
         tenantName,
         tenantEmail,
         mailSubject,
         dueDate,
         invoiceID,
-        frequency,
-        userId
+        userName,
+        userId,
+        businessNames
       );
     }
     //  if line items is not empty then delete line items and insert new line items
@@ -474,7 +475,7 @@ exports.invoiceDelete = async (req, res) => {
 //  ############################# Create Invoice Start ############################################################
 exports.resendEmail = async (req, res) => {
   const { invoiceID } = req.query;
-  const { userId } = req.user;
+  const { userId,userName,businessName } = req.user;
   try {
     const resendEmailResult = await queryRunner(resendEmailQuery, [invoiceID]);
 
@@ -486,15 +487,17 @@ exports.resendEmail = async (req, res) => {
         resendEmailResult[0][0].firstName +
         " " +
         resendEmailResult[0][0].lastName;
-      const mailSubject = invoiceID + " From " + frequency;
+      const mailSubject = "Invoice From " + userName;
+      var businessNames = businessName || "N/A";
       sendMail.invoiceSendMail(
         tenantName,
         tenantEmail,
         mailSubject,
         dueDate,
         invoiceID,
-        frequency,
-        userId
+        userName,
+        userId,
+        businessNames
       );
     }
     res.status(200).json({

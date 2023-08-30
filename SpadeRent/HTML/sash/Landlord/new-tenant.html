@@ -1151,8 +1151,8 @@ color: #000;
                         <!-- <div class="card-footer text-center border-0 pt-0">
                             <div class="row">
                                 <div class="text-center">
-                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">cancel</a>
-                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">delete</a>
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
                                 </div>
                             </div>
                         </div> -->
@@ -1186,8 +1186,8 @@ color: #000;
                         <!-- <div class="card-footer text-center border-0 pt-0">
                             <div class="row">
                                 <div class="text-center">
-                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">cancel</a>
-                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">delete</a>
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
                                 </div>
                             </div>
                         </div> -->
@@ -1257,8 +1257,8 @@ color: #000;
                         <!-- <div class="card-footer text-center border-0 pt-0">
                             <div class="row">
                                 <div class="text-center">
-                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">cancel</a>
-                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">delete</a>
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
                                 </div>
                             </div>
                         </div> -->
@@ -1292,8 +1292,8 @@ color: #000;
                         <div class="card-footer text-center border-0 pt-0">
                             <div class="row">
                                 <div class="text-center">
-                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">cancel</a>
-                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">delete</a>
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
                                 </div>
                             </div>
                         </div>
@@ -1668,6 +1668,7 @@ color: #000;
                                                 class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
                                             verification &nbsp; <i
                                                 class="angle fe fe-arrow-right create-btn-plus"></i></a>
+                                                <p class="text-white m-0" id="account-text"></p>
                                     </div>
                                     <div class="col-lg-3">
                                         <img src="../assets/header-img/Group1.png" alt="">
@@ -2668,6 +2669,11 @@ color: #000;
                                                                 <i class="fi fi-rs-trash text-danger fs-5"></i>
                                                             </button>
                                                         </div>`)
+                                                        for (var i = 0; i < middleDateInputs.length; i++) {
+                    var middleDateInput = middleDateInputs[i];
+                    middleDateInput.min = startDateInput.value;
+                    middleDateInput.max = endDateInput.value;
+                }
             });
             $('#add-item-container').on('click', '.del-btn', function() {
                 var $row = $(this).closest('.row');
@@ -3199,6 +3205,23 @@ resetAccordions()
             });
         });
     }
+</script>
+<script>
+    var startDateInput = document.getElementById('leaseStart');
+    var endDateInput = document.getElementById('leaseEnd');
+    var middleDateInputs = document.getElementsByClassName('dateofRentchange');
+
+    startDateInput.addEventListener("change", function() {
+        endDateInput.min = startDateInput.value;
+    });
+
+    endDateInput.addEventListener("change", function() {
+        for (var i = 0; i < middleDateInputs.length; i++) {
+            var middleDateInput = middleDateInputs[i];
+            middleDateInput.min = startDateInput.value;
+            middleDateInput.max = endDateInput.value;
+        }
+    });
 </script>
 <script>
     $('#email').keyup(function() {
