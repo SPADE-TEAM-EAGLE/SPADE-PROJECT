@@ -2591,25 +2591,26 @@
                             </div>
                         </div>
                         <!-- PAGE-HEADER END -->
-                        <div>
-                            <p class="d-inline-flex gap-1">
-                                <span>Add Invoicing | </span><a data-bs-toggle="collapse" href="#collapseHelp" role="button" aria-expanded="false" aria-controls="collapseHelp" class="collapsed active">
-                                  Help ? 
-                                </a>
-                            
-                              </p>
-                              <div class="collapse" id="collapseHelp" style="width: 40%;">
-                                <div class="card card-body">
-                                  <span><a href="#" onclick="Intercom('showArticle', 8210506)"><i class="fi fi-rs-question text-light"></i>  How to create Properties? </a></span>
-                                  <span><a href="#" onclick="Intercom('showArticle', 8210444)"><i class="fi fi-rs-question text-light"></i>  How to update Properties? </a></span>
-                                </div>
-                              </div>
-                        </div>
+                        
                         <div class="cardd">
                             <div class="card-body pt-0">
                                 <div class="panel panel-primary">
                                     <div class="panel-body tabs-menu-body">
                                         <div class="tab-content">
+                                            <div class="mb-3">
+                                                <p class="d-inline-flex gap-1">
+                                                    <span>Add Invoicing | </span><a data-bs-toggle="collapse" href="#collapseHelp" role="button" aria-expanded="false" aria-controls="collapseHelp" class="collapsed active">
+                                                      Help ? 
+                                                    </a>
+                                                
+                                                  </p>
+                                                  <div class="collapse" id="collapseHelp" style="width: 40%;">
+                                                    <div class="card card-body">
+                                                      <span><a href="#" onclick="Intercom('showArticle', 8210506)"><i class="fi fi-rs-question text-light"></i>  How to create Properties? </a></span>
+                                                      <span><a href="#" onclick="Intercom('showArticle', 8210444)"><i class="fi fi-rs-question text-light"></i>  How to update Properties? </a></span>
+                                                    </div>
+                                                  </div>
+                                            </div>
                                             <div class="tab-pane active" id="tab5">
                                                 <h2 class="h2-personal-inf">Personal Information</h2>
                                                 <p class="p-personal-inf">Automate everything from listing units to
@@ -2620,7 +2621,7 @@
                                                     style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-lg-2 col-4">
+                                                    <div class="col-lg-12 d-flex align-items-center">
                                                         <div id="profile">
                                                             <div class="dashes"></div>
                                                             <div><img src="../assets/images/fancy_upload.png"
@@ -2630,10 +2631,16 @@
                                                                 than
                                                                 10MB</label>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-lg-9 col-8"
-                                                        style="display: flex; align-items: center;">
                                                         <div class="profile-text-margin">
+                                                            <h3 class="mb-2 text-dark h3-profile-heading"><b>My Profile
+                                                                    Picture</b></h3>
+                                                            <p class="profile-paragraph-p">Your picture will be on your
+                                                                spade rent application, and more!</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-9 col-8 d-none"
+                                                        style="display: flex; align-items: center;">
+                                                        <div class="profile-text-margin ">
                                                             <h3 class="mb-2 text-dark h3-profile-heading"><b>My Profile
                                                                     Picture</b></h3>
                                                             <p class="profile-paragraph-p">Your picture will be on your
@@ -2768,10 +2775,8 @@
                                                         <div
                                                             style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
                                                         </div>
-                                                        <div style="display: flex;">
-                                                            <!-- <label class="custom-switch m-0"> <input type="radio"
-                                                                    name="radio11" class="custom-switch-input"> <span
-                                                                    class="custom-switch-indicator"></span> </label> -->
+                                                        <!-- <div style="display: flex;">
+                    
                                                             <div class="material-switch pull-right mt-1"> <input
                                                                     id="someSwitchOptionPrimary"
                                                                     name="someSwitchOption001" type="checkbox"> <label
@@ -2780,7 +2785,7 @@
                                                             &emsp;
                                                             <p>Require 2-Step verification code to log in <span
                                                                     style="color: #1467B0;">(recommended)</span></p>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                                     <div class="col-lg-6 mt-5">
                                                         <div class="card"
@@ -8299,9 +8304,9 @@
                                                                                             &nbsp; Continue &nbsp;
                                                                                         </button>
                                                                                     </div>
-                                                                                    <div class="modal-footer">
+                                                                                    <!-- <div class="modal-footer">
 
-                                                                                    </div>
+                                                                                    </div> -->
                                                                                 </div>
                                                                             </div>
                                                                             <!-- close account model box start  -->
@@ -10078,7 +10083,8 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                             }, 2000);
                         },
                         error: function (xhr, status, error) {
-                            window.alert('Error: ' + error);
+                            // window.alert('Error: ' + error);
+                                                       console.log(error);
                         }
                     });
                 })

@@ -2669,6 +2669,11 @@ color: #000;
                                                                 <i class="fi fi-rs-trash text-danger fs-5"></i>
                                                             </button>
                                                         </div>`)
+                                                        for (var i = 0; i < middleDateInputs.length; i++) {
+                    var middleDateInput = middleDateInputs[i];
+                    middleDateInput.min = startDateInput.value;
+                    middleDateInput.max = endDateInput.value;
+                }
             });
             $('#add-item-container').on('click', '.del-btn', function() {
                 var $row = $(this).closest('.row');
@@ -3200,6 +3205,23 @@ resetAccordions()
             });
         });
     }
+</script>
+<script>
+    var startDateInput = document.getElementById('leaseStart');
+    var endDateInput = document.getElementById('leaseEnd');
+    var middleDateInputs = document.getElementsByClassName('dateofRentchange');
+
+    startDateInput.addEventListener("change", function() {
+        endDateInput.min = startDateInput.value;
+    });
+
+    endDateInput.addEventListener("change", function() {
+        for (var i = 0; i < middleDateInputs.length; i++) {
+            var middleDateInput = middleDateInputs[i];
+            middleDateInput.min = startDateInput.value;
+            middleDateInput.max = endDateInput.value;
+        }
+    });
 </script>
 <script>
     $('#email').keyup(function() {
