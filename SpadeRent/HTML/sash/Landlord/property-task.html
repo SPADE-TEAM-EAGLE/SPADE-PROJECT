@@ -575,7 +575,7 @@
                             left</h6>
                         <input type="email" class="form-control form mb-2" style="width: 100%;"
                             data-bs-placement="top" data-bs-toggle="tooltip" title=""
-                            data-bs-original-title="Enter the name of the property." readonly id="user-email">
+                            data-bs-original-title="Enter the name of the property." readonly id="user-email"><span class="text-danger d-none" id="verify-email-span">* Email already exist</span>
                         <a class="text-primary mb-4" href="javascript:void(0)" id="change-email">Change Email</a>
                         <a class="text-primary mb-4 d-none" href="javascript:void(0)" id="save-email">Save Email</a>
                         <div class="">
@@ -1182,7 +1182,7 @@
                                     <div class="card inner-cards">
                                         <div class="card-header justify-content-between">
                                             <div class="d-flex">
-                                                <div class="btn-group">
+                                                <!-- <div class="btn-group">
                                                     <button type="button" class="btn btn-outline-default text-dark py-1"
                                                         id="filter_btn" data-bs-toggle="dropdown"><i
                                                             class="typcn typcn-filter fs-16"></i><strong
@@ -1231,7 +1231,7 @@
                                                             </div>
                                                         </li>
                                                     </ul>
-                                                </div>
+                                                </div> -->
                                                 <div class="mx-2">
                                                     <!-- <div class="form-group m-0">
                                                         <input class="form-control" placeholder="Search Users by Name, Email or Date" type="text" id="search_input">
@@ -1256,40 +1256,47 @@
                                                         <li><a href="javascript:void(0)"><strong class="text-dark">Filter by:</strong></a>
                                                         </li>
                                                         <li class="d-flex justify-content-between"><a
-                                                                href="javascript:void(0)" class="text-dark">A-Z Alphabets</a>
+                                                                href="javascript:void(0)" class="text-dark">IMAGE</a>
                                                             <div class="form-check m-0">
                                                                 <input type="checkbox" class="form-check-input mt-2"
-                                                                    id="exampleCheck1">
+                                                                    id="exampleCheck1" checked>
                                                             </div>
                                                         </li>
                                                         <li class="d-flex justify-content-between"><a
-                                                                href="javascript:void(0)" class="text-dark">Date Modified</a>
+                                                                href="javascript:void(0)" class="text-dark">TASK</a>
                                                             <div class="form-check m-0">
                                                                 <input type="checkbox" class="form-check-input mt-2"
-                                                                    id="exampleCheck1">
+                                                                    id="exampleCheck1" checked>
                                                             </div>
                                                         </li>
                                                         <li class="d-flex justify-content-between"><a
-                                                                href="javascript:void(0)" class="text-dark">Ascending</a>
+                                                                href="javascript:void(0)" class="text-dark">ASSIGN TO</a>
                                                             <div class="form-check m-0">
                                                                 <input type="checkbox" class="form-check-input mt-2"
-                                                                    id="exampleCheck1">
+                                                                    id="exampleCheck1" checked>
                                                             </div>
                                                         </li>
                                                         <li class="d-flex justify-content-between"><a
-                                                                href="javascript:void(0)" class="text-dark">Descending</a>
+                                                                href="javascript:void(0)" class="text-dark">DUE AT</a>
                                                             <div class="form-check m-0">
                                                                 <input type="checkbox" class="form-check-input mt-2"
-                                                                    id="exampleCheck1">
+                                                                    id="exampleCheck1" checked>
                                                             </div>
                                                         </li>
                                                         <li class="d-flex justify-content-between"><a
-                                                                href="javascript:void(0)" class="text-dark">Recently Added</a>
+                                                                href="javascript:void(0)" class="text-dark">RELATED TO</a>
                                                             <div class="form-check m-0">
                                                                 <input type="checkbox" class="form-check-input mt-2"
-                                                                    id="exampleCheck1">
+                                                                    id="exampleCheck1" checked>
                                                             </div>
                                                         </li>
+                                                        <li class="d-flex justify-content-between"><a
+                                                            href="javascript:void(0)" class="text-dark">STATUS</a>
+                                                        <div class="form-check m-0">
+                                                            <input type="checkbox" class="form-check-input mt-2"
+                                                                id="exampleCheck1" checked>
+                                                        </div>
+                                                    </li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -2115,6 +2122,16 @@ const propertyId = sjcl.decrypt(password, encryptedPropertyId);
             $("#viewOverview").attr("href", `./view-property.html?property=${encodedPropertyId}`)
             $("#viewTenants").attr("href", `./property-tenant.html?property=${encodedPropertyId}`)
             $("#viewTasks").attr("href", `./property-task.html?property=${encodedPropertyId}`)
+            $('input[type="checkbox"]').change(function () {
+                    var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
+                    var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
+                    console.log(columnIndex, isColumnVisible)
+                    // Toggle the visibility of the corresponding column
+                    $('table').find('tr').each(function () {
+                        var column = $(this).find('th:nth-child(' + columnIndex + '), td:nth-child(' + columnIndex + ')');
+                        isColumnVisible ? column.show() : column.hide();
+                    });
+                });
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/viewProperty',
                 type: 'GET',

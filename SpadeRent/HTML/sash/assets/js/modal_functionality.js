@@ -348,11 +348,20 @@ $("#addModal").modal("hide")
                         // window.location = '../Landlord/properties-all.html';
                     },
                     error: function (xhr, status, error) {
-                        $("#myModal_warning_connection").modal("show");
+                        if(xhr.responseJSON.error==='Property Already Exist'){
+                            $('#addModal').modal('hide');
+                            $('#infoModal').modal('show');
                             setTimeout(function() {
-                                $('#myModal_warning_connection').modal('hide');
-
+                                $('#infoModal').modal('hide');
                             }, 2000);
+                        }
+                       else{
+                        $("#myModal_warning_connection").modal("show");
+                        setTimeout(function() {
+                            $('#myModal_warning_connection').modal('hide');
+
+                        }, 2000);
+                       }
                         console.log('Error: ' + error);
                         console.log(xhr)
                     }
