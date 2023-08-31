@@ -202,3 +202,6 @@ router.post("/createUserPayment", paymentIntegration.createUserPayment);
 // router.post("/openOrder", openOrder);
 router.get("/getPropertyDashboard/:propertyId", verifyToken, userController.filterOutDashbordDataByProperty);
 module.exports = router;
+
+// router.get("/ProfileCompleteTenant", verifyTokenTenant, messageClt.getAllMessages);
+router.get("/ProfileCompleteTenant" , tenantPortalController.ProfileCompleteTenant);

@@ -406,3 +406,63 @@ exports.taskByIDTenant = async (req, res) => {
 };
 
 //  ############################# Task By ID Tenant End ############################################################
+
+
+
+//  ############################# Profile Complete Start ############################################################
+
+exports.ProfileCompleteTenant = async (req, res) => {
+  try {
+    // const { userId } = req.user;
+    const { userId } = req.body;
+    const tenantCheckResult = await queryRunner(selectQuery("tenants", "id"), [
+      userId,
+    ]);
+    if (tenantCheckResult[0].length > 0) {
+      count = 0;
+      if (tenantCheckResult[0][0].image) {
+        count += 10;
+      }
+      if (tenantCheckResult[0][0].firstName) {
+        count += 10;
+      }
+      if (tenantCheckResult[0][0].lastName) {
+        count += 10;
+      }
+      if (tenantCheckResult[0][0].email) {
+        count += 10;
+      }
+      if (tenantCheckResult[0][0].phoneNumber) {
+        count += 10;
+      }
+      if (tenantCheckResult[0][0].companyName) {
+        count += 10;
+      }
+      if (tenantCheckResult[0][0].streetAddress) {
+        count += 10;
+      }
+      if (tenantCheckResult[0][0].BusinessAddress) {
+        count += 10;
+      }
+      if (tenantCheckResult[0][0].city) {
+        count += 10;
+      }
+      if (tenantCheckResult[0][0].state) {
+        count += 10;
+      }
+      if (tenantCheckResult[0][0].zipcode) {
+        count += 10;
+      }
+      res.status(200).json({
+        // data : propertycheckresult,
+        count: count,
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+};
+//  ############################# Profile Complete End ############################################################
+
