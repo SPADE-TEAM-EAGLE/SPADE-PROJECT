@@ -98,7 +98,8 @@ router.delete('/tenantAttachFileDelete', verifyToken, tenantController.tenantAtt
 router.delete('/tenantDelete', verifyToken, tenantController.tenantDelete);
 // router.delete('/tenantDelete', tenantController.tenantDelete);
 router.get('/getTenantsByID', verifyToken, tenantController.getTenantsByID);
-router.post('/createInvoice', verifyToken, invoiceController.createInvoice);
+// router.post('/createInvoice', verifyToken, invoiceController.createInvoice);
+router.post('/createInvoice', invoiceController.createInvoice);
 router.put('/putInvoiceStatusUpdates', verifyToken, invoiceController.putInvoiceStatusUpdates);
 router.get('/getAllInvoices', verifyToken, invoiceController.getAllInvoices);
 router.get('/getByIdInvoices', verifyToken, invoiceController.getByIdInvoices);
