@@ -2259,7 +2259,7 @@
                         </div>
                         <div>
                             <p class="d-inline-flex gap-1">
-                                <span>Chats | </span><a data-bs-toggle="collapse" href="#collapseHelp" role="button" aria-expanded="false" aria-controls="collapseHelp" class="collapsed active">
+                                <span>Chats | </span><a data-bs-toggle="collapse" href="#collapseHelp" role="button" aria-expanded="false" aria-controls="collapseHelp" class="text-dark collapsed active">
                                   Help ? 
                                 </a>
                             
@@ -3773,6 +3773,7 @@
                             success: function (response) {
                                 console.log(messageData);
                                 socket.emit('chatMessage', messageData);
+                                
                                 // console.log(response);
                                 // console.log(tenantIid);
                                 // console.log(tenantName);
@@ -3950,7 +3951,7 @@
                                                         }
                                                     }
                                                 } else {
-                                                    messs1 = `<div class="time text-dark">No Message</div>`;
+                                                    messs1 = `<div class="time text-dark" id="no-mess">No Message</div>`;
                                                 }
 
                                                 messDiv.html(messs1);
@@ -3996,7 +3997,7 @@
                     },
                     success: function (response) {
                         console.log("viewAllPropertyTenant");
-                        console.log(response.data[0]);
+                        console.log(response);
                         var randomImg1 = "../assets/images/users/5.jpg";
                         var tab_pane = $('#tab-pane-ll');
                         tab_pane.empty();
@@ -4080,6 +4081,7 @@
                 // $('#time').text(formattedTime);
             }
             $(document).ready(function () {
+                var randomImg = "../assets/images/users/5.jpg";
                 //Selector
                 const $ = (selector) => document.querySelector(selector);
                 //Chat
