@@ -2065,8 +2065,8 @@ exports.checkAllTenantsPaid = async (req, res) => {
     const isMatchPwd = await bcrypt.compare(
       password,
       selectResult[0][0].Password
-      );
-      if (isMatchPwd) {
+    );
+    if (isMatchPwd) {
       console.log(isMatchPwd);
       // Check if tenant has any unpaid invoices
       const tenantAllPaidInvoiceResult = await queryRunner(
@@ -2093,13 +2093,15 @@ exports.checkAllTenantsPaid = async (req, res) => {
           );
         }
         // deleteUserAccountData
-        await queryRunner(deleteUserAccountData.task, [userId]);
-        await queryRunner(deleteUserAccountData.invoice, [userId]);
-        await queryRunner(deleteUserAccountData.tenants, [userId]);
-        await queryRunner(deleteUserAccountData.deletePropertyImages, [userId]);
-        await queryRunner(deleteUserAccountData.deletePropertyUnits, [userId]);
-        await queryRunner(deleteUserAccountData.deleteUserData, [userId]);
+        await queryRunner(deleteUserAccountData.task, [userId]);//
+        await queryRunner(deleteUserAccountData.invoice, [userId]);  //
+        await queryRunner(deleteUserAccountData.tenants, [userId]);   //
+        await queryRunner(deleteUserAccountData.deletePropertyImages, [userId]); //
+        await queryRunner(deleteUserAccountData.deletePropertyUnits, [userId]); //
+        await queryRunner(deleteUserAccountData.deleteUserData, [userId]);  //
+        await queryRunner(deleteUserAccountData.property, [userId]);  //
 
+      
         if (tenantAllPaid[0].affectedRows > 0) {
           res.status(200).json({
             message: "Tenant has paid invoices",
