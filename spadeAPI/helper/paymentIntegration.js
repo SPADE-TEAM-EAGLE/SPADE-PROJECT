@@ -102,8 +102,13 @@ const requestData = {
   county:"Pakistan",
   timeStamp: timestamp,
   // checksum: sha256(config.merchantId)+config.merchantSiteId)+"123")+utf8.encode(config.clientRequestId)+utf8.encode("John")+ utf8.encode("Smith")+utf8.encode(timestamp)+utf8.encode(config.Secret_Key))
-  checksum: sha256(config.merchantId+config.merchantSiteId+"123"+config.clientRequestId+"John"+ "Smith"+timestamp+config.Secret_Key)
+  checksum: sha256("6400701569295268447"+"244298"+"123"+"561ccf70-336b-11ee-a309-4f00ef0ed1ad"+"John"+ "Smith"+timestamp+"xp8GrYWC6n9wHbxWuDwRPtAPICRLbBvvY2DuLYVRu8v5ip4GHPNymd0MA8KsEpbU"),
+  checksumConcatenation: config.merchantId+config.merchantSiteId+"123"+config.clientRequestId+"John"+ "Smith"+timestamp+config.Secret_Key 
 };
+// Console checksum
+console.log(requestData.checksumConcatenation);
+console.log(requestData.checksum);
+
 const requestOptions = {
   method: "POST",
   headers: {

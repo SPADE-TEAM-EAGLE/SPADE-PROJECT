@@ -314,7 +314,7 @@ exports.welcomeHTML = (email, password, name) => {
     <tr>
     <td class="">
     <div class="">
-    <a style="background-color:#1467B0 ;border-radius:4px;color:#fff;display:inline-block;font-family: figtree; font-size:18px;font-weight:normal;line-height:50px;text-align:center;text-decoration:none;width:350px;-webkit-text-size-adjust:none;" href="https://app.spaderent.com/HTML/sash/Tenant/login_module.html">Visit Account and Start Managing</a>
+    <a style="background-color:#1467B0 ;border-radius:4px;color:#fff;display:inline-block;font-family: figtree; font-size:18px;font-weight:normal;line-height:50px;text-align:center;text-decoration:none;width:350px;-webkit-text-size-adjust:none;" href="http://app.spaderent.com/HTML/sash/Tenant/login_module.html">Visit Account and Start Managing</a>
     </div>
      <br>
     </td>
@@ -467,7 +467,7 @@ exports.welcomeHTMLLANDLORD = (email, name) => {
     <tr>
     <td class="">
     <div class="">
-    <a style="background-color:#1467B0 ;border-radius:4px;color:#fff;display:inline-block;font-family: figtree; font-size:18px;font-weight:normal;line-height:50px;text-align:center;text-decoration:none;width:350px;-webkit-text-size-adjust:none;" href="https://app.spaderent.com/HTML/sash/Landlord/login_module.html">Visit Account and Start Managing</a>
+    <a style="background-color:#1467B0 ;border-radius:4px;color:#fff;display:inline-block;font-family: figtree; font-size:18px;font-weight:normal;line-height:50px;text-align:center;text-decoration:none;width:350px;-webkit-text-size-adjust:none;" href="http://app.spaderent.com/HTML/sash/Landlord/login_module.html">Visit Account and Start Managing</a>
     </div>
      <br>
     </td>
