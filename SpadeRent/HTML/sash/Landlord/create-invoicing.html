@@ -3820,6 +3820,12 @@
         <script src="../assets/js/intercom.js"></script>
         <script src="../assets/js/getNotification.js"></script>
         <script>
+            var startDateInput = document.getElementById('startDate');
+    var endDateInput = document.getElementById('endDate');
+
+    startDateInput.addEventListener("change", function() {
+        endDateInput.min = startDateInput.value;
+    });
             $(document).ready(function () {
 
                 $.ajax({

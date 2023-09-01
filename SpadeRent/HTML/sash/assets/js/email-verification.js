@@ -61,6 +61,11 @@ $(document).ready(function () {
         success: function (response) {
             
             if (response.message.split(":")[0] == "Your remaining days to verify your email") {
+                if ($('body').hasClass('dark-mode')) {
+                    $('.Rent-logo').attr('src', '../assets/images/logo_white.png');
+                } else {
+                    $('.Rent-logo').attr('src', '../assets/images/Artboard GÇô 1.svg');
+                }
                 $("#days-left").text(response.data > 1 ? " " + response.data + " days" : " " + response.data + " day")
                 $("#account-text").text("Your account will be locked after "+(response.data > 1 ? " " + response.data + " days" : " " + response.data + " day"))
                 $("#user-email").val(userEmail)
@@ -205,4 +210,11 @@ $(document).ready(function () {
             }
         });
     })
+    $('#email_verification').on('click', function() {
+        if ($('body').hasClass('dark-mode')) {
+            $('.Rent-logo').attr('src', '../assets/images/logo_white.png');
+        } else {
+            $('.Rent-logo').attr('src', '../assets/images/Artboard GÇô 1.svg');
+        }
+    });
 })
