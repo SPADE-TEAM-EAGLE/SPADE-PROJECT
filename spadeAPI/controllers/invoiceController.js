@@ -50,8 +50,8 @@ exports.createInvoice = async (req, res) => {
     images
   } = req.body;
   try {
-    // const { userId,userName,businessName } = req.user;
-    const { userId,userName,businessName } = req.body;
+    const { userId,userName,businessName } = req.user;
+    // const { userId,userName,businessName } = req.body;
     // console.log(req.body)
     // console.log(userId)
     // if (!tenantID || !invoiceType || !startDate || !endDate || !frequency || !dueDate || !dueDays || !repeatTerms || !terms || !additionalNotes || !lineItems || !sendmails || !totalAmount) {
