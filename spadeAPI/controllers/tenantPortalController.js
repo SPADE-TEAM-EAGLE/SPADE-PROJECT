@@ -438,12 +438,12 @@ exports.ProfileCompleteTenant = async (req, res) => {
       if (tenantCheckResult[0][0].companyName) {
         count += 10;
       }
-      if (tenantCheckResult[0][0].streetAddress) {
+      if (tenantCheckResult[0][0].Address) {
         count += 10;
       }
-      if (tenantCheckResult[0][0].BusinessAddress) {
-        count += 10;
-      }
+      // if (tenantCheckResult[0][0].BusinessAddress) {
+      //   count += 10;
+      // }
       if (tenantCheckResult[0][0].city) {
         count += 10;
       }
