@@ -1601,6 +1601,76 @@
         #tenant-invite-none {
             display: none;
         }
+        #invoice-none {
+            display: none;
+        }
+        #taskupdate-none {
+            display: none;
+        }
+        #userinvite-none {
+            display: none;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+.popup22{
+    width: 100%;
+    margin: auto;
+    text-align: center
+}
+.popup22 img{
+    cursor: pointer
+}
+.show{
+    z-index: 999;
+    display: none;
+}
+.show .overlay{
+    width: 100%;
+    height: 1000%;
+    background: rgba(0,0,0,.6);
+    backdrop-filter: blur(5px);
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.show .img-show {
+    /*width: 600px;
+    height: auto;*/
+    background: transparent;
+    position: fixed;
+    top: 10px;
+    left: 60%;
+    transform: translate(-70%,27%);
+    overflow: hidden;
+    min-height: calc(75% - (0.75rem * 1));
+}
+.img-show span{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 99;
+    cursor: pointer;
+}
+/* .img-show img{
+    /*width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;*/
+    
+    
+/* } */ 
+/*End style*/
     </style>
 
 </head>
@@ -7460,7 +7530,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="col-xl-3 col-md-6 col-sm-12">
+                                                        <div class="col-xl-3 col-md-6 col-sm-12" id="invoice-show">
                                                             <div class="card overflow-hidden card-preview-templates">
                                                                 <input type="radio" name="test" id="cb2" />
                                                                 <label for="cb2" class="label">
@@ -7480,7 +7550,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="col-xl-3 col-md-6 col-sm-12">
+                                                        <div class="col-xl-3 col-md-6 col-sm-12" id="taskupdate-show">
                                                             <div class="card overflow-hidden card-preview-templates">
                                                                 <input type="radio" name="test" id="cb3" />
                                                                 <label for="cb3" class="label">
@@ -7499,7 +7569,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="col-xl-3 col-md-6 col-sm-12">
+                                                        <div class="col-xl-3 col-md-6 col-sm-12" id="userinvite-show">
                                                             <div class="card overflow-hidden card-preview-templates">
                                                                 <input type="radio" name="test" id="cb4" />
                                                                 <label for="cb4" class="label">
@@ -7521,15 +7591,16 @@
 
                                                 </div>
 
-                                                <!-- preview template start  -->
-                                                <div id="tenant-invite-none">
+                                        <!-- Tenant Invite preview template start  -->
+                                                <div id="tenant-invite-none" class="popup22 mt-5">
                                                 <div class="row">
+                                                    <h2 style="color: #1467B0; text-align: left;"><b>Tenant Invite Templates</b></h2>
                                                     <div class="col-xl-3 col-md-6 col-sm-12 tenant-invite-none">
                                                         <div class="card overflow-hidden card-preview-templates h-100">
                                                             <input type="radio" name="test" id="cb1" />
-                                                            <label for="cb1" class="label h-100">
+                                                            <labell for="cb1" class="label h-100">
                                                                 <img src="../assets/images/email-sent.png"
-                                                                    class="card-img-top" alt="img" style="height: 100%;"></label>
+                                                                    class="card-img-top" alt="img" style="height: 100%;"></labell>
                                                             <div class="card-body card-body-preview-templates">
                                                                 <h3 class="card-titlee mb-1"><b>Tenant Invite 1</b>
                                                                 </h3>
@@ -7538,7 +7609,7 @@
                                                                     and typesetting industry. Lorem Ipsum has been
                                                                     the industry's
                                                                 </p><a href="javascript:void(0)"
-                                                                    class="text-primary float-right"><b>Preview
+                                                                    class="text-primary float-right"><b>Select
                                                                         Template</b></a>
                                                             </div>
                                                         </div>
@@ -7547,9 +7618,9 @@
                                                     <div class="col-xl-3 col-md-6 col-sm-12 tenant-invite-none">
                                                         <div class="card overflow-hidden card-preview-templates h-100">
                                                             <input type="radio" name="test" id="cb1" />
-                                                            <label for="cb1" class="label h-100">
+                                                            <labell for="cb1" class="label h-100">
                                                                 <img src="../assets/images/email-sent-building.png"
-                                                                    class="card-img-top" alt="img" style="height: 100%;"></label>
+                                                                    class="card-img-top" alt="img" style="height: 100%;"></labell>
                                                             <div class="card-body card-body-preview-templates">
                                                                 <h3 class="card-titlee mb-1"><b>Tenant Invite 2</b>
                                                                 </h3>
@@ -7558,14 +7629,162 @@
                                                                     and typesetting industry. Lorem Ipsum has been
                                                                     the industry's
                                                                 </p><a href="javascript:void(0)"
-                                                                    class="text-primary float-right"><b>Preview
+                                                                    class="text-primary float-right"><b>Select
                                                                         Template</b></a>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                     </div>
-                                                <!-- preview template end  -->
+                                        <!-- Tenant invite preview template end  -->
+
+                                        <!-- Invoice preview template start  -->
+                                            <div id="invoice-none" class="popup22 mt-5">
+                                                <div class="row">
+                                                    <h2 style="color: #1467B0; text-align: left;"><b>Invoice Templates</b></h2>
+                                                    <div class="col-xl-3 col-md-6 col-sm-12 tenant-invite-none">
+                                                        <div class="card overflow-hidden card-preview-templates h-100">
+                                                            <input type="radio" name="test" id="cb1" />
+                                                            <labell for="cb1" class="label h-100">
+                                                                <img src="../assets/images/invoice-template1.png"
+                                                                    class="card-img-top" alt="img" style="height: 100%;"></labell>
+                                                            <div class="card-body card-body-preview-templates">
+                                                                <h3 class="card-titlee mb-1"><b>Invoice 1</b>
+                                                                </h3>
+                                                                <p class="card-text">
+                                                                    Lorem Ipsum is simply dummy text of the printing
+                                                                    and typesetting industry. Lorem Ipsum has been
+                                                                    the industry's
+                                                                </p><a href="javascript:void(0)"
+                                                                    class="text-primary float-right"><b>Select
+                                                                        Template</b></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-xl-3 col-md-6 col-sm-12 tenant-invite-none">
+                                                        <div class="card overflow-hidden card-preview-templates h-100">
+                                                            <input type="radio" name="test" id="cb1" />
+                                                            <labell for="cb1" class="label h-100">
+                                                                <img src="../assets/images/invoice-template2.png"
+                                                                    class="card-img-top" alt="img" style="height: 100%;"></labell>
+                                                            <div class="card-body card-body-preview-templates">
+                                                                <h3 class="card-titlee mb-1"><b>Invoice 2</b>
+                                                                </h3>
+                                                                <p class="card-text">
+                                                                    Lorem Ipsum is simply dummy text of the printing
+                                                                    and typesetting industry. Lorem Ipsum has been
+                                                                    the industry's
+                                                                </p><a href="javascript:void(0)"
+                                                                    class="text-primary float-right"><b>Select
+                                                                        Template</b></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                    </div>
+                                            <!-- Invoice preview template end  -->
+
+                                            <!-- Task Update preview template start  -->
+                                                 <div id="taskupdate-none" class="popup22 mt-5">
+                                                    <div class="row">
+                                                        <h2 style="color: #1467B0; text-align: left;"><b>Task Update Templates</b></h2>
+                                                        <div class="col-xl-3 col-md-6 col-sm-12 tenant-invite-none">
+                                                            <div class="card overflow-hidden card-preview-templates h-100">
+                                                                <input type="radio" name="test" id="cb1" />
+                                                                <labell for="cb1" class="label h-100">
+                                                                    <img src="../assets/images/task-update-template1.jpg.png"
+                                                                        class="card-img-top" alt="img" style="height: 100%;"></labell>
+                                                                <div class="card-body card-body-preview-templates">
+                                                                    <h3 class="card-titlee mb-1"><b>Task Update 1</b>
+                                                                    </h3>
+                                                                    <p class="card-text">
+                                                                        Lorem Ipsum is simply dummy text of the printing
+                                                                        and typesetting industry. Lorem Ipsum has been
+                                                                        the industry's
+                                                                    </p><a href="javascript:void(0)"
+                                                                        class="text-primary float-right"><b>Select
+                                                                            Template</b></a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+    
+                                                        <div class="col-xl-3 col-md-6 col-sm-12 tenant-invite-none">
+                                                            <div class="card overflow-hidden card-preview-templates h-100">
+                                                                <input type="radio" name="test" id="cb1" />
+                                                                <labell for="cb1" class="label h-100">
+                                                                    <img src="../assets/images/task-update-template2.png"
+                                                                        class="card-img-top" alt="img" style="height: 100%;"></labell>
+                                                                <div class="card-body card-body-preview-templates">
+                                                                    <h3 class="card-titlee mb-1"><b>Task Update 2</b>
+                                                                    </h3>
+                                                                    <p class="card-text">
+                                                                        Lorem Ipsum is simply dummy text of the printing
+                                                                        and typesetting industry. Lorem Ipsum has been
+                                                                        the industry's
+                                                                    </p><a href="javascript:void(0)"
+                                                                        class="text-primary float-right"><b>Select
+                                                                            Template</b></a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                        </div>
+                                        <!-- Task Update preview template end  -->
+
+                                        <!-- User Invite template start  -->
+                                            <div id="userinvite-none" class="popup22 mt-5">
+                                                <div class="row">
+                                                    <h2 style="color: #1467B0; text-align: left;"><b>User Invite Templates</b></h2>
+                                                    <div class="col-xl-3 col-md-6 col-sm-12 tenant-invite-none">
+                                                        <div class="card overflow-hidden card-preview-templates h-100">
+                                                            <input type="radio" name="test" id="cb1" />
+                                                            <labell for="cb1" class="label h-100">
+                                                                <img src="../assets/images/user-invite-template1.jpeg.png"
+                                                                    class="card-img-top" alt="img" style="height: 100%;"></labell>
+                                                            <div class="card-body card-body-preview-templates">
+                                                                <h3 class="card-titlee mb-1"><b>User Invite 1</b>
+                                                                </h3>
+                                                                <p class="card-text">
+                                                                    Lorem Ipsum is simply dummy text of the printing
+                                                                    and typesetting industry. Lorem Ipsum has been
+                                                                    the industry's
+                                                                </p><a href="javascript:void(0)"
+                                                                    class="text-primary float-right"><b>Select
+                                                                        Template</b></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-xl-3 col-md-6 col-sm-12 tenant-invite-none">
+                                                        <div class="card overflow-hidden card-preview-templates h-100">
+                                                            <input type="radio" name="test" id="cb1" />
+                                                            <labell for="cb1" class="label h-100">
+                                                                <img src="../assets/images/user-invite-template2.png"
+                                                                    class="card-img-top" alt="img" style="height: 100%;"></labell>
+                                                            <div class="card-body card-body-preview-templates">
+                                                                <h3 class="card-titlee mb-1"><b>User Invite 2</b>
+                                                                </h3>
+                                                                <p class="card-text">
+                                                                    Lorem Ipsum is simply dummy text of the printing
+                                                                    and typesetting industry. Lorem Ipsum has been
+                                                                    the industry's
+                                                                </p><a href="javascript:void(0)"
+                                                                    class="text-primary float-right"><b>Select
+                                                                        Template</b></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                    </div>
+                                            <!-- User Invite template end  -->
+
+                                            <!-- modal full show start  -->
+                                            <div class="show">
+                                                <div class="overlay"></div>
+                                                <div class="img-show"><span>X</span><img src=""></div>
+                                              </div>
+                                            <!-- modal full show End  -->
 
 
                                                 <div class="card-body p-0 d-none" id="tab11_tab_preview_invoice">
@@ -9747,7 +9966,10 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                                 image_url = response.image
                                 image_key = response.imageKey
                             }
-                            $('#profile').css('background-image', 'url(' + response.image + ')').addClass('hasImage');
+                            if(response.image != null ){
+
+                                $('#profile').css('background-image', 'url(' + response.image + ')').addClass('hasImage');
+                            }
                             const names = { 2: "to Basic", 3: "to Pro", 4: "to Premium", 5: "to Basic", 6: "to Pro", 7: "to Premium" };
                             
                                 if(4>=parseInt(response.planID)){
@@ -10821,9 +11043,59 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
     var button = document.getElementById("tenant-invite-show");
     var hiddenText = document.getElementById("tenant-invite-none");
 
+    var button1 = document.getElementById("invoice-show");
+    var hiddenText1 = document.getElementById("invoice-none");
+
+    var button2 = document.getElementById("taskupdate-show");
+    var hiddenText2 = document.getElementById("taskupdate-none");
+
+    var button3 = document.getElementById("userinvite-show");
+    var hiddenText3 = document.getElementById("userinvite-none");
+
     button.addEventListener("click", function () {
         hiddenText.style.display = "block";
+        hiddenText1.style.display = "none";
+        hiddenText2.style.display = "none";
+        hiddenText3.style.display = "none";
     });
+
+    button1.addEventListener("click", function () {
+        hiddenText1.style.display = "block";
+        hiddenText.style.display = "none";
+        hiddenText2.style.display = "none";
+        hiddenText3.style.display = "none";
+    });
+
+    button2.addEventListener("click", function () {
+        hiddenText.style.display = "none";
+        hiddenText1.style.display = "none";
+        hiddenText2.style.display = "block";
+        hiddenText3.style.display = "none";
+    });
+
+    button3.addEventListener("click", function () {
+        hiddenText.style.display = "none";
+        hiddenText1.style.display = "none";
+        hiddenText2.style.display = "none";
+        hiddenText3.style.display = "block";
+    });
+</script>
+
+<script>
+    $(function () {
+    "use strict";
+    
+    $(".popup22 img").click(function () {
+        var $src = $(this).attr("src");
+        $(".show").fadeIn();
+        $(".img-show img").attr("src", $src);
+    });
+    
+    $("span, .overlay").click(function () {
+        $(".show").fadeOut();
+    });
+    
+});
 </script>
 </body>
 </html>
