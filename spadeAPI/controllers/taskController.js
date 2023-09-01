@@ -915,9 +915,9 @@ exports.addVendorCategory = async (req, res) => {
   const { userId } = req.user;
   try {
     // Extract all unique categoryIds from the request
-    const uniqueCategoryIds = [
-      ...new Set(categories.map((item) => item.categoryId)),
-    ];
+    // const uniqueCategoryIds = [
+    //   ...new Set(categories.map((item) => item.categoryId)),
+    // ];
 
     // Fetch existing categories from the database based on categoryId
     const categoryCheckResult = await queryRunner(
@@ -927,50 +927,31 @@ exports.addVendorCategory = async (req, res) => {
     const existingCategories = categoryCheckResult[0];
 
     // Prepare arrays for updates and insertions
-    const categoriesToUpdate = [];
+    const categoriesToDelete = [];
+    
     const categoriesToInsert = [];
-
-    for (const category of categories) {
-      const existingCategory = existingCategories.find(
-        (cat) => cat.id == category.categoryId
-      );
-      if (existingCategory) {
-        // Category exists, check if it needs to be updated
-        if (existingCategory.category !== category.category) {
-          categoriesToUpdate.push(category);
-        }
-      } else {
-        // Category does not exist, add it to the list for insertion
-        categoriesToInsert.push(category);
+    existingCategories.forEach(async(obj1) => {
+      // Check if there's a corresponding object in array2 with the same properties
+      const obj2 = categories.find((obj) => obj.category.toLowerCase() == obj1.category.toLowerCase());
+      if (!obj2) {
+        await queryRunner(
+          deleteQuery("vendorcategory", "id"),
+          [obj1.id]
+        );
       }
-    }
+  });
+  categories.forEach(async(obj1) => {
+    // Check if there's a corresponding object in array2 with the same properties
+    const obj2 = existingCategories.find((obj) => obj.category.toLowerCase() == obj1.category.toLowerCase());
 
-    // Batch update existing vendor categories
-    console.log(categoriesToUpdate);
-    for (const categoryToUpdate of categoriesToUpdate) {
-      const { categoryId, category } = categoryToUpdate;
-      const categoryResult = await queryRunner(updateVendorCategory, [
-        category,
-        categoryId,
+    
+    if (!obj2) {
+      await queryRunner(addVendorCategory, [
+        obj1.category.toLowerCase(),
         userId,
       ]);
-      if (categoryResult.affectedRows === 0) {
-        return res.status(400).send("Error updating category");
-      }
     }
-
-    // Batch insert new vendor categories
-    for (const categoryToInsert of categoriesToInsert) {
-      const { category } = categoryToInsert;
-      const categoryResult = await queryRunner(addVendorCategory, [
-        category,
-        userId,
-      ]);
-      if (categoryResult.affectedRows === 0) {
-        return res.status(400).send("Error adding category");
-      }
-    }
-
+});
     res.status(200).json({
       message: "Categories added/updated successfully",
     });

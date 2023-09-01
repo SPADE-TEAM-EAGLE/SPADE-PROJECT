@@ -1,4 +1,5 @@
 //js code
+$("#save-email").addClass("disabled")
 let id1; let userEmail; let emailChange = false
 var password_varify_match = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
         var email_verify_password = document.getElementById("email-verify-password");
@@ -60,6 +61,11 @@ $(document).ready(function () {
         success: function (response) {
             
             if (response.message.split(":")[0] == "Your remaining days to verify your email") {
+                if ($('body').hasClass('dark-mode')) {
+                    $('.Rent-logo').attr('src', '../assets/images/logo_white.png');
+                } else {
+                    $('.Rent-logo').attr('src', '../assets/images/Artboard GÇô 1.svg');
+                }
                 $("#days-left").text(response.data > 1 ? " " + response.data + " days" : " " + response.data + " day")
                 $("#account-text").text("Your account will be locked after "+(response.data > 1 ? " " + response.data + " days" : " " + response.data + " day"))
                 $("#user-email").val(userEmail)
@@ -85,6 +91,46 @@ $(document).ready(function () {
     })
     $("#remind-later").click(() => {
         $("#modaldemo00").modal("hide")
+    })
+    $("#user-email").on("input", () => {
+        var emailRegex = /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/;
+        if($("#user-email").val() == userEmail){
+            $("#save-email").addClass("disabled")
+            $("#verify-email-span").addClass("d-none")
+        }else if(!emailRegex.test($("#user-email").val())){
+            $("#save-email").addClass("disabled")
+            $("#verify-email-span").addClass("d-none")
+        }
+        else{
+
+            $.ajax({
+                url: "https://backend.app.spaderent.com/api/spade/checkemail",
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                data: {
+                    email: $("#user-email").val()
+                },
+                success: function(response) {
+                    
+                    if(response.message == "New user")
+                    {
+                        $("#save-email").removeClass("disabled")
+                        $("#verify-email-span").addClass("d-none")
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error($("#save-email"));
+                    $("#save-email").addClass("disabled")
+                    $("#verify-email-span").removeClass("d-none")
+                    
+                },
+            });
+        }
+        // if ($("#user-email").val() !== userEmail) {
+        //     $("#save-email").removeClass("disabled")
+        // } else {
+        //     $("#save-email").addClass("disabled")
+        // }
     })
     $(document).on("click", "#save-email", () => {
         emailChange = true
@@ -164,4 +210,11 @@ $(document).ready(function () {
             }
         });
     })
+    $('#email_verification').on('click', function() {
+        if ($('body').hasClass('dark-mode')) {
+            $('.Rent-logo').attr('src', '../assets/images/logo_white.png');
+        } else {
+            $('.Rent-logo').attr('src', '../assets/images/Artboard GÇô 1.svg');
+        }
+    });
 })

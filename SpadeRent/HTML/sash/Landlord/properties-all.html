@@ -648,7 +648,7 @@
                             left</h6>
                         <input type="email" class="form-control form mb-2" style="width: 100%;"
                             data-bs-placement="top" data-bs-toggle="tooltip" title=""
-                            data-bs-original-title="Enter the name of the property." readonly id="user-email">
+                            data-bs-original-title="Enter the name of the property." readonly id="user-email"><span class="text-danger d-none" id="verify-email-span">* Email already exist</span>
                         <a class="text-primary mb-4" href="javascript:void(0)" id="change-email">Change Email</a>
                         <a class="text-primary mb-4 d-none" href="javascript:void(0)" id="save-email">Save Email</a>
                         <div class="">
@@ -3432,7 +3432,7 @@ selectedFiles.forEach(function(file, index) {
                         console.log(response.data[0].length);
                         response.data[0].forEach(function(property,index) {
                             var serial=`<td style="font-weight: 600;">${(index + 1)}</td>`
-                             var image = '<td><img src="' + property.images[0]?.imageURL + '" alt=""></td>';
+                             var image = '<td><img src="' + (property.images[0]?.imageURL?property.images[0]?.imageURL:'../assets/images/demo_img.png') + '" alt=""></td>';
 
                             var propertyId = '<td class="property-id d-none" style="font-weight: 600;">' + property
                                 .id + '</td>';

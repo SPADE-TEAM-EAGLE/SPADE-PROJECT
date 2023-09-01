@@ -50,20 +50,22 @@ exports.createInvoice = async (req, res) => {
     images
   } = req.body;
   try {
-    const { userId,userName,businessName } = req.user;
-    console.log(req.body)
+    // const { userId,userName,businessName } = req.user;
+    const { userId,userName,businessName } = req.body;
+    // console.log(req.body)
     // console.log(userId)
     // if (!tenantID || !invoiceType || !startDate || !endDate || !frequency || !dueDate || !dueDays || !repeatTerms || !terms || !additionalNotes || !lineItems || !sendmails || !totalAmount) {
     //   throw new Error("Please fill all the fields");
     // }
     const currentDate = new Date();
+    const notify = 0;
     const invoiceResult = await queryRunner(insertInvoice, [userId, tenantID, invoiceType, startDate, endDate, frequency, dueDate, dueDays, repeatTerms, terms, additionalNotes, "Unpaid", currentDate, totalAmount,notify, startDate]);
     if (invoiceResult.affectedRows === 0) {
       res.status(400).send("Error occur in creating invoice");
     } else {
       // select tenants
       const invoiceID = invoiceResult[0].insertId;
-      console.log(invoiceID, "invoiceID");
+      // console.log(invoiceID, "invoiceID");
       const selectTenantsResult = await queryRunner(
         selectQuery("tenants", "id"),
         [tenantID]
@@ -73,7 +75,7 @@ exports.createInvoice = async (req, res) => {
         const TenantName = selectTenantsResult[0][0].firstName + " " + selectTenantsResult[0][0].lastName;
         // send mail to tenant from landlord company
         const mailSubject = "invoice From " + userName;
-        var businessNames = businessName || "N/A";
+        const businessNames = businessName || "N/A";
         sendMail.invoiceSendMail(
           TenantName,
           TenantEmail,
@@ -87,7 +89,7 @@ exports.createInvoice = async (req, res) => {
       }
 
       if (lineItems) {
-        console.log(lineItems)
+        // console.log(lineItems)
         for (let i = 0; i < lineItems.length; i++) {
           if (Object.keys(lineItems[i]).length >= 1) {
             const category = lineItems[i].category;
@@ -103,7 +105,7 @@ exports.createInvoice = async (req, res) => {
           }
         }
       }
-      if (images.length > 0) {
+      if (images) {
         for (let i = 0; i < images.length; i++) {
           const { image_url } = images[i];
           const { image_key } = images[i];
@@ -138,7 +140,7 @@ exports.createInvoice = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.status(400).send("Error");
+    res.status(400).send("Error", error);
   }
  };
 //  ############################# Create Invoice END ############################################################
@@ -171,7 +173,7 @@ exports.putInvoiceStatusUpdates = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.send("Error Invoice Status update");
+    res.send("Error Invoice Status update"+error);
   }
 };
 //  ############################# update Invoice Status End ############################################################
@@ -214,7 +216,7 @@ exports.getAllInvoices = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.send("All Invoice ");
+    res.send("All Invoice "+error);
   }
 };
 //  ############################# View All Invoice  End ############################################################
@@ -266,7 +268,7 @@ exports.getByIdInvoices = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.send("Error occur in Invoice by ID");
+    res.send("Error occur in Invoice by ID"+error);
   }
 };
 //  ############################# Invoice By ID End ############################################################
@@ -368,7 +370,7 @@ exports.UpdateInvoice = async (req, res) => {
       }
     }
     let invoiceCheckResult;
-    console.log(images);
+    // console.log(images);
     invoiceCheckResult = await queryRunner(
       selectQuery("invoiceimages", "invoiceID"),
       [invoiceID]
@@ -388,7 +390,7 @@ exports.UpdateInvoice = async (req, res) => {
       const imagesToDelete = invoiceCheckResult[0].filter(
         (image) => !images.some((img) => img.imageKey === image.ImageKey)
       );
-      console.log(imagesToDelete);
+      // console.log(imagesToDelete);
       // Delete images from S3
       for (let i = 0; i < imagesToDelete.length; i++) {
         await deleteImageFromS3(imagesToDelete[i].ImageKey);
@@ -425,7 +427,7 @@ exports.UpdateInvoice = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    return res.status(400).send("Error occurred while updating invoice");
+    return res.status(400).send("Error occurred while updating invoice"+error);
   }
 };
 //  ############################# Update Invoice END ############################################################
@@ -467,7 +469,7 @@ exports.invoiceDelete = async (req, res) => {
       });
     }
   } catch (error) {
-    res.send("Error from delete Property ");
+    res.send("Error from delete Property "+error);
     console.log(error);
   }
 };
@@ -505,7 +507,7 @@ exports.resendEmail = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    res.status(400).send("Error");
+    res.status(400).send("Error"+error);
   }
 };
 //  ############################# Resend Email Invoice END ############################################################
@@ -604,7 +606,7 @@ exports.createInvoiceCategories = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.send("Error from create invoice categories");
+    res.send("Error from create invoice categories"+error);
   }
 };
 // ############################# create invoice categories ############################################################
@@ -629,7 +631,7 @@ exports.updateInvoiceCategories = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.send("Error from update invoice categories");
+    res.send("Error from update invoice categories"+error);
   }
 };
 exports.getInvoiceCategories = async (req, res) => {
@@ -650,7 +652,7 @@ exports.getInvoiceCategories = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.send("Error from create invoice categories");
+    res.send("Error from create invoice categories"+error);
   }
 };
 exports.getInvoiceCategoriesText = async (req, res) => {
@@ -690,7 +692,7 @@ exports.deleteInCategories = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.send("Error from delete invoice categories");
+    res.send("Error from delete invoice categories"+error);
   }
 };
 
@@ -713,7 +715,7 @@ exports.deleteVendCategories = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.send("Error from delete Vendor categories");
+    res.send("Error from delete Vendor categories"+error);
   }
 };
 

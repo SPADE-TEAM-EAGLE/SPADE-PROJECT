@@ -1061,9 +1061,9 @@
                         id='close'>Close</button>
                     <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
                     <div class="btn-group rounded-split mt-2 mb-2">
-                        <button type="button" class="btn btn-pill btn-primary save-invoice">Save</button>
+                        <button type="button" class="btn btn-pill btn-primary save-invoice" disabled>Save</button>
                         <button type="button" class="btn btn-pill btn-primary dropdown-toggle px-1" id="toggle-button"
-                            data-bs-toggle="dropdown" aria-expanded="false" >
+                        disabled data-bs-toggle="dropdown" aria-expanded="false" >
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
@@ -1575,11 +1575,11 @@
                                         <h1 class="page-titlee text-white" style="font-weight: 700;" id="user-name">
                                         </h1>
                                         <a data-bs-toggle="modal" href="#modaldemo00" id="email_verification"
-                                            class="btn btn-primary btn-pill btn-xl email-verification-btn"><i
+                                            class="btn btn-primary btn-pill btn-xl email-verification-btn mb-3"><i
                                                 class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
                                             verification &nbsp; <i
                                                 class="angle fe fe-arrow-right create-btn-plus"></i></a>
-                                                <p class="text-white m-0" id="account-text"></p>
+                                                <p class="text-white m-0 mt-3" id="account-text">Your account will be locked after 7-Days</p>
                                     </div>
                                     <div class="col-lg-3">
                                         <img src="../assets/header-img/Group1.png" alt="">
@@ -1590,7 +1590,7 @@
                         </div>
                         <div>
                             <p class="d-inline-flex gap-1">
-                                <span>Add Invoicing | </span><a data-bs-toggle="collapse" href="#collapseHelp" role="button" aria-expanded="false" aria-controls="collapseHelp" class="collapsed active">
+                                <span>Add Invoicing | </span><a data-bs-toggle="collapse" href="#collapseHelp" role="button" aria-expanded="false" aria-controls="collapseHelp" class="text-dark collapsed active">
                                   Help ? 
                                 </a>
                             
@@ -2310,6 +2310,12 @@
  
     </script>
     <script>
+          var startDateInput = document.getElementById('startDate');
+    var endDateInput = document.getElementById('endDate');
+
+    startDateInput.addEventListener("change", function() {
+        endDateInput.min = startDateInput.value;
+    });
         $(document).ready(function () {
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
@@ -2672,7 +2678,7 @@ $("#user-img").attr("src",image)
                                 console.log(invoiceData)
                         $.ajax({
                                     // url: 'https://backend.app.spaderent.com/api/spade/createInvoice',
-                                    url: 'https://backend.app.spaderent.com/api/spade/createInvoice',
+                                    url: 'http://localhost:3000/api/spade/createInvoice',
                                     type: 'POST',
                                     data: JSON.stringify(invoiceData),
                                     contentType: 'application/json',
@@ -2916,6 +2922,7 @@ if (selectedCategory == "Rent Amount" || selectedCategory == "Triple Net" || sel
         amountInput.val("No matching category found.");
     }
 }
+
 // Find the corresponding amount input within that row based on whether it's a category or category_update input
 
 
@@ -3171,7 +3178,7 @@ console.log(allFieldsFilled)
                                             </button></td>
                                         </tr>`)
             });
-            $(document).on('input change', '#addModal input, #addModal select, #addModal input, #addModal select,#addModal textarea', updateTotal);
+            
 function resetAccordions() {
                 selectedFiles = []
 
@@ -3194,58 +3201,55 @@ function resetAccordions() {
                 $('#toggle-button,.save-invoice').attr("disabled", true);
                 $(".file-grid").empty()
             }
-            function updateTotal() {
-                var total = 0;
+            function updateTotal(isUpdate) {
+                    var total = 0;
 
-                $("input[name='amount'], input[name='amount_update']").each(function () {
-                    var inputValue = $(this).val();
-                    var tax = $(this).closest(".tr").find("[name='tax']").val()
-                    if (inputValue !== "") {
-                        var numericValue = parseFloat(inputValue);
-                        if (!isNaN(numericValue)) {
-                            total += numericValue + ((numericValue * parseFloat(tax)) / 100);
+                    // Debugging statement to check the selector
+
+
+                    $("input[name='amount" + isUpdate + "']").each(function () {
+                        var inputValue = $(this).val();
+                        console.log(inputValue);
+                        var tax = $(this).closest(".tr").find("input[name='tax" + isUpdate + "']").val();
+                        if (inputValue !== "") {
+                            var numericValue = parseFloat(inputValue);
+
+                            if (!isNaN(numericValue)) {
+                               console.log(tax=="")
+                                total += numericValue + ((numericValue * parseFloat(tax=="" ? 0 : tax)) / 100);
+
+                                console.log(total)
+                            }
                         }
+                    });
+
+                    if (isNaN(total)) {
+                        total = 0.00;
                     }
-                });
 
-                if (isNaN(total)) {
-                    total = 0.00;
+                    if (total === 0) {
+                        console.log($("#totalText" + isUpdate))
+                        $("#totalText" + isUpdate).text("$ 0.00");
+                        // Update the 'textTotal_update' field as well
+                    } else {
+                        $("#totalText" + isUpdate).text("$ " + total);
+                        // Update the 'textTotal_update' field as well
+                    }
+
+                    // Perform other operations on the dynamically added input element as needed
                 }
-
-                if (total === 0) {
-                    $("#totalText").text("$ 0.00");
-                    $("#totalText_update").text("$ 0.00"); // Update the 'textTotal_update' field as well
-                } else {
-                    $("#totalText").text("$ " + total);
-                    $("#totalText_update").text("$ " + total); // Update the 'textTotal_update' field as well
-                }
-
-                // Perform other operations on the dynamically added input element as needed
-            }
-
             $('#add-item-container1').on('click', '#del-btn1', function () {
                 var $row = $(this).closest('.tr');
                 var $rowsContainer = $row.parent();
 
                 if ($rowsContainer.children('.tr').length > 1) {
                     $row.remove();
-                    updateTotal()
+                    updateTotal("")
                 } else {
                     //   alert('Cannot delete the last row.');
                 }
             });
-            $('#add-item-container1').on('click', '#del-btn_update', function () {
-                console.log(11)
-                var $row = $(this).closest('.tr');
-                var $rowsContainer = $row.parent();
-
-                if ($rowsContainer.children('.tr').length > 1) {
-                    $row.remove();
-                    updateTotal()
-                } else {
-                    //   alert('Cannot delete the last row.');
-                }
-            });
+            
             $("#add-item2").on("click", () => {
                 $("#add-item-container2").append(`<tr class="tr">
                                             <td><label class="custom-control custom-checkbox-md">
@@ -3694,20 +3698,20 @@ function resetAccordions() {
                 });
             })
             $(document).on('input change', '#addModal input, #addModal select, #addModal input, #addModal select,#addModal textarea', function () {
-                updateTotal();
-                var $field = $(this);
-                var $errorMessage = $field.next('.text-danger');
-                if ($field.val() === '' || $field.val() === 'Choose...') {
-                    $field.addClass('border-danger');
-                    $field.removeClass('border-green');
-                    $errorMessage.removeClass('d-none');
-                } else {
-                    $field.removeClass('border-danger');
-                    $field.addClass('border-green');
-                    $errorMessage.addClass('d-none');
-                }
-
-            });
+                    updateTotal("");
+                    var $field = $(this);
+                    var $errorMessage = $field.next('.text-danger');
+                    if ($field.val() === '' || $field.val() === 'Choose...') {
+                        $field.addClass('border-danger');
+                        $field.removeClass('border-green');
+                        $errorMessage.removeClass('d-none');
+                    } else {
+                        $field.removeClass('border-danger');
+                        $field.addClass('border-green');
+                        $errorMessage.addClass('d-none');
+                    }
+                    updateButtonStatus()
+                });
         });
     </script>
     <script>

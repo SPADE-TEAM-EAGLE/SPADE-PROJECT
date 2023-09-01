@@ -3820,6 +3820,12 @@
         <script src="../assets/js/intercom.js"></script>
         <script src="../assets/js/getNotification.js"></script>
         <script>
+            var startDateInput = document.getElementById('startDate');
+    var endDateInput = document.getElementById('endDate');
+
+    startDateInput.addEventListener("change", function() {
+        endDateInput.min = startDateInput.value;
+    });
             $(document).ready(function () {
 
                 $.ajax({
@@ -4832,7 +4838,7 @@
 
                             if (!isNaN(numericValue)) {
                                 console.log(tax)
-                                total += numericValue + ((numericValue * parseFloat(isNaN(tax) ? 0 : tax)) / 100);
+                                total += numericValue + ((numericValue * parseFloat(tax=="" ? 0 : tax)) / 100);
 
                                 console.log(total)
                             }
