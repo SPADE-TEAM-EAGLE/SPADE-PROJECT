@@ -799,7 +799,7 @@
         }
 
         .activee {
-            border-radius: 31px !important;
+            border-radius: 25px !important;
             border: 5px solid #1467B0 !important;
         }
 
@@ -1597,6 +1597,10 @@
         .tab-content .btn i {
             color: #000;
         }
+
+        #tenant-invite-none {
+            display: none;
+        }
     </style>
 
 </head>
@@ -1674,7 +1678,7 @@
                             left</h6>
                         <input type="email" class="form-control form mb-2" style="width: 100%;"
                             data-bs-placement="top" data-bs-toggle="tooltip" title=""
-                            data-bs-original-title="Enter the name of the property." readonly id="user-email">
+                            data-bs-original-title="Enter the name of the property." readonly id="user-email"><span class="text-danger d-none" id="verify-email-span">* Email already exist</span>
                         <a class="text-primary mb-4" href="javascript:void(0)" id="change-email">Change Email</a>
                         <a class="text-primary mb-4 d-none" href="javascript:void(0)" id="save-email">Save Email</a>
                         <div class="">
@@ -2666,7 +2670,7 @@
                                                     <div class="col-xl-4 mb-3">
                                                         <label for="email1"><b>Email</b></label>
                                                         <input type="email" class="form-control" id="email"
-                                                            placeholder="johnclark@outlook.com" required>
+                                                            placeholder="johnclark@outlook.com" required readonly>
                                                         <div class="valid-feedback">Looks good!</div>
                                                     </div>
 
@@ -7443,7 +7447,7 @@
 
                                                     <hr style="background-color: #D3D3D3;">
                                                     <div class="row">
-                                                        <div class="col-xl-3 col-md-6 col-sm-12">
+                                                        <div class="col-xl-3 col-md-6 col-sm-12" id="tenant-invite-show">
                                                             <div class="card overflow-hidden card-preview-templates">
                                                                 <input type="radio" name="test" id="cb1" />
                                                                 <label for="cb1" class="label">
@@ -7523,6 +7527,54 @@
                                                     </div>
 
                                                 </div>
+
+                                                <!-- preview template start  -->
+                                                <div id="tenant-invite-none">
+                                                <div class="row">
+                                                    <div class="col-xl-3 col-md-6 col-sm-12 tenant-invite-none">
+                                                        <div class="card overflow-hidden card-preview-templates h-100">
+                                                            <input type="radio" name="test" id="cb1" />
+                                                            <label for="cb1" class="label h-100">
+                                                                <img src="../assets/images/email-sent.png"
+                                                                    class="card-img-top" alt="img" style="height: 100%;"></label>
+                                                            <div class="card-body card-body-preview-templates">
+                                                                <h3 class="card-titlee mb-1"><b>Tenant Invite 1</b>
+                                                                </h3>
+                                                                <p class="card-text">
+                                                                    Lorem Ipsum is simply dummy text of the printing
+                                                                    and typesetting industry. Lorem Ipsum has been
+                                                                    the industry's
+                                                                </p><a href="javascript:void(0)"
+                                                                    class="text-primary float-right"><b>Preview
+                                                                        Template</b></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-xl-3 col-md-6 col-sm-12 tenant-invite-none">
+                                                        <div class="card overflow-hidden card-preview-templates h-100">
+                                                            <input type="radio" name="test" id="cb1" />
+                                                            <label for="cb1" class="label h-100">
+                                                                <img src="../assets/images/email-sent-building.png"
+                                                                    class="card-img-top" alt="img" style="height: 100%;"></label>
+                                                            <div class="card-body card-body-preview-templates">
+                                                                <h3 class="card-titlee mb-1"><b>Tenant Invite 2</b>
+                                                                </h3>
+                                                                <p class="card-text">
+                                                                    Lorem Ipsum is simply dummy text of the printing
+                                                                    and typesetting industry. Lorem Ipsum has been
+                                                                    the industry's
+                                                                </p><a href="javascript:void(0)"
+                                                                    class="text-primary float-right"><b>Preview
+                                                                        Template</b></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                    </div>
+                                                <!-- preview template end  -->
+
+
                                                 <div class="card-body p-0 d-none" id="tab11_tab_preview_invoice">
                                                     <div class="page-header">
                                                         <h1 class="page-title fw-bold">Email Template / Invoice</h1>
@@ -8124,117 +8176,7 @@
                                                                 </tr>
                                                             </thead> -->
                                                             <tbody id="table_body_unpaid_invoice">
-                                                                <tr>
-                                                                    <td class="text-primary">INV-5C5B28</td>
-                                                                    <td>
-                                                                        <p style="font-weight: 600;"
-                                                                            class="mb-1 text-primary">Justin Septimus
-                                                                        </p>
-                                                                        <span>Phone: (783) 220003</span>
-                                                                    </td>
-                                                                    <td>
-                                                                        <p style="font-weight: 600;" class="mb-1">Rent
-                                                                            for Jan Month</p>
-                                                                        <span>One Time Invoice</span>
-                                                                    </td>
-                                                                    <td>
-                                                                        <p style="font-weight: 600;" class="mb-1">
-                                                                            01/12/2023</p>
-                                                                        <span>Due Date: 01/17/2023</span>
-                                                                    </td>
-                                                                    <td>
-                                                                        <b>3114 Stargate Ct</b>
-                                                                    </td>
-                                                                    <td>
-                                                                        <p style="font-weight: 600;" class="mb-1">$3000
-                                                                        </p>
-                                                                    </td>
-                                                                    <td>
-                                                                        <b style="color: #FB233B;"><i
-                                                                                class="fi fi-rs-clock-three"
-                                                                                style="color: #FB233B;"></i> Unpaid</b>
-                                                                    </td>
-                                                                    <td><i class="fe fe-more-vertical"
-                                                                            data-bs-toggle="dropdown"></i>
-
-                                                                        <ul class="dropdown-menu">
-                                                                            <li><a class="dropdown-item"
-                                                                                    href="view-property.html"
-                                                                                    id="edit">View</a></li>
-                                                                            <li><a class="dropdown-item"
-                                                                                    href="javascript:void(0)"
-                                                                                    id="delete">Sent Reminder</a></li>
-                                                                            <li><a class="dropdown-item"
-                                                                                    href="javascript:void(0)">Change
-                                                                                    Status</a></li>
-                                                                            <li><a class="dropdown-item"
-                                                                                    href="javascript:void(0)">Resend
-                                                                                    Invoice</a></li>
-                                                                            <li><a class="dropdown-item"
-                                                                                    href="javascript:void(0)">Issue
-                                                                                    Refund</a></li>
-                                                                            <li><a class="dropdown-item delete-option"
-                                                                                    href="javascript:void(0)">Delete</a>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </td>
-                                                                </tr>
-
-                                                                <tr>
-                                                                    <td class="text-primary">INV-5C5B28</td>
-                                                                    <td>
-                                                                        <p style="font-weight: 600;"
-                                                                            class="mb-1 text-primary">Justin Septimus
-                                                                        </p>
-                                                                        <span>Phone: (783) 220003</span>
-                                                                    </td>
-                                                                    <td>
-                                                                        <p style="font-weight: 600;" class="mb-1">Rent
-                                                                            for Jan Month</p>
-                                                                        <span>One Time Invoice</span>
-                                                                    </td>
-                                                                    <td>
-                                                                        <p style="font-weight: 600;" class="mb-1">
-                                                                            01/12/2023</p>
-                                                                        <span>Due Date: 01/17/2023</span>
-                                                                    </td>
-                                                                    <td>
-                                                                        <b>3114 Stargate Ct</b>
-                                                                    </td>
-                                                                    <td>
-                                                                        <p style="font-weight: 600;" class="mb-1">$3000
-                                                                        </p>
-                                                                    </td>
-                                                                    <td>
-                                                                        <b style="color: #FB233B;"><i
-                                                                                class="fi fi-rs-clock-three"
-                                                                                style="color: #FB233B;"></i> Unpaid</b>
-                                                                    </td>
-                                                                    <td><i class="fe fe-more-vertical"
-                                                                            data-bs-toggle="dropdown"></i>
-
-                                                                        <ul class="dropdown-menu">
-                                                                            <li><a class="dropdown-item"
-                                                                                    href="view-property.html"
-                                                                                    id="edit">View</a></li>
-                                                                            <li><a class="dropdown-item"
-                                                                                    href="javascript:void(0)"
-                                                                                    id="delete">Sent Reminder</a></li>
-                                                                            <li><a class="dropdown-item"
-                                                                                    href="javascript:void(0)">Change
-                                                                                    Status</a></li>
-                                                                            <li><a class="dropdown-item"
-                                                                                    href="javascript:void(0)">Resend
-                                                                                    Invoice</a></li>
-                                                                            <li><a class="dropdown-item"
-                                                                                    href="javascript:void(0)">Issue
-                                                                                    Refund</a></li>
-                                                                            <li><a class="dropdown-item delete-option"
-                                                                                    href="javascript:void(0)">Delete</a>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </td>
-                                                                </tr>
+                                                                
 
                                                             </tbody>
                                                         </table>
@@ -9768,6 +9710,41 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                         }
                     });
                     $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/getVendorCategory',
+                type: 'GET',
+                contentType: false,
+                processData: false,
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+
+                success: function(response) {
+                            $("#add-item-container5").empty()
+                            response.data?.forEach(({ category,landLordId }, index) => {
+                                counter++
+
+                                $("#add-item-container5").append(`<tr class="tr">
+                                                                            <td>
+                                                                                <label for=""><b>Categories</b></label>
+                                                                                <input type="text" name=""
+                                                                                    class="form-control vendor-category" value='${category}' readonly>
+                                                                            </td>
+                                                                            <td><button type="button" class="btn"
+                                                                                id="del-btn5"
+                                                                                    style="text-align: left;">
+                                                                                    <i
+                                                                                        class="fi fi-rs-trash text-danger fs-5"></i>
+                                                                                </button></td>
+                                                                        </tr>`)
+                            })
+                   
+                },
+                error: function(xhr, status, error) {
+                   
+                }
+            });
+            
+                    $.ajax({
                         url: 'https://backend.app.spaderent.com/api/spade/invoiceCategory',
                         method: 'GET',
                         headers: {
@@ -9964,7 +9941,7 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
     },
     success: function (response) {
         if(response.message=="Tenant has unpaid invoices"){
-            $("#info-text").text("show");
+            $("#info-text").text("Tenant has unpaid invoices")
             $("#infoModal_account").modal("show");
             setTimeout(function () {
                 $('#infoModal_account').modal('hide');
@@ -9977,14 +9954,15 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
     error: function (xhr, status, error) {
         console.log('Error occurred while fetching invoices.');
         if(xhr?.responseJSON?.message=="Password is incorrect"){
+            $("#info-text").text("Password is incorrect")
             $("#infoModal_account").modal("show");
             setTimeout(function () {
                 $('#infoModal_account').modal('hide');
             }, 2000);
         }else{
-            $("#myModal_warning").modal("show");
+            $("#myModal_warning_connection").modal("show");
             setTimeout(function () {
-                $('#myModal_warning').modal('hide');
+                $('#myModal_warning_connection').modal('hide');
                 // window.location = '../Landlord/login_module.html';
             }, 2000);
         }
@@ -10128,7 +10106,7 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                     });
                     console.log(data)
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/addVendorCategory', // Replace with your actual backend endpoint URL
+                        url: 'http://localhost:3000/api/spade/addVendorCategory', // Replace with your actual backend endpoint URL
                         method: 'POST',
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -10772,6 +10750,13 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
     }
 </script>
 
-</body>
+<script>
+    var button = document.getElementById("tenant-invite-show");
+    var hiddenText = document.getElementById("tenant-invite-none");
 
+    button.addEventListener("click", function () {
+        hiddenText.style.display = "block";
+    });
+</script>
+</body>
 </html>

@@ -2791,7 +2791,7 @@
                         email: email
                     },
                     success: function(response) {
-                        button1()
+                        // button1()
                         if(response.message == "New user")
                         {
                          document.getElementById("email-span-invalid").style.display = "none";  
@@ -2814,11 +2814,9 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response)
+                        // console.log()
                         response.data.forEach((card)=>{
-                            // $(`.${card.id}`).each(function(){
-                            //     this
-                            // })
+                            
                             console.log($(`#${card.id}`))
                             $(`#${card.id} .total-amount`).text(card.plantotalAmount)
                             $(`#${card.id} .amount-payable`).text(card.planDiscountedAmount)
@@ -2828,32 +2826,10 @@
                         console.log('Error occurred while fetching state and city data.');
                         console.log(xhr);
                         console.log(error);
-                        // console.log('Error occurred while fetching state and city data.');
+                        
                     }
                 });
-            // $(document).on("focusout", "#email", function(a) {
-            //     var email = $("#email").val();
-            //     $.ajax({
-            //         url: "http://192.168.2.7:3000/api/spade/checkemail",
-            //         type: "POST",
-            //         contentType: "application/json",
-            //         data: JSON.stringify({
-            //             email: email
-            //         }),
-            //         success: function(response) {
-            //             if(response.message == "New user")
-            //             {
-            //              document.getElementById("email-span-invalid").style.display = "none";  
-            //             }
-            //             else{
-            //              document.getElementById("email-span-invalid").style.display = "block";
-            //             }
-            //         },
-            //         error: function(xhr, status, error) {
-            //             console.error(xhr.responseText);
-            //         },
-            //     });
-            // });
+           
             $(document).on("click", "#next3", function(a) {
                 var fname = $("#firstname1").val();
                 var lname = $("#lastname").val();
