@@ -34,6 +34,11 @@
     <!-- <link rel="stylesheet" href="fancy_fileupload.css"> -->
     <!-- COLOR SKIN CSS -->
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="../assets/colors/color1.css" />
+    <script>
+        if(!localStorage.getItem("authtoken")){
+               window.location="./login_module.html"
+           }
+   </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
         .custom-file-input::-webkit-file-upload-button {
@@ -924,11 +929,11 @@
                                             </a>
                                         </div>
 
-                                        <div class="d-flex country mt-2">
+                                        <!-- <div class="d-flex country mt-2">
                                             <a class="nav-link icon text-dark" onclick="mydemoclick()">
                                                 <i class="fi fi-rs-universal-access"></i>
                                             </a>
-                                        </div>
+                                        </div> -->
 
 
                                         <!-- 1 comments start  -->
@@ -2630,7 +2635,7 @@
         })
     </script>
     <script>
-        function logout() {
+       function logout() {
                 $(document).ready(function () {
                     $.ajax({
                         url: 'https://backend.app.spaderent.com/api/spade/inactiveTenant',
@@ -2643,8 +2648,9 @@
                         success: function (response) {
                             console.log(response);
                             localStorage.removeItem('authtoken');
-                            window.close();
-                            window.open('./login_module.html', "_blank")
+                            localStorage.clear();
+                            // window.close();
+                            window.open('./login_module.html', "_self")
                             console.log('Done');
                         },
                         error: function (xhr, status, error) {
