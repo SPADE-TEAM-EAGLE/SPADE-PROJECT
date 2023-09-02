@@ -692,6 +692,7 @@
     <!-- CUSTOM JS -->
     <script src="../assets/js/landing.js"></script>
     <!-- Ajax -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.8/sjcl.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
     <script>
@@ -728,8 +729,14 @@
 
     <script>
         $(document).ready(function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const user_id = urlParams.get("id");
+            const encryptedId = decodeURIComponent((new URL(document.location)).searchParams.get("id"));
+
+// Decryption
+var password = 'your-secret-password';
+const Id = sjcl.decrypt(password, encryptedId);
+var encodedId = encodeURIComponent(encryptedId);
+            // const urlParams = new URLSearchParams(window.location.search);
+            // const user_id = urlParams.get("id");
             $(document).on("click", "#continue", function(a) {
                 var verification = $("#verification").val();
 
@@ -738,13 +745,17 @@
                     type: 'POST',
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({
-                        id: user_id,
+                        id: Id,
                         token: verification
                     }),
                     success: function(response) {
                         document.getElementById("verification-spans").style.display = "none";
                         // window.alert(response.message)
-                        window.open(`new_password.html?id=${response.id}&token=${response.token}`, "_self")
+                        var encryptedToken = sjcl.encrypt(password, response.token.toString());
+
+// Include the encrypted value in the URL
+var encodedToken = encodeURIComponent(encryptedToken);
+                        window.open(`new_password.html?id=${encodedId}&token=${encodedToken}`, "_self")
                     },
                     error: function(xhr, status, error) {
                         // window.alert(xhr.statusText)

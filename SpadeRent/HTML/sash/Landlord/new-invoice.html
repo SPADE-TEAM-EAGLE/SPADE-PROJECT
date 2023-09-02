@@ -2922,6 +2922,7 @@ if (selectedCategory == "Rent Amount" || selectedCategory == "Triple Net" || sel
         amountInput.val("No matching category found.");
     }
 }
+
 // Find the corresponding amount input within that row based on whether it's a category or category_update input
 
 
@@ -3177,7 +3178,7 @@ console.log(allFieldsFilled)
                                             </button></td>
                                         </tr>`)
             });
-            $(document).on('input change', '#addModal input, #addModal select, #addModal input, #addModal select,#addModal textarea', updateTotal);
+            
 function resetAccordions() {
                 selectedFiles = []
 
@@ -3200,58 +3201,55 @@ function resetAccordions() {
                 $('#toggle-button,.save-invoice').attr("disabled", true);
                 $(".file-grid").empty()
             }
-            function updateTotal() {
-                var total = 0;
+            function updateTotal(isUpdate) {
+                    var total = 0;
 
-                $("input[name='amount'], input[name='amount_update']").each(function () {
-                    var inputValue = $(this).val();
-                    var tax = $(this).closest(".tr").find("[name='tax']").val()
-                    if (inputValue !== "") {
-                        var numericValue = parseFloat(inputValue);
-                        if (!isNaN(numericValue)) {
-                            total += numericValue + ((numericValue * parseFloat(tax)) / 100);
+                    // Debugging statement to check the selector
+
+
+                    $("input[name='amount" + isUpdate + "']").each(function () {
+                        var inputValue = $(this).val();
+                        console.log(inputValue);
+                        var tax = $(this).closest(".tr").find("input[name='tax" + isUpdate + "']").val();
+                        if (inputValue !== "") {
+                            var numericValue = parseFloat(inputValue);
+
+                            if (!isNaN(numericValue)) {
+                               console.log(tax=="")
+                                total += numericValue + ((numericValue * parseFloat(tax=="" ? 0 : tax)) / 100);
+
+                                console.log(total)
+                            }
                         }
+                    });
+
+                    if (isNaN(total)) {
+                        total = 0.00;
                     }
-                });
 
-                if (isNaN(total)) {
-                    total = 0.00;
+                    if (total === 0) {
+                        console.log($("#totalText" + isUpdate))
+                        $("#totalText" + isUpdate).text("$ 0.00");
+                        // Update the 'textTotal_update' field as well
+                    } else {
+                        $("#totalText" + isUpdate).text("$ " + total);
+                        // Update the 'textTotal_update' field as well
+                    }
+
+                    // Perform other operations on the dynamically added input element as needed
                 }
-
-                if (total === 0) {
-                    $("#totalText").text("$ 0.00");
-                    $("#totalText_update").text("$ 0.00"); // Update the 'textTotal_update' field as well
-                } else {
-                    $("#totalText").text("$ " + total);
-                    $("#totalText_update").text("$ " + total); // Update the 'textTotal_update' field as well
-                }
-
-                // Perform other operations on the dynamically added input element as needed
-            }
-
             $('#add-item-container1').on('click', '#del-btn1', function () {
                 var $row = $(this).closest('.tr');
                 var $rowsContainer = $row.parent();
 
                 if ($rowsContainer.children('.tr').length > 1) {
                     $row.remove();
-                    updateTotal()
+                    updateTotal("")
                 } else {
                     //   alert('Cannot delete the last row.');
                 }
             });
-            $('#add-item-container1').on('click', '#del-btn_update', function () {
-                console.log(11)
-                var $row = $(this).closest('.tr');
-                var $rowsContainer = $row.parent();
-
-                if ($rowsContainer.children('.tr').length > 1) {
-                    $row.remove();
-                    updateTotal()
-                } else {
-                    //   alert('Cannot delete the last row.');
-                }
-            });
+            
             $("#add-item2").on("click", () => {
                 $("#add-item-container2").append(`<tr class="tr">
                                             <td><label class="custom-control custom-checkbox-md">
@@ -3700,20 +3698,20 @@ function resetAccordions() {
                 });
             })
             $(document).on('input change', '#addModal input, #addModal select, #addModal input, #addModal select,#addModal textarea', function () {
-                updateTotal();
-                var $field = $(this);
-                var $errorMessage = $field.next('.text-danger');
-                if ($field.val() === '' || $field.val() === 'Choose...') {
-                    $field.addClass('border-danger');
-                    $field.removeClass('border-green');
-                    $errorMessage.removeClass('d-none');
-                } else {
-                    $field.removeClass('border-danger');
-                    $field.addClass('border-green');
-                    $errorMessage.addClass('d-none');
-                }
-
-            });
+                    updateTotal("");
+                    var $field = $(this);
+                    var $errorMessage = $field.next('.text-danger');
+                    if ($field.val() === '' || $field.val() === 'Choose...') {
+                        $field.addClass('border-danger');
+                        $field.removeClass('border-green');
+                        $errorMessage.removeClass('d-none');
+                    } else {
+                        $field.removeClass('border-danger');
+                        $field.addClass('border-green');
+                        $errorMessage.addClass('d-none');
+                    }
+                    updateButtonStatus()
+                });
         });
     </script>
     <script>

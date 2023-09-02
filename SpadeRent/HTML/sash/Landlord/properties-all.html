@@ -3432,7 +3432,7 @@ selectedFiles.forEach(function(file, index) {
                         console.log(response.data[0].length);
                         response.data[0].forEach(function(property,index) {
                             var serial=`<td style="font-weight: 600;">${(index + 1)}</td>`
-                             var image = '<td><img src="' + property.images[0]?.imageURL + '" alt=""></td>';
+                             var image = '<td><img src="' + (property.images[0]?.imageURL?property.images[0]?.imageURL:'../assets/images/demo_img.png') + '" alt=""></td>';
 
                             var propertyId = '<td class="property-id d-none" style="font-weight: 600;">' + property
                                 .id + '</td>';

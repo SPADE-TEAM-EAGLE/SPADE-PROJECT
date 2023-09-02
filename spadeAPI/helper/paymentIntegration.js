@@ -91,7 +91,7 @@ const requestData = {
   firstName: "John",
   lastName: "Smith",
   address: "some street",
-  state: "Sindh",
+  state: "Sn",
   city:"Karachi",
   zip:"234567",
   countryCode: "GB",
