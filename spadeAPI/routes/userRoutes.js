@@ -203,5 +203,5 @@ router.post("/getUserDetailsPayment", paymentIntegration.getUserDetailsPayment);
 // router.post("/openOrder", openOrder);
 router.get("/getPropertyDashboard/:propertyId", verifyToken, userController.filterOutDashbordDataByProperty);
 module.exports = router;
-// router.get("/ProfileCompleteTenant", verifyTokenTenant, tenantPortalController.ProfileCompleteTenant);
-router.get("/ProfileCompleteTenant" , tenantPortalController.ProfileCompleteTenant);
+router.get("/ProfileCompleteTenant", verifyTokenTenant, tenantPortalController.ProfileCompleteTenant);
+// router.get("/ProfileCompleteTenant" , tenantPortalController.ProfileCompleteTenant);
