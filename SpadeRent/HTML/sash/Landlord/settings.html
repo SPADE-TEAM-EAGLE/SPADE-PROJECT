@@ -9834,7 +9834,7 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                                 image_url = response.image
                                 image_key = response.imageKey
                             }
-                            if(response.image != null ){
+                            if(response.image !== null && response.image !== " " ){
 
                                 $('#profile').css('background-image', 'url(' + response.image + ')').addClass('hasImage');
                             }
@@ -10479,6 +10479,7 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
 
                         reader.readAsDataURL(file);
                         reader.onload = function (e) {
+                            console.log("2222222222222222222");
                             console.log(reader.result);
                             $('#profile').css('background-image', 'url(' + reader.result + ')').addClass('hasImage');
 
