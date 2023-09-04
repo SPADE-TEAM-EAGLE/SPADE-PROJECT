@@ -29,8 +29,11 @@ $(document).ready(function () {
                     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                 });
             }
-            $("#user-img").attr("src", image)
-            $("#user-img-dark").attr("src", image)
+            if(image!==" " && image!==null){
+                
+                $("#user-img").attr("src", image)
+                $("#user-img-dark").attr("src", image)
+            }
 
 
             $("#user-name").text(toTitleCase(userName))
@@ -83,6 +86,12 @@ $(document).ready(function () {
             // console.log('Error occurred while fetching state and city data.');
         }
     });
+    $("#modaldemo00").on("hidden.bs.modal", () => {
+        $("#user-email").prop("readonly", true)
+        $("#change-email").removeClass("d-none")
+        $("#send-email").removeClass("d-none")
+        $("#save-email").addClass("d-none")
+    })
     $("#change-email").on("click", () => {
         $("#user-email").prop("readonly", false)
         $("#change-email").addClass("d-none")

@@ -1422,7 +1422,7 @@
                                     style="font-weight: 800; margin-bottom: 0px;">$0</h1>
                                 <div style="display: flex; align-items: center;"> <i
                                         class="side-menu__icon fi fi-rs-calendar text-white"></i><span class="side-menu__labell text-white
-                   ">&nbsp;&nbsp; Your next payment of $0 is due on 5/1/2023&emsp;<a href="#"
+                   ">&nbsp;&nbsp; Your next payment of $0 is due on N/A&emsp;<a href="#"
                                             class="btn btn-primary btn-pill">Pay Now</a></span></div>
                                 <div style="display: flex; align-items: center;"><i
                                         class="side-menu__icon fi fi-rs-building text-white"></i><span
@@ -1984,6 +1984,10 @@
             function resetAccordions() {
                 // Reset all accordions
                 $('#addModal input[type="text"]').val('');
+                $('#addModal input[type="text"]').removeClass("border-green");
+                $('#addModal input[type="text"]').removeClass("border-danger");
+                $('#addModal select').removeClass("border-green");
+                $('#addModal select').removeClass("border-danger");
                 $('#addModal input[type="date"]').val('');
                 $('#addModal select').prop('selectedIndex', 0);
                 $('#addModal textarea').val('');
@@ -1993,6 +1997,9 @@
                 $('#draft').attr("disabled","disabled");
 
             }
+            $("#addModal").on("hidden.bs.modal", function () {
+                resetAccordions()
+            });
             $('#close,#top-close').on('click', function (e) {
                 console.log(333)
                 e.preventDefault()
@@ -2056,7 +2063,7 @@ if (task.ImageKey) {
         image = '<td><img src="' + task.ImageKey + '" alt=""></td>';
     }
 } else {
-    image = '<td><i class="fi fi-rs-picture"></i></td>';
+    image = '<td><img src="../assets/images/Group-create.png"></td>';
 }
 
 

@@ -1327,13 +1327,13 @@
 
 
                                         <!-- 1 comments start  -->
-                                        <div class="d-flex country mt-2">
+                                        <!-- <div class="d-flex country mt-2">
                                             <a class="nav-link icon text-dark" href="./chats.html">
                                                 <i class="fi fi-rs-comment"></i>
-                                            </a>
+                                            </a> -->
                                             <!-- <img src="../assets\header-img\comment-light.webp"
                                                 class="avatarr profile-user nav-link brroundd cover-image light-layout"> -->
-                                        </div>
+                                        <!-- </div> -->
                                         <!-- 1 comments start  -->
 
                                         <!-- 2 comments start  -->
@@ -1590,17 +1590,10 @@
                         </div>
                         <div>
                             <p class="d-inline-flex gap-1">
-                                <span>Add Invoicing | </span><a data-bs-toggle="collapse" href="#collapseHelp" role="button" aria-expanded="false" aria-controls="collapseHelp" class="text-dark collapsed active">
-                                  Help ? 
-                                </a>
-                            
-                              </p>
-                              <div class="collapse" id="collapseHelp" style="width: 40%;">
-                                <div class="card card-body">
-                                  <span><a href="#" onclick="Intercom('showArticle', 8210506)"><i class="fi fi-rs-question text-light"></i>  How to create Invoicing? </a></span>
-                                  <span><a href="#" onclick="Intercom('showArticle', 8210444)"><i class="fi fi-rs-question text-light"></i>  How to update Invoicing? </a></span>
-                                </div>
-                              </div>
+                                <span>Invoice | </span>
+                                  <span><a href="#" onclick="Intercom('showArticle', 8210506)"> How to add invoices? </a></span>
+                                  
+                            </p>
                         </div>
                         <!-- PAGE-HEADER END -->
                         <div class="row justify-content-center">
@@ -2510,8 +2503,11 @@
                 },
                 success: function ({ image,user }) {
                     
-$("#user-img").attr("src",image)
-                    $("#user-img-dark").attr("src",image)                    
+                    if(image!==" " && image!==null){
+                
+                $("#user-img").attr("src", image)
+                $("#user-img-dark").attr("src", image)
+            }               
                 },
                 error: function (xhr, status, error) {
                     $("#myModal_warning").modal("show");
@@ -2544,6 +2540,9 @@ $("#user-img").attr("src",image)
                     }
                 });
 
+            })
+            $("#succesModal").on("hidden.bs.modal", function () {
+                window.location = './create-invoicing.html'
             })
             $(".save-invoice").each(function () {
                 $(this).on("click", function () {
@@ -2586,13 +2585,11 @@ $("#user-img").attr("src",image)
                     }
                     
 
-                    // Add the files to the FormData object
-                    var fileInput = document.getElementById('fileInput');
-                    var files = fileInput.files;
-                    if (files.length >= 1) {
+                    
+                    if (selectedFiles.length >= 1) {
                         var uploadFormData = new FormData();
-                        for (var i = 0; i < files.length; i++) {
-                            var file = files[i];
+                        for (var i = 0; i < selectedFiles.length; i++) {
+                            var file = selectedFiles[i];
                             uploadFormData.append('image', file);
                         }
                         $("#addModal").modal("hide")

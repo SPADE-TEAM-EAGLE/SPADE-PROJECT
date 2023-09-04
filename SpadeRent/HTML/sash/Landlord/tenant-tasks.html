@@ -1023,13 +1023,13 @@
 
 
                                         <!-- 1 comments start  -->
-                                        <div class="d-flex country mt-2">
+                                        <!-- <div class="d-flex country mt-2">
                                             <a class="nav-link icon text-dark" href="./chats.html">
                                                 <i class="fi fi-rs-comment"></i>
-                                            </a>
+                                            </a> -->
                                             <!-- <img src="../assets\header-img\comment-light.webp"
                                                 class="avatarr profile-user nav-link brroundd cover-image light-layout"> -->
-                                        </div>
+                                        <!-- </div> -->
                                         <!-- 1 comments start  -->
 
                                         <!-- 2 comments start  -->
@@ -1381,17 +1381,10 @@
                         </div>
                         <div>
                             <p class="d-inline-flex gap-1">
-                                <span>Tenant Task | </span><a data-bs-toggle="collapse" href="#collapseHelp" role="button" aria-expanded="false" aria-controls="collapseHelp">
-                                  Help ? 
-                                </a>
-                            
-                              </p>
-                              <div class="collapse" id="collapseHelp" style="width: 40%;">
-                                <div class="card card-body">
-                                  <span><a href="#" onclick="Intercom('showArticle', 8210506)"><i class="fi fi-rs-question text-light"></i>  How to create Properties? </a></span>
-                                  <span><a href="#" onclick="Intercom('showArticle', 8210444)"><i class="fi fi-rs-question text-light"></i>  How to update Properties? </a></span>
-                                </div>
-                              </div>
+                                <span>Tenant-Task | </span>
+                                  <span><a href="#" onclick="Intercom('showArticle', 8210506)"> How to create Tenant? </a></span>
+                                  <span><a href="#" onclick="Intercom('showArticle', 8210444)"> How to update Tenant? </a></span>
+                            </p>
                         </div>
                         <!-- PAGE-HEADER END -->
                         <div class="row">
@@ -2232,8 +2225,11 @@
                         localStorage.setItem("LandlordImg", response.image)
                         localStorage.setItem("landlordId", response.userId)
                         // LandlordImg = response.image;
-                        $("#user-img").attr("src", response.image)
-                        $("#user-img-dark").attr("src", response.image)
+                        if(response.image!==" " && response.image!==null){
+                
+                $("#user-img").attr("src", response.image)
+                $("#user-img-dark").attr("src", response.image)
+            } 
                         $("#user-name").text(toTitleCase(response.userName))
                         $("#header-user").text(toTitleCase(response.userName))
                         // userEmail = email
@@ -2356,7 +2352,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                         var timeDiff = Math.abs(currentDate - createdDate);
                         var minutesDiff = Math.floor(timeDiff / (1000 * 60));
                         var hoursDiff = Math.floor(minutesDiff / 60);
-                        var daysDiff = Math.floor(hoursDiff / 24);
+                        var daysDiff = Math.floor(hoursDiff / 24); 
 
                         var taskName = `<td class="task-id" id=${task.id} style="font-weight: 600;">` + '<p style="font-weight: 600;" class="mb-1">' + task.taskName + '</p>' +
                             `<span class="font-weight-normal" style="color: #9B9B9B;"> `;
@@ -2371,20 +2367,22 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
 
                         taskName += ' ago</span>' + '</td>';
 
-                        var assignTo = '<td style="font-weight: 600;text-align: center;display: flex;">' +
-                            (task.vendor ?.map(({
-                                name,
-                                email
-                            }) => {
-                                return `
+                        if (task.vendor && Array.isArray(task.vendor) && task.vendor.length >= 1) {
+    var assignToHTML = task.vendor.map(({ name, email }) => {
+        return `
             <div class="me-2">
-                <img class="avatar brround avatar-md" src="../assets/images/users/2.jpg" alt="avatar-img">
+                <i class="fi fi-rs-circle-user avatar-md fs-30"></i>
                 <div class="media-body valign-middle mt-0">
                     <a href="javascript:void(0)" class="text-dark fw-semibold">${name}</a>
                 </div>
             </div>`;
-                            }) || "Not assigned") +
-                            '</td>';
+    }).join("");
+
+    var assignTo = `<td style="font-weight: 600; text-align: center; display: flex;">${assignToHTML}</td>`;
+} else {
+    var assignTo = '<td>Not Assigned</td>';
+}
+
 
                         var dueDate = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + (task.dueDate || "Not Set") + '</p>' + `<span class="font-weight-normal text-danger"> <i
                                                                         class="fe fe-circle me-1"></i>${task.priority}</span>` + '</td>';

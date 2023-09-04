@@ -783,13 +783,13 @@
 
 
                                         <!-- 1 comments start  -->
-                                        <div class="d-flex country mt-2">
+                                        <!-- <div class="d-flex country mt-2">
                                             <a class="nav-link icon text-dark" href="./chats.html">
                                                 <i class="fi fi-rs-comment"></i>
-                                            </a>
+                                            </a> -->
                                             <!-- <img src="../assets\header-img\comment-light.webp"
                                                 class="avatarr profile-user nav-link brroundd cover-image light-layout"> -->
-                                        </div>
+                                        <!-- </div> -->
                                         <!-- 1 comments start  -->
 
                                         <!-- 2 comments start  -->
@@ -1091,7 +1091,7 @@
 
                                         <ul class="nav1 br-7 position-absolute" style="bottom: 0;" id="nav_links">
                                             <li class="nav-item1 p-0">
-                                                <a class="nav-link active p-2" href="view-property.html" id="viewOverview">Overview</a>
+                                                <a class="nav-link  p-2" href="view-property.html" id="viewOverview">Overview</a>
                                             </li>
                                             <li class="nav-item1 p-0">
                                                 <a class="nav-link p-2" href="property-unit.html" id="viewUnits">Units</a>
@@ -1113,17 +1113,10 @@
                         </div>
                         <div>
                             <p class="d-inline-flex gap-1">
-                                <span>Add Properties | </span><a data-bs-toggle="collapse" href="#collapseHelp" role="button" aria-expanded="false" aria-controls="collapseHelp">
-                                  Help ? 
-                                </a>
-                            
-                              </p>
-                              <div class="collapse" id="collapseHelp" style="width: 40%;">
-                                <div class="card card-body">
-                                  <span><a href="#" onclick="Intercom('showArticle', 8210506)"><i class="fi fi-rs-question text-light"></i>  How to create Properties? </a></span>
-                                  <span><a href="#" onclick="Intercom('showArticle', 8210444)"><i class="fi fi-rs-question text-light"></i>  How to update Properties? </a></span>
-                                </div>
-                              </div>
+                                <span>Propertiy-Unit | </span>
+                                  <span><a href="#" onclick="Intercom('showArticle', 8210506)"> How to add property unit? </a></span>
+                                  <span><a href="#" onclick="Intercom('showArticle', 8210444)"> How to update property unit? </a></span>
+                            </p>
                         </div>
                         <!-- PAGE-HEADER END -->
                         <div class="over_view" id="Overview">
@@ -1859,8 +1852,11 @@
                 },
                 success: function ({ userName, image }) {
                     // console.log()
-                    $("#user-img").attr("src", image)
-                    $("#user-img-dark").attr("src", image)
+                    if(image!==" " && image!==null){
+                
+                $("#user-img").attr("src", image)
+                $("#user-img-dark").attr("src", image)
+            }
                     function toTitleCase(str) {
                         return str.replace(/\w\S*/g, function (txt) {
                             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
@@ -2274,6 +2270,7 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
             $("#viewTenants").attr("href", `./property-tenant.html?property=${encodedPropertyId}`)
             $("#viewTasks").attr("href", `./property-task.html?property=${encodedPropertyId}`)
         $("#add-units").click(() => {
+            $("#add-units").prop("disabled", true)
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/addMoreUnits',
                 type: 'POST',
@@ -2285,9 +2282,11 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function(response) {
+                    $("#add-units").prop("disabled", false)
                     getData()
                 },
                 error: function(xhr, status, error) {
+                    $("#add-units").prop("disabled", false)
                     $("#myModal_warning_connection").modal("show");
                             setTimeout(function() {
                                 $('#myModal_warning_connection').modal('hide');

@@ -1093,7 +1093,7 @@
                                     multiple placeholder="Enter Assign To">
 
                                 </select>
-                                </select>
+                                <span class="text-danger d-none" id="vendor-span">Add vendors first!!</span>
                                 <!-- <span class="text-danger d-none">Property name required!</span> -->
                             </div>
                             <div class="col-md-4">
@@ -1585,13 +1585,13 @@
 
 
                                         <!-- 1 comments start  -->
-                                        <div class="d-flex country mt-2">
-                                            <a class="nav-link icon text-dark" href="./chats.html">
+                                        <!-- <div class="d-flex country mt-2"> -->
+                                            <!-- <a class="nav-link icon text-dark" href="./chats.html">
                                                 <i class="fi fi-rs-comment"></i>
-                                            </a>
+                                            </a> -->
                                             <!-- <img src="../assets\header-img\comment-light.webp"
                                                 class="avatarr profile-user nav-link brroundd cover-image light-layout"> -->
-                                        </div>
+                                        <!-- </div> -->
                                         <!-- 1 comments start  -->
 
                                         <!-- 2 comments start  -->
@@ -1917,22 +1917,12 @@
                         </div>
                         <div>
                             <p class="d-inline-flex gap-1">
-                                <span>Add Invoicing | </span><a data-bs-toggle="collapse" href="#collapseHelp"
-                                    role="button" aria-expanded="false" aria-controls="collapseHelp">
-                                    Help ?
-                                </a>
+                                <span>Task | </span>
+                                <span><a href="#" onclick="Intercom('showArticle', 8210506)"> How to add Tasks? </a></span>
 
-                            </p>
-                            <div class="collapse" id="collapseHelp" style="width: 40%;">
-                                <div class="card card-body">
-                                    <span><a href="#" onclick="Intercom('showArticle', 8210506)"><i
-                                                class="fi fi-rs-question text-light"></i> How to create Task?
-                                        </a></span>
-                                    <span><a href="#" onclick="Intercom('showArticle', 8210444)"><i
-                                                class="fi fi-rs-question text-light"></i> How to update Task?
-                                        </a></span>
-                                </div>
-                            </div>
+                              </p>
+                              
+                               
                         </div>
                         <!-- PAGE-HEADER END -->
                         <div class="over_view" id="Overview">
@@ -2892,9 +2882,11 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function ({ userName, image }) {
-                    // console.log()
-                    $("#user-img").attr("src", image)
-                    $("#user-img-dark").attr("src", image)
+                    if(image!==" " && image!==null){
+                
+                $("#user-img").attr("src", image)
+                $("#user-img-dark").attr("src", image)
+            }
                     function toTitleCase(str) {
                         return str.replace(/\w\S*/g, function (txt) {
                             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
@@ -2951,13 +2943,11 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    // console.log(response.data)
-                    // $("#user-name").text(response.user)
-                    // console.log(response)
+                    console.log("zxfsdfmdskfusdhfuygsdfgsdfgsdgfsdgfuygfuygsdf")
                     $("#assignee").empty()
-                    // $("#assignee").append($("<option></option>").text("Choose..."))
+                    
                     $("#assignee_update").empty()
-                    // $("#assignee_update").append($("<option></option>").text("Choose..."))
+                    
                     if (response.data.length === 0) {
                         $("#assignee").append($("<option></option>").text("No Vendor available.."));
                         $("#assignee_update").append($("<option></option>").text("No Vendor available.."));
@@ -2972,6 +2962,15 @@
                         });
                     }
                     // Handle state selection change
+                },
+                error: function (xhr, status, error) {
+                    console.log("ftgrtyrtyrtyrtyrtyrtyrytrtyrytryt")
+                    if(xhr.responseJSON.message=="No vendor data found"){
+                        $("#assignee").empty()
+                        $("#assignee").prop("disabled", true);
+                        $("#vendor-span").removeClass("d-none");
+
+                    }
                 }
             })
 
@@ -3209,7 +3208,7 @@
                 // formData.append('notifyTenant', isNotifyTenantChecked);
                 // formData.append('notifyVendor', isNotifyAssigneesChecked);
 
-                var files = $('#fileInput')[0].files;
+                
                 if (selectedFiles.length >= 1) {
                     for (var i = 0; i < selectedFiles.length; i++) {
                         formData.append('image', selectedFiles[i]);
@@ -3834,6 +3833,7 @@
                                 });
                             }
                             taskInfo = response.data[0]
+                            console.log
                             response.data[0]?.forEach(function (task, index) {
                                 console.log(task?.taskImages[0])
                                 // var image = '<td><img src="../../../../spadeAPI/uploads/' + property.images[0] + '" alt=""></td>';
@@ -3875,7 +3875,7 @@
                                     var assignTo = '<td style="font-weight: 600;text-align: center;display: flex;">' +
                                         (task.AssignTo?.map(({
                                             name,
-                                            email
+                                            email 
                                         }) => {
                                             return `
         <div class="me-2">

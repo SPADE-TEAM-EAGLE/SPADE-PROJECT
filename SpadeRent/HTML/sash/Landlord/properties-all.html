@@ -1380,13 +1380,13 @@
 
 
                                         <!-- 1 comments start  -->
-                                        <div class="d-flex country mt-2">
+                                        <!-- <div class="d-flex country mt-2">
                                             <a class="nav-link icon text-dark" href="./chats.html">
                                                 <i class="fi fi-rs-comment"></i>
-                                            </a>
+                                            </a> -->
                                             <!-- <img src="../assets\header-img\comment-light.webp"
                                                 class="avatarr profile-user nav-link brroundd cover-image light-layout"> -->
-                                        </div>
+                                        <!-- </div> -->
                                         <!-- 1 comments start  -->
 
                                         <!-- 2 comments start  -->
@@ -1698,17 +1698,13 @@
                         <!-- PAGE-HEADER END -->
                         <div>
                             <p class="d-inline-flex gap-1">
-                                <span>Add Properties | </span><a data-bs-toggle="collapse" href="#collapseHelp" role="button" aria-expanded="false" aria-controls="collapseHelp">
-                                  Help ? 
-                                </a>
-                            
+                                <span>Add Properties | </span>
+                                
+                                <span><a href="#" onclick="Intercom('showArticle', 8210506)"> How to create Properties? </a></span>
+                                <span><a href="#" onclick="Intercom('showArticle', 8210444)"> How to update Properties? </a></span>
                               </p>
-                              <div class="collapse" id="collapseHelp" style="width: 40%;">
-                                <div class="card card-body">
-                                  <span><a href="#" onclick="Intercom('showArticle', 8210506)"><i class="fi fi-rs-question text-light"></i>  How to create Properties? </a></span>
-                                  <span><a href="#" onclick="Intercom('showArticle', 8210444)"><i class="fi fi-rs-question text-light"></i>  How to update Properties? </a></span>
-                                </div>
-                              </div>
+                              
+                               
                         </div>
                         <!-- Row -->
                         <div class="row">
@@ -2643,8 +2639,11 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function ({ image }) {
-$("#user-img").attr("src",image)
-                    $("#user-img-dark").attr("src",image)                },
+                    if(image!==" " && image!==null){
+                
+                $("#user-img").attr("src", image)
+                $("#user-img-dark").attr("src", image)
+            }           },
                 error: function (xhr, status, error) {
                     $("#myModal_warning").modal("show");
                     setTimeout(function() {
@@ -2849,9 +2848,6 @@ $("#user-img").attr("src",image)
     var propertyType = $("#propertyType").val();
     var propertySQFT = $("#propertyTotalSF").val();
     var units = $("#units").val();
-
-    var selectedFiles = $('#fileInput')[0].files;
-                console.log(selectedFiles,909090)
     if (selectedFiles.length >= 1) {
         var uploadFormData = new FormData();
         for (var i = 0; i < selectedFiles.length; i++) {
@@ -3432,7 +3428,7 @@ selectedFiles.forEach(function(file, index) {
                         console.log(response.data[0].length);
                         response.data[0].forEach(function(property,index) {
                             var serial=`<td style="font-weight: 600;">${(index + 1)}</td>`
-                             var image = '<td><img src="' + (property.images[0]?.imageURL?property.images[0]?.imageURL:'../assets/images/demo_img.png') + '" alt=""></td>';
+                             var image = '<td><img src="' + (property.images[0]?.imageURL?property.images[0]?.imageURL:'../assets/images/icons/Group 10341.png') + '" alt=""></td>';
 
                             var propertyId = '<td class="property-id d-none" style="font-weight: 600;">' + property
                                 .id + '</td>';

@@ -625,13 +625,13 @@
 
 
                                         <!-- 1 comments start  -->
-                                        <div class="d-flex country mt-2">
-                                            <a class="nav-link icon text-dark" href="./chats.html">
+                                        <!-- <div class="d-flex country mt-2"> -->
+                                            <!-- <a class="nav-link icon text-dark" href="./chats.html">
                                                 <i class="fi fi-rs-comment"></i>
-                                            </a>
+                                            </a> -->
                                             <!-- <img src="../assets\header-img\comment-light.webp"
                                                 class="avatarr profile-user nav-link brroundd cover-image light-layout"> -->
-                                        </div>
+                                        <!-- </div> -->
                                         <!-- 1 comments start  -->
 
                                         <!-- 2 comments start  -->
@@ -961,17 +961,10 @@
                         <!-- ROW 0  -->
                         <div>
                             <p class="d-inline-flex gap-1">
-                                <span>Add Invoicing | </span><a data-bs-toggle="collapse" href="#collapseHelp" role="button" aria-expanded="false" aria-controls="collapseHelp" class="text-dark collapsed active">
-                                  Help ? 
-                                </a>
-                            
-                              </p>
-                              <div class="collapse" id="collapseHelp" style="width: 40%;">
-                                <div class="card card-body">
-                                  <span><a href="#" onclick="Intercom('showArticle', 8210506)"><i class="fi fi-rs-question text-light"></i>  How to create Properties? </a></span>
-                                  <span><a href="#" onclick="Intercom('showArticle', 8210444)"><i class="fi fi-rs-question text-light"></i>  How to update Properties? </a></span>
-                                </div>
-                              </div>
+                                <span>Dashboard | </span>
+                                  <span><a href="#" onclick="Intercom('showArticle', 8210506)"> How to customize? </a></span>
+                                  <span><a href="#" onclick="Intercom('showArticle', 8210444)"> How to analyse data? </a></span>
+                            </p>
                         </div>
                         <div class="roww" style="display: flex;">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
@@ -1512,9 +1505,12 @@
                                         </div>
                                         <div class="card-body" style="padding: 0px 25px 0px 25px;">
                                             <div class="row">
-                                                <div class="col-lg-6 col-md-6 col-sm-12 col-xl-5 disabled">
-                                                    <h1 class="font-counter-chart" id="invoicing-amount"></h1>
-                                                    <p class="chart-paragraph">Total Amount</p>
+                                                <div class="col-lg-6 col-md-6 col-sm-12 col-xl-5 disabled" style="display: flex;
+                                                justify-content: center;
+                                                align-items: center;
+                                                flex-direction: column;">
+                                                    <h1 class="font-counter-chart" id="invoicing-amount" style="font-size: 35px;text-align: center;"></h1>
+                                                    <p class="chart-paragraph" style="font-size: x-large; text-align: center;">Total Amount</p> 
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-12 col-xl-7 disabled">
                                                     <!-- <div class="card">
@@ -2586,9 +2582,11 @@
                             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                         });
                     }
-                    $("#user-img").attr("src", image)
-                    $("#user-img-dark").attr("src", image)
-
+                    if(image!==" " && image!==null){
+                
+                $("#user-img").attr("src", image)
+                $("#user-img-dark").attr("src", image)
+            }
 
                     $("#user-name").text(toTitleCase(userName))
                         $("#header-user").text(toTitleCase(userName))
@@ -3061,20 +3059,25 @@ else {
                                 var propertyName = '<td class="property-id" id=' + task.id + ' style="font-weight: 600;">' +
                                     '<p style="font-weight: 600;" class="mb-1">' + task.propertyName + '</p>' +
                                     '<span class="font-weight-normal" style="color: #9B9B9B;"> Unit no. ' + task.unitNumber
-                                var assignTo = '<td style="font-weight: 600;text-align: center;display: flex;">';
-                                if (task.AssignTo) {
-                                    assignTo += task.AssignTo.map(function ({ name, email }) {
-                                        return '<div class="me-2">' +
-                                            '<i class="fi fi-rs-circle-user avatar-md fs-30 text-dark" ></i>' +
-                                            '<div class="media-body valign-middle mt-0">' +
-                                            '<a href="javascript:void(0)" class="text-dark fw-semibold">' + name + '</a>' +
-                                            '</div>' +
-                                            '</div>';
-                                    }).join('');
+                                        if (task.AssignTo.length >= 1) { 
+                                    var assignTo = '<td style="font-weight: 600;text-align: center;display: flex;">' +
+                                        (task.AssignTo?.map(({
+                                            name,
+                                            email 
+                                        }) => {
+                                            return `
+        <div class="me-2">
+            <i class="fi fi-rs-circle-user avatar-md fs-30" ></i>
+            <div class="media-body valign-middle mt-0">
+                <a href="javascript:void(0)" class="text-dark fw-semibold">${name}</a>
+            </div>
+        </div>`;
+                                        }).join("")) +
+                                        '</td>';
                                 } else {
-                                    assignTo += 'Not assigned';
+
+                                    var assignTo = '<td style="vertical-align:middle;">Not Assigned</td>';
                                 }
-                                assignTo += '</td>';
 
                                 var dueDate = '<td class="property-id " style="font-weight: 600;">' +
                                     '<p style="font-weight: 600;" class="mb-1">' + (task.dueDate || 'Not Set') + '</p>' +

@@ -821,13 +821,7 @@
                                     <!-- 2 comments start  -->
 
                                     <!-- 1 comments start  -->
-                                    <div class="d-flex country mt-2">
-                                        <a class="nav-link icon text-dark" href="./chats.html">
-                                            <i class="fi fi-rs-comment"></i>
-                                        </a>
-                                        <!-- <img src="../assets\header-img\comment-light.webp"
-                                            class="avatarr profile-user nav-link brroundd cover-image light-layout"> -->
-                                    </div>
+                                    
                                     <!-- 1 comments start  -->
 
 
@@ -1135,7 +1129,7 @@
                                                                         class="angle fe fe-arrow-right create-btn-plus"></i></a> -->
                                         <ul class="nav1 br-7 position-absolute" style="bottom: 0;" id="nav_links">
                                             <li class="nav-item1 p-0">
-                                                <a class="nav-link active p-2" href="view-property.html"
+                                                <a class="nav-link p-2" href="view-property.html"
                                                     id="viewOverview">Overview</a>
                                             </li>
                                             <li class="nav-item1 p-0">
@@ -1162,17 +1156,13 @@
                         </div>
                         <div>
                             <p class="d-inline-flex gap-1">
-                                <span>Add Properties | </span><a data-bs-toggle="collapse" href="#collapseHelp" role="button" aria-expanded="false" aria-controls="collapseHelp">
-                                  Help ? 
-                                </a>
-                            
+                                <span>Add Properties | </span>
+                                
+                                <span><a href="#" onclick="Intercom('showArticle', 8210506)"> How to create Properties? </a></span>
+                                <span><a href="#" onclick="Intercom('showArticle', 8210444)"> How to update Properties? </a></span>
                               </p>
-                              <div class="collapse" id="collapseHelp" style="width: 40%;">
-                                <div class="card card-body">
-                                  <span><a href="#" onclick="Intercom('showArticle', 8210506)"><i class="fi fi-rs-question text-light"></i>  How to create Properties? </a></span>
-                                  <span><a href="#" onclick="Intercom('showArticle', 8210444)"><i class="fi fi-rs-question text-light"></i>  How to update Properties? </a></span>
-                                </div>
-                              </div>
+                              
+                               
                         </div>
                         <!-- PAGE-HEADER END -->
                         <div class="over_view" id="Overview">
@@ -2084,8 +2074,11 @@
                 },
                 success: function ({ userName, image }) {
                     // console.log()
-                    $("#user-img").attr("src", image)
-                    $("#user-img-dark").attr("src", image)
+                    if(image!==" " && image!==null){
+                
+                $("#user-img").attr("src", image)
+                $("#user-img-dark").attr("src", image)
+            }
                     function toTitleCase(str) {
                         return str.replace(/\w\S*/g, function (txt) {
                             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
@@ -2208,21 +2201,36 @@ const propertyId = sjcl.decrypt(password, encryptedPropertyId);
                                 }
 
                                 taskName += ' ago</span>' + '</td>';
-
-                                var assignTo = '<td style="font-weight: 600;text-align: center;display: flex;">' +
-                                    (task.vendor?.map(({ name, email }) => {
-                                        return `
+                                if (task.vendor && Array.isArray(task.vendor) && task.vendor.length >= 1) {
+    var assignToHTML = task.vendor.map(({ name, email }) => {
+        return `
             <div class="me-2">
-                <i
-class=
-"fi fi-rs-circle-user avatar-md fs-30"
-></i>
+                <i class="fi fi-rs-circle-user avatar-md fs-30"></i>
                 <div class="media-body valign-middle mt-0">
                     <a href="javascript:void(0)" class="text-dark fw-semibold">${name}</a>
                 </div>
             </div>`;
-                                    }).join('') || "Not assigned") +
-                                    '</td>';
+    }).join("");
+
+    var assignTo = `<td style="font-weight: 600; text-align: center; display: flex;">${assignToHTML}</td>`;
+} else {
+    var assignTo = '<td>Not Assigned</td>';
+}
+
+//                                 var assignTo = '<td style="font-weight: 600;text-align: center;display: flex;">' +
+//                                     (task.vendor?.map(({ name, email }) => {
+//                                         return `
+//             <div class="me-2">
+//                 <i
+// class=
+// "fi fi-rs-circle-user avatar-md fs-30"
+// ></i>
+//                 <div class="media-body valign-middle mt-0">
+//                     <a href="javascript:void(0)" class="text-dark fw-semibold">${name}</a>
+//                 </div>
+//             </div>`;
+//                                     }).join('') || "Not assigned") +
+//                                     '</td>';
 
                                 var dueDate = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + (task.dueDate || "Not Set") + '</p>' + `<span class="font-weight-normal text-danger"> <i
                                                                         class="fe fe-circle me-1"></i>${task.priority}</span>` + '</td>';

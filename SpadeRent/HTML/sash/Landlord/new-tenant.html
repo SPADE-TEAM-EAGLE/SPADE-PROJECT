@@ -1366,13 +1366,13 @@ color: #000;
 
 
                                         <!-- 1 comments start  -->
-                                        <div class="d-flex country mt-2">
-                                            <a class="nav-link icon text-dark" href="./chats.html">
+                                        <!-- <div class="d-flex country mt-2"> -->
+                                            <!-- <a class="nav-link icon text-dark" href="./chats.html">
                                                 <i class="fi fi-rs-comment"></i>
-                                            </a>
+                                            </a> -->
                                             <!-- <img src="../assets\header-img\comment-light.webp"
                                                 class="avatarr profile-user nav-link brroundd cover-image light-layout"> -->
-                                        </div>
+                                        <!-- </div> -->
                                         <!-- 1 comments start  -->
 
                                         <!-- 2 comments start  -->
@@ -1679,17 +1679,12 @@ color: #000;
                         </div>
                         <div>
                             <p class="d-inline-flex gap-1">
-                                <span>Add Tenant | </span><a data-bs-toggle="collapse" href="#collapseHelp" role="button" aria-expanded="false" aria-controls="collapseHelp" class="text-dark collapsed active">
-                                  Help ? 
-                                </a>
+                                <span>Add Tenant | </span>
                             
+                                <span><a href="#" onclick="Intercom('showArticle', 8210506)"><i class="fi fi-rs-question text-light"></i>  How to create Tenant? </a></span>
                               </p>
-                              <div class="collapse" id="collapseHelp" style="width: 40%;">
-                                <div class="card card-body">
-                                  <span><a href="#" onclick="Intercom('showArticle', 8210506)"><i class="fi fi-rs-question text-light"></i>  How to create Tenant? </a></span>
-                                  <span><a href="#" onclick="Intercom('showArticle', 8210444)"><i class="fi fi-rs-question text-light"></i>  How to update Tenant? </a></span>
-                                </div>
-                              </div>
+                              
+                                
                         </div>
                         <!-- PAGE-HEADER END -->
                         <div class="row justify-content-center">
@@ -2566,9 +2561,13 @@ color: #000;
                                     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                                 });
                             }
-        $("#user-img").attr("src",image)
+                            if(image!==" " && image!==null){
+                
+                $("#user-img").attr("src", image)
+                $("#user-img-dark").attr("src", image)
+            }
         $("#user-name").text(toTitleCase(userName))
-                    $("#user-img-dark").attr("src",image)                     
+                                    
                         $("#header-user").text(toTitleCase(userName))
 
                 },
