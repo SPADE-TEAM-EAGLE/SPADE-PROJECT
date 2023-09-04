@@ -6465,8 +6465,9 @@ ul.dropdown-menu li.dropdown ul.dropdown-menu .dropdown-plus-title {
 
 .form-control:disabled,
 .form-control[readonly] {
-    background-color: #e9edf4 !important;
+    background-color: #00000057 !important;
     opacity: 1;
+    color: white;
 }
 
 .form-control:disabled::placeholder {
@@ -75314,3 +75315,37 @@ background: url("../images/success.png");
         .light-mode .file-details span {
             color: #000
         }               
+        body.transparent-mode .tab-menu-heading {
+    overflow-x: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: black transparent;
+}
+
+/* WebKit-based browsers (Chrome, Safari, etc.) */
+body.transparent-mode .tab-menu-heading::-webkit-scrollbar {
+    width: 12px;
+}
+
+body.transparent-mode .tab-menu-heading::-webkit-scrollbar-thumb {
+    background-color: black;
+}
+
+body.transparent-mode .tab-menu-heading::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+body.transparent-mode .tab-menu-heading {
+    overflow-x: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent; /* Set initial colors */
+}
+
+body.transparent-mode .tab-menu-heading::-webkit-scrollbar {
+    width: 12px;
+}
+
+body.transparent-mode .tab-menu-heading:hover::-webkit-scrollbar-thumb {
+    background-color: black; /* Change thumb color on hover */
+}
+
+
+

@@ -1821,27 +1821,27 @@
                                                 <div class="form-row mt-5">
                                                     <div class="col-xl-4 mb-3 mt-5">
                                                         <label for="validationCustom01">First name</label>
-                                                        <input type="text" class="form-control" id="firstName"
+                                                        <input type="text" class="form-control" id="firstName" pattern="[A-Za-z\s]+" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
                                                             placeholder="John" required>
                                                         <div class="valid-feedback">Looks good!</div>
                                                     </div>
                                                     <div class="col-xl-4 mb-3 mt-5">
                                                         <label for="validationCustom02">Last name</label>
-                                                        <input type="text" class="form-control" id="lastName"
+                                                        <input type="text" class="form-control" id="lastName" pattern="[A-Za-z\s]+" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
                                                             placeholder="Clark" required>
                                                         <div class="valid-feedback">Looks good!</div>
                                                     </div>
                                                     <div class="col-lg-4"></div>
                                                     <div class="col-xl-4 mb-3">
                                                         <label for="validationCustom02">Email</label>
-                                                        <input type="email" class="form-control" id="email"
+                                                        <input type="email" class="form-control" id="email" pattern="[A-Za-z0-9_\.@]+" oninput="this.value = this.value.replace(/[^A-Za-z0-9_\.@]/g, '').replace(/(@{2,})/g, '@')"
                                                             placeholder="johnclark@outlook.com" required>
                                                         <div class="valid-feedback">Looks good!</div>
                                                     </div>
 
                                                     <div class="col-xl-4 mb-3">
                                                         <label for="validationCustom02">Phone</label><br>
-                                                        <input id="phone" name="phone" type="tel">
+                                                        <input id="phone" name="phone" type="tel" pattern="[0-9]+" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                                                         <div class="valid-feedback">Looks good!</div>
                                                     </div>
                                                     <div class="col-lg-4"></div>
@@ -3835,7 +3835,38 @@
                     });
                 }
             </script>
+<script>
+    // Get references to the input fields and the save button
+    var firstNameInput = document.getElementById("firstName");
+       var lastNameInput = document.getElementById("lastName");
+       var phone1Input = document.getElementById("phone");
+       var emailInput = document.getElementById("email");
+       var saveButton = document.getElementById("save_profile");
 
+       // Function to check and update button state
+       function updateButtonState() {
+           var firstName = firstNameInput.value;
+           var lastName = lastNameInput.value;
+           var phone1 = phone1Input.value;
+           var email = emailInput.value;
+
+           // Check if all three fields are empty
+           if (firstName === '' || lastName === '' || phone1 === '' || email === '') {
+               saveButton.disabled = true;
+           } else {
+               saveButton.disabled = false;
+           }
+       }
+
+       // Bind the keyup event handler to the input fields
+       firstNameInput.addEventListener('keyup', updateButtonState);
+       lastNameInput.addEventListener('keyup', updateButtonState);
+       phone1Input.addEventListener('keyup', updateButtonState);
+       emailInput.addEventListener('keyup', updateButtonState);
+
+       // Call the function on page load to initialize button state
+    //    updateButtonState();
+</script>
 
 </body>
 
