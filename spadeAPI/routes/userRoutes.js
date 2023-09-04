@@ -205,3 +205,5 @@ router.get("/getPropertyDashboard/:propertyId", verifyToken, userController.filt
 module.exports = router;
 router.get("/ProfileCompleteTenant", verifyTokenTenant, tenantPortalController.ProfileCompleteTenant);
 // router.get("/ProfileCompleteTenant" , tenantPortalController.ProfileCompleteTenant);
+// router.get("/unpaidAmountTenant", verifyTokenTenant, tenantPortalController.unpaidAmountTenant);
+router.get("/unpaidAmountTenant", tenantPortalController.unpaidAmountTenant);
