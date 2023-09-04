@@ -879,7 +879,7 @@ color: #000;
                                     multiple>
 
                                 </select>
-                                </select>
+                                <span class="text-danger d-none" id="vendor-span">Add vendors first!!</span>
                                 <!-- <span class="text-danger d-none">Property name required!</span> -->
                             </div>
                             <div class="col-md-4">
@@ -1313,13 +1313,13 @@ color: #000;
 
 
                                         <!-- 1 comments start  -->
-                                        <div class="d-flex country mt-2">
-                                            <a class="nav-link icon text-dark" href="./chats.html">
+                                        <!-- <div class="d-flex country mt-2"> -->
+                                            <!-- <a class="nav-link icon text-dark" href="./chats.html">
                                                 <i class="fi fi-rs-comment"></i>
-                                            </a>
+                                            </a> -->
                                             <!-- <img src="../assets\header-img\comment-light.webp"
                                                 class="avatarr profile-user nav-link brroundd cover-image light-layout"> -->
-                                        </div>
+                                        <!-- </div> -->
                                         <!-- 1 comments start  -->
 
                                         <!-- 2 comments start  -->
@@ -1643,17 +1643,9 @@ color: #000;
                         </div>
                         <div>
                             <p class="d-inline-flex gap-1">
-                                <span>Add Task | </span><a data-bs-toggle="collapse" href="#collapseHelp" role="button" aria-expanded="false" aria-controls="collapseHelp" class="text-dark collapsed active">
-                                  Help ? 
-                                </a>
-                            
-                              </p>
-                              <div class="collapse" id="collapseHelp" style="width: 40%;">
-                                <div class="card card-body">
-                                  <span><a href="#" onclick="Intercom('showArticle', 8210506)"><i class="fi fi-rs-question text-light"></i>  How to create Task? </a></span>
-                                  <span><a href="#" onclick="Intercom('showArticle', 8210444)"><i class="fi fi-rs-question text-light"></i>  How to update Task? </a></span>
-                                </div>
-                              </div>
+                                <span>Task | </span>
+                                  <span><a href="#" onclick="Intercom('showArticle', 8210506)"> How to add Task? </a></span>
+                            </p>
                         </div>
                         <!-- PAGE-HEADER END -->
                         <div class="row justify-content-center">
@@ -2466,8 +2458,11 @@ color: #000;
                 },
                 success: function ({ image,userName }) {
                     
-$("#user-img").attr("src",image)
-                    $("#user-img-dark").attr("src",image)                   
+                    if(image!==" " && image!==null){
+                
+                $("#user-img").attr("src", image)
+                $("#user-img-dark").attr("src", image)
+            }                  
                 },
                 error: function (xhr, status, error) {
                     $("#myModal_warning").modal("show");
@@ -2546,7 +2541,17 @@ $("#user-img").attr("src",image)
                             });
                         }
                         // Handle state selection change
+                    },
+                    error: function (xhr, status, error) {
+                    
+                    if(xhr.responseJSON.message=="No vendor data found"){
+                        $("#assignee").empty()
+                        $("#assignee").prop("disabled", true);
+                        $("#vendor-span").removeClass("d-none");
+                        
+
                     }
+                }
                 })
 
                 function areAllFieldsFilled(update) {
@@ -2701,14 +2706,6 @@ $("#user-img").attr("src",image)
 
                     var formData = new FormData();
 
-                    // Add the form data
-                    // formData.append('task', task);
-                    // formData.append('assignee', assignee);
-                    // formData.append('property', property);
-                    // formData.append('dueDate', dueDate);
-                    // formData.append('status', status);
-                    // formData.append('priority', priority);
-                    // formData.append('note', note);
                     var taskData = {}
                     // Check if the first checkbox is checked
                     var isNotifyTenantChecked = $('input[name="example-checkbox1"]:eq(0)').is(':checked') ? "yes" : "no";
@@ -2723,8 +2720,9 @@ $("#user-img").attr("src",image)
                     var files = $('#fileInput')[0].files;
                     if (selectedFiles.length >= 1) {
                         for (var i = 0; i < selectedFiles.length; i++) {
-                            formData.append('image', selectedFiles[i]);
-                            $.ajax({
+                            formData.append('image', selectedFiles[i]);  
+                        }
+                        $.ajax({
                                 url: 'https://backend.app.spaderent.com/api/spade/upload',
                                 type: 'POST',
                                 data: formData,
@@ -2785,7 +2783,6 @@ $("#user-img").attr("src",image)
                     console.log(xhr.responseText);
                                 }
                             });
-                        }
                     }else{
                         taskData = {
                                         task: task,
@@ -3207,148 +3204,7 @@ $("#user-img").attr("src",image)
                     console.log(2)
                     $("#global-loader").fadeIn("fast")
                     // console.log(22)
-                    $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/getAllTask',
-                        type: 'GET',
-                        contentType: false,
-                        processData: false,
-                        headers: {
-                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                        },
-                        success: function (response) {
-                            console.log(response);
-                            if (false) {
-
-                                window.location = './new-property.html'
-                            } else {
-                                function toTitleCase(str) {
-                                    return str.replace(/\w\S*/g, function (txt) {
-                                        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-                                    });
-                                }
-                                $("#user-name").text(toTitleCase(response.user))
-                                $("#header-user").text(toTitleCase(response.user))
-
-                                var tableBody = $('#table_body');
-
-                                tableBody.empty();
-
-                                function toTitleCase(str) {
-                                    return str.replace(/\w\S*/g, function (txt) {
-                                        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-                                    });
-                                }
-
-                                response.data[0]?.forEach(function (task,index) {
-                                    // var image = '<td><img src="../../../../spadeAPI/uploads/' + property.images[0] + '" alt=""></td>';
-                                    // var image = '<td><img src="../../../../../../Desktop/spade API 2/uploads/image-1684250579662.png" alt="hhghghgh"></td>';
-                                    
-                                    var image = '<td><img src="../../../../spadeAPI/uploads/' + task.taskImages?.split(',')[0] + '" alt=""></td>';
-
-                                    var createdDate = new Date(task.created_at);
-                                    var currentDate = new Date();
-
-                                    var timeDiff = Math.abs(currentDate - createdDate);
-                                    var minutesDiff = Math.floor(timeDiff / (1000 * 60));
-                                    var hoursDiff = Math.floor(minutesDiff / 60);
-                                    var daysDiff = Math.floor(hoursDiff / 24);
-
-                                    var taskName = `<td class="task-id" id=${task.id} style="font-weight: 600;">` + '<p style="font-weight: 600;" class="mb-1">' + task.taskName + '</p>' +
-                                        `<span class="font-weight-normal" style="color: #9B9B9B;"> By ${task.createdBy} - `;
-
-                                    if (daysDiff > 0) {
-                                        taskName += `${daysDiff} days`;
-                                    } else if (hoursDiff > 0) {
-                                        taskName += `${hoursDiff} hours`;
-                                    } else {
-                                        taskName += `${minutesDiff} minutes`;
-                                    }
-
-                                    taskName += '</span>' + '</td>';
-
-                                    var assignTo = '<td style="font-weight: 600;text-align: center;display: flex;">' +
-                                        (task.AssignTo?.map(({
-                                            name,
-                                            email
-                                        }) => {
-                                            return `
-                <div class="me-2">
-                    <img class="avatar brround avatar-md" src="../assets/images/users/2.jpg" alt="avatar-img">
-                    <div class="media-body valign-middle mt-0">
-                        <a href="javascript:void(0)" class="text-dark fw-semibold">${name}</a>
-                    </div>
-                </div>`;
-                                        }) || "Not assigned") +
-                                        '</td>';
-
-                                    var dueDate = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + (task.dueDate || "Not Set") + '</p>' + `<span class="font-weight-normal text-danger"> <i
-                                                                            class="fe fe-circle me-1"></i>${task.priority}</span>` + '</td>';
-                                    var relatedTo = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + (task.propertyName ? toTitleCase(task.propertyName) : "Not Set") + '</p>' + `<span class="font-weight-normal text-danger">Unit Number: ${task.unitNumber}</span>` + '</td>';
-                                    var status = '<td class="property-id " style="font-weight: 600;">' + (task.status ? toTitleCase(task.status) : "Not Set") + '</td>';
-
-
-
-                                    var dropdownMenu =
-                                        '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
-                                        '<ul class="dropdown-menu">' +
-                                        '<li><a class="edit-option dropdown-item text-primary" href="javascript:void(0)">Edit</a></li>' +
-                                        '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>' +
-                                        `<li><a class="dropdown-item text-success" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#viewModal-tasks">View</a></li>` +
-                                        // `<li><a class="dropdown-item text-success" href="./view-property.html?propertyId=${property.id}">View</a></li>` +
-                                        '</ul></td>';
-                                    // Create a table row and append the generated columns
-                                    var row = '<tr>' + image + taskName + assignTo + dueDate +
-                                        relatedTo + status + dropdownMenu + '</tr>';
-
-                                    // Append the row to the table body
-                                    tableBody.append(row);
-                                });
-                                $("#global-loader").fadeOut("slow")
-                                $('.edit-option').click(function (e) {
-                                    e.preventDefault();
-                                    const taskIdElement = $(this).closest("tr").find(".task-id");
-
-                                    taskId = taskIdElement.attr("id")
-
-                                    const data = response.data[0].find(obj => obj.id.toString() == taskId);
-                                    console.log(taskId)
-                                    selectedFiles = data.taskImages.split(",")
-
-                                    updateSelectedFilesContainer()
-                                    $("#message").val(data.notes);
-                                    $("#dueDate_update").val(data.dueDate);
-                                    $("#taskName_update").val(data.taskName);
-                                    $("#property_update").val(data.tenantID);
-
-                                    $("#priority_update").find(`option[name="${data.priority.toLowerCase()}"]`).prop("selected", true);
-                                    $("#status_update").find(`option[value="${data.status}"]`).prop("selected", true);
-                                    data.AssignTo.forEach(({
-                                        ID,
-                                        name
-                                    }) => {
-                                        $("#assignee_update").find(`option[value="${ID}"]`).prop("selected", true);
-                                        $(".select2-selection__rendered").append(`<li class="select2-selection__choice" title="${name}"><span class="select2-selection__choice__remove" role="presentation">×</span>${name}</li>`)
-                                    })
-
-                                    $('#myModal_edit').modal('show');
-                                });
-                                $('.delete-option').click(function (e) {
-                                    e.preventDefault(); // Prevent default anchor behavior
-                                    const taskIdElement = $(this).closest("tr").find(".task-id");
-                                    taskId = taskIdElement.attr("id");
-                                    $('#myModal_delete').modal('show');
-                                });
-                            }
-                        },
-                        error: function (xhr, status, error) {
-                            console.log(error)
-                            $("#myModal_warning").modal("show");
-                            setTimeout(function () {
-                                $('#myModal_warning').modal('hide');
-                                window.location = '../Landlord/login_module.html';
-                            }, 2000);
-                        }
-                    });
+                    
 
                 }
                 getData()

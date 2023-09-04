@@ -214,9 +214,9 @@ $(document).ready(function () {
     $('#fileInput').on('change', function () {
         
         var files = Array.from($(this)[0].files);
-        // console.log(files)
+        console.log(files)
         files.forEach(function (file) {
-            selectedFiles.push(file); // Add each file to the selected files array
+            selectedFiles.push(file);
         });
         
         updateSelectedFilesContainer(); // Update the selected files container
@@ -287,7 +287,6 @@ $(document).on('click', '#next', function(e) {
     var propertySQFT = $("#propertyTotalSF").val();
     var units = $("#units").val();
 
-    var selectedFiles = $('#fileInput')[0].files;
 
     if (selectedFiles.length >= 1) {
         var uploadFormData = new FormData();
@@ -442,7 +441,7 @@ function updateSelectedFilesContainer() {
     selectedFilesContainer.empty();
     console.log(selectedFiles)
     selectedFiles.forEach(function (file, index) {
-        console.log(file)
+        // console.log(file)
         var fileElement = $('<div>')
             .addClass('selected-file')
             .append(
