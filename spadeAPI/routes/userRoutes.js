@@ -196,13 +196,12 @@ router.get("/invoiceAmountCount/:start/:end" ,verifyToken ,invoiceController.inv
 router.get("/getAllTaskTenantRequest", verifyToken, taskController.getAllTaskTenantRequest);
 router.get("/taskByIDTenant" ,verifyToken ,tenantPortalController.taskByIDTenant);
 // router.get("/taskByIDTenant" , tenantPortalController.taskByIDTenant);
-
 router.post("/openOrder", paymentIntegration.openOrder);
 router.post("/createUserPayment", paymentIntegration.createUserPayment);
+router.post("/getUserDetailsPayment", paymentIntegration.getUserDetailsPayment);
 // router.post("/createUserPaymentasdfgh", paymentIntegration.createUserPaymentasdfgh);
 // router.post("/openOrder", openOrder);
 router.get("/getPropertyDashboard/:propertyId", verifyToken, userController.filterOutDashbordDataByProperty);
 module.exports = router;
-
-router.get("/ProfileCompleteTenant", verifyTokenTenant, tenantPortalController.ProfileCompleteTenant);
-// router.get("/ProfileCompleteTenant" , tenantPortalController.ProfileCompleteTenant);
+// router.get("/ProfileCompleteTenant", verifyTokenTenant, tenantPortalController.ProfileCompleteTenant);
+router.get("/ProfileCompleteTenant" , tenantPortalController.ProfileCompleteTenant);

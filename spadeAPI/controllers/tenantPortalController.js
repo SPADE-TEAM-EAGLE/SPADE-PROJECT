@@ -413,8 +413,8 @@ exports.taskByIDTenant = async (req, res) => {
 
 exports.ProfileCompleteTenant = async (req, res) => {
   try {
-    const { userId } = req.user;
-    // const { userId } = req.body;
+    // const { userId } = req.user;
+    const { userId } = req.body;
     const tenantCheckResult = await queryRunner(selectQuery("tenants", "id"), [
       userId,
     ]);
