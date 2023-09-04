@@ -472,8 +472,8 @@ exports.ProfileCompleteTenant = async (req, res) => {
 
 exports.unpaidAmountTenant = async (req, res) => {
   try {
-    // const { userId } = req.user;
-    const { userId } = req.body;
+    const { userId } = req.user;
+    // const { userId } = req.body;
     const tenantAmountResult = await queryRunner(unpaidAmountQuery, [userId]);
     // console.log(tenantAmountResult)
     if (tenantAmountResult[0][0].length > 0) {
