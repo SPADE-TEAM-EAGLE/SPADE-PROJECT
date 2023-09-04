@@ -1630,11 +1630,11 @@
 .popup22 img{
     cursor: pointer
 }
-.show{
+.showw{
     z-index: 999;
     display: none;
 }
-.show .overlay{
+.showw .overlay{
     width: 100%;
     height: 1000%;
     background: rgba(0,0,0,.6);
@@ -1643,7 +1643,7 @@
     top: 0;
     left: 0;
 }
-.show .img-show {
+.showw .img-show {
     /*width: 600px;
     height: auto;*/
     background: transparent;
@@ -2417,7 +2417,7 @@
                                                 class="nav-link leading-none d-flex">
                                                 <!-- <img src="../assets/images/users/21.jpg" 
                                                     class="avatar  profile-user brround cover-image"> -->
-                                                <span class="dynamic-text-head text-dark text-dark" tyle="padding: 10px 10px;"
+                                                <span class="dynamic-text-head text-dark text-dark" style="padding: 10px 10px;"
                                                     id="header-user"></span> <i
                                                     class="fe fe-chevron-down dark-mode text-dark"
                                                     style="font-size: 20px; font-weight: 800;"></i>
@@ -8514,7 +8514,7 @@
                                                                         aria-describedby="emailHelp"
                                                                         placeholder="Enter Current Password">
                                                                     <i class="fi fi-rs-eye text-dark fs-20 toggle-password"
-                                                                        toggle="#current_password" style="cursor: pointer;
+                                                                        toggle="#current_password" id="current_password11" style="cursor: pointer;
                                                                 float: right;
                                                                 margin-top: -30px;
                                                                 margin-right: 15px;
@@ -8531,7 +8531,7 @@
                                                                         aria-describedby="emailHelp"
                                                                         placeholder="Enter Confirm Password">
                                                                     <i class="fi fi-rs-eye text-dark fs-20 toggle-password"
-                                                                        toggle="#confirm_password" style="cursor: pointer;
+                                                                        toggle="#confirm_password" id="confirm_password11" style="cursor: pointer;
                                                                 float: right;
                                                                 margin-top: -30px;
                                                                 margin-right: 15px;
@@ -9801,6 +9801,44 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                     $(this).toggleClass('fi-rs-eye fi-rs-crossed-eye');
                 });
             });
+
+
+
+// Close Account password eye start 
+const togglePasswordcloseaccount1 = document.querySelector("#current_password11");
+            const passwordcloseaccount1 = document.querySelector("#current_password_acount_close");
+
+            togglePasswordcloseaccount1.addEventListener("click", function (e) {
+                const type =
+                passwordcloseaccount1.getAttribute("type") === "password" ? "text" : "password";
+                passwordcloseaccount1.setAttribute("type", type);
+
+            });
+            const togglePasswordcloseaccount2 = document.querySelector("#confirm_password11");
+            const passwordcloseaccount2 = document.querySelector("#confirm_password_acount_close");
+
+            togglePasswordcloseaccount2.addEventListener("click", function (e) {
+                const type =
+                passwordcloseaccount2.getAttribute("type") === "password" ? "text" : "password";
+                passwordcloseaccount2.setAttribute("type", type);
+
+            });
+            $(document).ready(function () {
+                $('#current_password11').click(function () {
+                    $(this).toggleClass('fi-rs-eye fi-rs-crossed-eye');
+                });
+            });
+            $(document).ready(function () {
+                $('#confirm_password11').click(function () {
+                    $(this).toggleClass('fi-rs-eye fi-rs-crossed-eye');
+                });
+            });
+
+// Close Account password eye End 
+
+
+
+
             var invoiceData=[]
             $(document).ready(() => {
                 // ----- On render -----\\
@@ -11020,12 +11058,12 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
     
     $(".popup22 img").click(function () {
         var $src = $(this).attr("src");
-        $(".show").fadeIn();
+        $(".showw").fadeIn();
         $(".img-show img").attr("src", $src);
     });
     
     $("span, .overlay").click(function () {
-        $(".show").fadeOut();
+        $(".showw").fadeOut();
     });
     
 });
