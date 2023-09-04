@@ -2325,13 +2325,13 @@
                                             <img src="../assets\header-img\comment.svg"
                                                 class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div> -->
-                                        <div class="d-flex country mt-2">
-                                            <a class="nav-link icon text-dark" href="./chats.html">
+                                        <!-- <div class="d-flex country mt-2"> -->
+                                            <!-- <a class="nav-link icon text-dark" href="./chats.html">
                                                 <i class="fi fi-rs-comment"></i>
-                                            </a>
+                                            </a> -->
                                             <!-- <img src="../assets\header-img\comment-light.webp"
                                                 class="avatarr profile-user nav-link brroundd cover-image light-layout"> -->
-                                        </div>
+                                        <!-- </div> -->
                                         <!-- 1 comments start  -->
                                         <!-- 2 comments start  -->
                                         <!-- <div class="d-flex country mt-2">
@@ -2671,19 +2671,12 @@
                                 <div class="panel panel-primary">
                                     <div class="panel-body tabs-menu-body">
                                         <div class="tab-content">
-                                            <div class="mb-3">
+                                            <div>
                                                 <p class="d-inline-flex gap-1">
-                                                    <span>Add Invoicing | </span><a data-bs-toggle="collapse" href="#collapseHelp" role="button" aria-expanded="false" aria-controls="collapseHelp" class="text-dark collapsed active">
-                                                      Help ? 
-                                                    </a>
-                                                
-                                                  </p>
-                                                  <div class="collapse" id="collapseHelp" style="width: 40%;">
-                                                    <div class="card card-body">
-                                                      <span><a href="#" onclick="Intercom('showArticle', 8210506)"><i class="fi fi-rs-question text-light"></i>  How to create Properties? </a></span>
-                                                      <span><a href="#" onclick="Intercom('showArticle', 8210444)"><i class="fi fi-rs-question text-light"></i>  How to update Properties? </a></span>
-                                                    </div>
-                                                  </div>
+                                                    <span>Settings | </span>
+                                                      <span><a href="#" onclick="Intercom('showArticle', 8210506)"> Change Password? </a></span>
+                                                      <span><a href="#" onclick="Intercom('showArticle', 8210444)"> Subscription? </a></span>
+                                                </p>
                                             </div>
                                             <div class="tab-pane active" id="tab5">
                                                 <h2 class="h2-personal-inf">Personal Information</h2>
@@ -3130,7 +3123,7 @@
                                                                                         href="#month">Monthly</a>
                                                                                 </li>
                                                                                 <li>
-                                                                                    <a class="active show"
+                                                                                    <a class="active show d-block"
                                                                                         data-bs-toggle="tab"
                                                                                         href="#annualyear">Annually</a>
                                                                                 </li>
@@ -3662,7 +3655,7 @@
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-                                                                                <div class="tab-pane active show"
+                                                                                <div class="tab-pane active show d-block"
                                                                                     id="annualyear">
                                                                                     <div
                                                                                         class="row d-flex align-items-stretch justify-content-center">
@@ -9820,8 +9813,11 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                                 });
                             }
                             console.log(response)
-                            $("#user-img").attr("src", response.image)
-                            $("#user-img-dark").attr("src", response.image)
+                            if(response.image!==" " && response.image!==null){
+                
+                $("#user-img").attr("src", response.image)
+                $("#user-img-dark").attr("src", response.image)
+            }
                             $("#firstName").val(toTitleCase(response.firstName))
                             $("#lastName").val(toTitleCase(response.lastName))
                             $("#email").val(response.email)
@@ -10310,6 +10306,7 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                 })
 
                 $("#save-vendor").click(() => {
+                    $("#save-vendor").prop('disabled', true);
                     const data = []
                     $('#add-item-container5 .tr').each(function () {
 
@@ -10336,6 +10333,7 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                         data: JSON.stringify(data),
                         contentType: 'application/json',
                         success: function (response) {
+                            $("#save-vendor").prop('disabled', false);
 
                             // Handle the success response
                             $("#myModal_success p").text("Succesfully Updated!!!")
@@ -10347,6 +10345,8 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                             // Perform any additional actions or show success message
                         },
                         error: function (xhr, status, error) {
+                            $("#save-vendor").prop('disabled', false);
+
                             // Handle the error response
                             console.log('Error occurred:', error);
                             // Perform error handling or show error message
@@ -10355,6 +10355,7 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                 })
 
                 $('#save-categories').click(function () {
+                    $('#save-categories').prop('disabled', true);
                     var data = []; // Array to store data for each row
 
                     // Iterate over each table row
@@ -10401,6 +10402,8 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                         data: JSON.stringify(data),
                         contentType: 'application/json',
                         success: function (response) {
+                    $('#save-categories').prop('disabled', false);
+
                             // Handle the success response
                             $("#myModal_success p").text("Succesfully Updated!!!")
                             $("#myModal_success").modal("show")
@@ -10411,6 +10414,8 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                             // Perform any additional actions or show success message
                         },
                         error: function (xhr, status, error) {
+                    $('#save-categories').prop('disabled', false);
+
                             // Handle the error response
                             console.log('Error occurred:', error);
                             // Perform error handling or show error message
@@ -10554,6 +10559,7 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                 profileComplete();
 
                 $(document).on("click", "#save_profile", () => {
+                    $("#save_profile").prop("disabled", true)
                     let userData = {
                         firstName: $("#firstName").val(),
                         lastName: $("#lastName").val(),
@@ -10590,6 +10596,7 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                     },
                                     success: function (response) {
+                    $("#save_profile").prop("disabled", false)
                                         
                                         $("#myModal_success p").text("Succesfully Updated!!!")
                                         profileComplete();
@@ -10600,6 +10607,7 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                                         getData()
                                     },
                                     error: function (xhr, status, error) {
+                                        $("#save_profile").prop("disabled", false)
                                         console.log('Error occurred while fetching state and city data.');
                                         console.log(xhr);
                                         console.log(error);
@@ -10623,6 +10631,7 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                             },
                             success: function (response) {
+                                $("#save_profile").prop("disabled", false)
                                 $("#myModal_success p").text("Succesfully Updated!!!")
                                 profileComplete();
                                 $("#myModal_success").modal("show")
@@ -10633,6 +10642,7 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
 
                             },
                             error: function (xhr, status, error) {
+                                $("#save_profile").prop("disabled", false)
                                 console.log('Error occurred while fetching state and city data.');
                                 console.log(xhr);
                                 console.log(error);
@@ -10687,6 +10697,7 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                 });
 
                 $("#save").click(() => {
+                    $("#save").prop("disabled", true)
                     console.log($("#current_password_reset").val(), $("#id_password1_new").val())
                     $.ajax({
                         url: 'https://backend.app.spaderent.com/api/spade/changePasssword',
@@ -10701,6 +10712,8 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
+                    $("#save").prop("disabled", false)
+
                             $("#id_password_new").val("")
                             $("#id_password2").val("")
                             $("#current_password_reset").val("")
@@ -10713,6 +10726,8 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                             }, 2000);
                         },
                         error: function (xhr, status, error) {
+                    $("#save").prop("disabled", false)
+
                             // Handle the error response from the API
                             if(xhr.responseJSON.error=="Incorrect Password"){
                                 $("#myModal_incorrect").modal("show")
@@ -10908,7 +10923,7 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                     var $row = $(this).closest('.tr');
                     var $rowsContainer = $row.parent();
 
-                    if ($rowsContainer.children('.tr').length > 1) {
+                    if ($rowsContainer.children('.tr').length >= 1) {
                         $row.remove();
                     } else {
                         //   alert('Cannot delete the last row.');
@@ -10949,7 +10964,7 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response);
+                    
                     if(localStorage.getItem("htmlLayout")){
 
                         const htmlLayoutValue = localStorage.getItem("htmlLayout");
@@ -10959,10 +10974,9 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
                         localStorage.clear();
 
                     }
-                    // localStorage.removeItem('authtoken');
-                    // window.close();
+                    
                     window.open('./login_module.html', "_self")
-                    console.log('Done');
+                    
                 },
                 error: function (xhr, status, error) {
                     console.log(error);

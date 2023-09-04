@@ -2301,7 +2301,7 @@
                                                     <hr style="background-color: #D3D3D3;">
                                                     <h2 class="h2-personal-inf text-dark mb-3 balance-due">Balance Due
                                                     </h2>
-                                                    <h1 class="text-primary balnce-price mb-0"><b>$356.00</b></h1>
+                                                    <h1 class="text-primary balnce-price mb-0"><b>$ 0.00</b></h1>
                                                     <button class="btn btn-primary text-primaryy btn-pill m-2"
                                                         id="form2show"
                                                         style="width: fit-content; border: transparent;"><b>Pay
@@ -2309,7 +2309,7 @@
                                                     <p class="mt-4" id="text-hide"><b>You are not able to close account
                                                             because you have <br>
                                                             outstanding balance of <span
-                                                                style="color: #1467B0;">$356.00</span></b></p>
+                                                                style="color: #1467B0;">$0.00</span></b></p>
 
                                                     <div class="row mt-5">
                                                         <div id="form2" style="display: none;">
@@ -3416,6 +3416,11 @@
                                     $("#myModal_warning_connection").modal("show")
                                 } else if (xhr.responseText == "Incorrect Password") {
                                     $("#myModal_warning").modal("show")
+                                    setTimeout(function () {
+                                    $("#myModal_warning").modal("hide");
+                                    localStorage.setItem("authtoken", response.token);
+                                    // window.location = "../Landlord/index.html";
+                                }, 2000);
                                 }
                                 else {
                                     console.log('API error:', error);
@@ -3715,8 +3720,11 @@ $('#myModal_warning').modal('hide');
                             $('#profile').css('background-image', 'url(' + response.image + ')').addClass('hasImage');
 
                 console.log(response)    
-$("#user-img").attr("src",image)
-                    $("#user-img-dark").attr("src",image)                },
+                if(image!==" " && image!==null){
+                
+                $("#user-img").attr("src", image)
+                $("#user-img-dark").attr("src", image)
+            }                 },
                 error: function (xhr, status, error) {
                     $("#myModal_warning").modal("show");
                     setTimeout(function() {

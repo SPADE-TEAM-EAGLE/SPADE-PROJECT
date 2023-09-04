@@ -2582,13 +2582,13 @@
 
 
                                         <!-- 1 comments start  -->
-                                        <div class="d-flex country mt-2">
+                                        <!-- <div class="d-flex country mt-2">
                                             <a class="nav-link icon text-dark" href="./chats.html">
                                                 <i class="fi fi-rs-comment"></i>
-                                            </a>
+                                            </a> -->
                                             <!-- <img src="../assets\header-img\comment-light.webp"
                                                 class="avatarr profile-user nav-link brroundd cover-image light-layout"> -->
-                                        </div>
+                                        <!-- </div> -->
                                         <!-- 1 comments start  -->
 
                                         <!-- 2 comments start  -->
@@ -2915,22 +2915,10 @@
                         <!-- PAGE-HEADER END -->
                         <div>
                             <p class="d-inline-flex gap-1">
-                                <span>Add Invoicing | </span><a data-bs-toggle="collapse" href="#collapseHelp"
-                                    role="button" aria-expanded="false" aria-controls="collapseHelp">
-                                    Help ?
-                                </a>
-
+                                <span>Invoice | </span>
+                                  <span><a href="#" onclick="Intercom('showArticle', 8210506)"> How to add Invoice? </a></span>
+                                  <span><a href="#" onclick="Intercom('showArticle', 8210444)"> How to update Invoice? </a></span>
                             </p>
-                            <div class="collapse" id="collapseHelp" style="width: 40%;">
-                                <div class="card card-body">
-                                    <span><a href="#" onclick="Intercom('showArticle', 8210506)"><i
-                                                class="fi fi-rs-question text-light"></i> How to create Invoice?
-                                        </a></span>
-                                    <span><a href="#" onclick="Intercom('showArticle', 8210444)"><i
-                                                class="fi fi-rs-question text-light"></i> How to update Invoice?
-                                        </a></span>
-                                </div>
-                            </div>
                         </div>
                         <!-- Row -->
                         <div class="row">
@@ -4143,13 +4131,13 @@
                             windeo
                         }
                         console.log($("#totalText").text().split(' ')[1])
-                        var fileInput = document.getElementById('fileInput');
-                        var files = fileInput.files;
+                        // var fileInput = document.getElementById('fileInput');
+                        // var files = fileInput.files;
 
-                        if (files.length >= 1) {
+                        if (selectedFiles.length >= 1) {
                             var uploadFormData = new FormData();
-                            for (var i = 0; i < files.length; i++) {
-                                var file = files[i];
+                            for (var i = 0; i < selectedFiles.length; i++) {
+                                var file = selectedFiles[i];
                                 uploadFormData.append('image', file);
                             }
                             $.ajax({
@@ -4162,6 +4150,7 @@
                                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                 },
                                 success: function (response) {
+                                    $("#addModal").modal("hide")
                                     var imageArray = response.images;
                                     invoiceData = {
                                         tenantID: selectedTenant,
@@ -4192,7 +4181,7 @@
                                         success: function (response) {
                                             const tenant = tenantData.find(obj => obj.tenantID == selectedTenant)
                                             console.log(tenant)
-                                            $("#addModal").modal("hide")
+                                            
                                             invoiceId = response.invoiceId
 
                                             $('#addModal input[type="text"], #addModal input[type="date"], #addModal textarea').val('');
@@ -4380,7 +4369,7 @@
                                 var invoiceNumber = '<td class="invoice-id d-none" style="font-weight: 600;">' + invoice.invoiceID + '</td>';
 
                                 var tenantName = '<td class="tenantName" style="font-weight: 600;">' + invoice.firstName + invoice.lastName + `<br><small>${invoice.tPhone}</small>` + '</td>';
-                                var memoDescription = '<td class="memo" style="font-weight: 600;">' + invoice.memo[0].memo + `<br><small>${invoice.invoiceType}</small>` + '</td>';
+                                var memoDescription = '<td class="memo" style="font-weight: 600;">' + (invoice?.memo[0]?.memo || "N/A") + `<br><small>${invoice.invoiceType}</small>` + '</td>';
 
                                 var dateObj = new Date(invoice.created_at);
                                 var day = dateObj.getDate();
@@ -5129,6 +5118,7 @@
                     })
                     $("#viewModal").modal("show")
                 })
+                
                 $(document).on('click', ".view-btnn", function (e) {
                     e.preventDefault();
 
@@ -5790,9 +5780,11 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function ({ image }) {
-
-                        $("#user-img").attr("src", image)
-                        $("#user-img-dark").attr("src", image)
+                        if(image!==" " && image!==null){
+                
+                $("#user-img").attr("src", image)
+                $("#user-img-dark").attr("src", image)
+            }
                     },
                     error: function (xhr, status, error) {
                         $("#myModal_warning").modal("show");

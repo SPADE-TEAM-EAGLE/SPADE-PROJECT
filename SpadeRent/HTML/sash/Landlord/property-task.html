@@ -821,13 +821,7 @@
                                     <!-- 2 comments start  -->
 
                                     <!-- 1 comments start  -->
-                                    <div class="d-flex country mt-2">
-                                        <a class="nav-link icon text-dark" href="./chats.html">
-                                            <i class="fi fi-rs-comment"></i>
-                                        </a>
-                                        <!-- <img src="../assets\header-img\comment-light.webp"
-                                            class="avatarr profile-user nav-link brroundd cover-image light-layout"> -->
-                                    </div>
+                                    
                                     <!-- 1 comments start  -->
 
 
@@ -1162,17 +1156,13 @@
                         </div>
                         <div>
                             <p class="d-inline-flex gap-1">
-                                <span>Add Properties | </span><a data-bs-toggle="collapse" href="#collapseHelp" role="button" aria-expanded="false" aria-controls="collapseHelp">
-                                  Help ? 
-                                </a>
-                            
+                                <span>Add Properties | </span>
+                                
+                                <span><a href="#" onclick="Intercom('showArticle', 8210506)"> How to create Properties? </a></span>
+                                <span><a href="#" onclick="Intercom('showArticle', 8210444)"> How to update Properties? </a></span>
                               </p>
-                              <div class="collapse" id="collapseHelp" style="width: 40%;">
-                                <div class="card card-body">
-                                  <span><a href="#" onclick="Intercom('showArticle', 8210506)"><i class="fi fi-rs-question text-light"></i>  How to create Properties? </a></span>
-                                  <span><a href="#" onclick="Intercom('showArticle', 8210444)"><i class="fi fi-rs-question text-light"></i>  How to update Properties? </a></span>
-                                </div>
-                              </div>
+                              
+                               
                         </div>
                         <!-- PAGE-HEADER END -->
                         <div class="over_view" id="Overview">
@@ -2084,8 +2074,11 @@
                 },
                 success: function ({ userName, image }) {
                     // console.log()
-                    $("#user-img").attr("src", image)
-                    $("#user-img-dark").attr("src", image)
+                    if(image!==" " && image!==null){
+                
+                $("#user-img").attr("src", image)
+                $("#user-img-dark").attr("src", image)
+            }
                     function toTitleCase(str) {
                         return str.replace(/\w\S*/g, function (txt) {
                             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();

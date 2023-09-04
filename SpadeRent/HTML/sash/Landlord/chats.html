@@ -1944,13 +1944,13 @@
                                             </a>
                                         </div> -->
                                         <!-- 1 comments start  -->
-                                        <div class="d-flex country mt-2">
+                                        <!-- <div class="d-flex country mt-2">
                                             <a class="nav-link icon text-dark" href="./chats.html">
                                                 <i class="fi fi-rs-comment"></i>
-                                            </a>
+                                            </a> -->
                                             <!-- <img src="../assets\header-img\comment-light.webp"
                                                 class="avatarr profile-user nav-link brroundd cover-image light-layout"> -->
-                                        </div>
+                                        <!-- </div> -->
                                         <!-- 1 comments start  -->
                                         <!-- 2 comments start  -->
                                         <!-- <div class="d-flex country mt-2">
@@ -2258,17 +2258,12 @@
                         </div>
                         <div>
                             <p class="d-inline-flex gap-1">
-                                <span>Chats | </span><a data-bs-toggle="collapse" href="#collapseHelp" role="button" aria-expanded="false" aria-controls="collapseHelp" class="text-dark collapsed active">
-                                  Help ? 
-                                </a>
-                            
+                                <span>Chats | </span>
+                                <span><a href="#" onclick="Intercom('showArticle', 8210506)"> How to add Chats? </a></span>
+                                <span><a href="#" onclick="Intercom('showArticle', 8210444)"> How to Chats? </a></span>
                               </p>
-                              <div class="collapse" id="collapseHelp" style="width: 40%;">
-                                <div class="card card-body">
-                                  <span><a href="#" onclick="Intercom('showArticle', 8210506)"><i class="fi fi-rs-question text-light"></i>  How to Chat? </a></span>
-                                  <span><a href="#" onclick="Intercom('showArticle', 8210444)"><i class="fi fi-rs-question text-light"></i>  Send files? </a></span>
-                                </div>
-                              </div>
+                              
+                               
                         </div>
                         <div class="row">
                             <!-- <input type="text" id="inputField"> -->
@@ -3700,8 +3695,11 @@
                         localStorage.setItem("landlordId", response.userId)
                         // LandlordImg = response.image;
                         
-                        $("#user-img").attr("src", response.image)
-                        $("#user-img-dark").attr("src", response.image)
+                        if(response.image!==" " && response.image!==null){
+                
+                $("#user-img").attr("src", response.image)
+                $("#user-img-dark").attr("src", response.image)
+            }
                         $("#user-name").text(toTitleCase(response.userName))
                         $("#header-user").text(toTitleCase(response.userName))
                         // userEmail = email

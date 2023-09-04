@@ -1033,13 +1033,13 @@
 
 
                                         <!-- 1 comments start  -->
-                                        <div class="d-flex country mt-2">
+                                        <!-- <div class="d-flex country mt-2">
                                             <a class="nav-link icon text-dark" href="./chats.html">
                                                 <i class="fi fi-rs-comment"></i>
-                                            </a>
+                                            </a> -->
                                             <!-- <img src="../assets\header-img\comment-light.webp"
                                                 class="avatarr profile-user nav-link brroundd cover-image light-layout"> -->
-                                        </div>
+                                        <!-- </div> -->
                                         <!-- 1 comments start  -->
 
                                         <!-- 2 comments start  -->
@@ -1408,17 +1408,10 @@
                         </div>
                         <div>
                             <p class="d-inline-flex gap-1">
-                                <span>Tenant File | </span><a data-bs-toggle="collapse" href="#collapseHelp" role="button" aria-expanded="false" aria-controls="collapseHelp">
-                                  Help ? 
-                                </a>
-                            
-                              </p>
-                              <div class="collapse" id="collapseHelp" style="width: 40%;">
-                                <div class="card card-body">
-                                  <span><a href="#" onclick="Intercom('showArticle', 8210506)"><i class="fi fi-rs-question text-light"></i>  How to create Properties? </a></span>
-                                  <span><a href="#" onclick="Intercom('showArticle', 8210444)"><i class="fi fi-rs-question text-light"></i>  How to update Properties? </a></span>
-                                </div>
-                              </div>
+                                <span>Tenant-File | </span>
+                                  <span><a href="#" onclick="Intercom('showArticle', 8210506)"> How to create Tenant? </a></span>
+                                  <span><a href="#" onclick="Intercom('showArticle', 8210444)"> How to update Tenant? </a></span>
+                            </p>
                         </div>
                         <!-- PAGE-HEADER END -->
                         <div class="row justify-content-center">
@@ -2321,8 +2314,11 @@
                         localStorage.setItem("LandlordImg", response.image)
                         localStorage.setItem("landlordId", response.userId)
                         // LandlordImg = response.image;
-                        $("#user-img").attr("src", response.image)
-                        $("#user-img-dark").attr("src", response.image)
+                        if(response.image!==" " && response.image!==null){
+                
+                $("#user-img").attr("src", response.image)
+                $("#user-img-dark").attr("src", response.image)
+            } 
                         $("#user-name").text(toTitleCase(response.userName))
                         $("#header-user").text(toTitleCase(response.userName))
                         // userEmail = email
@@ -2400,6 +2396,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                 error: {}
             })
             $("#submit-pics").click(() => {
+                $("#submit-pics").prop("disabled", true)
                 var formData = new FormData();
                 formData.append('tenantID', tenantId);
                 var files = $('#fileInput')[0].files;
@@ -2431,6 +2428,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                             success: function ({message}) {
+                                $("#submit-pics").prop("disabled", false)
                                 console.log(message==" Tenant Files save successful")
                                if(message==" Tenant Files save successful"){
                                     $("#succesModal").modal("show")
@@ -2441,6 +2439,8 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                                 // $(".company-name").text(`${data[0][0].companyName} | ${data[0][0].firstName+" "+data[0][0].lastName}`)
                             },
                             error: function (xhr, status, error) {
+                                $("#submit-pics").prop("disabled", false)
+                                
                                 $("#myModal_warning_connection").modal("show");
                             setTimeout(function() {
                                 $('#myModal_warning_connection').modal('hide');
