@@ -165,7 +165,8 @@ exports.createTenants = async (req, res) => {
 //  ############################# tenant email send Start  ############################################################
 
 exports.sendInvitationLink = async (req, res) => {
-  const { tenantID } = req.body;
+  const { tenantEmail } = req.user;
+  const { tenantID} = req.body;
   try {
     const selectTenantResult = await queryRunner(selectQuery("tenants", "id"), [
       tenantID,
@@ -185,7 +186,7 @@ exports.sendInvitationLink = async (req, res) => {
         tenantID,
       ]);
       if (tenantsInsert[0].affectedRows > 0) {
-        await sendMail(email, mailSubject, tenantPassword, name);
+        await sendMail(email, mailSubject, tenantPassword, name, tenantEmail);
         res.status(200).json({
           message: "Tenants Welcome email send Successful",
           data: tenantsInsert[0],
@@ -199,7 +200,7 @@ exports.sendInvitationLink = async (req, res) => {
       return res.status(400).send("Tenant is not exists");
     }
   } catch (error) {
-    res.send("Error occurs in Sending Tenants welcome email " + error); // Sending error response
+    res.send("Error occurs in Sending Tenants welcome email " + error.message); // Sending error response
   }
 };
 
@@ -208,6 +209,7 @@ exports.sendInvitationLink = async (req, res) => {
 //  ############################# Tenant Reset Email ############################################################
 exports.createResetEmailTenant = async (req, res) => {
   const { email } = req.query;
+  // const { email } = req.body;
   const mailSubject = "Spade Reset Email";
   const random = Math.floor(100000 + Math.random() * 900000);
   try {
@@ -218,7 +220,7 @@ exports.createResetEmailTenant = async (req, res) => {
       const userid = selectResult[0][0].id;
       const name =
         selectResult[0][0].firstName + " " + selectResult[0][0].lastName;
-      sendMail(email, mailSubject, random, name);
+      sendMail(email, mailSubject, random, name,"emailTemplate");
       const now = new Date();
       const formattedDate = now.toISOString().slice(0, 19).replace("T", " ");
       const updateResult = await queryRunner(addResetTokenTenants, [
@@ -235,7 +237,7 @@ exports.createResetEmailTenant = async (req, res) => {
       res.status(400).send("Email not found");
     }
   } catch (error) {
-    res.status(400).send("Error");
+    res.status(400).send("Error"+error.message);
   }
 };
 //  ############################# Tenant Reset Email ############################################################

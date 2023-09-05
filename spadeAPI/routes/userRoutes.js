@@ -85,6 +85,7 @@ router.get(
 // router.post('/tenants',verifyToken,tenantController.createTenants);
 router.post("/tenants", verifyToken, tenantController.createTenants);
 router.post("/sendInvitationLink", verifyToken, tenantController.sendInvitationLink);
+// router.post("/sendInvitationLink" , tenantController.sendInvitationLink);
 // router.post('/tenantIncreaseRent' , userController.tenantIncreaseRent);
 // router.get('/ ',verifyToken,  userController.verifyMailCheck);
 router.get('/verifyMailCheck', verifyToken, userController.verifyMailCheck);

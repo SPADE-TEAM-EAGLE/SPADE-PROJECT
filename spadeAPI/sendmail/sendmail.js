@@ -1,11 +1,23 @@
 const nodemailer = require("nodemailer");
 const { createTransporter } = require("../helper/googleAuth");
 const codeHTML = require("./codeHTML");
+const tenantMail = require("./tenantInviteMail.js");
 const { queryRunner } = require("../helper/queryRunner");
 const { selectQuery } = require("../constants/queries");
 const constants = process.env;
 
-exports.sendMail = async (email, mailSubject, random, name) => {
+exports.sendMail = async (email, mailSubject, random, name, emailTemplate) => {
+  if(mailSubject == "Spade Welcome Email"){
+    // emailTemplate = '1';
+if(emailTemplate == '0'){
+  var emailHTML = tenantMail.tenantWelcomeHTML0(email, random, name)
+}else{
+  var emailHTML = tenantMail.tenantWelcomeHTML1(email, random, name)
+
+}
+  }else{
+    var emailHTML = codeHTML.codeHTML(name, random)
+  }
   try {
     let transpoter = await createTransporter();
     var mailOptions = {
@@ -13,10 +25,10 @@ exports.sendMail = async (email, mailSubject, random, name) => {
       to: email,
       // to:"aj8706786@gmail.com",
       subject: mailSubject,
-      html:
-        mailSubject == "Spade Welcome Email"
-          ? codeHTML.welcomeHTML(email, random, name)
-          : codeHTML.codeHTML(name, random),
+      html: emailHTML,
+        // mailSubject == "Spade Welcome Email"
+          // ? codeHTML.welcomeHTML(email, random, name)
+          // : codeHTML.codeHTML(name, random),
     };
     transpoter.sendMail(mailOptions, function (error, info) {
       if (error) {
