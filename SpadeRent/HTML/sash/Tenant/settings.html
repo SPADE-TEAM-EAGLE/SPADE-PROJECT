@@ -1995,18 +1995,18 @@
                                                         style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
                                                     </div>
                                                     <div class="row" id="myDIV">
-                                                        <div class="col-lg-3 layout-setting22"
+                                                        <div class="col-lg-3"
                                                             style="max-width: 17%; width: fit-content;">
                                                             <input type="radio" name="test" id="cb5" />
-                                                            <label for="cb5" class="label">
+                                                            <label for="cb5" class="label layout-setting22">
                                                                 <img src="../assets/images/light-mode.png" alt=""
                                                                     class="btnn" id="myonoffswitch1"></label>
                                                             <h5 style="padding: 10px;">Light Mode</h5>
                                                         </div>
-                                                        <div class="col-lg-3 layout-setting11"
+                                                        <div class="col-lg-3"
                                                             style="max-width: 17%; width: fit-content;">
                                                             <input type="radio" name="test" id="cb6" />
-                                                            <label for="cb6" class="label">
+                                                            <label for="cb6" class="label layout-setting11">
                                                                 <img src="../assets/images/dark-mode.png" alt=""
                                                                     class="btnn" id="myonoffswitch2"></label>
                                                             <h5 style="padding: 10px;">Dark Mode</h5>
@@ -3451,23 +3451,30 @@
                 function confirmPasswordValidation1() {
                     if (validconfirmPassword1.value.match(password_validate1)) {
                         validconfirmPassword1.classList.add("border-green");
+                        validconfirmPassword1.classList.remove("border-red");
+
                         spantag11.style.display = "none";
                     } else {
+                        validconfirmPassword1.classList.add("border-red");
                         validconfirmPassword1.classList.remove("border-green");
                         spantag11.style.display = "block";
                     }
 
                     if (confirmPassword1.value == validconfirmPassword1.value && validconfirmPassword1.value.match(password_validate1)) {
                         confirmPassword1.classList.add("border-green");
+                        confirmPassword1.classList.remove("border-red");
                     } else {
+                        confirmPassword1.classList.add("border-red");
                         confirmPassword1.classList.remove("border-green");
                     }
 
                     if (newPassword.value.match(password_validate1)) {
-                        newPassword.classList.add("border-green");
-                    } else {
-                        newPassword.classList.remove("border-green");
-                    }
+                    newPassword.classList.add("border-green");
+                    newPassword.classList.remove("border-red");
+                } else {
+                    newPassword.classList.remove("border-green");
+                    newPassword.classList.add("border-red");
+                }
                     if (confirmPassword1.value == validconfirmPassword1.value && validconfirmPassword1.value.match(password_validate1) && newPassword.value !== "") {
                         document.getElementById("save").disabled = false;
                     } else {
