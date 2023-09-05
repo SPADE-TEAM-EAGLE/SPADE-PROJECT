@@ -211,17 +211,16 @@
             classes: ScFieldClasses,
         });
         cardCvc.attach('#card-cvc');
-        sfc.addCardUpo({
-    useFields: true, // or websdk cardNumber object
-    billingAddress: { // optional
-        email: 'john.smith@email.com',
-        country:  'US'
-    }},
+        function main() {
+            sfc.addCardUpo({
+                useFields: true, // or websdk cardNumber object
+                billingAddress: { // optional
+                    email: 'john.smith@email.com',
+                    country:  'US'
+            }},
     function(result) {
         console.log(result);
 })
-        function main() {
-            
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/openOrder',
                 type: 'POST',
