@@ -18,7 +18,8 @@ const {
   addTasksQuerytenant,
   insertInTaskImage,
   addVendorList,
-  taskByIDQuery
+  taskByIDQuery,
+  unpaidAmountQuery
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -438,12 +439,12 @@ exports.ProfileCompleteTenant = async (req, res) => {
       if (tenantCheckResult[0][0].companyName) {
         count += 10;
       }
-      if (tenantCheckResult[0][0].streetAddress) {
+      if (tenantCheckResult[0][0].Address) {
         count += 10;
       }
-      if (tenantCheckResult[0][0].BusinessAddress) {
-        count += 10;
-      }
+      // if (tenantCheckResult[0][0].BusinessAddress) {
+      //   count += 10;
+      // }
       if (tenantCheckResult[0][0].city) {
         count += 10;
       }
@@ -466,3 +467,29 @@ exports.ProfileCompleteTenant = async (req, res) => {
 };
 //  ############################# Profile Complete End ############################################################
 
+
+//  ############################# unpaid Amount Tenant Start ############################################################
+
+exports.unpaidAmountTenant = async (req, res) => {
+  try {
+    const { userId } = req.user;
+    // const { userId } = req.body;
+    const tenantAmountResult = await queryRunner(unpaidAmountQuery, [userId]);
+    // console.log(tenantAmountResult)
+    if (tenantAmountResult[0][0].length > 0) {
+      res.status(200).json({
+        data : tenantAmountResult[0][0].totalAmount,
+        message : "Tenant unpaid Invoice Amount"
+      });
+    }else{
+      res.status(200).json({
+        message : "Tenant unpaid Invoice : All invoices Paid"
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+};
+//  ############################# unpaid Amount Tenant End ############################################################
