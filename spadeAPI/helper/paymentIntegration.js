@@ -19,6 +19,65 @@ function getTimestamp() {
   const timestamp = getTimestamp(); 
 // ############################ timestamp #################################
 
+exports.saveCard = async (req,res) => {
+  const {currency,amount} = req.body;
+const apiUrl = config.APIKey;
+const requestData = {
+  merchantId: config.merchantId,
+  merchantSiteId: config.merchantSiteId,
+  clientRequestId: config.clientRequestId,
+  clientUniqueId: config.clientUniqueId,
+  currency: currency,
+  amount: amount,
+  timeStamp: timestamp,
+  checksum: sha256(config.merchantId+config.merchantSiteId+config.clientRequestId+amount+currency+timestamp+config.Secret_Key)
+
+};
+
+const requestOptions = {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  }
+};
+
+const reqq = request(apiUrl, requestOptions, (response) => {
+  let responseData = ''; 
+  response.on('data', (chunk) => {
+    responseData += chunk;
+  }); 
+  response.on('end', () => {
+    try {
+      const data = JSON.parse(responseData);
+      // console.log(data);
+      res.status(200).json({
+          // data
+          sessionToken:data.sessionToken,
+          clientUniqueId:data.clientUniqueId,
+          merchantId:data.merchantId,
+          merchantSiteId:data.merchantSiteId,
+      })
+    } catch (error) {
+      console.error('Error parsing response:', error);
+      res.status(400).json({
+          message:"Error parsing response",
+          error,
+      })
+    }
+  });
+}); 
+reqq.on('error', (error) => {
+  console.error('Error sending request:', error);
+  res.status(400).json({
+      message:"Error sending request",
+      error,
+  })
+}); 
+// Send the request body
+reqq.write(JSON.stringify(requestData));
+reqq.end();
+};
+
 exports.openOrder = async (req,res) => {
     const {currency,amount} = req.body;
   const apiUrl = config.APIKey;
