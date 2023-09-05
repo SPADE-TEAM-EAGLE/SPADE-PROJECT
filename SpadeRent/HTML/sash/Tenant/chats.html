@@ -3287,7 +3287,7 @@
                                 console.log(1111111)
                                 console.log(response)
                                 localStorage.setItem("LandlordImg", response.data.image)
-                                if (localStorage.getItem("LandlordImg")) {
+                                if (localStorage.getItem("LandlordImg") != "null" && localStorage.getItem("LandlordImg") != " " ) {
                                     var newBgImageUrl = `url('` + localStorage.getItem("LandlordImg") + `')`;
                                     $(".person").css("background-image", newBgImageUrl);
                                 } else {
@@ -3318,13 +3318,20 @@
                             success: function (response) {
                                 console.log(22222)
                                 console.log(response)
+
                                 var imgggg = response.data.image;
-                                var urlArray = imgggg.split(",");
-
-                                var firstUrl = urlArray[0];
-                                localStorage.setItem("tenantImg", firstUrl)
-
-                                // console.log("First URL:", firstUrl);
+                                if (response.data.image != null && response.data.image != " " ) {
+                                    
+                                    var urlArray = imgggg.split(",");
+    
+                                    var firstUrl = urlArray[0];
+    
+                                    localStorage.setItem("tenantImg", firstUrl)
+    
+                                    // console.log("First URL:", firstUrl);
+                                }else{
+                                    localStorage.setItem("tenantImg", "../assets/images/users/5.jpg")
+                                }
 
                             },
                             error: function (xhr, status, error) {
@@ -3372,7 +3379,7 @@
 
                             messs2 = `<div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
                                 <div style="width: 36px;height: 36px;    border-radius: 50%;
-    background: url(` + (localStorage.getItem("LandlordImg") || localStorage.getItem("LandlordImg") != "null"  ? localStorage.getItem("LandlordImg") : randomImg) + `);
+    background: url(` + (localStorage.getItem("LandlordImg") != "null" && localStorage.getItem("LandlordImg") != " "  ? localStorage.getItem("LandlordImg") : randomImg) + `);
     background-position: center;
     background-size: cover;" class="me-1">  
                                         </div> 
@@ -3459,7 +3466,7 @@
                                                                     <span style="float: right;" class="text-primary">`+ time + `</span>
                                                                     </div>
                                                                     <div style="width: 36px;height: 36px;    border-radius: 50%;
-    background: url(` + (localStorage.getItem("tenantImg") && localStorage.getItem("tenantImg") != "null" ? localStorage.getItem("tenantImg") : randomImg) + `);
+    background: url(` + (localStorage.getItem("tenantImg") != " " && localStorage.getItem("tenantImg") != "null" ? localStorage.getItem("tenantImg") : randomImg) + `);
     background-position: center;
     background-size: cover;" class="ms-1"> 
                                                                         </div> 
@@ -3469,7 +3476,7 @@
                                                             const time = timeArray.slice(0, 2).join(":");
                                                             messs1 += `<div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
                                                                 <div style="width: 36px;height: 36px;    border-radius: 50%;
-    background: url(` + (localStorage.getItem("LandlordImg") && localStorage.getItem("LandlordImg") != "null" ? localStorage.getItem("LandlordImg") : randomImg) + `);
+    background: url(` + (localStorage.getItem("LandlordImg") != "null" && localStorage.getItem("LandlordImg") != " " ? localStorage.getItem("LandlordImg") : randomImg) + `);
     background-position: center;
     background-size: cover;" class="me-1"> 
                                                                         </div> 
@@ -3667,7 +3674,7 @@
 
                     // Create image container
                     const imageContainer = document.createElement('div');
-                    imageContainer.setAttribute('style', `width: 36px; height: 36px;border-radius: 50%;background: url(` + (localStorage.getItem("tenantImg") && localStorage.getItem("tenantImg") != "null" ? localStorage.getItem("tenantImg") : "../assets/images/users/5.jpg") + `);background-position: center;background-size: cover;`);
+                    imageContainer.setAttribute('style', `width: 36px; height: 36px;border-radius: 50%;background: url(` + (localStorage.getItem("tenantImg") != " " && localStorage.getItem("tenantImg") != "null" ? localStorage.getItem("tenantImg") : "../assets/images/users/5.jpg") + `);background-position: center;background-size: cover;`);
                     imageContainer.setAttribute('class', 'ms-1');
                     // const image = document.createElement('img');
                     // image.setAttribute('src', localStorage.getItem("tenantImg") ? localStorage.getItem("tenantImg") : "../assets/images/users/5.jpg");

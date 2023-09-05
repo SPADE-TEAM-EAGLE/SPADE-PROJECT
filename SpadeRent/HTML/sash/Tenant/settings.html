@@ -1973,7 +1973,7 @@
                                                                             for security purposes:</p>
                                                                         <input type="password" class="form-control"
                                                                             id="current_password_reset"
-                                                                            placeholder="Confirm Password" required>
+                                                                            placeholder="Old Password *" required>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -3530,7 +3530,9 @@
 
                         reader.readAsDataURL(file);
                         reader.onload = function (e) {
+                            console.log("11111111111111111");
                             console.log(reader.result);
+                            // if()
                             $('#profile').css('background-image', 'url(' + reader.result + ')').addClass('hasImage');
 
 
@@ -3561,7 +3563,8 @@
 
                         reader.readAsDataURL(file);
                         reader.onload = function (e) {
-
+                            console.log("22222222222");
+                            console.log(reader.result);
                             $('#profile').css('background-image', 'url(' + reader.result + ')').addClass('hasImage');
 
                         }
@@ -3651,6 +3654,7 @@
                                     success: function (response) {
                                         $("#myModal_success p").text("Succesfully Updated!!!")
                                         $("#myModal_success").modal("show")
+                                        profileComplete();
                                         setTimeout(function () {
                                             $("#myModal_success").modal("hide");
                                         }, 2000);
@@ -3726,7 +3730,10 @@
                             image_url = response.image
                             image_key = response.imageKey
                         }
-                        
+                        if(response.image !== null && response.image !== " " ){
+
+$('#profile').css('background-image', 'url(' + response.image + ')').addClass('hasImage');
+}       
 
                 console.log(response)    
                 if(image!==" " && image!==null){

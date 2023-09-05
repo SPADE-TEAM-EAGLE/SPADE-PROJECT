@@ -1152,7 +1152,8 @@
                         </h6>
                         <input type="email" class="form-control form mb-2" style="width: 100%;" data-bs-placement="top"
                             data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the name of the property."
-                            readonly id="user-email"><span class="text-danger d-none" id="verify-email-span">* Email already exist</span>
+                            readonly id="user-email"><span class="text-danger d-none" id="verify-email-span">* Email
+                            already exist</span>
                         <a class="text-primary mb-4" href="javascript:void(0)" id="change-email">Change Email</a>
                         <a class="text-primary mb-4 d-none" href="javascript:void(0)" id="save-email">Save Email</a>
                         <div class="">
@@ -1934,8 +1935,8 @@
                                         </div>
                                         <div class="d-flex country mt-2">
                                             <a class="nav-link icon text-dark customIntercomButton">
-                                        <i class="fi fi-rs-interrogation"></i>
-                                       
+                                                <i class="fi fi-rs-interrogation"></i>
+
                                             </a>
                                         </div>
                                         <!-- <div class="d-flex country mt-2">
@@ -1948,7 +1949,7 @@
                                             <a class="nav-link icon text-dark" href="./chats.html">
                                                 <i class="fi fi-rs-comment"></i>
                                             </a> -->
-                                            <!-- <img src="../assets\header-img\comment-light.webp"
+                                        <!-- <img src="../assets\header-img\comment-light.webp"
                                                 class="avatarr profile-user nav-link brroundd cover-image light-layout"> -->
                                         <!-- </div> -->
                                         <!-- 1 comments start  -->
@@ -2246,7 +2247,7 @@
                                                 class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
                                             verification &nbsp; <i
                                                 class="angle fe fe-arrow-right create-btn-plus"></i></a>
-                                        <p class="text-white m-0" id="account-text"> 
+                                        <p class="text-white m-0" id="account-text">
                                         </p>
                                     </div>
                                     <div class="col-lg-3">
@@ -2259,11 +2260,12 @@
                         <div>
                             <p class="d-inline-flex gap-1">
                                 <span>Chats | </span>
-                                <span><a href="#" onclick="Intercom('showArticle', 8210506)"> How to add Chats? </a></span>
+                                <span><a href="#" onclick="Intercom('showArticle', 8210506)"> How to add Chats?
+                                    </a></span>
                                 <span><a href="#" onclick="Intercom('showArticle', 8210444)"> How to Chats? </a></span>
-                              </p>
-                              
-                               
+                            </p>
+
+
                         </div>
                         <div class="row">
                             <!-- <input type="text" id="inputField"> -->
@@ -3622,7 +3624,7 @@
         <script src="../assets/js/charts.js"></script>
         <script src="../assets/js/email-verification.js"></script>
         <script src="../assets/js/getNotification.js"></script>
-<script src="../assets/js/push_notification.js"></script>
+        <script src="../assets/js/push_notification.js"></script>
 
         <script>
             function initializeWebSocket() {
@@ -3649,7 +3651,7 @@
             localStorage.removeItem('tenantName');
             // var socket = io('https://engage.app.spaderent.com');
             $(document).ready(function () {
-                
+
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
                     method: 'GET',
@@ -3694,12 +3696,12 @@
                         localStorage.setItem("LandlordImg", response.image)
                         localStorage.setItem("landlordId", response.userId)
                         // LandlordImg = response.image;
-                        
-                        if(response.image!==" " && response.image!==null){
-                
-                $("#user-img").attr("src", response.image)
-                $("#user-img-dark").attr("src", response.image)
-            }
+
+                        if (response.image !== " " && response.image !== null) {
+
+                            $("#user-img").attr("src", response.image)
+                            $("#user-img-dark").attr("src", response.image)
+                        }
                         $("#user-name").text(toTitleCase(response.userName))
                         $("#header-user").text(toTitleCase(response.userName))
                         // userEmail = email
@@ -3771,7 +3773,7 @@
                             success: function (response) {
                                 console.log(messageData);
                                 socket.emit('chatMessage', messageData);
-                                
+
                                 // console.log(response);
                                 // console.log(tenantIid);
                                 // console.log(tenantName);
@@ -3814,7 +3816,7 @@
                         console.log("check rec", message);
                         messs2 = `<div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
                                                                     <div style="width: 36px;height: 36px;    border-radius: 50%;
-    background: url(` + (localStorage.getItem("TenantImg") && localStorage.getItem("TenantImg") !== "null" ? localStorage.getItem("TenantImg") : randomImg) + `);
+    background: url(` + (localStorage.getItem("tenantImg") && localStorage.getItem("tenantImg") !== "null" ? localStorage.getItem("tenantImg") : randomImg) + `);
     background-position: center;
     background-size: cover;" class="me-1"> 
                                                                         </div> 
@@ -3880,23 +3882,35 @@
                                         console.log("getUserById");
                                         console.log(response);
                                         // console.log();
-                                        localStorage.setItem("TenantImg", response.data.image)
+                                        var imgggg = response.data.image;
+                                        if (response.data.image != null && response.data.image != " ") {
+
+                                            var urlArray = imgggg.split(",");
+
+                                            var firstUrl = urlArray[0];
+
+                                            localStorage.setItem("tenantImg", firstUrl)
+                                            if (localStorage.getItem("tenantImg")) {
+                                                var newBgImageUrl = `url('` + localStorage.getItem("tenantImg") + `')`;
+
+                                                // Select the div with the class "person" and change its background image
+                                                $(".person").css("background-image", newBgImageUrl);
+                                            } else {
+                                                var newBgImageUrl = "url('../assets/images/users/5.jpg')";
+
+                                                // Select the div with the class "person" and change its background image
+                                                $(".person").css("background-image", newBgImageUrl);
+                                            }
+                                            // console.log("First URL:", firstUrl);
+                                        } else {
+                                            localStorage.setItem("tenantImg", "../assets/images/users/5.jpg")
+                                        }
                                         if (response.data.isTenantActive == 1) {
                                             $('#online').show()
                                         } else {
                                             $('#online').hide()
                                         }
-                                        if (localStorage.getItem("TenantImg")) {
-                                            var newBgImageUrl = `url('` + localStorage.getItem("TenantImg") + `')`;
 
-                                            // Select the div with the class "person" and change its background image
-                                            $(".person").css("background-image", newBgImageUrl);
-                                        } else {
-                                            var newBgImageUrl = "url('../assets/images/users/5.jpg')";
-
-                                            // Select the div with the class "person" and change its background image
-                                            $(".person").css("background-image", newBgImageUrl);
-                                        }
                                         $.ajax({
                                             url: 'https://backend.app.spaderent.com/api/spade/LandlordMessages/' + localStorage.getItem("chatId"),
                                             type: 'GET',
@@ -3925,7 +3939,7 @@
                                                                     <span style="float: right;" class="text-primary">` + time + `</span>
                                                                     </div>
                                                                     <div style="width: 36px;height: 36px;    border-radius: 50%;
-    background: url(` + (localStorage.getItem("LandlordImg") && localStorage.getItem("LandlordImg") != "null" ? localStorage.getItem("LandlordImg") : randomImg) + `);
+    background: url(` + (localStorage.getItem("LandlordImg") != " " && localStorage.getItem("LandlordImg") != "null" ? localStorage.getItem("LandlordImg") : randomImg) + `);
     background-position: center;
     background-size: cover;" class="ms-1"> 
                                                                         </div> 
@@ -3937,7 +3951,7 @@
                                                             const time = timeArray.slice(0, 2).join(":");
                                                             messs1 += `<div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
                                                                 <div style="width: 36px;height: 36px;    border-radius: 50%;
-    background: url(` + (localStorage.getItem("TenantImg") !== "null" && localStorage.getItem("TenantImg") ? localStorage.getItem("TenantImg") : randomImg) + `);
+    background: url(` + (localStorage.getItem("tenantImg") != "null" && localStorage.getItem("tenantImg") != " " ? localStorage.getItem("tenantImg") : randomImg) + `);
     background-position: center;
     background-size: cover;" class="me-1"> 
                                                                         </div> 
@@ -4012,7 +4026,7 @@
                                 var row = `
                                 <a href="javascript:void(0)" onclick="chatTenant(` + tenant.tenantID + `,'` + tenant.firstName + ` ` + tenant.lastName + `',this)"><div class="media new border-top-0 " data-id="` + tenant.tenantID + `">
                                                                 <div class="main-img-user">
-                                                                    <img alt="" src="` + (tenant.image ? tenant.image : randomImg1) + `">
+                                                                    <img alt="" src="` + (tenant.image != null && tenant.image !=" " ? tenant.image : randomImg1) + `">
                                                                 </div>
                                                                 <div class="media-body">
                                                                     <div class="media-contact-name">
@@ -4164,7 +4178,7 @@
 
                     // Create image container
                     const imageContainer = document.createElement('div');
-                    imageContainer.setAttribute('style', `width: 36px; height: 36px;border-radius: 50%;background: url(` + (localStorage.getItem("LandlordImg") != "null" && localStorage.getItem("LandlordImg") ? localStorage.getItem("LandlordImg") : randomImg) + `);background-position: center;background-size: cover;`);
+                    imageContainer.setAttribute('style', `width: 36px; height: 36px;border-radius: 50%;background: url(` + (localStorage.getItem("LandlordImg") != "null" && localStorage.getItem("LandlordImg") != " " ? localStorage.getItem("LandlordImg") : randomImg) + `);background-position: center;background-size: cover;`);
                     imageContainer.setAttribute('class', 'ms-1');
                     // const image = document.createElement('img');
                     // image.setAttribute('src', localStorage.getItem("LandlordImg") != "null" ? localStorage.getItem("LandlordImg") : "../assets/images/users/5.jpg");
