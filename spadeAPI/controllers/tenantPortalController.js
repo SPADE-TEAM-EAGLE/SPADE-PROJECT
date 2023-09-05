@@ -47,7 +47,7 @@ const config = process.env;
                 const invoiceID = getAllInvoicesResult[0][i].invoiceID;
                 const invoicelineitemsResult = await queryRunner(selectQuery("invoicelineitems", "invoiceID"), [invoiceID]);
                 if (invoicelineitemsResult[0].length > 0) {
-                    const memo = invoicelineitemsResult[0].map((desc)=>({memo:desc.memo, category:desc.category, amount:desc.amount,property:desc.property}))
+                    const memo = invoicelineitemsResult[0].map((desc)=>({memo:desc.memo, category:desc.category, amount:desc.amount,property:desc.property,tax:desc.tax}))
                     getAllInvoicesResult[0][i].memo = memo
                 } else {
                     getAllInvoicesResult[0][i].memo = ["No memo"]
