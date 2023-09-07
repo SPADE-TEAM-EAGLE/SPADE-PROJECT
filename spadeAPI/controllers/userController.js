@@ -2411,6 +2411,7 @@ exports.checkSystem = async (req, res) => {
     });
   }
 };
+
 exports.filterOutDashbordDataByProperty = async (req, res) => {
   try {
     const { propertyId } = req.params;

@@ -31,7 +31,8 @@ const verifyToken = async (req, res, next) => {
       image:result[0][0].image,
       imageKey:result[0][0].imageKey,
       planID:result[0][0].PlanID,
-      isActive : result[0][0].active
+      isActive : result[0][0].active,
+      tenantEmail : result[0][0].tenantEmail
     };
     next();
     // console.log("hello")
