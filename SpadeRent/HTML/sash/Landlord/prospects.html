@@ -42,9 +42,6 @@
 
     <!-- COLOR SKIN CSS -->
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="../assets/colors/color1.css" />
-
-
-    <!-- <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css"> -->
     <script>
         if (!localStorage.getItem("authtoken")) {
             window.location = "./login_module.html"
@@ -52,6 +49,553 @@
     </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        .custom-file-input::-webkit-file-upload-button {
+            visibility: hidden;
+        }
+
+        #propertyTable {
+            padding: 0;
+        }
+
+        #propertyTable_wrapper .dataTables_wrapper {
+            padding: 0;
+        }
+
+        #propertyTable_wrapper .dataTables_scroll {
+            padding: 0;
+        }
+
+        #propertyTable_wrapper .dataTables_scrollHead {
+            padding: 0;
+        }
+
+        #propertyTable_wrapper .dataTables_scrollBody {
+            padding: 0;
+        }
+
+        .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar {
+            width: 7px;
+            /* Width of the scrollbar */
+        }
+
+        .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb {
+            background-color: rgb(136, 136, 136, 0.2);
+            /* Color of the scrollbar thumb */
+            border-radius: 7px;
+            transition: all 1ms;
+            /* Rounded corners for the thumb */
+        }
+
+        .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb:hover {
+            background-color: rgb(136, 136, 136, 0.5);
+            /* Color of the scrollbar thumb on hover */
+        }
+
+        .custom-file-input::before {
+            content: 'Select Files';
+            display: inline-block;
+            background: #007bff;
+            color: #fff;
+            padding: 4px 8px;
+            outline: none;
+            white-space: nowrap;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .custom-file-input:hover::before {
+            background: #0069d9;
+        }
+
+        .custom-file-input:active::before {
+            background: #0062cc;
+        }
+
+        .custom-file-input.selected::before {
+            content: 'Change Files';
+            background: #28a745;
+        }
+
+        .dark-mode .create-new-link {
+            background: transparent !important;
+            border: 3px solid #1467B0 !important;
+            color: white !important;
+            border-radius: 50px !important;
+        }
+
+        /* .dark-mode .create-new-link:hover {
+            border: 3px solid #1467B0 !important;
+        } */
+
+        .create-new-link {
+            background: transparent !important;
+            border: 3px solid #1467B0 !important;
+            color: black;
+            border-radius: 50px !important;
+        }
+
+        .selected-files {
+            margin-top: 10px;
+        }
+
+        .dark-mode .selected-files span {
+            display: inline-block;
+            margin-right: 0;
+            padding: 4px 8px;
+            background: transparent;
+            color: white !important;
+            border-radius: 4px;
+        }
+
+        .selected-files span {
+            display: inline-block;
+            margin-right: 5px;
+            padding: 4px 8px;
+            background: #f8f9fa;
+            color: #333;
+            border-radius: 4px;
+        }
+
+        .custom-file-input {
+            visibility: hidden;
+        }
+
+        .custom-file-label {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 12px;
+            background-color: #fff;
+        }
+
+        .dark-mode .custom-file-label {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 12px;
+            background-color: transparent;
+        }
+
+        .custom-file-label i {
+            margin-bottom: 5px;
+            font-size: 3rem;
+            color: #1467B0;
+        }
+
+        .custom-file-text {
+            text-align: center;
+            line-height: 1.2;
+            margin-top: 5px;
+        }
+
+        .custom-file-text span {
+            display: block;
+            font-size: 14px;
+        }
+
+        .remove-file {
+            cursor: pointer;
+        }
+
+        .border {
+            border: 0px solid #e9edf4 !important;
+            padding: 0.75rem;
+            vertical-align: top;
+            border: 1px solid #e9edf4;
+        }
+
+        /* /* input:focus {
+            border: 3px solid #555 !important;
+        } */
+
+        .panel-body {
+            padding: 0px;
+        }
+
+        .dark-mode .btn-close {
+            color: white;
+        }
+
+        .accordion-item:first-of-type {
+            border-bottom-left-radius: 0.25rem;
+            border-bottom-right-radius: 0.25rem;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .accordion-item:last-of-type {
+            border-top-right-radius: 0.25rem;
+            border-top-left-radius: 0.25rem;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .table-primary th {
+            font-weight: 600 !important;
+            vertical-align: middle !important;
+        }
+
+        .border-model-line {
+            border-top-left-radius: 3px;
+            border-bottom-left-radius: 3px;
+            border-top-right-radius: 3px !important;
+            border-bottom-right-radius: 3px !important;
+        }
+
+        .file-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            grid-gap: 10px;
+        }
+
+        .selected-file {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .file-preview {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .file-details {
+            margin-top: 5px;
+            font-size: 12px;
+        }
+
+        .table td {
+            vertical-align: middle !important;
+        }
+
+        /* .card-header {
+        padding: 0.5rem 1rem;
+    } */
+
+        .modal-footer .button-left {
+            background-color: #1F1F1F;
+            margin: 0rem 1rem;
+            color: white;
+        }
+
+        .modal-footer button,
+        .modal-footer a {
+            border-radius: 2.75rem;
+            padding: 4px 30px;
+            font-family: 'Figtree';
+            font-style: normal;
+            font-weight: 600;
+            line-height: 1.875rem;
+            font-size: 0.77rem;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
+            /* identical to box height, or 120% */
+            letter-spacing: 0.0145455em;
+            /* font-size: 0.938rem; */
+        }
+
+        .disabled {
+            pointer-events: none;
+            cursor: not-allowed;
+            color: gray;
+        }
+
+        .modal-footer .button {
+            font-size: 0.938rem;
+        }
+
+        .accordion-button::after {
+            content: "";
+            display: inline-block;
+            /* Replace with the path to your default chevron image */
+        }
+
+        .chevron,
+        .tick,
+        .cross {
+            position: absolute;
+            right: 15px;
+        }
+
+        .tick {
+            color: #1DBC5F;
+            font-weight: bolder
+        }
+
+        .cross {
+            color: red;
+            font-weight: bolder
+        }
+
+        .accordion-button .chevron {
+            transition: transform 0.3s;
+            /* Transition for smooth animation */
+        }
+
+        .accordion-button[aria-expanded="true"] .chevron {
+            transform: rotate(-180deg);
+            /* Rotate the chevron when accordion is open */
+        }
+
+        .accordion-button[aria-expanded="false"] .chevron {
+            transform: rotate(0deg);
+            /* Rotate the chevron when accordion is open */
+        }
+
+        .table tbody img {
+            width: 40px;
+            border: transparent;
+            border-radius: 5px;
+            height: 40px;
+        }
+
+        .rounded-pill-Single-Family {
+            color: #4A4AFF !important;
+            background: #E6E6F2 !important;
+            font-weight: bold;
+        }
+
+        .rounded-pill-Multi-Family {
+            color: #0BAAB8 !important;
+            background: #C8F3F7 !important;
+            font-weight: bold;
+        }
+
+        .rounded-pill-Multi-Commercial {
+            background: #FFF9E5 !important;
+            color: #F5CA38 !important;
+            font-weight: bold;
+        }
+
+        .table-primary {
+            background: #1467B014;
+        }
+
+        .selected-file {
+            position: relative;
+        }
+
+        .file-preview {
+            width: 100%;
+        }
+
+        .file-details {
+            padding: 10px;
+        }
+
+        /* .delete-file {
+            position: absolute !important;
+            top: -9px !important;
+            right: -4px !important;
+            font-weight: bolder !important;
+            cursor: pointer !important;
+            font-size: 13px !important;
+            color: #000000 !important;
+        } */
+
+        .dark-mode .delete-file {
+            color: #ffffff !important;
+        }
+
+        .btn-group>.btn-group:not(:last-child)>.btn,
+        .btn-group>.btn:not(:last-child):not(.dropdown-toggle) {
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+
+        .color-primary {
+            color: #1467B0;
+        }
+
+        .border-model-line {
+            border-left: 5px solid #1467B0;
+        }
+
+        .accordion-item:first-of-type .accordion-button {
+            border-top-right-radius: calc(0.5rem - 1px);
+            border-top-left-radius: calc(0.5rem - 1px);
+        }
+
+        /* .delete-file{
+            position: absolute;
+    top: -9px;
+    right: -11px;
+    font-weight: bolder;
+    cursor: pointer;
+    font-size: 13px;
+    color: #fff;
+    border: 2px solid black;
+    border-radius: 54px;
+    background: black;
+    width: 23px;
+        } */
+        /* .delete-file {
+        position: absolute;
+        top: 0px;
+        right: 5px;
+        cursor: pointer;
+        font-size: 13px;
+        color: #000;
+    } */
+
+        button.btn-close {
+            right: 6px;
+        }
+
+        .btn-close {
+            width: 1.8rem;
+            opacity: 1;
+            position: absolute;
+            top: 6px;
+        }
+
+        .del {
+            width: 2rem !important;
+        }
+
+        .btn-close:hover,
+        .btn-close:focus {
+            color: #000;
+            text-decoration: none;
+            opacity: 1;
+        }
+
+        @media (max-width:992px) {
+            .modal-footer button {
+                border-radius: 2.75rem;
+                padding: 4px 30px;
+                font-family: 'Figtree';
+                font-style: normal;
+                font-weight: 600;
+                font-size: 0.8rem;
+                line-height: 1.875rem;
+                /* identical to box height, or 120% */
+                letter-spacing: 0.0145455em;
+            }
+
+            #top_main_image {
+                display: none;
+            }
+
+            #top_main_card {
+                height: 220px;
+            }
+
+            #nav_links {
+                top: 153px;
+            }
+        }
+
+        @media (max-width:425px) {
+            .modal-footer {
+                flex-direction: column !important;
+                justify-content: flex-center !important;
+            }
+
+            .modal-footer .button-left {
+                margin: auto;
+            }
+
+            /* /* .modal-footer button {
+                width: 231px;
+            } */
+            .border-model-line h2 {
+                font-size: 1.6rem;
+            }
+
+            .accordion-button h3 {
+                font-size: 15px;
+            }
+
+            #filter_btn {
+                font-size: 12px;
+                margin: 0 !important;
+            }
+
+            #customize_btn {
+                display: none;
+            }
+
+            #add_property_btn {
+                font-size: 12px;
+                margin: 0 !important;
+            }
+
+            #typehead {
+                display: none;
+            }
+
+            #email_verification {
+                font-size: 12px;
+            }
+
+            #top_main_image {
+                display: none;
+            }
+
+            #top_main_card {
+                height: 220px;
+            }
+
+            #nav_links {
+                top: 153px;
+            }
+        }
+
+        @media (max-width:375px) {
+            .border-model-line h2 {
+                font-size: 1.4rem;
+            }
+
+            .succes-modal {
+                padding: 1rem 1rem;
+            }
+        }
+
+        @media (max-width:320px) {
+            /* /* .modal-footer button {
+                width: 231px;
+            } */
+        }
+
+        @media (max-width: 767px) {
+            .file-select-area {
+                display: block;
+                text-align: center;
+            }
+
+            .selected-files {
+                margin-top: 10px;
+                text-align: center;
+            }
+
+            .file-details {
+                padding: 5px;
+            }
+        }
+
+        th,
+        td {
+            border-left-color: transparent !important;
+            border-right-color: transparent !important;
+        }
+
+        .dark-mode th {
+            background: #212121 !important;
+        }
+
+        .light-mode th {
+            background: #ECF3F9 !important;
+        }
 
         .border {
             border: 0px solid #e9edf4 !important;
@@ -73,9 +617,9 @@
             background: #11D247;
         }
 
-        .form-select {
+        /* .form-select {
             border-radius: 45px;
-        }
+        } */
 
         .comingsoon-heading {
             font-size: 60px;
@@ -160,7 +704,13 @@
         .portlet-placeholder {
             border: 1px dotted black;
             margin: 0 1em 1em 0;
-            height: 50px;
+            height: 70px;
+        }
+
+        .dark-mode .portlet-placeholder {
+            border: 1px dotted white;
+            margin: 0 1em 1em 0;
+            height: 70px;
         }
 
         .header-badge {
@@ -174,24 +724,204 @@
             font-weight: 900;
         }
 
-        .portlet-placeholder {
-            border: 2px dotted black;
-            margin: 0 1em 1em 0;
-            height: 70px;
-            border-radius: 6px;
+        .dark-mode .tab-menu-heading {
+            border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+            background-color: transparent !important;
         }
 
-        .dark-mode .portlet-placeholder {
-            border: 2px dotted white;
-            margin: 0 1em 1em 0;
-            height: 70px;
-            border-radius: 5px;
+        .dark-mode .tabs-menu ul li a {
+            color: white;
+        }
+
+        .iti {
+            width: 100% !important;
+        }
+
+        .tab-pane .card {
+            min-height: 205px;
+        }
+
+        .card-options a:not(.btn) {
+            margin-left: 0;
+
         }
     </style>
 
 </head>
 
 <body class="app sidebar-mini ltr light-mode">
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="text-justify ps-2 border-model-line">
+                        <h2 class="modal-title">Add <strong class="color-primary">Prospects</strong></h2>
+                        <span class="">Powerful Real Estate Lead Generation System.</span>
+
+                    </div>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="top-close">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="accordion-item mb-4" id="accordion-item1">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button text-white" id="accordian-button-1" type="button"
+                                data-bs-toggle="collapse" onclick="checkFieldsFilled('accordion-item1')"
+                                id="accordion-button1" data-bs-target="#collapseOne-add-property" aria-expanded="true"
+                                aria-controls="collapseOne-add-property">
+                                <span class="m-0 me-4 fs-1" style="font-weight: bold;">01</span>
+                                <h3 class="m-0"><strong>Prospect Details</strong> <i class="fi fi-rs-pencil"></i><i
+                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
+                                </h3>
+                            </button>
+                        </h2>
+                        <div id="collapseOne-add-property" class="accordion-collapse collapse show"
+                            aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <form class="row g-3" enctype="multipart/form-data">
+                                    <div class="col-md-6 col-lg-6 col-xl-4">
+                                        <label for="inputEmail4" class="form-label fw-bold">First Name<spnan
+                                                class="text-danger"> *</span></label>
+                                        <input type="text" class="form-control form" placeholder="Enter First Name"
+                                            id="firstName" required pattern="[A-Za-z\s]+"
+                                            oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
+                                        <span class="text-danger d-none">First name is required!</span>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-xl-4">
+                                        <label for="inputEmail4" class="form-label fw-bold">Middle Name<spnan
+                                                class="text-danger"> *</span></label>
+                                        <input type="text" class="form-control form" placeholder="Enter Middle Name"
+                                            id="middleName" required pattern="[A-Za-z\s]+"
+                                            oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
+                                        <span class="text-danger d-none">Middle Name is required!</span>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-xl-4">
+                                        <label for="inputPassword4" class="form-label fw-bold">Last Name<spnan
+                                                class="text-danger"> *</span></label>
+                                        <input type="text" class="form-control form" placeholder="Enter Last Name"
+                                            id="lastName" required pattern="[A-Za-z\s]+"
+                                            oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
+                                        <span class="text-danger d-none">Last name required!</span>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-xl-6">
+                                        <label for="inputState" class="form-label fw-bold">Phone Number</label>
+                                        <input class="w-100" id="phone" name="phone" type="tel" autocomplete="off"
+                                            placeholder="Enter Phone Number" pattern="[0-9]{5}" maxlength="15"
+                                            oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                                        <!-- <input id="phone" name="phone" type="tel" autocomplete="off" pattern="[0-9]" placeholder="" maxlength="13" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                            required> -->
+                                        <span id="valid-msg" class="d-none text-success">✓ Valid</span>
+                                        <span id="error-msg" class="hide text-danger"></span>
+
+                                        <!-- <span class="text-danger d-none">State is required!</span> -->
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-xl-6">
+                                        <label for="inputCity" class="form-label fw-bold">Email<spnan
+                                                class="text-danger"> *</span></label>
+                                        <input type="email" class="form-control form" placeholder="Enter Email"
+                                            id="email" pattern="[A-Za-z0-9_\.@]+"
+                                            oninput="this.value = this.value.replace(/[^A-Za-z0-9_\.@]/g, '').replace(/(@{2,})/g, '@')"
+                                            id="email" required>
+
+                                        <!-- <label for="inputCity" class="form-label fw-bold">Email<span
+                                                        class="text-danger"> *</span></label>
+                                        <input type="email" class="form-control form" placeholder="Enter Email" id="email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"> -->
+                                        <span class="text-danger d-none">Email is required!</span>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-xl-6">
+                                        <label for="inputState" class="form-label fw-bold">Property Info <span
+                                                class="text-danger">*</span></label>
+                                        <select id="propertyInfo" class="form-select form">
+                                            <option selected>Choose...</option>
+                                        </select>
+                                        <span class="text-danger d-none">Property Info is required!</span>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-xl-6">
+                                        <label for="inputState" class="form-label fw-bold">Unit Info <span
+                                                class="text-danger">*</span></label>
+                                        <select id="unitInfo" class="form-select form">
+                                            <option selected>Choose...</option>
+                                        </select>
+                                        <span class="text-danger d-none">Unit Info is required!</span>
+                                    </div>
+                                    <div class="col-md-12 col-lg-12 col-xl-12">
+                                        <label for="inputCity" class="form-label fw-bold">Prospects Details<spnan
+                                                class="text-danger"> *</span></label>
+                                        <input type="email" id="propertyDetail" class="form-control form"
+                                            placeholder="Enter Prospects Details" required>
+                                        <span class="text-danger d-none">Prospects Details is required!</span>
+                                    </div>
+                                    <div class="col-md-12 col-lg-12 col-xl-12">
+                                        <label for="inputState" class="form-label fw-bold">Source Campaign <span
+                                                class="text-danger">*</span></label>
+                                        <select id="sourceCampaign" class="form-select form">
+                                            <option selected>Choose...</option>
+                                        </select>
+                                        <span class="text-danger d-none">Source Campaign is required!</span>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item" id="accordion-item2">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed text-white"
+                                onclick="checkFieldsFilled('accordion-item2')" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseTwo-add-property" aria-expanded="false"
+                                aria-controls="collapseTwo-add-property">
+                                <span class="m-0 me-4 fs-1" style="font-weight: bold;">02</span>
+                                <h3 class="m-0"><strong>Rent Details</strong> <i class="fi fi-rs-pencil"></i><i
+                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
+                                </h3>
+                            </button>
+                        </h2>
+                        <div id="collapseTwo-add-property" class="accordion-collapse collapse"
+                            aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <form class="row g-3">
+                                    <div class="col-md-6 col-lg-6 col-xl-7">
+                                        <label for="inputEmail4" class="form-label">Move-in Date</label>
+                                        <input type="date" id="moveInDate" class="form-control position-relative"
+                                            placeholder="Enter Lease Start Date">
+                                        <span class="text-danger d-none">Rent amount is
+                                            required!</span>
+                                        <!-- <i class="fi fi-rs-calendar"></i> -->
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-xl-5">
+                                        <label for="inputAddress" class="form-label">Potential Rent Amount<span
+                                                class="text-danger"> *</span></label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"
+                                                style="color: #1467B0;background-color: transparent !important;">$</span>
+                                            <input type="text" id="potentialRentAmount" class="form-control"
+                                                pattern="[0-9]{7}" placeholder="Enter Potential Rent Amount"
+                                                maxlength="7" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                                required>
+                                        </div>
+                                        <span class="text-danger d-none">Potential Rent Amount is required!</span>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <!-- <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
+                        Draft</button> -->
+                    <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal"
+                        id='close'>Close</button>
+                    <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
+                    <a href="javascript:void(0)" class="btn text-light button d-none" style='background-color:#1467B0;'
+                        id='next'>Submit</a>
+                    <button class="btn text-light button" style='background-color:#1467B0;'
+                        id='next-add-property'>Next</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="myModal_warning" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered text-center" role="document">
             <div class="modal-content modal-content-demo">
@@ -388,19 +1118,19 @@
                     <div class="col-md-6 col-lg-3 col-xl-3 mb-5">
                         <div class="card h-100">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
-                                <div class="card-title fw-bold"><a href="leads.html" style="color: white;">Lead</a>
+                                <div class="card-title fw-bold"><a href="prospects.html" style="color: white;">Lead</a>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <div class="text-center chat-image mb-5">
                                     <div class="avatar avatar-xxl chat-profile mb-3 brround">
-                                        <a class="" href="leads.html"><img alt="avatar"
+                                        <a class="" href="prospects.html"><img alt="avatar"
                                                 src="../assets/images/icons/Group 10348.png"
                                                 class="brround w-100 h-100"></a>
                                     </div>
 
                                     <div class="main-chat-msg-name">
-                                        <a href="leads.html">
+                                        <a href="prospects.html">
                                             <h5 class="mb-1 text-dark fw-bold">Create New Lead</h5>
                                         </a>
                                         <p class="text-default mt-0 mb-0 pt-0 fs-13">Effortlessly generate and manage
@@ -514,7 +1244,7 @@
                             <label class="custom-switch form-switch mb-0">
                                 <input type="checkbox" name="custom-switch-radio" class="custom-switch-input">
                                 <span class="custom-switch-indicator custom-switch-indicator-md"></span>
-                                <span class="custom-switch-description text-dark fw-bold">Active Leads</span>
+                                <span class="custom-switch-description text-dark fw-bold">Active Prospects</span>
                             </label>
                         </div>
                     </div>
@@ -834,9 +1564,9 @@
 
                             </li>
                             <li class="slide card-demo-4">
-                                <a class="side-menu__item" data-bs-toggle="slide" href="leads.html"><i
+                                <a class="side-menu__item" data-bs-toggle="slide" href="prospects.html"><i
                                         class="side-menu__icon fi fi-rs-chart-simple"></i><span
-                                        class="side-menu__label">Leads</span>
+                                        class="side-menu__label">Prospects</span>
                                 </a>
                             </li>
 
@@ -951,40 +1681,55 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <div class="text-justify ps-2 border-model-line">
-                                    <h2 class="modal-title"><strong>Leads </strong><strong
-                                            class="color-primary">Pipeline</strong></h2>
-                                    <span class="">Build Your Pipeline with High-quality Leads.</span>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="text-justify ps-2 border-model-line">
+                                        <h2 class="modal-title"><strong>Prospects </strong><strong
+                                                class="color-primary">Pipeline</strong></h2>
+                                        <span class="">Build Your Pipeline with High-quality Prospects.</span>
+
+                                    </div>
+                                    <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
+                                    <ul class="dropdown-menu dropdown-menu-top">
+                                        <li><a class="dropdown-item text-dark" href="javascript:void(0)">Kanban View</a>
+                                        </li>
+                                        <li><a class="dropdown-item text-dark" href="javascript:void(0)">List View</a>
+                                        </li>
+                                    </ul>
 
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="card-body pe-0 ps-0">
                                     <div class="panel panel-primary">
-                                        <div class="tab-menu-heading tab-menu-heading-boxed">
+                                        <div
+                                            class="tab-menu-heading tab-menu-heading-boxed d-flex justify-content-between align-items-center">
                                             <div class="tabs-menu tabs-menu-border">
                                                 <!-- Tabs -->
                                                 <ul class="nav panel-tabs">
                                                     <li><a href="#tab29" class="active" data-bs-toggle="tab"><i
                                                                 class="fi fi-rs-dashboard me-2"></i>Overview</a></li>
+                                                    <!-- <li><a href="#tab30" data-bs-toggle="tab"><i
+                                                                class="fi fi-rs-paper-plane me-2"></i>Active</a></li> -->
                                                     <li><a href="#tab30" data-bs-toggle="tab"><i
-                                                                class="fi fi-rs-paper-plane me-2"></i>Active</a></li>
-                                                    <li><a href="#tab31" data-bs-toggle="tab"><i
-                                                                class="fi fi-rs-time-delete me-2"></i>Lost</a></li>
+                                                                class="fi fi-rs-time-delete me-2"></i>Disqualified</a>
+                                                    </li>
                                                     <li><a href="#tab32" data-bs-toggle="tab"><i
-                                                                class="fi fi-rs-trophy me-2"></i>Won</a></li>
+                                                                class="fi fi-rs-trophy me-2"></i>Qualified</a></li>
                                                     <li><a href="#tab33" data-bs-toggle="tab"><i
-                                                                class="fi fi-rs-stats me-2"></i>Insights <span
-                                                                class="badge bg-secondary header-badge bg-warning"><i
-                                                                    class="fi fi-rs-crown"></i></span></a></li>
+                                                                class="fi fi-rs-stats me-2"></i>Insights
+                                                            <!-- <span class="badge bg-secondary header-badge bg-warning"><i class="fi fi-rs-crown"></i></span> -->
+                                                        </a></li>
                                                 </ul>
                                             </div>
+                                            <button type="button" class="btn btn-primary btn-pill mx-2"
+                                                data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal"><i
+                                                    class="fe fe-plus me-2"></i><strong>ADD PROSPECTS</strong></button>
                                         </div>
                                         <div class="panel-body tabs-menu-body mt-4">
                                             <div class="tab-content">
                                                 <div class="tab-pane active" id="tab29">
                                                     <div class="row remove-background">
-                                                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                                                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
                                                             <div class="card">
                                                                 <div class="card-header pe-4 ps-4 pt-4 pb-2">
                                                                     <a href="javascript:void(0)"
@@ -1001,151 +1746,14 @@
                                                                     </div>
                                                                     <div class="card-options">
                                                                         <a href="javascript:void(0)"><i
-                                                                                class="fi fi-rs-pencil fw-bold text-dark"></i></a>
-                                                                        <a href="javascript:void(0)"><i
-                                                                                class="fi fi-rs-trash fw-bold text-danger"></i></a>
+                                                                                class="fi fi-rs-edit fw-bold text-dark"></i></a>
+                                                                        <!-- <a href="javascript:void(0)"><i
+                                                                                class="fi fi-rs-circle-xmark fw-bold text-danger"></i></a> -->
                                                                     </div>
                                                                 </div>
                                                                 <div
                                                                     class="card-header d-flex justify-content-between pe-4 ps-4 pt-2 pb-2">
-                                                                    <h4 class="text-primary m-0 fw-bold">New Leads</h4>
-                                                                    <h4 class="text-dark m-0 fw-bold">$160.7k</h4>
-                                                                </div>
-                                                                <div class="card-body p-3 column">
-                                                                    <div class="d-flex p-2 mb-2 portlet"
-                                                                        style="border-radius: 7px;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
-                                                                        <div class="portlet-header">
-                                                                            <div class="media mt-0">
-                                                                                <div class="me-2">
-                                                                                    <img class="" style="width: 35px;
-                                                                                height: 48px;"
-                                                                                        src="../assets/images/Group 10242.svg">
-                                                                                </div>
-                                                                                <div class="media-body">
-                                                                                    <h6
-                                                                                        class="mb-0 mt-1 text-primary fw-bold">
-                                                                                        Mike</h6>
-                                                                                    <strong
-                                                                                        class="text-dark fw-bold fs-10">New
-                                                                                        as of 03/01/2023</strong>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="m-0 text-primary fw-bold fs-18">
-                                                                                $50k
-                                                                            </div>
-                                                                            <!-- <div class="m-0 text-primary fw-bold fs-18">
-                                                                                <div class="dropdown show">
-                                                                                    <a class="new option-dots"
-                                                                                        href="JavaScript:void(0);"
-                                                                                        data-bs-toggle="dropdown">
-                                                                                        <span class=""><i
-                                                                                                class="fe fe-more-vertical"></i></span>
-                                                                                    </a>
-                                                                                    <div
-                                                                                        class="dropdown-menu dropdown-menu-end">
-                                                                                        <a class="dropdown-item text-dark"
-                                                                                            href="javascript:void(0)">Edit
-                                                                                            Post</a>
-                                                                                        <a class="dropdown-item text-dark"
-                                                                                            href="javascript:void(0)">Delete
-                                                                                            Post</a>
-                                                                                        <a class="dropdown-item text-dark"
-                                                                                            href="javascript:void(0)">Personal
-                                                                                            Settings</a>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                         -->
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <!-- <div class="card-footer">
-                                                                    This is Basic card footer
-                                                                </div> -->
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
-                                                            <div class="card bg-transparent">
-                                                                <div class="card-header pe-4 ps-4 pt-4 pb-2">
-                                                                    <a href="javascript:void(0)"
-                                                                        data-bs-toggle="dropdown"><i
-                                                                            class="fi fi-rs-grip-lines fs-20 fw-bold"></i></a>
-                                                                    <div class="dropdown-menu dropdown-menu-end">
-                                                                        <a class="dropdown-item text-dark"
-                                                                            href="javascript:void(0)">Edit Post</a>
-                                                                        <a class="dropdown-item text-dark"
-                                                                            href="javascript:void(0)">Delete Post</a>
-                                                                        <a class="dropdown-item text-dark"
-                                                                            href="javascript:void(0)">Personal
-                                                                            Settings</a>
-                                                                    </div>
-                                                                    <div class="card-options">
-                                                                        <a href="javascript:void(0)"><i
-                                                                                class="fi fi-rs-pencil fw-bold text-dark"></i></a>
-                                                                        <a href="javascript:void(0)"><i
-                                                                                class="fi fi-rs-trash fw-bold text-danger"></i></a>
-                                                                    </div>
-                                                                </div>
-                                                                <div
-                                                                    class="card-header d-flex justify-content-between pe-4 ps-4 pt-2 pb-2">
-                                                                    <h4 class="text-primary m-0 fw-bold">Qualified</h4>
-                                                                    <h4 class="text-dark m-0 fw-bold">$90.3k</h4>
-                                                                </div>
-                                                                <div class="card-body p-3 column">
-                                                                    <div class="d-flex p-2 mb-2 portlet"
-                                                                        style="border-radius: 7px;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
-                                                                        <div class="portlet-header">
-                                                                            <div class="media mt-0">
-                                                                                <div class="me-2">
-                                                                                    <img class="" style="width: 35px;
-                                                                                height: 48px;"
-                                                                                        src="../assets/images/Group 10242.svg">
-                                                                                </div>
-                                                                                <div class="media-body">
-                                                                                    <h6
-                                                                                        class="mb-0 mt-1 text-primary fw-bold">
-                                                                                        John Smith</h6>
-                                                                                    <strong
-                                                                                        class="text-dark fw-bold fs-10">New
-                                                                                        as of 03/01/2023</strong>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="m-0 text-primary fw-bold fs-18">
-                                                                                $50k
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <!-- <div class="card-footer">
-                                                                    This is Basic card footer
-                                                                </div> -->
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
-                                                            <div class="card">
-                                                                <div class="card-header pe-4 ps-4 pt-4 pb-2">
-                                                                    <a href="javascript:void(0)"
-                                                                        data-bs-toggle="dropdown"><i
-                                                                            class="fi fi-rs-grip-lines fs-20 fw-bold"></i></a>
-                                                                    <div class="dropdown-menu dropdown-menu-end">
-                                                                        <a class="dropdown-item text-dark"
-                                                                            href="javascript:void(0)">Edit Post</a>
-                                                                        <a class="dropdown-item text-dark"
-                                                                            href="javascript:void(0)">Delete Post</a>
-                                                                        <a class="dropdown-item text-dark"
-                                                                            href="javascript:void(0)">Personal
-                                                                            Settings</a>
-                                                                    </div>
-                                                                    <div class="card-options">
-                                                                        <a href="javascript:void(0)"><i
-                                                                                class="fi fi-rs-pencil fw-bold text-dark"></i></a>
-                                                                        <a href="javascript:void(0)"><i
-                                                                                class="fi fi-rs-trash fw-bold text-danger"></i></a>
-                                                                    </div>
-                                                                </div>
-                                                                <div
-                                                                    class="card-header d-flex justify-content-between pe-4 ps-4 pt-2 pb-2">
-                                                                    <h4 class="text-primary m-0 fw-bold">In-Progress
+                                                                    <h4 class="text-primary m-0 fw-bold">New Prospects
                                                                     </h4>
                                                                     <h4 class="text-dark m-0 fw-bold">$160.7k</h4>
                                                                 </div>
@@ -1159,18 +1767,54 @@
                                                                                 height: 48px;"
                                                                                         src="../assets/images/Group 10242.svg">
                                                                                 </div>
-                                                                                <div class="media-body">
+                                                                                <div class="media-body"
+                                                                                    style="line-height: 10px;">
                                                                                     <h6
-                                                                                        class="mb-0 mt-1 text-primary fw-bold">
-                                                                                        Mike</h6>
+                                                                                        class="mb-0 mt-0 text-primary fw-bold">
+                                                                                        Dani</h6>
                                                                                     <strong
-                                                                                        class="text-dark fw-bold fs-10">New
-                                                                                        as of 03/01/2023</strong>
+                                                                                        class="text-dark fw-bold fs-10">Pensgate
+                                                                                        St <br>
+                                                                                        +167-985-2264</strong>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="m-0 text-primary fw-bold fs-18">
-                                                                                $50k
+                                                                            <div class="d-flex"
+                                                                                style="flex-direction: row;">
+                                                                                <div class="d-flex"
+                                                                                    style="flex-direction: column;">
+                                                                                    <div
+                                                                                        class="m-0 text-primary fw-bold fs-18">
+                                                                                        $50k
+                                                                                    </div>
+                                                                                    <a href="javascript:void(0)"
+                                                                                        class="fs-12 text-dark">View
+                                                                                        More</a>
+                                                                                </div>
+                                                                                <div
+                                                                                    class="m-0 text-primary fw-bold fs-18 ms-2">
+                                                                                    <div class="dropdown show">
+                                                                                        <a class="new option-dots p-0"
+                                                                                            href="JavaScript:void(0);"
+                                                                                            data-bs-toggle="dropdown">
+                                                                                            <span class=""><i
+                                                                                                    class="fe fe-more-vertical"></i></span>
+                                                                                        </a>
+                                                                                        <div
+                                                                                            class="dropdown-menu dropdown-menu-end">
+                                                                                            <a class="dropdown-item text-dark"
+                                                                                                href="javascript:void(0)">Edit
+                                                                                                Post</a>
+                                                                                            <a class="dropdown-item text-dark"
+                                                                                                href="javascript:void(0)">Delete
+                                                                                                Post</a>
+                                                                                            <a class="dropdown-item text-dark"
+                                                                                                href="javascript:void(0)">Personal
+                                                                                                Settings</a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
                                                                             </div>
+
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1179,7 +1823,7 @@
                                                                 </div> -->
                                                             </div>
                                                         </div>
-                                                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                                                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
                                                             <div class="card bg-transparent">
                                                                 <div class="card-header pe-4 ps-4 pt-4 pb-2">
                                                                     <a href="javascript:void(0)"
@@ -1196,9 +1840,197 @@
                                                                     </div>
                                                                     <div class="card-options">
                                                                         <a href="javascript:void(0)"><i
-                                                                                class="fi fi-rs-pencil fw-bold text-dark"></i></a>
+                                                                                class="fi fi-rs-edit fw-bold text-dark"></i></a>
+                                                                        <!-- <a href="javascript:void(0)"><i
+                                                                                class="fi fi-rs-circle-xmark fw-bold text-danger"></i></a> -->
+                                                                    </div>
+                                                                </div>
+                                                                <div
+                                                                    class="card-header d-flex justify-content-between pe-4 ps-4 pt-2 pb-2">
+                                                                    <h4 class="m-0 fw-bold" style="color: #1996A6;">
+                                                                        Engaged</h4>
+                                                                    <h4 class="text-dark m-0 fw-bold">$90.3k</h4>
+                                                                </div>
+                                                                <div class="card-body p-3 column">
+                                                                    <div href="javascript:void(0)"
+                                                                        class="d-flex p-2 mb-2 portlet"
+                                                                        style="border-radius: 7px;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
+                                                                        <div class="portlet-header">
+                                                                            <div class="media mt-0">
+                                                                                <div class="me-2">
+                                                                                    <img class="" style="width: 35px;
+                                                                                height: 48px;"
+                                                                                        src="../assets/images/Group 10242.svg">
+                                                                                </div>
+                                                                                <div class="media-body"
+                                                                                    style="line-height: 10px;">
+                                                                                    <h6
+                                                                                        class="mb-0 mt-0 text-primary fw-bold">
+                                                                                        John Smith</h6>
+                                                                                    <strong
+                                                                                        class="text-dark fw-bold fs-10">Pensgate
+                                                                                        St <br>
+                                                                                        +167-985-2264</strong>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="d-flex"
+                                                                                style="flex-direction: row;">
+                                                                                <div class="d-flex"
+                                                                                    style="flex-direction: column;">
+                                                                                    <div
+                                                                                        class="m-0 text-primary fw-bold fs-18">
+                                                                                        $50k
+                                                                                    </div>
+                                                                                    <a href="javascript:void(0)"
+                                                                                        class="fs-12 text-dark">View
+                                                                                        More</a>
+                                                                                </div>
+                                                                                <div
+                                                                                    class="m-0 text-primary fw-bold fs-18 ms-2">
+                                                                                    <div class="dropdown show">
+                                                                                        <a class="new option-dots p-0"
+                                                                                            href="JavaScript:void(0);"
+                                                                                            data-bs-toggle="dropdown">
+                                                                                            <span class=""><i
+                                                                                                    class="fe fe-more-vertical"></i></span>
+                                                                                        </a>
+                                                                                        <div
+                                                                                            class="dropdown-menu dropdown-menu-end">
+                                                                                            <a class="dropdown-item text-dark"
+                                                                                                href="javascript:void(0)">Edit
+                                                                                                Post</a>
+                                                                                            <a class="dropdown-item text-dark"
+                                                                                                href="javascript:void(0)">Delete
+                                                                                                Post</a>
+                                                                                            <a class="dropdown-item text-dark"
+                                                                                                href="javascript:void(0)">Personal
+                                                                                                Settings</a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- <div class="card-footer">
+                                                                    This is Basic card footer
+                                                                </div> -->
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                                                            <div class="card">
+                                                                <div class="card-header pe-4 ps-4 pt-4 pb-2">
+                                                                    <a href="javascript:void(0)"
+                                                                        data-bs-toggle="dropdown"><i
+                                                                            class="fi fi-rs-grip-lines fs-20 fw-bold"></i></a>
+                                                                    <div class="dropdown-menu dropdown-menu-end">
+                                                                        <a class="dropdown-item text-dark"
+                                                                            href="javascript:void(0)">Edit Post</a>
+                                                                        <a class="dropdown-item text-dark"
+                                                                            href="javascript:void(0)">Delete Post</a>
+                                                                        <a class="dropdown-item text-dark"
+                                                                            href="javascript:void(0)">Personal
+                                                                            Settings</a>
+                                                                    </div>
+                                                                    <div class="card-options">
                                                                         <a href="javascript:void(0)"><i
-                                                                                class="fi fi-rs-trash fw-bold text-danger"></i></a>
+                                                                                class="fi fi-rs-edit fw-bold text-dark"></i></a>
+                                                                        <!-- <a href="javascript:void(0)"><i
+                                                                                class="fi fi-rs-circle-xmark fw-bold text-danger"></i></a> -->
+                                                                    </div>
+                                                                </div>
+                                                                <div
+                                                                    class="card-header d-flex justify-content-between pe-4 ps-4 pt-2 pb-2">
+                                                                    <h4 class="text-warning m-0 fw-bold">Nurturing</h4>
+                                                                    <h4 class="text-dark m-0 fw-bold">$160.7k</h4>
+                                                                </div>
+                                                                <div class="card-body p-3 column">
+                                                                    <div class="d-flex p-2 mb-2 portlet"
+                                                                        style="border-radius: 7px;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
+                                                                        <div class="portlet-header">
+                                                                            <div class="media mt-0">
+                                                                                <div class="me-2">
+                                                                                    <img class="" style="width: 35px;
+                                                                                height: 48px;"
+                                                                                        src="../assets/images/Group 10242.svg">
+                                                                                </div>
+                                                                                <div class="media-body"
+                                                                                    style="line-height: 10px;">
+                                                                                    <h6
+                                                                                        class="mb-0 mt-0 text-primary fw-bold">
+                                                                                        Mike</h6>
+                                                                                    <strong
+                                                                                        class="text-dark fw-bold fs-10">Pensgate
+                                                                                        St <br>
+                                                                                        +167-985-2264</strong>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="d-flex"
+                                                                                style="flex-direction: row;">
+                                                                                <div class="d-flex"
+                                                                                    style="flex-direction: column;">
+                                                                                    <div
+                                                                                        class="m-0 text-primary fw-bold fs-18">
+                                                                                        $50k
+                                                                                    </div>
+                                                                                    <a href="javascript:void(0)"
+                                                                                        class="fs-12 text-dark">View
+                                                                                        More</a>
+                                                                                </div>
+                                                                                <div
+                                                                                    class="m-0 text-primary fw-bold fs-18 ms-2">
+                                                                                    <div class="dropdown show">
+                                                                                        <a class="new option-dots p-0"
+                                                                                            href="JavaScript:void(0);"
+                                                                                            data-bs-toggle="dropdown">
+                                                                                            <span class=""><i
+                                                                                                    class="fe fe-more-vertical"></i></span>
+                                                                                        </a>
+                                                                                        <div
+                                                                                            class="dropdown-menu dropdown-menu-end">
+                                                                                            <a class="dropdown-item text-dark"
+                                                                                                href="javascript:void(0)">Edit
+                                                                                                Post</a>
+                                                                                            <a class="dropdown-item text-dark"
+                                                                                                href="javascript:void(0)">Delete
+                                                                                                Post</a>
+                                                                                            <a class="dropdown-item text-dark"
+                                                                                                href="javascript:void(0)">Personal
+                                                                                                Settings</a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- <div class="card-footer">
+                                                                    This is Basic card footer
+                                                                </div> -->
+                                                            </div>
+                                                        </div>
+                                                        <!-- <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                                                            <div class="card bg-transparent">
+                                                                <div class="card-header pe-4 ps-4 pt-4 pb-2">
+                                                                    <a href="javascript:void(0)"
+                                                                        data-bs-toggle="dropdown"><i
+                                                                            class="fi fi-rs-grip-lines fs-20 fw-bold"></i></a>
+                                                                    <div class="dropdown-menu dropdown-menu-end">
+                                                                        <a class="dropdown-item text-dark"
+                                                                            href="javascript:void(0)">Edit Post</a>
+                                                                        <a class="dropdown-item text-dark"
+                                                                            href="javascript:void(0)">Delete Post</a>
+                                                                        <a class="dropdown-item text-dark"
+                                                                            href="javascript:void(0)">Personal
+                                                                            Settings</a>
+                                                                    </div>
+                                                                    <div class="card-options">
+                                                                        <a href="javascript:void(0)"><i
+                                                                                class="fi fi-rs-edit fw-bold text-dark"></i></a>
+                                                                        <a href="javascript:void(0)"><i
+                                                                                class="fi fi-rs-circle-xmark fw-bold text-danger"></i></a>
                                                                     </div>
                                                                 </div>
                                                                 <div
@@ -1216,38 +2048,281 @@
                                                                                 height: 48px;"
                                                                                         src="../assets/images/Group 10242.svg">
                                                                                 </div>
-                                                                                <div class="media-body">
+                                                                                <div class="media-body" style="line-height: 10px;">
                                                                                     <h6
-                                                                                        class="mb-0 mt-1 text-primary fw-bold">
+                                                                                        class="mb-0 mt-0 text-primary fw-bold">
                                                                                         John Smith</h6>
                                                                                     <strong
-                                                                                        class="text-dark fw-bold fs-10">New
-                                                                                        as of 03/01/2023</strong>
+                                                                                        class="text-dark fw-bold fs-10">Pensgate St <br>
++167-985-2264</strong>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="m-0 text-primary fw-bold fs-18">
                                                                                 $50k
-                                                                            </div>
+                                                                             </div>
                                                                         </div>
-                                                                    </div>
+                                                                    </div>                                                              
                                                                 </div>
-                                                                <!-- <div class="card-footer">
+                                                                <div class="card-footer">
                                                                     This is Basic card footer
-                                                                </div> -->
+                                                                </div> 
                                                             </div>
-                                                        </div>
+                                                        </div> -->
 
                                                     </div>
                                                 </div>
                                                 <div class="tab-pane" id="tab30">
-                                                    <p> default model text, and a search for 'lorem ipsum' will uncover
-                                                        many web sites still in their infancy. Various versions have
-                                                        evolved over the years, sometimes by accident, sometimes on
-                                                        purpose (injected
-                                                        humour and the like</p>
-                                                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-                                                        nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-                                                        erat, sed diam voluptua. At vero eos et</p>
+                                                    <div class="row">
+                                                        <div class="col-lg-12 col-xl-12">
+                                                            <div class="card">
+                                                                <div class="card-header justify-content-between">
+                                                                    <div class="d-flex">
+                                                                        <div class="btn-group">
+                                                                            <button type="button"
+                                                                                class="btn btn-outline-default text-dark py-1"
+                                                                                id="filter_btn"
+                                                                                data-bs-toggle="dropdown"><i
+                                                                                    class="typcn typcn-filter me-2 fs-16 text-dark"></i><strong>Filter</strong></button>
+                                                                            <ul class="dropdown-menu" role="menu">
+                                                                                <li><a href="javascript:void(0)"><strong
+                                                                                            class="text-dark">Filter
+                                                                                            by:</strong></a>
+                                                                                </li>
+                                                                                <li
+                                                                                    class="d-flex justify-content-between">
+                                                                                    <a href="javascript:void(0)"
+                                                                                        class="text-dark">A-Z
+                                                                                        Alphabets</a>
+                                                                                    <div class="form-check m-0">
+                                                                                        <input
+                                                                                            class="form-check-input mt-2"
+                                                                                            type="radio"
+                                                                                            name="exampleRadios"
+                                                                                            id="alphabets"
+                                                                                            value="option1">
+                                                                                    </div>
+                                                                                </li>
+
+                                                                                <li
+                                                                                    class="d-flex justify-content-between">
+                                                                                    <a href="javascript:void(0)"
+                                                                                        class="text-dark">Ascending</a>
+                                                                                    <div class="form-check m-0">
+                                                                                        <input
+                                                                                            class="form-check-input mt-2"
+                                                                                            type="radio"
+                                                                                            name="exampleRadios"
+                                                                                            id="ascending"
+                                                                                            value="option1">
+                                                                                    </div>
+                                                                                </li>
+                                                                                <li
+                                                                                    class="d-flex justify-content-between">
+                                                                                    <a href="javascript:void(0)"
+                                                                                        class="text-dark">Descending</a>
+                                                                                    <div class="form-check m-0">
+                                                                                        <input
+                                                                                            class="form-check-input mt-2"
+                                                                                            type="radio"
+                                                                                            name="exampleRadios"
+                                                                                            id="descending"
+                                                                                            value="option1">
+                                                                                    </div>
+                                                                                </li>
+                                                                                <!-- <li class="d-flex justify-content-between"><a
+                                                                                        href="javascript:void(0)">Recently Added</a>
+                                                                                    <div class="form-check m-0">
+                                                                                        <input class="form-check-input mt-2" type="radio"
+                                                                                            name="exampleRadios" id="exampleRadios1" value="option1"
+                                                                                            checked>
+                                                                                    </div>
+                                                                                </li> -->
+                                                                            </ul>
+                                                                        </div>
+                                                                        <div class="mx-2">
+                                                                            <!-- <div class="form-group m-0">
+                                                                                <input class="form-control" placeholder="Search Users by Name, Email or Date" id="search_input" type="text">
+                                                                            </div> -->
+                                                                            <div
+                                                                                class="main-header-center d-none d-lg-block m-0">
+                                                                                <button class="btn px-0 pt-2"><i
+                                                                                        class="fe fe-search"
+                                                                                        aria-hidden="true"></i></button>
+                                                                                <input type="text" class="form-control"
+                                                                                    id="typehead"
+                                                                                    placeholder="Search for results..."
+                                                                                    autocomplete="off"
+                                                                                    style="width: 230px;">
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="d-flex">
+                                                                        <div class="btn-group">
+                                                                            <button type="button"
+                                                                                class="btn font-weight-bold text-dark"
+                                                                                id="customize_btn"
+                                                                                data-bs-toggle="dropdown"
+                                                                                style="border: none;"><strong>CUSTOMIZED</strong><i
+                                                                                    class="fe fe-chevron-down ms-2 text-dark"></i></button>
+                                                                            <ul class="dropdown-menu" role="menu">
+                                                                                <li><a href="javascript:void(0)"
+                                                                                        class="text-dark"><strong>Coulmns
+                                                                                            to
+                                                                                            Show</strong></a>
+                                                                                </li>
+                                                                                <li
+                                                                                    class="d-flex justify-content-between">
+                                                                                    <a class="text-dark"
+                                                                                        href="javascript:void(0)">IMAGE</a>
+                                                                                    <div class="form-check m-0">
+                                                                                        <input type="checkbox"
+                                                                                            class="form-check-input mt-2"
+                                                                                            id="exampleCheck1" checked>
+                                                                                    </div>
+                                                                                </li>
+
+                                                                                <li
+                                                                                    class="d-flex justify-content-between">
+                                                                                    <a class="text-dark"
+                                                                                        href="javascript:void(0)">PROPERTY
+                                                                                        NAME</a>
+                                                                                    <div class="form-check m-0">
+                                                                                        <input type="checkbox"
+                                                                                            class="form-check-input mt-2"
+                                                                                            id="exampleCheck1" checked>
+                                                                                    </div>
+                                                                                </li>
+                                                                                <li
+                                                                                    class="d-flex justify-content-between">
+                                                                                    <a class="text-dark"
+                                                                                        href="javascript:void(0)">PROPERTY
+                                                                                        TYPE</a>
+                                                                                    <div class="form-check m-0">
+                                                                                        <input type="checkbox"
+                                                                                            class="form-check-input mt-2"
+                                                                                            id="exampleCheck1" checked>
+                                                                                    </div>
+                                                                                </li>
+                                                                                <li
+                                                                                    class="d-flex justify-content-between">
+                                                                                    <a class="text-dark"
+                                                                                        href="javascript:void(0)">PROPERTY
+                                                                                        UNITS</a>
+                                                                                    <div class="form-check m-0">
+                                                                                        <input type="checkbox"
+                                                                                            class="form-check-input mt-2"
+                                                                                            id="exampleCheck1" checked>
+                                                                                    </div>
+                                                                                </li>
+                                                                                <li
+                                                                                    class="d-flex justify-content-between">
+                                                                                    <a class="text-dark"
+                                                                                        href="javascript:void(0)">PROPERTY
+                                                                                        ADDRESS</a>
+                                                                                    <div class="form-check m-0">
+                                                                                        <input type="checkbox"
+                                                                                            class="form-check-input mt-2"
+                                                                                            id="exampleCheck1" checked>
+                                                                                    </div>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                        <!-- <button type="button" class="btn btn-primary mx-2" id="add_property_btn" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal"><i
+                                                                                class="fe fe-plus me-2"></i><strong>ADD NEW
+                                                                                PROPERTY</strong></button> -->
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card-body p-0">
+                                                                    <div class="table-responsive">
+                                                                        <table
+                                                                            class="table border text-nowrap text-md-nowrap mb-0"
+                                                                            id="responsive-datatable">
+                                                                            <thead>
+                                                                                <tr>
+
+                                                                                    <th>PROSPECTS NAME</th>
+                                                                                    <th>source campaign</th>
+                                                                                    <th>property name</th>
+                                                                                    <th>TOTAL UNITS</th>
+                                                                                    <th>contact info</th>
+                                                                                    <th>amount</th>
+                                                                                    <th>date CREATED</th>
+                                                                                    <th>status</th>
+                                                                                    <th>action</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody id="">
+                                                                                <tr>
+                                                                                    <td>Adobe Technologies</td>
+                                                                                    <td class="text-primary">Facebook
+                                                                                    </td>
+                                                                                    <td><span class="fw-bold">Pensgate
+                                                                                            St</span><br><small>9430
+                                                                                            Research Blvd. Ste 2-350
+                                                                                            Austin TX 78759</small></td>
+                                                                                    <td><span class="fw-bold">1
+                                                                                            Unit</span><br><small
+                                                                                            class="text-primary"><i
+                                                                                                class="fe fe-circle me-1 text-primary"></i>9
+                                                                                            (Vacant)</small><small
+                                                                                            class="text-danger"><i
+                                                                                                class="fe fe-circle me-1 text-danger"></i>9
+                                                                                            (Vacant)</small></td>
+                                                                                    <td><span
+                                                                                            class="fw-bold">example@gmail.com</span><br><small>(+256)
+                                                                                            2145.215-6</small></td>
+                                                                                    <td><span
+                                                                                            class="fw-bold">$170,000</span>
+                                                                                    </td>
+                                                                                    <td><span
+                                                                                            class="fw-bold">17/12/220</span>
+                                                                                    </td>
+                                                                                    <td><span
+                                                                                            class="fw-bold" data-bs-toggle="dropdown" style="cursor: pointer;">Active <i class="fi fi-rs-angle-small-down text-dark"></i></span>
+                                                                                            <ul
+                                                                                            class="dropdown-menu dropdown-menu-top">
+                                                                                            <li><a class="dropdown-item text-dark"
+                                                                                                    href="javascript:void(0)"><i class="fi fi-rs-user-check me-3 text-dark"></i>Active</a>
+                                                                                            </li>
+                                                                                            <li><a class="dropdown-item text-dark"
+                                                                                                    href="javascript:void(0)">Engaged</a>
+                                                                                            </li>
+                                                                                            <li><a class="dropdown-item text-dark"
+                                                                                                href="javascript:void(0)">Engaged</a>
+                                                                                        </li>
+                                                                                        <li><a class="dropdown-item text-dark"
+                                                                                            href="javascript:void(0)">Qualified</a>
+                                                                                    </li>
+                                                                                    <li><a class="dropdown-item text-dark"
+                                                                                        href="javascript:void(0)">Disqualified</a>
+                                                                                </li>
+                                                                                        </ul>
+
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <i class="fe fe-more-vertical"
+                                                                                            data-bs-toggle="dropdown"></i>
+                                                                                        <ul
+                                                                                            class="dropdown-menu dropdown-menu-top">
+                                                                                            <li><a class="dropdown-item text-dark"
+                                                                                                    href="javascript:void(0)">Kanban
+                                                                                                    View</a>
+                                                                                            </li>
+                                                                                            <li><a class="dropdown-item text-dark"
+                                                                                                    href="javascript:void(0)">List
+                                                                                                    View</a>
+                                                                                            </li>
+                                                                                        </ul>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="tab-pane" id="tab31">
                                                     <p>over the years, sometimes by accident, sometimes on purpose
@@ -1268,191 +2343,15 @@
                                                         erat, sed diam voluptua. At vero eos et</p>
                                                 </div>
                                                 <div class="tab-pane" id="tab33">
-                                                    <div class="container">
-                                                        <div class="row">
-                                                            <!-- Qualified & Disqualified start  -->
-                                                            <div class="col-lg-6 col-md-12 mb-5" id="banking-stats">
-                                                                <div class="card h-100">
-                                                                    <div class="card-header"
-                                                                        style="display: flex; justify-content: space-between;">
-                                                                        <div>
-                                                                            <label for=""><b
-                                                                                    style="color: #1467B0;">Qualified &
-                                                                                    Disqualified</b></label>
-                                                                        </div>
-                                                                        <div style="display: flex; align-items: end;">
-
-                                                                            <input type="date"
-                                                                                class="form-control form-control-date-width"
-                                                                                placeholder="Jan 6, 2022 – Jan 13, 2022">&emsp;
-                                                                            <input type="date"
-                                                                                class="form-control form-control-date-width"
-                                                                                placeholder="Jan 6, 2022 – Jan 13, 2022">
-                                                                        </div>
-                                                                        <i class="fe fe-more-vertical"
-                                                                            data-bs-toggle="dropdown"></i>
-                                                                        <ul class="dropdown-menu dropdown-menu-top">
-                                                                            <li><a class="dropdown-item text-danger"
-                                                                                    href="#">X Remove</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <div class="card-body">
-                                                                        <canvas id="chartBar2" class="h-275"></canvas>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- Qualified & Disqualified end  -->
-
-                                                            <!-- Average time from New Lead to Close start  -->
-                                                            <div class="col-lg-6 col-md-12 mb-5" id="banking-stats">
-                                                                <div class="card h-100">
-                                                                    <div class="card-header"
-                                                                        style="display: flex; justify-content: space-between;">
-                                                                        <div>
-                                                                            <label for=""><b
-                                                                                    style="color: #1467B0;">Average time
-                                                                                    from New Lead to Close</b></label>
-                                                                        </div>
-                                                                        <div style="display: flex; align-items: end;">
-
-                                                                            <input type="date"
-                                                                                class="form-control form-control-date-width"
-                                                                                placeholder="Jan 6, 2022 – Jan 13, 2022">&emsp;
-                                                                            <input type="date"
-                                                                                class="form-control form-control-date-width"
-                                                                                placeholder="Jan 6, 2022 – Jan 13, 2022">
-                                                                        </div>
-                                                                        <i class="fe fe-more-vertical"
-                                                                            data-bs-toggle="dropdown"></i>
-                                                                        <ul class="dropdown-menu dropdown-menu-top">
-                                                                            <li><a class="dropdown-item text-danger"
-                                                                                    href="#">X Remove</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <div class="card-body">
-                                                                        <canvas id="chartLine" class="h-275"></canvas>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- Average time from New Lead to Close end  -->
-
-                                                            <!-- Tenants Status start  -->
-                                                            <div class="col-lg-6 col-md-12 mb-5" id="tenants-status">
-                                                                <div class="card h-100">
-                                                                    <div class="card-header"
-                                                                        style="display: flex; justify-content: space-between;">
-                                                                        <div style="display: flex; align-items: end;">
-                                                                            <label for=""><b>Status </b></label>
-                                                                            &emsp;
-                                                                            <input type="date"
-                                                                                class="form-control form-control-date-width"
-                                                                                placeholder="Jan 6, 2022 – Jan 13, 2022">&emsp;
-                                                                            <input type="date"
-                                                                                class="form-control form-control-date-width"
-                                                                                placeholder="Jan 6, 2022 – Jan 13, 2022">
-                                                                        </div>
-                                                                        <i class="fe fe-more-vertical"
-                                                                            data-bs-toggle="dropdown"></i>
-                                                                        <ul class="dropdown-menu dropdown-menu-top">
-                                                                            <li><a class="dropdown-item text-danger"
-                                                                                    href="#">X Remove</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <div class="card-body"
-                                                                        style="display: flex; align-items: center;">
-                                                                        <div style="width: 100%;">
-                                                                            <div class="p-4"
-                                                                                style="background-color: #529EE0; border-radius: 12px; display: flex; align-items: center; justify-content: space-between; box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
-                                                                                <div
-                                                                                    style="display: flex; align-items: center; margin-right: 15px;">
-                                                                                    
-                                                                                    <h4 class="mb-0"><b
-                                                                                            class="text-light">Prospects</b></h4>
-                                                                                </div>
-                                                                                <div class="text-center"
-                                                                                    style="background-color: #fff; border-radius: 12px; display: flex; justify-content: center; align-items: center; height: 50px; width: 60px;">
-                                                                                    <h4
-                                                                                        style="margin-bottom: 0em !important;">
-                                                                                        <b style="color: #000">20</b>
-                                                                                    </h4>
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="p-4 mt-4"
-                                                                                style="background-color: #529EE0; border-radius: 12px; display: flex; align-items: center; justify-content: space-between; box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
-                                                                                <div
-                                                                                    style="display: flex; align-items: center; margin-right: 15px;">
-                                                                                    
-                                                                                    <h4 class="mb-0"><b
-                                                                                            class="text-light">Engaged</b></h4>
-                                                                                </div>
-                                                                                <div class="text-center"
-                                                                                    style="background-color: #fff; border-radius: 12px; display: flex; justify-content: center; align-items: center; height: 50px; width: 60px;">
-                                                                                    <h4
-                                                                                        style="margin-bottom: 0em !important;">
-                                                                                        <b style="color: #000">18</b>
-                                                                                    </h4>
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="p-4 mt-4"
-                                                                            style="background-color: #529EE0; border-radius: 12px; display: flex; align-items: center; justify-content: space-between; box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
-                                                                            <div
-                                                                                style="display: flex; align-items: center; margin-right: 15px;">
-                                                                                
-                                                                                <h4 class="mb-0"><b
-                                                                                        class="text-light"> Nurture</b></h4>
-                                                                            </div>
-                                                                            <div class="text-center"
-                                                                                style="background-color: #fff; border-radius: 12px; display: flex; justify-content: center; align-items: center; height: 50px; width: 60px;">
-                                                                                <h4
-                                                                                    style="margin-bottom: 0em !important;">
-                                                                                    <b style="color: #000">25</b>
-                                                                                </h4>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        </div>
-                                                                        <!-- <div class="text-center mt-0"><h4><b>20</b></h4></div> -->
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- Tenants Status end  -->
-
-                                                             <!-- Source start  -->
-                                                             <div class="col-lg-6 col-md-12 mb-5" id="banking-stats">
-                                                                <div class="card h-100">
-                                                                    <div class="card-header"
-                                                                        style="display: flex; justify-content: space-between;">
-                                                                        <div>
-                                                                            <label for=""><b
-                                                                                    style="color: #1467B0;">Source</b></label>
-                                                                        </div>
-                                                                        <div style="display: flex; align-items: end;">
-
-                                                                            <input type="date"
-                                                                                class="form-control form-control-date-width"
-                                                                                placeholder="Jan 6, 2022 – Jan 13, 2022">&emsp;
-                                                                            <input type="date"
-                                                                                class="form-control form-control-date-width"
-                                                                                placeholder="Jan 6, 2022 – Jan 13, 2022">
-                                                                        </div>
-                                                                        <i class="fe fe-more-vertical"
-                                                                            data-bs-toggle="dropdown"></i>
-                                                                        <ul class="dropdown-menu dropdown-menu-top">
-                                                                            <li><a class="dropdown-item text-danger"
-                                                                                    href="#">X Remove</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <div class="card-body">
-                                                                        <canvas id="chartBar11" class="h-275"></canvas>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- Source end  -->
-
-                                                        </div>
-                                                    </div>
+                                                    <p>page editors now use Lorem Ipsum as their default model text, and
+                                                        a search for 'lorem ipsum' will uncover many web sites still in
+                                                        their infancy. Various versions have evolved over the years,
+                                                        sometimes
+                                                        by accident, sometimes on purpose injected humour and the like
+                                                    </p>
+                                                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+                                                        nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+                                                        erat, sed diam voluptua. At vero eos et</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1521,6 +2420,7 @@
                                     class="Unread_span"></span></a></li>
                         <!-- <li><a href="#side4" data-bs-toggle="tab" class="text-dark">Archive <span class="archive_span"></span></a></li> -->
                     </ul>
+
                 </div>
                 <div class="tab-content">
                     <!-- <div class="tab-pane " id="side1">
@@ -2080,6 +2980,9 @@
 
     <!-- SIDEBAR JS -->
     <script src="../assets/plugins/sidebar/sidebar.js"></script>
+    <script src="../assets/plugins/intl-tel-input-master/intlTelInput.js"></script>
+    <script src="../assets/plugins/intl-tel-input-master/country-select.js"></script>
+    <script src="../assets/plugins/intl-tel-input-master/utils.js"></script>
 
     <!-- Perfect SCROLLBAR JS-->
     <script src="../assets/plugins/p-scroll/perfect-scrollbar.js"></script>
@@ -2177,6 +3080,62 @@
     </script>
     <script>
         $(document).ready(function () {
+            function updateButtonStatus() {
+                var accordion1Fields = $('#accordion-item1 input[required], #accordion-item1 select[required]');
+                var accordion2Fields = $('#accordion-item2 input[required], #accordion-item2 select[required]');
+                var accordion3Fields = $('#accordion-item3 input[required]');
+                var isAccordion1FieldsEmpty = accordion1Fields.filter(function () {
+                    return $(this).val() !== '' || $(this).val() === 'Choose...';
+                }).length === 0;
+                var isAccordion2FieldsEmpty = accordion2Fields.filter(function () {
+                    return $(this).val() !== '' || $(this).val() === 'Choose...';
+                }).length === 0;
+                var isAccordion3FieldsEmpty = accordion3Fields.filter(function () {
+                    return $(this).val() !== '';
+                }).length === 0;
+
+                // Enable or disable the buttons based on the fields' status
+                if (!isAccordion1FieldsEmpty || !isAccordion2FieldsEmpty || !isAccordion3FieldsEmpty) {
+                    $('#draft').removeAttr('disabled');
+                } else {
+                    $('#draft').attr('disabled', 'disabled');
+                }
+
+                var allFieldsFilled = areAllFieldsFilled();
+
+                // Enable or disable the buttons based on the fields' status
+                if (allFieldsFilled) {
+                    $('#next').removeClass("disabled").removeAttr("disabled");
+                } else {
+                    $('#next').addClass("disabled").attr("disabled", "disabled");
+                }
+            }
+            // Call the updateButtonStatus function when any field in the accordions is changed
+            $('#accordion-item1 input[type="text"],#accordion-item1 input[type="tel"], #accordion-item1 select, #accordion-item2 input, #accordion-item2 select, #accordion-item3 input, #accordion-item3 select').on('input change', function () {
+                var $field = $(this);
+                var $errorMessage = $field.next('.text-danger');
+                if ($field.attr("id") === "zip") {
+                    if ($field.val().length !== 5) {
+                        $field.addClass('border-danger');
+                        $field.removeClass('border-green');
+                        $errorMessage.removeClass('d-none');
+                    } else {
+                        $field.removeClass('border-danger');
+                        $field.addClass('border-green');
+                        $errorMessage.addClass('d-none');
+                    }
+                } else if ($field.val() === '' || $field.val() === 'Choose...') {
+                    $field.addClass('border-danger');
+                    $field.removeClass('border-green');
+                    $errorMessage.removeClass('d-none');
+                } else {
+                    $field.removeClass('border-danger');
+                    $field.addClass('border-green');
+                    $errorMessage.addClass('d-none');
+                }
+                updateButtonStatus();
+            });
+
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
                 method: 'GET',
@@ -2292,202 +3251,6 @@
             });
         })
     </script>
-
-    <!-- /*Qualified or Un-Qualified chart-bar*/ -->
-    <script>
-        var ctx = document.getElementById("chartBar2");
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ["2015", "2016", "2017", "2018", "2019"],
-                datasets: [{
-                    label: "Lost",
-                    data: [12, 22, 20, 35, 12],
-                    borderColor: "#FF2366",
-                    borderWidth: "0",
-                    backgroundColor: "#FF2366"
-                }, {
-                    label: "Won",
-                    data: [22, 42, 60, 70, 86],
-                    borderColor: "#02BC77",
-                    borderWidth: "0",
-                    backgroundColor: "#02BC77"
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    xAxes: [{
-                        barPercentage: 0.4,
-                        barValueSpacing: 0,
-                        barDatasetSpacing: 0,
-                        barRadius: 0,
-                        ticks: {
-                            fontColor: "#9ba6b5",
-                        },
-                        gridLines: {
-                            color: 'rgba(119, 119, 142, 0.2)'
-                        }
-                    }],
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true,
-                            fontColor: "#9ba6b5",
-                        },
-                        gridLines: {
-                            color: 'rgba(119, 119, 142, 0.2)'
-                        },
-                    }]
-                },
-                legend: {
-                    labels: {
-                        fontColor: "#9ba6b5"
-                    },
-                },
-            }
-        });
-    </script>
-    <!-- /*Qualified or Un-Qualified chart-bar*/ -->
-
-    <!-- /*Average time from New Lead to Close*/ -->
-    <script>
-        var ctx = document.getElementById("chartLine").getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"],
-                datasets: [{
-                    label: 'Profits',
-                    data: [100, 420, 210, 420, 210, 320, 350, 180],
-                    borderWidth: 2,
-                    backgroundColor: 'transparent',
-                    borderColor: '#4791FF',
-                    borderWidth: 3,
-                    pointBackgroundColor: '#ffffff',
-                    pointRadius: 2
-                }, {
-                    label: 'Expenses',
-                    data: [450, 200, 350, 250, 480, 200, 400, 200],
-                    borderWidth: 2,
-                    backgroundColor: 'transparent',
-                    borderColor: '#02BC77',
-                    borderWidth: 3,
-                    pointBackgroundColor: '#ffffff',
-                    pointRadius: 2
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-
-                scales: {
-                    xAxes: [{
-                        ticks: {
-                            fontColor: "#9ba6b5",
-                        },
-                        display: true,
-                        gridLines: {
-                            color: 'rgba(119, 119, 142, 0.2)'
-                        }
-                    }],
-                    yAxes: [{
-                        ticks: {
-                            fontColor: "#9ba6b5",
-                        },
-                        display: true,
-                        gridLines: {
-                            color: 'rgba(119, 119, 142, 0.2)'
-                        },
-                        scaleLabel: {
-                            display: false,
-                            labelString: 'Thousands',
-                            fontColor: 'rgba(119, 119, 142, 0.2)'
-                        }
-                    }]
-                },
-                legend: {
-                    labels: {
-                        fontColor: "#9ba6b5"
-                    },
-                },
-            }
-        });
-    </script>
-    <!-- /*Average time from New Lead to Close*/ -->
-
-
-        <!-- /* Source Close*/ -->
-        <script>
-var ctx = document.getElementById("chartBar11").getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ["Referel", "Social Media", "Google"],
-        datasets: [{
-            label: 'Sales',
-            data: [70, 110, 40],
-            borderWidth: 2,
-            backgroundColor: ['#09AD95', '#2086C8', '#000'],
-            borderColor: ['#09AD95', '#2086C8', '#000'],
-            borderWidth: 2.0,
-            pointBackgroundColor: '#ffffff',
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        legend: {
-            display: true
-        },
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true,
-                    stepSize: 150,
-                    fontColor: "#9ba6b5",
-                },
-                gridLines: {
-                    color: 'rgba(119, 119, 142, 0.2)'
-                }
-            }],
-            xAxes: [{
-                barPercentage: 0.9,
-                barValueSpacing: 0,
-                barDatasetSpacing: 0,
-                barRadius: 0,
-                ticks: {
-                    display: true,
-                    fontColor: "#9ba6b5",
-                },
-                gridLines: {
-                    display: false,
-                    color: 'rgba(119, 119, 142, 0.2)'
-                }
-            }]
-        },
-        legend: {
-            labels: {
-                fontColor: "#9ba6b5"
-            },
-        },
-        tooltips: {
-            enabled: true,
-            mode: 'single',
-            callbacks: {
-                label: function (tooltipItem, data) {
-                    var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-                    return value;
-                },
-            },
-        },
-    }
-});
-
-
-        </script>
-        <!-- /* Source Close*/ -->
-
 </body>
 
 </html>
