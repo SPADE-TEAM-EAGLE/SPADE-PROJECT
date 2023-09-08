@@ -10,7 +10,8 @@ const {
   selectQuery,
   deleteQuery,
   updatePassword,
-  updatePasswordTenantSetting
+  updatePasswordTenantSetting,
+  updateEmailTemplates
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -100,3 +101,27 @@ exports.changePasswordTenant = async function (req, res) {
   }
 };
 //  ############################# Update Setting tennant Password END ############################################################
+
+
+//  ############################# Email templates Start ############################################################
+exports.emailtemplates = async (req, res) => {
+  const { tenantEmail, invoiceEmail, taskEmail, userEmail } = req.body;
+  // const { userId } = req.user;
+  const { userId } = req.body;
+  try {
+    const updateEmailResult = await queryRunner(updateEmailTemplates, [tenantEmail, invoiceEmail, taskEmail, userEmail,userId,]);
+    if (updateEmailResult[0].affectedRows > 0) {
+      return res.status(200).json({
+        Message: "Updated Successful",
+        result : updateEmailResult[0]
+ 
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+};
+//  ############################# Email templates END ############################################################
+
