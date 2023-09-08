@@ -208,4 +208,4 @@ router.get("/ProfileCompleteTenant", verifyTokenTenant, tenantPortalController.P
 // router.get("/ProfileCompleteTenant" , tenantPortalController.ProfileCompleteTenant);
 router.get("/unpaidAmountTenant", verifyTokenTenant, tenantPortalController.unpaidAmountTenant);
 // router.get("/unpaidAmountTenant", tenantPortalController.unpaidAmountTenant);
-router.put("/emailtemplates", settingController.emailtemplates);
+router.put("/emailtemplates", verifyToken, settingController.emailtemplates);

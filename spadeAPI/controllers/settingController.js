@@ -106,8 +106,8 @@ exports.changePasswordTenant = async function (req, res) {
 //  ############################# Email templates Start ############################################################
 exports.emailtemplates = async (req, res) => {
   const { tenantEmail, invoiceEmail, taskEmail, userEmail = 0 } = req.body;
-  // const { userId } = req.user;
-  const { userId } = req.body;
+  const { userId } = req.user;
+  // const { userId } = req.body;
   try {
     const updateEmailResult = await queryRunner(updateEmailTemplates, [tenantEmail, invoiceEmail, taskEmail, userEmail,userId,]);
     if (updateEmailResult[0].affectedRows > 0) {
