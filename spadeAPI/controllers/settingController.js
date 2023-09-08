@@ -105,7 +105,7 @@ exports.changePasswordTenant = async function (req, res) {
 
 //  ############################# Email templates Start ############################################################
 exports.emailtemplates = async (req, res) => {
-  const { tenantEmail, invoiceEmail, taskEmail, userEmail } = req.body;
+  const { tenantEmail, invoiceEmail, taskEmail, userEmail = 0 } = req.body;
   // const { userId } = req.user;
   const { userId } = req.body;
   try {
@@ -114,7 +114,6 @@ exports.emailtemplates = async (req, res) => {
       return res.status(200).json({
         Message: "Updated Successful",
         result : updateEmailResult[0]
- 
       });
     }
   } catch (error) {
