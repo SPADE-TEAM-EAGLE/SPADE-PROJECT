@@ -64,6 +64,8 @@ const {
   updateAllTenantsAccountQuery,
   getAllTenantsQuery,
   deleteUserAccountData,
+  updateAuthQuery,
+  addResetTokenTenant,
 } = require("../constants/queries");
 
 const { hashedPassword } = require("../helper/hash");
@@ -174,10 +176,22 @@ exports.Signin = async function (req, res) {
       } else if (
         await bcrypt.compare(password, selectResult[0][0].tenantPassword)
       ) {
-        const token = jwt.sign({ email, password }, config.JWT_SECRET_KEY, {
+        const id = selectResult[0][0].id;
+        const token = jwt.sign({ email, id }, config.JWT_SECRET_KEY, {
           expiresIn: "3h",
         });
         if (selectResult[0][0].isTenantAccount == "1") {
+          if(selectResult[0][0].auth == 1){
+            const random = Math.floor(100000 + Math.random() * 900000);
+            sendMail(email, "2-Factor Authentication", random, selectResult[0][0].FirstName + " " + selectResult[0][0].LastName);
+            const now = new Date();
+    const formattedDate = now.toISOString().slice(0, 19).replace("T", " ");
+            const updateResult = await queryRunner(addResetTokenTenant, [
+              random,
+              formattedDate,
+              selectResult[0][0].id,
+            ]);
+          }
           res.status(200).json({
             token: token,
             body: selectResult[0][0],
@@ -205,7 +219,8 @@ exports.Signin = async function (req, res) {
       if (selectResult[0].length === 0) {
         res.status(400).send("Email not found");
       } else if (await bcrypt.compare(password, selectResult[0][0].Password)) {
-        const token = jwt.sign({ email, password }, config.JWT_SECRET_KEY, {
+        const id = selectResult[0][0].id;
+        const token = jwt.sign({ email, id}, config.JWT_SECRET_KEY, {
           expiresIn: "3h",
         });
 
@@ -334,6 +349,17 @@ exports.Signin = async function (req, res) {
               vendors = "false";
             }
             // ################################# Count ##############################################
+            if(selectResult[0][0].auth == 1){
+              const random = Math.floor(100000 + Math.random() * 900000);
+              sendMail(email, "2-Factor Authentication", random, selectResult[0][0].FirstName + " " + selectResult[0][0].LastName);
+              const now = new Date();
+      const formattedDate = now.toISOString().slice(0, 19).replace("T", " ");
+              const updateResult = await queryRunner(addResetToken, [
+                random,
+                formattedDate,
+                selectResult[0][0].id,
+              ]);
+            }
             res.status(200).json({
               property: property,
               tenants: tenants,
@@ -350,6 +376,7 @@ exports.Signin = async function (req, res) {
               emailMessage.message ==
               "Your account is locked due to email verification. Please verify your email."
             ) {
+              
               res.status(200).json({
                 property: property,
                 tenants: tenants,
@@ -362,6 +389,17 @@ exports.Signin = async function (req, res) {
                 msg: emailMessage.message,
               });
             } else {
+              if(selectResult[0][0].auth == 1){
+                const random = Math.floor(100000 + Math.random() * 900000);
+                sendMail(email, "2-Factor Authentication", random, selectResult[0][0].FirstName + " " + selectResult[0][0].LastName);
+                const now = new Date();
+                const formattedDate = now.toISOString().slice(0, 19).replace("T", " ");
+                        const updateResult = await queryRunner(addResetToken, [
+                          random,
+                          formattedDate,
+                          selectResult[0][0].id,
+                        ]);
+              }
               res.status(200).json({
                 property: property,
                 tenants: tenants,
@@ -553,6 +591,50 @@ exports.verifyResetEmailCode = async (req, res) => {
       const time2 = time / 1000;
       if (time2 >= 120) {
         res.status(408).send("Time out");
+      } else {
+        res.status(200).json({
+          message: "Successful",
+          id: id,
+          token: token,
+        });
+      }
+    } else {
+      res.status(404).json({
+        message: "Cannot Validate!!!",
+      });
+    }
+  } catch (error) {
+    res.status(400).send("Error");
+  }
+};
+
+exports.verifyAuthCode = async (req, res) => {
+  const { id, token, tenant } = req.body;
+  var selectResult;
+  try {
+    if(tenant == "tenant"){
+      selectResult = await queryRunner(
+        selectQuery("tenants", "id", "token"),
+        [id, token]
+      );
+    }else{
+
+      selectResult = await queryRunner(
+        selectQuery("users", "id", "token"),
+        [id, token]
+      );
+      
+    }
+    if (selectResult[0].length > 0) {
+      const now = new Date(selectResult[0][0].updated_at);
+      const now2 = new Date();
+      const formattedDate = now2.toISOString().slice(0, 19).replace("T", " ");
+      const time = new Date(formattedDate) - now;
+      const time2 = time / 1000;
+      if (time2 >= 300) {
+        res.status(400).json({
+          message: "OTP expired",
+        });
       } else {
         res.status(200).json({
           message: "Successful",
@@ -1890,7 +1972,8 @@ exports.verifyEmailUpdate = async (req, res) => {
         if (emailResult.affectedRows === 0) {
           return res.status(400).send("Email Verified status is not updated");
         } else {
-          const token = jwt.sign({ email, password }, config.JWT_SECRET_KEY, {
+          const id=userCheckResult[0][0].id
+          const token = jwt.sign({ email, id }, config.JWT_SECRET_KEY, {
             expiresIn: "3h",
           });
 
@@ -2423,6 +2506,23 @@ exports.filterOutDashbordDataByProperty = async (req, res) => {
       property: getAllPropertyData[0],
     });
   } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+};
+exports.updateAuth = async (req, res) => {
+  try {
+    const { auth } = req.body;
+    const {userId} = req.user
+    const updateAuth= await queryRunner(updateAuthQuery, [auth,userId]);
+    if(updateAuth[0].affectedRows>0){
+      res.status(200).json({message:`2 Factor Authentication ${auth==0?"turned off":"turned on"}`})
+    }else{
+      res.status(400).json({message:"Error in updating 2 Factor Authentication"})
+    }
+  } catch (error) {
+    console.log(error)
     res.status(400).json({
       message: error.message,
     });

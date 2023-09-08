@@ -220,21 +220,9 @@
         });
         cardCvc.attach('#card-cvc');
         function main() {
-            sfc.addCardUpo({
-                // userTokenId: "123",
-                useFields: true,
-                clientRequestId: "561ccf70-336b-11ee-a309-4f00ef0ed1ad", // or websdk cardNumber object
-                // sessionToken: "ab01f818-64c5-429c-ba18-6af96b2cdccf",
-                billingAddress: { // optional
-                    email: 'john.smith@email.com',
-                    country: 'US'
-                }
-            },
-                function (result) {
-                    console.log(result);
-                })
+            
             $.ajax({
-                url: 'http://localhost:3000/api/spade/openOrder',
+                url: 'https://backend.app.spaderent.com/api/spade/openOrder',
                 type: 'POST',
                 data: JSON.stringify({
                     amount: $("#amount").val(),
@@ -246,19 +234,20 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response)
-                    sfc.createPayment({
-                        sessionToken: response.sessionToken, //received from openOrder API
-                        // clientUniqueId: "695701003", // optional
-                        cardHolderName: "<card_holder>",
-                        paymentOption: scard,
-                        billingAddress: {
-                            email: "someone@somedomain.com",
-                            country: "GB"
-                        }
-                    }, function (res) {
-                        console.log(res)
-                    });
+                    sfc.addCardUpo({
+                // userTokenId: "123",
+                useFields: true,
+                clientRequestId: "561ccf70-336b-11ee-a309-4f00ef0ed1ad", // or websdk cardNumber object
+                sessionToken: response.sessionToken,
+                billingAddress: { // optional
+                    email: 'john.smith@email.com',
+                    country: 'US'
+                }
+            },
+                function (result) {
+                    console.log(result);
+                })
+                    
                     sfc.createPayment({
                         sessionToken: response.sessionToken, //received from openOrder API
                         merchantId: "6400701569295268447", //as assigned by Nuvei
