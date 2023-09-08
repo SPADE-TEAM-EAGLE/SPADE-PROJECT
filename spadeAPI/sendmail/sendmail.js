@@ -8,7 +8,7 @@ const constants = process.env;
 
 exports.sendMail = async (email, mailSubject, random, name, emailTemplate) => {
   if(mailSubject == "Spade Welcome Email"){
-    // emailTemplate = '1';
+    // emailTemplate = '0';
 if(emailTemplate == '0'){
   var emailHTML = tenantMail.tenantWelcomeHTML0(email, random, name)
 }else{
