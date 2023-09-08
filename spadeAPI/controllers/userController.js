@@ -861,8 +861,8 @@ exports.property = async (req, res) => {
       const landlordUser = await queryRunner(selectQuery("users", "id"), [
         userId,
       ]);
-      const FullName =
-        landlordUser[0][0].FirstName + " " + landlordUser[0][0].LastName;
+      const FullName = landlordUser[0][0].FirstName + " " + landlordUser[0][0].LastName;
+      const taskEmail = landlordUser[0][0].taskEmail;
       await taskSendMail(
         "tenantName",
         mailSubject,
@@ -874,7 +874,8 @@ exports.property = async (req, res) => {
         "companyName",
         "contactLandlord",
         userId,
-        email
+        email,
+        taskEmail
       );
     }
     const { insertId } = propertyResult[0];

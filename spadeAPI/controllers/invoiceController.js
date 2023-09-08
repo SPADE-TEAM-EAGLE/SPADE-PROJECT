@@ -50,7 +50,7 @@ exports.createInvoice = async (req, res) => {
     images
   } = req.body;
   try {
-    const { userId,userName,businessName } = req.user;
+    const { userId,userName,businessName,invoiceEmail } = req.user;
     // const { userId,userName,businessName } = req.body;
     // console.log(req.body)
     // console.log(userId)
@@ -84,7 +84,8 @@ exports.createInvoice = async (req, res) => {
           invoiceID,
           userName,
           userId,
-          businessNames
+          businessNames,
+          invoiceEmail
         );
       }
 
@@ -295,7 +296,7 @@ exports.UpdateInvoice = async (req, res) => {
     images,
   } = req.body;
   try {
-    const { userId,userName,businessName } = req.user;
+    const { userId,userName,businessName,invoiceEmail } = req.user;
     // console.log(req.body)
     const currentDate = new Date();
     const invoiceUpdatedResult = await queryRunner(updateInvoice, [
@@ -327,7 +328,7 @@ exports.UpdateInvoice = async (req, res) => {
         selectTenantsResult[0][0].lastName;
 
       const mailSubject = "invoice From " + userName;
-      var businessNames = businessName || "N/A";
+      let businessNames = businessName || "N/A";
       sendMail.invoiceSendMail(
 
         tenantName,
@@ -337,7 +338,8 @@ exports.UpdateInvoice = async (req, res) => {
         invoiceID,
         userName,
         userId,
-        businessNames
+        businessNames,
+        invoiceEmail
       );
     }
     //  if line items is not empty then delete line items and insert new line items
@@ -477,7 +479,7 @@ exports.invoiceDelete = async (req, res) => {
 //  ############################# Create Invoice Start ############################################################
 exports.resendEmail = async (req, res) => {
   const { invoiceID } = req.query;
-  const { userId,userName,businessName } = req.user;
+  const { userId,userName,businessName,invoiceEmail } = req.user;
   try {
     const resendEmailResult = await queryRunner(resendEmailQuery, [invoiceID]);
 
@@ -499,7 +501,8 @@ exports.resendEmail = async (req, res) => {
         invoiceID,
         userName,
         userId,
-        businessNames
+        businessNames,
+        invoiceEmail
       );
     }
     res.status(200).json({

@@ -2,6 +2,8 @@ const nodemailer = require("nodemailer");
 const { createTransporter } = require("../helper/googleAuth");
 const codeHTML = require("./codeHTML");
 const tenantMail = require("./tenantInviteMail.js");
+const invoiceMail = require("./invoiceMail.js");
+const taskMail = require("./taskMail.js");
 const { queryRunner } = require("../helper/queryRunner");
 const { selectQuery } = require("../constants/queries");
 const constants = process.env;
@@ -77,16 +79,24 @@ exports.invoiceSendMail = async (
   invoiceID,
   landlordName,
   id,
-  businessName
+  businessName,
+  invoiceTemplate
 ) => {
   try {
     console.log(id)
     const islandlordNotify = await queryRunner(selectQuery("notification", "landlordID"), [
       id
     ]);
+    
     if (islandlordNotify[0][0].emailNotification === "no") {
       console.log("email notification is off");
       return;
+    }
+    if(invoiceTemplate == '0'){
+      var emailHTML = invoiceMail.invoiceHTML0(tenantName, dueDays, invoiceID, landlordName,businessName)
+    }else{
+      var emailHTML = invoiceMail.invoiceHTML1(tenantName, dueDays, invoiceID, landlordName,businessName)
+    
     }
 
     let transpoter = await createTransporter();
@@ -95,7 +105,7 @@ exports.invoiceSendMail = async (
       to: tenantEmail,
       // to:"aj8706786@gmail.com",
       subject: mailSubject,
-      html: codeHTML.invoiceHTML(tenantName, dueDays, invoiceID, landlordName,businessName),
+      html: emailHTML,
     };
     transpoter.sendMail(mailOptions, function (error, info) {
       if (error) {
@@ -123,24 +133,25 @@ exports.taskSendMail = async (
   companyName,
   contactLandlord,
   id,
-  email
+  email,
+  taskTemplate
 ) => {
   try {
-    // const selectResult = await queryRunner(selectQuery("property", "id"), [
-    //   property,
-    // ]);
-    // const landLordUser = selectResult[0][0].landlordID
-    // const landlordUser = await queryRunner(selectQuery("users", "id"), [
-    //   landLordUser
-    // ]);
+
     const islandlordNotify = await queryRunner(selectQuery("notification", "landlordID"), [
       id
     ]);
     console.log(islandlordNotify[0])
     if ( islandlordNotify[0][0] && islandlordNotify[0][0].emailNotification === "no" || assignedTo != "Not Assigned") {
-    // if ( assignedTo !== "Not Assigned") {
+
       console.log("email notification is off");
       return;
+    }
+    if(taskTemplate == '0'){
+      var emailHTML = taskMail.taskHTML0(tenantName,dueDays,taskName,assignedTo,priority,landlordName,companyName,contactLandlord)
+    }else{
+      var emailHTML = taskMail.taskHTML1(tenantName,dueDays,taskName,assignedTo,priority,landlordName,companyName,contactLandlord)
+    
     }
     let transpoter = await createTransporter();
     var mailOptions = {

@@ -32,7 +32,9 @@ const verifyToken = async (req, res, next) => {
       imageKey:result[0][0].imageKey,
       planID:result[0][0].PlanID,
       isActive : result[0][0].active,
-      tenantEmail : result[0][0].tenantEmail
+      tenantEmail : result[0][0].tenantEmail,
+      invoiceEmail : result[0][0].invoiceEmail,
+      taskEmail : result[0][0].taskEmail,
     };
     next();
     // console.log("hello")

@@ -309,6 +309,7 @@ exports.addTasksTenant = async (req, res) => {
       const landlordName = landlordCheckResult[0][0].FirstName + " " + landlordCheckResult[0][0].LastName;
       const landlordEmail = landlordCheckResult[0][0].Email;
       const CompanyName = landlordCheckResult[0][0].BusinessName || "N/A";
+      const taskEmail = landlordCheckResult[0][0].taskEmail;
       // const landlordName = landlordCheckResult[0][0].FirstName + " " + landlordCheckResult[0][0].LastName;
       // const landlordContact = landlordCheckResult[0][0].Phone;
       // const vendorNames = vendorNamearr.toString();
@@ -325,6 +326,7 @@ exports.addTasksTenant = async (req, res) => {
           phoneNumber,
           userId,
           landlordEmail,
+          taskEmail
         );
       }
     }
