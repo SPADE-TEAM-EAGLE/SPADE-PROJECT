@@ -187,6 +187,10 @@
             height: 70px;
             border-radius: 5px;
         }
+
+        #export-button-hide3 {
+            display: none;
+        }
     </style>
 
 </head>
@@ -951,12 +955,48 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <div class="text-justify ps-2 border-model-line">
+                                <div class="text-justify ps-2 border-model-line d-flex justify-content-between">
+                                    <div>
                                     <h2 class="modal-title"><strong>Leads </strong><strong
                                             class="color-primary">Pipeline</strong></h2>
                                     <span class="">Build Your Pipeline with High-quality Leads.</span>
-
                                 </div>
+                                  <div class="export-button-hide" id="export-button-hide" style="display: none;">
+                                    <div class="d-flex">
+                                        <button type="button" class="btn btn-primary mx-2" onclick="exportTableToCSV('person.csv')" id="download_csv_reports" style="height: fit-content;"><strong>Export as CSV</strong></button>
+                                        <button type="button" class="btn btn-primary mx-2" id="download_pdf_reports" style="height: fit-content;"><strong>Export as PDF</strong></button>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-outline-default text-dark mx-2 py-1" id="filter_btn" data-bs-toggle="dropdown" style="border-radius: 5px; height: fit-content;"><i class="typcn typcn-filter me-2 fs-16"></i><strong>Filter</strong></button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li><a href="javascript:void(0)"><strong class="text-dark">Filter by:</strong></a>
+                                                </li>
+                                                <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">Campaign</a>
+                                                    <div class="form-check m-0">
+                                                        <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="alphabets" value="option1">
+                                                    </div>
+                                                </li>
+
+                                                <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">Year</a>
+                                                    <div class="form-check m-0">
+                                                        <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="ascending" value="option1">
+                                                    </div>
+                                                </li>
+                                                <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">Month</a>
+                                                    <div class="form-check m-0">
+                                                        <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="descending" value="option1">
+                                                    </div>
+                                                </li>
+                                                <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">Month & Year</a>
+                                                    <div class="form-check m-0">
+                                                        <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="descending" value="option1">
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                                
                             </div>
                             <div class="col-12">
                                 <div class="card-body pe-0 ps-0">
@@ -965,15 +1005,15 @@
                                             <div class="tabs-menu tabs-menu-border">
                                                 <!-- Tabs -->
                                                 <ul class="nav panel-tabs">
-                                                    <li><a href="#tab29" class="active" data-bs-toggle="tab"><i
+                                                    <li><a href="#tab29" class="active" id="tab299" data-bs-toggle="tab"><i
                                                                 class="fi fi-rs-dashboard me-2"></i>Overview</a></li>
-                                                    <li><a href="#tab30" data-bs-toggle="tab"><i
+                                                    <li><a href="#tab30" id="tab300" data-bs-toggle="tab"><i
                                                                 class="fi fi-rs-paper-plane me-2"></i>Active</a></li>
-                                                    <li><a href="#tab31" data-bs-toggle="tab"><i
+                                                    <li><a href="#tab31" id="tab311" data-bs-toggle="tab"><i
                                                                 class="fi fi-rs-time-delete me-2"></i>Lost</a></li>
-                                                    <li><a href="#tab32" data-bs-toggle="tab"><i
+                                                    <li><a href="#tab32" id="tab322" data-bs-toggle="tab"><i
                                                                 class="fi fi-rs-trophy me-2"></i>Won</a></li>
-                                                    <li><a href="#tab33" data-bs-toggle="tab"><i
+                                                    <li><a href="#tab33" id="tab333" data-bs-toggle="tab" id="tab333"><i
                                                                 class="fi fi-rs-stats me-2"></i>Insights <span
                                                                 class="badge bg-secondary header-badge bg-warning"><i
                                                                     class="fi fi-rs-crown"></i></span></a></li>
@@ -2487,6 +2527,52 @@ var myChart = new Chart(ctx, {
 
         </script>
         <!-- /* Source Close*/ -->
+
+        <!-- export button start  -->
+        <!-- <script>
+            const showButton = document.getElementById('tab333');
+            const displayText = document.getElementsByClassName('export-button-hide');
+    
+            showButton.addEventListener('click', () => {
+                displayText.style.display = 'block';
+            });
+        </script> -->
+
+<script>
+ const showButton1 = document.getElementById('tab299');
+const showButton2 = document.getElementById('tab300');
+const showButton3 = document.getElementById('tab311');
+const showButton4 = document.getElementById('tab322');
+const showButton5 = document.getElementById('tab333');
+const displayText = document.getElementById('export-button-hide');
+
+showButton1.addEventListener('click', () => {
+        displayText.style.display = 'none';
+    
+});
+
+showButton2.addEventListener('click', () => {
+    displayText.style.display = 'none';
+
+});
+
+showButton3.addEventListener('click', () => {
+    displayText.style.display = 'none';
+
+});
+
+showButton4.addEventListener('click', () => {
+    displayText.style.display = 'none';
+
+});
+
+showButton5.addEventListener('click', () => {
+    displayText.style.display = 'block';
+
+});
+
+</script>
+        <!-- export button End  -->
 
 </body>
 
