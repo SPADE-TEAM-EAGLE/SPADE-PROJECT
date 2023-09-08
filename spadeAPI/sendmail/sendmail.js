@@ -160,17 +160,18 @@ exports.taskSendMail = async (
       // to:"aj8706786@gmail.com",
       subject: mailSubject,
 
-      html: codeHTML.taskHTML(
-        mailSubject,
-        tenantName,
-        dueDays,
-        taskName,
-        assignedTo,
-        priority,
-        landlordName,
-        companyName,
-        contactLandlord
-      ),
+      html: emailHTML,
+      // html: codeHTML.taskHTML(
+      //   mailSubject,
+      //   tenantName,
+      //   dueDays,
+      //   taskName,
+      //   assignedTo,
+      //   priority,
+      //   landlordName,
+      //   companyName,
+      //   contactLandlord
+      // ),
     };
     transpoter.sendMail(mailOptions, function (error, info) {
       if (error) {
