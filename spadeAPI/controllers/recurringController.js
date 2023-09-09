@@ -74,23 +74,27 @@ console.log("ready");
           const invoiceResult = await queryRunner(insertInvoice, [ landlordID, tenantID, invoiceType, startDate, endDate, frequency, dueDate, dueDays, repeatTerms, terms, additionalNotes, "Unpaid", createdAt, totalAmount, recurringNextDate ]);
           if (invoiceResult.affectedRows === 0) {
             res.status(400).send('Error occur in creating invoice');
-            console.log("object");
+            // console.log("object");
           } else {
-            console.log("object2")
-            // console.log(landlordID, tenantID, invoiceType, startDate, endDate, frequency, dueDate, dueDays, repeatTerms, terms, additionalNotes, "Unpaid", createdAt, totalAmount, recurringNextDate);
-            // console.log(repeatTerms, terms);
-            // console.log("repeatTerms, terms");
+            // console.log("object2")
+
             // Invoice Email Start
             const invoiceID = invoiceResult[0].insertId;
             const selectTenantsResult = await queryRunner(selectQuery('tenants', 'id'), [tenantID])
             if (selectTenantsResult[0].length > 0) {
               const tenantEmail = selectTenantsResult[0][0].email;
+              const landlordID = selectTenantsResult[0][0].landlordID;
               const tenantName = selectTenantsResult[0][0].firstName + " " + selectTenantsResult[0][0].lastName;
-              const mailSubject = invoiceID + " From " + frequency;
-              console.log("1234")
-              await invoiceSendMail(tenantName, tenantEmail, mailSubject, dueDays, invoiceID, frequency,landlordID);
-              console.log("1234222")
-              console.log(tenantName, tenantEmail, mailSubject, dueDays, invoiceID, frequency)
+              // console.log("1234")
+              const selectLandlordResult = await queryRunner(selectQuery('users', 'id'), [landlordID])
+              const BusinessName = selectLandlordResult[0][0].BusinessName || "N/A";
+              const userName = selectLandlordResult[0][0].FirstName + " " + selectLandlordResult[0][0].LastName;
+              const invoiceEmail = selectLandlordResult[0][0].invoiceEmail;
+              const mailSubject = "Invoice From " + userName;
+              await invoiceSendMail(tenantName, tenantEmail, mailSubject, dueDays, invoiceID, userName,landlordID,BusinessName,invoiceEmail);
+ 
+              // console.log("1234222")
+              // console.log(tenantName, tenantEmail, mailSubject, dueDays, invoiceID, frequency)
             }
             const lineItemsResult = await queryRunner(selectQuery('invoicelineitems', 'invoiceID'), [PreviousInvoiceID])
             if (lineItemsResult[0].length > 0) {
@@ -100,14 +104,13 @@ console.log("ready");
                 const memo = lineItemsResult[0][j].memo;
                 const amount = lineItemsResult[0][j].amount;
                 const invoiceLineItemsResult = await queryRunner(insertLineItems, [invoiceID, category, property, memo, amount])
-                console.log("line item");
+                // console.log("line item");
               }
             }   
-            // Invoice Images Start
-            console.log("invoice Image");
+ 
             const invoiceImagesResult = await queryRunner(selectQuery('invoiceimages', 'invoiceID'), [PreviousInvoiceID])
             if (invoiceImagesResult[0].length > 0) {
-              console.log("invoice Image 2 ");
+              // console.log("invoice Image 2 ");
 
               for (let j = 0; j < invoiceImagesResult[0].length; j++) {
                 const image_url = invoiceImagesResult[0][j].Image;
@@ -118,9 +121,7 @@ console.log("ready");
                 console.log(image_url, image_key);
               }
             }
-            console.log(image_url, image_key);
-            console.log("image_url, image_key");
-            // Invoice Images END 
+ 
           } //invoiceResult else END
           // ############################################################# MONthly Rest of the code remains the same...
         } else if (frequency == "yearly") {
@@ -146,8 +147,15 @@ console.log("ready");
             if (selectTenantsResult[0].length > 0) {
               const tenantEmail = selectTenantsResult[0][0].email;
               const tenantName = selectTenantsResult[0][0].firstName + " " + selectTenantsResult[0][0].lastName;
-              const mailSubject = invoiceID + " From " + frequency;
-              await invoiceSendMail(tenantName, tenantEmail, mailSubject, dueDays, invoiceID, frequency,landlordID);
+              const landlordID = selectTenantsResult[0][0].landlordID;
+              // const mailSubject = invoiceID + " From " + frequency;
+              // const mailSubject = "Invoice From " + userName;
+              const selectLandlordResult = await queryRunner(selectQuery('users', 'id'), [landlordID])
+              const BusinessName = selectLandlordResult[0][0].BusinessName || "N/A";
+              const userName = selectLandlordResult[0][0].FirstName + " " + selectLandlordResult[0][0].LastName;
+              const invoiceEmail = selectLandlordResult[0][0].invoiceEmail;
+              const mailSubject = "Invoice From " + userName;
+              await invoiceSendMail(tenantName, tenantEmail, mailSubject, dueDays, invoiceID, userName,landlordID,BusinessName,invoiceEmail);
             }
             const lineItemsResult = await queryRunner(selectQuery('invoicelineitems', 'invoiceID'), [PreviousInvoiceID])
             if (lineItemsResult[0].length > 0) {

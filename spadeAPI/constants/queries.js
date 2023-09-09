@@ -531,8 +531,7 @@ invoice.id, invoice.invoiceType, invoice.status, invoice.startDate, invoice.endD
 // insertNotify notify
 exports.insertNotify =
   "INSERT INTO notification (landlordID, emailNotification, pushNotification, textNotification) VALUES (?,?,?,?)";
-exports.updateNotify =
-  "UPDATE notification SET emailNotification = ? , pushNotification = ?, textNotification = ? WHERE landlordID = ? ";
+exports.updateNotify = "UPDATE notification SET emailNotification = ? , pushNotification = ?, textNotification = ? WHERE landlordID = ? ";
 exports.addResetToken =
   "UPDATE users SET token = ?, updated_at = ? where id = ?";
 exports.addResetTokenTenant =
@@ -1003,3 +1002,4 @@ exports.updateAllStatusVacantQuery = `UPDATE propertyunits, tenants SET property
 exports.unpaidAmountQuery = `SELECT SUM(totalAmount) AS totalAmount FROM spade_Rent.invoice WHERE tenantID = ? AND status = 'Unpaid'`;
 exports.updateAuthQueryTenant=`UPDATE tenants SET auth = ? WHERE id = ?`;
 exports.updateAuthQuery=`UPDATE users SET auth = ? WHERE id = ?`;
+exports.updateEmailTemplates = "UPDATE users SET tenantEmail = ? , invoiceEmail = ?, taskEmail = ?, userEmail = ? WHERE id = ? ";

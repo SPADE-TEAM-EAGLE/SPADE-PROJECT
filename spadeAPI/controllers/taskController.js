@@ -371,7 +371,7 @@ exports.addTasks = async (req, res) => {
   } = req.body;
   console.log(req.body);
   const vendorID = assignee;
-  const { userId, userName } = req.user;
+  const { userId, userName,taskEmail } = req.user;
 
   const currentDate = new Date();
   try {
@@ -477,7 +477,8 @@ exports.addTasks = async (req, res) => {
         CompanyName,
         landlordContact,
         userId,
-        tenantEmail
+        tenantEmail,
+        taskEmail
       );
       // }
       // if (notifyVendor.toLowerCase() === "yes") {
@@ -495,7 +496,8 @@ exports.addTasks = async (req, res) => {
           CompanyName,
           landlordContact,
           userId,
-          vendorEmailarr[i]
+          vendorEmailarr[i],
+          taskEmail
         );
         // }
       }
@@ -709,7 +711,7 @@ exports.updateTasks = async (req, res) => {
 
   try {
     const currentDate = new Date();
-    const { userId } = req.user;
+    const { userId,taskEmail } = req.user;
     const TasksResult = await queryRunner(updateTasksQuery, [
       taskName,
       property,
@@ -841,7 +843,6 @@ exports.updateTasks = async (req, res) => {
     // if (notifyTenant.toLowerCase() === "yes") {
     await taskSendMail(
       tenantName,
-
       "Property Maintenance: " + taskName,
       dueDate,
       landlordName,
@@ -851,7 +852,8 @@ exports.updateTasks = async (req, res) => {
       CompanyName,
       landlordContact,
       userId,
-      tenantEmail
+      tenantEmail,
+      taskEmail
     );
     // }
     // if (notifyVendor.toLowerCase() === "yes") {
@@ -868,7 +870,8 @@ exports.updateTasks = async (req, res) => {
         CompanyName,
         landlordContact,
         userId,
-        vendorEmailarr[i]
+        vendorEmailarr[i],
+        taskEmail
       );
       // }
     }

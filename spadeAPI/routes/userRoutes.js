@@ -211,3 +211,4 @@ router.get("/unpaidAmountTenant", verifyTokenTenant, tenantPortalController.unpa
 router.put('/updateAuth',verifyToken, userController.updateAuth);
 router.put('/updateAuthTenant',verifyTokenTenant, tenantPortalController.updateAuthTenant);
 // router.get("/unpaidAmountTenant", tenantPortalController.unpaidAmountTenant);
+router.put("/emailtemplates", verifyToken, settingController.emailtemplates);
