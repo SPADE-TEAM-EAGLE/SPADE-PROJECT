@@ -316,7 +316,101 @@
       </div>
     </div>
   </div>
+  <div class="modal fade" id="infoModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered text-center" role="document">
+      <div class="modal-content modal-content-demo">
+        <div class="modal-body p-0">
+          <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
+            <!-- <div class="card-header border-0 pt-3">
+                      <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                      </button>
+                  </div> -->
+            <div class="card-body text-center">
+              <svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24">
+                <path fill="#fad383"
+                  d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z">
+                </path>
+                <circle cx="12" cy="16" r="1" fill="#f7b731"></circle>
+                <path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"></path>
+              </svg>
+              <h4 class="h4 mb-0 mt-3 fw-bold">Info</h4>
+              <p class="card-text text-dark" id="info-text">Tenant Email Already Exist</p>
+            </div>
+            <!-- <div class="card-footer text-center border-0 pt-0">
+                      <div class="row">
+                          <div class="text-center">
+                              <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
+                              <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
+                          </div>
+                      </div>
+                  </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade effect-scale" id="auth-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-l" role="document">
+      <div class="modal-content">
 
+        <div class="modal-body pt-5">
+          <div class="d-flex flex-column justify-content-center align-items-center p-5" style="text-align: center;">
+            <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" style="max-width: 110px;"
+              class="Rent-logo mb-5" />
+            <h1 class="mb-4 text-dark fw-bold">Two-Factor Authentication</h1>
+            <small class="lead text-default mb-3 fs-6">Your account is secured with Two-Factor Authentication. We have
+              sent an OTP to your registered email. <span class="text-primary fs-6" id="text-email"></span></small>
+            <label for="token_auth">Enter 6-digit code</label>
+            <input id="token_auth" name="token_auth" type="phone" class="form-control form mb-2" pattern="[0-9]{5}"
+              maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '')" style="width: 100%;"
+              placeholder="Enter 6-digit code">
+            <label class="text-danger">* Will expire in 5 minutes</label>
+            <div class="">
+              <!-- <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2">Remind me Later</a> -->
+              <button href="javascript:void(0)" class="btn btn-primary btn-pill" disabled id="verify_otp_auth">Verify</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="infoModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered text-center" role="document">
+      <div class="modal-content modal-content-demo">
+        <div class="modal-body p-0">
+          <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
+            <!-- <div class="card-header border-0 pt-3">
+                      <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                      </button>
+                  </div> -->
+            <div class="card-body text-center">
+              <svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24">
+                <path fill="#fad383"
+                  d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z">
+                </path>
+                <circle cx="12" cy="16" r="1" fill="#f7b731"></circle>
+                <path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"></path>
+              </svg>
+              <h4 class="h4 mb-0 mt-3 fw-bold">Info</h4>
+              <p class="card-text text-dark" id="info-text">Tenant Email Already Exist</p>
+            </div>
+            <!-- <div class="card-footer text-center border-0 pt-0">
+                      <div class="row">
+                          <div class="text-center">
+                              <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
+                              <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
+                          </div>
+                      </div>
+                  </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
   <div class="modal fade" id="myModal-else" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered text-center" role="document">
       <div class="modal-content modal-content-demo">
@@ -557,6 +651,7 @@
   </script>
   <script>
       $(document).ready(function() {
+        let userId; let emailChange;var authToken;
             $(document).on("click", "#next1", function(a) {
                 var email = $("#login-email").val();
                 var password = $("#id_password1").val();
@@ -577,30 +672,33 @@
                           $("#login-email").removeClass("is-invalid");
                           $("#login-email").addClass("is-valid");
                           $("#id_password1").addClass("is-valid");
-                          $("#myModal_success").modal("show");
-                          setTimeout(function() {
-                             $('#myModal_success').modal('hide');
-                             localStorage.setItem("authtoken",response.token )
-                             localStorage.setItem("tenantId",response.body.id )
-                             window.location = '../Tenant/index.html';
-                            }, 2000);
-                          // console.log(response)
-                          // localStorage.setItem("authtoken",response.token )
-                          // const token = response.token; // Assuming the token is returned as 'token' in the response
-                          // localStorage.setItem('token', token);
-                          // alert(response.message)
-                          // window.location = './index.html';
+                          // $("#myModal_success").modal("show");
+                          authToken=response.token
+                          if (response.body.auth == 0) {
+                $("#myModal_success").modal("show");
+                              localStorage.setItem("authtoken", response.token);
+                              localStorage.setItem("tenantId",response.body.id )
+                setTimeout(function () {
+                  $("#myModal_success").modal("hide");
+                  window.location = "../Tenant/index.html";
+                }, 2000);
+
+              }else if (response.body.auth == 1) {
+                userId = response.body.id
+                $("#text-email").text(email)
+                $("#auth-modal").modal("show")
+    
+              }
+                          // setTimeout(function() {
+                          //    $('#myModal_success').modal('hide');
+                          //    localStorage.setItem("authtoken",response.token )
+                          //    localStorage.setItem("tenantId",response.body.id )
+                          //    window.location = '../Tenant/index.html';
+                          //   }, 2000);
                         }
                         else{
-                          // alert(response.message)
                           // alert("Server Error!");
                           console.log("Server Error!");
-                          // $("#myModal-else").modal("show");
-                          // setTimeout(function() {
-                          //    $('#myModal-else').modal('hide');
-                          //    localStorage.setItem("authtoken",response.token )
-                          //   //  window.location = '../Tenant/index.html';
-                          //   });
                         }
                         
                     },
@@ -634,7 +732,58 @@
                 });
 
             });
+            $("#token_auth").on("input",function(){
+          if($(this).val().length==6){
+            $("#verify_otp_auth").prop("disabled",false)
+          }else{
+            $("#verify_otp_auth").prop("disabled",true)
+          }
+        })
+        $("#verify_otp_auth").on("click",function(){
+          $("#verify_otp_auth").prop("disabled",true)
+          $.ajax({
+            url: 'https://backend.app.spaderent.com/api/spade/verifyAuthCode',
+            type: 'POST',
+            contentType: "application/json; charset=utf-8",
+            
+            data: JSON.stringify({
+              id: userId,
+              token: $("#token_auth").val(),
+              tenant:"tenant"
+            }),
+            success: function (response) {
+              
+              if(response.message){
+                $("#auth-modal").modal("hide")
+                $("#myModal_success").modal("show");
+                localStorage.setItem("authtoken", authToken);
+                setTimeout(function () {
+                  $("#myModal_success").modal("hide");
+                  window.location = "../Tenant/index.html";
+                }, 2000);
+
+              }
+            },
+            error: function (xhr, status, error) {
+              $("#verify_otp_auth").prop("disabled",false)
+              if(xhr.responseJSON.message=="OTP expired"){
+                $("#info-text").text("OTP expired!!!")
+                $("#infoModal").modal("show")
+                setTimeout(function () {
+                  $("#infoModal").modal("hide");
+                }, 1700);
+              }else if(xhr.responseJSON.message=="Cannot Validate!!!"){
+                $("#info-text").text("Incorrect OTP")
+                $("#infoModal").modal("show")
+                setTimeout(function () {
+                  $("#infoModal").modal("hide");
+                }, 1700);
+              }
+            }
+          });
+        })
         });
+
   </script>
    <script>
     $(document).ready(function() {
