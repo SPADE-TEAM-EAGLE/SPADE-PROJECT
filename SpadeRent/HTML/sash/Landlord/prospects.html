@@ -861,10 +861,11 @@
                                     <div class="col-md-12 col-lg-12 col-xl-12">
                                         <label for="inputState" class="form-label fw-bold">Source Campaign <span
                                                 class="text-danger">*</span></label>
-                                        <select id="sourceCampaign" class="form-select form">
+                                        <select id="sourceCampaign" class="form-select form mb-2">
                                             <option selected>Choose...</option>
                                         </select>
                                         <span class="text-danger d-none">Source Campaign is required!</span>
+                                        <a href="javascript:void(0)" class="text-primary" style="text-decoration: underline;">+ Add Lead Source</a>
                                     </div>
 
                                 </form>
@@ -878,7 +879,9 @@
                                 data-bs-target="#collapseTwo-add-property" aria-expanded="false"
                                 aria-controls="collapseTwo-add-property">
                                 <span class="m-0 me-4 fs-1" style="font-weight: bold;">02</span>
-                                <h3 class="m-0"><strong>Rent Details</strong> <i class="fi fi-rs-pencil"></i><i
+                                <h3 class="m-0"><strong>Rent Details</strong> 
+                                    <!-- <i class="fi fi-rs-pencil"></i> -->
+                                    <i
                                         class="fi fi-rs-angle-circle-down chevron icon"></i>
                                 </h3>
                             </button>
@@ -920,7 +923,7 @@
                         id='close'>Close</button>
                     <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
                     <a href="javascript:void(0)" class="btn text-light button d-none" style='background-color:#1467B0;'
-                        id='next'>Submit</a>
+                        id='next'>Save</a>
                     <button class="btn text-light button" style='background-color:#1467B0;'
                         id='next-add-property'>Next</button>
 
@@ -1778,7 +1781,7 @@
                                                                     <a href="javascript:void(0)"
                                                                         data-bs-toggle="dropdown"><i
                                                                             class="fi fi-rs-grip-lines fs-20 fw-bold"></i></a>
-                                                                    <div class="dropdown-menu dropdown-menu-end">
+                                                                    <!-- <div class="dropdown-menu dropdown-menu-end">
                                                                         <a class="dropdown-item text-dark"
                                                                             href="javascript:void(0)">Edit Post</a>
                                                                         <a class="dropdown-item text-dark"
@@ -1786,7 +1789,7 @@
                                                                         <a class="dropdown-item text-dark"
                                                                             href="javascript:void(0)">Personal
                                                                             Settings</a>
-                                                                    </div>
+                                                                    </div> -->
                                                                     <div class="card-options">
                                                                         <a href="javascript:void(0)"><i
                                                                                 class="fi fi-rs-edit fw-bold text-dark"></i></a>
@@ -1872,7 +1875,7 @@
                                                                     <a href="javascript:void(0)"
                                                                         data-bs-toggle="dropdown"><i
                                                                             class="fi fi-rs-grip-lines fs-20 fw-bold"></i></a>
-                                                                    <div class="dropdown-menu dropdown-menu-end">
+                                                                    <!-- <div class="dropdown-menu dropdown-menu-end">
                                                                         <a class="dropdown-item text-dark"
                                                                             href="javascript:void(0)">Edit Post</a>
                                                                         <a class="dropdown-item text-dark"
@@ -1880,7 +1883,7 @@
                                                                         <a class="dropdown-item text-dark"
                                                                             href="javascript:void(0)">Personal
                                                                             Settings</a>
-                                                                    </div>
+                                                                    </div> -->
                                                                     <div class="card-options">
                                                                         <a href="javascript:void(0)"><i
                                                                                 class="fi fi-rs-edit fw-bold text-dark"></i></a>
@@ -1967,7 +1970,7 @@
                                                                     <a href="javascript:void(0)"
                                                                         data-bs-toggle="dropdown"><i
                                                                             class="fi fi-rs-grip-lines fs-20 fw-bold"></i></a>
-                                                                    <div class="dropdown-menu dropdown-menu-end">
+                                                                    <!-- <div class="dropdown-menu dropdown-menu-end">
                                                                         <a class="dropdown-item text-dark"
                                                                             href="javascript:void(0)">Edit Post</a>
                                                                         <a class="dropdown-item text-dark"
@@ -1975,7 +1978,7 @@
                                                                         <a class="dropdown-item text-dark"
                                                                             href="javascript:void(0)">Personal
                                                                             Settings</a>
-                                                                    </div>
+                                                                    </div> -->
                                                                     <div class="card-options">
                                                                         <a href="javascript:void(0)"><i
                                                                                 class="fi fi-rs-edit fw-bold text-dark"></i></a>
@@ -3770,9 +3773,9 @@
     receive: function (event, ui) {
         // Check the class of the receiving element
         if ($(this).hasClass("qualified")) {
-            alert(1); // Show alert for qualified div
+            console.log("Add qualified");
         } else if ($(this).hasClass("disqualified")) {
-            alert(2); // Show alert for disqualified div
+            console.log("Add disqualified");
         }
 
         // Add a class to the dropped portlet
