@@ -7647,7 +7647,7 @@
                                                 <div id="tenant-invite-none" class="popup22 mt-5">
                                                 <div class="row">
                                                     <h2 style="color: #1467B0; text-align: left;"><b>Tenant Invite Templates</b></h2>
-                                                    <div class="col-xl-3 col-md-6 col-sm-12 tenant-invite-none">
+                                                    <div class="col-xl-3 col-md-6 col-sm-12 tenant-invite-none" id="tenant-zero">
                                                         <div class="card overflow-hidden card-preview-templates h-100">
                                                             <input type="radio" name="test" id="cb1" />
                                                             <labell for="cb1" class="label h-100">
@@ -7667,7 +7667,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-xl-3 col-md-6 col-sm-12 tenant-invite-none">
+                                                    <div class="col-xl-3 col-md-6 col-sm-12 tenant-invite-none" id="tenant-one">
                                                         <div class="card overflow-hidden card-preview-templates h-100">
                                                             <input type="radio" name="test" id="cb1" />
                                                             <labell for="cb1" class="label h-100">
@@ -7694,7 +7694,7 @@
                                             <div id="invoice-none" class="popup22 mt-5">
                                                 <div class="row">
                                                     <h2 style="color: #1467B0; text-align: left;"><b>Invoice Templates</b></h2>
-                                                    <div class="col-xl-3 col-md-6 col-sm-12 tenant-invite-none">
+                                                    <div class="col-xl-3 col-md-6 col-sm-12 tenant-invite-none" id="invoice-zero">
                                                         <div class="card overflow-hidden card-preview-templates h-100">
                                                             <input type="radio" name="test" id="cb1" />
                                                             <labell for="cb1" class="label h-100">
@@ -7714,7 +7714,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-xl-3 col-md-6 col-sm-12 tenant-invite-none">
+                                                    <div class="col-xl-3 col-md-6 col-sm-12 tenant-invite-none" id="invoice-one">
                                                         <div class="card overflow-hidden card-preview-templates h-100">
                                                             <input type="radio" name="test" id="cb1" />
                                                             <labell for="cb1" class="label h-100">
@@ -7741,7 +7741,7 @@
                                                  <div id="taskupdate-none" class="popup22 mt-5">
                                                     <div class="row">
                                                         <h2 style="color: #1467B0; text-align: left;"><b>Task Update Templates</b></h2>
-                                                        <div class="col-xl-3 col-md-6 col-sm-12 tenant-invite-none">
+                                                        <div class="col-xl-3 col-md-6 col-sm-12 tenant-invite-none" id="task-zero">
                                                             <div class="card overflow-hidden card-preview-templates h-100">
                                                                 <input type="radio" name="test" id="cb1" />
                                                                 <labell for="cb1" class="label h-100">
@@ -7761,7 +7761,7 @@
                                                             </div>
                                                         </div>
     
-                                                        <div class="col-xl-3 col-md-6 col-sm-12 tenant-invite-none">
+                                                        <div class="col-xl-3 col-md-6 col-sm-12 tenant-invite-none" id="task-one">
                                                             <div class="card overflow-hidden card-preview-templates h-100">
                                                                 <input type="radio" name="test" id="cb1" />
                                                                 <labell for="cb1" class="label h-100">
@@ -11123,8 +11123,9 @@ const togglePasswordcloseaccount1 = document.querySelector("#current_password11"
 </script>
 
 <script>
-    var button = document.getElementById("tenant-invite-show");
-    var hiddenText = document.getElementById("tenant-invite-none");
+    var templateName;
+    var button = document.getElementById("");
+    var hiddenText = document.getElementByItenant-invite-showd("tenant-invite-none");
 
     var button1 = document.getElementById("invoice-show");
     var hiddenText1 = document.getElementById("invoice-none");
@@ -11136,6 +11137,8 @@ const togglePasswordcloseaccount1 = document.querySelector("#current_password11"
     var hiddenText3 = document.getElementById("userinvite-none");
 
     button.addEventListener("click", function () {
+        temaplateName = "tenantEmail";
+        // tenantEmail, invoiceEmail, taskEmail, userEmail
         hiddenText.style.display = "block";
         hiddenText1.style.display = "none";
         hiddenText2.style.display = "none";
@@ -11143,6 +11146,8 @@ const togglePasswordcloseaccount1 = document.querySelector("#current_password11"
     });
 
     button1.addEventListener("click", function () {
+        temaplateName = "invoiceEmail";
+
         hiddenText1.style.display = "block";
         hiddenText.style.display = "none";
         hiddenText2.style.display = "none";
@@ -11150,6 +11155,7 @@ const togglePasswordcloseaccount1 = document.querySelector("#current_password11"
     });
 
     button2.addEventListener("click", function () {
+        temaplateName = "taskEmail";
         hiddenText.style.display = "none";
         hiddenText1.style.display = "none";
         hiddenText2.style.display = "block";
