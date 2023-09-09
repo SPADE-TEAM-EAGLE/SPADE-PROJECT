@@ -2122,18 +2122,19 @@
                                                                 <div class="card-body">
                                                                     <div class="container">
                                                                         <div class="row">
-                                                                            <div class="col-6">
-                                                                                <div class="column bg-transparent"
+                                                                            <div class="col-6" style="text-align: center;">
+                                                                                <div class="column bg-transparent mb-4 disqualified"
                                                                                     style="min-height: 70px;border-radius: 8px;border: 2px dotted red;">
-                                                                                    <!-- <span class="text-dark"><i class="fi fi-rs-circle-xmark text-dark"></i> Disqualified prospects</span> -->
+                                                                                    
                                                                                 </div>
+                                                                                <span class="text-dark fw-bold"><i class="fi fi-rs-circle-xmark text-dark"></i> Disqualified prospects</span>
                                                                             </div>
-                                                                            <div class="col-6">
-                                                                                <div class="column bg-transparent"
+                                                                            <div class="col-6" style="text-align: center;">
+                                                                                <div class="column bg-transparent mb-4 qualified"
                                                                                     style="min-height: 70px;border-radius: 8px;border: 2px dotted green;">
-                                                                                    <!-- <span class="text-dark"><i class="fi fi-rs-star text-dark"></i> Qualified prospects</span> -->
-
+                                                                                    
                                                                                 </div>
+                                                                                <span class="text-dark fw-bold"><i class="fi fi-rs-star text-dark"></i> Qualified prospects</span>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -3758,24 +3759,32 @@
     <script>
         $(function () {
             $(".column").sortable({
-                connectWith: ".column",
-                handle: ".portlet-header",
-                cancel: ".portlet-toggle",
-                placeholder: "portlet-placeholder",
-                start: function (event, ui) {
-                    // Hide elements with the class "mytext" when dragging starts
-                    $("#status-bar").css("display", "block");
-                },
-                receive: function (event, ui) {
-                    // Add a class to the dropped portlet
-                    ui.item.addClass("dropped-portlet");
+    connectWith: ".column",
+    handle: ".portlet-header",
+    cancel: ".portlet-toggle",
+    placeholder: "portlet-placeholder",
+    start: function (event, ui) {
+        // Hide elements with the class "mytext" when dragging starts
+        $("#status-bar").css("display", "block");
+    },
+    receive: function (event, ui) {
+        // Check the class of the receiving element
+        if ($(this).hasClass("qualified")) {
+            alert(1); // Show alert for qualified div
+        } else if ($(this).hasClass("disqualified")) {
+            alert(2); // Show alert for disqualified div
+        }
 
-                    // Hide the dropped portlet after 2 seconds
-                    setTimeout(function () {
-                        $(".dropped-portlet").hide();
-                    }, 2000);
-                }
-            });
+        // Add a class to the dropped portlet
+        ui.item.addClass("dropped-portlet");
+
+        // Hide the dropped portlet after 2 seconds
+        setTimeout(function () {
+            $(".dropped-portlet").hide();
+        }, 2000);
+    }
+});
+
 
             $(".portlet")
                 .addClass("ui-widget ui-widget-content ui-helper-clearfix ui-corner-all")
