@@ -691,8 +691,7 @@ exports.addTasksQuerytenant =
   "INSERT INTO task (taskName, tenantID, dueDate,status, priority, notes, notifyTenant, created_at , createdBy,landlordID) VALUES ( ?,?,?,?,?,?,?,?,?,?)";
 exports.addVendorList =
   "INSERT INTO taskassignto (taskId, vendorId) VALUES (?, ?)";
-exports.addVendor =
-  "INSERT INTO vendor (firstName,lastName,businessName,streetAddress,city,zip,workPhone,phone,email,categoryID,landlordID) VALUES (?, ?,?,?,?,?,?,?,?,?,?)";
+exports.addVendor = "INSERT INTO vendor (firstName,lastName,businessName,streetAddress,city,zip,workPhone,phone,email,categoryID,landlordID) VALUES (?, ?,?,?,?,?,?,?,?,?,?)";
 exports.getVendors = `SELECT v.*, vc.category
 FROM vendor v
 JOIN vendorcategory vc ON v.categoryID = vc.id
@@ -859,7 +858,7 @@ GROUP BY
 tk.id;
 `;
 exports.updateTasksQuery =
-  "UPDATE task SET taskName = ? , tenantID = ? , dueDate = ? , status = ? , priority = ? , notes = ? , notifyTenant = ? , notifyVendor = ? , updated_at = ? where id = ? ";
+"UPDATE task SET taskName = ? , tenantID = ? , dueDate = ? , status = ? , priority = ? , notes = ? , notifyTenant = ? , notifyVendor = ? , updated_at = ? where id = ? ";
 exports.updatePassword =
   "UPDATE users SET Password = ? , updated_at = ? where id = ? ";
 exports.updatePasswordTenantSetting =
@@ -869,7 +868,7 @@ exports.updateVerifiedStatusQuery =
   "UPDATE users SET userVerified = ? where id = ? ";
 exports.recurringInvoice =
   "SELECT * FROM invoice WHERE DATE(recurringNextDate) = CURDATE() AND CURDATE() BETWEEN startDate AND endDate ";
-exports.recurringInvoiceCheck =
+  exports.recurringInvoiceCheck =
   "SELECT * FROM invoice WHERE DATE(created_at) = CURDATE() AND landlordID = ? AND tenantID = ? AND invoiceType = ? ";
 
 // add category in vendorcategory table
@@ -888,16 +887,16 @@ exports.updateInvoiceCategories =
 // =============================================chats start=====================================================================================
 exports.insertChat =
   "INSERT INTO chats (senderId, receiverID, created_at) VALUES (?,?,?)";
-// find already exist chat between two users
+  // find already exist chat between two users
 exports.findChat =
-  "SELECT * FROM chats WHERE (senderId = ? AND receiverID = ?) OR (senderID = ? AND receiverID = ?)";
+"SELECT * FROM chats WHERE (senderId = ? AND receiverID = ?) OR (senderID = ? AND receiverID = ?)";
 
 // updateTenants profile data
 exports.updateTenantsProfile =
   "UPDATE tenants SET firstName = ?, lastName = ?, companyName = ?, email = ?, phoneNumber = ?, Address = ?, city = ?, state = ?, zipcode = ?, Image = ?, ImageKey = ? WHERE id = ?";
-// create new Message in messages table
+  // create new Message in messages table
 exports.insertMessage =
-  "INSERT INTO messages (message,chatId,messageType, created_at,sender,userType) VALUES (?,?,?,?,?,?)";
+"INSERT INTO messages (message,chatId,messageType, created_at,sender,userType) VALUES (?,?,?,?,?,?)";
 
 // get all chats of user by senderId using joining chats and users table
 exports.getChatUsers = `
@@ -916,7 +915,7 @@ ORDER BY c.created_at DESC`;
 
 // get all messages of chat by chatId
 exports.getMessages =
-  "SELECT * FROM messages WHERE chatId = ? ORDER BY created_at ASC";
+"SELECT * FROM messages WHERE chatId = ? ORDER BY created_at ASC";
 
 // dashboard task Count
 exports.taskCount = `SELECT count(CASE WHEN status = "not started" THEN 0 END ) as notStarted, COUNT(CASE WHEN status = "in progress" then 0 END ) as inProgress, COUNT(CASE WHEN status = "completed" THEN 0 END) as completed FROM spade_Rent.task WHERE landlordID = ? AND  task.created_at >= ? AND task.created_at <= ?`;
@@ -929,15 +928,15 @@ SUM(CASE WHEN status = "uncollectible" OR status = "Unpaid" THEN totalAmount ELS
 FROM spade_Rent.invoice
 WHERE landlordID = ? AND invoice.created_at >= ? AND invoice.created_at <= ?`;
 exports.getPropertyDashboardData = `
-  SELECT
-  property.propertyCount,
-  propertyunits.vacantCount,
-  propertyunits.occupiedCount,
-  task.onGoingTaskCount,
-  task.finishedTaskCount,
-  task.totalTask,
-  invoice.totalAmount,
-  invoice.totalPaidAmount,
+SELECT
+property.propertyCount,
+propertyunits.vacantCount,
+propertyunits.occupiedCount,
+task.onGoingTaskCount,
+task.finishedTaskCount,
+task.totalTask,
+invoice.totalAmount,
+invoice.totalPaidAmount,
   invoice.totalUnPaidAmount,
   invoice.totalPaidCount,
   invoice.totalUnPaidCount
@@ -954,9 +953,9 @@ LEFT JOIN
       propertyId,
       SUM(CASE WHEN status = 'Vacant' THEN 1 ELSE 0 END) AS vacantCount,
       SUM(CASE WHEN status = 'Occupied' THEN 1 ELSE 0 END) AS occupiedCount
-  FROM
+      FROM
       propertyunits
-  GROUP BY
+      GROUP BY
       propertyId) AS propertyunits ON property.propertyId = propertyunits.propertyId
 LEFT JOIN
   (SELECT
@@ -964,13 +963,13 @@ LEFT JOIN
       COUNT(CASE WHEN task.status = 'in progress' THEN 1 END) AS onGoingTaskCount,
       COUNT(CASE WHEN task.status = 'completed' THEN 1 END) AS finishedTaskCount,
       COUNT(task.id) AS totalTask
-  FROM
+      FROM
       tenants
   LEFT JOIN
       task ON tenants.id = task.tenantID
   GROUP BY
-      tenants.propertyID) AS task ON property.propertyId = task.propertyId
-LEFT JOIN
+  tenants.propertyID) AS task ON property.propertyId = task.propertyId
+  LEFT JOIN
   (SELECT
       tenants.propertyID AS propertyId,
       SUM(CASE WHEN invoice.status = 'paid' THEN invoice.totalAmount ELSE 0 END) AS totalPaidAmount,
@@ -979,11 +978,11 @@ LEFT JOIN
       COUNT(CASE WHEN invoice.status = 'Unpaid' THEN 1 END) AS totalUnPaidCount,
       SUM(invoice.totalAmount) AS totalAmount
   FROM
-      tenants
+  tenants
   LEFT JOIN
-      invoice ON tenants.id = invoice.tenantID
+  invoice ON tenants.id = invoice.tenantID
   GROUP BY
-      tenants.propertyID) AS invoice ON property.propertyId = invoice.propertyId;
+  tenants.propertyID) AS invoice ON property.propertyId = invoice.propertyId;
 `;
 exports.getAllTenantsQuery = `SELECT DISTINCT tenants.firstName, tenants.lastName, tenants.email
 FROM tenants
@@ -999,3 +998,4 @@ WHERE invoice.tenantID = ? AND invoice.status = 'paid';
 exports.updateAllStatusVacantQuery = `UPDATE propertyunits, tenants SET propertyunits.status = ? WHERE tenants.propertyID = propertyunits.propertyID AND tenants.id = ?`;
 exports.unpaidAmountQuery = `SELECT SUM(totalAmount) AS totalAmount FROM spade_Rent.invoice WHERE tenantID = ? AND status = 'Unpaid'`;
 exports.updateEmailTemplates = "UPDATE users SET tenantEmail = ? , invoiceEmail = ?, taskEmail = ?, userEmail = ? WHERE id = ? ";
+exports.addProspectusQuery = "INSERT INTO prospectus (landlordId,firstName,middleName,lastName,phoneNumber,email,propertyInfo,unitInfo,prospectDetail,sourceCampaign,moveDate,rentAmount,prospectusStatus,createdDate) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";

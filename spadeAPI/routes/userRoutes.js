@@ -7,6 +7,7 @@ const tenantPortalController = require("../controllers/tenantPortalController");
 const settingController = require("../controllers/settingController");
 const { verifyToken, verifyTokenTenant } = require("../middleware/authenticate");
 const taskController = require("../controllers/taskController");
+const prospectus = require("../controllers/prospectusController");
 const fileUpload = require("../helper/S3Bucket");
 const notifyController = require("../controllers/notifyController");
 const { chatsController } = require("../controllers/chatsController");
@@ -209,3 +210,6 @@ router.get("/ProfileCompleteTenant", verifyTokenTenant, tenantPortalController.P
 router.get("/unpaidAmountTenant", verifyTokenTenant, tenantPortalController.unpaidAmountTenant);
 // router.get("/unpaidAmountTenant", tenantPortalController.unpaidAmountTenant);
 router.put("/emailtemplates", verifyToken, settingController.emailtemplates);
+// router.post("/addprospectus", verifyToken, prospectus.addprospectus);
+router.post("/addprospectus", prospectus.addprospectus);
+router.get("/getProspectus", prospectus.getProspectus);
