@@ -42,11 +42,11 @@
     <link href="../assets/switcher/demo.css" rel="stylesheet" />
 
     <script>
-         if(!localStorage.getItem("authtoken")){
-                window.location="./login_module.html"
-            }
+        if (!localStorage.getItem("authtoken")) {
+            window.location = "./login_module.html"
+        }
     </script>
-<style>
+    <style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
         .custom-file-input::-webkit-file-upload-button {
@@ -791,7 +791,7 @@
         }
 
         .dark-mode .nav.panel-tabs a.active {
-            color: white; 
+            color: white;
         }
 
         #myonoffswitch1 {
@@ -1601,12 +1601,15 @@
         #tenant-invite-none {
             display: none;
         }
+
         #invoice-none {
             display: none;
         }
+
         #taskupdate-none {
             display: none;
         }
+
         #userinvite-none {
             display: none;
         }
@@ -1622,55 +1625,61 @@
 
 
 
-.popup22{
-    width: 100%;
-    margin: auto;
-    text-align: center
-}
-.popup22 img{
-    cursor: pointer
-}
-.showw{
-    z-index: 999;
-    display: none;
-}
-.showw .overlay{
-    width: 100%;
-    height: 1000%;
-    background: rgba(0,0,0,.6);
-    backdrop-filter: blur(5px);
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-.showw .img-show {
-    /*width: 600px;
+        .popup22 {
+            width: 100%;
+            margin: auto;
+            text-align: center
+        }
+
+        .popup22 img {
+            cursor: pointer
+        }
+
+        .showw {
+            z-index: 999;
+            display: none;
+        }
+
+        .showw .overlay {
+            width: 100%;
+            height: 1000%;
+            background: rgba(0, 0, 0, .6);
+            backdrop-filter: blur(5px);
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .showw .img-show {
+            /*width: 600px;
     height: auto;*/
-    background: transparent;
-    position: fixed;
-    top: 10px;
-    left: 60%;
-    transform: translate(-70%,27%);
-    overflow: hidden;
-    min-height: calc(75% - (0.75rem * 1));
-}
-.img-show span{
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 99;
-    cursor: pointer;
-}
-/* .img-show img{
+            background: transparent;
+            position: fixed;
+            top: 10px;
+            left: 60%;
+            transform: translate(-70%, 27%);
+            overflow: hidden;
+            min-height: calc(75% - (0.75rem * 1));
+        }
+
+        .img-show span {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 99;
+            cursor: pointer;
+        }
+
+        /* .img-show img{
     /*width: 100%;
     height: 100%;
     position: absolute;
     top: 0;
     left: 0;*/
-    
-    
-/* } */ 
-/*End style*/
+
+
+        /* } */
+        /*End style*/
     </style>
 
 </head>
@@ -1705,9 +1714,9 @@
                         <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
                         <h6 class="text-default mb-3">Enter a 6-digit code to verify email address</h6>
                         <input id="token" name="token" type="phone" class="form-control form mb-2" pattern="[0-9]{5}"
-                            maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                            style="width: 100%;" data-bs-placement="top" data-bs-toggle="tooltip"
-                            title="" data-bs-original-title="Enter the name of the property.">
+                            maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '')" style="width: 100%;"
+                            data-bs-placement="top" data-bs-toggle="tooltip" title=""
+                            data-bs-original-title="Enter the name of the property.">
                         <input type="password" class="form-control form mb-2" id="email-verify-password"
                             aria-describedby="emailHelp" placeholder="Password" data-bs-placement="top"
                             data-bs-toggle="tooltip" title="" data-bs-original-title="Enter password here.">
@@ -1746,9 +1755,10 @@
                         <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
                         <h6 class="text-default mb-3">Get started with Spade Rent! You have<span id="days-left"></span>
                             left</h6>
-                        <input type="email" class="form-control form mb-2" style="width: 100%;"
-                            data-bs-placement="top" data-bs-toggle="tooltip" title=""
-                            data-bs-original-title="Enter the name of the property." readonly id="user-email"><span class="text-danger d-none" id="verify-email-span">* Email already exist</span>
+                        <input type="email" class="form-control form mb-2" style="width: 100%;" data-bs-placement="top"
+                            data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the name of the property."
+                            readonly id="user-email"><span class="text-danger d-none" id="verify-email-span">* Email
+                            already exist</span>
                         <a class="text-primary mb-4" href="javascript:void(0)" id="change-email">Change Email</a>
                         <a class="text-primary mb-4 d-none" href="javascript:void(0)" id="save-email">Save Email</a>
                         <div class="">
@@ -1793,7 +1803,9 @@
                                         <a href="properties-all.html">
                                             <h5 class="mb-1 text-dark fw-bold">Create New Property</h5>
                                         </a>
-                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Simplify property management. Effortlessly create and manage rental properties with our software, making life easier for landlords and property managers. </p>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Simplify property management.
+                                            Effortlessly create and manage rental properties with our software, making
+                                            life easier for landlords and property managers. </p>
                                     </div>
                                 </div>
                             </div>
@@ -1816,7 +1828,9 @@
                                         <a href="add-tenant.html">
                                             <h5 class="mb-1 text-dark fw-bold">Create New Tenant</h5>
                                         </a>
-                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Effortlessly add new tenants with our rental software, streamlining the tenant onboarding process for property managers and landlords. </p>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Effortlessly add new tenants with
+                                            our rental software, streamlining the tenant onboarding process for property
+                                            managers and landlords. </p>
                                     </div>
                                 </div>
                             </div>
@@ -1839,7 +1853,9 @@
                                         <a href="create-invoicing.html">
                                             <h5 class="mb-1 text-dark fw-bold">Create New Invoice</h5>
                                         </a>
-                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Effortlessly onboard new tenants with our user-friendly rental software, streamlining the tenant registration process for property managers and landlords. </p>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Effortlessly onboard new tenants
+                                            with our user-friendly rental software, streamlining the tenant registration
+                                            process for property managers and landlords. </p>
                                     </div>
                                 </div>
                             </div>
@@ -1848,7 +1864,8 @@
                     <div class="col-md-6 col-lg-3 col-xl-3 mb-5">
                         <div class="card h-100">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
-                                <div class="card-title fw-bold"><a href="prospects.html" style="color: white;">Lead</a></div>
+                                <div class="card-title fw-bold"><a href="prospects.html" style="color: white;">Lead</a>
+                                </div>
                             </div>
                             <div class="card-body">
                                 <div class="text-center chat-image mb-5">
@@ -1862,7 +1879,9 @@
                                         <a href="prospects.html">
                                             <h5 class="mb-1 text-dark fw-bold">Create New Lead</h5>
                                         </a>
-                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Effortlessly generate and manage leads with our property rental software, making it easier for landlords to find potential tenants. </p>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Effortlessly generate and manage
+                                            leads with our property rental software, making it easier for landlords to
+                                            find potential tenants. </p>
                                     </div>
                                 </div>
                             </div>
@@ -1885,7 +1904,9 @@
                                         <a href="create-tasks.html">
                                             <h5 class="mb-1 text-dark fw-bold">Create New Tasks</h5>
                                         </a>
-                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Effortlessly manage tasks with our property rental software. Stay organized and boost productivity in property management. </p>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Effortlessly manage tasks with our
+                                            property rental software. Stay organized and boost productivity in property
+                                            management. </p>
                                     </div>
                                 </div>
                             </div>
@@ -1909,7 +1930,9 @@
                                         <a href="tasks-vendors.html">
                                             <h5 class="mb-1 text-dark fw-bold">Create New Vendors</h5>
                                         </a>
-                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Effortlessly onboard vendors with our property rental software, streamlining property maintenance for landlords and property managers. </p>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Effortlessly onboard vendors with
+                                            our property rental software, streamlining property maintenance for
+                                            landlords and property managers. </p>
                                     </div>
                                 </div>
                             </div>
@@ -1991,7 +2014,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="modal fade" id="succesModal_verify" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered text-center" role="document">
             <div class="modal-content modal-content-demo">
@@ -2163,9 +2186,15 @@
                 <div class="modal-body p-0">
                     <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
                         <div class="card-body text-center">
-                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24"><path fill="#fad383" d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z"/><circle cx="12" cy="16" r="1" fill="#f7b731"/><path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"/></svg></span>
-                          <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
-                          <p class="card-text text-dark">Session expeired!, Login again</p>
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
+                                    viewBox="0 0 24 24">
+                                    <path fill="#fad383"
+                                        d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z" />
+                                    <circle cx="12" cy="16" r="1" fill="#f7b731" />
+                                    <path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z" />
+                                </svg></span>
+                            <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
+                            <p class="card-text text-dark">Session expeired!, Login again</p>
                         </div>
                     </div>
                 </div>
@@ -2178,9 +2207,15 @@
                 <div class="modal-body p-0">
                     <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
                         <div class="card-body text-center">
-                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24"><path fill="#fad383" d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z"/><circle cx="12" cy="16" r="1" fill="#f7b731"/><path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"/></svg></span>
-                          <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
-                          <p class="card-text text-dark">Password is Incorrect!!!</p>
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
+                                    viewBox="0 0 24 24">
+                                    <path fill="#fad383"
+                                        d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z" />
+                                    <circle cx="12" cy="16" r="1" fill="#f7b731" />
+                                    <path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z" />
+                                </svg></span>
+                            <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
+                            <p class="card-text text-dark">Password is Incorrect!!!</p>
                         </div>
                     </div>
                 </div>
@@ -2193,9 +2228,15 @@
                 <div class="modal-body p-0">
                     <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
                         <div class="card-body text-center">
-                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24"><path fill="#fad383" d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z"/><circle cx="12" cy="16" r="1" fill="#f7b731"/><path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"/></svg></span>
-                          <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
-                          <p class="card-text text-dark">Unable to update 2 factor Authentication</p>
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
+                                    viewBox="0 0 24 24">
+                                    <path fill="#fad383"
+                                        d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z" />
+                                    <circle cx="12" cy="16" r="1" fill="#f7b731" />
+                                    <path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z" />
+                                </svg></span>
+                            <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
+                            <p class="card-text text-dark">Unable to update 2 factor Authentication</p>
                         </div>
                     </div>
                 </div>
@@ -2363,8 +2404,8 @@
                                         </div>
                                         <div class="d-flex country mt-2">
                                             <a class="nav-link icon text-dark customIntercomButton">
-                                        <i class="fi fi-rs-interrogation"></i>
-                                       
+                                                <i class="fi fi-rs-interrogation"></i>
+
                                             </a>
                                         </div>
                                         <!-- <div class="d-flex country mt-2">
@@ -2378,10 +2419,10 @@
                                                 class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div> -->
                                         <!-- <div class="d-flex country mt-2"> -->
-                                            <!-- <a class="nav-link icon text-dark" href="./chats.html">
+                                        <!-- <a class="nav-link icon text-dark" href="./chats.html">
                                                 <i class="fi fi-rs-comment"></i>
                                             </a> -->
-                                            <!-- <img src="../assets\header-img\comment-light.webp"
+                                        <!-- <img src="../assets\header-img\comment-light.webp"
                                                 class="avatarr profile-user nav-link brroundd cover-image light-layout"> -->
                                         <!-- </div> -->
                                         <!-- 1 comments start  -->
@@ -2399,8 +2440,9 @@
                                         <!-- 3 comments start  -->
                                         <div class="dropdown  d-flex notifications">
                                             <a class="nav-link icon" data-bs-toggle="sidebar-right"
-                                                data-target=".sidebar-right"><i class="fe fe-bell"></i> 
-                                                <span class="badge bg-secondary header-badge bg-primary" id="count_unread"></span>
+                                                data-target=".sidebar-right"><i class="fe fe-bell"></i>
+                                                <span class="badge bg-secondary header-badge bg-primary"
+                                                    id="count_unread"></span>
                                             </a>
                                             <!-- <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                                 <div class="drop-heading border-bottom">
@@ -2461,7 +2503,6 @@
                                         </div>
                                         <div class="d-flex country">
                                             <img id="user-img-dark" src="../assets\header-img\circlels.png"
-                                                
                                                 class="avatarr profile-user nav-link brroundd cover-image light-layout">
                                         </div>
                                         <div class="dropdown d-flex profile-1 country">
@@ -2469,8 +2510,8 @@
                                                 class="nav-link leading-none d-flex">
                                                 <!-- <img src="../assets/images/users/21.jpg" 
                                                     class="avatar  profile-user brround cover-image"> -->
-                                                <span class="dynamic-text-head text-dark text-dark" style="padding: 10px 10px;"
-                                                    id="header-user"></span> <i
+                                                <span class="dynamic-text-head text-dark text-dark"
+                                                    style="padding: 10px 10px;" id="header-user"></span> <i
                                                     class="fe fe-chevron-down dark-mode text-dark"
                                                     style="font-size: 20px; font-weight: 800;"></i>
                                             </a>
@@ -2553,7 +2594,7 @@
                                             <i class="side-menu__icon fi fi-rs-rocket-lunch mb-0"></i>
                                             <h3 class="card-title side-menu__label">&nbsp; Complete your Profile
                                             </h3>
-    
+
                                         </div>
                                         <div class="card-body pt-0">
                                             <div class="side-menu__label progress progress-md mt-5">
@@ -2644,15 +2685,15 @@
 
                                     <!-- <i class="angle fe fe-chevron-right"></i> -->
                                 </a>
-</li>
-<li class="slide">
-    <a class="side-menu__item" data-bs-toggle="slide" href="chats.html">
-        <i class="side-menu__icon fi fi-rs-comment"></i>
-        <span class="side-menu__label">Chat</span>
+                            </li>
+                            <li class="slide">
+                                <a class="side-menu__item" data-bs-toggle="slide" href="chats.html">
+                                    <i class="side-menu__icon fi fi-rs-comment"></i>
+                                    <span class="side-menu__label">Chat</span>
 
-        <!-- <i class="angle fe fe-chevron-right"></i> -->
-    </a>
-</li>
+                                    <!-- <i class="angle fe fe-chevron-right"></i> -->
+                                </a>
+                            </li>
                             <li>
                                 <a class="side-menu__item has-link" href="settings.html" target="_self"><i
                                         class="side-menu__icon fi fi-rs-settings"></i><span
@@ -2717,7 +2758,7 @@
                             </div>
                         </div>
                         <!-- PAGE-HEADER END -->
-                        
+
                         <div class="cardd">
                             <div class="card-body pt-0">
                                 <div class="panel panel-primary">
@@ -2726,8 +2767,10 @@
                                             <div>
                                                 <p class="d-inline-flex gap-1">
                                                     <span>Settings | </span>
-                                                      <span><a href="#" onclick="Intercom('showArticle', 8210506)"> Change Password? </a></span>
-                                                      <span><a href="#" onclick="Intercom('showArticle', 8210444)"> Subscription? </a></span>
+                                                    <span><a href="#" onclick="Intercom('showArticle', 8210506)"> Change
+                                                            Password? </a></span>
+                                                    <span><a href="#" onclick="Intercom('showArticle', 8210444)">
+                                                            Subscription? </a></span>
                                                 </p>
                                             </div>
                                             <div class="tab-pane active" id="tab5">
@@ -2771,13 +2814,17 @@
                                                 <div class="form-row mt-5">
                                                     <div class="col-xl-4 mb-3 mt-5">
                                                         <label for="fname1"><b>First name</b></label>
-                                                        <input type="text" class="form-control" id="firstName" pattern="[A-Za-z\s]+" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
+                                                        <input type="text" class="form-control" id="firstName"
+                                                            pattern="[A-Za-z\s]+"
+                                                            oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
                                                             placeholder="Enter First name" required>
                                                         <div class="valid-feedback">Looks good!</div>
                                                     </div>
                                                     <div class="col-xl-4 mb-3 mt-5">
                                                         <label for="lname1"><b>Last name</b></label>
-                                                        <input type="text" class="form-control" id="lastName" pattern="[A-Za-z\s]+" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
+                                                        <input type="text" class="form-control" id="lastName"
+                                                            pattern="[A-Za-z\s]+"
+                                                            oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
                                                             placeholder="Enter Last name" required>
                                                         <div class="valid-feedback">Looks good!</div>
                                                     </div>
@@ -2791,7 +2838,9 @@
 
                                                     <div class="col-xl-4 mb-3">
                                                         <label for="phone1"><b>Phone</b></label><br>
-                                                        <input id="phone1" name="phone" class="form-control" type="tel" placeholder="Enter Phone" pattern="[0-9]+" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                                                        <input id="phone1" name="phone" class="form-control" type="tel"
+                                                            placeholder="Enter Phone" pattern="[0-9]+"
+                                                            oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                                                         <div class="valid-feedback">Looks good!</div>
                                                     </div>
                                                     <div class="col-lg-4"></div>
@@ -2811,24 +2860,27 @@
                                                             <div class="col-xl-8 mb-3">
                                                                 <label for="saddress1"><b>Street Address</b></label>
                                                                 <input type="text" class="form-control"
-                                                                    id="streetAddress" placeholder="Enter My Mailing Address" required>
+                                                                    id="streetAddress"
+                                                                    placeholder="Enter My Mailing Address" required>
                                                                 <div class="valid-feedback">Looks good!</div>
                                                             </div>
 
                                                             <div class="col-xl-8 mb-3">
                                                                 <label for="baddress1"><b>Business Address</b></label>
                                                                 <input type="text" class="form-control"
-                                                                    id="businessAddress" placeholder="Enter Business Address" required>
+                                                                    id="businessAddress"
+                                                                    placeholder="Enter Business Address" required>
                                                                 <div class="valid-feedback">Looks good!</div>
                                                             </div>
 
                                                             <!-- <div class="col-lg-3"></div> -->
                                                             <div class="col-lg-8 mt-4 d-flex">
-                                                                
-                                                                    <button type="button"
-                                                                        class="btn btn-light btn-pill m-2 ">Close</button>
-                                                              
-                                                                <button type="button" class="btn btn-primary btn-pill m-2"
+
+                                                                <button type="button"
+                                                                    class="btn btn-light btn-pill m-2 ">Close</button>
+
+                                                                <button type="button"
+                                                                    class="btn btn-primary btn-pill m-2"
                                                                     id="save_profile">Save</button>
                                                             </div>
                                                         </div>
@@ -2866,10 +2918,13 @@
                                                                 One Uppercase and One symbol.
                                                             </span>
                                                             <div class="mt-3">
-                                                                <img src="../assets/images/info.svg" alt="" height="11px" width="11px">
+                                                                <img src="../assets/images/info.svg" alt=""
+                                                                    height="11px" width="11px">
                                                                 <span class="">
-                                                                    <span style="font-weight:700;">MUST</span> be 8-12 characters. Must contain atleast One Uppercase and One
-                                                                symbol.
+                                                                    <span style="font-weight:700;">MUST</span> be 8-12
+                                                                    characters. Must contain atleast One Uppercase and
+                                                                    One
+                                                                    symbol.
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -5667,7 +5722,8 @@
                                                 <div class="card-body p-0">
                                                     <div style="display: flex; justify-content: space-between;">
                                                         <div>
-                                                            <h2 class="h2-personal-inf">Manage Users <span class="text-danger">(Not Functional)</span></h2>
+                                                            <h2 class="h2-personal-inf">Manage Users <span
+                                                                    class="text-danger">(Not Functional)</span></h2>
                                                             <p class="p-personal-inf">Automate everything from listing
                                                                 units to moving out tenants, and everything in between.
                                                             </p>
@@ -7558,11 +7614,13 @@
 
                                             <div class="tab-pane mt-0" id="tab11">
                                                 <div class="card-body p-0" id="tab11_tab_preview">
-                                                    <h2 class="h2-personal-inf text-dark">Select a Template <span class="text-danger">(Not Functional)</span></h2>
+                                                    <h2 class="h2-personal-inf text-dark">Select a Template <span
+                                                            class="text-danger">(Not Functional)</span></h2>
 
                                                     <hr style="background-color: #D3D3D3;">
                                                     <div class="row">
-                                                        <div class="col-xl-3 col-md-6 col-sm-12" id="tenant-invite-show">
+                                                        <div class="col-xl-3 col-md-6 col-sm-12"
+                                                            id="tenant-invite-show">
                                                             <div class="card overflow-hidden card-preview-templates">
                                                                 <input type="radio" name="test" id="cb1" />
                                                                 <label for="cb1" class="label">
@@ -7643,110 +7701,137 @@
 
                                                 </div>
 
-                                        <!-- Tenant Invite preview template start  -->
+                                                <!-- Tenant Invite preview template start  -->
                                                 <div id="tenant-invite-none" class="popup22 mt-5">
-                                                <div class="row">
-                                                    <h2 style="color: #1467B0; text-align: left;"><b>Tenant Invite Templates</b></h2>
-                                                    <div class="col-xl-3 col-md-6 col-sm-12 tenant-invite-none" id="tenant-zero">
-                                                        <div class="card overflow-hidden card-preview-templates h-100">
-                                                            <input type="radio" name="test" id="cb1" />
-                                                            <labell for="cb1" class="label h-100">
-                                                                <img src="../assets/images/email-sent.png"
-                                                                    class="card-img-top" alt="img" style="height: 100%;"></labell>
-                                                            <div class="card-body card-body-preview-templates">
-                                                                <h3 class="card-titlee mb-1"><b>Tenant Invite 1</b>
-                                                                </h3>
-                                                                <p class="card-text">
-                                                                    Lorem Ipsum is simply dummy text of the printing
-                                                                    and typesetting industry. Lorem Ipsum has been
-                                                                    the industry's
-                                                                </p><a href="javascript:void(0)"
-                                                                    class="text-primary float-right"><b>Select
-                                                                        Template</b></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-xl-3 col-md-6 col-sm-12 tenant-invite-none" id="tenant-one">
-                                                        <div class="card overflow-hidden card-preview-templates h-100">
-                                                            <input type="radio" name="test" id="cb1" />
-                                                            <labell for="cb1" class="label h-100">
-                                                                <img src="../assets/images/email-sent-building.png"
-                                                                    class="card-img-top" alt="img" style="height: 100%;"></labell>
-                                                            <div class="card-body card-body-preview-templates">
-                                                                <h3 class="card-titlee mb-1"><b>Tenant Invite 2</b>
-                                                                </h3>
-                                                                <p class="card-text">
-                                                                    Lorem Ipsum is simply dummy text of the printing
-                                                                    and typesetting industry. Lorem Ipsum has been
-                                                                    the industry's
-                                                                </p><a href="javascript:void(0)"
-                                                                    class="text-primary float-right"><b>Select
-                                                                        Template</b></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                    </div>
-                                        <!-- Tenant invite preview template end  -->
-
-                                        <!-- Invoice preview template start  -->
-                                            <div id="invoice-none" class="popup22 mt-5">
-                                                <div class="row">
-                                                    <h2 style="color: #1467B0; text-align: left;"><b>Invoice Templates</b></h2>
-                                                    <div class="col-xl-3 col-md-6 col-sm-12 tenant-invite-none" id="invoice-zero">
-                                                        <div class="card overflow-hidden card-preview-templates h-100">
-                                                            <input type="radio" name="test" id="cb1" />
-                                                            <labell for="cb1" class="label h-100">
-                                                                <img src="../assets/images/invoice-template1.png"
-                                                                    class="card-img-top" alt="img" style="height: 100%;"></labell>
-                                                            <div class="card-body card-body-preview-templates">
-                                                                <h3 class="card-titlee mb-1"><b>Invoice 1</b>
-                                                                </h3>
-                                                                <p class="card-text">
-                                                                    Lorem Ipsum is simply dummy text of the printing
-                                                                    and typesetting industry. Lorem Ipsum has been
-                                                                    the industry's
-                                                                </p><a href="javascript:void(0)"
-                                                                    class="text-primary float-right"><b>Select
-                                                                        Template</b></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-xl-3 col-md-6 col-sm-12 tenant-invite-none" id="invoice-one">
-                                                        <div class="card overflow-hidden card-preview-templates h-100">
-                                                            <input type="radio" name="test" id="cb1" />
-                                                            <labell for="cb1" class="label h-100">
-                                                                <img src="../assets/images/invoice-template2.png"
-                                                                    class="card-img-top" alt="img" style="height: 100%;"></labell>
-                                                            <div class="card-body card-body-preview-templates">
-                                                                <h3 class="card-titlee mb-1"><b>Invoice 2</b>
-                                                                </h3>
-                                                                <p class="card-text">
-                                                                    Lorem Ipsum is simply dummy text of the printing
-                                                                    and typesetting industry. Lorem Ipsum has been
-                                                                    the industry's
-                                                                </p><a href="javascript:void(0)"
-                                                                    class="text-primary float-right"><b>Select
-                                                                        Template</b></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                    </div>
-                                            <!-- Invoice preview template end  -->
-
-                                            <!-- Task Update preview template start  -->
-                                                 <div id="taskupdate-none" class="popup22 mt-5">
                                                     <div class="row">
-                                                        <h2 style="color: #1467B0; text-align: left;"><b>Task Update Templates</b></h2>
-                                                        <div class="col-xl-3 col-md-6 col-sm-12 tenant-invite-none" id="task-zero">
-                                                            <div class="card overflow-hidden card-preview-templates h-100">
+                                                        <h2 style="color: #1467B0; text-align: left;"><b>Tenant Invite
+                                                                Templates</b></h2>
+                                                        <div class="col-xl-3 col-md-6 col-sm-12 tenant-invite-none"
+                                                            id="tenant-zero">
+                                                            <div
+                                                                class="card overflow-hidden card-preview-templates h-100">
+                                                                <input type="radio" name="test" id="cb1" />
+                                                                <labell for="cb1" class="label h-100">
+                                                                    <img src="../assets/images/email-sent.png"
+                                                                        class="card-img-top" alt="img"
+                                                                        style="height: 100%;">
+                                                                </labell>
+                                                                <div class="card-body card-body-preview-templates">
+                                                                    <h3 class="card-titlee mb-1"><b>Tenant Invite 1</b>
+                                                                    </h3>
+                                                                    <p class="card-text">
+                                                                        Lorem Ipsum is simply dummy text of the printing
+                                                                        and typesetting industry. Lorem Ipsum has been
+                                                                        the industry's
+                                                                    </p>
+                                                                    <!-- <a href="javascript:void(0)"
+                                                                        class="text-primary float-right"><b>Select
+                                                                            Template</b></a> -->
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-xl-3 col-md-6 col-sm-12 tenant-invite-none"
+                                                            id="tenant-one">
+                                                            <div
+                                                                class="card overflow-hidden card-preview-templates h-100">
+                                                                <input type="radio" name="test" id="cb1" />
+                                                                <labell for="cb1" class="label h-100">
+                                                                    <img src="../assets/images/email-sent-building.png"
+                                                                        class="card-img-top" alt="img"
+                                                                        style="height: 100%;">
+                                                                </labell>
+                                                                <div class="card-body card-body-preview-templates">
+                                                                    <h3 class="card-titlee mb-1"><b>Tenant Invite 2</b>
+                                                                    </h3>
+                                                                    <p class="card-text">
+                                                                        Lorem Ipsum is simply dummy text of the printing
+                                                                        and typesetting industry. Lorem Ipsum has been
+                                                                        the industry's
+                                                                    </p>
+                                                                    <!-- <a href="javascript:void(0)"
+                                                                        class="text-primary float-right"><b>Select
+                                                                            Template</b></a> -->
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Tenant invite preview template end  -->
+
+                                                <!-- Invoice preview template start  -->
+                                                <div id="invoice-none" class="popup22 mt-5">
+                                                    <div class="row">
+                                                        <h2 style="color: #1467B0; text-align: left;"><b>Invoice
+                                                                Templates</b></h2>
+                                                        <div class="col-xl-3 col-md-6 col-sm-12 tenant-invite-none"
+                                                            id="invoice-zero">
+                                                            <div
+                                                                class="card overflow-hidden card-preview-templates h-100">
+                                                                <input type="radio" name="test" id="cb1" />
+                                                                <labell for="cb1" class="label h-100">
+                                                                    <img src="../assets/images/invoice-template1.png"
+                                                                        class="card-img-top" alt="img"
+                                                                        style="height: 100%;">
+                                                                </labell>
+                                                                <div class="card-body card-body-preview-templates">
+                                                                    <h3 class="card-titlee mb-1"><b>Invoice 1</b>
+                                                                    </h3>
+                                                                    <p class="card-text">
+                                                                        Lorem Ipsum is simply dummy text of the printing
+                                                                        and typesetting industry. Lorem Ipsum has been
+                                                                        the industry's
+                                                                    </p>
+                                                                    <!-- <a href="javascript:void(0)"
+                                                                        class="text-primary float-right"><b>Select
+                                                                            Template</b></a> -->
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-xl-3 col-md-6 col-sm-12 tenant-invite-none"
+                                                            id="invoice-one">
+                                                            <div
+                                                                class="card overflow-hidden card-preview-templates h-100">
+                                                                <input type="radio" name="test" id="cb1" />
+                                                                <labell for="cb1" class="label h-100">
+                                                                    <img src="../assets/images/invoice-template2.png"
+                                                                        class="card-img-top" alt="img"
+                                                                        style="height: 100%;">
+                                                                </labell>
+                                                                <div class="card-body card-body-preview-templates">
+                                                                    <h3 class="card-titlee mb-1"><b>Invoice 2</b>
+                                                                    </h3>
+                                                                    <p class="card-text">
+                                                                        Lorem Ipsum is simply dummy text of the printing
+                                                                        and typesetting industry. Lorem Ipsum has been
+                                                                        the industry's
+                                                                    </p>
+                                                                    <!-- <a href="javascript:void(0)"
+                                                                        class="text-primary float-right"><b>Select
+                                                                            Template</b></a> -->
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Invoice preview template end  -->
+
+                                                <!-- Task Update preview template start  -->
+                                                <div id="taskupdate-none" class="popup22 mt-5">
+                                                    <div class="row">
+                                                        <h2 style="color: #1467B0; text-align: left;"><b>Task Update
+                                                                Templates</b></h2>
+                                                        <div class="col-xl-3 col-md-6 col-sm-12 tenant-invite-none"
+                                                            id="task-zero">
+                                                            <div
+                                                                class="card overflow-hidden card-preview-templates h-100">
                                                                 <input type="radio" name="test" id="cb1" />
                                                                 <labell for="cb1" class="label h-100">
                                                                     <img src="../assets/images/task-update-template1.jpg.png"
-                                                                        class="card-img-top" alt="img" style="height: 100%;"></labell>
+                                                                        class="card-img-top" alt="img"
+                                                                        style="height: 100%;">
+                                                                </labell>
                                                                 <div class="card-body card-body-preview-templates">
                                                                     <h3 class="card-titlee mb-1"><b>Task Update 1</b>
                                                                     </h3>
@@ -7754,19 +7839,24 @@
                                                                         Lorem Ipsum is simply dummy text of the printing
                                                                         and typesetting industry. Lorem Ipsum has been
                                                                         the industry's
-                                                                    </p><a href="javascript:void(0)"
+                                                                    </p>
+                                                                    <!-- <a href="javascript:void(0)"
                                                                         class="text-primary float-right"><b>Select
-                                                                            Template</b></a>
+                                                                            Template</b></a> -->
                                                                 </div>
                                                             </div>
                                                         </div>
-    
-                                                        <div class="col-xl-3 col-md-6 col-sm-12 tenant-invite-none" id="task-one">
-                                                            <div class="card overflow-hidden card-preview-templates h-100">
+
+                                                        <div class="col-xl-3 col-md-6 col-sm-12 tenant-invite-none"
+                                                            id="task-one">
+                                                            <div
+                                                                class="card overflow-hidden card-preview-templates h-100">
                                                                 <input type="radio" name="test" id="cb1" />
                                                                 <labell for="cb1" class="label h-100">
                                                                     <img src="../assets/images/task-update-template2.png"
-                                                                        class="card-img-top" alt="img" style="height: 100%;"></labell>
+                                                                        class="card-img-top" alt="img"
+                                                                        style="height: 100%;">
+                                                                </labell>
                                                                 <div class="card-body card-body-preview-templates">
                                                                     <h3 class="card-titlee mb-1"><b>Task Update 2</b>
                                                                     </h3>
@@ -7774,69 +7864,79 @@
                                                                         Lorem Ipsum is simply dummy text of the printing
                                                                         and typesetting industry. Lorem Ipsum has been
                                                                         the industry's
-                                                                    </p><a href="javascript:void(0)"
+                                                                    </p>
+                                                                    <!-- <a href="javascript:void(0)"
                                                                         class="text-primary float-right"><b>Select
-                                                                            Template</b></a>
+                                                                            Template</b></a> -->
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                        </div>
-                                        <!-- Task Update preview template end  -->
+                                                </div>
+                                                <!-- Task Update preview template end  -->
 
-                                        <!-- User Invite template start  -->
-                                            <div id="userinvite-none" class="popup22 mt-5">
-                                                <div class="row">
-                                                    <h2 style="color: #1467B0; text-align: left;"><b>User Invite Templates</b></h2>
-                                                    <div class="col-xl-3 col-md-6 col-sm-12 tenant-invite-none">
-                                                        <div class="card overflow-hidden card-preview-templates h-100">
-                                                            <input type="radio" name="test" id="cb1" />
-                                                            <labell for="cb1" class="label h-100">
-                                                                <img src="../assets/images/user-invite-template1.jpeg.png"
-                                                                    class="card-img-top" alt="img" style="height: 100%;"></labell>
-                                                            <div class="card-body card-body-preview-templates">
-                                                                <h3 class="card-titlee mb-1"><b>User Invite 1</b>
-                                                                </h3>
-                                                                <p class="card-text">
-                                                                    Lorem Ipsum is simply dummy text of the printing
-                                                                    and typesetting industry. Lorem Ipsum has been
-                                                                    the industry's
-                                                                </p><a href="javascript:void(0)"
-                                                                    class="text-primary float-right"><b>Select
-                                                                        Template</b></a>
+                                                <!-- User Invite template start  -->
+                                                <div id="userinvite-none" class="popup22 mt-5">
+                                                    <div class="row">
+                                                        <h2 style="color: #1467B0; text-align: left;"><b>User Invite
+                                                                Templates</b></h2>
+                                                        <div class="col-xl-3 col-md-6 col-sm-12 tenant-invite-none">
+                                                            <div
+                                                                class="card overflow-hidden card-preview-templates h-100">
+                                                                <input type="radio" name="test" id="cb1" />
+                                                                <labell for="cb1" class="label h-100">
+                                                                    <img src="../assets/images/user-invite-template1.jpeg.png"
+                                                                        class="card-img-top" alt="img"
+                                                                        style="height: 100%;">
+                                                                </labell>
+                                                                <div class="card-body card-body-preview-templates">
+                                                                    <h3 class="card-titlee mb-1"><b>User Invite 1</b>
+                                                                    </h3>
+                                                                    <p class="card-text">
+                                                                        Lorem Ipsum is simply dummy text of the printing
+                                                                        and typesetting industry. Lorem Ipsum has been
+                                                                        the industry's
+                                                                    </p>
+                                                                    <!-- <a href="javascript:void(0)"
+                                                                        class="text-primary float-right"><b>Select
+                                                                            Template</b></a> -->
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
 
-                                                    <div class="col-xl-3 col-md-6 col-sm-12 tenant-invite-none">
-                                                        <div class="card overflow-hidden card-preview-templates h-100">
-                                                            <input type="radio" name="test" id="cb1" />
-                                                            <labell for="cb1" class="label h-100">
-                                                                <img src="../assets/images/user-invite-template2.png"
-                                                                    class="card-img-top" alt="img" style="height: 100%;"></labell>
-                                                            <div class="card-body card-body-preview-templates">
-                                                                <h3 class="card-titlee mb-1"><b>User Invite 2</b>
-                                                                </h3>
-                                                                <p class="card-text">
-                                                                    Lorem Ipsum is simply dummy text of the printing
-                                                                    and typesetting industry. Lorem Ipsum has been
-                                                                    the industry's
-                                                                </p><a href="javascript:void(0)"
-                                                                    class="text-primary float-right"><b>Select
-                                                                        Template</b></a>
+                                                        <div class="col-xl-3 col-md-6 col-sm-12 tenant-invite-none">
+                                                            <div
+                                                                class="card overflow-hidden card-preview-templates h-100">
+                                                                <input type="radio" name="test" id="cb1" />
+                                                                <labell for="cb1" class="label h-100">
+                                                                    <img src="../assets/images/user-invite-template2.png"
+                                                                        class="card-img-top" alt="img"
+                                                                        style="height: 100%;">
+                                                                </labell>
+                                                                <div class="card-body card-body-preview-templates">
+                                                                    <h3 class="card-titlee mb-1"><b>User Invite 2</b>
+                                                                    </h3>
+                                                                    <p class="card-text">
+                                                                        Lorem Ipsum is simply dummy text of the printing
+                                                                        and typesetting industry. Lorem Ipsum has been
+                                                                        the industry's
+                                                                    </p>
+                                                                    <!-- <a href="javascript:void(0)"
+                                                                        class="text-primary float-right"><b>Select
+                                                                            Template</b></a> -->
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                    </div>
-                                            <!-- User Invite template end  -->
+                                                <!-- User Invite template end  -->
 
-                                            <!-- modal full show start  -->
-                                            <div class="show">
-                                                <div class="overlay"></div>
-                                                <div class="img-show"><span>X</span><img src=""></div>
-                                              </div>
-                                            <!-- modal full show End  -->
+                                                <!-- modal full show start  -->
+                                                <div class="show">
+                                                    <div class="overlay"></div>
+                                                    <div class="img-show"><span>X</span><img src=""></div>
+                                                </div>
+                                                <!-- modal full show End  -->
 
 
                                                 <div class="card-body p-0 d-none" id="tab11_tab_preview_invoice">
@@ -7994,7 +8094,8 @@
                                             <div class="tab-pane mt-0" id="tab13">
                                                 <!-- Row -->
                                                 <div class="row">
-                                                    <h1 class="text-danger fw-bold" style="text-align: start;">(Not Functional)</h1>
+                                                    <h1 class="text-danger fw-bold" style="text-align: start;">(Not
+                                                        Functional)</h1>
                                                     <div class="col-lg-12 col-xl-12">
                                                         <div class="card">
                                                             <div class="card-header justify-content-between"
@@ -8276,7 +8377,8 @@
                                                                                         *</span></label>
                                                                                 <input type="text"
                                                                                     class="form-control form"
-                                                                                    id="propertyName" placeholder="Enter Account Name">
+                                                                                    id="propertyName"
+                                                                                    placeholder="Enter Account Name">
                                                                                 <span
                                                                                     class="text-danger d-none">Property
                                                                                     name required!</span>
@@ -8285,7 +8387,8 @@
                                                                                 <label for="inputAddress"
                                                                                     class="form-label fw-bold">Description
                                                                                     <spnan class="text-danger">
-                                                                                        *</span></label>
+                                                                                        *</span>
+                                                                                </label>
                                                                                 <textarea class="form-control mb-4"
                                                                                     placeholder="Enter Description"
                                                                                     required="" rows="3"></textarea>
@@ -8441,7 +8544,7 @@
                                                                 </tr>
                                                             </thead> -->
                                                             <tbody id="table_body_unpaid_invoice">
-                                                                
+
 
                                                             </tbody>
                                                         </table>
@@ -8465,9 +8568,13 @@
                                                                                         <p>Spade Rent</p>
                                                                                     </span>
                                                                                 </div>
-                                                                                
+
                                                                             </div>
-                                                                            <p class="text-danger d-none text-bolder mt-2" id="unpaid-text"><span class="text-danger">*</span> Before closure please resolve the unpaid invoice</p>
+                                                                            <p class="text-danger d-none text-bolder mt-2"
+                                                                                id="unpaid-text"><span
+                                                                                    class="text-danger">*</span> Before
+                                                                                closure please resolve the unpaid
+                                                                                invoice</p>
 
                                                                         </div>
                                                                         <div class="col-xl-6 col-sm-6 col-md-12"
@@ -8475,8 +8582,7 @@
                                                                             <button
                                                                                 class="btn btn-light text-primaryy btn-pill m-2"
                                                                                 data-bs-target="#closeaccount"
-                                                                                data-bs-toggle="modal"
-                                                                                id="closeButton"
+                                                                                data-bs-toggle="modal" id="closeButton"
                                                                                 style="width: fit-content; border: transparent;"><b>Close
                                                                                     Account</b></button>
                                                                         </div>
@@ -8556,11 +8662,13 @@
                                                                 <div class="form-group">
                                                                     <label for=""><b>Current Password</b></label>
                                                                     <input type="password" class="form-control"
-                                                                        name="password" id="current_password_acount_close"
+                                                                        name="password"
+                                                                        id="current_password_acount_close"
                                                                         aria-describedby="emailHelp"
                                                                         placeholder="Enter Current Password">
                                                                     <i class="fi fi-rs-eye text-dark fs-20 toggle-password"
-                                                                        toggle="#current_password" id="current_password11" style="cursor: pointer;
+                                                                        toggle="#current_password"
+                                                                        id="current_password11" style="cursor: pointer;
                                                                 float: right;
                                                                 margin-top: -30px;
                                                                 margin-right: 15px;
@@ -8573,11 +8681,13 @@
                                                                 <div class="form-group">
                                                                     <label for=""><b>Confirm Password</b></label>
                                                                     <input type="password" class="form-control"
-                                                                        name="password" id="confirm_password_acount_close"
+                                                                        name="password"
+                                                                        id="confirm_password_acount_close"
                                                                         aria-describedby="emailHelp"
                                                                         placeholder="Enter Confirm Password">
                                                                     <i class="fi fi-rs-eye text-dark fs-20 toggle-password"
-                                                                        toggle="#confirm_password" id="confirm_password11" style="cursor: pointer;
+                                                                        toggle="#confirm_password"
+                                                                        id="confirm_password11" style="cursor: pointer;
                                                                 float: right;
                                                                 margin-top: -30px;
                                                                 margin-right: 15px;
@@ -8586,10 +8696,9 @@
                                                                 <div class="col-lg-12">
                                                                     <button
                                                                         class="btn btn-primary text-light btn-pill mt-2"
-                                                                        
-                                                                        data-bs-toggle="modal"
-                                                                        disabled
-                                                                        style="width: fit-content; border: transparent;" id="close-request"><b>Request
+                                                                        data-bs-toggle="modal" disabled
+                                                                        style="width: fit-content; border: transparent;"
+                                                                        id="close-request"><b>Request
                                                                             to Close the Account</b></button>
                                                                 </div>
                                                             </div>
@@ -8677,34 +8786,38 @@
 
             </div>
 
-             <!-- Sidebar-right -->
-    <div class="sidebar sidebar-right sidebar-animate">
-        <div class="panel panel-primary card mb-0 shadow-none border-0">
-            <div class="tab-menu-heading border-0 d-flex p-3">
-                <div class="card-title mb-0 text-dark fw-bold">
-                    <!-- <i class="fe fe-bell me-2"></i> -->
-                    <!-- <span class=" pulse"></span> -->
-                    Notifications <a href="javascript:void(0);" class="text-primary text-decoration-underline " id="updateAllNotifyRead">Mark all
-                        as read</a>
-                </div>
-                <div class="card-options ms-auto">
-                    <a href="javascript:void(0);" class="sidebar-icon text-end float-end me-3 mb-1"
-                        data-bs-toggle="sidebar-right" data-target=".sidebar-right"><i
-                            class="fe fe-x text-dark"></i></a>
-                </div>
-            </div>
-            <div class="panel-body tabs-menu-body latest-tasks p-0 border-0">
-                <div class="tabs-menu border-bottom">
-                    <!-- Tabs -->
-                    <ul class="nav panel-tabs">
-                        <li><a href="#side1" data-bs-toggle="tab" class="text-dark active">All<span class="all_span"></span></a></li>
-                        <li><a href="#side2" data-bs-toggle="tab" class="text-dark">Inbox <span class="inbox_span"></span></a></li>
-                        <li><a href="#side3" data-bs-toggle="tab" class="text-dark">Unread <span class="Unread_span"></span></a></li>
-                        <!-- <li><a href="#side4" data-bs-toggle="tab" class="text-dark">Archive <span class="archive_span"></span></a></li> -->
-                    </ul>   
-                </div>
-                <div class="tab-content">
-                    <!-- <div class="tab-pane " id="side1">
+            <!-- Sidebar-right -->
+            <div class="sidebar sidebar-right sidebar-animate">
+                <div class="panel panel-primary card mb-0 shadow-none border-0">
+                    <div class="tab-menu-heading border-0 d-flex p-3">
+                        <div class="card-title mb-0 text-dark fw-bold">
+                            <!-- <i class="fe fe-bell me-2"></i> -->
+                            <!-- <span class=" pulse"></span> -->
+                            Notifications <a href="javascript:void(0);" class="text-primary text-decoration-underline "
+                                id="updateAllNotifyRead">Mark all
+                                as read</a>
+                        </div>
+                        <div class="card-options ms-auto">
+                            <a href="javascript:void(0);" class="sidebar-icon text-end float-end me-3 mb-1"
+                                data-bs-toggle="sidebar-right" data-target=".sidebar-right"><i
+                                    class="fe fe-x text-dark"></i></a>
+                        </div>
+                    </div>
+                    <div class="panel-body tabs-menu-body latest-tasks p-0 border-0">
+                        <div class="tabs-menu border-bottom">
+                            <!-- Tabs -->
+                            <ul class="nav panel-tabs">
+                                <li><a href="#side1" data-bs-toggle="tab" class="text-dark active">All<span
+                                            class="all_span"></span></a></li>
+                                <li><a href="#side2" data-bs-toggle="tab" class="text-dark">Inbox <span
+                                            class="inbox_span"></span></a></li>
+                                <li><a href="#side3" data-bs-toggle="tab" class="text-dark">Unread <span
+                                            class="Unread_span"></span></a></li>
+                                <!-- <li><a href="#side4" data-bs-toggle="tab" class="text-dark">Archive <span class="archive_span"></span></a></li> -->
+                            </ul>
+                        </div>
+                        <div class="tab-content">
+                            <!-- <div class="tab-pane " id="side1">
                         <div class="p-3 fw-semibold ps-5">Feeds</div>
                         <div class="card-body pt-2">
                             <div class="browser-stats">
@@ -8876,37 +8989,37 @@
                             </div>
                         </div>
                     </div> -->
-                    <div class="tab-pane active" id="side1">
-                        <div class="list-group list-group-flush" id="notification-container">
-                            
+                            <div class="tab-pane active" id="side1">
+                                <div class="list-group list-group-flush" id="notification-container">
 
-                        </div>
-                    </div>
-                  
-                    <div class="tab-pane " id="side2">
-                        <div class="list-group list-group-flush" id="inbox-notification-container">
 
-                        </div>
-                    </div>
-                    <div class="tab-pane " id="side3">
-                        <div class="list-group list-group-flush" id="unread-notification-container">
-                            
+                                </div>
+                            </div>
 
-                        </div>
-                    </div>
-                    <div class="tab-pane " id="side4">
-                        <div class="list-group list-group-flush" id="Archieve-notification-container">
-                            
+                            <div class="tab-pane " id="side2">
+                                <div class="list-group list-group-flush" id="inbox-notification-container">
 
-                        </div>
-                    </div>
-                    <!-- <div class="tab-pane active" id="side4">
+                                </div>
+                            </div>
+                            <div class="tab-pane " id="side3">
+                                <div class="list-group list-group-flush" id="unread-notification-container">
+
+
+                                </div>
+                            </div>
+                            <div class="tab-pane " id="side4">
+                                <div class="list-group list-group-flush" id="Archieve-notification-container">
+
+
+                                </div>
+                            </div>
+                            <!-- <div class="tab-pane active" id="side4">
                         <div class="list-group list-group-flush" id="read-notification-container">
                             
 
                         </div>
                     </div> -->
-                    <!-- <div class="tab-pane" id="side2">
+                            <!-- <div class="tab-pane" id="side2">
                         <div class="list-group list-group-flush">
                             <div class="pt-3 fw-semibold ps-5">Today</div> -->
                             <!-- <div class="list-group-item d-flex align-items-center justify-content-between">
@@ -8951,9 +9064,9 @@
                             </div> -->
                             <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
 
-                        <!-- </div>
-                    </div> --> 
-                    <!-- <div class="tab-pane" id="side3">
+                            <!-- </div>
+                    </div> -->
+                            <!-- <div class="tab-pane" id="side3">
                         <div class="list-group list-group-flush">
                             <div class="pt-3 fw-semibold ps-5">Today</div> -->
                             <!-- <div class="list-group-item d-flex align-items-center justify-content-between">
@@ -8998,9 +9111,9 @@
                             </div> -->
                             <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
 
-                        <!-- </div>
-                    </div> --> 
-                    <!-- <div class="tab-pane" id="side4">
+                            <!-- </div>
+                    </div> -->
+                            <!-- <div class="tab-pane" id="side4">
                         <div class="list-group list-group-flush">
                              <div class="pt-3 fw-semibold ps-5">Today</div> -->
                             <!-- <div class="list-group-item d-flex align-items-center justify-content-between">
@@ -9045,9 +9158,9 @@
                             </div> -->
                             <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
 
-                        <!-- </div>
-                    </div> --> 
-                    <!-- <div class="tab-pane" id="side3">
+                            <!-- </div>
+                    </div> -->
+                            <!-- <div class="tab-pane" id="side3">
                         <ul class="task-list timeline-task">
                             <li class="d-sm-flex mt-4">
                                 <div>
@@ -9139,11 +9252,11 @@
                             </li>
                         </ul>
                     </div> -->
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <!--/Sidebar-right-->
+            <!--/Sidebar-right-->
 
             <!-- Country-selector modal-->
             <div class="modal fade" id="country-selector">
@@ -9351,7 +9464,7 @@
         <script src="../assets/js/froala.js"></script>
         <!-- Color Theme js -->
         <script src="../assets/js/themeColors.js"></script>
-<script src="../assets/js/intercom.js"></script>
+        <script src="../assets/js/intercom.js"></script>
         <!-- Switcher js -->
         <!-- <script src="../assets/switcher/js/switcher.js"></script> -->
 
@@ -9393,19 +9506,95 @@
 <script src="../assets/js/push_notification.js"></script></script> -->
         <!-- <script src="https://code.jquery.com/jquery-latest.min.js"></script> -->
         <script src="../assets/js/email-verification.js"></script>
-    <script src="../assets/js/intercom.js"></script>
-    <script src="../assets/js/getNotification.js"></script>
-<script src="../assets/js/push_notification.js"></script>
+        <script src="../assets/js/intercom.js"></script>
+        <script src="../assets/js/getNotification.js"></script>
+        <script src="../assets/js/push_notification.js"></script>
 
         <script>
-           
+
             $(document).ready(function () {
-               
-    $(".label").click(function () {
-        $(".activee").removeClass("activee");
-        $(this).addClass("activee");
-    });
-});
+
+                $("#tenant-invite-show .label").click(function () {
+                    $("#invoice-show .label").removeClass("activee");
+                    $("#taskupdate-show .label").removeClass("activee");
+                    $(this).addClass("activee");
+                });
+                $("#invoice-show .label").click(function () {
+                    $("#tenant-invite-show .label").removeClass("activee");
+                    $("#taskupdate-show .label").removeClass("activee");
+                    $(this).addClass("activee");
+                });
+                $("#taskupdate-show .label").click(function () {
+                    $("#invoice-show .label").removeClass("activee");
+                    $("#tenant-invite-show .label").removeClass("activee");
+                    $(this).addClass("activee");
+                });
+                $("#tenant-one .label").click(function () {
+                    $("#tenant-zero .label").removeClass("activee");
+                    $(this).addClass("activee");
+                });
+                $("#invoice-one .label").click(function () {
+                    $("#invoice-zero .label").removeClass("activee");
+                    $(this).addClass("activee");
+                });
+                $("#task-one .label").click(function () {
+                    $("#task-zero .label").removeClass("activee");
+                    $(this).addClass("activee");
+                });
+                $("#tenant-zero .label").click(function () {
+                    $("#tenant-one .label").removeClass("activee");
+                    $(this).addClass("activee");
+                });
+                $("#invoice-zero .label").click(function () {
+                    $("#invoice-one .label").removeClass("activee");
+                    $(this).addClass("activee");
+                });
+                $("#task-zero .label").click(function () {
+                    $("#task-one .label").removeClass("activee");
+                    $(this).addClass("activee");
+                });
+                $(".tenant-invite-none").click(function () {
+                    const data = {};
+                    $(".tenant-invite-none").each(function () {
+                        if ($(this).find('.label').hasClass("activee")) {
+                            if ($(this).attr("id") == "tenant-one") {
+                                data.tenantEmail = 1;
+                            }
+                            if ($(this).attr("id") == "tenant-zero") {
+                                data.tenantEmail = 0;
+                            }
+                            if ($(this).attr("id") == "invoice-one") {
+                                data.invoiceEmail = 1;
+                            }
+                            if ($(this).attr("id") == "invoice-zero") {
+                                data.invoiceEmail = 0;
+                            }
+                            if ($(this).attr("id") == "task-one") {
+                                data.taskEmail = 1;
+                            }
+                            if ($(this).attr("id") == "task-zero") {
+                                data.taskEmail = 0;
+                            }
+                        }
+                    });
+                    console.log(data)
+                    $.ajax({
+                        url: "http://localhost:3000/api/spade/emailtemplates",
+                        type: "PUT",
+                        data: JSON.stringify(data),
+                        headers: {
+                            Authorization: "Bearer " + localStorage.getItem("authtoken"),
+                        },
+                        contentType: "application/json",
+                        success: function (data) {
+                            console.log(data);
+                        },
+                        error: function (err) {
+                            console.log(err);
+                        }
+                    })
+                });
+            });
 
             const labelInputs = document.querySelectorAll(".label");
             function DarkLightChecked() {
@@ -9418,46 +9607,46 @@
                     labelInputs[1].classList.add("activee");
                     labelInputs[0].classList.remove("activee");
 
-                }else if(document.body.classList.contains("bg-img1")){
+                } else if (document.body.classList.contains("bg-img1")) {
                     const imageIds = ["bgimage1", "bgimage2", "bgimage3", "bgimage4"];
 
-imageIds.forEach(id => {
-  const element = document.getElementById(id);
-  if (element) {
-    element.classList.toggle("activee", id === "bgimage1");
-  }
-});
+                    imageIds.forEach(id => {
+                        const element = document.getElementById(id);
+                        if (element) {
+                            element.classList.toggle("activee", id === "bgimage1");
+                        }
+                    });
 
                 }
-                else if(document.body.classList.contains("bg-img2")){
+                else if (document.body.classList.contains("bg-img2")) {
                     const imageIds = ["bgimage1", "bgimage2", "bgimage3", "bgimage4"];
 
-imageIds.forEach(id => {
-  const element = document.getElementById(id);
-  if (element) {
-    element.classList.toggle("activee", id === "bgimage2");
-  }
-});
+                    imageIds.forEach(id => {
+                        const element = document.getElementById(id);
+                        if (element) {
+                            element.classList.toggle("activee", id === "bgimage2");
+                        }
+                    });
                 }
-                else if(document.body.classList.contains("bg-img3")){
+                else if (document.body.classList.contains("bg-img3")) {
                     const imageIds = ["bgimage1", "bgimage2", "bgimage3", "bgimage4"];
 
-imageIds.forEach(id => {
-  const element = document.getElementById(id);
-  if (element) {
-    element.classList.toggle("activee", id === "bgimage3");
-  }
-});
+                    imageIds.forEach(id => {
+                        const element = document.getElementById(id);
+                        if (element) {
+                            element.classList.toggle("activee", id === "bgimage3");
+                        }
+                    });
                 }
-                else if(document.body.classList.contains("bg-img4")){
+                else if (document.body.classList.contains("bg-img4")) {
                     const imageIds = ["bgimage1", "bgimage2", "bgimage3", "bgimage4"];
 
-imageIds.forEach(id => {
-  const element = document.getElementById(id);
-  if (element) {
-    element.classList.toggle("activee", id === "bgimage4");
-  }
-});
+                    imageIds.forEach(id => {
+                        const element = document.getElementById(id);
+                        if (element) {
+                            element.classList.toggle("activee", id === "bgimage4");
+                        }
+                    });
                 }
             };
             // FULL WIDTH LAYOUT START
@@ -9764,21 +9953,21 @@ imageIds.forEach(id => {
             validconfirmPassword1.addEventListener('keyup', confirmPasswordValidation1);
             newPassword.addEventListener('keyup', confirmPasswordValidation1);
 
-            var password_account=document.getElementById("current_password_acount_close");
-            var confim_password_account=document.getElementById("confirm_password_acount_close");
+            var password_account = document.getElementById("current_password_acount_close");
+            var confim_password_account = document.getElementById("confirm_password_acount_close");
             password_account.addEventListener('keyup', confirmPasswordValidation2);
             confim_password_account.addEventListener('keyup', confirmPasswordValidation2);
-            function confirmPasswordValidation2(){
+            function confirmPasswordValidation2() {
                 if (password_account.value == confim_password_account.value && confim_password_account.value.match(password_validate1)) {
                     password_account.classList.add("border-green");
                     password_account.classList.remove("border-red");
                     confim_password_account.classList.add("border-green");
                     confim_password_account.classList.remove("border-red");
                     document.getElementById("close-request").disabled = false;
-                } else if(password_account.value.match(password_validate1)) {
+                } else if (password_account.value.match(password_validate1)) {
                     password_account.classList.add("border-green");
                     password_account.classList.remove("border-red");
-                }else{
+                } else {
                     password_account.classList.remove("border-green");
                     password_account.classList.add("border-red");
                     document.getElementById("close-request").disabled = true;
@@ -9794,7 +9983,7 @@ imageIds.forEach(id => {
                     validconfirmPassword1.classList.add("border-red");
                     spantag11.style.display = "block";
                 }
-console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPassword1.value.match(password_validate1))
+                console.log(confirmPassword1.value == validconfirmPassword1.value, validconfirmPassword1.value.match(password_validate1))
                 if (confirmPassword1.value == validconfirmPassword1.value && validconfirmPassword1.value.match(password_validate1)) {
                     confirmPassword1.classList.add("border-green");
                     confirmPassword1.classList.remove("border-red");
@@ -9851,13 +10040,13 @@ console.log(confirmPassword1.value == validconfirmPassword1.value,validconfirmPa
 
 
 
-// Close Account password eye start 
-const togglePasswordcloseaccount1 = document.querySelector("#current_password11");
+            // Close Account password eye start 
+            const togglePasswordcloseaccount1 = document.querySelector("#current_password11");
             const passwordcloseaccount1 = document.querySelector("#current_password_acount_close");
 
             togglePasswordcloseaccount1.addEventListener("click", function (e) {
                 const type =
-                passwordcloseaccount1.getAttribute("type") === "password" ? "text" : "password";
+                    passwordcloseaccount1.getAttribute("type") === "password" ? "text" : "password";
                 passwordcloseaccount1.setAttribute("type", type);
 
             });
@@ -9866,7 +10055,7 @@ const togglePasswordcloseaccount1 = document.querySelector("#current_password11"
 
             togglePasswordcloseaccount2.addEventListener("click", function (e) {
                 const type =
-                passwordcloseaccount2.getAttribute("type") === "password" ? "text" : "password";
+                    passwordcloseaccount2.getAttribute("type") === "password" ? "text" : "password";
                 passwordcloseaccount2.setAttribute("type", type);
 
             });
@@ -9881,18 +10070,18 @@ const togglePasswordcloseaccount1 = document.querySelector("#current_password11"
                 });
             });
 
-// Close Account password eye End 
+            // Close Account password eye End 
 
 
 
 
-            var invoiceData=[]
+            var invoiceData = []
             $(document).ready(() => {
                 // ----- On render -----\\
                 function getData() {
 
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/protected',
+                        url: 'http://localhost:3000/api/spade/protected',
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -9905,11 +10094,11 @@ const togglePasswordcloseaccount1 = document.querySelector("#current_password11"
                                 });
                             }
                             console.log(response)
-                            if(response.image!==" " && response.image!==null){
-                
-                $("#user-img").attr("src", response.image)
-                $("#user-img-dark").attr("src", response.image)
-            }
+                            if (response.image !== " " && response.image !== null) {
+
+                                $("#user-img").attr("src", response.image)
+                                $("#user-img-dark").attr("src", response.image)
+                            }
                             $("#firstName").val(toTitleCase(response.firstName))
                             $("#lastName").val(toTitleCase(response.lastName))
                             $("#email").val(response.email)
@@ -9917,94 +10106,122 @@ const togglePasswordcloseaccount1 = document.querySelector("#current_password11"
                             $("#businessName").val(toTitleCase(response.businessName || ""))
                             $("#streetAddress").val(toTitleCase(response.streetAddress || ""))
                             $("#businessAddress").val(toTitleCase(response.BusinessAddress || ""))
-                            if(response.auth == 1){
-        $('#2f-Auth').prop('checked', true);
-    }else{
-        $('#2f-Auth').prop('checked', false);
-    }
+                            //                         "tenantEmail": "0",
+                            // "auth": 0,
+                            // "invoiceEmail": "0",
+                            // "taskEmail": "0"
+
+                            if (response.tenantEmail == 0) {
+                                $("#tenant-zero .label")[0].classList.add("activee");
+                                $("#tenant-one .label")[0].classList.remove("activee");
+                            } else {
+                                $("#tenant-one .label")[0].classList.add("activee");
+                                $("#tenant-zero .label")[0].classList.remove("activee");
+                            }
+                            if (response.invoiceEmail == 0) {
+                                $("#invoice-zero .label")[0].classList.add("activee");
+                                $("#invoice-one .label")[0].classList.remove("activee");
+                            } else {
+                                $("#invoice-one .label")[0].classList.add("activee");
+                                $("#invoice-zero .label")[0].classList.remove("activee");
+                            }
+                            if (response.taskEmail == 0) {
+                                $("#task-zero .label")[0].classList.add("activee");
+                                $("#task-one .label")[0].classList.remove("activee");
+                            } else {
+                                $("#task-one .label")[0].classList.add("activee");
+                                $("#task-zero .label")[0].classList.remove("activee");
+                            }
+                            //                     $(".activee").removeClass("activee");
+                            // $(this).addClass("activee");
+                            if (response.auth == 1) {
+                                $('#2f-Auth').prop('checked', true);
+                            } else {
+                                $('#2f-Auth').prop('checked', false);
+                            }
                             // $("#user-name").text(toTitleCase(response.userName))
-                        $("#header-user").text(toTitleCase(response.userName))
+                            $("#header-user").text(toTitleCase(response.userName))
                             if (response.image) {
                                 image_url = response.image
                                 image_key = response.imageKey
                             }
-                            if(response.image !== null && response.image !== " " ){
+                            if (response.image !== null && response.image !== " ") {
 
                                 $('#profile').css('background-image', 'url(' + response.image + ')').addClass('hasImage');
                             }
                             const names = { 2: "to Basic", 3: "to Pro", 4: "to Premium", 5: "to Basic", 6: "to Pro", 7: "to Premium" };
-                            
-                                if(4>=parseInt(response.planID)){
-                                    [2, 3, 4].forEach(function (item) {
-                                        if (item < parseInt(response.planID)) {
-                                    console.log(names[item])
-                                    $(`#${item} .card-btnn span`).empty();
-                                    $(`#${item} .card-btnn span`).append("Downgrade " + names[item] + " " + `<img src="../assets/images/arrow-yellow.svg" class="float-right mt-0 mr-2" alt="">`);
-                                    $(`#${item}`).removeClass("bg-primary");
-                                    $(`#${item}`).removeClass("text-white");
-                                } else if (item > parseInt(response.planID)) {
-                                    $(`#${item} .card-btnn span`).empty();
-                                    $(`#${item} .card-btnn span`).append("Upgrade " + names[item] + " " + `<img src="../assets/images/arrow-yellow.svg" class="float-right mt-0 mr-2" alt="">`);
-                                    $(`#${item}`).removeClass("bg-primary");
-                                    $(`#${item}`).removeClass("text-white");
-                                } else if(item == parseInt(response.planID)){
-                                    $(`#${item} .card-btnn span`).empty();
-                                    $(`#${item} .card-btnn span`).text("Selected");
-                                    [5,6,7].forEach(function(item){
-                                        $(`#${item} .card-btnn span`).empty();
-                                    $(`#${item} .card-btnn span`).append("Upgrade " + names[item] + " " + `<img src="../assets/images/arrow-yellow.svg" class="float-right mt-0 mr-2" alt="">`);
-                                    $(`#${item}`).removeClass("bg-primary");
-                                    $(`#${item}`).removeClass("text-white");
-                                    })
-                                    // console.log($(".free-card"))
-                                    $(".free-card").each(function(){
-                                        $(this).addClass("d-none");
-                                        
-                                    
-                                    })
-                                }
-                            });
-                                }
 
-                                else if(4<parseInt(response.planID)){
-                                    [5,6,7].forEach(function (item) {
-                                        if (item < parseInt(response.planID)) {
-                                    console.log(names[item])
-                                    $(`#${item} .card-btnn span`).empty();
-                                    $(`#${item} .card-btnn span`).append("Downgrade " + names[item] + " " + `<img src="../assets/images/arrow-yellow.svg" class="float-right mt-0 mr-2" alt="">`);
-                                    $(`#${item}`).removeClass("bg-primary");
-                                    $(`#${item}`).removeClass("text-white");
-                                } else if (item > parseInt(response.planID)) {
-                                    $(`#${item} .card-btnn span`).empty();
-                                    $(`#${item} .card-btnn span`).append("Upgrade " + names[item] + " " + `<img src="../assets/images/arrow-yellow.svg" class="float-right mt-0 mr-2" alt="">`);
-                                    $(`#${item}`).removeClass("bg-primary");
-                                    $(`#${item}`).removeClass("text-white");
-                                } else if(item == parseInt(response.planID)){
-                                    $(`#${item} .card-btnn span`).empty();
-                                    $(`#${item} .card-btnn span`).text("Selected");
-                                    [2,3,4].forEach(function(item){
+                            if (4 >= parseInt(response.planID)) {
+                                [2, 3, 4].forEach(function (item) {
+                                    if (item < parseInt(response.planID)) {
+                                        console.log(names[item])
                                         $(`#${item} .card-btnn span`).empty();
-                                    $(`#${item} .card-btnn span`).append("Upgrade " + names[item] + " " + `<img src="../assets/images/arrow-yellow.svg" class="float-right mt-0 mr-2" alt="">`);
-                                    $(`#${item}`).removeClass("bg-primary");
-                                    $(`#${item}`).removeClass("text-white");
-                                    })
-                                    $(".free-card").each(function(){
-                                        $(this).addClass("d-none");
-                                        
-                                    
-                                    })
-                                }
-                            });
-                                }
-                                else{
-                                    $(".free-card .card").each(function(){
-                                        $(this).addClass("bg-primary");
-                                        $(this).addClass("text-white");
-                                        $(this).find(".card-btnn span").empty();
-                                        $(this).find(".card-btnn span").text("Selected");
-                                    
-                                    })
-                                }
+                                        $(`#${item} .card-btnn span`).append("Downgrade " + names[item] + " " + `<img src="../assets/images/arrow-yellow.svg" class="float-right mt-0 mr-2" alt="">`);
+                                        $(`#${item}`).removeClass("bg-primary");
+                                        $(`#${item}`).removeClass("text-white");
+                                    } else if (item > parseInt(response.planID)) {
+                                        $(`#${item} .card-btnn span`).empty();
+                                        $(`#${item} .card-btnn span`).append("Upgrade " + names[item] + " " + `<img src="../assets/images/arrow-yellow.svg" class="float-right mt-0 mr-2" alt="">`);
+                                        $(`#${item}`).removeClass("bg-primary");
+                                        $(`#${item}`).removeClass("text-white");
+                                    } else if (item == parseInt(response.planID)) {
+                                        $(`#${item} .card-btnn span`).empty();
+                                        $(`#${item} .card-btnn span`).text("Selected");
+                                        [5, 6, 7].forEach(function (item) {
+                                            $(`#${item} .card-btnn span`).empty();
+                                            $(`#${item} .card-btnn span`).append("Upgrade " + names[item] + " " + `<img src="../assets/images/arrow-yellow.svg" class="float-right mt-0 mr-2" alt="">`);
+                                            $(`#${item}`).removeClass("bg-primary");
+                                            $(`#${item}`).removeClass("text-white");
+                                        })
+                                        // console.log($(".free-card"))
+                                        $(".free-card").each(function () {
+                                            $(this).addClass("d-none");
+
+
+                                        })
+                                    }
+                                });
+                            }
+
+                            else if (4 < parseInt(response.planID)) {
+                                [5, 6, 7].forEach(function (item) {
+                                    if (item < parseInt(response.planID)) {
+                                        console.log(names[item])
+                                        $(`#${item} .card-btnn span`).empty();
+                                        $(`#${item} .card-btnn span`).append("Downgrade " + names[item] + " " + `<img src="../assets/images/arrow-yellow.svg" class="float-right mt-0 mr-2" alt="">`);
+                                        $(`#${item}`).removeClass("bg-primary");
+                                        $(`#${item}`).removeClass("text-white");
+                                    } else if (item > parseInt(response.planID)) {
+                                        $(`#${item} .card-btnn span`).empty();
+                                        $(`#${item} .card-btnn span`).append("Upgrade " + names[item] + " " + `<img src="../assets/images/arrow-yellow.svg" class="float-right mt-0 mr-2" alt="">`);
+                                        $(`#${item}`).removeClass("bg-primary");
+                                        $(`#${item}`).removeClass("text-white");
+                                    } else if (item == parseInt(response.planID)) {
+                                        $(`#${item} .card-btnn span`).empty();
+                                        $(`#${item} .card-btnn span`).text("Selected");
+                                        [2, 3, 4].forEach(function (item) {
+                                            $(`#${item} .card-btnn span`).empty();
+                                            $(`#${item} .card-btnn span`).append("Upgrade " + names[item] + " " + `<img src="../assets/images/arrow-yellow.svg" class="float-right mt-0 mr-2" alt="">`);
+                                            $(`#${item}`).removeClass("bg-primary");
+                                            $(`#${item}`).removeClass("text-white");
+                                        })
+                                        $(".free-card").each(function () {
+                                            $(this).addClass("d-none");
+
+
+                                        })
+                                    }
+                                });
+                            }
+                            else {
+                                $(".free-card .card").each(function () {
+                                    $(this).addClass("bg-primary");
+                                    $(this).addClass("text-white");
+                                    $(this).find(".card-btnn span").empty();
+                                    $(this).find(".card-btnn span").text("Selected");
+
+                                })
+                            }
 
                             $(`#${response.planID}`).addClass("bg-primary");
                             $(`#${response.planID}`).addClass("text-white");
@@ -10024,17 +10241,17 @@ const togglePasswordcloseaccount1 = document.querySelector("#current_password11"
                         }
                     });
                     $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getVendorCategory',
-                type: 'GET',
-                contentType: false,
-                processData: false,
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                },
+                        url: 'https://backend.app.spaderent.com/api/spade/getVendorCategory',
+                        type: 'GET',
+                        contentType: false,
+                        processData: false,
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
 
-                success: function(response) {
+                        success: function (response) {
                             $("#add-item-container5").empty()
-                            response.data?.forEach(({ category,landLordId }, index) => {
+                            response.data?.forEach(({ category, landLordId }, index) => {
                                 counter++
 
                                 $("#add-item-container5").append(`<tr class="tr">
@@ -10051,13 +10268,13 @@ const togglePasswordcloseaccount1 = document.querySelector("#current_password11"
                                                                                 </button></td>
                                                                         </tr>`)
                             })
-                   
-                },
-                error: function(xhr, status, error) {
-                   
-                }
-            });
-            
+
+                        },
+                        error: function (xhr, status, error) {
+
+                        }
+                    });
+
                     $.ajax({
                         url: 'https://backend.app.spaderent.com/api/spade/invoiceCategory',
                         method: 'GET',
@@ -10107,70 +10324,70 @@ const togglePasswordcloseaccount1 = document.querySelector("#current_password11"
                             // console.log('Error occurred while fetching state and city data.');
                         }
                     });
-                    
-                    
+
+
                     $.ajax({
-    url: 'https://backend.app.spaderent.com/api/spade/getAllInvoices',
-    method: 'GET',
-    headers: {
-        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-    },
-    success: function (response) {
-        console.log(response?.data[0])
-        var tableBody = $("#table_body_unpaid_invoice");
+                        url: 'https://backend.app.spaderent.com/api/spade/getAllInvoices',
+                        method: 'GET',
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            console.log(response?.data[0])
+                            var tableBody = $("#table_body_unpaid_invoice");
 
-        // Clear the existing content in the table body
-        tableBody.empty();
+                            // Clear the existing content in the table body
+                            tableBody.empty();
 
-        invoiceData=response?.data[0].filter(function(invoice){
-            return invoice.status=="Unpaid"
-        })
-        if(invoiceData.length>=1){
-            $("#closeButton").prop("disabled",true)
-            $("#unpaid-text").removeClass("d-none")
-        }else{
-            $("#closeButton").prop("disabled",false)
-            $("#unpaid-text").addClass("d-none")
-        }
-        invoiceData.forEach(function (invoice) {
-            var row = $("<tr>");
+                            invoiceData = response?.data[0].filter(function (invoice) {
+                                return invoice.status == "Unpaid"
+                            })
+                            if (invoiceData.length >= 1) {
+                                $("#closeButton").prop("disabled", true)
+                                $("#unpaid-text").removeClass("d-none")
+                            } else {
+                                $("#closeButton").prop("disabled", false)
+                                $("#unpaid-text").addClass("d-none")
+                            }
+                            invoiceData.forEach(function (invoice) {
+                                var row = $("<tr>");
 
-            // Populate invoice properties into cells
-            var invoiceNumber = $("<td>").text(invoice.invoiceID);
-            var customerInfo = $("<td>").html(`
-                <p style="font-weight: 600;" class="mb-1 text-primary">${invoice.firstName+" "+invoice.lastName}</p>
+                                // Populate invoice properties into cells
+                                var invoiceNumber = $("<td>").text(invoice.invoiceID);
+                                var customerInfo = $("<td>").html(`
+                <p style="font-weight: 600;" class="mb-1 text-primary">${invoice.firstName + " " + invoice.lastName}</p>
                 <span>Phone: ${invoice.tPhone}</span>
             `);
-            var description = $("<td>").html(`
-                <p style="font-weight: 600;" class="mb-1">${(invoice.note==""?"N/A":invoice.note)}</p>
+                                var description = $("<td>").html(`
+                <p style="font-weight: 600;" class="mb-1">${(invoice.note == "" ? "N/A" : invoice.note)}</p>
                 <span>${invoice.invoiceType}</span>
             `);
-            var dates = $("<td>").html(`
+                                var dates = $("<td>").html(`
                 <p style="font-weight: 600;" class="mb-1">${invoice.startDate}</p>
                 <span>Due Date: ${invoice.dueDate}</span>
             `);
-            var address = $("<td>").html(`<b>${invoice.propertyName}</b>`);
-            var amount = $("<td>").html(`<p style="font-weight: 600;" class="mb-1">${invoice.totalAmount}</p>`);
-            var status = $("<td>").html(`
+                                var address = $("<td>").html(`<b>${invoice.propertyName}</b>`);
+                                var amount = $("<td>").html(`<p style="font-weight: 600;" class="mb-1">${invoice.totalAmount}</p>`);
+                                var status = $("<td>").html(`
                 <b style="color: red;"><i class="fi fi-rs-clock-three" style="color: red;"></i> ${invoice.status}</b>
             `);
-            
-            row.append(
-                invoiceNumber, customerInfo, description, dates, address, amount, status
-            );
 
-            // Append the row to the table body
-            tableBody.append(row);
-        });
-    },
-    error: function (xhr, status, error) {
-        console.log('Error occurred while fetching invoices.');
-        console.log(xhr);
-        console.log(error);
-    }
-});
+                                row.append(
+                                    invoiceNumber, customerInfo, description, dates, address, amount, status
+                                );
 
-                    
+                                // Append the row to the table body
+                                tableBody.append(row);
+                            });
+                        },
+                        error: function (xhr, status, error) {
+                            console.log('Error occurred while fetching invoices.');
+                            console.log(xhr);
+                            console.log(error);
+                        }
+                    });
+
+
                     $.ajax({
                         url: 'https://backend.app.spaderent.com/api/spade/checkNotify',
                         method: 'GET',
@@ -10213,7 +10430,7 @@ const togglePasswordcloseaccount1 = document.querySelector("#current_password11"
                             } else {
                                 $("input[name='example-radios1'][value='Disable']").prop("checked", true);
 
-                            } 
+                            }
                             // if (response.text == "yes") {
                             //     $("input[name='example-radios3'][value='Enable']").prop("checked", true);
 
@@ -10235,55 +10452,55 @@ const togglePasswordcloseaccount1 = document.querySelector("#current_password11"
                 }
                 getData()
                 $("#requestcloseaccount").on('hide.bs.modal', function () {
-                   
-            
-                        localStorage.clear();
-                        window.open('./login_module.html', "_self")
-       
 
-})
-                $("#close-request").on("click",function(){
+
+                    localStorage.clear();
+                    window.open('./login_module.html', "_self")
+
+
+                })
+                $("#close-request").on("click", function () {
 
                     $.ajax({
-    url: 'https://backend.app.spaderent.com/api/spade/userCheckTenantPaidInvoice',
-    method: 'GET',
-    headers: {
-        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-    },
-    data: {
-        "password": $("#current_password_acount_close").val(),
-    },
-    success: function (response) {
-        if(response.message=="Tenant has unpaid invoices"){
-            $("#info-text").text("Tenant has unpaid invoices")
-            $("#infoModal_account").modal("show");
-            setTimeout(function () {
-                $('#infoModal_account').modal('hide');
-            }, 2000);
-        }else if(response.message=="Tenant has paid invoices"){
-            $("#requestcloseaccount").modal("show")
-        }
-            
-    },
-    error: function (xhr, status, error) {
-        console.log('Error occurred while fetching invoices.');
-        if(xhr?.responseJSON?.message=="Password is incorrect"){
-            $("#info-text").text("Password is incorrect")
-            $("#infoModal_account").modal("show");
-            setTimeout(function () {
-                $('#infoModal_account').modal('hide');
-            }, 2000);
-        }else{
-            $("#myModal_warning_connection").modal("show");
-            setTimeout(function () {
-                $('#myModal_warning_connection').modal('hide');
-                // window.location = '../Landlord/login_module.html';
-            }, 2000);
-        }
-    }
-});
+                        url: 'https://backend.app.spaderent.com/api/spade/userCheckTenantPaidInvoice',
+                        method: 'GET',
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        data: {
+                            "password": $("#current_password_acount_close").val(),
+                        },
+                        success: function (response) {
+                            if (response.message == "Tenant has unpaid invoices") {
+                                $("#info-text").text("Tenant has unpaid invoices")
+                                $("#infoModal_account").modal("show");
+                                setTimeout(function () {
+                                    $('#infoModal_account').modal('hide');
+                                }, 2000);
+                            } else if (response.message == "Tenant has paid invoices") {
+                                $("#requestcloseaccount").modal("show")
+                            }
+
+                        },
+                        error: function (xhr, status, error) {
+                            console.log('Error occurred while fetching invoices.');
+                            if (xhr?.responseJSON?.message == "Password is incorrect") {
+                                $("#info-text").text("Password is incorrect")
+                                $("#infoModal_account").modal("show");
+                                setTimeout(function () {
+                                    $('#infoModal_account').modal('hide');
+                                }, 2000);
+                            } else {
+                                $("#myModal_warning_connection").modal("show");
+                                setTimeout(function () {
+                                    $('#myModal_warning_connection').modal('hide');
+                                    // window.location = '../Landlord/login_module.html';
+                                }, 2000);
+                            }
+                        }
+                    });
                 })
-                
+
                 var vendor; var categoryId; var vendorCategoryId
                 $('#add-item-container1,#add-item-container5').on('click', '#del-btn-complete', function () {
                     vendor = false
@@ -10363,7 +10580,7 @@ const togglePasswordcloseaccount1 = document.querySelector("#current_password11"
                         },
                         error: function (xhr, status, error) {
                             // window.alert('Error: ' + error);
-                                                       console.log(error);
+                            console.log(error);
                         }
                     });
                 })
@@ -10498,7 +10715,7 @@ const togglePasswordcloseaccount1 = document.querySelector("#current_password11"
                         data: JSON.stringify(data),
                         contentType: 'application/json',
                         success: function (response) {
-                    $('#save-categories').prop('disabled', false);
+                            $('#save-categories').prop('disabled', false);
 
                             // Handle the success response
                             $("#myModal_success p").text("Succesfully Updated!!!")
@@ -10510,7 +10727,7 @@ const togglePasswordcloseaccount1 = document.querySelector("#current_password11"
                             // Perform any additional actions or show success message
                         },
                         error: function (xhr, status, error) {
-                    $('#save-categories').prop('disabled', false);
+                            $('#save-categories').prop('disabled', false);
 
                             // Handle the error response
                             console.log('Error occurred:', error);
@@ -10549,7 +10766,7 @@ const togglePasswordcloseaccount1 = document.querySelector("#current_password11"
                     // Use the cardId as needed
                     console.log('Clicked card ID:', cardId);
                 });
-                
+
                 var file;
                 $(function () {
 
@@ -10634,24 +10851,24 @@ const togglePasswordcloseaccount1 = document.querySelector("#current_password11"
                         // console.log('Error occurred while fetching state and city data.');
                     }
                 });
-                function profileComplete(){
+                function profileComplete() {
                     $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
-                method: 'GET',
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                },
-                success: function (response) {
-                    console.log(response);
-                    var myprogress = `<div class="progress-bar bg-info" style="width: `+response.count+`%;">`+response.count+`%</div>`;
-                    $(".progress").html(myprogress)
-                },
-                error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
-                }
-            });
+                        url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
+                        method: 'GET',
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            console.log(response);
+                            var myprogress = `<div class="progress-bar bg-info" style="width: ` + response.count + `%;">` + response.count + `%</div>`;
+                            $(".progress").html(myprogress)
+                        },
+                        error: function (xhr, status, error) {
+                            console.log('Error occurred while fetching state and city data.');
+                            console.log(xhr);
+                            console.log(error);
+                        }
+                    });
                 }
                 profileComplete();
 
@@ -10693,8 +10910,8 @@ const togglePasswordcloseaccount1 = document.querySelector("#current_password11"
                                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                     },
                                     success: function (response) {
-                    $("#save_profile").prop("disabled", false)
-                                        
+                                        $("#save_profile").prop("disabled", false)
+
                                         $("#myModal_success p").text("Succesfully Updated!!!")
                                         profileComplete();
                                         $("#myModal_success").modal("show")
@@ -10809,12 +11026,12 @@ const togglePasswordcloseaccount1 = document.querySelector("#current_password11"
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
-                    $("#save").prop("disabled", false)
+                            $("#save").prop("disabled", false)
 
                             $("#id_password_new").val("")
                             $("#id_password2").val("")
                             $("#current_password_reset").val("")
-                            
+
                             $("#myModal_success").modal("show");
                             setTimeout(function () {
                                 $("#myModal_success").modal("hide");
@@ -10823,16 +11040,16 @@ const togglePasswordcloseaccount1 = document.querySelector("#current_password11"
                             }, 2000);
                         },
                         error: function (xhr, status, error) {
-                    $("#save").prop("disabled", false)
+                            $("#save").prop("disabled", false)
 
                             // Handle the error response from the API
-                            if(xhr.responseJSON.error=="Incorrect Password"){
+                            if (xhr.responseJSON.error == "Incorrect Password") {
                                 $("#myModal_incorrect").modal("show")
                                 setTimeout(function () {
-                                $("#myModal_incorrect").modal("hide");
-                                // localStorage.setItem("authtoken", response.token);
-                                // window.location = "../Landlord/index.html";
-                            }, 2000);
+                                    $("#myModal_incorrect").modal("hide");
+                                    // localStorage.setItem("authtoken", response.token);
+                                    // window.location = "../Landlord/index.html";
+                                }, 2000);
                             }
                             else if (xhr.status === 401) {
                                 $("#myModal_warning").modal("show")
@@ -10863,51 +11080,51 @@ const togglePasswordcloseaccount1 = document.querySelector("#current_password11"
 
 
             // Add active class to the current button (highlight it)
-            
-            var auth=0;
+
+            var auth = 0;
             $(document).ready(function () {
 
-                $('#2f-Auth').change(function(){
-        if(this.checked) {
-            auth=1
-        } else {
-           auth=0
-        }
-        $.ajax({
-            url:"https://backend.app.spaderent.com/api/spade/updateAuth",
-            type:"PUT",
-            headers: {
+                $('#2f-Auth').change(function () {
+                    if (this.checked) {
+                        auth = 1
+                    } else {
+                        auth = 0
+                    }
+                    $.ajax({
+                        url: "https://backend.app.spaderent.com/api/spade/updateAuth",
+                        type: "PUT",
+                        headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-            },
-            data:JSON.stringify({
-                "auth":auth
-            }),
-            contentType:"application/json",
-            success:function(response){
-                $("#text-success").text(response.message)
-                $("#succesModal_verify_auth").modal("show")
-                setTimeout(()=>{
-                    $("#succesModal_verify_auth").modal("hide")
-                },2000)
-            },
-            error:function(xhr,status,error){
-                if(xhr.responseJSON.message=="Error in updating 2 Factor Authentication"){
-                    $("#myModal_incorrect_auth").modal("show")
-                    setTimeout(()=>{
-                        $("#myModal_incorrect_auth").modal("hide")
-                    },2000)
-                }else{
-                    $("#myModal_warning_connection").modal("show")
-                    setTimeout(()=>{
-                        $("#myModal_warning_connection").modal("hide")
-                    },2000)
-                }
-                
-            }
-        })
-    });
-                
-    $('input[type="radio"]').click(function () {
+                        },
+                        data: JSON.stringify({
+                            "auth": auth
+                        }),
+                        contentType: "application/json",
+                        success: function (response) {
+                            $("#text-success").text(response.message)
+                            $("#succesModal_verify_auth").modal("show")
+                            setTimeout(() => {
+                                $("#succesModal_verify_auth").modal("hide")
+                            }, 2000)
+                        },
+                        error: function (xhr, status, error) {
+                            if (xhr.responseJSON.message == "Error in updating 2 Factor Authentication") {
+                                $("#myModal_incorrect_auth").modal("show")
+                                setTimeout(() => {
+                                    $("#myModal_incorrect_auth").modal("hide")
+                                }, 2000)
+                            } else {
+                                $("#myModal_warning_connection").modal("show")
+                                setTimeout(() => {
+                                    $("#myModal_warning_connection").modal("hide")
+                                }, 2000)
+                            }
+
+                        }
+                    })
+                });
+
+                $('input[type="radio"]').click(function () {
                     var inputValue = $(this).attr("value");
                     var targetBox = $("." + inputValue);
                     $(".desc").not(targetBox).hide();
@@ -10965,7 +11182,7 @@ const togglePasswordcloseaccount1 = document.querySelector("#current_password11"
             }
 
             $(document).ready(function () {
-               
+
                 $("#add-item1").on("click", () => {
                     counter++;
                     $("#add-item-container1").append(`<tr class="tr">
@@ -11088,132 +11305,127 @@ const togglePasswordcloseaccount1 = document.querySelector("#current_password11"
                 $('#form1').show();
             });
         </script>
-  <script>
-    function logout() {
-        $(document).ready(function () {
-            $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
-                type: 'PUT',
-                contentType: false,
-                processData: false,
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                },
-                success: function (response) {
-                    
-                    if(localStorage.getItem("htmlLayout")){
+        <script>
+            function logout() {
+                $(document).ready(function () {
+                    $.ajax({
+                        url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                        type: 'PUT',
+                        contentType: false,
+                        processData: false,
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
 
-                        const htmlLayoutValue = localStorage.getItem("htmlLayout");
-                        localStorage.clear();
-                        localStorage.setItem("htmlLayout", htmlLayoutValue);
-                    }else{
-                        localStorage.clear();
+                            if (localStorage.getItem("htmlLayout")) {
 
-                    }
-                    
-                    window.open('./login_module.html', "_self")
-                    
-                },
-                error: function (xhr, status, error) {
-                    console.log(error);
-                }
+                                const htmlLayoutValue = localStorage.getItem("htmlLayout");
+                                localStorage.clear();
+                                localStorage.setItem("htmlLayout", htmlLayoutValue);
+                            } else {
+                                localStorage.clear();
+
+                            }
+
+                            window.open('./login_module.html', "_self")
+
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(error);
+                        }
+                    });
+                });
+            }
+        </script>
+
+        <script>
+            var button = document.getElementById("tenant-invite-show");
+            var hiddenText = document.getElementById("tenant-invite-none");
+
+            var button1 = document.getElementById("invoice-show");
+            var hiddenText1 = document.getElementById("invoice-none");
+
+            var button2 = document.getElementById("taskupdate-show");
+            var hiddenText2 = document.getElementById("taskupdate-none");
+
+            var button3 = document.getElementById("userinvite-show");
+            var hiddenText3 = document.getElementById("userinvite-none");
+
+            button.addEventListener("click", function () {
+                hiddenText.style.display = "block";
+                hiddenText1.style.display = "none";
+                hiddenText2.style.display = "none";
+                hiddenText3.style.display = "none";
             });
-        });
-    }
-</script>
 
-<script>
-    var templateName;
-    var button = document.getElementById("");
-    var hiddenText = document.getElementByItenant-invite-showd("tenant-invite-none");
+            button1.addEventListener("click", function () {
+                hiddenText1.style.display = "block";
+                hiddenText.style.display = "none";
+                hiddenText2.style.display = "none";
+                hiddenText3.style.display = "none";
+            });
 
-    var button1 = document.getElementById("invoice-show");
-    var hiddenText1 = document.getElementById("invoice-none");
+            button2.addEventListener("click", function () {
+                hiddenText.style.display = "none";
+                hiddenText1.style.display = "none";
+                hiddenText2.style.display = "block";
+                hiddenText3.style.display = "none";
+            });
 
-    var button2 = document.getElementById("taskupdate-show");
-    var hiddenText2 = document.getElementById("taskupdate-none");
+            button3.addEventListener("click", function () {
+                hiddenText.style.display = "none";
+                hiddenText1.style.display = "none";
+                hiddenText2.style.display = "none";
+                hiddenText3.style.display = "block";
+            });
+        </script>
 
-    var button3 = document.getElementById("userinvite-show");
-    var hiddenText3 = document.getElementById("userinvite-none");
+        <script>
+            $(function () {
+                "use strict";
 
-    button.addEventListener("click", function () {
-        temaplateName = "tenantEmail";
-        // tenantEmail, invoiceEmail, taskEmail, userEmail
-        hiddenText.style.display = "block";
-        hiddenText1.style.display = "none";
-        hiddenText2.style.display = "none";
-        hiddenText3.style.display = "none";
-    });
+                $(".popup22 img").click(function () {
+                    var $src = $(this).attr("src");
+                    $(".showw").fadeIn();
+                    $(".img-show img").attr("src", $src);
+                });
 
-    button1.addEventListener("click", function () {
-        temaplateName = "invoiceEmail";
+                $("span, .overlay").click(function () {
+                    $(".showw").fadeOut();
+                });
 
-        hiddenText1.style.display = "block";
-        hiddenText.style.display = "none";
-        hiddenText2.style.display = "none";
-        hiddenText3.style.display = "none";
-    });
+            });
+        </script>
+        <script>
+            // Get references to the input fields and the save button
+            var firstNameInput = document.getElementById("firstName");
+            var lastNameInput = document.getElementById("lastName");
+            var phone1Input = document.getElementById("phone1");
+            var saveButton = document.getElementById("save_profile");
 
-    button2.addEventListener("click", function () {
-        temaplateName = "taskEmail";
-        hiddenText.style.display = "none";
-        hiddenText1.style.display = "none";
-        hiddenText2.style.display = "block";
-        hiddenText3.style.display = "none";
-    });
+            // Function to check and update button state
+            function updateButtonState() {
+                var firstName = firstNameInput.value;
+                var lastName = lastNameInput.value;
+                var phone1 = phone1Input.value;
 
-    button3.addEventListener("click", function () {
-        hiddenText.style.display = "none";
-        hiddenText1.style.display = "none";
-        hiddenText2.style.display = "none";
-        hiddenText3.style.display = "block";
-    });
-</script>
+                // Check if all three fields are empty
+                if (firstName === '' || lastName === '' || phone1 === '') {
+                    saveButton.disabled = true;
+                } else {
+                    saveButton.disabled = false;
+                }
+            }
 
-<script>
-    $(function () {
-    "use strict";
-    
-    $(".popup22 img").click(function () {
-        var $src = $(this).attr("src");
-        $(".showw").fadeIn();
-        $(".img-show img").attr("src", $src);
-    });
-    
-    $("span, .overlay").click(function () {
-        $(".showw").fadeOut();
-    });
-    
-});
-</script>
-<script>
-    // Get references to the input fields and the save button
-    var firstNameInput = document.getElementById("firstName");
-       var lastNameInput = document.getElementById("lastName");
-       var phone1Input = document.getElementById("phone1");
-       var saveButton = document.getElementById("save_profile");
+            // Bind the keyup event handler to the input fields
+            firstNameInput.addEventListener('keyup', updateButtonState);
+            lastNameInput.addEventListener('keyup', updateButtonState);
+            phone1Input.addEventListener('keyup', updateButtonState);
 
-       // Function to check and update button state
-       function updateButtonState() {
-           var firstName = firstNameInput.value;
-           var lastName = lastNameInput.value;
-           var phone1 = phone1Input.value;
-
-           // Check if all three fields are empty
-           if (firstName === '' || lastName === '' || phone1 === '') {
-               saveButton.disabled = true;
-           } else {
-               saveButton.disabled = false;
-           }
-       }
-
-       // Bind the keyup event handler to the input fields
-       firstNameInput.addEventListener('keyup', updateButtonState);
-       lastNameInput.addEventListener('keyup', updateButtonState);
-       phone1Input.addEventListener('keyup', updateButtonState);
-
-       // Call the function on page load to initialize button state
-    //    updateButtonState();
-</script>
+            // Call the function on page load to initialize button state
+            //    updateButtonState();
+        </script>
 </body>
+
 </html>
