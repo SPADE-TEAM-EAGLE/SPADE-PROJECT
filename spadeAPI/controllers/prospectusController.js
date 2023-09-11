@@ -11,7 +11,8 @@ const {
     deleteQuery,
     addProspectusQuery,
     getProspectusByIdQuery,
-    UpdateProspectusQuery
+    UpdateProspectusQuery,
+    UpdateProspectusStatusQuery
 } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
 const { deleteImageFromS3 } = require("../helper/S3Bucket");
@@ -62,7 +63,7 @@ exports.addprospectus = async (req, res) => {
             currentDate
         ]);
         if (prospectusResult.affectedRows === 0) {
-            return res.status(400).send("Error1");
+            return res.status(400).send("No data found");
         }
         //}
 
@@ -180,7 +181,6 @@ exports.updateProspectus = async (req, res) => {
         unitInfo,
         prospectDetail,
         sourceCampaign,
-        moveDate,
         rentAmount,
         prospectusStatus,
         prospectusid
@@ -204,7 +204,7 @@ exports.updateProspectus = async (req, res) => {
             prospectusid
         ]);
         if (prospectusResult.affectedRows === 0) {
-            return res.status(400).send("Error1");
+            return res.status(400).send("No data found");
         }
         res.status(200).json({
             message: " prospectus updated successful",
@@ -219,3 +219,37 @@ exports.updateProspectus = async (req, res) => {
 };
 
 //  #############################  Update prospectus END ##################################################
+
+
+
+
+//  #############################  Update prospectus Status Start ##################################################
+exports.updateProspectusStatus = async (req, res) => {
+    const {
+        prospectusStatus,
+        prospectusid
+    } = req.body;
+    const currentDate = new Date(); 
+    try {
+
+        const prospectusResult = await queryRunner(UpdateProspectusStatusQuery, [
+            prospectusStatus,
+            currentDate,
+            prospectusid
+        ]);
+        if (prospectusResult.affectedRows === 0) {
+            return res.status(400).send("No data found");
+        }
+        res.status(200).json({
+            message: " prospectus status updated successful",
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            message: "Error occur in prospectus status",
+            error : error.message
+        });
+    }
+};
+
+//  #############################  Update prospectus Status END ##################################################
