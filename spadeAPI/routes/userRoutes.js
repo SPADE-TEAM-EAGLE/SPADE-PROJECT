@@ -212,5 +212,5 @@ router.get("/unpaidAmountTenant", verifyTokenTenant, tenantPortalController.unpa
 router.put("/emailtemplates", verifyToken, settingController.emailtemplates);
 router.post("/addprospectus", verifyToken, prospectus.addprospectus);
 // router.post("/addprospectus", prospectus.addprospectus);
-// router.get("/getProspectus", prospectus.getProspectus);
-router.get("/getProspectusByID", prospectus.getProspectusByID);
+router.get("/getProspectus", verifyToken, prospectus.getProspectus);
+router.get("/getProspectusByID", verifyToken, prospectus.getProspectusByID);

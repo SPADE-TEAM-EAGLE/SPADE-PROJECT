@@ -79,42 +79,35 @@ exports.addprospectus = async (req, res) => {
 
 //  #############################  GET prospectus START ##################################################
 exports.getProspectus = async (req, res) => {
-    // const { prospectusId } = req.body;
     const { userId } = req.user;
-
+    // const { userId } = req.body;
     try {
-
-        const getProspectusResult = await queryRunner(selectQuery("prospectus", "landlordId"), [prospectusId]);
+        const getProspectusResult = await queryRunner(selectQuery("prospectus", "landlordId"), [userId]);
         if (getProspectusResult[0].length === 0) {
-            return res.status(404).json({  
+            return res.status(404).json({
                 message: "No Prospectus Data Found",
-                data: null,  
+                data: null,
             });
         }
-
         const prospectusDataArray = [];
         for (let i = 0; i < getProspectusResult[0].length; i++) {
             const propertyInfo = getProspectusResult[0][i].propertyInfo;
             const unitInfo = getProspectusResult[0][i].unitInfo;
-console.log(propertyInfo + " " + unitInfo);
-            const getPropertyResult = await queryRunner(selectQuery("property", "id"), [propertyInfo]);
-            const property = getPropertyResult[0].length > 0 ? getPropertyResult[0][0] : null; 
+            // console.log(propertyInfo + " " + unitInfo);
+            const firstProspectusResult = getProspectusResult[0][i];
 
-            const getPropertyunitResult = await queryRunner(selectQuery("propertyunits", "id"), [unitInfo]);
-            const propertyunit = getPropertyunitResult[0].length > 0 ? getPropertyunitResult[0][0] : null;  
-
+            const getPropertyResult = await queryRunner(getProspectusByIdQuery, [propertyInfo, unitInfo]);
+            const property = getPropertyResult[0].length > 0 ? getPropertyResult[0][0] : [];
             const prospectusData = {
-                ...getProspectusResult[0][i],
-                property,
-                unit: propertyunit,
+                prospectus: firstProspectusResult,
+                property: property,
             };
+            prospectusDataArray.push(prospectusData);
 
-            prospectusDataArray.push(prospectusData); 
         }
-
         res.status(200).json({
             message: "Get prospectus",
-            data: prospectusDataArray,  
+            data: prospectusDataArray,
         });
 
     } catch (error) {
@@ -132,10 +125,9 @@ console.log(propertyInfo + " " + unitInfo);
 exports.getProspectusByID = async (req, res) => {
     const { prospectusId } = req.body;
     try {
-        // Fetch prospectus data
+
         const getProspectusResult = await queryRunner(selectQuery("prospectus", "id"), [prospectusId]);
 
-        // Check if prospectus data was found
         if (getProspectusResult[0].length === 0) {
             return res.status(404).json({
                 message: "No Prospectus Data Found",
@@ -144,23 +136,20 @@ exports.getProspectusByID = async (req, res) => {
         }
 
         const prospectusDataArray = [];
-        
-        // Assuming you want to process only the first result
+
         const firstProspectusResult = getProspectusResult[0][0];
         const propertyInfo = firstProspectusResult.propertyInfo;
         const unitInfo = firstProspectusResult.unitInfo;
-        
-        // Fetch property and related data
+
         const getPropertyResult = await queryRunner(getProspectusByIdQuery, [propertyInfo, unitInfo]);
 
-        // Create a prospectus object with property and prospectus data
         const prospectusData = {
             prospectus: firstProspectusResult,
             property: getPropertyResult[0][0],
         };
 
         prospectusDataArray.push(prospectusData);
-        
+
         res.status(200).json({
             message: "Get prospectus",
             data: prospectusDataArray,
@@ -174,5 +163,3 @@ exports.getProspectusByID = async (req, res) => {
     }
 };
 //  #############################  GET prospectus By ID END ##################################################
-
-//  #############################  GET prospectus END ##################################################
