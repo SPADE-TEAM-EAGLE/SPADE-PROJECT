@@ -10,7 +10,8 @@ const {
     selectQuery,
     deleteQuery,
     addProspectusQuery,
-    getProspectusByIdQuery
+    getProspectusByIdQuery,
+    UpdateProspectusQuery
 } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
 const { deleteImageFromS3 } = require("../helper/S3Bucket");
@@ -163,3 +164,58 @@ exports.getProspectusByID = async (req, res) => {
     }
 };
 //  #############################  GET prospectus By ID END ##################################################
+
+
+
+
+//  #############################  Update prospectus Start ##################################################
+exports.updateProspectus = async (req, res) => {
+    const {
+        firstName,
+        middleName,
+        lastName,
+        phoneNumber,
+        email,
+        propertyInfo,
+        unitInfo,
+        prospectDetail,
+        sourceCampaign,
+        moveDate,
+        rentAmount,
+        prospectusStatus,
+        prospectusid
+    } = req.body;
+    const currentDate = new Date(); 
+    try {
+
+        const prospectusResult = await queryRunner(UpdateProspectusQuery, [
+            firstName,
+            middleName,
+            lastName,
+            phoneNumber,
+            email,
+            propertyInfo,
+            unitInfo,
+            prospectDetail,
+            sourceCampaign,
+            rentAmount,
+            prospectusStatus,
+            currentDate,
+            prospectusid
+        ]);
+        if (prospectusResult.affectedRows === 0) {
+            return res.status(400).send("Error1");
+        }
+        res.status(200).json({
+            message: " prospectus updated successful",
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            message: "Error occur in prospectus",
+            error : error.message
+        });
+    }
+};
+
+//  #############################  Update prospectus END ##################################################

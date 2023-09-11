@@ -214,3 +214,5 @@ router.post("/addprospectus", verifyToken, prospectus.addprospectus);
 // router.post("/addprospectus", prospectus.addprospectus);
 router.get("/getProspectus", verifyToken, prospectus.getProspectus);
 router.get("/getProspectusByID", verifyToken, prospectus.getProspectusByID);
+// router.put("/updateProspectus", verifyToken, prospectus.getProspectusByID);
+router.put("/updateProspectus", prospectus.updateProspectus);
