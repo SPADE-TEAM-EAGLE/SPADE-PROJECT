@@ -210,7 +210,7 @@ router.get("/ProfileCompleteTenant", verifyTokenTenant, tenantPortalController.P
 router.get("/unpaidAmountTenant", verifyTokenTenant, tenantPortalController.unpaidAmountTenant);
 // router.get("/unpaidAmountTenant", tenantPortalController.unpaidAmountTenant);
 router.put("/emailtemplates", verifyToken, settingController.emailtemplates);
-// router.post("/addprospectus", verifyToken, prospectus.addprospectus);
-router.post("/addprospectus", prospectus.addprospectus);
+router.post("/addprospectus", verifyToken, prospectus.addprospectus);
+// router.post("/addprospectus", prospectus.addprospectus);
 // router.get("/getProspectus", prospectus.getProspectus);
 router.get("/getProspectusByID", prospectus.getProspectusByID);

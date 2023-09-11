@@ -31,8 +31,8 @@ exports.addprospectus = async (req, res) => {
         rentAmount,
         prospectusStatus,
     } = req.body;
-    // const { userId } = req.user;
-    const { userId } = req.body;
+    const { userId } = req.user;
+    // const { userId } = req.body;
     const currentDate = new Date();
     // console.log(userId)
     try {
@@ -78,52 +78,57 @@ exports.addprospectus = async (req, res) => {
 
 
 //  #############################  GET prospectus START ##################################################
-// exports.getProspectus = async (req, res) => {
-//     const { prospectusId } = req.body;
+exports.getProspectus = async (req, res) => {
+    // const { prospectusId } = req.body;
+    const { userId } = req.user;
 
-//     try {
+    try {
 
-//         const getProspectusResult = await queryRunner(selectQuery("prospectus", "id"), [prospectusId]);
-//         if (getProspectusResult[0].length === 0) {
-//             return res.status(404).json({  
-//                 message: "No Prospectus Data Found",
-//                 data: null,  
-//             });
-//         }
+        const getProspectusResult = await queryRunner(selectQuery("prospectus", "landlordId"), [prospectusId]);
+        if (getProspectusResult[0].length === 0) {
+            return res.status(404).json({  
+                message: "No Prospectus Data Found",
+                data: null,  
+            });
+        }
 
-//         const prospectusDataArray = [];
-//         for (let i = 0; i < getProspectusResult[0].length; i++) {
-//             const propertyInfo = getProspectusResult[0][i].propertyInfo;
-//             const unitInfo = getProspectusResult[0][i].unitInfo;
-// console.log(propertyInfo + " " + unitInfo);
-//             const getPropertyResult = await queryRunner(selectQuery("property", "id"), [propertyInfo]);
-//             const property = getPropertyResult[0].length > 0 ? getPropertyResult[0][0] : null; 
+        const prospectusDataArray = [];
+        for (let i = 0; i < getProspectusResult[0].length; i++) {
+            const propertyInfo = getProspectusResult[0][i].propertyInfo;
+            const unitInfo = getProspectusResult[0][i].unitInfo;
+console.log(propertyInfo + " " + unitInfo);
+            const getPropertyResult = await queryRunner(selectQuery("property", "id"), [propertyInfo]);
+            const property = getPropertyResult[0].length > 0 ? getPropertyResult[0][0] : null; 
 
-//             const getPropertyunitResult = await queryRunner(selectQuery("propertyunits", "id"), [unitInfo]);
-//             const propertyunit = getPropertyunitResult[0].length > 0 ? getPropertyunitResult[0][0] : null;  
+            const getPropertyunitResult = await queryRunner(selectQuery("propertyunits", "id"), [unitInfo]);
+            const propertyunit = getPropertyunitResult[0].length > 0 ? getPropertyunitResult[0][0] : null;  
 
-//             const prospectusData = {
-//                 ...getProspectusResult[0][i],
-//                 property,
-//                 unit: propertyunit,
-//             };
+            const prospectusData = {
+                ...getProspectusResult[0][i],
+                property,
+                unit: propertyunit,
+            };
 
-//             prospectusDataArray.push(prospectusData); 
-//         }
+            prospectusDataArray.push(prospectusData); 
+        }
 
-//         res.status(200).json({
-//             message: "Get prospectus",
-//             data: prospectusDataArray,  
-//         });
+        res.status(200).json({
+            message: "Get prospectus",
+            data: prospectusDataArray,  
+        });
 
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).json({
-//             message: "Internal Server Error",
-//             error: error.message,
-//         });
-//     }
-// };
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            message: "Internal Server Error",
+            error: error.message,
+        });
+    }
+};
+//  #############################  GET prospectus END ##################################################
+
+
+//  #############################  GET prospectus By ID START ##################################################
 exports.getProspectusByID = async (req, res) => {
     const { prospectusId } = req.body;
     try {
@@ -168,5 +173,6 @@ exports.getProspectusByID = async (req, res) => {
         });
     }
 };
+//  #############################  GET prospectus By ID END ##################################################
 
 //  #############################  GET prospectus END ##################################################
