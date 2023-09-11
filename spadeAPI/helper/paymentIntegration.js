@@ -148,9 +148,9 @@ const requestData = {
   // clientRequestId: "561ccf70-336b-11ee-a309-4f00ef0ed1ad",
   merchantId: config.merchantId,
   merchantSiteId: config.merchantSiteId,
-  userTokenId: "123",
+  userTokenId: "12345",
   clientRequestId: config.clientRequestId,
-  firstName: "John",
+  firstName: "Michael",
   lastName: "Smith",
   address: "4310 Lemon Tree Ln, Houston, TX 77088",
   state: "TX",
@@ -163,7 +163,7 @@ const requestData = {
   // dateOfBirth: "01-01998",
   county:"USA",
   timeStamp: timestamp,
-  checksum: sha256(config.merchantId+config.merchantSiteId+"123444"+config.clientRequestId+"John"+ "Smith"+"4310 Lemon Tree Ln, Houston, TX 77088"+"TX"+"Austin"+"77088"+"US"+"2818765489"+"en_US"+"john.smith@test.com"+"USA"+timestamp+config.Secret_Key),
+  checksum: sha256(config.merchantId+config.merchantSiteId+"12345"+config.clientRequestId+"Michael"+ "Smith"+"4310 Lemon Tree Ln, Houston, TX 77088"+"TX"+"Austin"+"77088"+"US"+"2818765489"+"en_US"+"john.smith@test.com"+"USA"+timestamp+config.Secret_Key),
   // checksum: sha256("6400701569295268447"+"244298"+"123"+"561ccf70-336b-11ee-a309-4f00ef0ed1ad"+"John"+ "Smith"+"US"+"john.smith@test.com"+timestamp+"xp8GrYWC6n9wHbxWuDwRPtAPICRLbBvvY2DuLYVRu8v5ip4GHPNymd0MA8KsEpbU"),
   // checksumConcatenation: config.merchantId+config.merchantSiteId+"123"+config.clientRequestId+"John"+ "Smith"+timestamp+config.Secret_Key 
 };

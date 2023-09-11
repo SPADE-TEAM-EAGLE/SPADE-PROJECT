@@ -999,3 +999,4 @@ exports.updateAllStatusVacantQuery = `UPDATE propertyunits, tenants SET property
 exports.unpaidAmountQuery = `SELECT SUM(totalAmount) AS totalAmount FROM spade_Rent.invoice WHERE tenantID = ? AND status = 'Unpaid'`;
 exports.updateEmailTemplates = "UPDATE users SET tenantEmail = ? , invoiceEmail = ?, taskEmail = ?, userEmail = ? WHERE id = ? ";
 exports.addProspectusQuery = "INSERT INTO prospectus (landlordId,firstName,middleName,lastName,phoneNumber,email,propertyInfo,unitInfo,prospectDetail,sourceCampaign,moveDate,rentAmount,prospectusStatus,createdDate) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+exports.getProspectusByIdQuery = `SELECT p.propertyName, p.address, p.city, p.state, p.zipCode, pu.unitNumber, pu.Area, pu.unitDetails, pu.status FROM property as p join propertyunits as pu on pu.propertyID = p.id where p.id = ? and pu.id = ?`;

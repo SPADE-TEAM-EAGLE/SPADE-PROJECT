@@ -9,7 +9,8 @@ const { serialize } = require("cookie");
 const {
     selectQuery,
     deleteQuery,
-    addProspectusQuery
+    addProspectusQuery,
+    getProspectusByIdQuery
 } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
 const { deleteImageFromS3 } = require("../helper/S3Bucket");
@@ -77,26 +78,95 @@ exports.addprospectus = async (req, res) => {
 
 
 //  #############################  GET prospectus START ##################################################
-exports.getProspectus = async (req, res) => {
+// exports.getProspectus = async (req, res) => {
+//     const { prospectusId } = req.body;
 
-    const { userId } = req.body;
+//     try {
+
+//         const getProspectusResult = await queryRunner(selectQuery("prospectus", "id"), [prospectusId]);
+//         if (getProspectusResult[0].length === 0) {
+//             return res.status(404).json({  
+//                 message: "No Prospectus Data Found",
+//                 data: null,  
+//             });
+//         }
+
+//         const prospectusDataArray = [];
+//         for (let i = 0; i < getProspectusResult[0].length; i++) {
+//             const propertyInfo = getProspectusResult[0][i].propertyInfo;
+//             const unitInfo = getProspectusResult[0][i].unitInfo;
+// console.log(propertyInfo + " " + unitInfo);
+//             const getPropertyResult = await queryRunner(selectQuery("property", "id"), [propertyInfo]);
+//             const property = getPropertyResult[0].length > 0 ? getPropertyResult[0][0] : null; 
+
+//             const getPropertyunitResult = await queryRunner(selectQuery("propertyunits", "id"), [unitInfo]);
+//             const propertyunit = getPropertyunitResult[0].length > 0 ? getPropertyunitResult[0][0] : null;  
+
+//             const prospectusData = {
+//                 ...getProspectusResult[0][i],
+//                 property,
+//                 unit: propertyunit,
+//             };
+
+//             prospectusDataArray.push(prospectusData); 
+//         }
+
+//         res.status(200).json({
+//             message: "Get prospectus",
+//             data: prospectusDataArray,  
+//         });
+
+//     } catch (error) {
+//         console.error(error);
+//         res.status(500).json({
+//             message: "Internal Server Error",
+//             error: error.message,
+//         });
+//     }
+// };
+exports.getProspectusByID = async (req, res) => {
+    const { prospectusId } = req.body;
     try {
-    
-        const getProspectusResult = await queryRunner(selectQuery("prospectus", "landlordId"), [userId]);
-        if (getProspectusResult[0].length == 0) {
-            return res.status(200).json({
-                message: " No Prospectus Data Found",
+        // Fetch prospectus data
+        const getProspectusResult = await queryRunner(selectQuery("prospectus", "id"), [prospectusId]);
+
+        // Check if prospectus data was found
+        if (getProspectusResult[0].length === 0) {
+            return res.status(404).json({
+                message: "No Prospectus Data Found",
+                data: null,
             });
         }
-        //}
 
+        const prospectusDataArray = [];
+        
+        // Assuming you want to process only the first result
+        const firstProspectusResult = getProspectusResult[0][0];
+        const propertyInfo = firstProspectusResult.propertyInfo;
+        const unitInfo = firstProspectusResult.unitInfo;
+        
+        // Fetch property and related data
+        const getPropertyResult = await queryRunner(getProspectusByIdQuery, [propertyInfo, unitInfo]);
+
+        // Create a prospectus object with property and prospectus data
+        const prospectusData = {
+            prospectus: firstProspectusResult,
+            property: getPropertyResult[0][0],
+        };
+
+        prospectusDataArray.push(prospectusData);
+        
         res.status(200).json({
-            message: " Get prospectus",
-            data : getProspectusResult[0]
+            message: "Get prospectus",
+            data: prospectusDataArray,
         });
     } catch (error) {
-        console.log(error);
-        res.status(400).send(error);
+        console.error(error);
+        res.status(500).json({
+            message: "Internal Server Error",
+            error: error.message,
+        });
     }
 };
+
 //  #############################  GET prospectus END ##################################################
