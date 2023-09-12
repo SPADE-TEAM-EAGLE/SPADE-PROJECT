@@ -756,6 +756,41 @@
 </head>
 
 <body class="app sidebar-mini ltr light-mode">
+    <div class="modal fade" id="myModal_success" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
+                        <!-- <div class="card-header border-0 pt-3">
+                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                            </button>
+                        </div> -->
+                        <div class="card-body text-center">
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
+                                    viewBox="0 0 24 24">
+                                    <path fill="#13bfa6"
+                                        d="M10.3125,16.09375a.99676.99676,0,0,1-.707-.293L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328l-6.1875,6.1875A.99676.99676,0,0,1,10.3125,16.09375Z"
+                                        opacity=".99" />
+                                    <path fill="#71d8c9"
+                                        d="M12,2A10,10,0,1,0,22,12,10.01146,10.01146,0,0,0,12,2Zm5.207,7.61328-6.1875,6.1875a.99963.99963,0,0,1-1.41406,0L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328Z" />
+                                </svg></span>
+                            <h4 class="h4 mb-0 mt-3 fw-bold">Success</h4>
+                            <p class="card-text text-dark">Successfully Added</p>
+                        </div>
+                        <!-- <div class="card-footer text-center border-0 pt-0">
+                            <div class="row">
+                                <div class="text-center">
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
@@ -858,15 +893,26 @@
                                             placeholder="Enter Prospects Details" required>
                                         <span class="text-danger d-none">Prospects Details is required!</span>
                                     </div>
-                                    <div class="col-md-12 col-lg-12 col-xl-12">
+                                    <div class="col-md-8 col-lg-8 col-xl-8">
                                         <label for="inputState" class="form-label fw-bold">Source Campaign <span
                                                 class="text-danger">*</span></label>
                                         <select id="sourceCampaign" class="form-select form">
                                             <option selected>Choose...</option>
+                                            <option value="system">System</option>
                                         </select>
+
                                         <span class="text-danger d-none">Source Campaign is required!</span>
                                     </div>
+                                    <div class="col-md-4 col-lg-4 col-xl-4">
+                                        <label for="status" class="form-label fw-bold">Status <span
+                                                class="text-danger">*</span></label>
+                                        <select id="status" class="form-select form">
+                                            <option selected>Choose...</option>
+                                            <option value="system">System</option>
+                                        </select>
 
+                                        <span class="text-danger d-none">Status is required!</span>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -922,7 +968,7 @@
                     <a href="javascript:void(0)" class="btn text-light button d-none" style='background-color:#1467B0;'
                         id='next'>Submit</a>
                     <button class="btn text-light button" style='background-color:#1467B0;'
-                        id='next-add-property'>Next</button>
+                        id='next-add-prospect'>Next</button>
 
                 </div>
             </div>
@@ -1696,38 +1742,55 @@
                                     </div>
                                     <div class="export-button-hide" id="export-button-hide" style="display: none;">
                                         <div class="d-flex">
-                                            <button type="button" class="btn btn-primary mx-2" onclick="exportTableToCSV('person.csv')" id="download_csv_reports" style="height: fit-content;"><strong>Export as CSV</strong></button>
-                                            <button type="button" class="btn btn-primary mx-2" id="download_pdf_reports" style="height: fit-content;"><strong>Export as PDF</strong></button>
+                                            <button type="button" class="btn btn-primary mx-2"
+                                                onclick="exportTableToCSV('person.csv')" id="download_csv_reports"
+                                                style="height: fit-content;"><strong>Export as CSV</strong></button>
+                                            <button type="button" class="btn btn-primary mx-2" id="download_pdf_reports"
+                                                style="height: fit-content;"><strong>Export as PDF</strong></button>
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-outline-default text-dark mx-2 py-1" id="filter_btn" data-bs-toggle="dropdown" style="border-radius: 5px; height: fit-content;"><i class="typcn typcn-filter me-2 fs-16"></i><strong>Filter</strong></button>
+                                                <button type="button"
+                                                    class="btn btn-outline-default text-dark mx-2 py-1" id="filter_btn"
+                                                    data-bs-toggle="dropdown"
+                                                    style="border-radius: 5px; height: fit-content;"><i
+                                                        class="typcn typcn-filter me-2 fs-16"></i><strong>Filter</strong></button>
                                                 <ul class="dropdown-menu" role="menu">
-                                                    <li><a href="javascript:void(0)"><strong class="text-dark">Filter by:</strong></a>
+                                                    <li><a href="javascript:void(0)"><strong class="text-dark">Filter
+                                                                by:</strong></a>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">Campaign</a>
+                                                    <li class="d-flex justify-content-between"><a
+                                                            href="javascript:void(0)" class="text-dark">Campaign</a>
                                                         <div class="form-check m-0">
-                                                            <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="alphabets" value="option1">
+                                                            <input class="form-check-input mt-2" type="radio"
+                                                                name="exampleRadios" id="alphabets" value="option1">
                                                         </div>
                                                     </li>
-    
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">Year</a>
+
+                                                    <li class="d-flex justify-content-between"><a
+                                                            href="javascript:void(0)" class="text-dark">Year</a>
                                                         <div class="form-check m-0">
-                                                            <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="ascending" value="option1">
+                                                            <input class="form-check-input mt-2" type="radio"
+                                                                name="exampleRadios" id="ascending" value="option1">
                                                         </div>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">Month</a>
+                                                    <li class="d-flex justify-content-between"><a
+                                                            href="javascript:void(0)" class="text-dark">Month</a>
                                                         <div class="form-check m-0">
-                                                            <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="descending" value="option1">
+                                                            <input class="form-check-input mt-2" type="radio"
+                                                                name="exampleRadios" id="descending" value="option1">
                                                         </div>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">Month & Year</a>
+                                                    <li class="d-flex justify-content-between"><a
+                                                            href="javascript:void(0)" class="text-dark">Month & Year</a>
                                                         <div class="form-check m-0">
-                                                            <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="descending" value="option1">
+                                                            <input class="form-check-input mt-2" type="radio"
+                                                                name="exampleRadios" id="descending" value="option1">
                                                         </div>
                                                     </li>
                                                 </ul>
                                             </div>
                                         </div>
-                                    </div>
+                                                  
+                                    </div>
                                     <div id="option-pipline">
                                         <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
                                         <ul class="dropdown-menu dropdown-menu-top">
@@ -1749,7 +1812,8 @@
                                             <div class="tabs-menu tabs-menu-border">
                                                 <!-- Tabs -->
                                                 <ul class="nav panel-tabs">
-                                                    <li><a href="#tab29" class="active" id="tab299" data-bs-toggle="tab"><i
+                                                    <li><a href="#tab29" class="active" id="tab299"
+                                                            data-bs-toggle="tab"><i
                                                                 class="fi fi-rs-dashboard me-2"></i>Overview</a></li>
                                                     <!-- <li><a href="#tab30" data-bs-toggle="tab"><i
                                                                 class="fi fi-rs-paper-plane me-2"></i>Active</a></li> -->
@@ -2122,19 +2186,25 @@
                                                                 <div class="card-body">
                                                                     <div class="container">
                                                                         <div class="row">
-                                                                            <div class="col-6" style="text-align: center;">
+                                                                            <div class="col-6"
+                                                                                style="text-align: center;">
                                                                                 <div class="column bg-transparent mb-4 disqualified"
                                                                                     style="min-height: 70px;border-radius: 8px;border: 2px dotted red;">
-                                                                                    
+
                                                                                 </div>
-                                                                                <span class="text-dark fw-bold"><i class="fi fi-rs-circle-xmark text-dark"></i> Disqualified prospects</span>
+                                                                                <span class="text-dark fw-bold"><i
+                                                                                        class="fi fi-rs-circle-xmark text-dark"></i>
+                                                                                    Disqualified prospects</span>
                                                                             </div>
-                                                                            <div class="col-6" style="text-align: center;">
+                                                                            <div class="col-6"
+                                                                                style="text-align: center;">
                                                                                 <div class="column bg-transparent mb-4 qualified"
                                                                                     style="min-height: 70px;border-radius: 8px;border: 2px dotted green;">
-                                                                                    
+
                                                                                 </div>
-                                                                                <span class="text-dark fw-bold"><i class="fi fi-rs-star text-dark"></i> Qualified prospects</span>
+                                                                                <span class="text-dark fw-bold"><i
+                                                                                        class="fi fi-rs-star text-dark"></i>
+                                                                                    Qualified prospects</span>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -3743,7 +3813,7 @@
 
     <!-- INPUT MASK JS-->
     <script src="../assets/plugins/input-mask/jquery.mask.min.js"></script>
-
+    <script src="../assets/js/accordian.js"></script>
     <!-- CHARTJS JS -->
     <script src="../assets/plugins/chart/Chart.bundle.js"></script>
     <script src="../assets/plugins/chart/utils.js"></script>
@@ -3759,31 +3829,31 @@
     <script>
         $(function () {
             $(".column").sortable({
-    connectWith: ".column",
-    handle: ".portlet-header",
-    cancel: ".portlet-toggle",
-    placeholder: "portlet-placeholder",
-    start: function (event, ui) {
-        // Hide elements with the class "mytext" when dragging starts
-        $("#status-bar").css("display", "block");
-    },
-    receive: function (event, ui) {
-        // Check the class of the receiving element
-        if ($(this).hasClass("qualified")) {
-            alert(1); // Show alert for qualified div
-        } else if ($(this).hasClass("disqualified")) {
-            alert(2); // Show alert for disqualified div
-        }
+                connectWith: ".column",
+                handle: ".portlet-header",
+                cancel: ".portlet-toggle",
+                placeholder: "portlet-placeholder",
+                start: function (event, ui) {
+                    // Hide elements with the class "mytext" when dragging starts
+                    $("#status-bar").css("display", "block");
+                },
+                receive: function (event, ui) {
+                    // Check the class of the receiving element
+                    if ($(this).hasClass("qualified")) {
+                        alert(1); // Show alert for qualified div
+                    } else if ($(this).hasClass("disqualified")) {
+                        alert(2); // Show alert for disqualified div
+                    }
 
-        // Add a class to the dropped portlet
-        ui.item.addClass("dropped-portlet");
+                    // Add a class to the dropped portlet
+                    ui.item.addClass("dropped-portlet");
 
-        // Hide the dropped portlet after 2 seconds
-        setTimeout(function () {
-            $(".dropped-portlet").hide();
-        }, 2000);
-    }
-});
+                    // Hide the dropped portlet after 2 seconds
+                    setTimeout(function () {
+                        $(".dropped-portlet").hide();
+                    }, 2000);
+                }
+            });
 
 
             $(".portlet")
@@ -3801,36 +3871,109 @@
     </script>
     <script>
         $(document).ready(function () {
-            function updateButtonStatus() {
-                var accordion1Fields = $('#accordion-item1 input[required], #accordion-item1 select[required]');
-                var accordion2Fields = $('#accordion-item2 input[required], #accordion-item2 select[required]');
-                var accordion3Fields = $('#accordion-item3 input[required]');
-                var isAccordion1FieldsEmpty = accordion1Fields.filter(function () {
-                    return $(this).val() !== '' || $(this).val() === 'Choose...';
-                }).length === 0;
-                var isAccordion2FieldsEmpty = accordion2Fields.filter(function () {
-                    return $(this).val() !== '' || $(this).val() === 'Choose...';
-                }).length === 0;
-                var isAccordion3FieldsEmpty = accordion3Fields.filter(function () {
-                    return $(this).val() !== '';
-                }).length === 0;
+            $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/getPropertyUnitsTenant',
+                type: 'GET',
+                contentType: false,
+                processData: false,
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    var properties = response.data;
+                    console.log(response.data)
+                    // Assuming the response data is an array of property objects
+                    // Populate Select Property dropdown
+                    var propertySelect = $('#propertyInfo');
+                    propertySelect.empty(); // Clear existing options
+                    propertySelect.append($('<option></option>')
+                        .text("Choose...")
+                    )
+                    properties.forEach(function (property) {
+                        var option = $('<option></option>')
+                            .text(property.propertyName)
+                            .val(property.id);
+                        propertySelect.append(option);
+                    });
 
-                // Enable or disable the buttons based on the fields' status
-                if (!isAccordion1FieldsEmpty || !isAccordion2FieldsEmpty || !isAccordion3FieldsEmpty) {
-                    $('#draft').removeAttr('disabled');
-                } else {
-                    $('#draft').attr('disabled', 'disabled');
+                    // Handle property selection change
+                    propertySelect.change(function () {
+                        var selectedPropertyId = $(this).val();
+
+                        // Find the selected property object
+                        var selectedProperty = properties.find(function (property) {
+                            return property.id == selectedPropertyId;
+                        });
+
+                        // Populate Select Property Unit dropdown
+                        var propertyUnitSelect = $('#unitInfo');
+                        // Clear existing options
+                        propertyUnitSelect.empty()
+
+                        console.log(selectedProperty)
+                        if (selectedProperty.vacantUnits.length === 0) {
+
+                            propertyUnitSelect.prop("disabled", true);
+                            propertyUnitSelect.append($('<option></option>')
+                                .text("No unit available!!"))
+                        } else {
+                            propertyUnitSelect.prop("disabled", false);
+                            propertyUnitSelect.append($('<option></option>')
+                                .text("Choose..."))
+
+                            selectedProperty.vacantUnits.forEach(function (unit) {
+
+                                var option = $('<option></option>')
+                                    .text(unit.unitNumber)
+                                    .val(unit.id);
+                                propertyUnitSelect.append(option);
+                            });
+                        }
+
+                    });
+                },
+                error: function (xhr, status, error) {
+                    $("#myModal_warning_connection").modal("show");
+                    setTimeout(function () {
+                        $('#myModal_warning_connection').modal('hide');
+
+                    }, 2000);
+                    console.log('Error: ' + error);
                 }
+            });
 
-                var allFieldsFilled = areAllFieldsFilled();
 
-                // Enable or disable the buttons based on the fields' status
-                if (allFieldsFilled) {
-                    $('#next').removeClass("disabled").removeAttr("disabled");
-                } else {
-                    $('#next').addClass("disabled").attr("disabled", "disabled");
-                }
-            }
+            // function updateButtonStatus() {
+            //     var accordion1Fields = $('#accordion-item1 input[required], #accordion-item1 select[required]');
+            //     var accordion2Fields = $('#accordion-item2 input[required], #accordion-item2 select[required]');
+            //     var accordion3Fields = $('#accordion-item3 input[required]');
+            //     var isAccordion1FieldsEmpty = accordion1Fields.filter(function () {
+            //         return $(this).val() !== '' || $(this).val() === 'Choose...';
+            //     }).length === 0;
+            //     var isAccordion2FieldsEmpty = accordion2Fields.filter(function () {
+            //         return $(this).val() !== '' || $(this).val() === 'Choose...';
+            //     }).length === 0;
+            //     var isAccordion3FieldsEmpty = accordion3Fields.filter(function () {
+            //         return $(this).val() !== '';
+            //     }).length === 0;
+
+            //     // Enable or disable the buttons based on the fields' status
+            //     if (!isAccordion1FieldsEmpty || !isAccordion2FieldsEmpty || !isAccordion3FieldsEmpty) {
+            //         $('#draft').removeAttr('disabled');
+            //     } else {
+            //         $('#draft').attr('disabled', 'disabled');
+            //     }
+
+            //     // var allFieldsFilled = areAllFieldsFilled();
+
+            //     // Enable or disable the buttons based on the fields' status
+            //     if (allFieldsFilled) {
+            //         $('#next').removeClass("disabled").removeAttr("disabled");
+            //     } else {
+            //         $('#next').addClass("disabled").attr("disabled", "disabled");
+            //     }
+            // }
+
             // Call the updateButtonStatus function when any field in the accordions is changed
             $('#accordion-item1 input[type="text"],#accordion-item1 input[type="tel"], #accordion-item1 select, #accordion-item2 input, #accordion-item2 select, #accordion-item3 input, #accordion-item3 select').on('input change', function () {
                 var $field = $(this);
@@ -3854,7 +3997,76 @@
                     $field.addClass('border-green');
                     $errorMessage.addClass('d-none');
                 }
-                updateButtonStatus();
+                // updateButtonStatus();
+            });
+            $(document).on('click', '#next', function (e) {
+                e.preventDefault();
+
+                var firstName = $("#firstName").val();
+                var middleName = $("#middleName").val();
+                var lastName = $("#lastName").val();
+                var phone = $("#phone").val();
+                var email = $("#email").val();
+                var propertyInfo = $("#propertyInfo").val();
+                var unitInfo = $("#unitInfo").val();
+                var propertyDetail = $("#propertyDetail").val();
+                var sourceCampaign = $("#sourceCampaign").val();
+                var moveInDate = $("#moveInDate").val();
+                var potentialRentAmount = $("#potentialRentAmount").val();
+                var status=$("#status").val();
+                var data={
+                    firstName:firstName,
+                    middleName:middleName,
+                    lastName:lastName,
+                    phoneNumber:phone,
+                    email:email,
+                    propertyInfo:propertyInfo,
+                    unitInfo:unitInfo,
+                    prospectDetail:propertyDetail,
+                    sourceCampaign:sourceCampaign,
+                    moveDate:moveInDate,
+                    rentAmount:potentialRentAmount,
+                    prospectusStatus:status
+                }
+                $("#addModal").modal("hide")
+
+
+                $.ajax({
+                    url: 'http://localhost:3000/api/spade/addprospectus',
+                    type: 'POST',
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        if(response.message==" prospectus created successful"){
+                            $("#myModal_success").modal("show");
+                            setTimeout(function () {
+                                $('#myModal_success').modal('hide');
+                                
+                            }, 2000);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        if (xhr.responseJSON.error === 'No data found') {
+                            $('#addModal').modal('hide');
+                            $('#infoModal').modal('show');
+                            setTimeout(function () {
+                                $('#infoModal').modal('hide');
+                            }, 2000);
+                        } else {
+                            $('#addModal').modal('hide');
+                            $("#myModal_warning_connection").modal("show");
+                            setTimeout(function () {
+                                $('#myModal_warning_connection').modal('hide');
+                            }, 2000);
+                        }
+                    }
+                });
+
+
+
             });
 
             $.ajax({
@@ -4165,50 +4377,50 @@
 
 
     </script>
-    
+
     <!-- /* Source Close*/ -->
     <!-- /* Source Close*/ -->
-<script>
-    const showButton1 = document.getElementById('tab299');
-   const showButton2 = document.getElementById('tab300');
-//    const showButton3 = document.getElementById('tab311');
-   const showButton4 = document.getElementById('tab322');
-   const showButton5 = document.getElementById('tab333');
-   const displayText = document.getElementById('export-button-hide');
-   const option_pipline = document.getElementById('option-pipline');
-   
-   showButton1.addEventListener('click', () => {
-           displayText.style.display = 'none';
-           option_pipline.style.display = 'block';
-       
-   });
-   
-   showButton2.addEventListener('click', () => {
-       displayText.style.display = 'none';
-       option_pipline.style.display = 'block';
-   
-   });
-   
-//    showButton3.addEventListener('click', () => {
-//        displayText.style.display = 'none';
-//        option_pipline.style.display = 'block';
-   
-//    });
-   
-   showButton4.addEventListener('click', () => {
-       displayText.style.display = 'none';
-           option_pipline.style.display = 'block';
-   
-   });
-   
-   showButton5.addEventListener('click', () => {
-       option_pipline.style.display = 'none';
-       displayText.style.display = 'block';
-   
-   });
-   
-   </script>
-           <!-- export button End  -->
+    <script>
+        const showButton1 = document.getElementById('tab299');
+        const showButton2 = document.getElementById('tab300');
+        //    const showButton3 = document.getElementById('tab311');
+        const showButton4 = document.getElementById('tab322');
+        const showButton5 = document.getElementById('tab333');
+        const displayText = document.getElementById('export-button-hide');
+        const option_pipline = document.getElementById('option-pipline');
+
+        showButton1.addEventListener('click', () => {
+            displayText.style.display = 'none';
+            option_pipline.style.display = 'block';
+
+        });
+
+        showButton2.addEventListener('click', () => {
+            displayText.style.display = 'none';
+            option_pipline.style.display = 'block';
+
+        });
+
+        //    showButton3.addEventListener('click', () => {
+        //        displayText.style.display = 'none';
+        //        option_pipline.style.display = 'block';
+
+        //    });
+
+        showButton4.addEventListener('click', () => {
+            displayText.style.display = 'none';
+            option_pipline.style.display = 'block';
+
+        });
+
+        showButton5.addEventListener('click', () => {
+            option_pipline.style.display = 'none';
+            displayText.style.display = 'block';
+
+        });
+
+    </script>
+    <!-- export button End  -->
 </body>
 
 </html>
