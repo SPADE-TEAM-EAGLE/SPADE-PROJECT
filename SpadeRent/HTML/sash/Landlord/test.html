@@ -222,7 +222,7 @@
         function main() {
             
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/openOrder',
+                url: 'http://localhost:3000/api/spade/openOrder',
                 type: 'POST',
                 data: JSON.stringify({
                     amount: $("#amount").val(),
@@ -234,25 +234,13 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    sfc.addCardUpo({
-                // userTokenId: "123",
-                useFields: true,
-                clientRequestId: "561ccf70-336b-11ee-a309-4f00ef0ed1ad", // or websdk cardNumber object
-                sessionToken: response.sessionToken,
-                billingAddress: { // optional
-                    email: 'john.smith@email.com',
-                    country: 'US'
-                }
-            },
-                function (result) {
-                    console.log(result);
-                })
                     
                     sfc.createPayment({
                         sessionToken: response.sessionToken, //received from openOrder API
-                        merchantId: "6400701569295268447", //as assigned by Nuvei
-                        merchantSiteId: "6400701569295268447", //as assigned by Nuvei
-                        clientUniqueId: response.clientUniqueId, // optional
+                        clientUniqueId: "695701003",
+                        merchantId:"6400701569295268447",
+                        merchantSiteId:"244298",
+                        cardHolderName: "<card_holder>",
                         paymentOption: scard,
                         billingAddress: {
                             email: "someone@somedomain.com",
@@ -260,7 +248,8 @@
                         }
                     }, function (res) {
                         console.log(res)
-                    })
+                    });
+                    
                 },
                 error: function (xhr, status, error) {
                     // Handle the error response

@@ -142,11 +142,11 @@ exports.taskSendMail = async (
       id
     ]);
     console.log(islandlordNotify[0])
-    if ( islandlordNotify[0][0] && islandlordNotify[0][0].emailNotification === "no" || assignedTo != "Not Assigned") {
+    // if ( islandlordNotify[0][0] && islandlordNotify[0][0].emailNotification === "no" || assignedTo != "Not Assigned") {
 
-      console.log("email notification is off");
-      return;
-    }
+    //   console.log("email notification is off");
+    //   return;
+    // }
     if(taskTemplate == '0'){
       var emailHTML = taskMail.taskHTML0(tenantName,dueDays,taskName,assignedTo,priority,landlordName,companyName,contactLandlord)
     }else{

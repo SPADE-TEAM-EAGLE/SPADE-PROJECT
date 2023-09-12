@@ -465,7 +465,7 @@ exports.addTasks = async (req, res) => {
 
       const vendorNames = vendorNamearr.toString();
 
-      // if (notifyTenant.toLowerCase() === "yes") {
+      if (notifyTenant.toLowerCase() === "yes") {
       await taskSendMail(
         tenantName,
         "Property Maintenance: " + task,
@@ -480,9 +480,8 @@ exports.addTasks = async (req, res) => {
         tenantEmail,
         taskEmail
       );
-      // }
-      // if (notifyVendor.toLowerCase() === "yes") {
-      console.log("vendor1");
+      }
+      if (notifyVendor.toLowerCase() === "yes") {
       for (let i = 0; i < vendorEmailarr.length > 0; i++) {
         console.log("vendor2");
         await taskSendMail(
@@ -499,7 +498,7 @@ exports.addTasks = async (req, res) => {
           vendorEmailarr[i],
           taskEmail
         );
-        // }
+        }
       }
     }
     return res.send("Created");
