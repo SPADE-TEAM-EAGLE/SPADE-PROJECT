@@ -225,13 +225,14 @@ exports.updateProspectus = async (req, res) => {
 
 //  #############################  Update prospectus Status Start ##################################################
 exports.updateProspectusStatus = async (req, res) => {
+    
     const {
         prospectusStatus,
         prospectusid
     } = req.body;
     const currentDate = new Date(); 
     try {
-
+        
         const prospectusResult = await queryRunner(UpdateProspectusStatusQuery, [
             prospectusStatus,
             currentDate,

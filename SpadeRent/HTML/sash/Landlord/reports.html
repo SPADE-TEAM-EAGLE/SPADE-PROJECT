@@ -4958,16 +4958,17 @@ $("#download_pdf_reports5").attr("disabled",true)
     '<p style="font-weight: 600;" class="mb-1">' + task.taskName + '</p>' +
     '<span class="font-weight-normal" style="color: #9B9B9B;"> By ' + task.createdBy + ' - ' + hoursDiff + ' hours</span>' +
     '</td>';
-
+        
 if (task.AssignTo.length>0) {
+    newRowHtml+='<td style="font-weight: 600;text-align: center;display: flex;">' 
     newRowHtml += task.AssignTo.map(function ({ name, email }) {
-        return '<td style="font-weight: 600;text-align: center;display: flex;"><div class="me-2">' +
+        return '<div class="me-2">' +
             '<i class="fi fi-rs-circle-user avatar-md fs-30 text-dark"></i>' +
             '<div class="media-body valign-middle mt-0">' +
             '<a href="javascript:void(0)" class="text-dark fw-semibold">' + name + '</a>' +
             '</div>' +
-            '</div></td>';
-    }).join('');
+            '</div>';
+    }).join('') +'</td>';
 } else {
     newRowHtml += '<td>Not assigned</td>';
 }
