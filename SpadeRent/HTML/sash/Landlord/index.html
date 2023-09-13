@@ -369,18 +369,18 @@
                     <div class="col-md-6 col-lg-3 col-xl-3 mb-5">
                         <div class="card h-100">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
-                                <div class="card-title fw-bold"><a href="coming-soon.html" style="color: white;">Lead</a></div>
+                                <div class="card-title fw-bold"><a href="prospects.html" style="color: white;">Lead</a></div>
                             </div>
                             <div class="card-body">
                                 <div class="text-center chat-image mb-5">
                                     <div class="avatar avatar-xxl chat-profile mb-3 brround">
-                                        <a class="" href="coming-soon.html"><img alt="avatar"
+                                        <a class="" href="prospects.html"><img alt="avatar"
                                                 src="../assets/images/icons/Group 10348.png"
                                                 class="brround w-100 h-100"></a>
                                     </div>
 
                                     <div class="main-chat-msg-name">
-                                        <a href="coming-soon.html">
+                                        <a href="prospects.html">
                                             <h5 class="mb-1 text-dark fw-bold">Create New Lead</h5>
                                         </a>
                                         <p class="text-default mt-0 mb-0 pt-0 fs-13">Effortlessly generate and manage leads with our property rental software, making it easier for landlords to find potential tenants. </p>
@@ -861,9 +861,9 @@
 
                             </li>
                             <li class="slide card-demo-4">
-                                <a class="side-menu__item" data-bs-toggle="slide" href="coming-soon.html"><i
+                                <a class="side-menu__item" data-bs-toggle="slide" href="prospects.html"><i
                                         class="side-menu__icon fi fi-rs-chart-simple"></i><span
-                                        class="side-menu__label">Leads</span>
+                                        class="side-menu__label">Prospects</span>
                                 </a>
                             </li>
 
@@ -893,6 +893,7 @@
                                 <a class="side-menu__item" data-bs-toggle="slide" href="chats.html">
                                     <i class="side-menu__icon fi fi-rs-comment"></i>
                                     <span class="side-menu__label">Chat</span>
+<span class="badge bg-primary side-badge">6</span>
 
                                     <!-- <i class="angle fe fe-chevron-right"></i> -->
                                 </a>
@@ -1372,13 +1373,26 @@
                                                 </div>
                                                 <div class="col-lg-6 mt-4 disabled"
                                                     style="display: flex; justify-content: space-around;">
-                                                    <h3><b id="task-complete-percent">97%</b></h3>
+                                                    <h3 class="mb-0" style="    background-color: #1467B0;
+                                                    border-radius: 12px;
+                                                    display: flex;
+                                                    justify-content: center;
+                                                    align-items: center;
+                                                    padding: 16px 15px;
+                                                    color: white;
+                                                    font-size: 1.5rem;"><b id="task-complete-percent">97%</b></h3>
                                                     <div class="text-center"
-                                                        style="background-color: #1467B0; border-radius: 12px; display: flex; justify-content: center; align-items: center; height: 35px; width: 80px;">
+                                                        style="    background-color: #1467B0;
+                                                        border-radius: 12px;
+                                                        display: flex;
+                                                        justify-content: center;
+                                                        align-items: center;
+                                                        padding: 16px 15px;
+                                                        color: white;
+                                                        font-size: 1.5rem;">
                                                         <img src="../assets/images/arrow-right-upp.png" alt=""
-                                                            style="height: 13px;">&nbsp;&nbsp; <h44
-                                                            style="margin-bottom: 0em !important;"><b class="text-light"
-                                                                id="task-incomplete-percent">48%</b></h4>
+                                                            style="height: 13px;">&nbsp;&nbsp; <h3 class="mb-0"><b 
+                                                                id="task-incomplete-percent">48%</b></h3>
                                                     </div>
                                                 </div>
 
@@ -2279,9 +2293,9 @@
                             $("#task-finished").text(finishedTaskCount !== null ? finishedTaskCount : 0);
 
                             // Calculate and update the text content of the element with the id "task-incomplete-percent"
-                            var taskCount = parseInt(response?.property[0]?.taskCount) || 1; // Handle 0 taskCount case
+                            var taskCount = parseInt(response?.property[0]?.taskCount) || 0; // Handle 0 taskCount case
                             if (onGoingTaskCount !== null) {
-                                var incompletePercent = (parseInt(onGoingTaskCount) / taskCount) * 100;
+                                var incompletePercent = (parseInt(onGoingTaskCount) / (taskCount == 0 ? 1 : taskCount)) * 100;
                                 $("#task-incomplete-percent").text(incompletePercent.toFixed(3) + " %");
                             } else {
                                 $("#task-incomplete-percent").text("0.000 %");
@@ -2289,7 +2303,7 @@
 
                             // Calculate and update the text content of the element with the id "task-complete-percent"
                             if (finishedTaskCount !== null) {
-                                var completePercent = (parseInt(finishedTaskCount) / taskCount) * 100;
+                                var completePercent = (parseInt(finishedTaskCount) / (taskCount == 0 ? 1 : taskCount)) * 100;
                                 $("#task-complete-percent").text(completePercent.toFixed(3) + " %");
                             } else {
                                 $("#task-complete-percent").text("0.000 %");
@@ -2342,7 +2356,7 @@
                             // Calculate and update the text content of the element with the id "task-incomplete-percent"
                             var taskCount = parseInt(response?.property[0]?.taskCount) || 0; // Handle 0 taskCount case
                             if (onGoingTaskCount !== null) {
-                                var incompletePercent = (parseInt(onGoingTaskCount) / taskCount) * 100;
+                                var incompletePercent = (parseInt(onGoingTaskCount) / (taskCount == 0 ? 1 : taskCount)) * 100;
                                 $("#task-incomplete-percent").text(incompletePercent.toFixed(3) + " %");
                             } else {
                                 $("#task-incomplete-percent").text("0.000 %");
@@ -2350,7 +2364,7 @@
 
                             // Calculate and update the text content of the element with the id "task-complete-percent"
                             if (finishedTaskCount !== null) {
-                                var completePercent = (parseInt(finishedTaskCount) / taskCount) * 100;
+                                var completePercent = (parseInt(finishedTaskCount) / (taskCount == 0 ? 1 : taskCount)) * 100;
                                 $("#task-complete-percent").text(completePercent.toFixed(3) + " %");
                             } else {
                                 $("#task-complete-percent").text("0.000 %");
@@ -2426,7 +2440,7 @@
                         // Extract values from the response object
                         var totalDeposit = parseInt(response?.data?.TotalDeposit) || 0;
                         var pendingBalance = parseInt(response?.data?.PendingBalance) || 0;
-                        var totalAmount = parseInt(response?.data?.TotalAmount) || 1; // Avoid division by zero
+                        var totalAmount = parseInt(response?.data?.TotalAmount) || 0; // Avoid division by zero
 
                         // Update the displayed values
                         $("#total-deposit").text("$ " + totalDeposit);
@@ -2435,11 +2449,11 @@
                         // Calculate percentages and update the donut chart
                         updateDonutChart([
                             {
-                                value: ((totalDeposit / totalAmount) * 100).toFixed(3),
+                                value: ((totalDeposit / (totalAmount==0?1:totalAmount)) * 100).toFixed(3),
                                 label: 'Total Deposit'
                             },
                             {
-                                value: ((pendingBalance / totalAmount) * 100).toFixed(3),
+                                value: ((pendingBalance / (totalAmount==0?1:totalAmount)) * 100).toFixed(3),
                                 label: 'Pending Balance'
                             }
                         ]);
@@ -2467,7 +2481,7 @@
                         // Extract values from the response object
                         var totalDeposit = parseInt(response?.data?.TotalDeposit) || 0;
                         var pendingBalance = parseInt(response?.data?.PendingBalance) || 0;
-                        var totalAmount = parseInt(response?.data?.TotalAmount) || 1; // Avoid division by zero
+                        var totalAmount = parseInt(response?.data?.TotalAmount) || 0; // Avoid division by zero
 
                         // Update the displayed values
                         $("#total-deposit").text("$ " + totalDeposit);
@@ -2476,11 +2490,11 @@
                         // Calculate percentages and update the donut chart
                         updateDonutChart([
                             {
-                                value: ((totalDeposit / totalAmount) * 100).toFixed(3),
+                                value: ((totalDeposit / (totalAmount==0?1:totalAmount)) * 100).toFixed(3),
                                 label: 'Total Deposit'
                             },
                             {
-                                value: ((pendingBalance / totalAmount) * 100).toFixed(3),
+                                value: ((pendingBalance / (totalAmount==0?1:totalAmount)) * 100).toFixed(3),
                                 label: 'Pending Balance'
                             }
                         ]);
@@ -2690,9 +2704,9 @@
                             $("#task-finished").text(finishedTaskCount !== null ? finishedTaskCount : 0);
 
                             // Calculate and update the text content of the element with the id "task-incomplete-percent"
-                            var taskCount = parseInt(response?.property[0]?.totalTask) || 1; // Handle 0 taskCount case
+                            var taskCount = parseInt(response?.property[0]?.totalTask) || 0; // Handle 0 taskCount case
                             if (onGoingTaskCount !== null) {
-                                var incompletePercent = (parseInt(onGoingTaskCount) / taskCount) * 100;
+                                var incompletePercent = (parseInt(onGoingTaskCount) / (taskCount == 0 ? 1 : taskCount)) * 100;
                                 console.log(incompletePercent)
                                 $("#task-incomplete-percent").text(incompletePercent.toFixed(3) + " %");
                             } else {
@@ -2701,7 +2715,7 @@
 
                             // Calculate and update the text content of the element with the id "task-complete-percent"
                             if (finishedTaskCount !== null) {
-                                var completePercent = (parseInt(finishedTaskCount) / taskCount) * 100;
+                                var completePercent = (parseInt(finishedTaskCount) / t(taskCount == 0 ? 1 : taskCount)) * 100;
                                 console.log(completePercent)
                                 $("#task-complete-percent").text(completePercent.toFixed(3) + " %");
                             } else {
@@ -2769,7 +2783,7 @@
                     // Extract values from the response object
                     var totalDeposit = parseInt(response?.data[0][0]?.TotalDeposit) || 0;
                     var pendingBalance = parseInt(response?.data[0][0]?.PendingBalance) || 0;
-                    var totalAmount = parseInt(response?.data[0][0]?.TotalAmount) || 1; // Avoid division by zero
+                    var totalAmount = parseInt(response?.data[0][0]?.TotalAmount) || 0; // Avoid division by zero
                     console.log(totalDeposit, pendingBalance, totalAmount)
                     // Update the displayed values
                     $("#total-deposit").text("$ " + totalDeposit);
@@ -2779,15 +2793,15 @@
                     $("#outstanding-amount").text("$ " + pendingBalance);
                     // Calculate percentages and update the donut chart
                     createDonutChart([
-                        {
-                            value: ((totalDeposit / totalAmount) * 100).toFixed(3),
-                            label: 'Total Deposit'
-                        },
-                        {
-                            value: ((pendingBalance / totalAmount) * 100).toFixed(3),
-                            label: 'Pending Balance'
-                        }
-                    ]);
+                            {
+                                value: ((totalDeposit / (totalAmount==0?1:totalAmount)) * 100).toFixed(3),
+                                label: 'Total Deposit'
+                            },
+                            {
+                                value: ((pendingBalance / (totalAmount==0?1:totalAmount)) * 100).toFixed(3),
+                                label: 'Pending Balance'
+                            }
+                        ]);
                     
 
                 },

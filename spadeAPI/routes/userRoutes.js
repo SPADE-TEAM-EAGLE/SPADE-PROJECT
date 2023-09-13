@@ -31,6 +31,7 @@ router.put("/updatePlanId", verifyToken, userController.updatePlanId);
 // router.get('/Signinall', userController.Signinall);
 router.post("/resetEmail", userController.createResetEmail);
 router.post("/verifyResetEmailCode", userController.verifyResetEmailCode);
+router.post("/verifyAuthCode",userController.verifyAuthCode)
 router.post("/updatePassword", userController.updatePassword);
 router.post("/resendCode", userController.resendCode);
 router.get("/pricingPlan", userController.pricingPlan);
@@ -208,6 +209,8 @@ module.exports = router;
 router.get("/ProfileCompleteTenant", verifyTokenTenant, tenantPortalController.ProfileCompleteTenant);
 // router.get("/ProfileCompleteTenant" , tenantPortalController.ProfileCompleteTenant);
 router.get("/unpaidAmountTenant", verifyTokenTenant, tenantPortalController.unpaidAmountTenant);
+router.put('/updateAuth',verifyToken, userController.updateAuth);
+router.put('/updateAuthTenant',verifyTokenTenant, tenantPortalController.updateAuthTenant);
 // router.get("/unpaidAmountTenant", tenantPortalController.unpaidAmountTenant);
 router.put("/emailtemplates", verifyToken, settingController.emailtemplates);
 router.post("/addprospectus", verifyToken, prospectus.addprospectus);

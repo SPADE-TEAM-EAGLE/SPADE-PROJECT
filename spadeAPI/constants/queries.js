@@ -534,6 +534,8 @@ exports.insertNotify =
 exports.updateNotify = "UPDATE notification SET emailNotification = ? , pushNotification = ?, textNotification = ? WHERE landlordID = ? ";
 exports.addResetToken =
   "UPDATE users SET token = ?, updated_at = ? where id = ?";
+exports.addResetTokenTenant =
+  "UPDATE tenants SET token = ?, tenantUpdated_at = ? where id = ?";
 exports.updatePasswordLandlord =
   // "UPDATE users SET Password = ? where id = ? and token = ?";
   "UPDATE users SET Password = ? , updated_at = ? where id = ? AND token = ?";
@@ -997,6 +999,9 @@ WHERE invoice.tenantID = ? AND invoice.status = 'paid';
 
 exports.updateAllStatusVacantQuery = `UPDATE propertyunits, tenants SET propertyunits.status = ? WHERE tenants.propertyID = propertyunits.propertyID AND tenants.id = ?`;
 exports.unpaidAmountQuery = `SELECT SUM(totalAmount) AS totalAmount FROM spade_Rent.invoice WHERE tenantID = ? AND status = 'Unpaid'`;
+exports.updateAuthQueryTenant=`UPDATE tenants SET auth = ? WHERE id = ?`;
+exports.updateAuthQuery=`UPDATE users SET auth = ? WHERE id = ?`;
+exports.updateEmailTemplates = "UPDATE users SET tenantEmail = ? , invoiceEmail = ?, taskEmail = ?, userEmail = ? WHERE id = ? ";
 exports.updateEmailTemplates = "UPDATE users SET tenantEmail = ? , invoiceEmail = ?, taskEmail = ?, userEmail = ? WHERE id = ? ";
 exports.addProspectusQuery = "INSERT INTO prospectus (landlordId,firstName,middleName,lastName,phoneNumber,email,propertyInfo,unitInfo,prospectDetail,sourceCampaign,moveDate,rentAmount,prospectusStatus,createdDate) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 exports.getProspectusByIdQuery = `SELECT p.propertyName, p.address, p.city, p.state, p.zipCode, pu.unitNumber, pu.Area, pu.unitDetails, pu.status, (SELECT count(unitNumber) from propertyunits WHERE propertyID = p.id )as totalunits , (SELECT count(unitNumber) from propertyunits WHERE status = "Occupied" AND propertyID = p.id )as totalOccupied,  (SELECT count(unitNumber) from propertyunits WHERE status = "Vacant" AND propertyID = p.id )as totalVacant FROM property as p join propertyunits as pu on pu.propertyID = p.id where p.id = ? and pu.id = ?`;

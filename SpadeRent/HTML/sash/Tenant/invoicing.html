@@ -607,7 +607,7 @@
                                                 <i class="fi fi-rs-cloud-upload"></i>
                                                 <div class="custom-file-text">
                                                     <span>Upload Photo here</span>
-                                                    <span>JPEG and PNG, file size no more than 10MB</span>
+                                                    <span>JPEG and PNG, file size no more than 5MB</span>
                                                 </div>
                                             </label>
                                         </div>
@@ -798,7 +798,7 @@
                                     <i class="fi fi-rs-cloud-upload"></i>
                                     <div class="custom-file-text">
                                         <span>Upload Photo here</span>
-                                        <span>JPEG and PNG, file size no more than 10MB</span>
+                                        <span>JPEG and PNG, file size no more than 5MB</span>
                                     </div>
                                 </label>
                             </div>
@@ -2066,7 +2066,7 @@
                 var files = Array.from($(this)[0].files);
                 console.log(files)
                 files.forEach(function(file) {
-                    selectedFiles.push(file); // Add each file to the selected files array
+                    file.size <= 5 * 1024 * 1024 && selectedFiles.length < 5 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array // Add each file to the selected files array
                 });
 
                 updateSelectedFilesContainer(); // Update the selected files container
@@ -2076,7 +2076,7 @@
                 var files = Array.from($(this)[0].files);
                 console.log(files)
                 files.forEach(function(file) {
-                    selectedFiles.push(file); // Add each file to the selected files array
+                    file.size <= 5 * 1024 * 1024 && selectedFiles.length < 5 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array // Add each file to the selected files array
                 });
 
                 updateSelectedFilesContainer(); // Update the selected files container

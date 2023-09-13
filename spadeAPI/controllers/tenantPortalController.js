@@ -19,7 +19,8 @@ const {
   insertInTaskImage,
   addVendorList,
   taskByIDQuery,
-  unpaidAmountQuery
+  unpaidAmountQuery,
+  updateAuthQueryTenant
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -495,3 +496,20 @@ exports.unpaidAmountTenant = async (req, res) => {
   }
 };
 //  ############################# unpaid Amount Tenant End ############################################################
+exports.updateAuthTenant = async (req, res) => {
+  try {
+    const { auth } = req.body;
+    const {userId} = req.user
+    const updateAuth= await queryRunner(updateAuthQueryTenant, [auth,userId]);
+    if(updateAuth[0].affectedRows>0){
+      res.status(200).json({message:`2 Factor Authentication ${auth==0?"turned off":"turned on"}`})
+    }else{
+      res.status(400).json({message:"Error in updating 2 Factor Authentication"})
+    }
+  } catch (error) {
+    console.log(error)
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+};

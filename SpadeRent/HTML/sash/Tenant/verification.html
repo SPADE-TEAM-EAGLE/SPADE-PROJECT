@@ -746,8 +746,8 @@ var encodedId = encodeURIComponent(encryptedId);
                     success: function(response) {
                         document.getElementById("verification-spans").style.display = "none";
                         // window.alert(response.message)
-                        var encodedToken = encodeURIComponent(encryptedToken);
-                        window.open(`new_password.html?id=${encodedId}&token=${encodedToken}`, "_self")
+                        var encodedToken = encodeURIComponent(encryptedId);
+                        window.open(`new_password.html?id=${encodedId}&token=${verification}`, "_self")
                     },
                     error: function(xhr, status, error) {
                         // window.alert(xhr.statusText)
@@ -830,12 +830,18 @@ send_again.addEventListener("click", function() {
 
             $(document).on("click", "#send_again", function(a) {
                 // console.log(2)
+                const encryptedId = decodeURIComponent((new URL(document.location)).searchParams.get("id"));
+
+// Decryption
+var password = 'your-secret-password';
+const Id = sjcl.decrypt(password, encryptedId);
+var encodedId = encodeURIComponent(encryptedId);
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/resendCodeTenants',
                     type: 'PUT',
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({
-                        id: user_id
+                        id: Id
                     }),
                     success: function(response) {
                         $("#infoModal").modal("show");

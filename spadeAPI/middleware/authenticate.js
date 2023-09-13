@@ -33,6 +33,7 @@ const verifyToken = async (req, res, next) => {
       planID:result[0][0].PlanID,
       isActive : result[0][0].active,
       tenantEmail : result[0][0].tenantEmail,
+      auth:result[0][0].auth,
       invoiceEmail : result[0][0].invoiceEmail,
       taskEmail : result[0][0].taskEmail,
     };
@@ -73,6 +74,7 @@ const verifyTokenTenant = async (req, res, next) => {
       image: result[0][0].image,
       imageKey: result[0][0].imageKey,
       businessName: result[0][0].companyName,
+      auth:result[0][0].auth
 
     };
 

@@ -946,18 +946,18 @@
                     <div class="col-md-6 col-lg-3 col-xl-3 mb-5">
                         <div class="card h-100">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
-                                <div class="card-title fw-bold"><a href="coming-soon.html" style="color: white;">Lead</a></div>
+                                <div class="card-title fw-bold"><a href="prospects.html" style="color: white;">Lead</a></div>
                             </div>
                             <div class="card-body">
                                 <div class="text-center chat-image mb-5">
                                     <div class="avatar avatar-xxl chat-profile mb-3 brround">
-                                        <a class="" href="coming-soon.html"><img alt="avatar"
+                                        <a class="" href="prospects.html"><img alt="avatar"
                                                 src="../assets/images/icons/Group 10348.png"
                                                 class="brround w-100 h-100"></a>
                                     </div>
 
                                     <div class="main-chat-msg-name">
-                                        <a href="coming-soon.html">
+                                        <a href="prospects.html">
                                             <h5 class="mb-1 text-dark fw-bold">Create New Lead</h5>
                                         </a>
                                         <p class="text-default mt-0 mb-0 pt-0 fs-13">Effortlessly generate and manage leads with our property rental software, making it easier for landlords to find potential tenants. </p>
@@ -1249,10 +1249,9 @@
                                     <div class="col-md-4">
                                         <label for="inputAddress" class="form-label">Input Rent Amount /Per
                                             Month<span class="text-danger"> *</span></label>
-                                        <div class="input-group">
-                                            <span class="input-group-text" style="color: #1467B0;background-color: transparent !important;">$</span>
-                                            <input type="text" class="form-control" id="rent" pattern="[0-9]{7}" placeholder="Enter Rent Amount" maxlength="7" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
-                                        </div>
+                                        
+                                            <input class="form-control form" type="text" id="rent" name="rent" pattern="[0-9]{5}" maxlength="7" minlength="1" placeholder="Rent amount" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                                        
                                         <span class="text-danger d-none">Rent amount is required!</span>
                                     </div>
                                 </form>
@@ -1763,9 +1762,9 @@
 
                             </li>
                             <li class="slide">
-                                <a class="side-menu__item" data-bs-toggle="slide" href="coming-soon.html"><i
+                                <a class="side-menu__item" data-bs-toggle="slide" href="prospects.html"><i
                                         class="side-menu__icon fi fi-rs-chart-simple"></i><span
-                                        class="side-menu__label">Leads</span>
+                                        class="side-menu__label">Prospects</span>
                                     <!-- <i class="angle fe fe-chevron-right"></i> -->
 
                                 </a>
@@ -1798,6 +1797,7 @@
                                 <a class="side-menu__item" data-bs-toggle="slide" href="chats.html">
                                     <i class="side-menu__icon fi fi-rs-comment"></i>
                                     <span class="side-menu__label">Chat</span>
+<span class="badge bg-primary side-badge">6</span>
 
                                     <!-- <i class="angle fe fe-chevron-right"></i> -->
                                 </a>
@@ -3854,7 +3854,7 @@
             formData.append('propertySQFT', propertySQFT);
             formData.append('units', units);
 
-            // Retrieve existing image names from the DOM
+            
 
             var existingImageNames = [];
             selectedFiles.forEach((file) => {
@@ -3875,7 +3875,7 @@
             formData.append("existingImages", existingImageNames)
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/updateProperty',
-                // url: 'http://ec2-54-158-103-230.compute-1.amazonaws.com:3000/api/spade/updateProperty',
+               
                 type: 'PUT',
                 data: formData,
                 contentType: false,
@@ -3899,7 +3899,7 @@
         $(document).on('click', '#confirmDelete', function(e) {
 
                 e.preventDefault();
-                // delete using AJAX
+                
                 $('#myModal_delete').modal('hide');
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/tenantDelete',
@@ -3913,14 +3913,13 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function(response) {
-                        // console.log(response);
-                        // window.alert(response.message);
+                       
 
                         getData()
                         
                         $("#succesModal_delete").modal("show");
                         
-                        // window.location = '../Landlord/properties-all.html';
+                        
                     },
                     error: function(xhr, status, error) {
                         $("#myModal_warning_connection").modal("show");
@@ -3932,10 +3931,7 @@
                     }
                 });
             })
-            // let data;
-            // var tenantData;
-            // var tenantID
-
+       
         function getData(selectedFilter = "alphabets") {
             $("#preloader").fadeIn("fast");
             // console.log(22)
@@ -4063,6 +4059,76 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                     //         }, 2000);
                 }
             });
+            $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/getPropertyUnitsTenant',
+                type: 'GET',
+                contentType: false,
+                processData: false,
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function(response) {
+                    var properties = response.data; // Assuming the response data is an array of property objects
+                    console.log("property",response.data)
+                    // Populate Select Property dropdown
+                    var propertySelect = $('#property');
+                    propertySelect.empty(); // Clear existing options
+                    propertySelect.append($('<option></option>')
+                        .text("Choose...")
+                    )
+                    properties.forEach(function(property) {
+                        var option = $('<option></option>')
+                            .text(property.propertyName)
+                            .val(property.id);
+                        propertySelect.append(option);
+                    });
+
+                    // Handle property selection change
+                    propertySelect.change(function() {
+                        var selectedPropertyId = $(this).val();
+
+                        // Find the selected property object
+                        var selectedProperty = properties.find(function(property) {
+                            return property.id == selectedPropertyId;
+                        });
+
+                        // Populate Select Property Unit dropdown
+                        var propertyUnitSelect = $('#unit');
+                        // Clear existing options
+                        propertyUnitSelect.empty()
+
+
+                        if (selectedProperty.vacantUnits.length === 0) {
+
+                            propertyUnitSelect.prop("disabled", true);
+                            propertyUnitSelect.append($('<option></option>')
+                                .text("No unit available!!"))
+                        } else {
+                            propertyUnitSelect.prop("disabled", false);
+                            propertyUnitSelect.append($('<option></option>')
+                                .text("Choose..."))
+
+                            selectedProperty.vacantUnits.forEach(function(unit) {
+
+                                var option = $('<option></option>')
+                                    .text(unit.unitNumber)
+                                    .val(unit.id);
+                                propertyUnitSelect.append(option);
+                            });
+                        }
+
+                    });
+                },
+                error: function(xhr, status, error) {
+                    $("#myModal_warning_connection").modal("show");
+                            setTimeout(function() {
+                                $('#myModal_warning_connection').modal('hide');
+
+                            }, 2000);
+                    console.log('Error: ' + error);
+                }
+            });
+
 
         }
 
@@ -4248,8 +4314,7 @@ function filterTableByPropertyAll() {
                         localStorage.clear();
 
                     }
-                    // localStorage.removeItem('authtoken');
-                    // window.close();
+                   
                     window.open('./login_module.html', "_self")
                     console.log('Done');
                 },
@@ -4260,28 +4325,14 @@ function filterTableByPropertyAll() {
         });
     }
 </script>
-    <!-- <script>
-        $(document).ready(function() {
-            $('#myTable').DataTable({
-                ordering: false,
-                info: false,
-                searching: false
-            });
-        });
-    </script> -->
 
-    <!-- <script>
-        $(document).ready(function() {
-            $('#state').select2();
-        });
-    </script> -->
     <script>
         $('#email').keyup(function() {
             var email = $(this).val();
             var emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z.-]+\.[A-Za-z]{2,}$/;
 
             if (!email.match(emailRegex)) {
-                // Invalid email format, display an error message or take appropriate action
+                
                 console.log("invalid");
                 $(this).addClass("border-danger")
                 $(this).removeClass("border-green")

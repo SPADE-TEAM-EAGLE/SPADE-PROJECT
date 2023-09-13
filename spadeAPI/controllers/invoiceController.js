@@ -485,7 +485,7 @@ exports.resendEmail = async (req, res) => {
 
     if (resendEmailResult[0].length > 0) {
       const tenantEmail = resendEmailResult[0][0].email;
-      const dueDays = resendEmailResult[0][0].dueDate;
+      const dueDate = resendEmailResult[0][0].dueDate;
       const frequency = resendEmailResult[0][0].frequency;
       const tenantName =
         resendEmailResult[0][0].firstName +
