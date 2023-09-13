@@ -766,7 +766,7 @@
             height: 100%;
             border: none;
             outline: none;
-            padding: 1.5em 1em;
+            padding: 1.5em 3em 1.5em 1em;
             /* border-radius: 50px; */
             color: var(--color);
             border-radius: 10px;
@@ -1651,6 +1651,7 @@
             </div>
         </div>
     </div>
+    
     <!-- modal end  -->
     <div class="modal fade" id="myModal_delete">
         <div class="modal-dialog modal-dialog-centered text-center" role="document">
@@ -1776,8 +1777,8 @@
                     <div class="col-md-6 col-lg-3 col-xl-3 mb-5">
                         <div class="card h-100">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
-                                <div class="card-title fw-bold"><a href="prospects.html"
-                                        style="color: white;">Lead</a></div>
+                                <div class="card-title fw-bold"><a href="prospects.html" style="color: white;">Lead</a>
+                                </div>
                             </div>
                             <div class="card-body">
                                 <div class="text-center chat-image mb-5">
@@ -2800,9 +2801,19 @@
                                                 <span class="text">Thank You</span>
                                             </div>
                                         </div>
+                                        <style>
+                                            .send-file {
+                                                position: absolute;
+                                                right: 13px;
+                                                cursor: pointer;
+                                                padding: 8px;
+                                                background: #EDF3F9
+                                            }
+                                        </style>
                                         <div class="field">
                                             <input id="input-message" class="input-message" type="text"
                                                 placeholder="Type Message..." maxlength="255" />
+                                            <div class="send-file"><i class="fi fi-rs-clip fs-18"></i></div>
                                             <!-- <div class="icon plus">
                                                 <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
@@ -3536,13 +3547,13 @@
         <script src="https://engage.app.spaderent.com/socket.io/socket.io.js"></script>
 
         <script>
-          // Connect to the socket.io server
-          // This code won't emit a 'connection' event, as it's automatically handled by socket.io
-          // Handle events from the server
-//           socket.on('getNotification', (data) => {
-// alert(data); // You can customize how you want to display the notification
-// });
-        //   socket.emit('message', 'Hello from the client');
+            // Connect to the socket.io server
+            // This code won't emit a 'connection' event, as it's automatically handled by socket.io
+            // Handle events from the server
+            //           socket.on('getNotification', (data) => {
+            // alert(data); // You can customize how you want to display the notification
+            // });
+            //   socket.emit('message', 'Hello from the client');
         </script>
 
         <!-- JQUERY JS -->
@@ -4026,14 +4037,21 @@
                                 var row = `
                                 <a href="javascript:void(0)" onclick="chatTenant(` + tenant.tenantID + `,'` + tenant.firstName + ` ` + tenant.lastName + `',this)"><div class="media new border-top-0 " data-id="` + tenant.tenantID + `">
                                                                 <div class="main-img-user">
-                                                                    <img alt="" src="` + (tenant.image != null && tenant.image !=" " ? tenant.image : randomImg1) + `">
+                                                                    <img alt="" src="` + (tenant.image != null && tenant.image != " " ? tenant.image : randomImg1) + `">
                                                                 </div>
                                                                 <div class="media-body">
                                                                     <div class="media-contact-name">
-                                                                        <span>` + tenant.firstName + ` ` + tenant.lastName + `
+                                                                        <span class=" fw-bold">` + tenant.firstName + ` ` + tenant.lastName + `
                                                                     </div>
                                                                     <p>` + tenant.tEmail + `</p>
                                                                 </div>
+                                                                <div class="mt-2 bg-primary text-white p-2 fw-bold" id="chat-counter" style="    border-radius: 50%;
+    height: 22px;
+    width: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+">6</div>
                                                             </div></a>`;
                                 tab_pane.append(row);
                             });
@@ -4134,10 +4152,30 @@
                 const messages = $('#messages'),
                     input = $('#input-message'),
                     send = $('#send-text');
+                const sendFile = document.querySelector('.send-file'); // Assuming this class exists
+
+                // Function to add the CSS class
+                function addRight62pxClass() {
+                    sendFile.style.right = '62px';
+                }
+
+                // Function to remove the CSS class
+                function removeRight62pxClass() {
+                    sendFile.style.right = '13px'; // Reset the style property
+                }
+                input.addEventListener('input', function () {
+                    const msg = input.value.trim();
+                    if (msg === "") {
+                        removeRight62pxClass(); // Apply the CSS class
+                    } else {
+                        addRight62pxClass(); // Remove the CSS class
+                    }
+                });
                 //Send messages
                 input.addEventListener('keypress', function (ev) {
                     const msg = input.value.trim();
                     if (ev.key === 'Enter' && msg !== "") {
+                        removeRight62pxClass()
                         ev.preventDefault();
                         const msg = input.value;
                         sendMessage(msg);
@@ -4146,6 +4184,7 @@
                 send.addEventListener('click', () => {
                     const msg = input.value.trim(); // Remove leading and trailing spaces
                     if (msg !== "") {
+                        removeRight62pxClass()
                         sendMessage(msg);
                     }
                 });
