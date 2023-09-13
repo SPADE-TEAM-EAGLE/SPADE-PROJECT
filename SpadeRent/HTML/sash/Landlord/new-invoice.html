@@ -1024,7 +1024,8 @@
                         </div>
                         <div class="col-12">
                             <label class="form-label fw-bold">Add Photo (Optional)</label>
-                            <div class="custom-file" style="border: 1px dashed #00000087;">
+                            <div class="custom-file" style="border: 1px dashed #00000087;" ondrop="dropHandler(event);"
+                            ondragover="dragOverHandler(event);">
                                 <input id="fileInput" type="file" name="image" class="custom-file-input form"
                                     accept=".jpg, .png, image/jpeg, image/png" aria-label="hello" multiple>
                                 <span className="d-none"></span>
@@ -1032,7 +1033,7 @@
                                     <i class="fi fi-rs-cloud-upload"></i>
                                     <div class="custom-file-text">
                                         <span>Upload Photo here</span>
-                                        <span>JPEG and PNG, file size no more than 10MB</span>
+                                        <span>JPEG and PNG, file size no more than 5MB</span><small class="text-danger d-none" id="count-text">Maximum number of files reached.</small><small class="text-danger d-none" id="size-text">File size exceeds 5MB limit.</small>
                                     </div>
                                 </label>
                             </div>
@@ -2345,6 +2346,113 @@
 
     </script>
     <script>
+        var selectedFiles = [];
+        function dropHandler(ev) {
+  console.log("File(s) dropped");
+
+  // Prevent default behavior (Prevent file from being opened)
+  ev.preventDefault();
+
+  if (ev.dataTransfer.items) {
+    // Use DataTransferItemList interface to access the file(s)
+    [...ev.dataTransfer.items].forEach((item, i) => {
+      // If dropped items aren't files, reject them
+      if (item.kind === "file") {
+        const file = item.getAsFile();
+        file.size <= 5 * 1024 * 1024 && selectedFiles.length < 5 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array
+        updateSelectedFilesContainer()
+      }
+    });
+  } else {
+    // Use DataTransfer interface to access the file(s)
+    [...ev.dataTransfer.files].forEach((file, i) => {
+      console.log(`… file[${i}].name = ${file.name}`);
+    });
+  }
+}
+function dragOverHandler(ev) {
+  console.log("File(s) in drop zone");
+
+  // Prevent default behavior (Prevent file from being opened)
+  ev.preventDefault();
+}
+
+                    function updateSelectedFilesContainer() {
+                var selectedFilesContainer = $('.file-grid');
+                selectedFilesContainer.empty();
+
+                selectedFiles.forEach(function (file, index) {
+                    console.log(selectedFiles.length)
+                    console.log(file)
+                    var fileElement = $('<div>')
+                        .addClass('selected-file');
+
+                    if (file.type && file.type.includes('image')) {
+                        // Handle image files
+                        fileElement.append(
+                            $('<div>').addClass('file-preview')
+                                .append($('<img style="height:80px">').attr('src', URL.createObjectURL(file)))
+                        );
+                    } else if (file.type && file.type.includes('pdf')) {
+                        // Handle PDF files
+                        fileElement.append(
+                            $('<div>').addClass('file-preview')
+                                .append($('<i style="font-size:50px">').addClass('fi fi-rs-file-pdf')) // Add your PDF icon class here
+                        );
+                    } else {
+                        // Handle S3 bucket URLs for images and PDFs
+                        if (file?.imageKey?.endsWith('.jpg') || file?.imageKey?.endsWith('.png')) {
+                            fileElement.append(
+                                $('<div>').addClass('file-preview')
+                                    .append($('<img style="height:80px">').attr('src', file.Image))
+                            );
+                        } else if (file?.imageKey?.endsWith('.pdf')) {
+                            fileElement.append(
+                                $('<div>').addClass('file-preview')
+                                    .append($('<i style="font-size:50px">').addClass('fi fi-rs-file-pdf'))
+                            );
+                        } else {
+                            // Handle other files (you can modify this part as needed)
+                            fileElement.append(
+                                $('<div>').addClass('file-preview')
+                                    .append($('<i>').addClass('fi fi-rs-file')) // Add an appropriate class for other files
+                            );
+                        }
+                    }
+                    if (file instanceof File) {
+                        fileElement
+                            .append(
+                                $('<div>')
+                                    .addClass('file-details')
+                                    .append($('<span>').text(file.type.includes('pdf') ? "PDF-" + (index + 1) : "Image-" + (index + 1)))
+                            )
+                            .append(
+                                $('<span>')
+                                    .addClass('delete-file')
+                                    .text('X')
+                                    .attr('data-index', index)
+                            )
+                            .appendTo(selectedFilesContainer);
+                    } else if(file instanceof Object) {
+                        if(file.Image){
+                            fileElement
+                            .append(
+                                $('<div>')
+                                    .addClass('file-details')
+                                    .append($('<span>').text(file?.imageKey?.includes('pdf') ? "PDF-" + (index + 1) : "Image-" + (index + 1)))
+                            )
+                            .append(
+                                $('<span>')
+                                    .addClass('delete-file')
+                                    .text('X')
+                                    .attr('data-index', index)
+                            )
+                            .appendTo(selectedFilesContainer);
+                        }
+                    }
+
+                });
+            }
         $(document).ready(function () {
 
             $(document).on("click", "#preview", function () {
@@ -2423,12 +2531,12 @@
                     })
                 }
             });
-            var selectedFiles = [];
+            
             $('#fileInput').on('change', function () {
                 var files = Array.from($(this)[0].files);
                 // console.log(files)
                 files.forEach(function (file) {
-                    selectedFiles.push(file); // Add each file to the selected files array
+                    file.size <= 5 * 1024 * 1024 && selectedFiles.length < 5 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array // Add each file to the selected files array
                 });
 
                 updateSelectedFilesContainer(); // Update the selected files container
@@ -2438,7 +2546,7 @@
                 var files = Array.from($(this)[0].files);
                 // console.log(files)
                 files.forEach(function (file) {
-                    selectedFiles.push(file); // Add each file to the selected files array
+                    file.size <= 5 * 1024 * 1024 && selectedFiles.length < 5 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array // Add each file to the selected files array
                 });
 
                 updateSelectedFilesContainer(); // Update the selected files container
@@ -2449,36 +2557,6 @@
                 selectedFiles.splice(index, 1); // Remove the selected file from the array
                 updateSelectedFilesContainer(); // Update the selected files container
             });
-            function updateSelectedFilesContainer() {
-                var selectedFilesContainer = $('.file-grid');
-                selectedFilesContainer.empty();
-                console.log(selectedFiles)
-                selectedFiles.forEach(function (file, index) {
-
-                    var fileElement = $('<div>')
-                        .addClass('selected-file')
-                        .append(
-                            $('<img>')
-                                .addClass('file-preview')
-                                .attr('src', typeof file === "object" ? URL.createObjectURL(file) : '../../../../spadeAPI/uploads/' + file)
-                        )
-                        .append(
-                            $('<div>')
-                                .addClass('file-details')
-                                .append($('<span>').text("Image-" + (index + 1)))
-                            // .append($('<span>').text(fileSize))
-                        )
-                        .append(
-                            $('<p>')
-                                .addClass('delete-file')
-                                .text('X')
-                                .attr('data-index', index)
-                        )
-                        .appendTo(selectedFilesContainer);
-
-                });
-
-            }
 
             function formatFileSize(bytes) {
                 if (bytes === 0) return '0 Bytes';

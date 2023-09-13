@@ -772,6 +772,7 @@
             background-repeat: no-repeat;
             background-size: contain;
         }
+
         .dark-mode .disqualified {
             min-height: 70px;
             border-radius: 8px;
@@ -797,6 +798,41 @@
 </head>
 
 <body class="app sidebar-mini ltr light-mode">
+    <div class="modal fade" id="myModal_success" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
+                        <!-- <div class="card-header border-0 pt-3">
+                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                            </button>
+                        </div> -->
+                        <div class="card-body text-center">
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
+                                    viewBox="0 0 24 24">
+                                    <path fill="#13bfa6"
+                                        d="M10.3125,16.09375a.99676.99676,0,0,1-.707-.293L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328l-6.1875,6.1875A.99676.99676,0,0,1,10.3125,16.09375Z"
+                                        opacity=".99" />
+                                    <path fill="#71d8c9"
+                                        d="M12,2A10,10,0,1,0,22,12,10.01146,10.01146,0,0,0,12,2Zm5.207,7.61328-6.1875,6.1875a.99963.99963,0,0,1-1.41406,0L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328Z" />
+                                </svg></span>
+                            <h4 class="h4 mb-0 mt-3 fw-bold">Success</h4>
+                            <p class="card-text text-dark">Successfully Added</p>
+                        </div>
+                        <!-- <div class="card-footer text-center border-0 pt-0">
+                            <div class="row">
+                                <div class="text-center">
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
@@ -899,17 +935,28 @@
                                             placeholder="Enter Prospects Details" required>
                                         <span class="text-danger d-none">Prospects Details is required!</span>
                                     </div>
-                                    <div class="col-md-12 col-lg-12 col-xl-12">
+                                    <div class="col-md-8 col-lg-8 col-xl-8">
                                         <label for="inputState" class="form-label fw-bold">Source Campaign <span
                                                 class="text-danger">*</span></label>
                                         <select id="sourceCampaign" class="form-select form mb-2">
                                             <option selected>Choose...</option>
+                                            <option value="system">System</option>
                                         </select>
+
                                         <span class="text-danger d-none">Source Campaign is required!</span>
                                         <a href="javascript:void(0)" class="text-primary"
                                             style="text-decoration: underline;">+ Add Lead Source</a>
                                     </div>
+                                    <div class="col-md-4 col-lg-4 col-xl-4">
+                                        <label for="status" class="form-label fw-bold">Status <span
+                                                class="text-danger">*</span></label>
+                                        <select id="status" class="form-select form">
+                                            <option selected>Choose...</option>
+                                            <option value="system">System</option>
+                                        </select>
 
+                                        <span class="text-danger d-none">Status is required!</span>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -966,7 +1013,7 @@
                     <a href="javascript:void(0)" class="btn text-light button d-none" style='background-color:#1467B0;'
                         id='next'>Save</a>
                     <button class="btn text-light button" style='background-color:#1467B0;'
-                        id='next-add-property'>Next</button>
+                        id='next-add-prospect'>Next</button>
 
                 </div>
             </div>
@@ -1908,17 +1955,33 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <div class="text-justify ps-2 border-model-line">
-                                        <h2 class="modal-title"><strong>Prospects </strong><strong
-                                                class="color-primary">Pipeline</strong></h2>
-                                        <span class="">Build Your Pipeline with High-quality Prospects.</span>
+                                    <div class="d-flex">
+                                        <div class="text-justify ps-2 border-model-line">
+                                            <h2 class="modal-title"><strong>Prospects </strong><strong
+                                                    class="color-primary">Pipeline</strong></h2>
+                                            <span class="">Build Your Pipeline with High-quality Prospects.</span>
 
+                                        </div>
+                                        <span id="option-pipline" style="display: flex;align-items: center;">
+                                            <i class="fe fe-more-vertical fs-20 fw-bold" data-bs-toggle="dropdown"></i>
+                                            <ul class="dropdown-menu dropdown-menu-top">
+                                                <li><a class="dropdown-item text-dark" href="javascript:void(0)"
+                                                        id="kanban-view-option"><i
+                                                            class="fi fi-rs-grid-alt me-2"></i>Kanban
+                                                        View</a>
+                                                </li>
+                                                <li><a class="dropdown-item text-dark" href="javascript:void(0)"
+                                                        id="list-view-option"><i class="fi fi-rs-list me-2"></i>List
+                                                        View</a>
+                                                </li>
+                                            </ul>
+                                        </span>
                                     </div>
                                     <div class="export-button-hide" id="export-button-hide" style="display: none;">
                                         <div class="d-flex">
-                                            <button type="button" class="btn btn-primary mx-2"
+                                            <!-- <button type="button" class="btn btn-primary mx-2"
                                                 onclick="exportTableToCSV('person.csv')" id="download_csv_reports"
-                                                style="height: fit-content;"><strong>Export as CSV</strong></button>
+                                                style="height: fit-content;"><strong>Export as CSV</strong></button> -->
                                             <button type="button" class="btn btn-primary mx-2" id="download_pdf_reports"
                                                 style="height: fit-content;"><strong>Export as PDF</strong></button>
                                             <div class="btn-group">
@@ -1965,19 +2028,7 @@
                                         </div>
                                                   
                                     </div>
-                                    <div id="option-pipline">
-                                        <i class="fe fe-more-vertical fs-20 fw-bold" data-bs-toggle="dropdown"></i>
-                                        <ul class="dropdown-menu dropdown-menu-top">
-                                            <li><a class="dropdown-item text-dark" href="javascript:void(0)"
-                                                    id="kanban-view-option"><i class="fi fi-rs-grid-alt me-2"></i>Kanban
-                                                    View</a>
-                                            </li>
-                                            <li><a class="dropdown-item text-dark" href="javascript:void(0)"
-                                                    id="list-view-option"><i class="fi fi-rs-list me-2"></i>List
-                                                    View</a>
-                                            </li>
-                                        </ul>
-                                    </div>
+
                                 </div>
                             </div>
                             <div class="col-12">
@@ -2005,8 +2056,9 @@
                                                 </ul>
                                             </div>
                                             <button type="button" class="btn btn-primary btn-pill mx-2"
-                                                data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal"><i
-                                                    class="fe fe-plus me-2"></i><strong>ADD PROSPECTS</strong></button>
+                                                id="add_prospect" data-bs-effect="effect-scale" data-bs-toggle="modal"
+                                                href="#addModal"><i class="fe fe-plus me-2"></i><strong>ADD
+                                                    PROSPECTS</strong></button>
                                         </div>
                                         <div class="panel-body tabs-menu-body mt-4">
                                             <div class="tab-content">
@@ -2020,11 +2072,11 @@
                                                                             class="card-header justify-content-between">
                                                                             <div class="d-flex">
                                                                                 <div class="btn-group">
-                                                                                    <button type="button"
+                                                                                    <!-- <button type="button"
                                                                                         class="btn btn-outline-default text-dark py-1"
                                                                                         id="filter_btn"
                                                                                         data-bs-toggle="dropdown"><i
-                                                                                            class="typcn typcn-filter me-2 fs-16 text-dark"></i><strong>Filter</strong></button>
+                                                                                            class="typcn typcn-filter me-2 fs-16 text-dark"></i><strong>Filter</strong></button> -->
                                                                                     <ul class="dropdown-menu"
                                                                                         role="menu">
                                                                                         <li><a
@@ -2197,8 +2249,32 @@
                                                                                         <li
                                                                                             class="d-flex justify-content-between">
                                                                                             <a class="text-dark"
-                                                                                                href="javascript:void(0)">Property
-                                                                                                name</a>
+                                                                                                href="javascript:void(0)">PROSPECTS
+                                                                                                NAME</a>
+                                                                                            <div class="form-check m-0">
+                                                                                                <input type="checkbox"
+                                                                                                    class="form-check-input mt-2"
+                                                                                                    id="exampleCheck1"
+                                                                                                    checked>
+                                                                                            </div>
+                                                                                        </li>
+                                                                                        <li
+                                                                                            class="d-flex justify-content-between">
+                                                                                            <a class="text-dark"
+                                                                                                href="javascript:void(0)">SOURCE
+                                                                                                CAMPAIGN</a>
+                                                                                            <div class="form-check m-0">
+                                                                                                <input type="checkbox"
+                                                                                                    class="form-check-input mt-2"
+                                                                                                    id="exampleCheck1"
+                                                                                                    checked>
+                                                                                            </div>
+                                                                                        </li>
+                                                                                        <li
+                                                                                            class="d-flex justify-content-between">
+                                                                                            <a class="text-dark"
+                                                                                                href="javascript:void(0)">PROPERTY
+                                                                                                NAME</a>
                                                                                             <div class="form-check m-0">
                                                                                                 <input type="checkbox"
                                                                                                     class="form-check-input mt-2"
@@ -2210,7 +2286,8 @@
                                                                                         <li
                                                                                             class="d-flex justify-content-between">
                                                                                             <a class="text-dark"
-                                                                                                href="javascript:void(0)">Units</a>
+                                                                                                href="javascript:void(0)">TOTAL
+                                                                                                UNITS</a>
                                                                                             <div class="form-check m-0">
                                                                                                 <input type="checkbox"
                                                                                                     class="form-check-input mt-2"
@@ -2221,8 +2298,8 @@
                                                                                         <li
                                                                                             class="d-flex justify-content-between">
                                                                                             <a class="text-dark"
-                                                                                                href="javascript:void(0)">Contact
-                                                                                                info</a>
+                                                                                                href="javascript:void(0)">CONTACT
+                                                                                                INFO</a>
                                                                                             <div class="form-check m-0">
                                                                                                 <input type="checkbox"
                                                                                                     class="form-check-input mt-2"
@@ -2233,7 +2310,7 @@
                                                                                         <li
                                                                                             class="d-flex justify-content-between">
                                                                                             <a class="text-dark"
-                                                                                                href="javascript:void(0)">Amount</a>
+                                                                                                href="javascript:void(0)">AMOUNT</a>
                                                                                             <div class="form-check m-0">
                                                                                                 <input type="checkbox"
                                                                                                     class="form-check-input mt-2"
@@ -2244,8 +2321,8 @@
                                                                                         <li
                                                                                             class="d-flex justify-content-between">
                                                                                             <a class="text-dark"
-                                                                                                href="javascript:void(0)">Date
-                                                                                                create</a>
+                                                                                                href="javascript:void(0)">DATE
+                                                                                                CREATED</a>
                                                                                             <div class="form-check m-0">
                                                                                                 <input type="checkbox"
                                                                                                     class="form-check-input mt-2"
@@ -2256,7 +2333,7 @@
                                                                                         <li
                                                                                             class="d-flex justify-content-between">
                                                                                             <a class="text-dark"
-                                                                                                href="javascript:void(0)">Status</a>
+                                                                                                href="javascript:void(0)">STATUS</a>
                                                                                             <div class="form-check m-0">
                                                                                                 <input type="checkbox"
                                                                                                     class="form-check-input mt-2"
@@ -2291,115 +2368,26 @@
                                                                                                         class="custom-control-label"></span>
                                                                                                 </label></th>
                                                                                             <th>PROSPECTS NAME</th>
-                                                                                            <th>source campaign</th>
-                                                                                            <th>property name</th>
+                                                                                            <th>SOURCE CAMPAIGN</th>
+                                                                                            <th>PROPERTY NAME</th>
                                                                                             <th>TOTAL UNITS</th>
-                                                                                            <th>contact info</th>
-                                                                                            <th>amount</th>
-                                                                                            <th>date CREATED</th>
-                                                                                            <th>status</th>
-                                                                                            <th>action</th>
+                                                                                            <th>CONTACT INFO</th>
+                                                                                            <th>AMOUNT</th>
+                                                                                            <th>DATE CREATED</th>
+                                                                                            <th>STATUS</th>
+
                                                                                         </tr>
                                                                                     </thead>
-                                                                                    <tbody id="">
-                                                                                        <tr>
-                                                                                            <td><label
-                                                                                                    class="custom-control custom-checkbox-md">
-                                                                                                    <input
-                                                                                                        type="checkbox"
-                                                                                                        class="custom-control-input"
-                                                                                                        name="example-checkbox5"
-                                                                                                        value="option5"
-                                                                                                        checked="">
-                                                                                                    <span
-                                                                                                        class="custom-control-label"></span>
-                                                                                                </label></td>
-                                                                                            <td>Realvest</td>
-                                                                                            <td class="text-primary">
-                                                                                                <span
-                                                                                                    class="fw-bold">LoopNet</span><br><small>https://www.facebook.com/story.php?story_</small>
-                                                                                            </td>
-                                                                                            <td><span
-                                                                                                    class="fw-bold">Pensgate
-                                                                                                    St</span><br><small>9430
-                                                                                                    Research Blvd. Ste
-                                                                                                    2-350
-                                                                                                    Austin TX
-                                                                                                    78759</small></td>
-                                                                                            <td><span class="fw-bold">1
-                                                                                                    Unit</span><br><small
-                                                                                                    class="text-primary"><i
-                                                                                                        class="fe fe-circle me-1 text-primary"></i>9
-                                                                                                    (Vacant)</small><br><small
-                                                                                                    class="text-danger"><i
-                                                                                                        class="fe fe-circle me-1 text-danger"></i>9
-                                                                                                    (Vacant)</small>
-                                                                                            </td>
-                                                                                            <td><span
-                                                                                                    class="fw-bold">example@gmail.com</span><br><small>(+256)
-                                                                                                    2145.215-6</small>
-                                                                                            </td>
-                                                                                            <td><span
-                                                                                                    class="fw-bold">$170,000</span>
-                                                                                            </td>
-                                                                                            <td><span
-                                                                                                    class="fw-bold">17/12/220</span>
-                                                                                            </td>
-                                                                                            <td><span
-                                                                                                    class="fw-bold text-danger"
-                                                                                                    data-bs-toggle="dropdown"
-                                                                                                    style="cursor: pointer;">Disqualified
-                                                                                                    <i
-                                                                                                        class="fi fi-rs-angle-small-down text-danger"></i></span>
-                                                                                                <ul
-                                                                                                    class="dropdown-menu dropdown-menu-top">
-                                                                                                    <li><a class="dropdown-item text-dark"
-                                                                                                            href="javascript:void(0)"><i
-                                                                                                                class="fi fi-rs-user text-dark me-2"></i>
-                                                                                                            Active</a>
-                                                                                                    </li>
-                                                                                                    <li><a class="dropdown-item text-dark"
-                                                                                                            href="javascript:void(0)"><i
-                                                                                                                class="fi fi-rs-minus-circle text-dark me-2"></i>
-                                                                                                            Engaged</a>
-                                                                                                    </li>
-                                                                                                    <li><a class="dropdown-item text-dark"
-                                                                                                            href="javascript:void(0)"><i
-                                                                                                                class="fi fi-rs-hand-holding-heart text-dark me-2"></i>
-                                                                                                            Nurturing</a>
-                                                                                                    </li>
-                                                                                                    <li><a class="dropdown-item text-success"
-                                                                                                            href="javascript:void(0)"><i
-                                                                                                                class="fi fi-rs-check-circle me-2 text-success"></i>
-                                                                                                            Qualified</a>
-                                                                                                    </li>
-                                                                                                    <li><a class="dropdown-item text-danger"
-                                                                                                            href="javascript:void(0)"><i
-                                                                                                                class="fi fi-rs-circle-xmark text-danger text-danger me-2"></i>
-                                                                                                            Disqualified</a>
-                                                                                                    </li>
-                                                                                                </ul>
+                                                                                    <tbody id="table-body">
 
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                <i class="fe fe-more-vertical"
-                                                                                                    data-bs-toggle="dropdown"></i>
-                                                                                                <ul
-                                                                                                    class="dropdown-menu dropdown-menu-top">
-                                                                                                    <li><a class="dropdown-item text-dark"
-                                                                                                            href="javascript:void(0)">Kanban
-                                                                                                            View</a>
-                                                                                                    </li>
-                                                                                                    <li><a class="dropdown-item text-dark"
-                                                                                                            href="javascript:void(0)">List
-                                                                                                            View</a>
-                                                                                                    </li>
-                                                                                                </ul>
-                                                                                            </td>
-                                                                                        </tr>
                                                                                     </tbody>
                                                                                 </table>
                                                                             </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="float-end">
+                                                                        <div class="fs-20">
+                                                                            <span class="text-dark fw-bold">Total Amount:</span> <span class="text-primary fw-bold">$ 34,44544</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -2481,15 +2469,11 @@
                                                                                         </a>
                                                                                         <div
                                                                                             class="dropdown-menu dropdown-menu-end">
-                                                                                            <a class="dropdown-item text-dark"
-                                                                                                href="javascript:void(0)">Edit
-                                                                                                Post</a>
-                                                                                            <a class="dropdown-item text-dark"
-                                                                                                href="javascript:void(0)">Delete
-                                                                                                Post</a>
-                                                                                            <a class="dropdown-item text-dark"
-                                                                                                href="javascript:void(0)">Personal
-                                                                                                Settings</a>
+                                                                                            <a class="dropdown-item text-success fw-bold"
+                                                                                                href="javascript:void(0)">Edit</a>
+                                                                                            <a class="dropdown-item text-danger fw-bold"
+                                                                                                href="javascript:void(0)">Delete</a>
+
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -2577,15 +2561,11 @@
                                                                                         </a>
                                                                                         <div
                                                                                             class="dropdown-menu dropdown-menu-end">
-                                                                                            <a class="dropdown-item text-dark"
-                                                                                                href="javascript:void(0)">Edit
-                                                                                                Post</a>
-                                                                                            <a class="dropdown-item text-dark"
-                                                                                                href="javascript:void(0)">Delete
-                                                                                                Post</a>
-                                                                                            <a class="dropdown-item text-dark"
-                                                                                                href="javascript:void(0)">Personal
-                                                                                                Settings</a>
+                                                                                            <a class="dropdown-item text-success fw-bold"
+                                                                                                href="javascript:void(0)">Edit</a>
+                                                                                            <a class="dropdown-item text-danger fw-bold"
+                                                                                                href="javascript:void(0)">Delete</a>
+
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -2671,15 +2651,11 @@
                                                                                         </a>
                                                                                         <div
                                                                                             class="dropdown-menu dropdown-menu-end">
-                                                                                            <a class="dropdown-item text-dark"
-                                                                                                href="javascript:void(0)">Edit
-                                                                                                Post</a>
-                                                                                            <a class="dropdown-item text-dark"
-                                                                                                href="javascript:void(0)">Delete
-                                                                                                Post</a>
-                                                                                            <a class="dropdown-item text-dark"
-                                                                                                href="javascript:void(0)">Personal
-                                                                                                Settings</a>
+                                                                                            <a class="dropdown-item text-success fw-bold"
+                                                                                                href="javascript:void(0)">Edit</a>
+                                                                                            <a class="dropdown-item text-danger fw-bold"
+                                                                                                href="javascript:void(0)">Delete</a>
+
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -2795,11 +2771,11 @@
                                                                 <div class="card-header justify-content-between">
                                                                     <div class="d-flex">
                                                                         <div class="btn-group">
-                                                                            <button type="button"
+                                                                            <!-- <button type="button"
                                                                                 class="btn btn-outline-default text-dark py-1"
                                                                                 id="filter_btn"
                                                                                 data-bs-toggle="dropdown"><i
-                                                                                    class="typcn typcn-filter me-2 fs-16 text-dark"></i><strong>Filter</strong></button>
+                                                                                    class="typcn typcn-filter me-2 fs-16 text-dark"></i><strong>Filter</strong></button> -->
                                                                             <ul class="dropdown-menu" role="menu">
                                                                                 <li><a href="javascript:void(0)"><strong
                                                                                             class="text-dark">Filter
@@ -2943,7 +2919,7 @@
                                                                                         class="fe fe-search"
                                                                                         aria-hidden="true"></i></button>
                                                                                 <input type="text" class="form-control"
-                                                                                    id="typehead"
+                                                                                    id="typehead1"
                                                                                     placeholder="Search Users by Name, Email or Date"
                                                                                     autocomplete="off"
                                                                                     style="width: 300px;">
@@ -3178,11 +3154,11 @@
                                                                 <div class="card-header justify-content-between">
                                                                     <div class="d-flex">
                                                                         <div class="btn-group">
-                                                                            <button type="button"
+                                                                            <!-- <button type="button"
                                                                                 class="btn btn-outline-default text-dark py-1"
                                                                                 id="filter_btn"
                                                                                 data-bs-toggle="dropdown"><i
-                                                                                    class="typcn typcn-filter me-2 fs-16 text-dark"></i><strong>Filter</strong></button>
+                                                                                    class="typcn typcn-filter me-2 fs-16 text-dark"></i><strong>Filter</strong></button> -->
                                                                             <ul class="dropdown-menu" role="menu">
                                                                                 <li><a href="javascript:void(0)"><strong
                                                                                             class="text-dark">Filter
@@ -4426,7 +4402,7 @@
 
     <!-- INPUT MASK JS-->
     <script src="../assets/plugins/input-mask/jquery.mask.min.js"></script>
-
+    <script src="../assets/js/accordian.js"></script>
     <!-- CHARTJS JS -->
     <script src="../assets/plugins/chart/Chart.bundle.js"></script>
     <script src="../assets/plugins/chart/utils.js"></script>
@@ -4486,7 +4462,74 @@
     </script>
     <script>
         $(document).ready(function () {
+            $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/getPropertyUnitsTenant',
+                type: 'GET',
+                contentType: false,
+                processData: false,
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    var properties = response.data;
+                    console.log(response.data)
+                    // Assuming the response data is an array of property objects
+                    // Populate Select Property dropdown
+                    var propertySelect = $('#propertyInfo');
+                    propertySelect.empty(); // Clear existing options
+                    propertySelect.append($('<option></option>')
+                        .text("Choose...")
+                    )
+                    properties.forEach(function (property) {
+                        var option = $('<option></option>')
+                            .text(property.propertyName)
+                            .val(property.id);
+                        propertySelect.append(option);
+                    });
+                    propertySelect.change(function () {
+                        var selectedPropertyId = $(this).val();
 
+                        // Find the selected property object
+                        var selectedProperty = properties.find(function (property) {
+                            return property.id == selectedPropertyId;
+                        });
+
+                        // Populate Select Property Unit dropdown
+                        var propertyUnitSelect = $('#unitInfo');
+                        // Clear existing options
+                        propertyUnitSelect.empty()
+
+                        console.log(selectedProperty)
+                        if (selectedProperty.vacantUnits.length === 0) {
+
+                            propertyUnitSelect.prop("disabled", true);
+                            propertyUnitSelect.append($('<option></option>')
+                                .text("No unit available!!"))
+                        } else {
+                            propertyUnitSelect.prop("disabled", false);
+                            propertyUnitSelect.append($('<option></option>')
+                                .text("Choose..."))
+
+                            selectedProperty.vacantUnits.forEach(function (unit) {
+
+                                var option = $('<option></option>')
+                                    .text(unit.unitNumber)
+                                    .val(unit.id);
+                                propertyUnitSelect.append(option);
+                            });
+                        }
+
+                    });
+                },
+                error: function (xhr, status, error) {
+                    $("#myModal_warning_connection").modal("show");
+                    setTimeout(function () {
+                        $('#myModal_warning_connection').modal('hide');
+
+                    }, 2000);
+                    console.log('Error: ' + error);
+                }
+            });
             $("#list-view").hide();
             $("#kanban-view-option").click(function () {
                 $("#kanban-view").show();
@@ -4499,6 +4542,17 @@
                 $("#kanban-view-picker").hide();
                 $("#list-view").show();
             });
+            $('input[type="checkbox"]').change(function () {
+                var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
+                var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
+                console.log(columnIndex, isColumnVisible)
+                // Toggle the visibility of the corresponding column
+                $('table').find('tr').each(function () {
+                    var column = $(this).find('th:nth-child(' + (columnIndex + 1) + '), td:nth-child(' + (columnIndex + 1) + ')');
+                    isColumnVisible ? column.show() : column.hide();
+                });
+            });
+
             function updateButtonStatus() {
                 var accordion1Fields = $('#accordion-item1 input[required], #accordion-item1 select[required]');
                 var accordion2Fields = $('#accordion-item2 input[required], #accordion-item2 select[required]');
@@ -4513,22 +4567,41 @@
                     return $(this).val() !== '';
                 }).length === 0;
 
-                // Enable or disable the buttons based on the fields' status
-                if (!isAccordion1FieldsEmpty || !isAccordion2FieldsEmpty || !isAccordion3FieldsEmpty) {
-                    $('#draft').removeAttr('disabled');
-                } else {
-                    $('#draft').attr('disabled', 'disabled');
-                }
+                // Handle property selection change
 
-                var allFieldsFilled = areAllFieldsFilled();
-
-                // Enable or disable the buttons based on the fields' status
-                if (allFieldsFilled) {
-                    $('#next').removeClass("disabled").removeAttr("disabled");
-                } else {
-                    $('#next').addClass("disabled").attr("disabled", "disabled");
-                }
             }
+
+            // function updateButtonStatus() {
+            //     var accordion1Fields = $('#accordion-item1 input[required], #accordion-item1 select[required]');
+            //     var accordion2Fields = $('#accordion-item2 input[required], #accordion-item2 select[required]');
+            //     var accordion3Fields = $('#accordion-item3 input[required]');
+            //     var isAccordion1FieldsEmpty = accordion1Fields.filter(function () {
+            //         return $(this).val() !== '' || $(this).val() === 'Choose...';
+            //     }).length === 0;
+            //     var isAccordion2FieldsEmpty = accordion2Fields.filter(function () {
+            //         return $(this).val() !== '' || $(this).val() === 'Choose...';
+            //     }).length === 0;
+            //     var isAccordion3FieldsEmpty = accordion3Fields.filter(function () {
+            //         return $(this).val() !== '';
+            //     }).length === 0;
+
+            //     // Enable or disable the buttons based on the fields' status
+            //     if (!isAccordion1FieldsEmpty || !isAccordion2FieldsEmpty || !isAccordion3FieldsEmpty) {
+            //         $('#draft').removeAttr('disabled');
+            //     } else {
+            //         $('#draft').attr('disabled', 'disabled');
+            //     }
+
+            //     // var allFieldsFilled = areAllFieldsFilled();
+
+            //     // Enable or disable the buttons based on the fields' status
+            //     if (allFieldsFilled) {
+            //         $('#next').removeClass("disabled").removeAttr("disabled");
+            //     } else {
+            //         $('#next').addClass("disabled").attr("disabled", "disabled");
+            //     }
+            // }
+
             // Call the updateButtonStatus function when any field in the accordions is changed
             $('#accordion-item1 input[type="text"],#accordion-item1 input[type="tel"], #accordion-item1 select, #accordion-item2 input, #accordion-item2 select, #accordion-item3 input, #accordion-item3 select').on('input change', function () {
                 var $field = $(this);
@@ -4552,7 +4625,152 @@
                     $field.addClass('border-green');
                     $errorMessage.addClass('d-none');
                 }
-                updateButtonStatus();
+                // updateButtonStatus();
+            });
+            $('#typehead').on('keyup', function () {
+                var searchValue = $(this).val().toLowerCase();
+                $('#table-body tr').filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+                });
+            });
+            function getData() {
+                // Assuming response.data is an array of objects containing prospectus and property data
+                $.ajax({
+                    url: 'http://localhost:3000/api/spade/getProspectus',
+                    type: 'GET',
+                    contentType: 'application/json',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        console.log(response.data);
+                        response?.data?.forEach(function (item, index) {
+                            var row = $('<tr>');
+                            var prospectus = item?.prospectus;
+                            var property = item?.property;
+
+                            row.append($('<td>').html('<label class="custom-control custom-checkbox-md"><input type="checkbox" class="custom-control-input" name="example-checkbox' + index + '" value="option' + index + '" checked=""><span class="custom-control-label"></span></label>'));
+                            row.append($('<td>').text(prospectus.firstName + ' ' + prospectus.lastName));
+                            row.append($('<td>').html('<span class="fw-bold">' + prospectus.sourceCampaign + '</span><br><small>' + "https:spaderent.com" + '</small>'));
+                            row.append($('<td>').html('<span class="fw-bold">' + property.propertyName + '</span><br><small>' + (property.address + ", " + property.city + ", " + property.state) + '</small>'));
+                            row.append($('<td>').html('<span class="fw-bold">' + property.totalunits + '</span><br><small class="text-primary"><i class="fe fe-circle me-1 text-primary"></i>' + property.totalVacant + ' (Vacant)</small><br><small class="text-danger"><i class="fe fe-circle me-1 text-danger"></i>' + property.totalOccupied + ' (Occupied)</small>'));
+                            row.append($('<td>').html('<span class="fw-bold">' + prospectus.email + '</span><br><small>(' + prospectus.phoneNumber + ')</small>'));
+                            row.append($('<td>').html('<span class="fw-bold">' + "$ " + prospectus.rentAmount + '</span>'));
+                            row.append($('<td>').html('<span class="fw-bold">' + prospectus.moveDate + '</span>'));
+
+                            var dropdownToggle = $('<span class="fw-bold text-danger" data-bs-toggle="dropdown" style="cursor: pointer;">' + prospectus.prospectusStatus + '<i class="fi fi-rs-angle-small-down text-danger"></i></span>');
+                            var dropdownMenu = $('<ul class="dropdown-menu dropdown-menu-top">');
+                            dropdownMenu.append('<li><a class="dropdown-item text-dark" href="javascript:void(0)" data-status="Active"><i class="fi fi-rs-user text-dark me-2"></i>Active</a></li>');
+                            dropdownMenu.append('<li><a class="dropdown-item text-dark" href="javascript:void(0)" data-status="Engaged"><i class="fi fi-rs-minus-circle text-dark me-2"></i>Engaged</a></li>');
+                            dropdownMenu.append('<li><a class="dropdown-item text-dark" href="javascript:void(0)" data-status="Nurturing"><i class="fi fi-rs-hand-holding-heart text-dark me-2"></i>Nurturing</a></li>');
+                            dropdownMenu.append('<li><a class="dropdown-item text-success" href="javascript:void(0)" data-status="Qualified"><i class="fi fi-rs-check-circle me-2 text-success"></i>Qualified</a></li>');
+                            dropdownMenu.append('<li><a class="dropdown-item text-danger" href="javascript:void(0)" data-status="Disqualified"><i class="fi fi-rs-circle-xmark text-danger text-danger me-2"></i>Disqualified</a></li>');
+
+                            dropdownMenu.find('a').on('click', function () {
+                                var newStatus = $(this).data('status');
+                                dropdownToggle.text(newStatus);
+
+                                // Make API call to update status
+                                $.ajax({
+                                    url: 'http://localhost:3000/api/spade/updateProspectusStatus',
+                                    type: 'PUT',
+                                    data: JSON.stringify({
+                                        prospectusid: prospectus?.id,
+                                        prospectusStatus: newStatus
+                                    }),
+                                    contentType: 'application/json',
+                                    headers: {
+                                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                                    },
+                                    success: function (response) {
+                                        getData()
+                                    },
+                                    error: function (xhr, status, error) {
+                                        console.error('Error updating status:', error);
+                                    }
+                                });
+                            });
+
+                            row.append($('<td>').html(dropdownToggle).append(dropdownMenu));
+
+                            $('#table-body').append(row);
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle error
+                    }
+                });
+
+            }
+            getData()
+            $(document).on('click', '#next', function (e) {
+                e.preventDefault();
+
+                var firstName = $("#firstName").val();
+                var middleName = $("#middleName").val();
+                var lastName = $("#lastName").val();
+                var phone = $("#phone").val();
+                var email = $("#email").val();
+                var propertyInfo = $("#propertyInfo").val();
+                var unitInfo = $("#unitInfo").val();
+                var propertyDetail = $("#propertyDetail").val();
+                var sourceCampaign = $("#sourceCampaign").val();
+                var moveInDate = $("#moveInDate").val();
+                var potentialRentAmount = $("#potentialRentAmount").val();
+                var status = $("#status").val();
+                var data = {
+                    firstName: firstName,
+                    middleName: middleName,
+                    lastName: lastName,
+                    phoneNumber: phone,
+                    email: email,
+                    propertyInfo: propertyInfo,
+                    unitInfo: unitInfo,
+                    prospectDetail: propertyDetail,
+                    sourceCampaign: sourceCampaign,
+                    moveDate: moveInDate,
+                    rentAmount: potentialRentAmount,
+                    prospectusStatus: status
+                }
+                $("#addModal").modal("hide")
+
+
+                $.ajax({
+                    url: 'http://localhost:3000/api/spade/addprospectus',
+                    type: 'POST',
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        if (response.message == " prospectus created successful") {
+                            $("#myModal_success").modal("show");
+                            setTimeout(function () {
+                                $('#myModal_success').modal('hide');
+
+                            }, 2000);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        if (xhr.responseJSON.error === 'No data found') {
+                            $('#addModal').modal('hide');
+                            $('#infoModal').modal('show');
+                            setTimeout(function () {
+                                $('#infoModal').modal('hide');
+                            }, 2000);
+                        } else {
+                            $('#addModal').modal('hide');
+                            $("#myModal_warning_connection").modal("show");
+                            setTimeout(function () {
+                                $('#myModal_warning_connection').modal('hide');
+                            }, 2000);
+                        }
+                    }
+                });
+
+
+
             });
 
             $.ajax({
@@ -4584,7 +4802,8 @@
                 } else {
                     $('.Rent-logo').attr('src', '../assets/images/Artboard GÇô 1.svg');
                 }
-            });
+            })
+
         });
 
     </script>
@@ -4874,34 +5093,43 @@
         const showButton5 = document.getElementById('tab333');
         const displayText = document.getElementById('export-button-hide');
         const option_pipline = document.getElementById('option-pipline');
+        const add_prospect = document.getElementById('add_prospect');
+
 
         showButton1.addEventListener('click', () => {
             displayText.style.display = 'none';
-            option_pipline.style.display = 'block';
+            option_pipline.style.display = 'flex';
+            add_prospect.style.display = 'block';
 
         });
 
         showButton2.addEventListener('click', () => {
             displayText.style.display = 'none';
-            option_pipline.style.display = 'block';
+            option_pipline.style.display = 'none';
+            add_prospect.style.display = 'block';
+
 
         });
 
         //    showButton3.addEventListener('click', () => {
         //        displayText.style.display = 'none';
-        //        option_pipline.style.display = 'block';
+        //        option_pipline.style.display = 'flex';
 
         //    });
 
         showButton4.addEventListener('click', () => {
             displayText.style.display = 'none';
-            option_pipline.style.display = 'block';
+            option_pipline.style.display = 'none';
+            add_prospect.style.display = 'block';
+
 
         });
 
         showButton5.addEventListener('click', () => {
             option_pipline.style.display = 'none';
             displayText.style.display = 'block';
+            add_prospect.style.display = 'none';
+
 
         });
 
