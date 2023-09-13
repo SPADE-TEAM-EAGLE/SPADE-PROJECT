@@ -751,6 +751,48 @@
             margin-left: 0;
 
         }
+
+        .disqualified {
+            min-height: 70px;
+            border-radius: 8px;
+            border: 2px dotted red;
+            background: url(../assets/images/Group\ 660.png);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+
+        .qualified {
+
+            min-height: 70px;
+            border-radius: 8px;
+            border: 2px dotted green;
+            background: url(../assets/images/Group\ 661.png);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+
+        .dark-mode .disqualified {
+            min-height: 70px;
+            border-radius: 8px;
+            border: 2px dotted red;
+            background: url(../assets/images/Group\ 662.png);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+
+        .dark-mode .qualified {
+
+            min-height: 70px;
+            border-radius: 8px;
+            border: 2px dotted green;
+            background: url(../assets/images/Group\ 663.png);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
     </style>
 
 </head>
@@ -1826,6 +1868,7 @@
                                 <a class="side-menu__item" data-bs-toggle="slide" href="chats.html">
                                     <i class="side-menu__icon fi fi-rs-comment"></i>
                                     <span class="side-menu__label">Chat</span>
+                                    <span class="badge bg-primary side-badge">6</span>
 
                                     <!-- <i class="angle fe fe-chevron-right"></i> -->
                                 </a>
@@ -1912,17 +1955,33 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <div class="text-justify ps-2 border-model-line">
-                                        <h2 class="modal-title"><strong>Prospects </strong><strong
-                                                class="color-primary">Pipeline</strong></h2>
-                                        <span class="">Build Your Pipeline with High-quality Prospects.</span>
+                                    <div class="d-flex">
+                                        <div class="text-justify ps-2 border-model-line">
+                                            <h2 class="modal-title"><strong>Prospects </strong><strong
+                                                    class="color-primary">Pipeline</strong></h2>
+                                            <span class="">Build Your Pipeline with High-quality Prospects.</span>
 
+                                        </div>
+                                        <span id="option-pipline" style="display: flex;align-items: center;">
+                                            <i class="fe fe-more-vertical fs-20 fw-bold" data-bs-toggle="dropdown"></i>
+                                            <ul class="dropdown-menu dropdown-menu-top">
+                                                <li><a class="dropdown-item text-dark" href="javascript:void(0)"
+                                                        id="kanban-view-option"><i
+                                                            class="fi fi-rs-grid-alt me-2"></i>Kanban
+                                                        View</a>
+                                                </li>
+                                                <li><a class="dropdown-item text-dark" href="javascript:void(0)"
+                                                        id="list-view-option"><i class="fi fi-rs-list me-2"></i>List
+                                                        View</a>
+                                                </li>
+                                            </ul>
+                                        </span>
                                     </div>
                                     <div class="export-button-hide" id="export-button-hide" style="display: none;">
                                         <div class="d-flex">
-                                            <button type="button" class="btn btn-primary mx-2"
+                                            <!-- <button type="button" class="btn btn-primary mx-2"
                                                 onclick="exportTableToCSV('person.csv')" id="download_csv_reports"
-                                                style="height: fit-content;"><strong>Export as CSV</strong></button>
+                                                style="height: fit-content;"><strong>Export as CSV</strong></button> -->
                                             <button type="button" class="btn btn-primary mx-2" id="download_pdf_reports"
                                                 style="height: fit-content;"><strong>Export as PDF</strong></button>
                                             <div class="btn-group">
@@ -1969,19 +2028,7 @@
                                         </div>
                                                   
                                     </div>
-                                    <div id="option-pipline">
-                                        <i class="fe fe-more-vertical fs-20 fw-bold" data-bs-toggle="dropdown"></i>
-                                        <ul class="dropdown-menu dropdown-menu-top">
-                                            <li><a class="dropdown-item text-dark" href="javascript:void(0)"
-                                                    id="kanban-view-option"><i class="fi fi-rs-grid-alt me-2"></i>Kanban
-                                                    View</a>
-                                            </li>
-                                            <li><a class="dropdown-item text-dark" href="javascript:void(0)"
-                                                    id="list-view-option"><i class="fi fi-rs-list me-2"></i>List
-                                                    View</a>
-                                            </li>
-                                        </ul>
-                                    </div>
+
                                 </div>
                             </div>
                             <div class="col-12">
@@ -2009,8 +2056,9 @@
                                                 </ul>
                                             </div>
                                             <button type="button" class="btn btn-primary btn-pill mx-2"
-                                                data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal"><i
-                                                    class="fe fe-plus me-2"></i><strong>ADD PROSPECTS</strong></button>
+                                                id="add_prospect" data-bs-effect="effect-scale" data-bs-toggle="modal"
+                                                href="#addModal"><i class="fe fe-plus me-2"></i><strong>ADD
+                                                    PROSPECTS</strong></button>
                                         </div>
                                         <div class="panel-body tabs-menu-body mt-4">
                                             <div class="tab-content">
@@ -2024,11 +2072,11 @@
                                                                             class="card-header justify-content-between">
                                                                             <div class="d-flex">
                                                                                 <div class="btn-group">
-                                                                                    <button type="button"
+                                                                                    <!-- <button type="button"
                                                                                         class="btn btn-outline-default text-dark py-1"
                                                                                         id="filter_btn"
                                                                                         data-bs-toggle="dropdown"><i
-                                                                                            class="typcn typcn-filter me-2 fs-16 text-dark"></i><strong>Filter</strong></button>
+                                                                                            class="typcn typcn-filter me-2 fs-16 text-dark"></i><strong>Filter</strong></button> -->
                                                                                     <ul class="dropdown-menu"
                                                                                         role="menu">
                                                                                         <li><a
@@ -2338,6 +2386,11 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
+                                                                    <div class="float-end">
+                                                                        <div class="fs-20">
+                                                                            <span class="text-dark fw-bold">Total Amount:</span> <span class="text-primary fw-bold">$ 34,44544</span>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
 
@@ -2520,10 +2573,8 @@
                                                                         <div class="row">
                                                                             <div class="col-6"
                                                                                 style="text-align: center;">
-                                                                                <div class="column bg-transparent disqualified"
-                                                                                    style="min-height: 70px;border-radius: 8px;border: 2px dotted red;background: url(../assets/images/Group\ 660.png);background-position: center;
-                                                                                    background-repeat: no-repeat;
-                                                                                    background-size: contain;">
+                                                                                <div
+                                                                                    class="column bg-transparent disqualified">
 
                                                                                 </div>
                                                                                 <!-- <span class="text-dark fw-bold"><i
@@ -2532,10 +2583,8 @@
                                                                             </div>
                                                                             <div class="col-6"
                                                                                 style="text-align: center;">
-                                                                                <div class="column bg-transparent qualified"
-                                                                                    style="min-height: 70px;border-radius: 8px;border: 2px dotted green;background: url(../assets/images/Group\ 661.png);background-position: center;
-                                                                                    background-repeat: no-repeat;
-                                                                                    background-size: contain;">
+                                                                                <div
+                                                                                    class="column bg-transparent qualified">
 
                                                                                 </div>
                                                                                 <!-- <span class="text-dark fw-bold"><i
@@ -2556,11 +2605,11 @@
                                                                 <div class="card-header justify-content-between">
                                                                     <div class="d-flex">
                                                                         <div class="btn-group">
-                                                                            <button type="button"
+                                                                            <!-- <button type="button"
                                                                                 class="btn btn-outline-default text-dark py-1"
                                                                                 id="filter_btn"
                                                                                 data-bs-toggle="dropdown"><i
-                                                                                    class="typcn typcn-filter me-2 fs-16 text-dark"></i><strong>Filter</strong></button>
+                                                                                    class="typcn typcn-filter me-2 fs-16 text-dark"></i><strong>Filter</strong></button> -->
                                                                             <ul class="dropdown-menu" role="menu">
                                                                                 <li><a href="javascript:void(0)"><strong
                                                                                             class="text-dark">Filter
@@ -2885,11 +2934,11 @@
                                                                 <div class="card-header justify-content-between">
                                                                     <div class="d-flex">
                                                                         <div class="btn-group">
-                                                                            <button type="button"
+                                                                            <!-- <button type="button"
                                                                                 class="btn btn-outline-default text-dark py-1"
                                                                                 id="filter_btn"
                                                                                 data-bs-toggle="dropdown"><i
-                                                                                    class="typcn typcn-filter me-2 fs-16 text-dark"></i><strong>Filter</strong></button>
+                                                                                    class="typcn typcn-filter me-2 fs-16 text-dark"></i><strong>Filter</strong></button> -->
                                                                             <ul class="dropdown-menu" role="menu">
                                                                                 <li><a href="javascript:void(0)"><strong
                                                                                             class="text-dark">Filter
@@ -5001,34 +5050,43 @@ $.ajax({
         const showButton5 = document.getElementById('tab333');
         const displayText = document.getElementById('export-button-hide');
         const option_pipline = document.getElementById('option-pipline');
+        const add_prospect = document.getElementById('add_prospect');
+
 
         showButton1.addEventListener('click', () => {
             displayText.style.display = 'none';
-            option_pipline.style.display = 'block';
+            option_pipline.style.display = 'flex';
+            add_prospect.style.display = 'block';
 
         });
 
         showButton2.addEventListener('click', () => {
             displayText.style.display = 'none';
-            option_pipline.style.display = 'block';
+            option_pipline.style.display = 'none';
+            add_prospect.style.display = 'block';
+
 
         });
 
         //    showButton3.addEventListener('click', () => {
         //        displayText.style.display = 'none';
-        //        option_pipline.style.display = 'block';
+        //        option_pipline.style.display = 'flex';
 
         //    });
 
         showButton4.addEventListener('click', () => {
             displayText.style.display = 'none';
-            option_pipline.style.display = 'block';
+            option_pipline.style.display = 'none';
+            add_prospect.style.display = 'block';
+
 
         });
 
         showButton5.addEventListener('click', () => {
             option_pipline.style.display = 'none';
             displayText.style.display = 'block';
+            add_prospect.style.display = 'none';
+
 
         });
 
