@@ -2709,6 +2709,7 @@
                                 <a class="side-menu__item" data-bs-toggle="slide" href="chats.html">
                                     <i class="side-menu__icon fi fi-rs-comment"></i>
                                     <span class="side-menu__label">Chat</span>
+<span class="badge bg-primary side-badge">6</span>
 
                                     <!-- <i class="angle fe fe-chevron-right"></i> -->
                                 </a>
@@ -2778,10 +2779,10 @@
                         </div>
                         <!-- PAGE-HEADER END -->
                         <div>
-                            <p class="d-inline-flex gap-1">
+                            <p class="d-inline-flex gap-1 text-dark">
                                 <span>Report | </span>
-                                  <span><a href="#" onclick="Intercom('showArticle', 8210506)"> Customized Report? </a></span>
-                                  <span><a href="#" onclick="Intercom('showArticle', 8210444)"> View Reports? </a></span>
+                                  <span><a href="#" onclick="Intercom('showArticle', 8210506)" class="text-primary"> Customized Report? </a></span>
+                                  <span><a href="#" onclick="Intercom('showArticle', 8210444)" class="text-primary"> View Reports? </a></span>
                             </p>
                         </div>
                         <div class="cardd">
@@ -4560,21 +4561,56 @@ document.getElementById("download_pdf_reports5").addEventListener("click", async
                //call the function to download the CSV file
                downloadCSV(csv.join("\n"), filename);
             }
+            // function exportTableToCSV5(filename) {
+            //    var csv = [];
+            //    var rows = document.querySelectorAll(".property-reports5 tr");
+            //    for(var i=0; i<rows.length; i++) {
+            //     var row = [], cols = rows[i].querySelectorAll("td, th");
+            //     for( var j=0; j<cols.length; j++)
+            //        row.push(cols[j].innerText);
+            //     csv.push(row.join(","));
+            //    } 
+            //    downloadCSV(csv.join("\n"), filename);
+            // }
             function exportTableToCSV5(filename) {
-               //declare a JavaScript variable of array type
-               var csv = [];
-               var rows = document.querySelectorAll(".property-reports5 tr");
-             
-               //merge the whole data in tabular form 
-               for(var i=0; i<rows.length; i++) {
-                var row = [], cols = rows[i].querySelectorAll("td, th");
-                for( var j=0; j<cols.length; j++)
-                   row.push(cols[j].innerText);
-                csv.push(row.join(","));
-               } 
-               //call the function to download the CSV file
-               downloadCSV(csv.join("\n"), filename);
+    var csv = [];
+    var rows = document.querySelectorAll(".property-reports5 tr");
+
+    for (var i = 0; i < rows.length; i++) {
+        var row = [];
+        var cols = rows[i].querySelectorAll("td, th");
+        
+        // Extract data from each column
+        for (var j = 0; j < cols.length; j++) {
+            var cellText = cols[j].innerText;
+            // If the cell contains a comma, wrap it in double quotes
+            if (cellText.includes(",")) {
+                cellText = '"' + cellText + '"';
             }
+            row.push(cellText);
+        }
+
+        csv.push(row.join(","));
+    }
+
+    // Combine rows into a CSV string
+    var csvContent = csv.join("\n");
+
+    // Create a data URI for the CSV content
+    var blob = new Blob([csvContent], { type: "text/csv" });
+    var url = window.URL.createObjectURL(blob);
+
+    // Create a hidden anchor element and trigger a click event to download the CSV
+    var a = document.createElement("a");
+    a.style.display = "none";
+    a.href = url;
+    a.download = filename + ".csv";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+}
+
             </script>
             
 
@@ -4992,6 +5028,8 @@ $('#table_body_task_report').append(newRowHtml);
         
 
         });
+  
+  
     },
     error: function (xhr, status, error) {
         // Handle the error response from the API
