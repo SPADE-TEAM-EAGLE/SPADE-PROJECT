@@ -952,7 +952,11 @@
                                                 class="text-danger">*</span></label>
                                         <select id="status" class="form-select form">
                                             <option selected>Choose...</option>
-                                            <option value="system">System</option>
+                                            <option value="engaged">Engaged</option>
+                                            <option value="active">Active</option>
+                                            <option value="nurturing">Nurturing</option>
+                                            <option value="qualified">Qualified</option>
+                                            <option value="disqualified">Disqualified</option>
                                         </select>
 
                                         <span class="text-danger d-none">Status is required!</span>
@@ -4199,14 +4203,14 @@
             $("#list-view").hide();
             $("#kanban-view-option").click(function () {
                 $("#kanban-view").show();
-                getData()
+                
                 $("#kanban-view-picker").show();
                 $("#list-view").hide();
             });
 
             $("#list-view-option").click(function () {
                 $("#kanban-view").hide();
-                getData()
+                
                 $("#kanban-view-picker").hide();
 
                 $("#list-view").show();
@@ -4437,7 +4441,7 @@ let totalActiveAmount = 0;
                                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                     },
                                     success: function (response) {
-                                        // getData()
+                                        getData()
                                     },
                                     error: function (xhr, status, error) {
                                         console.error('Error updating status:', error);
@@ -4488,20 +4492,27 @@ let totalActiveAmount = 0;
 
             }
             getData()
-           function resetAccordion(){
-        $('#firstName, #lastName, #phone,#email ,#propertyInfo, #unitInfo, #propertyDetail,#status ,#sourceCampaign').each(function() {
+            function resetAccordion() {
+    $('#firstName,#middleName ,#lastName, #phone,#email ,#propertyInfo, #unitInfo, #propertyDetail,#status ,#sourceCampaign').each(function() {
+        if ($(this).is('select')) {
+            // If it's a select box, select the first option
+            $(this).prop('selectedIndex', 0);
+        } else if ($(this).is('input')) {
+            // If it's an input field, empty the value
             $(this).val('');
-            $(this).removeClass('border-green');
-            $(this).removeClass('border-danger');
-            $(this).next('.text-danger').addClass('d-none');
-        });
-        $('#moveInDate').val(" ");
-        $('#potentialRentAmount').val(" ");
-        $('#moveInDate').removeClass('border-green');$('#moveInDate').removeClass('border-danger');$('#moveInDate').next('.text-danger').addClass('d-none');
-        $('#potentialRentAmount').removeClass('border-green');$('#potentialRentAmount').removeClass('border-danger');$('#potentialRentAmount').next('.text-danger').addClass('d-none');
+        }
+        $(this).removeClass('border-green');
+        $(this).removeClass('border-danger');
+        $(this).next('.text-danger').addClass('d-none');
+    });
 
+    // Additional code for specific fields like 'moveInDate' and 'potentialRentAmount'
+    $('#moveInDate, #potentialRentAmount').val('');
+    $('#moveInDate, #potentialRentAmount').removeClass('border-green');
+    $('#moveInDate, #potentialRentAmount').removeClass('border-danger');
+    $('#moveInDate, #potentialRentAmount').next('.text-danger').addClass('d-none');
+}
 
-           }
             $(function () {
                 $(".column").sortable({
                     connectWith: ".column",
