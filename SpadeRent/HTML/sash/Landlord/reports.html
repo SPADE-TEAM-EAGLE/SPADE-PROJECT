@@ -3744,9 +3744,12 @@
                                                             <th class="d-none"></th>
                                                             <th>Image</th>
                                                             <th>TASK</th>
+                                                            <th>USER & TIME</th>
                                                             <th>ASSIGNED TO</th>
                                                             <th>DUE AT</th>
+                                                            <th>STATUS</th>
                                                             <th>RELATED TO</th>
+                                                            <th>UNIT NUMBER</th>
                                                             <th>STATUS</th>
                                                             
 
@@ -4992,8 +4995,8 @@ $("#download_pdf_reports5").attr("disabled",true)
     '<td><img src="../assets/images/Group-user.png" alt=""></td>' +
     '<td class="task-id" id="' + task.taskID + '" style="font-weight: 600;">' +
     '<p style="font-weight: 600;" class="mb-1">' + task.taskName + '</p>' +
-    '<span class="font-weight-normal" style="color: #9B9B9B;"> By ' + task.createdBy + ' - ' + hoursDiff + ' hours</span>' +
-    '</td>';
+    '</td>'+
+    '<td><p style="font-weight: 600;" class="mb-1"> By ' + task.createdBy + ' - ' + hoursDiff + ' hours</p></td>';
 
     if (task.AssignTo.length>0) {
     newRowHtml+='<td style="font-weight: 600;text-align: center;display: flex;">' 
@@ -5011,13 +5014,16 @@ $("#download_pdf_reports5").attr("disabled",true)
 newRowHtml +=
     '<td class="property-id" style="font-weight: 600;">' +
     '<p style="font-weight: 600;" class="mb-1">' + formatDate(task.dueDate) + '</p>' +
-    '<span class="font-weight-normal text-danger"> <i class="fe fe-circle me-1"></i>' + task.priority + '</span>' +
     '</td>' +
+    '<td><span class="font-weight-normal text-danger"> <i class="fe fe-circle me-1"></i>' + task.priority + '</span></td>'+
     '<td class="property-id" style="font-weight: 600;">' +
     '<p style="font-weight: 600;" class="mb-1">' + task.propertyName + '</p>' +
-    '<span class="font-weight-normal text-danger">Unit Number: ' + task.unitNumber
- + '</span>' +
+    
     '</td>' +
+    '<td>'+
+        '<span class="font-weight-normal text-danger">Unit Number: ' + task.unitNumber
+ + '</span>' +
+       '</td>'+
     '<td class="property-id" style="font-weight: 600;">' + task.status + '</td>' +
     
     '</tr>';
