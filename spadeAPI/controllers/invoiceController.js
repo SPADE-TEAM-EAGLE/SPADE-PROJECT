@@ -497,7 +497,7 @@ exports.resendEmail = async (req, res) => {
         tenantName,
         tenantEmail,
         mailSubject,
-        dueDays,
+        dueDate,
         invoiceID,
         userName,
         userId,
