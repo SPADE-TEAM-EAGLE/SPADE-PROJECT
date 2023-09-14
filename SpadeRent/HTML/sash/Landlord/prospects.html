@@ -738,13 +738,13 @@
         }
 
         /* .tab-pane .card:nth-child(1) {
-            min-height: 205px;
+            min-height: 214px;
         }
         .tab-pane .card:nth-child(2) {
-            min-height: 205px;
+            min-height: 214px;
         }
         .tab-pane .card:nth-child(3) {
-            min-height: 205px;
+            min-height: 214px;
         } */
 
         .card-options a:not(.btn) {
@@ -931,7 +931,7 @@
                                     <div class="col-md-12 col-lg-12 col-xl-12">
                                         <label for="inputCity" class="form-label fw-bold">Prospects Details<spnan
                                                 class="text-danger"> *</span></label>
-                                        <input type="email" id="propertyDetail" class="form-control form"
+                                        <input type="text" id="propertyDetail" class="form-control form"
                                             placeholder="Enter Prospects Details" required>
                                         <span class="text-danger d-none">Prospects Details is required!</span>
                                     </div>
@@ -2406,7 +2406,7 @@
                                                     <div class="row remove-background" id="kanban-view">
                                                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4"
                                                             id="new-propsect-kanban">
-                                                            <div class="card" style="min-height: 205px;">
+                                                            <div class="card" style="min-height: 214px;">
                                                                 <div class="card-header pe-4 ps-4 pt-4 pb-2">
                                                                     <a href="javascript:void(0)"
                                                                         data-bs-toggle="dropdown"><i
@@ -2443,7 +2443,7 @@
                                                         </div>
                                                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4"
                                                             id="engaged-propsect-kanban">
-                                                            <div class="card bg-transparent" style="min-height: 205px;">
+                                                            <div class="card bg-transparent" style="min-height: 214px;">
                                                                 <div class="card-header pe-4 ps-4 pt-4 pb-2">
                                                                     <a href="javascript:void(0)"
                                                                         data-bs-toggle="dropdown"><i
@@ -2473,7 +2473,7 @@
                                                         </div>
                                                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4"
                                                             id="nurturing-propsect-kanban">
-                                                            <div class="card" style="min-height: 205px;">
+                                                            <div class="card" style="min-height: 214px;">
                                                                 <div class="card-header pe-4 ps-4 pt-4 pb-2">
                                                                     <a href="javascript:void(0)"
                                                                         data-bs-toggle="dropdown"><i
@@ -3457,6 +3457,7 @@
 
                 </div>
                 <!-- CONTAINER END -->
+                
             </div>
         </div>
         <!--app-content close-->
@@ -4025,8 +4026,8 @@
     </footer>
     <!-- FOOTER END -->
 
+   
     </div>
-
 
 
     <!-- BACK-TO-TOP -->
@@ -4131,7 +4132,25 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
     <script>
+        $('#email').change(function () {
+            var email = $(this).val();
+            var emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z.-]+\.[A-Za-z]{2,}$/;
+
+            if (!email.match(emailRegex)) {
+
+                console.log("invalid");
+                $(this).addClass("border-danger")
+                $(this).removeClass("border-green")
+            } else {
+                $(this).addClass("border-green")
+                $(this).removeClass("border-danger")
+            }
+        });
+    </script>
+
+    <script>
         $(document).ready(function () {
+         
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/getPropertyUnitsTenant',
                 type: 'GET',
@@ -4360,9 +4379,8 @@
                     '<span class=""><i class="fe fe-more-vertical"></i></span>' +
                     '</a>' +
                     '<div class="dropdown-menu dropdown-menu-end">' +
-                    '<a class="dropdown-item text-dark" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#editModal">Edit Post</a>' +
-                    '<a class="dropdown-item text-dark" href="javascript:void(0)">Delete Post</a>' +
-                    '<a class="dropdown-item text-dark" href="javascript:void(0)">Personal Settings</a>' +
+                    '<a class="dropdown-item text-success" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#editModal">Edit</a>' +
+                    '<a class="dropdown-item text-danger" href="javascript:void(0)">Delete</a>' +
                     '</div>' +
                     '</div>' +
                     '</div>' +
@@ -4370,7 +4388,9 @@
                 )
 
             }
-
+$("#tab300,#tab322").click(function(){
+    getData()
+});
             function getData() {
 
                 $("#engaged-propsect-kanban .card .card-body,#nurturing-propsect-kanban .card .card-body,#new-propsect-kanban .card .card-body").empty();
@@ -4478,6 +4498,8 @@ let totalActiveAmount = 0;
                                 totalActiveAmount += rentAmount;
                             }
                         });
+                      
+                      
                         $('#total-rent').text(formatRentAmount(totalRentDefault.toFixed(2)));
                         $('#nurturing-propsect-kanban-amount').text(formatRentAmount(totalNurtureAmount.toFixed(2)));
                         $('#engaged-propsect-kanban-amount').text(formatRentAmount(totalEngageAmount.toFixed(2)));
@@ -4542,7 +4564,7 @@ let totalActiveAmount = 0;
                                 success: function (response) {
                                     console.log($("#" + parentId))
                                     $("#card" + parentId).remove();
-                                    getData()
+                                    // getData()
                                 },
                                 error: function (xhr, status, error) {
                                     console.error('Error updating status:', error);
@@ -4564,7 +4586,7 @@ let totalActiveAmount = 0;
                                 success: function (response) {
                                     console.log($("#" + parentId))
                                     $("#card" + parentId).remove();
-                                    getData()
+                                    // getData()
 
                                 },
                                 error: function (xhr, status, error) {
@@ -4660,6 +4682,7 @@ let totalActiveAmount = 0;
                     icon.toggleClass("ui-icon-minusthick ui-icon-plusthick");
                     icon.closest(".portlet").find(".portlet-content").toggle();
                 });
+              
             });
 
             $(document).on("click", ".edit-option", function () {
