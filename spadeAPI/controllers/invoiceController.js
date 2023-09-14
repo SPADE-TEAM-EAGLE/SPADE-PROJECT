@@ -476,10 +476,13 @@ exports.invoiceDelete = async (req, res) => {
   }
 };
 //  ############################# Delete invoice End ############################################################
+
 //  ############################# Create Invoice Start ############################################################
 exports.resendEmail = async (req, res) => {
-  const { invoiceID } = req.query;
-  const { userId,userName,businessName,invoiceEmail } = req.user;
+  // const { invoiceID } = req.query;
+  const { invoiceID } = req.body;
+  // const { userId,userName,businessName,invoiceEmail } = req.user;
+  const { userId,userName,businessName,invoiceEmail } = req.body;
   try {
     const resendEmailResult = await queryRunner(resendEmailQuery, [invoiceID]);
 
@@ -493,11 +496,12 @@ exports.resendEmail = async (req, res) => {
         resendEmailResult[0][0].lastName;
       const mailSubject = "Invoice From " + userName;
       var businessNames = businessName || "N/A";
+      console.log(tenantName,businessNames,tenantEmail);
       sendMail.invoiceSendMail(
         tenantName,
         tenantEmail,
         mailSubject,
-        dueDays,
+        dueDate,
         invoiceID,
         userName,
         userId,
