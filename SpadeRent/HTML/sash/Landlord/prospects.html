@@ -2391,8 +2391,7 @@
                                                                         <div class="fs-20">
                                                                             <span class="text-dark fw-bold">Total
                                                                                 Amount:</span> <span
-                                                                                class="text-primary fw-bold">$
-                                                                                34,44544</span>
+                                                                                class="text-primary fw-bold" id="total-rent"></span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -2430,7 +2429,7 @@
                                                                     <h4 class="text-primary m-0 fw-bold">New Prospects
                                                                     </h4>
                                                                     <h4 class="text-dark m-0 fw-bold"
-                                                                        id="new-propsect-kanban-amount">$160.7k</h4>
+                                                                        id="new-propsect-kanban-amount"></h4>
                                                                 </div>
                                                                 <div class="card-body p-3 column new">
 
@@ -2458,7 +2457,7 @@
                                                                     <h4 class="m-0 fw-bold" style="color: #1996A6;">
                                                                         Engaged</h4>
                                                                     <h4 class="text-dark m-0 fw-bold"
-                                                                        id="engaged-propsect-kanban-amount">$90.3k</h4>
+                                                                        id="engaged-propsect-kanban-amount"></h4>
                                                                 </div>
                                                                 <div class="card-body p-3 column engaged">
 
@@ -2496,7 +2495,7 @@
                                                                     class="card-header d-flex justify-content-between pe-4 ps-4 pt-2 pb-2">
                                                                     <h4 class="text-warning m-0 fw-bold">Nurturing</h4>
                                                                     <h4 class="text-dark m-0 fw-bold"
-                                                                        id="nurturing-propsect-kanban-amount">$160.7k
+                                                                        id="nurturing-propsect-kanban-amount">
                                                                     </h4>
                                                                 </div>
                                                                 <div class="card-body p-3 column nurturing">
@@ -4358,10 +4357,10 @@
                     '<div class="portlet-header">' +
                     '<div class="media mt-0">' +
                     '<div class="me-2">' +
-                    '<img class="" style="width: 35px;height: 48px;" src="../assets/images/Group 10242.svg">' +
+                    '<img class="" style="width: 30px;height: 48px;" src="../assets/images/Group 10242.svg">' +
                     '</div>' +
                     '<div class="media-body" style="line-height: 10px;">' +
-                    '<h6 class="mb-0 mt-0 text-primary fw-bold">' + (prospectus.firstName + ' ' + prospectus.lastName) + '</h6>' +
+                    '<h6 class="mb-0 mt-0 text-primary fw-bold">' + (prospectus.firstName + ' ' + prospectus.middleName + " " + prospectus.lastName) + '</h6>' +
                     '<strong class="text-dark fw-bold fs-10">' + (property.address + " <br/>" + property.city + ", " + property.state) + '<br>' + prospectus.phoneNumber + '</strong>' +
                     '</div>' +
                     '</div>' +
@@ -4385,7 +4384,9 @@
                 )
 
             }
-
+$("#tab300,#tab322").click(function(){
+    getData()
+});
             function getData() {
 
                 $("#engaged-propsect-kanban .card .card-body,#nurturing-propsect-kanban .card .card-body,#new-propsect-kanban .card .card-body").empty();
@@ -4403,13 +4404,19 @@
                     success: function (response) {
                         console.log(response.data);
                         propsectData = response.data;
+                        
+let totalRentDefault = 0;
+let totalEngageAmount = 0;
+let totalNurtureAmount = 0;
+let totalActiveAmount = 0;
+
                         response?.data?.forEach(function (item, index) {
                             var row = $('<tr>');
                             var prospectus = item?.prospectus;
                             var property = item?.property;
 
                             row.append($('<td>').html('<label class="custom-control custom-checkbox-md"><input type="checkbox" class="custom-control-input" name="example-checkbox' + index + '" value="option' + index + '" checked=""><span class="custom-control-label"></span></label>'));
-                            row.append($('<td>').text(prospectus.firstName + ' ' + prospectus.lastName));
+                            row.append($('<td>').text(prospectus.firstName + ' ' + prospectus.middleName + " " + prospectus.lastName));
                             row.append($('<td>').html('<span class="fw-bold">' + prospectus.sourceCampaign + '</span><br><small>' + "https:spaderent.com" + '</small>'));
                             row.append($('<td>').html('<span class="fw-bold">' + property.propertyName + '</span><br><small>' + (property.address + ", " + property.city + ", " + property.state) + '</small>'));
                             row.append($('<td>').html('<span class="fw-bold">' + property.totalunits + '</span><br><small class="text-primary"><i class="fe fe-circle me-1 text-primary"></i>' + property.totalVacant + ' (Vacant)</small><br><small class="text-danger"><i class="fe fe-circle me-1 text-danger"></i>' + property.totalOccupied + ' (Occupied)</small>'));
@@ -4461,27 +4468,40 @@
                             row.append($('<td>').html(dropdownToggle).append(dropdownMenu));
                             // Assuming this is where you create the "Edit" dropdown option in your table
                             row.append($('<td>').html(`<i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i><ul class="dropdown-menu dropdown-menu-top"><li><a class="dropdown-item text-dark" href="javascript:void(0)">View</a></li><li><a class="dropdown-item text-dark edit-option" id="${prospectus?.id}">Edit</a></li><li><a class="dropdown-item text-dark" href="javascript:void(0)">Delete</a></li></ul>`));
-                            $('#table-body').append(row);
 
+                            var tableSelector = '';
+                            var rentAmount = parseFloat(prospectus.rentAmount);
                             if (prospectus.prospectusStatus == "Qualified") {
-                                console.log($("#table-body-qualified"))
-                                $("#table-body-qualified").append(row);
+                                tableSelector = "#table-body-qualified, ";
+                                
+                            } else if (prospectus.prospectusStatus == "Disqualified") {
+                                tableSelector = "#table-body-disqualified, ";
+                                
                             }
-                            else if (prospectus.prospectusStatus == "Disqualified") {
-                                console.log($("#table-body-disqualified"))
-                                $("#table-body-disqualified").append(row);
-                            }
+                            $(tableSelector + "#table-body").append(row);
+                            totalRentDefault += rentAmount;
 
                             let elem;
 
                             if (prospectus.prospectusStatus == "Engaged") {
                                 populateCards($('#engaged-propsect-kanban .card .card-body'), prospectus, property);
+                                totalEngageAmount += rentAmount;
                             } else if (prospectus.prospectusStatus == "Nurturing") {
                                 populateCards($('#nurturing-propsect-kanban .card .card-body'), prospectus, property);
+                                totalNurtureAmount += rentAmount;
                             } else if (prospectus.prospectusStatus !== "Qualified" && prospectus.prospectusStatus !== "Disqualified") {
                                 populateCards($('#new-propsect-kanban .card .card-body'), prospectus, property);
+                                totalActiveAmount += rentAmount;
                             }
                         });
+                      
+                      
+                        $('#total-rent').text(formatRentAmount(totalRentDefault.toFixed(2)));
+                        $('#nurturing-propsect-kanban-amount').text(formatRentAmount(totalNurtureAmount.toFixed(2)));
+                        $('#engaged-propsect-kanban-amount').text(formatRentAmount(totalEngageAmount.toFixed(2)));
+                        $('#new-propsect-kanban-amount').text(formatRentAmount(totalActiveAmount.toFixed(2)));
+
+                    
                     },
                     error: function (xhr, status, error) {
                         // Handle error
@@ -4490,6 +4510,20 @@
 
             }
             getData()
+           function resetAccordion(){
+        $('#firstName, #lastName, #phone,#email ,#propertyInfo, #unitInfo, #propertyDetail,#status ,#sourceCampaign').each(function() {
+            $(this).val('');
+            $(this).removeClass('border-green');
+            $(this).removeClass('border-danger');
+            $(this).next('.text-danger').addClass('d-none');
+        });
+        $('#moveInDate').val(" ");
+        $('#potentialRentAmount').val(" ");
+        $('#moveInDate').removeClass('border-green');$('#moveInDate').removeClass('border-danger');$('#moveInDate').next('.text-danger').addClass('d-none');
+        $('#potentialRentAmount').removeClass('border-green');$('#potentialRentAmount').removeClass('border-danger');$('#potentialRentAmount').next('.text-danger').addClass('d-none');
+
+
+           }
             $(function () {
                 $(".column").sortable({
                     connectWith: ".column",
@@ -4519,6 +4553,7 @@
                                 success: function (response) {
                                     console.log($("#" + parentId))
                                     $("#card" + parentId).remove();
+                                    // getData()
                                 },
                                 error: function (xhr, status, error) {
                                     console.error('Error updating status:', error);
@@ -4540,6 +4575,8 @@
                                 success: function (response) {
                                     console.log($("#" + parentId))
                                     $("#card" + parentId).remove();
+                                    // getData()
+
                                 },
                                 error: function (xhr, status, error) {
                                     console.error('Error updating status:', error);
@@ -4560,6 +4597,7 @@
                                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                 },
                                 success: function (response) {
+                                    getData()
 
                                 },
                                 error: function (xhr, status, error) {
@@ -4581,6 +4619,7 @@
                                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                 },
                                 success: function (response) {
+                                    getData()
 
                                 },
                                 error: function (xhr, status, error) {
@@ -4602,6 +4641,7 @@
                                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                 },
                                 success: function (response) {
+                                    getData()
 
                                 },
                                 error: function (xhr, status, error) {
@@ -4710,6 +4750,8 @@
                             $("#myModal_success").modal("show");
                             setTimeout(function () {
                                 $('#myModal_success').modal('hide');
+                                resetAccordion()
+                                getData()
 
                             }, 2000);
                         }
@@ -4747,15 +4789,11 @@
                     $(".progress").html(myprogress)
                 },
                 error: function (xhr, status, error) {
-                    // $("#myModal_warning").modal("show");
-                    // setTimeout(function () {
-                    //     $('#myModal_warning').modal('hide');
-                    //     window.location = '../Landlord/login_module.html';
-                    // }, 2000);
+                   
                     console.log('Error occurred while fetching state and city data.');
                     console.log(xhr);
                     console.log(error);
-                    // console.log('Error occurred while fetching state and city data.');
+                   
                 }
             });
             $('#email_verification').on('click', function () {
