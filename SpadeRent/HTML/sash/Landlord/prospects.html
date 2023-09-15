@@ -3240,14 +3240,13 @@
                                                                     </div>
                                                                     <div style="display: flex; align-items: end;">
 
-                                                                        <input type="date"
-                                                                            class="form-control form-control-date-width"
-                                                                            id="prospect-qualified-start-date"
-                                                                            placeholder="Jan 6, 2022 – Jan 13, 2022">&emsp;
-                                                                        <input type="date"
-                                                                            id="prospect-qualified-end-date"
-                                                                            class="form-control form-control-date-width"
-                                                                            placeholder="Jan 6, 2022 – Jan 13, 2022">
+                                                                        <select class="form-select form" id="prospect-year">
+                                                                            <option selected>2023</option>
+                                                                            <option value="2022">2022</option>
+                                                                            <option value="2021">2021</option>
+                                                                            <option value="2020">2020</option>
+                                                                            <option value="2019">2019</option>
+                                                                        </select>
                                                                     </div>
                                                                     <i class="fe fe-more-vertical"
                                                                         data-bs-toggle="dropdown"></i>
@@ -4344,7 +4343,7 @@
                     prospectusid: prospectID
                 }
                 $.ajax({
-                    url: "http://localhost:3000/api/spade/updateProspectus",
+                    url: "https://backend.app.spaderent.com/api/spade/updateProspectus",
                     type: "PUT",
                     data: JSON.stringify(data),
                     contentType: 'application/json',
@@ -4562,8 +4561,10 @@ var encodedProspectId = encodeURIComponent(encryptedProspectId);
             const oneMonthAgo = new Date(currentDate);
             oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
 
-            startDate = formatDate(oneMonthAgo); // Format the date if needed
-            endDate = formatDate(currentDate);
+            var startDate = formatDate(oneMonthAgo); // Format the date if needed
+            var endDate = formatDate(currentDate);
+            var year=new Date().getFullYear();
+            console.log(year)
             $("#prospect-status-start-date").val(startDate)
             $("#prospect-status-end-date").val(endDate)
             $("#prospect-qualified-start-date").val(startDate)
@@ -4578,7 +4579,7 @@ var encodedProspectId = encodeURIComponent(encryptedProspectId);
             $("#endDate_amount").val(endDate)
             function getGraphData() {
                 $.ajax({
-                    url: `http://localhost:3000/api/spade/prospectusInsightEN/${startDate}/${endDate}`,
+                    url: `https://backend.app.spaderent.com/api/spade/prospectusInsightEN/${startDate}/${endDate}`,
                     headers: {
                         authorization: "Bearer " + localStorage.getItem("authtoken")
                     },
@@ -4594,29 +4595,71 @@ var encodedProspectId = encodeURIComponent(encryptedProspectId);
                 })
             
                 $.ajax({
-                    url: `http://localhost:3000/api/spade//prospectusInsightQD/${startDate}/${endDate}`,
+                    url: `https://backend.app.spaderent.com/api/spade/prospectusInsightQD/${year}`,
                     headers: {
                         authorization: "Bearer " + localStorage.getItem("authtoken")
                     },
                     contentType: "application/json",
                     type: "GET",
                     success: function (response) {
-                        $("#total-prospects").text(response.data.totalProspectus)
-                        $("#engaged-prospect").text(response.data.Engaged ? response.data.Engaged : 0)
-                        $("#nurture-prospect").text(response.data.Nurturing ? response.data.Nurturing : 0)
+                        
+                        const qualified = [];
+const disqualified = [];
+
+response?.data?.forEach(entry => {
+    const month = entry.Month;
+    const disqualifiedValue = parseInt(entry.Disqualified);
+    const qualifiedValue = parseInt(entry.Qualified);
+        disqualified.push(disqualifiedValue);
+        qualified.push(qualifiedValue);
+});
+createQDChart(qualified, disqualified)
+                   
                     }, error: function (xhr, status, error) {
 
                     }
                 })
             
             }
+            
             $("#tab333").on("click", function () {
                 getGraphData()
             })
+            $("#prospect-year").on("change",function(){
+                
+                $.ajax({
+                    url: `https://backend.app.spaderent.com/api/spade/prospectusInsightQD/${$(this).val()}`,
+                    headers: {
+                        authorization: "Bearer " + localStorage.getItem("authtoken")
+                    },
+                    contentType: "application/json",
+                    type: "GET",
+                    success: function (response) {
+                        
+                        const qualified = [];
+const disqualified = [];
+
+response?.data?.forEach(entry => {
+    const month = entry.Month;
+    const disqualifiedValue = parseInt(entry.Disqualified);
+    const qualifiedValue = parseInt(entry.Qualified);
+        disqualified.push(disqualifiedValue);
+        qualified.push(qualifiedValue);
+});
+updateQDChart(qualified, disqualified)
+                   
+                    }, error: function (xhr, status, error) {
+
+                    }
+                })
+            
+
+            })
+            
             $("#prospect-status-start-date").on("change", function () {
 
                 $.ajax({
-                    url: `http://localhost:3000/api/spade/prospectusInsightEN/${$(this).val()}/${endDate}`,
+                    url: `https://backend.app.spaderent.com/api/spade/prospectusInsightEN/${$(this).val()}/${endDate}`,
                     headers: {
                         authorization: "Bearer " + localStorage.getItem("authtoken")
                     },
@@ -4634,7 +4677,7 @@ var encodedProspectId = encodeURIComponent(encryptedProspectId);
             $("#prospect-status-end-date").on("change", function () {
 
                 $.ajax({
-                    url: `http://localhost:3000/api/spade/prospectusInsightEN/${startDate}/${$(this).val()}`,
+                    url: `https://backend.app.spaderent.com/api/spade/prospectusInsightEN/${startDate}/${$(this).val()}`,
                     headers: {
                         authorization: "Bearer " + localStorage.getItem("authtoken")
                     },
@@ -5075,20 +5118,23 @@ var encodedProspectId = encodeURIComponent(encryptedProspectId);
     </script>
     <!-- /Qualified or Un-Qualified chart-bar/ -->
     <script>
-        var ctx = document.getElementById("chartBar2");
-        var myChart = new Chart(ctx, {
+        var ctx1 = document.getElementById("chartBar2");
+        var myChart;
+       function createQDChart(qualified,disqualified){
+        
+        myChart = new Chart(ctx1, {
             type: 'bar',
             data: {
-                labels: ["2015", "2016", "2017", "2018", "2019"],
+                labels: ["JAN", "FEB", "MAR", "APRIL", "MAY", "JUNE", "JULY", "AUG", "SEP", "OCT", "NOV", "DEC"],
                 datasets: [{
-                    label: "Lost",
-                    data: [12, 22, 20, 35, 12],
+                    label: "Disqualified",
+                    data: disqualified,
                     borderColor: "#FF2366",
                     borderWidth: "0",
                     backgroundColor: "#FF2366"
                 }, {
-                    label: "Won",
-                    data: [22, 42, 60, 70, 86],
+                    label: "Qualified",
+                    data: qualified,
                     borderColor: "#02BC77",
                     borderWidth: "0",
                     backgroundColor: "#02BC77"
@@ -5127,6 +5173,15 @@ var encodedProspectId = encodeURIComponent(encryptedProspectId);
                 },
             }
         });
+    
+       }
+         
+       function updateQDChart(qualified,disqualified){
+        myChart.data.datasets[0].data = disqualified;
+        myChart.data.datasets[1].data = qualified;
+        myChart.update();
+       }
+         
     </script>
     <!-- /Qualified or Un-Qualified chart-bar/ -->
 
