@@ -314,7 +314,7 @@ exports.prospectusInsightEN = async (req, res) => {
             data : prospectusResult[0][0]
         });
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         res.status(500).json({
             message: "Error occur in prospectus Insight Engaged and Nurturing",
             error : error.message
