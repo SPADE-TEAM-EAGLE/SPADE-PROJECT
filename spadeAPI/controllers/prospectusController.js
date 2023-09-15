@@ -12,7 +12,9 @@ const {
     addProspectusQuery,
     getProspectusByIdQuery,
     UpdateProspectusQuery,
-    UpdateProspectusStatusQuery
+    UpdateProspectusStatusQuery,
+    prospectusInsightQD,
+    prospectusInsightEN
 } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
 const { deleteImageFromS3 } = require("../helper/S3Bucket");
@@ -254,3 +256,71 @@ exports.updateProspectusStatus = async (req, res) => {
 };
 
 //  #############################  Update prospectus Status END ##################################################
+
+
+
+//  #############################  Insight Qualified & disQuilified Start ##################################################
+exports.prospectusInsightQD = async (req, res) => {
+    
+    const {
+        startDate,
+        endDate
+    } = req.body;
+    // const { userId } = req.body;
+    const { userId } = req.user;
+    try {
+        
+        const prospectusResult = await queryRunner(prospectusInsightQD, [
+            userId,
+            startDate,
+            endDate
+        ]);
+        if (prospectusResult[0].length === 0) {
+            return res.status(400).send("No data found");
+        }
+        res.status(200).json({
+            message: " prospectus Qualified & disQuilified successful",
+            data : prospectusResult[0][0]
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            message: "Error occur in prospectus Insight Qualified and Disqualified",
+            error : error.message
+        });
+    }
+};
+
+//  #############################  Insight Qualified & disQuilified END ##################################################
+
+
+//  #############################  Insight Count Engaged Nurture Start ##################################################
+exports.prospectusInsightEN = async (req, res) => {
+    const {startDate,endDate} = req.body;
+    // const { userId } = req.body;
+    const { userId } = req.user;
+    try {
+        
+        const prospectusResult = await queryRunner(prospectusInsightEN, [
+            userId,
+            startDate,
+            endDate
+        ]);
+        if (prospectusResult[0].length === 0) {
+            return res.status(400).send("No data found");
+        }
+        res.status(200).json({
+            message: " prospectus Engaged and Nurturing get successful",
+            data : prospectusResult[0][0]
+        });
+    } catch (error) {
+        // console.log(error);
+        res.status(500).json({
+            message: "Error occur in prospectus Insight Engaged and Nurturing",
+            error : error.message
+        });
+    }
+};
+
+//  #############################  Insight Engaged and Nurturing END ##################################################
+
