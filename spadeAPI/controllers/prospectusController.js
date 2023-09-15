@@ -263,8 +263,8 @@ exports.updateProspectusStatus = async (req, res) => {
 exports.prospectusInsightQD = async (req, res) => {
     
     const {year} = req.body;
-    const { userId } = req.body;
-    // const { userId } = req.user;
+    // const { userId } = req.body;
+    const { userId } = req.user;
     try {
         
         const prospectusResult = await queryRunner(prospectusInsightQD, [year,userId]);
