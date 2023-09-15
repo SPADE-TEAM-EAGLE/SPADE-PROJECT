@@ -127,7 +127,8 @@ exports.getProspectus = async (req, res) => {
 
 //  #############################  GET prospectus By ID START ##################################################
 exports.getProspectusByID = async (req, res) => {
-    const { prospectusId } = req.body;
+    const { prospectusId } = req.query;
+    console.log(req.query)
     try {
 
         const getProspectusResult = await queryRunner(selectQuery("prospectus", "id"), [prospectusId]);
@@ -265,7 +266,7 @@ exports.prospectusInsightQD = async (req, res) => {
     const {
         startDate,
         endDate
-    } = req.body;
+    } = req.params;
     // const { userId } = req.body;
     const { userId } = req.user;
     try {
@@ -296,7 +297,7 @@ exports.prospectusInsightQD = async (req, res) => {
 
 //  #############################  Insight Count Engaged Nurture Start ##################################################
 exports.prospectusInsightEN = async (req, res) => {
-    const {startDate,endDate} = req.body;
+    const {startDate,endDate} = req.params;
     // const { userId } = req.body;
     const { userId } = req.user;
     try {

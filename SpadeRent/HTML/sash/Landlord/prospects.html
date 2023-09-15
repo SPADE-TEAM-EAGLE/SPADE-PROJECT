@@ -663,7 +663,7 @@
             all: initial;
             /* Reset all CSS properties to their initial values */
             display: contents;
-            cursor: pointer;
+            cursor: grabbing;
             user-select: none;
         }
 
@@ -1190,9 +1190,9 @@
                     <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal"
                         id='close'>Close</button>
                     <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
-                    <a href="javascript:void(0)" class="btn text-light button disabled" style='background-color:#1467B0;'
-                        id='update'>Save</a>
-                    
+                    <a href="javascript:void(0)" class="btn text-light button disabled"
+                        style='background-color:#1467B0;' id='update'>Save</a>
+
 
                 </div>
             </div>
@@ -1939,8 +1939,10 @@
                         <div>
                             <p class="d-inline-flex gap-1">
                                 <span>Prospects | </span>
-                                  <span><a href="#" onclick="Intercom('showArticle', 8210506)"> How to add Prospect? </a></span>
-                                  <span><a href="#" onclick="Intercom('showArticle', 8210444)"> How to update Prospect? </a></span>
+                                <span><a href="#" onclick="Intercom('showArticle', 8210506)"> How to add Prospect?
+                                    </a></span>
+                                <span><a href="#" onclick="Intercom('showArticle', 8210444)"> How to update Prospect?
+                                    </a></span>
                             </p>
                         </div>
                         <div class="row">
@@ -2381,7 +2383,8 @@
                                                                         <div class="fs-20">
                                                                             <span class="text-dark fw-bold">Total
                                                                                 Amount:</span> <span
-                                                                                class="text-primary fw-bold" id="total-rent"></span>
+                                                                                class="text-primary fw-bold"
+                                                                                id="total-rent"></span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -3225,7 +3228,8 @@
 
                                                     <div class="row">
                                                         <!-- Qualified & Disqualified start  -->
-                                                        <div class="col-lg-6 col-md-12 mb-5" id="banking-stats">
+                                                        <div class="col-lg-6 col-md-12 mb-5"
+                                                            id="qualified & disqualified">
                                                             <div class="card h-100">
                                                                 <div class="card-header"
                                                                     style="display: flex; justify-content: space-between;">
@@ -3238,8 +3242,10 @@
 
                                                                         <input type="date"
                                                                             class="form-control form-control-date-width"
+                                                                            id="prospect-qualified-start-date"
                                                                             placeholder="Jan 6, 2022 – Jan 13, 2022">&emsp;
                                                                         <input type="date"
+                                                                            id="prospect-qualified-end-date"
                                                                             class="form-control form-control-date-width"
                                                                             placeholder="Jan 6, 2022 – Jan 13, 2022">
                                                                     </div>
@@ -3291,7 +3297,7 @@
                                                         <!-- Average time from New Lead to Close end  -->
 
                                                         <!-- Tenants Status start  -->
-                                                        <div class="col-lg-6 col-md-12 mb-5" id="tenants-status">
+                                                        <div class="col-lg-6 col-md-12 mb-5" id="prospect-status">
                                                             <div class="card h-100">
                                                                 <div class="card-header"
                                                                     style="display: flex; justify-content: space-between;">
@@ -3299,9 +3305,10 @@
                                                                         <label for=""><b>Status </b></label>
                                                                         &emsp;
                                                                         <input type="date"
+                                                                            id="prospect-status-start-date"
                                                                             class="form-control form-control-date-width"
                                                                             placeholder="Jan 6, 2022 – Jan 13, 2022">&emsp;
-                                                                        <input type="date"
+                                                                        <input type="date" id="prospect-status-end-date"
                                                                             class="form-control form-control-date-width"
                                                                             placeholder="Jan 6, 2022 – Jan 13, 2022">
                                                                     </div>
@@ -3328,7 +3335,8 @@
                                                                                 style="background-color: #fff; border-radius: 12px; display: flex; justify-content: center; align-items: center; height: 50px; width: 60px;">
                                                                                 <h4
                                                                                     style="margin-bottom: 0em !important;">
-                                                                                    <b style="color: #000">20</b>
+                                                                                    <b style="color: #000"
+                                                                                        id="total-prospects"></b>
                                                                                 </h4>
                                                                             </div>
                                                                         </div>
@@ -3346,7 +3354,8 @@
                                                                                 style="background-color: #fff; border-radius: 12px; display: flex; justify-content: center; align-items: center; height: 50px; width: 60px;">
                                                                                 <h4
                                                                                     style="margin-bottom: 0em !important;">
-                                                                                    <b style="color: #000">18</b>
+                                                                                    <b style="color: #000"
+                                                                                        id="engaged-prospect"></b>
                                                                                 </h4>
                                                                             </div>
                                                                         </div>
@@ -3363,7 +3372,8 @@
                                                                                 style="background-color: #fff; border-radius: 12px; display: flex; justify-content: center; align-items: center; height: 50px; width: 60px;">
                                                                                 <h4
                                                                                     style="margin-bottom: 0em !important;">
-                                                                                    <b style="color: #000">25</b>
+                                                                                    <b style="color: #000"
+                                                                                        id="nurture-prospect"></b>
                                                                                 </h4>
                                                                             </div>
                                                                         </div>
@@ -3443,7 +3453,7 @@
 
                 </div>
                 <!-- CONTAINER END -->
-                
+
             </div>
         </div>
         <!--app-content close-->
@@ -4012,7 +4022,7 @@
     </footer>
     <!-- FOOTER END -->
 
-   
+
     </div>
 
 
@@ -4072,7 +4082,7 @@
     <script src="../assets/plugins/flot/jquery.flot.fillbetween.js"></script>
     <script src="../assets/plugins/flot/chart.flot.sampledata.js"></script>
     <script src="../assets/plugins/flot/dashboard.sampledata.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.8/sjcl.min.js"></script>
     <!-- INTERNAL Vector js -->
     <script src="../assets/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
     <script src="../assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
@@ -4135,9 +4145,9 @@
     </script>
 
     <script>
-        var prospectID;var prospectusStatus;
+        var prospectID; var prospectusStatus;
         $(document).ready(function () {
-         
+
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/getPropertyUnitsTenant',
                 type: 'GET',
@@ -4217,7 +4227,7 @@
             $("#list-view-option").click(function () {
                 $("#kanban-view").hide();
                 getData()
-            
+
                 $("#kanban-view-picker").hide();
 
                 $("#list-view").show();
@@ -4255,16 +4265,16 @@
             function updateButtonStatus() {
                 var accordion1Fields = $('#editModal #accordion-item1 input[required],#editModal  #accordion-item1 select[required]');
                 var accordion2Fields = $('#editModal #accordion-item2 input[required],#editModal  #accordion-item2 select[required]');
-            
+
                 var isAccordion1FieldsEmpty = accordion1Fields.filter(function () {
                     return $(this).val() !== '' || $(this).val() === 'Choose...';
                 }).length === 0;
                 var isAccordion2FieldsEmpty = accordion2Fields.filter(function () {
                     return $(this).val() !== '' || $(this).val() === 'Choose...';
                 }).length === 0;
-                if(isAccordion1FieldsEmpty || isAccordion2FieldsEmpty){
+                if (isAccordion1FieldsEmpty || isAccordion2FieldsEmpty) {
                     $('#editModal #update').addClass('disabled');
-                }else{
+                } else {
                     $('#editModal #update').removeClass('disabled');
                 }
             }
@@ -4293,7 +4303,7 @@
                 }
                 // updateButtonStatus();
             });
-            
+
             $('#editModal #accordion-item1 input[type="text"],#editModal #accordion-item1 input[type="tel"],#editModal #accordion-item1 select,#editModal #accordion-item2 input,#editModal #accordion-item2 select,#editModal #accordion-item3 input, #accordion-item3 select').on('input change', function () {
                 var $field = $(this);
                 var $errorMessage = $field.next('.text-danger');
@@ -4318,30 +4328,30 @@
                 }
                 updateButtonStatus();
             });
-            $("#update").click(function(){
-                const data={
-                    firstName:$("#firstName_update").val(),
-                    middleName:$("#middleName_update").val(),
-                    lastName:$("#lastName_update").val(),
-                    phoneNumber:$("#phone2").val(),
-                    email:$("#email_update").val(),
-                    rentAmount:$("#potentialRentAmount_update").val(),
-                    propertyInfo:$("#propertyInfo_update").val(),
-                    unitInfo:$("#unitInfo_update").val(),
-                    prospectDetails:$("#propertyDetail_update").val(),
-                    sourceCampaign:$("#sourceCampaign_update").val(),
+            $("#update").click(function () {
+                const data = {
+                    firstName: $("#firstName_update").val(),
+                    middleName: $("#middleName_update").val(),
+                    lastName: $("#lastName_update").val(),
+                    phoneNumber: $("#phone2").val(),
+                    email: $("#email_update").val(),
+                    rentAmount: $("#potentialRentAmount_update").val(),
+                    propertyInfo: $("#propertyInfo_update").val(),
+                    unitInfo: $("#unitInfo_update").val(),
+                    prospectDetails: $("#propertyDetail_update").val(),
+                    sourceCampaign: $("#sourceCampaign_update").val(),
                     prospectusStatus,
-                    prospectusid:prospectID
+                    prospectusid: prospectID
                 }
                 $.ajax({
-                    url:"http://localhost:3000/api/spade/updateProspectus",
-                    type:"PUT",
-                    data:JSON.stringify(data),
+                    url: "http://localhost:3000/api/spade/updateProspectus",
+                    type: "PUT",
+                    data: JSON.stringify(data),
                     contentType: 'application/json',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
-                    success:function(response){
+                    success: function (response) {
                         console.log(response)
                         $("#editModal").modal("hide");
                         $("#myModal_success").modal("show");
@@ -4349,14 +4359,14 @@
                             $('#myModal_success').modal('hide');
                             getData()
                         }, 2000);
-                    },error:function(xhr,status,error){
+                    }, error: function (xhr, status, error) {
                         $("#editModal").modal("hide");
                         $("#myModal_warning_connection").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning_connection').modal('hide');
                             getData()
                         }, 2000);
-                    },data:JSON.stringify(data)
+                    }, data: JSON.stringify(data)
                 })
             })
             $('#typehead').on('keyup', function () {
@@ -4377,6 +4387,11 @@
                 }
             }
             function populateCards(elem, prospectus, property) {
+                var password = 'your-secret-password';
+var encryptedProspectId = sjcl.encrypt(password, prospectus.id.toString());
+
+// Include the encrypted value in the URL
+var encodedProspectId = encodeURIComponent(encryptedProspectId);
                 elem.append(
 
                     `<div class="d-flex p-2 mb-2 portlet" style="border-radius: 7px;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;" id="${"card" + prospectus.id}">` +
@@ -4393,7 +4408,7 @@
                     '<div class="d-flex" style="flex-direction: row;">' +
                     '<div class="d-flex" style="flex-direction: column;">' +
                     '<div class="m-0 text-primary fw-bold fs-18 rent-amount">' + (formatRentAmount(prospectus.rentAmount)) + '</div>' +
-                    '<a href="./view-prospects.html" class="fs-12 text-dark">View More</a>' +
+                    `<a href="./view-prospects.html?prospect=${encodedProspectId}" class="fs-12 text-dark">View More</a>` +
                     '</div>' +
                     '<div class="m-0 text-primary fw-bold fs-18 ms-2">' +
                     '<div class="dropdown show">' +
@@ -4410,10 +4425,11 @@
                 )
 
             }
-$("#tab300,#tab322").click(function(){
-    getData()
-});
+            $("#tab300,#tab322").click(function () {
+                getData()
+            });
             function getData() {
+                var password = 'your-secret-password';
 
                 $("#engaged-propsect-kanban .card .card-body,#nurturing-propsect-kanban .card .card-body,#new-propsect-kanban .card .card-body").empty();
                 $('#table-body').empty()
@@ -4430,8 +4446,8 @@ $("#tab300,#tab322").click(function(){
                     success: function (response) {
                         console.log(response.data);
                         propsectData = response.data;
-                        
-let totalRentDefault = 0;
+
+                        let totalRentDefault = 0;
 
 
                         response?.data?.forEach(function (item, index) {
@@ -4488,19 +4504,22 @@ let totalRentDefault = 0;
                                     }
                                 });
                             });
+                            var encryptedProspectId = sjcl.encrypt(password, prospectus.id.toString());
 
+// Include the encrypted value in the URL
+var encodedProspectId = encodeURIComponent(encryptedProspectId);
                             row.append($('<td>').html(dropdownToggle).append(dropdownMenu));
                             // Assuming this is where you create the "Edit" dropdown option in your table
-                            row.append($('<td>').html(`<i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i><ul class="dropdown-menu dropdown-menu-top"><li><a class="dropdown-item text-dark" href="javascript:void(0)">View</a></li><li><a class="dropdown-item text-dark edit-option" id="${prospectus?.id}">Edit</a></li><li><a class="dropdown-item text-dark" href="javascript:void(0)">Delete</a></li></ul>`));
+                            row.append($('<td>').html(`<i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i><ul class="dropdown-menu dropdown-menu-top"><li><a class="dropdown-item text-dark" href="./view-prospects.html?prospect=${encodedProspectId}">View</a></li><li><a class="dropdown-item text-dark edit-option" id="${prospectus?.id}">Edit</a></li><li><a class="dropdown-item text-dark" href="javascript:void(0)">Delete</a></li></ul>`));
 
                             var tableSelector = '';
                             var rentAmount = parseFloat(prospectus.rentAmount);
                             if (prospectus.prospectusStatus == "Qualified") {
                                 tableSelector = "#table-body-qualified, ";
-                                
+
                             } else if (prospectus.prospectusStatus == "Disqualified") {
                                 tableSelector = "#table-body-disqualified, ";
-                                
+
                             }
                             $(tableSelector + "#table-body").append(row);
                             totalRentDefault += rentAmount;
@@ -4509,22 +4528,22 @@ let totalRentDefault = 0;
 
                             if (prospectus.prospectusStatus == "Engaged") {
                                 populateCards($('#engaged-propsect-kanban .card .card-body'), prospectus, property);
-                                
+
                             } else if (prospectus.prospectusStatus == "Nurturing") {
                                 populateCards($('#nurturing-propsect-kanban .card .card-body'), prospectus, property);
-                                
+
                             } else if (prospectus.prospectusStatus !== "Qualified" && prospectus.prospectusStatus !== "Disqualified") {
                                 populateCards($('#new-propsect-kanban .card .card-body'), prospectus, property);
-                                
+
                             }
                             countValues()
                         });
-                      
-                      
-                        $('#total-rent').text(formatRentAmount(totalRentDefault.toFixed(2)));
-                        
 
-                    
+
+                        $('#total-rent').text(formatRentAmount(totalRentDefault.toFixed(2)));
+
+
+
                     },
                     error: function (xhr, status, error) {
                         // Handle error
@@ -4533,63 +4552,161 @@ let totalRentDefault = 0;
 
             }
             getData()
-            function countValues(){
+            function formatDate(date) {
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+                return `${year}-${month}-${day}`;
+            }
+            const currentDate = new Date();
+            const oneMonthAgo = new Date(currentDate);
+            oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+
+            startDate = formatDate(oneMonthAgo); // Format the date if needed
+            endDate = formatDate(currentDate);
+            $("#prospect-status-start-date").val(startDate)
+            $("#prospect-status-end-date").val(endDate)
+            $("#prospect-qualified-start-date").val(startDate)
+            $("#prospect-qualified-end-date").val(endDate)
+            $("#startDate_task").val(startDate)
+            $("#endDate_task").val(endDate)
+            $("#startDate_property").val(startDate)
+            $("#endDate_property").val(endDate)
+            $("#startDate_account").val(startDate)
+            $("#endDate_account").val(endDate)
+            $("#startDate_amount").val(startDate)
+            $("#endDate_amount").val(endDate)
+            function getGraphData() {
+                $.ajax({
+                    url: `http://localhost:3000/api/spade/prospectusInsightEN/${startDate}/${endDate}`,
+                    headers: {
+                        authorization: "Bearer " + localStorage.getItem("authtoken")
+                    },
+                    contentType: "application/json",
+                    type: "GET",
+                    success: function (response) {
+                        $("#total-prospects").text(response.data.totalProspectus)
+                        $("#engaged-prospect").text(response.data.Engaged ? response.data.Engaged : 0)
+                        $("#nurture-prospect").text(response.data.Nurturing ? response.data.Nurturing : 0)
+                    }, error: function (xhr, status, error) {
+
+                    }
+                })
+            
+                $.ajax({
+                    url: `http://localhost:3000/api/spade//prospectusInsightQD/${startDate}/${endDate}`,
+                    headers: {
+                        authorization: "Bearer " + localStorage.getItem("authtoken")
+                    },
+                    contentType: "application/json",
+                    type: "GET",
+                    success: function (response) {
+                        $("#total-prospects").text(response.data.totalProspectus)
+                        $("#engaged-prospect").text(response.data.Engaged ? response.data.Engaged : 0)
+                        $("#nurture-prospect").text(response.data.Nurturing ? response.data.Nurturing : 0)
+                    }, error: function (xhr, status, error) {
+
+                    }
+                })
+            
+            }
+            $("#tab333").on("click", function () {
+                getGraphData()
+            })
+            $("#prospect-status-start-date").on("change", function () {
+
+                $.ajax({
+                    url: `http://localhost:3000/api/spade/prospectusInsightEN/${$(this).val()}/${endDate}`,
+                    headers: {
+                        authorization: "Bearer " + localStorage.getItem("authtoken")
+                    },
+                    contentType: "application/json",
+                    type: "GET",
+                    success: function (response) {
+                        $("#total-prospects").text(response.data.totalProspectus)
+                        $("#engaged-prospect").text(response.data.Engaged ? response.data.Engaged : 0)
+                        $("#nurture-prospect").text(response.data.Nurturing ? response.data.Nurturing : 0)
+                    }, error: function (xhr, status, error) {
+
+                    }
+                })
+            })
+            $("#prospect-status-end-date").on("change", function () {
+
+                $.ajax({
+                    url: `http://localhost:3000/api/spade/prospectusInsightEN/${startDate}/${$(this).val()}`,
+                    headers: {
+                        authorization: "Bearer " + localStorage.getItem("authtoken")
+                    },
+                    contentType: "application/json",
+                    type: "GET",
+                    success: function (response) {
+                        $("#total-prospects").text(response.data.totalProspectus)
+                        $("#engaged-prospect").text(response.data.Engaged ? response.data.Engaged : 0)
+                        $("#nurture-prospect").text(response.data.Nurturing ? response.data.Nurturing : 0)
+                    }, error: function (xhr, status, error) {
+
+                    }
+                })
+            })
+
+            function countValues() {
                 let totalNurtureAmount = 0;
                 let totalEngageAmount = 0;
 
-let totalActiveAmount = 0;
-                $('#nurturing-propsect-kanban .card .card-body .rent-amount').each(function(){
-                    var value = parseFloat($(this).text().split("$")[1].trim(" ").includes("k")?$(this).text().split("$")[1].trim(" ").split("k")[0]*1000:$(this).text().split("$")[1].trim(" ").includes("M")?$(this).text().split("$")[1].trim(" ").split("M")[0]*1000000:$(this).text().split("$")[1].trim(" "));
+                let totalActiveAmount = 0;
+                $('#nurturing-propsect-kanban .card .card-body .rent-amount').each(function () {
+                    var value = parseFloat($(this).text().split("$")[1].trim(" ").includes("k") ? $(this).text().split("$")[1].trim(" ").split("k")[0] * 1000 : $(this).text().split("$")[1].trim(" ").includes("M") ? $(this).text().split("$")[1].trim(" ").split("M")[0] * 1000000 : $(this).text().split("$")[1].trim(" "));
                     console.log(value)
-                    totalNurtureAmount+=value;
+                    totalNurtureAmount += value;
                 })
-                $('#engaged-propsect-kanban .card .card-body .rent-amount').each(function(){
-                    var value = parseFloat($(this).text().split("$")[1].trim(" ").includes("k")?$(this).text().split("$")[1].trim(" ").split("k")[0]*1000:$(this).text().split("$")[1].trim(" ").includes("M")?$(this).text().split("$")[1].trim(" ").split("M")[0]*1000000:$(this).text().split("$")[1].trim(" "));
+                $('#engaged-propsect-kanban .card .card-body .rent-amount').each(function () {
+                    var value = parseFloat($(this).text().split("$")[1].trim(" ").includes("k") ? $(this).text().split("$")[1].trim(" ").split("k")[0] * 1000 : $(this).text().split("$")[1].trim(" ").includes("M") ? $(this).text().split("$")[1].trim(" ").split("M")[0] * 1000000 : $(this).text().split("$")[1].trim(" "));
 
-                    totalEngageAmount+=value;
+                    totalEngageAmount += value;
                 })
-                $('#new-propsect-kanban .card .card-body .rent-amount').each(function(){
-                    var value = parseFloat($(this).text().split("$")[1].trim(" ").includes("k")?$(this).text().split("$")[1].trim(" ").split("k")[0]*1000:$(this).text().split("$")[1].trim(" ").includes("M")?$(this).text().split("$")[1].trim(" ").split("M")[0]*1000000:$(this).text().split("$")[1].trim(" "));
+                $('#new-propsect-kanban .card .card-body .rent-amount').each(function () {
+                    var value = parseFloat($(this).text().split("$")[1].trim(" ").includes("k") ? $(this).text().split("$")[1].trim(" ").split("k")[0] * 1000 : $(this).text().split("$")[1].trim(" ").includes("M") ? $(this).text().split("$")[1].trim(" ").split("M")[0] * 1000000 : $(this).text().split("$")[1].trim(" "));
 
-                    totalActiveAmount+=value;
+                    totalActiveAmount += value;
                 })
                 $('#nurturing-propsect-kanban-amount').text(formatRentAmount(totalNurtureAmount));
-                        $('#engaged-propsect-kanban-amount').text(formatRentAmount(totalEngageAmount));
-                        $('#new-propsect-kanban-amount').text(formatRentAmount(totalActiveAmount));
+                $('#engaged-propsect-kanban-amount').text(formatRentAmount(totalEngageAmount));
+                $('#new-propsect-kanban-amount').text(formatRentAmount(totalActiveAmount));
 
             }
             function resetAccordion() {
-    $('#firstName,#middleName ,#lastName, #phone,#email ,#propertyInfo, #unitInfo, #propertyDetail,#status ,#sourceCampaign').each(function() {
-        if ($(this).is('select')) {
-            // If it's a select box, select the first option
-            $(this).prop('selectedIndex', 0);
-        } else if ($(this).is('input')) {
-            // If it's an input field, empty the value
-            $(this).val('');
-        }
-        $(this).removeClass('border-green');
-        $(this).removeClass('border-danger');
-        $(this).next('.text-danger').addClass('d-none');
-    });
-    $('#firstName_update,#middleName_update ,#lastName_update, #phone2,#email_update ,#propertyInfo_update, #unitInfo_update, #propertyDetail_update,#status_update ,#sourceCampaign_update').each(function() {
-        if ($(this).is('select')) {
-            // If it's a select box, select the first option
-            $(this).prop('selectedIndex', 0);
-        } else if ($(this).is('input')) {
-            // If it's an input field, empty the value
-            $(this).val('');
-        }
-        $(this).removeClass('border-green');
-        $(this).removeClass('border-danger');
-        $(this).next('.text-danger').addClass('d-none');
-    });
+                $('#firstName,#middleName ,#lastName, #phone,#email ,#propertyInfo, #unitInfo, #propertyDetail,#status ,#sourceCampaign').each(function () {
+                    if ($(this).is('select')) {
+                        // If it's a select box, select the first option
+                        $(this).prop('selectedIndex', 0);
+                    } else if ($(this).is('input')) {
+                        // If it's an input field, empty the value
+                        $(this).val('');
+                    }
+                    $(this).removeClass('border-green');
+                    $(this).removeClass('border-danger');
+                    $(this).next('.text-danger').addClass('d-none');
+                });
+                $('#firstName_update,#middleName_update ,#lastName_update, #phone2,#email_update ,#propertyInfo_update, #unitInfo_update, #propertyDetail_update,#status_update ,#sourceCampaign_update').each(function () {
+                    if ($(this).is('select')) {
+                        // If it's a select box, select the first option
+                        $(this).prop('selectedIndex', 0);
+                    } else if ($(this).is('input')) {
+                        // If it's an input field, empty the value
+                        $(this).val('');
+                    }
+                    $(this).removeClass('border-green');
+                    $(this).removeClass('border-danger');
+                    $(this).next('.text-danger').addClass('d-none');
+                });
 
-    // Additional code for specific fields like 'moveInDate' and 'potentialRentAmount'
-    $('#moveInDate_update, #potentialRentAmount_update').val('');
-    $('#moveInDate_update, #potentialRentAmount_update').removeClass('border-green');
-    $('#moveInDate_update, #potentialRentAmount_update').removeClass('border-danger');
-    $('#moveInDate_update, #potentialRentAmount_update').next('.text-danger').addClass('d-none');
-}
+                // Additional code for specific fields like 'moveInDate' and 'potentialRentAmount'
+                $('#moveInDate_update, #potentialRentAmount_update').val('');
+                $('#moveInDate_update, #potentialRentAmount_update').removeClass('border-green');
+                $('#moveInDate_update, #potentialRentAmount_update').removeClass('border-danger');
+                $('#moveInDate_update, #potentialRentAmount_update').next('.text-danger').addClass('d-none');
+            }
 
             $(function () {
                 $(".column").sortable({
@@ -4738,7 +4855,7 @@ let totalActiveAmount = 0;
                     icon.toggleClass("ui-icon-minusthick ui-icon-plusthick");
                     icon.closest(".portlet").find(".portlet-content").toggle();
                 });
-              
+
             });
 
             $(document).on("click", ".edit-option", function () {
@@ -4856,11 +4973,11 @@ let totalActiveAmount = 0;
                     $(".progress").html(myprogress)
                 },
                 error: function (xhr, status, error) {
-                   
+
                     console.log('Error occurred while fetching state and city data.');
                     console.log(xhr);
                     console.log(error);
-                   
+
                 }
             });
             $('#email_verification').on('click', function () {
