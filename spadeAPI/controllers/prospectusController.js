@@ -262,25 +262,18 @@ exports.updateProspectusStatus = async (req, res) => {
 //  #############################  Insight Qualified & disQuilified Start ##################################################
 exports.prospectusInsightQD = async (req, res) => {
     
-    const {
-        startDate,
-        endDate
-    } = req.body;
-    // const { userId } = req.body;
-    const { userId } = req.user;
+    const {year} = req.body;
+    const { userId } = req.body;
+    // const { userId } = req.user;
     try {
         
-        const prospectusResult = await queryRunner(prospectusInsightQD, [
-            userId,
-            startDate,
-            endDate
-        ]);
+        const prospectusResult = await queryRunner(prospectusInsightQD, [year,userId]);
         if (prospectusResult[0].length === 0) {
             return res.status(400).send("No data found");
         }
         res.status(200).json({
             message: " prospectus Qualified & disQuilified successful",
-            data : prospectusResult[0][0]
+            data : prospectusResult[0]
         });
     } catch (error) {
         console.log(error);

@@ -222,4 +222,5 @@ router.put("/updateProspectus", verifyToken, prospectus.getProspectusByID);
 // router.put("/updateProspectus", prospectus.updateProspectus);
 router.put("/updateProspectusStatus", verifyToken, prospectus.updateProspectusStatus);
 router.get("/prospectusInsightQD", verifyToken, prospectus.prospectusInsightQD);
+// router.get("/prospectusInsightQD", prospectus.prospectusInsightQD);
 router.get("/prospectusInsightEN", verifyToken, prospectus.prospectusInsightEN);
