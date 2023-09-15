@@ -945,7 +945,7 @@
 
                                         <span class="text-danger d-none">Source Campaign is required!</span>
                                         <a href="javascript:void(0)" class="text-primary"
-                                            style="text-decoration: underline;">+ Add Lead Source</a>
+                                            style="text-decoration: underline;">+ Add Prospect Source</a>
                                     </div>
                                     <div class="col-md-4 col-lg-4 col-xl-4">
                                         <label for="status" class="form-label fw-bold">Status <span
@@ -1134,7 +1134,7 @@
                                         </select>
                                         <span class="text-danger d-none">Source Campaign is required!</span>
                                         <a href="javascript:void(0)" class="text-primary"
-                                            style="text-decoration: underline;">+ Add Lead Source</a>
+                                            style="text-decoration: underline;">+ Add Prospect Source</a>
                                     </div>
 
                                 </form>
@@ -1190,10 +1190,9 @@
                     <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal"
                         id='close'>Close</button>
                     <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
-                    <a href="javascript:void(0)" class="btn text-light button d-none" style='background-color:#1467B0;'
-                        id='next'>Save</a>
-                    <button class="btn text-light button" style='background-color:#1467B0;'
-                        id='next-add-property'>Next</button>
+                    <a href="javascript:void(0)" class="btn text-light button disabled" style='background-color:#1467B0;'
+                        id='update'>Save</a>
+                    
 
                 </div>
             </div>
@@ -1939,23 +1938,10 @@
                         <!-- PAGE-HEADER END -->
                         <div>
                             <p class="d-inline-flex gap-1">
-                                <span>Add Invoicing | </span><a data-bs-toggle="collapse" href="#collapseHelp"
-                                    role="button" aria-expanded="false" aria-controls="collapseHelp"
-                                    class="text-dark collapsed active">
-                                    Help ?
-                                </a>
-
+                                <span>Prospects | </span>
+                                  <span><a href="#" onclick="Intercom('showArticle', 8210506)"> How to add Prospect? </a></span>
+                                  <span><a href="#" onclick="Intercom('showArticle', 8210444)"> How to update Prospect? </a></span>
                             </p>
-                            <div class="collapse" id="collapseHelp" style="width: 40%;">
-                                <div class="card card-body">
-                                    <span><a href="#" onclick="Intercom('showArticle', 8210506)"><i
-                                                class="fi fi-rs-question text-light"></i> How to create Properties?
-                                        </a></span>
-                                    <span><a href="#" onclick="Intercom('showArticle', 8210444)"><i
-                                                class="fi fi-rs-question text-light"></i> How to update Properties?
-                                        </a></span>
-                                </div>
-                            </div>
                         </div>
                         <div class="row">
                             <div class="col-12">
@@ -4149,6 +4135,7 @@
     </script>
 
     <script>
+        var prospectID;var prospectusStatus;
         $(document).ready(function () {
          
             $.ajax({
@@ -4222,14 +4209,15 @@
             $("#list-view").hide();
             $("#kanban-view-option").click(function () {
                 $("#kanban-view").show();
-                
+                getData()
                 $("#kanban-view-picker").show();
                 $("#list-view").hide();
             });
 
             $("#list-view-option").click(function () {
                 $("#kanban-view").hide();
-                
+                getData()
+            
                 $("#kanban-view-picker").hide();
 
                 $("#list-view").show();
@@ -4265,55 +4253,22 @@
                 });
             });
             function updateButtonStatus() {
-                var accordion1Fields = $('#accordion-item1 input[required], #accordion-item1 select[required]');
-                var accordion2Fields = $('#accordion-item2 input[required], #accordion-item2 select[required]');
-                var accordion3Fields = $('#accordion-item3 input[required]');
+                var accordion1Fields = $('#editModal #accordion-item1 input[required],#editModal  #accordion-item1 select[required]');
+                var accordion2Fields = $('#editModal #accordion-item2 input[required],#editModal  #accordion-item2 select[required]');
+            
                 var isAccordion1FieldsEmpty = accordion1Fields.filter(function () {
                     return $(this).val() !== '' || $(this).val() === 'Choose...';
                 }).length === 0;
                 var isAccordion2FieldsEmpty = accordion2Fields.filter(function () {
                     return $(this).val() !== '' || $(this).val() === 'Choose...';
                 }).length === 0;
-                var isAccordion3FieldsEmpty = accordion3Fields.filter(function () {
-                    return $(this).val() !== '';
-                }).length === 0;
-
-                // Handle property selection change
-
+                if(isAccordion1FieldsEmpty || isAccordion2FieldsEmpty){
+                    $('#editModal #update').addClass('disabled');
+                }else{
+                    $('#editModal #update').removeClass('disabled');
+                }
             }
 
-            // function updateButtonStatus() {
-            //     var accordion1Fields = $('#accordion-item1 input[required], #accordion-item1 select[required]');
-            //     var accordion2Fields = $('#accordion-item2 input[required], #accordion-item2 select[required]');
-            //     var accordion3Fields = $('#accordion-item3 input[required]');
-            //     var isAccordion1FieldsEmpty = accordion1Fields.filter(function () {
-            //         return $(this).val() !== '' || $(this).val() === 'Choose...';
-            //     }).length === 0;
-            //     var isAccordion2FieldsEmpty = accordion2Fields.filter(function () {
-            //         return $(this).val() !== '' || $(this).val() === 'Choose...';
-            //     }).length === 0;
-            //     var isAccordion3FieldsEmpty = accordion3Fields.filter(function () {
-            //         return $(this).val() !== '';
-            //     }).length === 0;
-
-            //     // Enable or disable the buttons based on the fields' status
-            //     if (!isAccordion1FieldsEmpty || !isAccordion2FieldsEmpty || !isAccordion3FieldsEmpty) {
-            //         $('#draft').removeAttr('disabled');
-            //     } else {
-            //         $('#draft').attr('disabled', 'disabled');
-            //     }
-
-            //     // var allFieldsFilled = areAllFieldsFilled();
-
-            //     // Enable or disable the buttons based on the fields' status
-            //     if (allFieldsFilled) {
-            //         $('#next').removeClass("disabled").removeAttr("disabled");
-            //     } else {
-            //         $('#next').addClass("disabled").attr("disabled", "disabled");
-            //     }
-            // }
-
-            // Call the updateButtonStatus function when any field in the accordions is changed
             $('#accordion-item1 input[type="text"],#accordion-item1 input[type="tel"], #accordion-item1 select, #accordion-item2 input, #accordion-item2 select, #accordion-item3 input, #accordion-item3 select').on('input change', function () {
                 var $field = $(this);
                 var $errorMessage = $field.next('.text-danger');
@@ -4338,6 +4293,72 @@
                 }
                 // updateButtonStatus();
             });
+            
+            $('#editModal #accordion-item1 input[type="text"],#editModal #accordion-item1 input[type="tel"],#editModal #accordion-item1 select,#editModal #accordion-item2 input,#editModal #accordion-item2 select,#editModal #accordion-item3 input, #accordion-item3 select').on('input change', function () {
+                var $field = $(this);
+                var $errorMessage = $field.next('.text-danger');
+                if ($field.attr("id") === "zip") {
+                    if ($field.val().length !== 5) {
+                        $field.addClass('border-danger');
+                        $field.removeClass('border-green');
+                        $errorMessage.removeClass('d-none');
+                    } else {
+                        $field.removeClass('border-danger');
+                        $field.addClass('border-green');
+                        $errorMessage.addClass('d-none');
+                    }
+                } else if ($field.val() === '' || $field.val() === 'Choose...') {
+                    $field.addClass('border-danger');
+                    $field.removeClass('border-green');
+                    $errorMessage.removeClass('d-none');
+                } else {
+                    $field.removeClass('border-danger');
+                    $field.addClass('border-green');
+                    $errorMessage.addClass('d-none');
+                }
+                updateButtonStatus();
+            });
+            $("#update").click(function(){
+                const data={
+                    firstName:$("#firstName_update").val(),
+                    middleName:$("#middleName_update").val(),
+                    lastName:$("#lastName_update").val(),
+                    phoneNumber:$("#phone2").val(),
+                    email:$("#email_update").val(),
+                    rentAmount:$("#potentialRentAmount_update").val(),
+                    propertyInfo:$("#propertyInfo_update").val(),
+                    unitInfo:$("#unitInfo_update").val(),
+                    prospectDetails:$("#propertyDetail_update").val(),
+                    sourceCampaign:$("#sourceCampaign_update").val(),
+                    prospectusStatus,
+                    prospectusid:prospectID
+                }
+                $.ajax({
+                    url:"http://localhost:3000/api/spade/updateProspectus",
+                    type:"PUT",
+                    data:JSON.stringify(data),
+                    contentType: 'application/json',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success:function(response){
+                        console.log(response)
+                        $("#editModal").modal("hide");
+                        $("#myModal_success").modal("show");
+                        setTimeout(function () {
+                            $('#myModal_success').modal('hide');
+                            getData()
+                        }, 2000);
+                    },error:function(xhr,status,error){
+                        $("#editModal").modal("hide");
+                        $("#myModal_warning_connection").modal("show");
+                        setTimeout(function () {
+                            $('#myModal_warning_connection').modal('hide');
+                            getData()
+                        }, 2000);
+                    },data:JSON.stringify(data)
+                })
+            })
             $('#typehead').on('keyup', function () {
                 var searchValue = $(this).val().toLowerCase();
                 $('#table-body tr').filter(function () {
@@ -4346,6 +4367,7 @@
             });
             var propsectData = [];
             function formatRentAmount(amount) {
+                console.log(amount)
                 if (amount >= 1000000) {
                     return "$ " + (amount / 1000000).toFixed(1) + "M";
                 } else if (amount >= 1000) {
@@ -4370,7 +4392,7 @@
                     '</div>' +
                     '<div class="d-flex" style="flex-direction: row;">' +
                     '<div class="d-flex" style="flex-direction: column;">' +
-                    '<div class="m-0 text-primary fw-bold fs-18">' + (formatRentAmount(prospectus.rentAmount)) + '</div>' +
+                    '<div class="m-0 text-primary fw-bold fs-18 rent-amount">' + (formatRentAmount(prospectus.rentAmount)) + '</div>' +
                     '<a href="./view-prospects.html" class="fs-12 text-dark">View More</a>' +
                     '</div>' +
                     '<div class="m-0 text-primary fw-bold fs-18 ms-2">' +
@@ -4379,7 +4401,7 @@
                     '<span class=""><i class="fe fe-more-vertical"></i></span>' +
                     '</a>' +
                     '<div class="dropdown-menu dropdown-menu-end">' +
-                    '<a class="dropdown-item text-success" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#editModal">Edit</a>' +
+                    `<a class="dropdown-item text-dark edit-option" id="${prospectus?.id}">Edit</a>` +
                     '<a class="dropdown-item text-danger" href="javascript:void(0)">Delete</a>' +
                     '</div>' +
                     '</div>' +
@@ -4410,9 +4432,7 @@ $("#tab300,#tab322").click(function(){
                         propsectData = response.data;
                         
 let totalRentDefault = 0;
-let totalEngageAmount = 0;
-let totalNurtureAmount = 0;
-let totalActiveAmount = 0;
+
 
                         response?.data?.forEach(function (item, index) {
                             var row = $('<tr>');
@@ -4489,21 +4509,20 @@ let totalActiveAmount = 0;
 
                             if (prospectus.prospectusStatus == "Engaged") {
                                 populateCards($('#engaged-propsect-kanban .card .card-body'), prospectus, property);
-                                totalEngageAmount += rentAmount;
+                                
                             } else if (prospectus.prospectusStatus == "Nurturing") {
                                 populateCards($('#nurturing-propsect-kanban .card .card-body'), prospectus, property);
-                                totalNurtureAmount += rentAmount;
+                                
                             } else if (prospectus.prospectusStatus !== "Qualified" && prospectus.prospectusStatus !== "Disqualified") {
                                 populateCards($('#new-propsect-kanban .card .card-body'), prospectus, property);
-                                totalActiveAmount += rentAmount;
+                                
                             }
+                            countValues()
                         });
                       
                       
                         $('#total-rent').text(formatRentAmount(totalRentDefault.toFixed(2)));
-                        $('#nurturing-propsect-kanban-amount').text(formatRentAmount(totalNurtureAmount.toFixed(2)));
-                        $('#engaged-propsect-kanban-amount').text(formatRentAmount(totalEngageAmount.toFixed(2)));
-                        $('#new-propsect-kanban-amount').text(formatRentAmount(totalActiveAmount.toFixed(2)));
+                        
 
                     
                     },
@@ -4514,6 +4533,31 @@ let totalActiveAmount = 0;
 
             }
             getData()
+            function countValues(){
+                let totalNurtureAmount = 0;
+                let totalEngageAmount = 0;
+
+let totalActiveAmount = 0;
+                $('#nurturing-propsect-kanban .card .card-body .rent-amount').each(function(){
+                    var value = parseFloat($(this).text().split("$")[1].trim(" ").includes("k")?$(this).text().split("$")[1].trim(" ").split("k")[0]*1000:$(this).text().split("$")[1].trim(" ").includes("M")?$(this).text().split("$")[1].trim(" ").split("M")[0]*1000000:$(this).text().split("$")[1].trim(" "));
+                    console.log(value)
+                    totalNurtureAmount+=value;
+                })
+                $('#engaged-propsect-kanban .card .card-body .rent-amount').each(function(){
+                    var value = parseFloat($(this).text().split("$")[1].trim(" ").includes("k")?$(this).text().split("$")[1].trim(" ").split("k")[0]*1000:$(this).text().split("$")[1].trim(" ").includes("M")?$(this).text().split("$")[1].trim(" ").split("M")[0]*1000000:$(this).text().split("$")[1].trim(" "));
+
+                    totalEngageAmount+=value;
+                })
+                $('#new-propsect-kanban .card .card-body .rent-amount').each(function(){
+                    var value = parseFloat($(this).text().split("$")[1].trim(" ").includes("k")?$(this).text().split("$")[1].trim(" ").split("k")[0]*1000:$(this).text().split("$")[1].trim(" ").includes("M")?$(this).text().split("$")[1].trim(" ").split("M")[0]*1000000:$(this).text().split("$")[1].trim(" "));
+
+                    totalActiveAmount+=value;
+                })
+                $('#nurturing-propsect-kanban-amount').text(formatRentAmount(totalNurtureAmount));
+                        $('#engaged-propsect-kanban-amount').text(formatRentAmount(totalEngageAmount));
+                        $('#new-propsect-kanban-amount').text(formatRentAmount(totalActiveAmount));
+
+            }
             function resetAccordion() {
     $('#firstName,#middleName ,#lastName, #phone,#email ,#propertyInfo, #unitInfo, #propertyDetail,#status ,#sourceCampaign').each(function() {
         if ($(this).is('select')) {
@@ -4527,12 +4571,24 @@ let totalActiveAmount = 0;
         $(this).removeClass('border-danger');
         $(this).next('.text-danger').addClass('d-none');
     });
+    $('#firstName_update,#middleName_update ,#lastName_update, #phone2,#email_update ,#propertyInfo_update, #unitInfo_update, #propertyDetail_update,#status_update ,#sourceCampaign_update').each(function() {
+        if ($(this).is('select')) {
+            // If it's a select box, select the first option
+            $(this).prop('selectedIndex', 0);
+        } else if ($(this).is('input')) {
+            // If it's an input field, empty the value
+            $(this).val('');
+        }
+        $(this).removeClass('border-green');
+        $(this).removeClass('border-danger');
+        $(this).next('.text-danger').addClass('d-none');
+    });
 
     // Additional code for specific fields like 'moveInDate' and 'potentialRentAmount'
-    $('#moveInDate, #potentialRentAmount').val('');
-    $('#moveInDate, #potentialRentAmount').removeClass('border-green');
-    $('#moveInDate, #potentialRentAmount').removeClass('border-danger');
-    $('#moveInDate, #potentialRentAmount').next('.text-danger').addClass('d-none');
+    $('#moveInDate_update, #potentialRentAmount_update').val('');
+    $('#moveInDate_update, #potentialRentAmount_update').removeClass('border-green');
+    $('#moveInDate_update, #potentialRentAmount_update').removeClass('border-danger');
+    $('#moveInDate_update, #potentialRentAmount_update').next('.text-danger').addClass('d-none');
 }
 
             $(function () {
@@ -4608,7 +4664,7 @@ let totalActiveAmount = 0;
                                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                 },
                                 success: function (response) {
-                                    getData()
+                                    countValues()
 
                                 },
                                 error: function (xhr, status, error) {
@@ -4630,7 +4686,7 @@ let totalActiveAmount = 0;
                                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                 },
                                 success: function (response) {
-                                    getData()
+                                    countValues()
 
                                 },
                                 error: function (xhr, status, error) {
@@ -4652,7 +4708,7 @@ let totalActiveAmount = 0;
                                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                 },
                                 success: function (response) {
-                                    getData()
+                                    countValues()
 
                                 },
                                 error: function (xhr, status, error) {
@@ -4686,13 +4742,13 @@ let totalActiveAmount = 0;
             });
 
             $(document).on("click", ".edit-option", function () {
-                var id = $(this).attr("id");
+                prospectID = $(this).attr("id");
                 const filteredData = propsectData.find(function (item, index) {
-                    if (item.prospectus.id == id) {
+                    if (item.prospectus.id == prospectID) {
                         return item;
                     }
                 })
-
+                prospectusStatus = filteredData.prospectus.prospectusStatus;
                 $("#firstName_update").val(filteredData.prospectus.firstName);
                 $("#middleName_update").val(filteredData.prospectus.middleName);
                 $("#lastName_update").val(filteredData.prospectus.lastName);
