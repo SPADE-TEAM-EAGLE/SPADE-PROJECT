@@ -12,7 +12,9 @@ const {
     addProspectusQuery,
     getProspectusByIdQuery,
     UpdateProspectusQuery,
-    UpdateProspectusStatusQuery
+    UpdateProspectusStatusQuery,
+    prospectusInsightQD,
+    prospectusInsightEN
 } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
 const { deleteImageFromS3 } = require("../helper/S3Bucket");
@@ -125,7 +127,8 @@ exports.getProspectus = async (req, res) => {
 
 //  #############################  GET prospectus By ID START ##################################################
 exports.getProspectusByID = async (req, res) => {
-    const { prospectusId } = req.body;
+    const { prospectusId } = req.query;
+    console.log(req.query)
     try {
 
         const getProspectusResult = await queryRunner(selectQuery("prospectus", "id"), [prospectusId]);
@@ -179,7 +182,7 @@ exports.updateProspectus = async (req, res) => {
         email,
         propertyInfo,
         unitInfo,
-        prospectDetail,
+        prospectDetails,
         sourceCampaign,
         rentAmount,
         prospectusStatus,
@@ -196,7 +199,7 @@ exports.updateProspectus = async (req, res) => {
             email,
             propertyInfo,
             unitInfo,
-            prospectDetail,
+            prospectDetails,
             sourceCampaign,
             rentAmount,
             prospectusStatus,
@@ -254,3 +257,64 @@ exports.updateProspectusStatus = async (req, res) => {
 };
 
 //  #############################  Update prospectus Status END ##################################################
+
+
+
+//  #############################  Insight Qualified & disQuilified Start ##################################################
+exports.prospectusInsightQD = async (req, res) => {
+    
+    const {year} = req.params;
+    // const { userId } = req.body;
+    const { userId } = req.user;
+    try {
+        
+        const prospectusResult = await queryRunner(prospectusInsightQD, [year,userId]);
+        if (prospectusResult[0].length === 0) {
+            return res.status(400).send("No data found");
+        }
+        res.status(200).json({
+            message: " prospectus Qualified & disQuilified successful",
+            data : prospectusResult[0]
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            message: "Error occur in prospectus Insight Qualified and Disqualified",
+            error : error.message
+        });
+    }
+};
+
+//  #############################  Insight Qualified & disQuilified END ##################################################
+
+
+//  #############################  Insight Count Engaged Nurture Start ##################################################
+exports.prospectusInsightEN = async (req, res) => {
+    const {startDate,endDate} = req.params;
+    // const { userId } = req.body;
+    const { userId } = req.user;
+    try {
+        
+        const prospectusResult = await queryRunner(prospectusInsightEN, [
+            userId,
+            startDate,
+            endDate
+        ]);
+        if (prospectusResult[0].length === 0) {
+            return res.status(400).send("No data found");
+        }
+        res.status(200).json({
+            message: " prospectus Engaged and Nurturing get successful",
+            data : prospectusResult[0][0]
+        });
+    } catch (error) {
+        // console.log(error);
+        res.status(500).json({
+            message: "Error occur in prospectus Insight Engaged and Nurturing",
+            error : error.message
+        });
+    }
+};
+
+//  #############################  Insight Engaged and Nurturing END ##################################################
+
