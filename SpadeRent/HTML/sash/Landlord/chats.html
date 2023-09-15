@@ -390,7 +390,8 @@
     } */
 
         button.btn-close {
-            right: -7px;
+            right: 0px;
+            top: auto;
         }
 
         .btn-close {
@@ -1075,6 +1076,14 @@
             }
         }
 
+        .send-file {
+            position: absolute;
+            right: 13px;
+            cursor: pointer;
+            padding: 8px;
+            background: #EDF3F9
+        }
+
         /* chats End css  */
     </style>
 </head>
@@ -1325,9 +1334,9 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="text-justify ps-2 border-model-line">
-                        <h2 class="modal-title">Create <strong class="color-primary">New Property</strong></h2>
-                        <span class="">Spade Rent allows you to add a range of commercial and residential properties,
-                            from condos and single-family homes to retail stores and parking lots.</span>
+                        <h2 class="modal-title">Attachment</h2>
+                        <!-- <span class="">Spade Rent allows you to add a range of commercial and residential properties,
+                            from condos and single-family homes to retail stores and parking lots.</span> -->
 
                     </div>
                     <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="top-close">
@@ -1335,133 +1344,41 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="accordion-item mb-4" id="accordion-item1">
-                        <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button text-white" id="accordian-button-1" type="button" data-bs-toggle="collapse" onclick="checkFieldsFilled('accordion-item1')" id="accordion-button1" data-bs-target="#collapseOne-add-property" aria-expanded="true" aria-controls="collapseOne-add-property">
-                                <span class="m-0 me-4 fs-1" style="font-weight: bold;">01</span>
-                                <h3 class="m-0"><strong>Property Information</strong> <i class="fi fi-rs-pencil"></i><i
-                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
-                                </h3>
-                            </button>
-                        </h2>
-                        <div id="collapseOne-add-property" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <form class="row g-3" enctype="multipart/form-data">
-                                    <div class="col-md-12">
-                                        <label class="form-label fw-bold">Property Photo (Optional)</label>
-                                        <div class="custom-file" style="border: 1px dashed #00000087;">
-                                            <input id="fileInput" type="file" name="image" placeholder="Enter Photo" class="custom-file-input form" accept=".jpg, .png, image/jpeg, image/png"
-                                                aria-label="hello" multiple>
-                                            <span className="d-none"></span>
-                                            <label class="custom-file-label" for="fileInput">
-                                                <i class="fi fi-rs-cloud-upload"></i>
-                                                <div class="custom-file-text">
-                                                    <span>Upload Photo here</span>
-                                                    <span>JPEG and PNG, file size no more than 10MB</span>
-                                                </div>
-                                            </label>
-                                        </div>
-                                        <div class="selected-files text-white">
-                                            <div class="file-grid"></div>
-                                        </div>
-                                        <span class="text-danger d-none">Photos are required!</span>
+                    <form class="row g-3" enctype="multipart/form-data">
+                        <div class="col-md-12">
+                            <label class="form-label fw-bold">Upload Photo</label>
+                            <div class="custom-file" style="border: 1px dashed #00000087;" ondrop="dropHandler(event);"
+                                ondragover="dragOverHandler(event);">
+                                <input id="fileInput" type="file" name="image" placeholder="Enter Photo"
+                                    class="custom-file-input form" accept=".jpg, .png, image/jpeg, image/png"
+                                    aria-label="hello" multiple>
+                                <span className="d-none"></span>
+                                <label class="custom-file-label" for="fileInput">
+                                    <i class="fi fi-rs-cloud-upload"></i>
+                                    <div class="custom-file-text">
+                                        <span>Upload Photo here</span>
+                                        <span>JPEG and PNG, file size no more than 10MB</span>
                                     </div>
-                                    <!-- <div class="col-md-6">
-                                        <label for="inputEmail4" class="form-label fw-bold">Property ID</label>
-                                        <input type="text" class="form-control form" id="propertyId">
-                                        <span class="text-danger d-none">Property ID is required!</span>
-                                    </div> -->
-                                    <div class="col-md-12">
-                                        <label for="inputPassword4" class="form-label fw-bold">Property Name <spnan
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="propertyName" placeholder="Enter Property Name">
-                                        <span class="text-danger d-none">Property name required!</span>
-                                    </div>
-                                    <div class="col-12">
-                                        <label for="inputAddress" class="form-label fw-bold">Address <spnan
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="address" placeholder="Enter Address">
-                                        <span class="text-danger d-none">Address is required!</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputState" class="form-label fw-bold">State <span
-                                                class="text-danger">*</span></label>
-                                        <select id="state" class="form-select form">
-                                            <option selected>Choose...</option>
-                                        </select>
-                                        <span class="text-danger d-none">State is required!</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputCity" class="form-label fw-bold">City <span
-                                                class="text-danger">*</span></label>
-                                        <input type="text" id="city" class="form-control form city-select" pattern="[A-Za-z\s]+" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')" placeholder="Enter City">
-                                        <span class="text-danger d-none">City is required!</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputZip" class="form-label fw-bold">Zip <spnan class="text-danger">
-                                                *</span></label>
-                                        <input class="form-control form" type="text" id="zip" name="zip" pattern="[0-9]{5}" placeholder="A valid 5-digit zip code" maxlength="5" minlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '')" placeholder="Enter Zip" required>
-
-                                        <span class="text-danger d-none">Zip code is required!</span>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <label for="inputState" class="form-label fw-bold">Property Type <spnan
-                                                class="text-danger">*</span></label>
-                                        <select id="propertyType" class="form-select form">
-                                            <option selected>Choose...</option>
-                                            <option>Single Family</option>
-                                            <option>Multi-Family</option>
-                                            <option>Multi-Commercial</option>
-                                        </select>
-                                        <span class="text-danger d-none">Property Type is required!</span>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="inputPassword4" class="form-label fw-bold">Property Total SQFT
-                                            <spnan class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="propertyTotalSF" pattern="[0-9]{5}" placeholder="Area in square feet" maxlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
-                                        <span class="text-danger d-none">Property Total SF is required!</span>
-                                    </div>
-                                </form>
+                                </label>
                             </div>
+                            <div class="selected-files text-white">
+                                <div class="file-grid"></div>
+                            </div>
+                            <span class="text-danger d-none">Photos are required!</span>
                         </div>
-                    </div>
-                    <div class="accordion-item" id="accordion-item2">
-                        <h2 class="accordion-header" id="headingTwo">
-                            <button class="accordion-button collapsed text-white" onclick="checkFieldsFilled('accordion-item2')" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo-add-property" aria-expanded="false" aria-controls="collapseTwo-add-property">
-                                <span class="m-0 me-4 fs-1" style="font-weight: bold;">02</span>
-                                <h3 class="m-0"><strong>Property Unit Information</strong> <i
-                                        class="fi fi-rs-pencil"></i><i
-                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
-                                </h3>
-                            </button>
-                        </h2>
-                        <div id="collapseTwo-add-property" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                            <form class="row g-3 m-1" enctype="multipart/form-data">
-
-                                <div class="col-12 mb-3">
-                                    <label for="inputAddress" class="form-label fw-bold">Number of Units<span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control px-2" id="units" pattern="[0-9]{5}" placeholder="Enter Number of Units" maxlength="3" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
-                                    <span class="text-danger d-none">Units are required!</span>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
-                    <!-- <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
-                        Draft</button> -->
-                    <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close'>Close</button>
-                    <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
-                    <a href="javascript:void(0)" class="btn text-light button d-none" style='background-color:#1467B0;' id='next'>Submit</a>
-                    <button class="btn text-light button" style='background-color:#1467B0;' id='next-add-property'>Next</button>
+                    <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal"
+                        id='close'>Close</button>
+                    <button class="btn text-light button" style='background-color:#1467B0;'
+                        id='submit-photo'>Send</button>
 
                 </div>
             </div>
         </div>
     </div>
-    
+
     <!-- modal end  -->
     <div class="modal fade" id="myModal_delete">
         <div class="modal-dialog modal-dialog-centered text-center" role="document">
@@ -1493,6 +1410,8 @@
                                 </div>
                             </div>
                         </div>
+
+
                     </div>
                 </div>
             </div>
@@ -2014,8 +1933,8 @@
                                 <a class="side-menu__item" data-bs-toggle="slide" href="chats.html">
                                     <i class="side-menu__icon fi fi-rs-comment"></i>
                                     <span class="side-menu__label">Chat</span>
-<span class="badge bg-primary side-badge">6</span>
-                                    
+                                    <span class="badge bg-primary side-badge">6</span>
+
                                     <!-- <i class="angle fe fe-chevron-right"></i> -->
                                 </a>
                             </li>
@@ -2613,19 +2532,12 @@
                                                 <span class="text">Thank You</span>
                                             </div>
                                         </div>
-                                        <style>
-                                            .send-file {
-                                                position: absolute;
-                                                right: 13px;
-                                                cursor: pointer;
-                                                padding: 8px;
-                                                background: #EDF3F9
-                                            }
-                                        </style>
+
                                         <div class="field">
                                             <input id="input-message" class="input-message" type="text"
                                                 placeholder="Type Message..." maxlength="255" />
-                                            <a href="#addModal" data-bs-effect="effect-scale" data-bs-toggle="modal" class="send-file text-black"><i class="fi fi-rs-clip fs-18"></i></a>
+                                            <a href="#addModal" data-bs-effect="effect-scale" data-bs-toggle="modal"
+                                                class="send-file text-black"><i class="fi fi-rs-clip fs-18"></i></a>
                                             <!-- <div class="icon plus">
                                                 <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
@@ -3631,28 +3543,236 @@
                     // Check if the message is not a duplicate
                     // if (!receivedMessages.has(message.message)) {
                     chatMessages.push(message.message);
+                    console.log(message);
                     // receivedMessages.add(message.message);
-                    if (chatMessages.length > 1 && chatMessages[chatMessages.length - 1] === chatMessages[chatMessages.length - 2]) {
+                    if (chatMessages.length > 1 && chatMessages[chatMessages.length - 1] === chatMessages[chatMessages.length - 2] && message.userType == "tenant") {
+                        // console.log(message.userType);
                         return;
                     }
                     if (message.userType == "tenant" && message.chatId == localStorage.getItem("chatId")) {
                         console.log("check rec", message);
-                        messs2 = `<div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
-                                                                    <div style="width: 36px;height: 36px;    border-radius: 50%;
-    background: url(` + (localStorage.getItem("tenantImg") && localStorage.getItem("tenantImg") !== "null" ? localStorage.getItem("tenantImg") : randomImg) + `);
-    background-position: center;
-    background-size: cover;" class="me-1"> 
-                                                                        </div> 
-                                                                    <div class="msg-text">
-                                                <span class="text">${message.message}</span>
-                                                <span style="float: right;" class="text-primary">${formattedTime}</span>
-                                            </div> </div>`;
+                        messs2 = `<div class="d-flex" style="align-items: flex-start; justify-content: flex-start;">
+    <div style="width: 36px; height: 36px; border-radius: 50%; background: url(${localStorage.getItem("tenantImg") && localStorage.getItem("tenantImg") !== "null" ? localStorage.getItem("tenantImg") : randomImg}); background-position: center; background-size: cover;" class="me-1"></div>
+    <div class="msg-text">`;
+
+                        if (message.message.includes('https')) {
+                            const imageUrls = message.message.split(',');
+                            imageUrls.forEach((imageUrl) => {
+                                messs2 += `<a href="JavaScript:void(0);" data-bs-toggle="dropdown"><img style="cursor: pointer; width:200px; margin-top: 5px;" class="text" src="${imageUrl}" /></a>
+        <ul class="dropdown-menu dropdown-menu-top"><li><a class="dropdown-item text-danger edit-option" id="">Delete</a></li><li><a class="dropdown-item text-primary">Download</a></li></ul>
+        <a class="text-primary" href="${imageUrl}">Download</a>
+        `;
+                            });
+                        } else {
+                            messs2 += `<span class="text">${message.message}</span>`;
+                        }
+
+                        messs2 += `<span style="float: right;" class="text-primary">${formattedTime}</span>
+    </div>
+</div>`;
+
                         messDiv.append(messs2);
                     }
                     // }
                 });
                 // receivedMessages.clear();
             }
+            function dropHandler(ev) {
+                console.log("File(s) dropped");
+
+                // Prevent default behavior (Prevent file from being opened)
+                ev.preventDefault();
+
+                if (ev.dataTransfer.items) {
+                    // Use DataTransferItemList interface to access the file(s)
+                    [...ev.dataTransfer.items].forEach((item, i) => {
+                        // If dropped items aren't files, reject them
+                        if (item.kind === "file") {
+                            const file = item.getAsFile();
+                            file.size <= 5 * 1024 * 1024 && selectedFiles.length < 5 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array
+                            updateSelectedFilesContainer()
+                        }
+                    });
+                } else {
+                    // Use DataTransfer interface to access the file(s)
+                    [...ev.dataTransfer.files].forEach((file, i) => {
+                        console.log(`… file[${i}].name = ${file.name}`);
+                    });
+                }
+            }
+            function dragOverHandler(ev) {
+                console.log("File(s) in drop zone");
+
+                // Prevent default behavior (Prevent file from being opened)
+                ev.preventDefault();
+            }
+
+            $(document).on('click', '.delete-file', function () {
+                var index = $(this).data('index');
+                selectedFiles.splice(index, 1);
+                $('#fileInput').empty() // Remove the selected file from the array
+                updateSelectedFilesContainer(); // Update the selected files container
+            });
+            function updateSelectedFilesContainer() {
+                var selectedFilesContainer = $('.file-grid');
+                selectedFilesContainer.empty();
+
+                selectedFiles.forEach(function (file, index) {
+                    console.log(selectedFiles.length)
+                    console.log(file)
+                    var fileElement = $('<div>')
+                        .addClass('selected-file');
+
+                    if (file.type && file.type.includes('image')) {
+                        // Handle image files
+                        fileElement.append(
+                            $('<div>').addClass('file-preview')
+                                .append($('<img style="height:80px">').attr('src', URL.createObjectURL(file)))
+                        );
+                    } else if (file.type && file.type.includes('pdf')) {
+                        // Handle PDF files
+                        fileElement.append(
+                            $('<div>').addClass('file-preview')
+                                .append($('<i style="font-size:50px">').addClass('fi fi-rs-file-pdf')) // Add your PDF icon class here
+                        );
+                    } else {
+                        // Handle S3 bucket URLs for images and PDFs
+                        if (file?.imageKey?.endsWith('.jpg') || file?.imageKey?.endsWith('.png')) {
+                            fileElement.append(
+                                $('<div>').addClass('file-preview')
+                                    .append($('<img style="height:80px">').attr('src', file.Image))
+                            );
+                        } else if (file?.imageKey?.endsWith('.pdf')) {
+                            fileElement.append(
+                                $('<div>').addClass('file-preview')
+                                    .append($('<i style="font-size:50px">').addClass('fi fi-rs-file-pdf'))
+                            );
+                        } else {
+                            // Handle other files (you can modify this part as needed)
+                            fileElement.append(
+                                $('<div>').addClass('file-preview')
+                                    .append($('<i>').addClass('fi fi-rs-file')) // Add an appropriate class for other files
+                            );
+                        }
+                    }
+                    if (file instanceof File) {
+                        fileElement
+                            .append(
+                                $('<div>')
+                                    .addClass('file-details')
+                                    .append($('<span>').text(file.type.includes('pdf') ? "PDF-" + (index + 1) : "Image-" + (index + 1)))
+                            )
+                            .append(
+                                $('<span>')
+                                    .addClass('delete-file')
+                                    .text('X')
+                                    .attr('data-index', index)
+                            )
+                            .appendTo(selectedFilesContainer);
+                    } else if (file instanceof Object) {
+                        if (file.Image) {
+                            fileElement
+                                .append(
+                                    $('<div>')
+                                        .addClass('file-details')
+                                        .append($('<span>').text(file?.imageKey?.includes('pdf') ? "PDF-" + (index + 1) : "Image-" + (index + 1)))
+                                )
+                                .append(
+                                    $('<span>')
+                                        .addClass('delete-file')
+                                        .text('X')
+                                        .attr('data-index', index)
+                                )
+                                .appendTo(selectedFilesContainer);
+                        }
+                    }
+
+                });
+            }
+
+
+            selectedFiles = [];
+            $('#fileInput').on('change', function () {
+                var files = Array.from($(this)[0].files);
+                // console.log(files)
+                files.forEach(function (file) {
+                    file.size <= 5 * 1024 * 1024 && selectedFiles.length < 5 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array
+                });
+
+                updateSelectedFilesContainer(); // Update the selected files container
+            });
+            $('#submit-photo').click(() => {
+                if (selectedFiles.length >= 1) {
+                    var uploadFormData = new FormData();
+                    for (var i = 0; i < selectedFiles.length; i++) {
+                        var file = selectedFiles[i];
+                        uploadFormData.append('image', file);
+                    }
+                    var str = "";
+
+                    $.ajax({
+                        url: 'https://backend.app.spaderent.com/api/spade/upload',
+                        type: 'POST',
+                        data: uploadFormData,
+                        contentType: false,
+                        processData: false,
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            console.log(response.images);
+                            response.images?.forEach(function (value, index, array) {
+                                str += value.image_url;
+
+                                // Add a comma if it's not the last item in the array
+                                if (index < array.length - 1) {
+                                    str += ",";
+                                }
+                            });
+                            // sendMessage2(str);
+                            console.log(str);
+                            var messageData2 = {
+                                chatId: localStorage.getItem("chatId"),
+                                message: str,
+                                messageType: "text",
+                                userType: "landlord"
+                            };
+                            $.ajax({
+                                url: 'https://backend.app.spaderent.com/api/spade/createNewMessage',
+                                type: 'POST',
+                                data: JSON.stringify(messageData2),
+                                contentType: 'application/json',
+                                processData: false,
+                                headers: {
+                                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                                },
+                                success: function (response) {
+                                    console.log(messageData2);
+                                    socket.emit('chatMessage', messageData2);
+                                    $('#addModal').modal('hide');
+                                    $('.file-grid').empty();
+                                    chatTenant(Number(localStorage.getItem("tenantId")), String(localStorage.getItem("tenantName")))
+                                },
+                                error: function (xhr, status, error) {
+                                    console.log(error);
+                                }
+                            });
+
+                        },
+                        error: function (xhr, status, error) {
+                            $("#myModal_warning_connection").modal("show");
+                            setTimeout(function () {
+                                $('#myModal_warning_connection').modal('hide');
+
+                            }, 2000);
+                            console.log('Error: ' + error);
+                        }
+                    });
+
+                }
+            })
+
+
             function chatTenant(tenatId, tenatName, element) {
                 // console.log(typeof String(tenatId));
                 // receivedMessages.clear();
@@ -3756,38 +3876,80 @@
                                                         if (response.data[i]['userType'] == "landlord") {
                                                             const timeArray = response.data[i]['created_at'].split(" ")[1].split(":");
                                                             const time = timeArray.slice(0, 2).join(":");
+                                                            //                                                         messs1 += `<div class="d-flex " style="align-items: flex-start;justify-content: end;"> 
+                                                            //                                                                 <div class="msg-text owner">
+                                                            //                                                                 <span class="text">` + response.data[i]['message'] + `</span>
+                                                            //                                                                 <span style="float: right;" class="text-primary">` + time + `</span>
+                                                            //                                                                 </div>
+                                                            //                                                                 <div style="width: 36px;height: 36px;    border-radius: 50%;
+                                                            // background: url(` + (localStorage.getItem("LandlordImg") != " " && localStorage.getItem("LandlordImg") != "null" ? localStorage.getItem("LandlordImg") : randomImg) + `);
+                                                            // background-position: center;
+                                                            // background-size: cover;" class="ms-1"> 
+                                                            //                                                                     </div> 
+                                                            //                                                                 </div> 
+                                                            //                                                                 `;
                                                             messs1 += `<div class="d-flex " style="align-items: flex-start;justify-content: end;"> 
-                                                                    <div class="msg-text owner">
-                                                                    <span class="text">` + response.data[i]['message'] + `</span>
-                                                                    <span style="float: right;" class="text-primary">` + time + `</span>
-                                                                    </div>
-                                                                    <div style="width: 36px;height: 36px;    border-radius: 50%;
-    background: url(` + (localStorage.getItem("LandlordImg") != " " && localStorage.getItem("LandlordImg") != "null" ? localStorage.getItem("LandlordImg") : randomImg) + `);
-    background-position: center;
-    background-size: cover;" class="ms-1"> 
-                                                                        </div> 
-                                                                    </div> 
-                                                                    `;
+                                                            <div class="msg-text owner">`;
+                                                            if (response.data[i]['message'].includes('https')) {
+                                                                const imageUrls = response.data[i]['message'].split(',');
+                                                                imageUrls.forEach((imageUrl) => {
+                                                                    messs1 += `<a href="JavaScript:void(0);" data-bs-toggle="dropdown"><img style="cursor: pointer; width:200px; margin-top: 5px;" class="text" src="${imageUrl}" /></a>
+        <ul class="dropdown-menu dropdown-menu-top"><li><a class="dropdown-item text-danger edit-option" id="">Delete</a></li><li><a class="dropdown-item text-primary">Download</a></li></ul>
+        <a class="text-primary" href="${imageUrl}">Download</a>
+        `;
+                                                                });
+                                                            } else {
+                                                                messs1 += `<span class="text">${response.data[i]['message']}</span>`;
+                                                            }
 
+                                                            messs1 += `<span style="float: right;" class="text-primary">${time}</span>
+                                                            </div>
+                                                            <div style="width: 36px;height: 36px; border-radius: 50%;
+                                                            background: url(${localStorage.getItem("LandlordImg") != " " && localStorage.getItem("LandlordImg") != "null" ? localStorage.getItem("LandlordImg") : randomImg});
+                                                            background-position: center;
+                                                            background-size: cover;" class="ms-1"> 
+                                                            </div> 
+                                                            </div>`;
                                                         } else if (response.data[i]['userType'] == "tenant") {
                                                             const timeArray = response.data[i]['created_at'].split(" ")[1].split(":");
                                                             const time = timeArray.slice(0, 2).join(":");
-                                                            messs1 += `<div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
-                                                                <div style="width: 36px;height: 36px;    border-radius: 50%;
-    background: url(` + (localStorage.getItem("tenantImg") != "null" && localStorage.getItem("tenantImg") != " " ? localStorage.getItem("tenantImg") : randomImg) + `);
-    background-position: center;
-    background-size: cover;" class="me-1"> 
-                                                                        </div> 
-                                                                    <div class="msg-text">
-                                                <span class="text">` + response.data[i]['message'] + `</span>
-                                                <span style="float: right;" class="text-primary">` + time + `</span>
-                                            </div> </div>
-                                        `;
+                                                            //                                                         messs1 += `<div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
+                                                            //                                                             <div style="width: 36px;height: 36px;    border-radius: 50%;
+                                                            // background: url(` + (localStorage.getItem("tenantImg") != "null" && localStorage.getItem("tenantImg") != " " ? localStorage.getItem("tenantImg") : randomImg) + `);
+                                                            // background-position: center;
+                                                            // background-size: cover;" class="me-1"> 
+                                                            //                                                                     </div> 
+                                                            //                                                                 <div class="msg-text">
+                                                            //                                             <span class="text">` + response.data[i]['message'] + `</span>
+                                                            //                                             <span style="float: right;" class="text-primary">` + time + `</span>
+                                                            //                                         </div> </div>
+                                                            //                                     `;
+                                                            messs1 += `<div class="d-flex" style="align-items: flex-start; justify-content: flex-start;">
+    <div style="width: 36px; height: 36px; border-radius: 50%; background: url(${localStorage.getItem("tenantImg") != "null" && localStorage.getItem("tenantImg") != " " ? localStorage.getItem("tenantImg") : randomImg}); background-position: center; background-size: cover;" class="me-1"></div>
+    <div class="msg-text">`;
+
+                                                            if (response.data[i]['message'].includes('https')) {
+                                                                const imageUrls = response.data[i]['message'].split(',');
+                                                                imageUrls.forEach((imageUrl) => {
+                                                                    messs1 += `<a href="JavaScript:void(0);" data-bs-toggle="dropdown"><img style="cursor: pointer; width:200px; margin-top: 5px;" class="text" src="${imageUrl}" /></a>
+        <ul class="dropdown-menu dropdown-menu-top"><li><a class="dropdown-item text-danger edit-option" id="">Delete</a></li><li><a class="dropdown-item text-primary">Download</a></li></ul>
+        <a class="text-primary" href="${imageUrl}">Download</a>
+        `;
+                                                                });
+                                                            } else {
+                                                                messs1 += `<span class="text">${response.data[i]['message']}</span>`;
+                                                            }
+
+                                                            messs1 += `<span style="float: right;" class="text-primary">${time}</span>
+    </div>
+</div>`;
+
                                                         }
                                                     }
                                                 } else {
                                                     messs1 = `<div class="time text-dark" id="no-mess">No Message</div>`;
                                                 }
+
 
                                                 messDiv.html(messs1);
                                                 messDiv.scrollTop(messDiv[0].scrollHeight);
@@ -3994,6 +4156,44 @@
                         sendMessage(msg);
                     }
                 });
+                var send2 = $('#submit-photo');
+                send2.addEventListener('click', () => {
+                    removeRight62pxClass()
+                });
+                // const sendMessage2 = (images) => {
+                //     updateTime();
+                //     const mainContainer = document.createElement('div');
+                //     mainContainer.setAttribute('class', 'd-flex');
+                //     mainContainer.style.alignItems = 'flex-start';
+                //     mainContainer.style.justifyContent = 'end';
+                //     const messageContainer = document.createElement('div');
+                //     messageContainer.setAttribute('class', 'msg-text owner');
+                //     const imageUrlArray = images.split(',');
+                //     imageUrlArray.forEach(imageUrl => {
+                //         const messageText = document.createElement('img');
+                //         messageText.setAttribute('class', 'text');
+                //         messageText.setAttribute('src', imageUrl);
+                //         imageContainer.appendChild(messageText);
+                //     });
+                //     messageContainer.appendChild(imageContainer);
+                //     const timestampSpan = document.createElement('span');
+                //     timestampSpan.setAttribute('style', 'float: right;');
+                //     timestampSpan.setAttribute('class', 'text-primary');
+                //     timestampSpan.innerText = formattedTime;
+                //     const imageContainer = document.createElement('div');
+                //     imageContainer.setAttribute('style', `width: 36px; height: 36px;border-radius: 50%;background: url(` + (localStorage.getItem("LandlordImg") != "null" && localStorage.getItem("LandlordImg") != " " ? localStorage.getItem("LandlordImg") : randomImg) + `);background-position: center;background-size: cover;`);
+                //     imageContainer.setAttribute('class', 'ms-1');
+                //     mainContainer.appendChild(messageContainer);
+                //     messageContainer.appendChild(timestampSpan);
+                //     mainContainer.appendChild(imageContainer);
+                //     messages.appendChild(mainContainer);
+                //     messages.scrollTo(0, messages.scrollHeight);
+                //     input.value = '';
+                //     input.focus();
+                // };
+
+
+
                 const sendMessage = (msg) => {
                     updateTime(); // Call it initially to set the time immediately
 

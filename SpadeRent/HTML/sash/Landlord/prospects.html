@@ -952,7 +952,11 @@
                                                 class="text-danger">*</span></label>
                                         <select id="status" class="form-select form">
                                             <option selected>Choose...</option>
-                                            <option value="system">System</option>
+                                            <option value="engaged">Engaged</option>
+                                            <option value="active">Active</option>
+                                            <option value="nurturing">Nurturing</option>
+                                            <option value="qualified">Qualified</option>
+                                            <option value="disqualified">Disqualified</option>
                                         </select>
 
                                         <span class="text-danger d-none">Status is required!</span>
@@ -2218,7 +2222,7 @@
                                                                                         <input class="form-control" placeholder="Search Users by Name, Email or Date" id="search_input" type="text">
                                                                                     </div> -->
                                                                                     <div
-                                                                                        class="main-header-center d-none d-lg-block m-0">
+                                                                                        class="main-header-center position-relative d-lg-block m-0">
                                                                                         <button class="btn px-0 pt-2"><i
                                                                                                 class="fe fe-search"
                                                                                                 aria-hidden="true"></i></button>
@@ -2751,7 +2755,7 @@
                                                                                 <input class="form-control" placeholder="Search Users by Name, Email or Date" id="search_input" type="text">
                                                                             </div> -->
                                                                             <div
-                                                                                class="main-header-center d-none d-lg-block m-0">
+                                                                                class="main-header-center position-relative d-lg-block m-0">
                                                                                 <button class="btn px-0 pt-2"><i
                                                                                         class="fe fe-search"
                                                                                         aria-hidden="true"></i></button>
@@ -4146,6 +4150,7 @@
 
     <script>
         $(document).ready(function () {
+         
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/getPropertyUnitsTenant',
                 type: 'GET',
@@ -4214,7 +4219,21 @@
                     console.log('Error: ' + error);
                 }
             });
+            $("#list-view").hide();
+            $("#kanban-view-option").click(function () {
+                $("#kanban-view").show();
+                
+                $("#kanban-view-picker").show();
+                $("#list-view").hide();
+            });
 
+            $("#list-view-option").click(function () {
+                $("#kanban-view").hide();
+                
+                $("#kanban-view-picker").hide();
+
+                $("#list-view").show();
+            });
             $('#tab29 input[type="checkbox"]').change(function () {
                 var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
                 var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
@@ -4442,13 +4461,13 @@ let totalActiveAmount = 0;
                                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                     },
                                     success: function (response) {
-                                        // getData()
+                                        getData()
                                     },
                                     error: function (xhr, status, error) {
                                         console.error('Error updating status:', error);
                                     }
                                 });
-                            });
+                            }); 
 
                             row.append($('<td>').html(dropdownToggle).append(dropdownMenu));
                             // Assuming this is where you create the "Edit" dropdown option in your table
@@ -4495,20 +4514,27 @@ let totalActiveAmount = 0;
 
             }
             getData()
-           function resetAccordion(){
-        $('#firstName, #lastName, #phone,#email ,#propertyInfo, #unitInfo, #propertyDetail,#status ,#sourceCampaign').each(function() {
+            function resetAccordion() {
+    $('#firstName,#middleName ,#lastName, #phone,#email ,#propertyInfo, #unitInfo, #propertyDetail,#status ,#sourceCampaign').each(function() {
+        if ($(this).is('select')) {
+            // If it's a select box, select the first option
+            $(this).prop('selectedIndex', 0);
+        } else if ($(this).is('input')) {
+            // If it's an input field, empty the value
             $(this).val('');
-            $(this).removeClass('border-green');
-            $(this).removeClass('border-danger');
-            $(this).next('.text-danger').addClass('d-none');
-        });
-        $('#moveInDate').val(" ");
-        $('#potentialRentAmount').val(" ");
-        $('#moveInDate').removeClass('border-green');$('#moveInDate').removeClass('border-danger');$('#moveInDate').next('.text-danger').addClass('d-none');
-        $('#potentialRentAmount').removeClass('border-green');$('#potentialRentAmount').removeClass('border-danger');$('#potentialRentAmount').next('.text-danger').addClass('d-none');
+        }
+        $(this).removeClass('border-green');
+        $(this).removeClass('border-danger');
+        $(this).next('.text-danger').addClass('d-none');
+    });
 
+    // Additional code for specific fields like 'moveInDate' and 'potentialRentAmount'
+    $('#moveInDate, #potentialRentAmount').val('');
+    $('#moveInDate, #potentialRentAmount').removeClass('border-green');
+    $('#moveInDate, #potentialRentAmount').removeClass('border-danger');
+    $('#moveInDate, #potentialRentAmount').next('.text-danger').addClass('d-none');
+}
 
-           }
             $(function () {
                 $(".column").sortable({
                     connectWith: ".column",
