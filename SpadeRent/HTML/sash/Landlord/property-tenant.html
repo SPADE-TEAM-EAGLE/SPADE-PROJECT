@@ -1161,12 +1161,15 @@
                                                     id="viewUnits">Units</a>
                                             </li>
                                             <li class="nav-item1 p-0">
-                                                <a class="nav-link p-2" href="property-tenant.html"
+                                                <a class="nav-link active p-2" href="property-tenant.html"
                                                     id="viewTenants">Tenants</a>
                                             </li>
                                             <li class="nav-item1 p-0">
                                                 <a class="nav-link p-2" href="property-task.html"
                                                     id="viewTasks">Tasks</a>
+                                            </li>
+                                            <li class="nav-item1 p-0">
+                                                <a class="nav-link p-2" href="bank-account.html" id="viewTasks">Bank Account</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -1327,14 +1330,14 @@
                                                     id="">
                                                     <thead>
                                                         <tr>
-                                                            <th>tenant ID</th>
-                                                            <th>tenant Name</th>
-                                                            <th>contact info</th>
-                                                            <th>Rent amount</th>
-                                                            <th>PROPERTY type</th>
-                                                            <th>Assign Unit</th>
-                                                            <th>PROPERTY UNITS</th>
-                                                            <th>Lease End Date</th>
+                                                            <th>TENANT ID</th>
+                                                            <th>TENANT NAME</th>
+                                                            <th>CONTACT INFO</th>
+                                                            <th>RENT AMOUNT</th>
+                                                            <!-- <th>PROPERTY type</th> -->
+                                                            <th>ASSIGNED UNIT</th>
+                                                            <th>LEASE START DATE </th>
+                                                            <th>LEASE END DATE</th>
                                                             <!-- <th>Action</th> -->
                                                         </tr>
                                                     </thead>
@@ -2284,12 +2287,15 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                             } else if (tenant.propertyType === 'Multi-Commercial') {
                                 var colorClass = 'rounded-pill-Multi-Commercial';
                             }
-                            var propertyType = '<td class="propertyType"><a class="like" href="javascript:;">' +
-                                `<span class="badge btn-light ${colorClass} rounded-pill py-2 px-3">` +
-                                '<i class="fe fe-circle me-1"></i>' + tenant.propertyType + '</span>' +
-                                '</a></td>';
+                            // var propertyType = '<td class="propertyType"><a class="like" href="javascript:;">' +
+                            //     `<span class="badge btn-light ${colorClass} rounded-pill py-2 px-3">` +
+                            //     '<i class="fe fe-circle me-1"></i>' + tenant.propertyType + '</span>' +
+                            //     '</a></td>';
+                            
                             var assignUnit = '<td class="tenant-id " style="font-weight: 600;">' + tenant.unitNumber + '</td>';
-                            var propertyUnits = '<td class="tenant-id " style="font-weight: 600;">' + tenant.pUnits + '</td>';
+                            var Leasestartdate = '<td class="leasestartdate" style="font-weight: 600;">10/12/2020</td>';
+
+                            // var propertyUnits = '<td class="tenant-id " style="font-weight: 600;">' + tenant.pUnits + '</td>';
 
                             // Create a table row and append the generated columns
                             var currentDate = new Date();
@@ -2314,8 +2320,8 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
 
                             }
 
-                            var row = '<tr>' + tenantID + tenantName + contactInfo + rentAmount +
-                                propertyType + assignUnit + propertyUnits + leaseEndDate + '</tr>';
+                            var row = '<tr>' + tenantID + tenantName + contactInfo + rentAmount
+                             + assignUnit + Leasestartdate + leaseEndDate + '</tr>';
 
                             // Append the row to the table body
                             tableBody.append(row);

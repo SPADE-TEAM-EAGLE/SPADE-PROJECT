@@ -567,6 +567,13 @@
         .light-mode th {
             background: #ECF3F9 !important;
         }
+
+        .modal-content{
+            border-radius: 15px !important;
+        }
+        .card{
+            border-radius: 15px !important;
+        }
     </style>
 
 </head>
@@ -1105,12 +1112,12 @@
                             <strong class="color-primary">Success!&nbsp;</strong>
                             <i class="fi fi-rs-check-circle text-success"></i>
                         </h2>
-                        <a id="unit-link" class="btn btn-outline-default btn-pill ms-1 my-2" style='background-color:#1467B0;color: white;'> <i class="fi fi-rs-pencil"></i> EDIT PROPERTY UNITS</a>
-                        <a class="btn btn-outline-default btn-pill button" href="./add-tenant.html" id="add-tenant-link">
-                            <i class="fi fi-rs-plus-small" style="vertical-align: middle;"></i>Add Tenants
+                        <a id="unit-link" class="btn btn-outline-default btn-pill ms-1 my-2" style='background-color:#1467B0;color: white;'>Connect Bank Account</a>
+                        <a class="btn btn-outline-default btn-pill button" href="./add-tenant.html" id="add-tenant-link" style="border: 2px solid #1467B0;">
+                            <b><i class="fi fi-rs-plus" style="vertical-align: middle; font-size: 13px;"></i> Add Tenants</b>
                         </a>
-                        <p class="ms-2 mb-0 text-start">Your Property has been successfully added.</p>
-                        <p class="ms-2 text-start">Please add tenant to this property.</p>
+                        <p class="ms-2 mb-0 text-start fs-18">Your Property has been successfully added.</p>
+                        <p class="ms-2 text-start fs-18">Please add tenant to this property.</p>
                     </div>
 
                 </div>
@@ -1158,22 +1165,23 @@
                             </button>
                         </div>
                         <div class="card-body text-center">
-                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
+                            <!-- <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
                                     viewBox="0 0 24 24">
                                     <path fill="#f07f8f"
                                         d="M20.05713,22H3.94287A3.02288,3.02288,0,0,1,1.3252,17.46631L9.38232,3.51123a3.02272,3.02272,0,0,1,5.23536,0L22.6748,17.46631A3.02288,3.02288,0,0,1,20.05713,22Z" />
                                     <circle cx="12" cy="17" r="1" fill="#e62a45" />
                                     <path fill="#e62a45" d="M12,14a1,1,0,0,1-1-1V9a1,1,0,0,1,2,0v4A1,1,0,0,1,12,14Z" />
-                                </svg></span>
-                            <h4 class="h4 mb-0 mt-3 fw-bold fs-4">Delete this property?</h4>
-                            <p class="card-text">This is best if you no longer own or manage the property. <strong>It is not recommended</strong>. You may lose access to data associated with this property.</p>
+                                </svg></span> -->
+                                <i class="fi fi-rs-circle-xmark" style="font-size: 60px; color: #FB233B;"></i>
+                            <h3 class="h4 mb-0 fw-bold fs-4">Are you sure you want to <br> delete this Property?</h3>
+                            <!-- <p class="card-text">This is best if you no longer own or manage the property. <strong>It is not recommended</strong>. You may lose access to data associated with this property.</p> -->
 
                         </div>
-                        <div class="card-footer text-center border-0 pt-0">
+                        <div class="card-footer text-center border-0 pt-0 pb-5">
                             <div class="row">
                                 <div class="text-center">
-                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
-                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete <span id="counter_delete"> (5)</span></a>
+                                    <a href="javascript:void(0)" class="btn btn-primary" id="confirmDelete" style="border-radius: 50px; padding: 4px 30px 3px 30px;">Yes <span id="counter_delete"> (5)</span></a>
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close" style="border-radius: 50px; padding: 4px 30px 3px 30px;border: 1px solid #1467B0;">No</a>
                                 </div>
                             </div>
                         </div>
@@ -1727,12 +1735,23 @@
                                                         </div>
                                                     </li>
 
+                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">Date Modified</a>
+                                                        <div class="form-check m-0">
+                                                            <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="alphabets" value="option1">
+                                                        </div>
+                                                    </li>
+
                                                     <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">Ascending</a>
                                                         <div class="form-check m-0">
                                                             <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="ascending" value="option1">
                                                         </div>
                                                     </li>
                                                     <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">Descending</a>
+                                                        <div class="form-check m-0">
+                                                            <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="descending" value="option1">
+                                                        </div>
+                                                    </li>
+                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">Recently Added</a>
                                                         <div class="form-check m-0">
                                                             <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="descending" value="option1">
                                                         </div>
@@ -1767,28 +1786,33 @@
                                                     <li><a href="javascript:void(0)" class="text-dark"><strong>Coulmns to
                                                                 Show</strong></a>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">IMAGE</a>
+                                                    <!-- <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">IMAGE</a>
                                                         <div class="form-check m-0">
                                                             <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
-                                                    </li>
+                                                    </li> -->
                                     
-                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">PROPERTY NAME</a>
+                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">Name</a>
                                                         <div class="form-check m-0">
                                                             <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">PROPERTY TYPE</a>
+                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">Units</a>
                                                         <div class="form-check m-0">
                                                             <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">PROPERTY UNITS</a>
+                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">Address</a>
                                                         <div class="form-check m-0">
                                                             <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">PROPERTY ADDRESS</a>
+                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">Type</a>
+                                                        <div class="form-check m-0">
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
+                                                        </div>
+                                                    </li>
+                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">Sqft</a>
                                                         <div class="form-check m-0">
                                                             <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
@@ -1809,8 +1833,9 @@
                                                         <th>IMAGE</th>
                                                         <th class="d-none">PROPERTY ID</th>
                                                         <th>PROPERTY NAME</th>
+                                                        <th>TOTAL SQFT</th>
                                                         <th>PROPERTY Type</th>
-                                                        <th>PROPERTY UNITS</th>
+                                                        <th>UNITS</th>
                                                         <th>PROPERTY ADDRESS</th>
                                                         <th>ACTION</th>
                                                     </tr>
@@ -3436,10 +3461,17 @@ selectedFiles.forEach(function(file, index) {
                             var propertyId = '<td class="property-id d-none" style="font-weight: 600;">' + property
                                 .id + '</td>';
 
+                                
+
+                                // var UserId = '<td>' + US-272323 + '</td>' ;
+
                             var propertyName = '<td class="propertyName" style="font-weight: 600;">' +
                                 property
                                 .propertyName +
                                 '</td>';
+
+                                var totalsqft = '<td class="totalsqft" style="font-weight: 600;">220 Sqft</td>';
+
                             var colorClass = '';
                             var backgroundClass = '';
 
@@ -3478,12 +3510,12 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                             var dropdownMenu =
                                 '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
                                 '<ul class="dropdown-menu dropdown-menu-top">' +
-                                    `<li><a class="dropdown-item text-success" href="./view-property.html?property=${encodedPropertyId}">View</a></li>` +
-                                '<li><a class="edit-option dropdown-item text-primary" href="javascript:void(0)">Edit</a></li>' +
-                                '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>'
+                                    `<li><a class="dropdown-item text-dark" href="./view-property.html?property=${encodedPropertyId}" style="display: flex; align-items: center;"><i class="fi fi-rs-eye" style="display: flex; align-items: center;"></i> &nbsp;&nbsp;&nbsp; View</a></li>` +
+                                '<li><a class="edit-option dropdown-item text-dark" href="javascript:void(0)" style="display: flex; align-items: center;"><i class="fi fi-rs-edit" style="display: flex; align-items: center;"></i> &nbsp;&nbsp;&nbsp; Edit</a></li>' +
+                                '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)" style="display: flex; align-items: center;"><i class="fi fi-rs-cross-small fs-20" style="display: flex; align-items: center;"></i> &nbsp;&nbsp;Delete</a></li>'
                             '</ul></td>';
                             // Create a table row and append the generated columns
-                            var row = '<tr>' + serial + image + propertyId + propertyName +
+                            var row = '<tr>' + serial + image + propertyId + propertyName + totalsqft +
           propertyType + propertyUnits + propertyAddress + dropdownMenu + '</tr>';
 
 // Append the row to the table body

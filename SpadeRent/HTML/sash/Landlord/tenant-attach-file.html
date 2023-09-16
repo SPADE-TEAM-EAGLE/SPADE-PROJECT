@@ -18,7 +18,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="../assets/images/brand/favicon.ico" />
 
     <!-- TITLE -->
-    <title>Tenant File - SpadeRent</title>
+    <title>Tasks list - SpadeRent</title>
 
     <!-- BOOTSTRAP CSS -->
     <link id="style" href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -33,6 +33,11 @@
     <link href="../assets/css/icons.css" rel="stylesheet" />
     <!-- <link rel="stylesheet" href="fancy_fileupload.css"> -->
     <!-- COLOR SKIN CSS -->
+    <script>
+        if (localStorage.getItem("task") == "false") {
+            window.location = "./new-tasks.html"
+        }
+    </script>
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="../assets/colors/color1.css" />
     <script>
          if(!localStorage.getItem("authtoken")){
@@ -44,6 +49,28 @@
 
         .custom-file-input::-webkit-file-upload-button {
             visibility: hidden;
+        }
+
+        .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar {
+            width: 7px;
+            /* Width of the scrollbar */
+        }
+
+        .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb {
+            background-color: rgb(136, 136, 136, 0.2);
+            /* Color of the scrollbar thumb */
+            border-radius: 7px;
+            transition: all 1ms;
+            /* Rounded corners for the thumb */
+        }
+
+        .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb:hover {
+            background-color: rgb(136, 136, 136, 0.5);
+            /* Color of the scrollbar thumb on hover */
+        }
+
+        .iti {
+            margin-bottom: 0 !important;
         }
 
         .custom-file-input::before {
@@ -62,6 +89,21 @@
             background: #0069d9;
         }
 
+        /* .fi-rs-calendar {
+    position: absolute;
+    top: 78%;
+    right: 24px;
+    transform: translateY(-50%);
+    background-size: cover;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #1467B0;
+} */
+
+        .dark-mode .link-text {
+            color: #000;
+        }
+
         .custom-file-input:active::before {
             background: #0062cc;
         }
@@ -71,19 +113,36 @@
             background: #28a745;
         }
 
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            /* display: none; */
+            background-size: cover;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #1467B0;
+        }
+
+        .dark-mode .create-new-link {
+            background: transparent !important;
+            border: 3px solid #1467B0 !important;
+            color: white !important;
+            border-radius: 50px !important;
+        }
+
+        .create-new-link {
+            background: transparent !important;
+            border: 3px solid #1467B0 !important;
+            color: black;
+            border-radius: 50px !important;
+        }
+
         .selected-files {
             margin-top: 10px;
         }
 
-        .image-container {
-            /* Border width and color */
-            border-radius: 5px;
-            /* Border radius for rounded corners */
-            padding: 10px;
-            /* Spacing between the image and the border */
-            /* Shadow effect */
-            margin-bottom: 10px;
-            /* Margin between the image containers */
+        .del-btn {
+            position: absolute;
+            right: 10px;
+            top: 50%;
         }
 
         .selected-files span {
@@ -92,6 +151,15 @@
             padding: 4px 8px;
             background: #f8f9fa;
             color: #333;
+            border-radius: 4px;
+        }
+
+        .dark-mode .selected-files span {
+            display: inline-block;
+            margin-right: 0;
+            padding: 4px 8px;
+            background: transparent;
+            color: white;
             border-radius: 4px;
         }
 
@@ -106,7 +174,29 @@
             align-items: center;
             justify-content: center;
             padding: 6px 12px;
+            background-color: #fff;
+        }
+
+        .dark-mode .custom-file-label {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 12px;
             background-color: transparent;
+        }
+
+        .dark-mode .btn-close {
+            color: white;
+        }
+
+        .dark-mode .iti input[type=tel],
+        .dark-mode .iti input[type=text] {
+            border-color: rgba(255, 255, 255, 0.1);
+            background-color: transparent;
+            border-right-color: rgba(255, 255, 255, 0.1);
+            color: #dedefd;
         }
 
         .custom-file-label i {
@@ -137,11 +227,11 @@
             border: 1px solid #e9edf4;
         }
 
-        /* input:focus {
+        /* /* input:focus {
             border: 3px solid #555 !important;
         } */
 
-        .panel-body {
+        */ .panel-body {
             padding: 0px;
         }
 
@@ -218,11 +308,16 @@
             font-family: 'Figtree';
             font-style: normal;
             font-weight: 600;
-            font-size: 0.938rem;
             line-height: 1.875rem;
+            font-size: 0.77rem;
             box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
             /* identical to box height, or 120% */
             letter-spacing: 0.0145455em;
+            /* font-size: 0.938rem; */
+        }
+
+        .modal-footer .button {
+            font-size: 0.938rem;
         }
 
         .accordion-button::after {
@@ -277,6 +372,15 @@
             font-weight: bold;
         }
 
+        .succes-modal-dialog {
+            max-width: 544px;
+            margin: 1.75rem auto;
+        }
+
+        .succes-modal-dialog .shadow-lg {
+            background-color: white;
+        }
+
         .rounded-pill-Multi-Commercial {
             background: #FFF9E5 !important;
             color: #F5CA38 !important;
@@ -299,16 +403,15 @@
             padding: 10px;
         }
 
+        /* 
         .delete-file {
-            .delete-file {
-                position: absolute;
-                top: -9px;
-                right: -4px;
-                cursor: pointer;
-                font-size: 13px;
-                color: #000;
-            }
-        }
+            position: absolute;
+            top: -1px;
+            right: 4px;
+            cursor: pointer;
+            font-size: 11px;
+            color: #000;
+        } */
 
         .btn-group>.btn-group:not(:last-child)>.btn,
         .btn-group>.btn:not(:last-child):not(.dropdown-toggle) {
@@ -339,24 +442,27 @@
         }
 
         /* .delete-file {
-            position: absolute;
-            top: 0px;
-            right: 5px;
-            cursor: pointer;
-            font-size: 13px;
-            color: #000;
-        }
-         */
+        position: absolute;
+        top: 0px;
+        right: 5px;
+        cursor: pointer;
+        font-size: 13px;
+        color: #000;
+    } */
 
         button.btn-close {
-            right: -7px;
+            right: 6px;
         }
 
         .btn-close {
-            width: 2.5rem !important;
+            width: 1.8rem;
             opacity: 1;
             position: absolute;
             top: 6px;
+        }
+
+        .del {
+            width: 2rem !important;
         }
 
         .btn-close:hover,
@@ -379,130 +485,181 @@
                 letter-spacing: 0.0145455em;
             }
 
-            #top_main_image {
-                display: none;
+            .btn-close {
+                width: 2.5rem;
+                opacity: 1;
+                position: absolute;
+                top: 6px;
             }
 
-            /* #top_main_card {
-                height: 220px;
-            } */
-            #nav_links {
-                top: 153px;
-            }
-        }
-
-        @media (max-width:425px) {
-            .modal-footer {
-                flex-direction: column !important;
-                justify-content: flex-center !important;
+            .del {
+                width: 2rem !important;
             }
 
-            .modal-footer .button-left {
-                margin: auto;
+            .btn-close:hover,
+            .btn-close:focus {
+                color: #000;
+                text-decoration: none;
+                opacity: 1;
             }
 
-            /* .modal-footer button {
-                width: 231px;
-            } */
-            .border-model-line h2 {
-                font-size: 1.6rem;
+            @media (max-width:992px) {
+                .modal-footer button {
+                    border-radius: 2.75rem;
+                    padding: 4px 30px;
+                    font-family: 'Figtree';
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 0.8rem;
+                    line-height: 1.875rem;
+                    /* identical to box height, or 120% */
+                    letter-spacing: 0.0145455em;
+                }
+
+                #top_main_image {
+                    display: none;
+                }
+
+                #top_main_card {
+                    height: 220px;
+                }
+
+                #nav_links {
+                    top: 153px;
+                }
             }
 
-            .accordion-button h3 {
-                font-size: 15px;
+            @media (max-width:575px) {
+                .modal-footer {
+                    flex-direction: column !important;
+                    justify-content: flex-center !important;
+                }
+
+                .modal-footer .button-left {
+                    margin: auto;
+                }
+
+                /* .modal-footer button {
+                    width: 231px;
+                } */
+                .border-model-line h2 {
+                    font-size: 1.6rem;
+                }
+
+                .accordion-button h3 {
+                    font-size: 15px;
+                }
+
+                #filter_btn {
+                    font-size: 12px;
+                    margin: 0 !important;
+                }
+
+                /* #customize_btn {
+                    display: none;
+                } */
+                #info-head {
+                    display: none;
+                }
+
+                #add_property_btn {
+                    font-size: 12px;
+                    margin: 0 !important;
+                    display: none;
+                }
+
+                /* #typehead {
+                    display: none;
+                } */
+                #email_verification {
+                    font-size: 12px;
+                }
+
+                #top_main_image {
+                    display: none;
+                }
+
+                #top_main_card {
+                    height: 220px;
+                }
+
+                #nav_links {
+                    top: 153px;
+                }
             }
 
-            #filter_btn {
-                font-size: 12px;
-                margin: 0 !important;
+            @media (max-width:375px) {
+                .border-model-line h2 {
+                    font-size: 1.4rem;
+                }
             }
 
-            #customize_btn {
-                display: none;
+            @media (max-width:320px) {
+                /* .modal-footer button {
+                    width: 231px;
+                } */
             }
 
-            #add_property_btn {
-                font-size: 12px;
-                margin: 0 !important;
+            @media (max-width: 767px) {
+                .file-select-area {
+                    display: block;
+                    text-align: center;
+                }
+
+                .selected-files {
+                    margin-top: 10px;
+                    text-align: center;
+                }
+
+                .file-details {
+                    padding: 5px;
+                }
             }
 
-            #typehead {
-                display: none;
+            th,
+            td {
+                border-left-color: transparent !important;
+                border-right-color: transparent !important;
             }
 
-            #email_verification {
-                font-size: 12px;
+            .dark-mode th {
+                background: #212121 !important;
+                font-weight: bold !important;
             }
 
-            #top_main_image {
-                display: none;
+            .light-mode th {
+                background: #ECF3F9 !important;
+                font-weight: bold !important;
             }
-
-            /* #top_main_card {
-                height: 220px;
-            } */
-            #nav_links {
-                top: 153px;
-            }
-        }
-
-        @media (max-width:375px) {
-            .border-model-line h2 {
-                font-size: 1.4rem;
-            }
-        }
-
-        @media (max-width:320px) {
-            /* .modal-footer button {
-                width: 231px;
-            } */
-        }
-
-        @media (max-width: 767px) {
-            .file-select-area {
-                display: block;
-                text-align: center;
-            }
-
-            .selected-files {
-                margin-top: 10px;
-                text-align: center;
-            }
-
-            .file-details {
-                padding: 5px;
-            }
-        }
-
-        th,
-        td {
-            border-left-color: transparent !important;
-            border-right-color: transparent !important;
-        }
-
-        .dark-mode th {
-            background: #212121 !important;
-            font-weight: bold !important;
-        }
-
-        .light-mode th {
-            background: #ECF3F9 !important;
-            font-weight: bold !important;
         }
     </style>
 
 </head>
 
 <body class="app sidebar-mini ltr light-mode">
-
-    <!-- GLOBAL-LOADER -->
-    <div id="preloader" class="tlp-preloader">
-        <div class="animation-preloader">
-            <div class="tlp-spinner"></div>
-            <img src="../assets/images/logo-preloader.png" alt="Preloader" style="width: 65px;">
+    <div class="modal fade" id="myModal_warning_connection" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
+                        <div class="card-body text-center">
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
+                                    viewBox="0 0 24 24">
+                                    <path fill="#fad383"
+                                        d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z" />
+                                    <circle cx="12" cy="16" r="1" fill="#f7b731" />
+                                    <path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z" />
+                                </svg></span>
+                            <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
+                            <p class="card-text text-dark m-0">Sorry! Something went wrong.</p>
+                            <p class="card-text text-dark m-0">Kindly check your internet connection or please try again
+                                later.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <!-- /GLOBAL-LOADER -->
     <div class="modal fade effect-scale" id="modaldemo8" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered modal-l" role="document">
             <div class="modal-content">
@@ -561,11 +718,8 @@
                         <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
                         <h6 class="text-default mb-3">Get started with Spade Rent! You have<span id="days-left"></span>
                             left</h6>
-                        <input type="email" class="form-control form mb-2" style="width: 100%;"
-                            data-bs-placement="top" data-bs-toggle="tooltip" title=""
-                            data-bs-original-title="Enter the name of the property." readonly id="user-email"><span class="text-danger d-none" id="verify-email-span">* Email already exist</span>
-                        <a class="text-primary mb-4" href="javascript:void(0)" id="change-email">Change Email</a>
-                        <a class="text-primary mb-4 d-none" href="javascript:void(0)" id="save-email">Save Email</a>
+                            <input type="email" class="form-control form mb-2" style="width: 100%;" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the name of the property." readonly="" id="user-email" aria-describedby="tooltip281258">
+                        <a class="text-primary mb-4" href="javascript:void(0)">Change Email</a>
                         <div class="">
                             <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2"
                                 id="remind-later">Remind me Later</a>
@@ -580,22 +734,179 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="myModal_warning_connection" tabindex="-1" role="dialog">
+    <div class="modal fade" id="successfully_changed" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
+                        <!-- <div class="card-header border-0 pt-3">
+                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                            </button>
+                        </div> -->
+                        <div class="card-body text-center">
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
+                                    viewBox="0 0 24 24">
+                                    <path fill="#13bfa6"
+                                        d="M10.3125,16.09375a.99676.99676,0,0,1-.707-.293L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328l-6.1875,6.1875A.99676.99676,0,0,1,10.3125,16.09375Z"
+                                        opacity=".99" />
+                                    <path fill="#71d8c9"
+                                        d="M12,2A10,10,0,1,0,22,12,10.01146,10.01146,0,0,0,12,2Zm5.207,7.61328-6.1875,6.1875a.99963.99963,0,0,1-1.41406,0L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328Z" />
+                                </svg></span>
+                            <!-- <h4 class="h4 mb-0 mt-3 fw-bold">Success</h4> -->
+                            <p class="card-text text-dark" id="successfully_changed_text"></p>
+                        </div>
+                        <!-- <div class="card-footer text-center border-0 pt-0">
+                            <div class="row">
+                                <div class="text-center">
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal_warning" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered text-center" role="document">
             <div class="modal-content modal-content-demo">
                 <div class="modal-body p-0">
                     <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
                         <div class="card-body text-center">
-                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24"><path fill="#fad383" d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z"/><circle cx="12" cy="16" r="1" fill="#f7b731"/><path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"/></svg></span>
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
+                                    viewBox="0 0 24 24">
+                                    <path fill="#fad383"
+                                        d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z" />
+                                    <circle cx="12" cy="16" r="1" fill="#f7b731" />
+                                    <path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z" />
+                                </svg></span>
                             <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
-                            <p class="card-text text-dark m-0">Sorry! Something went wrong.</p>
-                            <p class="card-text text-dark m-0">Kindly check your internet connection or please try again later.</p>
+                            <p class="card-text text-dark">Session expeired!, Login again</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <!-- View Modal Start  -->
+    <div class="modal fade" id="viewModal-tasks" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="text-justify ps-2 border-model-line">
+                        <h2 class="modal-title mb-0">View <strong class="color-primary">Tasks</strong></h2>
+                        <!-- <button type="button" class="btn btn-primary">#Invoice Number: INV-89900A</button> -->
+                    </div>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="viewModal-tasks">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark text-dark"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <label><b>Task Name</b></label>
+                            <p class="text-primary"><b id="taskName_view"></b></p>
+                        </div>
+                        <div class="col-lg-3">
+                            <label><b>Due Date</b></label>
+                            <p class="text-primary"><b id="dueDate_view">June-06-2023</b></p>
+                        </div>
+                        <div class="col-lg-3">
+                            <label><b>Priority</b></label>
+                            <p class="text-primary"><b id="priority_view">High Priority</b></p>
+                        </div>
+                        <div class="col-lg-3">
+                            <label><b>Status</b></label>
+                            <p class="text-danger"><b id="status_view"><i class="fi fi-rs-clock-three"
+                                        style="color: #FB233B;"></i>
+                                    Unpaid</b></p>
+                        </div>
+                        <div class="col-lg-12 mt-5">
+                            <label><b>Notes</b></label>
+                            <p class="text-primary"><b id="notes_view">Lorem, ipsum dolor sit amet consectetur
+                                    adipisicing elit.</b></p>
+                        </div>
+                        <div class="col-lg-12 mt-5">
+                            <div style="display: flex;">
+                                <p class="text-primary"><b>Line Items</b></p>
+                                <hr
+                                    style="height: 2px; background: black; width: 88%; margin-left: 83px; position: absolute; margin-top: 10px;">
+                            </div>
+                        </div>
+                        <!-- <div class="col-lg-10 mt-5">
+                                
+                            </div> -->
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-12 mb-5">
+                            <div class="table-responsive">
+                                <table class="table text-nowrap table-borderless text-md-nowrap mg-b-0 mb-0"
+                                    id="lineItemsTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Vendor</th>
+                                            <th>Property</th>
+                                            <th>Tenant</th>
+                                            <!-- <th>Amount</th> -->
+
+                                        </tr>
+                                    </thead>
+                                    <tbody id="view-task-line-item">
+                                        <tr class="tr">
+                                            <td>
+                                                <p class="text-primary"><b> / 0321-2045564</b></p>
+                                            </td>
+                                            <td>
+                                                <p class="text-primary"><b>Test / 200</b></p>
+                                            </td>
+                                            <td>
+                                                <p class="text-primary"><b>John Smith / 0321-2045564</b></p>
+                                            </td>
+                                            <!-- <td>
+                                                    <p class="text-primary"><b>$200.00</b></p>
+                                                </td> -->
+                                            <!-- <td><button type="button" class="btn" id="del-btn1">
+                                                        <i class="fi fi-rs-trash text-danger fs-5"></i>
+                                                    </button></td> -->
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- <div class="col-md-12 col-lg-8 mt-5">
+                                <label><b>Additional Information</b></label>
+                                <p class="text-primary"><b id="notes"></b></p>
+                            </div>
+                            <div class="col-md-12 col-lg-4 mt-5">
+                                <span class="float-end">
+                                    <label class="form-label fw-bold m-0">Balance Due</label>
+                                    <h1 class="text-primary fw-bold m-0" id="totalAmount">$200.00</h1>
+                                </span>
+                            </div> -->
+                        <div class="col-lg-12 mt-5 mb-5" id="view-task-images">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- View Modal End  -->
+
+    <!-- GLOBAL-LOADER -->
+    <!-- <div id="global-loader">
+        <img src="../assets/images/loader.svg" class="loader-img" alt="Loader">
+    </div> -->
+    <div id="preloader" class="tlp-preloader">
+        <div class="animation-preloader">
+            <div class="tlp-spinner"></div>
+            <img src="../assets/images/logo-preloader.png" alt="Preloader" style="width: 65px;">
+        </div>
+    </div>
+    <!-- /GLOBAL-LOADER -->
     <!-- Default Offcanvas-->
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
         <div class="offcanvas-header pt-5">
@@ -752,218 +1063,459 @@
         </div>
     </div>
     <!--/Default Offcanvas-->
-    <!-- Modal -->
-    <div class="modal fade" id="contactInfoModal" tabindex="-1" role="dialog">
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="text-justify ps-2 border-model-line">
-                        <h2 class="modal-title">Personal <strong class="color-primary">Information</strong></h2>
-                        <span class="">These details are required for rent reminders, tenants commutations
-                            and portal access. </span>
+                        <h2 class="modal-title">Create <strong class="color-primary">New Task</strong></h2>
+                        <span class="">The real power of tasks is keeping track of deadlines and having a
+                            log of all work and communication related to the tasks for later reference.</span>
                     </div>
-                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="top-close">
                         <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="accordion-item mb-4" id="accordion-item1">
-                        <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button text-white" type="button" id="accordion-button1"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                                aria-expanded="true" aria-controls="collapseOne">
-                                <span class="m-0 me-4 fs-1" style="font-weight: bold;">01</span>
-                                <h3 class="m-0"><strong>Personal Info</strong> <i class="fi fi-rs-pencil"></i><i
-                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
-                                </h3>
-                            </button>
-                        </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                            data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <form class="row g-3" enctype="multipart/form-data">
-                                    <div class="col-md-12">
-                                        <label class="form-label fw-bold">Property Photo</label>
-                                        <div class="custom-file" style="border: 1px dashed #00000087;">
-                                            <input type="file" name="image" class="custom-file-input form"
-                                                accept=".jpg, .png, image/jpeg, image/png" aria-label="hello" multiple>
-                                            <span className="d-none"></span>
-                                            <label class="custom-file-label" for="fileInput">
-                                                <i class="fi fi-rs-cloud-upload"></i>
-                                                <div class="custom-file-text">
-                                                    <span>Upload Photo here</span>
-                                                    <span>JPEG and PNG, file size no more than 10MB</span>
-                                                </div>
-                                            </label>
-                                        </div>
-                                        <div class="selected-files">
-                                            <div class="file-grid"></div>
-                                        </div>
-                                        <span class="text-danger d-none">Photos are required!</span>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="inputEmail4" class="form-label fw-bold">First Name<spnan
-                                                class="text-danger"> *</span></label>
-                                        <input type="text" class="form-control form" placeholder="Enter First Name"
-                                            id="firstName" required>
-                                        <span class="text-danger d-none">First name is required!</span>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="inputPassword4" class="form-label fw-bold">Last Name<spnan
-                                                class="text-danger"> *</span></label>
-                                        <input type="text" class="form-control form" placeholder="Enter Last Name"
-                                            id="lastName" required>
-                                        <span class="text-danger d-none">Last name required!</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputAddress" class="form-label fw-bold">Company Name <span
-                                                class="fw-light">(Optional)</span>
-                                        </label>
-                                        <input type="text" class="form-control form" id="company"
-                                            placeholder="Enter Company Name">
-                                        <!-- <span class="text-danger d-none">Company name is required!</span> -->
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputCity" class="form-label fw-bold">Email<spnan
-                                                class="text-danger"> *</span></label>
-                                        <input type="text" class="form-control form" placeholder="Enter Email"
-                                            id="email" required>
-                                        <span class="text-danger d-none">Email is required!</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputState" class="form-label fw-bold">Phone Number <span
-                                                class="fw-light">(Optional)</span></label>
-                                        <input id="phone" name="phone" type="tel" autocomplete="off">
-                                        <span id="valid-msg" class="d-none text-success">✓ Valid</span>
-                                        <span id="error-msg" class="hide text-danger"></span>
-                                        </select>
-                                        <!-- <span class="text-danger d-none">State is required!</span> -->
-                                    </div>
-                                    <div class="col-12">
-                                        <label for="inputAddress2" class="form-label fw-bold">Address <span
-                                                class="fw-light">(Optional)</span></label>
-                                        <input type="text" class="form-control" id="address"
-                                            placeholder="Enter Address">
-                                        <!-- <span class="text-danger d-none">Address is required!</span> -->
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputState" class="form-label fw-bold">State<spnan
-                                                class="text-danger">*</span></label>
-                                        <select id="state" class="form-select form" required>
-                                            <option selected>Choose...</option>
-                                        </select>
-                                        <span class="text-danger d-none">State is required!</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputState" class="form-label fw-bold">City <spnan
-                                                class="text-danger">*</span></label>
-                                        <select id="city" class="form-select form" required>
-                                            <option selected>Choose...</option>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                        data-bs-parent="#accordionExample">
+                        <form class="row g-3" enctype="multipart/form-data">
+                            <div class="col-md-4">
+                                <label for="inputEmail4" class="form-label fw-bold">Task Name</label>
+                                <input id="task" required class="form-control" placeholder="Sink in Leaked" type="text"
+                                    placeholder="Enter Task Name">
+                                <span class="text-danger d-none">Task name is required!</span>
+                            </div>
+                            <div class="col-md-4">
 
-                                        </select>
-                                        <span class="text-danger d-none">City is required!</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputPassword4" class="form-label fw-bold">Zip Code <spnan
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="zip" pattern="[0-9]{5}"
-                                            placeholder="A valid 5-digit zip code" maxlength="5"
-                                            oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
-                                        <span class="text-danger d-none">Zip code is required!</span>
-                                    </div>
-                                </form>
+                                <label class="form-label fw-bold">Assign To</label>
+                                <select id="assignee" class="form-control select2" data-placeholder="Choose Browser"
+                                    multiple placeholder="Enter Assign To">
+
+                                </select>
+                                <span class="text-danger d-none" id="vendor-span">Add vendors first!!</span>
+                                <!-- <span class="text-danger d-none">Property name required!</span> -->
                             </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item" id="accordion-item3">
-                        <h2 class="accordion-header" id="headingThree">
-                            <button class="accordion-button collapsed text-white" id="accordion-button3" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false"
-                                aria-controls="collapseThree">
-                                <span class="m-0 me-4 fs-1" style="font-weight: bold;">03</span>
-                                <h3 class="m-0"><strong>Contact Info</strong> <i class="fi fi-rs-pencil"></i><i
-                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
-                                </h3>
-                            </button>
-                        </h2>
-                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-                            data-bs-parent="#accordionExampe">
-                            <div class="accordion-body p-0">
-                                <div class="card-body mb-2" style="background-color: #F4FAFF !important;">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <label class="form-label"><strong>Phone</strong></label>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <select class="form-control form-select select2"
-                                                            data-bs-placeholder="Select">
-                                                            <option label="Select">Country</option>
-                                                            <option value="1">Germany</option>
-                                                            <option value="2">Canada</option>
-                                                            <option value="3">Usa</option>
-                                                            <option value="4">Aus</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <input type="tel" class="form-control"
-                                                            placeholder="Phone Number">
-                                                    </div>
-                                                    <div class="col-12 mt-2">
-                                                        <a href="javascript:;" class="mt-1" id="add-item">+Add Line
-                                                            Item</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body" style="background-color: #F4FAFF !important;">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <label class="form-label"><strong>Email</strong></label>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <select class="form-control form-select select2"
-                                                            data-bs-placeholder="Select">
-                                                            <option label="Select">Country</option>
-                                                            <option value="1">Germany</option>
-                                                            <option value="2">Canada</option>
-                                                            <option value="3">Usa</option>
-                                                            <option value="4">Aus</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <input type="email" class="form-control" placeholder="Email">
-                                                    </div>
-                                                    <div class="col-12 mt-2">
-                                                        <a href="javascript:;" class="mt-1" id="add-item">+Add Line
-                                                            Item</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="col-md-4">
+                                <label for="inputState" class="form-label fw-bold">Related To</label>
+                                <select required id="property" class="form-select form" placeholder="Enter Related To">
+                                    <option selected>Choose...</option>
+                                </select>
+                                <span class="text-danger d-none">This field is required!</span>
                             </div>
-                        </div>
+                            <div class="col-md-4">
+                                <label for="inputEmail4" class="form-label fw-bold">Due Date</label>
+                                <input id="dueDate" class="form-control" placeholder="MM/DD/YYYY" type="date"
+                                    placeholder="Enter Due Date">
+                                <span class="text-danger d-none">Due Date is required!</span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputState" class="form-label fw-bold">Status</label>
+                                <select id="status" required class="form-select form" placeholder="Select Status">
+                                    <option selected>Choose...</option>
+                                    <option value="not started">Not Started</option>
+                                    <option value="in progress">In progress</option>
+                                    <option value="completed">Completed</option>
+
+                                </select>
+                                <span class="text-danger d-none">Status is required!</span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputState" class="form-label fw-bold">Priority</label>
+                                <select id="priority" required class="form-select form" placeholder="Select Priority">
+                                    <option selected>Choose...</option>
+                                    <option name="high">High</option>
+                                    <option name="moderate">Moderate</option>
+                                    <option name="low">Low</option>
+                                </select>
+                                <span class="text-danger d-none">Priority is required!</span>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label fw-bold">Notes</label>
+                                <textarea id="notes" class="form-control mb-4"
+                                    placeholder="Sorry about that We will look into it." rows="4"></textarea>
+                                <!-- <span class="text-danger d-none">Photos are required!</span> -->
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label fw-bold">Media/ Files (Optional)</label>
+                                <div class="custom-file" style="border: 1px dashed #00000087;">
+                                    <input id="fileInput" type="file" name="media" class="custom-file-input form"
+                                        accept=".jpg, .jpeg, .png, .pdf, image/jpeg, image/png, application/pdf"
+                                        aria-label="hello" multiple>
+                                    <span className="d-none"></span>
+                                    <label class="custom-file-label" for="fileInput">
+                                        <i class="fi fi-rs-cloud-upload"></i>
+                                        <div class="custom-file-text">
+                                            <span>Upload Photo here</span>
+                                            <span>JPEG, PNG & PDF file size no more than 10MB</span>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="selected-files">
+                                    <div class="file-grid"></div>
+                                </div>
+                                <span class="text-danger d-none">Photos are required!</span>
+                            </div>
+                        </form>
                     </div>
+
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer d-flex justify-content-between">
                     <!-- <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
                         Draft</button> -->
-                    <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal"
-                        id='close'>Close</button>
-                    <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
-                    <button class="btn text-light button" style='background-color:#1467B0;' id='next'
-                        disabled>Next</button>
+                    <div class="d-flex">
+
+                        <label class="custom-control custom-checkbox me-2">
+                            <input type="checkbox" class="custom-control-input" name="example-checkbox1" value=""
+                                checked="">
+                            <span class="custom-control-label">Notify Tenant</span>
+                        </label>
+                        <label class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" name="example-checkbox1" value=""
+                                checked="">
+                            <span class="custom-control-label">Notify Assignee(s)</span>
+                        </label>
+                    </div>
+                    <div class=""><button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal"
+                            id='close'>Close</button>
+                        <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
+                        <a href="javascript:void(0)" class="btn text-light btn-pill button disabled"
+                            style='background-color:#1467B0;' id='next'>Next</a>
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
-    <!-- MODAL EFFECTS -->
+    <div class="modal fade" id="infoModal_verify" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
+                        <!-- <div class="card-header border-0 pt-3">
+                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                            </button>
+                        </div> -->
+                        <div class="card-body text-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24">
+                                <path fill="#fad383"
+                                    d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z">
+                                </path>
+                                <circle cx="12" cy="16" r="1" fill="#f7b731"></circle>
+                                <path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"></path>
+                            </svg>
+                            <h4 class="h4 mb-0 mt-3 fw-bold">Info</h4>
+                            <p class="card-text text-dark">Token code or Password not matched</p>
+                        </div>
+                        <!-- <div class="card-footer text-center border-0 pt-0">
+                            <div class="row">
+                                <div class="text-center">
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="succesModal_verify" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
+                        <!-- <div class="card-header border-0 pt-3">
+                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                            </button>
+                        </div> -->
+                        <div class="card-body text-center">
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
+                                    viewBox="0 0 24 24">
+                                    <path fill="#13bfa6"
+                                        d="M10.3125,16.09375a.99676.99676,0,0,1-.707-.293L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328l-6.1875,6.1875A.99676.99676,0,0,1,10.3125,16.09375Z"
+                                        opacity=".99" />
+                                    <path fill="#71d8c9"
+                                        d="M12,2A10,10,0,1,0,22,12,10.01146,10.01146,0,0,0,12,2Zm5.207,7.61328-6.1875,6.1875a.99963.99963,0,0,1-1.41406,0L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328Z" />
+                                </svg></span>
+                            <h4 class="h4 mb-0 mt-3 fw-bold">Success</h4>
+                            <p class="card-text text-dark">Your Email has been verified</p>
+                        </div>
+                        <!-- <div class="card-footer text-center border-0 pt-0">
+                            <div class="row">
+                                <div class="text-center">
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="modal fade" id="succesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
 
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body succes-modal">
+                    <div class="text-justify ps-2 border-model-line">
+                        <h2 class="modal-title d-flex align-items-center ps-1">
+                            <strong class="color-primary">Success!&nbsp;</strong>
+                            <i class="fi fi-rs-check-circle text-success"></i>
+                        </h2>
+                        <a href="javascript:void(0)" class="btn btn-outline-default btn-pill ms-1 my-2" style='background-color:#1467B0;color: white;'> <i class="fi fi-rs-pencil"></i> EDIT PROPERTY UNITS</a>
+                        <a class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal">
+                            <i class="fi fi-rs-plus-small" style="vertical-align: middle;"></i>Add Tenants
+                        </a>
+                        <p class="ms-2 mb-0 text-start">Your Property has been successfully added.</p>
+                        <p class="ms-2 text-start">Please add tenant to this property.</p>
+                    </div>
+
+                </div>
+                <div class="modal-footer" style="border-top: 0">
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <div class="modal fade" id="myModal_edit" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="text-justify ps-2 border-model-line">
+                        <h2 class="modal-title">Post an <strong class="color-primary">Update</strong></h2>
+                        <span class="">The real power of tasks is keeping track of deadlines and having a
+                            log of all work and communication related to the tasks for later reference.</span>
+                    </div>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="top-close">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="collapseOne_update" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                        data-bs-parent="#accordionExample">
+                        <form class="row g-3" enctype="multipart/form-data">
+                            <div class="col-md-12">
+                                <label class="form-label fw-bold">Message</label>
+
+                                <textarea class="form-control mb-4" placeholder="Sorry about that We will look into it."
+                                    rows="4" placeholder="Enter Message" id="message"></textarea>
+                                <span class="text-danger d-none">Message are required!</span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputEmail4" class="form-label fw-bold">Task Name</label>
+                                <input class="form-control" placeholder="Task name" type="text"
+                                    placeholder="Enter Task Name" required id="taskName_update">
+                                <span class="text-danger d-none">Task name is required!</span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputState" class="form-label fw-bold">Related To</label>
+                                <select required id="property_update" required class="form-select form"
+                                    placeholder="Enter Related To">
+                                    <option selected>Choose...</option>
+                                </select>
+                                <span class="text-danger d-none">Property name required!</span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputEmail4" class="form-label fw-bold">Due Date</label>
+                                <input class="form-control" required placeholder="MM/DD/YYYY" type="date"
+                                    placeholder="Enter Due Date" id="dueDate_update">
+                                <span class="text-danger d-none">Due date is required!</span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputState" class="form-label fw-bold">Priority</label>
+                                <select class="form-select form" required placeholder="Select Priority"
+                                    id="priority_update">
+                                    <option selected>Choose...</option>
+                                    <option name="high">High</option>
+                                    <option name="moderate">Moderate</option>
+                                    <option name="low">Low</option>
+
+
+                                </select>
+                                <span class="text-danger d-none">Priority name required!</span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputState" class="form-label fw-bold">Status</label>
+                                <select class="form-select form" required="top" placeholder="Select Status"
+                                    id="status_update">
+                                    <option selected>Choose...</option>
+                                    <option value="not started">Not Started</option>
+                                    <option value="in progress">In progress</option>
+                                    <option value="completed">Completed</option>
+
+                                </select>
+                                <span class="text-danger d-none">Status is required!</span>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="form-label fw-bold">Assignee(s)</label>
+                                    <select class="form-control select2" required data-placeholder="Choose Assignee"
+                                        multiple placeholder="Select Assignee(s)" id="assignee_update">
+
+                                    </select>
+                                </div>
+                                <span class="text-danger d-none">Assignee is required!</span>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label fw-bold">Media/ Files (Optional)</label>
+                                <div class="custom-file" style="border: 1px dashed #00000087;">
+                                    <input id="fileInput_update" type="file" name="media" class="custom-file-input form"
+                                        accept=".jpg, .jpeg, .png, .pdf, image/jpeg, image/png, application/pdf"
+                                        aria-label="hello" multiple>
+                                    <span className="d-none"></span>
+                                    <label class="custom-file-label" for="fileInput_update">
+                                        <i class="fi fi-rs-cloud-upload"></i>
+                                        <div class="custom-file-text">
+                                            <span>Upload Photo here</span>
+                                            <span>JPEG, PNG & PDF file size no more than 10MB</span>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="selected-files">
+                                    <div class="file-grid"></div>
+                                </div>
+                                <span class="text-danger d-none">Photos are required!</span>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+                <div class="modal-footer d-flex justify-content-between">
+                    <!-- <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
+                        Draft</button> -->
+                    <div class="d-flex">
+
+                        <label class="custom-control custom-checkbox me-2">
+                            <input type="checkbox" class="custom-control-input" name="example-checkbox1_update"
+                                value="option1" checked="">
+                            <span class="custom-control-label">Notify Tenant</span>
+                        </label>
+                        <label class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" name="example-checkbox1_update"
+                                value="option1" checked="">
+                            <span class="custom-control-label">Notify Assignee(s)</span>
+                        </label>
+                    </div>
+                    <div class=""><button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal"
+                            id='close'>Close</button>
+                        <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
+                        <a href="javascript:void(0)" class="btn text-light btn-pill button"
+                            style='background-color:#1467B0;' id='save'>Save</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="infoModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
+                        <!-- <div class="card-header border-0 pt-3">
+                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                            </button>
+                        </div> -->
+                        <div class="card-body text-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24">
+                                <path fill="#fad383"
+                                    d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z">
+                                </path>
+                                <circle cx="12" cy="16" r="1" fill="#f7b731"></circle>
+                                <path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"></path>
+                            </svg>
+                            <h4 class="h4 mb-0 mt-3 fw-bold">Info</h4>
+                            <p class="card-text text-dark">Task Already Exist</p>
+                        </div>
+                        <!-- <div class="card-footer text-center border-0 pt-0">
+                            <div class="row">
+                                <div class="text-center">
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="succesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content success-modal-content">
+                <div class="modal-header">
+
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="succes-close">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body succes-modal" style="padding-top: 70px;padding-bottom: 70px;">
+                    <div class="text-justify ps-2 border-model-line">
+                        <h2 class="modal-title d-flex align-items-center ps-1">
+                            <strong class="color-primary">Success!&nbsp;</strong>
+                            <i class="fi fi-rs-check-circle text-success"></i>
+                        </h2>
+                        <p class="ms-2 mb-0 text-start">Your task has been successfully added.</p>
+                        <!-- <p class="ms-2 text-start">Please add tenant to this property.</p> -->
+                        <a data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal"
+                            class="btn btn-outline-default btn-pill ms-1 my-2"
+                            style='background-color:#1467B0;color: white;'> <i class="fi fi-rs-pencil"></i> ADD NEW
+                            TASK</a>
+                        <a class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal">
+                            Close
+                        </a>
+                    </div>
+                </div>
+                <div class="modal-footer" style="border-top: 0">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal_delete">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
+                        <div class="card-header border-0 pt-3">
+                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                            </button>
+                        </div>
+                        <div class="card-body text-center">
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
+                                    viewBox="0 0 24 24">
+                                    <path fill="#f07f8f"
+                                        d="M20.05713,22H3.94287A3.02288,3.02288,0,0,1,1.3252,17.46631L9.38232,3.51123a3.02272,3.02272,0,0,1,5.23536,0L22.6748,17.46631A3.02288,3.02288,0,0,1,20.05713,22Z" />
+                                    <circle cx="12" cy="17" r="1" fill="#e62a45" />
+                                    <path fill="#e62a45" d="M12,14a1,1,0,0,1-1-1V9a1,1,0,0,1,2,0v4A1,1,0,0,1,12,14Z" />
+                                </svg></span>
+                            <h4 class="h4 mb-0 mt-3 fw-bold fs-4">Warning</h4>
+                            <p class="card-text">This will delete your task. Are you sure?</p>
+
+                        </div>
+                        <div class="card-footer text-center border-0 pt-0">
+                            <div class="row">
+                                <div class="text-center">
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal"
+                                        aria-label="Close">Cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- PAGE -->
     <div class="page">
         <div class="page-main">
@@ -1020,8 +1572,8 @@
                                         </div>
                                         <div class="d-flex country mt-2">
                                             <a class="nav-link icon text-dark customIntercomButton">
-                                        <i class="fi fi-rs-interrogation"></i>
-                                       
+                                                <i class="fi fi-rs-interrogation"></i>
+
                                             </a>
                                         </div>
 
@@ -1033,8 +1585,8 @@
 
 
                                         <!-- 1 comments start  -->
-                                        <!-- <div class="d-flex country mt-2">
-                                            <a class="nav-link icon text-dark" href="./chats.html">
+                                        <!-- <div class="d-flex country mt-2"> -->
+                                            <!-- <a class="nav-link icon text-dark" href="./chats.html">
                                                 <i class="fi fi-rs-comment"></i>
                                             </a> -->
                                             <!-- <img src="../assets\header-img\comment-light.webp"
@@ -1110,12 +1662,12 @@
                                             </div> -->
                                         </div>
                                         <div class="d-flex country">
-                                            <img id="user-img" src="../assets\header-img\spade.svg" 
+                                            <img id="user-img" src="../assets\header-img\spade.svg"
                                                 class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
                                         <div class="d-flex country">
-                                            <img id="user-img-dark" src="../assets\header-img\circlels.png"  class="avatarr profile-user nav-link brroundd cover-image light-layout">
-
+                                            <img id="user-img-dark" src="../assets\header-img\circlels.png"
+                                                class="avatarr profile-user nav-link brroundd cover-image light-layout">
                                         </div>
                                         <div class="dropdown d-flex profile-1 country">
                                             <a href="javascript:void(0)" data-bs-toggle="dropdown"
@@ -1197,11 +1749,11 @@
                             </li>
 
                             <!-- <li class="slide">
-                                <a class="side-menu__item has-link" href="landing-page.php" target="_blank"><i
-                                        class="side-menu__icon fe fe-plus"></i><span class="side-menu__label">Complete your
-                                        Profile</span>
-                                </a>
-                            </li> -->
+                            <a class="side-menu__item has-link" href="landing-page.php" target="_blank"><i
+                                    class="side-menu__icon fe fe-plus"></i><span class="side-menu__label">Complete your
+                                    Profile</span>
+                            </a>
+                        </li> -->
                             <a href="settings.html" class="text-dark">
                                 <li class="slide">
                                     <div class="M-0 mt-3 mb-4" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
@@ -1209,7 +1761,7 @@
                                             <i class="side-menu__icon fi fi-rs-rocket-lunch mb-0"></i>
                                             <h3 class="card-title side-menu__label">&nbsp; Complete your Profile
                                             </h3>
-    
+
                                         </div>
                                         <div class="card-body pt-0">
                                             <div class="side-menu__label progress progress-md mt-5">
@@ -1225,8 +1777,8 @@
                                         class="side-menu__label">Overview</span></a>
                             </li>
                             <!-- <li class="sub-category">
-                                           <h3>UI Kit</h3>
-                                       </li> -->
+                                       <h3>UI Kit</h3>
+                                   </li> -->
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
                                         class="side-menu__icon fi fi-rs-building"></i><span
@@ -1254,8 +1806,8 @@
                             </li>
 
                             <!-- <li class="sub-category">
-                                           <h3>Pre-build Pages</h3>
-                                       </li> -->
+                                       <h3>Pre-build Pages</h3>
+                                   </li> -->
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="invoices.html"><i
                                         class="side-menu__icon fi fi-rs-file-invoice-dollar"></i><span
@@ -1314,7 +1866,7 @@
                                         class="side-menu__icon fi fi-rs-settings"></i><span
                                         class="side-menu__label">Settings</span>
                                     <!-- <span
-                                                   class="badge bg-green br-5 side-badge blink-text pb-1">New</span> -->
+                                               class="badge bg-green br-5 side-badge blink-text pb-1">New</span> -->
                                 </a>
                             </li>
                         </ul>
@@ -1343,153 +1895,261 @@
                             </div>
                         </div> -->
 
-                        <div class="card" style="background: #1467B0;margin-bottom: 100px;" id="top_main_card">
-                            <div class="card-body pb-0">
+                        <div class="card mt-5" style="background: linear-gradient(180deg, #232323 0%, #434343 100%);">
+                            <div class="card-body">
                                 <div class="row">
-                                    <div class="col-lg-12  position-relative">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="media mt-0 mb-2">
-                                                <div class="media-user me-2">
-                                                    <div class=""><img alt="" class="rounded-circle avatar avatar-md" style="max-width: 120px;" src="../assets/images/users/16.jpg"></div>
-                                                </div>
-                                                <div class="media-body">
-                                                    <small class="text-white">Tenants</small>
-                                                    <h3 class="mb-0 mt-1 text-white company-name" style="font-weight: bold;"></h3>
-                                                </div>
-                                            </div>
-                                            <div class="dropdown show" style="border-radius: 50%; background: #fff; width: 35px; display: flex; align-items: center; justify-content: center; padding: 8px;">
-                                                <i class="fe fe-more-vertical fs-20" data-bs-toggle="dropdown" style="color: #1467B0;"></i>
-                                                <div class="dropdown-menu dropdown-menu-end">
-                                                    <a class="dropdown-item text-primary" href="javascript:void(0)"><i class="fi fi-rs-edit me-1"></i> Edit</a>
-                                                    <a class="dropdown-item text-danger" href="javascript:void(0)"> <i class="fi fi-rs-trash me-1"></i>Delete</a>
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                        <!-- <a href="javascript:void(0)" id="email_verification"
-                                                                    class="btn btn-primary btn-pill btn-xl email-verification-btn"><i
-                                                                        class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
-                                                                    verification &nbsp; <i
-                                                                        class="angle fe fe-arrow-right create-btn-plus"></i></a> -->
-
+                                    <div class="col-lg-9">
+                                        <h3 class="page-titlee text-white"
+                                            style="font-weight: 100; margin-bottom: 0px;">Welcome to Spade Portal</h3>
+                                        <h1 class="page-titlee text-white" style="font-weight: 700;" id="user-name">
+                                        </h1>
+                                        <a data-bs-toggle="modal" href="#modaldemo00" id="email_verification"
+                                            class="btn btn-primary btn-pill btn-xl email-verification-btn"><i
+                                                class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
+                                            verification &nbsp; <i
+                                                class="angle fe fe-arrow-right create-btn-plus"></i></a>
+                                        <p class="text-white m-0 mt-3" id="account-text">
+                                            </p>
                                     </div>
-                                    <div class="col-12">
-                                        <ul class="nav1 br-7" style="bottom: 0;">
-                                            <li class="nav-item1 p-0">
-                                                <a class="nav-link p-2" href="view-tenant.html"
-                                                    id="viewOverview">Overview</a>
-                                            </li>
-                                            <li class="nav-item1 p-0">
-                                                <a class="nav-link p-2" href="tenant-properties.html"
-                                                    id="viewProperties">Properties</a>
-                                            </li>
-                                            <li class="nav-item1 p-0">
-                                                <a class="nav-link p-2" href="tenant-tasks.html"
-                                                    id="viewTasks">Tasks</a>
-                                            </li>
-                                            <li class="nav-item1 p-0">
-                                                <a class="nav-link active p-2" href="tenant-file.html" id="viewFiles">Files</a>
-                                            </li>
-                                        </ul>
+                                    <div class="col-lg-3">
+                                        <img src="../assets/header-img/Group1.png" alt="">
                                     </div>
-
                                 </div>
 
                             </div>
                         </div>
                         <div>
                             <p class="d-inline-flex gap-1">
-                                <span>Tenant-File | </span>
-                                  <span><a href="#" onclick="Intercom('showArticle', 8210506)"> How to create Tenant? </a></span>
-                                  <span><a href="#" onclick="Intercom('showArticle', 8210444)"> How to update Tenant? </a></span>
-                            </p>
+                                <span>Task | </span>
+                                <span><a href="#" onclick="Intercom('showArticle', 8210506)"> How to add Tasks? </a></span>
+
+                              </p>
+                              
+                               
                         </div>
                         <!-- PAGE-HEADER END -->
-                        <div class="row justify-content-center">
-                            <div class="col-lg-6 col-xl-6">
-                                <div class="card">
-                                    <!-- <div class="card-header">
-                                        <div class="card-title">Edit Password</div>
-                                    </div> -->
-                                    <div class="card-body">
-                                        <div class="text-center chat-image mb-5" style="margin-top: -85px;">
+                        <div class="over_view" id="Overview">
+                            <!-- ROW-2 OPEN -->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card inner-cards">
+                                        <div class="card-header justify-content-between">
+                                            <div class="d-flex">
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-outline-default text-dark py-1"
+                                                        id="filter_btn" data-bs-toggle="dropdown"><i
+                                                            class="typcn typcn-filter fs-16"></i><strong
+                                                            id="Filter-btn">Filter</strong></button>
+                                                    <ul class="dropdown-menu" role="menu">
+                                                        <li><a href="javascript:void(0)"><strong
+                                                                    class="text-dark">Filter by:</strong></a>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between"><a class="text-dark"
+                                                                href="javascript:void(0)" for="exampleRadio">Default</a>
+                                                            <div class="form-check m-0">
+                                                                <input class="form-check-input mt-2" type="radio"
+                                                                    name="exampleRadios" id="exampleRadios1"
+                                                                    value="option1">
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between"><a class="text-dark"
+                                                                href="javascript:void(0)" for="exampleRadio">Task
+                                                                Name</a>
+                                                            <div class="form-check m-0">
+                                                                <input class="form-check-input mt-2" type="radio"
+                                                                    name="exampleRadios" id="exampleRadios1"
+                                                                    value="option1">
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between"><a class="text-dark"
+                                                                href="javascript:void(0)">Assigned To</a>
+                                                            <div class="form-check m-0">
+                                                                <input class="form-check-input mt-2" type="radio"
+                                                                    name="exampleRadios" id="exampleRadios1"
+                                                                    value="option1" checked>
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between"><a class="text-dark"
+                                                                href="javascript:void(0)">Date</a>
+                                                            <div class="form-check m-0">
+                                                                <input class="form-check-input mt-2" type="radio"
+                                                                    name="exampleRadios" id="exampleRadios1"
+                                                                    value="option1" checked>
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between"><a class="text-dark"
+                                                                href="javascript:void(0)">Ascending</a>
+                                                            <div class="form-check m-0">
+                                                                <input class="form-check-input mt-2" type="radio"
+                                                                    name="exampleRadios" id="exampleRadios1"
+                                                                    value="option1" checked>
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between"><a class="text-dark"
+                                                                href="javascript:void(0)">Descending</a>
+                                                            <div class="form-check m-0">
+                                                                <input class="form-check-input mt-2" type="radio"
+                                                                    name="exampleRadios" id="exampleRadios1"
+                                                                    value="option1" checked>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="mx-2">
+                                                    <div class="form-group m-0">
+                                                        <input class="form-control"
+                                                            placeholder="Search Users by Name, Email or Date"
+                                                            type="text" id="search_input">
 
-                                            <div class="profile-img-1 mb-5">
-                                                <img src="../assets/images/icons/Group 10372.png" class="brround"
-                                                    alt="img">
-                                            </div>
-
-
-                                            <div class="main-chat-msg-name">
-                                                <!-- <a href="profile.html">
-                                                    <h5 class="mb-1 text-dark fw-semibold">Percy Kewshun</h5>
-                                                </a>
-                                                <p class="text-muted mt-0 mb-0 pt-0 fs-13">Web Designer</p> -->
-                                                <h2 class="modal-title">No Files <strong
-                                                        class="color-primary">Here</strong></h2>
-
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="custom-file" style="border: 1px dashed #00000087;">
-                                                <input id="fileInput" type="file" name="image"
-                                                    class="custom-file-input form"
-                                                    accept=".jpg, .png, image/jpeg, image/png" aria-label="hello"
-                                                    multiple>
-                                                <span className="d-none"></span>
-                                                <label class="custom-file-label" for="fileInput">
-                                                    <i class="fi fi-rs-cloud-upload color-primary"></i>
-                                                    <div class="custom-file-text">
-                                                        <h4 class="mb-0" style="font-weight: bold;">Upload Photo</h4>
-                                                        <span class="fs-12">JPEG and PNG, file size no more than
-                                                            10MB</span>
                                                     </div>
-                                                </label>
+                                                </div>
                                             </div>
-                                            <div class="selected-files text-white">
-                                                <div class="file-grid"></div>
+                                            <!-- <div class="d-flex">
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn font-weight-bold text-dark"
+                                                        id="customize_btn" data-bs-toggle="dropdown"
+                                                        style="border: none;"><strong>CUSTOMIZED</strong><i
+                                                            class="fe fe-chevron-down ms-2"></i></button>
+                                                    <ul class="dropdown-menu" role="menu">
+                                                        <li><a href="javascript:void(0)"><strong
+                                                                    class="text-dark">Coulmns to
+                                                                    Show</strong></a>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between"><a class="text-dark"
+                                                                href="javascript:void(0)">IMAGE</a>
+                                                            <div class="form-check m-0">
+                                                                <input type="checkbox" class="form-check-input mt-2"
+                                                                    id="exampleCheck1" checked>
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between"><a class="text-dark"
+                                                                href="javascript:void(0)">TASK</a>
+                                                            <div class="form-check m-0">
+                                                                <input type="checkbox" class="form-check-input mt-2"
+                                                                    id="exampleCheck1" checked>
+                                                            </div>
+                                                        </li>
+
+                                                        <li class="d-flex justify-content-between"><a class="text-dark"
+                                                                href="javascript:void(0)">ASSIGNED TO</a>
+                                                            <div class="form-check m-0">
+                                                                <input type="checkbox" class="form-check-input mt-2"
+                                                                    id="exampleCheck1" checked>
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between"><a class="text-dark"
+                                                                href="javascript:void(0)">DUE AT</a>
+                                                            <div class="form-check m-0">
+                                                                <input type="checkbox" class="form-check-input mt-2"
+                                                                    id="exampleCheck1" checked>
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between"><a class="text-dark"
+                                                                href="javascript:void(0)">RELATED TO</a>
+                                                            <div class="form-check m-0">
+                                                                <input type="checkbox" class="form-check-input mt-2"
+                                                                    id="exampleCheck1" checked>
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between"><a class="text-dark"
+                                                                href="javascript:void(0)">STATUS</a>
+                                                            <div class="form-check m-0">
+                                                                <input type="checkbox" class="form-check-input mt-2"
+                                                                    id="exampleCheck1" checked>
+                                                            </div>
+                                                        </li>
+
+                                                    </ul>
+                                                </div>
+                                                <button type="button" class="btn btn-primary btn-pill mx-2"
+                                                    id="add_property_btn" data-bs-effect="effect-scale"
+                                                    data-bs-toggle="modal" href="#addModal"><i
+                                                        class="fe fe-plus me-2"></i><strong>ADD NEW
+                                                        TASK</strong></button>
+                                            </div> -->
+                                        </div>
+                                        <div class="card-body p-0">
+                                            <div class="table-responsive">
+                                                <table class="table border text-nowrap text-md-nowrap mb-0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>File name</th>
+                                                            <th>Properties</th>
+                                                            <th>Owner</th>
+                                                            <th>Date upload</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="table_body">
+                                                        <tr>
+                                                            <td style="font-weight: 600;">1</td>
+                                                            <td class="task-id" id="244"><div style="font-weight: 600; display: flex; gap: 1rem;"><img src="../assets/images/Group-user.png" alt=""><p style="color: #9B9B9B;" class="mb-1">Document screenshot.jpg <br><span class="font-weight-normal" style="color: #9B9B9B; font-weight: 200;"> 720 KB</span></p></div></td>
+                                                            <td class="propertyAddress"><p style="font-weight: 600;" class="mb-1">Pensgate St</p><span style="color: #9B9B9B;">9430 Research Blvd. Ste 2-350 Austin TX 78759</span></td>
+                                                            <td style="display: flex; align-items: center; gap: 0.5rem; border: none;"><img src="../assets/images/faces/man-prospects.png" alt="" style="width: 50px; height: 50px; border-radius: 50%;"><p class="mt-2">Sarah coner</p></td>
+                                                            <td>17/4/2022</td>
+                                                            <td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i><ul class="dropdown-menu dropdown-menu-top"><li><a class="dropdown-item text-dark" href="./view-property.html?property=%7B%22iv%22%3A%22%2BznES7nSPFokgtGzzUHw5Q%3D%3D%22%2C%22v%22%3A1%2C%22iter%22%3A10000%2C%22ks%22%3A128%2C%22ts%22%3A64%2C%22mode%22%3A%22ccm%22%2C%22adata%22%3A%22%22%2C%22cipher%22%3A%22aes%22%2C%22salt%22%3A%220gjQ9lri%2BGU%3D%22%2C%22ct%22%3A%22mrmF2pbNn1Z8%2BBQ%3D%22%7D" style="display: flex; align-items: center;"><i class="fi fi-rs-eye" style="display: flex; align-items: center;"></i> &nbsp;&nbsp;&nbsp; View</a></li><li><a class="edit-option dropdown-item text-dark" href="javascript:void(0)" style="display: flex; align-items: center;"><i class="fi fi-rs-edit" style="display: flex; align-items: center;"></i> &nbsp;&nbsp;&nbsp; Edit</a></li><li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)" style="display: flex; align-items: center;"><i class="fi fi-rs-cross-small fs-20" style="display: flex; align-items: center;"></i> &nbsp;&nbsp;Delete</a></li></ul></td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td style="font-weight: 600;">2</td>
+                                                            <td class="task-id" id="244"><div style="font-weight: 600; display: flex; gap: 1rem;"><img src="../assets/images/Group-user.png" alt=""><p style="color: #9B9B9B;" class="mb-1">Document screenshot.jpg <br><span class="font-weight-normal" style="color: #9B9B9B; font-weight: 200;"> 720 KB</span></p></div></td>
+                                                            <td class="propertyAddress"><p style="font-weight: 600;" class="mb-1">Pensgate St</p><span style="color: #9B9B9B;">9430 Research Blvd. Ste 2-350 Austin TX 78759</span></td>
+                                                            <td style="display: flex; align-items: center; gap: 0.5rem; border: none;"><img src="../assets/images/faces/man-prospects.png" alt="" style="width: 50px; height: 50px; border-radius: 50%;"><p class="mt-2">Sarah coner</p></td>
+                                                            <td>17/4/2022</td>
+                                                            <td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i><ul class="dropdown-menu dropdown-menu-top"><li><a class="dropdown-item text-dark" href="./view-property.html?property=%7B%22iv%22%3A%22%2BznES7nSPFokgtGzzUHw5Q%3D%3D%22%2C%22v%22%3A1%2C%22iter%22%3A10000%2C%22ks%22%3A128%2C%22ts%22%3A64%2C%22mode%22%3A%22ccm%22%2C%22adata%22%3A%22%22%2C%22cipher%22%3A%22aes%22%2C%22salt%22%3A%220gjQ9lri%2BGU%3D%22%2C%22ct%22%3A%22mrmF2pbNn1Z8%2BBQ%3D%22%7D" style="display: flex; align-items: center;"><i class="fi fi-rs-eye" style="display: flex; align-items: center;"></i> &nbsp;&nbsp;&nbsp; View</a></li><li><a class="edit-option dropdown-item text-dark" href="javascript:void(0)" style="display: flex; align-items: center;"><i class="fi fi-rs-edit" style="display: flex; align-items: center;"></i> &nbsp;&nbsp;&nbsp; Edit</a></li><li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)" style="display: flex; align-items: center;"><i class="fi fi-rs-cross-small fs-20" style="display: flex; align-items: center;"></i> &nbsp;&nbsp;Delete</a></li></ul></td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td style="font-weight: 600;">3</td>
+                                                            <td class="task-id" id="244"><div style="font-weight: 600; display: flex; gap: 1rem;"><img src="../assets/images/Group-user.png" alt=""><p style="color: #9B9B9B;" class="mb-1">Document screenshot.jpg <br><span class="font-weight-normal" style="color: #9B9B9B; font-weight: 200;"> 720 KB</span></p></div></td>
+                                                            <td class="propertyAddress"><p style="font-weight: 600;" class="mb-1">Pensgate St</p><span style="color: #9B9B9B;">9430 Research Blvd. Ste 2-350 Austin TX 78759</span></td>
+                                                            <td style="display: flex; align-items: center; gap: 0.5rem; border: none;"><img src="../assets/images/faces/man-prospects.png" alt="" style="width: 50px; height: 50px; border-radius: 50%;"><p class="mt-2">Sarah coner</p></td>
+                                                            <td>17/4/2022</td>
+                                                            <td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i><ul class="dropdown-menu dropdown-menu-top"><li><a class="dropdown-item text-dark" href="./view-property.html?property=%7B%22iv%22%3A%22%2BznES7nSPFokgtGzzUHw5Q%3D%3D%22%2C%22v%22%3A1%2C%22iter%22%3A10000%2C%22ks%22%3A128%2C%22ts%22%3A64%2C%22mode%22%3A%22ccm%22%2C%22adata%22%3A%22%22%2C%22cipher%22%3A%22aes%22%2C%22salt%22%3A%220gjQ9lri%2BGU%3D%22%2C%22ct%22%3A%22mrmF2pbNn1Z8%2BBQ%3D%22%7D" style="display: flex; align-items: center;"><i class="fi fi-rs-eye" style="display: flex; align-items: center;"></i> &nbsp;&nbsp;&nbsp; View</a></li><li><a class="edit-option dropdown-item text-dark" href="javascript:void(0)" style="display: flex; align-items: center;"><i class="fi fi-rs-edit" style="display: flex; align-items: center;"></i> &nbsp;&nbsp;&nbsp; Edit</a></li><li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)" style="display: flex; align-items: center;"><i class="fi fi-rs-cross-small fs-20" style="display: flex; align-items: center;"></i> &nbsp;&nbsp;Delete</a></li></ul></td>
+                                                        </tr>
+                                                        </tbody>
+                                                </table>
                                             </div>
                                         </div>
-                                        <button class="btn btn-outline-default btn-pill button btn-primary btn-lg w-100"
-                                            id="submit-pics" disabled>Submit</button>
                                     </div>
                                 </div>
                             </div>
+                            <!-- ROW-2 CLOSED -->
                         </div>
                     </div>
+                    <!-- ROW-3 CLOSED -->
                 </div>
-                <!-- ROW-3 CLOSED -->
-            </div>
-            <!-- ROW-2 END -->
+                <!-- ROW-2 END -->
 
 
 
 
-            <div class="card-body pb-0 bg-recentorder" style="display: none;">
-                <h3 class="card-title text-white">Recent Orders</h3>
-                <div class="chartjs-wrapper-demo">
-                    <canvas id="recentorders" class="chart-dropshadow"></canvas>
+                <div class="card-body pb-0 bg-recentorder" style="display: none;">
+                    <h3 class="card-title text-white">Recent Orders</h3>
+                    <div class="chartjs-wrapper-demo">
+                        <canvas id="recentorders" class="chart-dropshadow"></canvas>
+                    </div>
                 </div>
-            </div>
-            <div id="flotback-chart" class="flot-background" style="display: none;"></div>
+                <div id="flotback-chart" class="flot-background" style="display: none;"></div>
 
+            </div>
+            <!-- CONTAINER END -->
         </div>
-        <!-- CONTAINER END -->
-    </div>
     </div>
     <!--app-content close-->
 
     </div>
 
-      <!-- Sidebar-right -->
+    <!-- Sidebar-right -->
     <div class="sidebar sidebar-right sidebar-animate">
         <div class="panel panel-primary card mb-0 shadow-none border-0">
             <div class="tab-menu-heading border-0 d-flex p-3">
                 <div class="card-title mb-0 text-dark fw-bold">
                     <!-- <i class="fe fe-bell me-2"></i> -->
                     <!-- <span class=" pulse"></span> -->
-                    Notifications <a href="javascript:void(0);" class="text-primary text-decoration-underline " id="updateAllNotifyRead">Mark all
+                    Notifications <a href="javascript:void(0);" class="text-primary text-decoration-underline "
+                        id="updateAllNotifyRead">Mark all
                         as read</a>
                 </div>
                 <div class="card-options ms-auto">
@@ -1502,11 +2162,15 @@
                 <div class="tabs-menu border-bottom">
                     <!-- Tabs -->
                     <ul class="nav panel-tabs">
-                        <li><a href="#side1" data-bs-toggle="tab" class="text-dark active">All<span class="all_span"></span></a></li>
-                        <li><a href="#side2" data-bs-toggle="tab" class="text-dark">Inbox <span class="inbox_span"></span></a></li>
-                        <li><a href="#side3" data-bs-toggle="tab" class="text-dark">Unread <span class="Unread_span"></span></a></li>
-                        <!-- <li><a href="#side4" data-bs-toggle="tab" class="text-dark">Archive <span class="archive_span"></span></a></li> -->
-                    </ul>   
+                        <li><a href="#side1" data-bs-toggle="tab" class="text-dark active">All<span
+                                    class="all_span"></span></a></li>
+                        <li><a href="#side2" data-bs-toggle="tab" class="text-dark">Inbox <span
+                                    class="inbox_span"></span></a></li>
+                        <li><a href="#side3" data-bs-toggle="tab" class="text-dark">Unread <span
+                                    class="Unread_span"></span></a></li>
+                        <!-- <li><a href="#side4" data-bs-toggle="tab" class="text-dark">Archive <span
+                                    class="archive_span"></span></a></li> -->
+                    </ul>
                 </div>
                 <div class="tab-content">
                     <!-- <div class="tab-pane " id="side1">
@@ -1683,11 +2347,11 @@
                     </div> -->
                     <div class="tab-pane active" id="side1">
                         <div class="list-group list-group-flush" id="notification-container">
-                            
+
 
                         </div>
                     </div>
-                  
+
                     <div class="tab-pane " id="side2">
                         <div class="list-group list-group-flush" id="inbox-notification-container">
 
@@ -1695,13 +2359,13 @@
                     </div>
                     <div class="tab-pane " id="side3">
                         <div class="list-group list-group-flush" id="unread-notification-container">
-                            
+
 
                         </div>
                     </div>
                     <div class="tab-pane " id="side4">
                         <div class="list-group list-group-flush" id="Archieve-notification-container">
-                            
+
 
                         </div>
                     </div>
@@ -1714,7 +2378,7 @@
                     <!-- <div class="tab-pane" id="side2">
                         <div class="list-group list-group-flush">
                             <div class="pt-3 fw-semibold ps-5">Today</div> -->
-                            <!-- <div class="list-group-item d-flex align-items-center justify-content-between">
+                    <!-- <div class="list-group-item d-flex align-items-center justify-content-between">
                                 <div class="d-flex align-items-center">
                                     <div class="me-2">
                                         <span class="avatar avatar-md brround cover-image"
@@ -1754,14 +2418,14 @@
                                     <span class="fs-12 text-dark">2 min ago</span>
                                 </div>
                             </div> -->
-                            <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
+                    <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
 
-                        <!-- </div>
-                    </div> --> 
+                    <!-- </div>
+                    </div> -->
                     <!-- <div class="tab-pane" id="side3">
                         <div class="list-group list-group-flush">
                             <div class="pt-3 fw-semibold ps-5">Today</div> -->
-                            <!-- <div class="list-group-item d-flex align-items-center justify-content-between">
+                    <!-- <div class="list-group-item d-flex align-items-center justify-content-between">
                                 <div class="d-flex align-items-center">
                                     <div class="me-2">
                                         <span class="avatar avatar-md brround cover-image"
@@ -1801,14 +2465,14 @@
                                     <span class="fs-12 text-dark">2 min ago</span>
                                 </div>
                             </div> -->
-                            <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
+                    <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
 
-                        <!-- </div>
-                    </div> --> 
+                    <!-- </div>
+                    </div> -->
                     <!-- <div class="tab-pane" id="side4">
                         <div class="list-group list-group-flush">
                              <div class="pt-3 fw-semibold ps-5">Today</div> -->
-                            <!-- <div class="list-group-item d-flex align-items-center justify-content-between">
+                    <!-- <div class="list-group-item d-flex align-items-center justify-content-between">
                                 <div class="d-flex align-items-center">
                                     <div class="me-2">
                                         <span class="avatar avatar-md brround cover-image"
@@ -1848,10 +2512,10 @@
                                     <span class="fs-12 text-dark">2 min ago</span>
                                 </div>
                             </div> -->
-                            <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
+                    <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
 
-                        <!-- </div>
-                    </div> --> 
+                    <!-- </div>
+                    </div> -->
                     <!-- <div class="tab-pane" id="side3">
                         <ul class="task-list timeline-task">
                             <li class="d-sm-flex mt-4">
@@ -1949,140 +2613,7 @@
         </div>
     </div>
     <!--/Sidebar-right-->
-    <div class="modal fade" id="infoModal_verify" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-dialog-centered text-center" role="document">
-            <div class="modal-content modal-content-demo">
-                <div class="modal-body p-0">
-                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
-                        <!-- <div class="card-header border-0 pt-3">
-                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
-                            </button>
-                        </div> -->
-                        <div class="card-body text-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24">
-                                <path fill="#fad383"
-                                    d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z">
-                                </path>
-                                <circle cx="12" cy="16" r="1" fill="#f7b731"></circle>
-                                <path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"></path>
-                            </svg>
-                            <h4 class="h4 mb-0 mt-3 fw-bold">Info</h4>
-                            <p class="card-text text-dark">Token code or Password not matched</p>
-                        </div>
-                        <!-- <div class="card-footer text-center border-0 pt-0">
-                            <div class="row">
-                                <div class="text-center">
-                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
-                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
-                                </div>
-                            </div>
-                        </div> -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="succesModal_verify" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-dialog-centered text-center" role="document">
-            <div class="modal-content modal-content-demo">
-                <div class="modal-body p-0">
-                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
-                        <!-- <div class="card-header border-0 pt-3">
-                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
-                            </button>
-                        </div> -->
-                        <div class="card-body text-center">
-                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
-                                    viewBox="0 0 24 24">
-                                    <path fill="#13bfa6"
-                                        d="M10.3125,16.09375a.99676.99676,0,0,1-.707-.293L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328l-6.1875,6.1875A.99676.99676,0,0,1,10.3125,16.09375Z"
-                                        opacity=".99" />
-                                    <path fill="#71d8c9"
-                                        d="M12,2A10,10,0,1,0,22,12,10.01146,10.01146,0,0,0,12,2Zm5.207,7.61328-6.1875,6.1875a.99963.99963,0,0,1-1.41406,0L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328Z" />
-                                </svg></span>
-                            <h4 class="h4 mb-0 mt-3 fw-bold">Success</h4>
-                            <p class="card-text text-dark">Your Email has been verified</p>
-                        </div>
-                        <!-- <div class="card-footer text-center border-0 pt-0">
-                            <div class="row">
-                                <div class="text-center">
-                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
-                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
-                                </div>
-                            </div>
-                        </div> -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="succesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered succes-modal-dialog">
-            <div class="modal-content success-modal-content">
-                <div class="modal-header">
 
-                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="succes-close">
-                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
-                    </button>
-                </div>
-                <div class="modal-body succes-modal" style="padding-top: 70px;padding-bottom: 70px;">
-                    <div class="text-justify ps-2 border-model-line">
-                        <h2 class="modal-title d-flex align-items-center ps-1">
-                            <strong class="color-primary">Success!&nbsp;</strong>
-                            <i class="fi fi-rs-check-circle text-success"></i>
-
-                        </h2>
-                        <p class="ps-1 text-justify" id="succes-text">Files Added successfully!!!</p>
-
-                    </div>
-                    <!-- <div class="d-flex align-items-center p-2 my-3">
-                        <div class="flex-grow-1 ms-3">
-                            <p class="fw-bolder link-text">Invite send successfully!!!</p>
-                        </div>
-                        
-                    </div> -->
-                    <!-- <div class="mt-2"> <button type="button" class="btn btn-primary btn-pill mx-2" id="add_property_btn"
-                            data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal"><i
-                                class="fe fe-plus me-2"></i><strong>ADD NEW
-                                TENANT</strong></button></div> -->
-
-                </div>
-                <div class="modal-footer" style="border-top: 0">
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="infoModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-dialog-centered text-center" role="document">
-            <div class="modal-content modal-content-demo">
-                <div class="modal-body p-0">
-                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
-                        <!-- <div class="card-header border-0 pt-3">
-                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
-                            </button>
-                        </div> -->
-                        <div class="card-body text-center">
-                            <i class="fi fi-rs-check-circle text-success"></i>
-                            <h4 class="h4 mb-0 mt-3 fw-bold">Info</h4>
-                            <p class="card-text text-dark">No file selected!!!</p>
-                        </div>
-                        <!-- <div class="card-footer text-center border-0 pt-0">
-                            <div class="row">
-                                <div class="text-center">
-                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
-                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
-                                </div>
-                            </div>
-                        </div> -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <!-- Country-selector modal-->
     <div class="modal fade" id="country-selector">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -2175,7 +2706,10 @@
     </div>
 
     <!-- BACK-TO-TOP -->
-    <!-- <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a> -->
+    <!-- <!-- <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a> --> -->
+    <a href="#addModal" data-bs-effect="effect-scale" data-bs-toggle="modal" id="add-tenant-side-btn"><i
+            class="fe fe-plus"></i></a>
+
 
 
     <!-- JQUERY JS -->
@@ -2248,11 +2782,20 @@
     <script src="../assets/js/themeColors.js"></script>
 
     <!-- CUSTOM JS -->
-    <script src="../assets/js/custom.js"></script><script src="../assets/js/getNotification.js"></script>
+    <script src="../assets/js/custom.js"></script>
+    <script src="../assets/js/getNotification.js"></script>
 <script src="../assets/js/push_notification.js"></script>
 
     <!-- ############################################# -->
-
+    <!-- INTERNAL Autofill-Table JS -->
+    <!-- <script src="../assets/plugins/datatable/js/jquery.dataTables.min.js"></script> -->
+    <!-- <script src="../assets/plugins/datatable/js/dataTables.bootstrap5.js"></script> -->
+    <!-- <script src="../assets/plugins/datatable/js/dataTables.buttons.min.js"></script> -->
+    <!-- <script src="../assets/plugins/datatable/js/buttons.bootstrap5.min.js"></script> -->
+    <!-- <script src="../assets/plugins/extension-datatable/autofill/dataTables.autoFill.min.js"></script> -->
+    <script src="../assets/plugins/extension-datatable/autofill/autoFill.bootstrap5.min.js"></script>
+    <!-- <script src="../assets/plugins/extension-datatable/keytable/dataTables.keyTable.min.js"></script> -->
+    <script src="../assets/js/autofill-table.js"></script>
 
     <!-- C3 CHART JS -->
     <script src="../assets/plugins/charts-c3/d3.v5.min.js"></script>
@@ -2265,70 +2808,58 @@
     <script src="../assets/plugins/chart/Chart.bundle.js"></script>
     <script src="../assets/plugins/chart/utils.js"></script>
 
+
+    <script src="../assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <!-- BOOTSTRAP-DATERANGEPICKER JS -->
+    <script src="../assets/plugins/bootstrap-daterangepicker/moment.min.js"></script>
+    <script src="../assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+    <!-- INTERNAL Bootstrap-Datepicker js-->
+    <script src="../assets/plugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+
+    <!-- INTERNAL Sumoselect js-->
+    <script src="../assets/plugins/sumoselect/jquery.sumoselect.js"></script>
+
+    <!-- TIMEPICKER JS -->
+    <script src="../assets/plugins/time-picker/jquery.timepicker.js"></script>
+    <script src="../assets/plugins/time-picker/toggles.min.js"></script>
+
+    <!-- INTERNAL intlTelInput js-->
+    <script src="../assets/plugins/intl-tel-input-master/intlTelInput.js"></script>
+    <script src="../assets/plugins/intl-tel-input-master/country-select.js"></script>
+    <script src="../assets/plugins/intl-tel-input-master/utils.js"></script>
+
+    <!-- INTERNAL jquery transfer js-->
+    <script src="../assets/plugins/jQuerytransfer/jquery.transfer.js"></script>
+
+    <!-- INTERNAL multi js-->
+    <script src="../assets/plugins/multi/multi.min.js"></script>
+
+    <!-- DATEPICKER JS -->
+    <script src="../assets/plugins/date-picker/date-picker.js"></script>
+    <script src="../assets/plugins/date-picker/jquery-ui.js"></script>
+    <script src="../assets/plugins/input-mask/jquery.maskedinput.js"></script>
+
+    <!-- COLOR PICKER JS -->
+    <script src="../assets/plugins/pickr-master/pickr.es5.min.js"></script>
+    <script src="../assets/js/picker.js"></script>
+
+    <!-- MULTI SELECT JS-->
+    <script src="../assets/plugins/multipleselect/multiple-select.js"></script>
+    <script src="../assets/plugins/multipleselect/multi-select.js"></script>
+
+    <!-- FORMELEMENTS JS -->
+    <script src="../assets/js/formelementadvnced.js"></script>
+    <script src="../assets/js/form-elements.js"></script>
+
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
     <script src="../assets/js/email-verification.js"></script>
     <script src="../assets/js/intercom.js"></script>
     <script src="../assets/js/getNotification.js"></script>
 <script src="../assets/js/push_notification.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.8/sjcl.min.js"></script>
     <script>
-    </script>
-
-    <script>
-        // // Get the user's preferred color scheme
-        // const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-        // // Get a reference to the logo element
-        // const logo = document.getElementById('logo');
-
-        // if (userPrefersDark) {
-        //     logo.src = '../assets/header-img/comment.svg';
-        // } else {
-        //     logo.src = '../assets/header-img/question.svg';
-        // }
-        let selectedFiles = []
-        $(document).ready(() => {
-            $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/protected',
-                    method: 'GET',
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-                    success: function (response) {
-                        console.log(response);
-
-                        function toTitleCase(str) {
-                            return str.replace(/\w\S*/g, function (txt) {
-                                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-                            });
-                        }
-                        localStorage.setItem("LandlordImg", response.image)
-                        localStorage.setItem("landlordId", response.userId)
-                        // LandlordImg = response.image;
-                        if(response.image!==" " && response.image!==null){
-                
-                $("#user-img").attr("src", response.image)
-                $("#user-img-dark").attr("src", response.image)
-            } 
-                        $("#user-name").text(toTitleCase(response.userName))
-                        $("#header-user").text(toTitleCase(response.userName))
-                        // userEmail = email
-                        // id = userId
-                    },
-                    error: function (xhr, status, error) {
-                        localStorage.removeItem('authtoken');
-                        $("#myModal_warning").modal("show");
-                        setTimeout(function () {
-                            $('#myModal_warning').modal('hide');
-                            window.location = '../Landlord/login_module.html';
-                        }, 2000);
-                        console.log('Error occurred while fetching state and city data.');
-                        console.log(xhr);
-                        console.log(error);
-                        // console.log('Error occurred while fetching state and city data.');
-                    }
-                });
+        $(document).ready(function () {
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
                 method: 'GET',
@@ -2337,7 +2868,7 @@
                 },
                 success: function (response) {
                     console.log(response);
-                    var myprogress = `<div class="progress-bar bg-info" style="width: `+response.count+`%;">`+response.count+`%</div>`;
+                    var myprogress = `<div class="progress-bar bg-info" style="width: ` + response.count + `%;">` + response.count + `%</div>`;
                     $(".progress").html(myprogress)
                 },
                 error: function (xhr, status, error) {
@@ -2352,213 +2883,17 @@
                     // console.log('Error occurred while fetching state and city data.');
                 }
             });
-            
-            const encryptedPropertyId = decodeURIComponent((new URL(document.location)).searchParams.get("tenant"));
-
-// Decryption
-var password = 'your-secret-password';
-const tenantId = sjcl.decrypt(password, encryptedPropertyId);
-var encodedTenantId = encodeURIComponent(encryptedPropertyId);
-            
-                        
-            $(".company-name").text()
-            $("#viewProperties").attr("href", `./tenant-properties.html?tenant=${encodedTenantId}`)
-            $("#viewOverview").attr("href", `./view-tenant.html?tenant=${encodedTenantId}`)
-            $("#viewFiles").attr("href", `./tenant-file.html?tenant=${encodedTenantId}`)
-            $("#viewTasks").attr("href", `./tenant-tasks.html?tenant=${encodedTenantId}`)         
-
-        
-            // console.log(propertyId)
-            $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getTenantsByID',
-                type: 'GET',
-                data: {
-                    id: tenantId
-                },
-                contentType: "application/json; charset=utf-8",
-                // processData: false,
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                },
-                success: function ({
-                    data
-                }) {
-                    $(".company-name").text(`${data[0][0].companyName} | ${data[0][0].firstName + " " + data[0][0].lastName}`)
-                },
-                error: {}
-            })
-            $("#submit-pics").click(() => {
-                $("#submit-pics").prop("disabled", true)
-                var formData = new FormData();
-                formData.append('tenantID', tenantId);
-                var files = $('#fileInput')[0].files;
-                for (var i = 0; i < selectedFiles.length; i++) {
-                    formData.append('image', selectedFiles[i]);
-                }
-                $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/upload',
-                    type: 'POST',
-                    data: formData,
-                    contentType: false,
-                    processData: false,
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-                    success: function (response) {
-                        var imageArray = response.images;
-                        console.log(imageArray)
-                        var tenantData = {
-                            tenantID: tenantId,
-                            images: imageArray
-                        };
-                        $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/tenantAttachFile',
-                            type: 'POST',
-                            data: JSON.stringify(tenantData),
-                    contentType: 'application/json',
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-                            success: function ({message}) {
-                                $("#submit-pics").prop("disabled", false)
-                                console.log(message==" Tenant Files save successful")
-                               if(message==" Tenant Files save successful"){
-                                    $("#succesModal").modal("show")
-                                   
-                               }else{
-                                    $("#infoModal").modal("show")
-                               }
-                                // $(".company-name").text(`${data[0][0].companyName} | ${data[0][0].firstName+" "+data[0][0].lastName}`)
-                            },
-                            error: function (xhr, status, error) {
-                                $("#submit-pics").prop("disabled", false)
-                                
-                                $("#myModal_warning_connection").modal("show");
-                            setTimeout(function() {
-                                $('#myModal_warning_connection').modal('hide');
-
-                            }, 2000);
-                    console.log(xhr.responseText);
-                            }
-                        });
-                        selectedFiles=[]
-                        updateSelectedFilesContainer()
-                    },
-                    error: function (xhr, status, error) {
-                        $("#myModal_warning_connection").modal("show");
-                            setTimeout(function() {
-                                $('#myModal_warning_connection').modal('hide');
-
-                            }, 2000);
-                    console.log(xhr.responseText);
-                    }
-                })})
-
-                $('#fileInput').on('change', function () {
-                    console.log(1)
-                    var files = Array.from($(this)[0].files);
-                    // console.log(files)
-                    files.forEach(function (file) {
-                        selectedFiles.push(file); // Add each file to the selected files array
-                    });
-
-                    updateSelectedFilesContainer(); // Update the selected files container
-                });
-
-                $(document).on('click', '.delete-file', function () {
-                    var index = $(this).data('index');
-                    selectedFiles.splice(index, 1); // Remove the selected file from the array
-                    updateSelectedFilesContainer(); // Update the selected files container
-                });
-            })
-
-            function updateSelectedFilesContainer() {
-                if(selectedFiles.length>=1){
-                $("#submit-pics").attr("disabled", false)
-            }else{
-                $("#submit-pics").attr("disabled", true)
-            }
-                var selectedFilesContainer = $('.file-grid');
-                selectedFilesContainer.empty();
-                console.log(selectedFiles)
-                selectedFiles.forEach(function (file, index) {
-
-                    var fileElement = $('<div>')
-                        .addClass('selected-file')
-                        .append(
-                            $('<img>')
-                                .addClass('file-preview')
-                                .attr('src', typeof file === "object" ? URL.createObjectURL(file) : '../../../../spadeAPI/uploads/' + file)
-                        )
-                        .append(
-                            $('<div>')
-                                .addClass('file-details')
-                                .append($('<span>').text("Image-" + (index + 1)))
-                            // .append($('<span>').text(fileSize))
-                        )
-                        .append(
-                            $('<p>')
-                                .addClass('delete-file')
-                                .text('X')
-                                .attr('data-index', index)
-                        )
-                        .appendTo(selectedFilesContainer);
-
-                });
-
-            }
-
-            function formatFileSize(bytes) {
-                if (bytes === 0) return '0 Bytes';
-                var k = 1024;
-                var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-                var i = Math.floor(Math.log(bytes) / Math.log(k));
-                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-            }
-
-            function truncateFileName(fileName) {
-                var maxFileNameLength = 10; // Define the maximum length of the file name
-                if (fileName.length > maxFileNameLength) {
-                    return fileName.substring(0, maxFileNameLength) + '...'; // Truncate the file name
-                }
-
-                return fileName;
-            }
-    </script>
-   <script>
-    function logout() {
-        $(document).ready(function () {
-            $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
-                type: 'PUT',
-                contentType: false,
-                processData: false,
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                },
-                success: function (response) {
-                    console.log(response);
-                    if(localStorage.getItem("htmlLayout")){
-
-                        const htmlLayoutValue = localStorage.getItem("htmlLayout");
-                        localStorage.clear();
-                        localStorage.setItem("htmlLayout", htmlLayoutValue);
-                    }else{
-                        localStorage.clear();
-
-                    }
-                    // localStorage.removeItem('authtoken');
-                    // window.close();
-                    window.open('./login_module.html', "_self")
-                    console.log('Done');
-                },
-                error: function (xhr, status, error) {
-                    console.log(error);
+            $('#email_verification').on('click', function () {
+                if ($('body').hasClass('dark-mode')) {
+                    $('.Rent-logo').attr('src', '../assets/images/logo_white.png');
+                } else {
+                    $('.Rent-logo').attr('src', '../assets/images/Artboard GÇô 1.svg');
                 }
             });
         });
-    }
-</script>
+
+    </script>
+
 </body>
 
 </html>
