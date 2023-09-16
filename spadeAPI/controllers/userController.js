@@ -458,6 +458,12 @@ exports.updateUserProfile = async function (req, res) {
     businessAddress,
     imageUrl,
     imageKey,
+    PACity,
+    PAState,
+    PAZipcode,
+    BACity,
+    BAState,
+    BAZipcode
   } = req.body;
   const { userId } = req.user;
   console.log(req.body);
@@ -489,6 +495,12 @@ exports.updateUserProfile = async function (req, res) {
         businessAddress,
         imageUrl,
         imageKey,
+        PACity,
+        PAState,
+        PAZipcode,
+        BACity,
+        BAState,
+        BAZipcode,
         userId,
       ];
       const updateResult = await queryRunner(updateUser, updateUserParams);
