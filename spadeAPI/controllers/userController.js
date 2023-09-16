@@ -1806,11 +1806,12 @@ exports.getStates = async (req, res) => {
 
 //  ############################# Task property ############################################################
 exports.propertyTask = async (req, res) => {
-  const { Id } = req.query;
+  // const { Id } = req.query;
+  const { Id } = req.body;
   // console.log(req.query)
   try {
     const taskByIDResult = await queryRunner(propertyTaskQuery, [Id]);
-    if (taskByIDResult.length > 0) {
+    if (taskByIDResult[0].length > 0) {
       for (let j = 0; j < taskByIDResult[0].length; j++) {
         const taskID = taskByIDResult[0][j].id;
         const TaskImagesResult = await queryRunner(
@@ -1820,7 +1821,7 @@ exports.propertyTask = async (req, res) => {
         // this is for task images
         if (TaskImagesResult[0].length > 0) {
           const taskImages = TaskImagesResult[0].map(
-            (image) => image.taskImages
+            (image) => image.Image
           );
           taskByIDResult[0][j].taskImages = taskImages;
         } else {
@@ -1839,8 +1840,8 @@ exports.propertyTask = async (req, res) => {
           const vendorResult = await queryRunner(selectQuery("vendor", "id"), [
             vID,
           ]);
-          if (vendorResult.length > 0) {
-            const categoryIDs = vendorResult[0][0].categoryID;
+          if (vendorResult[0].length > 0) {
+            const categoryIDs = vendorResult[0][i].categoryID;
             const VendorCategoryResult = await queryRunner(
               selectQuery("vendorcategory", "id"),
               [categoryIDs]

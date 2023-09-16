@@ -663,7 +663,7 @@
             all: initial;
             /* Reset all CSS properties to their initial values */
             display: contents;
-            cursor: pointer;
+            cursor: grabbing;
             user-select: none;
         }
 
@@ -738,13 +738,13 @@
         }
 
         /* .tab-pane .card:nth-child(1) {
-            min-height: 205px;
+            min-height: 214px;
         }
         .tab-pane .card:nth-child(2) {
-            min-height: 205px;
+            min-height: 214px;
         }
         .tab-pane .card:nth-child(3) {
-            min-height: 205px;
+            min-height: 214px;
         } */
 
         .card-options a:not(.btn) {
@@ -931,7 +931,7 @@
                                     <div class="col-md-12 col-lg-12 col-xl-12">
                                         <label for="inputCity" class="form-label fw-bold">Prospects Details<spnan
                                                 class="text-danger"> *</span></label>
-                                        <input type="email" id="propertyDetail" class="form-control form"
+                                        <input type="text" id="propertyDetail" class="form-control form"
                                             placeholder="Enter Prospects Details" required>
                                         <span class="text-danger d-none">Prospects Details is required!</span>
                                     </div>
@@ -945,14 +945,18 @@
 
                                         <span class="text-danger d-none">Source Campaign is required!</span>
                                         <a href="javascript:void(0)" class="text-primary"
-                                            style="text-decoration: underline;">+ Add Lead Source</a>
+                                            style="text-decoration: underline;">+ Add Prospect Source</a>
                                     </div>
                                     <div class="col-md-4 col-lg-4 col-xl-4">
                                         <label for="status" class="form-label fw-bold">Status <span
                                                 class="text-danger">*</span></label>
                                         <select id="status" class="form-select form">
                                             <option selected>Choose...</option>
-                                            <option value="system">System</option>
+                                            <option value="engaged">Engaged</option>
+                                            <option value="active">Active</option>
+                                            <option value="nurturing">Nurturing</option>
+                                            <option value="qualified">Qualified</option>
+                                            <option value="disqualified">Disqualified</option>
                                         </select>
 
                                         <span class="text-danger d-none">Status is required!</span>
@@ -1116,7 +1120,8 @@
                                     </div>
                                     <div class="col-md-12 col-lg-12 col-xl-12">
                                         <label for="propertyDetail_update" class="form-label fw-bold">Prospects Details
-                                            <spnan class="text-danger"> *</span></label>
+                                            <spnan class="text-danger"> *</span>
+                                        </label>
                                         <input type="text" id="propertyDetail_update" class="form-control form"
                                             placeholder="Enter Prospects Details" required>
                                         <span class="text-danger d-none">Prospects Details is required!</span>
@@ -1129,7 +1134,7 @@
                                         </select>
                                         <span class="text-danger d-none">Source Campaign is required!</span>
                                         <a href="javascript:void(0)" class="text-primary"
-                                            style="text-decoration: underline;">+ Add Lead Source</a>
+                                            style="text-decoration: underline;">+ Add Prospect Source</a>
                                     </div>
 
                                 </form>
@@ -1185,10 +1190,9 @@
                     <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal"
                         id='close'>Close</button>
                     <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
-                    <a href="javascript:void(0)" class="btn text-light button d-none" style='background-color:#1467B0;'
-                        id='next'>Save</a>
-                    <button class="btn text-light button" style='background-color:#1467B0;'
-                        id='next-add-property'>Next</button>
+                    <a href="javascript:void(0)" class="btn text-light button disabled"
+                        style='background-color:#1467B0;' id='update'>Save</a>
+
 
                 </div>
             </div>
@@ -1934,23 +1938,12 @@
                         <!-- PAGE-HEADER END -->
                         <div>
                             <p class="d-inline-flex gap-1">
-                                <span>Add Invoicing | </span><a data-bs-toggle="collapse" href="#collapseHelp"
-                                    role="button" aria-expanded="false" aria-controls="collapseHelp"
-                                    class="text-dark collapsed active">
-                                    Help ?
-                                </a>
-
+                                <span>Prospects | </span>
+                                <span><a href="#" onclick="Intercom('showArticle', 8210506)"> How to add Prospect?
+                                    </a></span>
+                                <span><a href="#" onclick="Intercom('showArticle', 8210444)"> How to update Prospect?
+                                    </a></span>
                             </p>
-                            <div class="collapse" id="collapseHelp" style="width: 40%;">
-                                <div class="card card-body">
-                                    <span><a href="#" onclick="Intercom('showArticle', 8210506)"><i
-                                                class="fi fi-rs-question text-light"></i> How to create Properties?
-                                        </a></span>
-                                    <span><a href="#" onclick="Intercom('showArticle', 8210444)"><i
-                                                class="fi fi-rs-question text-light"></i> How to update Properties?
-                                        </a></span>
-                                </div>
-                            </div>
                         </div>
                         <div class="row">
                             <div class="col-12">
@@ -2217,7 +2210,7 @@
                                                                                         <input class="form-control" placeholder="Search Users by Name, Email or Date" id="search_input" type="text">
                                                                                     </div> -->
                                                                                     <div
-                                                                                        class="main-header-center d-none d-lg-block m-0">
+                                                                                        class="main-header-center position-relative d-lg-block m-0">
                                                                                         <button class="btn px-0 pt-2"><i
                                                                                                 class="fe fe-search"
                                                                                                 aria-hidden="true"></i></button>
@@ -2388,7 +2381,10 @@
                                                                     </div>
                                                                     <div class="float-end">
                                                                         <div class="fs-20">
-                                                                            <span class="text-dark fw-bold">Total Amount:</span> <span class="text-primary fw-bold">$ 34,44544</span>
+                                                                            <span class="text-dark fw-bold">Total
+                                                                                Amount:</span> <span
+                                                                                class="text-primary fw-bold"
+                                                                                id="total-rent"></span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -2399,7 +2395,7 @@
                                                     <div class="row remove-background" id="kanban-view">
                                                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4"
                                                             id="new-propsect-kanban">
-                                                            <div class="card" style="min-height: 205px;">
+                                                            <div class="card" style="min-height: 214px;">
                                                                 <div class="card-header pe-4 ps-4 pt-4 pb-2">
                                                                     <a href="javascript:void(0)"
                                                                         data-bs-toggle="dropdown"><i
@@ -2426,7 +2422,7 @@
                                                                     <h4 class="text-primary m-0 fw-bold">New Prospects
                                                                     </h4>
                                                                     <h4 class="text-dark m-0 fw-bold"
-                                                                        id="new-propsect-kanban-amount">$160.7k</h4>
+                                                                        id="new-propsect-kanban-amount"></h4>
                                                                 </div>
                                                                 <div class="card-body p-3 column new">
 
@@ -2436,7 +2432,7 @@
                                                         </div>
                                                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4"
                                                             id="engaged-propsect-kanban">
-                                                            <div class="card bg-transparent" style="min-height: 205px;">
+                                                            <div class="card bg-transparent" style="min-height: 214px;">
                                                                 <div class="card-header pe-4 ps-4 pt-4 pb-2">
                                                                     <a href="javascript:void(0)"
                                                                         data-bs-toggle="dropdown"><i
@@ -2454,7 +2450,7 @@
                                                                     <h4 class="m-0 fw-bold" style="color: #1996A6;">
                                                                         Engaged</h4>
                                                                     <h4 class="text-dark m-0 fw-bold"
-                                                                        id="engaged-propsect-kanban-amount">$90.3k</h4>
+                                                                        id="engaged-propsect-kanban-amount"></h4>
                                                                 </div>
                                                                 <div class="card-body p-3 column engaged">
 
@@ -2466,7 +2462,7 @@
                                                         </div>
                                                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4"
                                                             id="nurturing-propsect-kanban">
-                                                            <div class="card" style="min-height: 205px;">
+                                                            <div class="card" style="min-height: 214px;">
                                                                 <div class="card-header pe-4 ps-4 pt-4 pb-2">
                                                                     <a href="javascript:void(0)"
                                                                         data-bs-toggle="dropdown"><i
@@ -2492,7 +2488,7 @@
                                                                     class="card-header d-flex justify-content-between pe-4 ps-4 pt-2 pb-2">
                                                                     <h4 class="text-warning m-0 fw-bold">Nurturing</h4>
                                                                     <h4 class="text-dark m-0 fw-bold"
-                                                                        id="nurturing-propsect-kanban-amount">$160.7k
+                                                                        id="nurturing-propsect-kanban-amount">
                                                                     </h4>
                                                                 </div>
                                                                 <div class="card-body p-3 column nurturing">
@@ -2748,7 +2744,7 @@
                                                                                 <input class="form-control" placeholder="Search Users by Name, Email or Date" id="search_input" type="text">
                                                                             </div> -->
                                                                             <div
-                                                                                class="main-header-center d-none d-lg-block m-0">
+                                                                                class="main-header-center position-relative d-lg-block m-0">
                                                                                 <button class="btn px-0 pt-2"><i
                                                                                         class="fe fe-search"
                                                                                         aria-hidden="true"></i></button>
@@ -2769,110 +2765,101 @@
                                                                                 data-bs-toggle="dropdown"
                                                                                 style="border: none;"><strong>CUSTOMIZED</strong><i
                                                                                     class="fe fe-chevron-down ms-2 text-dark"></i></button>
-                                                                                    <ul class="dropdown-menu"
-                                                                                    role="menu">
-                                                                                    <li><a href="javascript:void(0)"
-                                                                                            class="text-dark"><strong>Coulmns
-                                                                                                to
-                                                                                                Show</strong></a>
-                                                                                    </li>
-                                                                                    <li
-                                                                                        class="d-flex justify-content-between">
-                                                                                        <a class="text-dark"
-                                                                                            href="javascript:void(0)">PROSPECTS
-                                                                                            NAME</a>
-                                                                                        <div class="form-check m-0">
-                                                                                            <input type="checkbox"
-                                                                                                class="form-check-input mt-2"
-                                                                                                id="exampleCheck1"
-                                                                                                checked>
-                                                                                        </div>
-                                                                                    </li>
-                                                                                    <li
-                                                                                        class="d-flex justify-content-between">
-                                                                                        <a class="text-dark"
-                                                                                            href="javascript:void(0)">SOURCE
-                                                                                            CAMPAIGN</a>
-                                                                                        <div class="form-check m-0">
-                                                                                            <input type="checkbox"
-                                                                                                class="form-check-input mt-2"
-                                                                                                id="exampleCheck1"
-                                                                                                checked>
-                                                                                        </div>
-                                                                                    </li>
-                                                                                    <li
-                                                                                        class="d-flex justify-content-between">
-                                                                                        <a class="text-dark"
-                                                                                            href="javascript:void(0)">PROPERTY
-                                                                                            NAME</a>
-                                                                                        <div class="form-check m-0">
-                                                                                            <input type="checkbox"
-                                                                                                class="form-check-input mt-2"
-                                                                                                id="exampleCheck1"
-                                                                                                checked>
-                                                                                        </div>
-                                                                                    </li>
+                                                                            <ul class="dropdown-menu" role="menu">
+                                                                                <li><a href="javascript:void(0)"
+                                                                                        class="text-dark"><strong>Coulmns
+                                                                                            to
+                                                                                            Show</strong></a>
+                                                                                </li>
+                                                                                <li
+                                                                                    class="d-flex justify-content-between">
+                                                                                    <a class="text-dark"
+                                                                                        href="javascript:void(0)">PROSPECTS
+                                                                                        NAME</a>
+                                                                                    <div class="form-check m-0">
+                                                                                        <input type="checkbox"
+                                                                                            class="form-check-input mt-2"
+                                                                                            id="exampleCheck1" checked>
+                                                                                    </div>
+                                                                                </li>
+                                                                                <li
+                                                                                    class="d-flex justify-content-between">
+                                                                                    <a class="text-dark"
+                                                                                        href="javascript:void(0)">SOURCE
+                                                                                        CAMPAIGN</a>
+                                                                                    <div class="form-check m-0">
+                                                                                        <input type="checkbox"
+                                                                                            class="form-check-input mt-2"
+                                                                                            id="exampleCheck1" checked>
+                                                                                    </div>
+                                                                                </li>
+                                                                                <li
+                                                                                    class="d-flex justify-content-between">
+                                                                                    <a class="text-dark"
+                                                                                        href="javascript:void(0)">PROPERTY
+                                                                                        NAME</a>
+                                                                                    <div class="form-check m-0">
+                                                                                        <input type="checkbox"
+                                                                                            class="form-check-input mt-2"
+                                                                                            id="exampleCheck1" checked>
+                                                                                    </div>
+                                                                                </li>
 
-                                                                                    <li
-                                                                                        class="d-flex justify-content-between">
-                                                                                        <a class="text-dark"
-                                                                                            href="javascript:void(0)">TOTAL
-                                                                                            UNITS</a>
-                                                                                        <div class="form-check m-0">
-                                                                                            <input type="checkbox"
-                                                                                                class="form-check-input mt-2"
-                                                                                                id="exampleCheck1"
-                                                                                                checked>
-                                                                                        </div>
-                                                                                    </li>
-                                                                                    <li
-                                                                                        class="d-flex justify-content-between">
-                                                                                        <a class="text-dark"
-                                                                                            href="javascript:void(0)">CONTACT
-                                                                                            INFO</a>
-                                                                                        <div class="form-check m-0">
-                                                                                            <input type="checkbox"
-                                                                                                class="form-check-input mt-2"
-                                                                                                id="exampleCheck1"
-                                                                                                checked>
-                                                                                        </div>
-                                                                                    </li>
-                                                                                    <li
-                                                                                        class="d-flex justify-content-between">
-                                                                                        <a class="text-dark"
-                                                                                            href="javascript:void(0)">AMOUNT</a>
-                                                                                        <div class="form-check m-0">
-                                                                                            <input type="checkbox"
-                                                                                                class="form-check-input mt-2"
-                                                                                                id="exampleCheck1"
-                                                                                                checked>
-                                                                                        </div>
-                                                                                    </li>
-                                                                                    <li
-                                                                                        class="d-flex justify-content-between">
-                                                                                        <a class="text-dark"
-                                                                                            href="javascript:void(0)">DATE
-                                                                                            CREATED</a>
-                                                                                        <div class="form-check m-0">
-                                                                                            <input type="checkbox"
-                                                                                                class="form-check-input mt-2"
-                                                                                                id="exampleCheck1"
-                                                                                                checked>
-                                                                                        </div>
-                                                                                    </li>
-                                                                                    <li
-                                                                                        class="d-flex justify-content-between">
-                                                                                        <a class="text-dark"
-                                                                                            href="javascript:void(0)">STATUS</a>
-                                                                                        <div class="form-check m-0">
-                                                                                            <input type="checkbox"
-                                                                                                class="form-check-input mt-2"
-                                                                                                id="exampleCheck1"
-                                                                                                checked>
-                                                                                        </div>
-                                                                                    </li>
+                                                                                <li
+                                                                                    class="d-flex justify-content-between">
+                                                                                    <a class="text-dark"
+                                                                                        href="javascript:void(0)">TOTAL
+                                                                                        UNITS</a>
+                                                                                    <div class="form-check m-0">
+                                                                                        <input type="checkbox"
+                                                                                            class="form-check-input mt-2"
+                                                                                            id="exampleCheck1" checked>
+                                                                                    </div>
+                                                                                </li>
+                                                                                <li
+                                                                                    class="d-flex justify-content-between">
+                                                                                    <a class="text-dark"
+                                                                                        href="javascript:void(0)">CONTACT
+                                                                                        INFO</a>
+                                                                                    <div class="form-check m-0">
+                                                                                        <input type="checkbox"
+                                                                                            class="form-check-input mt-2"
+                                                                                            id="exampleCheck1" checked>
+                                                                                    </div>
+                                                                                </li>
+                                                                                <li
+                                                                                    class="d-flex justify-content-between">
+                                                                                    <a class="text-dark"
+                                                                                        href="javascript:void(0)">AMOUNT</a>
+                                                                                    <div class="form-check m-0">
+                                                                                        <input type="checkbox"
+                                                                                            class="form-check-input mt-2"
+                                                                                            id="exampleCheck1" checked>
+                                                                                    </div>
+                                                                                </li>
+                                                                                <li
+                                                                                    class="d-flex justify-content-between">
+                                                                                    <a class="text-dark"
+                                                                                        href="javascript:void(0)">DATE
+                                                                                        CREATED</a>
+                                                                                    <div class="form-check m-0">
+                                                                                        <input type="checkbox"
+                                                                                            class="form-check-input mt-2"
+                                                                                            id="exampleCheck1" checked>
+                                                                                    </div>
+                                                                                </li>
+                                                                                <li
+                                                                                    class="d-flex justify-content-between">
+                                                                                    <a class="text-dark"
+                                                                                        href="javascript:void(0)">STATUS</a>
+                                                                                    <div class="form-check m-0">
+                                                                                        <input type="checkbox"
+                                                                                            class="form-check-input mt-2"
+                                                                                            id="exampleCheck1" checked>
+                                                                                    </div>
+                                                                                </li>
 
-                                                                                </ul>
+                                                                            </ul>
                                                                         </div>
                                                                         <!-- <button type="button" class="btn btn-primary mx-2" id="add_property_btn" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal"><i
                                                                                 class="fe fe-plus me-2"></i><strong>ADD NEW
@@ -2908,7 +2895,7 @@
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody id="table-body-disqualified">
-                                                                                
+
                                                                             </tbody>
                                                                         </table>
                                                                     </div>
@@ -3098,110 +3085,101 @@
                                                                                 data-bs-toggle="dropdown"
                                                                                 style="border: none;"><strong>CUSTOMIZED</strong><i
                                                                                     class="fe fe-chevron-down ms-2 text-dark"></i></button>
-                                                                                    <ul class="dropdown-menu"
-                                                                                    role="menu">
-                                                                                    <li><a href="javascript:void(0)"
-                                                                                            class="text-dark"><strong>Coulmns
-                                                                                                to
-                                                                                                Show</strong></a>
-                                                                                    </li>
-                                                                                    <li
-                                                                                        class="d-flex justify-content-between">
-                                                                                        <a class="text-dark"
-                                                                                            href="javascript:void(0)">PROSPECTS
-                                                                                            NAME</a>
-                                                                                        <div class="form-check m-0">
-                                                                                            <input type="checkbox"
-                                                                                                class="form-check-input mt-2"
-                                                                                                id="exampleCheck1"
-                                                                                                checked>
-                                                                                        </div>
-                                                                                    </li>
-                                                                                    <li
-                                                                                        class="d-flex justify-content-between">
-                                                                                        <a class="text-dark"
-                                                                                            href="javascript:void(0)">SOURCE
-                                                                                            CAMPAIGN</a>
-                                                                                        <div class="form-check m-0">
-                                                                                            <input type="checkbox"
-                                                                                                class="form-check-input mt-2"
-                                                                                                id="exampleCheck1"
-                                                                                                checked>
-                                                                                        </div>
-                                                                                    </li>
-                                                                                    <li
-                                                                                        class="d-flex justify-content-between">
-                                                                                        <a class="text-dark"
-                                                                                            href="javascript:void(0)">PROPERTY
-                                                                                            NAME</a>
-                                                                                        <div class="form-check m-0">
-                                                                                            <input type="checkbox"
-                                                                                                class="form-check-input mt-2"
-                                                                                                id="exampleCheck1"
-                                                                                                checked>
-                                                                                        </div>
-                                                                                    </li>
+                                                                            <ul class="dropdown-menu" role="menu">
+                                                                                <li><a href="javascript:void(0)"
+                                                                                        class="text-dark"><strong>Coulmns
+                                                                                            to
+                                                                                            Show</strong></a>
+                                                                                </li>
+                                                                                <li
+                                                                                    class="d-flex justify-content-between">
+                                                                                    <a class="text-dark"
+                                                                                        href="javascript:void(0)">PROSPECTS
+                                                                                        NAME</a>
+                                                                                    <div class="form-check m-0">
+                                                                                        <input type="checkbox"
+                                                                                            class="form-check-input mt-2"
+                                                                                            id="exampleCheck1" checked>
+                                                                                    </div>
+                                                                                </li>
+                                                                                <li
+                                                                                    class="d-flex justify-content-between">
+                                                                                    <a class="text-dark"
+                                                                                        href="javascript:void(0)">SOURCE
+                                                                                        CAMPAIGN</a>
+                                                                                    <div class="form-check m-0">
+                                                                                        <input type="checkbox"
+                                                                                            class="form-check-input mt-2"
+                                                                                            id="exampleCheck1" checked>
+                                                                                    </div>
+                                                                                </li>
+                                                                                <li
+                                                                                    class="d-flex justify-content-between">
+                                                                                    <a class="text-dark"
+                                                                                        href="javascript:void(0)">PROPERTY
+                                                                                        NAME</a>
+                                                                                    <div class="form-check m-0">
+                                                                                        <input type="checkbox"
+                                                                                            class="form-check-input mt-2"
+                                                                                            id="exampleCheck1" checked>
+                                                                                    </div>
+                                                                                </li>
 
-                                                                                    <li
-                                                                                        class="d-flex justify-content-between">
-                                                                                        <a class="text-dark"
-                                                                                            href="javascript:void(0)">TOTAL
-                                                                                            UNITS</a>
-                                                                                        <div class="form-check m-0">
-                                                                                            <input type="checkbox"
-                                                                                                class="form-check-input mt-2"
-                                                                                                id="exampleCheck1"
-                                                                                                checked>
-                                                                                        </div>
-                                                                                    </li>
-                                                                                    <li
-                                                                                        class="d-flex justify-content-between">
-                                                                                        <a class="text-dark"
-                                                                                            href="javascript:void(0)">CONTACT
-                                                                                            INFO</a>
-                                                                                        <div class="form-check m-0">
-                                                                                            <input type="checkbox"
-                                                                                                class="form-check-input mt-2"
-                                                                                                id="exampleCheck1"
-                                                                                                checked>
-                                                                                        </div>
-                                                                                    </li>
-                                                                                    <li
-                                                                                        class="d-flex justify-content-between">
-                                                                                        <a class="text-dark"
-                                                                                            href="javascript:void(0)">AMOUNT</a>
-                                                                                        <div class="form-check m-0">
-                                                                                            <input type="checkbox"
-                                                                                                class="form-check-input mt-2"
-                                                                                                id="exampleCheck1"
-                                                                                                checked>
-                                                                                        </div>
-                                                                                    </li>
-                                                                                    <li
-                                                                                        class="d-flex justify-content-between">
-                                                                                        <a class="text-dark"
-                                                                                            href="javascript:void(0)">DATE
-                                                                                            CREATED</a>
-                                                                                        <div class="form-check m-0">
-                                                                                            <input type="checkbox"
-                                                                                                class="form-check-input mt-2"
-                                                                                                id="exampleCheck1"
-                                                                                                checked>
-                                                                                        </div>
-                                                                                    </li>
-                                                                                    <li
-                                                                                        class="d-flex justify-content-between">
-                                                                                        <a class="text-dark"
-                                                                                            href="javascript:void(0)">STATUS</a>
-                                                                                        <div class="form-check m-0">
-                                                                                            <input type="checkbox"
-                                                                                                class="form-check-input mt-2"
-                                                                                                id="exampleCheck1"
-                                                                                                checked>
-                                                                                        </div>
-                                                                                    </li>
+                                                                                <li
+                                                                                    class="d-flex justify-content-between">
+                                                                                    <a class="text-dark"
+                                                                                        href="javascript:void(0)">TOTAL
+                                                                                        UNITS</a>
+                                                                                    <div class="form-check m-0">
+                                                                                        <input type="checkbox"
+                                                                                            class="form-check-input mt-2"
+                                                                                            id="exampleCheck1" checked>
+                                                                                    </div>
+                                                                                </li>
+                                                                                <li
+                                                                                    class="d-flex justify-content-between">
+                                                                                    <a class="text-dark"
+                                                                                        href="javascript:void(0)">CONTACT
+                                                                                        INFO</a>
+                                                                                    <div class="form-check m-0">
+                                                                                        <input type="checkbox"
+                                                                                            class="form-check-input mt-2"
+                                                                                            id="exampleCheck1" checked>
+                                                                                    </div>
+                                                                                </li>
+                                                                                <li
+                                                                                    class="d-flex justify-content-between">
+                                                                                    <a class="text-dark"
+                                                                                        href="javascript:void(0)">AMOUNT</a>
+                                                                                    <div class="form-check m-0">
+                                                                                        <input type="checkbox"
+                                                                                            class="form-check-input mt-2"
+                                                                                            id="exampleCheck1" checked>
+                                                                                    </div>
+                                                                                </li>
+                                                                                <li
+                                                                                    class="d-flex justify-content-between">
+                                                                                    <a class="text-dark"
+                                                                                        href="javascript:void(0)">DATE
+                                                                                        CREATED</a>
+                                                                                    <div class="form-check m-0">
+                                                                                        <input type="checkbox"
+                                                                                            class="form-check-input mt-2"
+                                                                                            id="exampleCheck1" checked>
+                                                                                    </div>
+                                                                                </li>
+                                                                                <li
+                                                                                    class="d-flex justify-content-between">
+                                                                                    <a class="text-dark"
+                                                                                        href="javascript:void(0)">STATUS</a>
+                                                                                    <div class="form-check m-0">
+                                                                                        <input type="checkbox"
+                                                                                            class="form-check-input mt-2"
+                                                                                            id="exampleCheck1" checked>
+                                                                                    </div>
+                                                                                </li>
 
-                                                                                </ul>
+                                                                            </ul>
                                                                         </div>
                                                                         <!-- <button type="button" class="btn btn-primary mx-2" id="add_property_btn" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal"><i
                                                                                 class="fe fe-plus me-2"></i><strong>ADD NEW
@@ -3237,7 +3215,7 @@
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody id="table-body-qualified">
-                                                                                
+
                                                                             </tbody>
                                                                         </table>
                                                                     </div>
@@ -3250,7 +3228,8 @@
 
                                                     <div class="row">
                                                         <!-- Qualified & Disqualified start  -->
-                                                        <div class="col-lg-6 col-md-12 mb-5" id="banking-stats">
+                                                        <div class="col-lg-6 col-md-12 mb-5"
+                                                            id="qualified & disqualified">
                                                             <div class="card h-100">
                                                                 <div class="card-header"
                                                                     style="display: flex; justify-content: space-between;">
@@ -3261,12 +3240,13 @@
                                                                     </div>
                                                                     <div style="display: flex; align-items: end;">
 
-                                                                        <input type="date"
-                                                                            class="form-control form-control-date-width"
-                                                                            placeholder="Jan 6, 2022 – Jan 13, 2022">&emsp;
-                                                                        <input type="date"
-                                                                            class="form-control form-control-date-width"
-                                                                            placeholder="Jan 6, 2022 – Jan 13, 2022">
+                                                                        <select class="form-select form" id="prospect-year">
+                                                                            <option selected>2023</option>
+                                                                            <option value="2022">2022</option>
+                                                                            <option value="2021">2021</option>
+                                                                            <option value="2020">2020</option>
+                                                                            <option value="2019">2019</option>
+                                                                        </select>
                                                                     </div>
                                                                     <i class="fe fe-more-vertical"
                                                                         data-bs-toggle="dropdown"></i>
@@ -3316,7 +3296,7 @@
                                                         <!-- Average time from New Lead to Close end  -->
 
                                                         <!-- Tenants Status start  -->
-                                                        <div class="col-lg-6 col-md-12 mb-5" id="tenants-status">
+                                                        <div class="col-lg-6 col-md-12 mb-5" id="prospect-status">
                                                             <div class="card h-100">
                                                                 <div class="card-header"
                                                                     style="display: flex; justify-content: space-between;">
@@ -3324,9 +3304,10 @@
                                                                         <label for=""><b>Status </b></label>
                                                                         &emsp;
                                                                         <input type="date"
+                                                                            id="prospect-status-start-date"
                                                                             class="form-control form-control-date-width"
                                                                             placeholder="Jan 6, 2022 – Jan 13, 2022">&emsp;
-                                                                        <input type="date"
+                                                                        <input type="date" id="prospect-status-end-date"
                                                                             class="form-control form-control-date-width"
                                                                             placeholder="Jan 6, 2022 – Jan 13, 2022">
                                                                     </div>
@@ -3353,7 +3334,8 @@
                                                                                 style="background-color: #fff; border-radius: 12px; display: flex; justify-content: center; align-items: center; height: 50px; width: 60px;">
                                                                                 <h4
                                                                                     style="margin-bottom: 0em !important;">
-                                                                                    <b style="color: #000">20</b>
+                                                                                    <b style="color: #000"
+                                                                                        id="total-prospects"></b>
                                                                                 </h4>
                                                                             </div>
                                                                         </div>
@@ -3371,7 +3353,8 @@
                                                                                 style="background-color: #fff; border-radius: 12px; display: flex; justify-content: center; align-items: center; height: 50px; width: 60px;">
                                                                                 <h4
                                                                                     style="margin-bottom: 0em !important;">
-                                                                                    <b style="color: #000">18</b>
+                                                                                    <b style="color: #000"
+                                                                                        id="engaged-prospect"></b>
                                                                                 </h4>
                                                                             </div>
                                                                         </div>
@@ -3388,7 +3371,8 @@
                                                                                 style="background-color: #fff; border-radius: 12px; display: flex; justify-content: center; align-items: center; height: 50px; width: 60px;">
                                                                                 <h4
                                                                                     style="margin-bottom: 0em !important;">
-                                                                                    <b style="color: #000">25</b>
+                                                                                    <b style="color: #000"
+                                                                                        id="nurture-prospect"></b>
                                                                                 </h4>
                                                                             </div>
                                                                         </div>
@@ -3468,6 +3452,7 @@
 
                 </div>
                 <!-- CONTAINER END -->
+
             </div>
         </div>
         <!--app-content close-->
@@ -4036,8 +4021,8 @@
     </footer>
     <!-- FOOTER END -->
 
-    </div>
 
+    </div>
 
 
     <!-- BACK-TO-TOP -->
@@ -4096,7 +4081,7 @@
     <script src="../assets/plugins/flot/jquery.flot.fillbetween.js"></script>
     <script src="../assets/plugins/flot/chart.flot.sampledata.js"></script>
     <script src="../assets/plugins/flot/dashboard.sampledata.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.8/sjcl.min.js"></script>
     <!-- INTERNAL Vector js -->
     <script src="../assets/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
     <script src="../assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
@@ -4142,7 +4127,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
     <script>
+        $('#email').change(function () {
+            var email = $(this).val();
+            var emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z.-]+\.[A-Za-z]{2,}$/;
+
+            if (!email.match(emailRegex)) {
+
+                console.log("invalid");
+                $(this).addClass("border-danger")
+                $(this).removeClass("border-green")
+            } else {
+                $(this).addClass("border-green")
+                $(this).removeClass("border-danger")
+            }
+        });
+    </script>
+
+    <script>
+        var prospectID; var prospectusStatus;
         $(document).ready(function () {
+
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/getPropertyUnitsTenant',
                 type: 'GET',
@@ -4222,6 +4226,7 @@
             $("#list-view-option").click(function () {
                 $("#kanban-view").hide();
                 getData()
+
                 $("#kanban-view-picker").hide();
 
                 $("#list-view").show();
@@ -4236,76 +4241,43 @@
                     isColumnVisible ? column.show() : column.hide();
                 });
             });
-            $('#tab30 input[type="checkbox"]').change(function() {
-            var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
-            var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
-            console.log(columnIndex, isColumnVisible)
+            $('#tab30 input[type="checkbox"]').change(function () {
+                var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
+                var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
+                console.log(columnIndex, isColumnVisible)
                 // Toggle the visibility of the corresponding column
-            $('#tab30').find('tr').each(function() {
-                var column = $(this).find('th:nth-child(' + (columnIndex+1) + '), td:nth-child(' + (columnIndex+1) + ')');
-                isColumnVisible ? column.show() : column.hide();
+                $('#tab30').find('tr').each(function () {
+                    var column = $(this).find('th:nth-child(' + (columnIndex + 1) + '), td:nth-child(' + (columnIndex + 1) + ')');
+                    isColumnVisible ? column.show() : column.hide();
+                });
             });
-        });
-        $('#tab32 input[type="checkbox"]').change(function() {
-            var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
-            var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
-            console.log(columnIndex, isColumnVisible)
+            $('#tab32 input[type="checkbox"]').change(function () {
+                var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
+                var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
+                console.log(columnIndex, isColumnVisible)
                 // Toggle the visibility of the corresponding column
-            $('#tab32').find('tr').each(function() {
-                var column = $(this).find('th:nth-child(' + (columnIndex+2) + '), td:nth-child(' + (columnIndex+2) + ')');
-                isColumnVisible ? column.show() : column.hide();
+                $('#tab32').find('tr').each(function () {
+                    var column = $(this).find('th:nth-child(' + (columnIndex + 2) + '), td:nth-child(' + (columnIndex + 2) + ')');
+                    isColumnVisible ? column.show() : column.hide();
+                });
             });
-        });
             function updateButtonStatus() {
-                var accordion1Fields = $('#accordion-item1 input[required], #accordion-item1 select[required]');
-                var accordion2Fields = $('#accordion-item2 input[required], #accordion-item2 select[required]');
-                var accordion3Fields = $('#accordion-item3 input[required]');
+                var accordion1Fields = $('#editModal #accordion-item1 input[required],#editModal  #accordion-item1 select[required]');
+                var accordion2Fields = $('#editModal #accordion-item2 input[required],#editModal  #accordion-item2 select[required]');
+
                 var isAccordion1FieldsEmpty = accordion1Fields.filter(function () {
                     return $(this).val() !== '' || $(this).val() === 'Choose...';
                 }).length === 0;
                 var isAccordion2FieldsEmpty = accordion2Fields.filter(function () {
                     return $(this).val() !== '' || $(this).val() === 'Choose...';
                 }).length === 0;
-                var isAccordion3FieldsEmpty = accordion3Fields.filter(function () {
-                    return $(this).val() !== '';
-                }).length === 0;
-
-                // Handle property selection change
-
+                if (isAccordion1FieldsEmpty || isAccordion2FieldsEmpty) {
+                    $('#editModal #update').addClass('disabled');
+                } else {
+                    $('#editModal #update').removeClass('disabled');
+                }
             }
 
-            // function updateButtonStatus() {
-            //     var accordion1Fields = $('#accordion-item1 input[required], #accordion-item1 select[required]');
-            //     var accordion2Fields = $('#accordion-item2 input[required], #accordion-item2 select[required]');
-            //     var accordion3Fields = $('#accordion-item3 input[required]');
-            //     var isAccordion1FieldsEmpty = accordion1Fields.filter(function () {
-            //         return $(this).val() !== '' || $(this).val() === 'Choose...';
-            //     }).length === 0;
-            //     var isAccordion2FieldsEmpty = accordion2Fields.filter(function () {
-            //         return $(this).val() !== '' || $(this).val() === 'Choose...';
-            //     }).length === 0;
-            //     var isAccordion3FieldsEmpty = accordion3Fields.filter(function () {
-            //         return $(this).val() !== '';
-            //     }).length === 0;
-
-            //     // Enable or disable the buttons based on the fields' status
-            //     if (!isAccordion1FieldsEmpty || !isAccordion2FieldsEmpty || !isAccordion3FieldsEmpty) {
-            //         $('#draft').removeAttr('disabled');
-            //     } else {
-            //         $('#draft').attr('disabled', 'disabled');
-            //     }
-
-            //     // var allFieldsFilled = areAllFieldsFilled();
-
-            //     // Enable or disable the buttons based on the fields' status
-            //     if (allFieldsFilled) {
-            //         $('#next').removeClass("disabled").removeAttr("disabled");
-            //     } else {
-            //         $('#next').addClass("disabled").attr("disabled", "disabled");
-            //     }
-            // }
-
-            // Call the updateButtonStatus function when any field in the accordions is changed
             $('#accordion-item1 input[type="text"],#accordion-item1 input[type="tel"], #accordion-item1 select, #accordion-item2 input, #accordion-item2 select, #accordion-item3 input, #accordion-item3 select').on('input change', function () {
                 var $field = $(this);
                 var $errorMessage = $field.next('.text-danger');
@@ -4330,6 +4302,72 @@
                 }
                 // updateButtonStatus();
             });
+
+            $('#editModal #accordion-item1 input[type="text"],#editModal #accordion-item1 input[type="tel"],#editModal #accordion-item1 select,#editModal #accordion-item2 input,#editModal #accordion-item2 select,#editModal #accordion-item3 input, #accordion-item3 select').on('input change', function () {
+                var $field = $(this);
+                var $errorMessage = $field.next('.text-danger');
+                if ($field.attr("id") === "zip") {
+                    if ($field.val().length !== 5) {
+                        $field.addClass('border-danger');
+                        $field.removeClass('border-green');
+                        $errorMessage.removeClass('d-none');
+                    } else {
+                        $field.removeClass('border-danger');
+                        $field.addClass('border-green');
+                        $errorMessage.addClass('d-none');
+                    }
+                } else if ($field.val() === '' || $field.val() === 'Choose...') {
+                    $field.addClass('border-danger');
+                    $field.removeClass('border-green');
+                    $errorMessage.removeClass('d-none');
+                } else {
+                    $field.removeClass('border-danger');
+                    $field.addClass('border-green');
+                    $errorMessage.addClass('d-none');
+                }
+                updateButtonStatus();
+            });
+            $("#update").click(function () {
+                const data = {
+                    firstName: $("#firstName_update").val(),
+                    middleName: $("#middleName_update").val(),
+                    lastName: $("#lastName_update").val(),
+                    phoneNumber: $("#phone2").val(),
+                    email: $("#email_update").val(),
+                    rentAmount: $("#potentialRentAmount_update").val(),
+                    propertyInfo: $("#propertyInfo_update").val(),
+                    unitInfo: $("#unitInfo_update").val(),
+                    prospectDetails: $("#propertyDetail_update").val(),
+                    sourceCampaign: $("#sourceCampaign_update").val(),
+                    prospectusStatus,
+                    prospectusid: prospectID
+                }
+                $.ajax({
+                    url: "https://backend.app.spaderent.com/api/spade/updateProspectus",
+                    type: "PUT",
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        console.log(response)
+                        $("#editModal").modal("hide");
+                        $("#myModal_success").modal("show");
+                        setTimeout(function () {
+                            $('#myModal_success').modal('hide');
+                            getData()
+                        }, 2000);
+                    }, error: function (xhr, status, error) {
+                        $("#editModal").modal("hide");
+                        $("#myModal_warning_connection").modal("show");
+                        setTimeout(function () {
+                            $('#myModal_warning_connection').modal('hide');
+                            getData()
+                        }, 2000);
+                    }, data: JSON.stringify(data)
+                })
+            })
             $('#typehead').on('keyup', function () {
                 var searchValue = $(this).val().toLowerCase();
                 $('#table-body tr').filter(function () {
@@ -4338,52 +4376,60 @@
             });
             var propsectData = [];
             function formatRentAmount(amount) {
-    if (amount >= 1000000) {
-        return "$ " + (amount / 1000000).toFixed(1) + "M";
-    } else if (amount >= 1000) {
-        return "$ " + (amount / 1000).toFixed(1) + "k";
-    } else {
-        return "$ " + amount;
-    }
-}
-            function populateCards(elem,prospectus,property){
+                console.log(amount)
+                if (amount >= 1000000) {
+                    return "$ " + (amount / 1000000).toFixed(1) + "M";
+                } else if (amount >= 1000) {
+                    return "$ " + (amount / 1000).toFixed(1) + "k";
+                } else {
+                    return "$ " + amount;
+                }
+            }
+            function populateCards(elem, prospectus, property) {
+                var password = 'your-secret-password';
+var encryptedProspectId = sjcl.encrypt(password, prospectus.id.toString());
+
+// Include the encrypted value in the URL
+var encodedProspectId = encodeURIComponent(encryptedProspectId);
                 elem.append(
 
-`<div class="d-flex p-2 mb-2 portlet" style="border-radius: 7px;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;" id="${"card" + prospectus.id}">` +
-'<div class="portlet-header">' +
-'<div class="media mt-0">' +
-'<div class="me-2">' +
-'<img class="" style="width: 35px;height: 48px;" src="../assets/images/Group 10242.svg">' +
-'</div>' +
-'<div class="media-body" style="line-height: 10px;">' +
-'<h6 class="mb-0 mt-0 text-primary fw-bold">' + (prospectus.firstName + ' ' + prospectus.lastName) + '</h6>' +
-'<strong class="text-dark fw-bold fs-10">' + (property.address + " <br/>" + property.city + ", " + property.state) + '<br>' + prospectus.phoneNumber + '</strong>' +
-'</div>' +
-'</div>' +
-'<div class="d-flex" style="flex-direction: row;">' +
-'<div class="d-flex" style="flex-direction: column;">' +
-'<div class="m-0 text-primary fw-bold fs-18">' + (formatRentAmount(prospectus.rentAmount)) + '</div>' +
-'<a href="./view-prospects.html" class="fs-12 text-dark">View More</a>' +
-'</div>' +
-'<div class="m-0 text-primary fw-bold fs-18 ms-2">' +
-'<div class="dropdown show">' +
-'<a class="new option-dots p-0" href="JavaScript:void(0);" data-bs-toggle="dropdown">' +
-'<span class=""><i class="fe fe-more-vertical"></i></span>' +
-'</a>' +
-'<div class="dropdown-menu dropdown-menu-end">' +
-'<a class="dropdown-item text-dark" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#editModal">Edit Post</a>' +
-'<a class="dropdown-item text-dark" href="javascript:void(0)">Delete Post</a>' +
-'<a class="dropdown-item text-dark" href="javascript:void(0)">Personal Settings</a>' +
-'</div>' +
-'</div>' +
-'</div>' +
-'</div>'
-)
+                    `<div class="d-flex p-2 mb-2 portlet" style="border-radius: 7px;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;" id="${"card" + prospectus.id}">` +
+                    '<div class="portlet-header">' +
+                    '<div class="media mt-0">' +
+                    '<div class="me-2">' +
+                    '<img class="" style="width: 30px;height: 48px;" src="../assets/images/Group 10242.svg">' +
+                    '</div>' +
+                    '<div class="media-body" style="line-height: 10px;">' +
+                    '<h6 class="mb-0 mt-0 text-primary fw-bold">' + (prospectus.firstName + ' ' + prospectus.middleName + " " + prospectus.lastName) + '</h6>' +
+                    '<strong class="text-dark fw-bold fs-10">' + (property.address + " <br/>" + property.city + ", " + property.state) + '<br>' + prospectus.phoneNumber + '</strong>' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="d-flex" style="flex-direction: row;">' +
+                    '<div class="d-flex" style="flex-direction: column;">' +
+                    '<div class="m-0 text-primary fw-bold fs-18 rent-amount">' + (formatRentAmount(prospectus.rentAmount)) + '</div>' +
+                    `<a href="./view-prospects.html?prospect=${encodedProspectId}" class="fs-12 text-dark">View More</a>` +
+                    '</div>' +
+                    '<div class="m-0 text-primary fw-bold fs-18 ms-2">' +
+                    '<div class="dropdown show">' +
+                    '<a class="new option-dots p-0" href="JavaScript:void(0);" data-bs-toggle="dropdown">' +
+                    '<span class=""><i class="fe fe-more-vertical"></i></span>' +
+                    '</a>' +
+                    '<div class="dropdown-menu dropdown-menu-end">' +
+                    `<a class="dropdown-item text-dark edit-option" id="${prospectus?.id}">Edit</a>` +
+                    '<a class="dropdown-item text-danger" href="javascript:void(0)">Delete</a>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>'
+                )
 
             }
-
+            $("#tab300,#tab322").click(function () {
+                getData()
+            });
             function getData() {
-                
+                var password = 'your-secret-password';
+
                 $("#engaged-propsect-kanban .card .card-body,#nurturing-propsect-kanban .card .card-body,#new-propsect-kanban .card .card-body").empty();
                 $('#table-body').empty()
                 $("#table-body-disqualified").empty()
@@ -4399,29 +4445,33 @@
                     success: function (response) {
                         console.log(response.data);
                         propsectData = response.data;
+
+                        let totalRentDefault = 0;
+
+
                         response?.data?.forEach(function (item, index) {
                             var row = $('<tr>');
                             var prospectus = item?.prospectus;
                             var property = item?.property;
 
                             row.append($('<td>').html('<label class="custom-control custom-checkbox-md"><input type="checkbox" class="custom-control-input" name="example-checkbox' + index + '" value="option' + index + '" checked=""><span class="custom-control-label"></span></label>'));
-                            row.append($('<td>').text(prospectus.firstName + ' ' + prospectus.lastName));
+                            row.append($('<td>').text(prospectus.firstName + ' ' + prospectus.middleName + " " + prospectus.lastName));
                             row.append($('<td>').html('<span class="fw-bold">' + prospectus.sourceCampaign + '</span><br><small>' + "https:spaderent.com" + '</small>'));
                             row.append($('<td>').html('<span class="fw-bold">' + property.propertyName + '</span><br><small>' + (property.address + ", " + property.city + ", " + property.state) + '</small>'));
                             row.append($('<td>').html('<span class="fw-bold">' + property.totalunits + '</span><br><small class="text-primary"><i class="fe fe-circle me-1 text-primary"></i>' + property.totalVacant + ' (Vacant)</small><br><small class="text-danger"><i class="fe fe-circle me-1 text-danger"></i>' + property.totalOccupied + ' (Occupied)</small>'));
                             row.append($('<td>').html('<span class="fw-bold">' + prospectus.email + '</span><br><small>(' + prospectus.phoneNumber + ')</small>'));
                             row.append($('<td>').html('<span class="fw-bold">' + formatRentAmount(prospectus.rentAmount) + '</span>'));
                             row.append($('<td>').html('<span class="fw-bold">' + prospectus.moveDate + '</span>'));
-                                if(prospectus.prospectusStatus == "Qualified"){
-                                    var dropdownToggle = $('<span class="fw-bold text-success" data-bs-toggle="dropdown" style="cursor: pointer;">' + prospectus.prospectusStatus + '<i class="fi fi-rs-angle-small-down text-success"></i></span>');
+                            if (prospectus.prospectusStatus == "Qualified") {
+                                var dropdownToggle = $('<span class="fw-bold text-success" data-bs-toggle="dropdown" style="cursor: pointer;">' + prospectus.prospectusStatus + '<i class="fi fi-rs-angle-small-down text-success"></i></span>');
 
-                                    }else if(prospectus.prospectusStatus == "Disqualified"){
-                                        var dropdownToggle = $('<span class="fw-bold text-danger" data-bs-toggle="dropdown" style="cursor: pointer;">' + prospectus.prospectusStatus + '<i class="fi fi-rs-angle-small-down text-danger"></i></span>');
-}
-                                            else{
-                                                var dropdownToggle = $('<span class="fw-bold text-dark" data-bs-toggle="dropdown" style="cursor: pointer;">' + prospectus.prospectusStatus + '<i class="fi fi-rs-angle-small-down text-dark"></i></span>');
+                            } else if (prospectus.prospectusStatus == "Disqualified") {
+                                var dropdownToggle = $('<span class="fw-bold text-danger" data-bs-toggle="dropdown" style="cursor: pointer;">' + prospectus.prospectusStatus + '<i class="fi fi-rs-angle-small-down text-danger"></i></span>');
+                            }
+                            else {
+                                var dropdownToggle = $('<span class="fw-bold text-dark" data-bs-toggle="dropdown" style="cursor: pointer;">' + prospectus.prospectusStatus + '<i class="fi fi-rs-angle-small-down text-dark"></i></span>');
 
-                                            }
+                            }
                             var dropdownMenu = $('<ul class="dropdown-menu dropdown-menu-top">');
                             dropdownMenu.append('<li><a class="dropdown-item text-dark" href="javascript:void(0)" data-status="Active"><i class="fi fi-rs-user text-dark me-2"></i>Active</a></li>');
                             dropdownMenu.append('<li><a class="dropdown-item text-dark" href="javascript:void(0)" data-status="Engaged"><i class="fi fi-rs-minus-circle text-dark me-2"></i>Engaged</a></li>');
@@ -4446,38 +4496,53 @@
                                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                     },
                                     success: function (response) {
-                                        // getData()
+                                        getData()
                                     },
                                     error: function (xhr, status, error) {
                                         console.error('Error updating status:', error);
                                     }
                                 });
                             });
+                            var encryptedProspectId = sjcl.encrypt(password, prospectus.id.toString());
 
+// Include the encrypted value in the URL
+var encodedProspectId = encodeURIComponent(encryptedProspectId);
                             row.append($('<td>').html(dropdownToggle).append(dropdownMenu));
                             // Assuming this is where you create the "Edit" dropdown option in your table
-                            row.append($('<td>').html(`<i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i><ul class="dropdown-menu dropdown-menu-top"><li><a class="dropdown-item text-dark" href="javascript:void(0)">View</a></li><li><a class="dropdown-item text-dark edit-option" id="${prospectus?.id}">Edit</a></li><li><a class="dropdown-item text-dark" href="javascript:void(0)">Delete</a></li></ul>`));
-$('#table-body').append(row);
-                                
-                                if(prospectus.prospectusStatus == "Qualified"){
-    console.log($("#table-body-qualified"))
-    $("#table-body-qualified").append(row);
-}
-else if(prospectus.prospectusStatus == "Disqualified"){
-    console.log($("#table-body-disqualified"))
-    $("#table-body-disqualified").append(row);
-}
+                            row.append($('<td>').html(`<i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i><ul class="dropdown-menu dropdown-menu-top"><li><a class="dropdown-item text-dark" href="./view-prospects.html?prospect=${encodedProspectId}">View</a></li><li><a class="dropdown-item text-dark edit-option" id="${prospectus?.id}">Edit</a></li><li><a class="dropdown-item text-dark" href="javascript:void(0)">Delete</a></li></ul>`));
+
+                            var tableSelector = '';
+                            var rentAmount = parseFloat(prospectus.rentAmount);
+                            if (prospectus.prospectusStatus == "Qualified") {
+                                tableSelector = "#table-body-qualified, ";
+
+                            } else if (prospectus.prospectusStatus == "Disqualified") {
+                                tableSelector = "#table-body-disqualified, ";
+
+                            }
+                            $(tableSelector + "#table-body").append(row);
+                            totalRentDefault += rentAmount;
 
                             let elem;
 
                             if (prospectus.prospectusStatus == "Engaged") {
-                                populateCards($('#engaged-propsect-kanban .card .card-body'),prospectus,property);
+                                populateCards($('#engaged-propsect-kanban .card .card-body'), prospectus, property);
+
                             } else if (prospectus.prospectusStatus == "Nurturing") {
-                                populateCards($('#nurturing-propsect-kanban .card .card-body'),prospectus,property);
-                            } else if(prospectus.prospectusStatus !== "Qualified" && prospectus.prospectusStatus !== "Disqualified") {
-                                populateCards($('#new-propsect-kanban .card .card-body'),prospectus,property);
+                                populateCards($('#nurturing-propsect-kanban .card .card-body'), prospectus, property);
+
+                            } else if (prospectus.prospectusStatus !== "Qualified" && prospectus.prospectusStatus !== "Disqualified") {
+                                populateCards($('#new-propsect-kanban .card .card-body'), prospectus, property);
+
                             }
+                            countValues()
                         });
+
+
+                        $('#total-rent').text(formatRentAmount(totalRentDefault.toFixed(2)));
+
+
+
                     },
                     error: function (xhr, status, error) {
                         // Handle error
@@ -4486,6 +4551,206 @@ else if(prospectus.prospectusStatus == "Disqualified"){
 
             }
             getData()
+            function formatDate(date) {
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+                return `${year}-${month}-${day}`;
+            }
+            const currentDate = new Date();
+            const oneMonthAgo = new Date(currentDate);
+            oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+
+            var startDate = formatDate(oneMonthAgo); // Format the date if needed
+            var endDate = formatDate(currentDate);
+            var year=new Date().getFullYear();
+            console.log(year)
+            $("#prospect-status-start-date").val(startDate)
+            $("#prospect-status-end-date").val(endDate)
+            $("#prospect-qualified-start-date").val(startDate)
+            $("#prospect-qualified-end-date").val(endDate)
+            $("#startDate_task").val(startDate)
+            $("#endDate_task").val(endDate)
+            $("#startDate_property").val(startDate)
+            $("#endDate_property").val(endDate)
+            $("#startDate_account").val(startDate)
+            $("#endDate_account").val(endDate)
+            $("#startDate_amount").val(startDate)
+            $("#endDate_amount").val(endDate)
+            function getGraphData() {
+                $.ajax({
+                    url: `https://backend.app.spaderent.com/api/spade/prospectusInsightEN/${startDate}/${endDate}`,
+                    headers: {
+                        authorization: "Bearer " + localStorage.getItem("authtoken")
+                    },
+                    contentType: "application/json",
+                    type: "GET",
+                    success: function (response) {
+                        $("#total-prospects").text(response.data.totalProspectus)
+                        $("#engaged-prospect").text(response.data.Engaged ? response.data.Engaged : 0)
+                        $("#nurture-prospect").text(response.data.Nurturing ? response.data.Nurturing : 0)
+                    }, error: function (xhr, status, error) {
+
+                    }
+                })
+            
+                $.ajax({
+                    url: `https://backend.app.spaderent.com/api/spade/prospectusInsightQD/${year}`,
+                    headers: {
+                        authorization: "Bearer " + localStorage.getItem("authtoken")
+                    },
+                    contentType: "application/json",
+                    type: "GET",
+                    success: function (response) {
+                        
+                        const qualified = [];
+const disqualified = [];
+
+response?.data?.forEach(entry => {
+    const month = entry.Month;
+    const disqualifiedValue = parseInt(entry.Disqualified);
+    const qualifiedValue = parseInt(entry.Qualified);
+        disqualified.push(disqualifiedValue);
+        qualified.push(qualifiedValue);
+});
+createQDChart(qualified, disqualified)
+                   
+                    }, error: function (xhr, status, error) {
+
+                    }
+                })
+            
+            }
+            
+            $("#tab333").on("click", function () {
+                getGraphData()
+            })
+            $("#prospect-year").on("change",function(){
+                
+                $.ajax({
+                    url: `https://backend.app.spaderent.com/api/spade/prospectusInsightQD/${$(this).val()}`,
+                    headers: {
+                        authorization: "Bearer " + localStorage.getItem("authtoken")
+                    },
+                    contentType: "application/json",
+                    type: "GET",
+                    success: function (response) {
+                        
+                        const qualified = [];
+const disqualified = [];
+
+response?.data?.forEach(entry => {
+    const month = entry.Month;
+    const disqualifiedValue = parseInt(entry.Disqualified);
+    const qualifiedValue = parseInt(entry.Qualified);
+        disqualified.push(disqualifiedValue);
+        qualified.push(qualifiedValue);
+});
+updateQDChart(qualified, disqualified)
+                   
+                    }, error: function (xhr, status, error) {
+
+                    }
+                })
+            
+
+            })
+            
+            $("#prospect-status-start-date").on("change", function () {
+
+                $.ajax({
+                    url: `https://backend.app.spaderent.com/api/spade/prospectusInsightEN/${$(this).val()}/${endDate}`,
+                    headers: {
+                        authorization: "Bearer " + localStorage.getItem("authtoken")
+                    },
+                    contentType: "application/json",
+                    type: "GET",
+                    success: function (response) {
+                        $("#total-prospects").text(response.data.totalProspectus)
+                        $("#engaged-prospect").text(response.data.Engaged ? response.data.Engaged : 0)
+                        $("#nurture-prospect").text(response.data.Nurturing ? response.data.Nurturing : 0)
+                    }, error: function (xhr, status, error) {
+
+                    }
+                })
+            })
+            $("#prospect-status-end-date").on("change", function () {
+
+                $.ajax({
+                    url: `https://backend.app.spaderent.com/api/spade/prospectusInsightEN/${startDate}/${$(this).val()}`,
+                    headers: {
+                        authorization: "Bearer " + localStorage.getItem("authtoken")
+                    },
+                    contentType: "application/json",
+                    type: "GET",
+                    success: function (response) {
+                        $("#total-prospects").text(response.data.totalProspectus)
+                        $("#engaged-prospect").text(response.data.Engaged ? response.data.Engaged : 0)
+                        $("#nurture-prospect").text(response.data.Nurturing ? response.data.Nurturing : 0)
+                    }, error: function (xhr, status, error) {
+
+                    }
+                })
+            })
+
+            function countValues() {
+                let totalNurtureAmount = 0;
+                let totalEngageAmount = 0;
+
+                let totalActiveAmount = 0;
+                $('#nurturing-propsect-kanban .card .card-body .rent-amount').each(function () {
+                    var value = parseFloat($(this).text().split("$")[1].trim(" ").includes("k") ? $(this).text().split("$")[1].trim(" ").split("k")[0] * 1000 : $(this).text().split("$")[1].trim(" ").includes("M") ? $(this).text().split("$")[1].trim(" ").split("M")[0] * 1000000 : $(this).text().split("$")[1].trim(" "));
+                    console.log(value)
+                    totalNurtureAmount += value;
+                })
+                $('#engaged-propsect-kanban .card .card-body .rent-amount').each(function () {
+                    var value = parseFloat($(this).text().split("$")[1].trim(" ").includes("k") ? $(this).text().split("$")[1].trim(" ").split("k")[0] * 1000 : $(this).text().split("$")[1].trim(" ").includes("M") ? $(this).text().split("$")[1].trim(" ").split("M")[0] * 1000000 : $(this).text().split("$")[1].trim(" "));
+
+                    totalEngageAmount += value;
+                })
+                $('#new-propsect-kanban .card .card-body .rent-amount').each(function () {
+                    var value = parseFloat($(this).text().split("$")[1].trim(" ").includes("k") ? $(this).text().split("$")[1].trim(" ").split("k")[0] * 1000 : $(this).text().split("$")[1].trim(" ").includes("M") ? $(this).text().split("$")[1].trim(" ").split("M")[0] * 1000000 : $(this).text().split("$")[1].trim(" "));
+
+                    totalActiveAmount += value;
+                })
+                $('#nurturing-propsect-kanban-amount').text(formatRentAmount(totalNurtureAmount));
+                $('#engaged-propsect-kanban-amount').text(formatRentAmount(totalEngageAmount));
+                $('#new-propsect-kanban-amount').text(formatRentAmount(totalActiveAmount));
+
+            }
+            function resetAccordion() {
+                $('#firstName,#middleName ,#lastName, #phone,#email ,#propertyInfo, #unitInfo, #propertyDetail,#status ,#sourceCampaign').each(function () {
+                    if ($(this).is('select')) {
+                        // If it's a select box, select the first option
+                        $(this).prop('selectedIndex', 0);
+                    } else if ($(this).is('input')) {
+                        // If it's an input field, empty the value
+                        $(this).val('');
+                    }
+                    $(this).removeClass('border-green');
+                    $(this).removeClass('border-danger');
+                    $(this).next('.text-danger').addClass('d-none');
+                });
+                $('#firstName_update,#middleName_update ,#lastName_update, #phone2,#email_update ,#propertyInfo_update, #unitInfo_update, #propertyDetail_update,#status_update ,#sourceCampaign_update').each(function () {
+                    if ($(this).is('select')) {
+                        // If it's a select box, select the first option
+                        $(this).prop('selectedIndex', 0);
+                    } else if ($(this).is('input')) {
+                        // If it's an input field, empty the value
+                        $(this).val('');
+                    }
+                    $(this).removeClass('border-green');
+                    $(this).removeClass('border-danger');
+                    $(this).next('.text-danger').addClass('d-none');
+                });
+
+                // Additional code for specific fields like 'moveInDate' and 'potentialRentAmount'
+                $('#moveInDate_update, #potentialRentAmount_update').val('');
+                $('#moveInDate_update, #potentialRentAmount_update').removeClass('border-green');
+                $('#moveInDate_update, #potentialRentAmount_update').removeClass('border-danger');
+                $('#moveInDate_update, #potentialRentAmount_update').next('.text-danger').addClass('d-none');
+            }
+
             $(function () {
                 $(".column").sortable({
                     connectWith: ".column",
@@ -4515,6 +4780,7 @@ else if(prospectus.prospectusStatus == "Disqualified"){
                                 success: function (response) {
                                     console.log($("#" + parentId))
                                     $("#card" + parentId).remove();
+                                    // getData()
                                 },
                                 error: function (xhr, status, error) {
                                     console.error('Error updating status:', error);
@@ -4536,6 +4802,8 @@ else if(prospectus.prospectusStatus == "Disqualified"){
                                 success: function (response) {
                                     console.log($("#" + parentId))
                                     $("#card" + parentId).remove();
+                                    // getData()
+
                                 },
                                 error: function (xhr, status, error) {
                                     console.error('Error updating status:', error);
@@ -4544,67 +4812,70 @@ else if(prospectus.prospectusStatus == "Disqualified"){
                         }
                         else if ($(this).hasClass("new")) {
 
-$.ajax({
-    url: 'https://backend.app.spaderent.com/api/spade/updateProspectusStatus',
-    type: 'PUT',
-    data: JSON.stringify({
-        prospectusid: parentId,
-        prospectusStatus: "Active"
-    }),
-    contentType: 'application/json',
-    headers: {
-        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-    },
-    success: function (response) {
-        
-    },
-    error: function (xhr, status, error) {
-        console.error('Error updating status:', error);
-    }
-});
-}
-else if ($(this).hasClass("engaged")) {
+                            $.ajax({
+                                url: 'https://backend.app.spaderent.com/api/spade/updateProspectusStatus',
+                                type: 'PUT',
+                                data: JSON.stringify({
+                                    prospectusid: parentId,
+                                    prospectusStatus: "Active"
+                                }),
+                                contentType: 'application/json',
+                                headers: {
+                                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                                },
+                                success: function (response) {
+                                    countValues()
 
-$.ajax({
-    url: 'https://backend.app.spaderent.com/api/spade/updateProspectusStatus',
-    type: 'PUT',
-    data: JSON.stringify({
-        prospectusid: parentId,
-        prospectusStatus: "Engaged"
-    }),
-    contentType: 'application/json',
-    headers: {
-        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-    },
-    success: function (response) {
-      
-    },
-    error: function (xhr, status, error) {
-        console.error('Error updating status:', error);
-    }
-});
-}
-else if ($(this).hasClass("nurturing")) {
+                                },
+                                error: function (xhr, status, error) {
+                                    console.error('Error updating status:', error);
+                                }
+                            });
+                        }
+                        else if ($(this).hasClass("engaged")) {
 
-$.ajax({
-    url: 'https://backend.app.spaderent.com/api/spade/updateProspectusStatus',
-    type: 'PUT',
-    data: JSON.stringify({
-        prospectusid: parentId,
-        prospectusStatus: "Nurturing"
-    }),
-    contentType: 'application/json',
-    headers: {
-        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-    },
-    success: function (response) {
-        
-    },
-    error: function (xhr, status, error) {
-        console.error('Error updating status:', error);
-    }
-});
-}
+                            $.ajax({
+                                url: 'https://backend.app.spaderent.com/api/spade/updateProspectusStatus',
+                                type: 'PUT',
+                                data: JSON.stringify({
+                                    prospectusid: parentId,
+                                    prospectusStatus: "Engaged"
+                                }),
+                                contentType: 'application/json',
+                                headers: {
+                                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                                },
+                                success: function (response) {
+                                    countValues()
+
+                                },
+                                error: function (xhr, status, error) {
+                                    console.error('Error updating status:', error);
+                                }
+                            });
+                        }
+                        else if ($(this).hasClass("nurturing")) {
+
+                            $.ajax({
+                                url: 'https://backend.app.spaderent.com/api/spade/updateProspectusStatus',
+                                type: 'PUT',
+                                data: JSON.stringify({
+                                    prospectusid: parentId,
+                                    prospectusStatus: "Nurturing"
+                                }),
+                                contentType: 'application/json',
+                                headers: {
+                                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                                },
+                                success: function (response) {
+                                    countValues()
+
+                                },
+                                error: function (xhr, status, error) {
+                                    console.error('Error updating status:', error);
+                                }
+                            });
+                        }
                         // Add a class to the dropped portlet
                         ui.item.addClass("dropped-portlet");
 
@@ -4627,16 +4898,17 @@ $.ajax({
                     icon.toggleClass("ui-icon-minusthick ui-icon-plusthick");
                     icon.closest(".portlet").find(".portlet-content").toggle();
                 });
+
             });
 
             $(document).on("click", ".edit-option", function () {
-                var id = $(this).attr("id");
+                prospectID = $(this).attr("id");
                 const filteredData = propsectData.find(function (item, index) {
-                    if (item.prospectus.id == id) {
+                    if (item.prospectus.id == prospectID) {
                         return item;
                     }
                 })
-
+                prospectusStatus = filteredData.prospectus.prospectusStatus;
                 $("#firstName_update").val(filteredData.prospectus.firstName);
                 $("#middleName_update").val(filteredData.prospectus.middleName);
                 $("#lastName_update").val(filteredData.prospectus.lastName);
@@ -4705,6 +4977,8 @@ $.ajax({
                             $("#myModal_success").modal("show");
                             setTimeout(function () {
                                 $('#myModal_success').modal('hide');
+                                resetAccordion()
+                                getData()
 
                             }, 2000);
                         }
@@ -4742,15 +5016,11 @@ $.ajax({
                     $(".progress").html(myprogress)
                 },
                 error: function (xhr, status, error) {
-                    // $("#myModal_warning").modal("show");
-                    // setTimeout(function () {
-                    //     $('#myModal_warning').modal('hide');
-                    //     window.location = '../Landlord/login_module.html';
-                    // }, 2000);
+
                     console.log('Error occurred while fetching state and city data.');
                     console.log(xhr);
                     console.log(error);
-                    // console.log('Error occurred while fetching state and city data.');
+
                 }
             });
             $('#email_verification').on('click', function () {
@@ -4848,20 +5118,23 @@ $.ajax({
     </script>
     <!-- /Qualified or Un-Qualified chart-bar/ -->
     <script>
-        var ctx = document.getElementById("chartBar2");
-        var myChart = new Chart(ctx, {
+        var ctx1 = document.getElementById("chartBar2");
+        var myChart;
+       function createQDChart(qualified,disqualified){
+        
+        myChart = new Chart(ctx1, {
             type: 'bar',
             data: {
-                labels: ["2015", "2016", "2017", "2018", "2019"],
+                labels: ["JAN", "FEB", "MAR", "APRIL", "MAY", "JUNE", "JULY", "AUG", "SEP", "OCT", "NOV", "DEC"],
                 datasets: [{
-                    label: "Lost",
-                    data: [12, 22, 20, 35, 12],
+                    label: "Disqualified",
+                    data: disqualified,
                     borderColor: "#FF2366",
                     borderWidth: "0",
                     backgroundColor: "#FF2366"
                 }, {
-                    label: "Won",
-                    data: [22, 42, 60, 70, 86],
+                    label: "Qualified",
+                    data: qualified,
                     borderColor: "#02BC77",
                     borderWidth: "0",
                     backgroundColor: "#02BC77"
@@ -4900,6 +5173,15 @@ $.ajax({
                 },
             }
         });
+    
+       }
+         
+       function updateQDChart(qualified,disqualified){
+        myChart.data.datasets[0].data = disqualified;
+        myChart.data.datasets[1].data = qualified;
+        myChart.update();
+       }
+         
     </script>
     <!-- /Qualified or Un-Qualified chart-bar/ -->
 
