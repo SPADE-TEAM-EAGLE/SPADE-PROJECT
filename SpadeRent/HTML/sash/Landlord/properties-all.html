@@ -1866,7 +1866,13 @@
                                                                 name="exampleRadios" id="alphabets" value="option1">
                                                         </div>
                                                     </li>
-
+                                                    <li class="d-flex justify-content-between"><a
+                                                        href="javascript:void(0)" class="text-dark">Created At</a>
+                                                    <div class="form-check m-0">
+                                                        <input class="form-check-input mt-2" type="radio"
+                                                            name="exampleRadios" id="created-at" value="option1">
+                                                    </div>
+                                                </li>
                                                     <li class="d-flex justify-content-between"><a
                                                             href="javascript:void(0)" class="text-dark">Ascending</a>
                                                         <div class="form-check m-0">
@@ -1974,6 +1980,7 @@
                                                         <th>PROPERTY UNITS</th>
                                                         <th>PROPERTY ADDRESS</th>
                                                         <th>ACTION</th>
+                                                        <th class="d-none">CREATED AT</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="table_body">
@@ -3348,6 +3355,7 @@
         });
 
         function filterTable(selectedFilter) {
+            
             var tableBody = $('#table_body');
             var rows = tableBody.find('tr');
 
@@ -3357,13 +3365,23 @@
                     var textB = $(b).find('.propertyName').text().toLowerCase();
                     return textA.localeCompare(textB);
                 });
-            } else if (selectedFilter === 'ascending') {
+            } else if (selectedFilter === 'created-at') {
+                
+                rows.sort(function (a, b) {
+                    var idA = new Date($(a).find('.created-at').text());
+                    console.log(idA)
+                    var idB = new Date($(b).find('.created-at').text());
+                    return idB - idA;
+                });
+            }
+            else if (selectedFilter === 'ascending') {
                 rows.sort(function (a, b) {
                     var idA = parseInt($(a).find('.propertyUnits').text());
                     var idB = parseInt($(b).find('.propertyUnits').text());
                     return idA - idB;
                 });
-            } else if (selectedFilter === 'descending') {
+            }
+            else if (selectedFilter === 'descending') {
                 rows.sort(function (a, b) {
                     var idA = parseInt($(a).find('.propertyUnits').text());
                     var idB = parseInt($(b).find('.propertyUnits').text());
@@ -3384,6 +3402,10 @@
         $('#alphabets').on('click', function () {
             // console.log(1)
             filterTable("alphabets")
+        });
+        $('#created-at').on('click', function () {
+            // console.log(1)
+            filterTable("created-at")
         });
         // console.log($('#alphabets'))
         // Search functionality
@@ -3646,7 +3668,7 @@
             $("#global-loader").fadeIn("fast")
             // console.log(22)
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/allproperty',
+                url: 'http://localhost:3000/api/spade/allproperty',
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -3713,6 +3735,7 @@
                                 '<span>' + property.city + ', ' + property.state + ' ' + property.zipCode +
                                 '</span>' +
                                 '</td>';
+                            var created_at=`<td class="created-at d-none" style="font-weight: 600;">${property.created_at}</td>`
                             var password = 'your-secret-password';
                             var encryptedPropertyId = sjcl.encrypt(password, property.id.toString());
 
@@ -3727,12 +3750,13 @@
                             '</ul></td>';
                             // Create a table row and append the generated columns
                             var row = '<tr>' + serial + image + propertyId + propertyName +
-                                propertyType + propertyUnits + propertyAddress + dropdownMenu + '</tr>';
+                                propertyType + propertyUnits + propertyAddress + dropdownMenu + created_at+'</tr>';
 
                             // Append the row to the table body
                             tableBody.append(row);
 
                         });
+                        
                         $("#global-loader").fadeOut("slow")
                         $(document).on("click", ".edit-option", function (e) {
                             e.preventDefault();
