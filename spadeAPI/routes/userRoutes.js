@@ -224,3 +224,4 @@ router.put("/updateProspectus", verifyToken, prospectus.updateProspectus);
 router.put("/updateProspectusStatus", verifyToken, prospectus.updateProspectusStatus);
 router.get("/prospectusInsightQD/:year", verifyToken, prospectus.prospectusInsightQD);
 router.get("/prospectusInsightEN/:startDate/:endDate", verifyToken, prospectus.prospectusInsightEN);
+router.delete("/deleteProspectus/:prospectusID", verifyToken, prospectus.deleteProspectus);
