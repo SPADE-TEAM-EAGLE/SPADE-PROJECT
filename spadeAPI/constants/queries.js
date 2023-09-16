@@ -624,6 +624,10 @@ t.lastName,
 t.id AS tenantID,
 t.phoneNumber AS tPhone,
 p.propertyName,
+p.address,
+p.city,
+p.state,
+p.zipCode,
 JSON_ARRAYAGG(JSON_OBJECT('imageKey', ii.imageKey, 'Image', ii.Image)) AS invoiceImages
 FROM
 invoice AS i
@@ -1011,4 +1015,4 @@ exports.UpdateProspectusStatusQuery = "UPDATE prospectus set prospectusStatus = 
 exports.prospectusInsightQD = "WITH Months AS (SELECT 1 AS Month UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12 ) SELECT m.Month AS Month, COALESCE(SUM(CASE WHEN p.prospectusStatus = 'DisQualified' THEN 1 ELSE 0 END), 0) AS Disqualified, COALESCE(SUM(CASE WHEN p.prospectusStatus = 'Qualified' THEN 1 ELSE 0 END), 0) AS Qualified FROM Months m LEFT JOIN spade_Rent.prospectus p ON m.Month = EXTRACT(MONTH FROM p.createdDate) AND EXTRACT(YEAR FROM p.createdDate) = ? AND p.landlordId = ? GROUP BY m.Month ORDER BY m.Month";
 exports.prospectusInsightEN = "SELECT count(prospectusStatus) as totalProspectus, SUM(CASE WHEN prospectusStatus = 'Engaged' THEN 1 ELSE 0 END) AS Engaged, SUM(CASE WHEN prospectusStatus = 'Nurturing' THEN 1 ELSE 0 END) AS Nurturing FROM spade_Rent.prospectus WHERE landlordId = ? AND createdDate >= ? AND createdDate <= ?";
 exports.propertyUnitCount = "SELECT *, sum(CASE WHEN propertyunits.status = 'Vacant' then 1 else 0 END ) as Vacant, sum(CASE WHEN propertyunits.status = 'Occupied' then 1 else 0 END ) as Occupied FROM spade_Rent.propertyunits where propertyID = ? ";
-
+exports.updateBusinessLogo = "UPDATE users SET businessLogo = ? , businessLogoKey = ? where id = ? ";

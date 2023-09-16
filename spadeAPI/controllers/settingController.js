@@ -11,7 +11,8 @@ const {
   deleteQuery,
   updatePassword,
   updatePasswordTenantSetting,
-  updateEmailTemplates
+  updateEmailTemplates,
+  updateBusinessLogo
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -124,3 +125,26 @@ exports.emailtemplates = async (req, res) => {
 };
 //  ############################# Email templates END ############################################################
 
+//  ############################# Landlord business logo Start ############################################################
+exports.updateBusinessLogo = async (req, res) => {
+  const { userId } = req.body; 
+  const { image, imageKey } = req.body; 
+  try {
+      const updateBusinessLogoResult = await queryRunner(updateBusinessLogo, [image, imageKey,userId]);
+      if (updateBusinessLogoResult[0].affectedRows > 0) {
+        res.status(200).json({
+          message: " Business Logo save successful",
+          // data : updateBusinessLogoResult[0]
+        });        
+      }else{
+        res.status(400).json({
+          message: " Something went wrong",
+        });        
+      }
+
+  } catch (error) {
+    res.status(400).send("Error4" + error);
+    console.log(error);
+  }
+};
+//  ############################# Landlord business logo End ############################################################
