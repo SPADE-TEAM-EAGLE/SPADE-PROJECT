@@ -97,11 +97,13 @@ router.post('/verifyResetEmailCodeTenant', tenantController.verifyResetEmailCode
 router.put('/updatePasswordTenant', tenantController.updatePasswordTenant);
 router.put('/resendCodeTenants', tenantController.resendCodeTenants);
 router.post('/addAlternateEmailPhone', verifyToken, tenantController.addAlternateEmailPhone);
-router.post('/tenantAttachFile', verifyToken, tenantController.tenantAttachFile);
+router.post('/tenantAttachFile', verifyToken, tenantController.tenantAttachFile); 
 router.delete('/tenantAttachFileDelete', verifyToken, tenantController.tenantAttachFileDelete);
+router.get('/GettenantAttachFile', tenantController.GettenantAttachFile);
 router.delete('/tenantDelete', verifyToken, tenantController.tenantDelete);
 // router.delete('/tenantDelete', tenantController.tenantDelete);
 router.get('/getTenantsByID', verifyToken, tenantController.getTenantsByID);
+// router.get('/getTenantsByID', tenantController.getTenantsByID);
 router.post('/createInvoice', verifyToken, invoiceController.createInvoice);
 // router.post('/createInvoice', invoiceController.createInvoice);
 router.put('/putInvoiceStatusUpdates', verifyToken, invoiceController.putInvoiceStatusUpdates);
