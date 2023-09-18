@@ -184,7 +184,7 @@ exports.getAllInvoices = async (req, res) => {
   try {
     // const { userId } = req.body;
     // console.log(111)
-    const { userId } = req.user;
+    const { userId,businessLogo } = req.user;
     // console.log(userId)
     const getAllInvoicesResult = await queryRunner(getAllInvoicesquery, [
       userId,
@@ -205,6 +205,8 @@ exports.getAllInvoices = async (req, res) => {
         } else {
           getAllInvoicesResult[0][i].memo = ["No memo"];
         }
+        
+        getAllInvoicesResult[0][i].businessLogo = businessLogo;
       }
       res.status(200).json({
         data: getAllInvoicesResult,

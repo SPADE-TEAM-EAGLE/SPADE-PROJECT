@@ -36,6 +36,8 @@ const verifyToken = async (req, res, next) => {
       auth:result[0][0].auth,
       invoiceEmail : result[0][0].invoiceEmail,
       taskEmail : result[0][0].taskEmail,
+      businessLogo : result[0][0].businessLogo,
+
     };
     next();
     // console.log("hello")
