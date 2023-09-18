@@ -129,6 +129,7 @@ exports.emailtemplates = async (req, res) => {
 exports.updateBusinessLogo = async (req, res) => {
   const { userId } = req.user; 
   const { image, imageKey } = req.body; 
+  console.log(req.body);
   try {
       const updateBusinessLogoResult = await queryRunner(updateBusinessLogo, [image, imageKey,userId]);
       if (updateBusinessLogoResult[0].affectedRows > 0) {

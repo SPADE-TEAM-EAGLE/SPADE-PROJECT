@@ -10317,6 +10317,8 @@
                         }
                     });
 
+
+
                     $.ajax({
                         url: 'https://backend.app.spaderent.com/api/spade/invoiceCategory',
                         method: 'GET',
@@ -11612,15 +11614,48 @@
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
-                            console.log(response.images);
+                            console.log(response.images[0]);
                             // response.images?.forEach(function (value, index, array) {
                             //     str += value.image_url;
                             //     if (index < array.length - 1) {
                             //         str += ",";
                             //     }
                             // });
-                            
-                            
+
+                            $.ajax({
+                                url: 'http://localhost:3000/api/spade/updateBusinessLogo',
+                                type: 'PUT',
+                                data: JSON.stringify({
+                                    image: response.images[0].image_url,
+                                    imageKey: response.images[0].image_key
+                                }),
+                                contentType: 'application/json',
+                                processData: false,
+                                headers: {
+                                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                                },
+                                success: function (response) {
+                                    console.log(response);
+                                    if (response.message == " Business Logo save successful") {
+                                        $("#myModal_success p").text("Succesfully Updated!!!")
+                                        $("#myModal_success").modal("show")
+                                        setTimeout(function () {
+                                            $("#myModal_success").modal("hide");
+                                        }, 2000);
+                                    }
+                                },
+                                error: function (xhr, status, error) {
+                                    console.log('Error: ' + error);
+                                    $("#myModal_warning_connection").modal("show");
+                            setTimeout(function () {
+                                $('#myModal_warning_connection').modal('hide');
+
+                            }, 2000);
+                                }
+                            });
+
+
+
                         },
                         error: function (xhr, status, error) {
                             $("#myModal_warning_connection").modal("show");
