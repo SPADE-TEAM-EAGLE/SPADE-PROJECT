@@ -66,6 +66,7 @@ const {
   deleteUserAccountData,
   updateAuthQuery,
   addResetTokenTenant,
+  propertyUnitCount
 } = require("../constants/queries");
 
 const { hashedPassword } = require("../helper/hash");
@@ -457,6 +458,12 @@ exports.updateUserProfile = async function (req, res) {
     businessAddress,
     imageUrl,
     imageKey,
+    PACity,
+    PAState,
+    PAZipcode,
+    BACity,
+    BAState,
+    BAZipcode
   } = req.body;
   const { userId } = req.user;
   console.log(req.body);
@@ -488,6 +495,12 @@ exports.updateUserProfile = async function (req, res) {
         businessAddress,
         imageUrl,
         imageKey,
+        PACity,
+        PAState,
+        PAZipcode,
+        BACity,
+        BAState,
+        BAZipcode,
         userId,
       ];
       const updateResult = await queryRunner(updateUser, updateUserParams);
@@ -1010,7 +1023,8 @@ exports.property = async (req, res) => {
 
 exports.getproperty = async (req, res) => {
   const { userId, userName } = req.user;
-  console.log(userId);
+  // const { userId, userName } = req.body;
+  // console.log(userId);
   try {
     const allPropertyResult = await queryRunner(
       selectQuery("property", "landlordID"),
@@ -1021,16 +1035,22 @@ exports.getproperty = async (req, res) => {
       for (var i = 0; i < allPropertyResult[0].length; i++) {
         const propertyID = allPropertyResult[0][i].id;
         // Retrieve property images for the current property ID
+
+        const propertyUnitCountResult = await queryRunner(propertyUnitCount , [propertyID]);
+        if (propertyUnitCountResult[0].length > 0) {
+        
+        allPropertyResult[0][i].NumberCount = propertyUnitCountResult[0][0];
+        }else{
+          allPropertyResult[0][i].NumberCount = ["no unit"];
+        }
         const allPropertyImageResult = await queryRunner(
           selectQuery("propertyimage", "propertyID"),
           [propertyID]
         );
-        console.log(allPropertyImageResult[0]);
         if (allPropertyImageResult.length > 0) {
           const propertyImages = allPropertyImageResult[0].map((image) => {
             return { imageURL: image.Image, imageKey: image.ImageKey };
           });
-          console.log(propertyImages);
           // Extract image URLs from the result
           allPropertyResult[0][i].images = propertyImages; // Add property images to the current property object
         } else {
@@ -1052,8 +1072,7 @@ exports.getproperty = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log("Error:", error);
-    res.send("Error Get Property");
+    res.send("Error Get Property "+ error );
   }
 };
 
@@ -1313,6 +1332,7 @@ exports.propertyUpdate = async (req, res) => {
 exports.propertyView = async (req, res) => {
   try {
     const { propertyId } = req.query;
+    // const { propertyId } = req.body;
     // console.log(req.query)
     // check property in database
     // console.log(propertyId);
@@ -1321,6 +1341,15 @@ exports.propertyView = async (req, res) => {
       [propertyId]
     );
     if (propertyViewResult.length > 0) {
+
+
+
+      const propertyUnitCountResult = await queryRunner(propertyUnitCount , [propertyId]);
+        if (propertyUnitCountResult[0].length > 0) {
+        propertyViewResult[0][0].NumberCount = propertyUnitCountResult[0][0];
+        }else{
+          propertyViewResult[0][0].NumberCount = ["no unit"];
+        }
       // check property Images in database
       const propertyViewImageResult = await queryRunner(
         selectQuery("propertyimage", "propertyID"),
@@ -1362,7 +1391,7 @@ exports.propertyView = async (req, res) => {
       });
     }
   } catch (error) {
-    res.send("Error from Viewing Property ");
+    res.send("Error from Viewing Property "+ error);
     // console.log(req.body)
     console.log(error);
   }
@@ -1629,17 +1658,18 @@ exports.viewPropertyTenant = async (req, res) => {
     console.log(error);
   }
 };
+
 exports.viewAllPropertyTenant = async (req, res) => {
   try {
     const { userId, userName } = req.user;
     // const { userId, userName } = req.body;
     // const {id} = req.query;
-    // console.log(req)
+    // console.log(userId);
     // console.log(req.user);
     let PropertyTenantResult;
     // console.log(id)
     PropertyTenantResult = await queryRunner(selectAllTenants, [userId]);
-    console.log(PropertyTenantResult[0]);
+    // console.log(PropertyTenantResult[0]);
     if (PropertyTenantResult[0].length > 0) {
       for (let i = 0; i < PropertyTenantResult[0].length; i++) {
         const tenantID = PropertyTenantResult[0][i].tenantID;
@@ -1670,8 +1700,8 @@ exports.viewAllPropertyTenant = async (req, res) => {
       });
     }
   } catch (error) {
-    res.send("Error Get Property Tenant data");
-    console.log(error);
+    res.send("Error Get Property Tenant data" + error);
+    // console.log(error);
   }
 };
 //  ############################# Get Property and tenant data End ############################################################
@@ -1789,11 +1819,12 @@ exports.getStates = async (req, res) => {
 
 //  ############################# Task property ############################################################
 exports.propertyTask = async (req, res) => {
-  const { Id } = req.query;
+  // const { Id } = req.query;
+  const { Id } = req.body;
   // console.log(req.query)
   try {
     const taskByIDResult = await queryRunner(propertyTaskQuery, [Id]);
-    if (taskByIDResult.length > 0) {
+    if (taskByIDResult[0].length > 0) {
       for (let j = 0; j < taskByIDResult[0].length; j++) {
         const taskID = taskByIDResult[0][j].id;
         const TaskImagesResult = await queryRunner(
@@ -1803,7 +1834,7 @@ exports.propertyTask = async (req, res) => {
         // this is for task images
         if (TaskImagesResult[0].length > 0) {
           const taskImages = TaskImagesResult[0].map(
-            (image) => image.taskImages
+            (image) => image.Image
           );
           taskByIDResult[0][j].taskImages = taskImages;
         } else {
@@ -1822,8 +1853,8 @@ exports.propertyTask = async (req, res) => {
           const vendorResult = await queryRunner(selectQuery("vendor", "id"), [
             vID,
           ]);
-          if (vendorResult.length > 0) {
-            const categoryIDs = vendorResult[0][0].categoryID;
+          if (vendorResult[0].length > 0) {
+            const categoryIDs = vendorResult[0][i].categoryID;
             const VendorCategoryResult = await queryRunner(
               selectQuery("vendorcategory", "id"),
               [categoryIDs]

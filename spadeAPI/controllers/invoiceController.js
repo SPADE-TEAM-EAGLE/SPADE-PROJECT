@@ -182,7 +182,7 @@ exports.putInvoiceStatusUpdates = async (req, res) => {
 //  ############################# View All Invoices Start ############################################################
 exports.getAllInvoices = async (req, res) => {
   try {
-    // const { userId } = req.user;
+    // const { userId } = req.body;
     // console.log(111)
     const { userId } = req.user;
     // console.log(userId)

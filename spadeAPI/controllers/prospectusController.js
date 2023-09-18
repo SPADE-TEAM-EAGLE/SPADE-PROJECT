@@ -318,3 +318,31 @@ exports.prospectusInsightEN = async (req, res) => {
 
 //  #############################  Insight Engaged and Nurturing END ##################################################
 
+
+
+//  #############################  Delete prospectus Start HERE ##################################################
+
+exports.deleteProspectus = async (req, res) => {
+    try {
+      const { prospectusID } = req.params;
+    //   console.log(prospectusID);
+      const deleteprospectusResult = await queryRunner(deleteQuery("prospectus", "id"), [
+        prospectusID,
+      ]);
+      if (deleteprospectusResult[0].affectedRows > 0) {
+        res.status(200).json({
+          // data: vendorResult[0],
+          message: "prospectus Deleted Successful",
+        });
+      } else {
+        res.status(400).json({
+          message: "No prospectus data found",
+        });
+      }
+    } catch (error) {
+      res.send("Error Get delete prospectus  ");
+      console.log(error);
+    }
+  };
+  //  #############################  Delete prospectus ENDS HERE ##################################################
+  
