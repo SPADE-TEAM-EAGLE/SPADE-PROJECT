@@ -1077,8 +1077,9 @@
             position: absolute;
             right: 13px;
             cursor: pointer;
-            padding: 8px;
-            background: #EDF3F9
+            padding: 5px;
+            background: #EDF3F9;
+            bottom: 7px;
         }
 
         /* chats End css  */
@@ -1209,6 +1210,7 @@
                                     </div>
                                 </label>
                             </div>
+                            <span class="text-dark">Maximum limit is 5</span>
                             <div class="selected-files text-white">
                                 <div class="file-grid"></div>
                             </div>
@@ -1221,6 +1223,11 @@
                         id='close'>Close</button>
                     <button class="btn text-light button" style='background-color:#1467B0;'
                         id='submit-photo'>Send</button>
+                    <button class="btn btn-primary my-1" type="button" disabled="" id="loading-btn"
+                        style="display: none;">
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Loading...
+                    </button>
 
                 </div>
             </div>
@@ -1722,6 +1729,7 @@
                                 <a class="side-menu__item" data-bs-toggle="slide" href="chats.html">
                                     <i class="side-menu__icon fi fi-rs-comment"></i>
                                     <span class="side-menu__label">Chat</span>
+                                    <span class="badge bg-primary side-badge">6</span>
                                     <!-- <span class="badge bg-secondary side-badge">6</span> -->
                                     <!-- <i class="angle fe fe-chevron-right"></i> -->
                                 </a>
@@ -2876,7 +2884,7 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-        
+
         <script>
             // const socket = io("http://ec2-52-45-181-206.compute-1.amazonaws.com:3000");
             var tenantId = [];
@@ -2926,7 +2934,7 @@
                         // console.log('Error occurred while fetching state and city data.');
                     }
                 });
-                
+
                 $('#send-text').on('click', function (ev) {
                     const msg_again1 = $('#input-message').val().trim();
                     if (msg_again1 !== "") {
@@ -2958,7 +2966,7 @@
                     }
                 });
                 // Attach a click event handler to all "Download" buttons
-                
+
                 $('#input-message').on('keypress', function (ev) {
                     const msg_again2 = $('#input-message').val().trim();
                     if (ev.key === 'Enter' && msg_again2 !== "") {
@@ -3129,19 +3137,25 @@
                             messs2 = `<div class="d-flex" style="align-items: flex-start; justify-content: flex-start;">
     <div style="width: 36px; height: 36px; border-radius: 50%; background: url(${localStorage.getItem("LandlordImg") != "null" && localStorage.getItem("LandlordImg") != " " ? localStorage.getItem("LandlordImg") : randomImg}); background-position: center; background-size: cover;" class="me-1"></div>
     <div class="msg-text">`;
-
-                            if (message.message.includes('https')) {
-                                const imageUrls = message.message.split(',');
-                                imageUrls.forEach((imageUrl) => {
+        if(message.message.includes('.s3.amazonaws.com/') && message.message.includes('https')){
+                            const imageUrls = message.message.split(',');
+                            imageUrls.forEach((imageUrl) => {
+                                if (imageUrl.includes('https') && imageUrl.includes('.pdf')) {
+                                    messs2 += `<a href="JavaScript:void(0);" data-bs-toggle="dropdown" class="text" style="text-align: center;"><i class="fi fi-rs-file-pdf" style="font-size: 115px;display: contents;"></i></a>
+        <ul class="dropdown-menu dropdown-menu-top"><li><a class="dropdown-item text-danger edit-option" id="">Delete</a></li><li><a class="dropdown-item text-primary">Download</a></li></ul>
+        <a class="text-primary" href="${imageUrl}">Download</a>
+        `;
+                                } else if (imageUrl.includes('https') && (imageUrl.includes('.png') || imageUrl.includes('.jpeg') || imageUrl.includes('.jpg'))) {
                                     messs2 += `<a href="JavaScript:void(0);" data-bs-toggle="dropdown"><img style="cursor: pointer; width:200px; margin-top: 5px;" class="text" src="${imageUrl}" /></a>
         <ul class="dropdown-menu dropdown-menu-top"><li><a class="dropdown-item text-danger edit-option" id="">Delete</a></li><li><a class="dropdown-item text-primary">Download</a></li></ul>
         <a class="text-primary" href="${imageUrl}">Download</a>
         `;
-                                });
-                            } else {
-                                messs2 += `<span class="text">${message.message}</span>`;
-                            }
-
+                                }
+                                
+                            });
+                        }else {
+                                    messs2 += `<span class="text">${message.message}</span>`;
+                                }
                             messs2 += `<span style="float: right;" class="text-primary">${formattedTime}</span>
     </div>
 </div>`;
@@ -3265,17 +3279,19 @@
                 }
 
 
-                selectedFiles = [];
+                var selectedFiles = [];
                 $('#fileInput').on('change', function () {
                     var files = Array.from($(this)[0].files);
                     // console.log(files)
                     files.forEach(function (file) {
                         file.size <= 5 * 1024 * 1024 && selectedFiles.length < 5 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array
                     });
-
+                    console.log(selectedFiles)
                     updateSelectedFilesContainer(); // Update the selected files container
                 });
                 $('#submit-photo').click(() => {
+                    $('#submit-photo').css("display", "none");
+                    $("#loading-btn").css("display", "inline-block");
                     if (selectedFiles.length >= 1) {
                         var uploadFormData = new FormData();
                         for (var i = 0; i < selectedFiles.length; i++) {
@@ -3323,8 +3339,11 @@
                                     success: function (response) {
                                         console.log(messageData2);
                                         socket.emit('chatMessage', messageData2);
+                                        $("#loading-btn").css("display", "none");
+                                        $("#submit-photo").css("display", "inline-block")
                                         $('#addModal').modal('hide');
                                         $('.file-grid').empty();
+                                        selectedFiles = [];
                                         chatTenant()
                                     },
                                     error: function (xhr, status, error) {
@@ -3350,7 +3369,7 @@
                     // Get the image source URL associated with this button
                     alert(1)
                     var imageUrl = $(this).closest(".msg-text").find("img.text").attr("src");
-    
+
                     // Create a hidden anchor element to trigger the download
                     var a = document.createElement("a");
                     a.href = imageUrl;
@@ -3428,18 +3447,28 @@
                                                             const time = timeArray.slice(0, 2).join(":");
                                                             messs1 += `<div class="d-flex" style="align-items: flex-start; justify-content: end;">
     <div class="msg-text owner">`;
+        if(response.data[i]['message'].includes('.s3.amazonaws.com/') && response.data[i]['message'].includes('https')){
+        var imageUrls = response.data[i]['message'].split(',');
+                                                            imageUrls.forEach((imageUrl) => {
+                                                                if (imageUrl.includes('https') && imageUrl.includes('.pdf')) {
 
-                                                            if (response.data[i]['message'].includes('https')) {
-                                                                const imageUrls = response.data[i]['message'].split(',');
-                                                                imageUrls.forEach((imageUrl) => {
-                                                                    messs1 += `<a href="JavaScript:void(0);" data-bs-toggle="dropdown"><img style="cursor: pointer; width:200px; margin-top: 5px;" class="text" src="${imageUrl}" /></a>
+                                                                    messs1 += `<a href="JavaScript:void(0);" class="text" data-bs-toggle="dropdown" style="text-align: center;"><i class="fi fi-rs-file-pdf" style="font-size: 115px;display: contents;"></i></a>
         <ul class="dropdown-menu dropdown-menu-top"><li><a class="dropdown-item text-danger edit-option" id="">Delete</a></li><li><a class="dropdown-item text-primary">Download</a></li></ul>
         <a class="text-primary" href="${imageUrl}">Download</a>
         `;
-                                                                });
-                                                            } else {
-                                                                messs1 += `<span class="text">${response.data[i]['message']}</span>`;
-                                                            }
+
+                                                                } else if (imageUrl.includes('https') && (imageUrl.includes('.png') || imageUrl.includes('.jpeg') || imageUrl.includes('.jpg'))) {
+
+                                                                    messs1 += `<a href="JavaScript:void(0);" data-bs-toggle="dropdown"><img style="cursor: pointer; width:200px; margin-top: 5px;" class="text" src="${imageUrl}" /></a>
+                                                            <ul class="dropdown-menu dropdown-menu-top"><li><a class="dropdown-item text-danger edit-option" id="">Delete</a></li><li><a class="dropdown-item text-primary">Download</a></li></ul>
+                                                            <a class="text-primary" href="${imageUrl}">Download</a>
+                                                            `;
+                                                                }
+                                                                
+                                                            });
+                                                        }else {
+                                                                    messs1 += `<span class="text">${response.data[i]['message']}</span>`;
+                                                                }
 
                                                             messs1 += `<span style="float: right;" class="text-primary">${time}</span>
     </div>
@@ -3452,19 +3481,25 @@
                                                             messs1 += `<div class="d-flex" style="align-items: flex-start; justify-content: flex-start;">
     <div style="width: 36px; height: 36px; border-radius: 50%; background: url(${localStorage.getItem("LandlordImg") != "null" && localStorage.getItem("LandlordImg") != " " ? localStorage.getItem("LandlordImg") : randomImg}); background-position: center; background-size: cover;" class="me-1"></div>
     <div class="msg-text">`;
-
-                                                            if (response.data[i]['message'].includes('https')) {
-                                                                const imageUrls = response.data[i]['message'].split(',');
-                                                                imageUrls.forEach((imageUrl) => {
+        if(response.data[i]['message'].includes('.s3.amazonaws.com/') && response.data[i]['message'].includes('https')){
+        const imageUrls = response.data[i]['message'].split(',');
+                                                            imageUrls.forEach((imageUrl) => {
+                                                                if (imageUrl.includes('https') && imageUrl.includes('.pdf')) {
+                                                                    messs1 += `<a href="JavaScript:void(0);" data-bs-toggle="dropdown" class="text" style="text-align: center;"><i class="fi fi-rs-file-pdf" style="font-size: 115px;display: contents;"></i></a>
+        <ul class="dropdown-menu dropdown-menu-top"><li><a class="dropdown-item text-danger edit-option" id="">Delete</a></li><li><a class="dropdown-item text-primary">Download</a></li></ul>
+        <a class="text-primary" href="${imageUrl}">Download</a>
+        `;
+                                                                } else if (imageUrl.includes('https') && (imageUrl.includes('.png') || imageUrl.includes('.jpeg') || imageUrl.includes('.jpg'))) {
                                                                     messs1 += `<a href="JavaScript:void(0);" data-bs-toggle="dropdown"><img style="cursor: pointer; width:200px; margin-top: 5px;" class="text" src="${imageUrl}" /></a>
         <ul class="dropdown-menu dropdown-menu-top"><li><a class="dropdown-item text-danger edit-option" id="">Delete</a></li><li><a class="dropdown-item text-primary">Download</a></li></ul>
         <a class="text-primary" href="${imageUrl}">Download</a>
         `;
-                                                                });
-                                                            } else {
-                                                                messs1 += `<span class="text">${response.data[i]['message']}</span>`;
-                                                            }
-
+                                                                }
+                                                                
+                                                            });
+                                                        }else {
+                                                                    messs1 += `<span class="text">${response.data[i]['message']}</span>`;
+                                                                }
                                                             messs1 += `<span style="float: right;" class="text-primary">${time}</span>
     </div>
 </div>`;
