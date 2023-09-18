@@ -228,4 +228,5 @@ router.get("/prospectusInsightQD/:year", verifyToken, prospectus.prospectusInsig
 router.get("/prospectusInsightEN/:startDate/:endDate", verifyToken, prospectus.prospectusInsightEN);
 router.delete("/deleteProspectus/:prospectusID", verifyToken, prospectus.deleteProspectus);
 router.get("/updateBusinessLogo", verifyToken, settingController.updateBusinessLogo);
+// router.get("/updateBusinessLogo" , settingController.updateBusinessLogo);
 
