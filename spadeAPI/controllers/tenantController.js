@@ -584,7 +584,6 @@ exports.tenantAttachFileDelete = async (req, res) => {
 exports.GettenantAttachFile = async (req, res) => {
   const { tenantID } = req.body; 
   try {
-
       const GettenantAttachFileResult = await queryRunner(getTenantAttachFile, [tenantID]);
       if (GettenantAttachFileResult[0].length === 0) {
         throw new Error("No data Found in tenant attach file");

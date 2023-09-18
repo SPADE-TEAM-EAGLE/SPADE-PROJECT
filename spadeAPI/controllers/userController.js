@@ -2403,13 +2403,13 @@ exports.ProfileComplete = async (req, res) => {
     if (propertycheckresult[0].length > 0) {
       count = 0;
       if (propertycheckresult[0][0].image) {
-        count += 30;
+        count += 10;
       }
       if (propertycheckresult[0][0].FirstName) {
-        count += 10;
+        count += 5;
       }
       if (propertycheckresult[0][0].LastName) {
-        count += 10;
+        count += 5;
       }
       if (propertycheckresult[0][0].Email) {
         count += 10;
@@ -2423,6 +2423,26 @@ exports.ProfileComplete = async (req, res) => {
       if (propertycheckresult[0][0].streetAddress) {
         count += 10;
       }
+
+      if (propertycheckresult[0][0].PACity) {
+        count += 5;
+      }
+      if (propertycheckresult[0][0].PAState) {
+        count += 5;
+      }
+      if (propertycheckresult[0][0].PAZipcode) {
+        count += 5;
+      }
+      if (propertycheckresult[0][0].BACity) {
+        count += 5;
+      }
+      if (propertycheckresult[0][0].BAState) {
+        count += 5;
+      }
+      if (propertycheckresult[0][0].BAZipcode) {
+        count += 5;
+      }
+      
       if (propertycheckresult[0][0].BusinessAddress) {
         count += 10;
       }

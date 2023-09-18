@@ -102,7 +102,7 @@ exports.updateAllTenantNotifyReadQuery = {
 };
 
 // update vendor for these fields firstName,lastName,businessName,streetAddress,city,zip,workPhone,phone,email,categoryID
-exports.updateVendor = `UPDATE vendor SET firstName = ?,lastName = ?,businessName = ?,streetAddress = ?,city = ?,zip = ?,workPhone = ?,phone = ?,email = ?,categoryID = ? WHERE id = ?`;
+exports.updateVendor = `UPDATE vendor SET firstName = ?,lastName = ?,businessName = ?,streetAddress = ?,city = ?,state = ?,zip = ?,workPhone = ?,phone = ?,email = ?,categoryID = ? WHERE id = ?`;
 
 // creat api get total properties of landlord and vacant or occupied properties using join with units table
 exports.getPropertiesGraphData = `SELECT
@@ -699,7 +699,7 @@ exports.addTasksQuerytenant =
   "INSERT INTO task (taskName, tenantID, dueDate,status, priority, notes, notifyTenant, created_at , createdBy,landlordID) VALUES ( ?,?,?,?,?,?,?,?,?,?)";
 exports.addVendorList =
   "INSERT INTO taskassignto (taskId, vendorId) VALUES (?, ?)";
-exports.addVendor = "INSERT INTO vendor (firstName,lastName,businessName,streetAddress,city,zip,workPhone,phone,email,categoryID,landlordID) VALUES (?, ?,?,?,?,?,?,?,?,?,?)";
+exports.addVendor = "INSERT INTO vendor (firstName,lastName,businessName,streetAddress,city,state,zip,workPhone,phone,email,categoryID,landlordID) VALUES (?, ?,?,?,?,?,?,?,?,?,?,?)";
 exports.getVendors = `SELECT v.*, vc.category
 FROM vendor v
 JOIN vendorcategory vc ON v.categoryID = vc.id
