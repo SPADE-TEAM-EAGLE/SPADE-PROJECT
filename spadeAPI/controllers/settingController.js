@@ -138,7 +138,7 @@ exports.updateBusinessLogo = async (req, res) => {
         });        
       }else{
         res.status(400).json({
-          message: " Something went wrong",
+          message: " Something went wrong in  Business Logo ",
         });        
       }
 
