@@ -1318,10 +1318,6 @@ exports.propertyUpdate = async (req, res) => {
 exports.propertyView = async (req, res) => {
   try {
     const { propertyId } = req.query;
-    // const { propertyId } = req.body;
-    // console.log(req.query)
-    // check property in database
-    // console.log(propertyId);
     const propertyViewResult = await queryRunner(
       selectQuery("property", "id"),
       [propertyId]

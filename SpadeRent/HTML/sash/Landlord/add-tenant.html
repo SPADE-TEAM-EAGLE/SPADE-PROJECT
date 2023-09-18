@@ -614,6 +614,20 @@
                 font-weight: bold !important;
             }
         }
+
+        .btn-delete-checkbox{
+            border: 2px solid #000;
+            width: fit-content;
+            margin: 12px 0px 12px 25px;
+            padding: 7px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+        }
+
+        .myButton {
+            display: none;
+        }
     </style>
 
 </head>
@@ -1111,6 +1125,43 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="succesModal_email" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered succes-modal-dialog">
+            <div class="modal-content success-modal-content">
+                <div class="modal-header">
+
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="succes-close">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body succes-modal" style="padding-top: 70px;padding-bottom: 70px;">
+                    <div class="text-justify ps-2 border-model-line">
+                        <h2 class="modal-title d-flex align-items-center ps-1">
+                            <strong class="color-primary">Success!&nbsp;</strong>
+                            <i class="fi fi-rs-check-circle text-success"></i>
+
+                        </h2>
+                        <p class="ps-1 text-justify" id="succes-text">Email sended successfully!!!</p>
+
+                    </div>
+                    <!-- <div class="d-flex align-items-center p-2 my-3">
+                        <div class="flex-grow-1 ms-3">
+                            <p class="fw-bolder link-text">Invite send successfully!!!</p>
+                        </div>
+                        
+                    </div> -->
+                    <!-- <div class="mt-2"> <button type="button" class="btn btn-primary btn-pill mx-2" id="add_property_btn"
+                            data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal"><i
+                                class="fe fe-plus me-2"></i><strong>ADD NEW
+                                TENANT</strong></button></div> -->
+
+                </div>
+                <div class="modal-footer" style="border-top: 0">
+
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Modal -->
 
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
@@ -1190,22 +1241,25 @@
                                         <input type="text" class="form-control" id="address" placeholder="Enter Address">
                                         <!-- <span class="text-danger d-none">Address is required!</span> -->
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="inputState" class="form-label fw-bold">State<spnan
-                                                class="text-danger">*</span></label>
-                                            <select id="state" class="form-select form form-select" required>
-                                            <option selected>Choose...</option>
-                                            </select>
-                                            <span class="text-danger d-none">State is required!</span>
-                                        </div>
-                                    </div>
+
                                     <div class="col-md-4">
                                         <label for="inputState" class="form-label fw-bold">City <spnan
                                                 class="text-danger">*</span></label>
                                         <input type="text" id="city" class="form-control form" placeholder="Enter City" required pattern="[A-Za-z\s]+" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
                                         <span class="text-danger d-none">City is required!</span>
                                     </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="inputState" class="form-label fw-bold">State<spnan
+                                                class="text-danger"> *</span></label>
+                                            <select id="state" class="form-select form form-select" required>
+                                            <option selected>Choose...</option>
+                                            </select>
+                                            <span class="text-danger d-none">State is required!</span>
+                                        </div>
+                                    </div>
+                                    
                                     <div class="col-md-4">
                                         <label for="inputPassword4" class="form-label fw-bold">Zip Code <spnan
                                                 class="text-danger">*</span></label>
@@ -1247,7 +1301,7 @@
                                         <span class="text-danger d-none">Property units is required!</span>
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="inputAddress" class="form-label">Input Rent Amount /Per
+                                        <label for="inputAddress" class="form-label">Rent Amount /Per
                                             Month<span class="text-danger"> *</span></label>
                                         
                                             <input class="form-control form" type="text" id="rent" name="rent" pattern="[0-9]{5}" maxlength="7" minlength="1" placeholder="Rent amount" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
@@ -1381,9 +1435,7 @@
                                                                 required!</span>
                                                         </div>
                                                         <div class="col-md-5">
-                                                            <label for="inputPassword4" class="form-label">Rent Amount
-                                                                Correlating to
-                                                                that Date</label>
+                                                            <label for="inputPassword4" class="form-label">Rent Amount Correlating to that Date</label>
                                                             <input type="text" class="form-control input-amount" id="amountChange" pattern="[0-9]{7}" placeholder="Enter Rent Amount.." maxlength="7" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                                                             <span class="text-danger d-none">Rent amount is
                                                                 required!</span>
@@ -1646,6 +1698,9 @@
                                                 <a class="dropdown-item" href="lockscreen.html">
                                                     <i class="dropdown-icon fe fe-lock"></i> Lockscreen
                                                 </a> -->
+                                                <a class="dropdown-item" href="settings.html">
+                                                    <i class="dropdown-icon fe fe-settings"></i> Settings
+                                                </a>
                                                 <a class="dropdown-item" onclick="logout()" style="cursor: pointer;">
                                                     <i class="dropdown-icon fe fe-alert-circle"></i> Sign out
                                                 </a>
@@ -1882,14 +1937,14 @@
                                                             <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="alphabets" value="option1" checked>
                                                         </div>
                                                     </li>
-                                                    <!-- <li class="d-flex justify-content-between"><a
-                                                            href="javascript:void(0)">Date Modified</a>
+                                                    <li class="d-flex justify-content-between"><a
+                                                           class="text-dark" href="javascript:void(0)">Date Modified</a>
                                                         <div class="form-check m-0">
                                                             <input class="form-check-input mt-2" type="radio"
                                                                 name="exampleRadios" id="exampleRadios1" value="option1"
-                                                                checked>
+                                                                >
                                                         </div>
-                                                    </li> -->
+                                                    </li>
                                                     <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">Ascending</a>
                                                         <div class="form-check m-0">
                                                             <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="ascending" value="option1">
@@ -1900,14 +1955,14 @@
                                                             <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="descending" value="option1">
                                                         </div>
                                                     </li>
-                                                    <!-- <li class="d-flex justify-content-between"><a
-                                                            href="javascript:void(0)">Recently Added</a>
+                                                    <li class="d-flex justify-content-between"><a
+                                                        class="text-dark" href="javascript:void(0)">Recently Added</a>
                                                         <div class="form-check m-0">
                                                             <input class="form-check-input mt-2" type="radio"
                                                                 name="exampleRadios" id="exampleRadios1" value="option1"
-                                                                checked>
+                                                                >
                                                         </div>
-                                                    </li> -->
+                                                    </li>
                                                 </ul>
                                             </div>
                                             <div class="mx-2">
@@ -1945,32 +2000,31 @@
                                                 <button type="button" class="btn btn-dark bg-transparent font-weight-bold text-dark" id="customize_btn" data-bs-toggle="dropdown" style="border: none;"><strong>CUSTOMIZED</strong><i
                                                         class="fe fe-chevron-down ms-2"></i></button>
                                                 <ul class="dropdown-menu" role="menu">
-                                                    <li><a href="javascript:void(0)"><strong class="text-dark">Columns to
-                                                                show</strong></a>
+                                                    <li><a href="javascript:void(0)"><strong class="text-dark">Column visibility by:</strong></a>
                                                     </li>
         
-                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">TENANT NAME</a>
+                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">Tenant Name</a>
                                                         <div class="form-check m-0">
                                                             <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">PROPERTY NAME</a>
+                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">Property Address</a>
                                                         <div class="form-check m-0">
                                                             <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">RENT AMOUNT</a>
+                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">Assigned Unit</a>
                                                         <div class="form-check m-0">
                                                             <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">PROPERTY UNITS</a>
+                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">Rent Amount</a>
                                                         <div class="form-check m-0">
                                                             <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
 
-                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">LEASE END DATE</a>
+                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">Lease End Date</a>
                                                         <div class="form-check m-0">
                                                             <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
@@ -1981,18 +2035,24 @@
                                                     class="fe fe-plus me-2"></i><strong>ADD NEW
                                                     TENANT</strong></button>
                                         </div>
+                                        
                                     </div>
+                                    
+                                    
                                     <div class="card-body p-0">
-                                        <div class="table-responsive">
+                                        <button id="myButton" class="btn-delete-checkbox myButton"><i class="fi fi-rs-trash mt-1"></i> &nbsp;Delete</button>
+                                        <div class="table-responsive"> 
                                             <table class="table border text-nowrap text-md-nowrap mb-0" id="">
                                                 <thead>
                                                     <tr>
+                                                        <th>SELECT</th>
                                                         <th>#</th>
-                                                        <th class="d-none">TENANT ID</th>
+                                                        <th class="d-non">TENANT ID</th>
                                                         <th>TENANT NAME</th>
-                                                        <th>PROPERTY NAME</th>
+                                                        <th>CONTACT INFO</th>
+                                                        <th>PROPERTY ADDRESS</th>
+                                                        <th>ASSIGN UNITS</th>
                                                         <th>RENT AMOUNT</th>
-                                                        <th>PROPERTY UNITS</th>
                                                         <th>LEASE END DATE</th>
                                                         <th>ACTION</th>
                                                     </tr>
@@ -2993,6 +3053,36 @@
 
                 return formData;
             }
+   
+                $(document).on('click', ".send-option", function() {
+                edit = true
+                tenantIdElement = $(this).closest("tr").find(".tenant-id");
+                $.ajax({
+                    url: 'https://backend.app.spaderent.com/api/spade/sendInvitationLink',
+                    type: 'POST',
+                    data: JSON.stringify({
+                        tenantID: tenantIdElement.text()
+                    }),
+                    contentType: "application/json; charset=utf-8",
+                    processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function(response) {
+                        console.log(1111)
+                        $("#succesModal_email").modal("show")
+                            //    getData()
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle the error response
+                        console.log(xhr)
+                        console.log(status)
+                        console.log(error)
+                        console.error('Error sending data:', error);
+                    }
+                });
+             
+            })
             $(document).on('click', ".edit-option", function() {
                 edit = true
                 tenantIdElement = $(this).closest("tr").find(".tenant-id");
@@ -3013,7 +3103,7 @@
                 $("#addModal").modal("show")
                 $("#addModal .modal-title").empty()
                 $("#addModal .modal-title").append(
-                    `Update <strong class="color-primary" id="title-sub"> Tenant</strong>`
+                    `View <strong class="color-dark" id="title-sub"> Tenant Summary</strong>`
                 )
                 $("#firstName").val(tenants.firstName)
                 $("#lastName").val(tenants.lastName)
@@ -3983,7 +4073,7 @@
                         window.location = "./new-tenant.html"
                     }
                     tenantData = response.data[0]
-
+                    console.log(tenantData)
                     function toTitleCase(str) {
                         return str.replace(/\w\S*/g, function(txt) {
                             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
@@ -3999,14 +4089,16 @@
 
                         // var image = '<td><img src="../../../../spadeApi/uploads/' + tenant.images[0] + '" alt=""></td>';
                         // var image = '<td><img src="../../../../../../Desktop/spadeApi/uploads/image-1684250579662.png" alt="hhghghgh"></td>';
-var serial='<td style="font-weight: 600;">' + (index+1) + '</td>';
-                        var tenantId = '<td class="tenant-id d-none" style="font-weight: 600;">' + tenant.tenantID + '</td>';
+                        var checkbox = '<td class="checkbox" style="font-weight: 600;"><div class="form-check"><input class="form-check-input myCheckbox" type="checkbox" value=""><label class="form-check-label" for="flexCheckDefault"></label></div></td>';
+                        var serial='<td style="font-weight: 600;">' + (index+1) + '</td>';
+                        var tenantId = '<td class="tenant-id" style="font-weight: 600;">' + tenant.tenantID + '</td>';
                         // var tenantId = '<td class="tenant-id" style="font-weight: 600;">' + tenant
                         // .id + '</td>';
-                        var tenantName = '<td class="tenantName" style="font-weight: 600;">' + tenant.firstName +" "+ tenant.lastName + `<br><small>${tenant.tEmail}</small>` + '</td>';
-                        var propertyName = '<td class="propertyName" style="font-weight: 600;">' + tenant.propertyName + `<br><small>${tenant.pAddress}</small>` + '</td>';
-                        var rentAmount = '<td class="rentAmount" style="font-weight: 600;">' + tenant.rentAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(formatDate(tenant.recurringNextDate)=="Invalid Date"?"N/A":formatDate(tenant.recurringNextDate))}` + '</td>';
+                        var tenantName = '<td class="tenantName" style="font-weight: 600;">' + tenant.firstName + tenant.lastName + `<br><small>${tenant.tEmail}</small>` + '</td>';
+                        var contactinfo = '<td class="contactinfo" style="font-weight: 600;"><span style="color: #1467B0";">'+tenant.tPhoneNumber+'</span><br><small style="color: gray;">'+tenant.tEmail+'</small></td>';
+                        var propertyAddress = '<td class="propertyAddress" style="font-weight: 600;">'+ tenant.propertyName+'</span><br><small>'+tenant.pAddress+", "+tenant.pCity+", "+tenant.pState+", "+tenant.pZipCode+'</small></td>';
                         var assignUnit = '<td class="assignUnit" style="font-weight: 600;">' + tenant.unitNumber + `<br><small>${tenant.unitArea} Square/Feet</small>` + '</td>';
+                        var rentAmount = '<td class="rentAmount" style="font-weight: 600;">' + tenant.rentAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(formatDate(tenant.recurringNextDate)=="Invalid Date"?"N/A":formatDate(tenant.recurringNextDate))}` + '</td>';
                         var password = 'your-secret-password';
 var encryptedPropertyId = sjcl.encrypt(password, tenant.tenantID.toString());
 
@@ -4017,6 +4109,7 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                             '<ul class="dropdown-menu">' +
                             `<li><a class="dropdown-item text-success" href="./view-tenant.html?tenant=${encodedPropertyId}">View</a></li>` +
                             '<li><a class="edit-option dropdown-item text-primary"  href="javascript:void(0) ">Edit</a></li>' +
+                            '<li><a class="send-option dropdown-item text-success"  href="javascript:void(0) ">Invite to Tenant Portal</a></li>' +
                             '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>'
                         '</ul></td>';
                         var currentDate = new Date();
@@ -4034,12 +4127,14 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
 
                         }
 
-                        var row = '<tr>'+serial + tenantId + tenantName + propertyName + rentAmount +
-                            assignUnit + leaseEndDate + dropdownMenu + '</tr>';
+                        var row = '<tr>'+ checkbox + serial + tenantId + tenantName + contactinfo + propertyAddress +
+                assignUnit + rentAmount + leaseEndDate + dropdownMenu + '</tr>';
 
                         // Append the row to the table body
                         tableBody.append(row);
                     });
+                    
+                    
                     $("#preloader").fadeOut("slow")
 
                     $(document).on("click",'.delete-option',function(e) {
@@ -4192,12 +4287,14 @@ function filterTableByPropertyType(propertyType) {
     // Iterate through tenantData and filter based on propertyType
     tenantData.forEach(function(tenant, index) {
         if (tenant.propertyType === propertyType) {
+            var checkbox = '<td class="checkbox" style="font-weight: 600;"><div class="form-check"><input class="form-check-input myCheckbox" type="checkbox" value=""><label class="form-check-label" for="flexCheckDefault"></label></div></td>';
             var serial = '<td style="font-weight: 600;">' + (index + 1) + '</td>';
-            var tenantId = '<td class="tenant-id d-none" style="font-weight: 600;">' + tenant.tenantID + '</td>';
+            var tenantId = '<td class="tenant-id" style="font-weight: 600;">' + tenant.tenantID + '</td>';
             var tenantName = '<td class="tenantName" style="font-weight: 600;">' + tenant.firstName + tenant.lastName + `<br><small>${tenant.tEmail}</small>` + '</td>';
-            var propertyName = '<td class="propertyName" style="font-weight: 600;">' + tenant.propertyName + `<br><small>${tenant.pAddress}</small>` + '</td>';
-            var rentAmount = '<td class="rentAmount" style="font-weight: 600;">' + tenant.rentAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(formatDate(tenant.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(tenant.recurringNextDate))}` + '</td>';
+            var contactinfo = '<td class="contactinfo" style="font-weight: 600;"><span style="color: #1467B0";">'+tenant.tPhoneNumber+'</span><br><small style="color: gray;">'+tenant.tEmail+'</small></td>';
+            var propertyAddress = '<td class="propertyAddress" style="font-weight: 600;">'+ tenant.propertyName+'</span><br><small>'+tenant.pAddress+", "+tenant.pCity+", "+tenant.pState+", "+tenant.pZipCode+'</small></td>';
             var assignUnit = '<td class="assignUnit" style="font-weight: 600;">' + tenant.unitNumber + `<br><small>${tenant.unitArea} Square/Feet</small>` + '</td>';
+            var rentAmount = '<td class="rentAmount" style="font-weight: 600;">' + tenant.rentAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(formatDate(tenant.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(tenant.recurringNextDate))}` + '</td>';
             var password = 'your-secret-password';
             var encryptedPropertyId = sjcl.encrypt(password, tenant.tenantID.toString());
             var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
@@ -4206,6 +4303,7 @@ function filterTableByPropertyType(propertyType) {
                 '<ul class="dropdown-menu">' +
                 `<li><a class="dropdown-item text-success" href="./view-tenant.html?tenant=${encodedPropertyId}">View</a></li>` +
                 '<li><a class="edit-option dropdown-item text-primary"  href="javascript:void(0) ">Edit</a></li>' +
+                '<li><a class="send-option dropdown-item text-success"  href="javascript:void(0) ">Invite to Tenant Portal</a></li>' +
                 '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>' +
                 '</ul></td>';
             
@@ -4222,8 +4320,8 @@ function filterTableByPropertyType(propertyType) {
                 leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + '</td>';
             }
 
-            var row = '<tr>' + serial + tenantId + tenantName + propertyName + rentAmount +
-                assignUnit + leaseEndDate + dropdownMenu + '</tr>';
+            var row = '<tr>' + checkbox + serial + tenantId + tenantName + contactinfo + propertyAddress +
+                assignUnit + rentAmount + leaseEndDate + dropdownMenu + '</tr>';
             
             // Append the row to the table body
             $('#table_body').append(row);
@@ -4236,13 +4334,15 @@ function filterTableByPropertyAll() {
 
     // Iterate through tenantData and filter based on propertyType
     tenantData.forEach(function(tenant, index) {
-        
+        console.log(tenant)
+        var checkbox = '<td class="checkboxx" style="font-weight: 600;"><input class="form-check-input myCheckbox" type="checkbox" value=""><label class="form-check-label" for="flexCheckDefault"></label></td>';
             var serial = '<td style="font-weight: 600;">' + (index + 1) + '</td>';
-            var tenantId = '<td class="tenant-id d-none" style="font-weight: 600;">' + tenant.tenantID + '</td>';
+            var tenantId = '<td class="tenant-id" style="font-weight: 600;">' + tenant.tenantID + '</td>';
             var tenantName = '<td class="tenantName" style="font-weight: 600;">' + tenant.firstName + tenant.lastName + `<br><small>${tenant.tEmail}</small>` + '</td>';
-            var propertyName = '<td class="propertyName" style="font-weight: 600;">' + tenant.propertyName + `<br><small>${tenant.pAddress}</small>` + '</td>';
-            var rentAmount = '<td class="rentAmount" style="font-weight: 600;">' + tenant.rentAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(formatDate(tenant.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(tenant.recurringNextDate))}` + '</td>';
+            var contactinfo = '<td class="contactinfo" style="font-weight: 600;"><span style="color: #1467B0";">'+tenant.tPhoneNumber+'</span><br><small style="color: gray;">'+tenant.tEmail+'</small></td>';
+            var propertyAddress = '<td class="propertyAddress" style="font-weight: 600;">'+ tenant.propertyName+'</span><br><small>'+tenant.pAddress+", "+tenant.pCity+", "+tenant.pState+", "+tenant.pZipCode+'</small></td>';
             var assignUnit = '<td class="assignUnit" style="font-weight: 600;">' + tenant.unitNumber + `<br><small>${tenant.unitArea} Square/Feet</small>` + '</td>';
+            var rentAmount = '<td class="rentAmount" style="font-weight: 600;">' + tenant.rentAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(formatDate(tenant.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(tenant.recurringNextDate))}` + '</td>';
             var password = 'your-secret-password';
             var encryptedPropertyId = sjcl.encrypt(password, tenant.tenantID.toString());
             var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
@@ -4251,6 +4351,7 @@ function filterTableByPropertyAll() {
                 '<ul class="dropdown-menu">' +
                 `<li><a class="dropdown-item text-success" href="./view-tenant.html?tenant=${encodedPropertyId}">View</a></li>` +
                 '<li><a class="edit-option dropdown-item text-primary"  href="javascript:void(0) ">Edit</a></li>' +
+                '<li><a class="send-option dropdown-item text-success"  href="javascript:void(0) ">Invite to Tenant Portal</a></li>' +
                 '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>' +
                 '</ul></td>';
             
@@ -4267,8 +4368,8 @@ function filterTableByPropertyAll() {
                 leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + '</td>';
             }
 
-            var row = '<tr>' + serial + tenantId + tenantName + propertyName + rentAmount +
-                assignUnit + leaseEndDate + dropdownMenu + '</tr>';
+            var row = '<tr>' + checkbox + serial + tenantId + tenantName + contactinfo + propertyAddress +
+                assignUnit + rentAmount + leaseEndDate + dropdownMenu + '</tr>';
             
             // Append the row to the table body
             $('#table_body').append(row);
@@ -4366,6 +4467,39 @@ function filterTableByPropertyAll() {
             }
         });
     })
+</script>
+
+<script>
+   // Get all elements with the class name 'myCheckbox' and 'myButton'
+   const checkboxes = document.querySelectorAll('.myCheckbox');
+        const buttons = document.querySelectorAll('.myButton');
+
+        // Add event listeners to each checkbox
+        checkboxes.forEach((checkbox, index) => {
+            checkbox.addEventListener('change', function () {
+                // If the current checkbox is checked, show the corresponding button; otherwise, hide it
+                if (checkbox.checked) {
+                    buttons[index].style.display = 'block';
+                } else {
+                    buttons[index].style.display = 'none';
+                }
+            });
+        });
+        
+</script>
+<script>
+   $(document).ready(() => {
+    // Use event delegation to handle the change event for dynamically generated checkboxes
+    $("table").on("change", ".myCheckbox", function() {
+        if ($(this).is(":checked")) {
+            $('.myButton').show(); // Show the button when the checkbox is checked
+        } else {
+            $('.myButton').hide(); // Hide the button when the checkbox is unchecked
+        }
+    });
+});
+
+
 </script>
 </body>
 

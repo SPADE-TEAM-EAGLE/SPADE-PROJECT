@@ -970,6 +970,44 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="succesModal_email" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered succes-modal-dialog">
+            <div class="modal-content success-modal-content">
+                <div class="modal-header">
+
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="succes-close">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body succes-modal" style="padding-top: 70px;padding-bottom: 70px;">
+                    <div class="text-justify ps-2 border-model-line">
+                        <h2 class="modal-title d-flex align-items-center ps-1">
+                            <strong class="color-primary">Success!&nbsp;</strong>
+                            <i class="fi fi-rs-check-circle text-success"></i>
+
+                        </h2>
+                        <p class="ps-1 text-justify" id="succes-text">Email sended successfully!!!</p>
+
+                    </div>
+                    <!-- <div class="d-flex align-items-center p-2 my-3">
+                        <div class="flex-grow-1 ms-3">
+                            <p class="fw-bolder link-text">Invite send successfully!!!</p>
+                        </div>
+                        
+                    </div> -->
+                    <!-- <div class="mt-2"> <button type="button" class="btn btn-primary btn-pill mx-2" id="add_property_btn"
+                            data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal"><i
+                                class="fe fe-plus me-2"></i><strong>ADD NEW
+                                TENANT</strong></button></div> -->
+
+                </div>
+                <div class="modal-footer" style="border-top: 0">
+
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- MODAL EFFECTS -->
 
     <!-- MODAL EFFECTS -->
@@ -1145,6 +1183,9 @@
                                                 <a class="dropdown-item" href="lockscreen.html">
                                                     <i class="dropdown-icon fe fe-lock"></i> Lockscreen
                                                 </a> -->
+                                                <a class="dropdown-item" href="settings.html">
+                                                    <i class="dropdown-icon fe fe-settings"></i> Settings
+                                                </a>
                                                 <a class="dropdown-item" onclick="logout()" style="cursor: pointer;">
                                                     <i class="dropdown-icon fe fe-alert-circle"></i> Sign out
                                                 </a>
@@ -1342,7 +1383,7 @@
                             <div class="card-body pb-0">
                                 <div class="row">
                                     <div class="col-lg-12  position-relative">
-                                        <div class="d-flex">
+                                        <div class="d-flex justify-content-between align-items-center">
                                             <div class="media mt-0 mb-2">
                                                 <div class="media-user me-2">
                                                     <div class=""><img alt="" class="rounded-circle avatar avatar-md" style="max-width: 120px;" src="../assets/images/users/16.jpg"></div>
@@ -1352,22 +1393,14 @@
                                                     <h3 class="mb-0 mt-1 text-white company-name" style="font-weight: bold;"></h3>
                                                 </div>
                                             </div>
-                                            <!-- <div class="ms-auto">
-                                                <div class="dropdown show">
-
-                                                    <i class="fe fe-more-vertical text-white fs-20" data-bs-toggle="dropdown"></i>
-
-                                                    <div class="dropdown-menu dropdown-menu-end">
-                                                        <a class="dropdown-item text-primary" href="javascript:void(0)"><i
-                                                            class=
-                                                            "fi fi-rs-edit me-1"
-                                                            ></i> Edit</a>
-                                                        <a class="dropdown-item text-danger" href="javascript:void(0)"> <i class="fi fi-rs-trash me-1"></i>Delete</a>
-
-
-                                                    </div>
+                                            <div class="dropdown show" style="border-radius: 50%; background: #fff; width: 35px; display: flex; align-items: center; justify-content: center; padding: 8px;">
+                                                <i class="fe fe-more-vertical fs-20" data-bs-toggle="dropdown" style="color: #1467B0;"></i>
+                                                <div class="dropdown-menu dropdown-menu-end">
+                                                    <a class="dropdown-item text-primary" href="javascript:void(0)"><i class="fi fi-rs-edit me-1"></i> Edit</a>
+                                                    <a class="dropdown-item text-danger" href="javascript:void(0)"> <i class="fi fi-rs-trash me-1"></i>Delete</a>
                                                 </div>
-                                            </div> -->
+                                            </div>
+
                                         </div>
 
                                         <!-- <a href="javascript:void(0)" id="email_verification"
@@ -1408,12 +1441,13 @@
                         <div class="modal fade" id="contactInfoModal" tabindex="-1" role="dialog">
                             <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
                                 <div class="modal-content">
-                                    <div class="modal-header">
+                                    <div class="modal-header align-items-center">
                                         <div class="text-justify ps-2 border-model-line">
                                             <h2 class="modal-title">Personal <strong class="color-primary">Information</strong></h2>
                                             <span class="">These details are required for rent reminders, tenants commutations
                                                 and portal access. </span>
                                         </div>
+                                        <img src="../assets/images/faces/man-prospects.png" alt="" style="border-radius: 50%; width: 130px;">
                                         <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
                                         </button>
@@ -1446,7 +1480,8 @@
                                                                             </select>
                                                                         </div>
                                                                         <div class="col-md-6 mt-2">
-                                                                            <input type="tel" class="form-control" placeholder="Phone Number" required>
+                                                                            <input id="phone" name="phone" type="tel" autocomplete="off" placeholder="Enter Phone Number" pattern="[0-9]{5}" maxlength="15"
+                                            oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                                                                         </div>
 
                                                                     </div>
@@ -1500,7 +1535,7 @@
                         <div class="over_view" id="Overview">
                             <!-- ROW-2 OPEN -->
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="card inner-cards">
                                         <div class="card-header justify-content-start bg-light">
                                             <h3 class="card-title font-weight-bold" style="font-weight: bold;">Contact Info</h3>
@@ -1509,15 +1544,16 @@
                                             <div class="main-profile-contact-list">
                                                 <div class="me-5">
                                                     <div class="media mb-4 d-flex">
-                                                        <div class="media-icon bg-primary  mb-3 mb-sm-0 me-3 mt-1">
-                                                            <i class="fi fi-rs-phone-call text-white"></i>
+                                                        <div class="media-icon bg-light mb-3 mb-sm-0 me-3 mt-1">
+                                                            <i class="fi fi-rs-phone-call text-primary"></i>
                                                         </div>
                                                         <div class="media-body">
                                                             <!-- <h6 class="font-weight-semibold mb-1">Web Designer at <a href="javascript:void(0)" class="btn-link">Spruko</a></h6> -->
                                                             <span style="color: #727272;">No Contact Info on File</span>
                                                             <br>
                                                             <!-- <p>Past Work: Spruko, Inc.</p> -->
-                                                            <a href="javascript:void(0)" class="btn-link add-contactInfo" style="font-weight: bold;">+ Add New</a>
+                                                            <a href="javascript:void(0)" class="btn-link add-contactInfo" style="font-weight: bold;" id="tenant-email"></a><br>
+                                                            <a href="javascript:void(0)" class="btn-link add-contactInfo" style="font-weight: bold;" id="tenant-phone"></a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1525,7 +1561,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="card inner-cards">
                                         <div class="card-header justify-content-start bg-light">
                                             <h3 class="card-title font-wieght-bold" style="font-weight: bold;">Emergency Contacts</h3>
@@ -1534,8 +1570,8 @@
                                             <div class="main-profile-contact-list">
                                                 <div class="me-5">
                                                     <div class="media mb-4 d-flex">
-                                                        <div class="media-icon bg-primary  mb-3 mb-sm-0 me-3 mt-1">
-                                                            <i class="fi fi-rs-portrait text-white"></i>
+                                                        <div class="media-icon bg-light  mb-3 mb-sm-0 me-3 mt-1">
+                                                            <i class="fi fi-rs-portrait text-primary"></i>
                                                         </div>
                                                         <div class="media-body">
                                                             <!-- <h6 class="font-weight-semibold mb-1">Web Designer at <a href="javascript:void(0)" class="btn-link">Spruko</a></h6> -->
@@ -1550,35 +1586,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="card inner-cards">
-                                        <div class="card-header justify-content-start bg-light">
-                                            <h3 class="card-title font-wieght-bold" style="font-weight: bold;">Email</h3>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="main-profile-contact-list">
-                                                <div class="me-5">
-                                                    <div class="media mb-4 d-flex">
-                                                        <div class="media-icon bg-primary  mb-3 mb-sm-0 me-3 mt-1">
 
-                                                            <i class="fi fi-rs-marker text-white"></i>
-                                                        </div>
-                                                        <div class="media-body">
-                                                            <!-- <h6 class="font-weight-semibold mb-1">Web Designer at <a href="javascript:void(0)" class="btn-link">Spruko</a></h6> -->
-                                                            <span style="color: #727272;">No Email Info on File</span>
-                                                            <br>
-                                                            <!-- <p>Past Work: Spruko, Inc.</p> -->
-                                                            <a href="javascript:void(0)" class="btn-link add-contactInfo" style="font-weight: bold;">+ Add New</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="card inner-cards">
                                         <div class="card-header justify-content-start bg-light">
                                             <h3 class="card-title font-wieght-bold" style="font-weight: bold;">Tenant Portal</h3>
@@ -1587,9 +1596,9 @@
                                             <div class="main-profile-contact-list">
                                                 <div class="me-5">
                                                     <div class="media mb-4 d-flex">
-                                                        <div class="media-icon bg-primary  mb-3 mb-sm-0 me-3 mt-1">
+                                                        <div class="media-icon bg-light  mb-3 mb-sm-0 me-3 mt-1">
 
-                                                            <i class="fi fi-rs-window-alt text-white"></i>
+                                                            <i class="fi fi-rs-window-alt text-primary"></i>
                                                         </div>
                                                         <div class="media-body">
                                                             <!-- <h6 class="font-weight-semibold mb-1">Web Designer at <a href="javascript:void(0)" class="btn-link">Spruko</a></h6> -->
@@ -1605,6 +1614,33 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- <div class="row"> -->
+                                <!-- <div class="col-md-6">
+                                    <div class="card inner-cards">
+                                        <div class="card-header justify-content-start bg-light">
+                                            <h3 class="card-title font-wieght-bold" style="font-weight: bold;">Email</h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="main-profile-contact-list">
+                                                <div class="me-5">
+                                                    <div class="media mb-4 d-flex">
+                                                        <div class="media-icon bg-primary  mb-3 mb-sm-0 me-3 mt-1">
+
+                                                            <i class="fi fi-rs-marker text-white"></i>
+                                                        </div>
+                                                        <div class="media-body">
+                                                            <span style="color: #727272;">No Email Info on File</span>
+                                                            <br>
+                                                            <a href="javascript:void(0)" class="btn-link add-contactInfo" style="font-weight: bold;">+ Add New</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                
+                            <!-- </div> -->
 
                             <!-- ROW-2 CLOSED -->
                         </div>
@@ -2269,7 +2305,9 @@
 <script src="../assets/js/push_notification.js"></script>
 
     <!-- ############################################# -->
-
+    <script src="../assets/plugins/intl-tel-input-master/intlTelInput.js"></script>
+    <script src="../assets/plugins/intl-tel-input-master/country-select.js"></script>
+    <script src="../assets/plugins/intl-tel-input-master/utils.js"></script>
     <!-- C3 CHART JS -->
     <script src="../assets/plugins/charts-c3/d3.v5.min.js"></script>
     <script src="../assets/plugins/charts-c3/c3-chart.js"></script>
@@ -2304,6 +2342,39 @@
         }
     </script>
     <script>
+        var input = document.querySelector("#phone");
+            const errorMsg = document.querySelector("#error-msg");
+            const validMsg = document.querySelector("#valid-msg");
+
+            // here, the index maps to the error code returned from getValidationError - see readme
+            const errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+
+            // initialise plugin
+            const iti = window.intlTelInput(input, {
+                utilsScript: "/intl-tel-input/js/utils.js?1684676252775"
+            });
+
+            const reset = () => {
+                input.classList.remove("error");
+                errorMsg.innerHTML = "";
+                errorMsg.classList.add("d-none");
+                validMsg.classList.add("d-none");
+            };
+
+            // on blur: validate
+            input.addEventListener('blur', () => {
+                reset();
+                if (input.value.trim()) {
+                    if (iti.isValidNumber()) {
+                        validMsg.classList.remove("d-none");
+                    } else {
+                        input.classList.add("error");
+                        const errorCode = iti.getValidationError();
+                        errorMsg.innerHTML = errorMap[errorCode];
+                        errorMsg.classList.remove("d-none");
+                    }
+                }
+            });
         $(document).ready(function() {
             $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/protected',
@@ -2322,10 +2393,10 @@
                         localStorage.setItem("LandlordImg", response.image)
                         localStorage.setItem("landlordId", response.userId)
                         // LandlordImg = response.image;
-                        if(image!==" " && image!==null){
+                        if(response.image!==" " && response.image!==null){
                 
-                $("#user-img").attr("src", image)
-                $("#user-img-dark").attr("src", image)
+                $("#user-img").attr("src", response.image)
+                $("#user-img-dark").attr("src", response.image)
             } 
                         $("#user-name").text(toTitleCase(response.userName))
                         $("#header-user").text(toTitleCase(response.userName))
@@ -2409,7 +2480,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                     },
                     success: function(response) {
                         console.log(1111)
-                        $("#succesModal").modal("show")
+                        $("#succesModal_email").modal("show")
                             //    getData()
                     },
                     error: function(xhr, status, error) {
@@ -2420,6 +2491,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                         console.error('Error sending data:', error);
                     }
                 });
+            
             })
             console.log(3464565455656546)
             $.ajax({
@@ -2436,7 +2508,8 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                 success: function({
                     data
                 }) {
-                    console.log(data)
+                    $("#tenant-email").text(data[0][0].tEmail)
+                    $("#tenant-phone").text(data[0][0].tPhoneNumber)
                     $(".company-name").text(`${data[0][0].companyName} | ${data[0][0].firstName+" "+data[0][0].lastName}`)
                 },
                 error: function(xhr, status, error) {

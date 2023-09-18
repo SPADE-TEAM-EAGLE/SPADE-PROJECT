@@ -16,7 +16,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="../assets/images/brand/favicon.ico" />
 
     <!-- TITLE -->
-    <title>Vendor list - SpadeRent</title>
+    <title>View Property - SpadeRent</title>
 
     <!-- BOOTSTRAP CSS -->
     <link id="style" href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -41,44 +41,6 @@
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
         .custom-file-input::-webkit-file-upload-button {
             visibility: hidden;
-        }
-        
-        #propertyTable {
-            padding: 0;
-        }
-        
-        #propertyTable_wrapper .dataTables_wrapper {
-            padding: 0;
-        }
-        
-        #propertyTable_wrapper .dataTables_scroll {
-            padding: 0;
-        }
-        
-        #propertyTable_wrapper .dataTables_scrollHead {
-            padding: 0;
-        }
-        
-        #propertyTable_wrapper .dataTables_scrollBody {
-            padding: 0;
-        }
-        
-        .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar {
-            width: 7px;
-            /* Width of the scrollbar */
-        }
-        
-        .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb {
-            background-color: rgb(136, 136, 136, 0.2);
-            /* Color of the scrollbar thumb */
-            border-radius: 7px;
-            transition: all 1ms;
-            /* Rounded corners for the thumb */
-        }
-        
-        .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb:hover {
-            background-color: rgb(136, 136, 136, 0.5);
-            /* Color of the scrollbar thumb on hover */
         }
         
         .custom-file-input::before {
@@ -106,34 +68,19 @@
             background: #28a745;
         }
         
-        .dark-mode .create-new-link {
-            background: transparent !important;
-            border: 3px solid #1467B0 !important;
-            color: white !important;
-            border-radius: 50px !important;
-        }
-        /* .dark-mode .create-new-link:hover {
-    border: 3px solid #1467B0 !important;
-} */
-        
-        .create-new-link {
-            background: transparent !important;
-            border: 3px solid #1467B0 !important;
-            color: black;
-            border-radius: 50px !important;
-        }
-        
         .selected-files {
             margin-top: 10px;
         }
         
-        .dark-mode .selected-files span {
-            display: inline-block;
-            margin-right: 0;
-            padding: 4px 8px;
-            background: transparent;
-            color: white !important;
-            border-radius: 4px;
+        .image-container {
+            /* Border width and color */
+            border-radius: 5px;
+            /* Border radius for rounded corners */
+            padding: 10px;
+            /* Spacing between the image and the border */
+            /* Shadow effect */
+            margin-bottom: 10px;
+            /* Margin between the image containers */
         }
         
         .selected-files span {
@@ -157,16 +104,6 @@
             justify-content: center;
             padding: 6px 12px;
             background-color: #fff;
-        }
-        
-        .dark-mode .custom-file-label {
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 6px 12px;
-            background-color: transparent;
         }
         
         .custom-file-label i {
@@ -197,15 +134,11 @@
             border: 1px solid #e9edf4;
         }
         /* input:focus {
-    border: 3px solid #555 !important;
-} */
+            border: 3px solid #555 !important;
+        } */
         
         .panel-body {
             padding: 0px;
-        }
-        
-        .dark-mode .btn-close {
-            color: white;
         }
         
         .accordion-item:first-of-type {
@@ -265,8 +198,13 @@
             vertical-align: middle !important;
         }
         /* .card-header {
-padding: 0.5rem 1rem;
-} */
+        padding: 0.5rem 1rem;
+    } */
+        
+        .card {
+            border-radius: 22px;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        }
         
         .modal-footer .button-left {
             background-color: #1F1F1F;
@@ -274,29 +212,17 @@ padding: 0.5rem 1rem;
             color: white;
         }
         
-        .modal-footer button,
-        .modal-footer a {
+        .modal-footer button {
             border-radius: 2.75rem;
             padding: 4px 30px;
             font-family: 'Figtree';
             font-style: normal;
             font-weight: 600;
+            font-size: 0.938rem;
             line-height: 1.875rem;
-            font-size: 0.77rem;
             box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
             /* identical to box height, or 120% */
             letter-spacing: 0.0145455em;
-            /* font-size: 0.938rem; */
-        }
-        
-        .disabled {
-            pointer-events: none;
-            cursor: not-allowed;
-            color: gray;
-        }
-        
-        .modal-footer .button {
-            font-size: 0.938rem;
         }
         
         .accordion-button::after {
@@ -313,7 +239,7 @@ padding: 0.5rem 1rem;
         }
         
         .tick {
-            color: #1DBC5F;
+            color: green;
             font-weight: bolder
         }
         
@@ -342,19 +268,16 @@ padding: 0.5rem 1rem;
         .rounded-pill-Single-Family {
             color: #4A4AFF !important;
             background: #E6E6F2 !important;
-            font-weight: bold;
         }
         
         .rounded-pill-Multi-Family {
             color: #0BAAB8 !important;
             background: #C8F3F7 !important;
-            font-weight: bold;
         }
         
         .rounded-pill-Multi-Commercial {
             background: #FFF9E5 !important;
             color: #F5CA38 !important;
-            font-weight: bold;
         }
         
         .table-primary {
@@ -375,11 +298,11 @@ padding: 0.5rem 1rem;
         
         .delete-file {
             position: absolute;
-            top: -1px;
-            right: 4px;
+            top: 5px;
+            right: 5px;
             cursor: pointer;
-            font-size: 11px;
-            color: #000;
+            font-size: 18px;
+            color: #ff0000;
         }
         
         .btn-group>.btn-group:not(:last-child)>.btn,
@@ -400,28 +323,34 @@ padding: 0.5rem 1rem;
             border-top-right-radius: calc(0.5rem - 1px);
             border-top-left-radius: calc(0.5rem - 1px);
         }
-        /* .delete-file {
-position: absolute;
-top: 0px;
-right: 5px;
-cursor: pointer;
-font-size: 13px;
-color: #000;
-} */
+        
+        .selected-files span {
+            display: inline-block;
+            margin-right: 0px;
+            padding: 0px;
+            background: none;
+            color: #333;
+            /* border-radius: 4px; */
+        }
+        
+        .delete-file {
+            position: absolute;
+            top: 0px;
+            right: 5px;
+            cursor: pointer;
+            font-size: 13px;
+            color: #000;
+        }
         
         button.btn-close {
-            right: 6px;
+            right: -7px;
         }
         
         .btn-close {
-            width: 1.8rem;
+            width: 2.5rem !important;
             opacity: 1;
             position: absolute;
             top: 6px;
-        }
-        
-        .del {
-            width: 2rem !important;
         }
         
         .btn-close:hover,
@@ -499,12 +428,14 @@ color: #000;
             }
         }
         
+        .card-header {
+            padding: 0.6rem 1.5rem;
+            border-radius: 28px 28px 0px 0px !important;
+        }
+        
         @media (max-width:375px) {
             .border-model-line h2 {
                 font-size: 1.4rem;
-            }
-            .succes-modal {
-                padding: 1rem 1rem;
             }
         }
         
@@ -527,74 +458,12 @@ color: #000;
                 padding: 5px;
             }
         }
-        
-        th,
-        td {
-            border-left-color: transparent !important;
-            border-right-color: transparent !important;
-        }
-        
-        .dark-mode th {
-            background: #212121 !important;
-        }
-        
-        .light-mode th {
-            background: #ECF3F9 !important;
-        }
+
     </style>
 
 </head>
 
-<body class="app sidebar-mini ltr light-mode">
-
-    <!-- GLOBAL-LOADER -->
-    <!-- <div id="global-loader">
-        <img src="../assets/images/loader.svg" class="loader-img" alt="Loader">
-    </div> -->
-    <div id="preloader" class="tlp-preloader">
-        <div class="animation-preloader">
-            <div class="tlp-spinner"></div>
-            <img src="../assets/images/logo-preloader.png" alt="Preloader" style="width: 65px;">
-        </div>
-    </div>
-    <!-- /GLOBAL-LOADER -->
-    <div class="modal fade" id="myModal_warning_connection" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-dialog-centered text-center" role="document">
-            <div class="modal-content modal-content-demo">
-                <div class="modal-body p-0">
-                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
-                        <div class="card-body text-center">
-                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24"><path fill="#fad383" d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z"/><circle cx="12" cy="16" r="1" fill="#f7b731"/><path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"/></svg></span>
-                            <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
-                            <p class="card-text text-dark m-0">Sorry! Something went wrong.</p>
-                            <p class="card-text text-dark m-0">Kindly check your internet connection or please try again later.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="myModal_warning" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-dialog-centered text-center" role="document">
-            <div class="modal-content modal-content-demo">
-                <div class="modal-body p-0">
-                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
-                        <div class="card-body text-center">
-                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
-                                    viewBox="0 0 24 24">
-                                    <path fill="#fad383"
-                                        d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z" />
-                                    <circle cx="12" cy="16" r="1" fill="#f7b731" />
-                                    <path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z" />
-                                </svg></span>
-                            <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
-                            <p class="card-text text-dark">Session expeired!, Login again</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<body class="app sidebar-mini ltr light-mode" style="color: #1467B0;">
     <div class="modal fade effect-scale" id="modaldemo8" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered modal-l" role="document">
             <div class="modal-content">
@@ -672,6 +541,30 @@ color: #000;
             </div>
         </div>
     </div>
+    <div class="modal fade" id="myModal_warning_connection" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
+                        <div class="card-body text-center">
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24"><path fill="#fad383" d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z"/><circle cx="12" cy="16" r="1" fill="#f7b731"/><path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"/></svg></span>
+                            <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
+                            <p class="card-text text-dark m-0">Sorry! Something went wrong.</p>
+                            <p class="card-text text-dark m-0">Kindly check your internet connection or please try again later.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- GLOBAL-LOADER -->
+    <div id="preloader" class="tlp-preloader">
+        <div class="animation-preloader">
+            <div class="tlp-spinner"></div>
+            <img src="../assets/images/logo-preloader.png" alt="Preloader" style="width: 65px;">
+        </div>
+    </div>
+    <!-- /GLOBAL-LOADER -->
     <!-- Default Offcanvas-->
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
         <div class="offcanvas-header pt-5">
@@ -828,444 +721,150 @@ color: #000;
         </div>
     </div>
     <!--/Default Offcanvas-->
-    <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+    <!-- Modal -->
+    <div class="modal fade" id="largemodal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg " role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="text-justify ps-2 border-model-line">
-                        <h2 class="modal-title">Add <strong class="color-primary">Vendors</strong></h2>
-                        <span class="">The real power of tasks is keeping track of deadlines and having a
-                            log of all work and communication related to the tasks for later reference.</span>
+                        <h2 class="modal-title">Create <strong class="color-primary">New Property</strong></h2>
+                        <span class="">Spade Rent allows you to add a range of commercial and residential properties,
+                            from condos and single-family homes to retail stores and parking lots.</span>
                     </div>
-                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="top-close">
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                        <form class="row g-3" enctype="multipart/form-data">
-                            <div class="col-md-4">
-                                <label for="inputEmail1" class="form-label fw-bold">First Name *</label>
-                                <input class="form-control" type="text" placeholder="Enter First Name" pattern="[A-Za-z\s]+" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')" data-bs-container="#addModal" id="firstName" required>
-                                <span class="text-danger d-none">First name is required!</span>
+                    <div class="accordion-item mb-4" id="accordion-item1">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" id="accordian-button-1" type="button" data-bs-toggle="collapse" onclick="checkFieldsFilled('accordion-item1')" id="accordion-button1" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <span class="m-0 me-4 fs-1" style="font-weight: bold;">01</span>
+                                <h3 class="m-0"><strong>Property Information</strong> <i class="fi fi-rs-pencil"></i><i
+                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
+                                </h3>
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <form class="row g-3" enctype="multipart/form-data">
+                                    <div class="col-md-12">
+                                        <label class="form-label fw-bold">Property Photo</label>
+                                        <div class="custom-file" style="border: 1px dashed #00000087;">
+                                            <input id="fileInput" type="file" name="image" class="custom-file-input form" accept=".jpg, .png, image/jpeg, image/png" aria-label="hello" multiple>
+                                            <span className="d-none"></span>
+                                            <label class="custom-file-label" for="fileInput">
+                                                <i class="fi fi-rs-cloud-upload"></i>
+                                                <div class="custom-file-text">
+                                                    <span>Upload Photo here</span>
+                                                    <span>JPEG and PNG, file size no more than 10MB</span>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        <div class="selected-files">
+                                            <div class="file-grid"></div>
+                                        </div>
+                                        <span class="text-danger d-none">Photos are required!</span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="inputEmail4" class="form-label fw-bold">Property ID</label>
+                                        <input type="text" class="form-control form" id="propertyId">
+                                        <span class="text-danger d-none">Property ID is required!</span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="inputPassword4" class="form-label fw-bold">Property Name <spnan
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control form" id="propertyName">
+                                        <span class="text-danger d-none">Property name required!</span>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="inputAddress" class="form-label fw-bold">Address <spnan
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control form" id="address" placeholder="Enter Address">
+                                        <span class="text-danger d-none">Address is required!</span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="inputCity" class="form-label fw-bold">City <spnan
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control form" id="city">
+                                        <span class="text-danger d-none">City is required!</span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="inputState" class="form-label fw-bold">State <spnan
+                                                class="text-danger">*</span></label>
+                                        <select id="state" class="form-select form">
+                                            <option selected>Choose...</option>
+                                            <option>Sindh</option>
+                                            <option>Punjab</option>
+                                            <option>Balochistan</option>
+                                            <option>KPK</option>
+                                        </select>
+                                        <span class="text-danger d-none">State is required!</span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="inputZip" class="form-label fw-bold">Zip <spnan class="text-danger">
+                                                *</span></label>
+                                        <input type="text" class="form-control form" id="zip">
+                                        <span class="text-danger d-none">Zip is required!</span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="inputState" class="form-label fw-bold">Property Type <spnan
+                                                class="text-danger">*</span></label>
+                                        <select id="propertyType" class="form-select form">
+                                            <option selected>Choose...</option>
+                                            <option>Sindh</option>
+                                            <option>Punjab</option>
+                                            <option>Balochistan</option>
+                                            <option>KPK</option>
+                                        </select>
+                                        <span class="text-danger d-none">Property Type is required!</span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="inputPassword4" class="form-label fw-bold">Property Total SF <spnan
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control form" id="propertyTotalSF">
+                                        <span class="text-danger d-none">Property Total SF is required!</span>
+                                    </div>
+                                </form>
                             </div>
-                            <div class="col-md-4">
-                                <label for="inputEmail2" class="form-label fw-bold">Last Name *</label>
-                                <input class="form-control" type="text" placeholder="Enter Last Name" pattern="[A-Za-z\s]+" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')" data-bs-container="#addModal" id="lastName" required>
-                                <span class="text-danger d-none">Last name is required!</span>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="inputEmail3" class="form-label fw-bold">Business Name *</label>
-                                <input class="form-control" type="text" placeholder="Enter Business Name" data-bs-container="#addModal" id="businessName" required>
-                                <span class="text-danger d-none">Business name is required!</span>
-                            </div>
-                            <div class="col-12">
-                                <label for="inputEmail3" class="form-label fw-bold">Street Address</label>
-                                <input class="form-control" type="text" placeholder="Enter Street Address" data-bs-container="#addModal" id="streetAddress" required>
-                                <span class="text-danger d-none">Street address is required!</span>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="inputEmail3" class="form-label fw-bold">City</label>
-                                <input class="form-control" type="text" placeholder="Enter City" pattern="[A-Za-z\s]+" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')" data-bs-container="#addModal" id="city" required>
-                                <span class="text-danger d-none">City is required!</span>
-                            </div>
-                            <!-- <div class="col-md-4">
-                                <label for="inputState" class="form-label fw-bold">Status</label>
-                                <select class="form-select form"
-                                    id="status" required>
-                                    <option selected>Choose...</option>
-                                    <option value="Not started">Not started</option>
-                                    <option value="In progress">In progress</option>
-                                    <option value="Completed">Completed</option>
-                                </select>
-                                <span class="text-danger d-none">Status is required!</span>
-                            </div> -->
-                            <div class="col-md-6">
-                                <label for="inputEmail3" class="form-label fw-bold">Zip Code</label>
-                                <input class="form-control form" type="text" id="zip" name="zip" pattern="[0-9]{5}" placeholder="A valid 5-digit zip code" maxlength="5" minlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '')"placeholder="Enter Zip" required>
-                                <span class="text-danger d-none">Zip code is required!</span>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="inputEmail3" class="form-label fw-bold">Work Phone Number</label>
-                                <input class="form-control" type="tel" data-bs-placement="top" placeholder="Enter Phone Number" pattern="[0-9]+" oninput="this.value = this.value.replace(/[^0-9]/g, '');" id="workPhone">
-                                <span class="text-danger d-none">Work Phone number is required!</span>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="inputEmail3" class="form-label fw-bold">Mobile Number</label>
-                                <input class="form-control" type="phone" placeholder="Enter Mobile Number" id="phone" required>
-                                <span id="valid-msg" class="d-none text-success">✓ Valid</span>
-                                <span id="error-msg" class="hide text-danger"></span>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="inputEmail3" class="form-label fw-bold">Email</label>
-                                <input class="form-control" type="email" pattern="[A-Za-z0-9_\.@]+" oninput="this.value = this.value.replace(/[^A-Za-z0-9_\.@]/g, '').replace(/(@+)/g, '@')" placeholder="Enter Email" id="email" required>
-                                <span class="text-danger d-none">Email is required!</span>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="inputState" class="form-label fw-bold">Category</label>
-                                <select class="form-select form" id="category" required>
-                                    <option selected>Choose...</option>
-                                </select>
-                                <span class="text-danger d-none">Category is required!</span>
-                            </div>
-
-                        </form>
+                        </div>
                     </div>
+                    <div class="accordion-item" id="accordion-item2">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" onclick="checkFieldsFilled('accordion-item2')" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <span class="m-0 me-4 fs-1" style="font-weight: bold;">02</span>
+                                <h3 class="m-0"><strong>Property Unit Information</strong> <i
+                                        class="fi fi-rs-pencil"></i><i
+                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
+                                </h3>
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                            <form class="row g-3 m-1" enctype="multipart/form-data">
 
-                </div>
-                <div class="modal-footer d-flex justify-content-end">
-                    <div class=""><button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close'>Close</button>
-                        <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
-                        <a href="javascript:void(0)" class="btn text-light btn-pill button disabled" style='background-color:#1467B0;' id='next'>Next</a>
+                                <div class="col-12 mb-1">
+                                    <label for="inputAddress" class="form-label fw-bold">Number of Units<span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control px-2" id="units" placeholder=" ">
+                                    <span class="text-danger d-none">Units are required!</span>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="myModal_edit" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div class="text-justify ps-2 border-model-line">
-                        <h2 class="modal-title">Update <strong class="color-primary">Vendor</strong></h2>
-                        <span class="">The real power of tasks is keeping track of deadlines and having a
-                            log of all work and communication related to the vendors for later reference.</span>
-                    </div>
-                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="top-close">
-                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                        <form class="row g-3" enctype="multipart/form-data">
-                            <div class="col-md-4">
-                                <label for="inputEmail1" class="form-label fw-bold">First Name *</label>
-                                <input class="form-control" type="text" placeholder="Enter First Name" pattern="[A-Za-z\s]+" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')" data-bs-container="#addModal" id="firstName_update" required>
-                                <span class="text-danger d-none">First name is required!</span>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="inputEmail2" class="form-label fw-bold">Last Name *</label>
-                                <input class="form-control" type="text" placeholder="Enter Last Name" pattern="[A-Za-z\s]+" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')" data-bs-container="#addModal" id="lastName_update" required>
-                                <span class="text-danger d-none">Last name is required!</span>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="inputEmail3" class="form-label fw-bold">Business Name *</label>
-                                <input class="form-control" type="text" placeholder="Enter Business Name" data-bs-container="#addModal" id="businessName_update" required>
-                                <span class="text-danger d-none">Business name is required!</span>
-                            </div>
-                            <div class="col-12">
-                                <label for="inputEmail3" class="form-label fw-bold">Street Address</label>
-                                <input class="form-control" type="text" placeholder="Enter Street Address" data-bs-container="#addModal" id="streetAddress_update" required>
-                                <span class="text-danger d-none">Street address is required!</span>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="inputEmail3" class="form-label fw-bold">City</label>
-                                <input class="form-control" type="text" placeholder="Enter City" pattern="[A-Za-z\s]+" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')" data-bs-container="#addModal" id="city_update" required>
-                                <span class="text-danger d-none">City is required!</span>
-                            </div>
-                            <!-- <div class="col-md-4">
-                                <label for="inputState" class="form-label fw-bold">Status</label>
-                                <select class="form-select form"
-                                    id="status" required>
-                                    <option selected>Choose...</option>
-                                    <option value="Not started">Not started</option>
-                                    <option value="In progress">In progress</option>
-                                    <option value="Completed">Completed</option>
-                                </select>
-                                <span class="text-danger d-none">Status is required!</span>
-                            </div> -->
-                            <div class="col-md-6">
-                                <label for="inputEmail3" class="form-label fw-bold">Zip Code</label>
-                                <input class="form-control form" type="text" id="zip_update" name="zip" pattern="[0-9]{5}" placeholder="A valid 5-digit zip code" maxlength="5" minlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '')"placeholder="Enter Zip" required>
-                                <span class="text-danger d-none">Zip code is required!</span>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="inputEmail3" class="form-label fw-bold">Work Phone Number</label>
-                                <input class="form-control" type="tel" data-bs-placement="top" placeholder="Enter Phone Number" pattern="[0-9]+" oninput="this.value = this.value.replace(/[^0-9]/g, '');" id="workPhone_update">
-                                <span class="text-danger d-none">Work Phone number is required!</span>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="inputEmail3" class="form-label fw-bold">Mobile Number</label>
-                                <input class="form-control" type="phone" placeholder="Enter Mobile Number" id="phone_update" required>
-                                <span id="valid-msg" class="d-none text-success">✓ Valid</span>
-                                <span id="error-msg" class="hide text-danger"></span>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="inputEmail3" class="form-label fw-bold">Email</label>
-                                <input class="form-control" type="email" pattern="[A-Za-z0-9_\.@]+" oninput="this.value = this.value.replace(/[^A-Za-z0-9_\.@]/g, '').replace(/(@+)/g, '@')" placeholder="Enter Email" id="email_update" required>
-                                <span class="text-danger d-none">Email is required!</span>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="inputState" class="form-label fw-bold">Category</label>
-                                <select class="form-select form" id="category_update" required>
-                                    <option selected>Choose...</option>
-                                </select>
-                                <span class="text-danger d-none">Category is required!</span>
-                            </div>
-
-                        </form>
-                    </div>
-
-                </div>
-                <div class="modal-footer d-flex justify-content-between">
-                    <!-- <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
+                <div class="modal-footer">
+                    <!-- <button class="btn btn-dark button-left me-auto" data-bs-dismiss="modal" id='draft' disabled>Save as
                         Draft</button> -->
-                    <div class="d-flex">
+                    <button class="btn btn-transparent text-dark" style='background-color:#FFFFFF; border: 3px solid #1467B0;' data-bs-dismiss="modal" id='close'>Close</button>
+                    <button class="btn text-light" style='background-color:#1467B0;' id='next' disabled>Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- MODAL EFFECTS -->
 
-                        <!-- <label class="custom-control custom-checkbox me-2">
-                            <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1"
-                                checked="">
-                            <span class="custom-control-label">Notify Tenant</span>
-                        </label>
-                        <label class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1"
-                                checked="">
-                            <span class="custom-control-label">Notify Assignee(s)</span>
-                        </label> -->
-                    </div>
-                    <div class=""><button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close'>Close</button>
-                        <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
-                        <a href="javascript:void(0)" class="btn text-light btn-pill button disabled" style='background-color:#1467B0;' id='save'>Save</a>
-                    </div>
+    <!-- MODAL EFFECTS -->
 
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="infoModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-dialog-centered text-center" role="document">
-            <div class="modal-content modal-content-demo">
-                <div class="modal-body p-0">
-                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
-                        <!-- <div class="card-header border-0 pt-3">
-                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
-                            </button>
-                        </div> -->
-                        <div class="card-body text-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24"><path fill="#fad383" d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z"></path><circle cx="12" cy="16" r="1" fill="#f7b731"></circle><path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"></path></svg>
-                            <h4 class="h4 mb-0 mt-3 fw-bold">Info</h4>
-                            <p class="card-text text-dark">Vendor Already Exist</p>
-                        </div>
-                        <!-- <div class="card-footer text-center border-0 pt-0">
-                            <div class="row">
-                                <div class="text-center">
-                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
-                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
-                                </div>
-                            </div>
-                        </div> -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="infoModal_verify" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-dialog-centered text-center" role="document">
-            <div class="modal-content modal-content-demo">
-                <div class="modal-body p-0">
-                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
-                        <!-- <div class="card-header border-0 pt-3">
-                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
-                            </button>
-                        </div> -->
-                        <div class="card-body text-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24">
-                                <path fill="#fad383"
-                                    d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z">
-                                </path>
-                                <circle cx="12" cy="16" r="1" fill="#f7b731"></circle>
-                                <path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"></path>
-                            </svg>
-                            <h4 class="h4 mb-0 mt-3 fw-bold">Info</h4>
-                            <p class="card-text text-dark">Token code or Password not matched</p>
-                        </div>
-                        <!-- <div class="card-footer text-center border-0 pt-0">
-                            <div class="row">
-                                <div class="text-center">
-                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
-                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
-                                </div>
-                            </div>
-                        </div> -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="succesModal_verify" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-dialog-centered text-center" role="document">
-            <div class="modal-content modal-content-demo">
-                <div class="modal-body p-0">
-                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
-                        <!-- <div class="card-header border-0 pt-3">
-                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
-                            </button>
-                        </div> -->
-                        <div class="card-body text-center">
-                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
-                                    viewBox="0 0 24 24">
-                                    <path fill="#13bfa6"
-                                        d="M10.3125,16.09375a.99676.99676,0,0,1-.707-.293L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328l-6.1875,6.1875A.99676.99676,0,0,1,10.3125,16.09375Z"
-                                        opacity=".99" />
-                                    <path fill="#71d8c9"
-                                        d="M12,2A10,10,0,1,0,22,12,10.01146,10.01146,0,0,0,12,2Zm5.207,7.61328-6.1875,6.1875a.99963.99963,0,0,1-1.41406,0L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328Z" />
-                                </svg></span>
-                            <h4 class="h4 mb-0 mt-3 fw-bold">Success</h4>
-                            <p class="card-text text-dark">Your Email has been verified</p>
-                        </div>
-                        <!-- <div class="card-footer text-center border-0 pt-0">
-                            <div class="row">
-                                <div class="text-center">
-                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
-                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
-                                </div>
-                            </div>
-                        </div> -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="succesModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-dialog-centered text-center" role="document">
-            <div class="modal-content modal-content-demo">
-                <div class="modal-body p-0">
-                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
-                        <!-- <div class="card-header border-0 pt-3">
-                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
-                            </button>
-                        </div> -->
-                        <div class="card-body text-center">
-                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24">
-                      <path fill="#13bfa6"
-                        d="M10.3125,16.09375a.99676.99676,0,0,1-.707-.293L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328l-6.1875,6.1875A.99676.99676,0,0,1,10.3125,16.09375Z"
-                        opacity=".99" />
-                      <path fill="#71d8c9"
-                        d="M12,2A10,10,0,1,0,22,12,10.01146,10.01146,0,0,0,12,2Zm5.207,7.61328-6.1875,6.1875a.99963.99963,0,0,1-1.41406,0L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328Z" />
-                    </svg></span>
-                            <h4 class="h4 mb-0 mt-3 fw-bold">Success</h4>
-                            <p class="card-text text-dark">Your vendor has been successfully added.</p>
-                        </div>
-                        <!-- <div class="card-footer text-center border-0 pt-0">
-                            <div class="row">
-                                <div class="text-center">
-                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
-                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
-                                </div>
-                            </div>
-                        </div> -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="succesModal_edit" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-dialog-centered text-center" role="document">
-            <div class="modal-content modal-content-demo">
-                <div class="modal-body p-0">
-                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
-                        <!-- <div class="card-header border-0 pt-3">
-                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
-                            </button>
-                        </div> -->
-                        <div class="card-body text-center">
-                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24">
-                      <path fill="#13bfa6"
-                        d="M10.3125,16.09375a.99676.99676,0,0,1-.707-.293L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328l-6.1875,6.1875A.99676.99676,0,0,1,10.3125,16.09375Z"
-                        opacity=".99" />
-                      <path fill="#71d8c9"
-                        d="M12,2A10,10,0,1,0,22,12,10.01146,10.01146,0,0,0,12,2Zm5.207,7.61328-6.1875,6.1875a.99963.99963,0,0,1-1.41406,0L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328Z" />
-                    </svg></span>
-                            <h4 class="h4 mb-0 mt-3 fw-bold">Success</h4>
-                            <p class="card-text text-dark" id="delete-text">Your vendor has been successfully deleted.</p>
-                        </div>
-                        <!-- <div class="card-footer text-center border-0 pt-0">
-                            <div class="row">
-                                <div class="text-center">
-                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
-                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
-                                </div>
-                            </div>
-                        </div> -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="succesModal_delete" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-dialog-centered text-center" role="document">
-            <div class="modal-content modal-content-demo">
-                <div class="modal-body p-0">
-                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
-                        <!-- <div class="card-header border-0 pt-3">
-                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
-                            </button>
-                        </div> -->
-                        <div class="card-body text-center">
-                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24">
-                      <path fill="#13bfa6"
-                        d="M10.3125,16.09375a.99676.99676,0,0,1-.707-.293L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328l-6.1875,6.1875A.99676.99676,0,0,1,10.3125,16.09375Z"
-                        opacity=".99" />
-                      <path fill="#71d8c9"
-                        d="M12,2A10,10,0,1,0,22,12,10.01146,10.01146,0,0,0,12,2Zm5.207,7.61328-6.1875,6.1875a.99963.99963,0,0,1-1.41406,0L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328Z" />
-                    </svg></span>
-                            <h4 class="h4 mb-0 mt-3 fw-bold">Success</h4>
-                            <p class="card-text text-dark" id="delete-text">Your vendor has been successfully edited.</p>
-                        </div>
-                        <!-- <div class="card-footer text-center border-0 pt-0">
-                            <div class="row">
-                                <div class="text-center">
-                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
-                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
-                                </div>
-                            </div>
-                        </div> -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="myModal_delete">
-        <div class="modal-dialog modal-dialog-centered text-center" role="document">
-            <div class="modal-content modal-content-demo">
-                <div class="modal-body p-0">
-                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
-                        <div class="card-header border-0 pt-3">
-                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
-                            </button>
-                        </div>
-                        <div class="card-body text-center">
-                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
-                                    viewBox="0 0 24 24">
-                                    <path fill="#f07f8f"
-                                        d="M20.05713,22H3.94287A3.02288,3.02288,0,0,1,1.3252,17.46631L9.38232,3.51123a3.02272,3.02272,0,0,1,5.23536,0L22.6748,17.46631A3.02288,3.02288,0,0,1,20.05713,22Z" />
-                                    <circle cx="12" cy="17" r="1" fill="#e62a45" />
-                                    <path fill="#e62a45" d="M12,14a1,1,0,0,1-1-1V9a1,1,0,0,1,2,0v4A1,1,0,0,1,12,14Z" />
-                                </svg></span>
-                            <h4 class="h4 mb-0 mt-3 fw-bold fs-4">Warning</h4>
-                            <p class="card-text">This will delete the Vendor. Are you sure?</p>
-
-                        </div>
-                        <div class="card-footer text-center border-0 pt-0">
-                            <div class="row">
-                                <div class="text-center">
-                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
-                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <!-- PAGE -->
     <div class="page">
         <div class="page-main">
@@ -1350,9 +949,9 @@ color: #000;
                                         <!-- 3 comments start  -->
                                         <div class="dropdown  d-flex notifications">
                                             <a class="nav-link icon" data-bs-toggle="sidebar-right"
-                                            data-target=".sidebar-right"><i class="fe fe-bell"></i> 
-                                            <span class="badge bg-secondary header-badge bg-primary" id="count_unread"></span>
-                                        </a>
+                                                data-target=".sidebar-right"><i class="fe fe-bell"></i> 
+                                                <span class="badge bg-secondary header-badge bg-primary" id="count_unread"></span>
+                                            </a>
                                             <!-- <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                                 <div class="drop-heading border-bottom">
                                                     <div class="d-flex">
@@ -1417,7 +1016,7 @@ color: #000;
                                             <a href="javascript:void(0)" data-bs-toggle="dropdown" class="nav-link leading-none d-flex">
                                                 <!-- <img src="../assets/images/users/21.jpg" 
                                                     class="avatar  profile-user brround cover-image"> -->
-                                                <span class="dynamic-text-head text-dark" id="header-user" style="padding: 10px 10px;"></span> <i class="fe fe-chevron-down dark-mode text-dark" style="font-size: 20px; font-weight: 800;"></i>
+                                                <span class="dynamic-text-head text-dark" style="padding: 10px 10px;" id="header-user"></span> <i class="fe fe-chevron-down dark-mode text-dark" style="font-size: 20px; font-weight: 800;"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                                 <!-- <div class="drop-heading">
@@ -1477,48 +1076,46 @@ color: #000;
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item has-link create-new-link" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample" style="border: 3px solid #1467B0 !important;"><i
-                                        class="side-menu__icon fi fi-rs-square-plus"></i><span
-                                        class="side-menu__label ">Create New</span>
+                                        class="side-menu__icon fi fi-rs-square-plus"></i><span class="side-menu__label ">Create New</span>
                                 </a>
                             </li>
 
                             <!-- <li class="slide">
-                            <a class="side-menu__item has-link" href="landing-page.php" target="_blank"><i
-                                    class="side-menu__icon fe fe-plus"></i><span class="side-menu__label">Complete your
-                                    Profile</span>
-                            </a>
-                        </li> -->
-                        <a href="settings.html" class="text-dark">
-                            <li class="slide">
-                                <div class="M-0 mt-3 mb-4" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
-                                    <div class="card-header pb-0 border-bottom-0">
-                                        <i class="side-menu__icon fi fi-rs-rocket-lunch mb-0"></i>
-                                        <h3 class="card-title side-menu__label">&nbsp; Complete your Profile
-                                        </h3>
-
-                                    </div>
-                                    <div class="card-body pt-0">
-                                        <div class="side-menu__label progress progress-md mt-5">
-                                            <!-- <div class="progress-bar bg-info" style="width: 40%;">40%</div> -->
+                                <a class="side-menu__item has-link" href="landing-page.php" target="_blank"><i
+                                        class="side-menu__icon fe fe-plus"></i><span class="side-menu__label">Complete your
+                                        Profile</span>
+                                </a>
+                            </li> -->
+                            <a href="settings.html" class="text-dark">
+                                <li class="slide">
+                                    <div class="M-0 mt-3 mb-4" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
+                                        <div class="card-header pb-0 border-bottom-0">
+                                            <i class="side-menu__icon fi fi-rs-rocket-lunch mb-0"></i>
+                                            <h3 class="card-title side-menu__label">&nbsp; Complete your Profile
+                                            </h3>
+    
+                                        </div>
+                                        <div class="card-body pt-0">
+                                            <div class="side-menu__label progress progress-md mt-5">
+                                                <!-- <div class="progress-bar bg-info" style="width: 40%;">40%</div> -->
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </li>
-                        </a>
+                                </li>
+                            </a>
                             <li class="slide">
                                 <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html"><i
-                                        class="side-menu__icon fi fi-rs-dashboard"></i><span
-                                        class="side-menu__label">Overview</span></a>
+                                        class="side-menu__icon fi fi-rs-dashboard"></i><span class="side-menu__label">Overview</span></a>
                             </li>
                             <!-- <li class="sub-category">
-                                       <h3>UI Kit</h3>
-                                   </li> -->
+                                           <h3>UI Kit</h3>
+                                       </li> -->
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
-                                        class="side-menu__icon fi fi-rs-building"></i><span
-                                        class="side-menu__label">Properties</span>
-                                    <i class="angle fe fe-chevron-right"></i>
-                                </a>
+                                        class="side-menu__icon fi fi-rs-building"></i><span class="side-menu__label">Properties</span>
+                                        <i
+                                        class="angle fe fe-chevron-right"></i>
+                                       </a>
                                 <ul class="slide-menu">
                                     <li class="side-menu-label1"><a href="javascript:void(0)">Properties</a></li>
                                     <li><a href="properties-all.html" class="slide-item">All</a></li>
@@ -1527,11 +1124,11 @@ color: #000;
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="add-tenant.html"><i
-                                        class="side-menu__icon fi fi-rs-cabin"></i><span
-                                        class="side-menu__label">Tenants</span>
-                                    <i class="angle fe fe-chevron-right"></i>
-
-                                </a>
+                                        class="side-menu__icon fi fi-rs-cabin"></i><span class="side-menu__label">Tenants</span>
+                                        <i
+                                        class="angle fe fe-chevron-right"></i>
+                                       
+                                       </a>
                                 <ul class="slide-menu">
                                     <li class="side-menu-label1"><a href="javascript:void(0)">Tenants</a></li>
                                     <li><a href="add-tenant.html" class="slide-item">All</a></li>
@@ -1540,14 +1137,14 @@ color: #000;
                             </li>
 
                             <!-- <li class="sub-category">
-                                       <h3>Pre-build Pages</h3>
-                                   </li> -->
+                                           <h3>Pre-build Pages</h3>
+                                       </li> -->
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="invoices.html"><i
-                                        class="side-menu__icon fi fi-rs-file-invoice-dollar"></i><span
-                                        class="side-menu__label">Invoicing</span>
-                                    <i class="angle fe fe-chevron-right"></i>
-                                </a>
+                                                class="side-menu__icon fi fi-rs-file-invoice-dollar"></i><span class="side-menu__label">Invoicing</span>
+                                                <i
+                                                class="angle fe fe-chevron-right"></i>
+                                               </a>
                                 <ul class="slide-menu">
                                     <li class="side-menu-label1"><a href="javascript:void(0)">Invoicing</a></li>
                                     <li><a href="create-invoicing.html" class="slide-item">All</a></li>
@@ -1557,8 +1154,8 @@ color: #000;
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="prospects.html"><i
-                                    class="side-menu__icon fi fi-rs-chart-simple"></i><span
-                                    class="side-menu__label">Prospects</span>
+                                        class="side-menu__icon fi fi-rs-chart-simple"></i><span
+                                        class="side-menu__label">Prospects</span>
                                     <!-- <i class="angle fe fe-chevron-right"></i> -->
 
                                 </a>
@@ -1567,11 +1164,11 @@ color: #000;
 
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="view-tasks.html"><i
-                                        class="side-menu__icon fi fi-rs-list-check"></i><span
-                                        class="side-menu__label">Tasks</span>
-                                    <i class="angle fe fe-chevron-right"></i>
-
-                                </a>
+                                        class="side-menu__icon fi fi-rs-list-check"></i><span class="side-menu__label">Tasks</span>
+                                        <i
+                                        class="angle fe fe-chevron-right"></i>
+                                       
+                                       </a>
                                 <ul class="slide-menu">
                                     <li class="side-menu-label1"><a href="javascript:void(0)">Tasks</a></li>
                                     <li><a href="create-tasks.html" class="slide-item">All</a></li>
@@ -1586,21 +1183,20 @@ color: #000;
 
                                     <!-- <i class="angle fe fe-chevron-right"></i> -->
                                 </a>
-                            </li>
-                            <li class="slide">
-                                <a class="side-menu__item" data-bs-toggle="slide" href="chats.html">
-                                    <i class="side-menu__icon fi fi-rs-comment"></i>
-                                    <span class="side-menu__label">Chat</span>
-<span class="badge bg-primary side-badge">6</span>
+</li>
+<li class="slide">
+    <a class="side-menu__item" data-bs-toggle="slide" href="chats.html">
+        <i class="side-menu__icon fi fi-rs-comment"></i>
+        <span class="side-menu__label">Chat</span>
 
-                                    <!-- <i class="angle fe fe-chevron-right"></i> -->
-                                </a>
-                            </li>
+        <!-- <i class="angle fe fe-chevron-right"></i> -->
+    </a>
+</li>
                                 <li>
                                     <a class="side-menu__item has-link" href="settings.html" target="_self"><i
-                                    class="side-menu__icon fi fi-rs-settings"></i><span class="side-menu__label">Settings</span>
-                                <!-- <span
-                                               class="badge bg-green br-5 side-badge blink-text pb-1">New</span> -->
+                                        class="side-menu__icon fi fi-rs-settings"></i><span class="side-menu__label">Settings</span>
+                                    <!-- <span
+                                                   class="badge bg-green br-5 side-badge blink-text pb-1">New</span> -->
                                 </a>
                                 </li>
                         </ul>
@@ -1628,21 +1224,41 @@ color: #000;
                             </div>
                         </div> -->
 
-                        <div class="card mt-5" style="background: linear-gradient(180deg, #232323 0%, #434343 100%);">
-                            <div class="card-body">
+                        <div class="card" style="background: #1467B0;" id="top_main_card">
+                            <div class="card-body pb-0">
                                 <div class="row">
-                                    <div class="col-lg-9">
-                                        <h3 class="page-titlee text-white" style="font-weight: 100; margin-bottom: 0px;">Welcome to Spade Portal</h3>
-                                        <h1 class="page-titlee text-white" style="font-weight: 700;" id="user-name">
-                                        </h1>
-                                        <a data-bs-toggle="modal" href="#modaldemo00" id="email_verification" class="btn btn-primary btn-pill btn-xl email-verification-btn"><i
-                                                class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
-                                            verification &nbsp; <i
-                                                class="angle fe fe-arrow-right create-btn-plus"></i></a>
-                                                <p class="text-white m-0 mt-3" id="account-text"></p>
+                                    <div class="col-lg-9 position-relative">
+                                        <h1 class="page-titlee text-white mb-1" style="font-weight: 700;">Fiona York Ok Guysss Ammii G 4</h1>
+                                        <h5 class="page-titlee text-white" style="font-weight: 100;">Eum Facilis Repudian, Nostrum Suscipit Nul, Kansas</h5>
+                                        <!-- <h1 class="page-titlee text-white mb-1" style="font-weight: 700;" id="property_name"></h1>
+                                        <h5 class="page-titlee text-white" style="font-weight: 100;" id="property_address"></h5> -->
+
+
+                                        <!-- <a href="javascript:void(0)" id="email_verification"
+                                                                    class="btn btn-primary btn-pill btn-xl email-verification-btn"><i
+                                                                        class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
+                                                                    verification &nbsp; <i
+                                                                        class="angle fe fe-arrow-right create-btn-plus"></i></a> -->
+                                        <ul class="nav1 br-7 position-absolute" style="bottom: 0;" id="nav_links">
+                                            <li class="nav-item1 p-0">
+                                                <a class="nav-link  p-2" href="view-property.html" id="viewOverview">Overview</a>
+                                            </li>
+                                            <li class="nav-item1 p-0">
+                                                <a class="nav-link p-2" href="property-unit.html" id="viewUnits">Units</a>
+                                            </li>
+                                            <li class="nav-item1 p-0">
+                                                <a class="nav-link p-2" href="property-tenant.html" id="viewTenants">Tenants</a>
+                                            </li>
+                                            <li class="nav-item1 p-0">
+                                                <a class="nav-link p-2" href="property-task.html" id="viewTasks">Tasks</a>
+                                            </li>
+                                            <li class="nav-item1 active p-0">
+                                                <a class="nav-link active p-2" href="bank-account.html" id="viewTasks">Bank Account</a>
+                                            </li>
+                                        </ul>
                                     </div>
                                     <div class="col-lg-3">
-                                        <img src="../assets/header-img/Group1.png" alt="">
+                                        <img src="../assets/header-img/Group1.png" alt="" id="top_main_image">
                                     </div>
                                 </div>
 
@@ -1650,169 +1266,97 @@ color: #000;
                         </div>
                         <div>
                             <p class="d-inline-flex gap-1">
-                                <span>Task Vendor | </span>
-                                  <span><a href="#" onclick="Intercom('showArticle', 8210506)"> How to add vendor? </a></span>
-                                  <span><a href="#" onclick="Intercom('showArticle', 8210444)"> How to update vendor? </a></span>
-                                  <span><a href="#" onclick="Intercom('showArticle', 8210444)"> How to add vendor category? </a></span>
-
+                                <span>Properties | </span>
+                                  <span><a href="#" onclick="Intercom('showArticle', 8210506)"> How to create Properties? </a></span>
+                                  <span><a href="#" onclick="Intercom('showArticle', 8210444)"> How to update Properties? </a></span>
                             </p>
                         </div>
-                        
                         <!-- PAGE-HEADER END -->
-                        
                         <div class="over_view" id="Overview">
-                            <!-- ROW-2 OPEN -->
+                            <!-- ROW-1 OPEN -->
                             <div class="row">
-                                <div class="col-md-12">
-                                    <div class="card inner-cards">
-                                        <div class="card-header justify-content-between">
-                                            <div class="d-flex">
-                                                <!-- <div class="btn-group">
-                                                    <button type="button" class="btn btn-outline-default text-dark py-1" id="filter_btn" data-bs-toggle="dropdown"><i
-                                                            class="typcn typcn-filter fs-16"></i><strong
-                                                            id="Filter-btn">Filter</strong></button>
-                                                    <ul class="dropdown-menu" role="menu">
-                                                        <li><a href="javascript:void(0)"><strong class="text-dark">Filter by:</strong></a>
-                                                        </li>
-                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)" for="exampleRadio">Default</a>
-                                                            <div class="form-check m-0">
-                                                                <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
-                                                            </div>
-                                                        </li>
-                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)" for="exampleRadio">Task
-                                                                Name</a>
-                                                            <div class="form-check m-0">
-                                                                <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
-                                                            </div>
-                                                        </li>
-                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">Assigned To</a>
-                                                            <div class="form-check m-0">
-                                                                <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                                                            </div>
-                                                        </li>
-                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">Date</a>
-                                                            <div class="form-check m-0">
-                                                                <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                                                            </div>
-                                                        </li>
-                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">Ascending</a>
-                                                            <div class="form-check m-0">
-                                                                <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                                                            </div>
-                                                        </li>
-                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">Descending</a>
-                                                            <div class="form-check m-0">
-                                                                <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </div> -->
-                                                <div class="mx-2">
-                                                    <div class="form-group m-0">
-                                                        <input class="form-control" placeholder="Search Users by Name, Email or Date" type="text" id="search_input">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex">
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn font-weight-bold text-dark" id="customize_btn" data-bs-toggle="dropdown" style="border: none;"><strong>CUSTOMIZED</strong><i
-                                                        class="fe fe-chevron-down ms-2"></i></button>
-                                                    <ul class="dropdown-menu" role="menu">
-                                                        <li><a href="javascript:void(0)"><strong class="text-dark">Coulmns to
-                                                                    Show</strong></a>
-                                                        </li>
-                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">COMPANY NAME</a>
-                                                            <div class="form-check m-0">
-                                                                <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
-                                                            </div>
-                                                        </li>
-                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">VANDOR NAME</a>
-                                                            <div class="form-check m-0">
-                                                                <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
-                                                            </div>
-                                                        </li>
-                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">PHONE</a>
-                                                            <div class="form-check m-0">
-                                                                <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
-                                                            </div>
-                                                        </li>
-                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">ADDRESS</a>
-                                                            <div class="form-check m-0">
-                                                                <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
-                                                            </div>
-                                                        </li>
-                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">WORK PHONE</a>
-                                                            <div class="form-check m-0">
-                                                                <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
-                                                            </div>
-                                                        </li>
-                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">CATEGORY</a>
-                                                            <div class="form-check m-0">
-                                                                <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <button type="button" class="btn btn-primary btn-pill mx-2" id="add_property_btn" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal"><i
-                                                        class="fe fe-plus me-2"></i><strong>ADD NEW
-                                                        VENDOR</strong></button>
-                                            </div>
-                                        </div>
-                                        <div class="card-body p-0">
-                                            <div class="table-responsive">
-                                                <table class="table border text-nowrap text-md-nowrap mb-0">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>#</th>
-
-                                                            <th>Company name</th>
-                                                            <th>Vendor name</th>
-                                                            <th>Phone number</th>
-                                                            <th>Address</th>
-                                                            <th>Work phone number</th>
-                                                            <th>Category</th>
-                                                            <th>Action</th>
-
-
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="table_body">
-
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                <div class="col-xl-4 col-sm-6">
+                                    <div class="card border p-0 inner-cards">
+                                        <div class="card-body text-center">
+                                            <span class=""><img src="../assets/images/logo-images/Group 10294.png"
+                                                    alt="" height="60" width="60"></span>
+                                            <h4 class="h4 mb-0 mt-3 font-weight-bold"><b>Account Name</b></h4>
+                                            <p class="card-text text-default mt-2" id="property_type">Payment Test
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
+                                <!-- COL END -->
+                                <div class="col-xl-4 col-sm-6">
+                                    <div class="card border p-0 inner-cards">
+                                        <div class="card-body text-center">
+                                            <span class=""><img src="../assets/images/logo-images/Group 10414.png"
+                                                    alt="" height="60" width="60"></span>
+                                            <h4 class="h4 mb-0 mt-3 font-weight-bold"><b>Status</b></h4>
+                                            <p class="card-text text-success mt-2" id="property_status">Active</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- COL END -->
                             </div>
-                            <!-- ROW-2 CLOSED -->
+                            <!-- ROW-1 CLOSED -->
+                            <!-- ROW-3 OPEN -->
+                            <!-- COL END -->
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="card inner-cards">
+                                        <div class="card-header justify-content-start bg-light">
+                                            <h3 class="card-title font-wieght-bold"><b>Description</b></h3>
+                                        </div>
+                                        <!-- id="image-placeholder" -->
+                                        <div class="card-body" id="image-placeholder">
+                                            <ul id="lightgallery" class="list-unstyled row">
+                                                <p>Build your luxurious Waterfront Home here on Beacon Island. An Exclusively Gated Community! 
+                                                    Premier Lot that is about half an acre with Outstanding Views</p>
+                                            </ul>
+                                        </div>
+                                        <!-- <div class="card-body">
+                                            <div class="row"
+                                                id="image-placeholder">
+                                            <img src="../assets/images/demo_img.png" alt="">
+                                            <img src="../assets/images/demo_img.png" alt="">
+                                            <img src="../assets/images/demo_img.png" alt="">
+                                            <img src="../assets/images/demo_img.png" alt="">
+                                            <img src="../assets/images/demo_img.png" alt="">
+                                            <img src="../assets/images/demo_img.png" alt="">
+                                            <img src="../assets/images/demo_img.png" alt=""></div>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <!-- ROW-3 CLOSED -->
                 </div>
-                <!-- ROW-2 END -->
-
-
-
-
-                <div class="card-body pb-0 bg-recentorder" style="display: none;">
-                    <h3 class="card-title text-white">Recent Orders</h3>
-                    <div class="chartjs-wrapper-demo">
-                        <canvas id="recentorders" class="chart-dropshadow"></canvas>
-                    </div>
-                </div>
-                <div id="flotback-chart" class="flot-background" style="display: none;"></div>
-
+                <!-- ROW-3 CLOSED -->
             </div>
-            <!-- CONTAINER END -->
+            <!-- ROW-2 END -->
+
+
+
+
+            <div class="card-body pb-0 bg-recentorder" style="display: none;">
+                <h3 class="card-title text-white">Recent Orders</h3>
+                <div class="chartjs-wrapper-demo">
+                    <canvas id="recentorders" class="chart-dropshadow"></canvas>
+                </div>
+            </div>
+            <div id="flotback-chart" class="flot-background" style="display: none;"></div>
+
         </div>
+        <!-- CONTAINER END -->
+    </div>
     </div>
     <!--app-content close-->
 
     </div>
 
-      <!-- Sidebar-right -->
-    <div class="sidebar sidebar-right sidebar-animate">
+     <!-- Sidebar-right -->
+     <div class="sidebar sidebar-right sidebar-animate">
         <div class="panel panel-primary card mb-0 shadow-none border-0">
             <div class="tab-menu-heading border-0 d-flex p-3">
                 <div class="card-title mb-0 text-dark fw-bold">
@@ -2370,10 +1914,7 @@ color: #000;
     </div>
 
     <!-- BACK-TO-TOP -->
-    <!-- <!-- <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a> --> -->
-    <a href="#addModal" data-bs-effect="effect-scale" data-bs-toggle="modal" id="add-tenant-side-btn"><i
-            class="fe fe-plus"></i></a>
-
+    <!-- <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a> -->
 
 
     <!-- JQUERY JS -->
@@ -2438,91 +1979,55 @@ color: #000;
     <!-- TypeHead js -->
     <script src="../assets/plugins/bootstrap5-typehead/autocomplete.js"></script>
     <script src="../assets/js/typehead.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.8/sjcl.min.js"></script>
 
     <!-- INTERNAL INDEX JS -->
     <script src="../assets/js/index1.js"></script>
 
     <!-- Color Theme js -->
     <script src="../assets/js/themeColors.js"></script>
-<script src="../assets/js/intercom.js"></script>
+
     <!-- CUSTOM JS -->
     <script src="../assets/js/custom.js"></script><script src="../assets/js/getNotification.js"></script>
 <script src="../assets/js/push_notification.js"></script>
-
-    <!-- ############################################# -->
-    <!-- INTERNAL Autofill-Table JS -->
-    <!-- <script src="../assets/plugins/datatable/js/jquery.dataTables.min.js"></script> -->
-    <!-- <script src="../assets/plugins/datatable/js/dataTables.bootstrap5.js"></script> -->
-    <!-- <script src="../assets/plugins/datatable/js/dataTables.buttons.min.js"></script> -->
-    <!-- <script src="../assets/plugins/datatable/js/buttons.bootstrap5.min.js"></script> -->
-    <!-- <script src="../assets/plugins/extension-datatable/autofill/dataTables.autoFill.min.js"></script> -->
-    <script src="../assets/plugins/extension-datatable/autofill/autoFill.bootstrap5.min.js"></script>
-    <!-- <script src="../assets/plugins/extension-datatable/keytable/dataTables.keyTable.min.js"></script> -->
-    <script src="../assets/js/autofill-table.js"></script>
-
-    <!-- C3 CHART JS -->
-    <script src="../assets/plugins/charts-c3/d3.v5.min.js"></script>
-    <script src="../assets/plugins/charts-c3/c3-chart.js"></script>
-
-    <!-- INPUT MASK JS-->
-    <script src="../assets/plugins/input-mask/jquery.mask.min.js"></script>
-
-    <!-- CHARTJS JS -->
-    <script src="../assets/plugins/chart/Chart.bundle.js"></script>
-    <script src="../assets/plugins/chart/utils.js"></script>
-
-
-    <script src="../assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
-    <!-- BOOTSTRAP-DATERANGEPICKER JS -->
-    <script src="../assets/plugins/bootstrap-daterangepicker/moment.min.js"></script>
-    <script src="../assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
-
-    <!-- INTERNAL Bootstrap-Datepicker js-->
-    <script src="../assets/plugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
-
-    <!-- INTERNAL Sumoselect js-->
-    <script src="../assets/plugins/sumoselect/jquery.sumoselect.js"></script>
-
-    <!-- TIMEPICKER JS -->
-    <script src="../assets/plugins/time-picker/jquery.timepicker.js"></script>
-    <script src="../assets/plugins/time-picker/toggles.min.js"></script>
-
-    <!-- INTERNAL intlTelInput js-->
-    <script src="../assets/plugins/intl-tel-input-master/intlTelInput.js"></script>
-    <script src="../assets/plugins/intl-tel-input-master/country-select.js"></script>
-    <script src="../assets/plugins/intl-tel-input-master/utils.js"></script>
-
-    <!-- INTERNAL jquery transfer js-->
-    <script src="../assets/plugins/jQuerytransfer/jquery.transfer.js"></script>
-
-    <!-- INTERNAL multi js-->
-    <script src="../assets/plugins/multi/multi.min.js"></script>
-
-    <!-- DATEPICKER JS -->
-    <script src="../assets/plugins/date-picker/date-picker.js"></script>
-    <script src="../assets/plugins/date-picker/jquery-ui.js"></script>
-    <script src="../assets/plugins/input-mask/jquery.maskedinput.js"></script>
-
-    <!-- COLOR PICKER JS -->
-    <script src="../assets/plugins/pickr-master/pickr.es5.min.js"></script>
-    <script src="../assets/js/picker.js"></script>
-
-    <!-- MULTI SELECT JS-->
-    <script src="../assets/plugins/multipleselect/multiple-select.js"></script>
-    <script src="../assets/plugins/multipleselect/multi-select.js"></script>
-
-    <!-- FORMELEMENTS JS -->
-    <script src="../assets/js/formelementadvnced.js"></script>
-    <script src="../assets/js/form-elements.js"></script>
-
-    <!-- CHART-DONUT JS -->
-    <script src="../assets/js/charts.js"></script>
-    <script src="../assets/js/email-verification.js"></script>
-    <script src="../assets/js/intercom.js"></script>
-    <script src="../assets/js/getNotification.js"></script>
-<script src="../assets/js/push_notification.js"></script>
     <script>
         $(document).ready(function() {
+            $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/protected',
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function ({ userName, image }) {
+                    // console.log()
+                    if(image!==" " && image!==null){
+                
+                $("#user-img").attr("src", image)
+                $("#user-img-dark").attr("src", image)
+            } 
+                    function toTitleCase(str) {
+                        return str.replace(/\w\S*/g, function (txt) {
+                            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                        });
+                    }
+                    $("#user-name").text(toTitleCase(userName))
+                        $("#header-user").text(toTitleCase(userName))
+
+
+
+                },
+                error: function (xhr, status, error) {
+                    $("#myModal_warning").modal("show");
+                    setTimeout(function () {
+                        $('#myModal_warning').modal('hide');
+                        window.location = '../Landlord/login_module.html';
+                    }, 2000);
+                    console.log('Error occurred while fetching state and city data.');
+                    console.log(xhr);
+                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                }
+            });
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
                 method: 'GET',
@@ -2546,668 +2051,202 @@ color: #000;
                     // console.log('Error occurred while fetching state and city data.');
                 }
             });
-            $('#email_verification').on('click', function() {
-      if ($('body').hasClass('dark-mode')) {
-        $('.Rent-logo').attr('src', '../assets/images/logo_white.png');
-      }else{
-        $('.Rent-logo').attr('src', '../assets/images/Artboard GÇô 1.svg');
-      }
-    });
-    });
-    
-      </script>
-    <script>
-        var vendorID;
-        $(document).ready(() => {
+            const encryptedPropertyId = decodeURIComponent((new URL(document.location)).searchParams.get("property"));
+
+// Decryption
+var password = 'your-secret-password';
+const propertyId = sjcl.decrypt(password, encryptedPropertyId);
+var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
+            // const propertyId = (new URL(document.location)).searchParams.get("propertyId");
+            $("#viewUnitspill").attr("href", `./property-unit.html?property=${encodedPropertyId}`)
+            $("#viewOverviewpill").attr("href", `./view-property.html?property=${encodedPropertyId}`)
+            $("#viewTenantspill").attr("href", `./add-tenant.html`)
+            $("#viewTaskspill").attr("href", `./create-tasks.html`)
+            $("#viewUnits").attr("href", `./property-unit.html?property=${encodedPropertyId}`)
+            $("#viewOverview").attr("href", `./view-property.html?property=${encodedPropertyId}`)
+            $("#viewTenants").attr("href", `./property-tenant.html?property=${encodedPropertyId}`)
+            $("#viewTasks").attr("href", `./property-task.html?property=${encodedPropertyId}`)
+            console.log(propertyId)
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/protected',
-                method: 'GET',
+                url: 'https://backend.app.spaderent.com/api/spade/viewProperty',
+                type: 'GET',
+                data: {
+                    propertyId
+                },
+                contentType: "application/json; charset=utf-8",
+                // processData: false,
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function({
-                    userName,image
+                    data
                 }) {
-                    // console.log()
+                    console.log(data)
+                        // window.alert(response.message);
+                    // console.log(data.propertyName)
                     function toTitleCase(str) {
                                 return str.replace(/\w\S*/g, function(txt) {
                                     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                                 });
                             }
-                            if(image!==" " && image!==null){
-                
-                $("#user-img").attr("src", image)
-                $("#user-img-dark").attr("src", image)
-            }                        
-                    $("#user-name").text(toTitleCase(userName))
-                        $("#header-user").text(toTitleCase(userName))
+                    $("#property_name").text(toTitleCase(data.propertyName))
+                    $("#property_address").text(toTitleCase(data.address)+", "+toTitleCase(data.city)+", "+toTitleCase(data.state))
+                    $("#property_type").text(data.propertyType)
+                    $("#property_units").text(data.units)
+                    $("#property_status").text(data.status)
+                    $("#lightgallery").empty()
+                    data.images.forEach(image => {
+                        $("#lightgallery").append('<li class="col-xs-6 col-sm-4 col-md-4 col-xl-3 mb-5 border-bottom-0" data-responsive="' + image.Image + '" data-src="' + image.Image + '" data-sub-html="<h4>Gallery Image 1</h4><p> Many desktop publishing packages and web page editors now use Lorem Ipsum</p>"><a href="javascript:void(0)"><img class="img-responsive br-5" src="' + image.Image + '" alt="Thumb-1"></a></li>');
 
-
+                    });
+                    // $("#lightgallery").append('<li class="col-xs-6 col-sm-4 col-md-4 col-xl-3 mb-5 border-bottom-0" data-responsive="../../../../spadeAPI/uploads/'+image.Image+'" data-src="../../../../spadeAPI/uploads/'+image.Image+'" data-sub-html="<h4>Gallery Image 1</h4><p> Many desktop publishing packages and web page editors now use Lorem Ipsum</p>"><a href="javascript:void(0)"><img class="img-responsive br-5" src="../../../../spadeAPI/uploads/' + image.Image + '" alt="Thumb-1"></a></li>')
                 },
                 error: function(xhr, status, error) {
-                    // $("#myModal_warning").modal("show");
-                    // setTimeout(function() {
-                    //     $('#myModal_warning').modal('hide');
-                    //     window.location = '../Landlord/login_module.html';
-                    // }, 2000);
-                    // console.log('Error occurred while fetching state and city data.');
-                    // console.log(xhr);
-                    // console.log(error);
-                    // console.log('Error occurred while fetching state and city data.');
-                }
-            });
-            let vendorData;
-
-            function resetAccordions() {
-                $('#addModal input, #addModal textarea, #addModal select').each(function() {
-                    console.log($(this))
-    $(this).removeClass('border-danger');
-    $(this).removeClass('border-green');
-});
-
-                $('#myModal_edit input, #myModal_edit textarea,#myModal_edit select').each(function() {
-                    $(this).removeClass('border-danger');
-                    $(this).removeClass('border-green');
-                });;
-                $("#firstName").val("")
-                $("#firstName_update").val("")
-                $("#lastName_update").val("")
-                $("#lastName").val("")
-                $("#businessName_update").val("")
-                $("#streetAddress_update").val("")
-                $("#city_update").val("")
-                $("#zip_update").val("")
-                $("#workPhone_update").val("")
-                $("#phone_update").val("")
-                $("#email_update").val("")
-                $("#businessName").val("")
-                $("#streetAddress").val("")
-                $("#city").val("")
-                $("#zip").val("")
-                $("#workPhone").val("")
-                $("#phone").val("")
-                $("#email").val("")
-                    $("#category option:first").prop("selected", true);
-                    $("#category_update option:first").prop("selected", true);
-            }
-
-            $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getVendorCategory',
-                type: 'GET',
-                contentType: false,
-                processData: false,
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                },
-
-                success: function(response) {
-                    console.log(response.data)
-                    $("#category").empty()
-                    
-                    if(response?.data?.length===0){
-                        $("#category").append($('<option></option>').text("Add vendor categories first!!"))
-                    }else{
-                        $("#category").append($('<option></option>').text("Choose..."))
-                        response.data.forEach((category) => {
-                        $("#category").append($('<option></option>').text(category.category).val(category.id))
-                    })
-                    }
-                    $("#category option:first").prop("selected", true);
-                    $("#category_update").empty()
-                    
-                    if(response?.data?.length===0){
-                        $("#category_update").append($('<option></option>').text("Add vendor categories first!!"))
-                    }else{
-                        $("#category_update").append($('<option></option>').text("Choose..."))
-                        response.data.forEach((category) => {
-                        $("#category_update").append($('<option></option>').text(category.category).val(category.id))
-                    })
-                    }
-                    
-                    // console.log(1)
-                    // getData()
-                    // $('#succesModal').modal('show')
-                    // window.location = '../Landlord/properties-all.html';
-                },
-                error: function(xhr, status, error) {
-                    if(xhr.responseJSON.message=="No vendor category data found"){
-                        $("#category").empty()
-                        $("#category").prop("disabled", true);
-                        $("#category").append($('<option></option>').text("Add vendor categories first!!"))
-
-                    }
-                }
-            });
-            
-            $(document).on('click', '#next', function(e) {
-                e.preventDefault()
-                    // selectedFiles = []
-                $('#addModal').modal('hide');
-                // $("#largemodal").addClass("hide");
-                var formData = new FormData();
-
-                // Get the form data
-                var firstName = $("#firstName").val();
-                var lastName = $("#lastName").val();
-                var businessName = $("#businessName").val();
-                var streetAddress = $("#streetAddress").val();
-                var city = $("#city").val();
-                // var status = $("#status").val();
-                var zip = $("#zip").val();
-                var workPhone = $("#workPhone").val();
-                var phone = $("#phone").val();
-                var email = $("#email").val();
-                var category = $("#category").val();
-
-
-                // Add the form data to the FormData object
-                formData.append('firstName', firstName);
-                formData.append('lastName', lastName);
-                formData.append('businessName', businessName);
-                formData.append('streetAddress', streetAddress);
-                formData.append('city', city);
-                // formData.append('status', status);
-                formData.append('zip', zip);
-                formData.append('phone', phone);
-                formData.append('workPhone', workPhone);
-                formData.append('email', email);
-                formData.append('categoryID', category);
-                // formData.append('categoryID', 2);
-                console.log(status)
-                $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/addVendor',
-                    // url: 'https://backend.app.spaderent.com/api/spade/addVendor',
-                    type: 'POST',
-                    data: JSON.stringify({
-                        firstName: firstName,
-                        lastName: lastName,
-                        businessName: businessName,
-                        streetAddress: streetAddress,
-                        city: city,
-                        // status: status,
-                        zip: zip,
-                        phone: phone,
-                        workPhone: workPhone,
-                        // status: status,
-                        email: email,
-                        // formData.append(categoryID:category),
-                        categoryID: category
-                    }),
-                    contentType: "application/json; charset=utf-8",
-                    processData: false,
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-
-                    success: function(response) {
-                        console.log(response)
-                        if(response=="Vendor already exists"){
-                            $("#infoModal").modal("show");
-                        }else if(response.message==" Vendor created successful"){
-                            GetNotification();
-                            $("#addModal").modal("hide")
-                        $("#succesModal").modal("show");
-                        getData()
-                        setTimeout(function() {
-                            $("#succesModal").modal("hide");
-                        }, 2000);
-                    }
-                    resetAccordions()
-                        
-                    },
-                    error: function(xhr, status, error) {
-                    //     $("#myModal_warning_connection").modal("show");
-                    //         setTimeout(function() {
-                    //             $('#myModal_warning_connection').modal('hide');
-
-                    //         }, 2000);
-                    // console.log(xhr.responseText);
-                    }
-                });
-
-
-            });
-
-            function getData(selectedFilter = "alphabets") {
-                $("#preloader").fadeIn("fast");
-                // console.log(22)
-                $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getAllVendors',
-                    type: 'GET',
-                    contentType: false,
-                    processData: false,
-
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-                    success: function(response) {
-                        // tenantData=data[0]
-                        console.log(response)
-                        if (response.message == "No data found") {
-                            
-                        }
-                        vendorData = (response.data[0]?response.data[0]:[])
-                            // $("#user-name").text(response.name)
-                        var tableBody = $('#table_body');
-                        tableBody.empty();
-                        // console.log(data[0])
-                        let tenantNames = []
-                        response.data[0] ?.forEach(function(vendor,index) {
-
-                            var serial='<td style="font-weight: 600;">' + (index+1) + '</td>';
-
-                            var vendorName = '<td class="vendorName" style="font-weight: 600;">' + vendor.firstName + vendor.lastName + `<br><small>${vendor.email}</small>` + '</td>';
-                            var businessName = '<td class="businessName" style="font-weight: 600;">' + vendor.businessName + '</td>';
-                            var phone = '<td class="phone" style="font-weight: 600;">' + vendor.phone + '</td>';
-                            var address = '<td class="address" style="font-weight: 600;">' + vendor.streetAddress + '</td>';
-                            var workPhone = '<td class="workPhone" style="font-weight: 600;">' + (vendor.workPhone.length >= 1 ? vendor.workPhone : "N/A") + '</td>';
-
-                            var category = `<td class="rentAmount" style="font-weight: 600;" id="${vendor.categoryID}">` + vendor.category + '</td>';
-                            // var assignUnit = '<td class="assignUnit" style="font-weight: 600;">' + tenant.unitNumber + `<br><small>${tenant.unitArea} Square/Feet</small>` + '</td>';
-                            var dropdownMenu =
-                                '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
-                                '<ul class="dropdown-menu">' +
-                                // `<li><a class="dropdown-item text-success" href="./view-tenant.html?tenantId=${vendor.id}">View</a></li>` +
-                                `<li><a class="edit-option dropdown-item text-primary" id="${vendor.id}"  href="javascript:void(0)">Edit</a></li>` +
-                                `<li><a class='delete-option dropdown-item text-danger' id="${vendor.id}" href="javascript:void(0)">Delete</a></li>`
-                            '</ul></td>';
-
-
-                            var row = '<tr>'+serial + businessName + vendorName + phone +
-                                address + workPhone + category +dropdownMenu +'</tr>';
-
-                            // Append the row to the table body
-                            tableBody.append(row);
-                        });
-                        $("#preloader").fadeOut("slow")
-
-                        
-                    },
-                    error: function(xhr, status, error) {
-                        var tableBody = $('#table_body');
-                        tableBody.empty();
-                    }
-                });
-
-            }
-            getData()
-            $(document).on("click",'.delete-option',function(e) {
-                            e.preventDefault(); // Prevent default anchor behavior
-                            vendorID = $(this).prop('id');
-                            $('#myModal_delete').modal('show');
-                        });
-                        $(document).on("click",'.edit-option',function(e) {
-                            e.preventDefault(); // Prevent default anchor behavior
-                            vendorID = $(this).prop('id');
-                            const vendorDetails=vendorData.filter((vendor)=>{
-                                
-                                return vendor.id==vendorID
-                            })
-                            
-                            $("#firstName_update").val(vendorDetails[0]?.firstName)
-                            $("#lastName_update").val(vendorDetails[0]?.lastName)
-                            $("#businessName_update").val(vendorDetails[0]?.businessName)
-                            $("#streetAddress_update").val(vendorDetails[0]?.streetAddress)
-                            $("#city_update").val(vendorDetails[0]?.city)
-                            $("#zip_update").val(vendorDetails[0]?.zip)
-                            $("#phone_update").val(vendorDetails[0]?.phone)
-                            $("#workPhone_update").val(vendorDetails[0]?.workPhone)
-                            $("#email_update").val(vendorDetails[0]?.email)
-                            $("#category_update").val(vendorDetails[0]?.categoryID)
-
-                            $('#myModal_edit').modal('show');
-                        });
-                        $(document).on("input", "#myModal_edit input, #myModal_edit select", function(e) {
-                e.preventDefault(); // Prevent default anchor behavior
-                var accordion1Fields = $('#myModal_edit input[required], #myModal_edit select[required]');
-                var allFieldsFilled = accordion1Fields.filter(function() {
-                    return $(this).val() === '' || $(this).val() === 'Choose...';
-                }).length === 0;
-                if (allFieldsFilled) {
-                    $('#save').removeClass('disabled');
-                    
-                } else {
-                    $('#save').addClass('disabled');
-                   
-                }
-            
-            })
-            $("#confirmDelete").on("click",function(){
-                $.ajax({
-                    url: `https://backend.app.spaderent.com/api/spade/deleteVendor/${vendorID}`,
-                    type: 'DELETE',
-                    contentType: false,
-                    processData: false,
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-                    success: function(response) {
-                        console.log(response)
-                        if(response.message=="Vendor Deleted successful"){
-                            
-                            $("#myModal_delete").modal("hide");
-                            $("#delete-text").empty()
-                            $("#delete-text").text("Vendor deleted successfully")
-                            $("#succesModal_delete").modal("show");
-                            getData()
+                    $("#myModal_warning_connection").modal("show");
                             setTimeout(function() {
-                                $("#succesModal_delete").modal("hide");
+                                $('#myModal_warning_connection').modal('hide');
+
                             }, 2000);
-                        }
-                        
-                    },
-                    error: function(xhr, status, error) {
-                        if(xhr.responseJSON.message=='Vendor not Deleted successful'){
-                            $("#myModal_delete").modal("hide");
-                            $("#delete-text").empty()
-
-                            $("#delete-text").text("Error deleting vendor")
-                            $("#succesModal_delete").modal("show");
-                            getData()
-                            setTimeout(function() {
-                                $("#succesModal_delete").modal("hide");
-                            }, 2000);
-                        }else{
-                            $("#myModal_delete").modal("hide");
-                            $("myModal_warning_connection").modal("show");
-                            getData()
-                            setTimeout(function() {
-                                $("#myModal_warning_connection").modal("hide");
-                            }, 2000);
-                        }
-                    }
-                })
-            })
-
-            $("#save").on("click",function(){
-                $.ajax({
-                    url: `https://backend.app.spaderent.com/api/spade/updateVendor`,
-                    type: 'PUT',
-                    data:JSON.stringify({
-                        vendId:vendorID,
-                        firstName: $("#firstName_update").val(),
-                        lastName: $("#lastName_update").val(),
-                        businessName: $("#businessName_update").val(),
-                        streetAddress: $("#streetAddress_update").val(),
-                        city: $("#city_update").val(),
-                        zip: $("#zip_update").val(),
-                        phone: $("#phone_update").val(),
-                        workPhone: $("#workPhone_update").val(),
-                        email: $("#email_update").val(),
-                        categoryID: $("#category_update").val()
-                    }),
-                    contentType: "application/json; charset=utf-8",
-                    processData: false,
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-                    success:function(response){
-                        $("#myModal_edit").modal("hide");
-                        $("#succesModal_edit").modal("show");
-                        resetAccordions()
-                        getData()
-                        setTimeout(function() {
-                            $("#succesModal_edit").modal("hide");
-                        }, 2000);
-                        
-                    },
-                    error:function(xhr, status, error){
-                        $("#myModal_edit").modal("hide");
-                        $("#myModal_warning_connection").modal("show");
-                        getData()
-                        setTimeout(function() {
-                            $("#myModal_warning_connection").modal("hide");
-                        }, 2000);
-                    }
-                })
-            })
-            $('input[type="checkbox"]').change(function() {
-                var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
-                var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
-                console.log(columnIndex, isColumnVisible)
-                    // Toggle the visibility of the corresponding column
-                $('table').find('tr').each(function() {
-                    var column = $(this).find('th:nth-child(' + (columnIndex+1) + '), td:nth-child(' + (columnIndex+1) + ')');
-                    isColumnVisible ? column.show() : column.hide();
-                });
-            });
-
-            function filterTable(selectedFilter) {
-                var tableBody = $('#table_body');
-                var rows = tableBody.find('tr');
-
-                if (selectedFilter === 'alphabets') {
-                    rows.sort(function(a, b) {
-                        var textA = $(a).find('.vendorName').text().toLowerCase();
-                        var textB = $(b).find('.vendorName').text().toLowerCase();
-                        return textA.localeCompare(textB);
-                    });
-                } else if (selectedFilter === 'ascending') {
-                    rows.sort(function(a, b) {
-                        console.log(parseInt($(a).find('.rentAmount').text()))
-                        var idA = parseInt($(a).find('.rentAmount').text());
-                        var idB = parseInt($(b).find('.rentAmount').text());
-                        return idA - idB;
-                    });
-                } else if (selectedFilter === 'descending') {
-                    rows.sort(function(a, b) {
-                        var idA = parseInt($(a).find('.rentAmount').text());
-                        var idB = parseInt($(b).find('.rentAmount').text());
-                        return idB - idA;
-                    });
-                }
-
-                tableBody.empty().append(rows);
-            }
-
-            // Filter functionality
-            $('#ascending').on('click', function() {
-                filterTable("ascending")
-            });
-            $('#descending').on('click', function() {
-                filterTable("descending")
-            });
-            $('#alphabets').on('click', function() {
-                // console.log(1)
-                filterTable("alphabets")
-            });
-
-            // Search functionality
-            $('#search_input').on('keyup', function() {
-                var searchValue = $(this).val().toLowerCase();
-                $('#table_body tr').filter(function() {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
-                });
-            });
-            let phoneError = true
-
-            function areAllFieldsFilled() {
-                var accordion1Fields = $('#addModal input[required], #addModal select[required]');
-                var allFieldsFilled = accordion1Fields.filter(function() {
-                    return $(this).val() === '' || $(this).val() === 'Choose...';
-                }).length === 0;
-                var zipField = $('#zip');
-                if (zipField.val().length !== 5) {
-                    allFieldsFilled = false;
-                }
-                if (phoneError) {
-                    allFieldsFilled = false;
-                }
-                return allFieldsFilled;
-            }
-
-            // Function to enable or disable buttons based on field status
-            function updateButtonStatus() {
-
-
-
-
-                var allFieldsFilled = areAllFieldsFilled();
-
-                // Enable or disable the buttons based on the fields' status
-                if (allFieldsFilled) {
-                    $('#next').removeClass("disabled");
-                    //   $('#draft').removeAttr("disabled");
-                } else {
-                    $('#next').addClass("disabled");
-                    //   $('#draft').removeAttr("disabled");
-
-                }
-            }
-
-            // Call the updateButtonStatus function when any field in the accordions is changed
-            $('#addModal input[required], #addModal select[required]').on('input change', function() {
-                var $field = $(this);
-                var $errorMessage = $field.next('.text-danger');
-                if ($field.attr("id") === "zip") {
-                    if ($field.val().length !== 5) {
-                        $field.addClass('border-danger');
-                        $errorMessage.removeClass('d-none');
-                    } else {
-                        $field.removeClass('border-danger');
-                        $errorMessage.addClass('d-none');
-                    }
-                } else if ($field.val() === '' || $field.val() === 'Choose...') {
-                    $field.addClass('border-danger');
-                    $errorMessage.removeClass('d-none');
-                } else {
-                    $field.removeClass('border-danger');
-                    $errorMessage.addClass('d-none');
-                }
-                updateButtonStatus();
-            });
-            const input = document.querySelector("#phone");
-            const errorMsg = document.querySelector("#error-msg");
-            const validMsg = document.querySelector("#valid-msg");
-
-            // here, the index maps to the error code returned from getValidationError - see readme
-            const errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
-
-            // initialise plugin
-            const iti = window.intlTelInput(input, {
-                utilsScript: "/intl-tel-input/js/utils.js?1684676252775"
-            });
-
-            const reset = () => {
-                input.classList.remove("error");
-                errorMsg.innerHTML = "";
-                errorMsg.classList.add("d-none");
-                validMsg.classList.add("d-none");
-            };
-
-            // on blur: validate
-            input.addEventListener('input', () => {
-                reset();
-                console.log("in phone input")
-                if (input.value.trim()) {
-                    if (iti.isValidNumber()) {
-                        validMsg.classList.remove("d-none");
-                        phoneError = false
-                    } else {
-                        phoneError = true
-                        input.classList.add("error");
-                        const errorCode = iti.getValidationError();
-                        errorMsg.innerHTML = errorMap[errorCode];
-                        errorMsg.classList.remove("d-none");
-                    }
+                            console.log(xhr.responseText);
                 }
             });
-            $("#close,.btn-close").click(() => {
-                resetAccordions()
-            })
-            $("#succes-close").click(() => {
-                getData()
-            })
-            $(document).on('input change','#addModal input[type="text"],#addModal input[type="tel"],#addModal input[type="phone"], #addModal select,#addModal textarea', function() {
-                // updateTotal();
-                    var $field = $(this);
-                    var $errorMessage = $field.next('.text-danger');
-                     if ($field.val() === '' || $field.val() === 'Choose...') {
-                        $field.addClass('border-danger');
-                        $field.removeClass('border-green');
-                        $errorMessage.removeClass('d-none');
-                    } else {
-                        $field.removeClass('border-danger');
-                        $field.addClass('border-green');
-                        $errorMessage.addClass('d-none');
-                    }
-                    
-                });
-                $('#email').keyup(function() {
-          var email = $(this).val();
-          var emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z.-]+\.[A-Za-z]{2,}$/;
-          
-          if(!email.match(emailRegex)) {
-            // Invalid email format, display an error message or take appropriate action
-            console.log("invalid");
-            $(this).addClass("border-danger")
-            $(this).removeClass("border-green")
-          }else{
-              $(this).addClass("border-green")
-            $(this).removeClass("border-danger")
-          }
         });
-        })
+
+
+        // });
     </script>
-<script>
-    function logout() {
+    <!-- ############################################# -->
+
+    <!-- GALLERY JS -->
+    <script src="../assets/plugins/gallery/picturefill.js"></script>
+    <script src="../assets/plugins/gallery/lightgallery.js"></script>
+    <script src="../assets/plugins/gallery/lightgallery-1.js"></script>
+    <script src="../assets/plugins/gallery/lg-pager.js"></script>
+    <script src="../assets/plugins/gallery/lg-autoplay.js"></script>
+    <script src="../assets/plugins/gallery/lg-fullscreen.js"></script>
+    <script src="../assets/plugins/gallery/lg-zoom.js"></script>
+    <script src="../assets/plugins/gallery/lg-hash.js"></script>
+    <script src="../assets/plugins/gallery/lg-share.js"></script>
+
+    <!-- C3 CHART JS -->
+    <script src="../assets/plugins/charts-c3/d3.v5.min.js"></script>
+    <script src="../assets/plugins/charts-c3/c3-chart.js"></script>
+
+    <!-- INPUT MASK JS-->
+    <script src="../assets/plugins/input-mask/jquery.mask.min.js"></script>
+
+    <!-- CHARTJS JS -->
+    <script src="../assets/plugins/chart/Chart.bundle.js"></script>
+    <script src="../assets/plugins/chart/utils.js"></script>
+
+    <!-- CHART-DONUT JS -->
+    <script src="../assets/js/charts.js"></script>
+    <script src="../assets/js/email-verification.js"></script>
+    <script src="../assets/js/intercom.js"></script>
+    <script src="../assets/js/getNotification.js"></script>
+<script src="../assets/js/push_notification.js"></script>
+    <script>
+    </script>
+
+    <script>
+        // Get the user's preferred color scheme
+        const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        // Get a reference to the logo element
+        // const logo = document.getElementById('logo');
+
+        // if (userPrefersDark) {
+        //     logo.src = '../assets/header-img/comment.svg';
+        // } else {
+        //     logo.src = '../assets/header-img/question.svg';
+        // }
+    </script>
+    <script src="../assets/plugins/fancyuploder/jquery.ui.widget.js"></script>
+    <script src="../assets/plugins/fancyuploder/jquery.fileupload.js"></script>
+    <script src="../assets/plugins/fancyuploder/jquery.iframe-transport.js"></script>
+    <script src="../assets/plugins/fancyuploder/jquery.fancy-fileupload.js"></script>
+    <script src="../assets/plugins/fancyuploder/fancy-uploader.js"></script>
+    <script>
+        function logout() {
+            $(document).ready(function () {
+                $.ajax({
+                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                    type: 'PUT',
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        if(localStorage.getItem("htmlLayout")){
+    
+                            const htmlLayoutValue = localStorage.getItem("htmlLayout");
+                            localStorage.clear();
+                            localStorage.setItem("htmlLayout", htmlLayoutValue);
+                        }else{
+                            localStorage.clear();
+    
+                        }
+                        // localStorage.removeItem('authtoken');
+                        // window.close();
+                        window.open('./login_module.html', "_self")
+                        console.log('Done');
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(error);
+                    }
+                });
+            });
+        }
+    </script>
+    <!-- <script>
         $(document).ready(function () {
+
+            const propertyId = (new URL(document.location)).searchParams.get("propertyId");
+            // console.log($("#viewUnits").attr("href"))
+            $(".viewUnits").attr("href",`./property-unit.html?propertyId=${propertyId}`)
+            $("#viewOverview").attr("href",`./view-property.html?propertyId=${propertyId}`)
+            $(".viewTenants").attr("href",`./property-tenant.html?propertyId=${propertyId}`)
+            $(".viewTasks").attr("href",`./property-task.html?propertyId=${propertyId}`)
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
-                type: 'PUT',
-                contentType: false,
-                processData: false,
+                url: 'https://backend.app.spaderent.com/api/spade/viewProperty',
+                type: 'GET',
+                data: {
+                    propertyId
+                },
+                contentType: "application/json; charset=utf-8",
+                // processData: false,
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function (response) {
-                    console.log(response);
-                    if(localStorage.getItem("htmlLayout")){
+                success: function({
+                    data
+                }) {
+                    console.log(data)
+                        // window.alert(response.message);
+                    console.log(data.propertyName)
+                    $("#property_name").text(data.propertyName)
+                    $("#property_address").text(data.address)
+                    $("#property_type").text(data.propertyType)
+                    $("#property_units").text(data.units)
+                    $("#property_status").text(data.status)
+                    $("#lightgallery").empty()
+                    data.images.forEach(image => {
+                    $("#lightgallery").append('<li class="col-xs-6 col-sm-4 col-md-4 col-xl-3 mb-5 border-bottom-0" data-responsive="../../../../spadeAPI/uploads/'+image.Image+'" data-src="../../../../spadeAPI/uploads/'+image.Image+'" data-sub-html="<h4>Gallery Image 1</h4><p> Many desktop publishing packages and web page editors now use Lorem Ipsum</p>"><a href="javascript:void(0)"><img class="img-responsive br-5" src="../../../../spadeAPI/uploads/' + image.Image + '" alt="Thumb-1"></a></li>')
 
-                        const htmlLayoutValue = localStorage.getItem("htmlLayout");
-                        localStorage.clear();
-                        localStorage.setItem("htmlLayout", htmlLayoutValue);
-                    }else{
-                        localStorage.clear();
-
-                    }
-                    // localStorage.removeItem('authtoken');
-                    // window.close();
-                    window.open('./login_module.html', "_self")
-                    console.log('Done');
+                    });
+                    // $("#lightgallery").append('<li class="col-xs-6 col-sm-4 col-md-4 col-xl-3 mb-5 border-bottom-0" data-responsive="../../../../spadeAPI/uploads/'+image.Image+'" data-src="../../../../spadeAPI/uploads/'+image.Image+'" data-sub-html="<h4>Gallery Image 1</h4><p> Many desktop publishing packages and web page editors now use Lorem Ipsum</p>"><a href="javascript:void(0)"><img class="img-responsive br-5" src="../../../../spadeAPI/uploads/' + image.Image + '" alt="Thumb-1"></a></li>')
                 },
-                error: function (xhr, status, error) {
-                    console.log(error);
+                error: function(xhr, status, error) {
+                    window.alert('Error: ' + error);
                 }
             });
         });
-    }
-</script>
 
-<script>
-    $(document).ready(()=>{
-        $.ajax({
-            url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
-            method: 'GET',
-            headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-            },
-            success: function (response) {
-                console.log("here")
-                if(response.message=="Email is verified"){
-                    $("#account-text").remove()
-                      $("#email_verification").remove()
-                }
-            },
-            error: function (xhr, status, error) {
-                console.log('Error occurred while fetching state and city data.');
-                console.log(xhr);
-                console.log(error);
-                // console.log('Error occurred while fetching state and city data.');
-            }
-        });
-    })
-</script>
+
+    // });
+    </script> -->
 </body>
 
 </html>

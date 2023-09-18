@@ -9,14 +9,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Sash – Bootstrap 5  Admin & Dashboard Template">
     <meta name="author" content="Spruko Technologies Private Limited">
-    <meta name="keywords" content="admin,admin dashboard,admin panel,admin template,bootstrap,clean,dashboard,flat,jquery,modern,responsive,premium admin templates,responsive admin,ui,ui kit.">
+    <meta name="keywords"
+        content="admin,admin dashboard,admin panel,admin template,bootstrap,clean,dashboard,flat,jquery,modern,responsive,premium admin templates,responsive admin,ui,ui kit.">
 
     <!-- FAVICON -->
-    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css'>
+    <link rel='stylesheet'
+        href='https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css'>
     <link rel="shortcut icon" type="image/x-icon" href="../assets/images/brand/favicon.ico" />
 
     <!-- TITLE -->
-    <title>Vendor list - SpadeRent</title>
+    <title>Tasks list - SpadeRent</title>
 
     <!-- BOOTSTRAP CSS -->
     <link id="style" href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -31,6 +33,11 @@
     <link href="../assets/css/icons.css" rel="stylesheet" />
     <!-- <link rel="stylesheet" href="fancy_fileupload.css"> -->
     <!-- COLOR SKIN CSS -->
+    <script>
+        if (localStorage.getItem("task") == "false") {
+            window.location = "./new-tasks.html"
+        }
+    </script>
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="../assets/colors/color1.css" />
     <script>
          if(!localStorage.getItem("authtoken")){
@@ -39,35 +46,16 @@
     </script>
 <style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
         .custom-file-input::-webkit-file-upload-button {
             visibility: hidden;
         }
-        
-        #propertyTable {
-            padding: 0;
-        }
-        
-        #propertyTable_wrapper .dataTables_wrapper {
-            padding: 0;
-        }
-        
-        #propertyTable_wrapper .dataTables_scroll {
-            padding: 0;
-        }
-        
-        #propertyTable_wrapper .dataTables_scrollHead {
-            padding: 0;
-        }
-        
-        #propertyTable_wrapper .dataTables_scrollBody {
-            padding: 0;
-        }
-        
+
         .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar {
             width: 7px;
             /* Width of the scrollbar */
         }
-        
+
         .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb {
             background-color: rgb(136, 136, 136, 0.2);
             /* Color of the scrollbar thumb */
@@ -75,12 +63,16 @@
             transition: all 1ms;
             /* Rounded corners for the thumb */
         }
-        
+
         .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb:hover {
             background-color: rgb(136, 136, 136, 0.5);
             /* Color of the scrollbar thumb on hover */
         }
-        
+
+        .iti {
+            margin-bottom: 0 !important;
+        }
+
         .custom-file-input::before {
             content: 'Select Files';
             display: inline-block;
@@ -92,50 +84,67 @@
             cursor: pointer;
             border-radius: 4px;
         }
-        
+
         .custom-file-input:hover::before {
             background: #0069d9;
         }
-        
+
+        /* .fi-rs-calendar {
+    position: absolute;
+    top: 78%;
+    right: 24px;
+    transform: translateY(-50%);
+    background-size: cover;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #1467B0;
+} */
+
+        .dark-mode .link-text {
+            color: #000;
+        }
+
         .custom-file-input:active::before {
             background: #0062cc;
         }
-        
+
         .custom-file-input.selected::before {
             content: 'Change Files';
             background: #28a745;
         }
-        
+
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            /* display: none; */
+            background-size: cover;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #1467B0;
+        }
+
         .dark-mode .create-new-link {
             background: transparent !important;
             border: 3px solid #1467B0 !important;
             color: white !important;
             border-radius: 50px !important;
         }
-        /* .dark-mode .create-new-link:hover {
-    border: 3px solid #1467B0 !important;
-} */
-        
+
         .create-new-link {
             background: transparent !important;
             border: 3px solid #1467B0 !important;
             color: black;
             border-radius: 50px !important;
         }
-        
+
         .selected-files {
             margin-top: 10px;
         }
-        
-        .dark-mode .selected-files span {
-            display: inline-block;
-            margin-right: 0;
-            padding: 4px 8px;
-            background: transparent;
-            color: white !important;
-            border-radius: 4px;
+
+        .del-btn {
+            position: absolute;
+            right: 10px;
+            top: 50%;
         }
-        
+
         .selected-files span {
             display: inline-block;
             margin-right: 5px;
@@ -144,11 +153,20 @@
             color: #333;
             border-radius: 4px;
         }
-        
+
+        .dark-mode .selected-files span {
+            display: inline-block;
+            margin-right: 0;
+            padding: 4px 8px;
+            background: transparent;
+            color: white;
+            border-radius: 4px;
+        }
+
         .custom-file-input {
             visibility: hidden;
         }
-        
+
         .custom-file-label {
             cursor: pointer;
             display: flex;
@@ -158,7 +176,7 @@
             padding: 6px 12px;
             background-color: #fff;
         }
-        
+
         .dark-mode .custom-file-label {
             cursor: pointer;
             display: flex;
@@ -168,76 +186,85 @@
             padding: 6px 12px;
             background-color: transparent;
         }
-        
+
+        .dark-mode .btn-close {
+            color: white;
+        }
+
+        .dark-mode .iti input[type=tel],
+        .dark-mode .iti input[type=text] {
+            border-color: rgba(255, 255, 255, 0.1);
+            background-color: transparent;
+            border-right-color: rgba(255, 255, 255, 0.1);
+            color: #dedefd;
+        }
+
         .custom-file-label i {
             margin-bottom: 5px;
             font-size: 3rem;
             color: #1467B0;
         }
-        
+
         .custom-file-text {
             text-align: center;
             line-height: 1.2;
             margin-top: 5px;
         }
-        
+
         .custom-file-text span {
             display: block;
             font-size: 14px;
         }
-        
+
         .remove-file {
             cursor: pointer;
         }
-        
+
         .border {
             border: 0px solid #e9edf4 !important;
             padding: 0.75rem;
             vertical-align: top;
             border: 1px solid #e9edf4;
         }
-        /* input:focus {
-    border: 3px solid #555 !important;
-} */
-        
-        .panel-body {
+
+        /* /* input:focus {
+            border: 3px solid #555 !important;
+        } */
+
+        */ .panel-body {
             padding: 0px;
         }
-        
-        .dark-mode .btn-close {
-            color: white;
-        }
-        
+
         .accordion-item:first-of-type {
             border-bottom-left-radius: 0.25rem;
             border-bottom-right-radius: 0.25rem;
             box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
         }
-        
+
         .accordion-item:last-of-type {
             border-top-right-radius: 0.25rem;
             border-top-left-radius: 0.25rem;
             box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
         }
-        
+
         .table-primary th {
             font-weight: 600 !important;
             vertical-align: middle !important;
         }
-        
+
         .border-model-line {
             border-top-left-radius: 3px;
             border-bottom-left-radius: 3px;
             border-top-right-radius: 3px !important;
             border-bottom-right-radius: 3px !important;
         }
-        
+
         .file-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
             grid-gap: 10px;
         }
-        
+
         .selected-file {
             display: flex;
             flex-direction: column;
@@ -248,34 +275,34 @@
             border: 1px solid #ccc;
             border-radius: 5px;
         }
-        
+
         .file-preview {
             width: 80px;
             height: 80px;
             object-fit: cover;
             border-radius: 5px;
         }
-        
+
         .file-details {
             margin-top: 5px;
             font-size: 12px;
         }
-        
+
         .table td {
             vertical-align: middle !important;
         }
+
         /* .card-header {
-padding: 0.5rem 1rem;
-} */
-        
+        padding: 0.5rem 1rem;
+    } */
+
         .modal-footer .button-left {
             background-color: #1F1F1F;
             margin: 0rem 1rem;
             color: white;
         }
-        
-        .modal-footer button,
-        .modal-footer a {
+
+        .modal-footer button {
             border-radius: 2.75rem;
             padding: 4px 30px;
             font-family: 'Figtree';
@@ -288,91 +315,95 @@ padding: 0.5rem 1rem;
             letter-spacing: 0.0145455em;
             /* font-size: 0.938rem; */
         }
-        
-        .disabled {
-            pointer-events: none;
-            cursor: not-allowed;
-            color: gray;
-        }
-        
+
         .modal-footer .button {
             font-size: 0.938rem;
         }
-        
+
         .accordion-button::after {
             content: "";
             display: inline-block;
             /* Replace with the path to your default chevron image */
         }
-        
+
         .chevron,
         .tick,
         .cross {
             position: absolute;
             right: 15px;
         }
-        
+
         .tick {
-            color: #1DBC5F;
+            color: green;
             font-weight: bolder
         }
-        
+
         .cross {
             color: red;
             font-weight: bolder
         }
-        
+
         .accordion-button .chevron {
             transition: transform 0.3s;
             /* Transition for smooth animation */
         }
-        
+
         .accordion-button[aria-expanded="true"] .chevron {
             transform: rotate(-180deg);
             /* Rotate the chevron when accordion is open */
         }
-        
+
         .table tbody img {
             width: 40px;
             border: transparent;
             border-radius: 5px;
             height: 40px;
         }
-        
+
         .rounded-pill-Single-Family {
             color: #4A4AFF !important;
             background: #E6E6F2 !important;
             font-weight: bold;
         }
-        
+
         .rounded-pill-Multi-Family {
             color: #0BAAB8 !important;
             background: #C8F3F7 !important;
             font-weight: bold;
         }
-        
+
+        .succes-modal-dialog {
+            max-width: 544px;
+            margin: 1.75rem auto;
+        }
+
+        .succes-modal-dialog .shadow-lg {
+            background-color: white;
+        }
+
         .rounded-pill-Multi-Commercial {
             background: #FFF9E5 !important;
             color: #F5CA38 !important;
             font-weight: bold;
         }
-        
+
         .table-primary {
             background: #1467B014;
         }
-        
+
         .selected-file {
             position: relative;
         }
-        
+
         .file-preview {
             width: 100%;
         }
-        
+
         .file-details {
             padding: 10px;
         }
-        
+
+        /* 
         .delete-file {
             position: absolute;
             top: -1px;
@@ -380,57 +411,67 @@ padding: 0.5rem 1rem;
             cursor: pointer;
             font-size: 11px;
             color: #000;
-        }
-        
+        } */
+
         .btn-group>.btn-group:not(:last-child)>.btn,
         .btn-group>.btn:not(:last-child):not(.dropdown-toggle) {
             border-top-right-radius: 5px;
             border-bottom-right-radius: 5px;
         }
-        
+
         .color-primary {
             color: #1467B0;
         }
-        
+
         .border-model-line {
             border-left: 5px solid #1467B0;
         }
-        
+
         .accordion-item:first-of-type .accordion-button {
             border-top-right-radius: calc(0.5rem - 1px);
             border-top-left-radius: calc(0.5rem - 1px);
         }
+
+        .selected-files span {
+            display: inline-block;
+            margin-right: 0px;
+            padding: 0px;
+            background: none;
+            color: #333;
+            /* border-radius: 4px; */
+        }
+
         /* .delete-file {
-position: absolute;
-top: 0px;
-right: 5px;
-cursor: pointer;
-font-size: 13px;
-color: #000;
-} */
-        
+        position: absolute;
+        top: 0px;
+        right: 5px;
+        cursor: pointer;
+        font-size: 13px;
+        color: #000;
+    } */
+
         button.btn-close {
             right: 6px;
         }
-        
+
         .btn-close {
             width: 1.8rem;
             opacity: 1;
             position: absolute;
             top: 6px;
         }
-        
+
         .del {
             width: 2rem !important;
         }
-        
+
         .btn-close:hover,
         .btn-close:focus {
             color: #000;
             text-decoration: none;
             opacity: 1;
         }
-        
+
         @media (max-width:992px) {
             .modal-footer button {
                 border-radius: 2.75rem;
@@ -443,138 +484,160 @@ color: #000;
                 /* identical to box height, or 120% */
                 letter-spacing: 0.0145455em;
             }
-            #top_main_image {
-                display: none;
+
+            .btn-close {
+                width: 2.5rem;
+                opacity: 1;
+                position: absolute;
+                top: 6px;
             }
-            #top_main_card {
-                height: 220px;
+
+            .del {
+                width: 2rem !important;
             }
-            #nav_links {
-                top: 153px;
+
+            .btn-close:hover,
+            .btn-close:focus {
+                color: #000;
+                text-decoration: none;
+                opacity: 1;
             }
-        }
-        
-        @media (max-width:425px) {
-            .modal-footer {
-                flex-direction: column !important;
-                justify-content: flex-center !important;
+
+            @media (max-width:992px) {
+                .modal-footer button {
+                    border-radius: 2.75rem;
+                    padding: 4px 30px;
+                    font-family: 'Figtree';
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 0.8rem;
+                    line-height: 1.875rem;
+                    /* identical to box height, or 120% */
+                    letter-spacing: 0.0145455em;
+                }
+
+                #top_main_image {
+                    display: none;
+                }
+
+                #top_main_card {
+                    height: 220px;
+                }
+
+                #nav_links {
+                    top: 153px;
+                }
             }
-            .modal-footer .button-left {
-                margin: auto;
+
+            @media (max-width:575px) {
+                .modal-footer {
+                    flex-direction: column !important;
+                    justify-content: flex-center !important;
+                }
+
+                .modal-footer .button-left {
+                    margin: auto;
+                }
+
+                /* .modal-footer button {
+                    width: 231px;
+                } */
+                .border-model-line h2 {
+                    font-size: 1.6rem;
+                }
+
+                .accordion-button h3 {
+                    font-size: 15px;
+                }
+
+                #filter_btn {
+                    font-size: 12px;
+                    margin: 0 !important;
+                }
+
+                /* #customize_btn {
+                    display: none;
+                } */
+                #info-head {
+                    display: none;
+                }
+
+                #add_property_btn {
+                    font-size: 12px;
+                    margin: 0 !important;
+                    display: none;
+                }
+
+                /* #typehead {
+                    display: none;
+                } */
+                #email_verification {
+                    font-size: 12px;
+                }
+
+                #top_main_image {
+                    display: none;
+                }
+
+                #top_main_card {
+                    height: 220px;
+                }
+
+                #nav_links {
+                    top: 153px;
+                }
             }
-            /* .modal-footer button {
-                width: 231px;
-            } */
-            .border-model-line h2 {
-                font-size: 1.6rem;
+
+            @media (max-width:375px) {
+                .border-model-line h2 {
+                    font-size: 1.4rem;
+                }
             }
-            .accordion-button h3 {
-                font-size: 15px;
+
+            @media (max-width:320px) {
+                /* .modal-footer button {
+                    width: 231px;
+                } */
             }
-            #filter_btn {
-                font-size: 12px;
-                margin: 0 !important;
+
+            @media (max-width: 767px) {
+                .file-select-area {
+                    display: block;
+                    text-align: center;
+                }
+
+                .selected-files {
+                    margin-top: 10px;
+                    text-align: center;
+                }
+
+                .file-details {
+                    padding: 5px;
+                }
             }
-            #customize_btn {
-                display: none;
+
+            th,
+            td {
+                border-left-color: transparent !important;
+                border-right-color: transparent !important;
             }
-            #add_property_btn {
-                font-size: 12px;
-                margin: 0 !important;
+
+            .dark-mode th {
+                background: #212121 !important;
+                font-weight: bold !important;
             }
-            #typehead {
-                display: none;
+
+            .light-mode th {
+                background: #ECF3F9 !important;
+                font-weight: bold !important;
             }
-            #email_verification {
-                font-size: 12px;
-            }
-            #top_main_image {
-                display: none;
-            }
-            #top_main_card {
-                height: 220px;
-            }
-            #nav_links {
-                top: 153px;
-            }
-        }
-        
-        @media (max-width:375px) {
-            .border-model-line h2 {
-                font-size: 1.4rem;
-            }
-            .succes-modal {
-                padding: 1rem 1rem;
-            }
-        }
-        
-        @media (max-width:320px) {
-            /* .modal-footer button {
-                width: 231px;
-            } */
-        }
-        
-        @media (max-width: 767px) {
-            .file-select-area {
-                display: block;
-                text-align: center;
-            }
-            .selected-files {
-                margin-top: 10px;
-                text-align: center;
-            }
-            .file-details {
-                padding: 5px;
-            }
-        }
-        
-        th,
-        td {
-            border-left-color: transparent !important;
-            border-right-color: transparent !important;
-        }
-        
-        .dark-mode th {
-            background: #212121 !important;
-        }
-        
-        .light-mode th {
-            background: #ECF3F9 !important;
         }
     </style>
 
 </head>
 
 <body class="app sidebar-mini ltr light-mode">
-
-    <!-- GLOBAL-LOADER -->
-    <!-- <div id="global-loader">
-        <img src="../assets/images/loader.svg" class="loader-img" alt="Loader">
-    </div> -->
-    <div id="preloader" class="tlp-preloader">
-        <div class="animation-preloader">
-            <div class="tlp-spinner"></div>
-            <img src="../assets/images/logo-preloader.png" alt="Preloader" style="width: 65px;">
-        </div>
-    </div>
-    <!-- /GLOBAL-LOADER -->
     <div class="modal fade" id="myModal_warning_connection" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-dialog-centered text-center" role="document">
-            <div class="modal-content modal-content-demo">
-                <div class="modal-body p-0">
-                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
-                        <div class="card-body text-center">
-                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24"><path fill="#fad383" d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z"/><circle cx="12" cy="16" r="1" fill="#f7b731"/><path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"/></svg></span>
-                            <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
-                            <p class="card-text text-dark m-0">Sorry! Something went wrong.</p>
-                            <p class="card-text text-dark m-0">Kindly check your internet connection or please try again later.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="myModal_warning" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered text-center" role="document">
             <div class="modal-content modal-content-demo">
                 <div class="modal-body p-0">
@@ -588,7 +651,9 @@ color: #000;
                                     <path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z" />
                                 </svg></span>
                             <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
-                            <p class="card-text text-dark">Session expeired!, Login again</p>
+                            <p class="card-text text-dark m-0">Sorry! Something went wrong.</p>
+                            <p class="card-text text-dark m-0">Kindly check your internet connection or please try again
+                                later.</p>
                         </div>
                     </div>
                 </div>
@@ -653,11 +718,8 @@ color: #000;
                         <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
                         <h6 class="text-default mb-3">Get started with Spade Rent! You have<span id="days-left"></span>
                             left</h6>
-                        <input type="email" class="form-control form mb-2" style="width: 100%;"
-                            data-bs-placement="top" data-bs-toggle="tooltip" title=""
-                            data-bs-original-title="Enter the name of the property." readonly id="user-email"><span class="text-danger d-none" id="verify-email-span">* Email already exist</span>
-                        <a class="text-primary mb-4" href="javascript:void(0)" id="change-email">Change Email</a>
-                        <a class="text-primary mb-4 d-none" href="javascript:void(0)" id="save-email">Save Email</a>
+                            <input type="email" class="form-control form mb-2" style="width: 100%;" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the name of the property." readonly="" id="user-email" aria-describedby="tooltip281258">
+                        <a class="text-primary mb-4" href="javascript:void(0)">Change Email</a>
                         <div class="">
                             <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2"
                                 id="remind-later">Remind me Later</a>
@@ -672,6 +734,179 @@ color: #000;
             </div>
         </div>
     </div>
+    <div class="modal fade" id="successfully_changed" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
+                        <!-- <div class="card-header border-0 pt-3">
+                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                            </button>
+                        </div> -->
+                        <div class="card-body text-center">
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
+                                    viewBox="0 0 24 24">
+                                    <path fill="#13bfa6"
+                                        d="M10.3125,16.09375a.99676.99676,0,0,1-.707-.293L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328l-6.1875,6.1875A.99676.99676,0,0,1,10.3125,16.09375Z"
+                                        opacity=".99" />
+                                    <path fill="#71d8c9"
+                                        d="M12,2A10,10,0,1,0,22,12,10.01146,10.01146,0,0,0,12,2Zm5.207,7.61328-6.1875,6.1875a.99963.99963,0,0,1-1.41406,0L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328Z" />
+                                </svg></span>
+                            <!-- <h4 class="h4 mb-0 mt-3 fw-bold">Success</h4> -->
+                            <p class="card-text text-dark" id="successfully_changed_text"></p>
+                        </div>
+                        <!-- <div class="card-footer text-center border-0 pt-0">
+                            <div class="row">
+                                <div class="text-center">
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal_warning" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
+                        <div class="card-body text-center">
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
+                                    viewBox="0 0 24 24">
+                                    <path fill="#fad383"
+                                        d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z" />
+                                    <circle cx="12" cy="16" r="1" fill="#f7b731" />
+                                    <path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z" />
+                                </svg></span>
+                            <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
+                            <p class="card-text text-dark">Session expeired!, Login again</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- View Modal Start  -->
+    <div class="modal fade" id="viewModal-tasks" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="text-justify ps-2 border-model-line">
+                        <h2 class="modal-title mb-0">View <strong class="color-primary">Tasks</strong></h2>
+                        <!-- <button type="button" class="btn btn-primary">#Invoice Number: INV-89900A</button> -->
+                    </div>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="viewModal-tasks">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark text-dark"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <label><b>Task Name</b></label>
+                            <p class="text-primary"><b id="taskName_view"></b></p>
+                        </div>
+                        <div class="col-lg-3">
+                            <label><b>Due Date</b></label>
+                            <p class="text-primary"><b id="dueDate_view">June-06-2023</b></p>
+                        </div>
+                        <div class="col-lg-3">
+                            <label><b>Priority</b></label>
+                            <p class="text-primary"><b id="priority_view">High Priority</b></p>
+                        </div>
+                        <div class="col-lg-3">
+                            <label><b>Status</b></label>
+                            <p class="text-danger"><b id="status_view"><i class="fi fi-rs-clock-three"
+                                        style="color: #FB233B;"></i>
+                                    Unpaid</b></p>
+                        </div>
+                        <div class="col-lg-12 mt-5">
+                            <label><b>Notes</b></label>
+                            <p class="text-primary"><b id="notes_view">Lorem, ipsum dolor sit amet consectetur
+                                    adipisicing elit.</b></p>
+                        </div>
+                        <div class="col-lg-12 mt-5">
+                            <div style="display: flex;">
+                                <p class="text-primary"><b>Line Items</b></p>
+                                <hr
+                                    style="height: 2px; background: black; width: 88%; margin-left: 83px; position: absolute; margin-top: 10px;">
+                            </div>
+                        </div>
+                        <!-- <div class="col-lg-10 mt-5">
+                                
+                            </div> -->
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-12 mb-5">
+                            <div class="table-responsive">
+                                <table class="table text-nowrap table-borderless text-md-nowrap mg-b-0 mb-0"
+                                    id="lineItemsTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Vendor</th>
+                                            <th>Property</th>
+                                            <th>Tenant</th>
+                                            <!-- <th>Amount</th> -->
+
+                                        </tr>
+                                    </thead>
+                                    <tbody id="view-task-line-item">
+                                        <tr class="tr">
+                                            <td>
+                                                <p class="text-primary"><b> / 0321-2045564</b></p>
+                                            </td>
+                                            <td>
+                                                <p class="text-primary"><b>Test / 200</b></p>
+                                            </td>
+                                            <td>
+                                                <p class="text-primary"><b>John Smith / 0321-2045564</b></p>
+                                            </td>
+                                            <!-- <td>
+                                                    <p class="text-primary"><b>$200.00</b></p>
+                                                </td> -->
+                                            <!-- <td><button type="button" class="btn" id="del-btn1">
+                                                        <i class="fi fi-rs-trash text-danger fs-5"></i>
+                                                    </button></td> -->
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- <div class="col-md-12 col-lg-8 mt-5">
+                                <label><b>Additional Information</b></label>
+                                <p class="text-primary"><b id="notes"></b></p>
+                            </div>
+                            <div class="col-md-12 col-lg-4 mt-5">
+                                <span class="float-end">
+                                    <label class="form-label fw-bold m-0">Balance Due</label>
+                                    <h1 class="text-primary fw-bold m-0" id="totalAmount">$200.00</h1>
+                                </span>
+                            </div> -->
+                        <div class="col-lg-12 mt-5 mb-5" id="view-task-images">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- View Modal End  -->
+
+    <!-- GLOBAL-LOADER -->
+    <!-- <div id="global-loader">
+        <img src="../assets/images/loader.svg" class="loader-img" alt="Loader">
+    </div> -->
+    <div id="preloader" class="tlp-preloader">
+        <div class="animation-preloader">
+            <div class="tlp-spinner"></div>
+            <img src="../assets/images/logo-preloader.png" alt="Preloader" style="width: 65px;">
+        </div>
+    </div>
+    <!-- /GLOBAL-LOADER -->
     <!-- Default Offcanvas-->
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
         <div class="offcanvas-header pt-5">
@@ -833,7 +1068,7 @@ color: #000;
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="text-justify ps-2 border-model-line">
-                        <h2 class="modal-title">Add <strong class="color-primary">Vendors</strong></h2>
+                        <h2 class="modal-title">Create <strong class="color-primary">New Task</strong></h2>
                         <span class="">The real power of tasks is keeping track of deadlines and having a
                             log of all work and communication related to the tasks for later reference.</span>
                     </div>
@@ -842,167 +1077,85 @@ color: #000;
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                        data-bs-parent="#accordionExample">
                         <form class="row g-3" enctype="multipart/form-data">
                             <div class="col-md-4">
-                                <label for="inputEmail1" class="form-label fw-bold">First Name *</label>
-                                <input class="form-control" type="text" placeholder="Enter First Name" pattern="[A-Za-z\s]+" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')" data-bs-container="#addModal" id="firstName" required>
-                                <span class="text-danger d-none">First name is required!</span>
+                                <label for="inputEmail4" class="form-label fw-bold">Task Name</label>
+                                <input id="task" required class="form-control" placeholder="Sink in Leaked" type="text"
+                                    placeholder="Enter Task Name">
+                                <span class="text-danger d-none">Task name is required!</span>
                             </div>
                             <div class="col-md-4">
-                                <label for="inputEmail2" class="form-label fw-bold">Last Name *</label>
-                                <input class="form-control" type="text" placeholder="Enter Last Name" pattern="[A-Za-z\s]+" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')" data-bs-container="#addModal" id="lastName" required>
-                                <span class="text-danger d-none">Last name is required!</span>
+
+                                <label class="form-label fw-bold">Assign To</label>
+                                <select id="assignee" class="form-control select2" data-placeholder="Choose Browser"
+                                    multiple placeholder="Enter Assign To">
+
+                                </select>
+                                <span class="text-danger d-none" id="vendor-span">Add vendors first!!</span>
+                                <!-- <span class="text-danger d-none">Property name required!</span> -->
                             </div>
                             <div class="col-md-4">
-                                <label for="inputEmail3" class="form-label fw-bold">Business Name *</label>
-                                <input class="form-control" type="text" placeholder="Enter Business Name" data-bs-container="#addModal" id="businessName" required>
-                                <span class="text-danger d-none">Business name is required!</span>
-                            </div>
-                            <div class="col-12">
-                                <label for="inputEmail3" class="form-label fw-bold">Street Address</label>
-                                <input class="form-control" type="text" placeholder="Enter Street Address" data-bs-container="#addModal" id="streetAddress" required>
-                                <span class="text-danger d-none">Street address is required!</span>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="inputEmail3" class="form-label fw-bold">City</label>
-                                <input class="form-control" type="text" placeholder="Enter City" pattern="[A-Za-z\s]+" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')" data-bs-container="#addModal" id="city" required>
-                                <span class="text-danger d-none">City is required!</span>
-                            </div>
-                            <!-- <div class="col-md-4">
-                                <label for="inputState" class="form-label fw-bold">Status</label>
-                                <select class="form-select form"
-                                    id="status" required>
+                                <label for="inputState" class="form-label fw-bold">Related To</label>
+                                <select required id="property" class="form-select form" placeholder="Enter Related To">
                                     <option selected>Choose...</option>
-                                    <option value="Not started">Not started</option>
-                                    <option value="In progress">In progress</option>
-                                    <option value="Completed">Completed</option>
+                                </select>
+                                <span class="text-danger d-none">This field is required!</span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputEmail4" class="form-label fw-bold">Due Date</label>
+                                <input id="dueDate" class="form-control" placeholder="MM/DD/YYYY" type="date"
+                                    placeholder="Enter Due Date">
+                                <span class="text-danger d-none">Due Date is required!</span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputState" class="form-label fw-bold">Status</label>
+                                <select id="status" required class="form-select form" placeholder="Select Status">
+                                    <option selected>Choose...</option>
+                                    <option value="not started">Not Started</option>
+                                    <option value="in progress">In progress</option>
+                                    <option value="completed">Completed</option>
+
                                 </select>
                                 <span class="text-danger d-none">Status is required!</span>
-                            </div> -->
-                            <div class="col-md-6">
-                                <label for="inputEmail3" class="form-label fw-bold">Zip Code</label>
-                                <input class="form-control form" type="text" id="zip" name="zip" pattern="[0-9]{5}" placeholder="A valid 5-digit zip code" maxlength="5" minlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '')"placeholder="Enter Zip" required>
-                                <span class="text-danger d-none">Zip code is required!</span>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="inputEmail3" class="form-label fw-bold">Work Phone Number</label>
-                                <input class="form-control" type="tel" data-bs-placement="top" placeholder="Enter Phone Number" pattern="[0-9]+" oninput="this.value = this.value.replace(/[^0-9]/g, '');" id="workPhone">
-                                <span class="text-danger d-none">Work Phone number is required!</span>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="inputEmail3" class="form-label fw-bold">Mobile Number</label>
-                                <input class="form-control" type="phone" placeholder="Enter Mobile Number" id="phone" required>
-                                <span id="valid-msg" class="d-none text-success">✓ Valid</span>
-                                <span id="error-msg" class="hide text-danger"></span>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="inputEmail3" class="form-label fw-bold">Email</label>
-                                <input class="form-control" type="email" pattern="[A-Za-z0-9_\.@]+" oninput="this.value = this.value.replace(/[^A-Za-z0-9_\.@]/g, '').replace(/(@+)/g, '@')" placeholder="Enter Email" id="email" required>
-                                <span class="text-danger d-none">Email is required!</span>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="inputState" class="form-label fw-bold">Category</label>
-                                <select class="form-select form" id="category" required>
-                                    <option selected>Choose...</option>
-                                </select>
-                                <span class="text-danger d-none">Category is required!</span>
-                            </div>
-
-                        </form>
-                    </div>
-
-                </div>
-                <div class="modal-footer d-flex justify-content-end">
-                    <div class=""><button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close'>Close</button>
-                        <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
-                        <a href="javascript:void(0)" class="btn text-light btn-pill button disabled" style='background-color:#1467B0;' id='next'>Next</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="myModal_edit" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div class="text-justify ps-2 border-model-line">
-                        <h2 class="modal-title">Update <strong class="color-primary">Vendor</strong></h2>
-                        <span class="">The real power of tasks is keeping track of deadlines and having a
-                            log of all work and communication related to the vendors for later reference.</span>
-                    </div>
-                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="top-close">
-                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                        <form class="row g-3" enctype="multipart/form-data">
-                            <div class="col-md-4">
-                                <label for="inputEmail1" class="form-label fw-bold">First Name *</label>
-                                <input class="form-control" type="text" placeholder="Enter First Name" pattern="[A-Za-z\s]+" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')" data-bs-container="#addModal" id="firstName_update" required>
-                                <span class="text-danger d-none">First name is required!</span>
                             </div>
                             <div class="col-md-4">
-                                <label for="inputEmail2" class="form-label fw-bold">Last Name *</label>
-                                <input class="form-control" type="text" placeholder="Enter Last Name" pattern="[A-Za-z\s]+" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')" data-bs-container="#addModal" id="lastName_update" required>
-                                <span class="text-danger d-none">Last name is required!</span>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="inputEmail3" class="form-label fw-bold">Business Name *</label>
-                                <input class="form-control" type="text" placeholder="Enter Business Name" data-bs-container="#addModal" id="businessName_update" required>
-                                <span class="text-danger d-none">Business name is required!</span>
-                            </div>
-                            <div class="col-12">
-                                <label for="inputEmail3" class="form-label fw-bold">Street Address</label>
-                                <input class="form-control" type="text" placeholder="Enter Street Address" data-bs-container="#addModal" id="streetAddress_update" required>
-                                <span class="text-danger d-none">Street address is required!</span>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="inputEmail3" class="form-label fw-bold">City</label>
-                                <input class="form-control" type="text" placeholder="Enter City" pattern="[A-Za-z\s]+" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')" data-bs-container="#addModal" id="city_update" required>
-                                <span class="text-danger d-none">City is required!</span>
-                            </div>
-                            <!-- <div class="col-md-4">
-                                <label for="inputState" class="form-label fw-bold">Status</label>
-                                <select class="form-select form"
-                                    id="status" required>
+                                <label for="inputState" class="form-label fw-bold">Priority</label>
+                                <select id="priority" required class="form-select form" placeholder="Select Priority">
                                     <option selected>Choose...</option>
-                                    <option value="Not started">Not started</option>
-                                    <option value="In progress">In progress</option>
-                                    <option value="Completed">Completed</option>
+                                    <option name="high">High</option>
+                                    <option name="moderate">Moderate</option>
+                                    <option name="low">Low</option>
                                 </select>
-                                <span class="text-danger d-none">Status is required!</span>
-                            </div> -->
-                            <div class="col-md-6">
-                                <label for="inputEmail3" class="form-label fw-bold">Zip Code</label>
-                                <input class="form-control form" type="text" id="zip_update" name="zip" pattern="[0-9]{5}" placeholder="A valid 5-digit zip code" maxlength="5" minlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '')"placeholder="Enter Zip" required>
-                                <span class="text-danger d-none">Zip code is required!</span>
+                                <span class="text-danger d-none">Priority is required!</span>
                             </div>
-                            <div class="col-md-6">
-                                <label for="inputEmail3" class="form-label fw-bold">Work Phone Number</label>
-                                <input class="form-control" type="tel" data-bs-placement="top" placeholder="Enter Phone Number" pattern="[0-9]+" oninput="this.value = this.value.replace(/[^0-9]/g, '');" id="workPhone_update">
-                                <span class="text-danger d-none">Work Phone number is required!</span>
+                            <div class="col-md-12">
+                                <label class="form-label fw-bold">Notes</label>
+                                <textarea id="notes" class="form-control mb-4"
+                                    placeholder="Sorry about that We will look into it." rows="4"></textarea>
+                                <!-- <span class="text-danger d-none">Photos are required!</span> -->
                             </div>
-                            <div class="col-md-6">
-                                <label for="inputEmail3" class="form-label fw-bold">Mobile Number</label>
-                                <input class="form-control" type="phone" placeholder="Enter Mobile Number" id="phone_update" required>
-                                <span id="valid-msg" class="d-none text-success">✓ Valid</span>
-                                <span id="error-msg" class="hide text-danger"></span>
+                            <div class="col-md-12">
+                                <label class="form-label fw-bold">Media/ Files (Optional)</label>
+                                <div class="custom-file" style="border: 1px dashed #00000087;">
+                                    <input id="fileInput" type="file" name="media" class="custom-file-input form"
+                                        accept=".jpg, .jpeg, .png, .pdf, image/jpeg, image/png, application/pdf"
+                                        aria-label="hello" multiple>
+                                    <span className="d-none"></span>
+                                    <label class="custom-file-label" for="fileInput">
+                                        <i class="fi fi-rs-cloud-upload"></i>
+                                        <div class="custom-file-text">
+                                            <span>Upload Photo here</span>
+                                            <span>JPEG, PNG & PDF file size no more than 10MB</span>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="selected-files">
+                                    <div class="file-grid"></div>
+                                </div>
+                                <span class="text-danger d-none">Photos are required!</span>
                             </div>
-                            <div class="col-md-6">
-                                <label for="inputEmail3" class="form-label fw-bold">Email</label>
-                                <input class="form-control" type="email" pattern="[A-Za-z0-9_\.@]+" oninput="this.value = this.value.replace(/[^A-Za-z0-9_\.@]/g, '').replace(/(@+)/g, '@')" placeholder="Enter Email" id="email_update" required>
-                                <span class="text-danger d-none">Email is required!</span>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="inputState" class="form-label fw-bold">Category</label>
-                                <select class="form-select form" id="category_update" required>
-                                    <option selected>Choose...</option>
-                                </select>
-                                <span class="text-danger d-none">Category is required!</span>
-                            </div>
-
                         </form>
                     </div>
 
@@ -1012,50 +1165,24 @@ color: #000;
                         Draft</button> -->
                     <div class="d-flex">
 
-                        <!-- <label class="custom-control custom-checkbox me-2">
-                            <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1"
+                        <label class="custom-control custom-checkbox me-2">
+                            <input type="checkbox" class="custom-control-input" name="example-checkbox1" value=""
                                 checked="">
                             <span class="custom-control-label">Notify Tenant</span>
                         </label>
                         <label class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1"
+                            <input type="checkbox" class="custom-control-input" name="example-checkbox1" value=""
                                 checked="">
                             <span class="custom-control-label">Notify Assignee(s)</span>
-                        </label> -->
+                        </label>
                     </div>
-                    <div class=""><button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close'>Close</button>
+                    <div class=""><button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal"
+                            id='close'>Close</button>
                         <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
-                        <a href="javascript:void(0)" class="btn text-light btn-pill button disabled" style='background-color:#1467B0;' id='save'>Save</a>
+                        <a href="javascript:void(0)" class="btn text-light btn-pill button disabled"
+                            style='background-color:#1467B0;' id='next'>Next</a>
                     </div>
 
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="infoModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-dialog-centered text-center" role="document">
-            <div class="modal-content modal-content-demo">
-                <div class="modal-body p-0">
-                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
-                        <!-- <div class="card-header border-0 pt-3">
-                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
-                            </button>
-                        </div> -->
-                        <div class="card-body text-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24"><path fill="#fad383" d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z"></path><circle cx="12" cy="16" r="1" fill="#f7b731"></circle><path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"></path></svg>
-                            <h4 class="h4 mb-0 mt-3 fw-bold">Info</h4>
-                            <p class="card-text text-dark">Vendor Already Exist</p>
-                        </div>
-                        <!-- <div class="card-footer text-center border-0 pt-0">
-                            <div class="row">
-                                <div class="text-center">
-                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
-                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
-                                </div>
-                            </div>
-                        </div> -->
-                    </div>
                 </div>
             </div>
         </div>
@@ -1129,7 +1256,166 @@ color: #000;
             </div>
         </div>
     </div>
-    <div class="modal fade" id="succesModal" tabindex="-1" role="dialog">
+    <!-- <div class="modal fade" id="succesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body succes-modal">
+                    <div class="text-justify ps-2 border-model-line">
+                        <h2 class="modal-title d-flex align-items-center ps-1">
+                            <strong class="color-primary">Success!&nbsp;</strong>
+                            <i class="fi fi-rs-check-circle text-success"></i>
+                        </h2>
+                        <a href="javascript:void(0)" class="btn btn-outline-default btn-pill ms-1 my-2" style='background-color:#1467B0;color: white;'> <i class="fi fi-rs-pencil"></i> EDIT PROPERTY UNITS</a>
+                        <a class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal">
+                            <i class="fi fi-rs-plus-small" style="vertical-align: middle;"></i>Add Tenants
+                        </a>
+                        <p class="ms-2 mb-0 text-start">Your Property has been successfully added.</p>
+                        <p class="ms-2 text-start">Please add tenant to this property.</p>
+                    </div>
+
+                </div>
+                <div class="modal-footer" style="border-top: 0">
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <div class="modal fade" id="myModal_edit" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="text-justify ps-2 border-model-line">
+                        <h2 class="modal-title">Post an <strong class="color-primary">Update</strong></h2>
+                        <span class="">The real power of tasks is keeping track of deadlines and having a
+                            log of all work and communication related to the tasks for later reference.</span>
+                    </div>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="top-close">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="collapseOne_update" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                        data-bs-parent="#accordionExample">
+                        <form class="row g-3" enctype="multipart/form-data">
+                            <div class="col-md-12">
+                                <label class="form-label fw-bold">Message</label>
+
+                                <textarea class="form-control mb-4" placeholder="Sorry about that We will look into it."
+                                    rows="4" placeholder="Enter Message" id="message"></textarea>
+                                <span class="text-danger d-none">Message are required!</span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputEmail4" class="form-label fw-bold">Task Name</label>
+                                <input class="form-control" placeholder="Task name" type="text"
+                                    placeholder="Enter Task Name" required id="taskName_update">
+                                <span class="text-danger d-none">Task name is required!</span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputState" class="form-label fw-bold">Related To</label>
+                                <select required id="property_update" required class="form-select form"
+                                    placeholder="Enter Related To">
+                                    <option selected>Choose...</option>
+                                </select>
+                                <span class="text-danger d-none">Property name required!</span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputEmail4" class="form-label fw-bold">Due Date</label>
+                                <input class="form-control" required placeholder="MM/DD/YYYY" type="date"
+                                    placeholder="Enter Due Date" id="dueDate_update">
+                                <span class="text-danger d-none">Due date is required!</span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputState" class="form-label fw-bold">Priority</label>
+                                <select class="form-select form" required placeholder="Select Priority"
+                                    id="priority_update">
+                                    <option selected>Choose...</option>
+                                    <option name="high">High</option>
+                                    <option name="moderate">Moderate</option>
+                                    <option name="low">Low</option>
+
+
+                                </select>
+                                <span class="text-danger d-none">Priority name required!</span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputState" class="form-label fw-bold">Status</label>
+                                <select class="form-select form" required="top" placeholder="Select Status"
+                                    id="status_update">
+                                    <option selected>Choose...</option>
+                                    <option value="not started">Not Started</option>
+                                    <option value="in progress">In progress</option>
+                                    <option value="completed">Completed</option>
+
+                                </select>
+                                <span class="text-danger d-none">Status is required!</span>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="form-label fw-bold">Assignee(s)</label>
+                                    <select class="form-control select2" required data-placeholder="Choose Assignee"
+                                        multiple placeholder="Select Assignee(s)" id="assignee_update">
+
+                                    </select>
+                                </div>
+                                <span class="text-danger d-none">Assignee is required!</span>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label fw-bold">Media/ Files (Optional)</label>
+                                <div class="custom-file" style="border: 1px dashed #00000087;">
+                                    <input id="fileInput_update" type="file" name="media" class="custom-file-input form"
+                                        accept=".jpg, .jpeg, .png, .pdf, image/jpeg, image/png, application/pdf"
+                                        aria-label="hello" multiple>
+                                    <span className="d-none"></span>
+                                    <label class="custom-file-label" for="fileInput_update">
+                                        <i class="fi fi-rs-cloud-upload"></i>
+                                        <div class="custom-file-text">
+                                            <span>Upload Photo here</span>
+                                            <span>JPEG, PNG & PDF file size no more than 10MB</span>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="selected-files">
+                                    <div class="file-grid"></div>
+                                </div>
+                                <span class="text-danger d-none">Photos are required!</span>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+                <div class="modal-footer d-flex justify-content-between">
+                    <!-- <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
+                        Draft</button> -->
+                    <div class="d-flex">
+
+                        <label class="custom-control custom-checkbox me-2">
+                            <input type="checkbox" class="custom-control-input" name="example-checkbox1_update"
+                                value="option1" checked="">
+                            <span class="custom-control-label">Notify Tenant</span>
+                        </label>
+                        <label class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" name="example-checkbox1_update"
+                                value="option1" checked="">
+                            <span class="custom-control-label">Notify Assignee(s)</span>
+                        </label>
+                    </div>
+                    <div class=""><button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal"
+                            id='close'>Close</button>
+                        <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
+                        <a href="javascript:void(0)" class="btn text-light btn-pill button"
+                            style='background-color:#1467B0;' id='save'>Save</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="infoModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered text-center" role="document">
             <div class="modal-content modal-content-demo">
                 <div class="modal-body p-0">
@@ -1140,15 +1426,15 @@ color: #000;
                             </button>
                         </div> -->
                         <div class="card-body text-center">
-                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24">
-                      <path fill="#13bfa6"
-                        d="M10.3125,16.09375a.99676.99676,0,0,1-.707-.293L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328l-6.1875,6.1875A.99676.99676,0,0,1,10.3125,16.09375Z"
-                        opacity=".99" />
-                      <path fill="#71d8c9"
-                        d="M12,2A10,10,0,1,0,22,12,10.01146,10.01146,0,0,0,12,2Zm5.207,7.61328-6.1875,6.1875a.99963.99963,0,0,1-1.41406,0L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328Z" />
-                    </svg></span>
-                            <h4 class="h4 mb-0 mt-3 fw-bold">Success</h4>
-                            <p class="card-text text-dark">Your vendor has been successfully added.</p>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24">
+                                <path fill="#fad383"
+                                    d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z">
+                                </path>
+                                <circle cx="12" cy="16" r="1" fill="#f7b731"></circle>
+                                <path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"></path>
+                            </svg>
+                            <h4 class="h4 mb-0 mt-3 fw-bold">Info</h4>
+                            <p class="card-text text-dark">Task Already Exist</p>
                         </div>
                         <!-- <div class="card-footer text-center border-0 pt-0">
                             <div class="row">
@@ -1163,70 +1449,33 @@ color: #000;
             </div>
         </div>
     </div>
-    <div class="modal fade" id="succesModal_edit" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-dialog-centered text-center" role="document">
-            <div class="modal-content modal-content-demo">
-                <div class="modal-body p-0">
-                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
-                        <!-- <div class="card-header border-0 pt-3">
-                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
-                            </button>
-                        </div> -->
-                        <div class="card-body text-center">
-                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24">
-                      <path fill="#13bfa6"
-                        d="M10.3125,16.09375a.99676.99676,0,0,1-.707-.293L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328l-6.1875,6.1875A.99676.99676,0,0,1,10.3125,16.09375Z"
-                        opacity=".99" />
-                      <path fill="#71d8c9"
-                        d="M12,2A10,10,0,1,0,22,12,10.01146,10.01146,0,0,0,12,2Zm5.207,7.61328-6.1875,6.1875a.99963.99963,0,0,1-1.41406,0L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328Z" />
-                    </svg></span>
-                            <h4 class="h4 mb-0 mt-3 fw-bold">Success</h4>
-                            <p class="card-text text-dark" id="delete-text">Your vendor has been successfully deleted.</p>
-                        </div>
-                        <!-- <div class="card-footer text-center border-0 pt-0">
-                            <div class="row">
-                                <div class="text-center">
-                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
-                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
-                                </div>
-                            </div>
-                        </div> -->
+    <div class="modal fade" id="succesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content success-modal-content">
+                <div class="modal-header">
+
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="succes-close">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body succes-modal" style="padding-top: 70px;padding-bottom: 70px;">
+                    <div class="text-justify ps-2 border-model-line">
+                        <h2 class="modal-title d-flex align-items-center ps-1">
+                            <strong class="color-primary">Success!&nbsp;</strong>
+                            <i class="fi fi-rs-check-circle text-success"></i>
+                        </h2>
+                        <p class="ms-2 mb-0 text-start">Your task has been successfully added.</p>
+                        <!-- <p class="ms-2 text-start">Please add tenant to this property.</p> -->
+                        <a data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal"
+                            class="btn btn-outline-default btn-pill ms-1 my-2"
+                            style='background-color:#1467B0;color: white;'> <i class="fi fi-rs-pencil"></i> ADD NEW
+                            TASK</a>
+                        <a class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal">
+                            Close
+                        </a>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="succesModal_delete" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-dialog-centered text-center" role="document">
-            <div class="modal-content modal-content-demo">
-                <div class="modal-body p-0">
-                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
-                        <!-- <div class="card-header border-0 pt-3">
-                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
-                            </button>
-                        </div> -->
-                        <div class="card-body text-center">
-                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24">
-                      <path fill="#13bfa6"
-                        d="M10.3125,16.09375a.99676.99676,0,0,1-.707-.293L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328l-6.1875,6.1875A.99676.99676,0,0,1,10.3125,16.09375Z"
-                        opacity=".99" />
-                      <path fill="#71d8c9"
-                        d="M12,2A10,10,0,1,0,22,12,10.01146,10.01146,0,0,0,12,2Zm5.207,7.61328-6.1875,6.1875a.99963.99963,0,0,1-1.41406,0L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328Z" />
-                    </svg></span>
-                            <h4 class="h4 mb-0 mt-3 fw-bold">Success</h4>
-                            <p class="card-text text-dark" id="delete-text">Your vendor has been successfully edited.</p>
-                        </div>
-                        <!-- <div class="card-footer text-center border-0 pt-0">
-                            <div class="row">
-                                <div class="text-center">
-                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
-                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
-                                </div>
-                            </div>
-                        </div> -->
-                    </div>
+                <div class="modal-footer" style="border-top: 0">
                 </div>
             </div>
         </div>
@@ -1250,13 +1499,14 @@ color: #000;
                                     <path fill="#e62a45" d="M12,14a1,1,0,0,1-1-1V9a1,1,0,0,1,2,0v4A1,1,0,0,1,12,14Z" />
                                 </svg></span>
                             <h4 class="h4 mb-0 mt-3 fw-bold fs-4">Warning</h4>
-                            <p class="card-text">This will delete the Vendor. Are you sure?</p>
+                            <p class="card-text">This will delete your task. Are you sure?</p>
 
                         </div>
                         <div class="card-footer text-center border-0 pt-0">
                             <div class="row">
                                 <div class="text-center">
-                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal"
+                                        aria-label="Close">Cancel</a>
                                     <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
                                 </div>
                             </div>
@@ -1274,11 +1524,13 @@ color: #000;
             <div class="app-header header sticky" id="navbar-placeholder">
                 <div class="container-fluid main-container">
                     <div class="d-flex">
-                        <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-bs-toggle="sidebar" href="javascript:void(0)"></a>
+                        <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-bs-toggle="sidebar"
+                            href="javascript:void(0)"></a>
                         <!-- sidebar-toggle-->
                         <a class="logo-horizontal " href="index.html">
                             <img src="../assets/images/logo_white.png" class="header-brand-img desktop-logo" alt="logo">
-                            <img src="../assets/images/Artboard GÇô 1.svg" class="header-brand-img light-logo1" alt="logo">
+                            <img src="../assets/images/Artboard GÇô 1.svg" class="header-brand-img light-logo1"
+                                alt="logo">
                         </a>
                         <!-- LOGO -->
                         <!-- <div class="main-header-center ms-3 d-none d-lg-block">
@@ -1287,7 +1539,10 @@ color: #000;
                         </div> -->
                         <div class="d-flex order-lg-2 ms-auto header-right-icons">
                             <!-- SEARCH -->
-                            <button class="navbar-toggler navresponsive-toggler d-lg-none ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
+                            <button class="navbar-toggler navresponsive-toggler d-lg-none ms-auto" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent-4"
+                                aria-controls="navbarSupportedContent-4" aria-expanded="false"
+                                aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon fe fe-more-vertical"></span>
                             </button>
                             <div class="navbar navbar-collapse responsive-navbar p-0">
@@ -1317,8 +1572,8 @@ color: #000;
                                         </div>
                                         <div class="d-flex country mt-2">
                                             <a class="nav-link icon text-dark customIntercomButton">
-                                        <i class="fi fi-rs-interrogation"></i>
-                                       
+                                                <i class="fi fi-rs-interrogation"></i>
+
                                             </a>
                                         </div>
 
@@ -1330,8 +1585,8 @@ color: #000;
 
 
                                         <!-- 1 comments start  -->
-                                        <!-- <div class="d-flex country mt-2">
-                                            <a class="nav-link icon text-dark" href="./chats.html">
+                                        <!-- <div class="d-flex country mt-2"> -->
+                                            <!-- <a class="nav-link icon text-dark" href="./chats.html">
                                                 <i class="fi fi-rs-comment"></i>
                                             </a> -->
                                             <!-- <img src="../assets\header-img\comment-light.webp"
@@ -1350,9 +1605,9 @@ color: #000;
                                         <!-- 3 comments start  -->
                                         <div class="dropdown  d-flex notifications">
                                             <a class="nav-link icon" data-bs-toggle="sidebar-right"
-                                            data-target=".sidebar-right"><i class="fe fe-bell"></i> 
-                                            <span class="badge bg-secondary header-badge bg-primary" id="count_unread"></span>
-                                        </a>
+                                                data-target=".sidebar-right"><i class="fe fe-bell"></i> 
+                                                <span class="badge bg-secondary header-badge bg-primary" id="count_unread"></span>
+                                            </a>
                                             <!-- <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                                 <div class="drop-heading border-bottom">
                                                     <div class="d-flex">
@@ -1407,17 +1662,22 @@ color: #000;
                                             </div> -->
                                         </div>
                                         <div class="d-flex country">
-                                            <img id="user-img" src="../assets\header-img\spade.svg"  class="avatarr profile-user brroundd nav-link cover-image dark-layout">
+                                            <img id="user-img" src="../assets\header-img\spade.svg"
+                                                class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
                                         <div class="d-flex country">
-                                            <img id="user-img-dark" src="../assets\header-img\circlels.png"  class="avatarr profile-user nav-link brroundd cover-image light-layout">
-
+                                            <img id="user-img-dark" src="../assets\header-img\circlels.png"
+                                                class="avatarr profile-user nav-link brroundd cover-image light-layout">
                                         </div>
                                         <div class="dropdown d-flex profile-1 country">
-                                            <a href="javascript:void(0)" data-bs-toggle="dropdown" class="nav-link leading-none d-flex">
+                                            <a href="javascript:void(0)" data-bs-toggle="dropdown"
+                                                class="nav-link leading-none d-flex">
                                                 <!-- <img src="../assets/images/users/21.jpg" 
                                                     class="avatar  profile-user brround cover-image"> -->
-                                                <span class="dynamic-text-head text-dark" id="header-user" style="padding: 10px 10px;"></span> <i class="fe fe-chevron-down dark-mode text-dark" style="font-size: 20px; font-weight: 800;"></i>
+                                                <span class="dynamic-text-head text-dark" style="padding: 10px 10px;"
+                                                    id="header-user"></span> <i
+                                                    class="fe fe-chevron-down dark-mode text-dark"
+                                                    style="font-size: 20px; font-weight: 800;"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                                 <!-- <div class="drop-heading">
@@ -1461,14 +1721,18 @@ color: #000;
                     <div class="side-header">
                         <a class="header-brand1" href="index.html">
                             <img src="../assets/images/logo_white.png" class="header-brand-img desktop-logo" alt="logo">
-                            <img src="../assets/images/logo_loginmodule.png" class="header-brand-img toggle-logo" alt="logo">
-                            <img src="../assets/images/logo_loginmodule.png" class="header-brand-img light-logo" alt="logo">
-                            <img src="../assets/images/Artboard GÇô 1.svg" class="header-brand-img light-logo1" alt="logo">
+                            <img src="../assets/images/logo_loginmodule.png" class="header-brand-img toggle-logo"
+                                alt="logo">
+                            <img src="../assets/images/logo_loginmodule.png" class="header-brand-img light-logo"
+                                alt="logo">
+                            <img src="../assets/images/Artboard GÇô 1.svg" class="header-brand-img light-logo1"
+                                alt="logo">
                         </a>
                         <!-- LOGO -->
                     </div>
                     <div class="main-sidemenu">
-                        <div class="slide-left disabled" id="slide-left"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24">
+                        <div class="slide-left disabled" id="slide-left"><svg xmlns="http://www.w3.org/2000/svg"
+                                fill="#7b8191" width="24" height="24" viewBox="0 0 24 24">
                                 <path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" />
                             </svg></div>
                         <ul class="side-menu">
@@ -1476,7 +1740,9 @@ color: #000;
                                 <!-- <h3>Main</h3> -->
                             </li>
                             <li class="slide">
-                                <a class="side-menu__item has-link create-new-link" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample" style="border: 3px solid #1467B0 !important;"><i
+                                <a class="side-menu__item has-link create-new-link" data-bs-toggle="offcanvas"
+                                    href="#offcanvasExample" role="button" aria-controls="offcanvasExample"
+                                    style="border: 3px solid #1467B0 !important;"><i
                                         class="side-menu__icon fi fi-rs-square-plus"></i><span
                                         class="side-menu__label ">Create New</span>
                                 </a>
@@ -1488,23 +1754,23 @@ color: #000;
                                     Profile</span>
                             </a>
                         </li> -->
-                        <a href="settings.html" class="text-dark">
-                            <li class="slide">
-                                <div class="M-0 mt-3 mb-4" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
-                                    <div class="card-header pb-0 border-bottom-0">
-                                        <i class="side-menu__icon fi fi-rs-rocket-lunch mb-0"></i>
-                                        <h3 class="card-title side-menu__label">&nbsp; Complete your Profile
-                                        </h3>
+                            <a href="settings.html" class="text-dark">
+                                <li class="slide">
+                                    <div class="M-0 mt-3 mb-4" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
+                                        <div class="card-header pb-0 border-bottom-0">
+                                            <i class="side-menu__icon fi fi-rs-rocket-lunch mb-0"></i>
+                                            <h3 class="card-title side-menu__label">&nbsp; Complete your Profile
+                                            </h3>
 
-                                    </div>
-                                    <div class="card-body pt-0">
-                                        <div class="side-menu__label progress progress-md mt-5">
-                                            <!-- <div class="progress-bar bg-info" style="width: 40%;">40%</div> -->
+                                        </div>
+                                        <div class="card-body pt-0">
+                                            <div class="side-menu__label progress progress-md mt-5">
+                                                <!-- <div class="progress-bar bg-info" style="width: 40%;">40%</div> -->
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </li>
-                        </a>
+                                </li>
+                            </a>
                             <li class="slide">
                                 <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html"><i
                                         class="side-menu__icon fi fi-rs-dashboard"></i><span
@@ -1557,8 +1823,8 @@ color: #000;
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="prospects.html"><i
-                                    class="side-menu__icon fi fi-rs-chart-simple"></i><span
-                                    class="side-menu__label">Prospects</span>
+                                        class="side-menu__icon fi fi-rs-chart-simple"></i><span
+                                        class="side-menu__label">Prospects</span>
                                     <!-- <i class="angle fe fe-chevron-right"></i> -->
 
                                 </a>
@@ -1591,20 +1857,21 @@ color: #000;
                                 <a class="side-menu__item" data-bs-toggle="slide" href="chats.html">
                                     <i class="side-menu__icon fi fi-rs-comment"></i>
                                     <span class="side-menu__label">Chat</span>
-<span class="badge bg-primary side-badge">6</span>
 
                                     <!-- <i class="angle fe fe-chevron-right"></i> -->
                                 </a>
                             </li>
-                                <li>
-                                    <a class="side-menu__item has-link" href="settings.html" target="_self"><i
-                                    class="side-menu__icon fi fi-rs-settings"></i><span class="side-menu__label">Settings</span>
-                                <!-- <span
+                            <li>
+                                <a class="side-menu__item has-link" href="settings.html" target="_self"><i
+                                        class="side-menu__icon fi fi-rs-settings"></i><span
+                                        class="side-menu__label">Settings</span>
+                                    <!-- <span
                                                class="badge bg-green br-5 side-badge blink-text pb-1">New</span> -->
                                 </a>
-                                </li>
+                            </li>
                         </ul>
-                        <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24">
+                        <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191"
+                                width="24" height="24" viewBox="0 0 24 24">
                                 <path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z" />
                             </svg></div>
                     </div>
@@ -1632,14 +1899,17 @@ color: #000;
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-lg-9">
-                                        <h3 class="page-titlee text-white" style="font-weight: 100; margin-bottom: 0px;">Welcome to Spade Portal</h3>
+                                        <h3 class="page-titlee text-white"
+                                            style="font-weight: 100; margin-bottom: 0px;">Welcome to Spade Portal</h3>
                                         <h1 class="page-titlee text-white" style="font-weight: 700;" id="user-name">
                                         </h1>
-                                        <a data-bs-toggle="modal" href="#modaldemo00" id="email_verification" class="btn btn-primary btn-pill btn-xl email-verification-btn"><i
+                                        <a data-bs-toggle="modal" href="#modaldemo00" id="email_verification"
+                                            class="btn btn-primary btn-pill btn-xl email-verification-btn"><i
                                                 class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
                                             verification &nbsp; <i
                                                 class="angle fe fe-arrow-right create-btn-plus"></i></a>
-                                                <p class="text-white m-0 mt-3" id="account-text"></p>
+                                        <p class="text-white m-0 mt-3" id="account-text">
+                                            </p>
                                     </div>
                                     <div class="col-lg-3">
                                         <img src="../assets/header-img/Group1.png" alt="">
@@ -1650,16 +1920,14 @@ color: #000;
                         </div>
                         <div>
                             <p class="d-inline-flex gap-1">
-                                <span>Task Vendor | </span>
-                                  <span><a href="#" onclick="Intercom('showArticle', 8210506)"> How to add vendor? </a></span>
-                                  <span><a href="#" onclick="Intercom('showArticle', 8210444)"> How to update vendor? </a></span>
-                                  <span><a href="#" onclick="Intercom('showArticle', 8210444)"> How to add vendor category? </a></span>
+                                <span>Task | </span>
+                                <span><a href="#" onclick="Intercom('showArticle', 8210506)"> How to add Tasks? </a></span>
 
-                            </p>
+                              </p>
+                              
+                               
                         </div>
-                        
                         <!-- PAGE-HEADER END -->
-                        
                         <div class="over_view" id="Overview">
                             <!-- ROW-2 OPEN -->
                             <div class="row">
@@ -1667,96 +1935,138 @@ color: #000;
                                     <div class="card inner-cards">
                                         <div class="card-header justify-content-between">
                                             <div class="d-flex">
-                                                <!-- <div class="btn-group">
-                                                    <button type="button" class="btn btn-outline-default text-dark py-1" id="filter_btn" data-bs-toggle="dropdown"><i
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-outline-default text-dark py-1"
+                                                        id="filter_btn" data-bs-toggle="dropdown"><i
                                                             class="typcn typcn-filter fs-16"></i><strong
                                                             id="Filter-btn">Filter</strong></button>
                                                     <ul class="dropdown-menu" role="menu">
-                                                        <li><a href="javascript:void(0)"><strong class="text-dark">Filter by:</strong></a>
+                                                        <li><a href="javascript:void(0)"><strong
+                                                                    class="text-dark">Filter by:</strong></a>
                                                         </li>
-                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)" for="exampleRadio">Default</a>
+                                                        <li class="d-flex justify-content-between"><a class="text-dark"
+                                                                href="javascript:void(0)" for="exampleRadio">Default</a>
                                                             <div class="form-check m-0">
-                                                                <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
+                                                                <input class="form-check-input mt-2" type="radio"
+                                                                    name="exampleRadios" id="exampleRadios1"
+                                                                    value="option1">
                                                             </div>
                                                         </li>
-                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)" for="exampleRadio">Task
+                                                        <li class="d-flex justify-content-between"><a class="text-dark"
+                                                                href="javascript:void(0)" for="exampleRadio">Task
                                                                 Name</a>
                                                             <div class="form-check m-0">
-                                                                <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
+                                                                <input class="form-check-input mt-2" type="radio"
+                                                                    name="exampleRadios" id="exampleRadios1"
+                                                                    value="option1">
                                                             </div>
                                                         </li>
-                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">Assigned To</a>
+                                                        <li class="d-flex justify-content-between"><a class="text-dark"
+                                                                href="javascript:void(0)">Assigned To</a>
                                                             <div class="form-check m-0">
-                                                                <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                                                <input class="form-check-input mt-2" type="radio"
+                                                                    name="exampleRadios" id="exampleRadios1"
+                                                                    value="option1" checked>
                                                             </div>
                                                         </li>
-                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">Date</a>
+                                                        <li class="d-flex justify-content-between"><a class="text-dark"
+                                                                href="javascript:void(0)">Date</a>
                                                             <div class="form-check m-0">
-                                                                <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                                                <input class="form-check-input mt-2" type="radio"
+                                                                    name="exampleRadios" id="exampleRadios1"
+                                                                    value="option1" checked>
                                                             </div>
                                                         </li>
-                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">Ascending</a>
+                                                        <li class="d-flex justify-content-between"><a class="text-dark"
+                                                                href="javascript:void(0)">Ascending</a>
                                                             <div class="form-check m-0">
-                                                                <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                                                <input class="form-check-input mt-2" type="radio"
+                                                                    name="exampleRadios" id="exampleRadios1"
+                                                                    value="option1" checked>
                                                             </div>
                                                         </li>
-                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">Descending</a>
+                                                        <li class="d-flex justify-content-between"><a class="text-dark"
+                                                                href="javascript:void(0)">Descending</a>
                                                             <div class="form-check m-0">
-                                                                <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                                                <input class="form-check-input mt-2" type="radio"
+                                                                    name="exampleRadios" id="exampleRadios1"
+                                                                    value="option1" checked>
                                                             </div>
                                                         </li>
                                                     </ul>
-                                                </div> -->
+                                                </div>
                                                 <div class="mx-2">
                                                     <div class="form-group m-0">
-                                                        <input class="form-control" placeholder="Search Users by Name, Email or Date" type="text" id="search_input">
+                                                        <input class="form-control"
+                                                            placeholder="Search Users by Name, Email or Date"
+                                                            type="text" id="search_input">
+
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="d-flex">
+                                            <!-- <div class="d-flex">
                                                 <div class="btn-group">
-                                                    <button type="button" class="btn font-weight-bold text-dark" id="customize_btn" data-bs-toggle="dropdown" style="border: none;"><strong>CUSTOMIZED</strong><i
-                                                        class="fe fe-chevron-down ms-2"></i></button>
+                                                    <button type="button" class="btn font-weight-bold text-dark"
+                                                        id="customize_btn" data-bs-toggle="dropdown"
+                                                        style="border: none;"><strong>CUSTOMIZED</strong><i
+                                                            class="fe fe-chevron-down ms-2"></i></button>
                                                     <ul class="dropdown-menu" role="menu">
-                                                        <li><a href="javascript:void(0)"><strong class="text-dark">Coulmns to
+                                                        <li><a href="javascript:void(0)"><strong
+                                                                    class="text-dark">Coulmns to
                                                                     Show</strong></a>
                                                         </li>
-                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">COMPANY NAME</a>
+                                                        <li class="d-flex justify-content-between"><a class="text-dark"
+                                                                href="javascript:void(0)">IMAGE</a>
                                                             <div class="form-check m-0">
-                                                                <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
+                                                                <input type="checkbox" class="form-check-input mt-2"
+                                                                    id="exampleCheck1" checked>
                                                             </div>
                                                         </li>
-                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">VANDOR NAME</a>
+                                                        <li class="d-flex justify-content-between"><a class="text-dark"
+                                                                href="javascript:void(0)">TASK</a>
                                                             <div class="form-check m-0">
-                                                                <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
+                                                                <input type="checkbox" class="form-check-input mt-2"
+                                                                    id="exampleCheck1" checked>
                                                             </div>
                                                         </li>
-                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">PHONE</a>
+
+                                                        <li class="d-flex justify-content-between"><a class="text-dark"
+                                                                href="javascript:void(0)">ASSIGNED TO</a>
                                                             <div class="form-check m-0">
-                                                                <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
+                                                                <input type="checkbox" class="form-check-input mt-2"
+                                                                    id="exampleCheck1" checked>
                                                             </div>
                                                         </li>
-                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">ADDRESS</a>
+                                                        <li class="d-flex justify-content-between"><a class="text-dark"
+                                                                href="javascript:void(0)">DUE AT</a>
                                                             <div class="form-check m-0">
-                                                                <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
+                                                                <input type="checkbox" class="form-check-input mt-2"
+                                                                    id="exampleCheck1" checked>
                                                             </div>
                                                         </li>
-                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">WORK PHONE</a>
+                                                        <li class="d-flex justify-content-between"><a class="text-dark"
+                                                                href="javascript:void(0)">RELATED TO</a>
                                                             <div class="form-check m-0">
-                                                                <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
+                                                                <input type="checkbox" class="form-check-input mt-2"
+                                                                    id="exampleCheck1" checked>
                                                             </div>
                                                         </li>
-                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">CATEGORY</a>
+                                                        <li class="d-flex justify-content-between"><a class="text-dark"
+                                                                href="javascript:void(0)">STATUS</a>
                                                             <div class="form-check m-0">
-                                                                <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
+                                                                <input type="checkbox" class="form-check-input mt-2"
+                                                                    id="exampleCheck1" checked>
                                                             </div>
                                                         </li>
+
                                                     </ul>
                                                 </div>
-                                                <button type="button" class="btn btn-primary btn-pill mx-2" id="add_property_btn" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal"><i
+                                                <button type="button" class="btn btn-primary btn-pill mx-2"
+                                                    id="add_property_btn" data-bs-effect="effect-scale"
+                                                    data-bs-toggle="modal" href="#addModal"><i
                                                         class="fe fe-plus me-2"></i><strong>ADD NEW
-                                                        VENDOR</strong></button>
-                                            </div>
+                                                        TASK</strong></button>
+                                            </div> -->
                                         </div>
                                         <div class="card-body p-0">
                                             <div class="table-responsive">
@@ -1764,21 +2074,41 @@ color: #000;
                                                     <thead>
                                                         <tr>
                                                             <th>#</th>
-
-                                                            <th>Company name</th>
-                                                            <th>Vendor name</th>
-                                                            <th>Phone number</th>
-                                                            <th>Address</th>
-                                                            <th>Work phone number</th>
-                                                            <th>Category</th>
+                                                            <th>File name</th>
+                                                            <th>Properties</th>
+                                                            <th>Owner</th>
+                                                            <th>Date upload</th>
                                                             <th>Action</th>
-
-
                                                         </tr>
                                                     </thead>
                                                     <tbody id="table_body">
+                                                        <tr>
+                                                            <td style="font-weight: 600;">1</td>
+                                                            <td class="task-id" id="244"><div style="font-weight: 600; display: flex; gap: 1rem;"><img src="../assets/images/Group-user.png" alt=""><p style="color: #9B9B9B;" class="mb-1">Document screenshot.jpg <br><span class="font-weight-normal" style="color: #9B9B9B; font-weight: 200;"> 720 KB</span></p></div></td>
+                                                            <td class="propertyAddress"><p style="font-weight: 600;" class="mb-1">Pensgate St</p><span style="color: #9B9B9B;">9430 Research Blvd. Ste 2-350 Austin TX 78759</span></td>
+                                                            <td style="display: flex; align-items: center; gap: 0.5rem; border: none;"><img src="../assets/images/faces/man-prospects.png" alt="" style="width: 50px; height: 50px; border-radius: 50%;"><p class="mt-2">Sarah coner</p></td>
+                                                            <td>17/4/2022</td>
+                                                            <td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i><ul class="dropdown-menu dropdown-menu-top"><li><a class="dropdown-item text-dark" href="./view-property.html?property=%7B%22iv%22%3A%22%2BznES7nSPFokgtGzzUHw5Q%3D%3D%22%2C%22v%22%3A1%2C%22iter%22%3A10000%2C%22ks%22%3A128%2C%22ts%22%3A64%2C%22mode%22%3A%22ccm%22%2C%22adata%22%3A%22%22%2C%22cipher%22%3A%22aes%22%2C%22salt%22%3A%220gjQ9lri%2BGU%3D%22%2C%22ct%22%3A%22mrmF2pbNn1Z8%2BBQ%3D%22%7D" style="display: flex; align-items: center;"><i class="fi fi-rs-eye" style="display: flex; align-items: center;"></i> &nbsp;&nbsp;&nbsp; View</a></li><li><a class="edit-option dropdown-item text-dark" href="javascript:void(0)" style="display: flex; align-items: center;"><i class="fi fi-rs-edit" style="display: flex; align-items: center;"></i> &nbsp;&nbsp;&nbsp; Edit</a></li><li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)" style="display: flex; align-items: center;"><i class="fi fi-rs-cross-small fs-20" style="display: flex; align-items: center;"></i> &nbsp;&nbsp;Delete</a></li></ul></td>
+                                                        </tr>
 
-                                                    </tbody>
+                                                        <tr>
+                                                            <td style="font-weight: 600;">2</td>
+                                                            <td class="task-id" id="244"><div style="font-weight: 600; display: flex; gap: 1rem;"><img src="../assets/images/Group-user.png" alt=""><p style="color: #9B9B9B;" class="mb-1">Document screenshot.jpg <br><span class="font-weight-normal" style="color: #9B9B9B; font-weight: 200;"> 720 KB</span></p></div></td>
+                                                            <td class="propertyAddress"><p style="font-weight: 600;" class="mb-1">Pensgate St</p><span style="color: #9B9B9B;">9430 Research Blvd. Ste 2-350 Austin TX 78759</span></td>
+                                                            <td style="display: flex; align-items: center; gap: 0.5rem; border: none;"><img src="../assets/images/faces/man-prospects.png" alt="" style="width: 50px; height: 50px; border-radius: 50%;"><p class="mt-2">Sarah coner</p></td>
+                                                            <td>17/4/2022</td>
+                                                            <td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i><ul class="dropdown-menu dropdown-menu-top"><li><a class="dropdown-item text-dark" href="./view-property.html?property=%7B%22iv%22%3A%22%2BznES7nSPFokgtGzzUHw5Q%3D%3D%22%2C%22v%22%3A1%2C%22iter%22%3A10000%2C%22ks%22%3A128%2C%22ts%22%3A64%2C%22mode%22%3A%22ccm%22%2C%22adata%22%3A%22%22%2C%22cipher%22%3A%22aes%22%2C%22salt%22%3A%220gjQ9lri%2BGU%3D%22%2C%22ct%22%3A%22mrmF2pbNn1Z8%2BBQ%3D%22%7D" style="display: flex; align-items: center;"><i class="fi fi-rs-eye" style="display: flex; align-items: center;"></i> &nbsp;&nbsp;&nbsp; View</a></li><li><a class="edit-option dropdown-item text-dark" href="javascript:void(0)" style="display: flex; align-items: center;"><i class="fi fi-rs-edit" style="display: flex; align-items: center;"></i> &nbsp;&nbsp;&nbsp; Edit</a></li><li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)" style="display: flex; align-items: center;"><i class="fi fi-rs-cross-small fs-20" style="display: flex; align-items: center;"></i> &nbsp;&nbsp;Delete</a></li></ul></td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td style="font-weight: 600;">3</td>
+                                                            <td class="task-id" id="244"><div style="font-weight: 600; display: flex; gap: 1rem;"><img src="../assets/images/Group-user.png" alt=""><p style="color: #9B9B9B;" class="mb-1">Document screenshot.jpg <br><span class="font-weight-normal" style="color: #9B9B9B; font-weight: 200;"> 720 KB</span></p></div></td>
+                                                            <td class="propertyAddress"><p style="font-weight: 600;" class="mb-1">Pensgate St</p><span style="color: #9B9B9B;">9430 Research Blvd. Ste 2-350 Austin TX 78759</span></td>
+                                                            <td style="display: flex; align-items: center; gap: 0.5rem; border: none;"><img src="../assets/images/faces/man-prospects.png" alt="" style="width: 50px; height: 50px; border-radius: 50%;"><p class="mt-2">Sarah coner</p></td>
+                                                            <td>17/4/2022</td>
+                                                            <td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i><ul class="dropdown-menu dropdown-menu-top"><li><a class="dropdown-item text-dark" href="./view-property.html?property=%7B%22iv%22%3A%22%2BznES7nSPFokgtGzzUHw5Q%3D%3D%22%2C%22v%22%3A1%2C%22iter%22%3A10000%2C%22ks%22%3A128%2C%22ts%22%3A64%2C%22mode%22%3A%22ccm%22%2C%22adata%22%3A%22%22%2C%22cipher%22%3A%22aes%22%2C%22salt%22%3A%220gjQ9lri%2BGU%3D%22%2C%22ct%22%3A%22mrmF2pbNn1Z8%2BBQ%3D%22%7D" style="display: flex; align-items: center;"><i class="fi fi-rs-eye" style="display: flex; align-items: center;"></i> &nbsp;&nbsp;&nbsp; View</a></li><li><a class="edit-option dropdown-item text-dark" href="javascript:void(0)" style="display: flex; align-items: center;"><i class="fi fi-rs-edit" style="display: flex; align-items: center;"></i> &nbsp;&nbsp;&nbsp; Edit</a></li><li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)" style="display: flex; align-items: center;"><i class="fi fi-rs-cross-small fs-20" style="display: flex; align-items: center;"></i> &nbsp;&nbsp;Delete</a></li></ul></td>
+                                                        </tr>
+                                                        </tbody>
                                                 </table>
                                             </div>
                                         </div>
@@ -1811,14 +2141,15 @@ color: #000;
 
     </div>
 
-      <!-- Sidebar-right -->
+    <!-- Sidebar-right -->
     <div class="sidebar sidebar-right sidebar-animate">
         <div class="panel panel-primary card mb-0 shadow-none border-0">
             <div class="tab-menu-heading border-0 d-flex p-3">
                 <div class="card-title mb-0 text-dark fw-bold">
                     <!-- <i class="fe fe-bell me-2"></i> -->
                     <!-- <span class=" pulse"></span> -->
-                    Notifications <a href="javascript:void(0);" class="text-primary text-decoration-underline " id="updateAllNotifyRead">Mark all
+                    Notifications <a href="javascript:void(0);" class="text-primary text-decoration-underline "
+                        id="updateAllNotifyRead">Mark all
                         as read</a>
                 </div>
                 <div class="card-options ms-auto">
@@ -1831,11 +2162,15 @@ color: #000;
                 <div class="tabs-menu border-bottom">
                     <!-- Tabs -->
                     <ul class="nav panel-tabs">
-                        <li><a href="#side1" data-bs-toggle="tab" class="text-dark active">All<span class="all_span"></span></a></li>
-                        <li><a href="#side2" data-bs-toggle="tab" class="text-dark">Inbox <span class="inbox_span"></span></a></li>
-                        <li><a href="#side3" data-bs-toggle="tab" class="text-dark">Unread <span class="Unread_span"></span></a></li>
-                        <!-- <li><a href="#side4" data-bs-toggle="tab" class="text-dark">Archive <span class="archive_span"></span></a></li> -->
-                    </ul>   
+                        <li><a href="#side1" data-bs-toggle="tab" class="text-dark active">All<span
+                                    class="all_span"></span></a></li>
+                        <li><a href="#side2" data-bs-toggle="tab" class="text-dark">Inbox <span
+                                    class="inbox_span"></span></a></li>
+                        <li><a href="#side3" data-bs-toggle="tab" class="text-dark">Unread <span
+                                    class="Unread_span"></span></a></li>
+                        <!-- <li><a href="#side4" data-bs-toggle="tab" class="text-dark">Archive <span
+                                    class="archive_span"></span></a></li> -->
+                    </ul>
                 </div>
                 <div class="tab-content">
                     <!-- <div class="tab-pane " id="side1">
@@ -2012,11 +2347,11 @@ color: #000;
                     </div> -->
                     <div class="tab-pane active" id="side1">
                         <div class="list-group list-group-flush" id="notification-container">
-                            
+
 
                         </div>
                     </div>
-                  
+
                     <div class="tab-pane " id="side2">
                         <div class="list-group list-group-flush" id="inbox-notification-container">
 
@@ -2024,13 +2359,13 @@ color: #000;
                     </div>
                     <div class="tab-pane " id="side3">
                         <div class="list-group list-group-flush" id="unread-notification-container">
-                            
+
 
                         </div>
                     </div>
                     <div class="tab-pane " id="side4">
                         <div class="list-group list-group-flush" id="Archieve-notification-container">
-                            
+
 
                         </div>
                     </div>
@@ -2043,7 +2378,7 @@ color: #000;
                     <!-- <div class="tab-pane" id="side2">
                         <div class="list-group list-group-flush">
                             <div class="pt-3 fw-semibold ps-5">Today</div> -->
-                            <!-- <div class="list-group-item d-flex align-items-center justify-content-between">
+                    <!-- <div class="list-group-item d-flex align-items-center justify-content-between">
                                 <div class="d-flex align-items-center">
                                     <div class="me-2">
                                         <span class="avatar avatar-md brround cover-image"
@@ -2083,14 +2418,14 @@ color: #000;
                                     <span class="fs-12 text-dark">2 min ago</span>
                                 </div>
                             </div> -->
-                            <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
+                    <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
 
-                        <!-- </div>
-                    </div> --> 
+                    <!-- </div>
+                    </div> -->
                     <!-- <div class="tab-pane" id="side3">
                         <div class="list-group list-group-flush">
                             <div class="pt-3 fw-semibold ps-5">Today</div> -->
-                            <!-- <div class="list-group-item d-flex align-items-center justify-content-between">
+                    <!-- <div class="list-group-item d-flex align-items-center justify-content-between">
                                 <div class="d-flex align-items-center">
                                     <div class="me-2">
                                         <span class="avatar avatar-md brround cover-image"
@@ -2130,14 +2465,14 @@ color: #000;
                                     <span class="fs-12 text-dark">2 min ago</span>
                                 </div>
                             </div> -->
-                            <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
+                    <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
 
-                        <!-- </div>
-                    </div> --> 
+                    <!-- </div>
+                    </div> -->
                     <!-- <div class="tab-pane" id="side4">
                         <div class="list-group list-group-flush">
                              <div class="pt-3 fw-semibold ps-5">Today</div> -->
-                            <!-- <div class="list-group-item d-flex align-items-center justify-content-between">
+                    <!-- <div class="list-group-item d-flex align-items-center justify-content-between">
                                 <div class="d-flex align-items-center">
                                     <div class="me-2">
                                         <span class="avatar avatar-md brround cover-image"
@@ -2177,10 +2512,10 @@ color: #000;
                                     <span class="fs-12 text-dark">2 min ago</span>
                                 </div>
                             </div> -->
-                            <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
+                    <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
 
-                        <!-- </div>
-                    </div> --> 
+                    <!-- </div>
+                    </div> -->
                     <!-- <div class="tab-pane" id="side3">
                         <ul class="task-list timeline-task">
                             <li class="d-sm-flex mt-4">
@@ -2284,7 +2619,8 @@ color: #000;
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content country-select-modal">
                 <div class="modal-header">
-                    <h6 class="modal-title">Choose Country</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
+                    <h6 class="modal-title">Choose Country</h6><button aria-label="Close" class="btn-close"
+                        data-bs-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
                     <ul class="row p-3">
@@ -2444,9 +2780,10 @@ color: #000;
 
     <!-- Color Theme js -->
     <script src="../assets/js/themeColors.js"></script>
-<script src="../assets/js/intercom.js"></script>
+
     <!-- CUSTOM JS -->
-    <script src="../assets/js/custom.js"></script><script src="../assets/js/getNotification.js"></script>
+    <script src="../assets/js/custom.js"></script>
+    <script src="../assets/js/getNotification.js"></script>
 <script src="../assets/js/push_notification.js"></script>
 
     <!-- ############################################# -->
@@ -2522,7 +2859,7 @@ color: #000;
     <script src="../assets/js/getNotification.js"></script>
 <script src="../assets/js/push_notification.js"></script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
                 method: 'GET',
@@ -2531,7 +2868,7 @@ color: #000;
                 },
                 success: function (response) {
                     console.log(response);
-                    var myprogress = `<div class="progress-bar bg-info" style="width: `+response.count+`%;">`+response.count+`%</div>`;
+                    var myprogress = `<div class="progress-bar bg-info" style="width: ` + response.count + `%;">` + response.count + `%</div>`;
                     $(".progress").html(myprogress)
                 },
                 error: function (xhr, status, error) {
@@ -2546,668 +2883,17 @@ color: #000;
                     // console.log('Error occurred while fetching state and city data.');
                 }
             });
-            $('#email_verification').on('click', function() {
-      if ($('body').hasClass('dark-mode')) {
-        $('.Rent-logo').attr('src', '../assets/images/logo_white.png');
-      }else{
-        $('.Rent-logo').attr('src', '../assets/images/Artboard GÇô 1.svg');
-      }
-    });
-    });
-    
-      </script>
-    <script>
-        var vendorID;
-        $(document).ready(() => {
-            $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/protected',
-                method: 'GET',
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                },
-                success: function({
-                    userName,image
-                }) {
-                    // console.log()
-                    function toTitleCase(str) {
-                                return str.replace(/\w\S*/g, function(txt) {
-                                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-                                });
-                            }
-                            if(image!==" " && image!==null){
-                
-                $("#user-img").attr("src", image)
-                $("#user-img-dark").attr("src", image)
-            }                        
-                    $("#user-name").text(toTitleCase(userName))
-                        $("#header-user").text(toTitleCase(userName))
-
-
-                },
-                error: function(xhr, status, error) {
-                    // $("#myModal_warning").modal("show");
-                    // setTimeout(function() {
-                    //     $('#myModal_warning').modal('hide');
-                    //     window.location = '../Landlord/login_module.html';
-                    // }, 2000);
-                    // console.log('Error occurred while fetching state and city data.');
-                    // console.log(xhr);
-                    // console.log(error);
-                    // console.log('Error occurred while fetching state and city data.');
-                }
-            });
-            let vendorData;
-
-            function resetAccordions() {
-                $('#addModal input, #addModal textarea, #addModal select').each(function() {
-                    console.log($(this))
-    $(this).removeClass('border-danger');
-    $(this).removeClass('border-green');
-});
-
-                $('#myModal_edit input, #myModal_edit textarea,#myModal_edit select').each(function() {
-                    $(this).removeClass('border-danger');
-                    $(this).removeClass('border-green');
-                });;
-                $("#firstName").val("")
-                $("#firstName_update").val("")
-                $("#lastName_update").val("")
-                $("#lastName").val("")
-                $("#businessName_update").val("")
-                $("#streetAddress_update").val("")
-                $("#city_update").val("")
-                $("#zip_update").val("")
-                $("#workPhone_update").val("")
-                $("#phone_update").val("")
-                $("#email_update").val("")
-                $("#businessName").val("")
-                $("#streetAddress").val("")
-                $("#city").val("")
-                $("#zip").val("")
-                $("#workPhone").val("")
-                $("#phone").val("")
-                $("#email").val("")
-                    $("#category option:first").prop("selected", true);
-                    $("#category_update option:first").prop("selected", true);
-            }
-
-            $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getVendorCategory',
-                type: 'GET',
-                contentType: false,
-                processData: false,
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                },
-
-                success: function(response) {
-                    console.log(response.data)
-                    $("#category").empty()
-                    
-                    if(response?.data?.length===0){
-                        $("#category").append($('<option></option>').text("Add vendor categories first!!"))
-                    }else{
-                        $("#category").append($('<option></option>').text("Choose..."))
-                        response.data.forEach((category) => {
-                        $("#category").append($('<option></option>').text(category.category).val(category.id))
-                    })
-                    }
-                    $("#category option:first").prop("selected", true);
-                    $("#category_update").empty()
-                    
-                    if(response?.data?.length===0){
-                        $("#category_update").append($('<option></option>').text("Add vendor categories first!!"))
-                    }else{
-                        $("#category_update").append($('<option></option>').text("Choose..."))
-                        response.data.forEach((category) => {
-                        $("#category_update").append($('<option></option>').text(category.category).val(category.id))
-                    })
-                    }
-                    
-                    // console.log(1)
-                    // getData()
-                    // $('#succesModal').modal('show')
-                    // window.location = '../Landlord/properties-all.html';
-                },
-                error: function(xhr, status, error) {
-                    if(xhr.responseJSON.message=="No vendor category data found"){
-                        $("#category").empty()
-                        $("#category").prop("disabled", true);
-                        $("#category").append($('<option></option>').text("Add vendor categories first!!"))
-
-                    }
-                }
-            });
-            
-            $(document).on('click', '#next', function(e) {
-                e.preventDefault()
-                    // selectedFiles = []
-                $('#addModal').modal('hide');
-                // $("#largemodal").addClass("hide");
-                var formData = new FormData();
-
-                // Get the form data
-                var firstName = $("#firstName").val();
-                var lastName = $("#lastName").val();
-                var businessName = $("#businessName").val();
-                var streetAddress = $("#streetAddress").val();
-                var city = $("#city").val();
-                // var status = $("#status").val();
-                var zip = $("#zip").val();
-                var workPhone = $("#workPhone").val();
-                var phone = $("#phone").val();
-                var email = $("#email").val();
-                var category = $("#category").val();
-
-
-                // Add the form data to the FormData object
-                formData.append('firstName', firstName);
-                formData.append('lastName', lastName);
-                formData.append('businessName', businessName);
-                formData.append('streetAddress', streetAddress);
-                formData.append('city', city);
-                // formData.append('status', status);
-                formData.append('zip', zip);
-                formData.append('phone', phone);
-                formData.append('workPhone', workPhone);
-                formData.append('email', email);
-                formData.append('categoryID', category);
-                // formData.append('categoryID', 2);
-                console.log(status)
-                $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/addVendor',
-                    // url: 'https://backend.app.spaderent.com/api/spade/addVendor',
-                    type: 'POST',
-                    data: JSON.stringify({
-                        firstName: firstName,
-                        lastName: lastName,
-                        businessName: businessName,
-                        streetAddress: streetAddress,
-                        city: city,
-                        // status: status,
-                        zip: zip,
-                        phone: phone,
-                        workPhone: workPhone,
-                        // status: status,
-                        email: email,
-                        // formData.append(categoryID:category),
-                        categoryID: category
-                    }),
-                    contentType: "application/json; charset=utf-8",
-                    processData: false,
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-
-                    success: function(response) {
-                        console.log(response)
-                        if(response=="Vendor already exists"){
-                            $("#infoModal").modal("show");
-                        }else if(response.message==" Vendor created successful"){
-                            GetNotification();
-                            $("#addModal").modal("hide")
-                        $("#succesModal").modal("show");
-                        getData()
-                        setTimeout(function() {
-                            $("#succesModal").modal("hide");
-                        }, 2000);
-                    }
-                    resetAccordions()
-                        
-                    },
-                    error: function(xhr, status, error) {
-                    //     $("#myModal_warning_connection").modal("show");
-                    //         setTimeout(function() {
-                    //             $('#myModal_warning_connection').modal('hide');
-
-                    //         }, 2000);
-                    // console.log(xhr.responseText);
-                    }
-                });
-
-
-            });
-
-            function getData(selectedFilter = "alphabets") {
-                $("#preloader").fadeIn("fast");
-                // console.log(22)
-                $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getAllVendors',
-                    type: 'GET',
-                    contentType: false,
-                    processData: false,
-
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-                    success: function(response) {
-                        // tenantData=data[0]
-                        console.log(response)
-                        if (response.message == "No data found") {
-                            
-                        }
-                        vendorData = (response.data[0]?response.data[0]:[])
-                            // $("#user-name").text(response.name)
-                        var tableBody = $('#table_body');
-                        tableBody.empty();
-                        // console.log(data[0])
-                        let tenantNames = []
-                        response.data[0] ?.forEach(function(vendor,index) {
-
-                            var serial='<td style="font-weight: 600;">' + (index+1) + '</td>';
-
-                            var vendorName = '<td class="vendorName" style="font-weight: 600;">' + vendor.firstName + vendor.lastName + `<br><small>${vendor.email}</small>` + '</td>';
-                            var businessName = '<td class="businessName" style="font-weight: 600;">' + vendor.businessName + '</td>';
-                            var phone = '<td class="phone" style="font-weight: 600;">' + vendor.phone + '</td>';
-                            var address = '<td class="address" style="font-weight: 600;">' + vendor.streetAddress + '</td>';
-                            var workPhone = '<td class="workPhone" style="font-weight: 600;">' + (vendor.workPhone.length >= 1 ? vendor.workPhone : "N/A") + '</td>';
-
-                            var category = `<td class="rentAmount" style="font-weight: 600;" id="${vendor.categoryID}">` + vendor.category + '</td>';
-                            // var assignUnit = '<td class="assignUnit" style="font-weight: 600;">' + tenant.unitNumber + `<br><small>${tenant.unitArea} Square/Feet</small>` + '</td>';
-                            var dropdownMenu =
-                                '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
-                                '<ul class="dropdown-menu">' +
-                                // `<li><a class="dropdown-item text-success" href="./view-tenant.html?tenantId=${vendor.id}">View</a></li>` +
-                                `<li><a class="edit-option dropdown-item text-primary" id="${vendor.id}"  href="javascript:void(0)">Edit</a></li>` +
-                                `<li><a class='delete-option dropdown-item text-danger' id="${vendor.id}" href="javascript:void(0)">Delete</a></li>`
-                            '</ul></td>';
-
-
-                            var row = '<tr>'+serial + businessName + vendorName + phone +
-                                address + workPhone + category +dropdownMenu +'</tr>';
-
-                            // Append the row to the table body
-                            tableBody.append(row);
-                        });
-                        $("#preloader").fadeOut("slow")
-
-                        
-                    },
-                    error: function(xhr, status, error) {
-                        var tableBody = $('#table_body');
-                        tableBody.empty();
-                    }
-                });
-
-            }
-            getData()
-            $(document).on("click",'.delete-option',function(e) {
-                            e.preventDefault(); // Prevent default anchor behavior
-                            vendorID = $(this).prop('id');
-                            $('#myModal_delete').modal('show');
-                        });
-                        $(document).on("click",'.edit-option',function(e) {
-                            e.preventDefault(); // Prevent default anchor behavior
-                            vendorID = $(this).prop('id');
-                            const vendorDetails=vendorData.filter((vendor)=>{
-                                
-                                return vendor.id==vendorID
-                            })
-                            
-                            $("#firstName_update").val(vendorDetails[0]?.firstName)
-                            $("#lastName_update").val(vendorDetails[0]?.lastName)
-                            $("#businessName_update").val(vendorDetails[0]?.businessName)
-                            $("#streetAddress_update").val(vendorDetails[0]?.streetAddress)
-                            $("#city_update").val(vendorDetails[0]?.city)
-                            $("#zip_update").val(vendorDetails[0]?.zip)
-                            $("#phone_update").val(vendorDetails[0]?.phone)
-                            $("#workPhone_update").val(vendorDetails[0]?.workPhone)
-                            $("#email_update").val(vendorDetails[0]?.email)
-                            $("#category_update").val(vendorDetails[0]?.categoryID)
-
-                            $('#myModal_edit').modal('show');
-                        });
-                        $(document).on("input", "#myModal_edit input, #myModal_edit select", function(e) {
-                e.preventDefault(); // Prevent default anchor behavior
-                var accordion1Fields = $('#myModal_edit input[required], #myModal_edit select[required]');
-                var allFieldsFilled = accordion1Fields.filter(function() {
-                    return $(this).val() === '' || $(this).val() === 'Choose...';
-                }).length === 0;
-                if (allFieldsFilled) {
-                    $('#save').removeClass('disabled');
-                    
+            $('#email_verification').on('click', function () {
+                if ($('body').hasClass('dark-mode')) {
+                    $('.Rent-logo').attr('src', '../assets/images/logo_white.png');
                 } else {
-                    $('#save').addClass('disabled');
-                   
-                }
-            
-            })
-            $("#confirmDelete").on("click",function(){
-                $.ajax({
-                    url: `https://backend.app.spaderent.com/api/spade/deleteVendor/${vendorID}`,
-                    type: 'DELETE',
-                    contentType: false,
-                    processData: false,
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-                    success: function(response) {
-                        console.log(response)
-                        if(response.message=="Vendor Deleted successful"){
-                            
-                            $("#myModal_delete").modal("hide");
-                            $("#delete-text").empty()
-                            $("#delete-text").text("Vendor deleted successfully")
-                            $("#succesModal_delete").modal("show");
-                            getData()
-                            setTimeout(function() {
-                                $("#succesModal_delete").modal("hide");
-                            }, 2000);
-                        }
-                        
-                    },
-                    error: function(xhr, status, error) {
-                        if(xhr.responseJSON.message=='Vendor not Deleted successful'){
-                            $("#myModal_delete").modal("hide");
-                            $("#delete-text").empty()
-
-                            $("#delete-text").text("Error deleting vendor")
-                            $("#succesModal_delete").modal("show");
-                            getData()
-                            setTimeout(function() {
-                                $("#succesModal_delete").modal("hide");
-                            }, 2000);
-                        }else{
-                            $("#myModal_delete").modal("hide");
-                            $("myModal_warning_connection").modal("show");
-                            getData()
-                            setTimeout(function() {
-                                $("#myModal_warning_connection").modal("hide");
-                            }, 2000);
-                        }
-                    }
-                })
-            })
-
-            $("#save").on("click",function(){
-                $.ajax({
-                    url: `https://backend.app.spaderent.com/api/spade/updateVendor`,
-                    type: 'PUT',
-                    data:JSON.stringify({
-                        vendId:vendorID,
-                        firstName: $("#firstName_update").val(),
-                        lastName: $("#lastName_update").val(),
-                        businessName: $("#businessName_update").val(),
-                        streetAddress: $("#streetAddress_update").val(),
-                        city: $("#city_update").val(),
-                        zip: $("#zip_update").val(),
-                        phone: $("#phone_update").val(),
-                        workPhone: $("#workPhone_update").val(),
-                        email: $("#email_update").val(),
-                        categoryID: $("#category_update").val()
-                    }),
-                    contentType: "application/json; charset=utf-8",
-                    processData: false,
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-                    success:function(response){
-                        $("#myModal_edit").modal("hide");
-                        $("#succesModal_edit").modal("show");
-                        resetAccordions()
-                        getData()
-                        setTimeout(function() {
-                            $("#succesModal_edit").modal("hide");
-                        }, 2000);
-                        
-                    },
-                    error:function(xhr, status, error){
-                        $("#myModal_edit").modal("hide");
-                        $("#myModal_warning_connection").modal("show");
-                        getData()
-                        setTimeout(function() {
-                            $("#myModal_warning_connection").modal("hide");
-                        }, 2000);
-                    }
-                })
-            })
-            $('input[type="checkbox"]').change(function() {
-                var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
-                var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
-                console.log(columnIndex, isColumnVisible)
-                    // Toggle the visibility of the corresponding column
-                $('table').find('tr').each(function() {
-                    var column = $(this).find('th:nth-child(' + (columnIndex+1) + '), td:nth-child(' + (columnIndex+1) + ')');
-                    isColumnVisible ? column.show() : column.hide();
-                });
-            });
-
-            function filterTable(selectedFilter) {
-                var tableBody = $('#table_body');
-                var rows = tableBody.find('tr');
-
-                if (selectedFilter === 'alphabets') {
-                    rows.sort(function(a, b) {
-                        var textA = $(a).find('.vendorName').text().toLowerCase();
-                        var textB = $(b).find('.vendorName').text().toLowerCase();
-                        return textA.localeCompare(textB);
-                    });
-                } else if (selectedFilter === 'ascending') {
-                    rows.sort(function(a, b) {
-                        console.log(parseInt($(a).find('.rentAmount').text()))
-                        var idA = parseInt($(a).find('.rentAmount').text());
-                        var idB = parseInt($(b).find('.rentAmount').text());
-                        return idA - idB;
-                    });
-                } else if (selectedFilter === 'descending') {
-                    rows.sort(function(a, b) {
-                        var idA = parseInt($(a).find('.rentAmount').text());
-                        var idB = parseInt($(b).find('.rentAmount').text());
-                        return idB - idA;
-                    });
-                }
-
-                tableBody.empty().append(rows);
-            }
-
-            // Filter functionality
-            $('#ascending').on('click', function() {
-                filterTable("ascending")
-            });
-            $('#descending').on('click', function() {
-                filterTable("descending")
-            });
-            $('#alphabets').on('click', function() {
-                // console.log(1)
-                filterTable("alphabets")
-            });
-
-            // Search functionality
-            $('#search_input').on('keyup', function() {
-                var searchValue = $(this).val().toLowerCase();
-                $('#table_body tr').filter(function() {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
-                });
-            });
-            let phoneError = true
-
-            function areAllFieldsFilled() {
-                var accordion1Fields = $('#addModal input[required], #addModal select[required]');
-                var allFieldsFilled = accordion1Fields.filter(function() {
-                    return $(this).val() === '' || $(this).val() === 'Choose...';
-                }).length === 0;
-                var zipField = $('#zip');
-                if (zipField.val().length !== 5) {
-                    allFieldsFilled = false;
-                }
-                if (phoneError) {
-                    allFieldsFilled = false;
-                }
-                return allFieldsFilled;
-            }
-
-            // Function to enable or disable buttons based on field status
-            function updateButtonStatus() {
-
-
-
-
-                var allFieldsFilled = areAllFieldsFilled();
-
-                // Enable or disable the buttons based on the fields' status
-                if (allFieldsFilled) {
-                    $('#next').removeClass("disabled");
-                    //   $('#draft').removeAttr("disabled");
-                } else {
-                    $('#next').addClass("disabled");
-                    //   $('#draft').removeAttr("disabled");
-
-                }
-            }
-
-            // Call the updateButtonStatus function when any field in the accordions is changed
-            $('#addModal input[required], #addModal select[required]').on('input change', function() {
-                var $field = $(this);
-                var $errorMessage = $field.next('.text-danger');
-                if ($field.attr("id") === "zip") {
-                    if ($field.val().length !== 5) {
-                        $field.addClass('border-danger');
-                        $errorMessage.removeClass('d-none');
-                    } else {
-                        $field.removeClass('border-danger');
-                        $errorMessage.addClass('d-none');
-                    }
-                } else if ($field.val() === '' || $field.val() === 'Choose...') {
-                    $field.addClass('border-danger');
-                    $errorMessage.removeClass('d-none');
-                } else {
-                    $field.removeClass('border-danger');
-                    $errorMessage.addClass('d-none');
-                }
-                updateButtonStatus();
-            });
-            const input = document.querySelector("#phone");
-            const errorMsg = document.querySelector("#error-msg");
-            const validMsg = document.querySelector("#valid-msg");
-
-            // here, the index maps to the error code returned from getValidationError - see readme
-            const errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
-
-            // initialise plugin
-            const iti = window.intlTelInput(input, {
-                utilsScript: "/intl-tel-input/js/utils.js?1684676252775"
-            });
-
-            const reset = () => {
-                input.classList.remove("error");
-                errorMsg.innerHTML = "";
-                errorMsg.classList.add("d-none");
-                validMsg.classList.add("d-none");
-            };
-
-            // on blur: validate
-            input.addEventListener('input', () => {
-                reset();
-                console.log("in phone input")
-                if (input.value.trim()) {
-                    if (iti.isValidNumber()) {
-                        validMsg.classList.remove("d-none");
-                        phoneError = false
-                    } else {
-                        phoneError = true
-                        input.classList.add("error");
-                        const errorCode = iti.getValidationError();
-                        errorMsg.innerHTML = errorMap[errorCode];
-                        errorMsg.classList.remove("d-none");
-                    }
+                    $('.Rent-logo').attr('src', '../assets/images/Artboard GÇô 1.svg');
                 }
             });
-            $("#close,.btn-close").click(() => {
-                resetAccordions()
-            })
-            $("#succes-close").click(() => {
-                getData()
-            })
-            $(document).on('input change','#addModal input[type="text"],#addModal input[type="tel"],#addModal input[type="phone"], #addModal select,#addModal textarea', function() {
-                // updateTotal();
-                    var $field = $(this);
-                    var $errorMessage = $field.next('.text-danger');
-                     if ($field.val() === '' || $field.val() === 'Choose...') {
-                        $field.addClass('border-danger');
-                        $field.removeClass('border-green');
-                        $errorMessage.removeClass('d-none');
-                    } else {
-                        $field.removeClass('border-danger');
-                        $field.addClass('border-green');
-                        $errorMessage.addClass('d-none');
-                    }
-                    
-                });
-                $('#email').keyup(function() {
-          var email = $(this).val();
-          var emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z.-]+\.[A-Za-z]{2,}$/;
-          
-          if(!email.match(emailRegex)) {
-            // Invalid email format, display an error message or take appropriate action
-            console.log("invalid");
-            $(this).addClass("border-danger")
-            $(this).removeClass("border-green")
-          }else{
-              $(this).addClass("border-green")
-            $(this).removeClass("border-danger")
-          }
         });
-        })
+
     </script>
-<script>
-    function logout() {
-        $(document).ready(function () {
-            $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
-                type: 'PUT',
-                contentType: false,
-                processData: false,
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                },
-                success: function (response) {
-                    console.log(response);
-                    if(localStorage.getItem("htmlLayout")){
 
-                        const htmlLayoutValue = localStorage.getItem("htmlLayout");
-                        localStorage.clear();
-                        localStorage.setItem("htmlLayout", htmlLayoutValue);
-                    }else{
-                        localStorage.clear();
-
-                    }
-                    // localStorage.removeItem('authtoken');
-                    // window.close();
-                    window.open('./login_module.html', "_self")
-                    console.log('Done');
-                },
-                error: function (xhr, status, error) {
-                    console.log(error);
-                }
-            });
-        });
-    }
-</script>
-
-<script>
-    $(document).ready(()=>{
-        $.ajax({
-            url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
-            method: 'GET',
-            headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-            },
-            success: function (response) {
-                console.log("here")
-                if(response.message=="Email is verified"){
-                    $("#account-text").remove()
-                      $("#email_verification").remove()
-                }
-            },
-            error: function (xhr, status, error) {
-                console.log('Error occurred while fetching state and city data.');
-                console.log(xhr);
-                console.log(error);
-                // console.log('Error occurred while fetching state and city data.');
-            }
-        });
-    })
-</script>
 </body>
 
 </html>
