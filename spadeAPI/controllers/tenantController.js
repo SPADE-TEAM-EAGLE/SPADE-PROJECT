@@ -583,6 +583,7 @@ exports.tenantAttachFileDelete = async (req, res) => {
 //  ############################# get all Tenant Attach File Start ############################################################
 exports.GettenantAttachFile = async (req, res) => {
   const { tenantID } = req.body; 
+  
   try {
       const GettenantAttachFileResult = await queryRunner(getTenantAttachFile, [tenantID]);
       if (GettenantAttachFileResult[0].length === 0) {
