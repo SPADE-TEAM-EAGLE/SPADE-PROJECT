@@ -102,7 +102,7 @@ exports.updateAllTenantNotifyReadQuery = {
 };
 
 // update vendor for these fields firstName,lastName,businessName,streetAddress,city,zip,workPhone,phone,email,categoryID
-exports.updateVendor = `UPDATE vendor SET firstName = ?,lastName = ?,businessName = ?,streetAddress = ?,city = ?,zip = ?,workPhone = ?,phone = ?,email = ?,categoryID = ? WHERE id = ?`;
+exports.updateVendor = `UPDATE vendor SET firstName = ?,lastName = ?,businessName = ?,streetAddress = ?,city = ?,state = ?,zip = ?,workPhone = ?,phone = ?,email = ?,categoryID = ? WHERE id = ?`;
 
 // creat api get total properties of landlord and vacant or occupied properties using join with units table
 exports.getPropertiesGraphData = `SELECT
@@ -583,7 +583,7 @@ exports.insertMoreUnits =
   "INSERT INTO propertyunits (propertyID, unitNumber,Area,unitDetails,status) VALUES (?,?,?,?,?)";
 exports.putUnitsUpdate = "UPDATE property SET  units = ?  where id = ? ";
 exports.insertTenantAttachFile = "INSERT INTO tenantattachfiles (landlordID, tenantID, Image,imageKey, uploadDate) VALUES (?,?,?,?,?)";
-exports.getTenantAttachFile = "SELECT tf.Image, tf.ImageKey, tf.uploadDate, p.propertyName, p.address, p.city, p.state, p.zipCode  FROM tenantattachfiles as tf join tenants as t ON tf.tenantID = t.id join property as p ON t.propertyID = p.id where tf.tenantID = ? ";
+exports.getTenantAttachFile = "SELECT tf.id, tf.Image, tf.ImageKey, tf.uploadDate, t.firstName,t.lastName, p.propertyName, p.address, p.city, p.state, p.zipCode  FROM tenantattachfiles as tf join tenants as t ON tf.tenantID = t.id join property as p ON t.propertyID = p.id where tf.tenantID = ? ";
 exports.insertInvoice =
   "INSERT INTO invoice (landlordID, tenantID, invoiceType, startDate, endDate, frequency, dueDate,daysDue, repeatTerms, terms,note,status,created_at,totalAmount,notify, recurringNextDate) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 exports.insertLineItems =
@@ -701,7 +701,7 @@ exports.addTasksQuerytenant =
   "INSERT INTO task (taskName, tenantID, dueDate,status, priority, notes, notifyTenant, created_at , createdBy,landlordID) VALUES ( ?,?,?,?,?,?,?,?,?,?)";
 exports.addVendorList =
   "INSERT INTO taskassignto (taskId, vendorId) VALUES (?, ?)";
-exports.addVendor = "INSERT INTO vendor (firstName,lastName,businessName,streetAddress,city,zip,workPhone,phone,email,categoryID,landlordID) VALUES (?, ?,?,?,?,?,?,?,?,?,?)";
+exports.addVendor = "INSERT INTO vendor (firstName,lastName,businessName,streetAddress,city,state,zip,workPhone,phone,email,categoryID,landlordID) VALUES (?, ?,?,?,?,?,?,?,?,?,?,?)";
 exports.getVendors = `SELECT v.*, vc.category
 FROM vendor v
 JOIN vendorcategory vc ON v.categoryID = vc.id

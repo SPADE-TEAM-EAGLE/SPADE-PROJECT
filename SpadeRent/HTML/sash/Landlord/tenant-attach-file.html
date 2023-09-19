@@ -1390,14 +1390,31 @@
                             <i class="fi fi-rs-check-circle text-success"></i>
                         </h2>
                         <p class="ms-2 mb-0 text-start">Your file(s) has been successfully added.</p>
-                        <!-- <p class="ms-2 text-start">Please add tenant to this property.</p> -->
-                        <a data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal"
-                            class="btn btn-outline-default btn-pill ms-1 my-2"
-                            style='background-color:#1467B0;color: white;'> <i class="fi fi-rs-pencil"></i> ADD NEW
-                            TASK</a>
-                        <a class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal">
-                            Close
-                        </a>
+                        
+                    </div>
+                </div>
+                <div class="modal-footer" style="border-top: 0">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="succesModal_delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content success-modal-content">
+                <div class="modal-header">
+
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="succes-close">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body succes-modal" style="padding-top: 70px;padding-bottom: 70px;">
+                    <div class="text-justify ps-2 border-model-line">
+                        <h2 class="modal-title d-flex align-items-center ps-1">
+                            <strong class="color-primary">Success!&nbsp;</strong>
+                            <i class="fi fi-rs-check-circle text-success"></i>
+                        </h2>
+                        <p class="ms-2 mb-0 text-start">Your file(s) has been successfully deleted.</p>
+                        
                     </div>
                 </div>
                 <div class="modal-footer" style="border-top: 0">
@@ -2970,7 +2987,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
             });
         $(document).ready(function () {
             $("#submit-photo").click(() => {
-                $("#succesModal").modal("show")
+                
                 $("#submit-photo").prop("disabled", true)
                 var formData = new FormData();
                 formData.append('tenantID', tenantId);
@@ -2988,6 +3005,8 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
+                        $("#addModal").modal("hide")
+                $("#succesModal").modal("show")
                         var imageArray = response.images;
                         console.log(imageArray)
                         var tenantData = {
@@ -3003,8 +3022,8 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                             success: function ({message}) {
-                                $("#submit-pics").prop("disabled", false)
-                                console.log(message==" Tenant Files save successful")
+                                $("#submit-photo").prop("disabled", false)
+                                
                                if(message==" Tenant Files save successful"){
                                     $("#succesModal").modal("show")
                                    
@@ -3014,7 +3033,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                                 // $(".company-name").text(`${data[0][0].companyName} | ${data[0][0].firstName+" "+data[0][0].lastName}`)
                             },
                             error: function (xhr, status, error) {
-                                $("#submit-pics").prop("disabled", false)
+                                $("#submit-photo").prop("disabled", false)
                                 
                                 $("#myModal_warning_connection").modal("show");
                             setTimeout(function() {
@@ -3099,7 +3118,8 @@ function formatDate(dateString) {
     const options = { year: 'numeric', month: 'short', day: 'numeric' };
     return date.toLocaleDateString('en-US', options);
 }
-$.ajax({
+function getData(){
+    $.ajax({
     url: 'http://localhost:3000/api/spade/GettenantAttachFile',
     type: 'GET',
     data: {
@@ -3113,6 +3133,7 @@ $.ajax({
         // Assuming response.data is an array of objects with the required data
         const data = response.data;
         console.log(tenantData)
+        table.empty()
         // Loop through the data and populate the table
         data.forEach(function (item, index) {
             // Create a new row for each item in the data
@@ -3121,7 +3142,8 @@ $.ajax({
                     <td style="font-weight: 600;">${index + 1}</td>
                     <td class="file-id" id="${item.id}">
                         <div style="font-weight: 600; display: flex; gap: 1rem;">
-                            <img src="${item?.Image?.split(",")[0]}" alt="">
+                            ${item?.Image?.split(",")[0].endsWith(".pdf") ? `<i class="fi fi-rs-file-pdf fs-20" style="display: flex; align-items: center;"></i>` : `<img src="${item?.Image?.split(",")[0]}" alt="">`}
+                            
                             <p style="color: #9B9B9B;" class="mb-1">${item.ImageKey}<br>
                                 <span class="font-weight-normal" style="color: #9B9B9B; font-weight: 200;">${item.fileSize} KB</span>
                             </p>
@@ -3133,7 +3155,7 @@ $.ajax({
                     </td>
                     <td style="display: flex; align-items: center; gap: 0.5rem; border: none;">
                         <img src="${localStorage?.getItem("LandlordImg")}" alt="" style="width: 50px; height: 50px; border-radius: 50%;">
-                        <p class="mt-2">${tenantData?.firstName + " " + tenantData?.lastName}</p>
+                        <p class="mt-2">${item?.firstName + " " + item?.lastName}</p>
                     </td>
                     <td>${formatDate(item.uploadDate)}</td>
                     <td>
@@ -3162,14 +3184,36 @@ $.ajax({
         window.location = './tenant-file.html?tenant=' + encodedTenantId;
     }
 });
+
+}
+getData()
 $(document).on("click",".download-option",function(e) {
                         e.preventDefault(); // Prevent default anchor behavior
                         const fileToDownload = $(this).closest("tr").find(".file-id").find("img").attr("src");
-                        console.log(fileToDownload)
+                        window.open(fileToDownload)
+                        getData()
 });
 $(document).on("click",'.delete-option',function(e) {
                         e.preventDefault(); // Prevent default anchor behavior
-                        const tenantIdElement = $(this).closest("tr").find(".file-id");
+                        const imageElement = $(this).closest("tr").find(".file-id").attr("id");
+                        $.ajax({
+                            url:"http://localhost:3000/api/spade/tenantAttachFileDelete",
+                            type:"DELETE",
+                            data:JSON.stringify({
+                                id:imageElement.trim(" ")
+                            }),
+                            contentType:"application/json",
+                            headers:{
+                                authorization:"Bearer "+localStorage.getItem("authtoken")
+                            },
+                            success:function({message}){
+                                $("#succesModal_delete").modal("show")
+                                getData()
+                            },
+                            error:function(xhr,status,error){
+                                console.log(xhr.responseText)
+                            }
+                        })
                         
                     });
 $('#search_input').on('keyup', function() {
