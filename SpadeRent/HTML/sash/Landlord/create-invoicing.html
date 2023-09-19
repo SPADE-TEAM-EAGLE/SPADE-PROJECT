@@ -1157,10 +1157,14 @@
                                border-radius: 5px;">
                                 <div class="row mb-5">
                                     <div class="col-12">
-                                        <span class="mt-2 mb-2" style="float: right;"><img
-                                                src="../assets/images/users/5.jpg" class="bussinessLogo" alt=""
-                                                style="max-width: 60px;"></span>
+                                        <div class="mt-2 mb-2" style="float: right;"><img
+                                                src="../assets/images/users/5.jpg"  id="bussinessLogo" alt=""
+                                                style="max-width: 90px;"></div>
+                                                
+                                                
+
                                     </div>
+                                    <div class="col-12" id="addbussinesslogocol"><a href="settings.html" class="text-primary" style="float: right;">Add your bussiness logo!</a></div>
                                     <div class="col-md-6" style="text-align: left;" id="client-id">
                                         <h5 class="fw-bold" style="color: 
                                 #562AC8;">BILLED TO</h5>
@@ -2182,7 +2186,7 @@
                             <div class="row mb-5">
                                 <div class="col-12">
                                     <span style="float: right;"><img src="../assets/images/users/5.jpg" alt=""
-                                            style="max-width: 60px;"></span>
+                                            style="max-width: 90px;"></span>
                                 </div>
                                 <div class="col-md-6" style="text-align: left;">
                                     <h5 class="fw-bold" style="color: 
@@ -3832,35 +3836,7 @@
                 endDateInput.min = startDateInput.value;
             });
             $(document).ready(function () {
-                var bussinessLogoImg ;
-                $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/protected',
-                    method: 'GET',
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-                    success: function (response) {
-                        console.log("protected");
-                        console.log(response);
-                        if (response.image !== " " && response.image !== null) {
-
-                            $("#user-img").attr("src", response.image)
-                            $("#user-img-dark").attr("src", response.image)
-                        }
-                        bussinessLogoImg = response.businessLogo;
-                    },
-                    error: function (xhr, status, error) {
-                        $("#myModal_warning").modal("show");
-                        setTimeout(function () {
-                            $('#myModal_warning').modal('hide');
-                            window.location = '../Landlord/login_module.html';
-                        }, 2000);
-                        console.log('Error occurred while fetching state and city data.');
-                        console.log(xhr);
-                        console.log(error);
-                        // console.log('Error occurred while fetching state and city data.');
-                    }
-                });
+                
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
                     method: 'GET',
@@ -3895,6 +3871,42 @@
 
         </script>
         <script>
+            var bussinessLogoImg ;
+            $(document).ready(()=>{
+                $.ajax({
+                    url: 'http://localhost:3000/api/spade/protected',
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        console.log("protected");
+                        console.log(response);
+                        if (response.image !== " " && response.image !== null) {
+
+                            $("#user-img").attr("src", response.image)
+                            $("#user-img-dark").attr("src", response.image)
+                        }
+                        bussinessLogoImg = response.businessLogo? response.businessLogo : "../assets/images/Artboard GÇô 1.svg" ;
+                    $("#bussinessLogo").attr("src", bussinessLogoImg)
+                    if(response.businessLogo){
+                        $("#addbussinesslogocol").addClass("d-none");
+                    }
+
+                    },
+                    error: function (xhr, status, error) {
+                        $("#myModal_warning").modal("show");
+                        setTimeout(function () {
+                            $('#myModal_warning').modal('hide');
+                            window.location = '../Landlord/login_module.html';
+                        }, 2000);
+                        console.log('Error occurred while fetching state and city data.');
+                        console.log(xhr);
+                        console.log(error);
+                    }
+                });
+                
+            });
             var selectedFiles = [];
             function dropHandler(ev) {
                 console.log("File(s) dropped");
@@ -5147,7 +5159,6 @@
                         ...data1,
                         ...data2
                     }
-
                     $("#client-id").empty()
                     $("#client-id").append(`<h5 class="fw-bold" style="color: 
                                 #562AC8;">BILLED TO</h5>
@@ -5281,6 +5292,8 @@
                     $("#viewModal").modal("show")
                 })
 
+
+                
                 $(document).on('click', ".view-btnn", function (e) {
                     e.preventDefault();
 
@@ -5911,6 +5924,7 @@
         <script>
             // PDF CODE START
             document.getElementById("create_pdf").addEventListener("click", () => {
+                document.getElementById("addbussinesslogocol").style.display = "none"
                 const invoice = this.document.getElementById("htmlContent");
                 var opt = {
                     margin: 0.1,
@@ -5929,9 +5943,15 @@
                     }
                 };
                 html2pdf().from(invoice).set(opt).save();
+                setTimeout(function(){
+                    document.getElementById("addbussinesslogocol").style.display = "block"
+                },2500)
+                
             })
             // PDF CODE END
         </script>
+    
+    
 
         <script>
             $(document).ready(() => {

@@ -9483,7 +9483,7 @@
         <!-- INTERNAL INDEX JS -->
         <!-- <script src="../assets/js/index1.js"></script> -->
 
-        <script src="../assets/js/modal_functionality.js"></script>
+        <!-- <script src="../assets/js/modal_functionality.js"></script> -->
 
         <!-- INTERNAL intlTelInput js-->
         <script src="../assets/plugins/intl-tel-input-master/intlTelInput.js"></script>
@@ -11484,7 +11484,7 @@
                         // If dropped items aren't files, reject them
                         if (item.kind === "file") {
                             const file = item.getAsFile();
-                            file.size <= 5 * 1024 * 1024 && selectedFiles.length < 5 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array
+                            file.size <= 5 * 1024 * 1024 && selectedFiles.length < 1 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array
                             updateSelectedFilesContainer()
                         }
                     });
@@ -11582,14 +11582,14 @@
                 selectedFiles.splice(index, 1); // Remove the selected file from the array
                 updateSelectedFilesContainer(); // Update the selected files container
             });
-            // $('#fileInput').on('change', function () {
-            //     var files = Array.from($(this)[0].files);
-            //     files.forEach(function (file) {
-            //         file.size <= 5 * 1024 * 1024 && selectedFiles.length < 5 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none")
-            //     });
+            $('#fileInput').on('change', function () {
+                var files = Array.from($(this)[0].files);
+                files.forEach(function (file) {
+                    file.size <= 5 * 1024 * 1024 && selectedFiles.length < 1 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none")
+                });
 
-            //     updateSelectedFilesContainer(); 
-            // });
+                updateSelectedFilesContainer(); 
+            });
 
 
 
