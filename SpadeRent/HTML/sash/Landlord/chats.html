@@ -1080,8 +1080,9 @@
             position: absolute;
             right: 13px;
             cursor: pointer;
-            padding: 8px;
-            background: #EDF3F9
+            padding: 5px;
+            background: #EDF3F9;
+            bottom: 7px;
         }
 
         /* chats End css  */
@@ -1114,7 +1115,7 @@
                         style="text-align: center;">
                         <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" style="max-width: 110px;"
                             class="Rent-logo mb-5" />
-                        <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
+                        <h1 class="mb-4 text-dark fw-bold">Verify Your Email Address</h1>
                         <h6 class="text-default mb-3">Enter a 6-digit code to verify email address</h6>
                         <input id="token" name="token" type="phone" class="form-control form mb-2" pattern="[0-9]{5}"
                             maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '')" style="width: 100%;"
@@ -1128,7 +1129,7 @@
                             MUST be atleast 8 characters long, Must contain atleast One Uppercase and One symbol.
                         </span>
                         <div class="">
-                            <!-- <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2">Remind me Later</a> -->
+                            <!-- <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2">Remind Me Later</a> -->
                             <a href="javascript:void(0)" class="btn btn-primary btn-pill disabled"
                                 id="verify-btn">Verify</a>
                         </div>
@@ -1155,7 +1156,7 @@
                         style="text-align: center;">
                         <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" style="max-width: 110px;"
                             class="Rent-logo mb-5" />
-                        <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
+                        <h1 class="mb-4 text-dark fw-bold">Verify Your Email Address</h1>
                         <h6 class="text-default mb-3">Get started with Spade Rent! You have<span id="days-left"></span>
                             left
                         </h6>
@@ -1167,7 +1168,7 @@
                         <a class="text-primary mb-4 d-none" href="javascript:void(0)" id="save-email">Save Email</a>
                         <div class="">
                             <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2"
-                                id="remind-later">Remind me Later</a>
+                                id="remind-later">Remind Me Later</a>
                             <a href="javascript:void(0)" class="btn btn-primary btn-pill" id="send-email">Send Mail</a>
                         </div>
                     </div>
@@ -1361,6 +1362,7 @@
                                     </div>
                                 </label>
                             </div>
+                            <span class="text-dark">Maximum limit is 5</span>
                             <div class="selected-files text-white">
                                 <div class="file-grid"></div>
                             </div>
@@ -1371,8 +1373,13 @@
                 <div class="modal-footer">
                     <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal"
                         id='close'>Close</button>
-                    <button class="btn text-light button" style='background-color:#1467B0;'
-                        id='submit-photo'>Send</button>
+                    <button class="btn text-light button" style='background-color:#1467B0;' id='submit-photo'>
+                        Send</button>
+                    <button class="btn btn-primary my-1" type="button" disabled="" id="loading-btn"
+                        style="display: none;">
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Loading...
+                    </button>
 
                 </div>
             </div>
@@ -1966,7 +1973,8 @@
                         <!-- PAGE-HEADER -->
                         <!-- PAGE-HEADER END -->
                         <!-- Row -->
-                        <div class="card mt-5 d-none" style="background: linear-gradient(180deg, #232323 0%, #434343 100%);">
+                        <div class="card mt-5 d-none"
+                            style="background: linear-gradient(180deg, #232323 0%, #434343 100%);">
                             <div class="card-body">
                                 <div class="roww" style="display: flex;">
                                     <div class="col-lg-9">
@@ -1999,8 +2007,6 @@
                                     </a></span>
                                 <span><a href="#" onclick="Intercom('showArticle', 8210444)"> How to Chats? </a></span>
                             </p>
-
-
                         </div>
                         <div class="row">
                             <!-- <input type="text" id="inputField"> -->
@@ -3270,19 +3276,9 @@
         <!--  <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a> -->
         <a href="#addModal" data-bs-effect="effect-scale" data-bs-toggle="modal" id="add-tenant-side-btn"><i
                 class="fe fe-plus"></i></a>
+
         <!-- socket      -->
         <script src="https://engage.app.spaderent.com/socket.io/socket.io.js"></script>
-
-        <script>
-            // Connect to the socket.io server
-            // This code won't emit a 'connection' event, as it's automatically handled by socket.io
-            // Handle events from the server
-            //           socket.on('getNotification', (data) => {
-            // alert(data); // You can customize how you want to display the notification
-            // });
-            //   socket.emit('message', 'Hello from the client');
-        </script>
-
         <!-- JQUERY JS -->
         <script src="../assets/js/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"
@@ -3389,7 +3385,6 @@
             localStorage.removeItem('tenantName');
             // var socket = io('https://engage.app.spaderent.com');
             $(document).ready(function () {
-
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
                     method: 'GET',
@@ -3557,14 +3552,21 @@
                         messs2 = `<div class="d-flex" style="align-items: flex-start; justify-content: flex-start;">
     <div style="width: 36px; height: 36px; border-radius: 50%; background: url(${localStorage.getItem("tenantImg") && localStorage.getItem("tenantImg") !== "null" ? localStorage.getItem("tenantImg") : randomImg}); background-position: center; background-size: cover;" class="me-1"></div>
     <div class="msg-text">`;
-
-                        if (message.message.includes('https')) {
+                        if (message.message.includes('.s3.amazonaws.com/') && message.message.includes('https')) {
                             const imageUrls = message.message.split(',');
                             imageUrls.forEach((imageUrl) => {
-                                messs2 += `<a href="JavaScript:void(0);" data-bs-toggle="dropdown"><img style="cursor: pointer; width:200px; margin-top: 5px;" class="text" src="${imageUrl}" /></a>
+                                if (imageUrl.includes('https') && imageUrl.includes('.pdf')) {
+                                    messs2 += `<a href="JavaScript:void(0);" data-bs-toggle="dropdown" class="text" style="text-align: center;"><i class="fi fi-rs-file-pdf" style="font-size: 115px;display: contents;"></i></a>
         <ul class="dropdown-menu dropdown-menu-top"><li><a class="dropdown-item text-danger edit-option" id="">Delete</a></li><li><a class="dropdown-item text-primary">Download</a></li></ul>
         <a class="text-primary" href="${imageUrl}">Download</a>
         `;
+                                } else if (imageUrl.includes('https') && (imageUrl.includes('.png') || imageUrl.includes('.jpeg') || imageUrl.includes('.jpg'))) {
+                                    messs2 += `<a href="JavaScript:void(0);" data-bs-toggle="dropdown"><img style="cursor: pointer; width:200px; margin-top: 5px;" class="text" src="${imageUrl}" /></a>
+        <ul class="dropdown-menu dropdown-menu-top"><li><a class="dropdown-item text-danger edit-option" id="">Delete</a></li><li><a class="dropdown-item text-primary">Download</a></li></ul>
+        <a class="text-primary" href="${imageUrl}">Download</a>
+        `;
+                                }
+
                             });
                         } else {
                             messs2 += `<span class="text">${message.message}</span>`;
@@ -3705,6 +3707,8 @@
                 updateSelectedFilesContainer(); // Update the selected files container
             });
             $('#submit-photo').click(() => {
+                $('#submit-photo').css("display", "none");
+                $("#loading-btn").css("display", "inline-block");
                 if (selectedFiles.length >= 1) {
                     var uploadFormData = new FormData();
                     for (var i = 0; i < selectedFiles.length; i++) {
@@ -3752,8 +3756,11 @@
                                 success: function (response) {
                                     console.log(messageData2);
                                     socket.emit('chatMessage', messageData2);
+                                    $("#loading-btn").css("display", "none");
+                                    $("#submit-photo").css("display", "inline-block")
                                     $('#addModal').modal('hide');
                                     $('.file-grid').empty();
+                                    selectedFiles = [];
                                     chatTenant(Number(localStorage.getItem("tenantId")), String(localStorage.getItem("tenantName")))
                                 },
                                 error: function (xhr, status, error) {
@@ -3850,6 +3857,10 @@
                                             // console.log("First URL:", firstUrl);
                                         } else {
                                             localStorage.setItem("tenantImg", "../assets/images/users/5.jpg")
+                                            var newBgImageUrl = "url('../assets/images/users/5.jpg')";
+
+                                            // Select the div with the class "person" and change its background image
+                                            $(".person").css("background-image", newBgImageUrl);
                                         }
                                         if (response.data.isTenantActive == 1) {
                                             $('#online').show()
@@ -3879,27 +3890,29 @@
                                                         if (response.data[i]['userType'] == "landlord") {
                                                             const timeArray = response.data[i]['created_at'].split(" ")[1].split(":");
                                                             const time = timeArray.slice(0, 2).join(":");
-                                                            //                                                         messs1 += `<div class="d-flex " style="align-items: flex-start;justify-content: end;"> 
-                                                            //                                                                 <div class="msg-text owner">
-                                                            //                                                                 <span class="text">` + response.data[i]['message'] + `</span>
-                                                            //                                                                 <span style="float: right;" class="text-primary">` + time + `</span>
-                                                            //                                                                 </div>
-                                                            //                                                                 <div style="width: 36px;height: 36px;    border-radius: 50%;
-                                                            // background: url(` + (localStorage.getItem("LandlordImg") != " " && localStorage.getItem("LandlordImg") != "null" ? localStorage.getItem("LandlordImg") : randomImg) + `);
-                                                            // background-position: center;
-                                                            // background-size: cover;" class="ms-1"> 
-                                                            //                                                                     </div> 
-                                                            //                                                                 </div> 
-                                                            //                                                                 `;
                                                             messs1 += `<div class="d-flex " style="align-items: flex-start;justify-content: end;"> 
-                                                            <div class="msg-text owner">`;
-                                                            if (response.data[i]['message'].includes('https')) {
-                                                                const imageUrls = response.data[i]['message'].split(',');
+                                                                <div class="msg-text owner">`;
+                                                            if (response.data[i]['message'].includes('.s3.amazonaws.com/') && response.data[i]['message'].includes('https')) {
+
+                                                                var imageUrls = response.data[i]['message'].split(',');
+                                                                // console.log("imageUrls");
+                                                                // console.log(imageUrls);
                                                                 imageUrls.forEach((imageUrl) => {
-                                                                    messs1 += `<a href="JavaScript:void(0);" data-bs-toggle="dropdown"><img style="cursor: pointer; width:200px; margin-top: 5px;" class="text" src="${imageUrl}" /></a>
-        <ul class="dropdown-menu dropdown-menu-top"><li><a class="dropdown-item text-danger edit-option" id="">Delete</a></li><li><a class="dropdown-item text-primary">Download</a></li></ul>
-        <a class="text-primary" href="${imageUrl}">Download</a>
-        `;
+                                                                    if (imageUrl.includes('https') && imageUrl.includes('.pdf')) {
+
+                                                                        messs1 += `<a href="JavaScript:void(0);" class="text" data-bs-toggle="dropdown" style="text-align: center;"><i class="fi fi-rs-file-pdf" style="font-size: 115px;display: contents;"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-top"><li><a class="dropdown-item text-danger edit-option" id="">Delete</a></li><li><a class="dropdown-item text-primary">Download</a></li></ul>
+                    <a class="text-primary" href="${imageUrl}">Download</a>
+                    `;
+
+                                                                    } else if (imageUrl.includes('https') && (imageUrl.includes('.png') || imageUrl.includes('.jpeg') || imageUrl.includes('.jpg'))) {
+
+                                                                        messs1 += `<a href="JavaScript:void(0);" data-bs-toggle="dropdown"><img style="cursor: pointer; width:200px; margin-top: 5px;" class="text" src="${imageUrl}" /></a>
+                                                                        <ul class="dropdown-menu dropdown-menu-top"><li><a class="dropdown-item text-danger edit-option" id="">Delete</a></li><li><a class="dropdown-item text-primary">Download</a></li></ul>
+                                                                        <a class="text-primary" href="${imageUrl}">Download</a>
+                                                                        `;
+                                                                    }
+
                                                                 });
                                                             } else {
                                                                 messs1 += `<span class="text">${response.data[i]['message']}</span>`;
@@ -3916,33 +3929,29 @@
                                                         } else if (response.data[i]['userType'] == "tenant") {
                                                             const timeArray = response.data[i]['created_at'].split(" ")[1].split(":");
                                                             const time = timeArray.slice(0, 2).join(":");
-                                                            //                                                         messs1 += `<div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
-                                                            //                                                             <div style="width: 36px;height: 36px;    border-radius: 50%;
-                                                            // background: url(` + (localStorage.getItem("tenantImg") != "null" && localStorage.getItem("tenantImg") != " " ? localStorage.getItem("tenantImg") : randomImg) + `);
-                                                            // background-position: center;
-                                                            // background-size: cover;" class="me-1"> 
-                                                            //                                                                     </div> 
-                                                            //                                                                 <div class="msg-text">
-                                                            //                                             <span class="text">` + response.data[i]['message'] + `</span>
-                                                            //                                             <span style="float: right;" class="text-primary">` + time + `</span>
-                                                            //                                         </div> </div>
-                                                            //                                     `;
+
                                                             messs1 += `<div class="d-flex" style="align-items: flex-start; justify-content: flex-start;">
     <div style="width: 36px; height: 36px; border-radius: 50%; background: url(${localStorage.getItem("tenantImg") != "null" && localStorage.getItem("tenantImg") != " " ? localStorage.getItem("tenantImg") : randomImg}); background-position: center; background-size: cover;" class="me-1"></div>
     <div class="msg-text">`;
-
-                                                            if (response.data[i]['message'].includes('https')) {
+                                                            if (response.data[i]['message'].includes('.s3.amazonaws.com/') && response.data[i]['message'].includes('https')) {
                                                                 const imageUrls = response.data[i]['message'].split(',');
                                                                 imageUrls.forEach((imageUrl) => {
-                                                                    messs1 += `<a href="JavaScript:void(0);" data-bs-toggle="dropdown"><img style="cursor: pointer; width:200px; margin-top: 5px;" class="text" src="${imageUrl}" /></a>
+                                                                    if (imageUrl.includes('https') && imageUrl.includes('.pdf')) {
+                                                                        messs1 += `<a href="JavaScript:void(0);" data-bs-toggle="dropdown" class="text" style="text-align: center;"><i class="fi fi-rs-file-pdf" style="font-size: 115px;display: contents;"></i></a>
         <ul class="dropdown-menu dropdown-menu-top"><li><a class="dropdown-item text-danger edit-option" id="">Delete</a></li><li><a class="dropdown-item text-primary">Download</a></li></ul>
         <a class="text-primary" href="${imageUrl}">Download</a>
         `;
+                                                                    } else if (imageUrl.includes('https') && (imageUrl.includes('.png') || imageUrl.includes('.jpeg') || imageUrl.includes('.jpg'))) {
+                                                                        messs1 += `<a href="JavaScript:void(0);" data-bs-toggle="dropdown"><img style="cursor: pointer; width:200px; margin-top: 5px;" class="text" src="${imageUrl}" /></a>
+        <ul class="dropdown-menu dropdown-menu-top"><li><a class="dropdown-item text-danger edit-option" id="">Delete</a></li><li><a class="dropdown-item text-primary">Download</a></li></ul>
+        <a class="text-primary" href="${imageUrl}">Download</a>
+        `;
+                                                                    }
+
                                                                 });
                                                             } else {
                                                                 messs1 += `<span class="text">${response.data[i]['message']}</span>`;
                                                             }
-
                                                             messs1 += `<span style="float: right;" class="text-primary">${time}</span>
     </div>
 </div>`;
@@ -3959,6 +3968,7 @@
                                                 // var chatContent = $("#chatContent");
                                                 var scrollBottom = messDiv.prop("scrollHeight");
                                                 messDiv.scrollTop(scrollBottom);
+
                                             },
                                             error: function (xhr, status, error) {
                                                 console.log(error);
@@ -3996,6 +4006,7 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
+
                         console.log("viewAllPropertyTenant");
                         console.log(response);
                         var randomImg1 = "../assets/images/users/5.jpg";
@@ -4032,6 +4043,7 @@
                         console.log(error);
                     }
                 });
+
             });
         </script>
         <script>
@@ -4251,6 +4263,7 @@
 
             });
         </script>
+
         <!-- chats js End  -->
 </body>
 
