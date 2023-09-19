@@ -2818,12 +2818,71 @@
                                                                 <div class="valid-feedback">Looks good!</div>
                                                             </div>
 
+                                                            <div class="col-lg-4"></div>
+
+                                                            <div class="col-xl-4 mb-3">
+                                                                <label for="bname1"><b>City</b></label>
+                                                                <input type="text" class="form-control" id="city"
+                                                                    placeholder="Enter City" required>
+                                                                <div class="valid-feedback">Looks good!</div>
+                                                            </div>
+
+                                                            <div class="col-md-4 mb-3">
+                                                                <div class="form-group">
+                                                                    <label for="inputState" class="form-labell fw-bold">State<spnan
+                                                                        class="text-danger"></span></label>
+                                                                    <select id="state" class="form-select form form-select" required>
+                                                                    <option selected>Choose...</option>
+                                                                    </select>
+                                                                    <span class="text-danger d-none">State is required!</span>
+                                                                </div>        
+                                                            </div>
+
+                                                            <div class="col-lg-4"></div>
+                                                            <div class="col-xl-4 mb-3">
+                                                                <label for="bname1"><b>Zip Code</b></label>
+                                                                <input type="text" class="form-control" id="zipcode"
+                                                                    placeholder="Enter Zipcode" pattern="[0-5]+" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                                                                <div class="valid-feedback">Looks good!</div>
+                                                            </div>
+
+                                                            <div class="col-lg-4 mb-3"></div>
                                                             <div class="col-xl-8 mb-3">
                                                                 <label for="baddress1"><b>Business Address</b></label>
                                                                 <input type="text" class="form-control"
                                                                     id="businessAddress" placeholder="Enter Business Address" required>
                                                                 <div class="valid-feedback">Looks good!</div>
                                                             </div>
+
+                                                            <div class="col-lg-4"></div>
+
+                                                            <div class="col-xl-4 mb-3">
+                                                                <label for="bname1"><b>City</b></label>
+                                                                <input type="text" class="form-control" id="city"
+                                                                    placeholder="Enter City" required>
+                                                                <div class="valid-feedback">Looks good!</div>
+                                                            </div>
+
+                                                            <div class="col-md-4 mb-3">
+                                                                <div class="form-group">
+                                                                    <label for="inputState" class="form-labell fw-bold">State<spnan
+                                                                        class="text-danger"></span></label>
+                                                                    <select id="state1" class="form-select form form-select" required>
+                                                                    <option selected>Choose...</option>
+                                                                    </select>
+                                                                    <span class="text-danger d-none">State is required!</span>
+                                                                </div>        
+                                                            </div>
+
+                                                            <div class="col-lg-4"></div>
+                                                            <div class="col-xl-4 mb-3">
+                                                                <label for="bname1"><b>Zip Code</b></label>
+                                                                <input type="text" class="form-control" id="zipcode1"
+                                                                    placeholder="Enter Zipcode" pattern="[0-5]+" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                                                                <div class="valid-feedback">Looks good!</div>
+                                                            </div>
+
+                                                            <div class="col-lg-4"></div>
 
                                                             <!-- <div class="col-lg-3"></div> -->
                                                             <div class="col-lg-8 mt-4 d-flex">
@@ -3092,7 +3151,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="mt-5">
+                                                    <!-- <div class="mt-5">
                                                         <h2 class="h2-personal-inf text-dark mb-3">Background Colors
                                                         </h2>
                                                         <div
@@ -3118,9 +3177,9 @@
                                                                     src="../assets/images/media/bg-img4.jpg"
                                                                     alt="Bg-Image" id="bgimage4" class="br-7"></a>
                                                         </div>
-                                                    </div>
+                                                    </div> -->
 
-                                                    <div class="mt-5">
+                                                    <!-- <div class="mt-5">
                                                         <h2 class="h2-personal-inf text-dark mb-3 mt-5">Layout Width
                                                             Styles
                                                         </h2>
@@ -3153,7 +3212,7 @@
 
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div> -->
                                                 </div>
 
                                             </div>
@@ -10666,7 +10725,9 @@ const togglePasswordcloseaccount1 = document.querySelector("#current_password11"
                         email: $("#email").val(),
                         phone: $("#phone1").val(),
                         businessName: $("#businessName").val(),
+                        zipcode: $("#zipcode").val(),
                         businessAddress: $("#businessAddress").val(),
+                        zipcode1: $("#zipcode1").val(),
                         streetAddress: $("#streetAddress").val(),
                         imageUrl: image_url,
                         imageKey: image_key
@@ -11187,6 +11248,8 @@ const togglePasswordcloseaccount1 = document.querySelector("#current_password11"
     // Get references to the input fields and the save button
     var firstNameInput = document.getElementById("firstName");
        var lastNameInput = document.getElementById("lastName");
+       var zipcodeInput = document.getElementById("zipcode");
+       var zipcodeInput1 = document.getElementById("zipcode1");
        var phone1Input = document.getElementById("phone1");
        var saveButton = document.getElementById("save_profile");
 
@@ -11195,9 +11258,11 @@ const togglePasswordcloseaccount1 = document.querySelector("#current_password11"
            var firstName = firstNameInput.value;
            var lastName = lastNameInput.value;
            var phone1 = phone1Input.value;
+           var zipcode = zipcodeInput.value;
+           var zipcode1 = zipcodeInput1.value;
 
            // Check if all three fields are empty
-           if (firstName === '' || lastName === '' || phone1 === '') {
+           if (firstName === '' || lastName === '' || phone1 === '' || zipcode === '' || zipcode1 === '') {
                saveButton.disabled = true;
            } else {
                saveButton.disabled = false;
@@ -11208,6 +11273,8 @@ const togglePasswordcloseaccount1 = document.querySelector("#current_password11"
        firstNameInput.addEventListener('keyup', updateButtonState);
        lastNameInput.addEventListener('keyup', updateButtonState);
        phone1Input.addEventListener('keyup', updateButtonState);
+       zipcodeInput.addEventListener('keyup', updateButtonState);
+       zipcodeInput1.addEventListener('keyup', updateButtonState);
 
        // Call the function on page load to initialize button state
     //    updateButtonState();

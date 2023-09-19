@@ -37,6 +37,11 @@
     <link rel="stylesheet" href="cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css"
         integrity="sha512-BMbq2It2D3J17/C7aRklzOODG1IQ3+MHw3ifzBHMBwGO/0yUqYmsStgBjI0z5EYlaDEFnvYV7gNYdD3vFLRKsA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- select option start  -->
+    <link href="https://cdn.jsdelivr.net/npm/semantic-ui@2.3.1/dist/semantic.min.css" rel="stylesheet" />
+    <!-- select option End  -->
+
     <script>
         if (localStorage.getItem("invoice") == "false") {
             window.location = "./new-invoice.html"
@@ -635,6 +640,32 @@
             background: #ECF3F9 !important;
             font-weight: bold !important;
         }
+
+                /* style dropdown start  */
+                .ui.selection.dropdown {
+                cursor: pointer;
+                word-wrap: break-word;
+                line-height: 1em;
+                white-space: normal;
+                outline: 0;
+                -webkit-transform: rotateZ(0);
+                transform: rotateZ(0);
+                min-width: 14em;
+                min-height: 34px;
+                background: #fff;
+                display: inline-block;
+                padding: 11px 0em 0 10px;
+                border-radius: 8px;
+                color: #000;
+                border: 1px solid #e9edf4;
+}
+        /* style dropdown End  */
+
+        .header {
+    padding-top: 0.75rem;
+    padding-bottom: 1.4rem;
+    border-bottom: 2px solid #949292;
+}
     </style>
 
 </head>
@@ -895,8 +926,8 @@
                     <div class="col-md-6 col-lg-3 col-xl-3 mb-5">
                         <div class="card h-100">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
-                                <div class="card-title fw-bold"><a href="prospects.html"
-                                        style="color: white;">Lead</a></div>
+                                <div class="card-title fw-bold"><a href="prospects.html" style="color: white;">Lead</a>
+                                </div>
                             </div>
                             <div class="card-body">
                                 <div class="text-center chat-image mb-5">
@@ -1529,38 +1560,70 @@
                 </div>
                 <div class="modal-body">
                     <div class="row mb-3">
+
                         <div class="col-md-12 col-lg-6">
+                            <form class="ui form">
+                                <section class="field">
+                                    <label class="form-label fw-bold fs-18">Select Tenant</label>
+                                    <div class="ui fluid search selection dropdown">
+                                        <input type="hidden" name="shipper_state_state">
+                                        <i class="dropdown icon"></i>
+                                        <div class="default text">Select State</div>
+                                        <div class="menu">
+                                            <div class="item" data-value="AL">Select Option</div>
+                                            <div class="item" data-value="AL">
+                                                <div style="display: flex; gap: 1rem; align-items: center;">
+                                                    <img src="../assets/images/icons/Group 10346.png" alt="" style="width: 65px; height: 65px;">
+                                                    <div><h3 class="mb-0 line-height: 22px;">John Adams</h3>
+                                                        <span style="line-height: 22px;">Email: example@gmail.com</span>
+                                                         <span style="line-height: 22px;">Company: IT Company</span><br>
+                                                         <span style="line-height: 22px;">Phone: (789) 900399</span>
+                                                        </div>
+                                                    </div>
+                                            </div>
+
+                                            <div class="item" data-value="AL">
+                                                <div style="display: flex; gap: 1rem; align-items: center;">
+                                                    <img src="../assets/images/icons/Group 10346.png" alt="" style="width: 65px; height: 65px;">
+                                                    <div><h3 class="mb-0 line-height: 22px;">Umair Nazakat</h3>
+                                                        <span style="line-height: 22px;">Email: example@gmail.com</span>
+                                                         <span style="line-height: 22px;">Company: IT Company</span><br>
+                                                         <span style="line-height: 22px;">Phone: (789) 900399</span>
+                                                        </div>
+                                                    </div>
+                                            </div>
+
+                                            <div class="item" data-value="AL">
+                                                <div style="display: flex; gap: 1rem; align-items: center;">
+                                                    <img src="../assets/images/icons/Group 10346.png" alt="" style="width: 65px; height: 65px;">
+                                                    <div><h3 class="mb-0 line-height: 22px;">Noman Peerzada</h3>
+                                                        <span style="line-height: 22px;">Email: example@gmail.com</span>
+                                                         <span style="line-height: 22px;">Company: IT Company</span><br>
+                                                         <span style="line-height: 22px;">Phone: (789) 900399</span>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                           
+                                        </div>
+                                    </div>
+                                </section>
+                            </form>
+                        </div>
+                        <!-- <div class="col-md-12 col-lg-6">
                             <label class="form-label fw-bold fs-18">Select Tenant</label>
-                            <select class="form-control select2 form-select d-block" data-placeholder="Select Tenant"
-                                name="tenants" id="tenants" required>
-                                <option label="Choose one">
-                                </option>
-
+                            <select class="js-example-basic-singlee form-control select2-show-search form-select"
+                                data-placeholder="Select Tenant" name="tenantss" id="tenantss" required>
+                                <option value="safari"
+                                    data-image="https://www.w3schools.com/images/w3schools_green.jpg">Safari</option>
+                                <option value="firefox"
+                                    data-image="https://www.w3schools.com/images/w3schools_green.jpg">Firefox</option>
+                                <option value="chrome"
+                                    data-image="https://www.w3schools.com/images/w3schools_green.jpg">Chrome</option>
                             </select>
+
                             <span class="text-danger d-none">Tenant is required!</span>
-                        </div>
+                        </div> -->
 
-                        <div class="col-md-12 col-lg-6">
-                            <label class="form-label fw-bold fs-18">Select Property</label>
-                            <select class="form-control select2 form-select d-block" data-placeholder="Select Property"
-                                name="tenants" id="propertyName" required>
-                                <option label="Choose one">
-                                </option>
-
-                            </select>
-                            <span class="text-danger d-none">Property is required!</span>
-                        </div>
-
-                        <div class="col-md-12 col-lg-6">
-                            <label class="form-label fw-bold fs-18">Select Unit</label>
-                            <select class="form-control select2 form-select d-block" data-placeholder="Select Unit"
-                                name="tenants" id="propertyUnit" required>
-                                <option label="Choose one">
-                                </option>
-
-                            </select>
-                            <span class="text-danger d-none">Units are required!</span>
-                        </div>
                         <div class="col-md-12 col-lg-6">
                             <label class="form-label fw-bold fs-18">Invoice Type</label>
                             <div class="d-flex">
@@ -1578,24 +1641,46 @@
                             </div>
                         </div>
 
+                        <div class="col-md-12 col-lg-6">
+                            <label class="form-label fw-bold fs-18">Property Information</label>
+                            <select class="form-control select2 form-select d-block" data-placeholder="Select Property"
+                                name="tenants" id="propertyName" required>
+                                <option label="Choose one">
+                                </option>
+
+                            </select>
+                            <span class="text-danger d-none">Property is required!</span>
+                        </div>
+
+                        <div class="col-md-12 col-lg-6">
+                            <label class="form-label fw-bold fs-18">Unit</label>
+                            <select class="form-control select2 form-select d-block" data-placeholder="Select Unit"
+                                name="tenants" id="propertyUnit" required>
+                                <option label="Choose one">
+                                </option>
+
+                            </select>
+                            <span class="text-danger d-none">Units are required!</span>
+                        </div>
+
                         <div class="col-md-8 col-lg-6">
                             <label class="form-label fw-bold fs-18">Due Date</label>
                             <input type="date" class="form-control form" id="dueDate" placeholder="Select Due Date">
                             <span class="text-danger d-none">Due Date is required!</span>
                         </div>
                         <div class="collapse row" id="collapse1">
-                            <div class="col-md-6 col-lg-4">
+                            <div class="col-md-6 col-lg-6">
                                 <label class="form-label fw-bold fs-18">Start Date</label>
                                 <input type="date" class="form-control form" id="startDate"
                                     placeholder="Select Start Date">
                                 <span class="text-danger d-none">Start Date is required!</span>
                             </div>
-                            <div class="col-md-6 col-lg-4">
+                            <div class="col-md-6 col-lg-6">
                                 <label class="form-label fw-bold fs-18">End Date</label>
                                 <input type="date" class="form-control form" id="endDate" placeholder="Enter End Date">
                                 <span class="text-danger d-none">End Date is required!</span>
                             </div>
-                            <div class="col-md-12 col-lg-4">
+                            <div class="col-md-12 col-lg-6">
                                 <label class="form-label fw-bold fs-18">Frequency</label>
                                 <select class="form-control select2 form-select" data-placeholder="Every Month"
                                     id="frequency" placeholder="Select Frequency" data-bs-container="#addModal">
@@ -1607,7 +1692,7 @@
                                 <span class="text-danger d-none">Photos are required!</span>
                             </div>
 
-                            <div class="col-md-12 col-lg-4">
+                            <div class="col-md-12 col-lg-6">
                                 <label class="form-label fw-bold fs-18">Terms</label>
                                 <select class="form-control select2 form-select" data-placeholder="Every Month"
                                     id="terms" data-bs-placement="top" placeholder="Select Terms">
@@ -1627,8 +1712,8 @@
                                     <thead>
                                         <tr>
                                             <th>Category</th>
-                                            <th>Property</th>
-                                            <th>Memo</th>
+                                            <!-- <th>Property</th> -->
+                                            <th>Description</th>
                                             <th>Tax</th>
                                             <th>Amount</th>
                                             <th>Delete</th>
@@ -1643,13 +1728,13 @@
                                                 </select>
                                                 <span class="text-danger d-none">State is required!</span>
                                             </td>
-                                            <td><select id="state" name="property" class="form-select form"
+                                            <!-- <td><select id="state" name="property" class="form-select form"
                                                     data-bs-placement="top" required>
                                                     <option selected="">Choose...</option>
                                                 </select>
 
                                                 <span class="text-danger d-none">State is required!</span>
-                                            </td>
+                                            </td> -->
                                             <td><input type="text" class="form-control" name="memo"
                                                     placeholder="Enter Memo" required></td>
                                             <td><input type="text" class="form-control" name="tax"
@@ -1670,8 +1755,9 @@
                             <a href="javascript:;" class="mt-1" id="add-item1">+Add Line Item</a>
                         </div>
                         <div class="col-md-12 col-lg-8">
-                            <textarea class="form-control mb-4" placeholder="Additional Notes" rows="4"
-                                id="additionalNotes" placeholder="Enter Additional Notes"></textarea>
+                            <label for="" style="color: #1467B0;"><b>Memo</b></label>
+                            <textarea class="form-control mb-4" placeholder="Add Memo" rows="4" id="additionalNotes"
+                                placeholder="Enter Additional Notes"></textarea>
                             <span class="text-danger d-none">Photos are required!</span>
                         </div>
                         <div class="col-md-12 col-lg-4">
@@ -1851,8 +1937,8 @@
                                     <thead>
                                         <tr>
                                             <th>Category</th>
-                                            <th>Property</th>
-                                            <th>Memo</th>
+                                            <!-- <th>Property</th> -->
+                                            <th>Description</th>
                                             <th>Tax</th>
                                             <th>Amount</th>
                                             <th>Delete</th>
@@ -1867,15 +1953,17 @@
                                                 </select>
                                                 <span class="text-danger d-none">State is required!</span>
                                             </td>
-                                            <td><select id="state" name="property" class="form-select form"
+                                            <!-- <td><select id="state" name="property" class="form-select form"
                                                     data-bs-placement="top" required>
                                                     <option selected="">Choose...</option>
                                                 </select>
 
                                                 <span class="text-danger d-none">State is required!</span>
-                                            </td>
-                                            <td><input type="text" class="form-control" name="memo"></td>
-                                            <td><input type="text" class="form-control" name="amount" required></td>
+                                            </td> -->
+                                            <td><input type="text" class="form-control" name="memo"
+                                                    placeholder="Enter Memo"></td>
+                                            <td><input type="text" class="form-control" name="amount"
+                                                    placeholder="Enter Amount" required></td>
                                             <td><button type="button" class="btn" id="del-btn_update">
                                                     <i class="fi fi-rs-trash text-danger fs-5"></i>
                                                 </button></td>
@@ -2586,7 +2674,7 @@
                                             <a class="nav-link icon text-dark" href="./chats.html">
                                                 <i class="fi fi-rs-comment"></i>
                                             </a> -->
-                                            <!-- <img src="../assets\header-img\comment-light.webp"
+                                        <!-- <img src="../assets\header-img\comment-light.webp"
                                                 class="avatarr profile-user nav-link brroundd cover-image light-layout"> -->
                                         <!-- </div> -->
                                         <!-- 1 comments start  -->
@@ -2906,7 +2994,7 @@
                                             verification &nbsp; <i
                                                 class="angle fe fe-arrow-right create-btn-plus"></i></a>
                                         <p class="text-white m-0 mt-3" id="account-text">
-                                            </p>
+                                        </p>
                                     </div>
                                     <div class="col-lg-3">
                                         <img src="../assets/header-img/Group1.png" alt="">
@@ -2919,8 +3007,10 @@
                         <div>
                             <p class="d-inline-flex gap-1">
                                 <span>Invoice | </span>
-                                  <span><a href="#" onclick="Intercom('showArticle', 8210506)"> How to add Invoice? </a></span>
-                                  <span><a href="#" onclick="Intercom('showArticle', 8210444)"> How to update Invoice? </a></span>
+                                <span><a href="#" onclick="Intercom('showArticle', 8210506)"> How to add Invoice?
+                                    </a></span>
+                                <span><a href="#" onclick="Intercom('showArticle', 8210444)"> How to update Invoice?
+                                    </a></span>
                             </p>
                         </div>
                         <!-- Row -->
@@ -3714,15 +3804,15 @@
         <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
         <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
         <script>
-        //             // $(document).ready(function() {
+            //             // $(document).ready(function() {
 
 
-        // $(function() {
-        // $('#sidebar-placeholder').load('./sidebar.html');
-        // });
-        // $(function() {
-        // $('#navbar-placeholder').load('./header.html');
-        // });})
+            // $(function() {
+            // $('#sidebar-placeholder').load('./sidebar.html');
+            // });
+            // $(function() {
+            // $('#navbar-placeholder').load('./header.html');
+            // });})
         </script>
         <!-- SPARKLINE JS-->
         <script src="../assets/js/jquery.sparkline.min.js"></script>
@@ -3753,6 +3843,7 @@
 
         <!-- INTERNAL SELECT2 JS -->
         <script src="../assets/plugins/select2/select2.full.min.js"></script>
+        <script src="../assets/js/select2.js"></script
 
         <!-- INTERNAL Data tables js-->
         <script src="../assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
@@ -3786,10 +3877,10 @@
         <!-- Color Theme js -->
         <script src="../assets/js/themeColors.js"></script>
 
-    <!-- CUSTOM JS -->
-    <script src="../assets/js/custom.js"></script>
-    <script src="../assets/js/getNotification.js"></script>
-<script src="../assets/js/push_notification.js"></script>
+        <!-- CUSTOM JS -->
+        <script src="../assets/js/custom.js"></script>
+        <script src="../assets/js/getNotification.js"></script>
+        <script src="../assets/js/push_notification.js"></script>
 
         <!-- ############################################# -->
 
@@ -3812,11 +3903,11 @@
         <script src="../assets/js/getNotification.js"></script>
         <script>
             var startDateInput = document.getElementById('startDate');
-    var endDateInput = document.getElementById('endDate');
+            var endDateInput = document.getElementById('endDate');
 
-    startDateInput.addEventListener("change", function() {
-        endDateInput.min = startDateInput.value;
-    });
+            startDateInput.addEventListener("change", function () {
+                endDateInput.min = startDateInput.value;
+            });
             $(document).ready(function () {
 
                 $.ajax({
@@ -4184,7 +4275,7 @@
                                         success: function (response) {
                                             const tenant = tenantData.find(obj => obj.tenantID == selectedTenant)
                                             console.log(tenant)
-                                            
+
                                             invoiceId = response.invoiceId
 
                                             $('#addModal input[type="text"], #addModal input[type="date"], #addModal textarea').val('');
@@ -4450,41 +4541,41 @@
                         const options = { year: 'numeric', month: 'short', day: 'numeric' };
                         return date.toLocaleDateString('en-US', options);
                     }
-                    
-                    if(type=="all"){
-                        var filteredData=invoiceData
-                    }else{
-                        var filteredData=invoiceData.filter((invoice)=>{
-                        if(invoice.invoiceType==type){
-                            return invoice
-                        }
-                    })
+
+                    if (type == "all") {
+                        var filteredData = invoiceData
+                    } else {
+                        var filteredData = invoiceData.filter((invoice) => {
+                            if (invoice.invoiceType == type) {
+                                return invoice
+                            }
+                        })
                     }
-                    
-                    
-                            var tableBody = $('#table_body');
-                            tableBody.empty();
-                            // console.log(data[0])
-                            let tenantNames = []
 
-                          filteredData?.forEach(function (invoice, index) {
 
-                                var serial = '<td style="font-weight: 600;" class="serial" >' + (index + 1) + '</td>';
-                                var invoiceNumber = '<td class="invoice-id d-none" style="font-weight: 600;">' + invoice.invoiceID + '</td>';
+                    var tableBody = $('#table_body');
+                    tableBody.empty();
+                    // console.log(data[0])
+                    let tenantNames = []
 
-                                var tenantName = '<td class="tenantName" style="font-weight: 600;">' + invoice.firstName + invoice.lastName + `<br><small>${invoice.tPhone}</small>` + '</td>';
-                                var memoDescription = '<td class="memo" style="font-weight: 600;">' + invoice.memo[0].memo + `<br><small>${invoice.invoiceType}</small>` + '</td>';
+                    filteredData?.forEach(function (invoice, index) {
 
-                                var dateObj = new Date(invoice.created_at);
-                                var day = dateObj.getDate();
-                                var month = dateObj.getMonth() + 1;
-                                var year = dateObj.getFullYear();
-                                var invoiceDate = '<td class="date" style="font-weight: 600;">' + day + "/" + month + "/" + year + '</td>';
-                                var propertyName = '<td class="propertyName" style="font-weight: 600;">' + invoice.propertyName + `<br><small>${invoice.tPhone}</small>` + '</td>';
-                                var invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + invoice.totalAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(formatDate(invoice.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(invoice.recurringNextDate))}</small>` + '</td>';
-                                const toShow = invoice.status
-                                var status = `<td class="status" style="font-weight: 600;${invoice.status === "Unpaid" ? 'color:blue;' : 'color:green'}">` + invoice.status + '</td>';
-                                var dropdownMenu = `<td><i class="fe fe-more-vertical three-dots"
+                        var serial = '<td style="font-weight: 600;" class="serial" >' + (index + 1) + '</td>';
+                        var invoiceNumber = '<td class="invoice-id d-none" style="font-weight: 600;">' + invoice.invoiceID + '</td>';
+
+                        var tenantName = '<td class="tenantName" style="font-weight: 600;">' + invoice.firstName + invoice.lastName + `<br><small>${invoice.tPhone}</small>` + '</td>';
+                        var memoDescription = '<td class="memo" style="font-weight: 600;">' + invoice.memo[0].memo + `<br><small>${invoice.invoiceType}</small>` + '</td>';
+
+                        var dateObj = new Date(invoice.created_at);
+                        var day = dateObj.getDate();
+                        var month = dateObj.getMonth() + 1;
+                        var year = dateObj.getFullYear();
+                        var invoiceDate = '<td class="date" style="font-weight: 600;">' + day + "/" + month + "/" + year + '</td>';
+                        var propertyName = '<td class="propertyName" style="font-weight: 600;">' + invoice.propertyName + `<br><small>${invoice.tPhone}</small>` + '</td>';
+                        var invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + invoice.totalAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(formatDate(invoice.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(invoice.recurringNextDate))}</small>` + '</td>';
+                        const toShow = invoice.status
+                        var status = `<td class="status" style="font-weight: 600;${invoice.status === "Unpaid" ? 'color:blue;' : 'color:green'}">` + invoice.status + '</td>';
+                        var dropdownMenu = `<td><i class="fe fe-more-vertical three-dots"
                                                                 data-bs-toggle="dropdown"></i>
 
                                                                 <ul class="dropdown-menu">
@@ -4507,23 +4598,23 @@
                                                         </td>`
 
 
-                                var row = '<tr>' + serial + invoiceNumber + tenantName + memoDescription + invoiceDate +
-                                    propertyName + invoiceAmount + status + dropdownMenu + '</tr>';
+                        var row = '<tr>' + serial + invoiceNumber + tenantName + memoDescription + invoiceDate +
+                            propertyName + invoiceAmount + status + dropdownMenu + '</tr>';
 
-                                // Append the row to the table body
-                                tableBody.append(row);
-                            });
-                            
+                        // Append the row to the table body
+                        tableBody.append(row);
+                    });
+
                 }
-                $("#allInvoices").click(()=>{
+                $("#allInvoices").click(() => {
                     filterInvoiceData("all")
                 })
-                $("#tenant-one-invocie").click(()=>{
+                $("#tenant-one-invocie").click(() => {
                     filterInvoiceData("One Time Invoice")
                 })
-                $("#tenant-recurring-invocie").click(()=>{
+                $("#tenant-recurring-invocie").click(() => {
                     filterInvoiceData("Recurring Invoice")
-                }) 
+                })
                 $("#tenants,#tenants_update").change(() => {
                     const property = $("#tenants").val()
                     // console.log(property)
@@ -4550,18 +4641,12 @@
           </select>
           <span class="text-danger d-none">State is required!</span>
         </td>
-        <td>
-          <select id="state" name="property" class="form-select form" placeholder="Enter the state" required>
-            <option selected="">Choose...</option>
-            <option value="${propertyName[0].propertyID}">${propertyName[0].propertyName}</option>
-          </select>
-          <span class="text-danger d-none">State is required!</span>
-        </td>
-        <td><input type="text" class="form-control" name="memo"></td>
+       
+        <td><input type="text" class="form-control" name="memo" placeholder="Enter Memo"></td>
         <td><input type="text" class="form-control" name="tax"
                                                     placeholder="Tax associated with this category"
                                                     readonly></td>
-        <td><input type="text" class="form-control" name="amount" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" required></td>
+        <td><input type="text" class="form-control" name="amount" placeholder="Enter Amount" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" required></td>
         <td>
           <button type="button" class="btn" id="del-btn1">
             <i class="fi fi-rs-trash text-danger fs-5"></i>
@@ -4662,17 +4747,11 @@
           </select>
           <span class="text-danger d-none">State is required!</span>
         </td>
-        <td>
-          <select id="state" name="property" class="form-select form" placeholder="Enter the state" required>
-            <option selected="">Choose...</option>
-          </select>
-          <span class="text-danger d-none">State is required!</span>
-        </td>
-        <td><input type="text" class="form-control" name="memo"></td>
+        <td><input type="text" class="form-control" name="memo" placeholder="Enter Memo"></td>
         <td><input type="text" class="form-control" name="tax"
                                                     placeholder="Tax associated with this category"
                                                     readonly></td>
-        <td><input type="text" class="form-control" name="amount" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" required></td>
+        <td><input type="text" class="form-control" name="amount" placeholder="Enter Amount" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" required></td>
         <td>
           <button type="button" class="btn" id="del-btn1">
             <i class="fi fi-rs-trash text-danger fs-5"></i>
@@ -4692,18 +4771,12 @@
           </select>
           <span class="text-danger d-none">State is required!</span>
         </td>
-        <td>
-          <select id="state" name="property" class="form-select form" placeholder="Enter the state" required>
-            <option selected="">Choose...</option>
-            <option value="${propertyName[0].propertyID}">${propertyName[0].propertyName}</option>
-          </select>
-          <span class="text-danger d-none">State is required!</span>
-        </td>
-        <td><input type="text" class="form-control" name="memo"></td>
+
+        <td><input type="text" class="form-control" name="memo" placeholder="Enter Memo"></td>
         <td><input type="text" class="form-control" name="tax"
                                                     data-bs-placement="top" placeholder="Tax Associated With This Category"
                                                     readonly></td>
-        <td><input type="text" class="form-control" name="amount" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" required></td>
+        <td><input type="text" class="form-control" name="amount" placeholder="Enter Amount" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" required></td>
         <td>
           <button type="button" class="btn" id="del-btn1">
             <i class="fi fi-rs-trash text-danger fs-5"></i>
@@ -4830,7 +4903,7 @@
 
                             if (!isNaN(numericValue)) {
                                 console.log(tax)
-                                total += numericValue + ((numericValue * parseFloat(tax=="" ? 0 : tax)) / 100);
+                                total += numericValue + ((numericValue * parseFloat(tax == "" ? 0 : tax)) / 100);
 
                                 console.log(total)
                             }
@@ -5121,7 +5194,7 @@
                     })
                     $("#viewModal").modal("show")
                 })
-                
+
                 $(document).on('click', ".view-btnn", function (e) {
                     e.preventDefault();
 
@@ -5783,11 +5856,11 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function ({ image }) {
-                        if(image!==" " && image!==null){
-                
-                $("#user-img").attr("src", image)
-                $("#user-img-dark").attr("src", image)
-            }
+                        if (image !== " " && image !== null) {
+
+                            $("#user-img").attr("src", image)
+                            $("#user-img-dark").attr("src", image)
+                        }
                     },
                     error: function (xhr, status, error) {
                         $("#myModal_warning").modal("show");
@@ -5823,6 +5896,40 @@
                 });
             })
         </script>
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+        <!-- select option image and text start  -->
+        <script>
+            $(document).ready(function () {
+                $('.js-example-basic-single').select2({
+                    templateResult: formatOption
+                });
+            });
+
+            function formatOption(option) {
+                if (!option.id) {
+                    return option.text;
+                }
+
+                var $option = $(
+                    '<span><img src="' + $(option.element).data('image') + '" class="img-option" /> ' + option.text + '</span>'
+                );
+
+                return $option;
+            }
+
+        </script>
+        <!-- select option image and text End  -->
+
+        <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.3.1/dist/semantic.min.js"></script>
+        <script>
+            $('.ui.dropdown')
+                .dropdown()
+                ;
+        </script>
+
 </body>
 
 </html>
