@@ -988,6 +988,7 @@ exports.addVendorCategory = async (req, res) => {
     else{
       res.status(201).json({
         message: "Categories Already Exist",
+        insertedCategories: categoryCheckResult[0][0].id
       });
     }
   } catch (error) {
