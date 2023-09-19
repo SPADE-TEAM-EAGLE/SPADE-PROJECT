@@ -1549,7 +1549,7 @@
                                                         </div>
                                                         <div class="media-body">
                                                             <!-- <h6 class="font-weight-semibold mb-1">Web Designer at <a href="javascript:void(0)" class="btn-link">Spruko</a></h6> -->
-                                                            <span style="color: #727272;">No Contact Info on File</span>
+                                                            <span style="color: #727272;" id="tenant-text">No Contact Info on File</span>
                                                             <br>
                                                             <!-- <p>Past Work: Spruko, Inc.</p> -->
                                                             <a href="javascript:void(0)" class="btn-link add-contactInfo" style="font-weight: bold;" id="tenant-email"></a><br>
@@ -1575,7 +1575,7 @@
                                                         </div>
                                                         <div class="media-body">
                                                             <!-- <h6 class="font-weight-semibold mb-1">Web Designer at <a href="javascript:void(0)" class="btn-link">Spruko</a></h6> -->
-                                                            <span style="color: #727272;">No Emergency Contacts on File</span>
+                                                            <span style="color: #727272;" id="contact-text">No Emergency Contacts on File</span>
                                                             <br>
                                                             <!-- <p>Past Work: Spruko, Inc.</p> -->
                                                             <a href="javascript:void(0)" class="btn-link add-contactInfo" style="font-weight: bold;">+ Add New</a>
@@ -1602,7 +1602,7 @@
                                                         </div>
                                                         <div class="media-body">
                                                             <!-- <h6 class="font-weight-semibold mb-1">Web Designer at <a href="javascript:void(0)" class="btn-link">Spruko</a></h6> -->
-                                                            <span style="color: #727272;">Status: Inactive</span>
+                                                            <span style="color: #727272;" id="status-text">Status: Inactive</span>
                                                             <br>
                                                             <!-- <p>Past Work: Spruko, Inc.</p> -->
                                                             <a href="javascript:void(0)" class="btn-link" style="font-weight: bold;" id="send-invite">+ Send Invite to Tenant Portal                                                            </a>
@@ -2508,9 +2508,13 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                 success: function({
                     data
                 }) {
+                    if(data[0].length>0){
+                        $("#tenant-text").text(" ")
+                    $("#contact-text").text(" ")
                     $("#tenant-email").text(data[0][0].tEmail)
                     $("#tenant-phone").text(data[0][0].tPhoneNumber)
                     $(".company-name").text(`${data[0][0].companyName} | ${data[0][0].firstName+" "+data[0][0].lastName}`)
+                    }
                 },
                 error: function(xhr, status, error) {
                     $("#myModal_warning_connection").modal("show");
