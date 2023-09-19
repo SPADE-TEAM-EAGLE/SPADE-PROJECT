@@ -2502,7 +2502,8 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                 error: {}
             })
             
-            $.ajax({
+            function getData(){
+                $.ajax({
                 url: 'http://localhost:3000/api/spade/GettenantAttachFile',
                 type: 'GET',
                 data: {
@@ -2524,6 +2525,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                 }
             })
             
+            }
             
             $("#submit-pics").click(() => {
                 $("#submit-pics").prop("disabled", true)
@@ -2566,6 +2568,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                                }else{
                                     $("#infoModal").modal("show")
                                }
+                               getData()
                                 // $(".company-name").text(`${data[0][0].companyName} | ${data[0][0].firstName+" "+data[0][0].lastName}`)
                             },
                             error: function (xhr, status, error) {
