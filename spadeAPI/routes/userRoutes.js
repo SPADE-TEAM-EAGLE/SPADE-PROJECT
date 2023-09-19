@@ -99,8 +99,8 @@ router.put('/resendCodeTenants', tenantController.resendCodeTenants);
 router.post('/addAlternateEmailPhone', verifyToken, tenantController.addAlternateEmailPhone);
 router.post('/tenantAttachFile', verifyToken, tenantController.tenantAttachFile); 
 router.delete('/tenantAttachFileDelete', verifyToken, tenantController.tenantAttachFileDelete);
-// router.get('/GettenantAttachFile', verifyToken, tenantController.GettenantAttachFile);
-router.get('/GettenantAttachFile', verifyToken,tenantController.GettenantAttachFile);
+router.get('/GettenantAttachFile', verifyToken, tenantController.GettenantAttachFile);
+// router.get('/GettenantAttachFile', tenantController.GettenantAttachFile);
 router.delete('/tenantDelete', verifyToken, tenantController.tenantDelete);
 // router.delete('/tenantDelete', tenantController.tenantDelete);
 router.get('/getTenantsByID', verifyToken, tenantController.getTenantsByID);
@@ -116,6 +116,7 @@ router.post("/addVendor", verifyToken, taskController.addVendors);
 router.put("/updateVendor", verifyToken, taskController.updateVendor); //=> **********  update vendor
 router.delete("/deleteVendor/:vendorID", verifyToken, taskController.deleteVendor); //=> **********  delete vendor
 router.post("/addVendorCategory", verifyToken, taskController.addVendorCategory);
+// router.post("/addVendorCategory", taskController.addVendorCategory);
 // router.get("/getAllVendors",verifyToken ,taskController.getAllVendors);
 router.get("/getAllVendors", verifyToken, taskController.getAllVendors);
 router.post("/addTasks", verifyToken, taskController.addTasks);

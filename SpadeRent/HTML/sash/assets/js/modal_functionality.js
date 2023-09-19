@@ -51,7 +51,7 @@ function checkFieldsStatus(accordionId) {
     }
 }
 
-let counter = 0
+var counter = 0
 function checkFieldsFilled(id) {
     const status = checkFieldsStatus(id)
     if (id === "accordion-item2" && counter === 0) {
