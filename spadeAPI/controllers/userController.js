@@ -458,6 +458,12 @@ exports.updateUserProfile = async function (req, res) {
     businessAddress,
     imageUrl,
     imageKey,
+    PACity,
+    PAState,
+    PAZipcode,
+    BACity,
+    BAState,
+    BAZipcode
   } = req.body;
   const { userId } = req.user;
   console.log(req.body);
@@ -489,6 +495,12 @@ exports.updateUserProfile = async function (req, res) {
         businessAddress,
         imageUrl,
         imageKey,
+        PACity,
+        PAState,
+        PAZipcode,
+        BACity,
+        BAState,
+        BAZipcode,
         userId,
       ];
       const updateResult = await queryRunner(updateUser, updateUserParams);
@@ -1640,17 +1652,18 @@ exports.viewPropertyTenant = async (req, res) => {
     console.log(error);
   }
 };
+
 exports.viewAllPropertyTenant = async (req, res) => {
   try {
     const { userId, userName } = req.user;
     // const { userId, userName } = req.body;
     // const {id} = req.query;
-    // console.log(req)
+    // console.log(userId);
     // console.log(req.user);
     let PropertyTenantResult;
     // console.log(id)
     PropertyTenantResult = await queryRunner(selectAllTenants, [userId]);
-    console.log(PropertyTenantResult[0]);
+    // console.log(PropertyTenantResult[0]);
     if (PropertyTenantResult[0].length > 0) {
       for (let i = 0; i < PropertyTenantResult[0].length; i++) {
         const tenantID = PropertyTenantResult[0][i].tenantID;
@@ -1681,8 +1694,8 @@ exports.viewAllPropertyTenant = async (req, res) => {
       });
     }
   } catch (error) {
-    res.send("Error Get Property Tenant data");
-    console.log(error);
+    res.send("Error Get Property Tenant data" + error);
+    // console.log(error);
   }
 };
 //  ############################# Get Property and tenant data End ############################################################

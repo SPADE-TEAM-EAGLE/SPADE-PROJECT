@@ -2496,13 +2496,35 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                 success: function ({
                     data
                 }) {
-                    if(data.images==''){
-                        window.location = './tenant-attach-file.html?tenant='+encodedTenantId;
-                    }
+                    
                     $(".company-name").text(`${data[0][0].companyName} | ${data[0][0].firstName + " " + data[0][0].lastName}`)
                 },
                 error: {}
             })
+            
+            $.ajax({
+                url: 'http://localhost:3000/api/spade/GettenantAttachFile',
+                type: 'GET',
+                data: {
+                    tenantID: tenantId
+                },
+                contentType: "application/json; charset=utf-8",
+                // processData: false,
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function ({
+                    data
+                }) {
+                   
+                        window.location = './tenant-attach-file.html?tenant='+encodedTenantId;
+                    
+                },
+                error: function(){
+                }
+            })
+            
+            
             $("#submit-pics").click(() => {
                 $("#submit-pics").prop("disabled", true)
                 var formData = new FormData();
