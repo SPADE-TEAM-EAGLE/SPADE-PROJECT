@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt");
 const fs = require("fs");
 const Path = require("path");
 const imageToDelete = require("./../middleware/deleteImage.js");
+const {deleteImageFromS3} = require("./../helper/S3Bucket.js")
 const { serialize } = require("cookie");
 const {
   selectQuery,
@@ -550,13 +551,12 @@ exports.tenantAttachFileDelete = async (req, res) => {
     // const { id,userId } = req.body
     const { userId } = req.user;
     const attachFileResult = await queryRunner(
-      selectQuery("tenantattachfiles", "id"),
-      [id]
-    );
+      selectQuery("tenantattachfiles", "id"), [id]);
     if (attachFileResult[0].length > 0) {
-      const file = attachFileResult[0][0].fileName;
+      const file = attachFileResult[0][0].ImageKey;
       // delete folder images Start
-      imageToDelete([file]);
+      // imageToDelete([file]);
+      deleteImageFromS3(file);
       // delete folder images End
       const PropertyDeleteResult = await queryRunner(
         deleteQuery("tenantattachfiles", "id", "landlordID"),
@@ -583,7 +583,7 @@ exports.tenantAttachFileDelete = async (req, res) => {
 //  ############################# get all Tenant Attach File Start ############################################################
 exports.GettenantAttachFile = async (req, res) => {
   const { tenantID } = req.body; 
-  
+
   try {
       const GettenantAttachFileResult = await queryRunner(getTenantAttachFile, [tenantID]);
       if (GettenantAttachFileResult[0].length === 0) {
