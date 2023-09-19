@@ -35,6 +35,7 @@ const {
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
 const { file } = require("googleapis/build/src/apis/file");
+const { deleteImageFromS3 } = require("../helper/S3Bucket");
 const config = process.env;
 
 //  ############################# Create tenants Start ############################################################
@@ -546,6 +547,7 @@ exports.tenantAttachFile = async (req, res) => {
 //  ############################# Delete Tenant Attach File Start ############################################################
 exports.tenantAttachFileDelete = async (req, res) => {
   try {
+    console.log(req.body)
     const { id } = req.body;
     // const { id,userId } = req.body
     const { userId } = req.user;
@@ -554,9 +556,9 @@ exports.tenantAttachFileDelete = async (req, res) => {
       [id]
     );
     if (attachFileResult[0].length > 0) {
-      const file = attachFileResult[0][0].fileName;
+      const file = attachFileResult[0][0].ImageKey;
       // delete folder images Start
-      imageToDelete([file]);
+      deleteImageFromS3(file);
       // delete folder images End
       const PropertyDeleteResult = await queryRunner(
         deleteQuery("tenantattachfiles", "id", "landlordID"),
@@ -584,7 +586,6 @@ exports.tenantAttachFileDelete = async (req, res) => {
 exports.GettenantAttachFile = async (req, res) => {
   const { tenantID } = req.query; 
   try {
-
       const GettenantAttachFileResult = await queryRunner(getTenantAttachFile, [tenantID]);
       if (GettenantAttachFileResult[0].length === 0) {
         throw new Error("No data Found in tenant attach file");
