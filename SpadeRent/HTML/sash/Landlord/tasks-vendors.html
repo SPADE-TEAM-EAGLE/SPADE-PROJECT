@@ -968,13 +968,15 @@ color: #000;
                                 <select class="form-select form" id="category" required>
                                     <option selected>Choose...</option>
                                 </select>
+                                <span class="text-primary" id="addCatBtn" style="cursor: pointer;">Add New
+                                    Category!</span>
                                 <span class="text-danger d-none">Category is required!</span>
                             </div>
                             <div class="col-12" id="add_category_col" style="display: none;">
                                 <label for="inputEmail3" class="form-label fw-bold">Add New Category</label>
                                 <input class="form-control form" type="text" id="add_category_input"
-                                    placeholder="Enter New Category">
-                                <span class="text-danger d-none">Zip code is required!</span>
+                                    placeholder="Enter New Category" >
+                                <span class="text-danger d-none">New Category is required!</span>
                             </div>
 
                         </form>
@@ -2710,6 +2712,33 @@ color: #000;
     <script>
         var vendorID;
         $(document).ready(() => {
+            $('#addCatBtn').click(() => {
+                var categoryCol = $('#add_category_col');
+                var currentDisplayStyle = categoryCol.css('display');
+
+                if (currentDisplayStyle === 'block') {
+                    categoryCol.css('display', 'none');
+                    $('#addCatBtn').text('Add New Category!');
+                    $("#category").prop("disabled", false);
+                    $("#category").prop("required", true);
+                } else {
+                    $("#category").prop("disabled", true);
+                    categoryCol.css('display', 'block');
+                    $('#addCatBtn').text('Close The Field!');
+                    $("#category").prop("required", false);
+                }
+            });
+            $("#category").change(function(){
+                
+                if($("#category").val() != "Choose..."){
+                    $('#addCatBtn').css('display',"none")
+                }else{
+                    $('#addCatBtn').css('display',"inline")
+
+                }
+            })
+
+
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/protected',
                 method: 'GET',
@@ -2781,56 +2810,67 @@ color: #000;
                 $("#category option:first").prop("selected", true);
                 $("#category_update option:first").prop("selected", true);
             }
+            function getVendorCategoryFunction() {
+                $.ajax({
+                    url: 'https://backend.app.spaderent.com/api/spade/getVendorCategory',
+                    type: 'GET',
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
 
-            $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getVendorCategory',
-                type: 'GET',
-                contentType: false,
-                processData: false,
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                },
-
-                success: function (response) {
-                    console.log(response.data)
-                    $("#category").empty()
-
-                    if (response?.data?.length === 0) {
-                        $("#category").append($('<option></option>').text("Add vendor categories first!!"))
-                    } else {
-                        $("#category").append($('<option></option>').text("Choose..."))
-                        response.data.forEach((category) => {
-                            $("#category").append($('<option></option>').text(category.category).val(category.id))
-                        })
-                    }
-                    $("#category option:first").prop("selected", true);
-                    $("#category_update").empty()
-
-                    if (response?.data?.length === 0) {
-                        $("#category_update").append($('<option></option>').text("Add vendor categories first!!"))
-                    } else {
-                        $("#category_update").append($('<option></option>').text("Choose..."))
-                        response.data.forEach((category) => {
-                            $("#category_update").append($('<option></option>').text(category.category).val(category.id))
-                        })
-                    }
-
-                    // console.log(1)
-                    // getData()
-                    // $('#succesModal').modal('show')
-                    // window.location = '../Landlord/properties-all.html';
-                },
-                error: function (xhr, status, error) {
-                    if (xhr.responseJSON.message == "No vendor category data found") {
+                    success: function (response) {
+                        console.log(response.data)
                         $("#category").empty()
-                        $("#category").prop("disabled", true);
-                        $("#category").append($('<option></option>').text("Add vendor categories first!!"))
-                        $("#add_category_col").show()
 
+                        if (response?.data?.length === 0) {
+                            $("#category").prop("disabled", true);
+                            $("#category").append($('<option></option>').text("Add vendor categories first!!"))
+                            $("#add_category_col").show()
+
+                        } else {
+                            $('#addCatBtn').css('display',"inline")
+                            $("#add_category_col").hide()
+                            $("#category").prop("disabled", false);
+                            $("#category").append($('<option></option>').text("Choose..."))
+                            response.data.forEach((category) => {
+                                $("#category").append($('<option></option>').text(category.category).val(category.id))
+                            })
+                        }
+                        $("#category option:first").prop("selected", true);
+                        $("#category_update").empty()
+
+                        if (response?.data?.length === 0) {
+                            $("#category_update").append($('<option></option>').text("Add vendor categories first!!"))
+                            $("#add_category_col").show()
+
+                        } else {
+                            $("#add_category_col").hide()
+
+                            $("#category_update").append($('<option></option>').text("Choose..."))
+                            response.data.forEach((category) => {
+                                $("#category_update").append($('<option></option>').text(category.category).val(category.id))
+                            })
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        if (xhr.responseJSON.message == "No vendor category data found") {
+                            $("#category").empty()
+                            $("#category").prop("disabled", true);
+                            $("#category").append($('<option></option>').text("Add vendor categories first!!"))
+                            $("#add_category_col").show()
+                            $('#addCatBtn').css('display',"none")
+
+                        }
                     }
-                }
-            });
+                });
 
+
+
+            }
+
+            getVendorCategoryFunction()
             $(document).on('click', '#next', function (e) {
                 e.preventDefault()
                 // selectedFiles = []
@@ -2914,6 +2954,8 @@ color: #000;
                                         $("#addModal").modal("hide")
                                         $("#succesModal").modal("show");
                                         getData()
+                                        getVendorCategoryFunction()
+                                        $('#addCatBtn').text('Add New Category!');
                                         setTimeout(function () {
                                             $("#succesModal").modal("hide");
                                         }, 2000);
@@ -2944,73 +2986,177 @@ color: #000;
                     });
 
 
-                }else{
+                } else {
 
                     // console.log(category);
-    
-                    // Add the form data to the FormData object
-                    formData.append('firstName', firstName);
-                    formData.append('lastName', lastName);
-                    formData.append('businessName', businessName);
-                    formData.append('streetAddress', streetAddress);
-                    formData.append('city', city);
-                    // formData.append('status', status);
-                    formData.append('zip', zip);
-                    formData.append('phone', phone);
-                    formData.append('workPhone', workPhone);
-                    formData.append('email', email);
-                    formData.append('categoryID', category);
-                    // formData.append('categoryID', 2);
-                    console.log(status)
-                    $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/addVendor',
+                    var categoryCol = $('#add_category_col');
+                    var currentDisplayStyle = categoryCol.css('display');
+
+                    if (currentDisplayStyle === 'block' && ($('#add_category_input').val()) != "" ) {
+                        $.ajax({
+                        url: 'http://localhost:3000/api/spade/addVendorCategory',
                         type: 'POST',
                         data: JSON.stringify({
-                            firstName: firstName,
-                            lastName: lastName,
-                            businessName: businessName,
-                            streetAddress: streetAddress,
-                            city: city,
-                            // status: status,
-                            zip: zip,
-                            phone: phone,
-                            workPhone: workPhone,
-                            // status: status,
-                            email: email,
-                            // formData.append(categoryID:category),
-                            categoryID: category
+                            categories: $('#add_category_input').val()
                         }),
                         contentType: "application/json; charset=utf-8",
                         processData: false,
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
-    
+
                         success: function (response) {
-                            console.log(response)
-                            if (response == "Vendor already exists") {
-                                $("#infoModal").modal("show");
-                            } else if (response.message == " Vendor created successful") {
-                                GetNotification();
-                                $("#addModal").modal("hide")
-                                $("#succesModal").modal("show");
-                                getData()
-                                setTimeout(function () {
-                                    $("#succesModal").modal("hide");
-                                }, 2000);
-                            }
-                            resetAccordions()
-    
+                            console.log("addVendorCategory");
+                            console.log(response.insertedCategories);
+                            category = response.insertedCategories
+                            // Add the form data to the FormData object
+                            formData.append('firstName', firstName);
+                            formData.append('lastName', lastName);
+                            formData.append('businessName', businessName);
+                            formData.append('streetAddress', streetAddress);
+                            formData.append('city', city);
+                            // formData.append('status', status);
+                            formData.append('zip', zip);
+                            formData.append('phone', phone);
+                            formData.append('workPhone', workPhone);
+                            formData.append('email', email);
+                            formData.append('categoryID', category);
+                            // formData.append('categoryID', 2);
+                            console.log(status)
+                            $.ajax({
+                                url: 'https://backend.app.spaderent.com/api/spade/addVendor',
+                                type: 'POST',
+                                data: JSON.stringify({
+                                    firstName: firstName,
+                                    lastName: lastName,
+                                    businessName: businessName,
+                                    streetAddress: streetAddress,
+                                    city: city,
+                                    // status: status,
+                                    zip: zip,
+                                    phone: phone,
+                                    workPhone: workPhone,
+                                    // status: status,
+                                    email: email,
+                                    // formData.append(categoryID:category),
+                                    categoryID: category
+                                }),
+                                contentType: "application/json; charset=utf-8",
+                                processData: false,
+                                headers: {
+                                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                                },
+
+                                success: function (response) {
+                                    console.log(response)
+                                    if (response == "Vendor already exists") {
+                                        $("#infoModal").modal("show");
+                                    } else if (response.message == " Vendor created successful") {
+                                        GetNotification();
+                                        $("#addModal").modal("hide")
+                                        $("#succesModal").modal("show");
+                                        getData()
+                                        getVendorCategoryFunction()
+                                        $('#addCatBtn').text('Add New Category!');
+                                        setTimeout(function () {
+                                            $("#succesModal").modal("hide");
+                                        }, 2000);
+                                    }
+                                    resetAccordions()
+
+                                },
+                                error: function (xhr, status, error) {
+                                    //     $("#myModal_warning_connection").modal("show");
+                                    //         setTimeout(function() {
+                                    //             $('#myModal_warning_connection').modal('hide');
+
+                                    //         }, 2000);
+                                    // console.log(xhr.responseText);
+                                }
+                            });
+
+
                         },
                         error: function (xhr, status, error) {
-                            //     $("#myModal_warning_connection").modal("show");
-                            //         setTimeout(function() {
-                            //             $('#myModal_warning_connection').modal('hide');
-    
-                            //         }, 2000);
-                            // console.log(xhr.responseText);
+                            $("#myModal_warning_connection").modal("show");
+                            setTimeout(function () {
+                                $('#myModal_warning_connection').modal('hide');
+
+                            }, 2000);
+                            console.log(xhr.responseText);
                         }
                     });
+
+
+                    }else{
+
+                        // Add the form data to the FormData object
+                        formData.append('firstName', firstName);
+                        formData.append('lastName', lastName);
+                        formData.append('businessName', businessName);
+                        formData.append('streetAddress', streetAddress);
+                        formData.append('city', city);
+                        // formData.append('status', status);
+                        formData.append('zip', zip);
+                        formData.append('phone', phone);
+                        formData.append('workPhone', workPhone);
+                        formData.append('email', email);
+                        formData.append('categoryID', category);
+                        // formData.append('categoryID', 2);
+                        console.log(status)
+                        $.ajax({
+                            url: 'https://backend.app.spaderent.com/api/spade/addVendor',
+                            type: 'POST',
+                            data: JSON.stringify({
+                                firstName: firstName,
+                                lastName: lastName,
+                                businessName: businessName,
+                                streetAddress: streetAddress,
+                                city: city,
+                                // status: status,
+                                zip: zip,
+                                phone: phone,
+                                workPhone: workPhone,
+                                // status: status,
+                                email: email,
+                                // formData.append(categoryID:category),
+                                categoryID: category
+                            }),
+                            contentType: "application/json; charset=utf-8",
+                            processData: false,
+                            headers: {
+                                'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                            },
+    
+                            success: function (response) {
+                                console.log(response)
+                                if (response == "Vendor already exists") {
+                                    $("#infoModal").modal("show");
+                                } else if (response.message == " Vendor created successful") {
+                                    GetNotification();
+                                    $("#addModal").modal("hide")
+                                    $("#succesModal").modal("show");
+                                    getData()
+                                    $('#addCatBtn').text('Add New Category!');
+                                    setTimeout(function () {
+                                        $("#succesModal").modal("hide");
+                                    }, 2000);
+                                }
+                                resetAccordions()
+    
+                            },
+                            error: function (xhr, status, error) {
+                                //     $("#myModal_warning_connection").modal("show");
+                                //         setTimeout(function() {
+                                //             $('#myModal_warning_connection').modal('hide');
+    
+                                //         }, 2000);
+                                // console.log(xhr.responseText);
+                            }
+                        });
+                  
+                  
+                    }
                 }
 
 
@@ -3291,7 +3437,17 @@ color: #000;
 
 
                 var allFieldsFilled = areAllFieldsFilled();
+                var inputFieldCol = $("#add_category_col");
+                var inputField = $("#add_category_input");
 
+                var displayStyle = inputFieldCol.css("display");
+                var inputValue = inputField.val();
+
+                if (displayStyle == "block" && inputValue == "") {
+                    console.log(displayStyle);
+                    allFieldsFilled = false;
+                }
+                console.log(allFieldsFilled);
                 // Enable or disable the buttons based on the fields' status
                 if (allFieldsFilled) {
                     $('#next').removeClass("disabled");
@@ -3304,7 +3460,7 @@ color: #000;
             }
 
             // Call the updateButtonStatus function when any field in the accordions is changed
-            $('#addModal input[required], #addModal select[required]').on('input change', function () {
+            $('#addModal input[required], #addModal select[required], #add_category_input').on('input change', function () {
                 var $field = $(this);
                 var $errorMessage = $field.next('.text-danger');
                 if ($field.attr("id") === "zip") {
