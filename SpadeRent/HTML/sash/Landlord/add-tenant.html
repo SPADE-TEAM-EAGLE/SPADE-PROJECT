@@ -1396,7 +1396,7 @@
 
                                         </select>
                                         <span id="addUnitBtn" class="mt-3" style="display: none;"><a
-                                                href="javascript:void(0)   " id="addUnitAnchor">Add Units!</a></span>
+                                                href="javascript:void(0)" id="addUnitAnchor">Add Units!</a></span>
                                         <span class="text-danger d-none">Property units is required!</span>
                                     </div>
                                     <div class="col-md-4">
@@ -2970,7 +2970,7 @@
     <!-- INTERNAL APEXCHART JS -->
     <script src="../assets/js/apexcharts.js"></script>
     <script src="../assets/plugins/apexchart/irregular-data-series.js"></script>
-    <script src="../assets/js/accordian.js"></script>
+    <script src="../assets/js/accordian.js"></script> 
 
     <!-- INTERNAL Flot JS -->
     <script src="../assets/plugins/flot/jquery.flot.js"></script>
@@ -4076,7 +4076,7 @@
                 }
             }
 
-            let counter = 0
+            var counter = 0
 
             function checkFieldsFilled(id) {
                 console.log(id)
@@ -4825,7 +4825,9 @@
                             propertyUnitSelect.prop("disabled", true);
                             propertyUnitSelect.append($('<option></option>')
                                 .text("No unit available!!"))
+                                $('#addUnitBtn').show()
                         } else {
+                            $('#addUnitBtn').hide()
                             propertyUnitSelect.prop("disabled", false);
                             propertyUnitSelect.append($('<option></option>')
                                 .text("Choose..."))
@@ -5142,31 +5144,30 @@
         });
     </script>
 
-    <script>
-        $(document).ready(() => {
-            $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
-                method: 'GET',
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                },
-                success: function (response) {
-                    console.log("here")
-                    if (response.message == "Email is verified") {
-                        $("#account-text").remove()
-                        $("#email_verification").remove()
-                    }
-                },
-                error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
-                    // console.log('Error occurred while fetching state and city data.');
+<script>
+    $(document).ready(()=>{
+        $.ajax({
+            url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+            },
+            success: function (response) {
+                console.log("here")
+                if(response.message=="Email is verified"){
+                    $("#account-text").remove()
+                      $("#email_verification").remove()
                 }
             },
-            );
-        })
-    </script>
+            error: function (xhr, status, error) {
+                console.log('Error occurred while fetching state and city data.');
+                console.log(xhr);
+                console.log(error);
+                // console.log('Error occurred while fetching state and city data.');
+            }
+        });
+    })
+</script>
 
     <script>
         // Get all elements with the class name 'myCheckbox' and 'myButton'

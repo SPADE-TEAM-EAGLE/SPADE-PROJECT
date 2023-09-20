@@ -952,6 +952,8 @@ color: #000;
                                         <option selected>Choose...</option>
                                         
                                     </select>
+                                    <span id="addUnitBtn" class="mt-3" style="display: none;"><a
+                                        href="javascript:void(0)" id="addUnitAnchor">Add Units!</a></span>
                                         <span class="text-danger d-none">Property units is required!</span>
                                     </div>
                                     <div class="col-md-4">
@@ -1123,6 +1125,69 @@ color: #000;
                     <!-- <button class="btn text-light button" style='background-color:#1467B0;' id='next'>Next</button> -->
                     <button class="btn text-light button d-none" style='background-color:#1467B0;' id='submit'>Submit</button>
                     <button class="btn text-light button d-none" style='background-color:#1467B0;' id='save'>Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addModal_units" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="text-justify ps-2 border-model-line title-text">
+                        <h2 class="modal-title">Add <strong class="color-primary" id="title-sub">New Units</strong>
+                        </h2>
+                        <span class="">Post your properties to thousands of potential investors,
+                            tenants and interested individuals.</span>
+                    </div>
+                    <button type="button" class="btn btn-primary me-4 mt-3 d-none" id="edit-btn"><i
+                            class="fi fi-rs-pencil" style="display:block"></i><small>Edit Details</small></button>
+                    <!-- <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                    </button> -->
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card inner-cards">
+                                <div class="card-header justify-content-start">
+                                    <button class="btn btn-primary btn-pill pt-1 pb-1 done-option1" id="add-units1">Add
+                                        Units</button>
+                                </div>
+                                <div class="card-body p-0">
+                                    <div class="table-responsive">
+                                        <table id="key-table" class="table table-bordered text-nowrap mb-0 ">
+                                            <thead>
+                                                <tr>
+                                                    <th colspan="1" class="d-none">UNIT.ID</th>
+                                                    <th colspan="1">UNIT.NUMBER</th>
+                                                    <th colspan="1">Status</th>
+                                                    <th colspan="1">Unit number</th>
+                                                    <th colspan="1">Area</th>
+                                                    <th colspan="3">UNIT DETAILS</th>
+                                                    <th colspan="1">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <!-- <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
+                        Draft</button> -->
+                    <button class="btn btn-outline-default btn-pill" id="addModal_units_close">Close</button>
+                    <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
+                    <!-- <button class="btn text-light button" style='background-color:#1467B0;'
+                       >Next</button>
+                    <button class="btn text-light button d-none" style='background-color:#1467B0;'
+                        >Submit</button>
+                    <button class="btn text-light button d-none" style='background-color:#1467B0;'
+                        >Save</button> -->
                 </div>
             </div>
         </div>
@@ -2335,7 +2400,7 @@ color: #000;
     <script src="../assets/plugins/select2/select2.full.min.js"></script>
 
     <!-- INTERNAL Data tables js-->
-    <script src="../assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
+    <!-- <script src="../assets/plugins/datatable/js/jquery.dataTables.min.js"></script> -->
     <script src="../assets/plugins/datatable/js/dataTables.bootstrap5.js"></script>
     <script src="../assets/plugins/datatable/dataTables.responsive.min.js"></script>
 
@@ -2483,6 +2548,378 @@ color: #000;
     <script>
         var selectedFiles = [];
         $(document).ready(function() {
+            var propertyId2;
+            $('#addUnitAnchor').click(() => {
+                propertyId2 = $('#property').val()
+                getData2()
+            })
+            $('#addModal_units_close').click(() => {
+                // alert(1)
+                $.ajax({
+                    url: 'https://backend.app.spaderent.com/api/spade/getPropertyUnitsTenant',
+                    type: 'GET',
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        var properties = response.data; // Assuming the response data is an array of property objects
+                        console.log("property", response.data)
+                        // Populate Select Property dropdown
+                        var propertySelect = $('#property');
+                        propertySelect.empty(); // Clear existing options
+                        propertySelect.append($('<option></option>')
+                            .text("Choose...")
+                        )
+                        properties.forEach(function (property) {
+                            var option = $('<option></option>')
+                                .text(property.propertyName)
+                                .val(property.id);
+                            propertySelect.append(option);
+                        });
+
+                        // Handle property selection change
+                        propertySelect.change(function () {
+                            var selectedPropertyId = $(this).val();
+
+                            // Find the selected property object
+                            var selectedProperty = properties.find(function (property) {
+                                return property.id == selectedPropertyId;
+                            });
+
+                            // Populate Select Property Unit dropdown
+                            var propertyUnitSelect = $('#unit');
+                            // Clear existing options
+                            propertyUnitSelect.empty()
+
+
+                            if (selectedProperty.vacantUnits.length === 0) {
+
+                                propertyUnitSelect.prop("disabled", true);
+                                propertyUnitSelect.append($('<option></option>')
+                                    .text("No unit available!!"))
+                                    $('#addUnitBtn').show()
+                            } else {
+                                $('#addUnitBtn').hide()
+                                propertyUnitSelect.prop("disabled", false);
+                                propertyUnitSelect.append($('<option></option>')
+                                    .text("Choose..."))
+
+                                selectedProperty.vacantUnits.forEach(function (unit) {
+
+                                    var option = $('<option></option>')
+                                        .text(unit.unitNumber)
+                                        .val(unit.id);
+                                    propertyUnitSelect.append(option);
+                                });
+                            }
+
+                        });
+                        $('#addUnitBtn').hide()
+                        $('#addModal_units').modal('hide')
+
+                    },
+                    error: function (xhr, status, error) {
+                        $("#myModal_warning_connection").modal("show");
+                        setTimeout(function () {
+                            $('#myModal_warning_connection').modal('hide');
+
+                        }, 2000);
+                        console.log('Error: ' + error);
+                    }
+                });
+            })
+
+            function getData2() {
+                $.ajax({
+                    url: 'https://backend.app.spaderent.com/api/spade/PropertyUnits',
+                    type: 'GET',
+                    data: {
+
+                        propertyId: propertyId2
+                    },
+                    contentType: "application/json; charset=utf-8",
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function ({
+                        data,
+                        propertyName,
+                        propertyAddress
+                    }) {
+                        console.log(data)
+
+                        const units = data[0];
+                        function toTitleCase(str) {
+                            return str.replace(/\w\S*/g, function (txt) {
+                                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                            });
+                        }
+
+                        $('#addModal_units').modal('show');
+                        $('#addModal_units').modal({
+                            backdrop: 'static',
+                            keyboard: false
+                        });
+                        const tableBody = $('#key-table tbody');
+                        tableBody.empty();
+                        let unitIdCell, statusCell, unitNumberInput, areaInput;
+                        units.forEach((unit, index) => {
+                            // Create a new table row for each unit
+                            const row = $(`<tr id='${unit.id}'></tr>`);
+
+                            // Create and populate cells for unit ID and index
+                            const unitIdCell = $('<td class="unit-id d-none"></td>');
+                            const unitIndexCell = $('<td class="unit-index"></td>');
+                            const unitIdLink = $('<a class="like" href="javascript:;"></a>');
+                            const unitIdBadge = $('<span class="badge bg-light-blue text-primary rounded-pill py-2 px-3"></span>');
+                            const unitIndexBadge = $('<span class="badge bg-light-blue text-primary rounded-pill py-2 px-3"></span>');
+
+                            unitIdBadge.text(unit.id);
+                            unitIndexBadge.text(index + 1);
+                            unitIdLink.append(unitIdBadge);
+                            unitIdCell.append(unitIdLink);
+                            unitIndexCell.append(unitIndexBadge);
+                            row.append(unitIdCell);
+                            row.append(unitIndexCell);
+                            const unitNumberCell = $('<td></td>');
+                            const unitNumberInput = $(`<input type="text" class="form-control  ${unit.unitNumber ? "for-light" : ""}" pattern="[0-9]{5}" oninput="this.value = this.value.replace(/[^0-9]/g, '')" style="min-width: 100px;"  id="inputEmail5" placeholder="Enter Unit Number" value='${unit.unitNumber}' ${unit.unitNumber ? "readonly" : ""}>`);
+
+                            // Determine the CSS class for the status cell based on unit status
+                            let classText;
+                            if (unit.status === "Vacant") {
+                                classText = "text-danger";
+                            } else {
+                                classText = "text-success";
+                            }
+
+                            // Create and populate the status cell
+                            const statusCell = $(`<td class='${classText}'></td>`);
+                            statusCell.text(unit.status);
+                            row.append(statusCell);
+
+                            // Create and populate the unit number cell
+
+                            unitNumberCell.append(unitNumberInput);
+                            row.append(unitNumberCell);
+
+                            const areaCell = $('<td></td>');
+                            const areaInput = $(`<input type="text" class="form-control ${unit.unitNumber ? "for-light" : ""}" pattern="[0-9]{5}" oninput="this.value = this.value.replace(/[^0-9]/g, '')" style="min-width: 100px;" id="inputEmail5" placeholder="Enter Area" value='${unit.Area}' ${unit.Area ? "readonly" : ""}>`);
+                            areaCell.append(areaInput);
+                            row.append(areaCell);
+
+                            const unitDetailsCell = $('<td colspan="3"></td>');
+                            const unitDetailsInput = $(`<input type="text" class="form-control ${unit.unitNumber ? "for-light" : ""}" style="min-width: 100px;" id="inputEmail5" placeholder="Enter Unit Details (Optional)" value='${unit.unitDetails}' ${unit.Area ? "readonly" : ""}>`);
+                            unitDetailsCell.append(unitDetailsInput);
+                            row.append(unitDetailsCell);
+
+                            const actionCell = $('<td></td>');
+                            const doneButton = $(`<button type="button" class="btn btn-primary me-1 btn-pill edit-option1 ${unit.unitNumber ? "" : "d-none"}">Edit</button> <button type="button" class="btn btn-success me-1 btn-pill done-option1 ${unit.unitNumber ? "d-none" : ""}">Done</button><button type="button" class="btn btn-danger btn-pill delete-option1 ${unit.status == "Occupied" ? "d-none" : ""}">Delete</button>`);
+                            actionCell.append(doneButton);
+
+                            row.append(actionCell);
+                            //                             $('#addModal_units').modal('show');
+                            //                             $('#addModal_units').modal({
+                            //   backdrop: 'static',
+                            //   keyboard: false
+                            // });
+                            // Function to check if the required fields are filled
+                            const checkRequiredFields = () => {
+                                const unitNumberValue = unitNumberInput.val();
+                                const areaValue = areaInput.val();
+
+                                if (unitNumberValue.trim() !== '' && areaValue.trim() !== '') {
+                                    doneButton.prop('disabled', false);
+                                } else {
+                                    doneButton.prop('disabled', true);
+                                }
+                            };
+
+                            // Event listener for unit number input
+                            unitNumberInput.on('input', function () {
+                                const unitNumberValue = $(this).val();
+                                // unitNumberRequiredMsg.toggle(unitNumberValue.trim() === '');
+                                checkRequiredFields();
+                            });
+
+                            // Event listener for area input
+                            areaInput.on('input', function () {
+                                const areaValue = $(this).val();
+                                // areaRequiredMsg.toggle(areaValue.trim() === '');
+                                checkRequiredFields();
+                            });
+
+                            tableBody.append(row);
+                        });
+                        $("#add-units1").click(() => {
+                            $("#add-units1").prop("disabled", true)
+                            $.ajax({
+                                url: 'https://backend.app.spaderent.com/api/spade/addMoreUnits',
+                                type: 'POST',
+                                data: JSON.stringify({
+                                    "propertyID": propertyId2
+                                }),
+                                contentType: "application/json; charset=utf-8",
+                                headers: {
+                                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                                },
+                                success: function (response) {
+                                    $("#add-units1").prop("disabled", false)
+                                    getData2()
+                                },
+                                error: function (xhr, status, error) {
+                                    $("#add-units1").prop("disabled", false)
+                                    $("#myModal_warning_connection").modal("show");
+                                    setTimeout(function () {
+                                        $('#myModal_warning_connection').modal('hide');
+
+                                    }, 2000);
+                                    console.log('Error: ' + error);
+                                }
+                            })
+                        })
+                        $('.done-option1').click(function (e) {
+                            console.log(22)
+                            e.preventDefault();
+                            const unitIdElement = $(this).closest("tr").find(".unit-id");
+                            const unitId = unitIdElement.text();
+                            let values = []
+                            $(`#${unitId}`).find('td').each(function () {
+                                let cellValue = "";
+                                const input = $(this).find('input')
+                                if (input.length > 0) {
+                                    cellValue = input.val()
+                                } else {
+                                    cellValue = $(this).text()
+
+                                }
+                                values.push(cellValue)
+                                console.log(values)
+                            });
+                            console.log(propertyId2)
+                            $.ajax({
+                                url: 'https://backend.app.spaderent.com/api/spade/PropertyUnitsUpdates',
+                                type: 'PUT',
+                                data: JSON.stringify({
+                                    id: values[0],
+                                    propertyId: propertyId2,
+                                    unitNumber: values[3],
+                                    Area: values[4],
+                                    unitDetails: values[5],
+                                }),
+                                contentType: "application/json; charset=utf-8",
+                                headers: {
+                                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                                },
+                                success: function (response) {
+                                    console.log(response)
+                                    getData2()
+                                },
+                                error: function (xhr, status, error) {
+                                    $("#myModal_warning_connection").modal("show");
+                                    setTimeout(function () {
+                                        $('#myModal_warning_connection').modal('hide');
+
+                                    }, 2000);
+                                    console.log('Error: ' + error);
+                                }
+                            })
+                        });
+                        $('.delete-option1').click(function (e) {
+                            console.log(333)
+                            e.preventDefault();
+                            const unitIdElement = $(this).closest("tr").find(".unit-id");
+                            const unitId = unitIdElement.text();
+                            let values = []
+                            $(`#${unitId}`).find('td').each(function () {
+                                let cellValue = "";
+                                const input = $(this).find('input')
+                                if (input.length > 0) {
+                                    cellValue = input.val()
+                                } else {
+                                    cellValue = $(this).text()
+
+                                }
+                                values.push(cellValue)
+                                // console.log(values)
+                            });
+                            $.ajax({
+                                url: 'https://backend.app.spaderent.com/api/spade/deleteMoreUnits',
+                                type: 'DELETE',
+                                data: JSON.stringify({
+                                    "propertyID": propertyId2,
+                                    "unitID": values[0],
+                                }),
+                                contentType: "application/json; charset=utf-8",
+                                processData: false,
+                                headers: {
+                                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                                },
+                                success: function (response) {
+                                    console.log(1)
+                                    getData2()
+                                },
+                                error: function (xhr, status, error) {
+                                    $("#myModal_warning_connection").modal("show");
+                                    setTimeout(function () {
+                                        $('#myModal_warning_connection').modal('hide');
+
+                                    }, 2000);
+                                    console.log('Error: ' + error);
+                                }
+                            });
+                        })
+                        $(".edit-option1").click(function () {
+                            // e.preventDefault();
+                            console.log(1)
+                            const unitIdElement = $(this).closest("tr").find(".unit-id");
+                            $(this).addClass("d-none")
+                            $(this).next().removeClass('d-none');
+                            $(this).parent().parent().find('input:input').removeClass('for-light')
+
+                            // $(".done-option").removeClass('d-none');
+
+                            const unitId = unitIdElement.text();
+
+                            $(`#${unitId}`).find('td').each(function () {
+
+                                const input = $(this).find('input')
+                                input.attr("readonly", false);
+                            });
+                            // $(this).replaceWith( ('<a class="dropdown-item text-success done-option" href="" disabled>Done</a>') )
+                        })
+                    },
+
+                    error: function (xhr, status, error) {
+                        $("#myModal_warning_connection").modal("show");
+                        setTimeout(function () {
+                            $('#myModal_warning_connection').modal('hide');
+
+                        }, 2000);
+                        console.log('Error: ' + error);
+                    }
+                });
+
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             $("#succes-close").click(() => {
                 window.location = './add-tenant.html'
             })
@@ -2629,7 +3066,9 @@ color: #000;
                             propertyUnitSelect.prop("disabled", true);
                             propertyUnitSelect.append($('<option></option>')
                                 .text("No unit available!!"))
+                                $('#addUnitBtn').show()
                         } else {
+                            $('#addUnitBtn').hide()
                             propertyUnitSelect.prop("disabled", false);
                             propertyUnitSelect.append($('<option></option>')
                                 .text("Choose..."))
@@ -2943,7 +3382,7 @@ resetAccordions()
                 }
             }
 
-            let counter = 0
+            var counter = 0
 
             function checkFieldsFilled(id) {
                 console.log(id)

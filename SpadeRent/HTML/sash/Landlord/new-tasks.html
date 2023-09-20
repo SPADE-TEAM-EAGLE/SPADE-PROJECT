@@ -880,6 +880,8 @@ color: #000;
 
                                 </select>
                                 <span class="text-danger d-none" id="vendor-span">Add vendors first!!</span>
+                                <br>
+                                <a href="./tasks-vendors.html" id="addVendorAnchor" style="display: none;">Add Vendor!</a>
                             </div>
                             <!-- <div class="col-md-4">
                               
@@ -2567,6 +2569,7 @@ function dragOverHandler(ev) {
                         if (response.data.length === 0) {
                             $("#assignee").append($("<option></option>").text("No Vendor available.."));
                             $("#assignee_update").append($("<option></option>").text("No Vendor available.."));
+                            // $('#addVendorAnchor').show()
                         } else {
                             response.data.forEach((vendor) => {
                                 // console.log(property);
@@ -2574,8 +2577,9 @@ function dragOverHandler(ev) {
                                 var optionValue = vendor.id;
                                 $("#assignee").append($("<option></option>").text(optionText).val(optionValue));
                                 $("#assignee_update").append($("<option></option>").text(optionText).val(optionValue));
-
+                                
                             });
+                            // $('#addVendorAnchor').hide()
                         }
                         // Handle state selection change
                     },
@@ -2585,6 +2589,7 @@ function dragOverHandler(ev) {
                         $("#assignee").empty()
                         $("#assignee").prop("disabled", true);
                         $("#vendor-span").removeClass("d-none");
+                        $('#addVendorAnchor').show()
                         
 
                     }

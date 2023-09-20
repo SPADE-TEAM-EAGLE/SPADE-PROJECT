@@ -1189,13 +1189,15 @@
                                 <div class="row mb-5">
                                     <div class="col-12">
                                         <div class="mt-2 mb-2" style="float: right;"><img
-                                                src="../assets/images/users/5.jpg"  id="bussinessLogo" alt=""
+                                                src="../assets/images/users/5.jpg" id="bussinessLogo" alt=""
                                                 style="max-width: 90px;"></div>
-                                                
-                                                
+
+
 
                                     </div>
-                                    <div class="col-12" id="addbussinesslogocol"><a href="settings.html" class="text-primary" style="float: right;">Add your bussiness logo!</a></div>
+                                    <div class="col-12" id="addbussinesslogocol"><a href="settings.html"
+                                            class="text-primary" style="float: right;">Add your bussiness logo!</a>
+                                    </div>
                                     <div class="col-md-6" style="text-align: left;" id="client-id">
                                         <h5 class="fw-bold" style="color: 
                                 #562AC8;">BILLED TO</h5>
@@ -1700,6 +1702,8 @@
                                                     data-bs-placement="top" required>
                                                     <option selected="">Choose...</option>
                                                 </select>
+                                                <span><a href="javascript:void(0)" class="addCategoryBtn">Add
+                                                        Category!</a></span>
                                                 <span class="text-danger d-none">State is required!</span>
                                             </td>
                                             <!-- <td><select id="state" name="property" class="form-select form"
@@ -1938,7 +1942,7 @@
             </div>
         </div>
     </div>
-
+   
     <div class="modal fade" id="myModal_edit" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
@@ -4026,7 +4030,7 @@
                 endDateInput.min = startDateInput.value;
             });
             $(document).ready(function () {
-                
+
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
                     method: 'GET',
@@ -4061,8 +4065,8 @@
 
         </script>
         <script>
-            var bussinessLogoImg ;
-            $(document).ready(()=>{
+            var bussinessLogoImg;
+            $(document).ready(() => {
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/protected',
                     method: 'GET',
@@ -4077,11 +4081,11 @@
                             $("#user-img").attr("src", response.image)
                             $("#user-img-dark").attr("src", response.image)
                         }
-                        bussinessLogoImg = response.businessLogo? response.businessLogo : "../assets/images/Artboard GÇô 1.svg" ;
-                    $("#bussinessLogo").attr("src", bussinessLogoImg)
-                    if(response.businessLogo){
-                        $("#addbussinesslogocol").addClass("d-none");
-                    }
+                        bussinessLogoImg = response.businessLogo ? response.businessLogo : "../assets/images/Artboard GÇô 1.svg";
+                        $("#bussinessLogo").attr("src", bussinessLogoImg)
+                        if (response.businessLogo) {
+                            $("#addbussinesslogocol").addClass("d-none");
+                        }
 
                     },
                     error: function (xhr, status, error) {
@@ -4095,7 +4099,7 @@
                         console.log(error);
                     }
                 });
-                
+
             });
             var selectedFiles = [];
             function dropHandler(ev) {
@@ -5016,6 +5020,7 @@
             <option selected="">Choose...</option>
             ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
           </select>
+          <span><a href="">Add Category!</a></span>
           <span class="text-danger d-none">State is required!</span>
         </td>
        
@@ -5314,6 +5319,7 @@ if (!categoryExists) {
             <option selected="">Choose...</option>
             ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
           </select>
+          <span><a href="">Add Category!</a></span>
           <span class="text-danger d-none">State is required!</span>
         </td>
         <td><input type="text" class="form-control" name="memo" placeholder="Enter Memo"></td>
@@ -5338,6 +5344,7 @@ if (!categoryExists) {
             <option selected="">Choose...</option>
             ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
           </select>
+          <span><a href="">Add Category!</a></span>
           <span class="text-danger d-none">State is required!</span>
         </td>
 
@@ -5385,6 +5392,7 @@ if (!categoryExists) {
             <option selected="">Choose...</option>
             ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
           </select>
+          <span><a href="">Add Category!</a></span>
           <span class="text-danger d-none">State is required!</span>
         </td>
         <td>
@@ -5415,6 +5423,7 @@ if (!categoryExists) {
             <option selected="">Choose...</option>
             ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
           </select>
+          <span><a href="">Add Category!</a></span>
           <span class="text-danger d-none">State is required!</span>
         </td>
         <td>
@@ -5767,7 +5776,7 @@ if (!categoryExists) {
                 })
 
 
-                
+
                 $(document).on('click', ".view-btnn", function (e) {
                     e.preventDefault();
 
@@ -5996,7 +6005,7 @@ if (!categoryExists) {
     <option>Choose...</option>
     ${categoryData.map((category) => `<option value="${category.id}" ${category.id == categoryid ? 'selected=" "' : ''}>${category.categorieName}</option>`).join("")}
 </select>
-
+<span><a href="">Add Category!</a></span>
           <span class="text-danger d-none">State is required!</span>
         </td>
         <td>
@@ -6417,19 +6426,19 @@ if (!categoryExists) {
                     }
                 };
                 html2pdf().from(invoice).set(opt).save();
-                setTimeout(function(){
+                setTimeout(function () {
                     document.getElementById("addbussinesslogocol").style.display = "block"
-                },2500)
-                
+                }, 2500)
+
             })
             // PDF CODE END
         </script>
-    
-    
+
+
 
         <script>
             $(document).ready(() => {
-                
+
 
 
                 $.ajax({
