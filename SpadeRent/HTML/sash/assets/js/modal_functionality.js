@@ -50,7 +50,6 @@ function checkFieldsStatus(accordionId) {
         return 0;
     }
 }
-
 var counter = 0
 function checkFieldsFilled(id) {
     const status = checkFieldsStatus(id)
@@ -217,6 +216,7 @@ $(document).ready(function () {
             console.log(data)
 
             var stateDropdown = $('#state');
+            var stateDropdown1 = $('#state1');
             // console.log(stateDropdown)
             // var stateupdateDropdown = $('#state_update');
             // states = result.geonames.filter(function(place) {
@@ -227,6 +227,8 @@ $(document).ready(function () {
             data.forEach(function(state) {
                 console.log(stateDropdown)
                 stateDropdown.append($('<option></option>').text(state.states).val(state.states));
+                stateDropdown1.append($('<option></option>').text(state.states).val(state.states));
+
             });
 
         },
