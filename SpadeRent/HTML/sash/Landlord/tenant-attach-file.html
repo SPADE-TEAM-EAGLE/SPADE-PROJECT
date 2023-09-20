@@ -3120,7 +3120,7 @@ function formatDate(dateString) {
 }
 function getData(){
     $.ajax({
-    url: 'http://localhost:3000/api/spade/GettenantAttachFile',
+    url: 'https://backend.app.spaderent.com/api/spade/GettenantAttachFile',
     type: 'GET',
     data: {
         tenantID: tenantId
@@ -3197,7 +3197,7 @@ $(document).on("click",'.delete-option',function(e) {
                         e.preventDefault(); // Prevent default anchor behavior
                         const imageElement = $(this).closest("tr").find(".file-id").attr("id");
                         $.ajax({
-                            url:"http://localhost:3000/api/spade/tenantAttachFileDelete",
+                            url:"https://backend.app.spaderent.com/api/spade/tenantAttachFileDelete",
                             type:"DELETE",
                             data:JSON.stringify({
                                 id:imageElement.trim(" ")

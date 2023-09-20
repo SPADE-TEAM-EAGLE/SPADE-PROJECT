@@ -899,46 +899,12 @@
                             <form class="ui form">
                                 <section class="field">
                                     <label class="form-label fw-bold fs-18">Select Tenant</label>
-
-                                    <div class="ui fluid search selection dropdown">
+                                    <div class="ui fluid search selection dropdown" >
                                         <input type="hidden" name="shipper_state_state">
                                         <i class="dropdown icon"></i>
                                         <div class="default text">Select State</div>
-                                        <div class="menu">
-                                            <div class="item" data-value="AL">Select Option</div>
-                                            <div class="item" data-value="AL">
-                                                <div style="display: flex; gap: 1rem; align-items: center;">
-                                                    <img src="../assets/images/icons/Group 10346.png" alt="" style="width: 65px; height: 65px;">
-                                                    <div><h3 class="mb-0 line-height: 22px;">John Adams</h3>
-                                                        <span style="line-height: 22px;">Email: example@gmail.com</span>
-                                                         <span style="line-height: 22px;">Company: IT Company</span><br>
-                                                         <span style="line-height: 22px;">Phone: (789) 900399</span>
-                                                        </div>
-                                                    </div>
-                                            </div>
-
-                                            <div class="item" data-value="AL">
-                                                <div style="display: flex; gap: 1rem; align-items: center;">
-                                                    <img src="../assets/images/icons/Group 10346.png" alt="" style="width: 65px; height: 65px;">
-                                                    <div><h3 class="mb-0 line-height: 22px;">Umair Nazakat</h3>
-                                                        <span style="line-height: 22px;">Email: example@gmail.com</span>
-                                                         <span style="line-height: 22px;">Company: IT Company</span><br>
-                                                         <span style="line-height: 22px;">Phone: (789) 900399</span>
-                                                        </div>
-                                                    </div>
-                                            </div>
-
-                                            <div class="item" data-value="AL">
-                                                <div style="display: flex; gap: 1rem; align-items: center;">
-                                                    <img src="../assets/images/icons/Group 10346.png" alt="" style="width: 65px; height: 65px;">
-                                                    <div><h3 class="mb-0 line-height: 22px;">Noman Peerzada</h3>
-                                                        <span style="line-height: 22px;">Email: example@gmail.com</span>
-                                                         <span style="line-height: 22px;">Company: IT Company</span><br>
-                                                         <span style="line-height: 22px;">Phone: (789) 900399</span>
-                                                        </div>
-                                                    </div>
-                                            </div>
-                                           
+                                        <div class="menu" id="menu">
+                                            <div class="item" data-value="AL">Select Option</div>   
                                         </div>
                                     </div>
                                 </section>
@@ -1090,6 +1056,98 @@
                         <div class="col-12 mb-2">
                             <a href="javascript:;" class="mt-1" id="add-item1">+Add Line Item</a>
                         </div>
+                        <div class="col-12 mb-2">
+                            <a data-bs-toggle="collapse" href="#collapse-category" role="button" aria-expanded="false" aria-controls="collapse-category">
+                                + Add Category
+                            </a>
+                        </div>
+                          <div class="collapse" id="collapse-category">
+                            <div class="card card-body">
+                                <h2 class="h2-personal-inf text-dark mb-3">Invoice Categories</h2>
+                                <div
+                                    style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-7">
+                                        <div class="table-responsive">
+                                            <table
+                                                class="table text-nowrap table-borderless text-md-nowrap mg-b-0 mb-0">
+                                                <tbody id="add-item-container1-add">
+                                                    <tr class="tr">
+                                                        <td>
+                                                            <label for=""><b>Categories</b></label>
+                                                            <input type="text" name="categories-add"
+                                                                class="form-control category-add">
+                                                        </td>
+                                                        <td style="width: 1px;">
+                                                            <label for=""><b>Taxable</b></label>
+                                                            <div
+                                                                class="material-switch pull-right mt-1">
+                                                                <input id="someSwitchOptionInfo-add"
+                                                                    class="category-tax-add"
+                                                                    name="someSwitchOption001-add"
+                                                                    type="checkbox"> <label
+                                                                    for="someSwitchOptionInfo-add"
+                                                                    class="label-info"></label>
+                                                            </div>
+                                                            <!-- <div class="form-check form-switch">
+                                                                <input class="form-check-input"
+                                                                    type="checkbox" role="switch"
+                                                                    id="flexSwitchCheckChecked"
+                                                                    checked>
+                                                                <label class="form-check-label"
+                                                                    for="flexSwitchCheckChecked">Taxable</label>
+                                                            </div> -->
+                                                        </td>
+                                                        <td><button type="button" class="btn"
+                                                                id="del-btn1-add"
+                                                                style="text-align: left;">
+                                                                <i
+                                                                    class="fi fi-rs-trash text-danger fs-5"></i>
+                                                            </button></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <a href="javascript:;" class="mt-1 text-primary"
+                                            id="add-item1-add">+Add Line Item</a>
+                                    </div>
+                                </div>
+                                <h2 class="h2-personal-inf text-dark mb-3 mt-5">Tax Setting</h2>
+                                <div
+                                    style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <div class="form-group"> <label class="form-label"><b>Select
+                                                    Category</b></label> <select name="categories-add"
+                                                id="categories-add" class="form-control form-select"
+                                                data-bs-placeholder="Select Category">
+
+                                            </select> </div>
+                                    </div>
+
+                                    <div class="col-lg-3">
+                                        <div class="form-group mt-2">
+                                            <label for=""><b>Set Taxes for Invoice</b></label>
+                                            <input type="text" name="tax-add" placeholder="8.26%"
+                                                id="tax-add" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6"></div>
+                                    <div class="col-lg-3 mt-4"
+                                        style="display: flex; width: auto; justify-content: space-evenly;">
+                                        <a href="#">
+                                            <button class="btn btn-light btn-pill m-2 w-100" onclick="(() => { $('#collapse-category').collapse('hide'); })()">Close</button>
+                                        </a>
+                                        <button class="btn btn-primary btn-pill m-2 w-40"
+                                            id="save-categories-add" disabled>Save</button>
+                                    </div>
+                                </div>
+                                
+                                
+                            </div>
+                          </div>
                         <div class="col-md-12 col-lg-8">
                             <label for=""><b style="color: #1467B0;">Memo</b></label>
                             <textarea class="form-control mb-4" placeholder="Memo" rows="4"
@@ -2709,7 +2767,7 @@ function dragOverHandler(ev) {
             $(".save-invoice").each(function () {
                 $(this).on("click", function () {
                     console.log(1)
-                    var selectedTenant = $('#tenants').val();
+                    var selectedTenant = $('#tenants').attr('data-value');
                     var selectedInvoiceType = $('input[name="invoice"]:checked').val();
                     var startDate = $('#startDate').val() || "";
                     var endDate = $('#endDate').val() || "";
@@ -2912,9 +2970,23 @@ function dragOverHandler(ev) {
                         tenantData = data[0]
                         // var tableBody = $('#table_body');
 
-                        data[0]?.forEach(function (tenant) {
-                            $("#tenants").append($('<option></option>').text(tenant.firstName + " " + tenant.lastName).val(tenant.tenantID));
-                        })
+                        data[0]?.forEach(function(tenant) {
+                // Create a new item div
+                var newItem = $('<div class="item" data-value="' + tenant.tenantID + '" id="tenants">');
+
+                // Build the HTML structure for the item
+                newItem.html(`<div style="display: flex; gap: 1rem; align-items: center;" id="${tenant.tenantID}">` +
+                    '<img src="' +  + '" alt="" style="width: 65px; height: 65px;">' +
+                    '<div><h3 class="mb-0 line-height: 22px;">' + (tenant.firstName + " " + tenant.lastName) + '</h3>' +
+                    '<span style="line-height: 22px;">Email: ' + tenant.tEmail + '</span>' +
+                    '<span style="line-height: 22px;">Company: ' + tenant.companyName + '</span><br>' +
+                    '<span style="line-height: 22px;">Phone: ' + tenant.tPhoneNumber + '</span>' +
+                    '</div></div>');
+
+                // Append the new item to the menu
+                $('#menu').append(newItem);
+            });
+                            
                     },
                     error: function (xhr, status, error) {
                         console.log(error)
@@ -3037,7 +3109,7 @@ function dragOverHandler(ev) {
             }
             getData()
             $(document).on("change", ".tr [name='category'], .tr [name='category_update']", function(){
-                const property = $("#tenants").val();
+                const property = $("#tenants").attr('data-value');;
 
 const selectedCategoryId = $(this).val();
 
@@ -3161,8 +3233,8 @@ console.log(allFieldsFilled)
                 }
                 updateButtonStatus();
             });
-            $("#tenants,#tenants_update").change(() => {
-                const property = $("#tenants").val()
+            $(document).on("click","#tenants,#tenants_update", function(){
+                const property = $("#tenants").attr("data-value")
                 // console.log(property)
                 const propertyName = tenantData.filter((tenant) => {
                     if (tenant.tenantID == property) {
@@ -3239,6 +3311,199 @@ console.log(allFieldsFilled)
 
             // Call the checkFields function on page load
             checkFields();
+            var counter;
+                $(document).on("click","#add-item1-add" ,() => {
+                    counter++;
+                    $("#add-item-container1-add").append(`<tr class="tr">
+                    <td>
+                        <label for=""><b>Categories</b></label>
+                        <input type="text" name="category-add" class="form-control category-add">
+                    </td>
+                    <td style="width: 1px;">
+                        <label for=""><b>Taxable</b></label>
+                        <div class="material-switch pull-right mt-1"> <input id="someSwitchOptionInfo-add` + counter + `" class='category-tax-add' name="someSwitchOption-add` + counter + `" type="checkbox"> <label for="someSwitchOptionInfo-add` + counter + `" class="label-info"></label> </div>                                                                      </td>
+                    <td><button type="button" class="btn" id="del-btn1-add" style="text-align: left;">
+                        <i class="fi fi-rs-trash text-danger fs-5"></i>
+                    </button></td>
+                </tr>`)
+
+                });
+                $('#add-item-container1-add').on('click', '#del-btn1-add', function () {
+                    var $row = $(this).closest('.tr');
+                    var $rowsContainer = $row.parent();
+
+                    // Retrieve the category from the deleted row
+                    var category = $row.find('.category-add').val();
+
+                    if ($rowsContainer.children('.tr').length > 1) {
+                        // Remove the row
+                        $row.remove();
+                        if ($('#categories-add').val() === category) {
+                            // Clear the tax input field
+                            $('#tax-add').val('');
+                        }
+                        // Remove the category from the select box
+                        $('#categories-add option[value="' + category + '"]').remove();
+
+                        // Remove the category from localStorage
+                        localStorage.removeItem(category);
+
+                        // Check if the deleted category is currently selected in the select box
+                    } else {
+                        // alert('Cannot delete the last row.');
+                    }
+                });
+                $(document).on('change', '.category-tax-add', function () {
+
+var category = $(this).closest('tr').find('.category-add').val();
+var taxable = $(this).is(':checked');
+console.log(taxable, category)
+if (taxable) {
+
+    // Add the category to the select box if it is taxable and not already present
+    var optionExists = $('#categories-add option[value="' + category + '"]').length > 0;
+    if (!optionExists) {
+        $('#categories-add').append($('<option>', {
+            value: category,
+            text: category
+        }));
+    }
+} else {
+    // Remove the category from the select box if it is not taxable
+    $('#categories-add option[value="' + category + '"]').remove();
+}
+});
+$('#categories-add').change(function () {
+                    var selectedCategory = $(this).val();
+                    const category = categoryData?.filter((category) => { return selectedCategory === category.categorieName })
+                    var taxAmount;
+                    if (category?.length === 1) {
+                        taxAmount = category[0].setTaxes;
+                    } else {
+                        taxAmount = localStorage.getItem(selectedCategory);
+                    }
+                    if (taxAmount !== null) {
+                        $('#tax-add').val(taxAmount);
+                    } else {
+                        $('#tax-add').val("");
+                    }
+                });
+
+                // Event handler for tax input change
+                $('#tax-add').change(function () {
+                    var selectedCategory = $('#categories-add').val();
+                    var taxAmount = $(this).val();
+
+                    localStorage.setItem(selectedCategory, taxAmount);
+                });
+                $(document).on("input", "[name='categories-add']", function() {
+    var atLeastOneFilled = false;
+    $("[name='categories-add']").each(function() {
+        console.log($(this).val())
+        if ($(this).val() !== '' && $(this).val() !== null) {
+            atLeastOneFilled = true;
+            return false; // Exit the loop early if a filled input is found
+        }
+    });
+
+    if (atLeastOneFilled) {
+        $('#save-categories-add').attr('disabled', false);
+    } else {
+        $('#save-categories-add').attr('disabled', true);
+
+    }
+});
+$('#collapse-category').on('hidden.bs.collapse', function () {
+    $(this).find('input, select').val(''); // Reset input and select values
+    $(this).find('input[type="checkbox"]').prop('checked', false); // Uncheck checkboxes
+    $(this).find('input, select').removeClass('border-green border-danger'); // Remove validation classes
+}
+);
+                $('#save-categories-add').click(function () {
+                    $('#save-categories-add').prop('disabled', true);
+                    var data = []; // Array to store data for each row
+
+                    // Iterate over each table row
+                    $('#collapse-category .tr').each(function () {
+                        var categoryName = $(this).find('.category-add').val();
+                        //   var taxAmount = $(this).find('.tax-amount-add').val();
+                        var categoryId = $(this).find('.category').attr('id')
+                        var taxable = $(this).find('.category-tax-add').is(':checked');
+                        if (typeof categoryName !== 'undefined') {
+
+                            var row = {
+                                categoryName: categoryName,
+                                categoryId: categoryId,
+                                taxable: taxable
+                            };
+                            if (localStorage.getItem(categoryName)) {
+                                row.taxAmount = localStorage.getItem(categoryName)
+                            } else {
+                                const category = categoryData?.filter((category) => { return categoryName == category.categorieName })
+                                if (category?.length === 1) {
+                                    taxAmount = category[0].setTaxes;
+                                    row.taxAmount = taxAmount
+                                }
+                                else {
+                                    row.taxAmount = null
+                                }
+
+                            }
+                            // Add the row object to the data array
+                            localStorage.removeItem(categoryName)
+                            data.push(row);
+                        }
+                        // Create an object for each row's data
+
+                    });
+                    console.log(data)
+                    // Send the data to the backend using AJAX
+                    $.ajax({
+                        url: 'https://backend.app.spaderent.com/api/spade/addInvoiceCategory', // Replace with your actual backend endpoint URL
+                        method: 'POST',
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        data: JSON.stringify(data),
+                        contentType: 'application/json',
+                        success: function (response) {
+                            $('#save-categories-add').prop('disabled', false);
+                            
+                            $("#collapse-category").collapse('hide');
+                            const property = $("#tenants").attr("data-value");
+                    const propertyName = tenantData.filter((tenant) => tenant.tenantID == property);
+                    $("#add-item-container1").find(".tr").find("[name='category']").each(function () {
+    const selectedCategory = $(this);
+    response?.data?.forEach(function(category) {
+        const optionExists = (value) => selectedCategory.find('option[value="' + value + '"]').length > 0;
+        if (!optionExists(category.id)) {
+            
+            const newOption = $('<option></option>').text(category.categorieName).val(category.id);
+            selectedCategory.append(newOption);
+// Check if category.id already exists in categoryData
+const categoryExists = categoryData.some(item => item.id === category.id);
+
+if (!categoryExists) {
+    
+    categoryData.push(category);
+}
+        }
+    });
+});
+
+                            // Perform any additional actions or show success message
+                        },
+                        error: function (xhr, status, error) {
+                            $('#save-categories').prop('disabled', false);
+
+                            // Handle the error response
+                            console.log('Error occurred:', error);
+                            // Perform error handling or show error message
+                        }
+                    });
+                    
+                });
+                
             $(document).on("click", "#add-item1", () => {
                 const property = $("#tenants").val();
                 const propertyName = tenantData.filter((tenant) => tenant.tenantID == property);
