@@ -1,4 +1,4 @@
-const { insertMessage, selectQuery, getMessages } = require("../constants/queries");
+const { insertMessage, selectQuery, getMessages, getMessageCount, updateMessageCount } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
 
 
@@ -8,14 +8,15 @@ const messageClt = {
     createNewMessage: async (req, res) => {
         try {
             const sender = req.user.userId;
-            const { chatId, message, messageType,userType } = req.body;
+            const { chatId, message, messageType,userType, receiverID } = req.body;
+            const isRead = 1;
             const created_at = new Date().toISOString().slice(0, 19).replace('T', ' ');
             if (!chatId || !message || !messageType) {
                 throw new Error("Please provide all required fields");
             }
             // message,chatId,messageType, created_at
             const sendMessage = await queryRunner(
-                insertMessage, [message, chatId, messageType, created_at,sender,userType]
+                insertMessage, [message, chatId, messageType, created_at,sender,userType, receiverID,isRead ]
             );
             if (sendMessage[0].affectedRows > 0) {
                 res.status(200).json({
@@ -32,14 +33,15 @@ const messageClt = {
     createNewMessageTenant: async (req, res) => {
         try {
             const sender = req.user.userId;
-            const { chatId, message, messageType ,userType} = req.body;
+            const { chatId, message, messageType ,userType, receiverID } = req.body;
+            const isRead = 1;
             const created_at = new Date().toISOString().slice(0, 19).replace('T', ' ');
             if (!chatId || !message || !messageType) {
                 throw new Error("Please provide all required fields");
             }
             // message,chatId,messageType, created_at
             const sendMessage = await queryRunner(
-                insertMessage, [message, chatId, messageType, created_at,sender,userType]
+                insertMessage, [message, chatId, messageType, created_at,sender,userType, receiverID,isRead ]
             );
             if (sendMessage[0].affectedRows > 0) {
                 res.status(200).json({
@@ -73,7 +75,112 @@ const messageClt = {
             })
         }
 
-    }
+    },
+
+    // get (Message) Number of count landlord
+    getMessagesCountLandlord : async (req, res) => {
+        try {
+            const { userId } = req.user;
+            if (!userId) {
+                throw new Error("Please provide all required fields");
+            }
+            // const getMessages = await queryRunner(selectQuery("messages", "chatId"), [chatId]);
+            const  getAllMessagesCount = await queryRunner(getMessageCount, [userId])
+            if (getAllMessagesCount[0].length > 0) {
+                res.status(200).json({
+                    message: "Messages fetched successfully",
+                    Count: getAllMessagesCount[0][0]
+                })
+            }else{
+                res.status(200).json({
+                    message: "Messages fetched successfully",
+                    Count: "0"
+                })
+            }
+        } catch (error) {
+            res.status(400).json({
+                message: error.message
+            })
+        }
+
+    },
+
+
+    // get (Message) Number of count Tenant
+    getMessagesCountTenant : async (req, res) => {
+        try {
+            const { userId } = req.user;
+            if (!userId) {
+                throw new Error("Please provide all required fields");
+            }
+            // const getMessages = await queryRunner(selectQuery("messages", "chatId"), [chatId]);
+            const  getAllMessagesCount = await queryRunner(getMessageCount, [userId])
+            if (getAllMessagesCount[0].length > 0) {
+                res.status(200).json({
+                    message: "Messages fetched successfully",
+                    Count: getAllMessagesCount[0][0]
+                })
+            }else{
+                res.status(200).json({
+                    message: "Messages fetched successfully",
+                    Count: "0"
+                })
+            }
+        } catch (error) {
+            res.status(400).json({
+                message: error.message
+            })
+        }
+
+    },
+
+     // get update Messages Count Landlord
+     updateMessagesCountLandlord : async (req, res) => {
+        try {
+            const { userId } = req.user;
+            // const isread = 0;
+            if (!userId) {
+                throw new Error("Please provide all required fields");
+            }
+            // const getMessages = await queryRunner(selectQuery("messages", "chatId"), [chatId]);
+            const  updateAllMessagesCount = await queryRunner(updateMessageCount, [userId])
+            if (updateAllMessagesCount[0].affectedRows > 0) {
+                res.status(200).json({
+                    message: "Messages Updated successfully",
+                    // Count: getAllMessagesCount[0][0]
+                })
+            }
+        } catch (error) {
+            res.status(400).json({
+                message: error.message
+            })
+        }
+
+    },
+    
+     // get update Messages Count Tenant 
+     updateMessagesCountTenant : async (req, res) => {
+        try {
+            const { userId } = req.user;
+            // const isread = 0;
+            if (!userId) {
+                throw new Error("Please provide all required fields");
+            }
+            // const getMessages = await queryRunner(selectQuery("messages", "chatId"), [chatId]);
+            const  updateAllMessagesCount = await queryRunner(updateMessageCount, [userId])
+            if (updateAllMessagesCount[0].affectedRows > 0) {
+                res.status(200).json({
+                    message: "Messages Updated successfully",
+                    // Count: getAllMessagesCount[0][0]
+                })
+            }
+        } catch (error) {
+            res.status(400).json({
+                message: error.message
+            })
+        }
+
+    } 
 }
 
 

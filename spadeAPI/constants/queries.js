@@ -3,7 +3,7 @@ exports.selectQuery = (table, ...field) => {
     // console.log(table,field[0])
     return `SELECT * FROM ${table} WHERE ${field[0]} = ?`;
   } else if (field.length > 1) {
-    return `SELECT * FROM ${table} WHERE ${field[0]} = ? and ${field[1]} = ?`;
+    return `SELECT * FROM ${table} WHERE ${field[0]} = ? and ${field[1]} = ? and ${field[2]} = ?`;
   } else {
     return `SELECT * FROM ${table}`;
   }
@@ -905,8 +905,10 @@ exports.findChat =
 exports.updateTenantsProfile =
   "UPDATE tenants SET firstName = ?, lastName = ?, companyName = ?, email = ?, phoneNumber = ?, Address = ?, city = ?, state = ?, zipcode = ?, Image = ?, ImageKey = ? WHERE id = ?";
   // create new Message in messages table
+// exports.insertMessage =
+// "INSERT INTO messages (message,chatId,messageType, created_at,sender,userType) VALUES (?,?,?,?,?,?)";
 exports.insertMessage =
-"INSERT INTO messages (message,chatId,messageType, created_at,sender,userType) VALUES (?,?,?,?,?,?)";
+"INSERT INTO messages (message,chatId,messageType, created_at,sender,userType,receiverID,isRead) VALUES (?,?,?,?,?,?,?,?)";
 
 // get all chats of user by senderId using joining chats and users table
 exports.getChatUsers = `
@@ -926,7 +928,13 @@ ORDER BY c.created_at DESC`;
 // get all messages of chat by chatId
 exports.getMessages =
 "SELECT * FROM messages WHERE chatId = ? ORDER BY created_at ASC";
+exports.getMessageCount =
+`select count(message) from messages where isRead = "1" AND receiverID = ?`;
 
+exports.updateMessageCount =
+`UPDATE messages SET isRead = "0" where receiverID = ?`;
+exports.getMessageCountByID =
+`select count(message) from messages where isRead = "1" AND receiverID = ? AND sender = ?`;
 // dashboard task Count
 exports.taskCount = `SELECT count(CASE WHEN status = "not started" THEN 0 END ) as notStarted, COUNT(CASE WHEN status = "in progress" then 0 END ) as inProgress, COUNT(CASE WHEN status = "completed" THEN 0 END) as completed FROM spade_Rent.task WHERE landlordID = ? AND  task.created_at >= ? AND task.created_at <= ?`;
 

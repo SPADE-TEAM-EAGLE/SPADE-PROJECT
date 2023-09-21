@@ -184,6 +184,11 @@ router.get("/fetchUsersChats", verifyToken, chatsController.fetchUsersTenants);
 router.post("/createNewMessageTenant", verifyTokenTenant, messageClt.createNewMessageTenant);
 router.post("/createNewMessage", verifyToken, messageClt.createNewMessage);
 router.get("/TenantMessages/:chatId", verifyTokenTenant, messageClt.getAllMessages);
+router.get("/getMessagesCountLandlord", verifyToken, messageClt.getMessagesCountLandlord);
+router.get("/getMessagesCountTenant", verifyTokenTenant, messageClt.getMessagesCountTenant);
+router.put("/updateMessagesCountLandlord", verifyToken, messageClt.updateMessagesCountLandlord);
+router.put("/updateMessagesCountTenant", verifyTokenTenant, messageClt.updateMessagesCountTenant);
+// router.get("/getMessagesCount", messageClt.getMessagesCount);
 router.get("/LandlordMessages/:chatId", verifyToken, messageClt.getAllMessages);
 
 // profile complition

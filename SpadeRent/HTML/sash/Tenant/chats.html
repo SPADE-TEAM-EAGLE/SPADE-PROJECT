@@ -178,10 +178,15 @@
             border: 1px solid #e9edf4;
         }
 
-        input:focus {
+        /* input:focus {
             border: 3px solid #555 !important;
+        } */
+        .border-green{
+            border: 1px solid green !important;
         }
-
+        .border-red{
+            border: 1px solid red !important;
+        }
         .panel-body {
             padding: 0px;
         }
@@ -1732,8 +1737,8 @@
                                 <a class="side-menu__item" data-bs-toggle="slide" href="chats.html">
                                     <i class="side-menu__icon fi fi-rs-comment"></i>
                                     <span class="side-menu__label">Chat</span>
-                                    <span class="badge bg-primary side-badge">6</span>
-                                    <!-- <span class="badge bg-secondary side-badge">6</span> -->
+                                    <span class="badge bg-primary side-badge" id="chatCounter"></span>
+                                    <!-- <span class="badge bg-secondary side-badge"></span> -->
                                     <!-- <i class="angle fe fe-chevron-right"></i> -->
                                 </a>
                             </li>
@@ -2945,11 +2950,12 @@
                             chatId: localStorage.getItem("chatId"),
                             message: msg_again1,
                             messageType: "text",
-                            userType: "tenant"
+                            userType: "tenant",
+                            receiverID: Number(localStorage.getItem("landloadId"))
                         };
                         // joinChatRoom(localStorage.getItem("chatId"));
                         $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/createNewMessageTenant',
+                            url: 'http://localhost:3000/api/spade/createNewMessageTenant',
                             type: 'POST',
                             data: JSON.stringify(messageData),
                             contentType: 'application/json',
@@ -2978,10 +2984,11 @@
                             chatId: localStorage.getItem("chatId"),
                             message: msg_again2,
                             messageType: "text",
-                            userType: "tenant"
+                            userType: "tenant",
+                            receiverID: Number(localStorage.getItem("landloadId"))
                         };
                         $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/createNewMessageTenant',
+                            url: 'http://localhost:3000/api/spade/createNewMessageTenant',
                             type: 'POST',
                             data: JSON.stringify(messageData),
                             contentType: 'application/json',
@@ -3328,10 +3335,11 @@
                                     chatId: localStorage.getItem("chatId"),
                                     message: str,
                                     messageType: "text",
-                                    userType: "tenant"
+                                    userType: "tenant",
+                            receiverID: Number(localStorage.getItem("landloadId"))
                                 };
                                 $.ajax({
-                                    url: 'https://backend.app.spaderent.com/api/spade/createNewMessageTenant',
+                                    url: 'http://localhost:3000/api/spade/createNewMessageTenant',
                                     type: 'POST',
                                     data: JSON.stringify(messageData2),
                                     contentType: 'application/json',

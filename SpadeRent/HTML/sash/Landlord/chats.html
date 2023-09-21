@@ -179,10 +179,15 @@
             border: 1px solid #e9edf4;
         }
 
-        input:focus {
+        /* input:focus {
             border: 3px solid #555 !important;
+        } */
+        .border-green{
+            border: 1px solid green !important;
         }
-
+        .border-red{
+            border: 1px solid red !important;
+        }
         .panel-body {
             padding: 0px;
         }
@@ -1943,7 +1948,7 @@
                                 <a class="side-menu__item" data-bs-toggle="slide" href="chats.html">
                                     <i class="side-menu__icon fi fi-rs-comment"></i>
                                     <span class="side-menu__label">Chat</span>
-                                    <span class="badge bg-primary side-badge">6</span>
+                                    <span class="badge bg-primary side-badge" id="chatCounter"></span>
 
                                     <!-- <i class="angle fe fe-chevron-right"></i> -->
                                 </a>
@@ -3359,7 +3364,58 @@
         <script src="../assets/js/email-verification.js"></script>
         <script src="../assets/js/getNotification.js"></script>
         <script src="../assets/js/push_notification.js"></script>
-
+        <script>
+            $(document).ready(function() {
+                $('#input-message').on('input', function() {
+                    var inputLength = $(this).val().length;
+                    
+                    if (inputLength === 255) {
+                        $(this).removeClass('border-green').addClass('border-red');
+                    } else {
+                        $(this).removeClass('border-red').addClass('border-green');
+                    }
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function(){
+                $.ajax({
+                        url: 'http://localhost:3000/api/spade/updateMessagesCountLandlord',
+                        type: 'PUT',
+                        contentType: false,
+                        processData: false,
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            console.log(response);
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(error);
+                        }
+                    });
+                $.ajax({
+                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        console.log("getMessagesCountLandlord");
+                        console.log(response.Count['count(message)']);
+                        $('#chatCounter').text(response.Count['count(message)'])
+                    },
+                    error: function (xhr, status, error) {
+                        $("#myModal_warning").modal("show");
+                        setTimeout(function () {
+                            $('#myModal_warning').modal('hide');
+                            window.location = '../Landlord/login_module.html';
+                        }, 2000);
+                        console.log(error);
+                    }
+                });
+            });
+        </script>
         <script>
             function initializeWebSocket() {
                 var socket = io('https://engage.app.spaderent.com');
@@ -3385,6 +3441,7 @@
             localStorage.removeItem('tenantName');
             // var socket = io('https://engage.app.spaderent.com');
             $(document).ready(function () {
+                
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
                     method: 'GET',
@@ -3462,10 +3519,11 @@
                             chatId: localStorage.getItem("chatId"),
                             message: msg_again1,
                             messageType: "text",
-                            userType: "landlord"
+                            userType: "landlord",
+                            receiverID: Number(localStorage.getItem("tenantId"))
                         };
                         $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/createNewMessage',
+                            url: 'http://localhost:3000/api/spade/createNewMessage',
                             type: 'POST',
                             data: JSON.stringify(messageData),
                             contentType: 'application/json',
@@ -3492,10 +3550,11 @@
                             chatId: localStorage.getItem("chatId"),
                             message: msg_again2,
                             messageType: "text",
-                            userType: "landlord"
+                            userType: "landlord",
+                            receiverID: Number(localStorage.getItem("tenantId"))
                         };
                         $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/createNewMessage',
+                            url: 'http://localhost:3000/api/spade/createNewMessage',
                             type: 'POST',
                             data: JSON.stringify(messageData),
                             contentType: 'application/json',
@@ -3742,10 +3801,11 @@
                                 chatId: localStorage.getItem("chatId"),
                                 message: str,
                                 messageType: "text",
-                                userType: "landlord"
+                                userType: "landlord",
+                                receiverID: Number(localStorage.getItem("tenantId"))
                             };
                             $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/createNewMessage',
+                                url: 'http://localhost:3000/api/spade/createNewMessage',
                                 type: 'POST',
                                 data: JSON.stringify(messageData2),
                                 contentType: 'application/json',

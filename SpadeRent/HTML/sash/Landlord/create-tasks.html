@@ -1113,7 +1113,7 @@
                                 <a href="./tasks-vendors.html" id="addVendorAnchor" style="display: none;">Add
                                     Vendor!</a>
                             </div> -->
-                            
+
                             <!-- <div class="col-4">
                                 <label class="form-label">Hide SelectAll</label>
                                 <select multiple="multiple" class="hide-select" id="hideSelector">
@@ -1131,13 +1131,10 @@
                                 <span class="text-danger d-none">This field is required!</span>
                             </div>
                             <div class="col-12">
-                                <label class="form-label">Hide SelectAll</label>
-                                <select multiple="multiple" data-placeholder="Choose Browser"
-                                multiple placeholder="Enter Assign To" class="hide-select" id="assignee">
-                                    <option value="1">First</option>
-                                    <option value="2">Second</option>
-                                    <option value="3">Third</option>
-                                    <option value="4">Fourth</option>
+                                <label class="form-label fw-bold">Assign To</label>
+                                <select multiple="multiple"  multiple
+                                    placeholder="Enter Assign To" class="hide-select" id="assignee">
+
                                 </select>
                                 <span class="text-danger d-none" id="vendor-span">Add vendors first!!</span>
                                 <br>
@@ -1905,7 +1902,7 @@
                                 <a class="side-menu__item" data-bs-toggle="slide" href="chats.html">
                                     <i class="side-menu__icon fi fi-rs-comment"></i>
                                     <span class="side-menu__label">Chat</span>
-                                    <span class="badge bg-primary side-badge">6</span>
+                                    <span class="badge bg-primary side-badge" id="chatCounter"></span>
 
                                     <!-- <i class="angle fe fe-chevron-right"></i> -->
                                 </a>
@@ -2884,6 +2881,30 @@
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
     <script src="../assets/js/email-verification.js"></script>
+<script>
+            $(document).ready(function(){
+                $.ajax({
+                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        console.log("getMessagesCountLandlord");
+                        console.log(response.Count['count(message)']);
+                        $('#chatCounter').text(response.Count['count(message)'])
+                    },
+                    error: function (xhr, status, error) {
+                        $("#myModal_warning").modal("show");
+                        setTimeout(function () {
+                            $('#myModal_warning').modal('hide');
+                            window.location = '../Landlord/login_module.html';
+                        }, 2000);
+                        console.log(error);
+                    }
+                });
+            });
+        </script>
     <script src="../assets/js/intercom.js"></script>
     <script src="../assets/js/getNotification.js"></script>
     <script src="../assets/js/push_notification.js"></script>
@@ -3219,6 +3240,17 @@
                 }
                 updateButtonStatus();
             });
+            $('.hide-select').on('input change', () => {
+                if ($('.ms-choice span').text() == '') {
+                    $('.ms-choice').addClass('border-danger');
+                    $('.ms-choice').removeClass('border-green');
+                    $('#vendor-span').removeClass('d-none');
+                } else {
+                    $('.ms-choice').removeClass('border-danger');
+                    $('.ms-choice').addClass('border-green');
+                    $('#vendor-span').addClass('d-none');
+                }
+            });
             $('#myModal_edit input[required], #myModal_edit select[required], #myModal_edit textarea').on('input change', function () {
                 var $field = $(this);
                 var $errorMessage = $field.next('.text-danger');
@@ -3338,14 +3370,14 @@
                 $('#addModal select').prop('selectedIndex', 0);
                 $('#addModal textarea').val('');
                 $('#addModal input[type="checkbox"]').prop('checked', false);
-                $('.hide-select ul li').each(function(){
+                $('.hide-select ul li').each(function () {
                     $(this).removeClass('selected')
                 })
                 $('#addModal .file-grid').empty();
                 $('#next').addClass("disabled");
                 $('#draft').attr("disabled", "disabled");
                 $('.ms-choice span').text("")
-$('#addModal input[type="text"],#addModal input[type="date"],#addModal select,#addModal textarea,#addModal input[type="checkbox"]').removeClass('border-green border-danger')
+                $('#addModal input[type="text"],#addModal input[type="date"],#addModal select,#addModal textarea,#addModal input[type="checkbox"]').removeClass('border-green border-danger')
             }
 
             $('#close,#top-close').on('click', function (e) {
