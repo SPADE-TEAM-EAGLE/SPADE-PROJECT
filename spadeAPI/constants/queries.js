@@ -929,6 +929,8 @@ exports.getMessageCount =
 
 exports.updateMessageCount =
 `UPDATE messages SET isRead = "0" where receiverID = ?`;
+exports.getMessageCountByID =
+`select count(message) from messages where isRead = "1" AND receiverID = ? AND sender = ?`;
 // dashboard task Count
 exports.taskCount = `SELECT count(CASE WHEN status = "not started" THEN 0 END ) as notStarted, COUNT(CASE WHEN status = "in progress" then 0 END ) as inProgress, COUNT(CASE WHEN status = "completed" THEN 0 END) as completed FROM spade_Rent.task WHERE landlordID = ? AND  task.created_at >= ? AND task.created_at <= ?`;
 
