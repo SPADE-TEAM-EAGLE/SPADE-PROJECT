@@ -924,9 +924,11 @@ ORDER BY c.created_at DESC`;
 // get all messages of chat by chatId
 exports.getMessages =
 "SELECT * FROM messages WHERE chatId = ? ORDER BY created_at ASC";
+exports.getMessageCount =
+`select count(message) from messages where isRead = "1" AND receiverID = ?`;
+
 exports.updateMessageCount =
 `UPDATE messages SET isRead = "0" where receiverID = ?`;
-
 // dashboard task Count
 exports.taskCount = `SELECT count(CASE WHEN status = "not started" THEN 0 END ) as notStarted, COUNT(CASE WHEN status = "in progress" then 0 END ) as inProgress, COUNT(CASE WHEN status = "completed" THEN 0 END) as completed FROM spade_Rent.task WHERE landlordID = ? AND  task.created_at >= ? AND task.created_at <= ?`;
 
