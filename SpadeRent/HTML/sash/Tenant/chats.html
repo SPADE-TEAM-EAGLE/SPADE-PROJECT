@@ -2945,11 +2945,12 @@
                             chatId: localStorage.getItem("chatId"),
                             message: msg_again1,
                             messageType: "text",
-                            userType: "tenant"
+                            userType: "tenant",
+                            receiverID: Number(localStorage.getItem("landloadId"))
                         };
                         // joinChatRoom(localStorage.getItem("chatId"));
                         $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/createNewMessageTenant',
+                            url: 'http://localhost:3000/api/spade/createNewMessageTenant',
                             type: 'POST',
                             data: JSON.stringify(messageData),
                             contentType: 'application/json',
@@ -2978,10 +2979,11 @@
                             chatId: localStorage.getItem("chatId"),
                             message: msg_again2,
                             messageType: "text",
-                            userType: "tenant"
+                            userType: "tenant",
+                            receiverID: Number(localStorage.getItem("landloadId"))
                         };
                         $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/createNewMessageTenant',
+                            url: 'http://localhost:3000/api/spade/createNewMessageTenant',
                             type: 'POST',
                             data: JSON.stringify(messageData),
                             contentType: 'application/json',
@@ -3328,10 +3330,11 @@
                                     chatId: localStorage.getItem("chatId"),
                                     message: str,
                                     messageType: "text",
-                                    userType: "tenant"
+                                    userType: "tenant",
+                            receiverID: Number(localStorage.getItem("landloadId"))
                                 };
                                 $.ajax({
-                                    url: 'https://backend.app.spaderent.com/api/spade/createNewMessageTenant',
+                                    url: 'http://localhost:3000/api/spade/createNewMessageTenant',
                                     type: 'POST',
                                     data: JSON.stringify(messageData2),
                                     contentType: 'application/json',

@@ -892,7 +892,7 @@ color: #000;
                             </div>
                             <div class="col-12">
                                 <label class="form-label fw-bold">Assign To</label>
-                                <select multiple="multiple" data-placeholder="Choose Browser"
+                                <select multiple="multiple" 
                                 multiple placeholder="Enter Assign To" class="hide-select" id="assignee">
                                     
                                 </select>
@@ -3214,6 +3214,17 @@ function dragOverHandler(ev) {
                     }
 
                 });
+                $('.hide-select').on('input change', () => {
+                if ($('.ms-choice span').text() == '') {
+                    $('.ms-choice').addClass('border-danger');
+                    $('.ms-choice').removeClass('border-green');
+                    $('#vendor-span').removeClass('d-none');
+                } else {
+                    $('.ms-choice').removeClass('border-danger');
+                    $('.ms-choice').addClass('border-green');
+                    $('#vendor-span').addClass('d-none');
+                }
+            });
             })
         </script>
       <script>

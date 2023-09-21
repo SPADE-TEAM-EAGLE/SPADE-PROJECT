@@ -905,8 +905,10 @@ exports.findChat =
 exports.updateTenantsProfile =
   "UPDATE tenants SET firstName = ?, lastName = ?, companyName = ?, email = ?, phoneNumber = ?, Address = ?, city = ?, state = ?, zipcode = ?, Image = ?, ImageKey = ? WHERE id = ?";
   // create new Message in messages table
+// exports.insertMessage =
+// "INSERT INTO messages (message,chatId,messageType, created_at,sender,userType) VALUES (?,?,?,?,?,?)";
 exports.insertMessage =
-"INSERT INTO messages (message,chatId,messageType, created_at,sender,userType) VALUES (?,?,?,?,?,?)";
+"INSERT INTO messages (message,chatId,messageType, created_at,sender,userType,receiverID) VALUES (?,?,?,?,?,?,?)";
 
 // get all chats of user by senderId using joining chats and users table
 exports.getChatUsers = `

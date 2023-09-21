@@ -3462,10 +3462,11 @@
                             chatId: localStorage.getItem("chatId"),
                             message: msg_again1,
                             messageType: "text",
-                            userType: "landlord"
+                            userType: "landlord",
+                            receiverID: Number(localStorage.getItem("tenantId"))
                         };
                         $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/createNewMessage',
+                            url: 'http://localhost:3000/api/spade/createNewMessage',
                             type: 'POST',
                             data: JSON.stringify(messageData),
                             contentType: 'application/json',
@@ -3492,10 +3493,11 @@
                             chatId: localStorage.getItem("chatId"),
                             message: msg_again2,
                             messageType: "text",
-                            userType: "landlord"
+                            userType: "landlord",
+                            receiverID: Number(localStorage.getItem("tenantId"))
                         };
                         $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/createNewMessage',
+                            url: 'http://localhost:3000/api/spade/createNewMessage',
                             type: 'POST',
                             data: JSON.stringify(messageData),
                             contentType: 'application/json',
@@ -3742,10 +3744,11 @@
                                 chatId: localStorage.getItem("chatId"),
                                 message: str,
                                 messageType: "text",
-                                userType: "landlord"
+                                userType: "landlord",
+                                receiverID: Number(localStorage.getItem("tenantId"))
                             };
                             $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/createNewMessage',
+                                url: 'http://localhost:3000/api/spade/createNewMessage',
                                 type: 'POST',
                                 data: JSON.stringify(messageData2),
                                 contentType: 'application/json',
