@@ -19,13 +19,13 @@ const messageClt = {
                 insertMessage, [message, chatId, messageType, created_at,sender,userType, receiverID,isRead ]
             );
             if (sendMessage[0].affectedRows > 0) {
-                const updateAllMessagesCount = await queryRunner(updateMessageCountLandlord, [receiverID,sender])
-                if (updateAllMessagesCount[0].affectedRows > 0) {
+                // const updateAllMessagesCount = await queryRunner(updateMessageCountLandlord, [receiverID,sender])
+                // if (updateAllMessagesCount[0].affectedRows > 0) {
                     res.status(200).json({
                         message: "Message sent successfully",
                         data: sendMessage[0]
                     })
-                }
+                // }
 
             }
         } catch (error) {
