@@ -91,6 +91,11 @@ const messageClt = {
                     message: "Messages fetched successfully",
                     Count: getAllMessagesCount[0][0]
                 })
+            }else{
+                res.status(200).json({
+                    message: "Messages fetched successfully",
+                    Count: "0"
+                })
             }
         } catch (error) {
             res.status(400).json({
