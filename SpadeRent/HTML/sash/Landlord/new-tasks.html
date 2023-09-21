@@ -866,13 +866,13 @@ color: #000;
                     <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
                         data-bs-parent="#accordionExample">
                         <form class="row g-3" enctype="multipart/form-data">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label for="inputEmail4" class="form-label fw-bold">Task Name</label>
                                 <input id="task" required class="form-control" type="text"
                                     placeholder="Enter Task Name here">
                                 <span class="text-danger d-none">Task name is required!</span>
                             </div>
-                            <div class="col-md-4">
+                            <!-- <div class="col-md-4">
 
                                 <label class="form-label fw-bold">Assign To</label>
                                 <select id="assignee" class="form-control select2" data-placeholder="Choose Browser"
@@ -882,40 +882,24 @@ color: #000;
                                 <span class="text-danger d-none" id="vendor-span">Add vendors first!!</span>
                                 <br>
                                 <a href="./tasks-vendors.html" id="addVendorAnchor" style="display: none;">Add Vendor!</a>
-                            </div>
-                            <!-- <div class="col-md-4">
-                              
-                                    <label class="form-label">Select Filter</label>
-                                    <select multiple="multiple" class="filter-multi" >
-                                            <option value="1">1</option>
-                                            <option value="2" >2</option>
-                                            <option value="3" >3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                            <option value="6">6</option>
-                                            <option value="7">7</option>
-                                            <option value="8">8</option>
-                                            <option value="9">9</option>
-                                            <option value="10">10</option>
-                                            <option value="11">11</option>
-                                            <option value="12">12</option>
-                                            <option value="13">13</option>
-                                            <option value="14">14</option>
-                                            <option value="15">15</option>
-                                            <option value="16">16</option>
-                                            <option value="17">17</option>
-                                            <option value="18">18</option>
-                                            <option value="19">19</option>
-                                            <option value="20">20</option>
-                                        </select>
-                                        <span class="text-danger d-none" id="vendor-span">Add vendors first!!</span>
                             </div> -->
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label for="inputState" class="form-label fw-bold">Related To</label>
                                 <select required id="property" class="form-select form" placeholder="Enter Related To here">
                                     <option selected>Choose...</option>
                                 </select>
                                 <span class="text-danger d-none">This field is required!</span>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-bold">Assign To</label>
+                                <select multiple="multiple" data-placeholder="Choose Browser"
+                                multiple placeholder="Enter Assign To" class="hide-select" id="assignee">
+                                    
+                                </select>
+                                <span class="text-danger d-none" id="vendor-span">Add vendors first!!</span>
+                                <br>
+                                <a href="./tasks-vendors.html" id="addVendorAnchor" style="display: none;">Add
+                                    Vendor!</a>
                             </div>
                             <div class="col-md-4">
                                 <label for="inputEmail4" class="form-label fw-bold">Due Date</label>
@@ -2562,12 +2546,15 @@ function dragOverHandler(ev) {
                         $("#user-name").text(toTitleCase(response.user))
                         $("#header-user").text(toTitleCase(response.user))
                         // console.log(response)
-                        $("#assignee").empty()
+                        // $("#assignee").empty()
                         // $("#assignee").append($("<option></option>").text("Choose..."))
+                        var selectElement = $('#assignee');
+                    selectElement.empty();
                         $("#assignee_update").empty()
                         $("#assignee_update").append($("<option></option>").text("Choose..."))
                         if (response.data.length === 0) {
-                            $("#assignee").append($("<option></option>").text("No Vendor available.."));
+                            // $("#assignee").append($("<option></option>").text("No Vendor available.."));
+                            selectElement.append($('<option></option>').text('No Vendor available..'));
                             $("#assignee_update").append($("<option></option>").text("No Vendor available.."));
                             // $('#addVendorAnchor').show()
                         } else {
@@ -2575,12 +2562,18 @@ function dragOverHandler(ev) {
                                 // console.log(property);
                                 var optionText = vendor.firstName + " " + vendor.lastName;
                                 var optionValue = vendor.id;
-                                $("#assignee").append($("<option></option>").text(optionText).val(optionValue));
+                                var option = $('<option></option>')
+                                .val(vendor.id)
+                                .text(vendor.firstName + " " + vendor.lastName);
+                            selectElement.append(option);
+                                // $("#assignee").append($("<option></option>").text(optionText).val(optionValue));
                                 $("#assignee_update").append($("<option></option>").text(optionText).val(optionValue));
                                 
                             });
                             // $('#addVendorAnchor').hide()
                         }
+                    selectElement.multipleSelect();
+
                         // Handle state selection change
                     },
                     error: function (xhr, status, error) {
