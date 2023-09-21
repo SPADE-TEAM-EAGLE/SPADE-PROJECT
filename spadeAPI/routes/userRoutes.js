@@ -184,6 +184,9 @@ router.get("/fetchUsersChats", verifyToken, chatsController.fetchUsersTenants);
 router.post("/createNewMessageTenant", verifyTokenTenant, messageClt.createNewMessageTenant);
 router.post("/createNewMessage", verifyToken, messageClt.createNewMessage);
 router.get("/TenantMessages/:chatId", verifyTokenTenant, messageClt.getAllMessages);
+router.get("/getMessagesCount", messageClt.getMessagesCount);
+router.put("/updateMessagesCount", messageClt.updateMessagesCount);
+// router.get("/getMessagesCount", messageClt.getMessagesCount);
 router.get("/LandlordMessages/:chatId", verifyToken, messageClt.getAllMessages);
 
 // profile complition
