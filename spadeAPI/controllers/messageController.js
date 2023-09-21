@@ -143,6 +143,7 @@ const messageClt = {
         try {
             const { sender } = req.body;
             const { userId } = req.user;
+            // console.log(req);
             // const isread = 0;
             if (!sender) {
                 throw new Error("Please provide all required fields");

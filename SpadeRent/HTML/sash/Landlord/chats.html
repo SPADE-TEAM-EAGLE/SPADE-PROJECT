@@ -3888,6 +3888,25 @@
                                 localStorage.setItem("tenantName", tenatName)
                                 socket.emit('joinRoom', { chatId: localStorage.getItem("chatId") });
                                 $.ajax({
+                        url: 'http://localhost:3000/api/spade/updateMessagesCountLandlord',
+                        type: 'PUT',
+                        data: JSON.stringify({
+                            sender : tenatId
+                        }),
+                        contentType: 'application/json',
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            console.log("updateMessagesCountLandlord");
+                            console.log(response);
+                            $(`#chat`+tenatId).text('0')
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(error);
+                        }
+                    });
+                                $.ajax({
                                     url: 'https://backend.app.spaderent.com/api/spade/getUserById/' + Number(tenatId) + '/tenant',
                                     type: 'GET',
                                     contentType: false,
@@ -4096,7 +4115,7 @@
                                                                     <p>` + tenant.tEmail + `</p>
                                                                 </div>
                                                             </div>
-                                                            <span class="badge bg-primary side-badge" style="top: 22px;">`+tenant.messageCount['count(message)']+`</span>
+                                                            <span class="badge bg-primary side-badge" style="top: 22px;" id="chat`+tenant.tenantID+`">`+tenant.messageCount['count(message)']+`</span>
                                                             </div></a>`;
                                 tab_pane.append(row);
                             });
