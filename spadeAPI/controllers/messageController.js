@@ -77,15 +77,15 @@ const messageClt = {
 
     },
 
-    // get (Message) Number of count
-    getMessagesCount : async (req, res) => {
+    // get (Message) Number of count landlord
+    getMessagesCountLandlord : async (req, res) => {
         try {
-            const { receiverId } = req.body;
-            if (!receiverId) {
+            const { userId } = req.user;
+            if (!userId) {
                 throw new Error("Please provide all required fields");
             }
             // const getMessages = await queryRunner(selectQuery("messages", "chatId"), [chatId]);
-            const  getAllMessagesCount = await queryRunner(getMessageCount, [receiverId])
+            const  getAllMessagesCount = await queryRunner(getMessageCount, [userId])
             if (getAllMessagesCount[0].length > 0) {
                 res.status(200).json({
                     message: "Messages fetched successfully",
@@ -106,16 +106,68 @@ const messageClt = {
     },
 
 
-     // get update Messages Count
-     updateMessagesCount : async (req, res) => {
+    // get (Message) Number of count Tenant
+    getMessagesCountTenant : async (req, res) => {
         try {
-            const { receiverId } = req.body;
-            // const isread = 0;
-            if (!receiverId) {
+            const { userId } = req.user;
+            if (!userId) {
                 throw new Error("Please provide all required fields");
             }
             // const getMessages = await queryRunner(selectQuery("messages", "chatId"), [chatId]);
-            const  updateAllMessagesCount = await queryRunner(updateMessageCount, [receiverId])
+            const  getAllMessagesCount = await queryRunner(getMessageCount, [userId])
+            if (getAllMessagesCount[0].length > 0) {
+                res.status(200).json({
+                    message: "Messages fetched successfully",
+                    Count: getAllMessagesCount[0][0]
+                })
+            }else{
+                res.status(200).json({
+                    message: "Messages fetched successfully",
+                    Count: "0"
+                })
+            }
+        } catch (error) {
+            res.status(400).json({
+                message: error.message
+            })
+        }
+
+    },
+
+     // get update Messages Count Landlord
+     updateMessagesCountLandlord : async (req, res) => {
+        try {
+            const { userId } = req.user;
+            // const isread = 0;
+            if (!userId) {
+                throw new Error("Please provide all required fields");
+            }
+            // const getMessages = await queryRunner(selectQuery("messages", "chatId"), [chatId]);
+            const  updateAllMessagesCount = await queryRunner(updateMessageCount, [userId])
+            if (updateAllMessagesCount[0].affectedRows > 0) {
+                res.status(200).json({
+                    message: "Messages Updated successfully",
+                    // Count: getAllMessagesCount[0][0]
+                })
+            }
+        } catch (error) {
+            res.status(400).json({
+                message: error.message
+            })
+        }
+
+    },
+    
+     // get update Messages Count Tenant 
+     updateMessagesCountTenant : async (req, res) => {
+        try {
+            const { userId } = req.user;
+            // const isread = 0;
+            if (!userId) {
+                throw new Error("Please provide all required fields");
+            }
+            // const getMessages = await queryRunner(selectQuery("messages", "chatId"), [chatId]);
+            const  updateAllMessagesCount = await queryRunner(updateMessageCount, [userId])
             if (updateAllMessagesCount[0].affectedRows > 0) {
                 res.status(200).json({
                     message: "Messages Updated successfully",
