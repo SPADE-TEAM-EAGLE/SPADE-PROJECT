@@ -66,7 +66,8 @@ const {
   deleteUserAccountData,
   updateAuthQuery,
   addResetTokenTenant,
-  propertyUnitCount
+  propertyUnitCount,
+  getMessageCountByID
 } = require("../constants/queries");
 
 const { hashedPassword } = require("../helper/hash");
@@ -1657,9 +1658,6 @@ exports.viewAllPropertyTenant = async (req, res) => {
   try {
     const { userId, userName } = req.user;
     // const { userId, userName } = req.body;
-    // const {id} = req.query;
-    // console.log(userId);
-    // console.log(req.user);
     let PropertyTenantResult;
     // console.log(id)
     PropertyTenantResult = await queryRunner(selectAllTenants, [userId]);
@@ -1682,7 +1680,13 @@ exports.viewAllPropertyTenant = async (req, res) => {
             "No tenant Increase",
           ];
         }
+        // Unread messages is start 
+
+      //   const chatCountResult = await queryRunner(getMessageCountByID ,[userId, tenantID]);
+      //   if (chatCountResult[0].length > 0) {
+      // }        
       }
+      //  ddddd
       res.status(200).json({
         data: PropertyTenantResult,
         message: "Property Tenant ",

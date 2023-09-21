@@ -186,8 +186,8 @@ router.post("/createNewMessage", verifyToken, messageClt.createNewMessage);
 router.get("/TenantMessages/:chatId", verifyTokenTenant, messageClt.getAllMessages);
 router.get("/getMessagesCountLandlord", verifyToken, messageClt.getMessagesCountLandlord);
 router.get("/getMessagesCountTenant", verifyTokenTenant, messageClt.getMessagesCountTenant);
-router.put("/updateMessagesCountLandlord", verifyToken, messageClt.updateMessagesCount);
-router.put("/updateMessagesCountTenant", verifyTokenTenant, messageClt.updateMessagesCount);
+router.put("/updateMessagesCountLandlord", verifyToken, messageClt.updateMessagesCountLandlord);
+router.put("/updateMessagesCountTenant", verifyTokenTenant, messageClt.updateMessagesCountTenant);
 // router.get("/getMessagesCount", messageClt.getMessagesCount);
 router.get("/LandlordMessages/:chatId", verifyToken, messageClt.getAllMessages);
 
