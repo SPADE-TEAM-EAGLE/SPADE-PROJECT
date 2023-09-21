@@ -94,7 +94,7 @@ const messageClt = {
             }else{
                 res.status(200).json({
                     message: "Messages fetched successfully",
-                    Count: "0"
+                    Count: ""
                 })
             }
         } catch (error) {
@@ -123,7 +123,7 @@ const messageClt = {
             }else{
                 res.status(200).json({
                     message: "Messages fetched successfully",
-                    Count: "0"
+                    Count: ""
                 })
             }
         } catch (error) {
