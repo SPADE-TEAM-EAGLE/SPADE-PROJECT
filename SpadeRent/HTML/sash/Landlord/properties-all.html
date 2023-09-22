@@ -35,6 +35,7 @@
     <!-- <link rel="stylesheet" href="../assets/css/"> -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
     <!-- COLOR SKIN CSS -->
+    
     <script>
         if (localStorage.getItem("property") == "false") {
             window.location = "./new-property.html"
@@ -595,10 +596,11 @@
             background: #ECF3F9 !important;
         }
 
-        .modal-content{
+        .modal-content {
             border-radius: 15px !important;
         }
-        .card{
+
+        .card {
             border-radius: 15px !important;
         }
     </style>
@@ -955,7 +957,17 @@
                         <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
                     </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body d-none" id="addmodal_body_loader">
+                    <div class="dimmer active">
+                        <div class="lds-ring">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body" id="addmodal_body">
                     <div class="accordion-item mb-4" id="accordion-item1">
                         <h2 class="accordion-header" id="headingOne">
                             <button class="accordion-button text-white" id="accordian-button-1" type="button"
@@ -1197,9 +1209,12 @@
                             <strong class="color-primary">Success!&nbsp;</strong>
                             <i class="fi fi-rs-check-circle text-success"></i>
                         </h2>
-                        <a id="unit-link" class="btn btn-outline-default btn-pill ms-1 my-2" style='background-color:#1467B0;color: white;'>Connect Bank Account</a>
-                        <a class="btn btn-outline-default btn-pill button" href="./add-tenant.html" id="add-tenant-link" style="border: 2px solid #1467B0;">
-                            <b><i class="fi fi-rs-plus" style="vertical-align: middle; font-size: 13px;"></i> Add Tenants</b>
+                        <a id="unit-link" class="btn btn-outline-default btn-pill ms-1 my-2"
+                            style='background-color:#1467B0;color: white;'>Connect Bank Account</a>
+                        <a class="btn btn-outline-default btn-pill button" href="./add-tenant.html" id="add-tenant-link"
+                            style="border: 2px solid #1467B0;">
+                            <b><i class="fi fi-rs-plus" style="vertical-align: middle; font-size: 13px;"></i> Add
+                                Tenants</b>
                         </a>
                         <p class="ms-2 mb-0 text-start fs-18">Your Property has been successfully added.</p>
                         <p class="ms-2 text-start fs-18">Please add tenant to this property.</p>
@@ -1263,7 +1278,7 @@
                                     <circle cx="12" cy="17" r="1" fill="#e62a45" />
                                     <path fill="#e62a45" d="M12,14a1,1,0,0,1-1-1V9a1,1,0,0,1,2,0v4A1,1,0,0,1,12,14Z" />
                                 </svg></span> -->
-                                <i class="fi fi-rs-circle-xmark" style="font-size: 60px; color: #FB233B;"></i>
+                            <i class="fi fi-rs-circle-xmark" style="font-size: 60px; color: #FB233B;"></i>
                             <h3 class="h4 mb-0 fw-bold fs-4">Are you sure you want to <br> delete this Property?</h3>
                             <!-- <p class="card-text">This is best if you no longer own or manage the property. <strong>It is not recommended</strong>. You may lose access to data associated with this property.</p> -->
 
@@ -1271,8 +1286,12 @@
                         <div class="card-footer text-center border-0 pt-0 pb-5">
                             <div class="row">
                                 <div class="text-center">
-                                    <a href="javascript:void(0)" class="btn btn-primary" id="confirmDelete" style="border-radius: 50px; padding: 4px 30px 3px 30px;">Yes <span id="counter_delete"> (5)</span></a>
-                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close" style="border-radius: 50px; padding: 4px 30px 3px 30px;border: 1px solid #1467B0;">No</a>
+                                    <a href="javascript:void(0)" class="btn btn-primary" id="confirmDelete"
+                                        style="border-radius: 50px; padding: 4px 30px 3px 30px;">Yes <span
+                                            id="counter_delete"> (5)</span></a>
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal"
+                                        aria-label="Close"
+                                        style="border-radius: 50px; padding: 4px 30px 3px 30px;border: 1px solid #1467B0;">No</a>
                                 </div>
                             </div>
                         </div>
@@ -1323,7 +1342,17 @@
                         <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
                     </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body d-none" id="myModal_edit_body_loader">
+                    <div class="dimmer active">
+                        <div class="lds-ring">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body" id="myModal_edit_body">
                     <form class="row g-3" enctype="multipart/form-data" id="update-form">
                         <div class="col-md-12">
                             <label class="form-label fw-bold">Property Photo</label>
@@ -1873,11 +1902,13 @@
 
                                                     <!-- <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">Date Modified</a>
                                                         <div class="form-check m-0">
-                                                            <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="alphabets" value="option1">
+                                                            <input class="form-check-input mt-2" type="radio"
+                                                                name="exampleRadios" id="alphabets" value="option1">
                                                         </div>
                                                     </li> -->
 
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">Ascending</a>
+                                                    <li class="d-flex justify-content-between"><a
+                                                            href="javascript:void(0)" class="text-dark">Ascending</a>
                                                         <div class="form-check m-0">
                                                             <input class="form-check-input mt-2" type="radio"
                                                                 name="exampleRadios" id="ascending" value="option1">
@@ -1890,9 +1921,12 @@
                                                                 name="exampleRadios" id="descending" value="option1">
                                                         </div>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">Recently Added</a>
+                                                    <li class="d-flex justify-content-between"><a
+                                                            href="javascript:void(0)" class="text-dark">Recently
+                                                            Added</a>
                                                         <div class="form-check m-0">
-                                                            <input class="form-check-input mt-2" id="created-at" type="radio" name="exampleRadios" value="option1">
+                                                            <input class="form-check-input mt-2" id="created-at"
+                                                                type="radio" name="exampleRadios" value="option1">
                                                         </div>
                                                     </li>
                                                     <!-- <li class="d-flex justify-content-between"><a
@@ -1965,7 +1999,8 @@
                                                                 id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">Address</a>
+                                                    <li class="d-flex justify-content-between"><a class="text-dark"
+                                                            href="javascript:void(0)">Address</a>
                                                         <div class="form-check m-0">
                                                             <input type="checkbox" class="form-check-input mt-2"
                                                                 id="exampleCheck1" checked>
@@ -2580,8 +2615,6 @@
             </div>
         </div>
     </div>
-    <!-- Country-selector modal-->
-
     <!-- FOOTER -->
     <footer class="footer">
         <div class="container">
@@ -2597,7 +2630,7 @@
     </div>
 
     <!-- BACK-TO-TOP -->
-    <!-- <!-- <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a> --> -->
+    <!--  <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a> -->
     <a href="#addModal" data-bs-effect="effect-scale" data-bs-toggle="modal" id="add-tenant-side-btn"><i
             class="fe fe-plus"></i></a>
 
@@ -2702,30 +2735,31 @@
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
     <script src="../assets/js/email-verification.js"></script>
-<script>
-            $(document).ready(function(){
-                $.ajax({
-                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
-                    method: 'GET',
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-                    success: function (response) {
-                        console.log("getMessagesCountLandlord");
-                        console.log(response.Count['count(message)']);
-                        $('#chatCounter').text(response.Count['count(message)'])
-                    },
-                    error: function (xhr, status, error) {
-                        $("#myModal_warning").modal("show");
-                        setTimeout(function () {
-                            $('#myModal_warning').modal('hide');
-                            window.location = '../Landlord/login_module.html';
-                        }, 2000);
-                        console.log(error);
-                    }
-                });
+    
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    console.log("getMessagesCountLandlord");
+                    console.log(response.Count['count(message)']);
+                    $('#chatCounter').text(response.Count['count(message)'])
+                },
+                error: function (xhr, status, error) {
+                    $("#myModal_warning").modal("show");
+                    setTimeout(function () {
+                        $('#myModal_warning').modal('hide');
+                        window.location = '../Landlord/login_module.html';
+                    }, 2000);
+                    console.log(error);
+                }
             });
-        </script>
+        });
+    </script>
     <script src="../assets/js/intercom.js"></script>
     <script src="../assets/js/getNotification.js"></script>
     <script src="../assets/js/push_notification.js"></script>
@@ -3164,7 +3198,8 @@
             })
             $(document).on('click', '#next', function (e) {
                 e.preventDefault();
-
+                $('#addmodal_body').addClass('d-none')
+                $('#addmodal_body_loader').removeClass('d-none')
                 var propertyName = $("#propertyName").val();
                 var address = $("#address").val();
                 var city = $("#city").val();
@@ -3201,7 +3236,8 @@
                                 units: units,
                                 images: imageArray
                             };
-
+                            $('#addmodal_body').removeClass('d-none')
+                    $('#addmodal_body_loader').addClass('d-none')
                             $.ajax({
                                 url: 'https://backend.app.spaderent.com/api/spade/property',
                                 type: 'POST',
@@ -3274,6 +3310,8 @@
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
+                            $('#addmodal_body').removeClass('d-none')
+                    $('#addmodal_body_loader').addClass('d-none')
                             var password = 'your-secret-password';
                             var encryptedPropertyId = sjcl.encrypt(password, response.propertyId.toString());
 
@@ -3289,6 +3327,8 @@
                             }
                         },
                         error: function (xhr, status, error) {
+                            $('#addmodal_body').removeClass('d-none')
+                    $('#addmodal_body_loader').addClass('d-none')
                             if (xhr.responseJSON.error === 'Property Already Exist') {
                                 $('#addModal').modal('hide');
                                 $('#infoModal').modal('show');
@@ -3392,7 +3432,7 @@
         });
 
         function filterTable(selectedFilter) {
-            
+
             var tableBody = $('#table_body');
             var rows = tableBody.find('tr');
 
@@ -3403,7 +3443,7 @@
                     return textA.localeCompare(textB);
                 });
             } else if (selectedFilter === 'created-at') {
-                
+
                 rows.sort(function (a, b) {
                     var idA = new Date($(a).find('.created-at').text());
                     console.log(idA)
@@ -3520,8 +3560,8 @@
         $(document).on('click', '#update', function (e) {
             console.log("he;;")
             e.preventDefault();
+            
             $("#myModal_edit").modal("hide");
-
             var formData = new FormData();
             var propertyName = $("#propertyName_update").val();
             var address = $("#address_update").val();
@@ -3740,16 +3780,16 @@
 
                             
 
-                                
 
-                                // var UserId = '<td>' + US-272323 + '</td>' ;
+
+                            // var UserId = '<td>' + US-272323 + '</td>' ;
 
                             var propertyName = '<td class="propertyName" style="font-weight: 600;">' +
                                 property
                                     .propertyName +
                                 '</td>';
 
-                                var totalsqft = `<td class="totalsqft" style="font-weight: 600;">${property.propertySQFT} SQft.</td>`;
+                            var totalsqft = `<td class="totalsqft" style="font-weight: 600;">${property.propertySQFT} SQft.</td>`;
 
                             var colorClass = '';
                             var backgroundClass = '';
@@ -3781,7 +3821,7 @@
                                 '<span>' + property.city + ', ' + property.state + ' ' + property.zipCode +
                                 '</span>' +
                                 '</td>';
-                            var created_at=`<td class="created-at d-none" style="font-weight: 600;">${property.created_at}</td>`
+                            var created_at = `<td class="created-at d-none" style="font-weight: 600;">${property.created_at}</td>`
                             var password = 'your-secret-password';
                             var encryptedPropertyId = sjcl.encrypt(password, property.id.toString());
 
@@ -3790,7 +3830,7 @@
                             var dropdownMenu =
                                 '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
                                 '<ul class="dropdown-menu dropdown-menu-top">' +
-                                    `<li><a class="dropdown-item text-dark" href="./view-property.html?property=${encodedPropertyId}" style="display: flex; align-items: center;"><i class="fi fi-rs-eye" style="display: flex; align-items: center;"></i> &nbsp;&nbsp;&nbsp; View</a></li>` +
+                                `<li><a class="dropdown-item text-dark" href="./view-property.html?property=${encodedPropertyId}" style="display: flex; align-items: center;"><i class="fi fi-rs-eye" style="display: flex; align-items: center;"></i> &nbsp;&nbsp;&nbsp; View</a></li>` +
                                 '<li><a class="edit-option dropdown-item text-dark" href="javascript:void(0)" style="display: flex; align-items: center;"><i class="fi fi-rs-edit" style="display: flex; align-items: center;"></i> &nbsp;&nbsp;&nbsp; Edit</a></li>' +
                                 '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)" style="display: flex; align-items: center;"><i class="fi fi-rs-cross-small fs-20" style="display: flex; align-items: center;"></i> &nbsp;&nbsp;Delete</a></li>'
                             '</ul></td>';
@@ -3802,7 +3842,7 @@
                             tableBody.append(row);
 
                         });
-                        
+
                         $("#global-loader").fadeOut("slow")
                         $(document).on("click", ".edit-option", function (e) {
                             e.preventDefault();

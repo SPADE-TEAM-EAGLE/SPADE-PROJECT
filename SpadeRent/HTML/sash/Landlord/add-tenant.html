@@ -3197,8 +3197,85 @@
                         console.log('Error: ' + error);
                     }
                 });
+          
+          
             })
+            $('#addModal_units').on('hidden.bs.modal', function () {
+                $.ajax({
+                    url: 'https://backend.app.spaderent.com/api/spade/getPropertyUnitsTenant',
+                    type: 'GET',
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        var properties = response.data; // Assuming the response data is an array of property objects
+                        console.log("property", response.data)
+                        // Populate Select Property dropdown
+                        var propertySelect = $('#property');
+                        propertySelect.empty(); // Clear existing options
+                        propertySelect.append($('<option></option>')
+                            .text("Choose...")
+                        )
+                        properties.forEach(function (property) {
+                            var option = $('<option></option>')
+                                .text(property.propertyName)
+                                .val(property.id);
+                            propertySelect.append(option);
+                        });
 
+                        // Handle property selection change
+                        propertySelect.change(function () {
+                            var selectedPropertyId = $(this).val();
+
+                            // Find the selected property object
+                            var selectedProperty = properties.find(function (property) {
+                                return property.id == selectedPropertyId;
+                            });
+
+                            // Populate Select Property Unit dropdown
+                            var propertyUnitSelect = $('#unit');
+                            // Clear existing options
+                            propertyUnitSelect.empty()
+
+
+                            if (selectedProperty.vacantUnits.length === 0) {
+
+                                propertyUnitSelect.prop("disabled", true);
+                                propertyUnitSelect.append($('<option></option>')
+                                    .text("No unit available!!"))
+                            } else {
+                                propertyUnitSelect.prop("disabled", false);
+                                propertyUnitSelect.append($('<option></option>')
+                                    .text("Choose..."))
+
+                                selectedProperty.vacantUnits.forEach(function (unit) {
+
+                                    var option = $('<option></option>')
+                                        .text(unit.unitNumber)
+                                        .val(unit.id);
+                                    propertyUnitSelect.append(option);
+                                });
+                            }
+
+                        });
+                        $('#addUnitBtn').hide()
+                        $('#addModal_units').modal('hide')
+
+                    },
+                    error: function (xhr, status, error) {
+                        $("#myModal_warning_connection").modal("show");
+                        setTimeout(function () {
+                            $('#myModal_warning_connection').modal('hide');
+
+                        }, 2000);
+                        console.log('Error: ' + error);
+                    }
+                });
+          
+          
+        });
             function getData2() {
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/PropertyUnits',

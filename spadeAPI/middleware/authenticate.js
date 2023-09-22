@@ -12,6 +12,7 @@ const verifyToken = async (req, res, next) => {
     return res.status(401).send("Access Denied");
   }
   try {
+    // console.log(token);
     const decoded = jwt.verify(token, config.JWT_SECRET_KEY);
     // console.log("landlord",decoded)
     const result = await queryRunner(selectQuery("users", "Email"), [

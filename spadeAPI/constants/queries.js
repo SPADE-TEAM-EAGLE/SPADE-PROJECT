@@ -969,8 +969,11 @@ exports.getMessages =
 exports.getMessageCount =
 `select count(message) from messages where isRead = "1" AND receiverID = ?`;
 
+exports.updateMessageCountLandlord =
+`UPDATE messages SET isRead = "0" where receiverID = ? AND sender = ?`;
 exports.updateMessageCount =
 `UPDATE messages SET isRead = "0" where receiverID = ?`;
+
 exports.getMessageCountByID =
 `select count(message) from messages where isRead = "1" AND receiverID = ? AND sender = ?`;
 // dashboard task Count

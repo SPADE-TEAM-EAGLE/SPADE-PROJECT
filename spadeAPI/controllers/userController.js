@@ -1681,10 +1681,15 @@ exports.viewAllPropertyTenant = async (req, res) => {
           ];
         }
         // Unread messages is start 
-
-      //   const chatCountResult = await queryRunner(getMessageCountByID ,[userId, tenantID]);
-      //   if (chatCountResult[0].length > 0) {
-      // }        
+        // const chatCount = 0;
+        const chatCountResult = await queryRunner(getMessageCountByID ,[userId, tenantID]);
+        // console.log(userId, tenantID);
+        if (chatCountResult[0].length > 0) {
+          PropertyTenantResult[0][i].messageCount = chatCountResult[0][0];
+      }
+      // else{
+      //   PropertyTenantResult[0][i].messageCount = chatCount;
+      // }
       }
       //  ddddd
       res.status(200).json({

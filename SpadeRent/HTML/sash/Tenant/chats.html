@@ -15,7 +15,7 @@
         href='https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css'>
     <link rel="shortcut icon" type="image/x-icon" href="../assets/images/brand/favicon.ico" />
     <!-- TITLE -->
-    <title>Property Tenant - SpadeRent</title>
+    <title>Chat - SpadeRent</title>
     <!-- BOOTSTRAP CSS -->
     <link id="style" href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <!-- STYLE CSS -->
@@ -788,7 +788,7 @@
             height: 100%;
             border: none;
             outline: none;
-            padding: 1.5em 1em;
+            padding: 1.5em 3em 1.5em 1em;
             /* border-radius: 50px; */
             color: var(--color);
             border-radius: 10px;
@@ -2891,7 +2891,58 @@
         <script src="../assets/js/completeTenantProfile.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+        <script>
+            $(document).ready(function() {
+                $('#input-message').on('input', function() {
+                    var inputLength = $(this).val().length;
+                    
+                    if (inputLength === 255) {
+                        $(this).removeClass('border-green').addClass('border-red');
+                    } else {
+                        $(this).removeClass('border-red').addClass('border-green');
+                    }
+                });
+            });
+        </script>
+  <script>
+    $(document).ready(function(){
+        $.ajax({
+                url: 'http://localhost:3000/api/spade/updateMessagesCountTenant',
+                type: 'PUT',
+                contentType: false,
+                processData: false,
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    console.log(response);
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        $.ajax({
+            url: 'http://localhost:3000/api/spade/getMessagesCountTenant',
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+            },
+            success: function (response) {
+                console.log("getMessagesCountLandlord");
+                console.log(response.Count['count(message)']);
+                $('#chatCounter').text(response.Count['count(message)'])
+            },
+            error: function (xhr, status, error) {
+                $("#myModal_warning").modal("show");
+                setTimeout(function () {
+                    $('#myModal_warning').modal('hide');
+                    window.location = '../Landlord/login_module.html';
+                }, 2000);
+                console.log(error);
+            }
+        });
+    });
+</script>
 
         <script>
             // const socket = io("http://ec2-52-45-181-206.compute-1.amazonaws.com:3000");
@@ -3311,7 +3362,7 @@
                         var str = "";
 
                         $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/upload',
+                            url: 'http://localhost:3000/api/spade/uploadTenant',
                             type: 'POST',
                             data: uploadFormData,
                             contentType: false,
