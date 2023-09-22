@@ -38,7 +38,14 @@ const verifyToken = async (req, res, next) => {
       invoiceEmail : result[0][0].invoiceEmail,
       taskEmail : result[0][0].taskEmail,
       businessLogo : result[0][0].businessLogo,
-
+      businessLogoKey : result[0][0].businessLogoKey,
+      BAzipCode : result[0][0].BAZipcode,
+      BAcity : result[0][0].BACity,
+      BAstate : result[0][0].BAState,
+      city : result[0][0].PACity,
+      state : result[0][0].PAState,
+      zipCode : result[0][0].PAZipcode,
+      
     };
     next();
     // console.log("hello")

@@ -641,31 +641,32 @@
             font-weight: bold !important;
         }
 
-                /* style dropdown start  */
-                .ui.selection.dropdown {
-                cursor: pointer;
-                word-wrap: break-word;
-                line-height: 1em;
-                white-space: normal;
-                outline: 0;
-                -webkit-transform: rotateZ(0);
-                transform: rotateZ(0);
-                min-width: 14em;
-                min-height: 34px;
-                background: #fff;
-                display: inline-block;
-                padding: 11px 0em 0 10px;
-                border-radius: 8px;
-                color: #000;
-                border: 1px solid #e9edf4;
-}
+        /* style dropdown start  */
+        .ui.selection.dropdown {
+            cursor: pointer;
+            word-wrap: break-word;
+            line-height: 1em;
+            white-space: normal;
+            outline: 0;
+            -webkit-transform: rotateZ(0);
+            transform: rotateZ(0);
+            min-width: 14em;
+            min-height: 34px;
+            background: #fff;
+            display: inline-block;
+            padding: 11px 0em 0 10px;
+            border-radius: 8px;
+            color: #000;
+            border: 1px solid #e9edf4;
+        }
+
         /* style dropdown End  */
 
         .header {
-    padding-top: 0.75rem;
-    padding-bottom: 1.4rem;
-    border-bottom: 2px solid #949292;
-}
+            padding-top: 0.75rem;
+            padding-bottom: 1.4rem;
+            border-bottom: 2px solid #949292;
+        }
     </style>
 
 </head>
@@ -1574,12 +1575,12 @@
                             <form class="ui form">
                                 <section class="field">
                                     <label class="form-label fw-bold fs-18">Select Tenant</label>
-                                    <div class="ui fluid search selection dropdown" >
+                                    <div class="ui fluid search selection dropdown">
                                         <input type="hidden" name="shipper_state_state">
                                         <i class="dropdown icon"></i>
                                         <div class="default text">Select State</div>
                                         <div class="menu" id="menu">
-                                            <div class="item" data-value="AL">Select Option</div>   
+                                            <div class="item" data-value="AL">Select Option</div>
                                         </div>
                                     </div>
                                 </section>
@@ -1702,8 +1703,7 @@
                                                     data-bs-placement="top" required>
                                                     <option selected="">Choose...</option>
                                                 </select>
-                                                <span><a href="javascript:void(0)" class="addCategoryBtn">Add
-                                                        Category!</a></span>
+
                                                 <span class="text-danger d-none">State is required!</span>
                                             </td>
                                             <!-- <td><select id="state" name="property" class="form-select form"
@@ -1729,8 +1729,137 @@
                                 </table>
                             </div>
                         </div>
+                        <!-- <div class="col-12 mb-2">
+                            <a href="javascript:;" class="mt-1" id="" data-bs-toggle="collapse" href="#collapse-category"
+                            role="button" aria-expanded="false" aria-controls="collapse-category">+ Add Category</a>
+                        </div>
+                        <div class="collapse row" id="collapse-category">
+                            <div class="col-md-6 col-lg-6">
+                                <label class="form-label fw-bold fs-18">Start Date</label>
+                                <input type="date" class="form-control form" id="startDate"
+                                    placeholder="Select Start Date">
+                                <span class="text-danger d-none">Start Date is required!</span>
+                            </div>
+                            <div class="col-md-6 col-lg-6">
+                                <label class="form-label fw-bold fs-18">End Date</label>
+                                <input type="date" class="form-control form" id="endDate" placeholder="Enter End Date">
+                                <span class="text-danger d-none">End Date is required!</span>
+                            </div>
+                            <div class="col-md-12 col-lg-6">
+                                <label class="form-label fw-bold fs-18">Frequency</label>
+                                <select class="form-control select2 form-select" data-placeholder="Every Month"
+                                    id="frequency" placeholder="Select Frequency" data-bs-container="#addModal">
+                                    <option label="Choose one">
+                                    </option>
+                                    <option value="Repeat Yearly">Repeat Yearly</option>
+                                    <option value="Repeat Monthly">Repeat Monthly</option>
+                                </select>
+                                <span class="text-danger d-none">Photos are required!</span>
+                            </div>
+
+                            <div class="col-md-12 col-lg-6">
+                                <label class="form-label fw-bold fs-18">Terms</label>
+                                <select class="form-control select2 form-select" data-placeholder="Every Month"
+                                    id="terms" data-bs-placement="top" placeholder="Select Terms">
+                                    <option label="Choose one">
+                                    </option>
+                                    <option value="Due on Receipt">Due on Receipt</option>
+                                </select>
+                                <span class="text-danger d-none">Photos are required!</span>
+                            </div>
+                        </div> -->
                         <div class="col-12 mb-2">
                             <a href="javascript:;" class="mt-1" id="add-item1">+Add Line Item</a>
+                        </div>
+                        <div class="col-12 mb-2">
+                            <a data-bs-toggle="collapse" href="#collapse-category" role="button" aria-expanded="false"
+                                aria-controls="collapse-category">
+                                + Add Category
+                            </a>
+                        </div>
+                        <div class="collapse" id="collapse-category">
+                            <div class="card card-body">
+                                <h2 class="h2-personal-inf text-dark mb-3">Invoice Categories</h2>
+                                <div
+                                    style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-7">
+                                        <div class="table-responsive">
+                                            <table
+                                                class="table text-nowrap table-borderless text-md-nowrap mg-b-0 mb-0">
+                                                <tbody id="add-item-container1-add">
+                                                    <tr class="tr">
+                                                        <td>
+                                                            <label for=""><b>Categories</b></label>
+                                                            <input type="text" name="categories-add"
+                                                                class="form-control category-add">
+                                                        </td>
+                                                        <td style="width: 1px;">
+                                                            <label for=""><b>Taxable</b></label>
+                                                            <div class="material-switch pull-right mt-1">
+                                                                <input id="someSwitchOptionInfo-add"
+                                                                    class="category-tax-add"
+                                                                    name="someSwitchOption001-add" type="checkbox">
+                                                                <label for="someSwitchOptionInfo-add"
+                                                                    class="label-info"></label>
+                                                            </div>
+                                                            <!-- <div class="form-check form-switch">
+                                                                <input class="form-check-input"
+                                                                    type="checkbox" role="switch"
+                                                                    id="flexSwitchCheckChecked"
+                                                                    checked>
+                                                                <label class="form-check-label"
+                                                                    for="flexSwitchCheckChecked">Taxable</label>
+                                                            </div> -->
+                                                        </td>
+                                                        <td><button type="button" class="btn" id="del-btn1-add"
+                                                                style="text-align: left;">
+                                                                <i class="fi fi-rs-trash text-danger fs-5"></i>
+                                                            </button></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <a href="javascript:;" class="mt-1 text-primary" id="add-item1-add">+Add Line
+                                            Item</a>
+                                    </div>
+                                </div>
+                                <h2 class="h2-personal-inf text-dark mb-3 mt-5">Tax Setting</h2>
+                                <div
+                                    style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <div class="form-group"> <label class="form-label"><b>Select
+                                                    Category</b></label> <select name="categories-add"
+                                                id="categories-add" class="form-control form-select"
+                                                data-bs-placeholder="Select Category">
+
+                                            </select> </div>
+                                    </div>
+
+                                    <div class="col-lg-3">
+                                        <div class="form-group mt-2">
+                                            <label for=""><b>Set Taxes for Invoice</b></label>
+                                            <input type="text" name="tax-add" placeholder="8.26%" id="tax-add"
+                                                class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6"></div>
+                                    <div class="col-lg-3 mt-4"
+                                        style="display: flex; width: auto; justify-content: space-evenly;">
+                                        <a href="#">
+                                            <button class="btn btn-light btn-pill m-2 w-100"
+                                                onclick="(() => { $('#collapse-category').collapse('hide'); })()">Close</button>
+                                        </a>
+                                        <button class="btn btn-primary btn-pill m-2 w-40" id="save-categories-add"
+                                            disabled>Save</button>
+                                    </div>
+                                </div>
+
+
+                            </div>
                         </div>
                         <div class="col-md-12 col-lg-8">
                             <label for="" style="color: #1467B0;"><b>Memo</b></label>
@@ -1811,7 +1940,7 @@
             </div>
         </div>
     </div>
-   
+
     <div class="modal fade" id="myModal_edit" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
@@ -1831,7 +1960,7 @@
                         <div class="col-md-12 col-lg-6">
                             <label class="form-label fw-bold fs-18">Select Tenant</label>
                             <select class="form-control select2 form-select d-block" data-placeholder="Select Tenant"
-                                name="tenants" id="tenants_update" required>
+                                name="tenants" id="tenants_update" readonly>
                                 <option label="Choose one">
                                 </option>
                             </select>
@@ -3094,7 +3223,7 @@
                                                     id="customize_btn" data-bs-toggle="dropdown"
                                                     style="border: none;"><strong>VISIBILITY</strong><i
                                                         class="fe fe-chevron-down ms-2"></i></button>
-                                                <ul class="dropdown-menu" role="menu">
+                                                <ul class="dropdown-menu" id="customize_btn_check" role="menu">
                                                     <li><a href="javascript:void(0)" class="text-dark"><strong>Column
                                                                 to show:</strong></a>
                                                     </li>
@@ -3958,6 +4087,7 @@
 
         </script>
         <script>
+            var userData;
             var bussinessLogoImg;
             $(document).ready(() => {
                 $.ajax({
@@ -3969,6 +4099,7 @@
                     success: function (response) {
                         console.log("protected");
                         console.log(response);
+                        userData=response
                         if (response.image !== " " && response.image !== null) {
 
                             $("#user-img").attr("src", response.image)
@@ -4296,7 +4427,9 @@
                     updateSelectedFilesContainer(); // Update the selected files container
                 });
 
-
+                var tenantData = [];
+                var invoiceData = []
+                var categoryData = []
                 function formatFileSize(bytes) {
                     if (bytes === 0) return '0 Bytes';
                     var k = 1024;
@@ -4313,203 +4446,76 @@
 
                     return fileName;
                 }
-                $(".save-invoice").each(function () {
-                    $(this).on("click", function () {
-                        var selectedTenant = $('#tenants').attr('data-value');
-                        var selectedInvoiceType = $('input[name="invoice"]:checked').val();
-                        var startDate = $('#startDate').val();
-                        var endDate = $('#endDate').val();
-                        var dueDate = $('#dueDate').val()
-                        var selectedFrequency = $('#frequency').val();
-                        // var daysUntilDue = $('#daysUntilDue').val();
-                        var selectedTerms = $('#terms').val();
-                        var additionalNotes = $('#additionalNotes').val();
-                        var switchValue = $("input[name='custom-switch-radio']").is(":checked");
-                        var lineItems = [];
-                        $('#lineItemsTable tbody tr').each(function () {
-
-                            var category = $(this).find('[name="category"]').val();
-                            var property = $(this).find('[name="property"]').val();
-                            var memo = $(this).find('input[name="memo"]').val();
-                            var amount = $(this).find('input[name="amount"]').val();
-                            var tax = $(this).find('input[name="tax"]').val()
-
-                            lineItems.push({
-                                category: category,
-                                property: property,
-                                memo: memo,
-                                tax: tax,
-                                amount: amount
-                            });
-                        });
-
-                        // Create a FormData object to hold the data and files
-                        var buttonText = $(this).text();
-                        var invoiceData = {}
-                        var send = ""
-                        if (buttonText !== "Save" && buttonText.indexOf("Print") === -1) {
-                            invoiceData.sendmails = "Yes"
-                            send = "yes"
-                        } else if (buttonText !== "Save" && buttonText.indexOf("Print") !== -1) {
-
-                        }
-                        console.log($("#totalText").text().split(' ')[1])
-                        // var fileInput = document.getElementById('fileInput');
-                        // var files = fileInput.files;
-
-                        if (selectedFiles.length >= 1) {
-                            var uploadFormData = new FormData();
-                            for (var i = 0; i < selectedFiles.length; i++) {
-                                var file = selectedFiles[i];
-                                uploadFormData.append('image', file);
-                            }
-                            $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/upload',
-                                type: 'POST',
-                                data: uploadFormData,
-                                contentType: false,
-                                processData: false,
-                                headers: {
-                                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                                },
-                                success: function (response) {
-                                    $("#addModal").modal("hide")
-                                    var imageArray = response.images;
-                                    invoiceData = {
-                                        tenantID: selectedTenant,
-                                        invoiceType: selectedInvoiceType,
-                                        startDate: startDate,
-                                        endDate: endDate,
-                                        frequency: selectedFrequency,
-                                        dueDate: dueDate,
-                                        dueDays: "",
-                                        terms: selectedTerms,
-                                        repeatTerms: "",
-                                        additionalNotes: additionalNotes,
-                                        totalAmount: $("#totalText").text().split(' ')[1],
-                                        images: imageArray,
-                                        lineItems: lineItems
-                                        // Loop through the lineItems array and add each line item to the FormData object
-                                    }
-
-                                    $.ajax({
-                                        url: 'https://backend.app.spaderent.com/api/spade/createInvoice',
-                                        type: 'POST',
-                                        data: JSON.stringify(invoiceData),
-                                        contentType: 'application/json',
-                                        headers: {
-                                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                                        },
-
-                                        success: function (response) {
-                                            const tenant = tenantData.find(obj => obj.tenantID == selectedTenant)
-                                            console.log(tenant)
-
-                                            invoiceId = response.invoiceId
-
-                                            $('#addModal input[type="text"], #addModal input[type="date"], #addModal textarea').val('');
-                                            $('#addModal select').prop('selectedIndex', 0);
-                                            if (send == "yes") {
-                                                $("#succes-tenantName").text(`sent to ${tenant.firstName + " " + tenant.lastName}.`)
-                                                $("#succesModal").modal("show")
-                                            } else {
-                                                GetNotification();
-                                                $("#succesModal_invoice").modal("show")
-                                            }
-                                            const buttonText = $(this).text();
-                    const headingElem = $("#viewModal .modal-title")
-                    headingElem.empty()
-                    // headingElem.append(`View <strong class="color-primary">Invoice</strong>`)
-                    switch (buttonText) {
-                        case "Edit":
-                            headingElem.append(`Edit <strong class="color-primary">Invoice</strong>`)
-                            break;
-                        case "Resend Invoice":
-                            headingElem.append(`Resend <strong class="color-primary">Invoice</strong>`)
-
-                            break;
-                        default:
-                            headingElem.append(`View <strong class="color-primary">Invoice</strong>`)
-
-                            break;
-                    }
-                    const invoiceIdElement = $(this).closest("tr").find(".invoice-id");
-                    console.log(invoiceIdElement.text())
-                    invoiceId = invoiceIdElement.text();
-                    // console.log(tenantData,invoiceData
-                    // console.log(invoiceData)
-                    const data1 = invoiceData.find(obj => obj.invoiceID == invoiceId);
-                    const data2 = tenantData.find(obj => obj.tenantID == data1.tenantID)
-
-                    const data = {
-                        ...data1,
-                        ...data2
-                    }
+                function saveAndPrint(tenant, data){
                     $("#client-id").empty()
-                    $("#client-id").append(`<h5 class="fw-bold" style="color: 
+                                            $("#client-id").append(`<h5 class="fw-bold" style="color: 
                                 #562AC8;">BILLED TO</h5>
-                                    <p class="text-black">${data.firstName + " " + data.lastName}<br>${data.tAddress
-                        }<br>${data.tCity},
-                                        ${data.tState}<br>${data.tZipcode}<br>United States<br>${data.tPhoneNumber}</p>`)
-                    console.log(1)
-                    $("#owner-id").empty()
-                    $("#owner-id").append(`                                    <h5 class="text-black fw-bold">${data.companyName}</h5>
-                                    <p class="text-black">${data.pAddress}<br>${data.pCity}, ${data.pState}<br>${data.pZipCode}<br>United
-                                        States<br>1-888-123-8910</p>`)
-                    $("#table-body").empty()
-                    var dateObj = new Date(data.created_at);
-                    var day = dateObj.getDate();
-                    var month = dateObj.getMonth() + 1;
-                    var year = dateObj.getFullYear();
-                    $("#table-body").append(
-                        `<tr class="text-black">
+                                    <p class="text-black">${tenant.firstName + " " + tenant.lastName}<br>${tenant.tAddress
+                                                }<br>${tenant.tCity},
+                                        ${tenant.tState}<br>${tenant.tZipcode}<br>United States<br>${tenant.tPhoneNumber}<br>${tenant.tEmail}</p>`)
+
+                                            $("#owner-id").empty()
+                                            $("#owner-id").append(`                                    <h5 class="text-black fw-bold">${tenant.companyName}</h5>
+                                    <p class="text-black">${tenant.pAddress}<br>${tenant.pCity}, ${tenant.pState}<br>${tenant.pZipCode}<br>United
+                                        States<br>${tenant.tPhoneNumber}</p>`)
+                                            $("#table-body").empty()
+                                            var dateObj = new Date();
+                                            var day = dateObj.getDate();
+                                            var month = dateObj.getMonth() + 1;
+                                            var year = dateObj.getFullYear();
+                                            $("#table-body").append(
+                                                `<tr class="text-black">
                         <td>${day}/${month}/${year}</td>
-                                                    <td>INV-10012</td>
+                                                    <td>INV-${data.invoiceID}</td>
                                                     <td>$ ${data.totalAmount}</td>
                                                     <td>${data.dueDate}</td>
                                                     <td>Due On Receipt</td>
                     </tr>
                     `
-                    )
+                                            )
 
-                    $("#memo-table").empty()
-                    let totalTaxAmount = 0;
+                                            $("#memo-table").empty()
+                                            let totalTaxAmount = 0;
 
-                    data.memo.forEach((item) => {
-                        // Calculate the tax amount as a percentage of the item amount
-                        const taxAmount = (parseFloat(item.amount) * parseFloat(item.tax)) / 100;
+                                            data.lineItems.forEach((item) => {
+                                                // Calculate the tax amount as a percentage of the item amount
+                                                const taxAmount = (parseFloat(item.amount) * parseFloat(item.tax !== "" ? item.tax : 0)) / 100;
 
-                        // Add the tax amount to the totalTaxAmount variable
-                        totalTaxAmount += taxAmount;
-                        let categoryname;
-                        if (item.category == "rent") {
-                            categoryname = "Rent Amount"
-                        } else if (item.category == "triple") {
-                            categoryname = "Triple Net"
-                        } else if (item.category == "base") {
-                            categoryname = "Base Rent"
-                        } else {
-                            const category = categoryData.filter((categorydata) => {
-                                return categorydata.id == item.category
-                            })
-                            categoryname = category[0].categorieName
-                        }
+                                                // Add the tax amount to the totalTaxAmount variable
+                                                totalTaxAmount += taxAmount;
+                                                let categoryname;
+                                                if (item.category == "rent") {
+                                                    categoryname = "Rent Amount"
+                                                } else if (item.category == "triple") {
+                                                    categoryname = "Triple Net"
+                                                } else if (item.category == "base") {
+                                                    categoryname = "Base Rent"
+                                                } else {
+                                                    console.log(categoryData)
+                                                    const category = categoryData.filter((categorydata) => {
+                                                        console.log(categorydata.id == item.category)
+                                                        return categorydata.id.toString() == item.category
+                                                    })
+                                                    console.log(category)
+                                                    categoryname = category[0]?.categorieName
+                                                }
 
-                        $("#memo-table").append(`
+                                                $("#memo-table").append(`
         <tr class="text-black">
             <td style="border-bottom: 2px solid black;">
                 <p style="font-weight: bold;" class="mb-1">Services</p>
                 <span>${item.memo}</span>
             </td>
-            <td style="border-bottom: 2px solid black;">${data.propertyName}</td>
+            <td style="border-bottom: 2px solid black;">${tenant.propertyName}</td>
+            
             <td style="border-bottom: 2px solid black;">${categoryname}</td>
-            <td style="border-bottom: 2px solid black;"> ${item.tax} %</td>
-            <td style="border-bottom: 2px solid black;">${item.amount}</td>
+            <td style="border-bottom: 2px solid black;"> ${item.tax !== "" ? item.tax : 0} %</td>
+            <td style="border-bottom: 2px solid black;">$ ${item.amount}</td>
             
         </tr>
     `);
-                        $("#price-table").empty()
-                        $("#price-table").append(`
+                                                $("#price-table").empty()
+                                                $("#price-table").append(`
                 <tr class="text-black">
                                                     <td>Subtotal</td>
                                                     <td>$ ${data.totalAmount - totalTaxAmount}</td>
@@ -4537,15 +4543,140 @@
                 `)
 
 
-                    })
-                    $("#viewModal").modal("show")
+                                            })
                                             var content = document.getElementById('htmlContent');
+                                            console.log(content)
     var originalContent = document.body.innerHTML;
     document.body.innerHTML = content.innerHTML;
 
     window.print();
 
-    document.body.innerHTML = originalContent;
+    window.location="./create-invoicing.html"
+                }
+                
+                $(".save-invoice").each(function () {
+                    
+                    $(this).on("click", function () {
+                        let print = false
+                        var selectedTenant = $('#tenants').attr('data-value');
+                        var selectedInvoiceType = $('input[name="invoice"]:checked').val();
+                        var startDate = $('#startDate').val();
+                        var endDate = $('#endDate').val();
+                        var dueDate = $('#dueDate').val()
+                        var selectedFrequency = $('#frequency').val();
+                        // var daysUntilDue = $('#daysUntilDue').val();
+                        var selectedTerms = $('#terms').val();
+                        var additionalNotes = $('#additionalNotes').val();
+                        var switchValue = $("input[name='custom-switch-radio']").is(":checked");
+                        var lineItems = [];
+                        $('#lineItemsTable tbody tr').each(function () {
+
+                            var category = $(this).find('[name="category"]').val();
+                            var property = $(this).find('[name="property"]').val();
+                            var memo = $(this).find('input[name="memo"]').val();
+                            var amount = $(this).find('input[name="amount"]').val();
+                            var tax = $(this).find('input[name="tax"]').val()
+
+                            if (category) {
+                                lineItems.push({
+                                    category: category,
+                                    property: property,
+                                    memo: memo,
+                                    amount: amount,
+                                    tax: tax
+                                });
+                            }
+                        });
+
+                        // Create a FormData object to hold the data and files
+                        var buttonText = $(this).text();
+                        var data = {}
+                        var send = ""
+                        if (buttonText !== "Save" && buttonText.indexOf("Print") === -1) {
+                            data.sendmails = "Yes"
+                            send = "yes"
+                        } else if (buttonText !== "Save" && buttonText.indexOf("Print") !== -1) {
+
+                            print = true
+                        }
+
+
+                        if (selectedFiles.length >= 1) {
+                            var uploadFormData = new FormData();
+                            for (var i = 0; i < selectedFiles.length; i++) {
+                                var file = selectedFiles[i];
+                                uploadFormData.append('image', file);
+                            }
+                            $.ajax({
+                                url: 'https://backend.app.spaderent.com/api/spade/upload',
+                                type: 'POST',
+                                data: uploadFormData,
+                                contentType: false,
+                                processData: false,
+                                headers: {
+                                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                                },
+                                success: function (response) {
+
+                                    var imageArray = response.images;
+                                    data = {
+                                        tenantID: selectedTenant,
+                                        invoiceType: selectedInvoiceType,
+                                        startDate: startDate,
+                                        endDate: endDate,
+                                        frequency: selectedFrequency,
+                                        dueDate: dueDate,
+                                        dueDays: "",
+                                        terms: selectedTerms,
+                                        repeatTerms: "",
+                                        additionalNotes: additionalNotes,
+                                        totalAmount: $("#totalText").text().split(' ')[1],
+                                        images: imageArray,
+                                        lineItems: lineItems
+                                        // Loop through the lineItems array and add each line item to the FormData object
+                                    }
+                                    $("#addModal").modal("hide")
+                                    $.ajax({
+                                        url: 'http://localhost:3000/api/spade/createInvoice',
+                                        type: 'POST',
+                                        data: JSON.stringify(data),
+                                        contentType: 'application/json',
+                                        headers: {
+                                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                                        },
+
+                                        success: function (response) {
+                                            const tenant = tenantData.find(obj => obj.tenantID == selectedTenant)
+                                            console.log(tenant)
+
+                                            invoiceId = response.invoiceId
+
+                                            $('#addModal input[type="text"], #addModal input[type="date"], #addModal textarea').val('');
+                                            $('#addModal select').prop('selectedIndex', 0);
+                                            if (send == "yes") {
+                                                $("#succes-tenantName").text(`sent to ${tenant.firstName + " " + tenant.lastName}.`)
+                                                $("#succesModal").modal("show")
+                                                setTimeout(function () {
+                                                    $('#succesModal').modal('hide');
+                                                    window.location = '../Landlord/invoice.html';
+                                                }, 2000);
+                                            } else {
+                                                GetNotification();
+                                                $("#succesModal_invoice").modal("show")
+                                                setTimeout(function () {
+                                                    $('#succesModal_invoice').modal('hide');
+                                                    window.location = '../Landlord/invoice.html';
+                                                }, 2000);
+                                            }
+
+
+
+
+                                          
+                                            if (print) {
+                                                saveAndPrint(tenant, data)
+                                            }
+                                            
                                         },
                                         error: function (xhr, status, error) {
                                             // Handle the error response from the API
@@ -4564,7 +4695,7 @@
                             });
 
                         } else {
-                            invoiceData = {
+                            data = {
                                 tenantID: selectedTenant,
                                 invoiceType: selectedInvoiceType,
                                 startDate: startDate,
@@ -4580,12 +4711,12 @@
                                 lineItems: lineItems
                                 // Loop through the lineItems array and add each line item to the FormData object
                             }
-                            console.log(invoiceData)
+                            console.log(data)
                             $.ajax({
-                                // url: 'https://backend.app.spaderent.com/api/spade/createInvoice',
-                                url: 'https://backend.app.spaderent.com/api/spade/createInvoice',
+                                // url: 'http://localhost:3000/api/spade/createInvoice',
+                                url: 'http://localhost:3000/api/spade/createInvoice',
                                 type: 'POST',
-                                data: JSON.stringify(invoiceData),
+                                data: JSON.stringify(data),
                                 contentType: 'application/json',
                                 headers: {
                                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -4605,7 +4736,9 @@
                                     } else {
                                         $("#succesModal_invoice").modal("show")
                                     }
-
+                                    if (print) {
+                                                saveAndPrint(tenant, data)
+                                            }
                                 },
                                 error: function (xhr, status, error) {
                                     // Handle the error response from the API
@@ -4615,10 +4748,8 @@
                         }
                     });
                 });
-           
-                let tenantData = [];
-                let invoiceData = []
-                let categoryData = []
+
+
                 function getData() {
 
                     $("#preloader").fadeIn("fast");
@@ -4646,27 +4777,27 @@
                             }
                             $("#user-name").text(toTitleCase(response.user))
                             $("#header-user").text(toTitleCase(response.user))
-                            $("#tenants").empty()
+                            $("#menu").empty()
                             $("#tenants").append($('<option></option>').text("Choose..."));
 
                             // var tableBody = $('#table_body');
-                            response?.data[0]?.forEach(function(tenant) {
-                // Create a new item div
-                var newItem = $('<div class="item" data-value="' + tenant.tenantID + '" id="tenants">');
+                            response?.data[0]?.forEach(function (tenant) {
+                                // Create a new item div
+                                var newItem = $('<div class="item" data-value="' + tenant.tenantID + '" id="tenants">');
 
-                // Build the HTML structure for the item
-                newItem.html(`<div style="display: flex; gap: 1rem; align-items: center;" id="${tenant.tenantID}">` +
-                    '<img src="' +  + '" alt="" style="width: 65px; height: 65px;">' +
-                    '<div><h3 class="mb-0 line-height: 22px;">' + (tenant.firstName + " " + tenant.lastName) + '</h3>' +
-                    '<span style="line-height: 22px;">Email: ' + tenant.tEmail + '</span>' +
-                    '<span style="line-height: 22px;">Company: ' + tenant.companyName + '</span><br>' +
-                    '<span style="line-height: 22px;">Phone: ' + tenant.tPhoneNumber + '</span>' +
-                    '</div></div>');
+                                // Build the HTML structure for the item
+                                newItem.html(`<div style="display: flex; gap: 1rem; align-items: center;" id="${tenant.tenantID}">` +
+                                    '<img src="' + + '" alt="" style="width: 65px; height: 65px;">' +
+                                    '<div><h3 class="mb-0 line-height: 22px;">' + (tenant.firstName + " " + tenant.lastName) + '</h3>' +
+                                    '<span style="line-height: 22px;">Email: ' + tenant.tEmail + '</span>' +
+                                    '<span style="line-height: 22px;">Company: ' + tenant.companyName + '</span><br>' +
+                                    '<span style="line-height: 22px;">Phone: ' + tenant.tPhoneNumber + '</span>' +
+                                    '</div></div>');
 
-                // Append the new item to the menu
-                $('#menu').append(newItem);
-            });
-                            
+                                // Append the new item to the menu
+                                $('#menu').append(newItem);
+                            });
+
                         },
                         error: function (xhr, status, error) {
                             console.log(error)
@@ -4888,10 +5019,10 @@
                 $("#tenant-recurring-invocie").click(() => {
                     filterInvoiceData("Recurring Invoice")
                 })
-                $(document).on("click","#tenants,#tenants_update", function(){
-                    console.log("clicked",$("#tenants").attr("data-value"))
+                $(document).on("click", "#tenants,#tenants_update", function () {
+                    console.log("clicked", $("#tenants").attr("data-value"))
                     const property = $("#tenants").attr("data-value")
-                    console.log("property",property)
+                    console.log("property", property)
                     const propertyName = tenantData.filter((tenant) => {
                         if (tenant.tenantID == property) {
                             return tenant.propertyName
@@ -4913,7 +5044,7 @@
             <option selected="">Choose...</option>
             ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
           </select>
-          <span><a href="">Add Category!</a></span>
+          
           <span class="text-danger d-none">State is required!</span>
         </td>
        
@@ -4954,7 +5085,7 @@
 
                     // Determine if the changed element is a category or category_update input
                     const isCategory = $(this).attr("name") === "category";
-                    const property = isCategory ? $("#tenants").val() : $("#tenants_update").val()
+                    const property = isCategory ? $("#tenants").attr('data-value') : $("#tenants_update").val()
                     // Find the matching category object in the categoryData array
                     const matchingCategory = categoryData.find((category) => category.id == selectedCategoryId);
                     const tenant = tenantData.filter((tenant) => {
@@ -5007,11 +5138,203 @@
                     console.log($("[name='category']").find('option[value="' + value + '"]').length > 0)
                     return $("[name='category']").find('option[value="' + value + '"]').length > 0;
                 }
+                var counter;
+                $(document).on("click", "#add-item1-add", () => {
+                    counter++;
+                    $("#add-item-container1-add").append(`<tr class="tr">
+                    <td>
+                        <label for=""><b>Categories</b></label>
+                        <input type="text" name="category-add" class="form-control category-add">
+                    </td>
+                    <td style="width: 1px;">
+                        <label for=""><b>Taxable</b></label>
+                        <div class="material-switch pull-right mt-1"> <input id="someSwitchOptionInfo-add` + counter + `" class='category-tax-add' name="someSwitchOption-add` + counter + `" type="checkbox"> <label for="someSwitchOptionInfo-add` + counter + `" class="label-info"></label> </div>                                                                      </td>
+                    <td><button type="button" class="btn" id="del-btn1-add" style="text-align: left;">
+                        <i class="fi fi-rs-trash text-danger fs-5"></i>
+                    </button></td>
+                </tr>`)
+
+                });
+                $('#add-item-container1-add').on('click', '#del-btn1-add', function () {
+                    var $row = $(this).closest('.tr');
+                    var $rowsContainer = $row.parent();
+
+                    // Retrieve the category from the deleted row
+                    var category = $row.find('.category-add').val();
+
+                    if ($rowsContainer.children('.tr').length > 1) {
+                        // Remove the row
+                        $row.remove();
+                        if ($('#categories-add').val() === category) {
+                            // Clear the tax input field
+                            $('#tax-add').val('');
+                        }
+                        // Remove the category from the select box
+                        $('#categories-add option[value="' + category + '"]').remove();
+
+                        // Remove the category from localStorage
+                        localStorage.removeItem(category);
+
+                        // Check if the deleted category is currently selected in the select box
+                    } else {
+                        // alert('Cannot delete the last row.');
+                    }
+                });
+                $(document).on('change', '.category-tax-add', function () {
+
+                    var category = $(this).closest('tr').find('.category-add').val();
+                    var taxable = $(this).is(':checked');
+                    console.log(taxable, category)
+                    if (taxable) {
+
+                        // Add the category to the select box if it is taxable and not already present
+                        var optionExists = $('#categories-add option[value="' + category + '"]').length > 0;
+                        if (!optionExists) {
+                            $('#categories-add').append($('<option>', {
+                                value: category,
+                                text: category
+                            }));
+                        }
+                    } else {
+                        // Remove the category from the select box if it is not taxable
+                        $('#categories-add option[value="' + category + '"]').remove();
+                    }
+                });
+                $('#categories-add').change(function () {
+                    var selectedCategory = $(this).val();
+                    const category = categoryData?.filter((category) => { return selectedCategory === category.categorieName })
+                    var taxAmount;
+                    if (category?.length === 1) {
+                        taxAmount = category[0].setTaxes;
+                    } else {
+                        taxAmount = localStorage.getItem(selectedCategory);
+                    }
+                    if (taxAmount !== null) {
+                        $('#tax-add').val(taxAmount);
+                    } else {
+                        $('#tax-add').val("");
+                    }
+                });
+
+                // Event handler for tax input change
+                $('#tax-add').change(function () {
+                    var selectedCategory = $('#categories-add').val();
+                    var taxAmount = $(this).val();
+
+                    localStorage.setItem(selectedCategory, taxAmount);
+                });
+                $(document).on("input", "[name='categories-add']", function () {
+                    var atLeastOneFilled = false;
+                    $("[name='categories-add']").each(function () {
+                        console.log($(this).val())
+                        if ($(this).val() !== '' && $(this).val() !== null) {
+                            atLeastOneFilled = true;
+                            return false; // Exit the loop early if a filled input is found
+                        }
+                    });
+
+                    if (atLeastOneFilled) {
+                        $('#save-categories-add').attr('disabled', false);
+                    } else {
+                        $('#save-categories-add').attr('disabled', true);
+
+                    }
+                });
+                $('#collapse-category').on('hidden.bs.collapse', function () {
+                    $(this).find('input, select').val(''); // Reset input and select values
+                    $(this).find('input[type="checkbox"]').prop('checked', false); // Uncheck checkboxes
+                    $(this).find('input, select').removeClass('border-green border-danger'); // Remove validation classes
+                }
+                );
+                $('#save-categories-add').click(function () {
+                    $('#save-categories-add').prop('disabled', true);
+                    var data = []; // Array to store data for each row
+
+                    // Iterate over each table row
+                    $('#collapse-category .tr').each(function () {
+                        var categoryName = $(this).find('.category-add').val();
+                        //   var taxAmount = $(this).find('.tax-amount-add').val();
+                        var categoryId = $(this).find('.category').attr('id')
+                        var taxable = $(this).find('.category-tax-add').is(':checked');
+                        if (typeof categoryName !== 'undefined') {
+
+                            var row = {
+                                categoryName: categoryName,
+                                categoryId: categoryId,
+                                taxable: taxable
+                            };
+                            if (localStorage.getItem(categoryName)) {
+                                row.taxAmount = localStorage.getItem(categoryName)
+                            } else {
+                                const category = categoryData?.filter((category) => { return categoryName == category.categorieName })
+                                if (category?.length === 1) {
+                                    taxAmount = category[0].setTaxes;
+                                    row.taxAmount = taxAmount
+                                }
+                                else {
+                                    row.taxAmount = null
+                                }
+
+                            }
+                            // Add the row object to the data array
+                            localStorage.removeItem(categoryName)
+                            data.push(row);
+                        }
+                        // Create an object for each row's data
+
+                    });
+                    console.log(data)
+                    // Send the data to the backend using AJAX
+                    $.ajax({
+                        url: 'https://backend.app.spaderent.com/api/spade/addInvoiceCategory', // Replace with your actual backend endpoint URL
+                        method: 'POST',
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        data: JSON.stringify(data),
+                        contentType: 'application/json',
+                        success: function (response) {
+                            $('#save-categories-add').prop('disabled', false);
+
+                            $("#collapse-category").collapse('hide');
+                            const property = $("#tenants").attr("data-value");
+                            const propertyName = tenantData.filter((tenant) => tenant.tenantID == property);
+                            $("#add-item-container1").find(".tr").find("[name='category']").each(function () {
+                                const selectedCategory = $(this);
+                                response?.data?.forEach(function (category) {
+                                    const optionExists = (value) => selectedCategory.find('option[value="' + value + '"]').length > 0;
+                                    if (!optionExists(category.id)) {
+
+                                        const newOption = $('<option></option>').text(category.categorieName).val(category.id);
+                                        selectedCategory.append(newOption);
+                                        // Check if category.id already exists in categoryData
+                                        const categoryExists = categoryData.some(item => item.id === category.id);
+
+                                        if (!categoryExists) {
+
+                                            categoryData.push(category);
+                                        }
+                                    }
+                                });
+                            });
+
+                            // Perform any additional actions or show success message
+                        },
+                        error: function (xhr, status, error) {
+                            $('#save-categories').prop('disabled', false);
+
+                            // Handle the error response
+                            console.log('Error occurred:', error);
+                            // Perform error handling or show error message
+                        }
+                    });
+
+                });
 
                 $(document).on("click", "#add-item1", () => {
-                    const property = $("#tenants").val();
+                    const property = $("#tenants").attr("data-value");
                     const propertyName = tenantData.filter((tenant) => tenant.tenantID == property);
-                    console.log(propertyName)
+                    console.log(categoryData)
                     if (property == "Choose...") {
                         $("#add-item-container1").append(`
       <tr class="tr">
@@ -5020,7 +5343,7 @@
             <option selected="">Choose...</option>
             ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
           </select>
-          <span><a href="">Add Category!</a></span>
+          
           <span class="text-danger d-none">State is required!</span>
         </td>
         <td><input type="text" class="form-control" name="memo" placeholder="Enter Memo"></td>
@@ -5045,7 +5368,7 @@
             <option selected="">Choose...</option>
             ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
           </select>
-          <span><a href="">Add Category!</a></span>
+          
           <span class="text-danger d-none">State is required!</span>
         </td>
 
@@ -5093,7 +5416,7 @@
             <option selected="">Choose...</option>
             ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
           </select>
-          <span><a href="">Add Category!</a></span>
+          
           <span class="text-danger d-none">State is required!</span>
         </td>
         <td>
@@ -5124,7 +5447,7 @@
             <option selected="">Choose...</option>
             ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
           </select>
-          <span><a href="">Add Category!</a></span>
+          
           <span class="text-danger d-none">State is required!</span>
         </td>
         <td>
@@ -5243,9 +5566,7 @@
                                             </button></td>
                                         </tr>`)
                 });
-                $('#printButton').click(function(){
-        window.print();
-    });
+
                 $('#add-item-container2').on('click', '#del-btn2', function () {
                     var $row = $(this).closest('.tr');
                     var $rowsContainer = $row.parent();
@@ -5256,7 +5577,7 @@
                         //   alert('Cannot delete the last row.');
                     }
                 });
-                $('input[type="checkbox"]').change(function () {
+                $('#customize_btn_check input[type="checkbox"]').change(function () {
                     var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
                     var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
                     console.log(columnIndex, isColumnVisible)
@@ -5302,7 +5623,7 @@
                     filterTable("descending")
                 });
                 $('#alphabets').on('click', function () {
-                    // console.log(1)
+                    // console.log(1)viewModal
                     filterTable("alphabets")
                 });
                 // console.log($('#alphabets'))
@@ -5385,11 +5706,11 @@
                                 #562AC8;">BILLED TO</h5>
                                     <p class="text-black">${data.firstName + " " + data.lastName}<br>${data.tAddress
                         }<br>${data.tCity},
-                                        ${data.tState}<br>${data.tZipcode}<br>United States<br>${data.tPhoneNumber}</p>`)
+                                        ${data.tState}<br>${data.tZipcode}<br>United States<br>${data.tPhoneNumber}<br>${data.tEmail}</p>`)
                     console.log(1)
                     $("#owner-id").empty()
-                    $("#owner-id").append(`                                    <h5 class="text-black fw-bold">${data.companyName}</h5>
-                                    <p class="text-black">${data.pAddress}<br>${data.pCity}, ${data.pState}<br>${data.pZipCode}<br>United
+                    $("#owner-id").append(`                                    <h5 class="text-black fw-bold">${userData.businessName}</h5>
+                                    <p class="text-black">${userData.BusinessAddress}<br>${userData.state}, ${userData.city}<br>${userData.zipCode}<br>United
                                         States<br>1-888-123-8910</p>`)
                     $("#table-body").empty()
                     var dateObj = new Date(data.created_at);
@@ -5399,20 +5720,43 @@
                     $("#table-body").append(
                         `<tr class="text-black">
                         <td>${day}/${month}/${year}</td>
-                                                    <td>INV-10012</td>
+                        <td>INV-${data.invoiceID}</td>
                                                     <td>$ ${data.totalAmount}</td>
                                                     <td>${data.dueDate}</td>
                                                     <td>Due On Receipt</td>
                     </tr>
                     `
                     )
-
+//                     {
+//     "email": "fahadahad567@gmail.com",
+//     "userId": 125,
+//     "userName": "Ahad Hsshsh",
+//     "businessName": "",
+//     "phone": "2014563216",
+//     "streetAddress": "",
+//     "BusinessAddress": "",
+//     "firstName": "Ahad",
+//     "lastName": "Hsshsh",
+//     "image": "https://spades3bucket.s3.amazonaws.com/1694765664593_1692984370826_my%20avatar-08~3.png",
+//     "imageKey": "1694765664593_1692984370826_my avatar-08~3.png",
+//     "planID": "4",
+//     "isActive": 1,
+//     "tenantEmail": "0",
+//     "auth": 0,
+//     "invoiceEmail": "1",
+//     "taskEmail": "1",
+//     "businessLogo": "https://spades3bucket.s3.amazonaws.com/1695295632479_1692361110176_2023-07-01%20%2815%29.png",
+//     "businessLogoKey": "1695295632479_1692361110176_2023-07-01 (15).png",
+//     "zipCode": null,
+//     "city": null,
+//     "state": null
+// }
                     $("#memo-table").empty()
                     let totalTaxAmount = 0;
 
                     data.memo.forEach((item) => {
                         // Calculate the tax amount as a percentage of the item amount
-                        const taxAmount = (parseFloat(item.amount) * parseFloat(item.tax)) / 100;
+                        const taxAmount = (parseFloat(item.amount) * parseFloat(item.tax !== "" ? item.tax : 0)) / 100;
 
                         // Add the tax amount to the totalTaxAmount variable
                         totalTaxAmount += taxAmount;
@@ -5438,7 +5782,7 @@
             </td>
             <td style="border-bottom: 2px solid black;">${data.propertyName}</td>
             <td style="border-bottom: 2px solid black;">${categoryname}</td>
-            <td style="border-bottom: 2px solid black;"> ${item.tax} %</td>
+            <td style="border-bottom: 2px solid black;"> ${item.tax !== "" ? item.tax : 0} %</td>
             <td style="border-bottom: 2px solid black;">${item.amount}</td>
             
         </tr>
@@ -5706,7 +6050,7 @@
     <option>Choose...</option>
     ${categoryData.map((category) => `<option value="${category.id}" ${category.id == categoryid ? 'selected=" "' : ''}>${category.categorieName}</option>`).join("")}
 </select>
-<span><a href="">Add Category!</a></span>
+
           <span class="text-danger d-none">State is required!</span>
         </td>
         <td>
