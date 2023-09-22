@@ -916,7 +916,16 @@ color: #000;
                                     data-bs-container="#addModal" id="streetAddress" required>
                                 <span class="text-danger d-none">Street address is required!</span>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
+                                <label for="inputState" class="form-label fw-bold">State</label>
+                                <select class="form-select form"
+                                    id="state" required>
+                                    <option selected>Choose...</option>
+                                   
+                                </select>
+                                <span class="text-danger d-none">Status is required!</span>
+                            </div>
+                            <div class="col-md-4">
                                 <label for="inputEmail3" class="form-label fw-bold">City</label>
                                 <input class="form-control" type="text" placeholder="Enter City" pattern="[A-Za-z\s]+"
                                     oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
@@ -934,7 +943,7 @@ color: #000;
                                 </select>
                                 <span class="text-danger d-none">Status is required!</span>
                             </div> -->
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <label for="inputEmail3" class="form-label fw-bold">Zip Code</label>
                                 <input class="form-control form" type="text" id="zip" name="zip" pattern="[0-9]{5}"
                                     placeholder="A valid 5-digit zip code" maxlength="5" minlength="5"
@@ -2731,7 +2740,39 @@ color: #000;
                 }
             });
         });
+        $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/getStates',
+                method: 'GET',
+                success: function ({
+                    data
+                }) {
+                    // Handle state selection change
+                    $('#state').change(function () {
+                        var selectedState = $(this).val();
 
+
+
+
+                        // if (selectedState !== "Choose...") {
+                        //     var cities = result.geonames.filter(function (place) {
+                        //         return place.adminName1 === selectedState && place.fcode === "PPL";
+                        //     });  
+                        // }
+                    });
+
+                    var stateDropdown = $('#state');
+                    var states = data
+
+                    //   stateDropdown.append($('<option></option>').text("Choose..."));
+                    data.forEach(function (state) {
+                        stateDropdown.append($('<option></option>').text(state.states).val(state.states));
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.log('Error occurred while fetching state and city data.');
+                }
+            });
+            
     </script>
     <script>
         var vendorID;
@@ -2907,6 +2948,7 @@ color: #000;
                 var lastName = $("#lastName").val();
                 var businessName = $("#businessName").val();
                 var streetAddress = $("#streetAddress").val();
+                var state = $("#state").val();
                 var city = $("#city").val();
                 // var status = $("#status").val();
                 var zip = $("#zip").val();
@@ -2953,6 +2995,7 @@ color: #000;
                                     lastName: lastName,
                                     businessName: businessName,
                                     streetAddress: streetAddress,
+                                    state:state,
                                     city: city,
                                     // status: status,
                                     zip: zip,
@@ -3055,6 +3098,7 @@ color: #000;
                                     lastName: lastName,
                                     businessName: businessName,
                                     streetAddress: streetAddress,
+                                    state:state,
                                     city: city,
                                     // status: status,
                                     zip: zip,
@@ -3136,6 +3180,7 @@ color: #000;
                                 lastName: lastName,
                                 businessName: businessName,
                                 streetAddress: streetAddress,
+                                state:state,
                                 city: city,
                                 // status: status,
                                 zip: zip,
@@ -3217,7 +3262,7 @@ color: #000;
                             var vendorName = '<td class="vendorName" style="font-weight: 600;">' + vendor.firstName + vendor.lastName + `<br><small>${vendor.email}</small>` + '</td>';
                             var businessName = '<td class="businessName" style="font-weight: 600;">' + vendor.businessName + '</td>';
                             var phone = '<td class="phone" style="font-weight: 600;">' + vendor.phone + '</td>';
-                            var address = '<td class="address" style="font-weight: 600;">' + vendor.streetAddress + '</td>';
+                            var address = '<td class="address" style="font-weight: 600;">' + vendor.streetAddress+", " +vendor.state+", " + vendor.city+", "+vendor.zip+'</td>';
                             var workPhone = '<td class="workPhone" style="font-weight: 600;">' + (vendor.workPhone.length >= 1 ? vendor.workPhone : "N/A") + '</td>';
 
                             var category = `<td class="rentAmount" style="font-weight: 600;" id="${vendor.categoryID}">` + vendor.category + '</td>';

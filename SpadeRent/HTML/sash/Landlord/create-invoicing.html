@@ -4087,6 +4087,7 @@
 
         </script>
         <script>
+            var userData;
             var bussinessLogoImg;
             $(document).ready(() => {
                 $.ajax({
@@ -4098,6 +4099,7 @@
                     success: function (response) {
                         console.log("protected");
                         console.log(response);
+                        userData=response
                         if (response.image !== " " && response.image !== null) {
 
                             $("#user-img").attr("src", response.image)
@@ -4450,12 +4452,12 @@
                                 #562AC8;">BILLED TO</h5>
                                     <p class="text-black">${tenant.firstName + " " + tenant.lastName}<br>${tenant.tAddress
                                                 }<br>${tenant.tCity},
-                                        ${tenant.tState}<br>${tenant.tZipcode}<br>United States<br>${tenant.tPhoneNumber}</p>`)
+                                        ${tenant.tState}<br>${tenant.tZipcode}<br>United States<br>${tenant.tPhoneNumber}<br>${tenant.tEmail}</p>`)
 
                                             $("#owner-id").empty()
                                             $("#owner-id").append(`                                    <h5 class="text-black fw-bold">${tenant.companyName}</h5>
                                     <p class="text-black">${tenant.pAddress}<br>${tenant.pCity}, ${tenant.pState}<br>${tenant.pZipCode}<br>United
-                                        States<br>1-888-123-8910</p>`)
+                                        States<br>${tenant.tPhoneNumber}</p>`)
                                             $("#table-body").empty()
                                             var dateObj = new Date();
                                             var day = dateObj.getDate();
@@ -4775,7 +4777,7 @@
                             }
                             $("#user-name").text(toTitleCase(response.user))
                             $("#header-user").text(toTitleCase(response.user))
-                            $("#tenants").empty()
+                            $("#menu").empty()
                             $("#tenants").append($('<option></option>').text("Choose..."));
 
                             // var tableBody = $('#table_body');
@@ -5704,11 +5706,11 @@
                                 #562AC8;">BILLED TO</h5>
                                     <p class="text-black">${data.firstName + " " + data.lastName}<br>${data.tAddress
                         }<br>${data.tCity},
-                                        ${data.tState}<br>${data.tZipcode}<br>United States<br>${data.tPhoneNumber}</p>`)
+                                        ${data.tState}<br>${data.tZipcode}<br>United States<br>${data.tPhoneNumber}<br>${data.tEmail}</p>`)
                     console.log(1)
                     $("#owner-id").empty()
-                    $("#owner-id").append(`                                    <h5 class="text-black fw-bold">${data.companyName}</h5>
-                                    <p class="text-black">${data.pAddress}<br>${data.pCity}, ${data.pState}<br>${data.pZipCode}<br>United
+                    $("#owner-id").append(`                                    <h5 class="text-black fw-bold">${userData.businessName}</h5>
+                                    <p class="text-black">${userData.BusinessAddress}<br>${userData.state}, ${userData.city}<br>${userData.zipCode}<br>United
                                         States<br>1-888-123-8910</p>`)
                     $("#table-body").empty()
                     var dateObj = new Date(data.created_at);
@@ -5725,7 +5727,30 @@
                     </tr>
                     `
                     )
-
+//                     {
+//     "email": "fahadahad567@gmail.com",
+//     "userId": 125,
+//     "userName": "Ahad Hsshsh",
+//     "businessName": "",
+//     "phone": "2014563216",
+//     "streetAddress": "",
+//     "BusinessAddress": "",
+//     "firstName": "Ahad",
+//     "lastName": "Hsshsh",
+//     "image": "https://spades3bucket.s3.amazonaws.com/1694765664593_1692984370826_my%20avatar-08~3.png",
+//     "imageKey": "1694765664593_1692984370826_my avatar-08~3.png",
+//     "planID": "4",
+//     "isActive": 1,
+//     "tenantEmail": "0",
+//     "auth": 0,
+//     "invoiceEmail": "1",
+//     "taskEmail": "1",
+//     "businessLogo": "https://spades3bucket.s3.amazonaws.com/1695295632479_1692361110176_2023-07-01%20%2815%29.png",
+//     "businessLogoKey": "1695295632479_1692361110176_2023-07-01 (15).png",
+//     "zipCode": null,
+//     "city": null,
+//     "state": null
+// }
                     $("#memo-table").empty()
                     let totalTaxAmount = 0;
 
