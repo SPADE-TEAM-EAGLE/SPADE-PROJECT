@@ -50,8 +50,8 @@ exports.createInvoice = async (req, res) => {
     images
   } = req.body;
   try {
-    const { userId,userName,businessName } = req.user;
-    // const { userId,userName,businessName } = req.body;
+    const { userId,userName,businessName,invoiceEmail } = req.user;
+    // const { userId,userName,businessName,invoiceEmail } = req.body;
     // console.log(req.body)
     // console.log(userId)
     // if (!tenantID || !invoiceType || !startDate || !endDate || !frequency || !dueDate || !dueDays || !repeatTerms || !terms || !additionalNotes || !lineItems || !sendmails || !totalAmount) {
@@ -84,7 +84,8 @@ exports.createInvoice = async (req, res) => {
           invoiceID,
           userName,
           userId,
-          businessNames
+          businessNames,
+          invoiceEmail
         );
       }
 
@@ -93,11 +94,11 @@ exports.createInvoice = async (req, res) => {
         for (let i = 0; i < lineItems.length; i++) {
           if (Object.keys(lineItems[i]).length >= 1) {
             const category = lineItems[i].category;
-            const property = lineItems[i].property;
+            
             const memo = lineItems[i].memo;
             const amount = lineItems[i].amount;
             const lineItemTax = lineItems[i].tax;
-            const invoiceLineItemsResult = await queryRunner(insertLineItems, [invoiceID, category, property, memo, amount, lineItemTax])
+            const invoiceLineItemsResult = await queryRunner(insertLineItems, [invoiceID, category, memo, amount, lineItemTax])
             if (invoiceLineItemsResult.affectedRows === 0) {
               res.send('Error2 in line item invoice');
               return;
@@ -140,7 +141,7 @@ exports.createInvoice = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.status(400).send("Error", error);
+    res.status(400).json({"Error":error});
   }
  };
 //  ############################# Create Invoice END ############################################################
@@ -181,9 +182,9 @@ exports.putInvoiceStatusUpdates = async (req, res) => {
 //  ############################# View All Invoices Start ############################################################
 exports.getAllInvoices = async (req, res) => {
   try {
-    // const { userId } = req.user;
+    // const { userId } = req.body;
     // console.log(111)
-    const { userId } = req.user;
+    const { userId,businessLogo } = req.user;
     // console.log(userId)
     const getAllInvoicesResult = await queryRunner(getAllInvoicesquery, [
       userId,
@@ -204,6 +205,8 @@ exports.getAllInvoices = async (req, res) => {
         } else {
           getAllInvoicesResult[0][i].memo = ["No memo"];
         }
+        
+        getAllInvoicesResult[0][i].businessLogo = businessLogo;
       }
       res.status(200).json({
         data: getAllInvoicesResult,
@@ -295,7 +298,7 @@ exports.UpdateInvoice = async (req, res) => {
     images,
   } = req.body;
   try {
-    const { userId,userName,businessName } = req.user;
+    const { userId,userName,businessName,invoiceEmail } = req.user;
     // console.log(req.body)
     const currentDate = new Date();
     const invoiceUpdatedResult = await queryRunner(updateInvoice, [
@@ -327,7 +330,7 @@ exports.UpdateInvoice = async (req, res) => {
         selectTenantsResult[0][0].lastName;
 
       const mailSubject = "invoice From " + userName;
-      var businessNames = businessName || "N/A";
+      let businessNames = businessName || "N/A";
       sendMail.invoiceSendMail(
 
         tenantName,
@@ -337,7 +340,8 @@ exports.UpdateInvoice = async (req, res) => {
         invoiceID,
         userName,
         userId,
-        businessNames
+        businessNames,
+        invoiceEmail
       );
     }
     //  if line items is not empty then delete line items and insert new line items
@@ -474,16 +478,19 @@ exports.invoiceDelete = async (req, res) => {
   }
 };
 //  ############################# Delete invoice End ############################################################
+
 //  ############################# Create Invoice Start ############################################################
 exports.resendEmail = async (req, res) => {
-  const { invoiceID } = req.query;
-  const { userId,userName,businessName } = req.user;
+  // const { invoiceID } = req.query;
+  const { invoiceID } = req.body;
+  // const { userId,userName,businessName,invoiceEmail } = req.user;
+  const { userId,userName,businessName,invoiceEmail } = req.body;
   try {
     const resendEmailResult = await queryRunner(resendEmailQuery, [invoiceID]);
 
     if (resendEmailResult[0].length > 0) {
       const tenantEmail = resendEmailResult[0][0].email;
-      const dueDays = resendEmailResult[0][0].dueDate;
+      const dueDate = resendEmailResult[0][0].dueDate;
       const frequency = resendEmailResult[0][0].frequency;
       const tenantName =
         resendEmailResult[0][0].firstName +
@@ -491,6 +498,7 @@ exports.resendEmail = async (req, res) => {
         resendEmailResult[0][0].lastName;
       const mailSubject = "Invoice From " + userName;
       var businessNames = businessName || "N/A";
+      console.log(tenantName,businessNames,tenantEmail);
       sendMail.invoiceSendMail(
         tenantName,
         tenantEmail,
@@ -499,7 +507,8 @@ exports.resendEmail = async (req, res) => {
         invoiceID,
         userName,
         userId,
-        businessNames
+        businessNames,
+        invoiceEmail
       );
     }
     res.status(200).json({

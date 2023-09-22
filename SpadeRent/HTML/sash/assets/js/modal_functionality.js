@@ -50,8 +50,7 @@ function checkFieldsStatus(accordionId) {
         return 0;
     }
 }
-
-let counter = 0
+var counter = 0
 function checkFieldsFilled(id) {
     const status = checkFieldsStatus(id)
     if (id === "accordion-item2" && counter === 0) {
@@ -98,6 +97,112 @@ function checkFieldsFilled(id) {
     }
 }
 var selectedFiles = [];
+function dropHandler(ev) {
+console.log("File(s) dropped");
+
+// Prevent default behavior (Prevent file from being opened)
+ev.preventDefault();
+
+if (ev.dataTransfer.items) {
+// Use DataTransferItemList interface to access the file(s)
+[...ev.dataTransfer.items].forEach((item, i) => {
+// If dropped items aren't files, reject them
+if (item.kind === "file") {
+const file = item.getAsFile();
+file.size <= 5 * 1024 * 1024 && selectedFiles.length < 5 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array
+updateSelectedFilesContainer()
+}
+});
+} else {
+// Use DataTransfer interface to access the file(s)
+[...ev.dataTransfer.files].forEach((file, i) => {
+console.log(`… file[${i}].name = ${file.name}`);
+});
+}
+}
+function dragOverHandler(ev) {
+console.log("File(s) in drop zone");
+
+// Prevent default behavior (Prevent file from being opened)
+ev.preventDefault();
+}
+
+function updateSelectedFilesContainer() {
+var selectedFilesContainer = $('.file-grid');
+selectedFilesContainer.empty();
+
+selectedFiles.forEach(function (file, index) {
+console.log(selectedFiles.length)
+console.log(file)
+var fileElement = $('<div>')
+.addClass('selected-file');
+
+if (file.type && file.type.includes('image')) {
+// Handle image files
+fileElement.append(
+$('<div>').addClass('file-preview')
+    .append($('<img style="height:80px">').attr('src', URL.createObjectURL(file)))
+);
+} else if (file.type && file.type.includes('pdf')) {
+// Handle PDF files
+fileElement.append(
+$('<div>').addClass('file-preview')
+    .append($('<i style="font-size:50px">').addClass('fi fi-rs-file-pdf')) // Add your PDF icon class here
+);
+} else {
+// Handle S3 bucket URLs for images and PDFs
+if (file?.imageKey?.endsWith('.jpg') || file?.imageKey?.endsWith('.png')) {
+fileElement.append(
+    $('<div>').addClass('file-preview')
+        .append($('<img style="height:80px">').attr('src', file.Image))
+);
+} else if (file?.imageKey?.endsWith('.pdf')) {
+fileElement.append(
+    $('<div>').addClass('file-preview')
+        .append($('<i style="font-size:50px">').addClass('fi fi-rs-file-pdf'))
+);
+} else {
+// Handle other files (you can modify this part as needed)
+fileElement.append(
+    $('<div>').addClass('file-preview')
+        .append($('<i>').addClass('fi fi-rs-file')) // Add an appropriate class for other files
+);
+}
+}
+if (file instanceof File) {
+fileElement
+.append(
+    $('<div>')
+        .addClass('file-details')
+        .append($('<span>').text(file.type.includes('pdf') ? "PDF-" + (index + 1) : "Image-" + (index + 1)))
+)
+.append(
+    $('<span>')
+        .addClass('delete-file')
+        .text('X')
+        .attr('data-index', index)
+)
+.appendTo(selectedFilesContainer);
+} else if(file instanceof Object) {
+if(file.Image){
+fileElement
+.append(
+    $('<div>')
+        .addClass('file-details')
+        .append($('<span>').text(file?.imageKey?.includes('pdf') ? "PDF-" + (index + 1) : "Image-" + (index + 1)))
+)
+.append(
+    $('<span>')
+        .addClass('delete-file')
+        .text('X')
+        .attr('data-index', index)
+)
+.appendTo(selectedFilesContainer);
+}
+}
+
+});
+}
 $(document).ready(function () {
     // $("#succesModal").on('hide.bs.modal', function () {
     //     window.location='./properties-all.html'
@@ -219,7 +324,7 @@ $(document).ready(function () {
         var files = Array.from($(this)[0].files);
         console.log(files)
         files.forEach(function (file) {
-            selectedFiles.push(file);
+            file.size <= 5 * 1024 * 1024 && selectedFiles.length < 5 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array
         });
         
         updateSelectedFilesContainer(); // Update the selected files container
@@ -229,7 +334,7 @@ $(document).ready(function () {
         var files = Array.from($(this)[0].files);
         // console.log(files)
         files.forEach(function (file) {
-            selectedFiles.push(file); // Add each file to the selected files array
+            file.size <= 5 * 1024 * 1024 && selectedFiles.length < 5 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array // Add each file to the selected files array
         });
 
         updateSelectedFilesContainer(); // Update the selected files container
@@ -438,51 +543,4 @@ $("#addModal").modal("hide")
     }
 });
 let propertyId;
-
-function updateSelectedFilesContainer() {
-    var selectedFilesContainer = $('.file-grid');
-    selectedFilesContainer.empty();
-    console.log(selectedFiles)
-    selectedFiles.forEach(function (file, index) {
-        // console.log(file)
-        var fileElement = $('<div>')
-            .addClass('selected-file')
-            .append(
-                $('<img>')
-                    .addClass('file-preview')
-                    .attr('src', typeof file === "object" ? URL.createObjectURL(file) : '../../../../spadeAPI/uploads/' + file)
-            )
-            .append(
-                $('<div>')
-                    .addClass('file-details')
-                    .append($('<span>').text("Image-" + (index + 1)))
-                // .append($('<span>').text(fileSize))
-            )
-            .append(
-                $('<p>')
-                    .addClass('delete-file')
-                    .text('X')
-                    .attr('data-index', index)
-            )
-            .appendTo(selectedFilesContainer);
-
-    });
-
-}
-
-function formatFileSize(bytes) {
-    if (bytes === 0) return '0 Bytes';
-    var k = 1024;
-    var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-    var i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-}
-
-function truncateFileName(fileName) {
-    var maxFileNameLength = 10; // Define the maximum length of the file name
-    if (fileName.length > maxFileNameLength) {
-        return fileName.substring(0, maxFileNameLength) + '...'; // Truncate the file name
-    }
-
-    return fileName;
-}})
+})

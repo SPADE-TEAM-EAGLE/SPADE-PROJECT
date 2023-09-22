@@ -1683,7 +1683,7 @@
                         style="text-align: center;">
                         <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" style="max-width: 110px;"
                             class="Rent-logo mb-5" />
-                        <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
+                        <h1 class="mb-4 text-dark fw-bold">Verify Your Email Address</h1>
                         <h6 class="text-default mb-3">Enter a 6-digit code to verify email address</h6>
                         <input id="token" name="token" type="phone" class="form-control form mb-2" pattern="[0-9]{5}"
                             maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
@@ -1697,7 +1697,7 @@
                             MUST be atleast 8 characters long, Must contain atleast One Uppercase and One symbol.
                         </span>
                         <div class="">
-                            <!-- <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2">Remind me Later</a> -->
+                            <!-- <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2">Remind Me Later</a> -->
                             <a href="javascript:void(0)" class="btn btn-primary btn-pill disabled"
                                 id="verify-btn">Verify</a>
                         </div>
@@ -1724,7 +1724,7 @@
                         style="text-align: center;">
                         <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" style="max-width: 110px;"
                             class="Rent-logo mb-5" />
-                        <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
+                        <h1 class="mb-4 text-dark fw-bold">Verify Your Email Address</h1>
                         <h6 class="text-default mb-3">Get started with Spade Rent! You have<span id="days-left"></span>
                             left</h6>
                         <input type="email" class="form-control form mb-2" style="width: 100%;"
@@ -1734,7 +1734,7 @@
                         <a class="text-primary mb-4 d-none" href="javascript:void(0)" id="save-email">Save Email</a>
                         <div class="">
                             <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2"
-                                id="remind-later">Remind me Later</a>
+                                id="remind-later">Remind Me Later</a>
                             <a href="javascript:void(0)" class="btn btn-primary btn-pill" id="send-email">Send Mail</a>
                         </div>
                     </div>
@@ -2709,6 +2709,7 @@
                                 <a class="side-menu__item" data-bs-toggle="slide" href="chats.html">
                                     <i class="side-menu__icon fi fi-rs-comment"></i>
                                     <span class="side-menu__label">Chat</span>
+<span class="badge bg-primary side-badge" id="chatCounter"></span>
 
                                     <!-- <i class="angle fe fe-chevron-right"></i> -->
                                 </a>
@@ -2778,10 +2779,10 @@
                         </div>
                         <!-- PAGE-HEADER END -->
                         <div>
-                            <p class="d-inline-flex gap-1">
+                            <p class="d-inline-flex gap-1 text-dark">
                                 <span>Report | </span>
-                                  <span><a href="#" onclick="Intercom('showArticle', 8210506)"> Customized Report? </a></span>
-                                  <span><a href="#" onclick="Intercom('showArticle', 8210444)"> View Reports? </a></span>
+                                  <span><a href="#" onclick="Intercom('showArticle', 8210506)" class="text-primary"> Customized Report? </a></span>
+                                  <span><a href="#" onclick="Intercom('showArticle', 8210444)" class="text-primary"> View Reports? </a></span>
                             </p>
                         </div>
                         <div class="cardd">
@@ -3743,9 +3744,12 @@
                                                             <th class="d-none"></th>
                                                             <th>Image</th>
                                                             <th>TASK</th>
+                                                            <th>USER & TIME</th>
                                                             <th>ASSIGNED TO</th>
                                                             <th>DUE AT</th>
+                                                            <th>STATUS</th>
                                                             <th>RELATED TO</th>
+                                                            <th>UNIT NUMBER</th>
                                                             <th>STATUS</th>
                                                             
 
@@ -4163,6 +4167,30 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
     <script src="../assets/js/email-verification.js"></script>
+<script>
+            $(document).ready(function(){
+                $.ajax({
+                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        console.log("getMessagesCountLandlord");
+                        console.log(response.Count['count(message)']);
+                        $('#chatCounter').text(response.Count['count(message)'])
+                    },
+                    error: function (xhr, status, error) {
+                        $("#myModal_warning").modal("show");
+                        setTimeout(function () {
+                            $('#myModal_warning').modal('hide');
+                            window.location = '../Landlord/login_module.html';
+                        }, 2000);
+                        console.log(error);
+                    }
+                });
+            });
+        </script>
     <script src="../assets/js/intercom.js"></script>
     <script>
         let result;
@@ -4560,21 +4588,56 @@ document.getElementById("download_pdf_reports5").addEventListener("click", async
                //call the function to download the CSV file
                downloadCSV(csv.join("\n"), filename);
             }
+            // function exportTableToCSV5(filename) {
+            //    var csv = [];
+            //    var rows = document.querySelectorAll(".property-reports5 tr");
+            //    for(var i=0; i<rows.length; i++) {
+            //     var row = [], cols = rows[i].querySelectorAll("td, th");
+            //     for( var j=0; j<cols.length; j++)
+            //        row.push(cols[j].innerText);
+            //     csv.push(row.join(","));
+            //    } 
+            //    downloadCSV(csv.join("\n"), filename);
+            // }
             function exportTableToCSV5(filename) {
-               //declare a JavaScript variable of array type
-               var csv = [];
-               var rows = document.querySelectorAll(".property-reports5 tr");
-             
-               //merge the whole data in tabular form 
-               for(var i=0; i<rows.length; i++) {
-                var row = [], cols = rows[i].querySelectorAll("td, th");
-                for( var j=0; j<cols.length; j++)
-                   row.push(cols[j].innerText);
-                csv.push(row.join(","));
-               } 
-               //call the function to download the CSV file
-               downloadCSV(csv.join("\n"), filename);
+    var csv = [];
+    var rows = document.querySelectorAll(".property-reports5 tr");
+
+    for (var i = 0; i < rows.length; i++) {
+        var row = [];
+        var cols = rows[i].querySelectorAll("td, th");
+        
+        // Extract data from each column
+        for (var j = 0; j < cols.length; j++) {
+            var cellText = cols[j].innerText;
+            // If the cell contains a comma, wrap it in double quotes
+            if (cellText.includes(",")) {
+                cellText = '"' + cellText + '"';
             }
+            row.push(cellText);
+        }
+
+        csv.push(row.join(","));
+    }
+
+    // Combine rows into a CSV string
+    var csvContent = csv.join("\n");
+
+    // Create a data URI for the CSV content
+    var blob = new Blob([csvContent], { type: "text/csv" });
+    var url = window.URL.createObjectURL(blob);
+
+    // Create a hidden anchor element and trigger a click event to download the CSV
+    var a = document.createElement("a");
+    a.style.display = "none";
+    a.href = url;
+    a.download = filename + ".csv";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+}
+
             </script>
             
 
@@ -4956,31 +5019,35 @@ $("#download_pdf_reports5").attr("disabled",true)
     '<td><img src="../assets/images/Group-user.png" alt=""></td>' +
     '<td class="task-id" id="' + task.taskID + '" style="font-weight: 600;">' +
     '<p style="font-weight: 600;" class="mb-1">' + task.taskName + '</p>' +
-    '<span class="font-weight-normal" style="color: #9B9B9B;"> By ' + task.createdBy + ' - ' + hoursDiff + ' hours</span>' +
-    '</td>';
+    '</td>'+
+    '<td><p style="font-weight: 600;" class="mb-1"> By ' + task.createdBy + ' - ' + hoursDiff + ' hours</p></td>';
 
-if (task.AssignTo.length>0) {
+    if (task.AssignTo.length>0) {
+    newRowHtml+='<td style="font-weight: 600;text-align: center;display: flex;">' 
     newRowHtml += task.AssignTo.map(function ({ name, email }) {
-        return '<td style="font-weight: 600;text-align: center;display: flex;"><div class="me-2">' +
-            '<i class="fi fi-rs-circle-user avatar-md fs-30 text-dark"></i>' +
+        return '<div class="me-2">' +
+            '<i class="fi fi-rs-circle-user avatar-md fs-30 text-black"></i>' +
             '<div class="media-body valign-middle mt-0">' +
-            '<a href="javascript:void(0)" class="text-dark fw-semibold">' + name + '</a>' +
+            '<a href="javascript:void(0)" class="text-black fw-semibold">' + name + '</a>' +
             '</div>' +
-            '</div></td>';
-    }).join('');
+            '</div>';
+    }).join('') +'</td>';
 } else {
     newRowHtml += '<td>Not assigned</td>';
 }
 newRowHtml +=
     '<td class="property-id" style="font-weight: 600;">' +
     '<p style="font-weight: 600;" class="mb-1">' + formatDate(task.dueDate) + '</p>' +
-    '<span class="font-weight-normal text-danger"> <i class="fe fe-circle me-1"></i>' + task.priority + '</span>' +
     '</td>' +
+    '<td><span class="font-weight-normal text-danger"> <i class="fe fe-circle me-1"></i>' + task.priority + '</span></td>'+
     '<td class="property-id" style="font-weight: 600;">' +
     '<p style="font-weight: 600;" class="mb-1">' + task.propertyName + '</p>' +
-    '<span class="font-weight-normal text-danger">Unit Number: ' + task.unitNumber
- + '</span>' +
+    
     '</td>' +
+    '<td>'+
+        '<span class="font-weight-normal text-danger">Unit Number: ' + task.unitNumber
+ + '</span>' +
+       '</td>'+
     '<td class="property-id" style="font-weight: 600;">' + task.status + '</td>' +
     
     '</tr>';
@@ -4991,6 +5058,8 @@ $('#table_body_task_report').append(newRowHtml);
         
 
         });
+  
+  
     },
     error: function (xhr, status, error) {
         // Handle the error response from the API

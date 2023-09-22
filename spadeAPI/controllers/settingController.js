@@ -10,7 +10,9 @@ const {
   selectQuery,
   deleteQuery,
   updatePassword,
-  updatePasswordTenantSetting
+  updatePasswordTenantSetting,
+  updateEmailTemplates,
+  updateBusinessLogo
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -100,3 +102,51 @@ exports.changePasswordTenant = async function (req, res) {
   }
 };
 //  ############################# Update Setting tennant Password END ############################################################
+
+
+//  ############################# Email templates Start ############################################################
+exports.emailtemplates = async (req, res) => {
+  const { tenantEmail, invoiceEmail, taskEmail, userEmail = 0 } = req.body;
+  const { userId } = req.user;
+  // const { userId } = req.body;
+  try {
+    const updateEmailResult = await queryRunner(updateEmailTemplates, [tenantEmail, invoiceEmail, taskEmail, userEmail,userId,]);
+    if (updateEmailResult[0].affectedRows > 0) {
+      return res.status(200).json({
+        Message: "Updated Successful",
+        result : updateEmailResult[0]
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+};
+//  ############################# Email templates END ############################################################
+
+//  ############################# Landlord business logo Start ############################################################
+exports.updateBusinessLogo = async (req, res) => {
+  const { userId } = req.user; 
+  const { image, imageKey } = req.body; 
+  console.log(req.body);
+  try {
+      const updateBusinessLogoResult = await queryRunner(updateBusinessLogo, [image, imageKey,userId]);
+      if (updateBusinessLogoResult[0].affectedRows > 0) {
+        res.status(200).json({
+          message: " Business Logo save successful",
+          // data : updateBusinessLogoResult[0]
+        });        
+      }else{
+        res.status(400).json({
+          message: " Something went wrong in  Business Logo ",
+        });        
+      }
+
+  } catch (error) {
+    res.status(400).send("Error4" + error);
+    console.log(error);
+  }
+};
+//  ############################# Landlord business logo End ############################################################
+

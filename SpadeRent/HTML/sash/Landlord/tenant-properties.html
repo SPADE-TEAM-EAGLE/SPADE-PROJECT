@@ -505,7 +505,7 @@
                         style="text-align: center;">
                         <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" style="max-width: 110px;"
                             class="Rent-logo mb-5" />
-                        <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
+                        <h1 class="mb-4 text-dark fw-bold">Verify Your Email Address</h1>
                         <h6 class="text-default mb-3">Enter a 6-digit code to verify email address</h6>
                         <input id="token" name="token" type="phone" class="form-control form mb-2" pattern="[0-9]{5}"
                             maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
@@ -519,7 +519,7 @@
                             MUST be atleast 8 characters long, Must contain atleast One Uppercase and One symbol.
                         </span>
                         <div class="">
-                            <!-- <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2">Remind me Later</a> -->
+                            <!-- <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2">Remind Me Later</a> -->
                             <a href="javascript:void(0)" class="btn btn-primary btn-pill disabled"
                                 id="verify-btn">Verify</a>
                         </div>
@@ -546,7 +546,7 @@
                         style="text-align: center;">
                         <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" style="max-width: 110px;"
                             class="Rent-logo mb-5" />
-                        <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
+                        <h1 class="mb-4 text-dark fw-bold">Verify Your Email Address</h1>
                         <h6 class="text-default mb-3">Get started with Spade Rent! You have<span id="days-left"></span>
                             left</h6>
                         <input type="email" class="form-control form mb-2" style="width: 100%;"
@@ -556,7 +556,7 @@
                         <a class="text-primary mb-4 d-none" href="javascript:void(0)" id="save-email">Save Email</a>
                         <div class="">
                             <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2"
-                                id="remind-later">Remind me Later</a>
+                                id="remind-later">Remind Me Later</a>
                             <a href="javascript:void(0)" class="btn btn-primary btn-pill" id="send-email">Send Mail</a>
                         </div>
                     </div>
@@ -845,7 +845,7 @@
                                                 <i class="fi fi-rs-cloud-upload"></i>
                                                 <div class="custom-file-text">
                                                     <span>Upload Photo here</span>
-                                                    <span>JPEG and PNG, file size no more than 10MB</span>
+                                                    <span>JPEG and PNG, file size no more than 5MB</span><small class="text-danger d-none" id="count-text">Maximum number of files reached.</small><small class="text-danger d-none" id="size-text">File size exceeds 5MB limit.</small>
                                                 </div>
                                             </label>
                                         </div>
@@ -1287,6 +1287,7 @@
                                 <a class="side-menu__item" data-bs-toggle="slide" href="chats.html">
                                     <i class="side-menu__icon fi fi-rs-comment"></i>
                                     <span class="side-menu__label">Chat</span>
+<span class="badge bg-primary side-badge" id="chatCounter"></span>
 
                                     <!-- <i class="angle fe fe-chevron-right"></i> -->
                                 </a>
@@ -2193,6 +2194,30 @@
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
     <script src="../assets/js/email-verification.js"></script>
+<script>
+            $(document).ready(function(){
+                $.ajax({
+                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        console.log("getMessagesCountLandlord");
+                        console.log(response.Count['count(message)']);
+                        $('#chatCounter').text(response.Count['count(message)'])
+                    },
+                    error: function (xhr, status, error) {
+                        $("#myModal_warning").modal("show");
+                        setTimeout(function () {
+                            $('#myModal_warning').modal('hide');
+                            window.location = '../Landlord/login_module.html';
+                        }, 2000);
+                        console.log(error);
+                    }
+                });
+            });
+        </script>
     <script src="../assets/js/intercom.js"></script>
     <script src="../assets/js/getNotification.js"></script>
 <script src="../assets/js/push_notification.js"></script>
@@ -2350,6 +2375,11 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                     $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
                 });
             });
+            function formatDate(dateString) {
+    const date = new Date(dateString);
+    const options = { year: 'numeric', month: 'short', day: 'numeric' };
+    return date.toLocaleDateString('en-US', options);
+}
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/getTenantsByID',
                 type: 'GET',
@@ -2374,7 +2404,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                         row.append('<td><img src="' + (item.images.split(',')[0]?item.images.split(',')[0]:'../assets/images/Group-user.png') + '" alt=""></td>');
                         
                         row.append('<td class="property-name">' + item.propertyName + '</td>');
-                        row.append('<td class="rentAmount"><p style="font-weight: bold;" class="mb-1">' + item.rentAmount + '</p><span style="color: #6E6893;">Next Due Date: ' + item.nextDueDate + '</span></td>');
+                        row.append('<td class="rentAmount"><p style="font-weight: bold;" class="mb-1">' +"$ "+ item.rentAmount + '</p><span style="color: #6E6893;">Next Due Date: ' + (item.recurringNextDate!==""?formatDate(item.recurringNextDate):"N/A") + '</span></td>');
                         row.append('<td><a class="like" href="javascript:;"><span class="badge btn-light rounded-pill-Single-Family rounded-pill py-2 px-3"><i class="fe fe-circle me-1"></i>' + item.propertyType + '</span></a></td>');
                         row.append('<td>' + item.pUnits + ' Unit(s)</td>');
                         var currentDate = new Date();

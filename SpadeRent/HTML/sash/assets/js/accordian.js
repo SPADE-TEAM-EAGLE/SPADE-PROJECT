@@ -152,4 +152,46 @@ if(!isEmpty2 && !isEmpty1){
  }
  
      });
+     $("#next-add-prospect").click(() => {
+        //first accordian
+        var isEmpty1 = false;
+        $('#firstName, #lastName, #phone,#email ,#propertyInfo, #unitInfo, #propertyDetail,#status ,#sourceCampaign').each(function() {
+            if ($(this).val() === '' || $(this).val() === 'Choose...') {
+                isEmpty1 = true;
+                return false;
+            }
+        });
+        if (!isEmpty1) {
+            $('#collapseOne-add-property').removeClass('show');
+            $('#collapseTwo-add-property').addClass('show');
+            $(".accordion-item .icon").eq(0).removeClass("fi-rs-exclamation");
+            $(".accordion-item .icon").eq(0).removeClass("chevron");
+            $(".accordion-item .icon").eq(0).addClass("fi-rs-check-circle");
+            $(".accordion-item .icon").eq(0).removeClass("cross");
+            $(".accordion-item .icon").eq(0).addClass("tick");
+            
+        }
+        //second accordian
+        var isEmpty2 = false;
+        
+            if ($('#moveInDate').val() === '' || $('#potentialRentAmount').val() === '') {
+                isEmpty2 = true;
+            }
+        if (!isEmpty2) {
+            $('#collapseOne-add-property').removeClass('show');
+            $('#collapseTwo-add-property').removeClass('show');
+            $(".accordion-item .icon").eq(1).removeClass("fi-rs-exclamation");
+            $(".accordion-item .icon").eq(1).removeClass("chevron");
+            $(".accordion-item .icon").eq(1).addClass("fi-rs-check-circle");
+            $(".accordion-item .icon").eq(1).removeClass("cross");
+            $(".accordion-item .icon").eq(1).addClass("tick");
+        }
+if(!isEmpty2 && !isEmpty1){
+    // $('#collapseTwo-add-property').removeClass('show');
+    $("#next-add-prospect").addClass('d-none')
+    $("#next").removeClass("d-none")
+    // $("#next-add-property").attr('id',"next")
+ }
+ 
+     });
 });

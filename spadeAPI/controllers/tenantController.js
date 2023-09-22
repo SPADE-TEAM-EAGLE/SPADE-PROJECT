@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt");
 const fs = require("fs");
 const Path = require("path");
 const imageToDelete = require("./../middleware/deleteImage.js");
+const {deleteImageFromS3} = require("./../helper/S3Bucket.js")
 const { serialize } = require("cookie");
 const {
   selectQuery,
@@ -19,6 +20,7 @@ const {
   insertAlternateEmailData,
   insertAlternatePhoneData,
   insertTenantAttachFile,
+  getTenantAttachFile,
   updateUnitsTenant,
   getTenantsById,
   updateTenants,
@@ -34,6 +36,7 @@ const {
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
 const { file } = require("googleapis/build/src/apis/file");
+
 const config = process.env;
 
 //  ############################# Create tenants Start ############################################################
@@ -507,22 +510,25 @@ exports.addAlternateEmailPhone = async (req, res) => {
 //  ############################# Add Alternate Email and Phone End ############################################################
 
 //  ############################# Add Tenant Attach File Start ############################################################
-
 exports.tenantAttachFile = async (req, res) => {
   // console.log(1)
   const { tenantID, images } = req.body;
 
   const { userId } = req.user;
+  // const { userId } = req.body;
+  const currentDate = new Date();
   try {
     for (let i = 0; i < images.length; i++) {
       const { image_url } = images[i];
       const { image_key } = images[i];
+
 
       const propertyImageResult = await queryRunner(insertTenantAttachFile, [
         userId,
         tenantID,
         image_url,
         image_key,
+        currentDate
       ]);
       // if property image data not inserted into property image table then throw error
       if (propertyImageResult.affectedRows === 0) {
@@ -533,27 +539,26 @@ exports.tenantAttachFile = async (req, res) => {
       message: " Tenant Files save successful",
     });
   } catch (error) {
-    res.status(400).send("Error4");
+    res.status(400).send("Error4" + error);
     console.log(error);
   }
 };
-
 //  ############################# Add Tenant Attach File End ############################################################
 
 //  ############################# Delete Tenant Attach File Start ############################################################
 exports.tenantAttachFileDelete = async (req, res) => {
   try {
+    console.log(req.body)
     const { id } = req.body;
     // const { id,userId } = req.body
     const { userId } = req.user;
     const attachFileResult = await queryRunner(
-      selectQuery("tenantattachfiles", "id"),
-      [id]
-    );
+      selectQuery("tenantattachfiles", "id"), [id]);
     if (attachFileResult[0].length > 0) {
-      const file = attachFileResult[0][0].fileName;
+      const file = attachFileResult[0][0].ImageKey;
       // delete folder images Start
-      imageToDelete([file]);
+      // imageToDelete([file]);
+      deleteImageFromS3(file);
       // delete folder images End
       const PropertyDeleteResult = await queryRunner(
         deleteQuery("tenantattachfiles", "id", "landlordID"),
@@ -576,6 +581,26 @@ exports.tenantAttachFileDelete = async (req, res) => {
   }
 };
 //  ############################# Delete Tenant Attach File End ############################################################
+
+//  ############################# get all Tenant Attach File Start ############################################################
+exports.GettenantAttachFile = async (req, res) => {
+  const { tenantID } = req.body; 
+
+  try {
+      const GettenantAttachFileResult = await queryRunner(getTenantAttachFile, [tenantID]);
+      if (GettenantAttachFileResult[0].length === 0) {
+        throw new Error("No data Found in tenant attach file");
+      }
+    res.status(200).json({
+      message: " Tenant Files save successful",
+      data : GettenantAttachFileResult[0]
+    });
+  } catch (error) {
+    res.status(400).send("Error4" + error);
+    console.log(error);
+  }
+};
+//  ############################# Add Tenant Attach File End ############################################################
 
 //  ############################# Delete Tenant Start ############################################################
 exports.tenantDelete = async (req, res) => {
@@ -708,6 +733,7 @@ exports.getTenantsByID = async (req, res) => {
   try {
     // con
     const { id } = req.query;
+    // const { id } = req.body;
     const TenantsByIDResult = await queryRunner(getTenantsById, [id]);
     if (TenantsByIDResult.length > 0) {
       const data = JSON.parse(JSON.stringify(TenantsByIDResult));
@@ -721,7 +747,7 @@ exports.getTenantsByID = async (req, res) => {
       });
     }
   } catch (error) {
-    res.send("Error Get Tenants By ID");
+    res.send("Error Get Tenants By ID" + error );
     console.log(error);
   }
 };

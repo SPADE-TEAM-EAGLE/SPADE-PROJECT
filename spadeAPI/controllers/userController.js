@@ -66,6 +66,8 @@ const {
   deleteUserAccountData,
   updateAuthQuery,
   addResetTokenTenant,
+  propertyUnitCount,
+  getMessageCountByID
 } = require("../constants/queries");
 
 const { hashedPassword } = require("../helper/hash");
@@ -457,6 +459,12 @@ exports.updateUserProfile = async function (req, res) {
     businessAddress,
     imageUrl,
     imageKey,
+    PACity,
+    PAState,
+    PAZipcode,
+    BACity,
+    BAState,
+    BAZipcode
   } = req.body;
   const { userId } = req.user;
   console.log(req.body);
@@ -488,6 +496,12 @@ exports.updateUserProfile = async function (req, res) {
         businessAddress,
         imageUrl,
         imageKey,
+        PACity,
+        PAState,
+        PAZipcode,
+        BACity,
+        BAState,
+        BAZipcode,
         userId,
       ];
       const updateResult = await queryRunner(updateUser, updateUserParams);
@@ -907,8 +921,8 @@ exports.property = async (req, res) => {
     const currentDate = new Date();
     // this line check property already exist or not
     const propertycheckresult = await queryRunner(
-      selectQuery("property", "propertyName", "address"),
-      [propertyName, address]
+      selectQuery("property", "propertyName", "address","landlordID" ),
+      [propertyName, address,userId]
     );
     if (propertycheckresult[0].length > 0) {
       throw new Error("Property Already Exist");
@@ -943,8 +957,8 @@ exports.property = async (req, res) => {
       const landlordUser = await queryRunner(selectQuery("users", "id"), [
         userId,
       ]);
-      const FullName =
-        landlordUser[0][0].FirstName + " " + landlordUser[0][0].LastName;
+      const FullName = landlordUser[0][0].FirstName + " " + landlordUser[0][0].LastName;
+      const taskEmail = landlordUser[0][0].taskEmail;
       await taskSendMail(
         "tenantName",
         mailSubject,
@@ -956,7 +970,8 @@ exports.property = async (req, res) => {
         "companyName",
         "contactLandlord",
         userId,
-        email
+        email,
+        taskEmail
       );
     }
     const { insertId } = propertyResult[0];
@@ -1009,7 +1024,6 @@ exports.property = async (req, res) => {
 
 exports.getproperty = async (req, res) => {
   const { userId, userName } = req.user;
-  console.log(userId);
   try {
     const allPropertyResult = await queryRunner(
       selectQuery("property", "landlordID"),
@@ -1020,16 +1034,22 @@ exports.getproperty = async (req, res) => {
       for (var i = 0; i < allPropertyResult[0].length; i++) {
         const propertyID = allPropertyResult[0][i].id;
         // Retrieve property images for the current property ID
+
+        const propertyUnitCountResult = await queryRunner(propertyUnitCount , [propertyID]);
+        if (propertyUnitCountResult[0].length > 0) {
+        
+        allPropertyResult[0][i].NumberCount = propertyUnitCountResult[0][0];
+        }else{
+          allPropertyResult[0][i].NumberCount = ["no unit"];
+        }
         const allPropertyImageResult = await queryRunner(
           selectQuery("propertyimage", "propertyID"),
           [propertyID]
         );
-        console.log(allPropertyImageResult[0]);
         if (allPropertyImageResult.length > 0) {
           const propertyImages = allPropertyImageResult[0].map((image) => {
             return { imageURL: image.Image, imageKey: image.ImageKey };
           });
-          console.log(propertyImages);
           // Extract image URLs from the result
           allPropertyResult[0][i].images = propertyImages; // Add property images to the current property object
         } else {
@@ -1051,8 +1071,7 @@ exports.getproperty = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log("Error:", error);
-    res.send("Error Get Property");
+    res.send("Error Get Property "+ error );
   }
 };
 
@@ -1312,14 +1331,20 @@ exports.propertyUpdate = async (req, res) => {
 exports.propertyView = async (req, res) => {
   try {
     const { propertyId } = req.query;
-    // console.log(req.query)
-    // check property in database
-    // console.log(propertyId);
     const propertyViewResult = await queryRunner(
       selectQuery("property", "id"),
       [propertyId]
     );
     if (propertyViewResult.length > 0) {
+
+
+
+      const propertyUnitCountResult = await queryRunner(propertyUnitCount , [propertyId]);
+        if (propertyUnitCountResult[0].length > 0) {
+        propertyViewResult[0][0].NumberCount = propertyUnitCountResult[0][0];
+        }else{
+          propertyViewResult[0][0].NumberCount = ["no unit"];
+        }
       // check property Images in database
       const propertyViewImageResult = await queryRunner(
         selectQuery("propertyimage", "propertyID"),
@@ -1361,7 +1386,7 @@ exports.propertyView = async (req, res) => {
       });
     }
   } catch (error) {
-    res.send("Error from Viewing Property ");
+    res.send("Error from Viewing Property "+ error);
     // console.log(req.body)
     console.log(error);
   }
@@ -1628,17 +1653,15 @@ exports.viewPropertyTenant = async (req, res) => {
     console.log(error);
   }
 };
+
 exports.viewAllPropertyTenant = async (req, res) => {
   try {
     const { userId, userName } = req.user;
     // const { userId, userName } = req.body;
-    // const {id} = req.query;
-    // console.log(req)
-    // console.log(req.user);
     let PropertyTenantResult;
     // console.log(id)
     PropertyTenantResult = await queryRunner(selectAllTenants, [userId]);
-    console.log(PropertyTenantResult[0]);
+    // console.log(PropertyTenantResult[0]);
     if (PropertyTenantResult[0].length > 0) {
       for (let i = 0; i < PropertyTenantResult[0].length; i++) {
         const tenantID = PropertyTenantResult[0][i].tenantID;
@@ -1657,7 +1680,13 @@ exports.viewAllPropertyTenant = async (req, res) => {
             "No tenant Increase",
           ];
         }
+        // Unread messages is start 
+
+      //   const chatCountResult = await queryRunner(getMessageCountByID ,[userId, tenantID]);
+      //   if (chatCountResult[0].length > 0) {
+      // }        
       }
+      //  ddddd
       res.status(200).json({
         data: PropertyTenantResult,
         message: "Property Tenant ",
@@ -1669,8 +1698,8 @@ exports.viewAllPropertyTenant = async (req, res) => {
       });
     }
   } catch (error) {
-    res.send("Error Get Property Tenant data");
-    console.log(error);
+    res.send("Error Get Property Tenant data" + error);
+    // console.log(error);
   }
 };
 //  ############################# Get Property and tenant data End ############################################################
@@ -1788,11 +1817,12 @@ exports.getStates = async (req, res) => {
 
 //  ############################# Task property ############################################################
 exports.propertyTask = async (req, res) => {
-  const { Id } = req.query;
+  // const { Id } = req.query;
+  const { Id } = req.body;
   // console.log(req.query)
   try {
     const taskByIDResult = await queryRunner(propertyTaskQuery, [Id]);
-    if (taskByIDResult.length > 0) {
+    if (taskByIDResult[0].length > 0) {
       for (let j = 0; j < taskByIDResult[0].length; j++) {
         const taskID = taskByIDResult[0][j].id;
         const TaskImagesResult = await queryRunner(
@@ -1802,7 +1832,7 @@ exports.propertyTask = async (req, res) => {
         // this is for task images
         if (TaskImagesResult[0].length > 0) {
           const taskImages = TaskImagesResult[0].map(
-            (image) => image.taskImages
+            (image) => image.Image
           );
           taskByIDResult[0][j].taskImages = taskImages;
         } else {
@@ -1821,8 +1851,8 @@ exports.propertyTask = async (req, res) => {
           const vendorResult = await queryRunner(selectQuery("vendor", "id"), [
             vID,
           ]);
-          if (vendorResult.length > 0) {
-            const categoryIDs = vendorResult[0][0].categoryID;
+          if (vendorResult[0].length > 0) {
+            const categoryIDs = vendorResult[0][i].categoryID;
             const VendorCategoryResult = await queryRunner(
               selectQuery("vendorcategory", "id"),
               [categoryIDs]
@@ -2371,13 +2401,13 @@ exports.ProfileComplete = async (req, res) => {
     if (propertycheckresult[0].length > 0) {
       count = 0;
       if (propertycheckresult[0][0].image) {
-        count += 30;
+        count += 10;
       }
       if (propertycheckresult[0][0].FirstName) {
-        count += 10;
+        count += 5;
       }
       if (propertycheckresult[0][0].LastName) {
-        count += 10;
+        count += 5;
       }
       if (propertycheckresult[0][0].Email) {
         count += 10;
@@ -2391,6 +2421,26 @@ exports.ProfileComplete = async (req, res) => {
       if (propertycheckresult[0][0].streetAddress) {
         count += 10;
       }
+
+      if (propertycheckresult[0][0].PACity) {
+        count += 5;
+      }
+      if (propertycheckresult[0][0].PAState) {
+        count += 5;
+      }
+      if (propertycheckresult[0][0].PAZipcode) {
+        count += 5;
+      }
+      if (propertycheckresult[0][0].BACity) {
+        count += 5;
+      }
+      if (propertycheckresult[0][0].BAState) {
+        count += 5;
+      }
+      if (propertycheckresult[0][0].BAZipcode) {
+        count += 5;
+      }
+      
       if (propertycheckresult[0][0].BusinessAddress) {
         count += 10;
       }

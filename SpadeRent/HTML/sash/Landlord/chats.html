@@ -179,10 +179,15 @@
             border: 1px solid #e9edf4;
         }
 
-        input:focus {
+        /* input:focus {
             border: 3px solid #555 !important;
+        } */
+        .border-green{
+            border: 1px solid green !important;
         }
-
+        .border-red{
+            border: 1px solid red !important;
+        }
         .panel-body {
             padding: 0px;
         }
@@ -390,7 +395,8 @@
     } */
 
         button.btn-close {
-            right: -7px;
+            right: 0px;
+            top: auto;
         }
 
         .btn-close {
@@ -766,7 +772,7 @@
             height: 100%;
             border: none;
             outline: none;
-            padding: 1.5em 1em;
+            padding: 1.5em 3em 1.5em 1em;
             /* border-radius: 50px; */
             color: var(--color);
             border-radius: 10px;
@@ -1075,6 +1081,15 @@
             }
         }
 
+        .send-file {
+            position: absolute;
+            right: 13px;
+            cursor: pointer;
+            padding: 5px;
+            background: #EDF3F9;
+            bottom: 7px;
+        }
+
         /* chats End css  */
     </style>
 </head>
@@ -1105,7 +1120,7 @@
                         style="text-align: center;">
                         <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" style="max-width: 110px;"
                             class="Rent-logo mb-5" />
-                        <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
+                        <h1 class="mb-4 text-dark fw-bold">Verify Your Email Address</h1>
                         <h6 class="text-default mb-3">Enter a 6-digit code to verify email address</h6>
                         <input id="token" name="token" type="phone" class="form-control form mb-2" pattern="[0-9]{5}"
                             maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '')" style="width: 100%;"
@@ -1119,7 +1134,7 @@
                             MUST be atleast 8 characters long, Must contain atleast One Uppercase and One symbol.
                         </span>
                         <div class="">
-                            <!-- <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2">Remind me Later</a> -->
+                            <!-- <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2">Remind Me Later</a> -->
                             <a href="javascript:void(0)" class="btn btn-primary btn-pill disabled"
                                 id="verify-btn">Verify</a>
                         </div>
@@ -1146,7 +1161,7 @@
                         style="text-align: center;">
                         <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" style="max-width: 110px;"
                             class="Rent-logo mb-5" />
-                        <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
+                        <h1 class="mb-4 text-dark fw-bold">Verify Your Email Address</h1>
                         <h6 class="text-default mb-3">Get started with Spade Rent! You have<span id="days-left"></span>
                             left
                         </h6>
@@ -1158,7 +1173,7 @@
                         <a class="text-primary mb-4 d-none" href="javascript:void(0)" id="save-email">Save Email</a>
                         <div class="">
                             <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2"
-                                id="remind-later">Remind me Later</a>
+                                id="remind-later">Remind Me Later</a>
                             <a href="javascript:void(0)" class="btn btn-primary btn-pill" id="send-email">Send Mail</a>
                         </div>
                     </div>
@@ -1325,332 +1340,57 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="text-justify ps-2 border-model-line">
-                        <h2 class="modal-title">Create <strong class="color-primary">New Tenant</strong></h2>
-                        <span class="">Post your properties to thousands of potential investors,
-                            tenants and interested individuals.</span>
+                        <h2 class="modal-title">Attachment</h2>
+                        <!-- <span class="">Spade Rent allows you to add a range of commercial and residential properties,
+                            from condos and single-family homes to retail stores and parking lots.</span> -->
+
                     </div>
-                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="top-close">
                         <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="accordion-item mb-4" id="accordion-item1">
-                        <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button text-white" type="button" id="accordion-button1"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                                aria-expanded="true" aria-controls="collapseOne">
-                                <span class="m-0 me-4 fs-1" style="font-weight: bold;">01</span>
-                                <h3 class="m-0"><strong>Tenant Information</strong> <i class="fi fi-rs-pencil"></i><i
-                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
-                                </h3>
-                            </button>
-                        </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                            data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <form class="row g-3" enctype="multipart/form-data">
-                                    <div class="col-md-6">
-                                        <label for="inputEmail4" class="form-label fw-bold">First Name<spnan
-                                                class="text-danger"> *</span></label>
-                                        <input type="text" class="form-control form" placeholder="Enter First Name"
-                                            id="firstName" required>
-                                        <span class="text-danger d-none">First name is required!</span>
+                    <form class="row g-3" enctype="multipart/form-data">
+                        <div class="col-md-12">
+                            <label class="form-label fw-bold">Upload Photo</label>
+                            <div class="custom-file" style="border: 1px dashed #00000087;" ondrop="dropHandler(event);"
+                                ondragover="dragOverHandler(event);">
+                                <input id="fileInput" type="file" name="image" placeholder="Enter Photo"
+                                    class="custom-file-input form" accept=".jpg, .png, image/jpeg, image/png"
+                                    aria-label="hello" multiple>
+                                <span className="d-none"></span>
+                                <label class="custom-file-label" for="fileInput">
+                                    <i class="fi fi-rs-cloud-upload"></i>
+                                    <div class="custom-file-text">
+                                        <span>Upload Photo here</span>
+                                        <span>JPEG and PNG, file size no more than 10MB</span>
                                     </div>
-                                    <div class="col-md-6">
-                                        <label for="inputPassword4" class="form-label fw-bold">Last Name<spnan
-                                                class="text-danger"> *</span></label>
-                                        <input type="text" class="form-control form" placeholder="Enter Last Name"
-                                            id="lastName" required>
-                                        <span class="text-danger d-none">Last name required!</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputAddress" class="form-label fw-bold">Company Name <span
-                                                class="fw-light">(Optional)</span>
-                                        </label>
-                                        <input type="text" class="form-control form" id="company"
-                                            placeholder="Enter Company Name">
-                                        <!-- <span class="text-danger d-none">Company name is required!</span> -->
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputCity" class="form-label fw-bold">Email<spnan
-                                                class="text-danger"> *</span></label>
-                                        <input type="text" class="form-control form" placeholder="Enter Email"
-                                            id="email" required>
-                                        <span class="text-danger d-none">Email is required!</span>
-                                    </div>
-                                    <!-- <div class="col-md-4">
-                                        <label for="inputState" class="form-label fw-bold">Phone Number <span
-                                                class="fw-light">(Optional)</span></label>
-                                        <input id="phone" name="phone" type="tel" autocomplete="off">
-                                        <span id="valid-msg" class="d-none text-success">✓ Valid</span>
-                                                    <span id="error-msg" class="hide text-danger"></span>
-                                        </select>
-                                    </div> -->
-                                    <div class="col-12">
-                                        <label for="inputAddress2" class="form-label fw-bold">Address <span
-                                                class="fw-light">(Optional)</span></label>
-                                        <input type="text" class="form-control" id="address"
-                                            placeholder="Enter Address">
-                                        <!-- <span class="text-danger d-none">Address is required!</span> -->
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputState" class="form-label fw-bold">State<spnan
-                                                class="text-danger">*</span></label>
-                                        <select id="state" class="form-select form" required>
-                                            <option selected>Choose...</option>
-                                        </select>
-                                        <span class="text-danger d-none">State is required!</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputState" class="form-label fw-bold">City <spnan
-                                                class="text-danger">*</span></label>
-                                        <select id="city" class="form-select form" required>
-                                            <option selected>Choose...</option>
-                                        </select>
-                                        <span class="text-danger d-none">City is required!</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputPassword4" class="form-label fw-bold">Zip Code <spnan
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="zip" pattern="[0-9]{5}"
-                                            placeholder="A valid 5-digit zip code" maxlength="5"
-                                            oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
-                                        <span class="text-danger d-none">Zip code is required!</span>
-                                    </div>
-                                </form>
+                                </label>
                             </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item mb-4" id="accordion-item2">
-                        <h2 class="accordion-header" id="headingTwo">
-                            <button class="accordion-button collapsed text-white" type="button" id="accordion-button2"
-                                data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
-                                aria-controls="collapseTwo">
-                                <span class="m-0 me-4 fs-1" style="font-weight: bold;">02</span>
-                                <h3 class="m-0"><strong>Assign Property</strong> <i class="fi fi-rs-pencil"></i><i
-                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
-                                </h3>
-                            </button>
-                        </h2>
-                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                            data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <form class="row g-3">
-                                    <div class="col-md-4">
-                                        <label for="inputEmail4" class="form-label">Select Property<span
-                                                class="text-danger"> *</span></label>
-                                        <select id="property" class="form-select" required>
-                                            <option selected>Choose...</option>
-                                            <option>...</option>
-                                        </select>
-                                        <span class="text-danger d-none">Property is required!</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputEmail4" class="form-label">Select Property Unit<span
-                                                class="text-danger"> *</span></label>
-                                        <select id="unit" class="form-select" required>
-                                            <option selected>Choose...</option>
-                                            <option>...</option>
-                                        </select>
-                                        <span class="text-danger d-none">Property units is required!</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="inputAddress" class="form-label">Input Rent Amount /Per
-                                            Month<span class="text-danger"> *</span></label>
-                                        <div class="input-group">
-                                            <span class="input-group-text"
-                                                style="color: #1467B0;background-color: transparent !important;">$</span>
-                                            <input type="text" class="form-control" id="rent" pattern="[0-9]{7}"
-                                                placeholder="Enter rent amount" maxlength="7"
-                                                oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
-                                        </div>
-                                        <span class="text-danger d-none">Rent amount is required!</span>
-                                    </div>
-                                </form>
+                            <span class="text-dark">Maximum limit is 5</span>
+                            <div class="selected-files text-white">
+                                <div class="file-grid"></div>
                             </div>
+                            <span class="text-danger d-none">Photos are required!</span>
                         </div>
-                    </div>
-                    <div class="accordion-item" id="accordion-item3">
-                        <h2 class="accordion-header" id="headingThree">
-                            <button class="accordion-button collapsed text-white" id="accordion-button3" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false"
-                                aria-controls="collapseThree">
-                                <span class="m-0 me-4 fs-1" style="font-weight: bold;">03</span>
-                                <h3 class="m-0"><strong>Lease Details</strong> <i class="fi fi-rs-pencil"></i><i
-                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
-                                </h3>
-                            </button>
-                        </h2>
-                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-                            data-bs-parent="#accordionExampe">
-                            <div class="accordion-body">
-                                <form class="row g-3">
-                                    <div class="col-md-12">
-                                        <label for="inputEmail4" class="form-label">Is this a gross lease or triple net
-                                            lease? <i class="fi fi-rs-info ms-2" style="color: #1467B0"></i></label>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" value="Gross Lease"
-                                                name="lease" id="flexCheckDefault">
-                                            <label class="form-check-label" for="flexCheckDefault">
-                                                Gross Lease
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" value="Triple Net Lease"
-                                                name="lease" id="flexCheckChecked1" href="#collapse1" role="button"
-                                                aria-expanded="false" aria-controls="collapseExample1">
-                                            <label class="form-check-label" for="flexCheckChecked1">
-                                                Triple Net Lease
-                                            </label>
-                                        </div>
-                                        <!-- <input type="hidden" name="radioOptionsHidden" required> -->
-                                        <div class="collapse" id="collapse1">
-                                            <div class="card card-body">
-                                                <div class="text-justify ps-2 border-model-line">
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <label for="inputEmail4" class="form-label">Base Rent Amount
-                                                                (Optional)</label>
-                                                            <div class="input-group">
-                                                                <span class="input-group-text"
-                                                                    style="color: #1467B0;background-color: transparent !important;">$</span>
-                                                                <input type="text" class="form-control" id="baseRent"
-                                                                    pattern="[0-9]{7}" placeholder="Enter Amount.."
-                                                                    maxlength="7"
-                                                                    oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                                                                    required>
-                                                            </div>
-                                                            <span class="text-danger d-none">Rent amount is
-                                                                required!</span>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <label for="inputPassword4" class="form-label">Triple Net
-                                                                Amount (Optional)</label>
-                                                            <div class="input-group">
-                                                                <span class="input-group-text"
-                                                                    style="color: #1467B0;background-color: transparent !important;">$</span>
-                                                                <input type="text" class="form-control" id="tripleNet"
-                                                                    pattern="[0-9]{7}" placeholder="Enter Amount.."
-                                                                    maxlength="7"
-                                                                    oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                                                                    required>
-                                                            </div>
-                                                            <span class="text-danger d-none">Rent amount is
-                                                                required!</span>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <label for="inputEmail4" class="form-label">Lease Start
-                                                                Date</label>
-                                                            <input type="date" class="form-control position-relative"
-                                                                id="leaseStart" required>
-                                                            <span class="text-danger d-none">Rent amount is
-                                                                required!</span>
-                                                            <!-- <i class="fi fi-rs-calendar"></i> -->
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <label for="inputPassword4" class="form-label">Lease End
-                                                                Date</label>
-                                                            <input type="date" class="form-control" id="leaseEnd"
-                                                                required>
-                                                            <span class="text-danger d-none">Rent amount is
-                                                                required!</span>
-                                                            <!-- <i class="fi fi-rs-calendar"></i> -->
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <label for="inputEmail4" class="form-label">Are there any rent increases during
-                                            the Lease Term? <i class="fi fi-rs-info ms-2"
-                                                style="color: #1467B0"></i></label>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" value="yes" name="yesno"
-                                                id="flexCheckChecked2" href="#collapse2" role="button"
-                                                aria-expanded="false" aria-controls="collapseExample2" required>
-                                            <label class="form-check-label" for="flexCheckChecked">
-                                                Yes
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" value="no" name="yesno"
-                                                required>
-                                            <label class="form-check-label" for="flexCheckChecked">
-                                                No
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 row">
-                                        <!-- <div class="col-md-5">
-                                            <label for="inputEmail4" class="form-label">Date of Rent Change
-                                                (Optional)</label>
-                                            <input type="email" class="form-control" id="inputEmail4">
-                                        </div>
-                                        <div class="col-md-5">
-                                            <label for="inputPassword4" class="form-label">Rent Amount Correlating to
-                                                that Date</label>
-                                            <input type="password" class="form-control" id="inputPassword4">
-                                        </div>
-                                        <div class="col-md-2">
-                                            <button>
-                                                <i class="fi fi-rs-trash"></i>
-                                            </button>
-                                        </div> -->
-                                        <div class="collapse" id="collapse2">
-                                            <div class="card card-body">
-                                                <div class="text-justify" id="add-item-container">
-                                                    <div class="row row-multiple">
-                                                        <div class="col-md-5">
-                                                            <label for="inputEmail4" class="form-label">Date of Rent
-                                                                Change
-                                                                (Optional)</label>
-                                                            <input type="date" class="form-control input-date"
-                                                                id="dateofRentchange" required>
-                                                            <span class="text-danger d-none">Rent amount is
-                                                                required!</span>
-                                                        </div>
-                                                        <div class="col-md-5">
-                                                            <label for="inputPassword4" class="form-label">Rent Amount
-                                                                Correlating to
-                                                                that Date</label>
-                                                            <input type="text" class="form-control input-amount"
-                                                                id="amountChange" pattern="[0-9]{7}"
-                                                                placeholder="Enter Amount.." maxlength="7"
-                                                                oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                                                                required>
-                                                            <span class="text-danger d-none">Rent amount is
-                                                                required!</span>
-                                                        </div>
-                                                        <div class="col-md-2 text-center d-flex align-items-center">
-                                                            <button type="button" class="btn position-relative">
-                                                                <i class="fi fi-rs-trash text-danger del-btn fs-5"></i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <a href="javascript:;" class="mt-1" id="add-item">+Add Line Item</a>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
-                    <!-- <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft'
-                        disabled>Save as
-                        Draft</button> -->
                     <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal"
                         id='close'>Close</button>
-                    <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
-                    <button class="btn text-light button" style='background-color:#1467B0;' id='next'
-                        disabled>Next</button>
+                    <button class="btn text-light button" style='background-color:#1467B0;' id='submit-photo'>
+                        Send</button>
+                    <button class="btn btn-primary my-1" type="button" disabled="" id="loading-btn"
+                        style="display: none;">
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Loading...
+                    </button>
+
                 </div>
             </div>
         </div>
     </div>
+
     <!-- modal end  -->
     <div class="modal fade" id="myModal_delete">
         <div class="modal-dialog modal-dialog-centered text-center" role="document">
@@ -1682,6 +1422,8 @@
                                 </div>
                             </div>
                         </div>
+
+
                     </div>
                 </div>
             </div>
@@ -1776,8 +1518,8 @@
                     <div class="col-md-6 col-lg-3 col-xl-3 mb-5">
                         <div class="card h-100">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
-                                <div class="card-title fw-bold"><a href="prospects.html"
-                                        style="color: white;">Lead</a></div>
+                                <div class="card-title fw-bold"><a href="prospects.html" style="color: white;">Lead</a>
+                                </div>
                             </div>
                             <div class="card-body">
                                 <div class="text-center chat-image mb-5">
@@ -2206,6 +1948,8 @@
                                 <a class="side-menu__item" data-bs-toggle="slide" href="chats.html">
                                     <i class="side-menu__icon fi fi-rs-comment"></i>
                                     <span class="side-menu__label">Chat</span>
+                                    <span class="badge bg-primary side-badge" id="chatCounter"></span>
+
                                     <!-- <i class="angle fe fe-chevron-right"></i> -->
                                 </a>
                             </li>
@@ -2234,7 +1978,8 @@
                         <!-- PAGE-HEADER -->
                         <!-- PAGE-HEADER END -->
                         <!-- Row -->
-                        <div class="card mt-5" style="background: linear-gradient(180deg, #232323 0%, #434343 100%);">
+                        <div class="card mt-5 d-none"
+                            style="background: linear-gradient(180deg, #232323 0%, #434343 100%);">
                             <div class="card-body">
                                 <div class="roww" style="display: flex;">
                                     <div class="col-lg-9">
@@ -2260,15 +2005,13 @@
 
                             </div>
                         </div>
-                        <div>
+                        <div class="mt-5">
                             <p class="d-inline-flex gap-1">
                                 <span>Chats | </span>
                                 <span><a href="#" onclick="Intercom('showArticle', 8210506)"> How to add Chats?
                                     </a></span>
                                 <span><a href="#" onclick="Intercom('showArticle', 8210444)"> How to Chats? </a></span>
                             </p>
-
-
                         </div>
                         <div class="row">
                             <!-- <input type="text" id="inputField"> -->
@@ -2803,9 +2546,12 @@
                                                 <span class="text">Thank You</span>
                                             </div>
                                         </div>
+
                                         <div class="field">
                                             <input id="input-message" class="input-message" type="text"
                                                 placeholder="Type Message..." maxlength="255" />
+                                            <a href="#addModal" data-bs-effect="effect-scale" data-bs-toggle="modal"
+                                                class="send-file text-black"><i class="fi fi-rs-clip fs-18"></i></a>
                                             <!-- <div class="icon plus">
                                                 <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
@@ -3535,19 +3281,9 @@
         <!--  <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a> -->
         <a href="#addModal" data-bs-effect="effect-scale" data-bs-toggle="modal" id="add-tenant-side-btn"><i
                 class="fe fe-plus"></i></a>
+
         <!-- socket      -->
         <script src="https://engage.app.spaderent.com/socket.io/socket.io.js"></script>
-
-        <script>
-          // Connect to the socket.io server
-          // This code won't emit a 'connection' event, as it's automatically handled by socket.io
-          // Handle events from the server
-//           socket.on('getNotification', (data) => {
-// alert(data); // You can customize how you want to display the notification
-// });
-        //   socket.emit('message', 'Hello from the client');
-        </script>
-
         <!-- JQUERY JS -->
         <script src="../assets/js/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"
@@ -3628,7 +3364,58 @@
         <script src="../assets/js/email-verification.js"></script>
         <script src="../assets/js/getNotification.js"></script>
         <script src="../assets/js/push_notification.js"></script>
-
+        <script>
+            $(document).ready(function() {
+                $('#input-message').on('input', function() {
+                    var inputLength = $(this).val().length;
+                    
+                    if (inputLength === 255) {
+                        $(this).removeClass('border-green').addClass('border-red');
+                    } else {
+                        $(this).removeClass('border-red').addClass('border-green');
+                    }
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function(){
+                $.ajax({
+                        url: 'http://localhost:3000/api/spade/updateMessagesCountLandlord',
+                        type: 'PUT',
+                        contentType: false,
+                        processData: false,
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            console.log(response);
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(error);
+                        }
+                    });
+                $.ajax({
+                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        console.log("getMessagesCountLandlord");
+                        console.log(response.Count['count(message)']);
+                        $('#chatCounter').text(response.Count['count(message)'])
+                    },
+                    error: function (xhr, status, error) {
+                        $("#myModal_warning").modal("show");
+                        setTimeout(function () {
+                            $('#myModal_warning').modal('hide');
+                            window.location = '../Landlord/login_module.html';
+                        }, 2000);
+                        console.log(error);
+                    }
+                });
+            });
+        </script>
         <script>
             function initializeWebSocket() {
                 var socket = io('https://engage.app.spaderent.com');
@@ -3654,7 +3441,7 @@
             localStorage.removeItem('tenantName');
             // var socket = io('https://engage.app.spaderent.com');
             $(document).ready(function () {
-
+                
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
                     method: 'GET',
@@ -3732,10 +3519,11 @@
                             chatId: localStorage.getItem("chatId"),
                             message: msg_again1,
                             messageType: "text",
-                            userType: "landlord"
+                            userType: "landlord",
+                            receiverID: Number(localStorage.getItem("tenantId"))
                         };
                         $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/createNewMessage',
+                            url: 'http://localhost:3000/api/spade/createNewMessage',
                             type: 'POST',
                             data: JSON.stringify(messageData),
                             contentType: 'application/json',
@@ -3762,10 +3550,11 @@
                             chatId: localStorage.getItem("chatId"),
                             message: msg_again2,
                             messageType: "text",
-                            userType: "landlord"
+                            userType: "landlord",
+                            receiverID: Number(localStorage.getItem("tenantId"))
                         };
                         $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/createNewMessage',
+                            url: 'http://localhost:3000/api/spade/createNewMessage',
                             type: 'POST',
                             data: JSON.stringify(messageData),
                             contentType: 'application/json',
@@ -3811,28 +3600,249 @@
                     // Check if the message is not a duplicate
                     // if (!receivedMessages.has(message.message)) {
                     chatMessages.push(message.message);
+                    console.log(message);
                     // receivedMessages.add(message.message);
-                    if (chatMessages.length > 1 && chatMessages[chatMessages.length - 1] === chatMessages[chatMessages.length - 2]) {
+                    if (chatMessages.length > 1 && chatMessages[chatMessages.length - 1] === chatMessages[chatMessages.length - 2] && message.userType == "tenant") {
+                        // console.log(message.userType);
                         return;
                     }
                     if (message.userType == "tenant" && message.chatId == localStorage.getItem("chatId")) {
                         console.log("check rec", message);
-                        messs2 = `<div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
-                                                                    <div style="width: 36px;height: 36px;    border-radius: 50%;
-    background: url(` + (localStorage.getItem("tenantImg") && localStorage.getItem("tenantImg") !== "null" ? localStorage.getItem("tenantImg") : randomImg) + `);
-    background-position: center;
-    background-size: cover;" class="me-1"> 
-                                                                        </div> 
-                                                                    <div class="msg-text">
-                                                <span class="text">${message.message}</span>
-                                                <span style="float: right;" class="text-primary">${formattedTime}</span>
-                                            </div> </div>`;
+                        messs2 = `<div class="d-flex" style="align-items: flex-start; justify-content: flex-start;">
+    <div style="width: 36px; height: 36px; border-radius: 50%; background: url(${localStorage.getItem("tenantImg") && localStorage.getItem("tenantImg") !== "null" ? localStorage.getItem("tenantImg") : randomImg}); background-position: center; background-size: cover;" class="me-1"></div>
+    <div class="msg-text">`;
+                        if (message.message.includes('.s3.amazonaws.com/') && message.message.includes('https')) {
+                            const imageUrls = message.message.split(',');
+                            imageUrls.forEach((imageUrl) => {
+                                if (imageUrl.includes('https') && imageUrl.includes('.pdf')) {
+                                    messs2 += `<a href="JavaScript:void(0);" data-bs-toggle="dropdown" class="text" style="text-align: center;"><i class="fi fi-rs-file-pdf" style="font-size: 115px;display: contents;"></i></a>
+        <ul class="dropdown-menu dropdown-menu-top"><li><a class="dropdown-item text-danger edit-option" id="">Delete</a></li><li><a class="dropdown-item text-primary">Download</a></li></ul>
+        <a class="text-primary" href="${imageUrl}">Download</a>
+        `;
+                                } else if (imageUrl.includes('https') && (imageUrl.includes('.png') || imageUrl.includes('.jpeg') || imageUrl.includes('.jpg'))) {
+                                    messs2 += `<a href="JavaScript:void(0);" data-bs-toggle="dropdown"><img style="cursor: pointer; width:200px; margin-top: 5px;" class="text" src="${imageUrl}" /></a>
+        <ul class="dropdown-menu dropdown-menu-top"><li><a class="dropdown-item text-danger edit-option" id="">Delete</a></li><li><a class="dropdown-item text-primary">Download</a></li></ul>
+        <a class="text-primary" href="${imageUrl}">Download</a>
+        `;
+                                }
+
+                            });
+                        } else {
+                            messs2 += `<span class="text">${message.message}</span>`;
+                        }
+
+                        messs2 += `<span style="float: right;" class="text-primary">${formattedTime}</span>
+    </div>
+</div>`;
+
                         messDiv.append(messs2);
                     }
                     // }
                 });
                 // receivedMessages.clear();
             }
+            function dropHandler(ev) {
+                console.log("File(s) dropped");
+
+                // Prevent default behavior (Prevent file from being opened)
+                ev.preventDefault();
+
+                if (ev.dataTransfer.items) {
+                    // Use DataTransferItemList interface to access the file(s)
+                    [...ev.dataTransfer.items].forEach((item, i) => {
+                        // If dropped items aren't files, reject them
+                        if (item.kind === "file") {
+                            const file = item.getAsFile();
+                            file.size <= 5 * 1024 * 1024 && selectedFiles.length < 5 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array
+                            updateSelectedFilesContainer()
+                        }
+                    });
+                } else {
+                    // Use DataTransfer interface to access the file(s)
+                    [...ev.dataTransfer.files].forEach((file, i) => {
+                        console.log(`… file[${i}].name = ${file.name}`);
+                    });
+                }
+            }
+            function dragOverHandler(ev) {
+                console.log("File(s) in drop zone");
+
+                // Prevent default behavior (Prevent file from being opened)
+                ev.preventDefault();
+            }
+
+            $(document).on('click', '.delete-file', function () {
+                var index = $(this).data('index');
+                selectedFiles.splice(index, 1);
+                $('#fileInput').empty() // Remove the selected file from the array
+                updateSelectedFilesContainer(); // Update the selected files container
+            });
+            function updateSelectedFilesContainer() {
+                var selectedFilesContainer = $('.file-grid');
+                selectedFilesContainer.empty();
+
+                selectedFiles.forEach(function (file, index) {
+                    console.log(selectedFiles.length)
+                    console.log(file)
+                    var fileElement = $('<div>')
+                        .addClass('selected-file');
+
+                    if (file.type && file.type.includes('image')) {
+                        // Handle image files
+                        fileElement.append(
+                            $('<div>').addClass('file-preview')
+                                .append($('<img style="height:80px">').attr('src', URL.createObjectURL(file)))
+                        );
+                    } else if (file.type && file.type.includes('pdf')) {
+                        // Handle PDF files
+                        fileElement.append(
+                            $('<div>').addClass('file-preview')
+                                .append($('<i style="font-size:50px">').addClass('fi fi-rs-file-pdf')) // Add your PDF icon class here
+                        );
+                    } else {
+                        // Handle S3 bucket URLs for images and PDFs
+                        if (file?.imageKey?.endsWith('.jpg') || file?.imageKey?.endsWith('.png')) {
+                            fileElement.append(
+                                $('<div>').addClass('file-preview')
+                                    .append($('<img style="height:80px">').attr('src', file.Image))
+                            );
+                        } else if (file?.imageKey?.endsWith('.pdf')) {
+                            fileElement.append(
+                                $('<div>').addClass('file-preview')
+                                    .append($('<i style="font-size:50px">').addClass('fi fi-rs-file-pdf'))
+                            );
+                        } else {
+                            // Handle other files (you can modify this part as needed)
+                            fileElement.append(
+                                $('<div>').addClass('file-preview')
+                                    .append($('<i>').addClass('fi fi-rs-file')) // Add an appropriate class for other files
+                            );
+                        }
+                    }
+                    if (file instanceof File) {
+                        fileElement
+                            .append(
+                                $('<div>')
+                                    .addClass('file-details')
+                                    .append($('<span>').text(file.type.includes('pdf') ? "PDF-" + (index + 1) : "Image-" + (index + 1)))
+                            )
+                            .append(
+                                $('<span>')
+                                    .addClass('delete-file')
+                                    .text('X')
+                                    .attr('data-index', index)
+                            )
+                            .appendTo(selectedFilesContainer);
+                    } else if (file instanceof Object) {
+                        if (file.Image) {
+                            fileElement
+                                .append(
+                                    $('<div>')
+                                        .addClass('file-details')
+                                        .append($('<span>').text(file?.imageKey?.includes('pdf') ? "PDF-" + (index + 1) : "Image-" + (index + 1)))
+                                )
+                                .append(
+                                    $('<span>')
+                                        .addClass('delete-file')
+                                        .text('X')
+                                        .attr('data-index', index)
+                                )
+                                .appendTo(selectedFilesContainer);
+                        }
+                    }
+
+                });
+            }
+
+
+            selectedFiles = [];
+            $('#fileInput').on('change', function () {
+                var files = Array.from($(this)[0].files);
+                // console.log(files)
+                files.forEach(function (file) {
+                    file.size <= 5 * 1024 * 1024 && selectedFiles.length < 5 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array
+                });
+
+                updateSelectedFilesContainer(); // Update the selected files container
+            });
+            $('#submit-photo').click(() => {
+                $('#submit-photo').css("display", "none");
+                $("#loading-btn").css("display", "inline-block");
+                if (selectedFiles.length >= 1) {
+                    var uploadFormData = new FormData();
+                    for (var i = 0; i < selectedFiles.length; i++) {
+                        var file = selectedFiles[i];
+                        uploadFormData.append('image', file);
+                    }
+                    var str = "";
+
+                    $.ajax({
+                        url: 'https://backend.app.spaderent.com/api/spade/upload',
+                        type: 'POST',
+                        data: uploadFormData,
+                        contentType: false,
+                        processData: false,
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            console.log(response.images);
+                            response.images?.forEach(function (value, index, array) {
+                                str += value.image_url;
+
+                                // Add a comma if it's not the last item in the array
+                                if (index < array.length - 1) {
+                                    str += ",";
+                                }
+                            });
+                            // sendMessage2(str);
+                            console.log(str);
+                            var messageData2 = {
+                                chatId: localStorage.getItem("chatId"),
+                                message: str,
+                                messageType: "text",
+                                userType: "landlord",
+                                receiverID: Number(localStorage.getItem("tenantId"))
+                            };
+                            $.ajax({
+                                url: 'http://localhost:3000/api/spade/createNewMessage',
+                                type: 'POST',
+                                data: JSON.stringify(messageData2),
+                                contentType: 'application/json',
+                                processData: false,
+                                headers: {
+                                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                                },
+                                success: function (response) {
+                                    console.log(messageData2);
+                                    socket.emit('chatMessage', messageData2);
+                                    $("#loading-btn").css("display", "none");
+                                    $("#submit-photo").css("display", "inline-block")
+                                    $('#addModal').modal('hide');
+                                    $('.file-grid').empty();
+                                    selectedFiles = [];
+                                    chatTenant(Number(localStorage.getItem("tenantId")), String(localStorage.getItem("tenantName")))
+                                },
+                                error: function (xhr, status, error) {
+                                    console.log(error);
+                                }
+                            });
+
+                        },
+                        error: function (xhr, status, error) {
+                            $("#myModal_warning_connection").modal("show");
+                            setTimeout(function () {
+                                $('#myModal_warning_connection').modal('hide');
+
+                            }, 2000);
+                            console.log('Error: ' + error);
+                        }
+                    });
+
+                }
+            })
+
+
             function chatTenant(tenatId, tenatName, element) {
                 // console.log(typeof String(tenatId));
                 // receivedMessages.clear();
@@ -3907,6 +3917,10 @@
                                             // console.log("First URL:", firstUrl);
                                         } else {
                                             localStorage.setItem("tenantImg", "../assets/images/users/5.jpg")
+                                            var newBgImageUrl = "url('../assets/images/users/5.jpg')";
+
+                                            // Select the div with the class "person" and change its background image
+                                            $(".person").css("background-image", newBgImageUrl);
                                         }
                                         if (response.data.isTenantActive == 1) {
                                             $('#online').show()
@@ -3937,43 +3951,84 @@
                                                             const timeArray = response.data[i]['created_at'].split(" ")[1].split(":");
                                                             const time = timeArray.slice(0, 2).join(":");
                                                             messs1 += `<div class="d-flex " style="align-items: flex-start;justify-content: end;"> 
-                                                                    <div class="msg-text owner">
-                                                                    <span class="text">` + response.data[i]['message'] + `</span>
-                                                                    <span style="float: right;" class="text-primary">` + time + `</span>
-                                                                    </div>
-                                                                    <div style="width: 36px;height: 36px;    border-radius: 50%;
-    background: url(` + (localStorage.getItem("LandlordImg") != " " && localStorage.getItem("LandlordImg") != "null" ? localStorage.getItem("LandlordImg") : randomImg) + `);
-    background-position: center;
-    background-size: cover;" class="ms-1"> 
-                                                                        </div> 
-                                                                    </div> 
-                                                                    `;
+                                                                <div class="msg-text owner">`;
+                                                            if (response.data[i]['message'].includes('.s3.amazonaws.com/') && response.data[i]['message'].includes('https')) {
 
+                                                                var imageUrls = response.data[i]['message'].split(',');
+                                                                // console.log("imageUrls");
+                                                                // console.log(imageUrls);
+                                                                imageUrls.forEach((imageUrl) => {
+                                                                    if (imageUrl.includes('https') && imageUrl.includes('.pdf')) {
+
+                                                                        messs1 += `<a href="JavaScript:void(0);" class="text" data-bs-toggle="dropdown" style="text-align: center;"><i class="fi fi-rs-file-pdf" style="font-size: 115px;display: contents;"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-top"><li><a class="dropdown-item text-danger edit-option" id="">Delete</a></li><li><a class="dropdown-item text-primary">Download</a></li></ul>
+                    <a class="text-primary" href="${imageUrl}">Download</a>
+                    `;
+
+                                                                    } else if (imageUrl.includes('https') && (imageUrl.includes('.png') || imageUrl.includes('.jpeg') || imageUrl.includes('.jpg'))) {
+
+                                                                        messs1 += `<a href="JavaScript:void(0);" data-bs-toggle="dropdown"><img style="cursor: pointer; width:200px; margin-top: 5px;" class="text" src="${imageUrl}" /></a>
+                                                                        <ul class="dropdown-menu dropdown-menu-top"><li><a class="dropdown-item text-danger edit-option" id="">Delete</a></li><li><a class="dropdown-item text-primary">Download</a></li></ul>
+                                                                        <a class="text-primary" href="${imageUrl}">Download</a>
+                                                                        `;
+                                                                    }
+
+                                                                });
+                                                            } else {
+                                                                messs1 += `<span class="text">${response.data[i]['message']}</span>`;
+                                                            }
+
+                                                            messs1 += `<span style="float: right;" class="text-primary">${time}</span>
+                                                            </div>
+                                                            <div style="width: 36px;height: 36px; border-radius: 50%;
+                                                            background: url(${localStorage.getItem("LandlordImg") != " " && localStorage.getItem("LandlordImg") != "null" ? localStorage.getItem("LandlordImg") : randomImg});
+                                                            background-position: center;
+                                                            background-size: cover;" class="ms-1"> 
+                                                            </div> 
+                                                            </div>`;
                                                         } else if (response.data[i]['userType'] == "tenant") {
                                                             const timeArray = response.data[i]['created_at'].split(" ")[1].split(":");
                                                             const time = timeArray.slice(0, 2).join(":");
-                                                            messs1 += `<div class="d-flex " style="align-items: flex-start;justify-content: flex-start;"> 
-                                                                <div style="width: 36px;height: 36px;    border-radius: 50%;
-    background: url(` + (localStorage.getItem("tenantImg") != "null" && localStorage.getItem("tenantImg") != " " ? localStorage.getItem("tenantImg") : randomImg) + `);
-    background-position: center;
-    background-size: cover;" class="me-1"> 
-                                                                        </div> 
-                                                                    <div class="msg-text">
-                                                <span class="text">` + response.data[i]['message'] + `</span>
-                                                <span style="float: right;" class="text-primary">` + time + `</span>
-                                            </div> </div>
-                                        `;
+
+                                                            messs1 += `<div class="d-flex" style="align-items: flex-start; justify-content: flex-start;">
+    <div style="width: 36px; height: 36px; border-radius: 50%; background: url(${localStorage.getItem("tenantImg") != "null" && localStorage.getItem("tenantImg") != " " ? localStorage.getItem("tenantImg") : randomImg}); background-position: center; background-size: cover;" class="me-1"></div>
+    <div class="msg-text">`;
+                                                            if (response.data[i]['message'].includes('.s3.amazonaws.com/') && response.data[i]['message'].includes('https')) {
+                                                                const imageUrls = response.data[i]['message'].split(',');
+                                                                imageUrls.forEach((imageUrl) => {
+                                                                    if (imageUrl.includes('https') && imageUrl.includes('.pdf')) {
+                                                                        messs1 += `<a href="JavaScript:void(0);" data-bs-toggle="dropdown" class="text" style="text-align: center;"><i class="fi fi-rs-file-pdf" style="font-size: 115px;display: contents;"></i></a>
+        <ul class="dropdown-menu dropdown-menu-top"><li><a class="dropdown-item text-danger edit-option" id="">Delete</a></li><li><a class="dropdown-item text-primary">Download</a></li></ul>
+        <a class="text-primary" href="${imageUrl}">Download</a>
+        `;
+                                                                    } else if (imageUrl.includes('https') && (imageUrl.includes('.png') || imageUrl.includes('.jpeg') || imageUrl.includes('.jpg'))) {
+                                                                        messs1 += `<a href="JavaScript:void(0);" data-bs-toggle="dropdown"><img style="cursor: pointer; width:200px; margin-top: 5px;" class="text" src="${imageUrl}" /></a>
+        <ul class="dropdown-menu dropdown-menu-top"><li><a class="dropdown-item text-danger edit-option" id="">Delete</a></li><li><a class="dropdown-item text-primary">Download</a></li></ul>
+        <a class="text-primary" href="${imageUrl}">Download</a>
+        `;
+                                                                    }
+
+                                                                });
+                                                            } else {
+                                                                messs1 += `<span class="text">${response.data[i]['message']}</span>`;
+                                                            }
+                                                            messs1 += `<span style="float: right;" class="text-primary">${time}</span>
+    </div>
+</div>`;
+
                                                         }
                                                     }
                                                 } else {
                                                     messs1 = `<div class="time text-dark" id="no-mess">No Message</div>`;
                                                 }
 
+
                                                 messDiv.html(messs1);
                                                 messDiv.scrollTop(messDiv[0].scrollHeight);
                                                 // var chatContent = $("#chatContent");
                                                 var scrollBottom = messDiv.prop("scrollHeight");
                                                 messDiv.scrollTop(scrollBottom);
+
                                             },
                                             error: function (xhr, status, error) {
                                                 console.log(error);
@@ -4011,6 +4066,7 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
+
                         console.log("viewAllPropertyTenant");
                         console.log(response);
                         var randomImg1 = "../assets/images/users/5.jpg";
@@ -4029,14 +4085,15 @@
                                 var row = `
                                 <a href="javascript:void(0)" onclick="chatTenant(` + tenant.tenantID + `,'` + tenant.firstName + ` ` + tenant.lastName + `',this)"><div class="media new border-top-0 " data-id="` + tenant.tenantID + `">
                                                                 <div class="main-img-user">
-                                                                    <img alt="" src="` + (tenant.image != null && tenant.image !=" " ? tenant.image : randomImg1) + `">
+                                                                    <img alt="" src="` + (tenant.image != null && tenant.image != " " ? tenant.image : randomImg1) + `">
                                                                 </div>
                                                                 <div class="media-body">
                                                                     <div class="media-contact-name">
-                                                                        <span>` + tenant.firstName + ` ` + tenant.lastName + `
+                                                                        <span class=" fw-bold">` + tenant.firstName + ` ` + tenant.lastName + `
                                                                     </div>
                                                                     <p>` + tenant.tEmail + `</p>
                                                                 </div>
+                                                                
                                                             </div></a>`;
                                 tab_pane.append(row);
                             });
@@ -4046,6 +4103,7 @@
                         console.log(error);
                     }
                 });
+
             });
         </script>
         <script>
@@ -4137,10 +4195,30 @@
                 const messages = $('#messages'),
                     input = $('#input-message'),
                     send = $('#send-text');
+                const sendFile = document.querySelector('.send-file'); // Assuming this class exists
+
+                // Function to add the CSS class
+                function addRight62pxClass() {
+                    sendFile.style.right = '62px';
+                }
+
+                // Function to remove the CSS class
+                function removeRight62pxClass() {
+                    sendFile.style.right = '13px'; // Reset the style property
+                }
+                input.addEventListener('input', function () {
+                    const msg = input.value.trim();
+                    if (msg === "") {
+                        removeRight62pxClass(); // Apply the CSS class
+                    } else {
+                        addRight62pxClass(); // Remove the CSS class
+                    }
+                });
                 //Send messages
                 input.addEventListener('keypress', function (ev) {
                     const msg = input.value.trim();
                     if (ev.key === 'Enter' && msg !== "") {
+                        removeRight62pxClass()
                         ev.preventDefault();
                         const msg = input.value;
                         sendMessage(msg);
@@ -4149,9 +4227,48 @@
                 send.addEventListener('click', () => {
                     const msg = input.value.trim(); // Remove leading and trailing spaces
                     if (msg !== "") {
+                        removeRight62pxClass()
                         sendMessage(msg);
                     }
                 });
+                var send2 = $('#submit-photo');
+                send2.addEventListener('click', () => {
+                    removeRight62pxClass()
+                });
+                // const sendMessage2 = (images) => {
+                //     updateTime();
+                //     const mainContainer = document.createElement('div');
+                //     mainContainer.setAttribute('class', 'd-flex');
+                //     mainContainer.style.alignItems = 'flex-start';
+                //     mainContainer.style.justifyContent = 'end';
+                //     const messageContainer = document.createElement('div');
+                //     messageContainer.setAttribute('class', 'msg-text owner');
+                //     const imageUrlArray = images.split(',');
+                //     imageUrlArray.forEach(imageUrl => {
+                //         const messageText = document.createElement('img');
+                //         messageText.setAttribute('class', 'text');
+                //         messageText.setAttribute('src', imageUrl);
+                //         imageContainer.appendChild(messageText);
+                //     });
+                //     messageContainer.appendChild(imageContainer);
+                //     const timestampSpan = document.createElement('span');
+                //     timestampSpan.setAttribute('style', 'float: right;');
+                //     timestampSpan.setAttribute('class', 'text-primary');
+                //     timestampSpan.innerText = formattedTime;
+                //     const imageContainer = document.createElement('div');
+                //     imageContainer.setAttribute('style', `width: 36px; height: 36px;border-radius: 50%;background: url(` + (localStorage.getItem("LandlordImg") != "null" && localStorage.getItem("LandlordImg") != " " ? localStorage.getItem("LandlordImg") : randomImg) + `);background-position: center;background-size: cover;`);
+                //     imageContainer.setAttribute('class', 'ms-1');
+                //     mainContainer.appendChild(messageContainer);
+                //     messageContainer.appendChild(timestampSpan);
+                //     mainContainer.appendChild(imageContainer);
+                //     messages.appendChild(mainContainer);
+                //     messages.scrollTo(0, messages.scrollHeight);
+                //     input.value = '';
+                //     input.focus();
+                // };
+
+
+
                 const sendMessage = (msg) => {
                     updateTime(); // Call it initially to set the time immediately
 
@@ -4206,6 +4323,7 @@
 
             });
         </script>
+
         <!-- chats js End  -->
 </body>
 
