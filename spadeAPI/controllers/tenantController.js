@@ -36,6 +36,7 @@ const {
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
 const { file } = require("googleapis/build/src/apis/file");
+
 const config = process.env;
 
 //  ############################# Create tenants Start ############################################################
@@ -547,6 +548,7 @@ exports.tenantAttachFile = async (req, res) => {
 //  ############################# Delete Tenant Attach File Start ############################################################
 exports.tenantAttachFileDelete = async (req, res) => {
   try {
+    console.log(req.body)
     const { id } = req.body;
     // const { id,userId } = req.body
     const { userId } = req.user;

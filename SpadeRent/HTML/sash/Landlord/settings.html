@@ -1711,7 +1711,7 @@
                         style="text-align: center;">
                         <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" style="max-width: 110px;"
                             class="Rent-logo mb-5" />
-                        <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
+                        <h1 class="mb-4 text-dark fw-bold">Verify Your Email Address</h1>
                         <h6 class="text-default mb-3">Enter a 6-digit code to verify email address</h6>
                         <input id="token" name="token" type="phone" class="form-control form mb-2" pattern="[0-9]{5}"
                             maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '')" style="width: 100%;"
@@ -1725,7 +1725,7 @@
                             MUST be atleast 8 characters long, Must contain atleast One Uppercase and One symbol.
                         </span>
                         <div class="">
-                            <!-- <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2">Remind me Later</a> -->
+                            <!-- <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2">Remind Me Later</a> -->
                             <a href="javascript:void(0)" class="btn btn-primary btn-pill disabled"
                                 id="verify-btn">Verify</a>
                         </div>
@@ -1752,7 +1752,7 @@
                         style="text-align: center;">
                         <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" style="max-width: 110px;"
                             class="Rent-logo mb-5" />
-                        <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
+                        <h1 class="mb-4 text-dark fw-bold">Verify Your Email Address</h1>
                         <h6 class="text-default mb-3">Get started with Spade Rent! You have<span id="days-left"></span>
                             left</h6>
                         <input type="email" class="form-control form mb-2" style="width: 100%;" data-bs-placement="top"
@@ -1763,7 +1763,7 @@
                         <a class="text-primary mb-4 d-none" href="javascript:void(0)" id="save-email">Save Email</a>
                         <div class="">
                             <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2"
-                                id="remind-later">Remind me Later</a>
+                                id="remind-later">Remind Me Later</a>
                             <a href="javascript:void(0)" class="btn btn-primary btn-pill" id="send-email">Send Mail</a>
                         </div>
                     </div>
@@ -2533,6 +2533,9 @@
                                                 <a class="dropdown-item" href="lockscreen.html">
                                                     <i class="dropdown-icon fe fe-lock"></i> Lockscreen
                                                 </a> -->
+                                                <a class="dropdown-item" href="settings.html">
+                                                    <i class="dropdown-icon fe fe-settings"></i> Settings
+                                                </a>
                                                 <a class="dropdown-item" onclick="logout()" style="cursor: pointer;">
                                                     <i class="dropdown-icon fe fe-alert-circle"></i> Sign out
                                                 </a>
@@ -2690,7 +2693,7 @@
                                 <a class="side-menu__item" data-bs-toggle="slide" href="chats.html">
                                     <i class="side-menu__icon fi fi-rs-comment"></i>
                                     <span class="side-menu__label">Chat</span>
-<span class="badge bg-primary side-badge">6</span>
+                                    <span class="badge bg-primary side-badge" id="chatCounter"></span>
 
                                     <!-- <i class="angle fe fe-chevron-right"></i> -->
                                 </a>
@@ -2768,9 +2771,11 @@
                                             <div>
                                                 <p class="d-inline-flex gap-1">
                                                     <span>Settings | </span>
-                                                    <span><a href="#" onclick="Intercom('showArticle', 8210506)" class="text-primary"> Change
+                                                    <span><a href="#" onclick="Intercom('showArticle', 8210506)"
+                                                            class="text-primary"> Change
                                                             Password? </a></span>
-                                                    <span><a href="#" onclick="Intercom('showArticle', 8210444)" class="text-primary">
+                                                    <span><a href="#" onclick="Intercom('showArticle', 8210444)"
+                                                            class="text-primary">
                                                             Subscription? </a></span>
                                                 </p>
                                             </div>
@@ -2853,19 +2858,59 @@
                                                     </div>
 
                                                     <div class="col-lg-12">
-                                                        <h3 class="mb-2 text-dark"><b>My Mailing Address</b></h3>
+                                                        <h3 class="mb-2 text-dark"><b>My Personal Address</b></h3>
                                                         <div
                                                             style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-xl-8 mb-3">
-                                                                <label for="saddress1"><b>Street Address</b></label>
+                                                                <label for="saddress1"><b>Personal Address</b></label>
                                                                 <input type="text" class="form-control"
                                                                     id="streetAddress"
                                                                     placeholder="Enter My Mailing Address" required>
                                                                 <div class="valid-feedback">Looks good!</div>
                                                             </div>
 
+                                                            <div class="col-lg-4"></div>
+
+                                                            <div class="col-xl-4 mb-3">
+                                                                <label for="bname1"><b>City</b></label>
+                                                                <input type="text" class="form-control" id="city"
+                                                                    placeholder="Enter City" required>
+                                                                <div class="valid-feedback">Looks good!</div>
+                                                            </div>
+
+                                                            <div class="col-md-4 mb-3">
+                                                                <div class="form-group">
+                                                                    <label for="inputState" class="form-labell fw-bold">State<spnan
+                                                                        class="text-danger"></span></label>
+                                                                    <select id="state" class="form-select form form-select" required>
+                                                                    <option selected>Choose...</option>
+                                                                    </select>
+                                                                    <span class="text-danger d-none">State is required!</span>
+                                                                </div>        
+                                                            </div>
+
+                                                            <div class="col-lg-4"></div>
+                                                            <div class="col-xl-4 mb-3">
+                                                                <label for="bname1"><b>Zip Code</b></label>
+                                                                <input type="text" class="form-control" id="zipcode"
+                                                                    placeholder="Enter Zipcode" pattern="[0-5]+" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                                                                <div class="valid-feedback">Looks good!</div>
+                                                            </div>
+                                                            
+                                                            
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <h3 class="mb-2 text-dark"><b>My Business Address</b></h3>
+                                                        <div
+                                                            style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
+                                                        </div>
+                                                        <div class="row">
+                                                            
+                                                            
                                                             <div class="col-xl-8 mb-3">
                                                                 <label for="baddress1"><b>Business Address</b></label>
                                                                 <input type="text" class="form-control"
@@ -2873,6 +2918,36 @@
                                                                     placeholder="Enter Business Address" required>
                                                                 <div class="valid-feedback">Looks good!</div>
                                                             </div>
+
+                                                    
+                                                            <div class="col-lg-4"></div>
+                                                            <div class="col-xl-4 mb-3">
+                                                                <label for="bname1"><b>City</b></label>
+                                                                <input type="text" class="form-control" id="city1"
+                                                                    placeholder="Enter City" required>
+                                                                <div class="valid-feedback">Looks good!</div>
+                                                            </div>
+
+                                                            <div class="col-md-4 mb-3">
+                                                                <div class="form-group">
+                                                                    <label for="inputState" class="form-labell fw-bold">State<spnan
+                                                                        class="text-danger"></span></label>
+                                                                    <select id="state1" class="form-select form form-select" required>
+                                                                    <option selected>Choose...</option>
+                                                                    </select>
+                                                                    <span class="text-danger d-none">State is required!</span>
+                                                                </div>        
+                                                            </div>
+
+                                                            <div class="col-lg-4"></div>
+                                                            <div class="col-xl-4 mb-3">
+                                                                <label for="bname1"><b>Zip Code</b></label>
+                                                                <input type="text" class="form-control" id="zipcode1"
+                                                                    placeholder="Enter Zipcode" pattern="[0-5]+" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                                                                <div class="valid-feedback">Looks good!</div>
+                                                            </div>
+
+                                                            <div class="col-lg-4"></div>
 
                                                             <!-- <div class="col-lg-3"></div> -->
                                                             <div class="col-lg-8 mt-4 d-flex">
@@ -2885,6 +2960,7 @@
                                                                     id="save_profile">Save</button>
                                                             </div>
                                                         </div>
+                                                        
                                                     </div>
 
                                                 </div>
@@ -2958,12 +3034,10 @@
                                                             style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
                                                         </div>
                                                         <div style="display: flex;">
-                    
+
                                                             <div class="material-switch pull-right mt-1"> <input
-                                                                    id="2f-Auth"
-                                                                    name="2f-Auth" type="checkbox"> <label
-                                                                    for="2f-Auth"
-                                                                    class="label-primary"></label> </div>
+                                                                    id="2f-Auth" name="2f-Auth" type="checkbox"> <label
+                                                                    for="2f-Auth" class="label-primary"></label> </div>
                                                             &emsp;
                                                             <p>Require 2-Step verification code to log in <span
                                                                     style="color: #1467B0;">(recommended)</span></p>
@@ -3145,7 +3219,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="mt-5">
+                                                    <!-- <div class="mt-5">
                                                         <h2 class="h2-personal-inf text-dark mb-3">Background Colors
                                                         </h2>
                                                         <div
@@ -3171,9 +3245,9 @@
                                                                     src="../assets/images/media/bg-img4.jpg"
                                                                     alt="Bg-Image" id="bgimage4" class="br-7"></a>
                                                         </div>
-                                                    </div>
+                                                    </div> -->
 
-                                                    <div class="mt-5">
+                                                    <!-- <div class="mt-5">
                                                         <h2 class="h2-personal-inf text-dark mb-3 mt-5">Layout Width
                                                             Styles
                                                         </h2>
@@ -3206,7 +3280,7 @@
 
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div> -->
                                                 </div>
 
                                             </div>
@@ -8088,6 +8162,47 @@
                                                                 id="save-categories">Save</button>
                                                         </div>
                                                     </div>
+                                                    <h2 class="h2-personal-inf text-dark mb-3 mt-5">Bussiness Logo</h2>
+                                                    <div
+                                                        style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-7">
+                                                            <label class="form-label fw-bold">Add Bussiness Logo</label>
+                                                            <div class="custom-file"
+                                                                style="border: 1px dashed #00000087;"
+                                                                ondrop="dropHandler(event);"
+                                                                ondragover="dragOverHandler(event);">
+                                                                <input id="fileInput" type="file" name="image"
+                                                                    placeholder="Enter Photo"
+                                                                    class="custom-file-input form"
+                                                                    accept=".jpg, .png, image/jpeg, image/png,.pdf,application/pdf"
+                                                                    aria-label="hello" multiple>
+                                                                <span className="d-none"></span>
+                                                                <label class="custom-file-label" for="fileInput">
+                                                                    <i class="fi fi-rs-cloud-upload"></i>
+                                                                    <div class="custom-file-text">
+                                                                        <span>Upload Photo here</span>
+                                                                        <span>JPEG and PNG, file size no more than
+                                                                            5MB</span><small class="text-danger d-none"
+                                                                            id="count-text">Maximum number of files
+                                                                            reached.</small><small
+                                                                            class="text-danger d-none"
+                                                                            id="size-text">File size exceeds 5MB
+                                                                            limit.</small>
+                                                                    </div>
+                                                                </label>
+                                                            </div>
+                                                            <div class="selected-files text-white">
+                                                                <div class="file-grid"></div>
+                                                            </div>
+                                                            <span class="text-danger d-none">Photos are required!</span>
+                                                        </div>
+                                                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-7">
+                                                            <button class="btn btn-primary btn-pill m-2"
+                                                                id="submit-photo">Save</button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -8249,7 +8364,8 @@
                                                                         data-bs-effect="effect-scale"
                                                                         data-bs-toggle="modal"
                                                                         href="#addModal-account"><i
-                                                                            class="fe fe-plus me-2 text-white"></i><strong>ADD NEW
+                                                                            class="fe fe-plus me-2 text-white"></i><strong>ADD
+                                                                            NEW
                                                                             ACCOUNT</strong></button>
                                                                 </div>
                                                             </div>
@@ -9506,6 +9622,30 @@
 <script src="../assets/js/push_notification.js"></script></script> -->
         <!-- <script src="https://code.jquery.com/jquery-latest.min.js"></script> -->
         <script src="../assets/js/email-verification.js"></script>
+<script>
+            $(document).ready(function(){
+                $.ajax({
+                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        console.log("getMessagesCountLandlord");
+                        console.log(response.Count['count(message)']);
+                        $('#chatCounter').text(response.Count['count(message)'])
+                    },
+                    error: function (xhr, status, error) {
+                        $("#myModal_warning").modal("show");
+                        setTimeout(function () {
+                            $('#myModal_warning').modal('hide');
+                            window.location = '../Landlord/login_module.html';
+                        }, 2000);
+                        console.log(error);
+                    }
+                });
+            });
+        </script>
         <script src="../assets/js/intercom.js"></script>
         <script src="../assets/js/getNotification.js"></script>
         <script src="../assets/js/push_notification.js"></script>
@@ -10076,12 +10216,13 @@
 
 
             var invoiceData = []
+            var counter;
             $(document).ready(() => {
                 // ----- On render -----\\
                 function getData() {
 
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/protected',
+                        url: 'http://localhost:3000/api/spade/protected',
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -10106,6 +10247,13 @@
                             $("#businessName").val(toTitleCase(response.businessName || ""))
                             $("#streetAddress").val(toTitleCase(response.streetAddress || ""))
                             $("#businessAddress").val(toTitleCase(response.BusinessAddress || ""))
+                            $("#city1").val(toTitleCase(response.BAcity || ""))
+                            $("#state1").val(toTitleCase(response.BAstate || ""))
+                            $("#zipcode1").val(response.BAzipCode)
+                            $("#city").val(toTitleCase(response.city || ""))
+                            $("#state").val(toTitleCase(response.state || ""))
+                            $("#zipcode").val(response.zipCode)
+
                             //                         "tenantEmail": "0",
                             // "auth": 0,
                             // "invoiceEmail": "0",
@@ -10274,6 +10422,8 @@
 
                         }
                     });
+
+
 
                     $.ajax({
                         url: 'https://backend.app.spaderent.com/api/spade/invoiceCategory',
@@ -10514,7 +10664,7 @@
                         vendorCategoryId = $row.find('.vendor-category').attr("id");
                     }
                     var interval;
-                    var counter = 5;
+                    counter = 5;
 
                     function startCounter() {
                         document.getElementById('confirmDelete').disabled = true;
@@ -10735,6 +10885,7 @@
                         }
                     });
                 });
+                
                 // Attach a click event listener to each button
                 $('.card-btnn').click(function () {
                     // Retrieve the ID of the parent card
@@ -10874,13 +11025,21 @@
 
                 $(document).on("click", "#save_profile", () => {
                     $("#save_profile").prop("disabled", true)
+
                     let userData = {
                         firstName: $("#firstName").val(),
                         lastName: $("#lastName").val(),
                         email: $("#email").val(),
                         phone: $("#phone1").val(),
                         businessName: $("#businessName").val(),
+                        PAZipcode: $("#zipcode").val(),
                         businessAddress: $("#businessAddress").val(),
+                        BAZipcode: $("#zipcode1").val(),
+                        BACity: $("#city1").val(),
+                        PACity: $("#city").val(),
+
+                        PAState: $("#state").val(),
+                        BAState: $("#state1").val(),
                         streetAddress: $("#streetAddress").val(),
                         imageUrl: image_url,
                         imageKey: image_key
@@ -10902,7 +11061,7 @@
                                 userData.imageUrl = response.images[0].image_url
                                 userData.imageKey = response.images[0].image_key
                                 $.ajax({
-                                    url: 'https://backend.app.spaderent.com/api/spade/updateUserProfile',
+                                    url: 'http://localhost:3000/api/spade/updateUserProfile',
                                     method: 'PUT',
                                     data: JSON.stringify(userData),
                                     contentType: 'application/json',
@@ -10937,7 +11096,7 @@
                         });
                     } else {
                         $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/updateUserProfile',
+                            url: 'http://localhost:3000/api/spade/updateUserProfile',
                             method: 'PUT',
                             data: JSON.stringify(userData),
                             contentType: 'application/json',
@@ -11397,34 +11556,130 @@
 
             });
         </script>
-        <script>
-            // Get references to the input fields and the save button
-            var firstNameInput = document.getElementById("firstName");
-            var lastNameInput = document.getElementById("lastName");
-            var phone1Input = document.getElementById("phone1");
-            var saveButton = document.getElementById("save_profile");
 
-            // Function to check and update button state
-            function updateButtonState() {
-                var firstName = firstNameInput.value;
-                var lastName = lastNameInput.value;
-                var phone1 = phone1Input.value;
+<script>
+    $(function () {
+    "use strict";
+    
+    $(".popup22 img").click(function () {
+        var $src = $(this).attr("src");
+        $(".showw").fadeIn();
+        $(".img-show img").attr("src", $src);
+    });
+    
+    $("span, .overlay").click(function () {
+        $(".showw").fadeOut();
+    });
+    
+});
+</script>
+<script>
+    // Get references to the input fields and the save button
+    var firstNameInput = document.getElementById("firstName");
+       var lastNameInput = document.getElementById("lastName");
+       var zipcodeInput = document.getElementById("zipcode");
+       var zipcodeInput1 = document.getElementById("zipcode1");
+       var phone1Input = document.getElementById("phone1");
+       var saveButton = document.getElementById("save_profile");
 
-                // Check if all three fields are empty
-                if (firstName === '' || lastName === '' || phone1 === '') {
-                    saveButton.disabled = true;
-                } else {
-                    saveButton.disabled = false;
+       // Function to check and update button state
+       function updateButtonState() {
+           var firstName = firstNameInput.value;
+           var lastName = lastNameInput.value;
+           var phone1 = phone1Input.value;
+           var zipcode = zipcodeInput.value;
+           var zipcode1 = zipcodeInput1.value;
+
+           // Check if all three fields are empty
+           if (firstName === '' || lastName === '' || phone1 === '' || zipcode === '' || zipcode1 === '') {
+               saveButton.disabled = true;
+           } else {
+               saveButton.disabled = false;
+           }
+       }
+
+       // Bind the keyup event handler to the input fields
+       firstNameInput.addEventListener('keyup', updateButtonState);
+       lastNameInput.addEventListener('keyup', updateButtonState);
+       phone1Input.addEventListener('keyup', updateButtonState);
+       zipcodeInput.addEventListener('keyup', updateButtonState);
+       zipcodeInput1.addEventListener('keyup', updateButtonState);
+       
+               
+            $('#submit-photo').click(() => {
+                if (selectedFiles.length >= 1) {
+                    var uploadFormData = new FormData();
+                    for (var i = 0; i < selectedFiles.length; i++) {
+                        var file = selectedFiles[i];
+                        uploadFormData.append('image', file);
+                    }
+                    var str = "";
+
+                    $.ajax({
+                        url: 'https://backend.app.spaderent.com/api/spade/upload',
+                        type: 'POST',
+                        data: uploadFormData,
+                        contentType: false,
+                        processData: false,
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            console.log(response.images[0]);
+                            // response.images?.forEach(function (value, index, array) {
+                            //     str += value.image_url;
+                            //     if (index < array.length - 1) {
+                            //         str += ",";
+                            //     }
+                            // });
+
+                            $.ajax({
+                                url: 'http://localhost:3000/api/spade/updateBusinessLogo',
+                                type: 'PUT',
+                                data: JSON.stringify({
+                                    image: response.images[0].image_url,
+                                    imageKey: response.images[0].image_key
+                                }),
+                                contentType: 'application/json',
+                                processData: false,
+                                headers: {
+                                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                                },
+                                success: function (response) {
+                                    console.log(response);
+                                    if (response.message == " Business Logo save successful") {
+                                        $("#myModal_success p").text("Succesfully Updated!!!")
+                                        $("#myModal_success").modal("show")
+                                        setTimeout(function () {
+                                            $("#myModal_success").modal("hide");
+                                        }, 2000);
+                                    }
+                                },
+                                error: function (xhr, status, error) {
+                                    console.log('Error: ' + error);
+                                    $("#myModal_warning_connection").modal("show");
+                            setTimeout(function () {
+                                $('#myModal_warning_connection').modal('hide');
+
+                            }, 2000);
+                                }
+                            });
+
+
+
+                        },
+                        error: function (xhr, status, error) {
+                            $("#myModal_warning_connection").modal("show");
+                            setTimeout(function () {
+                                $('#myModal_warning_connection').modal('hide');
+
+                            }, 2000);
+                            console.log('Error: ' + error);
+                        }
+                    });
+
                 }
-            }
-
-            // Bind the keyup event handler to the input fields
-            firstNameInput.addEventListener('keyup', updateButtonState);
-            lastNameInput.addEventListener('keyup', updateButtonState);
-            phone1Input.addEventListener('keyup', updateButtonState);
-
-            // Call the function on page load to initialize button state
-            //    updateButtonState();
+            })
         </script>
 </body>
 

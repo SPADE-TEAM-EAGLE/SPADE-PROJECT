@@ -518,7 +518,7 @@
                         style="text-align: center;">
                         <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" style="max-width: 110px;"
                             class="Rent-logo mb-5" />
-                        <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
+                        <h1 class="mb-4 text-dark fw-bold">Verify Your Email Address</h1>
                         <h6 class="text-default mb-3">Enter a 6-digit code to verify email address</h6>
                         <input id="token" name="token" type="phone" class="form-control form mb-2" pattern="[0-9]{5}"
                             maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
@@ -532,7 +532,7 @@
                             MUST be atleast 8 characters long, Must contain atleast One Uppercase and One symbol.
                         </span>
                         <div class="">
-                            <!-- <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2">Remind me Later</a> -->
+                            <!-- <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2">Remind Me Later</a> -->
                             <a href="javascript:void(0)" class="btn btn-primary btn-pill disabled"
                                 id="verify-btn">Verify</a>
                         </div>
@@ -559,7 +559,7 @@
                         style="text-align: center;">
                         <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" style="max-width: 110px;"
                             class="Rent-logo mb-5" />
-                        <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
+                        <h1 class="mb-4 text-dark fw-bold">Verify Your Email Address</h1>
                         <h6 class="text-default mb-3">Get started with Spade Rent! You have<span id="days-left"></span>
                             left</h6>
                         <input type="email" class="form-control form mb-2" style="width: 100%;"
@@ -569,7 +569,7 @@
                         <a class="text-primary mb-4 d-none" href="javascript:void(0)" id="save-email">Save Email</a>
                         <div class="">
                             <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2"
-                                id="remind-later">Remind me Later</a>
+                                id="remind-later">Remind Me Later</a>
                             <a href="javascript:void(0)" class="btn btn-primary btn-pill" id="send-email">Send Mail</a>
                         </div>
                     </div>
@@ -807,7 +807,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
+    <!-- <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -956,7 +956,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- MODAL EFFECTS -->
 
     <!-- PAGE -->
@@ -1130,6 +1130,9 @@
                                                 <a class="dropdown-item" href="lockscreen.html">
                                                     <i class="dropdown-icon fe fe-lock"></i> Lockscreen
                                                 </a> -->
+                                                <a class="dropdown-item" href="settings.html">
+                                                    <i class="dropdown-icon fe fe-settings"></i> Settings
+                                                </a>
                                                 <a class="dropdown-item" onclick="logout()" style="cursor: pointer;">
                                                     <i class="dropdown-icon fe fe-alert-circle"></i> Sign out
                                                 </a>
@@ -1281,7 +1284,7 @@
                                 <a class="side-menu__item" data-bs-toggle="slide" href="chats.html">
                                     <i class="side-menu__icon fi fi-rs-comment"></i>
                                     <span class="side-menu__label">Chat</span>
-<span class="badge bg-primary side-badge">6</span>
+<span class="badge bg-primary side-badge" id="chatCounter"></span>
 
                                     <!-- <i class="angle fe fe-chevron-right"></i> -->
                                 </a>
@@ -1323,33 +1326,24 @@
                             <div class="card-body pb-0">
                                 <div class="row">
                                     <div class="col-lg-12  position-relative">
-                                        <div class="d-flex">
+                                        <div class="d-flex justify-content-between align-items-center">
                                             <div class="media mt-0 mb-2">
                                                 <div class="media-user me-2">
                                                     <div class=""><img alt="" class="rounded-circle avatar avatar-md" style="max-width: 120px;" src="../assets/images/users/16.jpg"></div>
                                                 </div>
                                                 <div class="media-body">
                                                     <small class="text-white">Tenants</small>
-                                                    <h3 class="mb-0 text-white company-name" style="font-weight: bold;">
-                                                    </h3>
+                                                    <h3 class="mb-0 mt-1 text-white company-name" style="font-weight: bold;"></h3>
                                                 </div>
                                             </div>
-                                            <!-- <div class="ms-auto">
-                                                <div class="dropdown show">
-
-                                                    <i class="fe fe-more-vertical text-white fs-20"
-                                                        data-bs-toggle="dropdown"></i>
-
-                                                    <div class="dropdown-menu dropdown-menu-end">
-                                                        <a class="dropdown-item text-success" data-bs-toggle="modal"
-                                                            href="#addModal"><i class="fi fi-rs-edit me-1"></i> Edit</a>
-                                                        <a class="dropdown-item text-danger" href="javascript:void(0)">
-                                                            <i class="fi fi-rs-trash me-1"></i>Delete</a>
-
-
-                                                    </div>
+                                            <div class="dropdown show" style="border-radius: 50%; background: #fff; width: 35px; display: flex; align-items: center; justify-content: center; padding: 8px;">
+                                                <i class="fe fe-more-vertical fs-20" data-bs-toggle="dropdown" style="color: #1467B0;"></i>
+                                                <div class="dropdown-menu dropdown-menu-end">
+                                                    <a class="dropdown-item text-primary" href="javascript:void(0)"><i class="fi fi-rs-edit me-1"></i> Edit</a>
+                                                    <a class="dropdown-item text-danger" href="javascript:void(0)"> <i class="fi fi-rs-trash me-1"></i>Delete</a>
                                                 </div>
-                                            </div> -->
+                                            </div>
+
                                         </div>
 
                                         <!-- <a href="javascript:void(0)" id="email_verification"
@@ -1362,13 +1356,13 @@
                                     <div class="col-12">
                                         <ul class="nav1 br-7" style="bottom: 0;">
                                             <li class="nav-item1 p-0">
-                                                <a class="nav-link active p-2" href="view-tenant.html" id="viewOverview">Overview</a>
+                                                <a class="nav-link p-2" href="view-tenant.html" id="viewOverview">Overview</a>
                                             </li>
                                             <li class="nav-item1 p-0">
                                                 <a class="nav-link p-2" href="tenant-properties.html" id="viewProperties">Properties</a>
                                             </li>
                                             <li class="nav-item1 p-0">
-                                                <a class="nav-link p-2" href="tenant-tasks.html" id="viewTasks">Tasks</a>
+                                                <a class="nav-link active p-2" href="tenant-tasks.html" id="viewTasks">Tasks</a>
                                             </li>
                                             <li class="nav-item1 p-0">
                                                 <a class="nav-link p-2" href="tenant-file.html" id="viewFiles">Files</a>
@@ -1484,7 +1478,7 @@
                                                     </li>
                                                 </ul>
                                             </div>
-
+                                            <a href="create-tasks.html"><button type="button" class="btn btn-primary btn-pill mx-2" id="add_property_btn"><i class="fe fe-plus me-2"></i><strong>ADD NEW</strong></button></a>
                                         </div>
                                     </div>
                                     <div class="card-body p-0">
@@ -1531,6 +1525,130 @@
             </div>
             <!-- ROW-2 END -->
 
+            <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="text-justify ps-2 border-model-line">
+                                <h2 class="modal-title">Create <strong class="color-primary">New Task</strong></h2>
+                                <span class="">The real power of tasks is keeping track of deadlines and having a
+                                    log of all work and communication related to the tasks for later reference.</span>
+                            </div>
+                            <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="top-close">
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                                data-bs-parent="#accordionExample">
+                                <form class="row g-3" enctype="multipart/form-data">
+                                    <div class="col-md-4">
+                                        <label for="inputEmail4" class="form-label fw-bold">Task Name</label>
+                                        <input id="task" required class="form-control" placeholder="Sink in Leaked" type="text"
+                                            placeholder="Enter Task Name">
+                                        <span class="text-danger d-none">Task name is required!</span>
+                                    </div>
+                                    <div class="col-md-4">
+        
+                                        <label class="form-label fw-bold">Assign To</label>
+                                        <select id="assignee" class="form-control select2" data-placeholder="Choose Browser"
+                                            multiple placeholder="Enter Assign To">
+        
+                                        </select>
+                                        <span class="text-danger d-none" id="vendor-span">Add vendors first!!</span>
+                                        <!-- <span class="text-danger d-none">Property name required!</span> -->
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="inputState" class="form-label fw-bold">Related To</label>
+                                        <select required id="property" class="form-select form" placeholder="Enter Related To">
+                                            <option selected>Choose...</option>
+                                        </select>
+                                        <span class="text-danger d-none">This field is required!</span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="inputEmail4" class="form-label fw-bold">Due Date</label>
+                                        <input id="dueDate" class="form-control" placeholder="MM/DD/YYYY" type="date"
+                                            placeholder="Enter Due Date">
+                                        <span class="text-danger d-none">Due Date is required!</span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="inputState" class="form-label fw-bold">Status</label>
+                                        <select id="status" required class="form-select form" placeholder="Select Status">
+                                            <option selected>Choose...</option>
+                                            <option value="not started">Not Started</option>
+                                            <option value="in progress">In progress</option>
+                                            <option value="completed">Completed</option>
+        
+                                        </select>
+                                        <span class="text-danger d-none">Status is required!</span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="inputState" class="form-label fw-bold">Priority</label>
+                                        <select id="priority" required class="form-select form" placeholder="Select Priority">
+                                            <option selected>Choose...</option>
+                                            <option name="high">High</option>
+                                            <option name="moderate">Moderate</option>
+                                            <option name="low">Low</option>
+                                        </select>
+                                        <span class="text-danger d-none">Priority is required!</span>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label class="form-label fw-bold">Notes</label>
+                                        <textarea id="notes" class="form-control mb-4"
+                                            placeholder="Sorry about that We will look into it." rows="4"></textarea>
+                                        <!-- <span class="text-danger d-none">Photos are required!</span> -->
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label class="form-label fw-bold">Media/ Files (Optional)</label>
+                                        <div class="custom-file" style="border: 1px dashed #00000087;">
+                                            <input id="fileInput" type="file" name="media" class="custom-file-input form"
+                                                accept=".jpg, .jpeg, .png, .pdf, image/jpeg, image/png, application/pdf"
+                                                aria-label="hello" multiple>
+                                            <span className="d-none"></span>
+                                            <label class="custom-file-label" for="fileInput">
+                                                <i class="fi fi-rs-cloud-upload"></i>
+                                                <div class="custom-file-text">
+                                                    <span>Upload Photo here</span>
+                                                    <span>JPEG, PNG & PDF file size no more than 10MB</span>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        <div class="selected-files">
+                                            <div class="file-grid"></div>
+                                        </div>
+                                        <span class="text-danger d-none">Photos are required!</span>
+                                    </div>
+                                </form>
+                            </div>
+        
+                        </div>
+                        <div class="modal-footer d-flex justify-content-between">
+                            <!-- <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
+                                Draft</button> -->
+                            <div class="d-flex">
+        
+                                <label class="custom-control custom-checkbox me-2">
+                                    <input type="checkbox" class="custom-control-input" name="example-checkbox1" value=""
+                                        checked="">
+                                    <span class="custom-control-label">Notify Tenant</span>
+                                </label>
+                                <label class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" name="example-checkbox1" value=""
+                                        checked="">
+                                    <span class="custom-control-label">Notify Assignee(s)</span>
+                                </label>
+                            </div>
+                            <div class=""><button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal"
+                                    id='close'>Close</button>
+                                <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
+                                <a href="javascript:void(0)" class="btn text-light btn-pill button disabled"
+                                    style='background-color:#1467B0;' id='next'>Next</a>
+                            </div>
+        
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
 
@@ -2203,6 +2321,30 @@
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
     <script src="../assets/js/email-verification.js"></script>
+<script>
+            $(document).ready(function(){
+                $.ajax({
+                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        console.log("getMessagesCountLandlord");
+                        console.log(response.Count['count(message)']);
+                        $('#chatCounter').text(response.Count['count(message)'])
+                    },
+                    error: function (xhr, status, error) {
+                        $("#myModal_warning").modal("show");
+                        setTimeout(function () {
+                            $('#myModal_warning').modal('hide');
+                            window.location = '../Landlord/login_module.html';
+                        }, 2000);
+                        console.log(error);
+                    }
+                });
+            });
+        </script>
     <script src="../assets/js/intercom.js"></script>
     <script src="../assets/js/getNotification.js"></script>
 <script src="../assets/js/push_notification.js"></script>

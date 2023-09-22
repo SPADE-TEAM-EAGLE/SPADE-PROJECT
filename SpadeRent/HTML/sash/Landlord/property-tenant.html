@@ -516,7 +516,7 @@
                         style="text-align: center;">
                         <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" style="max-width: 110px;"
                             class="Rent-logo mb-5" />
-                        <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
+                        <h1 class="mb-4 text-dark fw-bold">Verify Your Email Address</h1>
                         <h6 class="text-default mb-3">Enter a 6-digit code to verify email address</h6>
                         <input id="token" name="token" type="phone" class="form-control form mb-2" pattern="[0-9]{5}"
                             maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
@@ -530,7 +530,7 @@
                             MUST be atleast 8 characters long, Must contain atleast One Uppercase and One symbol.
                         </span>
                         <div class="">
-                            <!-- <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2">Remind me Later</a> -->
+                            <!-- <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2">Remind Me Later</a> -->
                             <a href="javascript:void(0)" class="btn btn-primary btn-pill disabled"
                                 id="verify-btn">Verify</a>
                         </div>
@@ -557,7 +557,7 @@
                         style="text-align: center;">
                         <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" style="max-width: 110px;"
                             class="Rent-logo mb-5" />
-                        <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
+                        <h1 class="mb-4 text-dark fw-bold">Verify Your Email Address</h1>
                         <h6 class="text-default mb-3">Get started with Spade Rent! You have<span id="days-left"></span>
                             left</h6>
                         <input type="email" class="form-control form mb-2" style="width: 100%;"
@@ -567,7 +567,7 @@
                         <a class="text-primary mb-4 d-none" href="javascript:void(0)" id="save-email">Save Email</a>
                         <div class="">
                             <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2"
-                                id="remind-later">Remind me Later</a>
+                                id="remind-later">Remind Me Later</a>
                             <a href="javascript:void(0)" class="btn btn-primary btn-pill" id="send-email">Send Mail</a>
                         </div>
                     </div>
@@ -940,6 +940,9 @@
                                                 <a class="dropdown-item" href="lockscreen.html">
                                                     <i class="dropdown-icon fe fe-lock"></i> Lockscreen
                                                 </a> -->
+                                                <a class="dropdown-item" href="settings.html">
+                                                    <i class="dropdown-icon fe fe-settings"></i> Settings
+                                                </a>
                                                 <a class="dropdown-item" onclick="logout()" style="cursor: pointer;">
                                                     <i class="dropdown-icon fe fe-alert-circle"></i> Sign out
                                                 </a>
@@ -1097,7 +1100,7 @@
                                 <a class="side-menu__item" data-bs-toggle="slide" href="chats.html">
                                     <i class="side-menu__icon fi fi-rs-comment"></i>
                                     <span class="side-menu__label">Chat</span>
-<span class="badge bg-primary side-badge">6</span>
+<span class="badge bg-primary side-badge" id="chatCounter"></span>
 
                                     <!-- <i class="angle fe fe-chevron-right"></i> -->
                                 </a>
@@ -1159,12 +1162,15 @@
                                                     id="viewUnits">Units</a>
                                             </li>
                                             <li class="nav-item1 p-0">
-                                                <a class="nav-link p-2" href="property-tenant.html"
+                                                <a class="nav-link active p-2" href="property-tenant.html"
                                                     id="viewTenants">Tenants</a>
                                             </li>
                                             <li class="nav-item1 p-0">
                                                 <a class="nav-link p-2" href="property-task.html"
                                                     id="viewTasks">Tasks</a>
+                                            </li>
+                                            <li class="nav-item1 p-0">
+                                                <a class="nav-link p-2" href="bank-account.html" id="viewTasks">Bank Account</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -1325,14 +1331,14 @@
                                                     id="">
                                                     <thead>
                                                         <tr>
-                                                            <th>tenant ID</th>
-                                                            <th>tenant Name</th>
-                                                            <th>contact info</th>
-                                                            <th>Rent amount</th>
-                                                            <th>PROPERTY type</th>
-                                                            <th>Assign Unit</th>
-                                                            <th>PROPERTY UNITS</th>
-                                                            <th>Lease End Date</th>
+                                                            <th>TENANT ID</th>
+                                                            <th>TENANT NAME</th>
+                                                            <th>CONTACT INFO</th>
+                                                            <th>RENT AMOUNT</th>
+                                                            <!-- <th>PROPERTY type</th> -->
+                                                            <th>ASSIGNED UNIT</th>
+                                                            <th>LEASE START DATE </th>
+                                                            <th>LEASE END DATE</th>
                                                             <!-- <th>Action</th> -->
                                                         </tr>
                                                     </thead>
@@ -2037,6 +2043,30 @@
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
     <script src="../assets/js/email-verification.js"></script>
+<script>
+            $(document).ready(function(){
+                $.ajax({
+                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        console.log("getMessagesCountLandlord");
+                        console.log(response.Count['count(message)']);
+                        $('#chatCounter').text(response.Count['count(message)'])
+                    },
+                    error: function (xhr, status, error) {
+                        $("#myModal_warning").modal("show");
+                        setTimeout(function () {
+                            $('#myModal_warning').modal('hide');
+                            window.location = '../Landlord/login_module.html';
+                        }, 2000);
+                        console.log(error);
+                    }
+                });
+            });
+        </script>
     <script src="../assets/js/intercom.js"></script>
     <script src="../assets/js/getNotification.js"></script>
 <script src="../assets/js/push_notification.js"></script>
@@ -2270,7 +2300,7 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
 
                             var tenantName = '<td class="tenant-id tenantName" style="font-weight: 600;">' + tenant.firstName + " " + tenant.lastName + '</td>';
                             var contactInfo = '<td class="tenant-id" style="font-weight: 600;">' + `${tenant.tPhoneNumber ? tenant.tPhoneNumber : "N/A"}` + '</td>';
-                            var rentAmount = '<td class="tenant-id rentAmount" style="font-weight: 600;">' + tenant.rentAmount + '</td>';
+                            var rentAmount = '<td class="tenant-id rentAmount" style="font-weight: 600;">' +"$ " +tenant.rentAmount + '</td>';
                             var colorClass = '';
                             var backgroundClass = '';
 
@@ -2282,14 +2312,18 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                             } else if (tenant.propertyType === 'Multi-Commercial') {
                                 var colorClass = 'rounded-pill-Multi-Commercial';
                             }
-                            var propertyType = '<td class="propertyType"><a class="like" href="javascript:;">' +
-                                `<span class="badge btn-light ${colorClass} rounded-pill py-2 px-3">` +
-                                '<i class="fe fe-circle me-1"></i>' + tenant.propertyType + '</span>' +
-                                '</a></td>';
+                            // var propertyType = '<td class="propertyType"><a class="like" href="javascript:;">' +
+                            //     `<span class="badge btn-light ${colorClass} rounded-pill py-2 px-3">` +
+                            //     '<i class="fe fe-circle me-1"></i>' + tenant.propertyType + '</span>' +
+                            //     '</a></td>';
+                            
                             var assignUnit = '<td class="tenant-id " style="font-weight: 600;">' + tenant.unitNumber + '</td>';
-                            var propertyUnits = '<td class="tenant-id " style="font-weight: 600;">' + tenant.pUnits + '</td>';
+                            var Leasestartdate = '<td class="leasestartdate" style="font-weight: 600;">'+(tenant.leaseStartDate?tenant.leaseStartDate:"N/A")+'</td>';
+
+                            // var propertyUnits = '<td class="tenant-id " style="font-weight: 600;">' + tenant.pUnits + '</td>';
 
                             // Create a table row and append the generated columns
+                            
                             var currentDate = new Date();
                             if (tenant.leaseEndDate) {
                                 var targetDate = new Date(tenant.leaseEndDate);
@@ -2312,8 +2346,8 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
 
                             }
 
-                            var row = '<tr>' + tenantID + tenantName + contactInfo + rentAmount +
-                                propertyType + assignUnit + propertyUnits + leaseEndDate + '</tr>';
+                            var row = '<tr>' + tenantID + tenantName + contactInfo + rentAmount
+                             + assignUnit + Leasestartdate + leaseEndDate + '</tr>';
 
                             // Append the row to the table body
                             tableBody.append(row);

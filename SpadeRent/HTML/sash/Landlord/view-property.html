@@ -458,6 +458,13 @@
                 padding: 5px;
             }
         }
+
+        .card-body-center{
+            height: 160px;
+            display: flex;
+            align-items: center;
+        }
+
     </style>
 
 </head>
@@ -477,7 +484,7 @@
                         style="text-align: center;">
                         <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" style="max-width: 110px;"
                             class="Rent-logo mb-5" />
-                        <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
+                        <h1 class="mb-4 text-dark fw-bold">Verify Your Email Address</h1>
                         <h6 class="text-default mb-3">Enter a 6-digit code to verify email address</h6>
                         <input id="token" name="token" type="phone" class="form-control form mb-2" pattern="[0-9]{5}"
                             maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
@@ -491,7 +498,7 @@
                             MUST be atleast 8 characters long, Must contain atleast One Uppercase and One symbol.
                         </span>
                         <div class="">
-                            <!-- <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2">Remind me Later</a> -->
+                            <!-- <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2">Remind Me Later</a> -->
                             <a href="javascript:void(0)" class="btn btn-primary btn-pill disabled"
                                 id="verify-btn">Verify</a>
                         </div>
@@ -518,7 +525,7 @@
                         style="text-align: center;">
                         <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" style="max-width: 110px;"
                             class="Rent-logo mb-5" />
-                        <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
+                        <h1 class="mb-4 text-dark fw-bold">Verify Your Email Address</h1>
                         <h6 class="text-default mb-3">Get started with Spade Rent! You have<span id="days-left"></span>
                             left</h6>
                         <input type="email" class="form-control form mb-2" style="width: 100%;"
@@ -528,7 +535,7 @@
                         <a class="text-primary mb-4 d-none" href="javascript:void(0)" id="save-email">Save Email</a>
                         <div class="">
                             <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2"
-                                id="remind-later">Remind me Later</a>
+                                id="remind-later">Remind Me Later</a>
                             <a href="javascript:void(0)" class="btn btn-primary btn-pill" id="send-email">Send Mail</a>
                         </div>
                     </div>
@@ -1035,6 +1042,9 @@
                                                 <a class="dropdown-item" href="lockscreen.html">
                                                     <i class="dropdown-icon fe fe-lock"></i> Lockscreen
                                                 </a> -->
+                                                <a class="dropdown-item" href="settings.html">
+                                                    <i class="dropdown-icon fe fe-settings"></i> Settings
+                                                </a>
                                                 <a class="dropdown-item" onclick="logout()" style="cursor: pointer;">
                                                     <i class="dropdown-icon fe fe-alert-circle"></i> Sign out
                                                 </a>
@@ -1184,7 +1194,7 @@
     <a class="side-menu__item" data-bs-toggle="slide" href="chats.html">
         <i class="side-menu__icon fi fi-rs-comment"></i>
         <span class="side-menu__label">Chat</span>
-<span class="badge bg-primary side-badge">6</span>
+<span class="badge bg-primary side-badge" id="chatCounter"></span>
 
         <!-- <i class="angle fe fe-chevron-right"></i> -->
     </a>
@@ -1225,8 +1235,8 @@
                             <div class="card-body pb-0">
                                 <div class="row">
                                     <div class="col-lg-9 position-relative">
-                                        <h1 class="page-titlee text-white mb-1" style="font-weight: 700;" id="property_name"></h1>
-                                        <h5 class="page-titlee text-white" style="font-weight: 100;" id="property_address"></h5>
+                                        <h1 class="page-titlee text-white mb-1" style="font-weight: 700;" id="property_name6"></h1>
+                                        <h5 class="page-titlee text-white" style="font-weight: 100;" id="property-address"></h5>
                                         <!-- <a href="javascript:void(0)" id="email_verification"
                                                                     class="btn btn-primary btn-pill btn-xl email-verification-btn"><i
                                                                         class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
@@ -1234,7 +1244,7 @@
                                                                         class="angle fe fe-arrow-right create-btn-plus"></i></a> -->
                                         <ul class="nav1 br-7 position-absolute" style="bottom: 0;" id="nav_links">
                                             <li class="nav-item1 p-0">
-                                                <a class="nav-link  p-2" href="view-property.html" id="viewOverview">Overview</a>
+                                                <a class="nav-link active p-2" href="view-property.html" id="viewOverview">Overview</a>
                                             </li>
                                             <li class="nav-item1 p-0">
                                                 <a class="nav-link p-2" href="property-unit.html" id="viewUnits">Units</a>
@@ -1244,6 +1254,9 @@
                                             </li>
                                             <li class="nav-item1 p-0">
                                                 <a class="nav-link p-2" href="property-task.html" id="viewTasks">Tasks</a>
+                                            </li>
+                                            <li class="nav-item1 p-0">
+                                                <a class="nav-link p-2" href="bank-account.html" id="viewTasks">Bank Account</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -1291,57 +1304,97 @@
                             <!-- ROW-2 CLOSED -->
                             <!-- ROW-1 OPEN -->
                             <div class="row">
-                                <div class="col-xl-3 col-sm-6">
+                                <div class="col-xl-4 col-sm-6">
                                     <div class="card border p-0 inner-cards">
-                                        <!-- <div class="card-header border-0 pt-3">
-                                        <div class="card-options">
-                                            <a href="javascript:void(0)" class="card-options-remove"
-                                                data-bs-toggle="card-remove"><i class="fe fe-x"></i></a>
+                                        <div class="card-header justify-content-start bg-light">
+                                            <h3 class="card-title font-wieght-bold"><b>Property Info</b></h3>
                                         </div>
-                                    </div> -->
-                                        <div class="card-body text-center">
+                                        <div class="card-body text-center card-body-center">
+                                            <div style="display: flex; gap: 1em; align-items: center;">
                                             <span class=""><img src="../assets/images/logo-images/Group 10294.png"
-                                                    alt="" height="60" width="60"></span>
-                                            <h4 class="h4 mb-0 mt-3 font-weight-bold"><b>Property Type</b></h4>
-                                            <p class="card-text text-default mt-2" id="property_type">Multi-Commercial
+                                                    alt="" height="60" width="75"></span>
+                                                    <div style="flex-direction: column; text-align: left;">
+                                            <h4 class="h4 mb-0 mt-3 font-weight-bold"><b id="property_name"></b></h4>
+                                            <p class="card-text text-default mt-2" id="property_address">
                                             </p>
                                         </div>
-                                    </div>
-                                </div>
-                                <!-- COL END -->
-                                <div class="col-xl-3 col-sm-6">
-                                    <div class="card border p-0 inner-cards">
-                                        <!-- <div class="card-header border-0 pt-3">
-                                        <div class="card-options">
-                                            <a href="javascript:void(0)" class="card-options-remove"
-                                                data-bs-toggle="card-remove"><i class="fe fe-x"></i></a>
                                         </div>
-                                    </div> -->
-                                        <div class="card-body text-center">
-                                            <span class=""><img src="../assets/images/logo-images/Group 10332.png"
-                                                    alt="" height="60" width="60"></span>
-                                            <h4 class="h4 mb-0 mt-3 font-weight-bold"><b>Active Units</b></h4>
-                                            <p class="card-text text-default mt-2" id="property_units">0</p>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- COL END -->
-                                <div class="col-xl-3 col-sm-6">
+                                <div class="col-xl-4 col-sm-6">
                                     <div class="card border p-0 inner-cards">
-                                        <!-- <div class="card-header border-0 pt-3">
-                                        <div class="card-options">
-                                            <a href="javascript:void(0)" class="card-options-remove"
-                                                data-bs-toggle="card-remove"><i class="fe fe-x"></i></a>
+                                        <div class="card-header justify-content-start bg-light">
+                                            <h3 class="card-title font-wieght-bold"><b>Property Type</b></h3>
                                         </div>
-                                    </div> -->
-                                        <div class="card-body text-center">
-                                            <span class=""><img src="../assets/images/logo-images/Group 10414.png"
-                                                    alt="" height="60" width="60"></span>
-                                            <h4 class="h4 mb-0 mt-3 font-weight-bold"><b>Status</b></h4>
-                                            <p class="card-text text-success mt-2" id="property_status">Active</p>
+                                        <div class="card-body text-center card-body-center">
+                                            <div style="display: flex; gap: 1em; align-items: center;">
+                                            <span class=""><img src="../assets/images/logo-images/Users.png"
+                                                    alt="" height="60" width="65"></span>
+                                                    <div style="flex-direction: column; text-align: left;">
+                                            <td class="propertyType"><a class="like" href="javascript:;"><span class="badge btn-light rounded-pill-Multi-Family rounded-pill py-2 px-3" id="property_type"><i class="fe fe-circle me-1"></i></span></a></td>
+                                        </div>
+                                        </div>
                                         </div>
                                     </div>
                                 </div>
+                                <!-- COL END -->
+                                <div class="col-xl-4 col-sm-6">
+                                    <div class="card border p-0 inner-cards">
+                                        <div class="card-header justify-content-start bg-light">
+                                            <h3 class="card-title font-wieght-bold"><b>Property Info</b></h3>
+                                        </div>
+                                        <div class="card-body text-center card-body-center">
+                                            <div style="display: flex; gap: 1em; align-items: center;">
+                                            <span class=""><img src="../assets/images/logo-images/Units.png"
+                                                    alt="" height="60" width="65"></span>
+                                                    <div style="flex-direction: column; text-align: left;">
+                                            <h4 class="h4 mb-0 mt-3 font-weight-bold"><b id="property_units"></b></h4>
+                                            <p class="card-text text-default mt-2" id="unit_type">
+                                                
+                                            </p>
+                                        </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <!-- COL END -->
+                                <div class="col-xl-4 col-sm-6">
+                                    <div class="card border p-0 inner-cards">
+                                        <div class="card-header justify-content-start bg-light">
+                                            <h3 class="card-title font-wieght-bold"><b>Total Sqft</b></h3>
+                                        </div>
+                                        <div class="card-body text-center card-body-center">
+                                            <div style="display: flex; gap: 1em; align-items: center;">
+                                            <span class=""><img src="../assets/images/logo-images/sqft.png"
+                                                    alt="" height="60" width="65"></span>
+                                                    <div style="flex-direction: column; text-align: left;">
+                                            <h4 class="h4 mb-0 mt-3 font-weight-bold"><b id="property_size"></b></h4>
+                                        </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- COL END -->
+                                <!-- <div class="col-xl-4 col-sm-6">
+                                    <div class="card border p-0 inner-cards">
+                                        <div class="card-header justify-content-start bg-light">
+                                            <h3 class="card-title font-wieght-bold"><b>Description</b></h3>
+                                        </div>
+                                        <div class="card-body text-center card-body-center">
+                                            <div style="display: flex; gap: 1em; align-items: center;">
+                                            <span class=""><img src="../assets/images/logo-images/description.png"
+                                                    alt="" height="60" width="260"></span>
+                                                    <div style="flex-direction: column; text-align: left;">
+                                            <p class="card-text text-default mt-2" id="property_type">Build your luxurious Waterfront Home here on Beacon Island. An Exclusively Gated Community!Premier Lot that is about half an acre with Outstanding Views
+                                            </p>
+                                        </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div> -->
                                 <!-- COL END -->
                             </div>
                             <!-- ROW-1 CLOSED -->
@@ -1365,25 +1418,16 @@
                                 <div class="col-md-9">
                                     <div class="card inner-cards">
                                         <div class="card-header justify-content-start bg-light">
-                                            <h3 class="card-title font-wieght-bold"><b>Photos</b></h3>
+                                            <h3 class="card-title font-wieght-bold"><b>Media</b></h3>
                                         </div>
                                         <!-- id="image-placeholder" -->
-                                        <div class="card-body" id="image-placeholder">
-                                            <ul id="lightgallery" class="list-unstyled row">
-
-                                            </ul>
-                                        </div>
-                                        <!-- <div class="card-body">
+                                        <div class="card-body">
                                             <div class="row"
                                                 id="image-placeholder">
-                                            <img src="../assets/images/demo_img.png" alt="">
-                                            <img src="../assets/images/demo_img.png" alt="">
-                                            <img src="../assets/images/demo_img.png" alt="">
-                                            <img src="../assets/images/demo_img.png" alt="">
-                                            <img src="../assets/images/demo_img.png" alt="">
-                                            <img src="../assets/images/demo_img.png" alt="">
-                                            <img src="../assets/images/demo_img.png" alt=""></div>
-                                        </div> -->
+                                                
+                                            
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -2149,13 +2193,14 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                             }
                     $("#property_name").text(toTitleCase(data.propertyName))
                     $("#property_address").text(toTitleCase(data.address)+", "+toTitleCase(data.city)+", "+toTitleCase(data.state))
-                    $("#property_type").text(data.propertyType)
-                    $("#property_units").text(data.units)
+                    $("#property_type").append(data.propertyType)
+                    $("#unit_type").append(`<span style="color: #1467B0;"><b>${data.NumberCount.Occupied} (Occupied)</b></span> <span style="color: red;"><b>${data.NumberCount.Vacant} (Vacant)</b></span>`)
+                    $("#property_size").text(data.propertySQFT+ " sqft.")
+                    
                     $("#property_status").text(data.status)
                     $("#lightgallery").empty()
                     data.images.forEach(image => {
-                        $("#lightgallery").append('<li class="col-xs-6 col-sm-4 col-md-4 col-xl-3 mb-5 border-bottom-0" data-responsive="' + image.Image + '" data-src="' + image.Image + '" data-sub-html="<h4>Gallery Image 1</h4><p> Many desktop publishing packages and web page editors now use Lorem Ipsum</p>"><a href="javascript:void(0)"><img class="img-responsive br-5" src="' + image.Image + '" alt="Thumb-1"></a></li>');
-
+                        $("#image-placeholder").append('<div class="col-lg-2"><img src="' + image.Image + '" alt="" class="img-fluid rounded"></div>')
                     });
                     // $("#lightgallery").append('<li class="col-xs-6 col-sm-4 col-md-4 col-xl-3 mb-5 border-bottom-0" data-responsive="../../../../spadeAPI/uploads/'+image.Image+'" data-src="../../../../spadeAPI/uploads/'+image.Image+'" data-sub-html="<h4>Gallery Image 1</h4><p> Many desktop publishing packages and web page editors now use Lorem Ipsum</p>"><a href="javascript:void(0)"><img class="img-responsive br-5" src="../../../../spadeAPI/uploads/' + image.Image + '" alt="Thumb-1"></a></li>')
                 },
@@ -2200,6 +2245,30 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
     <script src="../assets/js/email-verification.js"></script>
+<script>
+            $(document).ready(function(){
+                $.ajax({
+                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        console.log("getMessagesCountLandlord");
+                        console.log(response.Count['count(message)']);
+                        $('#chatCounter').text(response.Count['count(message)'])
+                    },
+                    error: function (xhr, status, error) {
+                        $("#myModal_warning").modal("show");
+                        setTimeout(function () {
+                            $('#myModal_warning').modal('hide');
+                            window.location = '../Landlord/login_module.html';
+                        }, 2000);
+                        console.log(error);
+                    }
+                });
+            });
+        </script>
     <script src="../assets/js/intercom.js"></script>
     <script src="../assets/js/getNotification.js"></script>
 <script src="../assets/js/push_notification.js"></script>

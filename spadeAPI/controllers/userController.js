@@ -1024,8 +1024,6 @@ exports.property = async (req, res) => {
 
 exports.getproperty = async (req, res) => {
   const { userId, userName } = req.user;
-  // const { userId, userName } = req.body;
-  // console.log(userId);
   try {
     const allPropertyResult = await queryRunner(
       selectQuery("property", "landlordID"),
@@ -1333,10 +1331,6 @@ exports.propertyUpdate = async (req, res) => {
 exports.propertyView = async (req, res) => {
   try {
     const { propertyId } = req.query;
-    // const { propertyId } = req.body;
-    // console.log(req.query)
-    // check property in database
-    // console.log(propertyId);
     const propertyViewResult = await queryRunner(
       selectQuery("property", "id"),
       [propertyId]

@@ -194,7 +194,7 @@
                         style="text-align: center;">
                         <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" style="max-width: 110px;"
                             class="Rent-logo mb-5" />
-                        <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
+                        <h1 class="mb-4 text-dark fw-bold">Verify Your Email Address</h1>
                         <h6 class="text-default mb-3">Enter a 6-digit code to verify email address</h6>
                         <input id="token" name="token" type="phone" class="form-control form mb-2" pattern="[0-9]{5}"
                             maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
@@ -208,7 +208,7 @@
                             MUST be atleast 8 characters long, Must contain atleast One Uppercase and One symbol.
                         </span>
                         <div class="">
-                            <!-- <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2">Remind me Later</a> -->
+                            <!-- <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2">Remind Me Later</a> -->
                             <a href="javascript:void(0)" class="btn btn-primary btn-pill disabled"
                                 id="verify-btn">Verify</a>
                         </div>
@@ -235,7 +235,7 @@
                         style="text-align: center;">
                         <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" style="max-width: 110px;"
                             class="Rent-logo mb-5" />
-                        <h1 class="mb-4 text-dark fw-bold">Verify your Email Address</h1>
+                        <h1 class="mb-4 text-dark fw-bold">Verify Your Email Address</h1>
                         <h6 class="text-default mb-3">Get started with Spade Rent! You have<span id="days-left"></span>
                             left</h6>
                         <input type="email" class="form-control form mb-2" style="width: 100%;"
@@ -245,7 +245,7 @@
                         <a class="text-primary mb-4 d-none" href="javascript:void(0)" id="save-email">Save Email</a>
                         <div class="">
                             <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2"
-                                id="remind-later">Remind me Later</a>
+                                id="remind-later">Remind Me Later</a>
                             <a href="javascript:void(0)" class="btn btn-primary btn-pill" id="send-email">Send Mail</a>
                         </div>
                     </div>
@@ -739,6 +739,9 @@
                                                 <a class="dropdown-item" href="lockscreen.html">
                                                     <i class="dropdown-icon fe fe-lock"></i> Lockscreen
                                                 </a> -->
+                                                <a class="dropdown-item" href="settings.html">
+                                                    <i class="dropdown-icon fe fe-settings"></i> Settings
+                                                </a>
                                                 <a class="dropdown-item" onclick="logout()" style="cursor: pointer;">
                                                     <i class="dropdown-icon fe fe-alert-circle"></i> Sign out
                                                 </a>
@@ -893,7 +896,7 @@
                                 <a class="side-menu__item" data-bs-toggle="slide" href="chats.html">
                                     <i class="side-menu__icon fi fi-rs-comment"></i>
                                     <span class="side-menu__label">Chat</span>
-<span class="badge bg-primary side-badge">6</span>
+<span class="badge bg-primary side-badge" id="chatCounter"></span>
 
                                     <!-- <i class="angle fe fe-chevron-right"></i> -->
                                 </a>
@@ -1147,100 +1150,7 @@
 
                                 <!-- COL END -->
 
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12" id="task-card">
-                                    <div class="card" >
-                                        <div class="card-header" style="display: flex; justify-content: space-between;">
-                                            <h2 class="card-title text-dark"><b>Recent Tasks</b></h2>
-                                            <div class="tab-menu-heading float-right"
-                                                style="background-color: #F4F5F9; border-radius: 30px; padding: 4px;">
-                                                <div class="tabs-menu">
-                                                    <!-- Tabs -->
-                                                    <ul class="nav panel-tabs panel-info">
-                                                        <li><a href="#tab23" data-bs-toggle="tab"><span><i
-                                                                        class="fe fe-user me-1"></i></span>Monthly</a>
-                                                        </li>
-                                                        <li><a href="#tab22" data-bs-toggle="tab"><span><i
-                                                                        class="fe fe-calendar me-1"></i></span>Weekly</a>
-                                                        </li>
-                                                        <li><a href="#tab21" data-bs-toggle="tab"
-                                                                class="active"><span><i
-                                                                        class="fe fe-settings me-1"></i></span>Today</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="panel panel-primary">
-
-                                                <div class="tabs-menu-body">
-                                                    <div class="tab-content">
-                                                        <div class="tab-pane" id="tab21">
-                                                            <div class="table-responsive">
-                                                                <table
-                                                                    class="table border text-nowrap text-md-nowrap table-hover mb-0">
-                                                                    <thead class="table-recent">
-                                                                        <tr>
-                                                                            <th>Task</th>
-                                                                            <th>Assigned To</th>
-                                                                            <th>Due At</th>
-                                                                            <th>Related To</th>
-                                                                            <th>Status</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody id="table-body">
-
-
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="tab-pane" id="tab22">
-                                                            <div class="table-responsive">
-                                                                <table
-                                                                    class="table border text-nowrap text-md-nowrap table-hover mb-0">
-                                                                    <thead class="table-recent">
-                                                                        <tr>
-                                                                            <th>Task</th>
-                                                                            <th>Assigned To</th>
-                                                                            <th>Due At</th>
-                                                                            <th>Related To</th>
-                                                                            <th>Status</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="tab-pane active" id="tab23">
-                                                            <div class="table-responsive">
-                                                                <table
-                                                                    class="table border text-nowrap text-md-nowrap table-hover mb-0">
-                                                                    <thead class="table-recent">
-                                                                        <tr>
-                                                                            <th>Task</th>
-                                                                            <th>Assigned To</th>
-                                                                            <th>Due At</th>
-                                                                            <th>Related To</th>
-                                                                            <th>Status</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                
 
                                 <!-- Prospects status Start  -->
                                 <div class="col-lg-6 col-md-12 mb-5" id="prospect-status">
@@ -1630,7 +1540,100 @@
                                     </div>
                                 </div>
                                 <!-- Property Status End  -->
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12" id="task-card">
+                                    <div class="card" >
+                                        <div class="card-header" style="display: flex; justify-content: space-between;">
+                                            <h2 class="card-title text-dark"><b>Recent Tasks</b></h2>
+                                            <div class="tab-menu-heading float-right"
+                                                style="background-color: #F4F5F9; border-radius: 30px; padding: 4px;">
+                                                <div class="tabs-menu">
+                                                    <!-- Tabs -->
+                                                    <ul class="nav panel-tabs panel-info">
+                                                        <li><a href="#tab23" data-bs-toggle="tab"><span><i
+                                                                        class="fe fe-user me-1"></i></span>Monthly</a>
+                                                        </li>
+                                                        <li><a href="#tab22" data-bs-toggle="tab"><span><i
+                                                                        class="fe fe-calendar me-1"></i></span>Weekly</a>
+                                                        </li>
+                                                        <li><a href="#tab21" data-bs-toggle="tab"
+                                                                class="active"><span><i
+                                                                        class="fe fe-settings me-1"></i></span>Today</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="panel panel-primary">
 
+                                                <div class="tabs-menu-body">
+                                                    <div class="tab-content">
+                                                        <div class="tab-pane" id="tab21">
+                                                            <div class="table-responsive">
+                                                                <table
+                                                                    class="table border text-nowrap text-md-nowrap table-hover mb-0">
+                                                                    <thead class="table-recent">
+                                                                        <tr>
+                                                                            <th>Task</th>
+                                                                            <th>Assigned To</th>
+                                                                            <th>Due At</th>
+                                                                            <th>Related To</th>
+                                                                            <th>Status</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody id="table-body">
+
+
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="tab-pane" id="tab22">
+                                                            <div class="table-responsive">
+                                                                <table
+                                                                    class="table border text-nowrap text-md-nowrap table-hover mb-0">
+                                                                    <thead class="table-recent">
+                                                                        <tr>
+                                                                            <th>Task</th>
+                                                                            <th>Assigned To</th>
+                                                                            <th>Due At</th>
+                                                                            <th>Related To</th>
+                                                                            <th>Status</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="tab-pane active" id="tab23">
+                                                            <div class="table-responsive">
+                                                                <table
+                                                                    class="table border text-nowrap text-md-nowrap table-hover mb-0">
+                                                                    <thead class="table-recent">
+                                                                        <tr>
+                                                                            <th>Task</th>
+                                                                            <th>Assigned To</th>
+                                                                            <th>Due At</th>
+                                                                            <th>Related To</th>
+                                                                            <th>Status</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <!-- COL-END -->
@@ -1984,6 +1987,30 @@
     <script src="../assets/js/index-chart.js"></script>
     <!-- <script src="https://backend.app.spaderent.com/"></script> -->
     <script src="../assets/js/email-verification.js"></script>
+<script>
+            $(document).ready(function(){
+                $.ajax({
+                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        console.log("getMessagesCountLandlord");
+                        console.log(response.Count['count(message)']);
+                        $('#chatCounter').text(response.Count['count(message)'])
+                    },
+                    error: function (xhr, status, error) {
+                        $("#myModal_warning").modal("show");
+                        setTimeout(function () {
+                            $('#myModal_warning').modal('hide');
+                            window.location = '../Landlord/login_module.html';
+                        }, 2000);
+                        console.log(error);
+                    }
+                });
+            });
+        </script>
     <script src="../assets/js/intercom.js"></script>
     <!-- <script src="http://ec2-52-45-181-206.compute-1.amazonaws.com:3000/socket.io/socket.io.js"></script> -->
     <script>

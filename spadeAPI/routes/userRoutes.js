@@ -115,8 +115,8 @@ router.delete('/invoiceDelete', verifyToken, invoiceController.invoiceDelete);
 router.post("/addVendor", verifyToken, taskController.addVendors);  
 router.put("/updateVendor", verifyToken, taskController.updateVendor); //=> **********  update vendor
 router.delete("/deleteVendor/:vendorID", verifyToken, taskController.deleteVendor); //=> **********  delete vendor
-// router.post("/addVendorCategory", verifyToken, taskController.addVendorCategory);
-router.post("/addVendorCategory", taskController.addVendorCategory);
+router.post("/addVendorCategory", verifyToken, taskController.addVendorCategory);
+// router.post("/addVendorCategory", taskController.addVendorCategory);
 // router.get("/getAllVendors",verifyToken ,taskController.getAllVendors);
 router.get("/getAllVendors", verifyToken, taskController.getAllVendors);
 router.post("/addTasks", verifyToken, taskController.addTasks);
@@ -234,6 +234,6 @@ router.put("/updateProspectusStatus", verifyToken, prospectus.updateProspectusSt
 router.get("/prospectusInsightQD/:year", verifyToken, prospectus.prospectusInsightQD);
 router.get("/prospectusInsightEN/:startDate/:endDate", verifyToken, prospectus.prospectusInsightEN);
 router.delete("/deleteProspectus/:prospectusID", verifyToken, prospectus.deleteProspectus);
-router.get("/updateBusinessLogo", verifyToken, settingController.updateBusinessLogo);
+router.put("/updateBusinessLogo", verifyToken, settingController.updateBusinessLogo);
 // router.get("/updateBusinessLogo" , settingController.updateBusinessLogo);
 

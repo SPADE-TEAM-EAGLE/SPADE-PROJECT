@@ -94,11 +94,11 @@ exports.createInvoice = async (req, res) => {
         for (let i = 0; i < lineItems.length; i++) {
           if (Object.keys(lineItems[i]).length >= 1) {
             const category = lineItems[i].category;
-            const property = lineItems[i].property;
+            
             const memo = lineItems[i].memo;
             const amount = lineItems[i].amount;
             const lineItemTax = lineItems[i].tax;
-            const invoiceLineItemsResult = await queryRunner(insertLineItems, [invoiceID, category, property, memo, amount, lineItemTax])
+            const invoiceLineItemsResult = await queryRunner(insertLineItems, [invoiceID, category, memo, amount, lineItemTax])
             if (invoiceLineItemsResult.affectedRows === 0) {
               res.send('Error2 in line item invoice');
               return;
@@ -141,7 +141,7 @@ exports.createInvoice = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.status(400).send("Error", error);
+    res.status(400).json({"Error":error});
   }
  };
 //  ############################# Create Invoice END ############################################################
