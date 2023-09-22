@@ -864,23 +864,23 @@ color: #000;
                                 <input class="form-control" type="text" placeholder="Enter Street Address" data-bs-container="#addModal" id="streetAddress" required>
                                 <span class="text-danger d-none">Street address is required!</span>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <label for="inputEmail3" class="form-label fw-bold">City</label>
                                 <input class="form-control" type="text" placeholder="Enter City" pattern="[A-Za-z\s]+" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')" data-bs-container="#addModal" id="city" required>
                                 <span class="text-danger d-none">City is required!</span>
                             </div>
-                            <!-- <div class="col-md-4">
+                            <div class="col-md-4">
                                 <label for="inputState" class="form-label fw-bold">Status</label>
                                 <select class="form-select form"
-                                    id="status" required>
+                                    id="state" required>
                                     <option selected>Choose...</option>
-                                    <option value="Not started">Not started</option>
+                                    <!-- <option value="Not started">Not started</option>
                                     <option value="In progress">In progress</option>
-                                    <option value="Completed">Completed</option>
+                                    <option value="Completed">Completed</option> -->
                                 </select>
                                 <span class="text-danger d-none">Status is required!</span>
-                            </div> -->
-                            <div class="col-md-6">
+                            </div>
+                            <div class="col-md-4">
                                 <label for="inputEmail3" class="form-label fw-bold">Zip Code</label>
                                 <input class="form-control form" type="text" id="zip" name="zip" pattern="[0-9]{5}" placeholder="A valid 5-digit zip code" maxlength="5" minlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '')"placeholder="Enter Zip" required>
                                 <span class="text-danger d-none">Zip code is required!</span>
@@ -901,14 +901,21 @@ color: #000;
                                 <input class="form-control" type="email" pattern="[A-Za-z0-9_\.@]+" oninput="this.value = this.value.replace(/[^A-Za-z0-9_\.@]/g, '').replace(/(@+)/g, '@')" placeholder="Enter Email" id="email" required>
                                 <span class="text-danger d-none">Email is required!</span>
                             </div>
+                            
                             <div class="col-md-6">
+                            <div id="add-item-container5">
+                                <div class="trr">
                                 <label for="inputState" class="form-label fw-bold">Category</label>
                                 <select class="form-select form" id="category" required>
                                     <option selected>Choose...</option>
                                 </select>
-                                <span class="text-danger d-none">Category is required!</span>
                             </div>
-
+                            </div>
+                                <span class="text-danger d-none">Category is required!</span>
+                                <a href="javascript:;" class="mt-1 text-primary"
+                            id="add-item5">+ Add New Category</a>
+                            </div>
+                            
                         </form>
                     </div>
 
@@ -2421,6 +2428,8 @@ color: #000;
     <script src="../assets/js/apexcharts.js"></script>
     <script src="../assets/plugins/apexchart/irregular-data-series.js"></script>
 
+    <script src="../assets/js/modal_functionality.js"></script>
+
     <!-- INTERNAL Flot JS -->
     <script src="../assets/plugins/flot/jquery.flot.js"></script>
     <script src="../assets/plugins/flot/jquery.flot.fillbetween.js"></script>
@@ -3206,6 +3215,37 @@ color: #000;
             }
         });
     })
+</script>
+
+<!-- add category start  -->
+<script>
+$(document).ready(function () {
+    $("#add-item5").on("click", () => {
+        $("#add-item-container5").append(`
+            <div class="row">
+                <div class="col-md-12"> 
+                    <label for="inputState" class="form-label fw-bold">Category</label>
+                    <div style="display: flex; justify-content: center; align-items: center;">
+                        <select class="form-select form" id="category" required>
+                        <option selected>Choose...</option>
+                    </select>
+                    <span class="text-danger d-none">Category is required!</span>
+                
+                <button type="button" class="btn del-btn5" style="text-align: left;">
+                    <i class="fi fi-rs-trash text-danger fs-5"></i>
+                </button>
+            </div>
+            </div>
+            </div>
+        `);
+    });
+
+    $('#add-item-container5').on('click', '.del-btn5', function () {
+        // Find the closest parent div.row and remove it
+        $(this).closest('div.row').remove();
+    });
+});
+
 </script>
 </body>
 
