@@ -1386,7 +1386,7 @@
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="media mt-0 mb-2">
                                                 <div class="media-user me-2">
-                                                    <div class=""><img alt="" class="rounded-circle avatar avatar-md" style="max-width: 120px;" src="../assets/images/users/16.jpg"></div>
+                                                    <div class=""><img alt="" class="rounded-circle avatar avatar-md" style="max-width: 120px;" src="../assets/images/users/16.jpg" id="tenant-top-img"></div>
                                                 </div>
                                                 <div class="media-body">
                                                     <small class="text-white">Tenants</small>
@@ -1447,7 +1447,7 @@
                                             <span class="">These details are required for rent reminders, tenants commutations
                                                 and portal access. </span>
                                         </div>
-                                        <img src="../assets/images/faces/man-prospects.png" alt="" style="border-radius: 50%; width: 130px;">
+                                        <img src="" alt="" style="border-radius: 50%; width: 70px;" id="tenant-img">
                                         <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
                                         </button>
@@ -2519,7 +2519,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
             })
             console.log(3464565455656546)
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getTenantsByID',
+                url: 'http://localhost:3000/api/spade/getTenantsByID',
                 type: 'GET',
                 data: {
                     id: tenantId
@@ -2538,7 +2538,10 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                     $("#tenant-email").text(data[0][0].tEmail)
                     $("#tenant-phone").text(data[0][0].tPhoneNumber)
                     $(".company-name").text(`${data[0][0].companyName} | ${data[0][0].firstName+" "+data[0][0].lastName}`)
-                    }
+                    $("#tenant-img").attr("src", data[0][0].tenantImage?data[0][0].tenantImage:"../assets/images/users/16.jpg")
+                    $("#tenant-top-img").attr("src", data[0][0].tenantImage?data[0][0].tenantImage:"../assets/images/users/16.jpg")
+
+                }
                 },
                 error: function(xhr, status, error) {
                     $("#myModal_warning_connection").modal("show");

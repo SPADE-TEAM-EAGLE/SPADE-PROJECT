@@ -3038,7 +3038,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                             images: imageArray
                         };
                         $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/tenantAttachFile',
+                            url: 'http://localhost:3000/api/spade/tenantAttachFile',
                             type: 'POST',
                             data: JSON.stringify(tenantData),
                     contentType: 'application/json',
@@ -3144,7 +3144,7 @@ function formatDate(dateString) {
 }
 function getData(){
     $.ajax({
-    url: 'https://backend.app.spaderent.com/api/spade/GettenantAttachFile',
+    url: 'http://localhost:3000/api/spade/GettenantAttachFile',
     type: 'GET',
     data: {
         tenantID: tenantId
@@ -3221,7 +3221,7 @@ $(document).on("click",'.delete-option',function(e) {
                         e.preventDefault(); // Prevent default anchor behavior
                         const imageElement = $(this).closest("tr").find(".file-id").attr("id");
                         $.ajax({
-                            url:"https://backend.app.spaderent.com/api/spade/tenantAttachFileDelete",
+                            url:"http://localhost3000/api/spade/tenantAttachFileDelete",
                             type:"DELETE",
                             data:JSON.stringify({
                                 id:imageElement.trim(" ")

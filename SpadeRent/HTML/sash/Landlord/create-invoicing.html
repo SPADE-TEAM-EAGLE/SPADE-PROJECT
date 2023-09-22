@@ -4309,6 +4309,7 @@
                     $("#totalText").text("$ " + 0)
                     $('#toggle-button,.save-invoice').attr("disabled", true);
                     $(".file-grid").empty()
+                    $("#shipper_state_state").parent().empty()
                 }
                 $("#succesModal,#infoModal,#addModal,#myModal_edit,#succesModal_invoice").on('hide.bs.modal', function () {
 
@@ -4787,7 +4788,7 @@
 
                                 // Build the HTML structure for the item
                                 newItem.html(`<div style="display: flex; gap: 1rem; align-items: center;" id="${tenant.tenantID}">` +
-                                    '<img src="' + + '" alt="" style="width: 65px; height: 65px;">' +
+                                    '<img src="' + tenant.tenantImages.split(",")[0]+ '" alt="" style="width: 65px; height: 65px;">' +
                                     '<div><h3 class="mb-0 line-height: 22px;">' + (tenant.firstName + " " + tenant.lastName) + '</h3>' +
                                     '<span style="line-height: 22px;">Email: ' + tenant.tEmail + '</span>' +
                                     '<span style="line-height: 22px;">Company: ' + tenant.companyName + '</span><br>' +

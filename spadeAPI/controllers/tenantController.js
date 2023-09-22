@@ -584,7 +584,7 @@ exports.tenantAttachFileDelete = async (req, res) => {
 
 //  ############################# get all Tenant Attach File Start ############################################################
 exports.GettenantAttachFile = async (req, res) => {
-  const { tenantID } = req.body; 
+  const { tenantID } = req.query; 
 
   try {
       const GettenantAttachFileResult = await queryRunner(getTenantAttachFile, [tenantID]);
@@ -962,13 +962,15 @@ exports.tenantTask = async (req, res) => {
           (vendorID) => vendorID.vendorId
         );
         const vendorData = [];
+        
         for (let i = 0; i < vendorIDs.length; i++) {
           const vID = vendorIDs[i];
           const vendorResult = await queryRunner(selectQuery("vendor", "id"), [
             vID,
           ]);
           let VendorCategoryResult;
-          if (vendorResult.length > 0) {
+          
+          if (vendorResult[0].length > 0) {
             const categoryIDs = vendorResult[0][0].categoryID;
             VendorCategoryResult = await queryRunner(
               selectQuery("vendorcategory", "id"),

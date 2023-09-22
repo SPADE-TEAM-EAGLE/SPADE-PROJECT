@@ -2528,7 +2528,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
             
             function getData(){
                 $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/GettenantAttachFile',
+                url: 'http://localhost:3000/api/spade/GettenantAttachFile',
                 type: 'GET',
                 data: {
                     tenantID: tenantId
@@ -2550,6 +2550,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
             })
             
             }
+            getData()
             
             $("#submit-pics").click(() => {
                 $("#submit-pics").prop("disabled", true)
@@ -2576,7 +2577,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                             images: imageArray
                         };
                         $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/tenantAttachFile',
+                            url: 'http://localhost:3000/api/spade/tenantAttachFile',
                             type: 'POST',
                             data: JSON.stringify(tenantData),
                     contentType: 'application/json',

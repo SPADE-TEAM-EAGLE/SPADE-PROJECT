@@ -1871,11 +1871,11 @@
                                                         </div>
                                                     </li>
 
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">Date Modified</a>
+                                                    <!-- <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">Date Modified</a>
                                                         <div class="form-check m-0">
                                                             <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="alphabets" value="option1">
                                                         </div>
-                                                    </li>
+                                                    </li> -->
 
                                                     <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">Ascending</a>
                                                         <div class="form-check m-0">
@@ -1936,11 +1936,27 @@
                                                                 id="exampleCheck1" checked>
                                                         </div>
                                                     </li> -->
-                                    
+                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">Image</a>
+                                                        <div class="form-check m-0">
+                                                            <input type="checkbox" class="form-check-input mt-2"
+                                                                id="exampleCheck1" checked>
+                                                        </div>
+                                                    </li>
                                                     <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">Name</a>
                                                         <div class="form-check m-0">
                                                             <input type="checkbox" class="form-check-input mt-2"
                                                                 id="exampleCheck1" checked>
+                                                        </div>
+                                                    </li>
+                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">Sqft</a>
+                                                        <div class="form-check m-0">
+                                                            <input type="checkbox" class="form-check-input mt-2"
+                                                                id="exampleCheck1" checked>
+                                                        </div>
+                                                    </li>
+                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">Type</a>
+                                                        <div class="form-check m-0">
+                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
                                                     <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">Units</a>
@@ -1955,17 +1971,8 @@
                                                                 id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">Type</a>
-                                                        <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
-                                                        </div>
-                                                    </li>
-                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">Sqft</a>
-                                                        <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2"
-                                                                id="exampleCheck1" checked>
-                                                        </div>
-                                                    </li>
+                                                    
+                                                    
                                                 </ul>
                                             </div>
                                             <button type="button" class="btn btn-primary mx-2" id="add_property_btn"
@@ -1982,8 +1989,9 @@
                                                     <tr>
                                                         <th>#</th>
                                                         <th>USER ID</th>
-                                                        <th>IMAGE</th>
                                                         <th class="d-none">PROPERTY ID</th>
+                                                        <th>IMAGE</th>
+                                                        
                                                         <th>PROPERTY NAME</th>
                                                         <th>TOTAL SQFT</th>
                                                         <th>PROPERTY Type</th>
@@ -3209,7 +3217,7 @@
 
                                     // Include the encrypted value in the URL
                                     var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
-                                    $("#unit-link").attr("href", `./property-unit.html?property=${encodedPropertyId}`);
+                                    $("#unit-link").attr("href", `./bank-acount.html?property=${encodedPropertyId}`);
                                     if (response === "Property Already Exist") {
                                         $('#infoModal').modal('show');
                                     } else {
@@ -3271,7 +3279,7 @@
 
                             // Include the encrypted value in the URL
                             var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
-                            $("#unit-link").attr("href", `./property-unit.html?property=${encodedPropertyId}`);
+                            $("#unit-link").attr("href", `./bank-acount.html?property=${encodedPropertyId}`);
                             if (response === "Property Already Exist") {
                                 $('#infoModal').modal('show');
                             } else {
@@ -3374,17 +3382,12 @@
             console.log(columnIndex, isColumnVisible)
             console.log($(this).find('th:nth-child(' + (columnIndex) + ')'))
             // Toggle the visibility of the corresponding column
-            if (columnIndex >= 2) {
+            
                 $('table').find('tr').each(function () {
-                    var column = $(this).find('th:nth-child(' + (columnIndex + 2) + '), td:nth-child(' + (columnIndex + 2) + ')');
+                    var column = $(this).find('th:nth-child(' + (columnIndex + 3) + '), td:nth-child(' + (columnIndex + 3) + ')');
                     isColumnVisible ? column.show() : column.hide();
                 });
-            } else {
-                $('table').find('tr').each(function () {
-                    var column = $(this).find('th:nth-child(' + (columnIndex + 1) + '), td:nth-child(' + (columnIndex + 1) + ')');
-                    isColumnVisible ? column.show() : column.hide();
-                });
-            }
+        
 
         });
 
@@ -3731,10 +3734,11 @@
                         response.data[0].forEach(function (property, index) {
                             var serial = `<td style="font-weight: 600;">${(index + 1)}</td>`
                             var id=`<td style="font-weight: 600;">${property.landlordID}</td>`
-                            var image = '<td><img src="' + (property.images[0]?.imageURL ? property.images[0]?.imageURL : '../assets/images/icons/Group 10341.png') + '" alt=""></td>';
-
                             var propertyId = '<td class="property-id d-none" style="font-weight: 600;">' + property
                                 .id + '</td>';
+                            var image = '<td><img src="' + (property.images[0]?.imageURL ? property.images[0]?.imageURL : '../assets/images/icons/Group 10341.png') + '" alt=""></td>';
+
+                            
 
                                 
 
@@ -3791,7 +3795,7 @@
                                 '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)" style="display: flex; align-items: center;"><i class="fi fi-rs-cross-small fs-20" style="display: flex; align-items: center;"></i> &nbsp;&nbsp;Delete</a></li>'
                             '</ul></td>';
                             // Create a table row and append the generated columns
-                            var row = '<tr>' + serial+ id + image + propertyId + propertyName + totalsqft +
+                            var row = '<tr>' + serial+ id+ propertyId  + image + propertyName + totalsqft +
           propertyType + propertyUnits + propertyAddress + dropdownMenu +created_at +'</tr>';
 
                             // Append the row to the table body
