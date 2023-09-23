@@ -212,8 +212,44 @@ exports.createInvoiceCategories =
 exports.updateInvoiceCategories =
   "UPDATE InvoiceCategories SET categorieName = ?,setTaxes = ? WHERE id = ? AND landLordId = ?";
 
-exports.getPropertyReport =
-  "SELECT property.id, property.propertyName, property.propertyType,property.address,property.city,property.state,property.zipCode,property.units, tenants.firstName,tenants.lastName,tenants.email , tenants.phoneNumber FROM property JOIN tenants ON property.id = tenants.propertyID WHERE property.landlordID = ?";
+// exports.getPropertyReport =
+//   "SELECT property.id, property.propertyName, property.propertyType,property.address,property.city,property.state,property.zipCode,property.units, tenants.firstName,tenants.lastName,tenants.email , tenants.phoneNumber FROM property JOIN tenants ON property.id = tenants.propertyID WHERE property.landlordID = ?";
+exports.getPropertyReport =`SELECT 
+property.id,
+property.propertyName,
+property.propertyType,
+property.address,
+property.city,
+property.state,
+property.zipCode,
+property.units,
+tenants.firstName,
+tenants.lastName,
+tenants.email,
+tenants.phoneNumber,
+COALESCE(occupied_units.count, 0) as occupied_units_count,
+COALESCE(vacant_units.count, 0) as vacant_units_count,
+CASE 
+    WHEN COALESCE(occupied_units.count, 0) > (property.units / 2) THEN 'Occupied'
+    ELSE 'Vacant'
+END as occupancy_status
+FROM property 
+JOIN tenants ON property.id = tenants.propertyID
+LEFT JOIN (
+SELECT propertyID, COUNT(*) as count
+FROM propertyunits
+WHERE status = 'Occupied'
+GROUP BY propertyID
+) as occupied_units ON property.id = occupied_units.propertyID
+LEFT JOIN (
+SELECT propertyID, COUNT(*) as count
+FROM propertyunits
+WHERE status = 'Vacant'
+GROUP BY propertyID
+) as vacant_units ON property.id = vacant_units.propertyID
+WHERE property.landlordID = ?;
+
+`
 exports.getTenantReport =
   "SELECT tenants.id AS tenantID, tenants.companyName, tenants.firstName, tenants.lastName,tenants.leaseStartDate,tenants.leaseEndDate,tenants.phoneNumber,property.propertyType,property.propertyName,property.id AS propertyId ,property.units FROM tenants JOIN property ON tenants.propertyID = property.id WHERE tenants.landlordID = ?";
 exports.getTaskReportData =
@@ -592,7 +628,7 @@ exports.insertInvoiceImage =
   "INSERT INTO invoiceimages (invoiceID, Image,imageKey) VALUES (?,?,?)";
 exports.updateUnitsTenant =
   "UPDATE propertyunits SET  status = ?  where id = ? ";
-exports.getTenantsById = `SELECT l.Phone AS landlordPhone, p.id AS propertyID, p.propertyName, p.address AS pAddress, p.city AS pCity, p.state AS pState, p.zipCode AS pZipCode, p.propertyType, p.propertySQFT, p.status AS pStatus, p.units AS pUnits, t.id AS tenantID, t.landlordID, t.firstName, t.lastName, t.companyName, i.recurringNextDate,t.email AS tEmail, t.phoneNumber AS tPhoneNumber, t.Address AS tAddress, t.city AS tCity, t.state AS tState, t.zipcode AS tZipcode, t.rentAmount, t.gross_or_triple_lease, t.baseRent, t.tripleNet, t.leaseStartDate, t.leaseEndDate, t.increaseRent, pu.unitNumber, pu.Area AS unitArea, pu.unitDetails, pu.status AS unitStatus, GROUP_CONCAT(pi.image) AS images
+exports.getTenantsById = `SELECT l.Phone AS landlordPhone, p.id AS propertyID, p.propertyName, p.address AS pAddress, p.city AS pCity, p.state AS pState, p.zipCode AS pZipCode, p.propertyType, p.propertySQFT, p.status AS pStatus, p.units AS pUnits, t.id AS tenantID, t.landlordID, t.firstName, t.lastName, t.companyName, i.recurringNextDate,t.email AS tEmail, t.phoneNumber AS tPhoneNumber, t.Address AS tAddress,t.image AS tenantImage ,t.city AS tCity, t.state AS tState, t.zipcode AS tZipcode, t.rentAmount, t.gross_or_triple_lease, t.baseRent, t.tripleNet, t.leaseStartDate, t.leaseEndDate, t.increaseRent, pu.unitNumber, pu.Area AS unitArea, pu.unitDetails, pu.status AS unitStatus, GROUP_CONCAT(pi.image) AS images
 FROM tenants AS t
 INNER JOIN property AS p ON t.propertyID = p.id
 LEFT JOIN invoice AS i ON t.id = i.tenantID
@@ -679,7 +715,9 @@ t.baseRent,
 t.tripleNet,
 t.leaseStartDate,
 t.leaseEndDate,
+t.tenantCreated_at,
 t.increaseRent,
+t.tenantCreated_at,
 t.image,
 pu.id as propertyUnitID,
 pu.unitNumber,

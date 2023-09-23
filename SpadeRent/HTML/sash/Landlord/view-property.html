@@ -1236,7 +1236,7 @@
                                 <div class="row">
                                     <div class="col-lg-9 position-relative">
                                         <h1 class="page-titlee text-white mb-1" style="font-weight: 700;" id="property_name6"></h1>
-                                        <h5 class="page-titlee text-white" style="font-weight: 100;" id="property-address"></h5>
+                                        <h5 class="page-titlee text-white" style="font-weight: 100;" id="property-address6"></h5>
                                         <!-- <a href="javascript:void(0)" id="email_verification"
                                                                     class="btn btn-primary btn-pill btn-xl email-verification-btn"><i
                                                                         class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
@@ -1256,7 +1256,7 @@
                                                 <a class="nav-link p-2" href="property-task.html" id="viewTasks">Tasks</a>
                                             </li>
                                             <li class="nav-item1 p-0">
-                                                <a class="nav-link p-2" href="bank-account.html" id="viewTasks">Bank Account</a>
+                                                <a class="nav-link p-2" href="bank-account.html" id="viewBank">Bank Account</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -2168,9 +2168,11 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
             $("#viewOverview").attr("href", `./view-property.html?property=${encodedPropertyId}`)
             $("#viewTenants").attr("href", `./property-tenant.html?property=${encodedPropertyId}`)
             $("#viewTasks").attr("href", `./property-task.html?property=${encodedPropertyId}`)
+            $("#viewBank").attr("href", `./bank-account.html?property=${encodedPropertyId}`)
+
             console.log(propertyId)
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/viewProperty',
+                url: 'http://localhost:3000/api/spade/viewProperty',
                 type: 'GET',
                 data: {
                     propertyId
@@ -2193,6 +2195,8 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                             }
                     $("#property_name").text(toTitleCase(data.propertyName))
                     $("#property_address").text(toTitleCase(data.address)+", "+toTitleCase(data.city)+", "+toTitleCase(data.state))
+                    $("#property_name6").text(toTitleCase(data.propertyName))
+                    $("#property-address6").text(toTitleCase(data.address)+", "+toTitleCase(data.city)+", "+toTitleCase(data.state))
                     $("#property_type").append(data.propertyType)
                     $("#unit_type").append(`<span style="color: #1467B0;"><b>${data.NumberCount.Occupied} (Occupied)</b></span> <span style="color: red;"><b>${data.NumberCount.Vacant} (Vacant)</b></span>`)
                     $("#property_size").text(data.propertySQFT+ " sqft.")

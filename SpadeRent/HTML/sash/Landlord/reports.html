@@ -2795,7 +2795,7 @@
                                                 <div class="row">
                                                     <div class="col-lg-4">
                                                         <div class="form-group">
-                                                            <label class="form-label"><b>Report Type</b></label>
+                                                            <label class="form-label"><b>Property Type</b></label>
                                                             <select class="form-control select2-show-search form-select"
                                                                 id="propertySelect" data-placeholder="Choose one">
                                                                 <option label="Choose one"></option>
@@ -2803,19 +2803,18 @@
                                                         </div>
                                                     </div>
 
-                                                    <!-- <div class="col-lg-4">
+                                                    <div class="col-lg-4">
                                                         <div class="form-group">
                                                             <label class="form-label"><b>Report Type</b></label>
                                                             <select class="form-control select2-show-search form-select"
-                                                                data-placeholder="Choose one">
+                                                                data-placeholder="Choose one" id="reportTypeSelect">
                                                                 <option label="Choose one"></option>
-                                                                <option value="AZ" selected>Occupied Property Report
-                                                                </option>
-                                                                <option value="CO">Colorado</option>
-                                                                <option value="ID">Idaho</option>
+                                                               
+                                                                <option value="Occupied">Occupied Property</option>
+                                                                <option value="Vacant">Vaccant Property</option>
                                                             </select>
                                                         </div>
-                                                    </div> -->
+                                                    </div>
                                                     <!-- <div class="col-lg-2 mt-5">
                                                    
                                                             <button type="button" class="btn btn-info text-white mt-3"><i class="fi fi-rs-search me-1 text-white"></i>Search</button>
@@ -4758,7 +4757,7 @@ $.ajax({
                 }
             });
     $.ajax({
-    url: 'https://backend.app.spaderent.com/api/spade/propertyReport',
+    url: 'http://localhost:3000/api/spade/propertyReport',
     type: 'GET',
     contentType: "application/json; charset=utf-8",
     processData: false,
@@ -4834,12 +4833,37 @@ $("#download_pdf_reports_lease").attr("disabled",true)
 });
 function filterAndRenderTable(selectedValue) {
     if(selectedValue){
-        var filteredData = propertyData.filter(property => property.id == selectedValue);
-    constructPropertyTable(filteredData);
+        
+        if(selectedValue=="Occupied" || selectedValue=="Vacant"){
+            if($("#propertySelect").val()){
+                var filteredData = propertyData.filter((property) => {
+                
+                return property?.occupancy_status == selectedValue && property.id == $("#propertySelect").val()
+            });
+            }else{
+                var filteredData = propertyData.filter((property) => {
+                
+                return property?.occupancy_status == selectedValue
+            });
+            }
+            
+            constructPropertyTable(filteredData);
+        }
+        else{
+            
+            if($("#reportTypeSelect").val()){
+                var filteredData = propertyData.filter((property) => {
+                return property?.occupancy_status == $("#reportTypeSelect").val() && property.id == selectedValue
+            });
+            }else{
+                var filteredData = propertyData.filter((property) => {
+                return property.id == selectedValue
+            });
+            }
+            constructPropertyTable(filteredData);
+        }
     }
     else{
-       
-
     // Call the constructPropertyTable function to render the filtered data
     constructPropertyTable(propertyData);
     }
@@ -4868,7 +4892,7 @@ function filterAndRenderTableTenant(selectedValue) {
 //     constructPropertyTable(filteredData);
 // }
 // Attach an event handler to the select element
-$("#propertySelect").on('change', function() {
+$("#propertySelect,#reportTypeSelect").on('change', function() {
     var selectedValue = $(this).val();
     filterAndRenderTable(selectedValue);
 });
