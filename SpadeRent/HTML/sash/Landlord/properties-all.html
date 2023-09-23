@@ -35,7 +35,7 @@
     <!-- <link rel="stylesheet" href="../assets/css/"> -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
     <!-- COLOR SKIN CSS -->
-    
+
     <script>
         if (localStorage.getItem("property") == "false") {
             window.location = "./new-property.html"
@@ -1031,11 +1031,21 @@
                                     <div class="col-md-4">
                                         <label for="inputState" class="form-label fw-bold">State <span
                                                 class="text-danger">*</span></label>
-                                        <select id="state" class="form-select form">
+                                        <select id="state" class="form-select form select2-show-search">
                                             <option selected>Choose...</option>
                                         </select>
                                         <span class="text-danger d-none">State is required!</span>
                                     </div>
+                                    <!-- <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Select2 with search box</label>
+                                            <select class="form-control select2-show-search" data-placeholder="Choose one">
+                                                <option value="AZ">Arizona</option>
+                                                <option value="CO">Colorado</option>
+                                    
+                                            </select>
+                                        </div>
+                                    </div> -->
                                     <div class="col-md-4">
                                         <label for="inputCity" class="form-label fw-bold">City <span
                                                 class="text-danger">*</span></label>
@@ -1059,7 +1069,7 @@
                                     <div class="col-md-6">
                                         <label for="inputState" class="form-label fw-bold">Property Type <spnan
                                                 class="text-danger">*</span></label>
-                                        <select id="propertyType" class="form-select form">
+                                        <select id="propertyType" class="form-select form select2-show-search">
                                             <option selected>Choose...</option>
                                             <option>Single Family</option>
                                             <option>Multi-Family</option>
@@ -1403,7 +1413,7 @@
                         <div class="col-md-4">
                             <label for="inputState" class="form-label fw-bold">State <spnan class="text-danger">
                                     *</span></label>
-                            <select id="state_update" class="form-select form state-select">
+                            <select id="state_update" class="form-select form state-select select2-show-search">
                                 <option selected>Choose...</option>
 
                             </select>
@@ -1431,7 +1441,7 @@
                         <div class="col-md-6">
                             <label for="inputState" class="form-label fw-bold">Property Type <spnan class="text-danger">
                                     *</span></label>
-                            <select id="propertyType_update" class="form-select form">
+                            <select id="propertyType_update" class="form-select form select2-show-search">
                                 <option selected>Choose...</option>
                                 <option>Single Family</option>
                                 <option>Multi-Family</option>
@@ -2641,6 +2651,24 @@
     <!-- BOOTSTRAP JS -->
     <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
     <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../assets/plugins/select2/select2.full.min.js"></script>
+    <script src="../assets/js/select2.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#addModal').on('shown.bs.modal', function () {
+               
+                $('.select2-show-search').select2({
+                    dropdownParent: $('#addModal')
+                });
+            });
+            $('#myModal_edit').on('shown.bs.modal', function () {
+                
+                $('.select2-show-search').select2({
+                dropdownParent: $('#myModal_edit')
+            });
+            });
+        }); 
+    </script>
 
 
     <!-- SPARKLINE JS-->
@@ -2715,7 +2743,7 @@
     <script src="../assets/js/themeColors.js"></script>
 
     <!-- CUSTOM JS -->
-    <script src="../assets/js/custom.js"></script>i
+    <script src="../assets/js/custom.js"></script>
 
     <!-- ############################################# -->
     <!-- C3 CHART JS -->
@@ -2735,7 +2763,7 @@
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
     <script src="../assets/js/email-verification.js"></script>
-    
+
     <script>
         $(document).ready(function () {
             $.ajax({
@@ -3237,7 +3265,7 @@
                                 images: imageArray
                             };
                             $('#addmodal_body').removeClass('d-none')
-                    $('#addmodal_body_loader').addClass('d-none')
+                            $('#addmodal_body_loader').addClass('d-none')
                             $.ajax({
                                 url: 'https://backend.app.spaderent.com/api/spade/property',
                                 type: 'POST',
@@ -3311,7 +3339,7 @@
                         },
                         success: function (response) {
                             $('#addmodal_body').removeClass('d-none')
-                    $('#addmodal_body_loader').addClass('d-none')
+                            $('#addmodal_body_loader').addClass('d-none')
                             var password = 'your-secret-password';
                             var encryptedPropertyId = sjcl.encrypt(password, response.propertyId.toString());
 
@@ -3328,7 +3356,7 @@
                         },
                         error: function (xhr, status, error) {
                             $('#addmodal_body').removeClass('d-none')
-                    $('#addmodal_body_loader').addClass('d-none')
+                            $('#addmodal_body_loader').addClass('d-none')
                             if (xhr.responseJSON.error === 'Property Already Exist') {
                                 $('#addModal').modal('hide');
                                 $('#infoModal').modal('show');
@@ -3560,7 +3588,7 @@
         $(document).on('click', '#update', function (e) {
             console.log("he;;")
             e.preventDefault();
-            
+
             $("#myModal_edit").modal("hide");
             var formData = new FormData();
             var propertyName = $("#propertyName_update").val();

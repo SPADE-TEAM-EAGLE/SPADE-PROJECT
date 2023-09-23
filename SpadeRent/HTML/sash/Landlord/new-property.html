@@ -933,7 +933,7 @@
                                     <div class="col-md-4">
                                         <label for="inputState" class="form-label fw-bold">State <span
                                                 class="text-danger">*</span></label>
-                                        <select id="state" class="form-select form" placholder="Enter State">
+                                        <select id="state" class="form-select form select2-show-search" placholder="Enter State">
                                             <option selected>Choose...</option>
 
                                         </select>
@@ -957,7 +957,7 @@
                                     <div class="col-md-6">
                                         <label for="inputState" class="form-label fw-bold">Property Type <spnan
                                                 class="text-danger">*</span></label>
-                                        <select id="propertyType" class="form-select form">
+                                        <select id="propertyType" class="form-select form select2-show-search">
                                             <option selected>Choose...</option>
                                             <option>Single Family</option>
                                             <option>Multi-Family</option>
@@ -2107,7 +2107,24 @@
     <!-- BOOTSTRAP JS -->
     <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
     <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-
+    <script src="../assets/plugins/select2/select2.full.min.js"></script>
+    <script src="../assets/js/select2.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#addModal').on('shown.bs.modal', function () {
+               
+                $('.select2-show-search').select2({
+                    dropdownParent: $('#addModal')
+                });
+            });
+            $('#myModal_edit').on('shown.bs.modal', function () {
+                
+                $('.select2-show-search').select2({
+                dropdownParent: $('#myModal_edit')
+            });
+            });
+        }); 
+    </script>
     <!-- SPARKLINE JS-->
     <script src="../assets/js/jquery.sparkline.min.js"></script>
 

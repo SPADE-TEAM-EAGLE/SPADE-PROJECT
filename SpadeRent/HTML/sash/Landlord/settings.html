@@ -2882,26 +2882,32 @@
 
                                                             <div class="col-md-4 mb-3">
                                                                 <div class="form-group">
-                                                                    <label for="inputState" class="form-labell fw-bold">State<spnan
-                                                                        class="text-danger"></span></label>
-                                                                    <select id="state" class="form-select form form-select" required>
-                                                                    <option selected>Choose...</option>
+                                                                    <label for="inputState"
+                                                                        class="form-labell fw-bold">State<spnan
+                                                                            class="text-danger"></span></label>
+                                                                    <select id="state"
+                                                                        class="form-select form form-select select2-show-search"
+                                                                        required>
+                                                                        <option selected>Choose...</option>
                                                                     </select>
-                                                                    <span class="text-danger d-none">State is required!</span>
-                                                                </div>        
+                                                                    <span class="text-danger d-none">State is
+                                                                        required!</span>
+                                                                </div>
                                                             </div>
 
                                                             <div class="col-lg-4"></div>
                                                             <div class="col-xl-4 mb-3">
                                                                 <label for="bname1"><b>Zip Code</b></label>
                                                                 <input type="text" class="form-control" id="zipcode"
-                                                                    placeholder="Enter Zipcode" pattern="[0-5]+" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                                                                    placeholder="Enter Zipcode" pattern="[0-5]+"
+                                                                    oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                                                    required>
                                                                 <div class="valid-feedback">Looks good!</div>
                                                             </div>
-                                                            
-                                                            
+
+
                                                         </div>
-                                                        
+
                                                     </div>
                                                     <div class="col-lg-12">
                                                         <h3 class="mb-2 text-dark"><b>My Business Address</b></h3>
@@ -2909,8 +2915,8 @@
                                                             style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
                                                         </div>
                                                         <div class="row">
-                                                            
-                                                            
+
+
                                                             <div class="col-xl-8 mb-3">
                                                                 <label for="baddress1"><b>Business Address</b></label>
                                                                 <input type="text" class="form-control"
@@ -2919,7 +2925,7 @@
                                                                 <div class="valid-feedback">Looks good!</div>
                                                             </div>
 
-                                                    
+
                                                             <div class="col-lg-4"></div>
                                                             <div class="col-xl-4 mb-3">
                                                                 <label for="bname1"><b>City</b></label>
@@ -2930,20 +2936,22 @@
 
                                                             <div class="col-md-4 mb-3">
                                                                 <div class="form-group">
-                                                                    <label for="inputState" class="form-labell fw-bold">State<spnan
-                                                                        class="text-danger"></span></label>
-                                                                    <select id="state1" class="form-select form form-select" required>
-                                                                    <option selected>Choose...</option>
+                                                                    <label for="inputState" class="form-label fw-bold">State<span class="text-danger"></span></label>
+                                                                    <select id="state1" class="form-select form form-select select2-show-search" required>
+                                                                        <option selected>Choose...</option>
                                                                     </select>
                                                                     <span class="text-danger d-none">State is required!</span>
-                                                                </div>        
+                                                                </div>
                                                             </div>
+
 
                                                             <div class="col-lg-4"></div>
                                                             <div class="col-xl-4 mb-3">
                                                                 <label for="bname1"><b>Zip Code</b></label>
                                                                 <input type="text" class="form-control" id="zipcode1"
-                                                                    placeholder="Enter Zipcode" pattern="[0-5]+" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                                                                    placeholder="Enter Zipcode" pattern="[0-5]+"
+                                                                    oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                                                    required>
                                                                 <div class="valid-feedback">Looks good!</div>
                                                             </div>
 
@@ -2960,7 +2968,7 @@
                                                                     id="save_profile">Save</button>
                                                             </div>
                                                         </div>
-                                                        
+
                                                     </div>
 
                                                 </div>
@@ -8138,7 +8146,8 @@
                                                         <div class="col-lg-3">
                                                             <div class="form-group"> <label class="form-label"><b>Select
                                                                         Category</b></label> <select name="categories"
-                                                                    id="categories" class="form-control form-select"
+                                                                    id="categories"
+                                                                    class="form-control form-select select2-show-search"
                                                                     data-bs-placeholder="Select Category">
 
                                                                 </select> </div>
@@ -9476,7 +9485,7 @@
         </div>
 
         <!-- BACK-TO-TOP -->
-        <!-- <!-- <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a> --> -->
+        <!-- <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a> -->
         <a href="#addModal" data-bs-effect="effect-scale" data-bs-toggle="modal" id="add-tenant-side-btn"><i
                 class="fe fe-plus"></i></a>
 
@@ -9487,7 +9496,13 @@
         <!-- BOOTSTRAP JS -->
         <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
         <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-
+        <script src="../assets/plugins/select2/select2.full.min.js" defer></script>
+        <script src="../assets/js/select2.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('.select2-show-search').select2()
+            }); 
+        </script>
         <!-- CUSTOM JS -->
         <script src="../assets/js/custom1.js"></script>
 
@@ -9622,8 +9637,8 @@
 <script src="../assets/js/push_notification.js"></script></script> -->
         <!-- <script src="https://code.jquery.com/jquery-latest.min.js"></script> -->
         <script src="../assets/js/email-verification.js"></script>
-<script>
-            $(document).ready(function(){
+        <script>
+            $(document).ready(function () {
                 $.ajax({
                     url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
                     method: 'GET',
@@ -10885,7 +10900,7 @@
                         }
                     });
                 });
-                
+
                 // Attach a click event listener to each button
                 $('.card-btnn').click(function () {
                     // Retrieve the ID of the parent card
@@ -11557,55 +11572,55 @@
             });
         </script>
 
-<script>
-    $(function () {
-    "use strict";
-    
-    $(".popup22 img").click(function () {
-        var $src = $(this).attr("src");
-        $(".showw").fadeIn();
-        $(".img-show img").attr("src", $src);
-    });
-    
-    $("span, .overlay").click(function () {
-        $(".showw").fadeOut();
-    });
-    
-});
-</script>
-<script>
-    // Get references to the input fields and the save button
-    var firstNameInput = document.getElementById("firstName");
-       var lastNameInput = document.getElementById("lastName");
-       var zipcodeInput = document.getElementById("zipcode");
-       var zipcodeInput1 = document.getElementById("zipcode1");
-       var phone1Input = document.getElementById("phone1");
-       var saveButton = document.getElementById("save_profile");
+        <script>
+            $(function () {
+                "use strict";
 
-       // Function to check and update button state
-       function updateButtonState() {
-           var firstName = firstNameInput.value;
-           var lastName = lastNameInput.value;
-           var phone1 = phone1Input.value;
-           var zipcode = zipcodeInput.value;
-           var zipcode1 = zipcodeInput1.value;
+                $(".popup22 img").click(function () {
+                    var $src = $(this).attr("src");
+                    $(".showw").fadeIn();
+                    $(".img-show img").attr("src", $src);
+                });
 
-           // Check if all three fields are empty
-           if (firstName === '' || lastName === '' || phone1 === '' || zipcode === '' || zipcode1 === '') {
-               saveButton.disabled = true;
-           } else {
-               saveButton.disabled = false;
-           }
-       }
+                $("span, .overlay").click(function () {
+                    $(".showw").fadeOut();
+                });
 
-       // Bind the keyup event handler to the input fields
-       firstNameInput.addEventListener('keyup', updateButtonState);
-       lastNameInput.addEventListener('keyup', updateButtonState);
-       phone1Input.addEventListener('keyup', updateButtonState);
-       zipcodeInput.addEventListener('keyup', updateButtonState);
-       zipcodeInput1.addEventListener('keyup', updateButtonState);
-       
-               
+            });
+        </script>
+        <script>
+            // Get references to the input fields and the save button
+            var firstNameInput = document.getElementById("firstName");
+            var lastNameInput = document.getElementById("lastName");
+            var zipcodeInput = document.getElementById("zipcode");
+            var zipcodeInput1 = document.getElementById("zipcode1");
+            var phone1Input = document.getElementById("phone1");
+            var saveButton = document.getElementById("save_profile");
+
+            // Function to check and update button state
+            function updateButtonState() {
+                var firstName = firstNameInput.value;
+                var lastName = lastNameInput.value;
+                var phone1 = phone1Input.value;
+                var zipcode = zipcodeInput.value;
+                var zipcode1 = zipcodeInput1.value;
+
+                // Check if all three fields are empty
+                if (firstName === '' || lastName === '' || phone1 === '' || zipcode === '' || zipcode1 === '') {
+                    saveButton.disabled = true;
+                } else {
+                    saveButton.disabled = false;
+                }
+            }
+
+            // Bind the keyup event handler to the input fields
+            firstNameInput.addEventListener('keyup', updateButtonState);
+            lastNameInput.addEventListener('keyup', updateButtonState);
+            phone1Input.addEventListener('keyup', updateButtonState);
+            zipcodeInput.addEventListener('keyup', updateButtonState);
+            zipcodeInput1.addEventListener('keyup', updateButtonState);
+
+
             $('#submit-photo').click(() => {
                 if (selectedFiles.length >= 1) {
                     var uploadFormData = new FormData();
@@ -11658,10 +11673,10 @@
                                 error: function (xhr, status, error) {
                                     console.log('Error: ' + error);
                                     $("#myModal_warning_connection").modal("show");
-                            setTimeout(function () {
-                                $('#myModal_warning_connection').modal('hide');
+                                    setTimeout(function () {
+                                        $('#myModal_warning_connection').modal('hide');
 
-                            }, 2000);
+                                    }, 2000);
                                 }
                             });
 

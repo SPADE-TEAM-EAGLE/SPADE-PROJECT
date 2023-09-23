@@ -1620,7 +1620,7 @@
 
                         <div class="col-md-12 col-lg-6">
                             <label class="form-label fw-bold fs-18">Property Information</label>
-                            <select class="form-control select2 form-select d-block" data-placeholder="Select Property"
+                            <select class="form-control select2 form-select d-block select2-show-search" data-placeholder="Select Property"
                                 name="tenants" id="propertyName" required>
                                 <option label="Choose one">
                                 </option>
@@ -1631,7 +1631,7 @@
 
                         <div class="col-md-12 col-lg-6">
                             <label class="form-label fw-bold fs-18">Unit</label>
-                            <select class="form-control select2 form-select d-block" data-placeholder="Select Unit"
+                            <select class="form-control select2 form-select d-block select2-show-search" data-placeholder="Select Unit"
                                 name="tenants" id="propertyUnit" required>
                                 <option label="Choose one">
                                 </option>
@@ -1659,7 +1659,7 @@
                             </div>
                             <div class="col-md-12 col-lg-6">
                                 <label class="form-label fw-bold fs-18">Frequency</label>
-                                <select class="form-control select2 form-select" data-placeholder="Every Month"
+                                <select class="form-control select2 form-select select2-show-search" data-placeholder="Every Month"
                                     id="frequency" placeholder="Select Frequency" data-bs-container="#addModal">
                                     <option label="Choose one">
                                     </option>
@@ -1671,7 +1671,7 @@
 
                             <div class="col-md-12 col-lg-6">
                                 <label class="form-label fw-bold fs-18">Terms</label>
-                                <select class="form-control select2 form-select" data-placeholder="Every Month"
+                                <select class="form-control select2 form-select select2-show-search" data-placeholder="Every Month"
                                     id="terms" data-bs-placement="top" placeholder="Select Terms">
                                     <option label="Choose one">
                                     </option>
@@ -3922,16 +3922,23 @@
         <!-- BOOTSTRAP JS -->
         <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
         <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+        <script src="../assets/plugins/select2/select2.full.min.js"></script>
+        <script src="../assets/js/select2.js"></script>
         <script>
-            //             // $(document).ready(function() {
-
-
-            // $(function() {
-            // $('#sidebar-placeholder').load('./sidebar.html');
-            // });
-            // $(function() {
-            // $('#navbar-placeholder').load('./header.html');
-            // });})
+            $(document).ready(function () {
+                $('#addModal').on('shown.bs.modal', function () {
+                   
+                    $('.select2-show-search').select2({
+                        dropdownParent: $('#addModal')
+                    });
+                });
+                $('#myModal_edit').on('shown.bs.modal', function () {
+                    
+                    $('.select2-show-search').select2({
+                    dropdownParent: $('#myModal_edit')
+                });
+                });
+            }); 
         </script>
         <!-- SPARKLINE JS-->
         <script src="../assets/js/jquery.sparkline.min.js"></script>
@@ -3962,7 +3969,7 @@
 
         <!-- INTERNAL SELECT2 JS -->
         <script src="../assets/plugins/select2/select2.full.min.js"></script>
-        <script src="../assets/js/select2.js"></script
+        <script src="../assets/js/select2.js"></script>
 
         <!-- INTERNAL Data tables js-->
         <script src="../assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
@@ -5041,7 +5048,7 @@
                     $("#add-item-container1").append(`
       <tr class="tr">
         <td>
-          <select id="state" name="category" class="form-select form" placeholder="Enter the state" required>
+          <select id="state" name="category" class="form-select form select2-show-search" placeholder="Enter the state" required>
             <option selected="">Choose...</option>
             ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
           </select>
@@ -5340,7 +5347,7 @@
                         $("#add-item-container1").append(`
       <tr class="tr">
         <td>
-          <select id="state" name="category" class="form-select form" placeholder="Enter the state" required>
+          <select id="state" name="category" class="form-select form select2-show-search" placeholder="Enter the state" required>
             <option selected="">Choose...</option>
             ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
           </select>
@@ -5365,7 +5372,7 @@
                         $("#add-item-container1").append(`
       <tr class="tr">
         <td>
-          <select id="state" name="category" class="form-select form" placeholder="Enter the state" required>
+          <select id="state" name="category" class="form-select form select2-show-search" placeholder="Enter the state" required>
             <option selected="">Choose...</option>
             ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
           </select>
@@ -5413,7 +5420,7 @@
                         $("#add-item-container1_update").append(`
       <tr class="tr">
         <td>
-          <select id="state" name="category_update" class="form-select form" placeholder="Enter the state" required>
+          <select id="state" name="category_update" class="form-select form select2-show-search" placeholder="Enter the state" required>
             <option selected="">Choose...</option>
             ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
           </select>
@@ -5421,7 +5428,7 @@
           <span class="text-danger d-none">State is required!</span>
         </td>
         <td>
-          <select id="state" name="property_update" class="form-select form" placeholder="Enter the state" required>
+          <select id="state" name="property_update" class="form-select form select2-show-search" placeholder="Enter the state" required>
             <option selected="">Choose...</option>
           </select>
           <span class="text-danger d-none">State is required!</span>
@@ -5444,7 +5451,7 @@
                         $("#add-item-container1_update").append(`
       <tr class="tr">
         <td>
-          <select id="state" name="category_update" class="form-select form" placeholder="Enter the state" required>
+          <select id="state" name="category_update" class="form-select form select2-show-search" placeholder="Enter the state" required>
             <option selected="">Choose...</option>
             ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
           </select>
@@ -5452,7 +5459,7 @@
           <span class="text-danger d-none">State is required!</span>
         </td>
         <td>
-          <select id="state" name="property_update" class="form-select form" placeholder="Enter the state" required>
+          <select id="state" name="property_update" class="form-select form select2-show-search" placeholder="Enter the state" required>
             <option selected="">Choose...</option>
             <option value="${propertyName[0].propertyID}">${propertyName[0].propertyName}</option>
           </select>
@@ -6047,7 +6054,7 @@
                         $('#add-item-container1_update').append(
                             `<tr class="tr">
                             <td>
-                                <select id="state" name="category_update" class="form-select form" placeholder="Enter the state" required>
+                                <select id="state" name="category_update" class="form-select form select2-show-search" placeholder="Enter the state" required>
     <option>Choose...</option>
     ${categoryData.map((category) => `<option value="${category.id}" ${category.id == categoryid ? 'selected=" "' : ''}>${category.categorieName}</option>`).join("")}
 </select>
@@ -6055,7 +6062,7 @@
           <span class="text-danger d-none">State is required!</span>
         </td>
         <td>
-          <select id="state" name="property_update" class="form-select form" placeholder="Enter the state" required>
+          <select id="state" name="property_update" class="form-select form select2-show-search" placeholder="Enter the state" required>
             <option selected="">Choose...</option>
             <option value="${propertyName[0].propertyID}" selected=" ">${propertyName[0].propertyName}</option>
           </select>

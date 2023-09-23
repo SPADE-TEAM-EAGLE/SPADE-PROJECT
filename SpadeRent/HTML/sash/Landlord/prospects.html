@@ -951,7 +951,7 @@
                                     <div class="col-md-6 col-lg-6 col-xl-6">
                                         <label for="inputState" class="form-label fw-bold">Property Info <span
                                                 class="text-danger">*</span></label>
-                                        <select id="propertyInfo" class="form-select form">
+                                        <select id="propertyInfo" class="form-select form select2-show-search">
                                             <option selected>Choose...</option>
                                         </select>
                                         <span class="text-danger d-none">Property Info is required!</span>
@@ -959,7 +959,7 @@
                                     <div class="col-md-6 col-lg-6 col-xl-6">
                                         <label for="inputState" class="form-label fw-bold">Unit Info <span
                                                 class="text-danger">*</span></label>
-                                        <select id="unitInfo" class="form-select form">
+                                        <select id="unitInfo" class="form-select form select2-show-search">
                                             <option selected>Choose...</option>
                                         </select>
                                         <span class="text-danger d-none">Unit Info is required!</span>
@@ -974,7 +974,7 @@
                                     <div class="col-md-8 col-lg-8 col-xl-8">
                                         <label for="inputState" class="form-label fw-bold">Source Campaign <span
                                                 class="text-danger">*</span></label>
-                                        <select id="sourceCampaign" class="form-select form mb-2">
+                                        <select id="sourceCampaign" class="form-select form mb-2 select2-show-search">
                                             <option selected>Choose...</option>
                                             <option value="system">System</option>
                                         </select>
@@ -986,7 +986,7 @@
                                     <div class="col-md-4 col-lg-4 col-xl-4">
                                         <label for="status" class="form-label fw-bold">Status <span
                                                 class="text-danger">*</span></label>
-                                        <select id="status" class="form-select form">
+                                        <select id="status" class="form-select form select2-show-search">
                                             <option selected>Choose...</option>
                                             <option value="engaged">Engaged</option>
                                             <option value="active">Active</option>
@@ -1141,7 +1141,7 @@
                                     <div class="col-md-6 col-lg-6 col-xl-6">
                                         <label for="propertyInfo_update" class="form-label fw-bold">Property Info <span
                                                 class="text-danger">*</span></label>
-                                        <select id="propertyInfo_update" class="form-select form">
+                                        <select id="propertyInfo_update" class="form-select form select2-show-search">
                                             <option selected>Choose...</option>
                                         </select>
                                         <span class="text-danger d-none">Property Info is required!</span>
@@ -1149,7 +1149,7 @@
                                     <div class="col-md-6 col-lg-6 col-xl-6">
                                         <label for="propertyInfo_update" class="form-label fw-bold">Unit Info <span
                                                 class="text-danger">*</span></label>
-                                        <select id="unitInfo_update" class="form-select form">
+                                        <select id="unitInfo_update" class="form-select form select2-show-search">
                                             <option selected>Choose...</option>
                                         </select>
                                         <span class="text-danger d-none">Unit Info is required!</span>
@@ -1163,9 +1163,9 @@
                                         <span class="text-danger d-none">Prospects Details is required!</span>
                                     </div>
                                     <div class="col-md-12 col-lg-12 col-xl-12">
-                                        <label for="sourceCampaign_update" class="form-label fw-bold">Source Campaign
+                                        <label for="sourceCampaign_update" class="form-label fw-bold ">Source Campaign
                                             <span class="text-danger">*</span></label>
-                                        <select id="sourceCampaign_update" class="form-select form mb-2">
+                                        <select id="sourceCampaign_update" class="form-select form mb-2 select2-show-search">
                                             <option selected>Choose...</option>
                                         </select>
                                         <span class="text-danger d-none">Source Campaign is required!</span>
@@ -3314,7 +3314,7 @@
                                                                     </div>
                                                                     <div style="display: flex; align-items: end;">
 
-                                                                        <select class="form-select form" id="prospect-year">
+                                                                        <select class="form-select form select2-show-search" id="prospect-year">
                                                                             <option selected>2023</option>
                                                                             <option value="2022">2022</option>
                                                                             <option value="2021">2021</option>
@@ -4105,10 +4105,26 @@
     <!-- JQUERY JS -->
     <script src="../assets/js/jquery.min.js"></script>
 
+
     <!-- BOOTSTRAP JS -->
     <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
     <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-
+    <script src="../assets/plugins/select2/select2.full.min.js" defer></script>
+    <script src="../assets/js/select2.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.select2-show-search').select2({
+                    dropdownParent: $('#addModal')
+                });
+            $('.modal').on('shown.bs.modal', function () {
+               
+                $('.select2-show-search').select2({
+                    dropdownParent: $('#addModal')
+                });
+            });
+           
+        }); 
+    </script>   
     <!-- SPARKLINE JS-->
     <script src="../assets/js/jquery.sparkline.min.js"></script>
 
@@ -4138,8 +4154,7 @@
     <script src="../assets/plugins/chart/rounded-barchart.js"></script>
     <script src="../assets/plugins/chart/utils.js"></script>
 
-    <!-- INTERNAL SELECT2 JS -->
-    <script src="../assets/plugins/select2/select2.full.min.js"></script>
+   
 
     <!-- INTERNAL Data tables js-->
     <script src="../assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
@@ -4195,6 +4210,7 @@
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
     <script src="../assets/js/email-verification.js"></script>
+   
 <script>
             $(document).ready(function(){
                 $.ajax({

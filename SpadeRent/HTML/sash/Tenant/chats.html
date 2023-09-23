@@ -2436,7 +2436,7 @@
                                             </div>
                                             <h4 class="person-name mb-0" style="line-height: initial;"><b
                                                     id="person-name-bold"></b> <br>
-                                                <p class="text-success fw-bold fs-12 m-0" id="online">Online</p>
+                                                <p class="text-success fw-bold fs-12 m-0" id="online"><span class="dot-label bg-success"></span>Online</p>
                                             </h4>
 
 
@@ -2898,8 +2898,10 @@
                     
                     if (inputLength === 255) {
                         $(this).removeClass('border-green').addClass('border-red');
+                        $(this).addClass('text-danger');
                     } else {
                         $(this).removeClass('border-red').addClass('border-green');
+                        $(this).removeClass('text-danger');
                     }
                 });
             });
@@ -2995,6 +2997,7 @@
                 });
 
                 $('#send-text').on('click', function (ev) {
+                    $('#input-message').removeClass('border-red').removeClass('border-green').removeClass('text-danger');
                     const msg_again1 = $('#input-message').val().trim();
                     if (msg_again1 !== "") {
                         var messageData = {
@@ -3030,6 +3033,7 @@
                 $('#input-message').on('keypress', function (ev) {
                     const msg_again2 = $('#input-message').val().trim();
                     if (ev.key === 'Enter' && msg_again2 !== "") {
+                        $('#input-message').removeClass('border-red').removeClass('border-green').removeClass('text-danger');   
                         // var input_message = $('#input-message').val();
                         var messageData = {
                             chatId: localStorage.getItem("chatId"),
