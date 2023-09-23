@@ -9640,7 +9640,7 @@
         <script>
             $(document).ready(function () {
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
+                    url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -10237,7 +10237,7 @@
                 function getData() {
 
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/protected',
+                        url: 'https://backend.app.spaderent.com/api/spade/protected',
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -11076,7 +11076,7 @@
                                 userData.imageUrl = response.images[0].image_url
                                 userData.imageKey = response.images[0].image_key
                                 $.ajax({
-                                    url: 'http://localhost:3000/api/spade/updateUserProfile',
+                                    url: 'https://backend.app.spaderent.com/api/spade/updateUserProfile',
                                     method: 'PUT',
                                     data: JSON.stringify(userData),
                                     contentType: 'application/json',
@@ -11111,7 +11111,7 @@
                         });
                     } else {
                         $.ajax({
-                            url: 'http://localhost:3000/api/spade/updateUserProfile',
+                            url: 'https://backend.app.spaderent.com/api/spade/updateUserProfile',
                             method: 'PUT',
                             data: JSON.stringify(userData),
                             contentType: 'application/json',
@@ -11649,7 +11649,7 @@
                             // });
 
                             $.ajax({
-                                url: 'http://localhost:3000/api/spade/updateBusinessLogo',
+                                url: 'https://backend.app.spaderent.com/api/spade/updateBusinessLogo',
                                 type: 'PUT',
                                 data: JSON.stringify({
                                     image: response.images[0].image_url,
