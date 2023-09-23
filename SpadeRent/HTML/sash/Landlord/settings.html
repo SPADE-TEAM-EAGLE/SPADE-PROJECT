@@ -3074,8 +3074,26 @@
                                                                 disabled>Save</button>
                                                         </div>
                                                     </div>
-
                                                 </div>
+                                                      <!-- ############################################################ -->
+                                                      <br>
+                                                      <div class="row">
+                                                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-7">
+                                                            <h3 class="mb-2 text-dark"><b>Change Mail</b></h3>
+                                                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-7">
+                                                                    <label for="email1"><b>Email</b></label>
+                                                                    <input type="email" class="form-control" id="emailVerify"
+                                                                        placeholder="Enter Your Email " required >
+                                                                    <div class="valid-feedback">Looks good!</div>
+                                                                </div>
+                                                        </div>
+                                                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-7">
+                                                            <br>
+                                                            <button class="btn btn-primary btn-pill m-2" id="emailVerifySubmit">Submit</button>
+                                                        </div>
+                                                    </div>
+                                                    <!-- ############################################################ -->
+                                              
                                             </div>
 
                                             <div class="tab-pane" id="tab7">
@@ -9460,7 +9478,61 @@
                 </div>
             </div>
             <!-- Country-selector modal-->
+<!-- #######################################################################################3 -->
+<!-- Modal Trigger submit --> 
+  
+  <!-- Email Verification Modal -->
+  <div class="modal fade" id="emailVerifyModal" tabindex="-1" role="dialog" aria-labelledby="emailVerifyModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="emailVerifyModalLabel">Verify Your Email Address</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>
+            A verification code has been sent to your email address. Enter the code below and click Verify Code.
+          </p>
+          <div class="form-group">
+            <label for="verification">6-digits code *</label>
+            <input type="number" class="form-control" id="verification" placeholder="Enter 6-Digits Code" onkeyup="validatecode()">
+            <span class="mt-1 text-danger" id="verification-spans" style="display: none">Verification code is invalid. Please enter a Valid Code</span>
+            <span class="mt-1 text-danger" id="expired-spans" style="display: none">Verification Code has been expired!</span>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="continue" disabled>Verification Code</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <!-- error Modal  -->
+  <div class="modal fade" id="emailVerifyModalError" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered text-center" role="document">
+        <div class="modal-content modal-content-demo">
+            <div class="modal-body p-0">
+                <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
+                    <div class="card-body text-center">
+                        <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
+                                viewBox="0 0 24 24">
+                                <path fill="#fad383"
+                                    d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z" />
+                                <circle cx="12" cy="16" r="1" fill="#f7b731" />
+                                <path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z" />
+                            </svg></span>
+                        <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
+                        <p class="card-text text-dark">Email Not Found</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  <!-- error Modal  -->
+  
+<!-- #######################################################################################3 -->
             <!-- FOOTER -->
             <footer class="footer">
                 <div class="container">
@@ -10253,7 +10325,8 @@
                             $("#city").val(toTitleCase(response.city || ""))
                             $("#state").val(toTitleCase(response.state || ""))
                             $("#zipcode").val(response.zipCode)
-
+                            $("#emailVerify").val(response.email)
+                            
                             //                         "tenantEmail": "0",
                             // "auth": 0,
                             // "invoiceEmail": "0",
@@ -11679,8 +11752,46 @@
                     });
 
                 }
+
             })
-        </script>
+       
+
+// ############################################################################################
+$("#emailVerifySubmit").click(()=>{
+    data = {email : $("#emailVerify").val()}
+    $.ajax({
+        url:"http://localhost:3000/api/spade/changeEmail",
+        type : "get",
+        data : data,
+        contentType : "application/json; charset=utf-8",
+        headers : {
+            'Authorization' : 'Bearer ' + localStorage.getItem("authtoken")
+        },
+        success : function (response){
+            if(response.message == "Email Sent"){
+                $("#emailVerifyModal").modal("show");
+                
+            }else{
+                console.log("Some thing wents wrong");
+                console.log(response.message);
+                setTimeout(function (){
+                $("#emailVerifyModalError").modal("show");
+            }, 2000);
+            }
+        },
+        error : function (xhr, status,error){ 
+            $("#myModal_warning").modal("show");
+            setTimeout(function (){
+                $("#myModal_warning").modal("hide");
+            }, 2000);
+console.log(error);
+        }
+    })
+})
+
+
+// ############################################################################################
+       </script>
 </body>
 
 </html>

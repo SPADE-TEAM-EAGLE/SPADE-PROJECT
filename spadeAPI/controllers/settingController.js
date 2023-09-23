@@ -12,7 +12,8 @@ const {
   updatePassword,
   updatePasswordTenantSetting,
   updateEmailTemplates,
-  updateBusinessLogo
+  updateBusinessLogo,
+  addResetToken
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -150,3 +151,47 @@ exports.updateBusinessLogo = async (req, res) => {
 };
 //  ############################# Landlord business logo End ############################################################
 
+// ####################################### Change Email ##########################################
+
+exports.changeEmail = async (req, res) => { 
+  const { email } = req.query;
+  const { userId } = req.user;
+
+  if (!email) {
+    return res.status(201).json({ message: "Email Not found" });
+  }
+
+  const mailSubject = "Spade Email Change Request";
+  const random = Math.floor(100000 + Math.random() * 900000);
+
+  try {
+    const selectResult = await queryRunner(selectQuery("users", "id"), [userId]);
+
+    if (selectResult[0].length > 0) {
+      const name =
+        selectResult[0][0].FirstName + " " + selectResult[0][0].LastName;
+      // console.log(`Email: ${email}, Subject: ${mailSubject}, Random: ${random}, Name: ${name}`);
+      
+      sendMail(email, mailSubject, random, name);
+
+      const now = new Date();
+      const formattedDate = now.toISOString().slice(0, 19).replace("T", " ");
+
+      const updateResult = await queryRunner(addResetToken, [random, formattedDate, userId]);
+
+      if (updateResult[0].affectedRows === 0) {
+        return res.status(400).json({ message: "Error in changing Email" });
+      } else {
+        return res.status(200).json({ message: "Email Sent", id: userId, email : email });
+      }
+    } else {
+      return res.status(400).json({ message: "User not found" });
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+
+// ####################################### Change Email ##########################################
