@@ -1125,7 +1125,7 @@
                             </div> -->
                             <div class="col-md-6">
                                 <label for="inputState" class="form-label fw-bold">Related To</label>
-                                <select required id="property" class="form-select form" placeholder="Enter Related To">
+                                <select required id="property" class="form-select form select2-show-search" placeholder="Enter Related To">
                                     <option selected>Choose...</option>
                                 </select>
                                 <span class="text-danger d-none">This field is required!</span>
@@ -1149,7 +1149,7 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="inputState" class="form-label fw-bold">Status</label>
-                                <select id="status" required class="form-select form" placeholder="Select Status">
+                                <select id="status" required class="form-select form select2-show-search" placeholder="Select Status">
                                     <option selected>Choose...</option>
                                     <option value="not started">Not Started</option>
                                     <option value="in progress">In progress</option>
@@ -1160,7 +1160,7 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="inputState" class="form-label fw-bold">Priority</label>
-                                <select id="priority" required class="form-select form" placeholder="Select Priority">
+                                <select id="priority" required class="form-select form select2-show-search" placeholder="Select Priority">
                                     <option selected>Choose...</option>
                                     <option name="high">High</option>
                                     <option name="moderate">Moderate</option>
@@ -1358,7 +1358,7 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="inputState" class="form-label fw-bold">Related To</label>
-                                <select required id="property_update" required class="form-select form"
+                                <select required id="property_update" required class="form-select form select2-show-search"
                                     placeholder="Enter Related To">
                                     <option selected>Choose...</option>
                                 </select>
@@ -1372,7 +1372,7 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="inputState" class="form-label fw-bold">Priority</label>
-                                <select class="form-select form" required placeholder="Select Priority"
+                                <select class="form-select form select2-show-search" required placeholder="Select Priority "
                                     id="priority_update">
                                     <option selected>Choose...</option>
                                     <option name="high">High</option>
@@ -1385,7 +1385,7 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="inputState" class="form-label fw-bold">Status</label>
-                                <select class="form-select form" required="top" placeholder="Select Status"
+                                <select class="form-select form select2-show-search" required="top" placeholder="Select Status"
                                     id="status_update">
                                     <option selected>Choose...</option>
                                     <option value="not started">Not Started</option>
@@ -2744,7 +2744,28 @@
     <!-- BOOTSTRAP JS -->
     <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
     <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-
+    <script src="../assets/plugins/select2/select2.full.min.js"></script>
+    <script src="../assets/js/select2.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.select2-show-search').select2({
+                    dropdownParent: $('#addModal')
+                });
+                $('#addModal').on('shown.bs.modal', function () {
+                   
+                   $('.select2-show-search').select2({
+                       dropdownParent: $('#addModal')
+                   });
+               });
+               $('#myModal_edit').on('shown.bs.modal', function () {
+                   
+                   $('.select2-show-search').select2({
+                   dropdownParent: $('#myModal_edit')
+               });
+               });
+           
+        }); 
+    </script> 
     <!-- SPARKLINE JS-->
     <script src="../assets/js/jquery.sparkline.min.js"></script>
 
