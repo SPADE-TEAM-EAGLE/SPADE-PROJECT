@@ -236,5 +236,6 @@ router.get("/prospectusInsightEN/:startDate/:endDate", verifyToken, prospectus.p
 router.delete("/deleteProspectus/:prospectusID", verifyToken, prospectus.deleteProspectus);
 router.put("/updateBusinessLogo", verifyToken, settingController.updateBusinessLogo);
 router.get("/changeEmail", verifyToken, settingController.changeEmail);
+router.put("/changeEmailVerifyToken", verifyToken, settingController.changeEmailVerifyToken);
 // router.get("/updateBusinessLogo" , settingController.updateBusinessLogo);
 

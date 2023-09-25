@@ -13,7 +13,8 @@ const {
   updatePasswordTenantSetting,
   updateEmailTemplates,
   updateBusinessLogo,
-  addResetToken
+  addResetToken,
+  updateUserEmail
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -152,7 +153,6 @@ exports.updateBusinessLogo = async (req, res) => {
 //  ############################# Landlord business logo End ############################################################
 
 // ####################################### Change Email ##########################################
-
 exports.changeEmail = async (req, res) => { 
   const { email } = req.query;
   const { userId } = req.user;
@@ -160,6 +160,10 @@ exports.changeEmail = async (req, res) => {
   if (!email) {
     return res.status(201).json({ message: "Email Not found" });
   }
+  const checkUserResult = await queryRunner(selectQuery("users", "Email"),[email]);
+    if (checkUserResult[0].length > 0) {
+      return res.status(101).json({ message: "Email ALready Exist kindly change your Email" });
+    }
 
   const mailSubject = "Spade Email Change Request";
   const random = Math.floor(100000 + Math.random() * 900000);
@@ -192,6 +196,44 @@ exports.changeEmail = async (req, res) => {
     return res.status(500).json({ message: "Internal Server Error" });
   }
 };
-
-
 // ####################################### Change Email ##########################################
+
+
+// ####################################### Verify token ##########################################
+exports.changeEmailVerifyToken = async (req, res) => { 
+  // console.log(req);
+  const { token,email } = req.body;
+  // console.log(token + " " + email)
+  const { userId } = req.user;
+  try {
+    
+    const currentDate = new Date();
+    const selectResult = await queryRunner(selectQuery("users", "id", "token"),[userId,token]);
+    if (selectResult[0].length > 0) {
+      // const token = selectResult[0][0].token;
+
+      const updateResult = await queryRunner(updateUserEmail, [email, currentDate, userId]);
+
+      if (updateResult[0].affectedRows === 0) {
+        return res.status(400).json({ message: "Error in verify token" });
+      } else {
+        return res.status(200).json({ message: "Email updated Successful", id: userId, email : email });
+      }
+    } else {
+      res.status(201).json({
+        message: "Cannot Validate!!!",
+      });
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal Server Error",error : error });
+  }
+};
+// ####################################### Change Email ##########################################
+
+
+
+
+
+
+
