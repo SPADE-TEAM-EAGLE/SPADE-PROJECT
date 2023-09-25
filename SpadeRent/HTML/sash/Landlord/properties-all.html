@@ -2028,7 +2028,7 @@
                                     </div>
                                     <div class="card-body p-0">
                                         <div class="table-responsive">
-                                            <table class="table border text-nowrap text-md-nowrap mb-0"
+                                            <table class="table-hover table border text-nowrap text-md-nowrap mb-0"
                                                 id="responsive-datatable">
                                                 <thead>
                                                     <tr>
@@ -2762,31 +2762,31 @@
 
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
-    <script src="../assets/js/email-verification.js"></script>
-
-    <script>
-        $(document).ready(function () {
-            $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
-                method: 'GET',
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                },
-                success: function (response) {
-                    console.log("getMessagesCountLandlord");
-                    console.log(response.Count['count(message)']);
-                    $('#chatCounter').text(response.Count['count(message)'])
-                },
-                error: function (xhr, status, error) {
-                    $("#myModal_warning").modal("show");
-                    setTimeout(function () {
-                        $('#myModal_warning').modal('hide');
-                        window.location = '../Landlord/login_module.html';
-                    }, 2000);
-                    console.log(error);
-                }
+    <!-- <script src="../assets/js/email-verification.js"></script> -->
+<script>
+            $(document).ready(function(){
+                $.ajax({
+                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        console.log("getMessagesCountLandlord");
+                        console.log(response.Count['count(message)']);
+                        $('#chatCounter').text(response.Count['count(message)'])
+                    },
+                    error: function (xhr, status, error) {
+                        $("#myModal_warning").modal("show");
+                        setTimeout(function () {
+                            $('#myModal_warning').modal('hide');
+                            window.location = '../Landlord/login_module.html';
+                        }, 2000);
+                        console.log(error);
+                    }
+                });
             });
-        });
+      
     </script>
     <script src="../assets/js/intercom.js"></script>
     <script src="../assets/js/getNotification.js"></script>

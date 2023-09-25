@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Insert Image in Dropdown lists with jQuery</title>
+        
+        
+    </head>
+    <body>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+        <!-- select2 css -->
+        <link href='select2/dist/css/select2.min.css' rel='stylesheet' type='text/css'>
+
+        <!-- select2 script -->
+        <script src='select2/dist/js/select2.min.js'></script>
+        
+        <script>
+        $(document).ready(function(){
+            $("#social").select2({
+                templateResult: formatOptions
+            });
+        });
+        
+        function formatOptions (state) {
+            if (!state.id) { return state.text; }
+
+            console.log(state.element.value);
+                var $state = $(
+            '<span ><img sytle="display: inline-block;" src="images/' + state.element.value.toLowerCase() + '.png"  /> ' + state.text + '</span>'
+            );
+            return $state;
+        }
+        </script>
+
+        <select id='social' style='width: 200px;'>
+            <option value='facebook'>Facebook</option>
+            <option value='twitter'>Twitter</option>
+            <option value='linkedin'>Linkedin</option>
+            <option value='google_plus'>Google Plus</option>
+            <option value='vimeo'>Vimeo</option>
+        </select>
+    </body>
+</html>

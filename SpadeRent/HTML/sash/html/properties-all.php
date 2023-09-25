@@ -1141,7 +1141,7 @@
                                     </div>
                                     <div class="card-body p-0">
                                         <div class="table-responsive">
-                                            <table class="table border text-nowrap text-md-nowrap mb-0">
+                                            <table class="table-hover table border text-nowrap text-md-nowrap mb-0">
                                                 <thead class="table-primary">
                                                     <tr>
                                                         <th><label class="custom-control custom-checkbox-md">
