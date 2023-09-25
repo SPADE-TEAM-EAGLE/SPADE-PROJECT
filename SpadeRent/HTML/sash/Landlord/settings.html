@@ -9719,7 +9719,7 @@
                     });
                     console.log(data)
                     $.ajax({
-                        url: "https://backend.app.spaderent.com/api/spade/emailtemplates",
+                        url: "http://localhost:3000/api/spade/emailtemplates",
                         type: "PUT",
                         data: JSON.stringify(data),
                         headers: {
@@ -10389,7 +10389,7 @@
                         }
                     });
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/getVendorCategory',
+                        url: 'http://localhost:3000/api/spade/getVendorCategory',
                         type: 'GET',
                         contentType: false,
                         processData: false,
@@ -10426,7 +10426,7 @@
 
 
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/invoiceCategory',
+                        url: 'http://localhost:3000/api/spade/invoiceCategory',
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -10477,7 +10477,7 @@
 
 
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/getAllInvoices',
+                        url: 'http://localhost:3000/api/spade/getAllInvoices',
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -10539,7 +10539,7 @@
 
 
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/checkNotify',
+                        url: 'http://localhost:3000/api/spade/checkNotify',
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -10612,7 +10612,7 @@
                 $("#close-request").on("click", function () {
 
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/userCheckTenantPaidInvoice',
+                        url: 'http://localhost:3000/api/spade/userCheckTenantPaidInvoice',
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -10709,7 +10709,7 @@
                 })
                 $("#confirmDelete").click(() => {
                     $.ajax({
-                        url: vendor ? "https://backend.app.spaderent.com/api/spade/deleteVendorCategory" : "https://backend.app.spaderent.com/api/spade/deleteInvoiceCategory",
+                        url: vendor ? "http://localhost:3000/api/spade/deleteVendorCategory" : "http://localhost:3000/api/spade/deleteInvoiceCategory",
                         type: 'DELETE',
                         data: JSON.stringify({
                             "catId": vendor ? vendorCategoryId : categoryId
@@ -10743,7 +10743,7 @@
                         textNotification: $("input[name='example-radios2']:checked").val() == "Enable" ? "yes" : "no"
                     }
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/notify',
+                        url: 'http://localhost:3000/api/spade/notify',
                         method: 'PUT',
                         data: JSON.stringify(data),
                         contentType: 'application/json',
@@ -10788,7 +10788,7 @@
                     });
                     console.log(data)
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/addVendorCategory', // Replace with your actual backend endpoint URL
+                        url: 'http://localhost:3000/api/spade/addVendorCategory', // Replace with your actual backend endpoint URL
                         method: 'POST',
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -10857,7 +10857,7 @@
 
                     // Send the data to the backend using AJAX
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/addInvoiceCategory', // Replace with your actual backend endpoint URL
+                        url: 'http://localhost:3000/api/spade/addInvoiceCategory', // Replace with your actual backend endpoint URL
                         method: 'POST',
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -10891,7 +10891,7 @@
                     // Retrieve the ID of the parent card
                     var cardId = $(this).closest('.pricing-card').attr('id');
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/updatePlanId',
+                        url: 'http://localhost:3000/api/spade/updatePlanId',
                         method: 'PUT',
                         data: JSON.stringify({ planID: cardId }),
                         contentType: 'application/json',
@@ -10978,7 +10978,7 @@
                     }
                 })
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/pricingPlan',
+                    url: 'http://localhost:3000/api/spade/pricingPlan',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -11004,7 +11004,7 @@
                 });
                 function profileComplete() {
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
+                        url: 'http://localhost:3000/api/spade/ProfileComplete',
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -11048,7 +11048,7 @@
                     if (file) {
                         userForm.append("image", file)
                         $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/upload',
+                            url: 'http://localhost:3000/api/spade/upload',
                             type: 'POST',
                             data: userForm,
                             headers: {
@@ -11173,7 +11173,7 @@
                     $("#save").prop("disabled", true)
                     console.log($("#current_password_reset").val(), $("#id_password1_new").val())
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/changePasssword',
+                        url: 'http://localhost:3000/api/spade/changePasssword',
                         type: 'PUT',
                         data: JSON.stringify({
                             currentPassword: $("#current_password_reset").val(),
@@ -11250,7 +11250,7 @@
                         auth = 0
                     }
                     $.ajax({
-                        url: "https://backend.app.spaderent.com/api/spade/updateAuth",
+                        url: "http://localhost:3000/api/spade/updateAuth",
                         type: "PUT",
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -11468,7 +11468,7 @@
             function logout() {
                 $(document).ready(function () {
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                        url: 'http://localhost:3000/api/spade/inactiveUser',
                         type: 'PUT',
                         contentType: false,
                         processData: false,
@@ -11616,7 +11616,7 @@
                     var str = "";
 
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/upload',
+                        url: 'http://localhost:3000/api/spade/upload',
                         type: 'POST',
                         data: uploadFormData,
                         contentType: false,

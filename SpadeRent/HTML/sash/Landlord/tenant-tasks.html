@@ -2352,7 +2352,7 @@
     <script>
         $(document).ready(function() {
             $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/protected',
+                    url: 'http://localhost:3000/api/spade/protected',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2392,7 +2392,7 @@
                     }
                 });
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
+                url: 'http://localhost:3000/api/spade/ProfileComplete',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2429,7 +2429,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
             $("#viewTasks").attr("href", `./tenant-tasks.html?tenant=${encodedTenantId}`)
             //            
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getTenantsByID',
+                url: 'http://localhost:3000/api/spade/getTenantsByID',
                 type: 'GET',
                 data: {
                     id: tenantId
@@ -2465,7 +2465,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                 });
             }
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/tenantTask',
+                url: 'http://localhost:3000/api/spade/tenantTask',
                 type: 'GET',
                 data: {
                     Id: tenantId
@@ -2604,7 +2604,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
     function logout() {
         $(document).ready(function () {
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                url: 'http://localhost:3000/api/spade/inactiveUser',
                 type: 'PUT',
                 contentType: false,
                 processData: false,

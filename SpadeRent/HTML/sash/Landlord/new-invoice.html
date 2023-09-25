@@ -2643,7 +2643,7 @@
     });
         $(document).ready(function () {
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
+                url: 'http://localhost:3000/api/spade/ProfileComplete',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2905,7 +2905,7 @@ function dragOverHandler(ev) {
                 return fileName;
             }
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/protected',
+                url: 'http://localhost:3000/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2932,7 +2932,7 @@ function dragOverHandler(ev) {
             });
             $("#resend-invoice").click(() => {
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/resendEmail',
+                    url: 'http://localhost:3000/api/spade/resendEmail',
                     type: 'GET',  // Change the method to POST
                     data: { invoiceID: invoiceId },  // Send the data in the request body
                     contentType: 'application/json',  // Set the content type to JSON
@@ -3115,7 +3115,7 @@ print = true
                         }
                         
                         $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/upload',
+                            url: 'http://localhost:3000/api/spade/upload',
                             type: 'POST',
                             data: uploadFormData,
                             contentType: false,
@@ -3239,7 +3239,7 @@ print = true
             function getData() {
                 $("#preloader").fadeIn("fast");
                 $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/invoiceCategory',
+                        url: 'http://localhost:3000/api/spade/invoiceCategory',
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3259,7 +3259,7 @@ print = true
                     });
                 // console.log(22)
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/viewAllPropertyTenant',
+                    url: 'http://localhost:3000/api/spade/viewAllPropertyTenant',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -3309,7 +3309,7 @@ print = true
                 });
 
                 // $.ajax({
-                //     url: 'https://backend.app.spaderent.com/api/spade/getAllInvoices',
+                //     url: 'http://localhost:3000/api/spade/getAllInvoices',
                 //     type: 'GET',
                 //     contentType: false,
                 //     processData: false,
@@ -3769,7 +3769,7 @@ $('#collapse-category').on('hidden.bs.collapse', function () {
                     console.log(data)
                     // Send the data to the backend using AJAX
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/addInvoiceCategory', // Replace with your actual backend endpoint URL
+                        url: 'http://localhost:3000/api/spade/addInvoiceCategory', // Replace with your actual backend endpoint URL
                         method: 'POST',
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -4175,7 +4175,7 @@ function resetAccordions() {
             $(document).on("click", "#confirmDelete", () => {
                 $("#myModal_delete").modal("hide")
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/invoiceDelete',
+                    url: 'http://localhost:3000/api/spade/invoiceDelete',
                     type: 'DELETE',
                     data: JSON.stringify({
                         id: invoiceId,
@@ -4357,7 +4357,7 @@ function resetAccordions() {
 
                     // Send the data and files to the API using AJAX
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/UpdateInvoice',
+                        url: 'http://localhost:3000/api/spade/UpdateInvoice',
                         type: 'PUT',
                         data: formData,
                         contentType: false,
@@ -4382,7 +4382,7 @@ function resetAccordions() {
                 // console.log(invoiceId)
                 $("#changeStatusModal").modal("hide")
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/putInvoiceStatusUpdates',
+                    url: 'http://localhost:3000/api/spade/putInvoiceStatusUpdates',
                     type: 'PUT',
                     data: JSON.stringify({
                         id: invoiceId,
@@ -4432,7 +4432,7 @@ function resetAccordions() {
         function logout() {
             $(document).ready(function () {
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                    url: 'http://localhost:3000/api/spade/inactiveUser',
                     type: 'PUT',
                     contentType: false,
                     processData: false,

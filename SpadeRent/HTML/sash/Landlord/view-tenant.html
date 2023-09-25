@@ -2401,7 +2401,7 @@
             });
         $(document).ready(function() {
             $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/protected',
+                    url: 'http://localhost:3000/api/spade/protected',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2441,7 +2441,7 @@
                     }
                 });
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
+                url: 'http://localhost:3000/api/spade/ProfileComplete',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2492,7 +2492,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                 // $("#succesModal").modal("hide")
                 // console.log(tenantID)
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/sendInvitationLink',
+                    url: 'http://localhost:3000/api/spade/sendInvitationLink',
                     type: 'POST',
                     data: JSON.stringify({
                         tenantID: tenantId
@@ -2519,7 +2519,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
             })
             console.log(3464565455656546)
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getTenantsByID',
+                url: 'http://localhost:3000/api/spade/getTenantsByID',
                 type: 'GET',
                 data: {
                     id: tenantId
@@ -2617,7 +2617,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                 formData.append("tenantID", tenantId);
                 console.log(formData)
                 $.ajax({
-                    url: "https://backend.app.spaderent.com/api/spade/addAlternateEmailPhone",
+                    url: "http://localhost:3000/api/spade/addAlternateEmailPhone",
                     type: "POST",
                     data: JSON.stringify({
                         alternatePhone: phone,
@@ -2684,7 +2684,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
     function logout() {
         $(document).ready(function () {
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                url: 'http://localhost:3000/api/spade/inactiveUser',
                 type: 'PUT',
                 contentType: false,
                 processData: false,
