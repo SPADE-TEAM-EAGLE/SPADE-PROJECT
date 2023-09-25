@@ -2,8 +2,9 @@ exports.selectQuery = (table, ...field) => {
   if (field.length === 1) {
     // console.log(table,field[0])
     return `SELECT * FROM ${table} WHERE ${field[0]} = ?`;
-  } else if (field.length > 1) {
-    return `SELECT * FROM ${table} WHERE ${field[0]} = ? and ${field[1]} = ? and ${field[2]} = ?`;
+  } 
+  else if (field.length > 1) {
+    return `SELECT * FROM ${table} WHERE ${field[0]} = ? and ${field[1]} = ?`;
   } else {
     return `SELECT * FROM ${table}`;
   }
@@ -1071,3 +1072,6 @@ exports.prospectusInsightQD = "WITH Months AS (SELECT 1 AS Month UNION SELECT 2 
 exports.prospectusInsightEN = "SELECT count(prospectusStatus) as totalProspectus, SUM(CASE WHEN prospectusStatus = 'Engaged' THEN 1 ELSE 0 END) AS Engaged, SUM(CASE WHEN prospectusStatus = 'Nurturing' THEN 1 ELSE 0 END) AS Nurturing FROM spade_Rent.prospectus WHERE landlordId = ? AND createdDate >= ? AND createdDate <= ?";
 exports.propertyUnitCount = "SELECT *, sum(CASE WHEN propertyunits.status = 'Vacant' then 1 else 0 END ) as Vacant, sum(CASE WHEN propertyunits.status = 'Occupied' then 1 else 0 END ) as Occupied FROM spade_Rent.propertyunits where propertyID = ? ";
 exports.updateBusinessLogo = "UPDATE users SET businessLogo = ? , businessLogoKey = ? where id = ? ";
+exports.updateUserEmail =
+"UPDATE users SET Email = ?, updated_at = ? where id = ?";
+exports.checkProperty = "SELECT * FROM property where propertyName = ? AND address = ? AND landlordID = ? ";
