@@ -958,7 +958,7 @@
                 if (settings.useSingleQuotes === true) {
                     html = "<table class='table-1'><tbody>";
                 } else {
-                    html = '<table class="table-1"><tbody>';
+                    html = '<table class="table-hover table-1"><tbody>';
                 }
                 for (var i = 1; i <= rows; i++) {
                     // start new row
