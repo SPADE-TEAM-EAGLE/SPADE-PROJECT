@@ -1871,56 +1871,43 @@
                             <!-- <li class="sub-category">
                                        <h3>UI Kit</h3>
                                    </li> -->
-                            <li class="slide card-demo-1">
-                                <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
-                                        class="side-menu__icon fi fi-rs-building"></i><span
-                                        class="side-menu__label">Properties</span>
-                                    <i class="angle fe fe-chevron-right"></i>
-                                </a>
-                                <ul class="slide-menu">
-                                    <li class="side-menu-label1"><a href="javascript:void(0)">Properties</a></li>
-                                    <li><a href="properties-all.html" class="slide-item">All</a></li>
-                                    <!-- <li><a href="javascript:void(0)" class="slide-item">Draft</a></li> -->
-                                </ul>
-                            </li>
-                            <li class="slide card-demo-2">
-                                <a class="side-menu__item" data-bs-toggle="slide" href="add-tenant.html"><i
-                                        class="side-menu__icon fi fi-rs-cabin"></i><span
-                                        class="side-menu__label">Tenants</span>
-                                    <i class="angle fe fe-chevron-right"></i>
+                                   <li class="slide">
+                                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="properties-all.html"><i
+                                            class="side-menu__icon fi fi-rs-building"></i><span
+                                            class="side-menu__label">Properties</span>
+                                        
+                                    </a>
+                                </li>
+                                <li class="slide card-demo-2">
+                                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="add-tenant.html"><i
+                                            class="side-menu__icon fi fi-rs-cabin"></i><span
+                                            class="side-menu__label">Tenants</span>
+                                        
+    
+                                    </a>
+                                    
+                                </li>
+    
+                                <!-- <li class="sub-category">
+                                           <h3>Pre-build Pages</h3>
+                                       </li> -->
+                                <li class="slide card-demo-3">
+                                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="create-invoicing.html"><i
+                                            class="side-menu__icon fi fi-rs-file-invoice-dollar"></i><span
+                                            class="side-menu__label">Invoicing</span>
+                                        
+                                    </a>
+                                    
+    
+                                </li>
+                                <li class="slide card-demo-4">
+                                    <a class="side-menu__item" data-bs-toggle="slide" href="prospects.html"><i
+                                            class="side-menu__icon fi fi-rs-chart-simple"></i><span
+                                            class="side-menu__label">Prospects</span>
+                                    </a>
+                                </li>
 
-                                </a>
-                                <ul class="slide-menu">
-                                    <li class="side-menu-label1"><a href="javascript:void(0)">Tenants</a></li>
-                                    <li><a href="add-tenant.html" class="slide-item">All</a></li>
-                                    <!-- <li><a href="javascript:void(0)" class="slide-item">Draft</a></li> -->
-                                </ul>
-                            </li>
-
-                            <!-- <li class="sub-category">
-                                       <h3>Pre-build Pages</h3>
-                                   </li> -->
-                            <li class="slide card-demo-3">
-                                <a class="side-menu__item" data-bs-toggle="slide" href="invoices.html"><i
-                                        class="side-menu__icon fi fi-rs-file-invoice-dollar"></i><span
-                                        class="side-menu__label">Invoicing</span>
-                                    <i class="angle fe fe-chevron-right"></i>
-                                </a>
-                                <ul class="slide-menu">
-                                    <li class="side-menu-label1"><a href="javascript:void(0)">Invoicing</a></li>
-                                    <li><a href="create-invoicing.html" class="slide-item">All</a></li>
-                                    <!-- <li><a href="javascript:void(0)" class="slide-item">Draft</a></li> -->
-                                </ul>
-
-                            </li>
-                            <li class="slide card-demo-4">
-                                <a class="side-menu__item" data-bs-toggle="slide" href="prospects.html"><i
-                                        class="side-menu__icon fi fi-rs-chart-simple"></i><span
-                                        class="side-menu__label">Prospects</span>
-                                </a>
-                            </li>
-
-                            <li class="slide card-demo-5">
+                            <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="view-tasks.html"><i
                                         class="side-menu__icon fi fi-rs-list-check"></i><span
                                         class="side-menu__label">Tasks</span>
@@ -1934,7 +1921,7 @@
                                     <li><a href="tasks-vendors.html" class="slide-item">Vendors</a></li>
                                 </ul>
                             </li>
-                            <li class="slide card-demo-6">
+                            <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="reports.html">
                                     <i class="side-menu__icon fi fi-rs-document"></i>
                                     <span class="side-menu__label">Reports</span>
@@ -1951,7 +1938,7 @@
                                     <!-- <i class="angle fe fe-chevron-right"></i> -->
                                 </a>
                             </li>
-                            <li class="card-demo-7">
+                            <li>
                                 <a class="side-menu__item has-link" href="settings.html" target="_self"><i
                                         class="side-menu__icon fi fi-rs-settings"></i><span
                                         class="side-menu__label">Settings</span>
@@ -4612,10 +4599,10 @@ var encodedProspectId = encodeURIComponent(encryptedProspectId);
                             row.append($('<td>').html('<span class="fw-bold">' + prospectus.email + '</span><br><small>(' + prospectus.phoneNumber + ')</small>'));
                             row.append($('<td>').html('<span class="fw-bold">' + formatRentAmount(prospectus.rentAmount) + '</span>'));
                             row.append($('<td>').html('<span class="fw-bold">' + prospectus.moveDate + '</span>'));
-                            if (prospectus.prospectusStatus == "Qualified") {
+                            if (prospectus?.prospectusStatus?.toLowerCase() == "qualified") {
                                 var dropdownToggle = $('<span class="fw-bold text-success" data-bs-toggle="dropdown" style="cursor: pointer;">' + prospectus.prospectusStatus + '<i class="fi fi-rs-angle-small-down text-success"></i></span>');
 
-                            } else if (prospectus.prospectusStatus == "Disqualified") {
+                            } else if (prospectus?.prospectusStatus?.toLowerCase() == "disqualified") {
                                 var dropdownToggle = $('<span class="fw-bold text-danger" data-bs-toggle="dropdown" style="cursor: pointer;">' + prospectus.prospectusStatus + '<i class="fi fi-rs-angle-small-down text-danger"></i></span>');
                             }
                             else {
@@ -4663,10 +4650,10 @@ var encodedProspectId = encodeURIComponent(encryptedProspectId);
 
                             var tableSelector = '';
                             var rentAmount = parseFloat(prospectus.rentAmount);
-                            if (prospectus.prospectusStatus == "Qualified") {
+                            if (prospectus?.prospectusStatus?.toLowerCase() == "qualified") {
                                 tableSelector = "#table-body-qualified, ";
 
-                            } else if (prospectus.prospectusStatus == "Disqualified") {
+                            } else if (prospectus?.prospectusStatus?.toLowerCase() == "disqualified") {
                                 tableSelector = "#table-body-disqualified, ";
 
                             }
@@ -4675,13 +4662,13 @@ var encodedProspectId = encodeURIComponent(encryptedProspectId);
 
                             let elem;
 
-                            // if (prospectus.prospectusStatus == "engaged") {
-                            //     populateCards($('#engaged-propsect-kanban .card .card-body'), prospectus, property);
+                            if (prospectus?.prospectusStatus?.toLowerCase() == "engaged") {
+                                populateCards($('#engaged-propsect-kanban .card .card-body'), prospectus, property);
 
-                            // } else if (prospectus.prospectusStatus == "nurturing") {
-                            //     populateCards($('#nurturing-propsect-kanban .card .card-body'), prospectus, property);
+                            } else if (prospectus?.prospectusStatus?.toLowerCase() == "nurturing") {
+                                populateCards($('#nurturing-propsect-kanban .card .card-body'), prospectus, property);
 
-                            // } 
+                            } 
                             if (prospectus.prospectusStatus !== "qualified" && prospectus.prospectusStatus !== "disqualified") {
                                 populateCards($('#new-propsect-kanban .card .card-body'), prospectus, property);
 

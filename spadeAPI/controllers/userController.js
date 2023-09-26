@@ -1886,7 +1886,7 @@ console.log(Id)
         message: "Task data retrieved successfully",
       });
     } else {
-      res.status(400).json({
+      res.status(200).json({
         message: "No property Task data found",
       });
     }
