@@ -2907,7 +2907,7 @@
   <script>
     $(document).ready(function(){
         $.ajax({
-                url: 'http://localhost:3000/api/spade/updateMessagesCountTenant',
+                url: 'https://backend.app.spaderent.com/api/spade/updateMessagesCountTenant',
                 type: 'PUT',
                 contentType: false,
                 processData: false,
@@ -2922,7 +2922,7 @@
                 }
             });
         $.ajax({
-            url: 'http://localhost:3000/api/spade/getMessagesCountTenant',
+            url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountTenant',
             method: 'GET',
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3007,7 +3007,7 @@
                         };
                         // joinChatRoom(localStorage.getItem("chatId"));
                         $.ajax({
-                            url: 'http://localhost:3000/api/spade/createNewMessageTenant',
+                            url: 'https://backend.app.spaderent.com/api/spade/createNewMessageTenant',
                             type: 'POST',
                             data: JSON.stringify(messageData),
                             contentType: 'application/json',
@@ -3041,7 +3041,7 @@
                             receiverID: Number(localStorage.getItem("landloadId"))
                         };
                         $.ajax({
-                            url: 'http://localhost:3000/api/spade/createNewMessageTenant',
+                            url: 'https://backend.app.spaderent.com/api/spade/createNewMessageTenant',
                             type: 'POST',
                             data: JSON.stringify(messageData),
                             contentType: 'application/json',
@@ -3364,7 +3364,7 @@
                         var str = "";
 
                         $.ajax({
-                            url: 'http://localhost:3000/api/spade/uploadTenant',
+                            url: 'https://backend.app.spaderent.com/api/spade/uploadTenant',
                             type: 'POST',
                             data: uploadFormData,
                             contentType: false,
@@ -3392,7 +3392,7 @@
                             receiverID: Number(localStorage.getItem("landloadId"))
                                 };
                                 $.ajax({
-                                    url: 'http://localhost:3000/api/spade/createNewMessageTenant',
+                                    url: 'https://backend.app.spaderent.com/api/spade/createNewMessageTenant',
                                     type: 'POST',
                                     data: JSON.stringify(messageData2),
                                     contentType: 'application/json',
