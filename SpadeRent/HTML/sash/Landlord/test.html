@@ -234,7 +234,7 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    
+                    console.log(scard)
                     sfc.createPayment({
                         sessionToken: response.sessionToken, //received from openOrder API
                         clientUniqueId: "695701003",
@@ -242,7 +242,9 @@
                         merchantSiteId:"244298",
                         cardHolderName: "<card_holder>",
                         paymentOption: {
-                            userPaymentOptionId: "95475308"
+                            userPaymentOptionId: "95475308",
+                            card:{
+                            }
                         },
 
                         billingAddress: {

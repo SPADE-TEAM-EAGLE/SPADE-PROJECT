@@ -88,7 +88,7 @@ exports.openOrder = async (req,res) => {
     clientUniqueId: config.clientUniqueId,
     currency: currency,
     amount: amount,
-    transactionType: "Auth",
+    // transactionType: "Auth",
     userTokenId:"12345",
     timeStamp: timestamp,
     checksum: sha256(config.merchantId+config.merchantSiteId+config.clientRequestId+amount+currency+timestamp+config.Secret_Key)
