@@ -2700,7 +2700,7 @@ color: #000;
 <script>
             $(document).ready(function(){
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
+                    url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2727,7 +2727,7 @@ color: #000;
     <script>
         $(document).ready(function () {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/ProfileComplete',
+                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2758,7 +2758,7 @@ color: #000;
             });
         });
         $.ajax({
-                url: 'http://localhost:3000/api/spade/getStates',
+                url: 'https://backend.app.spaderent.com/api/spade/getStates',
                 method: 'GET',
                 success: function ({
                     data
@@ -2822,7 +2822,7 @@ color: #000;
 
 
             $.ajax({
-                url: 'http://localhost:3000/api/spade/protected',
+                url: 'https://backend.app.spaderent.com/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2894,7 +2894,7 @@ color: #000;
             }
             function getVendorCategoryFunction() {
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/getVendorCategory',
+                    url: 'https://backend.app.spaderent.com/api/spade/getVendorCategory',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -2975,7 +2975,7 @@ color: #000;
                 var category = $("#category").val();
                 if (category == "Add vendor categories first!!") {
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/addVendorCategory',
+                        url: 'https://backend.app.spaderent.com/api/spade/addVendorCategory',
                         type: 'POST',
                         data: JSON.stringify({
                             categories: $('#add_category_input').val()
@@ -3005,7 +3005,7 @@ color: #000;
                             // formData.append('categoryID', 2);
                             console.log(status)
                             $.ajax({
-                                url: 'http://localhost:3000/api/spade/addVendor',
+                                url: 'https://backend.app.spaderent.com/api/spade/addVendor',
                                 type: 'POST',
                                 data: JSON.stringify({
                                     firstName: firstName,
@@ -3078,7 +3078,7 @@ color: #000;
 
                     if (currentDisplayStyle === 'block' && ($('#add_category_input').val()) != "" ) {
                         $.ajax({
-                        url: 'http://localhost:3000/api/spade/addVendorCategory',
+                        url: 'https://backend.app.spaderent.com/api/spade/addVendorCategory',
                         type: 'POST',
                         data: JSON.stringify({
                             categories: $('#add_category_input').val()
@@ -3108,7 +3108,7 @@ color: #000;
                             // formData.append('categoryID', 2);
                             console.log(status)
                             $.ajax({
-                                url: 'http://localhost:3000/api/spade/addVendor',
+                                url: 'https://backend.app.spaderent.com/api/spade/addVendor',
                                 type: 'POST',
                                 data: JSON.stringify({
                                     firstName: firstName,
@@ -3190,7 +3190,7 @@ color: #000;
                         // formData.append('categoryID', 2);
                         console.log(status)
                         $.ajax({
-                            url: 'http://localhost:3000/api/spade/addVendor',
+                            url: 'https://backend.app.spaderent.com/api/spade/addVendor',
                             type: 'POST',
                             data: JSON.stringify({
                                 firstName: firstName,
@@ -3252,7 +3252,7 @@ color: #000;
                 $("#preloader").fadeIn("fast");
                 // console.log(22)
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/getAllVendors',
+                    url: 'https://backend.app.spaderent.com/api/spade/getAllVendors',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -3354,7 +3354,7 @@ color: #000;
             })
             $("#confirmDelete").on("click", function () {
                 $.ajax({
-                    url: `http://localhost:3000/api/spade/deleteVendor/${vendorID}`,
+                    url: `https://backend.app.spaderent.com/api/spade/deleteVendor/${vendorID}`,
                     type: 'DELETE',
                     contentType: false,
                     processData: false,
@@ -3401,7 +3401,7 @@ color: #000;
 
             $("#save").on("click", function () {
                 $.ajax({
-                    url: `http://localhost:3000/api/spade/updateVendor`,
+                    url: `https://backend.app.spaderent.com/api/spade/updateVendor`,
                     type: 'PUT',
                     data: JSON.stringify({
                         vendId: vendorID,
@@ -3643,7 +3643,7 @@ color: #000;
         function logout() {
             $(document).ready(function () {
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/inactiveUser',
+                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
                     type: 'PUT',
                     contentType: false,
                     processData: false,
@@ -3677,7 +3677,7 @@ color: #000;
     <script>
         $(document).ready(() => {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/verifyMailCheck',
+                url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")

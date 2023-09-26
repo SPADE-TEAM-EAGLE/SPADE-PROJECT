@@ -27,7 +27,7 @@ function convertTimestamp(timestamp) {
 
 function GetNotification() {
   $.ajax({
-    url: "http://localhost:3000/api/spade/tenantNotify",
+    url: "https://backend.app.spaderent.com/api/spade/tenantNotify",
     method: "GET",
     headers: {
       Authorization: "Bearer " + localStorage.getItem("authtoken"),
@@ -336,7 +336,7 @@ $("#updateAllNotifyRead").on("click", function () {
 });
 function getNotifyData() {
   $.ajax({
-    url: "http://localhost:3000/api/spade/notify",
+    url: "https://backend.app.spaderent.com/api/spade/notify",
     method: "GET",
     headers: {
       Authorization: "Bearer " + localStorage.getItem("authtoken"),
@@ -356,7 +356,7 @@ function updateAllNotifyRead() {
   getNotifyData()
   let propertyID ;
   $.ajax({
-    url: "http://localhost:3000/api/spade/protectedTenant",
+    url: "https://backend.app.spaderent.com/api/spade/protectedTenant",
     type: "GET",
     contentType: "application/json",
     headers: {
@@ -368,7 +368,7 @@ function updateAllNotifyRead() {
       propertyID = Number(response.propertyID);
       // console.log(typeof landlordID);
       $.ajax({
-        url: "http://localhost:3000/api/spade/updateAllTenantNotifyRead",
+        url: "https://backend.app.spaderent.com/api/spade/updateAllTenantNotifyRead",
         type: "PUT",
         data: JSON.stringify({
           propertyID: propertyID,
@@ -395,7 +395,7 @@ function updateAllNotifyRead() {
 function updateDataNotify(notificationId, type) {
   console.log(notificationId + " " + type);
   $.ajax({
-    url: "http://localhost:3000/api/spade/updateTenantReadUnRead",
+    url: "https://backend.app.spaderent.com/api/spade/updateTenantReadUnRead",
     type: "PUT",
     data: JSON.stringify({
       notify: 1,

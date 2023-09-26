@@ -1886,7 +1886,7 @@
 <script>
             $(document).ready(function(){
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/getMessagesCountTenant',
+                    url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountTenant',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1911,7 +1911,7 @@
 <script>
     $(document).ready(function() {
         $.ajax({
-                url: 'http://localhost:3000/api/spade/protectedTenant',
+                url: 'https://backend.app.spaderent.com/api/spade/protectedTenant',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2044,7 +2044,7 @@
             })
             function getData(){
                 $.ajax({
-                url: 'http://localhost:3000/api/spade/getAllTaskTenant',
+                url: 'https://backend.app.spaderent.com/api/spade/getAllTaskTenant',
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -2231,7 +2231,7 @@ if (task.ImageKey) {
                         formData.append('image', selectedFiles[i]);
                     }
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/uploadTenant',
+                        url: 'https://backend.app.spaderent.com/api/spade/uploadTenant',
                         type: 'POST',
                         data: formData,
                         contentType: false,
@@ -2251,7 +2251,7 @@ if (task.ImageKey) {
                                 // Loop through the lineItems array and add each line item to the FormData object
                             }
                             $.ajax({
-                                url: 'http://localhost:3000/api/spade/addTasksTenant',
+                                url: 'https://backend.app.spaderent.com/api/spade/addTasksTenant',
                                 type: 'POST',
                                 data: JSON.stringify(taskData),
                                 contentType: 'application/json',
@@ -2299,7 +2299,7 @@ if (task.ImageKey) {
                         // Loop through the lineItems array and add each line item to the FormData object
                     }
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/addTasksTenant',
+                        url: 'https://backend.app.spaderent.com/api/spade/addTasksTenant',
                         type: 'POST',
                         data: JSON.stringify(taskData),
                         contentType: 'application/json',
@@ -2563,7 +2563,7 @@ $('#fileInput').on('change', function () {
                 $("#viewModal-tasks").modal("show")
             })
             $.ajax({
-                url: 'http://localhost:3000/api/spade/getTenantByID',
+                url: 'https://backend.app.spaderent.com/api/spade/getTenantByID',
                 type: 'GET',
                 contentType:"application/json; charset=utf-8",
                 // processData: false,
@@ -2709,7 +2709,7 @@ $('#fileInput').on('change', function () {
        function logout() {
                 $(document).ready(function () {
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/inactiveTenant',
+                        url: 'https://backend.app.spaderent.com/api/spade/inactiveTenant',
                         type: 'PUT',
                         contentType: false,
                         processData: false,
