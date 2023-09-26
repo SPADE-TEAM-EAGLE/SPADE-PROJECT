@@ -1482,8 +1482,8 @@
                                 <span class="custom-control-label">Notify Assignee(s)</span>
                             </label>
                     </div> -->
-                    <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal"
-                        id='close'>Close</button>
+                    <a class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal"
+                        id='close'>Close</a>
                     <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
                     <a href="javascript:void(0)" class="btn text-light btn-pill button"
                         style='background-color:#1467B0;' id='update-status'>Update Status</a>
@@ -5678,6 +5678,7 @@
                         }
                     });
                 })
+                
                 $(document).on('click', ".view-btn,.edit-option", function (e) {
                     e.preventDefault();
                     const buttonText = $(this).text();
@@ -5910,6 +5911,7 @@
 
                     $("#viewModal-invoice").modal("show")
                 })
+                
                 $(document).on('click', '.three-dots', function () {
                     const invoiceIdElement = $(this).closest("tr").find(".invoice-id");
                     const invoiceSerialElement = $(this).closest("tr").find(".serial");
@@ -5935,6 +5937,7 @@
 
                     })
                 });
+                
                 $(document).on('click', '.status-option', function () {
                     // const invoiceIdElement = $(this).closest("tr").find(".invoice-id");
                     const data1 = invoiceData.find(obj => obj.invoiceID == invoiceId);
@@ -6366,6 +6369,7 @@
                         }
                     })
                 })
+                
                 $(document).on('input change', '#addModal input, #addModal select, #addModal input, #addModal select,#addModal textarea', function () {
                     updateTotal("");
                     var $field = $(this);
