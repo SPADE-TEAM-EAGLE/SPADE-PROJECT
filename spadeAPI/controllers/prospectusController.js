@@ -14,7 +14,8 @@ const {
     UpdateProspectusQuery,
     UpdateProspectusStatusQuery,
     prospectusInsightQD,
-    prospectusInsightEN
+    prospectusInsightEN,
+    prospectusTimeQuery
 } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
 const { deleteImageFromS3 } = require("../helper/S3Bucket");
@@ -345,4 +346,33 @@ exports.deleteProspectus = async (req, res) => {
     }
   };
   //  #############################  Delete prospectus ENDS HERE ##################################################
+  
+
+
+
+  //  #############################  Prospectus time Start HERE ##################################################
+exports.prospectusTime = async (req, res) => {
+    try {
+      const { startDate, endDate } = req.params;
+      const { userId } = req.user;
+      const prospectusTimeResult = await queryRunner(prospectusTimeQuery, [
+            userId,
+            startDate,
+            endDate
+      ]);
+      if (prospectusTimeResult[0].length > 0) {
+        res.status(200).json({
+          message: "prospectus Get Successful",
+        });
+      } else {
+        res.status(101).json({
+          message: "No prospectus data found",
+        });
+      }
+    } catch (error) {
+      res.send("Error Get delete prospectus  ");
+      console.log(error);
+    }
+  };
+  //  ############################# Prospectus time ENDS HERE ##################################################
   

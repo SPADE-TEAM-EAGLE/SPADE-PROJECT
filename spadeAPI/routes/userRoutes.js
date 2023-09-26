@@ -237,5 +237,6 @@ router.delete("/deleteProspectus/:prospectusID", verifyToken, prospectus.deleteP
 router.put("/updateBusinessLogo", verifyToken, settingController.updateBusinessLogo);
 router.put("/changeEmail", verifyToken, settingController.changeEmail);
 router.put("/changeEmailVerifyToken", verifyToken, settingController.changeEmailVerifyToken);
+router.get("/prospectusTime/:startDate/:endDate", verifyToken, prospectus.prospectusTime);
 // router.get("/updateBusinessLogo" , settingController.updateBusinessLogo);
 
