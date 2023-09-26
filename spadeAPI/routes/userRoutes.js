@@ -238,5 +238,5 @@ router.put("/updateBusinessLogo", verifyToken, settingController.updateBusinessL
 router.put("/changeEmail", verifyToken, settingController.changeEmail);
 router.put("/changeEmailVerifyToken", verifyToken, settingController.changeEmailVerifyToken);
 router.get("/prospectusTime/:startDate/:endDate", verifyToken, prospectus.prospectusTime);
-// router.get("/updateBusinessLogo" , settingController.updateBusinessLogo);
+router.get("/GettenantAttachEmailPhone/:tenantID", verifyToken, tenantController.GettenantAttachEmailPhone);
 

@@ -370,7 +370,7 @@ exports.prospectusTime = async (req, res) => {
         });
       }
     } catch (error) {
-      res.send("Error Get delete prospectus  ");
+      res.send("Error Get Prospectus time  ");
       console.log(error);
     }
   };

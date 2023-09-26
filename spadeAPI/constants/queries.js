@@ -1076,3 +1076,5 @@ exports.updateUserEmail =
 "UPDATE users SET Email = ?, updated_at = ? where id = ?";
 exports.checkProperty = "SELECT * FROM property where propertyName = ? AND address = ? AND landlordID = ? ";
 exports.prospectusTimeQuery = "SELECT firstName, lastName, prospectusStatus, email FROM spade_Rent.prospectus WHERE  landlordId = ? AND createdDate >= ? AND createdDate <= ? ";
+// exports.CheckTenant =
+//   "UPDATE propertyunits SET  status = ?  where id = ? ";
