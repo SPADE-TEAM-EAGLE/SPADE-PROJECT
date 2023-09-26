@@ -154,20 +154,18 @@ exports.updateBusinessLogo = async (req, res) => {
 
 // ####################################### Change Email ##########################################
 exports.changeEmail = async (req, res) => { 
-  const { email } = req.query;
+  const { email } = req.body;
   const { userId } = req.user;
-
   if (!email) {
     return res.status(201).json({ message: "Email Not found" });
   }
   const checkUserResult = await queryRunner(selectQuery("users", "Email"),[email]);
+  console.log(email);
     if (checkUserResult[0].length > 0) {
-      return res.status(101).json({ message: "Email ALready Exist kindly change your Email" });
+      return res.status(201).json({ message: "Email ALready Exist kindly change your Email" });
     }
-
   const mailSubject = "Spade Email Change Request";
   const random = Math.floor(100000 + Math.random() * 900000);
-
   try {
     const selectResult = await queryRunner(selectQuery("users", "id"), [userId]);
 

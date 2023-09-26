@@ -12178,9 +12178,9 @@ $(document).ready(function() {
         $emailVerifySubmit.prop("disabled", false);
     });
 
-    $emailVerifyInput.on("input", function() { 
-                $emailVerifySubmit.prop("disabled", false);
-    });
+    // $emailVerifyInput.on("input", function() { 
+    //             $emailVerifySubmit.prop("disabled", false);
+    // });
 });
 
 
@@ -12197,24 +12197,26 @@ $("#emailVerifySubmit").click(()=>{
     data = {email : $("#emailVerify").val()}
     $.ajax({
         url:"https://backend.app.spaderent.com/api/spade/changeEmail",
-        type : "get",
-        data : data,
-        contentType : "application/json; charset=utf-8",
+        type : "put",
+        data : JSON.stringify(data) ,
+        contentType : "application/json",
         headers : {
             'Authorization' : 'Bearer ' + localStorage.getItem("authtoken")
         },
         success : function (response){
+            console.log(response)
             if(response.message == "Email Sent"){
+                $("#verifyEmailSpan").hide();
                 $("#emailVerifyModal").modal("show");
-                
-            }else if(response.message == "Email ALready Exist kindly change your Email"){
+
+
+            }else if(response.message == "Email Already Exist Kindly Change Your Email"){
                 // $("#emailVerifyModal").modal("show");
                 $("#emailVerifySubmit").prop('disabled', 'true');
-                $("#verifyEmailSpan").val(response.message); 
+                $("#verifyEmailSpan").html(response.message); 
             }
             else{
                 console.log("Some thing wents wrong");
-                console.log(response.message);
                 setTimeout(function (){
                 $("#emailVerifyModalError").modal("show");
             }, 2000);
