@@ -1060,7 +1060,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="row mb-3">
-                        <div class="col-md-12 col-lg-6">
+                        <div class="col-md-12 col-lg-12">
                             <form class="ui form">
                                 <section class="field">
                                     <label class="form-label fw-bold fs-18">Select Tenant</label>
@@ -1105,7 +1105,7 @@
 
                         <div class="col-md-12 col-lg-6">
                             <label class="form-label fw-bold fs-18">Property Information</label>
-                            <select class="form-control select2 form-select d-block" data-placeholder="Select Property"
+                            <select class="form-control select2 form-select d-block select2-show-search" data-placeholder="Select Property"
                                 name="tenants" id="propertyName" required>
                                 <option label="Choose one">
                                 </option>
@@ -1116,7 +1116,7 @@
 
                         <div class="col-md-12 col-lg-6">
                             <label class="form-label fw-bold fs-18">Unit</label>
-                            <select class="form-control select2 form-select d-block" data-placeholder="Select Unit"
+                            <select class="form-control select2 form-select d-block select2-show-search" data-placeholder="Select Unit"
                                 name="tenants" id="propertyUnit" data-bs-placement="top" required>
                                 <option label="Choose one">
                                 </option>
@@ -1144,7 +1144,7 @@
                             </div>
                             <div class="col-md-12 col-lg-6">
                                 <label class="form-label fw-bold fs-18">Frequency</label>
-                                <select class="form-control select2 form-select" data-placeholder="Every Month"
+                                <select class="form-control select2 form-select select2-show-search" data-placeholder="Every Month"
                                     id="frequency" placeholder="Select Frequency">
                                     <option label="Choose one">
                                     </option>
@@ -1168,7 +1168,7 @@
                             </div> -->
                             <div class="col-md-12 col-lg-6">
                                 <label class="form-label fw-bold fs-18">Terms</label>
-                                <select class="form-control select2 form-select" data-placeholder="Every Month"
+                                <select class="form-control select2 form-select select2-show-search" data-placeholder="Every Month"
                                     id="terms" placeholder="Select Terms">
                                     <option label="Choose one">
                                     </option>
@@ -1196,7 +1196,7 @@
                                     <tbody id="add-item-container1">
                                         <tr class="tr">
                                             <td>
-                                                <select name="category" class="form-select form" placeholder="Enter the state where you reside" required>
+                                                <select name="category" class="form-select form select2-show-search" placeholder="Enter the state where you reside" required>
                                                     <option selected="">Choose...</option>
                                                 </select>
                                                 <!-- <span class="text-danger d-none">State is required!</span> -->
@@ -1219,7 +1219,7 @@
                             </div>
                         </div>
                         <div class="col-12 mb-2">
-                            <a href="javascript:;" class="mt-1" id="add-item1">+Add Line Item</a>
+                            <a href="javascript:;" class="mt-1" id="add-item1">+Add Item</a>
                         </div>
                         <div class="col-12 mb-2">
                             <a data-bs-toggle="collapse" href="#collapse-category" role="button" aria-expanded="false" aria-controls="collapse-category">
@@ -1275,7 +1275,7 @@
                                             </table>
                                         </div>
                                         <a href="javascript:;" class="mt-1 text-primary"
-                                            id="add-item1-add">+Add Line Item</a>
+                                            id="add-item1-add">+Add Item</a>
                                     </div>
                                 </div>
                                 <h2 class="h2-personal-inf text-dark mb-3 mt-5">Tax Setting</h2>
@@ -1286,7 +1286,7 @@
                                     <div class="col-lg-3">
                                         <div class="form-group"> <label class="form-label"><b>Select
                                                     Category</b></label> <select name="categories-add"
-                                                id="categories-add" class="form-control form-select"
+                                                id="categories-add" class="form-control form-select select2-show-search"
                                                 data-bs-placeholder="Select Category">
 
                                             </select> </div>
@@ -2521,7 +2521,24 @@
     <!-- BOOTSTRAP JS -->
     <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
     <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-
+    <script src="../assets/plugins/select2/select2.full.min.js"></script>
+    <script src="../assets/js/select2.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#addModal').on('shown.bs.modal', function () {
+               
+                $('.select2-show-search').select2({
+                    dropdownParent: $('#addModal')
+                });
+            });
+            $('#myModal_edit').on('shown.bs.modal', function () {
+                
+                $('.select2-show-search').select2({
+                dropdownParent: $('#myModal_edit')
+            });
+            });
+        }); 
+    </script>
     <!-- SPARKLINE JS-->
     <script src="../assets/js/jquery.sparkline.min.js"></script>
 
@@ -2608,7 +2625,7 @@
 <script>
             $(document).ready(function(){
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
+                    url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2643,7 +2660,7 @@
     });
         $(document).ready(function () {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/ProfileComplete',
+                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2905,7 +2922,7 @@ function dragOverHandler(ev) {
                 return fileName;
             }
             $.ajax({
-                url: 'http://localhost:3000/api/spade/protected',
+                url: 'https://backend.app.spaderent.com/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2932,7 +2949,7 @@ function dragOverHandler(ev) {
             });
             $("#resend-invoice").click(() => {
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/resendEmail',
+                    url: 'https://backend.app.spaderent.com/api/spade/resendEmail',
                     type: 'GET',  // Change the method to POST
                     data: { invoiceID: invoiceId },  // Send the data in the request body
                     contentType: 'application/json',  // Set the content type to JSON
@@ -3115,7 +3132,7 @@ print = true
                         }
                         
                         $.ajax({
-                            url: 'http://localhost:3000/api/spade/upload',
+                            url: 'https://backend.app.spaderent.com/api/spade/upload',
                             type: 'POST',
                             data: uploadFormData,
                             contentType: false,
@@ -3143,8 +3160,8 @@ print = true
                                 }
                                 $("#addModal").modal("hide")
                                 $.ajax({
-                                    // url: 'http://localhost:3000/api/spade/createInvoice',
-                                    url: 'http://localhost:3000/api/spade/createInvoice',
+                                    // url: 'https://backend.app.spaderent.com/api/spade/createInvoice',
+                                    url: 'https://backend.app.spaderent.com/api/spade/createInvoice',
                                     type: 'POST',
                                     data: JSON.stringify(invoiceData),
                                     contentType: 'application/json',
@@ -3200,8 +3217,8 @@ print = true
                                 }
                                 console.log(invoiceData)
                         $.ajax({
-                                    // url: 'http://localhost:3000/api/spade/createInvoice',
-                                    url: 'http://localhost:3000/api/spade/createInvoice',
+                                    // url: 'https://backend.app.spaderent.com/api/spade/createInvoice',
+                                    url: 'https://backend.app.spaderent.com/api/spade/createInvoice',
                                     type: 'POST',
                                     data: JSON.stringify(invoiceData),
                                     contentType: 'application/json',
@@ -3239,7 +3256,7 @@ print = true
             function getData() {
                 $("#preloader").fadeIn("fast");
                 $.ajax({
-                        url: 'http://localhost:3000/api/spade/invoiceCategory',
+                        url: 'https://backend.app.spaderent.com/api/spade/invoiceCategory',
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3259,7 +3276,7 @@ print = true
                     });
                 // console.log(22)
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/viewAllPropertyTenant',
+                    url: 'https://backend.app.spaderent.com/api/spade/viewAllPropertyTenant',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -3309,7 +3326,7 @@ print = true
                 });
 
                 // $.ajax({
-                //     url: 'http://localhost:3000/api/spade/getAllInvoices',
+                //     url: 'https://backend.app.spaderent.com/api/spade/getAllInvoices',
                 //     type: 'GET',
                 //     contentType: false,
                 //     processData: false,
@@ -3563,7 +3580,7 @@ console.log(allFieldsFilled)
                 $("#add-item-container1").append(`
       <tr class="tr">
         <td>
-          <select  name="category" class="form-select form" required>
+          <select  name="category" class="form-select form select2-show-search" required>
             <option selected="">Choose...</option>
             ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
           </select>
@@ -3769,7 +3786,7 @@ $('#collapse-category').on('hidden.bs.collapse', function () {
                     console.log(data)
                     // Send the data to the backend using AJAX
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/addInvoiceCategory', // Replace with your actual backend endpoint URL
+                        url: 'https://backend.app.spaderent.com/api/spade/addInvoiceCategory', // Replace with your actual backend endpoint URL
                         method: 'POST',
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3822,7 +3839,7 @@ if (!categoryExists) {
                     $("#add-item-container1").append(`
       <tr class="tr">
         <td>
-          <select  name="category" class="form-select form" placeholder="Enter the state where you reside" required>
+          <select  name="category" class="form-select form select2-show-search" placeholder="Enter the state where you reside" required>
             <option selected="">Choose...</option>
             ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
           </select>
@@ -3845,7 +3862,7 @@ if (!categoryExists) {
                     $("#add-item-container1").append(`
       <tr class="tr">
         <td>
-          <select name="category" class="form-select form" placeholder="Enter the state where you reside" required>
+          <select name="category" class="form-select form select2-show-search" placeholder="Enter the state where you reside" required>
             <option selected="">Choose...</option>
             ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
           </select>
@@ -4175,7 +4192,7 @@ function resetAccordions() {
             $(document).on("click", "#confirmDelete", () => {
                 $("#myModal_delete").modal("hide")
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/invoiceDelete',
+                    url: 'https://backend.app.spaderent.com/api/spade/invoiceDelete',
                     type: 'DELETE',
                     data: JSON.stringify({
                         id: invoiceId,
@@ -4357,7 +4374,7 @@ function resetAccordions() {
 
                     // Send the data and files to the API using AJAX
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/UpdateInvoice',
+                        url: 'https://backend.app.spaderent.com/api/spade/UpdateInvoice',
                         type: 'PUT',
                         data: formData,
                         contentType: false,
@@ -4382,7 +4399,7 @@ function resetAccordions() {
                 // console.log(invoiceId)
                 $("#changeStatusModal").modal("hide")
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/putInvoiceStatusUpdates',
+                    url: 'https://backend.app.spaderent.com/api/spade/putInvoiceStatusUpdates',
                     type: 'PUT',
                     data: JSON.stringify({
                         id: invoiceId,
@@ -4432,7 +4449,7 @@ function resetAccordions() {
         function logout() {
             $(document).ready(function () {
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/inactiveUser',
+                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
                     type: 'PUT',
                     contentType: false,
                     processData: false,

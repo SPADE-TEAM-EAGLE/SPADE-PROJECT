@@ -67,7 +67,8 @@ const {
   updateAuthQuery,
   addResetTokenTenant,
   propertyUnitCount,
-  getMessageCountByID
+  getMessageCountByID,
+  checkProperty
 } = require("../constants/queries");
 
 const { hashedPassword } = require("../helper/hash");
@@ -920,10 +921,8 @@ exports.property = async (req, res) => {
     }
     const currentDate = new Date();
     // this line check property already exist or not
-    const propertycheckresult = await queryRunner(
-      selectQuery("property", "propertyName", "address","landlordID" ),
-      [propertyName, address,userId]
-    );
+    // const propertycheckresult = await queryRunner( selectQuery("property", "propertyName", "address","landlordID" ),[propertyName, address,userId]);
+    const propertycheckresult = await queryRunner( checkProperty,[propertyName, address,userId]);
     if (propertycheckresult[0].length > 0) {
       throw new Error("Property Already Exist");
     }
@@ -1681,10 +1680,15 @@ exports.viewAllPropertyTenant = async (req, res) => {
           ];
         }
         // Unread messages is start 
-
-      //   const chatCountResult = await queryRunner(getMessageCountByID ,[userId, tenantID]);
-      //   if (chatCountResult[0].length > 0) {
-      // }        
+        // const chatCount = 0;
+        const chatCountResult = await queryRunner(getMessageCountByID ,[userId, tenantID]);
+        // console.log(userId, tenantID);
+        if (chatCountResult[0].length > 0) {
+          PropertyTenantResult[0][i].messageCount = chatCountResult[0][0];
+      }
+      // else{
+      //   PropertyTenantResult[0][i].messageCount = chatCount;
+      // }
       }
       //  ddddd
       res.status(200).json({
@@ -1817,9 +1821,8 @@ exports.getStates = async (req, res) => {
 
 //  ############################# Task property ############################################################
 exports.propertyTask = async (req, res) => {
-  // const { Id } = req.query;
-  const { Id } = req.body;
-  // console.log(req.query)
+  const { Id } = req.query;
+console.log(Id)
   try {
     const taskByIDResult = await queryRunner(propertyTaskQuery, [Id]);
     if (taskByIDResult[0].length > 0) {

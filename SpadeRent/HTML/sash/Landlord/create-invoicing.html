@@ -1390,7 +1390,7 @@
                             </div>
                         </div>
                         <div class="col-12">
-                            <a href="javascript:;" class="mt-1" id="add-item2">+Add Line Item</a>
+                            <a href="javascript:;" class="mt-1" id="add-item2">+Add Item</a>
                         </div>
                         <div class="col-12">
                             <label class="form-label fw-bold fs-18">Memo</label>
@@ -1571,7 +1571,7 @@
                 <div class="modal-body">
                     <div class="row mb-3">
 
-                        <div class="col-md-12 col-lg-6">
+                        <div class="col-md-12 col-lg-12">
                             <form class="ui form">
                                 <section class="field">
                                     <label class="form-label fw-bold fs-18">Select Tenant</label>
@@ -1620,7 +1620,7 @@
 
                         <div class="col-md-12 col-lg-6">
                             <label class="form-label fw-bold fs-18">Property Information</label>
-                            <select class="form-control select2 form-select d-block" data-placeholder="Select Property"
+                            <select class="form-control select2 form-select d-block select2-show-search" data-placeholder="Select Property"
                                 name="tenants" id="propertyName" required>
                                 <option label="Choose one">
                                 </option>
@@ -1631,7 +1631,7 @@
 
                         <div class="col-md-12 col-lg-6">
                             <label class="form-label fw-bold fs-18">Unit</label>
-                            <select class="form-control select2 form-select d-block" data-placeholder="Select Unit"
+                            <select class="form-control select2 form-select d-block select2-show-search" data-placeholder="Select Unit"
                                 name="tenants" id="propertyUnit" required>
                                 <option label="Choose one">
                                 </option>
@@ -1659,7 +1659,7 @@
                             </div>
                             <div class="col-md-12 col-lg-6">
                                 <label class="form-label fw-bold fs-18">Frequency</label>
-                                <select class="form-control select2 form-select" data-placeholder="Every Month"
+                                <select class="form-control select2 form-select select2-show-search" data-placeholder="Every Month"
                                     id="frequency" placeholder="Select Frequency" data-bs-container="#addModal">
                                     <option label="Choose one">
                                     </option>
@@ -1671,7 +1671,7 @@
 
                             <div class="col-md-12 col-lg-6">
                                 <label class="form-label fw-bold fs-18">Terms</label>
-                                <select class="form-control select2 form-select" data-placeholder="Every Month"
+                                <select class="form-control select2 form-select select2-show-search" data-placeholder="Every Month"
                                     id="terms" data-bs-placement="top" placeholder="Select Terms">
                                     <option label="Choose one">
                                     </option>
@@ -1769,7 +1769,7 @@
                             </div>
                         </div> -->
                         <div class="col-12 mb-2">
-                            <a href="javascript:;" class="mt-1" id="add-item1">+Add Line Item</a>
+                            <a href="javascript:;" class="mt-1" id="add-item1">+Add Item</a>
                         </div>
                         <div class="col-12 mb-2">
                             <a data-bs-toggle="collapse" href="#collapse-category" role="button" aria-expanded="false"
@@ -2085,7 +2085,7 @@
                             </div>
                         </div>
                         <div class="col-12 mb-2">
-                            <a href="javascript:;" class="mt-1" id="add-item1_update">+Add Line Item</a>
+                            <a href="javascript:;" class="mt-1" id="add-item1_update">+Add Item</a>
                         </div>
                         <div class="col-md-12 col-lg-8">
                             <textarea class="form-control mb-4" placeholder="Additional Notes" rows="4"
@@ -3922,16 +3922,23 @@
         <!-- BOOTSTRAP JS -->
         <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
         <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+        <script src="../assets/plugins/select2/select2.full.min.js"></script>
+        <script src="../assets/js/select2.js"></script>
         <script>
-            //             // $(document).ready(function() {
-
-
-            // $(function() {
-            // $('#sidebar-placeholder').load('./sidebar.html');
-            // });
-            // $(function() {
-            // $('#navbar-placeholder').load('./header.html');
-            // });})
+            $(document).ready(function () {
+                $('#addModal').on('shown.bs.modal', function () {
+                   
+                    $('.select2-show-search').select2({
+                        dropdownParent: $('#addModal')
+                    });
+                });
+                $('#myModal_edit').on('shown.bs.modal', function () {
+                    
+                    $('.select2-show-search').select2({
+                    dropdownParent: $('#myModal_edit')
+                });
+                });
+            }); 
         </script>
         <!-- SPARKLINE JS-->
         <script src="../assets/js/jquery.sparkline.min.js"></script>
@@ -3962,7 +3969,7 @@
 
         <!-- INTERNAL SELECT2 JS -->
         <script src="../assets/plugins/select2/select2.full.min.js"></script>
-        <script src="../assets/js/select2.js"></script
+        <script src="../assets/js/select2.js"></script>
 
         <!-- INTERNAL Data tables js-->
         <script src="../assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
@@ -4021,7 +4028,7 @@
 <script>
             $(document).ready(function(){
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
+                    url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -4054,7 +4061,7 @@
             $(document).ready(function () {
 
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/ProfileComplete',
+                    url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -4091,7 +4098,7 @@
             var bussinessLogoImg;
             $(document).ready(() => {
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/protected',
+                    url: 'https://backend.app.spaderent.com/api/spade/protected',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -4309,6 +4316,7 @@
                     $("#totalText").text("$ " + 0)
                     $('#toggle-button,.save-invoice').attr("disabled", true);
                     $(".file-grid").empty()
+                    $("#shipper_state_state").parent().empty()
                 }
                 $("#succesModal,#infoModal,#addModal,#myModal_edit,#succesModal_invoice").on('hide.bs.modal', function () {
 
@@ -4608,7 +4616,7 @@
                                 uploadFormData.append('image', file);
                             }
                             $.ajax({
-                                url: 'http://localhost:3000/api/spade/upload',
+                                url: 'https://backend.app.spaderent.com/api/spade/upload',
                                 type: 'POST',
                                 data: uploadFormData,
                                 contentType: false,
@@ -4637,7 +4645,7 @@
                                     }
                                     $("#addModal").modal("hide")
                                     $.ajax({
-                                        url: 'http://localhost:3000/api/spade/createInvoice',
+                                        url: 'https://backend.app.spaderent.com/api/spade/createInvoice',
                                         type: 'POST',
                                         data: JSON.stringify(data),
                                         contentType: 'application/json',
@@ -4713,8 +4721,8 @@
                             }
                             console.log(data)
                             $.ajax({
-                                // url: 'http://localhost:3000/api/spade/createInvoice',
-                                url: 'http://localhost:3000/api/spade/createInvoice',
+                                // url: 'https://backend.app.spaderent.com/api/spade/createInvoice',
+                                url: 'https://backend.app.spaderent.com/api/spade/createInvoice',
                                 type: 'POST',
                                 data: JSON.stringify(data),
                                 contentType: 'application/json',
@@ -4754,7 +4762,7 @@
 
                     $("#preloader").fadeIn("fast");
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/viewAllPropertyTenant',
+                        url: 'https://backend.app.spaderent.com/api/spade/viewAllPropertyTenant',
                         type: 'GET',
                         contentType: false,
                         processData: false,
@@ -4787,7 +4795,7 @@
 
                                 // Build the HTML structure for the item
                                 newItem.html(`<div style="display: flex; gap: 1rem; align-items: center;" id="${tenant.tenantID}">` +
-                                    '<img src="' + + '" alt="" style="width: 65px; height: 65px;">' +
+                                    '<img src="' + tenant.tenantImages.split(",")[0]+ '" alt="" style="width: 65px; height: 65px;">' +
                                     '<div><h3 class="mb-0 line-height: 22px;">' + (tenant.firstName + " " + tenant.lastName) + '</h3>' +
                                     '<span style="line-height: 22px;">Email: ' + tenant.tEmail + '</span>' +
                                     '<span style="line-height: 22px;">Company: ' + tenant.companyName + '</span><br>' +
@@ -4812,7 +4820,7 @@
 
 
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/invoiceCategory',
+                        url: 'https://backend.app.spaderent.com/api/spade/invoiceCategory',
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -4840,7 +4848,7 @@
                         return date.toLocaleDateString('en-US', options);
                     }
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/getAllInvoices',
+                        url: 'https://backend.app.spaderent.com/api/spade/getAllInvoices',
                         type: 'GET',
                         contentType: false,
                         processData: false,
@@ -5040,7 +5048,7 @@
                     $("#add-item-container1").append(`
       <tr class="tr">
         <td>
-          <select id="state" name="category" class="form-select form" placeholder="Enter the state" required>
+          <select id="state" name="category" class="form-select form select2-show-search" placeholder="Enter the state" required>
             <option selected="">Choose...</option>
             ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
           </select>
@@ -5286,7 +5294,7 @@
                     console.log(data)
                     // Send the data to the backend using AJAX
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/addInvoiceCategory', // Replace with your actual backend endpoint URL
+                        url: 'https://backend.app.spaderent.com/api/spade/addInvoiceCategory', // Replace with your actual backend endpoint URL
                         method: 'POST',
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -5339,7 +5347,7 @@
                         $("#add-item-container1").append(`
       <tr class="tr">
         <td>
-          <select id="state" name="category" class="form-select form" placeholder="Enter the state" required>
+          <select id="state" name="category" class="form-select form select2-show-search" placeholder="Enter the state" required>
             <option selected="">Choose...</option>
             ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
           </select>
@@ -5364,7 +5372,7 @@
                         $("#add-item-container1").append(`
       <tr class="tr">
         <td>
-          <select id="state" name="category" class="form-select form" placeholder="Enter the state" required>
+          <select id="state" name="category" class="form-select form select2-show-search" placeholder="Enter the state" required>
             <option selected="">Choose...</option>
             ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
           </select>
@@ -5412,7 +5420,7 @@
                         $("#add-item-container1_update").append(`
       <tr class="tr">
         <td>
-          <select id="state" name="category_update" class="form-select form" placeholder="Enter the state" required>
+          <select id="state" name="category_update" class="form-select form select2-show-search" placeholder="Enter the state" required>
             <option selected="">Choose...</option>
             ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
           </select>
@@ -5420,7 +5428,7 @@
           <span class="text-danger d-none">State is required!</span>
         </td>
         <td>
-          <select id="state" name="property_update" class="form-select form" placeholder="Enter the state" required>
+          <select id="state" name="property_update" class="form-select form select2-show-search" placeholder="Enter the state" required>
             <option selected="">Choose...</option>
           </select>
           <span class="text-danger d-none">State is required!</span>
@@ -5443,7 +5451,7 @@
                         $("#add-item-container1_update").append(`
       <tr class="tr">
         <td>
-          <select id="state" name="category_update" class="form-select form" placeholder="Enter the state" required>
+          <select id="state" name="category_update" class="form-select form select2-show-search" placeholder="Enter the state" required>
             <option selected="">Choose...</option>
             ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
           </select>
@@ -5451,7 +5459,7 @@
           <span class="text-danger d-none">State is required!</span>
         </td>
         <td>
-          <select id="state" name="property_update" class="form-select form" placeholder="Enter the state" required>
+          <select id="state" name="property_update" class="form-select form select2-show-search" placeholder="Enter the state" required>
             <option selected="">Choose...</option>
             <option value="${propertyName[0].propertyID}">${propertyName[0].propertyName}</option>
           </select>
@@ -5645,7 +5653,7 @@
                 })
                 $(document).on('click', ".resend-option", function () {
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/resendEmail',
+                        url: 'https://backend.app.spaderent.com/api/spade/resendEmail',
                         type: 'GET', // Change the method to POST
                         data: {
                             invoiceID: invoiceId
@@ -5949,7 +5957,7 @@
                 $(document).on("click", "#confirmDelete", () => {
                     $("#myModal_delete").modal("hide")
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/invoiceDelete',
+                        url: 'https://backend.app.spaderent.com/api/spade/invoiceDelete',
                         type: 'DELETE',
                         data: JSON.stringify({
                             id: invoiceId,
@@ -6046,7 +6054,7 @@
                         $('#add-item-container1_update').append(
                             `<tr class="tr">
                             <td>
-                                <select id="state" name="category_update" class="form-select form" placeholder="Enter the state" required>
+                                <select id="state" name="category_update" class="form-select form select2-show-search" placeholder="Enter the state" required>
     <option>Choose...</option>
     ${categoryData.map((category) => `<option value="${category.id}" ${category.id == categoryid ? 'selected=" "' : ''}>${category.categorieName}</option>`).join("")}
 </select>
@@ -6054,7 +6062,7 @@
           <span class="text-danger d-none">State is required!</span>
         </td>
         <td>
-          <select id="state" name="property_update" class="form-select form" placeholder="Enter the state" required>
+          <select id="state" name="property_update" class="form-select form select2-show-search" placeholder="Enter the state" required>
             <option selected="">Choose...</option>
             <option value="${propertyName[0].propertyID}" selected=" ">${propertyName[0].propertyName}</option>
           </select>
@@ -6206,7 +6214,7 @@
                                 formData.append('image', file);
                             });
                             $.ajax({
-                                url: 'http://localhost:3000/api/spade/upload',
+                                url: 'https://backend.app.spaderent.com/api/spade/upload',
                                 type: 'POST',
                                 data: formData,
                                 contentType: false,
@@ -6233,7 +6241,7 @@
                                         images: imageArray
                                     }
                                     $.ajax({
-                                        url: 'http://localhost:3000/api/spade/updateInvoice',
+                                        url: 'https://backend.app.spaderent.com/api/spade/updateInvoice',
                                         type: 'PUT',
                                         data: JSON.stringify(invoiceData),
                                         contentType: 'application/json',
@@ -6288,7 +6296,7 @@
                                 images: []
                             }
                             $.ajax({
-                                url: 'http://localhost:3000/api/spade/UpdateInvoice',
+                                url: 'https://backend.app.spaderent.com/api/spade/UpdateInvoice',
                                 type: 'PUT',
                                 data: JSON.stringify(invoiceData),
                                 contentType: 'application/json',
@@ -6324,7 +6332,7 @@
                     // console.log(invoiceId)
                     $("#changeStatusModal").modal("hide")
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/putInvoiceStatusUpdates',
+                        url: 'https://backend.app.spaderent.com/api/spade/putInvoiceStatusUpdates',
                         type: 'PUT',
                         data: JSON.stringify({
                             id: invoiceId,
@@ -6398,7 +6406,7 @@
             function logout() {
                 $(document).ready(function () {
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/inactiveUser',
+                        url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
                         type: 'PUT',
                         contentType: false,
                         processData: false,
@@ -6487,7 +6495,7 @@
 
 
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/verifyMailCheck',
+                    url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")

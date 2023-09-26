@@ -2,8 +2,9 @@ exports.selectQuery = (table, ...field) => {
   if (field.length === 1) {
     // console.log(table,field[0])
     return `SELECT * FROM ${table} WHERE ${field[0]} = ?`;
-  } else if (field.length > 1) {
-    return `SELECT * FROM ${table} WHERE ${field[0]} = ? and ${field[1]} = ? and ${field[2]} = ?`;
+  } 
+  else if (field.length > 1) {
+    return `SELECT * FROM ${table} WHERE ${field[0]} = ? and ${field[1]} = ?`;
   } else {
     return `SELECT * FROM ${table}`;
   }
@@ -212,8 +213,44 @@ exports.createInvoiceCategories =
 exports.updateInvoiceCategories =
   "UPDATE InvoiceCategories SET categorieName = ?,setTaxes = ? WHERE id = ? AND landLordId = ?";
 
-exports.getPropertyReport =
-  "SELECT property.id, property.propertyName, property.propertyType,property.address,property.city,property.state,property.zipCode,property.units, tenants.firstName,tenants.lastName,tenants.email , tenants.phoneNumber FROM property JOIN tenants ON property.id = tenants.propertyID WHERE property.landlordID = ?";
+// exports.getPropertyReport =
+//   "SELECT property.id, property.propertyName, property.propertyType,property.address,property.city,property.state,property.zipCode,property.units, tenants.firstName,tenants.lastName,tenants.email , tenants.phoneNumber FROM property JOIN tenants ON property.id = tenants.propertyID WHERE property.landlordID = ?";
+exports.getPropertyReport =`SELECT 
+property.id,
+property.propertyName,
+property.propertyType,
+property.address,
+property.city,
+property.state,
+property.zipCode,
+property.units,
+tenants.firstName,
+tenants.lastName,
+tenants.email,
+tenants.phoneNumber,
+COALESCE(occupied_units.count, 0) as occupied_units_count,
+COALESCE(vacant_units.count, 0) as vacant_units_count,
+CASE 
+    WHEN COALESCE(occupied_units.count, 0) > (property.units / 2) THEN 'Occupied'
+    ELSE 'Vacant'
+END as occupancy_status
+FROM property 
+JOIN tenants ON property.id = tenants.propertyID
+LEFT JOIN (
+SELECT propertyID, COUNT(*) as count
+FROM propertyunits
+WHERE status = 'Occupied'
+GROUP BY propertyID
+) as occupied_units ON property.id = occupied_units.propertyID
+LEFT JOIN (
+SELECT propertyID, COUNT(*) as count
+FROM propertyunits
+WHERE status = 'Vacant'
+GROUP BY propertyID
+) as vacant_units ON property.id = vacant_units.propertyID
+WHERE property.landlordID = ?;
+
+`
 exports.getTenantReport =
   "SELECT tenants.id AS tenantID, tenants.companyName, tenants.firstName, tenants.lastName,tenants.leaseStartDate,tenants.leaseEndDate,tenants.phoneNumber,property.propertyType,property.propertyName,property.id AS propertyId ,property.units FROM tenants JOIN property ON tenants.propertyID = property.id WHERE tenants.landlordID = ?";
 exports.getTaskReportData =
@@ -224,6 +261,7 @@ invoice.created_at,
 invoice.totalAmount,
 invoice.dueDate,
 invoice.recurringNextDate,
+invoice.status,
 property.propertyName,
 property.address,
 property.city,
@@ -592,7 +630,7 @@ exports.insertInvoiceImage =
   "INSERT INTO invoiceimages (invoiceID, Image,imageKey) VALUES (?,?,?)";
 exports.updateUnitsTenant =
   "UPDATE propertyunits SET  status = ?  where id = ? ";
-exports.getTenantsById = `SELECT l.Phone AS landlordPhone, p.id AS propertyID, p.propertyName, p.address AS pAddress, p.city AS pCity, p.state AS pState, p.zipCode AS pZipCode, p.propertyType, p.propertySQFT, p.status AS pStatus, p.units AS pUnits, t.id AS tenantID, t.landlordID, t.firstName, t.lastName, t.companyName, i.recurringNextDate,t.email AS tEmail, t.phoneNumber AS tPhoneNumber, t.Address AS tAddress, t.city AS tCity, t.state AS tState, t.zipcode AS tZipcode, t.rentAmount, t.gross_or_triple_lease, t.baseRent, t.tripleNet, t.leaseStartDate, t.leaseEndDate, t.increaseRent, pu.unitNumber, pu.Area AS unitArea, pu.unitDetails, pu.status AS unitStatus, GROUP_CONCAT(pi.image) AS images
+exports.getTenantsById = `SELECT l.Phone AS landlordPhone, p.id AS propertyID, p.propertyName, p.address AS pAddress, p.city AS pCity, p.state AS pState, p.zipCode AS pZipCode, p.propertyType, p.propertySQFT, p.status AS pStatus, p.units AS pUnits, t.id AS tenantID, t.landlordID, t.firstName, t.lastName, t.companyName, i.recurringNextDate,t.email AS tEmail, t.phoneNumber AS tPhoneNumber, t.Address AS tAddress,t.image AS tenantImage ,t.city AS tCity, t.state AS tState, t.zipcode AS tZipcode, t.rentAmount, t.gross_or_triple_lease, t.baseRent, t.tripleNet, t.leaseStartDate, t.leaseEndDate, t.increaseRent, pu.unitNumber, pu.Area AS unitArea, pu.unitDetails, pu.status AS unitStatus, GROUP_CONCAT(pi.image) AS images
 FROM tenants AS t
 INNER JOIN property AS p ON t.propertyID = p.id
 LEFT JOIN invoice AS i ON t.id = i.tenantID
@@ -679,8 +717,11 @@ t.baseRent,
 t.tripleNet,
 t.leaseStartDate,
 t.leaseEndDate,
+t.tenantCreated_at,
 t.increaseRent,
+t.tenantCreated_at,
 t.image,
+t.active,
 pu.id as propertyUnitID,
 pu.unitNumber,
 pu.Area AS unitArea,
@@ -931,8 +972,11 @@ exports.getMessages =
 exports.getMessageCount =
 `select count(message) from messages where isRead = "1" AND receiverID = ?`;
 
+exports.updateMessageCountLandlord =
+`UPDATE messages SET isRead = "0" where receiverID = ? AND sender = ?`;
 exports.updateMessageCount =
 `UPDATE messages SET isRead = "0" where receiverID = ?`;
+
 exports.getMessageCountByID =
 `select count(message) from messages where isRead = "1" AND receiverID = ? AND sender = ?`;
 // dashboard task Count
@@ -1028,3 +1072,6 @@ exports.prospectusInsightQD = "WITH Months AS (SELECT 1 AS Month UNION SELECT 2 
 exports.prospectusInsightEN = "SELECT count(prospectusStatus) as totalProspectus, SUM(CASE WHEN prospectusStatus = 'Engaged' THEN 1 ELSE 0 END) AS Engaged, SUM(CASE WHEN prospectusStatus = 'Nurturing' THEN 1 ELSE 0 END) AS Nurturing FROM spade_Rent.prospectus WHERE landlordId = ? AND createdDate >= ? AND createdDate <= ?";
 exports.propertyUnitCount = "SELECT *, sum(CASE WHEN propertyunits.status = 'Vacant' then 1 else 0 END ) as Vacant, sum(CASE WHEN propertyunits.status = 'Occupied' then 1 else 0 END ) as Occupied FROM spade_Rent.propertyunits where propertyID = ? ";
 exports.updateBusinessLogo = "UPDATE users SET businessLogo = ? , businessLogoKey = ? where id = ? ";
+exports.updateUserEmail =
+"UPDATE users SET Email = ?, updated_at = ? where id = ?";
+exports.checkProperty = "SELECT * FROM property where propertyName = ? AND address = ? AND landlordID = ? ";

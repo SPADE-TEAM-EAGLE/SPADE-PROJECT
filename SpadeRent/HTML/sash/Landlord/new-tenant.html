@@ -908,7 +908,7 @@ color: #000;
                                     <div class="col-md-4">
                                         <label for="inputState" class="form-label fw-bold">State<spnan
                                             class="text-danger">*</span></label>
-                                        <select id="state" class="form-select form" required>
+                                        <select id="state" class="form-select form select2-show-search" required>
                                         <option selected>Choose...</option>
                                     </select>
                                         <span class="text-danger d-none">State is required!</span>
@@ -939,7 +939,7 @@ color: #000;
                                     <div class="col-md-4">
                                         <label for="inputEmail4" class="form-label">Select Property<span
                                             class="text-danger"> *</span></label>
-                                        <select id="property" class="form-select" required>
+                                        <select id="property" class="form-select select2-show-search" required>
                                         <option selected>Choose...</option>
                                         <option>...</option>
                                     </select>
@@ -948,7 +948,7 @@ color: #000;
                                     <div class="col-md-4">
                                         <label for="inputEmail4" class="form-label">Select Property Unit<span
                                             class="text-danger"> *</span></label>
-                                        <select id="unit" class="form-select" required>
+                                        <select id="unit" class="form-select select2-show-search" required>
                                         <option selected>Choose...</option>
                                         
                                     </select>
@@ -1105,7 +1105,7 @@ color: #000;
                                                     </div>
                                                     
                                                 </div>
-                                                <a href="javascript:;" class="mt-1" id="add-item">+Add Line Item</a>
+                                                <a href="javascript:;" class="mt-1" id="add-item">+Add Item</a>
                                             </div>
                                         </div>
                                     </div>
@@ -2368,7 +2368,24 @@ color: #000;
     <!-- BOOTSTRAP JS -->
     <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
     <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-
+    <script src="../assets/plugins/select2/select2.full.min.js"></script>
+    <script src="../assets/js/select2.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#addModal').on('shown.bs.modal', function () {
+               
+                $('.select2-show-search').select2({
+                    dropdownParent: $('#addModal')
+                });
+            });
+            $('#myModal_edit').on('shown.bs.modal', function () {
+                
+                $('.select2-show-search').select2({
+                dropdownParent: $('#myModal_edit')
+            });
+            });
+        }); 
+    </script>
     <!-- SPARKLINE JS-->
     <script src="../assets/js/jquery.sparkline.min.js"></script>
 
@@ -2510,7 +2527,7 @@ color: #000;
 <script>
             $(document).ready(function(){
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
+                    url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2537,7 +2554,7 @@ color: #000;
     <script>
         $(document).ready(function() {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/ProfileComplete',
+                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2580,7 +2597,7 @@ color: #000;
             $('#addModal_units_close').click(() => {
                 // alert(1)
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/getPropertyUnitsTenant',
+                    url: 'https://backend.app.spaderent.com/api/spade/getPropertyUnitsTenant',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -2653,11 +2670,91 @@ color: #000;
                         console.log('Error: ' + error);
                     }
                 });
+           
+           
             })
+            $('#addModal_units').on('hidden.bs.modal', function () {
+  // alert(1)
+  $.ajax({
+                    url: 'https://backend.app.spaderent.com/api/spade/getPropertyUnitsTenant',
+                    type: 'GET',
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        var properties = response.data; // Assuming the response data is an array of property objects
+                        console.log("property", response.data)
+                        // Populate Select Property dropdown
+                        var propertySelect = $('#property');
+                        propertySelect.empty(); // Clear existing options
+                        propertySelect.append($('<option></option>')
+                            .text("Choose...")
+                        )
+                        properties.forEach(function (property) {
+                            var option = $('<option></option>')
+                                .text(property.propertyName)
+                                .val(property.id);
+                            propertySelect.append(option);
+                        });
 
+                        // Handle property selection change
+                        propertySelect.change(function () {
+                            var selectedPropertyId = $(this).val();
+
+                            // Find the selected property object
+                            var selectedProperty = properties.find(function (property) {
+                                return property.id == selectedPropertyId;
+                            });
+
+                            // Populate Select Property Unit dropdown
+                            var propertyUnitSelect = $('#unit');
+                            // Clear existing options
+                            propertyUnitSelect.empty()
+
+
+                            if (selectedProperty.vacantUnits.length === 0) {
+
+                                propertyUnitSelect.prop("disabled", true);
+                                propertyUnitSelect.append($('<option></option>')
+                                    .text("No unit available!!"))
+                                    $('#addUnitBtn').show()
+                            } else {
+                                $('#addUnitBtn').hide()
+                                propertyUnitSelect.prop("disabled", false);
+                                propertyUnitSelect.append($('<option></option>')
+                                    .text("Choose..."))
+
+                                selectedProperty.vacantUnits.forEach(function (unit) {
+
+                                    var option = $('<option></option>')
+                                        .text(unit.unitNumber)
+                                        .val(unit.id);
+                                    propertyUnitSelect.append(option);
+                                });
+                            }
+
+                        });
+                        $('#addUnitBtn').hide()
+                        $('#addModal_units').modal('hide')
+
+                    },
+                    error: function (xhr, status, error) {
+                        $("#myModal_warning_connection").modal("show");
+                        setTimeout(function () {
+                            $('#myModal_warning_connection').modal('hide');
+
+                        }, 2000);
+                        console.log('Error: ' + error);
+                    }
+                });
+           
+           
+            })
             function getData2() {
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/PropertyUnits',
+                    url: 'https://backend.app.spaderent.com/api/spade/PropertyUnits',
                     type: 'GET',
                     data: {
 
@@ -2779,7 +2876,7 @@ color: #000;
                         $("#add-units1").click(() => {
                             $("#add-units1").prop("disabled", true)
                             $.ajax({
-                                url: 'http://localhost:3000/api/spade/addMoreUnits',
+                                url: 'https://backend.app.spaderent.com/api/spade/addMoreUnits',
                                 type: 'POST',
                                 data: JSON.stringify({
                                     "propertyID": propertyId2
@@ -2823,7 +2920,7 @@ color: #000;
                             });
                             console.log(propertyId2)
                             $.ajax({
-                                url: 'http://localhost:3000/api/spade/PropertyUnitsUpdates',
+                                url: 'https://backend.app.spaderent.com/api/spade/PropertyUnitsUpdates',
                                 type: 'PUT',
                                 data: JSON.stringify({
                                     id: values[0],
@@ -2869,7 +2966,7 @@ color: #000;
                                 // console.log(values)
                             });
                             $.ajax({
-                                url: 'http://localhost:3000/api/spade/deleteMoreUnits',
+                                url: 'https://backend.app.spaderent.com/api/spade/deleteMoreUnits',
                                 type: 'DELETE',
                                 data: JSON.stringify({
                                     "propertyID": propertyId2,
@@ -2964,7 +3061,7 @@ color: #000;
                     $("#succesModal").modal("hide")
                     console.log(tenantID)
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/sendInvitationLink',
+                        url: 'https://backend.app.spaderent.com/api/spade/sendInvitationLink',
                         type: 'POST',
                         data: JSON.stringify({
                             tenantID: tenantID
@@ -2988,7 +3085,7 @@ color: #000;
                 })
                 // $("#succesModal").modal("show")
             $.ajax({
-                url: 'http://localhost:3000/api/spade/getStates',
+                url: 'https://backend.app.spaderent.com/api/spade/getStates',
                 method: 'GET',
                 success: function({
                     data
@@ -3013,7 +3110,7 @@ color: #000;
                 }
             });
             $.ajax({
-                url: 'http://localhost:3000/api/spade/protected',
+                url: 'https://backend.app.spaderent.com/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3049,7 +3146,7 @@ color: #000;
                 }
             });
             $.ajax({
-                url: 'http://localhost:3000/api/spade/getPropertyUnitsTenant',
+                url: 'https://backend.app.spaderent.com/api/spade/getPropertyUnitsTenant',
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -3262,7 +3359,7 @@ color: #000;
                 $("#addModal").modal("hide")
                     // Make the AJAX call
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/tenants',
+                    url: 'https://backend.app.spaderent.com/api/spade/tenants',
                     type: 'POST',
                     data: JSON.stringify(formData),
                     contentType: "application/json; charset=utf-8",
@@ -3642,7 +3739,7 @@ resetAccordions()
     function logout() {
         $(document).ready(function () {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/inactiveUser',
+                url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
                 type: 'PUT',
                 contentType: false,
                 processData: false,

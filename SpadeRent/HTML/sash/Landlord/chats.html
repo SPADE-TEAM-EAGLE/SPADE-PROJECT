@@ -182,12 +182,14 @@
         /* input:focus {
             border: 3px solid #555 !important;
         } */
-        .border-green{
+        .border-green {
             border: 1px solid green !important;
         }
-        .border-red{
+
+        .border-red {
             border: 1px solid red !important;
         }
+
         .panel-body {
             padding: 0px;
         }
@@ -2033,7 +2035,14 @@
                                             <div class="tab-content main-chat-list flex-2 ">
                                                 <div class="tab-pane active" id="ChatList">
                                                     <div class="main-chat-list tab-pane" id="tab-pane-ll">
-
+                                                        <div class="dimmer active">
+                                                            <div class="lds-ring">
+                                                                <div></div>
+                                                                <div></div>
+                                                                <div></div>
+                                                                <div></div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                     <!-- main-chat-list -->
                                                 </div>
@@ -2492,9 +2501,19 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-6 ">
+                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-6">
                                 <!-- chats start  -->
-                                <div id="chat" class="chat" style="display: none;">
+
+                                <div class="dimmer active d-none" id="chatLoader">
+                                    <div class="lds-ring">
+                                        <div></div>
+                                        <div></div>
+                                        <div></div>
+                                        <div></div>
+                                    </div>
+                                </div>
+
+                                <div id="chat" class="chat d-none">
                                     <div class="conversation">
                                         <div class="head">
                                             <div class="person avatar">
@@ -2503,7 +2522,8 @@
 
                                             <h4 class="person-name mb-0" style="line-height: initial;"><b
                                                     id="person-name-bold"></b> <br>
-                                                <p class="text-success fw-bold fs-12 m-0" id="online">Online</p>
+                                                <p class="text-success fw-bold fs-12 m-0" id="online"><span
+                                                        class="dot-label bg-success"></span>Online</p>
                                             </h4>
                                             <div class="buttons" style="display: none;">
                                                 <svg title="Call" class="audio-call icon" stroke="currentColor"
@@ -3365,37 +3385,24 @@
         <script src="../assets/js/getNotification.js"></script>
         <script src="../assets/js/push_notification.js"></script>
         <script>
-            $(document).ready(function() {
-                $('#input-message').on('input', function() {
+            $(document).ready(function () {
+                $('#input-message').on('input', function () {
                     var inputLength = $(this).val().length;
-                    
+
                     if (inputLength === 255) {
                         $(this).removeClass('border-green').addClass('border-red');
+                        $(this).addClass('text-danger');
                     } else {
                         $(this).removeClass('border-red').addClass('border-green');
+                        $(this).removeClass('text-danger');
                     }
                 });
             });
         </script>
         <script>
-            $(document).ready(function(){
+            $(document).ready(function () {
                 $.ajax({
-                        url: 'http://localhost:3000/api/spade/updateMessagesCountLandlord',
-                        type: 'PUT',
-                        contentType: false,
-                        processData: false,
-                        headers: {
-                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                        },
-                        success: function (response) {
-                            console.log(response);
-                        },
-                        error: function (xhr, status, error) {
-                            console.log(error);
-                        }
-                    });
-                $.ajax({
-                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
+                    url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3416,6 +3423,7 @@
                 });
             });
         </script>
+
         <script>
             function initializeWebSocket() {
                 var socket = io('https://engage.app.spaderent.com');
@@ -3441,9 +3449,9 @@
             localStorage.removeItem('tenantName');
             // var socket = io('https://engage.app.spaderent.com');
             $(document).ready(function () {
-                
+
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/ProfileComplete',
+                    url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3469,7 +3477,7 @@
                 let userEmail;
                 let emailChange = false;
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/protected',
+                    url: 'https://backend.app.spaderent.com/api/spade/protected',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3513,6 +3521,7 @@
                 // const socket = io("http://ec2-52-45-181-206.compute-1.amazonaws.com:3000");
                 // socket.emit('joinRoom', { chatId: localStorage.getItem("chatId") });
                 $('#send-text').on('click', function (ev) {
+                    $('#input-message').removeClass('border-red').removeClass('border-green').removeClass('text-danger');
                     const msg_again1 = $('#input-message').val().trim();
                     if (msg_again1 !== "") {
                         var messageData = {
@@ -3523,7 +3532,7 @@
                             receiverID: Number(localStorage.getItem("tenantId"))
                         };
                         $.ajax({
-                            url: 'http://localhost:3000/api/spade/createNewMessage',
+                            url: 'https://backend.app.spaderent.com/api/spade/createNewMessage',
                             type: 'POST',
                             data: JSON.stringify(messageData),
                             contentType: 'application/json',
@@ -3543,8 +3552,10 @@
                     }
                 });
                 $('#input-message').on('keypress', function (ev) {
+
                     const msg_again2 = $('#input-message').val().trim();
                     if (ev.key === 'Enter' && msg_again2 !== "") {
+                        $('#input-message').removeClass('border-red').removeClass('border-green').removeClass('text-danger');
                         // var input_message = $('#input-message').val();
                         var messageData = {
                             chatId: localStorage.getItem("chatId"),
@@ -3554,7 +3565,7 @@
                             receiverID: Number(localStorage.getItem("tenantId"))
                         };
                         $.ajax({
-                            url: 'http://localhost:3000/api/spade/createNewMessage',
+                            url: 'https://backend.app.spaderent.com/api/spade/createNewMessage',
                             type: 'POST',
                             data: JSON.stringify(messageData),
                             contentType: 'application/json',
@@ -3777,7 +3788,7 @@
                     var str = "";
 
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/upload',
+                        url: 'https://backend.app.spaderent.com/api/spade/upload',
                         type: 'POST',
                         data: uploadFormData,
                         contentType: false,
@@ -3805,7 +3816,7 @@
                                 receiverID: Number(localStorage.getItem("tenantId"))
                             };
                             $.ajax({
-                                url: 'http://localhost:3000/api/spade/createNewMessage',
+                                url: 'https://backend.app.spaderent.com/api/spade/createNewMessage',
                                 type: 'POST',
                                 data: JSON.stringify(messageData2),
                                 contentType: 'application/json',
@@ -3846,6 +3857,8 @@
             function chatTenant(tenatId, tenatName, element) {
                 // console.log(typeof String(tenatId));
                 // receivedMessages.clear();
+                $('#chatLoader').removeClass('d-none')
+                $('#chat').addClass('d-none')
                 fetchChatMessages()
                 // console.log(element);
                 const parentDiv = $(element).find(".media.new");
@@ -3864,7 +3877,7 @@
                     };
 
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/accessChats',
+                        url: 'https://backend.app.spaderent.com/api/spade/accessChats',
                         type: 'POST',
                         data: JSON.stringify(tenantIdd),
                         contentType: 'application/json',
@@ -3887,7 +3900,26 @@
                                 localStorage.setItem("tenantName", tenatName)
                                 socket.emit('joinRoom', { chatId: localStorage.getItem("chatId") });
                                 $.ajax({
-                                    url: 'http://localhost:3000/api/spade/getUserById/' + Number(tenatId) + '/tenant',
+                                    url: 'https://backend.app.spaderent.com/api/spade/updateMessagesCountLandlord',
+                                    type: 'PUT',
+                                    data: JSON.stringify({
+                                        sender: tenatId
+                                    }),
+                                    contentType: 'application/json',
+                                    headers: {
+                                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                                    },
+                                    success: function (response) {
+                                        console.log("updateMessagesCountLandlord");
+                                        console.log(response);
+                                        $(`#chat` + tenatId).text('0')
+                                    },
+                                    error: function (xhr, status, error) {
+                                        console.log(error);
+                                    }
+                                });
+                                $.ajax({
+                                    url: 'https://backend.app.spaderent.com/api/spade/getUserById/' + Number(tenatId) + '/tenant',
                                     type: 'GET',
                                     contentType: false,
                                     processData: false,
@@ -3929,7 +3961,7 @@
                                         }
 
                                         $.ajax({
-                                            url: 'http://localhost:3000/api/spade/LandlordMessages/' + localStorage.getItem("chatId"),
+                                            url: 'https://backend.app.spaderent.com/api/spade/LandlordMessages/' + localStorage.getItem("chatId"),
                                             type: 'GET',
                                             contentType: 'application/json',
                                             processData: false,
@@ -3937,12 +3969,33 @@
                                                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                             },
                                             success: function (response) {
+                                                $.ajax({
+                                                    url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
+                                                    method: 'GET',
+                                                    headers: {
+                                                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                                                    },
+                                                    success: function (response) {
+                                                        console.log("getMessagesCountLandlord");
+                                                        console.log(response.Count['count(message)']);
+                                                        $('#chatCounter').text(response.Count['count(message)'])
+                                                    },
+                                                    error: function (xhr, status, error) {
+                                                        $("#myModal_warning").modal("show");
+                                                        setTimeout(function () {
+                                                            $('#myModal_warning').modal('hide');
+                                                            window.location = '../Landlord/login_module.html';
+                                                        }, 2000);
+                                                        console.log(error);
+                                                    }
+                                                });
                                                 var messs1 = "";
 
                                                 var messDiv = $('#messages')
                                                 messDiv.empty();
                                                 $('#person-name-bold').text(tenatName)
-                                                $('#chat').show()
+                                                $('#chatLoader').addClass('d-none')
+                                                $('#chat').removeClass('d-none')
                                                 console.log(response.data.length);
                                                 if (response.message == 'Messages fetched successfully' && response.data.length > 0) {
                                                     var randomImg = "../assets/images/users/5.jpg";
@@ -4058,7 +4111,7 @@
 
             $(document).ready(function () {
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/viewAllPropertyTenant',
+                    url: 'https://backend.app.spaderent.com/api/spade/viewAllPropertyTenant',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -4084,16 +4137,22 @@
 
                                 var row = `
                                 <a href="javascript:void(0)" onclick="chatTenant(` + tenant.tenantID + `,'` + tenant.firstName + ` ` + tenant.lastName + `',this)"><div class="media new border-top-0 " data-id="` + tenant.tenantID + `">
-                                                                <div class="main-img-user">
+                                                              
+                                    <div class="main-img-user">
                                                                     <img alt="" src="` + (tenant.image != null && tenant.image != " " ? tenant.image : randomImg1) + `">
+                                                                    <span class="bg-primary" id="chat`+ tenant.tenantID + `">` + tenant.messageCount['count(message)'] + `</span>
                                                                 </div>
                                                                 <div class="media-body">
                                                                     <div class="media-contact-name">
-                                                                        <span class=" fw-bold">` + tenant.firstName + ` ` + tenant.lastName + `
+                                                                        <span class=" fw-bold">` + tenant.firstName + ` ` + tenant.lastName + `</span>
+                                                                        
+                                                                        ` + (tenant.active == 1 ? `<span class="fw-bold text-success" style="display: flex;justify-content: center;align-items: baseline;"><span class="dot-label bg-success"></span>Online</span>` : `<span class="fw-bold text-danger" style="display: flex;justify-content: center;align-items: baseline;"><span class="dot-label bg-danger"></span>Offline</span>`) + `
+                                                                        <span class="fw-bold d-none">online</span>
                                                                     </div>
                                                                     <p>` + tenant.tEmail + `</p>
                                                                 </div>
-                                                                
+                                                           
+                                                            <span class="badge bg-primary side-badge d-none" style="top: 22px;" >`+ tenant.messageCount['count(message)'] + `</span>
                                                             </div></a>`;
                                 tab_pane.append(row);
                             });
@@ -4110,7 +4169,7 @@
             function logout() {
                 $(document).ready(function () {
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/inactiveUser',
+                        url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
                         type: 'PUT',
                         contentType: false,
                         processData: false,

@@ -1344,7 +1344,7 @@
                                         <div class="form-group">
                                             <label for="inputState" class="form-label fw-bold">State<spnan
                                                     class="text-danger"> *</span></label>
-                                            <select id="state" class="form-select form form-select" required>
+                                            <select id="state" class="form-select form form-select select2-show-search" required>
                                                 <option selected>Choose...</option>
                                             </select>
                                             <span class="text-danger d-none">State is required!</span>
@@ -1382,7 +1382,7 @@
                                     <div class="col-md-4">
                                         <label for="inputEmail4" class="form-label">Select Property<span
                                                 class="text-danger"> *</span></label>
-                                        <select id="property" class="form-select form form-select" required>
+                                        <select id="property" class="form-select form form-select select2-show-search" required>
                                             <option selected>Choose...</option>
 
                                         </select>
@@ -1391,7 +1391,7 @@
                                     <div class="col-md-4">
                                         <label for="inputEmail4" class="form-label">Select Property Unit<span
                                                 class="text-danger"> *</span></label>
-                                        <select id="unit" class="form-select" required>
+                                        <select id="unit" class="form-select select2-show-search" required>
                                             <option selected>Choose...</option>
 
                                         </select>
@@ -2165,14 +2165,14 @@
                                                                 checked>
                                                         </div>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a class="text-dark"
+                                                    <!-- <li class="d-flex justify-content-between"><a class="text-dark"
                                                             href="javascript:void(0)">Date Modified</a>
                                                         <div class="form-check m-0">
                                                             <input class="form-check-input mt-2" type="radio"
                                                                 name="exampleRadios" id="exampleRadios1"
                                                                 value="option1">
                                                         </div>
-                                                    </li>
+                                                    </li> -->
                                                     <li class="d-flex justify-content-between"><a class="text-dark"
                                                             href="javascript:void(0)">Ascending</a>
                                                         <div class="form-check m-0">
@@ -2191,7 +2191,7 @@
                                                             href="javascript:void(0)">Recently Added</a>
                                                         <div class="form-check m-0">
                                                             <input class="form-check-input mt-2" type="radio"
-                                                                name="exampleRadios" id="exampleRadios1"
+                                                                name="exampleRadios" id="created-at"
                                                                 value="option1">
                                                         </div>
                                                     </li>
@@ -2257,6 +2257,13 @@
                                                         </div>
                                                     </li>
                                                     <li class="d-flex justify-content-between"><a class="text-dark"
+                                                        href="javascript:void(0)">Contact Info</a>
+                                                    <div class="form-check m-0">
+                                                        <input type="checkbox" class="form-check-input mt-2"
+                                                            id="exampleCheck1" checked>
+                                                    </div>
+                                                </li>
+                                                    <li class="d-flex justify-content-between"><a class="text-dark"
                                                             href="javascript:void(0)">Property Address</a>
                                                         <div class="form-check m-0">
                                                             <input type="checkbox" class="form-check-input mt-2"
@@ -2307,7 +2314,7 @@
                                                     <tr>
                                                         <th>SELECT</th>
                                                         <th>#</th>
-                                                        <th class="d-non">TENANT ID</th>
+                                                        <th class="d-none">TENANT ID</th>
                                                         <th>TENANT NAME</th>
                                                         <th>CONTACT INFO</th>
                                                         <th>PROPERTY ADDRESS</th>
@@ -2928,6 +2935,24 @@
     <!-- BOOTSTRAP JS -->
     <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
     <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../assets/plugins/select2/select2.full.min.js"></script>
+    <script src="../assets/js/select2.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#addModal').on('shown.bs.modal', function () {
+               
+                $('.select2-show-search').select2({
+                    dropdownParent: $('#addModal')
+                });
+            });
+            $('#myModal_edit').on('shown.bs.modal', function () {
+                
+                $('.select2-show-search').select2({
+                dropdownParent: $('#myModal_edit')
+            });
+            });
+        }); 
+    </script>
     <!-- SPARKLINE JS-->
     <script src="../assets/js/jquery.sparkline.min.js"></script>
 
@@ -3019,7 +3044,7 @@
 <script>
             $(document).ready(function(){
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
+                    url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3049,7 +3074,7 @@
     <script>
         $(document).ready(function () {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/ProfileComplete',
+                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3119,7 +3144,7 @@
             $('#addModal_units_close').click(() => {
                 // alert(1)
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/getPropertyUnitsTenant',
+                    url: 'https://backend.app.spaderent.com/api/spade/getPropertyUnitsTenant',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -3190,11 +3215,88 @@
                         console.log('Error: ' + error);
                     }
                 });
+          
+          
             })
+            $('#addModal_units').on('hidden.bs.modal', function () {
+                $.ajax({
+                    url: 'https://backend.app.spaderent.com/api/spade/getPropertyUnitsTenant',
+                    type: 'GET',
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        var properties = response.data; // Assuming the response data is an array of property objects
+                        console.log("property", response.data)
+                        // Populate Select Property dropdown
+                        var propertySelect = $('#property');
+                        propertySelect.empty(); // Clear existing options
+                        propertySelect.append($('<option></option>')
+                            .text("Choose...")
+                        )
+                        properties.forEach(function (property) {
+                            var option = $('<option></option>')
+                                .text(property.propertyName)
+                                .val(property.id);
+                            propertySelect.append(option);
+                        });
 
+                        // Handle property selection change
+                        propertySelect.change(function () {
+                            var selectedPropertyId = $(this).val();
+
+                            // Find the selected property object
+                            var selectedProperty = properties.find(function (property) {
+                                return property.id == selectedPropertyId;
+                            });
+
+                            // Populate Select Property Unit dropdown
+                            var propertyUnitSelect = $('#unit');
+                            // Clear existing options
+                            propertyUnitSelect.empty()
+
+
+                            if (selectedProperty.vacantUnits.length === 0) {
+
+                                propertyUnitSelect.prop("disabled", true);
+                                propertyUnitSelect.append($('<option></option>')
+                                    .text("No unit available!!"))
+                            } else {
+                                propertyUnitSelect.prop("disabled", false);
+                                propertyUnitSelect.append($('<option></option>')
+                                    .text("Choose..."))
+
+                                selectedProperty.vacantUnits.forEach(function (unit) {
+
+                                    var option = $('<option></option>')
+                                        .text(unit.unitNumber)
+                                        .val(unit.id);
+                                    propertyUnitSelect.append(option);
+                                });
+                            }
+
+                        });
+                        $('#addUnitBtn').hide()
+                        $('#addModal_units').modal('hide')
+
+                    },
+                    error: function (xhr, status, error) {
+                        $("#myModal_warning_connection").modal("show");
+                        setTimeout(function () {
+                            $('#myModal_warning_connection').modal('hide');
+
+                        }, 2000);
+                        console.log('Error: ' + error);
+                    }
+                });
+          
+          
+        });
             function getData2() {
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/PropertyUnits',
+                    url: 'https://backend.app.spaderent.com/api/spade/PropertyUnits',
                     type: 'GET',
                     data: {
 
@@ -3316,7 +3418,7 @@
                         $("#add-units1").click(() => {
                             $("#add-units1").prop("disabled", true)
                             $.ajax({
-                                url: 'http://localhost:3000/api/spade/addMoreUnits',
+                                url: 'https://backend.app.spaderent.com/api/spade/addMoreUnits',
                                 type: 'POST',
                                 data: JSON.stringify({
                                     "propertyID": propertyId2
@@ -3360,7 +3462,7 @@
                             });
                             console.log(propertyId2)
                             $.ajax({
-                                url: 'http://localhost:3000/api/spade/PropertyUnitsUpdates',
+                                url: 'https://backend.app.spaderent.com/api/spade/PropertyUnitsUpdates',
                                 type: 'PUT',
                                 data: JSON.stringify({
                                     id: values[0],
@@ -3406,7 +3508,7 @@
                                 // console.log(values)
                             });
                             $.ajax({
-                                url: 'http://localhost:3000/api/spade/deleteMoreUnits',
+                                url: 'https://backend.app.spaderent.com/api/spade/deleteMoreUnits',
                                 type: 'DELETE',
                                 data: JSON.stringify({
                                     "propertyID": propertyId2,
@@ -3466,7 +3568,7 @@
 
 
             $.ajax({
-                url: 'http://localhost:3000/api/spade/getStates',
+                url: 'https://backend.app.spaderent.com/api/spade/getStates',
                 method: 'GET',
                 success: function ({
                     data
@@ -3501,7 +3603,7 @@
             let tenantIdElement
 
             $.ajax({
-                url: 'http://localhost:3000/api/spade/getPropertyUnitsTenant',
+                url: 'https://backend.app.spaderent.com/api/spade/getPropertyUnitsTenant',
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -3707,7 +3809,7 @@
                 edit = true
                 tenantIdElement = $(this).closest("tr").find(".tenant-id");
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/sendInvitationLink',
+                    url: 'https://backend.app.spaderent.com/api/spade/sendInvitationLink',
                     type: 'POST',
                     data: JSON.stringify({
                         tenantID: tenantIdElement.text()
@@ -3873,7 +3975,7 @@
                 // console.log(formData)
                 // if(selectedFiles.length>=1){
                 //     $.ajax({
-                //     url: 'http://localhost:3000/api/spade/upload',
+                //     url: 'https://backend.app.spaderent.com/api/spade/upload',
                 //     type: 'POST',
                 //     data: formData,
                 //     contentType: false,
@@ -3894,7 +3996,7 @@
                 $("#addModal").modal("hide")
                 // Make the AJAX call
                 $.ajax({
-                    url: `http://localhost:3000/api/spade/${uri}`,
+                    url: `https://backend.app.spaderent.com/api/spade/${uri}`,
                     type: method,
                     data: JSON.stringify(formData),
                     contentType: "application/json; charset=utf-8",
@@ -3954,7 +4056,7 @@
                 $("#succesModal").modal("hide")
                 console.log(tenantID)
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/sendInvitationLink',
+                    url: 'https://backend.app.spaderent.com/api/spade/sendInvitationLink',
                     type: 'POST',
                     data: JSON.stringify({
                         tenantID: id
@@ -4338,7 +4440,7 @@
                 console.log(columnIndex, isColumnVisible)
                 // Toggle the visibility of the corresponding column
                 $('table').find('tr').each(function () {
-                    var column = $(this).find('th:nth-child(' + (columnIndex + 2) + '), td:nth-child(' + (columnIndex + 2) + ')');
+                    var column = $(this).find('th:nth-child(' + (columnIndex + 3) + '), td:nth-child(' + (columnIndex + 3) + ')');
                     isColumnVisible ? column.show() : column.hide();
                 });
             });
@@ -4366,7 +4468,15 @@
                         var idB = parseInt($(b).find('.rentAmount').text());
                         return idB - idA;
                     });
-                }
+                }else if (selectedFilter === 'created-at') {
+                
+                rows.sort(function (a, b) {
+                    var idA = new Date($(a).find('.created-at').text());
+                    console.log(idA)
+                    var idB = new Date($(b).find('.created-at').text());
+                    return idB - idA;
+                });
+            }
 
                 tableBody.empty().append(rows);
             }
@@ -4382,7 +4492,10 @@
                 // console.log(1)
                 filterTable("alphabets")
             });
-
+            $('#created-at').on('click', function () {
+            // console.log(1)
+            filterTable("created-at")
+        });
             // Search functionality
             $('#typehead').on('keyup', function () {
                 var searchValue = $(this).val().toLowerCase();
@@ -4544,7 +4657,7 @@
 
             // Send the form data to the server using AJAX
             $.ajax({
-                url: 'http://localhost:3000/api/spade/property',
+                url: 'https://backend.app.spaderent.com/api/spade/property',
                 type: 'POST',
                 data: formData,
                 contentType: false,
@@ -4615,7 +4728,7 @@
 
             formData.append("existingImages", existingImageNames)
             $.ajax({
-                url: 'http://localhost:3000/api/spade/updateProperty',
+                url: 'https://backend.app.spaderent.com/api/spade/updateProperty',
 
                 type: 'PUT',
                 data: formData,
@@ -4643,7 +4756,7 @@
 
             $('#myModal_delete').modal('hide');
             $.ajax({
-                url: 'http://localhost:3000/api/spade/tenantDelete',
+                url: 'https://backend.app.spaderent.com/api/spade/tenantDelete',
                 type: 'DELETE',
                 data: JSON.stringify({
                     "tenantID": tenantID
@@ -4677,7 +4790,7 @@
             $("#preloader").fadeIn("fast");
             // console.log(22)
             $.ajax({
-                url: 'http://localhost:3000/api/spade/protected',
+                url: 'https://backend.app.spaderent.com/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -4708,7 +4821,7 @@
                 return date.toLocaleDateString('en-US', options);
             }
             $.ajax({
-                url: 'http://localhost:3000/api/spade/viewAllPropertyTenant',
+                url: 'https://backend.app.spaderent.com/api/spade/viewAllPropertyTenant',
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -4743,8 +4856,9 @@
                         // var image = '<td><img src="../../../../../../Desktop/spadeApi/uploads/image-1684250579662.png" alt="hhghghgh"></td>';
                         var checkbox = '<td class="checkbox" style="font-weight: 600;"><div class="form-check"><input class="form-check-input myCheckbox" type="checkbox" value=""><label class="form-check-label" for="flexCheckDefault"></label></div></td>';
                         var serial = '<td style="font-weight: 600;">' + (index + 1) + '</td>';
-                        var tenantId = '<td class="tenant-id" style="font-weight: 600;">' + tenant.tenantID + '</td>';
-                        // var tenantId = '<td class="tenant-id" style="font-weight: 600;">' + tenant
+                        var tenantId = '<td class="tenant-id d-none" style="font-weight: 600;">' + tenant.tenantID + '</td>';
+                        var created_at = '<td class="created-at d-none" style="font-weight: 600;">' + tenant.tenantCreated_at + '</td>';
+                        // var tenantId = '<td class="tenant-id d-none" style="font-weight: 600;">' + tenant
                         // .id + '</td>';
                         var tenantName = '<td class="tenantName" style="font-weight: 600;">' + tenant.firstName + tenant.lastName + `<br><small>${tenant.tEmail}</small>` + '</td>';
                         var contactinfo = '<td class="contactinfo" style="font-weight: 600;"><span style="color: #1467B0";">' + tenant.tPhoneNumber + '</span><br><small style="color: gray;">' + tenant.tEmail + '</small></td>';
@@ -4780,7 +4894,7 @@
                         }
 
                         var row = '<tr>' + checkbox + serial + tenantId + tenantName + contactinfo + propertyAddress +
-                            assignUnit + rentAmount + leaseEndDate + dropdownMenu + '</tr>';
+                            assignUnit + rentAmount + leaseEndDate + dropdownMenu +created_at +'</tr>';
 
                         // Append the row to the table body
                         tableBody.append(row);
@@ -4807,7 +4921,7 @@
                 }
             });
             $.ajax({
-                url: 'http://localhost:3000/api/spade/getPropertyUnitsTenant',
+                url: 'https://backend.app.spaderent.com/api/spade/getPropertyUnitsTenant',
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -4943,7 +5057,7 @@
                 if (tenant.propertyType === propertyType) {
                     var checkbox = '<td class="checkbox" style="font-weight: 600;"><div class="form-check"><input class="form-check-input myCheckbox" type="checkbox" value=""><label class="form-check-label" for="flexCheckDefault"></label></div></td>';
                     var serial = '<td style="font-weight: 600;">' + (index + 1) + '</td>';
-                    var tenantId = '<td class="tenant-id" style="font-weight: 600;">' + tenant.tenantID + '</td>';
+                    var tenantId = '<td class="tenant-id d-none" style="font-weight: 600;">' + tenant.tenantID + '</td>';
                     var tenantName = '<td class="tenantName" style="font-weight: 600;">' + tenant.firstName + tenant.lastName + `<br><small>${tenant.tEmail}</small>` + '</td>';
                     var contactinfo = '<td class="contactinfo" style="font-weight: 600;"><span style="color: #1467B0";">' + tenant.tPhoneNumber + '</span><br><small style="color: gray;">' + tenant.tEmail + '</small></td>';
                     var propertyAddress = '<td class="propertyAddress" style="font-weight: 600;">' + tenant.propertyName + '</span><br><small>' + tenant.pAddress + ", " + tenant.pCity + ", " + tenant.pState + ", " + tenant.pZipCode + '</small></td>';
@@ -4952,6 +5066,7 @@
                     var password = 'your-secret-password';
                     var encryptedPropertyId = sjcl.encrypt(password, tenant.tenantID.toString());
                     var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
+                    var created_at = '<td class="created-at d-none" style="font-weight: 600;">' + tenant.tenantCreated_at + '</td>';
 
                     var dropdownMenu = '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
                         '<ul class="dropdown-menu">' +
@@ -4975,84 +5090,11 @@
                     }
 
                     var row = '<tr>' + checkbox + serial + tenantId + tenantName + contactinfo + propertyAddress +
-                        assignUnit + rentAmount + leaseEndDate + dropdownMenu + '</tr>';
+                        assignUnit + rentAmount + leaseEndDate + dropdownMenu + created_at+'</tr>';
 
                     // Append the row to the table body
                     $('#table_body').append(row);
                 }
-                function filterTableByPropertyType(propertyType) {
-                    // Clear the existing table
-                    $('#table_body').empty();
-
-                    // Iterate through tenantData and filter based on propertyType
-                    tenantData.forEach(function (tenant, index) {
-                        console.log(tenant)
-                        var checkbox = '<td class="checkboxx" style="font-weight: 600;"><input class="form-check-input myCheckbox" type="checkbox" value=""><label class="form-check-label" for="flexCheckDefault"></label></td>';
-                        var serial = '<td style="font-weight: 600;">' + (index + 1) + '</td>';
-                        var tenantId = '<td class="tenant-id" style="font-weight: 600;">' + tenant.tenantID + '</td>';
-                        var tenantName = '<td class="tenantName" style="font-weight: 600;">' + tenant.firstName + tenant.lastName + `<br><small>${tenant.tEmail}</small>` + '</td>';
-                        var contactinfo = '<td class="contactinfo" style="font-weight: 600;"><span style="color: #1467B0";">' + tenant.tPhoneNumber + '</span><br><small style="color: gray;">' + tenant.tEmail + '</small></td>';
-                        var propertyAddress = '<td class="propertyAddress" style="font-weight: 600;">' + tenant.propertyName + '</span><br><small>' + tenant.pAddress + ", " + tenant.pCity + ", " + tenant.pState + ", " + tenant.pZipCode + '</small></td>';
-                        var assignUnit = '<td class="assignUnit" style="font-weight: 600;">' + tenant.unitNumber + `<br><small>${tenant.unitArea} Square/Feet</small>` + '</td>';
-                        var rentAmount = '<td class="rentAmount" style="font-weight: 600;">' + tenant.rentAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(formatDate(tenant.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(tenant.recurringNextDate))}` + '</td>';
-                        var password = 'your-secret-password';
-                        var encryptedPropertyId = sjcl.encrypt(password, tenant.tenantID.toString());
-                        var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
-
-                        var dropdownMenu = '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
-                            '<ul class="dropdown-menu">' +
-                            `<li><a class="dropdown-item text-success" href="./view-tenant.html?tenant=${encodedPropertyId}">View</a></li>` +
-                            '<li><a class="edit-option dropdown-item text-primary"  href="javascript:void(0) ">Edit</a></li>' +
-                            '<li><a class="send-option dropdown-item text-success"  href="javascript:void(0) ">Invite to Tenant Portal</a></li>' +
-                            '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>' +
-                            '</ul></td>';
-
-                        var currentDate = new Date();
-                        var leaseEndDate = '';
-
-                        if (tenant.leaseEndDate) {
-                            var targetDate = new Date(tenant.leaseEndDate);
-                            var timeDiff = targetDate.getTime() - currentDate.getTime();
-                            var daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-
-                            leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + `<small class="${daysLeft > 10 ? 'text-primary' : 'text-danger'} d-block">` + daysLeft + ' day(s) remaining</small>' + '</td>';
-                        } else {
-                            leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + '</td>';
-                        }
-
-                        var row = '<tr>' + checkbox + serial + tenantId + tenantName + contactinfo + propertyAddress +
-                            assignUnit + rentAmount + leaseEndDate + dropdownMenu + '</tr>';
-
-                        // Append the row to the table body
-                        $('#table_body').append(row);
-
-                    });
-                }
-                $('#single-link').click(function () {
-                    filterTableByPropertyType('Single Family');
-                });
-                $('#all').click(function () {
-                    filterTableByPropertyAll();
-                });
-
-                var currentDate = new Date();
-                var leaseEndDate = '';
-
-                if (tenant.leaseEndDate) {
-                    var targetDate = new Date(tenant.leaseEndDate);
-                    var timeDiff = targetDate.getTime() - currentDate.getTime();
-                    var daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-
-                    leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + `<small class="${daysLeft > 10 ? 'text-primary' : 'text-danger'} d-block">` + daysLeft + ' day(s) remaining</small>' + '</td>';
-                } else {
-                    leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + '</td>';
-                }
-
-                var row = '<tr>' + serial + tenantId + tenantName + propertyName + rentAmount +
-                    assignUnit + leaseEndDate + dropdownMenu + '</tr>';
-
-                // Append the row to the table body
-                $('#table_body').append(row);
             }
             );
         }
@@ -5062,16 +5104,23 @@
 
             // Iterate through tenantData and filter based on propertyType
             tenantData.forEach(function (tenant, index) {
+                // var checkbox = '<td style="font-weight: 600;"><input class="form-check-input myCheckbox" type="checkbox" value=""><label class="form-check-label" for="flexCheckDefault"></label></td>';
+                var checkbox = `
+                <td class="checkbox" style="font-weight: 600;"><div class="form-check"><input class="form-check-input myCheckbox" type="checkbox" value=""><label class="form-check-label" for="flexCheckDefault"></label></div></td>
+                `;
 
                 var serial = '<td style="font-weight: 600;">' + (index + 1) + '</td>';
                 var tenantId = '<td class="tenant-id d-none" style="font-weight: 600;">' + tenant.tenantID + '</td>';
                 var tenantName = '<td class="tenantName" style="font-weight: 600;">' + tenant.firstName + tenant.lastName + `<br><small>${tenant.tEmail}</small>` + '</td>';
-                var propertyName = '<td class="propertyName" style="font-weight: 600;">' + tenant.propertyName + `<br><small>${tenant.pAddress}</small>` + '</td>';
-                var rentAmount = '<td class="rentAmount" style="font-weight: 600;">' + tenant.rentAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(formatDate(tenant.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(tenant.recurringNextDate))}` + '</td>';
-                var assignUnit = '<td class="assignUnit" style="font-weight: 600;">' + tenant.unitNumber + `<br><small>${tenant.unitArea} Square/Feet</small>` + '</td>';
+                var contactinfo = '<td class="contactinfo" style="font-weight: 600;"><span style="color: #1467B0";">' + tenant.tPhoneNumber + '</span><br><small style="color: gray;">' + tenant.tEmail + '</small></td>';
+                
+                var propertyAddress = '<td class="propertyAddress" style="font-weight: 600;">' + tenant.propertyName + '</span><br><small>' + tenant.pAddress + ", " + tenant.pCity + ", " + tenant.pState + ", " + tenant.pZipCode + '</small></td>';
+                        var assignUnit = '<td class="assignUnit" style="font-weight: 600;">' + tenant.unitNumber + `<br><small>${tenant.unitArea} Square/Feet</small>` + '</td>';
+                        var rentAmount = '<td class="rentAmount" style="font-weight: 600;">' + tenant.rentAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(formatDate(tenant.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(tenant.recurringNextDate))}` + '</td>';
                 var password = 'your-secret-password';
                 var encryptedPropertyId = sjcl.encrypt(password, tenant.tenantID.toString());
                 var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
+                var created_at = '<td class="created-at d-none" style="font-weight: 600;">' + tenant.tenantCreated_at + '</td>';
 
                 var dropdownMenu = '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
                     '<ul class="dropdown-menu">' +
@@ -5093,14 +5142,15 @@
                     leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + '</td>';
                 }
 
-                var row = '<tr>' + serial + tenantId + tenantName + propertyName + rentAmount +
-                    assignUnit + leaseEndDate + dropdownMenu + '</tr>';
+                var row = '<tr>' +checkbox +serial + tenantId + tenantName+contactinfo + propertyAddress + assignUnit +
+                    rentAmount + leaseEndDate + dropdownMenu + created_at+'</tr>';
 
                 // Append the row to the table body
                 $('#table_body').append(row);
 
             });
         }
+        
         $('#single-link').click(function () {
             filterTableByPropertyType('Single Family');
         });
@@ -5122,7 +5172,7 @@
         function logout() {
             $(document).ready(function () {
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/inactiveUser',
+                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
                     type: 'PUT',
                     contentType: false,
                     processData: false,
@@ -5172,7 +5222,7 @@
 <script>
     $(document).ready(()=>{
         $.ajax({
-            url: 'http://localhost:3000/api/spade/verifyMailCheck',
+            url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
             method: 'GET',
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -5226,6 +5276,11 @@
 
 
     </script>
+    <script>
+        $(document).ajaxStop(function () {
+          console.error("romail");
+        });
+      </script>
 </body>
 
 </html>

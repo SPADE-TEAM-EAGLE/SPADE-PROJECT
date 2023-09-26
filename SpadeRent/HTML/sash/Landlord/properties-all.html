@@ -35,6 +35,7 @@
     <!-- <link rel="stylesheet" href="../assets/css/"> -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
     <!-- COLOR SKIN CSS -->
+
     <script>
         if (localStorage.getItem("property") == "false") {
             window.location = "./new-property.html"
@@ -595,10 +596,11 @@
             background: #ECF3F9 !important;
         }
 
-        .modal-content{
+        .modal-content {
             border-radius: 15px !important;
         }
-        .card{
+
+        .card {
             border-radius: 15px !important;
         }
     </style>
@@ -955,7 +957,17 @@
                         <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
                     </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body d-none" id="addmodal_body_loader">
+                    <div class="dimmer active">
+                        <div class="lds-ring">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body" id="addmodal_body">
                     <div class="accordion-item mb-4" id="accordion-item1">
                         <h2 class="accordion-header" id="headingOne">
                             <button class="accordion-button text-white" id="accordian-button-1" type="button"
@@ -1019,11 +1031,21 @@
                                     <div class="col-md-4">
                                         <label for="inputState" class="form-label fw-bold">State <span
                                                 class="text-danger">*</span></label>
-                                        <select id="state" class="form-select form">
+                                        <select id="state" class="form-select form select2-show-search">
                                             <option selected>Choose...</option>
                                         </select>
                                         <span class="text-danger d-none">State is required!</span>
                                     </div>
+                                    <!-- <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Select2 with search box</label>
+                                            <select class="form-control select2-show-search" data-placeholder="Choose one">
+                                                <option value="AZ">Arizona</option>
+                                                <option value="CO">Colorado</option>
+                                    
+                                            </select>
+                                        </div>
+                                    </div> -->
                                     <div class="col-md-4">
                                         <label for="inputCity" class="form-label fw-bold">City <span
                                                 class="text-danger">*</span></label>
@@ -1047,7 +1069,7 @@
                                     <div class="col-md-6">
                                         <label for="inputState" class="form-label fw-bold">Property Type <spnan
                                                 class="text-danger">*</span></label>
-                                        <select id="propertyType" class="form-select form">
+                                        <select id="propertyType" class="form-select form select2-show-search">
                                             <option selected>Choose...</option>
                                             <option>Single Family</option>
                                             <option>Multi-Family</option>
@@ -1197,9 +1219,12 @@
                             <strong class="color-primary">Success!&nbsp;</strong>
                             <i class="fi fi-rs-check-circle text-success"></i>
                         </h2>
-                        <a id="unit-link" class="btn btn-outline-default btn-pill ms-1 my-2" style='background-color:#1467B0;color: white;'>Connect Bank Account</a>
-                        <a class="btn btn-outline-default btn-pill button" href="./add-tenant.html" id="add-tenant-link" style="border: 2px solid #1467B0;">
-                            <b><i class="fi fi-rs-plus" style="vertical-align: middle; font-size: 13px;"></i> Add Tenants</b>
+                        <a id="unit-link" class="btn btn-outline-default btn-pill ms-1 my-2"
+                            style='background-color:#1467B0;color: white;'>Connect Bank Account</a>
+                        <a class="btn btn-outline-default btn-pill button" href="./add-tenant.html" id="add-tenant-link"
+                            style="border: 2px solid #1467B0;">
+                            <b><i class="fi fi-rs-plus" style="vertical-align: middle; font-size: 13px;"></i> Add
+                                Tenants</b>
                         </a>
                         <p class="ms-2 mb-0 text-start fs-18">Your Property has been successfully added.</p>
                         <p class="ms-2 text-start fs-18">Please add tenant to this property.</p>
@@ -1263,7 +1288,7 @@
                                     <circle cx="12" cy="17" r="1" fill="#e62a45" />
                                     <path fill="#e62a45" d="M12,14a1,1,0,0,1-1-1V9a1,1,0,0,1,2,0v4A1,1,0,0,1,12,14Z" />
                                 </svg></span> -->
-                                <i class="fi fi-rs-circle-xmark" style="font-size: 60px; color: #FB233B;"></i>
+                            <i class="fi fi-rs-circle-xmark" style="font-size: 60px; color: #FB233B;"></i>
                             <h3 class="h4 mb-0 fw-bold fs-4">Are you sure you want to <br> delete this Property?</h3>
                             <!-- <p class="card-text">This is best if you no longer own or manage the property. <strong>It is not recommended</strong>. You may lose access to data associated with this property.</p> -->
 
@@ -1271,8 +1296,12 @@
                         <div class="card-footer text-center border-0 pt-0 pb-5">
                             <div class="row">
                                 <div class="text-center">
-                                    <a href="javascript:void(0)" class="btn btn-primary" id="confirmDelete" style="border-radius: 50px; padding: 4px 30px 3px 30px;">Yes <span id="counter_delete"> (5)</span></a>
-                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close" style="border-radius: 50px; padding: 4px 30px 3px 30px;border: 1px solid #1467B0;">No</a>
+                                    <a href="javascript:void(0)" class="btn btn-primary" id="confirmDelete"
+                                        style="border-radius: 50px; padding: 4px 30px 3px 30px;">Yes <span
+                                            id="counter_delete"> (5)</span></a>
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal"
+                                        aria-label="Close"
+                                        style="border-radius: 50px; padding: 4px 30px 3px 30px;border: 1px solid #1467B0;">No</a>
                                 </div>
                             </div>
                         </div>
@@ -1323,7 +1352,17 @@
                         <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
                     </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body d-none" id="myModal_edit_body_loader">
+                    <div class="dimmer active">
+                        <div class="lds-ring">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body" id="myModal_edit_body">
                     <form class="row g-3" enctype="multipart/form-data" id="update-form">
                         <div class="col-md-12">
                             <label class="form-label fw-bold">Property Photo</label>
@@ -1374,7 +1413,7 @@
                         <div class="col-md-4">
                             <label for="inputState" class="form-label fw-bold">State <spnan class="text-danger">
                                     *</span></label>
-                            <select id="state_update" class="form-select form state-select">
+                            <select id="state_update" class="form-select form state-select select2-show-search">
                                 <option selected>Choose...</option>
 
                             </select>
@@ -1402,7 +1441,7 @@
                         <div class="col-md-6">
                             <label for="inputState" class="form-label fw-bold">Property Type <spnan class="text-danger">
                                     *</span></label>
-                            <select id="propertyType_update" class="form-select form">
+                            <select id="propertyType_update" class="form-select form select2-show-search">
                                 <option selected>Choose...</option>
                                 <option>Single Family</option>
                                 <option>Multi-Family</option>
@@ -1871,13 +1910,15 @@
                                                         </div>
                                                     </li>
 
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">Date Modified</a>
+                                                    <!-- <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">Date Modified</a>
                                                         <div class="form-check m-0">
-                                                            <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="alphabets" value="option1">
+                                                            <input class="form-check-input mt-2" type="radio"
+                                                                name="exampleRadios" id="alphabets" value="option1">
                                                         </div>
-                                                    </li>
+                                                    </li> -->
 
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">Ascending</a>
+                                                    <li class="d-flex justify-content-between"><a
+                                                            href="javascript:void(0)" class="text-dark">Ascending</a>
                                                         <div class="form-check m-0">
                                                             <input class="form-check-input mt-2" type="radio"
                                                                 name="exampleRadios" id="ascending" value="option1">
@@ -1890,9 +1931,12 @@
                                                                 name="exampleRadios" id="descending" value="option1">
                                                         </div>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">Recently Added</a>
+                                                    <li class="d-flex justify-content-between"><a
+                                                            href="javascript:void(0)" class="text-dark">Recently
+                                                            Added</a>
                                                         <div class="form-check m-0">
-                                                            <input class="form-check-input mt-2" id="created-at" type="radio" name="exampleRadios" value="option1">
+                                                            <input class="form-check-input mt-2" id="created-at"
+                                                                type="radio" name="exampleRadios" value="option1">
                                                         </div>
                                                     </li>
                                                     <!-- <li class="d-flex justify-content-between"><a
@@ -1936,20 +1980,19 @@
                                                                 id="exampleCheck1" checked>
                                                         </div>
                                                     </li> -->
-                                    
+                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">Image</a>
+                                                        <div class="form-check m-0">
+                                                            <input type="checkbox" class="form-check-input mt-2"
+                                                                id="exampleCheck1" checked>
+                                                        </div>
+                                                    </li>
                                                     <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">Name</a>
                                                         <div class="form-check m-0">
                                                             <input type="checkbox" class="form-check-input mt-2"
                                                                 id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">Units</a>
-                                                        <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2"
-                                                                id="exampleCheck1" checked>
-                                                        </div>
-                                                    </li>
-                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">Address</a>
+                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">Sqft</a>
                                                         <div class="form-check m-0">
                                                             <input type="checkbox" class="form-check-input mt-2"
                                                                 id="exampleCheck1" checked>
@@ -1960,12 +2003,21 @@
                                                             <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
-                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">Sqft</a>
+                                                    <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">Units</a>
                                                         <div class="form-check m-0">
                                                             <input type="checkbox" class="form-check-input mt-2"
                                                                 id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
+                                                    <li class="d-flex justify-content-between"><a class="text-dark"
+                                                            href="javascript:void(0)">Address</a>
+                                                        <div class="form-check m-0">
+                                                            <input type="checkbox" class="form-check-input mt-2"
+                                                                id="exampleCheck1" checked>
+                                                        </div>
+                                                    </li>
+                                                    
+                                                    
                                                 </ul>
                                             </div>
                                             <button type="button" class="btn btn-primary mx-2" id="add_property_btn"
@@ -1982,8 +2034,9 @@
                                                     <tr>
                                                         <th>#</th>
                                                         <th>USER ID</th>
-                                                        <th>IMAGE</th>
                                                         <th class="d-none">PROPERTY ID</th>
+                                                        <th>IMAGE</th>
+                                                        
                                                         <th>PROPERTY NAME</th>
                                                         <th>TOTAL SQFT</th>
                                                         <th>PROPERTY Type</th>
@@ -2572,8 +2625,6 @@
             </div>
         </div>
     </div>
-    <!-- Country-selector modal-->
-
     <!-- FOOTER -->
     <footer class="footer">
         <div class="container">
@@ -2589,7 +2640,7 @@
     </div>
 
     <!-- BACK-TO-TOP -->
-    <!-- <!-- <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a> --> -->
+    <!--  <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a> -->
     <a href="#addModal" data-bs-effect="effect-scale" data-bs-toggle="modal" id="add-tenant-side-btn"><i
             class="fe fe-plus"></i></a>
 
@@ -2600,6 +2651,24 @@
     <!-- BOOTSTRAP JS -->
     <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
     <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../assets/plugins/select2/select2.full.min.js"></script>
+    <script src="../assets/js/select2.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#addModal').on('shown.bs.modal', function () {
+               
+                $('.select2-show-search').select2({
+                    dropdownParent: $('#addModal')
+                });
+            });
+            $('#myModal_edit').on('shown.bs.modal', function () {
+                
+                $('.select2-show-search').select2({
+                dropdownParent: $('#myModal_edit')
+            });
+            });
+        }); 
+    </script>
 
 
     <!-- SPARKLINE JS-->
@@ -2674,7 +2743,7 @@
     <script src="../assets/js/themeColors.js"></script>
 
     <!-- CUSTOM JS -->
-    <script src="../assets/js/custom.js"></script>i
+    <script src="../assets/js/custom.js"></script>
 
     <!-- ############################################# -->
     <!-- C3 CHART JS -->
@@ -2697,7 +2766,7 @@
 <script>
             $(document).ready(function(){
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
+                    url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2717,7 +2786,8 @@
                     }
                 });
             });
-        </script>
+      
+    </script>
     <script src="../assets/js/intercom.js"></script>
     <script src="../assets/js/getNotification.js"></script>
     <script src="../assets/js/push_notification.js"></script>
@@ -2727,7 +2797,7 @@
         $(document).ready(function () {
 
             $.ajax({
-                url: 'http://localhost:3000/api/spade/ProfileComplete',
+                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2949,7 +3019,7 @@
         $(document).ready(function () {
             // $('#infoModal').modal('show')
             $.ajax({
-                url: 'http://localhost:3000/api/spade/protected',
+                url: 'https://backend.app.spaderent.com/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2974,7 +3044,7 @@
                 }
             });
             $.ajax({
-                url: 'http://localhost:3000/api/spade/getStates',
+                url: 'https://backend.app.spaderent.com/api/spade/getStates',
                 method: 'GET',
                 success: function ({
                     data
@@ -3156,7 +3226,8 @@
             })
             $(document).on('click', '#next', function (e) {
                 e.preventDefault();
-
+                $('#addmodal_body').addClass('d-none')
+                $('#addmodal_body_loader').removeClass('d-none')
                 var propertyName = $("#propertyName").val();
                 var address = $("#address").val();
                 var city = $("#city").val();
@@ -3172,7 +3243,7 @@
                     }
                     $("#addModal").modal("hide")
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/upload',
+                        url: 'https://backend.app.spaderent.com/api/spade/upload',
                         type: 'POST',
                         data: uploadFormData,
                         contentType: false,
@@ -3193,9 +3264,10 @@
                                 units: units,
                                 images: imageArray
                             };
-
+                            $('#addmodal_body').removeClass('d-none')
+                            $('#addmodal_body_loader').addClass('d-none')
                             $.ajax({
-                                url: 'http://localhost:3000/api/spade/property',
+                                url: 'https://backend.app.spaderent.com/api/spade/property',
                                 type: 'POST',
                                 data: JSON.stringify(propertyData),
                                 contentType: 'application/json',
@@ -3209,7 +3281,7 @@
 
                                     // Include the encrypted value in the URL
                                     var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
-                                    $("#unit-link").attr("href", `./property-unit.html?property=${encodedPropertyId}`);
+                                    $("#unit-link").attr("href", `./bank-acount.html?property=${encodedPropertyId}`);
                                     if (response === "Property Already Exist") {
                                         $('#infoModal').modal('show');
                                     } else {
@@ -3258,7 +3330,7 @@
                     $("#addModal").modal("hide")
 
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/property',
+                        url: 'https://backend.app.spaderent.com/api/spade/property',
                         type: 'POST',
                         data: JSON.stringify(propertyData),
                         contentType: 'application/json',
@@ -3266,12 +3338,14 @@
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
+                            $('#addmodal_body').removeClass('d-none')
+                            $('#addmodal_body_loader').addClass('d-none')
                             var password = 'your-secret-password';
                             var encryptedPropertyId = sjcl.encrypt(password, response.propertyId.toString());
 
                             // Include the encrypted value in the URL
                             var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
-                            $("#unit-link").attr("href", `./property-unit.html?property=${encodedPropertyId}`);
+                            $("#unit-link").attr("href", `./bank-acount.html?property=${encodedPropertyId}`);
                             if (response === "Property Already Exist") {
                                 $('#infoModal').modal('show');
                             } else {
@@ -3281,6 +3355,8 @@
                             }
                         },
                         error: function (xhr, status, error) {
+                            $('#addmodal_body').removeClass('d-none')
+                            $('#addmodal_body_loader').addClass('d-none')
                             if (xhr.responseJSON.error === 'Property Already Exist') {
                                 $('#addModal').modal('hide');
                                 $('#infoModal').modal('show');
@@ -3374,22 +3450,17 @@
             console.log(columnIndex, isColumnVisible)
             console.log($(this).find('th:nth-child(' + (columnIndex) + ')'))
             // Toggle the visibility of the corresponding column
-            if (columnIndex >= 2) {
+            
                 $('table').find('tr').each(function () {
-                    var column = $(this).find('th:nth-child(' + (columnIndex + 2) + '), td:nth-child(' + (columnIndex + 2) + ')');
+                    var column = $(this).find('th:nth-child(' + (columnIndex + 3) + '), td:nth-child(' + (columnIndex + 3) + ')');
                     isColumnVisible ? column.show() : column.hide();
                 });
-            } else {
-                $('table').find('tr').each(function () {
-                    var column = $(this).find('th:nth-child(' + (columnIndex + 1) + '), td:nth-child(' + (columnIndex + 1) + ')');
-                    isColumnVisible ? column.show() : column.hide();
-                });
-            }
+        
 
         });
 
         function filterTable(selectedFilter) {
-            
+
             var tableBody = $('#table_body');
             var rows = tableBody.find('tr');
 
@@ -3400,7 +3471,7 @@
                     return textA.localeCompare(textB);
                 });
             } else if (selectedFilter === 'created-at') {
-                
+
                 rows.sort(function (a, b) {
                     var idA = new Date($(a).find('.created-at').text());
                     console.log(idA)
@@ -3454,7 +3525,7 @@
         function updateTable() {
             $('#table_body').empty();
             $.ajax({
-                url: 'http://localhost:3000/api/spade/allproperty',
+                url: 'https://backend.app.spaderent.com/api/spade/allproperty',
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -3517,8 +3588,8 @@
         $(document).on('click', '#update', function (e) {
             console.log("he;;")
             e.preventDefault();
-            $("#myModal_edit").modal("hide");
 
+            $("#myModal_edit").modal("hide");
             var formData = new FormData();
             var propertyName = $("#propertyName_update").val();
             var address = $("#address_update").val();
@@ -3548,7 +3619,7 @@
                     formData.append('image', file);
                 });
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/upload',
+                    url: 'https://backend.app.spaderent.com/api/spade/upload',
                     type: 'POST',
                     data: formData,
                     contentType: false,
@@ -3571,7 +3642,7 @@
                             images: imageArray
                         }
                         $.ajax({
-                            url: 'http://localhost:3000/api/spade/updateProperty',
+                            url: 'https://backend.app.spaderent.com/api/spade/updateProperty',
                             type: 'PUT',
                             data: JSON.stringify(formData),
                             contentType: 'application/json',
@@ -3622,7 +3693,7 @@
                     images: []
                 }
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/updateProperty',
+                    url: 'https://backend.app.spaderent.com/api/spade/updateProperty',
                     type: 'PUT',
                     data: JSON.stringify(formData),
                     contentType: 'application/json',
@@ -3651,7 +3722,7 @@
             // delete using AJAX
             $('#myModal_delete').modal('hide');
             $.ajax({
-                url: 'http://localhost:3000/api/spade/propertyDelete',
+                url: 'https://backend.app.spaderent.com/api/spade/propertyDelete',
                 type: 'DELETE',
                 data: JSON.stringify({
                     "id": propertyId
@@ -3702,7 +3773,7 @@
             $("#global-loader").fadeIn("fast")
             // console.log(22)
             $.ajax({
-                url: 'http://localhost:3000/api/spade/allproperty',
+                url: 'https://backend.app.spaderent.com/api/spade/allproperty',
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -3731,21 +3802,22 @@
                         response.data[0].forEach(function (property, index) {
                             var serial = `<td style="font-weight: 600;">${(index + 1)}</td>`
                             var id=`<td style="font-weight: 600;">${property.landlordID}</td>`
-                            var image = '<td><img src="' + (property.images[0]?.imageURL ? property.images[0]?.imageURL : '../assets/images/icons/Group 10341.png') + '" alt=""></td>';
-
                             var propertyId = '<td class="property-id d-none" style="font-weight: 600;">' + property
                                 .id + '</td>';
+                            var image = '<td><img src="' + (property.images[0]?.imageURL ? property.images[0]?.imageURL : '../assets/images/icons/Group 10341.png') + '" alt=""></td>';
 
-                                
+                            
 
-                                // var UserId = '<td>' + US-272323 + '</td>' ;
+
+
+                            // var UserId = '<td>' + US-272323 + '</td>' ;
 
                             var propertyName = '<td class="propertyName" style="font-weight: 600;">' +
                                 property
                                     .propertyName +
                                 '</td>';
 
-                                var totalsqft = `<td class="totalsqft" style="font-weight: 600;">${property.propertySQFT} SQft.</td>`;
+                            var totalsqft = `<td class="totalsqft" style="font-weight: 600;">${property.propertySQFT} SQft.</td>`;
 
                             var colorClass = '';
                             var backgroundClass = '';
@@ -3777,7 +3849,7 @@
                                 '<span>' + property.city + ', ' + property.state + ' ' + property.zipCode +
                                 '</span>' +
                                 '</td>';
-                            var created_at=`<td class="created-at d-none" style="font-weight: 600;">${property.created_at}</td>`
+                            var created_at = `<td class="created-at d-none" style="font-weight: 600;">${property.created_at}</td>`
                             var password = 'your-secret-password';
                             var encryptedPropertyId = sjcl.encrypt(password, property.id.toString());
 
@@ -3786,19 +3858,19 @@
                             var dropdownMenu =
                                 '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
                                 '<ul class="dropdown-menu dropdown-menu-top">' +
-                                    `<li><a class="dropdown-item text-dark" href="./view-property.html?property=${encodedPropertyId}" style="display: flex; align-items: center;"><i class="fi fi-rs-eye" style="display: flex; align-items: center;"></i> &nbsp;&nbsp;&nbsp; View</a></li>` +
+                                `<li><a class="dropdown-item text-dark" href="./view-property.html?property=${encodedPropertyId}" style="display: flex; align-items: center;"><i class="fi fi-rs-eye" style="display: flex; align-items: center;"></i> &nbsp;&nbsp;&nbsp; View</a></li>` +
                                 '<li><a class="edit-option dropdown-item text-dark" href="javascript:void(0)" style="display: flex; align-items: center;"><i class="fi fi-rs-edit" style="display: flex; align-items: center;"></i> &nbsp;&nbsp;&nbsp; Edit</a></li>' +
                                 '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)" style="display: flex; align-items: center;"><i class="fi fi-rs-cross-small fs-20" style="display: flex; align-items: center;"></i> &nbsp;&nbsp;Delete</a></li>'
                             '</ul></td>';
                             // Create a table row and append the generated columns
-                            var row = '<tr>' + serial+ id + image + propertyId + propertyName + totalsqft +
+                            var row = '<tr>' + serial+ id+ propertyId  + image + propertyName + totalsqft +
           propertyType + propertyUnits + propertyAddress + dropdownMenu +created_at +'</tr>';
 
                             // Append the row to the table body
                             tableBody.append(row);
 
                         });
-                        
+
                         $("#global-loader").fadeOut("slow")
                         $(document).on("click", ".edit-option", function (e) {
                             e.preventDefault();
@@ -3924,7 +3996,7 @@
         function logout() {
             $(document).ready(function () {
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/inactiveUser',
+                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
                     type: 'PUT',
                     contentType: false,
                     processData: false,
@@ -3958,7 +4030,7 @@
     <script>
         $(document).ready(() => {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/verifyMailCheck',
+                url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")

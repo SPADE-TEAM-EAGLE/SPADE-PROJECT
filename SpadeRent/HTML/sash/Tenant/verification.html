@@ -736,7 +736,7 @@ var encodedId = encodeURIComponent(encryptedId);
                 var verification = $("#verification").val();
 
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/verifyResetEmailCodeTenant',
+                    url: 'https://backend.app.spaderent.com/api/spade/verifyResetEmailCodeTenant',
                     type: 'POST',
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({
@@ -837,7 +837,7 @@ var password = 'your-secret-password';
 const Id = sjcl.decrypt(password, encryptedId);
 var encodedId = encodeURIComponent(encryptedId);
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/resendCodeTenants',
+                    url: 'https://backend.app.spaderent.com/api/spade/resendCodeTenants',
                     type: 'PUT',
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({

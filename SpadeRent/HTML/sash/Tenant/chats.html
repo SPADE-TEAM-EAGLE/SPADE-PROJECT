@@ -15,7 +15,7 @@
         href='https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css'>
     <link rel="shortcut icon" type="image/x-icon" href="../assets/images/brand/favicon.ico" />
     <!-- TITLE -->
-    <title>Property Tenant - SpadeRent</title>
+    <title>Chat - SpadeRent</title>
     <!-- BOOTSTRAP CSS -->
     <link id="style" href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <!-- STYLE CSS -->
@@ -786,7 +786,7 @@
             height: 100%;
             border: none;
             outline: none;
-            padding: 1.5em 1em;
+            padding: 1.5em 3em 1.5em 1em;
             /* border-radius: 50px; */
             color: var(--color);
             border-radius: 10px;
@@ -2434,7 +2434,7 @@
                                             </div>
                                             <h4 class="person-name mb-0" style="line-height: initial;"><b
                                                     id="person-name-bold"></b> <br>
-                                                <p class="text-success fw-bold fs-12 m-0" id="online">Online</p>
+                                                <p class="text-success fw-bold fs-12 m-0" id="online"><span class="dot-label bg-success"></span>Online</p>
                                             </h4>
 
 
@@ -2889,7 +2889,60 @@
         <script src="../assets/js/completeTenantProfile.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+        <script>
+            $(document).ready(function() {
+                $('#input-message').on('input', function() {
+                    var inputLength = $(this).val().length;
+                    
+                    if (inputLength === 255) {
+                        $(this).removeClass('border-green').addClass('border-red');
+                        $(this).addClass('text-danger');
+                    } else {
+                        $(this).removeClass('border-red').addClass('border-green');
+                        $(this).removeClass('text-danger');
+                    }
+                });
+            });
+        </script>
+  <script>
+    $(document).ready(function(){
+        $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/updateMessagesCountTenant',
+                type: 'PUT',
+                contentType: false,
+                processData: false,
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    console.log(response);
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        $.ajax({
+            url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountTenant',
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+            },
+            success: function (response) {
+                console.log("getMessagesCountLandlord");
+                console.log(response.Count['count(message)']);
+                $('#chatCounter').text(response.Count['count(message)'])
+            },
+            error: function (xhr, status, error) {
+                $("#myModal_warning").modal("show");
+                setTimeout(function () {
+                    $('#myModal_warning').modal('hide');
+                    window.location = '../Landlord/login_module.html';
+                }, 2000);
+                console.log(error);
+            }
+        });
+    });
+</script>
 
         <script>
             // const socket = io("http://ec2-52-45-181-206.compute-1.amazonaws.com:3000");
@@ -2908,7 +2961,7 @@
                 var hasScrolled = 0;
                 // socket.emit('joinRoom', { chatId: localStorage.getItem("chatId") });
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/protectedTenant',
+                    url: 'https://backend.app.spaderent.com/api/spade/protectedTenant',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2942,6 +2995,7 @@
                 });
 
                 $('#send-text').on('click', function (ev) {
+                    $('#input-message').removeClass('border-red').removeClass('border-green').removeClass('text-danger');
                     const msg_again1 = $('#input-message').val().trim();
                     if (msg_again1 !== "") {
                         var messageData = {
@@ -2953,7 +3007,7 @@
                         };
                         // joinChatRoom(localStorage.getItem("chatId"));
                         $.ajax({
-                            url: 'http://localhost:3000/api/spade/createNewMessageTenant',
+                            url: 'https://backend.app.spaderent.com/api/spade/createNewMessageTenant',
                             type: 'POST',
                             data: JSON.stringify(messageData),
                             contentType: 'application/json',
@@ -2977,6 +3031,7 @@
                 $('#input-message').on('keypress', function (ev) {
                     const msg_again2 = $('#input-message').val().trim();
                     if (ev.key === 'Enter' && msg_again2 !== "") {
+                        $('#input-message').removeClass('border-red').removeClass('border-green').removeClass('text-danger');   
                         // var input_message = $('#input-message').val();
                         var messageData = {
                             chatId: localStorage.getItem("chatId"),
@@ -2986,7 +3041,7 @@
                             receiverID: Number(localStorage.getItem("landloadId"))
                         };
                         $.ajax({
-                            url: 'http://localhost:3000/api/spade/createNewMessageTenant',
+                            url: 'https://backend.app.spaderent.com/api/spade/createNewMessageTenant',
                             type: 'POST',
                             data: JSON.stringify(messageData),
                             contentType: 'application/json',
@@ -3010,7 +3065,7 @@
                     }
                 });
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/getTenantByID',
+                    url: 'https://backend.app.spaderent.com/api/spade/getTenantByID',
                     type: 'GET',
                     contentType: "application/json; charset=utf-8",
                     // processData: false,
@@ -3034,7 +3089,7 @@
                         // $("#tenant-address").empty()
                         // $("#tenant-address").append(`&nbsp;&nbsp; <span><b>Pensgate St</b></span> <br>&nbsp;&nbsp; ${response.data.tAddress + " " + response.data.tCity + " " + response.data.tState + " " + response.data.tZipcode}`)
                         $.ajax({
-                            url: 'http://localhost:3000/api/spade/getUserById/' + Number(response.data.landlordID) + '/landlord',
+                            url: 'https://backend.app.spaderent.com/api/spade/getUserById/' + Number(response.data.landlordID) + '/landlord',
                             type: 'GET',
                             contentType: "application/json; charset=utf-8",
                             // processData: false,
@@ -3066,7 +3121,7 @@
                             }
                         });
                         $.ajax({
-                            url: 'http://localhost:3000/api/spade/getUserById/' + Number(response.data.tenantID) + '/tenant',
+                            url: 'https://backend.app.spaderent.com/api/spade/getUserById/' + Number(response.data.tenantID) + '/tenant',
                             type: 'GET',
                             contentType: "application/json; charset=utf-8",
                             // processData: false,
@@ -3309,7 +3364,7 @@
                         var str = "";
 
                         $.ajax({
-                            url: 'http://localhost:3000/api/spade/upload',
+                            url: 'https://backend.app.spaderent.com/api/spade/uploadTenant',
                             type: 'POST',
                             data: uploadFormData,
                             contentType: false,
@@ -3337,7 +3392,7 @@
                             receiverID: Number(localStorage.getItem("landloadId"))
                                 };
                                 $.ajax({
-                                    url: 'http://localhost:3000/api/spade/createNewMessageTenant',
+                                    url: 'https://backend.app.spaderent.com/api/spade/createNewMessageTenant',
                                     type: 'POST',
                                     data: JSON.stringify(messageData2),
                                     contentType: 'application/json',
@@ -3399,7 +3454,7 @@
 
                     // $('#person-name-bold').text(String(localStorage.getItem("tenantName")))
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/accessTenantChats',
+                        url: 'https://backend.app.spaderent.com/api/spade/accessTenantChats',
                         type: 'POST',
                         data: JSON.stringify(recieverIdd),
                         contentType: 'application/json',
@@ -3417,7 +3472,7 @@
                                 joinChatRoom(chatId);
                                 localStorage.setItem("chatId", chatId)
                                 $.ajax({
-                                    url: 'http://localhost:3000/api/spade/getUserById/' + Number(localStorage.getItem("landloadId")) + '/landlord',
+                                    url: 'https://backend.app.spaderent.com/api/spade/getUserById/' + Number(localStorage.getItem("landloadId")) + '/landlord',
                                     type: 'GET',
                                     contentType: false,
                                     processData: false,
@@ -3430,7 +3485,7 @@
                                             $('#online').hide()
                                         }
                                         $.ajax({
-                                            url: 'http://localhost:3000/api/spade/TenantMessages/' + chatId,
+                                            url: 'https://backend.app.spaderent.com/api/spade/TenantMessages/' + chatId,
                                             type: 'GET',
                                             contentType: 'application/json',
                                             processData: false,
@@ -3583,7 +3638,7 @@
             function logout() {
                 $(document).ready(function () {
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/inactiveTenant',
+                        url: 'https://backend.app.spaderent.com/api/spade/inactiveTenant',
                         type: 'PUT',
                         contentType: false,
                         processData: false,

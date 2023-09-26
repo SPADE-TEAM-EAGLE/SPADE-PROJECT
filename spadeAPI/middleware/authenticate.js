@@ -6,12 +6,13 @@ const { selectQuery } = require("../constants/queries");
 const config = process.env;
 const verifyToken = async (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
-  // console.log(req.body)
+  // console.log(req.headers);
 
   if (!token) {
     return res.status(401).send("Access Denied");
   }
   try {
+    // console.log(token);
     const decoded = jwt.verify(token, config.JWT_SECRET_KEY);
     // console.log("landlord",decoded)
     const result = await queryRunner(selectQuery("users", "Email"), [

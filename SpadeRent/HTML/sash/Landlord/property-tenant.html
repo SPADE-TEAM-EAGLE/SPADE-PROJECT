@@ -1170,7 +1170,7 @@
                                                     id="viewTasks">Tasks</a>
                                             </li>
                                             <li class="nav-item1 p-0">
-                                                <a class="nav-link p-2" href="bank-account.html" id="viewTasks">Bank Account</a>
+                                                <a class="nav-link p-2" href="bank-account.html" id="viewBank">Bank Account</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -2046,7 +2046,7 @@
 <script>
             $(document).ready(function(){
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
+                    url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2073,7 +2073,7 @@
     <script>
         $(document).ready(function() {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/protected',
+                url: 'https://backend.app.spaderent.com/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2109,7 +2109,7 @@
                 }
             });
             $.ajax({
-                url: 'http://localhost:3000/api/spade/ProfileComplete',
+                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2169,10 +2169,11 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
             $("#viewUnits").attr("href", `./property-unit.html?property=${encodedPropertyId}`)
             $("#viewOverview").attr("href", `./view-property.html?property=${encodedPropertyId}`)
             $("#viewTenants").attr("href", `./property-tenant.html?property=${encodedPropertyId}`)
-            $("#viewTasks").attr("href", `./property-task.html?property=${encodedPropertyId}`)
+                        $("#viewTasks").attr("href", `./property-task.html?property=${encodedPropertyId}`)
+            $("#viewBank").attr("href", `./bank-account.html?property=${encodedPropertyId}`)
             let columnsToHide = []
             $.ajax({
-                url: 'http://localhost:3000/api/spade/viewProperty',
+                url: 'https://backend.app.spaderent.com/api/spade/viewProperty',
                 type: 'GET',
                 data: {
                     propertyId
@@ -2267,7 +2268,7 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
 
             
             $.ajax({
-                url: 'http://localhost:3000/api/spade/viewPropertyTenant',
+                url: 'https://backend.app.spaderent.com/api/spade/viewPropertyTenant',
                 type: 'GET',
                 data: {
                     "id": propertyId
@@ -2417,7 +2418,7 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
         function logout() {
             $(document).ready(function () {
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/inactiveUser',
+                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
                     type: 'PUT',
                     contentType: false,
                     processData: false,
