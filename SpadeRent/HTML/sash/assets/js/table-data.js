@@ -1,6 +1,6 @@
 $(function(e) {
     "use strict";
-alert(1)
+// alert(1)
     //______Basic Data Table
     $('#basic-datatable').DataTable({
         language: {
