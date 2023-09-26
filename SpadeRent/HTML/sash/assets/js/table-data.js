@@ -1,6 +1,6 @@
 $(function(e) {
     "use strict";
-alert(1)
+// alert(1)
     //______Basic Data Table
     $('#basic-datatable').DataTable({
         language: {
@@ -8,10 +8,106 @@ alert(1)
             sSearch: '',
         }
     });
-
-
+    
+     //______Basic Data Table
+     $('#lineItemsTable').DataTable({
+        language: {
+            searchPlaceholder: 'Search...',
+            scrollX: "100%",
+            sSearch: '',
+        },
+        // retrieve: true,
+        // lengthMenu: false,
+        lengthChange: false, 
+        bInfo: false,
+        searching: false,
+        ordering: false,
+        columnDefs: [
+            {
+                targets: [0, 1],
+                orderable: false,
+            }
+        ],
+    });
+     //______Basic Data Table
+     $('#myTable').DataTable({
+        language: {
+            searchPlaceholder: 'Search...',
+            scrollX: "100%",
+            sSearch: '',
+        },
+        // retrieve: true,
+        // lengthMenu: false,
+        lengthChange: false, 
+        bInfo: false,
+        searching: false,
+        ordering: false,
+        columnDefs: [
+            {
+                targets: [0, 1],
+                orderable: false,
+            }
+        ],
+    });
     //______Basic Data Table
     $('#responsive-datatable').DataTable({
+        language: {
+            searchPlaceholder: 'Search...',
+            scrollX: "100%",
+            sSearch: '',
+        },
+        // retrieve: true,
+        // lengthMenu: false,
+        lengthChange: false, 
+        bInfo: false,
+        searching: false,
+        ordering: false,
+        columnDefs: [
+            {
+                targets: [0, 1],
+                orderable: false,
+            }
+        ],
+    });
+    $('#responsive-datatable2').DataTable({
+        language: {
+            searchPlaceholder: 'Search...',
+            scrollX: "100%",
+            sSearch: '',
+        },
+        // retrieve: true,
+        // lengthMenu: false,
+        lengthChange: false, 
+        bInfo: false,
+        searching: false,
+        ordering: false,
+        columnDefs: [
+            {
+                targets: [0, 1],
+                orderable: false,
+            }
+        ],
+    });
+    $('#responsive-datatable3').DataTable({
+        language: {
+            searchPlaceholder: 'Search...',
+            scrollX: "100%",
+            sSearch: '',
+        },
+        // retrieve: true,
+        // lengthMenu: false,
+        lengthChange: false, 
+        bInfo: false,
+        searching: false,
+        ordering: false,
+        columnDefs: [
+            {
+                targets: [0, 1],
+                orderable: false,
+            }
+        ],
+    });
+    $('#responsive-datatable4').DataTable({
         language: {
             searchPlaceholder: 'Search...',
             scrollX: "100%",
