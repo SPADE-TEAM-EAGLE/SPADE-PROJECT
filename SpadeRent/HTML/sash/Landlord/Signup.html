@@ -2784,7 +2784,7 @@
             $("#email").on("change",()=>{
                 var email = $("#email").val();
                 $.ajax({
-                    url: "https://backend.app.spaderent.com/api/spade/checkemail",
+                    url: "http://localhost:3000/api/spade/checkemail",
                     type: "GET",
                     contentType: "application/json",
                     data: {
@@ -2808,7 +2808,7 @@
                 });
             })
             $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/pricingPlan',
+                    url: 'http://localhost:3000/api/spade/pricingPlan',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2837,7 +2837,7 @@
                 var phone = $("#phone1").val();
                 var password = $("#id_password2").val();
                 $.ajax({
-                    url: "https://backend.app.spaderent.com/api/spade/Signup",
+                    url: "http://localhost:3000/api/spade/Signup",
                     type: "POST",
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({

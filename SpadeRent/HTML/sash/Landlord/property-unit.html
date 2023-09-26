@@ -1989,7 +1989,7 @@
 <script>
             $(document).ready(function(){
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
+                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2003,7 +2003,7 @@
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
-                            window.location = '../Landlord/login_module.html';
+                            // window.location = '../Landlord/login_module.html';
                         }, 2000);
                         console.log(error);
                     }
@@ -2016,7 +2016,7 @@
     <script>
         $(document).ready(function () {
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/protected',
+                url: 'http://localhost:3000/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2052,7 +2052,7 @@
                 }
             });
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
+                url: 'http://localhost:3000/api/spade/ProfileComplete',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2405,7 +2405,7 @@
 
             // Send the form data to the server using AJAX
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/property',
+                url: 'http://localhost:3000/api/spade/property',
                 type: 'POST',
                 data: formData,
                 contentType: false,
@@ -2444,7 +2444,7 @@
         $("#add-units").click(() => {
             $("#add-units").prop("disabled", true)
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/addMoreUnits',
+                url: 'http://localhost:3000/api/spade/addMoreUnits',
                 type: 'POST',
                 data: JSON.stringify({
                     "propertyID": propertyId
@@ -2469,7 +2469,7 @@
             })
         })
         $.ajax({
-            url: 'https://backend.app.spaderent.com/api/spade/viewProperty',
+            url: 'http://localhost:3000/api/spade/viewProperty',
             type: 'GET',
             data: {
                 propertyId
@@ -2503,7 +2503,7 @@
         function getData() {
 
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/PropertyUnits',
+                url: 'http://localhost:3000/api/spade/PropertyUnits',
                 type: 'GET',
                 data: {
                     propertyId
@@ -2633,7 +2633,7 @@
                         });
                         console.log(propertyId)
                         $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/PropertyUnitsUpdates',
+                            url: 'http://localhost:3000/api/spade/PropertyUnitsUpdates',
                             type: 'PUT',
                             data: JSON.stringify({
                                 id: values[0],
@@ -2687,7 +2687,7 @@
                     $('#confirmDelete').click(function (e) {
                         $("#myModal_delete").modal("hide");
                         $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/deleteMoreUnits',
+                            url: 'http://localhost:3000/api/spade/deleteMoreUnits',
                             type: 'DELETE',
                             data: JSON.stringify({
                                 "propertyID": propertyId,
@@ -2755,7 +2755,7 @@
         function logout() {
             $(document).ready(function () {
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                    url: 'http://localhost:3000/api/spade/inactiveUser',
                     type: 'PUT',
                     contentType: false,
                     processData: false,

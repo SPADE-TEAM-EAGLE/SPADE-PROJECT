@@ -1,6 +1,6 @@
 $(function(e) {
     "use strict";
-
+alert(1)
     //______Basic Data Table
     $('#basic-datatable').DataTable({
         language: {
@@ -16,7 +16,19 @@ $(function(e) {
             searchPlaceholder: 'Search...',
             scrollX: "100%",
             sSearch: '',
-        }
+        },
+        // retrieve: true,
+        // lengthMenu: false,
+        lengthChange: false, 
+        bInfo: false,
+        searching: false,
+        ordering: false,
+        columnDefs: [
+            {
+                targets: [0, 1],
+                orderable: false,
+            }
+        ],
     });
 
     //______File-Export Data Table
@@ -75,8 +87,8 @@ $(function(e) {
 	
 
     //______Select2 
-    $('.select2').select2({
-        minimumResultsForSearch: Infinity
-    });
+    // $('.select2').select2({
+    //     minimumResultsForSearch: Infinity
+    // });
 
 });

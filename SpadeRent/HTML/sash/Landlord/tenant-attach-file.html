@@ -2842,7 +2842,7 @@
 <script>
             $(document).ready(function(){
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
+                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2856,7 +2856,7 @@
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
-                            window.location = '../Landlord/login_module.html';
+                            // window.location = '../Landlord/login_module.html';
                         }, 2000);
                         console.log(error);
                     }
@@ -3020,7 +3020,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                     formData.append('image', selectedFiles[i]);
                 }
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/upload',
+                    url: 'http://localhost:3000/api/spade/upload',
                     type: 'POST',
                     data: formData,
                     contentType: false,
@@ -3038,7 +3038,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                             images: imageArray
                         };
                         $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/tenantAttachFile',
+                            url: 'http://localhost:3000/api/spade/tenantAttachFile',
                             type: 'POST',
                             data: JSON.stringify(tenantData),
                     contentType: 'application/json',
@@ -3081,7 +3081,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                 })})
 
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
+                url: 'http://localhost:3000/api/spade/ProfileComplete',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3105,7 +3105,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
             });
             let tenantData;
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getTenantsByID',
+                url: 'http://localhost:3000/api/spade/getTenantsByID',
                 type: 'GET',
                 data: {
                     id: tenantId
@@ -3144,7 +3144,7 @@ function formatDate(dateString) {
 }
 function getData(){
     $.ajax({
-    url: 'https://backend.app.spaderent.com/api/spade/GettenantAttachFile',
+    url: 'http://localhost:3000/api/spade/GettenantAttachFile',
     type: 'GET',
     data: {
         tenantID: tenantId

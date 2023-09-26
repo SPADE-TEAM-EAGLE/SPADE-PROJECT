@@ -2152,7 +2152,7 @@
 <script>
             $(document).ready(function(){
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
+                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2166,7 +2166,7 @@
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
-                            window.location = '../Landlord/login_module.html';
+                            // window.location = '../Landlord/login_module.html';
                         }, 2000);
                         console.log(error);
                     }
@@ -2180,7 +2180,7 @@
     <script>
         $(document).ready(function() {
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
+                url: 'http://localhost:3000/api/spade/ProfileComplete',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2229,7 +2229,7 @@
     <script>
         $(document).ready(() => {
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/protected',
+                url: 'http://localhost:3000/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2289,7 +2289,7 @@ const propertyId = sjcl.decrypt(password, encryptedPropertyId);
                     });
                 });
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/viewProperty',
+                url: 'http://localhost:3000/api/spade/viewProperty',
                 type: 'GET',
                 data: {
                     propertyId
@@ -2321,7 +2321,7 @@ const propertyId = sjcl.decrypt(password, encryptedPropertyId);
                 }
             });
             $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/propertyTask',
+                            url: 'http://localhost:3000/api/spade/propertyTask',
                             type: 'GET',
                             data: {
                                 Id:propertyId
@@ -2424,7 +2424,7 @@ const propertyId = sjcl.decrypt(password, encryptedPropertyId);
     function logout() {
         $(document).ready(function () {
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                url: 'http://localhost:3000/api/spade/inactiveUser',
                 type: 'PUT',
                 contentType: false,
                 processData: false,
