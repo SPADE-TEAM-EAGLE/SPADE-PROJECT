@@ -484,7 +484,7 @@ exports.resendEmail = async (req, res) => {
   // const { invoiceID } = req.query;
   const { invoiceID } = req.body;
   // const { userId,userName,businessName,invoiceEmail } = req.user;
-  const { userId,userName,businessName,invoiceEmail } = req.body;
+  const { userId,userName,businessName,invoiceEmail } = req.user;
   try {
     const resendEmailResult = await queryRunner(resendEmailQuery, [invoiceID]);
 

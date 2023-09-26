@@ -612,7 +612,7 @@ color: #000;
                     <div class="row mt-5">
                         <div class="col-12 mb-5">
                             <div class="table-responsive">
-                                <table class="table-hover table text-nowrap table-borderless text-md-nowrap mg-b-0 mb-0"
+                                <table class="table-hover table text-nowrap table-borderless text-md-nowrap mg-b-0 mb-0 p-0 w-100"
                                     id="lineItemsTable">
                                     <thead>
                                         <tr>
@@ -2562,7 +2562,7 @@ color: #000;
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
-                            window.location = '../Landlord/login_module.html';
+                            // window.location = '../Landlord/login_module.html';
                         }, 2000);
                         console.log(error);
                     }
@@ -4046,6 +4046,40 @@ if(task?.taskImages[0]?.imageKey?.includes('pdf')){
                 }
             });
     })
+</script>
+<script>
+    $(document).ready(function () {
+        // alert(2)
+        var scriptUrls = [
+            "../assets/plugins/datatable/js/jquery.dataTables.min.js",
+            "../assets/plugins/datatable/js/dataTables.bootstrap5.js",
+            "../assets/plugins/datatable/js/dataTables.buttons.min.js",
+            "../assets/plugins/datatable/js/buttons.bootstrap5.min.js",
+            "../assets/plugins/datatable/js/jszip.min.js",
+            "../assets/plugins/datatable/pdfmake/pdfmake.min.js",
+            "../assets/plugins/datatable/pdfmake/vfs_fonts.js",
+            "../assets/plugins/datatable/js/buttons.html5.min.js",
+            "../assets/plugins/datatable/js/buttons.print.min.js",
+            "../assets/plugins/datatable/js/buttons.colVis.min.js",
+            "../assets/plugins/datatable/dataTables.responsive.min.js",
+            "../assets/plugins/datatable/responsive.bootstrap5.min.js",
+            "../assets/js/table-data.js"
+        ];
+        function loadScripts() {
+            $('#responsive-datatable_paginate').remove();
+            $('script.dynamic-script').remove();
+            scriptUrls.forEach(function (scriptUrl) {
+                var script = document.createElement('script');
+                script.src = scriptUrl;
+                script.className = 'dynamic-script';
+                document.head.appendChild(script);
+            });
+        }
+        $(document).ajaxStop(function () {
+            // alert(1)
+            loadScripts()
+        });
+    });
 </script>
 </body>
 

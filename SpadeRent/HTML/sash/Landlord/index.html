@@ -1571,7 +1571,7 @@
                                                         <div class="tab-pane" id="tab21">
                                                             <div class="table-responsive">
                                                                 <table
-                                                                    class="table border text-nowrap text-md-nowrap table-hover mb-0">
+                                                                    class="table border text-nowrap text-md-nowrap table-hover mb-0 w-100">
                                                                     <thead class="table-recent">
                                                                         <tr>
                                                                             <th>Task</th>
@@ -1592,7 +1592,7 @@
                                                         <div class="tab-pane" id="tab22">
                                                             <div class="table-responsive">
                                                                 <table
-                                                                    class="table border text-nowrap text-md-nowrap table-hover mb-0">
+                                                                    class="table border text-nowrap text-md-nowrap table-hover mb-0 w-100" >
                                                                     <thead class="table-recent">
                                                                         <tr>
                                                                             <th>Task</th>
@@ -1612,7 +1612,7 @@
                                                         <div class="tab-pane active" id="tab23">
                                                             <div class="table-responsive">
                                                                 <table
-                                                                    class="table border text-nowrap text-md-nowrap table-hover mb-0">
+                                                                    class="table border text-nowrap text-md-nowrap table-hover mb-0 w-100" id="responsive-datatable">
                                                                     <thead class="table-recent">
                                                                         <tr>
                                                                             <th>Task</th>
@@ -1889,7 +1889,40 @@
     <!-- BOOTSTRAP JS -->
     <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
     <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-
+    <script>
+        $(document).ready(function () {
+            // alert(2)
+            var scriptUrls = [
+                "../assets/plugins/datatable/js/jquery.dataTables.min.js",
+                "../assets/plugins/datatable/js/dataTables.bootstrap5.js",
+                "../assets/plugins/datatable/js/dataTables.buttons.min.js",
+                "../assets/plugins/datatable/js/buttons.bootstrap5.min.js",
+                "../assets/plugins/datatable/js/jszip.min.js",
+                "../assets/plugins/datatable/pdfmake/pdfmake.min.js",
+                "../assets/plugins/datatable/pdfmake/vfs_fonts.js",
+                "../assets/plugins/datatable/js/buttons.html5.min.js",
+                "../assets/plugins/datatable/js/buttons.print.min.js",
+                "../assets/plugins/datatable/js/buttons.colVis.min.js",
+                "../assets/plugins/datatable/dataTables.responsive.min.js",
+                "../assets/plugins/datatable/responsive.bootstrap5.min.js",
+                "../assets/js/table-data.js"
+            ];
+            function loadScripts() {
+                $('#responsive-datatable_paginate').remove();
+                $('script.dynamic-script').remove();
+                scriptUrls.forEach(function (scriptUrl) {
+                    var script = document.createElement('script');
+                    script.src = scriptUrl;
+                    script.className = 'dynamic-script';
+                    document.head.appendChild(script);
+                });
+            }
+            $(document).ajaxStop(function () {
+                // alert(1)
+                loadScripts()
+            });
+        });
+    </script> 
     <!-- SPARKLINE JS-->
     <script src="../assets/js/jquery.sparkline.min.js"></script>
 
@@ -1922,9 +1955,9 @@
     <script src="../assets/plugins/select2/select2.full.min.js"></script>
 
     <!-- INTERNAL Data tables js-->
-    <script src="../assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
-    <script src="../assets/plugins/datatable/js/dataTables.bootstrap5.js"></script>
-    <script src="../assets/plugins/datatable/dataTables.responsive.min.js"></script>
+    <!-- <script src="../assets/plugins/datatable/js/jquery.dataTables.min.js"></script> -->
+    <!-- <script src="../assets/plugins/datatable/js/dataTables.bootstrap5.js"></script> -->
+    <!-- <script src="../assets/plugins/datatable/dataTables.responsive.min.js"></script> -->
 
     <!-- INTERNAL APEXCHART JS -->
     <script src="../assets/js/apexcharts.js"></script>
@@ -1987,6 +2020,7 @@
     <script src="../assets/js/index-chart.js"></script>
     <!-- <script src="https://backend.app.spaderent.com/"></script> -->
     <script src="../assets/js/email-verification.js"></script>
+      
 <script>
             $(document).ready(function(){
                 $.ajax({
@@ -3430,7 +3464,7 @@ else {
     <!-- date picker js start  -->
 
 
-
+    
 
 </body>
 
