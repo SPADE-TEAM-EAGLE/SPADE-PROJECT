@@ -971,7 +971,7 @@
                                             placeholder="Enter Prospects Details" required>
                                         <span class="text-danger d-none">Prospects Details is required!</span>
                                     </div>
-                                    <div class="col-md-8 col-lg-8 col-xl-8">
+                                    <div class="col-md-12 col-lg-12 col-xl-12">
                                         <label for="inputState" class="form-label fw-bold">Source Campaign <span
                                                 class="text-danger">*</span></label>
                                         <select id="sourceCampaign" class="form-select form mb-2 select2-show-search">
@@ -983,7 +983,7 @@
                                         <a href="javascript:void(0)" class="text-primary"
                                             style="text-decoration: underline;">+ Add Prospect Source</a>
                                     </div>
-                                    <div class="col-md-4 col-lg-4 col-xl-4">
+                                    <!-- <div class="col-md-4 col-lg-4 col-xl-4">
                                         <label for="status" class="form-label fw-bold">Status <span
                                                 class="text-danger">*</span></label>
                                         <select id="status" class="form-select form select2-show-search">
@@ -996,7 +996,7 @@
                                         </select>
 
                                         <span class="text-danger d-none">Status is required!</span>
-                                    </div>
+                                    </div> -->
                                 </form>
                             </div>
                         </div>
@@ -2483,7 +2483,7 @@
                                                                             href="javascript:void(0)">Personal
                                                                             Settings</a>
                                                                     </div> -->
-                                                                    <div class="card-options">
+                                                                    <div class="card-options" style="visibility: hidden;">
                                                                         <a data-bs-effect="effect-scale"
                                                                             data-bs-toggle="modal" href="#"><i
                                                                                 class="fi fi-rs-edit fw-bold text-dark"></i></a>
@@ -2512,7 +2512,7 @@
                                                                         data-bs-toggle="dropdown"><i
                                                                             class="fi fi-rs-grip-lines fs-20 fw-bold"></i></a>
 
-                                                                    <div class="card-options">
+                                                                    <div class="card-options" style="visibility: hidden;">
                                                                         <a data-bs-effect="effect-scale"
                                                                             data-bs-toggle="modal" href="#"><i
                                                                                 class="fi fi-rs-edit fw-bold text-dark"></i></a>
@@ -2550,7 +2550,7 @@
                                                                             href="javascript:void(0)">Personal
                                                                             Settings</a>
                                                                     </div> -->
-                                                                    <div class="card-options">
+                                                                    <div class="card-options" style="visibility: hidden;">
                                                                         <a data-bs-effect="effect-scale"
                                                                             data-bs-toggle=npm stat"modal" href=""><i
                                                                                 class="fi fi-rs-edit fw-bold text-dark"></i></a>
@@ -3314,7 +3314,7 @@
                                                                     </div>
                                                                     <div style="display: flex; align-items: end;">
 
-                                                                        <select class="form-select form select2-show-search" id="prospect-year">
+                                                                        <select class="form-select form " id="prospect-year">
                                                                             <option selected>2023</option>
                                                                             <option value="2022">2022</option>
                                                                             <option value="2021">2021</option>
@@ -4227,7 +4227,7 @@
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
-                            window.location = '../Landlord/login_module.html';
+                            // window.location = '../Landlord/login_module.html';
                         }, 2000);
                         console.log(error);
                     }
@@ -4259,7 +4259,44 @@
     <script>
         var prospectID; var prospectusStatus;
         $(document).ready(function () {
+            $.ajax({
+        url: 'https://backend.app.spaderent.com/api/spade/protected',
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+        },
+        success: function ({ userName, email, userId, image }) {
+            function toTitleCase(str) {
+                return str.replace(/\w\S*/g, function (txt) {
+                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                });
+            }
+            if(image!==" " && image!==null){
+                
+                $("#user-img").attr("src", image)
+                $("#user-img-dark").attr("src", image)
+            }
 
+
+            $("#user-name").text(toTitleCase(userName))
+            $("#header-user").text(toTitleCase(userName))
+            userEmail = email
+            id1 = userId
+            console.log($("#user-email"))
+            $("#user-email").val(email)
+        },
+        error: function (xhr, status, error) {
+            $("#myModal_warning").modal("show");
+            setTimeout(function () {
+                $('#myModal_warning').modal('hide');
+                window.location = '../Landlord/login_module.html';
+            }, 2000);
+            console.log('Error occurred while fetching state and city data.');
+            console.log(xhr);
+            console.log(error);
+            // console.log('Error occurred while fetching state and city data.');
+        }
+    });
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/getPropertyUnitsTenant',
                 type: 'GET',
@@ -4638,13 +4675,14 @@ var encodedProspectId = encodeURIComponent(encryptedProspectId);
 
                             let elem;
 
-                            if (prospectus.prospectusStatus == "Engaged") {
-                                populateCards($('#engaged-propsect-kanban .card .card-body'), prospectus, property);
+                            // if (prospectus.prospectusStatus == "engaged") {
+                            //     populateCards($('#engaged-propsect-kanban .card .card-body'), prospectus, property);
 
-                            } else if (prospectus.prospectusStatus == "Nurturing") {
-                                populateCards($('#nurturing-propsect-kanban .card .card-body'), prospectus, property);
+                            // } else if (prospectus.prospectusStatus == "nurturing") {
+                            //     populateCards($('#nurturing-propsect-kanban .card .card-body'), prospectus, property);
 
-                            } else if (prospectus.prospectusStatus !== "Qualified" && prospectus.prospectusStatus !== "Disqualified") {
+                            // } 
+                            if (prospectus.prospectusStatus !== "qualified" && prospectus.prospectusStatus !== "disqualified") {
                                 populateCards($('#new-propsect-kanban .card .card-body'), prospectus, property);
 
                             }
@@ -4859,9 +4897,23 @@ updateQDChart(qualified, disqualified)
 
                 // Additional code for specific fields like 'moveInDate' and 'potentialRentAmount'
                 $('#moveInDate_update, #potentialRentAmount_update').val('');
-                $('#moveInDate_update, #potentialRentAmount_update').removeClass('border-green');
-                $('#moveInDate_update, #potentialRentAmount_update').removeClass('border-danger');
+                $("#next").addClass("d-none")
+                $("#next-add-prospect").removeClass("d-none")
+                $('#moveInDate, #potentialRentAmount').val('');
+                $('#moveInDate_update, #potentialRentAmount_update').removeClass('border-danger border-green');
+                $('#moveInDate, #potentialRentAmount').removeClass('border-danger border-green');
                 $('#moveInDate_update, #potentialRentAmount_update').next('.text-danger').addClass('d-none');
+                $(".accordion-item .icon").eq(1).removeClass("fi-rs-exclamation");
+           $(".accordion-item .icon").eq(1).removeClass("fi-rs-check-circle");
+           $(".accordion-item .icon").eq(1).removeClass("tick cross");
+           $(".accordion-item .icon").eq(1).addClass("fi fi-rs-angle-circle-down");
+           
+           $(".accordion-item .icon").eq(0).removeClass("fi-rs-exclamation");
+           $(".accordion-item .icon").eq(0).removeClass("fi-rs-check-circle");
+           $(".accordion-item .icon").eq(0).removeClass("tick cross");
+           $(".accordion-item .icon").eq(0).addClass("fi fi-rs-angle-circle-down chevron");
+
+
             }
 
             $(function () {
@@ -5109,7 +5161,7 @@ updateQDChart(qualified, disqualified)
                     sourceCampaign: sourceCampaign,
                     moveDate: moveInDate,
                     rentAmount: potentialRentAmount,
-                    prospectusStatus: status
+                    prospectusStatus: "active"
                 }
                 $("#addModal").modal("hide")
 
