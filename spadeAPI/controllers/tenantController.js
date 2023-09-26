@@ -1066,15 +1066,6 @@ exports.updateTenantProfile = async (req, res) => {
 };
 //  ############################# Task tenant ############################################################
 
-
-
-
-
-
-
-
-
-
 //  ############################# get all Tenant Attach File Start ############################################################
 exports.GettenantAttachEmailPhone = async (req, res) => {
   const { tenantID } = req.params; 
@@ -1104,3 +1095,115 @@ return res.status(201).json({ Info: "No data found in tenant attach file" });
   }
 };
 //  ############################# Add Tenant Attach File End ############################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//  ############################# Delete All Tenant Start ############################################################
+exports.allTenantDelete = async (req, res) => {
+  try {
+    let { id } = req.body;
+
+  for(let i = 0; i < id.length; i++ ){
+   const tenantID = id[i];
+    const tenantResult = await queryRunner(selectQuery("tenants", "id"), [
+      tenantID,
+    ]);
+    if (tenantResult[0].length > 0) {
+  // const tenantAllPaidInvoiceResult = await queryRunner(
+  //   checkMyAllTenantsInvoicePaidQuerytenant,
+  //   [tenantID]
+  // );
+  // console.log(tenantAllPaidInvoiceResult[0].length);
+  // No un-paid invoices found, update tenant account
+  // if (tenantAllPaidInvoiceResult[0].length > 0) {
+  //   res.status(200).json({
+  //     message: "Tenant Invoice is pending Kindly Paid invoice ",
+  //   });
+  // } else {
+    const propertyUnitID = tenantResult[0][0].propertyUnitID;
+    const tenantDeleteResult = await queryRunner(
+      deleteQuery("tenants", "id"),
+      [tenantID]
+    );
+    // console.log(tenantDeleteResult[0])
+    if (tenantDeleteResult[0].affectedRows > 0) {
+      const tenantCheckResult = await queryRunner(
+        selectQuery("tenantattachfiles", "tenantID"),
+        [tenantID]
+      );
+      if (tenantCheckResult[0].length > 0) {
+        const tenantimages = tenantCheckResult[0].map(
+          (image) => image.fileName
+        );
+        // delete folder images
+        imageToDelete(tenantimages);
+        const tenantFileDeleteresult = await queryRunner(
+          deleteQuery("tenantattachfiles", "tenantID"),
+          [tenantID]
+        );
+      }
+
+      const tenantAdditionalEmailCheckResult = await queryRunner(
+        selectQuery("tenantalternateemail", "tenantID"),
+        [tenantID]
+      );
+      if (tenantAdditionalEmailCheckResult[0].length > 0) {
+        const tenantAdditionalEmailresult = await queryRunner(
+          deleteQuery("tenantalternateemail", "tenantID"),
+          [tenantID]
+        );
+      }
+      const tenantAdditionalPhoneCheckResult = await queryRunner(
+        selectQuery("tenantalternatephone", "tenantID"),
+        [tenantID]
+      );
+      if (tenantAdditionalPhoneCheckResult[0].length > 0) {
+        const tenantAdditionalPhoneResult = await queryRunner(
+          deleteQuery("tenantalternatephone", "tenantID"),
+          [tenantID]
+        );
+      }
+
+      const tenantIncreaseRentCheckResult = await queryRunner(
+        selectQuery("tenantincreaserent", "tenantID"),
+        [tenantID]
+      );
+      if (tenantIncreaseRentCheckResult[0].length > 0) {
+        const tenantIncreaseRentResult = await queryRunner(
+          deleteQuery("tenantincreaserent", "tenantID"),
+          [tenantID]
+        );
+      }
+      const status = "Vacant";
+      const propertyUnitsResult = await queryRunner(updateUnitsTenant, [
+        status,
+        propertyUnitID,
+      ]);
+    } 
+        } 
+    }
+    res.status(200).json({
+      message: " tenant deleted successfully",
+    });
+  } catch (error) {
+    console.log(error);
+    res.send("Error from delete tenants ", error);
+  }
+};
+//  ############################# Delete All Tenant End ############################################################

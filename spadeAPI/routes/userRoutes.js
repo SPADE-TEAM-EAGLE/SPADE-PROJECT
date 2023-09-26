@@ -239,4 +239,5 @@ router.put("/changeEmail", verifyToken, settingController.changeEmail);
 router.put("/changeEmailVerifyToken", verifyToken, settingController.changeEmailVerifyToken);
 router.get("/prospectusTime/:startDate/:endDate", verifyToken, prospectus.prospectusTime);
 router.get("/GettenantAttachEmailPhone/:tenantID", verifyToken, tenantController.GettenantAttachEmailPhone);
+router.delete("/allTenantDelete", verifyToken, tenantController.allTenantDelete);
 
