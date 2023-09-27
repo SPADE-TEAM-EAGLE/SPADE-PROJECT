@@ -1065,3 +1065,42 @@ exports.updateTenantProfile = async (req, res) => {
   }
 };
 //  ############################# Task tenant ############################################################
+
+
+
+
+
+
+
+
+
+
+//  ############################# get all Tenant Attach File Start ############################################################
+exports.GettenantAttachEmailPhone = async (req, res) => {
+  const { tenantID } = req.query; 
+
+  try {
+    const tenantAlternateEmailResult = await queryRunner(selectQuery("tenantalternateemail", "tenantID"), [
+      tenantID,
+    ]);
+    const tenantAlternatePhoneResult = await queryRunner(selectQuery("tenantalternatephone", "tenantID"), [
+      tenantID,
+    ]);
+      if (tenantAlternateEmailResult[0].length === 0 && tenantAlternatePhoneResult[0].length === 0) {
+        // throw new Error("No data Found in tenant attach file");
+return res.status(201).json({ Info: "No data found in tenant attach file" });
+
+      }else{
+        res.status(200).json({
+          message: " Alternate get successful",
+          Email : tenantAlternateEmailResult[0],
+          Phone : tenantAlternatePhoneResult[0]
+        });
+      }
+
+  } catch (error) {
+    res.status(400).send("Error4" + error);
+    console.log(error);
+  }
+};
+//  ############################# Add Tenant Attach File End ############################################################
