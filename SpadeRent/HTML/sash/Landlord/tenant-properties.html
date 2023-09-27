@@ -1478,6 +1478,20 @@
                                         </div>
                                     </div>
                                     <div class="card-body p-0">
+                                        <div class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-end">
+                                            <div style="width: 220px" class="d-flex justify-content-center align-items-center">
+                                                <span class="fw-bold me-2">Number of rows</span>
+                                                <select id="lengthSelectBox" class="form-select form" style="width: 80px;">
+
+                                                    <!-- <option value="1">1</option> -->
+                                                    <option value="10">10</option>
+                                                    <option value="25">25</option>
+                                                    <option value="100">100</option>
+                                                    <option value="200">200</option>
+                                                    <option value="500">500</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                         <div class="table-responsive">
                                             <table class="table-hover table border text-nowrap text-md-nowrap mb-0 p-0 w-100" id="responsive-datatable">
                                                 <thead>
@@ -2369,12 +2383,20 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
             });
 
             // Search functionality
-            $('#typehead').on('keyup', function() {
-                var searchValue = $(this).val().toLowerCase();
-                $('#table_body tr').filter(function() {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
-                });
-            });
+            $(document).on('keyup', '#typehead', function () {
+    var searchValue = $(this).val().toLowerCase();
+    var numRowsToShow = $('#lengthSelectBox').val();
+
+    $('#table_body tr').filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+    });
+
+    if (searchValue === '') {
+        // If search box is empty, use the selected value from the select box
+        $('#table_body tr:visible:lt(' + numRowsToShow + ')').show();
+        $('#table_body tr:visible:gt(' + (numRowsToShow - 1) + ')').hide();
+    }
+});
             function formatDate(dateString) {
     const date = new Date(dateString);
     const options = { year: 'numeric', month: 'short', day: 'numeric' };
@@ -2394,6 +2416,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                 success: function({
                     data
                 }) {
+                    $("#tenant-top-img").attr("src", data[0][0].tenantImage ? data[0][0].tenantImage : "../assets/images/users/16.jpg")
                     console.log(data[0])
                     $("#tenant-top-img").attr("src", data[0][0].tenantImage?data[0][0].tenantImage:"../assets/images/users/16.jpg")
                     $(".company-name").text(`${data[0][0].companyName} | ${data[0][0].firstName + " " + data[0][0].lastName}`)
@@ -2489,9 +2512,8 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
         });
     </script> -->
 
-    <script>
+    <!-- <script>
         $(document).ready(function () {
-            // alert(2)
             var scriptUrls = [
                 "../assets/plugins/datatable/js/jquery.dataTables.min.js",
                 "../assets/plugins/datatable/js/dataTables.bootstrap5.js",
@@ -2515,18 +2537,51 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
     var script = document.createElement('script');
     script.src = scriptUrl;
     script.className = 'dynamic-script';
-    script.setAttribute('defer', 'true'); // Set the "defer" attribute
+    script.setAttribute('defer', 'true'); 
     document.head.appendChild(script);
 });
 
             }
             $(document).ajaxStop(function () {
-                // alert(1)
+               
                 loadScripts()
             });
         });
-    </script> 
+    </script>  -->
+    <script>
+        $(document).change(function () {
+            if ($('#typehead').val() == "") {
 
+                let count = 1;
+                $("#table_body tr").each(function (item, index) {
+                    console.log(count, parseInt($("#lengthSelectBox").val()))
+                    if (count > parseInt($("#lengthSelectBox").val())) {
+                        $(this).hide()
+                    }
+                    else {
+                        $(this).show()
+                    }
+                    count++;
+                })
+            }
+        })
+        $(document).ajaxStop(function () {
+            if ($('#typehead').val() == "") {
+
+                let count = 1;
+                $("#table_body tr").each(function (item, index) {
+                    console.log(count, parseInt($("#lengthSelectBox").val()))
+                    if (count > parseInt($("#lengthSelectBox").val())) {
+                        $(this).hide()
+                    }
+                    else {
+                        $(this).show()
+                    }
+                    count++;
+                })
+            }
+        })
+    </script>
 </body>
 
 </html>

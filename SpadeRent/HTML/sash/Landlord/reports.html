@@ -2975,6 +2975,19 @@
                                                                 </div>
                                                             </div>
                                                             <div class="card-body p-0">
+                                                                <div class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-end">
+                                                                    <div style="width: 220px" class="d-flex justify-content-center align-items-center">
+                                                                        <span class="fw-bold me-2">Number of rows</span>
+                                                                        <select id="lengthSelectBox" class="form-select form" style="width: 80px;">
+                                                                            <!-- <option value="1">1</option> -->
+                                                                            <option value="10">10</option>
+                                                                            <option value="25">25</option>
+                                                                            <option value="100">100</option>
+                                                                            <option value="200">200</option>
+                                                                            <option value="500">500</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
                                                                 <form class="form" id="form">
                                                                     <div class="table-responsive" id="htmlContent">
                                                                         <table
@@ -3194,6 +3207,20 @@
                                                                 </div>
                                                             </div>
                                                             <div class="card-body p-0">
+                                                                <div class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-end">
+                                                                    <div style="width: 220px" class="d-flex justify-content-center align-items-center">
+                                                                        <span class="fw-bold me-2">Number of rows</span>
+                                                                        <select id="lengthSelectBox2" class="form-select form" style="width: 80px;">
+                        
+                                                                            <!-- <option value="1">1</option> -->
+                                                                            <option value="10">10</option>
+                                                                            <option value="25">25</option>
+                                                                            <option value="100">100</option>
+                                                                            <option value="200">200</option>
+                                                                            <option value="500">500</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
                                                                 <div class="table-responsive" id="htmlContent2">
                                                                     <table
                                                                         class="table border text-nowrap text-md-nowrap mb-0 property-reports2 p-0 w-100"
@@ -3439,6 +3466,20 @@
                                                                 </div>
                                                             </div>
                                                             <div class="card-body p-0">
+                                                                <div class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-end">
+                                                                    <div style="width: 220px" class="d-flex justify-content-center align-items-center">
+                                                                        <span class="fw-bold me-2">Number of rows</span>
+                                                                        <select id="lengthSelectBox3" class="form-select form" style="width: 80px;">
+                        
+                                                                            <!-- <option value="1">1</option> -->
+                                                                            <option value="10">10</option>
+                                                                            <option value="25">25</option>
+                                                                            <option value="100">100</option>
+                                                                            <option value="200">200</option>
+                                                                            <option value="500">500</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
                                                                 <div class="table-responsive" id="htmlContent3">
                                                                     <table
                                                                         class="table border text-nowrap text-md-nowrap mb-0 property-reports3 p-0 w-100"
@@ -3672,6 +3713,20 @@
                                                                 </div>
                                                             </div>
                                                             <div class="card-body p-0">
+                                                                <div class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-end">
+                                                                    <div style="width: 220px" class="d-flex justify-content-center align-items-center">
+                                                                        <span class="fw-bold me-2">Number of rows</span>
+                                                                        <select id="lengthSelectBox4" class="form-select form" style="width: 80px;">
+                        
+                                                                            <!-- <option value="1">1</option> -->
+                                                                            <option value="10">10</option>
+                                                                            <option value="25">25</option>
+                                                                            <option value="100">100</option>
+                                                                            <option value="200">200</option>
+                                                                            <option value="500">500</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
                                                                 <div class="table-responsive" id="htmlContent4">
                                                                     <table
                                                                         class="table border text-nowrap text-md-nowrap mb-0 property-reports4 p-0 w-100"
@@ -3895,6 +3950,20 @@
                                                                 </div>
                                                             </div>
                                                             <div class="card-body p-0" id="htmlContent5">
+                                                                <div class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-end">
+                                                                    <div style="width: 220px" class="d-flex justify-content-center align-items-center">
+                                                                        <span class="fw-bold me-2">Number of rows</span>
+                                                                        <select id="lengthSelectBox5" class="form-select form" style="width: 80px;">
+                        
+                                                                            <!-- <option value="1">1</option> -->
+                                                                            <option value="10">10</option>
+                                                                            <option value="25">25</option>
+                                                                            <option value="100">100</option>
+                                                                            <option value="200">200</option>
+                                                                            <option value="500">500</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
                                                                 <table
                                                                     class="table border text-nowrap text-md-nowrap mb-0 property-reports5 p-0 w-100" id="responsive-datatable4">
                                                                     <thead>
@@ -5335,38 +5404,103 @@ return eval(`${type}(createdAt)`);
                 var selectedValue = $(this).val();
                 filterAndRenderTableTenant(selectedValue);
             });
-            $("#typehead").on('input', function () {
-                var searchValue = $(this).val().toLowerCase();
-                $('#table_body_property_report tr').filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
-                });
-            });
-            $("#typehead_lease").on('input', function () {
+            // $("#typehead").on('input', function () {
+            //     var searchValue = $(this).val().toLowerCase();
+            //     $('#table_body_property_report tr').filter(function () {
+            //         $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+            //     });
+            // });
+            $(document).on('input', '#typehead', function () {
+    var searchValue = $(this).val().toLowerCase();
+    var numRowsToShow = $('#lengthSelectBox').val();
 
-                var searchValue = $(this).val().toLowerCase();
-                $('#table_body_lease_report tr').filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
-                });
+    $('#table_body_property_report tr').filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+    });
 
-            });
-            $("#typehead_tenant").on('input', function () {
-                var searchValue = $(this).val().toLowerCase();
-                $('#table_body_tenant_report tr').filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
-                });
-            });
-            $("#typehead_invoice").on('input', function () {
-                var searchValue = $(this).val().toLowerCase();
-                $('#table_body_invoice_report tr').filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
-                });
-            });
-            $("#typehead_task").on('input', function () {
-                var searchValue = $(this).val().toLowerCase();
-                $('#table_body_task_report tr').filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
-                });
-            });
+    if (searchValue === '') {
+        $('#table_body_property_report tr:visible:lt(' + numRowsToShow + ')').show();
+        $('#table_body_property_report tr:visible:gt(' + (numRowsToShow - 1) + ')').hide();
+    }
+});
+            // $("#typehead_lease").on('input', function () {
+
+            //     var searchValue = $(this).val().toLowerCase();
+            //     $('#table_body_lease_report tr').filter(function () {
+            //         $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+            //     });
+
+            // });
+            $(document).on('input', '#typehead_lease', function () {
+    var searchValue = $(this).val().toLowerCase();
+    var numRowsToShow = $('#lengthSelectBox2').val();
+
+    $('#table_body_lease_report tr').filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+    });
+
+    if (searchValue === '') {
+        $('#table_body_lease_report tr:visible:lt(' + numRowsToShow + ')').show();
+        $('#table_body_lease_report tr:visible:gt(' + (numRowsToShow - 1) + ')').hide();
+    }
+});
+            // $("#typehead_tenant").on('input', function () {
+            //     var searchValue = $(this).val().toLowerCase();
+            //     $('#table_body_tenant_report tr').filter(function () {
+            //         $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+            //     });
+            // });
+            $(document).on('input', '#typehead_tenant', function () {
+    var searchValue = $(this).val().toLowerCase();
+    var numRowsToShow = $('#lengthSelectBox3').val();
+
+    $('#table_body_tenant_report tr').filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+    });
+
+    if (searchValue === '') {
+        $('#table_body_tenant_report tr:visible:lt(' + numRowsToShow + ')').show();
+        $('#table_body_tenant_report tr:visible:gt(' + (numRowsToShow - 1) + ')').hide();
+    }
+});
+            // $("#typehead_invoice").on('input', function () {
+            //     var searchValue = $(this).val().toLowerCase();
+            //     $('#table_body_invoice_report tr').filter(function () {
+            //         $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+            //     });
+            // });
+            $(document).on('input', '#typehead_invoice', function () {
+    var searchValue = $(this).val().toLowerCase();
+    var numRowsToShow = $('#lengthSelectBox4').val();
+
+    $('#table_body_invoice_report tr').filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+    });
+
+    if (searchValue === '') {
+        $('#table_body_invoice_report tr:visible:lt(' + numRowsToShow + ')').show();
+        $('#table_body_invoice_report tr:visible:gt(' + (numRowsToShow - 1) + ')').hide();
+    }
+});
+            // $("#typehead_task").on('input', function () {
+            //     var searchValue = $(this).val().toLowerCase();
+            //     $('#table_body_task_report tr').filter(function () {
+            //         $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+            //     });
+            // });
+            $(document).on('input', '#typehead_task', function () {
+    var searchValue = $(this).val().toLowerCase();
+    var numRowsToShow = $('#lengthSelectBox5').val();
+
+    $('#table_body_task_report tr').filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+    });
+
+    if (searchValue === '') {
+        $('#table_body_task_report tr:visible:lt(' + numRowsToShow + ')').show();
+        $('#table_body_task_report tr:visible:gt(' + (numRowsToShow - 1) + ')').hide();
+    }
+});
             function formatCurrency(amount) {
                 // Convert amount to a number
                 const numericAmount = Number(amount);
@@ -5728,9 +5862,8 @@ return eval(`${type}(createdAt)`);
                 // });
             }); 
         </script>
-        <script>
+        <!-- <script>
             $(document).ready(function () {
-                // alert(2)
                 var scriptUrls = [
                     "../assets/plugins/datatable/js/jquery.dataTables.min.js",
                     "../assets/plugins/datatable/js/dataTables.bootstrap5.js",
@@ -5757,10 +5890,147 @@ return eval(`${type}(createdAt)`);
                     });
                 }
                 $(document).ajaxStop(function () {
-                    // alert(1)
                     loadScripts()
                 });
             });
+        </script> -->
+        <script>
+            $(document).change(function () {
+                if ($('#typehead').val() == "") {
+                    let count = 1;
+                    $("#table_body_property_report tr").each(function (item, index) {
+                        console.log(count, parseInt($("#lengthSelectBox").val()))
+                        if (count > parseInt($("#lengthSelectBox").val())) {
+                            $(this).hide()
+                        }
+                        else {
+                            $(this).show()
+                        }
+                        count++;
+                    })
+                }
+                if ($('#typehead_lease').val() == "") {
+                    let count = 1;
+                    $("#table_body_lease_report tr").each(function (item, index) {
+                        console.log(count, parseInt($("#lengthSelectBox2").val()))
+                        if (count > parseInt($("#lengthSelectBox2").val())) {
+                            $(this).hide()
+                        }
+                        else {
+                            $(this).show()
+                        }
+                        count++;
+                    })
+                }
+                if ($('#typehead_tenant').val() == "") {
+                    let count = 1;
+                    $("#table_body_tenant_report tr").each(function (item, index) {
+                        console.log(count, parseInt($("#lengthSelectBox3").val()))
+                        if (count > parseInt($("#lengthSelectBox3").val())) {
+                            $(this).hide()
+                        }
+                        else {
+                            $(this).show()
+                        }
+                        count++;
+                    })
+                }
+                if ($('#typehead_invoice').val() == "") {
+                    let count = 1;
+                    $("#table_body_invoice_report tr").each(function (item, index) {
+                        console.log(count, parseInt($("#lengthSelectBox4").val()))
+                        if (count > parseInt($("#lengthSelectBox4").val())) {
+                            $(this).hide()
+                        }
+                        else {
+                            $(this).show()
+                        }
+                        count++;
+                    })
+                }
+                if ($('#typehead_task').val() == "") {
+                    let count = 1;
+                    $("#table_body_task_report tr").each(function (item, index) {
+                        console.log(count, parseInt($("#lengthSelectBox5").val()))
+                        if (count > parseInt($("#lengthSelectBox5").val())) {
+                            $(this).hide()
+                        }
+                        else {
+                            $(this).show()
+                        }
+                        count++;
+                    })
+                }
+                
+            })
+            $(document).ajaxStop(function () {
+                if ($('#typehead').val() == "") {
+    
+                    let count = 1;
+                    $("#table_body_property_report tr").each(function (item, index) {
+                        console.log(count, parseInt($("#lengthSelectBox").val()))
+                        if (count > parseInt($("#lengthSelectBox").val())) {
+                            $(this).hide()
+                        }
+                        else {
+                            $(this).show()
+                        }
+                        count++;
+                    })
+                }
+                if ($('#typehead_lease').val() == "") {
+                    let count = 1;
+                    $("#table_body_lease_report tr").each(function (item, index) {
+                        console.log(count, parseInt($("#lengthSelectBox2").val()))
+                        if (count > parseInt($("#lengthSelectBox2").val())) {
+                            $(this).hide()
+                        }
+                        else {
+                            $(this).show()
+                        }
+                        count++;
+                    })
+                }
+                if ($('#typehead_tenant').val() == "") {
+                    let count = 1;
+                    $("#table_body_tenant_report tr").each(function (item, index) {
+                        console.log(count, parseInt($("#lengthSelectBox3").val()))
+                        if (count > parseInt($("#lengthSelectBox3").val())) {
+                            $(this).hide()
+                        }
+                        else {
+                            $(this).show()
+                        }
+                        count++;
+                    })
+                }
+                if ($('#typehead_invoice').val() == "") {
+                    let count = 1;
+                    $("#table_body_invoice_report tr").each(function (item, index) {
+                        console.log(count, parseInt($("#lengthSelectBox4").val()))
+                        if (count > parseInt($("#lengthSelectBox4").val())) {
+                            $(this).hide()
+                        }
+                        else {
+                            $(this).show()
+                        }
+                        count++;
+                    })
+                }
+                if ($('#typehead_task').val() == "") {
+                    let count = 1;
+                    $("#table_body_task_report tr").each(function (item, index) {
+                        console.log(count, parseInt($("#lengthSelectBox5").val()))
+                        if (count > parseInt($("#lengthSelectBox5").val())) {
+                            $(this).hide()
+                        }
+                        else {
+                            $(this).show()
+                        }
+                        count++;
+                    })
+                }
+            })
         </script>
 </body>
 

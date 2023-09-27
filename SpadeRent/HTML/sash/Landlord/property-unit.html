@@ -2575,7 +2575,7 @@
                         row.append(unitDetailsCell);
 
                         const actionCell = $('<td></td>');
-                        const doneButton = $(`<button type="button" class="btn btn-primary me-1 btn-pill edit-option ${unit.unitNumber ? "" : "d-none"}">Edit</button> <button type="button" disabled class="btn btn-success me-1 btn-pill done-option ${unit.unitNumber ? "d-none" : ""}">Done</button><button type="button" disabled class="btn btn-danger btn-pill delete-option ${unit.status == "Occupied" ? "d-none" : ""}">Delete</button>`);
+                        const doneButton = $(`<button type="button" class="btn btn-primary me-1 btn-pill edit-option ${unit.unitNumber ? "" : "d-none"}">Edit</button> <button type="button" disabled class="btn btn-success me-1 btn-pill done-option ${unit.unitNumber ? "d-none" : ""}">Done</button><button type="button"  class="btn btn-danger btn-pill delete-option ${unit.status == "Occupied" ? "d-none" : ""}">Delete</button>`);
                         actionCell.append(doneButton);
                         row.append(actionCell);
 
@@ -2713,6 +2713,9 @@
                     })
                     $(".edit-option").click(function () {
                         // e.preventDefault();
+                        // alert(1)
+                        $(this).closest('td').find('.done-option').removeAttr('disabled');
+
                         console.log(1)
                         const unitIdElement = $(this).closest("tr").find(".unit-id");
                         $(this).addClass("d-none")

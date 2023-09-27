@@ -1470,6 +1470,20 @@
                                         </div>
                                     </div>
                                     <div class="card-body p-0">
+                                        <div class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-end">
+                                            <div style="width: 220px" class="d-flex justify-content-center align-items-center">
+                                                <span class="fw-bold me-2">Number of rows</span>
+                                                <select id="lengthSelectBox" class="form-select form" style="width: 80px;">
+
+                                                    <!-- <option value="1">1</option> -->
+                                                    <option value="10">10</option>
+                                                    <option value="25">25</option>
+                                                    <option value="100">100</option>
+                                                    <option value="200">200</option>
+                                                    <option value="500">500</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                         <div class="table-responsive">
                                             <table class="table-hover table border text-nowrap text-md-nowrap mb-0" id="myTable">
                                                 <thead>
@@ -2442,6 +2456,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                 success: function({
                     data
                 }) {
+                    $("#tenant-top-img").attr("src", data[0][0].tenantImage ? data[0][0].tenantImage : "../assets/images/users/16.jpg")
                     function toTitleCase(str) {
                                 return str.replace(/\w\S*/g, function(txt) {
                                     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
@@ -2576,12 +2591,20 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                 isColumnVisible ? column.show() : column.hide();
             });
         });
-        $('#typehead').on('keyup', function() {
-                var searchValue = $(this).val().toLowerCase();
-                $('#table_body tr').filter(function() {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
-                });
-            });
+        $(document).on('keyup', '#typehead', function () {
+    var searchValue = $(this).val().toLowerCase();
+    var numRowsToShow = $('#lengthSelectBox').val();
+
+    $('#table_body tr').filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+    });
+
+    if (searchValue === '') {
+        // If search box is empty, use the selected value from the select box
+        $('#table_body tr:visible:lt(' + numRowsToShow + ')').show();
+        $('#table_body tr:visible:gt(' + (numRowsToShow - 1) + ')').hide();
+    }
+});
         });
     </script>
 
@@ -2640,7 +2663,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
         });
     }
 </script>
-<script>
+<!-- <script>
     $(document).ready(function () {
         var scriptUrls = [
             "../assets/plugins/datatable/js/jquery.dataTables.min.js",
@@ -2673,6 +2696,40 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
         });
 
     });
+</script> -->
+<script>
+    $(document).change(function () {
+        if ($('#typehead').val() == "") {
+
+            let count = 1;
+            $("#table_body tr").each(function (item, index) {
+                console.log(count, parseInt($("#lengthSelectBox").val()))
+                if (count > parseInt($("#lengthSelectBox").val())) {
+                    $(this).hide()
+                }
+                else {
+                    $(this).show()
+                }
+                count++;
+            })
+        }
+    })
+    $(document).ajaxStop(function () {
+        if ($('#typehead').val() == "") {
+
+            let count = 1;
+            $("#table_body tr").each(function (item, index) {
+                console.log(count, parseInt($("#lengthSelectBox").val()))
+                if (count > parseInt($("#lengthSelectBox").val())) {
+                    $(this).hide()
+                }
+                else {
+                    $(this).show()
+                }
+                count++;
+            })
+        }
+    })
 </script>
 </body>
 

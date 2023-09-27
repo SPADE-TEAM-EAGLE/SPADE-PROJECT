@@ -1959,7 +1959,7 @@
                     <div class="row mb-3">
                         <div class="col-md-12 col-lg-6">
                             <label class="form-label fw-bold fs-18">Select Tenant</label>
-                            <select class="form-control select2 form-select d-block" data-placeholder="Select Tenant"
+                            <select class="form-control form-select d-block" data-placeholder="Select Tenant"
                                 name="tenants" id="tenants_update" readonly>
                                 <option label="Choose one">
                                 </option>
@@ -2049,7 +2049,7 @@
                                     <thead>
                                         <tr>
                                             <th>Category</th>
-                                            <!-- <th>Property</th> -->
+                                            <th>Property</th>
                                             <th>Description</th>
                                             <th>Tax</th>
                                             <th>Amount</th>
@@ -3273,6 +3273,20 @@
                                         </div>
                                     </div>
                                     <div class="card-body p-0">
+                                        <div class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-end">
+                                            <div style="width: 220px" class="d-flex justify-content-center align-items-center">
+                                                <span class="fw-bold me-2">Number of rows</span>
+                                                <select id="lengthSelectBox" class="form-select form" style="width: 80px;">
+
+                                                    <!-- <option value="1">1</option> -->
+                                                    <option value="10">10</option>
+                                                    <option value="25">25</option>
+                                                    <option value="100">100</option>
+                                                    <option value="200">200</option>
+                                                    <option value="500">500</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                         <div class="table-responsive">
                                             <table class="table-hover table border text-nowrap text-md-nowrap mb-0 w-100 p-0" id="myTable">
                                                 <thead>
@@ -5632,12 +5646,20 @@
                 });
                 // console.log($('#alphabets'))
                 // Search functionality
-                $('#typehead').on('keyup', function () {
-                    var searchValue = $(this).val().toLowerCase();
-                    $('#table_body tr').filter(function () {
-                        $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
-                    });
-                });
+                $(document).on('keyup', '#typehead', function () {
+    var searchValue = $(this).val().toLowerCase();
+    var numRowsToShow = $('#lengthSelectBox').val();
+
+    $('#table_body tr').filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+    });
+
+    if (searchValue === '') {
+        // If search box is empty, use the selected value from the select box
+        $('#table_body tr:visible:lt(' + numRowsToShow + ')').show();
+        $('#table_body tr:visible:gt(' + (numRowsToShow - 1) + ')').hide();
+    }
+});
                 let invoiceId;
                 let selectedValue;
                 $('input[name="status"]').on('click', function () {
@@ -6549,9 +6571,8 @@
                 .dropdown()
                 ;
         </script>
- <script>
+ <!-- <script>
     $(document).ready(function () {
-        // alert(2)
         var scriptUrls = [
             "../assets/plugins/datatable/js/jquery.dataTables.min.js",
             "../assets/plugins/datatable/js/dataTables.bootstrap5.js",
@@ -6580,11 +6601,44 @@
             });
         }
         $(document).ajaxStop(function () {
-            // alert(1)
             loadScripts()
         });
     });
-</script> 
+</script>  -->
+<script>
+    $(document).change(function () {
+        if ($('#typehead').val() == "") {
+
+            let count = 1;
+            $("#table_body tr").each(function (item, index) {
+                console.log(count, parseInt($("#lengthSelectBox").val()))
+                if (count > parseInt($("#lengthSelectBox").val())) {
+                    $(this).hide()
+                }
+                else {
+                    $(this).show()
+                }
+                count++;
+            })
+        }
+    })
+    $(document).ajaxStop(function () {
+        if ($('#typehead').val() == "") {
+
+            let count = 1;
+            $("#table_body tr").each(function (item, index) {
+                console.log(count, parseInt($("#lengthSelectBox").val()))
+                if (count > parseInt($("#lengthSelectBox").val())) {
+                    $(this).hide()
+                }
+                else {
+                    $(this).show()
+                }
+                count++;
+            })
+        }
+    })
+</script>
 </body>
 
 </html>

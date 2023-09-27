@@ -1892,8 +1892,8 @@ console.log(Id)
     }
   } catch (error) {
     console.log("Error:", error);
-    res.send("Error Get property Task");
-  }
+    res.send("Error Get property Task");
+  }
 };
 
 //  ############################# Task property ############################################################
