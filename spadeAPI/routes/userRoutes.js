@@ -242,3 +242,5 @@ router.get("/GettenantAttachEmailPhone/:tenantID", verifyToken, tenantController
 router.delete("/allTenantDelete", verifyToken, tenantController.allTenantDelete);
 router.get("/checkUnpaidInvoices", verifyToken, tenantController.checkUnpaidInvoices);
 
+
+router.post("/prospectusSources", prospectus.prospectusSources);
