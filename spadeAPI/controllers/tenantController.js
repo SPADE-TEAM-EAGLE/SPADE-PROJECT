@@ -1077,7 +1077,7 @@ exports.updateTenantProfile = async (req, res) => {
 
 //  ############################# get all Tenant Attach File Start ############################################################
 exports.GettenantAttachEmailPhone = async (req, res) => {
-  const { tenantID } = req.params; 
+  const { tenantID } = req.query; 
 
   try {
     const tenantAlternateEmailResult = await queryRunner(selectQuery("tenantalternateemail", "tenantID"), [

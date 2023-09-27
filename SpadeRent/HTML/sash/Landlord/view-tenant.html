@@ -1559,7 +1559,17 @@
                                                         </div>
                                                         <div class="media-body">
                                                             <!-- <h6 class="font-weight-semibold mb-1">Web Designer at <a href="javascript:void(0)" class="btn-link">Spruko</a></h6> -->
-                                                            <span style="color: #727272;" id="contact-text">No Emergency Contacts on File</span>
+                                                            <div style="color: #727272;" id="contact-text">
+                                                            <div>
+                                                                <p>Email</p>
+                                                                <div id="contact-email"></div>
+
+                                                                <br>
+                                                                <p>Contact</p>
+                                                                <div id="contact-number"></div>
+
+                                                            </div>
+                                                            </div>
                                                             <br>
                                                             <!-- <p>Past Work: Spruko, Inc.</p> -->
                                                             <a href="javascript:void(0)" class="btn-link add-contactInfo" style="font-weight: bold;">+ Add New</a>
@@ -2518,13 +2528,49 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                 }) {
                     if(data[0].length>0){
                         $("#tenant-text").text(" ")
-                    $("#contact-text").text(" ")
+                   
+                    
                     $("#tenant-email").text(data[0][0].tEmail)
                     $("#tenant-phone").text(data[0][0].tPhoneNumber)
                     $(".company-name").text(`${data[0][0].companyName} | ${data[0][0].firstName+" "+data[0][0].lastName}`)
                     $("#tenant-img").attr("src", data[0][0].tenantImage?data[0][0].tenantImage:"../assets/images/users/16.jpg")
                     $("#tenant-top-img").attr("src", data[0][0].tenantImage?data[0][0].tenantImage:"../assets/images/users/16.jpg")
 
+                }
+                },
+                error: function(xhr, status, error) {
+                    $("#myModal_warning_connection").modal("show");
+                            setTimeout(function() {
+                                $('#myModal_warning_connection').modal('hide');
+
+                            }, 2000);
+                    console.log(xhr.responseText);
+                }
+            });
+            $.ajax({
+                url: 'http://localhost:3000/api/spade/GettenantAttachEmailPhone',
+                type: 'GET',
+                data: {
+                    tenantID: tenantId
+                },
+                contentType: "application/json; charset=utf-8",
+                // processData: false,
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function(response) {
+                    if(response?.Email?.length>0){
+                    $("#tenant-text").text(" ")
+                    
+                    response?.Email?.forEach(element => {
+                        $("#contact-email").append(`<p>${element.alternateEmail}</p>`)
+                        
+                    });
+                    response?.Phone?.forEach(element => {
+                        $("#contact-number").append(`<p>${element.phoneNumber}</p>`)
+                        
+                    });
+                    
                 }
                 },
                 error: function(xhr, status, error) {
