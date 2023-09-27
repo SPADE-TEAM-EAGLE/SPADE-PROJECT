@@ -2274,19 +2274,18 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function ({
-                    data
+                    data,
+                    message
                 }) {
-                    console.log(data)
-                    if (data[0].length === 0) {
-
-                        var tableBody = $('#table_body');
-
-                        tableBody.empty();
-                        // window.location = './new-property.html'
-                    } else {
+                    var tableBody = $('#table_body');
+                    if(message=="No data found"){
+                        var row = '<tr><td colspan="6" style="text-align: center;">No data found</td></tr>';
+                        tableBody.append(row);
+                    }
+                    else {
                         console.log(data[0][0])
 
-                        var tableBody = $('#table_body');
+                        
 
                         tableBody.empty();
 

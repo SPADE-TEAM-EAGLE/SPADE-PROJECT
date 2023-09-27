@@ -4,14 +4,14 @@ $.ajax({
     headers: {
         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
     },
-    success: function({user}) {
+    success: function({userName}) {
         function toTitleCase(str) {
             return str.replace(/\w\S*/g, function(txt) {
                 return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
             });
         }
-    $("#user-name").text(toTitleCase(user))
-    $("#header-user").text(toTitleCase(user))
+    $("#user-name").text(toTitleCase(userName))
+    $("#header-user").text(toTitleCase(userName))
     },
     error: function(xhr, status, error) {
         console.log('Error occurred while fetching state and city data.');

@@ -632,12 +632,12 @@ exports.updateUnitsTenant =
   "UPDATE propertyunits SET  status = ?  where id = ? ";
 exports.getTenantsById = `SELECT l.Phone AS landlordPhone, p.id AS propertyID, p.propertyName, p.address AS pAddress, p.city AS pCity, p.state AS pState, p.zipCode AS pZipCode, p.propertyType, p.propertySQFT, p.status AS pStatus, p.units AS pUnits, t.id AS tenantID, t.landlordID, t.firstName, t.lastName, t.companyName, i.recurringNextDate,t.email AS tEmail, t.phoneNumber AS tPhoneNumber, t.Address AS tAddress,t.image AS tenantImage ,t.city AS tCity, t.state AS tState, t.zipcode AS tZipcode, t.rentAmount, t.gross_or_triple_lease, t.baseRent, t.tripleNet, t.leaseStartDate, t.leaseEndDate, t.increaseRent, pu.unitNumber, pu.Area AS unitArea, pu.unitDetails, pu.status AS unitStatus, GROUP_CONCAT(pi.image) AS images
 FROM tenants AS t
-INNER JOIN property AS p ON t.propertyID = p.id
+LEFT JOIN property AS p ON t.propertyID = p.id
 LEFT JOIN invoice AS i ON t.id = i.tenantID
 LEFT JOIN users AS l ON t.landlordID=l.id
 
-INNER JOIN propertyunits AS pu ON t.propertyUnitID = pu.id
-INNER JOIN propertyimage AS pi ON p.id = pi.propertyID
+LEFT JOIN propertyunits AS pu ON t.propertyUnitID = pu.id
+LEFT JOIN propertyimage AS pi ON p.id = pi.propertyID
 WHERE t.id = ?
 GROUP BY t.id;`;
 exports.updateTenantsProfile =
@@ -1076,5 +1076,4 @@ exports.updateUserEmail =
 "UPDATE users SET Email = ?, updated_at = ? where id = ?";
 exports.checkProperty = "SELECT * FROM property where propertyName = ? AND address = ? AND landlordID = ? ";
 exports.prospectusTimeQuery = "SELECT firstName, lastName, prospectusStatus, email FROM spade_Rent.prospectus WHERE  landlordId = ? AND createdDate >= ? AND createdDate <= ? ";
-// exports.CheckTenant =
-//   "UPDATE propertyunits SET  status = ?  where id = ? ";
+exports.checkUpaidInvoiceQuery = `SELECT firstName, lastName, email FROM tenants join invoice on tenants.id = invoice.tenantID WHERE invoice.tenantID = ? AND invoice.status = 'Unpaid'`;

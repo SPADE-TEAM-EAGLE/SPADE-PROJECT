@@ -3788,8 +3788,12 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response)
-                    if (response.data[0].length === 0) {
+                    var tableBody = $('#table_body');
+                    if(response.message=='No Property data found'){
+                        var row = '<tr><td colspan="6" style="text-align: center;">No data found</td></tr>';
+                        tableBody.append(row);
+                    }
+                    else if (response.data[0].length === 0) {
                         localStorage.setItem("property", "false")
                         window.location = './new-property.html'
 
@@ -3802,12 +3806,18 @@
                         $("#user-name").text(toTitleCase(response.user))
                         $("#header-user").text(toTitleCase(response.user))
 
-                        var tableBody = $('#table_body');
+                        
 
                         tableBody.empty();
                         propertyApiData = response?.data[0];
                         console.log(response.data[0].length);
+                        
                         response.data[0].forEach(function (property, index) {
+                            var password = 'your-secret-password';
+                            var encryptedPropertyId = sjcl.encrypt(password, property.id.toString());
+
+                            // Include the encrypted value in the URL
+                            var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                             var serial = `<td style="font-weight: 600;">${(index + 1)}</td>`
                             var id=`<td style="font-weight: 600;">${property.landlordID}</td>`
                             var propertyId = '<td class="property-id d-none" style="font-weight: 600;">' + property
@@ -3820,10 +3830,10 @@
 
                             // var UserId = '<td>' + US-272323 + '</td>' ;
 
-                            var propertyName = '<td class="propertyName" style="font-weight: 600;">' +
+                            var propertyName = `<td class="propertyName" style="font-weight: 600;"><a href="./view-property.html?property=${encodedPropertyId}" style="color:black;"> ` +
                                 property
                                     .propertyName +
-                                '</td>';
+                                "</a>"+'</td>';
 
                             var totalsqft = `<td class="totalsqft" style="font-weight: 600;">${property.propertySQFT} SQft.</td>`;
 
@@ -3858,11 +3868,7 @@
                                 '</span>' +
                                 '</td>';
                             var created_at = `<td class="created-at d-none" style="font-weight: 600;">${property.created_at}</td>`
-                            var password = 'your-secret-password';
-                            var encryptedPropertyId = sjcl.encrypt(password, property.id.toString());
-
-                            // Include the encrypted value in the URL
-                            var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
+                            
                             var dropdownMenu =
                                 '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
                                 '<ul class="dropdown-menu dropdown-menu-top">' +

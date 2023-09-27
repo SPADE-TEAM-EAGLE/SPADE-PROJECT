@@ -1241,6 +1241,76 @@
     </div>
     <!-- Modal -->
 
+
+    <div class="modal fade" id="unPaidModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="text-justify ps-2 border-model-line">
+                        <h2 class="modal-title mb-0" id="previewHeading">Existing <strong class="color-primary">Tenant
+                                Invoices</strong></h2>
+                        <!-- <button type="button" class="btn btn-primary">#Invoice Number: INV-89900A</button> -->
+                    </div>
+                    <button class="btn-close top-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark text-dark"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12"><p class="fw-bolder text-danger mb-2">Following are the Tenants with unpaid invoices: </p></div>
+                        <br/>
+                        <div class="col-12">
+                            <div class="table-responsive">
+                                <table class="table-hover table text-nowrap table-borderless text-md-nowrap mg-b-0 mb-0"
+                                    >
+                                    <thead>
+                                        <tr>
+                                            <th>First Name</th>
+                                            
+                                            <th>Last Name</th>
+                                            <th>Email</th>
+                                        
+                                        </tr>
+                                    </thead>
+                                    <tbody id="add-tenant-name">
+                                        <tr class="tr">
+                                            <td>
+                                                <p>Fahad</p>
+                                            </td>
+                                            
+                                            <td><p>Aad</p></td>
+                                            <td><p>Aad</p></td>
+                                            
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="modal-footer d-flex">
+                    <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal"
+                        id='close'>Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
@@ -5161,6 +5231,80 @@
             filterTableByPropertyType('Multi-Commercial');
         });
         getData();
+        var tenantToDelete=[]
+        $("#myButton").click(function () {
+            $('#table_body tr').each(function() {
+        var checkbox = $(this).find('.checkbox input.myCheckbox');
+        
+        if (checkbox.is(':checked')) {
+            var tenantId = $(this).find('.tenant-id').text();
+            tenantToDelete.push(tenantId)
+        }
+    });
+    
+    $.ajax({
+        url:"http://localhost:3000/api/spade/checkUnpaidInvoices",
+        type:"GET",
+        data:{
+            tenants:tenantToDelete},
+        contentType: "application/json;",
+        headers:{
+            Authorization: "Bearer " + localStorage.getItem("authtoken")
+        },
+        success:function(response){
+            if(response.Info=="No data found in tenant "){
+                console.log(tenantToDelete)
+                $.ajax({
+                    url:"http://localhost:3000/api/spade/allTenantDelete",
+                    type:"DELETE",
+                    contentType: "application/json;charset=utf-8",
+                    data:JSON.stringify({
+                        "id":tenantToDelete
+                    }),
+                    headers:{
+                        Authorization: "Bearer " + localStorage.getItem("authtoken")
+                    },
+                    success:function(response){
+                        tenantToDelete=[]
+                        getData()
+
+                    $("#succesModal_delete").modal("show");
+                    },error:function(xhr,status,error){
+                        console.log(error)
+                    }
+
+                })
+            
+            }
+            else{
+                tenantToDelete=[]
+                $("#add-tenant-name").empty()
+                response?.data.forEach(function(item){
+                    $("#add-tenant-name").append(`
+                <tr class="tr">
+                                            <td>
+                                                <p>${item.firstName}</p>
+                                            </td>
+                                            
+                                            <td><p>${item.lastName}</p></td>
+                                            <td><p>${item.email}</p></td>
+                                            
+                                        </tr>
+                `)
+
+                })
+
+
+
+                
+                $("#unPaidModal").modal("show");
+
+            }
+        },error:function(xhr,status,error){
+            console.log(error)
+        }
+    })
+        });
     </script>
 
     <script>

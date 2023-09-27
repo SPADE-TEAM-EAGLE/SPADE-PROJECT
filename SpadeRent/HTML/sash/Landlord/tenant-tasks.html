@@ -1317,7 +1317,7 @@
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="media mt-0 mb-2">
                                                 <div class="media-user me-2">
-                                                    <div class=""><img alt="" class="rounded-circle avatar avatar-md" style="max-width: 120px;" src="../assets/images/users/16.jpg"></div>
+                                                    <div class=""><img alt="" class="rounded-circle avatar avatar-md" style="max-width: 120px;" src="../assets/images/users/16.jpg" id="tenant-top-img"></div>
                                                 </div>
                                                 <div class="media-body">
                                                     <small class="text-white">Tenants</small>
@@ -2429,7 +2429,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
             $("#viewTasks").attr("href", `./tenant-tasks.html?tenant=${encodedTenantId}`)
             //            
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getTenantsByID',
+                url: 'http://localhost:3000/api/spade/getTenantsByID',
                 type: 'GET',
                 data: {
                     id: tenantId
@@ -2465,7 +2465,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                 });
             }
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/tenantTask',
+                url: 'http://localhost:3000/api/spade/tenantTask',
                 type: 'GET',
                 data: {
                     Id: tenantId
@@ -2475,8 +2475,14 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function(response) {
-                    console.log(response)
-                   if(response?.data[0]?.length > 0){
+                    
+                    if(response?.message=="No tenant Task data found"){
+                        var row = '<tr><td colspan="6" style="text-align: center;">No data found</td></tr>';
+                        $('#table_body').append(row);
+                    }
+                   else if(response?.data[0]?.length > 0){
+                    $("#tenant-top-img").attr("src", response?.data[0][0].tenantImage?response?.data[0][0].tenantImage:"../assets/images/users/16.jpg")
+
                         $("#no-task").show()
                         $("#task-table").hide()
                     $("#property_name").text(response?.data[0][0]?.propertyName)

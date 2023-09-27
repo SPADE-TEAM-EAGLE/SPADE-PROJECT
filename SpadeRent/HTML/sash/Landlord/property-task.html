@@ -2351,7 +2351,7 @@ const propertyId = sjcl.decrypt(password, encryptedPropertyId);
                 }
             });
             $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/propertyTask',
+                            url: 'http://localhost:3000/api/spade/propertyTask',
                             type: 'GET',
                             data: {
                                 Id:propertyId
@@ -2371,7 +2371,16 @@ const propertyId = sjcl.decrypt(password, encryptedPropertyId);
                                     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                                 });
                             }
-                        response?.data[0]?.forEach(function (task) {
+                            if(response.message=="No property Task data found"){
+                                var row = '<tr><td colspan="6" style="text-align: center;">No data found</td></tr>';
+                        tableBody.append(row);
+                            }
+                            else if(response?.data?.length===0){
+                                var row = '<tr><td colspan="6" style="text-align: center;">No Tasks Found</td></tr>';
+                                tableBody.append(row);
+                            }
+                            else{
+                                response?.data[0]?.forEach(function (task) {
                             var image = '<td><img src="../assets/images/Group-user.png" alt=""></td>';
 
                                 var createdDate = new Date(task.created_at);
@@ -2438,7 +2447,10 @@ const propertyId = sjcl.decrypt(password, encryptedPropertyId);
 
                                 // Append the row to the table body
                                 tableBody.append(row);})
+                            
+                            }
                             },
+                            
                             error: function (xhr, status, error) {
                                 $("#myModal_warning_connection").modal("show");
                             setTimeout(function() {
@@ -2448,7 +2460,8 @@ const propertyId = sjcl.decrypt(password, encryptedPropertyId);
                     console.log('Error: ' + error);
                             }
                         })
-        })
+        
+                    })
     </script>
 <script>
     function logout() {
