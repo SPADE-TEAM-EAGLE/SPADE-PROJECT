@@ -4624,8 +4624,8 @@ var encodedProspectId = encodeURIComponent(encryptedProspectId);
                             dropdownMenu.append('<li><a class="dropdown-item text-dark" href="javascript:void(0)" data-status="Active"><i class="fi fi-rs-user text-dark me-2"></i>Active</a></li>');
                             dropdownMenu.append('<li><a class="dropdown-item text-dark" href="javascript:void(0)" data-status="Engaged"><i class="fi fi-rs-minus-circle text-dark me-2"></i>Engaged</a></li>');
                             dropdownMenu.append('<li><a class="dropdown-item text-dark" href="javascript:void(0)" data-status="Nurturing"><i class="fi fi-rs-hand-holding-heart text-dark me-2"></i>Nurturing</a></li>');
-                            dropdownMenu.append('<li><a class="dropdown-item text-success" href="javascript:void(0)" data-status="Qualified"><i class="fi fi-rs-check-circle me-2 text-success"></i>Qualified</a></li>');
-                            dropdownMenu.append('<li><a class="dropdown-item text-danger" href="javascript:void(0)" data-status="Disqualified"><i class="fi fi-rs-circle-xmark text-danger text-danger me-2"></i>Disqualified</a></li>');
+                            dropdownMenu.append('<li><a class="dropdown-item text-success" href="javascript:void(0)" data-status="qualified"><i class="fi fi-rs-check-circle me-2 text-success"></i>Qualified</a></li>');
+                            dropdownMenu.append('<li><a class="dropdown-item text-danger" href="javascript:void(0)" data-status="disqualified"><i class="fi fi-rs-circle-xmark text-danger text-danger me-2"></i>Disqualified</a></li>');
 
                             dropdownMenu.find('a').on('click', function () {
                                 var newStatus = $(this).data('status');
@@ -4680,9 +4680,8 @@ var encodedProspectId = encodeURIComponent(encryptedProspectId);
                                 populateCards($('#nurturing-propsect-kanban .card .card-body'), prospectus, property);
 
                             } 
-                            if (prospectus.prospectusStatus !== "qualified" && prospectus.prospectusStatus !== "disqualified") {
+                            else if (prospectus.prospectusStatus.toLowerCase() !== "qualified" && prospectus.prospectusStatus.toLowerCase() !== "disqualified") {
                                 populateCards($('#new-propsect-kanban .card .card-body'), prospectus, property);
-
                             }
                             countValues()
                         });
@@ -5573,7 +5572,7 @@ updateQDChart(qualified, disqualified)
         });
 
     </script>
-      <script>
+      <!-- <script>
         $(document).ready(function () {
             var scriptUrls = [
                 "../assets/plugins/datatable/js/jquery.dataTables.min.js",
@@ -5610,7 +5609,7 @@ updateQDChart(qualified, disqualified)
                 loadScripts()
             });
         });
-    </script>
+    </script> -->
     <!-- export button End  -->
 </body>
 

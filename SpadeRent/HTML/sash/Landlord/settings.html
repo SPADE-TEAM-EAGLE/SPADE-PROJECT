@@ -2911,7 +2911,7 @@
                             <div class="card-body pt-0">
                                 <div class="panel panel-primary">
                                     <div class="panel-body tabs-menu-body">
-                                        <div class="tab-content">
+                                        <div class="tab-content" id="tab-pane">
                                             <div class="mb-5">
                                                 <p class="d-inline-flex gap-1">
                                                     <span>Settings | </span>
@@ -2984,6 +2984,7 @@
                                                         <input type="email" class="form-control" id="email"
                                                             placeholder="johnclark@outlook.com" required readonly>
                                                         <div class="valid-feedback">Looks good!</div>
+                                                        <a href="#tab6" id="toTab6">Change Email</a>
                                                     </div>
 
                                                     <div class="col-xl-4 mb-3">
@@ -4008,7 +4009,7 @@
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-                                                                                <div class="tab-pane active show d-block"
+                                                                                <div class="tab-pane active show"
                                                                                     id="annualyear">
                                                                                     <div
                                                                                         class="row d-flex align-items-stretch justify-content-center">
@@ -11273,7 +11274,7 @@
                     });
                     console.log(data)
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/addVendorCategory', // Replace with your actual backend endpoint URL
+                        url: 'http://localhost:3000/api/spade/addVendorCategory', // Replace with your actual backend endpoint URL
                         method: 'POST',
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -12276,7 +12277,15 @@ console.log(error);
         }
     })
 })
+$("#toTab6").click(function(){
+    $("#tab6").addClass("active");
+    $('a[href="#tab6"]').addClass("active")
+    $('a[href="#tab5"]').removeClass("active")
 
+    $("#tab5").removeClass("active");
+    $("#tab5").removeClass("show");
+    $("#tab6").addClass("show");
+})
 // ############################################################################################
        </script>
        <script>

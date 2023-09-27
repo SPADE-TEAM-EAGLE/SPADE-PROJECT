@@ -2011,6 +2011,20 @@
                                         </div>
                                     </div>
                                     <div class="card-body p-0">
+                                        <div class="p-5 d-flex justify-content-end">
+                                            <div style="width: 100px">
+                                                <select id="lengthSelectBox"
+                                                    class="form-select form">
+
+                                                    <option value="10">10</option>
+                                                    <option value="25">25</option>
+                                                    <option value="100">100</option>
+                                                    <option value="200">200</option>
+                                                    <option value="500">500</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
                                         <div class="table-responsive">
                                             <table class="table-hover table border text-nowrap text-md-nowrap mb-0 w-100"
                                                 id="responsive-datatable">
@@ -3498,12 +3512,21 @@
         });
         // console.log($('#alphabets'))
         // Search functionality
-        $(document).on('keyup','#typehead' , function () {
-            var searchValue = $(this).val().toLowerCase();
-            $('#table_body tr').filter(function () {
-                $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
-            });
-        });
+        $(document).on('keyup', '#typehead', function () {
+    var searchValue = $(this).val().toLowerCase();
+    var numRowsToShow = $('#lengthSelectBox').val();
+
+    $('#table_body tr').filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+    });
+
+    if (searchValue === '') {
+        // If search box is empty, use the selected value from the select box
+        $('#table_body tr:visible:lt(' + numRowsToShow + ')').show();
+        $('#table_body tr:visible:gt(' + (numRowsToShow - 1) + ')').hide();
+    }
+});
+
         
         // Function to update the table based on filters
         function updateTable() {
@@ -3751,7 +3774,7 @@
 
             return fileName;
         }
-
+        var propertyApiData;
         function getData(selectedFilter = "alphabets") {
             // console.log(2)
             $("#global-loader").fadeIn("fast")
@@ -3782,6 +3805,7 @@
                         var tableBody = $('#table_body');
 
                         tableBody.empty();
+                        propertyApiData = response?.data[0];
                         console.log(response.data[0].length);
                         response.data[0].forEach(function (property, index) {
                             var serial = `<td style="font-weight: 600;">${(index + 1)}</td>`
@@ -3959,6 +3983,8 @@
 
         }
         getData()
+        
+       
     </script>
     <script>
         $(document).ready(function () {
@@ -4035,7 +4061,7 @@
             });
         })
     </script>
-<script>
+<!-- <script>
     $(document).ready(function () {
         var scriptUrls = [
             "../assets/plugins/datatable/js/jquery.dataTables.min.js",
@@ -4068,7 +4094,7 @@
         });
 
     });
-</script>
+</script> -->
 <script>
     var helloGuys = true;
     $(document).ajaxStop(function () {
@@ -4080,7 +4106,36 @@
         }
     });
 </script>
-
+<script>
+    $(document).change(function(){
+            let count=1;
+           $("#table_body tr").each(function(item,index){
+            console.log(count,parseInt($("#lengthSelectBox").val()))
+            if(count>parseInt($("#lengthSelectBox").val())){
+                $(this).hide()
+            }
+            else{
+                $(this).show()
+            }
+            count++;
+           })
+        })
+    $(document).ajaxStop(function(){
+       
+            let count=1;
+           $("#table_body tr").each(function(item,index){
+            console.log(count,parseInt($("#lengthSelectBox").val()))
+            if(count>parseInt($("#lengthSelectBox").val())){
+                $(this).hide()
+            }
+            else{
+                $(this).show()
+            }
+            count++;
+           })
+    
+    })
+</script>
 </body>
 
 </html>
