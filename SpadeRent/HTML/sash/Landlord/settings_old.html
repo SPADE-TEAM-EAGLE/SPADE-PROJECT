@@ -7129,7 +7129,18 @@
 
         <!-- CUSTOM JS -->
         <script src="../assets/js/custom-swicher.js"></script>
-        <script src="../assets/js/custom1.js"></script>
+        <!-- <script src="../assets/js/custom1.js"></script> -->
+        <script>
+            var helloGuys = true;
+            $(document).ajaxStop(function () {
+                if (helloGuys) {
+                    helloGuys = false;
+                    var customScript = document.createElement('script');
+                    customScript.src = "../assets/js/custom1.js";
+                    document.head.appendChild(customScript);
+                }
+            });
+        </script>
 
         <!-- ############################################# -->
 

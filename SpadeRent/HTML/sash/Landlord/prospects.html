@@ -4189,7 +4189,18 @@
     <script src="../assets/js/themeColors.js"></script>
 
     <!-- CUSTOM JS -->
-    <script src="../assets/js/custom.js"></script>
+    <!-- <script src="../assets/js/custom.js"></script> -->
+    <script>
+        var helloGuys = true;
+        $(document).ajaxStop(function () {
+            if (helloGuys) {
+                helloGuys = false;
+                var customScript = document.createElement('script');
+                customScript.src = "../assets/js/custom.js";
+                document.head.appendChild(customScript);
+            }
+        });
+    </script>
     <script src="../assets/js/getNotification.js"></script>
     <script src="../assets/js/push_notification.js"></script>
 
@@ -5523,7 +5534,7 @@ updateQDChart(qualified, disqualified)
         });
 
     </script>
-      <!-- <script>
+      <script>
         $(document).ready(function () {
             var scriptUrls = [
                 "../assets/plugins/datatable/js/jquery.dataTables.min.js",
@@ -5541,7 +5552,13 @@ updateQDChart(qualified, disqualified)
                 "../assets/js/table-data.js"
             ];
             function loadScripts() {
-                $('#responsive-datatable_paginate').remove();
+                $('#responsive-datatable_paginate')?.remove();
+                $('#responsive-datatable2_paginate')?.remove();
+                $('#responsive-datatable3_paginate')?.remove();
+                $('#responsive-datatable_length')?.remove();
+                $('#responsive-datatable2_length')?.remove();
+                $('#responsive-datatable3_length')?.remove();
+                
                 $('script.dynamic-script').remove();
                 scriptUrls.forEach(function (scriptUrl) {
                     var script = document.createElement('script');
@@ -5554,7 +5571,7 @@ updateQDChart(qualified, disqualified)
                 loadScripts()
             });
         });
-    </script> -->
+    </script>
     <!-- export button End  -->
 </body>
 

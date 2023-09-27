@@ -1563,7 +1563,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="card-body">
+                                        <div class="card-body p-0">
                                             <div class="panel panel-primary">
 
                                                 <div class="tabs-menu-body">
@@ -1571,7 +1571,7 @@
                                                         <div class="tab-pane" id="tab21">
                                                             <div class="table-responsive">
                                                                 <table
-                                                                    class="table border text-nowrap text-md-nowrap table-hover mb-0 w-100">
+                                                                    class="table border text-nowrap text-md-nowrap table-hover mb-0 w-100 p-0">
                                                                     <thead class="table-recent">
                                                                         <tr>
                                                                             <th>Task</th>
@@ -1592,7 +1592,7 @@
                                                         <div class="tab-pane" id="tab22">
                                                             <div class="table-responsive">
                                                                 <table
-                                                                    class="table border text-nowrap text-md-nowrap table-hover mb-0 w-100" >
+                                                                    class="table border text-nowrap text-md-nowrap table-hover mb-0 w-100 p-0" >
                                                                     <thead class="table-recent">
                                                                         <tr>
                                                                             <th>Task</th>
@@ -1612,7 +1612,7 @@
                                                         <div class="tab-pane active" id="tab23">
                                                             <div class="table-responsive">
                                                                 <table
-                                                                    class="table border text-nowrap text-md-nowrap table-hover mb-0 w-100" id="responsive-datatable">
+                                                                    class="table border text-nowrap text-md-nowrap table-hover mb-0 w-100 p-0" id="responsive-datatable">
                                                                     <thead class="table-recent">
                                                                         <tr>
                                                                             <th>Task</th>
@@ -1889,40 +1889,7 @@
     <!-- BOOTSTRAP JS -->
     <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
     <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            // alert(2)
-            var scriptUrls = [
-                "../assets/plugins/datatable/js/jquery.dataTables.min.js",
-                "../assets/plugins/datatable/js/dataTables.bootstrap5.js",
-                "../assets/plugins/datatable/js/dataTables.buttons.min.js",
-                "../assets/plugins/datatable/js/buttons.bootstrap5.min.js",
-                "../assets/plugins/datatable/js/jszip.min.js",
-                "../assets/plugins/datatable/pdfmake/pdfmake.min.js",
-                "../assets/plugins/datatable/pdfmake/vfs_fonts.js",
-                "../assets/plugins/datatable/js/buttons.html5.min.js",
-                "../assets/plugins/datatable/js/buttons.print.min.js",
-                "../assets/plugins/datatable/js/buttons.colVis.min.js",
-                "../assets/plugins/datatable/dataTables.responsive.min.js",
-                "../assets/plugins/datatable/responsive.bootstrap5.min.js",
-                "../assets/js/table-data.js"
-            ];
-            function loadScripts() {
-                $('#responsive-datatable_paginate').remove();
-                $('script.dynamic-script').remove();
-                scriptUrls.forEach(function (scriptUrl) {
-                    var script = document.createElement('script');
-                    script.src = scriptUrl;
-                    script.className = 'dynamic-script';
-                    document.head.appendChild(script);
-                });
-            }
-            $(document).ajaxStop(function () {
-                // alert(1)
-                loadScripts()
-            });
-        });
-    </script> 
+    
     <!-- SPARKLINE JS-->
     <script src="../assets/js/jquery.sparkline.min.js"></script>
 
@@ -1987,7 +1954,18 @@
     <script src="../assets/js/themeColors.js"></script>
 
     <!-- CUSTOM JS -->
-    <script src="../assets/js/custom.js"></script>
+    <!-- <script src="../assets/js/custom.js"></script> -->
+    <script>
+        var helloGuys = true;
+        $(document).ajaxStop(function () {
+            if (helloGuys) {
+                helloGuys = false;
+                var customScript = document.createElement('script');
+                customScript.src = "../assets/js/custom.js";
+                document.head.appendChild(customScript);
+            }
+        });
+    </script>
 
     <!-- ############################################# -->
 
@@ -3463,7 +3441,41 @@ else {
 
     <!-- date picker js start  -->
 
-
+    <script>
+        $(document).ready(function () {
+            // alert(2)
+            var scriptUrls = [
+                "../assets/plugins/datatable/js/jquery.dataTables.min.js",
+                "../assets/plugins/datatable/js/dataTables.bootstrap5.js",
+                "../assets/plugins/datatable/js/dataTables.buttons.min.js",
+                "../assets/plugins/datatable/js/buttons.bootstrap5.min.js",
+                "../assets/plugins/datatable/js/jszip.min.js",
+                "../assets/plugins/datatable/pdfmake/pdfmake.min.js",
+                "../assets/plugins/datatable/pdfmake/vfs_fonts.js",
+                "../assets/plugins/datatable/js/buttons.html5.min.js",
+                "../assets/plugins/datatable/js/buttons.print.min.js",
+                "../assets/plugins/datatable/js/buttons.colVis.min.js",
+                "../assets/plugins/datatable/dataTables.responsive.min.js",
+                "../assets/plugins/datatable/responsive.bootstrap5.min.js",
+                "../assets/js/table-data.js"
+            ];
+            function loadScripts() {
+                $('#responsive-datatable_paginate').remove();
+                $('#responsive-datatable_length').remove();
+                $('script.dynamic-script').remove();
+                scriptUrls.forEach(function (scriptUrl) {
+                    var script = document.createElement('script');
+                    script.src = scriptUrl;
+                    script.className = 'dynamic-script';
+                    document.head.appendChild(script);
+                });
+            }
+            $(document).ajaxStop(function () {
+                // alert(1)
+                loadScripts()
+            });
+        });
+    </script> 
     
 
 </body>

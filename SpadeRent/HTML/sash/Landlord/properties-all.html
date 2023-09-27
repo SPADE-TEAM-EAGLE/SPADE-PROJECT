@@ -2743,7 +2743,7 @@
     <script src="../assets/js/themeColors.js"></script>
 
     <!-- CUSTOM JS -->
-    <script src="../assets/js/custom.js"></script>
+    
 
     <!-- ############################################# -->
     <!-- C3 CHART JS -->
@@ -3514,13 +3514,13 @@
         });
         // console.log($('#alphabets'))
         // Search functionality
-        $('#typehead').on('keyup', function () {
+        $(document).on('keyup','#typehead' , function () {
             var searchValue = $(this).val().toLowerCase();
             $('#table_body tr').filter(function () {
                 $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
             });
         });
-
+        
         // Function to update the table based on filters
         function updateTable() {
             $('#table_body').empty();
@@ -4070,6 +4070,7 @@
         ];
         function loadScripts() {
             $('#responsive-datatable_paginate').remove();
+            $('#responsive-datatable_length').remove();
             $('script.dynamic-script').remove();
             scriptUrls.forEach(function (scriptUrl) {
                 var script = document.createElement('script');
@@ -4084,6 +4085,18 @@
 
     });
 </script>
+<script>
+    var helloGuys = true;
+    $(document).ajaxStop(function () {
+        if (helloGuys) {
+            helloGuys = false;
+            var customScript = document.createElement('script');
+            customScript.src = "../assets/js/custom.js";
+            document.head.appendChild(customScript);
+        }
+    });
+</script>
+
 </body>
 
 </html>

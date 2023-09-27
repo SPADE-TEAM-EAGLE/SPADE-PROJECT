@@ -4296,7 +4296,18 @@
 
         <!-- CUSTOM JS -->
         <script src="../assets/js/custom-swicher.js"></script>
-        <script src="../assets/js/custom1.js"></script>
+        <!-- <script src="../assets/js/custom1.js"></script> -->
+        <script>
+            var helloGuys = true;
+            $(document).ajaxStop(function () {
+                if (helloGuys) {
+                    helloGuys = false;
+                    var customScript = document.createElement('script');
+                    customScript.src = "../assets/js/custom1.js";
+                    document.head.appendChild(customScript);
+                }
+            });
+        </script>
 
         <!-- ############################################# -->
 
@@ -5744,7 +5755,7 @@ return eval(`${type}(createdAt)`);
                     "../assets/js/table-data.js"
                 ];
                 function loadScripts() {
-                    $('#responsive-datatable_paginate').remove();
+                    $('#responsive-datatable_length').remove();
                     $('script.dynamic-script').remove();
                     scriptUrls.forEach(function (scriptUrl) {
                         var script = document.createElement('script');

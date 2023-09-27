@@ -1,6 +1,6 @@
 $(function(e) {
     "use strict";
-// alert(1)
+    console.log("ammi g");
     //______Basic Data Table
     $('#basic-datatable').DataTable({
         language: {
@@ -16,9 +16,7 @@ $(function(e) {
             scrollX: "100%",
             sSearch: '',
         },
-        // retrieve: true,
-        // lengthMenu: false,
-        lengthChange: false, 
+        lengthMenu: [10, 25, 75, 200,500], // Customize the options in the dropdown
         bInfo: false,
         searching: false,
         ordering: false,
@@ -30,15 +28,32 @@ $(function(e) {
         ],
     });
      //______Basic Data Table
+    //  $('#myTable').DataTable({
+    //     language: {
+    //         searchPlaceholder: 'Search...',
+    //         scrollX: "100%",
+    //         sSearch: '',
+    //     },
+    //     retrieve: true,
+    //     lengthMenu: false,
+    //     lengthChange: false, 
+    //     bInfo: false,
+    //     searching: false,
+    //     ordering: false,
+    //     columnDefs: [
+    //         {
+    //             targets: [0, 1],
+    //             orderable: false,
+    //         }
+    //     ],
+    // });
      $('#myTable').DataTable({
         language: {
             searchPlaceholder: 'Search...',
             scrollX: "100%",
             sSearch: '',
         },
-        // retrieve: true,
-        // lengthMenu: false,
-        lengthChange: false, 
+        lengthMenu: [10, 25, 75, 200,500], // Customize the options in the dropdown
         bInfo: false,
         searching: false,
         ordering: false,
@@ -56,9 +71,7 @@ $(function(e) {
             scrollX: "100%",
             sSearch: '',
         },
-        // retrieve: true,
-        // lengthMenu: false,
-        lengthChange: false, 
+        lengthMenu: [10, 25, 75, 200,500], // Customize the options in the dropdown
         bInfo: false,
         searching: false,
         ordering: false,
@@ -69,15 +82,15 @@ $(function(e) {
             }
         ],
     });
+    
+    
     $('#responsive-datatable2').DataTable({
         language: {
             searchPlaceholder: 'Search...',
             scrollX: "100%",
             sSearch: '',
         },
-        // retrieve: true,
-        // lengthMenu: false,
-        lengthChange: false, 
+        lengthMenu: [10, 25, 75, 200,500], // Customize the options in the dropdown
         bInfo: false,
         searching: false,
         ordering: false,
@@ -94,9 +107,7 @@ $(function(e) {
             scrollX: "100%",
             sSearch: '',
         },
-        // retrieve: true,
-        // lengthMenu: false,
-        lengthChange: false, 
+        lengthMenu: [10, 25, 75, 200,500], // Customize the options in the dropdown
         bInfo: false,
         searching: false,
         ordering: false,
@@ -113,9 +124,7 @@ $(function(e) {
             scrollX: "100%",
             sSearch: '',
         },
-        // retrieve: true,
-        // lengthMenu: false,
-        lengthChange: false, 
+        lengthMenu: [10, 25, 75, 200,500], // Customize the options in the dropdown
         bInfo: false,
         searching: false,
         ordering: false,
