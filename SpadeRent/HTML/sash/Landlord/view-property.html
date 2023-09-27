@@ -1167,9 +1167,16 @@
                                 <ul class="slide-menu">
                                     <li class="side-menu-label1"><a href="javascript:void(0)">Tasks</a></li>
                                     <li><a href="create-tasks.html" class="slide-item">All</a></li>
-                                    <li><a href="tasks-requests.html" class="slide-item">Requests</a></li>
-                                    <li><a href="tasks-vendors.html" class="slide-item">Vendors</a></li>
+                                    <li><a href="tasks-requests.html" class="slide-item">Requests</a> </li>
+                                   <!-- <li><a href="tasks-vendors.html" class="slide-item">Vendors</a></li> -->
                                 </ul>
+
+<li class="slide">
+                                <a class="side-menu__item" data-bs-toggle="slide" href="tasks-vendors.html">
+                                    <i class="side-menu__icon fi fi-rs-users"></i>
+                                    <span class="side-menu__label">Vendors</span>
+                                </a>
+                            </li>
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="reports.html">
@@ -1295,7 +1302,7 @@
                             <!-- ROW-2 CLOSED -->
                             <!-- ROW-1 OPEN -->
                             <div class="row">
-                                <div class="col-xl-4 col-sm-6">
+                                <div class="col-xl-6 col-sm-6">
                                     <div class="card border p-0 inner-cards">
                                         <div class="card-header justify-content-start bg-light">
                                             <h3 class="card-title font-wieght-bold"><b>Property Info</b></h3>
@@ -1314,7 +1321,7 @@
                                     </div>
                                 </div>
                                 <!-- COL END -->
-                                <div class="col-xl-4 col-sm-6">
+                                <div class="col-xl-6 col-sm-6">
                                     <div class="card border p-0 inner-cards">
                                         <div class="card-header justify-content-start bg-light">
                                             <h3 class="card-title font-wieght-bold"><b>Property Type</b></h3>
@@ -1331,10 +1338,10 @@
                                     </div>
                                 </div>
                                 <!-- COL END -->
-                                <div class="col-xl-4 col-sm-6">
+                                <div class="col-xl-6 col-sm-6">
                                     <div class="card border p-0 inner-cards">
                                         <div class="card-header justify-content-start bg-light">
-                                            <h3 class="card-title font-wieght-bold"><b>Property Info</b></h3>
+                                            <h3 class="card-title font-wieght-bold"><b>Units</b></h3>
                                         </div>
                                         <div class="card-body text-center card-body-center">
                                             <div style="display: flex; gap: 1em; align-items: center;">
@@ -1352,7 +1359,7 @@
                                 </div>
                             
                                 <!-- COL END -->
-                                <div class="col-xl-4 col-sm-6">
+                                <div class="col-xl-6 col-sm-6">
                                     <div class="card border p-0 inner-cards">
                                         <div class="card-header justify-content-start bg-light">
                                             <h3 class="card-title font-wieght-bold"><b>Total Sqft</b></h3>
@@ -2207,7 +2214,7 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                     $("#property_status").text(data.status)
                     $("#lightgallery").empty()
                     data.images.forEach(image => {
-                        $("#image-placeholder").append('<div class="col-lg-2"><img src="' + image.Image + '" alt="" class="img-fluid rounded"></div>')
+                        $("#image-placeholder").append('<div class="col-lg-2"><img src="' + image.Image + '" alt="" class="img-fluid roundedd" style="width: 125px; height: 115px;"></div>')
                     });
                     // $("#lightgallery").append('<li class="col-xs-6 col-sm-4 col-md-4 col-xl-3 mb-5 border-bottom-0" data-responsive="../../../../spadeAPI/uploads/'+image.Image+'" data-src="../../../../spadeAPI/uploads/'+image.Image+'" data-sub-html="<h4>Gallery Image 1</h4><p> Many desktop publishing packages and web page editors now use Lorem Ipsum</p>"><a href="javascript:void(0)"><img class="img-responsive br-5" src="../../../../spadeAPI/uploads/' + image.Image + '" alt="Thumb-1"></a></li>')
                 },
