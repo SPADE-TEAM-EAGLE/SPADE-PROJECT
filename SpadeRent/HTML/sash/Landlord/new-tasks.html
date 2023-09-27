@@ -3039,12 +3039,26 @@ function dragOverHandler(ev) {
                 });
                 // console.log($('#alphabets'))
                 // Search functionality
-                $('#search_input').on('keyup', function () {
-                    var searchValue = $(this).val().toLowerCase();
-                    $('#table_body tr').filter(function () {
-                        $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
-                    });
-                });
+                // $('#search_input').on('keyup', function () {
+                //     var searchValue = $(this).val().toLowerCase();
+                //     $('#table_body tr').filter(function () {
+                //         $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+                //     });
+                // });
+                $(document).on('keyup', '#search_input', function () {
+            var searchValue = $(this).val().toLowerCase();
+            var numRowsToShow = $('#lengthSelectBox').val();
+
+            $('#table_body tr').filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+            });
+
+            if (searchValue === '') {
+                // If search box is empty, use the selected value from the select box
+                $('#table_body tr:visible:lt(' + numRowsToShow + ')').show();
+                $('#table_body tr:visible:gt(' + (numRowsToShow - 1) + ')').hide();
+            }
+        });
 
                 // Function to update the table based on filters
                 function updateTable() {

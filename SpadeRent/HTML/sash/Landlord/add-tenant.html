@@ -2290,7 +2290,21 @@
 
                                     <div class="card-body p-0">
                                         <!-- <button type="button" id="myButton" class="btn btn-primary px-3 myButton"><i class="fi fi-rs-trash mt-1 fs-20" aria-hidden="true"></i> Delete</button> -->
+                                        <div class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-end">
+                                            <div style="width: 220px" class="d-flex justify-content-center align-items-center">
+                                                <span class="fw-bold me-2">Number of rows</span>
+                                                <select id="lengthSelectBox"
+                                                    class="form-control form-select select2 form" style="width: 80px;">
 
+                                                    <!-- <option value="1">1</option> -->
+                                                    <option value="10">10</option>
+                                                    <option value="25">25</option>
+                                                    <option value="100">100</option>
+                                                    <option value="200">200</option>
+                                                    <option value="500">500</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                         <button id="myButton" class="btn-delete-checkbox myButton"><i class="fi fi-rs-trash mt-1 fs-16"></i> &nbsp;Delete</button>
                                         <div class="table-responsive"> 
                                             <table class="table-hover table border text-nowrap text-md-nowrap mb-0 w-100 p-0" id="responsive-datatable">
@@ -3530,6 +3544,7 @@
                         })
                         $(".edit-option1").click(function () {
                             // e.preventDefault();
+                            $(this).closest('td').find('.done-option').removeAttr('disabled');
                             console.log(1)
                             const unitIdElement = $(this).closest("tr").find(".unit-id");
                             $(this).addClass("d-none")
@@ -4492,12 +4507,20 @@
             filterTable("created-at")
         });
             // Search functionality
-            $('#typehead').on('keyup', function () {
-                var searchValue = $(this).val().toLowerCase();
-                $('#table_body tr').filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
-                });
-            });
+            $(document).on('keyup', '#typehead', function () {
+    var searchValue = $(this).val().toLowerCase();
+    var numRowsToShow = $('#lengthSelectBox').val();
+
+    $('#table_body tr').filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+    });
+
+    if (searchValue === '') {
+        // If search box is empty, use the selected value from the select box
+        $('#table_body tr:visible:lt(' + numRowsToShow + ')').show();
+        $('#table_body tr:visible:gt(' + (numRowsToShow - 1) + ')').hide();
+    }
+});
             $(".modal").on("click", ".btn-close,.btn-close-bottom", function () {
 
                 $('#addUnitBtn').hide()
@@ -5272,9 +5295,8 @@
 
     </script>
     
-      <script>
+      <!-- <script>
         $(document).ready(function () {
-            // alert(2)
             var scriptUrls = [
                 "../assets/plugins/datatable/js/jquery.dataTables.min.js",
                 "../assets/plugins/datatable/js/dataTables.bootstrap5.js",
@@ -5297,17 +5319,52 @@
     var script = document.createElement('script');
     script.src = scriptUrl;
     script.className = 'dynamic-script';
-    script.setAttribute('defer', 'true'); // Set the "defer" attribute
+    script.setAttribute('defer', 'true'); 
     document.head.appendChild(script);
 });
 
             }
             $(document).ajaxStop(function () {
-                // alert(1)
+             
                 loadScripts()
             });
         });
-    </script> 
+    </script>  -->
+    <script>
+        $(document).change(function () {
+            if ($('#typehead').val() == "") {
+
+                let count = 1;
+                $("#table_body tr").each(function (item, index) {
+                    console.log(count, parseInt($("#lengthSelectBox").val()))
+                    if (count > parseInt($("#lengthSelectBox").val())) {
+                        $(this).hide()
+                    }
+                    else {
+                        $(this).show()
+                    }
+                    count++;
+                })
+            }
+        })
+        $(document).ajaxStop(function () {
+            if ($('#typehead').val() == "") {
+
+                let count = 1;
+                $("#table_body tr").each(function (item, index) {
+                    console.log(count, parseInt($("#lengthSelectBox").val()))
+                    if (count > parseInt($("#lengthSelectBox").val())) {
+                        $(this).hide()
+                    }
+                    else {
+                        $(this).show()
+                    }
+                    count++;
+                })
+            }
+        })
+    </script>
+    
 </body>
 
 </html>

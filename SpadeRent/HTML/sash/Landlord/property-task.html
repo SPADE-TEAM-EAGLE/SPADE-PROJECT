@@ -40,11 +40,11 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
 
     <script>
-         if(!localStorage.getItem("authtoken")){
-                window.location="./login_module.html"
-            }
+        if (!localStorage.getItem("authtoken")) {
+            window.location = "./login_module.html"
+        }
     </script>
-<style>
+    <style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
         .custom-file-input::-webkit-file-upload-button {
@@ -497,10 +497,17 @@
                 <div class="modal-body p-0">
                     <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
                         <div class="card-body text-center">
-                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24"><path fill="#fad383" d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z"/><circle cx="12" cy="16" r="1" fill="#f7b731"/><path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"/></svg></span>
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
+                                    viewBox="0 0 24 24">
+                                    <path fill="#fad383"
+                                        d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z" />
+                                    <circle cx="12" cy="16" r="1" fill="#f7b731" />
+                                    <path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z" />
+                                </svg></span>
                             <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
                             <p class="card-text text-dark m-0">Sorry! Something went wrong.</p>
-                            <p class="card-text text-dark m-0">Kindly check your internet connection or please try again later.</p>
+                            <p class="card-text text-dark m-0">Kindly check your internet connection or please try again
+                                later.</p>
                         </div>
                     </div>
                 </div>
@@ -532,9 +539,9 @@
                         <h1 class="mb-4 text-dark fw-bold">Verify Your Email Address</h1>
                         <h6 class="text-default mb-3">Enter a 6-digit code to verify email address</h6>
                         <input id="token" name="token" type="phone" class="form-control form mb-2" pattern="[0-9]{5}"
-                            maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                            style="width: 100%;" data-bs-placement="top" data-bs-toggle="tooltip"
-                            title="" data-bs-original-title="Enter the name of the property.">
+                            maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '')" style="width: 100%;"
+                            data-bs-placement="top" data-bs-toggle="tooltip" title=""
+                            data-bs-original-title="Enter the name of the property.">
                         <input type="password" class="form-control form mb-2" id="email-verify-password"
                             aria-describedby="emailHelp" placeholder="Password" data-bs-placement="top"
                             data-bs-toggle="tooltip" title="" data-bs-original-title="Enter password here.">
@@ -573,9 +580,10 @@
                         <h1 class="mb-4 text-dark fw-bold">Verify Your Email Address</h1>
                         <h6 class="text-default mb-3">Get started with Spade Rent! You have<span id="days-left"></span>
                             left</h6>
-                        <input type="email" class="form-control form mb-2" style="width: 100%;"
-                            data-bs-placement="top" data-bs-toggle="tooltip" title=""
-                            data-bs-original-title="Enter the name of the property." readonly id="user-email"><span class="text-danger d-none" id="verify-email-span">* Email already exist</span>
+                        <input type="email" class="form-control form mb-2" style="width: 100%;" data-bs-placement="top"
+                            data-bs-toggle="tooltip" title="" data-bs-original-title="Enter the name of the property."
+                            readonly id="user-email"><span class="text-danger d-none" id="verify-email-span">* Email
+                            already exist</span>
                         <a class="text-primary mb-4" href="javascript:void(0)" id="change-email">Change Email</a>
                         <a class="text-primary mb-4 d-none" href="javascript:void(0)" id="save-email">Save Email</a>
                         <div class="">
@@ -620,7 +628,9 @@
                                         <a href="properties-all.html">
                                             <h5 class="mb-1 text-dark fw-bold">Create New Property</h5>
                                         </a>
-                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Simplify property management. Effortlessly create and manage rental properties with our software, making life easier for landlords and property managers. </p>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Simplify property management.
+                                            Effortlessly create and manage rental properties with our software, making
+                                            life easier for landlords and property managers. </p>
                                     </div>
                                 </div>
                             </div>
@@ -643,7 +653,9 @@
                                         <a href="add-tenant.html">
                                             <h5 class="mb-1 text-dark fw-bold">Create New Tenant</h5>
                                         </a>
-                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Effortlessly add new tenants with our rental software, streamlining the tenant onboarding process for property managers and landlords. </p>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Effortlessly add new tenants with
+                                            our rental software, streamlining the tenant onboarding process for property
+                                            managers and landlords. </p>
                                     </div>
                                 </div>
                             </div>
@@ -666,7 +678,9 @@
                                         <a href="create-invoicing.html">
                                             <h5 class="mb-1 text-dark fw-bold">Create New Invoice</h5>
                                         </a>
-                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Effortlessly onboard new tenants with our user-friendly rental software, streamlining the tenant registration process for property managers and landlords. </p>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Effortlessly onboard new tenants
+                                            with our user-friendly rental software, streamlining the tenant registration
+                                            process for property managers and landlords. </p>
                                     </div>
                                 </div>
                             </div>
@@ -675,7 +689,8 @@
                     <div class="col-md-6 col-lg-3 col-xl-3 mb-5">
                         <div class="card h-100">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
-                                <div class="card-title fw-bold"><a href="prospects.html" style="color: white;">Lead</a></div>
+                                <div class="card-title fw-bold"><a href="prospects.html" style="color: white;">Lead</a>
+                                </div>
                             </div>
                             <div class="card-body">
                                 <div class="text-center chat-image mb-5">
@@ -689,7 +704,9 @@
                                         <a href="prospects.html">
                                             <h5 class="mb-1 text-dark fw-bold">Create New Lead</h5>
                                         </a>
-                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Effortlessly generate and manage leads with our property rental software, making it easier for landlords to find potential tenants. </p>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Effortlessly generate and manage
+                                            leads with our property rental software, making it easier for landlords to
+                                            find potential tenants. </p>
                                     </div>
                                 </div>
                             </div>
@@ -712,7 +729,9 @@
                                         <a href="create-tasks.html">
                                             <h5 class="mb-1 text-dark fw-bold">Create New Tasks</h5>
                                         </a>
-                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Effortlessly manage tasks with our property rental software. Stay organized and boost productivity in property management. </p>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Effortlessly manage tasks with our
+                                            property rental software. Stay organized and boost productivity in property
+                                            management. </p>
                                     </div>
                                 </div>
                             </div>
@@ -736,7 +755,9 @@
                                         <a href="tasks-vendors.html">
                                             <h5 class="mb-1 text-dark fw-bold">Create New Vendors</h5>
                                         </a>
-                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Effortlessly onboard vendors with our property rental software, streamlining property maintenance for landlords and property managers. </p>
+                                        <p class="text-default mt-0 mb-0 pt-0 fs-13">Effortlessly onboard vendors with
+                                            our property rental software, streamlining property maintenance for
+                                            landlords and property managers. </p>
                                     </div>
                                 </div>
                             </div>
@@ -797,39 +818,40 @@
                                         </div> -->
                                         <!-- LOGO -->
 
-                                       <!-- COUNTRY -->
-                                       <div class="d-flex country mt-2">
-                                        <a class="nav-link icon theme-layout nav-link-bg layout-setting">
-                                            <span class="dark-layout text-dark"><i class="fi fi-rs-moon"></i></span>
-                                            <span class="light-layout"><i class="fi fi-rs-brightness"></i></span>
-                                        </a>
-                                    </div>
+                                        <!-- COUNTRY -->
+                                        <div class="d-flex country mt-2">
+                                            <a class="nav-link icon theme-layout nav-link-bg layout-setting">
+                                                <span class="dark-layout text-dark"><i class="fi fi-rs-moon"></i></span>
+                                                <span class="light-layout"><i class="fi fi-rs-brightness"></i></span>
+                                            </a>
+                                        </div>
 
-                                    <!-- <div class="d-flex country mt-2">
+                                        <!-- <div class="d-flex country mt-2">
                                         <a class="nav-link icon text-dark" onclick="mydemoclick()">
                                             <i class="fi fi-rs-universal-access"></i>
                                         </a>
                                     </div> -->
 
-                                    <!-- 2 comments start  -->
-                                    <div class="d-flex country mt-2">
-                                        <a class="nav-link icon text-dark customIntercomButton">
-                                            <i class="fi fi-rs-interrogation"></i>
-                                           
-                                                </a>
-                                    </div>
-                                    <!-- 2 comments start  -->
+                                        <!-- 2 comments start  -->
+                                        <div class="d-flex country mt-2">
+                                            <a class="nav-link icon text-dark customIntercomButton">
+                                                <i class="fi fi-rs-interrogation"></i>
 
-                                    <!-- 1 comments start  -->
-                                    
-                                    <!-- 1 comments start  -->
+                                            </a>
+                                        </div>
+                                        <!-- 2 comments start  -->
+
+                                        <!-- 1 comments start  -->
+
+                                        <!-- 1 comments start  -->
 
 
                                         <!-- 3 comments start  -->
                                         <div class="dropdown  d-flex notifications">
                                             <a class="nav-link icon" data-bs-toggle="sidebar-right"
-                                                data-target=".sidebar-right"><i class="fe fe-bell"></i> 
-                                                <span class="badge bg-secondary header-badge bg-primary" id="count_unread"></span>
+                                                data-target=".sidebar-right"><i class="fe fe-bell"></i>
+                                                <span class="badge bg-secondary header-badge bg-primary"
+                                                    id="count_unread"></span>
                                             </a>
                                             <!-- <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                                 <div class="drop-heading border-bottom">
@@ -885,19 +907,20 @@
                                             </div> -->
                                         </div>
                                         <div class="d-flex country">
-                                            <img id="user-img" src="../assets\header-img\spade.svg" 
+                                            <img id="user-img" src="../assets\header-img\spade.svg"
                                                 class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
                                         <div class="d-flex country">
-                                            <img id="user-img-dark" src="../assets\header-img\circlels.png"  class="avatarr profile-user nav-link brroundd cover-image light-layout">
+                                            <img id="user-img-dark" src="../assets\header-img\circlels.png"
+                                                class="avatarr profile-user nav-link brroundd cover-image light-layout">
                                         </div>
                                         <div class="dropdown d-flex profile-1 country">
                                             <a href="javascript:void(0)" data-bs-toggle="dropdown"
                                                 class="nav-link leading-none d-flex">
                                                 <!-- <img src="../assets/images/users/21.jpg" 
                                                     class="avatar  profile-user brround cover-image"> -->
-                                                <span class="dynamic-text-head text-dark"
-                                                    style="padding: 10px 10px;" id="header-user"></span> <i
+                                                <span class="dynamic-text-head text-dark" style="padding: 10px 10px;"
+                                                    id="header-user"></span> <i
                                                     class="fe fe-chevron-down dark-mode text-dark"
                                                     style="font-size: 20px; font-weight: 800;"></i>
                                             </a>
@@ -1001,41 +1024,42 @@
                             <!-- <li class="sub-category">
                                        <h3>UI Kit</h3>
                                    </li> -->
-                                   <li class="slide">
-                                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="properties-all.html"><i
-                                            class="side-menu__icon fi fi-rs-building"></i><span
-                                            class="side-menu__label">Properties</span>
-                                        
-                                    </a>
-                                </li>
-                                <li class="slide card-demo-2">
-                                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="add-tenant.html"><i
-                                            class="side-menu__icon fi fi-rs-cabin"></i><span
-                                            class="side-menu__label">Tenants</span>
-                                        
-    
-                                    </a>
-                                    
-                                </li>
-    
-                                <!-- <li class="sub-category">
+                            <li class="slide">
+                                <a class="side-menu__item has-link" data-bs-toggle="slide" href="properties-all.html"><i
+                                        class="side-menu__icon fi fi-rs-building"></i><span
+                                        class="side-menu__label">Properties</span>
+
+                                </a>
+                            </li>
+                            <li class="slide card-demo-2">
+                                <a class="side-menu__item has-link" data-bs-toggle="slide" href="add-tenant.html"><i
+                                        class="side-menu__icon fi fi-rs-cabin"></i><span
+                                        class="side-menu__label">Tenants</span>
+
+
+                                </a>
+
+                            </li>
+
+                            <!-- <li class="sub-category">
                                            <h3>Pre-build Pages</h3>
                                        </li> -->
-                                <li class="slide card-demo-3">
-                                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="create-invoicing.html"><i
-                                            class="side-menu__icon fi fi-rs-file-invoice-dollar"></i><span
-                                            class="side-menu__label">Invoicing</span>
-                                        
-                                    </a>
-                                    
-    
-                                </li>
-                                <li class="slide card-demo-4">
-                                    <a class="side-menu__item" data-bs-toggle="slide" href="prospects.html"><i
-                                            class="side-menu__icon fi fi-rs-chart-simple"></i><span
-                                            class="side-menu__label">Prospects</span>
-                                    </a>
-                                </li>
+                            <li class="slide card-demo-3">
+                                <a class="side-menu__item has-link" data-bs-toggle="slide"
+                                    href="create-invoicing.html"><i
+                                        class="side-menu__icon fi fi-rs-file-invoice-dollar"></i><span
+                                        class="side-menu__label">Invoicing</span>
+
+                                </a>
+
+
+                            </li>
+                            <li class="slide card-demo-4">
+                                <a class="side-menu__item" data-bs-toggle="slide" href="prospects.html"><i
+                                        class="side-menu__icon fi fi-rs-chart-simple"></i><span
+                                        class="side-menu__label">Prospects</span>
+                                </a>
+                            </li>
 
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="view-tasks.html"><i
@@ -1114,7 +1138,8 @@
                                                     id="viewTasks">Tasks</a>
                                             </li>
                                             <li class="nav-item1 p-0">
-                                                <a class="nav-link p-2" href="bank-account.html" id="viewBank">Bank Account</a>
+                                                <a class="nav-link p-2" href="bank-account.html" id="viewBank">Bank
+                                                    Account</a>
                                             </li>
                                         </ul>
 
@@ -1129,12 +1154,14 @@
                         <div>
                             <p class="d-inline-flex gap-1">
                                 <span>Add Properties | </span>
-                                
-                                <span><a href="#" onclick="Intercom('showArticle', 8210506)"> How to create Properties? </a></span>
-                                <span><a href="#" onclick="Intercom('showArticle', 8210444)"> How to update Properties? </a></span>
-                              </p>
-                              
-                               
+
+                                <span><a href="#" onclick="Intercom('showArticle', 8210506)"> How to create Properties?
+                                    </a></span>
+                                <span><a href="#" onclick="Intercom('showArticle', 8210444)"> How to update Properties?
+                                    </a></span>
+                            </p>
+
+
                         </div>
                         <!-- PAGE-HEADER END -->
                         <div class="over_view" id="Overview">
@@ -1215,7 +1242,8 @@
                                                         style="border: none;"><strong>CUSTOMIZED</strong><i
                                                             class="fe fe-chevron-down ms-2"></i></button>
                                                     <ul class="dropdown-menu" role="menu">
-                                                        <li><a href="javascript:void(0)"><strong class="text-dark">Filter by:</strong></a>
+                                                        <li><a href="javascript:void(0)"><strong
+                                                                    class="text-dark">Filter by:</strong></a>
                                                         </li>
                                                         <li class="d-flex justify-content-between"><a
                                                                 href="javascript:void(0)" class="text-dark">IMAGE</a>
@@ -1232,7 +1260,8 @@
                                                             </div>
                                                         </li>
                                                         <li class="d-flex justify-content-between"><a
-                                                                href="javascript:void(0)" class="text-dark">ASSIGN TO</a>
+                                                                href="javascript:void(0)" class="text-dark">ASSIGN
+                                                                TO</a>
                                                             <div class="form-check m-0">
                                                                 <input type="checkbox" class="form-check-input mt-2"
                                                                     id="exampleCheck1" checked>
@@ -1246,32 +1275,50 @@
                                                             </div>
                                                         </li>
                                                         <li class="d-flex justify-content-between"><a
-                                                                href="javascript:void(0)" class="text-dark">RELATED TO</a>
+                                                                href="javascript:void(0)" class="text-dark">RELATED
+                                                                TO</a>
                                                             <div class="form-check m-0">
                                                                 <input type="checkbox" class="form-check-input mt-2"
                                                                     id="exampleCheck1" checked>
                                                             </div>
                                                         </li>
                                                         <li class="d-flex justify-content-between"><a
-                                                            href="javascript:void(0)" class="text-dark">STATUS</a>
-                                                        <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2"
-                                                                id="exampleCheck1" checked>
-                                                        </div>
-                                                    </li>
+                                                                href="javascript:void(0)" class="text-dark">STATUS</a>
+                                                            <div class="form-check m-0">
+                                                                <input type="checkbox" class="form-check-input mt-2"
+                                                                    id="exampleCheck1" checked>
+                                                            </div>
+                                                        </li>
                                                     </ul>
                                                 </div>
-                                                <button type="button" class="btn btn-primary btn-pill mx-2" id="add_property_btn" onclick="window.location='./create-tasks.html'">
+                                                <button type="button" class="btn btn-primary btn-pill mx-2"
+                                                    id="add_property_btn"
+                                                    onclick="window.location='./create-tasks.html'">
                                                     <i class="fe fe-plus me-2"></i>
                                                     <strong>ADD NEW</strong>
                                                 </button>
-                                                
+
                                             </div>
                                         </div>
                                         <div class="card-body p-0">
+                                            <div class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-end">
+                                                <div style="width: 220px" class="d-flex justify-content-center align-items-center">
+                                                    <span class="fw-bold me-2">Number of rows</span>
+                                                    <select id="lengthSelectBox" class="form-select form" style="width: 80px;">
+
+                                                        <!-- <option value="1">1</option> -->
+                                                        <option value="10">10</option>
+                                                        <option value="25">25</option>
+                                                        <option value="100">100</option>
+                                                        <option value="200">200</option>
+                                                        <option value="500">500</option>
+                                                    </select>
+                                                </div>
+                                            </div>
                                             <div class="table-responsive">
-                                                <table class="table-hover table border text-nowrap text-md-nowrap mb-0 w-100" id="responsive-datatable"
-                                                    >
+                                                <table
+                                                    class="table-hover table border text-nowrap text-md-nowrap mb-0 w-100"
+                                                    id="responsive-datatable">
                                                     <thead>
                                                         <tr>
 
@@ -1281,12 +1328,12 @@
                                                             <th>DUE AT</th>
                                                             <th>RELATED TO</th>
                                                             <th>STATUS</th>
-                                                           
+
 
                                                         </tr>
                                                     </thead>
                                                     <tbody id="table_body">
-                                                        
+
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -1310,15 +1357,16 @@
                                 <div class="text-justify ps-2 border-model-line">
                                     <h2 class="modal-title">Create <strong class="color-primary">New Task</strong></h2>
                                     <span class="">The real power of tasks is keeping track of deadlines and having a
-                                        log of all work and communication related to the tasks for later reference.</span>
+                                        log of all work and communication related to the tasks for later
+                                        reference.</span>
                                 </div>
                                 <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="top-close">
                                     <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                                    data-bs-parent="#accordionExample">
+                                <div id="collapseOne" class="accordion-collapse collapse show"
+                                    aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                     <form class="row g-3" enctype="multipart/form-data">
                                         <div class="col-md-4">
                                             <label for="inputEmail4" class="form-label fw-bold">Task Name</label>
@@ -1327,42 +1375,46 @@
                                             <span class="text-danger d-none">Task name is required!</span>
                                         </div>
                                         <div class="col-md-4">
-            
+
                                             <label class="form-label fw-bold">Assign To</label>
-                                            <select id="assignee" class="form-control select2" data-placeholder="Choose Browser"
-                                                multiple placeholder="Enter Assign To">
-            
+                                            <select id="assignee" class="form-control select2"
+                                                data-placeholder="Choose Browser" multiple
+                                                placeholder="Enter Assign To">
+
                                             </select>
                                             <span class="text-danger d-none" id="vendor-span">Add vendors first!!</span>
                                             <!-- <span class="text-danger d-none">Property name required!</span> -->
                                         </div>
                                         <div class="col-md-4">
                                             <label for="inputState" class="form-label fw-bold">Related To</label>
-                                            <select required id="property" class="form-select form select2-show-search" placeholder="Enter Related To">
-                                                <option selected>Choose...</option> 
+                                            <select required id="property" class="form-select form select2-show-search"
+                                                placeholder="Enter Related To">
+                                                <option selected>Choose...</option>
                                             </select>
                                             <span class="text-danger d-none">This field is required!</span>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="inputEmail4" class="form-label fw-bold">Due Date</label>
-                                            <input id="dueDate" class="form-control" placeholder="MM/DD/YYYY" type="date"
-                                                placeholder="Enter Due Date">
+                                            <input id="dueDate" class="form-control" placeholder="MM/DD/YYYY"
+                                                type="date" placeholder="Enter Due Date">
                                             <span class="text-danger d-none">Due Date is required!</span>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="inputState" class="form-label fw-bold">Status</label>
-                                            <select id="status" required class="form-select form select2-show-search" placeholder="Select Status">
+                                            <select id="status" required class="form-select form select2-show-search"
+                                                placeholder="Select Status">
                                                 <option selected>Choose...</option>
                                                 <option value="not started">Not Started</option>
                                                 <option value="in progress">In progress</option>
                                                 <option value="completed">Completed</option>
-            
+
                                             </select>
                                             <span class="text-danger d-none">Status is required!</span>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="inputState" class="form-label fw-bold">Priority</label>
-                                            <select id="priority" required class="form-select form select2-show-search" placeholder="Select Priority">
+                                            <select id="priority" required class="form-select form select2-show-search"
+                                                placeholder="Select Priority">
                                                 <option selected>Choose...</option>
                                                 <option name="high">High</option>
                                                 <option name="moderate">Moderate</option>
@@ -1373,13 +1425,15 @@
                                         <div class="col-md-12">
                                             <label class="form-label fw-bold">Notes</label>
                                             <textarea id="notes" class="form-control mb-4"
-                                                placeholder="Sorry about that We will look into it." rows="4"></textarea>
+                                                placeholder="Sorry about that We will look into it."
+                                                rows="4"></textarea>
                                             <!-- <span class="text-danger d-none">Photos are required!</span> -->
                                         </div>
                                         <div class="col-md-12">
                                             <label class="form-label fw-bold">Media/ Files (Optional)</label>
                                             <div class="custom-file" style="border: 1px dashed #00000087;">
-                                                <input id="fileInput" type="file" name="media" class="custom-file-input form"
+                                                <input id="fileInput" type="file" name="media"
+                                                    class="custom-file-input form"
                                                     accept=".jpg, .jpeg, .png, .pdf, image/jpeg, image/png, application/pdf"
                                                     aria-label="hello" multiple>
                                                 <span className="d-none"></span>
@@ -1398,31 +1452,31 @@
                                         </div>
                                     </form>
                                 </div>
-            
+
                             </div>
                             <div class="modal-footer d-flex justify-content-between">
                                 <!-- <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
                                     Draft</button> -->
                                 <div class="d-flex">
-            
+
                                     <label class="custom-control custom-checkbox me-2">
-                                        <input type="checkbox" class="custom-control-input" name="example-checkbox1" value=""
-                                            checked="">
+                                        <input type="checkbox" class="custom-control-input" name="example-checkbox1"
+                                            value="" checked="">
                                         <span class="custom-control-label">Notify Tenant</span>
                                     </label>
                                     <label class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" name="example-checkbox1" value=""
-                                            checked="">
+                                        <input type="checkbox" class="custom-control-input" name="example-checkbox1"
+                                            value="" checked="">
                                         <span class="custom-control-label">Notify Assignee(s)</span>
                                     </label>
                                 </div>
-                                <div class=""><button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal"
-                                        id='close'>Close</button>
+                                <div class=""><button class="btn btn-outline-default btn-pill button"
+                                        data-bs-dismiss="modal" id='close'>Close</button>
                                     <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
                                     <a href="javascript:void(0)" class="btn text-light btn-pill button disabled"
                                         style='background-color:#1467B0;' id='next'>Next</a>
                                 </div>
-            
+
                             </div>
                         </div>
                     </div>
@@ -1448,14 +1502,15 @@
 
     </div>
 
-     <!-- Sidebar-right -->
-     <div class="sidebar sidebar-right sidebar-animate">
+    <!-- Sidebar-right -->
+    <div class="sidebar sidebar-right sidebar-animate">
         <div class="panel panel-primary card mb-0 shadow-none border-0">
             <div class="tab-menu-heading border-0 d-flex p-3">
                 <div class="card-title mb-0 text-dark fw-bold">
                     <!-- <i class="fe fe-bell me-2"></i> -->
                     <!-- <span class=" pulse"></span> -->
-                    Notifications <a href="javascript:void(0);" class="text-primary text-decoration-underline " id="updateAllNotifyRead">Mark all
+                    Notifications <a href="javascript:void(0);" class="text-primary text-decoration-underline "
+                        id="updateAllNotifyRead">Mark all
                         as read</a>
                 </div>
                 <div class="card-options ms-auto">
@@ -1468,11 +1523,14 @@
                 <div class="tabs-menu border-bottom">
                     <!-- Tabs -->
                     <ul class="nav panel-tabs">
-                        <li><a href="#side1" data-bs-toggle="tab" class="text-dark active">All<span class="all_span"></span></a></li>
-                        <li><a href="#side2" data-bs-toggle="tab" class="text-dark">Inbox <span class="inbox_span"></span></a></li>
-                        <li><a href="#side3" data-bs-toggle="tab" class="text-dark">Unread <span class="Unread_span"></span></a></li>
+                        <li><a href="#side1" data-bs-toggle="tab" class="text-dark active">All<span
+                                    class="all_span"></span></a></li>
+                        <li><a href="#side2" data-bs-toggle="tab" class="text-dark">Inbox <span
+                                    class="inbox_span"></span></a></li>
+                        <li><a href="#side3" data-bs-toggle="tab" class="text-dark">Unread <span
+                                    class="Unread_span"></span></a></li>
                         <!-- <li><a href="#side4" data-bs-toggle="tab" class="text-dark">Archive <span class="archive_span"></span></a></li> -->
-                    </ul>   
+                    </ul>
                 </div>
                 <div class="tab-content">
                     <!-- <div class="tab-pane " id="side1">
@@ -1649,11 +1707,11 @@
                     </div> -->
                     <div class="tab-pane active" id="side1">
                         <div class="list-group list-group-flush" id="notification-container">
-                            
+
 
                         </div>
                     </div>
-                  
+
                     <div class="tab-pane " id="side2">
                         <div class="list-group list-group-flush" id="inbox-notification-container">
 
@@ -1661,13 +1719,13 @@
                     </div>
                     <div class="tab-pane " id="side3">
                         <div class="list-group list-group-flush" id="unread-notification-container">
-                            
+
 
                         </div>
                     </div>
                     <div class="tab-pane " id="side4">
                         <div class="list-group list-group-flush" id="Archieve-notification-container">
-                            
+
 
                         </div>
                     </div>
@@ -1680,7 +1738,7 @@
                     <!-- <div class="tab-pane" id="side2">
                         <div class="list-group list-group-flush">
                             <div class="pt-3 fw-semibold ps-5">Today</div> -->
-                            <!-- <div class="list-group-item d-flex align-items-center justify-content-between">
+                    <!-- <div class="list-group-item d-flex align-items-center justify-content-between">
                                 <div class="d-flex align-items-center">
                                     <div class="me-2">
                                         <span class="avatar avatar-md brround cover-image"
@@ -1720,14 +1778,14 @@
                                     <span class="fs-12 text-dark">2 min ago</span>
                                 </div>
                             </div> -->
-                            <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
+                    <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
 
-                        <!-- </div>
-                    </div> --> 
+                    <!-- </div>
+                    </div> -->
                     <!-- <div class="tab-pane" id="side3">
                         <div class="list-group list-group-flush">
                             <div class="pt-3 fw-semibold ps-5">Today</div> -->
-                            <!-- <div class="list-group-item d-flex align-items-center justify-content-between">
+                    <!-- <div class="list-group-item d-flex align-items-center justify-content-between">
                                 <div class="d-flex align-items-center">
                                     <div class="me-2">
                                         <span class="avatar avatar-md brround cover-image"
@@ -1767,14 +1825,14 @@
                                     <span class="fs-12 text-dark">2 min ago</span>
                                 </div>
                             </div> -->
-                            <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
+                    <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
 
-                        <!-- </div>
-                    </div> --> 
+                    <!-- </div>
+                    </div> -->
                     <!-- <div class="tab-pane" id="side4">
                         <div class="list-group list-group-flush">
                              <div class="pt-3 fw-semibold ps-5">Today</div> -->
-                            <!-- <div class="list-group-item d-flex align-items-center justify-content-between">
+                    <!-- <div class="list-group-item d-flex align-items-center justify-content-between">
                                 <div class="d-flex align-items-center">
                                     <div class="me-2">
                                         <span class="avatar avatar-md brround cover-image"
@@ -1814,10 +1872,10 @@
                                     <span class="fs-12 text-dark">2 min ago</span>
                                 </div>
                             </div> -->
-                            <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
+                    <!-- <div class="pt-3 fw-semibold ps-5">Yesterday</div> -->
 
-                        <!-- </div>
-                    </div> --> 
+                    <!-- </div>
+                    </div> -->
                     <!-- <div class="tab-pane" id="side3">
                         <ul class="task-list timeline-task">
                             <li class="d-sm-flex mt-4">
@@ -2027,16 +2085,16 @@
     <script>
         $(document).ready(function () {
             $('#addModal').on('shown.bs.modal', function () {
-               
+
                 $('.select2-show-search').select2({
                     dropdownParent: $('#addModal')
                 });
             });
             $('#myModal_edit').on('shown.bs.modal', function () {
-                
+
                 $('.select2-show-search').select2({
-                dropdownParent: $('#myModal_edit')
-            });
+                    dropdownParent: $('#myModal_edit')
+                });
             });
         }); 
     </script>
@@ -2102,7 +2160,8 @@
     <!-- Color Theme js -->
     <script src="../assets/js/themeColors.js"></script>
     <script src="../assets/js/getNotification.js"></script>
-<script src="../assets/js/push_notification.js"></script></script>
+    <script src="../assets/js/push_notification.js"></script>
+    </script>
 
     <!-- CUSTOM JS -->
     <!-- <script src="../assets/js/custom.js"></script> -->
@@ -2144,9 +2203,8 @@
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
     <!-- <script src="../assets/js/email-verification.js"></script> -->
-    <script>
+    <!-- <script>
         $(document).ready(function () {
-            // alert(2)
             var scriptUrls = [
                 "../assets/plugins/datatable/js/jquery.dataTables.min.js",
                 "../assets/plugins/datatable/js/dataTables.bootstrap5.js",
@@ -2178,37 +2236,37 @@
                 loadScripts()
             });
         });
-    </script> 
-<script>
-            $(document).ready(function(){
-                $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
-                    method: 'GET',
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-                    success: function (response) {
-                        console.log("getMessagesCountLandlord");
-                        console.log(response.Count['count(message)']);
-                        $('#chatCounter').text(response.Count['count(message)'])
-                    },
-                    error: function (xhr, status, error) {
-                        $("#myModal_warning").modal("show");
-                        setTimeout(function () {
-                            $('#myModal_warning').modal('hide');
-                            // window.location = '../Landlord/login_module.html';
-                        }, 2000);
-                        console.log(error);
-                    }
-                });
+    </script>  -->
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    console.log("getMessagesCountLandlord");
+                    console.log(response.Count['count(message)']);
+                    $('#chatCounter').text(response.Count['count(message)'])
+                },
+                error: function (xhr, status, error) {
+                    $("#myModal_warning").modal("show");
+                    setTimeout(function () {
+                        $('#myModal_warning').modal('hide');
+                        // window.location = '../Landlord/login_module.html';
+                    }, 2000);
+                    console.log(error);
+                }
             });
-        </script>
+        });
+    </script>
     <script src="../assets/js/intercom.js"></script>
     <script src="../assets/js/getNotification.js"></script>
-<script src="../assets/js/push_notification.js"></script>
+    <script src="../assets/js/push_notification.js"></script>
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
                 method: 'GET',
@@ -2217,7 +2275,7 @@
                 },
                 success: function (response) {
                     console.log(response);
-                    var myprogress = `<div class="progress-bar bg-info" style="width: `+response.count+`%;">`+response.count+`%</div>`;
+                    var myprogress = `<div class="progress-bar bg-info" style="width: ` + response.count + `%;">` + response.count + `%</div>`;
                     $(".progress").html(myprogress)
                 },
                 error: function (xhr, status, error) {
@@ -2232,16 +2290,16 @@
                     // console.log('Error occurred while fetching state and city data.');
                 }
             });
-            $('#email_verification').on('click', function() {
-      if ($('body').hasClass('dark-mode')) {
-        $('.Rent-logo').attr('src', '../assets/images/logo_white.png');
-      }else{
-        $('.Rent-logo').attr('src', '../assets/images/Artboard GÇô 1.svg');
-      }
-    });
-    });
-    
-      </script>
+            $('#email_verification').on('click', function () {
+                if ($('body').hasClass('dark-mode')) {
+                    $('.Rent-logo').attr('src', '../assets/images/logo_white.png');
+                } else {
+                    $('.Rent-logo').attr('src', '../assets/images/Artboard GÇô 1.svg');
+                }
+            });
+        });
+
+    </script>
     <script>
         // Get the user's preferred color scheme
         const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -2258,6 +2316,20 @@
     </script>
     <script>
         $(document).ready(() => {
+            $(document).on('keyup', '#typehead', function () {
+    var searchValue = $(this).val().toLowerCase();
+    var numRowsToShow = $('#lengthSelectBox').val();
+
+    $('#table_body tr').filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+    });
+
+    if (searchValue === '') {
+        // If search box is empty, use the selected value from the select box
+        $('#table_body tr:visible:lt(' + numRowsToShow + ')').show();
+        $('#table_body tr:visible:gt(' + (numRowsToShow - 1) + ')').hide();
+    }
+});
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/protected',
                 method: 'GET',
@@ -2266,18 +2338,18 @@
                 },
                 success: function ({ userName, image }) {
                     // console.log()
-                    if(image!==" " && image!==null){
-                
-                $("#user-img").attr("src", image)
-                $("#user-img-dark").attr("src", image)
-            }
+                    if (image !== " " && image !== null) {
+
+                        $("#user-img").attr("src", image)
+                        $("#user-img-dark").attr("src", image)
+                    }
                     function toTitleCase(str) {
                         return str.replace(/\w\S*/g, function (txt) {
                             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                         });
                     }
                     $("#user-name").text(toTitleCase(userName))
-                        $("#header-user").text(toTitleCase(userName))
+                    $("#header-user").text(toTitleCase(userName))
 
 
 
@@ -2296,28 +2368,28 @@
             });
             const encryptedPropertyId = decodeURIComponent((new URL(document.location)).searchParams.get("property"));
 
-// Decryption
-var password = 'your-secret-password';
-const propertyId = sjcl.decrypt(password, encryptedPropertyId);
+            // Decryption
+            var password = 'your-secret-password';
+            const propertyId = sjcl.decrypt(password, encryptedPropertyId);
             // const propertyId = (new URL(document.location)).searchParams.get("propertyId");
             var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
             // const propertyId = (new URL(document.location)).searchParams.get("propertyId");
-            
+
             $("#viewUnits").attr("href", `./property-unit.html?property=${encodedPropertyId}`)
             $("#viewOverview").attr("href", `./view-property.html?property=${encodedPropertyId}`)
             $("#viewTenants").attr("href", `./property-tenant.html?property=${encodedPropertyId}`)
-                        $("#viewTasks").attr("href", `./property-task.html?property=${encodedPropertyId}`)
+            $("#viewTasks").attr("href", `./property-task.html?property=${encodedPropertyId}`)
             $("#viewBank").attr("href", `./bank-account.html?property=${encodedPropertyId}`)
             $('input[type="checkbox"]').change(function () {
-                    var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
-                    var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
-                    console.log(columnIndex, isColumnVisible)
-                    // Toggle the visibility of the corresponding column
-                    $('table').find('tr').each(function () {
-                        var column = $(this).find('th:nth-child(' + columnIndex + '), td:nth-child(' + columnIndex + ')');
-                        isColumnVisible ? column.show() : column.hide();
-                    });
+                var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
+                var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
+                console.log(columnIndex, isColumnVisible)
+                // Toggle the visibility of the corresponding column
+                $('table').find('tr').each(function () {
+                    var column = $(this).find('th:nth-child(' + columnIndex + '), td:nth-child(' + columnIndex + ')');
+                    isColumnVisible ? column.show() : column.hide();
                 });
+            });
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/viewProperty',
                 type: 'GET',
@@ -2329,24 +2401,24 @@ const propertyId = sjcl.decrypt(password, encryptedPropertyId);
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function({
+                success: function ({
                     data
                 }) {
                     function toTitleCase(str) {
-                                return str.replace(/\w\S*/g, function(txt) {
-                                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-                                });
-                            }
+                        return str.replace(/\w\S*/g, function (txt) {
+                            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                        });
+                    }
                     $("#property_name").text(toTitleCase(data.propertyName))
-                    $("#property_address").text(toTitleCase(data.address)+", "+toTitleCase(data.city)+", "+toTitleCase(data.state))
-                    
-                },
-                error: function(xhr, status, error) {
-                    $("#myModal_warning_connection").modal("show");
-                            setTimeout(function() {
-                                $('#myModal_warning_connection').modal('hide');
+                    $("#property_address").text(toTitleCase(data.address) + ", " + toTitleCase(data.city) + ", " + toTitleCase(data.state))
 
-                            }, 2000);
+                },
+                error: function (xhr, status, error) {
+                    $("#myModal_warning_connection").modal("show");
+                    setTimeout(function () {
+                        $('#myModal_warning_connection').modal('hide');
+
+                    }, 2000);
                     console.log('Error: ' + error);
                 }
             });
@@ -2371,7 +2443,12 @@ const propertyId = sjcl.decrypt(password, encryptedPropertyId);
                                     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                                 });
                             }
-                        response?.data[0]?.forEach(function (task) {
+                            if(response?.data?.length===0){
+                                var row = '<tr><td colspan="6" style="text-align: center;">No Tasks Found</td></tr>';
+                                tableBody.append(row);
+                            }
+                            else{
+                                response?.data[0]?.forEach(function (task) {
                             var image = '<td><img src="../assets/images/Group-user.png" alt=""></td>';
 
                                 var createdDate = new Date(task.created_at);
@@ -2438,7 +2515,10 @@ const propertyId = sjcl.decrypt(password, encryptedPropertyId);
 
                                 // Append the row to the table body
                                 tableBody.append(row);})
+                            
+                            }
                             },
+                            
                             error: function (xhr, status, error) {
                                 $("#myModal_warning_connection").modal("show");
                             setTimeout(function() {
@@ -2448,42 +2528,43 @@ const propertyId = sjcl.decrypt(password, encryptedPropertyId);
                     console.log('Error: ' + error);
                             }
                         })
+     
         })
     </script>
-<script>
-    function logout() {
-        $(document).ready(function () {
-            $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
-                type: 'PUT',
-                contentType: false,
-                processData: false,
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                },
-                success: function (response) {
-                    console.log(response);
-                    if(localStorage.getItem("htmlLayout")){
+    <script>
+        function logout() {
+            $(document).ready(function () {
+                $.ajax({
+                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                    type: 'PUT',
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        if (localStorage.getItem("htmlLayout")) {
 
-                        const htmlLayoutValue = localStorage.getItem("htmlLayout");
-                        localStorage.clear();
-                        localStorage.setItem("htmlLayout", htmlLayoutValue);
-                    }else{
-                        localStorage.clear();
+                            const htmlLayoutValue = localStorage.getItem("htmlLayout");
+                            localStorage.clear();
+                            localStorage.setItem("htmlLayout", htmlLayoutValue);
+                        } else {
+                            localStorage.clear();
 
+                        }
+                        // localStorage.removeItem('authtoken');
+                        // window.close();
+                        window.open('./login_module.html', "_self")
+                        console.log('Done');
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(error);
                     }
-                    // localStorage.removeItem('authtoken');
-                    // window.close();
-                    window.open('./login_module.html', "_self")
-                    console.log('Done');
-                },
-                error: function (xhr, status, error) {
-                    console.log(error);
-                }
+                });
             });
-        });
-    }
-</script>
+        }
+    </script>
     <!-- <script>
         $(document).ready(function () {
             $('#myTable').DataTable({
@@ -2500,7 +2581,41 @@ const propertyId = sjcl.decrypt(password, encryptedPropertyId);
 
         });
     </script> -->
-    
+    <script>
+        $(document).change(function () {
+            if ($('#typehead').val() == "") {
+
+                let count = 1;
+                $("#table_body tr").each(function (item, index) {
+                    console.log(count, parseInt($("#lengthSelectBox").val()))
+                    if (count > parseInt($("#lengthSelectBox").val())) {
+                        $(this).hide()
+                    }
+                    else {
+                        $(this).show()
+                    }
+                    count++;
+                })
+            }
+        })
+        $(document).ajaxStop(function () {
+            if ($('#typehead').val() == "") {
+
+                let count = 1;
+                $("#table_body tr").each(function (item, index) {
+                    console.log(count, parseInt($("#lengthSelectBox").val()))
+                    if (count > parseInt($("#lengthSelectBox").val())) {
+                        $(this).hide()
+                    }
+                    else {
+                        $(this).show()
+                    }
+                    count++;
+                })
+            }
+        })
+    </script>
+
 </body>
 
 </html>

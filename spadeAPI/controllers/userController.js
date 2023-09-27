@@ -1860,7 +1860,7 @@ console.log(Id)
               selectQuery("vendorcategory", "id"),
               [categoryIDs]
             );
-            if (VendorCategoryResult.length > 0) {
+            if (VendorCategoryResult[0].length > 0) {
               const vendorDataObject = {
                 name:
                   vendorResult[0][0].firstName +
@@ -1892,8 +1892,8 @@ console.log(Id)
     }
   } catch (error) {
     console.log("Error:", error);
-    res.send("Error Get property Task");
-  }
+    res.send("Error Get property Task");
+  }
 };
 
 //  ############################# Task property ############################################################
