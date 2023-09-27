@@ -240,4 +240,5 @@ router.put("/changeEmailVerifyToken", verifyToken, settingController.changeEmail
 router.get("/prospectusTime/:startDate/:endDate", verifyToken, prospectus.prospectusTime);
 router.get("/GettenantAttachEmailPhone/:tenantID", verifyToken, tenantController.GettenantAttachEmailPhone);
 router.delete("/allTenantDelete", verifyToken, tenantController.allTenantDelete);
+router.get("/checkUnpaidInvoices", verifyToken, tenantController.checkUnpaidInvoices);
 

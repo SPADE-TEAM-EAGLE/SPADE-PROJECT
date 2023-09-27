@@ -32,6 +32,7 @@ const {
   getLandlordDetailedQuery,
   checkMyAllTenantsInvoicePaidQuerytenant,
   deleteTenantAccountData,
+  checkUpaidInvoiceQuery,
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -1112,6 +1113,63 @@ return res.status(201).json({ Info: "No data found in tenant attach file" });
 
 
 
+// const tenantAllPaidInvoiceResult = await queryRunner(
+  //   checkMyAllTenantsInvoicePaidQuerytenant,
+  //   [tenantID]
+  // );
+  // console.log(tenantAllPaidInvoiceResult[0].length);
+  // No un-paid invoices found, update tenant account
+  // if (tenantAllPaidInvoiceResult[0].length > 0) {
+  //   res.status(200).json({
+  //     message: "Tenant Invoice is pending Kindly Paid invoice ",
+  //   });
+  // }
+//  ############################# Check unpaid invoices Start ############################################################
+exports.checkUnpaidInvoices = async (req, res) => {
+  const { tenantID } = req.query;  // tenantID is in array form
+  try {
+    const allResults = []; 
+    for (let i = 0; i < tenantID.length; i++) {
+      const ID = tenantID[i];
+      const checkUnpaidInvoicesResult = await queryRunner(checkUpaidInvoiceQuery, [ID]);
+      if (checkUnpaidInvoicesResult[0].length === 0) {
+        continue;
+      }
+      allResults.push(...checkUnpaidInvoicesResult[0]);
+    }
+    if (allResults.length === 0) {
+      return res.status(201).json({ Info: "No data found in tenant " });
+    } else {
+      res.status(200).json({
+        message: "tenants get successful",
+        data: allResults, 
+      });
+    }
+  } catch (error) {
+    console.error("Error: " + error.message);
+    res.status(400).send("Error: " + error.message);
+  }
+};
+
+
+//  ############################# Check unpaid invoices End ############################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //  ############################# Delete All Tenant Start ############################################################
@@ -1125,23 +1183,11 @@ exports.allTenantDelete = async (req, res) => {
       tenantID,
     ]);
     if (tenantResult[0].length > 0) {
-  // const tenantAllPaidInvoiceResult = await queryRunner(
-  //   checkMyAllTenantsInvoicePaidQuerytenant,
-  //   [tenantID]
-  // );
-  // console.log(tenantAllPaidInvoiceResult[0].length);
-  // No un-paid invoices found, update tenant account
-  // if (tenantAllPaidInvoiceResult[0].length > 0) {
-  //   res.status(200).json({
-  //     message: "Tenant Invoice is pending Kindly Paid invoice ",
-  //   });
-  // } else {
     const propertyUnitID = tenantResult[0][0].propertyUnitID;
     const tenantDeleteResult = await queryRunner(
       deleteQuery("tenants", "id"),
       [tenantID]
     );
-    // console.log(tenantDeleteResult[0])
     if (tenantDeleteResult[0].affectedRows > 0) {
       const tenantCheckResult = await queryRunner(
         selectQuery("tenantattachfiles", "tenantID"),
