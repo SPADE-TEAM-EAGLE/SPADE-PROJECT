@@ -2608,7 +2608,18 @@ color: #000;
     <script src="../assets/js/themeColors.js"></script>
     <script src="../assets/js/intercom.js"></script>
     <!-- CUSTOM JS -->
-    <script src="../assets/js/custom.js"></script>
+    <!-- <script src="../assets/js/custom.js"></script> -->
+    <script>
+        var helloGuys = true;
+        $(document).ajaxStop(function () {
+            if (helloGuys) {
+                helloGuys = false;
+                var customScript = document.createElement('script');
+                customScript.src = "../assets/js/custom.js";
+                document.head.appendChild(customScript);
+            }
+        });
+    </script>
     <script src="../assets/js/getNotification.js"></script>
     <script src="../assets/js/push_notification.js"></script>
 
@@ -3702,6 +3713,7 @@ color: #000;
             ];
             function loadScripts() {
                 $('#responsive-datatable_paginate').remove();
+                $('#responsive-datatable_length').remove();
                 $('script.dynamic-script').remove();
                 scriptUrls.forEach(function (scriptUrl) {
                     var script = document.createElement('script');

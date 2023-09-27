@@ -1939,7 +1939,18 @@
 
 
     <!-- CUSTOM JS -->
-    <script src="../assets/js/custom.js"></script>
+    <!-- <script src="../assets/js/custom.js"></script> -->
+    <script>
+        var helloGuys = true;
+        $(document).ajaxStop(function () {
+            if (helloGuys) {
+                helloGuys = false;
+                var customScript = document.createElement('script');
+                customScript.src = "../assets/js/custom.js";
+                document.head.appendChild(customScript);
+            }
+        });
+    </script>
     <script src="../assets/js/getNotification.js"></script>
     <script src="../assets/js/push_notification.js"></script>
 
@@ -2554,7 +2565,7 @@
                         row.append(unitNumberCell);
 
                         const areaCell = $('<td></td>');
-                        const areaInput = $(`<input type="text" class="form-control ${unit.unitNumber ? "for-light" : ""}" style="min-width: 100px;" id="inputEmail5" placeholder="Enter Area" value='${unit.Area}' ${unit.Area ? "readonly" : ""}>`);
+                        const areaInput = $(`<input type="text" class="form-control ${unit.unitNumber ? "for-light" : ""}" style="min-width: 100px;" oninput="this.value = this.value.replace(/[^0-9]/g, '')" id="inputEmail5" placeholder="Enter Area" value='${unit.Area}' ${unit.Area ? "readonly" : ""}>`);
                         areaCell.append(areaInput);
                         row.append(areaCell);
 
