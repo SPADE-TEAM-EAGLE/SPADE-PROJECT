@@ -1065,7 +1065,7 @@ exports.getproperty = async (req, res) => {
       });
       // }
     } else {
-      res.status(400).json({
+      res.status(200).json({
         message: "No Property data found",
       });
     }
@@ -1860,7 +1860,7 @@ console.log(Id)
               selectQuery("vendorcategory", "id"),
               [categoryIDs]
             );
-            if (VendorCategoryResult.length > 0) {
+            if (VendorCategoryResult[0].length > 0) {
               const vendorDataObject = {
                 name:
                   vendorResult[0][0].firstName +
@@ -1886,14 +1886,14 @@ console.log(Id)
         message: "Task data retrieved successfully",
       });
     } else {
-      res.status(400).json({
+      res.status(200).json({
         message: "No property Task data found",
       });
     }
   } catch (error) {
     console.log("Error:", error);
-    res.send("Error Get property Task");
-  }
+    res.send("Error Get property Task");
+  }
 };
 
 //  ############################# Task property ############################################################

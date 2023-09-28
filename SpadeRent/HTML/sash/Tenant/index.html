@@ -371,6 +371,7 @@
                                 </div>
                             </li>
                         </a>
+                        <div class="top-tabs">
                             <li class="slide">
                                 <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html"><i
                                         class="side-menu__icon fi fi-rs-dashboard"></i><span
@@ -405,10 +406,9 @@
                                     <i class="side-menu__icon fi fi-rs-comment"></i>
                                     <span class="side-menu__label">Chat</span>
                                     <span class="badge bg-primary side-badge" id="chatCounter"></span>
-                                    <!-- <i class="angle fe fe-chevron-right"></i> -->
                                 </a>
                             </li>
-
+<!-- 
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="coming-soon.html">
                                     <i class="side-menu__icon fi fi-rs-bell"></i>
@@ -421,9 +421,11 @@
                                     <i class="side-menu__icon fi fi-rs-comment-question"></i>
                                     <span class="side-menu__label">Help</span>
                                 </a>
-                            </li>
-
+                            </li> -->
+                        </div>
+                            <div style="position: absolute; bottom: 0; width: 94%;">
                             <li>
+                                <div style="border: 1px solid rgba(0, 0, 0, 0.1);"></div>
                                 <a class="side-menu__item has-link" href="settings.html" target="_self"><i
                                         class="side-menu__icon fi fi-rs-settings"></i><span
                                         class="side-menu__label">Settings</span>
@@ -431,6 +433,7 @@
                                                class="badge bg-green br-5 side-badge blink-text pb-1">New</span> -->
                                 </a>
                             </li>
+                        </div>
                         </ul>
                         <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191"
                                 width="24" height="24" viewBox="0 0 24 24">
@@ -439,6 +442,8 @@
                     </div>
                 </div>
             </div>
+
+            
 
             <!--app-content open-->
             <div class="main-content app-content mt-0">
@@ -470,9 +475,10 @@
                                                 class="side-menu__icon fi fi-rs-calendar text-white"></i><span
                                                 class="side-menu__labell text-white">&nbsp;&nbsp; Your next payment of
                                                 $0 is due on N/A&emsp; 
-                                                <!-- <a href="#"
-                                                    class="btn btn-primary btn-pill btn-paynow-banner">Pay
-                                                    Now</a> -->
+                                                <a href="#"
+                                                    class="btn btn-primary btn-pill btn-paynow-banner"data-bs-target="#closeaccount"
+                                                    data-bs-toggle="modal">Pay
+                                                    Now</a>
                                                 </span></div>
                                         <div class="mobile-icon-text-align"><i class="side-menu__icon fi fi-rs-building text-white"></i><span
                                                 class="side-menu__labell text-white" id="tenant-address">&nbsp;&nbsp;
@@ -486,6 +492,52 @@
                         </div>
                         <!-- PAGE-HEADER END -->
 
+                           <!-- close account model box start  -->
+                           <div class="modal fade" id="closeaccount"
+                           tabindex="-1" role="dialog">
+                           <div class="modal-dialog modal-md modal-dialog-scrollable"
+                               role="document">
+                               <div class="modal-content">
+                                   <div class="modal-header">
+                                       <button class="btn-close"
+                                           data-bs-dismiss="modal"
+                                           aria-label="Close">
+                                           <span
+                                               aria-hidden="true"><img
+                                                   src="../assets/images/cross-circle.svg" /></span>
+                                       </button>
+                                   </div>
+                                   <div
+                                       class="modal-body text-center text-dark">
+                                       <img src="../assets/images/logo_loginmodule.png"
+                                           class="model-account-close-logo"
+                                           alt="">
+                                       <h3 class="mt-5 mb-0">
+                                        <b>Spade Tenant</b>
+                                       </h3>
+                                       <h4>Spade Rent</h4>
+                                       <h2><b>Do you want to pay your due balance?</b>
+                                       </h2>
+
+                                       <button
+                                           class="btn btn-primary btn-pill m-2"
+                                           id="form1show"
+                                           type="button"
+                                           data-bs-dismiss="modal"
+                                           aria-label="Close"
+                                           style="width: fit-content;">
+                                           &nbsp; Paynow &nbsp;
+                                       </button>
+                                   </div>
+                                   <!-- <div class="modal-footer">
+
+                                   </div> -->
+                               </div>
+                           </div>
+                           <!-- close account model box start  -->
+
+                       </div>
+
                         <!-- ROW-1 -->
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
@@ -495,7 +547,7 @@
                                             <div class="card-body">
                                                 <div class="d-flex">
                                                     <div class="mt-2">
-                                                        <h6 class=""><b>Invoicing</b></h6>
+                                                        <h6 class=""><b>Total Amount</b></h6>
                                                         <h1 class="mb-0 number-font"><b id="invoice-amount">$0</b></h1>
                                                     </div>
                                                     <div class="ms-auto">
@@ -515,7 +567,7 @@
                                             <div class="card-body">
                                                 <div class="d-flex">
                                                     <div class="mt-2">
-                                                        <h6 class=""><b>Amount Paid</b></h6>
+                                                        <h6 class=""><b>Total Rent</b></h6>
                                                         <h1 class="mb-0 number-font"><b id="amount-paid">$0</b></h1>
                                                     </div>
                                                     <div class="ms-auto">
@@ -1082,7 +1134,18 @@
     <script src="../assets/js/themeColors.js"></script>
 
     <!-- CUSTOM JS -->
-    <script src="../assets/js/custom.js"></script>
+    <!-- <script src="../assets/js/custom.js"></script> -->
+    <script>
+        var helloGuys = true;
+        $(document).ajaxStop(function () {
+            if (helloGuys) {
+                helloGuys = false;
+                var customScript = document.createElement('script');
+                customScript.src = "../assets/js/custom.js";
+                document.head.appendChild(customScript);
+            }
+        });
+    </script>
 
     <!-- ############################################# -->
     <script src="../assets/js/intercom-tenant.js"></script>

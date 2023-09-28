@@ -238,7 +238,7 @@ router.put("/updateBusinessLogo", verifyToken, settingController.updateBusinessL
 router.put("/changeEmail", verifyToken, settingController.changeEmail);
 router.put("/changeEmailVerifyToken", verifyToken, settingController.changeEmailVerifyToken);
 router.get("/prospectusTime/:startDate/:endDate", verifyToken, prospectus.prospectusTime);
-router.get("/GettenantAttachEmailPhone/:tenantID", verifyToken, tenantController.GettenantAttachEmailPhone);
+router.get("/GettenantAttachEmailPhone", verifyToken, tenantController.GettenantAttachEmailPhone);
 router.delete("/allTenantDelete", verifyToken, tenantController.allTenantDelete);
 router.get("/checkUnpaidInvoices", verifyToken, tenantController.checkUnpaidInvoices);
 router.post("/prospectusSources", verifyToken, prospectus.prospectusSources);

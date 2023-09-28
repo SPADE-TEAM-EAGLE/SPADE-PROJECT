@@ -1069,7 +1069,7 @@ exports.updateTenantProfile = async (req, res) => {
 
 //  ############################# get all Tenant Attach File Start ############################################################
 exports.GettenantAttachEmailPhone = async (req, res) => {
-  const { tenantID } = req.params; 
+  const { tenantID } = req.query; 
 
   try {
     const tenantAlternateEmailResult = await queryRunner(selectQuery("tenantalternateemail", "tenantID"), [
@@ -1126,11 +1126,13 @@ return res.status(201).json({ Info: "No data found in tenant attach file" });
   // }
 //  ############################# Check unpaid invoices Start ############################################################
 exports.checkUnpaidInvoices = async (req, res) => {
-  const { tenantID } = req.query;  // tenantID is in array form
+  const {tenants} = req.query;
+  console.log(tenants);
+  // tenants is in array form
   try {
     const allResults = []; 
-    for (let i = 0; i < tenantID.length; i++) {
-      const ID = tenantID[i];
+    for (let i = 0; i < tenants.length; i++) {
+      const ID = tenants[i];
       const checkUnpaidInvoicesResult = await queryRunner(checkUpaidInvoiceQuery, [ID]);
       if (checkUnpaidInvoicesResult[0].length === 0) {
         continue;
@@ -1176,7 +1178,7 @@ exports.checkUnpaidInvoices = async (req, res) => {
 exports.allTenantDelete = async (req, res) => {
   try {
     let { id } = req.body;
-
+   
   for(let i = 0; i < id.length; i++ ){
    const tenantID = id[i];
     const tenantResult = await queryRunner(selectQuery("tenants", "id"), [
@@ -1249,7 +1251,10 @@ exports.allTenantDelete = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    res.send("Error from delete tenants ", error);
+    res.status(400).json({
+      message:"Error from delete tenants ",
+      error
+  });
   }
 };
 //  ############################# Delete All Tenant End ############################################################

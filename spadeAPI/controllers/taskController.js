@@ -967,30 +967,31 @@ exports.deleteTask = async (req, res) => {
 
 // add vendor category 19/9/23
 exports.addVendorCategory = async (req, res) => {
-  const {categories} = req.body;
+  const categories = req.body;
+  
   const { userId } = req.user;
   let insertedId; // Declare insertedId here
 
   try {
     const categoryCheckResult = await queryRunner(
-      selectQuery("vendorcategory", "landLordId", "category"),
-      [userId, categories]
+      selectQuery("vendorcategory", "landLordId"),
+      [userId]
     );
-    if (categoryCheckResult[0].length == 0) {
-      const insertedCategory = await queryRunner(addVendorCategory, [categories, userId]);
-      insertedId = insertedCategory[0].insertId // Assuming the ID is at index 0
-      res.status(200).json({
-        message: "Categories added/updated successfully",
-        insertedCategories: insertedId, // Include inserted IDs in the response
-      });
+    const existingCategories = categoryCheckResult[0];
+    categoryToInsert = categories.filter((category) => !existingCategories.some((existingCategory) => existingCategory.category.toLowerCase() === category.category.toLowerCase()));
+    categoryToDelete = existingCategories.filter((existingCategory) => !categories.some((category) => category.category.toLowerCase() === existingCategory.category.toLowerCase()));
+    if (categoryCheckResult[0].length !== 0) {
+      categoryToInsert?.forEach(async (item) => {
+            await queryRunner(addVendorCategory, [item.category, userId]);
+          })
+      categoryToDelete?.forEach(async (item) => {
+            await queryRunner(deleteQuery("vendorcategory", "id"), [item.id]);
+      })
+     
     }
-
-    else{
-      res.status(201).json({
-        message: "Categories Already Exist",
-        insertedCategories: categoryCheckResult[0][0].id
-      });
-    }
+    res.status(200).json({
+      message: "Categories added/updated successfully",
+    });
   } catch (error) {
     console.log(error);
     res.status(400).send(error);

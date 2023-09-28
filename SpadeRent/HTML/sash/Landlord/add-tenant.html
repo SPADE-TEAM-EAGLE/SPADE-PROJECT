@@ -1241,6 +1241,76 @@
     </div>
     <!-- Modal -->
 
+
+    <div class="modal fade" id="unPaidModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="text-justify ps-2 border-model-line">
+                        <h2 class="modal-title mb-0" id="previewHeading">Existing <strong class="color-primary">Tenant
+                                Invoices</strong></h2>
+                        <!-- <button type="button" class="btn btn-primary">#Invoice Number: INV-89900A</button> -->
+                    </div>
+                    <button class="btn-close top-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark text-dark"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12"><p class="fw-bolder text-danger mb-2">Following are the Tenants with unpaid invoices: </p></div>
+                        <br/>
+                        <div class="col-12">
+                            <div class="table-responsive">
+                                <table class="table-hover table text-nowrap table-borderless text-md-nowrap mg-b-0 mb-0"
+                                    >
+                                    <thead>
+                                        <tr>
+                                            <th>First Name</th>
+                                            
+                                            <th>Last Name</th>
+                                            <th>Email</th>
+                                        
+                                        </tr>
+                                    </thead>
+                                    <tbody id="add-tenant-name">
+                                        <tr class="tr">
+                                            <td>
+                                                <p>Fahad</p>
+                                            </td>
+                                            
+                                            <td><p>Aad</p></td>
+                                            <td><p>Aad</p></td>
+                                            
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="modal-footer d-flex">
+                    <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal"
+                        id='close'>Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
@@ -1962,11 +2032,11 @@
                             </li>
 
                             <!-- <li class="slide">
-                                <a class="side-menu__item has-link" href="landing-page.php" target="_blank"><i
-                                        class="side-menu__icon fe fe-plus"></i><span class="side-menu__label">Complete your
-                                        Profile</span>
-                                </a>
-                            </li> -->
+                            <a class="side-menu__item has-link" href="landing-page.php" target="_blank"><i
+                                    class="side-menu__icon fe fe-plus"></i><span class="side-menu__label">Complete your
+                                    Profile</span>
+                            </a>
+                        </li> -->
                             <a href="settings.html" class="text-dark">
                                 <li class="slide">
                                     <div class="M-0 mt-3 mb-4" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
@@ -1990,59 +2060,43 @@
                                         class="side-menu__label">Overview</span></a>
                             </li>
                             <!-- <li class="sub-category">
-                                           <h3>UI Kit</h3>
-                                       </li> -->
-                            <li class="slide">
-                                <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
-                                        class="side-menu__icon fi fi-rs-building"></i><span
-                                        class="side-menu__label">Properties</span>
-                                    <i class="angle fe fe-chevron-right"></i>
-                                </a>
-                                <ul class="slide-menu">
-                                    <li class="side-menu-label1"><a href="javascript:void(0)">Properties</a></li>
-                                    <li><a href="properties-all.html" class="slide-item">All</a></li>
-                                    <!-- <li><a href="javascript:void(0)" class="slide-item">Draft</a></li> -->
-                                </ul>
-                            </li>
-                            <li class="slide">
-                                <a class="side-menu__item" data-bs-toggle="slide" href="add-tenant.html"><i
-                                        class="side-menu__icon fi fi-rs-cabin"></i><span
-                                        class="side-menu__label">Tenants</span>
-                                    <i class="angle fe fe-chevron-right"></i>
-
-                                </a>
-                                <ul class="slide-menu">
-                                    <li class="side-menu-label1"><a href="javascript:void(0)">Tenants</a></li>
-                                    <li><a href="add-tenant.html" class="slide-item">All</a></li>
-                                    <!-- <li><a href="javascript:void(0)" class="slide-item">Draft</a></li> -->
-                                </ul>
-                            </li>
-
-                            <!-- <li class="sub-category">
+                                       <h3>UI Kit</h3>
+                                   </li> -->
+                                   <li class="slide">
+                                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="properties-all.html"><i
+                                            class="side-menu__icon fi fi-rs-building"></i><span
+                                            class="side-menu__label">Properties</span>
+                                        
+                                    </a>
+                                </li>
+                                <li class="slide card-demo-2">
+                                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="add-tenant.html"><i
+                                            class="side-menu__icon fi fi-rs-cabin"></i><span
+                                            class="side-menu__label">Tenants</span>
+                                        
+    
+                                    </a>
+                                    
+                                </li>
+    
+                                <!-- <li class="sub-category">
                                            <h3>Pre-build Pages</h3>
                                        </li> -->
-                            <li class="slide">
-                                <a class="side-menu__item" data-bs-toggle="slide" href="invoices.html"><i
-                                        class="side-menu__icon fi fi-rs-file-invoice-dollar"></i><span
-                                        class="side-menu__label">Invoicing</span>
-                                    <i class="angle fe fe-chevron-right"></i>
-                                </a>
-                                <ul class="slide-menu">
-                                    <li class="side-menu-label1"><a href="javascript:void(0)">Invoicing</a></li>
-                                    <li><a href="create-invoicing.html" class="slide-item">All</a></li>
-                                    <!-- <li><a href="javascript:void(0)" class="slide-item">Draft</a></li> -->
-                                </ul>
-
-                            </li>
-                            <li class="slide">
-                                <a class="side-menu__item" data-bs-toggle="slide" href="prospects.html"><i
-                                        class="side-menu__icon fi fi-rs-chart-simple"></i><span
-                                        class="side-menu__label">Prospects</span>
-                                    <!-- <i class="angle fe fe-chevron-right"></i> -->
-
-                                </a>
-
-                            </li>
+                                <li class="slide card-demo-3">
+                                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="create-invoicing.html"><i
+                                            class="side-menu__icon fi fi-rs-file-invoice-dollar"></i><span
+                                            class="side-menu__label">Invoicing</span>
+                                        
+                                    </a>
+                                    
+    
+                                </li>
+                                <li class="slide card-demo-4">
+                                    <a class="side-menu__item" data-bs-toggle="slide" href="prospects.html"><i
+                                            class="side-menu__icon fi fi-rs-chart-simple"></i><span
+                                            class="side-menu__label">Prospects</span>
+                                    </a>
+                                </li>
 
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="view-tasks.html"><i
@@ -2054,9 +2108,16 @@
                                 <ul class="slide-menu">
                                     <li class="side-menu-label1"><a href="javascript:void(0)">Tasks</a></li>
                                     <li><a href="create-tasks.html" class="slide-item">All</a></li>
-                                    <li><a href="tasks-requests.html" class="slide-item">Requests</a></li>
-                                    <li><a href="tasks-vendors.html" class="slide-item">Vendors</a></li>
+                                    <li><a href="tasks-requests.html" class="slide-item">Requests</a> </li>
+                                   <!-- <li><a href="tasks-vendors.html" class="slide-item">Vendors</a></li> -->
                                 </ul>
+
+<li class="slide">
+                                <a class="side-menu__item" data-bs-toggle="slide" href="tasks-vendors.html">
+                                    <i class="side-menu__icon fi fi-rs-users"></i>
+                                    <span class="side-menu__label">Vendors</span>
+                                </a>
+                            </li>
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="reports.html">
@@ -2080,7 +2141,7 @@
                                         class="side-menu__icon fi fi-rs-settings"></i><span
                                         class="side-menu__label">Settings</span>
                                     <!-- <span
-                                                   class="badge bg-green br-5 side-badge blink-text pb-1">New</span> -->
+                                               class="badge bg-green br-5 side-badge blink-text pb-1">New</span> -->
                                 </a>
                             </li>
                         </ul>
@@ -2306,7 +2367,21 @@
 
                                     <div class="card-body p-0">
                                         <!-- <button type="button" id="myButton" class="btn btn-primary px-3 myButton"><i class="fi fi-rs-trash mt-1 fs-20" aria-hidden="true"></i> Delete</button> -->
+                                        <div class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-end">
+                                            <div style="width: 220px" class="d-flex justify-content-center align-items-center">
+                                                <span class="fw-bold me-2">Number of rows</span>
+                                                <select id="lengthSelectBox"
+                                                    class="form-control form-select select2 form" style="width: 80px;">
 
+                                                    <!-- <option value="1">1</option> -->
+                                                    <option value="10">10</option>
+                                                    <option value="25">25</option>
+                                                    <option value="100">100</option>
+                                                    <option value="200">200</option>
+                                                    <option value="500">500</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                         <button id="myButton" class="btn-delete-checkbox myButton"><i class="fi fi-rs-trash mt-1 fs-16"></i> &nbsp;Delete</button>
                                         <div class="table-responsive"> 
                                             <table class="table-hover table border text-nowrap text-md-nowrap mb-0 w-100 p-0" id="responsive-datatable">
@@ -3021,7 +3096,18 @@
     <script src="../assets/js/themeColors.js"></script>
 
     <!-- CUSTOM JS -->
-    <script src="../assets/js/custom.js"></script>
+    <!-- <script src="../assets/js/custom.js"></script> -->
+    <script>
+        var helloGuys = true;
+        $(document).ajaxStop(function () {
+            if (helloGuys) {
+                helloGuys = false;
+                var customScript = document.createElement('script');
+                customScript.src = "../assets/js/custom.js";
+                document.head.appendChild(customScript);
+            }
+        });
+    </script>
     <script src="../assets/js/getNotification.js"></script>
     <script src="../assets/js/push_notification.js"></script>
 
@@ -3347,7 +3433,7 @@
                             row.append(unitIdCell);
                             row.append(unitIndexCell);
                             const unitNumberCell = $('<td></td>');
-                            const unitNumberInput = $(`<input type="text" class="form-control  ${unit.unitNumber ? "for-light" : ""}" pattern="[0-9]{5}" oninput="this.value = this.value.replace(/[^0-9]/g, '')" style="min-width: 100px;"  id="inputEmail5" placeholder="Enter Unit Number" value='${unit.unitNumber}' ${unit.unitNumber ? "readonly" : ""}>`);
+                            const unitNumberInput = $(`<input type="text" class="form-control  ${unit.unitNumber ? "for-light" : ""}"  style="min-width: 100px;"  id="inputEmail5" placeholder="Enter Unit Number" value='${unit.unitNumber}' ${unit.unitNumber ? "readonly" : ""}>`);
 
                             // Determine the CSS class for the status cell based on unit status
                             let classText;
@@ -3535,6 +3621,7 @@
                         })
                         $(".edit-option1").click(function () {
                             // e.preventDefault();
+                            $(this).closest('td').find('.done-option').removeAttr('disabled');
                             console.log(1)
                             const unitIdElement = $(this).closest("tr").find(".unit-id");
                             $(this).addClass("d-none")
@@ -4497,12 +4584,20 @@
             filterTable("created-at")
         });
             // Search functionality
-            $('#typehead').on('keyup', function () {
-                var searchValue = $(this).val().toLowerCase();
-                $('#table_body tr').filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
-                });
-            });
+            $(document).on('keyup', '#typehead', function () {
+    var searchValue = $(this).val().toLowerCase();
+    var numRowsToShow = $('#lengthSelectBox').val();
+
+    $('#table_body tr').filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+    });
+
+    if (searchValue === '') {
+        // If search box is empty, use the selected value from the select box
+        $('#table_body tr:visible:lt(' + numRowsToShow + ')').show();
+        $('#table_body tr:visible:gt(' + (numRowsToShow - 1) + ')').hide();
+    }
+});
             $(".modal").on("click", ".btn-close,.btn-close-bottom", function () {
 
                 $('#addUnitBtn').hide()
@@ -5166,6 +5261,80 @@
             filterTableByPropertyType('Multi-Commercial');
         });
         getData();
+        var tenantToDelete=[]
+        $("#myButton").click(function () {
+            $('#table_body tr').each(function() {
+        var checkbox = $(this).find('.checkbox input.myCheckbox');
+        
+        if (checkbox.is(':checked')) {
+            var tenantId = $(this).find('.tenant-id').text();
+            tenantToDelete.push(tenantId)
+        }
+    });
+    
+    $.ajax({
+        url:"http://localhost:3000/api/spade/checkUnpaidInvoices",
+        type:"GET",
+        data:{
+            tenants:tenantToDelete},
+        contentType: "application/json;",
+        headers:{
+            Authorization: "Bearer " + localStorage.getItem("authtoken")
+        },
+        success:function(response){
+            if(response.Info=="No data found in tenant "){
+                console.log(tenantToDelete)
+                $.ajax({
+                    url:"http://localhost:3000/api/spade/allTenantDelete",
+                    type:"DELETE",
+                    contentType: "application/json;charset=utf-8",
+                    data:JSON.stringify({
+                        "id":tenantToDelete
+                    }),
+                    headers:{
+                        Authorization: "Bearer " + localStorage.getItem("authtoken")
+                    },
+                    success:function(response){
+                        tenantToDelete=[]
+                        getData()
+
+                    $("#succesModal_delete").modal("show");
+                    },error:function(xhr,status,error){
+                        console.log(error)
+                    }
+
+                })
+            
+            }
+            else{
+                tenantToDelete=[]
+                $("#add-tenant-name").empty()
+                response?.data.forEach(function(item){
+                    $("#add-tenant-name").append(`
+                <tr class="tr">
+                                            <td>
+                                                <p>${item.firstName}</p>
+                                            </td>
+                                            
+                                            <td><p>${item.lastName}</p></td>
+                                            <td><p>${item.email}</p></td>
+                                            
+                                        </tr>
+                `)
+
+                })
+
+
+
+                
+                $("#unPaidModal").modal("show");
+
+            }
+        },error:function(xhr,status,error){
+            console.log(error)
+        }
+    })
+        });
     </script>
 
     <script>
@@ -5277,9 +5446,8 @@
 
     </script>
     
-      <script>
+      <!-- <script>
         $(document).ready(function () {
-            // alert(2)
             var scriptUrls = [
                 "../assets/plugins/datatable/js/jquery.dataTables.min.js",
                 "../assets/plugins/datatable/js/dataTables.bootstrap5.js",
@@ -5299,18 +5467,55 @@
                 $('#responsive-datatable_paginate').remove();
                 $('script.dynamic-script').remove();
                 scriptUrls.forEach(function (scriptUrl) {
-                    var script = document.createElement('script');
-                    script.src = scriptUrl;
-                    script.className = 'dynamic-script';
-                    document.head.appendChild(script);
-                });
+    var script = document.createElement('script');
+    script.src = scriptUrl;
+    script.className = 'dynamic-script';
+    script.setAttribute('defer', 'true'); 
+    document.head.appendChild(script);
+});
+
             }
             $(document).ajaxStop(function () {
-                // alert(1)
+             
                 loadScripts()
             });
         });
-    </script> 
+    </script>  -->
+    <script>
+        $(document).change(function () {
+            if ($('#typehead').val() == "") {
+
+                let count = 1;
+                $("#table_body tr").each(function (item, index) {
+                    console.log(count, parseInt($("#lengthSelectBox").val()))
+                    if (count > parseInt($("#lengthSelectBox").val())) {
+                        $(this).hide()
+                    }
+                    else {
+                        $(this).show()
+                    }
+                    count++;
+                })
+            }
+        })
+        $(document).ajaxStop(function () {
+            if ($('#typehead').val() == "") {
+
+                let count = 1;
+                $("#table_body tr").each(function (item, index) {
+                    console.log(count, parseInt($("#lengthSelectBox").val()))
+                    if (count > parseInt($("#lengthSelectBox").val())) {
+                        $(this).hide()
+                    }
+                    else {
+                        $(this).show()
+                    }
+                    count++;
+                })
+            }
+        })
+    </script>
+    
 </body>
 
 </html>
