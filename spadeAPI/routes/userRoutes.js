@@ -244,3 +244,4 @@ router.get("/checkUnpaidInvoices", verifyToken, tenantController.checkUnpaidInvo
 router.post("/prospectusSources", verifyToken, prospectus.prospectusSources);
 // router.get("/sourcesCampaignInsight" , prospectus.sourcesCampaignInsight);
 router.get("/sourcesCampaignInsight/:startDate/:endDate", verifyToken, prospectus.sourcesCampaignInsight);
+router.get("/dashboardProspectusInsight/:startDate/:endDate", verifyToken, prospectus.dashboardProspectusInsight);

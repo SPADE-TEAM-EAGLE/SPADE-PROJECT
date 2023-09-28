@@ -486,3 +486,35 @@ exports.sourcesCampaignInsight = async (req, res) => {
     }
 };
 //  #############################  Insight Sources END ##################################################
+
+
+
+
+  //  #############################  Dashboard prospectus Insight Start ##################################################
+  exports.dashboardProspectusInsight = async (req, res) => {
+    const {startDate,endDate} = req.params;
+    // const {startDate,endDate, userId } = req.body;
+    const { userId } = req.user;
+    try {
+        
+        const dashboardProspectusInsightResult = await queryRunner(dashboardProspectusInsight, [
+            userId,
+            startDate,
+            endDate
+        ]);
+        if (dashboardProspectusInsightResult[0].length === 0) {
+            return res.status(201).send("No data found");
+        }
+        res.status(200).json({
+            message: "  Dashboard prospectus Insight get successful",
+            data : dashboardProspectusInsightResult[0]
+        });
+    } catch (error) {
+        // console.log(error);
+        res.status(500).json({
+            message: "Error occur in Dashboard prospectus Insight",
+            error : error.message
+        });
+    }
+};
+//  #############################  Dashboard prospectus Insight END ##################################################
