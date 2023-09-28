@@ -1183,7 +1183,15 @@
                                         </select>
                                         <span class="text-danger d-none">Source Campaign is required!</span>
                                         <a href="javascript:void(0)" class="text-primary"
-                                            style="text-decoration: underline;">+ Add Prospect Source</a>
+                                            style="text-decoration: underline;" id="addProspectSourceBtn1">+ Add Prospect Source</a>
+                                    </div>
+                                    <div class="col-md-12 col-lg-12 col-xl-12" id="addProspectSourceCol1"
+                                        style="display: none;">
+                                        <label for="" class="form-label fw-bold">Add New Prospect Source<spnan
+                                                class="text-danger"> *</span></label>
+                                        <input type="text" id="addProspectSource1" class="form-control form"
+                                            placeholder="Enter Prospect Source" required>
+                                        <span class="text-danger d-none">Prospect Source is required!</span>
                                     </div>
 
                                 </form>
@@ -3182,7 +3190,7 @@
                                                                                 <input class="form-control" placeholder="Search Users by Name, Email or Date" id="search_input" type="text">
                                                                             </div> -->
                                                                             <div
-                                                                                class="main-header-center d-none d-lg-block m-0">
+                                                                                class="main-header-center d-lg-block m-0" style="position: relative;">
                                                                                 <button class="btn px-0 pt-2"><i
                                                                                         class="fe fe-search"
                                                                                         aria-hidden="true"></i></button>
@@ -4287,6 +4295,9 @@
         $(document).ready(function () {
             $('#addProspectSourceBtn').click(() => {
                 $('#addProspectSourceCol').css('display', 'block')
+            })
+            $('#addProspectSourceBtn1').click(() => {
+                $('#addProspectSourceCol1').css('display', 'block')
             })
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
