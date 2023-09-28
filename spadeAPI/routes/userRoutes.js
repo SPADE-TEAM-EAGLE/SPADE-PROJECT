@@ -242,4 +242,4 @@ router.get("/GettenantAttachEmailPhone", verifyToken, tenantController.Gettenant
 router.delete("/allTenantDelete", verifyToken, tenantController.allTenantDelete);
 router.get("/checkUnpaidInvoices", verifyToken, tenantController.checkUnpaidInvoices);
 router.post("/prospectusSources", verifyToken, prospectus.prospectusSources);
-router.get("/getProspectusSources", verifyToken, prospectus.getProspectusSources);
+// router.get("/getProspectusSources", verifyToken, prospectus.getProspectusSources);
