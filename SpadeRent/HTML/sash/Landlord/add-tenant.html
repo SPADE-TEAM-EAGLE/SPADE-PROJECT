@@ -4959,7 +4959,7 @@
                         var contactinfo = '<td class="contactinfo" style="font-weight: 600;"><span style="color: #1467B0";">' + tenant.tPhoneNumber + '</span><br><small style="color: gray;">' + tenant.tEmail + '</small></td>';
                         var propertyAddress = '<td class="propertyAddress" style="font-weight: 600;">' + tenant.propertyName + '</span><br><small>' + tenant.pAddress + ", " + tenant.pCity + ", " + tenant.pState + ", " + tenant.pZipCode + '</small></td>';
                         var assignUnit = '<td class="assignUnit" style="font-weight: 600;">' + tenant.unitNumber + `<br><small>${tenant.unitArea} Square/Feet</small>` + '</td>';
-                        var rentAmount = '<td class="rentAmount" style="font-weight: 600;">' + tenant.rentAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(formatDate(tenant.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(tenant.recurringNextDate))}` + '</td>';
+                        var rentAmount = '<td class="rentAmount" style="font-weight: 600;">' + tenant.rentAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(tenant.recurringNextDate?(formatDate(tenant.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(tenant.recurringNextDate)):"N/A")}` + '</td>';
                         var password = 'your-secret-password';
                         var encryptedPropertyId = sjcl.encrypt(password, tenant.tenantID.toString());
 
@@ -4974,19 +4974,23 @@
                             '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>'
                         '</ul></td>';
                         var currentDate = new Date();
-                        if (tenant.leaseEndDate) {
-                            var targetDate = new Date(tenant.leaseEndDate);
-                            var currentDate = new Date();
-                            var timeDiff = targetDate.getTime() - currentDate.getTime();
+var leaseEndDate = '';
+if (tenant.leaseEndDate) {
 
-                            // Convert milliseconds to days
-                            var daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-                            var leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + `<small class=d-block "${daysLeft > 10 ? 'text-primary' : 'text-danger'}">` + daysLeft + ' day(s) remaining</small>' + '</td>';
-                        } else {
+    var targetDate = new Date(tenant.leaseEndDate);
+    var timeDiff = targetDate.getTime() - currentDate.getTime();
+    var daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
 
-                            var leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + '</td>';
+    var year = targetDate.getFullYear().toString().slice(-2); // Extract last two digits of year
+    var month = (targetDate.getMonth() + 1).toString().padStart(2, '0'); // Add leading zero if necessary
+    var day = targetDate.getDate().toString().padStart(2, '0'); // Add leading zero if necessary
 
-                        }
+    var formattedEndDate = `${month}/${day}/${year}`;
+
+    leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${formattedEndDate ? formattedEndDate : "N/A"}` + `<small class="${daysLeft > 10 ? 'text-primary' : 'text-danger'} d-block">` + daysLeft + ' day(s) remaining</small>' + '</td>';
+} else {
+    leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + '</td>';
+}
 
                         var row = '<tr>' + checkbox + serial + tenantId + tenantName + contactinfo + propertyAddress +
                             assignUnit + rentAmount + leaseEndDate + dropdownMenu +created_at +'</tr>';
@@ -5157,7 +5161,7 @@
                     var contactinfo = '<td class="contactinfo" style="font-weight: 600;"><span style="color: #1467B0";">' + tenant.tPhoneNumber + '</span><br><small style="color: gray;">' + tenant.tEmail + '</small></td>';
                     var propertyAddress = '<td class="propertyAddress" style="font-weight: 600;">' + tenant.propertyName + '</span><br><small>' + tenant.pAddress + ", " + tenant.pCity + ", " + tenant.pState + ", " + tenant.pZipCode + '</small></td>';
                     var assignUnit = '<td class="assignUnit" style="font-weight: 600;">' + tenant.unitNumber + `<br><small>${tenant.unitArea} Square/Feet</small>` + '</td>';
-                    var rentAmount = '<td class="rentAmount" style="font-weight: 600;">' + tenant.rentAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(formatDate(tenant.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(tenant.recurringNextDate))}` + '</td>';
+                    var rentAmount = '<td class="rentAmount" style="font-weight: 600;">' + tenant.rentAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(tenant.recurringNextDate?(formatDate(tenant.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(tenant.recurringNextDate)):"N/A")}` + '</td>';
                     var password = 'your-secret-password';
                     var encryptedPropertyId = sjcl.encrypt(password, tenant.tenantID.toString());
                     var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
@@ -5171,18 +5175,26 @@
                         '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>' +
                         '</ul></td>';
 
-                    var currentDate = new Date();
-                    var leaseEndDate = '';
+                        var currentDate = new Date();
+var leaseEndDate = '';
+if (tenant.leaseEndDate) {
 
-                    if (tenant.leaseEndDate) {
-                        var targetDate = new Date(tenant.leaseEndDate);
-                        var timeDiff = targetDate.getTime() - currentDate.getTime();
-                        var daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+    var targetDate = new Date(tenant.leaseEndDate);
+    var timeDiff = targetDate.getTime() - currentDate.getTime();
+    var daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
 
-                        leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + `<small class="${daysLeft > 10 ? 'text-primary' : 'text-danger'} d-block">` + daysLeft + ' day(s) remaining</small>' + '</td>';
-                    } else {
-                        leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + '</td>';
-                    }
+    var year = targetDate.getFullYear().toString().slice(-2); // Extract last two digits of year
+    var month = (targetDate.getMonth() + 1).toString().padStart(2, '0'); // Add leading zero if necessary
+    var day = targetDate.getDate().toString().padStart(2, '0'); // Add leading zero if necessary
+
+    var formattedEndDate = `${month}/${day}/${year}`;
+
+    leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${formattedEndDate ? formattedEndDate : "N/A"}` + `<small class="${daysLeft > 10 ? 'text-primary' : 'text-danger'} d-block">` + daysLeft + ' day(s) remaining</small>' + '</td>';
+} else {
+    leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + '</td>';
+}
+ 
+
 
                     var row = '<tr>' + checkbox + serial + tenantId + tenantName + contactinfo + propertyAddress +
                         assignUnit + rentAmount + leaseEndDate + dropdownMenu + created_at+'</tr>';
@@ -5211,7 +5223,7 @@
                 
                 var propertyAddress = '<td class="propertyAddress" style="font-weight: 600;">' + tenant.propertyName + '</span><br><small>' + tenant.pAddress + ", " + tenant.pCity + ", " + tenant.pState + ", " + tenant.pZipCode + '</small></td>';
                         var assignUnit = '<td class="assignUnit" style="font-weight: 600;">' + tenant.unitNumber + `<br><small>${tenant.unitArea} Square/Feet</small>` + '</td>';
-                        var rentAmount = '<td class="rentAmount" style="font-weight: 600;">' + tenant.rentAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(formatDate(tenant.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(tenant.recurringNextDate))}` + '</td>';
+                        var rentAmount = '<td class="rentAmount" style="font-weight: 600;">' + tenant.rentAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(tenant.recurringNextDate?(formatDate(tenant.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(tenant.recurringNextDate)):"N/A")}` + '</td>';
                 var password = 'your-secret-password';
                 var encryptedPropertyId = sjcl.encrypt(password, tenant.tenantID.toString());
                 var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
@@ -5224,18 +5236,24 @@
                     '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>' +
                     '</ul></td>';
 
-                var currentDate = new Date();
-                var leaseEndDate = '';
+                    var currentDate = new Date();
+var leaseEndDate = '';
+if (tenant.leaseEndDate) {
 
-                if (tenant.leaseEndDate) {
-                    var targetDate = new Date(tenant.leaseEndDate);
-                    var timeDiff = targetDate.getTime() - currentDate.getTime();
-                    var daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+    var targetDate = new Date(tenant.leaseEndDate);
+    var timeDiff = targetDate.getTime() - currentDate.getTime();
+    var daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
 
-                    leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + `<small class="${daysLeft > 10 ? 'text-primary' : 'text-danger'} d-block">` + daysLeft + ' day(s) remaining</small>' + '</td>';
-                } else {
-                    leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + '</td>';
-                }
+    var year = targetDate.getFullYear().toString().slice(-2); // Extract last two digits of year
+    var month = (targetDate.getMonth() + 1).toString().padStart(2, '0'); // Add leading zero if necessary
+    var day = targetDate.getDate().toString().padStart(2, '0'); // Add leading zero if necessary
+
+    var formattedEndDate = `${month}-${day}-${year}`;
+
+    leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${formattedEndDate ? formattedEndDate : "N/A"}` + `<small class="${daysLeft > 10 ? 'text-primary' : 'text-danger'} d-block">` + daysLeft + ' day(s) remaining</small>' + '</td>';
+} else {
+    leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + '</td>';
+}
 
                 var row = '<tr>' +checkbox +serial + tenantId + tenantName+contactinfo + propertyAddress + assignUnit +
                     rentAmount + leaseEndDate + dropdownMenu + created_at+'</tr>';

@@ -2344,33 +2344,48 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                             //     '</a></td>';
                             
                             var assignUnit = '<td class="tenant-id " style="font-weight: 600;">' + tenant.unitNumber + '</td>';
-                            var Leasestartdate = '<td class="leasestartdate" style="font-weight: 600;">'+(tenant.leaseStartDate?tenant.leaseStartDate:"N/A")+'</td>';
+                            var Leasestartdate = '';
+                            var currentDate = new Date();
 
+if (tenant.leaseStartDate) {
+
+    var targetDate = new Date(tenant.leaseStartDate);
+    var timeDiff = targetDate.getTime() - currentDate.getTime();
+    var daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+
+    var year = targetDate.getFullYear().toString().slice(-2); // Extract last two digits of year
+    var month = (targetDate.getMonth() + 1).toString().padStart(2, '0'); // Add leading zero if necessary
+    var day = targetDate.getDate().toString().padStart(2, '0'); // Add leading zero if necessary
+
+    var formattedEndDate = `${month}-${day}-${year}`;
+
+    Leasestartdate = '<td class="Leasestartdate" style="font-weight: 600;">' + `${formattedEndDate ? formattedEndDate : "N/A"}`+ '</td>';
+} else {
+    Leasestartdate = '<td class="Leasestartdate" style="font-weight: 600;">' + `${tenant.leaseStartDate ? tenant.leaseStartDate : "N/A"}` + '</td>';
+}
                             // var propertyUnits = '<td class="tenant-id " style="font-weight: 600;">' + tenant.pUnits + '</td>';
 
                             // Create a table row and append the generated columns
                             
+                            
                             var currentDate = new Date();
-                            if (tenant.leaseEndDate) {
-                                var targetDate = new Date(tenant.leaseEndDate);
-                                var currentDate = new Date();
+var leaseEndDate = '';
+if (tenant.leaseEndDate) {
 
-                                // Calculate the time difference in milliseconds
-                                var timeDiff = targetDate.getTime() - currentDate.getTime();
+    var targetDate = new Date(tenant.leaseEndDate);
+    var timeDiff = targetDate.getTime() - currentDate.getTime();
+    var daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
 
-                                // Convert milliseconds to days
-                                var daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-                                var leaseEndDate = '<td class="tenant-id " style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + `<small class=d-block "${daysLeft > 10 ? 'text-primary' : 'text-danger'}">` + daysLeft + ' day(s) remaining</small>' + '</td>';
+    var year = targetDate.getFullYear().toString().slice(-2); // Extract last two digits of year
+    var month = (targetDate.getMonth() + 1).toString().padStart(2, '0'); // Add leading zero if necessary
+    var day = targetDate.getDate().toString().padStart(2, '0'); // Add leading zero if necessary
 
-                                // Append the days left in the leaseEndDate variable
-                                // leaseEndDate += '<p class="days-left">' + daysLeft + ' day(s) remaining</p>';
-                            } else {
-                                // Handle the case when leaseEndDate is not available
-                                // var leaseEndDate = '<td class="tenant-id " style="font-weight: 600;">' + `${tenant.leaseEndDate?tenant.leaseEndDate:"N/A"}`+ '<span>'+ daysLeft+' day(s) remaining</span>' + '</td>';
-                                // leaseEndDate += '<p class="days-left">N/A</p>';
-                                var leaseEndDate = '<td class="tenant-id " style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + '</td>';
+    var formattedEndDate = `${month}-${day}-${year}`;
 
-                            }
+    leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${formattedEndDate ? formattedEndDate : "N/A"}` + `<small class="${daysLeft > 10 ? 'text-primary' : 'text-danger'} d-block">` + daysLeft + ' day(s) remaining</small>' + '</td>';
+} else {
+    leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + '</td>';
+}
 
                             var row = '<tr>' + tenantID + tenantName + contactInfo + rentAmount
                              + assignUnit + Leasestartdate + leaseEndDate + '</tr>';

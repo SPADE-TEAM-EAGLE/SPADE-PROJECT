@@ -2933,8 +2933,9 @@
 
         function updateSelectedFilesContainer() {
             var selectedFilesContainer = $('.file-grid');
+            console.log(selectedFilesContainer)
             selectedFilesContainer.empty();
-
+            console.log(selectedFiles)
             selectedFiles.forEach(function (file, index) {
                 console.log(selectedFiles.length)
                 console.log(file)
@@ -2958,7 +2959,7 @@
                     if (file?.imageKey?.endsWith('.jpg') || file?.imageKey?.endsWith('.png')) {
                         fileElement.append(
                             $('<div>').addClass('file-preview')
-                                .append($('<img style="height:80px">').attr('src', file.Image))
+                                .append($('<img style="height:80px">').attr('src', file.imageURL))
                         );
                     } else if (file?.imageKey?.endsWith('.pdf')) {
                         fileElement.append(
@@ -2988,7 +2989,8 @@
                         )
                         .appendTo(selectedFilesContainer);
                 } else if (file instanceof Object) {
-                    if (file.Image) {
+                    console.log(file)
+                    if (file.imageURL) {
                         fileElement
                             .append(
                                 $('<div>')
@@ -3807,8 +3809,19 @@
                             var id = `<td style="font-weight: 600;">${property.landlordID}</td>`
                             var propertyId = '<td class="property-id d-none" style="font-weight: 600;">' + property
                                 .id + '</td>';
-                            var image = '<td><img src="' + (property.images[0]?.imageURL ? property.images[0]?.imageURL : '../assets/images/icons/Group 10341.png') + '" alt=""></td>';
+                            if(property.images[0]?.imageURL){
+                                if(property.images[0]?.imageURL.includes(".pdf") || property.images[0]?.imageURL.includes(".docx") || property.images[0]?.imageURL.includes(".doc") || property.images[0]?.imageURL.includes(".xls") || property.images[0]?.imageURL.includes(".xlsx") || property.images[0]?.imageURL.includes(".ppt") || property.images[0]?.imageURL.includes(".pptx")){
+                                    var image = '<td><i class="fi fi-rs-file-pdf" aria-hidden="true" style="font-size: 30px;"></i></td>';
+                                }
+                                else{
+                                    var image = '<td><img src="' + (property.images[0]?.imageURL ? property.images[0]?.imageURL : '../assets/images/icons/Group 10341.png') + '" alt=""></td>';
+                                }
 
+                                
+                            }
+                            else{
+                                var image = '<td><img src="' + (property.images[0]?.imageURL ? property.images[0]?.imageURL : '../assets/images/icons/Group 10341.png') + '" alt=""></td>';
+                            }
 
 
 
@@ -3878,6 +3891,7 @@
                             propertyId = propertyIdElement.text();
 
                             const data = response.data[0].find(obj => obj.id.toString() === propertyId);
+                            console.log(data)
                             var stateupdateDropdown = $('#state_update');
 
                             //   stateDropdown.append($('<option></option>').text("Choose..."));
@@ -3891,14 +3905,7 @@
 
                             });
                             selectedFiles = data.images
-                            // console.log(selectedFiles)
-                            // var option = $('<option>').text(data.city).val(data.city);
-
-                            // Append the option to the select element
-                            // $('#city_update').append(option);
-
-                            // Make the option selected
-                            // option.prop('selected', true);
+                            
                             updateSelectedFilesContainer()
                             $("#propertyId_update").val(data.id);
                             $("#propertyName_update").val(data.propertyName);
